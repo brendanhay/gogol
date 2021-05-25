@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Networks.Insert
     , niPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.insert@ method which the
 -- 'NetworksInsert' request conforms to.
@@ -62,8 +62,8 @@ type NetworksInsertResource =
 data NetworksInsert =
   NetworksInsert'
     { _niRequestId :: !(Maybe Text)
-    , _niProject   :: !Text
-    , _niPayload   :: !Network
+    , _niProject :: !Text
+    , _niPayload :: !Network
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

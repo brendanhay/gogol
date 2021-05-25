@@ -25,7 +25,7 @@
 -- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.sinks.update@.
 module Network.Google.Resource.Logging.Folders.Sinks.Update
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Logging.Folders.Sinks.Update
     , fsuCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.sinks.update@ method which the
 -- 'FoldersSinksUpdate' request conforms to.
@@ -73,15 +73,15 @@ type FoldersSinksUpdateResource =
 -- /See:/ 'foldersSinksUpdate' smart constructor.
 data FoldersSinksUpdate =
   FoldersSinksUpdate'
-    { _fsuXgafv                :: !(Maybe Xgafv)
+    { _fsuXgafv :: !(Maybe Xgafv)
     , _fsuUniqueWriterIdentity :: !(Maybe Bool)
-    , _fsuUploadProtocol       :: !(Maybe Text)
-    , _fsuUpdateMask           :: !(Maybe GFieldMask)
-    , _fsuAccessToken          :: !(Maybe Text)
-    , _fsuUploadType           :: !(Maybe Text)
-    , _fsuPayload              :: !LogSink
-    , _fsuSinkName             :: !Text
-    , _fsuCallback             :: !(Maybe Text)
+    , _fsuUploadProtocol :: !(Maybe Text)
+    , _fsuUpdateMask :: !(Maybe GFieldMask)
+    , _fsuAccessToken :: !(Maybe Text)
+    , _fsuUploadType :: !(Maybe Text)
+    , _fsuPayload :: !LogSink
+    , _fsuSinkName :: !Text
+    , _fsuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

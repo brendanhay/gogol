@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.Proposals.Setupcomplete
     , psProposalId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.proposals.setupcomplete@ method which the
 -- 'ProposalsSetupcomplete' request conforms to.

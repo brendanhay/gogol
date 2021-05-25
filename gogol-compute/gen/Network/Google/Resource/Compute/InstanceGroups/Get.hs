@@ -20,8 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance group. Gets a list of available instance
--- groups by making a list() request.
+-- Returns the specified zonal instance group. Get a list of available
+-- zonal instance groups by making a list() request. For managed instance
+-- groups, use the instanceGroupManagers or regionInstanceGroupManagers
+-- methods instead.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.get@.
 module Network.Google.Resource.Compute.InstanceGroups.Get
@@ -39,8 +41,8 @@ module Network.Google.Resource.Compute.InstanceGroups.Get
     , iggInstanceGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.get@ method which the
 -- 'InstanceGroupsGet' request conforms to.
@@ -55,14 +57,16 @@ type InstanceGroupsGetResource =
                    Capture "instanceGroup" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
 
--- | Returns the specified instance group. Gets a list of available instance
--- groups by making a list() request.
+-- | Returns the specified zonal instance group. Get a list of available
+-- zonal instance groups by making a list() request. For managed instance
+-- groups, use the instanceGroupManagers or regionInstanceGroupManagers
+-- methods instead.
 --
 -- /See:/ 'instanceGroupsGet' smart constructor.
 data InstanceGroupsGet =
   InstanceGroupsGet'
-    { _iggProject       :: !Text
-    , _iggZone          :: !Text
+    { _iggProject :: !Text
+    , _iggZone :: !Text
     , _iggInstanceGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

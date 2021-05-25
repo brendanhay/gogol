@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Locations.Operations.Get
     , plogCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.operations.get@ method which the
 -- 'ProjectsLocationsOperationsGet' request conforms to.
@@ -67,15 +67,15 @@ type ProjectsLocationsOperationsGetResource =
 -- /See:/ 'projectsLocationsOperationsGet' smart constructor.
 data ProjectsLocationsOperationsGet =
   ProjectsLocationsOperationsGet'
-    { _plogXgafv          :: !(Maybe Xgafv)
+    { _plogXgafv :: !(Maybe Xgafv)
     , _plogUploadProtocol :: !(Maybe Text)
-    , _plogAccessToken    :: !(Maybe Text)
-    , _plogUploadType     :: !(Maybe Text)
-    , _plogZone           :: !(Maybe Text)
-    , _plogName           :: !Text
-    , _plogProjectId      :: !(Maybe Text)
-    , _plogOperationId    :: !(Maybe Text)
-    , _plogCallback       :: !(Maybe Text)
+    , _plogAccessToken :: !(Maybe Text)
+    , _plogUploadType :: !(Maybe Text)
+    , _plogZone :: !(Maybe Text)
+    , _plogName :: !Text
+    , _plogProjectId :: !(Maybe Text)
+    , _plogOperationId :: !(Maybe Text)
+    , _plogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -142,13 +142,14 @@ plogUploadType
       (\ s a -> s{_plogUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 plogZone :: Lens' ProjectsLocationsOperationsGet (Maybe Text)
 plogZone = lens _plogZone (\ s a -> s{_plogZone = a})
 
 -- | The name (project, location, operation id) of the operation to get.
--- Specified in the format \'projects\/*\/locations\/*\/operations\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/operations\/*\`.
 plogName :: Lens' ProjectsLocationsOperationsGet Text
 plogName = lens _plogName (\ s a -> s{_plogName = a})
 

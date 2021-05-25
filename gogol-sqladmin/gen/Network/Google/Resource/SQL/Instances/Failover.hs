@@ -20,9 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Failover the instance to its failover replica instance.
+-- Initiates a manual failover of a high availability (HA) primary instance
+-- to a standby instance, which becomes the primary instance. Users are
+-- then rerouted to the new primary. For more information, see the Overview
+-- of high availability page in the Cloud SQL documentation. If using
+-- Legacy HA (MySQL only), this causes the instance to failover to its
+-- failover replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.failover@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.instances.failover@.
 module Network.Google.Resource.SQL.Instances.Failover
     (
     -- * REST Resource
@@ -33,35 +38,54 @@ module Network.Google.Resource.SQL.Instances.Failover
     , InstancesFailover
 
     -- * Request Lenses
+    , ifXgafv
+    , ifUploadProtocol
     , ifProject
+    , ifAccessToken
+    , ifUploadType
     , ifPayload
+    , ifCallback
     , ifInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.failover@ method which the
 -- 'InstancesFailover' request conforms to.
 type InstancesFailoverResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "failover" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] InstancesFailoverRequest :>
-                       Post '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "failover" :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] InstancesFailoverRequest :>
+                               Post '[JSON] Operation
 
--- | Failover the instance to its failover replica instance.
+-- | Initiates a manual failover of a high availability (HA) primary instance
+-- to a standby instance, which becomes the primary instance. Users are
+-- then rerouted to the new primary. For more information, see the Overview
+-- of high availability page in the Cloud SQL documentation. If using
+-- Legacy HA (MySQL only), this causes the instance to failover to its
+-- failover replica instance.
 --
 -- /See:/ 'instancesFailover' smart constructor.
 data InstancesFailover =
   InstancesFailover'
-    { _ifProject  :: !Text
-    , _ifPayload  :: !InstancesFailoverRequest
+    { _ifXgafv :: !(Maybe Xgafv)
+    , _ifUploadProtocol :: !(Maybe Text)
+    , _ifProject :: !Text
+    , _ifAccessToken :: !(Maybe Text)
+    , _ifUploadType :: !(Maybe Text)
+    , _ifPayload :: !InstancesFailoverRequest
+    , _ifCallback :: !(Maybe Text)
     , _ifInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -71,9 +95,19 @@ data InstancesFailover =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ifXgafv'
+--
+-- * 'ifUploadProtocol'
+--
 -- * 'ifProject'
 --
+-- * 'ifAccessToken'
+--
+-- * 'ifUploadType'
+--
 -- * 'ifPayload'
+--
+-- * 'ifCallback'
 --
 -- * 'ifInstance'
 instancesFailover
@@ -83,21 +117,52 @@ instancesFailover
     -> InstancesFailover
 instancesFailover pIfProject_ pIfPayload_ pIfInstance_ =
   InstancesFailover'
-    { _ifProject = pIfProject_
+    { _ifXgafv = Nothing
+    , _ifUploadProtocol = Nothing
+    , _ifProject = pIfProject_
+    , _ifAccessToken = Nothing
+    , _ifUploadType = Nothing
     , _ifPayload = pIfPayload_
+    , _ifCallback = Nothing
     , _ifInstance = pIfInstance_
     }
 
+
+-- | V1 error format.
+ifXgafv :: Lens' InstancesFailover (Maybe Xgafv)
+ifXgafv = lens _ifXgafv (\ s a -> s{_ifXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ifUploadProtocol :: Lens' InstancesFailover (Maybe Text)
+ifUploadProtocol
+  = lens _ifUploadProtocol
+      (\ s a -> s{_ifUploadProtocol = a})
 
 -- | ID of the project that contains the read replica.
 ifProject :: Lens' InstancesFailover Text
 ifProject
   = lens _ifProject (\ s a -> s{_ifProject = a})
 
+-- | OAuth access token.
+ifAccessToken :: Lens' InstancesFailover (Maybe Text)
+ifAccessToken
+  = lens _ifAccessToken
+      (\ s a -> s{_ifAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ifUploadType :: Lens' InstancesFailover (Maybe Text)
+ifUploadType
+  = lens _ifUploadType (\ s a -> s{_ifUploadType = a})
+
 -- | Multipart request metadata.
 ifPayload :: Lens' InstancesFailover InstancesFailoverRequest
 ifPayload
   = lens _ifPayload (\ s a -> s{_ifPayload = a})
+
+-- | JSONP
+ifCallback :: Lens' InstancesFailover (Maybe Text)
+ifCallback
+  = lens _ifCallback (\ s a -> s{_ifCallback = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 ifInstance :: Lens' InstancesFailover Text
@@ -110,7 +175,13 @@ instance GoogleRequest InstancesFailover where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesFailover'{..}
-          = go _ifProject _ifInstance (Just AltJSON) _ifPayload
+          = go _ifProject _ifInstance _ifXgafv
+              _ifUploadProtocol
+              _ifAccessToken
+              _ifUploadType
+              _ifCallback
+              (Just AltJSON)
+              _ifPayload
               sQLAdminService
           where go
                   = buildClient

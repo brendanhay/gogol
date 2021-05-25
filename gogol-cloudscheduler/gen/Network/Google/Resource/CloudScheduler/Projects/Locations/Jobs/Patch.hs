@@ -48,8 +48,8 @@ module Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Patch
     , pljpCallback
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.patch@ method which the
 -- 'ProjectsLocationsJobsPatch' request conforms to.
@@ -75,14 +75,14 @@ type ProjectsLocationsJobsPatchResource =
 -- /See:/ 'projectsLocationsJobsPatch' smart constructor.
 data ProjectsLocationsJobsPatch =
   ProjectsLocationsJobsPatch'
-    { _pljpXgafv          :: !(Maybe Xgafv)
+    { _pljpXgafv :: !(Maybe Xgafv)
     , _pljpUploadProtocol :: !(Maybe Text)
-    , _pljpUpdateMask     :: !(Maybe GFieldMask)
-    , _pljpAccessToken    :: !(Maybe Text)
-    , _pljpUploadType     :: !(Maybe Text)
-    , _pljpPayload        :: !Job
-    , _pljpName           :: !Text
-    , _pljpCallback       :: !(Maybe Text)
+    , _pljpUpdateMask :: !(Maybe GFieldMask)
+    , _pljpAccessToken :: !(Maybe Text)
+    , _pljpUploadType :: !(Maybe Text)
+    , _pljpPayload :: !Job
+    , _pljpName :: !Text
+    , _pljpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

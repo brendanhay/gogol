@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Create
     , ewacCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.webApps.create@ method which the
 -- 'EnterprisesWebAppsCreate' request conforms to.
@@ -64,13 +64,13 @@ type EnterprisesWebAppsCreateResource =
 -- /See:/ 'enterprisesWebAppsCreate' smart constructor.
 data EnterprisesWebAppsCreate =
   EnterprisesWebAppsCreate'
-    { _ewacParent         :: !Text
-    , _ewacXgafv          :: !(Maybe Xgafv)
+    { _ewacParent :: !Text
+    , _ewacXgafv :: !(Maybe Xgafv)
     , _ewacUploadProtocol :: !(Maybe Text)
-    , _ewacAccessToken    :: !(Maybe Text)
-    , _ewacUploadType     :: !(Maybe Text)
-    , _ewacPayload        :: !WebApp
-    , _ewacCallback       :: !(Maybe Text)
+    , _ewacAccessToken :: !(Maybe Text)
+    , _ewacUploadType :: !(Maybe Text)
+    , _ewacPayload :: !WebApp
+    , _ewacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

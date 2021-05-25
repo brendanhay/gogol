@@ -22,7 +22,7 @@
 --
 -- Retrieves a domain alias of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domainAliases.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.domainAliases.get@.
 module Network.Google.Resource.Directory.DomainAliases.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.DomainAliases.Get
     , DomainAliasesGet
 
     -- * Request Lenses
+    , dagXgafv
+    , dagUploadProtocol
+    , dagAccessToken
+    , dagUploadType
     , dagDomainAliasName
     , dagCustomer
+    , dagCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.domainAliases.get@ method which the
 -- 'DomainAliasesGet' request conforms to.
@@ -50,15 +55,25 @@ type DomainAliasesGetResource =
              Capture "customer" Text :>
                "domainaliases" :>
                  Capture "domainAliasName" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] DomainAlias
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] DomainAlias
 
 -- | Retrieves a domain alias of the customer.
 --
 -- /See:/ 'domainAliasesGet' smart constructor.
 data DomainAliasesGet =
   DomainAliasesGet'
-    { _dagDomainAliasName :: !Text
-    , _dagCustomer        :: !Text
+    { _dagXgafv :: !(Maybe Xgafv)
+    , _dagUploadProtocol :: !(Maybe Text)
+    , _dagAccessToken :: !(Maybe Text)
+    , _dagUploadType :: !(Maybe Text)
+    , _dagDomainAliasName :: !Text
+    , _dagCustomer :: !Text
+    , _dagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data DomainAliasesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dagXgafv'
+--
+-- * 'dagUploadProtocol'
+--
+-- * 'dagAccessToken'
+--
+-- * 'dagUploadType'
+--
 -- * 'dagDomainAliasName'
 --
 -- * 'dagCustomer'
+--
+-- * 'dagCallback'
 domainAliasesGet
     :: Text -- ^ 'dagDomainAliasName'
     -> Text -- ^ 'dagCustomer'
     -> DomainAliasesGet
 domainAliasesGet pDagDomainAliasName_ pDagCustomer_ =
   DomainAliasesGet'
-    {_dagDomainAliasName = pDagDomainAliasName_, _dagCustomer = pDagCustomer_}
+    { _dagXgafv = Nothing
+    , _dagUploadProtocol = Nothing
+    , _dagAccessToken = Nothing
+    , _dagUploadType = Nothing
+    , _dagDomainAliasName = pDagDomainAliasName_
+    , _dagCustomer = pDagCustomer_
+    , _dagCallback = Nothing
+    }
 
+
+-- | V1 error format.
+dagXgafv :: Lens' DomainAliasesGet (Maybe Xgafv)
+dagXgafv = lens _dagXgafv (\ s a -> s{_dagXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dagUploadProtocol :: Lens' DomainAliasesGet (Maybe Text)
+dagUploadProtocol
+  = lens _dagUploadProtocol
+      (\ s a -> s{_dagUploadProtocol = a})
+
+-- | OAuth access token.
+dagAccessToken :: Lens' DomainAliasesGet (Maybe Text)
+dagAccessToken
+  = lens _dagAccessToken
+      (\ s a -> s{_dagAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dagUploadType :: Lens' DomainAliasesGet (Maybe Text)
+dagUploadType
+  = lens _dagUploadType
+      (\ s a -> s{_dagUploadType = a})
 
 -- | Name of domain alias to be retrieved.
 dagDomainAliasName :: Lens' DomainAliasesGet Text
@@ -85,10 +139,15 @@ dagDomainAliasName
   = lens _dagDomainAliasName
       (\ s a -> s{_dagDomainAliasName = a})
 
--- | Immutable ID of the G Suite account.
+-- | Immutable ID of the Google Workspace account.
 dagCustomer :: Lens' DomainAliasesGet Text
 dagCustomer
   = lens _dagCustomer (\ s a -> s{_dagCustomer = a})
+
+-- | JSONP
+dagCallback :: Lens' DomainAliasesGet (Maybe Text)
+dagCallback
+  = lens _dagCallback (\ s a -> s{_dagCallback = a})
 
 instance GoogleRequest DomainAliasesGet where
         type Rs DomainAliasesGet = DomainAlias
@@ -96,7 +155,12 @@ instance GoogleRequest DomainAliasesGet where
              '["https://www.googleapis.com/auth/admin.directory.domain",
                "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
         requestClient DomainAliasesGet'{..}
-          = go _dagCustomer _dagDomainAliasName (Just AltJSON)
+          = go _dagCustomer _dagDomainAliasName _dagXgafv
+              _dagUploadProtocol
+              _dagAccessToken
+              _dagUploadType
+              _dagCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient

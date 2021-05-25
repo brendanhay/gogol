@@ -38,6 +38,7 @@ library
           Network.Google.DLP
         , Network.Google.DLP.Types
         , Network.Google.Resource.DLP.InfoTypes.List
+        , Network.Google.Resource.DLP.Locations.InfoTypes.List
         , Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Create
         , Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Delete
         , Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Get
@@ -48,6 +49,27 @@ library
         , Network.Google.Resource.DLP.Organizations.InspectTemplates.Get
         , Network.Google.Resource.DLP.Organizations.InspectTemplates.List
         , Network.Google.Resource.DLP.Organizations.InspectTemplates.Patch
+        , Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Create
+        , Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Delete
+        , Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Get
+        , Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.List
+        , Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Patch
+        , Network.Google.Resource.DLP.Organizations.Locations.DlpJobs.List
+        , Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Create
+        , Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Delete
+        , Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Get
+        , Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.List
+        , Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Patch
+        , Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Create
+        , Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Delete
+        , Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Get
+        , Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.List
+        , Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Patch
+        , Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Create
+        , Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Delete
+        , Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Get
+        , Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.List
+        , Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Patch
         , Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Create
         , Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Delete
         , Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Get
@@ -78,6 +100,39 @@ library
         , Network.Google.Resource.DLP.Projects.JobTriggers.Get
         , Network.Google.Resource.DLP.Projects.JobTriggers.List
         , Network.Google.Resource.DLP.Projects.JobTriggers.Patch
+        , Network.Google.Resource.DLP.Projects.Locations.Content.Deidentify
+        , Network.Google.Resource.DLP.Projects.Locations.Content.Inspect
+        , Network.Google.Resource.DLP.Projects.Locations.Content.Reidentify
+        , Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Create
+        , Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Delete
+        , Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Get
+        , Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.List
+        , Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Patch
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Cancel
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Create
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Delete
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Finish
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Get
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.HybridInspect
+        , Network.Google.Resource.DLP.Projects.Locations.DlpJobs.List
+        , Network.Google.Resource.DLP.Projects.Locations.Image.Redact
+        , Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Create
+        , Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Delete
+        , Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Get
+        , Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.List
+        , Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Patch
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Activate
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Create
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Delete
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Get
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.HybridInspect
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.List
+        , Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Patch
+        , Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Create
+        , Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Delete
+        , Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Get
+        , Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.List
+        , Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Patch
         , Network.Google.Resource.DLP.Projects.StoredInfoTypes.Create
         , Network.Google.Resource.DLP.Projects.StoredInfoTypes.Delete
         , Network.Google.Resource.DLP.Projects.StoredInfoTypes.Get

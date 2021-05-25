@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -27,13 +27,24 @@ module Network.Google.FirebaseRules.Types
     -- * SourcePosition
     , SourcePosition
     , sourcePosition
+    , spCurrentOffSet
     , spLine
+    , spEndOffSet
     , spColumn
     , spFileName
+
+    -- * ExpressionReport
+    , ExpressionReport
+    , expressionReport
+    , erSourcePosition
+    , erValues
+    , erChildren
 
     -- * TestCase
     , TestCase
     , testCase
+    , tcExpressionReportLevel
+    , tcPathEncoding
     , tcResource
     , tcExpectation
     , tcFunctionMocks
@@ -55,6 +66,12 @@ module Network.Google.FirebaseRules.Types
     , fmArgs
     , fmFunction
     , fmResult
+
+    -- * ProjectsReleasesGetExecutableExecutableVersion
+    , ProjectsReleasesGetExecutableExecutableVersion (..)
+
+    -- * TestCaseExpressionReportLevel
+    , TestCaseExpressionReportLevel (..)
 
     -- * TestResultState
     , TestResultState (..)
@@ -101,6 +118,7 @@ module Network.Google.FirebaseRules.Types
     , Ruleset
     , ruleset
     , rulName
+    , rulMetadata
     , rulSource
     , rulCreateTime
 
@@ -114,10 +132,14 @@ module Network.Google.FirebaseRules.Types
     , grerExecutableVersion
     , grerLanguage
 
+    -- * TestCasePathEncoding
+    , TestCasePathEncoding (..)
+
     -- * TestResult
     , TestResult
     , testResult
     , trState
+    , trExpressionReports
     , trFunctionCalls
     , trVisitedExpressions
     , trErrorPosition
@@ -129,6 +151,11 @@ module Network.Google.FirebaseRules.Types
     -- * IssueSeverity
     , IssueSeverity (..)
 
+    -- * Metadata
+    , Metadata
+    , metadata
+    , mServices
+
     -- * Source
     , Source
     , source
@@ -136,6 +163,12 @@ module Network.Google.FirebaseRules.Types
 
     -- * TestCaseExpectation
     , TestCaseExpectation (..)
+
+    -- * ValueCount
+    , ValueCount
+    , valueCount
+    , vcValue
+    , vcCount
 
     -- * TestSuite
     , TestSuite
@@ -181,9 +214,9 @@ module Network.Google.FirebaseRules.Types
     , urrRelease
     ) where
 
-import           Network.Google.FirebaseRules.Types.Product
-import           Network.Google.FirebaseRules.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types.Product
+import Network.Google.FirebaseRules.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Firebase Rules API. This contains the host and root path used as a starting point for constructing service requests.
 firebaseRulesService :: ServiceConfig
@@ -195,7 +228,7 @@ firebaseRulesService
 firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
 firebaseScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

@@ -44,8 +44,8 @@ module Network.Google.Resource.OSLogin.Users.GetLoginProFile
     , uglpfCallback
     ) where
 
-import           Network.Google.OSLogin.Types
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oslogin.users.getLoginProfile@ method which the
 -- 'UsersGetLoginProFile' request conforms to.
@@ -68,14 +68,14 @@ type UsersGetLoginProFileResource =
 -- /See:/ 'usersGetLoginProFile' smart constructor.
 data UsersGetLoginProFile =
   UsersGetLoginProFile'
-    { _uglpfXgafv          :: !(Maybe Xgafv)
+    { _uglpfXgafv :: !(Maybe Xgafv)
     , _uglpfUploadProtocol :: !(Maybe Text)
-    , _uglpfAccessToken    :: !(Maybe Text)
-    , _uglpfUploadType     :: !(Maybe Text)
-    , _uglpfName           :: !Text
-    , _uglpfProjectId      :: !(Maybe Text)
-    , _uglpfSystemId       :: !(Maybe Text)
-    , _uglpfCallback       :: !(Maybe Text)
+    , _uglpfAccessToken :: !(Maybe Text)
+    , _uglpfUploadType :: !(Maybe Text)
+    , _uglpfName :: !Text
+    , _uglpfProjectId :: !(Maybe Text)
+    , _uglpfSystemId :: !(Maybe Text)
+    , _uglpfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,7 +138,7 @@ uglpfUploadType
   = lens _uglpfUploadType
       (\ s a -> s{_uglpfUploadType = a})
 
--- | The unique ID for the user in format \`users\/{user}\`.
+-- | Required. The unique ID for the user in format \`users\/{user}\`.
 uglpfName :: Lens' UsersGetLoginProFile Text
 uglpfName
   = lens _uglpfName (\ s a -> s{_uglpfName = a})

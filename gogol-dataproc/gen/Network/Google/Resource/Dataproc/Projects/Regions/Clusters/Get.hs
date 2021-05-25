@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Get
     , prcgCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.clusters.get@ method which the
 -- 'ProjectsRegionsClustersGet' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsRegionsClustersGetResource =
 -- /See:/ 'projectsRegionsClustersGet' smart constructor.
 data ProjectsRegionsClustersGet =
   ProjectsRegionsClustersGet'
-    { _prcgXgafv          :: !(Maybe Xgafv)
+    { _prcgXgafv :: !(Maybe Xgafv)
     , _prcgUploadProtocol :: !(Maybe Text)
-    , _prcgAccessToken    :: !(Maybe Text)
-    , _prcgUploadType     :: !(Maybe Text)
-    , _prcgClusterName    :: !Text
-    , _prcgRegion         :: !Text
-    , _prcgProjectId      :: !Text
-    , _prcgCallback       :: !(Maybe Text)
+    , _prcgAccessToken :: !(Maybe Text)
+    , _prcgUploadType :: !(Maybe Text)
+    , _prcgClusterName :: !Text
+    , _prcgRegion :: !Text
+    , _prcgProjectId :: !Text
+    , _prcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,7 +146,7 @@ prcgClusterName
   = lens _prcgClusterName
       (\ s a -> s{_prcgClusterName = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prcgRegion :: Lens' ProjectsRegionsClustersGet Text
 prcgRegion
   = lens _prcgRegion (\ s a -> s{_prcgRegion = a})

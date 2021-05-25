@@ -42,8 +42,8 @@ module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
     , jgqrMaxResults
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.getQueryResults@ method which the
 -- 'JobsGetQueryResults' request conforms to.
@@ -67,11 +67,11 @@ type JobsGetQueryResultsResource =
 -- /See:/ 'jobsGetQueryResults' smart constructor.
 data JobsGetQueryResults =
   JobsGetQueryResults'
-    { _jgqrJobId      :: !Text
-    , _jgqrLocation   :: !(Maybe Text)
-    , _jgqrTimeoutMs  :: !(Maybe (Textual Word32))
-    , _jgqrPageToken  :: !(Maybe Text)
-    , _jgqrProjectId  :: !Text
+    { _jgqrJobId :: !Text
+    , _jgqrLocation :: !(Maybe Text)
+    , _jgqrTimeoutMs :: !(Maybe (Textual Word32))
+    , _jgqrPageToken :: !(Maybe Text)
+    , _jgqrProjectId :: !Text
     , _jgqrStartIndex :: !(Maybe (Textual Word64))
     , _jgqrMaxResults :: !(Maybe (Textual Word32))
     }

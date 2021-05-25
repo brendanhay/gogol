@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Patches the specified subnetwork with the data included in the request.
--- Only certain fields can up updated with a patch request as indicated in
--- the field descriptions. You must specify the current fingeprint of the
+-- Only certain fields can be updated with a patch request as indicated in
+-- the field descriptions. You must specify the current fingerprint of the
 -- subnetwork resource being patched.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.subnetworks.patch@.
@@ -38,13 +38,14 @@ module Network.Google.Resource.Compute.Subnetworks.Patch
     -- * Request Lenses
     , spRequestId
     , spProject
+    , spDrainTimeoutSeconds
     , spPayload
     , spSubnetwork
     , spRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.patch@ method which the
 -- 'SubnetworksPatch' request conforms to.
@@ -58,22 +59,24 @@ type SubnetworksPatchResource =
                  "subnetworks" :>
                    Capture "subnetwork" Text :>
                      QueryParam "requestId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Subnetwork :> Patch '[JSON] Operation
+                       QueryParam "drainTimeoutSeconds" (Textual Int32) :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Subnetwork :> Patch '[JSON] Operation
 
 -- | Patches the specified subnetwork with the data included in the request.
--- Only certain fields can up updated with a patch request as indicated in
--- the field descriptions. You must specify the current fingeprint of the
+-- Only certain fields can be updated with a patch request as indicated in
+-- the field descriptions. You must specify the current fingerprint of the
 -- subnetwork resource being patched.
 --
 -- /See:/ 'subnetworksPatch' smart constructor.
 data SubnetworksPatch =
   SubnetworksPatch'
-    { _spRequestId  :: !(Maybe Text)
-    , _spProject    :: !Text
-    , _spPayload    :: !Subnetwork
+    { _spRequestId :: !(Maybe Text)
+    , _spProject :: !Text
+    , _spDrainTimeoutSeconds :: !(Maybe (Textual Int32))
+    , _spPayload :: !Subnetwork
     , _spSubnetwork :: !Text
-    , _spRegion     :: !Text
+    , _spRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,6 +88,8 @@ data SubnetworksPatch =
 -- * 'spRequestId'
 --
 -- * 'spProject'
+--
+-- * 'spDrainTimeoutSeconds'
 --
 -- * 'spPayload'
 --
@@ -101,6 +106,7 @@ subnetworksPatch pSpProject_ pSpPayload_ pSpSubnetwork_ pSpRegion_ =
   SubnetworksPatch'
     { _spRequestId = Nothing
     , _spProject = pSpProject_
+    , _spDrainTimeoutSeconds = Nothing
     , _spPayload = pSpPayload_
     , _spSubnetwork = pSpSubnetwork_
     , _spRegion = pSpRegion_
@@ -126,6 +132,20 @@ spProject :: Lens' SubnetworksPatch Text
 spProject
   = lens _spProject (\ s a -> s{_spProject = a})
 
+-- | The drain timeout specifies the upper bound in seconds on the amount of
+-- time allowed to drain connections from the current ACTIVE subnetwork to
+-- the current BACKUP subnetwork. The drain timeout is only applicable when
+-- the following conditions are true: - the subnetwork being patched has
+-- purpose = INTERNAL_HTTPS_LOAD_BALANCER - the subnetwork being patched
+-- has role = BACKUP - the patch request is setting the role to ACTIVE.
+-- Note that after this patch operation the roles of the ACTIVE and BACKUP
+-- subnetworks will be swapped.
+spDrainTimeoutSeconds :: Lens' SubnetworksPatch (Maybe Int32)
+spDrainTimeoutSeconds
+  = lens _spDrainTimeoutSeconds
+      (\ s a -> s{_spDrainTimeoutSeconds = a})
+      . mapping _Coerce
+
 -- | Multipart request metadata.
 spPayload :: Lens' SubnetworksPatch Subnetwork
 spPayload
@@ -147,6 +167,7 @@ instance GoogleRequest SubnetworksPatch where
                "https://www.googleapis.com/auth/compute"]
         requestClient SubnetworksPatch'{..}
           = go _spProject _spRegion _spSubnetwork _spRequestId
+              _spDrainTimeoutSeconds
               (Just AltJSON)
               _spPayload
               computeService

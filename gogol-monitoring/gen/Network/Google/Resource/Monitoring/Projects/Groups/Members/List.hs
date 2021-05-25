@@ -22,7 +22,7 @@
 --
 -- Lists the monitored resources that are members of a group.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.members.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.groups.members.list@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Members.List
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Members.List
     , pgmlCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.groups.members.list@ method which the
 -- 'ProjectsGroupsMembersList' request conforms to.
@@ -74,16 +74,16 @@ type ProjectsGroupsMembersListResource =
 data ProjectsGroupsMembersList =
   ProjectsGroupsMembersList'
     { _pgmlIntervalStartTime :: !(Maybe DateTime')
-    , _pgmlXgafv             :: !(Maybe Xgafv)
-    , _pgmlUploadProtocol    :: !(Maybe Text)
-    , _pgmlAccessToken       :: !(Maybe Text)
-    , _pgmlUploadType        :: !(Maybe Text)
-    , _pgmlName              :: !Text
-    , _pgmlFilter            :: !(Maybe Text)
-    , _pgmlPageToken         :: !(Maybe Text)
-    , _pgmlIntervalEndTime   :: !(Maybe DateTime')
-    , _pgmlPageSize          :: !(Maybe (Textual Int32))
-    , _pgmlCallback          :: !(Maybe Text)
+    , _pgmlXgafv :: !(Maybe Xgafv)
+    , _pgmlUploadProtocol :: !(Maybe Text)
+    , _pgmlAccessToken :: !(Maybe Text)
+    , _pgmlUploadType :: !(Maybe Text)
+    , _pgmlName :: !Text
+    , _pgmlFilter :: !(Maybe Text)
+    , _pgmlPageToken :: !(Maybe Text)
+    , _pgmlIntervalEndTime :: !(Maybe DateTime')
+    , _pgmlPageSize :: !(Maybe (Textual Int32))
+    , _pgmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -164,23 +164,25 @@ pgmlUploadType
   = lens _pgmlUploadType
       (\ s a -> s{_pgmlUploadType = a})
 
--- | The group whose members are listed. The format is
--- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
+-- | Required. The group whose members are listed. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID]
 pgmlName :: Lens' ProjectsGroupsMembersList Text
 pgmlName = lens _pgmlName (\ s a -> s{_pgmlName = a})
 
--- | An optional list filter describing the members to be returned. The
--- filter may reference the type, labels, and metadata of monitored
--- resources that comprise the group. For example, to return only resources
--- representing Compute Engine VM instances, use this filter: resource.type
--- = \"gce_instance\"
+-- | An optional list filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/learn_more#filtering)
+-- describing the members to be returned. The filter may reference the
+-- type, labels, and metadata of monitored resources that comprise the
+-- group. For example, to return only resources representing Compute Engine
+-- VM instances, use this filter: \`resource.type = \"gce_instance\"\`
 pgmlFilter :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlFilter
   = lens _pgmlFilter (\ s a -> s{_pgmlFilter = a})
 
--- | If this field is not empty then it must contain the nextPageToken value
--- returned by a previous call to this method. Using this field causes the
--- method to return additional results from the previous method call.
+-- | If this field is not empty then it must contain the next_page_token
+-- value returned by a previous call to this method. Using this field
+-- causes the method to return additional results from the previous method
+-- call.
 pgmlPageToken :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlPageToken
   = lens _pgmlPageToken

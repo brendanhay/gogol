@@ -22,7 +22,7 @@
 --
 -- Looks up representative information for a single geographic division.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByDivision@.
+-- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByDivision@.
 module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
     (
     -- * REST Resource
@@ -33,15 +33,19 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDiv
     , RepresentativesRepresentativeInfoByDivision
 
     -- * Request Lenses
+    , rribdXgafv
     , rribdRoles
-    , rribdPayload
+    , rribdUploadProtocol
+    , rribdAccessToken
+    , rribdUploadType
     , rribdRecursive
     , rribdOcdId
     , rribdLevels
+    , rribdCallback
     ) where
 
-import           Network.Google.CivicInfo.Types
-import           Network.Google.Prelude
+import Network.Google.CivicInfo.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.representatives.representativeInfoByDivision@ method which the
 -- 'RepresentativesRepresentativeInfoByDivision' request conforms to.
@@ -51,27 +55,35 @@ type RepresentativesRepresentativeInfoByDivisionResource
        "v2" :>
          "representatives" :>
            Capture "ocdId" Text :>
-             QueryParams "roles"
-               RepresentativesRepresentativeInfoByDivisionRoles
-               :>
-               QueryParam "recursive" Bool :>
-                 QueryParams "levels"
-                   RepresentativesRepresentativeInfoByDivisionLevels
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] DivisionRepresentativeInfoRequest :>
-                       Get '[JSON] RepresentativeInfoData
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParams "roles"
+                 RepresentativesRepresentativeInfoByDivisionRoles
+                 :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "recursive" Bool :>
+                         QueryParams "levels"
+                           RepresentativesRepresentativeInfoByDivisionLevels
+                           :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] RepresentativeInfoData
 
 -- | Looks up representative information for a single geographic division.
 --
 -- /See:/ 'representativesRepresentativeInfoByDivision' smart constructor.
 data RepresentativesRepresentativeInfoByDivision =
   RepresentativesRepresentativeInfoByDivision'
-    { _rribdRoles     :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
-    , _rribdPayload   :: !DivisionRepresentativeInfoRequest
+    { _rribdXgafv :: !(Maybe Xgafv)
+    , _rribdRoles :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
+    , _rribdUploadProtocol :: !(Maybe Text)
+    , _rribdAccessToken :: !(Maybe Text)
+    , _rribdUploadType :: !(Maybe Text)
     , _rribdRecursive :: !(Maybe Bool)
-    , _rribdOcdId     :: !Text
-    , _rribdLevels    :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
+    , _rribdOcdId :: !Text
+    , _rribdLevels :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
+    , _rribdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,28 +92,44 @@ data RepresentativesRepresentativeInfoByDivision =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rribdXgafv'
+--
 -- * 'rribdRoles'
 --
--- * 'rribdPayload'
+-- * 'rribdUploadProtocol'
+--
+-- * 'rribdAccessToken'
+--
+-- * 'rribdUploadType'
 --
 -- * 'rribdRecursive'
 --
 -- * 'rribdOcdId'
 --
 -- * 'rribdLevels'
+--
+-- * 'rribdCallback'
 representativesRepresentativeInfoByDivision
-    :: DivisionRepresentativeInfoRequest -- ^ 'rribdPayload'
-    -> Text -- ^ 'rribdOcdId'
+    :: Text -- ^ 'rribdOcdId'
     -> RepresentativesRepresentativeInfoByDivision
-representativesRepresentativeInfoByDivision pRribdPayload_ pRribdOcdId_ =
+representativesRepresentativeInfoByDivision pRribdOcdId_ =
   RepresentativesRepresentativeInfoByDivision'
-    { _rribdRoles = Nothing
-    , _rribdPayload = pRribdPayload_
+    { _rribdXgafv = Nothing
+    , _rribdRoles = Nothing
+    , _rribdUploadProtocol = Nothing
+    , _rribdAccessToken = Nothing
+    , _rribdUploadType = Nothing
     , _rribdRecursive = Nothing
     , _rribdOcdId = pRribdOcdId_
     , _rribdLevels = Nothing
+    , _rribdCallback = Nothing
     }
 
+
+-- | V1 error format.
+rribdXgafv :: Lens' RepresentativesRepresentativeInfoByDivision (Maybe Xgafv)
+rribdXgafv
+  = lens _rribdXgafv (\ s a -> s{_rribdXgafv = a})
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
@@ -112,10 +140,23 @@ rribdRoles
       _Default
       . _Coerce
 
--- | Multipart request metadata.
-rribdPayload :: Lens' RepresentativesRepresentativeInfoByDivision DivisionRepresentativeInfoRequest
-rribdPayload
-  = lens _rribdPayload (\ s a -> s{_rribdPayload = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rribdUploadProtocol :: Lens' RepresentativesRepresentativeInfoByDivision (Maybe Text)
+rribdUploadProtocol
+  = lens _rribdUploadProtocol
+      (\ s a -> s{_rribdUploadProtocol = a})
+
+-- | OAuth access token.
+rribdAccessToken :: Lens' RepresentativesRepresentativeInfoByDivision (Maybe Text)
+rribdAccessToken
+  = lens _rribdAccessToken
+      (\ s a -> s{_rribdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rribdUploadType :: Lens' RepresentativesRepresentativeInfoByDivision (Maybe Text)
+rribdUploadType
+  = lens _rribdUploadType
+      (\ s a -> s{_rribdUploadType = a})
 
 -- | If true, information about all divisions contained in the division
 -- requested will be included as well. For example, if querying
@@ -140,6 +181,12 @@ rribdLevels
       _Default
       . _Coerce
 
+-- | JSONP
+rribdCallback :: Lens' RepresentativesRepresentativeInfoByDivision (Maybe Text)
+rribdCallback
+  = lens _rribdCallback
+      (\ s a -> s{_rribdCallback = a})
+
 instance GoogleRequest
            RepresentativesRepresentativeInfoByDivision
          where
@@ -150,11 +197,15 @@ instance GoogleRequest
              = '[]
         requestClient
           RepresentativesRepresentativeInfoByDivision'{..}
-          = go _rribdOcdId (_rribdRoles ^. _Default)
+          = go _rribdOcdId _rribdXgafv
+              (_rribdRoles ^. _Default)
+              _rribdUploadProtocol
+              _rribdAccessToken
+              _rribdUploadType
               _rribdRecursive
               (_rribdLevels ^. _Default)
+              _rribdCallback
               (Just AltJSON)
-              _rribdPayload
               civicInfoService
           where go
                   = buildClient

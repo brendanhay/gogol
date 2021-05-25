@@ -44,8 +44,8 @@ module Network.Google.Resource.Classroom.UserProFiles.Get
     , upfgCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.get@ method which the
 -- 'UserProFilesGet' request conforms to.
@@ -68,12 +68,12 @@ type UserProFilesGetResource =
 -- /See:/ 'userProFilesGet' smart constructor.
 data UserProFilesGet =
   UserProFilesGet'
-    { _upfgXgafv          :: !(Maybe Xgafv)
+    { _upfgXgafv :: !(Maybe Xgafv)
     , _upfgUploadProtocol :: !(Maybe Text)
-    , _upfgAccessToken    :: !(Maybe Text)
-    , _upfgUploadType     :: !(Maybe Text)
-    , _upfgUserId         :: !Text
-    , _upfgCallback       :: !(Maybe Text)
+    , _upfgAccessToken :: !(Maybe Text)
+    , _upfgUploadType :: !(Maybe Text)
+    , _upfgUserId :: !Text
+    , _upfgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

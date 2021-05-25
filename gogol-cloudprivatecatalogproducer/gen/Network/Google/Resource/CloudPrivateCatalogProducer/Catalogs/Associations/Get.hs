@@ -22,7 +22,7 @@
 --
 -- Returns the requested Association resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.associations.get@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.associations.get@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations
     , cagCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.associations.get@ method which the
 -- 'CatalogsAssociationsGet' request conforms to.
@@ -63,12 +63,12 @@ type CatalogsAssociationsGetResource =
 -- /See:/ 'catalogsAssociationsGet' smart constructor.
 data CatalogsAssociationsGet =
   CatalogsAssociationsGet'
-    { _cagXgafv          :: !(Maybe Xgafv)
+    { _cagXgafv :: !(Maybe Xgafv)
     , _cagUploadProtocol :: !(Maybe Text)
-    , _cagAccessToken    :: !(Maybe Text)
-    , _cagUploadType     :: !(Maybe Text)
-    , _cagName           :: !Text
-    , _cagCallback       :: !(Maybe Text)
+    , _cagAccessToken :: !(Maybe Text)
+    , _cagUploadType :: !(Maybe Text)
+    , _cagName :: !Text
+    , _cagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

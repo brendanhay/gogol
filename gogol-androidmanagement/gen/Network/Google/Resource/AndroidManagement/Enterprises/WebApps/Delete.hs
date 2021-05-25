@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Delete
     , ewadCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.webApps.delete@ method which the
 -- 'EnterprisesWebAppsDelete' request conforms to.
@@ -61,12 +61,12 @@ type EnterprisesWebAppsDeleteResource =
 -- /See:/ 'enterprisesWebAppsDelete' smart constructor.
 data EnterprisesWebAppsDelete =
   EnterprisesWebAppsDelete'
-    { _ewadXgafv          :: !(Maybe Xgafv)
+    { _ewadXgafv :: !(Maybe Xgafv)
     , _ewadUploadProtocol :: !(Maybe Text)
-    , _ewadAccessToken    :: !(Maybe Text)
-    , _ewadUploadType     :: !(Maybe Text)
-    , _ewadName           :: !Text
-    , _ewadCallback       :: !(Maybe Text)
+    , _ewadAccessToken :: !(Maybe Text)
+    , _ewadUploadType :: !(Maybe Text)
+    , _ewadName :: !Text
+    , _ewadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

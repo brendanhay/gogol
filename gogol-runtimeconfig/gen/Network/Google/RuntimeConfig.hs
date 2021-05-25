@@ -93,11 +93,11 @@ module Network.Google.RuntimeConfig
     , orAddtional
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.RuntimeConfig.Operations.Cancel
-import           Network.Google.Resource.RuntimeConfig.Operations.Delete
-import           Network.Google.Resource.RuntimeConfig.Operations.List
-import           Network.Google.RuntimeConfig.Types
+import Network.Google.Prelude
+import Network.Google.Resource.RuntimeConfig.Operations.Cancel
+import Network.Google.Resource.RuntimeConfig.Operations.Delete
+import Network.Google.Resource.RuntimeConfig.Operations.List
+import Network.Google.RuntimeConfig.Types
 
 {- $resources
 TODO

@@ -16,46 +16,57 @@
 --
 module Network.Google.CustomSearch.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | Returns images of a type, which can be one of: clipart, face, lineart,
--- news, and photo.
+-- | Returns images of a type. Acceptable values are: * \`\"clipart\"\` *
+-- \`\"face\"\` * \`\"lineart\"\` * \`\"stock\"\` * \`\"photo\"\` *
+-- \`\"animated\"\`
 data CSEListImgType
-    = CliPart
+    = ImgTypeUndefined
+      -- ^ @imgTypeUndefined@
+      -- No image type specified.
+    | CliPart
       -- ^ @clipart@
-      -- clipart
+      -- Clipart-style images only.
     | Face
       -- ^ @face@
-      -- face
+      -- Images of faces only.
     | Lineart
       -- ^ @lineart@
-      -- lineart
-    | News
-      -- ^ @news@
-      -- news
+      -- Line art images only.
+    | Stock
+      -- ^ @stock@
+      -- Stock images only.
     | Photo
       -- ^ @photo@
-      -- photo
+      -- Photo images only.
+    | Animated
+      -- ^ @animated@
+      -- Animated images only.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgType
 
 instance FromHttpApiData CSEListImgType where
     parseQueryParam = \case
+        "imgTypeUndefined" -> Right ImgTypeUndefined
         "clipart" -> Right CliPart
         "face" -> Right Face
         "lineart" -> Right Lineart
-        "news" -> Right News
+        "stock" -> Right Stock
         "photo" -> Right Photo
+        "animated" -> Right Animated
         x -> Left ("Unable to parse CSEListImgType from: " <> x)
 
 instance ToHttpApiData CSEListImgType where
     toQueryParam = \case
+        ImgTypeUndefined -> "imgTypeUndefined"
         CliPart -> "clipart"
         Face -> "face"
         Lineart -> "lineart"
-        News -> "news"
+        Stock -> "stock"
         Photo -> "photo"
+        Animated -> "animated"
 
 instance FromJSON CSEListImgType where
     parseJSON = parseJSONText "CSEListImgType"
@@ -64,26 +75,32 @@ instance ToJSON CSEListImgType where
     toJSON = toJSONText
 
 -- | Controls whether to include or exclude results from the site named in
--- the as_sitesearch parameter
+-- the \`siteSearch\` parameter. Acceptable values are: * \`\"e\"\`:
+-- exclude * \`\"i\"\`: include
 data CSEListSiteSearchFilter
-    = E
+    = SiteSearchFilterUndefined
+      -- ^ @siteSearchFilterUndefined@
+      -- Filter mode unspecified.
+    | E
       -- ^ @e@
-      -- exclude
+      -- Exclude results from the listed sites.
     | I
       -- ^ @i@
-      -- include
+      -- Include only results from the listed sites.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSiteSearchFilter
 
 instance FromHttpApiData CSEListSiteSearchFilter where
     parseQueryParam = \case
+        "siteSearchFilterUndefined" -> Right SiteSearchFilterUndefined
         "e" -> Right E
         "i" -> Right I
         x -> Left ("Unable to parse CSEListSiteSearchFilter from: " <> x)
 
 instance ToHttpApiData CSEListSiteSearchFilter where
     toQueryParam = \case
+        SiteSearchFilterUndefined -> "siteSearchFilterUndefined"
         E -> "e"
         I -> "i"
 
@@ -93,73 +110,55 @@ instance FromJSON CSEListSiteSearchFilter where
 instance ToJSON CSEListSiteSearchFilter where
     toJSON = toJSONText
 
--- | Controls turning on or off the duplicate content filter.
-data CSESiterestrictListFilter
-    = CSESLF0
-      -- ^ @0@
-      -- Turns off duplicate content filter.
-    | CSESLF1
-      -- ^ @1@
-      -- Turns on duplicate content filter.
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable CSESiterestrictListFilter
-
-instance FromHttpApiData CSESiterestrictListFilter where
-    parseQueryParam = \case
-        "0" -> Right CSESLF0
-        "1" -> Right CSESLF1
-        x -> Left ("Unable to parse CSESiterestrictListFilter from: " <> x)
-
-instance ToHttpApiData CSESiterestrictListFilter where
-    toQueryParam = \case
-        CSESLF0 -> "0"
-        CSESLF1 -> "1"
-
-instance FromJSON CSESiterestrictListFilter where
-    parseJSON = parseJSONText "CSESiterestrictListFilter"
-
-instance ToJSON CSESiterestrictListFilter where
-    toJSON = toJSONText
-
--- | Returns images of a type, which can be one of: clipart, face, lineart,
--- news, and photo.
+-- | Returns images of a type. Acceptable values are: * \`\"clipart\"\` *
+-- \`\"face\"\` * \`\"lineart\"\` * \`\"stock\"\` * \`\"photo\"\` *
+-- \`\"animated\"\`
 data CSESiterestrictListImgType
-    = CSESLITCliPart
+    = CSESLITImgTypeUndefined
+      -- ^ @imgTypeUndefined@
+      -- No image type specified.
+    | CSESLITCliPart
       -- ^ @clipart@
-      -- clipart
+      -- Clipart-style images only.
     | CSESLITFace
       -- ^ @face@
-      -- face
+      -- Images of faces only.
     | CSESLITLineart
       -- ^ @lineart@
-      -- lineart
-    | CSESLITNews
-      -- ^ @news@
-      -- news
+      -- Line art images only.
+    | CSESLITStock
+      -- ^ @stock@
+      -- Stock images only.
     | CSESLITPhoto
       -- ^ @photo@
-      -- photo
+      -- Photo images only.
+    | CSESLITAnimated
+      -- ^ @animated@
+      -- Animated images only.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListImgType
 
 instance FromHttpApiData CSESiterestrictListImgType where
     parseQueryParam = \case
+        "imgTypeUndefined" -> Right CSESLITImgTypeUndefined
         "clipart" -> Right CSESLITCliPart
         "face" -> Right CSESLITFace
         "lineart" -> Right CSESLITLineart
-        "news" -> Right CSESLITNews
+        "stock" -> Right CSESLITStock
         "photo" -> Right CSESLITPhoto
+        "animated" -> Right CSESLITAnimated
         x -> Left ("Unable to parse CSESiterestrictListImgType from: " <> x)
 
 instance ToHttpApiData CSESiterestrictListImgType where
     toQueryParam = \case
+        CSESLITImgTypeUndefined -> "imgTypeUndefined"
         CSESLITCliPart -> "clipart"
         CSESLITFace -> "face"
         CSESLITLineart -> "lineart"
-        CSESLITNews -> "news"
+        CSESLITStock -> "stock"
         CSESLITPhoto -> "photo"
+        CSESLITAnimated -> "animated"
 
 instance FromJSON CSESiterestrictListImgType where
     parseJSON = parseJSONText "CSESiterestrictListImgType"
@@ -167,51 +166,57 @@ instance FromJSON CSESiterestrictListImgType where
 instance ToJSON CSESiterestrictListImgType where
     toJSON = toJSONText
 
--- | Returns images of a specific dominant color: red, orange, yellow, green,
--- teal, blue, purple, pink, white, gray, black and brown.
+-- | Returns images of a specific dominant color. Acceptable values are: *
+-- \`\"black\"\` * \`\"blue\"\` * \`\"brown\"\` * \`\"gray\"\` *
+-- \`\"green\"\` * \`\"orange\"\` * \`\"pink\"\` * \`\"purple\"\` *
+-- \`\"red\"\` * \`\"teal\"\` * \`\"white\"\` * \`\"yellow\"\`
 data CSEListImgDominantColor
-    = Black
+    = ImgDominantColorUndefined
+      -- ^ @imgDominantColorUndefined@
+      -- No dominant color specified.
+    | Black
       -- ^ @black@
-      -- black
+      -- Predominantly black images only.
     | Blue
       -- ^ @blue@
-      -- blue
+      -- Predominantly blue images only.
     | Brown
       -- ^ @brown@
-      -- brown
+      -- Predominantly brown images only.
     | Gray
       -- ^ @gray@
-      -- gray
+      -- Predominantly gray images only.
     | Green
       -- ^ @green@
-      -- green
+      -- Predominantly green images only.
     | Orange
       -- ^ @orange@
-      -- orange
+      -- Predominantly orange images only.
     | Pink
       -- ^ @pink@
-      -- pink
+      -- Predominantly pink images only.
     | Purple
       -- ^ @purple@
-      -- purple
+      -- Predominantly purple images only.
     | Red
       -- ^ @red@
-      -- red
+      -- Predominantly red images only.
     | Teal
       -- ^ @teal@
-      -- teal
+      -- Predominantly teal images only.
     | White
       -- ^ @white@
-      -- white
+      -- Predominantly white images only.
     | Yellow
       -- ^ @yellow@
-      -- yellow
+      -- Predominantly yellow images only.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgDominantColor
 
 instance FromHttpApiData CSEListImgDominantColor where
     parseQueryParam = \case
+        "imgDominantColorUndefined" -> Right ImgDominantColorUndefined
         "black" -> Right Black
         "blue" -> Right Blue
         "brown" -> Right Brown
@@ -228,6 +233,7 @@ instance FromHttpApiData CSEListImgDominantColor where
 
 instance ToHttpApiData CSEListImgDominantColor where
     toQueryParam = \case
+        ImgDominantColorUndefined -> "imgDominantColorUndefined"
         Black -> "black"
         Blue -> "blue"
         Brown -> "brown"
@@ -247,26 +253,32 @@ instance FromJSON CSEListImgDominantColor where
 instance ToJSON CSEListImgDominantColor where
     toJSON = toJSONText
 
--- | Search safety level
+-- | Search safety level. Acceptable values are: * \`\"active\"\`: Enables
+-- SafeSearch filtering. * \`\"off\"\`: Disables SafeSearch filtering.
+-- (default)
 data CSEListSafe
-    = Active
+    = SafeUndefined
+      -- ^ @safeUndefined@
+      -- SafeSearch mode unspecified. (Falls back to engine\'s configuration.)
+    | Active
       -- ^ @active@
-      -- Enables safe search filtering.
+      -- Turn SafeSearch on.
     | High
       -- ^ @high@
-      -- (Deprecated) Same as active.
+      -- Deprecated, equivalent to \"active\".
     | Medium
       -- ^ @medium@
-      -- (Deprecated) Same as active.
+      -- Deprecated, equivalent to \"active\".
     | Off
       -- ^ @off@
-      -- Disables safe search filtering.
+      -- Turn SafeSearch off.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSafe
 
 instance FromHttpApiData CSEListSafe where
     parseQueryParam = \case
+        "safeUndefined" -> Right SafeUndefined
         "active" -> Right Active
         "high" -> Right High
         "medium" -> Right Medium
@@ -275,6 +287,7 @@ instance FromHttpApiData CSEListSafe where
 
 instance ToHttpApiData CSEListSafe where
     toQueryParam = \case
+        SafeUndefined -> "safeUndefined"
         Active -> "active"
         High -> "high"
         Medium -> "medium"
@@ -286,54 +299,60 @@ instance FromJSON CSEListSafe where
 instance ToJSON CSEListSafe where
     toJSON = toJSONText
 
--- | Returns images of a specified size, where size can be one of: icon,
--- small, medium, large, xlarge, xxlarge, and huge.
+-- | Returns images of a specified size. Acceptable values are: *
+-- \`\"huge\"\` * \`\"icon\"\` * \`\"large\"\` * \`\"medium\"\` *
+-- \`\"small\"\` * \`\"xlarge\"\` * \`\"xxlarge\"\`
 data CSESiterestrictListImgSize
-    = CSESLISHuge
-      -- ^ @huge@
-      -- huge
+    = CSESLISImgSizeUndefined
+      -- ^ @imgSizeUndefined@
+      -- No image size specified.
+    | CSESLISHuge
+      -- ^ @HUGE@
+      -- Only the largest possible images.
     | CSESLISIcon
-      -- ^ @icon@
-      -- icon
+      -- ^ @ICON@
+      -- Only very small icon-sized images.
     | CSESLISLarge
-      -- ^ @large@
-      -- large
+      -- ^ @LARGE@
+      -- Only large images.
     | CSESLISMedium
-      -- ^ @medium@
-      -- medium
+      -- ^ @MEDIUM@
+      -- Only medium images.
     | CSESLISSmall
-      -- ^ @small@
-      -- small
+      -- ^ @SMALL@
+      -- Only small images.
     | CSESLISXlarge
-      -- ^ @xlarge@
-      -- xlarge
+      -- ^ @XLARGE@
+      -- Only very large images.
     | CSESLISXxlarge
-      -- ^ @xxlarge@
-      -- xxlarge
+      -- ^ @XXLARGE@
+      -- Only extremely large images.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListImgSize
 
 instance FromHttpApiData CSESiterestrictListImgSize where
     parseQueryParam = \case
-        "huge" -> Right CSESLISHuge
-        "icon" -> Right CSESLISIcon
-        "large" -> Right CSESLISLarge
-        "medium" -> Right CSESLISMedium
-        "small" -> Right CSESLISSmall
-        "xlarge" -> Right CSESLISXlarge
-        "xxlarge" -> Right CSESLISXxlarge
+        "imgSizeUndefined" -> Right CSESLISImgSizeUndefined
+        "HUGE" -> Right CSESLISHuge
+        "ICON" -> Right CSESLISIcon
+        "LARGE" -> Right CSESLISLarge
+        "MEDIUM" -> Right CSESLISMedium
+        "SMALL" -> Right CSESLISSmall
+        "XLARGE" -> Right CSESLISXlarge
+        "XXLARGE" -> Right CSESLISXxlarge
         x -> Left ("Unable to parse CSESiterestrictListImgSize from: " <> x)
 
 instance ToHttpApiData CSESiterestrictListImgSize where
     toQueryParam = \case
-        CSESLISHuge -> "huge"
-        CSESLISIcon -> "icon"
-        CSESLISLarge -> "large"
-        CSESLISMedium -> "medium"
-        CSESLISSmall -> "small"
-        CSESLISXlarge -> "xlarge"
-        CSESLISXxlarge -> "xxlarge"
+        CSESLISImgSizeUndefined -> "imgSizeUndefined"
+        CSESLISHuge -> "HUGE"
+        CSESLISIcon -> "ICON"
+        CSESLISLarge -> "LARGE"
+        CSESLISMedium -> "MEDIUM"
+        CSESLISSmall -> "SMALL"
+        CSESLISXlarge -> "XLARGE"
+        CSESLISXxlarge -> "XXLARGE"
 
 instance FromJSON CSESiterestrictListImgSize where
     parseJSON = parseJSONText "CSESiterestrictListImgSize"
@@ -341,34 +360,45 @@ instance FromJSON CSESiterestrictListImgSize where
 instance ToJSON CSESiterestrictListImgSize where
     toJSON = toJSONText
 
--- | Returns black and white, grayscale, or color images: mono, gray, and
--- color.
+-- | Returns black and white, grayscale, transparent, or color images.
+-- Acceptable values are: * \`\"color\"\` * \`\"gray\"\` * \`\"mono\"\`:
+-- black and white * \`\"trans\"\`: transparent background
 data CSESiterestrictListImgColorType
-    = CSESLICTColor
-      -- ^ @color@
-      -- color
-    | CSESLICTGray
-      -- ^ @gray@
-      -- gray
+    = CSESLICTImgColorTypeUndefined
+      -- ^ @imgColorTypeUndefined@
+      -- No image color type specified.
     | CSESLICTMono
       -- ^ @mono@
-      -- mono
+      -- Black and white images only.
+    | CSESLICTGray
+      -- ^ @gray@
+      -- Grayscale images only.
+    | CSESLICTColor
+      -- ^ @color@
+      -- Color images only.
+    | CSESLICTTrans
+      -- ^ @trans@
+      -- Images with transparent background
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListImgColorType
 
 instance FromHttpApiData CSESiterestrictListImgColorType where
     parseQueryParam = \case
-        "color" -> Right CSESLICTColor
-        "gray" -> Right CSESLICTGray
+        "imgColorTypeUndefined" -> Right CSESLICTImgColorTypeUndefined
         "mono" -> Right CSESLICTMono
+        "gray" -> Right CSESLICTGray
+        "color" -> Right CSESLICTColor
+        "trans" -> Right CSESLICTTrans
         x -> Left ("Unable to parse CSESiterestrictListImgColorType from: " <> x)
 
 instance ToHttpApiData CSESiterestrictListImgColorType where
     toQueryParam = \case
-        CSESLICTColor -> "color"
-        CSESLICTGray -> "gray"
+        CSESLICTImgColorTypeUndefined -> "imgColorTypeUndefined"
         CSESLICTMono -> "mono"
+        CSESLICTGray -> "gray"
+        CSESLICTColor -> "color"
+        CSESLICTTrans -> "trans"
 
 instance FromJSON CSESiterestrictListImgColorType where
     parseJSON = parseJSONText "CSESiterestrictListImgColorType"
@@ -376,34 +406,45 @@ instance FromJSON CSESiterestrictListImgColorType where
 instance ToJSON CSESiterestrictListImgColorType where
     toJSON = toJSONText
 
--- | Returns black and white, grayscale, or color images: mono, gray, and
--- color.
+-- | Returns black and white, grayscale, transparent, or color images.
+-- Acceptable values are: * \`\"color\"\` * \`\"gray\"\` * \`\"mono\"\`:
+-- black and white * \`\"trans\"\`: transparent background
 data CSEListImgColorType
-    = CSELICTColor
-      -- ^ @color@
-      -- color
-    | CSELICTGray
-      -- ^ @gray@
-      -- gray
+    = CSELICTImgColorTypeUndefined
+      -- ^ @imgColorTypeUndefined@
+      -- No image color type specified.
     | CSELICTMono
       -- ^ @mono@
-      -- mono
+      -- Black and white images only.
+    | CSELICTGray
+      -- ^ @gray@
+      -- Grayscale images only.
+    | CSELICTColor
+      -- ^ @color@
+      -- Color images only.
+    | CSELICTTrans
+      -- ^ @trans@
+      -- Images with transparent background
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgColorType
 
 instance FromHttpApiData CSEListImgColorType where
     parseQueryParam = \case
-        "color" -> Right CSELICTColor
-        "gray" -> Right CSELICTGray
+        "imgColorTypeUndefined" -> Right CSELICTImgColorTypeUndefined
         "mono" -> Right CSELICTMono
+        "gray" -> Right CSELICTGray
+        "color" -> Right CSELICTColor
+        "trans" -> Right CSELICTTrans
         x -> Left ("Unable to parse CSEListImgColorType from: " <> x)
 
 instance ToHttpApiData CSEListImgColorType where
     toQueryParam = \case
-        CSELICTColor -> "color"
-        CSELICTGray -> "gray"
+        CSELICTImgColorTypeUndefined -> "imgColorTypeUndefined"
         CSELICTMono -> "mono"
+        CSELICTGray -> "gray"
+        CSELICTColor -> "color"
+        CSELICTTrans -> "trans"
 
 instance FromJSON CSEListImgColorType where
     parseJSON = parseJSONText "CSEListImgColorType"
@@ -411,23 +452,33 @@ instance FromJSON CSEListImgColorType where
 instance ToJSON CSEListImgColorType where
     toJSON = toJSONText
 
--- | Search safety level
+-- | Search safety level. Acceptable values are: * \`\"active\"\`: Enables
+-- SafeSearch filtering. * \`\"off\"\`: Disables SafeSearch filtering.
+-- (default)
 data CSESiterestrictListSafe
-    = CSESLSHigh
+    = CSESLSSafeUndefined
+      -- ^ @safeUndefined@
+      -- SafeSearch mode unspecified. (Falls back to engine\'s configuration.)
+    | CSESLSActive
+      -- ^ @active@
+      -- Turn SafeSearch on.
+    | CSESLSHigh
       -- ^ @high@
-      -- Enables highest level of safe search filtering.
+      -- Deprecated, equivalent to \"active\".
     | CSESLSMedium
       -- ^ @medium@
-      -- Enables moderate safe search filtering.
+      -- Deprecated, equivalent to \"active\".
     | CSESLSOff
       -- ^ @off@
-      -- Disables safe search filtering.
+      -- Turn SafeSearch off.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListSafe
 
 instance FromHttpApiData CSESiterestrictListSafe where
     parseQueryParam = \case
+        "safeUndefined" -> Right CSESLSSafeUndefined
+        "active" -> Right CSESLSActive
         "high" -> Right CSESLSHigh
         "medium" -> Right CSESLSMedium
         "off" -> Right CSESLSOff
@@ -435,6 +486,8 @@ instance FromHttpApiData CSESiterestrictListSafe where
 
 instance ToHttpApiData CSESiterestrictListSafe where
     toQueryParam = \case
+        CSESLSSafeUndefined -> "safeUndefined"
+        CSESLSActive -> "active"
         CSESLSHigh -> "high"
         CSESLSMedium -> "medium"
         CSESLSOff -> "off"
@@ -445,51 +498,57 @@ instance FromJSON CSESiterestrictListSafe where
 instance ToJSON CSESiterestrictListSafe where
     toJSON = toJSONText
 
--- | Returns images of a specific dominant color: red, orange, yellow, green,
--- teal, blue, purple, pink, white, gray, black and brown.
+-- | Returns images of a specific dominant color. Acceptable values are: *
+-- \`\"black\"\` * \`\"blue\"\` * \`\"brown\"\` * \`\"gray\"\` *
+-- \`\"green\"\` * \`\"orange\"\` * \`\"pink\"\` * \`\"purple\"\` *
+-- \`\"red\"\` * \`\"teal\"\` * \`\"white\"\` * \`\"yellow\"\`
 data CSESiterestrictListImgDominantColor
-    = CSESLIDCBlack
+    = CSESLIDCImgDominantColorUndefined
+      -- ^ @imgDominantColorUndefined@
+      -- No dominant color specified.
+    | CSESLIDCBlack
       -- ^ @black@
-      -- black
+      -- Predominantly black images only.
     | CSESLIDCBlue
       -- ^ @blue@
-      -- blue
+      -- Predominantly blue images only.
     | CSESLIDCBrown
       -- ^ @brown@
-      -- brown
+      -- Predominantly brown images only.
     | CSESLIDCGray
       -- ^ @gray@
-      -- gray
+      -- Predominantly gray images only.
     | CSESLIDCGreen
       -- ^ @green@
-      -- green
+      -- Predominantly green images only.
     | CSESLIDCOrange
       -- ^ @orange@
-      -- orange
+      -- Predominantly orange images only.
     | CSESLIDCPink
       -- ^ @pink@
-      -- pink
+      -- Predominantly pink images only.
     | CSESLIDCPurple
       -- ^ @purple@
-      -- purple
+      -- Predominantly purple images only.
     | CSESLIDCRed
       -- ^ @red@
-      -- red
+      -- Predominantly red images only.
     | CSESLIDCTeal
       -- ^ @teal@
-      -- teal
+      -- Predominantly teal images only.
     | CSESLIDCWhite
       -- ^ @white@
-      -- white
+      -- Predominantly white images only.
     | CSESLIDCYellow
       -- ^ @yellow@
-      -- yellow
+      -- Predominantly yellow images only.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListImgDominantColor
 
 instance FromHttpApiData CSESiterestrictListImgDominantColor where
     parseQueryParam = \case
+        "imgDominantColorUndefined" -> Right CSESLIDCImgDominantColorUndefined
         "black" -> Right CSESLIDCBlack
         "blue" -> Right CSESLIDCBlue
         "brown" -> Right CSESLIDCBrown
@@ -506,6 +565,7 @@ instance FromHttpApiData CSESiterestrictListImgDominantColor where
 
 instance ToHttpApiData CSESiterestrictListImgDominantColor where
     toQueryParam = \case
+        CSESLIDCImgDominantColorUndefined -> "imgDominantColorUndefined"
         CSESLIDCBlack -> "black"
         CSESLIDCBlue -> "blue"
         CSESLIDCBrown -> "brown"
@@ -525,56 +585,62 @@ instance FromJSON CSESiterestrictListImgDominantColor where
 instance ToJSON CSESiterestrictListImgDominantColor where
     toJSON = toJSONText
 
--- | Controls turning on or off the duplicate content filter.
-data CSEListFilter
-    = CSELF0
-      -- ^ @0@
-      -- Turns off duplicate content filter.
-    | CSELF1
+-- | V1 error format.
+data Xgafv
+    = X1
       -- ^ @1@
-      -- Turns on duplicate content filter.
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable CSEListFilter
+instance Hashable Xgafv
 
-instance FromHttpApiData CSEListFilter where
+instance FromHttpApiData Xgafv where
     parseQueryParam = \case
-        "0" -> Right CSELF0
-        "1" -> Right CSELF1
-        x -> Left ("Unable to parse CSEListFilter from: " <> x)
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
 
-instance ToHttpApiData CSEListFilter where
+instance ToHttpApiData Xgafv where
     toQueryParam = \case
-        CSELF0 -> "0"
-        CSELF1 -> "1"
+        X1 -> "1"
+        X2 -> "2"
 
-instance FromJSON CSEListFilter where
-    parseJSON = parseJSONText "CSEListFilter"
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
 
-instance ToJSON CSEListFilter where
+instance ToJSON Xgafv where
     toJSON = toJSONText
 
 -- | Controls whether to include or exclude results from the site named in
--- the as_sitesearch parameter
+-- the \`siteSearch\` parameter. Acceptable values are: * \`\"e\"\`:
+-- exclude * \`\"i\"\`: include
 data CSESiterestrictListSiteSearchFilter
-    = CSESLSSFE
+    = CSESLSSFSiteSearchFilterUndefined
+      -- ^ @siteSearchFilterUndefined@
+      -- Filter mode unspecified.
+    | CSESLSSFE
       -- ^ @e@
-      -- exclude
+      -- Exclude results from the listed sites.
     | CSESLSSFI
       -- ^ @i@
-      -- include
+      -- Include only results from the listed sites.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListSiteSearchFilter
 
 instance FromHttpApiData CSESiterestrictListSiteSearchFilter where
     parseQueryParam = \case
+        "siteSearchFilterUndefined" -> Right CSESLSSFSiteSearchFilterUndefined
         "e" -> Right CSESLSSFE
         "i" -> Right CSESLSSFI
         x -> Left ("Unable to parse CSESiterestrictListSiteSearchFilter from: " <> x)
 
 instance ToHttpApiData CSESiterestrictListSiteSearchFilter where
     toQueryParam = \case
+        CSESLSSFSiteSearchFilterUndefined -> "siteSearchFilterUndefined"
         CSESLSSFE -> "e"
         CSESLSSFI -> "i"
 
@@ -584,216 +650,29 @@ instance FromJSON CSESiterestrictListSiteSearchFilter where
 instance ToJSON CSESiterestrictListSiteSearchFilter where
     toJSON = toJSONText
 
--- | The language restriction for the search results
-data CSESiterestrictListLr
-    = LangAr
-      -- ^ @lang_ar@
-      -- Arabic
-    | LangBg
-      -- ^ @lang_bg@
-      -- Bulgarian
-    | LangCa
-      -- ^ @lang_ca@
-      -- Catalan
-    | LangCs
-      -- ^ @lang_cs@
-      -- Czech
-    | LangDa
-      -- ^ @lang_da@
-      -- Danish
-    | LangDe
-      -- ^ @lang_de@
-      -- German
-    | LangEl
-      -- ^ @lang_el@
-      -- Greek
-    | LangEn
-      -- ^ @lang_en@
-      -- English
-    | LangEs
-      -- ^ @lang_es@
-      -- Spanish
-    | LangEt
-      -- ^ @lang_et@
-      -- Estonian
-    | LangFi
-      -- ^ @lang_fi@
-      -- Finnish
-    | LangFr
-      -- ^ @lang_fr@
-      -- French
-    | LangHr
-      -- ^ @lang_hr@
-      -- Croatian
-    | LangHu
-      -- ^ @lang_hu@
-      -- Hungarian
-    | LangId
-      -- ^ @lang_id@
-      -- Indonesian
-    | LangIs
-      -- ^ @lang_is@
-      -- Icelandic
-    | LangIt
-      -- ^ @lang_it@
-      -- Italian
-    | LangIw
-      -- ^ @lang_iw@
-      -- Hebrew
-    | LangJa
-      -- ^ @lang_ja@
-      -- Japanese
-    | LangKo
-      -- ^ @lang_ko@
-      -- Korean
-    | LangLT
-      -- ^ @lang_lt@
-      -- Lithuanian
-    | LangLv
-      -- ^ @lang_lv@
-      -- Latvian
-    | LangNl
-      -- ^ @lang_nl@
-      -- Dutch
-    | LangNo
-      -- ^ @lang_no@
-      -- Norwegian
-    | LangPl
-      -- ^ @lang_pl@
-      -- Polish
-    | LangPt
-      -- ^ @lang_pt@
-      -- Portuguese
-    | LangRo
-      -- ^ @lang_ro@
-      -- Romanian
-    | LangRu
-      -- ^ @lang_ru@
-      -- Russian
-    | LangSk
-      -- ^ @lang_sk@
-      -- Slovak
-    | LangSl
-      -- ^ @lang_sl@
-      -- Slovenian
-    | LangSr
-      -- ^ @lang_sr@
-      -- Serbian
-    | LangSv
-      -- ^ @lang_sv@
-      -- Swedish
-    | LangTr
-      -- ^ @lang_tr@
-      -- Turkish
-    | LangZhCn
-      -- ^ @lang_zh-CN@
-      -- Chinese (Simplified)
-    | LangZhTw
-      -- ^ @lang_zh-TW@
-      -- Chinese (Traditional)
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable CSESiterestrictListLr
-
-instance FromHttpApiData CSESiterestrictListLr where
-    parseQueryParam = \case
-        "lang_ar" -> Right LangAr
-        "lang_bg" -> Right LangBg
-        "lang_ca" -> Right LangCa
-        "lang_cs" -> Right LangCs
-        "lang_da" -> Right LangDa
-        "lang_de" -> Right LangDe
-        "lang_el" -> Right LangEl
-        "lang_en" -> Right LangEn
-        "lang_es" -> Right LangEs
-        "lang_et" -> Right LangEt
-        "lang_fi" -> Right LangFi
-        "lang_fr" -> Right LangFr
-        "lang_hr" -> Right LangHr
-        "lang_hu" -> Right LangHu
-        "lang_id" -> Right LangId
-        "lang_is" -> Right LangIs
-        "lang_it" -> Right LangIt
-        "lang_iw" -> Right LangIw
-        "lang_ja" -> Right LangJa
-        "lang_ko" -> Right LangKo
-        "lang_lt" -> Right LangLT
-        "lang_lv" -> Right LangLv
-        "lang_nl" -> Right LangNl
-        "lang_no" -> Right LangNo
-        "lang_pl" -> Right LangPl
-        "lang_pt" -> Right LangPt
-        "lang_ro" -> Right LangRo
-        "lang_ru" -> Right LangRu
-        "lang_sk" -> Right LangSk
-        "lang_sl" -> Right LangSl
-        "lang_sr" -> Right LangSr
-        "lang_sv" -> Right LangSv
-        "lang_tr" -> Right LangTr
-        "lang_zh-CN" -> Right LangZhCn
-        "lang_zh-TW" -> Right LangZhTw
-        x -> Left ("Unable to parse CSESiterestrictListLr from: " <> x)
-
-instance ToHttpApiData CSESiterestrictListLr where
-    toQueryParam = \case
-        LangAr -> "lang_ar"
-        LangBg -> "lang_bg"
-        LangCa -> "lang_ca"
-        LangCs -> "lang_cs"
-        LangDa -> "lang_da"
-        LangDe -> "lang_de"
-        LangEl -> "lang_el"
-        LangEn -> "lang_en"
-        LangEs -> "lang_es"
-        LangEt -> "lang_et"
-        LangFi -> "lang_fi"
-        LangFr -> "lang_fr"
-        LangHr -> "lang_hr"
-        LangHu -> "lang_hu"
-        LangId -> "lang_id"
-        LangIs -> "lang_is"
-        LangIt -> "lang_it"
-        LangIw -> "lang_iw"
-        LangJa -> "lang_ja"
-        LangKo -> "lang_ko"
-        LangLT -> "lang_lt"
-        LangLv -> "lang_lv"
-        LangNl -> "lang_nl"
-        LangNo -> "lang_no"
-        LangPl -> "lang_pl"
-        LangPt -> "lang_pt"
-        LangRo -> "lang_ro"
-        LangRu -> "lang_ru"
-        LangSk -> "lang_sk"
-        LangSl -> "lang_sl"
-        LangSr -> "lang_sr"
-        LangSv -> "lang_sv"
-        LangTr -> "lang_tr"
-        LangZhCn -> "lang_zh-CN"
-        LangZhTw -> "lang_zh-TW"
-
-instance FromJSON CSESiterestrictListLr where
-    parseJSON = parseJSONText "CSESiterestrictListLr"
-
-instance ToJSON CSESiterestrictListLr where
-    toJSON = toJSONText
-
--- | Specifies the search type: image.
+-- | Specifies the search type: \`image\`. If unspecified, results are
+-- limited to webpages. Acceptable values are: * \`\"image\"\`: custom
+-- image search.
 data CSESiterestrictListSearchType
-    = Image
+    = SearchTypeUndefined
+      -- ^ @searchTypeUndefined@
+      -- Search type unspecified (defaults to web search).
+    | Image
       -- ^ @image@
-      -- custom image search
+      -- Image search.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSESiterestrictListSearchType
 
 instance FromHttpApiData CSESiterestrictListSearchType where
     parseQueryParam = \case
+        "searchTypeUndefined" -> Right SearchTypeUndefined
         "image" -> Right Image
         x -> Left ("Unable to parse CSESiterestrictListSearchType from: " <> x)
 
 instance ToHttpApiData CSESiterestrictListSearchType where
     toQueryParam = \case
+        SearchTypeUndefined -> "searchTypeUndefined"
         Image -> "image"
 
 instance FromJSON CSESiterestrictListSearchType where
@@ -802,216 +681,29 @@ instance FromJSON CSESiterestrictListSearchType where
 instance ToJSON CSESiterestrictListSearchType where
     toJSON = toJSONText
 
--- | The language restriction for the search results
-data CSEListLr
-    = CSELLLangAr
-      -- ^ @lang_ar@
-      -- Arabic
-    | CSELLLangBg
-      -- ^ @lang_bg@
-      -- Bulgarian
-    | CSELLLangCa
-      -- ^ @lang_ca@
-      -- Catalan
-    | CSELLLangCs
-      -- ^ @lang_cs@
-      -- Czech
-    | CSELLLangDa
-      -- ^ @lang_da@
-      -- Danish
-    | CSELLLangDe
-      -- ^ @lang_de@
-      -- German
-    | CSELLLangEl
-      -- ^ @lang_el@
-      -- Greek
-    | CSELLLangEn
-      -- ^ @lang_en@
-      -- English
-    | CSELLLangEs
-      -- ^ @lang_es@
-      -- Spanish
-    | CSELLLangEt
-      -- ^ @lang_et@
-      -- Estonian
-    | CSELLLangFi
-      -- ^ @lang_fi@
-      -- Finnish
-    | CSELLLangFr
-      -- ^ @lang_fr@
-      -- French
-    | CSELLLangHr
-      -- ^ @lang_hr@
-      -- Croatian
-    | CSELLLangHu
-      -- ^ @lang_hu@
-      -- Hungarian
-    | CSELLLangId
-      -- ^ @lang_id@
-      -- Indonesian
-    | CSELLLangIs
-      -- ^ @lang_is@
-      -- Icelandic
-    | CSELLLangIt
-      -- ^ @lang_it@
-      -- Italian
-    | CSELLLangIw
-      -- ^ @lang_iw@
-      -- Hebrew
-    | CSELLLangJa
-      -- ^ @lang_ja@
-      -- Japanese
-    | CSELLLangKo
-      -- ^ @lang_ko@
-      -- Korean
-    | CSELLLangLT
-      -- ^ @lang_lt@
-      -- Lithuanian
-    | CSELLLangLv
-      -- ^ @lang_lv@
-      -- Latvian
-    | CSELLLangNl
-      -- ^ @lang_nl@
-      -- Dutch
-    | CSELLLangNo
-      -- ^ @lang_no@
-      -- Norwegian
-    | CSELLLangPl
-      -- ^ @lang_pl@
-      -- Polish
-    | CSELLLangPt
-      -- ^ @lang_pt@
-      -- Portuguese
-    | CSELLLangRo
-      -- ^ @lang_ro@
-      -- Romanian
-    | CSELLLangRu
-      -- ^ @lang_ru@
-      -- Russian
-    | CSELLLangSk
-      -- ^ @lang_sk@
-      -- Slovak
-    | CSELLLangSl
-      -- ^ @lang_sl@
-      -- Slovenian
-    | CSELLLangSr
-      -- ^ @lang_sr@
-      -- Serbian
-    | CSELLLangSv
-      -- ^ @lang_sv@
-      -- Swedish
-    | CSELLLangTr
-      -- ^ @lang_tr@
-      -- Turkish
-    | CSELLLangZhCn
-      -- ^ @lang_zh-CN@
-      -- Chinese (Simplified)
-    | CSELLLangZhTw
-      -- ^ @lang_zh-TW@
-      -- Chinese (Traditional)
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable CSEListLr
-
-instance FromHttpApiData CSEListLr where
-    parseQueryParam = \case
-        "lang_ar" -> Right CSELLLangAr
-        "lang_bg" -> Right CSELLLangBg
-        "lang_ca" -> Right CSELLLangCa
-        "lang_cs" -> Right CSELLLangCs
-        "lang_da" -> Right CSELLLangDa
-        "lang_de" -> Right CSELLLangDe
-        "lang_el" -> Right CSELLLangEl
-        "lang_en" -> Right CSELLLangEn
-        "lang_es" -> Right CSELLLangEs
-        "lang_et" -> Right CSELLLangEt
-        "lang_fi" -> Right CSELLLangFi
-        "lang_fr" -> Right CSELLLangFr
-        "lang_hr" -> Right CSELLLangHr
-        "lang_hu" -> Right CSELLLangHu
-        "lang_id" -> Right CSELLLangId
-        "lang_is" -> Right CSELLLangIs
-        "lang_it" -> Right CSELLLangIt
-        "lang_iw" -> Right CSELLLangIw
-        "lang_ja" -> Right CSELLLangJa
-        "lang_ko" -> Right CSELLLangKo
-        "lang_lt" -> Right CSELLLangLT
-        "lang_lv" -> Right CSELLLangLv
-        "lang_nl" -> Right CSELLLangNl
-        "lang_no" -> Right CSELLLangNo
-        "lang_pl" -> Right CSELLLangPl
-        "lang_pt" -> Right CSELLLangPt
-        "lang_ro" -> Right CSELLLangRo
-        "lang_ru" -> Right CSELLLangRu
-        "lang_sk" -> Right CSELLLangSk
-        "lang_sl" -> Right CSELLLangSl
-        "lang_sr" -> Right CSELLLangSr
-        "lang_sv" -> Right CSELLLangSv
-        "lang_tr" -> Right CSELLLangTr
-        "lang_zh-CN" -> Right CSELLLangZhCn
-        "lang_zh-TW" -> Right CSELLLangZhTw
-        x -> Left ("Unable to parse CSEListLr from: " <> x)
-
-instance ToHttpApiData CSEListLr where
-    toQueryParam = \case
-        CSELLLangAr -> "lang_ar"
-        CSELLLangBg -> "lang_bg"
-        CSELLLangCa -> "lang_ca"
-        CSELLLangCs -> "lang_cs"
-        CSELLLangDa -> "lang_da"
-        CSELLLangDe -> "lang_de"
-        CSELLLangEl -> "lang_el"
-        CSELLLangEn -> "lang_en"
-        CSELLLangEs -> "lang_es"
-        CSELLLangEt -> "lang_et"
-        CSELLLangFi -> "lang_fi"
-        CSELLLangFr -> "lang_fr"
-        CSELLLangHr -> "lang_hr"
-        CSELLLangHu -> "lang_hu"
-        CSELLLangId -> "lang_id"
-        CSELLLangIs -> "lang_is"
-        CSELLLangIt -> "lang_it"
-        CSELLLangIw -> "lang_iw"
-        CSELLLangJa -> "lang_ja"
-        CSELLLangKo -> "lang_ko"
-        CSELLLangLT -> "lang_lt"
-        CSELLLangLv -> "lang_lv"
-        CSELLLangNl -> "lang_nl"
-        CSELLLangNo -> "lang_no"
-        CSELLLangPl -> "lang_pl"
-        CSELLLangPt -> "lang_pt"
-        CSELLLangRo -> "lang_ro"
-        CSELLLangRu -> "lang_ru"
-        CSELLLangSk -> "lang_sk"
-        CSELLLangSl -> "lang_sl"
-        CSELLLangSr -> "lang_sr"
-        CSELLLangSv -> "lang_sv"
-        CSELLLangTr -> "lang_tr"
-        CSELLLangZhCn -> "lang_zh-CN"
-        CSELLLangZhTw -> "lang_zh-TW"
-
-instance FromJSON CSEListLr where
-    parseJSON = parseJSONText "CSEListLr"
-
-instance ToJSON CSEListLr where
-    toJSON = toJSONText
-
--- | Specifies the search type: image.
+-- | Specifies the search type: \`image\`. If unspecified, results are
+-- limited to webpages. Acceptable values are: * \`\"image\"\`: custom
+-- image search.
 data CSEListSearchType
-    = CSELSTImage
+    = CSELSTSearchTypeUndefined
+      -- ^ @searchTypeUndefined@
+      -- Search type unspecified (defaults to web search).
+    | CSELSTImage
       -- ^ @image@
-      -- custom image search
+      -- Image search.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSearchType
 
 instance FromHttpApiData CSEListSearchType where
     parseQueryParam = \case
+        "searchTypeUndefined" -> Right CSELSTSearchTypeUndefined
         "image" -> Right CSELSTImage
         x -> Left ("Unable to parse CSEListSearchType from: " <> x)
 
 instance ToHttpApiData CSEListSearchType where
     toQueryParam = \case
+        CSELSTSearchTypeUndefined -> "searchTypeUndefined"
         CSELSTImage -> "image"
 
 instance FromJSON CSEListSearchType where
@@ -1020,54 +712,60 @@ instance FromJSON CSEListSearchType where
 instance ToJSON CSEListSearchType where
     toJSON = toJSONText
 
--- | Returns images of a specified size, where size can be one of: icon,
--- small, medium, large, xlarge, xxlarge, and huge.
+-- | Returns images of a specified size. Acceptable values are: *
+-- \`\"huge\"\` * \`\"icon\"\` * \`\"large\"\` * \`\"medium\"\` *
+-- \`\"small\"\` * \`\"xlarge\"\` * \`\"xxlarge\"\`
 data CSEListImgSize
-    = CSELISHuge
-      -- ^ @huge@
-      -- huge
+    = CSELISImgSizeUndefined
+      -- ^ @imgSizeUndefined@
+      -- No image size specified.
+    | CSELISHuge
+      -- ^ @HUGE@
+      -- Only the largest possible images.
     | CSELISIcon
-      -- ^ @icon@
-      -- icon
+      -- ^ @ICON@
+      -- Only very small icon-sized images.
     | CSELISLarge
-      -- ^ @large@
-      -- large
+      -- ^ @LARGE@
+      -- Only large images.
     | CSELISMedium
-      -- ^ @medium@
-      -- medium
+      -- ^ @MEDIUM@
+      -- Only medium images.
     | CSELISSmall
-      -- ^ @small@
-      -- small
+      -- ^ @SMALL@
+      -- Only small images.
     | CSELISXlarge
-      -- ^ @xlarge@
-      -- xlarge
+      -- ^ @XLARGE@
+      -- Only very large images.
     | CSELISXxlarge
-      -- ^ @xxlarge@
-      -- xxlarge
+      -- ^ @XXLARGE@
+      -- Only extremely large images.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgSize
 
 instance FromHttpApiData CSEListImgSize where
     parseQueryParam = \case
-        "huge" -> Right CSELISHuge
-        "icon" -> Right CSELISIcon
-        "large" -> Right CSELISLarge
-        "medium" -> Right CSELISMedium
-        "small" -> Right CSELISSmall
-        "xlarge" -> Right CSELISXlarge
-        "xxlarge" -> Right CSELISXxlarge
+        "imgSizeUndefined" -> Right CSELISImgSizeUndefined
+        "HUGE" -> Right CSELISHuge
+        "ICON" -> Right CSELISIcon
+        "LARGE" -> Right CSELISLarge
+        "MEDIUM" -> Right CSELISMedium
+        "SMALL" -> Right CSELISSmall
+        "XLARGE" -> Right CSELISXlarge
+        "XXLARGE" -> Right CSELISXxlarge
         x -> Left ("Unable to parse CSEListImgSize from: " <> x)
 
 instance ToHttpApiData CSEListImgSize where
     toQueryParam = \case
-        CSELISHuge -> "huge"
-        CSELISIcon -> "icon"
-        CSELISLarge -> "large"
-        CSELISMedium -> "medium"
-        CSELISSmall -> "small"
-        CSELISXlarge -> "xlarge"
-        CSELISXxlarge -> "xxlarge"
+        CSELISImgSizeUndefined -> "imgSizeUndefined"
+        CSELISHuge -> "HUGE"
+        CSELISIcon -> "ICON"
+        CSELISLarge -> "LARGE"
+        CSELISMedium -> "MEDIUM"
+        CSELISSmall -> "SMALL"
+        CSELISXlarge -> "XLARGE"
+        CSELISXxlarge -> "XXLARGE"
 
 instance FromJSON CSEListImgSize where
     parseJSON = parseJSONText "CSEListImgSize"

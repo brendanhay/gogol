@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes all images for the specified language and image type.
+-- Deletes all images for the specified language and image type. Returns an
+-- empty response if no images are found.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.deleteall@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.images.deleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
     (
     -- * REST Resource
@@ -33,14 +34,19 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
     , EditsImagesDeleteall
 
     -- * Request Lenses
+    , ediXgafv
+    , ediUploadProtocol
     , ediPackageName
+    , ediAccessToken
+    , ediUploadType
     , ediImageType
     , ediLanguage
     , ediEditId
+    , ediCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.images.deleteall@ method which the
 -- 'EditsImagesDeleteall' request conforms to.
@@ -54,18 +60,29 @@ type EditsImagesDeleteallResource =
                  "listings" :>
                    Capture "language" Text :>
                      Capture "imageType" EditsImagesDeleteallImageType :>
-                       QueryParam "alt" AltJSON :>
-                         Delete '[JSON] ImagesDeleteAllResponse
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] ImagesDeleteAllResponse
 
--- | Deletes all images for the specified language and image type.
+-- | Deletes all images for the specified language and image type. Returns an
+-- empty response if no images are found.
 --
 -- /See:/ 'editsImagesDeleteall' smart constructor.
 data EditsImagesDeleteall =
   EditsImagesDeleteall'
-    { _ediPackageName :: !Text
-    , _ediImageType   :: !EditsImagesDeleteallImageType
-    , _ediLanguage    :: !Text
-    , _ediEditId      :: !Text
+    { _ediXgafv :: !(Maybe Xgafv)
+    , _ediUploadProtocol :: !(Maybe Text)
+    , _ediPackageName :: !Text
+    , _ediAccessToken :: !(Maybe Text)
+    , _ediUploadType :: !(Maybe Text)
+    , _ediImageType :: !EditsImagesDeleteallImageType
+    , _ediLanguage :: !Text
+    , _ediEditId :: !Text
+    , _ediCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,13 +91,23 @@ data EditsImagesDeleteall =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ediXgafv'
+--
+-- * 'ediUploadProtocol'
+--
 -- * 'ediPackageName'
+--
+-- * 'ediAccessToken'
+--
+-- * 'ediUploadType'
 --
 -- * 'ediImageType'
 --
 -- * 'ediLanguage'
 --
 -- * 'ediEditId'
+--
+-- * 'ediCallback'
 editsImagesDeleteall
     :: Text -- ^ 'ediPackageName'
     -> EditsImagesDeleteallImageType -- ^ 'ediImageType'
@@ -89,35 +116,68 @@ editsImagesDeleteall
     -> EditsImagesDeleteall
 editsImagesDeleteall pEdiPackageName_ pEdiImageType_ pEdiLanguage_ pEdiEditId_ =
   EditsImagesDeleteall'
-    { _ediPackageName = pEdiPackageName_
+    { _ediXgafv = Nothing
+    , _ediUploadProtocol = Nothing
+    , _ediPackageName = pEdiPackageName_
+    , _ediAccessToken = Nothing
+    , _ediUploadType = Nothing
     , _ediImageType = pEdiImageType_
     , _ediLanguage = pEdiLanguage_
     , _ediEditId = pEdiEditId_
+    , _ediCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+ediXgafv :: Lens' EditsImagesDeleteall (Maybe Xgafv)
+ediXgafv = lens _ediXgafv (\ s a -> s{_ediXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ediUploadProtocol :: Lens' EditsImagesDeleteall (Maybe Text)
+ediUploadProtocol
+  = lens _ediUploadProtocol
+      (\ s a -> s{_ediUploadProtocol = a})
+
+-- | Package name of the app.
 ediPackageName :: Lens' EditsImagesDeleteall Text
 ediPackageName
   = lens _ediPackageName
       (\ s a -> s{_ediPackageName = a})
 
+-- | OAuth access token.
+ediAccessToken :: Lens' EditsImagesDeleteall (Maybe Text)
+ediAccessToken
+  = lens _ediAccessToken
+      (\ s a -> s{_ediAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ediUploadType :: Lens' EditsImagesDeleteall (Maybe Text)
+ediUploadType
+  = lens _ediUploadType
+      (\ s a -> s{_ediUploadType = a})
+
+-- | Type of the Image. Providing an image type that refers to no images is a
+-- no-op.
 ediImageType :: Lens' EditsImagesDeleteall EditsImagesDeleteallImageType
 ediImageType
   = lens _ediImageType (\ s a -> s{_ediImageType = a})
 
--- | The language code (a BCP-47 language tag) of the localized listing whose
--- images are to read or modified. For example, to select Austrian German,
--- pass \"de-AT\".
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German). Providing a language that is not
+-- supported by the App is a no-op.
 ediLanguage :: Lens' EditsImagesDeleteall Text
 ediLanguage
   = lens _ediLanguage (\ s a -> s{_ediLanguage = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 ediEditId :: Lens' EditsImagesDeleteall Text
 ediEditId
   = lens _ediEditId (\ s a -> s{_ediEditId = a})
+
+-- | JSONP
+ediCallback :: Lens' EditsImagesDeleteall (Maybe Text)
+ediCallback
+  = lens _ediCallback (\ s a -> s{_ediCallback = a})
 
 instance GoogleRequest EditsImagesDeleteall where
         type Rs EditsImagesDeleteall =
@@ -127,6 +187,11 @@ instance GoogleRequest EditsImagesDeleteall where
         requestClient EditsImagesDeleteall'{..}
           = go _ediPackageName _ediEditId _ediLanguage
               _ediImageType
+              _ediXgafv
+              _ediUploadProtocol
+              _ediAccessToken
+              _ediUploadType
+              _ediCallback
               (Just AltJSON)
               androidPublisherService
           where go

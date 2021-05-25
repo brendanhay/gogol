@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.TargetTCPProxies.Get
     , ttpgTargetTCPProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetTcpProxies.get@ method which the
 -- 'TargetTCPProxiesGet' request conforms to.
@@ -60,7 +60,7 @@ type TargetTCPProxiesGetResource =
 -- /See:/ 'targetTCPProxiesGet' smart constructor.
 data TargetTCPProxiesGet =
   TargetTCPProxiesGet'
-    { _ttpgProject        :: !Text
+    { _ttpgProject :: !Text
     , _ttpgTargetTCPProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

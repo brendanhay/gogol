@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Dele
     , bafsdCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.accounts.filterSets.delete@ method which the
 -- 'BiddersAccountsFilterSetsDelete' request conforms to.
@@ -63,12 +63,12 @@ type BiddersAccountsFilterSetsDeleteResource =
 -- /See:/ 'biddersAccountsFilterSetsDelete' smart constructor.
 data BiddersAccountsFilterSetsDelete =
   BiddersAccountsFilterSetsDelete'
-    { _bafsdXgafv          :: !(Maybe Xgafv)
+    { _bafsdXgafv :: !(Maybe Xgafv)
     , _bafsdUploadProtocol :: !(Maybe Text)
-    , _bafsdAccessToken    :: !(Maybe Text)
-    , _bafsdUploadType     :: !(Maybe Text)
-    , _bafsdName           :: !Text
-    , _bafsdCallback       :: !(Maybe Text)
+    , _bafsdAccessToken :: !(Maybe Text)
+    , _bafsdUploadType :: !(Maybe Text)
+    , _bafsdName :: !Text
+    , _bafsdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

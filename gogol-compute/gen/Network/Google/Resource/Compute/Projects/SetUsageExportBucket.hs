@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
     , psuebPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.setUsageExportBucket@ method which the
 -- 'ProjectsSetUsageExportBucket' request conforms to.
@@ -64,8 +64,8 @@ type ProjectsSetUsageExportBucketResource =
 data ProjectsSetUsageExportBucket =
   ProjectsSetUsageExportBucket'
     { _psuebRequestId :: !(Maybe Text)
-    , _psuebProject   :: !Text
-    , _psuebPayload   :: !UsageExportLocation
+    , _psuebProject :: !Text
+    , _psuebPayload :: !UsageExportLocation
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

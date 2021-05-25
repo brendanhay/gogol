@@ -39,12 +39,13 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Delete
     , ptdTriggerId
     , ptdAccessToken
     , ptdUploadType
+    , ptdName
     , ptdProjectId
     , ptdCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.triggers.delete@ method which the
 -- 'ProjectsTriggersDelete' request conforms to.
@@ -58,8 +59,9 @@ type ProjectsTriggersDeleteResource =
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                       QueryParam "name" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a \`BuildTrigger\` by its project ID and trigger ID. This API is
 -- experimental.
@@ -67,13 +69,14 @@ type ProjectsTriggersDeleteResource =
 -- /See:/ 'projectsTriggersDelete' smart constructor.
 data ProjectsTriggersDelete =
   ProjectsTriggersDelete'
-    { _ptdXgafv          :: !(Maybe Xgafv)
+    { _ptdXgafv :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
-    , _ptdTriggerId      :: !Text
-    , _ptdAccessToken    :: !(Maybe Text)
-    , _ptdUploadType     :: !(Maybe Text)
-    , _ptdProjectId      :: !Text
-    , _ptdCallback       :: !(Maybe Text)
+    , _ptdTriggerId :: !Text
+    , _ptdAccessToken :: !(Maybe Text)
+    , _ptdUploadType :: !(Maybe Text)
+    , _ptdName :: !(Maybe Text)
+    , _ptdProjectId :: !Text
+    , _ptdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,6 +95,8 @@ data ProjectsTriggersDelete =
 --
 -- * 'ptdUploadType'
 --
+-- * 'ptdName'
+--
 -- * 'ptdProjectId'
 --
 -- * 'ptdCallback'
@@ -106,6 +111,7 @@ projectsTriggersDelete pPtdTriggerId_ pPtdProjectId_ =
     , _ptdTriggerId = pPtdTriggerId_
     , _ptdAccessToken = Nothing
     , _ptdUploadType = Nothing
+    , _ptdName = Nothing
     , _ptdProjectId = pPtdProjectId_
     , _ptdCallback = Nothing
     }
@@ -121,7 +127,7 @@ ptdUploadProtocol
   = lens _ptdUploadProtocol
       (\ s a -> s{_ptdUploadProtocol = a})
 
--- | ID of the \`BuildTrigger\` to delete.
+-- | Required. ID of the \`BuildTrigger\` to delete.
 ptdTriggerId :: Lens' ProjectsTriggersDelete Text
 ptdTriggerId
   = lens _ptdTriggerId (\ s a -> s{_ptdTriggerId = a})
@@ -138,7 +144,12 @@ ptdUploadType
   = lens _ptdUploadType
       (\ s a -> s{_ptdUploadType = a})
 
--- | ID of the project that owns the trigger.
+-- | The name of the \`Trigger\` to delete. Format:
+-- \`projects\/{project}\/locations\/{location}\/triggers\/{trigger}\`
+ptdName :: Lens' ProjectsTriggersDelete (Maybe Text)
+ptdName = lens _ptdName (\ s a -> s{_ptdName = a})
+
+-- | Required. ID of the project that owns the trigger.
 ptdProjectId :: Lens' ProjectsTriggersDelete Text
 ptdProjectId
   = lens _ptdProjectId (\ s a -> s{_ptdProjectId = a})
@@ -157,6 +168,7 @@ instance GoogleRequest ProjectsTriggersDelete where
               _ptdUploadProtocol
               _ptdAccessToken
               _ptdUploadType
+              _ptdName
               _ptdCallback
               (Just AltJSON)
               containerBuilderService

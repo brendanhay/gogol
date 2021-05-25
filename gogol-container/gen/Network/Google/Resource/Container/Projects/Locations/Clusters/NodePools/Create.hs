@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.C
     , plcnpcCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.create@ method which the
 -- 'ProjectsLocationsClustersNodePoolsCreate' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsLocationsClustersNodePoolsCreateResource
 -- /See:/ 'projectsLocationsClustersNodePoolsCreate' smart constructor.
 data ProjectsLocationsClustersNodePoolsCreate =
   ProjectsLocationsClustersNodePoolsCreate'
-    { _plcnpcParent         :: !Text
-    , _plcnpcXgafv          :: !(Maybe Xgafv)
+    { _plcnpcParent :: !Text
+    , _plcnpcXgafv :: !(Maybe Xgafv)
     , _plcnpcUploadProtocol :: !(Maybe Text)
-    , _plcnpcAccessToken    :: !(Maybe Text)
-    , _plcnpcUploadType     :: !(Maybe Text)
-    , _plcnpcPayload        :: !CreateNodePoolRequest
-    , _plcnpcCallback       :: !(Maybe Text)
+    , _plcnpcAccessToken :: !(Maybe Text)
+    , _plcnpcUploadType :: !(Maybe Text)
+    , _plcnpcPayload :: !CreateNodePoolRequest
+    , _plcnpcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -112,7 +112,7 @@ projectsLocationsClustersNodePoolsCreate pPlcnpcParent_ pPlcnpcPayload_ =
 
 -- | The parent (project, location, cluster id) where the node pool will be
 -- created. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\`.
 plcnpcParent :: Lens' ProjectsLocationsClustersNodePoolsCreate Text
 plcnpcParent
   = lens _plcnpcParent (\ s a -> s{_plcnpcParent = a})

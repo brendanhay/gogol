@@ -22,11 +22,11 @@
 --
 -- Seeks an existing subscription to a point in time or to a given
 -- snapshot, whichever is provided in the request. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot. Note that both the subscription and
--- the snapshot must be on the same topic.
+-- [Seek] (https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview)
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot. Note that both the
+-- subscription and the snapshot must be on the same topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.seek@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
@@ -48,8 +48,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
     , pssCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.seek@ method which the
 -- 'ProjectsSubscriptionsSeek' request conforms to.
@@ -67,22 +67,22 @@ type ProjectsSubscriptionsSeekResource =
 
 -- | Seeks an existing subscription to a point in time or to a given
 -- snapshot, whichever is provided in the request. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot. Note that both the subscription and
--- the snapshot must be on the same topic.
+-- [Seek] (https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview)
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot. Note that both the
+-- subscription and the snapshot must be on the same topic.
 --
 -- /See:/ 'projectsSubscriptionsSeek' smart constructor.
 data ProjectsSubscriptionsSeek =
   ProjectsSubscriptionsSeek'
-    { _pssXgafv          :: !(Maybe Xgafv)
+    { _pssXgafv :: !(Maybe Xgafv)
     , _pssUploadProtocol :: !(Maybe Text)
-    , _pssAccessToken    :: !(Maybe Text)
-    , _pssUploadType     :: !(Maybe Text)
-    , _pssPayload        :: !SeekRequest
-    , _pssSubscription   :: !Text
-    , _pssCallback       :: !(Maybe Text)
+    , _pssAccessToken :: !(Maybe Text)
+    , _pssUploadType :: !(Maybe Text)
+    , _pssPayload :: !SeekRequest
+    , _pssSubscription :: !Text
+    , _pssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,7 +147,7 @@ pssPayload :: Lens' ProjectsSubscriptionsSeek SeekRequest
 pssPayload
   = lens _pssPayload (\ s a -> s{_pssPayload = a})
 
--- | The subscription to affect.
+-- | Required. The subscription to affect.
 pssSubscription :: Lens' ProjectsSubscriptionsSeek Text
 pssSubscription
   = lens _pssSubscription

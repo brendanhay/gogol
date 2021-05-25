@@ -42,8 +42,8 @@ module Network.Google.Resource.Calendar.Events.Insert
     , eveSendUpdates
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.insert@ method which the
 -- 'EventsInsert' request conforms to.
@@ -67,12 +67,12 @@ type EventsInsertResource =
 data EventsInsert =
   EventsInsert'
     { _eveConferenceDataVersion :: !(Maybe (Textual Int32))
-    , _eveCalendarId            :: !Text
-    , _evePayload               :: !Event
-    , _eveMaxAttendees          :: !(Maybe (Textual Int32))
-    , _eveSendNotifications     :: !(Maybe Bool)
-    , _eveSupportsAttachments   :: !(Maybe Bool)
-    , _eveSendUpdates           :: !(Maybe EventsInsertSendUpdates)
+    , _eveCalendarId :: !Text
+    , _evePayload :: !Event
+    , _eveMaxAttendees :: !(Maybe (Textual Int32))
+    , _eveSendNotifications :: !(Maybe Bool)
+    , _eveSupportsAttachments :: !(Maybe Bool)
+    , _eveSendUpdates :: !(Maybe EventsInsertSendUpdates)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

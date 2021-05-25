@@ -191,14 +191,14 @@ module Network.Google.PlayMoviesPartner
     , siShowId
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
+import Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
+import Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
+import Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
+import Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
+import Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+import Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 
 {- $resources
 TODO

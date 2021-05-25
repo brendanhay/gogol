@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -35,6 +35,23 @@ module Network.Google.AccessContextManager.Types
     , blConditions
     , blCombiningFunction
 
+    -- * AccessPoliciesAccessLevelsGetAccessLevelFormat
+    , AccessPoliciesAccessLevelsGetAccessLevelFormat (..)
+
+    -- * IngressPolicy
+    , IngressPolicy
+    , ingressPolicy
+    , ipIngressFrom
+    , ipIngressTo
+
+    -- * Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
+
     -- * ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
@@ -49,21 +66,29 @@ module Network.Google.AccessContextManager.Types
     , AccessLevel
     , accessLevel
     , alBasic
-    , alUpdateTime
+    , alCustom
     , alName
     , alTitle
     , alDescription
-    , alCreateTime
 
     -- * BasicLevelCombiningFunction
     , BasicLevelCombiningFunction (..)
+
+    -- * IngressSource
+    , IngressSource
+    , ingressSource
+    , isAccessLevel
+    , isResource
 
     -- * ServicePerimeterConfig
     , ServicePerimeterConfig
     , servicePerimeterConfig
     , spcResources
+    , spcVPCAccessibleServices
     , spcRestrictedServices
+    , spcEgressPolicies
     , spcAccessLevels
+    , spcIngressPolicies
 
     -- * Operation
     , Operation
@@ -73,6 +98,12 @@ module Network.Google.AccessContextManager.Types
     , oResponse
     , oName
     , oMetadata
+
+    -- * EgressPolicy
+    , EgressPolicy
+    , egressPolicy
+    , epEgressFrom
+    , epEgressTo
 
     -- * ServicePerimeterPerimeterType
     , ServicePerimeterPerimeterType (..)
@@ -84,16 +115,31 @@ module Network.Google.AccessContextManager.Types
     -- * OSConstraintOSType
     , OSConstraintOSType (..)
 
+    -- * GcpUserAccessBinding
+    , GcpUserAccessBinding
+    , gcpUserAccessBinding
+    , guabGroupKey
+    , guabName
+    , guabAccessLevels
+
     -- * ServicePerimeter
     , ServicePerimeter
     , servicePerimeter
     , spStatus
     , spPerimeterType
-    , spUpdateTime
     , spName
+    , spSpec
     , spTitle
+    , spUseExplicitDryRunSpec
     , spDescription
-    , spCreateTime
+
+    -- * AccessPoliciesAccessLevelsListAccessLevelFormat
+    , AccessPoliciesAccessLevelsListAccessLevelFormat (..)
+
+    -- * CommitServicePerimetersRequest
+    , CommitServicePerimetersRequest
+    , commitServicePerimetersRequest
+    , csprEtag
 
     -- * ListAccessPoliciesResponse
     , ListAccessPoliciesResponse
@@ -101,10 +147,36 @@ module Network.Google.AccessContextManager.Types
     , laprNextPageToken
     , laprAccessPolicies
 
+    -- * DevicePolicyAllowedDeviceManagementLevelsItem
+    , DevicePolicyAllowedDeviceManagementLevelsItem (..)
+
+    -- * EgressFrom
+    , EgressFrom
+    , egressFrom
+    , efIdentityType
+    , efIdentities
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- * ReplaceServicePerimetersRequest
+    , ReplaceServicePerimetersRequest
+    , replaceServicePerimetersRequest
+    , rsprEtag
+    , rsprServicePerimeters
+
+    -- * ReplaceAccessLevelsResponse
+    , ReplaceAccessLevelsResponse
+    , replaceAccessLevelsResponse
+    , ralrAccessLevels
+
+    -- * EgressTo
+    , EgressTo
+    , egressTo
+    , etResources
+    , etOperations
 
     -- * OSConstraint
     , OSConstraint
@@ -113,14 +185,52 @@ module Network.Google.AccessContextManager.Types
     , ocMinimumVersion
     , ocRequireVerifiedChromeOS
 
+    -- * IngressFrom
+    , IngressFrom
+    , ingressFrom
+    , ifIdentityType
+    , ifSources
+    , ifIdentities
+
+    -- * ReplaceServicePerimetersResponse
+    , ReplaceServicePerimetersResponse
+    , replaceServicePerimetersResponse
+    , rServicePerimeters
+
     -- * AccessPolicy
     , AccessPolicy
     , accessPolicy
     , apParent
-    , apUpdateTime
+    , apEtag
     , apName
     , apTitle
-    , apCreateTime
+
+    -- * ReplaceAccessLevelsRequest
+    , ReplaceAccessLevelsRequest
+    , replaceAccessLevelsRequest
+    , rEtag
+    , rAccessLevels
+
+    -- * IngressTo
+    , IngressTo
+    , ingressTo
+    , itResources
+    , itOperations
+
+    -- * IngressFromIdentityType
+    , IngressFromIdentityType (..)
+
+    -- * MethodSelector
+    , MethodSelector
+    , methodSelector
+    , msMethod
+    , msPermission
+
+    -- * ListGcpUserAccessBindingsResponse
+    , ListGcpUserAccessBindingsResponse
+    , listGcpUserAccessBindingsResponse
+    , lguabrNextPageToken
+    , lguabrGcpUserAccessBindings
 
     -- * Xgafv
     , Xgafv (..)
@@ -131,11 +241,34 @@ module Network.Google.AccessContextManager.Types
     , lsprNextPageToken
     , lsprServicePerimeters
 
+    -- * VPCAccessibleServices
+    , VPCAccessibleServices
+    , vpcAccessibleServices
+    , vasAllowedServices
+    , vasEnableRestriction
+
+    -- * CustomLevel
+    , CustomLevel
+    , customLevel
+    , clExpr
+
+    -- * APIOperation
+    , APIOperation
+    , apiOperation
+    , aoMethodSelectors
+    , aoServiceName
+
+    -- * EgressFromIdentityType
+    , EgressFromIdentityType (..)
+
     -- * ListAccessLevelsResponse
     , ListAccessLevelsResponse
     , listAccessLevelsResponse
     , lalrNextPageToken
     , lalrAccessLevels
+
+    -- * DevicePolicyAllowedEncryptionStatusesItem
+    , DevicePolicyAllowedEncryptionStatusesItem (..)
 
     -- * OperationMetadata
     , OperationMetadata
@@ -166,11 +299,16 @@ module Network.Google.AccessContextManager.Types
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- * CommitServicePerimetersResponse
+    , CommitServicePerimetersResponse
+    , commitServicePerimetersResponse
+    , csprServicePerimeters
     ) where
 
-import           Network.Google.AccessContextManager.Types.Product
-import           Network.Google.AccessContextManager.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types.Product
+import Network.Google.AccessContextManager.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
 accessContextManagerService :: ServiceConfig
@@ -179,6 +317,6 @@ accessContextManagerService
       (ServiceId "accesscontextmanager:v1")
       "accesscontextmanager.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

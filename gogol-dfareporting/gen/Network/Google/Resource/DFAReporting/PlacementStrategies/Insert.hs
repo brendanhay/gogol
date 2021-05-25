@@ -22,7 +22,7 @@
 --
 -- Inserts a new placement strategy.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.placementStrategies.insert@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     , PlacementStrategiesInsert
 
     -- * Request Lenses
+    , psiXgafv
+    , psiUploadProtocol
+    , psiAccessToken
+    , psiUploadType
     , psiProFileId
     , psiPayload
+    , psiCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementStrategies.insert@ method which the
 -- 'PlacementStrategiesInsert' request conforms to.
 type PlacementStrategiesInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] PlacementStrategy :>
-                   Post '[JSON] PlacementStrategy
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] PlacementStrategy :>
+                             Post '[JSON] PlacementStrategy
 
 -- | Inserts a new placement strategy.
 --
 -- /See:/ 'placementStrategiesInsert' smart constructor.
 data PlacementStrategiesInsert =
   PlacementStrategiesInsert'
-    { _psiProFileId :: !(Textual Int64)
-    , _psiPayload   :: !PlacementStrategy
+    { _psiXgafv :: !(Maybe Xgafv)
+    , _psiUploadProtocol :: !(Maybe Text)
+    , _psiAccessToken :: !(Maybe Text)
+    , _psiUploadType :: !(Maybe Text)
+    , _psiProFileId :: !(Textual Int64)
+    , _psiPayload :: !PlacementStrategy
+    , _psiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data PlacementStrategiesInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'psiXgafv'
+--
+-- * 'psiUploadProtocol'
+--
+-- * 'psiAccessToken'
+--
+-- * 'psiUploadType'
+--
 -- * 'psiProFileId'
 --
 -- * 'psiPayload'
+--
+-- * 'psiCallback'
 placementStrategiesInsert
     :: Int64 -- ^ 'psiProFileId'
     -> PlacementStrategy -- ^ 'psiPayload'
     -> PlacementStrategiesInsert
 placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
   PlacementStrategiesInsert'
-    {_psiProFileId = _Coerce # pPsiProFileId_, _psiPayload = pPsiPayload_}
+    { _psiXgafv = Nothing
+    , _psiUploadProtocol = Nothing
+    , _psiAccessToken = Nothing
+    , _psiUploadType = Nothing
+    , _psiProFileId = _Coerce # pPsiProFileId_
+    , _psiPayload = pPsiPayload_
+    , _psiCallback = Nothing
+    }
 
+
+-- | V1 error format.
+psiXgafv :: Lens' PlacementStrategiesInsert (Maybe Xgafv)
+psiXgafv = lens _psiXgafv (\ s a -> s{_psiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+psiUploadProtocol :: Lens' PlacementStrategiesInsert (Maybe Text)
+psiUploadProtocol
+  = lens _psiUploadProtocol
+      (\ s a -> s{_psiUploadProtocol = a})
+
+-- | OAuth access token.
+psiAccessToken :: Lens' PlacementStrategiesInsert (Maybe Text)
+psiAccessToken
+  = lens _psiAccessToken
+      (\ s a -> s{_psiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+psiUploadType :: Lens' PlacementStrategiesInsert (Maybe Text)
+psiUploadType
+  = lens _psiUploadType
+      (\ s a -> s{_psiUploadType = a})
 
 -- | User profile ID associated with this request.
 psiProFileId :: Lens' PlacementStrategiesInsert Int64
@@ -90,13 +144,23 @@ psiPayload :: Lens' PlacementStrategiesInsert PlacementStrategy
 psiPayload
   = lens _psiPayload (\ s a -> s{_psiPayload = a})
 
+-- | JSONP
+psiCallback :: Lens' PlacementStrategiesInsert (Maybe Text)
+psiCallback
+  = lens _psiCallback (\ s a -> s{_psiCallback = a})
+
 instance GoogleRequest PlacementStrategiesInsert
          where
         type Rs PlacementStrategiesInsert = PlacementStrategy
         type Scopes PlacementStrategiesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementStrategiesInsert'{..}
-          = go _psiProFileId (Just AltJSON) _psiPayload
+          = go _psiProFileId _psiXgafv _psiUploadProtocol
+              _psiAccessToken
+              _psiUploadType
+              _psiCallback
+              (Just AltJSON)
+              _psiPayload
               dFAReportingService
           where go
                   = buildClient

@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.Disks.Delete
     , ddZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.delete@ method which the
 -- 'DisksDelete' request conforms to.
@@ -68,9 +68,9 @@ type DisksDeleteResource =
 data DisksDelete =
   DisksDelete'
     { _ddRequestId :: !(Maybe Text)
-    , _ddProject   :: !Text
-    , _ddDisk      :: !Text
-    , _ddZone      :: !Text
+    , _ddProject :: !Text
+    , _ddDisk :: !Text
+    , _ddZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

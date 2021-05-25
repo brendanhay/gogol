@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -252,9 +252,9 @@ module Network.Google.QPXExpress.Types
     , sliAlliance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.QPXExpress.Types.Product
-import           Network.Google.QPXExpress.Types.Sum
+import Network.Google.Prelude
+import Network.Google.QPXExpress.Types.Product
+import Network.Google.QPXExpress.Types.Sum
 
 -- | Default request referring to version 'v1' of the QPX Express API. This contains the host and root path used as a starting point for constructing service requests.
 qPXExpressService :: ServiceConfig

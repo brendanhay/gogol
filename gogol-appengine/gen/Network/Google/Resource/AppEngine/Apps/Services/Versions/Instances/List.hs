@@ -47,8 +47,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
     , asvilCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.versions.instances.list@ method which the
 -- 'AppsServicesVersionsInstancesList' request conforms to.
@@ -78,16 +78,16 @@ type AppsServicesVersionsInstancesListResource =
 -- /See:/ 'appsServicesVersionsInstancesList' smart constructor.
 data AppsServicesVersionsInstancesList =
   AppsServicesVersionsInstancesList'
-    { _asvilXgafv          :: !(Maybe Xgafv)
+    { _asvilXgafv :: !(Maybe Xgafv)
     , _asvilUploadProtocol :: !(Maybe Text)
-    , _asvilAccessToken    :: !(Maybe Text)
-    , _asvilUploadType     :: !(Maybe Text)
-    , _asvilVersionsId     :: !Text
-    , _asvilAppsId         :: !Text
-    , _asvilPageToken      :: !(Maybe Text)
-    , _asvilServicesId     :: !Text
-    , _asvilPageSize       :: !(Maybe (Textual Int32))
-    , _asvilCallback       :: !(Maybe Text)
+    , _asvilAccessToken :: !(Maybe Text)
+    , _asvilUploadType :: !(Maybe Text)
+    , _asvilVersionsId :: !Text
+    , _asvilAppsId :: !Text
+    , _asvilPageToken :: !(Maybe Text)
+    , _asvilServicesId :: !Text
+    , _asvilPageSize :: !(Maybe (Textual Int32))
+    , _asvilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

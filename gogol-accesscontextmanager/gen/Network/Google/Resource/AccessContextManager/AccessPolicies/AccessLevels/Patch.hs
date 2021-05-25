@@ -46,8 +46,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.
     , apalpCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.patch@ method which the
 -- 'AccessPoliciesAccessLevelsPatch' request conforms to.
@@ -72,14 +72,14 @@ type AccessPoliciesAccessLevelsPatchResource =
 -- /See:/ 'accessPoliciesAccessLevelsPatch' smart constructor.
 data AccessPoliciesAccessLevelsPatch =
   AccessPoliciesAccessLevelsPatch'
-    { _apalpXgafv          :: !(Maybe Xgafv)
+    { _apalpXgafv :: !(Maybe Xgafv)
     , _apalpUploadProtocol :: !(Maybe Text)
-    , _apalpUpdateMask     :: !(Maybe GFieldMask)
-    , _apalpAccessToken    :: !(Maybe Text)
-    , _apalpUploadType     :: !(Maybe Text)
-    , _apalpPayload        :: !AccessLevel
-    , _apalpName           :: !Text
-    , _apalpCallback       :: !(Maybe Text)
+    , _apalpUpdateMask :: !(Maybe GFieldMask)
+    , _apalpAccessToken :: !(Maybe Text)
+    , _apalpUploadType :: !(Maybe Text)
+    , _apalpPayload :: !AccessLevel
+    , _apalpName :: !Text
+    , _apalpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -157,7 +157,8 @@ apalpPayload
 -- | Required. Resource name for the Access Level. The \`short_name\`
 -- component must begin with a letter and only include alphanumeric and
 -- \'_\'. Format:
--- \`accessPolicies\/{policy_id}\/accessLevels\/{short_name}\`
+-- \`accessPolicies\/{policy_id}\/accessLevels\/{short_name}\`. The maximum
+-- length of the \`short_name\` component is 50 characters.
 apalpName :: Lens' AccessPoliciesAccessLevelsPatch Text
 apalpName
   = lens _apalpName (\ s a -> s{_apalpName = a})

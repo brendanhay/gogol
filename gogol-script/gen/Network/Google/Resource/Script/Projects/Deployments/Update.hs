@@ -43,8 +43,8 @@ module Network.Google.Resource.Script.Projects.Deployments.Update
     , pduCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.deployments.update@ method which the
 -- 'ProjectsDeploymentsUpdate' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsDeploymentsUpdateResource =
 -- /See:/ 'projectsDeploymentsUpdate' smart constructor.
 data ProjectsDeploymentsUpdate =
   ProjectsDeploymentsUpdate'
-    { _pduDeploymentId   :: !Text
-    , _pduXgafv          :: !(Maybe Xgafv)
+    { _pduDeploymentId :: !Text
+    , _pduXgafv :: !(Maybe Xgafv)
     , _pduUploadProtocol :: !(Maybe Text)
-    , _pduAccessToken    :: !(Maybe Text)
-    , _pduUploadType     :: !(Maybe Text)
-    , _pduPayload        :: !UpdateDeploymentRequest
-    , _pduScriptId       :: !Text
-    , _pduCallback       :: !(Maybe Text)
+    , _pduAccessToken :: !(Maybe Text)
+    , _pduUploadType :: !(Maybe Text)
+    , _pduPayload :: !UpdateDeploymentRequest
+    , _pduScriptId :: !Text
+    , _pduCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

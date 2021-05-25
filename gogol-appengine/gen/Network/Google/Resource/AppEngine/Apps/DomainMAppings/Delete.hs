@@ -44,8 +44,8 @@ module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Delete
     , admadCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.domainMappings.delete@ method which the
 -- 'AppsDomainMAppingsDelete' request conforms to.
@@ -69,13 +69,13 @@ type AppsDomainMAppingsDeleteResource =
 -- /See:/ 'appsDomainMAppingsDelete' smart constructor.
 data AppsDomainMAppingsDelete =
   AppsDomainMAppingsDelete'
-    { _admadXgafv            :: !(Maybe Xgafv)
-    , _admadUploadProtocol   :: !(Maybe Text)
-    , _admadAccessToken      :: !(Maybe Text)
-    , _admadUploadType       :: !(Maybe Text)
-    , _admadAppsId           :: !Text
+    { _admadXgafv :: !(Maybe Xgafv)
+    , _admadUploadProtocol :: !(Maybe Text)
+    , _admadAccessToken :: !(Maybe Text)
+    , _admadUploadType :: !(Maybe Text)
+    , _admadAppsId :: !Text
     , _admadDomainMAppingsId :: !Text
-    , _admadCallback         :: !(Maybe Text)
+    , _admadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,13 +41,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Delete
     , padCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.attestors.delete@ method which the
 -- 'ProjectsAttestorsDelete' request conforms to.
 type ProjectsAttestorsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsAttestorsDeleteResource =
 -- /See:/ 'projectsAttestorsDelete' smart constructor.
 data ProjectsAttestorsDelete =
   ProjectsAttestorsDelete'
-    { _padXgafv          :: !(Maybe Xgafv)
+    { _padXgafv :: !(Maybe Xgafv)
     , _padUploadProtocol :: !(Maybe Text)
-    , _padAccessToken    :: !(Maybe Text)
-    , _padUploadType     :: !(Maybe Text)
-    , _padName           :: !Text
-    , _padCallback       :: !(Maybe Text)
+    , _padAccessToken :: !(Maybe Text)
+    , _padUploadType :: !(Maybe Text)
+    , _padName :: !Text
+    , _padCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

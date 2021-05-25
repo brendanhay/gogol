@@ -44,13 +44,14 @@ module Network.Google.Resource.DLP.Projects.DlpJobs.List
     , pdjlUploadType
     , pdjlFilter
     , pdjlPageToken
+    , pdjlLocationId
     , pdjlType
     , pdjlPageSize
     , pdjlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.dlpJobs.list@ method which the
 -- 'ProjectsDlpJobsList' request conforms to.
@@ -65,12 +66,13 @@ type ProjectsDlpJobsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "type" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON]
-                                   GooglePrivacyDlpV2ListDlpJobsResponse
+                         QueryParam "locationId" Text :>
+                           QueryParam "type" ProjectsDlpJobsListType :>
+                             QueryParam "pageSize" (Textual Int32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON]
+                                     GooglePrivacyDlpV2ListDlpJobsResponse
 
 -- | Lists DlpJobs that match the specified filter in the request. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and
@@ -80,17 +82,18 @@ type ProjectsDlpJobsListResource =
 -- /See:/ 'projectsDlpJobsList' smart constructor.
 data ProjectsDlpJobsList =
   ProjectsDlpJobsList'
-    { _pdjlParent         :: !Text
-    , _pdjlXgafv          :: !(Maybe Xgafv)
+    { _pdjlParent :: !Text
+    , _pdjlXgafv :: !(Maybe Xgafv)
     , _pdjlUploadProtocol :: !(Maybe Text)
-    , _pdjlOrderBy        :: !(Maybe Text)
-    , _pdjlAccessToken    :: !(Maybe Text)
-    , _pdjlUploadType     :: !(Maybe Text)
-    , _pdjlFilter         :: !(Maybe Text)
-    , _pdjlPageToken      :: !(Maybe Text)
-    , _pdjlType           :: !(Maybe Text)
-    , _pdjlPageSize       :: !(Maybe (Textual Int32))
-    , _pdjlCallback       :: !(Maybe Text)
+    , _pdjlOrderBy :: !(Maybe Text)
+    , _pdjlAccessToken :: !(Maybe Text)
+    , _pdjlUploadType :: !(Maybe Text)
+    , _pdjlFilter :: !(Maybe Text)
+    , _pdjlPageToken :: !(Maybe Text)
+    , _pdjlLocationId :: !(Maybe Text)
+    , _pdjlType :: !(Maybe ProjectsDlpJobsListType)
+    , _pdjlPageSize :: !(Maybe (Textual Int32))
+    , _pdjlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,6 +118,8 @@ data ProjectsDlpJobsList =
 --
 -- * 'pdjlPageToken'
 --
+-- * 'pdjlLocationId'
+--
 -- * 'pdjlType'
 --
 -- * 'pdjlPageSize'
@@ -133,13 +138,23 @@ projectsDlpJobsList pPdjlParent_ =
     , _pdjlUploadType = Nothing
     , _pdjlFilter = Nothing
     , _pdjlPageToken = Nothing
+    , _pdjlLocationId = Nothing
     , _pdjlType = Nothing
     , _pdjlPageSize = Nothing
     , _pdjlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID The
+-- following example \`parent\` string specifies a parent project with the
+-- identifier \`example-project\`, and specifies the \`europe-west3\`
+-- location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pdjlParent :: Lens' ProjectsDlpJobsList Text
 pdjlParent
   = lens _pdjlParent (\ s a -> s{_pdjlParent = a})
@@ -155,11 +170,11 @@ pdjlUploadProtocol
   = lens _pdjlUploadProtocol
       (\ s a -> s{_pdjlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc, end_time asc, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the job was created. -
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc, end_time asc, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the job was created. -
 -- \`end_time\`: corresponds to time the job ended. - \`name\`: corresponds
 -- to job\'s name. - \`state\`: corresponds to \`state\`
 pdjlOrderBy :: Lens' ProjectsDlpJobsList (Maybe Text)
@@ -178,20 +193,24 @@ pdjlUploadType
   = lens _pdjlUploadType
       (\ s a -> s{_pdjlUploadType = a})
 
--- | Optional. Allows filtering. Supported syntax: * Filter expressions are
--- made up of one or more restrictions. * Restrictions can be combined by
--- \`AND\` or \`OR\` logical operators. A sequence of restrictions
--- implicitly uses \`AND\`. * A restriction has the form of \` \`. *
--- Supported fields\/values for inspect jobs: - \`state\` -
+-- | Allows filtering. Supported syntax: * Filter expressions are made up of
+-- one or more restrictions. * Restrictions can be combined by \`AND\` or
+-- \`OR\` logical operators. A sequence of restrictions implicitly uses
+-- \`AND\`. * A restriction has the form of \`{field} {operator} {value}\`.
+-- * Supported fields\/values for inspect jobs: - \`state\` -
 -- PENDING|RUNNING|CANCELED|FINISHED|FAILED - \`inspected_storage\` -
 -- DATASTORE|CLOUD_STORAGE|BIGQUERY - \`trigger_name\` - The resource name
--- of the trigger that created job. * Supported fields for risk analysis
--- jobs: - \`state\` - RUNNING|CANCELED|FINISHED|FAILED * The operator must
--- be \`=\` or \`!=\`. Examples: * inspected_storage = cloud_storage AND
--- state = done * inspected_storage = cloud_storage OR inspected_storage =
--- bigquery * inspected_storage = cloud_storage AND (state = done OR state
--- = canceled) The length of this field should be no more than 500
--- characters.
+-- of the trigger that created job. - \'end_time\` - Corresponds to time
+-- the job finished. - \'start_time\` - Corresponds to time the job
+-- finished. * Supported fields for risk analysis jobs: - \`state\` -
+-- RUNNING|CANCELED|FINISHED|FAILED - \'end_time\` - Corresponds to time
+-- the job finished. - \'start_time\` - Corresponds to time the job
+-- finished. * The operator must be \`=\` or \`!=\`. Examples: *
+-- inspected_storage = cloud_storage AND state = done * inspected_storage =
+-- cloud_storage OR inspected_storage = bigquery * inspected_storage =
+-- cloud_storage AND (state = done OR state = canceled) * end_time >
+-- \\\"2017-12-12T00:00:00+00:00\\\" The length of this field should be no
+-- more than 500 characters.
 pdjlFilter :: Lens' ProjectsDlpJobsList (Maybe Text)
 pdjlFilter
   = lens _pdjlFilter (\ s a -> s{_pdjlFilter = a})
@@ -202,8 +221,14 @@ pdjlPageToken
   = lens _pdjlPageToken
       (\ s a -> s{_pdjlPageToken = a})
 
+-- | Deprecated. This field has no effect.
+pdjlLocationId :: Lens' ProjectsDlpJobsList (Maybe Text)
+pdjlLocationId
+  = lens _pdjlLocationId
+      (\ s a -> s{_pdjlLocationId = a})
+
 -- | The type of job. Defaults to \`DlpJobType.INSPECT\`
-pdjlType :: Lens' ProjectsDlpJobsList (Maybe Text)
+pdjlType :: Lens' ProjectsDlpJobsList (Maybe ProjectsDlpJobsListType)
 pdjlType = lens _pdjlType (\ s a -> s{_pdjlType = a})
 
 -- | The standard list page size.
@@ -229,6 +254,7 @@ instance GoogleRequest ProjectsDlpJobsList where
               _pdjlUploadType
               _pdjlFilter
               _pdjlPageToken
+              _pdjlLocationId
               _pdjlType
               _pdjlPageSize
               _pdjlCallback

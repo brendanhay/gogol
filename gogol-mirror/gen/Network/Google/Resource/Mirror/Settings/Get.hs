@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Settings.Get
     , sgId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.settings.get@ method which the
 -- 'SettingsGet' request conforms to.

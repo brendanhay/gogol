@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Routes.Insert
     , rouPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.insert@ method which the
 -- 'RoutesInsert' request conforms to.
@@ -62,8 +62,8 @@ type RoutesInsertResource =
 data RoutesInsert =
   RoutesInsert'
     { _rouRequestId :: !(Maybe Text)
-    , _rouProject   :: !Text
-    , _rouPayload   :: !Route
+    , _rouProject :: !Text
+    , _rouPayload :: !Route
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

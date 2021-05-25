@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.Instances.UpdateShieldedInstanceConfig
     , iusicInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.updateShieldedInstanceConfig@ method which the
 -- 'InstancesUpdateShieldedInstanceConfig' request conforms to.
@@ -70,10 +70,10 @@ type InstancesUpdateShieldedInstanceConfigResource =
 data InstancesUpdateShieldedInstanceConfig =
   InstancesUpdateShieldedInstanceConfig'
     { _iusicRequestId :: !(Maybe Text)
-    , _iusicProject   :: !Text
-    , _iusicZone      :: !Text
-    , _iusicPayload   :: !ShieldedInstanceConfig
-    , _iusicInstance  :: !Text
+    , _iusicProject :: !Text
+    , _iusicZone :: !Text
+    , _iusicPayload :: !ShieldedInstanceConfig
+    , _iusicInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

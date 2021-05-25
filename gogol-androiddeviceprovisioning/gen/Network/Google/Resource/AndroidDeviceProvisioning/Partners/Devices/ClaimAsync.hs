@@ -44,8 +44,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.ClaimA
     , pdcaCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.claimAsync@ method which the
 -- 'PartnersDevicesClaimAsync' request conforms to.
@@ -70,13 +70,13 @@ type PartnersDevicesClaimAsyncResource =
 -- /See:/ 'partnersDevicesClaimAsync' smart constructor.
 data PartnersDevicesClaimAsync =
   PartnersDevicesClaimAsync'
-    { _pdcaXgafv          :: !(Maybe Xgafv)
+    { _pdcaXgafv :: !(Maybe Xgafv)
     , _pdcaUploadProtocol :: !(Maybe Text)
-    , _pdcaAccessToken    :: !(Maybe Text)
-    , _pdcaPartnerId      :: !(Textual Int64)
-    , _pdcaUploadType     :: !(Maybe Text)
-    , _pdcaPayload        :: !ClaimDevicesRequest
-    , _pdcaCallback       :: !(Maybe Text)
+    , _pdcaAccessToken :: !(Maybe Text)
+    , _pdcaPartnerId :: !(Textual Int64)
+    , _pdcaUploadType :: !(Maybe Text)
+    , _pdcaPayload :: !ClaimDevicesRequest
+    , _pdcaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

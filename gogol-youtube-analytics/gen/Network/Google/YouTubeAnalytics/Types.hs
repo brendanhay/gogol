@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -129,9 +129,9 @@ module Network.Google.YouTubeAnalytics.Types
     , qrErrors
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types.Product
-import           Network.Google.YouTubeAnalytics.Types.Sum
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types.Product
+import Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | Default request referring to version 'v2' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeAnalyticsService :: ServiceConfig

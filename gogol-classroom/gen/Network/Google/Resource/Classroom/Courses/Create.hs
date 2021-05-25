@@ -48,8 +48,8 @@ module Network.Google.Resource.Classroom.Courses.Create
     , ccCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.create@ method which the
 -- 'CoursesCreate' request conforms to.
@@ -76,12 +76,12 @@ type CoursesCreateResource =
 -- /See:/ 'coursesCreate' smart constructor.
 data CoursesCreate =
   CoursesCreate'
-    { _ccXgafv          :: !(Maybe Xgafv)
+    { _ccXgafv :: !(Maybe Xgafv)
     , _ccUploadProtocol :: !(Maybe Text)
-    , _ccAccessToken    :: !(Maybe Text)
-    , _ccUploadType     :: !(Maybe Text)
-    , _ccPayload        :: !Course
-    , _ccCallback       :: !(Maybe Text)
+    , _ccAccessToken :: !(Maybe Text)
+    , _ccUploadType :: !(Maybe Text)
+    , _ccPayload :: !Course
+    , _ccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

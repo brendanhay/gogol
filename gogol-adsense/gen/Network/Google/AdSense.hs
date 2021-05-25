@@ -13,10 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Accesses AdSense publishers\' inventory and generates performance
--- reports.
+-- The AdSense Management API allows publishers to access their inventory
+-- and run earnings and performance reports.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
+-- /See:/ <http://code.google.com/apis/adsense/management/ AdSense Management API Reference>
 module Network.Google.AdSense
     (
     -- * Service Configuration
@@ -31,38 +31,38 @@ module Network.Google.AdSense
 
     -- * Resources
 
-    -- ** adsense.accounts.adclients.getAdCode
-    , module Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
+    -- ** adsense.accounts.adclients.adunits.get
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.Get
+
+    -- ** adsense.accounts.adclients.adunits.getAdcode
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.GetAdcode
+
+    -- ** adsense.accounts.adclients.adunits.list
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.List
+
+    -- ** adsense.accounts.adclients.adunits.listLinkedCustomChannels
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.ListLinkedCustomChannels
+
+    -- ** adsense.accounts.adclients.customchannels.get
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.Get
+
+    -- ** adsense.accounts.adclients.customchannels.list
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.List
+
+    -- ** adsense.accounts.adclients.customchannels.listLinkedAdUnits
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.ListLinkedAdUnits
+
+    -- ** adsense.accounts.adclients.getAdcode
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.GetAdcode
 
     -- ** adsense.accounts.adclients.list
     , module Network.Google.Resource.AdSense.Accounts.AdClients.List
 
-    -- ** adsense.accounts.adunits.customchannels.list
-    , module Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
-
-    -- ** adsense.accounts.adunits.get
-    , module Network.Google.Resource.AdSense.Accounts.AdUnits.Get
-
-    -- ** adsense.accounts.adunits.getAdCode
-    , module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
-
-    -- ** adsense.accounts.adunits.list
-    , module Network.Google.Resource.AdSense.Accounts.AdUnits.List
-
-    -- ** adsense.accounts.alerts.delete
-    , module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
+    -- ** adsense.accounts.adclients.urlchannels.list
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.URLChannels.List
 
     -- ** adsense.accounts.alerts.list
     , module Network.Google.Resource.AdSense.Accounts.Alerts.List
-
-    -- ** adsense.accounts.customchannels.adunits.list
-    , module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
-
-    -- ** adsense.accounts.customchannels.get
-    , module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
-
-    -- ** adsense.accounts.customchannels.list
-    , module Network.Google.Resource.AdSense.Accounts.CustomChannels.List
 
     -- ** adsense.accounts.get
     , module Network.Google.Resource.AdSense.Accounts.Get
@@ -70,386 +70,326 @@ module Network.Google.AdSense
     -- ** adsense.accounts.list
     , module Network.Google.Resource.AdSense.Accounts.List
 
+    -- ** adsense.accounts.listChildAccounts
+    , module Network.Google.Resource.AdSense.Accounts.ListChildAccounts
+
     -- ** adsense.accounts.payments.list
     , module Network.Google.Resource.AdSense.Accounts.Payments.List
 
     -- ** adsense.accounts.reports.generate
     , module Network.Google.Resource.AdSense.Accounts.Reports.Generate
 
+    -- ** adsense.accounts.reports.generateCsv
+    , module Network.Google.Resource.AdSense.Accounts.Reports.GenerateCSV
+
     -- ** adsense.accounts.reports.saved.generate
     , module Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
+
+    -- ** adsense.accounts.reports.saved.generateCsv
+    , module Network.Google.Resource.AdSense.Accounts.Reports.Saved.GenerateCSV
 
     -- ** adsense.accounts.reports.saved.list
     , module Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
 
-    -- ** adsense.accounts.savedadstyles.get
-    , module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
+    -- ** adsense.accounts.sites.get
+    , module Network.Google.Resource.AdSense.Accounts.Sites.Get
 
-    -- ** adsense.accounts.savedadstyles.list
-    , module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
-
-    -- ** adsense.accounts.urlchannels.list
-    , module Network.Google.Resource.AdSense.Accounts.URLChannels.List
-
-    -- ** adsense.adclients.list
-    , module Network.Google.Resource.AdSense.AdClients.List
-
-    -- ** adsense.adunits.customchannels.list
-    , module Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
-
-    -- ** adsense.adunits.get
-    , module Network.Google.Resource.AdSense.AdUnits.Get
-
-    -- ** adsense.adunits.getAdCode
-    , module Network.Google.Resource.AdSense.AdUnits.GetAdCode
-
-    -- ** adsense.adunits.list
-    , module Network.Google.Resource.AdSense.AdUnits.List
-
-    -- ** adsense.alerts.delete
-    , module Network.Google.Resource.AdSense.Alerts.Delete
-
-    -- ** adsense.alerts.list
-    , module Network.Google.Resource.AdSense.Alerts.List
-
-    -- ** adsense.customchannels.adunits.list
-    , module Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
-
-    -- ** adsense.customchannels.get
-    , module Network.Google.Resource.AdSense.CustomChannels.Get
-
-    -- ** adsense.customchannels.list
-    , module Network.Google.Resource.AdSense.CustomChannels.List
-
-    -- ** adsense.metadata.dimensions.list
-    , module Network.Google.Resource.AdSense.Metadata.Dimensions.List
-
-    -- ** adsense.metadata.metrics.list
-    , module Network.Google.Resource.AdSense.Metadata.Metrics.List
-
-    -- ** adsense.payments.list
-    , module Network.Google.Resource.AdSense.Payments.List
-
-    -- ** adsense.reports.generate
-    , module Network.Google.Resource.AdSense.Reports.Generate
-
-    -- ** adsense.reports.saved.generate
-    , module Network.Google.Resource.AdSense.Reports.Saved.Generate
-
-    -- ** adsense.reports.saved.list
-    , module Network.Google.Resource.AdSense.Reports.Saved.List
-
-    -- ** adsense.savedadstyles.get
-    , module Network.Google.Resource.AdSense.Savedadstyles.Get
-
-    -- ** adsense.savedadstyles.list
-    , module Network.Google.Resource.AdSense.Savedadstyles.List
-
-    -- ** adsense.urlchannels.list
-    , module Network.Google.Resource.AdSense.URLChannels.List
+    -- ** adsense.accounts.sites.list
+    , module Network.Google.Resource.AdSense.Accounts.Sites.List
 
     -- * Types
 
-    -- ** AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
+    -- ** SiteState
+    , SiteState (..)
 
-    -- ** ReportingMetadataEntry
-    , ReportingMetadataEntry
-    , reportingMetadataEntry
-    , rmeKind
-    , rmeRequiredMetrics
-    , rmeCompatibleMetrics
-    , rmeRequiredDimensions
-    , rmeId
-    , rmeCompatibleDimensions
-    , rmeSupportedProducts
+    -- ** ListAlertsResponse
+    , ListAlertsResponse
+    , listAlertsResponse
+    , larAlerts
 
-    -- ** AdsenseReportsGenerateResponseHeadersItem
-    , AdsenseReportsGenerateResponseHeadersItem
-    , adsenseReportsGenerateResponseHeadersItem
-    , argrhiName
-    , argrhiCurrency
-    , argrhiType
+    -- ** AdClientAdCode
+    , AdClientAdCode
+    , adClientAdCode
+    , acacAmpHead
+    , acacAmpBody
+    , acacAdCode
+
+    -- ** AccountsReportsSavedGenerateReportingTimeZone
+    , AccountsReportsSavedGenerateReportingTimeZone (..)
+
+    -- ** AccountsReportsSavedGenerateCSVDateRange
+    , AccountsReportsSavedGenerateCSVDateRange (..)
+
+    -- ** HTTPBodyExtensionsItem
+    , HTTPBodyExtensionsItem
+    , hTTPBodyExtensionsItem
+    , httpbeiAddtional
+
+    -- ** AccountsReportsGenerateCSVReportingTimeZone
+    , AccountsReportsGenerateCSVReportingTimeZone (..)
+
+    -- ** AccountsReportsGenerateDimensions
+    , AccountsReportsGenerateDimensions (..)
+
+    -- ** HeaderType
+    , HeaderType (..)
+
+    -- ** ListURLChannelsResponse
+    , ListURLChannelsResponse
+    , listURLChannelsResponse
+    , lucrNextPageToken
+    , lucrURLChannels
 
     -- ** Payment
     , Payment
     , payment
-    , pPaymentAmountCurrencyCode
-    , pKind
-    , pPaymentDate
-    , pId
-    , pPaymentAmount
+    , pAmount
+    , pDate
+    , pName
 
-    -- ** Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- ** AccountsReportsSavedGenerateCSVReportingTimeZone
+    , AccountsReportsSavedGenerateCSVReportingTimeZone (..)
 
-    -- ** Alerts
-    , Alerts
-    , alerts
-    , aleKind
-    , aleItems
+    -- ** ContentAdsSettingsType
+    , ContentAdsSettingsType (..)
 
-    -- ** SavedReports
-    , SavedReports
-    , savedReports
-    , srEtag
-    , srNextPageToken
-    , srKind
-    , srItems
+    -- ** ListCustomChannelsResponse
+    , ListCustomChannelsResponse
+    , listCustomChannelsResponse
+    , lccrNextPageToken
+    , lccrCustomChannels
 
-    -- ** AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- ** AccountsReportsSavedGenerateDateRange
+    , AccountsReportsSavedGenerateDateRange (..)
+
+    -- ** AccountsReportsGenerateCSVMetrics
+    , AccountsReportsGenerateCSVMetrics (..)
+
+    -- ** ListLinkedAdUnitsResponse
+    , ListLinkedAdUnitsResponse
+    , listLinkedAdUnitsResponse
+    , llaurNextPageToken
+    , llaurAdUnits
+
+    -- ** ListAccountsResponse
+    , ListAccountsResponse
+    , listAccountsResponse
+    , larNextPageToken
+    , larAccounts
 
     -- ** SavedReport
     , SavedReport
     , savedReport
-    , sKind
-    , sName
-    , sId
-
-    -- ** URLChannels
-    , URLChannels
-    , urlChannels
-    , ucEtag
-    , ucNextPageToken
-    , ucKind
-    , ucItems
-
-    -- ** CustomChannels
-    , CustomChannels
-    , customChannels
-    , ccEtag
-    , ccNextPageToken
-    , ccKind
-    , ccItems
+    , srName
+    , srTitle
 
     -- ** AdUnit
     , AdUnit
     , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuFeedAdsSettings
-    , auuCustomStyle
-    , auuSavedStyleId
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
+    , auState
+    , auReportingDimensionId
+    , auName
+    , auContentAdsSettings
+    , auDisplayName
+
+    -- ** Cell
+    , Cell
+    , cell
+    , cValue
 
     -- ** Alert
     , Alert
     , alert
-    , aaIsDismissible
-    , aaKind
-    , aaSeverity
-    , aaId
-    , aaType
-    , aaMessage
+    , aSeverity
+    , aName
+    , aType
+    , aMessage
 
-    -- ** AdStyleFont
-    , AdStyleFont
-    , adStyleFont
-    , asfSize
-    , asfFamily
+    -- ** ListSavedReportsResponse
+    , ListSavedReportsResponse
+    , listSavedReportsResponse
+    , lsrrNextPageToken
+    , lsrrSavedReports
+
+    -- ** ListChildAccountsResponse
+    , ListChildAccountsResponse
+    , listChildAccountsResponse
+    , lcarNextPageToken
+    , lcarAccounts
 
     -- ** Account
     , Account
     , account
-    , accKind
-    , accCreationTime
     , accPremium
+    , accPendingTasks
     , accName
-    , accId
-    , accTimezone
-    , accSubAccounts
+    , accDisplayName
+    , accTimeZone
+    , accCreateTime
 
-    -- ** AdUnitMobileContentAdsSettings
-    , AdUnitMobileContentAdsSettings
-    , adUnitMobileContentAdsSettings
-    , aumcasSize
-    , aumcasScriptingLanguage
-    , aumcasMarkupLanguage
-    , aumcasType
+    -- ** AccountsReportsGenerateCSVDateRange
+    , AccountsReportsGenerateCSVDateRange (..)
 
-    -- ** SavedAdStyles
-    , SavedAdStyles
-    , savedAdStyles
-    , sasEtag
-    , sasNextPageToken
-    , sasKind
-    , sasItems
+    -- ** ListAdUnitsResponse
+    , ListAdUnitsResponse
+    , listAdUnitsResponse
+    , laurNextPageToken
+    , laurAdUnits
 
-    -- ** AdStyleColors
-    , AdStyleColors
-    , adStyleColors
-    , ascText
-    , ascURL
-    , ascBOrder
-    , ascTitle
-    , ascBackgRound
+    -- ** Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
 
-    -- ** AdUnitContentAdsSettingsBackupOption
-    , AdUnitContentAdsSettingsBackupOption
-    , adUnitContentAdsSettingsBackupOption
-    , aucasboColor
-    , aucasboURL
-    , aucasboType
+    -- ** AdUnitState
+    , AdUnitState (..)
 
     -- ** AdClient
     , AdClient
     , adClient
-    , adKind
-    , adArcOptIn
-    , adSupportsReporting
-    , adId
-    , adProductCode
+    , acReportingDimensionId
+    , acName
+    , acProductCode
 
-    -- ** SavedAdStyle
-    , SavedAdStyle
-    , savedAdStyle
-    , savKind
-    , savName
-    , savAdStyle
-    , savId
+    -- ** ReportResult
+    , ReportResult
+    , reportResult
+    , rrAverages
+    , rrEndDate
+    , rrWarnings
+    , rrRows
+    , rrTotals
+    , rrStartDate
+    , rrHeaders
+    , rrTotalMatchedRows
 
-    -- ** CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
+    -- ** Header
+    , Header
+    , header
+    , hCurrencyCode
+    , hName
+    , hType
 
-    -- ** AdStyle
-    , AdStyle
-    , adStyle
-    , asCorners
-    , asKind
-    , asFont
-    , asColors
+    -- ** AccountsReportsGenerateDateRange
+    , AccountsReportsGenerateDateRange (..)
 
-    -- ** AdUnitFeedAdsSettings
-    , AdUnitFeedAdsSettings
-    , adUnitFeedAdsSettings
-    , aufasFrequency
-    , aufasAdPosition
-    , aufasType
-    , aufasMinimumWordCount
+    -- ** ContentAdsSettings
+    , ContentAdsSettings
+    , contentAdsSettings
+    , casSize
+    , casType
 
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** Row
+    , Row
+    , row
+    , rCells
+
+    -- ** AlertSeverity
+    , AlertSeverity (..)
 
     -- ** CustomChannel
     , CustomChannel
     , customChannel
-    , cTargetingInfo
-    , cKind
-    , cName
-    , cCode
-    , cId
+    , ccReportingDimensionId
+    , ccName
+    , ccDisplayName
 
     -- ** URLChannel
     , URLChannel
     , urlChannel
-    , urlcKind
-    , urlcId
-    , urlcURLPattern
+    , ucReportingDimensionId
+    , ucURIPattern
+    , ucName
 
-    -- ** AdCode
-    , AdCode
-    , adCode
-    , addKind
-    , addAmpHead
-    , addAmpBody
-    , addAdCode
+    -- ** ListPaymentsResponse
+    , ListPaymentsResponse
+    , listPaymentsResponse
+    , lprPayments
 
-    -- ** AdsenseReportsGenerateResponse
-    , AdsenseReportsGenerateResponse
-    , adsenseReportsGenerateResponse
-    , argrKind
-    , argrAverages
-    , argrEndDate
-    , argrWarnings
-    , argrRows
-    , argrTotals
-    , argrStartDate
-    , argrHeaders
-    , argrTotalMatchedRows
+    -- ** HTTPBody
+    , HTTPBody
+    , hTTPBody
+    , httpbExtensions
+    , httpbData
+    , httpbContentType
 
-    -- ** AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
+    -- ** ListLinkedCustomChannelsResponse
+    , ListLinkedCustomChannelsResponse
+    , listLinkedCustomChannelsResponse
+    , llccrNextPageToken
+    , llccrCustomChannels
 
-    -- ** Payments
-    , Payments
-    , payments
-    , payKind
-    , payItems
+    -- ** AdUnitAdCode
+    , AdUnitAdCode
+    , adUnitAdCode
+    , auacAdCode
+
+    -- ** TimeZone
+    , TimeZone
+    , timeZone
+    , tzVersion
+    , tzId
+
+    -- ** AccountsReportsGenerateMetrics
+    , AccountsReportsGenerateMetrics (..)
+
+    -- ** Site
+    , Site
+    , site
+    , sAutoAdsEnabled
+    , sState
+    , sDomain
+    , sReportingDimensionId
+    , sName
+
+    -- ** ListAdClientsResponse
+    , ListAdClientsResponse
+    , listAdClientsResponse
+    , lacrNextPageToken
+    , lacrAdClients
+
+    -- ** AccountsReportsGenerateCSVDimensions
+    , AccountsReportsGenerateCSVDimensions (..)
+
+    -- ** AccountsReportsGenerateReportingTimeZone
+    , AccountsReportsGenerateReportingTimeZone (..)
+
+    -- ** ListSitesResponse
+    , ListSitesResponse
+    , listSitesResponse
+    , lsrNextPageToken
+    , lsrSites
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
-import           Network.Google.Resource.AdSense.Accounts.AdClients.List
-import           Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
-import           Network.Google.Resource.AdSense.Accounts.AdUnits.Get
-import           Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
-import           Network.Google.Resource.AdSense.Accounts.AdUnits.List
-import           Network.Google.Resource.AdSense.Accounts.Alerts.Delete
-import           Network.Google.Resource.AdSense.Accounts.Alerts.List
-import           Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
-import           Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
-import           Network.Google.Resource.AdSense.Accounts.CustomChannels.List
-import           Network.Google.Resource.AdSense.Accounts.Get
-import           Network.Google.Resource.AdSense.Accounts.List
-import           Network.Google.Resource.AdSense.Accounts.Payments.List
-import           Network.Google.Resource.AdSense.Accounts.Reports.Generate
-import           Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
-import           Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
-import           Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
-import           Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
-import           Network.Google.Resource.AdSense.Accounts.URLChannels.List
-import           Network.Google.Resource.AdSense.AdClients.List
-import           Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
-import           Network.Google.Resource.AdSense.AdUnits.Get
-import           Network.Google.Resource.AdSense.AdUnits.GetAdCode
-import           Network.Google.Resource.AdSense.AdUnits.List
-import           Network.Google.Resource.AdSense.Alerts.Delete
-import           Network.Google.Resource.AdSense.Alerts.List
-import           Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
-import           Network.Google.Resource.AdSense.CustomChannels.Get
-import           Network.Google.Resource.AdSense.CustomChannels.List
-import           Network.Google.Resource.AdSense.Metadata.Dimensions.List
-import           Network.Google.Resource.AdSense.Metadata.Metrics.List
-import           Network.Google.Resource.AdSense.Payments.List
-import           Network.Google.Resource.AdSense.Reports.Generate
-import           Network.Google.Resource.AdSense.Reports.Saved.Generate
-import           Network.Google.Resource.AdSense.Reports.Saved.List
-import           Network.Google.Resource.AdSense.Savedadstyles.Get
-import           Network.Google.Resource.AdSense.Savedadstyles.List
-import           Network.Google.Resource.AdSense.URLChannels.List
+import Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.Get
+import Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.GetAdcode
+import Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.List
+import Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.ListLinkedCustomChannels
+import Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.Get
+import Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.List
+import Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.ListLinkedAdUnits
+import Network.Google.Resource.AdSense.Accounts.AdClients.GetAdcode
+import Network.Google.Resource.AdSense.Accounts.AdClients.List
+import Network.Google.Resource.AdSense.Accounts.AdClients.URLChannels.List
+import Network.Google.Resource.AdSense.Accounts.Alerts.List
+import Network.Google.Resource.AdSense.Accounts.Get
+import Network.Google.Resource.AdSense.Accounts.List
+import Network.Google.Resource.AdSense.Accounts.ListChildAccounts
+import Network.Google.Resource.AdSense.Accounts.Payments.List
+import Network.Google.Resource.AdSense.Accounts.Reports.Generate
+import Network.Google.Resource.AdSense.Accounts.Reports.GenerateCSV
+import Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
+import Network.Google.Resource.AdSense.Accounts.Reports.Saved.GenerateCSV
+import Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
+import Network.Google.Resource.AdSense.Accounts.Sites.Get
+import Network.Google.Resource.AdSense.Accounts.Sites.List
 
 {- $resources
 TODO
@@ -457,42 +397,27 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the AdSense Management API service.
 type AdSenseAPI =
-     AdClientsListResource :<|>
-       AccountsAdClientsListResource
-       :<|> AccountsAdClientsGetAdCodeResource
+     AccountsAdClientsAdUnitsListResource :<|>
+       AccountsAdClientsAdUnitsGetResource
+       :<|>
+       AccountsAdClientsAdUnitsListLinkedCustomChannelsResource
+       :<|> AccountsAdClientsAdUnitsGetAdcodeResource
+       :<|> AccountsAdClientsURLChannelsListResource
+       :<|> AccountsAdClientsCustomChannelsListResource
+       :<|>
+       AccountsAdClientsCustomChannelsListLinkedAdUnitsResource
+       :<|> AccountsAdClientsCustomChannelsGetResource
+       :<|> AccountsAdClientsListResource
+       :<|> AccountsAdClientsGetAdcodeResource
        :<|> AccountsReportsSavedListResource
+       :<|> AccountsReportsSavedGenerateCSVResource
        :<|> AccountsReportsSavedGenerateResource
+       :<|> AccountsReportsGenerateCSVResource
        :<|> AccountsReportsGenerateResource
        :<|> AccountsAlertsListResource
-       :<|> AccountsAlertsDeleteResource
-       :<|> AccountsAdUnitsCustomChannelsListResource
-       :<|> AccountsAdUnitsListResource
-       :<|> AccountsAdUnitsGetResource
-       :<|> AccountsAdUnitsGetAdCodeResource
-       :<|> AccountsURLChannelsListResource
-       :<|> AccountsCustomChannelsAdUnitsListResource
-       :<|> AccountsCustomChannelsListResource
-       :<|> AccountsCustomChannelsGetResource
-       :<|> AccountsSavedadstylesListResource
-       :<|> AccountsSavedadstylesGetResource
+       :<|> AccountsSitesListResource
+       :<|> AccountsSitesGetResource
        :<|> AccountsPaymentsListResource
+       :<|> AccountsListChildAccountsResource
        :<|> AccountsListResource
        :<|> AccountsGetResource
-       :<|> ReportsSavedListResource
-       :<|> ReportsSavedGenerateResource
-       :<|> ReportsGenerateResource
-       :<|> AlertsListResource
-       :<|> AlertsDeleteResource
-       :<|> AdUnitsCustomChannelsListResource
-       :<|> AdUnitsListResource
-       :<|> AdUnitsGetResource
-       :<|> AdUnitsGetAdCodeResource
-       :<|> URLChannelsListResource
-       :<|> CustomChannelsAdUnitsListResource
-       :<|> CustomChannelsListResource
-       :<|> CustomChannelsGetResource
-       :<|> SavedadstylesListResource
-       :<|> SavedadstylesGetResource
-       :<|> MetadataMetricsListResource
-       :<|> MetadataDimensionsListResource
-       :<|> PaymentsListResource

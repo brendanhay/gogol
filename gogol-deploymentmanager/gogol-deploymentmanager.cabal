@@ -1,6 +1,6 @@
 name:                  gogol-deploymentmanager
 version:               0.5.0
-synopsis:              Google Cloud Deployment Manager SDK.
+synopsis:              Google Cloud Deployment Manager V2 SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Declares, configures, and deploys complex solutions on Google Cloud
-    Platform.
+    The Google Cloud Deployment Manager v2 API provides services for
+    configuring, deploying, and viewing Google Cloud services and APIs via
+    templates which specify deployments of Cloud resources.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

@@ -41,8 +41,8 @@ module Network.Google.Resource.Analytics.Data.Realtime.Get
     , drgMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.data.realtime.get@ method which the
 -- 'DataRealtimeGet' request conforms to.
@@ -64,10 +64,10 @@ type DataRealtimeGetResource =
 -- /See:/ 'dataRealtimeGet' smart constructor.
 data DataRealtimeGet =
   DataRealtimeGet'
-    { _drgMetrics    :: !Text
-    , _drgFilters    :: !(Maybe Text)
-    , _drgIds        :: !Text
-    , _drgSort       :: !(Maybe Text)
+    { _drgMetrics :: !Text
+    , _drgFilters :: !(Maybe Text)
+    , _drgIds :: !Text
+    , _drgSort :: !(Maybe Text)
     , _drgDimensions :: !(Maybe Text)
     , _drgMaxResults :: !(Maybe (Textual Int32))
     }

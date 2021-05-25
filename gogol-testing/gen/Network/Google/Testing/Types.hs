@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -39,12 +39,23 @@ module Network.Google.Testing.Types
     -- * IosTestSetup
     , IosTestSetup
     , iosTestSetup
+    , itsAdditionalIPas
+    , itsPullDirectories
     , itsNetworkProFile
+    , itsPushFiles
+
+    -- * Shard
+    , Shard
+    , shard
+    , sShardIndex
+    , sTestTargetsForShard
+    , sNumShards
 
     -- * TestExecution
     , TestExecution
     , testExecution
     , teTestDetails
+    , teShard
     , teState
     , teEnvironment
     , teTestSpecification
@@ -53,6 +64,13 @@ module Network.Google.Testing.Types
     , teProjectId
     , teToolResultsStep
     , teTimestamp
+
+    -- * IosTestLoop
+    , IosTestLoop
+    , iosTestLoop
+    , itlScenarios
+    , itlAppBundleId
+    , itlAppIPa
 
     -- * IosVersion
     , IosVersion
@@ -87,6 +105,11 @@ module Network.Google.Testing.Types
     , xvVersion
     , xvTags
 
+    -- * SystraceSetup
+    , SystraceSetup
+    , systraceSetup
+    , ssDurationSeconds
+
     -- * Distribution
     , Distribution
     , distribution
@@ -100,8 +123,11 @@ module Network.Google.Testing.Types
     , IosModel
     , iosModel
     , imFormFactor
+    , imScreenX
+    , imScreenDensity
     , imName
     , imSupportedVersionIds
+    , imScreenY
     , imId
     , imDeviceCapabilities
     , imTags
@@ -141,6 +167,7 @@ module Network.Google.Testing.Types
     , artStartingIntents
     , artAppInitialActivity
     , artMaxSteps
+    , artRoboMode
     , artAppPackageId
     , artAppBundle
     , artAppAPK
@@ -170,6 +197,7 @@ module Network.Google.Testing.Types
     , tecNetworkConfigurationCatalog
     , tecAndroidDeviceCatalog
     , tecIosDeviceCatalog
+    , tecDeviceIPBlockCatalog
 
     -- * Locale
     , Locale
@@ -189,13 +217,24 @@ module Network.Google.Testing.Types
     -- * AndroidInstrumentationTestOrchestratorOption
     , AndroidInstrumentationTestOrchestratorOption (..)
 
+    -- * IosDeviceFile
+    , IosDeviceFile
+    , iosDeviceFile
+    , idfDevicePath
+    , idfBundleId
+    , idfContent
+
     -- * TestExecutionState
     , TestExecutionState (..)
+
+    -- * TestEnvironmentCatalogGetEnvironmentType
+    , TestEnvironmentCatalogGetEnvironmentType (..)
 
     -- * TestSpecification
     , TestSpecification
     , testSpecification
     , tsIosTestSetup
+    , tsIosTestLoop
     , tsTestTimeout
     , tsAndroidRoboTest
     , tsDisableVideoRecording
@@ -205,10 +244,19 @@ module Network.Google.Testing.Types
     , tsTestSetup
     , tsAndroidTestLoop
 
+    -- * TestTargetsForShard
+    , TestTargetsForShard
+    , testTargetsForShard
+    , ttfsTestTargets
+
+    -- * TestMatrixOutcomeSummary
+    , TestMatrixOutcomeSummary (..)
+
     -- * ProvidedSoftwareCatalog
     , ProvidedSoftwareCatalog
     , providedSoftwareCatalog
     , pscOrchestratorVersion
+    , pscAndroidxOrchestratorVersion
 
     -- * TrafficRule
     , TrafficRule
@@ -230,6 +278,9 @@ module Network.Google.Testing.Types
     -- * GoogleAuto
     , GoogleAuto
     , googleAuto
+
+    -- * DeviceIPBlockForm
+    , DeviceIPBlockForm (..)
 
     -- * CancelTestMatrixResponseTestState
     , CancelTestMatrixResponseTestState (..)
@@ -275,6 +326,7 @@ module Network.Google.Testing.Types
     -- * AndroidModel
     , AndroidModel
     , androidModel
+    , amThumbnailURL
     , amSupportedAbis
     , amManufacturer
     , amCodename
@@ -299,6 +351,12 @@ module Network.Google.Testing.Types
     -- * AndroidModelFormFactor
     , AndroidModelFormFactor (..)
 
+    -- * ShardingOption
+    , ShardingOption
+    , shardingOption
+    , soUniformSharding
+    , soManualSharding
+
     -- * AndroidModelForm
     , AndroidModelForm (..)
 
@@ -314,6 +372,7 @@ module Network.Google.Testing.Types
     , apkmPackageName
     , apkmIntentFilters
     , apkmMaxSdkVersion
+    , apkmUsesPermission
 
     -- * AppBundle
     , AppBundle
@@ -327,6 +386,7 @@ module Network.Google.Testing.Types
     , aitTestRunnerClass
     , aitAppPackageId
     , aitTestAPK
+    , aitShardingOption
     , aitOrchestratorOption
     , aitAppBundle
     , aitAppAPK
@@ -338,9 +398,11 @@ module Network.Google.Testing.Types
     , tmState
     , tmTestMatrixId
     , tmTestSpecification
+    , tmOutcomeSummary
     , tmFlakyTestAttempts
     , tmClientInfo
     , tmTestExecutions
+    , tmFailFast
     , tmResultStorage
     , tmInvalidMatrixDetails
     , tmProjectId
@@ -359,11 +421,17 @@ module Network.Google.Testing.Types
     , treHistoryId
     , treProjectId
 
+    -- * UniformSharding
+    , UniformSharding
+    , uniformSharding
+    , usNumShards
+
     -- * IosXcTest
     , IosXcTest
     , iosXcTest
     , ixtXctestrun
     , ixtXcodeVersion
+    , ixtTestSpecialEntitlements
     , ixtAppBundleId
     , ixtTestsZip
 
@@ -371,6 +439,7 @@ module Network.Google.Testing.Types
     , ResultStorage
     , resultStorage
     , rsToolResultsHistory
+    , rsResultsURL
     , rsToolResultsExecution
     , rsGoogleCloudStorage
 
@@ -389,6 +458,13 @@ module Network.Google.Testing.Types
     , trsStepId
     , trsHistoryId
     , trsProjectId
+
+    -- * DeviceIPBlock
+    , DeviceIPBlock
+    , deviceIPBlock
+    , dibAddedDate
+    , dibBlock
+    , dibForm
 
     -- * LauncherActivityIntent
     , LauncherActivityIntent
@@ -413,6 +489,11 @@ module Network.Google.Testing.Types
     , evValue
     , evKey
 
+    -- * DeviceIPBlockCatalog
+    , DeviceIPBlockCatalog
+    , deviceIPBlockCatalog
+    , dibcIPBlocks
+
     -- * Orientation
     , Orientation
     , orientation
@@ -433,11 +514,19 @@ module Network.Google.Testing.Types
     , dfRegularFile
     , dfObbFile
 
+    -- * ManualSharding
+    , ManualSharding
+    , manualSharding
+    , msTestTargetsForShard
+
     -- * ClientInfoDetail
     , ClientInfoDetail
     , clientInfoDetail
     , cidValue
     , cidKey
+
+    -- * AndroidRoboTestRoboMode
+    , AndroidRoboTestRoboMode (..)
 
     -- * NetworkConfiguration
     , NetworkConfiguration
@@ -491,6 +580,8 @@ module Network.Google.Testing.Types
     -- * TestSetup
     , TestSetup
     , testSetup
+    , tsDontAutograntPermissions
+    , tsSystrace
     , tsAccount
     , tsNetworkProFile
     , tsEnvironmentVariables
@@ -499,9 +590,9 @@ module Network.Google.Testing.Types
     , tsDirectoriesToPull
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types.Product
-import           Network.Google.Testing.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Testing.Types.Product
+import Network.Google.Testing.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Testing API. This contains the host and root path used as a starting point for constructing service requests.
 testingService :: ServiceConfig
@@ -513,6 +604,6 @@ testingService
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
 cloudPlatformReadOnlyScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

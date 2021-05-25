@@ -39,8 +39,8 @@ module Network.Google.Resource.Drive.Teamdrives.List
     , tlPageSize
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.teamdrives.list@ method which the
 -- 'TeamdrivesList' request conforms to.
@@ -59,10 +59,10 @@ type TeamdrivesListResource =
 -- /See:/ 'teamdrivesList' smart constructor.
 data TeamdrivesList =
   TeamdrivesList'
-    { _tlQ                    :: !(Maybe Text)
-    , _tlPageToken            :: !(Maybe Text)
+    { _tlQ :: !(Maybe Text)
+    , _tlPageToken :: !(Maybe Text)
     , _tlUseDomainAdminAccess :: !Bool
-    , _tlPageSize             :: !(Textual Int32)
+    , _tlPageSize :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

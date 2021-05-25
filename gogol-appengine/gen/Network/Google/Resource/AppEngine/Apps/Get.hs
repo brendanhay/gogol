@@ -41,8 +41,8 @@ module Network.Google.Resource.AppEngine.Apps.Get
     , agCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.get@ method which the
 -- 'AppsGet' request conforms to.
@@ -62,12 +62,12 @@ type AppsGetResource =
 -- /See:/ 'appsGet' smart constructor.
 data AppsGet =
   AppsGet'
-    { _agXgafv          :: !(Maybe Xgafv)
+    { _agXgafv :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
-    , _agAccessToken    :: !(Maybe Text)
-    , _agUploadType     :: !(Maybe Text)
-    , _agAppsId         :: !Text
-    , _agCallback       :: !(Maybe Text)
+    , _agAccessToken :: !(Maybe Text)
+    , _agUploadType :: !(Maybe Text)
+    , _agAppsId :: !Text
+    , _agCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

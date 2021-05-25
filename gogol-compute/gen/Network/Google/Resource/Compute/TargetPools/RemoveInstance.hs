@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetPools.RemoveInstance
     , tpriRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.removeInstance@ method which the
 -- 'TargetPoolsRemoveInstance' request conforms to.
@@ -65,11 +65,11 @@ type TargetPoolsRemoveInstanceResource =
 -- /See:/ 'targetPoolsRemoveInstance' smart constructor.
 data TargetPoolsRemoveInstance =
   TargetPoolsRemoveInstance'
-    { _tpriRequestId  :: !(Maybe Text)
-    , _tpriProject    :: !Text
+    { _tpriRequestId :: !(Maybe Text)
+    , _tpriProject :: !Text
     , _tpriTargetPool :: !Text
-    , _tpriPayload    :: !TargetPoolsRemoveInstanceRequest
-    , _tpriRegion     :: !Text
+    , _tpriPayload :: !TargetPoolsRemoveInstanceRequest
+    , _tpriRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

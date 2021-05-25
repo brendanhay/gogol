@@ -47,8 +47,8 @@ module Network.Google.Resource.Partners.UserStates.List
     , uslCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.userStates.list@ method which the
 -- 'UserStatesList' request conforms to.
@@ -86,18 +86,18 @@ type UserStatesListResource =
 -- /See:/ 'userStatesList' smart constructor.
 data UserStatesList =
   UserStatesList'
-    { _uslXgafv                                       :: !(Maybe Xgafv)
-    , _uslUploadProtocol                              :: !(Maybe Text)
-    , _uslAccessToken                                 :: !(Maybe Text)
-    , _uslUploadType                                  :: !(Maybe Text)
-    , _uslRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _uslRequestMetadataLocale                       :: !(Maybe Text)
-    , _uslRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _uslRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _uslRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _uslRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _uslXgafv :: !(Maybe Xgafv)
+    , _uslUploadProtocol :: !(Maybe Text)
+    , _uslAccessToken :: !(Maybe Text)
+    , _uslUploadType :: !(Maybe Text)
+    , _uslRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _uslRequestMetadataLocale :: !(Maybe Text)
+    , _uslRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _uslRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _uslRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _uslRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _uslCallback                                    :: !(Maybe Text)
+    , _uslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

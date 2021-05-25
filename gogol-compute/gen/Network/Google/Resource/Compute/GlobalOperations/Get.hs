@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves the specified Operations resource. Gets a list of operations
--- by making a list() request.
+-- by making a \`list()\` request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalOperations.get@.
 module Network.Google.Resource.Compute.GlobalOperations.Get
@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.GlobalOperations.Get
     , gogOperation
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalOperations.get@ method which the
 -- 'GlobalOperationsGet' request conforms to.
@@ -54,12 +54,12 @@ type GlobalOperationsGetResource =
                    QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified Operations resource. Gets a list of operations
--- by making a list() request.
+-- by making a \`list()\` request.
 --
 -- /See:/ 'globalOperationsGet' smart constructor.
 data GlobalOperationsGet =
   GlobalOperationsGet'
-    { _gogProject   :: !Text
+    { _gogProject :: !Text
     , _gogOperation :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

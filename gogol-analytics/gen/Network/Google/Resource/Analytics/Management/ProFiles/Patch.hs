@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Patch
     , mpfpAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.patch@ method which the
 -- 'ManagementProFilesPatch' request conforms to.
@@ -65,9 +65,9 @@ type ManagementProFilesPatchResource =
 data ManagementProFilesPatch =
   ManagementProFilesPatch'
     { _mpfpWebPropertyId :: !Text
-    , _mpfpProFileId     :: !Text
-    , _mpfpPayload       :: !ProFile
-    , _mpfpAccountId     :: !Text
+    , _mpfpProFileId :: !Text
+    , _mpfpPayload :: !ProFile
+    , _mpfpAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

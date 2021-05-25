@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Tag.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.tags.update@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.tags.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Up
     , AccountsContainersWorkspacesTagsUpdate
 
     -- * Request Lenses
+    , acwtucXgafv
+    , acwtucUploadProtocol
     , acwtucPath
     , acwtucFingerprint
+    , acwtucAccessToken
+    , acwtucUploadType
     , acwtucPayload
+    , acwtucCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.tags.update@ method which the
 -- 'AccountsContainersWorkspacesTagsUpdate' request conforms to.
@@ -47,18 +52,28 @@ type AccountsContainersWorkspacesTagsUpdateResource =
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "fingerprint" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Tag :> Put '[JSON] Tag
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Tag :> Put '[JSON] Tag
 
 -- | Updates a GTM Tag.
 --
 -- /See:/ 'accountsContainersWorkspacesTagsUpdate' smart constructor.
 data AccountsContainersWorkspacesTagsUpdate =
   AccountsContainersWorkspacesTagsUpdate'
-    { _acwtucPath        :: !Text
+    { _acwtucXgafv :: !(Maybe Xgafv)
+    , _acwtucUploadProtocol :: !(Maybe Text)
+    , _acwtucPath :: !Text
     , _acwtucFingerprint :: !(Maybe Text)
-    , _acwtucPayload     :: !Tag
+    , _acwtucAccessToken :: !(Maybe Text)
+    , _acwtucUploadType :: !(Maybe Text)
+    , _acwtucPayload :: !Tag
+    , _acwtucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,22 +82,48 @@ data AccountsContainersWorkspacesTagsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acwtucXgafv'
+--
+-- * 'acwtucUploadProtocol'
+--
 -- * 'acwtucPath'
 --
 -- * 'acwtucFingerprint'
 --
+-- * 'acwtucAccessToken'
+--
+-- * 'acwtucUploadType'
+--
 -- * 'acwtucPayload'
+--
+-- * 'acwtucCallback'
 accountsContainersWorkspacesTagsUpdate
     :: Text -- ^ 'acwtucPath'
     -> Tag -- ^ 'acwtucPayload'
     -> AccountsContainersWorkspacesTagsUpdate
 accountsContainersWorkspacesTagsUpdate pAcwtucPath_ pAcwtucPayload_ =
   AccountsContainersWorkspacesTagsUpdate'
-    { _acwtucPath = pAcwtucPath_
+    { _acwtucXgafv = Nothing
+    , _acwtucUploadProtocol = Nothing
+    , _acwtucPath = pAcwtucPath_
     , _acwtucFingerprint = Nothing
+    , _acwtucAccessToken = Nothing
+    , _acwtucUploadType = Nothing
     , _acwtucPayload = pAcwtucPayload_
+    , _acwtucCallback = Nothing
     }
 
+
+-- | V1 error format.
+acwtucXgafv :: Lens' AccountsContainersWorkspacesTagsUpdate (Maybe Xgafv)
+acwtucXgafv
+  = lens _acwtucXgafv (\ s a -> s{_acwtucXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwtucUploadProtocol :: Lens' AccountsContainersWorkspacesTagsUpdate (Maybe Text)
+acwtucUploadProtocol
+  = lens _acwtucUploadProtocol
+      (\ s a -> s{_acwtucUploadProtocol = a})
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}
@@ -97,11 +138,29 @@ acwtucFingerprint
   = lens _acwtucFingerprint
       (\ s a -> s{_acwtucFingerprint = a})
 
+-- | OAuth access token.
+acwtucAccessToken :: Lens' AccountsContainersWorkspacesTagsUpdate (Maybe Text)
+acwtucAccessToken
+  = lens _acwtucAccessToken
+      (\ s a -> s{_acwtucAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwtucUploadType :: Lens' AccountsContainersWorkspacesTagsUpdate (Maybe Text)
+acwtucUploadType
+  = lens _acwtucUploadType
+      (\ s a -> s{_acwtucUploadType = a})
+
 -- | Multipart request metadata.
 acwtucPayload :: Lens' AccountsContainersWorkspacesTagsUpdate Tag
 acwtucPayload
   = lens _acwtucPayload
       (\ s a -> s{_acwtucPayload = a})
+
+-- | JSONP
+acwtucCallback :: Lens' AccountsContainersWorkspacesTagsUpdate (Maybe Text)
+acwtucCallback
+  = lens _acwtucCallback
+      (\ s a -> s{_acwtucCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesTagsUpdate
@@ -111,7 +170,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesTagsUpdate'{..}
-          = go _acwtucPath _acwtucFingerprint (Just AltJSON)
+          = go _acwtucPath _acwtucXgafv _acwtucUploadProtocol
+              _acwtucFingerprint
+              _acwtucAccessToken
+              _acwtucUploadType
+              _acwtucCallback
+              (Just AltJSON)
               _acwtucPayload
               tagManagerService
           where go

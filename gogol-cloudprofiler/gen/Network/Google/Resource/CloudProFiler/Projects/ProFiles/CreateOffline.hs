@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudProFiler.Projects.ProFiles.CreateOffline
     , ppfcoCallback
     ) where
 
-import           Network.Google.CloudProFiler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudProFiler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprofiler.projects.profiles.createOffline@ method which the
 -- 'ProjectsProFilesCreateOffline' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsProFilesCreateOfflineResource =
 -- /See:/ 'projectsProFilesCreateOffline' smart constructor.
 data ProjectsProFilesCreateOffline =
   ProjectsProFilesCreateOffline'
-    { _ppfcoParent         :: !Text
-    , _ppfcoXgafv          :: !(Maybe Xgafv)
+    { _ppfcoParent :: !Text
+    , _ppfcoXgafv :: !(Maybe Xgafv)
     , _ppfcoUploadProtocol :: !(Maybe Text)
-    , _ppfcoAccessToken    :: !(Maybe Text)
-    , _ppfcoUploadType     :: !(Maybe Text)
-    , _ppfcoPayload        :: !ProFile
-    , _ppfcoCallback       :: !(Maybe Text)
+    , _ppfcoAccessToken :: !(Maybe Text)
+    , _ppfcoUploadType :: !(Maybe Text)
+    , _ppfcoPayload :: !ProFile
+    , _ppfcoCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

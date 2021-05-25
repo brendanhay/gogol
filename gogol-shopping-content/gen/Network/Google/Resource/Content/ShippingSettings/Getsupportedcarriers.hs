@@ -22,7 +22,7 @@
 --
 -- Retrieves supported carriers and carrier services for an account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.shippingsettings.getsupportedcarriers@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.shippingsettings.getsupportedcarriers@.
 module Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
     , ShippingSettingsGetsupportedcarriers
 
     -- * Request Lenses
+    , sXgafv
     , sMerchantId
+    , sUploadProtocol
+    , sAccessToken
+    , sUploadType
+    , sCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.shippingsettings.getsupportedcarriers@ method which the
 -- 'ShippingSettingsGetsupportedcarriers' request conforms to.
@@ -46,16 +51,26 @@ type ShippingSettingsGetsupportedcarriersResource =
        "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "supportedCarriers" :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON]
-                 ShippingSettingsGetSupportedCarriersResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON]
+                           ShippingSettingsGetSupportedCarriersResponse
 
 -- | Retrieves supported carriers and carrier services for an account.
 --
 -- /See:/ 'shippingSettingsGetsupportedcarriers' smart constructor.
-newtype ShippingSettingsGetsupportedcarriers =
+data ShippingSettingsGetsupportedcarriers =
   ShippingSettingsGetsupportedcarriers'
-    { _sMerchantId :: Textual Word64
+    { _sXgafv :: !(Maybe Xgafv)
+    , _sMerchantId :: !(Textual Word64)
+    , _sUploadProtocol :: !(Maybe Text)
+    , _sAccessToken :: !(Maybe Text)
+    , _sUploadType :: !(Maybe Text)
+    , _sCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,19 +79,61 @@ newtype ShippingSettingsGetsupportedcarriers =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sXgafv'
+--
 -- * 'sMerchantId'
+--
+-- * 'sUploadProtocol'
+--
+-- * 'sAccessToken'
+--
+-- * 'sUploadType'
+--
+-- * 'sCallback'
 shippingSettingsGetsupportedcarriers
     :: Word64 -- ^ 'sMerchantId'
     -> ShippingSettingsGetsupportedcarriers
 shippingSettingsGetsupportedcarriers pSMerchantId_ =
-  ShippingSettingsGetsupportedcarriers' {_sMerchantId = _Coerce # pSMerchantId_}
+  ShippingSettingsGetsupportedcarriers'
+    { _sXgafv = Nothing
+    , _sMerchantId = _Coerce # pSMerchantId_
+    , _sUploadProtocol = Nothing
+    , _sAccessToken = Nothing
+    , _sUploadType = Nothing
+    , _sCallback = Nothing
+    }
 
+
+-- | V1 error format.
+sXgafv :: Lens' ShippingSettingsGetsupportedcarriers (Maybe Xgafv)
+sXgafv = lens _sXgafv (\ s a -> s{_sXgafv = a})
 
 -- | The ID of the account for which to retrieve the supported carriers.
 sMerchantId :: Lens' ShippingSettingsGetsupportedcarriers Word64
 sMerchantId
   = lens _sMerchantId (\ s a -> s{_sMerchantId = a}) .
       _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+sUploadProtocol :: Lens' ShippingSettingsGetsupportedcarriers (Maybe Text)
+sUploadProtocol
+  = lens _sUploadProtocol
+      (\ s a -> s{_sUploadProtocol = a})
+
+-- | OAuth access token.
+sAccessToken :: Lens' ShippingSettingsGetsupportedcarriers (Maybe Text)
+sAccessToken
+  = lens _sAccessToken (\ s a -> s{_sAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+sUploadType :: Lens' ShippingSettingsGetsupportedcarriers (Maybe Text)
+sUploadType
+  = lens _sUploadType (\ s a -> s{_sUploadType = a})
+
+-- | JSONP
+sCallback :: Lens' ShippingSettingsGetsupportedcarriers (Maybe Text)
+sCallback
+  = lens _sCallback (\ s a -> s{_sCallback = a})
 
 instance GoogleRequest
            ShippingSettingsGetsupportedcarriers
@@ -87,7 +144,11 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/content"]
         requestClient
           ShippingSettingsGetsupportedcarriers'{..}
-          = go _sMerchantId (Just AltJSON)
+          = go _sMerchantId _sXgafv _sUploadProtocol
+              _sAccessToken
+              _sUploadType
+              _sCallback
+              (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

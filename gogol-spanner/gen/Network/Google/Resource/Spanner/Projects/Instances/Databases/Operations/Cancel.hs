@@ -49,8 +49,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.C
     , pidocCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.operations.cancel@ method which the
 -- 'ProjectsInstancesDatabasesOperationsCancel' request conforms to.
@@ -78,12 +78,12 @@ type ProjectsInstancesDatabasesOperationsCancelResource
 -- /See:/ 'projectsInstancesDatabasesOperationsCancel' smart constructor.
 data ProjectsInstancesDatabasesOperationsCancel =
   ProjectsInstancesDatabasesOperationsCancel'
-    { _pidocXgafv          :: !(Maybe Xgafv)
+    { _pidocXgafv :: !(Maybe Xgafv)
     , _pidocUploadProtocol :: !(Maybe Text)
-    , _pidocAccessToken    :: !(Maybe Text)
-    , _pidocUploadType     :: !(Maybe Text)
-    , _pidocName           :: !Text
-    , _pidocCallback       :: !(Maybe Text)
+    , _pidocAccessToken :: !(Maybe Text)
+    , _pidocUploadType :: !(Maybe Text)
+    , _pidocName :: !Text
+    , _pidocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

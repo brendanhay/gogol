@@ -22,7 +22,7 @@
 --
 -- Cancels all line items in an order, making a full refund.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.cancel@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.cancel@.
 module Network.Google.Resource.Content.Orders.Cancel
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Orders.Cancel
     , OrdersCancel
 
     -- * Request Lenses
-    , oc1MerchantId
-    , oc1Payload
-    , oc1OrderId
+    , ord1Xgafv
+    , ord1MerchantId
+    , ord1UploadProtocol
+    , ord1AccessToken
+    , ord1UploadType
+    , ord1Payload
+    , ord1OrderId
+    , ord1Callback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.cancel@ method which the
 -- 'OrdersCancel' request conforms to.
@@ -50,18 +55,28 @@ type OrdersCancelResource =
            "orders" :>
              Capture "orderId" Text :>
                "cancel" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersCancelRequest :>
-                     Post '[JSON] OrdersCancelResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersCancelRequest :>
+                               Post '[JSON] OrdersCancelResponse
 
 -- | Cancels all line items in an order, making a full refund.
 --
 -- /See:/ 'ordersCancel' smart constructor.
 data OrdersCancel =
   OrdersCancel'
-    { _oc1MerchantId :: !(Textual Word64)
-    , _oc1Payload    :: !OrdersCancelRequest
-    , _oc1OrderId    :: !Text
+    { _ord1Xgafv :: !(Maybe Xgafv)
+    , _ord1MerchantId :: !(Textual Word64)
+    , _ord1UploadProtocol :: !(Maybe Text)
+    , _ord1AccessToken :: !(Maybe Text)
+    , _ord1UploadType :: !(Maybe Text)
+    , _ord1Payload :: !OrdersCancelRequest
+    , _ord1OrderId :: !Text
+    , _ord1Callback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,49 +85,97 @@ data OrdersCancel =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oc1MerchantId'
+-- * 'ord1Xgafv'
 --
--- * 'oc1Payload'
+-- * 'ord1MerchantId'
 --
--- * 'oc1OrderId'
+-- * 'ord1UploadProtocol'
+--
+-- * 'ord1AccessToken'
+--
+-- * 'ord1UploadType'
+--
+-- * 'ord1Payload'
+--
+-- * 'ord1OrderId'
+--
+-- * 'ord1Callback'
 ordersCancel
-    :: Word64 -- ^ 'oc1MerchantId'
-    -> OrdersCancelRequest -- ^ 'oc1Payload'
-    -> Text -- ^ 'oc1OrderId'
+    :: Word64 -- ^ 'ord1MerchantId'
+    -> OrdersCancelRequest -- ^ 'ord1Payload'
+    -> Text -- ^ 'ord1OrderId'
     -> OrdersCancel
-ordersCancel pOc1MerchantId_ pOc1Payload_ pOc1OrderId_ =
+ordersCancel pOrd1MerchantId_ pOrd1Payload_ pOrd1OrderId_ =
   OrdersCancel'
-    { _oc1MerchantId = _Coerce # pOc1MerchantId_
-    , _oc1Payload = pOc1Payload_
-    , _oc1OrderId = pOc1OrderId_
+    { _ord1Xgafv = Nothing
+    , _ord1MerchantId = _Coerce # pOrd1MerchantId_
+    , _ord1UploadProtocol = Nothing
+    , _ord1AccessToken = Nothing
+    , _ord1UploadType = Nothing
+    , _ord1Payload = pOrd1Payload_
+    , _ord1OrderId = pOrd1OrderId_
+    , _ord1Callback = Nothing
     }
 
 
+-- | V1 error format.
+ord1Xgafv :: Lens' OrdersCancel (Maybe Xgafv)
+ord1Xgafv
+  = lens _ord1Xgafv (\ s a -> s{_ord1Xgafv = a})
+
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-oc1MerchantId :: Lens' OrdersCancel Word64
-oc1MerchantId
-  = lens _oc1MerchantId
-      (\ s a -> s{_oc1MerchantId = a})
+ord1MerchantId :: Lens' OrdersCancel Word64
+ord1MerchantId
+  = lens _ord1MerchantId
+      (\ s a -> s{_ord1MerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ord1UploadProtocol :: Lens' OrdersCancel (Maybe Text)
+ord1UploadProtocol
+  = lens _ord1UploadProtocol
+      (\ s a -> s{_ord1UploadProtocol = a})
+
+-- | OAuth access token.
+ord1AccessToken :: Lens' OrdersCancel (Maybe Text)
+ord1AccessToken
+  = lens _ord1AccessToken
+      (\ s a -> s{_ord1AccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ord1UploadType :: Lens' OrdersCancel (Maybe Text)
+ord1UploadType
+  = lens _ord1UploadType
+      (\ s a -> s{_ord1UploadType = a})
+
 -- | Multipart request metadata.
-oc1Payload :: Lens' OrdersCancel OrdersCancelRequest
-oc1Payload
-  = lens _oc1Payload (\ s a -> s{_oc1Payload = a})
+ord1Payload :: Lens' OrdersCancel OrdersCancelRequest
+ord1Payload
+  = lens _ord1Payload (\ s a -> s{_ord1Payload = a})
 
 -- | The ID of the order to cancel.
-oc1OrderId :: Lens' OrdersCancel Text
-oc1OrderId
-  = lens _oc1OrderId (\ s a -> s{_oc1OrderId = a})
+ord1OrderId :: Lens' OrdersCancel Text
+ord1OrderId
+  = lens _ord1OrderId (\ s a -> s{_ord1OrderId = a})
+
+-- | JSONP
+ord1Callback :: Lens' OrdersCancel (Maybe Text)
+ord1Callback
+  = lens _ord1Callback (\ s a -> s{_ord1Callback = a})
 
 instance GoogleRequest OrdersCancel where
         type Rs OrdersCancel = OrdersCancelResponse
         type Scopes OrdersCancel =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCancel'{..}
-          = go _oc1MerchantId _oc1OrderId (Just AltJSON)
-              _oc1Payload
+          = go _ord1MerchantId _ord1OrderId _ord1Xgafv
+              _ord1UploadProtocol
+              _ord1AccessToken
+              _ord1UploadType
+              _ord1Callback
+              (Just AltJSON)
+              _ord1Payload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy OrdersCancelResource)

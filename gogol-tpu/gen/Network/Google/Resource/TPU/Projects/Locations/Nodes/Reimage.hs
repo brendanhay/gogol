@@ -42,8 +42,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.Reimage
     , plnrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.reimage@ method which the
 -- 'ProjectsLocationsNodesReimage' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsNodesReimageResource =
 -- /See:/ 'projectsLocationsNodesReimage' smart constructor.
 data ProjectsLocationsNodesReimage =
   ProjectsLocationsNodesReimage'
-    { _plnrXgafv          :: !(Maybe Xgafv)
+    { _plnrXgafv :: !(Maybe Xgafv)
     , _plnrUploadProtocol :: !(Maybe Text)
-    , _plnrAccessToken    :: !(Maybe Text)
-    , _plnrUploadType     :: !(Maybe Text)
-    , _plnrPayload        :: !ReimageNodeRequest
-    , _plnrName           :: !Text
-    , _plnrCallback       :: !(Maybe Text)
+    , _plnrAccessToken :: !(Maybe Text)
+    , _plnrUploadType :: !(Maybe Text)
+    , _plnrPayload :: !ReimageNodeRequest
+    , _plnrName :: !Text
+    , _plnrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

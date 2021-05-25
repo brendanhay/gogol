@@ -50,8 +50,8 @@ module Network.Google.Resource.Partners.UpdateCompanies
     , ucCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.updateCompanies@ method which the
 -- 'UpdateCompanies' request conforms to.
@@ -92,20 +92,20 @@ type UpdateCompaniesResource =
 -- /See:/ 'updateCompanies' smart constructor.
 data UpdateCompanies =
   UpdateCompanies'
-    { _ucXgafv                                       :: !(Maybe Xgafv)
-    , _ucUploadProtocol                              :: !(Maybe Text)
-    , _ucUpdateMask                                  :: !(Maybe GFieldMask)
-    , _ucAccessToken                                 :: !(Maybe Text)
-    , _ucUploadType                                  :: !(Maybe Text)
-    , _ucPayload                                     :: !Company
-    , _ucRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _ucRequestMetadataLocale                       :: !(Maybe Text)
-    , _ucRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _ucRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _ucRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _ucRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _ucXgafv :: !(Maybe Xgafv)
+    , _ucUploadProtocol :: !(Maybe Text)
+    , _ucUpdateMask :: !(Maybe GFieldMask)
+    , _ucAccessToken :: !(Maybe Text)
+    , _ucUploadType :: !(Maybe Text)
+    , _ucPayload :: !Company
+    , _ucRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _ucRequestMetadataLocale :: !(Maybe Text)
+    , _ucRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _ucRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _ucRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _ucRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _ucRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _ucCallback                                    :: !(Maybe Text)
+    , _ucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -51,8 +51,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Par
     , pidspqCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.partitionQuery@ method which the
 -- 'ProjectsInstancesDatabasesSessionsPartitionQuery' request conforms to.
@@ -83,13 +83,13 @@ type ProjectsInstancesDatabasesSessionsPartitionQueryResource
 -- /See:/ 'projectsInstancesDatabasesSessionsPartitionQuery' smart constructor.
 data ProjectsInstancesDatabasesSessionsPartitionQuery =
   ProjectsInstancesDatabasesSessionsPartitionQuery'
-    { _pidspqXgafv          :: !(Maybe Xgafv)
+    { _pidspqXgafv :: !(Maybe Xgafv)
     , _pidspqUploadProtocol :: !(Maybe Text)
-    , _pidspqAccessToken    :: !(Maybe Text)
-    , _pidspqUploadType     :: !(Maybe Text)
-    , _pidspqPayload        :: !PartitionQueryRequest
-    , _pidspqSession        :: !Text
-    , _pidspqCallback       :: !(Maybe Text)
+    , _pidspqAccessToken :: !(Maybe Text)
+    , _pidspqUploadType :: !(Maybe Text)
+    , _pidspqPayload :: !PartitionQueryRequest
+    , _pidspqSession :: !Text
+    , _pidspqCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

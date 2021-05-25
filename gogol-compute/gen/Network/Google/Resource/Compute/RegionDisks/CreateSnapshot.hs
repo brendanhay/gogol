@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionDisks.CreateSnapshot
     , rdcsRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.createSnapshot@ method which the
 -- 'RegionDisksCreateSnapshot' request conforms to.
@@ -65,10 +65,10 @@ type RegionDisksCreateSnapshotResource =
 data RegionDisksCreateSnapshot =
   RegionDisksCreateSnapshot'
     { _rdcsRequestId :: !(Maybe Text)
-    , _rdcsProject   :: !Text
-    , _rdcsDisk      :: !Text
-    , _rdcsPayload   :: !Snapshot
-    , _rdcsRegion    :: !Text
+    , _rdcsProject :: !Text
+    , _rdcsDisk :: !Text
+    , _rdcsPayload :: !Snapshot
+    , _rdcsRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

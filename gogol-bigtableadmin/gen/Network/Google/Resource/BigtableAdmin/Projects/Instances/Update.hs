@@ -44,8 +44,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
     , piuCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.update@ method which the
 -- 'ProjectsInstancesUpdate' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsInstancesUpdateResource =
 -- /See:/ 'projectsInstancesUpdate' smart constructor.
 data ProjectsInstancesUpdate =
   ProjectsInstancesUpdate'
-    { _piuXgafv          :: !(Maybe Xgafv)
+    { _piuXgafv :: !(Maybe Xgafv)
     , _piuUploadProtocol :: !(Maybe Text)
-    , _piuAccessToken    :: !(Maybe Text)
-    , _piuUploadType     :: !(Maybe Text)
-    , _piuPayload        :: !Instance
-    , _piuName           :: !Text
-    , _piuCallback       :: !(Maybe Text)
+    , _piuAccessToken :: !(Maybe Text)
+    , _piuUploadType :: !(Maybe Text)
+    , _piuPayload :: !Instance
+    , _piuName :: !Text
+    , _piuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,8 +138,8 @@ piuPayload :: Lens' ProjectsInstancesUpdate Instance
 piuPayload
   = lens _piuPayload (\ s a -> s{_piuPayload = a})
 
--- | (\`OutputOnly\`) The unique name of the instance. Values are of the form
--- \`projects\/\/instances\/a-z+[a-z0-9]\`.
+-- | The unique name of the instance. Values are of the form
+-- \`projects\/{project}\/instances\/a-z+[a-z0-9]\`.
 piuName :: Lens' ProjectsInstancesUpdate Text
 piuName = lens _piuName (\ s a -> s{_piuName = a})
 

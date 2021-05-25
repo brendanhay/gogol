@@ -17,8 +17,8 @@
 --
 module Network.Google.CloudTrace.Types.Product where
 
-import           Network.Google.CloudTrace.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudTrace.Types.Sum
+import Network.Google.Prelude
 
 -- | A span represents a single operation within a trace. Spans can be nested
 -- to form a trace tree. Often, a trace contains a root span that describes
@@ -30,19 +30,20 @@ import           Network.Google.Prelude
 -- /See:/ 'span' smart constructor.
 data Span =
   Span'
-    { _sStatus                  :: !(Maybe Status)
-    , _sStartTime               :: !(Maybe DateTime')
-    , _sChildSpanCount          :: !(Maybe (Textual Int32))
+    { _sSpanKind :: !(Maybe SpanSpanKind)
+    , _sStatus :: !(Maybe Status)
+    , _sStartTime :: !(Maybe DateTime')
+    , _sChildSpanCount :: !(Maybe (Textual Int32))
     , _sSameProcessAsParentSpan :: !(Maybe Bool)
-    , _sName                    :: !(Maybe Text)
-    , _sStackTrace              :: !(Maybe StackTrace)
-    , _sAttributes              :: !(Maybe Attributes)
-    , _sEndTime                 :: !(Maybe DateTime')
-    , _sTimeEvents              :: !(Maybe TimeEvents)
-    , _sDisplayName             :: !(Maybe TruncatableString)
-    , _sParentSpanId            :: !(Maybe Text)
-    , _sLinks                   :: !(Maybe Links)
-    , _sSpanId                  :: !(Maybe Text)
+    , _sName :: !(Maybe Text)
+    , _sStackTrace :: !(Maybe StackTrace)
+    , _sAttributes :: !(Maybe Attributes)
+    , _sEndTime :: !(Maybe DateTime')
+    , _sTimeEvents :: !(Maybe TimeEvents)
+    , _sDisplayName :: !(Maybe TruncatableString)
+    , _sParentSpanId :: !(Maybe Text)
+    , _sLinks :: !(Maybe Links)
+    , _sSpanId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -50,6 +51,8 @@ data Span =
 -- | Creates a value of 'Span' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sSpanKind'
 --
 -- * 'sStatus'
 --
@@ -80,7 +83,8 @@ span
     :: Span
 span =
   Span'
-    { _sStatus = Nothing
+    { _sSpanKind = Nothing
+    , _sStatus = Nothing
     , _sStartTime = Nothing
     , _sChildSpanCount = Nothing
     , _sSameProcessAsParentSpan = Nothing
@@ -96,19 +100,27 @@ span =
     }
 
 
--- | An optional final status for this span.
+-- | Optional. Distinguishes between spans generated in a particular context.
+-- For example, two spans with the same name may be distinguished using
+-- \`CLIENT\` (caller) and \`SERVER\` (callee) to identify an RPC call.
+sSpanKind :: Lens' Span (Maybe SpanSpanKind)
+sSpanKind
+  = lens _sSpanKind (\ s a -> s{_sSpanKind = a})
+
+-- | Optional. The final status for this span.
 sStatus :: Lens' Span (Maybe Status)
 sStatus = lens _sStatus (\ s a -> s{_sStatus = a})
 
--- | The start time of the span. On the client side, this is the time kept by
--- the local machine where the span execution starts. On the server side,
--- this is the time when the server\'s application handler starts running.
+-- | Required. The start time of the span. On the client side, this is the
+-- time kept by the local machine where the span execution starts. On the
+-- server side, this is the time when the server\'s application handler
+-- starts running.
 sStartTime :: Lens' Span (Maybe UTCTime)
 sStartTime
   = lens _sStartTime (\ s a -> s{_sStartTime = a}) .
       mapping _DateTime
 
--- | An optional number of child spans that were generated while this span
+-- | Optional. The number of child spans that were generated while this span
 -- was active. If set, allows implementation to detect missing child spans.
 sChildSpanCount :: Lens' Span (Maybe Int32)
 sChildSpanCount
@@ -116,21 +128,20 @@ sChildSpanCount
       (\ s a -> s{_sChildSpanCount = a})
       . mapping _Coerce
 
--- | (Optional) Set this parameter to indicate whether this span is in the
--- same process as its parent. If you do not set this parameter,
--- Stackdriver Trace is unable to take advantage of this helpful
--- information.
+-- | Optional. Set this parameter to indicate whether this span is in the
+-- same process as its parent. If you do not set this parameter, Trace is
+-- unable to take advantage of this helpful information.
 sSameProcessAsParentSpan :: Lens' Span (Maybe Bool)
 sSameProcessAsParentSpan
   = lens _sSameProcessAsParentSpan
       (\ s a -> s{_sSameProcessAsParentSpan = a})
 
--- | The resource name of the span in the following format:
+-- | Required. The resource name of the span in the following format:
 -- projects\/[PROJECT_ID]\/traces\/[TRACE_ID]\/spans\/SPAN_ID is a unique
 -- identifier for a trace within a project; it is a 32-character
 -- hexadecimal encoding of a 16-byte array. [SPAN_ID] is a unique
 -- identifier for a span within a trace; it is a 16-character hexadecimal
--- encoding of an 8-byte array.
+-- encoding of an 8-byte array. It should not be zero.
 sName :: Lens' Span (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
@@ -145,9 +156,10 @@ sAttributes :: Lens' Span (Maybe Attributes)
 sAttributes
   = lens _sAttributes (\ s a -> s{_sAttributes = a})
 
--- | The end time of the span. On the client side, this is the time kept by
--- the local machine where the span execution ends. On the server side,
--- this is the time when the server application handler stops running.
+-- | Required. The end time of the span. On the client side, this is the time
+-- kept by the local machine where the span execution ends. On the server
+-- side, this is the time when the server application handler stops
+-- running.
 sEndTime :: Lens' Span (Maybe UTCTime)
 sEndTime
   = lens _sEndTime (\ s a -> s{_sEndTime = a}) .
@@ -159,7 +171,7 @@ sTimeEvents :: Lens' Span (Maybe TimeEvents)
 sTimeEvents
   = lens _sTimeEvents (\ s a -> s{_sTimeEvents = a})
 
--- | A description of the span\'s operation (up to 128 bytes). Stackdriver
+-- | Required. A description of the span\'s operation (up to 128 bytes).
 -- Trace displays the description in the Google Cloud Platform Console. For
 -- example, the display name can be a qualified method name or a file name
 -- and a line number where the operation is called. A best practice is to
@@ -180,7 +192,7 @@ sParentSpanId
 sLinks :: Lens' Span (Maybe Links)
 sLinks = lens _sLinks (\ s a -> s{_sLinks = a})
 
--- | The [SPAN_ID] portion of the span\'s resource name.
+-- | Required. The [SPAN_ID] portion of the span\'s resource name.
 sSpanId :: Lens' Span (Maybe Text)
 sSpanId = lens _sSpanId (\ s a -> s{_sSpanId = a})
 
@@ -189,8 +201,9 @@ instance FromJSON Span where
           = withObject "Span"
               (\ o ->
                  Span' <$>
-                   (o .:? "status") <*> (o .:? "startTime") <*>
-                     (o .:? "childSpanCount")
+                   (o .:? "spanKind") <*> (o .:? "status") <*>
+                     (o .:? "startTime")
+                     <*> (o .:? "childSpanCount")
                      <*> (o .:? "sameProcessAsParentSpan")
                      <*> (o .:? "name")
                      <*> (o .:? "stackTrace")
@@ -206,7 +219,8 @@ instance ToJSON Span where
         toJSON Span'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _sStatus,
+                 [("spanKind" .=) <$> _sSpanKind,
+                  ("status" .=) <$> _sStatus,
                   ("startTime" .=) <$> _sStartTime,
                   ("childSpanCount" .=) <$> _sChildSpanCount,
                   ("sameProcessAsParentSpan" .=) <$>
@@ -226,7 +240,7 @@ instance ToJSON Span where
 -- /See:/ 'truncatableString' smart constructor.
 data TruncatableString =
   TruncatableString'
-    { _tsValue              :: !(Maybe Text)
+    { _tsValue :: !(Maybe Text)
     , _tsTruncatedByteCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -278,45 +292,17 @@ instance ToJSON TruncatableString where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -375,8 +361,9 @@ instance ToJSON Status where
 -- | The set of attributes. Each attribute\'s key can be up to 128 bytes
 -- long. The value can be a string up to 256 bytes, a signed 64-bit
 -- integer, or the Boolean values \`true\` and \`false\`. For example:
--- \"\/instance_id\": \"my-instance\" \"\/http\/user_agent\": \"\"
--- \"\/http\/request_bytes\": 300 \"abc.com\/myattribute\": true
+-- \"\/instance_id\": { \"string_value\": { \"value\": \"my-instance\" } }
+-- \"\/http\/request_bytes\": { \"int_value\": 300 }
+-- \"abc.com\/myattribute\": { \"bool_value\": false }
 --
 -- /See:/ 'attributesAttributeMap' smart constructor.
 newtype AttributesAttributeMap =
@@ -417,7 +404,7 @@ instance ToJSON AttributesAttributeMap where
 -- /See:/ 'annotation' smart constructor.
 data Annotation =
   Annotation'
-    { _aAttributes  :: !(Maybe Attributes)
+    { _aAttributes :: !(Maybe Attributes)
     , _aDescription :: !(Maybe TruncatableString)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -466,8 +453,8 @@ instance ToJSON Annotation where
 -- /See:/ 'attributeValue' smart constructor.
 data AttributeValue =
   AttributeValue'
-    { _avBoolValue   :: !(Maybe Bool)
-    , _avIntValue    :: !(Maybe (Textual Int64))
+    { _avBoolValue :: !(Maybe Bool)
+    , _avIntValue :: !(Maybe (Textual Int64))
     , _avStringValue :: !(Maybe TruncatableString)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -527,10 +514,10 @@ instance ToJSON AttributeValue where
 -- /See:/ 'messageEvent' smart constructor.
 data MessageEvent =
   MessageEvent'
-    { _meId                    :: !(Maybe (Textual Int64))
+    { _meId :: !(Maybe (Textual Int64))
     , _meUncompressedSizeBytes :: !(Maybe (Textual Int64))
-    , _meType                  :: !(Maybe MessageEventType)
-    , _meCompressedSizeBytes   :: !(Maybe (Textual Int64))
+    , _meType :: !(Maybe MessageEventType)
+    , _meCompressedSizeBytes :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -638,10 +625,10 @@ instance ToJSON Empty where
 -- /See:/ 'link' smart constructor.
 data Link =
   Link'
-    { _lTraceId    :: !(Maybe Text)
+    { _lTraceId :: !(Maybe Text)
     , _lAttributes :: !(Maybe Attributes)
-    , _lType       :: !(Maybe LinkType)
-    , _lSpanId     :: !(Maybe Text)
+    , _lType :: !(Maybe LinkType)
+    , _lSpanId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -744,7 +731,7 @@ instance ToJSON StatusDetailsItem where
 data StackTrace =
   StackTrace'
     { _stStackTraceHashId :: !(Maybe (Textual Int64))
-    , _stStackFrames      :: !(Maybe StackFrames)
+    , _stStackFrames :: !(Maybe StackFrames)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -814,8 +801,8 @@ batchWriteSpansRequest
 batchWriteSpansRequest = BatchWriteSpansRequest' {_bwsrSpans = Nothing}
 
 
--- | A list of new spans. The span names must not match existing spans, or
--- the results are undefined.
+-- | Required. A list of new spans. The span names must not match existing
+-- spans, or the results are undefined.
 bwsrSpans :: Lens' BatchWriteSpansRequest [Span]
 bwsrSpans
   = lens _bwsrSpans (\ s a -> s{_bwsrSpans = a}) .
@@ -839,7 +826,7 @@ instance ToJSON BatchWriteSpansRequest where
 data Attributes =
   Attributes'
     { _aDroppedAttributesCount :: !(Maybe (Textual Int32))
-    , _aAttributeMap           :: !(Maybe AttributesAttributeMap)
+    , _aAttributeMap :: !(Maybe AttributesAttributeMap)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -869,8 +856,9 @@ aDroppedAttributesCount
 -- | The set of attributes. Each attribute\'s key can be up to 128 bytes
 -- long. The value can be a string up to 256 bytes, a signed 64-bit
 -- integer, or the Boolean values \`true\` and \`false\`. For example:
--- \"\/instance_id\": \"my-instance\" \"\/http\/user_agent\": \"\"
--- \"\/http\/request_bytes\": 300 \"abc.com\/myattribute\": true
+-- \"\/instance_id\": { \"string_value\": { \"value\": \"my-instance\" } }
+-- \"\/http\/request_bytes\": { \"int_value\": 300 }
+-- \"abc.com\/myattribute\": { \"bool_value\": false }
 aAttributeMap :: Lens' Attributes (Maybe AttributesAttributeMap)
 aAttributeMap
   = lens _aAttributeMap
@@ -898,7 +886,7 @@ instance ToJSON Attributes where
 data Module =
   Module'
     { _mBuildId :: !(Maybe TruncatableString)
-    , _mModule  :: !(Maybe TruncatableString)
+    , _mModule :: !(Maybe TruncatableString)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -946,8 +934,8 @@ instance ToJSON Module where
 data TimeEvents =
   TimeEvents'
     { _teDroppedMessageEventsCount :: !(Maybe (Textual Int32))
-    , _teDroppedAnnotationsCount   :: !(Maybe (Textual Int32))
-    , _teTimeEvent                 :: !(Maybe [TimeEvent])
+    , _teDroppedAnnotationsCount :: !(Maybe (Textual Int32))
+    , _teTimeEvent :: !(Maybe [TimeEvent])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1019,7 +1007,7 @@ instance ToJSON TimeEvents where
 data StackFrames =
   StackFrames'
     { _sfDroppedFramesCount :: !(Maybe (Textual Int32))
-    , _sfFrame              :: !(Maybe [StackFrame])
+    , _sfFrame :: !(Maybe [StackFrame])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1070,13 +1058,13 @@ instance ToJSON StackFrames where
 -- /See:/ 'stackFrame' smart constructor.
 data StackFrame =
   StackFrame'
-    { _sfLoadModule           :: !(Maybe Module)
+    { _sfLoadModule :: !(Maybe Module)
     , _sfOriginalFunctionName :: !(Maybe TruncatableString)
-    , _sfLineNumber           :: !(Maybe (Textual Int64))
-    , _sfSourceVersion        :: !(Maybe TruncatableString)
-    , _sfFunctionName         :: !(Maybe TruncatableString)
-    , _sfColumnNumber         :: !(Maybe (Textual Int64))
-    , _sfFileName             :: !(Maybe TruncatableString)
+    , _sfLineNumber :: !(Maybe (Textual Int64))
+    , _sfSourceVersion :: !(Maybe TruncatableString)
+    , _sfFunctionName :: !(Maybe TruncatableString)
+    , _sfColumnNumber :: !(Maybe (Textual Int64))
+    , _sfFileName :: !(Maybe TruncatableString)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1191,7 +1179,7 @@ instance ToJSON StackFrame where
 data Links =
   Links'
     { _lDroppedLinksCount :: !(Maybe (Textual Int32))
-    , _lLink              :: !(Maybe [Link])
+    , _lLink :: !(Maybe [Link])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1243,8 +1231,8 @@ instance ToJSON Links where
 data TimeEvent =
   TimeEvent'
     { _teMessageEvent :: !(Maybe MessageEvent)
-    , _teAnnotation   :: !(Maybe Annotation)
-    , _teTime         :: !(Maybe DateTime')
+    , _teAnnotation :: !(Maybe Annotation)
+    , _teTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

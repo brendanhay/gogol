@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.NonBillableWi
     , bfsnbwblCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.nonBillableWinningBids.list@ method which the
 -- 'BiddersFilterSetsNonBillableWinningBidsList' request conforms to.
@@ -70,14 +70,14 @@ type BiddersFilterSetsNonBillableWinningBidsListResource
 -- /See:/ 'biddersFilterSetsNonBillableWinningBidsList' smart constructor.
 data BiddersFilterSetsNonBillableWinningBidsList =
   BiddersFilterSetsNonBillableWinningBidsList'
-    { _bfsnbwblXgafv          :: !(Maybe Xgafv)
+    { _bfsnbwblXgafv :: !(Maybe Xgafv)
     , _bfsnbwblUploadProtocol :: !(Maybe Text)
-    , _bfsnbwblFilterSetName  :: !Text
-    , _bfsnbwblAccessToken    :: !(Maybe Text)
-    , _bfsnbwblUploadType     :: !(Maybe Text)
-    , _bfsnbwblPageToken      :: !(Maybe Text)
-    , _bfsnbwblPageSize       :: !(Maybe (Textual Int32))
-    , _bfsnbwblCallback       :: !(Maybe Text)
+    , _bfsnbwblFilterSetName :: !Text
+    , _bfsnbwblAccessToken :: !(Maybe Text)
+    , _bfsnbwblUploadType :: !(Maybe Text)
+    , _bfsnbwblPageToken :: !(Maybe Text)
+    , _bfsnbwblPageSize :: !(Maybe (Textual Int32))
+    , _bfsnbwblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

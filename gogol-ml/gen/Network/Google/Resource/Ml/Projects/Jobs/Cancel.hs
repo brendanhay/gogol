@@ -22,7 +22,7 @@
 --
 -- Cancels a running job.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.cancel@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.jobs.cancel@.
 module Network.Google.Resource.Ml.Projects.Jobs.Cancel
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Ml.Projects.Jobs.Cancel
     , pjcCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.jobs.cancel@ method which the
 -- 'ProjectsJobsCancel' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsJobsCancelResource =
 -- /See:/ 'projectsJobsCancel' smart constructor.
 data ProjectsJobsCancel =
   ProjectsJobsCancel'
-    { _pjcXgafv          :: !(Maybe Xgafv)
+    { _pjcXgafv :: !(Maybe Xgafv)
     , _pjcUploadProtocol :: !(Maybe Text)
-    , _pjcAccessToken    :: !(Maybe Text)
-    , _pjcUploadType     :: !(Maybe Text)
-    , _pjcPayload        :: !GoogleCloudMlV1__CancelJobRequest
-    , _pjcName           :: !Text
-    , _pjcCallback       :: !(Maybe Text)
+    , _pjcAccessToken :: !(Maybe Text)
+    , _pjcUploadType :: !(Maybe Text)
+    , _pjcPayload :: !GoogleCloudMlV1__CancelJobRequest
+    , _pjcName :: !Text
+    , _pjcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

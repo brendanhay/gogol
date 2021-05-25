@@ -16,7 +16,43 @@
 --
 module Network.Google.CloudIOT.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+-- | If \`GATEWAY\` is specified, only gateways are returned. If
+-- \`NON_GATEWAY\` is specified, only non-gateway devices are returned. If
+-- \`GATEWAY_TYPE_UNSPECIFIED\` is specified, all devices are returned.
+data ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
+    = GatewayTypeUnspecified
+      -- ^ @GATEWAY_TYPE_UNSPECIFIED@
+      -- If unspecified, the device is considered a non-gateway device.
+    | Gateway
+      -- ^ @GATEWAY@
+      -- The device is a gateway.
+    | NonGateway
+      -- ^ @NON_GATEWAY@
+      -- The device is not a gateway.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
+
+instance FromHttpApiData ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType where
+    parseQueryParam = \case
+        "GATEWAY_TYPE_UNSPECIFIED" -> Right GatewayTypeUnspecified
+        "GATEWAY" -> Right Gateway
+        "NON_GATEWAY" -> Right NonGateway
+        x -> Left ("Unable to parse ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType where
+    toQueryParam = \case
+        GatewayTypeUnspecified -> "GATEWAY_TYPE_UNSPECIFIED"
+        Gateway -> "GATEWAY"
+        NonGateway -> "NON_GATEWAY"
+
+instance FromJSON ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType where
+    parseJSON = parseJSONText "ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType"
+
+instance ToJSON ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType where
+    toJSON = toJSONText
 
 -- | **Beta Feature** The logging verbosity for device activity. If
 -- unspecified, DeviceRegistry.log_level will be used.
@@ -62,6 +98,42 @@ instance FromJSON DeviceLogLevel where
     parseJSON = parseJSONText "DeviceLogLevel"
 
 instance ToJSON DeviceLogLevel where
+    toJSON = toJSONText
+
+-- | If \`GATEWAY\` is specified, only gateways are returned. If
+-- \`NON_GATEWAY\` is specified, only non-gateway devices are returned. If
+-- \`GATEWAY_TYPE_UNSPECIFIED\` is specified, all devices are returned.
+data ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
+    = PLRDLGLOGTGatewayTypeUnspecified
+      -- ^ @GATEWAY_TYPE_UNSPECIFIED@
+      -- If unspecified, the device is considered a non-gateway device.
+    | PLRDLGLOGTGateway
+      -- ^ @GATEWAY@
+      -- The device is a gateway.
+    | PLRDLGLOGTNonGateway
+      -- ^ @NON_GATEWAY@
+      -- The device is not a gateway.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
+
+instance FromHttpApiData ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType where
+    parseQueryParam = \case
+        "GATEWAY_TYPE_UNSPECIFIED" -> Right PLRDLGLOGTGatewayTypeUnspecified
+        "GATEWAY" -> Right PLRDLGLOGTGateway
+        "NON_GATEWAY" -> Right PLRDLGLOGTNonGateway
+        x -> Left ("Unable to parse ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType where
+    toQueryParam = \case
+        PLRDLGLOGTGatewayTypeUnspecified -> "GATEWAY_TYPE_UNSPECIFIED"
+        PLRDLGLOGTGateway -> "GATEWAY"
+        PLRDLGLOGTNonGateway -> "NON_GATEWAY"
+
+instance FromJSON ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType where
+    parseJSON = parseJSONText "ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType"
+
+instance ToJSON ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType where
     toJSON = toJSONText
 
 -- | The certificate format.
@@ -235,13 +307,13 @@ instance ToJSON Xgafv where
 
 -- | Indicates whether the device is a gateway.
 data GatewayConfigGatewayType
-    = GatewayTypeUnspecified
+    = GCGTGatewayTypeUnspecified
       -- ^ @GATEWAY_TYPE_UNSPECIFIED@
       -- If unspecified, the device is considered a non-gateway device.
-    | Gateway
+    | GCGTGateway
       -- ^ @GATEWAY@
       -- The device is a gateway.
-    | NonGateway
+    | GCGTNonGateway
       -- ^ @NON_GATEWAY@
       -- The device is not a gateway.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -250,16 +322,16 @@ instance Hashable GatewayConfigGatewayType
 
 instance FromHttpApiData GatewayConfigGatewayType where
     parseQueryParam = \case
-        "GATEWAY_TYPE_UNSPECIFIED" -> Right GatewayTypeUnspecified
-        "GATEWAY" -> Right Gateway
-        "NON_GATEWAY" -> Right NonGateway
+        "GATEWAY_TYPE_UNSPECIFIED" -> Right GCGTGatewayTypeUnspecified
+        "GATEWAY" -> Right GCGTGateway
+        "NON_GATEWAY" -> Right GCGTNonGateway
         x -> Left ("Unable to parse GatewayConfigGatewayType from: " <> x)
 
 instance ToHttpApiData GatewayConfigGatewayType where
     toQueryParam = \case
-        GatewayTypeUnspecified -> "GATEWAY_TYPE_UNSPECIFIED"
-        Gateway -> "GATEWAY"
-        NonGateway -> "NON_GATEWAY"
+        GCGTGatewayTypeUnspecified -> "GATEWAY_TYPE_UNSPECIFIED"
+        GCGTGateway -> "GATEWAY"
+        GCGTNonGateway -> "NON_GATEWAY"
 
 instance FromJSON GatewayConfigGatewayType where
     parseJSON = parseJSONText "GatewayConfigGatewayType"

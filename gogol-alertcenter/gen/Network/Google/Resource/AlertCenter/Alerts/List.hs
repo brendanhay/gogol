@@ -22,7 +22,7 @@
 --
 -- Lists the alerts.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.list@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.list@.
 module Network.Google.Resource.AlertCenter.Alerts.List
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.AlertCenter.Alerts.List
     , alCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.alerts.list@ method which the
 -- 'AlertsList' request conforms to.
@@ -71,16 +71,16 @@ type AlertsListResource =
 -- /See:/ 'alertsList' smart constructor.
 data AlertsList =
   AlertsList'
-    { _alXgafv          :: !(Maybe Xgafv)
+    { _alXgafv :: !(Maybe Xgafv)
     , _alUploadProtocol :: !(Maybe Text)
-    , _alOrderBy        :: !(Maybe Text)
-    , _alAccessToken    :: !(Maybe Text)
-    , _alUploadType     :: !(Maybe Text)
-    , _alCustomerId     :: !(Maybe Text)
-    , _alFilter         :: !(Maybe Text)
-    , _alPageToken      :: !(Maybe Text)
-    , _alPageSize       :: !(Maybe (Textual Int32))
-    , _alCallback       :: !(Maybe Text)
+    , _alOrderBy :: !(Maybe Text)
+    , _alAccessToken :: !(Maybe Text)
+    , _alUploadType :: !(Maybe Text)
+    , _alCustomerId :: !(Maybe Text)
+    , _alFilter :: !(Maybe Text)
+    , _alPageToken :: !(Maybe Text)
+    , _alPageSize :: !(Maybe (Textual Int32))
+    , _alCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -155,17 +155,18 @@ alUploadType :: Lens' AlertsList (Maybe Text)
 alUploadType
   = lens _alUploadType (\ s a -> s{_alUploadType = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alerts are associated with. Inferred from the caller
--- identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alerts are associated with. Inferred from
+-- the caller identity if not provided.
 alCustomerId :: Lens' AlertsList (Maybe Text)
 alCustomerId
   = lens _alCustomerId (\ s a -> s{_alCustomerId = a})
 
 -- | Optional. A query string for filtering alert results. For more details,
--- see [Query filters](\/admin-sdk\/alertcenter\/guides\/query-filters) and
--- [Supported query filter
--- fields](\/admin-sdk\/alertcenter\/reference\/filter-fields#alerts.list).
+-- see [Query
+-- filters](https:\/\/developers.google.com\/admin-sdk\/alertcenter\/guides\/query-filters)
+-- and [Supported query filter
+-- fields](https:\/\/developers.google.com\/admin-sdk\/alertcenter\/reference\/filter-fields#alerts.list).
 alFilter :: Lens' AlertsList (Maybe Text)
 alFilter = lens _alFilter (\ s a -> s{_alFilter = a})
 

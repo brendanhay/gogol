@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists moderators for a live chat.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveChatModerators.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveChatModerators.list@.
 module Network.Google.Resource.YouTube.LiveChatModerators.List
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.YouTube.LiveChatModerators.List
     , LiveChatModeratorsList
 
     -- * Request Lenses
+    , livXgafv
     , livPart
+    , livUploadProtocol
     , livLiveChatId
+    , livAccessToken
+    , livUploadType
     , livPageToken
     , livMaxResults
+    , livCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatModerators.list@ method which the
 -- 'LiveChatModeratorsList' request conforms to.
@@ -50,21 +55,31 @@ type LiveChatModeratorsListResource =
          "liveChat" :>
            "moderators" :>
              QueryParam "liveChatId" Text :>
-               QueryParam "part" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] LiveChatModeratorListResponse
+               QueryParams "part" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] LiveChatModeratorListResponse
 
--- | Lists moderators for a live chat.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'liveChatModeratorsList' smart constructor.
 data LiveChatModeratorsList =
   LiveChatModeratorsList'
-    { _livPart       :: !Text
+    { _livXgafv :: !(Maybe Xgafv)
+    , _livPart :: ![Text]
+    , _livUploadProtocol :: !(Maybe Text)
     , _livLiveChatId :: !Text
-    , _livPageToken  :: !(Maybe Text)
+    , _livAccessToken :: !(Maybe Text)
+    , _livUploadType :: !(Maybe Text)
+    , _livPageToken :: !(Maybe Text)
     , _livMaxResults :: !(Textual Word32)
+    , _livCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,52 +88,94 @@ data LiveChatModeratorsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'livXgafv'
+--
 -- * 'livPart'
 --
+-- * 'livUploadProtocol'
+--
 -- * 'livLiveChatId'
+--
+-- * 'livAccessToken'
+--
+-- * 'livUploadType'
 --
 -- * 'livPageToken'
 --
 -- * 'livMaxResults'
+--
+-- * 'livCallback'
 liveChatModeratorsList
-    :: Text -- ^ 'livPart'
+    :: [Text] -- ^ 'livPart'
     -> Text -- ^ 'livLiveChatId'
     -> LiveChatModeratorsList
 liveChatModeratorsList pLivPart_ pLivLiveChatId_ =
   LiveChatModeratorsList'
-    { _livPart = pLivPart_
+    { _livXgafv = Nothing
+    , _livPart = _Coerce # pLivPart_
+    , _livUploadProtocol = Nothing
     , _livLiveChatId = pLivLiveChatId_
+    , _livAccessToken = Nothing
+    , _livUploadType = Nothing
     , _livPageToken = Nothing
     , _livMaxResults = 5
+    , _livCallback = Nothing
     }
 
 
--- | The part parameter specifies the liveChatModerator resource parts that
--- the API response will include. Supported values are id and snippet.
-livPart :: Lens' LiveChatModeratorsList Text
-livPart = lens _livPart (\ s a -> s{_livPart = a})
+-- | V1 error format.
+livXgafv :: Lens' LiveChatModeratorsList (Maybe Xgafv)
+livXgafv = lens _livXgafv (\ s a -> s{_livXgafv = a})
 
--- | The liveChatId parameter specifies the YouTube live chat for which the
--- API should return moderators.
+-- | The *part* parameter specifies the liveChatModerator resource parts that
+-- the API response will include. Supported values are id and snippet.
+livPart :: Lens' LiveChatModeratorsList [Text]
+livPart
+  = lens _livPart (\ s a -> s{_livPart = a}) . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+livUploadProtocol :: Lens' LiveChatModeratorsList (Maybe Text)
+livUploadProtocol
+  = lens _livUploadProtocol
+      (\ s a -> s{_livUploadProtocol = a})
+
+-- | The id of the live chat for which moderators should be returned.
 livLiveChatId :: Lens' LiveChatModeratorsList Text
 livLiveChatId
   = lens _livLiveChatId
       (\ s a -> s{_livLiveChatId = a})
 
--- | The pageToken parameter identifies a specific page in the result set
+-- | OAuth access token.
+livAccessToken :: Lens' LiveChatModeratorsList (Maybe Text)
+livAccessToken
+  = lens _livAccessToken
+      (\ s a -> s{_livAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+livUploadType :: Lens' LiveChatModeratorsList (Maybe Text)
+livUploadType
+  = lens _livUploadType
+      (\ s a -> s{_livUploadType = a})
+
+-- | The *pageToken* parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
 livPageToken :: Lens' LiveChatModeratorsList (Maybe Text)
 livPageToken
   = lens _livPageToken (\ s a -> s{_livPageToken = a})
 
--- | The maxResults parameter specifies the maximum number of items that
+-- | The *maxResults* parameter specifies the maximum number of items that
 -- should be returned in the result set.
 livMaxResults :: Lens' LiveChatModeratorsList Word32
 livMaxResults
   = lens _livMaxResults
       (\ s a -> s{_livMaxResults = a})
       . _Coerce
+
+-- | JSONP
+livCallback :: Lens' LiveChatModeratorsList (Maybe Text)
+livCallback
+  = lens _livCallback (\ s a -> s{_livCallback = a})
 
 instance GoogleRequest LiveChatModeratorsList where
         type Rs LiveChatModeratorsList =
@@ -128,9 +185,13 @@ instance GoogleRequest LiveChatModeratorsList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient LiveChatModeratorsList'{..}
-          = go (Just _livLiveChatId) (Just _livPart)
+          = go (Just _livLiveChatId) _livPart _livXgafv
+              _livUploadProtocol
+              _livAccessToken
+              _livUploadType
               _livPageToken
               (Just _livMaxResults)
+              _livCallback
               (Just AltJSON)
               youTubeService
           where go

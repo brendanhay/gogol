@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NodeTemplates.Delete
     , ntdRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTemplates.delete@ method which the
 -- 'NodeTemplatesDelete' request conforms to.
@@ -61,10 +61,10 @@ type NodeTemplatesDeleteResource =
 -- /See:/ 'nodeTemplatesDelete' smart constructor.
 data NodeTemplatesDelete =
   NodeTemplatesDelete'
-    { _ntdRequestId    :: !(Maybe Text)
-    , _ntdProject      :: !Text
+    { _ntdRequestId :: !(Maybe Text)
+    , _ntdProject :: !Text
     , _ntdNodeTemplate :: !Text
-    , _ntdRegion       :: !Text
+    , _ntdRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

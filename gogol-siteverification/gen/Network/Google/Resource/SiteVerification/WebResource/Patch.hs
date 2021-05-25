@@ -38,8 +38,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Patch
     , wrpId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.patch@ method which the
 -- 'WebResourcePatch' request conforms to.
@@ -59,7 +59,7 @@ type WebResourcePatchResource =
 data WebResourcePatch =
   WebResourcePatch'
     { _wrpPayload :: !SiteVerificationWebResourceResource
-    , _wrpId      :: !Text
+    , _wrpId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

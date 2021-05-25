@@ -23,12 +23,12 @@
 -- Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
--- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the Kubelet creates
--- routes for each node to allow the containers on that node to communicate
--- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range the cluster
--- is using.
+-- network](https:\/\/cloud.google.com\/compute\/docs\/networks-and-firewalls#networks).
+-- One firewall is added for the cluster. After cluster creation, the
+-- Kubelet creates routes for each node to allow the containers on that
+-- node to communicate with all other instances in the cluster. Finally, an
+-- entry is added to the project\'s global metadata indicating which CIDR
+-- range the cluster is using.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
@@ -51,8 +51,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     , pzccCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.create@ method which the
 -- 'ProjectsZonesClustersCreate' request conforms to.
@@ -75,24 +75,24 @@ type ProjectsZonesClustersCreateResource =
 -- | Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
--- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the Kubelet creates
--- routes for each node to allow the containers on that node to communicate
--- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range the cluster
--- is using.
+-- network](https:\/\/cloud.google.com\/compute\/docs\/networks-and-firewalls#networks).
+-- One firewall is added for the cluster. After cluster creation, the
+-- Kubelet creates routes for each node to allow the containers on that
+-- node to communicate with all other instances in the cluster. Finally, an
+-- entry is added to the project\'s global metadata indicating which CIDR
+-- range the cluster is using.
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
 data ProjectsZonesClustersCreate =
   ProjectsZonesClustersCreate'
-    { _pzccXgafv          :: !(Maybe Xgafv)
+    { _pzccXgafv :: !(Maybe Xgafv)
     , _pzccUploadProtocol :: !(Maybe Text)
-    , _pzccAccessToken    :: !(Maybe Text)
-    , _pzccUploadType     :: !(Maybe Text)
-    , _pzccZone           :: !Text
-    , _pzccPayload        :: !CreateClusterRequest
-    , _pzccProjectId      :: !Text
-    , _pzccCallback       :: !(Maybe Text)
+    , _pzccAccessToken :: !(Maybe Text)
+    , _pzccUploadType :: !(Maybe Text)
+    , _pzccZone :: !Text
+    , _pzccPayload :: !CreateClusterRequest
+    , _pzccProjectId :: !Text
+    , _pzccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,8 +158,9 @@ pzccUploadType
       (\ s a -> s{_pzccUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the parent field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the parent field.
 pzccZone :: Lens' ProjectsZonesClustersCreate Text
 pzccZone = lens _pzccZone (\ s a -> s{_pzccZone = a})
 

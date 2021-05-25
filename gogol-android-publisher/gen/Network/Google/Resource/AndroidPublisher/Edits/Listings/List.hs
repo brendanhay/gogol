@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns all of the localized store listings attached to this edit.
+-- Lists all localized store listings.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.list@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.listings.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
     , EditsListingsList
 
     -- * Request Lenses
+    , ellXgafv
+    , ellUploadProtocol
     , ellPackageName
+    , ellAccessToken
+    , ellUploadType
     , ellEditId
+    , ellCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.list@ method which the
 -- 'EditsListingsList' request conforms to.
@@ -50,16 +55,26 @@ type EditsListingsListResource =
              "edits" :>
                Capture "editId" Text :>
                  "listings" :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ListingsListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListingsListResponse
 
--- | Returns all of the localized store listings attached to this edit.
+-- | Lists all localized store listings.
 --
 -- /See:/ 'editsListingsList' smart constructor.
 data EditsListingsList =
   EditsListingsList'
-    { _ellPackageName :: !Text
-    , _ellEditId      :: !Text
+    { _ellXgafv :: !(Maybe Xgafv)
+    , _ellUploadProtocol :: !(Maybe Text)
+    , _ellPackageName :: !Text
+    , _ellAccessToken :: !(Maybe Text)
+    , _ellUploadType :: !(Maybe Text)
+    , _ellEditId :: !Text
+    , _ellCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,36 +83,84 @@ data EditsListingsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ellXgafv'
+--
+-- * 'ellUploadProtocol'
+--
 -- * 'ellPackageName'
 --
+-- * 'ellAccessToken'
+--
+-- * 'ellUploadType'
+--
 -- * 'ellEditId'
+--
+-- * 'ellCallback'
 editsListingsList
     :: Text -- ^ 'ellPackageName'
     -> Text -- ^ 'ellEditId'
     -> EditsListingsList
 editsListingsList pEllPackageName_ pEllEditId_ =
   EditsListingsList'
-    {_ellPackageName = pEllPackageName_, _ellEditId = pEllEditId_}
+    { _ellXgafv = Nothing
+    , _ellUploadProtocol = Nothing
+    , _ellPackageName = pEllPackageName_
+    , _ellAccessToken = Nothing
+    , _ellUploadType = Nothing
+    , _ellEditId = pEllEditId_
+    , _ellCallback = Nothing
+    }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+ellXgafv :: Lens' EditsListingsList (Maybe Xgafv)
+ellXgafv = lens _ellXgafv (\ s a -> s{_ellXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ellUploadProtocol :: Lens' EditsListingsList (Maybe Text)
+ellUploadProtocol
+  = lens _ellUploadProtocol
+      (\ s a -> s{_ellUploadProtocol = a})
+
+-- | Package name of the app.
 ellPackageName :: Lens' EditsListingsList Text
 ellPackageName
   = lens _ellPackageName
       (\ s a -> s{_ellPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+ellAccessToken :: Lens' EditsListingsList (Maybe Text)
+ellAccessToken
+  = lens _ellAccessToken
+      (\ s a -> s{_ellAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ellUploadType :: Lens' EditsListingsList (Maybe Text)
+ellUploadType
+  = lens _ellUploadType
+      (\ s a -> s{_ellUploadType = a})
+
+-- | Identifier of the edit.
 ellEditId :: Lens' EditsListingsList Text
 ellEditId
   = lens _ellEditId (\ s a -> s{_ellEditId = a})
+
+-- | JSONP
+ellCallback :: Lens' EditsListingsList (Maybe Text)
+ellCallback
+  = lens _ellCallback (\ s a -> s{_ellCallback = a})
 
 instance GoogleRequest EditsListingsList where
         type Rs EditsListingsList = ListingsListResponse
         type Scopes EditsListingsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsList'{..}
-          = go _ellPackageName _ellEditId (Just AltJSON)
+          = go _ellPackageName _ellEditId _ellXgafv
+              _ellUploadProtocol
+              _ellAccessToken
+              _ellUploadType
+              _ellCallback
+              (Just AltJSON)
               androidPublisherService
           where go
                   = buildClient

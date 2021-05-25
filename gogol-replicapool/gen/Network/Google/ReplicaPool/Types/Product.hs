@@ -17,19 +17,19 @@
 --
 module Network.Google.ReplicaPool.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types.Sum
 
 -- | The current status of a Replica.
 --
 -- /See:/ 'replicaStatus' smart constructor.
 data ReplicaStatus =
   ReplicaStatus'
-    { _rsState           :: !(Maybe Text)
+    { _rsState :: !(Maybe Text)
     , _rsTemplateVersion :: !(Maybe Text)
-    , _rsVMLink          :: !(Maybe Text)
-    , _rsVMStartTime     :: !(Maybe Text)
-    , _rsDetails         :: !(Maybe Text)
+    , _rsVMLink :: !(Maybe Text)
+    , _rsVMStartTime :: !(Maybe Text)
+    , _rsDetails :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -112,7 +112,7 @@ instance ToJSON ReplicaStatus where
 data DiskAttachment =
   DiskAttachment'
     { _daDeviceName :: !(Maybe Text)
-    , _daIndex      :: !(Maybe (Textual Word32))
+    , _daIndex :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -201,15 +201,15 @@ instance ToJSON PoolsDeleteRequest where
 -- /See:/ 'healthCheck' smart constructor.
 data HealthCheck =
   HealthCheck'
-    { _hcHealthyThreshold   :: !(Maybe (Textual Int32))
-    , _hcPath               :: !(Maybe Text)
-    , _hcCheckIntervalSec   :: !(Maybe (Textual Int32))
-    , _hcName               :: !(Maybe Text)
-    , _hcHost               :: !(Maybe Text)
-    , _hcTimeoutSec         :: !(Maybe (Textual Int32))
-    , _hcDescription        :: !(Maybe Text)
+    { _hcHealthyThreshold :: !(Maybe (Textual Int32))
+    , _hcPath :: !(Maybe Text)
+    , _hcCheckIntervalSec :: !(Maybe (Textual Int32))
+    , _hcName :: !(Maybe Text)
+    , _hcHost :: !(Maybe Text)
+    , _hcTimeoutSec :: !(Maybe (Textual Int32))
+    , _hcDescription :: !(Maybe Text)
     , _hcUnhealthyThreshold :: !(Maybe (Textual Int32))
-    , _hcPort               :: !(Maybe (Textual Int32))
+    , _hcPort :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -342,7 +342,7 @@ instance ToJSON HealthCheck where
 data Tag =
   Tag'
     { _tFingerPrint :: !(Maybe Text)
-    , _tItems       :: !(Maybe [Text])
+    , _tItems :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -390,8 +390,8 @@ instance ToJSON Tag where
 data NewDiskInitializeParams =
   NewDiskInitializeParams'
     { _ndipSourceImage :: !(Maybe Text)
-    , _ndipDiskSizeGb  :: !(Maybe (Textual Int64))
-    , _ndipDiskType    :: !(Maybe Text)
+    , _ndipDiskSizeGb :: !(Maybe (Textual Int64))
+    , _ndipDiskType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -464,7 +464,7 @@ instance ToJSON NewDiskInitializeParams where
 data MetadataItem =
   MetadataItem'
     { _miValue :: !(Maybe Text)
-    , _miKey   :: !(Maybe Text)
+    , _miKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -508,9 +508,9 @@ instance ToJSON MetadataItem where
 -- /See:/ 'replica' smart constructor.
 data Replica =
   Replica'
-    { _rStatus   :: !(Maybe ReplicaStatus)
+    { _rStatus :: !(Maybe ReplicaStatus)
     , _rSelfLink :: !(Maybe Text)
-    , _rName     :: !(Maybe Text)
+    , _rName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -564,8 +564,8 @@ instance ToJSON Replica where
 -- /See:/ 'networkInterface' smart constructor.
 data NetworkInterface =
   NetworkInterface'
-    { _niNetwork       :: !(Maybe Text)
-    , _niNetworkIP     :: !(Maybe Text)
+    { _niNetwork :: !(Maybe Text)
+    , _niNetworkIP :: !(Maybe Text)
     , _niAccessConfigs :: !(Maybe [AccessConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -630,7 +630,7 @@ instance ToJSON NetworkInterface where
 data ExistingDisk =
   ExistingDisk'
     { _edAttachment :: !(Maybe DiskAttachment)
-    , _edSource     :: !(Maybe Text)
+    , _edSource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -676,9 +676,9 @@ instance ToJSON ExistingDisk where
 -- /See:/ 'action' smart constructor.
 data Action =
   Action'
-    { _aCommands            :: !(Maybe [Text])
+    { _aCommands :: !(Maybe [Text])
     , _aTimeoutMilliSeconds :: !(Maybe (Textual Int32))
-    , _aEnvVariables        :: !(Maybe [EnvVariable])
+    , _aEnvVariables :: !(Maybe [EnvVariable])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -751,21 +751,21 @@ instance ToJSON Action where
 -- /See:/ 'pool' smart constructor.
 data Pool =
   Pool'
-    { _pResourceViews      :: !(Maybe [Text])
-    , _pNumReplicas        :: !(Maybe (Textual Int32))
-    , _pTargetPool         :: !(Maybe Text)
-    , _pAutoRestart        :: !(Maybe Bool)
-    , _pBaseInstanceName   :: !(Maybe Text)
+    { _pResourceViews :: !(Maybe [Text])
+    , _pNumReplicas :: !(Maybe (Textual Int32))
+    , _pTargetPool :: !(Maybe Text)
+    , _pAutoRestart :: !(Maybe Bool)
+    , _pBaseInstanceName :: !(Maybe Text)
     , _pInitialNumReplicas :: !(Maybe (Textual Int32))
     , _pCurrentNumReplicas :: !(Maybe (Textual Int32))
-    , _pSelfLink           :: !(Maybe Text)
-    , _pName               :: !(Maybe Text)
-    , _pLabels             :: !(Maybe [Label])
-    , _pType               :: !(Maybe Text)
-    , _pTemplate           :: !(Maybe Template)
-    , _pTargetPools        :: !(Maybe [Text])
-    , _pDescription        :: !(Maybe Text)
-    , _pHealthChecks       :: !(Maybe [HealthCheck])
+    , _pSelfLink :: !(Maybe Text)
+    , _pName :: !(Maybe Text)
+    , _pLabels :: !(Maybe [Label])
+    , _pType :: !(Maybe Text)
+    , _pTemplate :: !(Maybe Template)
+    , _pTargetPools :: !(Maybe [Text])
+    , _pDescription :: !(Maybe Text)
+    , _pHealthChecks :: !(Maybe [HealthCheck])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -976,7 +976,7 @@ instance ToJSON Pool where
 -- /See:/ 'serviceAccount' smart constructor.
 data ServiceAccount =
   ServiceAccount'
-    { _saEmail  :: !(Maybe Text)
+    { _saEmail :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1027,17 +1027,17 @@ instance ToJSON ServiceAccount where
 -- /See:/ 'vMParams' smart constructor.
 data VMParams =
   VMParams'
-    { _vmpServiceAccounts   :: !(Maybe [ServiceAccount])
+    { _vmpServiceAccounts :: !(Maybe [ServiceAccount])
     , _vmpNetworkInterfaces :: !(Maybe [NetworkInterface])
-    , _vmpBaseInstanceName  :: !(Maybe Text)
+    , _vmpBaseInstanceName :: !(Maybe Text)
     , _vmpOnHostMaintenance :: !(Maybe Text)
-    , _vmpMachineType       :: !(Maybe Text)
-    , _vmpMetadata          :: !(Maybe Metadata)
-    , _vmpDisksToAttach     :: !(Maybe [ExistingDisk])
-    , _vmpCanIPForward      :: !(Maybe Bool)
-    , _vmpDescription       :: !(Maybe Text)
-    , _vmpDisksToCreate     :: !(Maybe [NewDisk])
-    , _vmpTags              :: !(Maybe Tag)
+    , _vmpMachineType :: !(Maybe Text)
+    , _vmpMetadata :: !(Maybe Metadata)
+    , _vmpDisksToAttach :: !(Maybe [ExistingDisk])
+    , _vmpCanIPForward :: !(Maybe Bool)
+    , _vmpDescription :: !(Maybe Text)
+    , _vmpDisksToCreate :: !(Maybe [NewDisk])
+    , _vmpTags :: !(Maybe Tag)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1203,7 +1203,7 @@ instance ToJSON VMParams where
 data ReplicasListResponse =
   ReplicasListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
-    , _rlrResources     :: !(Maybe [Replica])
+    , _rlrResources :: !(Maybe [Replica])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1254,7 +1254,7 @@ instance ToJSON ReplicasListResponse where
 data Metadata =
   Metadata'
     { _mFingerPrint :: !(Maybe Text)
-    , _mItems       :: !(Maybe [MetadataItem])
+    , _mItems :: !(Maybe [MetadataItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1302,9 +1302,9 @@ instance ToJSON Metadata where
 -- /See:/ 'template' smart constructor.
 data Template =
   Template'
-    { _tAction       :: !(Maybe Action)
-    , _tVMParams     :: !(Maybe VMParams)
-    , _tVersion      :: !(Maybe Text)
+    { _tAction :: !(Maybe Action)
+    , _tVMParams :: !(Maybe VMParams)
+    , _tVersion :: !(Maybe Text)
     , _tHealthChecks :: !(Maybe [HealthCheck])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1384,8 +1384,8 @@ instance ToJSON Template where
 -- /See:/ 'envVariable' smart constructor.
 data EnvVariable =
   EnvVariable'
-    { _evValue  :: !(Maybe Text)
-    , _evName   :: !(Maybe Text)
+    { _evValue :: !(Maybe Text)
+    , _evName :: !(Maybe Text)
     , _evHidden :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1479,9 +1479,9 @@ instance ToJSON ReplicasDeleteRequest where
 -- /See:/ 'accessConfig' smart constructor.
 data AccessConfig =
   AccessConfig'
-    { _acName  :: !(Maybe Text)
+    { _acName :: !(Maybe Text)
     , _acNATIP :: !(Maybe Text)
-    , _acType  :: !(Maybe Text)
+    , _acType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1535,7 +1535,7 @@ instance ToJSON AccessConfig where
 data Label =
   Label'
     { _lValue :: !(Maybe Text)
-    , _lKey   :: !(Maybe Text)
+    , _lKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1576,7 +1576,7 @@ instance ToJSON Label where
 data PoolsListResponse =
   PoolsListResponse'
     { _plrNextPageToken :: !(Maybe Text)
-    , _plrResources     :: !(Maybe [Pool])
+    , _plrResources :: !(Maybe [Pool])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1627,9 +1627,9 @@ instance ToJSON PoolsListResponse where
 -- /See:/ 'newDisk' smart constructor.
 data NewDisk =
   NewDisk'
-    { _ndBoot             :: !(Maybe Bool)
-    , _ndAutoDelete       :: !(Maybe Bool)
-    , _ndAttachment       :: !(Maybe DiskAttachment)
+    { _ndBoot :: !(Maybe Bool)
+    , _ndAutoDelete :: !(Maybe Bool)
+    , _ndAttachment :: !(Maybe DiskAttachment)
     , _ndInitializeParams :: !(Maybe NewDiskInitializeParams)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -36,8 +36,8 @@ module Network.Google.Resource.FusionTables.Table.Delete
     , tddTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.delete@ method which the
 -- 'TableDelete' request conforms to.

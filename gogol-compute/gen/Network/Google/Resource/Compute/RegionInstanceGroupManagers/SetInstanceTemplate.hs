@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTe
     , rigmsitRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.setInstanceTemplate@ method which the
 -- 'RegionInstanceGroupManagersSetInstanceTemplate' request conforms to.
@@ -69,11 +69,11 @@ type RegionInstanceGroupManagersSetInstanceTemplateResource
 -- /See:/ 'regionInstanceGroupManagersSetInstanceTemplate' smart constructor.
 data RegionInstanceGroupManagersSetInstanceTemplate =
   RegionInstanceGroupManagersSetInstanceTemplate'
-    { _rigmsitRequestId            :: !(Maybe Text)
-    , _rigmsitProject              :: !Text
+    { _rigmsitRequestId :: !(Maybe Text)
+    , _rigmsitProject :: !Text
     , _rigmsitInstanceGroupManager :: !Text
-    , _rigmsitPayload              :: !RegionInstanceGroupManagersSetTemplateRequest
-    , _rigmsitRegion               :: !Text
+    , _rigmsitPayload :: !RegionInstanceGroupManagersSetTemplateRequest
+    , _rigmsitRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

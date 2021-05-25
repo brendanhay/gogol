@@ -16,7 +16,7 @@
 --
 module Network.Google.IAM.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The output format of the private key. The default value is
 -- \`TYPE_GOOGLE_CREDENTIALS_FILE\`, which is the Google Credentials File
@@ -94,6 +94,80 @@ instance FromJSON PermissionStage where
 instance ToJSON PermissionStage where
     toJSON = toJSONText
 
+-- | Output only. The state of the pool.
+data WorkLoadIdentityPoolState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- State unspecified.
+    | Active
+      -- ^ @ACTIVE@
+      -- The pool is active, and may be used in Google Cloud policies.
+    | Deleted
+      -- ^ @DELETED@
+      -- The pool is soft-deleted. Soft-deleted pools are permanently deleted
+      -- after approximately 30 days. You can restore a soft-deleted pool using
+      -- UndeleteWorkloadIdentityPool. You cannot reuse the ID of a soft-deleted
+      -- pool until it is permanently deleted. While a pool is deleted, you
+      -- cannot use it to exchange tokens, or use existing tokens to access
+      -- resources. If the pool is undeleted, existing tokens grant access again.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable WorkLoadIdentityPoolState
+
+instance FromHttpApiData WorkLoadIdentityPoolState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "ACTIVE" -> Right Active
+        "DELETED" -> Right Deleted
+        x -> Left ("Unable to parse WorkLoadIdentityPoolState from: " <> x)
+
+instance ToHttpApiData WorkLoadIdentityPoolState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Active -> "ACTIVE"
+        Deleted -> "DELETED"
+
+instance FromJSON WorkLoadIdentityPoolState where
+    parseJSON = parseJSONText "WorkLoadIdentityPoolState"
+
+instance ToJSON WorkLoadIdentityPoolState where
+    toJSON = toJSONText
+
+-- | The output format of the public key requested. X509_PEM is the default
+-- output format.
+data ProjectsServiceAccountsKeysGetPublicKeyType
+    = TypeNone
+      -- ^ @TYPE_NONE@
+      -- Unspecified. Returns nothing here.
+    | TypeX509PemFile
+      -- ^ @TYPE_X509_PEM_FILE@
+      -- X509 PEM format.
+    | TypeRawPublicKey
+      -- ^ @TYPE_RAW_PUBLIC_KEY@
+      -- Raw public key.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsServiceAccountsKeysGetPublicKeyType
+
+instance FromHttpApiData ProjectsServiceAccountsKeysGetPublicKeyType where
+    parseQueryParam = \case
+        "TYPE_NONE" -> Right TypeNone
+        "TYPE_X509_PEM_FILE" -> Right TypeX509PemFile
+        "TYPE_RAW_PUBLIC_KEY" -> Right TypeRawPublicKey
+        x -> Left ("Unable to parse ProjectsServiceAccountsKeysGetPublicKeyType from: " <> x)
+
+instance ToHttpApiData ProjectsServiceAccountsKeysGetPublicKeyType where
+    toQueryParam = \case
+        TypeNone -> "TYPE_NONE"
+        TypeX509PemFile -> "TYPE_X509_PEM_FILE"
+        TypeRawPublicKey -> "TYPE_RAW_PUBLIC_KEY"
+
+instance FromJSON ProjectsServiceAccountsKeysGetPublicKeyType where
+    parseJSON = parseJSONText "ProjectsServiceAccountsKeysGetPublicKeyType"
+
+instance ToJSON ProjectsServiceAccountsKeysGetPublicKeyType where
+    toJSON = toJSONText
+
 data QueryGrantableRolesRequestView
     = Basic
       -- ^ @BASIC@
@@ -120,6 +194,177 @@ instance FromJSON QueryGrantableRolesRequestView where
     parseJSON = parseJSONText "QueryGrantableRolesRequestView"
 
 instance ToJSON QueryGrantableRolesRequestView where
+    toJSON = toJSONText
+
+-- | Optional view for the returned Role objects. When \`FULL\` is specified,
+-- the \`includedPermissions\` field is returned, which includes a list of
+-- all permissions in the role. The default value is \`BASIC\`, which does
+-- not return the \`includedPermissions\` field.
+data OrganizationsRolesListView
+    = ORLVBasic
+      -- ^ @BASIC@
+      -- Omits the \`included_permissions\` field. This is the default value.
+    | ORLVFull
+      -- ^ @FULL@
+      -- Returns all fields.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsRolesListView
+
+instance FromHttpApiData OrganizationsRolesListView where
+    parseQueryParam = \case
+        "BASIC" -> Right ORLVBasic
+        "FULL" -> Right ORLVFull
+        x -> Left ("Unable to parse OrganizationsRolesListView from: " <> x)
+
+instance ToHttpApiData OrganizationsRolesListView where
+    toQueryParam = \case
+        ORLVBasic -> "BASIC"
+        ORLVFull -> "FULL"
+
+instance FromJSON OrganizationsRolesListView where
+    parseJSON = parseJSONText "OrganizationsRolesListView"
+
+instance ToJSON OrganizationsRolesListView where
+    toJSON = toJSONText
+
+-- | The key origin.
+data ServiceAccountKeyKeyOrigin
+    = OriginUnspecified
+      -- ^ @ORIGIN_UNSPECIFIED@
+      -- Unspecified key origin.
+    | UserProvided
+      -- ^ @USER_PROVIDED@
+      -- Key is provided by user.
+    | GoogleProvided
+      -- ^ @GOOGLE_PROVIDED@
+      -- Key is provided by Google.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServiceAccountKeyKeyOrigin
+
+instance FromHttpApiData ServiceAccountKeyKeyOrigin where
+    parseQueryParam = \case
+        "ORIGIN_UNSPECIFIED" -> Right OriginUnspecified
+        "USER_PROVIDED" -> Right UserProvided
+        "GOOGLE_PROVIDED" -> Right GoogleProvided
+        x -> Left ("Unable to parse ServiceAccountKeyKeyOrigin from: " <> x)
+
+instance ToHttpApiData ServiceAccountKeyKeyOrigin where
+    toQueryParam = \case
+        OriginUnspecified -> "ORIGIN_UNSPECIFIED"
+        UserProvided -> "USER_PROVIDED"
+        GoogleProvided -> "GOOGLE_PROVIDED"
+
+instance FromJSON ServiceAccountKeyKeyOrigin where
+    parseJSON = parseJSONText "ServiceAccountKeyKeyOrigin"
+
+instance ToJSON ServiceAccountKeyKeyOrigin where
+    toJSON = toJSONText
+
+-- | Output only. The state of the provider.
+data WorkLoadIdentityPoolProviderState
+    = WLIPPSStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- State unspecified.
+    | WLIPPSActive
+      -- ^ @ACTIVE@
+      -- The provider is active, and may be used to validate authentication
+      -- credentials.
+    | WLIPPSDeleted
+      -- ^ @DELETED@
+      -- The provider is soft-deleted. Soft-deleted providers are permanently
+      -- deleted after approximately 30 days. You can restore a soft-deleted
+      -- provider using UndeleteWorkloadIdentityPoolProvider. You cannot reuse
+      -- the ID of a soft-deleted provider until it is permanently deleted.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable WorkLoadIdentityPoolProviderState
+
+instance FromHttpApiData WorkLoadIdentityPoolProviderState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right WLIPPSStateUnspecified
+        "ACTIVE" -> Right WLIPPSActive
+        "DELETED" -> Right WLIPPSDeleted
+        x -> Left ("Unable to parse WorkLoadIdentityPoolProviderState from: " <> x)
+
+instance ToHttpApiData WorkLoadIdentityPoolProviderState where
+    toQueryParam = \case
+        WLIPPSStateUnspecified -> "STATE_UNSPECIFIED"
+        WLIPPSActive -> "ACTIVE"
+        WLIPPSDeleted -> "DELETED"
+
+instance FromJSON WorkLoadIdentityPoolProviderState where
+    parseJSON = parseJSONText "WorkLoadIdentityPoolProviderState"
+
+instance ToJSON WorkLoadIdentityPoolProviderState where
+    toJSON = toJSONText
+
+-- | Optional view for the returned Role objects. When \`FULL\` is specified,
+-- the \`includedPermissions\` field is returned, which includes a list of
+-- all permissions in the role. The default value is \`BASIC\`, which does
+-- not return the \`includedPermissions\` field.
+data ProjectsRolesListView
+    = PRLVBasic
+      -- ^ @BASIC@
+      -- Omits the \`included_permissions\` field. This is the default value.
+    | PRLVFull
+      -- ^ @FULL@
+      -- Returns all fields.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsRolesListView
+
+instance FromHttpApiData ProjectsRolesListView where
+    parseQueryParam = \case
+        "BASIC" -> Right PRLVBasic
+        "FULL" -> Right PRLVFull
+        x -> Left ("Unable to parse ProjectsRolesListView from: " <> x)
+
+instance ToHttpApiData ProjectsRolesListView where
+    toQueryParam = \case
+        PRLVBasic -> "BASIC"
+        PRLVFull -> "FULL"
+
+instance FromJSON ProjectsRolesListView where
+    parseJSON = parseJSONText "ProjectsRolesListView"
+
+instance ToJSON ProjectsRolesListView where
+    toJSON = toJSONText
+
+-- | The key type.
+data ServiceAccountKeyKeyType
+    = KeyTypeUnspecified
+      -- ^ @KEY_TYPE_UNSPECIFIED@
+      -- Unspecified key type. The presence of this in the message will
+      -- immediately result in an error.
+    | UserManaged
+      -- ^ @USER_MANAGED@
+      -- User-managed keys (managed and rotated by the user).
+    | SystemManaged
+      -- ^ @SYSTEM_MANAGED@
+      -- System-managed keys (managed and rotated by Google).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServiceAccountKeyKeyType
+
+instance FromHttpApiData ServiceAccountKeyKeyType where
+    parseQueryParam = \case
+        "KEY_TYPE_UNSPECIFIED" -> Right KeyTypeUnspecified
+        "USER_MANAGED" -> Right UserManaged
+        "SYSTEM_MANAGED" -> Right SystemManaged
+        x -> Left ("Unable to parse ServiceAccountKeyKeyType from: " <> x)
+
+instance ToHttpApiData ServiceAccountKeyKeyType where
+    toQueryParam = \case
+        KeyTypeUnspecified -> "KEY_TYPE_UNSPECIFIED"
+        UserManaged -> "USER_MANAGED"
+        SystemManaged -> "SYSTEM_MANAGED"
+
+instance FromJSON ServiceAccountKeyKeyType where
+    parseJSON = parseJSONText "ServiceAccountKeyKeyType"
+
+instance ToJSON ServiceAccountKeyKeyType where
     toJSON = toJSONText
 
 -- | The action that was performed on a Binding. Required
@@ -287,44 +532,61 @@ instance FromJSON LintResultSeverity where
 instance ToJSON LintResultSeverity where
     toJSON = toJSONText
 
+-- | Optional view for the returned Role objects. When \`FULL\` is specified,
+-- the \`includedPermissions\` field is returned, which includes a list of
+-- all permissions in the role. The default value is \`BASIC\`, which does
+-- not return the \`includedPermissions\` field.
+data RolesListView
+    = RLVBasic
+      -- ^ @BASIC@
+      -- Omits the \`included_permissions\` field. This is the default value.
+    | RLVFull
+      -- ^ @FULL@
+      -- Returns all fields.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RolesListView
+
+instance FromHttpApiData RolesListView where
+    parseQueryParam = \case
+        "BASIC" -> Right RLVBasic
+        "FULL" -> Right RLVFull
+        x -> Left ("Unable to parse RolesListView from: " <> x)
+
+instance ToHttpApiData RolesListView where
+    toQueryParam = \case
+        RLVBasic -> "BASIC"
+        RLVFull -> "FULL"
+
+instance FromJSON RolesListView where
+    parseJSON = parseJSONText "RolesListView"
+
+instance ToJSON RolesListView where
+    toJSON = toJSONText
+
 -- | The validation unit level.
 data LintResultLevel
-    = LRLLevelUnspecified
+    = LevelUnspecified
       -- ^ @LEVEL_UNSPECIFIED@
       -- Level is unspecified.
-    | LRLPolicy
-      -- ^ @POLICY@
-      -- A validation unit which operates on a policy. It is executed only if the
-      -- input object to lint is of type google.iam.v1.Policy.
-    | LRLBinding
-      -- ^ @BINDING@
-      -- A validation unit which operates on an individual binding. It is
-      -- executed in both cases where the input object to lint is of type
-      -- google.iam.v1.Policy or google.iam.v1.Binding.
-    | LRLCondition
+    | Condition
       -- ^ @CONDITION@
       -- A validation unit which operates on an individual condition within a
-      -- binding. It is executed in all three cases where the input object to
-      -- lint is of type google.iam.v1.Policy, google.iam.v1.Binding or
-      -- google.iam.v1.Binding.condition.
+      -- binding.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LintResultLevel
 
 instance FromHttpApiData LintResultLevel where
     parseQueryParam = \case
-        "LEVEL_UNSPECIFIED" -> Right LRLLevelUnspecified
-        "POLICY" -> Right LRLPolicy
-        "BINDING" -> Right LRLBinding
-        "CONDITION" -> Right LRLCondition
+        "LEVEL_UNSPECIFIED" -> Right LevelUnspecified
+        "CONDITION" -> Right Condition
         x -> Left ("Unable to parse LintResultLevel from: " <> x)
 
 instance ToHttpApiData LintResultLevel where
     toQueryParam = \case
-        LRLLevelUnspecified -> "LEVEL_UNSPECIFIED"
-        LRLPolicy -> "POLICY"
-        LRLBinding -> "BINDING"
-        LRLCondition -> "CONDITION"
+        LevelUnspecified -> "LEVEL_UNSPECIFIED"
+        Condition -> "CONDITION"
 
 instance FromJSON LintResultLevel where
     parseJSON = parseJSONText "LintResultLevel"
@@ -420,6 +682,43 @@ instance FromJSON ServiceAccountKeyKeyAlgorithm where
 instance ToJSON ServiceAccountKeyKeyAlgorithm where
     toJSON = toJSONText
 
+-- | Filters the types of keys the user wants to include in the list
+-- response. Duplicate key types are not allowed. If no key type is
+-- provided, all keys are returned.
+data ProjectsServiceAccountsKeysListKeyTypes
+    = PSAKLKTKeyTypeUnspecified
+      -- ^ @KEY_TYPE_UNSPECIFIED@
+      -- Unspecified key type. The presence of this in the message will
+      -- immediately result in an error.
+    | PSAKLKTUserManaged
+      -- ^ @USER_MANAGED@
+      -- User-managed keys (managed and rotated by the user).
+    | PSAKLKTSystemManaged
+      -- ^ @SYSTEM_MANAGED@
+      -- System-managed keys (managed and rotated by Google).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsServiceAccountsKeysListKeyTypes
+
+instance FromHttpApiData ProjectsServiceAccountsKeysListKeyTypes where
+    parseQueryParam = \case
+        "KEY_TYPE_UNSPECIFIED" -> Right PSAKLKTKeyTypeUnspecified
+        "USER_MANAGED" -> Right PSAKLKTUserManaged
+        "SYSTEM_MANAGED" -> Right PSAKLKTSystemManaged
+        x -> Left ("Unable to parse ProjectsServiceAccountsKeysListKeyTypes from: " <> x)
+
+instance ToHttpApiData ProjectsServiceAccountsKeysListKeyTypes where
+    toQueryParam = \case
+        PSAKLKTKeyTypeUnspecified -> "KEY_TYPE_UNSPECIFIED"
+        PSAKLKTUserManaged -> "USER_MANAGED"
+        PSAKLKTSystemManaged -> "SYSTEM_MANAGED"
+
+instance FromJSON ProjectsServiceAccountsKeysListKeyTypes where
+    parseJSON = parseJSONText "ProjectsServiceAccountsKeysListKeyTypes"
+
+instance ToJSON ProjectsServiceAccountsKeysListKeyTypes where
+    toJSON = toJSONText
+
 -- | Which type of key and algorithm to use for the key. The default is
 -- currently a 2K RSA key. However this may change in the future.
 data CreateServiceAccountKeyRequestKeyAlgorithm
@@ -459,7 +758,7 @@ instance ToJSON CreateServiceAccountKeyRequestKeyAlgorithm where
 data PermissionCustomRolesSupportLevel
     = Supported
       -- ^ @SUPPORTED@
-      -- Permission is fully supported for custom role use.
+      -- Default state. Permission is fully supported for custom role use.
     | Testing
       -- ^ @TESTING@
       -- Permission is being tested to check custom role compatibility.

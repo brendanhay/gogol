@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Instances.Reset
     , irInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.reset@ method which the
 -- 'InstancesReset' request conforms to.
@@ -65,9 +65,9 @@ type InstancesResetResource =
 data InstancesReset =
   InstancesReset'
     { _irRequestId :: !(Maybe Text)
-    , _irProject   :: !Text
-    , _irZone      :: !Text
-    , _irInstance  :: !Text
+    , _irProject :: !Text
+    , _irZone :: !Text
+    , _irInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

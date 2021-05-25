@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -104,6 +104,9 @@ module Network.Google.DoubleClickSearch.Types
     , clKind
     , clConversion
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * ReportAPIColumnSpec
     , ReportAPIColumnSpec
     , reportAPIColumnSpec
@@ -199,15 +202,15 @@ module Network.Google.DoubleClickSearch.Types
     , sclItems
     ) where
 
-import           Network.Google.DoubleClickSearch.Types.Product
-import           Network.Google.DoubleClickSearch.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DoubleClickSearch.Types.Product
+import Network.Google.DoubleClickSearch.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the DoubleClick Search API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Search Ads 360 API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickSearchService :: ServiceConfig
 doubleClickSearchService
   = defaultService (ServiceId "doubleclicksearch:v2")
-      "www.googleapis.com"
+      "doubleclicksearch.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
 doubleClickSearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]

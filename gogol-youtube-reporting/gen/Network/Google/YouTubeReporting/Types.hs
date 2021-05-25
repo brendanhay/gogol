@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -197,9 +197,9 @@ module Network.Google.YouTubeReporting.Types
     , rtSystemManaged
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types.Product
-import           Network.Google.YouTubeReporting.Types.Sum
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types.Product
+import Network.Google.YouTubeReporting.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeReportingService :: ServiceConfig

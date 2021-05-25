@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the instances in the specified instance group.
+-- Lists the instances in the specified instance group. The orderBy query
+-- parameter is not supported.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.listInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.ListInstances
@@ -33,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceGroups.ListInstances
     , InstanceGroupsListInstances'
 
     -- * Request Lenses
+    , igliReturnPartialSuccess
     , igliOrderBy
     , igliProject
     , igliZone
@@ -43,8 +45,8 @@ module Network.Google.Resource.Compute.InstanceGroups.ListInstances
     , igliMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.listInstances@ method which the
 -- 'InstanceGroupsListInstances'' request conforms to.
@@ -58,28 +60,31 @@ type InstanceGroupsListInstancesResource =
                  "instanceGroups" :>
                    Capture "instanceGroup" Text :>
                      "listInstances" :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" (Textual Word32) :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON]
-                                   InstanceGroupsListInstancesRequest
-                                   :> Post '[JSON] InstanceGroupsListInstances
+                       QueryParam "returnPartialSuccess" Bool :>
+                         QueryParam "orderBy" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON]
+                                     InstanceGroupsListInstancesRequest
+                                     :> Post '[JSON] InstanceGroupsListInstances
 
--- | Lists the instances in the specified instance group.
+-- | Lists the instances in the specified instance group. The orderBy query
+-- parameter is not supported.
 --
 -- /See:/ 'instanceGroupsListInstances'' smart constructor.
 data InstanceGroupsListInstances' =
   InstanceGroupsListInstances''
-    { _igliOrderBy       :: !(Maybe Text)
-    , _igliProject       :: !Text
-    , _igliZone          :: !Text
-    , _igliPayload       :: !InstanceGroupsListInstancesRequest
-    , _igliFilter        :: !(Maybe Text)
-    , _igliPageToken     :: !(Maybe Text)
+    { _igliReturnPartialSuccess :: !(Maybe Bool)
+    , _igliOrderBy :: !(Maybe Text)
+    , _igliProject :: !Text
+    , _igliZone :: !Text
+    , _igliPayload :: !InstanceGroupsListInstancesRequest
+    , _igliFilter :: !(Maybe Text)
+    , _igliPageToken :: !(Maybe Text)
     , _igliInstanceGroup :: !Text
-    , _igliMaxResults    :: !(Textual Word32)
+    , _igliMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,6 +92,8 @@ data InstanceGroupsListInstances' =
 -- | Creates a value of 'InstanceGroupsListInstances'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igliReturnPartialSuccess'
 --
 -- * 'igliOrderBy'
 --
@@ -111,7 +118,8 @@ instanceGroupsListInstances'
     -> InstanceGroupsListInstances'
 instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanceGroup_ =
   InstanceGroupsListInstances''
-    { _igliOrderBy = Nothing
+    { _igliReturnPartialSuccess = Nothing
+    , _igliOrderBy = Nothing
     , _igliProject = pIgliProject_
     , _igliZone = pIgliZone_
     , _igliPayload = pIgliPayload_
@@ -122,14 +130,21 @@ instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanc
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+igliReturnPartialSuccess :: Lens' InstanceGroupsListInstances' (Maybe Bool)
+igliReturnPartialSuccess
+  = lens _igliReturnPartialSuccess
+      (\ s a -> s{_igliReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 igliOrderBy :: Lens' InstanceGroupsListInstances' (Maybe Text)
 igliOrderBy
   = lens _igliOrderBy (\ s a -> s{_igliOrderBy = a})
@@ -151,25 +166,27 @@ igliPayload
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 igliFilter :: Lens' InstanceGroupsListInstances' (Maybe Text)
 igliFilter
   = lens _igliFilter (\ s a -> s{_igliFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 igliPageToken :: Lens' InstanceGroupsListInstances' (Maybe Text)
 igliPageToken
   = lens _igliPageToken
@@ -183,10 +200,10 @@ igliInstanceGroup
       (\ s a -> s{_igliInstanceGroup = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 igliMaxResults :: Lens' InstanceGroupsListInstances' Word32
 igliMaxResults
   = lens _igliMaxResults
@@ -203,6 +220,7 @@ instance GoogleRequest InstanceGroupsListInstances'
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsListInstances''{..}
           = go _igliProject _igliZone _igliInstanceGroup
+              _igliReturnPartialSuccess
               _igliOrderBy
               _igliFilter
               _igliPageToken

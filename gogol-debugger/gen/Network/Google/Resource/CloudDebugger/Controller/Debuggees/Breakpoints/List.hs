@@ -31,7 +31,7 @@
 -- the breakpoints that are completed until the controller removes them
 -- from the active list to avoid setting those breakpoints again.
 --
--- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
     (
     -- * REST Resource
@@ -47,13 +47,14 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Li
     , cdblAccessToken
     , cdblUploadType
     , cdblSuccessOnTimeout
+    , cdblAgentId
     , cdblWaitToken
     , cdblDebuggeeId
     , cdblCallback
     ) where
 
-import           Network.Google.Debugger.Types
-import           Network.Google.Prelude
+import Network.Google.Debugger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.list@ method which the
 -- 'ControllerDebuggeesBreakpointsList' request conforms to.
@@ -68,10 +69,11 @@ type ControllerDebuggeesBreakpointsListResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "successOnTimeout" Bool :>
-                         QueryParam "waitToken" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListActiveBreakpointsResponse
+                         QueryParam "agentId" Text :>
+                           QueryParam "waitToken" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListActiveBreakpointsResponse
 
 -- | Returns the list of all active breakpoints for the debuggee. The
 -- breakpoint specification (\`location\`, \`condition\`, and
@@ -87,14 +89,15 @@ type ControllerDebuggeesBreakpointsListResource =
 -- /See:/ 'controllerDebuggeesBreakpointsList' smart constructor.
 data ControllerDebuggeesBreakpointsList =
   ControllerDebuggeesBreakpointsList'
-    { _cdblXgafv            :: !(Maybe Xgafv)
-    , _cdblUploadProtocol   :: !(Maybe Text)
-    , _cdblAccessToken      :: !(Maybe Text)
-    , _cdblUploadType       :: !(Maybe Text)
+    { _cdblXgafv :: !(Maybe Xgafv)
+    , _cdblUploadProtocol :: !(Maybe Text)
+    , _cdblAccessToken :: !(Maybe Text)
+    , _cdblUploadType :: !(Maybe Text)
     , _cdblSuccessOnTimeout :: !(Maybe Bool)
-    , _cdblWaitToken        :: !(Maybe Text)
-    , _cdblDebuggeeId       :: !Text
-    , _cdblCallback         :: !(Maybe Text)
+    , _cdblAgentId :: !(Maybe Text)
+    , _cdblWaitToken :: !(Maybe Text)
+    , _cdblDebuggeeId :: !Text
+    , _cdblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,6 +116,8 @@ data ControllerDebuggeesBreakpointsList =
 --
 -- * 'cdblSuccessOnTimeout'
 --
+-- * 'cdblAgentId'
+--
 -- * 'cdblWaitToken'
 --
 -- * 'cdblDebuggeeId'
@@ -128,6 +133,7 @@ controllerDebuggeesBreakpointsList pCdblDebuggeeId_ =
     , _cdblAccessToken = Nothing
     , _cdblUploadType = Nothing
     , _cdblSuccessOnTimeout = Nothing
+    , _cdblAgentId = Nothing
     , _cdblWaitToken = Nothing
     , _cdblDebuggeeId = pCdblDebuggeeId_
     , _cdblCallback = Nothing
@@ -167,6 +173,12 @@ cdblSuccessOnTimeout
   = lens _cdblSuccessOnTimeout
       (\ s a -> s{_cdblSuccessOnTimeout = a})
 
+-- | Identifies the agent. This is the ID returned in the RegisterDebuggee
+-- response.
+cdblAgentId :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
+cdblAgentId
+  = lens _cdblAgentId (\ s a -> s{_cdblAgentId = a})
+
 -- | A token that, if specified, blocks the method call until the list of
 -- active breakpoints has changed, or a server-selected timeout has
 -- expired. The value should be set from the \`next_wait_token\` field in
@@ -176,7 +188,7 @@ cdblWaitToken
   = lens _cdblWaitToken
       (\ s a -> s{_cdblWaitToken = a})
 
--- | Identifies the debuggee.
+-- | Required. Identifies the debuggee.
 cdblDebuggeeId :: Lens' ControllerDebuggeesBreakpointsList Text
 cdblDebuggeeId
   = lens _cdblDebuggeeId
@@ -200,6 +212,7 @@ instance GoogleRequest
               _cdblAccessToken
               _cdblUploadType
               _cdblSuccessOnTimeout
+              _cdblAgentId
               _cdblWaitToken
               _cdblCallback
               (Just AltJSON)

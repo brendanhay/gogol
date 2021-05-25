@@ -36,8 +36,18 @@ library
           Network.Google.IAP
         , Network.Google.IAP.Types
         , Network.Google.Resource.IAP.GetIAMPolicy
+        , Network.Google.Resource.IAP.GetIapSettings
+        , Network.Google.Resource.IAP.Projects.Brands.Create
+        , Network.Google.Resource.IAP.Projects.Brands.Get
+        , Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Create
+        , Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
+        , Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.Get
+        , Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.List
+        , Network.Google.Resource.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
+        , Network.Google.Resource.IAP.Projects.Brands.List
         , Network.Google.Resource.IAP.SetIAMPolicy
         , Network.Google.Resource.IAP.TestIAMPermissions
+        , Network.Google.Resource.IAP.UpdateIapSettings
 
     other-modules:
           Network.Google.IAP.Types.Product

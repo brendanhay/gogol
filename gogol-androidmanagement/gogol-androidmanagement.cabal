@@ -38,6 +38,7 @@ library
         , Network.Google.AndroidManagement.Types
         , Network.Google.Resource.AndroidManagement.Enterprises.Applications.Get
         , Network.Google.Resource.AndroidManagement.Enterprises.Create
+        , Network.Google.Resource.AndroidManagement.Enterprises.Delete
         , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Delete
         , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Get
         , Network.Google.Resource.AndroidManagement.Enterprises.Devices.IssueCommand
@@ -50,6 +51,7 @@ library
         , Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Create
         , Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Delete
         , Network.Google.Resource.AndroidManagement.Enterprises.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.List
         , Network.Google.Resource.AndroidManagement.Enterprises.Patch
         , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Delete
         , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get

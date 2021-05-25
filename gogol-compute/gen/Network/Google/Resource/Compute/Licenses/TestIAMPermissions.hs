@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource.
+-- Returns permissions that a caller has on the specified resource. Caution
+-- This resource is intended for use only by third-party partners who are
+-- creating Cloud Marketplace images.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.licenses.testIamPermissions@.
 module Network.Google.Resource.Compute.Licenses.TestIAMPermissions
@@ -38,8 +40,8 @@ module Network.Google.Resource.Compute.Licenses.TestIAMPermissions
     , ltipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.licenses.testIamPermissions@ method which the
 -- 'LicensesTestIAMPermissions' request conforms to.
@@ -56,13 +58,15 @@ type LicensesTestIAMPermissionsResource =
                        ReqBody '[JSON] TestPermissionsRequest :>
                          Post '[JSON] TestPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource.
+-- | Returns permissions that a caller has on the specified resource. Caution
+-- This resource is intended for use only by third-party partners who are
+-- creating Cloud Marketplace images.
 --
 -- /See:/ 'licensesTestIAMPermissions' smart constructor.
 data LicensesTestIAMPermissions =
   LicensesTestIAMPermissions'
-    { _ltipProject  :: !Text
-    , _ltipPayload  :: !TestPermissionsRequest
+    { _ltipProject :: !Text
+    , _ltipPayload :: !TestPermissionsRequest
     , _ltipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Drives.Get
     , dgDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.drives.get@ method which the
 -- 'DrivesGet' request conforms to.
@@ -56,7 +56,7 @@ type DrivesGetResource =
 data DrivesGet =
   DrivesGet'
     { _dgUseDomainAdminAccess :: !Bool
-    , _dgDriveId              :: !Text
+    , _dgDriveId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

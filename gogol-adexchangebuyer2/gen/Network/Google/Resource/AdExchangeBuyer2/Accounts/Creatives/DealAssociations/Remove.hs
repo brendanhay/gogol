@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.DealAssociati
     , acdarCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.dealAssociations.remove@ method which the
 -- 'AccountsCreativesDealAssociationsRemove' request conforms to.
@@ -70,14 +70,14 @@ type AccountsCreativesDealAssociationsRemoveResource
 -- /See:/ 'accountsCreativesDealAssociationsRemove' smart constructor.
 data AccountsCreativesDealAssociationsRemove =
   AccountsCreativesDealAssociationsRemove'
-    { _acdarXgafv          :: !(Maybe Xgafv)
+    { _acdarXgafv :: !(Maybe Xgafv)
     , _acdarUploadProtocol :: !(Maybe Text)
-    , _acdarAccessToken    :: !(Maybe Text)
-    , _acdarUploadType     :: !(Maybe Text)
-    , _acdarCreativeId     :: !Text
-    , _acdarPayload        :: !RemoveDealAssociationRequest
-    , _acdarAccountId      :: !Text
-    , _acdarCallback       :: !(Maybe Text)
+    , _acdarAccessToken :: !(Maybe Text)
+    , _acdarUploadType :: !(Maybe Text)
+    , _acdarCreativeId :: !Text
+    , _acdarPayload :: !RemoveDealAssociationRequest
+    , _acdarAccountId :: !Text
+    , _acdarCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

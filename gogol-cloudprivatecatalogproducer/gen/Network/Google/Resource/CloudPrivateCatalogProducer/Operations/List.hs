@@ -31,7 +31,7 @@
 -- name binding is the parent resource, without the operations collection
 -- id.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.operations.list@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.operations.list@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
     (
     -- * REST Resource
@@ -53,8 +53,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
     , olCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.operations.list@ method which the
 -- 'OperationsList' request conforms to.
@@ -87,15 +87,15 @@ type OperationsListResource =
 -- /See:/ 'operationsList' smart constructor.
 data OperationsList =
   OperationsList'
-    { _olXgafv          :: !(Maybe Xgafv)
+    { _olXgafv :: !(Maybe Xgafv)
     , _olUploadProtocol :: !(Maybe Text)
-    , _olAccessToken    :: !(Maybe Text)
-    , _olUploadType     :: !(Maybe Text)
-    , _olName           :: !(Maybe Text)
-    , _olFilter         :: !(Maybe Text)
-    , _olPageToken      :: !(Maybe Text)
-    , _olPageSize       :: !(Maybe (Textual Int32))
-    , _olCallback       :: !(Maybe Text)
+    , _olAccessToken :: !(Maybe Text)
+    , _olUploadType :: !(Maybe Text)
+    , _olName :: !(Maybe Text)
+    , _olFilter :: !(Maybe Text)
+    , _olPageToken :: !(Maybe Text)
+    , _olPageSize :: !(Maybe (Textual Int32))
+    , _olCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

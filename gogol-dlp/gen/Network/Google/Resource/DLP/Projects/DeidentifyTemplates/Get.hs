@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Get
     , pdtgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.deidentifyTemplates.get@ method which the
 -- 'ProjectsDeidentifyTemplatesGet' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsDeidentifyTemplatesGetResource =
 -- /See:/ 'projectsDeidentifyTemplatesGet' smart constructor.
 data ProjectsDeidentifyTemplatesGet =
   ProjectsDeidentifyTemplatesGet'
-    { _pdtgXgafv          :: !(Maybe Xgafv)
+    { _pdtgXgafv :: !(Maybe Xgafv)
     , _pdtgUploadProtocol :: !(Maybe Text)
-    , _pdtgAccessToken    :: !(Maybe Text)
-    , _pdtgUploadType     :: !(Maybe Text)
-    , _pdtgName           :: !Text
-    , _pdtgCallback       :: !(Maybe Text)
+    , _pdtgAccessToken :: !(Maybe Text)
+    , _pdtgUploadType :: !(Maybe Text)
+    , _pdtgName :: !Text
+    , _pdtgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,9 +128,10 @@ pdtgUploadType
   = lens _pdtgUploadType
       (\ s a -> s{_pdtgUploadType = a})
 
--- | Resource name of the organization and deidentify template to be read,
--- for example \`organizations\/433245324\/deidentifyTemplates\/432452342\`
--- or projects\/project-id\/deidentifyTemplates\/432452342.
+-- | Required. Resource name of the organization and deidentify template to
+-- be read, for example
+-- \`organizations\/433245324\/deidentifyTemplates\/432452342\` or
+-- projects\/project-id\/deidentifyTemplates\/432452342.
 pdtgName :: Lens' ProjectsDeidentifyTemplatesGet Text
 pdtgName = lens _pdtgName (\ s a -> s{_pdtgName = a})
 

@@ -22,7 +22,7 @@
 --
 -- Updates a source.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.patch@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.patch@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.Patch
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.Patch
     , ospCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.patch@ method which the
 -- 'OrganizationsSourcesPatch' request conforms to.
 type OrganizationsSourcesPatchResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,14 +65,14 @@ type OrganizationsSourcesPatchResource =
 -- /See:/ 'organizationsSourcesPatch' smart constructor.
 data OrganizationsSourcesPatch =
   OrganizationsSourcesPatch'
-    { _ospXgafv          :: !(Maybe Xgafv)
+    { _ospXgafv :: !(Maybe Xgafv)
     , _ospUploadProtocol :: !(Maybe Text)
-    , _ospUpdateMask     :: !(Maybe GFieldMask)
-    , _ospAccessToken    :: !(Maybe Text)
-    , _ospUploadType     :: !(Maybe Text)
-    , _ospPayload        :: !Source
-    , _ospName           :: !Text
-    , _ospCallback       :: !(Maybe Text)
+    , _ospUpdateMask :: !(Maybe GFieldMask)
+    , _ospAccessToken :: !(Maybe Text)
+    , _ospUploadType :: !(Maybe Text)
+    , _ospPayload :: !Source
+    , _ospName :: !Text
+    , _ospCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,7 +149,7 @@ ospPayload
 
 -- | The relative resource name of this source. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/sources\/456\"
+-- Example: \"organizations\/{organization_id}\/sources\/{source_id}\"
 ospName :: Lens' OrganizationsSourcesPatch Text
 ospName = lens _ospName (\ s a -> s{_ospName = a})
 

@@ -63,10 +63,10 @@ module Network.Google.Indexing
     , unType
     ) where
 
-import           Network.Google.Indexing.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Indexing.URLNotifications.GetMetadata
-import           Network.Google.Resource.Indexing.URLNotifications.Publish
+import Network.Google.Prelude
+import Network.Google.Indexing.Types
+import Network.Google.Resource.Indexing.URLNotifications.GetMetadata
+import Network.Google.Resource.Indexing.URLNotifications.Publish
 
 {- $resources
 TODO

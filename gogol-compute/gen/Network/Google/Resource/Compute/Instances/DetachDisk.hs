@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Instances.DetachDisk
     , idddInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.detachDisk@ method which the
 -- 'InstancesDetachDisk' request conforms to.
@@ -64,11 +64,11 @@ type InstancesDetachDiskResource =
 -- /See:/ 'instancesDetachDisk' smart constructor.
 data InstancesDetachDisk =
   InstancesDetachDisk'
-    { _idddRequestId  :: !(Maybe Text)
-    , _idddProject    :: !Text
-    , _idddZone       :: !Text
+    { _idddRequestId :: !(Maybe Text)
+    , _idddProject :: !Text
+    , _idddZone :: !Text
     , _idddDeviceName :: !Text
-    , _idddInstance   :: !Text
+    , _idddInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

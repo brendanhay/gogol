@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the Roles defined on a resource.
+-- Lists every predefined Role that IAM supports, or every custom role that
+-- is defined for an organization or project.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.roles.list@.
 module Network.Google.Resource.IAM.Roles.List
@@ -45,8 +46,8 @@ module Network.Google.Resource.IAM.Roles.List
     , rlCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.roles.list@ method which the
 -- 'RolesList' request conforms to.
@@ -59,28 +60,29 @@ type RolesListResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "showDeleted" Bool :>
-                     QueryParam "view" Text :>
+                     QueryParam "view" RolesListView :>
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListRolesResponse
 
--- | Lists the Roles defined on a resource.
+-- | Lists every predefined Role that IAM supports, or every custom role that
+-- is defined for an organization or project.
 --
 -- /See:/ 'rolesList' smart constructor.
 data RolesList =
   RolesList'
-    { _rlParent         :: !(Maybe Text)
-    , _rlXgafv          :: !(Maybe Xgafv)
+    { _rlParent :: !(Maybe Text)
+    , _rlXgafv :: !(Maybe Xgafv)
     , _rlUploadProtocol :: !(Maybe Text)
-    , _rlAccessToken    :: !(Maybe Text)
-    , _rlUploadType     :: !(Maybe Text)
-    , _rlShowDeleted    :: !(Maybe Bool)
-    , _rlView           :: !(Maybe Text)
-    , _rlPageToken      :: !(Maybe Text)
-    , _rlPageSize       :: !(Maybe (Textual Int32))
-    , _rlCallback       :: !(Maybe Text)
+    , _rlAccessToken :: !(Maybe Text)
+    , _rlUploadType :: !(Maybe Text)
+    , _rlShowDeleted :: !(Maybe Bool)
+    , _rlView :: !(Maybe RolesListView)
+    , _rlPageToken :: !(Maybe Text)
+    , _rlPageSize :: !(Maybe (Textual Int32))
+    , _rlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,9 +127,27 @@ rolesList =
     }
 
 
--- | The resource name of the parent resource in one of the following
--- formats: \`\` (empty string) -- this refers to curated roles.
--- \`organizations\/{ORGANIZATION_ID}\` \`projects\/{PROJECT_ID}\`
+-- | The \`parent\` parameter\'s value depends on the target resource for the
+-- request, namely [\`roles\`](\/iam\/reference\/rest\/v1\/roles),
+-- [\`projects\`](\/iam\/reference\/rest\/v1\/projects.roles), or
+-- [\`organizations\`](\/iam\/reference\/rest\/v1\/organizations.roles).
+-- Each resource type\'s \`parent\` value format is described below: *
+-- [\`roles.list()\`](\/iam\/reference\/rest\/v1\/roles\/list): An empty
+-- string. This method doesn\'t require a resource; it simply returns all
+-- [predefined roles](\/iam\/docs\/understanding-roles#predefined_roles) in
+-- Cloud IAM. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/roles\` *
+-- [\`projects.roles.list()\`](\/iam\/reference\/rest\/v1\/projects.roles\/list):
+-- \`projects\/{PROJECT_ID}\`. This method lists all project-level [custom
+-- roles](\/iam\/docs\/understanding-custom-roles). Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\` *
+-- [\`organizations.roles.list()\`](\/iam\/reference\/rest\/v1\/organizations.roles\/list):
+-- \`organizations\/{ORGANIZATION_ID}\`. This method lists all
+-- organization-level [custom
+-- roles](\/iam\/docs\/understanding-custom-roles). Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\`
+-- Note: Wildcard (*) values are invalid; you must specify a complete
+-- project ID or organization ID.
 rlParent :: Lens' RolesList (Maybe Text)
 rlParent = lens _rlParent (\ s a -> s{_rlParent = a})
 
@@ -162,7 +182,7 @@ rlShowDeleted
 -- the \`includedPermissions\` field is returned, which includes a list of
 -- all permissions in the role. The default value is \`BASIC\`, which does
 -- not return the \`includedPermissions\` field.
-rlView :: Lens' RolesList (Maybe Text)
+rlView :: Lens' RolesList (Maybe RolesListView)
 rlView = lens _rlView (\ s a -> s{_rlView = a})
 
 -- | Optional pagination token returned in an earlier ListRolesResponse.
@@ -170,7 +190,8 @@ rlPageToken :: Lens' RolesList (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
--- | Optional limit on the number of roles to include in the response.
+-- | Optional limit on the number of roles to include in the response. The
+-- default is 300, and the maximum is 1,000.
 rlPageSize :: Lens' RolesList (Maybe Int32)
 rlPageSize
   = lens _rlPageSize (\ s a -> s{_rlPageSize = a}) .

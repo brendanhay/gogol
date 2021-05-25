@@ -40,8 +40,8 @@ module Network.Google.Resource.Drive.Replies.List
     , rlIncludeDeleted
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.list@ method which the
 -- 'RepliesList' request conforms to.
@@ -63,10 +63,10 @@ type RepliesListResource =
 -- /See:/ 'repliesList' smart constructor.
 data RepliesList =
   RepliesList'
-    { _rlPageToken      :: !(Maybe Text)
-    , _rlFileId         :: !Text
-    , _rlCommentId      :: !Text
-    , _rlPageSize       :: !(Textual Int32)
+    { _rlPageToken :: !(Maybe Text)
+    , _rlFileId :: !Text
+    , _rlCommentId :: !Text
+    , _rlPageSize :: !(Textual Int32)
     , _rlIncludeDeleted :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -1,6 +1,6 @@
 name:                  gogol-android-publisher
 version:               0.5.0
-synopsis:              Google Play Developer SDK.
+synopsis:              Google Play Android Developer SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Accesses Android application developers\' Google Play accounts.
+    Lets Android application developers access their Google Play accounts.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -76,8 +76,12 @@ library
         , Network.Google.Resource.AndroidPublisher.InAppProducts.List
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Update
+        , Network.Google.Resource.AndroidPublisher.InternalAppsharingartifacts.Uploadapk
+        , Network.Google.Resource.AndroidPublisher.InternalAppsharingartifacts.Uploadbundle
         , Network.Google.Resource.AndroidPublisher.Orders.Refund
+        , Network.Google.Resource.AndroidPublisher.Purchases.Products.Acknowledge
         , Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
+        , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Acknowledge
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
@@ -87,6 +91,10 @@ library
         , Network.Google.Resource.AndroidPublisher.Reviews.Get
         , Network.Google.Resource.AndroidPublisher.Reviews.List
         , Network.Google.Resource.AndroidPublisher.Reviews.Reply
+        , Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Create
+        , Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Download
+        , Network.Google.Resource.AndroidPublisher.Systemapks.Variants.Get
+        , Network.Google.Resource.AndroidPublisher.Systemapks.Variants.List
 
     other-modules:
           Network.Google.AndroidPublisher.Types.Product

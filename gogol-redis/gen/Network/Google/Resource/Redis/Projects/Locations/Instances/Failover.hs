@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Failover the master role to current replica node against a specific
--- STANDARD tier redis instance.
+-- Initiates a failover of the primary node to current replica node for a
+-- specific STANDARD tier Cloud Memorystore for Redis instance.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.failover@.
 module Network.Google.Resource.Redis.Projects.Locations.Instances.Failover
@@ -43,8 +43,8 @@ module Network.Google.Resource.Redis.Projects.Locations.Instances.Failover
     , plifCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Redis.Types
+import Network.Google.Prelude
+import Network.Google.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.failover@ method which the
 -- 'ProjectsLocationsInstancesFailover' request conforms to.
@@ -60,19 +60,19 @@ type ProjectsLocationsInstancesFailoverResource =
                      ReqBody '[JSON] FailoverInstanceRequest :>
                        Post '[JSON] Operation
 
--- | Failover the master role to current replica node against a specific
--- STANDARD tier redis instance.
+-- | Initiates a failover of the primary node to current replica node for a
+-- specific STANDARD tier Cloud Memorystore for Redis instance.
 --
 -- /See:/ 'projectsLocationsInstancesFailover' smart constructor.
 data ProjectsLocationsInstancesFailover =
   ProjectsLocationsInstancesFailover'
-    { _plifXgafv          :: !(Maybe Xgafv)
+    { _plifXgafv :: !(Maybe Xgafv)
     , _plifUploadProtocol :: !(Maybe Text)
-    , _plifAccessToken    :: !(Maybe Text)
-    , _plifUploadType     :: !(Maybe Text)
-    , _plifPayload        :: !FailoverInstanceRequest
-    , _plifName           :: !Text
-    , _plifCallback       :: !(Maybe Text)
+    , _plifAccessToken :: !(Maybe Text)
+    , _plifUploadType :: !(Maybe Text)
+    , _plifPayload :: !FailoverInstanceRequest
+    , _plifName :: !Text
+    , _plifCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +140,7 @@ plifPayload
 
 -- | Required. Redis instance resource name using the form:
 -- \`projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}\`
--- where \`location_id\` refers to a GCP region
+-- where \`location_id\` refers to a GCP region.
 plifName :: Lens' ProjectsLocationsInstancesFailover Text
 plifName = lens _plifName (\ s a -> s{_plifName = a})
 

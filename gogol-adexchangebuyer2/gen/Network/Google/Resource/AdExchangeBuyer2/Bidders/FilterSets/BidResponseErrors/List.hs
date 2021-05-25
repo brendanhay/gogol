@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.BidResponseEr
     , bfsbrelCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.bidResponseErrors.list@ method which the
 -- 'BiddersFilterSetsBidResponseErrorsList' request conforms to.
@@ -69,14 +69,14 @@ type BiddersFilterSetsBidResponseErrorsListResource =
 -- /See:/ 'biddersFilterSetsBidResponseErrorsList' smart constructor.
 data BiddersFilterSetsBidResponseErrorsList =
   BiddersFilterSetsBidResponseErrorsList'
-    { _bfsbrelXgafv          :: !(Maybe Xgafv)
+    { _bfsbrelXgafv :: !(Maybe Xgafv)
     , _bfsbrelUploadProtocol :: !(Maybe Text)
-    , _bfsbrelFilterSetName  :: !Text
-    , _bfsbrelAccessToken    :: !(Maybe Text)
-    , _bfsbrelUploadType     :: !(Maybe Text)
-    , _bfsbrelPageToken      :: !(Maybe Text)
-    , _bfsbrelPageSize       :: !(Maybe (Textual Int32))
-    , _bfsbrelCallback       :: !(Maybe Text)
+    , _bfsbrelFilterSetName :: !Text
+    , _bfsbrelAccessToken :: !(Maybe Text)
+    , _bfsbrelUploadType :: !(Maybe Text)
+    , _bfsbrelPageToken :: !(Maybe Text)
+    , _bfsbrelPageSize :: !(Maybe (Textual Int32))
+    , _bfsbrelCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

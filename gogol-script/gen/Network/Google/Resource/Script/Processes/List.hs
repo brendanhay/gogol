@@ -52,27 +52,32 @@ module Network.Google.Resource.Script.Processes.List
     , plCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.processes.list@ method which the
 -- 'ProcessesList' request conforms to.
 type ProcessesListResource =
      "v1" :>
        "processes" :>
-         QueryParams "userProcessFilter.userAccessLevels" Text
+         QueryParams "userProcessFilter.userAccessLevels"
+           ProcessesListUserProcessFilterUserAccessLevels
            :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "userProcessFilter.functionName" Text :>
-                     QueryParams "userProcessFilter.types" Text :>
+                     QueryParams "userProcessFilter.types"
+                       ProcessesListUserProcessFilterTypes
+                       :>
                        QueryParam "userProcessFilter.deploymentId" Text :>
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" (Textual Int32) :>
                              QueryParam "userProcessFilter.projectName" Text :>
-                               QueryParams "userProcessFilter.statuses" Text :>
+                               QueryParams "userProcessFilter.statuses"
+                                 ProcessesListUserProcessFilterStatuses
+                                 :>
                                  QueryParam "userProcessFilter.scriptId" Text :>
                                    QueryParam "userProcessFilter.endTime"
                                      DateTime'
@@ -90,22 +95,22 @@ type ProcessesListResource =
 -- /See:/ 'processesList' smart constructor.
 data ProcessesList =
   ProcessesList'
-    { _plUserProcessFilterUserAccessLevels :: !(Maybe [Text])
-    , _plXgafv                             :: !(Maybe Xgafv)
-    , _plUploadProtocol                    :: !(Maybe Text)
-    , _plAccessToken                       :: !(Maybe Text)
-    , _plUploadType                        :: !(Maybe Text)
-    , _plUserProcessFilterFunctionName     :: !(Maybe Text)
-    , _plUserProcessFilterTypes            :: !(Maybe [Text])
-    , _plUserProcessFilterDeploymentId     :: !(Maybe Text)
-    , _plPageToken                         :: !(Maybe Text)
-    , _plPageSize                          :: !(Maybe (Textual Int32))
-    , _plUserProcessFilterProjectName      :: !(Maybe Text)
-    , _plUserProcessFilterStatuses         :: !(Maybe [Text])
-    , _plUserProcessFilterScriptId         :: !(Maybe Text)
-    , _plUserProcessFilterEndTime          :: !(Maybe DateTime')
-    , _plUserProcessFilterStartTime        :: !(Maybe DateTime')
-    , _plCallback                          :: !(Maybe Text)
+    { _plUserProcessFilterUserAccessLevels :: !(Maybe [ProcessesListUserProcessFilterUserAccessLevels])
+    , _plXgafv :: !(Maybe Xgafv)
+    , _plUploadProtocol :: !(Maybe Text)
+    , _plAccessToken :: !(Maybe Text)
+    , _plUploadType :: !(Maybe Text)
+    , _plUserProcessFilterFunctionName :: !(Maybe Text)
+    , _plUserProcessFilterTypes :: !(Maybe [ProcessesListUserProcessFilterTypes])
+    , _plUserProcessFilterDeploymentId :: !(Maybe Text)
+    , _plPageToken :: !(Maybe Text)
+    , _plPageSize :: !(Maybe (Textual Int32))
+    , _plUserProcessFilterProjectName :: !(Maybe Text)
+    , _plUserProcessFilterStatuses :: !(Maybe [ProcessesListUserProcessFilterStatuses])
+    , _plUserProcessFilterScriptId :: !(Maybe Text)
+    , _plUserProcessFilterEndTime :: !(Maybe DateTime')
+    , _plUserProcessFilterStartTime :: !(Maybe DateTime')
+    , _plCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -170,7 +175,7 @@ processesList =
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified user access levels.
-plUserProcessFilterUserAccessLevels :: Lens' ProcessesList [Text]
+plUserProcessFilterUserAccessLevels :: Lens' ProcessesList [ProcessesListUserProcessFilterUserAccessLevels]
 plUserProcessFilterUserAccessLevels
   = lens _plUserProcessFilterUserAccessLevels
       (\ s a ->
@@ -208,7 +213,7 @@ plUserProcessFilterFunctionName
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified process types.
-plUserProcessFilterTypes :: Lens' ProcessesList [Text]
+plUserProcessFilterTypes :: Lens' ProcessesList [ProcessesListUserProcessFilterTypes]
 plUserProcessFilterTypes
   = lens _plUserProcessFilterTypes
       (\ s a -> s{_plUserProcessFilterTypes = a})
@@ -245,7 +250,7 @@ plUserProcessFilterProjectName
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified process statuses.
-plUserProcessFilterStatuses :: Lens' ProcessesList [Text]
+plUserProcessFilterStatuses :: Lens' ProcessesList [ProcessesListUserProcessFilterStatuses]
 plUserProcessFilterStatuses
   = lens _plUserProcessFilterStatuses
       (\ s a -> s{_plUserProcessFilterStatuses = a})

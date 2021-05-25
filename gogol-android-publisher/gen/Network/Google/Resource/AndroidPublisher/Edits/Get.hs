@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the edit specified. Calls will fail if the
--- edit is no long active (e.g. has been deleted, superseded or expired).
+-- Gets an app edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.get@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Get
     (
     -- * REST Resource
@@ -34,12 +33,17 @@ module Network.Google.Resource.AndroidPublisher.Edits.Get
     , EditsGet
 
     -- * Request Lenses
+    , egXgafv
+    , egUploadProtocol
     , egPackageName
+    , egAccessToken
+    , egUploadType
     , egEditId
+    , egCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.get@ method which the
 -- 'EditsGet' request conforms to.
@@ -50,16 +54,25 @@ type EditsGetResource =
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] AppEdit
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] AppEdit
 
--- | Returns information about the edit specified. Calls will fail if the
--- edit is no long active (e.g. has been deleted, superseded or expired).
+-- | Gets an app edit.
 --
 -- /See:/ 'editsGet' smart constructor.
 data EditsGet =
   EditsGet'
-    { _egPackageName :: !Text
-    , _egEditId      :: !Text
+    { _egXgafv :: !(Maybe Xgafv)
+    , _egUploadProtocol :: !(Maybe Text)
+    , _egPackageName :: !Text
+    , _egAccessToken :: !(Maybe Text)
+    , _egUploadType :: !(Maybe Text)
+    , _egEditId :: !Text
+    , _egCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,34 +81,82 @@ data EditsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'egXgafv'
+--
+-- * 'egUploadProtocol'
+--
 -- * 'egPackageName'
 --
+-- * 'egAccessToken'
+--
+-- * 'egUploadType'
+--
 -- * 'egEditId'
+--
+-- * 'egCallback'
 editsGet
     :: Text -- ^ 'egPackageName'
     -> Text -- ^ 'egEditId'
     -> EditsGet
 editsGet pEgPackageName_ pEgEditId_ =
-  EditsGet' {_egPackageName = pEgPackageName_, _egEditId = pEgEditId_}
+  EditsGet'
+    { _egXgafv = Nothing
+    , _egUploadProtocol = Nothing
+    , _egPackageName = pEgPackageName_
+    , _egAccessToken = Nothing
+    , _egUploadType = Nothing
+    , _egEditId = pEgEditId_
+    , _egCallback = Nothing
+    }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+egXgafv :: Lens' EditsGet (Maybe Xgafv)
+egXgafv = lens _egXgafv (\ s a -> s{_egXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+egUploadProtocol :: Lens' EditsGet (Maybe Text)
+egUploadProtocol
+  = lens _egUploadProtocol
+      (\ s a -> s{_egUploadProtocol = a})
+
+-- | Package name of the app.
 egPackageName :: Lens' EditsGet Text
 egPackageName
   = lens _egPackageName
       (\ s a -> s{_egPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+egAccessToken :: Lens' EditsGet (Maybe Text)
+egAccessToken
+  = lens _egAccessToken
+      (\ s a -> s{_egAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+egUploadType :: Lens' EditsGet (Maybe Text)
+egUploadType
+  = lens _egUploadType (\ s a -> s{_egUploadType = a})
+
+-- | Identifier of the edit.
 egEditId :: Lens' EditsGet Text
 egEditId = lens _egEditId (\ s a -> s{_egEditId = a})
+
+-- | JSONP
+egCallback :: Lens' EditsGet (Maybe Text)
+egCallback
+  = lens _egCallback (\ s a -> s{_egCallback = a})
 
 instance GoogleRequest EditsGet where
         type Rs EditsGet = AppEdit
         type Scopes EditsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsGet'{..}
-          = go _egPackageName _egEditId (Just AltJSON)
+          = go _egPackageName _egEditId _egXgafv
+              _egUploadProtocol
+              _egAccessToken
+              _egUploadType
+              _egCallback
+              (Just AltJSON)
               androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsGetResource)

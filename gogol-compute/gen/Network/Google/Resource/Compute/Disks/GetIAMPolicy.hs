@@ -37,10 +37,11 @@ module Network.Google.Resource.Compute.Disks.GetIAMPolicy
     , dgipProject
     , dgipZone
     , dgipResource
+    , dgipOptionsRequestedPolicyVersion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.getIamPolicy@ method which the
 -- 'DisksGetIAMPolicy' request conforms to.
@@ -54,7 +55,9 @@ type DisksGetIAMPolicyResource =
                  "disks" :>
                    Capture "resource" Text :>
                      "getIamPolicy" :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                       QueryParam "optionsRequestedPolicyVersion"
+                         (Textual Int32)
+                         :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -62,9 +65,10 @@ type DisksGetIAMPolicyResource =
 -- /See:/ 'disksGetIAMPolicy' smart constructor.
 data DisksGetIAMPolicy =
   DisksGetIAMPolicy'
-    { _dgipProject  :: !Text
-    , _dgipZone     :: !Text
+    { _dgipProject :: !Text
+    , _dgipZone :: !Text
     , _dgipResource :: !Text
+    , _dgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,6 +82,8 @@ data DisksGetIAMPolicy =
 -- * 'dgipZone'
 --
 -- * 'dgipResource'
+--
+-- * 'dgipOptionsRequestedPolicyVersion'
 disksGetIAMPolicy
     :: Text -- ^ 'dgipProject'
     -> Text -- ^ 'dgipZone'
@@ -88,6 +94,7 @@ disksGetIAMPolicy pDgipProject_ pDgipZone_ pDgipResource_ =
     { _dgipProject = pDgipProject_
     , _dgipZone = pDgipZone_
     , _dgipResource = pDgipResource_
+    , _dgipOptionsRequestedPolicyVersion = Nothing
     }
 
 
@@ -105,6 +112,13 @@ dgipResource :: Lens' DisksGetIAMPolicy Text
 dgipResource
   = lens _dgipResource (\ s a -> s{_dgipResource = a})
 
+-- | Requested IAM Policy version.
+dgipOptionsRequestedPolicyVersion :: Lens' DisksGetIAMPolicy (Maybe Int32)
+dgipOptionsRequestedPolicyVersion
+  = lens _dgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_dgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 instance GoogleRequest DisksGetIAMPolicy where
         type Rs DisksGetIAMPolicy = Policy
         type Scopes DisksGetIAMPolicy =
@@ -113,6 +127,7 @@ instance GoogleRequest DisksGetIAMPolicy where
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DisksGetIAMPolicy'{..}
           = go _dgipProject _dgipZone _dgipResource
+              _dgipOptionsRequestedPolicyVersion
               (Just AltJSON)
               computeService
           where go

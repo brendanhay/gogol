@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Run.
+A client library for the Google Cloud Run Admin.
 
 
 ## Contribute

@@ -36,10 +36,11 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
     , doaciBucket
     , doaciPayload
     , doaciUserProject
+    , doaciProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.insert@ method which the
 -- 'DefaultObjectAccessControlsInsert' request conforms to.
@@ -50,18 +51,20 @@ type DefaultObjectAccessControlsInsertResource =
            Capture "bucket" Text :>
              "defaultObjectAcl" :>
                QueryParam "userProject" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ObjectAccessControl :>
-                     Post '[JSON] ObjectAccessControl
+                 QueryParam "provisionalUserProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ObjectAccessControl :>
+                       Post '[JSON] ObjectAccessControl
 
 -- | Creates a new default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsInsert' smart constructor.
 data DefaultObjectAccessControlsInsert =
   DefaultObjectAccessControlsInsert'
-    { _doaciBucket      :: !Text
-    , _doaciPayload     :: !ObjectAccessControl
+    { _doaciBucket :: !Text
+    , _doaciPayload :: !ObjectAccessControl
     , _doaciUserProject :: !(Maybe Text)
+    , _doaciProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,6 +78,8 @@ data DefaultObjectAccessControlsInsert =
 -- * 'doaciPayload'
 --
 -- * 'doaciUserProject'
+--
+-- * 'doaciProvisionalUserProject'
 defaultObjectAccessControlsInsert
     :: Text -- ^ 'doaciBucket'
     -> ObjectAccessControl -- ^ 'doaciPayload'
@@ -84,6 +89,7 @@ defaultObjectAccessControlsInsert pDoaciBucket_ pDoaciPayload_ =
     { _doaciBucket = pDoaciBucket_
     , _doaciPayload = pDoaciPayload_
     , _doaciUserProject = Nothing
+    , _doaciProvisionalUserProject = Nothing
     }
 
 
@@ -104,6 +110,13 @@ doaciUserProject
   = lens _doaciUserProject
       (\ s a -> s{_doaciUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+doaciProvisionalUserProject :: Lens' DefaultObjectAccessControlsInsert (Maybe Text)
+doaciProvisionalUserProject
+  = lens _doaciProvisionalUserProject
+      (\ s a -> s{_doaciProvisionalUserProject = a})
+
 instance GoogleRequest
            DefaultObjectAccessControlsInsert
          where
@@ -113,7 +126,9 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsInsert'{..}
-          = go _doaciBucket _doaciUserProject (Just AltJSON)
+          = go _doaciBucket _doaciUserProject
+              _doaciProvisionalUserProject
+              (Just AltJSON)
               _doaciPayload
               storageService
           where go

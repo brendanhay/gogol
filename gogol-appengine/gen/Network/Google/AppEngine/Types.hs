@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -26,6 +26,12 @@ module Network.Google.AppEngine.Types
 
     -- * ApplicationServingStatus
     , ApplicationServingStatus (..)
+
+    -- * AppsAuthorizedCertificatesListView
+    , AppsAuthorizedCertificatesListView (..)
+
+    -- * VersionInboundServicesItem
+    , VersionInboundServicesItem (..)
 
     -- * URLMapLogin
     , URLMapLogin (..)
@@ -58,6 +64,9 @@ module Network.Google.AppEngine.Types
     , authorizedDomain
     , adName
     , adId
+
+    -- * InstanceVMLiveness
+    , InstanceVMLiveness (..)
 
     -- * TrafficSplit
     , TrafficSplit
@@ -149,6 +158,7 @@ module Network.Google.AppEngine.Types
     , VPCAccessConnector
     , vpcAccessConnector
     , vacName
+    , vacEgressSetting
 
     -- * APIConfigHandler
     , APIConfigHandler
@@ -178,6 +188,7 @@ module Network.Google.AppEngine.Types
     , aGcrDomain
     , aFeatureSettings
     , aName
+    , aDatabaseType
     , aDispatchRules
     , aDefaultBucket
     , aId
@@ -195,6 +206,7 @@ module Network.Google.AppEngine.Types
     , sSplit
     , sName
     , sId
+    , sNetworkSettings
 
     -- * ErrorHandlerErrorCode
     , ErrorHandlerErrorCode (..)
@@ -285,6 +297,9 @@ module Network.Google.AppEngine.Types
     , createVersionMetadataV1Alpha
     , cvmvaCloudBuildId
 
+    -- * AppsAuthorizedCertificatesGetView
+    , AppsAuthorizedCertificatesGetView (..)
+
     -- * FileInfo
     , FileInfo
     , fileInfo
@@ -341,6 +356,9 @@ module Network.Google.AppEngine.Types
     , nInstanceTag
     , nName
 
+    -- * AppsServicesVersionsGetView
+    , AppsServicesVersionsGetView (..)
+
     -- * APIConfigHandlerAuthFailAction
     , APIConfigHandlerAuthFailAction (..)
 
@@ -375,6 +393,7 @@ module Network.Google.AppEngine.Types
     , resources
     , rMemoryGb
     , rDiskGb
+    , rKmsKeyReference
     , rVolumes
     , rCPU
 
@@ -389,6 +408,9 @@ module Network.Google.AppEngine.Types
     , certificateRawData
     , crdPrivateKey
     , crdPublicCertificate
+
+    -- * NetworkSettingsIngressTrafficAllowed
+    , NetworkSettingsIngressTrafficAllowed (..)
 
     -- * DomainMApping
     , DomainMApping
@@ -417,6 +439,11 @@ module Network.Google.AppEngine.Types
     , cuAggregationWindowLength
     , cuTargetUtilization
 
+    -- * VersionBuildEnvVariables
+    , VersionBuildEnvVariables
+    , versionBuildEnvVariables
+    , vbevAddtional
+
     -- * CreateVersionMetadataV1
     , CreateVersionMetadataV1
     , createVersionMetadataV1
@@ -432,6 +459,9 @@ module Network.Google.AppEngine.Types
     , cloudBuildOptions
     , cboCloudBuildTimeout
     , cboAppYamlPath
+
+    -- * ApplicationDatabaseType
+    , ApplicationDatabaseType (..)
 
     -- * ManualScaling
     , ManualScaling
@@ -486,6 +516,7 @@ module Network.Google.AppEngine.Types
     , verReadinessCheck
     , verNetwork
     , verResources
+    , verServiceAccount
     , verName
     , verThreadsafe
     , verBetaSettings
@@ -495,6 +526,7 @@ module Network.Google.AppEngine.Types
     , verId
     , verEnvVariables
     , verLivenessCheck
+    , verBuildEnvVariables
     , verRuntimeAPIVersion
     , verServingStatus
     , verDiskUsageBytes
@@ -502,6 +534,9 @@ module Network.Google.AppEngine.Types
     , verLibraries
     , verVersionURL
     , verDeployment
+
+    -- * AppsServicesVersionsListView
+    , AppsServicesVersionsListView (..)
 
     -- * Xgafv
     , Xgafv (..)
@@ -561,12 +596,20 @@ module Network.Google.AppEngine.Types
     , LocationMetadata
     , locationMetadata
     , lmStandardEnvironmentAvailable
+    , lmSearchAPIAvailable
     , lmFlexibleEnvironmentAvailable
 
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
     , omAddtional
+
+    -- * GoogleAppEngineV1betaLocationMetadata
+    , GoogleAppEngineV1betaLocationMetadata
+    , googleAppEngineV1betaLocationMetadata
+    , gaevlmStandardEnvironmentAvailable
+    , gaevlmSearchAPIAvailable
+    , gaevlmFlexibleEnvironmentAvailable
 
     -- * URLMapAuthFailAction
     , URLMapAuthFailAction (..)
@@ -603,11 +646,19 @@ module Network.Google.AppEngine.Types
     -- * URLMapRedirectHTTPResponseCode
     , URLMapRedirectHTTPResponseCode (..)
 
+    -- * NetworkSettings
+    , NetworkSettings
+    , networkSettings
+    , nsIngressTrafficAllowed
+
     -- * RequestUtilization
     , RequestUtilization
     , requestUtilization
     , ruTargetConcurrentRequests
     , ruTargetRequestCountPerSecond
+
+    -- * AppsDomainMAppingsCreateOverrideStrategy
+    , AppsDomainMAppingsCreateOverrideStrategy (..)
 
     -- * FirewallRuleAction
     , FirewallRuleAction (..)
@@ -646,6 +697,9 @@ module Network.Google.AppEngine.Types
     -- * APIConfigHandlerLogin
     , APIConfigHandlerLogin (..)
 
+    -- * VPCAccessConnectorEgressSetting
+    , VPCAccessConnectorEgressSetting (..)
+
     -- * ContainerInfo
     , ContainerInfo
     , containerInfo
@@ -660,6 +714,7 @@ module Network.Google.AppEngine.Types
     , iVMIP
     , iStartTime
     , iVMId
+    , iVMLiveness
     , iAvailability
     , iVMName
     , iName
@@ -687,9 +742,9 @@ module Network.Google.AppEngine.Types
     , dFiles
     ) where
 
-import           Network.Google.AppEngine.Types.Product
-import           Network.Google.AppEngine.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types.Product
+import Network.Google.AppEngine.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
 appEngineService :: ServiceConfig
@@ -705,6 +760,6 @@ cloudPlatformReadOnlyScope = Proxy
 appEngineAdminScope :: Proxy '["https://www.googleapis.com/auth/appengine.admin"]
 appEngineAdminScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

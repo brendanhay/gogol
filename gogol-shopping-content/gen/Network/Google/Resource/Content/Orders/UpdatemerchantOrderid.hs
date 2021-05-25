@@ -22,7 +22,7 @@
 --
 -- Updates the merchant order ID for a given order.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updatemerchantorderid@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.updatemerchantorderid@.
 module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
     , OrdersUpdatemerchantOrderid
 
     -- * Request Lenses
+    , ouoXgafv
     , ouoMerchantId
+    , ouoUploadProtocol
+    , ouoAccessToken
+    , ouoUploadType
     , ouoPayload
     , ouoOrderId
+    , ouoCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.updatemerchantorderid@ method which the
 -- 'OrdersUpdatemerchantOrderid' request conforms to.
@@ -50,18 +55,29 @@ type OrdersUpdatemerchantOrderidResource =
            "orders" :>
              Capture "orderId" Text :>
                "updateMerchantOrderId" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
-                     Post '[JSON] OrdersUpdateMerchantOrderIdResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest
+                               :>
+                               Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
 -- | Updates the merchant order ID for a given order.
 --
 -- /See:/ 'ordersUpdatemerchantOrderid' smart constructor.
 data OrdersUpdatemerchantOrderid =
   OrdersUpdatemerchantOrderid'
-    { _ouoMerchantId :: !(Textual Word64)
-    , _ouoPayload    :: !OrdersUpdateMerchantOrderIdRequest
-    , _ouoOrderId    :: !Text
+    { _ouoXgafv :: !(Maybe Xgafv)
+    , _ouoMerchantId :: !(Textual Word64)
+    , _ouoUploadProtocol :: !(Maybe Text)
+    , _ouoAccessToken :: !(Maybe Text)
+    , _ouoUploadType :: !(Maybe Text)
+    , _ouoPayload :: !OrdersUpdateMerchantOrderIdRequest
+    , _ouoOrderId :: !Text
+    , _ouoCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +86,21 @@ data OrdersUpdatemerchantOrderid =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ouoXgafv'
+--
 -- * 'ouoMerchantId'
+--
+-- * 'ouoUploadProtocol'
+--
+-- * 'ouoAccessToken'
+--
+-- * 'ouoUploadType'
 --
 -- * 'ouoPayload'
 --
 -- * 'ouoOrderId'
+--
+-- * 'ouoCallback'
 ordersUpdatemerchantOrderid
     :: Word64 -- ^ 'ouoMerchantId'
     -> OrdersUpdateMerchantOrderIdRequest -- ^ 'ouoPayload'
@@ -82,11 +108,20 @@ ordersUpdatemerchantOrderid
     -> OrdersUpdatemerchantOrderid
 ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
   OrdersUpdatemerchantOrderid'
-    { _ouoMerchantId = _Coerce # pOuoMerchantId_
+    { _ouoXgafv = Nothing
+    , _ouoMerchantId = _Coerce # pOuoMerchantId_
+    , _ouoUploadProtocol = Nothing
+    , _ouoAccessToken = Nothing
+    , _ouoUploadType = Nothing
     , _ouoPayload = pOuoPayload_
     , _ouoOrderId = pOuoOrderId_
+    , _ouoCallback = Nothing
     }
 
+
+-- | V1 error format.
+ouoXgafv :: Lens' OrdersUpdatemerchantOrderid (Maybe Xgafv)
+ouoXgafv = lens _ouoXgafv (\ s a -> s{_ouoXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -95,6 +130,24 @@ ouoMerchantId
   = lens _ouoMerchantId
       (\ s a -> s{_ouoMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ouoUploadProtocol :: Lens' OrdersUpdatemerchantOrderid (Maybe Text)
+ouoUploadProtocol
+  = lens _ouoUploadProtocol
+      (\ s a -> s{_ouoUploadProtocol = a})
+
+-- | OAuth access token.
+ouoAccessToken :: Lens' OrdersUpdatemerchantOrderid (Maybe Text)
+ouoAccessToken
+  = lens _ouoAccessToken
+      (\ s a -> s{_ouoAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ouoUploadType :: Lens' OrdersUpdatemerchantOrderid (Maybe Text)
+ouoUploadType
+  = lens _ouoUploadType
+      (\ s a -> s{_ouoUploadType = a})
 
 -- | Multipart request metadata.
 ouoPayload :: Lens' OrdersUpdatemerchantOrderid OrdersUpdateMerchantOrderIdRequest
@@ -106,6 +159,11 @@ ouoOrderId :: Lens' OrdersUpdatemerchantOrderid Text
 ouoOrderId
   = lens _ouoOrderId (\ s a -> s{_ouoOrderId = a})
 
+-- | JSONP
+ouoCallback :: Lens' OrdersUpdatemerchantOrderid (Maybe Text)
+ouoCallback
+  = lens _ouoCallback (\ s a -> s{_ouoCallback = a})
+
 instance GoogleRequest OrdersUpdatemerchantOrderid
          where
         type Rs OrdersUpdatemerchantOrderid =
@@ -113,7 +171,12 @@ instance GoogleRequest OrdersUpdatemerchantOrderid
         type Scopes OrdersUpdatemerchantOrderid =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersUpdatemerchantOrderid'{..}
-          = go _ouoMerchantId _ouoOrderId (Just AltJSON)
+          = go _ouoMerchantId _ouoOrderId _ouoXgafv
+              _ouoUploadProtocol
+              _ouoAccessToken
+              _ouoUploadType
+              _ouoCallback
+              (Just AltJSON)
               _ouoPayload
               shoppingContentService
           where go

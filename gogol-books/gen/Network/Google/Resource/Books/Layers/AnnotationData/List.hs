@@ -22,7 +22,7 @@
 --
 -- Gets the annotation data for a volume and layer.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.annotationData.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.layers.annotationData.list@.
 module Network.Google.Resource.Books.Layers.AnnotationData.List
     (
     -- * REST Resource
@@ -33,10 +33,14 @@ module Network.Google.Resource.Books.Layers.AnnotationData.List
     , LayersAnnotationDataList
 
     -- * Request Lenses
+    , ladlXgafv
     , ladlW
+    , ladlUploadProtocol
     , ladlScale
     , ladlLocale
+    , ladlAccessToken
     , ladlContentVersion
+    , ladlUploadType
     , ladlUpdatedMax
     , ladlUpdatedMin
     , ladlAnnotationDataId
@@ -46,10 +50,11 @@ module Network.Google.Resource.Books.Layers.AnnotationData.List
     , ladlPageToken
     , ladlLayerId
     , ladlMaxResults
+    , ladlCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.layers.annotationData.list@ method which the
 -- 'LayersAnnotationDataList' request conforms to.
@@ -62,38 +67,49 @@ type LayersAnnotationDataListResource =
                Capture "layerId" Text :>
                  "data" :>
                    QueryParam "contentVersion" Text :>
-                     QueryParam "w" (Textual Int32) :>
-                       QueryParam "scale" (Textual Int32) :>
-                         QueryParam "locale" Text :>
-                           QueryParam "updatedMax" Text :>
-                             QueryParam "updatedMin" Text :>
-                               QueryParams "annotationDataId" Text :>
-                                 QueryParam "source" Text :>
-                                   QueryParam "h" (Textual Int32) :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "maxResults" (Textual Word32)
-                                         :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] AnnotationsData
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "w" (Textual Int32) :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "scale" (Textual Int32) :>
+                             QueryParam "locale" Text :>
+                               QueryParam "access_token" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "updatedMax" Text :>
+                                     QueryParam "updatedMin" Text :>
+                                       QueryParams "annotationDataId" Text :>
+                                         QueryParam "source" Text :>
+                                           QueryParam "h" (Textual Int32) :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "maxResults"
+                                                 (Textual Word32)
+                                                 :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" AltJSON :>
+                                                     Get '[JSON] AnnotationsData
 
 -- | Gets the annotation data for a volume and layer.
 --
 -- /See:/ 'layersAnnotationDataList' smart constructor.
 data LayersAnnotationDataList =
   LayersAnnotationDataList'
-    { _ladlW                :: !(Maybe (Textual Int32))
-    , _ladlScale            :: !(Maybe (Textual Int32))
-    , _ladlLocale           :: !(Maybe Text)
-    , _ladlContentVersion   :: !Text
-    , _ladlUpdatedMax       :: !(Maybe Text)
-    , _ladlUpdatedMin       :: !(Maybe Text)
+    { _ladlXgafv :: !(Maybe Xgafv)
+    , _ladlW :: !(Maybe (Textual Int32))
+    , _ladlUploadProtocol :: !(Maybe Text)
+    , _ladlScale :: !(Maybe (Textual Int32))
+    , _ladlLocale :: !(Maybe Text)
+    , _ladlAccessToken :: !(Maybe Text)
+    , _ladlContentVersion :: !Text
+    , _ladlUploadType :: !(Maybe Text)
+    , _ladlUpdatedMax :: !(Maybe Text)
+    , _ladlUpdatedMin :: !(Maybe Text)
     , _ladlAnnotationDataId :: !(Maybe [Text])
-    , _ladlVolumeId         :: !Text
-    , _ladlSource           :: !(Maybe Text)
-    , _ladlH                :: !(Maybe (Textual Int32))
-    , _ladlPageToken        :: !(Maybe Text)
-    , _ladlLayerId          :: !Text
-    , _ladlMaxResults       :: !(Maybe (Textual Word32))
+    , _ladlVolumeId :: !Text
+    , _ladlSource :: !(Maybe Text)
+    , _ladlH :: !(Maybe (Textual Int32))
+    , _ladlPageToken :: !(Maybe Text)
+    , _ladlLayerId :: !Text
+    , _ladlMaxResults :: !(Maybe (Textual Word32))
+    , _ladlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -102,13 +118,21 @@ data LayersAnnotationDataList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ladlXgafv'
+--
 -- * 'ladlW'
+--
+-- * 'ladlUploadProtocol'
 --
 -- * 'ladlScale'
 --
 -- * 'ladlLocale'
 --
+-- * 'ladlAccessToken'
+--
 -- * 'ladlContentVersion'
+--
+-- * 'ladlUploadType'
 --
 -- * 'ladlUpdatedMax'
 --
@@ -127,6 +151,8 @@ data LayersAnnotationDataList =
 -- * 'ladlLayerId'
 --
 -- * 'ladlMaxResults'
+--
+-- * 'ladlCallback'
 layersAnnotationDataList
     :: Text -- ^ 'ladlContentVersion'
     -> Text -- ^ 'ladlVolumeId'
@@ -134,10 +160,14 @@ layersAnnotationDataList
     -> LayersAnnotationDataList
 layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
   LayersAnnotationDataList'
-    { _ladlW = Nothing
+    { _ladlXgafv = Nothing
+    , _ladlW = Nothing
+    , _ladlUploadProtocol = Nothing
     , _ladlScale = Nothing
     , _ladlLocale = Nothing
+    , _ladlAccessToken = Nothing
     , _ladlContentVersion = pLadlContentVersion_
+    , _ladlUploadType = Nothing
     , _ladlUpdatedMax = Nothing
     , _ladlUpdatedMin = Nothing
     , _ladlAnnotationDataId = Nothing
@@ -147,8 +177,14 @@ layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
     , _ladlPageToken = Nothing
     , _ladlLayerId = pLadlLayerId_
     , _ladlMaxResults = Nothing
+    , _ladlCallback = Nothing
     }
 
+
+-- | V1 error format.
+ladlXgafv :: Lens' LayersAnnotationDataList (Maybe Xgafv)
+ladlXgafv
+  = lens _ladlXgafv (\ s a -> s{_ladlXgafv = a})
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
@@ -156,6 +192,12 @@ ladlW :: Lens' LayersAnnotationDataList (Maybe Int32)
 ladlW
   = lens _ladlW (\ s a -> s{_ladlW = a}) .
       mapping _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ladlUploadProtocol :: Lens' LayersAnnotationDataList (Maybe Text)
+ladlUploadProtocol
+  = lens _ladlUploadProtocol
+      (\ s a -> s{_ladlUploadProtocol = a})
 
 -- | The requested scale for the image.
 ladlScale :: Lens' LayersAnnotationDataList (Maybe Int32)
@@ -169,11 +211,23 @@ ladlLocale :: Lens' LayersAnnotationDataList (Maybe Text)
 ladlLocale
   = lens _ladlLocale (\ s a -> s{_ladlLocale = a})
 
+-- | OAuth access token.
+ladlAccessToken :: Lens' LayersAnnotationDataList (Maybe Text)
+ladlAccessToken
+  = lens _ladlAccessToken
+      (\ s a -> s{_ladlAccessToken = a})
+
 -- | The content version for the requested volume.
 ladlContentVersion :: Lens' LayersAnnotationDataList Text
 ladlContentVersion
   = lens _ladlContentVersion
       (\ s a -> s{_ladlContentVersion = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ladlUploadType :: Lens' LayersAnnotationDataList (Maybe Text)
+ladlUploadType
+  = lens _ladlUploadType
+      (\ s a -> s{_ladlUploadType = a})
 
 -- | RFC 3339 timestamp to restrict to items updated prior to this timestamp
 -- (exclusive).
@@ -233,6 +287,11 @@ ladlMaxResults
       (\ s a -> s{_ladlMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+ladlCallback :: Lens' LayersAnnotationDataList (Maybe Text)
+ladlCallback
+  = lens _ladlCallback (\ s a -> s{_ladlCallback = a})
+
 instance GoogleRequest LayersAnnotationDataList where
         type Rs LayersAnnotationDataList = AnnotationsData
         type Scopes LayersAnnotationDataList =
@@ -240,9 +299,13 @@ instance GoogleRequest LayersAnnotationDataList where
         requestClient LayersAnnotationDataList'{..}
           = go _ladlVolumeId _ladlLayerId
               (Just _ladlContentVersion)
+              _ladlXgafv
               _ladlW
+              _ladlUploadProtocol
               _ladlScale
               _ladlLocale
+              _ladlAccessToken
+              _ladlUploadType
               _ladlUpdatedMax
               _ladlUpdatedMin
               (_ladlAnnotationDataId ^. _Default)
@@ -250,6 +313,7 @@ instance GoogleRequest LayersAnnotationDataList where
               _ladlH
               _ladlPageToken
               _ladlMaxResults
+              _ladlCallback
               (Just AltJSON)
               booksService
           where go

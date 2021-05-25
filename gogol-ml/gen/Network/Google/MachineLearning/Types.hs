@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -20,6 +20,7 @@ module Network.Google.MachineLearning.Types
       machineLearningService
 
     -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
     -- * GoogleIAMV1__AuditConfig
@@ -28,27 +29,47 @@ module Network.Google.MachineLearning.Types
     , givacService
     , givacAuditLogConfigs
 
+    -- * GoogleCloudMlV1__Measurement
+    , GoogleCloudMlV1__Measurement
+    , googleCloudMlV1__Measurement
+    , gcmvmMetrics
+    , gcmvmElapsedTime
+    , gcmvmStepCount
+
     -- * GoogleCloudMlV1__Version
     , GoogleCloudMlV1__Version
     , googleCloudMlV1__Version
     , gcmvvFramework
     , gcmvvEtag
     , gcmvvState
+    , gcmvvRoutes
     , gcmvvAutoScaling
     , gcmvvPythonVersion
     , gcmvvRuntimeVersion
+    , gcmvvExplanationConfig
+    , gcmvvLastMigrationModelId
     , gcmvvLastUseTime
+    , gcmvvServiceAccount
     , gcmvvName
     , gcmvvPackageURIs
+    , gcmvvContainer
     , gcmvvDeploymentURI
     , gcmvvManualScaling
+    , gcmvvAcceleratorConfig
     , gcmvvMachineType
     , gcmvvLabels
+    , gcmvvRequestLoggingConfig
     , gcmvvPredictionClass
+    , gcmvvLastMigrationTime
     , gcmvvErrorMessage
     , gcmvvDescription
     , gcmvvCreateTime
     , gcmvvIsDefault
+
+    -- * GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig
+    , GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig
+    , googleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig
+    , gcmvascmascUseElapsedTime
 
     -- * GoogleCloudMlV1__PredictionOutput
     , GoogleCloudMlV1__PredictionOutput
@@ -58,6 +79,19 @@ module Network.Google.MachineLearning.Types
     , gcmvpoPredictionCount
     , gcmvpoOutputPath
 
+    -- * GoogleCloudMlV1__StudyConfigAlgorithm
+    , GoogleCloudMlV1__StudyConfigAlgorithm (..)
+
+    -- * GoogleCloudMlV1__SampledShapleyAttribution
+    , GoogleCloudMlV1__SampledShapleyAttribution
+    , googleCloudMlV1__SampledShapleyAttribution
+    , gcmvssaNumPaths
+
+    -- * GoogleCloudMlV1__HyperparameterOutputWebAccessURIs
+    , GoogleCloudMlV1__HyperparameterOutputWebAccessURIs
+    , googleCloudMlV1__HyperparameterOutputWebAccessURIs
+    , gcmvhowauAddtional
+
     -- * GoogleCloudMlV1__BuiltInAlgorithmOutput
     , GoogleCloudMlV1__BuiltInAlgorithmOutput
     , googleCloudMlV1__BuiltInAlgorithmOutput
@@ -66,18 +100,44 @@ module Network.Google.MachineLearning.Types
     , gcmvbiaoRuntimeVersion
     , gcmvbiaoModelPath
 
+    -- * GoogleCloudMlV1_StudyConfig_ParameterSpecType
+    , GoogleCloudMlV1_StudyConfig_ParameterSpecType (..)
+
     -- * GoogleCloudMlV1__HyperparameterOutputHyperparameters
     , GoogleCloudMlV1__HyperparameterOutputHyperparameters
     , googleCloudMlV1__HyperparameterOutputHyperparameters
     , gcmvhohAddtional
+
+    -- * GoogleCloudMlV1__AutomatedStoppingConfig
+    , GoogleCloudMlV1__AutomatedStoppingConfig
+    , googleCloudMlV1__AutomatedStoppingConfig
+    , gcmvascDecayCurveStoppingConfig
+    , gcmvascMedianAutomatedStoppingConfig
 
     -- * GoogleCloudMlV1__PredictRequest
     , GoogleCloudMlV1__PredictRequest
     , googleCloudMlV1__PredictRequest
     , gcmvprHTTPBody
 
+    -- * GoogleCloudMlV1__SuggestTrialsRequest
+    , GoogleCloudMlV1__SuggestTrialsRequest
+    , googleCloudMlV1__SuggestTrialsRequest
+    , gcmvstrClientId
+    , gcmvstrSuggestionCount
+
     -- * GoogleCloudMlV1__ParameterSpecType
     , GoogleCloudMlV1__ParameterSpecType (..)
+
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec
+    , gcmvscpsdvsValues
+
+    -- * GoogleCloudMlV1_StudyConfig_MetricSpec
+    , GoogleCloudMlV1_StudyConfig_MetricSpec
+    , googleCloudMlV1_StudyConfig_MetricSpec
+    , gcmvscmsMetric
+    , gcmvscmsGoal
 
     -- * GoogleCloudMlV1__TrainingInputScaleTier
     , GoogleCloudMlV1__TrainingInputScaleTier (..)
@@ -90,6 +150,18 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1__ParameterSpecScaleType
     , GoogleCloudMlV1__ParameterSpecScaleType (..)
 
+    -- * GoogleCloudMlV1__XraiAttribution
+    , GoogleCloudMlV1__XraiAttribution
+    , googleCloudMlV1__XraiAttribution
+    , gcmvxaNumIntegralSteps
+
+    -- * GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
+    , GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
+    , googleCloudMlV1__CheckTrialEarlyStoppingStateResponse
+    , gcmvctessrStartTime
+    , gcmvctessrShouldStop
+    , gcmvctessrEndTime
+
     -- * GoogleIAMV1__AuditLogConfig
     , GoogleIAMV1__AuditLogConfig
     , googleIAMV1__AuditLogConfig
@@ -99,6 +171,31 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1__VersionFramework
     , GoogleCloudMlV1__VersionFramework (..)
 
+    -- * GoogleCloudMlV1__SuggestTrialsResponse
+    , GoogleCloudMlV1__SuggestTrialsResponse
+    , googleCloudMlV1__SuggestTrialsResponse
+    , gcmvstrStartTime
+    , gcmvstrStudyState
+    , gcmvstrEndTime
+    , gcmvstrTrials
+
+    -- * GoogleCloudMlV1__MetricSpecName
+    , GoogleCloudMlV1__MetricSpecName (..)
+
+    -- * GoogleCloudMlV1__SuggestTrialsResponseStudyState
+    , GoogleCloudMlV1__SuggestTrialsResponseStudyState (..)
+
+    -- * GoogleCloudMlV1_Measurement_Metric
+    , GoogleCloudMlV1_Measurement_Metric
+    , googleCloudMlV1_Measurement_Metric
+    , gcmvmmValue
+    , gcmvmmMetric
+
+    -- * GoogleCloudMlV1__ExplainRequest
+    , GoogleCloudMlV1__ExplainRequest
+    , googleCloudMlV1__ExplainRequest
+    , gcmverHTTPBody
+
     -- * GoogleCloudMlV1__ListModelsResponse
     , GoogleCloudMlV1__ListModelsResponse
     , googleCloudMlV1__ListModelsResponse
@@ -107,6 +204,11 @@ module Network.Google.MachineLearning.Types
 
     -- * GoogleCloudMlV1__VersionState
     , GoogleCloudMlV1__VersionState (..)
+
+    -- * GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig
+    , GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig
+    , googleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig
+    , gcmvascdcascUseElapsedTime
 
     -- * GoogleLongrunning__ListOperationsResponse
     , GoogleLongrunning__ListOperationsResponse
@@ -133,6 +235,11 @@ module Network.Google.MachineLearning.Types
     , googleIAMV1__TestIAMPermissionsResponse
     , givtiprPermissions
 
+    -- * GoogleCloudMlV1__EncryptionConfig
+    , GoogleCloudMlV1__EncryptionConfig
+    , googleCloudMlV1__EncryptionConfig
+    , gcmvecKmsKeyName
+
     -- * GoogleCloudMlV1__HyperparameterSpecAlgorithm
     , GoogleCloudMlV1__HyperparameterSpecAlgorithm (..)
 
@@ -142,11 +249,30 @@ module Network.Google.MachineLearning.Types
     , gcmvljrNextPageToken
     , gcmvljrJobs
 
+    -- * GoogleCloudMlV1__StudyConfig
+    , GoogleCloudMlV1__StudyConfig
+    , googleCloudMlV1__StudyConfig
+    , gcmvscMetrics
+    , gcmvscAutomatedStoppingConfig
+    , gcmvscAlgorithm
+    , gcmvscParameters
+
+    -- * GoogleCloudMlV1__SuggestTrialsMetadata
+    , GoogleCloudMlV1__SuggestTrialsMetadata
+    , googleCloudMlV1__SuggestTrialsMetadata
+    , gcmvstmClientId
+    , gcmvstmSuggestionCount
+    , gcmvstmStudy
+    , gcmvstmCreateTime
+
     -- * GoogleCloudMlV1__ListVersionsResponse
     , GoogleCloudMlV1__ListVersionsResponse
     , googleCloudMlV1__ListVersionsResponse
     , gcmvlvrNextPageToken
     , gcmvlvrVersions
+
+    -- * GoogleCloudMlV1__CapabilityAvailableAcceleratorsItem
+    , GoogleCloudMlV1__CapabilityAvailableAcceleratorsItem (..)
 
     -- * GoogleType__Expr
     , GoogleType__Expr
@@ -156,11 +282,20 @@ module Network.Google.MachineLearning.Types
     , gteTitle
     , gteDescription
 
+    -- * GoogleCloudMlV1__ListOptimalTrialsRequest
+    , GoogleCloudMlV1__ListOptimalTrialsRequest
+    , googleCloudMlV1__ListOptimalTrialsRequest
+
     -- * GoogleCloudMlV1__JobState
     , GoogleCloudMlV1__JobState (..)
 
     -- * GoogleCloudMlV1__PredictionInputDataFormat
     , GoogleCloudMlV1__PredictionInputDataFormat (..)
+
+    -- * GoogleCloudMlV1__ListStudiesResponse
+    , GoogleCloudMlV1__ListStudiesResponse
+    , googleCloudMlV1__ListStudiesResponse
+    , gcmvlsrStudies
 
     -- * GoogleCloudMlV1__CapabilityType
     , GoogleCloudMlV1__CapabilityType (..)
@@ -168,12 +303,19 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1__HyperparameterOutput
     , GoogleCloudMlV1__HyperparameterOutput
     , googleCloudMlV1__HyperparameterOutput
+    , gcmvhoState
     , gcmvhoIsTrialStoppedEarly
+    , gcmvhoStartTime
     , gcmvhoAllMetrics
     , gcmvhoHyperparameters
     , gcmvhoTrialId
+    , gcmvhoEndTime
     , gcmvhoFinalMetric
     , gcmvhoBuiltInAlgorithmOutput
+    , gcmvhoWebAccessURIs
+
+    -- * GoogleCloudMlV1__StudyState
+    , GoogleCloudMlV1__StudyState (..)
 
     -- * GoogleCloudMlV1__GetConfigResponse
     , GoogleCloudMlV1__GetConfigResponse
@@ -184,6 +326,15 @@ module Network.Google.MachineLearning.Types
 
     -- * GoogleCloudMlV1__PredictionInputOutputDataFormat
     , GoogleCloudMlV1__PredictionInputOutputDataFormat (..)
+
+    -- * GoogleCloudMlV1__Study
+    , GoogleCloudMlV1__Study
+    , googleCloudMlV1__Study
+    , gcmvsState
+    , gcmvsName
+    , gcmvsInactiveReason
+    , gcmvsStudyConfig
+    , gcmvsCreateTime
 
     -- * GoogleCloudMlV1__ManualScaling
     , GoogleCloudMlV1__ManualScaling
@@ -247,6 +398,11 @@ module Network.Google.MachineLearning.Types
     , googleCloudMlV1__JobLabels
     , gcmvjlAddtional
 
+    -- * GoogleCloudMlV1__ListOptimalTrialsResponse
+    , GoogleCloudMlV1__ListOptimalTrialsResponse
+    , googleCloudMlV1__ListOptimalTrialsResponse
+    , gcmvlotrTrials
+
     -- * GoogleRpc__Status
     , GoogleRpc__Status
     , googleRpc__Status
@@ -257,8 +413,12 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1__ReplicaConfig
     , GoogleCloudMlV1__ReplicaConfig
     , googleCloudMlV1__ReplicaConfig
+    , gcmvrcDiskConfig
+    , gcmvrcContainerCommand
     , gcmvrcImageURI
     , gcmvrcAcceleratorConfig
+    , gcmvrcContainerArgs
+    , gcmvrcTpuTfVersion
 
     -- * GoogleCloudMlV1__Config
     , GoogleCloudMlV1__Config
@@ -278,15 +438,109 @@ module Network.Google.MachineLearning.Types
     , gcmvhsMaxFailedTrials
     , gcmvhsHyperparameterMetricTag
 
+    -- * GoogleCloudMlV1__CompleteTrialRequest
+    , GoogleCloudMlV1__CompleteTrialRequest
+    , googleCloudMlV1__CompleteTrialRequest
+    , gcmvctrFinalMeasurement
+    , gcmvctrInfeasibleReason
+    , gcmvctrTrialInfeasible
+
+    -- * GoogleCloudMlV1__Trial
+    , GoogleCloudMlV1__Trial
+    , googleCloudMlV1__Trial
+    , gcmvtClientId
+    , gcmvtState
+    , gcmvtStartTime
+    , gcmvtFinalMeasurement
+    , gcmvtMeasurements
+    , gcmvtName
+    , gcmvtEndTime
+    , gcmvtParameters
+    , gcmvtInfeasibleReason
+    , gcmvtTrialInfeasible
+
     -- * GoogleCloudMlV1__AutoScaling
     , GoogleCloudMlV1__AutoScaling
     , googleCloudMlV1__AutoScaling
+    , gcmvasMetrics
     , gcmvasMinNodes
+    , gcmvasMaxNodes
+
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
+    , gcmvscpsdvsMaxValue
+    , gcmvscpsdvsMinValue
+
+    -- * GoogleCloudMlV1__ContainerSpec
+    , GoogleCloudMlV1__ContainerSpec
+    , googleCloudMlV1__ContainerSpec
+    , gcmvcsImage
+    , gcmvcsCommand
+    , gcmvcsArgs
+    , gcmvcsEnv
+    , gcmvcsPorts
 
     -- * GoogleLongrunning__OperationMetadata
     , GoogleLongrunning__OperationMetadata
     , googleLongrunning__OperationMetadata
     , glomAddtional
+
+    -- * GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest
+    , GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest
+    , googleCloudMlV1__CheckTrialEarlyStoppingStateRequest
+
+    -- * GoogleCloudMlV1_StudyConfig_ParameterSpecScaleType
+    , GoogleCloudMlV1_StudyConfig_ParameterSpecScaleType (..)
+
+    -- * GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatData
+    , GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatData
+    , googleCloudMlV1__CheckTrialEarlyStoppingStateMetatData
+    , gcmvctessmdTrial
+    , gcmvctessmdStudy
+    , gcmvctessmdCreateTime
+
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec
+    , gcmvscpscvsValues
+
+    -- * GoogleCloudMlV1_StudyConfig_ParameterSpec
+    , GoogleCloudMlV1_StudyConfig_ParameterSpec
+    , googleCloudMlV1_StudyConfig_ParameterSpec
+    , gcmvscpsParentCategoricalValues
+    , gcmvscpsDoubleValueSpec
+    , gcmvscpsParentIntValues
+    , gcmvscpsParentDiscreteValues
+    , gcmvscpsChildParameterSpecs
+    , gcmvscpsDiscreteValueSpec
+    , gcmvscpsScaleType
+    , gcmvscpsIntegerValueSpec
+    , gcmvscpsCategoricalValueSpec
+    , gcmvscpsType
+    , gcmvscpsParameter
+
+    -- * GoogleCloudMlV1_StudyConfig_MetricSpecGoal
+    , GoogleCloudMlV1_StudyConfig_MetricSpecGoal (..)
+
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
+    , gcmvscpsivsMaxValue
+    , gcmvscpsivsMinValue
+
+    -- * GoogleCloudMlV1__ExplanationConfig
+    , GoogleCloudMlV1__ExplanationConfig
+    , googleCloudMlV1__ExplanationConfig
+    , gcmvecIntegratedGradientsAttribution
+    , gcmvecXraiAttribution
+    , gcmvecSampledShapleyAttribution
+
+    -- * GoogleCloudMlV1__MetricSpec
+    , GoogleCloudMlV1__MetricSpec
+    , googleCloudMlV1__MetricSpec
+    , gcmvmsName
+    , gcmvmsTarget
 
     -- * GoogleCloudMlV1__ParameterSpec
     , GoogleCloudMlV1__ParameterSpec
@@ -309,11 +563,33 @@ module Network.Google.MachineLearning.Types
     , givbRole
     , givbCondition
 
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
+    , gcmvscpsmpdvsValues
+
     -- * GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
     , GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
     , googleCloudMlV1_HyperparameterOutput_HyperparameterMetric
     , gcmvhohmTrainingStep
     , gcmvhohmObjectiveValue
+
+    -- * GoogleCloudMlV1__StopTrialRequest
+    , GoogleCloudMlV1__StopTrialRequest
+    , googleCloudMlV1__StopTrialRequest
+
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
+    , gcmvscpsmpivsValues
+
+    -- * GoogleCloudMlV1_Trial_Parameter
+    , GoogleCloudMlV1_Trial_Parameter
+    , googleCloudMlV1_Trial_Parameter
+    , gcmvtpIntValue
+    , gcmvtpStringValue
+    , gcmvtpFloatValue
+    , gcmvtpParameter
 
     -- * GoogleIAMV1__SetIAMPolicyRequest
     , GoogleIAMV1__SetIAMPolicyRequest
@@ -337,6 +613,21 @@ module Network.Google.MachineLearning.Types
     , gcmvpiInputPaths
     , gcmvpiSignatureName
 
+    -- * GoogleCloudMlV1__IntegratedGradientsAttribution
+    , GoogleCloudMlV1__IntegratedGradientsAttribution
+    , googleCloudMlV1__IntegratedGradientsAttribution
+    , gcmvigaNumIntegralSteps
+
+    -- * GoogleCloudMlV1__TrainingOutputWebAccessURIs
+    , GoogleCloudMlV1__TrainingOutputWebAccessURIs
+    , googleCloudMlV1__TrainingOutputWebAccessURIs
+    , gcmvtowauAddtional
+
+    -- * GoogleCloudMlV1__ContainerPort
+    , GoogleCloudMlV1__ContainerPort
+    , googleCloudMlV1__ContainerPort
+    , gcmvcpContainerPort
+
     -- * GoogleCloudMlV1__TrainingInput
     , GoogleCloudMlV1__TrainingInput
     , googleCloudMlV1__TrainingInput
@@ -344,19 +635,39 @@ module Network.Google.MachineLearning.Types
     , gcmvtiWorkerConfig
     , gcmvtiParameterServerCount
     , gcmvtiArgs
+    , gcmvtiEnableWebAccess
+    , gcmvtiUseChiefInTfConfig
     , gcmvtiWorkerCount
     , gcmvtiJobDir
+    , gcmvtiEvaluatorCount
+    , gcmvtiEvaluatorType
+    , gcmvtiNetwork
     , gcmvtiPythonVersion
     , gcmvtiRuntimeVersion
     , gcmvtiWorkerType
     , gcmvtiMasterConfig
     , gcmvtiPythonModule
     , gcmvtiParameterServerType
+    , gcmvtiServiceAccount
     , gcmvtiHyperparameters
     , gcmvtiPackageURIs
     , gcmvtiScaleTier
+    , gcmvtiEncryptionConfig
     , gcmvtiRegion
+    , gcmvtiScheduling
     , gcmvtiParameterServerConfig
+    , gcmvtiEvaluatorConfig
+
+    -- * GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
+    , GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
+    , googleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
+    , gcmvscpsmpcvsValues
+
+    -- * GoogleCloudMlV1__RouteMap
+    , GoogleCloudMlV1__RouteMap
+    , googleCloudMlV1__RouteMap
+    , gcmvrmHealth
+    , gcmvrmPredict
 
     -- * GoogleRpc__StatusDetailsItem
     , GoogleRpc__StatusDetailsItem
@@ -369,6 +680,9 @@ module Network.Google.MachineLearning.Types
     -- * GoogleProtobuf__Empty
     , GoogleProtobuf__Empty
     , googleProtobuf__Empty
+
+    -- * GoogleCloudMlV1__TrialState
+    , GoogleCloudMlV1__TrialState (..)
 
     -- * GoogleCloudMlV1__Location
     , GoogleCloudMlV1__Location
@@ -403,6 +717,28 @@ module Network.Google.MachineLearning.Types
     , gcmvomOperationType
     , gcmvomCreateTime
 
+    -- * GoogleCloudMlV1__EnvVar
+    , GoogleCloudMlV1__EnvVar
+    , googleCloudMlV1__EnvVar
+    , gcmvevValue
+    , gcmvevName
+
+    -- * GoogleCloudMlV1__ListTrialsResponse
+    , GoogleCloudMlV1__ListTrialsResponse
+    , googleCloudMlV1__ListTrialsResponse
+    , gcmvltrTrials
+
+    -- * GoogleCloudMlV1__AddTrialMeasurementRequest
+    , GoogleCloudMlV1__AddTrialMeasurementRequest
+    , googleCloudMlV1__AddTrialMeasurementRequest
+    , gcmvatmrMeasurement
+
+    -- * GoogleCloudMlV1__RequestLoggingConfig
+    , GoogleCloudMlV1__RequestLoggingConfig
+    , googleCloudMlV1__RequestLoggingConfig
+    , gcmvrlcSamplingPercentage
+    , gcmvrlcBigQueryTableName
+
     -- * GoogleAPI__HTTPBodyExtensionsItem
     , GoogleAPI__HTTPBodyExtensionsItem
     , googleAPI__HTTPBodyExtensionsItem
@@ -412,6 +748,13 @@ module Network.Google.MachineLearning.Types
     , GoogleCloudMlV1__CancelJobRequest
     , googleCloudMlV1__CancelJobRequest
 
+    -- * GoogleCloudMlV1__Scheduling
+    , GoogleCloudMlV1__Scheduling
+    , googleCloudMlV1__Scheduling
+    , gcmvsMaxWaitTime
+    , gcmvsPriority
+    , gcmvsMaxRunningTime
+
     -- * GoogleCloudMlV1__TrainingOutput
     , GoogleCloudMlV1__TrainingOutput
     , googleCloudMlV1__TrainingOutput
@@ -420,6 +763,8 @@ module Network.Google.MachineLearning.Types
     , gcmvtoCompletedTrialCount
     , gcmvtoConsumedMLUnits
     , gcmvtoBuiltInAlgorithmOutput
+    , gcmvtoHyperparameterMetricTag
+    , gcmvtoWebAccessURIs
     , gcmvtoTrials
 
     -- * GoogleAPI__HTTPBody
@@ -440,22 +785,35 @@ module Network.Google.MachineLearning.Types
     , gcmvllrNextPageToken
     , gcmvllrLocations
 
+    -- * GoogleCloudMlV1__DiskConfig
+    , GoogleCloudMlV1__DiskConfig
+    , googleCloudMlV1__DiskConfig
+    , gcmvdcBootDiskType
+    , gcmvdcBootDiskSizeGb
+
     -- * GoogleCloudMlV1__VersionLabels
     , GoogleCloudMlV1__VersionLabels
     , googleCloudMlV1__VersionLabels
     , gcmvvlAddtional
+
+    -- * GoogleCloudMlV1__HyperparameterOutputState
+    , GoogleCloudMlV1__HyperparameterOutputState (..)
     ) where
 
-import           Network.Google.MachineLearning.Types.Product
-import           Network.Google.MachineLearning.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types.Product
+import Network.Google.MachineLearning.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Cloud Machine Learning Engine. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the AI Platform Training & Prediction API. This contains the host and root path used as a starting point for constructing service requests.
 machineLearningService :: ServiceConfig
 machineLearningService
   = defaultService (ServiceId "ml:v1")
       "ml.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy
+
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

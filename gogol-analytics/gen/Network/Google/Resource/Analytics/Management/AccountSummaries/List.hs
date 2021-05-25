@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.AccountSummaries.List
     , maslMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountSummaries.list@ method which the
 -- 'ManagementAccountSummariesList' request conforms to.

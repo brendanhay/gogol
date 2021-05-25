@@ -24,7 +24,7 @@
 -- FirestoreAdmin.ListFields only supports listing fields that have been
 -- explicitly overridden. To issue this query, call
 -- FirestoreAdmin.ListFields with the filter set to
--- \`indexConfig.usesAncestorConfig:false\`.
+-- \`indexConfig.usesAncestorConfig:false\` .
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference> for @firestore.projects.databases.collectionGroups.fields.list@.
 module Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.List
@@ -48,8 +48,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fie
     , pdcgflCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.fields.list@ method which the
 -- 'ProjectsDatabasesCollectionGroupsFieldsList' request conforms to.
@@ -74,20 +74,20 @@ type ProjectsDatabasesCollectionGroupsFieldsListResource
 -- FirestoreAdmin.ListFields only supports listing fields that have been
 -- explicitly overridden. To issue this query, call
 -- FirestoreAdmin.ListFields with the filter set to
--- \`indexConfig.usesAncestorConfig:false\`.
+-- \`indexConfig.usesAncestorConfig:false\` .
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsFieldsList' smart constructor.
 data ProjectsDatabasesCollectionGroupsFieldsList =
   ProjectsDatabasesCollectionGroupsFieldsList'
-    { _pdcgflParent         :: !Text
-    , _pdcgflXgafv          :: !(Maybe Xgafv)
+    { _pdcgflParent :: !Text
+    , _pdcgflXgafv :: !(Maybe Xgafv)
     , _pdcgflUploadProtocol :: !(Maybe Text)
-    , _pdcgflAccessToken    :: !(Maybe Text)
-    , _pdcgflUploadType     :: !(Maybe Text)
-    , _pdcgflFilter         :: !(Maybe Text)
-    , _pdcgflPageToken      :: !(Maybe Text)
-    , _pdcgflPageSize       :: !(Maybe (Textual Int32))
-    , _pdcgflCallback       :: !(Maybe Text)
+    , _pdcgflAccessToken :: !(Maybe Text)
+    , _pdcgflUploadType :: !(Maybe Text)
+    , _pdcgflFilter :: !(Maybe Text)
+    , _pdcgflPageToken :: !(Maybe Text)
+    , _pdcgflPageSize :: !(Maybe (Textual Int32))
+    , _pdcgflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,7 +130,7 @@ projectsDatabasesCollectionGroupsFieldsList pPdcgflParent_ =
     }
 
 
--- | A parent name of the form
+-- | Required. A parent name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\`
 pdcgflParent :: Lens' ProjectsDatabasesCollectionGroupsFieldsList Text
 pdcgflParent
@@ -162,8 +162,8 @@ pdcgflUploadType
 -- | The filter to apply to list results. Currently,
 -- FirestoreAdmin.ListFields only supports listing fields that have been
 -- explicitly overridden. To issue this query, call
--- FirestoreAdmin.ListFields with the filter set to
--- \`indexConfig.usesAncestorConfig:false\`.
+-- FirestoreAdmin.ListFields with a filter that includes
+-- \`indexConfig.usesAncestorConfig:false\` .
 pdcgflFilter :: Lens' ProjectsDatabasesCollectionGroupsFieldsList (Maybe Text)
 pdcgflFilter
   = lens _pdcgflFilter (\ s a -> s{_pdcgflFilter = a})

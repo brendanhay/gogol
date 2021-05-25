@@ -37,10 +37,11 @@ module Network.Google.Resource.Storage.Buckets.Delete
     , bdBucket
     , bdUserProject
     , bdIfMetagenerationNotMatch
+    , bdProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.delete@ method which the
 -- 'BucketsDelete' request conforms to.
@@ -52,17 +53,20 @@ type BucketsDeleteResource =
              QueryParam "ifMetagenerationMatch" (Textual Int64) :>
                QueryParam "userProject" Text :>
                  QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                   :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   :>
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --
 -- /See:/ 'bucketsDelete' smart constructor.
 data BucketsDelete =
   BucketsDelete'
-    { _bdIfMetagenerationMatch    :: !(Maybe (Textual Int64))
-    , _bdBucket                   :: !Text
-    , _bdUserProject              :: !(Maybe Text)
+    { _bdIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _bdBucket :: !Text
+    , _bdUserProject :: !(Maybe Text)
     , _bdIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
+    , _bdProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,6 +82,8 @@ data BucketsDelete =
 -- * 'bdUserProject'
 --
 -- * 'bdIfMetagenerationNotMatch'
+--
+-- * 'bdProvisionalUserProject'
 bucketsDelete
     :: Text -- ^ 'bdBucket'
     -> BucketsDelete
@@ -87,6 +93,7 @@ bucketsDelete pBdBucket_ =
     , _bdBucket = pBdBucket_
     , _bdUserProject = Nothing
     , _bdIfMetagenerationNotMatch = Nothing
+    , _bdProvisionalUserProject = Nothing
     }
 
 
@@ -117,6 +124,13 @@ bdIfMetagenerationNotMatch
       (\ s a -> s{_bdIfMetagenerationNotMatch = a})
       . mapping _Coerce
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+bdProvisionalUserProject :: Lens' BucketsDelete (Maybe Text)
+bdProvisionalUserProject
+  = lens _bdProvisionalUserProject
+      (\ s a -> s{_bdProvisionalUserProject = a})
+
 instance GoogleRequest BucketsDelete where
         type Rs BucketsDelete = ()
         type Scopes BucketsDelete =
@@ -127,6 +141,7 @@ instance GoogleRequest BucketsDelete where
           = go _bdBucket _bdIfMetagenerationMatch
               _bdUserProject
               _bdIfMetagenerationNotMatch
+              _bdProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

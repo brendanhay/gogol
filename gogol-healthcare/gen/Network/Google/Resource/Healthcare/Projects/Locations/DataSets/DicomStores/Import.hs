@@ -21,10 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Imports data into the DICOM store by copying it from the specified
--- source. For errors, the Operation will be populated with error details
--- (in the form of ImportDicomDataErrorDetails in error.details), which
--- will hold finer-grained error information. The metadata field type is
--- OperationMetadata.
+-- source. Errors are logged to Cloud Logging. For more information, see
+-- [Viewing error logs in Cloud
+-- Logging](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/logging).
+-- The metadata field type is OperationMetadata.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.import@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Import
@@ -46,14 +46,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsiCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.import@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresImport' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresImportResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "import" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,21 +65,21 @@ type ProjectsLocationsDataSetsDicomStoresImportResource
                        Post '[JSON] Operation
 
 -- | Imports data into the DICOM store by copying it from the specified
--- source. For errors, the Operation will be populated with error details
--- (in the form of ImportDicomDataErrorDetails in error.details), which
--- will hold finer-grained error information. The metadata field type is
--- OperationMetadata.
+-- source. Errors are logged to Cloud Logging. For more information, see
+-- [Viewing error logs in Cloud
+-- Logging](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/logging).
+-- The metadata field type is OperationMetadata.
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresImport' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresImport =
   ProjectsLocationsDataSetsDicomStoresImport'
-    { _pldsdsiXgafv          :: !(Maybe Xgafv)
+    { _pldsdsiXgafv :: !(Maybe Xgafv)
     , _pldsdsiUploadProtocol :: !(Maybe Text)
-    , _pldsdsiAccessToken    :: !(Maybe Text)
-    , _pldsdsiUploadType     :: !(Maybe Text)
-    , _pldsdsiPayload        :: !ImportDicomDataRequest
-    , _pldsdsiName           :: !Text
-    , _pldsdsiCallback       :: !(Maybe Text)
+    , _pldsdsiAccessToken :: !(Maybe Text)
+    , _pldsdsiUploadType :: !(Maybe Text)
+    , _pldsdsiPayload :: !ImportDicomDataRequest
+    , _pldsdsiName :: !Text
+    , _pldsdsiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,9 +146,9 @@ pldsdsiPayload
   = lens _pldsdsiPayload
       (\ s a -> s{_pldsdsiPayload = a})
 
--- | The name of the DICOM store resource into which the data is imported
--- (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store resource into which the data is imported.
+-- For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsiName :: Lens' ProjectsLocationsDataSetsDicomStoresImport Text
 pldsdsiName
   = lens _pldsdsiName (\ s a -> s{_pldsdsiName = a})

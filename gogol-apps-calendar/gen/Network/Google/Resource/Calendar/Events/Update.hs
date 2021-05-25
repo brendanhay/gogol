@@ -44,8 +44,8 @@ module Network.Google.Resource.Calendar.Events.Update
     , euEventId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.update@ method which the
 -- 'EventsUpdate' request conforms to.
@@ -71,14 +71,14 @@ type EventsUpdateResource =
 data EventsUpdate =
   EventsUpdate'
     { _euConferenceDataVersion :: !(Maybe (Textual Int32))
-    , _euCalendarId            :: !Text
-    , _euPayload               :: !Event
-    , _euMaxAttendees          :: !(Maybe (Textual Int32))
-    , _euSendNotifications     :: !(Maybe Bool)
-    , _euSupportsAttachments   :: !(Maybe Bool)
-    , _euSendUpdates           :: !(Maybe EventsUpdateSendUpdates)
-    , _euAlwaysIncludeEmail    :: !(Maybe Bool)
-    , _euEventId               :: !Text
+    , _euCalendarId :: !Text
+    , _euPayload :: !Event
+    , _euMaxAttendees :: !(Maybe (Textual Int32))
+    , _euSendNotifications :: !(Maybe Bool)
+    , _euSupportsAttachments :: !(Maybe Bool)
+    , _euSendUpdates :: !(Maybe EventsUpdateSendUpdates)
+    , _euAlwaysIncludeEmail :: !(Maybe Bool)
+    , _euEventId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -178,12 +178,10 @@ euSendUpdates
   = lens _euSendUpdates
       (\ s a -> s{_euSendUpdates = a})
 
--- | Whether to always include a value in the email field for the organizer,
--- creator and attendees, even if no real email is available (i.e. a
--- generated, non-working value will be provided). The use of this option
--- is discouraged and should only be used by clients which cannot handle
--- the absence of an email address value in the mentioned places. Optional.
--- The default is False.
+-- | Deprecated and ignored. A value will always be returned in the email
+-- field for the organizer, creator and attendees, even if no real email
+-- address is available (i.e. a generated, non-working value will be
+-- provided).
 euAlwaysIncludeEmail :: Lens' EventsUpdate (Maybe Bool)
 euAlwaysIncludeEmail
   = lens _euAlwaysIncludeEmail

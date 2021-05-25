@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.RegionBackendServices.Get
     , rbsgBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionBackendServices.get@ method which the
 -- 'RegionBackendServicesGet' request conforms to.
@@ -60,8 +60,8 @@ type RegionBackendServicesGetResource =
 -- /See:/ 'regionBackendServicesGet' smart constructor.
 data RegionBackendServicesGet =
   RegionBackendServicesGet'
-    { _rbsgProject        :: !Text
-    , _rbsgRegion         :: !Text
+    { _rbsgProject :: !Text
+    , _rbsgRegion :: !Text
     , _rbsgBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -23,7 +23,7 @@
 -- Creates a new notification channel, representing a single notification
 -- endpoint such as an email address, SMS number, or PagerDuty service.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.notificationChannels.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.create@.
 module Network.Google.Resource.Monitoring.Projects.NotificationChannels.Create
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Monitoring.Projects.NotificationChannels.Create
     , pnccCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.notificationChannels.create@ method which the
 -- 'ProjectsNotificationChannelsCreate' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsNotificationChannelsCreateResource =
 -- /See:/ 'projectsNotificationChannelsCreate' smart constructor.
 data ProjectsNotificationChannelsCreate =
   ProjectsNotificationChannelsCreate'
-    { _pnccXgafv          :: !(Maybe Xgafv)
+    { _pnccXgafv :: !(Maybe Xgafv)
     , _pnccUploadProtocol :: !(Maybe Text)
-    , _pnccAccessToken    :: !(Maybe Text)
-    , _pnccUploadType     :: !(Maybe Text)
-    , _pnccPayload        :: !NotificationChannel
-    , _pnccName           :: !Text
-    , _pnccCallback       :: !(Maybe Text)
+    , _pnccAccessToken :: !(Maybe Text)
+    , _pnccUploadType :: !(Maybe Text)
+    , _pnccPayload :: !NotificationChannel
+    , _pnccName :: !Text
+    , _pnccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,12 +139,13 @@ pnccPayload :: Lens' ProjectsNotificationChannelsCreate NotificationChannel
 pnccPayload
   = lens _pnccPayload (\ s a -> s{_pnccPayload = a})
 
--- | The project on which to execute the request. The format is:
--- projects\/[PROJECT_ID] Note that this names the container into which the
--- channel will be written. This does not name the newly created channel.
--- The resulting channel\'s name will have a normalized version of this
--- field as a prefix, but will add \/notificationChannels\/[CHANNEL_ID] to
--- identify the channel.
+-- | Required. The project
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3#project_name) on which
+-- to execute the request. The format is: projects\/[PROJECT_ID_OR_NUMBER]
+-- This names the container into which the channel will be written, this
+-- does not name the newly created channel. The resulting channel\'s name
+-- will have a normalized version of this field as a prefix, but will add
+-- \/notificationChannels\/[CHANNEL_ID] to identify the channel.
 pnccName :: Lens' ProjectsNotificationChannelsCreate Text
 pnccName = lens _pnccName (\ s a -> s{_pnccName = a})
 

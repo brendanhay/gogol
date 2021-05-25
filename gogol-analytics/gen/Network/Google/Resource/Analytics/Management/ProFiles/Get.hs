@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Get
     , mpfgAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.get@ method which the
 -- 'ManagementProFilesGet' request conforms to.
@@ -61,8 +61,8 @@ type ManagementProFilesGetResource =
 data ManagementProFilesGet =
   ManagementProFilesGet'
     { _mpfgWebPropertyId :: !Text
-    , _mpfgProFileId     :: !Text
-    , _mpfgAccountId     :: !Text
+    , _mpfgProFileId :: !Text
+    , _mpfgAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

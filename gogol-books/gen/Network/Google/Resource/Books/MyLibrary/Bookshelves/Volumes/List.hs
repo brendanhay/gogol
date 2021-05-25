@@ -22,7 +22,7 @@
 --
 -- Gets volume information for volumes on a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.volumes.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.bookshelves.volumes.list@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
     (
     -- * REST Resource
@@ -33,7 +33,11 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
     , MyLibraryBookshelvesVolumesList
 
     -- * Request Lenses
+    , mlbvlXgafv
+    , mlbvlUploadProtocol
     , mlbvlCountry
+    , mlbvlAccessToken
+    , mlbvlUploadType
     , mlbvlQ
     , mlbvlShelf
     , mlbvlSource
@@ -41,10 +45,11 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
     , mlbvlStartIndex
     , mlbvlMaxResults
     , mlbvlShowPreOrders
+    , mlbvlCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.volumes.list@ method which the
 -- 'MyLibraryBookshelvesVolumesList' request conforms to.
@@ -55,30 +60,41 @@ type MyLibraryBookshelvesVolumesListResource =
            "bookshelves" :>
              Capture "shelf" Text :>
                "volumes" :>
-                 QueryParam "country" Text :>
-                   QueryParam "q" Text :>
-                     QueryParam "source" Text :>
-                       QueryParam "projection"
-                         MyLibraryBookshelvesVolumesListProjection
-                         :>
-                         QueryParam "startIndex" (Textual Word32) :>
-                           QueryParam "maxResults" (Textual Word32) :>
-                             QueryParam "showPreorders" Bool :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "country" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "q" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "projection"
+                                 MyLibraryBookshelvesVolumesListProjection
+                                 :>
+                                 QueryParam "startIndex" (Textual Word32) :>
+                                   QueryParam "maxResults" (Textual Word32) :>
+                                     QueryParam "showPreorders" Bool :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] Volumes
 
 -- | Gets volume information for volumes on a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesVolumesList' smart constructor.
 data MyLibraryBookshelvesVolumesList =
   MyLibraryBookshelvesVolumesList'
-    { _mlbvlCountry       :: !(Maybe Text)
-    , _mlbvlQ             :: !(Maybe Text)
-    , _mlbvlShelf         :: !Text
-    , _mlbvlSource        :: !(Maybe Text)
-    , _mlbvlProjection    :: !(Maybe MyLibraryBookshelvesVolumesListProjection)
-    , _mlbvlStartIndex    :: !(Maybe (Textual Word32))
-    , _mlbvlMaxResults    :: !(Maybe (Textual Word32))
+    { _mlbvlXgafv :: !(Maybe Xgafv)
+    , _mlbvlUploadProtocol :: !(Maybe Text)
+    , _mlbvlCountry :: !(Maybe Text)
+    , _mlbvlAccessToken :: !(Maybe Text)
+    , _mlbvlUploadType :: !(Maybe Text)
+    , _mlbvlQ :: !(Maybe Text)
+    , _mlbvlShelf :: !Text
+    , _mlbvlSource :: !(Maybe Text)
+    , _mlbvlProjection :: !(Maybe MyLibraryBookshelvesVolumesListProjection)
+    , _mlbvlStartIndex :: !(Maybe (Textual Word32))
+    , _mlbvlMaxResults :: !(Maybe (Textual Word32))
     , _mlbvlShowPreOrders :: !(Maybe Bool)
+    , _mlbvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,7 +103,15 @@ data MyLibraryBookshelvesVolumesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlbvlXgafv'
+--
+-- * 'mlbvlUploadProtocol'
+--
 -- * 'mlbvlCountry'
+--
+-- * 'mlbvlAccessToken'
+--
+-- * 'mlbvlUploadType'
 --
 -- * 'mlbvlQ'
 --
@@ -102,12 +126,18 @@ data MyLibraryBookshelvesVolumesList =
 -- * 'mlbvlMaxResults'
 --
 -- * 'mlbvlShowPreOrders'
+--
+-- * 'mlbvlCallback'
 myLibraryBookshelvesVolumesList
     :: Text -- ^ 'mlbvlShelf'
     -> MyLibraryBookshelvesVolumesList
 myLibraryBookshelvesVolumesList pMlbvlShelf_ =
   MyLibraryBookshelvesVolumesList'
-    { _mlbvlCountry = Nothing
+    { _mlbvlXgafv = Nothing
+    , _mlbvlUploadProtocol = Nothing
+    , _mlbvlCountry = Nothing
+    , _mlbvlAccessToken = Nothing
+    , _mlbvlUploadType = Nothing
     , _mlbvlQ = Nothing
     , _mlbvlShelf = pMlbvlShelf_
     , _mlbvlSource = Nothing
@@ -115,13 +145,37 @@ myLibraryBookshelvesVolumesList pMlbvlShelf_ =
     , _mlbvlStartIndex = Nothing
     , _mlbvlMaxResults = Nothing
     , _mlbvlShowPreOrders = Nothing
+    , _mlbvlCallback = Nothing
     }
 
+
+-- | V1 error format.
+mlbvlXgafv :: Lens' MyLibraryBookshelvesVolumesList (Maybe Xgafv)
+mlbvlXgafv
+  = lens _mlbvlXgafv (\ s a -> s{_mlbvlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlbvlUploadProtocol :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
+mlbvlUploadProtocol
+  = lens _mlbvlUploadProtocol
+      (\ s a -> s{_mlbvlUploadProtocol = a})
 
 -- | ISO-3166-1 code to override the IP-based location.
 mlbvlCountry :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
 mlbvlCountry
   = lens _mlbvlCountry (\ s a -> s{_mlbvlCountry = a})
+
+-- | OAuth access token.
+mlbvlAccessToken :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
+mlbvlAccessToken
+  = lens _mlbvlAccessToken
+      (\ s a -> s{_mlbvlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlbvlUploadType :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
+mlbvlUploadType
+  = lens _mlbvlUploadType
+      (\ s a -> s{_mlbvlUploadType = a})
 
 -- | Full-text search query string in this bookshelf.
 mlbvlQ :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
@@ -163,6 +217,12 @@ mlbvlShowPreOrders
   = lens _mlbvlShowPreOrders
       (\ s a -> s{_mlbvlShowPreOrders = a})
 
+-- | JSONP
+mlbvlCallback :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
+mlbvlCallback
+  = lens _mlbvlCallback
+      (\ s a -> s{_mlbvlCallback = a})
+
 instance GoogleRequest
            MyLibraryBookshelvesVolumesList
          where
@@ -170,11 +230,17 @@ instance GoogleRequest
         type Scopes MyLibraryBookshelvesVolumesList =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesVolumesList'{..}
-          = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
+          = go _mlbvlShelf _mlbvlXgafv _mlbvlUploadProtocol
+              _mlbvlCountry
+              _mlbvlAccessToken
+              _mlbvlUploadType
+              _mlbvlQ
+              _mlbvlSource
               _mlbvlProjection
               _mlbvlStartIndex
               _mlbvlMaxResults
               _mlbvlShowPreOrders
+              _mlbvlCallback
               (Just AltJSON)
               booksService
           where go

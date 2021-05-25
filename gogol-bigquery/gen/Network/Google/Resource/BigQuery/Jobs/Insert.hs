@@ -37,8 +37,8 @@ module Network.Google.Resource.BigQuery.Jobs.Insert
     , jiProjectId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.insert@ method which the
 -- 'JobsInsert' request conforms to.
@@ -66,7 +66,7 @@ type JobsInsertResource =
 -- /See:/ 'jobsInsert' smart constructor.
 data JobsInsert =
   JobsInsert'
-    { _jiPayload   :: !Job
+    { _jiPayload :: !Job
     , _jiProjectId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

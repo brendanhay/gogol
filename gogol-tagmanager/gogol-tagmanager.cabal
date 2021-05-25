@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Accesses Tag Manager accounts and containers.
+    This API allows clients to access and modify container and tag
+    configuration.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -80,6 +81,12 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.List
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Revert
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get

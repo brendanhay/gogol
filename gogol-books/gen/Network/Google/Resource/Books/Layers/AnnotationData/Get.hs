@@ -22,7 +22,7 @@
 --
 -- Gets the annotation data.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.annotationData.get@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.layers.annotationData.get@.
 module Network.Google.Resource.Books.Layers.AnnotationData.Get
     (
     -- * REST Resource
@@ -33,20 +33,25 @@ module Network.Google.Resource.Books.Layers.AnnotationData.Get
     , LayersAnnotationDataGet
 
     -- * Request Lenses
+    , ladgXgafv
     , ladgW
+    , ladgUploadProtocol
     , ladgScale
     , ladgLocale
+    , ladgAccessToken
     , ladgContentVersion
+    , ladgUploadType
     , ladgAllowWebDefinitions
     , ladgAnnotationDataId
     , ladgVolumeId
     , ladgSource
     , ladgH
     , ladgLayerId
+    , ladgCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.layers.annotationData.get@ method which the
 -- 'LayersAnnotationDataGet' request conforms to.
@@ -60,30 +65,41 @@ type LayersAnnotationDataGetResource =
                  "data" :>
                    Capture "annotationDataId" Text :>
                      QueryParam "contentVersion" Text :>
-                       QueryParam "w" (Textual Int32) :>
-                         QueryParam "scale" (Textual Int32) :>
-                           QueryParam "locale" Text :>
-                             QueryParam "allowWebDefinitions" Bool :>
-                               QueryParam "source" Text :>
-                                 QueryParam "h" (Textual Int32) :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] AnnotationData
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "w" (Textual Int32) :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "scale" (Textual Int32) :>
+                               QueryParam "locale" Text :>
+                                 QueryParam "access_token" Text :>
+                                   QueryParam "uploadType" Text :>
+                                     QueryParam "allowWebDefinitions" Bool :>
+                                       QueryParam "source" Text :>
+                                         QueryParam "h" (Textual Int32) :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON]
+                                                 DictionaryAnnotationData
 
 -- | Gets the annotation data.
 --
 -- /See:/ 'layersAnnotationDataGet' smart constructor.
 data LayersAnnotationDataGet =
   LayersAnnotationDataGet'
-    { _ladgW                   :: !(Maybe (Textual Int32))
-    , _ladgScale               :: !(Maybe (Textual Int32))
-    , _ladgLocale              :: !(Maybe Text)
-    , _ladgContentVersion      :: !Text
+    { _ladgXgafv :: !(Maybe Xgafv)
+    , _ladgW :: !(Maybe (Textual Int32))
+    , _ladgUploadProtocol :: !(Maybe Text)
+    , _ladgScale :: !(Maybe (Textual Int32))
+    , _ladgLocale :: !(Maybe Text)
+    , _ladgAccessToken :: !(Maybe Text)
+    , _ladgContentVersion :: !Text
+    , _ladgUploadType :: !(Maybe Text)
     , _ladgAllowWebDefinitions :: !(Maybe Bool)
-    , _ladgAnnotationDataId    :: !Text
-    , _ladgVolumeId            :: !Text
-    , _ladgSource              :: !(Maybe Text)
-    , _ladgH                   :: !(Maybe (Textual Int32))
-    , _ladgLayerId             :: !Text
+    , _ladgAnnotationDataId :: !Text
+    , _ladgVolumeId :: !Text
+    , _ladgSource :: !(Maybe Text)
+    , _ladgH :: !(Maybe (Textual Int32))
+    , _ladgLayerId :: !Text
+    , _ladgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,13 +108,21 @@ data LayersAnnotationDataGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ladgXgafv'
+--
 -- * 'ladgW'
+--
+-- * 'ladgUploadProtocol'
 --
 -- * 'ladgScale'
 --
 -- * 'ladgLocale'
 --
+-- * 'ladgAccessToken'
+--
 -- * 'ladgContentVersion'
+--
+-- * 'ladgUploadType'
 --
 -- * 'ladgAllowWebDefinitions'
 --
@@ -111,6 +135,8 @@ data LayersAnnotationDataGet =
 -- * 'ladgH'
 --
 -- * 'ladgLayerId'
+--
+-- * 'ladgCallback'
 layersAnnotationDataGet
     :: Text -- ^ 'ladgContentVersion'
     -> Text -- ^ 'ladgAnnotationDataId'
@@ -119,18 +145,28 @@ layersAnnotationDataGet
     -> LayersAnnotationDataGet
 layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
   LayersAnnotationDataGet'
-    { _ladgW = Nothing
+    { _ladgXgafv = Nothing
+    , _ladgW = Nothing
+    , _ladgUploadProtocol = Nothing
     , _ladgScale = Nothing
     , _ladgLocale = Nothing
+    , _ladgAccessToken = Nothing
     , _ladgContentVersion = pLadgContentVersion_
+    , _ladgUploadType = Nothing
     , _ladgAllowWebDefinitions = Nothing
     , _ladgAnnotationDataId = pLadgAnnotationDataId_
     , _ladgVolumeId = pLadgVolumeId_
     , _ladgSource = Nothing
     , _ladgH = Nothing
     , _ladgLayerId = pLadgLayerId_
+    , _ladgCallback = Nothing
     }
 
+
+-- | V1 error format.
+ladgXgafv :: Lens' LayersAnnotationDataGet (Maybe Xgafv)
+ladgXgafv
+  = lens _ladgXgafv (\ s a -> s{_ladgXgafv = a})
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
@@ -138,6 +174,12 @@ ladgW :: Lens' LayersAnnotationDataGet (Maybe Int32)
 ladgW
   = lens _ladgW (\ s a -> s{_ladgW = a}) .
       mapping _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ladgUploadProtocol :: Lens' LayersAnnotationDataGet (Maybe Text)
+ladgUploadProtocol
+  = lens _ladgUploadProtocol
+      (\ s a -> s{_ladgUploadProtocol = a})
 
 -- | The requested scale for the image.
 ladgScale :: Lens' LayersAnnotationDataGet (Maybe Int32)
@@ -151,11 +193,23 @@ ladgLocale :: Lens' LayersAnnotationDataGet (Maybe Text)
 ladgLocale
   = lens _ladgLocale (\ s a -> s{_ladgLocale = a})
 
+-- | OAuth access token.
+ladgAccessToken :: Lens' LayersAnnotationDataGet (Maybe Text)
+ladgAccessToken
+  = lens _ladgAccessToken
+      (\ s a -> s{_ladgAccessToken = a})
+
 -- | The content version for the volume you are trying to retrieve.
 ladgContentVersion :: Lens' LayersAnnotationDataGet Text
 ladgContentVersion
   = lens _ladgContentVersion
       (\ s a -> s{_ladgContentVersion = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ladgUploadType :: Lens' LayersAnnotationDataGet (Maybe Text)
+ladgUploadType
+  = lens _ladgUploadType
+      (\ s a -> s{_ladgUploadType = a})
 
 -- | For the dictionary layer. Whether or not to allow web definitions.
 ladgAllowWebDefinitions :: Lens' LayersAnnotationDataGet (Maybe Bool)
@@ -191,19 +245,30 @@ ladgLayerId :: Lens' LayersAnnotationDataGet Text
 ladgLayerId
   = lens _ladgLayerId (\ s a -> s{_ladgLayerId = a})
 
+-- | JSONP
+ladgCallback :: Lens' LayersAnnotationDataGet (Maybe Text)
+ladgCallback
+  = lens _ladgCallback (\ s a -> s{_ladgCallback = a})
+
 instance GoogleRequest LayersAnnotationDataGet where
-        type Rs LayersAnnotationDataGet = AnnotationData
+        type Rs LayersAnnotationDataGet =
+             DictionaryAnnotationData
         type Scopes LayersAnnotationDataGet =
              '["https://www.googleapis.com/auth/books"]
         requestClient LayersAnnotationDataGet'{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)
+              _ladgXgafv
               _ladgW
+              _ladgUploadProtocol
               _ladgScale
               _ladgLocale
+              _ladgAccessToken
+              _ladgUploadType
               _ladgAllowWebDefinitions
               _ladgSource
               _ladgH
+              _ladgCallback
               (Just AltJSON)
               booksService
           where go

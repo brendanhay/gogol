@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudBilling.Services.List
     , slCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.services.list@ method which the
 -- 'ServicesList' request conforms to.
@@ -65,13 +65,13 @@ type ServicesListResource =
 -- /See:/ 'servicesList' smart constructor.
 data ServicesList =
   ServicesList'
-    { _slXgafv          :: !(Maybe Xgafv)
+    { _slXgafv :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
-    , _slAccessToken    :: !(Maybe Text)
-    , _slUploadType     :: !(Maybe Text)
-    , _slPageToken      :: !(Maybe Text)
-    , _slPageSize       :: !(Maybe (Textual Int32))
-    , _slCallback       :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slPageToken :: !(Maybe Text)
+    , _slPageSize :: !(Maybe (Textual Int32))
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,7 +149,9 @@ slCallback
 instance GoogleRequest ServicesList where
         type Rs ServicesList = ListServicesResponse
         type Scopes ServicesList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient ServicesList'{..}
           = go _slXgafv _slUploadProtocol _slAccessToken
               _slUploadType

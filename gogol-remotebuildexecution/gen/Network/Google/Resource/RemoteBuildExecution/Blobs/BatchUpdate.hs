@@ -53,8 +53,8 @@ module Network.Google.Resource.RemoteBuildExecution.Blobs.BatchUpdate
     , bbuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.batchUpdate@ method which the
 -- 'BlobsBatchUpdate' request conforms to.
@@ -90,13 +90,13 @@ type BlobsBatchUpdateResource =
 -- /See:/ 'blobsBatchUpdate' smart constructor.
 data BlobsBatchUpdate =
   BlobsBatchUpdate'
-    { _bbuXgafv          :: !(Maybe Xgafv)
+    { _bbuXgafv :: !(Maybe Xgafv)
     , _bbuUploadProtocol :: !(Maybe Text)
-    , _bbuAccessToken    :: !(Maybe Text)
-    , _bbuUploadType     :: !(Maybe Text)
-    , _bbuPayload        :: !BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
-    , _bbuInstanceName   :: !Text
-    , _bbuCallback       :: !(Maybe Text)
+    , _bbuAccessToken :: !(Maybe Text)
+    , _bbuUploadType :: !(Maybe Text)
+    , _bbuPayload :: !BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
+    , _bbuInstanceName :: !Text
+    , _bbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

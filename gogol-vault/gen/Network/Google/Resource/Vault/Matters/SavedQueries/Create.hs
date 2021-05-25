@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.SavedQueries.Create
     , msqcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.savedQueries.create@ method which the
 -- 'MattersSavedQueriesCreate' request conforms to.
@@ -65,13 +65,13 @@ type MattersSavedQueriesCreateResource =
 -- /See:/ 'mattersSavedQueriesCreate' smart constructor.
 data MattersSavedQueriesCreate =
   MattersSavedQueriesCreate'
-    { _msqcXgafv          :: !(Maybe Xgafv)
+    { _msqcXgafv :: !(Maybe Xgafv)
     , _msqcUploadProtocol :: !(Maybe Text)
-    , _msqcAccessToken    :: !(Maybe Text)
-    , _msqcUploadType     :: !(Maybe Text)
-    , _msqcPayload        :: !SavedQuery
-    , _msqcMatterId       :: !Text
-    , _msqcCallback       :: !(Maybe Text)
+    , _msqcAccessToken :: !(Maybe Text)
+    , _msqcUploadType :: !(Maybe Text)
+    , _msqcPayload :: !SavedQuery
+    , _msqcMatterId :: !Text
+    , _msqcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,8 +137,7 @@ msqcPayload :: Lens' MattersSavedQueriesCreate SavedQuery
 msqcPayload
   = lens _msqcPayload (\ s a -> s{_msqcPayload = a})
 
--- | The matter id of the parent matter for which the saved query is to be
--- created.
+-- | The ID of the matter to create the saved query in.
 msqcMatterId :: Lens' MattersSavedQueriesCreate Text
 msqcMatterId
   = lens _msqcMatterId (\ s a -> s{_msqcMatterId = a})

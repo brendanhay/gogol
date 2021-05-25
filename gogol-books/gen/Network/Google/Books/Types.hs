@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -37,11 +37,25 @@ module Network.Google.Books.Types
     , aKind
     , aItems
 
+    -- * SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    , SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    , seriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    , ssissricriReleaseTime
+    , ssissricriCurrencyCode
+    , ssissricriAmountInMicros
+    , ssissricriReleaseNumber
+
     -- * VolumesListProjection
     , VolumesListProjection (..)
 
     -- * MyLibraryBookshelvesVolumesListProjection
     , MyLibraryBookshelvesVolumesListProjection (..)
+
+    -- * VolumeVolumeInfoReadingModes
+    , VolumeVolumeInfoReadingModes
+    , volumeVolumeInfoReadingModes
+    , vvirmImage
+    , vvirmText
 
     -- * VolumesListOrderBy
     , VolumesListOrderBy (..)
@@ -74,19 +88,6 @@ module Network.Google.Books.Types
     , rsExtraDescription
     , rsURL
     , rsDescription
-
-    -- * AnnotationData
-    , AnnotationData
-    , annotationData
-    , annEncodedData
-    , annKind
-    , annData
-    , annSelfLink
-    , annAnnotationType
-    , annVolumeId
-    , annId
-    , annUpdated
-    , annLayerId
 
     -- * Volumeannotation
     , Volumeannotation
@@ -123,23 +124,23 @@ module Network.Google.Books.Types
     -- * Annotation
     , Annotation
     , annotation
-    , aaSelectedText
-    , aaLayerSummary
-    , aaHighlightStyle
-    , aaClientVersionRanges
-    , aaPageIds
-    , aaKind
-    , aaData
-    , aaCreated
-    , aaAfterSelectedText
-    , aaSelfLink
-    , aaCurrentVersionRanges
-    , aaVolumeId
-    , aaBeforeSelectedText
-    , aaId
-    , aaDeleted
-    , aaUpdated
-    , aaLayerId
+    , annSelectedText
+    , annLayerSummary
+    , annHighlightStyle
+    , annClientVersionRanges
+    , annPageIds
+    , annKind
+    , annData
+    , annCreated
+    , annAfterSelectedText
+    , annSelfLink
+    , annCurrentVersionRanges
+    , annVolumeId
+    , annBeforeSelectedText
+    , annId
+    , annDeleted
+    , annUpdated
+    , annLayerId
 
     -- * ReviewAuthor
     , ReviewAuthor
@@ -229,6 +230,14 @@ module Network.Google.Books.Types
     , vvipsContainsEpubBubbles
     , vvipsImageBubbleVersion
 
+    -- * SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    , SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    , seriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    , ssissrinriReleaseTime
+    , ssissrinriCurrencyCode
+    , ssissrinriAmountInMicros
+    , ssissrinriReleaseNumber
+
     -- * MyLibraryBookshelvesRemoveVolumeReason
     , MyLibraryBookshelvesRemoveVolumeReason (..)
 
@@ -289,6 +298,10 @@ module Network.Google.Books.Types
     , bUpdated
     , bTitle
     , bDescription
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * Notification
     , Notification
@@ -396,12 +409,6 @@ module Network.Google.Books.Types
     , vvId
     , vvRecommendedInfo
     , vvVolumeInfo
-
-    -- * GeolayerDataGeoBoundaryItemItem
-    , GeolayerDataGeoBoundaryItemItem
-    , geolayerDataGeoBoundaryItemItem
-    , gdgbiiLatitude
-    , gdgbiiLongitude
 
     -- * Series
     , Series
@@ -599,6 +606,19 @@ module Network.Google.Books.Types
     , vsirpAmount
     , vsirpCurrencyCode
 
+    -- * DictionaryAnnotationData
+    , DictionaryAnnotationData
+    , dictionaryAnnotationData
+    , dadKind
+    , dadData
+    , dadSelfLink
+    , dadAnnotationType
+    , dadEncodedData
+    , dadVolumeId
+    , dadId
+    , dadUpdated
+    , dadLayerId
+
     -- * VolumeSaleInfoListPrice
     , VolumeSaleInfoListPrice
     , volumeSaleInfoListPrice
@@ -620,12 +640,28 @@ module Network.Google.Books.Types
     , fimAgeGroup
     , fimIsInFamily
 
+    -- * GeoAnnotationData
+    , GeoAnnotationData
+    , geoAnnotationData
+    , gadKind
+    , gadData
+    , gadSelfLink
+    , gadAnnotationType
+    , gadEncodedData
+    , gadVolumeId
+    , gadId
+    , gadUpdated
+    , gadLayerId
+
     -- * Volume2
     , Volume2
     , volume2
     , voloNextPageToken
     , voloKind
     , voloItems
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * Review
     , Review
@@ -647,6 +683,14 @@ module Network.Google.Books.Types
     , vuirpEndUtcSec
     , vuirpStartUtcSec
 
+    -- * SeriesSeriesItemSeriesSubscriptionReleaseInfo
+    , SeriesSeriesItemSeriesSubscriptionReleaseInfo
+    , seriesSeriesItemSeriesSubscriptionReleaseInfo
+    , ssissriSeriesSubscriptionType
+    , ssissriCancelTime
+    , ssissriCurrentReleaseInfo
+    , ssissriNextReleaseInfo
+
     -- * VolumeSaleInfo
     , VolumeSaleInfo
     , volumeSaleInfo
@@ -665,11 +709,16 @@ module Network.Google.Books.Types
     -- * SeriesSeriesItem
     , SeriesSeriesItem
     , seriesSeriesItem
+    , ssiIsComplete
     , ssiSeriesId
     , ssiImageURL
+    , ssiSeriesSubscriptionReleaseInfo
+    , ssiEligibleForSubscription
+    , ssiSeriesFormatType
     , ssiBannerImageURL
     , ssiTitle
     , ssiSeriesType
+    , ssiSubscriptionId
 
     -- * Metadata
     , Metadata
@@ -689,12 +738,12 @@ module Network.Google.Books.Types
     , vvidWidth
     , vvidThickness
 
-    -- * RequestAccess
-    , RequestAccess
-    , requestAccess
-    , raConcurrentAccess
-    , raKind
-    , raDownloadAccess
+    -- * RequestAccessData
+    , RequestAccessData
+    , requestAccessData
+    , radConcurrentAccess
+    , radKind
+    , radDownloadAccess
 
     -- * FamilyInfo
     , FamilyInfo
@@ -981,15 +1030,15 @@ module Network.Google.Books.Types
     , layItems
     ) where
 
-import           Network.Google.Books.Types.Product
-import           Network.Google.Books.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Books.Types.Product
+import Network.Google.Books.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Books API. This contains the host and root path used as a starting point for constructing service requests.
 booksService :: ServiceConfig
 booksService
   = defaultService (ServiceId "books:v1")
-      "www.googleapis.com"
+      "books.googleapis.com"
 
 -- | Manage your books
 booksScope :: Proxy '["https://www.googleapis.com/auth/books"]

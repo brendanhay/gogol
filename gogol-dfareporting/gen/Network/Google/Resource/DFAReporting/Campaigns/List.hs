@@ -23,7 +23,7 @@
 -- Retrieves a list of campaigns, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.campaigns.list@.
 module Network.Google.Resource.DFAReporting.Campaigns.List
     (
     -- * REST Resource
@@ -35,7 +35,11 @@ module Network.Google.Resource.DFAReporting.Campaigns.List
 
     -- * Request Lenses
     , clExcludedIds
+    , clXgafv
+    , clUploadProtocol
+    , clAccessToken
     , clSearchString
+    , clUploadType
     , clIds
     , clProFileId
     , clSortOrder
@@ -48,36 +52,54 @@ module Network.Google.Resource.DFAReporting.Campaigns.List
     , clAdvertiserIds
     , clArchived
     , clMaxResults
+    , clCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.list@ method which the
 -- 'CampaignsList' request conforms to.
 type CampaignsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
                QueryParams "excludedIds" (Textual Int64) :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" (Textual Int64) :>
-                     QueryParam "sortOrder" CampaignsListSortOrder :>
-                       QueryParams "advertiserGroupIds" (Textual Int64) :>
-                         QueryParam "atLeastOneOptimizationActivity" Bool :>
-                           QueryParam "overriddenEventTagId" (Textual Int64) :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" CampaignsListSortField :>
-                                 QueryParam "subaccountId" (Textual Int64) :>
-                                   QueryParams "advertiserIds" (Textual Int64)
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "ids" (Textual Int64) :>
+                             QueryParam "sortOrder" CampaignsListSortOrder :>
+                               QueryParams "advertiserGroupIds" (Textual Int64)
+                                 :>
+                                 QueryParam "atLeastOneOptimizationActivity"
+                                   Bool
+                                   :>
+                                   QueryParam "overriddenEventTagId"
+                                     (Textual Int64)
                                      :>
-                                     QueryParam "archived" Bool :>
-                                       QueryParam "maxResults" (Textual Int32)
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField"
+                                         CampaignsListSortField
                                          :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] CampaignsListResponse
+                                         QueryParam "subaccountId"
+                                           (Textual Int64)
+                                           :>
+                                           QueryParams "advertiserIds"
+                                             (Textual Int64)
+                                             :>
+                                             QueryParam "archived" Bool :>
+                                               QueryParam "maxResults"
+                                                 (Textual Int32)
+                                                 :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" AltJSON :>
+                                                     Get '[JSON]
+                                                       CampaignsListResponse
 
 -- | Retrieves a list of campaigns, possibly filtered. This method supports
 -- paging.
@@ -85,20 +107,25 @@ type CampaignsListResource =
 -- /See:/ 'campaignsList' smart constructor.
 data CampaignsList =
   CampaignsList'
-    { _clExcludedIds                    :: !(Maybe [Textual Int64])
-    , _clSearchString                   :: !(Maybe Text)
-    , _clIds                            :: !(Maybe [Textual Int64])
-    , _clProFileId                      :: !(Textual Int64)
-    , _clSortOrder                      :: !CampaignsListSortOrder
-    , _clAdvertiserGroupIds             :: !(Maybe [Textual Int64])
+    { _clExcludedIds :: !(Maybe [Textual Int64])
+    , _clXgafv :: !(Maybe Xgafv)
+    , _clUploadProtocol :: !(Maybe Text)
+    , _clAccessToken :: !(Maybe Text)
+    , _clSearchString :: !(Maybe Text)
+    , _clUploadType :: !(Maybe Text)
+    , _clIds :: !(Maybe [Textual Int64])
+    , _clProFileId :: !(Textual Int64)
+    , _clSortOrder :: !CampaignsListSortOrder
+    , _clAdvertiserGroupIds :: !(Maybe [Textual Int64])
     , _clAtLeastOneOptimizationActivity :: !(Maybe Bool)
-    , _clOverriddenEventTagId           :: !(Maybe (Textual Int64))
-    , _clPageToken                      :: !(Maybe Text)
-    , _clSortField                      :: !CampaignsListSortField
-    , _clSubAccountId                   :: !(Maybe (Textual Int64))
-    , _clAdvertiserIds                  :: !(Maybe [Textual Int64])
-    , _clArchived                       :: !(Maybe Bool)
-    , _clMaxResults                     :: !(Textual Int32)
+    , _clOverriddenEventTagId :: !(Maybe (Textual Int64))
+    , _clPageToken :: !(Maybe Text)
+    , _clSortField :: !CampaignsListSortField
+    , _clSubAccountId :: !(Maybe (Textual Int64))
+    , _clAdvertiserIds :: !(Maybe [Textual Int64])
+    , _clArchived :: !(Maybe Bool)
+    , _clMaxResults :: !(Textual Int32)
+    , _clCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,7 +136,15 @@ data CampaignsList =
 --
 -- * 'clExcludedIds'
 --
+-- * 'clXgafv'
+--
+-- * 'clUploadProtocol'
+--
+-- * 'clAccessToken'
+--
 -- * 'clSearchString'
+--
+-- * 'clUploadType'
 --
 -- * 'clIds'
 --
@@ -134,13 +169,19 @@ data CampaignsList =
 -- * 'clArchived'
 --
 -- * 'clMaxResults'
+--
+-- * 'clCallback'
 campaignsList
     :: Int64 -- ^ 'clProFileId'
     -> CampaignsList
 campaignsList pClProFileId_ =
   CampaignsList'
     { _clExcludedIds = Nothing
+    , _clXgafv = Nothing
+    , _clUploadProtocol = Nothing
+    , _clAccessToken = Nothing
     , _clSearchString = Nothing
+    , _clUploadType = Nothing
     , _clIds = Nothing
     , _clProFileId = _Coerce # pClProFileId_
     , _clSortOrder = CLSOAscending
@@ -153,6 +194,7 @@ campaignsList pClProFileId_ =
     , _clAdvertiserIds = Nothing
     , _clArchived = Nothing
     , _clMaxResults = 1000
+    , _clCallback = Nothing
     }
 
 
@@ -163,6 +205,22 @@ clExcludedIds
       (\ s a -> s{_clExcludedIds = a})
       . _Default
       . _Coerce
+
+-- | V1 error format.
+clXgafv :: Lens' CampaignsList (Maybe Xgafv)
+clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+clUploadProtocol :: Lens' CampaignsList (Maybe Text)
+clUploadProtocol
+  = lens _clUploadProtocol
+      (\ s a -> s{_clUploadProtocol = a})
+
+-- | OAuth access token.
+clAccessToken :: Lens' CampaignsList (Maybe Text)
+clAccessToken
+  = lens _clAccessToken
+      (\ s a -> s{_clAccessToken = a})
 
 -- | Allows searching for campaigns by name or ID. Wildcards (*) are allowed.
 -- For example, \"campaign*2015\" will return campaigns with names like
@@ -175,6 +233,11 @@ clSearchString :: Lens' CampaignsList (Maybe Text)
 clSearchString
   = lens _clSearchString
       (\ s a -> s{_clSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+clUploadType :: Lens' CampaignsList (Maybe Text)
+clUploadType
+  = lens _clUploadType (\ s a -> s{_clUploadType = a})
 
 -- | Select only campaigns with these IDs.
 clIds :: Lens' CampaignsList [Int64]
@@ -252,13 +315,22 @@ clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
       . _Coerce
 
+-- | JSONP
+clCallback :: Lens' CampaignsList (Maybe Text)
+clCallback
+  = lens _clCallback (\ s a -> s{_clCallback = a})
+
 instance GoogleRequest CampaignsList where
         type Rs CampaignsList = CampaignsListResponse
         type Scopes CampaignsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsList'{..}
           = go _clProFileId (_clExcludedIds ^. _Default)
+              _clXgafv
+              _clUploadProtocol
+              _clAccessToken
               _clSearchString
+              _clUploadType
               (_clIds ^. _Default)
               (Just _clSortOrder)
               (_clAdvertiserGroupIds ^. _Default)
@@ -270,6 +342,7 @@ instance GoogleRequest CampaignsList where
               (_clAdvertiserIds ^. _Default)
               _clArchived
               (Just _clMaxResults)
+              _clCallback
               (Just AltJSON)
               dFAReportingService
           where go

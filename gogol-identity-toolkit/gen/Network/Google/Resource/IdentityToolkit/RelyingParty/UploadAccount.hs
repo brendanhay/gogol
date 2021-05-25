@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
     , rpuaPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.uploadAccount@ method which the
 -- 'RelyingPartyUploadAccount' request conforms to.

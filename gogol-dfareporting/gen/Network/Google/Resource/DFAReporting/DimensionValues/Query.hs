@@ -22,7 +22,7 @@
 --
 -- Retrieves list of report dimension values for a list of filters.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dimensionValues.query@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.dimensionValues.query@.
 module Network.Google.Resource.DFAReporting.DimensionValues.Query
     (
     -- * REST Resource
@@ -33,39 +33,54 @@ module Network.Google.Resource.DFAReporting.DimensionValues.Query
     , DimensionValuesQuery
 
     -- * Request Lenses
+    , dvqXgafv
+    , dvqUploadProtocol
+    , dvqAccessToken
+    , dvqUploadType
     , dvqProFileId
     , dvqPayload
     , dvqPageToken
     , dvqMaxResults
+    , dvqCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.dimensionValues.query@ method which the
 -- 'DimensionValuesQuery' request conforms to.
 type DimensionValuesQueryResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dimensionvalues" :>
                "query" :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] DimensionValueRequest :>
-                         Post '[JSON] DimensionValueList
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] DimensionValueRequest :>
+                                   Post '[JSON] DimensionValueList
 
 -- | Retrieves list of report dimension values for a list of filters.
 --
 -- /See:/ 'dimensionValuesQuery' smart constructor.
 data DimensionValuesQuery =
   DimensionValuesQuery'
-    { _dvqProFileId  :: !(Textual Int64)
-    , _dvqPayload    :: !DimensionValueRequest
-    , _dvqPageToken  :: !(Maybe Text)
+    { _dvqXgafv :: !(Maybe Xgafv)
+    , _dvqUploadProtocol :: !(Maybe Text)
+    , _dvqAccessToken :: !(Maybe Text)
+    , _dvqUploadType :: !(Maybe Text)
+    , _dvqProFileId :: !(Textual Int64)
+    , _dvqPayload :: !DimensionValueRequest
+    , _dvqPageToken :: !(Maybe Text)
     , _dvqMaxResults :: !(Textual Int32)
+    , _dvqCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,6 +89,14 @@ data DimensionValuesQuery =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dvqXgafv'
+--
+-- * 'dvqUploadProtocol'
+--
+-- * 'dvqAccessToken'
+--
+-- * 'dvqUploadType'
+--
 -- * 'dvqProFileId'
 --
 -- * 'dvqPayload'
@@ -81,20 +104,49 @@ data DimensionValuesQuery =
 -- * 'dvqPageToken'
 --
 -- * 'dvqMaxResults'
+--
+-- * 'dvqCallback'
 dimensionValuesQuery
     :: Int64 -- ^ 'dvqProFileId'
     -> DimensionValueRequest -- ^ 'dvqPayload'
     -> DimensionValuesQuery
 dimensionValuesQuery pDvqProFileId_ pDvqPayload_ =
   DimensionValuesQuery'
-    { _dvqProFileId = _Coerce # pDvqProFileId_
+    { _dvqXgafv = Nothing
+    , _dvqUploadProtocol = Nothing
+    , _dvqAccessToken = Nothing
+    , _dvqUploadType = Nothing
+    , _dvqProFileId = _Coerce # pDvqProFileId_
     , _dvqPayload = pDvqPayload_
     , _dvqPageToken = Nothing
     , _dvqMaxResults = 100
+    , _dvqCallback = Nothing
     }
 
 
--- | The DFA user profile ID.
+-- | V1 error format.
+dvqXgafv :: Lens' DimensionValuesQuery (Maybe Xgafv)
+dvqXgafv = lens _dvqXgafv (\ s a -> s{_dvqXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dvqUploadProtocol :: Lens' DimensionValuesQuery (Maybe Text)
+dvqUploadProtocol
+  = lens _dvqUploadProtocol
+      (\ s a -> s{_dvqUploadProtocol = a})
+
+-- | OAuth access token.
+dvqAccessToken :: Lens' DimensionValuesQuery (Maybe Text)
+dvqAccessToken
+  = lens _dvqAccessToken
+      (\ s a -> s{_dvqAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dvqUploadType :: Lens' DimensionValuesQuery (Maybe Text)
+dvqUploadType
+  = lens _dvqUploadType
+      (\ s a -> s{_dvqUploadType = a})
+
+-- | The Campaign Manager 360 user profile ID.
 dvqProFileId :: Lens' DimensionValuesQuery Int64
 dvqProFileId
   = lens _dvqProFileId (\ s a -> s{_dvqProFileId = a})
@@ -117,13 +169,22 @@ dvqMaxResults
       (\ s a -> s{_dvqMaxResults = a})
       . _Coerce
 
+-- | JSONP
+dvqCallback :: Lens' DimensionValuesQuery (Maybe Text)
+dvqCallback
+  = lens _dvqCallback (\ s a -> s{_dvqCallback = a})
+
 instance GoogleRequest DimensionValuesQuery where
         type Rs DimensionValuesQuery = DimensionValueList
         type Scopes DimensionValuesQuery =
              '["https://www.googleapis.com/auth/dfareporting"]
         requestClient DimensionValuesQuery'{..}
-          = go _dvqProFileId _dvqPageToken
+          = go _dvqProFileId _dvqXgafv _dvqUploadProtocol
+              _dvqAccessToken
+              _dvqUploadType
+              _dvqPageToken
               (Just _dvqMaxResults)
+              _dvqCallback
               (Just AltJSON)
               _dvqPayload
               dFAReportingService

@@ -38,13 +38,14 @@ module Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
     , plivlUploadProtocol
     , plivlAccessToken
     , plivlUploadType
+    , plivlIncludePastReleases
     , plivlPageToken
     , plivlPageSize
     , plivlCallback
     ) where
 
-import           Network.Google.Composer.Types
-import           Network.Google.Prelude
+import Network.Google.Composer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @composer.projects.locations.imageVersions.list@ method which the
 -- 'ProjectsLocationsImageVersionsList' request conforms to.
@@ -56,25 +57,27 @@ type ProjectsLocationsImageVersionsListResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListImageVersionsResponse
+                   QueryParam "includePastReleases" Bool :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListImageVersionsResponse
 
 -- | List ImageVersions for provided location.
 --
 -- /See:/ 'projectsLocationsImageVersionsList' smart constructor.
 data ProjectsLocationsImageVersionsList =
   ProjectsLocationsImageVersionsList'
-    { _plivlParent         :: !Text
-    , _plivlXgafv          :: !(Maybe Xgafv)
+    { _plivlParent :: !Text
+    , _plivlXgafv :: !(Maybe Xgafv)
     , _plivlUploadProtocol :: !(Maybe Text)
-    , _plivlAccessToken    :: !(Maybe Text)
-    , _plivlUploadType     :: !(Maybe Text)
-    , _plivlPageToken      :: !(Maybe Text)
-    , _plivlPageSize       :: !(Maybe (Textual Int32))
-    , _plivlCallback       :: !(Maybe Text)
+    , _plivlAccessToken :: !(Maybe Text)
+    , _plivlUploadType :: !(Maybe Text)
+    , _plivlIncludePastReleases :: !(Maybe Bool)
+    , _plivlPageToken :: !(Maybe Text)
+    , _plivlPageSize :: !(Maybe (Textual Int32))
+    , _plivlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,6 +96,8 @@ data ProjectsLocationsImageVersionsList =
 --
 -- * 'plivlUploadType'
 --
+-- * 'plivlIncludePastReleases'
+--
 -- * 'plivlPageToken'
 --
 -- * 'plivlPageSize'
@@ -108,6 +113,7 @@ projectsLocationsImageVersionsList pPlivlParent_ =
     , _plivlUploadProtocol = Nothing
     , _plivlAccessToken = Nothing
     , _plivlUploadType = Nothing
+    , _plivlIncludePastReleases = Nothing
     , _plivlPageToken = Nothing
     , _plivlPageSize = Nothing
     , _plivlCallback = Nothing
@@ -143,6 +149,12 @@ plivlUploadType
   = lens _plivlUploadType
       (\ s a -> s{_plivlUploadType = a})
 
+-- | Whether or not image versions from old releases should be included.
+plivlIncludePastReleases :: Lens' ProjectsLocationsImageVersionsList (Maybe Bool)
+plivlIncludePastReleases
+  = lens _plivlIncludePastReleases
+      (\ s a -> s{_plivlIncludePastReleases = a})
+
 -- | The next_page_token value returned from a previous List request, if any.
 plivlPageToken :: Lens' ProjectsLocationsImageVersionsList (Maybe Text)
 plivlPageToken
@@ -173,6 +185,7 @@ instance GoogleRequest
           = go _plivlParent _plivlXgafv _plivlUploadProtocol
               _plivlAccessToken
               _plivlUploadType
+              _plivlIncludePastReleases
               _plivlPageToken
               _plivlPageSize
               _plivlCallback

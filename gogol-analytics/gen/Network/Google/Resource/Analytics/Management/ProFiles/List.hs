@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.List
     , mpflMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.list@ method which the
 -- 'ManagementProFilesList' request conforms to.
@@ -63,9 +63,9 @@ type ManagementProFilesListResource =
 data ManagementProFilesList =
   ManagementProFilesList'
     { _mpflWebPropertyId :: !Text
-    , _mpflAccountId     :: !Text
-    , _mpflStartIndex    :: !(Maybe (Textual Int32))
-    , _mpflMaxResults    :: !(Maybe (Textual Int32))
+    , _mpflAccountId :: !Text
+    , _mpflStartIndex :: !(Maybe (Textual Int32))
+    , _mpflMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Instances.GetShieldedInstanceIdentity
     , igsiiInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.getShieldedInstanceIdentity@ method which the
 -- 'InstancesGetShieldedInstanceIdentity' request conforms to.
@@ -61,8 +61,8 @@ type InstancesGetShieldedInstanceIdentityResource =
 -- /See:/ 'instancesGetShieldedInstanceIdentity' smart constructor.
 data InstancesGetShieldedInstanceIdentity =
   InstancesGetShieldedInstanceIdentity'
-    { _igsiiProject  :: !Text
-    , _igsiiZone     :: !Text
+    { _igsiiProject :: !Text
+    , _igsiiZone :: !Text
     , _igsiiInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

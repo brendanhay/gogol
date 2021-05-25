@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a ServiceAccount and returns it.
+-- Creates a ServiceAccount.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.create@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
@@ -42,8 +42,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
     , psacCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.create@ method which the
 -- 'ProjectsServiceAccountsCreate' request conforms to.
@@ -60,18 +60,18 @@ type ProjectsServiceAccountsCreateResource =
                        ReqBody '[JSON] CreateServiceAccountRequest :>
                          Post '[JSON] ServiceAccount
 
--- | Creates a ServiceAccount and returns it.
+-- | Creates a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsCreate' smart constructor.
 data ProjectsServiceAccountsCreate =
   ProjectsServiceAccountsCreate'
-    { _psacXgafv          :: !(Maybe Xgafv)
+    { _psacXgafv :: !(Maybe Xgafv)
     , _psacUploadProtocol :: !(Maybe Text)
-    , _psacAccessToken    :: !(Maybe Text)
-    , _psacUploadType     :: !(Maybe Text)
-    , _psacPayload        :: !CreateServiceAccountRequest
-    , _psacName           :: !Text
-    , _psacCallback       :: !(Maybe Text)
+    , _psacAccessToken :: !(Maybe Text)
+    , _psacUploadType :: !(Maybe Text)
+    , _psacPayload :: !CreateServiceAccountRequest
+    , _psacName :: !Text
+    , _psacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

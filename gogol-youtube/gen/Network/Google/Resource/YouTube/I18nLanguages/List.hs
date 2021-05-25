@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of application languages that the YouTube website
--- supports.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.i18nLanguages.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.i18nLanguages.list@.
 module Network.Google.Resource.YouTube.I18nLanguages.List
     (
     -- * REST Resource
@@ -34,12 +33,17 @@ module Network.Google.Resource.YouTube.I18nLanguages.List
     , I18nLanguagesList
 
     -- * Request Lenses
+    , illXgafv
     , illPart
+    , illUploadProtocol
+    , illAccessToken
+    , illUploadType
     , illHl
+    , illCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.i18nLanguages.list@ method which the
 -- 'I18nLanguagesList' request conforms to.
@@ -47,19 +51,28 @@ type I18nLanguagesListResource =
      "youtube" :>
        "v3" :>
          "i18nLanguages" :>
-           QueryParam "part" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] I18nLanguageListResponse
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "hl" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] I18nLanguageListResponse
 
--- | Returns a list of application languages that the YouTube website
--- supports.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'i18nLanguagesList' smart constructor.
 data I18nLanguagesList =
   I18nLanguagesList'
-    { _illPart :: !Text
-    , _illHl   :: !Text
+    { _illXgafv :: !(Maybe Xgafv)
+    , _illPart :: ![Text]
+    , _illUploadProtocol :: !(Maybe Text)
+    , _illAccessToken :: !(Maybe Text)
+    , _illUploadType :: !(Maybe Text)
+    , _illHl :: !Text
+    , _illCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,25 +81,69 @@ data I18nLanguagesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'illXgafv'
+--
 -- * 'illPart'
 --
+-- * 'illUploadProtocol'
+--
+-- * 'illAccessToken'
+--
+-- * 'illUploadType'
+--
 -- * 'illHl'
+--
+-- * 'illCallback'
 i18nLanguagesList
-    :: Text -- ^ 'illPart'
+    :: [Text] -- ^ 'illPart'
     -> I18nLanguagesList
 i18nLanguagesList pIllPart_ =
-  I18nLanguagesList' {_illPart = pIllPart_, _illHl = "en_US"}
+  I18nLanguagesList'
+    { _illXgafv = Nothing
+    , _illPart = _Coerce # pIllPart_
+    , _illUploadProtocol = Nothing
+    , _illAccessToken = Nothing
+    , _illUploadType = Nothing
+    , _illHl = "en_US"
+    , _illCallback = Nothing
+    }
 
 
--- | The part parameter specifies the i18nLanguage resource properties that
+-- | V1 error format.
+illXgafv :: Lens' I18nLanguagesList (Maybe Xgafv)
+illXgafv = lens _illXgafv (\ s a -> s{_illXgafv = a})
+
+-- | The *part* parameter specifies the i18nLanguage resource properties that
 -- the API response will include. Set the parameter value to snippet.
-illPart :: Lens' I18nLanguagesList Text
-illPart = lens _illPart (\ s a -> s{_illPart = a})
+illPart :: Lens' I18nLanguagesList [Text]
+illPart
+  = lens _illPart (\ s a -> s{_illPart = a}) . _Coerce
 
--- | The hl parameter specifies the language that should be used for text
--- values in the API response.
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+illUploadProtocol :: Lens' I18nLanguagesList (Maybe Text)
+illUploadProtocol
+  = lens _illUploadProtocol
+      (\ s a -> s{_illUploadProtocol = a})
+
+-- | OAuth access token.
+illAccessToken :: Lens' I18nLanguagesList (Maybe Text)
+illAccessToken
+  = lens _illAccessToken
+      (\ s a -> s{_illAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+illUploadType :: Lens' I18nLanguagesList (Maybe Text)
+illUploadType
+  = lens _illUploadType
+      (\ s a -> s{_illUploadType = a})
+
 illHl :: Lens' I18nLanguagesList Text
 illHl = lens _illHl (\ s a -> s{_illHl = a})
+
+-- | JSONP
+illCallback :: Lens' I18nLanguagesList (Maybe Text)
+illCallback
+  = lens _illCallback (\ s a -> s{_illCallback = a})
 
 instance GoogleRequest I18nLanguagesList where
         type Rs I18nLanguagesList = I18nLanguageListResponse
@@ -96,7 +153,12 @@ instance GoogleRequest I18nLanguagesList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient I18nLanguagesList'{..}
-          = go (Just _illPart) (Just _illHl) (Just AltJSON)
+          = go _illPart _illXgafv _illUploadProtocol
+              _illAccessToken
+              _illUploadType
+              (Just _illHl)
+              _illCallback
+              (Just AltJSON)
               youTubeService
           where go
                   = buildClient

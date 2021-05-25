@@ -17,16 +17,16 @@
 --
 module Network.Google.AdExperienceReport.Types.Product where
 
-import           Network.Google.AdExperienceReport.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AdExperienceReport.Types.Sum
+import Network.Google.Prelude
 
 -- | Response message for GetSiteSummary.
 --
 -- /See:/ 'siteSummaryResponse' smart constructor.
 data SiteSummaryResponse =
   SiteSummaryResponse'
-    { _ssrMobileSummary  :: !(Maybe PlatformSummary)
-    , _ssrReviewedSite   :: !(Maybe Text)
+    { _ssrMobileSummary :: !(Maybe PlatformSummary)
+    , _ssrReviewedSite :: !(Maybe Text)
     , _ssrDesktopSummary :: !(Maybe PlatformSummary)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -51,19 +51,19 @@ siteSummaryResponse =
     }
 
 
--- | Summary for the mobile review of the site.
+-- | The site\'s Ad Experience Report summary on mobile.
 ssrMobileSummary :: Lens' SiteSummaryResponse (Maybe PlatformSummary)
 ssrMobileSummary
   = lens _ssrMobileSummary
       (\ s a -> s{_ssrMobileSummary = a})
 
--- | The name of the site reviewed.
+-- | The name of the reviewed site, e.g. \`google.com\`.
 ssrReviewedSite :: Lens' SiteSummaryResponse (Maybe Text)
 ssrReviewedSite
   = lens _ssrReviewedSite
       (\ s a -> s{_ssrReviewedSite = a})
 
--- | Summary for the desktop review of the site.
+-- | The site\'s Ad Experience Report summary on desktop.
 ssrDesktopSummary :: Lens' SiteSummaryResponse (Maybe PlatformSummary)
 ssrDesktopSummary
   = lens _ssrDesktopSummary
@@ -105,7 +105,7 @@ violatingSitesResponse
 violatingSitesResponse = ViolatingSitesResponse' {_vsrViolatingSites = Nothing}
 
 
--- | A list of summaries of violating sites.
+-- | The list of violating sites.
 vsrViolatingSites :: Lens' ViolatingSitesResponse [SiteSummaryResponse]
 vsrViolatingSites
   = lens _vsrViolatingSites
@@ -126,18 +126,18 @@ instance ToJSON ViolatingSitesResponse where
               (catMaybes
                  [("violatingSites" .=) <$> _vsrViolatingSites])
 
--- | Summary of the ad experience rating of a site for a specific platform.
+-- | A site\'s Ad Experience Report summary on a single platform.
 --
 -- /See:/ 'platformSummary' smart constructor.
 data PlatformSummary =
   PlatformSummary'
     { _psEnforcementTime :: !(Maybe DateTime')
-    , _psLastChangeTime  :: !(Maybe DateTime')
-    , _psFilterStatus    :: !(Maybe PlatformSummaryFilterStatus)
-    , _psUnderReview     :: !(Maybe Bool)
+    , _psLastChangeTime :: !(Maybe DateTime')
+    , _psFilterStatus :: !(Maybe PlatformSummaryFilterStatus)
+    , _psUnderReview :: !(Maybe Bool)
     , _psBetterAdsStatus :: !(Maybe PlatformSummaryBetterAdsStatus)
-    , _psReportURL       :: !(Maybe Text)
-    , _psRegion          :: !(Maybe [Text])
+    , _psReportURL :: !(Maybe Text)
+    , _psRegion :: !(Maybe [PlatformSummaryRegionItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -173,45 +173,55 @@ platformSummary =
     }
 
 
--- | The date on which ad filtering begins.
+-- | The time at which
+-- [enforcement](https:\/\/support.google.com\/webtools\/answer\/7308033)
+-- against the site began or will begin on this platform. Not set when the
+-- filter_status is OFF.
 psEnforcementTime :: Lens' PlatformSummary (Maybe UTCTime)
 psEnforcementTime
   = lens _psEnforcementTime
       (\ s a -> s{_psEnforcementTime = a})
       . mapping _DateTime
 
--- | The last time that the site changed status.
+-- | The time at which the site\'s status last changed on this platform.
 psLastChangeTime :: Lens' PlatformSummary (Maybe UTCTime)
 psLastChangeTime
   = lens _psLastChangeTime
       (\ s a -> s{_psLastChangeTime = a})
       . mapping _DateTime
 
--- | The ad filtering status of the site.
+-- | The site\'s [enforcement
+-- status](https:\/\/support.google.com\/webtools\/answer\/7308033) on this
+-- platform.
 psFilterStatus :: Lens' PlatformSummary (Maybe PlatformSummaryFilterStatus)
 psFilterStatus
   = lens _psFilterStatus
       (\ s a -> s{_psFilterStatus = a})
 
--- | Whether the site is currently under review.
+-- | Whether the site is currently under review on this platform.
 psUnderReview :: Lens' PlatformSummary (Maybe Bool)
 psUnderReview
   = lens _psUnderReview
       (\ s a -> s{_psUnderReview = a})
 
--- | The status of the site reviewed for the Better Ads Standards.
+-- | The site\'s Ad Experience Report status on this platform.
 psBetterAdsStatus :: Lens' PlatformSummary (Maybe PlatformSummaryBetterAdsStatus)
 psBetterAdsStatus
   = lens _psBetterAdsStatus
       (\ s a -> s{_psBetterAdsStatus = a})
 
--- | A link that leads to a full ad experience report.
+-- | A link to the full Ad Experience Report for the site on this platform..
+-- Not set in ViolatingSitesResponse. Note that you must complete the
+-- [Search Console verification
+-- process](https:\/\/support.google.com\/webmasters\/answer\/9008080) for
+-- the site before you can access the full report.
 psReportURL :: Lens' PlatformSummary (Maybe Text)
 psReportURL
   = lens _psReportURL (\ s a -> s{_psReportURL = a})
 
--- | The assigned regions for the site and platform.
-psRegion :: Lens' PlatformSummary [Text]
+-- | The site\'s regions on this platform. No longer populated, because there
+-- is no longer any semantic difference between sites in different regions.
+psRegion :: Lens' PlatformSummary [PlatformSummaryRegionItem]
 psRegion
   = lens _psRegion (\ s a -> s{_psRegion = a}) .
       _Default

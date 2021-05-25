@@ -330,6 +330,7 @@ module Network.Google.DriveActivity
     -- ** Assignment
     , Assignment
     , assignment
+    , aAssignedUser
     , aSubtype
 
     -- ** SettingsChange
@@ -415,9 +416,9 @@ module Network.Google.DriveActivity
     , seType
     ) where
 
-import           Network.Google.DriveActivity.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DriveActivity.Activity.Query
+import Network.Google.Prelude
+import Network.Google.DriveActivity.Types
+import Network.Google.Resource.DriveActivity.Activity.Query
 
 {- $resources
 TODO

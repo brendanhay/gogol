@@ -50,6 +50,7 @@ module Network.Google.GroupsSettings
     , gWhoCanAssignTopics
     , gWhoCanPostMessage
     , gWhoCanDeleteTopics
+    , gDefaultSender
     , gAllowExternalMembers
     , gWhoCanModifyMembers
     , gWhoCanAssistContent
@@ -106,11 +107,11 @@ module Network.Google.GroupsSettings
     , gWhoCanMoveTopicsOut
     ) where
 
-import           Network.Google.GroupsSettings.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.GroupsSettings.Groups.Get
-import           Network.Google.Resource.GroupsSettings.Groups.Patch
-import           Network.Google.Resource.GroupsSettings.Groups.Update
+import Network.Google.Prelude
+import Network.Google.GroupsSettings.Types
+import Network.Google.Resource.GroupsSettings.Groups.Get
+import Network.Google.Resource.GroupsSettings.Groups.Patch
+import Network.Google.Resource.GroupsSettings.Groups.Update
 
 {- $resources
 TODO

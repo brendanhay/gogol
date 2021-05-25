@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Interconnects.Insert
     , intnPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnects.insert@ method which the
 -- 'InterconnectsInsert' request conforms to.
@@ -63,8 +63,8 @@ type InterconnectsInsertResource =
 data InterconnectsInsert =
   InterconnectsInsert'
     { _intnRequestId :: !(Maybe Text)
-    , _intnProject   :: !Text
-    , _intnPayload   :: !Interconnect
+    , _intnProject :: !Text
+    , _intnPayload :: !Interconnect
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

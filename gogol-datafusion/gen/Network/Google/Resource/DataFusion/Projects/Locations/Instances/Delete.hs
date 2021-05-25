@@ -41,13 +41,13 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Delete
     , plidCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.instances.delete@ method which the
 -- 'ProjectsLocationsInstancesDelete' request conforms to.
 type ProjectsLocationsInstancesDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsLocationsInstancesDeleteResource =
 -- /See:/ 'projectsLocationsInstancesDelete' smart constructor.
 data ProjectsLocationsInstancesDelete =
   ProjectsLocationsInstancesDelete'
-    { _plidXgafv          :: !(Maybe Xgafv)
+    { _plidXgafv :: !(Maybe Xgafv)
     , _plidUploadProtocol :: !(Maybe Text)
-    , _plidAccessToken    :: !(Maybe Text)
-    , _plidUploadType     :: !(Maybe Text)
-    , _plidName           :: !Text
-    , _plidCallback       :: !(Maybe Text)
+    , _plidAccessToken :: !(Maybe Text)
+    , _plidUploadType :: !(Maybe Text)
+    , _plidName :: !Text
+    , _plidCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @oauth2.userinfo.get@.
+-- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference> for @oauth2.userinfo.get@.
 module Network.Google.Resource.OAuth2.UserInfo.Get
     (
     -- * REST Resource
@@ -32,8 +32,8 @@ module Network.Google.Resource.OAuth2.UserInfo.Get
 
     ) where
 
-import           Network.Google.OAuth2.Types
-import           Network.Google.Prelude
+import Network.Google.OAuth2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oauth2.userinfo.get@ method which the
 -- 'UserInfoGet' request conforms to.
@@ -41,7 +41,7 @@ type UserInfoGetResource =
      "oauth2" :>
        "v2" :>
          "userinfo" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
+           QueryParam "alt" AltJSON :> Get '[JSON] UserInfo
 
 --
 -- /See:/ 'userInfoGet' smart constructor.
@@ -58,9 +58,9 @@ userInfoGet = UserInfoGet'
 
 
 instance GoogleRequest UserInfoGet where
-        type Rs UserInfoGet = UserInfoplus
+        type Rs UserInfoGet = UserInfo
         type Scopes UserInfoGet =
-             '["https://www.googleapis.com/auth/plus.me",
+             '["openid",
                "https://www.googleapis.com/auth/userinfo.email",
                "https://www.googleapis.com/auth/userinfo.profile"]
         requestClient UserInfoGet'{}

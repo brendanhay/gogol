@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.RegionDiskTypes.Get
     , rdtgRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDiskTypes.get@ method which the
 -- 'RegionDiskTypesGet' request conforms to.
@@ -61,9 +61,9 @@ type RegionDiskTypesGetResource =
 -- /See:/ 'regionDiskTypesGet' smart constructor.
 data RegionDiskTypesGet =
   RegionDiskTypesGet'
-    { _rdtgProject  :: !Text
+    { _rdtgProject :: !Text
     , _rdtgDiskType :: !Text
-    , _rdtgRegion   :: !Text
+    , _rdtgRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

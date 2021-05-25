@@ -41,12 +41,13 @@ module Network.Google.Resource.DLP.Projects.InspectTemplates.List
     , pitlAccessToken
     , pitlUploadType
     , pitlPageToken
+    , pitlLocationId
     , pitlPageSize
     , pitlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.inspectTemplates.list@ method which the
 -- 'ProjectsInspectTemplatesList' request conforms to.
@@ -60,11 +61,12 @@ type ProjectsInspectTemplatesListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListInspectTemplatesResponse
+                       QueryParam "locationId" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListInspectTemplatesResponse
 
 -- | Lists InspectTemplates. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
@@ -72,15 +74,16 @@ type ProjectsInspectTemplatesListResource =
 -- /See:/ 'projectsInspectTemplatesList' smart constructor.
 data ProjectsInspectTemplatesList =
   ProjectsInspectTemplatesList'
-    { _pitlParent         :: !Text
-    , _pitlXgafv          :: !(Maybe Xgafv)
+    { _pitlParent :: !Text
+    , _pitlXgafv :: !(Maybe Xgafv)
     , _pitlUploadProtocol :: !(Maybe Text)
-    , _pitlOrderBy        :: !(Maybe Text)
-    , _pitlAccessToken    :: !(Maybe Text)
-    , _pitlUploadType     :: !(Maybe Text)
-    , _pitlPageToken      :: !(Maybe Text)
-    , _pitlPageSize       :: !(Maybe (Textual Int32))
-    , _pitlCallback       :: !(Maybe Text)
+    , _pitlOrderBy :: !(Maybe Text)
+    , _pitlAccessToken :: !(Maybe Text)
+    , _pitlUploadType :: !(Maybe Text)
+    , _pitlPageToken :: !(Maybe Text)
+    , _pitlLocationId :: !(Maybe Text)
+    , _pitlPageSize :: !(Maybe (Textual Int32))
+    , _pitlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -103,6 +106,8 @@ data ProjectsInspectTemplatesList =
 --
 -- * 'pitlPageToken'
 --
+-- * 'pitlLocationId'
+--
 -- * 'pitlPageSize'
 --
 -- * 'pitlCallback'
@@ -118,13 +123,26 @@ projectsInspectTemplatesList pPitlParent_ =
     , _pitlAccessToken = Nothing
     , _pitlUploadType = Nothing
     , _pitlPageToken = Nothing
+    , _pitlLocationId = Nothing
     , _pitlPageSize = Nothing
     , _pitlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pitlParent :: Lens' ProjectsInspectTemplatesList Text
 pitlParent
   = lens _pitlParent (\ s a -> s{_pitlParent = a})
@@ -140,11 +158,11 @@ pitlUploadProtocol
   = lens _pitlUploadProtocol
       (\ s a -> s{_pitlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc,update_time, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the template was created. -
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc,update_time, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the template was created. -
 -- \`update_time\`: corresponds to time the template was last updated. -
 -- \`name\`: corresponds to template\'s name. - \`display_name\`:
 -- corresponds to template\'s display name.
@@ -164,15 +182,21 @@ pitlUploadType
   = lens _pitlUploadType
       (\ s a -> s{_pitlUploadType = a})
 
--- | Optional page token to continue retrieval. Comes from previous call to
+-- | Page token to continue retrieval. Comes from previous call to
 -- \`ListInspectTemplates\`.
 pitlPageToken :: Lens' ProjectsInspectTemplatesList (Maybe Text)
 pitlPageToken
   = lens _pitlPageToken
       (\ s a -> s{_pitlPageToken = a})
 
--- | Optional size of the page, can be limited by server. If zero server
--- returns a page of max size 100.
+-- | Deprecated. This field has no effect.
+pitlLocationId :: Lens' ProjectsInspectTemplatesList (Maybe Text)
+pitlLocationId
+  = lens _pitlLocationId
+      (\ s a -> s{_pitlLocationId = a})
+
+-- | Size of the page, can be limited by server. If zero server returns a
+-- page of max size 100.
 pitlPageSize :: Lens' ProjectsInspectTemplatesList (Maybe Int32)
 pitlPageSize
   = lens _pitlPageSize (\ s a -> s{_pitlPageSize = a})
@@ -195,6 +219,7 @@ instance GoogleRequest ProjectsInspectTemplatesList
               _pitlAccessToken
               _pitlUploadType
               _pitlPageToken
+              _pitlLocationId
               _pitlPageSize
               _pitlCallback
               (Just AltJSON)

@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.Proposals.Search
     , pPqlQuery
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.proposals.search@ method which the
 -- 'ProposalsSearch' request conforms to.

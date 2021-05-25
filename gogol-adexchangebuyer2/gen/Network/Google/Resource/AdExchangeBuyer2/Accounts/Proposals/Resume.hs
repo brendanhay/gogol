@@ -49,8 +49,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Resume
     , aprCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.resume@ method which the
 -- 'AccountsProposalsResume' request conforms to.
@@ -80,14 +80,14 @@ type AccountsProposalsResumeResource =
 -- /See:/ 'accountsProposalsResume' smart constructor.
 data AccountsProposalsResume =
   AccountsProposalsResume'
-    { _aprXgafv          :: !(Maybe Xgafv)
+    { _aprXgafv :: !(Maybe Xgafv)
     , _aprUploadProtocol :: !(Maybe Text)
-    , _aprAccessToken    :: !(Maybe Text)
-    , _aprUploadType     :: !(Maybe Text)
-    , _aprPayload        :: !ResumeProposalRequest
-    , _aprProposalId     :: !Text
-    , _aprAccountId      :: !Text
-    , _aprCallback       :: !(Maybe Text)
+    , _aprAccessToken :: !(Maybe Text)
+    , _aprUploadType :: !(Maybe Text)
+    , _aprPayload :: !ResumeProposalRequest
+    , _aprProposalId :: !Text
+    , _aprAccountId :: !Text
+    , _aprCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

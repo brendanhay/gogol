@@ -23,7 +23,7 @@
 -- Search Version resources that consumers have access to, within the scope
 -- of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference> for @cloudprivatecatalog.organizations.versions.search@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.organizations.versions.search@.
 module Network.Google.Resource.CloudPrivateCatalog.Organizations.Versions.Search
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalog.Organizations.Versions.Search
     , ovsCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalog.organizations.versions.search@ method which the
 -- 'OrganizationsVersionsSearch' request conforms to.
@@ -72,15 +72,15 @@ type OrganizationsVersionsSearchResource =
 -- /See:/ 'organizationsVersionsSearch' smart constructor.
 data OrganizationsVersionsSearch =
   OrganizationsVersionsSearch'
-    { _ovsXgafv          :: !(Maybe Xgafv)
+    { _ovsXgafv :: !(Maybe Xgafv)
     , _ovsUploadProtocol :: !(Maybe Text)
-    , _ovsAccessToken    :: !(Maybe Text)
-    , _ovsUploadType     :: !(Maybe Text)
-    , _ovsResource       :: !Text
-    , _ovsQuery          :: !(Maybe Text)
-    , _ovsPageToken      :: !(Maybe Text)
-    , _ovsPageSize       :: !(Maybe (Textual Int32))
-    , _ovsCallback       :: !(Maybe Text)
+    , _ovsAccessToken :: !(Maybe Text)
+    , _ovsUploadType :: !(Maybe Text)
+    , _ovsResource :: !Text
+    , _ovsQuery :: !(Maybe Text)
+    , _ovsPageToken :: !(Maybe Text)
+    , _ovsPageSize :: !(Maybe (Textual Int32))
+    , _ovsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.BackendServices.Delete
     , bsdBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.delete@ method which the
 -- 'BackendServicesDelete' request conforms to.
@@ -59,8 +59,8 @@ type BackendServicesDeleteResource =
 -- /See:/ 'backendServicesDelete' smart constructor.
 data BackendServicesDelete =
   BackendServicesDelete'
-    { _bsdRequestId      :: !(Maybe Text)
-    , _bsdProject        :: !Text
+    { _bsdRequestId :: !(Maybe Text)
+    , _bsdProject :: !Text
     , _bsdBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

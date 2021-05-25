@@ -17,50 +17,22 @@
 --
 module Network.Google.SecurityCenter.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types.Sum
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types.Sum
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -116,14 +88,218 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | Wrapper over asset object that also captures the state change for the
+-- asset e.g. if it was a newly created asset vs updated or deleted asset.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1TemporalAsset' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1TemporalAsset =
+  GoogleCloudSecuritycenterV1p1beta1TemporalAsset'
+    { _gcsvtaAsset :: !(Maybe GoogleCloudSecuritycenterV1p1beta1Asset)
+    , _gcsvtaChangeType :: !(Maybe GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1TemporalAsset' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvtaAsset'
+--
+-- * 'gcsvtaChangeType'
+googleCloudSecuritycenterV1p1beta1TemporalAsset
+    :: GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+googleCloudSecuritycenterV1p1beta1TemporalAsset =
+  GoogleCloudSecuritycenterV1p1beta1TemporalAsset'
+    {_gcsvtaAsset = Nothing, _gcsvtaChangeType = Nothing}
+
+
+-- | Asset data that includes attributes, properties and marks about the
+-- asset.
+gcsvtaAsset :: Lens' GoogleCloudSecuritycenterV1p1beta1TemporalAsset (Maybe GoogleCloudSecuritycenterV1p1beta1Asset)
+gcsvtaAsset
+  = lens _gcsvtaAsset (\ s a -> s{_gcsvtaAsset = a})
+
+-- | Represents if the asset was created\/updated\/deleted.
+gcsvtaChangeType :: Lens' GoogleCloudSecuritycenterV1p1beta1TemporalAsset (Maybe GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType)
+gcsvtaChangeType
+  = lens _gcsvtaChangeType
+      (\ s a -> s{_gcsvtaChangeType = a})
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1TemporalAsset"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1TemporalAsset' <$>
+                   (o .:? "asset") <*> (o .:? "changeType"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1TemporalAsset'{..}
+          = object
+              (catMaybes
+                 [("asset" .=) <$> _gcsvtaAsset,
+                  ("changeType" .=) <$> _gcsvtaChangeType])
+
+-- | Security Command Center managed properties. These properties are managed
+-- by Security Command Center and cannot be modified by the user.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1SecurityCenterProperties' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties =
+  GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
+    { _gcsvscpResourceDisplayName :: !(Maybe Text)
+    , _gcsvscpResourceType :: !(Maybe Text)
+    , _gcsvscpResourceName :: !(Maybe Text)
+    , _gcsvscpResourceParentDisplayName :: !(Maybe Text)
+    , _gcsvscpResourceParent :: !(Maybe Text)
+    , _gcsvscpResourceProject :: !(Maybe Text)
+    , _gcsvscpResourceProjectDisplayName :: !(Maybe Text)
+    , _gcsvscpResourceOwners :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvscpResourceDisplayName'
+--
+-- * 'gcsvscpResourceType'
+--
+-- * 'gcsvscpResourceName'
+--
+-- * 'gcsvscpResourceParentDisplayName'
+--
+-- * 'gcsvscpResourceParent'
+--
+-- * 'gcsvscpResourceProject'
+--
+-- * 'gcsvscpResourceProjectDisplayName'
+--
+-- * 'gcsvscpResourceOwners'
+googleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    :: GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+googleCloudSecuritycenterV1p1beta1SecurityCenterProperties =
+  GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
+    { _gcsvscpResourceDisplayName = Nothing
+    , _gcsvscpResourceType = Nothing
+    , _gcsvscpResourceName = Nothing
+    , _gcsvscpResourceParentDisplayName = Nothing
+    , _gcsvscpResourceParent = Nothing
+    , _gcsvscpResourceProject = Nothing
+    , _gcsvscpResourceProjectDisplayName = Nothing
+    , _gcsvscpResourceOwners = Nothing
+    }
+
+
+-- | The user defined display name for this resource.
+gcsvscpResourceDisplayName :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceDisplayName
+  = lens _gcsvscpResourceDisplayName
+      (\ s a -> s{_gcsvscpResourceDisplayName = a})
+
+-- | The type of the Google Cloud resource. Examples include: APPLICATION,
+-- PROJECT, and ORGANIZATION. This is a case insensitive field defined by
+-- Security Command Center and\/or the producer of the resource and is
+-- immutable after create time.
+gcsvscpResourceType :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceType
+  = lens _gcsvscpResourceType
+      (\ s a -> s{_gcsvscpResourceType = a})
+
+-- | The full resource name of the Google Cloud resource this asset
+-- represents. This field is immutable after create time. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+gcsvscpResourceName :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceName
+  = lens _gcsvscpResourceName
+      (\ s a -> s{_gcsvscpResourceName = a})
+
+-- | The user defined display name for the parent of this resource.
+gcsvscpResourceParentDisplayName :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceParentDisplayName
+  = lens _gcsvscpResourceParentDisplayName
+      (\ s a -> s{_gcsvscpResourceParentDisplayName = a})
+
+-- | The full resource name of the immediate parent of the resource. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+gcsvscpResourceParent :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceParent
+  = lens _gcsvscpResourceParent
+      (\ s a -> s{_gcsvscpResourceParent = a})
+
+-- | The full resource name of the project the resource belongs to. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+gcsvscpResourceProject :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceProject
+  = lens _gcsvscpResourceProject
+      (\ s a -> s{_gcsvscpResourceProject = a})
+
+-- | The user defined display name for the project of this resource.
+gcsvscpResourceProjectDisplayName :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties (Maybe Text)
+gcsvscpResourceProjectDisplayName
+  = lens _gcsvscpResourceProjectDisplayName
+      (\ s a -> s{_gcsvscpResourceProjectDisplayName = a})
+
+-- | Owners of the Google Cloud resource.
+gcsvscpResourceOwners :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties [Text]
+gcsvscpResourceOwners
+  = lens _gcsvscpResourceOwners
+      (\ s a -> s{_gcsvscpResourceOwners = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
+                   <$>
+                   (o .:? "resourceDisplayName") <*>
+                     (o .:? "resourceType")
+                     <*> (o .:? "resourceName")
+                     <*> (o .:? "resourceParentDisplayName")
+                     <*> (o .:? "resourceParent")
+                     <*> (o .:? "resourceProject")
+                     <*> (o .:? "resourceProjectDisplayName")
+                     <*> (o .:? "resourceOwners" .!= mempty))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'{..}
+          = object
+              (catMaybes
+                 [("resourceDisplayName" .=) <$>
+                    _gcsvscpResourceDisplayName,
+                  ("resourceType" .=) <$> _gcsvscpResourceType,
+                  ("resourceName" .=) <$> _gcsvscpResourceName,
+                  ("resourceParentDisplayName" .=) <$>
+                    _gcsvscpResourceParentDisplayName,
+                  ("resourceParent" .=) <$> _gcsvscpResourceParent,
+                  ("resourceProject" .=) <$> _gcsvscpResourceProject,
+                  ("resourceProjectDisplayName" .=) <$>
+                    _gcsvscpResourceProjectDisplayName,
+                  ("resourceOwners" .=) <$> _gcsvscpResourceOwners])
+
 -- | Response message for listing findings.
 --
 -- /See:/ 'listFindingsResponse' smart constructor.
 data ListFindingsResponse =
   ListFindingsResponse'
-    { _lfrReadTime            :: !(Maybe DateTime')
-    , _lfrNextPageToken       :: !(Maybe Text)
-    , _lfrTotalSize           :: !(Maybe (Textual Int32))
+    { _lfrReadTime :: !(Maybe DateTime')
+    , _lfrNextPageToken :: !(Maybe Text)
+    , _lfrTotalSize :: !(Maybe (Textual Int32))
     , _lfrListFindingsResults :: !(Maybe [ListFindingsResult])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -205,20 +381,20 @@ instance ToJSON ListFindingsResponse where
 -- service: the log_types specified in each AuditConfig are enabled, and
 -- the exempted_members in each AuditLogConfig are exempted. Example Policy
 -- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
--- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
--- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
--- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
--- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
--- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
--- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
--- DATA_WRITE logging.
+-- \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\":
+-- \"sampleservice.googleapis.com\", \"audit_log_configs\": [ {
+-- \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\",
+-- \"exempted_members\": [ \"user:aliya\'example.com\" ] } ] } ] } For
+-- sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+-- logging. It also exempts jose\'example.com from DATA_READ logging, and
+-- aliya\'example.com from DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig =
   AuditConfig'
-    { _acService         :: !(Maybe Text)
+    { _acService :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -266,16 +442,135 @@ instance ToJSON AuditConfig where
                  [("service" .=) <$> _acService,
                   ("auditLogConfigs" .=) <$> _acAuditLogConfigs])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Security Command Center notification configs. A notification config is a
+-- Security Command Center resource that contains the configuration to send
+-- notifications for create\/update events of findings, assets and etc.
+--
+-- /See:/ 'notificationConfig' smart constructor.
+data NotificationConfig =
+  NotificationConfig'
+    { _ncServiceAccount :: !(Maybe Text)
+    , _ncEventType :: !(Maybe NotificationConfigEventType)
+    , _ncName :: !(Maybe Text)
+    , _ncPubsubTopic :: !(Maybe Text)
+    , _ncStreamingConfig :: !(Maybe StreamingConfig)
+    , _ncDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ncServiceAccount'
+--
+-- * 'ncEventType'
+--
+-- * 'ncName'
+--
+-- * 'ncPubsubTopic'
+--
+-- * 'ncStreamingConfig'
+--
+-- * 'ncDescription'
+notificationConfig
+    :: NotificationConfig
+notificationConfig =
+  NotificationConfig'
+    { _ncServiceAccount = Nothing
+    , _ncEventType = Nothing
+    , _ncName = Nothing
+    , _ncPubsubTopic = Nothing
+    , _ncStreamingConfig = Nothing
+    , _ncDescription = Nothing
+    }
+
+
+-- | Output only. The service account that needs \"pubsub.topics.publish\"
+-- permission to publish to the Pub\/Sub topic.
+ncServiceAccount :: Lens' NotificationConfig (Maybe Text)
+ncServiceAccount
+  = lens _ncServiceAccount
+      (\ s a -> s{_ncServiceAccount = a})
+
+-- | The type of events the config is for, e.g. FINDING.
+ncEventType :: Lens' NotificationConfig (Maybe NotificationConfigEventType)
+ncEventType
+  = lens _ncEventType (\ s a -> s{_ncEventType = a})
+
+-- | The relative resource name of this notification config. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
+-- Example:
+-- \"organizations\/{organization_id}\/notificationConfigs\/notify_public_bucket\".
+ncName :: Lens' NotificationConfig (Maybe Text)
+ncName = lens _ncName (\ s a -> s{_ncName = a})
+
+-- | The Pub\/Sub topic to send notifications to. Its format is
+-- \"projects\/[project_id]\/topics\/[topic]\".
+ncPubsubTopic :: Lens' NotificationConfig (Maybe Text)
+ncPubsubTopic
+  = lens _ncPubsubTopic
+      (\ s a -> s{_ncPubsubTopic = a})
+
+-- | The config for triggering streaming-based notifications.
+ncStreamingConfig :: Lens' NotificationConfig (Maybe StreamingConfig)
+ncStreamingConfig
+  = lens _ncStreamingConfig
+      (\ s a -> s{_ncStreamingConfig = a})
+
+-- | The description of the notification config (max of 1024 characters).
+ncDescription :: Lens' NotificationConfig (Maybe Text)
+ncDescription
+  = lens _ncDescription
+      (\ s a -> s{_ncDescription = a})
+
+instance FromJSON NotificationConfig where
+        parseJSON
+          = withObject "NotificationConfig"
+              (\ o ->
+                 NotificationConfig' <$>
+                   (o .:? "serviceAccount") <*> (o .:? "eventType") <*>
+                     (o .:? "name")
+                     <*> (o .:? "pubsubTopic")
+                     <*> (o .:? "streamingConfig")
+                     <*> (o .:? "description"))
+
+instance ToJSON NotificationConfig where
+        toJSON NotificationConfig'{..}
+          = object
+              (catMaybes
+                 [("serviceAccount" .=) <$> _ncServiceAccount,
+                  ("eventType" .=) <$> _ncEventType,
+                  ("name" .=) <$> _ncName,
+                  ("pubsubTopic" .=) <$> _ncPubsubTopic,
+                  ("streamingConfig" .=) <$> _ncStreamingConfig,
+                  ("description" .=) <$> _ncDescription])
+
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -303,26 +598,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -352,7 +646,7 @@ instance ToJSON Expr where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -403,34 +697,47 @@ instance ToJSON ListOperationsResponse where
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
-data GetIAMPolicyRequest =
+newtype GetIAMPolicyRequest =
   GetIAMPolicyRequest'
+    { _giprOptions :: Maybe GetPolicyOptions
+    }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giprOptions'
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest'
+getIAMPolicyRequest = GetIAMPolicyRequest' {_giprOptions = Nothing}
 
+
+-- | OPTIONAL: A \`GetPolicyOptions\` object for specifying options to
+-- \`GetIamPolicy\`.
+giprOptions :: Lens' GetIAMPolicyRequest (Maybe GetPolicyOptions)
+giprOptions
+  = lens _giprOptions (\ s a -> s{_giprOptions = a})
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest')
+              (\ o -> GetIAMPolicyRequest' <$> (o .:? "options"))
 
 instance ToJSON GetIAMPolicyRequest where
-        toJSON = const emptyObject
+        toJSON GetIAMPolicyRequest'{..}
+          = object
+              (catMaybes [("options" .=) <$> _giprOptions])
 
 -- | Response message for group by findings.
 --
 -- /See:/ 'groupFindingsResponse' smart constructor.
 data GroupFindingsResponse =
   GroupFindingsResponse'
-    { _gfrReadTime       :: !(Maybe DateTime')
-    , _gfrNextPageToken  :: !(Maybe Text)
-    , _gfrTotalSize      :: !(Maybe (Textual Int32))
+    { _gfrReadTime :: !(Maybe DateTime')
+    , _gfrNextPageToken :: !(Maybe Text)
+    , _gfrTotalSize :: !(Maybe (Textual Int32))
     , _gfrGroupByResults :: !(Maybe [GroupResult])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -528,16 +835,161 @@ instance FromJSON RunAssetDiscoveryRequest where
 instance ToJSON RunAssetDiscoveryRequest where
         toJSON = const emptyObject
 
+-- | Information related to the Google Cloud resource.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1Resource' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1Resource =
+  GoogleCloudSecuritycenterV1p1beta1Resource'
+    { _gcsvrParent :: !(Maybe Text)
+    , _gcsvrProject :: !(Maybe Text)
+    , _gcsvrProjectDisplayName :: !(Maybe Text)
+    , _gcsvrName :: !(Maybe Text)
+    , _gcsvrParentDisplayName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1Resource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvrParent'
+--
+-- * 'gcsvrProject'
+--
+-- * 'gcsvrProjectDisplayName'
+--
+-- * 'gcsvrName'
+--
+-- * 'gcsvrParentDisplayName'
+googleCloudSecuritycenterV1p1beta1Resource
+    :: GoogleCloudSecuritycenterV1p1beta1Resource
+googleCloudSecuritycenterV1p1beta1Resource =
+  GoogleCloudSecuritycenterV1p1beta1Resource'
+    { _gcsvrParent = Nothing
+    , _gcsvrProject = Nothing
+    , _gcsvrProjectDisplayName = Nothing
+    , _gcsvrName = Nothing
+    , _gcsvrParentDisplayName = Nothing
+    }
+
+
+-- | The full resource name of resource\'s parent.
+gcsvrParent :: Lens' GoogleCloudSecuritycenterV1p1beta1Resource (Maybe Text)
+gcsvrParent
+  = lens _gcsvrParent (\ s a -> s{_gcsvrParent = a})
+
+-- | The full resource name of project that the resource belongs to.
+gcsvrProject :: Lens' GoogleCloudSecuritycenterV1p1beta1Resource (Maybe Text)
+gcsvrProject
+  = lens _gcsvrProject (\ s a -> s{_gcsvrProject = a})
+
+-- | The human readable name of project that the resource belongs to.
+gcsvrProjectDisplayName :: Lens' GoogleCloudSecuritycenterV1p1beta1Resource (Maybe Text)
+gcsvrProjectDisplayName
+  = lens _gcsvrProjectDisplayName
+      (\ s a -> s{_gcsvrProjectDisplayName = a})
+
+-- | The full resource name of the resource. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+gcsvrName :: Lens' GoogleCloudSecuritycenterV1p1beta1Resource (Maybe Text)
+gcsvrName
+  = lens _gcsvrName (\ s a -> s{_gcsvrName = a})
+
+-- | The human readable name of resource\'s parent.
+gcsvrParentDisplayName :: Lens' GoogleCloudSecuritycenterV1p1beta1Resource (Maybe Text)
+gcsvrParentDisplayName
+  = lens _gcsvrParentDisplayName
+      (\ s a -> s{_gcsvrParentDisplayName = a})
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1Resource
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1Resource"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1Resource' <$>
+                   (o .:? "parent") <*> (o .:? "project") <*>
+                     (o .:? "projectDisplayName")
+                     <*> (o .:? "name")
+                     <*> (o .:? "parentDisplayName"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1Resource
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1Resource'{..}
+          = object
+              (catMaybes
+                 [("parent" .=) <$> _gcsvrParent,
+                  ("project" .=) <$> _gcsvrProject,
+                  ("projectDisplayName" .=) <$>
+                    _gcsvrProjectDisplayName,
+                  ("name" .=) <$> _gcsvrName,
+                  ("parentDisplayName" .=) <$>
+                    _gcsvrParentDisplayName])
+
+-- | Cloud IAM Policy information associated with the Google Cloud resource
+-- described by the Security Command Center asset. This information is
+-- managed and defined by the Google Cloud resource and cannot be modified
+-- by the user.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1IAMPolicy' smart constructor.
+newtype GoogleCloudSecuritycenterV1p1beta1IAMPolicy =
+  GoogleCloudSecuritycenterV1p1beta1IAMPolicy'
+    { _gcsvipPolicyBlob :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1IAMPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvipPolicyBlob'
+googleCloudSecuritycenterV1p1beta1IAMPolicy
+    :: GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+googleCloudSecuritycenterV1p1beta1IAMPolicy =
+  GoogleCloudSecuritycenterV1p1beta1IAMPolicy' {_gcsvipPolicyBlob = Nothing}
+
+
+-- | The JSON representation of the Policy associated with the asset. See
+-- https:\/\/cloud.google.com\/iam\/docs\/reference\/rest\/v1\/Policy for
+-- format details.
+gcsvipPolicyBlob :: Lens' GoogleCloudSecuritycenterV1p1beta1IAMPolicy (Maybe Text)
+gcsvipPolicyBlob
+  = lens _gcsvipPolicyBlob
+      (\ s a -> s{_gcsvipPolicyBlob = a})
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1IAMPolicy"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1IAMPolicy' <$>
+                   (o .:? "policyBlob"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1IAMPolicy'{..}
+          = object
+              (catMaybes [("policyBlob" .=) <$> _gcsvipPolicyBlob])
+
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -592,7 +1044,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -623,25 +1076,25 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
--- | Cloud Security Command Center (Cloud SCC) finding. A finding is a record
--- of assessment data (security, risk, health or privacy) ingested into
--- Cloud SCC for presentation, notification, analysis, policy testing, and
--- enforcement. For example, an XSS vulnerability in an App Engine
--- application is a finding.
+-- | Security Command Center finding. A finding is a record of assessment
+-- data like security, risk, health, or privacy, that is ingested into
+-- Security Command Center for presentation, notification, analysis, policy
+-- testing, and enforcement. For example, a cross-site scripting (XSS)
+-- vulnerability in an App Engine application is a finding.
 --
 -- /See:/ 'finding' smart constructor.
 data Finding =
   Finding'
-    { _fParent           :: !(Maybe Text)
+    { _fParent :: !(Maybe Text)
     , _fSourceProperties :: !(Maybe FindingSourceProperties)
-    , _fState            :: !(Maybe FindingState)
-    , _fResourceName     :: !(Maybe Text)
-    , _fSecurityMarks    :: !(Maybe SecurityMarks)
-    , _fCategory         :: !(Maybe Text)
-    , _fExternalURI      :: !(Maybe Text)
-    , _fEventTime        :: !(Maybe DateTime')
-    , _fName             :: !(Maybe Text)
-    , _fCreateTime       :: !(Maybe DateTime')
+    , _fState :: !(Maybe FindingState)
+    , _fResourceName :: !(Maybe Text)
+    , _fSecurityMarks :: !(Maybe SecurityMarks)
+    , _fCategory :: !(Maybe Text)
+    , _fExternalURI :: !(Maybe Text)
+    , _fEventTime :: !(Maybe DateTime')
+    , _fName :: !(Maybe Text)
+    , _fCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -689,7 +1142,7 @@ finding =
 -- | The relative resource name of the source the finding belongs to. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
 -- This field is immutable after creation time. For example:
--- \"organizations\/123\/sources\/456\"
+-- \"organizations\/{organization_id}\/sources\/{source_id}\"
 fParent :: Lens' Finding (Maybe Text)
 fParent = lens _fParent (\ s a -> s{_fParent = a})
 
@@ -706,10 +1159,12 @@ fSourceProperties
 fState :: Lens' Finding (Maybe FindingState)
 fState = lens _fState (\ s a -> s{_fState = a})
 
--- | The full resource name of the Google Cloud Platform (GCP) resource this
--- finding is for. See:
+-- | For findings on Google Cloud resources, the full resource name of the
+-- Google Cloud resource this finding is for. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
--- This field is immutable after creation time.
+-- When the finding is for a non-Google Cloud resource, the resourceName
+-- can be a customer or partner defined string. This field is immutable
+-- after creation time.
 fResourceName :: Lens' Finding (Maybe Text)
 fResourceName
   = lens _fResourceName
@@ -729,16 +1184,19 @@ fCategory :: Lens' Finding (Maybe Text)
 fCategory
   = lens _fCategory (\ s a -> s{_fCategory = a})
 
--- | The URI that, if available, points to a web page outside of Cloud SCC
--- where additional information about the finding can be found. This field
--- is guaranteed to be either empty or a well formed URL.
+-- | The URI that, if available, points to a web page outside of Security
+-- Command Center where additional information about the finding can be
+-- found. This field is guaranteed to be either empty or a well formed URL.
 fExternalURI :: Lens' Finding (Maybe Text)
 fExternalURI
   = lens _fExternalURI (\ s a -> s{_fExternalURI = a})
 
--- | The time at which the event took place. For example, if the finding
--- represents an open firewall it would capture the time the open firewall
--- was detected.
+-- | The time at which the event took place, or when an update to the finding
+-- occurred. For example, if the finding represents an open firewall it
+-- would capture the time the detector believes the firewall became open.
+-- The accuracy is determined by the detector. If the finding were to be
+-- resolved afterward, this time would reflect when the finding was
+-- resolved.
 fEventTime :: Lens' Finding (Maybe UTCTime)
 fEventTime
   = lens _fEventTime (\ s a -> s{_fEventTime = a}) .
@@ -746,11 +1204,12 @@ fEventTime
 
 -- | The relative resource name of this finding. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/sources\/456\/findings\/789\"
+-- Example:
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/findings\/{finding_id}\"
 fName :: Lens' Finding (Maybe Text)
 fName = lens _fName (\ s a -> s{_fName = a})
 
--- | The time at which the finding was created in Cloud SCC.
+-- | The time at which the finding was created in Security Command Center.
 fCreateTime :: Lens' Finding (Maybe UTCTime)
 fCreateTime
   = lens _fCreateTime (\ s a -> s{_fCreateTime = a}) .
@@ -816,7 +1275,8 @@ instance ToJSON Empty where
 -- /See:/ 'listFindingsResult' smart constructor.
 data ListFindingsResult =
   ListFindingsResult'
-    { _lfrFinding     :: !(Maybe Finding)
+    { _lfrFinding :: !(Maybe GoogleCloudSecuritycenterV1p1beta1Finding)
+    , _lfrResource :: !(Maybe Resource)
     , _lfrStateChange :: !(Maybe ListFindingsResultStateChange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -828,17 +1288,25 @@ data ListFindingsResult =
 --
 -- * 'lfrFinding'
 --
+-- * 'lfrResource'
+--
 -- * 'lfrStateChange'
 listFindingsResult
     :: ListFindingsResult
 listFindingsResult =
-  ListFindingsResult' {_lfrFinding = Nothing, _lfrStateChange = Nothing}
+  ListFindingsResult'
+    {_lfrFinding = Nothing, _lfrResource = Nothing, _lfrStateChange = Nothing}
 
 
 -- | Finding matching the search request.
-lfrFinding :: Lens' ListFindingsResult (Maybe Finding)
+lfrFinding :: Lens' ListFindingsResult (Maybe GoogleCloudSecuritycenterV1p1beta1Finding)
 lfrFinding
   = lens _lfrFinding (\ s a -> s{_lfrFinding = a})
+
+-- | Output only. Resource that is associated with this finding.
+lfrResource :: Lens' ListFindingsResult (Maybe Resource)
+lfrResource
+  = lens _lfrResource (\ s a -> s{_lfrResource = a})
 
 -- | State change of the finding between the points in time.
 lfrStateChange :: Lens' ListFindingsResult (Maybe ListFindingsResultStateChange)
@@ -851,25 +1319,84 @@ instance FromJSON ListFindingsResult where
           = withObject "ListFindingsResult"
               (\ o ->
                  ListFindingsResult' <$>
-                   (o .:? "finding") <*> (o .:? "stateChange"))
+                   (o .:? "finding") <*> (o .:? "resource") <*>
+                     (o .:? "stateChange"))
 
 instance ToJSON ListFindingsResult where
         toJSON ListFindingsResult'{..}
           = object
               (catMaybes
                  [("finding" .=) <$> _lfrFinding,
+                  ("resource" .=) <$> _lfrResource,
                   ("stateChange" .=) <$> _lfrStateChange])
+
+-- | Response message for listing notification configs.
+--
+-- /See:/ 'listNotificationConfigsResponse' smart constructor.
+data ListNotificationConfigsResponse =
+  ListNotificationConfigsResponse'
+    { _lncrNotificationConfigs :: !(Maybe [NotificationConfig])
+    , _lncrNextPageToken :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListNotificationConfigsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lncrNotificationConfigs'
+--
+-- * 'lncrNextPageToken'
+listNotificationConfigsResponse
+    :: ListNotificationConfigsResponse
+listNotificationConfigsResponse =
+  ListNotificationConfigsResponse'
+    {_lncrNotificationConfigs = Nothing, _lncrNextPageToken = Nothing}
+
+
+-- | Notification configs belonging to the requested parent.
+lncrNotificationConfigs :: Lens' ListNotificationConfigsResponse [NotificationConfig]
+lncrNotificationConfigs
+  = lens _lncrNotificationConfigs
+      (\ s a -> s{_lncrNotificationConfigs = a})
+      . _Default
+      . _Coerce
+
+-- | Token to retrieve the next page of results, or empty if there are no
+-- more results.
+lncrNextPageToken :: Lens' ListNotificationConfigsResponse (Maybe Text)
+lncrNextPageToken
+  = lens _lncrNextPageToken
+      (\ s a -> s{_lncrNextPageToken = a})
+
+instance FromJSON ListNotificationConfigsResponse
+         where
+        parseJSON
+          = withObject "ListNotificationConfigsResponse"
+              (\ o ->
+                 ListNotificationConfigsResponse' <$>
+                   (o .:? "notificationConfigs" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON ListNotificationConfigsResponse where
+        toJSON ListNotificationConfigsResponse'{..}
+          = object
+              (catMaybes
+                 [("notificationConfigs" .=) <$>
+                    _lncrNotificationConfigs,
+                  ("nextPageToken" .=) <$> _lncrNextPageToken])
 
 -- | Request message for grouping by assets.
 --
 -- /See:/ 'groupAssetsRequest' smart constructor.
 data GroupAssetsRequest =
   GroupAssetsRequest'
-    { _garGroupBy         :: !(Maybe Text)
-    , _garReadTime        :: !(Maybe DateTime')
-    , _garFilter          :: !(Maybe Text)
-    , _garPageToken       :: !(Maybe Text)
-    , _garPageSize        :: !(Maybe (Textual Int32))
+    { _garGroupBy :: !(Maybe Text)
+    , _garReadTime :: !(Maybe DateTime')
+    , _garFilter :: !(Maybe Text)
+    , _garPageToken :: !(Maybe Text)
+    , _garPageSize :: !(Maybe (Textual Int32))
     , _garCompareDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -903,16 +1430,20 @@ groupAssetsRequest =
     }
 
 
--- | Expression that defines what assets fields to use for grouping. The
--- string value should follow SQL syntax: comma separated list of fields.
--- For example:
+-- | Required. Expression that defines what assets fields to use for
+-- grouping. The string value should follow SQL syntax: comma separated
+-- list of fields. For example:
 -- \"security_center_properties.resource_project,security_center_properties.project\".
 -- The following fields are supported when compare_duration is not set: *
 -- security_center_properties.resource_project *
+-- security_center_properties.resource_project_display_name *
 -- security_center_properties.resource_type *
--- security_center_properties.resource_parent The following fields are
--- supported when compare_duration is set: *
--- security_center_properties.resource_type
+-- security_center_properties.resource_parent *
+-- security_center_properties.resource_parent_display_name The following
+-- fields are supported when compare_duration is set: *
+-- security_center_properties.resource_type *
+-- security_center_properties.resource_project_display_name *
+-- security_center_properties.resource_parent_display_name
 garGroupBy :: Lens' GroupAssetsRequest (Maybe Text)
 garGroupBy
   = lens _garGroupBy (\ s a -> s{_garGroupBy = a})
@@ -939,16 +1470,28 @@ garReadTime
 -- for strings. The supported value types are: * string literals in quotes.
 -- * integer literals without quotes. * boolean literals \`true\` and
 -- \`false\` without quotes. The following field and operator combinations
--- are supported: name | \'=\' update_time | \'>\', \'\<\', \'>=\',
--- \'\<=\', \'=\' create_time | \'>\', \'\<\', \'>=\', \'\<=\', \'=\'
--- iam_policy.policy_blob | \'=\', \':\' resource_properties | \'=\',
--- \':\', \'>\', \'\<\', \'>=\', \'\<=\' security_marks | \'=\', \':\'
--- security_center_properties.resource_name | \'=\', \':\'
--- security_center_properties.resource_type | \'=\', \':\'
--- security_center_properties.resource_parent | \'=\', \':\'
--- security_center_properties.resource_project | \'=\', \':\'
--- security_center_properties.resource_owners | \'=\', \':\' For example,
--- \`resource_properties.size = 100\` is a valid filter string.
+-- are supported: * name: \`=\` * update_time: \`=\`, \`>\`, \`\<\`,
+-- \`>=\`, \`\<=\` Usage: This should be milliseconds since epoch or an
+-- RFC3339 string. Examples: \`update_time =
+-- \"2019-06-10T16:07:18-07:00\"\` \`update_time = 1560208038000\` *
+-- create_time: \`=\`, \`>\`, \`\<\`, \`>=\`, \`\<=\` Usage: This should be
+-- milliseconds since epoch or an RFC3339 string. Examples: \`create_time =
+-- \"2019-06-10T16:07:18-07:00\"\` \`create_time = 1560208038000\` *
+-- iam_policy.policy_blob: \`=\`, \`:\` * resource_properties: \`=\`,
+-- \`:\`, \`>\`, \`\<\`, \`>=\`, \`\<=\` * security_marks.marks: \`=\`,
+-- \`:\` * security_center_properties.resource_name: \`=\`, \`:\` *
+-- security_center_properties.resource_name_display_name: \`=\`, \`:\` *
+-- security_center_properties.resource_type: \`=\`, \`:\` *
+-- security_center_properties.resource_parent: \`=\`, \`:\` *
+-- security_center_properties.resource_parent_display_name: \`=\`, \`:\` *
+-- security_center_properties.resource_project: \`=\`, \`:\` *
+-- security_center_properties.resource_project_display_name: \`=\`, \`:\` *
+-- security_center_properties.resource_owners: \`=\`, \`:\` For example,
+-- \`resource_properties.size = 100\` is a valid filter string. Use a
+-- partial match on the empty string to filter based on a property
+-- existing: \`resource_properties.my_property : \"\"\` Use a negated
+-- partial match on the empty string to filter based on a property not
+-- existing: \`-resource_properties.my_property : \"\"\`
 garFilter :: Lens' GroupAssetsRequest (Maybe Text)
 garFilter
   = lens _garFilter (\ s a -> s{_garFilter = a})
@@ -1019,11 +1562,11 @@ instance ToJSON GroupAssetsRequest where
 -- /See:/ 'groupFindingsRequest' smart constructor.
 data GroupFindingsRequest =
   GroupFindingsRequest'
-    { _gGroupBy         :: !(Maybe Text)
-    , _gReadTime        :: !(Maybe DateTime')
-    , _gFilter          :: !(Maybe Text)
-    , _gPageToken       :: !(Maybe Text)
-    , _gPageSize        :: !(Maybe (Textual Int32))
+    { _gGroupBy :: !(Maybe Text)
+    , _gReadTime :: !(Maybe DateTime')
+    , _gFilter :: !(Maybe Text)
+    , _gPageToken :: !(Maybe Text)
+    , _gPageSize :: !(Maybe (Textual Int32))
     , _gCompareDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1057,7 +1600,7 @@ groupFindingsRequest =
     }
 
 
--- | Expression that defines what assets fields to use for grouping
+-- | Required. Expression that defines what assets fields to use for grouping
 -- (including \`state_change\`). The string value should follow SQL syntax:
 -- comma separated list of fields. For example: \"parent,resource_name\".
 -- The following fields are supported: * resource_name * category * state *
@@ -1086,12 +1629,18 @@ gReadTime
 -- \`:\`, meaning substring matching, for strings. The supported value
 -- types are: * string literals in quotes. * integer literals without
 -- quotes. * boolean literals \`true\` and \`false\` without quotes. The
--- following field and operator combinations are supported: name | \`=\`
--- parent | \'=\', \':\' resource_name | \'=\', \':\' state | \'=\', \':\'
--- category | \'=\', \':\' external_uri | \'=\', \':\' event_time | \`>\`,
--- \`\<\`, \`>=\`, \`\<=\` security_marks | \'=\', \':\' source_properties
--- | \'=\', \':\', \`>\`, \`\<\`, \`>=\`, \`\<=\` For example,
--- \`source_properties.size = 100\` is a valid filter string.
+-- following field and operator combinations are supported: * name: \`=\` *
+-- parent: \`=\`, \`:\` * resource_name: \`=\`, \`:\` * state: \`=\`, \`:\`
+-- * category: \`=\`, \`:\` * external_uri: \`=\`, \`:\` * event_time:
+-- \`=\`, \`>\`, \`\<\`, \`>=\`, \`\<=\` Usage: This should be milliseconds
+-- since epoch or an RFC3339 string. Examples: \`event_time =
+-- \"2019-06-10T16:07:18-07:00\"\` \`event_time = 1560208038000\` *
+-- security_marks.marks: \`=\`, \`:\` * source_properties: \`=\`, \`:\`,
+-- \`>\`, \`\<\`, \`>=\`, \`\<=\` For example, \`source_properties.size =
+-- 100\` is a valid filter string. Use a partial match on the empty string
+-- to filter based on a property existing: \`source_properties.my_property
+-- : \"\"\` Use a negated partial match on the empty string to filter based
+-- on a property not existing: \`-source_properties.my_property : \"\"\`
 gFilter :: Lens' GroupFindingsRequest (Maybe Text)
 gFilter = lens _gFilter (\ s a -> s{_gFilter = a})
 
@@ -1119,16 +1668,19 @@ gPageSize
 -- changes between the two times don\'t affect the result. For example, the
 -- results aren\'t affected if the finding is made inactive and then active
 -- again. Possible \"state_change\" values when compare_duration is
--- specified: * \"CHANGED\": indicates that the finding was present at the
--- start of compare_duration, but changed its state at read_time. *
--- \"UNCHANGED\": indicates that the finding was present at the start of
--- compare_duration and did not change state at read_time. * \"ADDED\":
--- indicates that the finding was not present at the start of
--- compare_duration, but was present at read_time. If compare_duration is
--- not specified, then the only possible state_change is \"UNUSED\", which
--- will be the state_change set for all findings present at read_time. If
--- this field is set then \`state_change\` must be a specified field in
--- \`group_by\`.
+-- specified: * \"CHANGED\": indicates that the finding was present and
+-- matched the given filter at the start of compare_duration, but changed
+-- its state at read_time. * \"UNCHANGED\": indicates that the finding was
+-- present and matched the given filter at the start of compare_duration
+-- and did not change state at read_time. * \"ADDED\": indicates that the
+-- finding did not match the given filter or was not present at the start
+-- of compare_duration, but was present at read_time. * \"REMOVED\":
+-- indicates that the finding was present and matched the filter at the
+-- start of compare_duration, but did not match the filter at read_time. If
+-- compare_duration is not specified, then the only possible state_change
+-- is \"UNUSED\", which will be the state_change set for all findings
+-- present at read_time. If this field is set then \`state_change\` must be
+-- a specified field in \`group_by\`.
 gCompareDuration :: Lens' GroupFindingsRequest (Maybe Scientific)
 gCompareDuration
   = lens _gCompareDuration
@@ -1157,13 +1709,99 @@ instance ToJSON GroupFindingsRequest where
                   ("pageSize" .=) <$> _gPageSize,
                   ("compareDuration" .=) <$> _gCompareDuration])
 
+-- | Information related to the Google Cloud resource.
+--
+-- /See:/ 'googleCloudSecuritycenterV1Resource' smart constructor.
+data GoogleCloudSecuritycenterV1Resource =
+  GoogleCloudSecuritycenterV1Resource'
+    { _gParent :: !(Maybe Text)
+    , _gProject :: !(Maybe Text)
+    , _gProjectDisplayName :: !(Maybe Text)
+    , _gName :: !(Maybe Text)
+    , _gParentDisplayName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1Resource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gParent'
+--
+-- * 'gProject'
+--
+-- * 'gProjectDisplayName'
+--
+-- * 'gName'
+--
+-- * 'gParentDisplayName'
+googleCloudSecuritycenterV1Resource
+    :: GoogleCloudSecuritycenterV1Resource
+googleCloudSecuritycenterV1Resource =
+  GoogleCloudSecuritycenterV1Resource'
+    { _gParent = Nothing
+    , _gProject = Nothing
+    , _gProjectDisplayName = Nothing
+    , _gName = Nothing
+    , _gParentDisplayName = Nothing
+    }
+
+
+-- | The full resource name of resource\'s parent.
+gParent :: Lens' GoogleCloudSecuritycenterV1Resource (Maybe Text)
+gParent = lens _gParent (\ s a -> s{_gParent = a})
+
+-- | The full resource name of project that the resource belongs to.
+gProject :: Lens' GoogleCloudSecuritycenterV1Resource (Maybe Text)
+gProject = lens _gProject (\ s a -> s{_gProject = a})
+
+-- | The human readable name of project that the resource belongs to.
+gProjectDisplayName :: Lens' GoogleCloudSecuritycenterV1Resource (Maybe Text)
+gProjectDisplayName
+  = lens _gProjectDisplayName
+      (\ s a -> s{_gProjectDisplayName = a})
+
+-- | The full resource name of the resource. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+gName :: Lens' GoogleCloudSecuritycenterV1Resource (Maybe Text)
+gName = lens _gName (\ s a -> s{_gName = a})
+
+-- | The human readable name of resource\'s parent.
+gParentDisplayName :: Lens' GoogleCloudSecuritycenterV1Resource (Maybe Text)
+gParentDisplayName
+  = lens _gParentDisplayName
+      (\ s a -> s{_gParentDisplayName = a})
+
+instance FromJSON GoogleCloudSecuritycenterV1Resource
+         where
+        parseJSON
+          = withObject "GoogleCloudSecuritycenterV1Resource"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1Resource' <$>
+                   (o .:? "parent") <*> (o .:? "project") <*>
+                     (o .:? "projectDisplayName")
+                     <*> (o .:? "name")
+                     <*> (o .:? "parentDisplayName"))
+
+instance ToJSON GoogleCloudSecuritycenterV1Resource
+         where
+        toJSON GoogleCloudSecuritycenterV1Resource'{..}
+          = object
+              (catMaybes
+                 [("parent" .=) <$> _gParent,
+                  ("project" .=) <$> _gProject,
+                  ("projectDisplayName" .=) <$> _gProjectDisplayName,
+                  ("name" .=) <$> _gName,
+                  ("parentDisplayName" .=) <$> _gParentDisplayName])
+
 -- | The configuration used for Asset Discovery runs.
 --
 -- /See:/ 'assetDiscoveryConfig' smart constructor.
 data AssetDiscoveryConfig =
   AssetDiscoveryConfig'
     { _adcInclusionMode :: !(Maybe AssetDiscoveryConfigInclusionMode)
-    , _adcProjectIds    :: !(Maybe [Text])
+    , _adcProjectIds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1210,139 +1848,15 @@ instance ToJSON AssetDiscoveryConfig where
                  [("inclusionMode" .=) <$> _adcInclusionMode,
                   ("projectIds" .=) <$> _adcProjectIds])
 
--- | Cloud Security Command Center\'s (Cloud SCC) representation of a Google
--- Cloud Platform (GCP) resource. The Asset is a Cloud SCC resource that
--- captures information about a single GCP resource. All modifications to
--- an Asset are only within the context of Cloud SCC and don\'t affect the
--- referenced GCP resource.
---
--- /See:/ 'asset' smart constructor.
-data Asset =
-  Asset'
-    { _aSecurityMarks            :: !(Maybe SecurityMarks)
-    , _aResourceProperties       :: !(Maybe AssetResourceProperties)
-    , _aUpdateTime               :: !(Maybe DateTime')
-    , _aSecurityCenterProperties :: !(Maybe SecurityCenterProperties)
-    , _aName                     :: !(Maybe Text)
-    , _aIAMPolicy                :: !(Maybe IAMPolicy)
-    , _aCreateTime               :: !(Maybe DateTime')
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Asset' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aSecurityMarks'
---
--- * 'aResourceProperties'
---
--- * 'aUpdateTime'
---
--- * 'aSecurityCenterProperties'
---
--- * 'aName'
---
--- * 'aIAMPolicy'
---
--- * 'aCreateTime'
-asset
-    :: Asset
-asset =
-  Asset'
-    { _aSecurityMarks = Nothing
-    , _aResourceProperties = Nothing
-    , _aUpdateTime = Nothing
-    , _aSecurityCenterProperties = Nothing
-    , _aName = Nothing
-    , _aIAMPolicy = Nothing
-    , _aCreateTime = Nothing
-    }
-
-
--- | User specified security marks. These marks are entirely managed by the
--- user and come from the SecurityMarks resource that belongs to the asset.
-aSecurityMarks :: Lens' Asset (Maybe SecurityMarks)
-aSecurityMarks
-  = lens _aSecurityMarks
-      (\ s a -> s{_aSecurityMarks = a})
-
--- | Resource managed properties. These properties are managed and defined by
--- the GCP resource and cannot be modified by the user.
-aResourceProperties :: Lens' Asset (Maybe AssetResourceProperties)
-aResourceProperties
-  = lens _aResourceProperties
-      (\ s a -> s{_aResourceProperties = a})
-
--- | The time at which the asset was last updated, added, or deleted in Cloud
--- SCC.
-aUpdateTime :: Lens' Asset (Maybe UTCTime)
-aUpdateTime
-  = lens _aUpdateTime (\ s a -> s{_aUpdateTime = a}) .
-      mapping _DateTime
-
--- | Cloud SCC managed properties. These properties are managed by Cloud SCC
--- and cannot be modified by the user.
-aSecurityCenterProperties :: Lens' Asset (Maybe SecurityCenterProperties)
-aSecurityCenterProperties
-  = lens _aSecurityCenterProperties
-      (\ s a -> s{_aSecurityCenterProperties = a})
-
--- | The relative resource name of this asset. See:
--- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/assets\/456\".
-aName :: Lens' Asset (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
-
--- | IAM Policy information associated with the GCP resource described by the
--- Cloud SCC asset. This information is managed and defined by the GCP
--- resource and cannot be modified by the user.
-aIAMPolicy :: Lens' Asset (Maybe IAMPolicy)
-aIAMPolicy
-  = lens _aIAMPolicy (\ s a -> s{_aIAMPolicy = a})
-
--- | The time at which the asset was created in Cloud SCC.
-aCreateTime :: Lens' Asset (Maybe UTCTime)
-aCreateTime
-  = lens _aCreateTime (\ s a -> s{_aCreateTime = a}) .
-      mapping _DateTime
-
-instance FromJSON Asset where
-        parseJSON
-          = withObject "Asset"
-              (\ o ->
-                 Asset' <$>
-                   (o .:? "securityMarks") <*>
-                     (o .:? "resourceProperties")
-                     <*> (o .:? "updateTime")
-                     <*> (o .:? "securityCenterProperties")
-                     <*> (o .:? "name")
-                     <*> (o .:? "iamPolicy")
-                     <*> (o .:? "createTime"))
-
-instance ToJSON Asset where
-        toJSON Asset'{..}
-          = object
-              (catMaybes
-                 [("securityMarks" .=) <$> _aSecurityMarks,
-                  ("resourceProperties" .=) <$> _aResourceProperties,
-                  ("updateTime" .=) <$> _aUpdateTime,
-                  ("securityCenterProperties" .=) <$>
-                    _aSecurityCenterProperties,
-                  ("name" .=) <$> _aName,
-                  ("iamPolicy" .=) <$> _aIAMPolicy,
-                  ("createTime" .=) <$> _aCreateTime])
-
--- | User specified security marks that are attached to the parent Cloud
--- Security Command Center (Cloud SCC) resource. Security marks are scoped
--- within a Cloud SCC organization -- they can be modified and viewed by
--- all users who have proper permissions on the organization.
+-- | User specified security marks that are attached to the parent Security
+-- Command Center resource. Security marks are scoped within a Security
+-- Command Center organization -- they can be modified and viewed by all
+-- users who have proper permissions on the organization.
 --
 -- /See:/ 'securityMarks' smart constructor.
 data SecurityMarks =
   SecurityMarks'
-    { _smName  :: !(Maybe Text)
+    { _smName :: !(Maybe Text)
     , _smMarks :: !(Maybe SecurityMarksMarks)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1362,15 +1876,16 @@ securityMarks = SecurityMarks' {_smName = Nothing, _smMarks = Nothing}
 
 -- | The relative resource name of the SecurityMarks. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Examples: \"organizations\/123\/assets\/456\/securityMarks\"
--- \"organizations\/123\/sources\/456\/findings\/789\/securityMarks\".
+-- Examples:
+-- \"organizations\/{organization_id}\/assets\/{asset_id}\/securityMarks\"
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/findings\/{finding_id}\/securityMarks\".
 smName :: Lens' SecurityMarks (Maybe Text)
 smName = lens _smName (\ s a -> s{_smName = a})
 
 -- | Mutable user specified security marks belonging to the parent resource.
--- Constraints are as follows: - Keys and values are treated as case
--- insensitive - Keys must be between 1 - 256 characters (inclusive) - Keys
--- must be letters, numbers, underscores, or dashes - Values have leading
+-- Constraints are as follows: * Keys and values are treated as case
+-- insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys
+-- must be letters, numbers, underscores, or dashes * Values have leading
 -- and trailing whitespace trimmed, remaining characters must be between 1
 -- - 4096 characters (inclusive)
 smMarks :: Lens' SecurityMarks (Maybe SecurityMarksMarks)
@@ -1388,43 +1903,6 @@ instance ToJSON SecurityMarks where
           = object
               (catMaybes
                  [("name" .=) <$> _smName, ("marks" .=) <$> _smMarks])
-
--- | Resource managed properties. These properties are managed and defined by
--- the GCP resource and cannot be modified by the user.
---
--- /See:/ 'assetResourceProperties' smart constructor.
-newtype AssetResourceProperties =
-  AssetResourceProperties'
-    { _arpAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AssetResourceProperties' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'arpAddtional'
-assetResourceProperties
-    :: HashMap Text JSONValue -- ^ 'arpAddtional'
-    -> AssetResourceProperties
-assetResourceProperties pArpAddtional_ =
-  AssetResourceProperties' {_arpAddtional = _Coerce # pArpAddtional_}
-
-
-arpAddtional :: Lens' AssetResourceProperties (HashMap Text JSONValue)
-arpAddtional
-  = lens _arpAddtional (\ s a -> s{_arpAddtional = a})
-      . _Coerce
-
-instance FromJSON AssetResourceProperties where
-        parseJSON
-          = withObject "AssetResourceProperties"
-              (\ o ->
-                 AssetResourceProperties' <$> (parseJSONObject o))
-
-instance ToJSON AssetResourceProperties where
-        toJSON = toJSON . _arpAddtional
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -1461,15 +1939,102 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | User specified settings that are attached to the Cloud Security Command
--- Center (Cloud SCC) organization.
+-- | Security Command Center\'s Notification
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1NotificationMessage' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1NotificationMessage =
+  GoogleCloudSecuritycenterV1p1beta1NotificationMessage'
+    { _gcsvnmFinding :: !(Maybe GoogleCloudSecuritycenterV1p1beta1Finding)
+    , _gcsvnmTemporalAsset :: !(Maybe GoogleCloudSecuritycenterV1p1beta1TemporalAsset)
+    , _gcsvnmResource :: !(Maybe GoogleCloudSecuritycenterV1p1beta1Resource)
+    , _gcsvnmNotificationConfigName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1NotificationMessage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvnmFinding'
+--
+-- * 'gcsvnmTemporalAsset'
+--
+-- * 'gcsvnmResource'
+--
+-- * 'gcsvnmNotificationConfigName'
+googleCloudSecuritycenterV1p1beta1NotificationMessage
+    :: GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+googleCloudSecuritycenterV1p1beta1NotificationMessage =
+  GoogleCloudSecuritycenterV1p1beta1NotificationMessage'
+    { _gcsvnmFinding = Nothing
+    , _gcsvnmTemporalAsset = Nothing
+    , _gcsvnmResource = Nothing
+    , _gcsvnmNotificationConfigName = Nothing
+    }
+
+
+-- | If it\'s a Finding based notification config, this field will be
+-- populated.
+gcsvnmFinding :: Lens' GoogleCloudSecuritycenterV1p1beta1NotificationMessage (Maybe GoogleCloudSecuritycenterV1p1beta1Finding)
+gcsvnmFinding
+  = lens _gcsvnmFinding
+      (\ s a -> s{_gcsvnmFinding = a})
+
+-- | If it\'s an asset based notification config, this field will be
+-- populated.
+gcsvnmTemporalAsset :: Lens' GoogleCloudSecuritycenterV1p1beta1NotificationMessage (Maybe GoogleCloudSecuritycenterV1p1beta1TemporalAsset)
+gcsvnmTemporalAsset
+  = lens _gcsvnmTemporalAsset
+      (\ s a -> s{_gcsvnmTemporalAsset = a})
+
+-- | The Cloud resource tied to the notification.
+gcsvnmResource :: Lens' GoogleCloudSecuritycenterV1p1beta1NotificationMessage (Maybe GoogleCloudSecuritycenterV1p1beta1Resource)
+gcsvnmResource
+  = lens _gcsvnmResource
+      (\ s a -> s{_gcsvnmResource = a})
+
+-- | Name of the notification config that generated current notification.
+gcsvnmNotificationConfigName :: Lens' GoogleCloudSecuritycenterV1p1beta1NotificationMessage (Maybe Text)
+gcsvnmNotificationConfigName
+  = lens _gcsvnmNotificationConfigName
+      (\ s a -> s{_gcsvnmNotificationConfigName = a})
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1NotificationMessage"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1NotificationMessage'
+                   <$>
+                   (o .:? "finding") <*> (o .:? "temporalAsset") <*>
+                     (o .:? "resource")
+                     <*> (o .:? "notificationConfigName"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1NotificationMessage'{..}
+          = object
+              (catMaybes
+                 [("finding" .=) <$> _gcsvnmFinding,
+                  ("temporalAsset" .=) <$> _gcsvnmTemporalAsset,
+                  ("resource" .=) <$> _gcsvnmResource,
+                  ("notificationConfigName" .=) <$>
+                    _gcsvnmNotificationConfigName])
+
+-- | User specified settings that are attached to the Security Command Center
+-- organization.
 --
 -- /See:/ 'organizationSettings' smart constructor.
 data OrganizationSettings =
   OrganizationSettings'
     { _osAssetDiscoveryConfig :: !(Maybe AssetDiscoveryConfig)
     , _osEnableAssetDiscovery :: !(Maybe Bool)
-    , _osName                 :: !(Maybe Text)
+    , _osName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1510,7 +2075,7 @@ osEnableAssetDiscovery
 
 -- | The relative resource name of the settings. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/organizationSettings\".
+-- Example: \"organizations\/{organization_id}\/organizationSettings\".
 osName :: Lens' OrganizationSettings (Maybe Text)
 osName = lens _osName (\ s a -> s{_osName = a})
 
@@ -1533,13 +2098,109 @@ instance ToJSON OrganizationSettings where
                     _osEnableAssetDiscovery,
                   ("name" .=) <$> _osName])
 
+-- | Encapsulates settings provided to GetIamPolicy.
+--
+-- /See:/ 'getPolicyOptions' smart constructor.
+newtype GetPolicyOptions =
+  GetPolicyOptions'
+    { _gpoRequestedPolicyVersion :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpoRequestedPolicyVersion'
+getPolicyOptions
+    :: GetPolicyOptions
+getPolicyOptions = GetPolicyOptions' {_gpoRequestedPolicyVersion = Nothing}
+
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+gpoRequestedPolicyVersion :: Lens' GetPolicyOptions (Maybe Int32)
+gpoRequestedPolicyVersion
+  = lens _gpoRequestedPolicyVersion
+      (\ s a -> s{_gpoRequestedPolicyVersion = a})
+      . mapping _Coerce
+
+instance FromJSON GetPolicyOptions where
+        parseJSON
+          = withObject "GetPolicyOptions"
+              (\ o ->
+                 GetPolicyOptions' <$>
+                   (o .:? "requestedPolicyVersion"))
+
+instance ToJSON GetPolicyOptions where
+        toJSON GetPolicyOptions'{..}
+          = object
+              (catMaybes
+                 [("requestedPolicyVersion" .=) <$>
+                    _gpoRequestedPolicyVersion])
+
+-- | Mutable user specified security marks belonging to the parent resource.
+-- Constraints are as follows: * Keys and values are treated as case
+-- insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys
+-- must be letters, numbers, underscores, or dashes * Values have leading
+-- and trailing whitespace trimmed, remaining characters must be between 1
+-- - 4096 characters (inclusive)
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1SecurityMarksMarks' smart constructor.
+newtype GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks =
+  GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks'
+    { _gcsvsmmAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvsmmAddtional'
+googleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    :: HashMap Text Text -- ^ 'gcsvsmmAddtional'
+    -> GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+googleCloudSecuritycenterV1p1beta1SecurityMarksMarks pGcsvsmmAddtional_ =
+  GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks'
+    {_gcsvsmmAddtional = _Coerce # pGcsvsmmAddtional_}
+
+
+gcsvsmmAddtional :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks (HashMap Text Text)
+gcsvsmmAddtional
+  = lens _gcsvsmmAddtional
+      (\ s a -> s{_gcsvsmmAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+         where
+        toJSON = toJSON . _gcsvsmmAddtional
+
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
 data SetIAMPolicyRequest =
   SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
-    , _siprPolicy     :: !(Maybe Policy)
+    , _siprPolicy :: !(Maybe Policy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1559,8 +2220,7 @@ setIAMPolicyRequest =
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
--- the following default mask is used: paths: \"bindings, etag\" This field
--- is only used by Cloud IAM.
+-- the following default mask is used: \`paths: \"bindings, etag\"\`
 siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe GFieldMask)
 siprUpdateMask
   = lens _siprUpdateMask
@@ -1632,7 +2292,7 @@ instance ToJSON FindingSourceProperties where
 -- /See:/ 'setFindingStateRequest' smart constructor.
 data SetFindingStateRequest =
   SetFindingStateRequest'
-    { _sfsrState     :: !(Maybe SetFindingStateRequestState)
+    { _sfsrState :: !(Maybe SetFindingStateRequestState)
     , _sfsrStartTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1651,12 +2311,12 @@ setFindingStateRequest =
   SetFindingStateRequest' {_sfsrState = Nothing, _sfsrStartTime = Nothing}
 
 
--- | The desired State of the finding.
+-- | Required. The desired State of the finding.
 sfsrState :: Lens' SetFindingStateRequest (Maybe SetFindingStateRequestState)
 sfsrState
   = lens _sfsrState (\ s a -> s{_sfsrState = a})
 
--- | The time at which the updated state takes effect.
+-- | Required. The time at which the updated state takes effect.
 sfsrStartTime :: Lens' SetFindingStateRequest (Maybe UTCTime)
 sfsrStartTime
   = lens _sfsrStartTime
@@ -1677,112 +2337,84 @@ instance ToJSON SetFindingStateRequest where
                  [("state" .=) <$> _sfsrState,
                   ("startTime" .=) <$> _sfsrStartTime])
 
--- | Cloud SCC managed properties. These properties are managed by Cloud SCC
--- and cannot be modified by the user.
+-- | Cloud SCC\'s Notification
 --
--- /See:/ 'securityCenterProperties' smart constructor.
-data SecurityCenterProperties =
-  SecurityCenterProperties'
-    { _scpResourceType    :: !(Maybe Text)
-    , _scpResourceName    :: !(Maybe Text)
-    , _scpResourceParent  :: !(Maybe Text)
-    , _scpResourceProject :: !(Maybe Text)
-    , _scpResourceOwners  :: !(Maybe [Text])
+-- /See:/ 'googleCloudSecuritycenterV1NotificationMessage' smart constructor.
+data GoogleCloudSecuritycenterV1NotificationMessage =
+  GoogleCloudSecuritycenterV1NotificationMessage'
+    { _gFinding :: !(Maybe Finding)
+    , _gResource :: !(Maybe GoogleCloudSecuritycenterV1Resource)
+    , _gNotificationConfigName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'SecurityCenterProperties' with the minimum fields required to make a request.
+-- | Creates a value of 'GoogleCloudSecuritycenterV1NotificationMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scpResourceType'
+-- * 'gFinding'
 --
--- * 'scpResourceName'
+-- * 'gResource'
 --
--- * 'scpResourceParent'
---
--- * 'scpResourceProject'
---
--- * 'scpResourceOwners'
-securityCenterProperties
-    :: SecurityCenterProperties
-securityCenterProperties =
-  SecurityCenterProperties'
-    { _scpResourceType = Nothing
-    , _scpResourceName = Nothing
-    , _scpResourceParent = Nothing
-    , _scpResourceProject = Nothing
-    , _scpResourceOwners = Nothing
+-- * 'gNotificationConfigName'
+googleCloudSecuritycenterV1NotificationMessage
+    :: GoogleCloudSecuritycenterV1NotificationMessage
+googleCloudSecuritycenterV1NotificationMessage =
+  GoogleCloudSecuritycenterV1NotificationMessage'
+    { _gFinding = Nothing
+    , _gResource = Nothing
+    , _gNotificationConfigName = Nothing
     }
 
 
--- | The type of the GCP resource. Examples include: APPLICATION, PROJECT,
--- and ORGANIZATION. This is a case insensitive field defined by Cloud SCC
--- and\/or the producer of the resource and is immutable after create time.
-scpResourceType :: Lens' SecurityCenterProperties (Maybe Text)
-scpResourceType
-  = lens _scpResourceType
-      (\ s a -> s{_scpResourceType = a})
+-- | If it\'s a Finding based notification config, this field will be
+-- populated.
+gFinding :: Lens' GoogleCloudSecuritycenterV1NotificationMessage (Maybe Finding)
+gFinding = lens _gFinding (\ s a -> s{_gFinding = a})
 
--- | The full resource name of the GCP resource this asset represents. This
--- field is immutable after create time. See:
--- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
-scpResourceName :: Lens' SecurityCenterProperties (Maybe Text)
-scpResourceName
-  = lens _scpResourceName
-      (\ s a -> s{_scpResourceName = a})
+-- | The Cloud resource tied to this notification\'s Finding.
+gResource :: Lens' GoogleCloudSecuritycenterV1NotificationMessage (Maybe GoogleCloudSecuritycenterV1Resource)
+gResource
+  = lens _gResource (\ s a -> s{_gResource = a})
 
--- | The full resource name of the immediate parent of the resource. See:
--- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
-scpResourceParent :: Lens' SecurityCenterProperties (Maybe Text)
-scpResourceParent
-  = lens _scpResourceParent
-      (\ s a -> s{_scpResourceParent = a})
+-- | Name of the notification config that generated current notification.
+gNotificationConfigName :: Lens' GoogleCloudSecuritycenterV1NotificationMessage (Maybe Text)
+gNotificationConfigName
+  = lens _gNotificationConfigName
+      (\ s a -> s{_gNotificationConfigName = a})
 
--- | The full resource name of the project the resource belongs to. See:
--- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
-scpResourceProject :: Lens' SecurityCenterProperties (Maybe Text)
-scpResourceProject
-  = lens _scpResourceProject
-      (\ s a -> s{_scpResourceProject = a})
-
--- | Owners of the Google Cloud resource.
-scpResourceOwners :: Lens' SecurityCenterProperties [Text]
-scpResourceOwners
-  = lens _scpResourceOwners
-      (\ s a -> s{_scpResourceOwners = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON SecurityCenterProperties where
+instance FromJSON
+           GoogleCloudSecuritycenterV1NotificationMessage
+         where
         parseJSON
-          = withObject "SecurityCenterProperties"
+          = withObject
+              "GoogleCloudSecuritycenterV1NotificationMessage"
               (\ o ->
-                 SecurityCenterProperties' <$>
-                   (o .:? "resourceType") <*> (o .:? "resourceName") <*>
-                     (o .:? "resourceParent")
-                     <*> (o .:? "resourceProject")
-                     <*> (o .:? "resourceOwners" .!= mempty))
+                 GoogleCloudSecuritycenterV1NotificationMessage' <$>
+                   (o .:? "finding") <*> (o .:? "resource") <*>
+                     (o .:? "notificationConfigName"))
 
-instance ToJSON SecurityCenterProperties where
-        toJSON SecurityCenterProperties'{..}
+instance ToJSON
+           GoogleCloudSecuritycenterV1NotificationMessage
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1NotificationMessage'{..}
           = object
               (catMaybes
-                 [("resourceType" .=) <$> _scpResourceType,
-                  ("resourceName" .=) <$> _scpResourceName,
-                  ("resourceParent" .=) <$> _scpResourceParent,
-                  ("resourceProject" .=) <$> _scpResourceProject,
-                  ("resourceOwners" .=) <$> _scpResourceOwners])
+                 [("finding" .=) <$> _gFinding,
+                  ("resource" .=) <$> _gResource,
+                  ("notificationConfigName" .=) <$>
+                    _gNotificationConfigName])
 
 -- | Response message for grouping by assets.
 --
 -- /See:/ 'groupAssetsResponse' smart constructor.
 data GroupAssetsResponse =
   GroupAssetsResponse'
-    { _groReadTime       :: !(Maybe DateTime')
-    , _groNextPageToken  :: !(Maybe Text)
-    , _groTotalSize      :: !(Maybe (Textual Int32))
+    { _groReadTime :: !(Maybe DateTime')
+    , _groNextPageToken :: !(Maybe Text)
+    , _groTotalSize :: !(Maybe (Textual Int32))
     , _groGroupByResults :: !(Maybe [GroupResult])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1863,7 +2495,7 @@ instance ToJSON GroupAssetsResponse where
 data ListSourcesResponse =
   ListSourcesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrSources       :: !(Maybe [Source])
+    , _lsrSources :: !(Maybe [Source])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1946,12 +2578,99 @@ instance FromJSON GroupResultProperties where
 instance ToJSON GroupResultProperties where
         toJSON = toJSON . _grpAddtional
 
+-- | Information related to the Google Cloud resource that is associated with
+-- this finding.
+--
+-- /See:/ 'resource' smart constructor.
+data Resource =
+  Resource'
+    { _rProjectDisplayName :: !(Maybe Text)
+    , _rName :: !(Maybe Text)
+    , _rProjectName :: !(Maybe Text)
+    , _rParentName :: !(Maybe Text)
+    , _rParentDisplayName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Resource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rProjectDisplayName'
+--
+-- * 'rName'
+--
+-- * 'rProjectName'
+--
+-- * 'rParentName'
+--
+-- * 'rParentDisplayName'
+resource
+    :: Resource
+resource =
+  Resource'
+    { _rProjectDisplayName = Nothing
+    , _rName = Nothing
+    , _rProjectName = Nothing
+    , _rParentName = Nothing
+    , _rParentDisplayName = Nothing
+    }
+
+
+-- | The human readable name of project that the resource belongs to.
+rProjectDisplayName :: Lens' Resource (Maybe Text)
+rProjectDisplayName
+  = lens _rProjectDisplayName
+      (\ s a -> s{_rProjectDisplayName = a})
+
+-- | The full resource name of the resource. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+rName :: Lens' Resource (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
+
+-- | The full resource name of project that the resource belongs to.
+rProjectName :: Lens' Resource (Maybe Text)
+rProjectName
+  = lens _rProjectName (\ s a -> s{_rProjectName = a})
+
+-- | The full resource name of resource\'s parent.
+rParentName :: Lens' Resource (Maybe Text)
+rParentName
+  = lens _rParentName (\ s a -> s{_rParentName = a})
+
+-- | The human readable name of resource\'s parent.
+rParentDisplayName :: Lens' Resource (Maybe Text)
+rParentDisplayName
+  = lens _rParentDisplayName
+      (\ s a -> s{_rParentDisplayName = a})
+
+instance FromJSON Resource where
+        parseJSON
+          = withObject "Resource"
+              (\ o ->
+                 Resource' <$>
+                   (o .:? "projectDisplayName") <*> (o .:? "name") <*>
+                     (o .:? "projectName")
+                     <*> (o .:? "parentName")
+                     <*> (o .:? "parentDisplayName"))
+
+instance ToJSON Resource where
+        toJSON Resource'{..}
+          = object
+              (catMaybes
+                 [("projectDisplayName" .=) <$> _rProjectDisplayName,
+                  ("name" .=) <$> _rName,
+                  ("projectName" .=) <$> _rProjectName,
+                  ("parentName" .=) <$> _rParentName,
+                  ("parentDisplayName" .=) <$> _rParentDisplayName])
+
 -- | Response of asset discovery run
 --
 -- /See:/ 'googleCloudSecuritycenterV1RunAssetDiscoveryResponse' smart constructor.
 data GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse =
   GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse'
-    { _gcsvradrState    :: !(Maybe GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState)
+    { _gcsvradrState :: !(Maybe GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState)
     , _gcsvradrDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2009,10 +2728,10 @@ instance ToJSON
 -- /See:/ 'listAssetsResponse' smart constructor.
 data ListAssetsResponse =
   ListAssetsResponse'
-    { _larReadTime          :: !(Maybe DateTime')
-    , _larNextPageToken     :: !(Maybe Text)
+    { _larReadTime :: !(Maybe DateTime')
+    , _larNextPageToken :: !(Maybe Text)
     , _larListAssetsResults :: !(Maybe [ListAssetsResult])
-    , _larTotalSize         :: !(Maybe (Textual Int32))
+    , _larTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2128,54 +2847,14 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
--- | IAM Policy information associated with the GCP resource described by the
--- Cloud SCC asset. This information is managed and defined by the GCP
--- resource and cannot be modified by the user.
---
--- /See:/ 'iamPolicy' smart constructor.
-newtype IAMPolicy =
-  IAMPolicy'
-    { _ipPolicyBlob :: Maybe Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'IAMPolicy' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ipPolicyBlob'
-iamPolicy
-    :: IAMPolicy
-iamPolicy = IAMPolicy' {_ipPolicyBlob = Nothing}
-
-
--- | The JSON representation of the Policy associated with the asset. See
--- https:\/\/cloud.google.com\/iam\/reference\/rest\/v1\/Policy for format
--- details.
-ipPolicyBlob :: Lens' IAMPolicy (Maybe Text)
-ipPolicyBlob
-  = lens _ipPolicyBlob (\ s a -> s{_ipPolicyBlob = a})
-
-instance FromJSON IAMPolicy where
-        parseJSON
-          = withObject "IAMPolicy"
-              (\ o -> IAMPolicy' <$> (o .:? "policyBlob"))
-
-instance ToJSON IAMPolicy where
-        toJSON IAMPolicy'{..}
-          = object
-              (catMaybes [("policyBlob" .=) <$> _ipPolicyBlob])
-
--- | Cloud Security Command Center\'s (Cloud SCC) finding source. A finding
--- source is an entity or a mechanism that can produce a finding. A source
--- is like a container of findings that come from the same scanner, logger,
--- monitor, etc.
+-- | Security Command Center finding source. A finding source is an entity or
+-- a mechanism that can produce a finding. A source is like a container of
+-- findings that come from the same scanner, logger, monitor, etc.
 --
 -- /See:/ 'source' smart constructor.
 data Source =
   Source'
-    { _sName        :: !(Maybe Text)
+    { _sName :: !(Maybe Text)
     , _sDisplayName :: !(Maybe Text)
     , _sDescription :: !(Maybe Text)
     }
@@ -2199,22 +2878,19 @@ source =
 
 -- | The relative resource name of this source. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/sources\/456\"
+-- Example: \"organizations\/{organization_id}\/sources\/{source_id}\"
 sName :: Lens' Source (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
 -- | The source\'s display name. A source\'s display name must be unique
 -- amongst its siblings, for example, two sources with the same parent
--- can\'t share the same display name. The display name must start and end
--- with a letter or digit, may contain letters, digits, spaces, hyphens,
--- and underscores, and can be no longer than 32 characters. This is
--- captured by the regular expression: [\\p{L}\\p{N}]({\\p{L}\\p{N}_-
--- ]{0,30}[\\p{L}\\p{N}])?.
+-- can\'t share the same display name. The display name must have a length
+-- between 1 and 64 characters (inclusive).
 sDisplayName :: Lens' Source (Maybe Text)
 sDisplayName
   = lens _sDisplayName (\ s a -> s{_sDisplayName = a})
 
--- | The description of the source (max of 1024 characters). Example: \"Cloud
+-- | The description of the source (max of 1024 characters). Example: \"Web
 -- Security Scanner is a web security scanner for common vulnerabilities in
 -- App Engine applications. It can automatically scan and detect four
 -- common vulnerabilities, including cross-site-scripting (XSS), Flash
@@ -2239,6 +2915,321 @@ instance ToJSON Source where
                  [("name" .=) <$> _sName,
                   ("displayName" .=) <$> _sDisplayName,
                   ("description" .=) <$> _sDescription])
+
+-- | Security Command Center finding. A finding is a record of assessment
+-- data (security, risk, health or privacy) ingested into Security Command
+-- Center for presentation, notification, analysis, policy testing, and
+-- enforcement. For example, an XSS vulnerability in an App Engine
+-- application is a finding.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1Finding' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1Finding =
+  GoogleCloudSecuritycenterV1p1beta1Finding'
+    { _gcsvfParent :: !(Maybe Text)
+    , _gcsvfSourceProperties :: !(Maybe GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties)
+    , _gcsvfState :: !(Maybe GoogleCloudSecuritycenterV1p1beta1FindingState)
+    , _gcsvfResourceName :: !(Maybe Text)
+    , _gcsvfSecurityMarks :: !(Maybe GoogleCloudSecuritycenterV1p1beta1SecurityMarks)
+    , _gcsvfCategory :: !(Maybe Text)
+    , _gcsvfSeverity :: !(Maybe GoogleCloudSecuritycenterV1p1beta1FindingSeverity)
+    , _gcsvfExternalURI :: !(Maybe Text)
+    , _gcsvfEventTime :: !(Maybe DateTime')
+    , _gcsvfName :: !(Maybe Text)
+    , _gcsvfCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1Finding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvfParent'
+--
+-- * 'gcsvfSourceProperties'
+--
+-- * 'gcsvfState'
+--
+-- * 'gcsvfResourceName'
+--
+-- * 'gcsvfSecurityMarks'
+--
+-- * 'gcsvfCategory'
+--
+-- * 'gcsvfSeverity'
+--
+-- * 'gcsvfExternalURI'
+--
+-- * 'gcsvfEventTime'
+--
+-- * 'gcsvfName'
+--
+-- * 'gcsvfCreateTime'
+googleCloudSecuritycenterV1p1beta1Finding
+    :: GoogleCloudSecuritycenterV1p1beta1Finding
+googleCloudSecuritycenterV1p1beta1Finding =
+  GoogleCloudSecuritycenterV1p1beta1Finding'
+    { _gcsvfParent = Nothing
+    , _gcsvfSourceProperties = Nothing
+    , _gcsvfState = Nothing
+    , _gcsvfResourceName = Nothing
+    , _gcsvfSecurityMarks = Nothing
+    , _gcsvfCategory = Nothing
+    , _gcsvfSeverity = Nothing
+    , _gcsvfExternalURI = Nothing
+    , _gcsvfEventTime = Nothing
+    , _gcsvfName = Nothing
+    , _gcsvfCreateTime = Nothing
+    }
+
+
+-- | The relative resource name of the source the finding belongs to. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
+-- This field is immutable after creation time. For example:
+-- \"organizations\/{organization_id}\/sources\/{source_id}\"
+gcsvfParent :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe Text)
+gcsvfParent
+  = lens _gcsvfParent (\ s a -> s{_gcsvfParent = a})
+
+-- | Source specific properties. These properties are managed by the source
+-- that writes the finding. The key names in the source_properties map must
+-- be between 1 and 255 characters, and must start with a letter and
+-- contain alphanumeric characters or underscores only.
+gcsvfSourceProperties :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties)
+gcsvfSourceProperties
+  = lens _gcsvfSourceProperties
+      (\ s a -> s{_gcsvfSourceProperties = a})
+
+-- | The state of the finding.
+gcsvfState :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe GoogleCloudSecuritycenterV1p1beta1FindingState)
+gcsvfState
+  = lens _gcsvfState (\ s a -> s{_gcsvfState = a})
+
+-- | For findings on Google Cloud resources, the full resource name of the
+-- Google Cloud resource this finding is for. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name
+-- When the finding is for a non-Google Cloud resource, the resourceName
+-- can be a customer or partner defined string. This field is immutable
+-- after creation time.
+gcsvfResourceName :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe Text)
+gcsvfResourceName
+  = lens _gcsvfResourceName
+      (\ s a -> s{_gcsvfResourceName = a})
+
+-- | Output only. User specified security marks. These marks are entirely
+-- managed by the user and come from the SecurityMarks resource that
+-- belongs to the finding.
+gcsvfSecurityMarks :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe GoogleCloudSecuritycenterV1p1beta1SecurityMarks)
+gcsvfSecurityMarks
+  = lens _gcsvfSecurityMarks
+      (\ s a -> s{_gcsvfSecurityMarks = a})
+
+-- | The additional taxonomy group within findings from a given source. This
+-- field is immutable after creation time. Example: \"XSS_FLASH_INJECTION\"
+gcsvfCategory :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe Text)
+gcsvfCategory
+  = lens _gcsvfCategory
+      (\ s a -> s{_gcsvfCategory = a})
+
+-- | The severity of the finding.
+gcsvfSeverity :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe GoogleCloudSecuritycenterV1p1beta1FindingSeverity)
+gcsvfSeverity
+  = lens _gcsvfSeverity
+      (\ s a -> s{_gcsvfSeverity = a})
+
+-- | The URI that, if available, points to a web page outside of Security
+-- Command Center where additional information about the finding can be
+-- found. This field is guaranteed to be either empty or a well formed URL.
+gcsvfExternalURI :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe Text)
+gcsvfExternalURI
+  = lens _gcsvfExternalURI
+      (\ s a -> s{_gcsvfExternalURI = a})
+
+-- | The time at which the event took place, or when an update to the finding
+-- occurred. For example, if the finding represents an open firewall it
+-- would capture the time the detector believes the firewall became open.
+-- The accuracy is determined by the detector. If the finding were to be
+-- resolved afterward, this time would reflect when the finding was
+-- resolved.
+gcsvfEventTime :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe UTCTime)
+gcsvfEventTime
+  = lens _gcsvfEventTime
+      (\ s a -> s{_gcsvfEventTime = a})
+      . mapping _DateTime
+
+-- | The relative resource name of this finding. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
+-- Example:
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/findings\/{finding_id}\"
+gcsvfName :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe Text)
+gcsvfName
+  = lens _gcsvfName (\ s a -> s{_gcsvfName = a})
+
+-- | The time at which the finding was created in Security Command Center.
+gcsvfCreateTime :: Lens' GoogleCloudSecuritycenterV1p1beta1Finding (Maybe UTCTime)
+gcsvfCreateTime
+  = lens _gcsvfCreateTime
+      (\ s a -> s{_gcsvfCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1Finding
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1Finding"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1Finding' <$>
+                   (o .:? "parent") <*> (o .:? "sourceProperties") <*>
+                     (o .:? "state")
+                     <*> (o .:? "resourceName")
+                     <*> (o .:? "securityMarks")
+                     <*> (o .:? "category")
+                     <*> (o .:? "severity")
+                     <*> (o .:? "externalUri")
+                     <*> (o .:? "eventTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1Finding
+         where
+        toJSON GoogleCloudSecuritycenterV1p1beta1Finding'{..}
+          = object
+              (catMaybes
+                 [("parent" .=) <$> _gcsvfParent,
+                  ("sourceProperties" .=) <$> _gcsvfSourceProperties,
+                  ("state" .=) <$> _gcsvfState,
+                  ("resourceName" .=) <$> _gcsvfResourceName,
+                  ("securityMarks" .=) <$> _gcsvfSecurityMarks,
+                  ("category" .=) <$> _gcsvfCategory,
+                  ("severity" .=) <$> _gcsvfSeverity,
+                  ("externalUri" .=) <$> _gcsvfExternalURI,
+                  ("eventTime" .=) <$> _gcsvfEventTime,
+                  ("name" .=) <$> _gcsvfName,
+                  ("createTime" .=) <$> _gcsvfCreateTime])
+
+-- | Response of asset discovery run
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse =
+  GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse'
+    { _gState :: !(Maybe GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState)
+    , _gDuration :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gState'
+--
+-- * 'gDuration'
+googleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    :: GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+googleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse =
+  GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse'
+    {_gState = Nothing, _gDuration = Nothing}
+
+
+-- | The state of an asset discovery run.
+gState :: Lens' GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse (Maybe GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState)
+gState = lens _gState (\ s a -> s{_gState = a})
+
+-- | The duration between asset discovery run start and end
+gDuration :: Lens' GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse (Maybe Scientific)
+gDuration
+  = lens _gDuration (\ s a -> s{_gDuration = a}) .
+      mapping _GDuration
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse'
+                   <$> (o .:? "state") <*> (o .:? "duration"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _gState,
+                  ("duration" .=) <$> _gDuration])
+
+-- | User specified security marks that are attached to the parent Security
+-- Command Center resource. Security marks are scoped within a Security
+-- Command Center organization -- they can be modified and viewed by all
+-- users who have proper permissions on the organization.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1SecurityMarks' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1SecurityMarks =
+  GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
+    { _gcsvsmName :: !(Maybe Text)
+    , _gcsvsmMarks :: !(Maybe GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1SecurityMarks' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvsmName'
+--
+-- * 'gcsvsmMarks'
+googleCloudSecuritycenterV1p1beta1SecurityMarks
+    :: GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+googleCloudSecuritycenterV1p1beta1SecurityMarks =
+  GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
+    {_gcsvsmName = Nothing, _gcsvsmMarks = Nothing}
+
+
+-- | The relative resource name of the SecurityMarks. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
+-- Examples:
+-- \"organizations\/{organization_id}\/assets\/{asset_id}\/securityMarks\"
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/findings\/{finding_id}\/securityMarks\".
+gcsvsmName :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityMarks (Maybe Text)
+gcsvsmName
+  = lens _gcsvsmName (\ s a -> s{_gcsvsmName = a})
+
+-- | Mutable user specified security marks belonging to the parent resource.
+-- Constraints are as follows: * Keys and values are treated as case
+-- insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys
+-- must be letters, numbers, underscores, or dashes * Values have leading
+-- and trailing whitespace trimmed, remaining characters must be between 1
+-- - 4096 characters (inclusive)
+gcsvsmMarks :: Lens' GoogleCloudSecuritycenterV1p1beta1SecurityMarks (Maybe GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks)
+gcsvsmMarks
+  = lens _gcsvsmMarks (\ s a -> s{_gcsvsmMarks = a})
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1SecurityMarks"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1SecurityMarks' <$>
+                   (o .:? "name") <*> (o .:? "marks"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+         where
+        toJSON
+          GoogleCloudSecuritycenterV1p1beta1SecurityMarks'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _gcsvsmName,
+                  ("marks" .=) <$> _gcsvsmMarks])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
@@ -2288,7 +3279,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'listAssetsResult' smart constructor.
 data ListAssetsResult =
   ListAssetsResult'
-    { _larAsset       :: !(Maybe Asset)
+    { _larAsset :: !(Maybe GoogleCloudSecuritycenterV1p1beta1Asset)
     , _larStateChange :: !(Maybe ListAssetsResultStateChange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2308,7 +3299,7 @@ listAssetsResult =
 
 
 -- | Asset matching the search request.
-larAsset :: Lens' ListAssetsResult (Maybe Asset)
+larAsset :: Lens' ListAssetsResult (Maybe GoogleCloudSecuritycenterV1p1beta1Asset)
 larAsset = lens _larAsset (\ s a -> s{_larAsset = a})
 
 -- | State change of the asset between the points in time.
@@ -2331,31 +3322,48 @@ instance ToJSON ListAssetsResult where
                  [("asset" .=) <$> _larAsset,
                   ("stateChange" .=) <$> _larStateChange])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Bytes)
-    , _pVersion      :: !(Maybe (Textual Int32))
-    , _pBindings     :: !(Maybe [Binding])
+    , _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2397,21 +3405,40 @@ pAuditConfigs
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -2474,16 +3501,151 @@ instance FromJSON OperationMetadata where
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
 
+-- | Security Command Center representation of a Google Cloud resource. The
+-- Asset is a Security Command Center resource that captures information
+-- about a single Google Cloud resource. All modifications to an Asset are
+-- only within the context of Security Command Center and don\'t affect the
+-- referenced Google Cloud resource.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1Asset' smart constructor.
+data GoogleCloudSecuritycenterV1p1beta1Asset =
+  GoogleCloudSecuritycenterV1p1beta1Asset'
+    { _gcsvaSecurityMarks :: !(Maybe GoogleCloudSecuritycenterV1p1beta1SecurityMarks)
+    , _gcsvaResourceProperties :: !(Maybe GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties)
+    , _gcsvaUpdateTime :: !(Maybe DateTime')
+    , _gcsvaSecurityCenterProperties :: !(Maybe GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties)
+    , _gcsvaName :: !(Maybe Text)
+    , _gcsvaIAMPolicy :: !(Maybe GoogleCloudSecuritycenterV1p1beta1IAMPolicy)
+    , _gcsvaCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1Asset' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvaSecurityMarks'
+--
+-- * 'gcsvaResourceProperties'
+--
+-- * 'gcsvaUpdateTime'
+--
+-- * 'gcsvaSecurityCenterProperties'
+--
+-- * 'gcsvaName'
+--
+-- * 'gcsvaIAMPolicy'
+--
+-- * 'gcsvaCreateTime'
+googleCloudSecuritycenterV1p1beta1Asset
+    :: GoogleCloudSecuritycenterV1p1beta1Asset
+googleCloudSecuritycenterV1p1beta1Asset =
+  GoogleCloudSecuritycenterV1p1beta1Asset'
+    { _gcsvaSecurityMarks = Nothing
+    , _gcsvaResourceProperties = Nothing
+    , _gcsvaUpdateTime = Nothing
+    , _gcsvaSecurityCenterProperties = Nothing
+    , _gcsvaName = Nothing
+    , _gcsvaIAMPolicy = Nothing
+    , _gcsvaCreateTime = Nothing
+    }
+
+
+-- | User specified security marks. These marks are entirely managed by the
+-- user and come from the SecurityMarks resource that belongs to the asset.
+gcsvaSecurityMarks :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe GoogleCloudSecuritycenterV1p1beta1SecurityMarks)
+gcsvaSecurityMarks
+  = lens _gcsvaSecurityMarks
+      (\ s a -> s{_gcsvaSecurityMarks = a})
+
+-- | Resource managed properties. These properties are managed and defined by
+-- the Google Cloud resource and cannot be modified by the user.
+gcsvaResourceProperties :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties)
+gcsvaResourceProperties
+  = lens _gcsvaResourceProperties
+      (\ s a -> s{_gcsvaResourceProperties = a})
+
+-- | The time at which the asset was last updated, added, or deleted in Cloud
+-- SCC.
+gcsvaUpdateTime :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe UTCTime)
+gcsvaUpdateTime
+  = lens _gcsvaUpdateTime
+      (\ s a -> s{_gcsvaUpdateTime = a})
+      . mapping _DateTime
+
+-- | Security Command Center managed properties. These properties are managed
+-- by Security Command Center and cannot be modified by the user.
+gcsvaSecurityCenterProperties :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties)
+gcsvaSecurityCenterProperties
+  = lens _gcsvaSecurityCenterProperties
+      (\ s a -> s{_gcsvaSecurityCenterProperties = a})
+
+-- | The relative resource name of this asset. See:
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
+-- Example: \"organizations\/{organization_id}\/assets\/{asset_id}\".
+gcsvaName :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe Text)
+gcsvaName
+  = lens _gcsvaName (\ s a -> s{_gcsvaName = a})
+
+-- | Cloud IAM Policy information associated with the Google Cloud resource
+-- described by the Security Command Center asset. This information is
+-- managed and defined by the Google Cloud resource and cannot be modified
+-- by the user.
+gcsvaIAMPolicy :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe GoogleCloudSecuritycenterV1p1beta1IAMPolicy)
+gcsvaIAMPolicy
+  = lens _gcsvaIAMPolicy
+      (\ s a -> s{_gcsvaIAMPolicy = a})
+
+-- | The time at which the asset was created in Security Command Center.
+gcsvaCreateTime :: Lens' GoogleCloudSecuritycenterV1p1beta1Asset (Maybe UTCTime)
+gcsvaCreateTime
+  = lens _gcsvaCreateTime
+      (\ s a -> s{_gcsvaCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1Asset
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1Asset"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1Asset' <$>
+                   (o .:? "securityMarks") <*>
+                     (o .:? "resourceProperties")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "securityCenterProperties")
+                     <*> (o .:? "name")
+                     <*> (o .:? "iamPolicy")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1Asset
+         where
+        toJSON GoogleCloudSecuritycenterV1p1beta1Asset'{..}
+          = object
+              (catMaybes
+                 [("securityMarks" .=) <$> _gcsvaSecurityMarks,
+                  ("resourceProperties" .=) <$>
+                    _gcsvaResourceProperties,
+                  ("updateTime" .=) <$> _gcsvaUpdateTime,
+                  ("securityCenterProperties" .=) <$>
+                    _gcsvaSecurityCenterProperties,
+                  ("name" .=) <$> _gcsvaName,
+                  ("iamPolicy" .=) <$> _gcsvaIAMPolicy,
+                  ("createTime" .=) <$> _gcsvaCreateTime])
+
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
--- logging, while exempting foo\'gmail.com from DATA_READ logging.
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting jose\'example.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
 data AuditLogConfig =
   AuditLogConfig'
-    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    { _alcLogType :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2531,12 +3693,57 @@ instance ToJSON AuditLogConfig where
                  [("logType" .=) <$> _alcLogType,
                   ("exemptedMembers" .=) <$> _alcExemptedMembers])
 
+-- | Resource managed properties. These properties are managed and defined by
+-- the Google Cloud resource and cannot be modified by the user.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1AssetResourceProperties' smart constructor.
+newtype GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties =
+  GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties'
+    { _gcsvarpAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvarpAddtional'
+googleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    :: HashMap Text JSONValue -- ^ 'gcsvarpAddtional'
+    -> GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+googleCloudSecuritycenterV1p1beta1AssetResourceProperties pGcsvarpAddtional_ =
+  GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties'
+    {_gcsvarpAddtional = _Coerce # pGcsvarpAddtional_}
+
+
+gcsvarpAddtional :: Lens' GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties (HashMap Text JSONValue)
+gcsvarpAddtional
+  = lens _gcsvarpAddtional
+      (\ s a -> s{_gcsvarpAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+         where
+        toJSON = toJSON . _gcsvarpAddtional
+
 -- | Result containing the properties and count of a groupBy request.
 --
 -- /See:/ 'groupResult' smart constructor.
 data GroupResult =
   GroupResult'
-    { _grCount      :: !(Maybe (Textual Int64))
+    { _grCount :: !(Maybe (Textual Int64))
     , _grProperties :: !(Maybe GroupResultProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2622,10 +3829,55 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
+-- | The config for streaming-based notifications, which send each event as
+-- soon as it is detected.
+--
+-- /See:/ 'streamingConfig' smart constructor.
+newtype StreamingConfig =
+  StreamingConfig'
+    { _scFilter :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StreamingConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scFilter'
+streamingConfig
+    :: StreamingConfig
+streamingConfig = StreamingConfig' {_scFilter = Nothing}
+
+
+-- | Expression that defines the filter to apply across create\/update events
+-- of assets or findings as specified by the event type. The expression is
+-- a list of zero or more restrictions combined via logical operators
+-- \`AND\` and \`OR\`. Parentheses are supported, and \`OR\` has higher
+-- precedence than \`AND\`. Restrictions have the form \` \` and may have a
+-- \`-\` character in front of them to indicate negation. The fields map to
+-- those defined in the corresponding resource. The supported operators
+-- are: * \`=\` for all value types. * \`>\`, \`\<\`, \`>=\`, \`\<=\` for
+-- integer values. * \`:\`, meaning substring matching, for strings. The
+-- supported value types are: * string literals in quotes. * integer
+-- literals without quotes. * boolean literals \`true\` and \`false\`
+-- without quotes.
+scFilter :: Lens' StreamingConfig (Maybe Text)
+scFilter = lens _scFilter (\ s a -> s{_scFilter = a})
+
+instance FromJSON StreamingConfig where
+        parseJSON
+          = withObject "StreamingConfig"
+              (\ o -> StreamingConfig' <$> (o .:? "filter"))
+
+instance ToJSON StreamingConfig where
+        toJSON StreamingConfig'{..}
+          = object (catMaybes [("filter" .=) <$> _scFilter])
+
 -- | Mutable user specified security marks belonging to the parent resource.
--- Constraints are as follows: - Keys and values are treated as case
--- insensitive - Keys must be between 1 - 256 characters (inclusive) - Keys
--- must be letters, numbers, underscores, or dashes - Values have leading
+-- Constraints are as follows: * Keys and values are treated as case
+-- insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys
+-- must be letters, numbers, underscores, or dashes * Values have leading
 -- and trailing whitespace trimmed, remaining characters must be between 1
 -- - 4096 characters (inclusive)
 --
@@ -2662,13 +3914,60 @@ instance FromJSON SecurityMarksMarks where
 instance ToJSON SecurityMarksMarks where
         toJSON = toJSON . _smmAddtional
 
+-- | Source specific properties. These properties are managed by the source
+-- that writes the finding. The key names in the source_properties map must
+-- be between 1 and 255 characters, and must start with a letter and
+-- contain alphanumeric characters or underscores only.
+--
+-- /See:/ 'googleCloudSecuritycenterV1p1beta1FindingSourceProperties' smart constructor.
+newtype GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties =
+  GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties'
+    { _gcsvfspAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvfspAddtional'
+googleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    :: HashMap Text JSONValue -- ^ 'gcsvfspAddtional'
+    -> GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+googleCloudSecuritycenterV1p1beta1FindingSourceProperties pGcsvfspAddtional_ =
+  GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties'
+    {_gcsvfspAddtional = _Coerce # pGcsvfspAddtional_}
+
+
+gcsvfspAddtional :: Lens' GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties (HashMap Text JSONValue)
+gcsvfspAddtional
+  = lens _gcsvfspAddtional
+      (\ s a -> s{_gcsvfspAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties"
+              (\ o ->
+                 GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+         where
+        toJSON = toJSON . _gcsvfspAddtional
+
 -- | Response of asset discovery run
 --
 -- /See:/ 'googleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse' smart constructor.
 data GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse =
   GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse'
-    { _gState    :: !(Maybe GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState)
-    , _gDuration :: !(Maybe GDuration)
+    { _gooState :: !(Maybe GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState)
+    , _gooDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2677,24 +3976,24 @@ data GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gState'
+-- * 'gooState'
 --
--- * 'gDuration'
+-- * 'gooDuration'
 googleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
     :: GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
 googleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse =
   GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse'
-    {_gState = Nothing, _gDuration = Nothing}
+    {_gooState = Nothing, _gooDuration = Nothing}
 
 
 -- | The state of an asset discovery run.
-gState :: Lens' GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse (Maybe GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState)
-gState = lens _gState (\ s a -> s{_gState = a})
+gooState :: Lens' GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse (Maybe GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState)
+gooState = lens _gooState (\ s a -> s{_gooState = a})
 
 -- | The duration between asset discovery run start and end
-gDuration :: Lens' GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse (Maybe Scientific)
-gDuration
-  = lens _gDuration (\ s a -> s{_gDuration = a}) .
+gooDuration :: Lens' GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse (Maybe Scientific)
+gooDuration
+  = lens _gooDuration (\ s a -> s{_gooDuration = a}) .
       mapping _GDuration
 
 instance FromJSON
@@ -2714,16 +4013,16 @@ instance ToJSON
           GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse'{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _gState,
-                  ("duration" .=) <$> _gDuration])
+                 [("state" .=) <$> _gooState,
+                  ("duration" .=) <$> _gooDuration])
 
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2751,13 +4050,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -2769,9 +4085,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

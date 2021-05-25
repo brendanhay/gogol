@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -39,6 +39,12 @@ module Network.Google.DFAReporting.Types
     , dlAppURL
     , dlMobileApp
 
+    -- * DisjunctiveMatchStatement
+    , DisjunctiveMatchStatement
+    , disjunctiveMatchStatement
+    , dmsEventFilters
+    , dmsKind
+
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
 
@@ -62,6 +68,15 @@ module Network.Google.DFAReporting.Types
     -- * TargetingTemplatesListSortOrder
     , TargetingTemplatesListSortOrder (..)
 
+    -- * PathReportCompatibleFields
+    , PathReportCompatibleFields
+    , pathReportCompatibleFields
+    , prcfMetrics
+    , prcfChannelGroupings
+    , prcfKind
+    , prcfPathFilters
+    , prcfDimensions
+
     -- * OptimizationActivity
     , OptimizationActivity
     , optimizationActivity
@@ -77,10 +92,7 @@ module Network.Google.DFAReporting.Types
     -- * AdBlockingConfiguration
     , AdBlockingConfiguration
     , adBlockingConfiguration
-    , abcCreativeBundleId
-    , abcOverrideClickThroughURL
     , abcEnabled
-    , abcClickThroughURL
 
     -- * AdvertiserLandingPagesListSortOrder
     , AdvertiserLandingPagesListSortOrder (..)
@@ -131,7 +143,10 @@ module Network.Google.DFAReporting.Types
     , videoSettings
     , vsKind
     , vsCompanionSettings
+    , vsObaSettings
+    , vsObaEnabled
     , vsTranscodeSettings
+    , vsDurationSeconds
     , vsOrientation
     , vsSkippableSettings
 
@@ -195,6 +210,18 @@ module Network.Google.DFAReporting.Types
 
     -- * PricingScheduleCapCostOption
     , PricingScheduleCapCostOption (..)
+
+    -- * ObaIcon
+    , ObaIcon
+    , obaIcon
+    , oiSize
+    , oiIconClickThroughURL
+    , oiYPosition
+    , oiIconClickTrackingURL
+    , oiXPosition
+    , oiProgram
+    , oiIconViewTrackingURL
+    , oiResourceURL
 
     -- * ListPopulationRule
     , ListPopulationRule
@@ -291,6 +318,8 @@ module Network.Google.DFAReporting.Types
     , siteVideoSettings
     , svsKind
     , svsCompanionSettings
+    , svsObaSettings
+    , svsObaEnabled
     , svsTranscodeSettings
     , svsOrientation
     , svsSkippableSettings
@@ -360,7 +389,6 @@ module Network.Google.DFAReporting.Types
     , dsURL
     , dsIdDimensionValue
     , dsInpageTagFormats
-    , dsActive
     , dsName
     , dsId
 
@@ -401,6 +429,13 @@ module Network.Google.DFAReporting.Types
     , cdrrcfKind
     , cdrrcfDimensionFilters
     , cdrrcfOverlapMetrics
+
+    -- * ChannelGroupingRule
+    , ChannelGroupingRule
+    , channelGroupingRule
+    , cgrKind
+    , cgrName
+    , cgrDisjunctiveMatchStatements
 
     -- * FsCommand
     , FsCommand
@@ -526,6 +561,9 @@ module Network.Google.DFAReporting.Types
 
     -- * FloodlightConfigurationNATuralSearchConversionAttributionOption
     , FloodlightConfigurationNATuralSearchConversionAttributionOption (..)
+
+    -- * MeasurementPartnerWrAppingDataTagWrAppingMode
+    , MeasurementPartnerWrAppingDataTagWrAppingMode (..)
 
     -- * PlacementStrategiesListResponse
     , PlacementStrategiesListResponse
@@ -719,7 +757,6 @@ module Network.Google.DFAReporting.Types
     , psTestingStartDate
     , psFloodlightActivityId
     , psEndDate
-    , psDisregardOverdelivery
     , psStartDate
     , psCapCostOption
     , psPricingType
@@ -870,6 +907,17 @@ module Network.Google.DFAReporting.Types
     -- * PlacementsListCompatibilities
     , PlacementsListCompatibilities (..)
 
+    -- * ReportPathCriteria
+    , ReportPathCriteria
+    , reportPathCriteria
+    , rpcCustomChannelGrouping
+    , rpcMetricNames
+    , rpcDateRange
+    , rpcPathFilters
+    , rpcFloodlightConfigId
+    , rpcDimensions
+    , rpcActivityFilters
+
     -- * TargetableRemarketingListsListResponse
     , TargetableRemarketingListsListResponse
     , targetableRemarketingListsListResponse
@@ -989,6 +1037,7 @@ module Network.Google.DFAReporting.Types
     , creRenderingIdDimensionValue
     , creCustomKeyValues
     , creSkipOffSet
+    , creObaIcon
     , creRenderingId
     , creThirdPartyBackupImageImpressionsURL
     , creFsCommand
@@ -1097,10 +1146,12 @@ module Network.Google.DFAReporting.Types
     , rPathToConversionCriteria
     , rKind
     , rFormat
+    , rPathCriteria
     , rReachCriteria
     , rLastModifiedTime
     , rAccountId
     , rName
+    , rPathAttributionCriteria
     , rId
     , rCrossDimensionReachCriteria
     , rType
@@ -1133,6 +1184,7 @@ module Network.Google.DFAReporting.Types
     -- * Campaign
     , Campaign
     , campaign
+    , camMeasurementPartnerLink
     , camAdBlockingConfiguration
     , camCreativeOptimizationConfiguration
     , camCreativeGroupIds
@@ -1170,6 +1222,9 @@ module Network.Google.DFAReporting.Types
 
     -- * CreativesListSortOrder
     , CreativesListSortOrder (..)
+
+    -- * MeasurementPartnerCampaignLinkMeasurementPartner
+    , MeasurementPartnerCampaignLinkMeasurementPartner (..)
 
     -- * InventoryItemsListType
     , InventoryItemsListType (..)
@@ -1209,6 +1264,9 @@ module Network.Google.DFAReporting.Types
     -- * RemarketingListListSource
     , RemarketingListListSource (..)
 
+    -- * MeasurementPartnerCampaignLinkLinkStatus
+    , MeasurementPartnerCampaignLinkLinkStatus (..)
+
     -- * BrowsersListResponse
     , BrowsersListResponse
     , browsersListResponse
@@ -1246,6 +1304,17 @@ module Network.Google.DFAReporting.Types
 
     -- * UserDefinedVariableConfigurationDataType
     , UserDefinedVariableConfigurationDataType (..)
+
+    -- * ReportPathAttributionCriteria
+    , ReportPathAttributionCriteria
+    , reportPathAttributionCriteria
+    , rpacCustomChannelGrouping
+    , rpacMetricNames
+    , rpacDateRange
+    , rpacPathFilters
+    , rpacFloodlightConfigId
+    , rpacDimensions
+    , rpacActivityFilters
 
     -- * FloodlightActivityCacheBustingType
     , FloodlightActivityCacheBustingType (..)
@@ -1428,6 +1497,9 @@ module Network.Google.DFAReporting.Types
     , rptccrpIncludeUnattributedCookieConversions
     , rptccrpIncludeAttributedIPConversions
 
+    -- * MeasurementPartnerWrAppingDataLinkStatus
+    , MeasurementPartnerWrAppingDataLinkStatus (..)
+
     -- * UserRolePermissionsListResponse
     , UserRolePermissionsListResponse
     , userRolePermissionsListResponse
@@ -1479,6 +1551,15 @@ module Network.Google.DFAReporting.Types
     , ctlrKind
     , ctlrConnectionTypes
 
+    -- * EventFilter
+    , EventFilter
+    , eventFilter
+    , efKind
+    , efDimensionFilter
+
+    -- * MeasurementPartnerWrAppingDataMeasurementPartner
+    , MeasurementPartnerWrAppingDataMeasurementPartner (..)
+
     -- * OrdersListResponse
     , OrdersListResponse
     , ordersListResponse
@@ -1505,6 +1586,14 @@ module Network.Google.DFAReporting.Types
     , cgName
     , cgId
     , cgSubAccountId
+
+    -- * ChannelGrouping
+    , ChannelGrouping
+    , channelGrouping
+    , chaRules
+    , chaKind
+    , chaFallbackName
+    , chaName
 
     -- * SubAccountsListSortField
     , SubAccountsListSortField (..)
@@ -1616,8 +1705,10 @@ module Network.Google.DFAReporting.Types
     -- * CompatibleFields
     , CompatibleFields
     , compatibleFields
+    , cfPathReportCompatibleFields
     , cfReachReportCompatibleFields
     , cfCrossDimensionReachReportCompatibleFields
+    , cfPathAttributionReportCompatibleFields
     , cfKind
     , cfFloodlightReportCompatibleFields
     , cfReportCompatibleFields
@@ -1785,6 +1876,12 @@ module Network.Google.DFAReporting.Types
     , osvName
     , osvId
 
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * PathFilterPathMatchPosition
+    , PathFilterPathMatchPosition (..)
+
     -- * InventoryItemsListSortOrder
     , InventoryItemsListSortOrder (..)
 
@@ -1800,6 +1897,13 @@ module Network.Google.DFAReporting.Types
     , acccId
     , acccLevel
     , acccPermissionGroupId
+
+    -- * MeasurementPartnerCampaignLink
+    , MeasurementPartnerCampaignLink
+    , measurementPartnerCampaignLink
+    , mpclLinkStatus
+    , mpclMeasurementPartner
+    , mpclPartnerCampaignId
 
     -- * UserProFile
     , UserProFile
@@ -1855,20 +1959,20 @@ module Network.Google.DFAReporting.Types
     -- * ChangeLog
     , ChangeLog
     , changeLog
-    , chaUserProFileId
-    , chaObjectType
-    , chaUserProFileName
-    , chaKind
-    , chaObjectId
-    , chaAction
-    , chaTransactionId
-    , chaOldValue
-    , chaAccountId
-    , chaNewValue
-    , chaFieldName
-    , chaId
-    , chaSubAccountId
-    , chaChangeTime
+    , chahUserProFileId
+    , chahObjectType
+    , chahUserProFileName
+    , chahKind
+    , chahObjectId
+    , chahAction
+    , chahTransactionId
+    , chahOldValue
+    , chahAccountId
+    , chahNewValue
+    , chahFieldName
+    , chahId
+    , chahSubAccountId
+    , chahChangeTime
 
     -- * Language
     , Language
@@ -1893,6 +1997,8 @@ module Network.Google.DFAReporting.Types
     , FloodlightActivity
     , floodlightActivity
     , faCountingMethod
+    , faAttributionEnabled
+    , faStatus
     , faTagString
     , faSecure
     , faExpectedURL
@@ -1909,7 +2015,6 @@ module Network.Google.DFAReporting.Types
     , faName
     , faPublisherTags
     , faFloodlightActivityGroupId
-    , faHidden
     , faFloodlightActivityGroupType
     , faDefaultTags
     , faFloodlightTagType
@@ -1957,6 +2062,9 @@ module Network.Google.DFAReporting.Types
     , lastModifiedInfo
     , lmiTime
 
+    -- * MeasurementPartnerAdvertiserLinkLinkStatus
+    , MeasurementPartnerAdvertiserLinkLinkStatus (..)
+
     -- * TargetWindow
     , TargetWindow
     , targetWindow
@@ -1982,6 +2090,7 @@ module Network.Google.DFAReporting.Types
     -- * Advertiser
     , Advertiser
     , advertiser
+    , advdMeasurementPartnerLink
     , advdOriginalFloodlightConfigurationId
     , advdStatus
     , advdFloodlightConfigurationId
@@ -2012,6 +2121,16 @@ module Network.Google.DFAReporting.Types
     , urId
     , urPermissions
     , urSubAccountId
+
+    -- * PathFilter
+    , PathFilter
+    , pathFilter
+    , pfEventFilters
+    , pfKind
+    , pfPathMatchPosition
+
+    -- * MeasurementPartnerAdvertiserLinkMeasurementPartner
+    , MeasurementPartnerAdvertiserLinkMeasurementPartner (..)
 
     -- * FloodlightActivityUserDefinedVariableTypesItem
     , FloodlightActivityUserDefinedVariableTypesItem (..)
@@ -2110,6 +2229,15 @@ module Network.Google.DFAReporting.Types
     , dfValue
     , dfDimensionName
 
+    -- * PathReportDimensionValue
+    , PathReportDimensionValue
+    , pathReportDimensionValue
+    , prdvKind
+    , prdvValues
+    , prdvMatchType
+    , prdvIds
+    , prdvDimensionName
+
     -- * UserProFileList
     , UserProFileList
     , userProFileList
@@ -2185,6 +2313,8 @@ module Network.Google.DFAReporting.Types
     , conoChildDirectedTreatment
     , conoGclid
     , conoOrdinal
+    , conoDclid
+    , conoMatchId
 
     -- * CreativeFieldValuesListResponse
     , CreativeFieldValuesListResponse
@@ -2195,6 +2325,14 @@ module Network.Google.DFAReporting.Types
 
     -- * SiteSettingsVpaidAdapterChoiceTemplate
     , SiteSettingsVpaidAdapterChoiceTemplate (..)
+
+    -- * MeasurementPartnerWrAppingData
+    , MeasurementPartnerWrAppingData
+    , measurementPartnerWrAppingData
+    , mpwadLinkStatus
+    , mpwadMeasurementPartner
+    , mpwadWrAppedTag
+    , mpwadTagWrAppingMode
 
     -- * AccountsListSortField
     , AccountsListSortField (..)
@@ -2239,6 +2377,9 @@ module Network.Google.DFAReporting.Types
     , sdKind
     , sdSortOrder
     , sdName
+
+    -- * PathReportDimensionValueMatchType
+    , PathReportDimensionValueMatchType (..)
 
     -- * PlacementGroupsListSortOrder
     , PlacementGroupsListSortOrder (..)
@@ -2563,12 +2704,16 @@ module Network.Google.DFAReporting.Types
     -- * CreativeAssetMetadata
     , CreativeAssetMetadata
     , creativeAssetMetadata
+    , camaRichMedia
+    , camaCounterCustomEvents
     , camaKind
     , camaAssetIdentifier
     , camaIdDimensionValue
+    , camaExitCustomEvents
     , camaClickTags
     , camaWarnedValidationRules
     , camaId
+    , camaTimerCustomEvents
     , camaDetectedFeatures
 
     -- * OmnitureSettings
@@ -2685,6 +2830,16 @@ module Network.Google.DFAReporting.Types
     , assComment
     , assCompatibility
 
+    -- * MeasurementPartnerAdvertiserLink
+    , MeasurementPartnerAdvertiserLink
+    , measurementPartnerAdvertiserLink
+    , mpalLinkStatus
+    , mpalMeasurementPartner
+    , mpalPartnerAdvertiserId
+
+    -- * FloodlightActivityStatus
+    , FloodlightActivityStatus (..)
+
     -- * ThirdPartyTrackingURL
     , ThirdPartyTrackingURL
     , thirdPartyTrackingURL
@@ -2747,6 +2902,7 @@ module Network.Google.DFAReporting.Types
     , p1Status
     , p1VideoSettings
     , p1PlacementStrategyId
+    , p1PartnerWrAppingData
     , p1TagFormats
     , p1SiteIdDimensionValue
     , p1PricingSchedule
@@ -2760,6 +2916,7 @@ module Network.Google.DFAReporting.Types
     , p1IdDimensionValue
     , p1VpaidAdapterChoice
     , p1AdBlockingOptOut
+    , p1WrAppingOptOut
     , p1Primary
     , p1LookbackConfiguration
     , p1TagSetting
@@ -2850,15 +3007,15 @@ module Network.Google.DFAReporting.Types
     , lteExpression
     ) where
 
-import           Network.Google.DFAReporting.Types.Product
-import           Network.Google.DFAReporting.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types.Product
+import Network.Google.DFAReporting.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v3.3' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3.5' of the Campaign Manager 360 API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v3.3")
-      "www.googleapis.com"
+  = defaultService (ServiceId "dfareporting:v3.5")
+      "dfareporting.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports
 dFAReportingScope :: Proxy '["https://www.googleapis.com/auth/dfareporting"]

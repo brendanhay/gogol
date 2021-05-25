@@ -33,11 +33,16 @@ module Network.Google.Resource.Gmail.Users.GetProFile
     , UsersGetProFile
 
     -- * Request Lenses
+    , ugpfXgafv
+    , ugpfUploadProtocol
+    , ugpfAccessToken
+    , ugpfUploadType
     , ugpfUserId
+    , ugpfCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.getProfile@ method which the
 -- 'UsersGetProFile' request conforms to.
@@ -47,14 +52,24 @@ type UsersGetProFileResource =
          "users" :>
            Capture "userId" Text :>
              "profile" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] ProFile
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] ProFile
 
 -- | Gets the current user\'s Gmail profile.
 --
 -- /See:/ 'usersGetProFile' smart constructor.
-newtype UsersGetProFile =
+data UsersGetProFile =
   UsersGetProFile'
-    { _ugpfUserId :: Text
+    { _ugpfXgafv :: !(Maybe Xgafv)
+    , _ugpfUploadProtocol :: !(Maybe Text)
+    , _ugpfAccessToken :: !(Maybe Text)
+    , _ugpfUploadType :: !(Maybe Text)
+    , _ugpfUserId :: !Text
+    , _ugpfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,17 +78,63 @@ newtype UsersGetProFile =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ugpfXgafv'
+--
+-- * 'ugpfUploadProtocol'
+--
+-- * 'ugpfAccessToken'
+--
+-- * 'ugpfUploadType'
+--
 -- * 'ugpfUserId'
+--
+-- * 'ugpfCallback'
 usersGetProFile
     :: UsersGetProFile
-usersGetProFile = UsersGetProFile' {_ugpfUserId = "me"}
+usersGetProFile =
+  UsersGetProFile'
+    { _ugpfXgafv = Nothing
+    , _ugpfUploadProtocol = Nothing
+    , _ugpfAccessToken = Nothing
+    , _ugpfUploadType = Nothing
+    , _ugpfUserId = "me"
+    , _ugpfCallback = Nothing
+    }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+ugpfXgafv :: Lens' UsersGetProFile (Maybe Xgafv)
+ugpfXgafv
+  = lens _ugpfXgafv (\ s a -> s{_ugpfXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ugpfUploadProtocol :: Lens' UsersGetProFile (Maybe Text)
+ugpfUploadProtocol
+  = lens _ugpfUploadProtocol
+      (\ s a -> s{_ugpfUploadProtocol = a})
+
+-- | OAuth access token.
+ugpfAccessToken :: Lens' UsersGetProFile (Maybe Text)
+ugpfAccessToken
+  = lens _ugpfAccessToken
+      (\ s a -> s{_ugpfAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ugpfUploadType :: Lens' UsersGetProFile (Maybe Text)
+ugpfUploadType
+  = lens _ugpfUploadType
+      (\ s a -> s{_ugpfUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 ugpfUserId :: Lens' UsersGetProFile Text
 ugpfUserId
   = lens _ugpfUserId (\ s a -> s{_ugpfUserId = a})
+
+-- | JSONP
+ugpfCallback :: Lens' UsersGetProFile (Maybe Text)
+ugpfCallback
+  = lens _ugpfCallback (\ s a -> s{_ugpfCallback = a})
 
 instance GoogleRequest UsersGetProFile where
         type Rs UsersGetProFile = ProFile
@@ -84,7 +145,12 @@ instance GoogleRequest UsersGetProFile where
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersGetProFile'{..}
-          = go _ugpfUserId (Just AltJSON) gmailService
+          = go _ugpfUserId _ugpfXgafv _ugpfUploadProtocol
+              _ugpfAccessToken
+              _ugpfUploadType
+              _ugpfCallback
+              (Just AltJSON)
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersGetProFileResource)

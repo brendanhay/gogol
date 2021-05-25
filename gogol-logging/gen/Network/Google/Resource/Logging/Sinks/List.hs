@@ -22,7 +22,7 @@
 --
 -- Lists sinks.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.sinks.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.sinks.list@.
 module Network.Google.Resource.Logging.Sinks.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.Sinks.List
     , slCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.sinks.list@ method which the
 -- 'SinksList' request conforms to.
@@ -67,14 +67,14 @@ type SinksListResource =
 -- /See:/ 'sinksList' smart constructor.
 data SinksList =
   SinksList'
-    { _slParent         :: !Text
-    , _slXgafv          :: !(Maybe Xgafv)
+    { _slParent :: !Text
+    , _slXgafv :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
-    , _slAccessToken    :: !(Maybe Text)
-    , _slUploadType     :: !(Maybe Text)
-    , _slPageToken      :: !(Maybe Text)
-    , _slPageSize       :: !(Maybe (Textual Int32))
-    , _slCallback       :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slPageToken :: !(Maybe Text)
+    , _slPageSize :: !(Maybe (Textual Int32))
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

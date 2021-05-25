@@ -45,8 +45,8 @@ module Network.Google.Resource.OSLogin.Users.ImportSSHPublicKey
     , uispkCallback
     ) where
 
-import           Network.Google.OSLogin.Types
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oslogin.users.importSshPublicKey@ method which the
 -- 'UsersImportSSHPublicKey' request conforms to.
@@ -70,14 +70,14 @@ type UsersImportSSHPublicKeyResource =
 -- /See:/ 'usersImportSSHPublicKey' smart constructor.
 data UsersImportSSHPublicKey =
   UsersImportSSHPublicKey'
-    { _uispkParent         :: !Text
-    , _uispkXgafv          :: !(Maybe Xgafv)
+    { _uispkParent :: !Text
+    , _uispkXgafv :: !(Maybe Xgafv)
     , _uispkUploadProtocol :: !(Maybe Text)
-    , _uispkAccessToken    :: !(Maybe Text)
-    , _uispkUploadType     :: !(Maybe Text)
-    , _uispkPayload        :: !SSHPublicKey
-    , _uispkProjectId      :: !(Maybe Text)
-    , _uispkCallback       :: !(Maybe Text)
+    , _uispkAccessToken :: !(Maybe Text)
+    , _uispkUploadType :: !(Maybe Text)
+    , _uispkPayload :: !SSHPublicKey
+    , _uispkProjectId :: !(Maybe Text)
+    , _uispkCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,7 +118,7 @@ usersImportSSHPublicKey pUispkParent_ pUispkPayload_ =
     }
 
 
--- | The unique ID for the user in format \`users\/{user}\`.
+-- | Required. The unique ID for the user in format \`users\/{user}\`.
 uispkParent :: Lens' UsersImportSSHPublicKey Text
 uispkParent
   = lens _uispkParent (\ s a -> s{_uispkParent = a})

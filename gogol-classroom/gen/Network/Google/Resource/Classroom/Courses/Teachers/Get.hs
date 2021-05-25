@@ -46,8 +46,8 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Get
     , ctgtCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.teachers.get@ method which the
 -- 'CoursesTeachersGet' request conforms to.
@@ -73,13 +73,13 @@ type CoursesTeachersGetResource =
 -- /See:/ 'coursesTeachersGet' smart constructor.
 data CoursesTeachersGet =
   CoursesTeachersGet'
-    { _ctgtXgafv          :: !(Maybe Xgafv)
+    { _ctgtXgafv :: !(Maybe Xgafv)
     , _ctgtUploadProtocol :: !(Maybe Text)
-    , _ctgtCourseId       :: !Text
-    , _ctgtAccessToken    :: !(Maybe Text)
-    , _ctgtUploadType     :: !(Maybe Text)
-    , _ctgtUserId         :: !Text
-    , _ctgtCallback       :: !(Maybe Text)
+    , _ctgtCourseId :: !Text
+    , _ctgtAccessToken :: !(Maybe Text)
+    , _ctgtUploadType :: !(Maybe Text)
+    , _ctgtUserId :: !Text
+    , _ctgtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

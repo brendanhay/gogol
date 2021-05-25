@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specified caption track.
+-- Deletes a resource.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.delete@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.captions.delete@.
 module Network.Google.Resource.YouTube.Captions.Delete
     (
     -- * REST Resource
@@ -34,12 +34,17 @@ module Network.Google.Resource.YouTube.Captions.Delete
 
     -- * Request Lenses
     , cddOnBehalfOf
+    , cddXgafv
+    , cddUploadProtocol
+    , cddAccessToken
+    , cddUploadType
     , cddOnBehalfOfContentOwner
     , cddId
+    , cddCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.delete@ method which the
 -- 'CaptionsDelete' request conforms to.
@@ -49,17 +54,27 @@ type CaptionsDeleteResource =
          "captions" :>
            QueryParam "id" Text :>
              QueryParam "onBehalfOf" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a specified caption track.
+-- | Deletes a resource.
 --
 -- /See:/ 'captionsDelete' smart constructor.
 data CaptionsDelete =
   CaptionsDelete'
-    { _cddOnBehalfOf             :: !(Maybe Text)
+    { _cddOnBehalfOf :: !(Maybe Text)
+    , _cddXgafv :: !(Maybe Xgafv)
+    , _cddUploadProtocol :: !(Maybe Text)
+    , _cddAccessToken :: !(Maybe Text)
+    , _cddUploadType :: !(Maybe Text)
     , _cddOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cddId                     :: !Text
+    , _cddId :: !Text
+    , _cddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,17 +85,32 @@ data CaptionsDelete =
 --
 -- * 'cddOnBehalfOf'
 --
+-- * 'cddXgafv'
+--
+-- * 'cddUploadProtocol'
+--
+-- * 'cddAccessToken'
+--
+-- * 'cddUploadType'
+--
 -- * 'cddOnBehalfOfContentOwner'
 --
 -- * 'cddId'
+--
+-- * 'cddCallback'
 captionsDelete
     :: Text -- ^ 'cddId'
     -> CaptionsDelete
 captionsDelete pCddId_ =
   CaptionsDelete'
     { _cddOnBehalfOf = Nothing
+    , _cddXgafv = Nothing
+    , _cddUploadProtocol = Nothing
+    , _cddAccessToken = Nothing
+    , _cddUploadType = Nothing
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddId = pCddId_
+    , _cddCallback = Nothing
     }
 
 
@@ -91,8 +121,30 @@ cddOnBehalfOf
   = lens _cddOnBehalfOf
       (\ s a -> s{_cddOnBehalfOf = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | V1 error format.
+cddXgafv :: Lens' CaptionsDelete (Maybe Xgafv)
+cddXgafv = lens _cddXgafv (\ s a -> s{_cddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cddUploadProtocol :: Lens' CaptionsDelete (Maybe Text)
+cddUploadProtocol
+  = lens _cddUploadProtocol
+      (\ s a -> s{_cddUploadProtocol = a})
+
+-- | OAuth access token.
+cddAccessToken :: Lens' CaptionsDelete (Maybe Text)
+cddAccessToken
+  = lens _cddAccessToken
+      (\ s a -> s{_cddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cddUploadType :: Lens' CaptionsDelete (Maybe Text)
+cddUploadType
+  = lens _cddUploadType
+      (\ s a -> s{_cddUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -106,11 +158,13 @@ cddOnBehalfOfContentOwner
   = lens _cddOnBehalfOfContentOwner
       (\ s a -> s{_cddOnBehalfOfContentOwner = a})
 
--- | The id parameter identifies the caption track that is being deleted. The
--- value is a caption track ID as identified by the id property in a
--- caption resource.
 cddId :: Lens' CaptionsDelete Text
 cddId = lens _cddId (\ s a -> s{_cddId = a})
+
+-- | JSONP
+cddCallback :: Lens' CaptionsDelete (Maybe Text)
+cddCallback
+  = lens _cddCallback (\ s a -> s{_cddCallback = a})
 
 instance GoogleRequest CaptionsDelete where
         type Rs CaptionsDelete = ()
@@ -118,8 +172,12 @@ instance GoogleRequest CaptionsDelete where
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsDelete'{..}
-          = go (Just _cddId) _cddOnBehalfOf
+          = go (Just _cddId) _cddOnBehalfOf _cddXgafv
+              _cddUploadProtocol
+              _cddAccessToken
+              _cddUploadType
               _cddOnBehalfOfContentOwner
+              _cddCallback
               (Just AltJSON)
               youTubeService
           where go

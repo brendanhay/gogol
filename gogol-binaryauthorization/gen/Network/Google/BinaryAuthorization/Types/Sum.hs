@@ -16,7 +16,7 @@
 --
 module Network.Google.BinaryAuthorization.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Required. The action when a pod creation is denied by the admission
 -- rule.
@@ -126,11 +126,20 @@ data PkixPublicKeySignatureAlgorithm
     | EcdsaP256SHA256
       -- ^ @ECDSA_P256_SHA256@
       -- ECDSA on the NIST P-256 curve with a SHA256 digest.
+    | EcSignP256SHA256
+      -- ^ @EC_SIGN_P256_SHA256@
+      -- ECDSA on the NIST P-256 curve with a SHA256 digest.
     | EcdsaP384SHA384
       -- ^ @ECDSA_P384_SHA384@
       -- ECDSA on the NIST P-384 curve with a SHA384 digest.
+    | EcSignP384SHA384
+      -- ^ @EC_SIGN_P384_SHA384@
+      -- ECDSA on the NIST P-384 curve with a SHA384 digest.
     | EcdsaP521SHA512
       -- ^ @ECDSA_P521_SHA512@
+      -- ECDSA on the NIST P-521 curve with a SHA512 digest.
+    | EcSignP521SHA512
+      -- ^ @EC_SIGN_P521_SHA512@
       -- ECDSA on the NIST P-521 curve with a SHA512 digest.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -148,8 +157,11 @@ instance FromHttpApiData PkixPublicKeySignatureAlgorithm where
         "RSA_SIGN_PKCS1_4096_SHA256" -> Right RsaSignPKCS14096SHA256
         "RSA_SIGN_PKCS1_4096_SHA512" -> Right RsaSignPKCS14096SHA512
         "ECDSA_P256_SHA256" -> Right EcdsaP256SHA256
+        "EC_SIGN_P256_SHA256" -> Right EcSignP256SHA256
         "ECDSA_P384_SHA384" -> Right EcdsaP384SHA384
+        "EC_SIGN_P384_SHA384" -> Right EcSignP384SHA384
         "ECDSA_P521_SHA512" -> Right EcdsaP521SHA512
+        "EC_SIGN_P521_SHA512" -> Right EcSignP521SHA512
         x -> Left ("Unable to parse PkixPublicKeySignatureAlgorithm from: " <> x)
 
 instance ToHttpApiData PkixPublicKeySignatureAlgorithm where
@@ -164,8 +176,11 @@ instance ToHttpApiData PkixPublicKeySignatureAlgorithm where
         RsaSignPKCS14096SHA256 -> "RSA_SIGN_PKCS1_4096_SHA256"
         RsaSignPKCS14096SHA512 -> "RSA_SIGN_PKCS1_4096_SHA512"
         EcdsaP256SHA256 -> "ECDSA_P256_SHA256"
+        EcSignP256SHA256 -> "EC_SIGN_P256_SHA256"
         EcdsaP384SHA384 -> "ECDSA_P384_SHA384"
+        EcSignP384SHA384 -> "EC_SIGN_P384_SHA384"
         EcdsaP521SHA512 -> "ECDSA_P521_SHA512"
+        EcSignP521SHA512 -> "EC_SIGN_P521_SHA512"
 
 instance FromJSON PkixPublicKeySignatureAlgorithm where
     parseJSON = parseJSONText "PkixPublicKeySignatureAlgorithm"
@@ -241,4 +256,38 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | The result of the Attestation validation.
+data ValidateAttestationOccurrenceResponseResult
+    = ResultUnspecified
+      -- ^ @RESULT_UNSPECIFIED@
+      -- Unspecified.
+    | Verified
+      -- ^ @VERIFIED@
+      -- The Attestation was able to verified by the Attestor.
+    | AttestationNotVerifiable
+      -- ^ @ATTESTATION_NOT_VERIFIABLE@
+      -- The Attestation was not able to verified by the Attestor.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ValidateAttestationOccurrenceResponseResult
+
+instance FromHttpApiData ValidateAttestationOccurrenceResponseResult where
+    parseQueryParam = \case
+        "RESULT_UNSPECIFIED" -> Right ResultUnspecified
+        "VERIFIED" -> Right Verified
+        "ATTESTATION_NOT_VERIFIABLE" -> Right AttestationNotVerifiable
+        x -> Left ("Unable to parse ValidateAttestationOccurrenceResponseResult from: " <> x)
+
+instance ToHttpApiData ValidateAttestationOccurrenceResponseResult where
+    toQueryParam = \case
+        ResultUnspecified -> "RESULT_UNSPECIFIED"
+        Verified -> "VERIFIED"
+        AttestationNotVerifiable -> "ATTESTATION_NOT_VERIFIABLE"
+
+instance FromJSON ValidateAttestationOccurrenceResponseResult where
+    parseJSON = parseJSONText "ValidateAttestationOccurrenceResponseResult"
+
+instance ToJSON ValidateAttestationOccurrenceResponseResult where
     toJSON = toJSONText

@@ -20,18 +20,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Checks whether an operation on a service should be allowed to proceed
--- based on the configuration of the service and related policies. It must
--- be called before the operation is executed. If feasible, the client
--- should cache the check results and reuse them for 60 seconds. In case of
--- any server errors, the client should rely on the cached results for much
--- longer time to avoid outage. WARNING: There is general 60s delay for the
--- configuration and policy propagation, therefore callers MUST NOT depend
--- on the \`Check\` method having the latest policy information. NOTE: the
--- CheckRequest has the size limit of 64KB. This method requires the
+-- Private Preview. This feature is only available for approved services.
+-- This method provides admission control for services that are integrated
+-- with [Service Infrastructure](\/service-infrastructure). It checks
+-- whether an operation should be allowed based on the service
+-- configuration and relevant policies. It must be called before the
+-- operation is executed. For more information, see [Admission
+-- Control](\/service-infrastructure\/docs\/admission-control). NOTE: The
+-- admission control has an expected policy propagation delay of 60s. The
+-- caller **must** not depend on the most recent policy changes. NOTE: The
+-- admission control has a hard limit of 1 referenced resources per call.
+-- If an operation refers to more than 1 resources, the caller must call
+-- the Check method multiple times. This method requires the
 -- \`servicemanagement.services.check\` permission on the specified
--- service. For more information, see [Cloud
--- IAM](https:\/\/cloud.google.com\/iam).
+-- service. For more information, see [Service Control API Access
+-- Control](https:\/\/cloud.google.com\/service-infrastructure\/docs\/service-control\/access-control).
 --
 -- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference> for @servicecontrol.services.check@.
 module Network.Google.Resource.ServiceControl.Services.Check
@@ -53,13 +56,13 @@ module Network.Google.Resource.ServiceControl.Services.Check
     , scCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceControl.Types
+import Network.Google.Prelude
+import Network.Google.ServiceControl.Types
 
 -- | A resource alias for @servicecontrol.services.check@ method which the
 -- 'ServicesCheck' request conforms to.
 type ServicesCheckResource =
-     "v1" :>
+     "v2" :>
        "services" :>
          CaptureMode "serviceName" "check" Text :>
            QueryParam "$.xgafv" Xgafv :>
@@ -71,29 +74,32 @@ type ServicesCheckResource =
                        ReqBody '[JSON] CheckRequest :>
                          Post '[JSON] CheckResponse
 
--- | Checks whether an operation on a service should be allowed to proceed
--- based on the configuration of the service and related policies. It must
--- be called before the operation is executed. If feasible, the client
--- should cache the check results and reuse them for 60 seconds. In case of
--- any server errors, the client should rely on the cached results for much
--- longer time to avoid outage. WARNING: There is general 60s delay for the
--- configuration and policy propagation, therefore callers MUST NOT depend
--- on the \`Check\` method having the latest policy information. NOTE: the
--- CheckRequest has the size limit of 64KB. This method requires the
+-- | Private Preview. This feature is only available for approved services.
+-- This method provides admission control for services that are integrated
+-- with [Service Infrastructure](\/service-infrastructure). It checks
+-- whether an operation should be allowed based on the service
+-- configuration and relevant policies. It must be called before the
+-- operation is executed. For more information, see [Admission
+-- Control](\/service-infrastructure\/docs\/admission-control). NOTE: The
+-- admission control has an expected policy propagation delay of 60s. The
+-- caller **must** not depend on the most recent policy changes. NOTE: The
+-- admission control has a hard limit of 1 referenced resources per call.
+-- If an operation refers to more than 1 resources, the caller must call
+-- the Check method multiple times. This method requires the
 -- \`servicemanagement.services.check\` permission on the specified
--- service. For more information, see [Cloud
--- IAM](https:\/\/cloud.google.com\/iam).
+-- service. For more information, see [Service Control API Access
+-- Control](https:\/\/cloud.google.com\/service-infrastructure\/docs\/service-control\/access-control).
 --
 -- /See:/ 'servicesCheck' smart constructor.
 data ServicesCheck =
   ServicesCheck'
-    { _scXgafv          :: !(Maybe Xgafv)
+    { _scXgafv :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
-    , _scAccessToken    :: !(Maybe Text)
-    , _scUploadType     :: !(Maybe Text)
-    , _scPayload        :: !CheckRequest
-    , _scServiceName    :: !Text
-    , _scCallback       :: !(Maybe Text)
+    , _scAccessToken :: !(Maybe Text)
+    , _scUploadType :: !(Maybe Text)
+    , _scPayload :: !CheckRequest
+    , _scServiceName :: !Text
+    , _scCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

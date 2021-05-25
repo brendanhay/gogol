@@ -46,8 +46,8 @@ module Network.Google.Resource.Calendar.Events.Instances
     , eEventId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.instances@ method which the
 -- 'EventsInstances' request conforms to.
@@ -76,17 +76,17 @@ type EventsInstancesResource =
 -- /See:/ 'eventsInstances' smart constructor.
 data EventsInstances =
   EventsInstances'
-    { _eCalendarId         :: !Text
-    , _eTimeMin            :: !(Maybe DateTime')
-    , _eShowDeleted        :: !(Maybe Bool)
-    , _eOriginalStart      :: !(Maybe Text)
-    , _eMaxAttendees       :: !(Maybe (Textual Int32))
-    , _ePageToken          :: !(Maybe Text)
-    , _eTimeZone           :: !(Maybe Text)
-    , _eMaxResults         :: !(Maybe (Textual Int32))
+    { _eCalendarId :: !Text
+    , _eTimeMin :: !(Maybe DateTime')
+    , _eShowDeleted :: !(Maybe Bool)
+    , _eOriginalStart :: !(Maybe Text)
+    , _eMaxAttendees :: !(Maybe (Textual Int32))
+    , _ePageToken :: !(Maybe Text)
+    , _eTimeZone :: !(Maybe Text)
+    , _eMaxResults :: !(Maybe (Textual Int32))
     , _eAlwaysIncludeEmail :: !(Maybe Bool)
-    , _eTimeMax            :: !(Maybe DateTime')
-    , _eEventId            :: !Text
+    , _eTimeMax :: !(Maybe DateTime')
+    , _eEventId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -192,12 +192,10 @@ eMaxResults
   = lens _eMaxResults (\ s a -> s{_eMaxResults = a}) .
       mapping _Coerce
 
--- | Whether to always include a value in the email field for the organizer,
--- creator and attendees, even if no real email is available (i.e. a
--- generated, non-working value will be provided). The use of this option
--- is discouraged and should only be used by clients which cannot handle
--- the absence of an email address value in the mentioned places. Optional.
--- The default is False.
+-- | Deprecated and ignored. A value will always be returned in the email
+-- field for the organizer, creator and attendees, even if no real email
+-- address is available (i.e. a generated, non-working value will be
+-- provided).
 eAlwaysIncludeEmail :: Lens' EventsInstances (Maybe Bool)
 eAlwaysIncludeEmail
   = lens _eAlwaysIncludeEmail

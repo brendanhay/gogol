@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetInstances.Delete
     , tidZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetInstances.delete@ method which the
 -- 'TargetInstancesDelete' request conforms to.
@@ -61,10 +61,10 @@ type TargetInstancesDeleteResource =
 -- /See:/ 'targetInstancesDelete' smart constructor.
 data TargetInstancesDelete =
   TargetInstancesDelete'
-    { _tidRequestId      :: !(Maybe Text)
-    , _tidProject        :: !Text
+    { _tidRequestId :: !(Maybe Text)
+    , _tidProject :: !Text
     , _tidTargetInstance :: !Text
-    , _tidZone           :: !Text
+    , _tidZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -34,12 +34,17 @@ module Network.Google.Resource.Gmail.Users.Messages.BatchDelete
     , UsersMessagesBatchDelete
 
     -- * Request Lenses
+    , umbdXgafv
+    , umbdUploadProtocol
+    , umbdAccessToken
+    , umbdUploadType
     , umbdPayload
     , umbdUserId
+    , umbdCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.batchDelete@ method which the
 -- 'UsersMessagesBatchDelete' request conforms to.
@@ -50,9 +55,14 @@ type UsersMessagesBatchDeleteResource =
            Capture "userId" Text :>
              "messages" :>
                "batchDelete" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] BatchDeleteMessagesRequest :>
-                     Post '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] BatchDeleteMessagesRequest :>
+                               Post '[JSON] ()
 
 -- | Deletes many messages by message ID. Provides no guarantees that
 -- messages were not already deleted or even existed at all.
@@ -60,8 +70,13 @@ type UsersMessagesBatchDeleteResource =
 -- /See:/ 'usersMessagesBatchDelete' smart constructor.
 data UsersMessagesBatchDelete =
   UsersMessagesBatchDelete'
-    { _umbdPayload :: !BatchDeleteMessagesRequest
-    , _umbdUserId  :: !Text
+    { _umbdXgafv :: !(Maybe Xgafv)
+    , _umbdUploadProtocol :: !(Maybe Text)
+    , _umbdAccessToken :: !(Maybe Text)
+    , _umbdUploadType :: !(Maybe Text)
+    , _umbdPayload :: !BatchDeleteMessagesRequest
+    , _umbdUserId :: !Text
+    , _umbdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,33 +85,84 @@ data UsersMessagesBatchDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'umbdXgafv'
+--
+-- * 'umbdUploadProtocol'
+--
+-- * 'umbdAccessToken'
+--
+-- * 'umbdUploadType'
+--
 -- * 'umbdPayload'
 --
 -- * 'umbdUserId'
+--
+-- * 'umbdCallback'
 usersMessagesBatchDelete
     :: BatchDeleteMessagesRequest -- ^ 'umbdPayload'
     -> UsersMessagesBatchDelete
 usersMessagesBatchDelete pUmbdPayload_ =
-  UsersMessagesBatchDelete' {_umbdPayload = pUmbdPayload_, _umbdUserId = "me"}
+  UsersMessagesBatchDelete'
+    { _umbdXgafv = Nothing
+    , _umbdUploadProtocol = Nothing
+    , _umbdAccessToken = Nothing
+    , _umbdUploadType = Nothing
+    , _umbdPayload = pUmbdPayload_
+    , _umbdUserId = "me"
+    , _umbdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+umbdXgafv :: Lens' UsersMessagesBatchDelete (Maybe Xgafv)
+umbdXgafv
+  = lens _umbdXgafv (\ s a -> s{_umbdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+umbdUploadProtocol :: Lens' UsersMessagesBatchDelete (Maybe Text)
+umbdUploadProtocol
+  = lens _umbdUploadProtocol
+      (\ s a -> s{_umbdUploadProtocol = a})
+
+-- | OAuth access token.
+umbdAccessToken :: Lens' UsersMessagesBatchDelete (Maybe Text)
+umbdAccessToken
+  = lens _umbdAccessToken
+      (\ s a -> s{_umbdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+umbdUploadType :: Lens' UsersMessagesBatchDelete (Maybe Text)
+umbdUploadType
+  = lens _umbdUploadType
+      (\ s a -> s{_umbdUploadType = a})
 
 -- | Multipart request metadata.
 umbdPayload :: Lens' UsersMessagesBatchDelete BatchDeleteMessagesRequest
 umbdPayload
   = lens _umbdPayload (\ s a -> s{_umbdPayload = a})
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 umbdUserId :: Lens' UsersMessagesBatchDelete Text
 umbdUserId
   = lens _umbdUserId (\ s a -> s{_umbdUserId = a})
+
+-- | JSONP
+umbdCallback :: Lens' UsersMessagesBatchDelete (Maybe Text)
+umbdCallback
+  = lens _umbdCallback (\ s a -> s{_umbdCallback = a})
 
 instance GoogleRequest UsersMessagesBatchDelete where
         type Rs UsersMessagesBatchDelete = ()
         type Scopes UsersMessagesBatchDelete =
              '["https://mail.google.com/"]
         requestClient UsersMessagesBatchDelete'{..}
-          = go _umbdUserId (Just AltJSON) _umbdPayload
+          = go _umbdUserId _umbdXgafv _umbdUploadProtocol
+              _umbdAccessToken
+              _umbdUploadType
+              _umbdCallback
+              (Just AltJSON)
+              _umbdPayload
               gmailService
           where go
                   = buildClient

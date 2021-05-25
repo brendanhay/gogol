@@ -48,8 +48,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.GetIAMPolicy
     , pngipCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.getIamPolicy@ method which the
 -- 'ProjectsNotesGetIAMPolicy' request conforms to.
@@ -76,13 +76,13 @@ type ProjectsNotesGetIAMPolicyResource =
 -- /See:/ 'projectsNotesGetIAMPolicy' smart constructor.
 data ProjectsNotesGetIAMPolicy =
   ProjectsNotesGetIAMPolicy'
-    { _pngipXgafv          :: !(Maybe Xgafv)
+    { _pngipXgafv :: !(Maybe Xgafv)
     , _pngipUploadProtocol :: !(Maybe Text)
-    , _pngipAccessToken    :: !(Maybe Text)
-    , _pngipUploadType     :: !(Maybe Text)
-    , _pngipPayload        :: !GetIAMPolicyRequest
-    , _pngipResource       :: !Text
-    , _pngipCallback       :: !(Maybe Text)
+    , _pngipAccessToken :: !(Maybe Text)
+    , _pngipUploadType :: !(Maybe Text)
+    , _pngipPayload :: !GetIAMPolicyRequest
+    , _pngipResource :: !Text
+    , _pngipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -17,8 +17,8 @@
 --
 module Network.Google.Spectrum.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Spectrum.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Spectrum.Types.Sum
 
 -- | A region is represented using the polygonal shape.
 --
@@ -75,7 +75,7 @@ instance ToJSON GeoLocationPolygon where
 -- /See:/ 'geoLocationPoint' smart constructor.
 data GeoLocationPoint =
   GeoLocationPoint'
-    { _glpLatitude  :: !(Maybe (Textual Double))
+    { _glpLatitude :: !(Maybe (Textual Double))
     , _glpLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -130,10 +130,10 @@ instance ToJSON GeoLocationPoint where
 -- /See:/ 'pawsInitResponse' smart constructor.
 data PawsInitResponse =
   PawsInitResponse'
-    { _pirKind           :: !Text
-    , _pirVersion        :: !(Maybe Text)
-    , _pirRulesetInfo    :: !(Maybe RulesetInfo)
-    , _pirType           :: !(Maybe Text)
+    { _pirKind :: !Text
+    , _pirVersion :: !(Maybe Text)
+    , _pirRulesetInfo :: !(Maybe RulesetInfo)
+    , _pirType :: !(Maybe Text)
     , _pirDatabaseChange :: !(Maybe DBUpdateSpec)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -226,9 +226,9 @@ instance ToJSON PawsInitResponse where
 -- /See:/ 'pawsRegisterResponse' smart constructor.
 data PawsRegisterResponse =
   PawsRegisterResponse'
-    { _prrKind           :: !Text
-    , _prrVersion        :: !(Maybe Text)
-    , _prrType           :: !(Maybe Text)
+    { _prrKind :: !Text
+    , _prrVersion :: !(Maybe Text)
+    , _prrType :: !(Maybe Text)
     , _prrDatabaseChange :: !(Maybe DBUpdateSpec)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -306,10 +306,10 @@ instance ToJSON PawsRegisterResponse where
 -- /See:/ 'pawsNotifySpectrumUseRequest' smart constructor.
 data PawsNotifySpectrumUseRequest =
   PawsNotifySpectrumUseRequest'
-    { _pnsurSpectra    :: !(Maybe [SpectrumMessage])
-    , _pnsurLocation   :: !(Maybe GeoLocation)
-    , _pnsurVersion    :: !(Maybe Text)
-    , _pnsurType       :: !(Maybe Text)
+    { _pnsurSpectra :: !(Maybe [SpectrumMessage])
+    , _pnsurLocation :: !(Maybe GeoLocation)
+    , _pnsurVersion :: !(Maybe Text)
+    , _pnsurType :: !(Maybe Text)
     , _pnsurDeviceDesc :: !(Maybe DeviceDescriptor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -414,10 +414,10 @@ instance ToJSON PawsNotifySpectrumUseRequest where
 data Vcard =
   Vcard'
     { _vEmail :: !(Maybe VcardTypedText)
-    , _vAdr   :: !(Maybe VcardAddress)
-    , _vOrg   :: !(Maybe VcardTypedText)
-    , _vTel   :: !(Maybe VcardTelephone)
-    , _vFn    :: !(Maybe Text)
+    , _vAdr :: !(Maybe VcardAddress)
+    , _vOrg :: !(Maybe VcardTypedText)
+    , _vTel :: !(Maybe VcardTelephone)
+    , _vFn :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -530,15 +530,15 @@ instance ToJSON DBUpdateSpec where
 -- /See:/ 'pawsGetSpectrumBatchRequest' smart constructor.
 data PawsGetSpectrumBatchRequest =
   PawsGetSpectrumBatchRequest'
-    { _pgsbrAntenna          :: !(Maybe AntennaCharacteristics)
+    { _pgsbrAntenna :: !(Maybe AntennaCharacteristics)
     , _pgsbrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
-    , _pgsbrOwner            :: !(Maybe DeviceOwner)
-    , _pgsbrRequestType      :: !(Maybe Text)
-    , _pgsbrVersion          :: !(Maybe Text)
-    , _pgsbrType             :: !(Maybe Text)
-    , _pgsbrLocations        :: !(Maybe [GeoLocation])
-    , _pgsbrCapabilities     :: !(Maybe DeviceCapabilities)
-    , _pgsbrDeviceDesc       :: !(Maybe DeviceDescriptor)
+    , _pgsbrOwner :: !(Maybe DeviceOwner)
+    , _pgsbrRequestType :: !(Maybe Text)
+    , _pgsbrVersion :: !(Maybe Text)
+    , _pgsbrType :: !(Maybe Text)
+    , _pgsbrLocations :: !(Maybe [GeoLocation])
+    , _pgsbrCapabilities :: !(Maybe DeviceCapabilities)
+    , _pgsbrDeviceDesc :: !(Maybe DeviceDescriptor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -703,7 +703,7 @@ instance ToJSON PawsGetSpectrumBatchRequest where
 -- /See:/ 'geoSpectrumSchedule' smart constructor.
 data GeoSpectrumSchedule =
   GeoSpectrumSchedule'
-    { _gssLocation          :: !(Maybe GeoLocation)
+    { _gssLocation :: !(Maybe GeoLocation)
     , _gssSpectrumSchedules :: !(Maybe [SpectrumSchedule])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -794,7 +794,7 @@ instance ToJSON VcardTypedText where
 -- /See:/ 'spectrumSchedule' smart constructor.
 data SpectrumSchedule =
   SpectrumSchedule'
-    { _ssSpectra   :: !(Maybe [SpectrumMessage])
+    { _ssSpectra :: !(Maybe [SpectrumMessage])
     , _ssEventTime :: !(Maybe EventTime)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -887,7 +887,7 @@ instance ToJSON VcardTelephone where
 data DeviceOwner =
   DeviceOwner'
     { _doOperator :: !(Maybe Vcard)
-    , _doOwner    :: !(Maybe Vcard)
+    , _doOwner :: !(Maybe Vcard)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -938,7 +938,7 @@ instance ToJSON DeviceOwner where
 data EventTime =
   EventTime'
     { _etStartTime :: !(Maybe Text)
-    , _etStopTime  :: !(Maybe Text)
+    , _etStopTime :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -985,15 +985,15 @@ instance ToJSON EventTime where
 -- /See:/ 'pawsGetSpectrumRequest' smart constructor.
 data PawsGetSpectrumRequest =
   PawsGetSpectrumRequest'
-    { _pgsrAntenna          :: !(Maybe AntennaCharacteristics)
+    { _pgsrAntenna :: !(Maybe AntennaCharacteristics)
     , _pgsrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
-    , _pgsrLocation         :: !(Maybe GeoLocation)
-    , _pgsrOwner            :: !(Maybe DeviceOwner)
-    , _pgsrRequestType      :: !(Maybe Text)
-    , _pgsrVersion          :: !(Maybe Text)
-    , _pgsrType             :: !(Maybe Text)
-    , _pgsrCapabilities     :: !(Maybe DeviceCapabilities)
-    , _pgsrDeviceDesc       :: !(Maybe DeviceDescriptor)
+    , _pgsrLocation :: !(Maybe GeoLocation)
+    , _pgsrOwner :: !(Maybe DeviceOwner)
+    , _pgsrRequestType :: !(Maybe Text)
+    , _pgsrVersion :: !(Maybe Text)
+    , _pgsrType :: !(Maybe Text)
+    , _pgsrCapabilities :: !(Maybe DeviceCapabilities)
+    , _pgsrDeviceDesc :: !(Maybe DeviceDescriptor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1153,8 +1153,8 @@ instance ToJSON PawsGetSpectrumRequest where
 -- /See:/ 'antennaCharacteristics' smart constructor.
 data AntennaCharacteristics =
   AntennaCharacteristics'
-    { _acHeight            :: !(Maybe (Textual Double))
-    , _acHeightType        :: !(Maybe Text)
+    { _acHeight :: !(Maybe (Textual Double))
+    , _acHeightType :: !(Maybe Text)
     , _acHeightUncertainty :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1224,10 +1224,10 @@ instance ToJSON AntennaCharacteristics where
 data PawsVerifyDeviceResponse =
   PawsVerifyDeviceResponse'
     { _pvdrDeviceValidities :: !(Maybe [DeviceValidity])
-    , _pvdrKind             :: !Text
-    , _pvdrVersion          :: !(Maybe Text)
-    , _pvdrType             :: !(Maybe Text)
-    , _pvdrDatabaseChange   :: !(Maybe DBUpdateSpec)
+    , _pvdrKind :: !Text
+    , _pvdrVersion :: !(Maybe Text)
+    , _pvdrType :: !(Maybe Text)
+    , _pvdrDatabaseChange :: !(Maybe DBUpdateSpec)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1320,12 +1320,12 @@ instance ToJSON PawsVerifyDeviceResponse where
 -- /See:/ 'vcardAddress' smart constructor.
 data VcardAddress =
   VcardAddress'
-    { _vaPobox    :: !(Maybe Text)
-    , _vaCountry  :: !(Maybe Text)
-    , _vaStreet   :: !(Maybe Text)
+    { _vaPobox :: !(Maybe Text)
+    , _vaCountry :: !(Maybe Text)
+    , _vaStreet :: !(Maybe Text)
     , _vaLocality :: !(Maybe Text)
-    , _vaCode     :: !(Maybe Text)
-    , _vaRegion   :: !(Maybe Text)
+    , _vaCode :: !(Maybe Text)
+    , _vaRegion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1413,17 +1413,17 @@ instance ToJSON VcardAddress where
 -- /See:/ 'pawsGetSpectrumBatchResponse' smart constructor.
 data PawsGetSpectrumBatchResponse =
   PawsGetSpectrumBatchResponse'
-    { _pNeedsSpectrumReport  :: !(Maybe Bool)
-    , _pKind                 :: !Text
+    { _pNeedsSpectrumReport :: !(Maybe Bool)
+    , _pKind :: !Text
     , _pGeoSpectrumSchedules :: !(Maybe [GeoSpectrumSchedule])
-    , _pMaxContiguousBwHz    :: !(Maybe (Textual Double))
-    , _pVersion              :: !(Maybe Text)
-    , _pRulesetInfo          :: !(Maybe RulesetInfo)
-    , _pType                 :: !(Maybe Text)
-    , _pDatabaseChange       :: !(Maybe DBUpdateSpec)
-    , _pTimestamp            :: !(Maybe Text)
-    , _pDeviceDesc           :: !(Maybe DeviceDescriptor)
-    , _pMaxTotalBwHz         :: !(Maybe (Textual Double))
+    , _pMaxContiguousBwHz :: !(Maybe (Textual Double))
+    , _pVersion :: !(Maybe Text)
+    , _pRulesetInfo :: !(Maybe RulesetInfo)
+    , _pType :: !(Maybe Text)
+    , _pDatabaseChange :: !(Maybe DBUpdateSpec)
+    , _pTimestamp :: !(Maybe Text)
+    , _pDeviceDesc :: !(Maybe DeviceDescriptor)
+    , _pMaxTotalBwHz :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1615,8 +1615,8 @@ instance ToJSON PawsGetSpectrumBatchResponse where
 -- /See:/ 'deviceValidity' smart constructor.
 data DeviceValidity =
   DeviceValidity'
-    { _dvIsValid    :: !(Maybe Bool)
-    , _dvReason     :: !(Maybe Text)
+    { _dvIsValid :: !(Maybe Bool)
+    , _dvReason :: !(Maybe Text)
     , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1678,8 +1678,8 @@ instance ToJSON DeviceValidity where
 data GeoLocationEllipse =
   GeoLocationEllipse'
     { _gleSemiMajorAxis :: !(Maybe (Textual Double))
-    , _gleCenter        :: !(Maybe GeoLocationPoint)
-    , _gleOrientation   :: !(Maybe (Textual Double))
+    , _gleCenter :: !(Maybe GeoLocationPoint)
+    , _gleOrientation :: !(Maybe (Textual Double))
     , _gleSemiMinorAxis :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1767,10 +1767,10 @@ instance ToJSON GeoLocationEllipse where
 -- /See:/ 'rulesetInfo' smart constructor.
 data RulesetInfo =
   RulesetInfo'
-    { _riRulesetIds        :: !(Maybe [Text])
-    , _riMaxPollingSecs    :: !(Maybe (Textual Int32))
+    { _riRulesetIds :: !(Maybe [Text])
+    , _riMaxPollingSecs :: !(Maybe (Textual Int32))
     , _riMaxLocationChange :: !(Maybe (Textual Double))
-    , _riAuthority         :: !(Maybe Text)
+    , _riAuthority :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1874,12 +1874,12 @@ instance ToJSON RulesetInfo where
 -- /See:/ 'pawsRegisterRequest' smart constructor.
 data PawsRegisterRequest =
   PawsRegisterRequest'
-    { _pawAntenna     :: !(Maybe AntennaCharacteristics)
-    , _pawLocation    :: !(Maybe GeoLocation)
+    { _pawAntenna :: !(Maybe AntennaCharacteristics)
+    , _pawLocation :: !(Maybe GeoLocation)
     , _pawDeviceOwner :: !(Maybe DeviceOwner)
-    , _pawVersion     :: !(Maybe Text)
-    , _pawType        :: !(Maybe Text)
-    , _pawDeviceDesc  :: !(Maybe DeviceDescriptor)
+    , _pawVersion :: !(Maybe Text)
+    , _pawType :: !(Maybe Text)
+    , _pawDeviceDesc :: !(Maybe DeviceDescriptor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1971,9 +1971,9 @@ instance ToJSON PawsRegisterRequest where
 -- /See:/ 'pawsNotifySpectrumUseResponse' smart constructor.
 data PawsNotifySpectrumUseResponse =
   PawsNotifySpectrumUseResponse'
-    { _pnsurnKind    :: !Text
+    { _pnsurnKind :: !Text
     , _pnsurnVersion :: !(Maybe Text)
-    , _pnsurnType    :: !(Maybe Text)
+    , _pnsurnType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2038,7 +2038,7 @@ instance ToJSON PawsNotifySpectrumUseResponse where
 -- /See:/ 'databaseSpec' smart constructor.
 data DatabaseSpec =
   DatabaseSpec'
-    { _dsURI  :: !(Maybe Text)
+    { _dsURI :: !(Maybe Text)
     , _dsName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2082,7 +2082,7 @@ instance ToJSON DatabaseSpec where
 -- /See:/ 'spectrumMessage' smart constructor.
 data SpectrumMessage =
   SpectrumMessage'
-    { _smBandwidth       :: !(Maybe (Textual Double))
+    { _smBandwidth :: !(Maybe (Textual Double))
     , _smFrequencyRanges :: !(Maybe [FrequencyRange])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2142,8 +2142,8 @@ instance ToJSON SpectrumMessage where
 data GeoLocation =
   GeoLocation'
     { _glConfidence :: !(Maybe (Textual Int32))
-    , _glPoint      :: !(Maybe GeoLocationEllipse)
-    , _glRegion     :: !(Maybe GeoLocationPolygon)
+    , _glPoint :: !(Maybe GeoLocationEllipse)
+    , _glRegion :: !(Maybe GeoLocationPolygon)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2210,10 +2210,10 @@ instance ToJSON GeoLocation where
 -- /See:/ 'frequencyRange' smart constructor.
 data FrequencyRange =
   FrequencyRange'
-    { _frStopHz      :: !(Maybe (Textual Double))
+    { _frStopHz :: !(Maybe (Textual Double))
     , _frMaxPowerDBm :: !(Maybe (Textual Double))
-    , _frChannelId   :: !(Maybe Text)
-    , _frStartHz     :: !(Maybe (Textual Double))
+    , _frChannelId :: !(Maybe Text)
+    , _frStartHz :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2298,16 +2298,16 @@ instance ToJSON FrequencyRange where
 data PawsGetSpectrumResponse =
   PawsGetSpectrumResponse'
     { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
-    , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
-    , _pgsrgKind                :: !Text
-    , _pgsrgMaxContiguousBwHz   :: !(Maybe (Textual Double))
-    , _pgsrgVersion             :: !(Maybe Text)
-    , _pgsrgRulesetInfo         :: !(Maybe RulesetInfo)
-    , _pgsrgType                :: !(Maybe Text)
-    , _pgsrgDatabaseChange      :: !(Maybe DBUpdateSpec)
-    , _pgsrgTimestamp           :: !(Maybe Text)
-    , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
-    , _pgsrgMaxTotalBwHz        :: !(Maybe (Textual Double))
+    , _pgsrgSpectrumSchedules :: !(Maybe [SpectrumSchedule])
+    , _pgsrgKind :: !Text
+    , _pgsrgMaxContiguousBwHz :: !(Maybe (Textual Double))
+    , _pgsrgVersion :: !(Maybe Text)
+    , _pgsrgRulesetInfo :: !(Maybe RulesetInfo)
+    , _pgsrgType :: !(Maybe Text)
+    , _pgsrgDatabaseChange :: !(Maybe DBUpdateSpec)
+    , _pgsrgTimestamp :: !(Maybe Text)
+    , _pgsrgDeviceDesc :: !(Maybe DeviceDescriptor)
+    , _pgsrgMaxTotalBwHz :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2498,9 +2498,9 @@ instance ToJSON PawsGetSpectrumResponse where
 -- /See:/ 'pawsVerifyDeviceRequest' smart constructor.
 data PawsVerifyDeviceRequest =
   PawsVerifyDeviceRequest'
-    { _pvdrvVersion     :: !(Maybe Text)
+    { _pvdrvVersion :: !(Maybe Text)
     , _pvdrvDeviceDescs :: !(Maybe [DeviceDescriptor])
-    , _pvdrvType        :: !(Maybe Text)
+    , _pvdrvType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2567,15 +2567,15 @@ instance ToJSON PawsVerifyDeviceRequest where
 data DeviceDescriptor =
   DeviceDescriptor'
     { _ddEtsiEnDeviceEmissionsClass :: !(Maybe Text)
-    , _ddRulesetIds                 :: !(Maybe [Text])
-    , _ddModelId                    :: !(Maybe Text)
-    , _ddEtsiEnDeviceType           :: !(Maybe Text)
-    , _ddEtsiEnTechnologyId         :: !(Maybe Text)
-    , _ddFccId                      :: !(Maybe Text)
-    , _ddManufacturerId             :: !(Maybe Text)
-    , _ddFccTvbdDeviceType          :: !(Maybe Text)
-    , _ddEtsiEnDeviceCategory       :: !(Maybe Text)
-    , _ddSerialNumber               :: !(Maybe Text)
+    , _ddRulesetIds :: !(Maybe [Text])
+    , _ddModelId :: !(Maybe Text)
+    , _ddEtsiEnDeviceType :: !(Maybe Text)
+    , _ddEtsiEnTechnologyId :: !(Maybe Text)
+    , _ddFccId :: !(Maybe Text)
+    , _ddManufacturerId :: !(Maybe Text)
+    , _ddFccTvbdDeviceType :: !(Maybe Text)
+    , _ddEtsiEnDeviceCategory :: !(Maybe Text)
+    , _ddSerialNumber :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2742,9 +2742,9 @@ instance ToJSON DeviceDescriptor where
 -- /See:/ 'pawsInitRequest' smart constructor.
 data PawsInitRequest =
   PawsInitRequest'
-    { _piriLocation   :: !(Maybe GeoLocation)
-    , _piriVersion    :: !(Maybe Text)
-    , _piriType       :: !(Maybe Text)
+    { _piriLocation :: !(Maybe GeoLocation)
+    , _piriVersion :: !(Maybe Text)
+    , _piriType :: !(Maybe Text)
     , _piriDeviceDesc :: !(Maybe DeviceDescriptor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

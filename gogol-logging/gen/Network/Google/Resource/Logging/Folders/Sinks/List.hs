@@ -22,7 +22,7 @@
 --
 -- Lists sinks.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.sinks.list@.
 module Network.Google.Resource.Logging.Folders.Sinks.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.Folders.Sinks.List
     , fslCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.sinks.list@ method which the
 -- 'FoldersSinksList' request conforms to.
@@ -67,14 +67,14 @@ type FoldersSinksListResource =
 -- /See:/ 'foldersSinksList' smart constructor.
 data FoldersSinksList =
   FoldersSinksList'
-    { _fslParent         :: !Text
-    , _fslXgafv          :: !(Maybe Xgafv)
+    { _fslParent :: !Text
+    , _fslXgafv :: !(Maybe Xgafv)
     , _fslUploadProtocol :: !(Maybe Text)
-    , _fslAccessToken    :: !(Maybe Text)
-    , _fslUploadType     :: !(Maybe Text)
-    , _fslPageToken      :: !(Maybe Text)
-    , _fslPageSize       :: !(Maybe (Textual Int32))
-    , _fslCallback       :: !(Maybe Text)
+    , _fslAccessToken :: !(Maybe Text)
+    , _fslUploadType :: !(Maybe Text)
+    , _fslPageToken :: !(Maybe Text)
+    , _fslPageSize :: !(Maybe (Textual Int32))
+    , _fslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

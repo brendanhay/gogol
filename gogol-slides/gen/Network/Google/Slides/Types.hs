@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -27,6 +27,13 @@ module Network.Google.Slides.Types
     , driveFileScope
     , spreadsheetsScope
     , presentationsReadOnlyScope
+
+    -- * Autofit
+    , Autofit
+    , autofit
+    , aFontScale
+    , aLineSpacingReduction
+    , aAutofitType
 
     -- * ParagraphMarker
     , ParagraphMarker
@@ -400,6 +407,9 @@ module Network.Google.Slides.Types
     , dorObjectId
     , dorObjectIds
 
+    -- * PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+    , PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize (..)
+
     -- * PlaceholderType
     , PlaceholderType (..)
 
@@ -452,6 +462,7 @@ module Network.Google.Slides.Types
     , slideProperties
     , spLayoutObjectId
     , spMasterObjectId
+    , spIsSkipped
     , spNotesPage
 
     -- * Presentation
@@ -493,6 +504,16 @@ module Network.Google.Slides.Types
 
     -- * LinePropertiesDashStyle
     , LinePropertiesDashStyle (..)
+
+    -- * UpdateSlidePropertiesRequest
+    , UpdateSlidePropertiesRequest
+    , updateSlidePropertiesRequest
+    , usprObjectId
+    , usprSlideProperties
+    , usprFields
+
+    -- * PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+    , PresentationsPagesGetThumbnailThumbnailPropertiesMimeType (..)
 
     -- * ImageProperties
     , ImageProperties
@@ -854,6 +875,9 @@ module Network.Google.Slides.Types
     , listNestingLevel
     , lnlAddtional
 
+    -- * AutofitAutofitType
+    , AutofitAutofitType (..)
+
     -- * Outline
     , Outline
     , outline
@@ -963,9 +987,9 @@ module Network.Google.Slides.Types
     -- * UpdateShapePropertiesRequest
     , UpdateShapePropertiesRequest
     , updateShapePropertiesRequest
-    , usprObjectId
-    , usprShapeProperties
-    , usprFields
+    , uObjectId
+    , uShapeProperties
+    , uFields
 
     -- * Table
     , Table
@@ -992,6 +1016,7 @@ module Network.Google.Slides.Types
     -- * ShapeProperties
     , ShapeProperties
     , shapeProperties
+    , spAutofit
     , spLink
     , spShadow
     , spOutline
@@ -1043,10 +1068,10 @@ module Network.Google.Slides.Types
     -- * UpdateTableCellPropertiesRequest
     , UpdateTableCellPropertiesRequest
     , updateTableCellPropertiesRequest
-    , uObjectId
-    , uTableCellProperties
-    , uTableRange
-    , uFields
+    , updObjectId
+    , updTableCellProperties
+    , updTableRange
+    , updFields
 
     -- * ReplaceAllShapesWithImageRequestImageReplaceMethod
     , ReplaceAllShapesWithImageRequestImageReplaceMethod (..)
@@ -1143,6 +1168,7 @@ module Network.Google.Slides.Types
     , reqUpdateTableRowProperties
     , reqCreateSheetsChart
     , reqInsertTableColumns
+    , reqUpdateSlideProperties
     , reqUpdateImageProperties
     , reqUnGroupObjects
     , reqDuplicateObject
@@ -1166,9 +1192,9 @@ module Network.Google.Slides.Types
     , smcText
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Slides.Types.Product
-import           Network.Google.Slides.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Slides.Types.Product
+import Network.Google.Slides.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Slides API. This contains the host and root path used as a starting point for constructing service requests.
 slidesService :: ServiceConfig
@@ -1176,11 +1202,11 @@ slidesService
   = defaultService (ServiceId "slides:v1")
       "slides.googleapis.com"
 
--- | View your Google Spreadsheets
+-- | See all your Google Sheets spreadsheets
 spreadsheetsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets.readonly"]
 spreadsheetsReadOnlyScope = Proxy
 
--- | View and manage your Google Slides presentations
+-- | See, edit, create, and delete all your Google Slides presentations
 presentationsScope :: Proxy '["https://www.googleapis.com/auth/presentations"]
 presentationsScope = Proxy
 
@@ -1192,15 +1218,15 @@ driveReadOnlyScope = Proxy
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
 driveScope = Proxy
 
--- | View and manage Google Drive files and folders that you have opened or
--- created with this app
+-- | See, edit, create, and delete only the specific Google Drive files you
+-- use with this app
 driveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
 driveFileScope = Proxy
 
--- | See, edit, create, and delete your spreadsheets in Google Drive
+-- | See, edit, create, and delete all your Google Sheets spreadsheets
 spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
 spreadsheetsScope = Proxy
 
--- | View your Google Slides presentations
+-- | See all your Google Slides presentations
 presentationsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/presentations.readonly"]
 presentationsReadOnlyScope = Proxy

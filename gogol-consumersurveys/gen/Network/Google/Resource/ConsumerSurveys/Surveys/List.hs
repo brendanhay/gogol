@@ -38,8 +38,8 @@ module Network.Google.Resource.ConsumerSurveys.Surveys.List
     , slMaxResults
     ) where
 
-import           Network.Google.ConsumerSurveys.Types
-import           Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @consumersurveys.surveys.list@ method which the
 -- 'SurveysList' request conforms to.
@@ -58,7 +58,7 @@ type SurveysListResource =
 -- /See:/ 'surveysList' smart constructor.
 data SurveysList =
   SurveysList'
-    { _slToken      :: !(Maybe Text)
+    { _slToken :: !(Maybe Text)
     , _slStartIndex :: !(Maybe (Textual Word32))
     , _slMaxResults :: !(Maybe (Textual Word32))
     }

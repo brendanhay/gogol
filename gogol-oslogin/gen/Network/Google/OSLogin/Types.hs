@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -46,12 +46,14 @@ module Network.Google.OSLogin.Types
     , ImportSSHPublicKeyResponse
     , importSSHPublicKeyResponse
     , ispkrLoginProFile
+    , ispkrDetails
 
     -- * SSHPublicKey
     , SSHPublicKey
     , sshPublicKey
     , spkFingerprint
     , spkKey
+    , spkName
     , spkExpirationTimeUsec
 
     -- * PosixAccount
@@ -63,6 +65,7 @@ module Network.Google.OSLogin.Types
     , paShell
     , paPrimary
     , paAccountId
+    , paName
     , paGid
     , paOperatingSystemType
     , paSystemId
@@ -72,9 +75,9 @@ module Network.Google.OSLogin.Types
     , Xgafv (..)
     ) where
 
-import           Network.Google.OSLogin.Types.Product
-import           Network.Google.OSLogin.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types.Product
+import Network.Google.OSLogin.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud OS Login API. This contains the host and root path used as a starting point for constructing service requests.
 oSLoginService :: ServiceConfig
@@ -86,6 +89,6 @@ oSLoginService
 computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
 computeScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

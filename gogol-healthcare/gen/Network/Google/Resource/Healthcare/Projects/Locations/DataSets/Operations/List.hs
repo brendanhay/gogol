@@ -53,14 +53,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Operations
     , pldsolCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.operations.list@ method which the
 -- 'ProjectsLocationsDataSetsOperationsList' request conforms to.
 type ProjectsLocationsDataSetsOperationsListResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "operations" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -88,15 +88,15 @@ type ProjectsLocationsDataSetsOperationsListResource
 -- /See:/ 'projectsLocationsDataSetsOperationsList' smart constructor.
 data ProjectsLocationsDataSetsOperationsList =
   ProjectsLocationsDataSetsOperationsList'
-    { _pldsolXgafv          :: !(Maybe Xgafv)
+    { _pldsolXgafv :: !(Maybe Xgafv)
     , _pldsolUploadProtocol :: !(Maybe Text)
-    , _pldsolAccessToken    :: !(Maybe Text)
-    , _pldsolUploadType     :: !(Maybe Text)
-    , _pldsolName           :: !Text
-    , _pldsolFilter         :: !(Maybe Text)
-    , _pldsolPageToken      :: !(Maybe Text)
-    , _pldsolPageSize       :: !(Maybe (Textual Int32))
-    , _pldsolCallback       :: !(Maybe Text)
+    , _pldsolAccessToken :: !(Maybe Text)
+    , _pldsolUploadType :: !(Maybe Text)
+    , _pldsolName :: !Text
+    , _pldsolFilter :: !(Maybe Text)
+    , _pldsolPageToken :: !(Maybe Text)
+    , _pldsolPageSize :: !(Maybe (Textual Int32))
+    , _pldsolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

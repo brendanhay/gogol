@@ -16,7 +16,7 @@
 --
 module Network.Google.SecurityCenter.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | State change of the finding between the points in time.
 data ListFindingsResultStateChange
@@ -65,6 +65,80 @@ instance FromJSON ListFindingsResultStateChange where
 instance ToJSON ListFindingsResultStateChange where
     toJSON = toJSONText
 
+-- | The state of the finding.
+data GoogleCloudSecuritycenterV1p1beta1FindingState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified state.
+    | Active
+      -- ^ @ACTIVE@
+      -- The finding requires attention and has not been addressed yet.
+    | Inactive
+      -- ^ @INACTIVE@
+      -- The finding has been fixed, triaged as a non-issue or otherwise
+      -- addressed and is no longer active.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudSecuritycenterV1p1beta1FindingState
+
+instance FromHttpApiData GoogleCloudSecuritycenterV1p1beta1FindingState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "ACTIVE" -> Right Active
+        "INACTIVE" -> Right Inactive
+        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1p1beta1FindingState from: " <> x)
+
+instance ToHttpApiData GoogleCloudSecuritycenterV1p1beta1FindingState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Active -> "ACTIVE"
+        Inactive -> "INACTIVE"
+
+instance FromJSON GoogleCloudSecuritycenterV1p1beta1FindingState where
+    parseJSON = parseJSONText "GoogleCloudSecuritycenterV1p1beta1FindingState"
+
+instance ToJSON GoogleCloudSecuritycenterV1p1beta1FindingState where
+    toJSON = toJSONText
+
+-- | Represents if the asset was created\/updated\/deleted.
+data GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType
+    = ChangeTypeUnspecified
+      -- ^ @CHANGE_TYPE_UNSPECIFIED@
+      -- Unspecified or default.
+    | Created
+      -- ^ @CREATED@
+      -- Newly created Asset
+    | Updated
+      -- ^ @UPDATED@
+      -- Asset was updated.
+    | Deleted
+      -- ^ @DELETED@
+      -- Asset was deleted.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType
+
+instance FromHttpApiData GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType where
+    parseQueryParam = \case
+        "CHANGE_TYPE_UNSPECIFIED" -> Right ChangeTypeUnspecified
+        "CREATED" -> Right Created
+        "UPDATED" -> Right Updated
+        "DELETED" -> Right Deleted
+        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType from: " <> x)
+
+instance ToHttpApiData GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType where
+    toQueryParam = \case
+        ChangeTypeUnspecified -> "CHANGE_TYPE_UNSPECIFIED"
+        Created -> "CREATED"
+        Updated -> "UPDATED"
+        Deleted -> "DELETED"
+
+instance FromJSON GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType where
+    parseJSON = parseJSONText "GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType"
+
+instance ToJSON GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType where
+    toJSON = toJSONText
+
 -- | The mode to use for filtering asset discovery.
 data AssetDiscoveryConfigInclusionMode
     = InclusionModeUnspecified
@@ -102,15 +176,88 @@ instance FromJSON AssetDiscoveryConfigInclusionMode where
 instance ToJSON AssetDiscoveryConfigInclusionMode where
     toJSON = toJSONText
 
--- | The desired State of the finding.
+-- | The type of events the config is for, e.g. FINDING.
+data NotificationConfigEventType
+    = NCETEventTypeUnspecified
+      -- ^ @EVENT_TYPE_UNSPECIFIED@
+      -- Unspecified event type.
+    | NCETFinding
+      -- ^ @FINDING@
+      -- Events for findings.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NotificationConfigEventType
+
+instance FromHttpApiData NotificationConfigEventType where
+    parseQueryParam = \case
+        "EVENT_TYPE_UNSPECIFIED" -> Right NCETEventTypeUnspecified
+        "FINDING" -> Right NCETFinding
+        x -> Left ("Unable to parse NotificationConfigEventType from: " <> x)
+
+instance ToHttpApiData NotificationConfigEventType where
+    toQueryParam = \case
+        NCETEventTypeUnspecified -> "EVENT_TYPE_UNSPECIFIED"
+        NCETFinding -> "FINDING"
+
+instance FromJSON NotificationConfigEventType where
+    parseJSON = parseJSONText "NotificationConfigEventType"
+
+instance ToJSON NotificationConfigEventType where
+    toJSON = toJSONText
+
+-- | The severity of the finding.
+data GoogleCloudSecuritycenterV1p1beta1FindingSeverity
+    = SeverityUnspecified
+      -- ^ @SEVERITY_UNSPECIFIED@
+      -- No severity specified. The default value.
+    | Critical
+      -- ^ @CRITICAL@
+      -- Critical severity.
+    | High
+      -- ^ @HIGH@
+      -- High severity.
+    | Medium
+      -- ^ @MEDIUM@
+      -- Medium severity.
+    | Low
+      -- ^ @LOW@
+      -- Low severity.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudSecuritycenterV1p1beta1FindingSeverity
+
+instance FromHttpApiData GoogleCloudSecuritycenterV1p1beta1FindingSeverity where
+    parseQueryParam = \case
+        "SEVERITY_UNSPECIFIED" -> Right SeverityUnspecified
+        "CRITICAL" -> Right Critical
+        "HIGH" -> Right High
+        "MEDIUM" -> Right Medium
+        "LOW" -> Right Low
+        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1p1beta1FindingSeverity from: " <> x)
+
+instance ToHttpApiData GoogleCloudSecuritycenterV1p1beta1FindingSeverity where
+    toQueryParam = \case
+        SeverityUnspecified -> "SEVERITY_UNSPECIFIED"
+        Critical -> "CRITICAL"
+        High -> "HIGH"
+        Medium -> "MEDIUM"
+        Low -> "LOW"
+
+instance FromJSON GoogleCloudSecuritycenterV1p1beta1FindingSeverity where
+    parseJSON = parseJSONText "GoogleCloudSecuritycenterV1p1beta1FindingSeverity"
+
+instance ToJSON GoogleCloudSecuritycenterV1p1beta1FindingSeverity where
+    toJSON = toJSONText
+
+-- | Required. The desired State of the finding.
 data SetFindingStateRequestState
-    = StateUnspecified
+    = SFSRSStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- Unspecified state.
-    | Active
+    | SFSRSActive
       -- ^ @ACTIVE@
       -- The finding requires attention and has not been addressed yet.
-    | Inactive
+    | SFSRSInactive
       -- ^ @INACTIVE@
       -- The finding has been fixed, triaged as a non-issue or otherwise
       -- addressed and is no longer active.
@@ -120,16 +267,16 @@ instance Hashable SetFindingStateRequestState
 
 instance FromHttpApiData SetFindingStateRequestState where
     parseQueryParam = \case
-        "STATE_UNSPECIFIED" -> Right StateUnspecified
-        "ACTIVE" -> Right Active
-        "INACTIVE" -> Right Inactive
+        "STATE_UNSPECIFIED" -> Right SFSRSStateUnspecified
+        "ACTIVE" -> Right SFSRSActive
+        "INACTIVE" -> Right SFSRSInactive
         x -> Left ("Unable to parse SetFindingStateRequestState from: " <> x)
 
 instance ToHttpApiData SetFindingStateRequestState where
     toQueryParam = \case
-        StateUnspecified -> "STATE_UNSPECIFIED"
-        Active -> "ACTIVE"
-        Inactive -> "INACTIVE"
+        SFSRSStateUnspecified -> "STATE_UNSPECIFIED"
+        SFSRSActive -> "ACTIVE"
+        SFSRSInactive -> "INACTIVE"
 
 instance FromJSON SetFindingStateRequestState where
     parseJSON = parseJSONText "SetFindingStateRequestState"
@@ -174,6 +321,46 @@ instance FromJSON ListAssetsResultStateChange where
     parseJSON = parseJSONText "ListAssetsResultStateChange"
 
 instance ToJSON ListAssetsResultStateChange where
+    toJSON = toJSONText
+
+-- | The state of an asset discovery run.
+data GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState
+    = GCSVRADRSStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Asset discovery run state was unspecified.
+    | GCSVRADRSCompleted
+      -- ^ @COMPLETED@
+      -- Asset discovery run completed successfully.
+    | GCSVRADRSSuperseded
+      -- ^ @SUPERSEDED@
+      -- Asset discovery run was cancelled with tasks still pending, as another
+      -- run for the same organization was started with a higher priority.
+    | GCSVRADRSTerminated
+      -- ^ @TERMINATED@
+      -- Asset discovery run was killed and terminated.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState
+
+instance FromHttpApiData GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right GCSVRADRSStateUnspecified
+        "COMPLETED" -> Right GCSVRADRSCompleted
+        "SUPERSEDED" -> Right GCSVRADRSSuperseded
+        "TERMINATED" -> Right GCSVRADRSTerminated
+        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState from: " <> x)
+
+instance ToHttpApiData GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState where
+    toQueryParam = \case
+        GCSVRADRSStateUnspecified -> "STATE_UNSPECIFIED"
+        GCSVRADRSCompleted -> "COMPLETED"
+        GCSVRADRSSuperseded -> "SUPERSEDED"
+        GCSVRADRSTerminated -> "TERMINATED"
+
+instance FromJSON GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState where
+    parseJSON = parseJSONText "GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState"
+
+instance ToJSON GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState where
     toJSON = toJSONText
 
 -- | The log type that this config enables.
@@ -281,46 +468,6 @@ instance ToJSON Xgafv where
 
 -- | The state of an asset discovery run.
 data GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState
-    = GCSVRADRSStateUnspecified
-      -- ^ @STATE_UNSPECIFIED@
-      -- Asset discovery run state was unspecified.
-    | GCSVRADRSCompleted
-      -- ^ @COMPLETED@
-      -- Asset discovery run completed successfully.
-    | GCSVRADRSSuperseded
-      -- ^ @SUPERSEDED@
-      -- Asset discovery run was cancelled with tasks still pending, as another
-      -- run for the same organization was started with a higher priority.
-    | GCSVRADRSTerminated
-      -- ^ @TERMINATED@
-      -- Asset discovery run was killed and terminated.
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState
-
-instance FromHttpApiData GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
-    parseQueryParam = \case
-        "STATE_UNSPECIFIED" -> Right GCSVRADRSStateUnspecified
-        "COMPLETED" -> Right GCSVRADRSCompleted
-        "SUPERSEDED" -> Right GCSVRADRSSuperseded
-        "TERMINATED" -> Right GCSVRADRSTerminated
-        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState from: " <> x)
-
-instance ToHttpApiData GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
-    toQueryParam = \case
-        GCSVRADRSStateUnspecified -> "STATE_UNSPECIFIED"
-        GCSVRADRSCompleted -> "COMPLETED"
-        GCSVRADRSSuperseded -> "SUPERSEDED"
-        GCSVRADRSTerminated -> "TERMINATED"
-
-instance FromJSON GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
-    parseJSON = parseJSONText "GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState"
-
-instance ToJSON GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
-    toJSON = toJSONText
-
--- | The state of an asset discovery run.
-data GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
     = GStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- Asset discovery run state was unspecified.
@@ -336,22 +483,62 @@ data GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
       -- Asset discovery run was killed and terminated.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
+instance Hashable GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState
 
-instance FromHttpApiData GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState where
+instance FromHttpApiData GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
     parseQueryParam = \case
         "STATE_UNSPECIFIED" -> Right GStateUnspecified
         "COMPLETED" -> Right GCompleted
         "SUPERSEDED" -> Right GSuperseded
         "TERMINATED" -> Right GTerminated
-        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState from: " <> x)
+        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState from: " <> x)
 
-instance ToHttpApiData GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState where
+instance ToHttpApiData GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
     toQueryParam = \case
         GStateUnspecified -> "STATE_UNSPECIFIED"
         GCompleted -> "COMPLETED"
         GSuperseded -> "SUPERSEDED"
         GTerminated -> "TERMINATED"
+
+instance FromJSON GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
+    parseJSON = parseJSONText "GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState"
+
+instance ToJSON GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState where
+    toJSON = toJSONText
+
+-- | The state of an asset discovery run.
+data GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
+    = GOOStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Asset discovery run state was unspecified.
+    | GOOCompleted
+      -- ^ @COMPLETED@
+      -- Asset discovery run completed successfully.
+    | GOOSuperseded
+      -- ^ @SUPERSEDED@
+      -- Asset discovery run was cancelled with tasks still pending, as another
+      -- run for the same organization was started with a higher priority.
+    | GOOTerminated
+      -- ^ @TERMINATED@
+      -- Asset discovery run was killed and terminated.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
+
+instance FromHttpApiData GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right GOOStateUnspecified
+        "COMPLETED" -> Right GOOCompleted
+        "SUPERSEDED" -> Right GOOSuperseded
+        "TERMINATED" -> Right GOOTerminated
+        x -> Left ("Unable to parse GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState from: " <> x)
+
+instance ToHttpApiData GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState where
+    toQueryParam = \case
+        GOOStateUnspecified -> "STATE_UNSPECIFIED"
+        GOOCompleted -> "COMPLETED"
+        GOOSuperseded -> "SUPERSEDED"
+        GOOTerminated -> "TERMINATED"
 
 instance FromJSON GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState where
     parseJSON = parseJSONText "GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState"

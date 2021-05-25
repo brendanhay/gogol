@@ -21,14 +21,19 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Update contact data for an existing contact person. Any non-contact data
--- will not be modified. The request throws a 400 error if
--- \`updatePersonFields\` is not specified.
--- The request throws a 400 error if \`person.metadata.sources\` is not
--- specified for the contact to be updated.
--- The request throws a 412 error if \`person.metadata.sources.etag\` is
+-- will not be modified. Any non-contact data in the person to update will
+-- be ignored. All fields specified in the \`update_mask\` will be
+-- replaced. The server returns a 400 error if \`person.metadata.sources\`
+-- is not specified for the contact to be updated or if there is no contact
+-- source. The server returns a 400 error with reason
+-- \`\"failedPrecondition\"\` if \`person.metadata.sources.etag\` is
 -- different than the contact\'s etag, which indicates the contact has
 -- changed since its data was read. Clients should get the latest person
--- and re-apply their updates to the latest person.
+-- and merge their updates into the latest person. The server returns a 400
+-- error if \`memberships\` are being updated and there are no contact
+-- group memberships specified on the person. The server returns a 400
+-- error if more than one field is specified on a field that is a singleton
+-- for contact sources: * biographies * birthdays * genders * names
 --
 -- /See:/ <https://developers.google.com/people/ People API Reference> for @people.people.updateContact@.
 module Network.Google.Resource.People.People.UpdateContact
@@ -47,12 +52,14 @@ module Network.Google.Resource.People.People.UpdateContact
     , pucUpdatePersonFields
     , pucAccessToken
     , pucUploadType
+    , pucSources
     , pucPayload
+    , pucPersonFields
     , pucCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.people.updateContact@ method which the
 -- 'PeopleUpdateContact' request conforms to.
@@ -64,31 +71,40 @@ type PeopleUpdateContactResource =
              QueryParam "updatePersonFields" GFieldMask :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Person :> Patch '[JSON] Person
+                   QueryParams "sources" PeopleUpdateContactSources :>
+                     QueryParam "personFields" GFieldMask :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Person :> Patch '[JSON] Person
 
 -- | Update contact data for an existing contact person. Any non-contact data
--- will not be modified. The request throws a 400 error if
--- \`updatePersonFields\` is not specified.
--- The request throws a 400 error if \`person.metadata.sources\` is not
--- specified for the contact to be updated.
--- The request throws a 412 error if \`person.metadata.sources.etag\` is
+-- will not be modified. Any non-contact data in the person to update will
+-- be ignored. All fields specified in the \`update_mask\` will be
+-- replaced. The server returns a 400 error if \`person.metadata.sources\`
+-- is not specified for the contact to be updated or if there is no contact
+-- source. The server returns a 400 error with reason
+-- \`\"failedPrecondition\"\` if \`person.metadata.sources.etag\` is
 -- different than the contact\'s etag, which indicates the contact has
 -- changed since its data was read. Clients should get the latest person
--- and re-apply their updates to the latest person.
+-- and merge their updates into the latest person. The server returns a 400
+-- error if \`memberships\` are being updated and there are no contact
+-- group memberships specified on the person. The server returns a 400
+-- error if more than one field is specified on a field that is a singleton
+-- for contact sources: * biographies * birthdays * genders * names
 --
 -- /See:/ 'peopleUpdateContact' smart constructor.
 data PeopleUpdateContact =
   PeopleUpdateContact'
-    { _pucXgafv              :: !(Maybe Xgafv)
-    , _pucUploadProtocol     :: !(Maybe Text)
-    , _pucResourceName       :: !Text
+    { _pucXgafv :: !(Maybe Xgafv)
+    , _pucUploadProtocol :: !(Maybe Text)
+    , _pucResourceName :: !Text
     , _pucUpdatePersonFields :: !(Maybe GFieldMask)
-    , _pucAccessToken        :: !(Maybe Text)
-    , _pucUploadType         :: !(Maybe Text)
-    , _pucPayload            :: !Person
-    , _pucCallback           :: !(Maybe Text)
+    , _pucAccessToken :: !(Maybe Text)
+    , _pucUploadType :: !(Maybe Text)
+    , _pucSources :: !(Maybe [PeopleUpdateContactSources])
+    , _pucPayload :: !Person
+    , _pucPersonFields :: !(Maybe GFieldMask)
+    , _pucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,7 +125,11 @@ data PeopleUpdateContact =
 --
 -- * 'pucUploadType'
 --
+-- * 'pucSources'
+--
 -- * 'pucPayload'
+--
+-- * 'pucPersonFields'
 --
 -- * 'pucCallback'
 peopleUpdateContact
@@ -124,7 +144,9 @@ peopleUpdateContact pPucResourceName_ pPucPayload_ =
     , _pucUpdatePersonFields = Nothing
     , _pucAccessToken = Nothing
     , _pucUploadType = Nothing
+    , _pucSources = Nothing
     , _pucPayload = pPucPayload_
+    , _pucPersonFields = Nothing
     , _pucCallback = Nothing
     }
 
@@ -141,19 +163,20 @@ pucUploadProtocol
 
 -- | The resource name for the person, assigned by the server. An ASCII
 -- string with a max length of 27 characters, in the form of
--- \`people\/\`person_id.
+-- \`people\/{person_id}\`.
 pucResourceName :: Lens' PeopleUpdateContact Text
 pucResourceName
   = lens _pucResourceName
       (\ s a -> s{_pucResourceName = a})
 
--- | **Required.** A field mask to restrict which fields on the person are
+-- | Required. A field mask to restrict which fields on the person are
 -- updated. Multiple fields can be specified by separating them with
 -- commas. All updated fields will be replaced. Valid values are: *
--- addresses * biographies * birthdays * emailAddresses * events * genders
--- * imClients * interests * locales * memberships * names * nicknames *
--- occupations * organizations * phoneNumbers * relations * residences *
--- sipAddresses * urls * userDefined
+-- addresses * biographies * birthdays * calendarUrls * clientData *
+-- emailAddresses * events * externalIds * genders * imClients * interests
+-- * locales * locations * memberships * miscKeywords * names * nicknames *
+-- occupations * organizations * phoneNumbers * relations * sipAddresses *
+-- urls * userDefined
 pucUpdatePersonFields :: Lens' PeopleUpdateContact (Maybe GFieldMask)
 pucUpdatePersonFields
   = lens _pucUpdatePersonFields
@@ -171,10 +194,32 @@ pucUploadType
   = lens _pucUploadType
       (\ s a -> s{_pucUploadType = a})
 
+-- | Optional. A mask of what source types to return. Defaults to
+-- READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+pucSources :: Lens' PeopleUpdateContact [PeopleUpdateContactSources]
+pucSources
+  = lens _pucSources (\ s a -> s{_pucSources = a}) .
+      _Default
+      . _Coerce
+
 -- | Multipart request metadata.
 pucPayload :: Lens' PeopleUpdateContact Person
 pucPayload
   = lens _pucPayload (\ s a -> s{_pucPayload = a})
+
+-- | Optional. A field mask to restrict which fields on each person are
+-- returned. Multiple fields can be specified by separating them with
+-- commas. Defaults to all fields if not set. Valid values are: * addresses
+-- * ageRanges * biographies * birthdays * calendarUrls * clientData *
+-- coverPhotos * emailAddresses * events * externalIds * genders *
+-- imClients * interests * locales * locations * memberships * metadata *
+-- miscKeywords * names * nicknames * occupations * organizations *
+-- phoneNumbers * photos * relations * sipAddresses * skills * urls *
+-- userDefined
+pucPersonFields :: Lens' PeopleUpdateContact (Maybe GFieldMask)
+pucPersonFields
+  = lens _pucPersonFields
+      (\ s a -> s{_pucPersonFields = a})
 
 -- | JSONP
 pucCallback :: Lens' PeopleUpdateContact (Maybe Text)
@@ -190,6 +235,8 @@ instance GoogleRequest PeopleUpdateContact where
               _pucUpdatePersonFields
               _pucAccessToken
               _pucUploadType
+              (_pucSources ^. _Default)
+              _pucPersonFields
               _pucCallback
               (Just AltJSON)
               _pucPayload

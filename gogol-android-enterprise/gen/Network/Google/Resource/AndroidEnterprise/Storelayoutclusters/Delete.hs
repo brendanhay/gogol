@@ -33,13 +33,18 @@ module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
     , StorelayoutclustersDelete
 
     -- * Request Lenses
+    , sddXgafv
+    , sddUploadProtocol
     , sddEnterpriseId
+    , sddAccessToken
+    , sddUploadType
     , sddPageId
     , sddClusterId
+    , sddCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.storelayoutclusters.delete@ method which the
 -- 'StorelayoutclustersDelete' request conforms to.
@@ -53,16 +58,26 @@ type StorelayoutclustersDeleteResource =
                  Capture "pageId" Text :>
                    "clusters" :>
                      Capture "clusterId" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a cluster.
 --
 -- /See:/ 'storelayoutclustersDelete' smart constructor.
 data StorelayoutclustersDelete =
   StorelayoutclustersDelete'
-    { _sddEnterpriseId :: !Text
-    , _sddPageId       :: !Text
-    , _sddClusterId    :: !Text
+    { _sddXgafv :: !(Maybe Xgafv)
+    , _sddUploadProtocol :: !(Maybe Text)
+    , _sddEnterpriseId :: !Text
+    , _sddAccessToken :: !(Maybe Text)
+    , _sddUploadType :: !(Maybe Text)
+    , _sddPageId :: !Text
+    , _sddClusterId :: !Text
+    , _sddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,11 +86,21 @@ data StorelayoutclustersDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sddXgafv'
+--
+-- * 'sddUploadProtocol'
+--
 -- * 'sddEnterpriseId'
+--
+-- * 'sddAccessToken'
+--
+-- * 'sddUploadType'
 --
 -- * 'sddPageId'
 --
 -- * 'sddClusterId'
+--
+-- * 'sddCallback'
 storelayoutclustersDelete
     :: Text -- ^ 'sddEnterpriseId'
     -> Text -- ^ 'sddPageId'
@@ -83,17 +108,44 @@ storelayoutclustersDelete
     -> StorelayoutclustersDelete
 storelayoutclustersDelete pSddEnterpriseId_ pSddPageId_ pSddClusterId_ =
   StorelayoutclustersDelete'
-    { _sddEnterpriseId = pSddEnterpriseId_
+    { _sddXgafv = Nothing
+    , _sddUploadProtocol = Nothing
+    , _sddEnterpriseId = pSddEnterpriseId_
+    , _sddAccessToken = Nothing
+    , _sddUploadType = Nothing
     , _sddPageId = pSddPageId_
     , _sddClusterId = pSddClusterId_
+    , _sddCallback = Nothing
     }
 
+
+-- | V1 error format.
+sddXgafv :: Lens' StorelayoutclustersDelete (Maybe Xgafv)
+sddXgafv = lens _sddXgafv (\ s a -> s{_sddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+sddUploadProtocol :: Lens' StorelayoutclustersDelete (Maybe Text)
+sddUploadProtocol
+  = lens _sddUploadProtocol
+      (\ s a -> s{_sddUploadProtocol = a})
 
 -- | The ID of the enterprise.
 sddEnterpriseId :: Lens' StorelayoutclustersDelete Text
 sddEnterpriseId
   = lens _sddEnterpriseId
       (\ s a -> s{_sddEnterpriseId = a})
+
+-- | OAuth access token.
+sddAccessToken :: Lens' StorelayoutclustersDelete (Maybe Text)
+sddAccessToken
+  = lens _sddAccessToken
+      (\ s a -> s{_sddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+sddUploadType :: Lens' StorelayoutclustersDelete (Maybe Text)
+sddUploadType
+  = lens _sddUploadType
+      (\ s a -> s{_sddUploadType = a})
 
 -- | The ID of the page.
 sddPageId :: Lens' StorelayoutclustersDelete Text
@@ -105,6 +157,11 @@ sddClusterId :: Lens' StorelayoutclustersDelete Text
 sddClusterId
   = lens _sddClusterId (\ s a -> s{_sddClusterId = a})
 
+-- | JSONP
+sddCallback :: Lens' StorelayoutclustersDelete (Maybe Text)
+sddCallback
+  = lens _sddCallback (\ s a -> s{_sddCallback = a})
+
 instance GoogleRequest StorelayoutclustersDelete
          where
         type Rs StorelayoutclustersDelete = ()
@@ -112,6 +169,11 @@ instance GoogleRequest StorelayoutclustersDelete
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutclustersDelete'{..}
           = go _sddEnterpriseId _sddPageId _sddClusterId
+              _sddXgafv
+              _sddUploadProtocol
+              _sddAccessToken
+              _sddUploadType
+              _sddCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -36,8 +36,8 @@ module Network.Google.Resource.ConsumerSurveys.MobileApppanels.Get
     , magPanelId
     ) where
 
-import           Network.Google.ConsumerSurveys.Types
-import           Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @consumersurveys.mobileapppanels.get@ method which the
 -- 'MobileApppanelsGet' request conforms to.

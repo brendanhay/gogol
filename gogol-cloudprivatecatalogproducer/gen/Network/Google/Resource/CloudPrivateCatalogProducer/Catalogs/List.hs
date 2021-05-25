@@ -23,7 +23,7 @@
 -- Lists Catalog resources that the producer has access to, within the
 -- scope of the parent resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.list@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.list@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
     , clCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.list@ method which the
 -- 'CatalogsList' request conforms to.
@@ -70,14 +70,14 @@ type CatalogsListResource =
 -- /See:/ 'catalogsList' smart constructor.
 data CatalogsList =
   CatalogsList'
-    { _clParent         :: !(Maybe Text)
-    , _clXgafv          :: !(Maybe Xgafv)
+    { _clParent :: !(Maybe Text)
+    , _clXgafv :: !(Maybe Xgafv)
     , _clUploadProtocol :: !(Maybe Text)
-    , _clAccessToken    :: !(Maybe Text)
-    , _clUploadType     :: !(Maybe Text)
-    , _clPageToken      :: !(Maybe Text)
-    , _clPageSize       :: !(Maybe (Textual Int32))
-    , _clCallback       :: !(Maybe Text)
+    , _clAccessToken :: !(Maybe Text)
+    , _clUploadType :: !(Maybe Text)
+    , _clPageToken :: !(Maybe Text)
+    , _clPageSize :: !(Maybe (Textual Int32))
+    , _clCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

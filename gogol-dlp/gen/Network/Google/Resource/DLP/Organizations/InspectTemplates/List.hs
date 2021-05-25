@@ -41,12 +41,13 @@ module Network.Google.Resource.DLP.Organizations.InspectTemplates.List
     , oitlAccessToken
     , oitlUploadType
     , oitlPageToken
+    , oitlLocationId
     , oitlPageSize
     , oitlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.inspectTemplates.list@ method which the
 -- 'OrganizationsInspectTemplatesList' request conforms to.
@@ -60,11 +61,12 @@ type OrganizationsInspectTemplatesListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListInspectTemplatesResponse
+                       QueryParam "locationId" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListInspectTemplatesResponse
 
 -- | Lists InspectTemplates. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
@@ -72,15 +74,16 @@ type OrganizationsInspectTemplatesListResource =
 -- /See:/ 'organizationsInspectTemplatesList' smart constructor.
 data OrganizationsInspectTemplatesList =
   OrganizationsInspectTemplatesList'
-    { _oitlParent         :: !Text
-    , _oitlXgafv          :: !(Maybe Xgafv)
+    { _oitlParent :: !Text
+    , _oitlXgafv :: !(Maybe Xgafv)
     , _oitlUploadProtocol :: !(Maybe Text)
-    , _oitlOrderBy        :: !(Maybe Text)
-    , _oitlAccessToken    :: !(Maybe Text)
-    , _oitlUploadType     :: !(Maybe Text)
-    , _oitlPageToken      :: !(Maybe Text)
-    , _oitlPageSize       :: !(Maybe (Textual Int32))
-    , _oitlCallback       :: !(Maybe Text)
+    , _oitlOrderBy :: !(Maybe Text)
+    , _oitlAccessToken :: !(Maybe Text)
+    , _oitlUploadType :: !(Maybe Text)
+    , _oitlPageToken :: !(Maybe Text)
+    , _oitlLocationId :: !(Maybe Text)
+    , _oitlPageSize :: !(Maybe (Textual Int32))
+    , _oitlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -103,6 +106,8 @@ data OrganizationsInspectTemplatesList =
 --
 -- * 'oitlPageToken'
 --
+-- * 'oitlLocationId'
+--
 -- * 'oitlPageSize'
 --
 -- * 'oitlCallback'
@@ -118,13 +123,26 @@ organizationsInspectTemplatesList pOitlParent_ =
     , _oitlAccessToken = Nothing
     , _oitlUploadType = Nothing
     , _oitlPageToken = Nothing
+    , _oitlLocationId = Nothing
     , _oitlPageSize = Nothing
     , _oitlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 oitlParent :: Lens' OrganizationsInspectTemplatesList Text
 oitlParent
   = lens _oitlParent (\ s a -> s{_oitlParent = a})
@@ -140,11 +158,11 @@ oitlUploadProtocol
   = lens _oitlUploadProtocol
       (\ s a -> s{_oitlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc,update_time, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the template was created. -
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc,update_time, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the template was created. -
 -- \`update_time\`: corresponds to time the template was last updated. -
 -- \`name\`: corresponds to template\'s name. - \`display_name\`:
 -- corresponds to template\'s display name.
@@ -164,15 +182,21 @@ oitlUploadType
   = lens _oitlUploadType
       (\ s a -> s{_oitlUploadType = a})
 
--- | Optional page token to continue retrieval. Comes from previous call to
+-- | Page token to continue retrieval. Comes from previous call to
 -- \`ListInspectTemplates\`.
 oitlPageToken :: Lens' OrganizationsInspectTemplatesList (Maybe Text)
 oitlPageToken
   = lens _oitlPageToken
       (\ s a -> s{_oitlPageToken = a})
 
--- | Optional size of the page, can be limited by server. If zero server
--- returns a page of max size 100.
+-- | Deprecated. This field has no effect.
+oitlLocationId :: Lens' OrganizationsInspectTemplatesList (Maybe Text)
+oitlLocationId
+  = lens _oitlLocationId
+      (\ s a -> s{_oitlLocationId = a})
+
+-- | Size of the page, can be limited by server. If zero server returns a
+-- page of max size 100.
 oitlPageSize :: Lens' OrganizationsInspectTemplatesList (Maybe Int32)
 oitlPageSize
   = lens _oitlPageSize (\ s a -> s{_oitlPageSize = a})
@@ -196,6 +220,7 @@ instance GoogleRequest
               _oitlAccessToken
               _oitlUploadType
               _oitlPageToken
+              _oitlLocationId
               _oitlPageSize
               _oitlCallback
               (Just AltJSON)

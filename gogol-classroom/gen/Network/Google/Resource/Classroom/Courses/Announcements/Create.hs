@@ -48,8 +48,8 @@ module Network.Google.Resource.Classroom.Courses.Announcements.Create
     , couCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.announcements.create@ method which the
 -- 'CoursesAnnouncementsCreate' request conforms to.
@@ -78,13 +78,13 @@ type CoursesAnnouncementsCreateResource =
 -- /See:/ 'coursesAnnouncementsCreate' smart constructor.
 data CoursesAnnouncementsCreate =
   CoursesAnnouncementsCreate'
-    { _couXgafv          :: !(Maybe Xgafv)
+    { _couXgafv :: !(Maybe Xgafv)
     , _couUploadProtocol :: !(Maybe Text)
-    , _couCourseId       :: !Text
-    , _couAccessToken    :: !(Maybe Text)
-    , _couUploadType     :: !(Maybe Text)
-    , _couPayload        :: !Announcement
-    , _couCallback       :: !(Maybe Text)
+    , _couCourseId :: !Text
+    , _couAccessToken :: !(Maybe Text)
+    , _couUploadType :: !(Maybe Text)
+    , _couPayload :: !Announcement
+    , _couCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

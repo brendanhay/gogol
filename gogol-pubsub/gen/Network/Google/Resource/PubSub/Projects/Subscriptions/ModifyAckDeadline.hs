@@ -46,8 +46,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     , psmadCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.modifyAckDeadline@ method which the
 -- 'ProjectsSubscriptionsModifyAckDeadline' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
 data ProjectsSubscriptionsModifyAckDeadline =
   ProjectsSubscriptionsModifyAckDeadline'
-    { _psmadXgafv          :: !(Maybe Xgafv)
+    { _psmadXgafv :: !(Maybe Xgafv)
     , _psmadUploadProtocol :: !(Maybe Text)
-    , _psmadAccessToken    :: !(Maybe Text)
-    , _psmadUploadType     :: !(Maybe Text)
-    , _psmadPayload        :: !ModifyAckDeadlineRequest
-    , _psmadSubscription   :: !Text
-    , _psmadCallback       :: !(Maybe Text)
+    , _psmadAccessToken :: !(Maybe Text)
+    , _psmadUploadType :: !(Maybe Text)
+    , _psmadPayload :: !ModifyAckDeadlineRequest
+    , _psmadSubscription :: !Text
+    , _psmadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -145,7 +145,7 @@ psmadPayload :: Lens' ProjectsSubscriptionsModifyAckDeadline ModifyAckDeadlineRe
 psmadPayload
   = lens _psmadPayload (\ s a -> s{_psmadPayload = a})
 
--- | The name of the subscription. Format is
+-- | Required. The name of the subscription. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
 psmadSubscription :: Lens' ProjectsSubscriptionsModifyAckDeadline Text
 psmadSubscription

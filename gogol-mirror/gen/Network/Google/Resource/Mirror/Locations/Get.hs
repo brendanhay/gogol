@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Locations.Get
     , lgId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.locations.get@ method which the
 -- 'LocationsGet' request conforms to.

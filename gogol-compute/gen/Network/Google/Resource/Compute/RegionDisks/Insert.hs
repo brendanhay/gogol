@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.RegionDisks.Insert
     , rdiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.insert@ method which the
 -- 'RegionDisksInsert' request conforms to.
@@ -65,11 +65,11 @@ type RegionDisksInsertResource =
 -- /See:/ 'regionDisksInsert' smart constructor.
 data RegionDisksInsert =
   RegionDisksInsert'
-    { _rdiRequestId   :: !(Maybe Text)
+    { _rdiRequestId :: !(Maybe Text)
     , _rdiSourceImage :: !(Maybe Text)
-    , _rdiProject     :: !Text
-    , _rdiPayload     :: !Disk
-    , _rdiRegion      :: !Text
+    , _rdiProject :: !Text
+    , _rdiPayload :: !Disk
+    , _rdiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,7 +116,7 @@ rdiRequestId :: Lens' RegionDisksInsert (Maybe Text)
 rdiRequestId
   = lens _rdiRequestId (\ s a -> s{_rdiRequestId = a})
 
--- | Optional. Source image to restore onto a disk.
+-- | Source image to restore onto a disk. This field is optional.
 rdiSourceImage :: Lens' RegionDisksInsert (Maybe Text)
 rdiSourceImage
   = lens _rdiSourceImage

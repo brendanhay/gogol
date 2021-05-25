@@ -16,15 +16,17 @@
 --
 module Network.Google.Books.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Restrict information returned to a set of selected fields.
 data VolumesListProjection
-    = Full
-      -- ^ @full@
+    = ProjectionUndefined
+      -- ^ @PROJECTION_UNDEFINED@
+    | Full
+      -- ^ @FULL@
       -- Includes all volume data.
     | Lite
-      -- ^ @lite@
+      -- ^ @LITE@
       -- Includes a subset of fields in volumeInfo and accessInfo.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -32,14 +34,16 @@ instance Hashable VolumesListProjection
 
 instance FromHttpApiData VolumesListProjection where
     parseQueryParam = \case
-        "full" -> Right Full
-        "lite" -> Right Lite
+        "PROJECTION_UNDEFINED" -> Right ProjectionUndefined
+        "FULL" -> Right Full
+        "LITE" -> Right Lite
         x -> Left ("Unable to parse VolumesListProjection from: " <> x)
 
 instance ToHttpApiData VolumesListProjection where
     toQueryParam = \case
-        Full -> "full"
-        Lite -> "lite"
+        ProjectionUndefined -> "PROJECTION_UNDEFINED"
+        Full -> "FULL"
+        Lite -> "LITE"
 
 instance FromJSON VolumesListProjection where
     parseJSON = parseJSONText "VolumesListProjection"
@@ -49,11 +53,13 @@ instance ToJSON VolumesListProjection where
 
 -- | Restrict information returned to a set of selected fields.
 data MyLibraryBookshelvesVolumesListProjection
-    = MLBVLPFull
-      -- ^ @full@
+    = MLBVLPProjectionUndefined
+      -- ^ @PROJECTION_UNDEFINED@
+    | MLBVLPFull
+      -- ^ @FULL@
       -- Includes all volume data.
     | MLBVLPLite
-      -- ^ @lite@
+      -- ^ @LITE@
       -- Includes a subset of fields in volumeInfo and accessInfo.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -61,14 +67,16 @@ instance Hashable MyLibraryBookshelvesVolumesListProjection
 
 instance FromHttpApiData MyLibraryBookshelvesVolumesListProjection where
     parseQueryParam = \case
-        "full" -> Right MLBVLPFull
-        "lite" -> Right MLBVLPLite
+        "PROJECTION_UNDEFINED" -> Right MLBVLPProjectionUndefined
+        "FULL" -> Right MLBVLPFull
+        "LITE" -> Right MLBVLPLite
         x -> Left ("Unable to parse MyLibraryBookshelvesVolumesListProjection from: " <> x)
 
 instance ToHttpApiData MyLibraryBookshelvesVolumesListProjection where
     toQueryParam = \case
-        MLBVLPFull -> "full"
-        MLBVLPLite -> "lite"
+        MLBVLPProjectionUndefined -> "PROJECTION_UNDEFINED"
+        MLBVLPFull -> "FULL"
+        MLBVLPLite -> "LITE"
 
 instance FromJSON MyLibraryBookshelvesVolumesListProjection where
     parseJSON = parseJSONText "MyLibraryBookshelvesVolumesListProjection"
@@ -78,7 +86,9 @@ instance ToJSON MyLibraryBookshelvesVolumesListProjection where
 
 -- | Sort search results.
 data VolumesListOrderBy
-    = Newest
+    = OrderByUndefined
+      -- ^ @ORDER_BY_UNDEFINED@
+    | Newest
       -- ^ @newest@
       -- Most recently published.
     | Relevance
@@ -90,12 +100,14 @@ instance Hashable VolumesListOrderBy
 
 instance FromHttpApiData VolumesListOrderBy where
     parseQueryParam = \case
+        "ORDER_BY_UNDEFINED" -> Right OrderByUndefined
         "newest" -> Right Newest
         "relevance" -> Right Relevance
         x -> Left ("Unable to parse VolumesListOrderBy from: " <> x)
 
 instance ToHttpApiData VolumesListOrderBy where
     toQueryParam = \case
+        OrderByUndefined -> "ORDER_BY_UNDEFINED"
         Newest -> "newest"
         Relevance -> "relevance"
 
@@ -107,7 +119,9 @@ instance ToJSON VolumesListOrderBy where
 
 -- | Restrict search to this user\'s library.
 data VolumesListLibraryRestrict
-    = MyLibrary
+    = LibraryRestrictUndefined
+      -- ^ @LIBRARY_RESTRICT_UNDEFINED@
+    | MyLibrary
       -- ^ @my-library@
       -- Restrict to the user\'s library, any shelf.
     | NoRestrict
@@ -119,12 +133,14 @@ instance Hashable VolumesListLibraryRestrict
 
 instance FromHttpApiData VolumesListLibraryRestrict where
     parseQueryParam = \case
+        "LIBRARY_RESTRICT_UNDEFINED" -> Right LibraryRestrictUndefined
         "my-library" -> Right MyLibrary
         "no-restrict" -> Right NoRestrict
         x -> Left ("Unable to parse VolumesListLibraryRestrict from: " <> x)
 
 instance ToHttpApiData VolumesListLibraryRestrict where
     toQueryParam = \case
+        LibraryRestrictUndefined -> "LIBRARY_RESTRICT_UNDEFINED"
         MyLibrary -> "my-library"
         NoRestrict -> "no-restrict"
 
@@ -136,7 +152,9 @@ instance ToJSON VolumesListLibraryRestrict where
 
 -- | The reason for which the book is removed from the library.
 data MyLibraryBookshelvesRemoveVolumeReason
-    = Onboarding
+    = ReasonUndefined
+      -- ^ @REASON_UNDEFINED@
+    | Onboarding
       -- ^ @ONBOARDING@
       -- Samples removed from the Onboarding flow.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -145,11 +163,13 @@ instance Hashable MyLibraryBookshelvesRemoveVolumeReason
 
 instance FromHttpApiData MyLibraryBookshelvesRemoveVolumeReason where
     parseQueryParam = \case
+        "REASON_UNDEFINED" -> Right ReasonUndefined
         "ONBOARDING" -> Right Onboarding
         x -> Left ("Unable to parse MyLibraryBookshelvesRemoveVolumeReason from: " <> x)
 
 instance ToHttpApiData MyLibraryBookshelvesRemoveVolumeReason where
     toQueryParam = \case
+        ReasonUndefined -> "REASON_UNDEFINED"
         Onboarding -> "ONBOARDING"
 
 instance FromJSON MyLibraryBookshelvesRemoveVolumeReason where
@@ -161,8 +181,10 @@ instance ToJSON MyLibraryBookshelvesRemoveVolumeReason where
 -- | The maximum allowed maturity rating of returned volumes. Books with a
 -- higher maturity rating are filtered out.
 data OnboardingListCategoryVolumesMaxAllowedMaturityRating
-    = Mature
-      -- ^ @mature@
+    = MaxAllowedMaturityRatingUndefined
+      -- ^ @MAX_ALLOWED_MATURITY_RATING_UNDEFINED@
+    | Mature
+      -- ^ @MATURE@
       -- Show books which are rated mature or lower.
     | NotMature
       -- ^ @not-mature@
@@ -173,13 +195,15 @@ instance Hashable OnboardingListCategoryVolumesMaxAllowedMaturityRating
 
 instance FromHttpApiData OnboardingListCategoryVolumesMaxAllowedMaturityRating where
     parseQueryParam = \case
-        "mature" -> Right Mature
+        "MAX_ALLOWED_MATURITY_RATING_UNDEFINED" -> Right MaxAllowedMaturityRatingUndefined
+        "MATURE" -> Right Mature
         "not-mature" -> Right NotMature
         x -> Left ("Unable to parse OnboardingListCategoryVolumesMaxAllowedMaturityRating from: " <> x)
 
 instance ToHttpApiData OnboardingListCategoryVolumesMaxAllowedMaturityRating where
     toQueryParam = \case
-        Mature -> "mature"
+        MaxAllowedMaturityRatingUndefined -> "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
+        Mature -> "MATURE"
         NotMature -> "not-mature"
 
 instance FromJSON OnboardingListCategoryVolumesMaxAllowedMaturityRating where
@@ -190,8 +214,10 @@ instance ToJSON OnboardingListCategoryVolumesMaxAllowedMaturityRating where
 
 -- | Restrict to volumes by download availability.
 data VolumesListDownload
-    = Epub
-      -- ^ @epub@
+    = DownloadUndefined
+      -- ^ @DOWNLOAD_UNDEFINED@
+    | Epub
+      -- ^ @EPUB@
       -- All volumes with epub.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -199,12 +225,14 @@ instance Hashable VolumesListDownload
 
 instance FromHttpApiData VolumesListDownload where
     parseQueryParam = \case
-        "epub" -> Right Epub
+        "DOWNLOAD_UNDEFINED" -> Right DownloadUndefined
+        "EPUB" -> Right Epub
         x -> Left ("Unable to parse VolumesListDownload from: " <> x)
 
 instance ToHttpApiData VolumesListDownload where
     toQueryParam = \case
-        Epub -> "epub"
+        DownloadUndefined -> "DOWNLOAD_UNDEFINED"
+        Epub -> "EPUB"
 
 instance FromJSON VolumesListDownload where
     parseJSON = parseJSONText "VolumesListDownload"
@@ -214,11 +242,13 @@ instance ToJSON VolumesListDownload where
 
 -- | Restrict information returned to a set of selected fields.
 data VolumesGetProjection
-    = VGPFull
-      -- ^ @full@
+    = VGPProjectionUndefined
+      -- ^ @PROJECTION_UNDEFINED@
+    | VGPFull
+      -- ^ @FULL@
       -- Includes all volume data.
     | VGPLite
-      -- ^ @lite@
+      -- ^ @LITE@
       -- Includes a subset of fields in volumeInfo and accessInfo.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -226,14 +256,16 @@ instance Hashable VolumesGetProjection
 
 instance FromHttpApiData VolumesGetProjection where
     parseQueryParam = \case
-        "full" -> Right VGPFull
-        "lite" -> Right VGPLite
+        "PROJECTION_UNDEFINED" -> Right VGPProjectionUndefined
+        "FULL" -> Right VGPFull
+        "LITE" -> Right VGPLite
         x -> Left ("Unable to parse VolumesGetProjection from: " <> x)
 
 instance ToHttpApiData VolumesGetProjection where
     toQueryParam = \case
-        VGPFull -> "full"
-        VGPLite -> "lite"
+        VGPProjectionUndefined -> "PROJECTION_UNDEFINED"
+        VGPFull -> "FULL"
+        VGPLite -> "LITE"
 
 instance FromJSON VolumesGetProjection where
     parseJSON = parseJSONText "VolumesGetProjection"
@@ -243,7 +275,9 @@ instance ToJSON VolumesGetProjection where
 
 -- | Association type.
 data VolumesAssociatedListAssociation
-    = EndOfSample
+    = AssociationUndefined
+      -- ^ @ASSOCIATION_UNDEFINED@
+    | EndOfSample
       -- ^ @end-of-sample@
       -- Recommendations for display end-of-sample.
     | EndOfVolume
@@ -258,6 +292,7 @@ instance Hashable VolumesAssociatedListAssociation
 
 instance FromHttpApiData VolumesAssociatedListAssociation where
     parseQueryParam = \case
+        "ASSOCIATION_UNDEFINED" -> Right AssociationUndefined
         "end-of-sample" -> Right EndOfSample
         "end-of-volume" -> Right EndOfVolume
         "related-for-play" -> Right RelatedForPlay
@@ -265,6 +300,7 @@ instance FromHttpApiData VolumesAssociatedListAssociation where
 
 instance ToHttpApiData VolumesAssociatedListAssociation where
     toQueryParam = \case
+        AssociationUndefined -> "ASSOCIATION_UNDEFINED"
         EndOfSample -> "end-of-sample"
         EndOfVolume -> "end-of-volume"
         RelatedForPlay -> "related-for-play"
@@ -277,7 +313,9 @@ instance ToJSON VolumesAssociatedListAssociation where
 
 -- | Rating to be given to the volume.
 data VolumesRecommendedRateRating
-    = HaveIt
+    = RatingUndefined
+      -- ^ @RATING_UNDEFINED@
+    | HaveIt
       -- ^ @HAVE_IT@
       -- Rating indicating a dismissal due to ownership.
     | NotInterested
@@ -289,12 +327,14 @@ instance Hashable VolumesRecommendedRateRating
 
 instance FromHttpApiData VolumesRecommendedRateRating where
     parseQueryParam = \case
+        "RATING_UNDEFINED" -> Right RatingUndefined
         "HAVE_IT" -> Right HaveIt
         "NOT_INTERESTED" -> Right NotInterested
         x -> Left ("Unable to parse VolumesRecommendedRateRating from: " <> x)
 
 instance ToHttpApiData VolumesRecommendedRateRating where
     toQueryParam = \case
+        RatingUndefined -> "RATING_UNDEFINED"
         HaveIt -> "HAVE_IT"
         NotInterested -> "NOT_INTERESTED"
 
@@ -306,7 +346,9 @@ instance ToJSON VolumesRecommendedRateRating where
 
 -- | The processing state of the user uploaded volumes to be returned.
 data VolumesUserUploadedListProcessingState
-    = CompletedFailed
+    = ProcessingStateUndefined
+      -- ^ @PROCESSING_STATE_UNDEFINED@
+    | CompletedFailed
       -- ^ @COMPLETED_FAILED@
       -- The volume processing hase failed.
     | CompletedSuccess
@@ -321,6 +363,7 @@ instance Hashable VolumesUserUploadedListProcessingState
 
 instance FromHttpApiData VolumesUserUploadedListProcessingState where
     parseQueryParam = \case
+        "PROCESSING_STATE_UNDEFINED" -> Right ProcessingStateUndefined
         "COMPLETED_FAILED" -> Right CompletedFailed
         "COMPLETED_SUCCESS" -> Right CompletedSuccess
         "RUNNING" -> Right Running
@@ -328,6 +371,7 @@ instance FromHttpApiData VolumesUserUploadedListProcessingState where
 
 instance ToHttpApiData VolumesUserUploadedListProcessingState where
     toQueryParam = \case
+        ProcessingStateUndefined -> "PROCESSING_STATE_UNDEFINED"
         CompletedFailed -> "COMPLETED_FAILED"
         CompletedSuccess -> "COMPLETED_SUCCESS"
         Running -> "RUNNING"
@@ -340,7 +384,9 @@ instance ToJSON VolumesUserUploadedListProcessingState where
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
 data MyConfigSyncVolumeLicensesFeatures
-    = Rentals
+    = FeaturesUndefined
+      -- ^ @FEATURES_UNDEFINED@
+    | Rentals
       -- ^ @RENTALS@
       -- Client supports rentals.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -349,11 +395,13 @@ instance Hashable MyConfigSyncVolumeLicensesFeatures
 
 instance FromHttpApiData MyConfigSyncVolumeLicensesFeatures where
     parseQueryParam = \case
+        "FEATURES_UNDEFINED" -> Right FeaturesUndefined
         "RENTALS" -> Right Rentals
         x -> Left ("Unable to parse MyConfigSyncVolumeLicensesFeatures from: " <> x)
 
 instance ToHttpApiData MyConfigSyncVolumeLicensesFeatures where
     toQueryParam = \case
+        FeaturesUndefined -> "FEATURES_UNDEFINED"
         Rentals -> "RENTALS"
 
 instance FromJSON MyConfigSyncVolumeLicensesFeatures where
@@ -365,8 +413,10 @@ instance ToJSON MyConfigSyncVolumeLicensesFeatures where
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
 data VolumesAssociatedListMaxAllowedMaturityRating
-    = VALMAMRMature
-      -- ^ @mature@
+    = VALMAMRMaxAllowedMaturityRatingUndefined
+      -- ^ @MAX_ALLOWED_MATURITY_RATING_UNDEFINED@
+    | VALMAMRMature
+      -- ^ @MATURE@
       -- Show books which are rated mature or lower.
     | VALMAMRNotMature
       -- ^ @not-mature@
@@ -377,13 +427,15 @@ instance Hashable VolumesAssociatedListMaxAllowedMaturityRating
 
 instance FromHttpApiData VolumesAssociatedListMaxAllowedMaturityRating where
     parseQueryParam = \case
-        "mature" -> Right VALMAMRMature
+        "MAX_ALLOWED_MATURITY_RATING_UNDEFINED" -> Right VALMAMRMaxAllowedMaturityRatingUndefined
+        "MATURE" -> Right VALMAMRMature
         "not-mature" -> Right VALMAMRNotMature
         x -> Left ("Unable to parse VolumesAssociatedListMaxAllowedMaturityRating from: " <> x)
 
 instance ToHttpApiData VolumesAssociatedListMaxAllowedMaturityRating where
     toQueryParam = \case
-        VALMAMRMature -> "mature"
+        VALMAMRMaxAllowedMaturityRatingUndefined -> "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
+        VALMAMRMature -> "MATURE"
         VALMAMRNotMature -> "not-mature"
 
 instance FromJSON VolumesAssociatedListMaxAllowedMaturityRating where
@@ -394,7 +446,9 @@ instance ToJSON VolumesAssociatedListMaxAllowedMaturityRating where
 
 -- | Filter search results.
 data VolumesListFilter
-    = VLFEbooks
+    = VLFFilterUndefined
+      -- ^ @FILTER_UNDEFINED@
+    | VLFEbooks
       -- ^ @ebooks@
       -- All Google eBooks.
     | VLFFreeEbooks
@@ -415,6 +469,7 @@ instance Hashable VolumesListFilter
 
 instance FromHttpApiData VolumesListFilter where
     parseQueryParam = \case
+        "FILTER_UNDEFINED" -> Right VLFFilterUndefined
         "ebooks" -> Right VLFEbooks
         "free-ebooks" -> Right VLFFreeEbooks
         "full" -> Right VLFFull
@@ -424,6 +479,7 @@ instance FromHttpApiData VolumesListFilter where
 
 instance ToHttpApiData VolumesListFilter where
     toQueryParam = \case
+        VLFFilterUndefined -> "FILTER_UNDEFINED"
         VLFEbooks -> "ebooks"
         VLFFreeEbooks -> "free-ebooks"
         VLFFull -> "full"
@@ -439,8 +495,10 @@ instance ToJSON VolumesListFilter where
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
 data VolumesRecommendedListMaxAllowedMaturityRating
-    = VRLMAMRMature
-      -- ^ @mature@
+    = VRLMAMRMaxAllowedMaturityRatingUndefined
+      -- ^ @MAX_ALLOWED_MATURITY_RATING_UNDEFINED@
+    | VRLMAMRMature
+      -- ^ @MATURE@
       -- Show books which are rated mature or lower.
     | VRLMAMRNotMature
       -- ^ @not-mature@
@@ -451,13 +509,15 @@ instance Hashable VolumesRecommendedListMaxAllowedMaturityRating
 
 instance FromHttpApiData VolumesRecommendedListMaxAllowedMaturityRating where
     parseQueryParam = \case
-        "mature" -> Right VRLMAMRMature
+        "MAX_ALLOWED_MATURITY_RATING_UNDEFINED" -> Right VRLMAMRMaxAllowedMaturityRatingUndefined
+        "MATURE" -> Right VRLMAMRMature
         "not-mature" -> Right VRLMAMRNotMature
         x -> Left ("Unable to parse VolumesRecommendedListMaxAllowedMaturityRating from: " <> x)
 
 instance ToHttpApiData VolumesRecommendedListMaxAllowedMaturityRating where
     toQueryParam = \case
-        VRLMAMRMature -> "mature"
+        VRLMAMRMaxAllowedMaturityRatingUndefined -> "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
+        VRLMAMRMature -> "MATURE"
         VRLMAMRNotMature -> "not-mature"
 
 instance FromJSON VolumesRecommendedListMaxAllowedMaturityRating where
@@ -466,9 +526,40 @@ instance FromJSON VolumesRecommendedListMaxAllowedMaturityRating where
 instance ToJSON VolumesRecommendedListMaxAllowedMaturityRating where
     toJSON = toJSONText
 
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
 -- | The reason for which the book is added to the library.
 data MyLibraryBookshelvesAddVolumeReason
-    = MLBAVRIosPrex
+    = MLBAVRReasonUndefined
+      -- ^ @REASON_UNDEFINED@
+    | MLBAVRIosPrex
       -- ^ @IOS_PREX@
       -- Volumes added from the PREX flow on iOS.
     | MLBAVRIosSearch
@@ -483,6 +574,7 @@ instance Hashable MyLibraryBookshelvesAddVolumeReason
 
 instance FromHttpApiData MyLibraryBookshelvesAddVolumeReason where
     parseQueryParam = \case
+        "REASON_UNDEFINED" -> Right MLBAVRReasonUndefined
         "IOS_PREX" -> Right MLBAVRIosPrex
         "IOS_SEARCH" -> Right MLBAVRIosSearch
         "ONBOARDING" -> Right MLBAVROnboarding
@@ -490,6 +582,7 @@ instance FromHttpApiData MyLibraryBookshelvesAddVolumeReason where
 
 instance ToHttpApiData MyLibraryBookshelvesAddVolumeReason where
     toQueryParam = \case
+        MLBAVRReasonUndefined -> "REASON_UNDEFINED"
         MLBAVRIosPrex -> "IOS_PREX"
         MLBAVRIosSearch -> "IOS_SEARCH"
         MLBAVROnboarding -> "ONBOARDING"
@@ -502,7 +595,9 @@ instance ToJSON MyLibraryBookshelvesAddVolumeReason where
 
 -- | How the book was acquired
 data VolumesMybooksListAcquireMethod
-    = FamilyShared
+    = AcquireMethodUndefined
+      -- ^ @ACQUIRE_METHOD_UNDEFINED@
+    | FamilyShared
       -- ^ @FAMILY_SHARED@
       -- Books acquired via Family Sharing
     | PreOrdered
@@ -532,6 +627,7 @@ instance Hashable VolumesMybooksListAcquireMethod
 
 instance FromHttpApiData VolumesMybooksListAcquireMethod where
     parseQueryParam = \case
+        "ACQUIRE_METHOD_UNDEFINED" -> Right AcquireMethodUndefined
         "FAMILY_SHARED" -> Right FamilyShared
         "PREORDERED" -> Right PreOrdered
         "PREVIOUSLY_RENTED" -> Right PreviouslyRented
@@ -544,6 +640,7 @@ instance FromHttpApiData VolumesMybooksListAcquireMethod where
 
 instance ToHttpApiData VolumesMybooksListAcquireMethod where
     toQueryParam = \case
+        AcquireMethodUndefined -> "ACQUIRE_METHOD_UNDEFINED"
         FamilyShared -> "FAMILY_SHARED"
         PreOrdered -> "PREORDERED"
         PreviouslyRented -> "PREVIOUSLY_RENTED"
@@ -562,8 +659,10 @@ instance ToJSON VolumesMybooksListAcquireMethod where
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
 data PersonalizedstreamGetMaxAllowedMaturityRating
-    = PGMAMRMature
-      -- ^ @mature@
+    = PGMAMRMaxAllowedMaturityRatingUndefined
+      -- ^ @MAX_ALLOWED_MATURITY_RATING_UNDEFINED@
+    | PGMAMRMature
+      -- ^ @MATURE@
       -- Show books which are rated mature or lower.
     | PGMAMRNotMature
       -- ^ @not-mature@
@@ -574,13 +673,15 @@ instance Hashable PersonalizedstreamGetMaxAllowedMaturityRating
 
 instance FromHttpApiData PersonalizedstreamGetMaxAllowedMaturityRating where
     parseQueryParam = \case
-        "mature" -> Right PGMAMRMature
+        "MAX_ALLOWED_MATURITY_RATING_UNDEFINED" -> Right PGMAMRMaxAllowedMaturityRatingUndefined
+        "MATURE" -> Right PGMAMRMature
         "not-mature" -> Right PGMAMRNotMature
         x -> Left ("Unable to parse PersonalizedstreamGetMaxAllowedMaturityRating from: " <> x)
 
 instance ToHttpApiData PersonalizedstreamGetMaxAllowedMaturityRating where
     toQueryParam = \case
-        PGMAMRMature -> "mature"
+        PGMAMRMaxAllowedMaturityRatingUndefined -> "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
+        PGMAMRMature -> "MATURE"
         PGMAMRNotMature -> "not-mature"
 
 instance FromJSON PersonalizedstreamGetMaxAllowedMaturityRating where
@@ -591,14 +692,16 @@ instance ToJSON PersonalizedstreamGetMaxAllowedMaturityRating where
 
 -- | Restrict to books or magazines.
 data VolumesListPrintType
-    = All
-      -- ^ @all@
+    = PrintTypeUndefined
+      -- ^ @PRINT_TYPE_UNDEFINED@
+    | All
+      -- ^ @ALL@
       -- All volume content types.
     | Books
-      -- ^ @books@
+      -- ^ @BOOKS@
       -- Just books.
     | Magazines
-      -- ^ @magazines@
+      -- ^ @MAGAZINES@
       -- Just magazines.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -606,16 +709,18 @@ instance Hashable VolumesListPrintType
 
 instance FromHttpApiData VolumesListPrintType where
     parseQueryParam = \case
-        "all" -> Right All
-        "books" -> Right Books
-        "magazines" -> Right Magazines
+        "PRINT_TYPE_UNDEFINED" -> Right PrintTypeUndefined
+        "ALL" -> Right All
+        "BOOKS" -> Right Books
+        "MAGAZINES" -> Right Magazines
         x -> Left ("Unable to parse VolumesListPrintType from: " <> x)
 
 instance ToHttpApiData VolumesListPrintType where
     toQueryParam = \case
-        All -> "all"
-        Books -> "books"
-        Magazines -> "magazines"
+        PrintTypeUndefined -> "PRINT_TYPE_UNDEFINED"
+        All -> "ALL"
+        Books -> "BOOKS"
+        Magazines -> "MAGAZINES"
 
 instance FromJSON VolumesListPrintType where
     parseJSON = parseJSONText "VolumesListPrintType"
@@ -626,7 +731,9 @@ instance ToJSON VolumesListPrintType where
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.
 data VolumesMybooksListProcessingState
-    = VMLPSCompletedFailed
+    = VMLPSProcessingStateUndefined
+      -- ^ @PROCESSING_STATE_UNDEFINED@
+    | VMLPSCompletedFailed
       -- ^ @COMPLETED_FAILED@
       -- The volume processing hase failed.
     | VMLPSCompletedSuccess
@@ -641,6 +748,7 @@ instance Hashable VolumesMybooksListProcessingState
 
 instance FromHttpApiData VolumesMybooksListProcessingState where
     parseQueryParam = \case
+        "PROCESSING_STATE_UNDEFINED" -> Right VMLPSProcessingStateUndefined
         "COMPLETED_FAILED" -> Right VMLPSCompletedFailed
         "COMPLETED_SUCCESS" -> Right VMLPSCompletedSuccess
         "RUNNING" -> Right VMLPSRunning
@@ -648,6 +756,7 @@ instance FromHttpApiData VolumesMybooksListProcessingState where
 
 instance ToHttpApiData VolumesMybooksListProcessingState where
     toQueryParam = \case
+        VMLPSProcessingStateUndefined -> "PROCESSING_STATE_UNDEFINED"
         VMLPSCompletedFailed -> "COMPLETED_FAILED"
         VMLPSCompletedSuccess -> "COMPLETED_SUCCESS"
         VMLPSRunning -> "RUNNING"
@@ -661,7 +770,9 @@ instance ToJSON VolumesMybooksListProcessingState where
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
 data MyConfigRequestAccessLicenseTypes
-    = Both
+    = LicenseTypesUndefined
+      -- ^ @LICENSE_TYPES_UNDEFINED@
+    | Both
       -- ^ @BOTH@
       -- Both concurrent and download licenses.
     | Concurrent
@@ -676,6 +787,7 @@ instance Hashable MyConfigRequestAccessLicenseTypes
 
 instance FromHttpApiData MyConfigRequestAccessLicenseTypes where
     parseQueryParam = \case
+        "LICENSE_TYPES_UNDEFINED" -> Right LicenseTypesUndefined
         "BOTH" -> Right Both
         "CONCURRENT" -> Right Concurrent
         "DOWNLOAD" -> Right Download
@@ -683,6 +795,7 @@ instance FromHttpApiData MyConfigRequestAccessLicenseTypes where
 
 instance ToHttpApiData MyConfigRequestAccessLicenseTypes where
     toQueryParam = \case
+        LicenseTypesUndefined -> "LICENSE_TYPES_UNDEFINED"
         Both -> "BOTH"
         Concurrent -> "CONCURRENT"
         Download -> "DOWNLOAD"
@@ -695,7 +808,9 @@ instance ToJSON MyConfigRequestAccessLicenseTypes where
 
 -- | Action that caused this reading position to be set.
 data MyLibraryReadingPositionsSetPositionAction
-    = Bookmark
+    = ActionUndefined
+      -- ^ @ACTION_UNDEFINED@
+    | Bookmark
       -- ^ @bookmark@
       -- User chose bookmark within volume.
     | Chapter
@@ -719,6 +834,7 @@ instance Hashable MyLibraryReadingPositionsSetPositionAction
 
 instance FromHttpApiData MyLibraryReadingPositionsSetPositionAction where
     parseQueryParam = \case
+        "ACTION_UNDEFINED" -> Right ActionUndefined
         "bookmark" -> Right Bookmark
         "chapter" -> Right Chapter
         "next-page" -> Right NextPage
@@ -729,6 +845,7 @@ instance FromHttpApiData MyLibraryReadingPositionsSetPositionAction where
 
 instance ToHttpApiData MyLibraryReadingPositionsSetPositionAction where
     toQueryParam = \case
+        ActionUndefined -> "ACTION_UNDEFINED"
         Bookmark -> "bookmark"
         Chapter -> "chapter"
         NextPage -> "next-page"
@@ -745,8 +862,10 @@ instance ToJSON MyLibraryReadingPositionsSetPositionAction where
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
 data VolumesListMaxAllowedMaturityRating
-    = VLMAMRMature
-      -- ^ @mature@
+    = VLMAMRMaxAllowedMaturityRatingUndefined
+      -- ^ @MAX_ALLOWED_MATURITY_RATING_UNDEFINED@
+    | VLMAMRMature
+      -- ^ @MATURE@
       -- Show books which are rated mature or lower.
     | VLMAMRNotMature
       -- ^ @not-mature@
@@ -757,13 +876,15 @@ instance Hashable VolumesListMaxAllowedMaturityRating
 
 instance FromHttpApiData VolumesListMaxAllowedMaturityRating where
     parseQueryParam = \case
-        "mature" -> Right VLMAMRMature
+        "MAX_ALLOWED_MATURITY_RATING_UNDEFINED" -> Right VLMAMRMaxAllowedMaturityRatingUndefined
+        "MATURE" -> Right VLMAMRMature
         "not-mature" -> Right VLMAMRNotMature
         x -> Left ("Unable to parse VolumesListMaxAllowedMaturityRating from: " <> x)
 
 instance ToHttpApiData VolumesListMaxAllowedMaturityRating where
     toQueryParam = \case
-        VLMAMRMature -> "mature"
+        VLMAMRMaxAllowedMaturityRatingUndefined -> "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
+        VLMAMRMature -> "MATURE"
         VLMAMRNotMature -> "not-mature"
 
 instance FromJSON VolumesListMaxAllowedMaturityRating where

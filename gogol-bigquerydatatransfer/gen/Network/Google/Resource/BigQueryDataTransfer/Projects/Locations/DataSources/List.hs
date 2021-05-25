@@ -23,7 +23,7 @@
 -- Lists supported data sources and returns their settings, which can be
 -- used for UI rendering.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.list@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.list@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.List
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSourc
     , pldslCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.dataSources.list@ method which the
 -- 'ProjectsLocationsDataSourcesList' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsLocationsDataSourcesListResource =
 -- /See:/ 'projectsLocationsDataSourcesList' smart constructor.
 data ProjectsLocationsDataSourcesList =
   ProjectsLocationsDataSourcesList'
-    { _pldslParent         :: !Text
-    , _pldslXgafv          :: !(Maybe Xgafv)
+    { _pldslParent :: !Text
+    , _pldslXgafv :: !(Maybe Xgafv)
     , _pldslUploadProtocol :: !(Maybe Text)
-    , _pldslAccessToken    :: !(Maybe Text)
-    , _pldslUploadType     :: !(Maybe Text)
-    , _pldslPageToken      :: !(Maybe Text)
-    , _pldslPageSize       :: !(Maybe (Textual Int32))
-    , _pldslCallback       :: !(Maybe Text)
+    , _pldslAccessToken :: !(Maybe Text)
+    , _pldslUploadType :: !(Maybe Text)
+    , _pldslPageToken :: !(Maybe Text)
+    , _pldslPageSize :: !(Maybe (Textual Int32))
+    , _pldslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,8 +116,9 @@ projectsLocationsDataSourcesList pPldslParent_ =
     }
 
 
--- | The BigQuery project id for which data sources should be returned. Must
--- be in the form: \`projects\/{project_id}\`
+-- | Required. The BigQuery project id for which data sources should be
+-- returned. Must be in the form: \`projects\/{project_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}
 pldslParent :: Lens' ProjectsLocationsDataSourcesList Text
 pldslParent
   = lens _pldslParent (\ s a -> s{_pldslParent = a})

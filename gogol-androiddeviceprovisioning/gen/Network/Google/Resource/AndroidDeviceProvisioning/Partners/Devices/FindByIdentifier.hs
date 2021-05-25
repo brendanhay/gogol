@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindBy
     , pdfbiCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.findByIdentifier@ method which the
 -- 'PartnersDevicesFindByIdentifier' request conforms to.
@@ -66,13 +66,13 @@ type PartnersDevicesFindByIdentifierResource =
 -- /See:/ 'partnersDevicesFindByIdentifier' smart constructor.
 data PartnersDevicesFindByIdentifier =
   PartnersDevicesFindByIdentifier'
-    { _pdfbiXgafv          :: !(Maybe Xgafv)
+    { _pdfbiXgafv :: !(Maybe Xgafv)
     , _pdfbiUploadProtocol :: !(Maybe Text)
-    , _pdfbiAccessToken    :: !(Maybe Text)
-    , _pdfbiPartnerId      :: !(Textual Int64)
-    , _pdfbiUploadType     :: !(Maybe Text)
-    , _pdfbiPayload        :: !FindDevicesByDeviceIdentifierRequest
-    , _pdfbiCallback       :: !(Maybe Text)
+    , _pdfbiAccessToken :: !(Maybe Text)
+    , _pdfbiPartnerId :: !(Textual Int64)
+    , _pdfbiUploadType :: !(Maybe Text)
+    , _pdfbiPayload :: !FindDevicesByDeviceIdentifierRequest
+    , _pdfbiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

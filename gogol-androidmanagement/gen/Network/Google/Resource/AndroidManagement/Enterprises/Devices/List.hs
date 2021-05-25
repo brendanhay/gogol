@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.List
     , edlCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.list@ method which the
 -- 'EnterprisesDevicesList' request conforms to.
@@ -67,14 +67,14 @@ type EnterprisesDevicesListResource =
 -- /See:/ 'enterprisesDevicesList' smart constructor.
 data EnterprisesDevicesList =
   EnterprisesDevicesList'
-    { _edlParent         :: !Text
-    , _edlXgafv          :: !(Maybe Xgafv)
+    { _edlParent :: !Text
+    , _edlXgafv :: !(Maybe Xgafv)
     , _edlUploadProtocol :: !(Maybe Text)
-    , _edlAccessToken    :: !(Maybe Text)
-    , _edlUploadType     :: !(Maybe Text)
-    , _edlPageToken      :: !(Maybe Text)
-    , _edlPageSize       :: !(Maybe (Textual Int32))
-    , _edlCallback       :: !(Maybe Text)
+    , _edlAccessToken :: !(Maybe Text)
+    , _edlUploadType :: !(Maybe Text)
+    , _edlPageToken :: !(Maybe Text)
+    , _edlPageSize :: !(Maybe (Textual Int32))
+    , _edlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

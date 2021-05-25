@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get information about the selected AdSense account.
+-- Gets information about the selected AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.get@.
+-- /See:/ <http://code.google.com/apis/adsense/management/ AdSense Management API Reference> for @adsense.accounts.get@.
 module Network.Google.Resource.AdSense.Accounts.Get
     (
     -- * REST Resource
@@ -33,30 +33,40 @@ module Network.Google.Resource.AdSense.Accounts.Get
     , AccountsGet
 
     -- * Request Lenses
-    , agTree
-    , agAccountId
+    , agXgafv
+    , agUploadProtocol
+    , agAccessToken
+    , agUploadType
+    , agName
+    , agCallback
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             QueryParam "tree" Bool :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Account
+     "v2" :>
+       Capture "name" Text :>
+         QueryParam "$.xgafv" Xgafv :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Account
 
--- | Get information about the selected AdSense account.
+-- | Gets information about the selected AdSense account.
 --
 -- /See:/ 'accountsGet' smart constructor.
 data AccountsGet =
   AccountsGet'
-    { _agTree      :: !(Maybe Bool)
-    , _agAccountId :: !Text
+    { _agXgafv :: !(Maybe Xgafv)
+    , _agUploadProtocol :: !(Maybe Text)
+    , _agAccessToken :: !(Maybe Text)
+    , _agUploadType :: !(Maybe Text)
+    , _agName :: !Text
+    , _agCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,24 +75,61 @@ data AccountsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'agTree'
+-- * 'agXgafv'
 --
--- * 'agAccountId'
+-- * 'agUploadProtocol'
+--
+-- * 'agAccessToken'
+--
+-- * 'agUploadType'
+--
+-- * 'agName'
+--
+-- * 'agCallback'
 accountsGet
-    :: Text -- ^ 'agAccountId'
+    :: Text -- ^ 'agName'
     -> AccountsGet
-accountsGet pAgAccountId_ =
-  AccountsGet' {_agTree = Nothing, _agAccountId = pAgAccountId_}
+accountsGet pAgName_ =
+  AccountsGet'
+    { _agXgafv = Nothing
+    , _agUploadProtocol = Nothing
+    , _agAccessToken = Nothing
+    , _agUploadType = Nothing
+    , _agName = pAgName_
+    , _agCallback = Nothing
+    }
 
 
--- | Whether the tree of sub accounts should be returned.
-agTree :: Lens' AccountsGet (Maybe Bool)
-agTree = lens _agTree (\ s a -> s{_agTree = a})
+-- | V1 error format.
+agXgafv :: Lens' AccountsGet (Maybe Xgafv)
+agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
 
--- | Account to get information about.
-agAccountId :: Lens' AccountsGet Text
-agAccountId
-  = lens _agAccountId (\ s a -> s{_agAccountId = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+agUploadProtocol :: Lens' AccountsGet (Maybe Text)
+agUploadProtocol
+  = lens _agUploadProtocol
+      (\ s a -> s{_agUploadProtocol = a})
+
+-- | OAuth access token.
+agAccessToken :: Lens' AccountsGet (Maybe Text)
+agAccessToken
+  = lens _agAccessToken
+      (\ s a -> s{_agAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+agUploadType :: Lens' AccountsGet (Maybe Text)
+agUploadType
+  = lens _agUploadType (\ s a -> s{_agUploadType = a})
+
+-- | Required. Account to get information about. Format:
+-- accounts\/{account_id}
+agName :: Lens' AccountsGet Text
+agName = lens _agName (\ s a -> s{_agName = a})
+
+-- | JSONP
+agCallback :: Lens' AccountsGet (Maybe Text)
+agCallback
+  = lens _agCallback (\ s a -> s{_agCallback = a})
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
@@ -90,7 +137,11 @@ instance GoogleRequest AccountsGet where
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsGet'{..}
-          = go _agAccountId _agTree (Just AltJSON)
+          = go _agName _agXgafv _agUploadProtocol
+              _agAccessToken
+              _agUploadType
+              _agCallback
+              (Just AltJSON)
               adSenseService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

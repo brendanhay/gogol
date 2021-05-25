@@ -54,8 +54,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     , aalCallback
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.avails.list@ method which the
 -- 'AccountsAvailsList' request conforms to.
@@ -91,23 +91,23 @@ type AccountsAvailsListResource =
 -- /See:/ 'accountsAvailsList' smart constructor.
 data AccountsAvailsList =
   AccountsAvailsList'
-    { _aalAltId          :: !(Maybe Text)
-    , _aalPphNames       :: !(Maybe [Text])
-    , _aalXgafv          :: !(Maybe Xgafv)
-    , _aalStudioNames    :: !(Maybe [Text])
-    , _aalVideoIds       :: !(Maybe [Text])
+    { _aalAltId :: !(Maybe Text)
+    , _aalPphNames :: !(Maybe [Text])
+    , _aalXgafv :: !(Maybe Xgafv)
+    , _aalStudioNames :: !(Maybe [Text])
+    , _aalVideoIds :: !(Maybe [Text])
     , _aalUploadProtocol :: !(Maybe Text)
-    , _aalPp             :: !Bool
-    , _aalAccessToken    :: !(Maybe Text)
-    , _aalUploadType     :: !(Maybe Text)
-    , _aalTerritories    :: !(Maybe [Text])
-    , _aalAccountId      :: !Text
-    , _aalBearerToken    :: !(Maybe Text)
-    , _aalAltIds         :: !(Maybe [Text])
-    , _aalPageToken      :: !(Maybe Text)
-    , _aalTitle          :: !(Maybe Text)
-    , _aalPageSize       :: !(Maybe (Textual Int32))
-    , _aalCallback       :: !(Maybe Text)
+    , _aalPp :: !Bool
+    , _aalAccessToken :: !(Maybe Text)
+    , _aalUploadType :: !(Maybe Text)
+    , _aalTerritories :: !(Maybe [Text])
+    , _aalAccountId :: !Text
+    , _aalBearerToken :: !(Maybe Text)
+    , _aalAltIds :: !(Maybe [Text])
+    , _aalPageToken :: !(Maybe Text)
+    , _aalTitle :: !(Maybe Text)
+    , _aalPageSize :: !(Maybe (Textual Int32))
+    , _aalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

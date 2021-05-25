@@ -44,8 +44,8 @@ module Network.Google.Resource.DLP.Projects.DlpJobs.Get
     , pdjgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.dlpJobs.get@ method which the
 -- 'ProjectsDlpJobsGet' request conforms to.
@@ -68,12 +68,12 @@ type ProjectsDlpJobsGetResource =
 -- /See:/ 'projectsDlpJobsGet' smart constructor.
 data ProjectsDlpJobsGet =
   ProjectsDlpJobsGet'
-    { _pdjgXgafv          :: !(Maybe Xgafv)
+    { _pdjgXgafv :: !(Maybe Xgafv)
     , _pdjgUploadProtocol :: !(Maybe Text)
-    , _pdjgAccessToken    :: !(Maybe Text)
-    , _pdjgUploadType     :: !(Maybe Text)
-    , _pdjgName           :: !Text
-    , _pdjgCallback       :: !(Maybe Text)
+    , _pdjgAccessToken :: !(Maybe Text)
+    , _pdjgUploadType :: !(Maybe Text)
+    , _pdjgName :: !Text
+    , _pdjgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,7 +130,7 @@ pdjgUploadType
   = lens _pdjgUploadType
       (\ s a -> s{_pdjgUploadType = a})
 
--- | The name of the DlpJob resource.
+-- | Required. The name of the DlpJob resource.
 pdjgName :: Lens' ProjectsDlpJobsGet Text
 pdjgName = lens _pdjgName (\ s a -> s{_pdjgName = a})
 

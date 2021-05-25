@@ -36,8 +36,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Get
     , wrgId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.get@ method which the
 -- 'WebResourceGet' request conforms to.

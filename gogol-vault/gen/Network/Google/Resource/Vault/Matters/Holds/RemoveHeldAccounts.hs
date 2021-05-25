@@ -20,9 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes HeldAccounts from a hold. Returns a list of statuses in the same
--- order as the request. If this request leaves the hold with no held
--- accounts, the hold will not apply to any accounts.
+-- Removes the specified accounts from a hold. Returns a list of statuses
+-- in the same order as the request.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.removeHeldAccounts@.
 module Network.Google.Resource.Vault.Matters.Holds.RemoveHeldAccounts
@@ -45,8 +44,8 @@ module Network.Google.Resource.Vault.Matters.Holds.RemoveHeldAccounts
     , mhrhaCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.removeHeldAccounts@ method which the
 -- 'MattersHoldsRemoveHeldAccounts' request conforms to.
@@ -65,21 +64,20 @@ type MattersHoldsRemoveHeldAccountsResource =
                            ReqBody '[JSON] RemoveHeldAccountsRequest :>
                              Post '[JSON] RemoveHeldAccountsResponse
 
--- | Removes HeldAccounts from a hold. Returns a list of statuses in the same
--- order as the request. If this request leaves the hold with no held
--- accounts, the hold will not apply to any accounts.
+-- | Removes the specified accounts from a hold. Returns a list of statuses
+-- in the same order as the request.
 --
 -- /See:/ 'mattersHoldsRemoveHeldAccounts' smart constructor.
 data MattersHoldsRemoveHeldAccounts =
   MattersHoldsRemoveHeldAccounts'
-    { _mhrhaXgafv          :: !(Maybe Xgafv)
+    { _mhrhaXgafv :: !(Maybe Xgafv)
     , _mhrhaUploadProtocol :: !(Maybe Text)
-    , _mhrhaHoldId         :: !Text
-    , _mhrhaAccessToken    :: !(Maybe Text)
-    , _mhrhaUploadType     :: !(Maybe Text)
-    , _mhrhaPayload        :: !RemoveHeldAccountsRequest
-    , _mhrhaMatterId       :: !Text
-    , _mhrhaCallback       :: !(Maybe Text)
+    , _mhrhaHoldId :: !Text
+    , _mhrhaAccessToken :: !(Maybe Text)
+    , _mhrhaUploadType :: !(Maybe Text)
+    , _mhrhaPayload :: !RemoveHeldAccountsRequest
+    , _mhrhaMatterId :: !Text
+    , _mhrhaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

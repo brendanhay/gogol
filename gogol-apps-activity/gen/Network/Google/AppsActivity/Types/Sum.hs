@@ -16,7 +16,7 @@
 --
 module Network.Google.AppsActivity.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The main type of event that occurred.
 data EventPrimaryEventType
@@ -86,6 +86,8 @@ instance ToJSON EventPrimaryEventType where
 data PermissionRole
     = Commenter
       -- ^ @commenter@
+    | FileOrganizer
+      -- ^ @fileOrganizer@
     | Owner
       -- ^ @owner@
     | PublishedReader
@@ -101,6 +103,7 @@ instance Hashable PermissionRole
 instance FromHttpApiData PermissionRole where
     parseQueryParam = \case
         "commenter" -> Right Commenter
+        "fileOrganizer" -> Right FileOrganizer
         "owner" -> Right Owner
         "publishedReader" -> Right PublishedReader
         "reader" -> Right Reader
@@ -110,6 +113,7 @@ instance FromHttpApiData PermissionRole where
 instance ToHttpApiData PermissionRole where
     toQueryParam = \case
         Commenter -> "commenter"
+        FileOrganizer -> "fileOrganizer"
         Owner -> "owner"
         PublishedReader -> "publishedReader"
         Reader -> "reader"

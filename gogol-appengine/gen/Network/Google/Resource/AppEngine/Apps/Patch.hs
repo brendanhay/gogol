@@ -23,7 +23,8 @@
 -- Updates the specified Application resource. You can update the following
 -- fields: auth_domain - Google authentication domain for controlling user
 -- access to the application. default_cookie_expiration - Cookie expiration
--- policy for the application.
+-- policy for the application. iap - Identity-Aware Proxy properties for
+-- the application.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.patch@.
 module Network.Google.Resource.AppEngine.Apps.Patch
@@ -46,8 +47,8 @@ module Network.Google.Resource.AppEngine.Apps.Patch
     , apCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.patch@ method which the
 -- 'AppsPatch' request conforms to.
@@ -68,19 +69,20 @@ type AppsPatchResource =
 -- | Updates the specified Application resource. You can update the following
 -- fields: auth_domain - Google authentication domain for controlling user
 -- access to the application. default_cookie_expiration - Cookie expiration
--- policy for the application.
+-- policy for the application. iap - Identity-Aware Proxy properties for
+-- the application.
 --
 -- /See:/ 'appsPatch' smart constructor.
 data AppsPatch =
   AppsPatch'
-    { _apXgafv          :: !(Maybe Xgafv)
+    { _apXgafv :: !(Maybe Xgafv)
     , _apUploadProtocol :: !(Maybe Text)
-    , _apUpdateMask     :: !(Maybe GFieldMask)
-    , _apAccessToken    :: !(Maybe Text)
-    , _apUploadType     :: !(Maybe Text)
-    , _apPayload        :: !Application
-    , _apAppsId         :: !Text
-    , _apCallback       :: !(Maybe Text)
+    , _apUpdateMask :: !(Maybe GFieldMask)
+    , _apAccessToken :: !(Maybe Text)
+    , _apUploadType :: !(Maybe Text)
+    , _apPayload :: !Application
+    , _apAppsId :: !Text
+    , _apCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,7 +133,7 @@ apUploadProtocol
   = lens _apUploadProtocol
       (\ s a -> s{_apUploadProtocol = a})
 
--- | Standard field mask for the set of fields to be updated.
+-- | Required. Standard field mask for the set of fields to be updated.
 apUpdateMask :: Lens' AppsPatch (Maybe GFieldMask)
 apUpdateMask
   = lens _apUpdateMask (\ s a -> s{_apUpdateMask = a})

@@ -17,19 +17,18 @@
 --
 module Network.Google.Datastore.Types.Product where
 
-import           Network.Google.Datastore.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types.Sum
+import Network.Google.Prelude
 
--- | An object representing a latitude\/longitude pair. This is expressed as
--- a pair of doubles representing degrees latitude and degrees longitude.
--- Unless specified otherwise, this must conform to the
--- <http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf WGS84 standard>.
--- Values must be within normalized ranges.
+-- | An object that represents a latitude\/longitude pair. This is expressed
+-- as a pair of doubles to represent degrees latitude and degrees
+-- longitude. Unless specified otherwise, this object must conform to the
+-- WGS84 standard. Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng =
   LatLng'
-    { _llLatitude  :: !(Maybe (Textual Double))
+    { _llLatitude :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,7 +80,7 @@ instance ToJSON LatLng where
 data TransactionOptions =
   TransactionOptions'
     { _toReadWrite :: !(Maybe ReadWrite)
-    , _toReadOnly  :: !(Maybe ReadOnly)
+    , _toReadOnly :: !(Maybe ReadOnly)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,45 +124,17 @@ instance ToJSON TransactionOptions where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -373,7 +344,7 @@ rollbackRequest
 rollbackRequest = RollbackRequest' {_rrTransaction = Nothing}
 
 
--- | The transaction identifier, returned by a call to
+-- | Required. The transaction identifier, returned by a call to
 -- Datastore.BeginTransaction.
 rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
 rrTransaction
@@ -396,7 +367,7 @@ instance ToJSON RollbackRequest where
 -- /See:/ 'reserveIdsRequest' smart constructor.
 data ReserveIdsRequest =
   ReserveIdsRequest'
-    { _rirKeys       :: !(Maybe [Key])
+    { _rirKeys :: !(Maybe [Key])
     , _rirDatabaseId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -415,8 +386,8 @@ reserveIdsRequest =
   ReserveIdsRequest' {_rirKeys = Nothing, _rirDatabaseId = Nothing}
 
 
--- | A list of keys with complete key paths whose numeric IDs should not be
--- auto-allocated.
+-- | Required. A list of keys with complete key paths whose numeric IDs
+-- should not be auto-allocated.
 rirKeys :: Lens' ReserveIdsRequest [Key]
 rirKeys
   = lens _rirKeys (\ s a -> s{_rirKeys = a}) . _Default
@@ -458,7 +429,7 @@ instance ToJSON ReserveIdsRequest where
 data PartitionId =
   PartitionId'
     { _piNamespaceId :: !(Maybe Text)
-    , _piProjectId   :: !(Maybe Text)
+    , _piProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -506,7 +477,7 @@ instance ToJSON PartitionId where
 data GoogleDatastoreAdminV1ListIndexesResponse =
   GoogleDatastoreAdminV1ListIndexesResponse'
     { _gdavlirNextPageToken :: !(Maybe Text)
-    , _gdavlirIndexes       :: !(Maybe [GoogleDatastoreAdminV1Index])
+    , _gdavlirIndexes :: !(Maybe [GoogleDatastoreAdminV1Index])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -564,13 +535,13 @@ instance ToJSON
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch =
   QueryResultBatch'
-    { _qrbSkippedResults   :: !(Maybe (Textual Int32))
-    , _qrbSkippedCursor    :: !(Maybe Bytes)
+    { _qrbSkippedResults :: !(Maybe (Textual Int32))
+    , _qrbSkippedCursor :: !(Maybe Bytes)
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
-    , _qrbSnapshotVersion  :: !(Maybe (Textual Int64))
-    , _qrbEntityResults    :: !(Maybe [EntityResult])
-    , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
-    , _qrbEndCursor        :: !(Maybe Bytes)
+    , _qrbSnapshotVersion :: !(Maybe (Textual Int64))
+    , _qrbEntityResults :: !(Maybe [EntityResult])
+    , _qrbMoreResults :: !(Maybe QueryResultBatchMoreResults)
+    , _qrbEndCursor :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -814,8 +785,8 @@ instance ToJSON BeginTransactionRequest where
 data RunQueryRequest =
   RunQueryRequest'
     { _rqrPartitionId :: !(Maybe PartitionId)
-    , _rqrGqlQuery    :: !(Maybe GqlQuery)
-    , _rqrQuery       :: !(Maybe Query)
+    , _rqrGqlQuery :: !(Maybe GqlQuery)
+    , _rqrQuery :: !(Maybe Query)
     , _rqrReadOptions :: !(Maybe ReadOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -904,8 +875,8 @@ allocateIdsRequest
 allocateIdsRequest = AllocateIdsRequest' {_airKeys = Nothing}
 
 
--- | A list of keys with incomplete key paths for which to allocate IDs. No
--- key may be reserved\/read-only.
+-- | Required. A list of keys with incomplete key paths for which to allocate
+-- IDs. No key may be reserved\/read-only.
 airKeys :: Lens' AllocateIdsRequest [Key]
 airKeys
   = lens _airKeys (\ s a -> s{_airKeys = a}) . _Default
@@ -926,11 +897,11 @@ instance ToJSON AllocateIdsRequest where
 -- /See:/ 'googleDatastoreAdminV1ExportEntitiesMetadata' smart constructor.
 data GoogleDatastoreAdminV1ExportEntitiesMetadata =
   GoogleDatastoreAdminV1ExportEntitiesMetadata'
-    { _gdaveemProgressBytes    :: !(Maybe GoogleDatastoreAdminV1Progress)
-    , _gdaveemOutputURLPrefix  :: !(Maybe Text)
+    { _gdaveemProgressBytes :: !(Maybe GoogleDatastoreAdminV1Progress)
+    , _gdaveemOutputURLPrefix :: !(Maybe Text)
     , _gdaveemProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
-    , _gdaveemEntityFilter     :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
-    , _gdaveemCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
+    , _gdaveemEntityFilter :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gdaveemCommon :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1025,10 +996,10 @@ instance ToJSON
 -- /See:/ 'googleDatastoreAdminV1beta1CommonMetadata' smart constructor.
 data GoogleDatastoreAdminV1beta1CommonMetadata =
   GoogleDatastoreAdminV1beta1CommonMetadata'
-    { _gdavcmState         :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataState)
-    , _gdavcmStartTime     :: !(Maybe DateTime')
-    , _gdavcmEndTime       :: !(Maybe DateTime')
-    , _gdavcmLabels        :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataLabels)
+    { _gdavcmState :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataState)
+    , _gdavcmStartTime :: !(Maybe DateTime')
+    , _gdavcmEndTime :: !(Maybe DateTime')
+    , _gdavcmLabels :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataLabels)
     , _gdavcmOperationType :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataOperationType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1146,7 +1117,7 @@ instance ToJSON Empty where
 -- /See:/ 'compositeFilter' smart constructor.
 data CompositeFilter =
   CompositeFilter'
-    { _cfOp      :: !(Maybe CompositeFilterOp)
+    { _cfOp :: !(Maybe CompositeFilterOp)
     , _cfFilters :: !(Maybe [Filter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1194,8 +1165,8 @@ instance ToJSON CompositeFilter where
 data GoogleDatastoreAdminV1IndexOperationMetadata =
   GoogleDatastoreAdminV1IndexOperationMetadata'
     { _gdaviomProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
-    , _gdaviomCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
-    , _gdaviomIndexId          :: !(Maybe Text)
+    , _gdaviomCommon :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
+    , _gdaviomIndexId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1265,11 +1236,11 @@ instance ToJSON
 -- /See:/ 'googleDatastoreAdminV1beta1ImportEntitiesMetadata' smart constructor.
 data GoogleDatastoreAdminV1beta1ImportEntitiesMetadata =
   GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
-    { _gdaviemProgressBytes    :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
+    { _gdaviemProgressBytes :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
     , _gdaviemProgressEntities :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
-    , _gdaviemEntityFilter     :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
-    , _gdaviemInputURL         :: !(Maybe Text)
-    , _gdaviemCommon           :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
+    , _gdaviemEntityFilter :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
+    , _gdaviemInputURL :: !(Maybe Text)
+    , _gdaviemCommon :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1460,8 +1431,8 @@ instance ToJSON BeginTransactionResponse where
 data MutationResult =
   MutationResult'
     { _mrConflictDetected :: !(Maybe Bool)
-    , _mrKey              :: !(Maybe Key)
-    , _mrVersion          :: !(Maybe (Textual Int64))
+    , _mrKey :: !(Maybe Key)
+    , _mrVersion :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1564,9 +1535,9 @@ instance ToJSON AllocateIdsResponse where
 data GqlQuery =
   GqlQuery'
     { _gqPositionalBindings :: !(Maybe [GqlQueryParameter])
-    , _gqNamedBindings      :: !(Maybe GqlQueryNamedBindings)
-    , _gqQueryString        :: !(Maybe Text)
-    , _gqAllowLiterals      :: !(Maybe Bool)
+    , _gqNamedBindings :: !(Maybe GqlQueryNamedBindings)
+    , _gqQueryString :: !(Maybe Text)
+    , _gqAllowLiterals :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1742,19 +1713,19 @@ instance ToJSON
 -- /See:/ 'value' smart constructor.
 data Value =
   Value'
-    { _vKeyValue           :: !(Maybe Key)
-    , _vGeoPointValue      :: !(Maybe LatLng)
-    , _vIntegerValue       :: !(Maybe (Textual Int64))
-    , _vTimestampValue     :: !(Maybe DateTime')
-    , _vEntityValue        :: !(Maybe Entity)
+    { _vKeyValue :: !(Maybe Key)
+    , _vGeoPointValue :: !(Maybe LatLng)
+    , _vIntegerValue :: !(Maybe (Textual Int64))
+    , _vTimestampValue :: !(Maybe DateTime')
+    , _vEntityValue :: !(Maybe Entity)
     , _vExcludeFromIndexes :: !(Maybe Bool)
-    , _vDoubleValue        :: !(Maybe (Textual Double))
-    , _vStringValue        :: !(Maybe Text)
-    , _vBooleanValue       :: !(Maybe Bool)
-    , _vMeaning            :: !(Maybe (Textual Int32))
-    , _vArrayValue         :: !(Maybe ArrayValue)
-    , _vNullValue          :: !(Maybe ValueNullValue)
-    , _vBlobValue          :: !(Maybe Bytes)
+    , _vDoubleValue :: !(Maybe (Textual Double))
+    , _vStringValue :: !(Maybe Text)
+    , _vBooleanValue :: !(Maybe Bool)
+    , _vMeaning :: !(Maybe (Textual Int32))
+    , _vArrayValue :: !(Maybe ArrayValue)
+    , _vNullValue :: !(Maybe ValueNullValue)
+    , _vBlobValue :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1855,7 +1826,7 @@ vDoubleValue
 
 -- | A UTF-8 encoded string value. When \`exclude_from_indexes\` is false (it
 -- is indexed) , may have at most 1500 bytes. Otherwise, may be set to at
--- least 1,000,000 bytes.
+-- most 1,000,000 bytes.
 vStringValue :: Lens' Value (Maybe Text)
 vStringValue
   = lens _vStringValue (\ s a -> s{_vStringValue = a})
@@ -2014,7 +1985,7 @@ instance ToJSON StatusDetailsItem where
 -- /See:/ 'lookupRequest' smart constructor.
 data LookupRequest =
   LookupRequest'
-    { _lrKeys        :: !(Maybe [Key])
+    { _lrKeys :: !(Maybe [Key])
     , _lrReadOptions :: !(Maybe ReadOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2032,7 +2003,7 @@ lookupRequest
 lookupRequest = LookupRequest' {_lrKeys = Nothing, _lrReadOptions = Nothing}
 
 
--- | Keys of entities to look up.
+-- | Required. Keys of entities to look up.
 lrKeys :: Lens' LookupRequest [Key]
 lrKeys
   = lens _lrKeys (\ s a -> s{_lrKeys = a}) . _Default .
@@ -2063,10 +2034,10 @@ instance ToJSON LookupRequest where
 -- /See:/ 'googleDatastoreAdminV1CommonMetadata' smart constructor.
 data GoogleDatastoreAdminV1CommonMetadata =
   GoogleDatastoreAdminV1CommonMetadata'
-    { _gState         :: !(Maybe GoogleDatastoreAdminV1CommonMetadataState)
-    , _gStartTime     :: !(Maybe DateTime')
-    , _gEndTime       :: !(Maybe DateTime')
-    , _gLabels        :: !(Maybe GoogleDatastoreAdminV1CommonMetadataLabels)
+    { _gState :: !(Maybe GoogleDatastoreAdminV1CommonMetadataState)
+    , _gStartTime :: !(Maybe DateTime')
+    , _gEndTime :: !(Maybe DateTime')
+    , _gLabels :: !(Maybe GoogleDatastoreAdminV1CommonMetadataLabels)
     , _gOperationType :: !(Maybe GoogleDatastoreAdminV1CommonMetadataOperationType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2154,8 +2125,8 @@ instance ToJSON GoogleDatastoreAdminV1CommonMetadata
 data GoogleDatastoreAdminV1ExportEntitiesRequest =
   GoogleDatastoreAdminV1ExportEntitiesRequest'
     { _gdaveerOutputURLPrefix :: !(Maybe Text)
-    , _gdaveerEntityFilter    :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
-    , _gdaveerLabels          :: !(Maybe GoogleDatastoreAdminV1ExportEntitiesRequestLabels)
+    , _gdaveerEntityFilter :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gdaveerLabels :: !(Maybe GoogleDatastoreAdminV1ExportEntitiesRequestLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2179,9 +2150,9 @@ googleDatastoreAdminV1ExportEntitiesRequest =
     }
 
 
--- | Location for the export metadata and data files. The full resource URL
--- of the external storage location. Currently, only Google Cloud Storage
--- is supported. So output_url_prefix should be of the form:
+-- | Required. Location for the export metadata and data files. The full
+-- resource URL of the external storage location. Currently, only Google
+-- Cloud Storage is supported. So output_url_prefix should be of the form:
 -- \`gs:\/\/BUCKET_NAME[\/NAMESPACE_PATH]\`, where \`BUCKET_NAME\` is the
 -- name of the Cloud Storage bucket and \`NAMESPACE_PATH\` is an optional
 -- Cloud Storage namespace path (this is not a Cloud Datastore namespace).
@@ -2239,10 +2210,10 @@ instance ToJSON
 data Mutation =
   Mutation'
     { _mBaseVersion :: !(Maybe (Textual Int64))
-    , _mInsert      :: !(Maybe Entity)
-    , _mUpsert      :: !(Maybe Entity)
-    , _mDelete      :: !(Maybe Key)
-    , _mUpdate      :: !(Maybe Entity)
+    , _mInsert :: !(Maybe Entity)
+    , _mUpsert :: !(Maybe Entity)
+    , _mDelete :: !(Maybe Key)
+    , _mUpdate :: !(Maybe Entity)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2452,7 +2423,7 @@ instance ToJSON PropertyReference where
 data Key =
   Key'
     { _kPartitionId :: !(Maybe PartitionId)
-    , _kPath        :: !(Maybe [PathElement])
+    , _kPath :: !(Maybe [PathElement])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2513,8 +2484,8 @@ instance ToJSON Key where
 data GoogleDatastoreAdminV1ImportEntitiesRequest =
   GoogleDatastoreAdminV1ImportEntitiesRequest'
     { _gdavierEntityFilter :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
-    , _gdavierInputURL     :: !(Maybe Text)
-    , _gdavierLabels       :: !(Maybe GoogleDatastoreAdminV1ImportEntitiesRequestLabels)
+    , _gdavierInputURL :: !(Maybe Text)
+    , _gdavierLabels :: !(Maybe GoogleDatastoreAdminV1ImportEntitiesRequestLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2547,8 +2518,9 @@ gdavierEntityFilter
   = lens _gdavierEntityFilter
       (\ s a -> s{_gdavierEntityFilter = a})
 
--- | The full resource URL of the external storage location. Currently, only
--- Google Cloud Storage is supported. So input_url should be of the form:
+-- | Required. The full resource URL of the external storage location.
+-- Currently, only Google Cloud Storage is supported. So input_url should
+-- be of the form:
 -- \`gs:\/\/BUCKET_NAME[\/NAMESPACE_PATH]\/OVERALL_EXPORT_METADATA_FILE\`,
 -- where \`BUCKET_NAME\` is the name of the Cloud Storage bucket,
 -- \`NAMESPACE_PATH\` is an optional Cloud Storage namespace path (this is
@@ -2597,8 +2569,8 @@ instance ToJSON
 data PropertyFilter =
   PropertyFilter'
     { _pfProperty :: !(Maybe PropertyReference)
-    , _pfOp       :: !(Maybe PropertyFilterOp)
-    , _pfValue    :: !(Maybe Value)
+    , _pfOp :: !(Maybe PropertyFilterOp)
+    , _pfValue :: !(Maybe Value)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2652,14 +2624,14 @@ instance ToJSON PropertyFilter where
 data Query =
   Query'
     { _qStartCursor :: !(Maybe Bytes)
-    , _qOffSet      :: !(Maybe (Textual Int32))
-    , _qKind        :: !(Maybe [KindExpression])
-    , _qDistinctOn  :: !(Maybe [PropertyReference])
-    , _qEndCursor   :: !(Maybe Bytes)
-    , _qLimit       :: !(Maybe (Textual Int32))
-    , _qProjection  :: !(Maybe [Projection])
-    , _qFilter      :: !(Maybe Filter)
-    , _qOrder       :: !(Maybe [PropertyOrder])
+    , _qOffSet :: !(Maybe (Textual Int32))
+    , _qKind :: !(Maybe [KindExpression])
+    , _qDistinctOn :: !(Maybe [PropertyReference])
+    , _qEndCursor :: !(Maybe Bytes)
+    , _qLimit :: !(Maybe (Textual Int32))
+    , _qProjection :: !(Maybe [Projection])
+    , _qFilter :: !(Maybe Filter)
+    , _qOrder :: !(Maybe [PropertyOrder])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2835,9 +2807,9 @@ instance ToJSON ArrayValue where
 -- /See:/ 'entityResult' smart constructor.
 data EntityResult =
   EntityResult'
-    { _erCursor  :: !(Maybe Bytes)
+    { _erCursor :: !(Maybe Bytes)
     , _erVersion :: !(Maybe (Textual Int64))
-    , _erEntity  :: !(Maybe Entity)
+    , _erEntity :: !(Maybe Entity)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2899,7 +2871,7 @@ instance ToJSON EntityResult where
 -- /See:/ 'commitResponse' smart constructor.
 data CommitResponse =
   CommitResponse'
-    { _crIndexUpdates    :: !(Maybe (Textual Int32))
+    { _crIndexUpdates :: !(Maybe (Textual Int32))
     , _crMutationResults :: !(Maybe [MutationResult])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3038,7 +3010,7 @@ instance ToJSON GoogleLongrunningOperationResponse
 data ReadOptions =
   ReadOptions'
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
-    , _roTransaction     :: !(Maybe Bytes)
+    , _roTransaction :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3099,7 +3071,7 @@ instance ToJSON ReadOptions where
 data GoogleDatastoreAdminV1EntityFilter =
   GoogleDatastoreAdminV1EntityFilter'
     { _gdavefNamespaceIds :: !(Maybe [Text])
-    , _gdavefKinds        :: !(Maybe [Text])
+    , _gdavefKinds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3240,7 +3212,7 @@ instance ToJSON ReserveIdsResponse where
 data Filter =
   Filter'
     { _fCompositeFilter :: !(Maybe CompositeFilter)
-    , _fPropertyFilter  :: !(Maybe PropertyFilter)
+    , _fPropertyFilter :: !(Maybe PropertyFilter)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3284,16 +3256,16 @@ instance ToJSON Filter where
                  [("compositeFilter" .=) <$> _fCompositeFilter,
                   ("propertyFilter" .=) <$> _fPropertyFilter])
 
--- | A minimal index definition.
+-- | Datastore composite index definition.
 --
 -- /See:/ 'googleDatastoreAdminV1Index' smart constructor.
 data GoogleDatastoreAdminV1Index =
   GoogleDatastoreAdminV1Index'
-    { _gdaviState      :: !(Maybe GoogleDatastoreAdminV1IndexState)
-    , _gdaviKind       :: !(Maybe Text)
-    , _gdaviProjectId  :: !(Maybe Text)
-    , _gdaviIndexId    :: !(Maybe Text)
-    , _gdaviAncestor   :: !(Maybe GoogleDatastoreAdminV1IndexAncestor)
+    { _gdaviState :: !(Maybe GoogleDatastoreAdminV1IndexState)
+    , _gdaviKind :: !(Maybe Text)
+    , _gdaviProjectId :: !(Maybe Text)
+    , _gdaviIndexId :: !(Maybe Text)
+    , _gdaviAncestor :: !(Maybe GoogleDatastoreAdminV1IndexAncestor)
     , _gdaviProperties :: !(Maybe [GoogleDatastoreAdminV1IndexedProperty])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3327,36 +3299,36 @@ googleDatastoreAdminV1Index =
     }
 
 
--- | The state of the index. Output only.
+-- | Output only. The state of the index.
 gdaviState :: Lens' GoogleDatastoreAdminV1Index (Maybe GoogleDatastoreAdminV1IndexState)
 gdaviState
   = lens _gdaviState (\ s a -> s{_gdaviState = a})
 
--- | The entity kind to which this index applies. Required.
+-- | Required. The entity kind to which this index applies.
 gdaviKind :: Lens' GoogleDatastoreAdminV1Index (Maybe Text)
 gdaviKind
   = lens _gdaviKind (\ s a -> s{_gdaviKind = a})
 
--- | Project ID. Output only.
+-- | Output only. Project ID.
 gdaviProjectId :: Lens' GoogleDatastoreAdminV1Index (Maybe Text)
 gdaviProjectId
   = lens _gdaviProjectId
       (\ s a -> s{_gdaviProjectId = a})
 
--- | The resource ID of the index. Output only.
+-- | Output only. The resource ID of the index.
 gdaviIndexId :: Lens' GoogleDatastoreAdminV1Index (Maybe Text)
 gdaviIndexId
   = lens _gdaviIndexId (\ s a -> s{_gdaviIndexId = a})
 
--- | The index\'s ancestor mode. Must not be ANCESTOR_MODE_UNSPECIFIED.
--- Required.
+-- | Required. The index\'s ancestor mode. Must not be
+-- ANCESTOR_MODE_UNSPECIFIED.
 gdaviAncestor :: Lens' GoogleDatastoreAdminV1Index (Maybe GoogleDatastoreAdminV1IndexAncestor)
 gdaviAncestor
   = lens _gdaviAncestor
       (\ s a -> s{_gdaviAncestor = a})
 
--- | An ordered sequence of property names and their index attributes.
--- Required.
+-- | Required. An ordered sequence of property names and their index
+-- attributes.
 gdaviProperties :: Lens' GoogleDatastoreAdminV1Index [GoogleDatastoreAdminV1IndexedProperty]
 gdaviProperties
   = lens _gdaviProperties
@@ -3435,8 +3407,8 @@ instance ToJSON
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest =
   CommitRequest'
-    { _crMutations   :: !(Maybe [Mutation])
-    , _crMode        :: !(Maybe CommitRequestMode)
+    { _crMutations :: !(Maybe [Mutation])
+    , _crMode :: !(Maybe CommitRequestMode)
     , _crTransaction :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3506,7 +3478,7 @@ instance ToJSON CommitRequest where
 data GoogleLongrunningListOperationsResponse =
   GoogleLongrunningListOperationsResponse'
     { _gllorNextPageToken :: !(Maybe Text)
-    , _gllorOperations    :: !(Maybe [GoogleLongrunningOperation])
+    , _gllorOperations :: !(Maybe [GoogleLongrunningOperation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3564,11 +3536,11 @@ instance ToJSON
 -- /See:/ 'googleDatastoreAdminV1ImportEntitiesMetadata' smart constructor.
 data GoogleDatastoreAdminV1ImportEntitiesMetadata =
   GoogleDatastoreAdminV1ImportEntitiesMetadata'
-    { _gProgressBytes    :: !(Maybe GoogleDatastoreAdminV1Progress)
+    { _gProgressBytes :: !(Maybe GoogleDatastoreAdminV1Progress)
     , _gProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
-    , _gEntityFilter     :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
-    , _gInputURL         :: !(Maybe Text)
-    , _gCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
+    , _gEntityFilter :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gInputURL :: !(Maybe Text)
+    , _gCommon :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3718,7 +3690,7 @@ data PathElement =
   PathElement'
     { _peKind :: !(Maybe Text)
     , _peName :: !(Maybe Text)
-    , _peId   :: !(Maybe (Textual Int64))
+    , _peId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3778,7 +3750,7 @@ instance ToJSON PathElement where
 -- /See:/ 'entity' smart constructor.
 data Entity =
   Entity'
-    { _eKey        :: !(Maybe Key)
+    { _eKey :: !(Maybe Key)
     , _eProperties :: !(Maybe EntityProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3838,7 +3810,7 @@ instance ToJSON Entity where
 data GoogleDatastoreAdminV1beta1EntityFilter =
   GoogleDatastoreAdminV1beta1EntityFilter'
     { _gNamespaceIds :: !(Maybe [Text])
-    , _gKinds        :: !(Maybe [Text])
+    , _gKinds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3923,7 +3895,7 @@ instance ToJSON ReadOnly where
 data GoogleDatastoreAdminV1IndexedProperty =
   GoogleDatastoreAdminV1IndexedProperty'
     { _gdavipDirection :: !(Maybe GoogleDatastoreAdminV1IndexedPropertyDirection)
-    , _gdavipName      :: !(Maybe Text)
+    , _gdavipName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3942,14 +3914,14 @@ googleDatastoreAdminV1IndexedProperty =
     {_gdavipDirection = Nothing, _gdavipName = Nothing}
 
 
--- | The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
--- Required.
+-- | Required. The indexed property\'s direction. Must not be
+-- DIRECTION_UNSPECIFIED.
 gdavipDirection :: Lens' GoogleDatastoreAdminV1IndexedProperty (Maybe GoogleDatastoreAdminV1IndexedPropertyDirection)
 gdavipDirection
   = lens _gdavipDirection
       (\ s a -> s{_gdavipDirection = a})
 
--- | The property name to index. Required.
+-- | Required. The property name to index.
 gdavipName :: Lens' GoogleDatastoreAdminV1IndexedProperty (Maybe Text)
 gdavipName
   = lens _gdavipName (\ s a -> s{_gdavipName = a})
@@ -3977,8 +3949,8 @@ instance ToJSON GoogleDatastoreAdminV1IndexedProperty
 data LookupResponse =
   LookupResponse'
     { _lrDeferred :: !(Maybe [Key])
-    , _lrFound    :: !(Maybe [EntityResult])
-    , _lrMissing  :: !(Maybe [EntityResult])
+    , _lrFound :: !(Maybe [EntityResult])
+    , _lrMissing :: !(Maybe [EntityResult])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4048,10 +4020,10 @@ instance ToJSON LookupResponse where
 -- /See:/ 'googleLongrunningOperation' smart constructor.
 data GoogleLongrunningOperation =
   GoogleLongrunningOperation'
-    { _gloDone     :: !(Maybe Bool)
-    , _gloError    :: !(Maybe Status)
+    { _gloDone :: !(Maybe Bool)
+    , _gloError :: !(Maybe Status)
     , _gloResponse :: !(Maybe GoogleLongrunningOperationResponse)
-    , _gloName     :: !(Maybe Text)
+    , _gloName :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunningOperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4106,7 +4078,8 @@ gloResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 gloName :: Lens' GoogleLongrunningOperation (Maybe Text)
 gloName = lens _gloName (\ s a -> s{_gloName = a})
 
@@ -4143,7 +4116,7 @@ instance ToJSON GoogleLongrunningOperation where
 -- /See:/ 'propertyOrder' smart constructor.
 data PropertyOrder =
   PropertyOrder'
-    { _poProperty  :: !(Maybe PropertyReference)
+    { _poProperty :: !(Maybe PropertyReference)
     , _poDirection :: !(Maybe PropertyOrderDirection)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4190,11 +4163,11 @@ instance ToJSON PropertyOrder where
 -- /See:/ 'googleDatastoreAdminV1beta1ExportEntitiesMetadata' smart constructor.
 data GoogleDatastoreAdminV1beta1ExportEntitiesMetadata =
   GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
-    { _gooProgressBytes    :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
-    , _gooOutputURLPrefix  :: !(Maybe Text)
+    { _gooProgressBytes :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
+    , _gooOutputURLPrefix :: !(Maybe Text)
     , _gooProgressEntities :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
-    , _gooEntityFilter     :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
-    , _gooCommon           :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
+    , _gooEntityFilter :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
+    , _gooCommon :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4290,7 +4263,7 @@ instance ToJSON
 data GqlQueryParameter =
   GqlQueryParameter'
     { _gqpCursor :: !(Maybe Bytes)
-    , _gqpValue  :: !(Maybe Value)
+    , _gqpValue :: !(Maybe Value)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

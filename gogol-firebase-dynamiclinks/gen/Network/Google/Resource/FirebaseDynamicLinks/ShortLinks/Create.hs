@@ -46,8 +46,8 @@ module Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
     , slcCallback
     ) where
 
-import           Network.Google.FirebaseDynamicLinks.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebasedynamiclinks.shortLinks.create@ method which the
 -- 'ShortLinksCreate' request conforms to.
@@ -73,12 +73,12 @@ type ShortLinksCreateResource =
 -- /See:/ 'shortLinksCreate' smart constructor.
 data ShortLinksCreate =
   ShortLinksCreate'
-    { _slcXgafv          :: !(Maybe Xgafv)
+    { _slcXgafv :: !(Maybe Xgafv)
     , _slcUploadProtocol :: !(Maybe Text)
-    , _slcAccessToken    :: !(Maybe Text)
-    , _slcUploadType     :: !(Maybe Text)
-    , _slcPayload        :: !CreateShortDynamicLinkRequest
-    , _slcCallback       :: !(Maybe Text)
+    , _slcAccessToken :: !(Maybe Text)
+    , _slcUploadType :: !(Maybe Text)
+    , _slcPayload :: !CreateShortDynamicLinkRequest
+    , _slcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

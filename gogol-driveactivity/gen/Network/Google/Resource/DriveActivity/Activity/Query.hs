@@ -41,8 +41,8 @@ module Network.Google.Resource.DriveActivity.Activity.Query
     , aqCallback
     ) where
 
-import           Network.Google.DriveActivity.Types
-import           Network.Google.Prelude
+import Network.Google.DriveActivity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @driveactivity.activity.query@ method which the
 -- 'ActivityQuery' request conforms to.
@@ -63,12 +63,12 @@ type ActivityQueryResource =
 -- /See:/ 'activityQuery' smart constructor.
 data ActivityQuery =
   ActivityQuery'
-    { _aqXgafv          :: !(Maybe Xgafv)
+    { _aqXgafv :: !(Maybe Xgafv)
     , _aqUploadProtocol :: !(Maybe Text)
-    , _aqAccessToken    :: !(Maybe Text)
-    , _aqUploadType     :: !(Maybe Text)
-    , _aqPayload        :: !QueryDriveActivityRequest
-    , _aqCallback       :: !(Maybe Text)
+    , _aqAccessToken :: !(Maybe Text)
+    , _aqUploadType :: !(Maybe Text)
+    , _aqPayload :: !QueryDriveActivityRequest
+    , _aqCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

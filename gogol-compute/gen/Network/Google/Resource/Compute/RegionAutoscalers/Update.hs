@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Update
     , rauRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionAutoscalers.update@ method which the
 -- 'RegionAutoscalersUpdate' request conforms to.
@@ -65,11 +65,11 @@ type RegionAutoscalersUpdateResource =
 -- /See:/ 'regionAutoscalersUpdate' smart constructor.
 data RegionAutoscalersUpdate =
   RegionAutoscalersUpdate'
-    { _rauRequestId  :: !(Maybe Text)
-    , _rauProject    :: !Text
-    , _rauPayload    :: !Autoscaler
+    { _rauRequestId :: !(Maybe Text)
+    , _rauProject :: !Text
+    , _rauPayload :: !Autoscaler
     , _rauAutoscaler :: !(Maybe Text)
-    , _rauRegion     :: !Text
+    , _rauRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

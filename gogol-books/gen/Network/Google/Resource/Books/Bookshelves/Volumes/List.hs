@@ -22,7 +22,7 @@
 --
 -- Retrieves volumes in a specific bookshelf for the specified user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.bookshelves.volumes.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.bookshelves.volumes.list@.
 module Network.Google.Resource.Books.Bookshelves.Volumes.List
     (
     -- * REST Resource
@@ -33,16 +33,21 @@ module Network.Google.Resource.Books.Bookshelves.Volumes.List
     , BookshelvesVolumesList
 
     -- * Request Lenses
+    , bvlXgafv
+    , bvlUploadProtocol
+    , bvlAccessToken
+    , bvlUploadType
     , bvlUserId
     , bvlShelf
     , bvlSource
     , bvlStartIndex
     , bvlMaxResults
     , bvlShowPreOrders
+    , bvlCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.bookshelves.volumes.list@ method which the
 -- 'BookshelvesVolumesList' request conforms to.
@@ -54,23 +59,34 @@ type BookshelvesVolumesListResource =
              "bookshelves" :>
                Capture "shelf" Text :>
                  "volumes" :>
-                   QueryParam "source" Text :>
-                     QueryParam "startIndex" (Textual Word32) :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "showPreorders" Bool :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "startIndex" (Textual Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "showPreorders" Bool :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Volumes
 
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --
 -- /See:/ 'bookshelvesVolumesList' smart constructor.
 data BookshelvesVolumesList =
   BookshelvesVolumesList'
-    { _bvlUserId        :: !Text
-    , _bvlShelf         :: !Text
-    , _bvlSource        :: !(Maybe Text)
-    , _bvlStartIndex    :: !(Maybe (Textual Word32))
-    , _bvlMaxResults    :: !(Maybe (Textual Word32))
+    { _bvlXgafv :: !(Maybe Xgafv)
+    , _bvlUploadProtocol :: !(Maybe Text)
+    , _bvlAccessToken :: !(Maybe Text)
+    , _bvlUploadType :: !(Maybe Text)
+    , _bvlUserId :: !Text
+    , _bvlShelf :: !Text
+    , _bvlSource :: !(Maybe Text)
+    , _bvlStartIndex :: !(Maybe (Textual Word32))
+    , _bvlMaxResults :: !(Maybe (Textual Word32))
     , _bvlShowPreOrders :: !(Maybe Bool)
+    , _bvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,6 +94,14 @@ data BookshelvesVolumesList =
 -- | Creates a value of 'BookshelvesVolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bvlXgafv'
+--
+-- * 'bvlUploadProtocol'
+--
+-- * 'bvlAccessToken'
+--
+-- * 'bvlUploadType'
 --
 -- * 'bvlUserId'
 --
@@ -90,20 +114,49 @@ data BookshelvesVolumesList =
 -- * 'bvlMaxResults'
 --
 -- * 'bvlShowPreOrders'
+--
+-- * 'bvlCallback'
 bookshelvesVolumesList
     :: Text -- ^ 'bvlUserId'
     -> Text -- ^ 'bvlShelf'
     -> BookshelvesVolumesList
 bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
   BookshelvesVolumesList'
-    { _bvlUserId = pBvlUserId_
+    { _bvlXgafv = Nothing
+    , _bvlUploadProtocol = Nothing
+    , _bvlAccessToken = Nothing
+    , _bvlUploadType = Nothing
+    , _bvlUserId = pBvlUserId_
     , _bvlShelf = pBvlShelf_
     , _bvlSource = Nothing
     , _bvlStartIndex = Nothing
     , _bvlMaxResults = Nothing
     , _bvlShowPreOrders = Nothing
+    , _bvlCallback = Nothing
     }
 
+
+-- | V1 error format.
+bvlXgafv :: Lens' BookshelvesVolumesList (Maybe Xgafv)
+bvlXgafv = lens _bvlXgafv (\ s a -> s{_bvlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+bvlUploadProtocol :: Lens' BookshelvesVolumesList (Maybe Text)
+bvlUploadProtocol
+  = lens _bvlUploadProtocol
+      (\ s a -> s{_bvlUploadProtocol = a})
+
+-- | OAuth access token.
+bvlAccessToken :: Lens' BookshelvesVolumesList (Maybe Text)
+bvlAccessToken
+  = lens _bvlAccessToken
+      (\ s a -> s{_bvlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+bvlUploadType :: Lens' BookshelvesVolumesList (Maybe Text)
+bvlUploadType
+  = lens _bvlUploadType
+      (\ s a -> s{_bvlUploadType = a})
 
 -- | ID of user for whom to retrieve bookshelf volumes.
 bvlUserId :: Lens' BookshelvesVolumesList Text
@@ -139,14 +192,25 @@ bvlShowPreOrders
   = lens _bvlShowPreOrders
       (\ s a -> s{_bvlShowPreOrders = a})
 
+-- | JSONP
+bvlCallback :: Lens' BookshelvesVolumesList (Maybe Text)
+bvlCallback
+  = lens _bvlCallback (\ s a -> s{_bvlCallback = a})
+
 instance GoogleRequest BookshelvesVolumesList where
         type Rs BookshelvesVolumesList = Volumes
         type Scopes BookshelvesVolumesList =
              '["https://www.googleapis.com/auth/books"]
         requestClient BookshelvesVolumesList'{..}
-          = go _bvlUserId _bvlShelf _bvlSource _bvlStartIndex
+          = go _bvlUserId _bvlShelf _bvlXgafv
+              _bvlUploadProtocol
+              _bvlAccessToken
+              _bvlUploadType
+              _bvlSource
+              _bvlStartIndex
               _bvlMaxResults
               _bvlShowPreOrders
+              _bvlCallback
               (Just AltJSON)
               booksService
           where go

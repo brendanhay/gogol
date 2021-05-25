@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Projects.StoredInfoTypes.Get
     , psitgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.storedInfoTypes.get@ method which the
 -- 'ProjectsStoredInfoTypesGet' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsStoredInfoTypesGetResource =
 -- /See:/ 'projectsStoredInfoTypesGet' smart constructor.
 data ProjectsStoredInfoTypesGet =
   ProjectsStoredInfoTypesGet'
-    { _psitgXgafv          :: !(Maybe Xgafv)
+    { _psitgXgafv :: !(Maybe Xgafv)
     , _psitgUploadProtocol :: !(Maybe Text)
-    , _psitgAccessToken    :: !(Maybe Text)
-    , _psitgUploadType     :: !(Maybe Text)
-    , _psitgName           :: !Text
-    , _psitgCallback       :: !(Maybe Text)
+    , _psitgAccessToken :: !(Maybe Text)
+    , _psitgUploadType :: !(Maybe Text)
+    , _psitgName :: !Text
+    , _psitgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,8 +128,9 @@ psitgUploadType
   = lens _psitgUploadType
       (\ s a -> s{_psitgUploadType = a})
 
--- | Resource name of the organization and storedInfoType to be read, for
--- example \`organizations\/433245324\/storedInfoTypes\/432452342\` or
+-- | Required. Resource name of the organization and storedInfoType to be
+-- read, for example
+-- \`organizations\/433245324\/storedInfoTypes\/432452342\` or
 -- projects\/project-id\/storedInfoTypes\/432452342.
 psitgName :: Lens' ProjectsStoredInfoTypesGet Text
 psitgName

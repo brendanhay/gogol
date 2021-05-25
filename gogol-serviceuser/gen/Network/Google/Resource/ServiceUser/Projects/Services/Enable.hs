@@ -44,8 +44,8 @@ module Network.Google.Resource.ServiceUser.Projects.Services.Enable
     , pseCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceUser.Types
+import Network.Google.Prelude
+import Network.Google.ServiceUser.Types
 
 -- | A resource alias for @serviceuser.projects.services.enable@ method which the
 -- 'ProjectsServicesEnable' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsServicesEnableResource =
 -- /See:/ 'projectsServicesEnable' smart constructor.
 data ProjectsServicesEnable =
   ProjectsServicesEnable'
-    { _pseXgafv          :: !(Maybe Xgafv)
+    { _pseXgafv :: !(Maybe Xgafv)
     , _pseUploadProtocol :: !(Maybe Text)
-    , _pseAccessToken    :: !(Maybe Text)
-    , _pseUploadType     :: !(Maybe Text)
-    , _psePayload        :: !EnableServiceRequest
-    , _pseName           :: !Text
-    , _pseCallback       :: !(Maybe Text)
+    , _pseAccessToken :: !(Maybe Text)
+    , _pseUploadType :: !(Maybe Text)
+    , _psePayload :: !EnableServiceRequest
+    , _pseName :: !Text
+    , _pseCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

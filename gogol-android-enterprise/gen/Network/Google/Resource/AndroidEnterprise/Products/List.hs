@@ -34,16 +34,21 @@ module Network.Google.Resource.AndroidEnterprise.Products.List
     , ProductsList
 
     -- * Request Lenses
+    , plXgafv
+    , plUploadProtocol
     , plEnterpriseId
+    , plAccessToken
     , plToken
+    , plUploadType
     , plQuery
     , plLanguage
     , plApproved
     , plMaxResults
+    , plCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.list@ method which the
 -- 'ProductsList' request conforms to.
@@ -53,13 +58,18 @@ type ProductsListResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "products" :>
-               QueryParam "token" Text :>
-                 QueryParam "query" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "approved" Bool :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ProductsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "query" Text :>
+                           QueryParam "language" Text :>
+                             QueryParam "approved" Bool :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ProductsListResponse
 
 -- | Finds approved products that match a query, or all approved products if
 -- there is no query.
@@ -67,12 +77,17 @@ type ProductsListResource =
 -- /See:/ 'productsList' smart constructor.
 data ProductsList =
   ProductsList'
-    { _plEnterpriseId :: !Text
-    , _plToken        :: !(Maybe Text)
-    , _plQuery        :: !(Maybe Text)
-    , _plLanguage     :: !(Maybe Text)
-    , _plApproved     :: !(Maybe Bool)
-    , _plMaxResults   :: !(Maybe (Textual Word32))
+    { _plXgafv :: !(Maybe Xgafv)
+    , _plUploadProtocol :: !(Maybe Text)
+    , _plEnterpriseId :: !Text
+    , _plAccessToken :: !(Maybe Text)
+    , _plToken :: !(Maybe Text)
+    , _plUploadType :: !(Maybe Text)
+    , _plQuery :: !(Maybe Text)
+    , _plLanguage :: !(Maybe Text)
+    , _plApproved :: !(Maybe Bool)
+    , _plMaxResults :: !(Maybe (Textual Word32))
+    , _plCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -81,9 +96,17 @@ data ProductsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'plXgafv'
+--
+-- * 'plUploadProtocol'
+--
 -- * 'plEnterpriseId'
 --
+-- * 'plAccessToken'
+--
 -- * 'plToken'
+--
+-- * 'plUploadType'
 --
 -- * 'plQuery'
 --
@@ -92,19 +115,36 @@ data ProductsList =
 -- * 'plApproved'
 --
 -- * 'plMaxResults'
+--
+-- * 'plCallback'
 productsList
     :: Text -- ^ 'plEnterpriseId'
     -> ProductsList
 productsList pPlEnterpriseId_ =
   ProductsList'
-    { _plEnterpriseId = pPlEnterpriseId_
+    { _plXgafv = Nothing
+    , _plUploadProtocol = Nothing
+    , _plEnterpriseId = pPlEnterpriseId_
+    , _plAccessToken = Nothing
     , _plToken = Nothing
+    , _plUploadType = Nothing
     , _plQuery = Nothing
     , _plLanguage = Nothing
     , _plApproved = Nothing
     , _plMaxResults = Nothing
+    , _plCallback = Nothing
     }
 
+
+-- | V1 error format.
+plXgafv :: Lens' ProductsList (Maybe Xgafv)
+plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+plUploadProtocol :: Lens' ProductsList (Maybe Text)
+plUploadProtocol
+  = lens _plUploadProtocol
+      (\ s a -> s{_plUploadProtocol = a})
 
 -- | The ID of the enterprise.
 plEnterpriseId :: Lens' ProductsList Text
@@ -112,12 +152,21 @@ plEnterpriseId
   = lens _plEnterpriseId
       (\ s a -> s{_plEnterpriseId = a})
 
--- | A pagination token is contained in a request\'s response when there are
--- more products. The token can be used in a subsequent request to obtain
--- more products, and so forth. This parameter cannot be used in the
--- initial request.
+-- | OAuth access token.
+plAccessToken :: Lens' ProductsList (Maybe Text)
+plAccessToken
+  = lens _plAccessToken
+      (\ s a -> s{_plAccessToken = a})
+
+-- | Defines the token of the page to return, usually taken from
+-- TokenPagination. This can only be used if token paging is enabled.
 plToken :: Lens' ProductsList (Maybe Text)
 plToken = lens _plToken (\ s a -> s{_plToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+plUploadType :: Lens' ProductsList (Maybe Text)
+plUploadType
+  = lens _plUploadType (\ s a -> s{_plUploadType = a})
 
 -- | The search query as typed in the Google Play store search box. If
 -- omitted, all approved apps will be returned (using the pagination
@@ -140,22 +189,32 @@ plApproved :: Lens' ProductsList (Maybe Bool)
 plApproved
   = lens _plApproved (\ s a -> s{_plApproved = a})
 
--- | Specifies the maximum number of products that can be returned per
--- request. If not specified, uses a default value of 100, which is also
--- the maximum retrievable within a single response.
+-- | Defines how many results the list operation should return. The default
+-- number depends on the resource collection.
 plMaxResults :: Lens' ProductsList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+plCallback :: Lens' ProductsList (Maybe Text)
+plCallback
+  = lens _plCallback (\ s a -> s{_plCallback = a})
 
 instance GoogleRequest ProductsList where
         type Rs ProductsList = ProductsListResponse
         type Scopes ProductsList =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsList'{..}
-          = go _plEnterpriseId _plToken _plQuery _plLanguage
+          = go _plEnterpriseId _plXgafv _plUploadProtocol
+              _plAccessToken
+              _plToken
+              _plUploadType
+              _plQuery
+              _plLanguage
               _plApproved
               _plMaxResults
+              _plCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

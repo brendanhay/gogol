@@ -47,8 +47,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.TestI
     , prwttipCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.testIamPermissions@ method which the
 -- 'ProjectsRegionsWorkflowTemplatesTestIAMPermissions' request conforms to.
@@ -75,13 +75,13 @@ type ProjectsRegionsWorkflowTemplatesTestIAMPermissionsResource
 -- /See:/ 'projectsRegionsWorkflowTemplatesTestIAMPermissions' smart constructor.
 data ProjectsRegionsWorkflowTemplatesTestIAMPermissions =
   ProjectsRegionsWorkflowTemplatesTestIAMPermissions'
-    { _prwttipXgafv          :: !(Maybe Xgafv)
+    { _prwttipXgafv :: !(Maybe Xgafv)
     , _prwttipUploadProtocol :: !(Maybe Text)
-    , _prwttipAccessToken    :: !(Maybe Text)
-    , _prwttipUploadType     :: !(Maybe Text)
-    , _prwttipPayload        :: !TestIAMPermissionsRequest
-    , _prwttipResource       :: !Text
-    , _prwttipCallback       :: !(Maybe Text)
+    , _prwttipAccessToken :: !(Maybe Text)
+    , _prwttipUploadType :: !(Maybe Text)
+    , _prwttipPayload :: !TestIAMPermissionsRequest
+    , _prwttipResource :: !Text
+    , _prwttipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

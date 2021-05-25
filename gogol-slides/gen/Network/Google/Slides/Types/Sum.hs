@@ -16,7 +16,7 @@
 --
 module Network.Google.Slides.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The text direction of this paragraph. If unset, the value defaults to
 -- LEFT_TO_RIGHT since text direction is not inherited.
@@ -1452,7 +1452,7 @@ instance FromJSON LayoutReferencePredefinedLayout where
 instance ToJSON LayoutReferencePredefinedLayout where
     toJSON = toJSONText
 
--- | The category of the line to be created. __Deprecated__: use \`category\`
+-- | The category of the line to be created. *Deprecated*: use \`category\`
 -- instead. The exact line type created is determined based on the category
 -- and how it\'s routed to connect to other page elements. If you specify
 -- both a \`category\` and a \`line_category\`, the \`category\` takes
@@ -2440,6 +2440,48 @@ instance FromJSON LineLineCategory where
 instance ToJSON LineLineCategory where
     toJSON = toJSONText
 
+-- | The optional thumbnail image size. If you don\'t specify the size, the
+-- server chooses a default size of the image.
+data PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+    = ThumbnailSizeUnspecified
+      -- ^ @THUMBNAIL_SIZE_UNSPECIFIED@
+      -- The default thumbnail image size. The unspecified thumbnail size implies
+      -- that the server chooses the size of the image in a way that might vary
+      -- in the future.
+    | Large
+      -- ^ @LARGE@
+      -- The thumbnail image width of 1600px.
+    | Medium
+      -- ^ @MEDIUM@
+      -- The thumbnail image width of 800px.
+    | Small
+      -- ^ @SMALL@
+      -- The thumbnail image width of 200px.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+
+instance FromHttpApiData PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize where
+    parseQueryParam = \case
+        "THUMBNAIL_SIZE_UNSPECIFIED" -> Right ThumbnailSizeUnspecified
+        "LARGE" -> Right Large
+        "MEDIUM" -> Right Medium
+        "SMALL" -> Right Small
+        x -> Left ("Unable to parse PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize from: " <> x)
+
+instance ToHttpApiData PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize where
+    toQueryParam = \case
+        ThumbnailSizeUnspecified -> "THUMBNAIL_SIZE_UNSPECIFIED"
+        Large -> "LARGE"
+        Medium -> "MEDIUM"
+        Small -> "SMALL"
+
+instance FromJSON PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize where
+    parseJSON = parseJSONText "PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize"
+
+instance ToJSON PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize where
+    toJSON = toJSONText
+
 -- | The type of the placeholder.
 data PlaceholderType
     = PTNone
@@ -2544,8 +2586,8 @@ instance FromJSON PlaceholderType where
 instance ToJSON PlaceholderType where
     toJSON = toJSONText
 
--- | The replace method. __Deprecated__: use \`image_replace_method\`
--- instead. If you specify both a \`replace_method\` and an
+-- | The replace method. *Deprecated*: use \`image_replace_method\` instead.
+-- If you specify both a \`replace_method\` and an
 -- \`image_replace_method\`, the \`image_replace_method\` takes precedence.
 data ReplaceAllShapesWithImageRequestReplaceMethod
     = CenterInside
@@ -2823,6 +2865,31 @@ instance FromJSON LinePropertiesDashStyle where
     parseJSON = parseJSONText "LinePropertiesDashStyle"
 
 instance ToJSON LinePropertiesDashStyle where
+    toJSON = toJSONText
+
+-- | The optional mime type of the thumbnail image. If you don\'t specify the
+-- mime type, the mime type defaults to PNG.
+data PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+    = Png
+      -- ^ @PNG@
+      -- The default mime type.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+
+instance FromHttpApiData PresentationsPagesGetThumbnailThumbnailPropertiesMimeType where
+    parseQueryParam = \case
+        "PNG" -> Right Png
+        x -> Left ("Unable to parse PresentationsPagesGetThumbnailThumbnailPropertiesMimeType from: " <> x)
+
+instance ToHttpApiData PresentationsPagesGetThumbnailThumbnailPropertiesMimeType where
+    toQueryParam = \case
+        Png -> "PNG"
+
+instance FromJSON PresentationsPagesGetThumbnailThumbnailPropertiesMimeType where
+    parseJSON = parseJSONText "PresentationsPagesGetThumbnailThumbnailPropertiesMimeType"
+
+instance ToJSON PresentationsPagesGetThumbnailThumbnailPropertiesMimeType where
     toJSON = toJSONText
 
 -- | The text alignment for this paragraph.
@@ -3393,6 +3460,51 @@ instance FromJSON TableBOrderPropertiesDashStyle where
     parseJSON = parseJSONText "TableBOrderPropertiesDashStyle"
 
 instance ToJSON TableBOrderPropertiesDashStyle where
+    toJSON = toJSONText
+
+-- | The autofit type of the shape. If the autofit type is
+-- AUTOFIT_TYPE_UNSPECIFIED, the autofit type is inherited from a parent
+-- placeholder if it exists. The field is automatically set to NONE if a
+-- request is made that might affect text fitting within its bounding text
+-- box. In this case the font_scale is applied to the font_size and the
+-- line_spacing_reduction is applied to the line_spacing. Both properties
+-- are also reset to default values.
+data AutofitAutofitType
+    = AATAutofitTypeUnspecified
+      -- ^ @AUTOFIT_TYPE_UNSPECIFIED@
+      -- The autofit type is unspecified.
+    | AATNone
+      -- ^ @NONE@
+      -- Do not autofit.
+    | AATTextAutofit
+      -- ^ @TEXT_AUTOFIT@
+      -- Shrink text on overflow to fit the shape.
+    | AATShapeAutofit
+      -- ^ @SHAPE_AUTOFIT@
+      -- Resize the shape to fit the text.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AutofitAutofitType
+
+instance FromHttpApiData AutofitAutofitType where
+    parseQueryParam = \case
+        "AUTOFIT_TYPE_UNSPECIFIED" -> Right AATAutofitTypeUnspecified
+        "NONE" -> Right AATNone
+        "TEXT_AUTOFIT" -> Right AATTextAutofit
+        "SHAPE_AUTOFIT" -> Right AATShapeAutofit
+        x -> Left ("Unable to parse AutofitAutofitType from: " <> x)
+
+instance ToHttpApiData AutofitAutofitType where
+    toQueryParam = \case
+        AATAutofitTypeUnspecified -> "AUTOFIT_TYPE_UNSPECIFIED"
+        AATNone -> "NONE"
+        AATTextAutofit -> "TEXT_AUTOFIT"
+        AATShapeAutofit -> "SHAPE_AUTOFIT"
+
+instance FromJSON AutofitAutofitType where
+    parseJSON = parseJSONText "AutofitAutofitType"
+
+instance ToJSON AutofitAutofitType where
     toJSON = toJSONText
 
 -- | The line category to update to. The exact line type is determined based

@@ -22,7 +22,7 @@
 --
 -- Lists ScanConfigs under a given project.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.list@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.list@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.List
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.List
     , psclCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.list@ method which the
 -- 'ProjectsScanConfigsList' request conforms to.
 type ProjectsScanConfigsListResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "scanConfigs" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,14 +67,14 @@ type ProjectsScanConfigsListResource =
 -- /See:/ 'projectsScanConfigsList' smart constructor.
 data ProjectsScanConfigsList =
   ProjectsScanConfigsList'
-    { _psclParent         :: !Text
-    , _psclXgafv          :: !(Maybe Xgafv)
+    { _psclParent :: !Text
+    , _psclXgafv :: !(Maybe Xgafv)
     , _psclUploadProtocol :: !(Maybe Text)
-    , _psclAccessToken    :: !(Maybe Text)
-    , _psclUploadType     :: !(Maybe Text)
-    , _psclPageToken      :: !(Maybe Text)
-    , _psclPageSize       :: !(Maybe (Textual Int32))
-    , _psclCallback       :: !(Maybe Text)
+    , _psclAccessToken :: !(Maybe Text)
+    , _psclUploadType :: !(Maybe Text)
+    , _psclPageToken :: !(Maybe Text)
+    , _psclPageSize :: !(Maybe (Textual Int32))
+    , _psclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

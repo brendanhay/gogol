@@ -36,8 +36,8 @@ module Network.Google.Resource.AdSense.Savedadstyles.Get
     , sgSavedAdStyleId
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.savedadstyles.get@ method which the
 -- 'SavedadstylesGet' request conforms to.

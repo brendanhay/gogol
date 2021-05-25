@@ -33,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Drafts.Get
     , UsersDraftsGet
 
     -- * Request Lenses
+    , udgXgafv
+    , udgUploadProtocol
+    , udgAccessToken
     , udgFormat
+    , udgUploadType
     , udgUserId
     , udgId
+    , udgCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.drafts.get@ method which the
 -- 'UsersDraftsGet' request conforms to.
@@ -50,17 +55,27 @@ type UsersDraftsGetResource =
            Capture "userId" Text :>
              "drafts" :>
                Capture "id" Text :>
-                 QueryParam "format" UsersDraftsGetFormat :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Draft
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "format" UsersDraftsGetFormat :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Draft
 
 -- | Gets the specified draft.
 --
 -- /See:/ 'usersDraftsGet' smart constructor.
 data UsersDraftsGet =
   UsersDraftsGet'
-    { _udgFormat :: !UsersDraftsGetFormat
+    { _udgXgafv :: !(Maybe Xgafv)
+    , _udgUploadProtocol :: !(Maybe Text)
+    , _udgAccessToken :: !(Maybe Text)
+    , _udgFormat :: !UsersDraftsGetFormat
+    , _udgUploadType :: !(Maybe Text)
     , _udgUserId :: !Text
-    , _udgId     :: !Text
+    , _udgId :: !Text
+    , _udgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,25 +84,66 @@ data UsersDraftsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'udgXgafv'
+--
+-- * 'udgUploadProtocol'
+--
+-- * 'udgAccessToken'
+--
 -- * 'udgFormat'
+--
+-- * 'udgUploadType'
 --
 -- * 'udgUserId'
 --
 -- * 'udgId'
+--
+-- * 'udgCallback'
 usersDraftsGet
     :: Text -- ^ 'udgId'
     -> UsersDraftsGet
 usersDraftsGet pUdgId_ =
-  UsersDraftsGet' {_udgFormat = UDGFFull, _udgUserId = "me", _udgId = pUdgId_}
+  UsersDraftsGet'
+    { _udgXgafv = Nothing
+    , _udgUploadProtocol = Nothing
+    , _udgAccessToken = Nothing
+    , _udgFormat = UDGFFull
+    , _udgUploadType = Nothing
+    , _udgUserId = "me"
+    , _udgId = pUdgId_
+    , _udgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+udgXgafv :: Lens' UsersDraftsGet (Maybe Xgafv)
+udgXgafv = lens _udgXgafv (\ s a -> s{_udgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+udgUploadProtocol :: Lens' UsersDraftsGet (Maybe Text)
+udgUploadProtocol
+  = lens _udgUploadProtocol
+      (\ s a -> s{_udgUploadProtocol = a})
+
+-- | OAuth access token.
+udgAccessToken :: Lens' UsersDraftsGet (Maybe Text)
+udgAccessToken
+  = lens _udgAccessToken
+      (\ s a -> s{_udgAccessToken = a})
 
 -- | The format to return the draft in.
 udgFormat :: Lens' UsersDraftsGet UsersDraftsGetFormat
 udgFormat
   = lens _udgFormat (\ s a -> s{_udgFormat = a})
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+udgUploadType :: Lens' UsersDraftsGet (Maybe Text)
+udgUploadType
+  = lens _udgUploadType
+      (\ s a -> s{_udgUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 udgUserId :: Lens' UsersDraftsGet Text
 udgUserId
   = lens _udgUserId (\ s a -> s{_udgUserId = a})
@@ -95,6 +151,11 @@ udgUserId
 -- | The ID of the draft to retrieve.
 udgId :: Lens' UsersDraftsGet Text
 udgId = lens _udgId (\ s a -> s{_udgId = a})
+
+-- | JSONP
+udgCallback :: Lens' UsersDraftsGet (Maybe Text)
+udgCallback
+  = lens _udgCallback (\ s a -> s{_udgCallback = a})
 
 instance GoogleRequest UsersDraftsGet where
         type Rs UsersDraftsGet = Draft
@@ -104,7 +165,11 @@ instance GoogleRequest UsersDraftsGet where
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersDraftsGet'{..}
-          = go _udgUserId _udgId (Just _udgFormat)
+          = go _udgUserId _udgId _udgXgafv _udgUploadProtocol
+              _udgAccessToken
+              (Just _udgFormat)
+              _udgUploadType
+              _udgCallback
               (Just AltJSON)
               gmailService
           where go

@@ -38,8 +38,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
     , cgAccountId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.creatives.get@ method which the
 -- 'CreativesGet' request conforms to.
@@ -58,7 +58,7 @@ type CreativesGetResource =
 data CreativesGet =
   CreativesGet'
     { _cgBuyerCreativeId :: !Text
-    , _cgAccountId       :: !(Textual Int32)
+    , _cgAccountId :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

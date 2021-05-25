@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Move or insert multiple Chrome OS Devices to organizational unit
+-- Moves or inserts multiple Chrome OS devices to an organizational unit.
+-- You can move up to 50 devices at once.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.chromeosdevices.moveDevicesToOu@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.chromeosdevices.moveDevicesToOu@.
 module Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
     (
     -- * REST Resource
@@ -33,13 +34,18 @@ module Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
     , ChromeosDevicesMoveDevicesToOu
 
     -- * Request Lenses
+    , cdmdtoXgafv
+    , cdmdtoUploadProtocol
+    , cdmdtoAccessToken
+    , cdmdtoUploadType
     , cdmdtoPayload
     , cdmdtoOrgUnitPath
     , cdmdtoCustomerId
+    , cdmdtoCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.chromeosdevices.moveDevicesToOu@ method which the
 -- 'ChromeosDevicesMoveDevicesToOu' request conforms to.
@@ -53,18 +59,29 @@ type ChromeosDevicesMoveDevicesToOuResource =
                  "chromeos" :>
                    "moveDevicesToOu" :>
                      QueryParam "orgUnitPath" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ChromeOSMoveDevicesToOu :>
-                           Post '[JSON] ()
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ChromeOSMoveDevicesToOu :>
+                                     Post '[JSON] ()
 
--- | Move or insert multiple Chrome OS Devices to organizational unit
+-- | Moves or inserts multiple Chrome OS devices to an organizational unit.
+-- You can move up to 50 devices at once.
 --
 -- /See:/ 'chromeosDevicesMoveDevicesToOu' smart constructor.
 data ChromeosDevicesMoveDevicesToOu =
   ChromeosDevicesMoveDevicesToOu'
-    { _cdmdtoPayload     :: !ChromeOSMoveDevicesToOu
+    { _cdmdtoXgafv :: !(Maybe Xgafv)
+    , _cdmdtoUploadProtocol :: !(Maybe Text)
+    , _cdmdtoAccessToken :: !(Maybe Text)
+    , _cdmdtoUploadType :: !(Maybe Text)
+    , _cdmdtoPayload :: !ChromeOSMoveDevicesToOu
     , _cdmdtoOrgUnitPath :: !Text
-    , _cdmdtoCustomerId  :: !Text
+    , _cdmdtoCustomerId :: !Text
+    , _cdmdtoCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,11 +90,21 @@ data ChromeosDevicesMoveDevicesToOu =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdmdtoXgafv'
+--
+-- * 'cdmdtoUploadProtocol'
+--
+-- * 'cdmdtoAccessToken'
+--
+-- * 'cdmdtoUploadType'
+--
 -- * 'cdmdtoPayload'
 --
 -- * 'cdmdtoOrgUnitPath'
 --
 -- * 'cdmdtoCustomerId'
+--
+-- * 'cdmdtoCallback'
 chromeosDevicesMoveDevicesToOu
     :: ChromeOSMoveDevicesToOu -- ^ 'cdmdtoPayload'
     -> Text -- ^ 'cdmdtoOrgUnitPath'
@@ -85,11 +112,39 @@ chromeosDevicesMoveDevicesToOu
     -> ChromeosDevicesMoveDevicesToOu
 chromeosDevicesMoveDevicesToOu pCdmdtoPayload_ pCdmdtoOrgUnitPath_ pCdmdtoCustomerId_ =
   ChromeosDevicesMoveDevicesToOu'
-    { _cdmdtoPayload = pCdmdtoPayload_
+    { _cdmdtoXgafv = Nothing
+    , _cdmdtoUploadProtocol = Nothing
+    , _cdmdtoAccessToken = Nothing
+    , _cdmdtoUploadType = Nothing
+    , _cdmdtoPayload = pCdmdtoPayload_
     , _cdmdtoOrgUnitPath = pCdmdtoOrgUnitPath_
     , _cdmdtoCustomerId = pCdmdtoCustomerId_
+    , _cdmdtoCallback = Nothing
     }
 
+
+-- | V1 error format.
+cdmdtoXgafv :: Lens' ChromeosDevicesMoveDevicesToOu (Maybe Xgafv)
+cdmdtoXgafv
+  = lens _cdmdtoXgafv (\ s a -> s{_cdmdtoXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cdmdtoUploadProtocol :: Lens' ChromeosDevicesMoveDevicesToOu (Maybe Text)
+cdmdtoUploadProtocol
+  = lens _cdmdtoUploadProtocol
+      (\ s a -> s{_cdmdtoUploadProtocol = a})
+
+-- | OAuth access token.
+cdmdtoAccessToken :: Lens' ChromeosDevicesMoveDevicesToOu (Maybe Text)
+cdmdtoAccessToken
+  = lens _cdmdtoAccessToken
+      (\ s a -> s{_cdmdtoAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cdmdtoUploadType :: Lens' ChromeosDevicesMoveDevicesToOu (Maybe Text)
+cdmdtoUploadType
+  = lens _cdmdtoUploadType
+      (\ s a -> s{_cdmdtoUploadType = a})
 
 -- | Multipart request metadata.
 cdmdtoPayload :: Lens' ChromeosDevicesMoveDevicesToOu ChromeOSMoveDevicesToOu
@@ -103,11 +158,17 @@ cdmdtoOrgUnitPath
   = lens _cdmdtoOrgUnitPath
       (\ s a -> s{_cdmdtoOrgUnitPath = a})
 
--- | Immutable ID of the G Suite account
+-- | Immutable ID of the Google Workspace account
 cdmdtoCustomerId :: Lens' ChromeosDevicesMoveDevicesToOu Text
 cdmdtoCustomerId
   = lens _cdmdtoCustomerId
       (\ s a -> s{_cdmdtoCustomerId = a})
+
+-- | JSONP
+cdmdtoCallback :: Lens' ChromeosDevicesMoveDevicesToOu (Maybe Text)
+cdmdtoCallback
+  = lens _cdmdtoCallback
+      (\ s a -> s{_cdmdtoCallback = a})
 
 instance GoogleRequest ChromeosDevicesMoveDevicesToOu
          where
@@ -116,6 +177,11 @@ instance GoogleRequest ChromeosDevicesMoveDevicesToOu
              '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
         requestClient ChromeosDevicesMoveDevicesToOu'{..}
           = go _cdmdtoCustomerId (Just _cdmdtoOrgUnitPath)
+              _cdmdtoXgafv
+              _cdmdtoUploadProtocol
+              _cdmdtoAccessToken
+              _cdmdtoUploadType
+              _cdmdtoCallback
               (Just AltJSON)
               _cdmdtoPayload
               directoryService

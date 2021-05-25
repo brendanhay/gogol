@@ -42,8 +42,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Create
     , picCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.create@ method which the
 -- 'ProjectsInstancesCreate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsInstancesCreateResource =
 -- /See:/ 'projectsInstancesCreate' smart constructor.
 data ProjectsInstancesCreate =
   ProjectsInstancesCreate'
-    { _picParent         :: !Text
-    , _picXgafv          :: !(Maybe Xgafv)
+    { _picParent :: !Text
+    , _picXgafv :: !(Maybe Xgafv)
     , _picUploadProtocol :: !(Maybe Text)
-    , _picAccessToken    :: !(Maybe Text)
-    , _picUploadType     :: !(Maybe Text)
-    , _picPayload        :: !CreateInstanceRequest
-    , _picCallback       :: !(Maybe Text)
+    , _picAccessToken :: !(Maybe Text)
+    , _picUploadType :: !(Maybe Text)
+    , _picPayload :: !CreateInstanceRequest
+    , _picCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,8 +109,8 @@ projectsInstancesCreate pPicParent_ pPicPayload_ =
     }
 
 
--- | The unique name of the project in which to create the new instance.
--- Values are of the form \`projects\/\`.
+-- | Required. The unique name of the project in which to create the new
+-- instance. Values are of the form \`projects\/{project}\`.
 picParent :: Lens' ProjectsInstancesCreate Text
 picParent
   = lens _picParent (\ s a -> s{_picParent = a})

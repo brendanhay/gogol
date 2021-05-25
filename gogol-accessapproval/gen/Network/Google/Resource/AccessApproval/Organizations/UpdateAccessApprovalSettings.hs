@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the settings associated with a project, folder, or organization.
--- Completely replaces the existing settings.
+-- Settings to update are determined by the value of field_mask.
 --
 -- /See:/ <https://cloud.google.com/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.updateAccessApprovalSettings@.
 module Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApprovalSettings
@@ -36,6 +36,7 @@ module Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApproval
     -- * Request Lenses
     , ouaasXgafv
     , ouaasUploadProtocol
+    , ouaasUpdateMask
     , ouaasAccessToken
     , ouaasUploadType
     , ouaasPayload
@@ -43,37 +44,39 @@ module Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApproval
     , ouaasCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.organizations.updateAccessApprovalSettings@ method which the
 -- 'OrganizationsUpdateAccessApprovalSettings' request conforms to.
 type OrganizationsUpdateAccessApprovalSettingsResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] AccessApprovalSettings :>
-                       Patch '[JSON] AccessApprovalSettings
+             QueryParam "updateMask" GFieldMask :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AccessApprovalSettings :>
+                         Patch '[JSON] AccessApprovalSettings
 
 -- | Updates the settings associated with a project, folder, or organization.
--- Completely replaces the existing settings.
+-- Settings to update are determined by the value of field_mask.
 --
 -- /See:/ 'organizationsUpdateAccessApprovalSettings' smart constructor.
 data OrganizationsUpdateAccessApprovalSettings =
   OrganizationsUpdateAccessApprovalSettings'
-    { _ouaasXgafv          :: !(Maybe Xgafv)
+    { _ouaasXgafv :: !(Maybe Xgafv)
     , _ouaasUploadProtocol :: !(Maybe Text)
-    , _ouaasAccessToken    :: !(Maybe Text)
-    , _ouaasUploadType     :: !(Maybe Text)
-    , _ouaasPayload        :: !AccessApprovalSettings
-    , _ouaasName           :: !Text
-    , _ouaasCallback       :: !(Maybe Text)
+    , _ouaasUpdateMask :: !(Maybe GFieldMask)
+    , _ouaasAccessToken :: !(Maybe Text)
+    , _ouaasUploadType :: !(Maybe Text)
+    , _ouaasPayload :: !AccessApprovalSettings
+    , _ouaasName :: !Text
+    , _ouaasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,6 +88,8 @@ data OrganizationsUpdateAccessApprovalSettings =
 -- * 'ouaasXgafv'
 --
 -- * 'ouaasUploadProtocol'
+--
+-- * 'ouaasUpdateMask'
 --
 -- * 'ouaasAccessToken'
 --
@@ -103,6 +108,7 @@ organizationsUpdateAccessApprovalSettings pOuaasPayload_ pOuaasName_ =
   OrganizationsUpdateAccessApprovalSettings'
     { _ouaasXgafv = Nothing
     , _ouaasUploadProtocol = Nothing
+    , _ouaasUpdateMask = Nothing
     , _ouaasAccessToken = Nothing
     , _ouaasUploadType = Nothing
     , _ouaasPayload = pOuaasPayload_
@@ -122,6 +128,19 @@ ouaasUploadProtocol
   = lens _ouaasUploadProtocol
       (\ s a -> s{_ouaasUploadProtocol = a})
 
+-- | The update mask applies to the settings. Only the top level fields of
+-- AccessApprovalSettings (notification_emails & enrolled_services) are
+-- supported. For each field, if it is included, the currently stored value
+-- will be entirely overwritten with the value of the field passed in this
+-- request. For the \`FieldMask\` definition, see
+-- https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+-- If this field is left unset, only the notification_emails field will be
+-- updated.
+ouaasUpdateMask :: Lens' OrganizationsUpdateAccessApprovalSettings (Maybe GFieldMask)
+ouaasUpdateMask
+  = lens _ouaasUpdateMask
+      (\ s a -> s{_ouaasUpdateMask = a})
+
 -- | OAuth access token.
 ouaasAccessToken :: Lens' OrganizationsUpdateAccessApprovalSettings (Maybe Text)
 ouaasAccessToken
@@ -139,10 +158,10 @@ ouaasPayload :: Lens' OrganizationsUpdateAccessApprovalSettings AccessApprovalSe
 ouaasPayload
   = lens _ouaasPayload (\ s a -> s{_ouaasPayload = a})
 
--- | The resource name of the settings. Format is one of:
--- \"projects\/{project_id}\/accessApprovalSettings\"
--- \"folders\/{folder_id}\/accessApprovalSettings\"
--- \"organizations\/{organization_id}\/accessApprovalSettings\"
+-- | The resource name of the settings. Format is one of: *
+-- \"projects\/{project}\/accessApprovalSettings\" *
+-- \"folders\/{folder}\/accessApprovalSettings\" *
+-- \"organizations\/{organization}\/accessApprovalSettings\"
 ouaasName :: Lens' OrganizationsUpdateAccessApprovalSettings Text
 ouaasName
   = lens _ouaasName (\ s a -> s{_ouaasName = a})
@@ -163,6 +182,7 @@ instance GoogleRequest
         requestClient
           OrganizationsUpdateAccessApprovalSettings'{..}
           = go _ouaasName _ouaasXgafv _ouaasUploadProtocol
+              _ouaasUpdateMask
               _ouaasAccessToken
               _ouaasUploadType
               _ouaasCallback

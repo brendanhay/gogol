@@ -23,7 +23,7 @@
 -- Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.myconfig.syncVolumeLicenses@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.myconfig.syncVolumeLicenses@.
 module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
     (
     -- * REST Resource
@@ -34,18 +34,23 @@ module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
     , MyConfigSyncVolumeLicenses
 
     -- * Request Lenses
+    , mcsvlXgafv
     , mcsvlCpksver
+    , mcsvlUploadProtocol
     , mcsvlLocale
     , mcsvlIncludeNonComicsSeries
+    , mcsvlAccessToken
+    , mcsvlUploadType
     , mcsvlVolumeIds
     , mcsvlFeatures
     , mcsvlSource
     , mcsvlShowPreOrders
+    , mcsvlCallback
     , mcsvlNonce
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.myconfig.syncVolumeLicenses@ method which the
 -- 'MyConfigSyncVolumeLicenses' request conforms to.
@@ -54,17 +59,23 @@ type MyConfigSyncVolumeLicensesResource =
        "v1" :>
          "myconfig" :>
            "syncVolumeLicenses" :>
-             QueryParam "source" Text :>
+             QueryParam "cpksver" Text :>
                QueryParam "nonce" Text :>
-                 QueryParam "cpksver" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "includeNonComicsSeries" Bool :>
-                       QueryParams "volumeIds" Text :>
-                         QueryParams "features"
-                           MyConfigSyncVolumeLicensesFeatures
-                           :>
-                           QueryParam "showPreorders" Bool :>
-                             QueryParam "alt" AltJSON :> Post '[JSON] Volumes
+                 QueryParam "source" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "includeNonComicsSeries" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParams "volumeIds" Text :>
+                                 QueryParams "features"
+                                   MyConfigSyncVolumeLicensesFeatures
+                                   :>
+                                   QueryParam "showPreorders" Bool :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Post '[JSON] Volumes
 
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
@@ -72,14 +83,19 @@ type MyConfigSyncVolumeLicensesResource =
 -- /See:/ 'myConfigSyncVolumeLicenses' smart constructor.
 data MyConfigSyncVolumeLicenses =
   MyConfigSyncVolumeLicenses'
-    { _mcsvlCpksver                :: !Text
-    , _mcsvlLocale                 :: !(Maybe Text)
+    { _mcsvlXgafv :: !(Maybe Xgafv)
+    , _mcsvlCpksver :: !Text
+    , _mcsvlUploadProtocol :: !(Maybe Text)
+    , _mcsvlLocale :: !(Maybe Text)
     , _mcsvlIncludeNonComicsSeries :: !(Maybe Bool)
-    , _mcsvlVolumeIds              :: !(Maybe [Text])
-    , _mcsvlFeatures               :: !(Maybe [MyConfigSyncVolumeLicensesFeatures])
-    , _mcsvlSource                 :: !Text
-    , _mcsvlShowPreOrders          :: !(Maybe Bool)
-    , _mcsvlNonce                  :: !Text
+    , _mcsvlAccessToken :: !(Maybe Text)
+    , _mcsvlUploadType :: !(Maybe Text)
+    , _mcsvlVolumeIds :: !(Maybe [Text])
+    , _mcsvlFeatures :: !(Maybe [MyConfigSyncVolumeLicensesFeatures])
+    , _mcsvlSource :: !Text
+    , _mcsvlShowPreOrders :: !(Maybe Bool)
+    , _mcsvlCallback :: !(Maybe Text)
+    , _mcsvlNonce :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -88,11 +104,19 @@ data MyConfigSyncVolumeLicenses =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mcsvlXgafv'
+--
 -- * 'mcsvlCpksver'
+--
+-- * 'mcsvlUploadProtocol'
 --
 -- * 'mcsvlLocale'
 --
 -- * 'mcsvlIncludeNonComicsSeries'
+--
+-- * 'mcsvlAccessToken'
+--
+-- * 'mcsvlUploadType'
 --
 -- * 'mcsvlVolumeIds'
 --
@@ -102,6 +126,8 @@ data MyConfigSyncVolumeLicenses =
 --
 -- * 'mcsvlShowPreOrders'
 --
+-- * 'mcsvlCallback'
+--
 -- * 'mcsvlNonce'
 myConfigSyncVolumeLicenses
     :: Text -- ^ 'mcsvlCpksver'
@@ -110,21 +136,37 @@ myConfigSyncVolumeLicenses
     -> MyConfigSyncVolumeLicenses
 myConfigSyncVolumeLicenses pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
   MyConfigSyncVolumeLicenses'
-    { _mcsvlCpksver = pMcsvlCpksver_
+    { _mcsvlXgafv = Nothing
+    , _mcsvlCpksver = pMcsvlCpksver_
+    , _mcsvlUploadProtocol = Nothing
     , _mcsvlLocale = Nothing
     , _mcsvlIncludeNonComicsSeries = Nothing
+    , _mcsvlAccessToken = Nothing
+    , _mcsvlUploadType = Nothing
     , _mcsvlVolumeIds = Nothing
     , _mcsvlFeatures = Nothing
     , _mcsvlSource = pMcsvlSource_
     , _mcsvlShowPreOrders = Nothing
+    , _mcsvlCallback = Nothing
     , _mcsvlNonce = pMcsvlNonce_
     }
 
+
+-- | V1 error format.
+mcsvlXgafv :: Lens' MyConfigSyncVolumeLicenses (Maybe Xgafv)
+mcsvlXgafv
+  = lens _mcsvlXgafv (\ s a -> s{_mcsvlXgafv = a})
 
 -- | The device\/version ID from which to release the restriction.
 mcsvlCpksver :: Lens' MyConfigSyncVolumeLicenses Text
 mcsvlCpksver
   = lens _mcsvlCpksver (\ s a -> s{_mcsvlCpksver = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mcsvlUploadProtocol :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
+mcsvlUploadProtocol
+  = lens _mcsvlUploadProtocol
+      (\ s a -> s{_mcsvlUploadProtocol = a})
 
 -- | ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.
 mcsvlLocale :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
@@ -136,6 +178,18 @@ mcsvlIncludeNonComicsSeries :: Lens' MyConfigSyncVolumeLicenses (Maybe Bool)
 mcsvlIncludeNonComicsSeries
   = lens _mcsvlIncludeNonComicsSeries
       (\ s a -> s{_mcsvlIncludeNonComicsSeries = a})
+
+-- | OAuth access token.
+mcsvlAccessToken :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
+mcsvlAccessToken
+  = lens _mcsvlAccessToken
+      (\ s a -> s{_mcsvlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mcsvlUploadType :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
+mcsvlUploadType
+  = lens _mcsvlUploadType
+      (\ s a -> s{_mcsvlUploadType = a})
 
 -- | The volume(s) to request download restrictions for.
 mcsvlVolumeIds :: Lens' MyConfigSyncVolumeLicenses [Text]
@@ -164,6 +218,12 @@ mcsvlShowPreOrders
   = lens _mcsvlShowPreOrders
       (\ s a -> s{_mcsvlShowPreOrders = a})
 
+-- | JSONP
+mcsvlCallback :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
+mcsvlCallback
+  = lens _mcsvlCallback
+      (\ s a -> s{_mcsvlCallback = a})
+
 -- | The client nonce value.
 mcsvlNonce :: Lens' MyConfigSyncVolumeLicenses Text
 mcsvlNonce
@@ -175,13 +235,18 @@ instance GoogleRequest MyConfigSyncVolumeLicenses
         type Scopes MyConfigSyncVolumeLicenses =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyConfigSyncVolumeLicenses'{..}
-          = go (Just _mcsvlSource) (Just _mcsvlNonce)
-              (Just _mcsvlCpksver)
+          = go (Just _mcsvlCpksver) (Just _mcsvlNonce)
+              (Just _mcsvlSource)
+              _mcsvlXgafv
+              _mcsvlUploadProtocol
               _mcsvlLocale
               _mcsvlIncludeNonComicsSeries
+              _mcsvlAccessToken
+              _mcsvlUploadType
               (_mcsvlVolumeIds ^. _Default)
               (_mcsvlFeatures ^. _Default)
               _mcsvlShowPreOrders
+              _mcsvlCallback
               (Just AltJSON)
               booksService
           where go

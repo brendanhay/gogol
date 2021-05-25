@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.Insert
     , spiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.insert@ method which the
 -- 'SecurityPoliciesInsert' request conforms to.
@@ -63,8 +63,8 @@ type SecurityPoliciesInsertResource =
 data SecurityPoliciesInsert =
   SecurityPoliciesInsert'
     { _spiRequestId :: !(Maybe Text)
-    , _spiProject   :: !Text
-    , _spiPayload   :: !SecurityPolicy
+    , _spiProject :: !Text
+    , _spiPayload :: !SecurityPolicy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

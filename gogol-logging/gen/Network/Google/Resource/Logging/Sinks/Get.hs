@@ -22,7 +22,7 @@
 --
 -- Gets a sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.sinks.get@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.sinks.get@.
 module Network.Google.Resource.Logging.Sinks.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.Sinks.Get
     , sgCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.sinks.get@ method which the
 -- 'SinksGet' request conforms to.
@@ -61,12 +61,12 @@ type SinksGetResource =
 -- /See:/ 'sinksGet' smart constructor.
 data SinksGet =
   SinksGet'
-    { _sgXgafv          :: !(Maybe Xgafv)
+    { _sgXgafv :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
-    , _sgAccessToken    :: !(Maybe Text)
-    , _sgUploadType     :: !(Maybe Text)
-    , _sgSinkName       :: !Text
-    , _sgCallback       :: !(Maybe Text)
+    , _sgAccessToken :: !(Maybe Text)
+    , _sgUploadType :: !(Maybe Text)
+    , _sgSinkName :: !Text
+    , _sgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

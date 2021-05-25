@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.De
     , plrddCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.devices.delete@ method which the
 -- 'ProjectsLocationsRegistriesDevicesDelete' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsLocationsRegistriesDevicesDeleteResource
 -- /See:/ 'projectsLocationsRegistriesDevicesDelete' smart constructor.
 data ProjectsLocationsRegistriesDevicesDelete =
   ProjectsLocationsRegistriesDevicesDelete'
-    { _plrddXgafv          :: !(Maybe Xgafv)
+    { _plrddXgafv :: !(Maybe Xgafv)
     , _plrddUploadProtocol :: !(Maybe Text)
-    , _plrddAccessToken    :: !(Maybe Text)
-    , _plrddUploadType     :: !(Maybe Text)
-    , _plrddName           :: !Text
-    , _plrddCallback       :: !(Maybe Text)
+    , _plrddAccessToken :: !(Maybe Text)
+    , _plrddUploadType :: !(Maybe Text)
+    , _plrddName :: !Text
+    , _plrddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,7 +124,7 @@ plrddUploadType
   = lens _plrddUploadType
       (\ s a -> s{_plrddUploadType = a})
 
--- | The name of the device. For example,
+-- | Required. The name of the device. For example,
 -- \`projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/device0\`
 -- or
 -- \`projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/{num_id}\`.

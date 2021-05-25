@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Insert
     , tvgiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.insert@ method which the
 -- 'TargetVPNGatewaysInsert' request conforms to.
@@ -65,9 +65,9 @@ type TargetVPNGatewaysInsertResource =
 data TargetVPNGatewaysInsert =
   TargetVPNGatewaysInsert'
     { _tvgiRequestId :: !(Maybe Text)
-    , _tvgiProject   :: !Text
-    , _tvgiPayload   :: !TargetVPNGateway
-    , _tvgiRegion    :: !Text
+    , _tvgiProject :: !Text
+    , _tvgiPayload :: !TargetVPNGateway
+    , _tvgiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

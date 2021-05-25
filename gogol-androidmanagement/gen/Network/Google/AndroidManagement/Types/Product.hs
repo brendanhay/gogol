@@ -17,49 +17,22 @@
 --
 module Network.Google.AndroidManagement.Types.Product where
 
-import           Network.Google.AndroidManagement.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types.Sum
+import Network.Google.Prelude
 
 -- | The Status type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by gRPC (https:\/\/github.com\/grpc). The error model is
--- designed to be: Simple to use and understand for most users Flexible
--- enough to meet unexpected needsOverviewThe Status message contains three
--- pieces of data: error code, error message, and error details. The error
--- code should be an enum value of google.rpc.Code, but it may accept
--- additional error codes if needed. The error message should be a
--- developer-facing English message that helps developers understand and
--- resolve the error. If a localized user-facing error message is needed,
--- put the localized message in the error details or localize it in the
--- client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package google.rpc that can be used for common error conditions.Language
--- mappingThe Status message is the logical representation of the error
--- model, but it is not necessarily the actual wire format. When the Status
--- message is exposed in different client libraries and different wire
--- protocols, it can be mapped differently. For example, it will likely be
--- mapped to some exceptions in Java, but more likely mapped to some error
--- codes in C.Other usesThe error model and the Status message can be used
--- in a variety of environments, either with or without APIs, to provide a
--- consistent developer experience across different environments.Example
--- uses of this error model include: Partial errors. If a service needs to
--- return partial errors to the client, it may embed the Status in the
--- normal response to indicate the partial errors. Workflow errors. A
--- typical workflow has multiple steps. Each step may have a Status message
--- for error reporting. Batch operations. If a client uses batch request
--- and batch response, the Status message should be used directly inside
--- batch response, one for each error sub-response. Asynchronous
--- operations. If an API call embeds asynchronous operation results in its
--- response, the status of those operations should be represented directly
--- using the Status message. Logging. If some API errors are stored in
--- logs, the message Status could be used directly after any stripping
--- needed for security\/privacy reasons.
+-- is used by gRPC (https:\/\/github.com\/grpc). Each Status message
+-- contains three pieces of data: error code, error message, and error
+-- details.You can find out more about this error model and how to work
+-- with it in the API Design Guide
+-- (https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -121,7 +94,7 @@ instance ToJSON Status where
 data ListPoliciesResponse =
   ListPoliciesResponse'
     { _lprNextPageToken :: !(Maybe Text)
-    , _lprPolicies      :: !(Maybe [Policy])
+    , _lprPolicies :: !(Maybe [Policy])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -173,7 +146,7 @@ instance ToJSON ListPoliciesResponse where
 data MemoryInfo =
   MemoryInfo'
     { _miTotalInternalStorage :: !(Maybe (Textual Int64))
-    , _miTotalRam             :: !(Maybe (Textual Int64))
+    , _miTotalRam :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -266,13 +239,13 @@ instance ToJSON PackageNameList where
 -- /See:/ 'command' smart constructor.
 data Command =
   Command'
-    { _cResetPasswordFlags :: !(Maybe [Text])
-    , _cNewPassword        :: !(Maybe Text)
-    , _cUserName           :: !(Maybe Text)
-    , _cErrorCode          :: !(Maybe CommandErrorCode)
-    , _cType               :: !(Maybe CommandType)
-    , _cDuration           :: !(Maybe GDuration)
-    , _cCreateTime         :: !(Maybe DateTime')
+    { _cResetPasswordFlags :: !(Maybe [CommandResetPasswordFlagsItem])
+    , _cNewPassword :: !(Maybe Text)
+    , _cUserName :: !(Maybe Text)
+    , _cErrorCode :: !(Maybe CommandErrorCode)
+    , _cType :: !(Maybe CommandType)
+    , _cDuration :: !(Maybe GDuration)
+    , _cCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -309,7 +282,7 @@ command =
 
 
 -- | For commands of type RESET_PASSWORD, optionally specifies flags.
-cResetPasswordFlags :: Lens' Command [Text]
+cResetPasswordFlags :: Lens' Command [CommandResetPasswordFlagsItem]
 cResetPasswordFlags
   = lens _cResetPasswordFlags
       (\ s a -> s{_cResetPasswordFlags = a})
@@ -385,7 +358,7 @@ instance ToJSON Command where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -438,13 +411,13 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'display' smart constructor.
 data Display =
   Display'
-    { _dHeight      :: !(Maybe (Textual Int32))
-    , _dState       :: !(Maybe DisplayState)
-    , _dWidth       :: !(Maybe (Textual Int32))
-    , _dName        :: !(Maybe Text)
+    { _dHeight :: !(Maybe (Textual Int32))
+    , _dState :: !(Maybe DisplayState)
+    , _dWidth :: !(Maybe (Textual Int32))
+    , _dName :: !(Maybe Text)
     , _dRefreshRate :: !(Maybe (Textual Int32))
-    , _dDisplayId   :: !(Maybe (Textual Int32))
-    , _dDensity     :: !(Maybe (Textual Int32))
+    , _dDisplayId :: !(Maybe (Textual Int32))
+    , _dDensity :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -547,7 +520,7 @@ instance ToJSON Display where
 data AlwaysOnVPNPackage =
   AlwaysOnVPNPackage'
     { _aovpLockdownEnabled :: !(Maybe Bool)
-    , _aovpPackageName     :: !(Maybe Text)
+    , _aovpPackageName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -669,19 +642,90 @@ instance ToJSON LaunchAppAction where
           = object
               (catMaybes [("packageName" .=) <$> _laaPackageName])
 
+-- | A rule that defines the actions to take if a device or work profile is
+-- not compliant with the policy specified in settingName.
+--
+-- /See:/ 'policyEnforcementRule' smart constructor.
+data PolicyEnforcementRule =
+  PolicyEnforcementRule'
+    { _perWipeAction :: !(Maybe WipeAction)
+    , _perSettingName :: !(Maybe Text)
+    , _perBlockAction :: !(Maybe BlockAction)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PolicyEnforcementRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'perWipeAction'
+--
+-- * 'perSettingName'
+--
+-- * 'perBlockAction'
+policyEnforcementRule
+    :: PolicyEnforcementRule
+policyEnforcementRule =
+  PolicyEnforcementRule'
+    { _perWipeAction = Nothing
+    , _perSettingName = Nothing
+    , _perBlockAction = Nothing
+    }
+
+
+-- | An action to reset a fully managed device or delete a work profile.
+-- Note: blockAction must also be specified.
+perWipeAction :: Lens' PolicyEnforcementRule (Maybe WipeAction)
+perWipeAction
+  = lens _perWipeAction
+      (\ s a -> s{_perWipeAction = a})
+
+-- | The top-level policy to enforce. For example, applications or
+-- passwordPolicies.
+perSettingName :: Lens' PolicyEnforcementRule (Maybe Text)
+perSettingName
+  = lens _perSettingName
+      (\ s a -> s{_perSettingName = a})
+
+-- | An action to block access to apps and data on a fully managed device or
+-- in a work profile. This action also triggers a user-facing notification
+-- with information (where possible) on how to correct the compliance
+-- issue. Note: wipeAction must also be specified.
+perBlockAction :: Lens' PolicyEnforcementRule (Maybe BlockAction)
+perBlockAction
+  = lens _perBlockAction
+      (\ s a -> s{_perBlockAction = a})
+
+instance FromJSON PolicyEnforcementRule where
+        parseJSON
+          = withObject "PolicyEnforcementRule"
+              (\ o ->
+                 PolicyEnforcementRule' <$>
+                   (o .:? "wipeAction") <*> (o .:? "settingName") <*>
+                     (o .:? "blockAction"))
+
+instance ToJSON PolicyEnforcementRule where
+        toJSON PolicyEnforcementRule'{..}
+          = object
+              (catMaybes
+                 [("wipeAction" .=) <$> _perWipeAction,
+                  ("settingName" .=) <$> _perSettingName,
+                  ("blockAction" .=) <$> _perBlockAction])
+
 -- | Hardware status. Temperatures may be compared to the temperature
 -- thresholds available in hardwareInfo to determine hardware health.
 --
 -- /See:/ 'hardwareStatus' smart constructor.
 data HardwareStatus =
   HardwareStatus'
-    { _hsCPUTemperatures     :: !(Maybe [Textual Double])
+    { _hsCPUTemperatures :: !(Maybe [Textual Double])
     , _hsBatteryTemperatures :: !(Maybe [Textual Double])
-    , _hsGpuTemperatures     :: !(Maybe [Textual Double])
-    , _hsFanSpeeds           :: !(Maybe [Textual Double])
-    , _hsSkinTemperatures    :: !(Maybe [Textual Double])
-    , _hsCPUUsages           :: !(Maybe [Textual Double])
-    , _hsCreateTime          :: !(Maybe DateTime')
+    , _hsGpuTemperatures :: !(Maybe [Textual Double])
+    , _hsFanSpeeds :: !(Maybe [Textual Double])
+    , _hsSkinTemperatures :: !(Maybe [Textual Double])
+    , _hsCPUUsages :: !(Maybe [Textual Double])
+    , _hsCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -803,10 +847,11 @@ instance ToJSON HardwareStatus where
 -- /See:/ 'application' smart constructor.
 data Application =
   Application'
-    { _aManagedProperties :: !(Maybe [ManagedProperty])
-    , _aName              :: !(Maybe Text)
-    , _aPermissions       :: !(Maybe [ApplicationPermission])
-    , _aTitle             :: !(Maybe Text)
+    { _aAppTracks :: !(Maybe [AppTrackInfo])
+    , _aManagedProperties :: !(Maybe [ManagedProperty])
+    , _aName :: !(Maybe Text)
+    , _aPermissions :: !(Maybe [ApplicationPermission])
+    , _aTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -814,6 +859,8 @@ data Application =
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aAppTracks'
 --
 -- * 'aManagedProperties'
 --
@@ -826,12 +873,20 @@ application
     :: Application
 application =
   Application'
-    { _aManagedProperties = Nothing
+    { _aAppTracks = Nothing
+    , _aManagedProperties = Nothing
     , _aName = Nothing
     , _aPermissions = Nothing
     , _aTitle = Nothing
     }
 
+
+-- | Application tracks visible to the enterprise.
+aAppTracks :: Lens' Application [AppTrackInfo]
+aAppTracks
+  = lens _aAppTracks (\ s a -> s{_aAppTracks = a}) .
+      _Default
+      . _Coerce
 
 -- | The set of managed properties available to be pre-configured for the
 -- app.
@@ -863,8 +918,9 @@ instance FromJSON Application where
           = withObject "Application"
               (\ o ->
                  Application' <$>
-                   (o .:? "managedProperties" .!= mempty) <*>
-                     (o .:? "name")
+                   (o .:? "appTracks" .!= mempty) <*>
+                     (o .:? "managedProperties" .!= mempty)
+                     <*> (o .:? "name")
                      <*> (o .:? "permissions" .!= mempty)
                      <*> (o .:? "title"))
 
@@ -872,23 +928,76 @@ instance ToJSON Application where
         toJSON Application'{..}
           = object
               (catMaybes
-                 [("managedProperties" .=) <$> _aManagedProperties,
+                 [("appTracks" .=) <$> _aAppTracks,
+                  ("managedProperties" .=) <$> _aManagedProperties,
                   ("name" .=) <$> _aName,
                   ("permissions" .=) <$> _aPermissions,
                   ("title" .=) <$> _aTitle])
+
+-- | Policies for apps in the personal profile of a company-owned device with
+-- a work profile.
+--
+-- /See:/ 'personalApplicationPolicy' smart constructor.
+data PersonalApplicationPolicy =
+  PersonalApplicationPolicy'
+    { _papPackageName :: !(Maybe Text)
+    , _papInstallType :: !(Maybe PersonalApplicationPolicyInstallType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PersonalApplicationPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'papPackageName'
+--
+-- * 'papInstallType'
+personalApplicationPolicy
+    :: PersonalApplicationPolicy
+personalApplicationPolicy =
+  PersonalApplicationPolicy'
+    {_papPackageName = Nothing, _papInstallType = Nothing}
+
+
+-- | The package name of the application.
+papPackageName :: Lens' PersonalApplicationPolicy (Maybe Text)
+papPackageName
+  = lens _papPackageName
+      (\ s a -> s{_papPackageName = a})
+
+-- | The type of installation to perform.
+papInstallType :: Lens' PersonalApplicationPolicy (Maybe PersonalApplicationPolicyInstallType)
+papInstallType
+  = lens _papInstallType
+      (\ s a -> s{_papInstallType = a})
+
+instance FromJSON PersonalApplicationPolicy where
+        parseJSON
+          = withObject "PersonalApplicationPolicy"
+              (\ o ->
+                 PersonalApplicationPolicy' <$>
+                   (o .:? "packageName") <*> (o .:? "installType"))
+
+instance ToJSON PersonalApplicationPolicy where
+        toJSON PersonalApplicationPolicy'{..}
+          = object
+              (catMaybes
+                 [("packageName" .=) <$> _papPackageName,
+                  ("installType" .=) <$> _papInstallType])
 
 -- | Managed property.
 --
 -- /See:/ 'managedProperty' smart constructor.
 data ManagedProperty =
   ManagedProperty'
-    { _mpEntries          :: !(Maybe [ManagedPropertyEntry])
+    { _mpEntries :: !(Maybe [ManagedPropertyEntry])
     , _mpNestedProperties :: !(Maybe [ManagedProperty])
-    , _mpKey              :: !(Maybe Text)
-    , _mpDefaultValue     :: !(Maybe JSONValue)
-    , _mpTitle            :: !(Maybe Text)
-    , _mpType             :: !(Maybe ManagedPropertyType)
-    , _mpDescription      :: !(Maybe Text)
+    , _mpKey :: !(Maybe Text)
+    , _mpDefaultValue :: !(Maybe JSONValue)
+    , _mpTitle :: !(Maybe Text)
+    , _mpType :: !(Maybe ManagedPropertyType)
+    , _mpDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -998,10 +1107,10 @@ instance ToJSON ManagedProperty where
 -- /See:/ 'proxyInfo' smart constructor.
 data ProxyInfo =
   ProxyInfo'
-    { _piPacURI        :: !(Maybe Text)
-    , _piHost          :: !(Maybe Text)
+    { _piPacURI :: !(Maybe Text)
+    , _piHost :: !(Maybe Text)
     , _piExcludedHosts :: !(Maybe [Text])
-    , _piPort          :: !(Maybe (Textual Int32))
+    , _piPort :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1070,13 +1179,14 @@ instance ToJSON ProxyInfo where
                   ("port" .=) <$> _piPort])
 
 -- | A default activity for handling intents that match a particular intent
--- filter.
+-- filter. Note: To set up a kiosk, use InstallType to KIOSK rather than
+-- use persistent preferred activities.
 --
 -- /See:/ 'persistentPreferredActivity' smart constructor.
 data PersistentPreferredActivity =
   PersistentPreferredActivity'
-    { _ppaActions          :: !(Maybe [Text])
-    , _ppaCategories       :: !(Maybe [Text])
+    { _ppaActions :: !(Maybe [Text])
+    , _ppaCategories :: !(Maybe [Text])
     , _ppaReceiverActivity :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1154,10 +1264,10 @@ instance ToJSON PersistentPreferredActivity where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1211,7 +1321,7 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- name should have the format of operations\/some\/unique\/name.
+-- name should be a resource name ending with operations\/{unique_id}.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1273,7 +1383,7 @@ instance ToJSON Empty where
 -- /See:/ 'externalData' smart constructor.
 data ExternalData =
   ExternalData'
-    { _edURL        :: !(Maybe Text)
+    { _edURL :: !(Maybe Text)
     , _edSha256Hash :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1361,18 +1471,41 @@ instance ToJSON APILevelCondition where
           = object
               (catMaybes [("minApiLevel" .=) <$> _alcMinAPILevel])
 
+-- | Response on issuing a command. This is currently empty as a placeholder.
+--
+-- /See:/ 'issueCommandResponse' smart constructor.
+data IssueCommandResponse =
+  IssueCommandResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IssueCommandResponse' with the minimum fields required to make a request.
+--
+issueCommandResponse
+    :: IssueCommandResponse
+issueCommandResponse = IssueCommandResponse'
+
+
+instance FromJSON IssueCommandResponse where
+        parseJSON
+          = withObject "IssueCommandResponse"
+              (\ o -> pure IssueCommandResponse')
+
+instance ToJSON IssueCommandResponse where
+        toJSON = const emptyObject
+
 -- | Information about security related device settings on device.
 --
 -- /See:/ 'deviceSettings' smart constructor.
 data DeviceSettings =
   DeviceSettings'
-    { _dsIsEncrypted                :: !(Maybe Bool)
-    , _dsAdbEnabled                 :: !(Maybe Bool)
-    , _dsIsDeviceSecure             :: !(Maybe Bool)
-    , _dsVerifyAppsEnabled          :: !(Maybe Bool)
+    { _dsIsEncrypted :: !(Maybe Bool)
+    , _dsAdbEnabled :: !(Maybe Bool)
+    , _dsIsDeviceSecure :: !(Maybe Bool)
+    , _dsVerifyAppsEnabled :: !(Maybe Bool)
     , _dsDevelopmentSettingsEnabled :: !(Maybe Bool)
-    , _dsEncryptionStatus           :: !(Maybe DeviceSettingsEncryptionStatus)
-    , _dsUnknownSourcesEnabled      :: !(Maybe Bool)
+    , _dsEncryptionStatus :: !(Maybe DeviceSettingsEncryptionStatus)
+    , _dsUnknownSourcesEnabled :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1427,9 +1560,9 @@ dsIsDeviceSecure
   = lens _dsIsDeviceSecure
       (\ s a -> s{_dsIsDeviceSecure = a})
 
--- | Whether Verify Apps (Google Play Protect
--- (https:\/\/support.google.com\/googleplay\/answer\/2812853)) is enabled
--- on the device.
+-- | Whether Google Play Protect verification
+-- (https:\/\/support.google.com\/accounts\/answer\/2812853) is enforced on
+-- the device.
 dsVerifyAppsEnabled :: Lens' DeviceSettings (Maybe Bool)
 dsVerifyAppsEnabled
   = lens _dsVerifyAppsEnabled
@@ -1478,6 +1611,59 @@ instance ToJSON DeviceSettings where
                   ("encryptionStatus" .=) <$> _dsEncryptionStatus,
                   ("unknownSourcesEnabled" .=) <$>
                     _dsUnknownSourcesEnabled])
+
+-- | An action to reset a fully managed device or delete a work profile.
+-- Note: blockAction must also be specified.
+--
+-- /See:/ 'wipeAction' smart constructor.
+data WipeAction =
+  WipeAction'
+    { _waWipeAfterDays :: !(Maybe (Textual Int32))
+    , _waPreserveFrp :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WipeAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'waWipeAfterDays'
+--
+-- * 'waPreserveFrp'
+wipeAction
+    :: WipeAction
+wipeAction = WipeAction' {_waWipeAfterDays = Nothing, _waPreserveFrp = Nothing}
+
+
+-- | Number of days the policy is non-compliant before the device or work
+-- profile is wiped. wipeAfterDays must be greater than blockAfterDays.
+waWipeAfterDays :: Lens' WipeAction (Maybe Int32)
+waWipeAfterDays
+  = lens _waWipeAfterDays
+      (\ s a -> s{_waWipeAfterDays = a})
+      . mapping _Coerce
+
+-- | Whether the factory-reset protection data is preserved on the device.
+-- This setting doesn’t apply to work profiles.
+waPreserveFrp :: Lens' WipeAction (Maybe Bool)
+waPreserveFrp
+  = lens _waPreserveFrp
+      (\ s a -> s{_waPreserveFrp = a})
+
+instance FromJSON WipeAction where
+        parseJSON
+          = withObject "WipeAction"
+              (\ o ->
+                 WipeAction' <$>
+                   (o .:? "wipeAfterDays") <*> (o .:? "preserveFrp"))
+
+instance ToJSON WipeAction where
+        toJSON WipeAction'{..}
+          = object
+              (catMaybes
+                 [("wipeAfterDays" .=) <$> _waWipeAfterDays,
+                  ("preserveFrp" .=) <$> _waPreserveFrp])
 
 -- | Optional, a map containing configuration variables defined for the
 -- configuration.
@@ -1531,20 +1717,20 @@ instance ToJSON
 -- /See:/ 'hardwareInfo' smart constructor.
 data HardwareInfo =
   HardwareInfo'
-    { _hiCPUThrottlingTemperatures     :: !(Maybe [Textual Double])
-    , _hiManufacturer                  :: !(Maybe Text)
-    , _hiBrand                         :: !(Maybe Text)
-    , _hiCPUShutdownTemperatures       :: !(Maybe [Textual Double])
+    { _hiCPUThrottlingTemperatures :: !(Maybe [Textual Double])
+    , _hiManufacturer :: !(Maybe Text)
+    , _hiBrand :: !(Maybe Text)
+    , _hiCPUShutdownTemperatures :: !(Maybe [Textual Double])
     , _hiBatteryThrottlingTemperatures :: !(Maybe [Textual Double])
-    , _hiModel                         :: !(Maybe Text)
-    , _hiBatteryShutdownTemperatures   :: !(Maybe [Textual Double])
-    , _hiSkinThrottlingTemperatures    :: !(Maybe [Textual Double])
-    , _hiGpuShutdownTemperatures       :: !(Maybe [Textual Double])
-    , _hiGpuThrottlingTemperatures     :: !(Maybe [Textual Double])
-    , _hiSkinShutdownTemperatures      :: !(Maybe [Textual Double])
-    , _hiSerialNumber                  :: !(Maybe Text)
-    , _hiDeviceBasebandVersion         :: !(Maybe Text)
-    , _hiHardware                      :: !(Maybe Text)
+    , _hiModel :: !(Maybe Text)
+    , _hiBatteryShutdownTemperatures :: !(Maybe [Textual Double])
+    , _hiSkinThrottlingTemperatures :: !(Maybe [Textual Double])
+    , _hiGpuShutdownTemperatures :: !(Maybe [Textual Double])
+    , _hiGpuThrottlingTemperatures :: !(Maybe [Textual Double])
+    , _hiSkinShutdownTemperatures :: !(Maybe [Textual Double])
+    , _hiSerialNumber :: !(Maybe Text)
+    , _hiDeviceBasebandVersion :: !(Maybe Text)
+    , _hiHardware :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1757,36 +1943,41 @@ instance ToJSON HardwareInfo where
 -- /See:/ 'device' smart constructor.
 data Device =
   Device'
-    { _devMemoryInfo                     :: !(Maybe MemoryInfo)
-    , _devPolicyCompliant                :: !(Maybe Bool)
-    , _devApplicationReports             :: !(Maybe [ApplicationReport])
-    , _devPolicyName                     :: !(Maybe Text)
-    , _devState                          :: !(Maybe DeviceState)
-    , _devAppliedPolicyName              :: !(Maybe Text)
-    , _devLastStatusReportTime           :: !(Maybe DateTime')
-    , _devDeviceSettings                 :: !(Maybe DeviceSettings)
-    , _devEnrollmentTokenName            :: !(Maybe Text)
-    , _devManagementMode                 :: !(Maybe DeviceManagementMode)
-    , _devHardwareInfo                   :: !(Maybe HardwareInfo)
-    , _devPowerManagementEvents          :: !(Maybe [PowerManagementEvent])
-    , _devUserName                       :: !(Maybe Text)
-    , _devMemoryEvents                   :: !(Maybe [MemoryEvent])
-    , _devAPILevel                       :: !(Maybe (Textual Int32))
-    , _devUser                           :: !(Maybe User)
-    , _devDisabledReason                 :: !(Maybe UserFacingMessage)
+    { _devMemoryInfo :: !(Maybe MemoryInfo)
+    , _devPolicyCompliant :: !(Maybe Bool)
+    , _devApplicationReports :: !(Maybe [ApplicationReport])
+    , _devPolicyName :: !(Maybe Text)
+    , _devState :: !(Maybe DeviceState)
+    , _devAppliedPolicyName :: !(Maybe Text)
+    , _devLastStatusReportTime :: !(Maybe DateTime')
+    , _devDeviceSettings :: !(Maybe DeviceSettings)
+    , _devEnrollmentTokenName :: !(Maybe Text)
+    , _devManagementMode :: !(Maybe DeviceManagementMode)
+    , _devHardwareInfo :: !(Maybe HardwareInfo)
+    , _devPowerManagementEvents :: !(Maybe [PowerManagementEvent])
+    , _devCommonCriteriaModeInfo :: !(Maybe CommonCriteriaModeInfo)
+    , _devUserName :: !(Maybe Text)
+    , _devMemoryEvents :: !(Maybe [MemoryEvent])
+    , _devAPILevel :: !(Maybe (Textual Int32))
+    , _devUser :: !(Maybe User)
+    , _devDisabledReason :: !(Maybe UserFacingMessage)
+    , _devSystemProperties :: !(Maybe DeviceSystemProperties)
     , _devLastPolicyComplianceReportTime :: !(Maybe DateTime')
-    , _devEnrollmentTokenData            :: !(Maybe Text)
-    , _devName                           :: !(Maybe Text)
-    , _devAppliedPolicyVersion           :: !(Maybe (Textual Int64))
-    , _devHardwareStatusSamples          :: !(Maybe [HardwareStatus])
-    , _devAppliedState                   :: !(Maybe DeviceAppliedState)
-    , _devPreviousDeviceNames            :: !(Maybe [Text])
-    , _devLastPolicySyncTime             :: !(Maybe DateTime')
-    , _devNetworkInfo                    :: !(Maybe NetworkInfo)
-    , _devNonComplianceDetails           :: !(Maybe [NonComplianceDetail])
-    , _devSoftwareInfo                   :: !(Maybe SoftwareInfo)
-    , _devEnrollmentTime                 :: !(Maybe DateTime')
-    , _devDisplays                       :: !(Maybe [Display])
+    , _devAppliedPasswordPolicies :: !(Maybe [PasswordRequirements])
+    , _devSecurityPosture :: !(Maybe SecurityPosture)
+    , _devEnrollmentTokenData :: !(Maybe Text)
+    , _devName :: !(Maybe Text)
+    , _devAppliedPolicyVersion :: !(Maybe (Textual Int64))
+    , _devHardwareStatusSamples :: !(Maybe [HardwareStatus])
+    , _devAppliedState :: !(Maybe DeviceAppliedState)
+    , _devPreviousDeviceNames :: !(Maybe [Text])
+    , _devLastPolicySyncTime :: !(Maybe DateTime')
+    , _devNetworkInfo :: !(Maybe NetworkInfo)
+    , _devNonComplianceDetails :: !(Maybe [NonComplianceDetail])
+    , _devOwnership :: !(Maybe DeviceOwnership)
+    , _devSoftwareInfo :: !(Maybe SoftwareInfo)
+    , _devEnrollmentTime :: !(Maybe DateTime')
+    , _devDisplays :: !(Maybe [Display])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1819,6 +2010,8 @@ data Device =
 --
 -- * 'devPowerManagementEvents'
 --
+-- * 'devCommonCriteriaModeInfo'
+--
 -- * 'devUserName'
 --
 -- * 'devMemoryEvents'
@@ -1829,7 +2022,13 @@ data Device =
 --
 -- * 'devDisabledReason'
 --
+-- * 'devSystemProperties'
+--
 -- * 'devLastPolicyComplianceReportTime'
+--
+-- * 'devAppliedPasswordPolicies'
+--
+-- * 'devSecurityPosture'
 --
 -- * 'devEnrollmentTokenData'
 --
@@ -1848,6 +2047,8 @@ data Device =
 -- * 'devNetworkInfo'
 --
 -- * 'devNonComplianceDetails'
+--
+-- * 'devOwnership'
 --
 -- * 'devSoftwareInfo'
 --
@@ -1870,12 +2071,16 @@ device =
     , _devManagementMode = Nothing
     , _devHardwareInfo = Nothing
     , _devPowerManagementEvents = Nothing
+    , _devCommonCriteriaModeInfo = Nothing
     , _devUserName = Nothing
     , _devMemoryEvents = Nothing
     , _devAPILevel = Nothing
     , _devUser = Nothing
     , _devDisabledReason = Nothing
+    , _devSystemProperties = Nothing
     , _devLastPolicyComplianceReportTime = Nothing
+    , _devAppliedPasswordPolicies = Nothing
+    , _devSecurityPosture = Nothing
     , _devEnrollmentTokenData = Nothing
     , _devName = Nothing
     , _devAppliedPolicyVersion = Nothing
@@ -1885,6 +2090,7 @@ device =
     , _devLastPolicySyncTime = Nothing
     , _devNetworkInfo = Nothing
     , _devNonComplianceDetails = Nothing
+    , _devOwnership = Nothing
     , _devSoftwareInfo = Nothing
     , _devEnrollmentTime = Nothing
     , _devDisplays = Nothing
@@ -1982,6 +2188,16 @@ devPowerManagementEvents
       . _Default
       . _Coerce
 
+-- | Information about Common Criteria Mode—security standards defined in the
+-- Common Criteria for Information Technology Security Evaluation
+-- (https:\/\/www.commoncriteriaportal.org\/) (CC).This information is only
+-- available if statusReportingSettings.commonCriteriaModeEnabled is true
+-- in the device\'s policy.
+devCommonCriteriaModeInfo :: Lens' Device (Maybe CommonCriteriaModeInfo)
+devCommonCriteriaModeInfo
+  = lens _devCommonCriteriaModeInfo
+      (\ s a -> s{_devCommonCriteriaModeInfo = a})
+
 -- | The resource name of the user that owns this device in the form
 -- enterprises\/{enterpriseId}\/users\/{userId}.
 devUserName :: Lens' Device (Maybe Text)
@@ -2016,12 +2232,37 @@ devDisabledReason
   = lens _devDisabledReason
       (\ s a -> s{_devDisabledReason = a})
 
+-- | Map of selected system properties name and value related to the device.
+-- This information is only available if systemPropertiesEnabled is true in
+-- the device\'s policy.
+devSystemProperties :: Lens' Device (Maybe DeviceSystemProperties)
+devSystemProperties
+  = lens _devSystemProperties
+      (\ s a -> s{_devSystemProperties = a})
+
 -- | Deprecated.
 devLastPolicyComplianceReportTime :: Lens' Device (Maybe UTCTime)
 devLastPolicyComplianceReportTime
   = lens _devLastPolicyComplianceReportTime
       (\ s a -> s{_devLastPolicyComplianceReportTime = a})
       . mapping _DateTime
+
+-- | The password requirements currently applied to the device. The applied
+-- requirements may be slightly different from those specified in
+-- passwordPolicies in some cases. fieldPath is set based on
+-- passwordPolicies.
+devAppliedPasswordPolicies :: Lens' Device [PasswordRequirements]
+devAppliedPasswordPolicies
+  = lens _devAppliedPasswordPolicies
+      (\ s a -> s{_devAppliedPasswordPolicies = a})
+      . _Default
+      . _Coerce
+
+-- | Device\'s security posture value that reflects how secure the device is.
+devSecurityPosture :: Lens' Device (Maybe SecurityPosture)
+devSecurityPosture
+  = lens _devSecurityPosture
+      (\ s a -> s{_devSecurityPosture = a})
 
 -- | If the device was enrolled with an enrollment token with additional data
 -- provided, this field contains that data.
@@ -2090,6 +2331,11 @@ devNonComplianceDetails
       . _Default
       . _Coerce
 
+-- | Ownership of the managed device.
+devOwnership :: Lens' Device (Maybe DeviceOwnership)
+devOwnership
+  = lens _devOwnership (\ s a -> s{_devOwnership = a})
+
 -- | Detailed information about the device software. This information is only
 -- available if softwareInfoEnabled is true in the device\'s policy.
 devSoftwareInfo :: Lens' Device (Maybe SoftwareInfo)
@@ -2128,12 +2374,16 @@ instance FromJSON Device where
                      <*> (o .:? "managementMode")
                      <*> (o .:? "hardwareInfo")
                      <*> (o .:? "powerManagementEvents" .!= mempty)
+                     <*> (o .:? "commonCriteriaModeInfo")
                      <*> (o .:? "userName")
                      <*> (o .:? "memoryEvents" .!= mempty)
                      <*> (o .:? "apiLevel")
                      <*> (o .:? "user")
                      <*> (o .:? "disabledReason")
+                     <*> (o .:? "systemProperties")
                      <*> (o .:? "lastPolicyComplianceReportTime")
+                     <*> (o .:? "appliedPasswordPolicies" .!= mempty)
+                     <*> (o .:? "securityPosture")
                      <*> (o .:? "enrollmentTokenData")
                      <*> (o .:? "name")
                      <*> (o .:? "appliedPolicyVersion")
@@ -2143,6 +2393,7 @@ instance FromJSON Device where
                      <*> (o .:? "lastPolicySyncTime")
                      <*> (o .:? "networkInfo")
                      <*> (o .:? "nonComplianceDetails" .!= mempty)
+                     <*> (o .:? "ownership")
                      <*> (o .:? "softwareInfo")
                      <*> (o .:? "enrollmentTime")
                      <*> (o .:? "displays" .!= mempty))
@@ -2166,13 +2417,19 @@ instance ToJSON Device where
                   ("hardwareInfo" .=) <$> _devHardwareInfo,
                   ("powerManagementEvents" .=) <$>
                     _devPowerManagementEvents,
+                  ("commonCriteriaModeInfo" .=) <$>
+                    _devCommonCriteriaModeInfo,
                   ("userName" .=) <$> _devUserName,
                   ("memoryEvents" .=) <$> _devMemoryEvents,
                   ("apiLevel" .=) <$> _devAPILevel,
                   ("user" .=) <$> _devUser,
                   ("disabledReason" .=) <$> _devDisabledReason,
+                  ("systemProperties" .=) <$> _devSystemProperties,
                   ("lastPolicyComplianceReportTime" .=) <$>
                     _devLastPolicyComplianceReportTime,
+                  ("appliedPasswordPolicies" .=) <$>
+                    _devAppliedPasswordPolicies,
+                  ("securityPosture" .=) <$> _devSecurityPosture,
                   ("enrollmentTokenData" .=) <$>
                     _devEnrollmentTokenData,
                   ("name" .=) <$> _devName,
@@ -2187,9 +2444,292 @@ instance ToJSON Device where
                   ("networkInfo" .=) <$> _devNetworkInfo,
                   ("nonComplianceDetails" .=) <$>
                     _devNonComplianceDetails,
+                  ("ownership" .=) <$> _devOwnership,
                   ("softwareInfo" .=) <$> _devSoftwareInfo,
                   ("enrollmentTime" .=) <$> _devEnrollmentTime,
                   ("displays" .=) <$> _devDisplays])
+
+-- | This feature is not generally available.
+--
+-- /See:/ 'contentProviderEndpoint' smart constructor.
+data ContentProviderEndpoint =
+  ContentProviderEndpoint'
+    { _cpePackageName :: !(Maybe Text)
+    , _cpeSigningCertsSha256 :: !(Maybe [Text])
+    , _cpeURI :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ContentProviderEndpoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpePackageName'
+--
+-- * 'cpeSigningCertsSha256'
+--
+-- * 'cpeURI'
+contentProviderEndpoint
+    :: ContentProviderEndpoint
+contentProviderEndpoint =
+  ContentProviderEndpoint'
+    { _cpePackageName = Nothing
+    , _cpeSigningCertsSha256 = Nothing
+    , _cpeURI = Nothing
+    }
+
+
+-- | This feature is not generally available.
+cpePackageName :: Lens' ContentProviderEndpoint (Maybe Text)
+cpePackageName
+  = lens _cpePackageName
+      (\ s a -> s{_cpePackageName = a})
+
+-- | Required. This feature is not generally available.
+cpeSigningCertsSha256 :: Lens' ContentProviderEndpoint [Text]
+cpeSigningCertsSha256
+  = lens _cpeSigningCertsSha256
+      (\ s a -> s{_cpeSigningCertsSha256 = a})
+      . _Default
+      . _Coerce
+
+-- | This feature is not generally available.
+cpeURI :: Lens' ContentProviderEndpoint (Maybe Text)
+cpeURI = lens _cpeURI (\ s a -> s{_cpeURI = a})
+
+instance FromJSON ContentProviderEndpoint where
+        parseJSON
+          = withObject "ContentProviderEndpoint"
+              (\ o ->
+                 ContentProviderEndpoint' <$>
+                   (o .:? "packageName") <*>
+                     (o .:? "signingCertsSha256" .!= mempty)
+                     <*> (o .:? "uri"))
+
+instance ToJSON ContentProviderEndpoint where
+        toJSON ContentProviderEndpoint'{..}
+          = object
+              (catMaybes
+                 [("packageName" .=) <$> _cpePackageName,
+                  ("signingCertsSha256" .=) <$> _cpeSigningCertsSha256,
+                  ("uri" .=) <$> _cpeURI])
+
+-- | Policies controlling personal usage on a company-owned device with a
+-- work profile.
+--
+-- /See:/ 'personalUsagePolicies' smart constructor.
+data PersonalUsagePolicies =
+  PersonalUsagePolicies'
+    { _pupMaxDaysWithWorkOff :: !(Maybe (Textual Int32))
+    , _pupPersonalPlayStoreMode :: !(Maybe PersonalUsagePoliciesPersonalPlayStoreMode)
+    , _pupScreenCaptureDisabled :: !(Maybe Bool)
+    , _pupPersonalApplications :: !(Maybe [PersonalApplicationPolicy])
+    , _pupAccountTypesWithManagementDisabled :: !(Maybe [Text])
+    , _pupCameraDisabled :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PersonalUsagePolicies' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pupMaxDaysWithWorkOff'
+--
+-- * 'pupPersonalPlayStoreMode'
+--
+-- * 'pupScreenCaptureDisabled'
+--
+-- * 'pupPersonalApplications'
+--
+-- * 'pupAccountTypesWithManagementDisabled'
+--
+-- * 'pupCameraDisabled'
+personalUsagePolicies
+    :: PersonalUsagePolicies
+personalUsagePolicies =
+  PersonalUsagePolicies'
+    { _pupMaxDaysWithWorkOff = Nothing
+    , _pupPersonalPlayStoreMode = Nothing
+    , _pupScreenCaptureDisabled = Nothing
+    , _pupPersonalApplications = Nothing
+    , _pupAccountTypesWithManagementDisabled = Nothing
+    , _pupCameraDisabled = Nothing
+    }
+
+
+-- | Controls how long the work profile can stay off. The duration must be at
+-- least 3 days.
+pupMaxDaysWithWorkOff :: Lens' PersonalUsagePolicies (Maybe Int32)
+pupMaxDaysWithWorkOff
+  = lens _pupMaxDaysWithWorkOff
+      (\ s a -> s{_pupMaxDaysWithWorkOff = a})
+      . mapping _Coerce
+
+-- | Used together with personalApplications to control how apps in the
+-- personal profile are allowed or blocked.
+pupPersonalPlayStoreMode :: Lens' PersonalUsagePolicies (Maybe PersonalUsagePoliciesPersonalPlayStoreMode)
+pupPersonalPlayStoreMode
+  = lens _pupPersonalPlayStoreMode
+      (\ s a -> s{_pupPersonalPlayStoreMode = a})
+
+-- | Whether screen capture is disabled.
+pupScreenCaptureDisabled :: Lens' PersonalUsagePolicies (Maybe Bool)
+pupScreenCaptureDisabled
+  = lens _pupScreenCaptureDisabled
+      (\ s a -> s{_pupScreenCaptureDisabled = a})
+
+-- | Policy applied to applications in the personal profile.
+pupPersonalApplications :: Lens' PersonalUsagePolicies [PersonalApplicationPolicy]
+pupPersonalApplications
+  = lens _pupPersonalApplications
+      (\ s a -> s{_pupPersonalApplications = a})
+      . _Default
+      . _Coerce
+
+-- | Account types that can\'t be managed by the user.
+pupAccountTypesWithManagementDisabled :: Lens' PersonalUsagePolicies [Text]
+pupAccountTypesWithManagementDisabled
+  = lens _pupAccountTypesWithManagementDisabled
+      (\ s a ->
+         s{_pupAccountTypesWithManagementDisabled = a})
+      . _Default
+      . _Coerce
+
+-- | Whether camera is disabled.
+pupCameraDisabled :: Lens' PersonalUsagePolicies (Maybe Bool)
+pupCameraDisabled
+  = lens _pupCameraDisabled
+      (\ s a -> s{_pupCameraDisabled = a})
+
+instance FromJSON PersonalUsagePolicies where
+        parseJSON
+          = withObject "PersonalUsagePolicies"
+              (\ o ->
+                 PersonalUsagePolicies' <$>
+                   (o .:? "maxDaysWithWorkOff") <*>
+                     (o .:? "personalPlayStoreMode")
+                     <*> (o .:? "screenCaptureDisabled")
+                     <*> (o .:? "personalApplications" .!= mempty)
+                     <*>
+                     (o .:? "accountTypesWithManagementDisabled" .!=
+                        mempty)
+                     <*> (o .:? "cameraDisabled"))
+
+instance ToJSON PersonalUsagePolicies where
+        toJSON PersonalUsagePolicies'{..}
+          = object
+              (catMaybes
+                 [("maxDaysWithWorkOff" .=) <$>
+                    _pupMaxDaysWithWorkOff,
+                  ("personalPlayStoreMode" .=) <$>
+                    _pupPersonalPlayStoreMode,
+                  ("screenCaptureDisabled" .=) <$>
+                    _pupScreenCaptureDisabled,
+                  ("personalApplications" .=) <$>
+                    _pupPersonalApplications,
+                  ("accountTypesWithManagementDisabled" .=) <$>
+                    _pupAccountTypesWithManagementDisabled,
+                  ("cameraDisabled" .=) <$> _pupCameraDisabled])
+
+-- | Additional details regarding the security posture of the device.
+--
+-- /See:/ 'postureDetail' smart constructor.
+data PostureDetail =
+  PostureDetail'
+    { _pdAdvice :: !(Maybe [UserFacingMessage])
+    , _pdSecurityRisk :: !(Maybe PostureDetailSecurityRisk)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PostureDetail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdAdvice'
+--
+-- * 'pdSecurityRisk'
+postureDetail
+    :: PostureDetail
+postureDetail = PostureDetail' {_pdAdvice = Nothing, _pdSecurityRisk = Nothing}
+
+
+-- | Corresponding admin-facing advice to mitigate this security risk and
+-- improve the security posture of the device.
+pdAdvice :: Lens' PostureDetail [UserFacingMessage]
+pdAdvice
+  = lens _pdAdvice (\ s a -> s{_pdAdvice = a}) .
+      _Default
+      . _Coerce
+
+-- | A specific security risk that negatively affects the security posture of
+-- the device.
+pdSecurityRisk :: Lens' PostureDetail (Maybe PostureDetailSecurityRisk)
+pdSecurityRisk
+  = lens _pdSecurityRisk
+      (\ s a -> s{_pdSecurityRisk = a})
+
+instance FromJSON PostureDetail where
+        parseJSON
+          = withObject "PostureDetail"
+              (\ o ->
+                 PostureDetail' <$>
+                   (o .:? "advice" .!= mempty) <*>
+                     (o .:? "securityRisk"))
+
+instance ToJSON PostureDetail where
+        toJSON PostureDetail'{..}
+          = object
+              (catMaybes
+                 [("advice" .=) <$> _pdAdvice,
+                  ("securityRisk" .=) <$> _pdSecurityRisk])
+
+-- | Information about Common Criteria Mode—security standards defined in the
+-- Common Criteria for Information Technology Security Evaluation
+-- (https:\/\/www.commoncriteriaportal.org\/) (CC).This information is only
+-- available if statusReportingSettings.commonCriteriaModeEnabled is true
+-- in the device\'s policy.
+--
+-- /See:/ 'commonCriteriaModeInfo' smart constructor.
+newtype CommonCriteriaModeInfo =
+  CommonCriteriaModeInfo'
+    { _ccmiCommonCriteriaModeStatus :: Maybe CommonCriteriaModeInfoCommonCriteriaModeStatus
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CommonCriteriaModeInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccmiCommonCriteriaModeStatus'
+commonCriteriaModeInfo
+    :: CommonCriteriaModeInfo
+commonCriteriaModeInfo =
+  CommonCriteriaModeInfo' {_ccmiCommonCriteriaModeStatus = Nothing}
+
+
+-- | Whether Common Criteria Mode is enabled.
+ccmiCommonCriteriaModeStatus :: Lens' CommonCriteriaModeInfo (Maybe CommonCriteriaModeInfoCommonCriteriaModeStatus)
+ccmiCommonCriteriaModeStatus
+  = lens _ccmiCommonCriteriaModeStatus
+      (\ s a -> s{_ccmiCommonCriteriaModeStatus = a})
+
+instance FromJSON CommonCriteriaModeInfo where
+        parseJSON
+          = withObject "CommonCriteriaModeInfo"
+              (\ o ->
+                 CommonCriteriaModeInfo' <$>
+                   (o .:? "commonCriteriaModeStatus"))
+
+instance ToJSON CommonCriteriaModeInfo where
+        toJSON CommonCriteriaModeInfo'{..}
+          = object
+              (catMaybes
+                 [("commonCriteriaModeStatus" .=) <$>
+                    _ccmiCommonCriteriaModeStatus])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -2226,13 +2766,69 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | This feature is not generally available.
+--
+-- /See:/ 'oncCertificateProvider' smart constructor.
+data OncCertificateProvider =
+  OncCertificateProvider'
+    { _ocpContentProviderEndpoint :: !(Maybe ContentProviderEndpoint)
+    , _ocpCertificateReferences :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OncCertificateProvider' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocpContentProviderEndpoint'
+--
+-- * 'ocpCertificateReferences'
+oncCertificateProvider
+    :: OncCertificateProvider
+oncCertificateProvider =
+  OncCertificateProvider'
+    {_ocpContentProviderEndpoint = Nothing, _ocpCertificateReferences = Nothing}
+
+
+-- | This feature is not generally available.
+ocpContentProviderEndpoint :: Lens' OncCertificateProvider (Maybe ContentProviderEndpoint)
+ocpContentProviderEndpoint
+  = lens _ocpContentProviderEndpoint
+      (\ s a -> s{_ocpContentProviderEndpoint = a})
+
+-- | This feature is not generally available.
+ocpCertificateReferences :: Lens' OncCertificateProvider [Text]
+ocpCertificateReferences
+  = lens _ocpCertificateReferences
+      (\ s a -> s{_ocpCertificateReferences = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON OncCertificateProvider where
+        parseJSON
+          = withObject "OncCertificateProvider"
+              (\ o ->
+                 OncCertificateProvider' <$>
+                   (o .:? "contentProviderEndpoint") <*>
+                     (o .:? "certificateReferences" .!= mempty))
+
+instance ToJSON OncCertificateProvider where
+        toJSON OncCertificateProvider'{..}
+          = object
+              (catMaybes
+                 [("contentProviderEndpoint" .=) <$>
+                    _ocpContentProviderEndpoint,
+                  ("certificateReferences" .=) <$>
+                    _ocpCertificateReferences])
+
 -- | An entry of a managed property.
 --
 -- /See:/ 'managedPropertyEntry' smart constructor.
 data ManagedPropertyEntry =
   ManagedPropertyEntry'
     { _mpeValue :: !(Maybe Text)
-    , _mpeName  :: !(Maybe Text)
+    , _mpeName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2273,15 +2869,139 @@ instance ToJSON ManagedPropertyEntry where
                  [("value" .=) <$> _mpeValue,
                   ("name" .=) <$> _mpeName])
 
--- | A rule for automatically choosing a private key and certificate to
--- authenticate the device to a server.
+-- | A system freeze period. When a device’s clock is within the freeze
+-- period, all incoming system updates (including security patches) are
+-- blocked and won’t be installed. When a device is outside the freeze
+-- period, normal update behavior applies. Leap years are ignored in freeze
+-- period calculations, in particular: * If Feb. 29th is set as the start
+-- or end date of a freeze period, the freeze period will start or end on
+-- Feb. 28th instead. * When a device’s system clock reads Feb. 29th, it’s
+-- treated as Feb. 28th. * When calculating the number of days in a freeze
+-- period or the time between two freeze periods, Feb. 29th is ignored and
+-- not counted as a day.
+--
+-- /See:/ 'freezePeriod' smart constructor.
+data FreezePeriod =
+  FreezePeriod'
+    { _fpEndDate :: !(Maybe Date)
+    , _fpStartDate :: !(Maybe Date)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FreezePeriod' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fpEndDate'
+--
+-- * 'fpStartDate'
+freezePeriod
+    :: FreezePeriod
+freezePeriod = FreezePeriod' {_fpEndDate = Nothing, _fpStartDate = Nothing}
+
+
+-- | The end date (inclusive) of the freeze period. Must be no later than 90
+-- days from the start date. If the end date is earlier than the start
+-- date, the freeze period is considered wrapping year-end. Note: year must
+-- not be set. For example, {\"month\": 1,\"date\": 30}.
+fpEndDate :: Lens' FreezePeriod (Maybe Date)
+fpEndDate
+  = lens _fpEndDate (\ s a -> s{_fpEndDate = a})
+
+-- | The start date (inclusive) of the freeze period. Note: year must not be
+-- set. For example, {\"month\": 1,\"date\": 30}.
+fpStartDate :: Lens' FreezePeriod (Maybe Date)
+fpStartDate
+  = lens _fpStartDate (\ s a -> s{_fpStartDate = a})
+
+instance FromJSON FreezePeriod where
+        parseJSON
+          = withObject "FreezePeriod"
+              (\ o ->
+                 FreezePeriod' <$>
+                   (o .:? "endDate") <*> (o .:? "startDate"))
+
+instance ToJSON FreezePeriod where
+        toJSON FreezePeriod'{..}
+          = object
+              (catMaybes
+                 [("endDate" .=) <$> _fpEndDate,
+                  ("startDate" .=) <$> _fpStartDate])
+
+-- | Telephony information associated with a given SIM card on the device.
+-- Only supported on fully managed devices starting from Android API level
+-- 23.
+--
+-- /See:/ 'telephonyInfo' smart constructor.
+data TelephonyInfo =
+  TelephonyInfo'
+    { _tiPhoneNumber :: !(Maybe Text)
+    , _tiCarrierName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TelephonyInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiPhoneNumber'
+--
+-- * 'tiCarrierName'
+telephonyInfo
+    :: TelephonyInfo
+telephonyInfo =
+  TelephonyInfo' {_tiPhoneNumber = Nothing, _tiCarrierName = Nothing}
+
+
+-- | The phone number associated with this SIM card.
+tiPhoneNumber :: Lens' TelephonyInfo (Maybe Text)
+tiPhoneNumber
+  = lens _tiPhoneNumber
+      (\ s a -> s{_tiPhoneNumber = a})
+
+-- | The carrier name associated with this SIM card.
+tiCarrierName :: Lens' TelephonyInfo (Maybe Text)
+tiCarrierName
+  = lens _tiCarrierName
+      (\ s a -> s{_tiCarrierName = a})
+
+instance FromJSON TelephonyInfo where
+        parseJSON
+          = withObject "TelephonyInfo"
+              (\ o ->
+                 TelephonyInfo' <$>
+                   (o .:? "phoneNumber") <*> (o .:? "carrierName"))
+
+instance ToJSON TelephonyInfo where
+        toJSON TelephonyInfo'{..}
+          = object
+              (catMaybes
+                 [("phoneNumber" .=) <$> _tiPhoneNumber,
+                  ("carrierName" .=) <$> _tiCarrierName])
+
+-- | Controls apps\' access to private keys. The rule determines which
+-- private key, if any, Android Device Policy grants to the specified app.
+-- Access is granted either when the app calls
+-- KeyChain.choosePrivateKeyAlias
+-- (https:\/\/developer.android.com\/reference\/android\/security\/KeyChain#choosePrivateKeyAlias%28android.app.Activity,%20android.security.KeyChainAliasCallback,%20java.lang.String[],%20java.security.Principal[],%20java.lang.String,%20int,%20java.lang.String%29)
+-- (or any overloads) to request a private key alias for a given URL, or
+-- for rules that are not URL-specific (that is, if urlPattern is not set,
+-- or set to the empty string or .*) on Android 11 and above, directly so
+-- that the app can call KeyChain.getPrivateKey
+-- (https:\/\/developer.android.com\/reference\/android\/security\/KeyChain#getPrivateKey%28android.content.Context,%20java.lang.String%29),
+-- without first having to call KeyChain.choosePrivateKeyAlias.When an app
+-- calls KeyChain.choosePrivateKeyAlias if more than one
+-- choosePrivateKeyRules matches, the last matching rule defines which key
+-- alias to return.
 --
 -- /See:/ 'choosePrivateKeyRule' smart constructor.
 data ChoosePrivateKeyRule =
   ChoosePrivateKeyRule'
     { _cpkrPrivateKeyAlias :: !(Maybe Text)
-    , _cpkrURLPattern      :: !(Maybe Text)
-    , _cpkrPackageNames    :: !(Maybe [Text])
+    , _cpkrURLPattern :: !(Maybe Text)
+    , _cpkrPackageNames :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2311,20 +3031,23 @@ cpkrPrivateKeyAlias
   = lens _cpkrPrivateKeyAlias
       (\ s a -> s{_cpkrPrivateKeyAlias = a})
 
--- | The URL pattern to match against the URL of the outgoing request. The
--- pattern may contain asterisk (*) wildcards. Any URL is matched if
--- unspecified.
+-- | The URL pattern to match against the URL of the request. If not set or
+-- empty, it matches all URLs. This uses the regular expression syntax of
+-- java.util.regex.Pattern.
 cpkrURLPattern :: Lens' ChoosePrivateKeyRule (Maybe Text)
 cpkrURLPattern
   = lens _cpkrURLPattern
       (\ s a -> s{_cpkrURLPattern = a})
 
--- | The package names for which outgoing requests are subject to this rule.
--- If no package names are specified, then the rule applies to all
--- packages. For each package name listed, the rule applies to that package
--- and all other packages that shared the same Android UID. The SHA256 hash
--- of the signing key signatures of each package_name will be verified
--- against those provided by Play
+-- | The package names to which this rule applies. The hash of the signing
+-- certificate for each app is verified against the hash provided by Play.
+-- If no package names are specified, then the alias is provided to all
+-- apps that call KeyChain.choosePrivateKeyAlias
+-- (https:\/\/developer.android.com\/reference\/android\/security\/KeyChain#choosePrivateKeyAlias%28android.app.Activity,%20android.security.KeyChainAliasCallback,%20java.lang.String[],%20java.security.Principal[],%20java.lang.String,%20int,%20java.lang.String%29)
+-- or any overloads (but not without calling
+-- KeyChain.choosePrivateKeyAlias, even on Android 11 and above). Any app
+-- with the same Android UID as a package specified here will have access
+-- when they call KeyChain.choosePrivateKeyAlias.
 cpkrPackageNames :: Lens' ChoosePrivateKeyRule [Text]
 cpkrPackageNames
   = lens _cpkrPackageNames
@@ -2432,14 +3155,139 @@ instance ToJSON User where
               (catMaybes
                  [("accountIdentifier" .=) <$> _uAccountIdentifier])
 
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: A full date, with non-zero year, month,
+-- and day values A month and day value, with a zero year, such as an
+-- anniversary A year on its own, with zero month and day values A year and
+-- month value, with a zero day, such as a credit card expiration
+-- dateRelated types are google.type.TimeOfDay and
+-- google.protobuf.Timestamp.
+--
+-- /See:/ 'date' smart constructor.
+data Date =
+  Date'
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
+    , _dMonth :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dDay'
+--
+-- * 'dYear'
+--
+-- * 'dMonth'
+date
+    :: Date
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
+
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
+dDay :: Lens' Date (Maybe Int32)
+dDay
+  = lens _dDay (\ s a -> s{_dDay = a}) .
+      mapping _Coerce
+
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+-- a year.
+dYear :: Lens' Date (Maybe Int32)
+dYear
+  = lens _dYear (\ s a -> s{_dYear = a}) .
+      mapping _Coerce
+
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+-- month and day.
+dMonth :: Lens' Date (Maybe Int32)
+dMonth
+  = lens _dMonth (\ s a -> s{_dMonth = a}) .
+      mapping _Coerce
+
+instance FromJSON Date where
+        parseJSON
+          = withObject "Date"
+              (\ o ->
+                 Date' <$>
+                   (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
+
+instance ToJSON Date where
+        toJSON Date'{..}
+          = object
+              (catMaybes
+                 [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
+                  ("month" .=) <$> _dMonth])
+
+-- | The security posture of the device, as determined by the current device
+-- state and the policies applied.
+--
+-- /See:/ 'securityPosture' smart constructor.
+data SecurityPosture =
+  SecurityPosture'
+    { _spPostureDetails :: !(Maybe [PostureDetail])
+    , _spDevicePosture :: !(Maybe SecurityPostureDevicePosture)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SecurityPosture' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spPostureDetails'
+--
+-- * 'spDevicePosture'
+securityPosture
+    :: SecurityPosture
+securityPosture =
+  SecurityPosture' {_spPostureDetails = Nothing, _spDevicePosture = Nothing}
+
+
+-- | Additional details regarding the security posture of the device.
+spPostureDetails :: Lens' SecurityPosture [PostureDetail]
+spPostureDetails
+  = lens _spPostureDetails
+      (\ s a -> s{_spPostureDetails = a})
+      . _Default
+      . _Coerce
+
+-- | Device\'s security posture value.
+spDevicePosture :: Lens' SecurityPosture (Maybe SecurityPostureDevicePosture)
+spDevicePosture
+  = lens _spDevicePosture
+      (\ s a -> s{_spDevicePosture = a})
+
+instance FromJSON SecurityPosture where
+        parseJSON
+          = withObject "SecurityPosture"
+              (\ o ->
+                 SecurityPosture' <$>
+                   (o .:? "postureDetails" .!= mempty) <*>
+                     (o .:? "devicePosture"))
+
+instance ToJSON SecurityPosture where
+        toJSON SecurityPosture'{..}
+          = object
+              (catMaybes
+                 [("postureDetails" .=) <$> _spPostureDetails,
+                  ("devicePosture" .=) <$> _spDevicePosture])
+
 -- | Configuration for managing system updates
 --
 -- /See:/ 'systemUpdate' smart constructor.
 data SystemUpdate =
   SystemUpdate'
-    { _suEndMinutes   :: !(Maybe (Textual Int32))
+    { _suFreezePeriods :: !(Maybe [FreezePeriod])
+    , _suEndMinutes :: !(Maybe (Textual Int32))
     , _suStartMinutes :: !(Maybe (Textual Int32))
-    , _suType         :: !(Maybe SystemUpdateType)
+    , _suType :: !(Maybe SystemUpdateType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2447,6 +3295,8 @@ data SystemUpdate =
 -- | Creates a value of 'SystemUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'suFreezePeriods'
 --
 -- * 'suEndMinutes'
 --
@@ -2457,8 +3307,23 @@ systemUpdate
     :: SystemUpdate
 systemUpdate =
   SystemUpdate'
-    {_suEndMinutes = Nothing, _suStartMinutes = Nothing, _suType = Nothing}
+    { _suFreezePeriods = Nothing
+    , _suEndMinutes = Nothing
+    , _suStartMinutes = Nothing
+    , _suType = Nothing
+    }
 
+
+-- | An annually repeating time period in which over-the-air (OTA) system
+-- updates are postponed to freeze the OS version running on a device. To
+-- prevent freezing the device indefinitely, each freeze period must be
+-- separated by at least 60 days.
+suFreezePeriods :: Lens' SystemUpdate [FreezePeriod]
+suFreezePeriods
+  = lens _suFreezePeriods
+      (\ s a -> s{_suFreezePeriods = a})
+      . _Default
+      . _Coerce
 
 -- | If the type is WINDOWED, the end of the maintenance window, measured as
 -- the number of minutes after midnight in device\'s local time. This value
@@ -2489,33 +3354,74 @@ instance FromJSON SystemUpdate where
           = withObject "SystemUpdate"
               (\ o ->
                  SystemUpdate' <$>
-                   (o .:? "endMinutes") <*> (o .:? "startMinutes") <*>
-                     (o .:? "type"))
+                   (o .:? "freezePeriods" .!= mempty) <*>
+                     (o .:? "endMinutes")
+                     <*> (o .:? "startMinutes")
+                     <*> (o .:? "type"))
 
 instance ToJSON SystemUpdate where
         toJSON SystemUpdate'{..}
           = object
               (catMaybes
-                 [("endMinutes" .=) <$> _suEndMinutes,
+                 [("freezePeriods" .=) <$> _suFreezePeriods,
+                  ("endMinutes" .=) <$> _suEndMinutes,
                   ("startMinutes" .=) <$> _suStartMinutes,
                   ("type" .=) <$> _suType])
+
+-- | Map of selected system properties name and value related to the device.
+-- This information is only available if systemPropertiesEnabled is true in
+-- the device\'s policy.
+--
+-- /See:/ 'deviceSystemProperties' smart constructor.
+newtype DeviceSystemProperties =
+  DeviceSystemProperties'
+    { _dspAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeviceSystemProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dspAddtional'
+deviceSystemProperties
+    :: HashMap Text Text -- ^ 'dspAddtional'
+    -> DeviceSystemProperties
+deviceSystemProperties pDspAddtional_ =
+  DeviceSystemProperties' {_dspAddtional = _Coerce # pDspAddtional_}
+
+
+dspAddtional :: Lens' DeviceSystemProperties (HashMap Text Text)
+dspAddtional
+  = lens _dspAddtional (\ s a -> s{_dspAddtional = a})
+      . _Coerce
+
+instance FromJSON DeviceSystemProperties where
+        parseJSON
+          = withObject "DeviceSystemProperties"
+              (\ o ->
+                 DeviceSystemProperties' <$> (parseJSONObject o))
+
+instance ToJSON DeviceSystemProperties where
+        toJSON = toJSON . _dspAddtional
 
 -- | Information reported about an installed app.
 --
 -- /See:/ 'applicationReport' smart constructor.
 data ApplicationReport =
   ApplicationReport'
-    { _arVersionCode                :: !(Maybe (Textual Int32))
+    { _arVersionCode :: !(Maybe (Textual Int32))
     , _arSigningKeyCertFingerprints :: !(Maybe [Text])
-    , _arState                      :: !(Maybe ApplicationReportState)
-    , _arVersionName                :: !(Maybe Text)
-    , _arPackageName                :: !(Maybe Text)
-    , _arPackageSha256Hash          :: !(Maybe Text)
-    , _arKeyedAppStates             :: !(Maybe [KeyedAppState])
-    , _arApplicationSource          :: !(Maybe ApplicationReportApplicationSource)
-    , _arEvents                     :: !(Maybe [ApplicationEvent])
-    , _arDisplayName                :: !(Maybe Text)
-    , _arInstallerPackageName       :: !(Maybe Text)
+    , _arState :: !(Maybe ApplicationReportState)
+    , _arVersionName :: !(Maybe Text)
+    , _arPackageName :: !(Maybe Text)
+    , _arPackageSha256Hash :: !(Maybe Text)
+    , _arKeyedAppStates :: !(Maybe [KeyedAppState])
+    , _arApplicationSource :: !(Maybe ApplicationReportApplicationSource)
+    , _arEvents :: !(Maybe [ApplicationEvent])
+    , _arDisplayName :: !(Maybe Text)
+    , _arInstallerPackageName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2674,20 +3580,116 @@ instance ToJSON ApplicationReport where
                   ("installerPackageName" .=) <$>
                     _arInstallerPackageName])
 
+-- | Security policies set to the most secure values by default. To maintain
+-- the security posture of a device, we don\'t recommend overriding any of
+-- the default values.
+--
+-- /See:/ 'advancedSecurityOverrides' smart constructor.
+data AdvancedSecurityOverrides =
+  AdvancedSecurityOverrides'
+    { _asoUntrustedAppsPolicy :: !(Maybe AdvancedSecurityOverridesUntrustedAppsPolicy)
+    , _asoCommonCriteriaMode :: !(Maybe AdvancedSecurityOverridesCommonCriteriaMode)
+    , _asoDeveloperSettings :: !(Maybe AdvancedSecurityOverridesDeveloperSettings)
+    , _asoGooglePlayProtectVerifyApps :: !(Maybe AdvancedSecurityOverridesGooglePlayProtectVerifyApps)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AdvancedSecurityOverrides' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asoUntrustedAppsPolicy'
+--
+-- * 'asoCommonCriteriaMode'
+--
+-- * 'asoDeveloperSettings'
+--
+-- * 'asoGooglePlayProtectVerifyApps'
+advancedSecurityOverrides
+    :: AdvancedSecurityOverrides
+advancedSecurityOverrides =
+  AdvancedSecurityOverrides'
+    { _asoUntrustedAppsPolicy = Nothing
+    , _asoCommonCriteriaMode = Nothing
+    , _asoDeveloperSettings = Nothing
+    , _asoGooglePlayProtectVerifyApps = Nothing
+    }
+
+
+-- | The policy for untrusted apps (apps from unknown sources) enforced on
+-- the device. Replaces install_unknown_sources_allowed (deprecated).
+asoUntrustedAppsPolicy :: Lens' AdvancedSecurityOverrides (Maybe AdvancedSecurityOverridesUntrustedAppsPolicy)
+asoUntrustedAppsPolicy
+  = lens _asoUntrustedAppsPolicy
+      (\ s a -> s{_asoUntrustedAppsPolicy = a})
+
+-- | Controls Common Criteria Mode—security standards defined in the Common
+-- Criteria for Information Technology Security Evaluation
+-- (https:\/\/www.commoncriteriaportal.org\/) (CC). Enabling Common
+-- Criteria Mode increases certain security components on a device,
+-- including AES-GCM encryption of Bluetooth Long Term Keys, and Wi-Fi
+-- configuration stores.Warning: Common Criteria Mode enforces a strict
+-- security model typically only required for IT products used in national
+-- security systems and other highly sensitive organizations. Standard
+-- device use may be affected. Only enabled if required.
+asoCommonCriteriaMode :: Lens' AdvancedSecurityOverrides (Maybe AdvancedSecurityOverridesCommonCriteriaMode)
+asoCommonCriteriaMode
+  = lens _asoCommonCriteriaMode
+      (\ s a -> s{_asoCommonCriteriaMode = a})
+
+-- | Controls access to developer settings: developer options and safe boot.
+-- Replaces safeBootDisabled (deprecated) and debuggingFeaturesAllowed
+-- (deprecated).
+asoDeveloperSettings :: Lens' AdvancedSecurityOverrides (Maybe AdvancedSecurityOverridesDeveloperSettings)
+asoDeveloperSettings
+  = lens _asoDeveloperSettings
+      (\ s a -> s{_asoDeveloperSettings = a})
+
+-- | Whether Google Play Protect verification
+-- (https:\/\/support.google.com\/accounts\/answer\/2812853) is enforced.
+-- Replaces ensureVerifyAppsEnabled (deprecated).
+asoGooglePlayProtectVerifyApps :: Lens' AdvancedSecurityOverrides (Maybe AdvancedSecurityOverridesGooglePlayProtectVerifyApps)
+asoGooglePlayProtectVerifyApps
+  = lens _asoGooglePlayProtectVerifyApps
+      (\ s a -> s{_asoGooglePlayProtectVerifyApps = a})
+
+instance FromJSON AdvancedSecurityOverrides where
+        parseJSON
+          = withObject "AdvancedSecurityOverrides"
+              (\ o ->
+                 AdvancedSecurityOverrides' <$>
+                   (o .:? "untrustedAppsPolicy") <*>
+                     (o .:? "commonCriteriaMode")
+                     <*> (o .:? "developerSettings")
+                     <*> (o .:? "googlePlayProtectVerifyApps"))
+
+instance ToJSON AdvancedSecurityOverrides where
+        toJSON AdvancedSecurityOverrides'{..}
+          = object
+              (catMaybes
+                 [("untrustedAppsPolicy" .=) <$>
+                    _asoUntrustedAppsPolicy,
+                  ("commonCriteriaMode" .=) <$> _asoCommonCriteriaMode,
+                  ("developerSettings" .=) <$> _asoDeveloperSettings,
+                  ("googlePlayProtectVerifyApps" .=) <$>
+                    _asoGooglePlayProtectVerifyApps])
+
 -- | An enrollment token.
 --
 -- /See:/ 'enrollmentToken' smart constructor.
 data EnrollmentToken =
   EnrollmentToken'
-    { _etPolicyName          :: !(Maybe Text)
-    , _etValue               :: !(Maybe Text)
-    , _etQrCode              :: !(Maybe Text)
-    , _etAdditionalData      :: !(Maybe Text)
-    , _etUser                :: !(Maybe User)
-    , _etName                :: !(Maybe Text)
-    , _etOneTimeOnly         :: !(Maybe Bool)
+    { _etPolicyName :: !(Maybe Text)
+    , _etValue :: !(Maybe Text)
+    , _etQrCode :: !(Maybe Text)
+    , _etAdditionalData :: !(Maybe Text)
+    , _etUser :: !(Maybe User)
+    , _etAllowPersonalUsage :: !(Maybe EnrollmentTokenAllowPersonalUsage)
+    , _etName :: !(Maybe Text)
+    , _etOneTimeOnly :: !(Maybe Bool)
     , _etExpirationTimestamp :: !(Maybe DateTime')
-    , _etDuration            :: !(Maybe GDuration)
+    , _etDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2706,6 +3708,8 @@ data EnrollmentToken =
 --
 -- * 'etUser'
 --
+-- * 'etAllowPersonalUsage'
+--
 -- * 'etName'
 --
 -- * 'etOneTimeOnly'
@@ -2722,6 +3726,7 @@ enrollmentToken =
     , _etQrCode = Nothing
     , _etAdditionalData = Nothing
     , _etUser = Nothing
+    , _etAllowPersonalUsage = Nothing
     , _etName = Nothing
     , _etOneTimeOnly = Nothing
     , _etExpirationTimestamp = Nothing
@@ -2771,6 +3776,19 @@ etAdditionalData
 etUser :: Lens' EnrollmentToken (Maybe User)
 etUser = lens _etUser (\ s a -> s{_etUser = a})
 
+-- | Controls whether personal usage is allowed on a device provisioned with
+-- this enrollment token.For company-owned devices: Enabling personal usage
+-- allows the user to set up a work profile on the device. Disabling
+-- personal usage requires the user provision the device as a fully managed
+-- device.For personally-owned devices: Enabling personal usage allows the
+-- user to set up a work profile on the device. Disabling personal usage
+-- will prevent the device from provisioning. Personal usage cannot be
+-- disabled on personally-owned device.
+etAllowPersonalUsage :: Lens' EnrollmentToken (Maybe EnrollmentTokenAllowPersonalUsage)
+etAllowPersonalUsage
+  = lens _etAllowPersonalUsage
+      (\ s a -> s{_etAllowPersonalUsage = a})
+
 -- | The name of the enrollment token, which is generated by the server
 -- during creation, in the form
 -- enterprises\/{enterpriseId}\/enrollmentTokens\/{enrollmentTokenId}.
@@ -2793,7 +3811,7 @@ etExpirationTimestamp
       . mapping _DateTime
 
 -- | The length of time the enrollment token is valid, ranging from 1 minute
--- to 30 days. If not specified, the default duration is 1 hour.
+-- to 90 days. If not specified, the default duration is 1 hour.
 etDuration :: Lens' EnrollmentToken (Maybe Scientific)
 etDuration
   = lens _etDuration (\ s a -> s{_etDuration = a}) .
@@ -2808,6 +3826,7 @@ instance FromJSON EnrollmentToken where
                      (o .:? "qrCode")
                      <*> (o .:? "additionalData")
                      <*> (o .:? "user")
+                     <*> (o .:? "allowPersonalUsage")
                      <*> (o .:? "name")
                      <*> (o .:? "oneTimeOnly")
                      <*> (o .:? "expirationTimestamp")
@@ -2821,34 +3840,75 @@ instance ToJSON EnrollmentToken where
                   ("value" .=) <$> _etValue,
                   ("qrCode" .=) <$> _etQrCode,
                   ("additionalData" .=) <$> _etAdditionalData,
-                  ("user" .=) <$> _etUser, ("name" .=) <$> _etName,
+                  ("user" .=) <$> _etUser,
+                  ("allowPersonalUsage" .=) <$> _etAllowPersonalUsage,
+                  ("name" .=) <$> _etName,
                   ("oneTimeOnly" .=) <$> _etOneTimeOnly,
                   ("expirationTimestamp" .=) <$>
                     _etExpirationTimestamp,
                   ("duration" .=) <$> _etDuration])
 
+-- | Response to a request to list enterprises.
+--
+-- /See:/ 'listEnterprisesResponse' smart constructor.
+data ListEnterprisesResponse =
+  ListEnterprisesResponse'
+    { _lerNextPageToken :: !(Maybe Text)
+    , _lerEnterprises :: !(Maybe [Enterprise])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListEnterprisesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lerNextPageToken'
+--
+-- * 'lerEnterprises'
+listEnterprisesResponse
+    :: ListEnterprisesResponse
+listEnterprisesResponse =
+  ListEnterprisesResponse'
+    {_lerNextPageToken = Nothing, _lerEnterprises = Nothing}
+
+
+-- | If there are more results, a token to retrieve next page of results.
+lerNextPageToken :: Lens' ListEnterprisesResponse (Maybe Text)
+lerNextPageToken
+  = lens _lerNextPageToken
+      (\ s a -> s{_lerNextPageToken = a})
+
+-- | The list of enterprises.
+lerEnterprises :: Lens' ListEnterprisesResponse [Enterprise]
+lerEnterprises
+  = lens _lerEnterprises
+      (\ s a -> s{_lerEnterprises = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListEnterprisesResponse where
+        parseJSON
+          = withObject "ListEnterprisesResponse"
+              (\ o ->
+                 ListEnterprisesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "enterprises" .!= mempty))
+
+instance ToJSON ListEnterprisesResponse where
+        toJSON ListEnterprisesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lerNextPageToken,
+                  ("enterprises" .=) <$> _lerEnterprises])
+
 -- | Managed configuration applied to the app. The format for the
 -- configuration is dictated by the ManagedProperty values supported by the
 -- app. Each field name in the managed configuration must match the key
 -- field of the ManagedProperty. The field value must be compatible with
--- the type of the ManagedProperty:
--- > +--------------+------------------+
--- > | /type/       | /JSON value/     |
--- > +--------------+------------------+
--- > | BOOL         | true or false    |
--- > +--------------+------------------+
--- > | STRING       | string           |
--- > +--------------+------------------+
--- > | INTEGER      | number           |
--- > +--------------+------------------+
--- > | CHOICE       | string           |
--- > +--------------+------------------+
--- > | MULTISELECT  | array of strings |
--- > +--------------+------------------+
--- > | HIDDEN       | string           |
--- > +--------------+------------------+
--- > | BUNDLE_ARRAY | array of objects |
--- > +--------------+------------------+
+-- the type of the ManagedProperty: *type* *JSON value* BOOL true or false
+-- STRING string INTEGER number CHOICE string MULTISELECT array of strings
+-- HIDDEN string BUNDLE_ARRAY array of objects
 --
 -- /See:/ 'applicationPolicyManagedConfiguration' smart constructor.
 newtype ApplicationPolicyManagedConfiguration =
@@ -2891,19 +3951,78 @@ instance ToJSON ApplicationPolicyManagedConfiguration
          where
         toJSON = toJSON . _apmcAddtional
 
+-- | An action to block access to apps and data on a fully managed device or
+-- in a work profile. This action also triggers a device or work profile to
+-- displays a user-facing notification with information (where possible) on
+-- how to correct the compliance issue. Note: wipeAction must also be
+-- specified.
+--
+-- /See:/ 'blockAction' smart constructor.
+data BlockAction =
+  BlockAction'
+    { _baBlockScope :: !(Maybe BlockActionBlockScope)
+    , _baBlockAfterDays :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BlockAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'baBlockScope'
+--
+-- * 'baBlockAfterDays'
+blockAction
+    :: BlockAction
+blockAction =
+  BlockAction' {_baBlockScope = Nothing, _baBlockAfterDays = Nothing}
+
+
+-- | Specifies the scope of this BlockAction. Only applicable to devices that
+-- are company-owned.
+baBlockScope :: Lens' BlockAction (Maybe BlockActionBlockScope)
+baBlockScope
+  = lens _baBlockScope (\ s a -> s{_baBlockScope = a})
+
+-- | Number of days the policy is non-compliant before the device or work
+-- profile is blocked. To block access immediately, set to 0.
+-- blockAfterDays must be less than wipeAfterDays.
+baBlockAfterDays :: Lens' BlockAction (Maybe Int32)
+baBlockAfterDays
+  = lens _baBlockAfterDays
+      (\ s a -> s{_baBlockAfterDays = a})
+      . mapping _Coerce
+
+instance FromJSON BlockAction where
+        parseJSON
+          = withObject "BlockAction"
+              (\ o ->
+                 BlockAction' <$>
+                   (o .:? "blockScope") <*> (o .:? "blockAfterDays"))
+
+instance ToJSON BlockAction where
+        toJSON BlockAction'{..}
+          = object
+              (catMaybes
+                 [("blockScope" .=) <$> _baBlockScope,
+                  ("blockAfterDays" .=) <$> _baBlockAfterDays])
+
 -- | Settings controlling the behavior of status reports.
 --
 -- /See:/ 'statusReportingSettings' smart constructor.
 data StatusReportingSettings =
   StatusReportingSettings'
-    { _srsSoftwareInfoEnabled          :: !(Maybe Bool)
-    , _srsHardwareStatusEnabled        :: !(Maybe Bool)
+    { _srsSoftwareInfoEnabled :: !(Maybe Bool)
+    , _srsHardwareStatusEnabled :: !(Maybe Bool)
     , _srsPowerManagementEventsEnabled :: !(Maybe Bool)
-    , _srsDisplayInfoEnabled           :: !(Maybe Bool)
-    , _srsApplicationReportsEnabled    :: !(Maybe Bool)
-    , _srsMemoryInfoEnabled            :: !(Maybe Bool)
-    , _srsNetworkInfoEnabled           :: !(Maybe Bool)
-    , _srsDeviceSettingsEnabled        :: !(Maybe Bool)
+    , _srsDisplayInfoEnabled :: !(Maybe Bool)
+    , _srsApplicationReportsEnabled :: !(Maybe Bool)
+    , _srsMemoryInfoEnabled :: !(Maybe Bool)
+    , _srsNetworkInfoEnabled :: !(Maybe Bool)
+    , _srsDeviceSettingsEnabled :: !(Maybe Bool)
+    , _srsCommonCriteriaModeEnabled :: !(Maybe Bool)
+    , _srsSystemPropertiesEnabled :: !(Maybe Bool)
     , _srsApplicationReportingSettings :: !(Maybe ApplicationReportingSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2929,6 +4048,10 @@ data StatusReportingSettings =
 --
 -- * 'srsDeviceSettingsEnabled'
 --
+-- * 'srsCommonCriteriaModeEnabled'
+--
+-- * 'srsSystemPropertiesEnabled'
+--
 -- * 'srsApplicationReportingSettings'
 statusReportingSettings
     :: StatusReportingSettings
@@ -2942,6 +4065,8 @@ statusReportingSettings =
     , _srsMemoryInfoEnabled = Nothing
     , _srsNetworkInfoEnabled = Nothing
     , _srsDeviceSettingsEnabled = Nothing
+    , _srsCommonCriteriaModeEnabled = Nothing
+    , _srsSystemPropertiesEnabled = Nothing
     , _srsApplicationReportingSettings = Nothing
     }
 
@@ -2952,19 +4077,22 @@ srsSoftwareInfoEnabled
   = lens _srsSoftwareInfoEnabled
       (\ s a -> s{_srsSoftwareInfoEnabled = a})
 
--- | Whether hardware status reporting is enabled.
+-- | Whether hardware status reporting is enabled. Report data is not
+-- available for personally owned devices with work profiles.
 srsHardwareStatusEnabled :: Lens' StatusReportingSettings (Maybe Bool)
 srsHardwareStatusEnabled
   = lens _srsHardwareStatusEnabled
       (\ s a -> s{_srsHardwareStatusEnabled = a})
 
--- | Whether power management event reporting is enabled.
+-- | Whether power management event reporting is enabled. Report data is not
+-- available for personally owned devices with work profiles.
 srsPowerManagementEventsEnabled :: Lens' StatusReportingSettings (Maybe Bool)
 srsPowerManagementEventsEnabled
   = lens _srsPowerManagementEventsEnabled
       (\ s a -> s{_srsPowerManagementEventsEnabled = a})
 
--- | Whether displays reporting is enabled.
+-- | Whether displays reporting is enabled. Report data is not available for
+-- personally owned devices with work profiles.
 srsDisplayInfoEnabled :: Lens' StatusReportingSettings (Maybe Bool)
 srsDisplayInfoEnabled
   = lens _srsDisplayInfoEnabled
@@ -2994,6 +4122,18 @@ srsDeviceSettingsEnabled
   = lens _srsDeviceSettingsEnabled
       (\ s a -> s{_srsDeviceSettingsEnabled = a})
 
+-- | Whether Common Criteria Mode reporting is enabled.
+srsCommonCriteriaModeEnabled :: Lens' StatusReportingSettings (Maybe Bool)
+srsCommonCriteriaModeEnabled
+  = lens _srsCommonCriteriaModeEnabled
+      (\ s a -> s{_srsCommonCriteriaModeEnabled = a})
+
+-- | Whether system properties reporting is enabled.
+srsSystemPropertiesEnabled :: Lens' StatusReportingSettings (Maybe Bool)
+srsSystemPropertiesEnabled
+  = lens _srsSystemPropertiesEnabled
+      (\ s a -> s{_srsSystemPropertiesEnabled = a})
+
 -- | Application reporting settings. Only applicable if
 -- application_reports_enabled is true.
 srsApplicationReportingSettings :: Lens' StatusReportingSettings (Maybe ApplicationReportingSettings)
@@ -3014,6 +4154,8 @@ instance FromJSON StatusReportingSettings where
                      <*> (o .:? "memoryInfoEnabled")
                      <*> (o .:? "networkInfoEnabled")
                      <*> (o .:? "deviceSettingsEnabled")
+                     <*> (o .:? "commonCriteriaModeEnabled")
+                     <*> (o .:? "systemPropertiesEnabled")
                      <*> (o .:? "applicationReportingSettings"))
 
 instance ToJSON StatusReportingSettings where
@@ -3033,8 +4175,69 @@ instance ToJSON StatusReportingSettings where
                   ("networkInfoEnabled" .=) <$> _srsNetworkInfoEnabled,
                   ("deviceSettingsEnabled" .=) <$>
                     _srsDeviceSettingsEnabled,
+                  ("commonCriteriaModeEnabled" .=) <$>
+                    _srsCommonCriteriaModeEnabled,
+                  ("systemPropertiesEnabled" .=) <$>
+                    _srsSystemPropertiesEnabled,
                   ("applicationReportingSettings" .=) <$>
                     _srsApplicationReportingSettings])
+
+-- | Information about a potential pending system update.
+--
+-- /See:/ 'systemUpdateInfo' smart constructor.
+data SystemUpdateInfo =
+  SystemUpdateInfo'
+    { _suiUpdateStatus :: !(Maybe SystemUpdateInfoUpdateStatus)
+    , _suiUpdateReceivedTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SystemUpdateInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'suiUpdateStatus'
+--
+-- * 'suiUpdateReceivedTime'
+systemUpdateInfo
+    :: SystemUpdateInfo
+systemUpdateInfo =
+  SystemUpdateInfo'
+    {_suiUpdateStatus = Nothing, _suiUpdateReceivedTime = Nothing}
+
+
+-- | The status of an update: whether an update exists and what type it is.
+suiUpdateStatus :: Lens' SystemUpdateInfo (Maybe SystemUpdateInfoUpdateStatus)
+suiUpdateStatus
+  = lens _suiUpdateStatus
+      (\ s a -> s{_suiUpdateStatus = a})
+
+-- | The time when the update was first available. A zero value indicates
+-- that this field is not set. This field is set only if an update is
+-- available (that is, updateStatus is neither UPDATE_STATUS_UNKNOWN nor
+-- UP_TO_DATE).
+suiUpdateReceivedTime :: Lens' SystemUpdateInfo (Maybe UTCTime)
+suiUpdateReceivedTime
+  = lens _suiUpdateReceivedTime
+      (\ s a -> s{_suiUpdateReceivedTime = a})
+      . mapping _DateTime
+
+instance FromJSON SystemUpdateInfo where
+        parseJSON
+          = withObject "SystemUpdateInfo"
+              (\ o ->
+                 SystemUpdateInfo' <$>
+                   (o .:? "updateStatus") <*>
+                     (o .:? "updateReceivedTime"))
+
+instance ToJSON SystemUpdateInfo where
+        toJSON SystemUpdateInfo'{..}
+          = object
+              (catMaybes
+                 [("updateStatus" .=) <$> _suiUpdateStatus,
+                  ("updateReceivedTime" .=) <$>
+                    _suiUpdateReceivedTime])
 
 -- | An icon for a web app. Supported formats are: png, jpg and webp.
 --
@@ -3058,11 +4261,8 @@ webAppIcon = WebAppIcon' {_waiImageData = Nothing}
 
 -- | The actual bytes of the image in a base64url encoded string (c.f.
 -- RFC4648, section 5 \"Base 64 Encoding with URL and Filename Safe
--- Alphabet\").
---
--- -   The image type can be png or jpg.
--- -   The image should ideally be square.
--- -   The image should ideally have a size of 512x512.
+-- Alphabet\"). - The image type can be png or jpg. - The image should
+-- ideally be square. - The image should ideally have a size of 512x512.
 waiImageData :: Lens' WebAppIcon (Maybe Text)
 waiImageData
   = lens _waiImageData (\ s a -> s{_waiImageData = a})
@@ -3082,16 +4282,19 @@ instance ToJSON WebAppIcon where
 -- /See:/ 'applicationPolicy' smart constructor.
 data ApplicationPolicy =
   ApplicationPolicy'
-    { _apDelegatedScopes              :: !(Maybe [Text])
-    , _apPackageName                  :: !(Maybe Text)
-    , _apManagedConfiguration         :: !(Maybe ApplicationPolicyManagedConfiguration)
-    , _apDefaultPermissionPolicy      :: !(Maybe ApplicationPolicyDefaultPermissionPolicy)
-    , _apDisabled                     :: !(Maybe Bool)
-    , _apLockTaskAllowed              :: !(Maybe Bool)
-    , _apPermissionGrants             :: !(Maybe [PermissionGrant])
+    { _apAccessibleTrackIds :: !(Maybe [Text])
+    , _apDelegatedScopes :: !(Maybe [ApplicationPolicyDelegatedScopesItem])
+    , _apPackageName :: !(Maybe Text)
+    , _apManagedConfiguration :: !(Maybe ApplicationPolicyManagedConfiguration)
+    , _apDefaultPermissionPolicy :: !(Maybe ApplicationPolicyDefaultPermissionPolicy)
+    , _apDisabled :: !(Maybe Bool)
+    , _apLockTaskAllowed :: !(Maybe Bool)
+    , _apPermissionGrants :: !(Maybe [PermissionGrant])
+    , _apConnectedWorkAndPersonalApp :: !(Maybe ApplicationPolicyConnectedWorkAndPersonalApp)
     , _apManagedConfigurationTemplate :: !(Maybe ManagedConfigurationTemplate)
-    , _apMinimumVersionCode           :: !(Maybe (Textual Int32))
-    , _apInstallType                  :: !(Maybe ApplicationPolicyInstallType)
+    , _apAutoUpdateMode :: !(Maybe ApplicationPolicyAutoUpdateMode)
+    , _apMinimumVersionCode :: !(Maybe (Textual Int32))
+    , _apInstallType :: !(Maybe ApplicationPolicyInstallType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3099,6 +4302,8 @@ data ApplicationPolicy =
 -- | Creates a value of 'ApplicationPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apAccessibleTrackIds'
 --
 -- * 'apDelegatedScopes'
 --
@@ -3114,7 +4319,11 @@ data ApplicationPolicy =
 --
 -- * 'apPermissionGrants'
 --
+-- * 'apConnectedWorkAndPersonalApp'
+--
 -- * 'apManagedConfigurationTemplate'
+--
+-- * 'apAutoUpdateMode'
 --
 -- * 'apMinimumVersionCode'
 --
@@ -3123,21 +4332,36 @@ applicationPolicy
     :: ApplicationPolicy
 applicationPolicy =
   ApplicationPolicy'
-    { _apDelegatedScopes = Nothing
+    { _apAccessibleTrackIds = Nothing
+    , _apDelegatedScopes = Nothing
     , _apPackageName = Nothing
     , _apManagedConfiguration = Nothing
     , _apDefaultPermissionPolicy = Nothing
     , _apDisabled = Nothing
     , _apLockTaskAllowed = Nothing
     , _apPermissionGrants = Nothing
+    , _apConnectedWorkAndPersonalApp = Nothing
     , _apManagedConfigurationTemplate = Nothing
+    , _apAutoUpdateMode = Nothing
     , _apMinimumVersionCode = Nothing
     , _apInstallType = Nothing
     }
 
 
+-- | List of the app’s track IDs that a device belonging to the enterprise
+-- can access. If the list contains multiple track IDs, devices receive the
+-- latest version among all accessible tracks. If the list contains no
+-- track IDs, devices only have access to the app’s production track. More
+-- details about each track are available in AppTrackInfo.
+apAccessibleTrackIds :: Lens' ApplicationPolicy [Text]
+apAccessibleTrackIds
+  = lens _apAccessibleTrackIds
+      (\ s a -> s{_apAccessibleTrackIds = a})
+      . _Default
+      . _Coerce
+
 -- | The scopes delegated to the app from Android Device Policy.
-apDelegatedScopes :: Lens' ApplicationPolicy [Text]
+apDelegatedScopes :: Lens' ApplicationPolicy [ApplicationPolicyDelegatedScopesItem]
 apDelegatedScopes
   = lens _apDelegatedScopes
       (\ s a -> s{_apDelegatedScopes = a})
@@ -3155,24 +4379,9 @@ apPackageName
 -- configuration is dictated by the ManagedProperty values supported by the
 -- app. Each field name in the managed configuration must match the key
 -- field of the ManagedProperty. The field value must be compatible with
--- the type of the ManagedProperty:
--- > +--------------+------------------+
--- > | /type/       | /JSON value/     |
--- > +--------------+------------------+
--- > | BOOL         | true or false    |
--- > +--------------+------------------+
--- > | STRING       | string           |
--- > +--------------+------------------+
--- > | INTEGER      | number           |
--- > +--------------+------------------+
--- > | CHOICE       | string           |
--- > +--------------+------------------+
--- > | MULTISELECT  | array of strings |
--- > +--------------+------------------+
--- > | HIDDEN       | string           |
--- > +--------------+------------------+
--- > | BUNDLE_ARRAY | array of objects |
--- > +--------------+------------------+
+-- the type of the ManagedProperty: *type* *JSON value* BOOL true or false
+-- STRING string INTEGER number CHOICE string MULTISELECT array of strings
+-- HIDDEN string BUNDLE_ARRAY array of objects
 apManagedConfiguration :: Lens' ApplicationPolicy (Maybe ApplicationPolicyManagedConfiguration)
 apManagedConfiguration
   = lens _apManagedConfiguration
@@ -3194,6 +4403,8 @@ apDisabled
   = lens _apDisabled (\ s a -> s{_apDisabled = a})
 
 -- | Whether the app is allowed to lock itself in full-screen mode.
+-- DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to to
+-- configure a dedicated device.
 apLockTaskAllowed :: Lens' ApplicationPolicy (Maybe Bool)
 apLockTaskAllowed
   = lens _apLockTaskAllowed
@@ -3209,6 +4420,13 @@ apPermissionGrants
       . _Default
       . _Coerce
 
+-- | Controls whether the app can communicate with itself across a device’s
+-- work and personal profiles, subject to user consent.
+apConnectedWorkAndPersonalApp :: Lens' ApplicationPolicy (Maybe ApplicationPolicyConnectedWorkAndPersonalApp)
+apConnectedWorkAndPersonalApp
+  = lens _apConnectedWorkAndPersonalApp
+      (\ s a -> s{_apConnectedWorkAndPersonalApp = a})
+
 -- | The managed configurations template for the app, saved from the managed
 -- configurations iframe. This field is ignored if managed_configuration is
 -- set.
@@ -3216,6 +4434,12 @@ apManagedConfigurationTemplate :: Lens' ApplicationPolicy (Maybe ManagedConfigur
 apManagedConfigurationTemplate
   = lens _apManagedConfigurationTemplate
       (\ s a -> s{_apManagedConfigurationTemplate = a})
+
+-- | Controls the auto-update mode for the app.
+apAutoUpdateMode :: Lens' ApplicationPolicy (Maybe ApplicationPolicyAutoUpdateMode)
+apAutoUpdateMode
+  = lens _apAutoUpdateMode
+      (\ s a -> s{_apAutoUpdateMode = a})
 
 -- | The minimum version of the app that runs on the device. If set, the
 -- device attempts to update the app to at least this version code. If the
@@ -3241,14 +4465,17 @@ instance FromJSON ApplicationPolicy where
           = withObject "ApplicationPolicy"
               (\ o ->
                  ApplicationPolicy' <$>
-                   (o .:? "delegatedScopes" .!= mempty) <*>
-                     (o .:? "packageName")
+                   (o .:? "accessibleTrackIds" .!= mempty) <*>
+                     (o .:? "delegatedScopes" .!= mempty)
+                     <*> (o .:? "packageName")
                      <*> (o .:? "managedConfiguration")
                      <*> (o .:? "defaultPermissionPolicy")
                      <*> (o .:? "disabled")
                      <*> (o .:? "lockTaskAllowed")
                      <*> (o .:? "permissionGrants" .!= mempty)
+                     <*> (o .:? "connectedWorkAndPersonalApp")
                      <*> (o .:? "managedConfigurationTemplate")
+                     <*> (o .:? "autoUpdateMode")
                      <*> (o .:? "minimumVersionCode")
                      <*> (o .:? "installType"))
 
@@ -3256,7 +4483,8 @@ instance ToJSON ApplicationPolicy where
         toJSON ApplicationPolicy'{..}
           = object
               (catMaybes
-                 [("delegatedScopes" .=) <$> _apDelegatedScopes,
+                 [("accessibleTrackIds" .=) <$> _apAccessibleTrackIds,
+                  ("delegatedScopes" .=) <$> _apDelegatedScopes,
                   ("packageName" .=) <$> _apPackageName,
                   ("managedConfiguration" .=) <$>
                     _apManagedConfiguration,
@@ -3265,8 +4493,11 @@ instance ToJSON ApplicationPolicy where
                   ("disabled" .=) <$> _apDisabled,
                   ("lockTaskAllowed" .=) <$> _apLockTaskAllowed,
                   ("permissionGrants" .=) <$> _apPermissionGrants,
+                  ("connectedWorkAndPersonalApp" .=) <$>
+                    _apConnectedWorkAndPersonalApp,
                   ("managedConfigurationTemplate" .=) <$>
                     _apManagedConfigurationTemplate,
+                  ("autoUpdateMode" .=) <$> _apAutoUpdateMode,
                   ("minimumVersionCode" .=) <$> _apMinimumVersionCode,
                   ("installType" .=) <$> _apInstallType])
 
@@ -3276,7 +4507,7 @@ instance ToJSON ApplicationPolicy where
 data ListDevicesResponse =
   ListDevicesResponse'
     { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDevices       :: !(Maybe [Device])
+    , _ldrDevices :: !(Maybe [Device])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3328,7 +4559,7 @@ instance ToJSON ListDevicesResponse where
 -- /See:/ 'managedConfigurationTemplate' smart constructor.
 data ManagedConfigurationTemplate =
   ManagedConfigurationTemplate'
-    { _mctTemplateId             :: !(Maybe Text)
+    { _mctTemplateId :: !(Maybe Text)
     , _mctConfigurationVariables :: !(Maybe ManagedConfigurationTemplateConfigurationVariables)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3382,15 +4613,16 @@ instance ToJSON ManagedConfigurationTemplate where
 -- /See:/ 'enterprise' smart constructor.
 data Enterprise =
   Enterprise'
-    { _eAppAutoApprovalEnabled   :: !(Maybe Bool)
-    , _eEnabledNotificationTypes :: !(Maybe [Text])
-    , _eSigninDetails            :: !(Maybe [SigninDetail])
-    , _eName                     :: !(Maybe Text)
-    , _ePubsubTopic              :: !(Maybe Text)
-    , _eEnterpriseDisplayName    :: !(Maybe Text)
-    , _eLogo                     :: !(Maybe ExternalData)
-    , _eTermsAndConditions       :: !(Maybe [TermsAndConditions])
-    , _ePrimaryColor             :: !(Maybe (Textual Int32))
+    { _eAppAutoApprovalEnabled :: !(Maybe Bool)
+    , _eEnabledNotificationTypes :: !(Maybe [EnterpriseEnabledNotificationTypesItem])
+    , _eSigninDetails :: !(Maybe [SigninDetail])
+    , _eName :: !(Maybe Text)
+    , _ePubsubTopic :: !(Maybe Text)
+    , _eEnterpriseDisplayName :: !(Maybe Text)
+    , _eLogo :: !(Maybe ExternalData)
+    , _eTermsAndConditions :: !(Maybe [TermsAndConditions])
+    , _eContactInfo :: !(Maybe ContactInfo)
+    , _ePrimaryColor :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3415,6 +4647,8 @@ data Enterprise =
 --
 -- * 'eTermsAndConditions'
 --
+-- * 'eContactInfo'
+--
 -- * 'ePrimaryColor'
 enterprise
     :: Enterprise
@@ -3428,6 +4662,7 @@ enterprise =
     , _eEnterpriseDisplayName = Nothing
     , _eLogo = Nothing
     , _eTermsAndConditions = Nothing
+    , _eContactInfo = Nothing
     , _ePrimaryColor = Nothing
     }
 
@@ -3439,15 +4674,14 @@ eAppAutoApprovalEnabled
       (\ s a -> s{_eAppAutoApprovalEnabled = a})
 
 -- | The types of Google Pub\/Sub notifications enabled for the enterprise.
-eEnabledNotificationTypes :: Lens' Enterprise [Text]
+eEnabledNotificationTypes :: Lens' Enterprise [EnterpriseEnabledNotificationTypesItem]
 eEnabledNotificationTypes
   = lens _eEnabledNotificationTypes
       (\ s a -> s{_eEnabledNotificationTypes = a})
       . _Default
       . _Coerce
 
--- | Sign-in details of the enterprise. Maximum of 1 SigninDetail is
--- supported.
+-- | Sign-in details of the enterprise.
 eSigninDetails :: Lens' Enterprise [SigninDetail]
 eSigninDetails
   = lens _eSigninDetails
@@ -3489,6 +4723,11 @@ eTermsAndConditions
       . _Default
       . _Coerce
 
+-- | The enterprise contact info of an EMM-managed enterprise.
+eContactInfo :: Lens' Enterprise (Maybe ContactInfo)
+eContactInfo
+  = lens _eContactInfo (\ s a -> s{_eContactInfo = a})
+
 -- | A color in RGB format that indicates the predominant color to display in
 -- the device management app UI. The color components are stored as
 -- follows: (red \<\< 16) | (green \<\< 8) | blue, where the value of each
@@ -3512,6 +4751,7 @@ instance FromJSON Enterprise where
                      <*> (o .:? "enterpriseDisplayName")
                      <*> (o .:? "logo")
                      <*> (o .:? "termsAndConditions" .!= mempty)
+                     <*> (o .:? "contactInfo")
                      <*> (o .:? "primaryColor"))
 
 instance ToJSON Enterprise where
@@ -3529,6 +4769,7 @@ instance ToJSON Enterprise where
                     _eEnterpriseDisplayName,
                   ("logo" .=) <$> _eLogo,
                   ("termsAndConditions" .=) <$> _eTermsAndConditions,
+                  ("contactInfo" .=) <$> _eContactInfo,
                   ("primaryColor" .=) <$> _ePrimaryColor])
 
 -- | An event related to memory and storage measurements.
@@ -3536,8 +4777,8 @@ instance ToJSON Enterprise where
 -- /See:/ 'memoryEvent' smart constructor.
 data MemoryEvent =
   MemoryEvent'
-    { _meByteCount  :: !(Maybe (Textual Int64))
-    , _meEventType  :: !(Maybe MemoryEventEventType)
+    { _meByteCount :: !(Maybe (Textual Int64))
+    , _meEventType :: !(Maybe MemoryEventEventType)
     , _meCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3599,7 +4840,7 @@ instance ToJSON MemoryEvent where
 -- /See:/ 'permissionGrant' smart constructor.
 data PermissionGrant =
   PermissionGrant'
-    { _pgPolicy     :: !(Maybe PermissionGrantPolicy)
+    { _pgPolicy :: !(Maybe PermissionGrantPolicy)
     , _pgPermission :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3647,8 +4888,9 @@ instance ToJSON PermissionGrant where
 -- /See:/ 'signinDetail' smart constructor.
 data SigninDetail =
   SigninDetail'
-    { _sdSigninURL             :: !(Maybe Text)
-    , _sdQrCode                :: !(Maybe Text)
+    { _sdSigninURL :: !(Maybe Text)
+    , _sdQrCode :: !(Maybe Text)
+    , _sdAllowPersonalUsage :: !(Maybe SigninDetailAllowPersonalUsage)
     , _sdSigninEnrollmentToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3662,6 +4904,8 @@ data SigninDetail =
 --
 -- * 'sdQrCode'
 --
+-- * 'sdAllowPersonalUsage'
+--
 -- * 'sdSigninEnrollmentToken'
 signinDetail
     :: SigninDetail
@@ -3669,6 +4913,7 @@ signinDetail =
   SigninDetail'
     { _sdSigninURL = Nothing
     , _sdQrCode = Nothing
+    , _sdAllowPersonalUsage = Nothing
     , _sdSigninEnrollmentToken = Nothing
     }
 
@@ -3691,6 +4936,19 @@ sdSigninURL
 sdQrCode :: Lens' SigninDetail (Maybe Text)
 sdQrCode = lens _sdQrCode (\ s a -> s{_sdQrCode = a})
 
+-- | Controls whether personal usage is allowed on a device provisioned with
+-- this enrollment token.For company-owned devices: Enabling personal usage
+-- allows the user to set up a work profile on the device. Disabling
+-- personal usage requires the user provision the device as a fully managed
+-- device.For personally-owned devices: Enabling personal usage allows the
+-- user to set up a work profile on the device. Disabling personal usage
+-- will prevent the device from provisioning. Personal usage cannot be
+-- disabled on personally-owned device.
+sdAllowPersonalUsage :: Lens' SigninDetail (Maybe SigninDetailAllowPersonalUsage)
+sdAllowPersonalUsage
+  = lens _sdAllowPersonalUsage
+      (\ s a -> s{_sdAllowPersonalUsage = a})
+
 -- | An enterprise wide enrollment token used to trigger custom sign-in flow.
 -- This is a read-only field generated by the server.
 sdSigninEnrollmentToken :: Lens' SigninDetail (Maybe Text)
@@ -3704,7 +4962,8 @@ instance FromJSON SigninDetail where
               (\ o ->
                  SigninDetail' <$>
                    (o .:? "signinUrl") <*> (o .:? "qrCode") <*>
-                     (o .:? "signinEnrollmentToken"))
+                     (o .:? "allowPersonalUsage")
+                     <*> (o .:? "signinEnrollmentToken"))
 
 instance ToJSON SigninDetail where
         toJSON SigninDetail'{..}
@@ -3712,6 +4971,7 @@ instance ToJSON SigninDetail where
               (catMaybes
                  [("signinUrl" .=) <$> _sdSigninURL,
                   ("qrCode" .=) <$> _sdQrCode,
+                  ("allowPersonalUsage" .=) <$> _sdAllowPersonalUsage,
                   ("signinEnrollmentToken" .=) <$>
                     _sdSigninEnrollmentToken])
 
@@ -3720,7 +4980,7 @@ instance ToJSON SigninDetail where
 -- /See:/ 'signupURL' smart constructor.
 data SignupURL =
   SignupURL'
-    { _suURL  :: !(Maybe Text)
+    { _suURL :: !(Maybe Text)
     , _suName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3760,15 +5020,67 @@ instance ToJSON SignupURL where
               (catMaybes
                  [("url" .=) <$> _suURL, ("name" .=) <$> _suName])
 
+-- | Id to name association of a app track.
+--
+-- /See:/ 'appTrackInfo' smart constructor.
+data AppTrackInfo =
+  AppTrackInfo'
+    { _atiTrackAlias :: !(Maybe Text)
+    , _atiTrackId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AppTrackInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'atiTrackAlias'
+--
+-- * 'atiTrackId'
+appTrackInfo
+    :: AppTrackInfo
+appTrackInfo = AppTrackInfo' {_atiTrackAlias = Nothing, _atiTrackId = Nothing}
+
+
+-- | The track name associated with the trackId, set in the Play Console. The
+-- name is modifiable from Play Console.
+atiTrackAlias :: Lens' AppTrackInfo (Maybe Text)
+atiTrackAlias
+  = lens _atiTrackAlias
+      (\ s a -> s{_atiTrackAlias = a})
+
+-- | The unmodifiable unique track identifier, taken from the releaseTrackId
+-- in the URL of the Play Console page that displays the app’s track
+-- information.
+atiTrackId :: Lens' AppTrackInfo (Maybe Text)
+atiTrackId
+  = lens _atiTrackId (\ s a -> s{_atiTrackId = a})
+
+instance FromJSON AppTrackInfo where
+        parseJSON
+          = withObject "AppTrackInfo"
+              (\ o ->
+                 AppTrackInfo' <$>
+                   (o .:? "trackAlias") <*> (o .:? "trackId"))
+
+instance ToJSON AppTrackInfo where
+        toJSON AppTrackInfo'{..}
+          = object
+              (catMaybes
+                 [("trackAlias" .=) <$> _atiTrackAlias,
+                  ("trackId" .=) <$> _atiTrackId])
+
 -- | Device network info.
 --
 -- /See:/ 'networkInfo' smart constructor.
 data NetworkInfo =
   NetworkInfo'
-    { _niNetworkOperatorName :: !(Maybe Text)
-    , _niMeid                :: !(Maybe Text)
-    , _niImei                :: !(Maybe Text)
-    , _niWifiMACAddress      :: !(Maybe Text)
+    { _niTelephonyInfos :: !(Maybe [TelephonyInfo])
+    , _niNetworkOperatorName :: !(Maybe Text)
+    , _niMeid :: !(Maybe Text)
+    , _niImei :: !(Maybe Text)
+    , _niWifiMACAddress :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3776,6 +5088,8 @@ data NetworkInfo =
 -- | Creates a value of 'NetworkInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'niTelephonyInfos'
 --
 -- * 'niNetworkOperatorName'
 --
@@ -3788,12 +5102,23 @@ networkInfo
     :: NetworkInfo
 networkInfo =
   NetworkInfo'
-    { _niNetworkOperatorName = Nothing
+    { _niTelephonyInfos = Nothing
+    , _niNetworkOperatorName = Nothing
     , _niMeid = Nothing
     , _niImei = Nothing
     , _niWifiMACAddress = Nothing
     }
 
+
+-- | Provides telephony information associated with each SIM card on the
+-- device. Only supported on fully managed devices starting from Android
+-- API level 23.
+niTelephonyInfos :: Lens' NetworkInfo [TelephonyInfo]
+niTelephonyInfos
+  = lens _niTelephonyInfos
+      (\ s a -> s{_niTelephonyInfos = a})
+      . _Default
+      . _Coerce
 
 -- | Alphabetic name of current registered operator. For example, Vodafone.
 niNetworkOperatorName :: Lens' NetworkInfo (Maybe Text)
@@ -3820,15 +5145,18 @@ instance FromJSON NetworkInfo where
           = withObject "NetworkInfo"
               (\ o ->
                  NetworkInfo' <$>
-                   (o .:? "networkOperatorName") <*> (o .:? "meid") <*>
-                     (o .:? "imei")
+                   (o .:? "telephonyInfos" .!= mempty) <*>
+                     (o .:? "networkOperatorName")
+                     <*> (o .:? "meid")
+                     <*> (o .:? "imei")
                      <*> (o .:? "wifiMacAddress"))
 
 instance ToJSON NetworkInfo where
         toJSON NetworkInfo'{..}
           = object
               (catMaybes
-                 [("networkOperatorName" .=) <$>
+                 [("telephonyInfos" .=) <$> _niTelephonyInfos,
+                  ("networkOperatorName" .=) <$>
                     _niNetworkOperatorName,
                   ("meid" .=) <$> _niMeid, ("imei" .=) <$> _niImei,
                   ("wifiMacAddress" .=) <$> _niWifiMACAddress])
@@ -3839,8 +5167,8 @@ instance ToJSON NetworkInfo where
 data PowerManagementEvent =
   PowerManagementEvent'
     { _pmeBatteryLevel :: !(Maybe (Textual Double))
-    , _pmeEventType    :: !(Maybe PowerManagementEventEventType)
-    , _pmeCreateTime   :: !(Maybe DateTime')
+    , _pmeEventType :: !(Maybe PowerManagementEventEventType)
+    , _pmeCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3899,87 +5227,95 @@ instance ToJSON PowerManagementEvent where
                   ("eventType" .=) <$> _pmeEventType,
                   ("createTime" .=) <$> _pmeCreateTime])
 
--- | A policy resources represents a group settings that govern the behavior
--- of a managed device and the apps installed on it.
+-- | A policy resource represents a group of settings that govern the
+-- behavior of a managed device and the apps installed on it.
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pBluetoothConfigDisabled            :: !(Maybe Bool)
-    , _pUnmuteMicrophoneDisabled           :: !(Maybe Bool)
-    , _pMountPhysicalMediaDisabled         :: !(Maybe Bool)
-    , _pFrpAdminEmails                     :: !(Maybe [Text])
-    , _pAppAutoUpdatePolicy                :: !(Maybe PolicyAppAutoUpdatePolicy)
-    , _pEncryptionPolicy                   :: !(Maybe PolicyEncryptionPolicy)
-    , _pAndroidDevicePolicyTracks          :: !(Maybe [Text])
-    , _pSafeBootDisabled                   :: !(Maybe Bool)
-    , _pAlwaysOnVPNPackage                 :: !(Maybe AlwaysOnVPNPackage)
-    , _pChoosePrivateKeyRules              :: !(Maybe [ChoosePrivateKeyRule])
-    , _pCredentialsConfigDisabled          :: !(Maybe Bool)
-    , _pRecommendedGlobalProxy             :: !(Maybe ProxyInfo)
-    , _pKeyguardDisabled                   :: !(Maybe Bool)
-    , _pSkipFirstUseHintsEnabled           :: !(Maybe Bool)
-    , _pAdjustVolumeDisabled               :: !(Maybe Bool)
-    , _pDefaultPermissionPolicy            :: !(Maybe PolicyDefaultPermissionPolicy)
-    , _pUninstallAppsDisabled              :: !(Maybe Bool)
-    , _pSetUserIconDisabled                :: !(Maybe Bool)
-    , _pPermittedInputMethods              :: !(Maybe PackageNameList)
-    , _pScreenCaptureDisabled              :: !(Maybe Bool)
-    , _pAddUserDisabled                    :: !(Maybe Bool)
-    , _pShareLocationDisabled              :: !(Maybe Bool)
-    , _pAutoTimeRequired                   :: !(Maybe Bool)
-    , _pInstallAppsDisabled                :: !(Maybe Bool)
-    , _pCreateWindowsDisabled              :: !(Maybe Bool)
-    , _pNetworkResetDisabled               :: !(Maybe Bool)
-    , _pBluetoothContactSharingDisabled    :: !(Maybe Bool)
-    , _pPermissionGrants                   :: !(Maybe [PermissionGrant])
-    , _pShortSupportMessage                :: !(Maybe UserFacingMessage)
-    , _pStayOnPluggedModes                 :: !(Maybe [Text])
-    , _pDataRoamingDisabled                :: !(Maybe Bool)
-    , _pDebuggingFeaturesAllowed           :: !(Maybe Bool)
-    , _pKioskCustomLauncherEnabled         :: !(Maybe Bool)
-    , _pWifiConfigsLockdownEnabled         :: !(Maybe Bool)
-    , _pUsbMassStorageEnabled              :: !(Maybe Bool)
-    , _pNetworkEscapeHatchEnabled          :: !(Maybe Bool)
-    , _pSystemUpdate                       :: !(Maybe SystemUpdate)
-    , _pInstallUnknownSourcesAllowed       :: !(Maybe Bool)
-    , _pName                               :: !(Maybe Text)
-    , _pPrivateKeySelectionEnabled         :: !(Maybe Bool)
-    , _pOutgoingCallsDisabled              :: !(Maybe Bool)
-    , _pStatusReportingSettings            :: !(Maybe StatusReportingSettings)
-    , _pRemoveUserDisabled                 :: !(Maybe Bool)
-    , _pMobileNetworksConfigDisabled       :: !(Maybe Bool)
-    , _pVersion                            :: !(Maybe (Textual Int64))
-    , _pEnsureVerifyAppsEnabled            :: !(Maybe Bool)
-    , _pSetWallpaperDisabled               :: !(Maybe Bool)
-    , _pVPNConfigDisabled                  :: !(Maybe Bool)
-    , _pSetupActions                       :: !(Maybe [SetupAction])
-    , _pOpenNetworkConfiguration           :: !(Maybe PolicyOpenNetworkConfiguration)
-    , _pModifyAccountsDisabled             :: !(Maybe Bool)
-    , _pBlockApplicationsEnabled           :: !(Maybe Bool)
-    , _pKeyguardDisabledFeatures           :: !(Maybe [Text])
-    , _pFunDisabled                        :: !(Maybe Bool)
-    , _pSmsDisabled                        :: !(Maybe Bool)
-    , _pMaximumTimeToLock                  :: !(Maybe (Textual Int64))
-    , _pOutgoingBeamDisabled               :: !(Maybe Bool)
-    , _pStatusBarDisabled                  :: !(Maybe Bool)
-    , _pCellBroadcastsConfigDisabled       :: !(Maybe Bool)
-    , _pDeviceOwnerLockScreenInfo          :: !(Maybe UserFacingMessage)
-    , _pPlayStoreMode                      :: !(Maybe PolicyPlayStoreMode)
-    , _pComplianceRules                    :: !(Maybe [ComplianceRule])
-    , _pTetheringConfigDisabled            :: !(Maybe Bool)
+    { _pBluetoothConfigDisabled :: !(Maybe Bool)
+    , _pUnmuteMicrophoneDisabled :: !(Maybe Bool)
+    , _pMountPhysicalMediaDisabled :: !(Maybe Bool)
+    , _pFrpAdminEmails :: !(Maybe [Text])
+    , _pAppAutoUpdatePolicy :: !(Maybe PolicyAppAutoUpdatePolicy)
+    , _pEncryptionPolicy :: !(Maybe PolicyEncryptionPolicy)
+    , _pAndroidDevicePolicyTracks :: !(Maybe [PolicyAndroidDevicePolicyTracksItem])
+    , _pSafeBootDisabled :: !(Maybe Bool)
+    , _pAlwaysOnVPNPackage :: !(Maybe AlwaysOnVPNPackage)
+    , _pChoosePrivateKeyRules :: !(Maybe [ChoosePrivateKeyRule])
+    , _pCredentialsConfigDisabled :: !(Maybe Bool)
+    , _pRecommendedGlobalProxy :: !(Maybe ProxyInfo)
+    , _pPermittedAccessibilityServices :: !(Maybe PackageNameList)
+    , _pKeyguardDisabled :: !(Maybe Bool)
+    , _pOncCertificateProviders :: !(Maybe [OncCertificateProvider])
+    , _pSkipFirstUseHintsEnabled :: !(Maybe Bool)
+    , _pAdjustVolumeDisabled :: !(Maybe Bool)
+    , _pDefaultPermissionPolicy :: !(Maybe PolicyDefaultPermissionPolicy)
+    , _pUninstallAppsDisabled :: !(Maybe Bool)
+    , _pSetUserIconDisabled :: !(Maybe Bool)
+    , _pPermittedInputMethods :: !(Maybe PackageNameList)
+    , _pMinimumAPILevel :: !(Maybe (Textual Int32))
+    , _pScreenCaptureDisabled :: !(Maybe Bool)
+    , _pAddUserDisabled :: !(Maybe Bool)
+    , _pShareLocationDisabled :: !(Maybe Bool)
+    , _pAutoTimeRequired :: !(Maybe Bool)
+    , _pInstallAppsDisabled :: !(Maybe Bool)
+    , _pCreateWindowsDisabled :: !(Maybe Bool)
+    , _pNetworkResetDisabled :: !(Maybe Bool)
+    , _pPersonalUsagePolicies :: !(Maybe PersonalUsagePolicies)
+    , _pBluetoothContactSharingDisabled :: !(Maybe Bool)
+    , _pPermissionGrants :: !(Maybe [PermissionGrant])
+    , _pShortSupportMessage :: !(Maybe UserFacingMessage)
+    , _pStayOnPluggedModes :: !(Maybe [PolicyStayOnPluggedModesItem])
+    , _pDataRoamingDisabled :: !(Maybe Bool)
+    , _pDebuggingFeaturesAllowed :: !(Maybe Bool)
+    , _pKioskCustomLauncherEnabled :: !(Maybe Bool)
+    , _pWifiConfigsLockdownEnabled :: !(Maybe Bool)
+    , _pUsbMassStorageEnabled :: !(Maybe Bool)
+    , _pNetworkEscapeHatchEnabled :: !(Maybe Bool)
+    , _pSystemUpdate :: !(Maybe SystemUpdate)
+    , _pInstallUnknownSourcesAllowed :: !(Maybe Bool)
+    , _pName :: !(Maybe Text)
+    , _pPrivateKeySelectionEnabled :: !(Maybe Bool)
+    , _pAdvancedSecurityOverrides :: !(Maybe AdvancedSecurityOverrides)
+    , _pOutgoingCallsDisabled :: !(Maybe Bool)
+    , _pStatusReportingSettings :: !(Maybe StatusReportingSettings)
+    , _pRemoveUserDisabled :: !(Maybe Bool)
+    , _pMobileNetworksConfigDisabled :: !(Maybe Bool)
+    , _pVersion :: !(Maybe (Textual Int64))
+    , _pEnsureVerifyAppsEnabled :: !(Maybe Bool)
+    , _pSetWallpaperDisabled :: !(Maybe Bool)
+    , _pVPNConfigDisabled :: !(Maybe Bool)
+    , _pSetupActions :: !(Maybe [SetupAction])
+    , _pOpenNetworkConfiguration :: !(Maybe PolicyOpenNetworkConfiguration)
+    , _pModifyAccountsDisabled :: !(Maybe Bool)
+    , _pBlockApplicationsEnabled :: !(Maybe Bool)
+    , _pKeyguardDisabledFeatures :: !(Maybe [PolicyKeyguardDisabledFeaturesItem])
+    , _pFunDisabled :: !(Maybe Bool)
+    , _pSmsDisabled :: !(Maybe Bool)
+    , _pMaximumTimeToLock :: !(Maybe (Textual Int64))
+    , _pOutgoingBeamDisabled :: !(Maybe Bool)
+    , _pStatusBarDisabled :: !(Maybe Bool)
+    , _pCellBroadcastsConfigDisabled :: !(Maybe Bool)
+    , _pDeviceOwnerLockScreenInfo :: !(Maybe UserFacingMessage)
+    , _pPlayStoreMode :: !(Maybe PolicyPlayStoreMode)
+    , _pKioskCustomization :: !(Maybe KioskCustomization)
+    , _pComplianceRules :: !(Maybe [ComplianceRule])
+    , _pTetheringConfigDisabled :: !(Maybe Bool)
     , _pAccountTypesWithManagementDisabled :: !(Maybe [Text])
-    , _pWifiConfigDisabled                 :: !(Maybe Bool)
-    , _pPersistentPreferredActivities      :: !(Maybe [PersistentPreferredActivity])
-    , _pPasswordRequirements               :: !(Maybe PasswordRequirements)
-    , _pLongSupportMessage                 :: !(Maybe UserFacingMessage)
-    , _pLocationMode                       :: !(Maybe PolicyLocationMode)
-    , _pBluetoothDisabled                  :: !(Maybe Bool)
-    , _pUsbFileTransferDisabled            :: !(Maybe Bool)
-    , _pCameraDisabled                     :: !(Maybe Bool)
-    , _pApplications                       :: !(Maybe [ApplicationPolicy])
-    , _pPasswordPolicies                   :: !(Maybe [PasswordRequirements])
-    , _pFactoryResetDisabled               :: !(Maybe Bool)
+    , _pWifiConfigDisabled :: !(Maybe Bool)
+    , _pPersistentPreferredActivities :: !(Maybe [PersistentPreferredActivity])
+    , _pPasswordRequirements :: !(Maybe PasswordRequirements)
+    , _pAutoDateAndTimeZone :: !(Maybe PolicyAutoDateAndTimeZone)
+    , _pLongSupportMessage :: !(Maybe UserFacingMessage)
+    , _pLocationMode :: !(Maybe PolicyLocationMode)
+    , _pBluetoothDisabled :: !(Maybe Bool)
+    , _pPolicyEnforcementRules :: !(Maybe [PolicyEnforcementRule])
+    , _pUsbFileTransferDisabled :: !(Maybe Bool)
+    , _pCameraDisabled :: !(Maybe Bool)
+    , _pApplications :: !(Maybe [ApplicationPolicy])
+    , _pPasswordPolicies :: !(Maybe [PasswordRequirements])
+    , _pFactoryResetDisabled :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4012,7 +5348,11 @@ data Policy =
 --
 -- * 'pRecommendedGlobalProxy'
 --
+-- * 'pPermittedAccessibilityServices'
+--
 -- * 'pKeyguardDisabled'
+--
+-- * 'pOncCertificateProviders'
 --
 -- * 'pSkipFirstUseHintsEnabled'
 --
@@ -4025,6 +5365,8 @@ data Policy =
 -- * 'pSetUserIconDisabled'
 --
 -- * 'pPermittedInputMethods'
+--
+-- * 'pMinimumAPILevel'
 --
 -- * 'pScreenCaptureDisabled'
 --
@@ -4039,6 +5381,8 @@ data Policy =
 -- * 'pCreateWindowsDisabled'
 --
 -- * 'pNetworkResetDisabled'
+--
+-- * 'pPersonalUsagePolicies'
 --
 -- * 'pBluetoothContactSharingDisabled'
 --
@@ -4067,6 +5411,8 @@ data Policy =
 -- * 'pName'
 --
 -- * 'pPrivateKeySelectionEnabled'
+--
+-- * 'pAdvancedSecurityOverrides'
 --
 -- * 'pOutgoingCallsDisabled'
 --
@@ -4110,6 +5456,8 @@ data Policy =
 --
 -- * 'pPlayStoreMode'
 --
+-- * 'pKioskCustomization'
+--
 -- * 'pComplianceRules'
 --
 -- * 'pTetheringConfigDisabled'
@@ -4122,11 +5470,15 @@ data Policy =
 --
 -- * 'pPasswordRequirements'
 --
+-- * 'pAutoDateAndTimeZone'
+--
 -- * 'pLongSupportMessage'
 --
 -- * 'pLocationMode'
 --
 -- * 'pBluetoothDisabled'
+--
+-- * 'pPolicyEnforcementRules'
 --
 -- * 'pUsbFileTransferDisabled'
 --
@@ -4153,13 +5505,16 @@ policy =
     , _pChoosePrivateKeyRules = Nothing
     , _pCredentialsConfigDisabled = Nothing
     , _pRecommendedGlobalProxy = Nothing
+    , _pPermittedAccessibilityServices = Nothing
     , _pKeyguardDisabled = Nothing
+    , _pOncCertificateProviders = Nothing
     , _pSkipFirstUseHintsEnabled = Nothing
     , _pAdjustVolumeDisabled = Nothing
     , _pDefaultPermissionPolicy = Nothing
     , _pUninstallAppsDisabled = Nothing
     , _pSetUserIconDisabled = Nothing
     , _pPermittedInputMethods = Nothing
+    , _pMinimumAPILevel = Nothing
     , _pScreenCaptureDisabled = Nothing
     , _pAddUserDisabled = Nothing
     , _pShareLocationDisabled = Nothing
@@ -4167,6 +5522,7 @@ policy =
     , _pInstallAppsDisabled = Nothing
     , _pCreateWindowsDisabled = Nothing
     , _pNetworkResetDisabled = Nothing
+    , _pPersonalUsagePolicies = Nothing
     , _pBluetoothContactSharingDisabled = Nothing
     , _pPermissionGrants = Nothing
     , _pShortSupportMessage = Nothing
@@ -4181,6 +5537,7 @@ policy =
     , _pInstallUnknownSourcesAllowed = Nothing
     , _pName = Nothing
     , _pPrivateKeySelectionEnabled = Nothing
+    , _pAdvancedSecurityOverrides = Nothing
     , _pOutgoingCallsDisabled = Nothing
     , _pStatusReportingSettings = Nothing
     , _pRemoveUserDisabled = Nothing
@@ -4202,15 +5559,18 @@ policy =
     , _pCellBroadcastsConfigDisabled = Nothing
     , _pDeviceOwnerLockScreenInfo = Nothing
     , _pPlayStoreMode = Nothing
+    , _pKioskCustomization = Nothing
     , _pComplianceRules = Nothing
     , _pTetheringConfigDisabled = Nothing
     , _pAccountTypesWithManagementDisabled = Nothing
     , _pWifiConfigDisabled = Nothing
     , _pPersistentPreferredActivities = Nothing
     , _pPasswordRequirements = Nothing
+    , _pAutoDateAndTimeZone = Nothing
     , _pLongSupportMessage = Nothing
     , _pLocationMode = Nothing
     , _pBluetoothDisabled = Nothing
+    , _pPolicyEnforcementRules = Nothing
     , _pUsbFileTransferDisabled = Nothing
     , _pCameraDisabled = Nothing
     , _pApplications = Nothing
@@ -4250,8 +5610,10 @@ pFrpAdminEmails
       . _Default
       . _Coerce
 
--- | The app auto update policy, which controls when automatic app updates
--- can be applied.
+-- | Deprecated. Use autoUpdateMode instead.When autoUpdateMode is set to
+-- AUTO_UPDATE_POSTPONED or AUTO_UPDATE_HIGH_PRIORITY, this field has no
+-- effect.The app auto update policy, which controls when automatic app
+-- updates can be applied.
 pAppAutoUpdatePolicy :: Lens' Policy (Maybe PolicyAppAutoUpdatePolicy)
 pAppAutoUpdatePolicy
   = lens _pAppAutoUpdatePolicy
@@ -4266,7 +5628,7 @@ pEncryptionPolicy
 -- | The app tracks for Android Device Policy the device can access. The
 -- device receives the latest version among all accessible tracks. If no
 -- tracks are specified, then the device only uses the production track.
-pAndroidDevicePolicyTracks :: Lens' Policy [Text]
+pAndroidDevicePolicyTracks :: Lens' Policy [PolicyAndroidDevicePolicyTracksItem]
 pAndroidDevicePolicyTracks
   = lens _pAndroidDevicePolicyTracks
       (\ s a -> s{_pAndroidDevicePolicyTracks = a})
@@ -4286,10 +5648,8 @@ pAlwaysOnVPNPackage
   = lens _pAlwaysOnVPNPackage
       (\ s a -> s{_pAlwaysOnVPNPackage = a})
 
--- | Rules for automatically choosing a private key and certificate to
--- authenticate the device to a server. The rules are ordered by increasing
--- precedence, so if an outgoing request matches more than one rule, the
--- last rule defines which private key to use.
+-- | Rules for determining apps\' access to private keys. See
+-- ChoosePrivateKeyRule for details.
 pChoosePrivateKeyRules :: Lens' Policy [ChoosePrivateKeyRule]
 pChoosePrivateKeyRules
   = lens _pChoosePrivateKeyRules
@@ -4314,11 +5674,29 @@ pRecommendedGlobalProxy
   = lens _pRecommendedGlobalProxy
       (\ s a -> s{_pRecommendedGlobalProxy = a})
 
+-- | Specifies permitted accessibility services. If the field is not set, any
+-- accessibility service can be used. If the field is set, only the
+-- accessibility services in this list and the system\'s built-in
+-- accessibility service can be used. In particular, if the field is set to
+-- empty, only the system\'s built-in accessibility servicess can be used.
+pPermittedAccessibilityServices :: Lens' Policy (Maybe PackageNameList)
+pPermittedAccessibilityServices
+  = lens _pPermittedAccessibilityServices
+      (\ s a -> s{_pPermittedAccessibilityServices = a})
+
 -- | Whether the keyguard is disabled.
 pKeyguardDisabled :: Lens' Policy (Maybe Bool)
 pKeyguardDisabled
   = lens _pKeyguardDisabled
       (\ s a -> s{_pKeyguardDisabled = a})
+
+-- | This feature is not generally available.
+pOncCertificateProviders :: Lens' Policy [OncCertificateProvider]
+pOncCertificateProviders
+  = lens _pOncCertificateProviders
+      (\ s a -> s{_pOncCertificateProviders = a})
+      . _Default
+      . _Coerce
 
 -- | Flag to skip hints on the first use. Enterprise admin can enable the
 -- system recommendation for apps to skip their user tutorial and other
@@ -4328,7 +5706,7 @@ pSkipFirstUseHintsEnabled
   = lens _pSkipFirstUseHintsEnabled
       (\ s a -> s{_pSkipFirstUseHintsEnabled = a})
 
--- | Whether adjusting the master volume is disabled.
+-- | Whether adjusting the master volume is disabled. Also mutes the device.
 pAdjustVolumeDisabled :: Lens' Policy (Maybe Bool)
 pAdjustVolumeDisabled
   = lens _pAdjustVolumeDisabled
@@ -4360,6 +5738,13 @@ pPermittedInputMethods
   = lens _pPermittedInputMethods
       (\ s a -> s{_pPermittedInputMethods = a})
 
+-- | The minimum allowed Android API level.
+pMinimumAPILevel :: Lens' Policy (Maybe Int32)
+pMinimumAPILevel
+  = lens _pMinimumAPILevel
+      (\ s a -> s{_pMinimumAPILevel = a})
+      . mapping _Coerce
+
 -- | Whether screen capture is disabled.
 pScreenCaptureDisabled :: Lens' Policy (Maybe Bool)
 pScreenCaptureDisabled
@@ -4379,7 +5764,8 @@ pShareLocationDisabled
       (\ s a -> s{_pShareLocationDisabled = a})
 
 -- | Whether auto time is required, which prevents the user from manually
--- setting the date and time.
+-- setting the date and time. If autoDateAndTimeZone is set, this field is
+-- ignored.
 pAutoTimeRequired :: Lens' Policy (Maybe Bool)
 pAutoTimeRequired
   = lens _pAutoTimeRequired
@@ -4403,6 +5789,12 @@ pNetworkResetDisabled
   = lens _pNetworkResetDisabled
       (\ s a -> s{_pNetworkResetDisabled = a})
 
+-- | Policies managing personal usage on a company-owned device.
+pPersonalUsagePolicies :: Lens' Policy (Maybe PersonalUsagePolicies)
+pPersonalUsagePolicies
+  = lens _pPersonalUsagePolicies
+      (\ s a -> s{_pPersonalUsagePolicies = a})
+
 -- | Whether bluetooth contact sharing is disabled.
 pBluetoothContactSharingDisabled :: Lens' Policy (Maybe Bool)
 pBluetoothContactSharingDisabled
@@ -4419,7 +5811,8 @@ pPermissionGrants
       . _Coerce
 
 -- | A message displayed to the user in the settings screen wherever
--- functionality has been disabled by the admin.
+-- functionality has been disabled by the admin. If the message is longer
+-- than 200 characters it may be truncated.
 pShortSupportMessage :: Lens' Policy (Maybe UserFacingMessage)
 pShortSupportMessage
   = lens _pShortSupportMessage
@@ -4428,7 +5821,7 @@ pShortSupportMessage
 -- | The battery plugged in modes for which the device stays on. When using
 -- this setting, it is recommended to clear maximum_time_to_lock so that
 -- the device doesn\'t lock itself while it stays on.
-pStayOnPluggedModes :: Lens' Policy [Text]
+pStayOnPluggedModes :: Lens' Policy [PolicyStayOnPluggedModesItem]
 pStayOnPluggedModes
   = lens _pStayOnPluggedModes
       (\ s a -> s{_pStayOnPluggedModes = a})
@@ -4449,9 +5842,9 @@ pDebuggingFeaturesAllowed
 
 -- | Whether the kiosk custom launcher is enabled. This replaces the home
 -- screen with a launcher that locks down the device to the apps installed
--- via the applications setting. The apps appear on a single page in
--- alphabetical order. It is recommended to also use status_bar_disabled to
--- block access to device settings.
+-- via the applications setting. Apps appear on a single page in
+-- alphabetical order. Use kioskCustomization to further configure the
+-- kiosk device behavior.
 pKioskCustomLauncherEnabled :: Lens' Policy (Maybe Bool)
 pKioskCustomLauncherEnabled
   = lens _pKioskCustomLauncherEnabled
@@ -4476,7 +5869,9 @@ pUsbMassStorageEnabled
 -- device will continue booting. This prevents being unable to connect to a
 -- network if there is no suitable network in the last policy and the
 -- device boots into an app in lock task mode, or the user is otherwise
--- unable to reach device settings.
+-- unable to reach device settings.Note: Setting wifiConfigDisabled to true
+-- will override this setting under specific circumstances. Please see
+-- wifiConfigDisabled for further details.
 pNetworkEscapeHatchEnabled :: Lens' Policy (Maybe Bool)
 pNetworkEscapeHatchEnabled
   = lens _pNetworkEscapeHatchEnabled
@@ -4490,8 +5885,7 @@ pSystemUpdate
   = lens _pSystemUpdate
       (\ s a -> s{_pSystemUpdate = a})
 
--- | Whether the user is allowed to enable the \"Unknown Sources\" setting,
--- which allows installation of apps from unknown sources.
+-- | This field has no effect.
 pInstallUnknownSourcesAllowed :: Lens' Policy (Maybe Bool)
 pInstallUnknownSourcesAllowed
   = lens _pInstallUnknownSourcesAllowed
@@ -4509,6 +5903,14 @@ pPrivateKeySelectionEnabled :: Lens' Policy (Maybe Bool)
 pPrivateKeySelectionEnabled
   = lens _pPrivateKeySelectionEnabled
       (\ s a -> s{_pPrivateKeySelectionEnabled = a})
+
+-- | Security policies set to the most secure values by default. To maintain
+-- the security posture of a device, we don\'t recommend overriding any of
+-- the default values.
+pAdvancedSecurityOverrides :: Lens' Policy (Maybe AdvancedSecurityOverrides)
+pAdvancedSecurityOverrides
+  = lens _pAdvancedSecurityOverrides
+      (\ s a -> s{_pAdvancedSecurityOverrides = a})
 
 -- | Whether outgoing calls are disabled.
 pOutgoingCallsDisabled :: Lens' Policy (Maybe Bool)
@@ -4590,7 +5992,7 @@ pBlockApplicationsEnabled
       (\ s a -> s{_pBlockApplicationsEnabled = a})
 
 -- | Disabled keyguard customizations, such as widgets.
-pKeyguardDisabledFeatures :: Lens' Policy [Text]
+pKeyguardDisabledFeatures :: Lens' Policy [PolicyKeyguardDisabledFeaturesItem]
 pKeyguardDisabledFeatures
   = lens _pKeyguardDisabledFeatures
       (\ s a -> s{_pKeyguardDisabledFeatures = a})
@@ -4624,7 +6026,8 @@ pOutgoingBeamDisabled
 
 -- | Whether the status bar is disabled. This disables notifications, quick
 -- settings, and other screen overlays that allow escape from full-screen
--- mode.
+-- mode. DEPRECATED. To disable the status bar on a kiosk device, use
+-- InstallType KIOSK or kioskCustomLauncherEnabled.
 pStatusBarDisabled :: Lens' Policy (Maybe Bool)
 pStatusBarDisabled
   = lens _pStatusBarDisabled
@@ -4650,10 +6053,18 @@ pPlayStoreMode
   = lens _pPlayStoreMode
       (\ s a -> s{_pPlayStoreMode = a})
 
+-- | Settings controlling the behavior of a device in kiosk mode. To enable
+-- kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in
+-- the policy with installType KIOSK.
+pKioskCustomization :: Lens' Policy (Maybe KioskCustomization)
+pKioskCustomization
+  = lens _pKioskCustomization
+      (\ s a -> s{_pKioskCustomization = a})
+
 -- | Rules declaring which mitigating actions to take when a device is not
 -- compliant with its policy. When the conditions for multiple rules are
 -- satisfied, all of the mitigating actions for the rules are taken. There
--- is a maximum limit of 100 rules.
+-- is a maximum limit of 100 rules. Use policy enforcement rules instead.
 pComplianceRules :: Lens' Policy [ComplianceRule]
 pComplianceRules
   = lens _pComplianceRules
@@ -4676,7 +6087,10 @@ pAccountTypesWithManagementDisabled
       . _Default
       . _Coerce
 
--- | Whether configuring Wi-Fi access points is disabled.
+-- | Whether configuring Wi-Fi access points is disabled.Note: If a network
+-- connection can\'t be made at boot time and configuring Wi-Fi is disabled
+-- then network escape hatch will be shown in order to refresh the device
+-- policy (see networkEscapeHatchEnabled).
 pWifiConfigDisabled :: Lens' Policy (Maybe Bool)
 pWifiConfigDisabled
   = lens _pWifiConfigDisabled
@@ -4690,11 +6104,22 @@ pPersistentPreferredActivities
       . _Default
       . _Coerce
 
--- | Password requirements. DEPRECATED - Use password_policies
+-- | Password requirements. The field
+-- password_requirements.require_password_unlock must not be set.
+-- DEPRECATED - Use password_policies.Note:Complexity-based values of
+-- PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and
+-- COMPLEXITY_HIGH, cannot be used here.
 pPasswordRequirements :: Lens' Policy (Maybe PasswordRequirements)
 pPasswordRequirements
   = lens _pPasswordRequirements
       (\ s a -> s{_pPasswordRequirements = a})
+
+-- | Whether auto date, time, and time zone are enabled on a company-owned
+-- device. If this is set, then autoTimeRequired is ignored.
+pAutoDateAndTimeZone :: Lens' Policy (Maybe PolicyAutoDateAndTimeZone)
+pAutoDateAndTimeZone
+  = lens _pAutoDateAndTimeZone
+      (\ s a -> s{_pAutoDateAndTimeZone = a})
 
 -- | A message displayed to the user in the device administators settings
 -- screen.
@@ -4703,8 +6128,7 @@ pLongSupportMessage
   = lens _pLongSupportMessage
       (\ s a -> s{_pLongSupportMessage = a})
 
--- | The degree of location detection enabled. The user may change the value
--- unless the user is otherwise blocked from accessing device settings.
+-- | The degree of location detection enabled.
 pLocationMode :: Lens' Policy (Maybe PolicyLocationMode)
 pLocationMode
   = lens _pLocationMode
@@ -4717,6 +6141,15 @@ pBluetoothDisabled :: Lens' Policy (Maybe Bool)
 pBluetoothDisabled
   = lens _pBluetoothDisabled
       (\ s a -> s{_pBluetoothDisabled = a})
+
+-- | Rules that define the behavior when a particular policy can not be
+-- applied on device
+pPolicyEnforcementRules :: Lens' Policy [PolicyEnforcementRule]
+pPolicyEnforcementRules
+  = lens _pPolicyEnforcementRules
+      (\ s a -> s{_pPolicyEnforcementRules = a})
+      . _Default
+      . _Coerce
 
 -- | Whether transferring files over USB is disabled.
 pUsbFileTransferDisabled :: Lens' Policy (Maybe Bool)
@@ -4771,13 +6204,16 @@ instance FromJSON Policy where
                      <*> (o .:? "choosePrivateKeyRules" .!= mempty)
                      <*> (o .:? "credentialsConfigDisabled")
                      <*> (o .:? "recommendedGlobalProxy")
+                     <*> (o .:? "permittedAccessibilityServices")
                      <*> (o .:? "keyguardDisabled")
+                     <*> (o .:? "oncCertificateProviders" .!= mempty)
                      <*> (o .:? "skipFirstUseHintsEnabled")
                      <*> (o .:? "adjustVolumeDisabled")
                      <*> (o .:? "defaultPermissionPolicy")
                      <*> (o .:? "uninstallAppsDisabled")
                      <*> (o .:? "setUserIconDisabled")
                      <*> (o .:? "permittedInputMethods")
+                     <*> (o .:? "minimumApiLevel")
                      <*> (o .:? "screenCaptureDisabled")
                      <*> (o .:? "addUserDisabled")
                      <*> (o .:? "shareLocationDisabled")
@@ -4785,6 +6221,7 @@ instance FromJSON Policy where
                      <*> (o .:? "installAppsDisabled")
                      <*> (o .:? "createWindowsDisabled")
                      <*> (o .:? "networkResetDisabled")
+                     <*> (o .:? "personalUsagePolicies")
                      <*> (o .:? "bluetoothContactSharingDisabled")
                      <*> (o .:? "permissionGrants" .!= mempty)
                      <*> (o .:? "shortSupportMessage")
@@ -4799,6 +6236,7 @@ instance FromJSON Policy where
                      <*> (o .:? "installUnknownSourcesAllowed")
                      <*> (o .:? "name")
                      <*> (o .:? "privateKeySelectionEnabled")
+                     <*> (o .:? "advancedSecurityOverrides")
                      <*> (o .:? "outgoingCallsDisabled")
                      <*> (o .:? "statusReportingSettings")
                      <*> (o .:? "removeUserDisabled")
@@ -4820,6 +6258,7 @@ instance FromJSON Policy where
                      <*> (o .:? "cellBroadcastsConfigDisabled")
                      <*> (o .:? "deviceOwnerLockScreenInfo")
                      <*> (o .:? "playStoreMode")
+                     <*> (o .:? "kioskCustomization")
                      <*> (o .:? "complianceRules" .!= mempty)
                      <*> (o .:? "tetheringConfigDisabled")
                      <*>
@@ -4829,9 +6268,11 @@ instance FromJSON Policy where
                      <*>
                      (o .:? "persistentPreferredActivities" .!= mempty)
                      <*> (o .:? "passwordRequirements")
+                     <*> (o .:? "autoDateAndTimeZone")
                      <*> (o .:? "longSupportMessage")
                      <*> (o .:? "locationMode")
                      <*> (o .:? "bluetoothDisabled")
+                     <*> (o .:? "policyEnforcementRules" .!= mempty)
                      <*> (o .:? "usbFileTransferDisabled")
                      <*> (o .:? "cameraDisabled")
                      <*> (o .:? "applications" .!= mempty)
@@ -4861,7 +6302,11 @@ instance ToJSON Policy where
                     _pCredentialsConfigDisabled,
                   ("recommendedGlobalProxy" .=) <$>
                     _pRecommendedGlobalProxy,
+                  ("permittedAccessibilityServices" .=) <$>
+                    _pPermittedAccessibilityServices,
                   ("keyguardDisabled" .=) <$> _pKeyguardDisabled,
+                  ("oncCertificateProviders" .=) <$>
+                    _pOncCertificateProviders,
                   ("skipFirstUseHintsEnabled" .=) <$>
                     _pSkipFirstUseHintsEnabled,
                   ("adjustVolumeDisabled" .=) <$>
@@ -4873,6 +6318,7 @@ instance ToJSON Policy where
                   ("setUserIconDisabled" .=) <$> _pSetUserIconDisabled,
                   ("permittedInputMethods" .=) <$>
                     _pPermittedInputMethods,
+                  ("minimumApiLevel" .=) <$> _pMinimumAPILevel,
                   ("screenCaptureDisabled" .=) <$>
                     _pScreenCaptureDisabled,
                   ("addUserDisabled" .=) <$> _pAddUserDisabled,
@@ -4884,6 +6330,8 @@ instance ToJSON Policy where
                     _pCreateWindowsDisabled,
                   ("networkResetDisabled" .=) <$>
                     _pNetworkResetDisabled,
+                  ("personalUsagePolicies" .=) <$>
+                    _pPersonalUsagePolicies,
                   ("bluetoothContactSharingDisabled" .=) <$>
                     _pBluetoothContactSharingDisabled,
                   ("permissionGrants" .=) <$> _pPermissionGrants,
@@ -4906,6 +6354,8 @@ instance ToJSON Policy where
                   ("name" .=) <$> _pName,
                   ("privateKeySelectionEnabled" .=) <$>
                     _pPrivateKeySelectionEnabled,
+                  ("advancedSecurityOverrides" .=) <$>
+                    _pAdvancedSecurityOverrides,
                   ("outgoingCallsDisabled" .=) <$>
                     _pOutgoingCallsDisabled,
                   ("statusReportingSettings" .=) <$>
@@ -4939,6 +6389,7 @@ instance ToJSON Policy where
                   ("deviceOwnerLockScreenInfo" .=) <$>
                     _pDeviceOwnerLockScreenInfo,
                   ("playStoreMode" .=) <$> _pPlayStoreMode,
+                  ("kioskCustomization" .=) <$> _pKioskCustomization,
                   ("complianceRules" .=) <$> _pComplianceRules,
                   ("tetheringConfigDisabled" .=) <$>
                     _pTetheringConfigDisabled,
@@ -4949,9 +6400,12 @@ instance ToJSON Policy where
                     _pPersistentPreferredActivities,
                   ("passwordRequirements" .=) <$>
                     _pPasswordRequirements,
+                  ("autoDateAndTimeZone" .=) <$> _pAutoDateAndTimeZone,
                   ("longSupportMessage" .=) <$> _pLongSupportMessage,
                   ("locationMode" .=) <$> _pLocationMode,
                   ("bluetoothDisabled" .=) <$> _pBluetoothDisabled,
+                  ("policyEnforcementRules" .=) <$>
+                    _pPolicyEnforcementRules,
                   ("usbFileTransferDisabled" .=) <$>
                     _pUsbFileTransferDisabled,
                   ("cameraDisabled" .=) <$> _pCameraDisabled,
@@ -4969,9 +6423,9 @@ instance ToJSON Policy where
 -- /See:/ 'nonComplianceDetailCondition' smart constructor.
 data NonComplianceDetailCondition =
   NonComplianceDetailCondition'
-    { _ncdcPackageName         :: !(Maybe Text)
+    { _ncdcPackageName :: !(Maybe Text)
     , _ncdcNonComplianceReason :: !(Maybe NonComplianceDetailConditionNonComplianceReason)
-    , _ncdcSettingName         :: !(Maybe Text)
+    , _ncdcSettingName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5040,12 +6494,12 @@ instance ToJSON NonComplianceDetailCondition where
 -- /See:/ 'keyedAppState' smart constructor.
 data KeyedAppState =
   KeyedAppState'
-    { _kasData           :: !(Maybe Text)
-    , _kasSeverity       :: !(Maybe KeyedAppStateSeverity)
-    , _kasKey            :: !(Maybe Text)
-    , _kasMessage        :: !(Maybe Text)
+    { _kasData :: !(Maybe Text)
+    , _kasSeverity :: !(Maybe KeyedAppStateSeverity)
+    , _kasKey :: !(Maybe Text)
+    , _kasMessage :: !(Maybe Text)
     , _kasLastUpdateTime :: !(Maybe DateTime')
-    , _kasCreateTime     :: !(Maybe DateTime')
+    , _kasCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5138,6 +6592,103 @@ instance ToJSON KeyedAppState where
                   ("lastUpdateTime" .=) <$> _kasLastUpdateTime,
                   ("createTime" .=) <$> _kasCreateTime])
 
+-- | Settings controlling the behavior of a device in kiosk mode. To enable
+-- kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in
+-- the policy with installType KIOSK.
+--
+-- /See:/ 'kioskCustomization' smart constructor.
+data KioskCustomization =
+  KioskCustomization'
+    { _kcSystemNavigation :: !(Maybe KioskCustomizationSystemNavigation)
+    , _kcDeviceSettings :: !(Maybe KioskCustomizationDeviceSettings)
+    , _kcPowerButtonActions :: !(Maybe KioskCustomizationPowerButtonActions)
+    , _kcSystemErrorWarnings :: !(Maybe KioskCustomizationSystemErrorWarnings)
+    , _kcStatusBar :: !(Maybe KioskCustomizationStatusBar)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KioskCustomization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kcSystemNavigation'
+--
+-- * 'kcDeviceSettings'
+--
+-- * 'kcPowerButtonActions'
+--
+-- * 'kcSystemErrorWarnings'
+--
+-- * 'kcStatusBar'
+kioskCustomization
+    :: KioskCustomization
+kioskCustomization =
+  KioskCustomization'
+    { _kcSystemNavigation = Nothing
+    , _kcDeviceSettings = Nothing
+    , _kcPowerButtonActions = Nothing
+    , _kcSystemErrorWarnings = Nothing
+    , _kcStatusBar = Nothing
+    }
+
+
+-- | Specifies which navigation features are enabled (e.g. Home, Overview
+-- buttons) in kiosk mode.
+kcSystemNavigation :: Lens' KioskCustomization (Maybe KioskCustomizationSystemNavigation)
+kcSystemNavigation
+  = lens _kcSystemNavigation
+      (\ s a -> s{_kcSystemNavigation = a})
+
+-- | Specifies whether the Settings app is allowed in kiosk mode.
+kcDeviceSettings :: Lens' KioskCustomization (Maybe KioskCustomizationDeviceSettings)
+kcDeviceSettings
+  = lens _kcDeviceSettings
+      (\ s a -> s{_kcDeviceSettings = a})
+
+-- | Sets the behavior of a device in kiosk mode when a user presses and
+-- holds (long-presses) the Power button.
+kcPowerButtonActions :: Lens' KioskCustomization (Maybe KioskCustomizationPowerButtonActions)
+kcPowerButtonActions
+  = lens _kcPowerButtonActions
+      (\ s a -> s{_kcPowerButtonActions = a})
+
+-- | Specifies whether system error dialogs for crashed or unresponsive apps
+-- are blocked in kiosk mode. When blocked, the system will force-stop the
+-- app as if the user chooses the \"close app\" option on the UI.
+kcSystemErrorWarnings :: Lens' KioskCustomization (Maybe KioskCustomizationSystemErrorWarnings)
+kcSystemErrorWarnings
+  = lens _kcSystemErrorWarnings
+      (\ s a -> s{_kcSystemErrorWarnings = a})
+
+-- | Specifies whether system info and notifications are disabled in kiosk
+-- mode.
+kcStatusBar :: Lens' KioskCustomization (Maybe KioskCustomizationStatusBar)
+kcStatusBar
+  = lens _kcStatusBar (\ s a -> s{_kcStatusBar = a})
+
+instance FromJSON KioskCustomization where
+        parseJSON
+          = withObject "KioskCustomization"
+              (\ o ->
+                 KioskCustomization' <$>
+                   (o .:? "systemNavigation") <*>
+                     (o .:? "deviceSettings")
+                     <*> (o .:? "powerButtonActions")
+                     <*> (o .:? "systemErrorWarnings")
+                     <*> (o .:? "statusBar"))
+
+instance ToJSON KioskCustomization where
+        toJSON KioskCustomization'{..}
+          = object
+              (catMaybes
+                 [("systemNavigation" .=) <$> _kcSystemNavigation,
+                  ("deviceSettings" .=) <$> _kcDeviceSettings,
+                  ("powerButtonActions" .=) <$> _kcPowerButtonActions,
+                  ("systemErrorWarnings" .=) <$>
+                    _kcSystemErrorWarnings,
+                  ("statusBar" .=) <$> _kcStatusBar])
+
 -- | Service-specific metadata associated with the operation. It typically
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
@@ -5183,9 +6734,10 @@ instance ToJSON OperationMetadata where
 data WebToken =
   WebToken'
     { _wtParentFrameURL :: !(Maybe Text)
-    , _wtValue          :: !(Maybe Text)
-    , _wtName           :: !(Maybe Text)
-    , _wtPermissions    :: !(Maybe [Text])
+    , _wtValue :: !(Maybe Text)
+    , _wtName :: !(Maybe Text)
+    , _wtEnabledFeatures :: !(Maybe [WebTokenEnabledFeaturesItem])
+    , _wtPermissions :: !(Maybe [WebTokenPermissionsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5200,6 +6752,8 @@ data WebToken =
 --
 -- * 'wtName'
 --
+-- * 'wtEnabledFeatures'
+--
 -- * 'wtPermissions'
 webToken
     :: WebToken
@@ -5208,6 +6762,7 @@ webToken =
     { _wtParentFrameURL = Nothing
     , _wtValue = Nothing
     , _wtName = Nothing
+    , _wtEnabledFeatures = Nothing
     , _wtPermissions = Nothing
     }
 
@@ -5231,9 +6786,23 @@ wtValue = lens _wtValue (\ s a -> s{_wtValue = a})
 wtName :: Lens' WebToken (Maybe Text)
 wtName = lens _wtName (\ s a -> s{_wtName = a})
 
+-- | The features to enable. Use this if you want to control exactly which
+-- feature(s) will be activated; leave empty to allow all
+-- features.Restrictions \/ things to note: - If no features are listed
+-- here, all features are enabled — this is the default behavior where you
+-- give access to all features to your admins. - This must not contain any
+-- FEATURE_UNSPECIFIED values. - Repeated values are ignored
+wtEnabledFeatures :: Lens' WebToken [WebTokenEnabledFeaturesItem]
+wtEnabledFeatures
+  = lens _wtEnabledFeatures
+      (\ s a -> s{_wtEnabledFeatures = a})
+      . _Default
+      . _Coerce
+
 -- | Permissions available to an admin in the embedded UI. An admin must have
--- all of these permissions in order to view the UI.
-wtPermissions :: Lens' WebToken [Text]
+-- all of these permissions in order to view the UI. This field is
+-- deprecated.
+wtPermissions :: Lens' WebToken [WebTokenPermissionsItem]
 wtPermissions
   = lens _wtPermissions
       (\ s a -> s{_wtPermissions = a})
@@ -5247,6 +6816,7 @@ instance FromJSON WebToken where
                  WebToken' <$>
                    (o .:? "parentFrameUrl") <*> (o .:? "value") <*>
                      (o .:? "name")
+                     <*> (o .:? "enabledFeatures" .!= mempty)
                      <*> (o .:? "permissions" .!= mempty))
 
 instance ToJSON WebToken where
@@ -5255,6 +6825,7 @@ instance ToJSON WebToken where
               (catMaybes
                  [("parentFrameUrl" .=) <$> _wtParentFrameURL,
                   ("value" .=) <$> _wtValue, ("name" .=) <$> _wtName,
+                  ("enabledFeatures" .=) <$> _wtEnabledFeatures,
                   ("permissions" .=) <$> _wtPermissions])
 
 -- | A rule declaring which mitigating actions to take when a device is not
@@ -5267,9 +6838,9 @@ instance ToJSON WebToken where
 -- /See:/ 'complianceRule' smart constructor.
 data ComplianceRule =
   ComplianceRule'
-    { _crAPILevelCondition            :: !(Maybe APILevelCondition)
-    , _crDisableApps                  :: !(Maybe Bool)
-    , _crPackageNamesToDisable        :: !(Maybe [Text])
+    { _crAPILevelCondition :: !(Maybe APILevelCondition)
+    , _crDisableApps :: !(Maybe Bool)
+    , _crPackageNamesToDisable :: !(Maybe [Text])
     , _crNonComplianceDetailCondition :: !(Maybe NonComplianceDetailCondition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5355,7 +6926,7 @@ instance ToJSON ComplianceRule where
 data ListWebAppsResponse =
   ListWebAppsResponse'
     { _lwarNextPageToken :: !(Maybe Text)
-    , _lwarWebApps       :: !(Maybe [WebApp])
+    , _lwarWebApps :: !(Maybe [WebApp])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5406,18 +6977,19 @@ instance ToJSON ListWebAppsResponse where
 -- /See:/ 'passwordRequirements' smart constructor.
 data PasswordRequirements =
   PasswordRequirements'
-    { _prPasswordMinimumSymbols        :: !(Maybe (Textual Int32))
+    { _prPasswordMinimumSymbols :: !(Maybe (Textual Int32))
     , _prMaximumFailedPasswordsForWipe :: !(Maybe (Textual Int32))
-    , _prPasswordExpirationTimeout     :: !(Maybe GDuration)
-    , _prPasswordMinimumNonLetter      :: !(Maybe (Textual Int32))
-    , _prPasswordHistoryLength         :: !(Maybe (Textual Int32))
-    , _prPasswordMinimumLetters        :: !(Maybe (Textual Int32))
-    , _prPasswordMinimumUpperCase      :: !(Maybe (Textual Int32))
-    , _prPasswordMinimumNumeric        :: !(Maybe (Textual Int32))
-    , _prPasswordQuality               :: !(Maybe PasswordRequirementsPasswordQuality)
-    , _prPasswordMinimumLength         :: !(Maybe (Textual Int32))
-    , _prPasswordScope                 :: !(Maybe PasswordRequirementsPasswordScope)
-    , _prPasswordMinimumLowerCase      :: !(Maybe (Textual Int32))
+    , _prPasswordExpirationTimeout :: !(Maybe GDuration)
+    , _prPasswordMinimumNonLetter :: !(Maybe (Textual Int32))
+    , _prPasswordHistoryLength :: !(Maybe (Textual Int32))
+    , _prPasswordMinimumLetters :: !(Maybe (Textual Int32))
+    , _prPasswordMinimumUpperCase :: !(Maybe (Textual Int32))
+    , _prRequirePasswordUnlock :: !(Maybe PasswordRequirementsRequirePasswordUnlock)
+    , _prPasswordMinimumNumeric :: !(Maybe (Textual Int32))
+    , _prPasswordQuality :: !(Maybe PasswordRequirementsPasswordQuality)
+    , _prPasswordMinimumLength :: !(Maybe (Textual Int32))
+    , _prPasswordScope :: !(Maybe PasswordRequirementsPasswordScope)
+    , _prPasswordMinimumLowerCase :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5440,6 +7012,8 @@ data PasswordRequirements =
 --
 -- * 'prPasswordMinimumUpperCase'
 --
+-- * 'prRequirePasswordUnlock'
+--
 -- * 'prPasswordMinimumNumeric'
 --
 -- * 'prPasswordQuality'
@@ -5460,6 +7034,7 @@ passwordRequirements =
     , _prPasswordHistoryLength = Nothing
     , _prPasswordMinimumLetters = Nothing
     , _prPasswordMinimumUpperCase = Nothing
+    , _prRequirePasswordUnlock = Nothing
     , _prPasswordMinimumNumeric = Nothing
     , _prPasswordQuality = Nothing
     , _prPasswordMinimumLength = Nothing
@@ -5525,6 +7100,17 @@ prPasswordMinimumUpperCase
       (\ s a -> s{_prPasswordMinimumUpperCase = a})
       . mapping _Coerce
 
+-- | The length of time after a device or work profile is unlocked using a
+-- strong form of authentication (password, PIN, pattern) that it can be
+-- unlocked using any other authentication method (e.g. fingerprint, trust
+-- agents, face). After the specified time period elapses, only strong
+-- forms of authentication can be used to unlock the device or work
+-- profile.
+prRequirePasswordUnlock :: Lens' PasswordRequirements (Maybe PasswordRequirementsRequirePasswordUnlock)
+prRequirePasswordUnlock
+  = lens _prRequirePasswordUnlock
+      (\ s a -> s{_prRequirePasswordUnlock = a})
+
 -- | Minimum number of numerical digits required in the password. Only
 -- enforced when password_quality is COMPLEX.
 prPasswordMinimumNumeric :: Lens' PasswordRequirements (Maybe Int32)
@@ -5574,6 +7160,7 @@ instance FromJSON PasswordRequirements where
                      <*> (o .:? "passwordHistoryLength")
                      <*> (o .:? "passwordMinimumLetters")
                      <*> (o .:? "passwordMinimumUpperCase")
+                     <*> (o .:? "requirePasswordUnlock")
                      <*> (o .:? "passwordMinimumNumeric")
                      <*> (o .:? "passwordQuality")
                      <*> (o .:? "passwordMinimumLength")
@@ -5598,6 +7185,8 @@ instance ToJSON PasswordRequirements where
                     _prPasswordMinimumLetters,
                   ("passwordMinimumUpperCase" .=) <$>
                     _prPasswordMinimumUpperCase,
+                  ("requirePasswordUnlock" .=) <$>
+                    _prRequirePasswordUnlock,
                   ("passwordMinimumNumeric" .=) <$>
                     _prPasswordMinimumNumeric,
                   ("passwordQuality" .=) <$> _prPasswordQuality,
@@ -5612,12 +7201,12 @@ instance ToJSON PasswordRequirements where
 -- /See:/ 'nonComplianceDetail' smart constructor.
 data NonComplianceDetail =
   NonComplianceDetail'
-    { _ncdFieldPath                 :: !(Maybe Text)
-    , _ncdPackageName               :: !(Maybe Text)
+    { _ncdFieldPath :: !(Maybe Text)
+    , _ncdPackageName :: !(Maybe Text)
     , _ncdInstallationFailureReason :: !(Maybe NonComplianceDetailInstallationFailureReason)
-    , _ncdNonComplianceReason       :: !(Maybe NonComplianceDetailNonComplianceReason)
-    , _ncdSettingName               :: !(Maybe Text)
-    , _ncdCurrentValue              :: !(Maybe JSONValue)
+    , _ncdNonComplianceReason :: !(Maybe NonComplianceDetailNonComplianceReason)
+    , _ncdSettingName :: !(Maybe Text)
+    , _ncdCurrentValue :: !(Maybe JSONValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5727,7 +7316,7 @@ instance ToJSON NonComplianceDetail where
 -- /See:/ 'applicationEvent' smart constructor.
 data ApplicationEvent =
   ApplicationEvent'
-    { _aeEventType  :: !(Maybe ApplicationEventEventType)
+    { _aeEventType :: !(Maybe ApplicationEventEventType)
     , _aeCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5777,7 +7366,7 @@ instance ToJSON ApplicationEvent where
 data TermsAndConditions =
   TermsAndConditions'
     { _tacContent :: !(Maybe UserFacingMessage)
-    , _tacHeader  :: !(Maybe UserFacingMessage)
+    , _tacHeader :: !(Maybe UserFacingMessage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5869,7 +7458,7 @@ instance ToJSON OperationResponse where
 data UserFacingMessage =
   UserFacingMessage'
     { _ufmLocalizedMessages :: !(Maybe UserFacingMessageLocalizedMessages)
-    , _ufmDefaultMessage    :: !(Maybe Text)
+    , _ufmDefaultMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5919,21 +7508,147 @@ instance ToJSON UserFacingMessage where
                  [("localizedMessages" .=) <$> _ufmLocalizedMessages,
                   ("defaultMessage" .=) <$> _ufmDefaultMessage])
 
+-- | Contact details for LaForge enterprises.
+--
+-- /See:/ 'contactInfo' smart constructor.
+data ContactInfo =
+  ContactInfo'
+    { _ciContactEmail :: !(Maybe Text)
+    , _ciDataProtectionOfficerName :: !(Maybe Text)
+    , _ciEuRepresentativeName :: !(Maybe Text)
+    , _ciEuRepresentativeEmail :: !(Maybe Text)
+    , _ciEuRepresentativePhone :: !(Maybe Text)
+    , _ciDataProtectionOfficerEmail :: !(Maybe Text)
+    , _ciDataProtectionOfficerPhone :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ContactInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciContactEmail'
+--
+-- * 'ciDataProtectionOfficerName'
+--
+-- * 'ciEuRepresentativeName'
+--
+-- * 'ciEuRepresentativeEmail'
+--
+-- * 'ciEuRepresentativePhone'
+--
+-- * 'ciDataProtectionOfficerEmail'
+--
+-- * 'ciDataProtectionOfficerPhone'
+contactInfo
+    :: ContactInfo
+contactInfo =
+  ContactInfo'
+    { _ciContactEmail = Nothing
+    , _ciDataProtectionOfficerName = Nothing
+    , _ciEuRepresentativeName = Nothing
+    , _ciEuRepresentativeEmail = Nothing
+    , _ciEuRepresentativePhone = Nothing
+    , _ciDataProtectionOfficerEmail = Nothing
+    , _ciDataProtectionOfficerPhone = Nothing
+    }
+
+
+-- | Email address for a point of contact, which will be used to send
+-- important announcements related to managed Google Play.
+ciContactEmail :: Lens' ContactInfo (Maybe Text)
+ciContactEmail
+  = lens _ciContactEmail
+      (\ s a -> s{_ciContactEmail = a})
+
+-- | The name of the data protection officer.
+ciDataProtectionOfficerName :: Lens' ContactInfo (Maybe Text)
+ciDataProtectionOfficerName
+  = lens _ciDataProtectionOfficerName
+      (\ s a -> s{_ciDataProtectionOfficerName = a})
+
+-- | The name of the EU representative.
+ciEuRepresentativeName :: Lens' ContactInfo (Maybe Text)
+ciEuRepresentativeName
+  = lens _ciEuRepresentativeName
+      (\ s a -> s{_ciEuRepresentativeName = a})
+
+-- | The email of the EU representative. The email is validated but not
+-- verified.
+ciEuRepresentativeEmail :: Lens' ContactInfo (Maybe Text)
+ciEuRepresentativeEmail
+  = lens _ciEuRepresentativeEmail
+      (\ s a -> s{_ciEuRepresentativeEmail = a})
+
+-- | The phone number of the EU representative. The phone number is validated
+-- but not verified.
+ciEuRepresentativePhone :: Lens' ContactInfo (Maybe Text)
+ciEuRepresentativePhone
+  = lens _ciEuRepresentativePhone
+      (\ s a -> s{_ciEuRepresentativePhone = a})
+
+-- | The email of the data protection officer. The email is validated but not
+-- verified.
+ciDataProtectionOfficerEmail :: Lens' ContactInfo (Maybe Text)
+ciDataProtectionOfficerEmail
+  = lens _ciDataProtectionOfficerEmail
+      (\ s a -> s{_ciDataProtectionOfficerEmail = a})
+
+-- | The phone number of the data protection officer The phone number is
+-- validated but not verified.
+ciDataProtectionOfficerPhone :: Lens' ContactInfo (Maybe Text)
+ciDataProtectionOfficerPhone
+  = lens _ciDataProtectionOfficerPhone
+      (\ s a -> s{_ciDataProtectionOfficerPhone = a})
+
+instance FromJSON ContactInfo where
+        parseJSON
+          = withObject "ContactInfo"
+              (\ o ->
+                 ContactInfo' <$>
+                   (o .:? "contactEmail") <*>
+                     (o .:? "dataProtectionOfficerName")
+                     <*> (o .:? "euRepresentativeName")
+                     <*> (o .:? "euRepresentativeEmail")
+                     <*> (o .:? "euRepresentativePhone")
+                     <*> (o .:? "dataProtectionOfficerEmail")
+                     <*> (o .:? "dataProtectionOfficerPhone"))
+
+instance ToJSON ContactInfo where
+        toJSON ContactInfo'{..}
+          = object
+              (catMaybes
+                 [("contactEmail" .=) <$> _ciContactEmail,
+                  ("dataProtectionOfficerName" .=) <$>
+                    _ciDataProtectionOfficerName,
+                  ("euRepresentativeName" .=) <$>
+                    _ciEuRepresentativeName,
+                  ("euRepresentativeEmail" .=) <$>
+                    _ciEuRepresentativeEmail,
+                  ("euRepresentativePhone" .=) <$>
+                    _ciEuRepresentativePhone,
+                  ("dataProtectionOfficerEmail" .=) <$>
+                    _ciDataProtectionOfficerEmail,
+                  ("dataProtectionOfficerPhone" .=) <$>
+                    _ciDataProtectionOfficerPhone])
+
 -- | Information about device software.
 --
 -- /See:/ 'softwareInfo' smart constructor.
 data SoftwareInfo =
   SoftwareInfo'
-    { _siSecurityPatchLevel             :: !(Maybe Text)
+    { _siSecurityPatchLevel :: !(Maybe Text)
     , _siAndroidDevicePolicyVersionName :: !(Maybe Text)
-    , _siDeviceKernelVersion            :: !(Maybe Text)
+    , _siDeviceKernelVersion :: !(Maybe Text)
     , _siAndroidDevicePolicyVersionCode :: !(Maybe (Textual Int32))
-    , _siDeviceBuildSignature           :: !(Maybe Text)
-    , _siBootLoaderVersion              :: !(Maybe Text)
-    , _siAndroidBuildTime               :: !(Maybe DateTime')
-    , _siPrimaryLanguageCode            :: !(Maybe Text)
-    , _siAndroidBuildNumber             :: !(Maybe Text)
-    , _siAndroidVersion                 :: !(Maybe Text)
+    , _siDeviceBuildSignature :: !(Maybe Text)
+    , _siSystemUpdateInfo :: !(Maybe SystemUpdateInfo)
+    , _siBootLoaderVersion :: !(Maybe Text)
+    , _siAndroidBuildTime :: !(Maybe DateTime')
+    , _siPrimaryLanguageCode :: !(Maybe Text)
+    , _siAndroidBuildNumber :: !(Maybe Text)
+    , _siAndroidVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5951,6 +7666,8 @@ data SoftwareInfo =
 -- * 'siAndroidDevicePolicyVersionCode'
 --
 -- * 'siDeviceBuildSignature'
+--
+-- * 'siSystemUpdateInfo'
 --
 -- * 'siBootLoaderVersion'
 --
@@ -5970,6 +7687,7 @@ softwareInfo =
     , _siDeviceKernelVersion = Nothing
     , _siAndroidDevicePolicyVersionCode = Nothing
     , _siDeviceBuildSignature = Nothing
+    , _siSystemUpdateInfo = Nothing
     , _siBootLoaderVersion = Nothing
     , _siAndroidBuildTime = Nothing
     , _siPrimaryLanguageCode = Nothing
@@ -6011,6 +7729,12 @@ siDeviceBuildSignature :: Lens' SoftwareInfo (Maybe Text)
 siDeviceBuildSignature
   = lens _siDeviceBuildSignature
       (\ s a -> s{_siDeviceBuildSignature = a})
+
+-- | Information about a potential pending system update.
+siSystemUpdateInfo :: Lens' SoftwareInfo (Maybe SystemUpdateInfo)
+siSystemUpdateInfo
+  = lens _siSystemUpdateInfo
+      (\ s a -> s{_siSystemUpdateInfo = a})
 
 -- | The system bootloader version number, e.g. 0.6.7.
 siBootLoaderVersion :: Lens' SoftwareInfo (Maybe Text)
@@ -6054,6 +7778,7 @@ instance FromJSON SoftwareInfo where
                      <*> (o .:? "deviceKernelVersion")
                      <*> (o .:? "androidDevicePolicyVersionCode")
                      <*> (o .:? "deviceBuildSignature")
+                     <*> (o .:? "systemUpdateInfo")
                      <*> (o .:? "bootloaderVersion")
                      <*> (o .:? "androidBuildTime")
                      <*> (o .:? "primaryLanguageCode")
@@ -6073,6 +7798,7 @@ instance ToJSON SoftwareInfo where
                     _siAndroidDevicePolicyVersionCode,
                   ("deviceBuildSignature" .=) <$>
                     _siDeviceBuildSignature,
+                  ("systemUpdateInfo" .=) <$> _siSystemUpdateInfo,
                   ("bootloaderVersion" .=) <$> _siBootLoaderVersion,
                   ("androidBuildTime" .=) <$> _siAndroidBuildTime,
                   ("primaryLanguageCode" .=) <$>
@@ -6126,8 +7852,8 @@ instance ToJSON ApplicationReportingSettings where
 -- /See:/ 'applicationPermission' smart constructor.
 data ApplicationPermission =
   ApplicationPermission'
-    { _apName         :: !(Maybe Text)
-    , _apDescription  :: !(Maybe Text)
+    { _apName :: !(Maybe Text)
+    , _apDescription :: !(Maybe Text)
     , _apPermissionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6187,8 +7913,8 @@ instance ToJSON ApplicationPermission where
 -- /See:/ 'setupAction' smart constructor.
 data SetupAction =
   SetupAction'
-    { _saLaunchApp   :: !(Maybe LaunchAppAction)
-    , _saTitle       :: !(Maybe UserFacingMessage)
+    { _saLaunchApp :: !(Maybe LaunchAppAction)
+    , _saTitle :: !(Maybe UserFacingMessage)
     , _saDescription :: !(Maybe UserFacingMessage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6247,11 +7973,11 @@ instance ToJSON SetupAction where
 data WebApp =
   WebApp'
     { _waVersionCode :: !(Maybe (Textual Int64))
-    , _waIcons       :: !(Maybe [WebAppIcon])
-    , _waStartURL    :: !(Maybe Text)
+    , _waIcons :: !(Maybe [WebAppIcon])
+    , _waStartURL :: !(Maybe Text)
     , _waDisplayMode :: !(Maybe WebAppDisplayMode)
-    , _waName        :: !(Maybe Text)
-    , _waTitle       :: !(Maybe Text)
+    , _waName :: !(Maybe Text)
+    , _waTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6284,11 +8010,9 @@ webApp =
     }
 
 
--- | The current version of the app.
---
--- Note that the version can automatically increase during the lifetime of
--- the web app, while Google does internal housekeeping to keep the web app
--- up-to-date.
+-- | The current version of the app.Note that the version can automatically
+-- increase during the lifetime of the web app, while Google does internal
+-- housekeeping to keep the web app up-to-date.
 waVersionCode :: Lens' WebApp (Maybe Int64)
 waVersionCode
   = lens _waVersionCode

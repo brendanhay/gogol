@@ -22,10 +22,9 @@
 --
 -- Creates a model which will later contain one or more versions. You must
 -- add at least one version before you can request predictions from the
--- model. Add versions by calling
--- [projects.models.versions.create](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/create).
+-- model. Add versions by calling projects.models.versions.create.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.create@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.create@.
 module Network.Google.Resource.Ml.Projects.Models.Create
     (
     -- * REST Resource
@@ -45,8 +44,8 @@ module Network.Google.Resource.Ml.Projects.Models.Create
     , pmcCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.create@ method which the
 -- 'ProjectsModelsCreate' request conforms to.
@@ -65,19 +64,18 @@ type ProjectsModelsCreateResource =
 
 -- | Creates a model which will later contain one or more versions. You must
 -- add at least one version before you can request predictions from the
--- model. Add versions by calling
--- [projects.models.versions.create](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/create).
+-- model. Add versions by calling projects.models.versions.create.
 --
 -- /See:/ 'projectsModelsCreate' smart constructor.
 data ProjectsModelsCreate =
   ProjectsModelsCreate'
-    { _pmcParent         :: !Text
-    , _pmcXgafv          :: !(Maybe Xgafv)
+    { _pmcParent :: !Text
+    , _pmcXgafv :: !(Maybe Xgafv)
     , _pmcUploadProtocol :: !(Maybe Text)
-    , _pmcAccessToken    :: !(Maybe Text)
-    , _pmcUploadType     :: !(Maybe Text)
-    , _pmcPayload        :: !GoogleCloudMlV1__Model
-    , _pmcCallback       :: !(Maybe Text)
+    , _pmcAccessToken :: !(Maybe Text)
+    , _pmcUploadType :: !(Maybe Text)
+    , _pmcPayload :: !GoogleCloudMlV1__Model
+    , _pmcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

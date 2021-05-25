@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a datasource.
+-- Gets a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.get@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.datasources.get@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Get
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.Datasources.Get
     , sdgCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.datasources.get@ method which the
 -- 'SettingsDatasourcesGet' request conforms to.
@@ -59,18 +60,19 @@ type SettingsDatasourcesGetResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
--- | Gets a datasource.
+-- | Gets a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
 -- /See:/ 'settingsDatasourcesGet' smart constructor.
 data SettingsDatasourcesGet =
   SettingsDatasourcesGet'
-    { _sdgXgafv                       :: !(Maybe Xgafv)
-    , _sdgUploadProtocol              :: !(Maybe Text)
-    , _sdgAccessToken                 :: !(Maybe Text)
-    , _sdgUploadType                  :: !(Maybe Text)
-    , _sdgName                        :: !Text
+    { _sdgXgafv :: !(Maybe Xgafv)
+    , _sdgUploadProtocol :: !(Maybe Text)
+    , _sdgAccessToken :: !(Maybe Text)
+    , _sdgUploadType :: !(Maybe Text)
+    , _sdgName :: !Text
     , _sdgDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _sdgCallback                    :: !(Maybe Text)
+    , _sdgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

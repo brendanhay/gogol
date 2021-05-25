@@ -45,8 +45,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Str
     , pidssrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.streamingRead@ method which the
 -- 'ProjectsInstancesDatabasesSessionsStreamingRead' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsInstancesDatabasesSessionsStreamingReadResource
 -- /See:/ 'projectsInstancesDatabasesSessionsStreamingRead' smart constructor.
 data ProjectsInstancesDatabasesSessionsStreamingRead =
   ProjectsInstancesDatabasesSessionsStreamingRead'
-    { _pidssrXgafv          :: !(Maybe Xgafv)
+    { _pidssrXgafv :: !(Maybe Xgafv)
     , _pidssrUploadProtocol :: !(Maybe Text)
-    , _pidssrAccessToken    :: !(Maybe Text)
-    , _pidssrUploadType     :: !(Maybe Text)
-    , _pidssrPayload        :: !ReadRequest
-    , _pidssrSession        :: !Text
-    , _pidssrCallback       :: !(Maybe Text)
+    , _pidssrAccessToken :: !(Maybe Text)
+    , _pidssrUploadType :: !(Maybe Text)
+    , _pidssrPayload :: !ReadRequest
+    , _pidssrSession :: !Text
+    , _pidssrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

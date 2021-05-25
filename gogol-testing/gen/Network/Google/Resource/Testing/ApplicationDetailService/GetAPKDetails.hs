@@ -41,8 +41,8 @@ module Network.Google.Resource.Testing.ApplicationDetailService.GetAPKDetails
     , adsgapkdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types
+import Network.Google.Prelude
+import Network.Google.Testing.Types
 
 -- | A resource alias for @testing.applicationDetailService.getApkDetails@ method which the
 -- 'ApplicationDetailServiceGetAPKDetails' request conforms to.
@@ -64,12 +64,12 @@ type ApplicationDetailServiceGetAPKDetailsResource =
 -- /See:/ 'applicationDetailServiceGetAPKDetails' smart constructor.
 data ApplicationDetailServiceGetAPKDetails =
   ApplicationDetailServiceGetAPKDetails'
-    { _adsgapkdXgafv          :: !(Maybe Xgafv)
+    { _adsgapkdXgafv :: !(Maybe Xgafv)
     , _adsgapkdUploadProtocol :: !(Maybe Text)
-    , _adsgapkdAccessToken    :: !(Maybe Text)
-    , _adsgapkdUploadType     :: !(Maybe Text)
-    , _adsgapkdPayload        :: !FileReference
-    , _adsgapkdCallback       :: !(Maybe Text)
+    , _adsgapkdAccessToken :: !(Maybe Text)
+    , _adsgapkdUploadType :: !(Maybe Text)
+    , _adsgapkdPayload :: !FileReference
+    , _adsgapkdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

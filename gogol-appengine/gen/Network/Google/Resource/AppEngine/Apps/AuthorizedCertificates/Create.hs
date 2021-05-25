@@ -42,8 +42,8 @@ module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Create
     , aaccCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.create@ method which the
 -- 'AppsAuthorizedCertificatesCreate' request conforms to.
@@ -66,13 +66,13 @@ type AppsAuthorizedCertificatesCreateResource =
 -- /See:/ 'appsAuthorizedCertificatesCreate' smart constructor.
 data AppsAuthorizedCertificatesCreate =
   AppsAuthorizedCertificatesCreate'
-    { _aaccXgafv          :: !(Maybe Xgafv)
+    { _aaccXgafv :: !(Maybe Xgafv)
     , _aaccUploadProtocol :: !(Maybe Text)
-    , _aaccAccessToken    :: !(Maybe Text)
-    , _aaccUploadType     :: !(Maybe Text)
-    , _aaccPayload        :: !AuthorizedCertificate
-    , _aaccAppsId         :: !Text
-    , _aaccCallback       :: !(Maybe Text)
+    , _aaccAccessToken :: !(Maybe Text)
+    , _aaccUploadType :: !(Maybe Text)
+    , _aaccPayload :: !AuthorizedCertificate
+    , _aaccAppsId :: !Text
+    , _aaccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

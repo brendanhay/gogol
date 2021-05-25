@@ -40,13 +40,18 @@ module Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
     , ProductsGenerateApprovalURL
 
     -- * Request Lenses
+    , pgauXgafv
     , pgauLanguageCode
+    , pgauUploadProtocol
     , pgauEnterpriseId
+    , pgauAccessToken
+    , pgauUploadType
     , pgauProductId
+    , pgauCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.generateApprovalUrl@ method which the
 -- 'ProductsGenerateApprovalURL' request conforms to.
@@ -58,9 +63,15 @@ type ProductsGenerateApprovalURLResource =
              "products" :>
                Capture "productId" Text :>
                  "generateApprovalUrl" :>
-                   QueryParam "languageCode" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] ProductsGenerateApprovalURLResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "languageCode" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Post '[JSON]
+                                   ProductsGenerateApprovalURLResponse
 
 -- | Generates a URL that can be rendered in an iframe to display the
 -- permissions (if any) of a product. An enterprise admin must view these
@@ -74,9 +85,14 @@ type ProductsGenerateApprovalURLResource =
 -- /See:/ 'productsGenerateApprovalURL' smart constructor.
 data ProductsGenerateApprovalURL =
   ProductsGenerateApprovalURL'
-    { _pgauLanguageCode :: !(Maybe Text)
+    { _pgauXgafv :: !(Maybe Xgafv)
+    , _pgauLanguageCode :: !(Maybe Text)
+    , _pgauUploadProtocol :: !(Maybe Text)
     , _pgauEnterpriseId :: !Text
-    , _pgauProductId    :: !Text
+    , _pgauAccessToken :: !(Maybe Text)
+    , _pgauUploadType :: !(Maybe Text)
+    , _pgauProductId :: !Text
+    , _pgauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,22 +101,42 @@ data ProductsGenerateApprovalURL =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pgauXgafv'
+--
 -- * 'pgauLanguageCode'
+--
+-- * 'pgauUploadProtocol'
 --
 -- * 'pgauEnterpriseId'
 --
+-- * 'pgauAccessToken'
+--
+-- * 'pgauUploadType'
+--
 -- * 'pgauProductId'
+--
+-- * 'pgauCallback'
 productsGenerateApprovalURL
     :: Text -- ^ 'pgauEnterpriseId'
     -> Text -- ^ 'pgauProductId'
     -> ProductsGenerateApprovalURL
 productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
   ProductsGenerateApprovalURL'
-    { _pgauLanguageCode = Nothing
+    { _pgauXgafv = Nothing
+    , _pgauLanguageCode = Nothing
+    , _pgauUploadProtocol = Nothing
     , _pgauEnterpriseId = pPgauEnterpriseId_
+    , _pgauAccessToken = Nothing
+    , _pgauUploadType = Nothing
     , _pgauProductId = pPgauProductId_
+    , _pgauCallback = Nothing
     }
 
+
+-- | V1 error format.
+pgauXgafv :: Lens' ProductsGenerateApprovalURL (Maybe Xgafv)
+pgauXgafv
+  = lens _pgauXgafv (\ s a -> s{_pgauXgafv = a})
 
 -- | The BCP 47 language code used for permission names and descriptions in
 -- the returned iframe, for instance \"en-US\".
@@ -109,17 +145,40 @@ pgauLanguageCode
   = lens _pgauLanguageCode
       (\ s a -> s{_pgauLanguageCode = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pgauUploadProtocol :: Lens' ProductsGenerateApprovalURL (Maybe Text)
+pgauUploadProtocol
+  = lens _pgauUploadProtocol
+      (\ s a -> s{_pgauUploadProtocol = a})
+
 -- | The ID of the enterprise.
 pgauEnterpriseId :: Lens' ProductsGenerateApprovalURL Text
 pgauEnterpriseId
   = lens _pgauEnterpriseId
       (\ s a -> s{_pgauEnterpriseId = a})
 
+-- | OAuth access token.
+pgauAccessToken :: Lens' ProductsGenerateApprovalURL (Maybe Text)
+pgauAccessToken
+  = lens _pgauAccessToken
+      (\ s a -> s{_pgauAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pgauUploadType :: Lens' ProductsGenerateApprovalURL (Maybe Text)
+pgauUploadType
+  = lens _pgauUploadType
+      (\ s a -> s{_pgauUploadType = a})
+
 -- | The ID of the product.
 pgauProductId :: Lens' ProductsGenerateApprovalURL Text
 pgauProductId
   = lens _pgauProductId
       (\ s a -> s{_pgauProductId = a})
+
+-- | JSONP
+pgauCallback :: Lens' ProductsGenerateApprovalURL (Maybe Text)
+pgauCallback
+  = lens _pgauCallback (\ s a -> s{_pgauCallback = a})
 
 instance GoogleRequest ProductsGenerateApprovalURL
          where
@@ -128,8 +187,12 @@ instance GoogleRequest ProductsGenerateApprovalURL
         type Scopes ProductsGenerateApprovalURL =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGenerateApprovalURL'{..}
-          = go _pgauEnterpriseId _pgauProductId
+          = go _pgauEnterpriseId _pgauProductId _pgauXgafv
               _pgauLanguageCode
+              _pgauUploadProtocol
+              _pgauAccessToken
+              _pgauUploadType
+              _pgauCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

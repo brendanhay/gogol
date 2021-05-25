@@ -42,8 +42,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Creat
     , prwtcCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.create@ method which the
 -- 'ProjectsRegionsWorkflowTemplatesCreate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsRegionsWorkflowTemplatesCreateResource =
 -- /See:/ 'projectsRegionsWorkflowTemplatesCreate' smart constructor.
 data ProjectsRegionsWorkflowTemplatesCreate =
   ProjectsRegionsWorkflowTemplatesCreate'
-    { _prwtcParent         :: !Text
-    , _prwtcXgafv          :: !(Maybe Xgafv)
+    { _prwtcParent :: !Text
+    , _prwtcXgafv :: !(Maybe Xgafv)
     , _prwtcUploadProtocol :: !(Maybe Text)
-    , _prwtcAccessToken    :: !(Maybe Text)
-    , _prwtcUploadType     :: !(Maybe Text)
-    , _prwtcPayload        :: !WorkflowTemplate
-    , _prwtcCallback       :: !(Maybe Text)
+    , _prwtcAccessToken :: !(Maybe Text)
+    , _prwtcUploadType :: !(Maybe Text)
+    , _prwtcPayload :: !WorkflowTemplate
+    , _prwtcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,9 +109,14 @@ projectsRegionsWorkflowTemplatesCreate pPrwtcParent_ pPrwtcPayload_ =
     }
 
 
--- | Required. The \"resource name\" of the region, as described in
--- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
--- projects\/{project_id}\/regions\/{region}
+-- | Required. The resource name of the region or location, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates,create, the resource name of the
+-- region has the following format:
+-- projects\/{project_id}\/regions\/{region} For
+-- projects.locations.workflowTemplates.create, the resource name of the
+-- location has the following format:
+-- projects\/{project_id}\/locations\/{location}
 prwtcParent :: Lens' ProjectsRegionsWorkflowTemplatesCreate Text
 prwtcParent
   = lens _prwtcParent (\ s a -> s{_prwtcParent = a})

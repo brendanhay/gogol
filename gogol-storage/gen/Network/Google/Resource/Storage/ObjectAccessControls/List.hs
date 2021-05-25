@@ -36,11 +36,12 @@ module Network.Google.Resource.Storage.ObjectAccessControls.List
     , oaclBucket
     , oaclUserProject
     , oaclObject
+    , oaclProvisionalUserProject
     , oaclGeneration
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.list@ method which the
 -- 'ObjectAccessControlsList' request conforms to.
@@ -53,19 +54,21 @@ type ObjectAccessControlsListResource =
                Capture "object" Text :>
                  "acl" :>
                    QueryParam "userProject" Text :>
-                     QueryParam "generation" (Textual Int64) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ObjectAccessControls
+                     QueryParam "provisionalUserProject" Text :>
+                       QueryParam "generation" (Textual Int64) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ObjectAccessControls
 
 -- | Retrieves ACL entries on the specified object.
 --
 -- /See:/ 'objectAccessControlsList' smart constructor.
 data ObjectAccessControlsList =
   ObjectAccessControlsList'
-    { _oaclBucket      :: !Text
+    { _oaclBucket :: !Text
     , _oaclUserProject :: !(Maybe Text)
-    , _oaclObject      :: !Text
-    , _oaclGeneration  :: !(Maybe (Textual Int64))
+    , _oaclObject :: !Text
+    , _oaclProvisionalUserProject :: !(Maybe Text)
+    , _oaclGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,6 +83,8 @@ data ObjectAccessControlsList =
 --
 -- * 'oaclObject'
 --
+-- * 'oaclProvisionalUserProject'
+--
 -- * 'oaclGeneration'
 objectAccessControlsList
     :: Text -- ^ 'oaclBucket'
@@ -90,6 +95,7 @@ objectAccessControlsList pOaclBucket_ pOaclObject_ =
     { _oaclBucket = pOaclBucket_
     , _oaclUserProject = Nothing
     , _oaclObject = pOaclObject_
+    , _oaclProvisionalUserProject = Nothing
     , _oaclGeneration = Nothing
     }
 
@@ -112,6 +118,13 @@ oaclObject :: Lens' ObjectAccessControlsList Text
 oaclObject
   = lens _oaclObject (\ s a -> s{_oaclObject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+oaclProvisionalUserProject :: Lens' ObjectAccessControlsList (Maybe Text)
+oaclProvisionalUserProject
+  = lens _oaclProvisionalUserProject
+      (\ s a -> s{_oaclProvisionalUserProject = a})
+
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
 oaclGeneration :: Lens' ObjectAccessControlsList (Maybe Int64)
@@ -128,6 +141,7 @@ instance GoogleRequest ObjectAccessControlsList where
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsList'{..}
           = go _oaclBucket _oaclObject _oaclUserProject
+              _oaclProvisionalUserProject
               _oaclGeneration
               (Just AltJSON)
               storageService

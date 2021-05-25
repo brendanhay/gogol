@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update membership of a user in the specified group.
+-- Updates the membership of a user in the specified group.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.update@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.members.update@.
 module Network.Google.Resource.Directory.Members.Update
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Directory.Members.Update
     , MembersUpdate
 
     -- * Request Lenses
+    , muXgafv
     , muMemberKey
+    , muUploadProtocol
+    , muAccessToken
     , muGroupKey
+    , muUploadType
     , muPayload
+    , muCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.members.update@ method which the
 -- 'MembersUpdate' request conforms to.
@@ -51,17 +56,27 @@ type MembersUpdateResource =
              Capture "groupKey" Text :>
                "members" :>
                  Capture "memberKey" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Member :> Put '[JSON] Member
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Member :> Put '[JSON] Member
 
--- | Update membership of a user in the specified group.
+-- | Updates the membership of a user in the specified group.
 --
 -- /See:/ 'membersUpdate' smart constructor.
 data MembersUpdate =
   MembersUpdate'
-    { _muMemberKey :: !Text
-    , _muGroupKey  :: !Text
-    , _muPayload   :: !Member
+    { _muXgafv :: !(Maybe Xgafv)
+    , _muMemberKey :: !Text
+    , _muUploadProtocol :: !(Maybe Text)
+    , _muAccessToken :: !(Maybe Text)
+    , _muGroupKey :: !Text
+    , _muUploadType :: !(Maybe Text)
+    , _muPayload :: !Member
+    , _muCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +85,21 @@ data MembersUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'muXgafv'
+--
 -- * 'muMemberKey'
+--
+-- * 'muUploadProtocol'
+--
+-- * 'muAccessToken'
 --
 -- * 'muGroupKey'
 --
+-- * 'muUploadType'
+--
 -- * 'muPayload'
+--
+-- * 'muCallback'
 membersUpdate
     :: Text -- ^ 'muMemberKey'
     -> Text -- ^ 'muGroupKey'
@@ -82,28 +107,60 @@ membersUpdate
     -> MembersUpdate
 membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
   MembersUpdate'
-    { _muMemberKey = pMuMemberKey_
+    { _muXgafv = Nothing
+    , _muMemberKey = pMuMemberKey_
+    , _muUploadProtocol = Nothing
+    , _muAccessToken = Nothing
     , _muGroupKey = pMuGroupKey_
+    , _muUploadType = Nothing
     , _muPayload = pMuPayload_
+    , _muCallback = Nothing
     }
 
 
--- | Email or immutable ID of the user. If ID, it should match with id of
--- member object
+-- | V1 error format.
+muXgafv :: Lens' MembersUpdate (Maybe Xgafv)
+muXgafv = lens _muXgafv (\ s a -> s{_muXgafv = a})
+
+-- | Identifies the group member in the API request. A group member can be a
+-- user or another group. The value can be the member\'s (group or user)
+-- primary email address, alias, or unique ID.
 muMemberKey :: Lens' MembersUpdate Text
 muMemberKey
   = lens _muMemberKey (\ s a -> s{_muMemberKey = a})
 
--- | Email or immutable ID of the group. If ID, it should match with id of
--- group object
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+muUploadProtocol :: Lens' MembersUpdate (Maybe Text)
+muUploadProtocol
+  = lens _muUploadProtocol
+      (\ s a -> s{_muUploadProtocol = a})
+
+-- | OAuth access token.
+muAccessToken :: Lens' MembersUpdate (Maybe Text)
+muAccessToken
+  = lens _muAccessToken
+      (\ s a -> s{_muAccessToken = a})
+
+-- | Identifies the group in the API request. The value can be the group\'s
+-- email address, group alias, or the unique group ID.
 muGroupKey :: Lens' MembersUpdate Text
 muGroupKey
   = lens _muGroupKey (\ s a -> s{_muGroupKey = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+muUploadType :: Lens' MembersUpdate (Maybe Text)
+muUploadType
+  = lens _muUploadType (\ s a -> s{_muUploadType = a})
 
 -- | Multipart request metadata.
 muPayload :: Lens' MembersUpdate Member
 muPayload
   = lens _muPayload (\ s a -> s{_muPayload = a})
+
+-- | JSONP
+muCallback :: Lens' MembersUpdate (Maybe Text)
+muCallback
+  = lens _muCallback (\ s a -> s{_muCallback = a})
 
 instance GoogleRequest MembersUpdate where
         type Rs MembersUpdate = Member
@@ -111,7 +168,12 @@ instance GoogleRequest MembersUpdate where
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.member"]
         requestClient MembersUpdate'{..}
-          = go _muGroupKey _muMemberKey (Just AltJSON)
+          = go _muGroupKey _muMemberKey _muXgafv
+              _muUploadProtocol
+              _muAccessToken
+              _muUploadType
+              _muCallback
+              (Just AltJSON)
               _muPayload
               directoryService
           where go

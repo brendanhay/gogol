@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Subnetworks.SetPrivateIPGoogleAccess
     , sspigaRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.setPrivateIpGoogleAccess@ method which the
 -- 'SubnetworksSetPrivateIPGoogleAccess' request conforms to.
@@ -68,11 +68,11 @@ type SubnetworksSetPrivateIPGoogleAccessResource =
 -- /See:/ 'subnetworksSetPrivateIPGoogleAccess' smart constructor.
 data SubnetworksSetPrivateIPGoogleAccess =
   SubnetworksSetPrivateIPGoogleAccess'
-    { _sspigaRequestId  :: !(Maybe Text)
-    , _sspigaProject    :: !Text
-    , _sspigaPayload    :: !SubnetworksSetPrivateIPGoogleAccessRequest
+    { _sspigaRequestId :: !(Maybe Text)
+    , _sspigaProject :: !Text
+    , _sspigaPayload :: !SubnetworksSetPrivateIPGoogleAccessRequest
     , _sspigaSubnetwork :: !Text
-    , _sspigaRegion     :: !Text
+    , _sspigaRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

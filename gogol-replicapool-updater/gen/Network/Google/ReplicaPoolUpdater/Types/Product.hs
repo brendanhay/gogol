@@ -17,15 +17,15 @@
 --
 module Network.Google.ReplicaPoolUpdater.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types.Sum
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
 data OperationWarningsItemDataItem =
   OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
-    , _owidiKey   :: !(Maybe Text)
+    , _owidiKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,22 +72,22 @@ instance ToJSON OperationWarningsItemDataItem where
 -- /See:/ 'rollingUpdate' smart constructor.
 data RollingUpdate =
   RollingUpdate'
-    { _ruStatus               :: !(Maybe Text)
-    , _ruProgress             :: !(Maybe (Textual Int32))
+    { _ruStatus :: !(Maybe Text)
+    , _ruProgress :: !(Maybe (Textual Int32))
     , _ruInstanceGroupManager :: !(Maybe Text)
-    , _ruKind                 :: !Text
-    , _ruError                :: !(Maybe RollingUpdateError)
-    , _ruInstanceTemplate     :: !(Maybe Text)
-    , _ruUser                 :: !(Maybe Text)
-    , _ruSelfLink             :: !(Maybe Text)
-    , _ruStatusMessage        :: !(Maybe Text)
-    , _ruCreationTimestamp    :: !(Maybe Text)
-    , _ruId                   :: !(Maybe Text)
-    , _ruPolicy               :: !(Maybe RollingUpdatePolicy)
-    , _ruActionType           :: !(Maybe Text)
-    , _ruOldInstanceTemplate  :: !(Maybe Text)
-    , _ruDescription          :: !(Maybe Text)
-    , _ruInstanceGroup        :: !(Maybe Text)
+    , _ruKind :: !Text
+    , _ruError :: !(Maybe RollingUpdateError)
+    , _ruInstanceTemplate :: !(Maybe Text)
+    , _ruUser :: !(Maybe Text)
+    , _ruSelfLink :: !(Maybe Text)
+    , _ruStatusMessage :: !(Maybe Text)
+    , _ruCreationTimestamp :: !(Maybe Text)
+    , _ruId :: !(Maybe Text)
+    , _ruPolicy :: !(Maybe RollingUpdatePolicy)
+    , _ruActionType :: !(Maybe Text)
+    , _ruOldInstanceTemplate :: !(Maybe Text)
+    , _ruDescription :: !(Maybe Text)
+    , _ruInstanceGroup :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -340,10 +340,10 @@ instance ToJSON RollingUpdateError where
 data OperationList =
   OperationList'
     { _olNextPageToken :: !(Maybe Text)
-    , _olKind          :: !Text
-    , _olItems         :: !(Maybe [Operation])
-    , _olSelfLink      :: !(Maybe Text)
-    , _olId            :: !(Maybe Text)
+    , _olKind :: !Text
+    , _olItems :: !(Maybe [Operation])
+    , _olSelfLink :: !(Maybe Text)
+    , _olId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -425,9 +425,9 @@ instance ToJSON OperationList where
 data InstanceUpdateList =
   InstanceUpdateList'
     { _iulNextPageToken :: !(Maybe Text)
-    , _iulKind          :: !Text
-    , _iulItems         :: !(Maybe [InstanceUpdate])
-    , _iulSelfLink      :: !(Maybe Text)
+    , _iulKind :: !Text
+    , _iulItems :: !(Maybe [InstanceUpdate])
+    , _iulSelfLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -501,8 +501,8 @@ instance ToJSON InstanceUpdateList where
 data RollingUpdateErrorErrorsItem =
   RollingUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
-    , _rueeiCode     :: !(Maybe Text)
-    , _rueeiMessage  :: !(Maybe Text)
+    , _rueeiCode :: !(Maybe Text)
+    , _rueeiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -561,28 +561,28 @@ instance ToJSON RollingUpdateErrorErrorsItem where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oTargetId            :: !(Maybe (Textual Word64))
-    , _oStatus              :: !(Maybe Text)
-    , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (Textual Int32))
-    , _oStartTime           :: !(Maybe Text)
-    , _oKind                :: !Text
-    , _oError               :: !(Maybe OperationError)
-    , _oHTTPErrorMessage    :: !(Maybe Text)
-    , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [OperationWarningsItem])
+    { _oTargetId :: !(Maybe (Textual Word64))
+    , _oStatus :: !(Maybe Text)
+    , _oInsertTime :: !(Maybe Text)
+    , _oProgress :: !(Maybe (Textual Int32))
+    , _oStartTime :: !(Maybe Text)
+    , _oKind :: !Text
+    , _oError :: !(Maybe OperationError)
+    , _oHTTPErrorMessage :: !(Maybe Text)
+    , _oZone :: !(Maybe Text)
+    , _oWarnings :: !(Maybe [OperationWarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
-    , _oUser                :: !(Maybe Text)
-    , _oSelfLink            :: !(Maybe Text)
-    , _oName                :: !(Maybe Text)
-    , _oStatusMessage       :: !(Maybe Text)
-    , _oCreationTimestamp   :: !(Maybe Text)
-    , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (Textual Word64))
-    , _oOperationType       :: !(Maybe Text)
-    , _oRegion              :: !(Maybe Text)
-    , _oTargetLink          :: !(Maybe Text)
-    , _oClientOperationId   :: !(Maybe Text)
+    , _oUser :: !(Maybe Text)
+    , _oSelfLink :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
+    , _oStatusMessage :: !(Maybe Text)
+    , _oCreationTimestamp :: !(Maybe Text)
+    , _oEndTime :: !(Maybe Text)
+    , _oId :: !(Maybe (Textual Word64))
+    , _oOperationType :: !(Maybe Text)
+    , _oRegion :: !(Maybe Text)
+    , _oTargetLink :: !(Maybe Text)
+    , _oClientOperationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -832,8 +832,8 @@ instance ToJSON Operation where
 -- /See:/ 'instanceUpdate' smart constructor.
 data InstanceUpdate =
   InstanceUpdate'
-    { _iuStatus   :: !(Maybe Text)
-    , _iuError    :: !(Maybe InstanceUpdateError)
+    { _iuStatus :: !(Maybe Text)
+    , _iuError :: !(Maybe InstanceUpdateError)
     , _iuInstance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -936,10 +936,10 @@ instance ToJSON InstanceUpdateError where
 -- /See:/ 'rollingUpdatePolicy' smart constructor.
 data RollingUpdatePolicy =
   RollingUpdatePolicy'
-    { _rupMinInstanceUpdateTimeSec  :: !(Maybe (Textual Int32))
+    { _rupMinInstanceUpdateTimeSec :: !(Maybe (Textual Int32))
     , _rupInstanceStartupTimeoutSec :: !(Maybe (Textual Int32))
-    , _rupMaxNumFailedInstances     :: !(Maybe (Textual Int32))
-    , _rupAutoPauseAfterInstances   :: !(Maybe (Textual Int32))
+    , _rupMaxNumFailedInstances :: !(Maybe (Textual Int32))
+    , _rupAutoPauseAfterInstances :: !(Maybe (Textual Int32))
     , _rupMaxNumConcurrentInstances :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1090,8 +1090,8 @@ instance ToJSON OperationError where
 data OperationErrorErrorsItem =
   OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
-    , _oeeiCode     :: !(Maybe Text)
-    , _oeeiMessage  :: !(Maybe Text)
+    , _oeeiCode :: !(Maybe Text)
+    , _oeeiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1148,8 +1148,8 @@ instance ToJSON OperationErrorErrorsItem where
 data InstanceUpdateErrorErrorsItem =
   InstanceUpdateErrorErrorsItem'
     { _iueeiLocation :: !(Maybe Text)
-    , _iueeiCode     :: !(Maybe Text)
-    , _iueeiMessage  :: !(Maybe Text)
+    , _iueeiCode :: !(Maybe Text)
+    , _iueeiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1209,9 +1209,9 @@ instance ToJSON InstanceUpdateErrorErrorsItem where
 data RollingUpdateList =
   RollingUpdateList'
     { _rulNextPageToken :: !(Maybe Text)
-    , _rulKind          :: !Text
-    , _rulItems         :: !(Maybe [RollingUpdate])
-    , _rulSelfLink      :: !(Maybe Text)
+    , _rulKind :: !Text
+    , _rulItems :: !(Maybe [RollingUpdate])
+    , _rulSelfLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1284,8 +1284,8 @@ instance ToJSON RollingUpdateList where
 -- /See:/ 'operationWarningsItem' smart constructor.
 data OperationWarningsItem =
   OperationWarningsItem'
-    { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
-    , _owiCode    :: !(Maybe Text)
+    { _owiData :: !(Maybe [OperationWarningsItemDataItem])
+    , _owiCode :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

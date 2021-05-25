@@ -22,7 +22,7 @@
 --
 -- Lists all the exclusions in a parent resource.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.exclusions.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.exclusions.list@.
 module Network.Google.Resource.Logging.Exclusions.List
     (
     -- * REST Resource
@@ -33,18 +33,18 @@ module Network.Google.Resource.Logging.Exclusions.List
     , ExclusionsList
 
     -- * Request Lenses
-    , eParent
-    , eXgafv
-    , eUploadProtocol
-    , eAccessToken
-    , eUploadType
-    , ePageToken
-    , ePageSize
-    , eCallback
+    , excParent
+    , excXgafv
+    , excUploadProtocol
+    , excAccessToken
+    , excUploadType
+    , excPageToken
+    , excPageSize
+    , excCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.exclusions.list@ method which the
 -- 'ExclusionsList' request conforms to.
@@ -67,14 +67,14 @@ type ExclusionsListResource =
 -- /See:/ 'exclusionsList' smart constructor.
 data ExclusionsList =
   ExclusionsList'
-    { _eParent         :: !Text
-    , _eXgafv          :: !(Maybe Xgafv)
-    , _eUploadProtocol :: !(Maybe Text)
-    , _eAccessToken    :: !(Maybe Text)
-    , _eUploadType     :: !(Maybe Text)
-    , _ePageToken      :: !(Maybe Text)
-    , _ePageSize       :: !(Maybe (Textual Int32))
-    , _eCallback       :: !(Maybe Text)
+    { _excParent :: !Text
+    , _excXgafv :: !(Maybe Xgafv)
+    , _excUploadProtocol :: !(Maybe Text)
+    , _excAccessToken :: !(Maybe Text)
+    , _excUploadType :: !(Maybe Text)
+    , _excPageToken :: !(Maybe Text)
+    , _excPageSize :: !(Maybe (Textual Int32))
+    , _excCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,83 +83,86 @@ data ExclusionsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eParent'
+-- * 'excParent'
 --
--- * 'eXgafv'
+-- * 'excXgafv'
 --
--- * 'eUploadProtocol'
+-- * 'excUploadProtocol'
 --
--- * 'eAccessToken'
+-- * 'excAccessToken'
 --
--- * 'eUploadType'
+-- * 'excUploadType'
 --
--- * 'ePageToken'
+-- * 'excPageToken'
 --
--- * 'ePageSize'
+-- * 'excPageSize'
 --
--- * 'eCallback'
+-- * 'excCallback'
 exclusionsList
-    :: Text -- ^ 'eParent'
+    :: Text -- ^ 'excParent'
     -> ExclusionsList
-exclusionsList pEParent_ =
+exclusionsList pExcParent_ =
   ExclusionsList'
-    { _eParent = pEParent_
-    , _eXgafv = Nothing
-    , _eUploadProtocol = Nothing
-    , _eAccessToken = Nothing
-    , _eUploadType = Nothing
-    , _ePageToken = Nothing
-    , _ePageSize = Nothing
-    , _eCallback = Nothing
+    { _excParent = pExcParent_
+    , _excXgafv = Nothing
+    , _excUploadProtocol = Nothing
+    , _excAccessToken = Nothing
+    , _excUploadType = Nothing
+    , _excPageToken = Nothing
+    , _excPageSize = Nothing
+    , _excCallback = Nothing
     }
 
 
 -- | Required. The parent resource whose exclusions are to be listed.
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
 -- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
-eParent :: Lens' ExclusionsList Text
-eParent = lens _eParent (\ s a -> s{_eParent = a})
+excParent :: Lens' ExclusionsList Text
+excParent
+  = lens _excParent (\ s a -> s{_excParent = a})
 
 -- | V1 error format.
-eXgafv :: Lens' ExclusionsList (Maybe Xgafv)
-eXgafv = lens _eXgafv (\ s a -> s{_eXgafv = a})
+excXgafv :: Lens' ExclusionsList (Maybe Xgafv)
+excXgafv = lens _excXgafv (\ s a -> s{_excXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-eUploadProtocol :: Lens' ExclusionsList (Maybe Text)
-eUploadProtocol
-  = lens _eUploadProtocol
-      (\ s a -> s{_eUploadProtocol = a})
+excUploadProtocol :: Lens' ExclusionsList (Maybe Text)
+excUploadProtocol
+  = lens _excUploadProtocol
+      (\ s a -> s{_excUploadProtocol = a})
 
 -- | OAuth access token.
-eAccessToken :: Lens' ExclusionsList (Maybe Text)
-eAccessToken
-  = lens _eAccessToken (\ s a -> s{_eAccessToken = a})
+excAccessToken :: Lens' ExclusionsList (Maybe Text)
+excAccessToken
+  = lens _excAccessToken
+      (\ s a -> s{_excAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-eUploadType :: Lens' ExclusionsList (Maybe Text)
-eUploadType
-  = lens _eUploadType (\ s a -> s{_eUploadType = a})
+excUploadType :: Lens' ExclusionsList (Maybe Text)
+excUploadType
+  = lens _excUploadType
+      (\ s a -> s{_excUploadType = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
 -- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
-ePageToken :: Lens' ExclusionsList (Maybe Text)
-ePageToken
-  = lens _ePageToken (\ s a -> s{_ePageToken = a})
+excPageToken :: Lens' ExclusionsList (Maybe Text)
+excPageToken
+  = lens _excPageToken (\ s a -> s{_excPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
 -- Non-positive values are ignored. The presence of nextPageToken in the
 -- response indicates that more results might be available.
-ePageSize :: Lens' ExclusionsList (Maybe Int32)
-ePageSize
-  = lens _ePageSize (\ s a -> s{_ePageSize = a}) .
+excPageSize :: Lens' ExclusionsList (Maybe Int32)
+excPageSize
+  = lens _excPageSize (\ s a -> s{_excPageSize = a}) .
       mapping _Coerce
 
 -- | JSONP
-eCallback :: Lens' ExclusionsList (Maybe Text)
-eCallback
-  = lens _eCallback (\ s a -> s{_eCallback = a})
+excCallback :: Lens' ExclusionsList (Maybe Text)
+excCallback
+  = lens _excCallback (\ s a -> s{_excCallback = a})
 
 instance GoogleRequest ExclusionsList where
         type Rs ExclusionsList = ListExclusionsResponse
@@ -169,11 +172,12 @@ instance GoogleRequest ExclusionsList where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ExclusionsList'{..}
-          = go _eParent _eXgafv _eUploadProtocol _eAccessToken
-              _eUploadType
-              _ePageToken
-              _ePageSize
-              _eCallback
+          = go _excParent _excXgafv _excUploadProtocol
+              _excAccessToken
+              _excUploadType
+              _excPageToken
+              _excPageSize
+              _excCallback
               (Just AltJSON)
               loggingService
           where go

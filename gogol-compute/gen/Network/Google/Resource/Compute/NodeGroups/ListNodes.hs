@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.NodeGroups.ListNodes
 
     -- * Request Lenses
     , nglnNodeGroup
+    , nglnReturnPartialSuccess
     , nglnOrderBy
     , nglnProject
     , nglnZone
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.NodeGroups.ListNodes
     , nglnMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.listNodes@ method which the
 -- 'NodeGroupsListNodes'' request conforms to.
@@ -57,24 +58,26 @@ type NodeGroupsListNodesResource =
                  "nodeGroups" :>
                    Capture "nodeGroup" Text :>
                      "listNodes" :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" (Textual Word32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Post '[JSON] NodeGroupsListNodes
+                       QueryParam "returnPartialSuccess" Bool :>
+                         QueryParam "orderBy" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "alt" AltJSON :>
+                                   Post '[JSON] NodeGroupsListNodes
 
 -- | Lists nodes in the node group.
 --
 -- /See:/ 'nodeGroupsListNodes'' smart constructor.
 data NodeGroupsListNodes' =
   NodeGroupsListNodes''
-    { _nglnNodeGroup  :: !Text
-    , _nglnOrderBy    :: !(Maybe Text)
-    , _nglnProject    :: !Text
-    , _nglnZone       :: !Text
-    , _nglnFilter     :: !(Maybe Text)
-    , _nglnPageToken  :: !(Maybe Text)
+    { _nglnNodeGroup :: !Text
+    , _nglnReturnPartialSuccess :: !(Maybe Bool)
+    , _nglnOrderBy :: !(Maybe Text)
+    , _nglnProject :: !Text
+    , _nglnZone :: !Text
+    , _nglnFilter :: !(Maybe Text)
+    , _nglnPageToken :: !(Maybe Text)
     , _nglnMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -85,6 +88,8 @@ data NodeGroupsListNodes' =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'nglnNodeGroup'
+--
+-- * 'nglnReturnPartialSuccess'
 --
 -- * 'nglnOrderBy'
 --
@@ -105,6 +110,7 @@ nodeGroupsListNodes'
 nodeGroupsListNodes' pNglnNodeGroup_ pNglnProject_ pNglnZone_ =
   NodeGroupsListNodes''
     { _nglnNodeGroup = pNglnNodeGroup_
+    , _nglnReturnPartialSuccess = Nothing
     , _nglnOrderBy = Nothing
     , _nglnProject = pNglnProject_
     , _nglnZone = pNglnZone_
@@ -120,14 +126,21 @@ nglnNodeGroup
   = lens _nglnNodeGroup
       (\ s a -> s{_nglnNodeGroup = a})
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+nglnReturnPartialSuccess :: Lens' NodeGroupsListNodes' (Maybe Bool)
+nglnReturnPartialSuccess
+  = lens _nglnReturnPartialSuccess
+      (\ s a -> s{_nglnReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 nglnOrderBy :: Lens' NodeGroupsListNodes' (Maybe Text)
 nglnOrderBy
   = lens _nglnOrderBy (\ s a -> s{_nglnOrderBy = a})
@@ -144,35 +157,37 @@ nglnZone = lens _nglnZone (\ s a -> s{_nglnZone = a})
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 nglnFilter :: Lens' NodeGroupsListNodes' (Maybe Text)
 nglnFilter
   = lens _nglnFilter (\ s a -> s{_nglnFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 nglnPageToken :: Lens' NodeGroupsListNodes' (Maybe Text)
 nglnPageToken
   = lens _nglnPageToken
       (\ s a -> s{_nglnPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 nglnMaxResults :: Lens' NodeGroupsListNodes' Word32
 nglnMaxResults
   = lens _nglnMaxResults
@@ -187,6 +202,7 @@ instance GoogleRequest NodeGroupsListNodes' where
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NodeGroupsListNodes''{..}
           = go _nglnProject _nglnZone _nglnNodeGroup
+              _nglnReturnPartialSuccess
               _nglnOrderBy
               _nglnFilter
               _nglnPageToken

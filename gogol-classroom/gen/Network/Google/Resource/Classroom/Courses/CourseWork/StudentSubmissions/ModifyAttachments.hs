@@ -55,8 +55,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.M
     , ccwssmaCourseWorkId
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.modifyAttachments@ method which the
 -- 'CoursesCourseWorkStudentSubmissionsModifyAttachments' request conforms to.
@@ -94,15 +94,15 @@ type CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
 -- /See:/ 'coursesCourseWorkStudentSubmissionsModifyAttachments' smart constructor.
 data CoursesCourseWorkStudentSubmissionsModifyAttachments =
   CoursesCourseWorkStudentSubmissionsModifyAttachments'
-    { _ccwssmaXgafv          :: !(Maybe Xgafv)
+    { _ccwssmaXgafv :: !(Maybe Xgafv)
     , _ccwssmaUploadProtocol :: !(Maybe Text)
-    , _ccwssmaCourseId       :: !Text
-    , _ccwssmaAccessToken    :: !(Maybe Text)
-    , _ccwssmaUploadType     :: !(Maybe Text)
-    , _ccwssmaPayload        :: !ModifyAttachmentsRequest
-    , _ccwssmaId             :: !Text
-    , _ccwssmaCallback       :: !(Maybe Text)
-    , _ccwssmaCourseWorkId   :: !Text
+    , _ccwssmaCourseId :: !Text
+    , _ccwssmaAccessToken :: !(Maybe Text)
+    , _ccwssmaUploadType :: !(Maybe Text)
+    , _ccwssmaPayload :: !ModifyAttachmentsRequest
+    , _ccwssmaId :: !Text
+    , _ccwssmaCallback :: !(Maybe Text)
+    , _ccwssmaCourseWorkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

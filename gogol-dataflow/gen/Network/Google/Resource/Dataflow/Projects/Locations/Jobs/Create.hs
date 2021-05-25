@@ -49,8 +49,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
     , pljcCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.jobs.create@ method which the
 -- 'ProjectsLocationsJobsCreate' request conforms to.
@@ -65,7 +65,7 @@ type ProjectsLocationsJobsCreateResource =
                    QueryParam "upload_protocol" Text :>
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "view" Text :>
+                         QueryParam "view" ProjectsLocationsJobsCreateView :>
                            QueryParam "replaceJobId" Text :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
@@ -80,16 +80,16 @@ type ProjectsLocationsJobsCreateResource =
 -- /See:/ 'projectsLocationsJobsCreate' smart constructor.
 data ProjectsLocationsJobsCreate =
   ProjectsLocationsJobsCreate'
-    { _pljcXgafv          :: !(Maybe Xgafv)
+    { _pljcXgafv :: !(Maybe Xgafv)
     , _pljcUploadProtocol :: !(Maybe Text)
-    , _pljcLocation       :: !Text
-    , _pljcAccessToken    :: !(Maybe Text)
-    , _pljcUploadType     :: !(Maybe Text)
-    , _pljcPayload        :: !Job
-    , _pljcView           :: !(Maybe Text)
-    , _pljcProjectId      :: !Text
-    , _pljcReplaceJobId   :: !(Maybe Text)
-    , _pljcCallback       :: !(Maybe Text)
+    , _pljcLocation :: !Text
+    , _pljcAccessToken :: !(Maybe Text)
+    , _pljcUploadType :: !(Maybe Text)
+    , _pljcPayload :: !Job
+    , _pljcView :: !(Maybe ProjectsLocationsJobsCreateView)
+    , _pljcProjectId :: !Text
+    , _pljcReplaceJobId :: !(Maybe Text)
+    , _pljcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -173,7 +173,7 @@ pljcPayload
   = lens _pljcPayload (\ s a -> s{_pljcPayload = a})
 
 -- | The level of information requested in response.
-pljcView :: Lens' ProjectsLocationsJobsCreate (Maybe Text)
+pljcView :: Lens' ProjectsLocationsJobsCreate (Maybe ProjectsLocationsJobsCreateView)
 pljcView = lens _pljcView (\ s a -> s{_pljcView = a})
 
 -- | The ID of the Cloud Platform project that the job belongs to.

@@ -47,8 +47,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Pause
     , appCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.pause@ method which the
 -- 'AccountsProposalsPause' request conforms to.
@@ -76,14 +76,14 @@ type AccountsProposalsPauseResource =
 -- /See:/ 'accountsProposalsPause' smart constructor.
 data AccountsProposalsPause =
   AccountsProposalsPause'
-    { _appXgafv          :: !(Maybe Xgafv)
+    { _appXgafv :: !(Maybe Xgafv)
     , _appUploadProtocol :: !(Maybe Text)
-    , _appAccessToken    :: !(Maybe Text)
-    , _appUploadType     :: !(Maybe Text)
-    , _appPayload        :: !PauseProposalRequest
-    , _appProposalId     :: !Text
-    , _appAccountId      :: !Text
-    , _appCallback       :: !(Maybe Text)
+    , _appAccessToken :: !(Maybe Text)
+    , _appUploadType :: !(Maybe Text)
+    , _appPayload :: !PauseProposalRequest
+    , _appProposalId :: !Text
+    , _appAccountId :: !Text
+    , _appCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

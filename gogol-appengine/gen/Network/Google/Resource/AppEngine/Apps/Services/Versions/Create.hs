@@ -43,8 +43,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
     , asvcCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.versions.create@ method which the
 -- 'AppsServicesVersionsCreate' request conforms to.
@@ -68,14 +68,14 @@ type AppsServicesVersionsCreateResource =
 -- /See:/ 'appsServicesVersionsCreate' smart constructor.
 data AppsServicesVersionsCreate =
   AppsServicesVersionsCreate'
-    { _asvcXgafv          :: !(Maybe Xgafv)
+    { _asvcXgafv :: !(Maybe Xgafv)
     , _asvcUploadProtocol :: !(Maybe Text)
-    , _asvcAccessToken    :: !(Maybe Text)
-    , _asvcUploadType     :: !(Maybe Text)
-    , _asvcPayload        :: !Version
-    , _asvcAppsId         :: !Text
-    , _asvcServicesId     :: !Text
-    , _asvcCallback       :: !(Maybe Text)
+    , _asvcAccessToken :: !(Maybe Text)
+    , _asvcUploadType :: !(Maybe Text)
+    , _asvcPayload :: !Version
+    , _asvcAppsId :: !Text
+    , _asvcServicesId :: !Text
+    , _asvcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

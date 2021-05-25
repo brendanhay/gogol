@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Policies.List
     , eplCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.policies.list@ method which the
 -- 'EnterprisesPoliciesList' request conforms to.
@@ -67,14 +67,14 @@ type EnterprisesPoliciesListResource =
 -- /See:/ 'enterprisesPoliciesList' smart constructor.
 data EnterprisesPoliciesList =
   EnterprisesPoliciesList'
-    { _eplParent         :: !Text
-    , _eplXgafv          :: !(Maybe Xgafv)
+    { _eplParent :: !Text
+    , _eplXgafv :: !(Maybe Xgafv)
     , _eplUploadProtocol :: !(Maybe Text)
-    , _eplAccessToken    :: !(Maybe Text)
-    , _eplUploadType     :: !(Maybe Text)
-    , _eplPageToken      :: !(Maybe Text)
-    , _eplPageSize       :: !(Maybe (Textual Int32))
-    , _eplCallback       :: !(Maybe Text)
+    , _eplAccessToken :: !(Maybe Text)
+    , _eplUploadType :: !(Maybe Text)
+    , _eplPageToken :: !(Maybe Text)
+    , _eplPageSize :: !(Maybe (Textual Int32))
+    , _eplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

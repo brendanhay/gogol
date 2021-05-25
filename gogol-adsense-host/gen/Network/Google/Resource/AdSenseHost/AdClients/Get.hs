@@ -36,8 +36,8 @@ module Network.Google.Resource.AdSenseHost.AdClients.Get
     , acgAdClientId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.adclients.get@ method which the
 -- 'AdClientsGet' request conforms to.

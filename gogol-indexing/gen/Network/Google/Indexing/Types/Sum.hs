@@ -16,7 +16,7 @@
 --
 module Network.Google.Indexing.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The URL life cycle event that Google is being notified about.
 data URLNotificationType

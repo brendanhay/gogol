@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.SSLPolicies.Insert
     , sslpiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslPolicies.insert@ method which the
 -- 'SSLPoliciesInsert' request conforms to.
@@ -62,8 +62,8 @@ type SSLPoliciesInsertResource =
 data SSLPoliciesInsert =
   SSLPoliciesInsert'
     { _sslpiRequestId :: !(Maybe Text)
-    , _sslpiProject   :: !Text
-    , _sslpiPayload   :: !SSLPolicy
+    , _sslpiProject :: !Text
+    , _sslpiPayload :: !SSLPolicy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

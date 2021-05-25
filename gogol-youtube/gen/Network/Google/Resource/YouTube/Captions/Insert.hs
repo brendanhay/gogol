@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uploads a caption track.
+-- Inserts a new resource into this collection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.insert@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.captions.insert@.
 module Network.Google.Resource.YouTube.Captions.Insert
     (
     -- * REST Resource
@@ -34,14 +34,19 @@ module Network.Google.Resource.YouTube.Captions.Insert
 
     -- * Request Lenses
     , ciOnBehalfOf
+    , ciXgafv
     , ciPart
+    , ciUploadProtocol
+    , ciAccessToken
+    , ciUploadType
     , ciPayload
     , ciOnBehalfOfContentOwner
     , ciSync
+    , ciCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.insert@ method which the
 -- 'CaptionsInsert' request conforms to.
@@ -49,36 +54,51 @@ type CaptionsInsertResource =
      "youtube" :>
        "v3" :>
          "captions" :>
-           QueryParam "part" Text :>
+           QueryParams "part" Text :>
              QueryParam "onBehalfOf" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "sync" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Caption :> Post '[JSON] Caption
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "sync" Bool :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Caption :> Post '[JSON] Caption
        :<|>
        "upload" :>
          "youtube" :>
            "v3" :>
              "captions" :>
-               QueryParam "part" Text :>
+               QueryParams "part" Text :>
                  QueryParam "onBehalfOf" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "sync" Bool :>
-                       QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" Multipart :>
-                           MultipartRelated '[JSON] Caption :>
-                             Post '[JSON] Caption
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "onBehalfOfContentOwner" Text :>
+                             QueryParam "sync" Bool :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   QueryParam "uploadType" Multipart :>
+                                     MultipartRelated '[JSON] Caption :>
+                                       Post '[JSON] Caption
 
--- | Uploads a caption track.
+-- | Inserts a new resource into this collection.
 --
 -- /See:/ 'captionsInsert' smart constructor.
 data CaptionsInsert =
   CaptionsInsert'
-    { _ciOnBehalfOf             :: !(Maybe Text)
-    , _ciPart                   :: !Text
-    , _ciPayload                :: !Caption
+    { _ciOnBehalfOf :: !(Maybe Text)
+    , _ciXgafv :: !(Maybe Xgafv)
+    , _ciPart :: ![Text]
+    , _ciUploadProtocol :: !(Maybe Text)
+    , _ciAccessToken :: !(Maybe Text)
+    , _ciUploadType :: !(Maybe Text)
+    , _ciPayload :: !Caption
     , _ciOnBehalfOfContentOwner :: !(Maybe Text)
-    , _ciSync                   :: !(Maybe Bool)
+    , _ciSync :: !(Maybe Bool)
+    , _ciCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -89,24 +109,39 @@ data CaptionsInsert =
 --
 -- * 'ciOnBehalfOf'
 --
+-- * 'ciXgafv'
+--
 -- * 'ciPart'
+--
+-- * 'ciUploadProtocol'
+--
+-- * 'ciAccessToken'
+--
+-- * 'ciUploadType'
 --
 -- * 'ciPayload'
 --
 -- * 'ciOnBehalfOfContentOwner'
 --
 -- * 'ciSync'
+--
+-- * 'ciCallback'
 captionsInsert
-    :: Text -- ^ 'ciPart'
+    :: [Text] -- ^ 'ciPart'
     -> Caption -- ^ 'ciPayload'
     -> CaptionsInsert
 captionsInsert pCiPart_ pCiPayload_ =
   CaptionsInsert'
     { _ciOnBehalfOf = Nothing
-    , _ciPart = pCiPart_
+    , _ciXgafv = Nothing
+    , _ciPart = _Coerce # pCiPart_
+    , _ciUploadProtocol = Nothing
+    , _ciAccessToken = Nothing
+    , _ciUploadType = Nothing
     , _ciPayload = pCiPayload_
     , _ciOnBehalfOfContentOwner = Nothing
     , _ciSync = Nothing
+    , _ciCallback = Nothing
     }
 
 
@@ -116,18 +151,40 @@ ciOnBehalfOf :: Lens' CaptionsInsert (Maybe Text)
 ciOnBehalfOf
   = lens _ciOnBehalfOf (\ s a -> s{_ciOnBehalfOf = a})
 
--- | The part parameter specifies the caption resource parts that the API
+-- | V1 error format.
+ciXgafv :: Lens' CaptionsInsert (Maybe Xgafv)
+ciXgafv = lens _ciXgafv (\ s a -> s{_ciXgafv = a})
+
+-- | The *part* parameter specifies the caption resource parts that the API
 -- response will include. Set the parameter value to snippet.
-ciPart :: Lens' CaptionsInsert Text
-ciPart = lens _ciPart (\ s a -> s{_ciPart = a})
+ciPart :: Lens' CaptionsInsert [Text]
+ciPart
+  = lens _ciPart (\ s a -> s{_ciPart = a}) . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ciUploadProtocol :: Lens' CaptionsInsert (Maybe Text)
+ciUploadProtocol
+  = lens _ciUploadProtocol
+      (\ s a -> s{_ciUploadProtocol = a})
+
+-- | OAuth access token.
+ciAccessToken :: Lens' CaptionsInsert (Maybe Text)
+ciAccessToken
+  = lens _ciAccessToken
+      (\ s a -> s{_ciAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ciUploadType :: Lens' CaptionsInsert (Maybe Text)
+ciUploadType
+  = lens _ciUploadType (\ s a -> s{_ciUploadType = a})
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CaptionsInsert Caption
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -141,15 +198,15 @@ ciOnBehalfOfContentOwner
   = lens _ciOnBehalfOfContentOwner
       (\ s a -> s{_ciOnBehalfOfContentOwner = a})
 
--- | The sync parameter indicates whether YouTube should automatically
--- synchronize the caption file with the audio track of the video. If you
--- set the value to true, YouTube will disregard any time codes that are in
--- the uploaded caption file and generate new time codes for the captions.
--- You should set the sync parameter to true if you are uploading a
--- transcript, which has no time codes, or if you suspect the time codes in
--- your file are incorrect and want YouTube to try to fix them.
+-- | Extra parameter to allow automatically syncing the uploaded
+-- caption\/transcript with the audio.
 ciSync :: Lens' CaptionsInsert (Maybe Bool)
 ciSync = lens _ciSync (\ s a -> s{_ciSync = a})
+
+-- | JSONP
+ciCallback :: Lens' CaptionsInsert (Maybe Text)
+ciCallback
+  = lens _ciCallback (\ s a -> s{_ciCallback = a})
 
 instance GoogleRequest CaptionsInsert where
         type Rs CaptionsInsert = Caption
@@ -157,9 +214,12 @@ instance GoogleRequest CaptionsInsert where
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsInsert'{..}
-          = go (Just _ciPart) _ciOnBehalfOf
+          = go _ciPart _ciOnBehalfOf _ciXgafv _ciUploadProtocol
+              _ciAccessToken
+              _ciUploadType
               _ciOnBehalfOfContentOwner
               _ciSync
+              _ciCallback
               (Just AltJSON)
               _ciPayload
               youTubeService
@@ -173,9 +233,12 @@ instance GoogleRequest (MediaUpload CaptionsInsert)
         type Scopes (MediaUpload CaptionsInsert) =
              Scopes CaptionsInsert
         requestClient (MediaUpload CaptionsInsert'{..} body)
-          = go (Just _ciPart) _ciOnBehalfOf
+          = go _ciPart _ciOnBehalfOf _ciXgafv _ciUploadProtocol
+              _ciAccessToken
+              _ciUploadType
               _ciOnBehalfOfContentOwner
               _ciSync
+              _ciCallback
               (Just AltJSON)
               (Just Multipart)
               _ciPayload

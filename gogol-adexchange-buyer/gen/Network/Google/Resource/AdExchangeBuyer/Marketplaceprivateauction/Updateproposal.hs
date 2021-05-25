@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeBuyer.Marketplaceprivateauction.Updatep
     , muPayload
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplaceprivateauction.updateproposal@ method which the
 -- 'MarketplaceprivateauctionUpdateproposal' request conforms to.
@@ -59,7 +59,7 @@ type MarketplaceprivateauctionUpdateproposalResource
 data MarketplaceprivateauctionUpdateproposal =
   MarketplaceprivateauctionUpdateproposal'
     { _muPrivateAuctionId :: !Text
-    , _muPayload          :: !UpdatePrivateAuctionProposalRequest
+    , _muPayload :: !UpdatePrivateAuctionProposalRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

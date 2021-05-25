@@ -43,8 +43,8 @@ module Network.Google.Resource.Spanner.Projects.InstanceConfigs.List
     , piclCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instanceConfigs.list@ method which the
 -- 'ProjectsInstanceConfigsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsInstanceConfigsListResource =
 -- /See:/ 'projectsInstanceConfigsList' smart constructor.
 data ProjectsInstanceConfigsList =
   ProjectsInstanceConfigsList'
-    { _piclParent         :: !Text
-    , _piclXgafv          :: !(Maybe Xgafv)
+    { _piclParent :: !Text
+    , _piclXgafv :: !(Maybe Xgafv)
     , _piclUploadProtocol :: !(Maybe Text)
-    , _piclAccessToken    :: !(Maybe Text)
-    , _piclUploadType     :: !(Maybe Text)
-    , _piclPageToken      :: !(Maybe Text)
-    , _piclPageSize       :: !(Maybe (Textual Int32))
-    , _piclCallback       :: !(Maybe Text)
+    , _piclAccessToken :: !(Maybe Text)
+    , _piclUploadType :: !(Maybe Text)
+    , _piclPageToken :: !(Maybe Text)
+    , _piclPageSize :: !(Maybe (Textual Int32))
+    , _piclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

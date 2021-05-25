@@ -41,8 +41,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.Get
     , plngCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.get@ method which the
 -- 'ProjectsLocationsNodesGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsNodesGetResource =
 -- /See:/ 'projectsLocationsNodesGet' smart constructor.
 data ProjectsLocationsNodesGet =
   ProjectsLocationsNodesGet'
-    { _plngXgafv          :: !(Maybe Xgafv)
+    { _plngXgafv :: !(Maybe Xgafv)
     , _plngUploadProtocol :: !(Maybe Text)
-    , _plngAccessToken    :: !(Maybe Text)
-    , _plngUploadType     :: !(Maybe Text)
-    , _plngName           :: !Text
-    , _plngCallback       :: !(Maybe Text)
+    , _plngAccessToken :: !(Maybe Text)
+    , _plngUploadType :: !(Maybe Text)
+    , _plngName :: !Text
+    , _plngCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ plngUploadType
   = lens _plngUploadType
       (\ s a -> s{_plngUploadType = a})
 
--- | The resource name.
+-- | Required. The resource name.
 plngName :: Lens' ProjectsLocationsNodesGet Text
 plngName = lens _plngName (\ s a -> s{_plngName = a})
 

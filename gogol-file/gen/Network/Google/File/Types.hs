@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -27,6 +27,19 @@ module Network.Google.File.Types
     , instanceLabels
     , ilAddtional
 
+    -- * ListBackupsResponse
+    , ListBackupsResponse
+    , listBackupsResponse
+    , lbrNextPageToken
+    , lbrBackups
+    , lbrUnreachable
+
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
+    , GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
+    , googleCloudSaasacceleratorManagementProvidersV1SloEligibility
+    , gcsmpvseEligible
+    , gcsmpvseReason
+
     -- * Status
     , Status
     , status
@@ -42,12 +55,14 @@ module Network.Google.File.Types
     -- * GoogleCloudSaasacceleratorManagementProvidersV1InstanceState
     , GoogleCloudSaasacceleratorManagementProvidersV1InstanceState (..)
 
-    -- * GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-    , GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-    , googleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-    , gcsmpvrmRolloutName
-    , gcsmpvrmNotification
-    , gcsmpvrmReleaseName
+    -- * NfsExportOptions
+    , NfsExportOptions
+    , nfsExportOptions
+    , neoAnonGid
+    , neoAccessMode
+    , neoAnonUid
+    , neoSquashMode
+    , neoIPRanges
 
     -- * ListLocationsResponse
     , ListLocationsResponse
@@ -64,6 +79,16 @@ module Network.Google.File.Types
     -- * CancelOperationRequest
     , CancelOperationRequest
     , cancelOperationRequest
+
+    -- * MaintenancePolicyState
+    , MaintenancePolicyState (..)
+
+    -- * Schedule
+    , Schedule
+    , schedule
+    , sStartTime
+    , sDay
+    , sDuration
 
     -- * Location
     , Location
@@ -87,11 +112,21 @@ module Network.Google.File.Types
     , Empty
     , empty
 
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+    , GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+    , googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+    , gcsmpvpsseEligibilities
+
+    -- * NfsExportOptionsAccessMode
+    , NfsExportOptionsAccessMode (..)
+
     -- * GoogleCloudSaasacceleratorManagementProvidersV1Instance
     , GoogleCloudSaasacceleratorManagementProvidersV1Instance
     , googleCloudSaasacceleratorManagementProvidersV1Instance
     , gcsmpviTenantProjectId
     , gcsmpviState
+    , gcsmpviConsumerDefinedName
+    , gcsmpviMaintenanceSettings
     , gcsmpviSoftwareVersions
     , gcsmpviProvisionedResources
     , gcsmpviUpdateTime
@@ -99,34 +134,104 @@ module Network.Google.File.Types
     , gcsmpviLabels
     , gcsmpviSloMetadata
     , gcsmpviProducerMetadata
-    , gcsmpviRolloutMetadata
+    , gcsmpviSlmInstanceTemplate
+    , gcsmpviMaintenanceSchedules
     , gcsmpviCreateTime
     , gcsmpviMaintenancePolicyNames
 
+    -- * MaintenancePolicyLabels
+    , MaintenancePolicyLabels
+    , maintenancePolicyLabels
+    , mplAddtional
+
+    -- * BackupSourceInstanceTier
+    , BackupSourceInstanceTier (..)
+
     -- * InstanceTier
     , InstanceTier (..)
+
+    -- * BackupLabels
+    , BackupLabels
+    , backupLabels
+    , blAddtional
 
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
 
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+    , GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+    , googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+    , gcsmpvpsseeAddtional
+
     -- * GoogleCloudSaasacceleratorManagementProvidersV1InstanceSoftwareVersions
     , GoogleCloudSaasacceleratorManagementProvidersV1InstanceSoftwareVersions
     , googleCloudSaasacceleratorManagementProvidersV1InstanceSoftwareVersions
     , gcsmpvisvAddtional
 
-    -- * GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
-    , GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
-    , googleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
-    , gcsmpvnmTargetRelease
-    , gcsmpvnmScheduledEndTime
-    , gcsmpvnmRescheduled
-    , gcsmpvnmScheduledStartTime
+    -- * Backup
+    , Backup
+    , backup
+    , bSatisfiesPzs
+    , bSourceInstance
+    , bState
+    , bDownloadBytes
+    , bStorageBytes
+    , bSourceInstanceTier
+    , bName
+    , bLabels
+    , bSourceFileShare
+    , bDescription
+    , bCreateTime
+    , bCapacityGb
+
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
+    , GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
+    , googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
+    , gcsmpvmsIsRollback
+    , gcsmpvmsMaintenancePolicies
+    , gcsmpvmsExclude
+
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+    , GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+    , googleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+    , gcsmpvmsStartTime
+    , gcsmpvmsRolloutManagementPolicy
+    , gcsmpvmsCanReschedule
+    , gcsmpvmsEndTime
+    , gcsmpvmsScheduleDeadlineTime
+
+    -- * NetworkConfigModesItem
+    , NetworkConfigModesItem (..)
+
+    -- * UpdatePolicy
+    , UpdatePolicy
+    , updatePolicy
+    , upWindow
+    , upChannel
+    , upDenyMaintenancePeriods
+
+    -- * MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwDailyCycle
+    , mwWeeklyCycle
+
+    -- * ScheduleDay
+    , ScheduleDay (..)
+
+    -- * DailyCycle
+    , DailyCycle
+    , dailyCycle
+    , dcStartTime
+    , dcDuration
 
     -- * FileShareConfig
     , FileShareConfig
     , fileShareConfig
+    , fscNfsExportOptions
+    , fscSourceBackup
     , fscName
     , fscCapacityGb
 
@@ -138,14 +243,50 @@ module Network.Google.File.Types
     , ncReservedIPRange
     , ncIPAddresses
 
+    -- * Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
+
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+    , GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+    , googleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+    , gcsmpvnsmPerSliEligibility
+    , gcsmpvnsmLocation
+    , gcsmpvnsmExclusions
+    , gcsmpvnsmNodeId
+
     -- * GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
     , GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
     , googleCloudSaasacceleratorManagementProvidersV1SloMetadata
+    , gcsmpvsmPerSliEligibility
     , gcsmpvsmExclusions
     , gcsmpvsmTier
+    , gcsmpvsmNodes
+
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+    , GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+    , googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+    , gcsmpvmsmpAddtional
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * UpdatePolicyChannel
+    , UpdatePolicyChannel (..)
+
+    -- * MaintenancePolicy
+    , MaintenancePolicy
+    , maintenancePolicy
+    , mpState
+    , mpUpdatePolicy
+    , mpUpdateTime
+    , mpName
+    , mpLabels
+    , mpDescription
+    , mpCreateTime
 
     -- * GoogleCloudSaasacceleratorManagementProvidersV1InstanceProducerMetadata
     , GoogleCloudSaasacceleratorManagementProvidersV1InstanceProducerMetadata
@@ -160,10 +301,24 @@ module Network.Google.File.Types
     -- * GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion
     , GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion
     , googleCloudSaasacceleratorManagementProvidersV1SloExclusion
-    , gcsmpvseExclusionDuration
-    , gcsmpvseExclusionStartTime
-    , gcsmpvseReason
-    , gcsmpvseSloName
+    , gStartTime
+    , gReason
+    , gDuration
+    , gSliName
+
+    -- * RestoreInstanceRequest
+    , RestoreInstanceRequest
+    , restoreInstanceRequest
+    , rirSourceBackup
+    , rirFileShare
+
+    -- * TimeOfDay'
+    , TimeOfDay'
+    , timeOfDay
+    , todNanos
+    , todHours
+    , todMinutes
+    , todSeconds
 
     -- * LocationLabels
     , LocationLabels
@@ -192,6 +347,11 @@ module Network.Google.File.Types
     , gcsmpvprResourceType
     , gcsmpvprResourceURL
 
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+    , GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+    , googleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+    , gcsmpvimsAddtional
+
     -- * ListInstancesResponse
     , ListInstancesResponse
     , listInstancesResponse
@@ -207,10 +367,23 @@ module Network.Google.File.Types
     , operationResponse
     , orAddtional
 
-    -- * GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-    , GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-    , googleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-    , gcsmpvirmAddtional
+    -- * DenyMaintenancePeriod
+    , DenyMaintenancePeriod
+    , denyMaintenancePeriod
+    , dmpTime
+    , dmpEndDate
+    , dmpStartDate
+
+    -- * WeeklyCycle
+    , WeeklyCycle
+    , weeklyCycle
+    , wcSchedule
+
+    -- * NfsExportOptionsSquashMode
+    , NfsExportOptionsSquashMode (..)
+
+    -- * BackupState
+    , BackupState (..)
 
     -- * GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenancePolicyNames
     , GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenancePolicyNames
@@ -220,6 +393,7 @@ module Network.Google.File.Types
     -- * Instance
     , Instance
     , instance'
+    , iSatisfiesPzs
     , iEtag
     , iState
     , iNetworks
@@ -232,9 +406,9 @@ module Network.Google.File.Types
     , iCreateTime
     ) where
 
-import           Network.Google.File.Types.Product
-import           Network.Google.File.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.File.Types.Product
+import Network.Google.File.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Filestore API. This contains the host and root path used as a starting point for constructing service requests.
 fileService :: ServiceConfig
@@ -242,6 +416,6 @@ fileService
   = defaultService (ServiceId "file:v1")
       "file.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

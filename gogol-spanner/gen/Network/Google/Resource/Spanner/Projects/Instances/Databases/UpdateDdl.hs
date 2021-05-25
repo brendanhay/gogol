@@ -46,8 +46,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.UpdateDdl
     , pidudCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.updateDdl@ method which the
 -- 'ProjectsInstancesDatabasesUpdateDdl' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsInstancesDatabasesUpdateDdlResource =
 -- /See:/ 'projectsInstancesDatabasesUpdateDdl' smart constructor.
 data ProjectsInstancesDatabasesUpdateDdl =
   ProjectsInstancesDatabasesUpdateDdl'
-    { _pidudXgafv          :: !(Maybe Xgafv)
+    { _pidudXgafv :: !(Maybe Xgafv)
     , _pidudUploadProtocol :: !(Maybe Text)
-    , _pidudDatabase       :: !Text
-    , _pidudAccessToken    :: !(Maybe Text)
-    , _pidudUploadType     :: !(Maybe Text)
-    , _pidudPayload        :: !UpdateDatabaseDdlRequest
-    , _pidudCallback       :: !(Maybe Text)
+    , _pidudDatabase :: !Text
+    , _pidudAccessToken :: !(Maybe Text)
+    , _pidudUploadType :: !(Maybe Text)
+    , _pidudPayload :: !UpdateDatabaseDdlRequest
+    , _pidudCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

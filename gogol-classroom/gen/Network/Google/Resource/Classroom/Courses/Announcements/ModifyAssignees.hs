@@ -49,8 +49,8 @@ module Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
     , camaCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.announcements.modifyAssignees@ method which the
 -- 'CoursesAnnouncementsModifyAssignees' request conforms to.
@@ -80,14 +80,14 @@ type CoursesAnnouncementsModifyAssigneesResource =
 -- /See:/ 'coursesAnnouncementsModifyAssignees' smart constructor.
 data CoursesAnnouncementsModifyAssignees =
   CoursesAnnouncementsModifyAssignees'
-    { _camaXgafv          :: !(Maybe Xgafv)
+    { _camaXgafv :: !(Maybe Xgafv)
     , _camaUploadProtocol :: !(Maybe Text)
-    , _camaCourseId       :: !Text
-    , _camaAccessToken    :: !(Maybe Text)
-    , _camaUploadType     :: !(Maybe Text)
-    , _camaPayload        :: !ModifyAnnouncementAssigneesRequest
-    , _camaId             :: !Text
-    , _camaCallback       :: !(Maybe Text)
+    , _camaCourseId :: !Text
+    , _camaAccessToken :: !(Maybe Text)
+    , _camaUploadType :: !(Maybe Text)
+    , _camaPayload :: !ModifyAnnouncementAssigneesRequest
+    , _camaId :: !Text
+    , _camaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

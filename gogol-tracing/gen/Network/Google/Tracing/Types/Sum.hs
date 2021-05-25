@@ -16,7 +16,7 @@
 --
 module Network.Google.Tracing.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Type of NetworkEvent. Indicates whether the RPC message was sent or
 -- received.

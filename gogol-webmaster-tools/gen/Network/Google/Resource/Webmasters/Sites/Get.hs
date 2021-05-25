@@ -36,8 +36,8 @@ module Network.Google.Resource.Webmasters.Sites.Get
     , sitSiteURL
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.get@ method which the
 -- 'SitesGet' request conforms to.

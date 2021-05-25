@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Files.Export
     , feFileId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.export@ method which the
 -- 'FilesExport' request conforms to.
@@ -68,7 +68,7 @@ type FilesExportResource =
 data FilesExport =
   FilesExport'
     { _feMimeType :: !Text
-    , _feFileId   :: !Text
+    , _feFileId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

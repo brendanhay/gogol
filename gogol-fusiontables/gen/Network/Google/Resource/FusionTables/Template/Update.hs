@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Template.Update
     , tuTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.update@ method which the
 -- 'TemplateUpdate' request conforms to.
@@ -59,8 +59,8 @@ type TemplateUpdateResource =
 data TemplateUpdate =
   TemplateUpdate'
     { _tuTemplateId :: !(Textual Int32)
-    , _tuPayload    :: !Template
-    , _tuTableId    :: !Text
+    , _tuPayload :: !Template
+    , _tuTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

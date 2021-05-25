@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Routers.GetRouterStatus
     , rgrsRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.getRouterStatus@ method which the
 -- 'RoutersGetRouterStatus' request conforms to.
@@ -62,8 +62,8 @@ type RoutersGetRouterStatusResource =
 data RoutersGetRouterStatus =
   RoutersGetRouterStatus'
     { _rgrsProject :: !Text
-    , _rgrsRouter  :: !Text
-    , _rgrsRegion  :: !Text
+    , _rgrsRouter :: !Text
+    , _rgrsRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

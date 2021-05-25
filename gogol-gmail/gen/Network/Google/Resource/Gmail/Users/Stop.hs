@@ -33,11 +33,16 @@ module Network.Google.Resource.Gmail.Users.Stop
     , UsersStop
 
     -- * Request Lenses
+    , usXgafv
+    , usUploadProtocol
+    , usAccessToken
+    , usUploadType
     , usUserId
+    , usCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.stop@ method which the
 -- 'UsersStop' request conforms to.
@@ -46,14 +51,25 @@ type UsersStopResource =
        "v1" :>
          "users" :>
            Capture "userId" Text :>
-             "stop" :> QueryParam "alt" AltJSON :> Post '[JSON] ()
+             "stop" :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ 'usersStop' smart constructor.
-newtype UsersStop =
+data UsersStop =
   UsersStop'
-    { _usUserId :: Text
+    { _usXgafv :: !(Maybe Xgafv)
+    , _usUploadProtocol :: !(Maybe Text)
+    , _usAccessToken :: !(Maybe Text)
+    , _usUploadType :: !(Maybe Text)
+    , _usUserId :: !Text
+    , _usCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,16 +78,60 @@ newtype UsersStop =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usXgafv'
+--
+-- * 'usUploadProtocol'
+--
+-- * 'usAccessToken'
+--
+-- * 'usUploadType'
+--
 -- * 'usUserId'
+--
+-- * 'usCallback'
 usersStop
     :: UsersStop
-usersStop = UsersStop' {_usUserId = "me"}
+usersStop =
+  UsersStop'
+    { _usXgafv = Nothing
+    , _usUploadProtocol = Nothing
+    , _usAccessToken = Nothing
+    , _usUploadType = Nothing
+    , _usUserId = "me"
+    , _usCallback = Nothing
+    }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+usXgafv :: Lens' UsersStop (Maybe Xgafv)
+usXgafv = lens _usXgafv (\ s a -> s{_usXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usUploadProtocol :: Lens' UsersStop (Maybe Text)
+usUploadProtocol
+  = lens _usUploadProtocol
+      (\ s a -> s{_usUploadProtocol = a})
+
+-- | OAuth access token.
+usAccessToken :: Lens' UsersStop (Maybe Text)
+usAccessToken
+  = lens _usAccessToken
+      (\ s a -> s{_usAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usUploadType :: Lens' UsersStop (Maybe Text)
+usUploadType
+  = lens _usUploadType (\ s a -> s{_usUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 usUserId :: Lens' UsersStop Text
 usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
+
+-- | JSONP
+usCallback :: Lens' UsersStop (Maybe Text)
+usCallback
+  = lens _usCallback (\ s a -> s{_usCallback = a})
 
 instance GoogleRequest UsersStop where
         type Rs UsersStop = ()
@@ -81,7 +141,12 @@ instance GoogleRequest UsersStop where
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersStop'{..}
-          = go _usUserId (Just AltJSON) gmailService
+          = go _usUserId _usXgafv _usUploadProtocol
+              _usAccessToken
+              _usUploadType
+              _usCallback
+              (Just AltJSON)
+              gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersStopResource)
                       mempty

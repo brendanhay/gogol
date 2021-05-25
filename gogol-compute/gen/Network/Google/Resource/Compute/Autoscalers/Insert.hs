@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Autoscalers.Insert
     , aiiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.autoscalers.insert@ method which the
 -- 'AutoscalersInsert' request conforms to.
@@ -64,9 +64,9 @@ type AutoscalersInsertResource =
 data AutoscalersInsert =
   AutoscalersInsert'
     { _aiiRequestId :: !(Maybe Text)
-    , _aiiProject   :: !Text
-    , _aiiZone      :: !Text
-    , _aiiPayload   :: !Autoscaler
+    , _aiiProject :: !Text
+    , _aiiZone :: !Text
+    , _aiiPayload :: !Autoscaler
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

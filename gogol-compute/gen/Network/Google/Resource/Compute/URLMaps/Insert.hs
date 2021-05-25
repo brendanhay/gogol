@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.URLMaps.Insert
     , umiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.insert@ method which the
 -- 'URLMapsInsert' request conforms to.
@@ -62,8 +62,8 @@ type URLMapsInsertResource =
 data URLMapsInsert =
   URLMapsInsert'
     { _umiRequestId :: !(Maybe Text)
-    , _umiProject   :: !Text
-    , _umiPayload   :: !URLMap
+    , _umiProject :: !Text
+    , _umiPayload :: !URLMap
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

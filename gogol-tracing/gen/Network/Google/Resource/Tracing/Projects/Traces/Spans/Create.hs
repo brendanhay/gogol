@@ -44,8 +44,8 @@ module Network.Google.Resource.Tracing.Projects.Traces.Spans.Create
     , ptscCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Tracing.Types
+import Network.Google.Prelude
+import Network.Google.Tracing.Types
 
 -- | A resource alias for @tracing.projects.traces.spans.create@ method which the
 -- 'ProjectsTracesSpansCreate' request conforms to.
@@ -67,15 +67,15 @@ type ProjectsTracesSpansCreateResource =
 -- /See:/ 'projectsTracesSpansCreate' smart constructor.
 data ProjectsTracesSpansCreate =
   ProjectsTracesSpansCreate'
-    { _ptscXgafv          :: !(Maybe Xgafv)
+    { _ptscXgafv :: !(Maybe Xgafv)
     , _ptscUploadProtocol :: !(Maybe Text)
-    , _ptscPp             :: !Bool
-    , _ptscAccessToken    :: !(Maybe Text)
-    , _ptscUploadType     :: !(Maybe Text)
-    , _ptscPayload        :: !Span
-    , _ptscBearerToken    :: !(Maybe Text)
-    , _ptscName           :: !Text
-    , _ptscCallback       :: !(Maybe Text)
+    , _ptscPp :: !Bool
+    , _ptscAccessToken :: !(Maybe Text)
+    , _ptscUploadType :: !(Maybe Text)
+    , _ptscPayload :: !Span
+    , _ptscBearerToken :: !(Maybe Text)
+    , _ptscName :: !Text
+    , _ptscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

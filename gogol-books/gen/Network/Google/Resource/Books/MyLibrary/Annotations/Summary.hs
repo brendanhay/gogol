@@ -22,7 +22,7 @@
 --
 -- Gets the summary of specified layers.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.summary@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.annotations.summary@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
     , MyLibraryAnnotationsSummary
 
     -- * Request Lenses
+    , mlasXgafv
+    , mlasUploadProtocol
+    , mlasAccessToken
+    , mlasUploadType
     , mlasLayerIds
     , mlasVolumeId
+    , mlasCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.summary@ method which the
 -- 'MyLibraryAnnotationsSummary' request conforms to.
@@ -50,16 +55,26 @@ type MyLibraryAnnotationsSummaryResource =
              "summary" :>
                QueryParams "layerIds" Text :>
                  QueryParam "volumeId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] AnnotationsSummary
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Post '[JSON] AnnotationsSummary
 
 -- | Gets the summary of specified layers.
 --
 -- /See:/ 'myLibraryAnnotationsSummary' smart constructor.
 data MyLibraryAnnotationsSummary =
   MyLibraryAnnotationsSummary'
-    { _mlasLayerIds :: ![Text]
+    { _mlasXgafv :: !(Maybe Xgafv)
+    , _mlasUploadProtocol :: !(Maybe Text)
+    , _mlasAccessToken :: !(Maybe Text)
+    , _mlasUploadType :: !(Maybe Text)
+    , _mlasLayerIds :: ![Text]
     , _mlasVolumeId :: !Text
+    , _mlasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,17 +83,57 @@ data MyLibraryAnnotationsSummary =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlasXgafv'
+--
+-- * 'mlasUploadProtocol'
+--
+-- * 'mlasAccessToken'
+--
+-- * 'mlasUploadType'
+--
 -- * 'mlasLayerIds'
 --
 -- * 'mlasVolumeId'
+--
+-- * 'mlasCallback'
 myLibraryAnnotationsSummary
     :: [Text] -- ^ 'mlasLayerIds'
     -> Text -- ^ 'mlasVolumeId'
     -> MyLibraryAnnotationsSummary
 myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
   MyLibraryAnnotationsSummary'
-    {_mlasLayerIds = _Coerce # pMlasLayerIds_, _mlasVolumeId = pMlasVolumeId_}
+    { _mlasXgafv = Nothing
+    , _mlasUploadProtocol = Nothing
+    , _mlasAccessToken = Nothing
+    , _mlasUploadType = Nothing
+    , _mlasLayerIds = _Coerce # pMlasLayerIds_
+    , _mlasVolumeId = pMlasVolumeId_
+    , _mlasCallback = Nothing
+    }
 
+
+-- | V1 error format.
+mlasXgafv :: Lens' MyLibraryAnnotationsSummary (Maybe Xgafv)
+mlasXgafv
+  = lens _mlasXgafv (\ s a -> s{_mlasXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlasUploadProtocol :: Lens' MyLibraryAnnotationsSummary (Maybe Text)
+mlasUploadProtocol
+  = lens _mlasUploadProtocol
+      (\ s a -> s{_mlasUploadProtocol = a})
+
+-- | OAuth access token.
+mlasAccessToken :: Lens' MyLibraryAnnotationsSummary (Maybe Text)
+mlasAccessToken
+  = lens _mlasAccessToken
+      (\ s a -> s{_mlasAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlasUploadType :: Lens' MyLibraryAnnotationsSummary (Maybe Text)
+mlasUploadType
+  = lens _mlasUploadType
+      (\ s a -> s{_mlasUploadType = a})
 
 -- | Array of layer IDs to get the summary for.
 mlasLayerIds :: Lens' MyLibraryAnnotationsSummary [Text]
@@ -91,6 +146,11 @@ mlasVolumeId :: Lens' MyLibraryAnnotationsSummary Text
 mlasVolumeId
   = lens _mlasVolumeId (\ s a -> s{_mlasVolumeId = a})
 
+-- | JSONP
+mlasCallback :: Lens' MyLibraryAnnotationsSummary (Maybe Text)
+mlasCallback
+  = lens _mlasCallback (\ s a -> s{_mlasCallback = a})
+
 instance GoogleRequest MyLibraryAnnotationsSummary
          where
         type Rs MyLibraryAnnotationsSummary =
@@ -98,7 +158,11 @@ instance GoogleRequest MyLibraryAnnotationsSummary
         type Scopes MyLibraryAnnotationsSummary =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsSummary'{..}
-          = go _mlasLayerIds (Just _mlasVolumeId)
+          = go _mlasLayerIds (Just _mlasVolumeId) _mlasXgafv
+              _mlasUploadProtocol
+              _mlasAccessToken
+              _mlasUploadType
+              _mlasCallback
               (Just AltJSON)
               booksService
           where go

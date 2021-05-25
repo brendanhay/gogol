@@ -22,7 +22,7 @@
 --
 -- Claims the website of a Merchant Center sub-account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.claimwebsite@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.accounts.claimwebsite@.
 module Network.Google.Resource.Content.Accounts.Claimwebsite
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Accounts.Claimwebsite
     , AccountsClaimwebsite
 
     -- * Request Lenses
-    , acMerchantId
-    , acAccountId
-    , acOverwrite
+    , a1Xgafv
+    , a1MerchantId
+    , a1UploadProtocol
+    , a1AccessToken
+    , a1UploadType
+    , a1AccountId
+    , a1Overwrite
+    , a1Callback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.claimwebsite@ method which the
 -- 'AccountsClaimwebsite' request conforms to.
@@ -50,18 +55,28 @@ type AccountsClaimwebsiteResource =
            "accounts" :>
              Capture "accountId" (Textual Word64) :>
                "claimwebsite" :>
-                 QueryParam "overwrite" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] AccountsClaimWebsiteResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "overwrite" Bool :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Post '[JSON] AccountsClaimWebsiteResponse
 
 -- | Claims the website of a Merchant Center sub-account.
 --
 -- /See:/ 'accountsClaimwebsite' smart constructor.
 data AccountsClaimwebsite =
   AccountsClaimwebsite'
-    { _acMerchantId :: !(Textual Word64)
-    , _acAccountId  :: !(Textual Word64)
-    , _acOverwrite  :: !(Maybe Bool)
+    { _a1Xgafv :: !(Maybe Xgafv)
+    , _a1MerchantId :: !(Textual Word64)
+    , _a1UploadProtocol :: !(Maybe Text)
+    , _a1AccessToken :: !(Maybe Text)
+    , _a1UploadType :: !(Maybe Text)
+    , _a1AccountId :: !(Textual Word64)
+    , _a1Overwrite :: !(Maybe Bool)
+    , _a1Callback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,43 +85,84 @@ data AccountsClaimwebsite =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acMerchantId'
+-- * 'a1Xgafv'
 --
--- * 'acAccountId'
+-- * 'a1MerchantId'
 --
--- * 'acOverwrite'
+-- * 'a1UploadProtocol'
+--
+-- * 'a1AccessToken'
+--
+-- * 'a1UploadType'
+--
+-- * 'a1AccountId'
+--
+-- * 'a1Overwrite'
+--
+-- * 'a1Callback'
 accountsClaimwebsite
-    :: Word64 -- ^ 'acMerchantId'
-    -> Word64 -- ^ 'acAccountId'
+    :: Word64 -- ^ 'a1MerchantId'
+    -> Word64 -- ^ 'a1AccountId'
     -> AccountsClaimwebsite
-accountsClaimwebsite pAcMerchantId_ pAcAccountId_ =
+accountsClaimwebsite pA1MerchantId_ pA1AccountId_ =
   AccountsClaimwebsite'
-    { _acMerchantId = _Coerce # pAcMerchantId_
-    , _acAccountId = _Coerce # pAcAccountId_
-    , _acOverwrite = Nothing
+    { _a1Xgafv = Nothing
+    , _a1MerchantId = _Coerce # pA1MerchantId_
+    , _a1UploadProtocol = Nothing
+    , _a1AccessToken = Nothing
+    , _a1UploadType = Nothing
+    , _a1AccountId = _Coerce # pA1AccountId_
+    , _a1Overwrite = Nothing
+    , _a1Callback = Nothing
     }
 
 
+-- | V1 error format.
+a1Xgafv :: Lens' AccountsClaimwebsite (Maybe Xgafv)
+a1Xgafv = lens _a1Xgafv (\ s a -> s{_a1Xgafv = a})
+
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and
--- accountId must be the ID of a sub-account of this account.
-acMerchantId :: Lens' AccountsClaimwebsite Word64
-acMerchantId
-  = lens _acMerchantId (\ s a -> s{_acMerchantId = a})
+-- \`accountId\` must be the ID of a sub-account of this account.
+a1MerchantId :: Lens' AccountsClaimwebsite Word64
+a1MerchantId
+  = lens _a1MerchantId (\ s a -> s{_a1MerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+a1UploadProtocol :: Lens' AccountsClaimwebsite (Maybe Text)
+a1UploadProtocol
+  = lens _a1UploadProtocol
+      (\ s a -> s{_a1UploadProtocol = a})
+
+-- | OAuth access token.
+a1AccessToken :: Lens' AccountsClaimwebsite (Maybe Text)
+a1AccessToken
+  = lens _a1AccessToken
+      (\ s a -> s{_a1AccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+a1UploadType :: Lens' AccountsClaimwebsite (Maybe Text)
+a1UploadType
+  = lens _a1UploadType (\ s a -> s{_a1UploadType = a})
+
 -- | The ID of the account whose website is claimed.
-acAccountId :: Lens' AccountsClaimwebsite Word64
-acAccountId
-  = lens _acAccountId (\ s a -> s{_acAccountId = a}) .
+a1AccountId :: Lens' AccountsClaimwebsite Word64
+a1AccountId
+  = lens _a1AccountId (\ s a -> s{_a1AccountId = a}) .
       _Coerce
 
--- | Only available to selected merchants. When set to True, this flag
+-- | Only available to selected merchants. When set to \`True\`, this flag
 -- removes any existing claim on the requested website by another account
 -- and replaces it with a claim from this account.
-acOverwrite :: Lens' AccountsClaimwebsite (Maybe Bool)
-acOverwrite
-  = lens _acOverwrite (\ s a -> s{_acOverwrite = a})
+a1Overwrite :: Lens' AccountsClaimwebsite (Maybe Bool)
+a1Overwrite
+  = lens _a1Overwrite (\ s a -> s{_a1Overwrite = a})
+
+-- | JSONP
+a1Callback :: Lens' AccountsClaimwebsite (Maybe Text)
+a1Callback
+  = lens _a1Callback (\ s a -> s{_a1Callback = a})
 
 instance GoogleRequest AccountsClaimwebsite where
         type Rs AccountsClaimwebsite =
@@ -114,7 +170,12 @@ instance GoogleRequest AccountsClaimwebsite where
         type Scopes AccountsClaimwebsite =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountsClaimwebsite'{..}
-          = go _acMerchantId _acAccountId _acOverwrite
+          = go _a1MerchantId _a1AccountId _a1Xgafv
+              _a1UploadProtocol
+              _a1AccessToken
+              _a1UploadType
+              _a1Overwrite
+              _a1Callback
               (Just AltJSON)
               shoppingContentService
           where go

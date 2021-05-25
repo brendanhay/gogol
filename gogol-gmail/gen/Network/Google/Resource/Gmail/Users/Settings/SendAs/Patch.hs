@@ -20,11 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a send-as alias. If a signature is provided, Gmail will sanitize
--- the HTML before saving it with the alias. Addresses other than the
--- primary address for the account can only be updated by service account
--- clients that have been delegated domain-wide authority. This method
--- supports patch semantics.
+-- Patch the specified send-as alias.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.sendAs.patch@.
 module Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
@@ -37,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
     , UsersSettingsSendAsPatch
 
     -- * Request Lenses
+    , ussapXgafv
+    , ussapUploadProtocol
+    , ussapAccessToken
+    , ussapUploadType
     , ussapPayload
     , ussapUserId
     , ussapSendAsEmail
+    , ussapCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.patch@ method which the
 -- 'UsersSettingsSendAsPatch' request conforms to.
@@ -55,21 +56,27 @@ type UsersSettingsSendAsPatchResource =
              "settings" :>
                "sendAs" :>
                  Capture "sendAsEmail" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] SendAs :> Patch '[JSON] SendAs
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] SendAs :> Patch '[JSON] SendAs
 
--- | Updates a send-as alias. If a signature is provided, Gmail will sanitize
--- the HTML before saving it with the alias. Addresses other than the
--- primary address for the account can only be updated by service account
--- clients that have been delegated domain-wide authority. This method
--- supports patch semantics.
+-- | Patch the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsPatch' smart constructor.
 data UsersSettingsSendAsPatch =
   UsersSettingsSendAsPatch'
-    { _ussapPayload     :: !SendAs
-    , _ussapUserId      :: !Text
+    { _ussapXgafv :: !(Maybe Xgafv)
+    , _ussapUploadProtocol :: !(Maybe Text)
+    , _ussapAccessToken :: !(Maybe Text)
+    , _ussapUploadType :: !(Maybe Text)
+    , _ussapPayload :: !SendAs
+    , _ussapUserId :: !Text
     , _ussapSendAsEmail :: !Text
+    , _ussapCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,22 +85,60 @@ data UsersSettingsSendAsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussapXgafv'
+--
+-- * 'ussapUploadProtocol'
+--
+-- * 'ussapAccessToken'
+--
+-- * 'ussapUploadType'
+--
 -- * 'ussapPayload'
 --
 -- * 'ussapUserId'
 --
 -- * 'ussapSendAsEmail'
+--
+-- * 'ussapCallback'
 usersSettingsSendAsPatch
     :: SendAs -- ^ 'ussapPayload'
     -> Text -- ^ 'ussapSendAsEmail'
     -> UsersSettingsSendAsPatch
 usersSettingsSendAsPatch pUssapPayload_ pUssapSendAsEmail_ =
   UsersSettingsSendAsPatch'
-    { _ussapPayload = pUssapPayload_
+    { _ussapXgafv = Nothing
+    , _ussapUploadProtocol = Nothing
+    , _ussapAccessToken = Nothing
+    , _ussapUploadType = Nothing
+    , _ussapPayload = pUssapPayload_
     , _ussapUserId = "me"
     , _ussapSendAsEmail = pUssapSendAsEmail_
+    , _ussapCallback = Nothing
     }
 
+
+-- | V1 error format.
+ussapXgafv :: Lens' UsersSettingsSendAsPatch (Maybe Xgafv)
+ussapXgafv
+  = lens _ussapXgafv (\ s a -> s{_ussapXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussapUploadProtocol :: Lens' UsersSettingsSendAsPatch (Maybe Text)
+ussapUploadProtocol
+  = lens _ussapUploadProtocol
+      (\ s a -> s{_ussapUploadProtocol = a})
+
+-- | OAuth access token.
+ussapAccessToken :: Lens' UsersSettingsSendAsPatch (Maybe Text)
+ussapAccessToken
+  = lens _ussapAccessToken
+      (\ s a -> s{_ussapAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussapUploadType :: Lens' UsersSettingsSendAsPatch (Maybe Text)
+ussapUploadType
+  = lens _ussapUploadType
+      (\ s a -> s{_ussapUploadType = a})
 
 -- | Multipart request metadata.
 ussapPayload :: Lens' UsersSettingsSendAsPatch SendAs
@@ -112,13 +157,24 @@ ussapSendAsEmail
   = lens _ussapSendAsEmail
       (\ s a -> s{_ussapSendAsEmail = a})
 
+-- | JSONP
+ussapCallback :: Lens' UsersSettingsSendAsPatch (Maybe Text)
+ussapCallback
+  = lens _ussapCallback
+      (\ s a -> s{_ussapCallback = a})
+
 instance GoogleRequest UsersSettingsSendAsPatch where
         type Rs UsersSettingsSendAsPatch = SendAs
         type Scopes UsersSettingsSendAsPatch =
              '["https://www.googleapis.com/auth/gmail.settings.basic",
                "https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsSendAsPatch'{..}
-          = go _ussapUserId _ussapSendAsEmail (Just AltJSON)
+          = go _ussapUserId _ussapSendAsEmail _ussapXgafv
+              _ussapUploadProtocol
+              _ussapAccessToken
+              _ussapUploadType
+              _ussapCallback
+              (Just AltJSON)
               _ussapPayload
               gmailService
           where go

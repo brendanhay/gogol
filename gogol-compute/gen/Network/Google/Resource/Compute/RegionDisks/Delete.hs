@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.RegionDisks.Delete
     , rddRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.delete@ method which the
 -- 'RegionDisksDelete' request conforms to.
@@ -68,9 +68,9 @@ type RegionDisksDeleteResource =
 data RegionDisksDelete =
   RegionDisksDelete'
     { _rddRequestId :: !(Maybe Text)
-    , _rddProject   :: !Text
-    , _rddDisk      :: !Text
-    , _rddRegion    :: !Text
+    , _rddProject :: !Text
+    , _rddDisk :: !Text
+    , _rddRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

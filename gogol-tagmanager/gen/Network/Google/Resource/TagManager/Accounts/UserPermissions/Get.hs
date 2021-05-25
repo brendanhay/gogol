@@ -22,7 +22,7 @@
 --
 -- Gets a user\'s Account & Container access.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.user_permissions.get@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.user_permissions.get@.
 module Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
     , AccountsUserPermissionsGet
 
     -- * Request Lenses
+    , aupgXgafv
+    , aupgUploadProtocol
     , aupgPath
+    , aupgAccessToken
+    , aupgUploadType
+    , aupgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.user_permissions.get@ method which the
 -- 'AccountsUserPermissionsGet' request conforms to.
@@ -45,15 +50,25 @@ type AccountsUserPermissionsGetResource =
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] UserPermission
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] UserPermission
 
 -- | Gets a user\'s Account & Container access.
 --
 -- /See:/ 'accountsUserPermissionsGet' smart constructor.
-newtype AccountsUserPermissionsGet =
+data AccountsUserPermissionsGet =
   AccountsUserPermissionsGet'
-    { _aupgPath :: Text
+    { _aupgXgafv :: !(Maybe Xgafv)
+    , _aupgUploadProtocol :: !(Maybe Text)
+    , _aupgPath :: !Text
+    , _aupgAccessToken :: !(Maybe Text)
+    , _aupgUploadType :: !(Maybe Text)
+    , _aupgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,18 +77,63 @@ newtype AccountsUserPermissionsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aupgXgafv'
+--
+-- * 'aupgUploadProtocol'
+--
 -- * 'aupgPath'
+--
+-- * 'aupgAccessToken'
+--
+-- * 'aupgUploadType'
+--
+-- * 'aupgCallback'
 accountsUserPermissionsGet
     :: Text -- ^ 'aupgPath'
     -> AccountsUserPermissionsGet
 accountsUserPermissionsGet pAupgPath_ =
-  AccountsUserPermissionsGet' {_aupgPath = pAupgPath_}
+  AccountsUserPermissionsGet'
+    { _aupgXgafv = Nothing
+    , _aupgUploadProtocol = Nothing
+    , _aupgPath = pAupgPath_
+    , _aupgAccessToken = Nothing
+    , _aupgUploadType = Nothing
+    , _aupgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+aupgXgafv :: Lens' AccountsUserPermissionsGet (Maybe Xgafv)
+aupgXgafv
+  = lens _aupgXgafv (\ s a -> s{_aupgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aupgUploadProtocol :: Lens' AccountsUserPermissionsGet (Maybe Text)
+aupgUploadProtocol
+  = lens _aupgUploadProtocol
+      (\ s a -> s{_aupgUploadProtocol = a})
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}
 aupgPath :: Lens' AccountsUserPermissionsGet Text
 aupgPath = lens _aupgPath (\ s a -> s{_aupgPath = a})
+
+-- | OAuth access token.
+aupgAccessToken :: Lens' AccountsUserPermissionsGet (Maybe Text)
+aupgAccessToken
+  = lens _aupgAccessToken
+      (\ s a -> s{_aupgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aupgUploadType :: Lens' AccountsUserPermissionsGet (Maybe Text)
+aupgUploadType
+  = lens _aupgUploadType
+      (\ s a -> s{_aupgUploadType = a})
+
+-- | JSONP
+aupgCallback :: Lens' AccountsUserPermissionsGet (Maybe Text)
+aupgCallback
+  = lens _aupgCallback (\ s a -> s{_aupgCallback = a})
 
 instance GoogleRequest AccountsUserPermissionsGet
          where
@@ -81,7 +141,12 @@ instance GoogleRequest AccountsUserPermissionsGet
         type Scopes AccountsUserPermissionsGet =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsUserPermissionsGet'{..}
-          = go _aupgPath (Just AltJSON) tagManagerService
+          = go _aupgPath _aupgXgafv _aupgUploadProtocol
+              _aupgAccessToken
+              _aupgUploadType
+              _aupgCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsUserPermissionsGetResource)

@@ -16,7 +16,7 @@
 --
 module Network.Google.WebSecurityScanner.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Output only. Indicates the error reason code.
 data ScanRunErrorTraceCode
@@ -45,7 +45,7 @@ data ScanRunErrorTraceCode
       -- ^ @TOO_MANY_HTTP_ERRORS@
       -- Indicates that a scan encountered numerous errors from the web site
       -- pages. When available, most_common_http_error_code field indicates the
-      -- the most common HTTP error code encountered during the scan.
+      -- most common HTTP error code encountered during the scan.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScanRunErrorTraceCode
@@ -75,6 +75,106 @@ instance FromJSON ScanRunErrorTraceCode where
     parseJSON = parseJSONText "ScanRunErrorTraceCode"
 
 instance ToJSON ScanRunErrorTraceCode where
+    toJSON = toJSONText
+
+-- | The attack vector of the payload triggering this XSS.
+data XssAttackVector
+    = AttackVectorUnspecified
+      -- ^ @ATTACK_VECTOR_UNSPECIFIED@
+      -- Unknown attack vector.
+    | LocalStorage
+      -- ^ @LOCAL_STORAGE@
+      -- The attack comes from fuzzing the browser\'s localStorage.
+    | SessionStorage
+      -- ^ @SESSION_STORAGE@
+      -- The attack comes from fuzzing the browser\'s sessionStorage.
+    | WindowName
+      -- ^ @WINDOW_NAME@
+      -- The attack comes from fuzzing the window\'s name property.
+    | Referrer
+      -- ^ @REFERRER@
+      -- The attack comes from fuzzing the referrer property.
+    | FormInput
+      -- ^ @FORM_INPUT@
+      -- The attack comes from fuzzing an input element.
+    | Cookie
+      -- ^ @COOKIE@
+      -- The attack comes from fuzzing the browser\'s cookies.
+    | PostMessage
+      -- ^ @POST_MESSAGE@
+      -- The attack comes from hijacking the post messaging mechanism.
+    | GetParameters
+      -- ^ @GET_PARAMETERS@
+      -- The attack comes from fuzzing parameters in the url.
+    | URLFragment
+      -- ^ @URL_FRAGMENT@
+      -- The attack comes from fuzzing the fragment in the url.
+    | HTMLComment
+      -- ^ @HTML_COMMENT@
+      -- The attack comes from fuzzing the HTML comments.
+    | PostParameters
+      -- ^ @POST_PARAMETERS@
+      -- The attack comes from fuzzing the POST parameters.
+    | Protocol
+      -- ^ @PROTOCOL@
+      -- The attack comes from fuzzing the protocol.
+    | StoredXss
+      -- ^ @STORED_XSS@
+      -- The attack comes from the server side and is stored.
+    | SameOrigin
+      -- ^ @SAME_ORIGIN@
+      -- The attack is a Same-Origin Method Execution attack via a GET parameter.
+    | UserControllableURL
+      -- ^ @USER_CONTROLLABLE_URL@
+      -- The attack payload is received from a third-party host via a URL that is
+      -- user-controllable
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable XssAttackVector
+
+instance FromHttpApiData XssAttackVector where
+    parseQueryParam = \case
+        "ATTACK_VECTOR_UNSPECIFIED" -> Right AttackVectorUnspecified
+        "LOCAL_STORAGE" -> Right LocalStorage
+        "SESSION_STORAGE" -> Right SessionStorage
+        "WINDOW_NAME" -> Right WindowName
+        "REFERRER" -> Right Referrer
+        "FORM_INPUT" -> Right FormInput
+        "COOKIE" -> Right Cookie
+        "POST_MESSAGE" -> Right PostMessage
+        "GET_PARAMETERS" -> Right GetParameters
+        "URL_FRAGMENT" -> Right URLFragment
+        "HTML_COMMENT" -> Right HTMLComment
+        "POST_PARAMETERS" -> Right PostParameters
+        "PROTOCOL" -> Right Protocol
+        "STORED_XSS" -> Right StoredXss
+        "SAME_ORIGIN" -> Right SameOrigin
+        "USER_CONTROLLABLE_URL" -> Right UserControllableURL
+        x -> Left ("Unable to parse XssAttackVector from: " <> x)
+
+instance ToHttpApiData XssAttackVector where
+    toQueryParam = \case
+        AttackVectorUnspecified -> "ATTACK_VECTOR_UNSPECIFIED"
+        LocalStorage -> "LOCAL_STORAGE"
+        SessionStorage -> "SESSION_STORAGE"
+        WindowName -> "WINDOW_NAME"
+        Referrer -> "REFERRER"
+        FormInput -> "FORM_INPUT"
+        Cookie -> "COOKIE"
+        PostMessage -> "POST_MESSAGE"
+        GetParameters -> "GET_PARAMETERS"
+        URLFragment -> "URL_FRAGMENT"
+        HTMLComment -> "HTML_COMMENT"
+        PostParameters -> "POST_PARAMETERS"
+        Protocol -> "PROTOCOL"
+        StoredXss -> "STORED_XSS"
+        SameOrigin -> "SAME_ORIGIN"
+        UserControllableURL -> "USER_CONTROLLABLE_URL"
+
+instance FromJSON XssAttackVector where
+    parseJSON = parseJSONText "XssAttackVector"
+
+instance ToJSON XssAttackVector where
     toJSON = toJSONText
 
 -- | V1 error format.
@@ -168,6 +268,9 @@ data ScanRunWarningTraceCode
     | SRWTCBlockedByIap
       -- ^ @BLOCKED_BY_IAP@
       -- Indicates that a scan is blocked by IAP.
+    | SRWTCNoStartingURLFoundForManagedScan
+      -- ^ @NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN@
+      -- Indicates that no seeds is found for a scan
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScanRunWarningTraceCode
@@ -179,6 +282,7 @@ instance FromHttpApiData ScanRunWarningTraceCode where
         "TOO_MANY_CRAWL_RESULTS" -> Right SRWTCTooManyCrawlResults
         "TOO_MANY_FUZZ_TASKS" -> Right SRWTCTooManyFuzzTasks
         "BLOCKED_BY_IAP" -> Right SRWTCBlockedByIap
+        "NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN" -> Right SRWTCNoStartingURLFoundForManagedScan
         x -> Left ("Unable to parse ScanRunWarningTraceCode from: " <> x)
 
 instance ToHttpApiData ScanRunWarningTraceCode where
@@ -188,6 +292,7 @@ instance ToHttpApiData ScanRunWarningTraceCode where
         SRWTCTooManyCrawlResults -> "TOO_MANY_CRAWL_RESULTS"
         SRWTCTooManyFuzzTasks -> "TOO_MANY_FUZZ_TASKS"
         SRWTCBlockedByIap -> "BLOCKED_BY_IAP"
+        SRWTCNoStartingURLFoundForManagedScan -> "NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN"
 
 instance FromJSON ScanRunWarningTraceCode where
     parseJSON = parseJSONText "ScanRunWarningTraceCode"
@@ -195,18 +300,18 @@ instance FromJSON ScanRunWarningTraceCode where
 instance ToJSON ScanRunWarningTraceCode where
     toJSON = toJSONText
 
--- | Controls export of scan configurations and results to Cloud Security
--- Command Center.
+-- | Controls export of scan configurations and results to Security Command
+-- Center.
 data ScanConfigExportToSecurityCommandCenter
     = ExportToSecurityCommandCenterUnspecified
       -- ^ @EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED@
       -- Use default, which is ENABLED.
     | Enabled
       -- ^ @ENABLED@
-      -- Export results of this scan to Cloud Security Command Center.
+      -- Export results of this scan to Security Command Center.
     | Disabled
       -- ^ @DISABLED@
-      -- Do not export results of this scan to Cloud Security Command Center.
+      -- Do not export results of this scan to Security Command Center.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScanConfigExportToSecurityCommandCenter
@@ -254,10 +359,6 @@ data ScanConfigErrorCode
       -- ^ @APPENGINE_DEFAULT_HOST_MISSING@
       -- One of the seed URLs is an App Engine URL but the Default Host of the
       -- App Engine is not set.
-    | SCECAppEngineSeedURLNotAllowed
-      -- ^ @APPENGINE_SEED_URL_NOT_ALLOWED@
-      -- One of the seed URLs is an App Engine URL and the scan targets Compute
-      -- Engine only.
     | SCECCannotUseGoogleComAccount
       -- ^ @CANNOT_USE_GOOGLE_COM_ACCOUNT@
       -- Google corporate accounts can not be used for scanning.
@@ -308,6 +409,9 @@ data ScanConfigErrorCode
       -- ^ @FORBIDDEN_TO_SCAN_COMPUTE@
       -- Scan targets Compute Engine, yet current project was not whitelisted for
       -- Google Compute Engine Scanning Alpha access.
+    | SCECForBiddenUpdateToManagedScan
+      -- ^ @FORBIDDEN_UPDATE_TO_MANAGED_SCAN@
+      -- User tries to update managed scan
     | SCECMalformedFilter
       -- ^ @MALFORMED_FILTER@
       -- The supplied filter is malformed. For example, it can not be parsed,
@@ -348,17 +452,13 @@ data ScanConfigErrorCode
     | SCECSeedURLHasNonRoutableIPAddress
       -- ^ @SEED_URL_HAS_NON_ROUTABLE_IP_ADDRESS@
       -- One of the seed URLs has on-routable IP address.
-    | SCECSeedURLIPAddressNotSupportedForAppEngine
-      -- ^ @SEED_URL_IP_ADDRESS_NOT_SUPPORTED_FOR_APPENGINE@
-      -- One of the supplied seed URLs has an IP address, and this is not
-      -- supported in App Engine-only targeted scan.
     | SCECSeedURLHasUnreservedIPAddress
       -- ^ @SEED_URL_HAS_UNRESERVED_IP_ADDRESS@
       -- One of the seed URLs has an IP address that is not reserved for the
       -- current project.
     | SCECServiceAccountNotConfigured
       -- ^ @SERVICE_ACCOUNT_NOT_CONFIGURED@
-      -- The Cloud Security Scanner service account is not configured under the
+      -- The Web Security Scanner service account is not configured under the
       -- project.
     | SCECTooManyScans
       -- ^ @TOO_MANY_SCANS@
@@ -391,7 +491,6 @@ instance FromHttpApiData ScanConfigErrorCode where
         "APPENGINE_API_BACKEND_ERROR" -> Right SCECAppEngineAPIBackendError
         "APPENGINE_API_NOT_ACCESSIBLE" -> Right SCECAppEngineAPINotAccessible
         "APPENGINE_DEFAULT_HOST_MISSING" -> Right SCECAppEngineDefaultHostMissing
-        "APPENGINE_SEED_URL_NOT_ALLOWED" -> Right SCECAppEngineSeedURLNotAllowed
         "CANNOT_USE_GOOGLE_COM_ACCOUNT" -> Right SCECCannotUseGoogleComAccount
         "CANNOT_USE_OWNER_ACCOUNT" -> Right SCECCannotUseOwnerAccount
         "COMPUTE_API_BACKEND_ERROR" -> Right SCECComputeAPIBackendError
@@ -407,6 +506,7 @@ instance FromHttpApiData ScanConfigErrorCode where
         "FAILED_TO_AUTHENTICATE_TO_TARGET" -> Right SCECFailedToAuthenticateToTarget
         "FINDING_TYPE_UNSPECIFIED" -> Right SCECFindingTypeUnspecified
         "FORBIDDEN_TO_SCAN_COMPUTE" -> Right SCECForBiddenToScanCompute
+        "FORBIDDEN_UPDATE_TO_MANAGED_SCAN" -> Right SCECForBiddenUpdateToManagedScan
         "MALFORMED_FILTER" -> Right SCECMalformedFilter
         "MALFORMED_RESOURCE_NAME" -> Right SCECMalformedResourceName
         "PROJECT_INACTIVE" -> Right SCECProjectInactive
@@ -419,7 +519,6 @@ instance FromHttpApiData ScanConfigErrorCode where
         "SEED_URL_MAPPED_TO_NON_ROUTABLE_ADDRESS" -> Right SCECSeedURLMAppedToNonRoutableAddress
         "SEED_URL_MAPPED_TO_UNRESERVED_ADDRESS" -> Right SCECSeedURLMAppedToUnreservedAddress
         "SEED_URL_HAS_NON_ROUTABLE_IP_ADDRESS" -> Right SCECSeedURLHasNonRoutableIPAddress
-        "SEED_URL_IP_ADDRESS_NOT_SUPPORTED_FOR_APPENGINE" -> Right SCECSeedURLIPAddressNotSupportedForAppEngine
         "SEED_URL_HAS_UNRESERVED_IP_ADDRESS" -> Right SCECSeedURLHasUnreservedIPAddress
         "SERVICE_ACCOUNT_NOT_CONFIGURED" -> Right SCECServiceAccountNotConfigured
         "TOO_MANY_SCANS" -> Right SCECTooManyScans
@@ -438,7 +537,6 @@ instance ToHttpApiData ScanConfigErrorCode where
         SCECAppEngineAPIBackendError -> "APPENGINE_API_BACKEND_ERROR"
         SCECAppEngineAPINotAccessible -> "APPENGINE_API_NOT_ACCESSIBLE"
         SCECAppEngineDefaultHostMissing -> "APPENGINE_DEFAULT_HOST_MISSING"
-        SCECAppEngineSeedURLNotAllowed -> "APPENGINE_SEED_URL_NOT_ALLOWED"
         SCECCannotUseGoogleComAccount -> "CANNOT_USE_GOOGLE_COM_ACCOUNT"
         SCECCannotUseOwnerAccount -> "CANNOT_USE_OWNER_ACCOUNT"
         SCECComputeAPIBackendError -> "COMPUTE_API_BACKEND_ERROR"
@@ -454,6 +552,7 @@ instance ToHttpApiData ScanConfigErrorCode where
         SCECFailedToAuthenticateToTarget -> "FAILED_TO_AUTHENTICATE_TO_TARGET"
         SCECFindingTypeUnspecified -> "FINDING_TYPE_UNSPECIFIED"
         SCECForBiddenToScanCompute -> "FORBIDDEN_TO_SCAN_COMPUTE"
+        SCECForBiddenUpdateToManagedScan -> "FORBIDDEN_UPDATE_TO_MANAGED_SCAN"
         SCECMalformedFilter -> "MALFORMED_FILTER"
         SCECMalformedResourceName -> "MALFORMED_RESOURCE_NAME"
         SCECProjectInactive -> "PROJECT_INACTIVE"
@@ -466,7 +565,6 @@ instance ToHttpApiData ScanConfigErrorCode where
         SCECSeedURLMAppedToNonRoutableAddress -> "SEED_URL_MAPPED_TO_NON_ROUTABLE_ADDRESS"
         SCECSeedURLMAppedToUnreservedAddress -> "SEED_URL_MAPPED_TO_UNRESERVED_ADDRESS"
         SCECSeedURLHasNonRoutableIPAddress -> "SEED_URL_HAS_NON_ROUTABLE_IP_ADDRESS"
-        SCECSeedURLIPAddressNotSupportedForAppEngine -> "SEED_URL_IP_ADDRESS_NOT_SUPPORTED_FOR_APPENGINE"
         SCECSeedURLHasUnreservedIPAddress -> "SEED_URL_HAS_UNRESERVED_IP_ADDRESS"
         SCECServiceAccountNotConfigured -> "SERVICE_ACCOUNT_NOT_CONFIGURED"
         SCECTooManyScans -> "TOO_MANY_SCANS"
@@ -523,6 +621,40 @@ instance FromJSON ScanRunResultState where
 instance ToJSON ScanRunResultState where
     toJSON = toJSONText
 
+-- | The risk level selected for the scan
+data ScanConfigRiskLevel
+    = RiskLevelUnspecified
+      -- ^ @RISK_LEVEL_UNSPECIFIED@
+      -- Use default, which is NORMAL.
+    | Normal
+      -- ^ @NORMAL@
+      -- Normal scanning (Recommended)
+    | Low
+      -- ^ @LOW@
+      -- Lower impact scanning
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ScanConfigRiskLevel
+
+instance FromHttpApiData ScanConfigRiskLevel where
+    parseQueryParam = \case
+        "RISK_LEVEL_UNSPECIFIED" -> Right RiskLevelUnspecified
+        "NORMAL" -> Right Normal
+        "LOW" -> Right Low
+        x -> Left ("Unable to parse ScanConfigRiskLevel from: " <> x)
+
+instance ToHttpApiData ScanConfigRiskLevel where
+    toQueryParam = \case
+        RiskLevelUnspecified -> "RISK_LEVEL_UNSPECIFIED"
+        Normal -> "NORMAL"
+        Low -> "LOW"
+
+instance FromJSON ScanConfigRiskLevel where
+    parseJSON = parseJSONText "ScanConfigRiskLevel"
+
+instance ToJSON ScanConfigRiskLevel where
+    toJSON = toJSONText
+
 -- | Output only. The execution state of the ScanRun.
 data ScanRunExecutionState
     = ExecutionStateUnspecified
@@ -561,4 +693,48 @@ instance FromJSON ScanRunExecutionState where
     parseJSON = parseJSONText "ScanRunExecutionState"
 
 instance ToJSON ScanRunExecutionState where
+    toJSON = toJSONText
+
+-- | Output only. The severity level of the reported vulnerability.
+data FindingSeverity
+    = FSSeverityUnspecified
+      -- ^ @SEVERITY_UNSPECIFIED@
+      -- No severity specified. The default value.
+    | FSCritical
+      -- ^ @CRITICAL@
+      -- Critical severity.
+    | FSHigh
+      -- ^ @HIGH@
+      -- High severity.
+    | FSMedium
+      -- ^ @MEDIUM@
+      -- Medium severity.
+    | FSLow
+      -- ^ @LOW@
+      -- Low severity.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FindingSeverity
+
+instance FromHttpApiData FindingSeverity where
+    parseQueryParam = \case
+        "SEVERITY_UNSPECIFIED" -> Right FSSeverityUnspecified
+        "CRITICAL" -> Right FSCritical
+        "HIGH" -> Right FSHigh
+        "MEDIUM" -> Right FSMedium
+        "LOW" -> Right FSLow
+        x -> Left ("Unable to parse FindingSeverity from: " <> x)
+
+instance ToHttpApiData FindingSeverity where
+    toQueryParam = \case
+        FSSeverityUnspecified -> "SEVERITY_UNSPECIFIED"
+        FSCritical -> "CRITICAL"
+        FSHigh -> "HIGH"
+        FSMedium -> "MEDIUM"
+        FSLow -> "LOW"
+
+instance FromJSON FindingSeverity where
+    parseJSON = parseJSONText "FindingSeverity"
+
+instance ToJSON FindingSeverity where
     toJSON = toJSONText

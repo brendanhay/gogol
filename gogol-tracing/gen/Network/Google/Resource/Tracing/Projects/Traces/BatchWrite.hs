@@ -48,8 +48,8 @@ module Network.Google.Resource.Tracing.Projects.Traces.BatchWrite
     , ptbwCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Tracing.Types
+import Network.Google.Prelude
+import Network.Google.Tracing.Types
 
 -- | A resource alias for @tracing.projects.traces.batchWrite@ method which the
 -- 'ProjectsTracesBatchWrite' request conforms to.
@@ -77,15 +77,15 @@ type ProjectsTracesBatchWriteResource =
 -- /See:/ 'projectsTracesBatchWrite' smart constructor.
 data ProjectsTracesBatchWrite =
   ProjectsTracesBatchWrite'
-    { _ptbwXgafv          :: !(Maybe Xgafv)
+    { _ptbwXgafv :: !(Maybe Xgafv)
     , _ptbwUploadProtocol :: !(Maybe Text)
-    , _ptbwPp             :: !Bool
-    , _ptbwAccessToken    :: !(Maybe Text)
-    , _ptbwUploadType     :: !(Maybe Text)
-    , _ptbwPayload        :: !BatchWriteSpansRequest
-    , _ptbwBearerToken    :: !(Maybe Text)
-    , _ptbwName           :: !Text
-    , _ptbwCallback       :: !(Maybe Text)
+    , _ptbwPp :: !Bool
+    , _ptbwAccessToken :: !(Maybe Text)
+    , _ptbwUploadType :: !(Maybe Text)
+    , _ptbwPayload :: !BatchWriteSpansRequest
+    , _ptbwBearerToken :: !(Maybe Text)
+    , _ptbwName :: !Text
+    , _ptbwCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

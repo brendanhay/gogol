@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Delete
     , odtdCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.deidentifyTemplates.delete@ method which the
 -- 'OrganizationsDeidentifyTemplatesDelete' request conforms to.
@@ -66,12 +66,12 @@ type OrganizationsDeidentifyTemplatesDeleteResource =
 -- /See:/ 'organizationsDeidentifyTemplatesDelete' smart constructor.
 data OrganizationsDeidentifyTemplatesDelete =
   OrganizationsDeidentifyTemplatesDelete'
-    { _odtdXgafv          :: !(Maybe Xgafv)
+    { _odtdXgafv :: !(Maybe Xgafv)
     , _odtdUploadProtocol :: !(Maybe Text)
-    , _odtdAccessToken    :: !(Maybe Text)
-    , _odtdUploadType     :: !(Maybe Text)
-    , _odtdName           :: !Text
-    , _odtdCallback       :: !(Maybe Text)
+    , _odtdAccessToken :: !(Maybe Text)
+    , _odtdUploadType :: !(Maybe Text)
+    , _odtdName :: !Text
+    , _odtdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,9 +128,10 @@ odtdUploadType
   = lens _odtdUploadType
       (\ s a -> s{_odtdUploadType = a})
 
--- | Resource name of the organization and deidentify template to be deleted,
--- for example \`organizations\/433245324\/deidentifyTemplates\/432452342\`
--- or projects\/project-id\/deidentifyTemplates\/432452342.
+-- | Required. Resource name of the organization and deidentify template to
+-- be deleted, for example
+-- \`organizations\/433245324\/deidentifyTemplates\/432452342\` or
+-- projects\/project-id\/deidentifyTemplates\/432452342.
 odtdName :: Lens' OrganizationsDeidentifyTemplatesDelete Text
 odtdName = lens _odtdName (\ s a -> s{_odtdName = a})
 

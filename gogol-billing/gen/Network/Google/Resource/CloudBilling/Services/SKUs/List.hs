@@ -46,8 +46,8 @@ module Network.Google.Resource.CloudBilling.Services.SKUs.List
     , sskulCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.services.skus.list@ method which the
 -- 'ServicesSKUsList' request conforms to.
@@ -73,17 +73,17 @@ type ServicesSKUsListResource =
 -- /See:/ 'servicesSKUsList' smart constructor.
 data ServicesSKUsList =
   ServicesSKUsList'
-    { _sskulParent         :: !Text
-    , _sskulXgafv          :: !(Maybe Xgafv)
-    , _sskulCurrencyCode   :: !(Maybe Text)
+    { _sskulParent :: !Text
+    , _sskulXgafv :: !(Maybe Xgafv)
+    , _sskulCurrencyCode :: !(Maybe Text)
     , _sskulUploadProtocol :: !(Maybe Text)
-    , _sskulStartTime      :: !(Maybe DateTime')
-    , _sskulAccessToken    :: !(Maybe Text)
-    , _sskulUploadType     :: !(Maybe Text)
-    , _sskulEndTime        :: !(Maybe DateTime')
-    , _sskulPageToken      :: !(Maybe Text)
-    , _sskulPageSize       :: !(Maybe (Textual Int32))
-    , _sskulCallback       :: !(Maybe Text)
+    , _sskulStartTime :: !(Maybe DateTime')
+    , _sskulAccessToken :: !(Maybe Text)
+    , _sskulUploadType :: !(Maybe Text)
+    , _sskulEndTime :: !(Maybe DateTime')
+    , _sskulPageToken :: !(Maybe Text)
+    , _sskulPageSize :: !(Maybe (Textual Int32))
+    , _sskulCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -132,7 +132,7 @@ servicesSKUsList pSskulParent_ =
     }
 
 
--- | The name of the service. Example: \"services\/DA34-426B-A397\"
+-- | Required. The name of the service. Example: \"services\/DA34-426B-A397\"
 sskulParent :: Lens' ServicesSKUsList Text
 sskulParent
   = lens _sskulParent (\ s a -> s{_sskulParent = a})
@@ -215,7 +215,9 @@ sskulCallback
 instance GoogleRequest ServicesSKUsList where
         type Rs ServicesSKUsList = ListSKUsResponse
         type Scopes ServicesSKUsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient ServicesSKUsList'{..}
           = go _sskulParent _sskulXgafv _sskulCurrencyCode
               _sskulUploadProtocol

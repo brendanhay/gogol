@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSenseHost.AdClients.List
     , aclMaxResults
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.adclients.list@ method which the
 -- 'AdClientsList' request conforms to.
@@ -55,7 +55,7 @@ type AdClientsListResource =
 -- /See:/ 'adClientsList' smart constructor.
 data AdClientsList =
   AdClientsList'
-    { _aclPageToken  :: !(Maybe Text)
+    { _aclPageToken :: !(Maybe Text)
     , _aclMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

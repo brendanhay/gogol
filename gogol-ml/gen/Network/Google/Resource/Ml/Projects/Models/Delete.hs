@@ -21,10 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes a model. You can only delete a model if there are no versions in
--- it. You can delete versions by calling
--- [projects.models.versions.delete](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/delete).
+-- it. You can delete versions by calling projects.models.versions.delete.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.delete@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.delete@.
 module Network.Google.Resource.Ml.Projects.Models.Delete
     (
     -- * REST Resource
@@ -43,8 +42,8 @@ module Network.Google.Resource.Ml.Projects.Models.Delete
     , pmdCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.delete@ method which the
 -- 'ProjectsModelsDelete' request conforms to.
@@ -60,18 +59,17 @@ type ProjectsModelsDeleteResource =
                      Delete '[JSON] GoogleLongrunning__Operation
 
 -- | Deletes a model. You can only delete a model if there are no versions in
--- it. You can delete versions by calling
--- [projects.models.versions.delete](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/delete).
+-- it. You can delete versions by calling projects.models.versions.delete.
 --
 -- /See:/ 'projectsModelsDelete' smart constructor.
 data ProjectsModelsDelete =
   ProjectsModelsDelete'
-    { _pmdXgafv          :: !(Maybe Xgafv)
+    { _pmdXgafv :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
-    , _pmdAccessToken    :: !(Maybe Text)
-    , _pmdUploadType     :: !(Maybe Text)
-    , _pmdName           :: !Text
-    , _pmdCallback       :: !(Maybe Text)
+    , _pmdAccessToken :: !(Maybe Text)
+    , _pmdUploadType :: !(Maybe Text)
+    , _pmdName :: !Text
+    , _pmdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,7 +23,7 @@
 -- Updates a ScanConfig. This method support partial update of a
 -- ScanConfig.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.patch@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.patch@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.Patch
     (
     -- * REST Resource
@@ -44,13 +44,13 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.Patch
     , pscpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.patch@ method which the
 -- 'ProjectsScanConfigsPatch' request conforms to.
 type ProjectsScanConfigsPatchResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -68,14 +68,14 @@ type ProjectsScanConfigsPatchResource =
 -- /See:/ 'projectsScanConfigsPatch' smart constructor.
 data ProjectsScanConfigsPatch =
   ProjectsScanConfigsPatch'
-    { _pscpXgafv          :: !(Maybe Xgafv)
+    { _pscpXgafv :: !(Maybe Xgafv)
     , _pscpUploadProtocol :: !(Maybe Text)
-    , _pscpUpdateMask     :: !(Maybe GFieldMask)
-    , _pscpAccessToken    :: !(Maybe Text)
-    , _pscpUploadType     :: !(Maybe Text)
-    , _pscpPayload        :: !ScanConfig
-    , _pscpName           :: !Text
-    , _pscpCallback       :: !(Maybe Text)
+    , _pscpUpdateMask :: !(Maybe GFieldMask)
+    , _pscpAccessToken :: !(Maybe Text)
+    , _pscpUploadType :: !(Maybe Text)
+    , _pscpPayload :: !ScanConfig
+    , _pscpName :: !Text
+    , _pscpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

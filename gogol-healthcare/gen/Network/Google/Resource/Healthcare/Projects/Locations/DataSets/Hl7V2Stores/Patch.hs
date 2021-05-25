@@ -43,14 +43,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvspCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.patch@ method which the
 -- 'ProjectsLocationsDataSetsHl7V2StoresPatch' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresPatchResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,14 +67,14 @@ type ProjectsLocationsDataSetsHl7V2StoresPatchResource
 -- /See:/ 'projectsLocationsDataSetsHl7V2StoresPatch' smart constructor.
 data ProjectsLocationsDataSetsHl7V2StoresPatch =
   ProjectsLocationsDataSetsHl7V2StoresPatch'
-    { _pldshvspXgafv          :: !(Maybe Xgafv)
+    { _pldshvspXgafv :: !(Maybe Xgafv)
     , _pldshvspUploadProtocol :: !(Maybe Text)
-    , _pldshvspUpdateMask     :: !(Maybe GFieldMask)
-    , _pldshvspAccessToken    :: !(Maybe Text)
-    , _pldshvspUploadType     :: !(Maybe Text)
-    , _pldshvspPayload        :: !Hl7V2Store
-    , _pldshvspName           :: !Text
-    , _pldshvspCallback       :: !(Maybe Text)
+    , _pldshvspUpdateMask :: !(Maybe GFieldMask)
+    , _pldshvspAccessToken :: !(Maybe Text)
+    , _pldshvspUploadType :: !(Maybe Text)
+    , _pldshvspPayload :: !Hl7V2Store
+    , _pldshvspName :: !Text
+    , _pldshvspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -153,7 +153,7 @@ pldshvspPayload
   = lens _pldshvspPayload
       (\ s a -> s{_pldshvspPayload = a})
 
--- | Output only. Resource name of the HL7v2 store, of the form
+-- | Resource name of the HL7v2 store, of the form
 -- \`projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}\`.
 pldshvspName :: Lens' ProjectsLocationsDataSetsHl7V2StoresPatch Text
 pldshvspName

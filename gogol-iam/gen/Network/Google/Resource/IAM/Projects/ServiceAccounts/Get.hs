@@ -41,8 +41,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
     , psagCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.get@ method which the
 -- 'ProjectsServiceAccountsGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsServiceAccountsGetResource =
 -- /See:/ 'projectsServiceAccountsGet' smart constructor.
 data ProjectsServiceAccountsGet =
   ProjectsServiceAccountsGet'
-    { _psagXgafv          :: !(Maybe Xgafv)
+    { _psagXgafv :: !(Maybe Xgafv)
     , _psagUploadProtocol :: !(Maybe Text)
-    , _psagAccessToken    :: !(Maybe Text)
-    , _psagUploadType     :: !(Maybe Text)
-    , _psagName           :: !Text
-    , _psagCallback       :: !(Maybe Text)
+    , _psagAccessToken :: !(Maybe Text)
+    , _psagUploadType :: !(Maybe Text)
+    , _psagName :: !Text
+    , _psagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,11 +124,11 @@ psagUploadType
   = lens _psagUploadType
       (\ s a -> s{_psagUploadType = a})
 
--- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
--- wildcard for the \`PROJECT_ID\` will infer the project from the account.
--- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
--- of the service account.
+-- | Required. The resource name of the service account in the following
+-- format: \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using
+-- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
+-- the account. The \`ACCOUNT\` value can be the \`email\` address or the
+-- \`unique_id\` of the service account.
 psagName :: Lens' ProjectsServiceAccountsGet Text
 psagName = lens _psagName (\ s a -> s{_psagName = a})
 

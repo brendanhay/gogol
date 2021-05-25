@@ -41,8 +41,8 @@ module Network.Google.Resource.FirebaseDynamicLinks.InstallAttribution
     , iaCallback
     ) where
 
-import           Network.Google.FirebaseDynamicLinks.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebasedynamiclinks.installAttribution@ method which the
 -- 'InstallAttribution' request conforms to.
@@ -63,12 +63,12 @@ type InstallAttributionResource =
 -- /See:/ 'installAttribution' smart constructor.
 data InstallAttribution =
   InstallAttribution'
-    { _iaXgafv          :: !(Maybe Xgafv)
+    { _iaXgafv :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
-    , _iaAccessToken    :: !(Maybe Text)
-    , _iaUploadType     :: !(Maybe Text)
-    , _iaPayload        :: !GetIosPostInstallAttributionRequest
-    , _iaCallback       :: !(Maybe Text)
+    , _iaAccessToken :: !(Maybe Text)
+    , _iaUploadType :: !(Maybe Text)
+    , _iaPayload :: !GetIosPostInstallAttributionRequest
+    , _iaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

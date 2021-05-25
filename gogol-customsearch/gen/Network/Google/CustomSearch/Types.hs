@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -29,33 +29,61 @@ module Network.Google.CustomSearch.Types
     , piWidth
     , piSource
 
-    -- * Context
-    , Context
-    , context
-    , cFacets
-    , cTitle
-
     -- * CSEListSiteSearchFilter
     , CSEListSiteSearchFilter (..)
 
     -- * SearchQueries
     , SearchQueries
     , searchQueries
-    , sqAddtional
+    , sqNextPage
+    , sqPreviousPage
+    , sqRequest
 
-    -- * ResultPagemapAdditionalItem
-    , ResultPagemapAdditionalItem
-    , resultPagemapAdditionalItem
-    , rpaiAddtional
+    -- * SearchQueriesPreviousPageItem
+    , SearchQueriesPreviousPageItem
+    , searchQueriesPreviousPageItem
+    , sqppiImgDominantColor
+    , sqppiOutputEncoding
+    , sqppiSiteSearchFilter
+    , sqppiInputEncoding
+    , sqppiOrTerms
+    , sqppiSearchTerms
+    , sqppiStartPage
+    , sqppiRights
+    , sqppiCount
+    , sqppiExcludeTerms
+    , sqppiFileType
+    , sqppiSearchType
+    , sqppiGoogleHost
+    , sqppiDisableCnTwTranslation
+    , sqppiRelatedSite
+    , sqppiHl
+    , sqppiSort
+    , sqppiLanguage
+    , sqppiSiteSearch
+    , sqppiFilter
+    , sqppiTotalResults
+    , sqppiDateRestrict
+    , sqppiTitle
+    , sqppiLinkSite
+    , sqppiLowRange
+    , sqppiImgType
+    , sqppiGl
+    , sqppiCx
+    , sqppiImgColorType
+    , sqppiImgSize
+    , sqppiExactTerms
+    , sqppiStartIndex
+    , sqppiCr
+    , sqppiSafe
+    , sqppiHq
+    , sqppiHighRange
 
     -- * SearchURL
     , SearchURL
     , searchURL
     , suType
     , suTemplate
-
-    -- * CSESiterestrictListFilter
-    , CSESiterestrictListFilter (..)
 
     -- * SearchSpelling
     , SearchSpelling
@@ -126,6 +154,11 @@ module Network.Google.CustomSearch.Types
     , rliDisplayName
     , rliLabelWithOp
 
+    -- * SearchContext
+    , SearchContext
+    , searchContext
+    , scAddtional
+
     -- * CSESiterestrictListImgDominantColor
     , CSESiterestrictListImgDominantColor (..)
 
@@ -137,51 +170,51 @@ module Network.Google.CustomSearch.Types
     , ssiTotalResults
     , ssiFormattedTotalResults
 
-    -- * CSEListFilter
-    , CSEListFilter (..)
-
-    -- * Query
-    , Query
-    , query
-    , qImgDominantColor
-    , qOutputEncoding
-    , qSiteSearchFilter
-    , qInputEncoding
-    , qOrTerms
-    , qSearchTerms
-    , qStartPage
-    , qRights
-    , qCount
-    , qExcludeTerms
-    , qFileType
-    , qSearchType
-    , qGoogleHost
-    , qDisableCnTwTranslation
-    , qRelatedSite
-    , qHl
-    , qSort
-    , qLanguage
-    , qSiteSearch
-    , qFilter
-    , qTotalResults
-    , qDateRestrict
-    , qTitle
-    , qLinkSite
-    , qLowRange
-    , qImgType
-    , qGl
-    , qCx
-    , qImgColorType
-    , qImgSize
-    , qExactTerms
-    , qStartIndex
-    , qCr
-    , qSafe
-    , qHq
-    , qHighRange
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * CSESiterestrictListSiteSearchFilter
     , CSESiterestrictListSiteSearchFilter (..)
+
+    -- * SearchQueriesNextPageItem
+    , SearchQueriesNextPageItem
+    , searchQueriesNextPageItem
+    , sqnpiImgDominantColor
+    , sqnpiOutputEncoding
+    , sqnpiSiteSearchFilter
+    , sqnpiInputEncoding
+    , sqnpiOrTerms
+    , sqnpiSearchTerms
+    , sqnpiStartPage
+    , sqnpiRights
+    , sqnpiCount
+    , sqnpiExcludeTerms
+    , sqnpiFileType
+    , sqnpiSearchType
+    , sqnpiGoogleHost
+    , sqnpiDisableCnTwTranslation
+    , sqnpiRelatedSite
+    , sqnpiHl
+    , sqnpiSort
+    , sqnpiLanguage
+    , sqnpiSiteSearch
+    , sqnpiFilter
+    , sqnpiTotalResults
+    , sqnpiDateRestrict
+    , sqnpiTitle
+    , sqnpiLinkSite
+    , sqnpiLowRange
+    , sqnpiImgType
+    , sqnpiGl
+    , sqnpiCx
+    , sqnpiImgColorType
+    , sqnpiImgSize
+    , sqnpiExactTerms
+    , sqnpiStartIndex
+    , sqnpiCr
+    , sqnpiSafe
+    , sqnpiHq
+    , sqnpiHighRange
 
     -- * PromotionBodyLinesItem
     , PromotionBodyLinesItem
@@ -201,8 +234,45 @@ module Network.Google.CustomSearch.Types
     , pHTMLTitle
     , pTitle
 
-    -- * CSESiterestrictListLr
-    , CSESiterestrictListLr (..)
+    -- * SearchQueriesRequestItem
+    , SearchQueriesRequestItem
+    , searchQueriesRequestItem
+    , sqriImgDominantColor
+    , sqriOutputEncoding
+    , sqriSiteSearchFilter
+    , sqriInputEncoding
+    , sqriOrTerms
+    , sqriSearchTerms
+    , sqriStartPage
+    , sqriRights
+    , sqriCount
+    , sqriExcludeTerms
+    , sqriFileType
+    , sqriSearchType
+    , sqriGoogleHost
+    , sqriDisableCnTwTranslation
+    , sqriRelatedSite
+    , sqriHl
+    , sqriSort
+    , sqriLanguage
+    , sqriSiteSearch
+    , sqriFilter
+    , sqriTotalResults
+    , sqriDateRestrict
+    , sqriTitle
+    , sqriLinkSite
+    , sqriLowRange
+    , sqriImgType
+    , sqriGl
+    , sqriCx
+    , sqriImgColorType
+    , sqriImgSize
+    , sqriExactTerms
+    , sqriStartIndex
+    , sqriCr
+    , sqriSafe
+    , sqriHq
+    , sqriHighRange
 
     -- * CSESiterestrictListSearchType
     , CSESiterestrictListSearchType (..)
@@ -219,16 +289,6 @@ module Network.Google.CustomSearch.Types
     , sPromotions
     , sSpelling
 
-    -- * CSEListLr
-    , CSEListLr (..)
-
-    -- * ContextFacetsItemItem
-    , ContextFacetsItemItem
-    , contextFacetsItemItem
-    , cfiiAnchor
-    , cfiiLabelWithOp
-    , cfiiLabel
-
     -- * CSEListSearchType
     , CSEListSearchType (..)
 
@@ -236,12 +296,12 @@ module Network.Google.CustomSearch.Types
     , CSEListImgSize (..)
     ) where
 
-import           Network.Google.CustomSearch.Types.Product
-import           Network.Google.CustomSearch.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CustomSearch.Types.Product
+import Network.Google.CustomSearch.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the CustomSearch API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Custom Search API. This contains the host and root path used as a starting point for constructing service requests.
 customSearchService :: ServiceConfig
 customSearchService
   = defaultService (ServiceId "customsearch:v1")
-      "www.googleapis.com"
+      "customsearch.googleapis.com"

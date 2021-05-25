@@ -36,8 +36,8 @@ module Network.Google.Resource.SiteVerification.WebResource.GetToken
     , wrgtPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.getToken@ method which the
 -- 'WebResourceGetToken' request conforms to.

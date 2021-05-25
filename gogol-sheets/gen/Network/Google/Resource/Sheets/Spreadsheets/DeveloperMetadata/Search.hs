@@ -46,8 +46,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Search
     , sdmsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.developerMetadata.search@ method which the
 -- 'SpreadsheetsDeveloperMetadataSearch' request conforms to.
@@ -74,13 +74,13 @@ type SpreadsheetsDeveloperMetadataSearchResource =
 -- /See:/ 'spreadsheetsDeveloperMetadataSearch' smart constructor.
 data SpreadsheetsDeveloperMetadataSearch =
   SpreadsheetsDeveloperMetadataSearch'
-    { _sdmsXgafv          :: !(Maybe Xgafv)
+    { _sdmsXgafv :: !(Maybe Xgafv)
     , _sdmsUploadProtocol :: !(Maybe Text)
-    , _sdmsAccessToken    :: !(Maybe Text)
-    , _sdmsSpreadsheetId  :: !Text
-    , _sdmsUploadType     :: !(Maybe Text)
-    , _sdmsPayload        :: !SearchDeveloperMetadataRequest
-    , _sdmsCallback       :: !(Maybe Text)
+    , _sdmsAccessToken :: !(Maybe Text)
+    , _sdmsSpreadsheetId :: !Text
+    , _sdmsUploadType :: !(Maybe Text)
+    , _sdmsPayload :: !SearchDeveloperMetadataRequest
+    , _sdmsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.operations.cancel@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.operations.cancel@.
 module Network.Google.Resource.Ml.Projects.Operations.Cancel
     (
     -- * REST Resource
@@ -49,8 +49,8 @@ module Network.Google.Resource.Ml.Projects.Operations.Cancel
     , pocCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.operations.cancel@ method which the
 -- 'ProjectsOperationsCancel' request conforms to.
@@ -78,12 +78,12 @@ type ProjectsOperationsCancelResource =
 -- /See:/ 'projectsOperationsCancel' smart constructor.
 data ProjectsOperationsCancel =
   ProjectsOperationsCancel'
-    { _pocXgafv          :: !(Maybe Xgafv)
+    { _pocXgafv :: !(Maybe Xgafv)
     , _pocUploadProtocol :: !(Maybe Text)
-    , _pocAccessToken    :: !(Maybe Text)
-    , _pocUploadType     :: !(Maybe Text)
-    , _pocName           :: !Text
-    , _pocCallback       :: !(Maybe Text)
+    , _pocAccessToken :: !(Maybe Text)
+    , _pocUploadType :: !(Maybe Text)
+    , _pocName :: !Text
+    , _pocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -55,9 +55,9 @@ module Network.Google.AcceleratedMobilePageURL.Types
     , BatchGetAmpURLsRequestLookupStrategy (..)
     ) where
 
-import           Network.Google.AcceleratedMobilePageURL.Types.Product
-import           Network.Google.AcceleratedMobilePageURL.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AcceleratedMobilePageURL.Types.Product
+import Network.Google.AcceleratedMobilePageURL.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Accelerated Mobile Pages (AMP) URL API. This contains the host and root path used as a starting point for constructing service requests.
 acceleratedMobilePageUrlService :: ServiceConfig

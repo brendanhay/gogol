@@ -38,8 +38,8 @@ module Network.Google.Resource.ReplicaPool.Pools.Get
     , pgProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.get@ method which the
 -- 'PoolsGet' request conforms to.
@@ -59,8 +59,8 @@ type PoolsGetResource =
 -- /See:/ 'poolsGet' smart constructor.
 data PoolsGet =
   PoolsGet'
-    { _pgPoolName    :: !Text
-    , _pgZone        :: !Text
+    { _pgPoolName :: !Text
+    , _pgZone :: !Text
     , _pgProjectName :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

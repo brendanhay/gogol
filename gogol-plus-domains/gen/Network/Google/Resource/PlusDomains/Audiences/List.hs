@@ -39,8 +39,8 @@ module Network.Google.Resource.PlusDomains.Audiences.List
     , aMaxResults
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.audiences.list@ method which the
 -- 'AudiencesList' request conforms to.
@@ -60,8 +60,8 @@ type AudiencesListResource =
 -- /See:/ 'audiencesList' smart constructor.
 data AudiencesList =
   AudiencesList'
-    { _aUserId     :: !Text
-    , _aPageToken  :: !(Maybe Text)
+    { _aUserId :: !Text
+    , _aPageToken :: !(Maybe Text)
     , _aMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

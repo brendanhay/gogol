@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,6 +22,12 @@ module Network.Google.CloudScheduler.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * OAuthToken
+    , OAuthToken
+    , oAuthToken
+    , oatScope
+    , oatServiceAccountEmail
+
     -- * Status
     , Status
     , status
@@ -42,6 +48,12 @@ module Network.Google.CloudScheduler.Types
     -- * ResumeJobRequest
     , ResumeJobRequest
     , resumeJobRequest
+
+    -- * OidcToken
+    , OidcToken
+    , oidcToken
+    , otAudience
+    , otServiceAccountEmail
 
     -- * AppEngineHTTPTargetHeaders
     , AppEngineHTTPTargetHeaders
@@ -87,6 +99,7 @@ module Network.Google.CloudScheduler.Types
     , pmPublishTime
     , pmAttributes
     , pmMessageId
+    , pmOrderingKey
 
     -- * JobState
     , JobState (..)
@@ -108,7 +121,9 @@ module Network.Google.CloudScheduler.Types
     -- * HTTPTarget
     , HTTPTarget
     , hTTPTarget
+    , httptOAuthToken
     , httptHTTPMethod
+    , httptOidcToken
     , httptBody
     , httptURI
     , httptHeaders
@@ -121,6 +136,7 @@ module Network.Google.CloudScheduler.Types
     , Job
     , job
     , jStatus
+    , jAttemptDeadline
     , jState
     , jLastAttemptTime
     , jRetryConfig
@@ -180,9 +196,9 @@ module Network.Google.CloudScheduler.Types
     , AppEngineHTTPTargetHTTPMethod (..)
     ) where
 
-import           Network.Google.CloudScheduler.Types.Product
-import           Network.Google.CloudScheduler.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types.Product
+import Network.Google.CloudScheduler.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Scheduler API. This contains the host and root path used as a starting point for constructing service requests.
 cloudSchedulerService :: ServiceConfig
@@ -190,6 +206,6 @@ cloudSchedulerService
   = defaultService (ServiceId "cloudscheduler:v1")
       "cloudscheduler.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

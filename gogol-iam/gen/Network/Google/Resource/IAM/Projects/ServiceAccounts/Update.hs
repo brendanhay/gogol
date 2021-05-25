@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Note: This method is in the process of being deprecated. Use
--- PatchServiceAccount instead. Updates a ServiceAccount. Currently, only
--- the following fields are updatable: \`display_name\` . The \`etag\` is
--- mandatory.
+-- **Note:** We are in the process of deprecating this method. Use
+-- PatchServiceAccount instead. Updates a ServiceAccount. You can update
+-- only the \`display_name\` and \`description\` fields.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.update@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
@@ -45,8 +44,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
     , proCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.update@ method which the
 -- 'ProjectsServiceAccountsUpdate' request conforms to.
@@ -62,21 +61,20 @@ type ProjectsServiceAccountsUpdateResource =
                      ReqBody '[JSON] ServiceAccount :>
                        Put '[JSON] ServiceAccount
 
--- | Note: This method is in the process of being deprecated. Use
--- PatchServiceAccount instead. Updates a ServiceAccount. Currently, only
--- the following fields are updatable: \`display_name\` . The \`etag\` is
--- mandatory.
+-- | **Note:** We are in the process of deprecating this method. Use
+-- PatchServiceAccount instead. Updates a ServiceAccount. You can update
+-- only the \`display_name\` and \`description\` fields.
 --
 -- /See:/ 'projectsServiceAccountsUpdate' smart constructor.
 data ProjectsServiceAccountsUpdate =
   ProjectsServiceAccountsUpdate'
-    { _proXgafv          :: !(Maybe Xgafv)
+    { _proXgafv :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
-    , _proAccessToken    :: !(Maybe Text)
-    , _proUploadType     :: !(Maybe Text)
-    , _proPayload        :: !ServiceAccount
-    , _proName           :: !Text
-    , _proCallback       :: !(Maybe Text)
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proPayload :: !ServiceAccount
+    , _proName :: !Text
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,13 +139,17 @@ proPayload :: Lens' ProjectsServiceAccountsUpdate ServiceAccount
 proPayload
   = lens _proPayload (\ s a -> s{_proPayload = a})
 
--- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Requests using
--- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
--- the \`account\` and the \`ACCOUNT\` value can be the \`email\` address
--- or the \`unique_id\` of the service account. In responses the resource
--- name will always be in the format
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`.
+-- | The resource name of the service account. Use one of the following
+-- formats: * \`projects\/{PROJECT_ID}\/serviceAccounts\/{EMAIL_ADDRESS}\`
+-- * \`projects\/{PROJECT_ID}\/serviceAccounts\/{UNIQUE_ID}\` As an
+-- alternative, you can use the \`-\` wildcard character instead of the
+-- project ID: * \`projects\/-\/serviceAccounts\/{EMAIL_ADDRESS}\` *
+-- \`projects\/-\/serviceAccounts\/{UNIQUE_ID}\` When possible, avoid using
+-- the \`-\` wildcard character, because it can cause response messages to
+-- contain misleading error codes. For example, if you try to get the
+-- service account \`projects\/-\/serviceAccounts\/fake\'example.com\`,
+-- which does not exist, the response contains an HTTP \`403 Forbidden\`
+-- error instead of a \`404 Not Found\` error.
 proName :: Lens' ProjectsServiceAccountsUpdate Text
 proName = lens _proName (\ s a -> s{_proName = a})
 

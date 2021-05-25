@@ -17,16 +17,16 @@
 --
 module Network.Google.WebmasterTools.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types.Sum
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types.Sum
 
 -- | Information about the various content types in the sitemap.
 --
 -- /See:/ 'wmxSitemapContent' smart constructor.
 data WmxSitemapContent =
   WmxSitemapContent'
-    { _wscIndexed   :: !(Maybe (Textual Int64))
-    , _wscType      :: !(Maybe Text)
+    { _wscIndexed :: !(Maybe (Textual Int64))
+    , _wscType :: !(Maybe Text)
     , _wscSubmitted :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -85,7 +85,7 @@ instance ToJSON WmxSitemapContent where
 -- /See:/ 'apidimensionFilterGroup' smart constructor.
 data APIdimensionFilterGroup =
   APIdimensionFilterGroup'
-    { _afgFilters   :: !(Maybe [APIdimensionFilter])
+    { _afgFilters :: !(Maybe [APIdimensionFilter])
     , _afgGroupType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -128,141 +128,15 @@ instance ToJSON APIdimensionFilterGroup where
                  [("filters" .=) <$> _afgFilters,
                   ("groupType" .=) <$> _afgGroupType])
 
--- | Additional details about the URL, set only when calling get().
---
--- /See:/ 'urlSampleDetails' smart constructor.
-data URLSampleDetails =
-  URLSampleDetails'
-    { _usdLinkedFromURLs     :: !(Maybe [Text])
-    , _usdContainingSitemaps :: !(Maybe [Text])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLSampleDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'usdLinkedFromURLs'
---
--- * 'usdContainingSitemaps'
-urlSampleDetails
-    :: URLSampleDetails
-urlSampleDetails =
-  URLSampleDetails'
-    {_usdLinkedFromURLs = Nothing, _usdContainingSitemaps = Nothing}
-
-
--- | A sample set of URLs linking to this URL.
-usdLinkedFromURLs :: Lens' URLSampleDetails [Text]
-usdLinkedFromURLs
-  = lens _usdLinkedFromURLs
-      (\ s a -> s{_usdLinkedFromURLs = a})
-      . _Default
-      . _Coerce
-
--- | List of sitemaps pointing at this URL.
-usdContainingSitemaps :: Lens' URLSampleDetails [Text]
-usdContainingSitemaps
-  = lens _usdContainingSitemaps
-      (\ s a -> s{_usdContainingSitemaps = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON URLSampleDetails where
-        parseJSON
-          = withObject "URLSampleDetails"
-              (\ o ->
-                 URLSampleDetails' <$>
-                   (o .:? "linkedFromUrls" .!= mempty) <*>
-                     (o .:? "containingSitemaps" .!= mempty))
-
-instance ToJSON URLSampleDetails where
-        toJSON URLSampleDetails'{..}
-          = object
-              (catMaybes
-                 [("linkedFromUrls" .=) <$> _usdLinkedFromURLs,
-                  ("containingSitemaps" .=) <$>
-                    _usdContainingSitemaps])
-
--- | Number of errors per day for a specific error type (defined by platform
--- and category).
---
--- /See:/ 'urlCrawlErrorCountsPerType' smart constructor.
-data URLCrawlErrorCountsPerType =
-  URLCrawlErrorCountsPerType'
-    { _ucecptPlatform :: !(Maybe Text)
-    , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
-    , _ucecptCategory :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLCrawlErrorCountsPerType' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ucecptPlatform'
---
--- * 'ucecptEntries'
---
--- * 'ucecptCategory'
-urlCrawlErrorCountsPerType
-    :: URLCrawlErrorCountsPerType
-urlCrawlErrorCountsPerType =
-  URLCrawlErrorCountsPerType'
-    { _ucecptPlatform = Nothing
-    , _ucecptEntries = Nothing
-    , _ucecptCategory = Nothing
-    }
-
-
--- | The general type of Googlebot that made the request (see list of
--- Googlebot user-agents for the user-agents used).
-ucecptPlatform :: Lens' URLCrawlErrorCountsPerType (Maybe Text)
-ucecptPlatform
-  = lens _ucecptPlatform
-      (\ s a -> s{_ucecptPlatform = a})
-
--- | The error count entries time series.
-ucecptEntries :: Lens' URLCrawlErrorCountsPerType [URLCrawlErrorCount]
-ucecptEntries
-  = lens _ucecptEntries
-      (\ s a -> s{_ucecptEntries = a})
-      . _Default
-      . _Coerce
-
--- | The crawl error type.
-ucecptCategory :: Lens' URLCrawlErrorCountsPerType (Maybe Text)
-ucecptCategory
-  = lens _ucecptCategory
-      (\ s a -> s{_ucecptCategory = a})
-
-instance FromJSON URLCrawlErrorCountsPerType where
-        parseJSON
-          = withObject "URLCrawlErrorCountsPerType"
-              (\ o ->
-                 URLCrawlErrorCountsPerType' <$>
-                   (o .:? "platform") <*> (o .:? "entries" .!= mempty)
-                     <*> (o .:? "category"))
-
-instance ToJSON URLCrawlErrorCountsPerType where
-        toJSON URLCrawlErrorCountsPerType'{..}
-          = object
-              (catMaybes
-                 [("platform" .=) <$> _ucecptPlatform,
-                  ("entries" .=) <$> _ucecptEntries,
-                  ("category" .=) <$> _ucecptCategory])
-
 --
 -- /See:/ 'apiDataRow' smart constructor.
 data APIDataRow =
   APIDataRow'
     { _adrImpressions :: !(Maybe (Textual Double))
-    , _adrKeys        :: !(Maybe [Text])
-    , _adrCtr         :: !(Maybe (Textual Double))
-    , _adrClicks      :: !(Maybe (Textual Double))
-    , _adrPosition    :: !(Maybe (Textual Double))
+    , _adrKeys :: !(Maybe [Text])
+    , _adrCtr :: !(Maybe (Textual Double))
+    , _adrClicks :: !(Maybe (Textual Double))
+    , _adrPosition :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -341,8 +215,8 @@ instance ToJSON APIDataRow where
 -- /See:/ 'apidimensionFilter' smart constructor.
 data APIdimensionFilter =
   APIdimensionFilter'
-    { _afOperator   :: !(Maybe Text)
-    , _afDimension  :: !(Maybe Text)
+    { _afOperator :: !(Maybe Text)
+    , _afDimension :: !(Maybe Text)
     , _afExpression :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -392,57 +266,6 @@ instance ToJSON APIdimensionFilter where
                   ("dimension" .=) <$> _afDimension,
                   ("expression" .=) <$> _afExpression])
 
--- | An entry in a URL crawl errors time series.
---
--- /See:/ 'urlCrawlErrorCount' smart constructor.
-data URLCrawlErrorCount =
-  URLCrawlErrorCount'
-    { _ucecCount     :: !(Maybe (Textual Int64))
-    , _ucecTimestamp :: !(Maybe DateTime')
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLCrawlErrorCount' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ucecCount'
---
--- * 'ucecTimestamp'
-urlCrawlErrorCount
-    :: URLCrawlErrorCount
-urlCrawlErrorCount =
-  URLCrawlErrorCount' {_ucecCount = Nothing, _ucecTimestamp = Nothing}
-
-
--- | The error count at the given timestamp.
-ucecCount :: Lens' URLCrawlErrorCount (Maybe Int64)
-ucecCount
-  = lens _ucecCount (\ s a -> s{_ucecCount = a}) .
-      mapping _Coerce
-
--- | The date and time when the crawl attempt took place, in RFC 3339 format.
-ucecTimestamp :: Lens' URLCrawlErrorCount (Maybe UTCTime)
-ucecTimestamp
-  = lens _ucecTimestamp
-      (\ s a -> s{_ucecTimestamp = a})
-      . mapping _DateTime
-
-instance FromJSON URLCrawlErrorCount where
-        parseJSON
-          = withObject "URLCrawlErrorCount"
-              (\ o ->
-                 URLCrawlErrorCount' <$>
-                   (o .:? "count") <*> (o .:? "timestamp"))
-
-instance ToJSON URLCrawlErrorCount where
-        toJSON URLCrawlErrorCount'{..}
-          = object
-              (catMaybes
-                 [("count" .=) <$> _ucecCount,
-                  ("timestamp" .=) <$> _ucecTimestamp])
-
 -- | A list of rows, one per result, grouped by key. Metrics in each row are
 -- aggregated for all data grouped by that key either by page or property,
 -- as specified by the aggregation type parameter.
@@ -450,7 +273,7 @@ instance ToJSON URLCrawlErrorCount where
 -- /See:/ 'searchAnalyticsQueryResponse' smart constructor.
 data SearchAnalyticsQueryResponse =
   SearchAnalyticsQueryResponse'
-    { _saqrRows                    :: !(Maybe [APIDataRow])
+    { _saqrRows :: !(Maybe [APIDataRow])
     , _saqrResponseAggregationType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -500,203 +323,21 @@ instance ToJSON SearchAnalyticsQueryResponse where
                   ("responseAggregationType" .=) <$>
                     _saqrResponseAggregationType])
 
--- | List of crawl error samples.
---
--- /See:/ 'urlCrawlErrorsSamplesListResponse' smart constructor.
-newtype URLCrawlErrorsSamplesListResponse =
-  URLCrawlErrorsSamplesListResponse'
-    { _uceslrURLCrawlErrorSample :: Maybe [URLCrawlErrorsSample]
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLCrawlErrorsSamplesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uceslrURLCrawlErrorSample'
-urlCrawlErrorsSamplesListResponse
-    :: URLCrawlErrorsSamplesListResponse
-urlCrawlErrorsSamplesListResponse =
-  URLCrawlErrorsSamplesListResponse' {_uceslrURLCrawlErrorSample = Nothing}
-
-
--- | Information about the sample URL and its crawl error.
-uceslrURLCrawlErrorSample :: Lens' URLCrawlErrorsSamplesListResponse [URLCrawlErrorsSample]
-uceslrURLCrawlErrorSample
-  = lens _uceslrURLCrawlErrorSample
-      (\ s a -> s{_uceslrURLCrawlErrorSample = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON URLCrawlErrorsSamplesListResponse
-         where
-        parseJSON
-          = withObject "URLCrawlErrorsSamplesListResponse"
-              (\ o ->
-                 URLCrawlErrorsSamplesListResponse' <$>
-                   (o .:? "urlCrawlErrorSample" .!= mempty))
-
-instance ToJSON URLCrawlErrorsSamplesListResponse
-         where
-        toJSON URLCrawlErrorsSamplesListResponse'{..}
-          = object
-              (catMaybes
-                 [("urlCrawlErrorSample" .=) <$>
-                    _uceslrURLCrawlErrorSample])
-
--- | A time series of the number of URL crawl errors per error category and
--- platform.
---
--- /See:/ 'urlCrawlErrorsCountsQueryResponse' smart constructor.
-newtype URLCrawlErrorsCountsQueryResponse =
-  URLCrawlErrorsCountsQueryResponse'
-    { _ucecqrCountPerTypes :: Maybe [URLCrawlErrorCountsPerType]
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLCrawlErrorsCountsQueryResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ucecqrCountPerTypes'
-urlCrawlErrorsCountsQueryResponse
-    :: URLCrawlErrorsCountsQueryResponse
-urlCrawlErrorsCountsQueryResponse =
-  URLCrawlErrorsCountsQueryResponse' {_ucecqrCountPerTypes = Nothing}
-
-
--- | The time series of the number of URL crawl errors per error category and
--- platform.
-ucecqrCountPerTypes :: Lens' URLCrawlErrorsCountsQueryResponse [URLCrawlErrorCountsPerType]
-ucecqrCountPerTypes
-  = lens _ucecqrCountPerTypes
-      (\ s a -> s{_ucecqrCountPerTypes = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON URLCrawlErrorsCountsQueryResponse
-         where
-        parseJSON
-          = withObject "URLCrawlErrorsCountsQueryResponse"
-              (\ o ->
-                 URLCrawlErrorsCountsQueryResponse' <$>
-                   (o .:? "countPerTypes" .!= mempty))
-
-instance ToJSON URLCrawlErrorsCountsQueryResponse
-         where
-        toJSON URLCrawlErrorsCountsQueryResponse'{..}
-          = object
-              (catMaybes
-                 [("countPerTypes" .=) <$> _ucecqrCountPerTypes])
-
--- | Contains information about specific crawl errors.
---
--- /See:/ 'urlCrawlErrorsSample' smart constructor.
-data URLCrawlErrorsSample =
-  URLCrawlErrorsSample'
-    { _ucesResponseCode  :: !(Maybe (Textual Int32))
-    , _ucesURLDetails    :: !(Maybe URLSampleDetails)
-    , _ucesLastCrawled   :: !(Maybe DateTime')
-    , _ucesPageURL       :: !(Maybe Text)
-    , _ucesFirstDetected :: !(Maybe DateTime')
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLCrawlErrorsSample' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ucesResponseCode'
---
--- * 'ucesURLDetails'
---
--- * 'ucesLastCrawled'
---
--- * 'ucesPageURL'
---
--- * 'ucesFirstDetected'
-urlCrawlErrorsSample
-    :: URLCrawlErrorsSample
-urlCrawlErrorsSample =
-  URLCrawlErrorsSample'
-    { _ucesResponseCode = Nothing
-    , _ucesURLDetails = Nothing
-    , _ucesLastCrawled = Nothing
-    , _ucesPageURL = Nothing
-    , _ucesFirstDetected = Nothing
-    }
-
-
--- | The HTTP response code, if any.
-ucesResponseCode :: Lens' URLCrawlErrorsSample (Maybe Int32)
-ucesResponseCode
-  = lens _ucesResponseCode
-      (\ s a -> s{_ucesResponseCode = a})
-      . mapping _Coerce
-
--- | Additional details about the URL, set only when calling get().
-ucesURLDetails :: Lens' URLCrawlErrorsSample (Maybe URLSampleDetails)
-ucesURLDetails
-  = lens _ucesURLDetails
-      (\ s a -> s{_ucesURLDetails = a})
-
--- | The time when the URL was last crawled, in RFC 3339 format.
-ucesLastCrawled :: Lens' URLCrawlErrorsSample (Maybe UTCTime)
-ucesLastCrawled
-  = lens _ucesLastCrawled
-      (\ s a -> s{_ucesLastCrawled = a})
-      . mapping _DateTime
-
--- | The URL of an error, relative to the site.
-ucesPageURL :: Lens' URLCrawlErrorsSample (Maybe Text)
-ucesPageURL
-  = lens _ucesPageURL (\ s a -> s{_ucesPageURL = a})
-
--- | The time the error was first detected, in RFC 3339 format.
-ucesFirstDetected :: Lens' URLCrawlErrorsSample (Maybe UTCTime)
-ucesFirstDetected
-  = lens _ucesFirstDetected
-      (\ s a -> s{_ucesFirstDetected = a})
-      . mapping _DateTime
-
-instance FromJSON URLCrawlErrorsSample where
-        parseJSON
-          = withObject "URLCrawlErrorsSample"
-              (\ o ->
-                 URLCrawlErrorsSample' <$>
-                   (o .:? "responseCode") <*> (o .:? "urlDetails") <*>
-                     (o .:? "last_crawled")
-                     <*> (o .:? "pageUrl")
-                     <*> (o .:? "first_detected"))
-
-instance ToJSON URLCrawlErrorsSample where
-        toJSON URLCrawlErrorsSample'{..}
-          = object
-              (catMaybes
-                 [("responseCode" .=) <$> _ucesResponseCode,
-                  ("urlDetails" .=) <$> _ucesURLDetails,
-                  ("last_crawled" .=) <$> _ucesLastCrawled,
-                  ("pageUrl" .=) <$> _ucesPageURL,
-                  ("first_detected" .=) <$> _ucesFirstDetected])
-
 -- | Contains detailed information about a specific URL submitted as a
 -- sitemap.
 --
 -- /See:/ 'wmxSitemap' smart constructor.
 data WmxSitemap =
   WmxSitemap'
-    { _wsContents        :: !(Maybe [WmxSitemapContent])
-    , _wsPath            :: !(Maybe Text)
+    { _wsContents :: !(Maybe [WmxSitemapContent])
+    , _wsPath :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
-    , _wsLastSubmitted   :: !(Maybe DateTime')
-    , _wsWarnings        :: !(Maybe (Textual Int64))
-    , _wsLastDownloaded  :: !(Maybe DateTime')
-    , _wsIsPending       :: !(Maybe Bool)
-    , _wsType            :: !(Maybe Text)
-    , _wsErrors          :: !(Maybe (Textual Int64))
+    , _wsLastSubmitted :: !(Maybe DateTime')
+    , _wsWarnings :: !(Maybe (Textual Int64))
+    , _wsLastDownloaded :: !(Maybe DateTime')
+    , _wsIsPending :: !(Maybe Bool)
+    , _wsType :: !(Maybe Text)
+    , _wsErrors :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -865,14 +506,15 @@ instance ToJSON SitemapsListResponse where
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.
 data SearchAnalyticsQueryRequest =
   SearchAnalyticsQueryRequest'
-    { _saqrAggregationType       :: !(Maybe Text)
-    , _saqrRowLimit              :: !(Maybe (Textual Int32))
-    , _saqrEndDate               :: !(Maybe Text)
-    , _saqrSearchType            :: !(Maybe Text)
+    { _saqrAggregationType :: !(Maybe Text)
+    , _saqrDataState :: !(Maybe Text)
+    , _saqrRowLimit :: !(Maybe (Textual Int32))
+    , _saqrEndDate :: !(Maybe Text)
+    , _saqrSearchType :: !(Maybe Text)
     , _saqrDimensionFilterGroups :: !(Maybe [APIdimensionFilterGroup])
-    , _saqrStartDate             :: !(Maybe Text)
-    , _saqrStartRow              :: !(Maybe (Textual Int32))
-    , _saqrDimensions            :: !(Maybe [Text])
+    , _saqrStartDate :: !(Maybe Text)
+    , _saqrStartRow :: !(Maybe (Textual Int32))
+    , _saqrDimensions :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -882,6 +524,8 @@ data SearchAnalyticsQueryRequest =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'saqrAggregationType'
+--
+-- * 'saqrDataState'
 --
 -- * 'saqrRowLimit'
 --
@@ -901,6 +545,7 @@ searchAnalyticsQueryRequest
 searchAnalyticsQueryRequest =
   SearchAnalyticsQueryRequest'
     { _saqrAggregationType = Nothing
+    , _saqrDataState = Nothing
     , _saqrRowLimit = Nothing
     , _saqrEndDate = Nothing
     , _saqrSearchType = Nothing
@@ -926,6 +571,14 @@ saqrAggregationType :: Lens' SearchAnalyticsQueryRequest (Maybe Text)
 saqrAggregationType
   = lens _saqrAggregationType
       (\ s a -> s{_saqrAggregationType = a})
+
+-- | [Optional] If \"all\" (case-insensitive), data will include fresh data.
+-- If \"final\" (case-insensitive) or if this parameter is omitted, the
+-- returned data will include only finalized data.
+saqrDataState :: Lens' SearchAnalyticsQueryRequest (Maybe Text)
+saqrDataState
+  = lens _saqrDataState
+      (\ s a -> s{_saqrDataState = a})
 
 -- | [Optional; Default is 1000] The maximum number of rows to return. Must
 -- be a number from 1 to 5,000 (inclusive).
@@ -989,8 +642,9 @@ instance FromJSON SearchAnalyticsQueryRequest where
           = withObject "SearchAnalyticsQueryRequest"
               (\ o ->
                  SearchAnalyticsQueryRequest' <$>
-                   (o .:? "aggregationType") <*> (o .:? "rowLimit") <*>
-                     (o .:? "endDate")
+                   (o .:? "aggregationType") <*> (o .:? "dataState") <*>
+                     (o .:? "rowLimit")
+                     <*> (o .:? "endDate")
                      <*> (o .:? "searchType")
                      <*> (o .:? "dimensionFilterGroups" .!= mempty)
                      <*> (o .:? "startDate")
@@ -1002,6 +656,7 @@ instance ToJSON SearchAnalyticsQueryRequest where
           = object
               (catMaybes
                  [("aggregationType" .=) <$> _saqrAggregationType,
+                  ("dataState" .=) <$> _saqrDataState,
                   ("rowLimit" .=) <$> _saqrRowLimit,
                   ("endDate" .=) <$> _saqrEndDate,
                   ("searchType" .=) <$> _saqrSearchType,
@@ -1058,7 +713,7 @@ instance ToJSON SitesListResponse where
 data WmxSite =
   WmxSite'
     { _wsPermissionLevel :: !(Maybe Text)
-    , _wsSiteURL         :: !(Maybe Text)
+    , _wsSiteURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

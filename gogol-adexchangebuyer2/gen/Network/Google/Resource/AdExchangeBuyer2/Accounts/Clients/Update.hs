@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Update
     , acuCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.clients.update@ method which the
 -- 'AccountsClientsUpdate' request conforms to.
@@ -67,14 +67,14 @@ type AccountsClientsUpdateResource =
 -- /See:/ 'accountsClientsUpdate' smart constructor.
 data AccountsClientsUpdate =
   AccountsClientsUpdate'
-    { _acuXgafv           :: !(Maybe Xgafv)
-    , _acuUploadProtocol  :: !(Maybe Text)
-    , _acuAccessToken     :: !(Maybe Text)
-    , _acuUploadType      :: !(Maybe Text)
-    , _acuPayload         :: !Client
-    , _acuAccountId       :: !(Textual Int64)
+    { _acuXgafv :: !(Maybe Xgafv)
+    , _acuUploadProtocol :: !(Maybe Text)
+    , _acuAccessToken :: !(Maybe Text)
+    , _acuUploadType :: !(Maybe Text)
+    , _acuPayload :: !Client
+    , _acuAccountId :: !(Textual Int64)
     , _acuClientAccountId :: !(Textual Int64)
-    , _acuCallback        :: !(Maybe Text)
+    , _acuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

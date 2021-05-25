@@ -22,7 +22,7 @@
 --
 -- Tests the IAM permissions for the specified Catalog.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.testIamPermissions@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermissions
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermi
     , ctipCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.testIamPermissions@ method which the
 -- 'CatalogsTestIAMPermissions' request conforms to.
@@ -64,13 +64,13 @@ type CatalogsTestIAMPermissionsResource =
 -- /See:/ 'catalogsTestIAMPermissions' smart constructor.
 data CatalogsTestIAMPermissions =
   CatalogsTestIAMPermissions'
-    { _ctipXgafv          :: !(Maybe Xgafv)
+    { _ctipXgafv :: !(Maybe Xgafv)
     , _ctipUploadProtocol :: !(Maybe Text)
-    , _ctipAccessToken    :: !(Maybe Text)
-    , _ctipUploadType     :: !(Maybe Text)
-    , _ctipPayload        :: !GoogleIAMV1TestIAMPermissionsRequest
-    , _ctipResource       :: !Text
-    , _ctipCallback       :: !(Maybe Text)
+    , _ctipAccessToken :: !(Maybe Text)
+    , _ctipUploadType :: !(Maybe Text)
+    , _ctipPayload :: !GoogleIAMV1TestIAMPermissionsRequest
+    , _ctipResource :: !Text
+    , _ctipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

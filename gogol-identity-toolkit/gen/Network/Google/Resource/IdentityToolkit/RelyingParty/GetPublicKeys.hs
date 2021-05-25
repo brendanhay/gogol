@@ -34,8 +34,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
 
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getPublicKeys@ method which the
 -- 'RelyingPartyGetPublicKeys' request conforms to.

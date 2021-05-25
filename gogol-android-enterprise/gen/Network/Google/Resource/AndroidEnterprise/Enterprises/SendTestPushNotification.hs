@@ -34,11 +34,16 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotific
     , EnterprisesSendTestPushNotification
 
     -- * Request Lenses
+    , estpnXgafv
+    , estpnUploadProtocol
     , estpnEnterpriseId
+    , estpnAccessToken
+    , estpnUploadType
+    , estpnCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.sendTestPushNotification@ method which the
 -- 'EnterprisesSendTestPushNotification' request conforms to.
@@ -48,17 +53,27 @@ type EnterprisesSendTestPushNotificationResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "sendTestPushNotification" :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON]
-                   EnterprisesSendTestPushNotificationResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON]
+                             EnterprisesSendTestPushNotificationResponse
 
 -- | Sends a test notification to validate the EMM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ 'enterprisesSendTestPushNotification' smart constructor.
-newtype EnterprisesSendTestPushNotification =
+data EnterprisesSendTestPushNotification =
   EnterprisesSendTestPushNotification'
-    { _estpnEnterpriseId :: Text
+    { _estpnXgafv :: !(Maybe Xgafv)
+    , _estpnUploadProtocol :: !(Maybe Text)
+    , _estpnEnterpriseId :: !Text
+    , _estpnAccessToken :: !(Maybe Text)
+    , _estpnUploadType :: !(Maybe Text)
+    , _estpnCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,20 +82,65 @@ newtype EnterprisesSendTestPushNotification =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'estpnXgafv'
+--
+-- * 'estpnUploadProtocol'
+--
 -- * 'estpnEnterpriseId'
+--
+-- * 'estpnAccessToken'
+--
+-- * 'estpnUploadType'
+--
+-- * 'estpnCallback'
 enterprisesSendTestPushNotification
     :: Text -- ^ 'estpnEnterpriseId'
     -> EnterprisesSendTestPushNotification
 enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
   EnterprisesSendTestPushNotification'
-    {_estpnEnterpriseId = pEstpnEnterpriseId_}
+    { _estpnXgafv = Nothing
+    , _estpnUploadProtocol = Nothing
+    , _estpnEnterpriseId = pEstpnEnterpriseId_
+    , _estpnAccessToken = Nothing
+    , _estpnUploadType = Nothing
+    , _estpnCallback = Nothing
+    }
 
+
+-- | V1 error format.
+estpnXgafv :: Lens' EnterprisesSendTestPushNotification (Maybe Xgafv)
+estpnXgafv
+  = lens _estpnXgafv (\ s a -> s{_estpnXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+estpnUploadProtocol :: Lens' EnterprisesSendTestPushNotification (Maybe Text)
+estpnUploadProtocol
+  = lens _estpnUploadProtocol
+      (\ s a -> s{_estpnUploadProtocol = a})
 
 -- | The ID of the enterprise.
 estpnEnterpriseId :: Lens' EnterprisesSendTestPushNotification Text
 estpnEnterpriseId
   = lens _estpnEnterpriseId
       (\ s a -> s{_estpnEnterpriseId = a})
+
+-- | OAuth access token.
+estpnAccessToken :: Lens' EnterprisesSendTestPushNotification (Maybe Text)
+estpnAccessToken
+  = lens _estpnAccessToken
+      (\ s a -> s{_estpnAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+estpnUploadType :: Lens' EnterprisesSendTestPushNotification (Maybe Text)
+estpnUploadType
+  = lens _estpnUploadType
+      (\ s a -> s{_estpnUploadType = a})
+
+-- | JSONP
+estpnCallback :: Lens' EnterprisesSendTestPushNotification (Maybe Text)
+estpnCallback
+  = lens _estpnCallback
+      (\ s a -> s{_estpnCallback = a})
 
 instance GoogleRequest
            EnterprisesSendTestPushNotification
@@ -91,7 +151,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient
           EnterprisesSendTestPushNotification'{..}
-          = go _estpnEnterpriseId (Just AltJSON)
+          = go _estpnEnterpriseId _estpnXgafv
+              _estpnUploadProtocol
+              _estpnAccessToken
+              _estpnUploadType
+              _estpnCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

@@ -40,8 +40,8 @@ module Network.Google.Resource.Calendar.Events.Move
     , emEventId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.move@ method which the
 -- 'EventsMove' request conforms to.
@@ -63,11 +63,11 @@ type EventsMoveResource =
 -- /See:/ 'eventsMove' smart constructor.
 data EventsMove =
   EventsMove'
-    { _emDestination       :: !Text
-    , _emCalendarId        :: !Text
+    { _emDestination :: !Text
+    , _emCalendarId :: !Text
     , _emSendNotifications :: !(Maybe Bool)
-    , _emSendUpdates       :: !(Maybe EventsMoveSendUpdates)
-    , _emEventId           :: !Text
+    , _emSendUpdates :: !(Maybe EventsMoveSendUpdates)
+    , _emEventId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

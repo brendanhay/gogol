@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Configures and serves authoritative DNS records.
+
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -48,6 +48,12 @@ library
         , Network.Google.Resource.DNS.ManagedZones.List
         , Network.Google.Resource.DNS.ManagedZones.Patch
         , Network.Google.Resource.DNS.ManagedZones.Update
+        , Network.Google.Resource.DNS.Policies.Create
+        , Network.Google.Resource.DNS.Policies.Delete
+        , Network.Google.Resource.DNS.Policies.Get
+        , Network.Google.Resource.DNS.Policies.List
+        , Network.Google.Resource.DNS.Policies.Patch
+        , Network.Google.Resource.DNS.Policies.Update
         , Network.Google.Resource.DNS.Projects.Get
         , Network.Google.Resource.DNS.ResourceRecordSets.List
 

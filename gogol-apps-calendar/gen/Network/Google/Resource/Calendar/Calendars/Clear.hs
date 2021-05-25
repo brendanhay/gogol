@@ -37,8 +37,8 @@ module Network.Google.Resource.Calendar.Calendars.Clear
     , ccCalendarId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.clear@ method which the
 -- 'CalendarsClear' request conforms to.

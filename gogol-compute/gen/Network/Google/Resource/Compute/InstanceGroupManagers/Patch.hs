@@ -46,8 +46,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Patch
     , igmpPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.patch@ method which the
 -- 'InstanceGroupManagersPatch' request conforms to.
@@ -76,11 +76,11 @@ type InstanceGroupManagersPatchResource =
 -- /See:/ 'instanceGroupManagersPatch' smart constructor.
 data InstanceGroupManagersPatch =
   InstanceGroupManagersPatch'
-    { _igmpRequestId            :: !(Maybe Text)
-    , _igmpProject              :: !Text
+    { _igmpRequestId :: !(Maybe Text)
+    , _igmpProject :: !Text
     , _igmpInstanceGroupManager :: !Text
-    , _igmpZone                 :: !Text
-    , _igmpPayload              :: !InstanceGroupManager
+    , _igmpZone :: !Text
+    , _igmpPayload :: !InstanceGroupManager
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

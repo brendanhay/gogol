@@ -17,18 +17,19 @@
 --
 module Network.Google.Analytics.Types.Product where
 
-import           Network.Google.Analytics.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types.Sum
+import Network.Google.Prelude
 
 -- | JSON template for a user deletion request resource.
 --
 -- /See:/ 'userDeletionRequest' smart constructor.
 data UserDeletionRequest =
   UserDeletionRequest'
-    { _udrWebPropertyId       :: !(Maybe Text)
-    , _udrKind                :: !Text
-    , _udrId                  :: !(Maybe UserDeletionRequestId)
-    , _udrFirebaseProjectId   :: !(Maybe Text)
+    { _udrWebPropertyId :: !(Maybe Text)
+    , _udrKind :: !Text
+    , _udrPropertyId :: !(Maybe Text)
+    , _udrId :: !(Maybe UserDeletionRequestId)
+    , _udrFirebaseProjectId :: !(Maybe Text)
     , _udrDeletionRequestTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -42,6 +43,8 @@ data UserDeletionRequest =
 --
 -- * 'udrKind'
 --
+-- * 'udrPropertyId'
+--
 -- * 'udrId'
 --
 -- * 'udrFirebaseProjectId'
@@ -53,6 +56,7 @@ userDeletionRequest =
   UserDeletionRequest'
     { _udrWebPropertyId = Nothing
     , _udrKind = "analytics#userDeletionRequest"
+    , _udrPropertyId = Nothing
     , _udrId = Nothing
     , _udrFirebaseProjectId = Nothing
     , _udrDeletionRequestTime = Nothing
@@ -68,6 +72,12 @@ udrWebPropertyId
 -- | Value is \"analytics#userDeletionRequest\".
 udrKind :: Lens' UserDeletionRequest Text
 udrKind = lens _udrKind (\ s a -> s{_udrKind = a})
+
+-- | Property ID
+udrPropertyId :: Lens' UserDeletionRequest (Maybe Text)
+udrPropertyId
+  = lens _udrPropertyId
+      (\ s a -> s{_udrPropertyId = a})
 
 -- | User ID.
 udrId :: Lens' UserDeletionRequest (Maybe UserDeletionRequestId)
@@ -94,6 +104,7 @@ instance FromJSON UserDeletionRequest where
                  UserDeletionRequest' <$>
                    (o .:? "webPropertyId") <*>
                      (o .:? "kind" .!= "analytics#userDeletionRequest")
+                     <*> (o .:? "propertyId")
                      <*> (o .:? "id")
                      <*> (o .:? "firebaseProjectId")
                      <*> (o .:? "deletionRequestTime"))
@@ -103,7 +114,9 @@ instance ToJSON UserDeletionRequest where
           = object
               (catMaybes
                  [("webPropertyId" .=) <$> _udrWebPropertyId,
-                  Just ("kind" .= _udrKind), ("id" .=) <$> _udrId,
+                  Just ("kind" .= _udrKind),
+                  ("propertyId" .=) <$> _udrPropertyId,
+                  ("id" .=) <$> _udrId,
                   ("firebaseProjectId" .=) <$> _udrFirebaseProjectId,
                   ("deletionRequestTime" .=) <$>
                     _udrDeletionRequestTime])
@@ -116,13 +129,13 @@ instance ToJSON UserDeletionRequest where
 -- /See:/ 'unSampledReports' smart constructor.
 data UnSampledReports =
   UnSampledReports'
-    { _usrNextLink     :: !(Maybe Text)
+    { _usrNextLink :: !(Maybe Text)
     , _usrItemsPerPage :: !(Maybe (Textual Int32))
-    , _usrKind         :: !Text
-    , _usrUsername     :: !(Maybe Text)
-    , _usrItems        :: !(Maybe [UnSampledReport])
+    , _usrKind :: !Text
+    , _usrUsername :: !(Maybe Text)
+    , _usrItems :: !(Maybe [UnSampledReport])
     , _usrTotalResults :: !(Maybe (Textual Int32))
-    , _usrStartIndex   :: !(Maybe (Textual Int32))
+    , _usrStartIndex :: !(Maybe (Textual Int32))
     , _usrPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -245,8 +258,8 @@ instance ToJSON UnSampledReports where
 -- /See:/ 'goalURLDestinationDetailsStepsItem' smart constructor.
 data GoalURLDestinationDetailsStepsItem =
   GoalURLDestinationDetailsStepsItem'
-    { _guddsiURL    :: !(Maybe Text)
-    , _guddsiName   :: !(Maybe Text)
+    { _guddsiURL :: !(Maybe Text)
+    , _guddsiName :: !(Maybe Text)
     , _guddsiNumber :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -307,17 +320,17 @@ instance ToJSON GoalURLDestinationDetailsStepsItem
 -- /See:/ 'gaDataQuery' smart constructor.
 data GaDataQuery =
   GaDataQuery'
-    { _gdqMetrics       :: !(Maybe [Text])
+    { _gdqMetrics :: !(Maybe [Text])
     , _gdqSamplingLevel :: !(Maybe Text)
-    , _gdqFilters       :: !(Maybe Text)
-    , _gdqIds           :: !(Maybe Text)
-    , _gdqEndDate       :: !(Maybe Text)
-    , _gdqSort          :: !(Maybe [Text])
-    , _gdqDimensions    :: !(Maybe Text)
-    , _gdqStartIndex    :: !(Maybe (Textual Int32))
-    , _gdqMaxResults    :: !(Maybe (Textual Int32))
-    , _gdqSegment       :: !(Maybe Text)
-    , _gdqStartDate     :: !(Maybe Text)
+    , _gdqFilters :: !(Maybe Text)
+    , _gdqIds :: !(Maybe Text)
+    , _gdqEndDate :: !(Maybe Text)
+    , _gdqSort :: !(Maybe [Text])
+    , _gdqDimensions :: !(Maybe Text)
+    , _gdqStartIndex :: !(Maybe (Textual Int32))
+    , _gdqMaxResults :: !(Maybe (Textual Int32))
+    , _gdqSegment :: !(Maybe Text)
+    , _gdqStartDate :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -468,13 +481,13 @@ instance ToJSON GaDataQuery where
 -- /See:/ 'remarketingAudiences' smart constructor.
 data RemarketingAudiences =
   RemarketingAudiences'
-    { _raNextLink     :: !(Maybe Text)
+    { _raNextLink :: !(Maybe Text)
     , _raItemsPerPage :: !(Maybe (Textual Int32))
-    , _raKind         :: !Text
-    , _raUsername     :: !(Maybe Text)
-    , _raItems        :: !(Maybe [RemarketingAudience])
+    , _raKind :: !Text
+    , _raUsername :: !(Maybe Text)
+    , _raItems :: !(Maybe [RemarketingAudience])
     , _raTotalResults :: !(Maybe (Textual Int32))
-    , _raStartIndex   :: !(Maybe (Textual Int32))
+    , _raStartIndex :: !(Maybe (Textual Int32))
     , _raPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -630,25 +643,25 @@ instance ToJSON GaDataDataTableRowsItem where
 -- /See:/ 'unSampledReport' smart constructor.
 data UnSampledReport =
   UnSampledReport'
-    { _uDownloadType                :: !(Maybe Text)
-    , _uStatus                      :: !(Maybe Text)
-    , _uMetrics                     :: !(Maybe Text)
-    , _uDriveDownloadDetails        :: !(Maybe UnSampledReportDriveDownloadDetails)
-    , _uWebPropertyId               :: !(Maybe Text)
-    , _uKind                        :: !Text
-    , _uCreated                     :: !(Maybe DateTime')
-    , _uFilters                     :: !(Maybe Text)
-    , _uProFileId                   :: !(Maybe Text)
-    , _uEndDate                     :: !(Maybe Text)
-    , _uSelfLink                    :: !(Maybe Text)
-    , _uAccountId                   :: !(Maybe Text)
-    , _uId                          :: !(Maybe Text)
-    , _uUpdated                     :: !(Maybe DateTime')
-    , _uTitle                       :: !(Maybe Text)
-    , _uDimensions                  :: !(Maybe Text)
-    , _uSegment                     :: !(Maybe Text)
+    { _uDownloadType :: !(Maybe Text)
+    , _uStatus :: !(Maybe Text)
+    , _uMetrics :: !(Maybe Text)
+    , _uDriveDownloadDetails :: !(Maybe UnSampledReportDriveDownloadDetails)
+    , _uWebPropertyId :: !(Maybe Text)
+    , _uKind :: !Text
+    , _uCreated :: !(Maybe DateTime')
+    , _uFilters :: !(Maybe Text)
+    , _uProFileId :: !(Maybe Text)
+    , _uEndDate :: !(Maybe Text)
+    , _uSelfLink :: !(Maybe Text)
+    , _uAccountId :: !(Maybe Text)
+    , _uId :: !(Maybe Text)
+    , _uUpdated :: !(Maybe DateTime')
+    , _uTitle :: !(Maybe Text)
+    , _uDimensions :: !(Maybe Text)
+    , _uSegment :: !(Maybe Text)
     , _uCloudStorageDownloadDetails :: !(Maybe UnSampledReportCloudStorageDownloadDetails)
-    , _uStartDate                   :: !(Maybe Text)
+    , _uStartDate :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -873,8 +886,8 @@ instance ToJSON UnSampledReport where
 data McfDataColumnHeadersItem =
   McfDataColumnHeadersItem'
     { _mdchiColumnType :: !(Maybe Text)
-    , _mdchiName       :: !(Maybe Text)
-    , _mdchiDataType   :: !(Maybe Text)
+    , _mdchiName :: !(Maybe Text)
+    , _mdchiDataType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1023,20 +1036,20 @@ instance ToJSON ProFileParentLink where
 -- /See:/ 'remarketingAudience' smart constructor.
 data RemarketingAudience =
   RemarketingAudience'
-    { _rWebPropertyId                :: !(Maybe Text)
-    , _rKind                         :: !Text
-    , _rCreated                      :: !(Maybe DateTime')
-    , _rLinkedAdAccounts             :: !(Maybe [LinkedForeignAccount])
-    , _rAudienceDefinition           :: !(Maybe RemarketingAudienceAudienceDefinition)
-    , _rAudienceType                 :: !(Maybe Text)
-    , _rAccountId                    :: !(Maybe Text)
-    , _rName                         :: !(Maybe Text)
+    { _rWebPropertyId :: !(Maybe Text)
+    , _rKind :: !Text
+    , _rCreated :: !(Maybe DateTime')
+    , _rLinkedAdAccounts :: !(Maybe [LinkedForeignAccount])
+    , _rAudienceDefinition :: !(Maybe RemarketingAudienceAudienceDefinition)
+    , _rAudienceType :: !(Maybe Text)
+    , _rAccountId :: !(Maybe Text)
+    , _rName :: !(Maybe Text)
     , _rStateBasedAudienceDefinition :: !(Maybe RemarketingAudienceStateBasedAudienceDefinition)
-    , _rLinkedViews                  :: !(Maybe [Text])
-    , _rInternalWebPropertyId        :: !(Maybe Text)
-    , _rId                           :: !(Maybe Text)
-    , _rUpdated                      :: !(Maybe DateTime')
-    , _rDescription                  :: !(Maybe Text)
+    , _rLinkedViews :: !(Maybe [Text])
+    , _rInternalWebPropertyId :: !(Maybe Text)
+    , _rId :: !(Maybe Text)
+    , _rUpdated :: !(Maybe DateTime')
+    , _rDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1256,7 +1269,7 @@ instance ToJSON GaDataDataTableRowsItemCItem where
 -- /See:/ 'entityUserLinkPermissions' smart constructor.
 data EntityUserLinkPermissions =
   EntityUserLinkPermissions'
-    { _eulpLocal     :: !(Maybe [Text])
+    { _eulpLocal :: !(Maybe [Text])
     , _eulpEffective :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1316,12 +1329,12 @@ instance ToJSON EntityUserLinkPermissions where
 -- /See:/ 'realtimeDataProFileInfo' smart constructor.
 data RealtimeDataProFileInfo =
   RealtimeDataProFileInfo'
-    { _rdpfiWebPropertyId         :: !(Maybe Text)
-    , _rdpfiProFileId             :: !(Maybe Text)
-    , _rdpfiProFileName           :: !(Maybe Text)
-    , _rdpfiAccountId             :: !(Maybe Text)
+    { _rdpfiWebPropertyId :: !(Maybe Text)
+    , _rdpfiProFileId :: !(Maybe Text)
+    , _rdpfiProFileName :: !(Maybe Text)
+    , _rdpfiAccountId :: !(Maybe Text)
     , _rdpfiInternalWebPropertyId :: !(Maybe Text)
-    , _rdpfiTableId               :: !(Maybe Text)
+    , _rdpfiTableId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1417,7 +1430,7 @@ instance ToJSON RealtimeDataProFileInfo where
 data McfDataRowsItemItemConversionPathValueItem =
   McfDataRowsItemItemConversionPathValueItem'
     { _mdriicpviInteractionType :: !(Maybe Text)
-    , _mdriicpviNodeValue       :: !(Maybe Text)
+    , _mdriicpviNodeValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1476,11 +1489,11 @@ instance ToJSON
 -- /See:/ 'filterExpression' smart constructor.
 data FilterExpression =
   FilterExpression'
-    { _feFieldIndex      :: !(Maybe (Textual Int32))
-    , _feField           :: !(Maybe Text)
-    , _feKind            :: !Text
-    , _feMatchType       :: !(Maybe Text)
-    , _feCaseSensitive   :: !(Maybe Bool)
+    { _feFieldIndex :: !(Maybe (Textual Int32))
+    , _feField :: !(Maybe Text)
+    , _feKind :: !Text
+    , _feMatchType :: !(Maybe Text)
+    , _feCaseSensitive :: !(Maybe Bool)
     , _feExpressionValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1603,13 +1616,13 @@ instance ToJSON FilterExpression where
 -- /See:/ 'proFileRef' smart constructor.
 data ProFileRef =
   ProFileRef'
-    { _pfrWebPropertyId         :: !(Maybe Text)
-    , _pfrKind                  :: !Text
-    , _pfrHref                  :: !(Maybe Text)
-    , _pfrAccountId             :: !(Maybe Text)
-    , _pfrName                  :: !(Maybe Text)
+    { _pfrWebPropertyId :: !(Maybe Text)
+    , _pfrKind :: !Text
+    , _pfrHref :: !(Maybe Text)
+    , _pfrAccountId :: !(Maybe Text)
+    , _pfrName :: !(Maybe Text)
     , _pfrInternalWebPropertyId :: !(Maybe Text)
-    , _pfrId                    :: !(Maybe Text)
+    , _pfrId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1712,13 +1725,13 @@ instance ToJSON ProFileRef where
 -- /See:/ 'accounts' smart constructor.
 data Accounts =
   Accounts'
-    { _aNextLink     :: !(Maybe Text)
+    { _aNextLink :: !(Maybe Text)
     , _aItemsPerPage :: !(Maybe (Textual Int32))
-    , _aKind         :: !Text
-    , _aUsername     :: !(Maybe Text)
-    , _aItems        :: !(Maybe [Account])
+    , _aKind :: !Text
+    , _aUsername :: !(Maybe Text)
+    , _aItems :: !(Maybe [Account])
     , _aTotalResults :: !(Maybe (Textual Int32))
-    , _aStartIndex   :: !(Maybe (Textual Int32))
+    , _aStartIndex :: !(Maybe (Textual Int32))
     , _aPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1843,13 +1856,13 @@ instance ToJSON Accounts where
 -- /See:/ 'experiments' smart constructor.
 data Experiments =
   Experiments'
-    { _eNextLink     :: !(Maybe Text)
+    { _eNextLink :: !(Maybe Text)
     , _eItemsPerPage :: !(Maybe (Textual Int32))
-    , _eKind         :: !Text
-    , _eUsername     :: !(Maybe Text)
-    , _eItems        :: !(Maybe [Experiment])
+    , _eKind :: !Text
+    , _eUsername :: !(Maybe Text)
+    , _eItems :: !(Maybe [Experiment])
     , _eTotalResults :: !(Maybe (Textual Int32))
-    , _eStartIndex   :: !(Maybe (Textual Int32))
+    , _eStartIndex :: !(Maybe (Textual Int32))
     , _ePreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2062,12 +2075,12 @@ instance ToJSON UnSampledReportDriveDownloadDetails
 -- /See:/ 'mcfDataProFileInfo' smart constructor.
 data McfDataProFileInfo =
   McfDataProFileInfo'
-    { _mdpfiWebPropertyId         :: !(Maybe Text)
-    , _mdpfiProFileId             :: !(Maybe Text)
-    , _mdpfiProFileName           :: !(Maybe Text)
-    , _mdpfiAccountId             :: !(Maybe Text)
+    { _mdpfiWebPropertyId :: !(Maybe Text)
+    , _mdpfiProFileId :: !(Maybe Text)
+    , _mdpfiProFileName :: !(Maybe Text)
+    , _mdpfiAccountId :: !(Maybe Text)
     , _mdpfiInternalWebPropertyId :: !(Maybe Text)
-    , _mdpfiTableId               :: !(Maybe Text)
+    , _mdpfiTableId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2165,13 +2178,13 @@ instance ToJSON McfDataProFileInfo where
 -- /See:/ 'customDataSources' smart constructor.
 data CustomDataSources =
   CustomDataSources'
-    { _cdsNextLink     :: !(Maybe Text)
+    { _cdsNextLink :: !(Maybe Text)
     , _cdsItemsPerPage :: !(Maybe (Textual Int32))
-    , _cdsKind         :: !Text
-    , _cdsUsername     :: !(Maybe Text)
-    , _cdsItems        :: !(Maybe [CustomDataSource])
+    , _cdsKind :: !Text
+    , _cdsUsername :: !(Maybe Text)
+    , _cdsItems :: !(Maybe [CustomDataSource])
     , _cdsTotalResults :: !(Maybe (Textual Int32))
-    , _cdsStartIndex   :: !(Maybe (Textual Int32))
+    , _cdsStartIndex :: !(Maybe (Textual Int32))
     , _cdsPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2343,9 +2356,9 @@ instance ToJSON WebPropertyChildLink where
 -- /See:/ 'hashClientIdResponse' smart constructor.
 data HashClientIdResponse =
   HashClientIdResponse'
-    { _hcirClientId       :: !(Maybe Text)
-    , _hcirWebPropertyId  :: !(Maybe Text)
-    , _hcirKind           :: !Text
+    { _hcirClientId :: !(Maybe Text)
+    , _hcirWebPropertyId :: !(Maybe Text)
+    , _hcirKind :: !Text
     , _hcirHashedClientId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2413,21 +2426,21 @@ instance ToJSON HashClientIdResponse where
 -- /See:/ 'mcfData' smart constructor.
 data McfData =
   McfData'
-    { _mdNextLink            :: !(Maybe Text)
-    , _mdSampleSpace         :: !(Maybe (Textual Int64))
-    , _mdItemsPerPage        :: !(Maybe (Textual Int32))
-    , _mdProFileInfo         :: !(Maybe McfDataProFileInfo)
-    , _mdKind                :: !Text
-    , _mdSampleSize          :: !(Maybe (Textual Int64))
-    , _mdRows                :: !(Maybe [[McfDataRowsItemItem]])
-    , _mdSelfLink            :: !(Maybe Text)
-    , _mdQuery               :: !(Maybe McfDataQuery)
-    , _mdColumnHeaders       :: !(Maybe [McfDataColumnHeadersItem])
-    , _mdId                  :: !(Maybe Text)
-    , _mdTotalResults        :: !(Maybe (Textual Int32))
+    { _mdNextLink :: !(Maybe Text)
+    , _mdSampleSpace :: !(Maybe (Textual Int64))
+    , _mdItemsPerPage :: !(Maybe (Textual Int32))
+    , _mdProFileInfo :: !(Maybe McfDataProFileInfo)
+    , _mdKind :: !Text
+    , _mdSampleSize :: !(Maybe (Textual Int64))
+    , _mdRows :: !(Maybe [[McfDataRowsItemItem]])
+    , _mdSelfLink :: !(Maybe Text)
+    , _mdQuery :: !(Maybe McfDataQuery)
+    , _mdColumnHeaders :: !(Maybe [McfDataColumnHeadersItem])
+    , _mdId :: !(Maybe Text)
+    , _mdTotalResults :: !(Maybe (Textual Int32))
     , _mdContainsSampledData :: !(Maybe Bool)
     , _mdTotalsForAllResults :: !(Maybe McfDataTotalsForAllResults)
-    , _mdPreviousLink        :: !(Maybe Text)
+    , _mdPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2632,8 +2645,8 @@ instance ToJSON McfData where
 data UserRef =
   UserRef'
     { _urEmail :: !(Maybe Text)
-    , _urKind  :: !Text
-    , _urId    :: !(Maybe Text)
+    , _urKind :: !Text
+    , _urId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2686,7 +2699,7 @@ instance ToJSON UserRef where
 data GoalVisitNumPagesDetails =
   GoalVisitNumPagesDetails'
     { _gvnpdComparisonValue :: !(Maybe (Textual Int64))
-    , _gvnpdComparisonType  :: !(Maybe Text)
+    , _gvnpdComparisonType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2739,8 +2752,8 @@ instance ToJSON GoalVisitNumPagesDetails where
 data RealtimeDataColumnHeadersItem =
   RealtimeDataColumnHeadersItem'
     { _rdchiColumnType :: !(Maybe Text)
-    , _rdchiName       :: !(Maybe Text)
-    , _rdchiDataType   :: !(Maybe Text)
+    , _rdchiName :: !(Maybe Text)
+    , _rdchiDataType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2804,7 +2817,7 @@ data AccountRef =
     { _arKind :: !Text
     , _arHref :: !(Maybe Text)
     , _arName :: !(Maybe Text)
-    , _arId   :: !(Maybe Text)
+    , _arId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2870,12 +2883,12 @@ instance ToJSON AccountRef where
 -- /See:/ 'entityAdWordsLinks' smart constructor.
 data EntityAdWordsLinks =
   EntityAdWordsLinks'
-    { _eawlNextLink     :: !(Maybe Text)
+    { _eawlNextLink :: !(Maybe Text)
     , _eawlItemsPerPage :: !(Maybe (Textual Int32))
-    , _eawlKind         :: !Text
-    , _eawlItems        :: !(Maybe [EntityAdWordsLink])
+    , _eawlKind :: !Text
+    , _eawlItems :: !(Maybe [EntityAdWordsLink])
     , _eawlTotalResults :: !(Maybe (Textual Int32))
-    , _eawlStartIndex   :: !(Maybe (Textual Int32))
+    , _eawlStartIndex :: !(Maybe (Textual Int32))
     , _eawlPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2991,13 +3004,13 @@ instance ToJSON EntityAdWordsLinks where
 -- /See:/ 'proFiles' smart constructor.
 data ProFiles =
   ProFiles'
-    { _pfNextLink     :: !(Maybe Text)
+    { _pfNextLink :: !(Maybe Text)
     , _pfItemsPerPage :: !(Maybe (Textual Int32))
-    , _pfKind         :: !Text
-    , _pfUsername     :: !(Maybe Text)
-    , _pfItems        :: !(Maybe [ProFile])
+    , _pfKind :: !Text
+    , _pfUsername :: !(Maybe Text)
+    , _pfItems :: !(Maybe [ProFile])
     , _pfTotalResults :: !(Maybe (Textual Int32))
-    , _pfStartIndex   :: !(Maybe (Textual Int32))
+    , _pfStartIndex :: !(Maybe (Textual Int32))
     , _pfPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3170,12 +3183,12 @@ instance ToJSON
 data EntityAdWordsLink =
   EntityAdWordsLink'
     { _entAdWordsAccounts :: !(Maybe [AdWordsAccount])
-    , _entProFileIds      :: !(Maybe [Text])
-    , _entKind            :: !Text
-    , _entSelfLink        :: !(Maybe Text)
-    , _entName            :: !(Maybe Text)
-    , _entId              :: !(Maybe Text)
-    , _entEntity          :: !(Maybe EntityAdWordsLinkEntity)
+    , _entProFileIds :: !(Maybe [Text])
+    , _entKind :: !Text
+    , _entSelfLink :: !(Maybe Text)
+    , _entName :: !(Maybe Text)
+    , _entId :: !(Maybe Text)
+    , _entEntity :: !(Maybe EntityAdWordsLinkEntity)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3280,9 +3293,9 @@ instance ToJSON EntityAdWordsLink where
 -- /See:/ 'filterSearchAndReplaceDetails' smart constructor.
 data FilterSearchAndReplaceDetails =
   FilterSearchAndReplaceDetails'
-    { _fsardFieldIndex    :: !(Maybe (Textual Int32))
-    , _fsardField         :: !(Maybe Text)
-    , _fsardSearchString  :: !(Maybe Text)
+    { _fsardFieldIndex :: !(Maybe (Textual Int32))
+    , _fsardField :: !(Maybe Text)
+    , _fsardSearchString :: !(Maybe Text)
     , _fsardReplaceString :: !(Maybe Text)
     , _fsardCaseSensitive :: !(Maybe Bool)
     }
@@ -3411,32 +3424,32 @@ instance ToJSON ProFilePermissions where
 -- /See:/ 'proFile' smart constructor.
 data ProFile =
   ProFile'
-    { _pParentLink                        :: !(Maybe ProFileParentLink)
-    , _pECommerceTracking                 :: !(Maybe Bool)
-    , _pSiteSearchCategoryParameters      :: !(Maybe Text)
-    , _pWebPropertyId                     :: !(Maybe Text)
-    , _pChildLink                         :: !(Maybe ProFileChildLink)
-    , _pSiteSearchQueryParameters         :: !(Maybe Text)
-    , _pKind                              :: !Text
-    , _pDefaultPage                       :: !(Maybe Text)
-    , _pCreated                           :: !(Maybe DateTime')
-    , _pSelfLink                          :: !(Maybe Text)
-    , _pAccountId                         :: !(Maybe Text)
-    , _pBotFilteringEnabled               :: !(Maybe Bool)
-    , _pName                              :: !(Maybe Text)
-    , _pCurrency                          :: !(Maybe Text)
-    , _pStarred                           :: !(Maybe Bool)
-    , _pInternalWebPropertyId             :: !(Maybe Text)
-    , _pId                                :: !(Maybe Text)
-    , _pUpdated                           :: !(Maybe DateTime')
-    , _pPermissions                       :: !(Maybe ProFilePermissions)
-    , _pWebsiteURL                        :: !(Maybe Text)
-    , _pType                              :: !(Maybe Text)
+    { _pParentLink :: !(Maybe ProFileParentLink)
+    , _pECommerceTracking :: !(Maybe Bool)
+    , _pSiteSearchCategoryParameters :: !(Maybe Text)
+    , _pWebPropertyId :: !(Maybe Text)
+    , _pChildLink :: !(Maybe ProFileChildLink)
+    , _pSiteSearchQueryParameters :: !(Maybe Text)
+    , _pKind :: !Text
+    , _pDefaultPage :: !(Maybe Text)
+    , _pCreated :: !(Maybe DateTime')
+    , _pSelfLink :: !(Maybe Text)
+    , _pAccountId :: !(Maybe Text)
+    , _pBotFilteringEnabled :: !(Maybe Bool)
+    , _pName :: !(Maybe Text)
+    , _pCurrency :: !(Maybe Text)
+    , _pStarred :: !(Maybe Bool)
+    , _pInternalWebPropertyId :: !(Maybe Text)
+    , _pId :: !(Maybe Text)
+    , _pUpdated :: !(Maybe DateTime')
+    , _pPermissions :: !(Maybe ProFilePermissions)
+    , _pWebsiteURL :: !(Maybe Text)
+    , _pType :: !(Maybe Text)
     , _pStripSiteSearchCategoryParameters :: !(Maybe Bool)
-    , _pTimezone                          :: !(Maybe Text)
-    , _pExcludeQueryParameters            :: !(Maybe Text)
-    , _pEnhancedECommerceTracking         :: !(Maybe Bool)
-    , _pStripSiteSearchQueryParameters    :: !(Maybe Bool)
+    , _pTimezone :: !(Maybe Text)
+    , _pExcludeQueryParameters :: !(Maybe Text)
+    , _pEnhancedECommerceTracking :: !(Maybe Bool)
+    , _pStripSiteSearchQueryParameters :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3753,13 +3766,13 @@ instance ToJSON ProFile where
 -- /See:/ 'accountSummaries' smart constructor.
 data AccountSummaries =
   AccountSummaries'
-    { _asNextLink     :: !(Maybe Text)
+    { _asNextLink :: !(Maybe Text)
     , _asItemsPerPage :: !(Maybe (Textual Int32))
-    , _asKind         :: !Text
-    , _asUsername     :: !(Maybe Text)
-    , _asItems        :: !(Maybe [AccountSummary])
+    , _asKind :: !Text
+    , _asUsername :: !(Maybe Text)
+    , _asItems :: !(Maybe [AccountSummary])
     , _asTotalResults :: !(Maybe (Textual Int32))
-    , _asStartIndex   :: !(Maybe (Textual Int32))
+    , _asStartIndex :: !(Maybe (Textual Int32))
     , _asPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3881,7 +3894,7 @@ instance ToJSON AccountSummaries where
 -- /See:/ 'goalEventDetails' smart constructor.
 data GoalEventDetails =
   GoalEventDetails'
-    { _gedUseEventValue   :: !(Maybe Bool)
+    { _gedUseEventValue :: !(Maybe Bool)
     , _gedEventConditions :: !(Maybe [GoalEventDetailsEventConditionsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3935,14 +3948,14 @@ instance ToJSON GoalEventDetails where
 -- /See:/ 'webPropertySummary' smart constructor.
 data WebPropertySummary =
   WebPropertySummary'
-    { _wpsKind                  :: !Text
-    , _wpsProFiles              :: !(Maybe [ProFileSummary])
-    , _wpsName                  :: !(Maybe Text)
-    , _wpsStarred               :: !(Maybe Bool)
+    { _wpsKind :: !Text
+    , _wpsProFiles :: !(Maybe [ProFileSummary])
+    , _wpsName :: !(Maybe Text)
+    , _wpsStarred :: !(Maybe Bool)
     , _wpsInternalWebPropertyId :: !(Maybe Text)
-    , _wpsId                    :: !(Maybe Text)
-    , _wpsWebsiteURL            :: !(Maybe Text)
-    , _wpsLevel                 :: !(Maybe Text)
+    , _wpsId :: !(Maybe Text)
+    , _wpsWebsiteURL :: !(Maybe Text)
+    , _wpsLevel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4055,13 +4068,13 @@ instance ToJSON WebPropertySummary where
 -- /See:/ 'filters' smart constructor.
 data Filters =
   Filters'
-    { _fNextLink     :: !(Maybe Text)
+    { _fNextLink :: !(Maybe Text)
     , _fItemsPerPage :: !(Maybe (Textual Int32))
-    , _fKind         :: !Text
-    , _fUsername     :: !(Maybe Text)
-    , _fItems        :: !(Maybe [Filter])
+    , _fKind :: !Text
+    , _fUsername :: !(Maybe Text)
+    , _fItems :: !(Maybe [Filter])
     , _fTotalResults :: !(Maybe (Textual Int32))
-    , _fStartIndex   :: !(Maybe (Textual Int32))
+    , _fStartIndex :: !(Maybe (Textual Int32))
     , _fPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4183,23 +4196,23 @@ instance ToJSON Filters where
 -- /See:/ 'gaData' smart constructor.
 data GaData =
   GaData'
-    { _gdNextLink            :: !(Maybe Text)
-    , _gdSampleSpace         :: !(Maybe (Textual Int64))
-    , _gdItemsPerPage        :: !(Maybe (Textual Int32))
-    , _gdProFileInfo         :: !(Maybe GaDataProFileInfo)
-    , _gdKind                :: !Text
-    , _gdSampleSize          :: !(Maybe (Textual Int64))
-    , _gdRows                :: !(Maybe [[Text]])
-    , _gdSelfLink            :: !(Maybe Text)
-    , _gdQuery               :: !(Maybe GaDataQuery)
-    , _gdColumnHeaders       :: !(Maybe [GaDataColumnHeadersItem])
-    , _gdId                  :: !(Maybe Text)
-    , _gdTotalResults        :: !(Maybe (Textual Int32))
-    , _gdDataLastRefreshed   :: !(Maybe (Textual Int64))
-    , _gdDataTable           :: !(Maybe GaDataDataTable)
+    { _gdNextLink :: !(Maybe Text)
+    , _gdSampleSpace :: !(Maybe (Textual Int64))
+    , _gdItemsPerPage :: !(Maybe (Textual Int32))
+    , _gdProFileInfo :: !(Maybe GaDataProFileInfo)
+    , _gdKind :: !Text
+    , _gdSampleSize :: !(Maybe (Textual Int64))
+    , _gdRows :: !(Maybe [[Text]])
+    , _gdSelfLink :: !(Maybe Text)
+    , _gdQuery :: !(Maybe GaDataQuery)
+    , _gdColumnHeaders :: !(Maybe [GaDataColumnHeadersItem])
+    , _gdId :: !(Maybe Text)
+    , _gdTotalResults :: !(Maybe (Textual Int32))
+    , _gdDataLastRefreshed :: !(Maybe (Textual Int64))
+    , _gdDataTable :: !(Maybe GaDataDataTable)
     , _gdContainsSampledData :: !(Maybe Bool)
     , _gdTotalsForAllResults :: !(Maybe GaDataTotalsForAllResults)
-    , _gdPreviousLink        :: !(Maybe Text)
+    , _gdPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4468,21 +4481,21 @@ instance ToJSON RealtimeDataTotalsForAllResults where
 -- /See:/ 'customDataSource' smart constructor.
 data CustomDataSource =
   CustomDataSource'
-    { _cParentLink     :: !(Maybe CustomDataSourceParentLink)
-    , _cWebPropertyId  :: !(Maybe Text)
-    , _cChildLink      :: !(Maybe CustomDataSourceChildLink)
-    , _cKind           :: !Text
-    , _cCreated        :: !(Maybe DateTime')
-    , _cUploadType     :: !(Maybe Text)
-    , _cSchema         :: !(Maybe [Text])
+    { _cParentLink :: !(Maybe CustomDataSourceParentLink)
+    , _cWebPropertyId :: !(Maybe Text)
+    , _cChildLink :: !(Maybe CustomDataSourceChildLink)
+    , _cKind :: !Text
+    , _cCreated :: !(Maybe DateTime')
+    , _cUploadType :: !(Maybe Text)
+    , _cSchema :: !(Maybe [Text])
     , _cImportBehavior :: !(Maybe Text)
-    , _cSelfLink       :: !(Maybe Text)
-    , _cAccountId      :: !(Maybe Text)
-    , _cName           :: !(Maybe Text)
-    , _cId             :: !(Maybe Text)
-    , _cUpdated        :: !(Maybe DateTime')
-    , _cType           :: !(Maybe Text)
-    , _cDescription    :: !(Maybe Text)
+    , _cSelfLink :: !(Maybe Text)
+    , _cAccountId :: !(Maybe Text)
+    , _cName :: !(Maybe Text)
+    , _cId :: !(Maybe Text)
+    , _cUpdated :: !(Maybe DateTime')
+    , _cType :: !(Maybe Text)
+    , _cDescription :: !(Maybe Text)
     , _cProFilesLinked :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4679,11 +4692,11 @@ instance ToJSON CustomDataSource where
 data AccountTreeRequest =
   AccountTreeRequest'
     { _atrWebPropertyName :: !(Maybe Text)
-    , _atrKind            :: !Text
-    , _atrAccountName     :: !(Maybe Text)
-    , _atrProFileName     :: !(Maybe Text)
-    , _atrWebsiteURL      :: !(Maybe Text)
-    , _atrTimezone        :: !(Maybe Text)
+    , _atrKind :: !Text
+    , _atrAccountName :: !(Maybe Text)
+    , _atrProFileName :: !(Maybe Text)
+    , _atrWebsiteURL :: !(Maybe Text)
+    , _atrTimezone :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4772,12 +4785,12 @@ instance ToJSON AccountTreeRequest where
 -- /See:/ 'webPropertyRef' smart constructor.
 data WebPropertyRef =
   WebPropertyRef'
-    { _wprKind                  :: !Text
-    , _wprHref                  :: !(Maybe Text)
-    , _wprAccountId             :: !(Maybe Text)
-    , _wprName                  :: !(Maybe Text)
+    { _wprKind :: !Text
+    , _wprHref :: !(Maybe Text)
+    , _wprAccountId :: !(Maybe Text)
+    , _wprName :: !(Maybe Text)
     , _wprInternalWebPropertyId :: !(Maybe Text)
-    , _wprId                    :: !(Maybe Text)
+    , _wprId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4865,16 +4878,16 @@ instance ToJSON WebPropertyRef where
 -- /See:/ 'linkedForeignAccount' smart constructor.
 data LinkedForeignAccount =
   LinkedForeignAccount'
-    { _lfaStatus                :: !(Maybe Text)
-    , _lfaWebPropertyId         :: !(Maybe Text)
-    , _lfaKind                  :: !Text
-    , _lfaEligibleForSearch     :: !(Maybe Bool)
-    , _lfaAccountId             :: !(Maybe Text)
+    { _lfaStatus :: !(Maybe Text)
+    , _lfaWebPropertyId :: !(Maybe Text)
+    , _lfaKind :: !Text
+    , _lfaEligibleForSearch :: !(Maybe Bool)
+    , _lfaAccountId :: !(Maybe Text)
     , _lfaRemarketingAudienceId :: !(Maybe Text)
-    , _lfaLinkedAccountId       :: !(Maybe Text)
+    , _lfaLinkedAccountId :: !(Maybe Text)
     , _lfaInternalWebPropertyId :: !(Maybe Text)
-    , _lfaId                    :: !(Maybe Text)
-    , _lfaType                  :: !(Maybe Text)
+    , _lfaId :: !(Maybe Text)
+    , _lfaType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5013,13 +5026,13 @@ instance ToJSON LinkedForeignAccount where
 -- /See:/ 'goals' smart constructor.
 data Goals =
   Goals'
-    { _gNextLink     :: !(Maybe Text)
+    { _gNextLink :: !(Maybe Text)
     , _gItemsPerPage :: !(Maybe (Textual Int32))
-    , _gKind         :: !Text
-    , _gUsername     :: !(Maybe Text)
-    , _gItems        :: !(Maybe [Goal])
+    , _gKind :: !Text
+    , _gUsername :: !(Maybe Text)
+    , _gItems :: !(Maybe [Goal])
     , _gTotalResults :: !(Maybe (Textual Int32))
-    , _gStartIndex   :: !(Maybe (Textual Int32))
+    , _gStartIndex :: !(Maybe (Textual Int32))
     , _gPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5143,7 +5156,7 @@ instance ToJSON Goals where
 -- /See:/ 'mcfDataRowsItemItem' smart constructor.
 data McfDataRowsItemItem =
   McfDataRowsItemItem'
-    { _mdriiPrimitiveValue      :: !(Maybe Text)
+    { _mdriiPrimitiveValue :: !(Maybe Text)
     , _mdriiConversionPathValue :: !(Maybe [McfDataRowsItemItemConversionPathValueItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5240,8 +5253,8 @@ instance ToJSON AccountPermissions where
 -- /See:/ 'entityUserLinkEntity' smart constructor.
 data EntityUserLinkEntity =
   EntityUserLinkEntity'
-    { _euleProFileRef     :: !(Maybe ProFileRef)
-    , _euleAccountRef     :: !(Maybe AccountRef)
+    { _euleProFileRef :: !(Maybe ProFileRef)
+    , _euleAccountRef :: !(Maybe AccountRef)
     , _euleWebPropertyRef :: !(Maybe WebPropertyRef)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5305,14 +5318,14 @@ instance ToJSON EntityUserLinkEntity where
 -- /See:/ 'account' smart constructor.
 data Account =
   Account'
-    { _accChildLink   :: !(Maybe AccountChildLink)
-    , _accKind        :: !Text
-    , _accCreated     :: !(Maybe DateTime')
-    , _accSelfLink    :: !(Maybe Text)
-    , _accName        :: !(Maybe Text)
-    , _accStarred     :: !(Maybe Bool)
-    , _accId          :: !(Maybe Text)
-    , _accUpdated     :: !(Maybe DateTime')
+    { _accChildLink :: !(Maybe AccountChildLink)
+    , _accKind :: !Text
+    , _accCreated :: !(Maybe DateTime')
+    , _accSelfLink :: !(Maybe Text)
+    , _accName :: !(Maybe Text)
+    , _accStarred :: !(Maybe Bool)
+    , _accId :: !(Maybe Text)
+    , _accUpdated :: !(Maybe DateTime')
     , _accPermissions :: !(Maybe AccountPermissions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5434,34 +5447,34 @@ instance ToJSON Account where
 -- /See:/ 'experiment' smart constructor.
 data Experiment =
   Experiment'
-    { _expParentLink                     :: !(Maybe ExperimentParentLink)
-    , _expEqualWeighting                 :: !(Maybe Bool)
-    , _expStatus                         :: !(Maybe Text)
-    , _expWebPropertyId                  :: !(Maybe Text)
-    , _expStartTime                      :: !(Maybe DateTime')
-    , _expSnippet                        :: !(Maybe Text)
-    , _expKind                           :: !Text
-    , _expCreated                        :: !(Maybe DateTime')
-    , _expReasonExperimentEnded          :: !(Maybe Text)
-    , _expTrafficCoverage                :: !(Maybe (Textual Double))
-    , _expEditableInGaUi                 :: !(Maybe Bool)
-    , _expMinimumExperimentLengthInDays  :: !(Maybe (Textual Int32))
-    , _expProFileId                      :: !(Maybe Text)
-    , _expOptimizationType               :: !(Maybe Text)
-    , _expSelfLink                       :: !(Maybe Text)
-    , _expAccountId                      :: !(Maybe Text)
-    , _expName                           :: !(Maybe Text)
-    , _expWinnerFound                    :: !(Maybe Bool)
-    , _expEndTime                        :: !(Maybe DateTime')
-    , _expVariations                     :: !(Maybe [ExperimentVariationsItem])
-    , _expInternalWebPropertyId          :: !(Maybe Text)
-    , _expId                             :: !(Maybe Text)
-    , _expUpdated                        :: !(Maybe DateTime')
+    { _expParentLink :: !(Maybe ExperimentParentLink)
+    , _expEqualWeighting :: !(Maybe Bool)
+    , _expStatus :: !(Maybe Text)
+    , _expWebPropertyId :: !(Maybe Text)
+    , _expStartTime :: !(Maybe DateTime')
+    , _expSnippet :: !(Maybe Text)
+    , _expKind :: !Text
+    , _expCreated :: !(Maybe DateTime')
+    , _expReasonExperimentEnded :: !(Maybe Text)
+    , _expTrafficCoverage :: !(Maybe (Textual Double))
+    , _expEditableInGaUi :: !(Maybe Bool)
+    , _expMinimumExperimentLengthInDays :: !(Maybe (Textual Int32))
+    , _expProFileId :: !(Maybe Text)
+    , _expOptimizationType :: !(Maybe Text)
+    , _expSelfLink :: !(Maybe Text)
+    , _expAccountId :: !(Maybe Text)
+    , _expName :: !(Maybe Text)
+    , _expWinnerFound :: !(Maybe Bool)
+    , _expEndTime :: !(Maybe DateTime')
+    , _expVariations :: !(Maybe [ExperimentVariationsItem])
+    , _expInternalWebPropertyId :: !(Maybe Text)
+    , _expId :: !(Maybe Text)
+    , _expUpdated :: !(Maybe DateTime')
     , _expRewriteVariationURLsAsOriginal :: !(Maybe Bool)
-    , _expObjectiveMetric                :: !(Maybe Text)
-    , _expWinnerConfidenceLevel          :: !(Maybe (Textual Double))
-    , _expServingFramework               :: !(Maybe Text)
-    , _expDescription                    :: !(Maybe Text)
+    , _expObjectiveMetric :: !(Maybe Text)
+    , _expWinnerConfidenceLevel :: !(Maybe (Textual Double))
+    , _expServingFramework :: !(Maybe Text)
+    , _expDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5850,12 +5863,12 @@ instance ToJSON Experiment where
 -- /See:/ 'entityUserLinks' smart constructor.
 data EntityUserLinks =
   EntityUserLinks'
-    { _eulNextLink     :: !(Maybe Text)
+    { _eulNextLink :: !(Maybe Text)
     , _eulItemsPerPage :: !(Maybe (Textual Int32))
-    , _eulKind         :: !Text
-    , _eulItems        :: !(Maybe [EntityUserLink])
+    , _eulKind :: !Text
+    , _eulItems :: !(Maybe [EntityUserLink])
     , _eulTotalResults :: !(Maybe (Textual Int32))
-    , _eulStartIndex   :: !(Maybe (Textual Int32))
+    , _eulStartIndex :: !(Maybe (Textual Int32))
     , _eulPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5970,8 +5983,8 @@ instance ToJSON EntityUserLinks where
 data AdWordsAccount =
   AdWordsAccount'
     { _awaAutoTaggingEnabled :: !(Maybe Bool)
-    , _awaKind               :: !Text
-    , _awaCustomerId         :: !(Maybe Text)
+    , _awaKind :: !Text
+    , _awaCustomerId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6035,11 +6048,11 @@ instance ToJSON AdWordsAccount where
 -- /See:/ 'filterRef' smart constructor.
 data FilterRef =
   FilterRef'
-    { _frKind      :: !Text
-    , _frHref      :: !(Maybe Text)
+    { _frKind :: !Text
+    , _frHref :: !(Maybe Text)
     , _frAccountId :: !(Maybe Text)
-    , _frName      :: !(Maybe Text)
-    , _frId        :: !(Maybe Text)
+    , _frName :: !(Maybe Text)
+    , _frId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6115,7 +6128,7 @@ instance ToJSON FilterRef where
 data GoalVisitTimeOnSiteDetails =
   GoalVisitTimeOnSiteDetails'
     { _gvtosdComparisonValue :: !(Maybe (Textual Int64))
-    , _gvtosdComparisonType  :: !(Maybe Text)
+    , _gvtosdComparisonType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6169,13 +6182,13 @@ instance ToJSON GoalVisitTimeOnSiteDetails where
 -- /See:/ 'webProperties' smart constructor.
 data WebProperties =
   WebProperties'
-    { _wpNextLink     :: !(Maybe Text)
+    { _wpNextLink :: !(Maybe Text)
     , _wpItemsPerPage :: !(Maybe (Textual Int32))
-    , _wpKind         :: !Text
-    , _wpUsername     :: !(Maybe Text)
-    , _wpItems        :: !(Maybe [WebProperty])
+    , _wpKind :: !Text
+    , _wpUsername :: !(Maybe Text)
+    , _wpItems :: !(Maybe [WebProperty])
     , _wpTotalResults :: !(Maybe (Textual Int32))
-    , _wpStartIndex   :: !(Maybe (Textual Int32))
+    , _wpStartIndex :: !(Maybe (Textual Int32))
     , _wpPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6299,13 +6312,13 @@ instance ToJSON WebProperties where
 -- /See:/ 'customMetrics' smart constructor.
 data CustomMetrics =
   CustomMetrics'
-    { _cmNextLink     :: !(Maybe Text)
+    { _cmNextLink :: !(Maybe Text)
     , _cmItemsPerPage :: !(Maybe (Textual Int32))
-    , _cmKind         :: !Text
-    , _cmUsername     :: !(Maybe Text)
-    , _cmItems        :: !(Maybe [CustomMetric])
+    , _cmKind :: !Text
+    , _cmUsername :: !(Maybe Text)
+    , _cmItems :: !(Maybe [CustomMetric])
     , _cmTotalResults :: !(Maybe (Textual Int32))
-    , _cmStartIndex   :: !(Maybe (Textual Int32))
+    , _cmStartIndex :: !(Maybe (Textual Int32))
     , _cmPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6427,18 +6440,18 @@ instance ToJSON CustomMetrics where
 -- /See:/ 'filterAdvancedDetails' smart constructor.
 data FilterAdvancedDetails =
   FilterAdvancedDetails'
-    { _fadExtractA            :: !(Maybe Text)
-    , _fadFieldARequired      :: !(Maybe Bool)
-    , _fadFieldA              :: !(Maybe Text)
-    , _fadFieldBIndex         :: !(Maybe (Textual Int32))
-    , _fadOutputToField       :: !(Maybe Text)
-    , _fadOutputConstructor   :: !(Maybe Text)
-    , _fadExtractB            :: !(Maybe Text)
-    , _fadFieldAIndex         :: !(Maybe (Textual Int32))
-    , _fadCaseSensitive       :: !(Maybe Bool)
-    , _fadOutputToFieldIndex  :: !(Maybe (Textual Int32))
-    , _fadFieldB              :: !(Maybe Text)
-    , _fadFieldBRequired      :: !(Maybe Bool)
+    { _fadExtractA :: !(Maybe Text)
+    , _fadFieldARequired :: !(Maybe Bool)
+    , _fadFieldA :: !(Maybe Text)
+    , _fadFieldBIndex :: !(Maybe (Textual Int32))
+    , _fadOutputToField :: !(Maybe Text)
+    , _fadOutputConstructor :: !(Maybe Text)
+    , _fadExtractB :: !(Maybe Text)
+    , _fadFieldAIndex :: !(Maybe (Textual Int32))
+    , _fadCaseSensitive :: !(Maybe Bool)
+    , _fadOutputToFieldIndex :: !(Maybe (Textual Int32))
+    , _fadFieldB :: !(Maybe Text)
+    , _fadFieldBRequired :: !(Maybe Bool)
     , _fadOverrideOutputField :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6618,9 +6631,9 @@ instance ToJSON FilterAdvancedDetails where
 -- /See:/ 'accountTreeResponse' smart constructor.
 data AccountTreeResponse =
   AccountTreeResponse'
-    { _atrtKind        :: !Text
-    , _atrtProFile     :: !(Maybe ProFile)
-    , _atrtAccount     :: !(Maybe Account)
+    { _atrtKind :: !Text
+    , _atrtProFile :: !(Maybe ProFile)
+    , _atrtAccount :: !(Maybe Account)
     , _atrtWebProperty :: !(Maybe WebProperty)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6693,7 +6706,7 @@ instance ToJSON AccountTreeResponse where
 data FilterUppercaseDetails =
   FilterUppercaseDetails'
     { _fudFieldIndex :: !(Maybe (Textual Int32))
-    , _fudField      :: !(Maybe Text)
+    , _fudField :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6790,11 +6803,11 @@ instance ToJSON CustomDataSourceChildLink where
 -- /See:/ 'includeConditions' smart constructor.
 data IncludeConditions =
   IncludeConditions'
-    { _icKind                   :: !Text
-    , _icDaysToLookBack         :: !(Maybe (Textual Int32))
+    { _icKind :: !Text
+    , _icDaysToLookBack :: !(Maybe (Textual Int32))
     , _icMembershipDurationDays :: !(Maybe (Textual Int32))
-    , _icSegment                :: !(Maybe Text)
-    , _icIsSmartList            :: !(Maybe Bool)
+    , _icSegment :: !(Maybe Text)
+    , _icIsSmartList :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6934,9 +6947,9 @@ instance ToJSON FilterParentLink where
 -- /See:/ 'hashClientIdRequest' smart constructor.
 data HashClientIdRequest =
   HashClientIdRequest'
-    { _hClientId      :: !(Maybe Text)
+    { _hClientId :: !(Maybe Text)
     , _hWebPropertyId :: !(Maybe Text)
-    , _hKind          :: !Text
+    , _hKind :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6993,14 +7006,14 @@ instance ToJSON HashClientIdRequest where
 -- /See:/ 'realtimeData' smart constructor.
 data RealtimeData =
   RealtimeData'
-    { _rdProFileInfo         :: !(Maybe RealtimeDataProFileInfo)
-    , _rdKind                :: !Text
-    , _rdRows                :: !(Maybe [[Text]])
-    , _rdSelfLink            :: !(Maybe Text)
-    , _rdQuery               :: !(Maybe RealtimeDataQuery)
-    , _rdColumnHeaders       :: !(Maybe [RealtimeDataColumnHeadersItem])
-    , _rdId                  :: !(Maybe Text)
-    , _rdTotalResults        :: !(Maybe (Textual Int32))
+    { _rdProFileInfo :: !(Maybe RealtimeDataProFileInfo)
+    , _rdKind :: !Text
+    , _rdRows :: !(Maybe [[Text]])
+    , _rdSelfLink :: !(Maybe Text)
+    , _rdQuery :: !(Maybe RealtimeDataQuery)
+    , _rdColumnHeaders :: !(Maybe [RealtimeDataColumnHeadersItem])
+    , _rdId :: !(Maybe Text)
+    , _rdTotalResults :: !(Maybe (Textual Int32))
     , _rdTotalsForAllResults :: !(Maybe RealtimeDataTotalsForAllResults)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7134,21 +7147,21 @@ instance ToJSON RealtimeData where
 -- /See:/ 'customMetric' smart constructor.
 data CustomMetric =
   CustomMetric'
-    { _cusParentLink    :: !(Maybe CustomMetricParentLink)
+    { _cusParentLink :: !(Maybe CustomMetricParentLink)
     , _cusWebPropertyId :: !(Maybe Text)
-    , _cusKind          :: !Text
-    , _cusMaxValue      :: !(Maybe Text)
-    , _cusCreated       :: !(Maybe DateTime')
-    , _cusMinValue      :: !(Maybe Text)
-    , _cusActive        :: !(Maybe Bool)
-    , _cusSelfLink      :: !(Maybe Text)
-    , _cusAccountId     :: !(Maybe Text)
-    , _cusName          :: !(Maybe Text)
-    , _cusScope         :: !(Maybe Text)
-    , _cusId            :: !(Maybe Text)
-    , _cusUpdated       :: !(Maybe DateTime')
-    , _cusType          :: !(Maybe Text)
-    , _cusIndex         :: !(Maybe (Textual Int32))
+    , _cusKind :: !Text
+    , _cusMaxValue :: !(Maybe Text)
+    , _cusCreated :: !(Maybe DateTime')
+    , _cusMinValue :: !(Maybe Text)
+    , _cusActive :: !(Maybe Bool)
+    , _cusSelfLink :: !(Maybe Text)
+    , _cusAccountId :: !(Maybe Text)
+    , _cusName :: !(Maybe Text)
+    , _cusScope :: !(Maybe Text)
+    , _cusId :: !(Maybe Text)
+    , _cusUpdated :: !(Maybe DateTime')
+    , _cusType :: !(Maybe Text)
+    , _cusIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7329,11 +7342,11 @@ instance ToJSON CustomMetric where
 -- /See:/ 'proFileSummary' smart constructor.
 data ProFileSummary =
   ProFileSummary'
-    { _pfsKind    :: !Text
-    , _pfsName    :: !(Maybe Text)
+    { _pfsKind :: !Text
+    , _pfsName :: !(Maybe Text)
     , _pfsStarred :: !(Maybe Bool)
-    , _pfsId      :: !(Maybe Text)
-    , _pfsType    :: !(Maybe Text)
+    , _pfsId :: !(Maybe Text)
+    , _pfsType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7457,25 +7470,25 @@ instance ToJSON CustomDimensionParentLink where
 -- /See:/ 'webProperty' smart constructor.
 data WebProperty =
   WebProperty'
-    { _wParentLink                      :: !(Maybe WebPropertyParentLink)
-    , _wChildLink                       :: !(Maybe WebPropertyChildLink)
-    , _wDefaultProFileId                :: !(Maybe (Textual Int64))
-    , _wKind                            :: !Text
-    , _wCreated                         :: !(Maybe DateTime')
-    , _wDataRetentionTtl                :: !(Maybe Text)
+    { _wParentLink :: !(Maybe WebPropertyParentLink)
+    , _wChildLink :: !(Maybe WebPropertyChildLink)
+    , _wDefaultProFileId :: !(Maybe (Textual Int64))
+    , _wKind :: !Text
+    , _wCreated :: !(Maybe DateTime')
+    , _wDataRetentionTtl :: !(Maybe Text)
     , _wDataRetentionResetOnNewActivity :: !(Maybe Bool)
-    , _wSelfLink                        :: !(Maybe Text)
-    , _wAccountId                       :: !(Maybe Text)
-    , _wName                            :: !(Maybe Text)
-    , _wStarred                         :: !(Maybe Bool)
-    , _wInternalWebPropertyId           :: !(Maybe Text)
-    , _wId                              :: !(Maybe Text)
-    , _wUpdated                         :: !(Maybe DateTime')
-    , _wProFileCount                    :: !(Maybe (Textual Int32))
-    , _wPermissions                     :: !(Maybe WebPropertyPermissions)
-    , _wWebsiteURL                      :: !(Maybe Text)
-    , _wIndustryVertical                :: !(Maybe Text)
-    , _wLevel                           :: !(Maybe Text)
+    , _wSelfLink :: !(Maybe Text)
+    , _wAccountId :: !(Maybe Text)
+    , _wName :: !(Maybe Text)
+    , _wStarred :: !(Maybe Bool)
+    , _wInternalWebPropertyId :: !(Maybe Text)
+    , _wId :: !(Maybe Text)
+    , _wUpdated :: !(Maybe DateTime')
+    , _wProFileCount :: !(Maybe (Textual Int32))
+    , _wPermissions :: !(Maybe WebPropertyPermissions)
+    , _wWebsiteURL :: !(Maybe Text)
+    , _wIndustryVertical :: !(Maybe Text)
+    , _wLevel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7586,7 +7599,7 @@ wDataRetentionTtl
 -- | Set to true to reset the retention period of the user identifier with
 -- each new event from that user (thus setting the expiration date to
 -- current time plus retention period). Set to false to delete data
--- associated with the user identifer automatically after the rentention
+-- associated with the user identifier automatically after the rentention
 -- period. This property cannot be set on insert.
 wDataRetentionResetOnNewActivity :: Lens' WebProperty (Maybe Bool)
 wDataRetentionResetOnNewActivity
@@ -7749,12 +7762,12 @@ instance ToJSON WebPropertyPermissions where
 -- /See:/ 'entityUserLink' smart constructor.
 data EntityUserLink =
   EntityUserLink'
-    { _euluKind        :: !Text
-    , _euluUserRef     :: !(Maybe UserRef)
-    , _euluSelfLink    :: !(Maybe Text)
-    , _euluId          :: !(Maybe Text)
+    { _euluKind :: !Text
+    , _euluUserRef :: !(Maybe UserRef)
+    , _euluSelfLink :: !(Maybe Text)
+    , _euluId :: !(Maybe Text)
     , _euluPermissions :: !(Maybe EntityUserLinkPermissions)
-    , _euluEntity      :: !(Maybe EntityUserLinkEntity)
+    , _euluEntity :: !(Maybe EntityUserLinkEntity)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7895,11 +7908,11 @@ instance ToJSON CustomDataSourceParentLink where
 -- /See:/ 'goalEventDetailsEventConditionsItem' smart constructor.
 data GoalEventDetailsEventConditionsItem =
   GoalEventDetailsEventConditionsItem'
-    { _gedeciMatchType       :: !(Maybe Text)
-    , _gedeciExpression      :: !(Maybe Text)
+    { _gedeciMatchType :: !(Maybe Text)
+    , _gedeciExpression :: !(Maybe Text)
     , _gedeciComparisonValue :: !(Maybe (Textual Int64))
-    , _gedeciType            :: !(Maybe Text)
-    , _gedeciComparisonType  :: !(Maybe Text)
+    , _gedeciType :: !(Maybe Text)
+    , _gedeciComparisonType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7989,17 +8002,17 @@ instance ToJSON GoalEventDetailsEventConditionsItem
 -- /See:/ 'mcfDataQuery' smart constructor.
 data McfDataQuery =
   McfDataQuery'
-    { _mdqMetrics       :: !(Maybe [Text])
+    { _mdqMetrics :: !(Maybe [Text])
     , _mdqSamplingLevel :: !(Maybe Text)
-    , _mdqFilters       :: !(Maybe Text)
-    , _mdqIds           :: !(Maybe Text)
-    , _mdqEndDate       :: !(Maybe Text)
-    , _mdqSort          :: !(Maybe [Text])
-    , _mdqDimensions    :: !(Maybe Text)
-    , _mdqStartIndex    :: !(Maybe (Textual Int32))
-    , _mdqMaxResults    :: !(Maybe (Textual Int32))
-    , _mdqSegment       :: !(Maybe Text)
-    , _mdqStartDate     :: !(Maybe Text)
+    , _mdqFilters :: !(Maybe Text)
+    , _mdqIds :: !(Maybe Text)
+    , _mdqEndDate :: !(Maybe Text)
+    , _mdqSort :: !(Maybe [Text])
+    , _mdqDimensions :: !(Maybe Text)
+    , _mdqStartIndex :: !(Maybe (Textual Int32))
+    , _mdqMaxResults :: !(Maybe (Textual Int32))
+    , _mdqSegment :: !(Maybe Text)
+    , _mdqStartDate :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8148,24 +8161,24 @@ instance ToJSON McfDataQuery where
 -- /See:/ 'goal' smart constructor.
 data Goal =
   Goal'
-    { _goaParentLink             :: !(Maybe GoalParentLink)
-    , _goaWebPropertyId          :: !(Maybe Text)
-    , _goaKind                   :: !Text
-    , _goaCreated                :: !(Maybe DateTime')
-    , _goaValue                  :: !(Maybe (Textual Double))
-    , _goaProFileId              :: !(Maybe Text)
-    , _goaEventDetails           :: !(Maybe GoalEventDetails)
-    , _goaActive                 :: !(Maybe Bool)
-    , _goaSelfLink               :: !(Maybe Text)
+    { _goaParentLink :: !(Maybe GoalParentLink)
+    , _goaWebPropertyId :: !(Maybe Text)
+    , _goaKind :: !Text
+    , _goaCreated :: !(Maybe DateTime')
+    , _goaValue :: !(Maybe (Textual Double))
+    , _goaProFileId :: !(Maybe Text)
+    , _goaEventDetails :: !(Maybe GoalEventDetails)
+    , _goaActive :: !(Maybe Bool)
+    , _goaSelfLink :: !(Maybe Text)
     , _goaVisitTimeOnSiteDetails :: !(Maybe GoalVisitTimeOnSiteDetails)
-    , _goaAccountId              :: !(Maybe Text)
-    , _goaName                   :: !(Maybe Text)
-    , _goaInternalWebPropertyId  :: !(Maybe Text)
-    , _goaId                     :: !(Maybe Text)
-    , _goaURLDestinationDetails  :: !(Maybe GoalURLDestinationDetails)
-    , _goaVisitNumPagesDetails   :: !(Maybe GoalVisitNumPagesDetails)
-    , _goaUpdated                :: !(Maybe DateTime')
-    , _goaType                   :: !(Maybe Text)
+    , _goaAccountId :: !(Maybe Text)
+    , _goaName :: !(Maybe Text)
+    , _goaInternalWebPropertyId :: !(Maybe Text)
+    , _goaId :: !(Maybe Text)
+    , _goaURLDestinationDetails :: !(Maybe GoalURLDestinationDetails)
+    , _goaVisitNumPagesDetails :: !(Maybe GoalVisitNumPagesDetails)
+    , _goaUpdated :: !(Maybe DateTime')
+    , _goaType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8391,11 +8404,11 @@ instance ToJSON Goal where
 data AccountTicket =
   AccountTicket'
     { _atRedirectURI :: !(Maybe Text)
-    , _atKind        :: !Text
-    , _atProFile     :: !(Maybe ProFile)
-    , _atAccount     :: !(Maybe Account)
+    , _atKind :: !Text
+    , _atProFile :: !(Maybe ProFile)
+    , _atAccount :: !(Maybe Account)
     , _atWebProperty :: !(Maybe WebProperty)
-    , _atId          :: !(Maybe Text)
+    , _atId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8488,11 +8501,11 @@ instance ToJSON AccountTicket where
 -- /See:/ 'accountSummary' smart constructor.
 data AccountSummary =
   AccountSummary'
-    { _assKind          :: !Text
+    { _assKind :: !Text
     , _assWebProperties :: !(Maybe [WebPropertySummary])
-    , _assName          :: !(Maybe Text)
-    , _assStarred       :: !(Maybe Bool)
-    , _assId            :: !(Maybe Text)
+    , _assName :: !(Maybe Text)
+    , _assStarred :: !(Maybe Bool)
+    , _assId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8573,10 +8586,10 @@ instance ToJSON AccountSummary where
 -- /See:/ 'realtimeDataQuery' smart constructor.
 data RealtimeDataQuery =
   RealtimeDataQuery'
-    { _rdqMetrics    :: !(Maybe [Text])
-    , _rdqFilters    :: !(Maybe Text)
-    , _rdqIds        :: !(Maybe Text)
-    , _rdqSort       :: !(Maybe [Text])
+    { _rdqMetrics :: !(Maybe [Text])
+    , _rdqFilters :: !(Maybe Text)
+    , _rdqIds :: !(Maybe Text)
+    , _rdqSort :: !(Maybe [Text])
     , _rdqDimensions :: !(Maybe Text)
     , _rdqMaxResults :: !(Maybe (Textual Int32))
     }
@@ -8672,10 +8685,10 @@ instance ToJSON RealtimeDataQuery where
 -- /See:/ 'columns' smart constructor.
 data Columns =
   Columns'
-    { _colEtag           :: !(Maybe Text)
-    , _colKind           :: !Text
-    , _colItems          :: !(Maybe [Column])
-    , _colTotalResults   :: !(Maybe (Textual Int32))
+    { _colEtag :: !(Maybe Text)
+    , _colKind :: !Text
+    , _colItems :: !(Maybe [Column])
+    , _colTotalResults :: !(Maybe (Textual Int32))
     , _colAttributeNames :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8763,7 +8776,7 @@ instance ToJSON Columns where
 data FilterLowercaseDetails =
   FilterLowercaseDetails'
     { _fldFieldIndex :: !(Maybe (Textual Int32))
-    , _fldField      :: !(Maybe Text)
+    , _fldField :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8812,20 +8825,20 @@ instance ToJSON FilterLowercaseDetails where
 -- /See:/ 'filter'' smart constructor.
 data Filter =
   Filter'
-    { _filParentLink              :: !(Maybe FilterParentLink)
-    , _filAdvancedDetails         :: !(Maybe FilterAdvancedDetails)
-    , _filUppercaseDetails        :: !(Maybe FilterUppercaseDetails)
-    , _filLowercaseDetails        :: !(Maybe FilterLowercaseDetails)
-    , _filKind                    :: !Text
-    , _filCreated                 :: !(Maybe DateTime')
-    , _filIncludeDetails          :: !(Maybe FilterExpression)
-    , _filExcludeDetails          :: !(Maybe FilterExpression)
-    , _filSelfLink                :: !(Maybe Text)
-    , _filAccountId               :: !(Maybe Text)
-    , _filName                    :: !(Maybe Text)
-    , _filId                      :: !(Maybe Text)
-    , _filUpdated                 :: !(Maybe DateTime')
-    , _filType                    :: !(Maybe Text)
+    { _filParentLink :: !(Maybe FilterParentLink)
+    , _filAdvancedDetails :: !(Maybe FilterAdvancedDetails)
+    , _filUppercaseDetails :: !(Maybe FilterUppercaseDetails)
+    , _filLowercaseDetails :: !(Maybe FilterLowercaseDetails)
+    , _filKind :: !Text
+    , _filCreated :: !(Maybe DateTime')
+    , _filIncludeDetails :: !(Maybe FilterExpression)
+    , _filExcludeDetails :: !(Maybe FilterExpression)
+    , _filSelfLink :: !(Maybe Text)
+    , _filAccountId :: !(Maybe Text)
+    , _filName :: !(Maybe Text)
+    , _filId :: !(Maybe Text)
+    , _filUpdated :: !(Maybe DateTime')
+    , _filType :: !(Maybe Text)
     , _filSearchAndReplaceDetails :: !(Maybe FilterSearchAndReplaceDetails)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9015,12 +9028,12 @@ instance ToJSON Filter where
 -- /See:/ 'uploads' smart constructor.
 data Uploads =
   Uploads'
-    { _uplNextLink     :: !(Maybe Text)
+    { _uplNextLink :: !(Maybe Text)
     , _uplItemsPerPage :: !(Maybe (Textual Int32))
-    , _uplKind         :: !Text
-    , _uplItems        :: !(Maybe [Upload])
+    , _uplKind :: !Text
+    , _uplItems :: !(Maybe [Upload])
     , _uplTotalResults :: !(Maybe (Textual Int32))
-    , _uplStartIndex   :: !(Maybe (Textual Int32))
+    , _uplStartIndex :: !(Maybe (Textual Int32))
     , _uplPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9136,13 +9149,13 @@ instance ToJSON Uploads where
 -- /See:/ 'customDimensions' smart constructor.
 data CustomDimensions =
   CustomDimensions'
-    { _cdNextLink     :: !(Maybe Text)
+    { _cdNextLink :: !(Maybe Text)
     , _cdItemsPerPage :: !(Maybe (Textual Int32))
-    , _cdKind         :: !Text
-    , _cdUsername     :: !(Maybe Text)
-    , _cdItems        :: !(Maybe [CustomDimension])
+    , _cdKind :: !Text
+    , _cdUsername :: !(Maybe Text)
+    , _cdItems :: !(Maybe [CustomDimension])
     , _cdTotalResults :: !(Maybe (Textual Int32))
-    , _cdStartIndex   :: !(Maybe (Textual Int32))
+    , _cdStartIndex :: !(Maybe (Textual Int32))
     , _cdPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9266,13 +9279,13 @@ instance ToJSON CustomDimensions where
 -- /See:/ 'segments' smart constructor.
 data Segments =
   Segments'
-    { _sNextLink     :: !(Maybe Text)
+    { _sNextLink :: !(Maybe Text)
     , _sItemsPerPage :: !(Maybe (Textual Int32))
-    , _sKind         :: !Text
-    , _sUsername     :: !(Maybe Text)
-    , _sItems        :: !(Maybe [Segment])
+    , _sKind :: !Text
+    , _sUsername :: !(Maybe Text)
+    , _sItems :: !(Maybe [Segment])
     , _sTotalResults :: !(Maybe (Textual Int32))
-    , _sStartIndex   :: !(Maybe (Textual Int32))
+    , _sStartIndex :: !(Maybe (Textual Int32))
     , _sPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9543,10 +9556,10 @@ instance ToJSON
 -- /See:/ 'goalURLDestinationDetails' smart constructor.
 data GoalURLDestinationDetails =
   GoalURLDestinationDetails'
-    { _guddURL               :: !(Maybe Text)
-    , _guddMatchType         :: !(Maybe Text)
-    , _guddSteps             :: !(Maybe [GoalURLDestinationDetailsStepsItem])
-    , _guddCaseSensitive     :: !(Maybe Bool)
+    { _guddURL :: !(Maybe Text)
+    , _guddMatchType :: !(Maybe Text)
+    , _guddSteps :: !(Maybe [GoalURLDestinationDetailsStepsItem])
+    , _guddCaseSensitive :: !(Maybe Bool)
     , _guddFirstStepRequired :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9634,13 +9647,13 @@ instance ToJSON GoalURLDestinationDetails where
 -- /See:/ 'proFileFilterLinks' smart constructor.
 data ProFileFilterLinks =
   ProFileFilterLinks'
-    { _pfflNextLink     :: !(Maybe Text)
+    { _pfflNextLink :: !(Maybe Text)
     , _pfflItemsPerPage :: !(Maybe (Textual Int32))
-    , _pfflKind         :: !Text
-    , _pfflUsername     :: !(Maybe Text)
-    , _pfflItems        :: !(Maybe [ProFileFilterLink])
+    , _pfflKind :: !Text
+    , _pfflUsername :: !(Maybe Text)
+    , _pfflItems :: !(Maybe [ProFileFilterLink])
     , _pfflTotalResults :: !(Maybe (Textual Int32))
-    , _pfflStartIndex   :: !(Maybe (Textual Int32))
+    , _pfflStartIndex :: !(Maybe (Textual Int32))
     , _pfflPreviousLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9813,12 +9826,12 @@ instance ToJSON WebPropertyParentLink where
 -- /See:/ 'gaDataProFileInfo' smart constructor.
 data GaDataProFileInfo =
   GaDataProFileInfo'
-    { _gdpfiWebPropertyId         :: !(Maybe Text)
-    , _gdpfiProFileId             :: !(Maybe Text)
-    , _gdpfiProFileName           :: !(Maybe Text)
-    , _gdpfiAccountId             :: !(Maybe Text)
+    { _gdpfiWebPropertyId :: !(Maybe Text)
+    , _gdpfiProFileId :: !(Maybe Text)
+    , _gdpfiProFileName :: !(Maybe Text)
+    , _gdpfiAccountId :: !(Maybe Text)
     , _gdpfiInternalWebPropertyId :: !(Maybe Text)
-    , _gdpfiTableId               :: !(Maybe Text)
+    , _gdpfiTableId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9914,13 +9927,13 @@ instance ToJSON GaDataProFileInfo where
 -- /See:/ 'upload' smart constructor.
 data Upload =
   Upload'
-    { _uuStatus             :: !(Maybe Text)
-    , _uuKind               :: !Text
+    { _uuStatus :: !(Maybe Text)
+    , _uuKind :: !Text
     , _uuCustomDataSourceId :: !(Maybe Text)
-    , _uuUploadTime         :: !(Maybe DateTime')
-    , _uuAccountId          :: !(Maybe (Textual Int64))
-    , _uuId                 :: !(Maybe Text)
-    , _uuErrors             :: !(Maybe [Text])
+    , _uuUploadTime :: !(Maybe DateTime')
+    , _uuAccountId :: !(Maybe (Textual Int64))
+    , _uuId :: !(Maybe Text)
+    , _uuErrors :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10023,18 +10036,18 @@ instance ToJSON Upload where
 -- /See:/ 'customDimension' smart constructor.
 data CustomDimension =
   CustomDimension'
-    { _cddParentLink    :: !(Maybe CustomDimensionParentLink)
+    { _cddParentLink :: !(Maybe CustomDimensionParentLink)
     , _cddWebPropertyId :: !(Maybe Text)
-    , _cddKind          :: !Text
-    , _cddCreated       :: !(Maybe DateTime')
-    , _cddActive        :: !(Maybe Bool)
-    , _cddSelfLink      :: !(Maybe Text)
-    , _cddAccountId     :: !(Maybe Text)
-    , _cddName          :: !(Maybe Text)
-    , _cddScope         :: !(Maybe Text)
-    , _cddId            :: !(Maybe Text)
-    , _cddUpdated       :: !(Maybe DateTime')
-    , _cddIndex         :: !(Maybe (Textual Int32))
+    , _cddKind :: !Text
+    , _cddCreated :: !(Maybe DateTime')
+    , _cddActive :: !(Maybe Bool)
+    , _cddSelfLink :: !(Maybe Text)
+    , _cddAccountId :: !(Maybe Text)
+    , _cddName :: !(Maybe Text)
+    , _cddScope :: !(Maybe Text)
+    , _cddId :: !(Maybe Text)
+    , _cddUpdated :: !(Maybe DateTime')
+    , _cddIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10186,14 +10199,14 @@ instance ToJSON CustomDimension where
 data Segment =
   Segment'
     { _segDefinition :: !(Maybe Text)
-    , _segKind       :: !Text
-    , _segCreated    :: !(Maybe DateTime')
-    , _segSelfLink   :: !(Maybe Text)
-    , _segName       :: !(Maybe Text)
-    , _segId         :: !(Maybe Text)
-    , _segUpdated    :: !(Maybe DateTime')
-    , _segType       :: !(Maybe Text)
-    , _segSegmentId  :: !(Maybe Text)
+    , _segKind :: !Text
+    , _segCreated :: !(Maybe DateTime')
+    , _segSelfLink :: !(Maybe Text)
+    , _segName :: !(Maybe Text)
+    , _segId :: !(Maybe Text)
+    , _segUpdated :: !(Maybe DateTime')
+    , _segType :: !(Maybe Text)
+    , _segSegmentId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10362,11 +10375,11 @@ instance ToJSON AccountChildLink where
 data ProFileFilterLink =
   ProFileFilterLink'
     { _proProFileRef :: !(Maybe ProFileRef)
-    , _proKind       :: !Text
-    , _proFilterRef  :: !(Maybe FilterRef)
-    , _proSelfLink   :: !(Maybe Text)
-    , _proId         :: !(Maybe Text)
-    , _proRank       :: !(Maybe (Textual Int32))
+    , _proKind :: !Text
+    , _proFilterRef :: !(Maybe FilterRef)
+    , _proSelfLink :: !(Maybe Text)
+    , _proId :: !(Maybe Text)
+    , _proRank :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10515,9 +10528,9 @@ instance ToJSON CustomMetricParentLink where
 -- /See:/ 'column' smart constructor.
 data Column =
   Column'
-    { _ccKind       :: !Text
+    { _ccKind :: !Text
     , _ccAttributes :: !(Maybe ColumnAttributes)
-    , _ccId         :: !(Maybe Text)
+    , _ccId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10617,8 +10630,8 @@ instance ToJSON RemarketingAudienceAudienceDefinition
 -- /See:/ 'gaDataDataTableColsItem' smart constructor.
 data GaDataDataTableColsItem =
   GaDataDataTableColsItem'
-    { _gddtciId    :: !(Maybe Text)
-    , _gddtciType  :: !(Maybe Text)
+    { _gddtciId :: !(Maybe Text)
+    , _gddtciType :: !(Maybe Text)
     , _gddtciLabel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10672,9 +10685,9 @@ data ExperimentVariationsItem =
   ExperimentVariationsItem'
     { _eviStatus :: !(Maybe Text)
     , _eviWeight :: !(Maybe (Textual Double))
-    , _eviURL    :: !(Maybe Text)
-    , _eviWon    :: !(Maybe Bool)
-    , _eviName   :: !(Maybe Text)
+    , _eviURL :: !(Maybe Text)
+    , _eviWon :: !(Maybe Bool)
+    , _eviName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10759,7 +10772,7 @@ instance ToJSON ExperimentVariationsItem where
 data RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions =
   RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
     { _rasbadecExclusionDuration :: !(Maybe Text)
-    , _rasbadecSegment           :: !(Maybe Text)
+    , _rasbadecSegment :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10860,7 +10873,7 @@ instance ToJSON McfDataTotalsForAllResults where
 data UserDeletionRequestId =
   UserDeletionRequestId'
     { _udriUserId :: !(Maybe Text)
-    , _udriType   :: !(Maybe Text)
+    , _udriType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11011,8 +11024,8 @@ instance ToJSON ProFileChildLink where
 data GaDataColumnHeadersItem =
   GaDataColumnHeadersItem'
     { _gdchiColumnType :: !(Maybe Text)
-    , _gdchiName       :: !(Maybe Text)
-    , _gdchiDataType   :: !(Maybe Text)
+    , _gdchiName :: !(Maybe Text)
+    , _gdchiDataType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NetworkEndpointGroups.Insert
     , negiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networkEndpointGroups.insert@ method which the
 -- 'NetworkEndpointGroupsInsert' request conforms to.
@@ -65,9 +65,9 @@ type NetworkEndpointGroupsInsertResource =
 data NetworkEndpointGroupsInsert =
   NetworkEndpointGroupsInsert'
     { _negiRequestId :: !(Maybe Text)
-    , _negiProject   :: !Text
-    , _negiZone      :: !Text
-    , _negiPayload   :: !NetworkEndpointGroup
+    , _negiProject :: !Text
+    , _negiZone :: !Text
+    , _negiPayload :: !NetworkEndpointGroup
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

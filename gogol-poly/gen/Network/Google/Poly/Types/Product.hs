@@ -17,8 +17,8 @@
 --
 module Network.Google.Poly.Types.Product where
 
-import           Network.Google.Poly.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Poly.Types.Sum
+import Network.Google.Prelude
 
 -- | Details of an error resulting from parsing an OBJ file
 --
@@ -26,10 +26,10 @@ import           Network.Google.Prelude
 data ObjParseError =
   ObjParseError'
     { _opeLineNumber :: !(Maybe (Textual Int32))
-    , _opeFilePath   :: !(Maybe Text)
-    , _opeLine       :: !(Maybe Text)
-    , _opeEndIndex   :: !(Maybe (Textual Int32))
-    , _opeCode       :: !(Maybe ObjParseErrorCode)
+    , _opeFilePath :: !(Maybe Text)
+    , _opeLine :: !(Maybe Text)
+    , _opeEndIndex :: !(Maybe (Textual Int32))
+    , _opeCode :: !(Maybe ObjParseErrorCode)
     , _opeStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -126,9 +126,9 @@ instance ToJSON ObjParseError where
 -- /See:/ 'presentationParams' smart constructor.
 data PresentationParams =
   PresentationParams'
-    { _ppBackgRoundColor   :: !(Maybe Text)
+    { _ppBackgRoundColor :: !(Maybe Text)
     , _ppOrientingRotation :: !(Maybe Quaternion)
-    , _ppColorSpace        :: !(Maybe PresentationParamsColorSpace)
+    , _ppColorSpace :: !(Maybe PresentationParamsColorSpace)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -209,8 +209,8 @@ instance ToJSON PresentationParams where
 data ListLikedAssetsResponse =
   ListLikedAssetsResponse'
     { _llarNextPageToken :: !(Maybe Text)
-    , _llarTotalSize     :: !(Maybe (Textual Int32))
-    , _llarAssets        :: !(Maybe [Asset])
+    , _llarTotalSize :: !(Maybe (Textual Int32))
+    , _llarAssets :: !(Maybe [Asset])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -384,20 +384,20 @@ instance ToJSON Quaternion where
 -- /See:/ 'asset' smart constructor.
 data Asset =
   Asset'
-    { _aThumbnail          :: !(Maybe File)
+    { _aThumbnail :: !(Maybe File)
     , _aPresentationParams :: !(Maybe PresentationParams)
-    , _aIsCurated          :: !(Maybe Bool)
-    , _aAuthorName         :: !(Maybe Text)
-    , _aRemixInfo          :: !(Maybe RemixInfo)
-    , _aFormats            :: !(Maybe [Format])
-    , _aVisibility         :: !(Maybe AssetVisibility)
-    , _aUpdateTime         :: !(Maybe DateTime')
-    , _aName               :: !(Maybe Text)
-    , _aMetadata           :: !(Maybe Text)
-    , _aDisplayName        :: !(Maybe Text)
-    , _aLicense            :: !(Maybe AssetLicense)
-    , _aDescription        :: !(Maybe Text)
-    , _aCreateTime         :: !(Maybe DateTime')
+    , _aIsCurated :: !(Maybe Bool)
+    , _aAuthorName :: !(Maybe Text)
+    , _aRemixInfo :: !(Maybe RemixInfo)
+    , _aFormats :: !(Maybe [Format])
+    , _aVisibility :: !(Maybe AssetVisibility)
+    , _aUpdateTime :: !(Maybe DateTime')
+    , _aName :: !(Maybe Text)
+    , _aMetadata :: !(Maybe Text)
+    , _aDisplayName :: !(Maybe Text)
+    , _aLicense :: !(Maybe AssetLicense)
+    , _aDescription :: !(Maybe Text)
+    , _aCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -588,10 +588,10 @@ instance ToJSON Asset where
 -- /See:/ 'format' smart constructor.
 data Format =
   Format'
-    { _fRoot             :: !(Maybe File)
-    , _fResources        :: !(Maybe [File])
+    { _fRoot :: !(Maybe File)
+    , _fResources :: !(Maybe [File])
     , _fFormatComplexity :: !(Maybe FormatComplexity)
-    , _fFormatType       :: !(Maybe Text)
+    , _fFormatType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -670,9 +670,9 @@ instance ToJSON Format where
 data AssetImportMessage =
   AssetImportMessage'
     { _aimObjParseError :: !(Maybe ObjParseError)
-    , _aimFilePath      :: !(Maybe Text)
-    , _aimImageError    :: !(Maybe ImageError)
-    , _aimCode          :: !(Maybe AssetImportMessageCode)
+    , _aimFilePath :: !(Maybe Text)
+    , _aimImageError :: !(Maybe ImageError)
+    , _aimCode :: !(Maybe AssetImportMessageCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -745,10 +745,10 @@ instance ToJSON AssetImportMessage where
 -- /See:/ 'startAssetImportResponse' smart constructor.
 data StartAssetImportResponse =
   StartAssetImportResponse'
-    { _sairPublishURL          :: !(Maybe Text)
+    { _sairPublishURL :: !(Maybe Text)
     , _sairAssetImportMessages :: !(Maybe [AssetImportMessage])
-    , _sairAssetImportId       :: !(Maybe Text)
-    , _sairAssetId             :: !(Maybe Text)
+    , _sairAssetImportId :: !(Maybe Text)
+    , _sairAssetId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -829,7 +829,7 @@ instance ToJSON StartAssetImportResponse where
 data ImageError =
   ImageError'
     { _ieFilePath :: !(Maybe Text)
-    , _ieCode     :: !(Maybe ImageErrorCode)
+    , _ieCode :: !(Maybe ImageErrorCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -875,7 +875,7 @@ instance ToJSON ImageError where
 data FormatComplexity =
   FormatComplexity'
     { _fcTriangleCount :: !(Maybe (Textual Int64))
-    , _fcLodHint       :: !(Maybe (Textual Int32))
+    , _fcLodHint :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -929,8 +929,8 @@ instance ToJSON FormatComplexity where
 data ListAssetsResponse =
   ListAssetsResponse'
     { _larNextPageToken :: !(Maybe Text)
-    , _larTotalSize     :: !(Maybe (Textual Int32))
-    , _larAssets        :: !(Maybe [Asset])
+    , _larTotalSize :: !(Maybe (Textual Int32))
+    , _larAssets :: !(Maybe [Asset])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -994,8 +994,8 @@ instance ToJSON ListAssetsResponse where
 data ListUserAssetsResponse =
   ListUserAssetsResponse'
     { _luarNextPageToken :: !(Maybe Text)
-    , _luarTotalSize     :: !(Maybe (Textual Int32))
-    , _luarUserAssets    :: !(Maybe [UserAsset])
+    , _luarTotalSize :: !(Maybe (Textual Int32))
+    , _luarUserAssets :: !(Maybe [UserAsset])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1064,9 +1064,9 @@ instance ToJSON ListUserAssetsResponse where
 -- /See:/ 'file' smart constructor.
 data File =
   File'
-    { _fURL          :: !(Maybe Text)
+    { _fURL :: !(Maybe Text)
     , _fRelativePath :: !(Maybe Text)
-    , _fContentType  :: !(Maybe Text)
+    , _fContentType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

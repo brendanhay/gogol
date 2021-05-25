@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all backup runs associated with a given instance and configuration
--- in the reverse chronological order of the backup initiation time.
+-- Lists all backup runs associated with the project or a given instance
+-- and configuration in the reverse chronological order of the backup
+-- initiation time.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.backupRuns.list@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.backupRuns.list@.
 module Network.Google.Resource.SQL.BackupRuns.List
     (
     -- * REST Resource
@@ -34,40 +35,55 @@ module Network.Google.Resource.SQL.BackupRuns.List
     , BackupRunsList
 
     -- * Request Lenses
+    , brlXgafv
+    , brlUploadProtocol
     , brlProject
+    , brlAccessToken
+    , brlUploadType
     , brlPageToken
     , brlMaxResults
+    , brlCallback
     , brlInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.backupRuns.list@ method which the
 -- 'BackupRunsList' request conforms to.
 type BackupRunsListResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "backupRuns" :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] BackupRunsListResponse
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "backupRuns" :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] BackupRunsListResponse
 
--- | Lists all backup runs associated with a given instance and configuration
--- in the reverse chronological order of the backup initiation time.
+-- | Lists all backup runs associated with the project or a given instance
+-- and configuration in the reverse chronological order of the backup
+-- initiation time.
 --
 -- /See:/ 'backupRunsList' smart constructor.
 data BackupRunsList =
   BackupRunsList'
-    { _brlProject    :: !Text
-    , _brlPageToken  :: !(Maybe Text)
+    { _brlXgafv :: !(Maybe Xgafv)
+    , _brlUploadProtocol :: !(Maybe Text)
+    , _brlProject :: !Text
+    , _brlAccessToken :: !(Maybe Text)
+    , _brlUploadType :: !(Maybe Text)
+    , _brlPageToken :: !(Maybe Text)
     , _brlMaxResults :: !(Maybe (Textual Int32))
-    , _brlInstance   :: !Text
+    , _brlCallback :: !(Maybe Text)
+    , _brlInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,11 +92,21 @@ data BackupRunsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'brlXgafv'
+--
+-- * 'brlUploadProtocol'
+--
 -- * 'brlProject'
+--
+-- * 'brlAccessToken'
+--
+-- * 'brlUploadType'
 --
 -- * 'brlPageToken'
 --
 -- * 'brlMaxResults'
+--
+-- * 'brlCallback'
 --
 -- * 'brlInstance'
 backupRunsList
@@ -89,17 +115,44 @@ backupRunsList
     -> BackupRunsList
 backupRunsList pBrlProject_ pBrlInstance_ =
   BackupRunsList'
-    { _brlProject = pBrlProject_
+    { _brlXgafv = Nothing
+    , _brlUploadProtocol = Nothing
+    , _brlProject = pBrlProject_
+    , _brlAccessToken = Nothing
+    , _brlUploadType = Nothing
     , _brlPageToken = Nothing
     , _brlMaxResults = Nothing
+    , _brlCallback = Nothing
     , _brlInstance = pBrlInstance_
     }
 
+
+-- | V1 error format.
+brlXgafv :: Lens' BackupRunsList (Maybe Xgafv)
+brlXgafv = lens _brlXgafv (\ s a -> s{_brlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+brlUploadProtocol :: Lens' BackupRunsList (Maybe Text)
+brlUploadProtocol
+  = lens _brlUploadProtocol
+      (\ s a -> s{_brlUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 brlProject :: Lens' BackupRunsList Text
 brlProject
   = lens _brlProject (\ s a -> s{_brlProject = a})
+
+-- | OAuth access token.
+brlAccessToken :: Lens' BackupRunsList (Maybe Text)
+brlAccessToken
+  = lens _brlAccessToken
+      (\ s a -> s{_brlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+brlUploadType :: Lens' BackupRunsList (Maybe Text)
+brlUploadType
+  = lens _brlUploadType
+      (\ s a -> s{_brlUploadType = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
@@ -114,7 +167,13 @@ brlMaxResults
       (\ s a -> s{_brlMaxResults = a})
       . mapping _Coerce
 
--- | Cloud SQL instance ID. This does not include the project ID.
+-- | JSONP
+brlCallback :: Lens' BackupRunsList (Maybe Text)
+brlCallback
+  = lens _brlCallback (\ s a -> s{_brlCallback = a})
+
+-- | Cloud SQL instance ID, or \"-\" for all instances. This does not include
+-- the project ID.
 brlInstance :: Lens' BackupRunsList Text
 brlInstance
   = lens _brlInstance (\ s a -> s{_brlInstance = a})
@@ -125,8 +184,13 @@ instance GoogleRequest BackupRunsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient BackupRunsList'{..}
-          = go _brlProject _brlInstance _brlPageToken
+          = go _brlProject _brlInstance _brlXgafv
+              _brlUploadProtocol
+              _brlAccessToken
+              _brlUploadType
+              _brlPageToken
               _brlMaxResults
+              _brlCallback
               (Just AltJSON)
               sQLAdminService
           where go

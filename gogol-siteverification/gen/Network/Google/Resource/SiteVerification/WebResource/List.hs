@@ -34,8 +34,8 @@ module Network.Google.Resource.SiteVerification.WebResource.List
 
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.list@ method which the
 -- 'WebResourceList' request conforms to.

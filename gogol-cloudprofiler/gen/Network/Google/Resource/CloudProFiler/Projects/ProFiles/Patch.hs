@@ -46,8 +46,8 @@ module Network.Google.Resource.CloudProFiler.Projects.ProFiles.Patch
     , ppfpCallback
     ) where
 
-import           Network.Google.CloudProFiler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudProFiler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprofiler.projects.profiles.patch@ method which the
 -- 'ProjectsProFilesPatch' request conforms to.
@@ -71,14 +71,14 @@ type ProjectsProFilesPatchResource =
 -- /See:/ 'projectsProFilesPatch' smart constructor.
 data ProjectsProFilesPatch =
   ProjectsProFilesPatch'
-    { _ppfpXgafv          :: !(Maybe Xgafv)
+    { _ppfpXgafv :: !(Maybe Xgafv)
     , _ppfpUploadProtocol :: !(Maybe Text)
-    , _ppfpUpdateMask     :: !(Maybe GFieldMask)
-    , _ppfpAccessToken    :: !(Maybe Text)
-    , _ppfpUploadType     :: !(Maybe Text)
-    , _ppfpPayload        :: !ProFile
-    , _ppfpName           :: !Text
-    , _ppfpCallback       :: !(Maybe Text)
+    , _ppfpUpdateMask :: !(Maybe GFieldMask)
+    , _ppfpAccessToken :: !(Maybe Text)
+    , _ppfpUploadType :: !(Maybe Text)
+    , _ppfpPayload :: !ProFile
+    , _ppfpName :: !Text
+    , _ppfpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

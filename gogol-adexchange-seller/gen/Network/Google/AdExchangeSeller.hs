@@ -231,22 +231,22 @@ module Network.Google.AdExchangeSeller
     , pFixedCpm
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
-import           Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Get
-import           Network.Google.Resource.AdExchangeSeller.Accounts.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
-import           Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
-import           Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
-import           Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
+import Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
+import Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.Get
+import Network.Google.Resource.AdExchangeSeller.Accounts.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
+import Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
+import Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
+import Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
+import Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
 
 {- $resources
 TODO

@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.Instances.SetShieldedInstanceIntegrityPol
     , issiipInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setShieldedInstanceIntegrityPolicy@ method which the
 -- 'InstancesSetShieldedInstanceIntegrityPolicy' request conforms to.
@@ -71,10 +71,10 @@ type InstancesSetShieldedInstanceIntegrityPolicyResource
 data InstancesSetShieldedInstanceIntegrityPolicy =
   InstancesSetShieldedInstanceIntegrityPolicy'
     { _issiipRequestId :: !(Maybe Text)
-    , _issiipProject   :: !Text
-    , _issiipZone      :: !Text
-    , _issiipPayload   :: !ShieldedInstanceIntegrityPolicy
-    , _issiipInstance  :: !Text
+    , _issiipProject :: !Text
+    , _issiipZone :: !Text
+    , _issiipPayload :: !ShieldedInstanceIntegrityPolicy
+    , _issiipInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

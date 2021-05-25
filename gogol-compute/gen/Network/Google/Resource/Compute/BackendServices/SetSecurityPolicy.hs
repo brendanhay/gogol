@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the security policy for the specified backend service.
+-- Sets the Google Cloud Armor security policy for the specified backend
+-- service. For more information, see Google Cloud Armor Overview
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.setSecurityPolicy@.
 module Network.Google.Resource.Compute.BackendServices.SetSecurityPolicy
@@ -39,8 +40,8 @@ module Network.Google.Resource.Compute.BackendServices.SetSecurityPolicy
     , bssspBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.setSecurityPolicy@ method which the
 -- 'BackendServicesSetSecurityPolicy' request conforms to.
@@ -58,14 +59,15 @@ type BackendServicesSetSecurityPolicyResource =
                          ReqBody '[JSON] SecurityPolicyReference :>
                            Post '[JSON] Operation
 
--- | Sets the security policy for the specified backend service.
+-- | Sets the Google Cloud Armor security policy for the specified backend
+-- service. For more information, see Google Cloud Armor Overview
 --
 -- /See:/ 'backendServicesSetSecurityPolicy' smart constructor.
 data BackendServicesSetSecurityPolicy =
   BackendServicesSetSecurityPolicy'
-    { _bssspRequestId      :: !(Maybe Text)
-    , _bssspProject        :: !Text
-    , _bssspPayload        :: !SecurityPolicyReference
+    { _bssspRequestId :: !(Maybe Text)
+    , _bssspProject :: !Text
+    , _bssspPayload :: !SecurityPolicyReference
     , _bssspBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

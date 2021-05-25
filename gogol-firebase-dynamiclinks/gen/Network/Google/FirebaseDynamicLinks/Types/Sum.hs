@@ -16,7 +16,7 @@
 --
 module Network.Google.FirebaseDynamicLinks.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Requested platform.
 data DynamicLinkEventStatPlatform
@@ -144,6 +144,34 @@ instance FromJSON SuffixOption where
     parseJSON = parseJSONText "SuffixOption"
 
 instance ToJSON SuffixOption where
+    toJSON = toJSONText
+
+data ManagedShortLinkFlaggedAttributeItem
+    = UnspecifiedAttribute
+      -- ^ @UNSPECIFIED_ATTRIBUTE@
+      -- Indicates that no attributes were found for this short url.
+    | Spam
+      -- ^ @SPAM@
+      -- Indicates that short url has been flagged by AbuseIAm team as spam.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ManagedShortLinkFlaggedAttributeItem
+
+instance FromHttpApiData ManagedShortLinkFlaggedAttributeItem where
+    parseQueryParam = \case
+        "UNSPECIFIED_ATTRIBUTE" -> Right UnspecifiedAttribute
+        "SPAM" -> Right Spam
+        x -> Left ("Unable to parse ManagedShortLinkFlaggedAttributeItem from: " <> x)
+
+instance ToHttpApiData ManagedShortLinkFlaggedAttributeItem where
+    toQueryParam = \case
+        UnspecifiedAttribute -> "UNSPECIFIED_ATTRIBUTE"
+        Spam -> "SPAM"
+
+instance FromJSON ManagedShortLinkFlaggedAttributeItem where
+    parseJSON = parseJSONText "ManagedShortLinkFlaggedAttributeItem"
+
+instance ToJSON ManagedShortLinkFlaggedAttributeItem where
     toJSON = toJSONText
 
 -- | Link event.

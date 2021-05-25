@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Subnetworks.TestIAMPermissions
     , stiampRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.testIamPermissions@ method which the
 -- 'SubnetworksTestIAMPermissions' request conforms to.
@@ -63,10 +63,10 @@ type SubnetworksTestIAMPermissionsResource =
 -- /See:/ 'subnetworksTestIAMPermissions' smart constructor.
 data SubnetworksTestIAMPermissions =
   SubnetworksTestIAMPermissions'
-    { _stiampProject  :: !Text
-    , _stiampPayload  :: !TestPermissionsRequest
+    { _stiampProject :: !Text
+    , _stiampPayload :: !TestPermissionsRequest
     , _stiampResource :: !Text
-    , _stiampRegion   :: !Text
+    , _stiampRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

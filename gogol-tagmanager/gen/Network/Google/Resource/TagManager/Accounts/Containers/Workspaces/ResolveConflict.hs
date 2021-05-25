@@ -23,7 +23,7 @@
 -- Resolves a merge conflict for a workspace entity by updating it to the
 -- resolved entity passed in the request.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.resolve_conflict@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.resolve_conflict@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Resolve
     , AccountsContainersWorkspacesResolveConflict
 
     -- * Request Lenses
+    , acwrcXgafv
+    , acwrcUploadProtocol
     , acwrcPath
     , acwrcFingerprint
+    , acwrcAccessToken
+    , acwrcUploadType
     , acwrcPayload
+    , acwrcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.resolve_conflict@ method which the
 -- 'AccountsContainersWorkspacesResolveConflict' request conforms to.
@@ -49,9 +54,14 @@ type AccountsContainersWorkspacesResolveConflictResource
      "tagmanager" :>
        "v2" :>
          CaptureMode "path" "resolve_conflict" Text :>
-           QueryParam "fingerprint" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Entity :> Post '[JSON] ()
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Entity :> Post '[JSON] ()
 
 -- | Resolves a merge conflict for a workspace entity by updating it to the
 -- resolved entity passed in the request.
@@ -59,9 +69,14 @@ type AccountsContainersWorkspacesResolveConflictResource
 -- /See:/ 'accountsContainersWorkspacesResolveConflict' smart constructor.
 data AccountsContainersWorkspacesResolveConflict =
   AccountsContainersWorkspacesResolveConflict'
-    { _acwrcPath        :: !Text
+    { _acwrcXgafv :: !(Maybe Xgafv)
+    , _acwrcUploadProtocol :: !(Maybe Text)
+    , _acwrcPath :: !Text
     , _acwrcFingerprint :: !(Maybe Text)
-    , _acwrcPayload     :: !Entity
+    , _acwrcAccessToken :: !(Maybe Text)
+    , _acwrcUploadType :: !(Maybe Text)
+    , _acwrcPayload :: !Entity
+    , _acwrcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,22 +85,48 @@ data AccountsContainersWorkspacesResolveConflict =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acwrcXgafv'
+--
+-- * 'acwrcUploadProtocol'
+--
 -- * 'acwrcPath'
 --
 -- * 'acwrcFingerprint'
 --
+-- * 'acwrcAccessToken'
+--
+-- * 'acwrcUploadType'
+--
 -- * 'acwrcPayload'
+--
+-- * 'acwrcCallback'
 accountsContainersWorkspacesResolveConflict
     :: Text -- ^ 'acwrcPath'
     -> Entity -- ^ 'acwrcPayload'
     -> AccountsContainersWorkspacesResolveConflict
 accountsContainersWorkspacesResolveConflict pAcwrcPath_ pAcwrcPayload_ =
   AccountsContainersWorkspacesResolveConflict'
-    { _acwrcPath = pAcwrcPath_
+    { _acwrcXgafv = Nothing
+    , _acwrcUploadProtocol = Nothing
+    , _acwrcPath = pAcwrcPath_
     , _acwrcFingerprint = Nothing
+    , _acwrcAccessToken = Nothing
+    , _acwrcUploadType = Nothing
     , _acwrcPayload = pAcwrcPayload_
+    , _acwrcCallback = Nothing
     }
 
+
+-- | V1 error format.
+acwrcXgafv :: Lens' AccountsContainersWorkspacesResolveConflict (Maybe Xgafv)
+acwrcXgafv
+  = lens _acwrcXgafv (\ s a -> s{_acwrcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwrcUploadProtocol :: Lens' AccountsContainersWorkspacesResolveConflict (Maybe Text)
+acwrcUploadProtocol
+  = lens _acwrcUploadProtocol
+      (\ s a -> s{_acwrcUploadProtocol = a})
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -100,10 +141,28 @@ acwrcFingerprint
   = lens _acwrcFingerprint
       (\ s a -> s{_acwrcFingerprint = a})
 
+-- | OAuth access token.
+acwrcAccessToken :: Lens' AccountsContainersWorkspacesResolveConflict (Maybe Text)
+acwrcAccessToken
+  = lens _acwrcAccessToken
+      (\ s a -> s{_acwrcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwrcUploadType :: Lens' AccountsContainersWorkspacesResolveConflict (Maybe Text)
+acwrcUploadType
+  = lens _acwrcUploadType
+      (\ s a -> s{_acwrcUploadType = a})
+
 -- | Multipart request metadata.
 acwrcPayload :: Lens' AccountsContainersWorkspacesResolveConflict Entity
 acwrcPayload
   = lens _acwrcPayload (\ s a -> s{_acwrcPayload = a})
+
+-- | JSONP
+acwrcCallback :: Lens' AccountsContainersWorkspacesResolveConflict (Maybe Text)
+acwrcCallback
+  = lens _acwrcCallback
+      (\ s a -> s{_acwrcCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesResolveConflict
@@ -116,7 +175,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesResolveConflict'{..}
-          = go _acwrcPath _acwrcFingerprint (Just AltJSON)
+          = go _acwrcPath _acwrcXgafv _acwrcUploadProtocol
+              _acwrcFingerprint
+              _acwrcAccessToken
+              _acwrcUploadType
+              _acwrcCallback
+              (Just AltJSON)
               _acwrcPayload
               tagManagerService
           where go

@@ -46,8 +46,8 @@ module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
     , afirbuCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.batchUpdate@ method which the
 -- 'AppsFirewallIngressRulesBatchUpdate' request conforms to.
@@ -75,13 +75,13 @@ type AppsFirewallIngressRulesBatchUpdateResource =
 -- /See:/ 'appsFirewallIngressRulesBatchUpdate' smart constructor.
 data AppsFirewallIngressRulesBatchUpdate =
   AppsFirewallIngressRulesBatchUpdate'
-    { _afirbuXgafv          :: !(Maybe Xgafv)
+    { _afirbuXgafv :: !(Maybe Xgafv)
     , _afirbuUploadProtocol :: !(Maybe Text)
-    , _afirbuAccessToken    :: !(Maybe Text)
-    , _afirbuUploadType     :: !(Maybe Text)
-    , _afirbuPayload        :: !BatchUpdateIngressRulesRequest
-    , _afirbuAppsId         :: !Text
-    , _afirbuCallback       :: !(Maybe Text)
+    , _afirbuAccessToken :: !(Maybe Text)
+    , _afirbuUploadType :: !(Maybe Text)
+    , _afirbuPayload :: !BatchUpdateIngressRulesRequest
+    , _afirbuAppsId :: !Text
+    , _afirbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

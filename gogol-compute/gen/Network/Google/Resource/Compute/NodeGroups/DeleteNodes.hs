@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NodeGroups.DeleteNodes
     , ngdnPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.deleteNodes@ method which the
 -- 'NodeGroupsDeleteNodes' request conforms to.
@@ -67,9 +67,9 @@ data NodeGroupsDeleteNodes =
   NodeGroupsDeleteNodes'
     { _ngdnRequestId :: !(Maybe Text)
     , _ngdnNodeGroup :: !Text
-    , _ngdnProject   :: !Text
-    , _ngdnZone      :: !Text
-    , _ngdnPayload   :: !NodeGroupsDeleteNodesRequest
+    , _ngdnProject :: !Text
+    , _ngdnZone :: !Text
+    , _ngdnPayload :: !NodeGroupsDeleteNodesRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,7 +118,7 @@ ngdnRequestId
   = lens _ngdnRequestId
       (\ s a -> s{_ngdnRequestId = a})
 
--- | Name of the NodeGroup resource to delete.
+-- | Name of the NodeGroup resource whose nodes will be deleted.
 ngdnNodeGroup :: Lens' NodeGroupsDeleteNodes Text
 ngdnNodeGroup
   = lens _ngdnNodeGroup

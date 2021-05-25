@@ -41,8 +41,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
     , ptgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.get@ method which the
 -- 'ProjectsTopicsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsTopicsGetResource =
 -- /See:/ 'projectsTopicsGet' smart constructor.
 data ProjectsTopicsGet =
   ProjectsTopicsGet'
-    { _ptgXgafv          :: !(Maybe Xgafv)
+    { _ptgXgafv :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
-    , _ptgAccessToken    :: !(Maybe Text)
-    , _ptgUploadType     :: !(Maybe Text)
-    , _ptgTopic          :: !Text
-    , _ptgCallback       :: !(Maybe Text)
+    , _ptgAccessToken :: !(Maybe Text)
+    , _ptgUploadType :: !(Maybe Text)
+    , _ptgTopic :: !Text
+    , _ptgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,7 +122,7 @@ ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
 
--- | The name of the topic to get. Format is
+-- | Required. The name of the topic to get. Format is
 -- \`projects\/{project}\/topics\/{topic}\`.
 ptgTopic :: Lens' ProjectsTopicsGet Text
 ptgTopic = lens _ptgTopic (\ s a -> s{_ptgTopic = a})

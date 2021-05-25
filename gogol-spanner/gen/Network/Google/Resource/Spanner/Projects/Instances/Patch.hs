@@ -63,8 +63,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Patch
     , pipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.patch@ method which the
 -- 'ProjectsInstancesPatch' request conforms to.
@@ -106,13 +106,13 @@ type ProjectsInstancesPatchResource =
 -- /See:/ 'projectsInstancesPatch' smart constructor.
 data ProjectsInstancesPatch =
   ProjectsInstancesPatch'
-    { _pipXgafv          :: !(Maybe Xgafv)
+    { _pipXgafv :: !(Maybe Xgafv)
     , _pipUploadProtocol :: !(Maybe Text)
-    , _pipAccessToken    :: !(Maybe Text)
-    , _pipUploadType     :: !(Maybe Text)
-    , _pipPayload        :: !UpdateInstanceRequest
-    , _pipName           :: !Text
-    , _pipCallback       :: !(Maybe Text)
+    , _pipAccessToken :: !(Maybe Text)
+    , _pipUploadType :: !(Maybe Text)
+    , _pipPayload :: !UpdateInstanceRequest
+    , _pipName :: !Text
+    , _pipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

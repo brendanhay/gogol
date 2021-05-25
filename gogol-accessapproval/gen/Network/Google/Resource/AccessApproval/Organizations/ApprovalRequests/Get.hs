@@ -42,13 +42,13 @@ module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Get
     , oargCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.organizations.approvalRequests.get@ method which the
 -- 'OrganizationsApprovalRequestsGet' request conforms to.
 type OrganizationsApprovalRequestsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,12 +64,12 @@ type OrganizationsApprovalRequestsGetResource =
 -- /See:/ 'organizationsApprovalRequestsGet' smart constructor.
 data OrganizationsApprovalRequestsGet =
   OrganizationsApprovalRequestsGet'
-    { _oargXgafv          :: !(Maybe Xgafv)
+    { _oargXgafv :: !(Maybe Xgafv)
     , _oargUploadProtocol :: !(Maybe Text)
-    , _oargAccessToken    :: !(Maybe Text)
-    , _oargUploadType     :: !(Maybe Text)
-    , _oargName           :: !Text
-    , _oargCallback       :: !(Maybe Text)
+    , _oargAccessToken :: !(Maybe Text)
+    , _oargUploadType :: !(Maybe Text)
+    , _oargName :: !Text
+    , _oargCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

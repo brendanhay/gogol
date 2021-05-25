@@ -22,7 +22,7 @@
 --
 -- Registers a Reseller for receiving notifications.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.resellernotify.register@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.resellernotify.register@.
 module Network.Google.Resource.Reseller.Resellernotify.Register
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Reseller.Resellernotify.Register
     , ResellernotifyRegister
 
     -- * Request Lenses
+    , rrXgafv
+    , rrUploadProtocol
+    , rrAccessToken
+    , rrUploadType
     , rrServiceAccountEmailAddress
+    , rrCallback
     ) where
 
-import           Network.Google.AppsReseller.Types
-import           Network.Google.Prelude
+import Network.Google.AppsReseller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @reseller.resellernotify.register@ method which the
 -- 'ResellernotifyRegister' request conforms to.
@@ -47,16 +52,26 @@ type ResellernotifyRegisterResource =
          "v1" :>
            "resellernotify" :>
              "register" :>
-               QueryParam "serviceAccountEmailAddress" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] ResellernotifyResource
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "serviceAccountEmailAddress" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Post '[JSON] ResellernotifyResource
 
 -- | Registers a Reseller for receiving notifications.
 --
 -- /See:/ 'resellernotifyRegister' smart constructor.
-newtype ResellernotifyRegister =
+data ResellernotifyRegister =
   ResellernotifyRegister'
-    { _rrServiceAccountEmailAddress :: Maybe Text
+    { _rrXgafv :: !(Maybe Xgafv)
+    , _rrUploadProtocol :: !(Maybe Text)
+    , _rrAccessToken :: !(Maybe Text)
+    , _rrUploadType :: !(Maybe Text)
+    , _rrServiceAccountEmailAddress :: !(Maybe Text)
+    , _rrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,12 +80,50 @@ newtype ResellernotifyRegister =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rrXgafv'
+--
+-- * 'rrUploadProtocol'
+--
+-- * 'rrAccessToken'
+--
+-- * 'rrUploadType'
+--
 -- * 'rrServiceAccountEmailAddress'
+--
+-- * 'rrCallback'
 resellernotifyRegister
     :: ResellernotifyRegister
 resellernotifyRegister =
-  ResellernotifyRegister' {_rrServiceAccountEmailAddress = Nothing}
+  ResellernotifyRegister'
+    { _rrXgafv = Nothing
+    , _rrUploadProtocol = Nothing
+    , _rrAccessToken = Nothing
+    , _rrUploadType = Nothing
+    , _rrServiceAccountEmailAddress = Nothing
+    , _rrCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rrXgafv :: Lens' ResellernotifyRegister (Maybe Xgafv)
+rrXgafv = lens _rrXgafv (\ s a -> s{_rrXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rrUploadProtocol :: Lens' ResellernotifyRegister (Maybe Text)
+rrUploadProtocol
+  = lens _rrUploadProtocol
+      (\ s a -> s{_rrUploadProtocol = a})
+
+-- | OAuth access token.
+rrAccessToken :: Lens' ResellernotifyRegister (Maybe Text)
+rrAccessToken
+  = lens _rrAccessToken
+      (\ s a -> s{_rrAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rrUploadType :: Lens' ResellernotifyRegister (Maybe Text)
+rrUploadType
+  = lens _rrUploadType (\ s a -> s{_rrUploadType = a})
 
 -- | The service account which will own the created Cloud-PubSub topic.
 rrServiceAccountEmailAddress :: Lens' ResellernotifyRegister (Maybe Text)
@@ -78,13 +131,22 @@ rrServiceAccountEmailAddress
   = lens _rrServiceAccountEmailAddress
       (\ s a -> s{_rrServiceAccountEmailAddress = a})
 
+-- | JSONP
+rrCallback :: Lens' ResellernotifyRegister (Maybe Text)
+rrCallback
+  = lens _rrCallback (\ s a -> s{_rrCallback = a})
+
 instance GoogleRequest ResellernotifyRegister where
         type Rs ResellernotifyRegister =
              ResellernotifyResource
         type Scopes ResellernotifyRegister =
              '["https://www.googleapis.com/auth/apps.order"]
         requestClient ResellernotifyRegister'{..}
-          = go _rrServiceAccountEmailAddress (Just AltJSON)
+          = go _rrXgafv _rrUploadProtocol _rrAccessToken
+              _rrUploadType
+              _rrServiceAccountEmailAddress
+              _rrCallback
+              (Just AltJSON)
               appsResellerService
           where go
                   = buildClient

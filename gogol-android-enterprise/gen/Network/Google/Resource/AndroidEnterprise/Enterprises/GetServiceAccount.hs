@@ -43,12 +43,17 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
     , EnterprisesGetServiceAccount
 
     -- * Request Lenses
+    , egsaXgafv
     , egsaKeyType
+    , egsaUploadProtocol
     , egsaEnterpriseId
+    , egsaAccessToken
+    , egsaUploadType
+    , egsaCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.getServiceAccount@ method which the
 -- 'EnterprisesGetServiceAccount' request conforms to.
@@ -58,11 +63,16 @@ type EnterprisesGetServiceAccountResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "serviceAccount" :>
-               QueryParam "keyType"
-                 EnterprisesGetServiceAccountKeyType
-                 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ServiceAccount
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "keyType"
+                   EnterprisesGetServiceAccountKeyType
+                   :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ServiceAccount
 
 -- | Returns a service account and credentials. The service account can be
 -- bound to the enterprise by calling setAccount. The service account is
@@ -79,8 +89,13 @@ type EnterprisesGetServiceAccountResource =
 -- /See:/ 'enterprisesGetServiceAccount' smart constructor.
 data EnterprisesGetServiceAccount =
   EnterprisesGetServiceAccount'
-    { _egsaKeyType      :: !(Maybe EnterprisesGetServiceAccountKeyType)
+    { _egsaXgafv :: !(Maybe Xgafv)
+    , _egsaKeyType :: !(Maybe EnterprisesGetServiceAccountKeyType)
+    , _egsaUploadProtocol :: !(Maybe Text)
     , _egsaEnterpriseId :: !Text
+    , _egsaAccessToken :: !(Maybe Text)
+    , _egsaUploadType :: !(Maybe Text)
+    , _egsaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -89,21 +104,49 @@ data EnterprisesGetServiceAccount =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'egsaXgafv'
+--
 -- * 'egsaKeyType'
 --
+-- * 'egsaUploadProtocol'
+--
 -- * 'egsaEnterpriseId'
+--
+-- * 'egsaAccessToken'
+--
+-- * 'egsaUploadType'
+--
+-- * 'egsaCallback'
 enterprisesGetServiceAccount
     :: Text -- ^ 'egsaEnterpriseId'
     -> EnterprisesGetServiceAccount
 enterprisesGetServiceAccount pEgsaEnterpriseId_ =
   EnterprisesGetServiceAccount'
-    {_egsaKeyType = Nothing, _egsaEnterpriseId = pEgsaEnterpriseId_}
+    { _egsaXgafv = Nothing
+    , _egsaKeyType = Nothing
+    , _egsaUploadProtocol = Nothing
+    , _egsaEnterpriseId = pEgsaEnterpriseId_
+    , _egsaAccessToken = Nothing
+    , _egsaUploadType = Nothing
+    , _egsaCallback = Nothing
+    }
 
+
+-- | V1 error format.
+egsaXgafv :: Lens' EnterprisesGetServiceAccount (Maybe Xgafv)
+egsaXgafv
+  = lens _egsaXgafv (\ s a -> s{_egsaXgafv = a})
 
 -- | The type of credential to return with the service account. Required.
 egsaKeyType :: Lens' EnterprisesGetServiceAccount (Maybe EnterprisesGetServiceAccountKeyType)
 egsaKeyType
   = lens _egsaKeyType (\ s a -> s{_egsaKeyType = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+egsaUploadProtocol :: Lens' EnterprisesGetServiceAccount (Maybe Text)
+egsaUploadProtocol
+  = lens _egsaUploadProtocol
+      (\ s a -> s{_egsaUploadProtocol = a})
 
 -- | The ID of the enterprise.
 egsaEnterpriseId :: Lens' EnterprisesGetServiceAccount Text
@@ -111,13 +154,35 @@ egsaEnterpriseId
   = lens _egsaEnterpriseId
       (\ s a -> s{_egsaEnterpriseId = a})
 
+-- | OAuth access token.
+egsaAccessToken :: Lens' EnterprisesGetServiceAccount (Maybe Text)
+egsaAccessToken
+  = lens _egsaAccessToken
+      (\ s a -> s{_egsaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+egsaUploadType :: Lens' EnterprisesGetServiceAccount (Maybe Text)
+egsaUploadType
+  = lens _egsaUploadType
+      (\ s a -> s{_egsaUploadType = a})
+
+-- | JSONP
+egsaCallback :: Lens' EnterprisesGetServiceAccount (Maybe Text)
+egsaCallback
+  = lens _egsaCallback (\ s a -> s{_egsaCallback = a})
+
 instance GoogleRequest EnterprisesGetServiceAccount
          where
         type Rs EnterprisesGetServiceAccount = ServiceAccount
         type Scopes EnterprisesGetServiceAccount =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesGetServiceAccount'{..}
-          = go _egsaEnterpriseId _egsaKeyType (Just AltJSON)
+          = go _egsaEnterpriseId _egsaXgafv _egsaKeyType
+              _egsaUploadProtocol
+              _egsaAccessToken
+              _egsaUploadType
+              _egsaCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

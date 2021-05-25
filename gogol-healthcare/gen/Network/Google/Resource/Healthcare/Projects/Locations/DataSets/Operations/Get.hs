@@ -43,13 +43,13 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Operations
     , pldsogCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.operations.get@ method which the
 -- 'ProjectsLocationsDataSetsOperationsGet' request conforms to.
 type ProjectsLocationsDataSetsOperationsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,12 +65,12 @@ type ProjectsLocationsDataSetsOperationsGetResource =
 -- /See:/ 'projectsLocationsDataSetsOperationsGet' smart constructor.
 data ProjectsLocationsDataSetsOperationsGet =
   ProjectsLocationsDataSetsOperationsGet'
-    { _pldsogXgafv          :: !(Maybe Xgafv)
+    { _pldsogXgafv :: !(Maybe Xgafv)
     , _pldsogUploadProtocol :: !(Maybe Text)
-    , _pldsogAccessToken    :: !(Maybe Text)
-    , _pldsogUploadType     :: !(Maybe Text)
-    , _pldsogName           :: !Text
-    , _pldsogCallback       :: !(Maybe Text)
+    , _pldsogAccessToken :: !(Maybe Text)
+    , _pldsogUploadType :: !(Maybe Text)
+    , _pldsogName :: !Text
+    , _pldsogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

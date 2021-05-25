@@ -45,8 +45,8 @@ module Network.Google.Resource.LibraryAgent.Shelves.Books.List
     , sblCallback
     ) where
 
-import           Network.Google.LibraryAgent.Types
-import           Network.Google.Prelude
+import Network.Google.LibraryAgent.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @libraryagent.shelves.books.list@ method which the
 -- 'ShelvesBooksList' request conforms to.
@@ -72,14 +72,14 @@ type ShelvesBooksListResource =
 -- /See:/ 'shelvesBooksList' smart constructor.
 data ShelvesBooksList =
   ShelvesBooksList'
-    { _sblParent         :: !Text
-    , _sblXgafv          :: !(Maybe Xgafv)
+    { _sblParent :: !Text
+    , _sblXgafv :: !(Maybe Xgafv)
     , _sblUploadProtocol :: !(Maybe Text)
-    , _sblAccessToken    :: !(Maybe Text)
-    , _sblUploadType     :: !(Maybe Text)
-    , _sblPageToken      :: !(Maybe Text)
-    , _sblPageSize       :: !(Maybe (Textual Int32))
-    , _sblCallback       :: !(Maybe Text)
+    , _sblAccessToken :: !(Maybe Text)
+    , _sblUploadType :: !(Maybe Text)
+    , _sblPageToken :: !(Maybe Text)
+    , _sblPageSize :: !(Maybe (Textual Int32))
+    , _sblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -119,7 +119,7 @@ shelvesBooksList pSblParent_ =
     }
 
 
--- | The name of the shelf whose books we\'d like to list.
+-- | Required. The name of the shelf whose books we\'d like to list.
 sblParent :: Lens' ShelvesBooksList Text
 sblParent
   = lens _sblParent (\ s a -> s{_sblParent = a})

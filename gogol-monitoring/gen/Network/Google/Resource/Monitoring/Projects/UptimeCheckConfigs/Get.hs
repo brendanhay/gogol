@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a single uptime check configuration.
+-- Gets a single Uptime check configuration.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.get@.
 module Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Get
     , puccgCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.uptimeCheckConfigs.get@ method which the
 -- 'ProjectsUptimeCheckConfigsGet' request conforms to.
@@ -57,17 +57,17 @@ type ProjectsUptimeCheckConfigsGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] UptimeCheckConfig
 
--- | Gets a single uptime check configuration.
+-- | Gets a single Uptime check configuration.
 --
 -- /See:/ 'projectsUptimeCheckConfigsGet' smart constructor.
 data ProjectsUptimeCheckConfigsGet =
   ProjectsUptimeCheckConfigsGet'
-    { _puccgXgafv          :: !(Maybe Xgafv)
+    { _puccgXgafv :: !(Maybe Xgafv)
     , _puccgUploadProtocol :: !(Maybe Text)
-    , _puccgAccessToken    :: !(Maybe Text)
-    , _puccgUploadType     :: !(Maybe Text)
-    , _puccgName           :: !Text
-    , _puccgCallback       :: !(Maybe Text)
+    , _puccgAccessToken :: !(Maybe Text)
+    , _puccgUploadType :: !(Maybe Text)
+    , _puccgName :: !Text
+    , _puccgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ puccgUploadType
   = lens _puccgUploadType
       (\ s a -> s{_puccgUploadType = a})
 
--- | The uptime check configuration to retrieve. The format is
--- projects\/[PROJECT_ID]\/uptimeCheckConfigs\/[UPTIME_CHECK_ID].
+-- | Required. The Uptime check configuration to retrieve. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/uptimeCheckConfigs\/[UPTIME_CHECK_ID]
 puccgName :: Lens' ProjectsUptimeCheckConfigsGet Text
 puccgName
   = lens _puccgName (\ s a -> s{_puccgName = a})

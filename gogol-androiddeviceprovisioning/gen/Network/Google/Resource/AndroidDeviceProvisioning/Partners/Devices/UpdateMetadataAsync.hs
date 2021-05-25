@@ -45,8 +45,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Update
     , pdumaCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.updateMetadataAsync@ method which the
 -- 'PartnersDevicesUpdateMetadataAsync' request conforms to.
@@ -72,13 +72,13 @@ type PartnersDevicesUpdateMetadataAsyncResource =
 -- /See:/ 'partnersDevicesUpdateMetadataAsync' smart constructor.
 data PartnersDevicesUpdateMetadataAsync =
   PartnersDevicesUpdateMetadataAsync'
-    { _pdumaXgafv          :: !(Maybe Xgafv)
+    { _pdumaXgafv :: !(Maybe Xgafv)
     , _pdumaUploadProtocol :: !(Maybe Text)
-    , _pdumaAccessToken    :: !(Maybe Text)
-    , _pdumaPartnerId      :: !(Textual Int64)
-    , _pdumaUploadType     :: !(Maybe Text)
-    , _pdumaPayload        :: !UpdateDeviceMetadataInBatchRequest
-    , _pdumaCallback       :: !(Maybe Text)
+    , _pdumaAccessToken :: !(Maybe Text)
+    , _pdumaPartnerId :: !(Textual Int64)
+    , _pdumaUploadType :: !(Maybe Text)
+    , _pdumaPayload :: !UpdateDeviceMetadataInBatchRequest
+    , _pdumaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

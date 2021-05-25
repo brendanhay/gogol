@@ -42,20 +42,37 @@ library
         , Network.Google.Resource.BigQuery.DataSets.Patch
         , Network.Google.Resource.BigQuery.DataSets.Update
         , Network.Google.Resource.BigQuery.Jobs.Cancel
+        , Network.Google.Resource.BigQuery.Jobs.Delete
         , Network.Google.Resource.BigQuery.Jobs.Get
         , Network.Google.Resource.BigQuery.Jobs.GetQueryResults
         , Network.Google.Resource.BigQuery.Jobs.Insert
         , Network.Google.Resource.BigQuery.Jobs.List
         , Network.Google.Resource.BigQuery.Jobs.Query
+        , Network.Google.Resource.BigQuery.Models.Delete
+        , Network.Google.Resource.BigQuery.Models.Get
+        , Network.Google.Resource.BigQuery.Models.List
+        , Network.Google.Resource.BigQuery.Models.Patch
         , Network.Google.Resource.BigQuery.Projects.GetServiceAccount
         , Network.Google.Resource.BigQuery.Projects.List
+        , Network.Google.Resource.BigQuery.Routines.Delete
+        , Network.Google.Resource.BigQuery.Routines.Get
+        , Network.Google.Resource.BigQuery.Routines.Insert
+        , Network.Google.Resource.BigQuery.Routines.List
+        , Network.Google.Resource.BigQuery.Routines.Update
+        , Network.Google.Resource.BigQuery.RowAccessPolicies.GetIAMPolicy
+        , Network.Google.Resource.BigQuery.RowAccessPolicies.List
+        , Network.Google.Resource.BigQuery.RowAccessPolicies.SetIAMPolicy
+        , Network.Google.Resource.BigQuery.RowAccessPolicies.TestIAMPermissions
         , Network.Google.Resource.BigQuery.TableData.InsertAll
         , Network.Google.Resource.BigQuery.TableData.List
         , Network.Google.Resource.BigQuery.Tables.Delete
         , Network.Google.Resource.BigQuery.Tables.Get
+        , Network.Google.Resource.BigQuery.Tables.GetIAMPolicy
         , Network.Google.Resource.BigQuery.Tables.Insert
         , Network.Google.Resource.BigQuery.Tables.List
         , Network.Google.Resource.BigQuery.Tables.Patch
+        , Network.Google.Resource.BigQuery.Tables.SetIAMPolicy
+        , Network.Google.Resource.BigQuery.Tables.TestIAMPermissions
         , Network.Google.Resource.BigQuery.Tables.Update
 
     other-modules:

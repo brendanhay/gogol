@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Get
     , plqtgCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.get@ method which the
 -- 'ProjectsLocationsQueuesTasksGet' request conforms to.
@@ -54,7 +54,9 @@ type ProjectsLocationsQueuesTasksGetResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "responseView" Text :>
+                 QueryParam "responseView"
+                   ProjectsLocationsQueuesTasksGetResponseView
+                   :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Task
 
@@ -63,13 +65,13 @@ type ProjectsLocationsQueuesTasksGetResource =
 -- /See:/ 'projectsLocationsQueuesTasksGet' smart constructor.
 data ProjectsLocationsQueuesTasksGet =
   ProjectsLocationsQueuesTasksGet'
-    { _plqtgXgafv          :: !(Maybe Xgafv)
+    { _plqtgXgafv :: !(Maybe Xgafv)
     , _plqtgUploadProtocol :: !(Maybe Text)
-    , _plqtgAccessToken    :: !(Maybe Text)
-    , _plqtgUploadType     :: !(Maybe Text)
-    , _plqtgResponseView   :: !(Maybe Text)
-    , _plqtgName           :: !Text
-    , _plqtgCallback       :: !(Maybe Text)
+    , _plqtgAccessToken :: !(Maybe Text)
+    , _plqtgUploadType :: !(Maybe Text)
+    , _plqtgResponseView :: !(Maybe ProjectsLocationsQueuesTasksGetResponseView)
+    , _plqtgName :: !Text
+    , _plqtgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,7 +138,7 @@ plqtgUploadType
 -- sensitivity of data that it contains. Authorization for FULL requires
 -- \`cloudtasks.tasks.fullView\` [Google
 -- IAM](https:\/\/cloud.google.com\/iam\/) permission on the Task resource.
-plqtgResponseView :: Lens' ProjectsLocationsQueuesTasksGet (Maybe Text)
+plqtgResponseView :: Lens' ProjectsLocationsQueuesTasksGet (Maybe ProjectsLocationsQueuesTasksGetResponseView)
 plqtgResponseView
   = lens _plqtgResponseView
       (\ s a -> s{_plqtgResponseView = a})

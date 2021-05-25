@@ -47,8 +47,8 @@ module Network.Google.Resource.AppEngine.Apps.Create
     , acCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.create@ method which the
 -- 'AppsCreate' request conforms to.
@@ -74,12 +74,12 @@ type AppsCreateResource =
 -- /See:/ 'appsCreate' smart constructor.
 data AppsCreate =
   AppsCreate'
-    { _acXgafv          :: !(Maybe Xgafv)
+    { _acXgafv :: !(Maybe Xgafv)
     , _acUploadProtocol :: !(Maybe Text)
-    , _acAccessToken    :: !(Maybe Text)
-    , _acUploadType     :: !(Maybe Text)
-    , _acPayload        :: !Application
-    , _acCallback       :: !(Maybe Text)
+    , _acAccessToken :: !(Maybe Text)
+    , _acUploadType :: !(Maybe Text)
+    , _acPayload :: !Application
+    , _acCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

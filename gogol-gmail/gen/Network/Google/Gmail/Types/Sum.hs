@@ -16,32 +16,34 @@
 --
 module Network.Google.Gmail.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | How the message size in bytes should be in relation to the size field.
 data FilterCriteriaSizeComparison
-    = Larger
-      -- ^ @larger@
+    = Unspecified
+      -- ^ @unspecified@
     | Smaller
       -- ^ @smaller@
-    | Unspecified
-      -- ^ @unspecified@
+      -- Find messages smaller than the given size.
+    | Larger
+      -- ^ @larger@
+      -- Find messages larger than the given size.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilterCriteriaSizeComparison
 
 instance FromHttpApiData FilterCriteriaSizeComparison where
     parseQueryParam = \case
-        "larger" -> Right Larger
-        "smaller" -> Right Smaller
         "unspecified" -> Right Unspecified
+        "smaller" -> Right Smaller
+        "larger" -> Right Larger
         x -> Left ("Unable to parse FilterCriteriaSizeComparison from: " <> x)
 
 instance ToHttpApiData FilterCriteriaSizeComparison where
     toQueryParam = \case
-        Larger -> "larger"
-        Smaller -> "smaller"
         Unspecified -> "unspecified"
+        Smaller -> "smaller"
+        Larger -> "larger"
 
 instance FromJSON FilterCriteriaSizeComparison where
     parseJSON = parseJSONText "FilterCriteriaSizeComparison"
@@ -51,32 +53,42 @@ instance ToJSON FilterCriteriaSizeComparison where
 
 -- | The format to return the message in.
 data UsersMessagesGetFormat
-    = Full
-      -- ^ @full@
-    | Metadata
-      -- ^ @metadata@
-    | Minimal
+    = Minimal
       -- ^ @minimal@
+      -- Returns only email message ID and labels; does not return the email
+      -- headers, body, or payload.
+    | Full
+      -- ^ @full@
+      -- Returns the full email message data with body content parsed in the
+      -- \`payload\` field; the \`raw\` field is not used. Format cannot be used
+      -- when accessing the api using the gmail.metadata scope.
     | Raw
       -- ^ @raw@
+      -- Returns the full email message data with body content in the \`raw\`
+      -- field as a base64url encoded string; the \`payload\` field is not used.
+      -- Format cannot be used when accessing the api using the gmail.metadata
+      -- scope.
+    | Metadata
+      -- ^ @metadata@
+      -- Returns only email message ID, labels, and email headers.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesGetFormat
 
 instance FromHttpApiData UsersMessagesGetFormat where
     parseQueryParam = \case
-        "full" -> Right Full
-        "metadata" -> Right Metadata
         "minimal" -> Right Minimal
+        "full" -> Right Full
         "raw" -> Right Raw
+        "metadata" -> Right Metadata
         x -> Left ("Unable to parse UsersMessagesGetFormat from: " <> x)
 
 instance ToHttpApiData UsersMessagesGetFormat where
     toQueryParam = \case
-        Full -> "full"
-        Metadata -> "metadata"
         Minimal -> "minimal"
+        Full -> "full"
         Raw -> "raw"
+        Metadata -> "metadata"
 
 instance FromJSON UsersMessagesGetFormat where
     parseJSON = parseJSONText "UsersMessagesGetFormat"
@@ -88,12 +100,17 @@ instance ToJSON UsersMessagesGetFormat where
 data PopSettingsAccessWindow
     = AccessWindowUnspecified
       -- ^ @accessWindowUnspecified@
-    | AllMail
-      -- ^ @allMail@
+      -- Unspecified range.
     | Disabled
       -- ^ @disabled@
+      -- Indicates that no messages are accessible via POP.
     | FromNowOn
       -- ^ @fromNowOn@
+      -- Indicates that unfetched messages received after some past point in time
+      -- are accessible via POP.
+    | AllMail
+      -- ^ @allMail@
+      -- Indicates that all unfetched messages are accessible via POP.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PopSettingsAccessWindow
@@ -101,17 +118,17 @@ instance Hashable PopSettingsAccessWindow
 instance FromHttpApiData PopSettingsAccessWindow where
     parseQueryParam = \case
         "accessWindowUnspecified" -> Right AccessWindowUnspecified
-        "allMail" -> Right AllMail
         "disabled" -> Right Disabled
         "fromNowOn" -> Right FromNowOn
+        "allMail" -> Right AllMail
         x -> Left ("Unable to parse PopSettingsAccessWindow from: " <> x)
 
 instance ToHttpApiData PopSettingsAccessWindow where
     toQueryParam = \case
         AccessWindowUnspecified -> "accessWindowUnspecified"
-        AllMail -> "allMail"
         Disabled -> "disabled"
         FromNowOn -> "fromNowOn"
+        AllMail -> "allMail"
 
 instance FromJSON PopSettingsAccessWindow where
     parseJSON = parseJSONText "PopSettingsAccessWindow"
@@ -122,28 +139,31 @@ instance ToJSON PopSettingsAccessWindow where
 -- | Indicates whether this address has been verified and is usable for
 -- forwarding. Read-only.
 data ForwardingAddressVerificationStatus
-    = Accepted
+    = VerificationStatusUnspecified
+      -- ^ @verificationStatusUnspecified@
+      -- Unspecified verification status.
+    | Accepted
       -- ^ @accepted@
+      -- The address is ready to use for forwarding.
     | Pending
       -- ^ @pending@
-    | VerificationStatusUnspecified
-      -- ^ @verificationStatusUnspecified@
+      -- The address is awaiting verification by the owner.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ForwardingAddressVerificationStatus
 
 instance FromHttpApiData ForwardingAddressVerificationStatus where
     parseQueryParam = \case
+        "verificationStatusUnspecified" -> Right VerificationStatusUnspecified
         "accepted" -> Right Accepted
         "pending" -> Right Pending
-        "verificationStatusUnspecified" -> Right VerificationStatusUnspecified
         x -> Left ("Unable to parse ForwardingAddressVerificationStatus from: " <> x)
 
 instance ToHttpApiData ForwardingAddressVerificationStatus where
     toQueryParam = \case
+        VerificationStatusUnspecified -> "verificationStatusUnspecified"
         Accepted -> "accepted"
         Pending -> "pending"
-        VerificationStatusUnspecified -> "verificationStatusUnspecified"
 
 instance FromJSON ForwardingAddressVerificationStatus where
     parseJSON = parseJSONText "ForwardingAddressVerificationStatus"
@@ -153,36 +173,41 @@ instance ToJSON ForwardingAddressVerificationStatus where
 
 -- | The state that a message should be left in after it has been forwarded.
 data AutoForwardingDisPosition
-    = Archive
-      -- ^ @archive@
-    | DisPositionUnspecified
+    = DisPositionUnspecified
       -- ^ @dispositionUnspecified@
+      -- Unspecified disposition.
     | LeaveInInbox
       -- ^ @leaveInInbox@
-    | MarkRead
-      -- ^ @markRead@
+      -- Leave the message in the \`INBOX\`.
+    | Archive
+      -- ^ @archive@
+      -- Archive the message.
     | Trash
       -- ^ @trash@
+      -- Move the message to the \`TRASH\`.
+    | MarkRead
+      -- ^ @markRead@
+      -- Leave the message in the \`INBOX\` and mark it as read.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AutoForwardingDisPosition
 
 instance FromHttpApiData AutoForwardingDisPosition where
     parseQueryParam = \case
-        "archive" -> Right Archive
         "dispositionUnspecified" -> Right DisPositionUnspecified
         "leaveInInbox" -> Right LeaveInInbox
-        "markRead" -> Right MarkRead
+        "archive" -> Right Archive
         "trash" -> Right Trash
+        "markRead" -> Right MarkRead
         x -> Left ("Unable to parse AutoForwardingDisPosition from: " <> x)
 
 instance ToHttpApiData AutoForwardingDisPosition where
     toQueryParam = \case
-        Archive -> "archive"
         DisPositionUnspecified -> "dispositionUnspecified"
         LeaveInInbox -> "leaveInInbox"
-        MarkRead -> "markRead"
+        Archive -> "archive"
         Trash -> "trash"
+        MarkRead -> "markRead"
 
 instance FromJSON AutoForwardingDisPosition where
     parseJSON = parseJSONText "AutoForwardingDisPosition"
@@ -192,32 +217,32 @@ instance ToJSON AutoForwardingDisPosition where
 
 -- | History types to be returned by the function
 data UsersHistoryListHistoryTypes
-    = LabelAdded
-      -- ^ @labelAdded@
-    | LabelRemoved
-      -- ^ @labelRemoved@
-    | MessageAdded
+    = MessageAdded
       -- ^ @messageAdded@
     | MessageDeleted
       -- ^ @messageDeleted@
+    | LabelAdded
+      -- ^ @labelAdded@
+    | LabelRemoved
+      -- ^ @labelRemoved@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersHistoryListHistoryTypes
 
 instance FromHttpApiData UsersHistoryListHistoryTypes where
     parseQueryParam = \case
-        "labelAdded" -> Right LabelAdded
-        "labelRemoved" -> Right LabelRemoved
         "messageAdded" -> Right MessageAdded
         "messageDeleted" -> Right MessageDeleted
+        "labelAdded" -> Right LabelAdded
+        "labelRemoved" -> Right LabelRemoved
         x -> Left ("Unable to parse UsersHistoryListHistoryTypes from: " <> x)
 
 instance ToHttpApiData UsersHistoryListHistoryTypes where
     toQueryParam = \case
-        LabelAdded -> "labelAdded"
-        LabelRemoved -> "labelRemoved"
         MessageAdded -> "messageAdded"
         MessageDeleted -> "messageDeleted"
+        LabelAdded -> "labelAdded"
+        LabelRemoved -> "labelRemoved"
 
 instance FromJSON UsersHistoryListHistoryTypes where
     parseJSON = parseJSONText "UsersHistoryListHistoryTypes"
@@ -228,28 +253,31 @@ instance ToJSON UsersHistoryListHistoryTypes where
 -- | Indicates whether this address has been verified for use as a send-as
 -- alias. Read-only. This setting only applies to custom \"from\" aliases.
 data SendAsVerificationStatus
-    = SAVSAccepted
+    = SAVSVerificationStatusUnspecified
+      -- ^ @verificationStatusUnspecified@
+      -- Unspecified verification status.
+    | SAVSAccepted
       -- ^ @accepted@
+      -- The address is ready to use as a send-as alias.
     | SAVSPending
       -- ^ @pending@
-    | SAVSVerificationStatusUnspecified
-      -- ^ @verificationStatusUnspecified@
+      -- The address is awaiting verification by the owner.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SendAsVerificationStatus
 
 instance FromHttpApiData SendAsVerificationStatus where
     parseQueryParam = \case
+        "verificationStatusUnspecified" -> Right SAVSVerificationStatusUnspecified
         "accepted" -> Right SAVSAccepted
         "pending" -> Right SAVSPending
-        "verificationStatusUnspecified" -> Right SAVSVerificationStatusUnspecified
         x -> Left ("Unable to parse SendAsVerificationStatus from: " <> x)
 
 instance ToHttpApiData SendAsVerificationStatus where
     toQueryParam = \case
+        SAVSVerificationStatusUnspecified -> "verificationStatusUnspecified"
         SAVSAccepted -> "accepted"
         SAVSPending -> "pending"
-        SAVSVerificationStatusUnspecified -> "verificationStatusUnspecified"
 
 instance FromJSON SendAsVerificationStatus where
     parseJSON = parseJSONText "SendAsVerificationStatus"
@@ -262,14 +290,16 @@ instance ToJSON SendAsVerificationStatus where
 -- message or thread. System labels are internally created and cannot be
 -- added, modified, or deleted. System labels may be able to be applied to
 -- or removed from messages and threads under some circumstances but this
--- is not guaranteed. For example, users can apply and remove the INBOX and
--- UNREAD labels from messages and threads, but cannot apply or remove the
--- DRAFTS or SENT labels from messages or threads.
+-- is not guaranteed. For example, users can apply and remove the \`INBOX\`
+-- and \`UNREAD\` labels from messages and threads, but cannot apply or
+-- remove the \`DRAFTS\` or \`SENT\` labels from messages or threads.
 data LabelType
     = System
       -- ^ @system@
+      -- Labels created by Gmail.
     | User
       -- ^ @user@
+      -- Custom labels created by the user or application.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelType
@@ -293,32 +323,42 @@ instance ToJSON LabelType where
 
 -- | The format to return the draft in.
 data UsersDraftsGetFormat
-    = UDGFFull
-      -- ^ @full@
-    | UDGFMetadata
-      -- ^ @metadata@
-    | UDGFMinimal
+    = UDGFMinimal
       -- ^ @minimal@
+      -- Returns only email message ID and labels; does not return the email
+      -- headers, body, or payload.
+    | UDGFFull
+      -- ^ @full@
+      -- Returns the full email message data with body content parsed in the
+      -- \`payload\` field; the \`raw\` field is not used. Format cannot be used
+      -- when accessing the api using the gmail.metadata scope.
     | UDGFRaw
       -- ^ @raw@
+      -- Returns the full email message data with body content in the \`raw\`
+      -- field as a base64url encoded string; the \`payload\` field is not used.
+      -- Format cannot be used when accessing the api using the gmail.metadata
+      -- scope.
+    | UDGFMetadata
+      -- ^ @metadata@
+      -- Returns only email message ID, labels, and email headers.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersDraftsGetFormat
 
 instance FromHttpApiData UsersDraftsGetFormat where
     parseQueryParam = \case
-        "full" -> Right UDGFFull
-        "metadata" -> Right UDGFMetadata
         "minimal" -> Right UDGFMinimal
+        "full" -> Right UDGFFull
         "raw" -> Right UDGFRaw
+        "metadata" -> Right UDGFMetadata
         x -> Left ("Unable to parse UsersDraftsGetFormat from: " <> x)
 
 instance ToHttpApiData UsersDraftsGetFormat where
     toQueryParam = \case
-        UDGFFull -> "full"
-        UDGFMetadata -> "metadata"
         UDGFMinimal -> "minimal"
+        UDGFFull -> "full"
         UDGFRaw -> "raw"
+        UDGFMetadata -> "metadata"
 
 instance FromJSON UsersDraftsGetFormat where
     parseJSON = parseJSONText "UsersDraftsGetFormat"
@@ -328,24 +368,26 @@ instance ToJSON UsersDraftsGetFormat where
 
 -- | Source for Gmail\'s internal date of the message.
 data UsersMessagesImportInternalDateSource
-    = DateHeader
-      -- ^ @dateHeader@
-    | ReceivedTime
+    = ReceivedTime
       -- ^ @receivedTime@
+      -- Internal message date set to current time when received by Gmail.
+    | DateHeader
+      -- ^ @dateHeader@
+      -- Internal message time based on \'Date\' header in email, when valid.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesImportInternalDateSource
 
 instance FromHttpApiData UsersMessagesImportInternalDateSource where
     parseQueryParam = \case
-        "dateHeader" -> Right DateHeader
         "receivedTime" -> Right ReceivedTime
+        "dateHeader" -> Right DateHeader
         x -> Left ("Unable to parse UsersMessagesImportInternalDateSource from: " <> x)
 
 instance ToHttpApiData UsersMessagesImportInternalDateSource where
     toQueryParam = \case
-        DateHeader -> "dateHeader"
         ReceivedTime -> "receivedTime"
+        DateHeader -> "dateHeader"
 
 instance FromJSON UsersMessagesImportInternalDateSource where
     parseJSON = parseJSONText "UsersMessagesImportInternalDateSource"
@@ -353,27 +395,29 @@ instance FromJSON UsersMessagesImportInternalDateSource where
 instance ToJSON UsersMessagesImportInternalDateSource where
     toJSON = toJSONText
 
--- | The visibility of the label in the message list in the Gmail web
--- interface.
+-- | The visibility of messages with this label in the message list in the
+-- Gmail web interface.
 data LabelMessageListVisibility
-    = Hide
-      -- ^ @hide@
-    | Show
+    = Show
       -- ^ @show@
+      -- Show the label in the message list.
+    | Hide
+      -- ^ @hide@
+      -- Do not show the label in the message list.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelMessageListVisibility
 
 instance FromHttpApiData LabelMessageListVisibility where
     parseQueryParam = \case
-        "hide" -> Right Hide
         "show" -> Right Show
+        "hide" -> Right Hide
         x -> Left ("Unable to parse LabelMessageListVisibility from: " <> x)
 
 instance ToHttpApiData LabelMessageListVisibility where
     toQueryParam = \case
-        Hide -> "hide"
         Show -> "show"
+        Hide -> "hide"
 
 instance FromJSON LabelMessageListVisibility where
     parseJSON = parseJSONText "LabelMessageListVisibility"
@@ -384,28 +428,31 @@ instance ToJSON LabelMessageListVisibility where
 -- | The visibility of the label in the label list in the Gmail web
 -- interface.
 data LabelLabelListVisibility
-    = LabelHide
-      -- ^ @labelHide@
-    | LabelShow
+    = LabelShow
       -- ^ @labelShow@
+      -- Show the label in the label list.
     | LabelShowIfUnread
       -- ^ @labelShowIfUnread@
+      -- Show the label if there are any unread messages with that label.
+    | LabelHide
+      -- ^ @labelHide@
+      -- Do not show the label in the label list.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelLabelListVisibility
 
 instance FromHttpApiData LabelLabelListVisibility where
     parseQueryParam = \case
-        "labelHide" -> Right LabelHide
         "labelShow" -> Right LabelShow
         "labelShowIfUnread" -> Right LabelShowIfUnread
+        "labelHide" -> Right LabelHide
         x -> Left ("Unable to parse LabelLabelListVisibility from: " <> x)
 
 instance ToHttpApiData LabelLabelListVisibility where
     toQueryParam = \case
-        LabelHide -> "labelHide"
         LabelShow -> "labelShow"
         LabelShowIfUnread -> "labelShowIfUnread"
+        LabelHide -> "labelHide"
 
 instance FromJSON LabelLabelListVisibility where
     parseJSON = parseJSONText "LabelLabelListVisibility"
@@ -413,39 +460,76 @@ instance FromJSON LabelLabelListVisibility where
 instance ToJSON LabelLabelListVisibility where
     toJSON = toJSONText
 
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
 -- | Indicates whether this address has been verified and can act as a
 -- delegate for the account. Read-only.
 data DelegateVerificationStatus
-    = DVSAccepted
+    = DVSVerificationStatusUnspecified
+      -- ^ @verificationStatusUnspecified@
+      -- Unspecified verification status.
+    | DVSAccepted
       -- ^ @accepted@
-    | DVSExpired
-      -- ^ @expired@
+      -- The address can act a delegate for the account.
     | DVSPending
       -- ^ @pending@
+      -- A verification request was mailed to the address, and the owner has not
+      -- yet accepted it.
     | DVSRejected
       -- ^ @rejected@
-    | DVSVerificationStatusUnspecified
-      -- ^ @verificationStatusUnspecified@
+      -- A verification request was mailed to the address, and the owner rejected
+      -- it.
+    | DVSExpired
+      -- ^ @expired@
+      -- A verification request was mailed to the address, and it expired without
+      -- verification.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DelegateVerificationStatus
 
 instance FromHttpApiData DelegateVerificationStatus where
     parseQueryParam = \case
+        "verificationStatusUnspecified" -> Right DVSVerificationStatusUnspecified
         "accepted" -> Right DVSAccepted
-        "expired" -> Right DVSExpired
         "pending" -> Right DVSPending
         "rejected" -> Right DVSRejected
-        "verificationStatusUnspecified" -> Right DVSVerificationStatusUnspecified
+        "expired" -> Right DVSExpired
         x -> Left ("Unable to parse DelegateVerificationStatus from: " <> x)
 
 instance ToHttpApiData DelegateVerificationStatus where
     toQueryParam = \case
+        DVSVerificationStatusUnspecified -> "verificationStatusUnspecified"
         DVSAccepted -> "accepted"
-        DVSExpired -> "expired"
         DVSPending -> "pending"
         DVSRejected -> "rejected"
-        DVSVerificationStatusUnspecified -> "verificationStatusUnspecified"
+        DVSExpired -> "expired"
 
 instance FromJSON DelegateVerificationStatus where
     parseJSON = parseJSONText "DelegateVerificationStatus"
@@ -457,10 +541,16 @@ instance ToJSON DelegateVerificationStatus where
 data UsersThreadsGetFormat
     = UTGFFull
       -- ^ @full@
+      -- Returns the full email message data with body content parsed in the
+      -- \`payload\` field; the \`raw\` field is not used. Format cannot be used
+      -- when accessing the api using the gmail.metadata scope.
     | UTGFMetadata
       -- ^ @metadata@
+      -- Returns only email message IDs, labels, and email headers.
     | UTGFMinimal
       -- ^ @minimal@
+      -- Returns only email message IDs and labels; does not return the email
+      -- headers, body, or payload.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersThreadsGetFormat
@@ -487,36 +577,41 @@ instance ToJSON UsersThreadsGetFormat where
 -- | The action that will be executed on a message after it has been fetched
 -- via POP.
 data PopSettingsDisPosition
-    = PSDPArchive
-      -- ^ @archive@
-    | PSDPDisPositionUnspecified
+    = PSDPDisPositionUnspecified
       -- ^ @dispositionUnspecified@
+      -- Unspecified disposition.
     | PSDPLeaveInInbox
       -- ^ @leaveInInbox@
-    | PSDPMarkRead
-      -- ^ @markRead@
+      -- Leave the message in the \`INBOX\`.
+    | PSDPArchive
+      -- ^ @archive@
+      -- Archive the message.
     | PSDPTrash
       -- ^ @trash@
+      -- Move the message to the \`TRASH\`.
+    | PSDPMarkRead
+      -- ^ @markRead@
+      -- Leave the message in the \`INBOX\` and mark it as read.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PopSettingsDisPosition
 
 instance FromHttpApiData PopSettingsDisPosition where
     parseQueryParam = \case
-        "archive" -> Right PSDPArchive
         "dispositionUnspecified" -> Right PSDPDisPositionUnspecified
         "leaveInInbox" -> Right PSDPLeaveInInbox
-        "markRead" -> Right PSDPMarkRead
+        "archive" -> Right PSDPArchive
         "trash" -> Right PSDPTrash
+        "markRead" -> Right PSDPMarkRead
         x -> Left ("Unable to parse PopSettingsDisPosition from: " <> x)
 
 instance ToHttpApiData PopSettingsDisPosition where
     toQueryParam = \case
-        PSDPArchive -> "archive"
         PSDPDisPositionUnspecified -> "dispositionUnspecified"
         PSDPLeaveInInbox -> "leaveInInbox"
-        PSDPMarkRead -> "markRead"
+        PSDPArchive -> "archive"
         PSDPTrash -> "trash"
+        PSDPMarkRead -> "markRead"
 
 instance FromJSON PopSettingsDisPosition where
     parseJSON = parseJSONText "PopSettingsDisPosition"
@@ -526,24 +621,28 @@ instance ToJSON PopSettingsDisPosition where
 
 -- | Filtering behavior of labelIds list specified.
 data WatchRequestLabelFilterAction
-    = Exclude
-      -- ^ @exclude@
-    | Include
+    = Include
       -- ^ @include@
+      -- Only get push notifications for message changes relating to labelIds
+      -- specified.
+    | Exclude
+      -- ^ @exclude@
+      -- Get push notifications for all message changes except those relating to
+      -- labelIds specified.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable WatchRequestLabelFilterAction
 
 instance FromHttpApiData WatchRequestLabelFilterAction where
     parseQueryParam = \case
-        "exclude" -> Right Exclude
         "include" -> Right Include
+        "exclude" -> Right Exclude
         x -> Left ("Unable to parse WatchRequestLabelFilterAction from: " <> x)
 
 instance ToHttpApiData WatchRequestLabelFilterAction where
     toQueryParam = \case
-        Exclude -> "exclude"
         Include -> "include"
+        Exclude -> "exclude"
 
 instance FromJSON WatchRequestLabelFilterAction where
     parseJSON = parseJSONText "WatchRequestLabelFilterAction"
@@ -554,32 +653,37 @@ instance ToJSON WatchRequestLabelFilterAction where
 -- | The action that will be executed on a message when it is marked as
 -- deleted and expunged from the last visible IMAP folder.
 data ImapSettingsExpungeBehavior
-    = ISEBArchive
-      -- ^ @archive@
-    | ISEBDeleteForever
-      -- ^ @deleteForever@
-    | ISEBExpungeBehaviorUnspecified
+    = ISEBExpungeBehaviorUnspecified
       -- ^ @expungeBehaviorUnspecified@
+      -- Unspecified behavior.
+    | ISEBArchive
+      -- ^ @archive@
+      -- Archive messages marked as deleted.
     | ISEBTrash
       -- ^ @trash@
+      -- Move messages marked as deleted to the trash.
+    | ISEBDeleteForever
+      -- ^ @deleteForever@
+      -- Immediately and permanently delete messages marked as deleted. The
+      -- expunged messages cannot be recovered.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ImapSettingsExpungeBehavior
 
 instance FromHttpApiData ImapSettingsExpungeBehavior where
     parseQueryParam = \case
-        "archive" -> Right ISEBArchive
-        "deleteForever" -> Right ISEBDeleteForever
         "expungeBehaviorUnspecified" -> Right ISEBExpungeBehaviorUnspecified
+        "archive" -> Right ISEBArchive
         "trash" -> Right ISEBTrash
+        "deleteForever" -> Right ISEBDeleteForever
         x -> Left ("Unable to parse ImapSettingsExpungeBehavior from: " <> x)
 
 instance ToHttpApiData ImapSettingsExpungeBehavior where
     toQueryParam = \case
-        ISEBArchive -> "archive"
-        ISEBDeleteForever -> "deleteForever"
         ISEBExpungeBehaviorUnspecified -> "expungeBehaviorUnspecified"
+        ISEBArchive -> "archive"
         ISEBTrash -> "trash"
+        ISEBDeleteForever -> "deleteForever"
 
 instance FromJSON ImapSettingsExpungeBehavior where
     parseJSON = parseJSONText "ImapSettingsExpungeBehavior"
@@ -590,30 +694,35 @@ instance ToJSON ImapSettingsExpungeBehavior where
 -- | The protocol that will be used to secure communication with the SMTP
 -- service. Required.
 data SmtpMsaSecurityMode
-    = None
-      -- ^ @none@
-    | SecurityModeUnspecified
+    = SecurityModeUnspecified
       -- ^ @securityModeUnspecified@
+      -- Unspecified security mode.
+    | None
+      -- ^ @none@
+      -- Communication with the remote SMTP service is unsecured. Requires port
+      -- 25.
     | SSL
       -- ^ @ssl@
+      -- Communication with the remote SMTP service is secured using SSL.
     | Starttls
       -- ^ @starttls@
+      -- Communication with the remote SMTP service is secured using STARTTLS.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SmtpMsaSecurityMode
 
 instance FromHttpApiData SmtpMsaSecurityMode where
     parseQueryParam = \case
-        "none" -> Right None
         "securityModeUnspecified" -> Right SecurityModeUnspecified
+        "none" -> Right None
         "ssl" -> Right SSL
         "starttls" -> Right Starttls
         x -> Left ("Unable to parse SmtpMsaSecurityMode from: " <> x)
 
 instance ToHttpApiData SmtpMsaSecurityMode where
     toQueryParam = \case
-        None -> "none"
         SecurityModeUnspecified -> "securityModeUnspecified"
+        None -> "none"
         SSL -> "ssl"
         Starttls -> "starttls"
 
@@ -625,24 +734,26 @@ instance ToJSON SmtpMsaSecurityMode where
 
 -- | Source for Gmail\'s internal date of the message.
 data UsersMessagesInsertInternalDateSource
-    = UMIIDSDateHeader
-      -- ^ @dateHeader@
-    | UMIIDSReceivedTime
+    = UMIIDSReceivedTime
       -- ^ @receivedTime@
+      -- Internal message date set to current time when received by Gmail.
+    | UMIIDSDateHeader
+      -- ^ @dateHeader@
+      -- Internal message time based on \'Date\' header in email, when valid.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesInsertInternalDateSource
 
 instance FromHttpApiData UsersMessagesInsertInternalDateSource where
     parseQueryParam = \case
-        "dateHeader" -> Right UMIIDSDateHeader
         "receivedTime" -> Right UMIIDSReceivedTime
+        "dateHeader" -> Right UMIIDSDateHeader
         x -> Left ("Unable to parse UsersMessagesInsertInternalDateSource from: " <> x)
 
 instance ToHttpApiData UsersMessagesInsertInternalDateSource where
     toQueryParam = \case
-        UMIIDSDateHeader -> "dateHeader"
         UMIIDSReceivedTime -> "receivedTime"
+        UMIIDSDateHeader -> "dateHeader"
 
 instance FromJSON UsersMessagesInsertInternalDateSource where
     parseJSON = parseJSONText "UsersMessagesInsertInternalDateSource"

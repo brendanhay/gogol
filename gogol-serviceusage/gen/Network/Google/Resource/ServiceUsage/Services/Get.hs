@@ -41,8 +41,8 @@ module Network.Google.Resource.ServiceUsage.Services.Get
     , sgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceUsage.Types
+import Network.Google.Prelude
+import Network.Google.ServiceUsage.Types
 
 -- | A resource alias for @serviceusage.services.get@ method which the
 -- 'ServicesGet' request conforms to.
@@ -62,12 +62,12 @@ type ServicesGetResource =
 -- /See:/ 'servicesGet' smart constructor.
 data ServicesGet =
   ServicesGet'
-    { _sgXgafv          :: !(Maybe Xgafv)
+    { _sgXgafv :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
-    , _sgAccessToken    :: !(Maybe Text)
-    , _sgUploadType     :: !(Maybe Text)
-    , _sgName           :: !Text
-    , _sgCallback       :: !(Maybe Text)
+    , _sgAccessToken :: !(Maybe Text)
+    , _sgUploadType :: !(Maybe Text)
+    , _sgName :: !Text
+    , _sgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,7 +125,7 @@ sgUploadType
 -- | Name of the consumer and service to get the \`ConsumerState\` for. An
 -- example name would be:
 -- \`projects\/123\/services\/serviceusage.googleapis.com\` where \`123\`
--- is the project number (not project ID).
+-- is the project number.
 sgName :: Lens' ServicesGet Text
 sgName = lens _sgName (\ s a -> s{_sgName = a})
 

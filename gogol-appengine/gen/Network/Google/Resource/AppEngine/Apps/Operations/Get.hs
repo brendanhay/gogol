@@ -44,8 +44,8 @@ module Network.Google.Resource.AppEngine.Apps.Operations.Get
     , aogCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.operations.get@ method which the
 -- 'AppsOperationsGet' request conforms to.
@@ -69,13 +69,13 @@ type AppsOperationsGetResource =
 -- /See:/ 'appsOperationsGet' smart constructor.
 data AppsOperationsGet =
   AppsOperationsGet'
-    { _aogXgafv          :: !(Maybe Xgafv)
+    { _aogXgafv :: !(Maybe Xgafv)
     , _aogUploadProtocol :: !(Maybe Text)
-    , _aogAccessToken    :: !(Maybe Text)
-    , _aogUploadType     :: !(Maybe Text)
-    , _aogAppsId         :: !Text
-    , _aogOperationsId   :: !Text
-    , _aogCallback       :: !(Maybe Text)
+    , _aogAccessToken :: !(Maybe Text)
+    , _aogUploadType :: !(Maybe Text)
+    , _aogAppsId :: !Text
+    , _aogOperationsId :: !Text
+    , _aogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

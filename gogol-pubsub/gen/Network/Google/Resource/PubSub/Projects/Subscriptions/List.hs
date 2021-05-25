@@ -43,8 +43,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.List
     , pslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.list@ method which the
 -- 'ProjectsSubscriptionsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsSubscriptionsListResource =
 -- /See:/ 'projectsSubscriptionsList' smart constructor.
 data ProjectsSubscriptionsList =
   ProjectsSubscriptionsList'
-    { _pslXgafv          :: !(Maybe Xgafv)
+    { _pslXgafv :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
-    , _pslProject        :: !Text
-    , _pslAccessToken    :: !(Maybe Text)
-    , _pslUploadType     :: !(Maybe Text)
-    , _pslPageToken      :: !(Maybe Text)
-    , _pslPageSize       :: !(Maybe (Textual Int32))
-    , _pslCallback       :: !(Maybe Text)
+    , _pslProject :: !Text
+    , _pslAccessToken :: !(Maybe Text)
+    , _pslUploadType :: !(Maybe Text)
+    , _pslPageToken :: !(Maybe Text)
+    , _pslPageSize :: !(Maybe (Textual Int32))
+    , _pslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ pslUploadProtocol
   = lens _pslUploadProtocol
       (\ s a -> s{_pslUploadProtocol = a})
 
--- | The name of the project in which to list subscriptions. Format is
--- \`projects\/{project-id}\`.
+-- | Required. The name of the project in which to list subscriptions. Format
+-- is \`projects\/{project-id}\`.
 pslProject :: Lens' ProjectsSubscriptionsList Text
 pslProject
   = lens _pslProject (\ s a -> s{_pslProject = a})

@@ -42,9 +42,9 @@ module Network.Google.KnowledgeGraphSearch
     , Xgafv (..)
     ) where
 
-import           Network.Google.KnowledgeGraphSearch.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Kgsearch.Entities.Search
+import Network.Google.Prelude
+import Network.Google.KnowledgeGraphSearch.Types
+import Network.Google.Resource.Kgsearch.Entities.Search
 
 {- $resources
 TODO

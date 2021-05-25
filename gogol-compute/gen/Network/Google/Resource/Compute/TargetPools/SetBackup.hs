@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.TargetPools.SetBackup
     , tpsbRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.setBackup@ method which the
 -- 'TargetPoolsSetBackup' request conforms to.
@@ -67,12 +67,12 @@ type TargetPoolsSetBackupResource =
 -- /See:/ 'targetPoolsSetBackup' smart constructor.
 data TargetPoolsSetBackup =
   TargetPoolsSetBackup'
-    { _tpsbRequestId     :: !(Maybe Text)
-    , _tpsbProject       :: !Text
-    , _tpsbTargetPool    :: !Text
-    , _tpsbPayload       :: !TargetReference
+    { _tpsbRequestId :: !(Maybe Text)
+    , _tpsbProject :: !Text
+    , _tpsbTargetPool :: !Text
+    , _tpsbPayload :: !TargetReference
     , _tpsbFailoverRatio :: !(Maybe (Textual Double))
-    , _tpsbRegion        :: !Text
+    , _tpsbRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

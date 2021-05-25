@@ -22,7 +22,7 @@
 --
 -- Creates or updates a logs-based metric.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.metrics.update@.
 module Network.Google.Resource.Logging.Projects.Metrics.Update
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Logging.Projects.Metrics.Update
     , pmuCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.metrics.update@ method which the
 -- 'ProjectsMetricsUpdate' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsMetricsUpdateResource =
 -- /See:/ 'projectsMetricsUpdate' smart constructor.
 data ProjectsMetricsUpdate =
   ProjectsMetricsUpdate'
-    { _pmuXgafv          :: !(Maybe Xgafv)
+    { _pmuXgafv :: !(Maybe Xgafv)
     , _pmuUploadProtocol :: !(Maybe Text)
-    , _pmuAccessToken    :: !(Maybe Text)
-    , _pmuMetricName     :: !Text
-    , _pmuUploadType     :: !(Maybe Text)
-    , _pmuPayload        :: !LogMetric
-    , _pmuCallback       :: !(Maybe Text)
+    , _pmuAccessToken :: !(Maybe Text)
+    , _pmuMetricName :: !Text
+    , _pmuUploadType :: !(Maybe Text)
+    , _pmuPayload :: !LogMetric
+    , _pmuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ pmuAccessToken
   = lens _pmuAccessToken
       (\ s a -> s{_pmuAccessToken = a})
 
--- | The resource name of the metric to update:
+-- | Required. The resource name of the metric to update:
 -- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\" The updated metric must
 -- be provided in the request and it\'s name field must be the same as
 -- [METRIC_ID] If the metric does not exist in [PROJECT_ID], then a new

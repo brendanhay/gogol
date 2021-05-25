@@ -22,7 +22,7 @@
 --
 -- Enumerate Operations for the given ManagedZone.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZoneOperations.list@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.managedZoneOperations.list@.
 module Network.Google.Resource.DNS.ManagedZoneOperations.List
     (
     -- * REST Resource
@@ -33,15 +33,20 @@ module Network.Google.Resource.DNS.ManagedZoneOperations.List
     , ManagedZoneOperationsList
 
     -- * Request Lenses
+    , mzolXgafv
+    , mzolUploadProtocol
     , mzolProject
+    , mzolAccessToken
+    , mzolUploadType
     , mzolPageToken
     , mzolManagedZone
     , mzolMaxResults
+    , mzolCallback
     , mzolSortBy
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.managedZoneOperations.list@ method which the
 -- 'ManagedZoneOperationsList' request conforms to.
@@ -53,23 +58,35 @@ type ManagedZoneOperationsListResource =
              "managedZones" :>
                Capture "managedZone" Text :>
                  "operations" :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "sortBy" ManagedZoneOperationsListSortBy
-                         :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ManagedZoneOperationsListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Int32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "sortBy"
+                                   ManagedZoneOperationsListSortBy
+                                   :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON]
+                                       ManagedZoneOperationsListResponse
 
 -- | Enumerate Operations for the given ManagedZone.
 --
 -- /See:/ 'managedZoneOperationsList' smart constructor.
 data ManagedZoneOperationsList =
   ManagedZoneOperationsList'
-    { _mzolProject     :: !Text
-    , _mzolPageToken   :: !(Maybe Text)
+    { _mzolXgafv :: !(Maybe Xgafv)
+    , _mzolUploadProtocol :: !(Maybe Text)
+    , _mzolProject :: !Text
+    , _mzolAccessToken :: !(Maybe Text)
+    , _mzolUploadType :: !(Maybe Text)
+    , _mzolPageToken :: !(Maybe Text)
     , _mzolManagedZone :: !Text
-    , _mzolMaxResults  :: !(Maybe (Textual Int32))
-    , _mzolSortBy      :: !ManagedZoneOperationsListSortBy
+    , _mzolMaxResults :: !(Maybe (Textual Int32))
+    , _mzolCallback :: !(Maybe Text)
+    , _mzolSortBy :: !ManagedZoneOperationsListSortBy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,13 +95,23 @@ data ManagedZoneOperationsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mzolXgafv'
+--
+-- * 'mzolUploadProtocol'
+--
 -- * 'mzolProject'
+--
+-- * 'mzolAccessToken'
+--
+-- * 'mzolUploadType'
 --
 -- * 'mzolPageToken'
 --
 -- * 'mzolManagedZone'
 --
 -- * 'mzolMaxResults'
+--
+-- * 'mzolCallback'
 --
 -- * 'mzolSortBy'
 managedZoneOperationsList
@@ -93,18 +120,46 @@ managedZoneOperationsList
     -> ManagedZoneOperationsList
 managedZoneOperationsList pMzolProject_ pMzolManagedZone_ =
   ManagedZoneOperationsList'
-    { _mzolProject = pMzolProject_
+    { _mzolXgafv = Nothing
+    , _mzolUploadProtocol = Nothing
+    , _mzolProject = pMzolProject_
+    , _mzolAccessToken = Nothing
+    , _mzolUploadType = Nothing
     , _mzolPageToken = Nothing
     , _mzolManagedZone = pMzolManagedZone_
     , _mzolMaxResults = Nothing
+    , _mzolCallback = Nothing
     , _mzolSortBy = StartTime
     }
 
+
+-- | V1 error format.
+mzolXgafv :: Lens' ManagedZoneOperationsList (Maybe Xgafv)
+mzolXgafv
+  = lens _mzolXgafv (\ s a -> s{_mzolXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mzolUploadProtocol :: Lens' ManagedZoneOperationsList (Maybe Text)
+mzolUploadProtocol
+  = lens _mzolUploadProtocol
+      (\ s a -> s{_mzolUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 mzolProject :: Lens' ManagedZoneOperationsList Text
 mzolProject
   = lens _mzolProject (\ s a -> s{_mzolProject = a})
+
+-- | OAuth access token.
+mzolAccessToken :: Lens' ManagedZoneOperationsList (Maybe Text)
+mzolAccessToken
+  = lens _mzolAccessToken
+      (\ s a -> s{_mzolAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mzolUploadType :: Lens' ManagedZoneOperationsList (Maybe Text)
+mzolUploadType
+  = lens _mzolUploadType
+      (\ s a -> s{_mzolUploadType = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
 -- Use this parameter to continue a previous list request.
@@ -127,6 +182,11 @@ mzolMaxResults
       (\ s a -> s{_mzolMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+mzolCallback :: Lens' ManagedZoneOperationsList (Maybe Text)
+mzolCallback
+  = lens _mzolCallback (\ s a -> s{_mzolCallback = a})
+
 -- | Sorting criterion. The only supported values are START_TIME and ID.
 mzolSortBy :: Lens' ManagedZoneOperationsList ManagedZoneOperationsListSortBy
 mzolSortBy
@@ -142,8 +202,13 @@ instance GoogleRequest ManagedZoneOperationsList
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZoneOperationsList'{..}
-          = go _mzolProject _mzolManagedZone _mzolPageToken
+          = go _mzolProject _mzolManagedZone _mzolXgafv
+              _mzolUploadProtocol
+              _mzolAccessToken
+              _mzolUploadType
+              _mzolPageToken
               _mzolMaxResults
+              _mzolCallback
               (Just _mzolSortBy)
               (Just AltJSON)
               dNSService

@@ -42,8 +42,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPe
     , pittipCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.testIamPermissions@ method which the
 -- 'ProjectsInstancesTablesTestIAMPermissions' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsInstancesTablesTestIAMPermissionsResource
 -- /See:/ 'projectsInstancesTablesTestIAMPermissions' smart constructor.
 data ProjectsInstancesTablesTestIAMPermissions =
   ProjectsInstancesTablesTestIAMPermissions'
-    { _pittipXgafv          :: !(Maybe Xgafv)
+    { _pittipXgafv :: !(Maybe Xgafv)
     , _pittipUploadProtocol :: !(Maybe Text)
-    , _pittipAccessToken    :: !(Maybe Text)
-    , _pittipUploadType     :: !(Maybe Text)
-    , _pittipPayload        :: !TestIAMPermissionsRequest
-    , _pittipResource       :: !Text
-    , _pittipCallback       :: !(Maybe Text)
+    , _pittipAccessToken :: !(Maybe Text)
+    , _pittipUploadType :: !(Maybe Text)
+    , _pittipPayload :: !TestIAMPermissionsRequest
+    , _pittipResource :: !Text
+    , _pittipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

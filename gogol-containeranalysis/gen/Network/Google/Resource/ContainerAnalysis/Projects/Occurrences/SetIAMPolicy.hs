@@ -48,8 +48,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.SetIAMPoli
     , posipCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.setIamPolicy@ method which the
 -- 'ProjectsOccurrencesSetIAMPolicy' request conforms to.
@@ -76,13 +76,13 @@ type ProjectsOccurrencesSetIAMPolicyResource =
 -- /See:/ 'projectsOccurrencesSetIAMPolicy' smart constructor.
 data ProjectsOccurrencesSetIAMPolicy =
   ProjectsOccurrencesSetIAMPolicy'
-    { _posipXgafv          :: !(Maybe Xgafv)
+    { _posipXgafv :: !(Maybe Xgafv)
     , _posipUploadProtocol :: !(Maybe Text)
-    , _posipAccessToken    :: !(Maybe Text)
-    , _posipUploadType     :: !(Maybe Text)
-    , _posipPayload        :: !SetIAMPolicyRequest
-    , _posipResource       :: !Text
-    , _posipCallback       :: !(Maybe Text)
+    , _posipAccessToken :: !(Maybe Text)
+    , _posipUploadType :: !(Maybe Text)
+    , _posipPayload :: !SetIAMPolicyRequest
+    , _posipResource :: !Text
+    , _posipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

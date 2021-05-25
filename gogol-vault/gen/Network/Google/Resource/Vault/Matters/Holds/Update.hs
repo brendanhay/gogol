@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the OU and\/or query parameters of a hold. You cannot add
--- accounts to a hold that covers an OU, nor can you add OUs to a hold that
--- covers individual accounts. Accounts listed in the hold will be ignored.
+-- Updates the scope (organizational unit or accounts) and query parameters
+-- of a hold. You cannot add accounts to a hold that covers an
+-- organizational unit, nor can you add organizational units to a hold that
+-- covers individual accounts. If you try, the unsupported values are
+-- ignored.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.update@.
 module Network.Google.Resource.Vault.Matters.Holds.Update
@@ -45,8 +47,8 @@ module Network.Google.Resource.Vault.Matters.Holds.Update
     , mhuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.update@ method which the
 -- 'MattersHoldsUpdate' request conforms to.
@@ -64,21 +66,23 @@ type MattersHoldsUpdateResource =
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Hold :> Put '[JSON] Hold
 
--- | Updates the OU and\/or query parameters of a hold. You cannot add
--- accounts to a hold that covers an OU, nor can you add OUs to a hold that
--- covers individual accounts. Accounts listed in the hold will be ignored.
+-- | Updates the scope (organizational unit or accounts) and query parameters
+-- of a hold. You cannot add accounts to a hold that covers an
+-- organizational unit, nor can you add organizational units to a hold that
+-- covers individual accounts. If you try, the unsupported values are
+-- ignored.
 --
 -- /See:/ 'mattersHoldsUpdate' smart constructor.
 data MattersHoldsUpdate =
   MattersHoldsUpdate'
-    { _mhuXgafv          :: !(Maybe Xgafv)
+    { _mhuXgafv :: !(Maybe Xgafv)
     , _mhuUploadProtocol :: !(Maybe Text)
-    , _mhuHoldId         :: !Text
-    , _mhuAccessToken    :: !(Maybe Text)
-    , _mhuUploadType     :: !(Maybe Text)
-    , _mhuPayload        :: !Hold
-    , _mhuMatterId       :: !Text
-    , _mhuCallback       :: !(Maybe Text)
+    , _mhuHoldId :: !Text
+    , _mhuAccessToken :: !(Maybe Text)
+    , _mhuUploadType :: !(Maybe Text)
+    , _mhuPayload :: !Hold
+    , _mhuMatterId :: !Text
+    , _mhuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

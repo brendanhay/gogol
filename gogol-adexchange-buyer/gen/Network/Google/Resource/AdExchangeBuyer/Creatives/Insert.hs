@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
     , ciPayload
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.creatives.insert@ method which the
 -- 'CreativesInsert' request conforms to.

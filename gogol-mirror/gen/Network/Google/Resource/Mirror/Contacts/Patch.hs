@@ -37,8 +37,8 @@ module Network.Google.Resource.Mirror.Contacts.Patch
     , cpId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.patch@ method which the
 -- 'ContactsPatch' request conforms to.
@@ -56,7 +56,7 @@ type ContactsPatchResource =
 data ContactsPatch =
   ContactsPatch'
     { _cpPayload :: !Contact
-    , _cpId      :: !Text
+    , _cpId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

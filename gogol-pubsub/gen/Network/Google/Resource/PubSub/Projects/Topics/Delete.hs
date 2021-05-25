@@ -46,8 +46,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
     , ptdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.delete@ method which the
 -- 'ProjectsTopicsDelete' request conforms to.
@@ -71,12 +71,12 @@ type ProjectsTopicsDeleteResource =
 -- /See:/ 'projectsTopicsDelete' smart constructor.
 data ProjectsTopicsDelete =
   ProjectsTopicsDelete'
-    { _ptdXgafv          :: !(Maybe Xgafv)
+    { _ptdXgafv :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
-    , _ptdAccessToken    :: !(Maybe Text)
-    , _ptdUploadType     :: !(Maybe Text)
-    , _ptdTopic          :: !Text
-    , _ptdCallback       :: !(Maybe Text)
+    , _ptdAccessToken :: !(Maybe Text)
+    , _ptdUploadType :: !(Maybe Text)
+    , _ptdTopic :: !Text
+    , _ptdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -132,7 +132,7 @@ ptdUploadType
   = lens _ptdUploadType
       (\ s a -> s{_ptdUploadType = a})
 
--- | Name of the topic to delete. Format is
+-- | Required. Name of the topic to delete. Format is
 -- \`projects\/{project}\/topics\/{topic}\`.
 ptdTopic :: Lens' ProjectsTopicsDelete Text
 ptdTopic = lens _ptdTopic (\ s a -> s{_ptdTopic = a})

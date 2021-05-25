@@ -41,8 +41,8 @@ module Network.Google.Resource.AnalyticsReporting.UserActivity.Search
     , uasCallback
     ) where
 
-import           Network.Google.AnalyticsReporting.Types
-import           Network.Google.Prelude
+import Network.Google.AnalyticsReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analyticsreporting.userActivity.search@ method which the
 -- 'UserActivitySearch' request conforms to.
@@ -63,12 +63,12 @@ type UserActivitySearchResource =
 -- /See:/ 'userActivitySearch' smart constructor.
 data UserActivitySearch =
   UserActivitySearch'
-    { _uasXgafv          :: !(Maybe Xgafv)
+    { _uasXgafv :: !(Maybe Xgafv)
     , _uasUploadProtocol :: !(Maybe Text)
-    , _uasAccessToken    :: !(Maybe Text)
-    , _uasUploadType     :: !(Maybe Text)
-    , _uasPayload        :: !SearchUserActivityRequest
-    , _uasCallback       :: !(Maybe Text)
+    , _uasAccessToken :: !(Maybe Text)
+    , _uasUploadType :: !(Maybe Text)
+    , _uasPayload :: !SearchUserActivityRequest
+    , _uasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

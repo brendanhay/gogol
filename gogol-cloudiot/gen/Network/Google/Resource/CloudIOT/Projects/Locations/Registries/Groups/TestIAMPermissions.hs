@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Tes
     , plrgtipCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.groups.testIamPermissions@ method which the
 -- 'ProjectsLocationsRegistriesGroupsTestIAMPermissions' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsLocationsRegistriesGroupsTestIAMPermissionsResource
 -- /See:/ 'projectsLocationsRegistriesGroupsTestIAMPermissions' smart constructor.
 data ProjectsLocationsRegistriesGroupsTestIAMPermissions =
   ProjectsLocationsRegistriesGroupsTestIAMPermissions'
-    { _plrgtipXgafv          :: !(Maybe Xgafv)
+    { _plrgtipXgafv :: !(Maybe Xgafv)
     , _plrgtipUploadProtocol :: !(Maybe Text)
-    , _plrgtipAccessToken    :: !(Maybe Text)
-    , _plrgtipUploadType     :: !(Maybe Text)
-    , _plrgtipPayload        :: !TestIAMPermissionsRequest
-    , _plrgtipResource       :: !Text
-    , _plrgtipCallback       :: !(Maybe Text)
+    , _plrgtipAccessToken :: !(Maybe Text)
+    , _plrgtipUploadType :: !(Maybe Text)
+    , _plrgtipPayload :: !TestIAMPermissionsRequest
+    , _plrgtipResource :: !Text
+    , _plrgtipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

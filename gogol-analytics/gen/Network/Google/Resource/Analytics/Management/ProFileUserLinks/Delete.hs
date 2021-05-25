@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
     , mpfuldLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileUserLinks.delete@ method which the
 -- 'ManagementProFileUserLinksDelete' request conforms to.
@@ -64,9 +64,9 @@ type ManagementProFileUserLinksDeleteResource =
 data ManagementProFileUserLinksDelete =
   ManagementProFileUserLinksDelete'
     { _mpfuldWebPropertyId :: !Text
-    , _mpfuldProFileId     :: !Text
-    , _mpfuldAccountId     :: !Text
-    , _mpfuldLinkId        :: !Text
+    , _mpfuldProFileId :: !Text
+    , _mpfuldAccountId :: !Text
+    , _mpfuldLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

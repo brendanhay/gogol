@@ -37,10 +37,11 @@ module Network.Google.Resource.Compute.Instances.GetIAMPolicy
     , igiampProject
     , igiampZone
     , igiampResource
+    , igiampOptionsRequestedPolicyVersion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.getIamPolicy@ method which the
 -- 'InstancesGetIAMPolicy' request conforms to.
@@ -54,7 +55,9 @@ type InstancesGetIAMPolicyResource =
                  "instances" :>
                    Capture "resource" Text :>
                      "getIamPolicy" :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                       QueryParam "optionsRequestedPolicyVersion"
+                         (Textual Int32)
+                         :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -62,9 +65,10 @@ type InstancesGetIAMPolicyResource =
 -- /See:/ 'instancesGetIAMPolicy' smart constructor.
 data InstancesGetIAMPolicy =
   InstancesGetIAMPolicy'
-    { _igiampProject  :: !Text
-    , _igiampZone     :: !Text
+    { _igiampProject :: !Text
+    , _igiampZone :: !Text
     , _igiampResource :: !Text
+    , _igiampOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,6 +82,8 @@ data InstancesGetIAMPolicy =
 -- * 'igiampZone'
 --
 -- * 'igiampResource'
+--
+-- * 'igiampOptionsRequestedPolicyVersion'
 instancesGetIAMPolicy
     :: Text -- ^ 'igiampProject'
     -> Text -- ^ 'igiampZone'
@@ -88,6 +94,7 @@ instancesGetIAMPolicy pIgiampProject_ pIgiampZone_ pIgiampResource_ =
     { _igiampProject = pIgiampProject_
     , _igiampZone = pIgiampZone_
     , _igiampResource = pIgiampResource_
+    , _igiampOptionsRequestedPolicyVersion = Nothing
     }
 
 
@@ -108,6 +115,14 @@ igiampResource
   = lens _igiampResource
       (\ s a -> s{_igiampResource = a})
 
+-- | Requested IAM Policy version.
+igiampOptionsRequestedPolicyVersion :: Lens' InstancesGetIAMPolicy (Maybe Int32)
+igiampOptionsRequestedPolicyVersion
+  = lens _igiampOptionsRequestedPolicyVersion
+      (\ s a ->
+         s{_igiampOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 instance GoogleRequest InstancesGetIAMPolicy where
         type Rs InstancesGetIAMPolicy = Policy
         type Scopes InstancesGetIAMPolicy =
@@ -116,6 +131,7 @@ instance GoogleRequest InstancesGetIAMPolicy where
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesGetIAMPolicy'{..}
           = go _igiampProject _igiampZone _igiampResource
+              _igiampOptionsRequestedPolicyVersion
               (Just AltJSON)
               computeService
           where go

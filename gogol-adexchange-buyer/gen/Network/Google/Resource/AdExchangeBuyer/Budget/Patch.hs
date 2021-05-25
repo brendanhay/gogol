@@ -40,8 +40,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
     , bpBillingId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.budget.patch@ method which the
 -- 'BudgetPatch' request conforms to.
@@ -61,7 +61,7 @@ type BudgetPatchResource =
 -- /See:/ 'budgetPatch' smart constructor.
 data BudgetPatch =
   BudgetPatch'
-    { _bpPayload   :: !Budget
+    { _bpPayload :: !Budget
     , _bpAccountId :: !(Textual Int64)
     , _bpBillingId :: !(Textual Int64)
     }

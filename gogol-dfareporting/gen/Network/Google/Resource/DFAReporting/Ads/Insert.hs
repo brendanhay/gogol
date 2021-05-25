@@ -22,7 +22,7 @@
 --
 -- Inserts a new ad.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.ads.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.ads.insert@.
 module Network.Google.Resource.DFAReporting.Ads.Insert
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.Ads.Insert
     , AdsInsert
 
     -- * Request Lenses
+    , aiXgafv
+    , aiUploadProtocol
+    , aiAccessToken
+    , aiUploadType
     , aiProFileId
     , aiPayload
+    , aiCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.insert@ method which the
 -- 'AdsInsert' request conforms to.
 type AdsInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Ad :> Post '[JSON] Ad
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Ad :> Post '[JSON] Ad
 
 -- | Inserts a new ad.
 --
 -- /See:/ 'adsInsert' smart constructor.
 data AdsInsert =
   AdsInsert'
-    { _aiProFileId :: !(Textual Int64)
-    , _aiPayload   :: !Ad
+    { _aiXgafv :: !(Maybe Xgafv)
+    , _aiUploadProtocol :: !(Maybe Text)
+    , _aiAccessToken :: !(Maybe Text)
+    , _aiUploadType :: !(Maybe Text)
+    , _aiProFileId :: !(Textual Int64)
+    , _aiPayload :: !Ad
+    , _aiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,16 +81,55 @@ data AdsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aiXgafv'
+--
+-- * 'aiUploadProtocol'
+--
+-- * 'aiAccessToken'
+--
+-- * 'aiUploadType'
+--
 -- * 'aiProFileId'
 --
 -- * 'aiPayload'
+--
+-- * 'aiCallback'
 adsInsert
     :: Int64 -- ^ 'aiProFileId'
     -> Ad -- ^ 'aiPayload'
     -> AdsInsert
 adsInsert pAiProFileId_ pAiPayload_ =
-  AdsInsert' {_aiProFileId = _Coerce # pAiProFileId_, _aiPayload = pAiPayload_}
+  AdsInsert'
+    { _aiXgafv = Nothing
+    , _aiUploadProtocol = Nothing
+    , _aiAccessToken = Nothing
+    , _aiUploadType = Nothing
+    , _aiProFileId = _Coerce # pAiProFileId_
+    , _aiPayload = pAiPayload_
+    , _aiCallback = Nothing
+    }
 
+
+-- | V1 error format.
+aiXgafv :: Lens' AdsInsert (Maybe Xgafv)
+aiXgafv = lens _aiXgafv (\ s a -> s{_aiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aiUploadProtocol :: Lens' AdsInsert (Maybe Text)
+aiUploadProtocol
+  = lens _aiUploadProtocol
+      (\ s a -> s{_aiUploadProtocol = a})
+
+-- | OAuth access token.
+aiAccessToken :: Lens' AdsInsert (Maybe Text)
+aiAccessToken
+  = lens _aiAccessToken
+      (\ s a -> s{_aiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aiUploadType :: Lens' AdsInsert (Maybe Text)
+aiUploadType
+  = lens _aiUploadType (\ s a -> s{_aiUploadType = a})
 
 -- | User profile ID associated with this request.
 aiProFileId :: Lens' AdsInsert Int64
@@ -88,12 +142,22 @@ aiPayload :: Lens' AdsInsert Ad
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
+-- | JSONP
+aiCallback :: Lens' AdsInsert (Maybe Text)
+aiCallback
+  = lens _aiCallback (\ s a -> s{_aiCallback = a})
+
 instance GoogleRequest AdsInsert where
         type Rs AdsInsert = Ad
         type Scopes AdsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsInsert'{..}
-          = go _aiProFileId (Just AltJSON) _aiPayload
+          = go _aiProFileId _aiXgafv _aiUploadProtocol
+              _aiAccessToken
+              _aiUploadType
+              _aiCallback
+              (Just AltJSON)
+              _aiPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsInsertResource)

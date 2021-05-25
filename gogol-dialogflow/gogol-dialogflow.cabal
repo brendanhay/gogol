@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2@
+    This library is compatible with version @v3@
     of the API.
 
 source-repository head
@@ -36,42 +36,110 @@ library
     exposed-modules:
           Network.Google.DialogFlow
         , Network.Google.DialogFlow.Types
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.BatchDelete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.BatchUpdate
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Create
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Entities.BatchCreate
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Entities.BatchDelete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Entities.BatchUpdate
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Get
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.List
-        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Export
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Import
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.BatchDelete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.BatchUpdate
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Create
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Get
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.List
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Restore
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Search
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Create
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Get
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.List
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.DeleteContexts
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.DetectIntent
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Create
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Delete
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Get
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.List
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Patch
-        , Network.Google.Resource.DialogFlow.Projects.Agent.Train
-        , Network.Google.Resource.DialogFlow.Projects.GetAgent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.EntityTypes.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestResults.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Stop
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.LookupEnvironmentHistory
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.RunContinuousTest
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.DetectIntent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.FulfillIntent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Environments.Sessions.MatchIntent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Export
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Export
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Import
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Pages.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Train
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Validate
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Load
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Flows.Versions.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.GetValidationResult
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Intents.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Restore
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.DetectIntent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Sessions.MatchIntent
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.BatchDelete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.BatchRun
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.CalculateCoverage
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Export
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Import
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Results.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.TestCases.Run
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Validate
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Agents.Webhooks.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Operations.Cancel
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Operations.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.Operations.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Create
+        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Get
+        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.List
+        , Network.Google.Resource.DialogFlow.Projects.Locations.SecuritySettings.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Operations.Cancel
         , Network.Google.Resource.DialogFlow.Projects.Operations.Get
+        , Network.Google.Resource.DialogFlow.Projects.Operations.List
 
     other-modules:
           Network.Google.DialogFlow.Types.Product

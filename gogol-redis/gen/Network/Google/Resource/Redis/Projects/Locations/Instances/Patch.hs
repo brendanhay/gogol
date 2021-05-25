@@ -46,8 +46,8 @@ module Network.Google.Resource.Redis.Projects.Locations.Instances.Patch
     , plipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Redis.Types
+import Network.Google.Prelude
+import Network.Google.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.patch@ method which the
 -- 'ProjectsLocationsInstancesPatch' request conforms to.
@@ -71,14 +71,14 @@ type ProjectsLocationsInstancesPatchResource =
 -- /See:/ 'projectsLocationsInstancesPatch' smart constructor.
 data ProjectsLocationsInstancesPatch =
   ProjectsLocationsInstancesPatch'
-    { _plipXgafv          :: !(Maybe Xgafv)
+    { _plipXgafv :: !(Maybe Xgafv)
     , _plipUploadProtocol :: !(Maybe Text)
-    , _plipUpdateMask     :: !(Maybe GFieldMask)
-    , _plipAccessToken    :: !(Maybe Text)
-    , _plipUploadType     :: !(Maybe Text)
-    , _plipPayload        :: !Instance
-    , _plipName           :: !Text
-    , _plipCallback       :: !(Maybe Text)
+    , _plipUpdateMask :: !(Maybe GFieldMask)
+    , _plipAccessToken :: !(Maybe Text)
+    , _plipUploadType :: !(Maybe Text)
+    , _plipPayload :: !Instance
+    , _plipName :: !Text
+    , _plipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,8 +162,8 @@ plipPayload
 -- Note: Redis instances are managed and addressed at regional level so
 -- location_id here refers to a GCP region; however, users may choose which
 -- specific zone (or collection of zones for cross-zone instances) an
--- instance should be provisioned in. Refer to [location_id] and
--- [alternative_location_id] fields for more details.
+-- instance should be provisioned in. Refer to location_id and
+-- alternative_location_id fields for more details.
 plipName :: Lens' ProjectsLocationsInstancesPatch Text
 plipName = lens _plipName (\ s a -> s{_plipName = a})
 

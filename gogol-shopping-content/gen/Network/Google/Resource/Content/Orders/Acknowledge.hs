@@ -22,7 +22,7 @@
 --
 -- Marks an order as acknowledged.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.acknowledge@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.acknowledge@.
 module Network.Google.Resource.Content.Orders.Acknowledge
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Orders.Acknowledge
     , OrdersAcknowledge
 
     -- * Request Lenses
-    , oaMerchantId
-    , oaPayload
-    , oaOrderId
+    , oXgafv
+    , oMerchantId
+    , oUploadProtocol
+    , oAccessToken
+    , oUploadType
+    , oPayload
+    , oOrderId
+    , oCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.acknowledge@ method which the
 -- 'OrdersAcknowledge' request conforms to.
@@ -50,18 +55,28 @@ type OrdersAcknowledgeResource =
            "orders" :>
              Capture "orderId" Text :>
                "acknowledge" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersAcknowledgeRequest :>
-                     Post '[JSON] OrdersAcknowledgeResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersAcknowledgeRequest :>
+                               Post '[JSON] OrdersAcknowledgeResponse
 
 -- | Marks an order as acknowledged.
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
 data OrdersAcknowledge =
   OrdersAcknowledge'
-    { _oaMerchantId :: !(Textual Word64)
-    , _oaPayload    :: !OrdersAcknowledgeRequest
-    , _oaOrderId    :: !Text
+    { _oXgafv :: !(Maybe Xgafv)
+    , _oMerchantId :: !(Textual Word64)
+    , _oUploadProtocol :: !(Maybe Text)
+    , _oAccessToken :: !(Maybe Text)
+    , _oUploadType :: !(Maybe Text)
+    , _oPayload :: !OrdersAcknowledgeRequest
+    , _oOrderId :: !Text
+    , _oCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,48 +85,90 @@ data OrdersAcknowledge =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oaMerchantId'
+-- * 'oXgafv'
 --
--- * 'oaPayload'
+-- * 'oMerchantId'
 --
--- * 'oaOrderId'
+-- * 'oUploadProtocol'
+--
+-- * 'oAccessToken'
+--
+-- * 'oUploadType'
+--
+-- * 'oPayload'
+--
+-- * 'oOrderId'
+--
+-- * 'oCallback'
 ordersAcknowledge
-    :: Word64 -- ^ 'oaMerchantId'
-    -> OrdersAcknowledgeRequest -- ^ 'oaPayload'
-    -> Text -- ^ 'oaOrderId'
+    :: Word64 -- ^ 'oMerchantId'
+    -> OrdersAcknowledgeRequest -- ^ 'oPayload'
+    -> Text -- ^ 'oOrderId'
     -> OrdersAcknowledge
-ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
+ordersAcknowledge pOMerchantId_ pOPayload_ pOOrderId_ =
   OrdersAcknowledge'
-    { _oaMerchantId = _Coerce # pOaMerchantId_
-    , _oaPayload = pOaPayload_
-    , _oaOrderId = pOaOrderId_
+    { _oXgafv = Nothing
+    , _oMerchantId = _Coerce # pOMerchantId_
+    , _oUploadProtocol = Nothing
+    , _oAccessToken = Nothing
+    , _oUploadType = Nothing
+    , _oPayload = pOPayload_
+    , _oOrderId = pOOrderId_
+    , _oCallback = Nothing
     }
 
 
+-- | V1 error format.
+oXgafv :: Lens' OrdersAcknowledge (Maybe Xgafv)
+oXgafv = lens _oXgafv (\ s a -> s{_oXgafv = a})
+
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-oaMerchantId :: Lens' OrdersAcknowledge Word64
-oaMerchantId
-  = lens _oaMerchantId (\ s a -> s{_oaMerchantId = a})
-      . _Coerce
+oMerchantId :: Lens' OrdersAcknowledge Word64
+oMerchantId
+  = lens _oMerchantId (\ s a -> s{_oMerchantId = a}) .
+      _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+oUploadProtocol :: Lens' OrdersAcknowledge (Maybe Text)
+oUploadProtocol
+  = lens _oUploadProtocol
+      (\ s a -> s{_oUploadProtocol = a})
+
+-- | OAuth access token.
+oAccessToken :: Lens' OrdersAcknowledge (Maybe Text)
+oAccessToken
+  = lens _oAccessToken (\ s a -> s{_oAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+oUploadType :: Lens' OrdersAcknowledge (Maybe Text)
+oUploadType
+  = lens _oUploadType (\ s a -> s{_oUploadType = a})
 
 -- | Multipart request metadata.
-oaPayload :: Lens' OrdersAcknowledge OrdersAcknowledgeRequest
-oaPayload
-  = lens _oaPayload (\ s a -> s{_oaPayload = a})
+oPayload :: Lens' OrdersAcknowledge OrdersAcknowledgeRequest
+oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 
 -- | The ID of the order.
-oaOrderId :: Lens' OrdersAcknowledge Text
-oaOrderId
-  = lens _oaOrderId (\ s a -> s{_oaOrderId = a})
+oOrderId :: Lens' OrdersAcknowledge Text
+oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
+
+-- | JSONP
+oCallback :: Lens' OrdersAcknowledge (Maybe Text)
+oCallback
+  = lens _oCallback (\ s a -> s{_oCallback = a})
 
 instance GoogleRequest OrdersAcknowledge where
         type Rs OrdersAcknowledge = OrdersAcknowledgeResponse
         type Scopes OrdersAcknowledge =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersAcknowledge'{..}
-          = go _oaMerchantId _oaOrderId (Just AltJSON)
-              _oaPayload
+          = go _oMerchantId _oOrderId _oXgafv _oUploadProtocol
+              _oAccessToken
+              _oUploadType
+              _oCallback
+              (Just AltJSON)
+              _oPayload
               shoppingContentService
           where go
                   = buildClient

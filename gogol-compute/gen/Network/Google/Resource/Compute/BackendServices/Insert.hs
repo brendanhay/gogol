@@ -21,9 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a BackendService resource in the specified project using the
--- data included in the request. There are several restrictions and
--- guidelines to keep in mind when creating a backend service. Read
--- Restrictions and Guidelines for more information.
+-- data included in the request. For more information, see Backend services
+-- overview.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.insert@.
 module Network.Google.Resource.Compute.BackendServices.Insert
@@ -41,8 +40,8 @@ module Network.Google.Resource.Compute.BackendServices.Insert
     , bsiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.insert@ method which the
 -- 'BackendServicesInsert' request conforms to.
@@ -59,16 +58,15 @@ type BackendServicesInsertResource =
                        Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the
--- data included in the request. There are several restrictions and
--- guidelines to keep in mind when creating a backend service. Read
--- Restrictions and Guidelines for more information.
+-- data included in the request. For more information, see Backend services
+-- overview.
 --
 -- /See:/ 'backendServicesInsert' smart constructor.
 data BackendServicesInsert =
   BackendServicesInsert'
     { _bsiRequestId :: !(Maybe Text)
-    , _bsiProject   :: !Text
-    , _bsiPayload   :: !BackendService
+    , _bsiProject :: !Text
+    , _bsiPayload :: !BackendService
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

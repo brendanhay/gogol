@@ -48,8 +48,8 @@ module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Patch
     , aacpCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.patch@ method which the
 -- 'AppsAuthorizedCertificatesPatch' request conforms to.
@@ -79,14 +79,14 @@ type AppsAuthorizedCertificatesPatchResource =
 data AppsAuthorizedCertificatesPatch =
   AppsAuthorizedCertificatesPatch'
     { _aacpAuthorizedCertificatesId :: !Text
-    , _aacpXgafv                    :: !(Maybe Xgafv)
-    , _aacpUploadProtocol           :: !(Maybe Text)
-    , _aacpUpdateMask               :: !(Maybe GFieldMask)
-    , _aacpAccessToken              :: !(Maybe Text)
-    , _aacpUploadType               :: !(Maybe Text)
-    , _aacpPayload                  :: !AuthorizedCertificate
-    , _aacpAppsId                   :: !Text
-    , _aacpCallback                 :: !(Maybe Text)
+    , _aacpXgafv :: !(Maybe Xgafv)
+    , _aacpUploadProtocol :: !(Maybe Text)
+    , _aacpUpdateMask :: !(Maybe GFieldMask)
+    , _aacpAccessToken :: !(Maybe Text)
+    , _aacpUploadType :: !(Maybe Text)
+    , _aacpPayload :: !AuthorizedCertificate
+    , _aacpAppsId :: !Text
+    , _aacpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

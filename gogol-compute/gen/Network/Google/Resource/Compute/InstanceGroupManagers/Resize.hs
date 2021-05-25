@@ -54,8 +54,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
     , igmrZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.resize@ method which the
 -- 'InstanceGroupManagersResize' request conforms to.
@@ -92,11 +92,11 @@ type InstanceGroupManagersResizeResource =
 -- /See:/ 'instanceGroupManagersResize' smart constructor.
 data InstanceGroupManagersResize =
   InstanceGroupManagersResize'
-    { _igmrRequestId            :: !(Maybe Text)
-    , _igmrProject              :: !Text
-    , _igmrSize                 :: !(Textual Int32)
+    { _igmrRequestId :: !(Maybe Text)
+    , _igmrProject :: !Text
+    , _igmrSize :: !(Textual Int32)
     , _igmrInstanceGroupManager :: !Text
-    , _igmrZone                 :: !Text
+    , _igmrZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

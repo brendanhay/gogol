@@ -49,8 +49,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.List
     , pCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.list@ method which the
 -- 'ProjectsDatabasesDocumentsList' request conforms to.
@@ -78,20 +78,20 @@ type ProjectsDatabasesDocumentsListResource =
 -- /See:/ 'projectsDatabasesDocumentsList' smart constructor.
 data ProjectsDatabasesDocumentsList =
   ProjectsDatabasesDocumentsList'
-    { _pParent         :: !Text
-    , _pXgafv          :: !(Maybe Xgafv)
-    , _pReadTime       :: !(Maybe DateTime')
+    { _pParent :: !Text
+    , _pXgafv :: !(Maybe Xgafv)
+    , _pReadTime :: !(Maybe DateTime')
     , _pUploadProtocol :: !(Maybe Text)
-    , _pOrderBy        :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pCollectionId   :: !Text
-    , _pUploadType     :: !(Maybe Text)
-    , _pTransaction    :: !(Maybe Bytes)
-    , _pShowMissing    :: !(Maybe Bool)
-    , _pPageToken      :: !(Maybe Text)
-    , _pPageSize       :: !(Maybe (Textual Int32))
+    , _pOrderBy :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pCollectionId :: !Text
+    , _pUploadType :: !(Maybe Text)
+    , _pTransaction :: !(Maybe Bytes)
+    , _pShowMissing :: !(Maybe Bool)
+    , _pPageToken :: !(Maybe Text)
+    , _pPageSize :: !(Maybe (Textual Int32))
     , _pMaskFieldPaths :: !(Maybe [Text])
-    , _pCallback       :: !(Maybe Text)
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,7 +150,7 @@ projectsDatabasesDocumentsList pPParent_ pPCollectionId_ =
     }
 
 
--- | The parent resource name. In the format:
+-- | Required. The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
 -- For example: \`projects\/my-project\/databases\/my-database\/documents\`
@@ -164,7 +164,7 @@ pXgafv :: Lens' ProjectsDatabasesDocumentsList (Maybe Xgafv)
 pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
 
 -- | Reads documents as they were at the given time. This may not be older
--- than 60 seconds.
+-- than 270 seconds.
 pReadTime :: Lens' ProjectsDatabasesDocumentsList (Maybe UTCTime)
 pReadTime
   = lens _pReadTime (\ s a -> s{_pReadTime = a}) .
@@ -185,8 +185,8 @@ pAccessToken :: Lens' ProjectsDatabasesDocumentsList (Maybe Text)
 pAccessToken
   = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
 
--- | The collection ID, relative to \`parent\`, to list. For example:
--- \`chatrooms\` or \`messages\`.
+-- | Required. The collection ID, relative to \`parent\`, to list. For
+-- example: \`chatrooms\` or \`messages\`.
 pCollectionId :: Lens' ProjectsDatabasesDocumentsList Text
 pCollectionId
   = lens _pCollectionId

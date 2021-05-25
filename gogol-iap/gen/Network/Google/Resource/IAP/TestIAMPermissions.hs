@@ -45,8 +45,8 @@ module Network.Google.Resource.IAP.TestIAMPermissions
     , tipCallback
     ) where
 
-import           Network.Google.IAP.Types
-import           Network.Google.Prelude
+import Network.Google.IAP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iap.testIamPermissions@ method which the
 -- 'TestIAMPermissions' request conforms to.
@@ -70,13 +70,13 @@ type TestIAMPermissionsResource =
 -- /See:/ 'testIAMPermissions' smart constructor.
 data TestIAMPermissions =
   TestIAMPermissions'
-    { _tipXgafv          :: !(Maybe Xgafv)
+    { _tipXgafv :: !(Maybe Xgafv)
     , _tipUploadProtocol :: !(Maybe Text)
-    , _tipAccessToken    :: !(Maybe Text)
-    , _tipUploadType     :: !(Maybe Text)
-    , _tipPayload        :: !TestIAMPermissionsRequest
-    , _tipResource       :: !Text
-    , _tipCallback       :: !(Maybe Text)
+    , _tipAccessToken :: !(Maybe Text)
+    , _tipUploadType :: !(Maybe Text)
+    , _tipPayload :: !TestIAMPermissionsRequest
+    , _tipResource :: !Text
+    , _tipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

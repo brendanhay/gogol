@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Images.Deprecate
     , id1Payload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.deprecate@ method which the
 -- 'ImagesDeprecate' request conforms to.
@@ -66,9 +66,9 @@ type ImagesDeprecateResource =
 data ImagesDeprecate =
   ImagesDeprecate'
     { _id1RequestId :: !(Maybe Text)
-    , _id1Image     :: !Text
-    , _id1Project   :: !Text
-    , _id1Payload   :: !DeprecationStatus
+    , _id1Image :: !Text
+    , _id1Project :: !Text
+    , _id1Payload :: !DeprecationStatus
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

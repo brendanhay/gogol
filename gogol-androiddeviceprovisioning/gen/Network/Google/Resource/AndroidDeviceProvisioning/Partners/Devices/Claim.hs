@@ -44,8 +44,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Claim
     , pdcCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.claim@ method which the
 -- 'PartnersDevicesClaim' request conforms to.
@@ -70,13 +70,13 @@ type PartnersDevicesClaimResource =
 -- /See:/ 'partnersDevicesClaim' smart constructor.
 data PartnersDevicesClaim =
   PartnersDevicesClaim'
-    { _pdcXgafv          :: !(Maybe Xgafv)
+    { _pdcXgafv :: !(Maybe Xgafv)
     , _pdcUploadProtocol :: !(Maybe Text)
-    , _pdcAccessToken    :: !(Maybe Text)
-    , _pdcPartnerId      :: !(Textual Int64)
-    , _pdcUploadType     :: !(Maybe Text)
-    , _pdcPayload        :: !ClaimDeviceRequest
-    , _pdcCallback       :: !(Maybe Text)
+    , _pdcAccessToken :: !(Maybe Text)
+    , _pdcPartnerId :: !(Textual Int64)
+    , _pdcUploadType :: !(Maybe Text)
+    , _pdcPayload :: !ClaimDeviceRequest
+    , _pdcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

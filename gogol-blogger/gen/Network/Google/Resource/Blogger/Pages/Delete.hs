@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a page by ID.
+-- Deletes a page by blog id and page id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.delete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.delete@.
 module Network.Google.Resource.Blogger.Pages.Delete
     (
     -- * REST Resource
@@ -33,31 +33,45 @@ module Network.Google.Resource.Blogger.Pages.Delete
     , PagesDelete
 
     -- * Request Lenses
+    , pddXgafv
+    , pddUploadProtocol
+    , pddAccessToken
+    , pddUploadType
     , pddBlogId
     , pddPageId
+    , pddCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.delete@ method which the
 -- 'PagesDelete' request conforms to.
 type PagesDeleteResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "pages" :>
+             Capture "pageId" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Delete a page by ID.
+-- | Deletes a page by blog id and page id.
 --
 -- /See:/ 'pagesDelete' smart constructor.
 data PagesDelete =
   PagesDelete'
-    { _pddBlogId :: !Text
+    { _pddXgafv :: !(Maybe Xgafv)
+    , _pddUploadProtocol :: !(Maybe Text)
+    , _pddAccessToken :: !(Maybe Text)
+    , _pddUploadType :: !(Maybe Text)
+    , _pddBlogId :: !Text
     , _pddPageId :: !Text
+    , _pddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,33 +80,81 @@ data PagesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pddXgafv'
+--
+-- * 'pddUploadProtocol'
+--
+-- * 'pddAccessToken'
+--
+-- * 'pddUploadType'
+--
 -- * 'pddBlogId'
 --
 -- * 'pddPageId'
+--
+-- * 'pddCallback'
 pagesDelete
     :: Text -- ^ 'pddBlogId'
     -> Text -- ^ 'pddPageId'
     -> PagesDelete
 pagesDelete pPddBlogId_ pPddPageId_ =
-  PagesDelete' {_pddBlogId = pPddBlogId_, _pddPageId = pPddPageId_}
+  PagesDelete'
+    { _pddXgafv = Nothing
+    , _pddUploadProtocol = Nothing
+    , _pddAccessToken = Nothing
+    , _pddUploadType = Nothing
+    , _pddBlogId = pPddBlogId_
+    , _pddPageId = pPddPageId_
+    , _pddCallback = Nothing
+    }
 
 
--- | The ID of the Blog.
+-- | V1 error format.
+pddXgafv :: Lens' PagesDelete (Maybe Xgafv)
+pddXgafv = lens _pddXgafv (\ s a -> s{_pddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pddUploadProtocol :: Lens' PagesDelete (Maybe Text)
+pddUploadProtocol
+  = lens _pddUploadProtocol
+      (\ s a -> s{_pddUploadProtocol = a})
+
+-- | OAuth access token.
+pddAccessToken :: Lens' PagesDelete (Maybe Text)
+pddAccessToken
+  = lens _pddAccessToken
+      (\ s a -> s{_pddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pddUploadType :: Lens' PagesDelete (Maybe Text)
+pddUploadType
+  = lens _pddUploadType
+      (\ s a -> s{_pddUploadType = a})
+
 pddBlogId :: Lens' PagesDelete Text
 pddBlogId
   = lens _pddBlogId (\ s a -> s{_pddBlogId = a})
 
--- | The ID of the Page.
 pddPageId :: Lens' PagesDelete Text
 pddPageId
   = lens _pddPageId (\ s a -> s{_pddPageId = a})
+
+-- | JSONP
+pddCallback :: Lens' PagesDelete (Maybe Text)
+pddCallback
+  = lens _pddCallback (\ s a -> s{_pddCallback = a})
 
 instance GoogleRequest PagesDelete where
         type Rs PagesDelete = ()
         type Scopes PagesDelete =
              '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesDelete'{..}
-          = go _pddBlogId _pddPageId (Just AltJSON)
+          = go _pddBlogId _pddPageId _pddXgafv
+              _pddUploadProtocol
+              _pddAccessToken
+              _pddUploadType
+              _pddCallback
+              (Just AltJSON)
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy PagesDeleteResource)

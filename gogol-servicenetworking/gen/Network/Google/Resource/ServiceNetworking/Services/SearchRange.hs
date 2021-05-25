@@ -25,7 +25,7 @@
 -- and not guaranteed to remain unused. It will validate previously
 -- provided allocated ranges, find non-conflicting sub-range of requested
 -- size (expressed in number of leading bits of ipv4 network mask, as in
--- CIDR range notation). Operation
+-- CIDR range notation).
 --
 -- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.services.searchRange@.
 module Network.Google.Resource.ServiceNetworking.Services.SearchRange
@@ -47,8 +47,8 @@ module Network.Google.Resource.ServiceNetworking.Services.SearchRange
     , ssrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceNetworking.Types
+import Network.Google.Prelude
+import Network.Google.ServiceNetworking.Types
 
 -- | A resource alias for @servicenetworking.services.searchRange@ method which the
 -- 'ServicesSearchRange' request conforms to.
@@ -69,18 +69,18 @@ type ServicesSearchRangeResource =
 -- and not guaranteed to remain unused. It will validate previously
 -- provided allocated ranges, find non-conflicting sub-range of requested
 -- size (expressed in number of leading bits of ipv4 network mask, as in
--- CIDR range notation). Operation
+-- CIDR range notation).
 --
 -- /See:/ 'servicesSearchRange' smart constructor.
 data ServicesSearchRange =
   ServicesSearchRange'
-    { _ssrParent         :: !Text
-    , _ssrXgafv          :: !(Maybe Xgafv)
+    { _ssrParent :: !Text
+    , _ssrXgafv :: !(Maybe Xgafv)
     , _ssrUploadProtocol :: !(Maybe Text)
-    , _ssrAccessToken    :: !(Maybe Text)
-    , _ssrUploadType     :: !(Maybe Text)
-    , _ssrPayload        :: !SearchRangeRequest
-    , _ssrCallback       :: !(Maybe Text)
+    , _ssrAccessToken :: !(Maybe Text)
+    , _ssrUploadType :: !(Maybe Text)
+    , _ssrPayload :: !SearchRangeRequest
+    , _ssrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

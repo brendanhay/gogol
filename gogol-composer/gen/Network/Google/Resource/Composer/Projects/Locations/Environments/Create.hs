@@ -42,8 +42,8 @@ module Network.Google.Resource.Composer.Projects.Locations.Environments.Create
     , plecCallback
     ) where
 
-import           Network.Google.Composer.Types
-import           Network.Google.Prelude
+import Network.Google.Composer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @composer.projects.locations.environments.create@ method which the
 -- 'ProjectsLocationsEnvironmentsCreate' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsEnvironmentsCreateResource =
 -- /See:/ 'projectsLocationsEnvironmentsCreate' smart constructor.
 data ProjectsLocationsEnvironmentsCreate =
   ProjectsLocationsEnvironmentsCreate'
-    { _plecParent         :: !Text
-    , _plecXgafv          :: !(Maybe Xgafv)
+    { _plecParent :: !Text
+    , _plecXgafv :: !(Maybe Xgafv)
     , _plecUploadProtocol :: !(Maybe Text)
-    , _plecAccessToken    :: !(Maybe Text)
-    , _plecUploadType     :: !(Maybe Text)
-    , _plecPayload        :: !Environment
-    , _plecCallback       :: !(Maybe Text)
+    , _plecAccessToken :: !(Maybe Text)
+    , _plecUploadType :: !(Maybe Text)
+    , _plecPayload :: !Environment
+    , _plecCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

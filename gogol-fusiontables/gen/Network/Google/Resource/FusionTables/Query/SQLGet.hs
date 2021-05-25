@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Query.SQLGet
     , qsqlgSQL
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.query.sqlGet@ method which the
 -- 'QuerySQLGet' request conforms to.
@@ -67,8 +67,8 @@ type QuerySQLGetResource =
 data QuerySQLGet =
   QuerySQLGet'
     { _qsqlgTyped :: !(Maybe Bool)
-    , _qsqlgHdrs  :: !(Maybe Bool)
-    , _qsqlgSQL   :: !Text
+    , _qsqlgHdrs :: !(Maybe Bool)
+    , _qsqlgSQL :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

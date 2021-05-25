@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.InterconnectAttachments.Get
     , iagInterconnectAttachment
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnectAttachments.get@ method which the
 -- 'InterconnectAttachmentsGet' request conforms to.
@@ -60,8 +60,8 @@ type InterconnectAttachmentsGetResource =
 -- /See:/ 'interconnectAttachmentsGet' smart constructor.
 data InterconnectAttachmentsGet =
   InterconnectAttachmentsGet'
-    { _iagProject                :: !Text
-    , _iagRegion                 :: !Text
+    { _iagProject :: !Text
+    , _iagRegion :: !Text
     , _iagInterconnectAttachment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

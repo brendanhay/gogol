@@ -22,7 +22,7 @@
 --
 -- Inserts a new creative group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeGroups.insert@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     , CreativeGroupsInsert
 
     -- * Request Lenses
+    , cgiXgafv
+    , cgiUploadProtocol
+    , cgiAccessToken
+    , cgiUploadType
     , cgiProFileId
     , cgiPayload
+    , cgiCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.insert@ method which the
 -- 'CreativeGroupsInsert' request conforms to.
 type CreativeGroupsInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CreativeGroup :>
-                   Post '[JSON] CreativeGroup
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CreativeGroup :>
+                             Post '[JSON] CreativeGroup
 
 -- | Inserts a new creative group.
 --
 -- /See:/ 'creativeGroupsInsert' smart constructor.
 data CreativeGroupsInsert =
   CreativeGroupsInsert'
-    { _cgiProFileId :: !(Textual Int64)
-    , _cgiPayload   :: !CreativeGroup
+    { _cgiXgafv :: !(Maybe Xgafv)
+    , _cgiUploadProtocol :: !(Maybe Text)
+    , _cgiAccessToken :: !(Maybe Text)
+    , _cgiUploadType :: !(Maybe Text)
+    , _cgiProFileId :: !(Textual Int64)
+    , _cgiPayload :: !CreativeGroup
+    , _cgiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data CreativeGroupsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cgiXgafv'
+--
+-- * 'cgiUploadProtocol'
+--
+-- * 'cgiAccessToken'
+--
+-- * 'cgiUploadType'
+--
 -- * 'cgiProFileId'
 --
 -- * 'cgiPayload'
+--
+-- * 'cgiCallback'
 creativeGroupsInsert
     :: Int64 -- ^ 'cgiProFileId'
     -> CreativeGroup -- ^ 'cgiPayload'
     -> CreativeGroupsInsert
 creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
   CreativeGroupsInsert'
-    {_cgiProFileId = _Coerce # pCgiProFileId_, _cgiPayload = pCgiPayload_}
+    { _cgiXgafv = Nothing
+    , _cgiUploadProtocol = Nothing
+    , _cgiAccessToken = Nothing
+    , _cgiUploadType = Nothing
+    , _cgiProFileId = _Coerce # pCgiProFileId_
+    , _cgiPayload = pCgiPayload_
+    , _cgiCallback = Nothing
+    }
 
+
+-- | V1 error format.
+cgiXgafv :: Lens' CreativeGroupsInsert (Maybe Xgafv)
+cgiXgafv = lens _cgiXgafv (\ s a -> s{_cgiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cgiUploadProtocol :: Lens' CreativeGroupsInsert (Maybe Text)
+cgiUploadProtocol
+  = lens _cgiUploadProtocol
+      (\ s a -> s{_cgiUploadProtocol = a})
+
+-- | OAuth access token.
+cgiAccessToken :: Lens' CreativeGroupsInsert (Maybe Text)
+cgiAccessToken
+  = lens _cgiAccessToken
+      (\ s a -> s{_cgiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cgiUploadType :: Lens' CreativeGroupsInsert (Maybe Text)
+cgiUploadType
+  = lens _cgiUploadType
+      (\ s a -> s{_cgiUploadType = a})
 
 -- | User profile ID associated with this request.
 cgiProFileId :: Lens' CreativeGroupsInsert Int64
@@ -90,12 +144,22 @@ cgiPayload :: Lens' CreativeGroupsInsert CreativeGroup
 cgiPayload
   = lens _cgiPayload (\ s a -> s{_cgiPayload = a})
 
+-- | JSONP
+cgiCallback :: Lens' CreativeGroupsInsert (Maybe Text)
+cgiCallback
+  = lens _cgiCallback (\ s a -> s{_cgiCallback = a})
+
 instance GoogleRequest CreativeGroupsInsert where
         type Rs CreativeGroupsInsert = CreativeGroup
         type Scopes CreativeGroupsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsInsert'{..}
-          = go _cgiProFileId (Just AltJSON) _cgiPayload
+          = go _cgiProFileId _cgiXgafv _cgiUploadProtocol
+              _cgiAccessToken
+              _cgiUploadType
+              _cgiCallback
+              (Just AltJSON)
+              _cgiPayload
               dFAReportingService
           where go
                   = buildClient

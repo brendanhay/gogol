@@ -44,8 +44,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
     , pljdgcCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.jobs.debug.getConfig@ method which the
 -- 'ProjectsLocationsJobsDebugGetConfig' request conforms to.
@@ -73,15 +73,15 @@ type ProjectsLocationsJobsDebugGetConfigResource =
 -- /See:/ 'projectsLocationsJobsDebugGetConfig' smart constructor.
 data ProjectsLocationsJobsDebugGetConfig =
   ProjectsLocationsJobsDebugGetConfig'
-    { _pljdgcXgafv          :: !(Maybe Xgafv)
-    , _pljdgcJobId          :: !Text
+    { _pljdgcXgafv :: !(Maybe Xgafv)
+    , _pljdgcJobId :: !Text
     , _pljdgcUploadProtocol :: !(Maybe Text)
-    , _pljdgcLocation       :: !Text
-    , _pljdgcAccessToken    :: !(Maybe Text)
-    , _pljdgcUploadType     :: !(Maybe Text)
-    , _pljdgcPayload        :: !GetDebugConfigRequest
-    , _pljdgcProjectId      :: !Text
-    , _pljdgcCallback       :: !(Maybe Text)
+    , _pljdgcLocation :: !Text
+    , _pljdgcAccessToken :: !(Maybe Text)
+    , _pljdgcUploadType :: !(Maybe Text)
+    , _pljdgcPayload :: !GetDebugConfigRequest
+    , _pljdgcProjectId :: !Text
+    , _pljdgcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

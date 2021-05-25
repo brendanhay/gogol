@@ -42,8 +42,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.List
     , piclCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.clusters.list@ method which the
 -- 'ProjectsInstancesClustersList' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsInstancesClustersListResource =
 -- /See:/ 'projectsInstancesClustersList' smart constructor.
 data ProjectsInstancesClustersList =
   ProjectsInstancesClustersList'
-    { _piclParent         :: !Text
-    , _piclXgafv          :: !(Maybe Xgafv)
+    { _piclParent :: !Text
+    , _piclXgafv :: !(Maybe Xgafv)
     , _piclUploadProtocol :: !(Maybe Text)
-    , _piclAccessToken    :: !(Maybe Text)
-    , _piclUploadType     :: !(Maybe Text)
-    , _piclPageToken      :: !(Maybe Text)
-    , _piclCallback       :: !(Maybe Text)
+    , _piclAccessToken :: !(Maybe Text)
+    , _piclUploadType :: !(Maybe Text)
+    , _piclPageToken :: !(Maybe Text)
+    , _piclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,8 +108,9 @@ projectsInstancesClustersList pPiclParent_ =
     }
 
 
--- | The unique name of the instance for which a list of clusters is
--- requested. Values are of the form \`projects\/\/instances\/\`. Use \` =
+-- | Required. The unique name of the instance for which a list of clusters
+-- is requested. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\`. Use \`{instance} =
 -- \'-\'\` to list Clusters for all Instances in a project, e.g.,
 -- \`projects\/myproject\/instances\/-\`.
 piclParent :: Lens' ProjectsInstancesClustersList Text

@@ -41,8 +41,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Get
     , pCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.releases.get@ method which the
 -- 'ProjectsReleasesGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsReleasesGetResource =
 -- /See:/ 'projectsReleasesGet' smart constructor.
 data ProjectsReleasesGet =
   ProjectsReleasesGet'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,7 +120,7 @@ pUploadType :: Lens' ProjectsReleasesGet (Maybe Text)
 pUploadType
   = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
--- | Resource name of the \`Release\`. Format:
+-- | Required. Resource name of the \`Release\`. Format:
 -- \`projects\/{project_id}\/releases\/{release_id}\`
 pName :: Lens' ProjectsReleasesGet Text
 pName = lens _pName (\ s a -> s{_pName = a})

@@ -33,12 +33,13 @@ module Network.Google.Resource.Storage.Projects.HmacKeys.Get
     , ProjectsHmacKeysGet
 
     -- * Request Lenses
+    , phkgUserProject
     , phkgProjectId
     , phkgAccessId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.projects.hmacKeys.get@ method which the
 -- 'ProjectsHmacKeysGet' request conforms to.
@@ -49,16 +50,18 @@ type ProjectsHmacKeysGetResource =
            Capture "projectId" Text :>
              "hmacKeys" :>
                Capture "accessId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] HmacKeyMetadata
+                 QueryParam "userProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] HmacKeyMetadata
 
 -- | Retrieves an HMAC key\'s metadata
 --
 -- /See:/ 'projectsHmacKeysGet' smart constructor.
 data ProjectsHmacKeysGet =
   ProjectsHmacKeysGet'
-    { _phkgProjectId :: !Text
-    , _phkgAccessId  :: !Text
+    { _phkgUserProject :: !(Maybe Text)
+    , _phkgProjectId :: !Text
+    , _phkgAccessId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,6 +69,8 @@ data ProjectsHmacKeysGet =
 -- | Creates a value of 'ProjectsHmacKeysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'phkgUserProject'
 --
 -- * 'phkgProjectId'
 --
@@ -76,8 +81,17 @@ projectsHmacKeysGet
     -> ProjectsHmacKeysGet
 projectsHmacKeysGet pPhkgProjectId_ pPhkgAccessId_ =
   ProjectsHmacKeysGet'
-    {_phkgProjectId = pPhkgProjectId_, _phkgAccessId = pPhkgAccessId_}
+    { _phkgUserProject = Nothing
+    , _phkgProjectId = pPhkgProjectId_
+    , _phkgAccessId = pPhkgAccessId_
+    }
 
+
+-- | The project to be billed for this request.
+phkgUserProject :: Lens' ProjectsHmacKeysGet (Maybe Text)
+phkgUserProject
+  = lens _phkgUserProject
+      (\ s a -> s{_phkgUserProject = a})
 
 -- | Project ID owning the service account of the requested key.
 phkgProjectId :: Lens' ProjectsHmacKeysGet Text
@@ -95,9 +109,11 @@ instance GoogleRequest ProjectsHmacKeysGet where
         type Scopes ProjectsHmacKeysGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only"]
         requestClient ProjectsHmacKeysGet'{..}
-          = go _phkgProjectId _phkgAccessId (Just AltJSON)
+          = go _phkgProjectId _phkgAccessId _phkgUserProject
+              (Just AltJSON)
               storageService
           where go
                   = buildClient

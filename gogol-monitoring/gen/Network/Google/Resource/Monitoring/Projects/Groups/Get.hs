@@ -22,7 +22,7 @@
 --
 -- Gets a single group.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.groups.get@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Get
     , pggCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.groups.get@ method which the
 -- 'ProjectsGroupsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsGroupsGetResource =
 -- /See:/ 'projectsGroupsGet' smart constructor.
 data ProjectsGroupsGet =
   ProjectsGroupsGet'
-    { _pggXgafv          :: !(Maybe Xgafv)
+    { _pggXgafv :: !(Maybe Xgafv)
     , _pggUploadProtocol :: !(Maybe Text)
-    , _pggAccessToken    :: !(Maybe Text)
-    , _pggUploadType     :: !(Maybe Text)
-    , _pggName           :: !Text
-    , _pggCallback       :: !(Maybe Text)
+    , _pggAccessToken :: !(Maybe Text)
+    , _pggUploadType :: !(Maybe Text)
+    , _pggName :: !Text
+    , _pggCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,8 +122,8 @@ pggUploadType
   = lens _pggUploadType
       (\ s a -> s{_pggUploadType = a})
 
--- | The group to retrieve. The format is
--- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
+-- | Required. The group to retrieve. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID]
 pggName :: Lens' ProjectsGroupsGet Text
 pggName = lens _pggName (\ s a -> s{_pggName = a})
 

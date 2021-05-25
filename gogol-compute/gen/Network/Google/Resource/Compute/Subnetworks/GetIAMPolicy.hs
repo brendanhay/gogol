@@ -36,11 +36,12 @@ module Network.Google.Resource.Compute.Subnetworks.GetIAMPolicy
     -- * Request Lenses
     , sgipProject
     , sgipResource
+    , sgipOptionsRequestedPolicyVersion
     , sgipRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.getIamPolicy@ method which the
 -- 'SubnetworksGetIAMPolicy' request conforms to.
@@ -54,7 +55,9 @@ type SubnetworksGetIAMPolicyResource =
                  "subnetworks" :>
                    Capture "resource" Text :>
                      "getIamPolicy" :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                       QueryParam "optionsRequestedPolicyVersion"
+                         (Textual Int32)
+                         :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -62,9 +65,10 @@ type SubnetworksGetIAMPolicyResource =
 -- /See:/ 'subnetworksGetIAMPolicy' smart constructor.
 data SubnetworksGetIAMPolicy =
   SubnetworksGetIAMPolicy'
-    { _sgipProject  :: !Text
+    { _sgipProject :: !Text
     , _sgipResource :: !Text
-    , _sgipRegion   :: !Text
+    , _sgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _sgipRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +81,8 @@ data SubnetworksGetIAMPolicy =
 --
 -- * 'sgipResource'
 --
+-- * 'sgipOptionsRequestedPolicyVersion'
+--
 -- * 'sgipRegion'
 subnetworksGetIAMPolicy
     :: Text -- ^ 'sgipProject'
@@ -87,6 +93,7 @@ subnetworksGetIAMPolicy pSgipProject_ pSgipResource_ pSgipRegion_ =
   SubnetworksGetIAMPolicy'
     { _sgipProject = pSgipProject_
     , _sgipResource = pSgipResource_
+    , _sgipOptionsRequestedPolicyVersion = Nothing
     , _sgipRegion = pSgipRegion_
     }
 
@@ -101,6 +108,13 @@ sgipResource :: Lens' SubnetworksGetIAMPolicy Text
 sgipResource
   = lens _sgipResource (\ s a -> s{_sgipResource = a})
 
+-- | Requested IAM Policy version.
+sgipOptionsRequestedPolicyVersion :: Lens' SubnetworksGetIAMPolicy (Maybe Int32)
+sgipOptionsRequestedPolicyVersion
+  = lens _sgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_sgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 -- | The name of the region for this request.
 sgipRegion :: Lens' SubnetworksGetIAMPolicy Text
 sgipRegion
@@ -114,6 +128,7 @@ instance GoogleRequest SubnetworksGetIAMPolicy where
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SubnetworksGetIAMPolicy'{..}
           = go _sgipProject _sgipRegion _sgipResource
+              _sgipOptionsRequestedPolicyVersion
               (Just AltJSON)
               computeService
           where go

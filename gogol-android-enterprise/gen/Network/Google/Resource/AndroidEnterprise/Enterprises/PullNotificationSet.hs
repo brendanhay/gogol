@@ -46,11 +46,16 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.PullNotificationSet
     , EnterprisesPullNotificationSet
 
     -- * Request Lenses
+    , epnsXgafv
+    , epnsUploadProtocol
+    , epnsAccessToken
+    , epnsUploadType
     , epnsRequestMode
+    , epnsCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.pullNotificationSet@ method which the
 -- 'EnterprisesPullNotificationSet' request conforms to.
@@ -59,11 +64,16 @@ type EnterprisesPullNotificationSetResource =
        "v1" :>
          "enterprises" :>
            "pullNotificationSet" :>
-             QueryParam "requestMode"
-               EnterprisesPullNotificationSetRequestMode
-               :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] NotificationSet
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "requestMode"
+                       EnterprisesPullNotificationSetRequestMode
+                       :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] NotificationSet
 
 -- | Pulls and returns a notification set for the enterprises associated with
 -- the service account authenticated for the request. The notification set
@@ -81,9 +91,14 @@ type EnterprisesPullNotificationSetResource =
 -- may return more notifications once they become available.
 --
 -- /See:/ 'enterprisesPullNotificationSet' smart constructor.
-newtype EnterprisesPullNotificationSet =
+data EnterprisesPullNotificationSet =
   EnterprisesPullNotificationSet'
-    { _epnsRequestMode :: Maybe EnterprisesPullNotificationSetRequestMode
+    { _epnsXgafv :: !(Maybe Xgafv)
+    , _epnsUploadProtocol :: !(Maybe Text)
+    , _epnsAccessToken :: !(Maybe Text)
+    , _epnsUploadType :: !(Maybe Text)
+    , _epnsRequestMode :: !(Maybe EnterprisesPullNotificationSetRequestMode)
+    , _epnsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,12 +107,52 @@ newtype EnterprisesPullNotificationSet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'epnsXgafv'
+--
+-- * 'epnsUploadProtocol'
+--
+-- * 'epnsAccessToken'
+--
+-- * 'epnsUploadType'
+--
 -- * 'epnsRequestMode'
+--
+-- * 'epnsCallback'
 enterprisesPullNotificationSet
     :: EnterprisesPullNotificationSet
 enterprisesPullNotificationSet =
-  EnterprisesPullNotificationSet' {_epnsRequestMode = Nothing}
+  EnterprisesPullNotificationSet'
+    { _epnsXgafv = Nothing
+    , _epnsUploadProtocol = Nothing
+    , _epnsAccessToken = Nothing
+    , _epnsUploadType = Nothing
+    , _epnsRequestMode = Nothing
+    , _epnsCallback = Nothing
+    }
 
+
+-- | V1 error format.
+epnsXgafv :: Lens' EnterprisesPullNotificationSet (Maybe Xgafv)
+epnsXgafv
+  = lens _epnsXgafv (\ s a -> s{_epnsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+epnsUploadProtocol :: Lens' EnterprisesPullNotificationSet (Maybe Text)
+epnsUploadProtocol
+  = lens _epnsUploadProtocol
+      (\ s a -> s{_epnsUploadProtocol = a})
+
+-- | OAuth access token.
+epnsAccessToken :: Lens' EnterprisesPullNotificationSet (Maybe Text)
+epnsAccessToken
+  = lens _epnsAccessToken
+      (\ s a -> s{_epnsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+epnsUploadType :: Lens' EnterprisesPullNotificationSet (Maybe Text)
+epnsUploadType
+  = lens _epnsUploadType
+      (\ s a -> s{_epnsUploadType = a})
 
 -- | The request mode for pulling notifications. Specifying
 -- waitForNotifications will cause the request to block and wait until one
@@ -111,6 +166,11 @@ epnsRequestMode
   = lens _epnsRequestMode
       (\ s a -> s{_epnsRequestMode = a})
 
+-- | JSONP
+epnsCallback :: Lens' EnterprisesPullNotificationSet (Maybe Text)
+epnsCallback
+  = lens _epnsCallback (\ s a -> s{_epnsCallback = a})
+
 instance GoogleRequest EnterprisesPullNotificationSet
          where
         type Rs EnterprisesPullNotificationSet =
@@ -118,7 +178,11 @@ instance GoogleRequest EnterprisesPullNotificationSet
         type Scopes EnterprisesPullNotificationSet =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesPullNotificationSet'{..}
-          = go _epnsRequestMode (Just AltJSON)
+          = go _epnsXgafv _epnsUploadProtocol _epnsAccessToken
+              _epnsUploadType
+              _epnsRequestMode
+              _epnsCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

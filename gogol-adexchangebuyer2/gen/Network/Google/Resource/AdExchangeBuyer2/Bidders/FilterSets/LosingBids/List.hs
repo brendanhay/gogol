@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.LosingBids.Li
     , bfslblCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.losingBids.list@ method which the
 -- 'BiddersFilterSetsLosingBidsList' request conforms to.
@@ -69,14 +69,14 @@ type BiddersFilterSetsLosingBidsListResource =
 -- /See:/ 'biddersFilterSetsLosingBidsList' smart constructor.
 data BiddersFilterSetsLosingBidsList =
   BiddersFilterSetsLosingBidsList'
-    { _bfslblXgafv          :: !(Maybe Xgafv)
+    { _bfslblXgafv :: !(Maybe Xgafv)
     , _bfslblUploadProtocol :: !(Maybe Text)
-    , _bfslblFilterSetName  :: !Text
-    , _bfslblAccessToken    :: !(Maybe Text)
-    , _bfslblUploadType     :: !(Maybe Text)
-    , _bfslblPageToken      :: !(Maybe Text)
-    , _bfslblPageSize       :: !(Maybe (Textual Int32))
-    , _bfslblCallback       :: !(Maybe Text)
+    , _bfslblFilterSetName :: !Text
+    , _bfslblAccessToken :: !(Maybe Text)
+    , _bfslblUploadType :: !(Maybe Text)
+    , _bfslblPageToken :: !(Maybe Text)
+    , _bfslblPageSize :: !(Maybe (Textual Int32))
+    , _bfslblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

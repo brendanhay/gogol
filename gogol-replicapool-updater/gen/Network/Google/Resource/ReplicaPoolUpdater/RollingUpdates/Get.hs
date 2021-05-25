@@ -38,8 +38,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
     , rugZone
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.get@ method which the
 -- 'RollingUpdatesGet' request conforms to.
@@ -60,8 +60,8 @@ type RollingUpdatesGetResource =
 data RollingUpdatesGet =
   RollingUpdatesGet'
     { _rugRollingUpdate :: !Text
-    , _rugProject       :: !Text
-    , _rugZone          :: !Text
+    , _rugProject :: !Text
+    , _rugZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

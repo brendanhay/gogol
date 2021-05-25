@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.Lis
     , amdlAccountId
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.metadata.dimensions.list@ method which the
 -- 'AccountsMetadataDimensionsList' request conforms to.

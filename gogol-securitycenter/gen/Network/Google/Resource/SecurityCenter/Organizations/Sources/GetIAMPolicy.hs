@@ -22,7 +22,7 @@
 --
 -- Gets the access control policy on the specified Source.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.getIamPolicy@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.getIamPolicy@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.GetIAMPolicy
     (
     -- * REST Resource
@@ -42,13 +42,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.GetIAMPolicy
     , osgipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.getIamPolicy@ method which the
 -- 'OrganizationsSourcesGetIAMPolicy' request conforms to.
 type OrganizationsSourcesGetIAMPolicyResource =
-     "v1" :>
+     "v1p1beta1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,13 +64,13 @@ type OrganizationsSourcesGetIAMPolicyResource =
 -- /See:/ 'organizationsSourcesGetIAMPolicy' smart constructor.
 data OrganizationsSourcesGetIAMPolicy =
   OrganizationsSourcesGetIAMPolicy'
-    { _osgipXgafv          :: !(Maybe Xgafv)
+    { _osgipXgafv :: !(Maybe Xgafv)
     , _osgipUploadProtocol :: !(Maybe Text)
-    , _osgipAccessToken    :: !(Maybe Text)
-    , _osgipUploadType     :: !(Maybe Text)
-    , _osgipPayload        :: !GetIAMPolicyRequest
-    , _osgipResource       :: !Text
-    , _osgipCallback       :: !(Maybe Text)
+    , _osgipAccessToken :: !(Maybe Text)
+    , _osgipUploadType :: !(Maybe Text)
+    , _osgipPayload :: !GetIAMPolicyRequest
+    , _osgipResource :: !Text
+    , _osgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

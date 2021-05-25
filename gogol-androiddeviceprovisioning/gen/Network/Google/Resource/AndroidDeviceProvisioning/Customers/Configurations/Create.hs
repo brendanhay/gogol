@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configuration
     , cccCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.configurations.create@ method which the
 -- 'CustomersConfigurationsCreate' request conforms to.
@@ -67,13 +67,13 @@ type CustomersConfigurationsCreateResource =
 -- /See:/ 'customersConfigurationsCreate' smart constructor.
 data CustomersConfigurationsCreate =
   CustomersConfigurationsCreate'
-    { _cccParent         :: !Text
-    , _cccXgafv          :: !(Maybe Xgafv)
+    { _cccParent :: !Text
+    , _cccXgafv :: !(Maybe Xgafv)
     , _cccUploadProtocol :: !(Maybe Text)
-    , _cccAccessToken    :: !(Maybe Text)
-    , _cccUploadType     :: !(Maybe Text)
-    , _cccPayload        :: !Configuration
-    , _cccCallback       :: !(Maybe Text)
+    , _cccAccessToken :: !(Maybe Text)
+    , _cccUploadType :: !(Maybe Text)
+    , _cccPayload :: !Configuration
+    , _cccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Get
     , plfgCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.get@ method which the
 -- 'ProjectsLocationsFunctionsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsFunctionsGetResource =
 -- /See:/ 'projectsLocationsFunctionsGet' smart constructor.
 data ProjectsLocationsFunctionsGet =
   ProjectsLocationsFunctionsGet'
-    { _plfgXgafv          :: !(Maybe Xgafv)
+    { _plfgXgafv :: !(Maybe Xgafv)
     , _plfgUploadProtocol :: !(Maybe Text)
-    , _plfgAccessToken    :: !(Maybe Text)
-    , _plfgUploadType     :: !(Maybe Text)
-    , _plfgName           :: !Text
-    , _plfgCallback       :: !(Maybe Text)
+    , _plfgAccessToken :: !(Maybe Text)
+    , _plfgUploadType :: !(Maybe Text)
+    , _plfgName :: !Text
+    , _plfgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ plfgUploadType
   = lens _plfgUploadType
       (\ s a -> s{_plfgUploadType = a})
 
--- | The name of the function which details should be obtained.
+-- | Required. The name of the function which details should be obtained.
 plfgName :: Lens' ProjectsLocationsFunctionsGet Text
 plfgName = lens _plfgName (\ s a -> s{_plfgName = a})
 

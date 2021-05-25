@@ -43,8 +43,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Publish
     , ptptCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.publish@ method which the
 -- 'ProjectsTopicsPublish' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsTopicsPublishResource =
 -- /See:/ 'projectsTopicsPublish' smart constructor.
 data ProjectsTopicsPublish =
   ProjectsTopicsPublish'
-    { _ptptXgafv          :: !(Maybe Xgafv)
+    { _ptptXgafv :: !(Maybe Xgafv)
     , _ptptUploadProtocol :: !(Maybe Text)
-    , _ptptAccessToken    :: !(Maybe Text)
-    , _ptptUploadType     :: !(Maybe Text)
-    , _ptptPayload        :: !PublishRequest
-    , _ptptTopic          :: !Text
-    , _ptptCallback       :: !(Maybe Text)
+    , _ptptAccessToken :: !(Maybe Text)
+    , _ptptUploadType :: !(Maybe Text)
+    , _ptptPayload :: !PublishRequest
+    , _ptptTopic :: !Text
+    , _ptptCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,8 +138,8 @@ ptptPayload :: Lens' ProjectsTopicsPublish PublishRequest
 ptptPayload
   = lens _ptptPayload (\ s a -> s{_ptptPayload = a})
 
--- | The messages in the request will be published on this topic. Format is
--- \`projects\/{project}\/topics\/{topic}\`.
+-- | Required. The messages in the request will be published on this topic.
+-- Format is \`projects\/{project}\/topics\/{topic}\`.
 ptptTopic :: Lens' ProjectsTopicsPublish Text
 ptptTopic
   = lens _ptptTopic (\ s a -> s{_ptptTopic = a})

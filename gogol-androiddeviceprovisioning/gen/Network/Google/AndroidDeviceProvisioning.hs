@@ -291,11 +291,13 @@ module Network.Google.AndroidDeviceProvisioning
     -- ** Company
     , Company
     , company
+    , cLanguageCode
     , cCompanyId
     , cCompanyName
     , cOwnerEmails
     , cTermsStatus
     , cName
+    , cSkipWelcomeEmail
     , cAdminEmails
 
     -- ** Xgafv
@@ -314,6 +316,7 @@ module Network.Google.AndroidDeviceProvisioning
     , DeviceClaim
     , deviceClaim
     , dcSectionType
+    , dcAdditionalService
     , dcVacationModeExpireTime
     , dcVacationModeStartTime
     , dcOwnerCompanyId
@@ -409,6 +412,9 @@ module Network.Google.AndroidDeviceProvisioning
     , cldrNextPageToken
     , cldrDevices
 
+    -- ** DeviceClaimAdditionalService
+    , DeviceClaimAdditionalService (..)
+
     -- ** UpdateDeviceMetadataInBatchRequest
     , UpdateDeviceMetadataInBatchRequest
     , updateDeviceMetadataInBatchRequest
@@ -437,34 +443,34 @@ module Network.Google.AndroidDeviceProvisioning
     , DevicesLongRunningOperationMetadataProcessingStatus (..)
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Create
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Delete
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Get
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.List
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Patch
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.ApplyConfiguration
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Get
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.List
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.RemoveConfiguration
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Unclaim
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.Dpcs.List
-import           Network.Google.Resource.AndroidDeviceProvisioning.Customers.List
-import           Network.Google.Resource.AndroidDeviceProvisioning.Operations.Get
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.Create
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.List
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Claim
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindByOwner
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Get
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Metadata
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Unclaim
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.UnclaimAsync
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.Customers.List
-import           Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.List
+import Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Create
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Delete
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Get
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.List
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Patch
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.ApplyConfiguration
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Get
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.List
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.RemoveConfiguration
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Unclaim
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.Dpcs.List
+import Network.Google.Resource.AndroidDeviceProvisioning.Customers.List
+import Network.Google.Resource.AndroidDeviceProvisioning.Operations.Get
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.Create
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.List
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Claim
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindByOwner
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Get
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Metadata
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Unclaim
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.UnclaimAsync
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.Customers.List
+import Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.List
 
 {- $resources
 TODO

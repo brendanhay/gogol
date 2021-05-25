@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Blogger.
+A client library for the Google Blogger API v3.
 
 
 ## Contribute

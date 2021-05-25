@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.SetProjectConfig
     , rpspcPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.setProjectConfig@ method which the
 -- 'RelyingPartySetProjectConfig' request conforms to.

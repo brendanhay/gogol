@@ -22,7 +22,7 @@
 --
 -- Fetch the representation of an existing Change.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.changes.get@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.changes.get@.
 module Network.Google.Resource.DNS.Changes.Get
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.DNS.Changes.Get
     , ChangesGet
 
     -- * Request Lenses
+    , cgXgafv
+    , cgUploadProtocol
     , cgProject
+    , cgAccessToken
     , cgChangeId
+    , cgUploadType
     , cgManagedZone
     , cgClientOperationId
+    , cgCallback
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.changes.get@ method which the
 -- 'ChangesGet' request conforms to.
@@ -53,18 +58,28 @@ type ChangesGetResource =
                Capture "managedZone" Text :>
                  "changes" :>
                    Capture "changeId" Text :>
-                     QueryParam "clientOperationId" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Change
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "clientOperationId" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Fetch the representation of an existing Change.
 --
 -- /See:/ 'changesGet' smart constructor.
 data ChangesGet =
   ChangesGet'
-    { _cgProject           :: !Text
-    , _cgChangeId          :: !Text
-    , _cgManagedZone       :: !Text
+    { _cgXgafv :: !(Maybe Xgafv)
+    , _cgUploadProtocol :: !(Maybe Text)
+    , _cgProject :: !Text
+    , _cgAccessToken :: !(Maybe Text)
+    , _cgChangeId :: !Text
+    , _cgUploadType :: !(Maybe Text)
+    , _cgManagedZone :: !Text
     , _cgClientOperationId :: !(Maybe Text)
+    , _cgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,13 +88,23 @@ data ChangesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cgXgafv'
+--
+-- * 'cgUploadProtocol'
+--
 -- * 'cgProject'
 --
+-- * 'cgAccessToken'
+--
 -- * 'cgChangeId'
+--
+-- * 'cgUploadType'
 --
 -- * 'cgManagedZone'
 --
 -- * 'cgClientOperationId'
+--
+-- * 'cgCallback'
 changesGet
     :: Text -- ^ 'cgProject'
     -> Text -- ^ 'cgChangeId'
@@ -87,23 +112,49 @@ changesGet
     -> ChangesGet
 changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
   ChangesGet'
-    { _cgProject = pCgProject_
+    { _cgXgafv = Nothing
+    , _cgUploadProtocol = Nothing
+    , _cgProject = pCgProject_
+    , _cgAccessToken = Nothing
     , _cgChangeId = pCgChangeId_
+    , _cgUploadType = Nothing
     , _cgManagedZone = pCgManagedZone_
     , _cgClientOperationId = Nothing
+    , _cgCallback = Nothing
     }
 
+
+-- | V1 error format.
+cgXgafv :: Lens' ChangesGet (Maybe Xgafv)
+cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cgUploadProtocol :: Lens' ChangesGet (Maybe Text)
+cgUploadProtocol
+  = lens _cgUploadProtocol
+      (\ s a -> s{_cgUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 cgProject :: Lens' ChangesGet Text
 cgProject
   = lens _cgProject (\ s a -> s{_cgProject = a})
 
+-- | OAuth access token.
+cgAccessToken :: Lens' ChangesGet (Maybe Text)
+cgAccessToken
+  = lens _cgAccessToken
+      (\ s a -> s{_cgAccessToken = a})
+
 -- | The identifier of the requested change, from a previous
 -- ResourceRecordSetsChangeResponse.
 cgChangeId :: Lens' ChangesGet Text
 cgChangeId
   = lens _cgChangeId (\ s a -> s{_cgChangeId = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cgUploadType :: Lens' ChangesGet (Maybe Text)
+cgUploadType
+  = lens _cgUploadType (\ s a -> s{_cgUploadType = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -120,6 +171,11 @@ cgClientOperationId
   = lens _cgClientOperationId
       (\ s a -> s{_cgClientOperationId = a})
 
+-- | JSONP
+cgCallback :: Lens' ChangesGet (Maybe Text)
+cgCallback
+  = lens _cgCallback (\ s a -> s{_cgCallback = a})
+
 instance GoogleRequest ChangesGet where
         type Rs ChangesGet = Change
         type Scopes ChangesGet =
@@ -128,8 +184,12 @@ instance GoogleRequest ChangesGet where
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ChangesGet'{..}
-          = go _cgProject _cgManagedZone _cgChangeId
+          = go _cgProject _cgManagedZone _cgChangeId _cgXgafv
+              _cgUploadProtocol
+              _cgAccessToken
+              _cgUploadType
               _cgClientOperationId
+              _cgCallback
               (Just AltJSON)
               dNSService
           where go

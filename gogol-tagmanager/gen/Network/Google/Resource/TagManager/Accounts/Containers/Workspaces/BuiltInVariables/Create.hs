@@ -22,7 +22,7 @@
 --
 -- Creates one or more GTM Built-In Variables.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.built_in_variables.create@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.built_in_variables.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Create
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltIn
 
     -- * Request Lenses
     , acwbivcParent
+    , acwbivcXgafv
+    , acwbivcUploadProtocol
+    , acwbivcAccessToken
+    , acwbivcUploadType
     , acwbivcType
+    , acwbivcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.built_in_variables.create@ method which the
 -- 'AccountsContainersWorkspacesBuiltInVariablesCreate' request conforms to.
@@ -48,11 +53,16 @@ type AccountsContainersWorkspacesBuiltInVariablesCreateResource
        "v2" :>
          Capture "parent" Text :>
            "built_in_variables" :>
-             QueryParams "type"
-               AccountsContainersWorkspacesBuilt_in_variablesCreateType
-               :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] CreateBuiltInVariableResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParams "type"
+                       AccountsContainersWorkspacesBuilt_in_variablesCreateType
+                       :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] CreateBuiltInVariableResponse
 
 -- | Creates one or more GTM Built-In Variables.
 --
@@ -60,7 +70,12 @@ type AccountsContainersWorkspacesBuiltInVariablesCreateResource
 data AccountsContainersWorkspacesBuiltInVariablesCreate =
   AccountsContainersWorkspacesBuiltInVariablesCreate'
     { _acwbivcParent :: !Text
-    , _acwbivcType   :: !(Maybe [AccountsContainersWorkspacesBuilt_in_variablesCreateType])
+    , _acwbivcXgafv :: !(Maybe Xgafv)
+    , _acwbivcUploadProtocol :: !(Maybe Text)
+    , _acwbivcAccessToken :: !(Maybe Text)
+    , _acwbivcUploadType :: !(Maybe Text)
+    , _acwbivcType :: !(Maybe [AccountsContainersWorkspacesBuilt_in_variablesCreateType])
+    , _acwbivcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,13 +86,30 @@ data AccountsContainersWorkspacesBuiltInVariablesCreate =
 --
 -- * 'acwbivcParent'
 --
+-- * 'acwbivcXgafv'
+--
+-- * 'acwbivcUploadProtocol'
+--
+-- * 'acwbivcAccessToken'
+--
+-- * 'acwbivcUploadType'
+--
 -- * 'acwbivcType'
+--
+-- * 'acwbivcCallback'
 accountsContainersWorkspacesBuiltInVariablesCreate
     :: Text -- ^ 'acwbivcParent'
     -> AccountsContainersWorkspacesBuiltInVariablesCreate
 accountsContainersWorkspacesBuiltInVariablesCreate pAcwbivcParent_ =
   AccountsContainersWorkspacesBuiltInVariablesCreate'
-    {_acwbivcParent = pAcwbivcParent_, _acwbivcType = Nothing}
+    { _acwbivcParent = pAcwbivcParent_
+    , _acwbivcXgafv = Nothing
+    , _acwbivcUploadProtocol = Nothing
+    , _acwbivcAccessToken = Nothing
+    , _acwbivcUploadType = Nothing
+    , _acwbivcType = Nothing
+    , _acwbivcCallback = Nothing
+    }
 
 
 -- | GTM Workspace\'s API relative path. Example:
@@ -87,12 +119,41 @@ acwbivcParent
   = lens _acwbivcParent
       (\ s a -> s{_acwbivcParent = a})
 
+-- | V1 error format.
+acwbivcXgafv :: Lens' AccountsContainersWorkspacesBuiltInVariablesCreate (Maybe Xgafv)
+acwbivcXgafv
+  = lens _acwbivcXgafv (\ s a -> s{_acwbivcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwbivcUploadProtocol :: Lens' AccountsContainersWorkspacesBuiltInVariablesCreate (Maybe Text)
+acwbivcUploadProtocol
+  = lens _acwbivcUploadProtocol
+      (\ s a -> s{_acwbivcUploadProtocol = a})
+
+-- | OAuth access token.
+acwbivcAccessToken :: Lens' AccountsContainersWorkspacesBuiltInVariablesCreate (Maybe Text)
+acwbivcAccessToken
+  = lens _acwbivcAccessToken
+      (\ s a -> s{_acwbivcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwbivcUploadType :: Lens' AccountsContainersWorkspacesBuiltInVariablesCreate (Maybe Text)
+acwbivcUploadType
+  = lens _acwbivcUploadType
+      (\ s a -> s{_acwbivcUploadType = a})
+
 -- | The types of built-in variables to enable.
 acwbivcType :: Lens' AccountsContainersWorkspacesBuiltInVariablesCreate [AccountsContainersWorkspacesBuilt_in_variablesCreateType]
 acwbivcType
   = lens _acwbivcType (\ s a -> s{_acwbivcType = a}) .
       _Default
       . _Coerce
+
+-- | JSONP
+acwbivcCallback :: Lens' AccountsContainersWorkspacesBuiltInVariablesCreate (Maybe Text)
+acwbivcCallback
+  = lens _acwbivcCallback
+      (\ s a -> s{_acwbivcCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesBuiltInVariablesCreate
@@ -106,7 +167,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesBuiltInVariablesCreate'{..}
-          = go _acwbivcParent (_acwbivcType ^. _Default)
+          = go _acwbivcParent _acwbivcXgafv
+              _acwbivcUploadProtocol
+              _acwbivcAccessToken
+              _acwbivcUploadType
+              (_acwbivcType ^. _Default)
+              _acwbivcCallback
               (Just AltJSON)
               tagManagerService
           where go

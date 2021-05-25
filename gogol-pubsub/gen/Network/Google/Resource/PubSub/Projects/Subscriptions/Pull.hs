@@ -44,8 +44,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
     , pspsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.pull@ method which the
 -- 'ProjectsSubscriptionsPull' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsSubscriptionsPullResource =
 -- /See:/ 'projectsSubscriptionsPull' smart constructor.
 data ProjectsSubscriptionsPull =
   ProjectsSubscriptionsPull'
-    { _pspsXgafv          :: !(Maybe Xgafv)
+    { _pspsXgafv :: !(Maybe Xgafv)
     , _pspsUploadProtocol :: !(Maybe Text)
-    , _pspsAccessToken    :: !(Maybe Text)
-    , _pspsUploadType     :: !(Maybe Text)
-    , _pspsPayload        :: !PullRequest
-    , _pspsSubscription   :: !Text
-    , _pspsCallback       :: !(Maybe Text)
+    , _pspsAccessToken :: !(Maybe Text)
+    , _pspsUploadType :: !(Maybe Text)
+    , _pspsPayload :: !PullRequest
+    , _pspsSubscription :: !Text
+    , _pspsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,8 +140,8 @@ pspsPayload :: Lens' ProjectsSubscriptionsPull PullRequest
 pspsPayload
   = lens _pspsPayload (\ s a -> s{_pspsPayload = a})
 
--- | The subscription from which messages should be pulled. Format is
--- \`projects\/{project}\/subscriptions\/{sub}\`.
+-- | Required. The subscription from which messages should be pulled. Format
+-- is \`projects\/{project}\/subscriptions\/{sub}\`.
 pspsSubscription :: Lens' ProjectsSubscriptionsPull Text
 pspsSubscription
   = lens _pspsSubscription

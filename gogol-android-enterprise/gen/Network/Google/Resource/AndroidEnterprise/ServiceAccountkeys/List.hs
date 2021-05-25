@@ -37,11 +37,16 @@ module Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.List
     , ServiceAccountkeysList
 
     -- * Request Lenses
+    , salXgafv
+    , salUploadProtocol
     , salEnterpriseId
+    , salAccessToken
+    , salUploadType
+    , salCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.serviceaccountkeys.list@ method which the
 -- 'ServiceAccountkeysList' request conforms to.
@@ -51,8 +56,13 @@ type ServiceAccountkeysListResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "serviceAccountKeys" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ServiceAccountKeysListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ServiceAccountKeysListResponse
 
 -- | Lists all active credentials for the service account associated with
 -- this enterprise. Only the ID and key type are returned. The calling
@@ -61,9 +71,14 @@ type ServiceAccountkeysListResource =
 -- service account by calling Enterprises.SetAccount.
 --
 -- /See:/ 'serviceAccountkeysList' smart constructor.
-newtype ServiceAccountkeysList =
+data ServiceAccountkeysList =
   ServiceAccountkeysList'
-    { _salEnterpriseId :: Text
+    { _salXgafv :: !(Maybe Xgafv)
+    , _salUploadProtocol :: !(Maybe Text)
+    , _salEnterpriseId :: !Text
+    , _salAccessToken :: !(Maybe Text)
+    , _salUploadType :: !(Maybe Text)
+    , _salCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,13 +87,40 @@ newtype ServiceAccountkeysList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'salXgafv'
+--
+-- * 'salUploadProtocol'
+--
 -- * 'salEnterpriseId'
+--
+-- * 'salAccessToken'
+--
+-- * 'salUploadType'
+--
+-- * 'salCallback'
 serviceAccountkeysList
     :: Text -- ^ 'salEnterpriseId'
     -> ServiceAccountkeysList
 serviceAccountkeysList pSalEnterpriseId_ =
-  ServiceAccountkeysList' {_salEnterpriseId = pSalEnterpriseId_}
+  ServiceAccountkeysList'
+    { _salXgafv = Nothing
+    , _salUploadProtocol = Nothing
+    , _salEnterpriseId = pSalEnterpriseId_
+    , _salAccessToken = Nothing
+    , _salUploadType = Nothing
+    , _salCallback = Nothing
+    }
 
+
+-- | V1 error format.
+salXgafv :: Lens' ServiceAccountkeysList (Maybe Xgafv)
+salXgafv = lens _salXgafv (\ s a -> s{_salXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+salUploadProtocol :: Lens' ServiceAccountkeysList (Maybe Text)
+salUploadProtocol
+  = lens _salUploadProtocol
+      (\ s a -> s{_salUploadProtocol = a})
 
 -- | The ID of the enterprise.
 salEnterpriseId :: Lens' ServiceAccountkeysList Text
@@ -86,13 +128,34 @@ salEnterpriseId
   = lens _salEnterpriseId
       (\ s a -> s{_salEnterpriseId = a})
 
+-- | OAuth access token.
+salAccessToken :: Lens' ServiceAccountkeysList (Maybe Text)
+salAccessToken
+  = lens _salAccessToken
+      (\ s a -> s{_salAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+salUploadType :: Lens' ServiceAccountkeysList (Maybe Text)
+salUploadType
+  = lens _salUploadType
+      (\ s a -> s{_salUploadType = a})
+
+-- | JSONP
+salCallback :: Lens' ServiceAccountkeysList (Maybe Text)
+salCallback
+  = lens _salCallback (\ s a -> s{_salCallback = a})
+
 instance GoogleRequest ServiceAccountkeysList where
         type Rs ServiceAccountkeysList =
              ServiceAccountKeysListResponse
         type Scopes ServiceAccountkeysList =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ServiceAccountkeysList'{..}
-          = go _salEnterpriseId (Just AltJSON)
+          = go _salEnterpriseId _salXgafv _salUploadProtocol
+              _salAccessToken
+              _salUploadType
+              _salCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

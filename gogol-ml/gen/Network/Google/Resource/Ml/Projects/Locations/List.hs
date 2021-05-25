@@ -22,7 +22,7 @@
 --
 -- List all locations that provides at least one type of CMLE capability.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.locations.list@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.locations.list@.
 module Network.Google.Resource.Ml.Projects.Locations.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Ml.Projects.Locations.List
     , pllCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsListResource =
 -- /See:/ 'projectsLocationsList' smart constructor.
 data ProjectsLocationsList =
   ProjectsLocationsList'
-    { _pllParent         :: !Text
-    , _pllXgafv          :: !(Maybe Xgafv)
+    { _pllParent :: !Text
+    , _pllXgafv :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
-    , _pllAccessToken    :: !(Maybe Text)
-    , _pllUploadType     :: !(Maybe Text)
-    , _pllPageToken      :: !(Maybe Text)
-    , _pllPageSize       :: !(Maybe (Textual Int32))
-    , _pllCallback       :: !(Maybe Text)
+    , _pllAccessToken :: !(Maybe Text)
+    , _pllUploadType :: !(Maybe Text)
+    , _pllPageToken :: !(Maybe Text)
+    , _pllPageSize :: !(Maybe (Textual Int32))
+    , _pllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -168,7 +168,8 @@ instance GoogleRequest ProjectsLocationsList where
         type Rs ProjectsLocationsList =
              GoogleCloudMlV1__ListLocationsResponse
         type Scopes ProjectsLocationsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsLocationsList'{..}
           = go _pllParent _pllXgafv _pllUploadProtocol
               _pllAccessToken

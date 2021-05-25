@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
     , ewtcCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.webTokens.create@ method which the
 -- 'EnterprisesWebTokensCreate' request conforms to.
@@ -66,13 +66,13 @@ type EnterprisesWebTokensCreateResource =
 -- /See:/ 'enterprisesWebTokensCreate' smart constructor.
 data EnterprisesWebTokensCreate =
   EnterprisesWebTokensCreate'
-    { _ewtcParent         :: !Text
-    , _ewtcXgafv          :: !(Maybe Xgafv)
+    { _ewtcParent :: !Text
+    , _ewtcXgafv :: !(Maybe Xgafv)
     , _ewtcUploadProtocol :: !(Maybe Text)
-    , _ewtcAccessToken    :: !(Maybe Text)
-    , _ewtcUploadType     :: !(Maybe Text)
-    , _ewtcPayload        :: !WebToken
-    , _ewtcCallback       :: !(Maybe Text)
+    , _ewtcAccessToken :: !(Maybe Text)
+    , _ewtcUploadType :: !(Maybe Text)
+    , _ewtcPayload :: !WebToken
+    , _ewtcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

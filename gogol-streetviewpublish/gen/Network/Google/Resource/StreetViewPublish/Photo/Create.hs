@@ -52,8 +52,8 @@ module Network.Google.Resource.StreetViewPublish.Photo.Create
     , pcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.create@ method which the
 -- 'PhotoCreate' request conforms to.
@@ -84,12 +84,12 @@ type PhotoCreateResource =
 -- /See:/ 'photoCreate' smart constructor.
 data PhotoCreate =
   PhotoCreate'
-    { _pcXgafv          :: !(Maybe Xgafv)
+    { _pcXgafv :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcAccessToken    :: !(Maybe Text)
-    , _pcUploadType     :: !(Maybe Text)
-    , _pcPayload        :: !Photo
-    , _pcCallback       :: !(Maybe Text)
+    , _pcAccessToken :: !(Maybe Text)
+    , _pcUploadType :: !(Maybe Text)
+    , _pcPayload :: !Photo
+    , _pcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

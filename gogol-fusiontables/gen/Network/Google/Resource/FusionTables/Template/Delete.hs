@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Template.Delete
     , tTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.delete@ method which the
 -- 'TemplateDelete' request conforms to.
@@ -57,7 +57,7 @@ type TemplateDeleteResource =
 data TemplateDelete =
   TemplateDelete'
     { _tTemplateId :: !(Textual Int32)
-    , _tTableId    :: !Text
+    , _tTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

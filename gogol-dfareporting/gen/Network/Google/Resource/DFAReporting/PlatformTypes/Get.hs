@@ -22,7 +22,7 @@
 --
 -- Gets one platform type by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.platformTypes.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.platformTypes.get@.
 module Network.Google.Resource.DFAReporting.PlatformTypes.Get
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.Get
     , PlatformTypesGet
 
     -- * Request Lenses
+    , ptgXgafv
+    , ptgUploadProtocol
+    , ptgAccessToken
+    , ptgUploadType
     , ptgProFileId
     , ptgId
+    , ptgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.platformTypes.get@ method which the
 -- 'PlatformTypesGet' request conforms to.
 type PlatformTypesGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
                Capture "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] PlatformType
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] PlatformType
 
 -- | Gets one platform type by ID.
 --
 -- /See:/ 'platformTypesGet' smart constructor.
 data PlatformTypesGet =
   PlatformTypesGet'
-    { _ptgProFileId :: !(Textual Int64)
-    , _ptgId        :: !(Textual Int64)
+    { _ptgXgafv :: !(Maybe Xgafv)
+    , _ptgUploadProtocol :: !(Maybe Text)
+    , _ptgAccessToken :: !(Maybe Text)
+    , _ptgUploadType :: !(Maybe Text)
+    , _ptgProFileId :: !(Textual Int64)
+    , _ptgId :: !(Textual Int64)
+    , _ptgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,56 @@ data PlatformTypesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ptgXgafv'
+--
+-- * 'ptgUploadProtocol'
+--
+-- * 'ptgAccessToken'
+--
+-- * 'ptgUploadType'
+--
 -- * 'ptgProFileId'
 --
 -- * 'ptgId'
+--
+-- * 'ptgCallback'
 platformTypesGet
     :: Int64 -- ^ 'ptgProFileId'
     -> Int64 -- ^ 'ptgId'
     -> PlatformTypesGet
 platformTypesGet pPtgProFileId_ pPtgId_ =
   PlatformTypesGet'
-    {_ptgProFileId = _Coerce # pPtgProFileId_, _ptgId = _Coerce # pPtgId_}
+    { _ptgXgafv = Nothing
+    , _ptgUploadProtocol = Nothing
+    , _ptgAccessToken = Nothing
+    , _ptgUploadType = Nothing
+    , _ptgProFileId = _Coerce # pPtgProFileId_
+    , _ptgId = _Coerce # pPtgId_
+    , _ptgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ptgXgafv :: Lens' PlatformTypesGet (Maybe Xgafv)
+ptgXgafv = lens _ptgXgafv (\ s a -> s{_ptgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ptgUploadProtocol :: Lens' PlatformTypesGet (Maybe Text)
+ptgUploadProtocol
+  = lens _ptgUploadProtocol
+      (\ s a -> s{_ptgUploadProtocol = a})
+
+-- | OAuth access token.
+ptgAccessToken :: Lens' PlatformTypesGet (Maybe Text)
+ptgAccessToken
+  = lens _ptgAccessToken
+      (\ s a -> s{_ptgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ptgUploadType :: Lens' PlatformTypesGet (Maybe Text)
+ptgUploadType
+  = lens _ptgUploadType
+      (\ s a -> s{_ptgUploadType = a})
 
 -- | User profile ID associated with this request.
 ptgProFileId :: Lens' PlatformTypesGet Int64
@@ -89,12 +143,22 @@ ptgId :: Lens' PlatformTypesGet Int64
 ptgId
   = lens _ptgId (\ s a -> s{_ptgId = a}) . _Coerce
 
+-- | JSONP
+ptgCallback :: Lens' PlatformTypesGet (Maybe Text)
+ptgCallback
+  = lens _ptgCallback (\ s a -> s{_ptgCallback = a})
+
 instance GoogleRequest PlatformTypesGet where
         type Rs PlatformTypesGet = PlatformType
         type Scopes PlatformTypesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlatformTypesGet'{..}
-          = go _ptgProFileId _ptgId (Just AltJSON)
+          = go _ptgProFileId _ptgId _ptgXgafv
+              _ptgUploadProtocol
+              _ptgAccessToken
+              _ptgUploadType
+              _ptgCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

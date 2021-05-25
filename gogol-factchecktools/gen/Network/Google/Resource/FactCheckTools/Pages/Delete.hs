@@ -41,8 +41,8 @@ module Network.Google.Resource.FactCheckTools.Pages.Delete
     , pdCallback
     ) where
 
-import           Network.Google.FactCheckTools.Types
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @factchecktools.pages.delete@ method which the
 -- 'PagesDelete' request conforms to.
@@ -62,12 +62,12 @@ type PagesDeleteResource =
 -- /See:/ 'pagesDelete' smart constructor.
 data PagesDelete =
   PagesDelete'
-    { _pdXgafv          :: !(Maybe Xgafv)
+    { _pdXgafv :: !(Maybe Xgafv)
     , _pdUploadProtocol :: !(Maybe Text)
-    , _pdAccessToken    :: !(Maybe Text)
-    , _pdUploadType     :: !(Maybe Text)
-    , _pdName           :: !Text
-    , _pdCallback       :: !(Maybe Text)
+    , _pdAccessToken :: !(Maybe Text)
+    , _pdUploadType :: !(Maybe Text)
+    , _pdName :: !Text
+    , _pdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

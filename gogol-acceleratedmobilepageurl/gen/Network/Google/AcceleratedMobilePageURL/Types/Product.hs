@@ -17,16 +17,16 @@
 --
 module Network.Google.AcceleratedMobilePageURL.Types.Product where
 
-import           Network.Google.AcceleratedMobilePageURL.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AcceleratedMobilePageURL.Types.Sum
+import Network.Google.Prelude
 
 -- | AMP URL Error resource for a requested URL that couldn\'t be found.
 --
 -- /See:/ 'ampURLError' smart constructor.
 data AmpURLError =
   AmpURLError'
-    { _aueOriginalURL  :: !(Maybe Text)
-    , _aueErrorCode    :: !(Maybe AmpURLErrorErrorCode)
+    { _aueOriginalURL :: !(Maybe Text)
+    , _aueErrorCode :: !(Maybe AmpURLErrorErrorCode)
     , _aueErrorMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -89,7 +89,7 @@ instance ToJSON AmpURLError where
 -- /See:/ 'batchGetAmpURLsResponse' smart constructor.
 data BatchGetAmpURLsResponse =
   BatchGetAmpURLsResponse'
-    { _bgaurAmpURLs   :: !(Maybe [AmpURL])
+    { _bgaurAmpURLs :: !(Maybe [AmpURL])
     , _bgaurURLErrors :: !(Maybe [AmpURLError])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -146,7 +146,7 @@ instance ToJSON BatchGetAmpURLsResponse where
 -- /See:/ 'batchGetAmpURLsRequest' smart constructor.
 data BatchGetAmpURLsRequest =
   BatchGetAmpURLsRequest'
-    { _bgaurURLs           :: !(Maybe [Text])
+    { _bgaurURLs :: !(Maybe [Text])
     , _bgaurLookupStrategy :: !(Maybe BatchGetAmpURLsRequestLookupStrategy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -201,8 +201,8 @@ instance ToJSON BatchGetAmpURLsRequest where
 data AmpURL =
   AmpURL'
     { _auOriginalURL :: !(Maybe Text)
-    , _auAmpURL      :: !(Maybe Text)
-    , _auCdnAmpURL   :: !(Maybe Text)
+    , _auAmpURL :: !(Maybe Text)
+    , _auCdnAmpURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

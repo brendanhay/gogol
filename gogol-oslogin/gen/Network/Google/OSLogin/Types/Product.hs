@@ -17,8 +17,8 @@
 --
 module Network.Google.OSLogin.Types.Product where
 
-import           Network.Google.OSLogin.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types.Sum
+import Network.Google.Prelude
 
 -- | A map from SSH public key fingerprint to the associated key object.
 --
@@ -90,7 +90,7 @@ data LoginProFile =
   LoginProFile'
     { _lpfPosixAccounts :: !(Maybe [PosixAccount])
     , _lpfSSHPublicKeys :: !(Maybe LoginProFileSSHPublicKeys)
-    , _lpfName          :: !(Maybe Text)
+    , _lpfName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,7 +128,7 @@ lpfSSHPublicKeys
   = lens _lpfSSHPublicKeys
       (\ s a -> s{_lpfSSHPublicKeys = a})
 
--- | A unique user ID.
+-- | Required. A unique user ID.
 lpfName :: Lens' LoginProFile (Maybe Text)
 lpfName = lens _lpfName (\ s a -> s{_lpfName = a})
 
@@ -152,9 +152,10 @@ instance ToJSON LoginProFile where
 -- | A response message for importing an SSH public key.
 --
 -- /See:/ 'importSSHPublicKeyResponse' smart constructor.
-newtype ImportSSHPublicKeyResponse =
+data ImportSSHPublicKeyResponse =
   ImportSSHPublicKeyResponse'
-    { _ispkrLoginProFile :: Maybe LoginProFile
+    { _ispkrLoginProFile :: !(Maybe LoginProFile)
+    , _ispkrDetails :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -164,10 +165,13 @@ newtype ImportSSHPublicKeyResponse =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ispkrLoginProFile'
+--
+-- * 'ispkrDetails'
 importSSHPublicKeyResponse
     :: ImportSSHPublicKeyResponse
 importSSHPublicKeyResponse =
-  ImportSSHPublicKeyResponse' {_ispkrLoginProFile = Nothing}
+  ImportSSHPublicKeyResponse'
+    {_ispkrLoginProFile = Nothing, _ispkrDetails = Nothing}
 
 
 -- | The login profile information for the user.
@@ -176,26 +180,33 @@ ispkrLoginProFile
   = lens _ispkrLoginProFile
       (\ s a -> s{_ispkrLoginProFile = a})
 
+-- | Detailed information about import results.
+ispkrDetails :: Lens' ImportSSHPublicKeyResponse (Maybe Text)
+ispkrDetails
+  = lens _ispkrDetails (\ s a -> s{_ispkrDetails = a})
+
 instance FromJSON ImportSSHPublicKeyResponse where
         parseJSON
           = withObject "ImportSSHPublicKeyResponse"
               (\ o ->
                  ImportSSHPublicKeyResponse' <$>
-                   (o .:? "loginProfile"))
+                   (o .:? "loginProfile") <*> (o .:? "details"))
 
 instance ToJSON ImportSSHPublicKeyResponse where
         toJSON ImportSSHPublicKeyResponse'{..}
           = object
               (catMaybes
-                 [("loginProfile" .=) <$> _ispkrLoginProFile])
+                 [("loginProfile" .=) <$> _ispkrLoginProFile,
+                  ("details" .=) <$> _ispkrDetails])
 
 -- | The SSH public key information associated with a Google account.
 --
 -- /See:/ 'sshPublicKey' smart constructor.
 data SSHPublicKey =
   SSHPublicKey'
-    { _spkFingerprint        :: !(Maybe Text)
-    , _spkKey                :: !(Maybe Text)
+    { _spkFingerprint :: !(Maybe Text)
+    , _spkKey :: !(Maybe Text)
+    , _spkName :: !(Maybe Text)
     , _spkExpirationTimeUsec :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -209,6 +220,8 @@ data SSHPublicKey =
 --
 -- * 'spkKey'
 --
+-- * 'spkName'
+--
 -- * 'spkExpirationTimeUsec'
 sshPublicKey
     :: SSHPublicKey
@@ -216,6 +229,7 @@ sshPublicKey =
   SSHPublicKey'
     { _spkFingerprint = Nothing
     , _spkKey = Nothing
+    , _spkName = Nothing
     , _spkExpirationTimeUsec = Nothing
     }
 
@@ -226,10 +240,13 @@ spkFingerprint
   = lens _spkFingerprint
       (\ s a -> s{_spkFingerprint = a})
 
--- | Public key text in SSH format, defined by
--- <https://www.ietf.org/rfc/rfc4253.txt RFC4253> section 6.6.
+-- | Public key text in SSH format, defined by RFC4253 section 6.6.
 spkKey :: Lens' SSHPublicKey (Maybe Text)
 spkKey = lens _spkKey (\ s a -> s{_spkKey = a})
+
+-- | Output only. The canonical resource name.
+spkName :: Lens' SSHPublicKey (Maybe Text)
+spkName = lens _spkName (\ s a -> s{_spkName = a})
 
 -- | An expiration time in microseconds since epoch.
 spkExpirationTimeUsec :: Lens' SSHPublicKey (Maybe Int64)
@@ -244,14 +261,15 @@ instance FromJSON SSHPublicKey where
               (\ o ->
                  SSHPublicKey' <$>
                    (o .:? "fingerprint") <*> (o .:? "key") <*>
-                     (o .:? "expirationTimeUsec"))
+                     (o .:? "name")
+                     <*> (o .:? "expirationTimeUsec"))
 
 instance ToJSON SSHPublicKey where
         toJSON SSHPublicKey'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _spkFingerprint,
-                  ("key" .=) <$> _spkKey,
+                  ("key" .=) <$> _spkKey, ("name" .=) <$> _spkName,
                   ("expirationTimeUsec" .=) <$>
                     _spkExpirationTimeUsec])
 
@@ -260,16 +278,17 @@ instance ToJSON SSHPublicKey where
 -- /See:/ 'posixAccount' smart constructor.
 data PosixAccount =
   PosixAccount'
-    { _paGecos               :: !(Maybe Text)
-    , _paUid                 :: !(Maybe (Textual Int64))
-    , _paUsername            :: !(Maybe Text)
-    , _paShell               :: !(Maybe Text)
-    , _paPrimary             :: !(Maybe Bool)
-    , _paAccountId           :: !(Maybe Text)
-    , _paGid                 :: !(Maybe (Textual Int64))
+    { _paGecos :: !(Maybe Text)
+    , _paUid :: !(Maybe (Textual Int64))
+    , _paUsername :: !(Maybe Text)
+    , _paShell :: !(Maybe Text)
+    , _paPrimary :: !(Maybe Bool)
+    , _paAccountId :: !(Maybe Text)
+    , _paName :: !(Maybe Text)
+    , _paGid :: !(Maybe (Textual Int64))
     , _paOperatingSystemType :: !(Maybe PosixAccountOperatingSystemType)
-    , _paSystemId            :: !(Maybe Text)
-    , _paHomeDirectory       :: !(Maybe Text)
+    , _paSystemId :: !(Maybe Text)
+    , _paHomeDirectory :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -290,6 +309,8 @@ data PosixAccount =
 --
 -- * 'paAccountId'
 --
+-- * 'paName'
+--
 -- * 'paGid'
 --
 -- * 'paOperatingSystemType'
@@ -307,6 +328,7 @@ posixAccount =
     , _paShell = Nothing
     , _paPrimary = Nothing
     , _paAccountId = Nothing
+    , _paName = Nothing
     , _paGid = Nothing
     , _paOperatingSystemType = Nothing
     , _paSystemId = Nothing
@@ -343,6 +365,10 @@ paAccountId :: Lens' PosixAccount (Maybe Text)
 paAccountId
   = lens _paAccountId (\ s a -> s{_paAccountId = a})
 
+-- | Output only. The canonical resource name.
+paName :: Lens' PosixAccount (Maybe Text)
+paName = lens _paName (\ s a -> s{_paName = a})
+
 -- | The default group ID.
 paGid :: Lens' PosixAccount (Maybe Int64)
 paGid
@@ -377,6 +403,7 @@ instance FromJSON PosixAccount where
                      <*> (o .:? "shell")
                      <*> (o .:? "primary")
                      <*> (o .:? "accountId")
+                     <*> (o .:? "name")
                      <*> (o .:? "gid")
                      <*> (o .:? "operatingSystemType")
                      <*> (o .:? "systemId")
@@ -391,7 +418,7 @@ instance ToJSON PosixAccount where
                   ("shell" .=) <$> _paShell,
                   ("primary" .=) <$> _paPrimary,
                   ("accountId" .=) <$> _paAccountId,
-                  ("gid" .=) <$> _paGid,
+                  ("name" .=) <$> _paName, ("gid" .=) <$> _paGid,
                   ("operatingSystemType" .=) <$>
                     _paOperatingSystemType,
                   ("systemId" .=) <$> _paSystemId,

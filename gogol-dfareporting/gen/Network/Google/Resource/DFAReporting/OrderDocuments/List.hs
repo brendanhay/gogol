@@ -23,7 +23,7 @@
 -- Retrieves a list of order documents, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.orderDocuments.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.orderDocuments.list@.
 module Network.Google.Resource.DFAReporting.OrderDocuments.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
     , OrderDocumentsList
 
     -- * Request Lenses
+    , odlXgafv
+    , odlUploadProtocol
+    , odlAccessToken
     , odlSearchString
+    , odlUploadType
     , odlIds
     , odlProFileId
     , odlSortOrder
@@ -45,32 +49,45 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
     , odlApproved
     , odlSiteId
     , odlMaxResults
+    , odlCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.orderDocuments.list@ method which the
 -- 'OrderDocumentsList' request conforms to.
 type OrderDocumentsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
                Capture "projectId" (Textual Int64) :>
                  "orderDocuments" :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "sortOrder" OrderDocumentsListSortOrder :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" OrderDocumentsListSortField :>
-                             QueryParams "orderId" (Textual Int64) :>
-                               QueryParam "approved" Bool :>
-                                 QueryParams "siteId" (Textual Int64) :>
-                                   QueryParam "maxResults" (Textual Int32) :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] OrderDocumentsListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "sortOrder"
+                                 OrderDocumentsListSortOrder
+                                 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     OrderDocumentsListSortField
+                                     :>
+                                     QueryParams "orderId" (Textual Int64) :>
+                                       QueryParam "approved" Bool :>
+                                         QueryParams "siteId" (Textual Int64) :>
+                                           QueryParam "maxResults"
+                                             (Textual Int32)
+                                             :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON]
+                                                   OrderDocumentsListResponse
 
 -- | Retrieves a list of order documents, possibly filtered. This method
 -- supports paging.
@@ -78,17 +95,22 @@ type OrderDocumentsListResource =
 -- /See:/ 'orderDocumentsList' smart constructor.
 data OrderDocumentsList =
   OrderDocumentsList'
-    { _odlSearchString :: !(Maybe Text)
-    , _odlIds          :: !(Maybe [Textual Int64])
-    , _odlProFileId    :: !(Textual Int64)
-    , _odlSortOrder    :: !OrderDocumentsListSortOrder
-    , _odlPageToken    :: !(Maybe Text)
-    , _odlProjectId    :: !(Textual Int64)
-    , _odlSortField    :: !OrderDocumentsListSortField
-    , _odlOrderId      :: !(Maybe [Textual Int64])
-    , _odlApproved     :: !(Maybe Bool)
-    , _odlSiteId       :: !(Maybe [Textual Int64])
-    , _odlMaxResults   :: !(Textual Int32)
+    { _odlXgafv :: !(Maybe Xgafv)
+    , _odlUploadProtocol :: !(Maybe Text)
+    , _odlAccessToken :: !(Maybe Text)
+    , _odlSearchString :: !(Maybe Text)
+    , _odlUploadType :: !(Maybe Text)
+    , _odlIds :: !(Maybe [Textual Int64])
+    , _odlProFileId :: !(Textual Int64)
+    , _odlSortOrder :: !OrderDocumentsListSortOrder
+    , _odlPageToken :: !(Maybe Text)
+    , _odlProjectId :: !(Textual Int64)
+    , _odlSortField :: !OrderDocumentsListSortField
+    , _odlOrderId :: !(Maybe [Textual Int64])
+    , _odlApproved :: !(Maybe Bool)
+    , _odlSiteId :: !(Maybe [Textual Int64])
+    , _odlMaxResults :: !(Textual Int32)
+    , _odlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -97,7 +119,15 @@ data OrderDocumentsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'odlXgafv'
+--
+-- * 'odlUploadProtocol'
+--
+-- * 'odlAccessToken'
+--
 -- * 'odlSearchString'
+--
+-- * 'odlUploadType'
 --
 -- * 'odlIds'
 --
@@ -118,13 +148,19 @@ data OrderDocumentsList =
 -- * 'odlSiteId'
 --
 -- * 'odlMaxResults'
+--
+-- * 'odlCallback'
 orderDocumentsList
     :: Int64 -- ^ 'odlProFileId'
     -> Int64 -- ^ 'odlProjectId'
     -> OrderDocumentsList
 orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
   OrderDocumentsList'
-    { _odlSearchString = Nothing
+    { _odlXgafv = Nothing
+    , _odlUploadProtocol = Nothing
+    , _odlAccessToken = Nothing
+    , _odlSearchString = Nothing
+    , _odlUploadType = Nothing
     , _odlIds = Nothing
     , _odlProFileId = _Coerce # pOdlProFileId_
     , _odlSortOrder = ODLSOAscending
@@ -135,8 +171,25 @@ orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
     , _odlApproved = Nothing
     , _odlSiteId = Nothing
     , _odlMaxResults = 1000
+    , _odlCallback = Nothing
     }
 
+
+-- | V1 error format.
+odlXgafv :: Lens' OrderDocumentsList (Maybe Xgafv)
+odlXgafv = lens _odlXgafv (\ s a -> s{_odlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+odlUploadProtocol :: Lens' OrderDocumentsList (Maybe Text)
+odlUploadProtocol
+  = lens _odlUploadProtocol
+      (\ s a -> s{_odlUploadProtocol = a})
+
+-- | OAuth access token.
+odlAccessToken :: Lens' OrderDocumentsList (Maybe Text)
+odlAccessToken
+  = lens _odlAccessToken
+      (\ s a -> s{_odlAccessToken = a})
 
 -- | Allows searching for order documents by name or ID. Wildcards (*) are
 -- allowed. For example, \"orderdocument*2015\" will return order documents
@@ -150,6 +203,12 @@ odlSearchString :: Lens' OrderDocumentsList (Maybe Text)
 odlSearchString
   = lens _odlSearchString
       (\ s a -> s{_odlSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+odlUploadType :: Lens' OrderDocumentsList (Maybe Text)
+odlUploadType
+  = lens _odlUploadType
+      (\ s a -> s{_odlUploadType = a})
 
 -- | Select only order documents with these IDs.
 odlIds :: Lens' OrderDocumentsList [Int64]
@@ -211,13 +270,22 @@ odlMaxResults
       (\ s a -> s{_odlMaxResults = a})
       . _Coerce
 
+-- | JSONP
+odlCallback :: Lens' OrderDocumentsList (Maybe Text)
+odlCallback
+  = lens _odlCallback (\ s a -> s{_odlCallback = a})
+
 instance GoogleRequest OrderDocumentsList where
         type Rs OrderDocumentsList =
              OrderDocumentsListResponse
         type Scopes OrderDocumentsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrderDocumentsList'{..}
-          = go _odlProFileId _odlProjectId _odlSearchString
+          = go _odlProFileId _odlProjectId _odlXgafv
+              _odlUploadProtocol
+              _odlAccessToken
+              _odlSearchString
+              _odlUploadType
               (_odlIds ^. _Default)
               (Just _odlSortOrder)
               _odlPageToken
@@ -226,6 +294,7 @@ instance GoogleRequest OrderDocumentsList where
               _odlApproved
               (_odlSiteId ^. _Default)
               (Just _odlMaxResults)
+              _odlCallback
               (Just AltJSON)
               dFAReportingService
           where go

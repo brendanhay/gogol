@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Metada
     , pdmMetadataOwnerId
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.metadata@ method which the
 -- 'PartnersDevicesMetadata' request conforms to.
@@ -69,13 +69,13 @@ type PartnersDevicesMetadataResource =
 -- /See:/ 'partnersDevicesMetadata' smart constructor.
 data PartnersDevicesMetadata =
   PartnersDevicesMetadata'
-    { _pdmXgafv           :: !(Maybe Xgafv)
-    , _pdmUploadProtocol  :: !(Maybe Text)
-    , _pdmAccessToken     :: !(Maybe Text)
-    , _pdmUploadType      :: !(Maybe Text)
-    , _pdmPayload         :: !UpdateDeviceMetadataRequest
-    , _pdmDeviceId        :: !(Textual Int64)
-    , _pdmCallback        :: !(Maybe Text)
+    { _pdmXgafv :: !(Maybe Xgafv)
+    , _pdmUploadProtocol :: !(Maybe Text)
+    , _pdmAccessToken :: !(Maybe Text)
+    , _pdmUploadType :: !(Maybe Text)
+    , _pdmPayload :: !UpdateDeviceMetadataRequest
+    , _pdmDeviceId :: !(Textual Int64)
+    , _pdmCallback :: !(Maybe Text)
     , _pdmMetadataOwnerId :: !(Textual Int64)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

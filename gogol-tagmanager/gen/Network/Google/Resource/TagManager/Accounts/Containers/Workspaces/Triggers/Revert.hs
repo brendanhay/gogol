@@ -22,7 +22,7 @@
 --
 -- Reverts changes to a GTM Trigger in a GTM Workspace.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.revert@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.revert@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Trigger
     , AccountsContainersWorkspacesTriggersRevert
 
     -- * Request Lenses
-    , acwtrPath
-    , acwtrFingerprint
+    , acwtrcXgafv
+    , acwtrcUploadProtocol
+    , acwtrcPath
+    , acwtrcFingerprint
+    , acwtrcAccessToken
+    , acwtrcUploadType
+    , acwtrcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.triggers.revert@ method which the
 -- 'AccountsContainersWorkspacesTriggersRevert' request conforms to.
@@ -47,17 +52,27 @@ type AccountsContainersWorkspacesTriggersRevertResource
      "tagmanager" :>
        "v2" :>
          CaptureMode "path" "revert" Text :>
-           QueryParam "fingerprint" Text :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] RevertTriggerResponse
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] RevertTriggerResponse
 
 -- | Reverts changes to a GTM Trigger in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersRevert' smart constructor.
 data AccountsContainersWorkspacesTriggersRevert =
   AccountsContainersWorkspacesTriggersRevert'
-    { _acwtrPath        :: !Text
-    , _acwtrFingerprint :: !(Maybe Text)
+    { _acwtrcXgafv :: !(Maybe Xgafv)
+    , _acwtrcUploadProtocol :: !(Maybe Text)
+    , _acwtrcPath :: !Text
+    , _acwtrcFingerprint :: !(Maybe Text)
+    , _acwtrcAccessToken :: !(Maybe Text)
+    , _acwtrcUploadType :: !(Maybe Text)
+    , _acwtrcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,29 +81,75 @@ data AccountsContainersWorkspacesTriggersRevert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acwtrPath'
+-- * 'acwtrcXgafv'
 --
--- * 'acwtrFingerprint'
+-- * 'acwtrcUploadProtocol'
+--
+-- * 'acwtrcPath'
+--
+-- * 'acwtrcFingerprint'
+--
+-- * 'acwtrcAccessToken'
+--
+-- * 'acwtrcUploadType'
+--
+-- * 'acwtrcCallback'
 accountsContainersWorkspacesTriggersRevert
-    :: Text -- ^ 'acwtrPath'
+    :: Text -- ^ 'acwtrcPath'
     -> AccountsContainersWorkspacesTriggersRevert
-accountsContainersWorkspacesTriggersRevert pAcwtrPath_ =
+accountsContainersWorkspacesTriggersRevert pAcwtrcPath_ =
   AccountsContainersWorkspacesTriggersRevert'
-    {_acwtrPath = pAcwtrPath_, _acwtrFingerprint = Nothing}
+    { _acwtrcXgafv = Nothing
+    , _acwtrcUploadProtocol = Nothing
+    , _acwtrcPath = pAcwtrcPath_
+    , _acwtrcFingerprint = Nothing
+    , _acwtrcAccessToken = Nothing
+    , _acwtrcUploadType = Nothing
+    , _acwtrcCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acwtrcXgafv :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Xgafv)
+acwtrcXgafv
+  = lens _acwtrcXgafv (\ s a -> s{_acwtrcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwtrcUploadProtocol :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Text)
+acwtrcUploadProtocol
+  = lens _acwtrcUploadProtocol
+      (\ s a -> s{_acwtrcUploadProtocol = a})
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}
-acwtrPath :: Lens' AccountsContainersWorkspacesTriggersRevert Text
-acwtrPath
-  = lens _acwtrPath (\ s a -> s{_acwtrPath = a})
+acwtrcPath :: Lens' AccountsContainersWorkspacesTriggersRevert Text
+acwtrcPath
+  = lens _acwtrcPath (\ s a -> s{_acwtrcPath = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- trigger in storage.
-acwtrFingerprint :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Text)
-acwtrFingerprint
-  = lens _acwtrFingerprint
-      (\ s a -> s{_acwtrFingerprint = a})
+acwtrcFingerprint :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Text)
+acwtrcFingerprint
+  = lens _acwtrcFingerprint
+      (\ s a -> s{_acwtrcFingerprint = a})
+
+-- | OAuth access token.
+acwtrcAccessToken :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Text)
+acwtrcAccessToken
+  = lens _acwtrcAccessToken
+      (\ s a -> s{_acwtrcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwtrcUploadType :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Text)
+acwtrcUploadType
+  = lens _acwtrcUploadType
+      (\ s a -> s{_acwtrcUploadType = a})
+
+-- | JSONP
+acwtrcCallback :: Lens' AccountsContainersWorkspacesTriggersRevert (Maybe Text)
+acwtrcCallback
+  = lens _acwtrcCallback
+      (\ s a -> s{_acwtrcCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesTriggersRevert
@@ -101,7 +162,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesTriggersRevert'{..}
-          = go _acwtrPath _acwtrFingerprint (Just AltJSON)
+          = go _acwtrcPath _acwtrcXgafv _acwtrcUploadProtocol
+              _acwtrcFingerprint
+              _acwtrcAccessToken
+              _acwtrcUploadType
+              _acwtrcCallback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

@@ -41,8 +41,8 @@ module Network.Google.Resource.LibraryAgent.Shelves.Get
     , sgCallback
     ) where
 
-import           Network.Google.LibraryAgent.Types
-import           Network.Google.Prelude
+import Network.Google.LibraryAgent.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @libraryagent.shelves.get@ method which the
 -- 'ShelvesGet' request conforms to.
@@ -62,12 +62,12 @@ type ShelvesGetResource =
 -- /See:/ 'shelvesGet' smart constructor.
 data ShelvesGet =
   ShelvesGet'
-    { _sgXgafv          :: !(Maybe Xgafv)
+    { _sgXgafv :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
-    , _sgAccessToken    :: !(Maybe Text)
-    , _sgUploadType     :: !(Maybe Text)
-    , _sgName           :: !Text
-    , _sgCallback       :: !(Maybe Text)
+    , _sgAccessToken :: !(Maybe Text)
+    , _sgUploadType :: !(Maybe Text)
+    , _sgName :: !Text
+    , _sgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,7 +122,7 @@ sgUploadType :: Lens' ShelvesGet (Maybe Text)
 sgUploadType
   = lens _sgUploadType (\ s a -> s{_sgUploadType = a})
 
--- | The name of the shelf to retrieve.
+-- | Required. The name of the shelf to retrieve.
 sgName :: Lens' ShelvesGet Text
 sgName = lens _sgName (\ s a -> s{_sgName = a})
 

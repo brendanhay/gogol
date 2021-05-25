@@ -39,8 +39,8 @@ module Network.Google.Resource.PlusDomains.Media.Insert
     , miUserId
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.media.insert@ method which the
 -- 'MediaInsert' request conforms to.
@@ -72,8 +72,8 @@ type MediaInsertResource =
 data MediaInsert =
   MediaInsert'
     { _miCollection :: !MediaInsertCollection
-    , _miPayload    :: !Media
-    , _miUserId     :: !Text
+    , _miPayload :: !Media
+    , _miUserId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

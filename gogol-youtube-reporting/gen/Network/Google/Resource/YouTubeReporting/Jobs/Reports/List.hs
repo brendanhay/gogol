@@ -48,8 +48,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
     , jrlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.reports.list@ method which the
 -- 'JobsReportsList' request conforms to.
@@ -78,18 +78,18 @@ type JobsReportsListResource =
 -- /See:/ 'jobsReportsList' smart constructor.
 data JobsReportsList =
   JobsReportsList'
-    { _jrlCreatedAfter           :: !(Maybe DateTime')
-    , _jrlXgafv                  :: !(Maybe Xgafv)
-    , _jrlJobId                  :: !Text
-    , _jrlUploadProtocol         :: !(Maybe Text)
-    , _jrlAccessToken            :: !(Maybe Text)
-    , _jrlUploadType             :: !(Maybe Text)
-    , _jrlStartTimeAtOrAfter     :: !(Maybe DateTime')
-    , _jrlStartTimeBefore        :: !(Maybe DateTime')
+    { _jrlCreatedAfter :: !(Maybe DateTime')
+    , _jrlXgafv :: !(Maybe Xgafv)
+    , _jrlJobId :: !Text
+    , _jrlUploadProtocol :: !(Maybe Text)
+    , _jrlAccessToken :: !(Maybe Text)
+    , _jrlUploadType :: !(Maybe Text)
+    , _jrlStartTimeAtOrAfter :: !(Maybe DateTime')
+    , _jrlStartTimeBefore :: !(Maybe DateTime')
     , _jrlOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jrlPageToken              :: !(Maybe Text)
-    , _jrlPageSize               :: !(Maybe (Textual Int32))
-    , _jrlCallback               :: !(Maybe Text)
+    , _jrlPageToken :: !(Maybe Text)
+    , _jrlPageSize :: !(Maybe (Textual Int32))
+    , _jrlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -42,8 +42,8 @@ module Network.Google.Resource.Manufacturers.Accounts.Products.Delete
     , apdCallback
     ) where
 
-import           Network.Google.Manufacturers.Types
-import           Network.Google.Prelude
+import Network.Google.Manufacturers.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @manufacturers.accounts.products.delete@ method which the
 -- 'AccountsProductsDelete' request conforms to.
@@ -64,13 +64,13 @@ type AccountsProductsDeleteResource =
 -- /See:/ 'accountsProductsDelete' smart constructor.
 data AccountsProductsDelete =
   AccountsProductsDelete'
-    { _apdParent         :: !Text
-    , _apdXgafv          :: !(Maybe Xgafv)
+    { _apdParent :: !Text
+    , _apdXgafv :: !(Maybe Xgafv)
     , _apdUploadProtocol :: !(Maybe Text)
-    , _apdAccessToken    :: !(Maybe Text)
-    , _apdUploadType     :: !(Maybe Text)
-    , _apdName           :: !Text
-    , _apdCallback       :: !(Maybe Text)
+    , _apdAccessToken :: !(Maybe Text)
+    , _apdUploadType :: !(Maybe Text)
+    , _apdName :: !Text
+    , _apdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

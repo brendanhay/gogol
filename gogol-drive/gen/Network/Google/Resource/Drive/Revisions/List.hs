@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Revisions.List
     , rllPageSize
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.list@ method which the
 -- 'RevisionsList' request conforms to.
@@ -59,8 +59,8 @@ type RevisionsListResource =
 data RevisionsList =
   RevisionsList'
     { _rllPageToken :: !(Maybe Text)
-    , _rllFileId    :: !Text
-    , _rllPageSize  :: !(Textual Int32)
+    , _rllFileId :: !Text
+    , _rllPageSize :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

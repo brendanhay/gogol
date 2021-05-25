@@ -41,13 +41,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Get
     , pagCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.attestors.get@ method which the
 -- 'ProjectsAttestorsGet' request conforms to.
 type ProjectsAttestorsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsAttestorsGetResource =
 -- /See:/ 'projectsAttestorsGet' smart constructor.
 data ProjectsAttestorsGet =
   ProjectsAttestorsGet'
-    { _pagXgafv          :: !(Maybe Xgafv)
+    { _pagXgafv :: !(Maybe Xgafv)
     , _pagUploadProtocol :: !(Maybe Text)
-    , _pagAccessToken    :: !(Maybe Text)
-    , _pagUploadType     :: !(Maybe Text)
-    , _pagName           :: !Text
-    , _pagCallback       :: !(Maybe Text)
+    , _pagAccessToken :: !(Maybe Text)
+    , _pagUploadType :: !(Maybe Text)
+    , _pagName :: !Text
+    , _pagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,12 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Binds a YouTube broadcast to a stream or removes an existing binding
--- between a broadcast and a stream. A broadcast can only be bound to one
--- video stream, though a video stream may be bound to more than one
--- broadcast.
+-- Bind a broadcast to a stream.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.bind@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveBroadcasts.bind@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
     (
     -- * REST Resource
@@ -36,15 +33,20 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
     , LiveBroadcastsBind
 
     -- * Request Lenses
+    , lbbXgafv
     , lbbPart
+    , lbbUploadProtocol
+    , lbbAccessToken
+    , lbbUploadType
     , lbbOnBehalfOfContentOwner
     , lbbOnBehalfOfContentOwnerChannel
     , lbbId
     , lbbStreamId
+    , lbbCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.bind@ method which the
 -- 'LiveBroadcastsBind' request conforms to.
@@ -54,26 +56,33 @@ type LiveBroadcastsBindResource =
          "liveBroadcasts" :>
            "bind" :>
              QueryParam "id" Text :>
-               QueryParam "part" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "streamId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] LiveBroadcast
+               QueryParams "part" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "onBehalfOfContentOwner" Text :>
+                           QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                             QueryParam "streamId" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Post '[JSON] LiveBroadcast
 
--- | Binds a YouTube broadcast to a stream or removes an existing binding
--- between a broadcast and a stream. A broadcast can only be bound to one
--- video stream, though a video stream may be bound to more than one
--- broadcast.
+-- | Bind a broadcast to a stream.
 --
 -- /See:/ 'liveBroadcastsBind' smart constructor.
 data LiveBroadcastsBind =
   LiveBroadcastsBind'
-    { _lbbPart                          :: !Text
-    , _lbbOnBehalfOfContentOwner        :: !(Maybe Text)
+    { _lbbXgafv :: !(Maybe Xgafv)
+    , _lbbPart :: ![Text]
+    , _lbbUploadProtocol :: !(Maybe Text)
+    , _lbbAccessToken :: !(Maybe Text)
+    , _lbbUploadType :: !(Maybe Text)
+    , _lbbOnBehalfOfContentOwner :: !(Maybe Text)
     , _lbbOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _lbbId                            :: !Text
-    , _lbbStreamId                      :: !(Maybe Text)
+    , _lbbId :: !Text
+    , _lbbStreamId :: !(Maybe Text)
+    , _lbbCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -82,7 +91,15 @@ data LiveBroadcastsBind =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lbbXgafv'
+--
 -- * 'lbbPart'
+--
+-- * 'lbbUploadProtocol'
+--
+-- * 'lbbAccessToken'
+--
+-- * 'lbbUploadType'
 --
 -- * 'lbbOnBehalfOfContentOwner'
 --
@@ -91,29 +108,59 @@ data LiveBroadcastsBind =
 -- * 'lbbId'
 --
 -- * 'lbbStreamId'
+--
+-- * 'lbbCallback'
 liveBroadcastsBind
-    :: Text -- ^ 'lbbPart'
+    :: [Text] -- ^ 'lbbPart'
     -> Text -- ^ 'lbbId'
     -> LiveBroadcastsBind
 liveBroadcastsBind pLbbPart_ pLbbId_ =
   LiveBroadcastsBind'
-    { _lbbPart = pLbbPart_
+    { _lbbXgafv = Nothing
+    , _lbbPart = _Coerce # pLbbPart_
+    , _lbbUploadProtocol = Nothing
+    , _lbbAccessToken = Nothing
+    , _lbbUploadType = Nothing
     , _lbbOnBehalfOfContentOwner = Nothing
     , _lbbOnBehalfOfContentOwnerChannel = Nothing
     , _lbbId = pLbbId_
     , _lbbStreamId = Nothing
+    , _lbbCallback = Nothing
     }
 
 
--- | The part parameter specifies a comma-separated list of one or more
+-- | V1 error format.
+lbbXgafv :: Lens' LiveBroadcastsBind (Maybe Xgafv)
+lbbXgafv = lens _lbbXgafv (\ s a -> s{_lbbXgafv = a})
+
+-- | The *part* parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, contentDetails, and status.
-lbbPart :: Lens' LiveBroadcastsBind Text
-lbbPart = lens _lbbPart (\ s a -> s{_lbbPart = a})
+lbbPart :: Lens' LiveBroadcastsBind [Text]
+lbbPart
+  = lens _lbbPart (\ s a -> s{_lbbPart = a}) . _Coerce
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lbbUploadProtocol :: Lens' LiveBroadcastsBind (Maybe Text)
+lbbUploadProtocol
+  = lens _lbbUploadProtocol
+      (\ s a -> s{_lbbUploadProtocol = a})
+
+-- | OAuth access token.
+lbbAccessToken :: Lens' LiveBroadcastsBind (Maybe Text)
+lbbAccessToken
+  = lens _lbbAccessToken
+      (\ s a -> s{_lbbAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lbbUploadType :: Lens' LiveBroadcastsBind (Maybe Text)
+lbbUploadType
+  = lens _lbbUploadType
+      (\ s a -> s{_lbbUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -127,39 +174,40 @@ lbbOnBehalfOfContentOwner
   = lens _lbbOnBehalfOfContentOwner
       (\ s a -> s{_lbbOnBehalfOfContentOwner = a})
 
--- | This parameter can only be used in a properly authorized request. Note:
--- This parameter is intended exclusively for YouTube content partners. The
--- onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID
--- of the channel to which a video is being added. This parameter is
--- required when a request specifies a value for the onBehalfOfContentOwner
--- parameter, and it can only be used in conjunction with that parameter.
--- In addition, the request must be authorized using a CMS account that is
+-- | This parameter can only be used in a properly authorized request.
+-- *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwnerChannel* parameter specifies the
+-- YouTube channel ID of the channel to which a video is being added. This
+-- parameter is required when a request specifies a value for the
+-- onBehalfOfContentOwner parameter, and it can only be used in conjunction
+-- with that parameter. In addition, the request must be authorized using a
+-- CMS account that is linked to the content owner that the
+-- onBehalfOfContentOwner parameter specifies. Finally, the channel that
+-- the onBehalfOfContentOwnerChannel parameter value specifies must be
 -- linked to the content owner that the onBehalfOfContentOwner parameter
--- specifies. Finally, the channel that the onBehalfOfContentOwnerChannel
--- parameter value specifies must be linked to the content owner that the
--- onBehalfOfContentOwner parameter specifies. This parameter is intended
--- for YouTube content partners that own and manage many different YouTube
--- channels. It allows content owners to authenticate once and perform
--- actions on behalf of the channel specified in the parameter value,
--- without having to provide authentication credentials for each separate
--- channel.
+-- specifies. This parameter is intended for YouTube content partners that
+-- own and manage many different YouTube channels. It allows content owners
+-- to authenticate once and perform actions on behalf of the channel
+-- specified in the parameter value, without having to provide
+-- authentication credentials for each separate channel.
 lbbOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsBind (Maybe Text)
 lbbOnBehalfOfContentOwnerChannel
   = lens _lbbOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbbOnBehalfOfContentOwnerChannel = a})
 
--- | The id parameter specifies the unique ID of the broadcast that is being
--- bound to a video stream.
+-- | Broadcast to bind to the stream
 lbbId :: Lens' LiveBroadcastsBind Text
 lbbId = lens _lbbId (\ s a -> s{_lbbId = a})
 
--- | The streamId parameter specifies the unique ID of the video stream that
--- is being bound to a broadcast. If this parameter is omitted, the API
--- will remove any existing binding between the broadcast and a video
--- stream.
+-- | Stream to bind, if not set unbind the current one.
 lbbStreamId :: Lens' LiveBroadcastsBind (Maybe Text)
 lbbStreamId
   = lens _lbbStreamId (\ s a -> s{_lbbStreamId = a})
+
+-- | JSONP
+lbbCallback :: Lens' LiveBroadcastsBind (Maybe Text)
+lbbCallback
+  = lens _lbbCallback (\ s a -> s{_lbbCallback = a})
 
 instance GoogleRequest LiveBroadcastsBind where
         type Rs LiveBroadcastsBind = LiveBroadcast
@@ -167,10 +215,14 @@ instance GoogleRequest LiveBroadcastsBind where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveBroadcastsBind'{..}
-          = go (Just _lbbId) (Just _lbbPart)
+          = go (Just _lbbId) _lbbPart _lbbXgafv
+              _lbbUploadProtocol
+              _lbbAccessToken
+              _lbbUploadType
               _lbbOnBehalfOfContentOwner
               _lbbOnBehalfOfContentOwnerChannel
               _lbbStreamId
+              _lbbCallback
               (Just AltJSON)
               youTubeService
           where go

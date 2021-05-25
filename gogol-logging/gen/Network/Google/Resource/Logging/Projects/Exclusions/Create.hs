@@ -24,7 +24,7 @@
 -- belonging to that resource can be excluded. You can have up to 10
 -- exclusions in a resource.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.exclusions.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.exclusions.create@.
 module Network.Google.Resource.Logging.Projects.Exclusions.Create
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.Logging.Projects.Exclusions.Create
     , pecCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.exclusions.create@ method which the
 -- 'ProjectsExclusionsCreate' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsExclusionsCreateResource =
 -- /See:/ 'projectsExclusionsCreate' smart constructor.
 data ProjectsExclusionsCreate =
   ProjectsExclusionsCreate'
-    { _pecParent         :: !Text
-    , _pecXgafv          :: !(Maybe Xgafv)
+    { _pecParent :: !Text
+    , _pecXgafv :: !(Maybe Xgafv)
     , _pecUploadProtocol :: !(Maybe Text)
-    , _pecAccessToken    :: !(Maybe Text)
-    , _pecUploadType     :: !(Maybe Text)
-    , _pecPayload        :: !LogExclusion
-    , _pecCallback       :: !(Maybe Text)
+    , _pecAccessToken :: !(Maybe Text)
+    , _pecUploadType :: !(Maybe Text)
+    , _pecPayload :: !LogExclusion
+    , _pecCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

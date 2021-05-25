@@ -44,8 +44,8 @@ module Network.Google.Resource.Compute.Instances.UpdateAccessConfig
     , iuacInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.updateAccessConfig@ method which the
 -- 'InstancesUpdateAccessConfig' request conforms to.
@@ -73,12 +73,12 @@ type InstancesUpdateAccessConfigResource =
 -- /See:/ 'instancesUpdateAccessConfig' smart constructor.
 data InstancesUpdateAccessConfig =
   InstancesUpdateAccessConfig'
-    { _iuacRequestId        :: !(Maybe Text)
-    , _iuacProject          :: !Text
+    { _iuacRequestId :: !(Maybe Text)
+    , _iuacProject :: !Text
     , _iuacNetworkInterface :: !Text
-    , _iuacZone             :: !Text
-    , _iuacPayload          :: !AccessConfig
-    , _iuacInstance         :: !Text
+    , _iuacZone :: !Text
+    , _iuacPayload :: !AccessConfig
+    , _iuacInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

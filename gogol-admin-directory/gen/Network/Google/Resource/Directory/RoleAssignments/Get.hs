@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve a role assignment.
+-- Retrieves a role assignment.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roleAssignments.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.roleAssignments.get@.
 module Network.Google.Resource.Directory.RoleAssignments.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.RoleAssignments.Get
     , RoleAssignmentsGet
 
     -- * Request Lenses
+    , ragXgafv
+    , ragUploadProtocol
+    , ragAccessToken
+    , ragUploadType
     , ragCustomer
     , ragRoleAssignmentId
+    , ragCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.roleAssignments.get@ method which the
 -- 'RoleAssignmentsGet' request conforms to.
@@ -50,16 +55,26 @@ type RoleAssignmentsGetResource =
              Capture "customer" Text :>
                "roleassignments" :>
                  Capture "roleAssignmentId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] RoleAssignment
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] RoleAssignment
 
--- | Retrieve a role assignment.
+-- | Retrieves a role assignment.
 --
 -- /See:/ 'roleAssignmentsGet' smart constructor.
 data RoleAssignmentsGet =
   RoleAssignmentsGet'
-    { _ragCustomer         :: !Text
+    { _ragXgafv :: !(Maybe Xgafv)
+    , _ragUploadProtocol :: !(Maybe Text)
+    , _ragAccessToken :: !(Maybe Text)
+    , _ragUploadType :: !(Maybe Text)
+    , _ragCustomer :: !Text
     , _ragRoleAssignmentId :: !Text
+    , _ragCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,19 +83,58 @@ data RoleAssignmentsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ragXgafv'
+--
+-- * 'ragUploadProtocol'
+--
+-- * 'ragAccessToken'
+--
+-- * 'ragUploadType'
+--
 -- * 'ragCustomer'
 --
 -- * 'ragRoleAssignmentId'
+--
+-- * 'ragCallback'
 roleAssignmentsGet
     :: Text -- ^ 'ragCustomer'
     -> Text -- ^ 'ragRoleAssignmentId'
     -> RoleAssignmentsGet
 roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
   RoleAssignmentsGet'
-    {_ragCustomer = pRagCustomer_, _ragRoleAssignmentId = pRagRoleAssignmentId_}
+    { _ragXgafv = Nothing
+    , _ragUploadProtocol = Nothing
+    , _ragAccessToken = Nothing
+    , _ragUploadType = Nothing
+    , _ragCustomer = pRagCustomer_
+    , _ragRoleAssignmentId = pRagRoleAssignmentId_
+    , _ragCallback = Nothing
+    }
 
 
--- | Immutable ID of the G Suite account.
+-- | V1 error format.
+ragXgafv :: Lens' RoleAssignmentsGet (Maybe Xgafv)
+ragXgafv = lens _ragXgafv (\ s a -> s{_ragXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ragUploadProtocol :: Lens' RoleAssignmentsGet (Maybe Text)
+ragUploadProtocol
+  = lens _ragUploadProtocol
+      (\ s a -> s{_ragUploadProtocol = a})
+
+-- | OAuth access token.
+ragAccessToken :: Lens' RoleAssignmentsGet (Maybe Text)
+ragAccessToken
+  = lens _ragAccessToken
+      (\ s a -> s{_ragAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ragUploadType :: Lens' RoleAssignmentsGet (Maybe Text)
+ragUploadType
+  = lens _ragUploadType
+      (\ s a -> s{_ragUploadType = a})
+
+-- | Immutable ID of the Google Workspace account.
 ragCustomer :: Lens' RoleAssignmentsGet Text
 ragCustomer
   = lens _ragCustomer (\ s a -> s{_ragCustomer = a})
@@ -91,13 +145,23 @@ ragRoleAssignmentId
   = lens _ragRoleAssignmentId
       (\ s a -> s{_ragRoleAssignmentId = a})
 
+-- | JSONP
+ragCallback :: Lens' RoleAssignmentsGet (Maybe Text)
+ragCallback
+  = lens _ragCallback (\ s a -> s{_ragCallback = a})
+
 instance GoogleRequest RoleAssignmentsGet where
         type Rs RoleAssignmentsGet = RoleAssignment
         type Scopes RoleAssignmentsGet =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RoleAssignmentsGet'{..}
-          = go _ragCustomer _ragRoleAssignmentId (Just AltJSON)
+          = go _ragCustomer _ragRoleAssignmentId _ragXgafv
+              _ragUploadProtocol
+              _ragAccessToken
+              _ragUploadType
+              _ragCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient

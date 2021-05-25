@@ -22,7 +22,7 @@
 --
 -- Updates security marks.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.assets.updateSecurityMarks@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.assets.updateSecurityMarks@.
 module Network.Google.Resource.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
     (
     -- * REST Resource
@@ -44,13 +44,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Assets.UpdateSecurit
     , oausmCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.assets.updateSecurityMarks@ method which the
 -- 'OrganizationsAssetsUpdateSecurityMarks' request conforms to.
 type OrganizationsAssetsUpdateSecurityMarksResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -60,23 +60,26 @@ type OrganizationsAssetsUpdateSecurityMarksResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SecurityMarks :>
-                           Patch '[JSON] SecurityMarks
+                         ReqBody '[JSON]
+                           GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+                           :>
+                           Patch '[JSON]
+                             GoogleCloudSecuritycenterV1p1beta1SecurityMarks
 
 -- | Updates security marks.
 --
 -- /See:/ 'organizationsAssetsUpdateSecurityMarks' smart constructor.
 data OrganizationsAssetsUpdateSecurityMarks =
   OrganizationsAssetsUpdateSecurityMarks'
-    { _oausmXgafv          :: !(Maybe Xgafv)
+    { _oausmXgafv :: !(Maybe Xgafv)
     , _oausmUploadProtocol :: !(Maybe Text)
-    , _oausmStartTime      :: !(Maybe DateTime')
-    , _oausmUpdateMask     :: !(Maybe GFieldMask)
-    , _oausmAccessToken    :: !(Maybe Text)
-    , _oausmUploadType     :: !(Maybe Text)
-    , _oausmPayload        :: !SecurityMarks
-    , _oausmName           :: !Text
-    , _oausmCallback       :: !(Maybe Text)
+    , _oausmStartTime :: !(Maybe DateTime')
+    , _oausmUpdateMask :: !(Maybe GFieldMask)
+    , _oausmAccessToken :: !(Maybe Text)
+    , _oausmUploadType :: !(Maybe Text)
+    , _oausmPayload :: !GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+    , _oausmName :: !Text
+    , _oausmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -103,7 +106,7 @@ data OrganizationsAssetsUpdateSecurityMarks =
 --
 -- * 'oausmCallback'
 organizationsAssetsUpdateSecurityMarks
-    :: SecurityMarks -- ^ 'oausmPayload'
+    :: GoogleCloudSecuritycenterV1p1beta1SecurityMarks -- ^ 'oausmPayload'
     -> Text -- ^ 'oausmName'
     -> OrganizationsAssetsUpdateSecurityMarks
 organizationsAssetsUpdateSecurityMarks pOausmPayload_ pOausmName_ =
@@ -162,14 +165,15 @@ oausmUploadType
       (\ s a -> s{_oausmUploadType = a})
 
 -- | Multipart request metadata.
-oausmPayload :: Lens' OrganizationsAssetsUpdateSecurityMarks SecurityMarks
+oausmPayload :: Lens' OrganizationsAssetsUpdateSecurityMarks GoogleCloudSecuritycenterV1p1beta1SecurityMarks
 oausmPayload
   = lens _oausmPayload (\ s a -> s{_oausmPayload = a})
 
 -- | The relative resource name of the SecurityMarks. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Examples: \"organizations\/123\/assets\/456\/securityMarks\"
--- \"organizations\/123\/sources\/456\/findings\/789\/securityMarks\".
+-- Examples:
+-- \"organizations\/{organization_id}\/assets\/{asset_id}\/securityMarks\"
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/findings\/{finding_id}\/securityMarks\".
 oausmName :: Lens' OrganizationsAssetsUpdateSecurityMarks Text
 oausmName
   = lens _oausmName (\ s a -> s{_oausmName = a})
@@ -184,7 +188,7 @@ instance GoogleRequest
            OrganizationsAssetsUpdateSecurityMarks
          where
         type Rs OrganizationsAssetsUpdateSecurityMarks =
-             SecurityMarks
+             GoogleCloudSecuritycenterV1p1beta1SecurityMarks
         type Scopes OrganizationsAssetsUpdateSecurityMarks =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient

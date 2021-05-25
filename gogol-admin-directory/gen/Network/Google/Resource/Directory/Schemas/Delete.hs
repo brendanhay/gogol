@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete schema
+-- Deletes a schema.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.delete@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.schemas.delete@.
 module Network.Google.Resource.Directory.Schemas.Delete
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Schemas.Delete
     , SchemasDelete
 
     -- * Request Lenses
+    , sdXgafv
+    , sdUploadProtocol
+    , sdAccessToken
+    , sdUploadType
     , sdCustomerId
     , sdSchemaKey
+    , sdCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.schemas.delete@ method which the
 -- 'SchemasDelete' request conforms to.
@@ -50,15 +55,25 @@ type SchemasDeleteResource =
              Capture "customerId" Text :>
                "schemas" :>
                  Capture "schemaKey" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Delete schema
+-- | Deletes a schema.
 --
 -- /See:/ 'schemasDelete' smart constructor.
 data SchemasDelete =
   SchemasDelete'
-    { _sdCustomerId :: !Text
-    , _sdSchemaKey  :: !Text
+    { _sdXgafv :: !(Maybe Xgafv)
+    , _sdUploadProtocol :: !(Maybe Text)
+    , _sdAccessToken :: !(Maybe Text)
+    , _sdUploadType :: !(Maybe Text)
+    , _sdCustomerId :: !Text
+    , _sdSchemaKey :: !Text
+    , _sdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,33 +82,82 @@ data SchemasDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sdXgafv'
+--
+-- * 'sdUploadProtocol'
+--
+-- * 'sdAccessToken'
+--
+-- * 'sdUploadType'
+--
 -- * 'sdCustomerId'
 --
 -- * 'sdSchemaKey'
+--
+-- * 'sdCallback'
 schemasDelete
     :: Text -- ^ 'sdCustomerId'
     -> Text -- ^ 'sdSchemaKey'
     -> SchemasDelete
 schemasDelete pSdCustomerId_ pSdSchemaKey_ =
-  SchemasDelete' {_sdCustomerId = pSdCustomerId_, _sdSchemaKey = pSdSchemaKey_}
+  SchemasDelete'
+    { _sdXgafv = Nothing
+    , _sdUploadProtocol = Nothing
+    , _sdAccessToken = Nothing
+    , _sdUploadType = Nothing
+    , _sdCustomerId = pSdCustomerId_
+    , _sdSchemaKey = pSdSchemaKey_
+    , _sdCallback = Nothing
+    }
 
 
--- | Immutable ID of the G Suite account
+-- | V1 error format.
+sdXgafv :: Lens' SchemasDelete (Maybe Xgafv)
+sdXgafv = lens _sdXgafv (\ s a -> s{_sdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+sdUploadProtocol :: Lens' SchemasDelete (Maybe Text)
+sdUploadProtocol
+  = lens _sdUploadProtocol
+      (\ s a -> s{_sdUploadProtocol = a})
+
+-- | OAuth access token.
+sdAccessToken :: Lens' SchemasDelete (Maybe Text)
+sdAccessToken
+  = lens _sdAccessToken
+      (\ s a -> s{_sdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+sdUploadType :: Lens' SchemasDelete (Maybe Text)
+sdUploadType
+  = lens _sdUploadType (\ s a -> s{_sdUploadType = a})
+
+-- | Immutable ID of the Google Workspace account.
 sdCustomerId :: Lens' SchemasDelete Text
 sdCustomerId
   = lens _sdCustomerId (\ s a -> s{_sdCustomerId = a})
 
--- | Name or immutable ID of the schema
+-- | Name or immutable ID of the schema.
 sdSchemaKey :: Lens' SchemasDelete Text
 sdSchemaKey
   = lens _sdSchemaKey (\ s a -> s{_sdSchemaKey = a})
+
+-- | JSONP
+sdCallback :: Lens' SchemasDelete (Maybe Text)
+sdCallback
+  = lens _sdCallback (\ s a -> s{_sdCallback = a})
 
 instance GoogleRequest SchemasDelete where
         type Rs SchemasDelete = ()
         type Scopes SchemasDelete =
              '["https://www.googleapis.com/auth/admin.directory.userschema"]
         requestClient SchemasDelete'{..}
-          = go _sdCustomerId _sdSchemaKey (Just AltJSON)
+          = go _sdCustomerId _sdSchemaKey _sdXgafv
+              _sdUploadProtocol
+              _sdAccessToken
+              _sdUploadType
+              _sdCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasDeleteResource)

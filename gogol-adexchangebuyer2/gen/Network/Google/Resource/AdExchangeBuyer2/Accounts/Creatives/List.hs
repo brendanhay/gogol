@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.List
     , aclCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.list@ method which the
 -- 'AccountsCreativesList' request conforms to.
@@ -70,15 +70,15 @@ type AccountsCreativesListResource =
 -- /See:/ 'accountsCreativesList' smart constructor.
 data AccountsCreativesList =
   AccountsCreativesList'
-    { _aclXgafv          :: !(Maybe Xgafv)
+    { _aclXgafv :: !(Maybe Xgafv)
     , _aclUploadProtocol :: !(Maybe Text)
-    , _aclAccessToken    :: !(Maybe Text)
-    , _aclUploadType     :: !(Maybe Text)
-    , _aclAccountId      :: !Text
-    , _aclQuery          :: !(Maybe Text)
-    , _aclPageToken      :: !(Maybe Text)
-    , _aclPageSize       :: !(Maybe (Textual Int32))
-    , _aclCallback       :: !(Maybe Text)
+    , _aclAccessToken :: !(Maybe Text)
+    , _aclUploadType :: !(Maybe Text)
+    , _aclAccountId :: !Text
+    , _aclQuery :: !(Maybe Text)
+    , _aclPageToken :: !(Maybe Text)
+    , _aclPageSize :: !(Maybe (Textual Int32))
+    , _aclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,21 +150,15 @@ aclAccountId
   = lens _aclAccountId (\ s a -> s{_aclAccountId = a})
 
 -- | An optional query string to filter creatives. If no filter is specified,
--- all active creatives will be returned.
---
--- Supported queries are:
---
--- -   accountId=/account_id_string/
--- -   creativeId=/creative_id_string/
--- -   dealsStatus: {approved, conditionally_approved, disapproved,
---     not_checked}
--- -   openAuctionStatus: {approved, conditionally_approved, disapproved,
---     not_checked}
--- -   attribute: {a numeric attribute from the list of attributes}
--- -   disapprovalReason: {a reason from DisapprovalReason}
---
--- Example: \'accountId=12345 AND (dealsStatus:disapproved AND
--- disapprovalReason:unacceptable_content) OR attribute:47\'
+-- all active creatives will be returned. Supported queries are: -
+-- accountId=*account_id_string* - creativeId=*creative_id_string* -
+-- dealsStatus: {approved, conditionally_approved, disapproved,
+-- not_checked} - openAuctionStatus: {approved, conditionally_approved,
+-- disapproved, not_checked} - attribute: {a numeric attribute from the
+-- list of attributes} - disapprovalReason: {a reason from
+-- DisapprovalReason} Example: \'accountId=12345 AND
+-- (dealsStatus:disapproved AND disapprovalReason:unacceptable_content) OR
+-- attribute:47\'
 aclQuery :: Lens' AccountsCreativesList (Maybe Text)
 aclQuery = lens _aclQuery (\ s a -> s{_aclQuery = a})
 

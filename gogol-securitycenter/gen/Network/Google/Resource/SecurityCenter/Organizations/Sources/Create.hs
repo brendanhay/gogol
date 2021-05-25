@@ -22,7 +22,7 @@
 --
 -- Creates a source.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.create@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.create@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.Create
     (
     -- * REST Resource
@@ -42,13 +42,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.Create
     , oscCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.create@ method which the
 -- 'OrganizationsSourcesCreate' request conforms to.
 type OrganizationsSourcesCreateResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "parent" Text :>
          "sources" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -64,13 +64,13 @@ type OrganizationsSourcesCreateResource =
 -- /See:/ 'organizationsSourcesCreate' smart constructor.
 data OrganizationsSourcesCreate =
   OrganizationsSourcesCreate'
-    { _oscParent         :: !Text
-    , _oscXgafv          :: !(Maybe Xgafv)
+    { _oscParent :: !Text
+    , _oscXgafv :: !(Maybe Xgafv)
     , _oscUploadProtocol :: !(Maybe Text)
-    , _oscAccessToken    :: !(Maybe Text)
-    , _oscUploadType     :: !(Maybe Text)
-    , _oscPayload        :: !Source
-    , _oscCallback       :: !(Maybe Text)
+    , _oscAccessToken :: !(Maybe Text)
+    , _oscUploadType :: !(Maybe Text)
+    , _oscPayload :: !Source
+    , _oscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,8 +108,8 @@ organizationsSourcesCreate pOscParent_ pOscPayload_ =
     }
 
 
--- | Resource name of the new source\'s parent. Its format should be
--- \"organizations\/[organization_id]\".
+-- | Required. Resource name of the new source\'s parent. Its format should
+-- be \"organizations\/[organization_id]\".
 oscParent :: Lens' OrganizationsSourcesCreate Text
 oscParent
   = lens _oscParent (\ s a -> s{_oscParent = a})

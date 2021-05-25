@@ -42,8 +42,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.BeginTrans
     , pddbtCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.beginTransaction@ method which the
 -- 'ProjectsDatabasesDocumentsBeginTransaction' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsDatabasesDocumentsBeginTransactionResource
 -- /See:/ 'projectsDatabasesDocumentsBeginTransaction' smart constructor.
 data ProjectsDatabasesDocumentsBeginTransaction =
   ProjectsDatabasesDocumentsBeginTransaction'
-    { _pddbtXgafv          :: !(Maybe Xgafv)
+    { _pddbtXgafv :: !(Maybe Xgafv)
     , _pddbtUploadProtocol :: !(Maybe Text)
-    , _pddbtDatabase       :: !Text
-    , _pddbtAccessToken    :: !(Maybe Text)
-    , _pddbtUploadType     :: !(Maybe Text)
-    , _pddbtPayload        :: !BeginTransactionRequest
-    , _pddbtCallback       :: !(Maybe Text)
+    , _pddbtDatabase :: !Text
+    , _pddbtAccessToken :: !(Maybe Text)
+    , _pddbtUploadType :: !(Maybe Text)
+    , _pddbtPayload :: !BeginTransactionRequest
+    , _pddbtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -121,7 +121,7 @@ pddbtUploadProtocol
   = lens _pddbtUploadProtocol
       (\ s a -> s{_pddbtUploadProtocol = a})
 
--- | The database name. In the format:
+-- | Required. The database name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\`.
 pddbtDatabase :: Lens' ProjectsDatabasesDocumentsBeginTransaction Text
 pddbtDatabase

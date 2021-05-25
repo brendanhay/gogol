@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.UpdateMaste
     , plcumCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.updateMaster@ method which the
 -- 'ProjectsLocationsClustersUpdateMaster' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsClustersUpdateMasterResource =
 -- /See:/ 'projectsLocationsClustersUpdateMaster' smart constructor.
 data ProjectsLocationsClustersUpdateMaster =
   ProjectsLocationsClustersUpdateMaster'
-    { _plcumXgafv          :: !(Maybe Xgafv)
+    { _plcumXgafv :: !(Maybe Xgafv)
     , _plcumUploadProtocol :: !(Maybe Text)
-    , _plcumAccessToken    :: !(Maybe Text)
-    , _plcumUploadType     :: !(Maybe Text)
-    , _plcumPayload        :: !UpdateMasterRequest
-    , _plcumName           :: !Text
-    , _plcumCallback       :: !(Maybe Text)
+    , _plcumAccessToken :: !(Maybe Text)
+    , _plcumUploadType :: !(Maybe Text)
+    , _plcumPayload :: !UpdateMasterRequest
+    , _plcumName :: !Text
+    , _plcumCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ plcumPayload
   = lens _plcumPayload (\ s a -> s{_plcumPayload = a})
 
 -- | The name (project, location, cluster) of the cluster to update.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcumName :: Lens' ProjectsLocationsClustersUpdateMaster Text
 plcumName
   = lens _plcumName (\ s a -> s{_plcumName = a})

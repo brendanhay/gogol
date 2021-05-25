@@ -162,16 +162,16 @@ module Network.Google.YouTubeAnalytics
     , qrErrors
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
-import           Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
-import           Network.Google.Resource.YouTubeAnalytics.GroupItems.List
-import           Network.Google.Resource.YouTubeAnalytics.Groups.Delete
-import           Network.Google.Resource.YouTubeAnalytics.Groups.Insert
-import           Network.Google.Resource.YouTubeAnalytics.Groups.List
-import           Network.Google.Resource.YouTubeAnalytics.Groups.Update
-import           Network.Google.Resource.YouTubeAnalytics.Reports.Query
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
+import Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
+import Network.Google.Resource.YouTubeAnalytics.GroupItems.List
+import Network.Google.Resource.YouTubeAnalytics.Groups.Delete
+import Network.Google.Resource.YouTubeAnalytics.Groups.Insert
+import Network.Google.Resource.YouTubeAnalytics.Groups.List
+import Network.Google.Resource.YouTubeAnalytics.Groups.Update
+import Network.Google.Resource.YouTubeAnalytics.Reports.Query
+import Network.Google.YouTubeAnalytics.Types
 
 {- $resources
 TODO

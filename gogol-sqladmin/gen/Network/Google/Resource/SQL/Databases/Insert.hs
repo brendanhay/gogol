@@ -23,7 +23,7 @@
 -- Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.databases.insert@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.databases.insert@.
 module Network.Google.Resource.SQL.Databases.Insert
     (
     -- * REST Resource
@@ -34,26 +34,35 @@ module Network.Google.Resource.SQL.Databases.Insert
     , DatabasesInsert
 
     -- * Request Lenses
+    , diXgafv
+    , diUploadProtocol
     , diProject
+    , diAccessToken
+    , diUploadType
     , diPayload
+    , diCallback
     , diInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.insert@ method which the
 -- 'DatabasesInsert' request conforms to.
 type DatabasesInsertResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Database :> Post '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "databases" :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Database :> Post '[JSON] Operation
 
 -- | Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.
@@ -61,8 +70,13 @@ type DatabasesInsertResource =
 -- /See:/ 'databasesInsert' smart constructor.
 data DatabasesInsert =
   DatabasesInsert'
-    { _diProject  :: !Text
-    , _diPayload  :: !Database
+    { _diXgafv :: !(Maybe Xgafv)
+    , _diUploadProtocol :: !(Maybe Text)
+    , _diProject :: !Text
+    , _diAccessToken :: !(Maybe Text)
+    , _diUploadType :: !(Maybe Text)
+    , _diPayload :: !Database
+    , _diCallback :: !(Maybe Text)
     , _diInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -72,9 +86,19 @@ data DatabasesInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'diXgafv'
+--
+-- * 'diUploadProtocol'
+--
 -- * 'diProject'
 --
+-- * 'diAccessToken'
+--
+-- * 'diUploadType'
+--
 -- * 'diPayload'
+--
+-- * 'diCallback'
 --
 -- * 'diInstance'
 databasesInsert
@@ -84,21 +108,52 @@ databasesInsert
     -> DatabasesInsert
 databasesInsert pDiProject_ pDiPayload_ pDiInstance_ =
   DatabasesInsert'
-    { _diProject = pDiProject_
+    { _diXgafv = Nothing
+    , _diUploadProtocol = Nothing
+    , _diProject = pDiProject_
+    , _diAccessToken = Nothing
+    , _diUploadType = Nothing
     , _diPayload = pDiPayload_
+    , _diCallback = Nothing
     , _diInstance = pDiInstance_
     }
 
+
+-- | V1 error format.
+diXgafv :: Lens' DatabasesInsert (Maybe Xgafv)
+diXgafv = lens _diXgafv (\ s a -> s{_diXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+diUploadProtocol :: Lens' DatabasesInsert (Maybe Text)
+diUploadProtocol
+  = lens _diUploadProtocol
+      (\ s a -> s{_diUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 diProject :: Lens' DatabasesInsert Text
 diProject
   = lens _diProject (\ s a -> s{_diProject = a})
 
+-- | OAuth access token.
+diAccessToken :: Lens' DatabasesInsert (Maybe Text)
+diAccessToken
+  = lens _diAccessToken
+      (\ s a -> s{_diAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+diUploadType :: Lens' DatabasesInsert (Maybe Text)
+diUploadType
+  = lens _diUploadType (\ s a -> s{_diUploadType = a})
+
 -- | Multipart request metadata.
 diPayload :: Lens' DatabasesInsert Database
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
+
+-- | JSONP
+diCallback :: Lens' DatabasesInsert (Maybe Text)
+diCallback
+  = lens _diCallback (\ s a -> s{_diCallback = a})
 
 -- | Database instance ID. This does not include the project ID.
 diInstance :: Lens' DatabasesInsert Text
@@ -111,7 +166,13 @@ instance GoogleRequest DatabasesInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesInsert'{..}
-          = go _diProject _diInstance (Just AltJSON) _diPayload
+          = go _diProject _diInstance _diXgafv
+              _diUploadProtocol
+              _diAccessToken
+              _diUploadType
+              _diCallback
+              (Just AltJSON)
+              _diPayload
               sQLAdminService
           where go
                   = buildClient

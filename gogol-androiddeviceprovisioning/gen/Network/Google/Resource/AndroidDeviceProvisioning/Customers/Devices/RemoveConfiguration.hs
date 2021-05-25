@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Remov
     , cdrcCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.devices.removeConfiguration@ method which the
 -- 'CustomersDevicesRemoveConfiguration' request conforms to.
@@ -65,13 +65,13 @@ type CustomersDevicesRemoveConfigurationResource =
 -- /See:/ 'customersDevicesRemoveConfiguration' smart constructor.
 data CustomersDevicesRemoveConfiguration =
   CustomersDevicesRemoveConfiguration'
-    { _cdrcParent         :: !Text
-    , _cdrcXgafv          :: !(Maybe Xgafv)
+    { _cdrcParent :: !Text
+    , _cdrcXgafv :: !(Maybe Xgafv)
     , _cdrcUploadProtocol :: !(Maybe Text)
-    , _cdrcAccessToken    :: !(Maybe Text)
-    , _cdrcUploadType     :: !(Maybe Text)
-    , _cdrcPayload        :: !CustomerRemoveConfigurationRequest
-    , _cdrcCallback       :: !(Maybe Text)
+    , _cdrcAccessToken :: !(Maybe Text)
+    , _cdrcUploadType :: !(Maybe Text)
+    , _cdrcPayload :: !CustomerRemoveConfigurationRequest
+    , _cdrcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,7 +23,7 @@
 -- Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.markAsSpam@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.comments.markAsSpam@.
 module Network.Google.Resource.YouTube.Comments.MarkAsSpam
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.YouTube.Comments.MarkAsSpam
     , CommentsMarkAsSpam
 
     -- * Request Lenses
+    , cmasXgafv
+    , cmasUploadProtocol
+    , cmasAccessToken
+    , cmasUploadType
     , cmasId
+    , cmasCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.markAsSpam@ method which the
 -- 'CommentsMarkAsSpam' request conforms to.
@@ -47,16 +52,26 @@ type CommentsMarkAsSpamResource =
        "v3" :>
          "comments" :>
            "markAsSpam" :>
-             QueryParam "id" Text :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParams "id" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.
 --
 -- /See:/ 'commentsMarkAsSpam' smart constructor.
-newtype CommentsMarkAsSpam =
+data CommentsMarkAsSpam =
   CommentsMarkAsSpam'
-    { _cmasId :: Text
+    { _cmasXgafv :: !(Maybe Xgafv)
+    , _cmasUploadProtocol :: !(Maybe Text)
+    , _cmasAccessToken :: !(Maybe Text)
+    , _cmasUploadType :: !(Maybe Text)
+    , _cmasId :: ![Text]
+    , _cmasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,24 +80,75 @@ newtype CommentsMarkAsSpam =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cmasXgafv'
+--
+-- * 'cmasUploadProtocol'
+--
+-- * 'cmasAccessToken'
+--
+-- * 'cmasUploadType'
+--
 -- * 'cmasId'
+--
+-- * 'cmasCallback'
 commentsMarkAsSpam
-    :: Text -- ^ 'cmasId'
+    :: [Text] -- ^ 'cmasId'
     -> CommentsMarkAsSpam
-commentsMarkAsSpam pCmasId_ = CommentsMarkAsSpam' {_cmasId = pCmasId_}
+commentsMarkAsSpam pCmasId_ =
+  CommentsMarkAsSpam'
+    { _cmasXgafv = Nothing
+    , _cmasUploadProtocol = Nothing
+    , _cmasAccessToken = Nothing
+    , _cmasUploadType = Nothing
+    , _cmasId = _Coerce # pCmasId_
+    , _cmasCallback = Nothing
+    }
 
 
--- | The id parameter specifies a comma-separated list of IDs of comments
--- that the caller believes should be classified as spam.
-cmasId :: Lens' CommentsMarkAsSpam Text
-cmasId = lens _cmasId (\ s a -> s{_cmasId = a})
+-- | V1 error format.
+cmasXgafv :: Lens' CommentsMarkAsSpam (Maybe Xgafv)
+cmasXgafv
+  = lens _cmasXgafv (\ s a -> s{_cmasXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cmasUploadProtocol :: Lens' CommentsMarkAsSpam (Maybe Text)
+cmasUploadProtocol
+  = lens _cmasUploadProtocol
+      (\ s a -> s{_cmasUploadProtocol = a})
+
+-- | OAuth access token.
+cmasAccessToken :: Lens' CommentsMarkAsSpam (Maybe Text)
+cmasAccessToken
+  = lens _cmasAccessToken
+      (\ s a -> s{_cmasAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cmasUploadType :: Lens' CommentsMarkAsSpam (Maybe Text)
+cmasUploadType
+  = lens _cmasUploadType
+      (\ s a -> s{_cmasUploadType = a})
+
+-- | Flags the comments with the given IDs as spam in the caller\'s opinion.
+cmasId :: Lens' CommentsMarkAsSpam [Text]
+cmasId
+  = lens _cmasId (\ s a -> s{_cmasId = a}) . _Coerce
+
+-- | JSONP
+cmasCallback :: Lens' CommentsMarkAsSpam (Maybe Text)
+cmasCallback
+  = lens _cmasCallback (\ s a -> s{_cmasCallback = a})
 
 instance GoogleRequest CommentsMarkAsSpam where
         type Rs CommentsMarkAsSpam = ()
         type Scopes CommentsMarkAsSpam =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsMarkAsSpam'{..}
-          = go (Just _cmasId) (Just AltJSON) youTubeService
+          = go _cmasId _cmasXgafv _cmasUploadProtocol
+              _cmasAccessToken
+              _cmasUploadType
+              _cmasCallback
+              (Just AltJSON)
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy CommentsMarkAsSpamResource)

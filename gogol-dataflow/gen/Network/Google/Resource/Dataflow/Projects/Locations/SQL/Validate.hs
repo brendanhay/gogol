@@ -46,8 +46,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.SQL.Validate
     , plsqlvCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.sql.validate@ method which the
 -- 'ProjectsLocationsSQLValidate' request conforms to.
@@ -75,14 +75,14 @@ type ProjectsLocationsSQLValidateResource =
 -- /See:/ 'projectsLocationsSQLValidate' smart constructor.
 data ProjectsLocationsSQLValidate =
   ProjectsLocationsSQLValidate'
-    { _plsqlvXgafv          :: !(Maybe Xgafv)
+    { _plsqlvXgafv :: !(Maybe Xgafv)
     , _plsqlvUploadProtocol :: !(Maybe Text)
-    , _plsqlvLocation       :: !Text
-    , _plsqlvAccessToken    :: !(Maybe Text)
-    , _plsqlvUploadType     :: !(Maybe Text)
-    , _plsqlvQuery          :: !(Maybe Text)
-    , _plsqlvProjectId      :: !Text
-    , _plsqlvCallback       :: !(Maybe Text)
+    , _plsqlvLocation :: !Text
+    , _plsqlvAccessToken :: !(Maybe Text)
+    , _plsqlvUploadType :: !(Maybe Text)
+    , _plsqlvQuery :: !(Maybe Text)
+    , _plsqlvProjectId :: !Text
+    , _plsqlvCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

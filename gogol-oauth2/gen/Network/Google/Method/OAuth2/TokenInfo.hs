@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @oauth2.tokeninfo@.
+-- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference> for @oauth2.tokeninfo@.
 module Network.Google.Method.OAuth2.TokenInfo
     (
     -- * REST Resource
@@ -31,13 +31,12 @@ module Network.Google.Method.OAuth2.TokenInfo
     , TokenInfo'
 
     -- * Request Lenses
-    , tAccessToken
-    , tTokenHandle
-    , tIdToken
+    , tiAccessToken
+    , tiIdToken
     ) where
 
-import           Network.Google.OAuth2.Types
-import           Network.Google.Prelude
+import Network.Google.OAuth2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oauth2.tokeninfo@ method which the
 -- 'TokenInfo'' request conforms to.
@@ -46,17 +45,15 @@ type TokenInfoMethod =
        "v2" :>
          "tokeninfo" :>
            QueryParam "access_token" Text :>
-             QueryParam "token_handle" Text :>
-               QueryParam "id_token" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] TokenInfo
+             QueryParam "id_token" Text :>
+               QueryParam "alt" AltJSON :> Post '[JSON] TokenInfo
 
 --
 -- /See:/ 'tokenInfo'' smart constructor.
 data TokenInfo' =
   TokenInfo''
-    { _tAccessToken :: !(Maybe Text)
-    , _tTokenHandle :: !(Maybe Text)
-    , _tIdToken     :: !(Maybe Text)
+    { _tiAccessToken :: !(Maybe Text)
+    , _tiIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,35 +62,28 @@ data TokenInfo' =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tAccessToken'
+-- * 'tiAccessToken'
 --
--- * 'tTokenHandle'
---
--- * 'tIdToken'
+-- * 'tiIdToken'
 tokenInfo'
     :: TokenInfo'
-tokenInfo' =
-  TokenInfo''
-    {_tAccessToken = Nothing, _tTokenHandle = Nothing, _tIdToken = Nothing}
+tokenInfo' = TokenInfo'' {_tiAccessToken = Nothing, _tiIdToken = Nothing}
 
 
-tAccessToken :: Lens' TokenInfo' (Maybe Text)
-tAccessToken
-  = lens _tAccessToken (\ s a -> s{_tAccessToken = a})
+tiAccessToken :: Lens' TokenInfo' (Maybe Text)
+tiAccessToken
+  = lens _tiAccessToken
+      (\ s a -> s{_tiAccessToken = a})
 
-tTokenHandle :: Lens' TokenInfo' (Maybe Text)
-tTokenHandle
-  = lens _tTokenHandle (\ s a -> s{_tTokenHandle = a})
-
-tIdToken :: Lens' TokenInfo' (Maybe Text)
-tIdToken = lens _tIdToken (\ s a -> s{_tIdToken = a})
+tiIdToken :: Lens' TokenInfo' (Maybe Text)
+tiIdToken
+  = lens _tiIdToken (\ s a -> s{_tiIdToken = a})
 
 instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
         type Scopes TokenInfo' = '[]
         requestClient TokenInfo''{..}
-          = go _tAccessToken _tTokenHandle _tIdToken
-              (Just AltJSON)
+          = go _tiAccessToken _tiIdToken (Just AltJSON)
               oAuth2Service
           where go
                   = buildClient (Proxy :: Proxy TokenInfoMethod) mempty

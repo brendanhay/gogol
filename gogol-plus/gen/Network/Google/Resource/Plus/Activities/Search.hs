@@ -41,8 +41,8 @@ module Network.Google.Resource.Plus.Activities.Search
     , asMaxResults
     ) where
 
-import           Network.Google.Plus.Types
-import           Network.Google.Prelude
+import Network.Google.Plus.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @plus.activities.search@ method which the
 -- 'ActivitiesSearch' request conforms to.
@@ -63,10 +63,10 @@ type ActivitiesSearchResource =
 -- /See:/ 'activitiesSearch' smart constructor.
 data ActivitiesSearch =
   ActivitiesSearch'
-    { _asOrderBy    :: !ActivitiesSearchOrderBy
-    , _asQuery      :: !Text
-    , _asLanguage   :: !Text
-    , _asPageToken  :: !(Maybe Text)
+    { _asOrderBy :: !ActivitiesSearchOrderBy
+    , _asQuery :: !Text
+    , _asLanguage :: !Text
+    , _asPageToken :: !(Maybe Text)
     , _asMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.RegionAutoscalers.List
     , RegionAutoscalersList
 
     -- * Request Lenses
+    , ralReturnPartialSuccess
     , ralOrderBy
     , ralProject
     , ralFilter
@@ -41,8 +42,8 @@ module Network.Google.Resource.Compute.RegionAutoscalers.List
     , ralMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionAutoscalers.list@ method which the
 -- 'RegionAutoscalersList' request conforms to.
@@ -54,23 +55,25 @@ type RegionAutoscalersListResource =
              "regions" :>
                Capture "region" Text :>
                  "autoscalers" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] RegionAutoscalerList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] RegionAutoscalerList
 
 -- | Retrieves a list of autoscalers contained within the specified region.
 --
 -- /See:/ 'regionAutoscalersList' smart constructor.
 data RegionAutoscalersList =
   RegionAutoscalersList'
-    { _ralOrderBy    :: !(Maybe Text)
-    , _ralProject    :: !Text
-    , _ralFilter     :: !(Maybe Text)
-    , _ralRegion     :: !Text
-    , _ralPageToken  :: !(Maybe Text)
+    { _ralReturnPartialSuccess :: !(Maybe Bool)
+    , _ralOrderBy :: !(Maybe Text)
+    , _ralProject :: !Text
+    , _ralFilter :: !(Maybe Text)
+    , _ralRegion :: !Text
+    , _ralPageToken :: !(Maybe Text)
     , _ralMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -79,6 +82,8 @@ data RegionAutoscalersList =
 -- | Creates a value of 'RegionAutoscalersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ralReturnPartialSuccess'
 --
 -- * 'ralOrderBy'
 --
@@ -97,7 +102,8 @@ regionAutoscalersList
     -> RegionAutoscalersList
 regionAutoscalersList pRalProject_ pRalRegion_ =
   RegionAutoscalersList'
-    { _ralOrderBy = Nothing
+    { _ralReturnPartialSuccess = Nothing
+    , _ralOrderBy = Nothing
     , _ralProject = pRalProject_
     , _ralFilter = Nothing
     , _ralRegion = pRalRegion_
@@ -106,14 +112,21 @@ regionAutoscalersList pRalProject_ pRalRegion_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+ralReturnPartialSuccess :: Lens' RegionAutoscalersList (Maybe Bool)
+ralReturnPartialSuccess
+  = lens _ralReturnPartialSuccess
+      (\ s a -> s{_ralReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 ralOrderBy :: Lens' RegionAutoscalersList (Maybe Text)
 ralOrderBy
   = lens _ralOrderBy (\ s a -> s{_ralOrderBy = a})
@@ -126,19 +139,20 @@ ralProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 ralFilter :: Lens' RegionAutoscalersList (Maybe Text)
 ralFilter
   = lens _ralFilter (\ s a -> s{_ralFilter = a})
@@ -148,17 +162,18 @@ ralRegion :: Lens' RegionAutoscalersList Text
 ralRegion
   = lens _ralRegion (\ s a -> s{_ralRegion = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 ralPageToken :: Lens' RegionAutoscalersList (Maybe Text)
 ralPageToken
   = lens _ralPageToken (\ s a -> s{_ralPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 ralMaxResults :: Lens' RegionAutoscalersList Word32
 ralMaxResults
   = lens _ralMaxResults
@@ -172,7 +187,9 @@ instance GoogleRequest RegionAutoscalersList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionAutoscalersList'{..}
-          = go _ralProject _ralRegion _ralOrderBy _ralFilter
+          = go _ralProject _ralRegion _ralReturnPartialSuccess
+              _ralOrderBy
+              _ralFilter
               _ralPageToken
               (Just _ralMaxResults)
               (Just AltJSON)

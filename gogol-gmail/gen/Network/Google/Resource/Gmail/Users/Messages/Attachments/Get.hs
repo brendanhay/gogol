@@ -33,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
     , UsersMessagesAttachmentsGet
 
     -- * Request Lenses
+    , umagXgafv
+    , umagUploadProtocol
+    , umagAccessToken
+    , umagUploadType
     , umagUserId
     , umagId
     , umagMessageId
+    , umagCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.attachments.get@ method which the
 -- 'UsersMessagesAttachmentsGet' request conforms to.
@@ -52,17 +57,27 @@ type UsersMessagesAttachmentsGetResource =
                Capture "messageId" Text :>
                  "attachments" :>
                    Capture "id" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] MessagePartBody
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] MessagePartBody
 
 -- | Gets the specified message attachment.
 --
 -- /See:/ 'usersMessagesAttachmentsGet' smart constructor.
 data UsersMessagesAttachmentsGet =
   UsersMessagesAttachmentsGet'
-    { _umagUserId    :: !Text
-    , _umagId        :: !Text
+    { _umagXgafv :: !(Maybe Xgafv)
+    , _umagUploadProtocol :: !(Maybe Text)
+    , _umagAccessToken :: !(Maybe Text)
+    , _umagUploadType :: !(Maybe Text)
+    , _umagUserId :: !Text
+    , _umagId :: !Text
     , _umagMessageId :: !Text
+    , _umagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,22 +86,63 @@ data UsersMessagesAttachmentsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'umagXgafv'
+--
+-- * 'umagUploadProtocol'
+--
+-- * 'umagAccessToken'
+--
+-- * 'umagUploadType'
+--
 -- * 'umagUserId'
 --
 -- * 'umagId'
 --
 -- * 'umagMessageId'
+--
+-- * 'umagCallback'
 usersMessagesAttachmentsGet
     :: Text -- ^ 'umagId'
     -> Text -- ^ 'umagMessageId'
     -> UsersMessagesAttachmentsGet
 usersMessagesAttachmentsGet pUmagId_ pUmagMessageId_ =
   UsersMessagesAttachmentsGet'
-    {_umagUserId = "me", _umagId = pUmagId_, _umagMessageId = pUmagMessageId_}
+    { _umagXgafv = Nothing
+    , _umagUploadProtocol = Nothing
+    , _umagAccessToken = Nothing
+    , _umagUploadType = Nothing
+    , _umagUserId = "me"
+    , _umagId = pUmagId_
+    , _umagMessageId = pUmagMessageId_
+    , _umagCallback = Nothing
+    }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+umagXgafv :: Lens' UsersMessagesAttachmentsGet (Maybe Xgafv)
+umagXgafv
+  = lens _umagXgafv (\ s a -> s{_umagXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+umagUploadProtocol :: Lens' UsersMessagesAttachmentsGet (Maybe Text)
+umagUploadProtocol
+  = lens _umagUploadProtocol
+      (\ s a -> s{_umagUploadProtocol = a})
+
+-- | OAuth access token.
+umagAccessToken :: Lens' UsersMessagesAttachmentsGet (Maybe Text)
+umagAccessToken
+  = lens _umagAccessToken
+      (\ s a -> s{_umagAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+umagUploadType :: Lens' UsersMessagesAttachmentsGet (Maybe Text)
+umagUploadType
+  = lens _umagUploadType
+      (\ s a -> s{_umagUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 umagUserId :: Lens' UsersMessagesAttachmentsGet Text
 umagUserId
   = lens _umagUserId (\ s a -> s{_umagUserId = a})
@@ -101,15 +157,26 @@ umagMessageId
   = lens _umagMessageId
       (\ s a -> s{_umagMessageId = a})
 
+-- | JSONP
+umagCallback :: Lens' UsersMessagesAttachmentsGet (Maybe Text)
+umagCallback
+  = lens _umagCallback (\ s a -> s{_umagCallback = a})
+
 instance GoogleRequest UsersMessagesAttachmentsGet
          where
         type Rs UsersMessagesAttachmentsGet = MessagePartBody
         type Scopes UsersMessagesAttachmentsGet =
              '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.addons.current.message.action",
+               "https://www.googleapis.com/auth/gmail.addons.current.message.readonly",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersMessagesAttachmentsGet'{..}
-          = go _umagUserId _umagMessageId _umagId
+          = go _umagUserId _umagMessageId _umagId _umagXgafv
+              _umagUploadProtocol
+              _umagAccessToken
+              _umagUploadType
+              _umagCallback
               (Just AltJSON)
               gmailService
           where go

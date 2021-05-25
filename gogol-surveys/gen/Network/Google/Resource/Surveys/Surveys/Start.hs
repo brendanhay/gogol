@@ -37,8 +37,8 @@ module Network.Google.Resource.Surveys.Surveys.Start
     , ssPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.start@ method which the
 -- 'SurveysStart' request conforms to.
@@ -58,7 +58,7 @@ type SurveysStartResource =
 data SurveysStart =
   SurveysStart'
     { _ssResourceId :: !Text
-    , _ssPayload    :: !SurveysStartRequest
+    , _ssPayload :: !SurveysStartRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

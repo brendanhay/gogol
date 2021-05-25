@@ -17,8 +17,8 @@
 --
 module Network.Google.Partners.Types.Product where
 
-import           Network.Google.Partners.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Partners.Types.Sum
+import Network.Google.Prelude
 
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
@@ -29,7 +29,7 @@ import           Network.Google.Prelude
 -- /See:/ 'latLng' smart constructor.
 data LatLng =
   LatLng'
-    { _llLatitude  :: !(Maybe (Textual Double))
+    { _llLatitude :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -78,7 +78,7 @@ instance ToJSON LatLng where
 -- /See:/ 'listUserStatesResponse' smart constructor.
 data ListUserStatesResponse =
   ListUserStatesResponse'
-    { _lusrUserStates       :: !(Maybe [Text])
+    { _lusrUserStates :: !(Maybe [Text])
     , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -133,7 +133,7 @@ instance ToJSON ListUserStatesResponse where
 data EventData =
   EventData'
     { _edValues :: !(Maybe [Text])
-    , _edKey    :: !(Maybe EventDataKey)
+    , _edKey :: !(Maybe EventDataKey)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -179,18 +179,18 @@ instance ToJSON EventData where
 -- /See:/ 'historicalOffer' smart constructor.
 data HistoricalOffer =
   HistoricalOffer'
-    { _hoCreationTime     :: !(Maybe DateTime')
-    , _hoClientId         :: !(Maybe (Textual Int64))
-    , _hoStatus           :: !(Maybe HistoricalOfferStatus)
-    , _hoClientEmail      :: !(Maybe Text)
-    , _hoAdwordsURL       :: !(Maybe Text)
+    { _hoCreationTime :: !(Maybe DateTime')
+    , _hoClientId :: !(Maybe (Textual Int64))
+    , _hoStatus :: !(Maybe HistoricalOfferStatus)
+    , _hoClientEmail :: !(Maybe Text)
+    , _hoAdwordsURL :: !(Maybe Text)
     , _hoLastModifiedTime :: !(Maybe DateTime')
-    , _hoSenderName       :: !(Maybe Text)
-    , _hoOfferCode        :: !(Maybe Text)
+    , _hoSenderName :: !(Maybe Text)
+    , _hoOfferCode :: !(Maybe Text)
     , _hoOfferCountryCode :: !(Maybe Text)
-    , _hoOfferType        :: !(Maybe HistoricalOfferOfferType)
-    , _hoClientName       :: !(Maybe Text)
-    , _hoExpirationTime   :: !(Maybe DateTime')
+    , _hoOfferType :: !(Maybe HistoricalOfferOfferType)
+    , _hoClientName :: !(Maybe Text)
+    , _hoExpirationTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -349,10 +349,10 @@ instance ToJSON HistoricalOffer where
 -- /See:/ 'requestMetadata' smart constructor.
 data RequestMetadata =
   RequestMetadata'
-    { _rmExperimentIds     :: !(Maybe [Text])
-    , _rmTrafficSource     :: !(Maybe TrafficSource)
-    , _rmLocale            :: !(Maybe Text)
-    , _rmUserOverrides     :: !(Maybe UserOverrides)
+    { _rmExperimentIds :: !(Maybe [Text])
+    , _rmTrafficSource :: !(Maybe TrafficSource)
+    , _rmLocale :: !(Maybe Text)
+    , _rmUserOverrides :: !(Maybe UserOverrides)
     , _rmPartnersSessionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -440,9 +440,9 @@ instance ToJSON RequestMetadata where
 -- /See:/ 'certificationStatus' smart constructor.
 data CertificationStatus =
   CertificationStatus'
-    { _csUserCount    :: !(Maybe (Textual Int32))
-    , _csIsCertified  :: !(Maybe Bool)
-    , _csType         :: !(Maybe CertificationStatusType)
+    { _csUserCount :: !(Maybe (Textual Int32))
+    , _csIsCertified :: !(Maybe Bool)
+    , _csType :: !(Maybe CertificationStatusType)
     , _csExamStatuses :: !(Maybe [CertificationExamStatus])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -517,9 +517,9 @@ instance ToJSON CertificationStatus where
 -- /See:/ 'debugInfo' smart constructor.
 data DebugInfo =
   DebugInfo'
-    { _diServiceURL      :: !(Maybe Text)
+    { _diServiceURL :: !(Maybe Text)
     , _diServerTraceInfo :: !(Maybe Text)
-    , _diServerInfo      :: !(Maybe Text)
+    , _diServerInfo :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -580,11 +580,11 @@ instance ToJSON DebugInfo where
 -- /See:/ 'optIns' smart constructor.
 data OptIns =
   OptIns'
-    { _oiPhoneContact           :: !(Maybe Bool)
-    , _oiPhysicalMail           :: !(Maybe Bool)
+    { _oiPhoneContact :: !(Maybe Bool)
+    , _oiPhysicalMail :: !(Maybe Bool)
     , _oiPerformanceSuggestions :: !(Maybe Bool)
-    , _oiSpecialOffers          :: !(Maybe Bool)
-    , _oiMarketComm             :: !(Maybe Bool)
+    , _oiSpecialOffers :: !(Maybe Bool)
+    , _oiMarketComm :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -671,7 +671,7 @@ instance ToJSON OptIns where
 -- /See:/ 'analyticsDataPoint' smart constructor.
 data AnalyticsDataPoint =
   AnalyticsDataPoint'
-    { _adpEventCount     :: !(Maybe (Textual Int32))
+    { _adpEventCount :: !(Maybe (Textual Int32))
     , _adpEventLocations :: !(Maybe [LatLng])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -727,7 +727,7 @@ instance ToJSON AnalyticsDataPoint where
 data GetCompanyResponse =
   GetCompanyResponse'
     { _gcrResponseMetadata :: !(Maybe ResponseMetadata)
-    , _gcrCompany          :: !(Maybe Company)
+    , _gcrCompany :: !(Maybe Company)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -775,11 +775,11 @@ instance ToJSON GetCompanyResponse where
 -- /See:/ 'publicProFile' smart constructor.
 data PublicProFile =
   PublicProFile'
-    { _ppfURL             :: !(Maybe Text)
+    { _ppfURL :: !(Maybe Text)
     , _ppfDisplayImageURL :: !(Maybe Text)
-    , _ppfProFileImage    :: !(Maybe Text)
-    , _ppfDisplayName     :: !(Maybe Text)
-    , _ppfId              :: !(Maybe Text)
+    , _ppfProFileImage :: !(Maybe Text)
+    , _ppfDisplayName :: !(Maybe Text)
+    , _ppfId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -862,12 +862,12 @@ instance ToJSON PublicProFile where
 -- /See:/ 'examStatus' smart constructor.
 data ExamStatus =
   ExamStatus'
-    { _esPassed     :: !(Maybe Bool)
+    { _esPassed :: !(Maybe Bool)
     , _esExpiration :: !(Maybe DateTime')
-    , _esWarning    :: !(Maybe Bool)
+    , _esWarning :: !(Maybe Bool)
     , _esLastPassed :: !(Maybe DateTime')
-    , _esTaken      :: !(Maybe DateTime')
-    , _esExamType   :: !(Maybe ExamStatusExamType)
+    , _esTaken :: !(Maybe DateTime')
+    , _esExamType :: !(Maybe ExamStatusExamType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -960,7 +960,7 @@ instance ToJSON ExamStatus where
 data CertificationExamStatus =
   CertificationExamStatus'
     { _cesNumberUsersPass :: !(Maybe (Textual Int32))
-    , _cesType            :: !(Maybe CertificationExamStatusType)
+    , _cesType :: !(Maybe CertificationExamStatusType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1009,15 +1009,15 @@ instance ToJSON CertificationExamStatus where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lLatLng             :: !(Maybe LatLng)
-    , _lLanguageCode       :: !(Maybe Text)
-    , _lSortingCode        :: !(Maybe Text)
-    , _lRegionCode         :: !(Maybe Text)
-    , _lAddressLine        :: !(Maybe [Text])
-    , _lDependentLocality  :: !(Maybe Text)
-    , _lPostalCode         :: !(Maybe Text)
-    , _lAddress            :: !(Maybe Text)
-    , _lLocality           :: !(Maybe Text)
+    { _lLatLng :: !(Maybe LatLng)
+    , _lLanguageCode :: !(Maybe Text)
+    , _lSortingCode :: !(Maybe Text)
+    , _lRegionCode :: !(Maybe Text)
+    , _lAddressLine :: !(Maybe [Text])
+    , _lDependentLocality :: !(Maybe Text)
+    , _lPostalCode :: !(Maybe Text)
+    , _lAddress :: !(Maybe Text)
+    , _lLocality :: !(Maybe Text)
     , _lAdministrativeArea :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1179,7 +1179,7 @@ instance ToJSON Empty where
 -- /See:/ 'trafficSource' smart constructor.
 data TrafficSource =
   TrafficSource'
-    { _tsTrafficSubId    :: !(Maybe Text)
+    { _tsTrafficSubId :: !(Maybe Text)
     , _tsTrafficSourceId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1232,12 +1232,12 @@ instance ToJSON TrafficSource where
 -- /See:/ 'listOffersHistoryResponse' smart constructor.
 data ListOffersHistoryResponse =
   ListOffersHistoryResponse'
-    { _lohrNextPageToken        :: !(Maybe Text)
+    { _lohrNextPageToken :: !(Maybe Text)
     , _lohrShowingEntireCompany :: !(Maybe Bool)
-    , _lohrResponseMetadata     :: !(Maybe ResponseMetadata)
+    , _lohrResponseMetadata :: !(Maybe ResponseMetadata)
     , _lohrCanShowEntireCompany :: !(Maybe Bool)
-    , _lohrTotalResults         :: !(Maybe (Textual Int32))
-    , _lohrOffers               :: !(Maybe [HistoricalOffer])
+    , _lohrTotalResults :: !(Maybe (Textual Int32))
+    , _lohrOffers :: !(Maybe [HistoricalOffer])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1340,8 +1340,8 @@ instance ToJSON ListOffersHistoryResponse where
 data Money =
   Money'
     { _mCurrencyCode :: !(Maybe Text)
-    , _mNanos        :: !(Maybe (Textual Int32))
-    , _mUnits        :: !(Maybe (Textual Int64))
+    , _mNanos :: !(Maybe (Textual Int32))
+    , _mUnits :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1404,9 +1404,9 @@ instance ToJSON Money where
 -- /See:/ 'listCompaniesResponse' smart constructor.
 data ListCompaniesResponse =
   ListCompaniesResponse'
-    { _lcrNextPageToken    :: !(Maybe Text)
+    { _lcrNextPageToken :: !(Maybe Text)
     , _lcrResponseMetadata :: !(Maybe ResponseMetadata)
-    , _lcrCompanies        :: !(Maybe [Company])
+    , _lcrCompanies :: !(Maybe [Company])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1473,11 +1473,11 @@ instance ToJSON ListCompaniesResponse where
 -- /See:/ 'certification' smart constructor.
 data Certification =
   Certification'
-    { _cLastAchieved      :: !(Maybe DateTime')
-    , _cExpiration        :: !(Maybe DateTime')
-    , _cWarning           :: !(Maybe Bool)
+    { _cLastAchieved :: !(Maybe DateTime')
+    , _cExpiration :: !(Maybe DateTime')
+    , _cWarning :: !(Maybe Bool)
     , _cCertificationType :: !(Maybe CertificationCertificationType)
-    , _cAchieved          :: !(Maybe Bool)
+    , _cAchieved :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1561,7 +1561,7 @@ instance ToJSON Certification where
 data RecaptchaChallenge =
   RecaptchaChallenge'
     { _rcResponse :: !(Maybe Text)
-    , _rcId       :: !(Maybe Text)
+    , _rcId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1607,9 +1607,9 @@ instance ToJSON RecaptchaChallenge where
 -- /See:/ 'createLeadResponse' smart constructor.
 data CreateLeadResponse =
   CreateLeadResponse'
-    { _clrRecaptchaStatus  :: !(Maybe CreateLeadResponseRecaptchaStatus)
+    { _clrRecaptchaStatus :: !(Maybe CreateLeadResponseRecaptchaStatus)
     , _clrResponseMetadata :: !(Maybe ResponseMetadata)
-    , _clrLead             :: !(Maybe Lead)
+    , _clrLead :: !(Maybe Lead)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1674,7 +1674,7 @@ instance ToJSON CreateLeadResponse where
 data UserOverrides =
   UserOverrides'
     { _uoIPAddress :: !(Maybe Text)
-    , _uoUserId    :: !(Maybe Text)
+    , _uoUserId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1720,9 +1720,9 @@ instance ToJSON UserOverrides where
 data Analytics =
   Analytics'
     { _aProFileViews :: !(Maybe AnalyticsDataPoint)
-    , _aEventDate    :: !(Maybe Date)
-    , _aSearchViews  :: !(Maybe AnalyticsDataPoint)
-    , _aContacts     :: !(Maybe AnalyticsDataPoint)
+    , _aEventDate :: !(Maybe Date)
+    , _aSearchViews :: !(Maybe AnalyticsDataPoint)
+    , _aContacts :: !(Maybe AnalyticsDataPoint)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1831,9 +1831,9 @@ instance ToJSON ResponseMetadata where
 data LogMessageRequest =
   LogMessageRequest'
     { _lmrRequestMetadata :: !(Maybe RequestMetadata)
-    , _lmrClientInfo      :: !(Maybe LogMessageRequestClientInfo)
-    , _lmrDetails         :: !(Maybe Text)
-    , _lmrLevel           :: !(Maybe LogMessageRequestLevel)
+    , _lmrClientInfo :: !(Maybe LogMessageRequestClientInfo)
+    , _lmrDetails :: !(Maybe Text)
+    , _lmrLevel :: !(Maybe LogMessageRequestLevel)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1906,9 +1906,9 @@ instance ToJSON LogMessageRequest where
 data LocalizedCompanyInfo =
   LocalizedCompanyInfo'
     { _lciLanguageCode :: !(Maybe Text)
-    , _lciOverview     :: !(Maybe Text)
+    , _lciOverview :: !(Maybe Text)
     , _lciCountryCodes :: !(Maybe [Text])
-    , _lciDisplayName  :: !(Maybe Text)
+    , _lciDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1986,18 +1986,18 @@ instance ToJSON LocalizedCompanyInfo where
 -- /See:/ 'availableOffer' smart constructor.
 data AvailableOffer =
   AvailableOffer'
-    { _aoShowSpecialOfferCopy       :: !(Maybe Bool)
-    , _aoQualifiedCustomer          :: !(Maybe [OfferCustomer])
-    , _aoTerms                      :: !(Maybe Text)
+    { _aoShowSpecialOfferCopy :: !(Maybe Bool)
+    , _aoQualifiedCustomer :: !(Maybe [OfferCustomer])
+    , _aoTerms :: !(Maybe Text)
     , _aoQualifiedCustomersComplete :: !(Maybe Bool)
-    , _aoMaxAccountAge              :: !(Maybe (Textual Int32))
-    , _aoName                       :: !(Maybe Text)
-    , _aoCountryOfferInfos          :: !(Maybe [CountryOfferInfo])
-    , _aoId                         :: !(Maybe (Textual Int64))
-    , _aoOfferType                  :: !(Maybe AvailableOfferOfferType)
-    , _aoOfferLevel                 :: !(Maybe AvailableOfferOfferLevel)
-    , _aoDescription                :: !(Maybe Text)
-    , _aoAvailable                  :: !(Maybe (Textual Int32))
+    , _aoMaxAccountAge :: !(Maybe (Textual Int32))
+    , _aoName :: !(Maybe Text)
+    , _aoCountryOfferInfos :: !(Maybe [CountryOfferInfo])
+    , _aoId :: !(Maybe (Textual Int64))
+    , _aoOfferType :: !(Maybe AvailableOfferOfferType)
+    , _aoOfferLevel :: !(Maybe AvailableOfferOfferLevel)
+    , _aoDescription :: !(Maybe Text)
+    , _aoAvailable :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2200,25 +2200,25 @@ instance ToJSON LogMessageRequestClientInfo where
 -- /See:/ 'companyRelation' smart constructor.
 data CompanyRelation =
   CompanyRelation'
-    { _crCreationTime         :: !(Maybe DateTime')
-    , _crState                :: !(Maybe CompanyRelationState)
-    , _crBadgeTier            :: !(Maybe CompanyRelationBadgeTier)
-    , _crCompanyId            :: !(Maybe Text)
-    , _crPrimaryAddress       :: !(Maybe Location)
-    , _crLogoURL              :: !(Maybe Text)
-    , _crCompanyAdmin         :: !(Maybe Bool)
-    , _crWebsite              :: !(Maybe Text)
-    , _crAddress              :: !(Maybe Text)
-    , _crPrimaryCountryCode   :: !(Maybe Text)
-    , _crName                 :: !(Maybe Text)
-    , _crPhoneNumber          :: !(Maybe Text)
-    , _crManagerAccount       :: !(Maybe (Textual Int64))
-    , _crIsPending            :: !(Maybe Bool)
-    , _crInternalCompanyId    :: !(Maybe Text)
+    { _crCreationTime :: !(Maybe DateTime')
+    , _crState :: !(Maybe CompanyRelationState)
+    , _crBadgeTier :: !(Maybe CompanyRelationBadgeTier)
+    , _crCompanyId :: !(Maybe Text)
+    , _crPrimaryAddress :: !(Maybe Location)
+    , _crLogoURL :: !(Maybe Text)
+    , _crCompanyAdmin :: !(Maybe Bool)
+    , _crWebsite :: !(Maybe Text)
+    , _crAddress :: !(Maybe Text)
+    , _crPrimaryCountryCode :: !(Maybe Text)
+    , _crName :: !(Maybe Text)
+    , _crPhoneNumber :: !(Maybe Text)
+    , _crManagerAccount :: !(Maybe (Textual Int64))
+    , _crIsPending :: !(Maybe Bool)
+    , _crInternalCompanyId :: !(Maybe Text)
     , _crSpecializationStatus :: !(Maybe [SpecializationStatus])
-    , _crSegment              :: !(Maybe [Text])
-    , _crPrimaryLanguageCode  :: !(Maybe Text)
-    , _crResolvedTimestamp    :: !(Maybe DateTime')
+    , _crSegment :: !(Maybe [Text])
+    , _crPrimaryLanguageCode :: !(Maybe Text)
+    , _crResolvedTimestamp :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2456,18 +2456,18 @@ instance ToJSON CompanyRelation where
 -- /See:/ 'user' smart constructor.
 data User =
   User'
-    { _uCertificationStatus             :: !(Maybe [Certification])
-    , _uPublicProFile                   :: !(Maybe PublicProFile)
-    , _uCompanyVerificationEmail        :: !(Maybe Text)
-    , _uExamStatus                      :: !(Maybe [ExamStatus])
-    , _uPrimaryEmails                   :: !(Maybe [Text])
-    , _uProFile                         :: !(Maybe UserProFile)
-    , _uAfaInfoShared                   :: !(Maybe Bool)
-    , _uCompany                         :: !(Maybe CompanyRelation)
-    , _uInternalId                      :: !(Maybe Text)
-    , _uId                              :: !(Maybe Text)
+    { _uCertificationStatus :: !(Maybe [Certification])
+    , _uPublicProFile :: !(Maybe PublicProFile)
+    , _uCompanyVerificationEmail :: !(Maybe Text)
+    , _uExamStatus :: !(Maybe [ExamStatus])
+    , _uPrimaryEmails :: !(Maybe [Text])
+    , _uProFile :: !(Maybe UserProFile)
+    , _uAfaInfoShared :: !(Maybe Bool)
+    , _uCompany :: !(Maybe CompanyRelation)
+    , _uInternalId :: !(Maybe Text)
+    , _uId :: !(Maybe Text)
     , _uAvailableAdwordsManagerAccounts :: !(Maybe [AdWordsManagerAccountInfo])
-    , _uLastAccessTime                  :: !(Maybe DateTime')
+    , _uLastAccessTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2656,8 +2656,8 @@ instance ToJSON User where
 -- /See:/ 'date' smart constructor.
 data Date =
   Date'
-    { _dDay   :: !(Maybe (Textual Int32))
-    , _dYear  :: !(Maybe (Textual Int32))
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2720,21 +2720,21 @@ instance ToJSON Date where
 -- /See:/ 'lead' smart constructor.
 data Lead =
   Lead'
-    { _leaGivenName         :: !(Maybe Text)
-    , _leaEmail             :: !(Maybe Text)
-    , _leaLanguageCode      :: !(Maybe Text)
-    , _leaState             :: !(Maybe LeadState)
-    , _leaMarketingOptIn    :: !(Maybe Bool)
+    { _leaGivenName :: !(Maybe Text)
+    , _leaEmail :: !(Maybe Text)
+    , _leaLanguageCode :: !(Maybe Text)
+    , _leaState :: !(Maybe LeadState)
+    , _leaMarketingOptIn :: !(Maybe Bool)
     , _leaAdwordsCustomerId :: !(Maybe (Textual Int64))
-    , _leaFamilyName        :: !(Maybe Text)
-    , _leaPhoneNumber       :: !(Maybe Text)
-    , _leaMinMonthlyBudget  :: !(Maybe Money)
-    , _leaId                :: !(Maybe Text)
-    , _leaComments          :: !(Maybe Text)
-    , _leaWebsiteURL        :: !(Maybe Text)
-    , _leaType              :: !(Maybe LeadType)
-    , _leaGpsMotivations    :: !(Maybe [Text])
-    , _leaCreateTime        :: !(Maybe DateTime')
+    , _leaFamilyName :: !(Maybe Text)
+    , _leaPhoneNumber :: !(Maybe Text)
+    , _leaMinMonthlyBudget :: !(Maybe Money)
+    , _leaId :: !(Maybe Text)
+    , _leaComments :: !(Maybe Text)
+    , _leaWebsiteURL :: !(Maybe Text)
+    , _leaType :: !(Maybe LeadType)
+    , _leaGpsMotivations :: !(Maybe [Text])
+    , _leaCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2927,7 +2927,7 @@ instance ToJSON Lead where
 data AdWordsManagerAccountInfo =
   AdWordsManagerAccountInfo'
     { _awmaiCustomerName :: !(Maybe Text)
-    , _awmaiId           :: !(Maybe (Textual Int64))
+    , _awmaiId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3014,14 +3014,14 @@ instance ToJSON LogMessageResponse where
 -- /See:/ 'offerCustomer' smart constructor.
 data OfferCustomer =
   OfferCustomer'
-    { _ocCreationTime        :: !(Maybe DateTime')
-    , _ocAdwordsURL          :: !(Maybe Text)
-    , _ocGetYAmount          :: !(Maybe Text)
-    , _ocName                :: !(Maybe Text)
-    , _ocCountryCode         :: !(Maybe Text)
-    , _ocOfferType           :: !(Maybe OfferCustomerOfferType)
-    , _ocSpendXAmount        :: !(Maybe Text)
-    , _ocExternalCid         :: !(Maybe (Textual Int64))
+    { _ocCreationTime :: !(Maybe DateTime')
+    , _ocAdwordsURL :: !(Maybe Text)
+    , _ocGetYAmount :: !(Maybe Text)
+    , _ocName :: !(Maybe Text)
+    , _ocCountryCode :: !(Maybe Text)
+    , _ocOfferType :: !(Maybe OfferCustomerOfferType)
+    , _ocSpendXAmount :: !(Maybe Text)
+    , _ocExternalCid :: !(Maybe (Textual Int64))
     , _ocEligibilityDaysLeft :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3190,8 +3190,8 @@ instance ToJSON GetPartnersStatusResponse where
 -- /See:/ 'listAnalyticsResponse' smart constructor.
 data ListAnalyticsResponse =
   ListAnalyticsResponse'
-    { _larNextPageToken    :: !(Maybe Text)
-    , _larAnalytics        :: !(Maybe [Analytics])
+    { _larNextPageToken :: !(Maybe Text)
+    , _larAnalytics :: !(Maybe [Analytics])
     , _larResponseMetadata :: !(Maybe ResponseMetadata)
     , _larAnalyticsSummary :: !(Maybe AnalyticsSummary)
     }
@@ -3273,28 +3273,28 @@ instance ToJSON ListAnalyticsResponse where
 -- /See:/ 'company' smart constructor.
 data Company =
   Company'
-    { _cCompanyTypes                   :: !(Maybe [Text])
-    , _cAutoApprovalEmailDomains       :: !(Maybe [Text])
-    , _cProFileStatus                  :: !(Maybe CompanyProFileStatus)
-    , _cBadgeTier                      :: !(Maybe CompanyBadgeTier)
-    , _cPublicProFile                  :: !(Maybe PublicProFile)
-    , _cOriginalMinMonthlyBudget       :: !(Maybe Money)
-    , _cAdditionalWebsites             :: !(Maybe [Text])
-    , _cIndustries                     :: !(Maybe [Text])
-    , _cConvertedMinMonthlyBudget      :: !(Maybe Money)
-    , _cName                           :: !(Maybe Text)
-    , _cLocalizedInfos                 :: !(Maybe [LocalizedCompanyInfo])
-    , _cCertificationStatuses          :: !(Maybe [CertificationStatus])
-    , _cRanks                          :: !(Maybe [Rank])
-    , _cId                             :: !(Maybe Text)
-    , _cWebsiteURL                     :: !(Maybe Text)
-    , _cSpecializationStatus           :: !(Maybe [SpecializationStatus])
+    { _cCompanyTypes :: !(Maybe [Text])
+    , _cAutoApprovalEmailDomains :: !(Maybe [Text])
+    , _cProFileStatus :: !(Maybe CompanyProFileStatus)
+    , _cBadgeTier :: !(Maybe CompanyBadgeTier)
+    , _cPublicProFile :: !(Maybe PublicProFile)
+    , _cOriginalMinMonthlyBudget :: !(Maybe Money)
+    , _cAdditionalWebsites :: !(Maybe [Text])
+    , _cIndustries :: !(Maybe [Text])
+    , _cConvertedMinMonthlyBudget :: !(Maybe Money)
+    , _cName :: !(Maybe Text)
+    , _cLocalizedInfos :: !(Maybe [LocalizedCompanyInfo])
+    , _cCertificationStatuses :: !(Maybe [CertificationStatus])
+    , _cRanks :: !(Maybe [Rank])
+    , _cId :: !(Maybe Text)
+    , _cWebsiteURL :: !(Maybe Text)
+    , _cSpecializationStatus :: !(Maybe [SpecializationStatus])
     , _cPrimaryAdwordsManagerAccountId :: !(Maybe (Textual Int64))
-    , _cBadgeAuthorityInAwn            :: !(Maybe Bool)
-    , _cPrimaryLanguageCode            :: !(Maybe Text)
-    , _cLocations                      :: !(Maybe [Location])
-    , _cServices                       :: !(Maybe [Text])
-    , _cPrimaryLocation                :: !(Maybe Location)
+    , _cBadgeAuthorityInAwn :: !(Maybe Bool)
+    , _cPrimaryLanguageCode :: !(Maybe Text)
+    , _cLocations :: !(Maybe [Location])
+    , _cServices :: !(Maybe [Text])
+    , _cPrimaryLocation :: !(Maybe Location)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3629,8 +3629,8 @@ instance ToJSON LogUserEventResponse where
 -- /See:/ 'listOffersResponse' smart constructor.
 data ListOffersResponse =
   ListOffersResponse'
-    { _lorAvailableOffers  :: !(Maybe [AvailableOffer])
-    , _lorNoOfferReason    :: !(Maybe ListOffersResponseNoOfferReason)
+    { _lorAvailableOffers :: !(Maybe [AvailableOffer])
+    , _lorNoOfferReason :: !(Maybe ListOffersResponseNoOfferReason)
     , _lorResponseMetadata :: !(Maybe ResponseMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3697,21 +3697,21 @@ instance ToJSON ListOffersResponse where
 -- /See:/ 'userProFile' smart constructor.
 data UserProFile =
   UserProFile'
-    { _upfGivenName             :: !(Maybe Text)
-    , _upfMarkets               :: !(Maybe [Text])
-    , _upfChannels              :: !(Maybe [Text])
-    , _upfEmailOptIns           :: !(Maybe OptIns)
-    , _upfJobFunctions          :: !(Maybe [Text])
-    , _upfAddress               :: !(Maybe Location)
-    , _upfPrimaryCountryCode    :: !(Maybe Text)
-    , _upfFamilyName            :: !(Maybe Text)
-    , _upfLanguages             :: !(Maybe [Text])
-    , _upfIndustries            :: !(Maybe [Text])
-    , _upfMigrateToAfa          :: !(Maybe Bool)
-    , _upfPhoneNumber           :: !(Maybe Text)
-    , _upfEmailAddress          :: !(Maybe Text)
+    { _upfGivenName :: !(Maybe Text)
+    , _upfMarkets :: !(Maybe [Text])
+    , _upfChannels :: !(Maybe [Text])
+    , _upfEmailOptIns :: !(Maybe OptIns)
+    , _upfJobFunctions :: !(Maybe [Text])
+    , _upfAddress :: !(Maybe Location)
+    , _upfPrimaryCountryCode :: !(Maybe Text)
+    , _upfFamilyName :: !(Maybe Text)
+    , _upfLanguages :: !(Maybe [Text])
+    , _upfIndustries :: !(Maybe [Text])
+    , _upfMigrateToAfa :: !(Maybe Bool)
+    , _upfPhoneNumber :: !(Maybe Text)
+    , _upfEmailAddress :: !(Maybe Text)
     , _upfAdwordsManagerAccount :: !(Maybe (Textual Int64))
-    , _upfProFilePublic         :: !(Maybe Bool)
+    , _upfProFilePublic :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3916,9 +3916,9 @@ instance ToJSON UserProFile where
 -- /See:/ 'analyticsSummary' smart constructor.
 data AnalyticsSummary =
   AnalyticsSummary'
-    { _asContactsCount     :: !(Maybe (Textual Int32))
+    { _asContactsCount :: !(Maybe (Textual Int32))
     , _asProFileViewsCount :: !(Maybe (Textual Int32))
-    , _asSearchViewsCount  :: !(Maybe (Textual Int32))
+    , _asSearchViewsCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3988,13 +3988,13 @@ instance ToJSON AnalyticsSummary where
 -- /See:/ 'logUserEventRequest' smart constructor.
 data LogUserEventRequest =
   LogUserEventRequest'
-    { _luerEventCategory   :: !(Maybe LogUserEventRequestEventCategory)
+    { _luerEventCategory :: !(Maybe LogUserEventRequestEventCategory)
     , _luerRequestMetadata :: !(Maybe RequestMetadata)
-    , _luerURL             :: !(Maybe Text)
-    , _luerEventScope      :: !(Maybe LogUserEventRequestEventScope)
-    , _luerLead            :: !(Maybe Lead)
-    , _luerEventDatas      :: !(Maybe [EventData])
-    , _luerEventAction     :: !(Maybe LogUserEventRequestEventAction)
+    , _luerURL :: !(Maybe Text)
+    , _luerEventScope :: !(Maybe LogUserEventRequestEventScope)
+    , _luerLead :: !(Maybe Lead)
+    , _luerEventDatas :: !(Maybe [EventData])
+    , _luerEventAction :: !(Maybe LogUserEventRequestEventAction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4099,7 +4099,7 @@ instance ToJSON LogUserEventRequest where
 -- /See:/ 'specializationStatus' smart constructor.
 data SpecializationStatus =
   SpecializationStatus'
-    { _ssBadgeSpecialization      :: !(Maybe SpecializationStatusBadgeSpecialization)
+    { _ssBadgeSpecialization :: !(Maybe SpecializationStatusBadgeSpecialization)
     , _ssBadgeSpecializationState :: !(Maybe SpecializationStatusBadgeSpecializationState)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4154,7 +4154,7 @@ instance ToJSON SpecializationStatus where
 data Rank =
   Rank'
     { _rValue :: !(Maybe (Textual Double))
-    , _rType  :: !(Maybe RankType)
+    , _rType :: !(Maybe RankType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4197,10 +4197,10 @@ instance ToJSON Rank where
 -- /See:/ 'listLeadsResponse' smart constructor.
 data ListLeadsResponse =
   ListLeadsResponse'
-    { _llrLeads            :: !(Maybe [Lead])
-    , _llrNextPageToken    :: !(Maybe Text)
+    { _llrLeads :: !(Maybe [Lead])
+    , _llrNextPageToken :: !(Maybe Text)
     , _llrResponseMetadata :: !(Maybe ResponseMetadata)
-    , _llrTotalSize        :: !(Maybe (Textual Int32))
+    , _llrTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4278,10 +4278,10 @@ instance ToJSON ListLeadsResponse where
 -- /See:/ 'countryOfferInfo' smart constructor.
 data CountryOfferInfo =
   CountryOfferInfo'
-    { _coiGetYAmount       :: !(Maybe Text)
+    { _coiGetYAmount :: !(Maybe Text)
     , _coiOfferCountryCode :: !(Maybe Text)
-    , _coiOfferType        :: !(Maybe CountryOfferInfoOfferType)
-    , _coiSpendXAmount     :: !(Maybe Text)
+    , _coiOfferType :: !(Maybe CountryOfferInfoOfferType)
+    , _coiSpendXAmount :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4354,9 +4354,9 @@ instance ToJSON CountryOfferInfo where
 -- /See:/ 'createLeadRequest' smart constructor.
 data CreateLeadRequest =
   CreateLeadRequest'
-    { _cRequestMetadata    :: !(Maybe RequestMetadata)
+    { _cRequestMetadata :: !(Maybe RequestMetadata)
     , _cRecaptchaChallenge :: !(Maybe RecaptchaChallenge)
-    , _cLead               :: !(Maybe Lead)
+    , _cLead :: !(Maybe Lead)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

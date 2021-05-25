@@ -43,8 +43,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.
     , apaldCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.delete@ method which the
 -- 'AccessPoliciesAccessLevelsDelete' request conforms to.
@@ -65,12 +65,12 @@ type AccessPoliciesAccessLevelsDeleteResource =
 -- /See:/ 'accessPoliciesAccessLevelsDelete' smart constructor.
 data AccessPoliciesAccessLevelsDelete =
   AccessPoliciesAccessLevelsDelete'
-    { _apaldXgafv          :: !(Maybe Xgafv)
+    { _apaldXgafv :: !(Maybe Xgafv)
     , _apaldUploadProtocol :: !(Maybe Text)
-    , _apaldAccessToken    :: !(Maybe Text)
-    , _apaldUploadType     :: !(Maybe Text)
-    , _apaldName           :: !Text
-    , _apaldCallback       :: !(Maybe Text)
+    , _apaldAccessToken :: !(Maybe Text)
+    , _apaldUploadType :: !(Maybe Text)
+    , _apaldName :: !Text
+    , _apaldCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

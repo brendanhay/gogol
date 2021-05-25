@@ -21,9 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the specified regional BackendService resource with the data
--- included in the request. There are several restrictions and guidelines
--- to keep in mind when updating a backend service. Read Restrictions and
--- Guidelines for more information.
+-- included in the request. For more information, see Backend services
+-- overview.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionBackendServices.update@.
 module Network.Google.Resource.Compute.RegionBackendServices.Update
@@ -43,8 +42,8 @@ module Network.Google.Resource.Compute.RegionBackendServices.Update
     , rbsuBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionBackendServices.update@ method which the
 -- 'RegionBackendServicesUpdate' request conforms to.
@@ -63,17 +62,16 @@ type RegionBackendServicesUpdateResource =
                            Put '[JSON] Operation
 
 -- | Updates the specified regional BackendService resource with the data
--- included in the request. There are several restrictions and guidelines
--- to keep in mind when updating a backend service. Read Restrictions and
--- Guidelines for more information.
+-- included in the request. For more information, see Backend services
+-- overview.
 --
 -- /See:/ 'regionBackendServicesUpdate' smart constructor.
 data RegionBackendServicesUpdate =
   RegionBackendServicesUpdate'
-    { _rbsuRequestId      :: !(Maybe Text)
-    , _rbsuProject        :: !Text
-    , _rbsuPayload        :: !BackendService
-    , _rbsuRegion         :: !Text
+    { _rbsuRequestId :: !(Maybe Text)
+    , _rbsuProject :: !Text
+    , _rbsuPayload :: !BackendService
+    , _rbsuRegion :: !Text
     , _rbsuBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

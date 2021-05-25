@@ -52,8 +52,8 @@ module Network.Google.Resource.Partners.Companies.Get
     , cgCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.companies.get@ method which the
 -- 'CompaniesGet' request conforms to.
@@ -99,23 +99,23 @@ type CompaniesGetResource =
 -- /See:/ 'companiesGet' smart constructor.
 data CompaniesGet =
   CompaniesGet'
-    { _cgXgafv                                       :: !(Maybe Xgafv)
-    , _cgCurrencyCode                                :: !(Maybe Text)
-    , _cgUploadProtocol                              :: !(Maybe Text)
-    , _cgCompanyId                                   :: !Text
-    , _cgOrderBy                                     :: !(Maybe Text)
-    , _cgAccessToken                                 :: !(Maybe Text)
-    , _cgUploadType                                  :: !(Maybe Text)
-    , _cgAddress                                     :: !(Maybe Text)
-    , _cgRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _cgRequestMetadataLocale                       :: !(Maybe Text)
-    , _cgView                                        :: !(Maybe Text)
-    , _cgRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _cgRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _cgRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _cgRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _cgXgafv :: !(Maybe Xgafv)
+    , _cgCurrencyCode :: !(Maybe Text)
+    , _cgUploadProtocol :: !(Maybe Text)
+    , _cgCompanyId :: !Text
+    , _cgOrderBy :: !(Maybe Text)
+    , _cgAccessToken :: !(Maybe Text)
+    , _cgUploadType :: !(Maybe Text)
+    , _cgAddress :: !(Maybe Text)
+    , _cgRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _cgRequestMetadataLocale :: !(Maybe Text)
+    , _cgView :: !(Maybe Text)
+    , _cgRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _cgRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _cgRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _cgRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _cgCallback                                    :: !(Maybe Text)
+    , _cgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

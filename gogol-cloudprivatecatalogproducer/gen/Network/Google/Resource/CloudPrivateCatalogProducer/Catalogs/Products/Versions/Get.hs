@@ -22,7 +22,7 @@
 --
 -- Returns the requested Version resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.get@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.get@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Ver
     , cpvgCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.versions.get@ method which the
 -- 'CatalogsProductsVersionsGet' request conforms to.
@@ -63,12 +63,12 @@ type CatalogsProductsVersionsGetResource =
 -- /See:/ 'catalogsProductsVersionsGet' smart constructor.
 data CatalogsProductsVersionsGet =
   CatalogsProductsVersionsGet'
-    { _cpvgXgafv          :: !(Maybe Xgafv)
+    { _cpvgXgafv :: !(Maybe Xgafv)
     , _cpvgUploadProtocol :: !(Maybe Text)
-    , _cpvgAccessToken    :: !(Maybe Text)
-    , _cpvgUploadType     :: !(Maybe Text)
-    , _cpvgName           :: !Text
-    , _cpvgCallback       :: !(Maybe Text)
+    , _cpvgAccessToken :: !(Maybe Text)
+    , _cpvgUploadType :: !(Maybe Text)
+    , _cpvgName :: !Text
+    , _cpvgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Delete
     , tvgdRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.delete@ method which the
 -- 'TargetVPNGatewaysDelete' request conforms to.
@@ -61,10 +61,10 @@ type TargetVPNGatewaysDeleteResource =
 -- /See:/ 'targetVPNGatewaysDelete' smart constructor.
 data TargetVPNGatewaysDelete =
   TargetVPNGatewaysDelete'
-    { _tvgdRequestId        :: !(Maybe Text)
-    , _tvgdProject          :: !Text
+    { _tvgdRequestId :: !(Maybe Text)
+    , _tvgdProject :: !Text
     , _tvgdTargetVPNGateway :: !Text
-    , _tvgdRegion           :: !Text
+    , _tvgdRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Publishing API for Google Play Game Services.
+-- The Google Play Game Services Publishing API allows developers to
+-- configure their games in Game Services.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference>
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference>
 module Network.Google.GamesConfiguration
     (
     -- * Service Configuration
@@ -41,9 +42,6 @@ module Network.Google.GamesConfiguration
     -- ** gamesConfiguration.achievementConfigurations.list
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
 
-    -- ** gamesConfiguration.achievementConfigurations.patch
-    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
-
     -- ** gamesConfiguration.achievementConfigurations.update
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
 
@@ -62,13 +60,13 @@ module Network.Google.GamesConfiguration
     -- ** gamesConfiguration.leaderboardConfigurations.list
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
 
-    -- ** gamesConfiguration.leaderboardConfigurations.patch
-    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
-
     -- ** gamesConfiguration.leaderboardConfigurations.update
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
 
     -- * Types
+
+    -- ** LeaderboardConfigurationScoreOrder
+    , LeaderboardConfigurationScoreOrder (..)
 
     -- ** ImageConfiguration
     , ImageConfiguration
@@ -77,6 +75,12 @@ module Network.Google.GamesConfiguration
     , icKind
     , icURL
     , icImageType
+
+    -- ** AchievementConfigurationAchievementType
+    , AchievementConfigurationAchievementType (..)
+
+    -- ** ImageConfigurationImageType
+    , ImageConfigurationImageType (..)
 
     -- ** LeaderboardConfigurationListResponse
     , LeaderboardConfigurationListResponse
@@ -94,6 +98,9 @@ module Network.Google.GamesConfiguration
     , gnacOne
     , gnacZero
     , gnacMany
+
+    -- ** AchievementConfigurationInitialState
+    , AchievementConfigurationInitialState (..)
 
     -- ** AchievementConfigurationListResponse
     , AchievementConfigurationListResponse
@@ -126,6 +133,9 @@ module Network.Google.GamesConfiguration
     , acDraft
     , acId
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** LocalizedString
     , LocalizedString
     , localizedString
@@ -140,6 +150,9 @@ module Network.Google.GamesConfiguration
     , gnfcCurrencyCode
     , gnfcNumberFormatType
     , gnfcNumDecimalPlaces
+
+    -- ** GamesNumberFormatConfigurationNumberFormatType
+    , GamesNumberFormatConfigurationNumberFormatType (..)
 
     -- ** ImageConfigurationsUploadImageType
     , ImageConfigurationsUploadImageType (..)
@@ -170,21 +183,19 @@ module Network.Google.GamesConfiguration
     , lsbTranslations
     ) where
 
-import           Network.Google.GamesConfiguration.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
-import           Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
-import           Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
-import           Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
-import           Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
-import           Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
-import           Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
-import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
-import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
-import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
-import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
-import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
-import           Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
+import Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types
+import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
+import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
+import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
+import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
+import Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
+import Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
+import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
+import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
+import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
+import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
+import Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
 
 {- $resources
 TODO
@@ -195,13 +206,11 @@ type GamesConfigurationAPI =
      ImageConfigurationsUploadResource :<|>
        LeaderboardConfigurationsInsertResource
        :<|> LeaderboardConfigurationsListResource
-       :<|> LeaderboardConfigurationsPatchResource
        :<|> LeaderboardConfigurationsGetResource
        :<|> LeaderboardConfigurationsDeleteResource
        :<|> LeaderboardConfigurationsUpdateResource
        :<|> AchievementConfigurationsInsertResource
        :<|> AchievementConfigurationsListResource
-       :<|> AchievementConfigurationsPatchResource
        :<|> AchievementConfigurationsGetResource
        :<|> AchievementConfigurationsDeleteResource
        :<|> AchievementConfigurationsUpdateResource

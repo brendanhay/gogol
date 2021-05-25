@@ -47,8 +47,8 @@ module Network.Google.Resource.AppsActivity.Activities.List
     , alPageSize
     ) where
 
-import           Network.Google.AppsActivity.Types
-import           Network.Google.Prelude
+import Network.Google.AppsActivity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appsactivity.activities.list@ method which the
 -- 'ActivitiesList' request conforms to.
@@ -78,13 +78,13 @@ type ActivitiesListResource =
 -- /See:/ 'activitiesList' smart constructor.
 data ActivitiesList =
   ActivitiesList'
-    { _alDriveFileId      :: !(Maybe Text)
-    , _alDriveAncestorId  :: !(Maybe Text)
+    { _alDriveFileId :: !(Maybe Text)
+    , _alDriveAncestorId :: !(Maybe Text)
     , _alGroupingStrategy :: !ActivitiesListGroupingStrategy
-    , _alUserId           :: !Text
-    , _alSource           :: !(Maybe Text)
-    , _alPageToken        :: !(Maybe Text)
-    , _alPageSize         :: !(Textual Int32)
+    , _alUserId :: !Text
+    , _alSource :: !(Maybe Text)
+    , _alPageToken :: !(Maybe Text)
+    , _alPageSize :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -44,8 +44,8 @@ module Network.Google.Resource.ServiceManagement.Services.Delete
     , sdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.delete@ method which the
 -- 'ServicesDelete' request conforms to.
@@ -68,12 +68,12 @@ type ServicesDeleteResource =
 -- /See:/ 'servicesDelete' smart constructor.
 data ServicesDelete =
   ServicesDelete'
-    { _sdXgafv          :: !(Maybe Xgafv)
+    { _sdXgafv :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
-    , _sdAccessToken    :: !(Maybe Text)
-    , _sdUploadType     :: !(Maybe Text)
-    , _sdServiceName    :: !Text
-    , _sdCallback       :: !(Maybe Text)
+    , _sdAccessToken :: !(Maybe Text)
+    , _sdUploadType :: !(Maybe Text)
+    , _sdServiceName :: !Text
+    , _sdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,7 +128,7 @@ sdUploadType :: Lens' ServicesDelete (Maybe Text)
 sdUploadType
   = lens _sdUploadType (\ s a -> s{_sdUploadType = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 sdServiceName :: Lens' ServicesDelete Text

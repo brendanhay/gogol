@@ -48,8 +48,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Patch
     , bapCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.patch@ method which the
 -- 'BillingAccountsPatch' request conforms to.
@@ -76,14 +76,14 @@ type BillingAccountsPatchResource =
 -- /See:/ 'billingAccountsPatch' smart constructor.
 data BillingAccountsPatch =
   BillingAccountsPatch'
-    { _bapXgafv          :: !(Maybe Xgafv)
+    { _bapXgafv :: !(Maybe Xgafv)
     , _bapUploadProtocol :: !(Maybe Text)
-    , _bapUpdateMask     :: !(Maybe GFieldMask)
-    , _bapAccessToken    :: !(Maybe Text)
-    , _bapUploadType     :: !(Maybe Text)
-    , _bapPayload        :: !BillingAccount
-    , _bapName           :: !Text
-    , _bapCallback       :: !(Maybe Text)
+    , _bapUpdateMask :: !(Maybe GFieldMask)
+    , _bapAccessToken :: !(Maybe Text)
+    , _bapUploadType :: !(Maybe Text)
+    , _bapPayload :: !BillingAccount
+    , _bapName :: !Text
+    , _bapCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,7 +158,7 @@ bapPayload :: Lens' BillingAccountsPatch BillingAccount
 bapPayload
   = lens _bapPayload (\ s a -> s{_bapPayload = a})
 
--- | The name of the billing account resource to be updated.
+-- | Required. The name of the billing account resource to be updated.
 bapName :: Lens' BillingAccountsPatch Text
 bapName = lens _bapName (\ s a -> s{_bapName = a})
 
@@ -170,7 +170,8 @@ bapCallback
 instance GoogleRequest BillingAccountsPatch where
         type Rs BillingAccountsPatch = BillingAccount
         type Scopes BillingAccountsPatch =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsPatch'{..}
           = go _bapName _bapXgafv _bapUploadProtocol
               _bapUpdateMask

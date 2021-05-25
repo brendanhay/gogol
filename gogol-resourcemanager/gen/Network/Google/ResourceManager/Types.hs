@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -23,11 +23,22 @@ module Network.Google.ResourceManager.Types
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
+    -- * UndeleteOrganizationMetadata
+    , UndeleteOrganizationMetadata
+    , undeleteOrganizationMetadata
+
     -- * ListFoldersResponse
     , ListFoldersResponse
     , listFoldersResponse
     , lfrNextPageToken
     , lfrFolders
+
+    -- * CreateProjectMetadata
+    , CreateProjectMetadata
+    , createProjectMetadata
+    , cpmGettable
+    , cpmReady
+    , cpmCreateTime
 
     -- * Status
     , Status
@@ -36,8 +47,8 @@ module Network.Google.ResourceManager.Types
     , sCode
     , sMessage
 
-    -- * FolderLifecycleState
-    , FolderLifecycleState (..)
+    -- * OrganizationState
+    , OrganizationState (..)
 
     -- * AuditConfig
     , AuditConfig
@@ -53,20 +64,42 @@ module Network.Google.ResourceManager.Types
     , eTitle
     , eDescription
 
+    -- * ListProjectsResponse
+    , ListProjectsResponse
+    , listProjectsResponse
+    , lprNextPageToken
+    , lprProjects
+
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
-
-    -- * SearchFoldersRequest
-    , SearchFoldersRequest
-    , searchFoldersRequest
-    , sfrQuery
-    , sfrPageToken
-    , sfrPageSize
+    , giprOptions
 
     -- * UndeleteFolderRequest
     , UndeleteFolderRequest
     , undeleteFolderRequest
+
+    -- * DeleteTagValueMetadata
+    , DeleteTagValueMetadata
+    , deleteTagValueMetadata
+
+    -- * UpdateTagValueMetadata
+    , UpdateTagValueMetadata
+    , updateTagValueMetadata
+
+    -- * Project
+    , Project
+    , project
+    , pParent
+    , pEtag
+    , pState
+    , pUpdateTime
+    , pDeleteTime
+    , pName
+    , pDisplayName
+    , pLabels
+    , pProjectId
+    , pCreateTime
 
     -- * Operation
     , Operation
@@ -76,6 +109,10 @@ module Network.Google.ResourceManager.Types
     , oResponse
     , oName
     , oMetadata
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * FolderOperationErrorErrorMessageId
     , FolderOperationErrorErrorMessageId (..)
@@ -93,10 +130,34 @@ module Network.Google.ResourceManager.Types
     , pcsReady
     , pcsCreateTime
 
+    -- * CreateTagValueMetadata
+    , CreateTagValueMetadata
+    , createTagValueMetadata
+
+    -- * ListTagValuesResponse
+    , ListTagValuesResponse
+    , listTagValuesResponse
+    , ltvrNextPageToken
+    , ltvrTagValues
+
+    -- * CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperation
+    , CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperation
+    , cloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperation
+    , crmgcrmvfoDestinationParent
+    , crmgcrmvfoDisplayName
+    , crmgcrmvfoOperationType
+    , crmgcrmvfoSourceParent
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- * SearchProjectsResponse
+    , SearchProjectsResponse
+    , searchProjectsResponse
+    , sprNextPageToken
+    , sprProjects
 
     -- * FolderOperationError
     , FolderOperationError
@@ -107,10 +168,18 @@ module Network.Google.ResourceManager.Types
     , Folder
     , folder
     , fParent
+    , fEtag
+    , fState
+    , fUpdateTime
+    , fDeleteTime
     , fName
     , fDisplayName
-    , fLifecycleState
     , fCreateTime
+
+    -- * GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
 
     -- * FolderOperationOperationType
     , FolderOperationOperationType (..)
@@ -121,16 +190,119 @@ module Network.Google.ResourceManager.Types
     , siprUpdateMask
     , siprPolicy
 
+    -- * TagValue
+    , TagValue
+    , tagValue
+    , tvParent
+    , tvEtag
+    , tvShortName
+    , tvUpdateTime
+    , tvName
+    , tvNamespacedName
+    , tvDescription
+    , tvCreateTime
+
+    -- * UndeleteFolderMetadata
+    , UndeleteFolderMetadata
+    , undeleteFolderMetadata
+
+    -- * ListLiensResponse
+    , ListLiensResponse
+    , listLiensResponse
+    , llrNextPageToken
+    , llrLiens
+
+    -- * CreateTagKeyMetadata
+    , CreateTagKeyMetadata
+    , createTagKeyMetadata
+
+    -- * CreateFolderMetadata
+    , CreateFolderMetadata
+    , createFolderMetadata
+    , cfmParent
+    , cfmDisplayName
+
+    -- * DeleteOrganizationMetadata
+    , DeleteOrganizationMetadata
+    , deleteOrganizationMetadata
+
+    -- * DeleteTagBindingMetadata
+    , DeleteTagBindingMetadata
+    , deleteTagBindingMetadata
+
+    -- * ListTagKeysResponse
+    , ListTagKeysResponse
+    , listTagKeysResponse
+    , ltkrNextPageToken
+    , ltkrTagKeys
+
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
 
+    -- * MoveFolderMetadata
+    , MoveFolderMetadata
+    , moveFolderMetadata
+    , mfmDestinationParent
+    , mfmDisplayName
+    , mfmSourceParent
+
     -- * Xgafv
     , Xgafv (..)
+
+    -- * UndeleteProjectMetadata
+    , UndeleteProjectMetadata
+    , undeleteProjectMetadata
+
+    -- * CreateTagBindingMetadata
+    , CreateTagBindingMetadata
+    , createTagBindingMetadata
+
+    -- * ProjectState
+    , ProjectState (..)
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
+
+    -- * DeleteFolderMetadata
+    , DeleteFolderMetadata
+    , deleteFolderMetadata
+
+    -- * UpdateFolderMetadata
+    , UpdateFolderMetadata
+    , updateFolderMetadata
+
+    -- * MoveProjectRequest
+    , MoveProjectRequest
+    , moveProjectRequest
+    , mprDestinationParent
+
+    -- * TagKey
+    , TagKey
+    , tagKey
+    , tkParent
+    , tkEtag
+    , tkShortName
+    , tkUpdateTime
+    , tkName
+    , tkNamespacedName
+    , tkDescription
+    , tkCreateTime
+
+    -- * CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperation
+    , CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperation
+    , cloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperation
+    , cDestinationParent
+    , cDisplayName
+    , cOperationType
+    , cSourceParent
+
+    -- * SearchOrganizationsResponse
+    , SearchOrganizationsResponse
+    , searchOrganizationsResponse
+    , sorNextPageToken
+    , sorOrganizations
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -140,10 +312,18 @@ module Network.Google.ResourceManager.Types
     -- * Policy
     , Policy
     , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
+    , polAuditConfigs
+    , polEtag
+    , polVersion
+    , polBindings
+
+    -- * ProjectLabels
+    , ProjectLabels
+    , projectLabels
+    , plAddtional
+
+    -- * CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType
+    , CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType (..)
 
     -- * OperationMetadata
     , OperationMetadata
@@ -164,15 +344,74 @@ module Network.Google.ResourceManager.Types
     , alcLogType
     , alcExemptedMembers
 
+    -- * TagBinding
+    , TagBinding
+    , tagBinding
+    , tbParent
+    , tbTagValue
+    , tbName
+
+    -- * Organization
+    , Organization
+    , organization
+    , orgEtag
+    , orgState
+    , orgUpdateTime
+    , orgDeleteTime
+    , orgName
+    , orgDisplayName
+    , orgDirectoryCustomerId
+    , orgCreateTime
+
+    -- * CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType
+    , CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType (..)
+
     -- * OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
 
+    -- * UndeleteProjectRequest
+    , UndeleteProjectRequest
+    , undeleteProjectRequest
+
+    -- * Lien
+    , Lien
+    , lien
+    , lParent
+    , lOrigin
+    , lReason
+    , lName
+    , lRestrictions
+    , lCreateTime
+
     -- * MoveFolderRequest
     , MoveFolderRequest
     , moveFolderRequest
     , mfrDestinationParent
+
+    -- * DeleteProjectMetadata
+    , DeleteProjectMetadata
+    , deleteProjectMetadata
+
+    -- * UpdateProjectMetadata
+    , UpdateProjectMetadata
+    , updateProjectMetadata
+
+    -- * FolderState
+    , FolderState (..)
+
+    -- * MoveProjectMetadata
+    , MoveProjectMetadata
+    , moveProjectMetadata
+
+    -- * UpdateTagKeyMetadata
+    , UpdateTagKeyMetadata
+    , updateTagKeyMetadata
+
+    -- * DeleteTagKeyMetadata
+    , DeleteTagKeyMetadata
+    , deleteTagKeyMetadata
 
     -- * Binding
     , Binding
@@ -180,23 +419,29 @@ module Network.Google.ResourceManager.Types
     , bMembers
     , bRole
     , bCondition
+
+    -- * ListTagBindingsResponse
+    , ListTagBindingsResponse
+    , listTagBindingsResponse
+    , ltbrNextPageToken
+    , ltbrTagBindings
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types.Product
-import           Network.Google.ResourceManager.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types.Product
+import Network.Google.ResourceManager.Types.Sum
 
--- | Default request referring to version 'v2' of the Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3' of the Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
 resourceManagerService :: ServiceConfig
 resourceManagerService
   = defaultService
-      (ServiceId "cloudresourcemanager:v2")
+      (ServiceId "cloudresourcemanager:v3")
       "cloudresourcemanager.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
 cloudPlatformReadOnlyScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

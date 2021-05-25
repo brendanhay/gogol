@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configuration
     , cclCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.configurations.list@ method which the
 -- 'CustomersConfigurationsList' request conforms to.
@@ -63,12 +63,12 @@ type CustomersConfigurationsListResource =
 -- /See:/ 'customersConfigurationsList' smart constructor.
 data CustomersConfigurationsList =
   CustomersConfigurationsList'
-    { _cclParent         :: !Text
-    , _cclXgafv          :: !(Maybe Xgafv)
+    { _cclParent :: !Text
+    , _cclXgafv :: !(Maybe Xgafv)
     , _cclUploadProtocol :: !(Maybe Text)
-    , _cclAccessToken    :: !(Maybe Text)
-    , _cclUploadType     :: !(Maybe Text)
-    , _cclCallback       :: !(Maybe Text)
+    , _cclAccessToken :: !(Maybe Text)
+    , _cclUploadType :: !(Maybe Text)
+    , _cclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

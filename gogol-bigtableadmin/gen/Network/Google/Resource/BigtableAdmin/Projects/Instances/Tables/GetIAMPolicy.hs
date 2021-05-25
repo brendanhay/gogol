@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for an instance resource. Returns an
--- empty policy if an table exists but does not have a policy set.
+-- Gets the access control policy for a Table resource. Returns an empty
+-- policy if the resource exists but does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.tables.getIamPolicy@.
 module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
@@ -43,8 +43,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPol
     , pitgipCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.getIamPolicy@ method which the
 -- 'ProjectsInstancesTablesGetIAMPolicy' request conforms to.
@@ -60,19 +60,19 @@ type ProjectsInstancesTablesGetIAMPolicyResource =
                      ReqBody '[JSON] GetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Gets the access control policy for an instance resource. Returns an
--- empty policy if an table exists but does not have a policy set.
+-- | Gets the access control policy for a Table resource. Returns an empty
+-- policy if the resource exists but does not have a policy set.
 --
 -- /See:/ 'projectsInstancesTablesGetIAMPolicy' smart constructor.
 data ProjectsInstancesTablesGetIAMPolicy =
   ProjectsInstancesTablesGetIAMPolicy'
-    { _pitgipXgafv          :: !(Maybe Xgafv)
+    { _pitgipXgafv :: !(Maybe Xgafv)
     , _pitgipUploadProtocol :: !(Maybe Text)
-    , _pitgipAccessToken    :: !(Maybe Text)
-    , _pitgipUploadType     :: !(Maybe Text)
-    , _pitgipPayload        :: !GetIAMPolicyRequest
-    , _pitgipResource       :: !Text
-    , _pitgipCallback       :: !(Maybe Text)
+    , _pitgipAccessToken :: !(Maybe Text)
+    , _pitgipUploadType :: !(Maybe Text)
+    , _pitgipPayload :: !GetIAMPolicyRequest
+    , _pitgipResource :: !Text
+    , _pitgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

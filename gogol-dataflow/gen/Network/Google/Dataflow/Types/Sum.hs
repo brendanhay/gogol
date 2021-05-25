@@ -16,7 +16,7 @@
 --
 module Network.Google.Dataflow.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Counter aggregation kind.
 data NameAndKindKind
@@ -89,6 +89,98 @@ instance FromJSON NameAndKindKind where
 instance ToJSON NameAndKindKind where
     toJSON = toJSONText
 
+-- | The kind of filter to use.
+data ProjectsJobsAggregatedFilter
+    = Unknown
+      -- ^ @UNKNOWN@
+      -- The filter isn\'t specified, or is unknown. This returns all jobs
+      -- ordered on descending \`JobUuid\`.
+    | All
+      -- ^ @ALL@
+      -- Returns all running jobs first ordered on creation timestamp, then
+      -- returns all terminated jobs ordered on the termination timestamp.
+    | Terminated
+      -- ^ @TERMINATED@
+      -- Filters the jobs that have a terminated state, ordered on the
+      -- termination timestamp. Example terminated states: \`JOB_STATE_STOPPED\`,
+      -- \`JOB_STATE_UPDATED\`, \`JOB_STATE_DRAINED\`, etc.
+    | Active
+      -- ^ @ACTIVE@
+      -- Filters the jobs that are running ordered on the creation timestamp.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsAggregatedFilter
+
+instance FromHttpApiData ProjectsJobsAggregatedFilter where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right Unknown
+        "ALL" -> Right All
+        "TERMINATED" -> Right Terminated
+        "ACTIVE" -> Right Active
+        x -> Left ("Unable to parse ProjectsJobsAggregatedFilter from: " <> x)
+
+instance ToHttpApiData ProjectsJobsAggregatedFilter where
+    toQueryParam = \case
+        Unknown -> "UNKNOWN"
+        All -> "ALL"
+        Terminated -> "TERMINATED"
+        Active -> "ACTIVE"
+
+instance FromJSON ProjectsJobsAggregatedFilter where
+    parseJSON = parseJSONText "ProjectsJobsAggregatedFilter"
+
+instance ToJSON ProjectsJobsAggregatedFilter where
+    toJSON = toJSONText
+
+-- | State of this stage.
+data StageSummaryState
+    = ExecutionStateUnknown
+      -- ^ @EXECUTION_STATE_UNKNOWN@
+      -- The component state is unknown or unspecified.
+    | ExecutionStateNotStarted
+      -- ^ @EXECUTION_STATE_NOT_STARTED@
+      -- The component is not yet running.
+    | ExecutionStateRunning
+      -- ^ @EXECUTION_STATE_RUNNING@
+      -- The component is currently running.
+    | ExecutionStateSucceeded
+      -- ^ @EXECUTION_STATE_SUCCEEDED@
+      -- The component succeeded.
+    | ExecutionStateFailed
+      -- ^ @EXECUTION_STATE_FAILED@
+      -- The component failed.
+    | ExecutionStateCancelled
+      -- ^ @EXECUTION_STATE_CANCELLED@
+      -- Execution of the component was cancelled.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable StageSummaryState
+
+instance FromHttpApiData StageSummaryState where
+    parseQueryParam = \case
+        "EXECUTION_STATE_UNKNOWN" -> Right ExecutionStateUnknown
+        "EXECUTION_STATE_NOT_STARTED" -> Right ExecutionStateNotStarted
+        "EXECUTION_STATE_RUNNING" -> Right ExecutionStateRunning
+        "EXECUTION_STATE_SUCCEEDED" -> Right ExecutionStateSucceeded
+        "EXECUTION_STATE_FAILED" -> Right ExecutionStateFailed
+        "EXECUTION_STATE_CANCELLED" -> Right ExecutionStateCancelled
+        x -> Left ("Unable to parse StageSummaryState from: " <> x)
+
+instance ToHttpApiData StageSummaryState where
+    toQueryParam = \case
+        ExecutionStateUnknown -> "EXECUTION_STATE_UNKNOWN"
+        ExecutionStateNotStarted -> "EXECUTION_STATE_NOT_STARTED"
+        ExecutionStateRunning -> "EXECUTION_STATE_RUNNING"
+        ExecutionStateSucceeded -> "EXECUTION_STATE_SUCCEEDED"
+        ExecutionStateFailed -> "EXECUTION_STATE_FAILED"
+        ExecutionStateCancelled -> "EXECUTION_STATE_CANCELLED"
+
+instance FromJSON StageSummaryState where
+    parseJSON = parseJSONText "StageSummaryState"
+
+instance ToJSON StageSummaryState where
+    toJSON = toJSONText
+
 -- | The type of Cloud Dataflow job.
 data JobType
     = JobTypeUnknown
@@ -123,6 +215,84 @@ instance FromJSON JobType where
     parseJSON = parseJSONText "JobType"
 
 instance ToJSON JobType where
+    toJSON = toJSONText
+
+-- | Configuration for VM IPs.
+data FlexTemplateRuntimeEnvironmentIPConfiguration
+    = WorkerIPUnspecified
+      -- ^ @WORKER_IP_UNSPECIFIED@
+      -- The configuration is unknown, or unspecified.
+    | WorkerIPPublic
+      -- ^ @WORKER_IP_PUBLIC@
+      -- Workers should have public IP addresses.
+    | WorkerIPPrivate
+      -- ^ @WORKER_IP_PRIVATE@
+      -- Workers should have private IP addresses.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FlexTemplateRuntimeEnvironmentIPConfiguration
+
+instance FromHttpApiData FlexTemplateRuntimeEnvironmentIPConfiguration where
+    parseQueryParam = \case
+        "WORKER_IP_UNSPECIFIED" -> Right WorkerIPUnspecified
+        "WORKER_IP_PUBLIC" -> Right WorkerIPPublic
+        "WORKER_IP_PRIVATE" -> Right WorkerIPPrivate
+        x -> Left ("Unable to parse FlexTemplateRuntimeEnvironmentIPConfiguration from: " <> x)
+
+instance ToHttpApiData FlexTemplateRuntimeEnvironmentIPConfiguration where
+    toQueryParam = \case
+        WorkerIPUnspecified -> "WORKER_IP_UNSPECIFIED"
+        WorkerIPPublic -> "WORKER_IP_PUBLIC"
+        WorkerIPPrivate -> "WORKER_IP_PRIVATE"
+
+instance FromJSON FlexTemplateRuntimeEnvironmentIPConfiguration where
+    parseJSON = parseJSONText "FlexTemplateRuntimeEnvironmentIPConfiguration"
+
+instance ToJSON FlexTemplateRuntimeEnvironmentIPConfiguration where
+    toJSON = toJSONText
+
+-- | Deprecated. ListJobs always returns summaries now. Use GetJob for other
+-- JobViews.
+data ProjectsJobsAggregatedView
+    = JobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | JobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | JobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | JobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsAggregatedView
+
+instance FromHttpApiData ProjectsJobsAggregatedView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right JobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right JobViewSummary
+        "JOB_VIEW_ALL" -> Right JobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right JobViewDescription
+        x -> Left ("Unable to parse ProjectsJobsAggregatedView from: " <> x)
+
+instance ToHttpApiData ProjectsJobsAggregatedView where
+    toQueryParam = \case
+        JobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        JobViewSummary -> "JOB_VIEW_SUMMARY"
+        JobViewAll -> "JOB_VIEW_ALL"
+        JobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsJobsAggregatedView where
+    parseJSON = parseJSONText "ProjectsJobsAggregatedView"
+
+instance ToJSON ProjectsJobsAggregatedView where
     toJSON = toJSONText
 
 -- | Sets the policy for determining when to turndown worker pool. Allowed
@@ -176,8 +346,9 @@ instance FromJSON WorkerPoolTeardownPolicy where
 instance ToJSON WorkerPoolTeardownPolicy where
     toJSON = toJSONText
 
--- | Which Flexible Resource Scheduling mode to run in.
-data EnvironmentFlexResourceSchedulingGoal
+-- | Set FlexRS goal for the job.
+-- https:\/\/cloud.google.com\/dataflow\/docs\/guides\/flexrs
+data FlexTemplateRuntimeEnvironmentFlexrsGoal
     = FlexrsUnspecified
       -- ^ @FLEXRS_UNSPECIFIED@
       -- Run in the default mode.
@@ -189,20 +360,132 @@ data EnvironmentFlexResourceSchedulingGoal
       -- Optimize for lower cost.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable EnvironmentFlexResourceSchedulingGoal
+instance Hashable FlexTemplateRuntimeEnvironmentFlexrsGoal
 
-instance FromHttpApiData EnvironmentFlexResourceSchedulingGoal where
+instance FromHttpApiData FlexTemplateRuntimeEnvironmentFlexrsGoal where
     parseQueryParam = \case
         "FLEXRS_UNSPECIFIED" -> Right FlexrsUnspecified
         "FLEXRS_SPEED_OPTIMIZED" -> Right FlexrsSpeedOptimized
         "FLEXRS_COST_OPTIMIZED" -> Right FlexrsCostOptimized
-        x -> Left ("Unable to parse EnvironmentFlexResourceSchedulingGoal from: " <> x)
+        x -> Left ("Unable to parse FlexTemplateRuntimeEnvironmentFlexrsGoal from: " <> x)
 
-instance ToHttpApiData EnvironmentFlexResourceSchedulingGoal where
+instance ToHttpApiData FlexTemplateRuntimeEnvironmentFlexrsGoal where
     toQueryParam = \case
         FlexrsUnspecified -> "FLEXRS_UNSPECIFIED"
         FlexrsSpeedOptimized -> "FLEXRS_SPEED_OPTIMIZED"
         FlexrsCostOptimized -> "FLEXRS_COST_OPTIMIZED"
+
+instance FromJSON FlexTemplateRuntimeEnvironmentFlexrsGoal where
+    parseJSON = parseJSONText "FlexTemplateRuntimeEnvironmentFlexrsGoal"
+
+instance ToJSON FlexTemplateRuntimeEnvironmentFlexrsGoal where
+    toJSON = toJSONText
+
+-- | Deprecated. ListJobs always returns summaries now. Use GetJob for other
+-- JobViews.
+data ProjectsJobsListView
+    = PJLVJobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | PJLVJobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | PJLVJobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | PJLVJobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsListView
+
+instance FromHttpApiData ProjectsJobsListView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right PJLVJobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right PJLVJobViewSummary
+        "JOB_VIEW_ALL" -> Right PJLVJobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right PJLVJobViewDescription
+        x -> Left ("Unable to parse ProjectsJobsListView from: " <> x)
+
+instance ToHttpApiData ProjectsJobsListView where
+    toQueryParam = \case
+        PJLVJobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        PJLVJobViewSummary -> "JOB_VIEW_SUMMARY"
+        PJLVJobViewAll -> "JOB_VIEW_ALL"
+        PJLVJobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsJobsListView where
+    parseJSON = parseJSONText "ProjectsJobsListView"
+
+instance ToJSON ProjectsJobsListView where
+    toJSON = toJSONText
+
+-- | Template Type.
+data GetTemplateResponseTemplateType
+    = GTRTTUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown Template Type.
+    | GTRTTLegacy
+      -- ^ @LEGACY@
+      -- Legacy Template.
+    | GTRTTFlex
+      -- ^ @FLEX@
+      -- Flex Template.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GetTemplateResponseTemplateType
+
+instance FromHttpApiData GetTemplateResponseTemplateType where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GTRTTUnknown
+        "LEGACY" -> Right GTRTTLegacy
+        "FLEX" -> Right GTRTTFlex
+        x -> Left ("Unable to parse GetTemplateResponseTemplateType from: " <> x)
+
+instance ToHttpApiData GetTemplateResponseTemplateType where
+    toQueryParam = \case
+        GTRTTUnknown -> "UNKNOWN"
+        GTRTTLegacy -> "LEGACY"
+        GTRTTFlex -> "FLEX"
+
+instance FromJSON GetTemplateResponseTemplateType where
+    parseJSON = parseJSONText "GetTemplateResponseTemplateType"
+
+instance ToJSON GetTemplateResponseTemplateType where
+    toJSON = toJSONText
+
+-- | Which Flexible Resource Scheduling mode to run in.
+data EnvironmentFlexResourceSchedulingGoal
+    = EFRSGFlexrsUnspecified
+      -- ^ @FLEXRS_UNSPECIFIED@
+      -- Run in the default mode.
+    | EFRSGFlexrsSpeedOptimized
+      -- ^ @FLEXRS_SPEED_OPTIMIZED@
+      -- Optimize for lower execution time.
+    | EFRSGFlexrsCostOptimized
+      -- ^ @FLEXRS_COST_OPTIMIZED@
+      -- Optimize for lower cost.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EnvironmentFlexResourceSchedulingGoal
+
+instance FromHttpApiData EnvironmentFlexResourceSchedulingGoal where
+    parseQueryParam = \case
+        "FLEXRS_UNSPECIFIED" -> Right EFRSGFlexrsUnspecified
+        "FLEXRS_SPEED_OPTIMIZED" -> Right EFRSGFlexrsSpeedOptimized
+        "FLEXRS_COST_OPTIMIZED" -> Right EFRSGFlexrsCostOptimized
+        x -> Left ("Unable to parse EnvironmentFlexResourceSchedulingGoal from: " <> x)
+
+instance ToHttpApiData EnvironmentFlexResourceSchedulingGoal where
+    toQueryParam = \case
+        EFRSGFlexrsUnspecified -> "FLEXRS_UNSPECIFIED"
+        EFRSGFlexrsSpeedOptimized -> "FLEXRS_SPEED_OPTIMIZED"
+        EFRSGFlexrsCostOptimized -> "FLEXRS_COST_OPTIMIZED"
 
 instance FromJSON EnvironmentFlexResourceSchedulingGoal where
     parseJSON = parseJSONText "EnvironmentFlexResourceSchedulingGoal"
@@ -308,15 +591,127 @@ instance FromJSON TransformSummaryKind where
 instance ToJSON TransformSummaryKind where
     toJSON = toJSONText
 
+-- | The kind of filter to use.
+data ProjectsJobsListFilter
+    = PJLFUnknown
+      -- ^ @UNKNOWN@
+      -- The filter isn\'t specified, or is unknown. This returns all jobs
+      -- ordered on descending \`JobUuid\`.
+    | PJLFAll
+      -- ^ @ALL@
+      -- Returns all running jobs first ordered on creation timestamp, then
+      -- returns all terminated jobs ordered on the termination timestamp.
+    | PJLFTerminated
+      -- ^ @TERMINATED@
+      -- Filters the jobs that have a terminated state, ordered on the
+      -- termination timestamp. Example terminated states: \`JOB_STATE_STOPPED\`,
+      -- \`JOB_STATE_UPDATED\`, \`JOB_STATE_DRAINED\`, etc.
+    | PJLFActive
+      -- ^ @ACTIVE@
+      -- Filters the jobs that are running ordered on the creation timestamp.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsListFilter
+
+instance FromHttpApiData ProjectsJobsListFilter where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right PJLFUnknown
+        "ALL" -> Right PJLFAll
+        "TERMINATED" -> Right PJLFTerminated
+        "ACTIVE" -> Right PJLFActive
+        x -> Left ("Unable to parse ProjectsJobsListFilter from: " <> x)
+
+instance ToHttpApiData ProjectsJobsListFilter where
+    toQueryParam = \case
+        PJLFUnknown -> "UNKNOWN"
+        PJLFAll -> "ALL"
+        PJLFTerminated -> "TERMINATED"
+        PJLFActive -> "ACTIVE"
+
+instance FromJSON ProjectsJobsListFilter where
+    parseJSON = parseJSONText "ProjectsJobsListFilter"
+
+instance ToJSON ProjectsJobsListFilter where
+    toJSON = toJSONText
+
+-- | Optional. The type of the parameter. Used for selecting input picker.
+data ParameterMetadataParamType
+    = Default
+      -- ^ @DEFAULT@
+      -- Default input type.
+    | Text
+      -- ^ @TEXT@
+      -- The parameter specifies generic text input.
+    | GcsReadBucket
+      -- ^ @GCS_READ_BUCKET@
+      -- The parameter specifies a Cloud Storage Bucket to read from.
+    | GcsWriteBucket
+      -- ^ @GCS_WRITE_BUCKET@
+      -- The parameter specifies a Cloud Storage Bucket to write to.
+    | GcsReadFile
+      -- ^ @GCS_READ_FILE@
+      -- The parameter specifies a Cloud Storage file path to read from.
+    | GcsWriteFile
+      -- ^ @GCS_WRITE_FILE@
+      -- The parameter specifies a Cloud Storage file path to write to.
+    | GcsReadFolder
+      -- ^ @GCS_READ_FOLDER@
+      -- The parameter specifies a Cloud Storage folder path to read from.
+    | GcsWriteFolder
+      -- ^ @GCS_WRITE_FOLDER@
+      -- The parameter specifies a Cloud Storage folder to write to.
+    | PubsubTopic
+      -- ^ @PUBSUB_TOPIC@
+      -- The parameter specifies a Pub\/Sub Topic.
+    | PubsubSubscription
+      -- ^ @PUBSUB_SUBSCRIPTION@
+      -- The parameter specifies a Pub\/Sub Subscription.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ParameterMetadataParamType
+
+instance FromHttpApiData ParameterMetadataParamType where
+    parseQueryParam = \case
+        "DEFAULT" -> Right Default
+        "TEXT" -> Right Text
+        "GCS_READ_BUCKET" -> Right GcsReadBucket
+        "GCS_WRITE_BUCKET" -> Right GcsWriteBucket
+        "GCS_READ_FILE" -> Right GcsReadFile
+        "GCS_WRITE_FILE" -> Right GcsWriteFile
+        "GCS_READ_FOLDER" -> Right GcsReadFolder
+        "GCS_WRITE_FOLDER" -> Right GcsWriteFolder
+        "PUBSUB_TOPIC" -> Right PubsubTopic
+        "PUBSUB_SUBSCRIPTION" -> Right PubsubSubscription
+        x -> Left ("Unable to parse ParameterMetadataParamType from: " <> x)
+
+instance ToHttpApiData ParameterMetadataParamType where
+    toQueryParam = \case
+        Default -> "DEFAULT"
+        Text -> "TEXT"
+        GcsReadBucket -> "GCS_READ_BUCKET"
+        GcsWriteBucket -> "GCS_WRITE_BUCKET"
+        GcsReadFile -> "GCS_READ_FILE"
+        GcsWriteFile -> "GCS_WRITE_FILE"
+        GcsReadFolder -> "GCS_READ_FOLDER"
+        GcsWriteFolder -> "GCS_WRITE_FOLDER"
+        PubsubTopic -> "PUBSUB_TOPIC"
+        PubsubSubscription -> "PUBSUB_SUBSCRIPTION"
+
+instance FromJSON ParameterMetadataParamType where
+    parseJSON = parseJSONText "ParameterMetadataParamType"
+
+instance ToJSON ParameterMetadataParamType where
+    toJSON = toJSONText
+
 -- | Portion of this counter, either key or value.
 data CounterStructuredNamePortion
-    = All
+    = CSNPAll
       -- ^ @ALL@
       -- Counter portion has not been set.
-    | Key
+    | CSNPKey
       -- ^ @KEY@
       -- Counter reports a key.
-    | Value
+    | CSNPValue
       -- ^ @VALUE@
       -- Counter reports a value.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -325,16 +720,16 @@ instance Hashable CounterStructuredNamePortion
 
 instance FromHttpApiData CounterStructuredNamePortion where
     parseQueryParam = \case
-        "ALL" -> Right All
-        "KEY" -> Right Key
-        "VALUE" -> Right Value
+        "ALL" -> Right CSNPAll
+        "KEY" -> Right CSNPKey
+        "VALUE" -> Right CSNPValue
         x -> Left ("Unable to parse CounterStructuredNamePortion from: " <> x)
 
 instance ToHttpApiData CounterStructuredNamePortion where
     toQueryParam = \case
-        All -> "ALL"
-        Key -> "KEY"
-        Value -> "VALUE"
+        CSNPAll -> "ALL"
+        CSNPKey -> "KEY"
+        CSNPValue -> "VALUE"
 
 instance FromJSON CounterStructuredNamePortion where
     parseJSON = parseJSONText "CounterStructuredNamePortion"
@@ -405,6 +800,125 @@ instance FromJSON JobMessageMessageImportance where
     parseJSON = parseJSONText "JobMessageMessageImportance"
 
 instance ToJSON JobMessageMessageImportance where
+    toJSON = toJSONText
+
+-- | Deprecated. ListJobs always returns summaries now. Use GetJob for other
+-- JobViews.
+data ProjectsLocationsJobsListView
+    = PLJLVJobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | PLJLVJobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | PLJLVJobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | PLJLVJobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsJobsListView
+
+instance FromHttpApiData ProjectsLocationsJobsListView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right PLJLVJobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right PLJLVJobViewSummary
+        "JOB_VIEW_ALL" -> Right PLJLVJobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right PLJLVJobViewDescription
+        x -> Left ("Unable to parse ProjectsLocationsJobsListView from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsJobsListView where
+    toQueryParam = \case
+        PLJLVJobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        PLJLVJobViewSummary -> "JOB_VIEW_SUMMARY"
+        PLJLVJobViewAll -> "JOB_VIEW_ALL"
+        PLJLVJobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsLocationsJobsListView where
+    parseJSON = parseJSONText "ProjectsLocationsJobsListView"
+
+instance ToJSON ProjectsLocationsJobsListView where
+    toJSON = toJSONText
+
+-- | State of the snapshot.
+data SnapshotState
+    = UnknownSnapshotState
+      -- ^ @UNKNOWN_SNAPSHOT_STATE@
+      -- Unknown state.
+    | Pending
+      -- ^ @PENDING@
+      -- Snapshot intent to create has been persisted, snapshotting of state has
+      -- not yet started.
+    | Running
+      -- ^ @RUNNING@
+      -- Snapshotting is being performed.
+    | Ready
+      -- ^ @READY@
+      -- Snapshot has been created and is ready to be used.
+    | Failed
+      -- ^ @FAILED@
+      -- Snapshot failed to be created.
+    | Deleted
+      -- ^ @DELETED@
+      -- Snapshot has been deleted.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SnapshotState
+
+instance FromHttpApiData SnapshotState where
+    parseQueryParam = \case
+        "UNKNOWN_SNAPSHOT_STATE" -> Right UnknownSnapshotState
+        "PENDING" -> Right Pending
+        "RUNNING" -> Right Running
+        "READY" -> Right Ready
+        "FAILED" -> Right Failed
+        "DELETED" -> Right Deleted
+        x -> Left ("Unable to parse SnapshotState from: " <> x)
+
+instance ToHttpApiData SnapshotState where
+    toQueryParam = \case
+        UnknownSnapshotState -> "UNKNOWN_SNAPSHOT_STATE"
+        Pending -> "PENDING"
+        Running -> "RUNNING"
+        Ready -> "READY"
+        Failed -> "FAILED"
+        Deleted -> "DELETED"
+
+instance FromJSON SnapshotState where
+    parseJSON = parseJSONText "SnapshotState"
+
+instance ToJSON SnapshotState where
+    toJSON = toJSONText
+
+-- | The view to retrieve. Defaults to METADATA_ONLY.
+data ProjectsTemplatesGetView
+    = MetadataOnly
+      -- ^ @METADATA_ONLY@
+      -- Template view that retrieves only the metadata associated with the
+      -- template.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTemplatesGetView
+
+instance FromHttpApiData ProjectsTemplatesGetView where
+    parseQueryParam = \case
+        "METADATA_ONLY" -> Right MetadataOnly
+        x -> Left ("Unable to parse ProjectsTemplatesGetView from: " <> x)
+
+instance ToHttpApiData ProjectsTemplatesGetView where
+    toQueryParam = \case
+        MetadataOnly -> "METADATA_ONLY"
+
+instance FromJSON ProjectsTemplatesGetView where
+    parseJSON = parseJSONText "ProjectsTemplatesGetView"
+
+instance ToJSON ProjectsTemplatesGetView where
     toJSON = toJSONText
 
 -- | Indicates whether splitting happened and produced a list of bundles. If
@@ -500,7 +1014,7 @@ data WorkerPoolDefaultPackageSet
       -- Stage packages typically useful to workers written in Java.
     | DefaultPackageSetPython
       -- ^ @DEFAULT_PACKAGE_SET_PYTHON@
-      -- Stage pacakges typically useful to workers written in Python.
+      -- Stage packages typically useful to workers written in Python.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable WorkerPoolDefaultPackageSet
@@ -668,6 +1182,12 @@ data JobCurrentState
       -- \`JOB_STATE_QUEUED\` indicates that the job has been created but is
       -- being delayed until launch. Jobs that are queued may only transition to
       -- \`JOB_STATE_PENDING\` or \`JOB_STATE_CANCELLED\`.
+    | JobStateResourceCleaningUp
+      -- ^ @JOB_STATE_RESOURCE_CLEANING_UP@
+      -- \`JOB_STATE_RESOURCE_CLEANING_UP\` indicates that the batch job\'s
+      -- associated resources are currently being cleaned up after a successful
+      -- run. Currently, this is an opt-in feature, please reach out to Cloud
+      -- support team if you are interested.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobCurrentState
@@ -686,6 +1206,7 @@ instance FromHttpApiData JobCurrentState where
         "JOB_STATE_PENDING" -> Right JobStatePending
         "JOB_STATE_CANCELLING" -> Right JobStateCancelling
         "JOB_STATE_QUEUED" -> Right JobStateQueued
+        "JOB_STATE_RESOURCE_CLEANING_UP" -> Right JobStateResourceCleaningUp
         x -> Left ("Unable to parse JobCurrentState from: " <> x)
 
 instance ToHttpApiData JobCurrentState where
@@ -702,11 +1223,105 @@ instance ToHttpApiData JobCurrentState where
         JobStatePending -> "JOB_STATE_PENDING"
         JobStateCancelling -> "JOB_STATE_CANCELLING"
         JobStateQueued -> "JOB_STATE_QUEUED"
+        JobStateResourceCleaningUp -> "JOB_STATE_RESOURCE_CLEANING_UP"
 
 instance FromJSON JobCurrentState where
     parseJSON = parseJSONText "JobCurrentState"
 
 instance ToJSON JobCurrentState where
+    toJSON = toJSONText
+
+-- | Filter to only get messages with importance >= level
+data ProjectsLocationsJobsMessagesListMinimumImportance
+    = PLJMLMIJobMessageImportanceUnknown
+      -- ^ @JOB_MESSAGE_IMPORTANCE_UNKNOWN@
+      -- The message importance isn\'t specified, or is unknown.
+    | PLJMLMIJobMessageDebug
+      -- ^ @JOB_MESSAGE_DEBUG@
+      -- The message is at the \'debug\' level: typically only useful for
+      -- software engineers working on the code the job is running. Typically,
+      -- Dataflow pipeline runners do not display log messages at this level by
+      -- default.
+    | PLJMLMIJobMessageDetailed
+      -- ^ @JOB_MESSAGE_DETAILED@
+      -- The message is at the \'detailed\' level: somewhat verbose, but
+      -- potentially useful to users. Typically, Dataflow pipeline runners do not
+      -- display log messages at this level by default. These messages are
+      -- displayed by default in the Dataflow monitoring UI.
+    | PLJMLMIJobMessageBasic
+      -- ^ @JOB_MESSAGE_BASIC@
+      -- The message is at the \'basic\' level: useful for keeping track of the
+      -- execution of a Dataflow pipeline. Typically, Dataflow pipeline runners
+      -- display log messages at this level by default, and these messages are
+      -- displayed by default in the Dataflow monitoring UI.
+    | PLJMLMIJobMessageWarning
+      -- ^ @JOB_MESSAGE_WARNING@
+      -- The message is at the \'warning\' level: indicating a condition
+      -- pertaining to a job which may require human intervention. Typically,
+      -- Dataflow pipeline runners display log messages at this level by default,
+      -- and these messages are displayed by default in the Dataflow monitoring
+      -- UI.
+    | PLJMLMIJobMessageError
+      -- ^ @JOB_MESSAGE_ERROR@
+      -- The message is at the \'error\' level: indicating a condition preventing
+      -- a job from succeeding. Typically, Dataflow pipeline runners display log
+      -- messages at this level by default, and these messages are displayed by
+      -- default in the Dataflow monitoring UI.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsJobsMessagesListMinimumImportance
+
+instance FromHttpApiData ProjectsLocationsJobsMessagesListMinimumImportance where
+    parseQueryParam = \case
+        "JOB_MESSAGE_IMPORTANCE_UNKNOWN" -> Right PLJMLMIJobMessageImportanceUnknown
+        "JOB_MESSAGE_DEBUG" -> Right PLJMLMIJobMessageDebug
+        "JOB_MESSAGE_DETAILED" -> Right PLJMLMIJobMessageDetailed
+        "JOB_MESSAGE_BASIC" -> Right PLJMLMIJobMessageBasic
+        "JOB_MESSAGE_WARNING" -> Right PLJMLMIJobMessageWarning
+        "JOB_MESSAGE_ERROR" -> Right PLJMLMIJobMessageError
+        x -> Left ("Unable to parse ProjectsLocationsJobsMessagesListMinimumImportance from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsJobsMessagesListMinimumImportance where
+    toQueryParam = \case
+        PLJMLMIJobMessageImportanceUnknown -> "JOB_MESSAGE_IMPORTANCE_UNKNOWN"
+        PLJMLMIJobMessageDebug -> "JOB_MESSAGE_DEBUG"
+        PLJMLMIJobMessageDetailed -> "JOB_MESSAGE_DETAILED"
+        PLJMLMIJobMessageBasic -> "JOB_MESSAGE_BASIC"
+        PLJMLMIJobMessageWarning -> "JOB_MESSAGE_WARNING"
+        PLJMLMIJobMessageError -> "JOB_MESSAGE_ERROR"
+
+instance FromJSON ProjectsLocationsJobsMessagesListMinimumImportance where
+    parseJSON = parseJSONText "ProjectsLocationsJobsMessagesListMinimumImportance"
+
+instance ToJSON ProjectsLocationsJobsMessagesListMinimumImportance where
+    toJSON = toJSONText
+
+data QueryInfoQueryPropertyItem
+    = QueryPropertyUnspecified
+      -- ^ @QUERY_PROPERTY_UNSPECIFIED@
+      -- The query property is unknown or unspecified.
+    | HasUnboundedSource
+      -- ^ @HAS_UNBOUNDED_SOURCE@
+      -- Indicates this query reads from >= 1 unbounded source.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable QueryInfoQueryPropertyItem
+
+instance FromHttpApiData QueryInfoQueryPropertyItem where
+    parseQueryParam = \case
+        "QUERY_PROPERTY_UNSPECIFIED" -> Right QueryPropertyUnspecified
+        "HAS_UNBOUNDED_SOURCE" -> Right HasUnboundedSource
+        x -> Left ("Unable to parse QueryInfoQueryPropertyItem from: " <> x)
+
+instance ToHttpApiData QueryInfoQueryPropertyItem where
+    toQueryParam = \case
+        QueryPropertyUnspecified -> "QUERY_PROPERTY_UNSPECIFIED"
+        HasUnboundedSource -> "HAS_UNBOUNDED_SOURCE"
+
+instance FromJSON QueryInfoQueryPropertyItem where
+    parseJSON = parseJSONText "QueryInfoQueryPropertyItem"
+
+instance ToJSON QueryInfoQueryPropertyItem where
     toJSON = toJSONText
 
 -- | System defined Units, see above enum.
@@ -766,6 +1381,49 @@ instance FromJSON CounterMetadataStandardUnits where
     parseJSON = parseJSONText "CounterMetadataStandardUnits"
 
 instance ToJSON CounterMetadataStandardUnits where
+    toJSON = toJSONText
+
+-- | The level of information requested in response.
+data ProjectsLocationsJobsGetView
+    = PLJGVJobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | PLJGVJobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | PLJGVJobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | PLJGVJobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsJobsGetView
+
+instance FromHttpApiData ProjectsLocationsJobsGetView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right PLJGVJobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right PLJGVJobViewSummary
+        "JOB_VIEW_ALL" -> Right PLJGVJobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right PLJGVJobViewDescription
+        x -> Left ("Unable to parse ProjectsLocationsJobsGetView from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsJobsGetView where
+    toQueryParam = \case
+        PLJGVJobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        PLJGVJobViewSummary -> "JOB_VIEW_SUMMARY"
+        PLJGVJobViewAll -> "JOB_VIEW_ALL"
+        PLJGVJobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsLocationsJobsGetView where
+    parseJSON = parseJSONText "ProjectsLocationsJobsGetView"
+
+instance ToJSON ProjectsLocationsJobsGetView where
     toJSON = toJSONText
 
 -- | The type of autoscaling event to report.
@@ -860,7 +1518,7 @@ instance FromJSON DerivedSourceDerivationMode where
 instance ToJSON DerivedSourceDerivationMode where
     toJSON = toJSONText
 
--- | Type of tranform this stage is executing.
+-- | Type of transform this stage is executing.
 data ExecutionStageSummaryKind
     = ESSKUnknownKind
       -- ^ @UNKNOWN_KIND@
@@ -953,6 +1611,148 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
+-- | Filter to only get messages with importance >= level
+data ProjectsJobsMessagesListMinimumImportance
+    = PJMLMIJobMessageImportanceUnknown
+      -- ^ @JOB_MESSAGE_IMPORTANCE_UNKNOWN@
+      -- The message importance isn\'t specified, or is unknown.
+    | PJMLMIJobMessageDebug
+      -- ^ @JOB_MESSAGE_DEBUG@
+      -- The message is at the \'debug\' level: typically only useful for
+      -- software engineers working on the code the job is running. Typically,
+      -- Dataflow pipeline runners do not display log messages at this level by
+      -- default.
+    | PJMLMIJobMessageDetailed
+      -- ^ @JOB_MESSAGE_DETAILED@
+      -- The message is at the \'detailed\' level: somewhat verbose, but
+      -- potentially useful to users. Typically, Dataflow pipeline runners do not
+      -- display log messages at this level by default. These messages are
+      -- displayed by default in the Dataflow monitoring UI.
+    | PJMLMIJobMessageBasic
+      -- ^ @JOB_MESSAGE_BASIC@
+      -- The message is at the \'basic\' level: useful for keeping track of the
+      -- execution of a Dataflow pipeline. Typically, Dataflow pipeline runners
+      -- display log messages at this level by default, and these messages are
+      -- displayed by default in the Dataflow monitoring UI.
+    | PJMLMIJobMessageWarning
+      -- ^ @JOB_MESSAGE_WARNING@
+      -- The message is at the \'warning\' level: indicating a condition
+      -- pertaining to a job which may require human intervention. Typically,
+      -- Dataflow pipeline runners display log messages at this level by default,
+      -- and these messages are displayed by default in the Dataflow monitoring
+      -- UI.
+    | PJMLMIJobMessageError
+      -- ^ @JOB_MESSAGE_ERROR@
+      -- The message is at the \'error\' level: indicating a condition preventing
+      -- a job from succeeding. Typically, Dataflow pipeline runners display log
+      -- messages at this level by default, and these messages are displayed by
+      -- default in the Dataflow monitoring UI.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsMessagesListMinimumImportance
+
+instance FromHttpApiData ProjectsJobsMessagesListMinimumImportance where
+    parseQueryParam = \case
+        "JOB_MESSAGE_IMPORTANCE_UNKNOWN" -> Right PJMLMIJobMessageImportanceUnknown
+        "JOB_MESSAGE_DEBUG" -> Right PJMLMIJobMessageDebug
+        "JOB_MESSAGE_DETAILED" -> Right PJMLMIJobMessageDetailed
+        "JOB_MESSAGE_BASIC" -> Right PJMLMIJobMessageBasic
+        "JOB_MESSAGE_WARNING" -> Right PJMLMIJobMessageWarning
+        "JOB_MESSAGE_ERROR" -> Right PJMLMIJobMessageError
+        x -> Left ("Unable to parse ProjectsJobsMessagesListMinimumImportance from: " <> x)
+
+instance ToHttpApiData ProjectsJobsMessagesListMinimumImportance where
+    toQueryParam = \case
+        PJMLMIJobMessageImportanceUnknown -> "JOB_MESSAGE_IMPORTANCE_UNKNOWN"
+        PJMLMIJobMessageDebug -> "JOB_MESSAGE_DEBUG"
+        PJMLMIJobMessageDetailed -> "JOB_MESSAGE_DETAILED"
+        PJMLMIJobMessageBasic -> "JOB_MESSAGE_BASIC"
+        PJMLMIJobMessageWarning -> "JOB_MESSAGE_WARNING"
+        PJMLMIJobMessageError -> "JOB_MESSAGE_ERROR"
+
+instance FromJSON ProjectsJobsMessagesListMinimumImportance where
+    parseJSON = parseJSONText "ProjectsJobsMessagesListMinimumImportance"
+
+instance ToJSON ProjectsJobsMessagesListMinimumImportance where
+    toJSON = toJSONText
+
+-- | The level of information requested in response.
+data ProjectsLocationsJobsCreateView
+    = PLJCVJobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | PLJCVJobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | PLJCVJobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | PLJCVJobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsJobsCreateView
+
+instance FromHttpApiData ProjectsLocationsJobsCreateView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right PLJCVJobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right PLJCVJobViewSummary
+        "JOB_VIEW_ALL" -> Right PLJCVJobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right PLJCVJobViewDescription
+        x -> Left ("Unable to parse ProjectsLocationsJobsCreateView from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsJobsCreateView where
+    toQueryParam = \case
+        PLJCVJobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        PLJCVJobViewSummary -> "JOB_VIEW_SUMMARY"
+        PLJCVJobViewAll -> "JOB_VIEW_ALL"
+        PLJCVJobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsLocationsJobsCreateView where
+    parseJSON = parseJSONText "ProjectsLocationsJobsCreateView"
+
+instance ToJSON ProjectsLocationsJobsCreateView where
+    toJSON = toJSONText
+
+-- | Required. The SDK Language.
+data SDKInfoLanguage
+    = SDKILUnknown
+      -- ^ @UNKNOWN@
+      -- UNKNOWN Language.
+    | SDKILJava
+      -- ^ @JAVA@
+      -- Java.
+    | SDKILPython
+      -- ^ @PYTHON@
+      -- Python.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SDKInfoLanguage
+
+instance FromHttpApiData SDKInfoLanguage where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right SDKILUnknown
+        "JAVA" -> Right SDKILJava
+        "PYTHON" -> Right SDKILPython
+        x -> Left ("Unable to parse SDKInfoLanguage from: " <> x)
+
+instance ToHttpApiData SDKInfoLanguage where
+    toQueryParam = \case
+        SDKILUnknown -> "UNKNOWN"
+        SDKILJava -> "JAVA"
+        SDKILPython -> "PYTHON"
+
+instance FromJSON SDKInfoLanguage where
+    parseJSON = parseJSONText "SDKInfoLanguage"
+
+instance ToJSON SDKInfoLanguage where
+    toJSON = toJSONText
+
 -- | The job\'s requested state. \`UpdateJob\` may be used to switch between
 -- the \`JOB_STATE_STOPPED\` and \`JOB_STATE_RUNNING\` states, by setting
 -- requested_state. \`UpdateJob\` may also be used to directly set a job\'s
@@ -1024,6 +1824,12 @@ data JobRequestedState
       -- \`JOB_STATE_QUEUED\` indicates that the job has been created but is
       -- being delayed until launch. Jobs that are queued may only transition to
       -- \`JOB_STATE_PENDING\` or \`JOB_STATE_CANCELLED\`.
+    | JRSJobStateResourceCleaningUp
+      -- ^ @JOB_STATE_RESOURCE_CLEANING_UP@
+      -- \`JOB_STATE_RESOURCE_CLEANING_UP\` indicates that the batch job\'s
+      -- associated resources are currently being cleaned up after a successful
+      -- run. Currently, this is an opt-in feature, please reach out to Cloud
+      -- support team if you are interested.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobRequestedState
@@ -1042,6 +1848,7 @@ instance FromHttpApiData JobRequestedState where
         "JOB_STATE_PENDING" -> Right JRSJobStatePending
         "JOB_STATE_CANCELLING" -> Right JRSJobStateCancelling
         "JOB_STATE_QUEUED" -> Right JRSJobStateQueued
+        "JOB_STATE_RESOURCE_CLEANING_UP" -> Right JRSJobStateResourceCleaningUp
         x -> Left ("Unable to parse JobRequestedState from: " <> x)
 
 instance ToHttpApiData JobRequestedState where
@@ -1058,11 +1865,71 @@ instance ToHttpApiData JobRequestedState where
         JRSJobStatePending -> "JOB_STATE_PENDING"
         JRSJobStateCancelling -> "JOB_STATE_CANCELLING"
         JRSJobStateQueued -> "JOB_STATE_QUEUED"
+        JRSJobStateResourceCleaningUp -> "JOB_STATE_RESOURCE_CLEANING_UP"
 
 instance FromJSON JobRequestedState where
     parseJSON = parseJSONText "JobRequestedState"
 
 instance ToJSON JobRequestedState where
+    toJSON = toJSONText
+
+-- | Configuration for VM IPs.
+data RuntimeEnvironmentIPConfiguration
+    = REICWorkerIPUnspecified
+      -- ^ @WORKER_IP_UNSPECIFIED@
+      -- The configuration is unknown, or unspecified.
+    | REICWorkerIPPublic
+      -- ^ @WORKER_IP_PUBLIC@
+      -- Workers should have public IP addresses.
+    | REICWorkerIPPrivate
+      -- ^ @WORKER_IP_PRIVATE@
+      -- Workers should have private IP addresses.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RuntimeEnvironmentIPConfiguration
+
+instance FromHttpApiData RuntimeEnvironmentIPConfiguration where
+    parseQueryParam = \case
+        "WORKER_IP_UNSPECIFIED" -> Right REICWorkerIPUnspecified
+        "WORKER_IP_PUBLIC" -> Right REICWorkerIPPublic
+        "WORKER_IP_PRIVATE" -> Right REICWorkerIPPrivate
+        x -> Left ("Unable to parse RuntimeEnvironmentIPConfiguration from: " <> x)
+
+instance ToHttpApiData RuntimeEnvironmentIPConfiguration where
+    toQueryParam = \case
+        REICWorkerIPUnspecified -> "WORKER_IP_UNSPECIFIED"
+        REICWorkerIPPublic -> "WORKER_IP_PUBLIC"
+        REICWorkerIPPrivate -> "WORKER_IP_PRIVATE"
+
+instance FromJSON RuntimeEnvironmentIPConfiguration where
+    parseJSON = parseJSONText "RuntimeEnvironmentIPConfiguration"
+
+instance ToJSON RuntimeEnvironmentIPConfiguration where
+    toJSON = toJSONText
+
+-- | The view to retrieve. Defaults to METADATA_ONLY.
+data ProjectsLocationsTemplatesGetView
+    = PLTGVMetadataOnly
+      -- ^ @METADATA_ONLY@
+      -- Template view that retrieves only the metadata associated with the
+      -- template.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsTemplatesGetView
+
+instance FromHttpApiData ProjectsLocationsTemplatesGetView where
+    parseQueryParam = \case
+        "METADATA_ONLY" -> Right PLTGVMetadataOnly
+        x -> Left ("Unable to parse ProjectsLocationsTemplatesGetView from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsTemplatesGetView where
+    toQueryParam = \case
+        PLTGVMetadataOnly -> "METADATA_ONLY"
+
+instance FromJSON ProjectsLocationsTemplatesGetView where
+    parseJSON = parseJSONText "ProjectsLocationsTemplatesGetView"
+
+instance ToJSON ProjectsLocationsTemplatesGetView where
     toJSON = toJSONText
 
 -- | The event being reported.
@@ -1191,6 +2058,12 @@ data ExecutionStageStateExecutionStageState
       -- \`JOB_STATE_QUEUED\` indicates that the job has been created but is
       -- being delayed until launch. Jobs that are queued may only transition to
       -- \`JOB_STATE_PENDING\` or \`JOB_STATE_CANCELLED\`.
+    | ESSESSJobStateResourceCleaningUp
+      -- ^ @JOB_STATE_RESOURCE_CLEANING_UP@
+      -- \`JOB_STATE_RESOURCE_CLEANING_UP\` indicates that the batch job\'s
+      -- associated resources are currently being cleaned up after a successful
+      -- run. Currently, this is an opt-in feature, please reach out to Cloud
+      -- support team if you are interested.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ExecutionStageStateExecutionStageState
@@ -1209,6 +2082,7 @@ instance FromHttpApiData ExecutionStageStateExecutionStageState where
         "JOB_STATE_PENDING" -> Right ESSESSJobStatePending
         "JOB_STATE_CANCELLING" -> Right ESSESSJobStateCancelling
         "JOB_STATE_QUEUED" -> Right ESSESSJobStateQueued
+        "JOB_STATE_RESOURCE_CLEANING_UP" -> Right ESSESSJobStateResourceCleaningUp
         x -> Left ("Unable to parse ExecutionStageStateExecutionStageState from: " <> x)
 
 instance ToHttpApiData ExecutionStageStateExecutionStageState where
@@ -1225,6 +2099,7 @@ instance ToHttpApiData ExecutionStageStateExecutionStageState where
         ESSESSJobStatePending -> "JOB_STATE_PENDING"
         ESSESSJobStateCancelling -> "JOB_STATE_CANCELLING"
         ESSESSJobStateQueued -> "JOB_STATE_QUEUED"
+        ESSESSJobStateResourceCleaningUp -> "JOB_STATE_RESOURCE_CLEANING_UP"
 
 instance FromJSON ExecutionStageStateExecutionStageState where
     parseJSON = parseJSONText "ExecutionStageStateExecutionStageState"
@@ -1232,15 +2107,58 @@ instance FromJSON ExecutionStageStateExecutionStageState where
 instance ToJSON ExecutionStageStateExecutionStageState where
     toJSON = toJSONText
 
+-- | The level of information requested in response.
+data ProjectsJobsCreateView
+    = PJCVJobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | PJCVJobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | PJCVJobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | PJCVJobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsCreateView
+
+instance FromHttpApiData ProjectsJobsCreateView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right PJCVJobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right PJCVJobViewSummary
+        "JOB_VIEW_ALL" -> Right PJCVJobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right PJCVJobViewDescription
+        x -> Left ("Unable to parse ProjectsJobsCreateView from: " <> x)
+
+instance ToHttpApiData ProjectsJobsCreateView where
+    toQueryParam = \case
+        PJCVJobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        PJCVJobViewSummary -> "JOB_VIEW_SUMMARY"
+        PJCVJobViewAll -> "JOB_VIEW_ALL"
+        PJCVJobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsJobsCreateView where
+    parseJSON = parseJSONText "ProjectsJobsCreateView"
+
+instance ToJSON ProjectsJobsCreateView where
+    toJSON = toJSONText
+
 -- | Configuration for VM IPs.
 data WorkerPoolIPConfiguration
-    = WorkerIPUnspecified
+    = WPICWorkerIPUnspecified
       -- ^ @WORKER_IP_UNSPECIFIED@
       -- The configuration is unknown, or unspecified.
-    | WorkerIPPublic
+    | WPICWorkerIPPublic
       -- ^ @WORKER_IP_PUBLIC@
       -- Workers should have public IP addresses.
-    | WorkerIPPrivate
+    | WPICWorkerIPPrivate
       -- ^ @WORKER_IP_PRIVATE@
       -- Workers should have private IP addresses.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1249,16 +2167,16 @@ instance Hashable WorkerPoolIPConfiguration
 
 instance FromHttpApiData WorkerPoolIPConfiguration where
     parseQueryParam = \case
-        "WORKER_IP_UNSPECIFIED" -> Right WorkerIPUnspecified
-        "WORKER_IP_PUBLIC" -> Right WorkerIPPublic
-        "WORKER_IP_PRIVATE" -> Right WorkerIPPrivate
+        "WORKER_IP_UNSPECIFIED" -> Right WPICWorkerIPUnspecified
+        "WORKER_IP_PUBLIC" -> Right WPICWorkerIPPublic
+        "WORKER_IP_PRIVATE" -> Right WPICWorkerIPPrivate
         x -> Left ("Unable to parse WorkerPoolIPConfiguration from: " <> x)
 
 instance ToHttpApiData WorkerPoolIPConfiguration where
     toQueryParam = \case
-        WorkerIPUnspecified -> "WORKER_IP_UNSPECIFIED"
-        WorkerIPPublic -> "WORKER_IP_PUBLIC"
-        WorkerIPPrivate -> "WORKER_IP_PRIVATE"
+        WPICWorkerIPUnspecified -> "WORKER_IP_UNSPECIFIED"
+        WPICWorkerIPPublic -> "WORKER_IP_PUBLIC"
+        WPICWorkerIPPrivate -> "WORKER_IP_PRIVATE"
 
 instance FromJSON WorkerPoolIPConfiguration where
     parseJSON = parseJSONText "WorkerPoolIPConfiguration"
@@ -1295,6 +2213,49 @@ instance FromJSON CounterStructuredNameOrigin where
 instance ToJSON CounterStructuredNameOrigin where
     toJSON = toJSONText
 
+-- | The kind of filter to use.
+data ProjectsLocationsJobsListFilter
+    = PLJLFUnknown
+      -- ^ @UNKNOWN@
+      -- The filter isn\'t specified, or is unknown. This returns all jobs
+      -- ordered on descending \`JobUuid\`.
+    | PLJLFAll
+      -- ^ @ALL@
+      -- Returns all running jobs first ordered on creation timestamp, then
+      -- returns all terminated jobs ordered on the termination timestamp.
+    | PLJLFTerminated
+      -- ^ @TERMINATED@
+      -- Filters the jobs that have a terminated state, ordered on the
+      -- termination timestamp. Example terminated states: \`JOB_STATE_STOPPED\`,
+      -- \`JOB_STATE_UPDATED\`, \`JOB_STATE_DRAINED\`, etc.
+    | PLJLFActive
+      -- ^ @ACTIVE@
+      -- Filters the jobs that are running ordered on the creation timestamp.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsJobsListFilter
+
+instance FromHttpApiData ProjectsLocationsJobsListFilter where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right PLJLFUnknown
+        "ALL" -> Right PLJLFAll
+        "TERMINATED" -> Right PLJLFTerminated
+        "ACTIVE" -> Right PLJLFActive
+        x -> Left ("Unable to parse ProjectsLocationsJobsListFilter from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsJobsListFilter where
+    toQueryParam = \case
+        PLJLFUnknown -> "UNKNOWN"
+        PLJLFAll -> "ALL"
+        PLJLFTerminated -> "TERMINATED"
+        PLJLFActive -> "ACTIVE"
+
+instance FromJSON ProjectsLocationsJobsListFilter where
+    parseJSON = parseJSONText "ProjectsLocationsJobsListFilter"
+
+instance ToJSON ProjectsLocationsJobsListFilter where
+    toJSON = toJSONText
+
 -- | A type of streaming computation task.
 data StreamingComputationTaskTaskType
     = StreamingComputationTaskUnknown
@@ -1329,22 +2290,148 @@ instance FromJSON StreamingComputationTaskTaskType where
 instance ToJSON StreamingComputationTaskTaskType where
     toJSON = toJSONText
 
+-- | State of this work item.
+data WorkItemDetailsState
+    = WIDSExecutionStateUnknown
+      -- ^ @EXECUTION_STATE_UNKNOWN@
+      -- The component state is unknown or unspecified.
+    | WIDSExecutionStateNotStarted
+      -- ^ @EXECUTION_STATE_NOT_STARTED@
+      -- The component is not yet running.
+    | WIDSExecutionStateRunning
+      -- ^ @EXECUTION_STATE_RUNNING@
+      -- The component is currently running.
+    | WIDSExecutionStateSucceeded
+      -- ^ @EXECUTION_STATE_SUCCEEDED@
+      -- The component succeeded.
+    | WIDSExecutionStateFailed
+      -- ^ @EXECUTION_STATE_FAILED@
+      -- The component failed.
+    | WIDSExecutionStateCancelled
+      -- ^ @EXECUTION_STATE_CANCELLED@
+      -- Execution of the component was cancelled.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable WorkItemDetailsState
+
+instance FromHttpApiData WorkItemDetailsState where
+    parseQueryParam = \case
+        "EXECUTION_STATE_UNKNOWN" -> Right WIDSExecutionStateUnknown
+        "EXECUTION_STATE_NOT_STARTED" -> Right WIDSExecutionStateNotStarted
+        "EXECUTION_STATE_RUNNING" -> Right WIDSExecutionStateRunning
+        "EXECUTION_STATE_SUCCEEDED" -> Right WIDSExecutionStateSucceeded
+        "EXECUTION_STATE_FAILED" -> Right WIDSExecutionStateFailed
+        "EXECUTION_STATE_CANCELLED" -> Right WIDSExecutionStateCancelled
+        x -> Left ("Unable to parse WorkItemDetailsState from: " <> x)
+
+instance ToHttpApiData WorkItemDetailsState where
+    toQueryParam = \case
+        WIDSExecutionStateUnknown -> "EXECUTION_STATE_UNKNOWN"
+        WIDSExecutionStateNotStarted -> "EXECUTION_STATE_NOT_STARTED"
+        WIDSExecutionStateRunning -> "EXECUTION_STATE_RUNNING"
+        WIDSExecutionStateSucceeded -> "EXECUTION_STATE_SUCCEEDED"
+        WIDSExecutionStateFailed -> "EXECUTION_STATE_FAILED"
+        WIDSExecutionStateCancelled -> "EXECUTION_STATE_CANCELLED"
+
+instance FromJSON WorkItemDetailsState where
+    parseJSON = parseJSONText "WorkItemDetailsState"
+
+instance ToJSON WorkItemDetailsState where
+    toJSON = toJSONText
+
+-- | Output only. The shuffle mode used for the job.
+data EnvironmentShuffleMode
+    = ShuffleModeUnspecified
+      -- ^ @SHUFFLE_MODE_UNSPECIFIED@
+      -- Shuffle mode information is not available.
+    | VMBased
+      -- ^ @VM_BASED@
+      -- Shuffle is done on the worker VMs.
+    | ServiceBased
+      -- ^ @SERVICE_BASED@
+      -- Shuffle is done on the service side.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EnvironmentShuffleMode
+
+instance FromHttpApiData EnvironmentShuffleMode where
+    parseQueryParam = \case
+        "SHUFFLE_MODE_UNSPECIFIED" -> Right ShuffleModeUnspecified
+        "VM_BASED" -> Right VMBased
+        "SERVICE_BASED" -> Right ServiceBased
+        x -> Left ("Unable to parse EnvironmentShuffleMode from: " <> x)
+
+instance ToHttpApiData EnvironmentShuffleMode where
+    toQueryParam = \case
+        ShuffleModeUnspecified -> "SHUFFLE_MODE_UNSPECIFIED"
+        VMBased -> "VM_BASED"
+        ServiceBased -> "SERVICE_BASED"
+
+instance FromJSON EnvironmentShuffleMode where
+    parseJSON = parseJSONText "EnvironmentShuffleMode"
+
+instance ToJSON EnvironmentShuffleMode where
+    toJSON = toJSONText
+
+-- | The level of information requested in response.
+data ProjectsJobsGetView
+    = PJGVJobViewUnknown
+      -- ^ @JOB_VIEW_UNKNOWN@
+      -- The job view to return isn\'t specified, or is unknown. Responses will
+      -- contain at least the \`JOB_VIEW_SUMMARY\` information, and may contain
+      -- additional information.
+    | PJGVJobViewSummary
+      -- ^ @JOB_VIEW_SUMMARY@
+      -- Request summary information only: Project ID, Job ID, job name, job
+      -- type, job status, start\/end time, and Cloud SDK version details.
+    | PJGVJobViewAll
+      -- ^ @JOB_VIEW_ALL@
+      -- Request all information available for this job.
+    | PJGVJobViewDescription
+      -- ^ @JOB_VIEW_DESCRIPTION@
+      -- Request summary info and limited job description data for steps, labels
+      -- and environment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobsGetView
+
+instance FromHttpApiData ProjectsJobsGetView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNKNOWN" -> Right PJGVJobViewUnknown
+        "JOB_VIEW_SUMMARY" -> Right PJGVJobViewSummary
+        "JOB_VIEW_ALL" -> Right PJGVJobViewAll
+        "JOB_VIEW_DESCRIPTION" -> Right PJGVJobViewDescription
+        x -> Left ("Unable to parse ProjectsJobsGetView from: " <> x)
+
+instance ToHttpApiData ProjectsJobsGetView where
+    toQueryParam = \case
+        PJGVJobViewUnknown -> "JOB_VIEW_UNKNOWN"
+        PJGVJobViewSummary -> "JOB_VIEW_SUMMARY"
+        PJGVJobViewAll -> "JOB_VIEW_ALL"
+        PJGVJobViewDescription -> "JOB_VIEW_DESCRIPTION"
+
+instance FromJSON ProjectsJobsGetView where
+    parseJSON = parseJSONText "ProjectsJobsGetView"
+
+instance ToJSON ProjectsJobsGetView where
+    toJSON = toJSONText
+
 -- | The support status for this SDK version.
 data SdkVersionSdkSupportStatus
-    = Unknown
+    = SVSSSUnknown
       -- ^ @UNKNOWN@
       -- Cloud Dataflow is unaware of this version.
-    | Supported
+    | SVSSSSupported
       -- ^ @SUPPORTED@
       -- This is a known version of an SDK, and is supported.
-    | Stale
+    | SVSSSStale
       -- ^ @STALE@
       -- A newer version of the SDK family exists, and an update is recommended.
-    | Deprecated
+    | SVSSSDeprecated
       -- ^ @DEPRECATED@
-      -- This version of the SDK is deprecated and will eventually be no longer
-      -- supported.
-    | Unsupported
+      -- This version of the SDK is deprecated and will eventually be
+      -- unsupported.
+    | SVSSSUnsupported
       -- ^ @UNSUPPORTED@
       -- Support for this SDK version has ended and it should no longer be used.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1353,20 +2440,20 @@ instance Hashable SdkVersionSdkSupportStatus
 
 instance FromHttpApiData SdkVersionSdkSupportStatus where
     parseQueryParam = \case
-        "UNKNOWN" -> Right Unknown
-        "SUPPORTED" -> Right Supported
-        "STALE" -> Right Stale
-        "DEPRECATED" -> Right Deprecated
-        "UNSUPPORTED" -> Right Unsupported
+        "UNKNOWN" -> Right SVSSSUnknown
+        "SUPPORTED" -> Right SVSSSSupported
+        "STALE" -> Right SVSSSStale
+        "DEPRECATED" -> Right SVSSSDeprecated
+        "UNSUPPORTED" -> Right SVSSSUnsupported
         x -> Left ("Unable to parse SdkVersionSdkSupportStatus from: " <> x)
 
 instance ToHttpApiData SdkVersionSdkSupportStatus where
     toQueryParam = \case
-        Unknown -> "UNKNOWN"
-        Supported -> "SUPPORTED"
-        Stale -> "STALE"
-        Deprecated -> "DEPRECATED"
-        Unsupported -> "UNSUPPORTED"
+        SVSSSUnknown -> "UNKNOWN"
+        SVSSSSupported -> "SUPPORTED"
+        SVSSSStale -> "STALE"
+        SVSSSDeprecated -> "DEPRECATED"
+        SVSSSUnsupported -> "UNSUPPORTED"
 
 instance FromJSON SdkVersionSdkSupportStatus where
     parseJSON = parseJSONText "SdkVersionSdkSupportStatus"

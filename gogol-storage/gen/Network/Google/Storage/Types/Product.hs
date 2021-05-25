@@ -17,15 +17,15 @@
 --
 module Network.Google.Storage.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Storage.Types.Sum
 
 -- | The owner of the object. This will always be the uploader of the object.
 --
 -- /See:/ 'objectOwner' smart constructor.
 data ObjectOwner =
   ObjectOwner'
-    { _ooEntity   :: !(Maybe Text)
+    { _ooEntity :: !(Maybe Text)
     , _ooEntityId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -107,10 +107,9 @@ instance ToJSON BucketVersioning where
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eKind        :: !Text
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -122,8 +121,6 @@ data Expr =
 --
 -- * 'eLocation'
 --
--- * 'eKind'
---
 -- * 'eExpression'
 --
 -- * 'eTitle'
@@ -134,7 +131,6 @@ expr
 expr =
   Expr'
     { _eLocation = Nothing
-    , _eKind = "storage#expr"
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
@@ -146,11 +142,6 @@ expr =
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
-
--- | The kind of item this is. For storage, this is always storage#expr. This
--- field is ignored on input.
-eKind :: Lens' Expr Text
-eKind = lens _eKind (\ s a -> s{_eKind = a})
 
 -- | Textual representation of an expression in Common Expression Language
 -- syntax. The application context of the containing message determines
@@ -176,10 +167,8 @@ instance FromJSON Expr where
           = withObject "Expr"
               (\ o ->
                  Expr' <$>
-                   (o .:? "location") <*>
-                     (o .:? "kind" .!= "storage#expr")
-                     <*> (o .:? "expression")
-                     <*> (o .:? "title")
+                   (o .:? "location") <*> (o .:? "expression") <*>
+                     (o .:? "title")
                      <*> (o .:? "description"))
 
 instance ToJSON Expr where
@@ -187,7 +176,6 @@ instance ToJSON Expr where
           = object
               (catMaybes
                  [("location" .=) <$> _eLocation,
-                  Just ("kind" .= _eKind),
                   ("expression" .=) <$> _eExpression,
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
@@ -206,8 +194,8 @@ instance ToJSON Expr where
 data BucketRetentionPolicy =
   BucketRetentionPolicy'
     { _brpRetentionPeriod :: !(Maybe (Textual Int64))
-    , _brpEffectiveTime   :: !(Maybe DateTime')
-    , _brpIsLocked        :: !(Maybe Bool)
+    , _brpEffectiveTime :: !(Maybe DateTime')
+    , _brpIsLocked :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -276,8 +264,8 @@ instance ToJSON BucketRetentionPolicy where
 data Buckets =
   Buckets'
     { _bNextPageToken :: !(Maybe Text)
-    , _bKind          :: !Text
-    , _bItems         :: !(Maybe [Bucket])
+    , _bKind :: !Text
+    , _bItems :: !(Maybe [Bucket])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -337,16 +325,16 @@ instance ToJSON Buckets where
 -- /See:/ 'hmacKeyMetadata' smart constructor.
 data HmacKeyMetadata =
   HmacKeyMetadata'
-    { _hkmEtag                :: !(Maybe Text)
-    , _hkmState               :: !(Maybe Text)
-    , _hkmKind                :: !Text
-    , _hkmSelfLink            :: !(Maybe Text)
-    , _hkmTimeCreated         :: !(Maybe Text)
-    , _hkmId                  :: !(Maybe Text)
-    , _hkmUpdated             :: !(Maybe Text)
+    { _hkmEtag :: !(Maybe Text)
+    , _hkmState :: !(Maybe Text)
+    , _hkmKind :: !Text
+    , _hkmSelfLink :: !(Maybe Text)
+    , _hkmTimeCreated :: !(Maybe DateTime')
+    , _hkmId :: !(Maybe Text)
+    , _hkmUpdated :: !(Maybe DateTime')
     , _hkmServiceAccountEmail :: !(Maybe Text)
-    , _hkmProjectId           :: !(Maybe Text)
-    , _hkmAccessId            :: !(Maybe Text)
+    , _hkmProjectId :: !(Maybe Text)
+    , _hkmAccessId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -391,7 +379,7 @@ hmacKeyMetadata =
     }
 
 
--- | HTTP 1.1 Entity tag for the access-control entry.
+-- | HTTP 1.1 Entity tag for the HMAC key.
 hkmEtag :: Lens' HmacKeyMetadata (Maybe Text)
 hkmEtag = lens _hkmEtag (\ s a -> s{_hkmEtag = a})
 
@@ -410,19 +398,21 @@ hkmSelfLink
   = lens _hkmSelfLink (\ s a -> s{_hkmSelfLink = a})
 
 -- | The creation time of the HMAC key in RFC 3339 format.
-hkmTimeCreated :: Lens' HmacKeyMetadata (Maybe Text)
+hkmTimeCreated :: Lens' HmacKeyMetadata (Maybe UTCTime)
 hkmTimeCreated
   = lens _hkmTimeCreated
       (\ s a -> s{_hkmTimeCreated = a})
+      . mapping _DateTime
 
 -- | The ID of the HMAC key, including the Project ID and the Access ID.
 hkmId :: Lens' HmacKeyMetadata (Maybe Text)
 hkmId = lens _hkmId (\ s a -> s{_hkmId = a})
 
 -- | The last modification time of the HMAC key metadata in RFC 3339 format.
-hkmUpdated :: Lens' HmacKeyMetadata (Maybe Text)
+hkmUpdated :: Lens' HmacKeyMetadata (Maybe UTCTime)
 hkmUpdated
-  = lens _hkmUpdated (\ s a -> s{_hkmUpdated = a})
+  = lens _hkmUpdated (\ s a -> s{_hkmUpdated = a}) .
+      mapping _DateTime
 
 -- | The email address of the key\'s associated service account.
 hkmServiceAccountEmail :: Lens' HmacKeyMetadata (Maybe Text)
@@ -512,14 +502,14 @@ instance ToJSON BucketBilling where
 -- /See:/ 'notification' smart constructor.
 data Notification =
   Notification'
-    { _nEtag             :: !(Maybe Text)
+    { _nEtag :: !(Maybe Text)
     , _nObjectNamePrefix :: !(Maybe Text)
-    , _nPayloadFormat    :: !Text
-    , _nEventTypes       :: !(Maybe [Text])
-    , _nKind             :: !Text
-    , _nTopic            :: !(Maybe Text)
-    , _nSelfLink         :: !(Maybe Text)
-    , _nId               :: !(Maybe Text)
+    , _nPayloadFormat :: !Text
+    , _nEventTypes :: !(Maybe [Text])
+    , _nKind :: !Text
+    , _nTopic :: !(Maybe Text)
+    , _nSelfLink :: !(Maybe Text)
+    , _nId :: !(Maybe Text)
     , _nCustomAttributes :: !(Maybe NotificationCustom_attributes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -646,7 +636,7 @@ instance ToJSON Notification where
 -- /See:/ 'bucketLogging' smart constructor.
 data BucketLogging =
   BucketLogging'
-    { _blLogBucket       :: !(Maybe Text)
+    { _blLogBucket :: !(Maybe Text)
     , _blLogObjectPrefix :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -732,12 +722,16 @@ instance ToJSON ObjectMetadata where
 -- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
 data BucketLifecycleRuleItemCondition =
   BucketLifecycleRuleItemCondition'
-    { _blricAge                 :: !(Maybe (Textual Int32))
-    , _blricIsLive              :: !(Maybe Bool)
-    , _blricNumNewerVersions    :: !(Maybe (Textual Int32))
+    { _blricNoncurrentTimeBefore :: !(Maybe Date')
+    , _blricDaysSinceCustomTime :: !(Maybe (Textual Int32))
+    , _blricAge :: !(Maybe (Textual Int32))
+    , _blricDaysSinceNoncurrentTime :: !(Maybe (Textual Int32))
+    , _blricIsLive :: !(Maybe Bool)
+    , _blricNumNewerVersions :: !(Maybe (Textual Int32))
+    , _blricCustomTimeBefore :: !(Maybe Date')
     , _blricMatchesStorageClass :: !(Maybe [Text])
-    , _blricMatchesPattern      :: !(Maybe Text)
-    , _blricCreatedBefore       :: !(Maybe Date')
+    , _blricMatchesPattern :: !(Maybe Text)
+    , _blricCreatedBefore :: !(Maybe Date')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -746,11 +740,19 @@ data BucketLifecycleRuleItemCondition =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'blricNoncurrentTimeBefore'
+--
+-- * 'blricDaysSinceCustomTime'
+--
 -- * 'blricAge'
+--
+-- * 'blricDaysSinceNoncurrentTime'
 --
 -- * 'blricIsLive'
 --
 -- * 'blricNumNewerVersions'
+--
+-- * 'blricCustomTimeBefore'
 --
 -- * 'blricMatchesStorageClass'
 --
@@ -761,14 +763,38 @@ bucketLifecycleRuleItemCondition
     :: BucketLifecycleRuleItemCondition
 bucketLifecycleRuleItemCondition =
   BucketLifecycleRuleItemCondition'
-    { _blricAge = Nothing
+    { _blricNoncurrentTimeBefore = Nothing
+    , _blricDaysSinceCustomTime = Nothing
+    , _blricAge = Nothing
+    , _blricDaysSinceNoncurrentTime = Nothing
     , _blricIsLive = Nothing
     , _blricNumNewerVersions = Nothing
+    , _blricCustomTimeBefore = Nothing
     , _blricMatchesStorageClass = Nothing
     , _blricMatchesPattern = Nothing
     , _blricCreatedBefore = Nothing
     }
 
+
+-- | A date in RFC 3339 format with only the date part (for instance,
+-- \"2013-01-15\"). This condition is satisfied when the noncurrent time on
+-- an object is before this date in UTC. This condition is relevant only
+-- for versioned objects.
+blricNoncurrentTimeBefore :: Lens' BucketLifecycleRuleItemCondition (Maybe Day)
+blricNoncurrentTimeBefore
+  = lens _blricNoncurrentTimeBefore
+      (\ s a -> s{_blricNoncurrentTimeBefore = a})
+      . mapping _Date
+
+-- | Number of days elapsed since the user-specified timestamp set on an
+-- object. The condition is satisfied if the days elapsed is at least this
+-- number. If no custom timestamp is specified on an object, the condition
+-- does not apply.
+blricDaysSinceCustomTime :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
+blricDaysSinceCustomTime
+  = lens _blricDaysSinceCustomTime
+      (\ s a -> s{_blricDaysSinceCustomTime = a})
+      . mapping _Coerce
 
 -- | Age of an object (in days). This condition is satisfied when an object
 -- reaches the specified age.
@@ -776,6 +802,17 @@ blricAge :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
 blricAge
   = lens _blricAge (\ s a -> s{_blricAge = a}) .
       mapping _Coerce
+
+-- | Number of days elapsed since the noncurrent timestamp of an object. The
+-- condition is satisfied if the days elapsed is at least this number. This
+-- condition is relevant only for versioned objects. The value of the field
+-- must be a nonnegative integer. If it\'s zero, the object version will
+-- become eligible for Lifecycle action as soon as it becomes noncurrent.
+blricDaysSinceNoncurrentTime :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
+blricDaysSinceNoncurrentTime
+  = lens _blricDaysSinceNoncurrentTime
+      (\ s a -> s{_blricDaysSinceNoncurrentTime = a})
+      . mapping _Coerce
 
 -- | Relevant only for versioned objects. If the value is true, this
 -- condition matches live objects; if the value is false, it matches
@@ -793,9 +830,18 @@ blricNumNewerVersions
       (\ s a -> s{_blricNumNewerVersions = a})
       . mapping _Coerce
 
+-- | A date in RFC 3339 format with only the date part (for instance,
+-- \"2013-01-15\"). This condition is satisfied when the custom time on an
+-- object is before this date in UTC.
+blricCustomTimeBefore :: Lens' BucketLifecycleRuleItemCondition (Maybe Day)
+blricCustomTimeBefore
+  = lens _blricCustomTimeBefore
+      (\ s a -> s{_blricCustomTimeBefore = a})
+      . mapping _Date
+
 -- | Objects having any of the storage classes specified by this condition
 -- will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE,
--- COLDLINE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.
+-- COLDLINE, ARCHIVE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.
 blricMatchesStorageClass :: Lens' BucketLifecycleRuleItemCondition [Text]
 blricMatchesStorageClass
   = lens _blricMatchesStorageClass
@@ -829,8 +875,13 @@ instance FromJSON BucketLifecycleRuleItemCondition
           = withObject "BucketLifecycleRuleItemCondition"
               (\ o ->
                  BucketLifecycleRuleItemCondition' <$>
-                   (o .:? "age") <*> (o .:? "isLive") <*>
-                     (o .:? "numNewerVersions")
+                   (o .:? "noncurrentTimeBefore") <*>
+                     (o .:? "daysSinceCustomTime")
+                     <*> (o .:? "age")
+                     <*> (o .:? "daysSinceNoncurrentTime")
+                     <*> (o .:? "isLive")
+                     <*> (o .:? "numNewerVersions")
+                     <*> (o .:? "customTimeBefore")
                      <*> (o .:? "matchesStorageClass" .!= mempty)
                      <*> (o .:? "matchesPattern")
                      <*> (o .:? "createdBefore"))
@@ -840,9 +891,16 @@ instance ToJSON BucketLifecycleRuleItemCondition
         toJSON BucketLifecycleRuleItemCondition'{..}
           = object
               (catMaybes
-                 [("age" .=) <$> _blricAge,
+                 [("noncurrentTimeBefore" .=) <$>
+                    _blricNoncurrentTimeBefore,
+                  ("daysSinceCustomTime" .=) <$>
+                    _blricDaysSinceCustomTime,
+                  ("age" .=) <$> _blricAge,
+                  ("daysSinceNoncurrentTime" .=) <$>
+                    _blricDaysSinceNoncurrentTime,
                   ("isLive" .=) <$> _blricIsLive,
                   ("numNewerVersions" .=) <$> _blricNumNewerVersions,
+                  ("customTimeBefore" .=) <$> _blricCustomTimeBefore,
                   ("matchesStorageClass" .=) <$>
                     _blricMatchesStorageClass,
                   ("matchesPattern" .=) <$> _blricMatchesPattern,
@@ -928,15 +986,15 @@ instance ToJSON BucketLabels where
 data Channel =
   Channel'
     { _cResourceURI :: !(Maybe Text)
-    , _cResourceId  :: !(Maybe Text)
-    , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (Textual Int64))
-    , _cToken       :: !(Maybe Text)
-    , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe ChannelParams)
-    , _cId          :: !(Maybe Text)
-    , _cType        :: !(Maybe Text)
+    , _cResourceId :: !(Maybe Text)
+    , _cKind :: !Text
+    , _cExpiration :: !(Maybe (Textual Int64))
+    , _cToken :: !(Maybe Text)
+    , _cAddress :: !(Maybe Text)
+    , _cPayload :: !(Maybe Bool)
+    , _cParams :: !(Maybe ChannelParams)
+    , _cId :: !(Maybe Text)
+    , _cType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -993,7 +1051,7 @@ cResourceId
   = lens _cResourceId (\ s a -> s{_cResourceId = a})
 
 -- | Identifies this as a notification channel used to watch for changes to a
--- resource. Value: the fixed string \"api#channel\".
+-- resource, which is \"api#channel\".
 cKind :: Lens' Channel Text
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
@@ -1062,7 +1120,7 @@ instance ToJSON Channel where
 -- /See:/ 'bucketLifecycleRuleItem' smart constructor.
 data BucketLifecycleRuleItem =
   BucketLifecycleRuleItem'
-    { _blriAction    :: !(Maybe BucketLifecycleRuleItemAction)
+    { _blriAction :: !(Maybe BucketLifecycleRuleItemAction)
     , _blriCondition :: !(Maybe BucketLifecycleRuleItemCondition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1110,10 +1168,10 @@ instance ToJSON BucketLifecycleRuleItem where
 -- /See:/ 'bucketCORSItem' smart constructor.
 data BucketCORSItem =
   BucketCORSItem'
-    { _bciMaxAgeSeconds  :: !(Maybe (Textual Int32))
-    , _bciOrigin         :: !(Maybe [Text])
+    { _bciMaxAgeSeconds :: !(Maybe (Textual Int32))
+    , _bciOrigin :: !(Maybe [Text])
     , _bciResponseHeader :: !(Maybe [Text])
-    , _bciMethod         :: !(Maybe [Text])
+    , _bciMethod :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1199,7 +1257,7 @@ instance ToJSON BucketCORSItem where
 data ObjectAccessControlProjectTeam =
   ObjectAccessControlProjectTeam'
     { _oacptProjectNumber :: !(Maybe Text)
-    , _oacptTeam          :: !(Maybe Text)
+    , _oacptTeam :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1250,7 +1308,7 @@ instance ToJSON ObjectAccessControlProjectTeam where
 -- /See:/ 'objectCustomerEncryption' smart constructor.
 data ObjectCustomerEncryption =
   ObjectCustomerEncryption'
-    { _oceKeySha256           :: !(Maybe Text)
+    { _oceKeySha256 :: !(Maybe Text)
     , _oceEncryptionAlgorithm :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1302,30 +1360,33 @@ instance ToJSON ObjectCustomerEncryption where
 -- /See:/ 'bucket' smart constructor.
 data Bucket =
   Bucket'
-    { _bucEtag                  :: !(Maybe Text)
-    , _bucLocation              :: !(Maybe Text)
-    , _bucIAMConfiguration      :: !(Maybe BucketIAMConfiguration)
-    , _bucKind                  :: !Text
-    , _bucWebsite               :: !(Maybe BucketWebsite)
-    , _bucProjectNumber         :: !(Maybe (Textual Word64))
-    , _bucLifecycle             :: !(Maybe BucketLifecycle)
-    , _bucOwner                 :: !(Maybe BucketOwner)
-    , _bucRetentionPolicy       :: !(Maybe BucketRetentionPolicy)
-    , _bucSelfLink              :: !(Maybe Text)
-    , _bucName                  :: !(Maybe Text)
-    , _bucEncryption            :: !(Maybe BucketEncryption)
-    , _bucStorageClass          :: !(Maybe Text)
-    , _bucVersioning            :: !(Maybe BucketVersioning)
-    , _bucCORS                  :: !(Maybe [BucketCORSItem])
-    , _bucTimeCreated           :: !(Maybe DateTime')
-    , _bucId                    :: !(Maybe Text)
-    , _bucLabels                :: !(Maybe BucketLabels)
-    , _bucUpdated               :: !(Maybe DateTime')
-    , _bucDefaultObjectACL      :: !(Maybe [ObjectAccessControl])
-    , _bucBilling               :: !(Maybe BucketBilling)
-    , _bucMetageneration        :: !(Maybe (Textual Int64))
-    , _bucLogging               :: !(Maybe BucketLogging)
-    , _bucACL                   :: !(Maybe [BucketAccessControl])
+    { _bucSatisfiesPZS :: !(Maybe Bool)
+    , _bucEtag :: !(Maybe Text)
+    , _bucLocation :: !(Maybe Text)
+    , _bucIAMConfiguration :: !(Maybe BucketIAMConfiguration)
+    , _bucKind :: !Text
+    , _bucWebsite :: !(Maybe BucketWebsite)
+    , _bucProjectNumber :: !(Maybe (Textual Word64))
+    , _bucLifecycle :: !(Maybe BucketLifecycle)
+    , _bucOwner :: !(Maybe BucketOwner)
+    , _bucRetentionPolicy :: !(Maybe BucketRetentionPolicy)
+    , _bucZoneAffinity :: !(Maybe [Text])
+    , _bucSelfLink :: !(Maybe Text)
+    , _bucName :: !(Maybe Text)
+    , _bucEncryption :: !(Maybe BucketEncryption)
+    , _bucStorageClass :: !(Maybe Text)
+    , _bucVersioning :: !(Maybe BucketVersioning)
+    , _bucCORS :: !(Maybe [BucketCORSItem])
+    , _bucTimeCreated :: !(Maybe DateTime')
+    , _bucId :: !(Maybe Text)
+    , _bucLabels :: !(Maybe BucketLabels)
+    , _bucLocationType :: !(Maybe Text)
+    , _bucUpdated :: !(Maybe DateTime')
+    , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
+    , _bucBilling :: !(Maybe BucketBilling)
+    , _bucMetageneration :: !(Maybe (Textual Int64))
+    , _bucLogging :: !(Maybe BucketLogging)
+    , _bucACL :: !(Maybe [BucketAccessControl])
     , _bucDefaultEventBasedHold :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1334,6 +1395,8 @@ data Bucket =
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bucSatisfiesPZS'
 --
 -- * 'bucEtag'
 --
@@ -1353,6 +1416,8 @@ data Bucket =
 --
 -- * 'bucRetentionPolicy'
 --
+-- * 'bucZoneAffinity'
+--
 -- * 'bucSelfLink'
 --
 -- * 'bucName'
@@ -1371,6 +1436,8 @@ data Bucket =
 --
 -- * 'bucLabels'
 --
+-- * 'bucLocationType'
+--
 -- * 'bucUpdated'
 --
 -- * 'bucDefaultObjectACL'
@@ -1388,7 +1455,8 @@ bucket
     :: Bucket
 bucket =
   Bucket'
-    { _bucEtag = Nothing
+    { _bucSatisfiesPZS = Nothing
+    , _bucEtag = Nothing
     , _bucLocation = Nothing
     , _bucIAMConfiguration = Nothing
     , _bucKind = "storage#bucket"
@@ -1397,6 +1465,7 @@ bucket =
     , _bucLifecycle = Nothing
     , _bucOwner = Nothing
     , _bucRetentionPolicy = Nothing
+    , _bucZoneAffinity = Nothing
     , _bucSelfLink = Nothing
     , _bucName = Nothing
     , _bucEncryption = Nothing
@@ -1406,6 +1475,7 @@ bucket =
     , _bucTimeCreated = Nothing
     , _bucId = Nothing
     , _bucLabels = Nothing
+    , _bucLocationType = Nothing
     , _bucUpdated = Nothing
     , _bucDefaultObjectACL = Nothing
     , _bucBilling = Nothing
@@ -1415,6 +1485,12 @@ bucket =
     , _bucDefaultEventBasedHold = Nothing
     }
 
+
+-- | Reserved for future use.
+bucSatisfiesPZS :: Lens' Bucket (Maybe Bool)
+bucSatisfiesPZS
+  = lens _bucSatisfiesPZS
+      (\ s a -> s{_bucSatisfiesPZS = a})
 
 -- | HTTP 1.1 Entity tag for the bucket.
 bucEtag :: Lens' Bucket (Maybe Text)
@@ -1475,6 +1551,18 @@ bucRetentionPolicy
   = lens _bucRetentionPolicy
       (\ s a -> s{_bucRetentionPolicy = a})
 
+-- | The zone or zones from which the bucket is intended to use zonal quota.
+-- Requests for data from outside the specified affinities are still
+-- allowed but won\'t be able to use zonal quota. The zone or zones need to
+-- be within the bucket location otherwise the requests will fail with a
+-- 400 Bad Request response.
+bucZoneAffinity :: Lens' Bucket [Text]
+bucZoneAffinity
+  = lens _bucZoneAffinity
+      (\ s a -> s{_bucZoneAffinity = a})
+      . _Default
+      . _Coerce
+
 -- | The URI of this bucket.
 bucSelfLink :: Lens' Bucket (Maybe Text)
 bucSelfLink
@@ -1493,10 +1581,10 @@ bucEncryption
 -- | The bucket\'s default storage class, used whenever no storageClass is
 -- specified for a newly-created object. This defines how objects in the
 -- bucket are stored and determines the SLA and the cost of storage. Values
--- include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, and
--- DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the
--- bucket is created, it will default to STANDARD. For more information,
--- see storage classes.
+-- include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, ARCHIVE,
+-- and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when
+-- the bucket is created, it will default to STANDARD. For more
+-- information, see storage classes.
 bucStorageClass :: Lens' Bucket (Maybe Text)
 bucStorageClass
   = lens _bucStorageClass
@@ -1530,6 +1618,12 @@ bucId = lens _bucId (\ s a -> s{_bucId = a})
 bucLabels :: Lens' Bucket (Maybe BucketLabels)
 bucLabels
   = lens _bucLabels (\ s a -> s{_bucLabels = a})
+
+-- | The type of the bucket location.
+bucLocationType :: Lens' Bucket (Maybe Text)
+bucLocationType
+  = lens _bucLocationType
+      (\ s a -> s{_bucLocationType = a})
 
 -- | The modification time of the bucket in RFC 3339 format.
 bucUpdated :: Lens' Bucket (Maybe UTCTime)
@@ -1592,14 +1686,16 @@ instance FromJSON Bucket where
           = withObject "Bucket"
               (\ o ->
                  Bucket' <$>
-                   (o .:? "etag") <*> (o .:? "location") <*>
-                     (o .:? "iamConfiguration")
+                   (o .:? "satisfiesPZS") <*> (o .:? "etag") <*>
+                     (o .:? "location")
+                     <*> (o .:? "iamConfiguration")
                      <*> (o .:? "kind" .!= "storage#bucket")
                      <*> (o .:? "website")
                      <*> (o .:? "projectNumber")
                      <*> (o .:? "lifecycle")
                      <*> (o .:? "owner")
                      <*> (o .:? "retentionPolicy")
+                     <*> (o .:? "zoneAffinity" .!= mempty)
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "encryption")
@@ -1609,6 +1705,7 @@ instance FromJSON Bucket where
                      <*> (o .:? "timeCreated")
                      <*> (o .:? "id")
                      <*> (o .:? "labels")
+                     <*> (o .:? "locationType")
                      <*> (o .:? "updated")
                      <*> (o .:? "defaultObjectAcl" .!= mempty)
                      <*> (o .:? "billing")
@@ -1621,7 +1718,8 @@ instance ToJSON Bucket where
         toJSON Bucket'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _bucEtag,
+                 [("satisfiesPZS" .=) <$> _bucSatisfiesPZS,
+                  ("etag" .=) <$> _bucEtag,
                   ("location" .=) <$> _bucLocation,
                   ("iamConfiguration" .=) <$> _bucIAMConfiguration,
                   Just ("kind" .= _bucKind),
@@ -1630,6 +1728,7 @@ instance ToJSON Bucket where
                   ("lifecycle" .=) <$> _bucLifecycle,
                   ("owner" .=) <$> _bucOwner,
                   ("retentionPolicy" .=) <$> _bucRetentionPolicy,
+                  ("zoneAffinity" .=) <$> _bucZoneAffinity,
                   ("selfLink" .=) <$> _bucSelfLink,
                   ("name" .=) <$> _bucName,
                   ("encryption" .=) <$> _bucEncryption,
@@ -1638,6 +1737,7 @@ instance ToJSON Bucket where
                   ("cors" .=) <$> _bucCORS,
                   ("timeCreated" .=) <$> _bucTimeCreated,
                   ("id" .=) <$> _bucId, ("labels" .=) <$> _bucLabels,
+                  ("locationType" .=) <$> _bucLocationType,
                   ("updated" .=) <$> _bucUpdated,
                   ("defaultObjectAcl" .=) <$> _bucDefaultObjectACL,
                   ("billing" .=) <$> _bucBilling,
@@ -1653,9 +1753,9 @@ instance ToJSON Bucket where
 data Objects =
   Objects'
     { _oNextPageToken :: !(Maybe Text)
-    , _oKind          :: !Text
-    , _oItems         :: !(Maybe [Object])
-    , _oPrefixes      :: !(Maybe [Text])
+    , _oKind :: !Text
+    , _oItems :: !(Maybe [Object])
+    , _oPrefixes :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1732,8 +1832,8 @@ instance ToJSON Objects where
 data HmacKeysMetadata =
   HmacKeysMetadata'
     { _hNextPageToken :: !(Maybe Text)
-    , _hKind          :: !Text
-    , _hItems         :: !(Maybe [HmacKeyMetadata])
+    , _hKind :: !Text
+    , _hItems :: !(Maybe [HmacKeyMetadata])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1796,7 +1896,7 @@ instance ToJSON HmacKeysMetadata where
 -- /See:/ 'bucketAccessControls' smart constructor.
 data BucketAccessControls =
   BucketAccessControls'
-    { _bacKind  :: !Text
+    { _bacKind :: !Text
     , _bacItems :: !(Maybe [BucketAccessControl])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1887,8 +1987,8 @@ instance ToJSON BucketEncryption where
 -- /See:/ 'composeRequest' smart constructor.
 data ComposeRequest =
   ComposeRequest'
-    { _crDestination   :: !(Maybe Object)
-    , _crKind          :: !Text
+    { _crDestination :: !(Maybe Object)
+    , _crKind :: !Text
     , _crSourceObjects :: !(Maybe [ComposeRequestSourceObjectsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1954,7 +2054,7 @@ instance ToJSON ComposeRequest where
 -- /See:/ 'serviceAccount' smart constructor.
 data ServiceAccount =
   ServiceAccount'
-    { _saKind         :: !Text
+    { _saKind :: !Text
     , _saEmailAddress :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2005,7 +2105,7 @@ instance ToJSON ServiceAccount where
 -- /See:/ 'bucketOwner' smart constructor.
 data BucketOwner =
   BucketOwner'
-    { _boEntity   :: !(Maybe Text)
+    { _boEntity :: !(Maybe Text)
     , _boEntityId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2050,9 +2150,9 @@ instance ToJSON BucketOwner where
 -- /See:/ 'composeRequestSourceObjectsItem' smart constructor.
 data ComposeRequestSourceObjectsItem =
   ComposeRequestSourceObjectsItem'
-    { _crsoiName                :: !(Maybe Text)
+    { _crsoiName :: !(Maybe Text)
     , _crsoiObjectPreconditions :: !(Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
-    , _crsoiGeneration          :: !(Maybe (Textual Int64))
+    , _crsoiGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2153,8 +2253,8 @@ instance ToJSON ChannelParams where
 -- /See:/ 'policyBindingsItem' smart constructor.
 data PolicyBindingsItem =
   PolicyBindingsItem'
-    { _pbiMembers   :: !(Maybe [Text])
-    , _pbiRole      :: !(Maybe Text)
+    { _pbiMembers :: !(Maybe [Text])
+    , _pbiRole :: !(Maybe Text)
     , _pbiCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2253,37 +2353,38 @@ instance ToJSON PolicyBindingsItem where
 -- /See:/ 'object'' smart constructor.
 data Object =
   Object'
-    { _objTemporaryHold           :: !(Maybe Bool)
-    , _objEtag                    :: !(Maybe Text)
+    { _objTemporaryHold :: !(Maybe Bool)
+    , _objEtag :: !(Maybe Text)
     , _objTimeStorageClassUpdated :: !(Maybe DateTime')
     , _objRetentionExpirationTime :: !(Maybe DateTime')
-    , _objSize                    :: !(Maybe (Textual Word64))
-    , _objKind                    :: !Text
-    , _objTimeDeleted             :: !(Maybe DateTime')
-    , _objCrc32c                  :: !(Maybe Text)
-    , _objCustomerEncryption      :: !(Maybe ObjectCustomerEncryption)
-    , _objBucket                  :: !(Maybe Text)
-    , _objOwner                   :: !(Maybe ObjectOwner)
-    , _objSelfLink                :: !(Maybe Text)
-    , _objMediaLink               :: !(Maybe Text)
-    , _objComponentCount          :: !(Maybe (Textual Int32))
-    , _objName                    :: !(Maybe Text)
-    , _objStorageClass            :: !(Maybe Text)
-    , _objContentEncoding         :: !(Maybe Text)
-    , _objEventBasedHold          :: !(Maybe Bool)
-    , _objMetadata                :: !(Maybe ObjectMetadata)
-    , _objTimeCreated             :: !(Maybe DateTime')
-    , _objId                      :: !(Maybe Text)
-    , _objKmsKeyName              :: !(Maybe Text)
-    , _objUpdated                 :: !(Maybe DateTime')
-    , _objContentLanguage         :: !(Maybe Text)
-    , _objCacheControl            :: !(Maybe Text)
-    , _objMetageneration          :: !(Maybe (Textual Int64))
-    , _objGeneration              :: !(Maybe (Textual Int64))
-    , _objACL                     :: !(Maybe [ObjectAccessControl])
-    , _objContentDisPosition      :: !(Maybe Text)
-    , _objMD5Hash                 :: !(Maybe Text)
-    , _objContentType             :: !(Maybe Text)
+    , _objSize :: !(Maybe (Textual Word64))
+    , _objKind :: !Text
+    , _objTimeDeleted :: !(Maybe DateTime')
+    , _objCrc32c :: !(Maybe Text)
+    , _objCustomerEncryption :: !(Maybe ObjectCustomerEncryption)
+    , _objBucket :: !(Maybe Text)
+    , _objOwner :: !(Maybe ObjectOwner)
+    , _objSelfLink :: !(Maybe Text)
+    , _objMediaLink :: !(Maybe Text)
+    , _objComponentCount :: !(Maybe (Textual Int32))
+    , _objName :: !(Maybe Text)
+    , _objStorageClass :: !(Maybe Text)
+    , _objContentEncoding :: !(Maybe Text)
+    , _objEventBasedHold :: !(Maybe Bool)
+    , _objMetadata :: !(Maybe ObjectMetadata)
+    , _objTimeCreated :: !(Maybe DateTime')
+    , _objId :: !(Maybe Text)
+    , _objKmsKeyName :: !(Maybe Text)
+    , _objUpdated :: !(Maybe DateTime')
+    , _objContentLanguage :: !(Maybe Text)
+    , _objCacheControl :: !(Maybe Text)
+    , _objMetageneration :: !(Maybe (Textual Int64))
+    , _objGeneration :: !(Maybe (Textual Int64))
+    , _objACL :: !(Maybe [ObjectAccessControl])
+    , _objCustomTime :: !(Maybe DateTime')
+    , _objContentDisPosition :: !(Maybe Text)
+    , _objMD5Hash :: !(Maybe Text)
+    , _objContentType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2348,6 +2449,8 @@ data Object =
 --
 -- * 'objACL'
 --
+-- * 'objCustomTime'
+--
 -- * 'objContentDisPosition'
 --
 -- * 'objMD5Hash'
@@ -2385,6 +2488,7 @@ object' =
     , _objMetageneration = Nothing
     , _objGeneration = Nothing
     , _objACL = Nothing
+    , _objCustomTime = Nothing
     , _objContentDisPosition = Nothing
     , _objMD5Hash = Nothing
     , _objContentType = Nothing
@@ -2536,8 +2640,8 @@ objTimeCreated
 objId :: Lens' Object (Maybe Text)
 objId = lens _objId (\ s a -> s{_objId = a})
 
--- | Cloud KMS Key used to encrypt this object, if the object is encrypted by
--- such a key.
+-- | Not currently supported. Specifying the parameter causes the request to
+-- fail with status code 400 - Bad Request.
 objKmsKeyName :: Lens' Object (Maybe Text)
 objKmsKeyName
   = lens _objKmsKeyName
@@ -2585,6 +2689,13 @@ objACL :: Lens' Object [ObjectAccessControl]
 objACL
   = lens _objACL (\ s a -> s{_objACL = a}) . _Default .
       _Coerce
+
+-- | A timestamp in RFC 3339 format specified by the user for an object.
+objCustomTime :: Lens' Object (Maybe UTCTime)
+objCustomTime
+  = lens _objCustomTime
+      (\ s a -> s{_objCustomTime = a})
+      . mapping _DateTime
 
 -- | Content-Disposition of the object data.
 objContentDisPosition :: Lens' Object (Maybe Text)
@@ -2637,6 +2748,7 @@ instance FromJSON Object where
                      <*> (o .:? "metageneration")
                      <*> (o .:? "generation")
                      <*> (o .:? "acl" .!= mempty)
+                     <*> (o .:? "customTime")
                      <*> (o .:? "contentDisposition")
                      <*> (o .:? "md5Hash")
                      <*> (o .:? "contentType"))
@@ -2674,6 +2786,7 @@ instance ToJSON Object where
                   ("metageneration" .=) <$> _objMetageneration,
                   ("generation" .=) <$> _objGeneration,
                   ("acl" .=) <$> _objACL,
+                  ("customTime" .=) <$> _objCustomTime,
                   ("contentDisposition" .=) <$> _objContentDisPosition,
                   ("md5Hash" .=) <$> _objMD5Hash,
                   ("contentType" .=) <$> _objContentType])
@@ -2735,7 +2848,7 @@ instance ToJSON
 data BucketAccessControlProjectTeam =
   BucketAccessControlProjectTeam'
     { _bacptProjectNumber :: !(Maybe Text)
-    , _bacptTeam          :: !(Maybe Text)
+    , _bacptTeam :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2785,7 +2898,7 @@ instance ToJSON BucketAccessControlProjectTeam where
 -- /See:/ 'objectAccessControls' smart constructor.
 data ObjectAccessControls =
   ObjectAccessControls'
-    { _oacKind  :: !Text
+    { _oacKind :: !Text
     , _oacItems :: !(Maybe [ObjectAccessControl])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2840,7 +2953,7 @@ instance ToJSON ObjectAccessControls where
 data BucketWebsite =
   BucketWebsite'
     { _bwMainPageSuffix :: !(Maybe Text)
-    , _bwNotFoundPage   :: !(Maybe Text)
+    , _bwNotFoundPage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2894,17 +3007,17 @@ instance ToJSON BucketWebsite where
 -- /See:/ 'bucketAccessControl' smart constructor.
 data BucketAccessControl =
   BucketAccessControl'
-    { _bacaEmail       :: !(Maybe Text)
-    , _bacaEtag        :: !(Maybe Text)
-    , _bacaKind        :: !Text
-    , _bacaDomain      :: !(Maybe Text)
-    , _bacaBucket      :: !(Maybe Text)
-    , _bacaRole        :: !(Maybe Text)
-    , _bacaSelfLink    :: !(Maybe Text)
-    , _bacaId          :: !(Maybe Text)
+    { _bacaEmail :: !(Maybe Text)
+    , _bacaEtag :: !(Maybe Text)
+    , _bacaKind :: !Text
+    , _bacaDomain :: !(Maybe Text)
+    , _bacaBucket :: !(Maybe Text)
+    , _bacaRole :: !(Maybe Text)
+    , _bacaSelfLink :: !(Maybe Text)
+    , _bacaId :: !(Maybe Text)
     , _bacaProjectTeam :: !(Maybe BucketAccessControlProjectTeam)
-    , _bacaEntity      :: !(Maybe Text)
-    , _bacaEntityId    :: !(Maybe Text)
+    , _bacaEntity :: !(Maybe Text)
+    , _bacaEntityId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3049,7 +3162,7 @@ instance ToJSON BucketAccessControl where
 data BucketLifecycleRuleItemAction =
   BucketLifecycleRuleItemAction'
     { _blriaStorageClass :: !(Maybe Text)
-    , _blriaType         :: !(Maybe Text)
+    , _blriaType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3100,7 +3213,7 @@ instance ToJSON BucketLifecycleRuleItemAction where
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
 data TestIAMPermissionsResponse =
   TestIAMPermissionsResponse'
-    { _tiprKind        :: !Text
+    { _tiprKind :: !Text
     , _tiprPermissions :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3169,9 +3282,9 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'hmacKey' smart constructor.
 data HmacKey =
   HmacKey'
-    { _hkKind     :: !Text
-    , _hkSecret   :: !(Maybe Text)
-    , _hkMetadata :: !(Maybe JSONValue)
+    { _hkKind :: !Text
+    , _hkSecret :: !(Maybe Text)
+    , _hkMetadata :: !(Maybe HmacKeyMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3201,7 +3314,7 @@ hkSecret :: Lens' HmacKey (Maybe Text)
 hkSecret = lens _hkSecret (\ s a -> s{_hkSecret = a})
 
 -- | Key metadata.
-hkMetadata :: Lens' HmacKey (Maybe JSONValue)
+hkMetadata :: Lens' HmacKey (Maybe HmacKeyMetadata)
 hkMetadata
   = lens _hkMetadata (\ s a -> s{_hkMetadata = a})
 
@@ -3227,10 +3340,11 @@ instance ToJSON HmacKey where
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pEtag       :: !(Maybe Bytes)
+    { _pEtag :: !(Maybe Bytes)
     , _pResourceId :: !(Maybe Text)
-    , _pKind       :: !Text
-    , _pBindings   :: !(Maybe [PolicyBindingsItem])
+    , _pKind :: !Text
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [PolicyBindingsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3245,6 +3359,8 @@ data Policy =
 --
 -- * 'pKind'
 --
+-- * 'pVersion'
+--
 -- * 'pBindings'
 policy
     :: Policy
@@ -3253,6 +3369,7 @@ policy =
     { _pEtag = Nothing
     , _pResourceId = Nothing
     , _pKind = "storage#policy"
+    , _pVersion = Nothing
     , _pBindings = Nothing
     }
 
@@ -3279,6 +3396,12 @@ pResourceId
 pKind :: Lens' Policy Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
+-- | The IAM policy format version.
+pVersion :: Lens' Policy (Maybe Int32)
+pVersion
+  = lens _pVersion (\ s a -> s{_pVersion = a}) .
+      mapping _Coerce
+
 -- | An association between a role, which comes with a set of permissions,
 -- and members who may assume that role.
 pBindings :: Lens' Policy [PolicyBindingsItem]
@@ -3294,6 +3417,7 @@ instance FromJSON Policy where
                  Policy' <$>
                    (o .:? "etag") <*> (o .:? "resourceId") <*>
                      (o .:? "kind" .!= "storage#policy")
+                     <*> (o .:? "version")
                      <*> (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
@@ -3303,14 +3427,79 @@ instance ToJSON Policy where
                  [("etag" .=) <$> _pEtag,
                   ("resourceId" .=) <$> _pResourceId,
                   Just ("kind" .= _pKind),
+                  ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
+
+-- | The bucket\'s uniform bucket-level access configuration.
+--
+-- /See:/ 'bucketIAMConfigurationUniformBucketLevelAccess' smart constructor.
+data BucketIAMConfigurationUniformBucketLevelAccess =
+  BucketIAMConfigurationUniformBucketLevelAccess'
+    { _bicublaLockedTime :: !(Maybe DateTime')
+    , _bicublaEnabled :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BucketIAMConfigurationUniformBucketLevelAccess' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bicublaLockedTime'
+--
+-- * 'bicublaEnabled'
+bucketIAMConfigurationUniformBucketLevelAccess
+    :: BucketIAMConfigurationUniformBucketLevelAccess
+bucketIAMConfigurationUniformBucketLevelAccess =
+  BucketIAMConfigurationUniformBucketLevelAccess'
+    {_bicublaLockedTime = Nothing, _bicublaEnabled = Nothing}
+
+
+-- | The deadline for changing
+-- iamConfiguration.uniformBucketLevelAccess.enabled from true to false in
+-- RFC 3339 format. iamConfiguration.uniformBucketLevelAccess.enabled may
+-- be changed from true to false until the locked time, after which the
+-- field is immutable.
+bicublaLockedTime :: Lens' BucketIAMConfigurationUniformBucketLevelAccess (Maybe UTCTime)
+bicublaLockedTime
+  = lens _bicublaLockedTime
+      (\ s a -> s{_bicublaLockedTime = a})
+      . mapping _DateTime
+
+-- | If set, access is controlled only by bucket-level or above IAM policies.
+bicublaEnabled :: Lens' BucketIAMConfigurationUniformBucketLevelAccess (Maybe Bool)
+bicublaEnabled
+  = lens _bicublaEnabled
+      (\ s a -> s{_bicublaEnabled = a})
+
+instance FromJSON
+           BucketIAMConfigurationUniformBucketLevelAccess
+         where
+        parseJSON
+          = withObject
+              "BucketIAMConfigurationUniformBucketLevelAccess"
+              (\ o ->
+                 BucketIAMConfigurationUniformBucketLevelAccess' <$>
+                   (o .:? "lockedTime") <*> (o .:? "enabled"))
+
+instance ToJSON
+           BucketIAMConfigurationUniformBucketLevelAccess
+         where
+        toJSON
+          BucketIAMConfigurationUniformBucketLevelAccess'{..}
+          = object
+              (catMaybes
+                 [("lockedTime" .=) <$> _bicublaLockedTime,
+                  ("enabled" .=) <$> _bicublaEnabled])
 
 -- | The bucket\'s IAM configuration.
 --
 -- /See:/ 'bucketIAMConfiguration' smart constructor.
-newtype BucketIAMConfiguration =
+data BucketIAMConfiguration =
   BucketIAMConfiguration'
-    { _bicBucketPolicyOnly :: Maybe BucketIAMConfigurationBucketPolicyOnly
+    { _bicBucketPolicyOnly :: !(Maybe BucketIAMConfigurationBucketPolicyOnly)
+    , _bicUniformBucketLevelAccess :: !(Maybe BucketIAMConfigurationUniformBucketLevelAccess)
+    , _bicPublicAccessPrevention :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3320,49 +3509,80 @@ newtype BucketIAMConfiguration =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bicBucketPolicyOnly'
+--
+-- * 'bicUniformBucketLevelAccess'
+--
+-- * 'bicPublicAccessPrevention'
 bucketIAMConfiguration
     :: BucketIAMConfiguration
 bucketIAMConfiguration =
-  BucketIAMConfiguration' {_bicBucketPolicyOnly = Nothing}
+  BucketIAMConfiguration'
+    { _bicBucketPolicyOnly = Nothing
+    , _bicUniformBucketLevelAccess = Nothing
+    , _bicPublicAccessPrevention = Nothing
+    }
 
 
--- | The bucket\'s Bucket Policy Only configuration.
+-- | The bucket\'s uniform bucket-level access configuration. The feature was
+-- formerly known as Bucket Policy Only. For backward compatibility, this
+-- field will be populated with identical information as the
+-- uniformBucketLevelAccess field. We recommend using the
+-- uniformBucketLevelAccess field to enable and disable the feature.
 bicBucketPolicyOnly :: Lens' BucketIAMConfiguration (Maybe BucketIAMConfigurationBucketPolicyOnly)
 bicBucketPolicyOnly
   = lens _bicBucketPolicyOnly
       (\ s a -> s{_bicBucketPolicyOnly = a})
+
+-- | The bucket\'s uniform bucket-level access configuration.
+bicUniformBucketLevelAccess :: Lens' BucketIAMConfiguration (Maybe BucketIAMConfigurationUniformBucketLevelAccess)
+bicUniformBucketLevelAccess
+  = lens _bicUniformBucketLevelAccess
+      (\ s a -> s{_bicUniformBucketLevelAccess = a})
+
+-- | The bucket\'s Public Access Prevention configuration. Currently,
+-- \'unspecified\' and \'enforced\' are supported.
+bicPublicAccessPrevention :: Lens' BucketIAMConfiguration (Maybe Text)
+bicPublicAccessPrevention
+  = lens _bicPublicAccessPrevention
+      (\ s a -> s{_bicPublicAccessPrevention = a})
 
 instance FromJSON BucketIAMConfiguration where
         parseJSON
           = withObject "BucketIAMConfiguration"
               (\ o ->
                  BucketIAMConfiguration' <$>
-                   (o .:? "bucketPolicyOnly"))
+                   (o .:? "bucketPolicyOnly") <*>
+                     (o .:? "uniformBucketLevelAccess")
+                     <*> (o .:? "publicAccessPrevention"))
 
 instance ToJSON BucketIAMConfiguration where
         toJSON BucketIAMConfiguration'{..}
           = object
               (catMaybes
-                 [("bucketPolicyOnly" .=) <$> _bicBucketPolicyOnly])
+                 [("bucketPolicyOnly" .=) <$> _bicBucketPolicyOnly,
+                  ("uniformBucketLevelAccess" .=) <$>
+                    _bicUniformBucketLevelAccess,
+                  ("publicAccessPrevention" .=) <$>
+                    _bicPublicAccessPrevention])
 
 -- | An access-control entry.
 --
 -- /See:/ 'objectAccessControl' smart constructor.
 data ObjectAccessControl =
   ObjectAccessControl'
-    { _oacaEmail       :: !(Maybe Text)
-    , _oacaEtag        :: !(Maybe Text)
-    , _oacaKind        :: !Text
-    , _oacaDomain      :: !(Maybe Text)
-    , _oacaBucket      :: !(Maybe Text)
-    , _oacaRole        :: !(Maybe Text)
-    , _oacaSelfLink    :: !(Maybe Text)
-    , _oacaObject      :: !(Maybe Text)
-    , _oacaId          :: !(Maybe Text)
+    { _oacaEmail :: !(Maybe Text)
+    , _oacaEtag :: !(Maybe Text)
+    , _oacaKind :: !Text
+    , _oacaDomain :: !(Maybe Text)
+    , _oacaBucket :: !(Maybe Text)
+    , _oacaRole :: !(Maybe Text)
+    , _oacaSelfLink :: !(Maybe Text)
+    , _oacaObject :: !(Maybe Text)
+    , _oacaId :: !(Maybe Text)
     , _oacaProjectTeam :: !(Maybe ObjectAccessControlProjectTeam)
-    , _oacaEntity      :: !(Maybe Text)
-    , _oacaGeneration  :: !(Maybe (Textual Int64))
-    , _oacaEntityId    :: !(Maybe Text)
+    , _oacaEntity :: !(Maybe Text)
+    , _oacaGeneration :: !(Maybe (Textual Int64))
+    , _oacaEntityId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3527,7 +3747,7 @@ instance ToJSON ObjectAccessControl where
 -- /See:/ 'notifications' smart constructor.
 data Notifications =
   Notifications'
-    { _notKind  :: !Text
+    { _notKind :: !Text
     , _notItems :: !(Maybe [Notification])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3611,13 +3831,17 @@ instance FromJSON NotificationCustom_attributes where
 instance ToJSON NotificationCustom_attributes where
         toJSON = toJSON . _ncAddtional
 
--- | The bucket\'s Bucket Policy Only configuration.
+-- | The bucket\'s uniform bucket-level access configuration. The feature was
+-- formerly known as Bucket Policy Only. For backward compatibility, this
+-- field will be populated with identical information as the
+-- uniformBucketLevelAccess field. We recommend using the
+-- uniformBucketLevelAccess field to enable and disable the feature.
 --
 -- /See:/ 'bucketIAMConfigurationBucketPolicyOnly' smart constructor.
 data BucketIAMConfigurationBucketPolicyOnly =
   BucketIAMConfigurationBucketPolicyOnly'
     { _bicbpoLockedTime :: !(Maybe DateTime')
-    , _bicbpoEnabled    :: !(Maybe Bool)
+    , _bicbpoEnabled :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3636,8 +3860,8 @@ bucketIAMConfigurationBucketPolicyOnly =
     {_bicbpoLockedTime = Nothing, _bicbpoEnabled = Nothing}
 
 
--- | The deadline time for changing iamConfiguration.bucketPolicyOnly.enabled
--- from true to false in RFC 3339 format.
+-- | The deadline for changing iamConfiguration.bucketPolicyOnly.enabled from
+-- true to false in RFC 3339 format.
 -- iamConfiguration.bucketPolicyOnly.enabled may be changed from true to
 -- false until the locked time, after which the field is immutable.
 bicbpoLockedTime :: Lens' BucketIAMConfigurationBucketPolicyOnly (Maybe UTCTime)
@@ -3646,7 +3870,7 @@ bicbpoLockedTime
       (\ s a -> s{_bicbpoLockedTime = a})
       . mapping _DateTime
 
--- | If set, access checks only use bucket-level IAM policies or above.
+-- | If set, access is controlled only by bucket-level or above IAM policies.
 bicbpoEnabled :: Lens' BucketIAMConfigurationBucketPolicyOnly (Maybe Bool)
 bicbpoEnabled
   = lens _bicbpoEnabled
@@ -3675,12 +3899,12 @@ instance ToJSON
 -- /See:/ 'rewriteResponse' smart constructor.
 data RewriteResponse =
   RewriteResponse'
-    { _rrKind                :: !Text
-    , _rrDone                :: !(Maybe Bool)
-    , _rrResource            :: !(Maybe Object)
-    , _rrObjectSize          :: !(Maybe (Textual Int64))
+    { _rrKind :: !Text
+    , _rrDone :: !(Maybe Bool)
+    , _rrResource :: !(Maybe Object)
+    , _rrObjectSize :: !(Maybe (Textual Int64))
     , _rrTotalBytesRewritten :: !(Maybe (Textual Int64))
-    , _rrRewriteToken        :: !(Maybe Text)
+    , _rrRewriteToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

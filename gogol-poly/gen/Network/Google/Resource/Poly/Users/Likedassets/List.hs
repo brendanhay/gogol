@@ -47,8 +47,8 @@ module Network.Google.Resource.Poly.Users.Likedassets.List
     , ullCallback
     ) where
 
-import           Network.Google.Poly.Types
-import           Network.Google.Prelude
+import Network.Google.Poly.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @poly.users.likedassets.list@ method which the
 -- 'UsersLikedassetsList' request conforms to.
@@ -75,16 +75,16 @@ type UsersLikedassetsListResource =
 -- /See:/ 'usersLikedassetsList' smart constructor.
 data UsersLikedassetsList =
   UsersLikedassetsList'
-    { _ullXgafv          :: !(Maybe Xgafv)
+    { _ullXgafv :: !(Maybe Xgafv)
     , _ullUploadProtocol :: !(Maybe Text)
-    , _ullOrderBy        :: !(Maybe Text)
-    , _ullAccessToken    :: !(Maybe Text)
-    , _ullFormat         :: !(Maybe Text)
-    , _ullUploadType     :: !(Maybe Text)
-    , _ullName           :: !Text
-    , _ullPageToken      :: !(Maybe Text)
-    , _ullPageSize       :: !(Maybe (Textual Int32))
-    , _ullCallback       :: !(Maybe Text)
+    , _ullOrderBy :: !(Maybe Text)
+    , _ullAccessToken :: !(Maybe Text)
+    , _ullFormat :: !(Maybe Text)
+    , _ullUploadType :: !(Maybe Text)
+    , _ullName :: !Text
+    , _ullPageToken :: !(Maybe Text)
+    , _ullPageSize :: !(Maybe (Textual Int32))
+    , _ullCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

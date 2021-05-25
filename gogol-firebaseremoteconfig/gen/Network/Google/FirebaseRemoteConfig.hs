@@ -79,10 +79,10 @@ module Network.Google.FirebaseRemoteConfig
     , rcConditions
     ) where
 
-import           Network.Google.FirebaseRemoteConfig.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.FirebaseRemoteConfig.Projects.GetRemoteConfig
-import           Network.Google.Resource.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
+import Network.Google.Prelude
+import Network.Google.FirebaseRemoteConfig.Types
+import Network.Google.Resource.FirebaseRemoteConfig.Projects.GetRemoteConfig
+import Network.Google.Resource.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
 
 {- $resources
 TODO

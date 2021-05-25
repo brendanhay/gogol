@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.operations.cancel@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.operations.cancel@.
 module Network.Google.Resource.SecurityCenter.Organizations.Operations.Cancel
     (
     -- * REST Resource
@@ -49,13 +49,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Operations.Cancel
     , oocCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.operations.cancel@ method which the
 -- 'OrganizationsOperationsCancel' request conforms to.
 type OrganizationsOperationsCancelResource =
-     "v1" :>
+     "v1p1beta1" :>
        CaptureMode "name" "cancel" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -77,12 +77,12 @@ type OrganizationsOperationsCancelResource =
 -- /See:/ 'organizationsOperationsCancel' smart constructor.
 data OrganizationsOperationsCancel =
   OrganizationsOperationsCancel'
-    { _oocXgafv          :: !(Maybe Xgafv)
+    { _oocXgafv :: !(Maybe Xgafv)
     , _oocUploadProtocol :: !(Maybe Text)
-    , _oocAccessToken    :: !(Maybe Text)
-    , _oocUploadType     :: !(Maybe Text)
-    , _oocName           :: !Text
-    , _oocCallback       :: !(Maybe Text)
+    , _oocAccessToken :: !(Maybe Text)
+    , _oocUploadType :: !(Maybe Text)
+    , _oocName :: !Text
+    , _oocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

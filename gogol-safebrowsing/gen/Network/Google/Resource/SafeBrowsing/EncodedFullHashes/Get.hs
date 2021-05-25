@@ -43,8 +43,8 @@ module Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
     , efhgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SafeBrowsing.Types
+import Network.Google.Prelude
+import Network.Google.SafeBrowsing.Types
 
 -- | A resource alias for @safebrowsing.encodedFullHashes.get@ method which the
 -- 'EncodedFullHashesGet' request conforms to.
@@ -60,21 +60,22 @@ type EncodedFullHashesGetResource =
                      QueryParam "clientVersion" Text :>
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :>
-                           Get '[JSON] FindFullHashesResponse
+                           Get '[JSON]
+                             GoogleSecuritySafebrowsingV4FindFullHashesResponse
 
 -- |
 --
 -- /See:/ 'encodedFullHashesGet' smart constructor.
 data EncodedFullHashesGet =
   EncodedFullHashesGet'
-    { _efhgClientId       :: !(Maybe Text)
-    , _efhgXgafv          :: !(Maybe Xgafv)
+    { _efhgClientId :: !(Maybe Text)
+    , _efhgXgafv :: !(Maybe Xgafv)
     , _efhgUploadProtocol :: !(Maybe Text)
-    , _efhgAccessToken    :: !(Maybe Text)
+    , _efhgAccessToken :: !(Maybe Text)
     , _efhgEncodedRequest :: !Bytes
-    , _efhgUploadType     :: !(Maybe Text)
-    , _efhgClientVersion  :: !(Maybe Text)
-    , _efhgCallback       :: !(Maybe Text)
+    , _efhgUploadType :: !(Maybe Text)
+    , _efhgClientVersion :: !(Maybe Text)
+    , _efhgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,7 +163,8 @@ efhgCallback
   = lens _efhgCallback (\ s a -> s{_efhgCallback = a})
 
 instance GoogleRequest EncodedFullHashesGet where
-        type Rs EncodedFullHashesGet = FindFullHashesResponse
+        type Rs EncodedFullHashesGet =
+             GoogleSecuritySafebrowsingV4FindFullHashesResponse
         type Scopes EncodedFullHashesGet = '[]
         requestClient EncodedFullHashesGet'{..}
           = go _efhgEncodedRequest _efhgClientId _efhgXgafv

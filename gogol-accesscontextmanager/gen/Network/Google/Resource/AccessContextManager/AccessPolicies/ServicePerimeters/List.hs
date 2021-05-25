@@ -43,8 +43,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerime
     , apsplCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.list@ method which the
 -- 'AccessPoliciesServicePerimetersList' request conforms to.
@@ -67,14 +67,14 @@ type AccessPoliciesServicePerimetersListResource =
 -- /See:/ 'accessPoliciesServicePerimetersList' smart constructor.
 data AccessPoliciesServicePerimetersList =
   AccessPoliciesServicePerimetersList'
-    { _apsplParent         :: !Text
-    , _apsplXgafv          :: !(Maybe Xgafv)
+    { _apsplParent :: !Text
+    , _apsplXgafv :: !(Maybe Xgafv)
     , _apsplUploadProtocol :: !(Maybe Text)
-    , _apsplAccessToken    :: !(Maybe Text)
-    , _apsplUploadType     :: !(Maybe Text)
-    , _apsplPageToken      :: !(Maybe Text)
-    , _apsplPageSize       :: !(Maybe (Textual Int32))
-    , _apsplCallback       :: !(Maybe Text)
+    , _apsplAccessToken :: !(Maybe Text)
+    , _apsplUploadType :: !(Maybe Text)
+    , _apsplPageToken :: !(Maybe Text)
+    , _apsplPageSize :: !(Maybe (Textual Int32))
+    , _apsplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

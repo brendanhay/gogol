@@ -21,10 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the names of the snapshots on this topic. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot.
+-- [Seek](https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview)
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.snapshots.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
@@ -47,8 +47,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
     , ptsltCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.snapshots.list@ method which the
 -- 'ProjectsTopicsSnapshotsList' request conforms to.
@@ -67,22 +67,22 @@ type ProjectsTopicsSnapshotsListResource =
                            Get '[JSON] ListTopicSnapshotsResponse
 
 -- | Lists the names of the snapshots on this topic. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot.
+-- [Seek](https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview)
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot.
 --
 -- /See:/ 'projectsTopicsSnapshotsList' smart constructor.
 data ProjectsTopicsSnapshotsList =
   ProjectsTopicsSnapshotsList'
-    { _ptsltXgafv          :: !(Maybe Xgafv)
+    { _ptsltXgafv :: !(Maybe Xgafv)
     , _ptsltUploadProtocol :: !(Maybe Text)
-    , _ptsltAccessToken    :: !(Maybe Text)
-    , _ptsltUploadType     :: !(Maybe Text)
-    , _ptsltTopic          :: !Text
-    , _ptsltPageToken      :: !(Maybe Text)
-    , _ptsltPageSize       :: !(Maybe (Textual Int32))
-    , _ptsltCallback       :: !(Maybe Text)
+    , _ptsltAccessToken :: !(Maybe Text)
+    , _ptsltUploadType :: !(Maybe Text)
+    , _ptsltTopic :: !Text
+    , _ptsltPageToken :: !(Maybe Text)
+    , _ptsltPageSize :: !(Maybe (Textual Int32))
+    , _ptsltCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -145,8 +145,8 @@ ptsltUploadType
   = lens _ptsltUploadType
       (\ s a -> s{_ptsltUploadType = a})
 
--- | The name of the topic that snapshots are attached to. Format is
--- \`projects\/{project}\/topics\/{topic}\`.
+-- | Required. The name of the topic that snapshots are attached to. Format
+-- is \`projects\/{project}\/topics\/{topic}\`.
 ptsltTopic :: Lens' ProjectsTopicsSnapshotsList Text
 ptsltTopic
   = lens _ptsltTopic (\ s a -> s{_ptsltTopic = a})

@@ -33,22 +33,22 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , ProjectsLocationsDataSetsFhirStoresDelete
 
     -- * Request Lenses
-    , pldsfsdXgafv
-    , pldsfsdUploadProtocol
-    , pldsfsdAccessToken
-    , pldsfsdUploadType
-    , pldsfsdName
-    , pldsfsdCallback
+    , pldsfsdlXgafv
+    , pldsfsdlUploadProtocol
+    , pldsfsdlAccessToken
+    , pldsfsdlUploadType
+    , pldsfsdlName
+    , pldsfsdlCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.delete@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresDelete' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresDeleteResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,12 +62,12 @@ type ProjectsLocationsDataSetsFhirStoresDeleteResource
 -- /See:/ 'projectsLocationsDataSetsFhirStoresDelete' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresDelete =
   ProjectsLocationsDataSetsFhirStoresDelete'
-    { _pldsfsdXgafv          :: !(Maybe Xgafv)
-    , _pldsfsdUploadProtocol :: !(Maybe Text)
-    , _pldsfsdAccessToken    :: !(Maybe Text)
-    , _pldsfsdUploadType     :: !(Maybe Text)
-    , _pldsfsdName           :: !Text
-    , _pldsfsdCallback       :: !(Maybe Text)
+    { _pldsfsdlXgafv :: !(Maybe Xgafv)
+    , _pldsfsdlUploadProtocol :: !(Maybe Text)
+    , _pldsfsdlAccessToken :: !(Maybe Text)
+    , _pldsfsdlUploadType :: !(Maybe Text)
+    , _pldsfsdlName :: !Text
+    , _pldsfsdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,64 +76,65 @@ data ProjectsLocationsDataSetsFhirStoresDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pldsfsdXgafv'
+-- * 'pldsfsdlXgafv'
 --
--- * 'pldsfsdUploadProtocol'
+-- * 'pldsfsdlUploadProtocol'
 --
--- * 'pldsfsdAccessToken'
+-- * 'pldsfsdlAccessToken'
 --
--- * 'pldsfsdUploadType'
+-- * 'pldsfsdlUploadType'
 --
--- * 'pldsfsdName'
+-- * 'pldsfsdlName'
 --
--- * 'pldsfsdCallback'
+-- * 'pldsfsdlCallback'
 projectsLocationsDataSetsFhirStoresDelete
-    :: Text -- ^ 'pldsfsdName'
+    :: Text -- ^ 'pldsfsdlName'
     -> ProjectsLocationsDataSetsFhirStoresDelete
-projectsLocationsDataSetsFhirStoresDelete pPldsfsdName_ =
+projectsLocationsDataSetsFhirStoresDelete pPldsfsdlName_ =
   ProjectsLocationsDataSetsFhirStoresDelete'
-    { _pldsfsdXgafv = Nothing
-    , _pldsfsdUploadProtocol = Nothing
-    , _pldsfsdAccessToken = Nothing
-    , _pldsfsdUploadType = Nothing
-    , _pldsfsdName = pPldsfsdName_
-    , _pldsfsdCallback = Nothing
+    { _pldsfsdlXgafv = Nothing
+    , _pldsfsdlUploadProtocol = Nothing
+    , _pldsfsdlAccessToken = Nothing
+    , _pldsfsdlUploadType = Nothing
+    , _pldsfsdlName = pPldsfsdlName_
+    , _pldsfsdlCallback = Nothing
     }
 
 
 -- | V1 error format.
-pldsfsdXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Xgafv)
-pldsfsdXgafv
-  = lens _pldsfsdXgafv (\ s a -> s{_pldsfsdXgafv = a})
+pldsfsdlXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Xgafv)
+pldsfsdlXgafv
+  = lens _pldsfsdlXgafv
+      (\ s a -> s{_pldsfsdlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pldsfsdUploadProtocol :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
-pldsfsdUploadProtocol
-  = lens _pldsfsdUploadProtocol
-      (\ s a -> s{_pldsfsdUploadProtocol = a})
+pldsfsdlUploadProtocol :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
+pldsfsdlUploadProtocol
+  = lens _pldsfsdlUploadProtocol
+      (\ s a -> s{_pldsfsdlUploadProtocol = a})
 
 -- | OAuth access token.
-pldsfsdAccessToken :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
-pldsfsdAccessToken
-  = lens _pldsfsdAccessToken
-      (\ s a -> s{_pldsfsdAccessToken = a})
+pldsfsdlAccessToken :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
+pldsfsdlAccessToken
+  = lens _pldsfsdlAccessToken
+      (\ s a -> s{_pldsfsdlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pldsfsdUploadType :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
-pldsfsdUploadType
-  = lens _pldsfsdUploadType
-      (\ s a -> s{_pldsfsdUploadType = a})
+pldsfsdlUploadType :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
+pldsfsdlUploadType
+  = lens _pldsfsdlUploadType
+      (\ s a -> s{_pldsfsdlUploadType = a})
 
 -- | The resource name of the FHIR store to delete.
-pldsfsdName :: Lens' ProjectsLocationsDataSetsFhirStoresDelete Text
-pldsfsdName
-  = lens _pldsfsdName (\ s a -> s{_pldsfsdName = a})
+pldsfsdlName :: Lens' ProjectsLocationsDataSetsFhirStoresDelete Text
+pldsfsdlName
+  = lens _pldsfsdlName (\ s a -> s{_pldsfsdlName = a})
 
 -- | JSONP
-pldsfsdCallback :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
-pldsfsdCallback
-  = lens _pldsfsdCallback
-      (\ s a -> s{_pldsfsdCallback = a})
+pldsfsdlCallback :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Text)
+pldsfsdlCallback
+  = lens _pldsfsdlCallback
+      (\ s a -> s{_pldsfsdlCallback = a})
 
 instance GoogleRequest
            ProjectsLocationsDataSetsFhirStoresDelete
@@ -144,11 +145,11 @@ instance GoogleRequest
              = '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient
           ProjectsLocationsDataSetsFhirStoresDelete'{..}
-          = go _pldsfsdName _pldsfsdXgafv
-              _pldsfsdUploadProtocol
-              _pldsfsdAccessToken
-              _pldsfsdUploadType
-              _pldsfsdCallback
+          = go _pldsfsdlName _pldsfsdlXgafv
+              _pldsfsdlUploadProtocol
+              _pldsfsdlAccessToken
+              _pldsfsdlUploadType
+              _pldsfsdlCallback
               (Just AltJSON)
               healthcareService
           where go

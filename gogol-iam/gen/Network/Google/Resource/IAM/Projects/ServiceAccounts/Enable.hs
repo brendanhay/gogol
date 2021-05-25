@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables a ServiceAccount. The API is currently in alpha phase.
+-- Enables a ServiceAccount that was disabled by DisableServiceAccount. If
+-- the service account is already enabled, then this method has no effect.
+-- If the service account was disabled by other means—for example, if
+-- Google disabled the service account because it was compromised—you
+-- cannot use this method to enable the service account.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.enable@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
@@ -42,8 +46,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
     , psaeCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.enable@ method which the
 -- 'ProjectsServiceAccountsEnable' request conforms to.
@@ -59,18 +63,22 @@ type ProjectsServiceAccountsEnableResource =
                      ReqBody '[JSON] EnableServiceAccountRequest :>
                        Post '[JSON] Empty
 
--- | Enables a ServiceAccount. The API is currently in alpha phase.
+-- | Enables a ServiceAccount that was disabled by DisableServiceAccount. If
+-- the service account is already enabled, then this method has no effect.
+-- If the service account was disabled by other means—for example, if
+-- Google disabled the service account because it was compromised—you
+-- cannot use this method to enable the service account.
 --
 -- /See:/ 'projectsServiceAccountsEnable' smart constructor.
 data ProjectsServiceAccountsEnable =
   ProjectsServiceAccountsEnable'
-    { _psaeXgafv          :: !(Maybe Xgafv)
+    { _psaeXgafv :: !(Maybe Xgafv)
     , _psaeUploadProtocol :: !(Maybe Text)
-    , _psaeAccessToken    :: !(Maybe Text)
-    , _psaeUploadType     :: !(Maybe Text)
-    , _psaePayload        :: !EnableServiceAccountRequest
-    , _psaeName           :: !Text
-    , _psaeCallback       :: !(Maybe Text)
+    , _psaeAccessToken :: !(Maybe Text)
+    , _psaeUploadType :: !(Maybe Text)
+    , _psaePayload :: !EnableServiceAccountRequest
+    , _psaeName :: !Text
+    , _psaeCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,9 +145,10 @@ psaePayload
   = lens _psaePayload (\ s a -> s{_psaePayload = a})
 
 -- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT_UNIQUE_ID}\'. Using
--- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
--- the account.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
+-- wildcard for the \`PROJECT_ID\` will infer the project from the account.
+-- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
+-- of the service account.
 psaeName :: Lens' ProjectsServiceAccountsEnable Text
 psaeName = lens _psaeName (\ s a -> s{_psaeName = a})
 

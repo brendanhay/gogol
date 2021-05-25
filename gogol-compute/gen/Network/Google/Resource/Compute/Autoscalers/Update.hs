@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Autoscalers.Update
     , auAutoscaler
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.autoscalers.update@ method which the
 -- 'AutoscalersUpdate' request conforms to.
@@ -65,10 +65,10 @@ type AutoscalersUpdateResource =
 -- /See:/ 'autoscalersUpdate' smart constructor.
 data AutoscalersUpdate =
   AutoscalersUpdate'
-    { _auRequestId  :: !(Maybe Text)
-    , _auProject    :: !Text
-    , _auZone       :: !Text
-    , _auPayload    :: !Autoscaler
+    { _auRequestId :: !(Maybe Text)
+    , _auProject :: !Text
+    , _auZone :: !Text
+    , _auPayload :: !Autoscaler
     , _auAutoscaler :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

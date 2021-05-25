@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Get
     , gfrgForwardingRule
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.get@ method which the
 -- 'GlobalForwardingRulesGet' request conforms to.
@@ -60,7 +60,7 @@ type GlobalForwardingRulesGetResource =
 -- /See:/ 'globalForwardingRulesGet' smart constructor.
 data GlobalForwardingRulesGet =
   GlobalForwardingRulesGet'
-    { _gfrgProject        :: !Text
+    { _gfrgProject :: !Text
     , _gfrgForwardingRule :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

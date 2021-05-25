@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Invitations.Cre
     , acicCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.clients.invitations.create@ method which the
 -- 'AccountsClientsInvitationsCreate' request conforms to.
@@ -71,14 +71,14 @@ type AccountsClientsInvitationsCreateResource =
 -- /See:/ 'accountsClientsInvitationsCreate' smart constructor.
 data AccountsClientsInvitationsCreate =
   AccountsClientsInvitationsCreate'
-    { _acicXgafv           :: !(Maybe Xgafv)
-    , _acicUploadProtocol  :: !(Maybe Text)
-    , _acicAccessToken     :: !(Maybe Text)
-    , _acicUploadType      :: !(Maybe Text)
-    , _acicPayload         :: !ClientUserInvitation
-    , _acicAccountId       :: !(Textual Int64)
+    { _acicXgafv :: !(Maybe Xgafv)
+    , _acicUploadProtocol :: !(Maybe Text)
+    , _acicAccessToken :: !(Maybe Text)
+    , _acicUploadType :: !(Maybe Text)
+    , _acicPayload :: !ClientUserInvitation
+    , _acicAccountId :: !(Textual Int64)
     , _acicClientAccountId :: !(Textual Int64)
-    , _acicCallback        :: !(Maybe Text)
+    , _acicCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

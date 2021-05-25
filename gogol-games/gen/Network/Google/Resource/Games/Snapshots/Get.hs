@@ -22,7 +22,7 @@
 --
 -- Retrieves the metadata for a given snapshot ID.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.snapshots.get@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference> for @games.snapshots.get@.
 module Network.Google.Resource.Games.Snapshots.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Games.Snapshots.Get
     , SnapshotsGet
 
     -- * Request Lenses
-    , sLanguage
-    , sSnapshotId
+    , snaXgafv
+    , snaUploadProtocol
+    , snaAccessToken
+    , snaUploadType
+    , snaLanguage
+    , snaCallback
+    , snaSnapshotId
     ) where
 
-import           Network.Google.Games.Types
-import           Network.Google.Prelude
+import Network.Google.Games.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @games.snapshots.get@ method which the
 -- 'SnapshotsGet' request conforms to.
@@ -47,16 +52,26 @@ type SnapshotsGetResource =
        "v1" :>
          "snapshots" :>
            Capture "snapshotId" Text :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Retrieves the metadata for a given snapshot ID.
 --
 -- /See:/ 'snapshotsGet' smart constructor.
 data SnapshotsGet =
   SnapshotsGet'
-    { _sLanguage   :: !(Maybe Text)
-    , _sSnapshotId :: !Text
+    { _snaXgafv :: !(Maybe Xgafv)
+    , _snaUploadProtocol :: !(Maybe Text)
+    , _snaAccessToken :: !(Maybe Text)
+    , _snaUploadType :: !(Maybe Text)
+    , _snaLanguage :: !(Maybe Text)
+    , _snaCallback :: !(Maybe Text)
+    , _snaSnapshotId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,34 +80,84 @@ data SnapshotsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sLanguage'
+-- * 'snaXgafv'
 --
--- * 'sSnapshotId'
+-- * 'snaUploadProtocol'
+--
+-- * 'snaAccessToken'
+--
+-- * 'snaUploadType'
+--
+-- * 'snaLanguage'
+--
+-- * 'snaCallback'
+--
+-- * 'snaSnapshotId'
 snapshotsGet
-    :: Text -- ^ 'sSnapshotId'
+    :: Text -- ^ 'snaSnapshotId'
     -> SnapshotsGet
-snapshotsGet pSSnapshotId_ =
-  SnapshotsGet' {_sLanguage = Nothing, _sSnapshotId = pSSnapshotId_}
+snapshotsGet pSnaSnapshotId_ =
+  SnapshotsGet'
+    { _snaXgafv = Nothing
+    , _snaUploadProtocol = Nothing
+    , _snaAccessToken = Nothing
+    , _snaUploadType = Nothing
+    , _snaLanguage = Nothing
+    , _snaCallback = Nothing
+    , _snaSnapshotId = pSnaSnapshotId_
+    }
 
+
+-- | V1 error format.
+snaXgafv :: Lens' SnapshotsGet (Maybe Xgafv)
+snaXgafv = lens _snaXgafv (\ s a -> s{_snaXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+snaUploadProtocol :: Lens' SnapshotsGet (Maybe Text)
+snaUploadProtocol
+  = lens _snaUploadProtocol
+      (\ s a -> s{_snaUploadProtocol = a})
+
+-- | OAuth access token.
+snaAccessToken :: Lens' SnapshotsGet (Maybe Text)
+snaAccessToken
+  = lens _snaAccessToken
+      (\ s a -> s{_snaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+snaUploadType :: Lens' SnapshotsGet (Maybe Text)
+snaUploadType
+  = lens _snaUploadType
+      (\ s a -> s{_snaUploadType = a})
 
 -- | The preferred language to use for strings returned by this method.
-sLanguage :: Lens' SnapshotsGet (Maybe Text)
-sLanguage
-  = lens _sLanguage (\ s a -> s{_sLanguage = a})
+snaLanguage :: Lens' SnapshotsGet (Maybe Text)
+snaLanguage
+  = lens _snaLanguage (\ s a -> s{_snaLanguage = a})
+
+-- | JSONP
+snaCallback :: Lens' SnapshotsGet (Maybe Text)
+snaCallback
+  = lens _snaCallback (\ s a -> s{_snaCallback = a})
 
 -- | The ID of the snapshot.
-sSnapshotId :: Lens' SnapshotsGet Text
-sSnapshotId
-  = lens _sSnapshotId (\ s a -> s{_sSnapshotId = a})
+snaSnapshotId :: Lens' SnapshotsGet Text
+snaSnapshotId
+  = lens _snaSnapshotId
+      (\ s a -> s{_snaSnapshotId = a})
 
 instance GoogleRequest SnapshotsGet where
         type Rs SnapshotsGet = Snapshot
         type Scopes SnapshotsGet =
              '["https://www.googleapis.com/auth/drive.appdata",
-               "https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.me"]
+               "https://www.googleapis.com/auth/games"]
         requestClient SnapshotsGet'{..}
-          = go _sSnapshotId _sLanguage (Just AltJSON)
+          = go _snaSnapshotId _snaXgafv _snaUploadProtocol
+              _snaAccessToken
+              _snaUploadType
+              _snaLanguage
+              _snaCallback
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient (Proxy :: Proxy SnapshotsGetResource)

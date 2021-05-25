@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates and manages your customers and their subscriptions.
+-- Perform common functions that are available on the Channel Services
+-- console at scale, like placing orders and viewing customer information
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference>
 module Network.Google.AppsReseller
     (
     -- * Service Configuration
@@ -117,6 +118,7 @@ module Network.Google.AppsReseller
     -- ** Customer
     , Customer
     , customer
+    , cCustomerType
     , cCustomerDomainVerified
     , cResourceUiURL
     , cKind
@@ -125,6 +127,7 @@ module Network.Google.AppsReseller
     , cCustomerDomain
     , cPhoneNumber
     , cPostalAddress
+    , cPrimaryAdmin
 
     -- ** ChangePlanRequest
     , ChangePlanRequest
@@ -141,6 +144,9 @@ module Network.Google.AppsReseller
     , spciStartTime
     , spciEndTime
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** SubscriptionsDeleteDeletionType
     , SubscriptionsDeleteDeletionType (..)
 
@@ -150,6 +156,9 @@ module Network.Google.AppsReseller
     , spCommitmentInterval
     , spIsCommitmentPlan
     , spPlanName
+
+    -- ** CustomerCustomerType
+    , CustomerCustomerType (..)
 
     -- ** Subscriptions
     , Subscriptions
@@ -165,6 +174,11 @@ module Network.Google.AppsReseller
     , seaMaximumNumberOfSeats
     , seaLicensedNumberOfSeats
     , seaKind
+
+    -- ** PrimaryAdmin
+    , PrimaryAdmin
+    , primaryAdmin
+    , paPrimaryEmail
 
     -- ** RenewalSettings
     , RenewalSettings
@@ -197,35 +211,36 @@ module Network.Google.AppsReseller
     -- ** SubscriptionTransferInfo
     , SubscriptionTransferInfo
     , subscriptionTransferInfo
+    , stiCurrentLegacySKUId
     , stiTransferabilityExpirationTime
     , stiMinimumTransferableSeats
     ) where
 
-import           Network.Google.AppsReseller.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Reseller.Customers.Get
-import           Network.Google.Resource.Reseller.Customers.Insert
-import           Network.Google.Resource.Reseller.Customers.Patch
-import           Network.Google.Resource.Reseller.Customers.Update
-import           Network.Google.Resource.Reseller.Resellernotify.Getwatchdetails
-import           Network.Google.Resource.Reseller.Resellernotify.Register
-import           Network.Google.Resource.Reseller.Resellernotify.Unregister
-import           Network.Google.Resource.Reseller.Subscriptions.Activate
-import           Network.Google.Resource.Reseller.Subscriptions.ChangePlan
-import           Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
-import           Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
-import           Network.Google.Resource.Reseller.Subscriptions.Delete
-import           Network.Google.Resource.Reseller.Subscriptions.Get
-import           Network.Google.Resource.Reseller.Subscriptions.Insert
-import           Network.Google.Resource.Reseller.Subscriptions.List
-import           Network.Google.Resource.Reseller.Subscriptions.StartPaidService
-import           Network.Google.Resource.Reseller.Subscriptions.Suspend
+import Network.Google.Prelude
+import Network.Google.AppsReseller.Types
+import Network.Google.Resource.Reseller.Customers.Get
+import Network.Google.Resource.Reseller.Customers.Insert
+import Network.Google.Resource.Reseller.Customers.Patch
+import Network.Google.Resource.Reseller.Customers.Update
+import Network.Google.Resource.Reseller.Resellernotify.Getwatchdetails
+import Network.Google.Resource.Reseller.Resellernotify.Register
+import Network.Google.Resource.Reseller.Resellernotify.Unregister
+import Network.Google.Resource.Reseller.Subscriptions.Activate
+import Network.Google.Resource.Reseller.Subscriptions.ChangePlan
+import Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
+import Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
+import Network.Google.Resource.Reseller.Subscriptions.Delete
+import Network.Google.Resource.Reseller.Subscriptions.Get
+import Network.Google.Resource.Reseller.Subscriptions.Insert
+import Network.Google.Resource.Reseller.Subscriptions.List
+import Network.Google.Resource.Reseller.Subscriptions.StartPaidService
+import Network.Google.Resource.Reseller.Subscriptions.Suspend
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Enterprise Apps Reseller API service.
+-- | Represents the entirety of the methods and resources available for the Google Workspace Reseller API service.
 type AppsResellerAPI =
      CustomersInsertResource :<|> CustomersPatchResource
        :<|> CustomersGetResource

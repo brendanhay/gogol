@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.BackendBuckets.Get
     , bbgProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendBuckets.get@ method which the
 -- 'BackendBucketsGet' request conforms to.
@@ -60,7 +60,7 @@ type BackendBucketsGetResource =
 data BackendBucketsGet =
   BackendBucketsGet'
     { _bbgBackendBucket :: !Text
-    , _bbgProject       :: !Text
+    , _bbgProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

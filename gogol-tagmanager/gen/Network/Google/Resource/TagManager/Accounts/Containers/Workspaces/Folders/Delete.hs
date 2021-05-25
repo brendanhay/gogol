@@ -22,7 +22,7 @@
 --
 -- Deletes a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.folders.delete@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.folders.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders
     , AccountsContainersWorkspacesFoldersDelete
 
     -- * Request Lenses
+    , acwfdXgafv
+    , acwfdUploadProtocol
     , acwfdPath
+    , acwfdAccessToken
+    , acwfdUploadType
+    , acwfdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.folders.delete@ method which the
 -- 'AccountsContainersWorkspacesFoldersDelete' request conforms to.
@@ -46,14 +51,24 @@ type AccountsContainersWorkspacesFoldersDeleteResource
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersDelete' smart constructor.
-newtype AccountsContainersWorkspacesFoldersDelete =
+data AccountsContainersWorkspacesFoldersDelete =
   AccountsContainersWorkspacesFoldersDelete'
-    { _acwfdPath :: Text
+    { _acwfdXgafv :: !(Maybe Xgafv)
+    , _acwfdUploadProtocol :: !(Maybe Text)
+    , _acwfdPath :: !Text
+    , _acwfdAccessToken :: !(Maybe Text)
+    , _acwfdUploadType :: !(Maybe Text)
+    , _acwfdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,19 +77,65 @@ newtype AccountsContainersWorkspacesFoldersDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acwfdXgafv'
+--
+-- * 'acwfdUploadProtocol'
+--
 -- * 'acwfdPath'
+--
+-- * 'acwfdAccessToken'
+--
+-- * 'acwfdUploadType'
+--
+-- * 'acwfdCallback'
 accountsContainersWorkspacesFoldersDelete
     :: Text -- ^ 'acwfdPath'
     -> AccountsContainersWorkspacesFoldersDelete
 accountsContainersWorkspacesFoldersDelete pAcwfdPath_ =
-  AccountsContainersWorkspacesFoldersDelete' {_acwfdPath = pAcwfdPath_}
+  AccountsContainersWorkspacesFoldersDelete'
+    { _acwfdXgafv = Nothing
+    , _acwfdUploadProtocol = Nothing
+    , _acwfdPath = pAcwfdPath_
+    , _acwfdAccessToken = Nothing
+    , _acwfdUploadType = Nothing
+    , _acwfdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acwfdXgafv :: Lens' AccountsContainersWorkspacesFoldersDelete (Maybe Xgafv)
+acwfdXgafv
+  = lens _acwfdXgafv (\ s a -> s{_acwfdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwfdUploadProtocol :: Lens' AccountsContainersWorkspacesFoldersDelete (Maybe Text)
+acwfdUploadProtocol
+  = lens _acwfdUploadProtocol
+      (\ s a -> s{_acwfdUploadProtocol = a})
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
 acwfdPath :: Lens' AccountsContainersWorkspacesFoldersDelete Text
 acwfdPath
   = lens _acwfdPath (\ s a -> s{_acwfdPath = a})
+
+-- | OAuth access token.
+acwfdAccessToken :: Lens' AccountsContainersWorkspacesFoldersDelete (Maybe Text)
+acwfdAccessToken
+  = lens _acwfdAccessToken
+      (\ s a -> s{_acwfdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwfdUploadType :: Lens' AccountsContainersWorkspacesFoldersDelete (Maybe Text)
+acwfdUploadType
+  = lens _acwfdUploadType
+      (\ s a -> s{_acwfdUploadType = a})
+
+-- | JSONP
+acwfdCallback :: Lens' AccountsContainersWorkspacesFoldersDelete (Maybe Text)
+acwfdCallback
+  = lens _acwfdCallback
+      (\ s a -> s{_acwfdCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesFoldersDelete
@@ -86,7 +147,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesFoldersDelete'{..}
-          = go _acwfdPath (Just AltJSON) tagManagerService
+          = go _acwfdPath _acwfdXgafv _acwfdUploadProtocol
+              _acwfdAccessToken
+              _acwfdUploadType
+              _acwfdCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

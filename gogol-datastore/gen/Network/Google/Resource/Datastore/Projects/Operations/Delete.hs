@@ -44,8 +44,8 @@ module Network.Google.Resource.Datastore.Projects.Operations.Delete
     , podCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.operations.delete@ method which the
 -- 'ProjectsOperationsDelete' request conforms to.
@@ -67,12 +67,12 @@ type ProjectsOperationsDeleteResource =
 -- /See:/ 'projectsOperationsDelete' smart constructor.
 data ProjectsOperationsDelete =
   ProjectsOperationsDelete'
-    { _podXgafv          :: !(Maybe Xgafv)
+    { _podXgafv :: !(Maybe Xgafv)
     , _podUploadProtocol :: !(Maybe Text)
-    , _podAccessToken    :: !(Maybe Text)
-    , _podUploadType     :: !(Maybe Text)
-    , _podName           :: !Text
-    , _podCallback       :: !(Maybe Text)
+    , _podAccessToken :: !(Maybe Text)
+    , _podUploadType :: !(Maybe Text)
+    , _podName :: !Text
+    , _podCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

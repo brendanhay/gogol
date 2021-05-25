@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.SendVerificationCode
     , rpsvcPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.sendVerificationCode@ method which the
 -- 'RelyingPartySendVerificationCode' request conforms to.

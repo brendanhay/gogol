@@ -13,9 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API to publish custom Android apps.
+-- API to create and publish custom Android apps
 --
--- /See:/ <https://developers.google.com/android/work/play/custom-app-api Google Play Custom App Publishing API Reference>
+-- /See:/ <https://developers.google.com/android/work/play/custom-app-api/ Google Play Custom App Publishing API Reference>
 module Network.Google.PlayCustomApp
     (
     -- * Service Configuration
@@ -34,16 +34,20 @@ module Network.Google.PlayCustomApp
 
     -- * Types
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** CustomApp
     , CustomApp
     , customApp
     , caLanguageCode
+    , caPackageName
     , caTitle
     ) where
 
-import           Network.Google.PlayCustomApp.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.PlayCustomApp.Accounts.CustomApps.Create
+import Network.Google.Prelude
+import Network.Google.PlayCustomApp.Types
+import Network.Google.Resource.PlayCustomApp.Accounts.CustomApps.Create
 
 {- $resources
 TODO

@@ -39,8 +39,8 @@ module Network.Google.Resource.Calendar.CalendarList.Patch
     , clpColorRgbFormat
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.patch@ method which the
 -- 'CalendarListPatch' request conforms to.
@@ -62,8 +62,8 @@ type CalendarListPatchResource =
 -- /See:/ 'calendarListPatch' smart constructor.
 data CalendarListPatch =
   CalendarListPatch'
-    { _clpCalendarId     :: !Text
-    , _clpPayload        :: !CalendarListEntry
+    { _clpCalendarId :: !Text
+    , _clpPayload :: !CalendarListEntry
     , _clpColorRgbFormat :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

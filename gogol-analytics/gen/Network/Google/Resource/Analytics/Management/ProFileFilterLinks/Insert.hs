@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
     , mpffliAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.insert@ method which the
 -- 'ManagementProFileFilterLinksInsert' request conforms to.
@@ -65,9 +65,9 @@ type ManagementProFileFilterLinksInsertResource =
 data ManagementProFileFilterLinksInsert =
   ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId :: !Text
-    , _mpffliProFileId     :: !Text
-    , _mpffliPayload       :: !ProFileFilterLink
-    , _mpffliAccountId     :: !Text
+    , _mpffliProFileId :: !Text
+    , _mpffliPayload :: !ProFileFilterLink
+    , _mpffliAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

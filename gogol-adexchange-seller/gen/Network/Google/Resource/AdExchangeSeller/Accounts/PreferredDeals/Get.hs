@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
     , apdgAccountId
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.preferreddeals.get@ method which the
 -- 'AccountsPreferredDealsGet' request conforms to.
@@ -56,7 +56,7 @@ type AccountsPreferredDealsGetResource =
 -- /See:/ 'accountsPreferredDealsGet' smart constructor.
 data AccountsPreferredDealsGet =
   AccountsPreferredDealsGet'
-    { _apdgDealId    :: !Text
+    { _apdgDealId :: !Text
     , _apdgAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

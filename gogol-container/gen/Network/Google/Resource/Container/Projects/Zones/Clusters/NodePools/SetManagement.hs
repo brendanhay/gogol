@@ -45,8 +45,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetMa
     , pzcnpsmCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.setManagement@ method which the
 -- 'ProjectsZonesClustersNodePoolsSetManagement' request conforms to.
@@ -77,16 +77,16 @@ type ProjectsZonesClustersNodePoolsSetManagementResource
 -- /See:/ 'projectsZonesClustersNodePoolsSetManagement' smart constructor.
 data ProjectsZonesClustersNodePoolsSetManagement =
   ProjectsZonesClustersNodePoolsSetManagement'
-    { _pzcnpsmXgafv          :: !(Maybe Xgafv)
+    { _pzcnpsmXgafv :: !(Maybe Xgafv)
     , _pzcnpsmUploadProtocol :: !(Maybe Text)
-    , _pzcnpsmAccessToken    :: !(Maybe Text)
-    , _pzcnpsmUploadType     :: !(Maybe Text)
-    , _pzcnpsmZone           :: !Text
-    , _pzcnpsmPayload        :: !SetNodePoolManagementRequest
-    , _pzcnpsmNodePoolId     :: !Text
-    , _pzcnpsmClusterId      :: !Text
-    , _pzcnpsmProjectId      :: !Text
-    , _pzcnpsmCallback       :: !(Maybe Text)
+    , _pzcnpsmAccessToken :: !(Maybe Text)
+    , _pzcnpsmUploadType :: !(Maybe Text)
+    , _pzcnpsmZone :: !Text
+    , _pzcnpsmPayload :: !SetNodePoolManagementRequest
+    , _pzcnpsmNodePoolId :: !Text
+    , _pzcnpsmClusterId :: !Text
+    , _pzcnpsmProjectId :: !Text
+    , _pzcnpsmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,8 +160,9 @@ pzcnpsmUploadType
       (\ s a -> s{_pzcnpsmUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcnpsmZone :: Lens' ProjectsZonesClustersNodePoolsSetManagement Text
 pzcnpsmZone
   = lens _pzcnpsmZone (\ s a -> s{_pzcnpsmZone = a})

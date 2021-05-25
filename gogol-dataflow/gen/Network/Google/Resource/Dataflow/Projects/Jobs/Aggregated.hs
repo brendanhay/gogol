@@ -46,8 +46,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
     , pjaCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.aggregated@ method which the
 -- 'ProjectsJobsAggregated' request conforms to.
@@ -61,8 +61,8 @@ type ProjectsJobsAggregatedResource =
                  QueryParam "location" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "view" Text :>
-                         QueryParam "filter" Text :>
+                       QueryParam "view" ProjectsJobsAggregatedView :>
+                         QueryParam "filter" ProjectsJobsAggregatedFilter :>
                            QueryParam "pageToken" Text :>
                              QueryParam "pageSize" (Textual Int32) :>
                                QueryParam "callback" Text :>
@@ -74,17 +74,17 @@ type ProjectsJobsAggregatedResource =
 -- /See:/ 'projectsJobsAggregated' smart constructor.
 data ProjectsJobsAggregated =
   ProjectsJobsAggregated'
-    { _pjaXgafv          :: !(Maybe Xgafv)
+    { _pjaXgafv :: !(Maybe Xgafv)
     , _pjaUploadProtocol :: !(Maybe Text)
-    , _pjaLocation       :: !(Maybe Text)
-    , _pjaAccessToken    :: !(Maybe Text)
-    , _pjaUploadType     :: !(Maybe Text)
-    , _pjaView           :: !(Maybe Text)
-    , _pjaFilter         :: !(Maybe Text)
-    , _pjaPageToken      :: !(Maybe Text)
-    , _pjaProjectId      :: !Text
-    , _pjaPageSize       :: !(Maybe (Textual Int32))
-    , _pjaCallback       :: !(Maybe Text)
+    , _pjaLocation :: !(Maybe Text)
+    , _pjaAccessToken :: !(Maybe Text)
+    , _pjaUploadType :: !(Maybe Text)
+    , _pjaView :: !(Maybe ProjectsJobsAggregatedView)
+    , _pjaFilter :: !(Maybe ProjectsJobsAggregatedFilter)
+    , _pjaPageToken :: !(Maybe Text)
+    , _pjaProjectId :: !Text
+    , _pjaPageSize :: !(Maybe (Textual Int32))
+    , _pjaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,13 +162,13 @@ pjaUploadType
   = lens _pjaUploadType
       (\ s a -> s{_pjaUploadType = a})
 
--- | Level of information requested in response. Default is
--- \`JOB_VIEW_SUMMARY\`.
-pjaView :: Lens' ProjectsJobsAggregated (Maybe Text)
+-- | Deprecated. ListJobs always returns summaries now. Use GetJob for other
+-- JobViews.
+pjaView :: Lens' ProjectsJobsAggregated (Maybe ProjectsJobsAggregatedView)
 pjaView = lens _pjaView (\ s a -> s{_pjaView = a})
 
 -- | The kind of filter to use.
-pjaFilter :: Lens' ProjectsJobsAggregated (Maybe Text)
+pjaFilter :: Lens' ProjectsJobsAggregated (Maybe ProjectsJobsAggregatedFilter)
 pjaFilter
   = lens _pjaFilter (\ s a -> s{_pjaFilter = a})
 

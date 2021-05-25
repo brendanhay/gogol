@@ -22,7 +22,7 @@
 --
 -- Stops a ScanRun. The stopped ScanRun is returned.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.stop@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.stop@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
     (
     -- * REST Resource
@@ -42,13 +42,13 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.
     , pscsrsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.stop@ method which the
 -- 'ProjectsScanConfigsScanRunsStop' request conforms to.
 type ProjectsScanConfigsScanRunsStopResource =
-     "v1beta" :>
+     "v1" :>
        CaptureMode "name" "stop" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,13 +64,13 @@ type ProjectsScanConfigsScanRunsStopResource =
 -- /See:/ 'projectsScanConfigsScanRunsStop' smart constructor.
 data ProjectsScanConfigsScanRunsStop =
   ProjectsScanConfigsScanRunsStop'
-    { _pscsrsXgafv          :: !(Maybe Xgafv)
+    { _pscsrsXgafv :: !(Maybe Xgafv)
     , _pscsrsUploadProtocol :: !(Maybe Text)
-    , _pscsrsAccessToken    :: !(Maybe Text)
-    , _pscsrsUploadType     :: !(Maybe Text)
-    , _pscsrsPayload        :: !StopScanRunRequest
-    , _pscsrsName           :: !Text
-    , _pscsrsCallback       :: !(Maybe Text)
+    , _pscsrsAccessToken :: !(Maybe Text)
+    , _pscsrsUploadType :: !(Maybe Text)
+    , _pscsrsPayload :: !StopScanRunRequest
+    , _pscsrsName :: !Text
+    , _pscsrsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -25,6 +25,14 @@ module Network.Google.Sheets.Types
     , driveScope
     , driveFileScope
     , spreadsheetsScope
+
+    -- * SpreadsheetsValuesBatchGetMajorDimension
+    , SpreadsheetsValuesBatchGetMajorDimension (..)
+
+    -- * DataSourceRefreshDailySchedule
+    , DataSourceRefreshDailySchedule
+    , dataSourceRefreshDailySchedule
+    , dsrdsStartTime
 
     -- * BasicChartSpecStackedType
     , BasicChartSpecStackedType (..)
@@ -74,7 +82,13 @@ module Network.Google.Sheets.Types
     -- * ChartData
     , ChartData
     , chartData
+    , cdColumnReference
     , cdSourceRange
+    , cdAggregateType
+    , cdGroupRule
+
+    -- * ChartAxisViewWindowOptionsViewWindowMode
+    , ChartAxisViewWindowOptionsViewWindowMode (..)
 
     -- * BatchClearValuesRequest
     , BatchClearValuesRequest
@@ -94,6 +108,9 @@ module Network.Google.Sheets.Types
     -- * DeleteRangeRequestShiftDimension
     , DeleteRangeRequestShiftDimension (..)
 
+    -- * SpreadsheetsValuesBatchGetDateTimeRenderOption
+    , SpreadsheetsValuesBatchGetDateTimeRenderOption (..)
+
     -- * BasicChartSeriesTargetAxis
     , BasicChartSeriesTargetAxis (..)
 
@@ -103,6 +120,7 @@ module Network.Google.Sheets.Types
     -- * SpreadsheetProperties
     , SpreadsheetProperties
     , spreadsheetProperties
+    , spSpreadsheetTheme
     , spDefaultFormat
     , spLocale
     , spIterativeCalculationSettings
@@ -151,8 +169,13 @@ module Network.Google.Sheets.Types
     -- * SortSpec
     , SortSpec
     , sortSpec
+    , ssDataSourceColumnReference
+    , ssBackgRoundColor
+    , ssForegRoundColor
     , ssSortOrder
+    , ssBackgRoundColorStyle
     , ssDimensionIndex
+    , ssForegRoundColorStyle
 
     -- * DimensionGroup
     , DimensionGroup
@@ -160,6 +183,12 @@ module Network.Google.Sheets.Types
     , dgCollapsed
     , dgRange
     , dgDepth
+
+    -- * KeyValueFormat
+    , KeyValueFormat
+    , keyValueFormat
+    , kvfTextFormat
+    , kvfPosition
 
     -- * BatchUpdateValuesRequestResponseDateTimeRenderOption
     , BatchUpdateValuesRequestResponseDateTimeRenderOption (..)
@@ -184,6 +213,9 @@ module Network.Google.Sheets.Types
     -- * AppendDimensionRequestDimension
     , AppendDimensionRequestDimension (..)
 
+    -- * SpreadsheetsValuesUpdateResponseDateTimeRenderOption
+    , SpreadsheetsValuesUpdateResponseDateTimeRenderOption (..)
+
     -- * AddFilterViewResponse
     , AddFilterViewResponse
     , addFilterViewResponse
@@ -191,6 +223,12 @@ module Network.Google.Sheets.Types
 
     -- * DimensionRangeDimension
     , DimensionRangeDimension (..)
+
+    -- * UpdateDataSourceResponse
+    , UpdateDataSourceResponse
+    , updateDataSourceResponse
+    , udsrDataExecutionStatus
+    , udsrDataSource
 
     -- * BooleanCondition
     , BooleanCondition
@@ -202,6 +240,7 @@ module Network.Google.Sheets.Types
     , AutoResizeDimensionsRequest
     , autoResizeDimensionsRequest
     , ardrDimensions
+    , ardrDataSourceSheetDimensions
 
     -- * BubbleChartSpec
     , BubbleChartSpec
@@ -217,12 +256,19 @@ module Network.Google.Sheets.Types
     , bcsBubbleMaxRadiusSize
     , bcsBubbleOpacity
     , bcsBubbleSizes
+    , bcsBubbleBOrderColorStyle
 
     -- * DeleteRangeRequest
     , DeleteRangeRequest
     , deleteRangeRequest
     , drrShiftDimension
     , drrRange
+
+    -- * SpreadsheetTheme
+    , SpreadsheetTheme
+    , spreadsheetTheme
+    , stThemeColors
+    , stPrimaryFontFamily
 
     -- * Sheet
     , Sheet
@@ -238,6 +284,7 @@ module Network.Google.Sheets.Types
     , sDeveloperMetadata
     , sConditionalFormats
     , sFilterViews
+    , sSlicers
     , sProperties
 
     -- * GridCoordinate
@@ -258,6 +305,18 @@ module Network.Google.Sheets.Types
     , clearBasicFilterRequest
     , cbfrSheetId
 
+    -- * AddSlicerRequest
+    , AddSlicerRequest
+    , addSlicerRequest
+    , asrSlicer
+
+    -- * ChartHistogramRule
+    , ChartHistogramRule
+    , chartHistogramRule
+    , chrMaxValue
+    , chrIntervalSize
+    , chrMinValue
+
     -- * BatchGetValuesByDataFilterRequestValueRenderOption
     , BatchGetValuesByDataFilterRequestValueRenderOption (..)
 
@@ -277,8 +336,24 @@ module Network.Google.Sheets.Types
     , brFormat
     , brCondition
 
+    -- * SpreadsheetsValuesUpdateValueInputOption
+    , SpreadsheetsValuesUpdateValueInputOption (..)
+
     -- * CellFormatWrapStrategy
     , CellFormatWrapStrategy (..)
+
+    -- * DataSourceRefreshScheduleRefreshScope
+    , DataSourceRefreshScheduleRefreshScope (..)
+
+    -- * SpreadsheetsValuesAppendResponseValueRenderOption
+    , SpreadsheetsValuesAppendResponseValueRenderOption (..)
+
+    -- * Slicer
+    , Slicer
+    , slicer
+    , sSlicerId
+    , sSpec
+    , sPosition
 
     -- * BatchGetValuesByDataFilterResponse
     , BatchGetValuesByDataFilterResponse
@@ -335,6 +410,9 @@ module Network.Google.Sheets.Types
     , pcsSeries
     , pcsThreeDimensional
 
+    -- * SpreadsheetsValuesUpdateResponseValueRenderOption
+    , SpreadsheetsValuesUpdateResponseValueRenderOption (..)
+
     -- * BatchUpdateValuesByDataFilterResponse
     , BatchUpdateValuesByDataFilterResponse
     , batchUpdateValuesByDataFilterResponse
@@ -378,6 +456,17 @@ module Network.Google.Sheets.Types
     , fvFilterViewId
     , fvTitle
     , fvCriteria
+    , fvFilterSpecs
+
+    -- * DataSourceRefreshSchedule
+    , DataSourceRefreshSchedule
+    , dataSourceRefreshSchedule
+    , dsrsDailySchedule
+    , dsrsRefreshScope
+    , dsrsEnabled
+    , dsrsMonthlySchedule
+    , dsrsNextRun
+    , dsrsWeeklySchedule
 
     -- * Color
     , Color
@@ -386,6 +475,14 @@ module Network.Google.Sheets.Types
     , cAlpha
     , cGreen
     , cBlue
+
+    -- * AddDataSourceRequest
+    , AddDataSourceRequest
+    , addDataSourceRequest
+    , adsrDataSource
+
+    -- * SpreadsheetsValuesBatchGetValueRenderOption
+    , SpreadsheetsValuesBatchGetValueRenderOption (..)
 
     -- * DeleteFilterViewRequest
     , DeleteFilterViewRequest
@@ -404,8 +501,19 @@ module Network.Google.Sheets.Types
     , bTargetAxis
     , bColor
     , bSeries
+    , bColorStyle
+    , bStyleOverrides
     , bType
+    , bPointStyle
+    , bDataLabel
     , bLineStyle
+
+    -- * FilterSpec
+    , FilterSpec
+    , filterSpec
+    , fsDataSourceColumnReference
+    , fsColumnIndex
+    , fsFilterCriteria
 
     -- * PivotGroupRule
     , PivotGroupRule
@@ -457,6 +565,12 @@ module Network.Google.Sheets.Types
     , frrSearchByRegex
     , frrReplacement
 
+    -- * DataSourceRefreshMonthlySchedule
+    , DataSourceRefreshMonthlySchedule
+    , dataSourceRefreshMonthlySchedule
+    , dsrmsStartTime
+    , dsrmsDaysOfMonth
+
     -- * MoveDimensionRequest
     , MoveDimensionRequest
     , moveDimensionRequest
@@ -477,12 +591,33 @@ module Network.Google.Sheets.Types
     -- * NumberFormatType
     , NumberFormatType (..)
 
+    -- * DataSourceSpec
+    , DataSourceSpec
+    , dataSourceSpec
+    , dssParameters
+    , dssBigQuery
+
+    -- * Link
+    , Link
+    , link
+    , lURI
+
+    -- * DataSourceColumnReference
+    , DataSourceColumnReference
+    , dataSourceColumnReference
+    , dscrName
+
     -- * GradientRule
     , GradientRule
     , gradientRule
     , grMidpoint
     , grMaxpoint
     , grMinpoint
+
+    -- * DataSourceObjectReferences
+    , DataSourceObjectReferences
+    , dataSourceObjectReferences
+    , dsorReferences
 
     -- * CutPasteRequest
     , CutPasteRequest
@@ -499,6 +634,14 @@ module Network.Google.Sheets.Types
     -- * ConditionValueRelativeDate
     , ConditionValueRelativeDate (..)
 
+    -- * AddSlicerResponse
+    , AddSlicerResponse
+    , addSlicerResponse
+    , aSlicer
+
+    -- * ThemeColorPairColorType
+    , ThemeColorPairColorType (..)
+
     -- * WaterfallChartCustomSubtotal
     , WaterfallChartCustomSubtotal
     , waterfallChartCustomSubtotal
@@ -513,34 +656,82 @@ module Network.Google.Sheets.Types
     , Response
     , response
     , rAddFilterView
+    , rUpdateDataSource
     , rCreateDeveloperMetadata
     , rDuplicateFilterView
+    , rAddSlicer
     , rUpdateEmbeddedObjectPosition
     , rDeleteDimensionGroup
     , rAddSheet
     , rFindReplace
     , rAddProtectedRange
+    , rAddDataSource
     , rDeleteConditionalFormatRule
     , rUpdateConditionalFormatRule
     , rDeleteDeveloperMetadata
     , rUpdateDeveloperMetadata
     , rAddNamedRange
     , rAddChart
+    , rDeleteDuplicates
     , rAddBanding
     , rDuplicateSheet
+    , rRefreshDataSource
     , rAddDimensionGroup
+    , rTrimWhitespace
+
+    -- * ChartDateTimeRule
+    , ChartDateTimeRule
+    , chartDateTimeRule
+    , cdtrType
 
     -- * FilterCriteria
     , FilterCriteria
     , filterCriteria
+    , fcVisibleForegRoundColorStyle
+    , fcVisibleBackgRoundColorStyle
+    , fcVisibleForegRoundColor
     , fcHiddenValues
+    , fcVisibleBackgRoundColor
     , fcCondition
+
+    -- * DataSourceObjectReference
+    , DataSourceObjectReference
+    , dataSourceObjectReference
+    , dsorDataSourceFormulaCell
+    , dsorDataSourceTableAnchorCell
+    , dsorSheetId
+    , dsorDataSourcePivotTableAnchorCell
+    , dsorChartId
+
+    -- * BaselineValueFormat
+    , BaselineValueFormat
+    , baselineValueFormat
+    , bvfNegativeColor
+    , bvfPositiveColorStyle
+    , bvfPositiveColor
+    , bvfTextFormat
+    , bvfDescription
+    , bvfComparisonType
+    , bvfPosition
+    , bvfNegativeColorStyle
+
+    -- * DataExecutionStatusErrorCode
+    , DataExecutionStatusErrorCode (..)
+
+    -- * DataSourceRefreshWeeklyScheduleDaysOfWeekItem
+    , DataSourceRefreshWeeklyScheduleDaysOfWeekItem (..)
 
     -- * ErrorValue
     , ErrorValue
     , errorValue
     , evType
     , evMessage
+
+    -- * RefreshDataSourceObjectExecutionStatus
+    , RefreshDataSourceObjectExecutionStatus
+    , refreshDataSourceObjectExecutionStatus
+    , rdsoesReference
+    , rdsoesDataExecutionStatus
 
     -- * UpdateConditionalFormatRuleRequest
     , UpdateConditionalFormatRuleRequest
@@ -555,6 +746,17 @@ module Network.Google.Sheets.Types
     , deleteConditionalFormatRuleRequest
     , dcfrrSheetId
     , dcfrrIndex
+
+    -- * DataSourceTable
+    , DataSourceTable
+    , dataSourceTable
+    , dstSortSpecs
+    , dstRowLimit
+    , dstDataSourceId
+    , dstDataExecutionStatus
+    , dstColumns
+    , dstFilterSpecs
+    , dstColumnSelectionType
 
     -- * UpdateDeveloperMetadataRequest
     , UpdateDeveloperMetadataRequest
@@ -579,6 +781,7 @@ module Network.Google.Sheets.Types
     , wcsDomain
     , wcsSeries
     , wcsHideConnectorLines
+    , wcsTotalDataLabel
     , wcsFirstValueIsTotal
 
     -- * OverlayPosition
@@ -607,18 +810,23 @@ module Network.Google.Sheets.Types
     , SheetProperties
     , sheetProperties
     , sTabColor
+    , sTabColorStyle
     , sGridProperties
     , sSheetType
     , sHidden
     , sSheetId
     , sTitle
     , sRightToLeft
+    , sDataSourceSheetProperties
     , sIndex
 
     -- * FilterViewCriteria
     , FilterViewCriteria
     , filterViewCriteria
     , fvcAddtional
+
+    -- * SlicerSpecHorizontalAlignment
+    , SlicerSpecHorizontalAlignment (..)
 
     -- * BatchUpdateValuesResponse
     , BatchUpdateValuesResponse
@@ -642,6 +850,8 @@ module Network.Google.Sheets.Types
     , sprSheets
     , sprNamedRanges
     , sprSpreadsheetId
+    , sprDataSourceSchedules
+    , sprDataSources
     , sprSpreadsheetURL
     , sprDeveloperMetadata
     , sprProperties
@@ -651,6 +861,15 @@ module Network.Google.Sheets.Types
     , candlestickChartSpec
     , ccsData
     , ccsDomain
+
+    -- * ThemeColorPair
+    , ThemeColorPair
+    , themeColorPair
+    , tcpColor
+    , tcpColorType
+
+    -- * ColorStyleThemeColor
+    , ColorStyleThemeColor (..)
 
     -- * InsertDimensionRequest
     , InsertDimensionRequest
@@ -671,7 +890,13 @@ module Network.Google.Sheets.Types
     , interpolationPoint
     , ipColor
     , ipValue
+    , ipColorStyle
     , ipType
+
+    -- * DeleteDuplicatesResponse
+    , DeleteDuplicatesResponse
+    , deleteDuplicatesResponse
+    , ddrDuplicatesRemovedCount
 
     -- * OrgChartSpecNodeSize
     , OrgChartSpecNodeSize (..)
@@ -683,10 +908,12 @@ module Network.Google.Sheets.Types
     , cdNote
     , cdUserEnteredValue
     , cdUserEnteredFormat
+    , cdDataSourceTable
     , cdEffectiveFormat
     , cdPivotTable
     , cdFormattedValue
     , cdDataValidation
+    , cdDataSourceFormula
     , cdHyperlink
     , cdEffectiveValue
 
@@ -709,10 +936,39 @@ module Network.Google.Sheets.Types
     , wcdReversed
     , wcdData
 
+    -- * ChartAxisViewWindowOptions
+    , ChartAxisViewWindowOptions
+    , chartAxisViewWindowOptions
+    , cavwoViewWindowMax
+    , cavwoViewWindowMode
+    , cavwoViewWindowMin
+
+    -- * DataExecutionStatus
+    , DataExecutionStatus
+    , dataExecutionStatus
+    , desState
+    , desLastRefreshTime
+    , desErrorCode
+    , desErrorMessage
+
+    -- * PivotGroupLimit
+    , PivotGroupLimit
+    , pivotGroupLimit
+    , pglApplyOrder
+    , pglCountLimit
+
+    -- * DataLabelType
+    , DataLabelType (..)
+
     -- * AddChartResponse
     , AddChartResponse
     , addChartResponse
     , acrChart
+
+    -- * BigQueryQuerySpec
+    , BigQueryQuerySpec
+    , bigQueryQuerySpec
+    , bqqsRawQuery
 
     -- * UpdateChartSpecRequest
     , UpdateChartSpecRequest
@@ -730,6 +986,14 @@ module Network.Google.Sheets.Types
     , iterativeCalculationSettings
     , icsMaxIterations
     , icsConvergenceThreshold
+
+    -- * RefreshDataSourceRequest
+    , RefreshDataSourceRequest
+    , refreshDataSourceRequest
+    , rdsrForce
+    , rdsrReferences
+    , rdsrDataSourceId
+    , rdsrIsAll
 
     -- * UpdateValuesByDataFilterResponse
     , UpdateValuesByDataFilterResponse
@@ -784,6 +1048,7 @@ module Network.Google.Sheets.Types
     , UpdateDimensionPropertiesRequest
     , updateDimensionPropertiesRequest
     , udprRange
+    , udprDataSourceSheetRange
     , udprFields
     , udprProperties
 
@@ -851,6 +1116,18 @@ module Network.Google.Sheets.Types
     , dfvrDataFilter
     , dfvrMajorDimension
 
+    -- * DeleteDuplicatesRequest
+    , DeleteDuplicatesRequest
+    , deleteDuplicatesRequest
+    , dComparisonColumns
+    , dRange
+
+    -- * DataSourceRefreshWeeklySchedule
+    , DataSourceRefreshWeeklySchedule
+    , dataSourceRefreshWeeklySchedule
+    , dsrwsDaysOfWeek
+    , dsrwsStartTime
+
     -- * AddChartRequest
     , AddChartRequest
     , addChartRequest
@@ -866,11 +1143,17 @@ module Network.Google.Sheets.Types
     -- * DeveloperMetadataLookupLocationType
     , DeveloperMetadataLookupLocationType (..)
 
+    -- * PointStyleShape
+    , PointStyleShape (..)
+
     -- * MergeCellsRequest
     , MergeCellsRequest
     , mergeCellsRequest
     , mcrMergeType
     , mcrRange
+
+    -- * ScorecardChartSpecAggregateType
+    , ScorecardChartSpecAggregateType (..)
 
     -- * ManualRule
     , ManualRule
@@ -894,11 +1177,19 @@ module Network.Google.Sheets.Types
     , boStyle
     , boColor
     , boWidth
+    , boColorStyle
 
     -- * SearchDeveloperMetadataRequest
     , SearchDeveloperMetadataRequest
     , searchDeveloperMetadataRequest
     , sdmrDataFilters
+
+    -- * DataSourceParameter
+    , DataSourceParameter
+    , dataSourceParameter
+    , dspNamedRangeId
+    , dspName
+    , dspRange
 
     -- * CandlestickSeries
     , CandlestickSeries
@@ -926,6 +1217,8 @@ module Network.Google.Sheets.Types
     , PivotFilterCriteria
     , pivotFilterCriteria
     , pfcVisibleValues
+    , pfcCondition
+    , pfcVisibleByDefault
 
     -- * DimensionRange
     , DimensionRange
@@ -941,11 +1234,20 @@ module Network.Google.Sheets.Types
     , uFields
     , uProperties
 
+    -- * EmbeddedObjectBOrder
+    , EmbeddedObjectBOrder
+    , embeddedObjectBOrder
+    , eoboColor
+    , eoboColorStyle
+
     -- * DateTimeRuleType
     , DateTimeRuleType (..)
 
     -- * DeveloperMetadataLookupVisibility
     , DeveloperMetadataLookupVisibility (..)
+
+    -- * DataLabelPlacement
+    , DataLabelPlacement (..)
 
     -- * CandlestickDomain
     , CandlestickDomain
@@ -958,6 +1260,12 @@ module Network.Google.Sheets.Types
     , addProtectedRangeResponse
     , aProtectedRange
 
+    -- * Interval
+    , Interval
+    , interval
+    , iStartTime
+    , iEndTime
+
     -- * AppendDimensionRequest
     , AppendDimensionRequest
     , appendDimensionRequest
@@ -968,6 +1276,7 @@ module Network.Google.Sheets.Types
     -- * PivotValue
     , PivotValue
     , pivotValue
+    , pvDataSourceColumnReference
     , pvSourceColumnOffSet
     , pvFormula
     , pvName
@@ -976,6 +1285,12 @@ module Network.Google.Sheets.Types
 
     -- * BasicChartSpecCompareMode
     , BasicChartSpecCompareMode (..)
+
+    -- * AddDataSourceResponse
+    , AddDataSourceResponse
+    , addDataSourceResponse
+    , aDataExecutionStatus
+    , aDataSource
 
     -- * UnmergeCellsRequest
     , UnmergeCellsRequest
@@ -995,11 +1310,39 @@ module Network.Google.Sheets.Types
     , addDimensionGroupRequest
     , adgrRange
 
+    -- * UpdateEmbeddedObjectBOrderRequest
+    , UpdateEmbeddedObjectBOrderRequest
+    , updateEmbeddedObjectBOrderRequest
+    , ueoborObjectId
+    , ueoborBOrder
+    , ueoborFields
+
     -- * WaterfallChartColumnStyle
     , WaterfallChartColumnStyle
     , waterfallChartColumnStyle
     , wColor
+    , wColorStyle
     , wLabel
+
+    -- * UpdateSlicerSpecRequest
+    , UpdateSlicerSpecRequest
+    , updateSlicerSpecRequest
+    , ussrSlicerId
+    , ussrSpec
+    , ussrFields
+
+    -- * SlicerSpec
+    , SlicerSpec
+    , slicerSpec
+    , sliColumnIndex
+    , sliBackgRoundColor
+    , sliFilterCriteria
+    , sliBackgRoundColorStyle
+    , sliDataRange
+    , sliTitle
+    , sliApplyToPivotTables
+    , sliTextFormat
+    , sliHorizontalAlignment
 
     -- * CandlestickData
     , CandlestickData
@@ -1043,12 +1386,22 @@ module Network.Google.Sheets.Types
     -- * PivotGroupSortOrder
     , PivotGroupSortOrder (..)
 
+    -- * SpreadsheetsValuesAppendInsertDataOption
+    , SpreadsheetsValuesAppendInsertDataOption (..)
+
     -- * BasicChartSpecChartType
     , BasicChartSpecChartType (..)
+
+    -- * ChartCustomNumberFormatOptions
+    , ChartCustomNumberFormatOptions
+    , chartCustomNumberFormatOptions
+    , ccnfoSuffix
+    , ccnfoPrefix
 
     -- * EmbeddedChart
     , EmbeddedChart
     , embeddedChart
+    , ecBOrder
     , ecSpec
     , ecPosition
     , ecChartId
@@ -1057,6 +1410,9 @@ module Network.Google.Sheets.Types
     , RowData
     , rowData
     , rdValues
+
+    -- * BaselineValueFormatComparisonType
+    , BaselineValueFormatComparisonType (..)
 
     -- * Editors
     , Editors
@@ -1072,11 +1428,14 @@ module Network.Google.Sheets.Types
     , PivotTable
     , pivotTable
     , ptValues
+    , ptDataSourceId
+    , ptDataExecutionStatus
     , ptValueLayout
     , ptRows
     , ptSource
     , ptColumns
     , ptCriteria
+    , ptFilterSpecs
 
     -- * EmbeddedObjectPosition
     , EmbeddedObjectPosition
@@ -1091,6 +1450,7 @@ module Network.Google.Sheets.Types
     , bfSortSpecs
     , bfRange
     , bfCriteria
+    , bfFilterSpecs
 
     -- * TextToColumnsRequest
     , TextToColumnsRequest
@@ -1102,6 +1462,11 @@ module Network.Google.Sheets.Types
     -- * SpreadsheetPropertiesAutoRecalc
     , SpreadsheetPropertiesAutoRecalc (..)
 
+    -- * TrimWhitespaceResponse
+    , TrimWhitespaceResponse
+    , trimWhitespaceResponse
+    , twrCellsChangedCount
+
     -- * CopyPasteRequestPasteOrientation
     , CopyPasteRequestPasteOrientation (..)
 
@@ -1110,6 +1475,12 @@ module Network.Google.Sheets.Types
     , getSpreadsheetByDataFilterRequest
     , gsbdfrDataFilters
     , gsbdfrIncludeGridData
+
+    -- * ColorStyle
+    , ColorStyle
+    , colorStyle
+    , csThemeColor
+    , csRgbColor
 
     -- * BatchUpdateSpreadsheetRequest
     , BatchUpdateSpreadsheetRequest
@@ -1132,6 +1503,18 @@ module Network.Google.Sheets.Types
     , uvrUpdatedData
     , uvrUpdatedColumns
 
+    -- * ScorecardChartSpec
+    , ScorecardChartSpec
+    , scorecardChartSpec
+    , scsKeyValueData
+    , scsKeyValueFormat
+    , scsNumberFormatSource
+    , scsScaleFactor
+    , scsBaselineValueData
+    , scsBaselineValueFormat
+    , scsCustomFormatOptions
+    , scsAggregateType
+
     -- * DeleteDimensionGroupResponse
     , DeleteDimensionGroupResponse
     , deleteDimensionGroupResponse
@@ -1142,16 +1525,38 @@ module Network.Google.Sheets.Types
     , copySheetToAnotherSpreadsheetRequest
     , cstasrDestinationSpreadsheetId
 
+    -- * DeleteDataSourceRequest
+    , DeleteDataSourceRequest
+    , deleteDataSourceRequest
+    , ddsrDataSourceId
+
     -- * AddFilterViewRequest
     , AddFilterViewRequest
     , addFilterViewRequest
     , aFilter
+
+    -- * UpdateDataSourceRequest
+    , UpdateDataSourceRequest
+    , updateDataSourceRequest
+    , updDataSource
+    , updFields
 
     -- * PivotGroupValueMetadata
     , PivotGroupValueMetadata
     , pivotGroupValueMetadata
     , pgvmValue
     , pgvmCollapsed
+
+    -- * SpreadsheetsValuesAppendValueInputOption
+    , SpreadsheetsValuesAppendValueInputOption (..)
+
+    -- * DataSource
+    , DataSource
+    , dataSource
+    , dsDataSourceId
+    , dsSheetId
+    , dsSpec
+    , dsCalculatedColumns
 
     -- * CellFormatTextDirection
     , CellFormatTextDirection (..)
@@ -1162,6 +1567,12 @@ module Network.Google.Sheets.Types
     , bcvbdfrClearedRanges
     , bcvbdfrSpreadsheetId
 
+    -- * DataSourceSheetDimensionRange
+    , DataSourceSheetDimensionRange
+    , dataSourceSheetDimensionRange
+    , dssdrSheetId
+    , dssdrColumnReferences
+
     -- * WaterfallChartSeries
     , WaterfallChartSeries
     , waterfallChartSeries
@@ -1170,7 +1581,18 @@ module Network.Google.Sheets.Types
     , wcsNegativeColumnsStyle
     , wcsHideTrailingSubtotal
     , wcsSubtotalColumnsStyle
+    , wcsDataLabel
     , wcsPositiveColumnsStyle
+
+    -- * DataSourceTableColumnSelectionType
+    , DataSourceTableColumnSelectionType (..)
+
+    -- * BigQueryTableSpec
+    , BigQueryTableSpec
+    , bigQueryTableSpec
+    , bqtsTableProjectId
+    , bqtsDataSetId
+    , bqtsTableId
 
     -- * BasicChartSeriesType
     , BasicChartSeriesType (..)
@@ -1178,10 +1600,10 @@ module Network.Google.Sheets.Types
     -- * UpdateCellsRequest
     , UpdateCellsRequest
     , updateCellsRequest
-    , updStart
-    , updRows
-    , updRange
-    , updFields
+    , ucrcStart
+    , ucrcRows
+    , ucrcRange
+    , ucrcFields
 
     -- * CellFormat
     , CellFormat
@@ -1190,6 +1612,7 @@ module Network.Google.Sheets.Types
     , cfVerticalAlignment
     , cfBackgRoundColor
     , cfTextRotation
+    , cfBackgRoundColorStyle
     , cfHyperlinkDisplayType
     , cfWrapStrategy
     , cfNumberFormat
@@ -1229,13 +1652,29 @@ module Network.Google.Sheets.Types
     -- * PivotValueCalculatedDisplayType
     , PivotValueCalculatedDisplayType (..)
 
+    -- * ChartDataAggregateType
+    , ChartDataAggregateType (..)
+
+    -- * ChartGroupRule
+    , ChartGroupRule
+    , chartGroupRule
+    , cgrDateTimeRule
+    , cgrHistogramRule
+
     -- * BasicChartAxis
     , BasicChartAxis
     , basicChartAxis
     , bcaTitleTextPosition
     , bcaFormat
     , bcaTitle
+    , bcaViewWindowOptions
     , bcaPosition
+
+    -- * SpreadsheetsValuesGetMajorDimension
+    , SpreadsheetsValuesGetMajorDimension (..)
+
+    -- * ScorecardChartSpecNumberFormatSource
+    , ScorecardChartSpecNumberFormatSource (..)
 
     -- * GridData
     , GridData
@@ -1246,11 +1685,33 @@ module Network.Google.Sheets.Types
     , gdColumnMetadata
     , gdStartColumn
 
+    -- * SpreadsheetsValuesAppendResponseDateTimeRenderOption
+    , SpreadsheetsValuesAppendResponseDateTimeRenderOption (..)
+
+    -- * DataSourceChartProperties
+    , DataSourceChartProperties
+    , dataSourceChartProperties
+    , dscpDataSourceId
+    , dscpDataExecutionStatus
+
     -- * NumberFormat
     , NumberFormat
     , numberFormat
     , nfPattern
     , nfType
+
+    -- * TimeOfDay'
+    , TimeOfDay'
+    , timeOfDay
+    , todNanos
+    , todHours
+    , todMinutes
+    , todSeconds
+
+    -- * TrimWhitespaceRequest
+    , TrimWhitespaceRequest
+    , trimWhitespaceRequest
+    , twrRange
 
     -- * BatchGetValuesByDataFilterRequestDateTimeRenderOption
     , BatchGetValuesByDataFilterRequestDateTimeRenderOption (..)
@@ -1279,8 +1740,12 @@ module Network.Google.Sheets.Types
     , BandingProperties
     , bandingProperties
     , bpSecondBandColor
+    , bpFooterColorStyle
     , bpHeaderColor
+    , bpHeaderColorStyle
     , bpFooterColor
+    , bpSecondBandColorStyle
+    , bpFirstBandColorStyle
     , bpFirstBandColor
 
     -- * ChartSpecHiddenDimensionStrategy
@@ -1294,10 +1759,19 @@ module Network.Google.Sheets.Types
     -- * BOrderStyle
     , BOrderStyle (..)
 
+    -- * DataSourceSheetProperties
+    , DataSourceSheetProperties
+    , dataSourceSheetProperties
+    , dsspDataSourceId
+    , dsspDataExecutionStatus
+    , dsspColumns
+
     -- * PivotGroup
     , PivotGroup
     , pivotGroup
     , pgRepeatHeadings
+    , pgGroupLimit
+    , pgDataSourceColumnReference
     , pgValueMetadata
     , pgSourceColumnOffSet
     , pgSortOrder
@@ -1318,7 +1792,9 @@ module Network.Google.Sheets.Types
     , ocsNodeSize
     , ocsTooltips
     , ocsSelectedNodeColor
+    , ocsNodeColorStyle
     , ocsLabels
+    , ocsSelectedNodeColorStyle
     , ocsParentLabels
 
     -- * CutPasteRequestPasteType
@@ -1335,11 +1811,18 @@ module Network.Google.Sheets.Types
     , randomizeRangeRequest
     , rrrRange
 
+    -- * PointStyle
+    , PointStyle
+    , pointStyle
+    , psSize
+    , psShape
+
     -- * HistogramSeries
     , HistogramSeries
     , histogramSeries
     , hsBarColor
     , hsData
+    , hsBarColorStyle
 
     -- * TreemapChartSpec
     , TreemapChartSpec
@@ -1349,6 +1832,7 @@ module Network.Google.Sheets.Types
     , tcsHeaderColor
     , tcsSizeData
     , tcsColorData
+    , tcsHeaderColorStyle
     , tcsHideTooltips
     , tcsLevels
     , tcsLabels
@@ -1356,6 +1840,11 @@ module Network.Google.Sheets.Types
     , tcsTextFormat
     , tcsMinValue
     , tcsParentLabels
+
+    -- * RefreshDataSourceResponse
+    , RefreshDataSourceResponse
+    , refreshDataSourceResponse
+    , rdsrStatuses
 
     -- * ConditionalFormatRule
     , ConditionalFormatRule
@@ -1373,6 +1862,7 @@ module Network.Google.Sheets.Types
     , basStackedType
     , basLegendPosition
     , basSeries
+    , basTotalDataLabel
     , basCompareMode
     , basChartType
     , basThreeDimensional
@@ -1387,6 +1877,12 @@ module Network.Google.Sheets.Types
 
     -- * BatchGetValuesByDataFilterRequestMajorDimension
     , BatchGetValuesByDataFilterRequestMajorDimension (..)
+
+    -- * DataSourceFormula
+    , DataSourceFormula
+    , dataSourceFormula
+    , dsfDataSourceId
+    , dsfDataExecutionStatus
 
     -- * AddConditionalFormatRuleRequest
     , AddConditionalFormatRuleRequest
@@ -1403,16 +1899,32 @@ module Network.Google.Sheets.Types
     , dmMetadataKey
     , dmMetadataValue
 
+    -- * ChartDateTimeRuleType
+    , ChartDateTimeRuleType (..)
+
     -- * TreemapChartColorScale
     , TreemapChartColorScale
     , treemapChartColorScale
     , tccsMinValueColor
+    , tccsMinValueColorStyle
+    , tccsMidValueColorStyle
     , tccsNoDataColor
     , tccsMaxValueColor
+    , tccsMaxValueColorStyle
+    , tccsNoDataColorStyle
     , tccsMidValueColor
 
     -- * PivotTableValueLayout
     , PivotTableValueLayout (..)
+
+    -- * SpreadsheetsValuesGetDateTimeRenderOption
+    , SpreadsheetsValuesGetDateTimeRenderOption (..)
+
+    -- * DataSourceColumn
+    , DataSourceColumn
+    , dataSourceColumn
+    , dscReference
+    , dscFormula
 
     -- * DuplicateSheetResponse
     , DuplicateSheetResponse
@@ -1423,17 +1935,35 @@ module Network.Google.Sheets.Types
     , TextFormat
     , textFormat
     , tfFontFamily
+    , tfLink
     , tfForegRoundColor
     , tfFontSize
     , tfUnderline
     , tfItalic
     , tfBold
+    , tfForegRoundColorStyle
     , tfStrikethrough
+
+    -- * DataLabel
+    , DataLabel
+    , dataLabel
+    , dlCustomLabelData
+    , dlType
+    , dlTextFormat
+    , dlPlacement
 
     -- * CreateDeveloperMetadataRequest
     , CreateDeveloperMetadataRequest
     , createDeveloperMetadataRequest
     , cDeveloperMetadata
+
+    -- * BasicSeriesDataPointStyleOverride
+    , BasicSeriesDataPointStyleOverride
+    , basicSeriesDataPointStyleOverride
+    , bsdpsoColor
+    , bsdpsoColorStyle
+    , bsdpsoPointStyle
+    , bsdpsoIndex
 
     -- * BatchClearValuesResponse
     , BatchClearValuesResponse
@@ -1456,6 +1986,13 @@ module Network.Google.Sheets.Types
     -- * InterpolationPointType
     , InterpolationPointType (..)
 
+    -- * BigQueryDataSourceSpec
+    , BigQueryDataSourceSpec
+    , bigQueryDataSourceSpec
+    , bqdssQuerySpec
+    , bqdssProjectId
+    , bqdssTableSpec
+
     -- * HistogramRule
     , HistogramRule
     , histogramRule
@@ -1468,6 +2005,13 @@ module Network.Google.Sheets.Types
     , matchedDeveloperMetadata
     , mdmDataFilters
     , mdmDeveloperMetadata
+
+    -- * PivotFilterSpec
+    , PivotFilterSpec
+    , pivotFilterSpec
+    , pfsDataSourceColumnReference
+    , pfsFilterCriteria
+    , pfsColumnOffSetIndex
 
     -- * TextToColumnsRequestDelimiterType
     , TextToColumnsRequestDelimiterType (..)
@@ -1492,8 +2036,10 @@ module Network.Google.Sheets.Types
     -- * ChartSpec
     , ChartSpec
     , chartSpec
+    , csSortSpecs
     , csTitleTextPosition
     , csFontName
+    , csScorecardChart
     , csSubtitleTextPosition
     , csBackgRoundColor
     , csCandlestickChart
@@ -1501,12 +2047,15 @@ module Network.Google.Sheets.Types
     , csTitleTextFormat
     , csSubtitle
     , csAltText
+    , csBackgRoundColorStyle
     , csHistogramChart
     , csBubbleChart
     , csMaximized
     , csSubtitleTextFormat
+    , csDataSourceChartProperties
     , csTitle
     , csPieChart
+    , csFilterSpecs
     , csOrgChart
     , csTreemapChart
     , csBasicChart
@@ -1515,10 +2064,14 @@ module Network.Google.Sheets.Types
     -- * DimensionProperties
     , DimensionProperties
     , dimensionProperties
+    , dpDataSourceColumnReference
     , dpHiddenByFilter
     , dpPixelSize
     , dpHiddenByUser
     , dpDeveloperMetadata
+
+    -- * DataExecutionStatusState
+    , DataExecutionStatusState (..)
 
     -- * UpdateBandingRequest
     , UpdateBandingRequest
@@ -1547,6 +2100,9 @@ module Network.Google.Sheets.Types
     , updateDeveloperMetadataResponse
     , uDeveloperMetadata
 
+    -- * SpreadsheetsValuesGetValueRenderOption
+    , SpreadsheetsValuesGetValueRenderOption (..)
+
     -- * Request'
     , Request'
     , request'
@@ -1554,6 +2110,8 @@ module Network.Google.Sheets.Types
     , reqDeleteProtectedRange
     , reqUpdateProtectedRange
     , reqUpdateCells
+    , reqDeleteDataSource
+    , reqUpdateDataSource
     , reqCreateDeveloperMetadata
     , reqDuplicateFilterView
     , reqAddConditionalFormatRule
@@ -1567,6 +2125,7 @@ module Network.Google.Sheets.Types
     , reqClearBasicFilter
     , reqAppendCells
     , reqPasteData
+    , reqAddSlicer
     , reqUpdateEmbeddedObjectPosition
     , reqDeleteRange
     , reqCopyPaste
@@ -1582,6 +2141,7 @@ module Network.Google.Sheets.Types
     , reqAddProtectedRange
     , reqUpdateFilterView
     , reqDeleteFilterView
+    , reqAddDataSource
     , reqInsertDimension
     , reqUpdateSheetProperties
     , reqDeleteConditionalFormatRule
@@ -1592,8 +2152,10 @@ module Network.Google.Sheets.Types
     , reqMergeCells
     , reqAddNamedRange
     , reqAddChart
+    , reqDeleteDuplicates
     , reqAddBanding
     , reqDuplicateSheet
+    , reqRefreshDataSource
     , reqAutoFill
     , reqUpdateDimensionProperties
     , reqUpdateChartSpec
@@ -1601,11 +2163,14 @@ module Network.Google.Sheets.Types
     , reqTextToColumns
     , reqAddDimensionGroup
     , reqUpdateSpreadsheetProperties
+    , reqUpdateEmbeddedObjectBOrder
     , reqDeleteSheet
+    , reqUpdateSlicerSpec
     , reqUnmergeCells
     , reqUpdateBOrders
     , reqAppendDimension
     , reqSetDataValidation
+    , reqTrimWhitespace
 
     -- * LineStyle
     , LineStyle
@@ -1627,9 +2192,9 @@ module Network.Google.Sheets.Types
     , uOldRule
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types.Product
-import           Network.Google.Sheets.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Sheets.Types.Product
+import Network.Google.Sheets.Types.Sum
 
 -- | Default request referring to version 'v4' of the Google Sheets API. This contains the host and root path used as a starting point for constructing service requests.
 sheetsService :: ServiceConfig
@@ -1637,7 +2202,7 @@ sheetsService
   = defaultService (ServiceId "sheets:v4")
       "sheets.googleapis.com"
 
--- | View your Google Spreadsheets
+-- | See all your Google Sheets spreadsheets
 spreadsheetsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets.readonly"]
 spreadsheetsReadOnlyScope = Proxy
 
@@ -1649,11 +2214,11 @@ driveReadOnlyScope = Proxy
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
 driveScope = Proxy
 
--- | View and manage Google Drive files and folders that you have opened or
--- created with this app
+-- | See, edit, create, and delete only the specific Google Drive files you
+-- use with this app
 driveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
 driveFileScope = Proxy
 
--- | See, edit, create, and delete your spreadsheets in Google Drive
+-- | See, edit, create, and delete all your Google Sheets spreadsheets
 spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
 spreadsheetsScope = Proxy

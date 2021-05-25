@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.SetMonitori
     , plcsmCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.setMonitoring@ method which the
 -- 'ProjectsLocationsClustersSetMonitoring' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsClustersSetMonitoringResource =
 -- /See:/ 'projectsLocationsClustersSetMonitoring' smart constructor.
 data ProjectsLocationsClustersSetMonitoring =
   ProjectsLocationsClustersSetMonitoring'
-    { _plcsmXgafv          :: !(Maybe Xgafv)
+    { _plcsmXgafv :: !(Maybe Xgafv)
     , _plcsmUploadProtocol :: !(Maybe Text)
-    , _plcsmAccessToken    :: !(Maybe Text)
-    , _plcsmUploadType     :: !(Maybe Text)
-    , _plcsmPayload        :: !SetMonitoringServiceRequest
-    , _plcsmName           :: !Text
-    , _plcsmCallback       :: !(Maybe Text)
+    , _plcsmAccessToken :: !(Maybe Text)
+    , _plcsmUploadType :: !(Maybe Text)
+    , _plcsmPayload :: !SetMonitoringServiceRequest
+    , _plcsmName :: !Text
+    , _plcsmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ plcsmPayload
   = lens _plcsmPayload (\ s a -> s{_plcsmPayload = a})
 
 -- | The name (project, location, cluster) of the cluster to set monitoring.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcsmName :: Lens' ProjectsLocationsClustersSetMonitoring Text
 plcsmName
   = lens _plcsmName (\ s a -> s{_plcsmName = a})

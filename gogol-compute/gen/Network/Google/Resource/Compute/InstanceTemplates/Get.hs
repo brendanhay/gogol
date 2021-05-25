@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.Get
     , itgInstanceTemplate
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.get@ method which the
 -- 'InstanceTemplatesGet' request conforms to.
@@ -60,7 +60,7 @@ type InstanceTemplatesGetResource =
 -- /See:/ 'instanceTemplatesGet' smart constructor.
 data InstanceTemplatesGet =
   InstanceTemplatesGet'
-    { _itgProject          :: !Text
+    { _itgProject :: !Text
     , _itgInstanceTemplate :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

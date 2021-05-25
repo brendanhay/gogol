@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -551,9 +551,9 @@ module Network.Google.ServiceUser.Types
     , crAllowedResponseExtensions
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceUser.Types.Product
-import           Network.Google.ServiceUser.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ServiceUser.Types.Product
+import Network.Google.ServiceUser.Types.Sum
 
 -- | Default request referring to version 'v1' of the Service User API. This contains the host and root path used as a starting point for constructing service requests.
 serviceUserService :: ServiceConfig

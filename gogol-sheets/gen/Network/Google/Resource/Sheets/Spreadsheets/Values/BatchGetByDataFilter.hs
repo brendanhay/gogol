@@ -45,8 +45,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGetByDataFilter
     , svbgbdfCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchGetByDataFilter@ method which the
 -- 'SpreadsheetsValuesBatchGetByDataFilter' request conforms to.
@@ -72,13 +72,13 @@ type SpreadsheetsValuesBatchGetByDataFilterResource =
 -- /See:/ 'spreadsheetsValuesBatchGetByDataFilter' smart constructor.
 data SpreadsheetsValuesBatchGetByDataFilter =
   SpreadsheetsValuesBatchGetByDataFilter'
-    { _svbgbdfXgafv          :: !(Maybe Xgafv)
+    { _svbgbdfXgafv :: !(Maybe Xgafv)
     , _svbgbdfUploadProtocol :: !(Maybe Text)
-    , _svbgbdfAccessToken    :: !(Maybe Text)
-    , _svbgbdfSpreadsheetId  :: !Text
-    , _svbgbdfUploadType     :: !(Maybe Text)
-    , _svbgbdfPayload        :: !BatchGetValuesByDataFilterRequest
-    , _svbgbdfCallback       :: !(Maybe Text)
+    , _svbgbdfAccessToken :: !(Maybe Text)
+    , _svbgbdfSpreadsheetId :: !Text
+    , _svbgbdfUploadType :: !(Maybe Text)
+    , _svbgbdfPayload :: !BatchGetValuesByDataFilterRequest
+    , _svbgbdfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -15,13 +15,14 @@ extra-source-files:    README.md src/.gitkeep
 
 description:
     The Firebase Hosting REST API enables programmatic and customizable
-    deployments to your Firebase-hosted sites. Use this REST API to deploy
-    new or updated hosting configurations and content files.
+    management and deployments to your Firebase-hosted sites. Use this REST
+    API to create and manage channels and sites as well as to deploy new or
+    updated hosting configurations and content files.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -37,20 +38,9 @@ library
     exposed-modules:
           Network.Google.FirebaseHosting
         , Network.Google.FirebaseHosting.Types
-        , Network.Google.Resource.FirebaseHosting.Sites.Domains.Create
-        , Network.Google.Resource.FirebaseHosting.Sites.Domains.Delete
-        , Network.Google.Resource.FirebaseHosting.Sites.Domains.Get
-        , Network.Google.Resource.FirebaseHosting.Sites.Domains.List
-        , Network.Google.Resource.FirebaseHosting.Sites.Domains.Update
-        , Network.Google.Resource.FirebaseHosting.Sites.GetConfig
-        , Network.Google.Resource.FirebaseHosting.Sites.Releases.Create
-        , Network.Google.Resource.FirebaseHosting.Sites.Releases.List
-        , Network.Google.Resource.FirebaseHosting.Sites.UpdateConfig
-        , Network.Google.Resource.FirebaseHosting.Sites.Versions.Create
-        , Network.Google.Resource.FirebaseHosting.Sites.Versions.Delete
-        , Network.Google.Resource.FirebaseHosting.Sites.Versions.Files.List
-        , Network.Google.Resource.FirebaseHosting.Sites.Versions.Patch
-        , Network.Google.Resource.FirebaseHosting.Sites.Versions.PopulateFiles
+        , Network.Google.Resource.FirebaseHosting.Operations.Cancel
+        , Network.Google.Resource.FirebaseHosting.Operations.Delete
+        , Network.Google.Resource.FirebaseHosting.Operations.List
 
     other-modules:
           Network.Google.FirebaseHosting.Types.Product

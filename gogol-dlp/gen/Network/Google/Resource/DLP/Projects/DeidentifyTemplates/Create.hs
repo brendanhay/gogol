@@ -45,8 +45,8 @@ module Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Create
     , pdtcCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.deidentifyTemplates.create@ method which the
 -- 'ProjectsDeidentifyTemplatesCreate' request conforms to.
@@ -72,13 +72,13 @@ type ProjectsDeidentifyTemplatesCreateResource =
 -- /See:/ 'projectsDeidentifyTemplatesCreate' smart constructor.
 data ProjectsDeidentifyTemplatesCreate =
   ProjectsDeidentifyTemplatesCreate'
-    { _pdtcParent         :: !Text
-    , _pdtcXgafv          :: !(Maybe Xgafv)
+    { _pdtcParent :: !Text
+    , _pdtcXgafv :: !(Maybe Xgafv)
     , _pdtcUploadProtocol :: !(Maybe Text)
-    , _pdtcAccessToken    :: !(Maybe Text)
-    , _pdtcUploadType     :: !(Maybe Text)
-    , _pdtcPayload        :: !GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
-    , _pdtcCallback       :: !(Maybe Text)
+    , _pdtcAccessToken :: !(Maybe Text)
+    , _pdtcUploadType :: !(Maybe Text)
+    , _pdtcPayload :: !GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
+    , _pdtcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,8 +116,20 @@ projectsDeidentifyTemplatesCreate pPdtcParent_ pPdtcPayload_ =
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pdtcParent :: Lens' ProjectsDeidentifyTemplatesCreate Text
 pdtcParent
   = lens _pdtcParent (\ s a -> s{_pdtcParent = a})

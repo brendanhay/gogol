@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Networks.RemovePeering
     , nrpPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.removePeering@ method which the
 -- 'NetworksRemovePeering' request conforms to.
@@ -64,9 +64,9 @@ type NetworksRemovePeeringResource =
 data NetworksRemovePeering =
   NetworksRemovePeering'
     { _nrpRequestId :: !(Maybe Text)
-    , _nrpProject   :: !Text
-    , _nrpNetwork   :: !Text
-    , _nrpPayload   :: !NetworksRemovePeeringRequest
+    , _nrpProject :: !Text
+    , _nrpNetwork :: !Text
+    , _nrpPayload :: !NetworksRemovePeeringRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

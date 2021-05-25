@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.SSLCertificates.Delete
     , scdSSLCertificate
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslCertificates.delete@ method which the
 -- 'SSLCertificatesDelete' request conforms to.
@@ -59,8 +59,8 @@ type SSLCertificatesDeleteResource =
 -- /See:/ 'sslCertificatesDelete' smart constructor.
 data SSLCertificatesDelete =
   SSLCertificatesDelete'
-    { _scdRequestId      :: !(Maybe Text)
-    , _scdProject        :: !Text
+    { _scdRequestId :: !(Maybe Text)
+    , _scdProject :: !Text
     , _scdSSLCertificate :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

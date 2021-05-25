@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified localized store listing from an edit.
+-- Deletes a localized store listing.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.delete@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.listings.delete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
     , EditsListingsDelete
 
     -- * Request Lenses
+    , eldXgafv
+    , eldUploadProtocol
     , eldPackageName
+    , eldAccessToken
+    , eldUploadType
     , eldLanguage
     , eldEditId
+    , eldCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.delete@ method which the
 -- 'EditsListingsDelete' request conforms to.
@@ -52,16 +57,26 @@ type EditsListingsDeleteResource =
                Capture "editId" Text :>
                  "listings" :>
                    Capture "language" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes the specified localized store listing from an edit.
+-- | Deletes a localized store listing.
 --
 -- /See:/ 'editsListingsDelete' smart constructor.
 data EditsListingsDelete =
   EditsListingsDelete'
-    { _eldPackageName :: !Text
-    , _eldLanguage    :: !Text
-    , _eldEditId      :: !Text
+    { _eldXgafv :: !(Maybe Xgafv)
+    , _eldUploadProtocol :: !(Maybe Text)
+    , _eldPackageName :: !Text
+    , _eldAccessToken :: !(Maybe Text)
+    , _eldUploadType :: !(Maybe Text)
+    , _eldLanguage :: !Text
+    , _eldEditId :: !Text
+    , _eldCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +85,21 @@ data EditsListingsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eldXgafv'
+--
+-- * 'eldUploadProtocol'
+--
 -- * 'eldPackageName'
+--
+-- * 'eldAccessToken'
+--
+-- * 'eldUploadType'
 --
 -- * 'eldLanguage'
 --
 -- * 'eldEditId'
+--
+-- * 'eldCallback'
 editsListingsDelete
     :: Text -- ^ 'eldPackageName'
     -> Text -- ^ 'eldLanguage'
@@ -82,29 +107,60 @@ editsListingsDelete
     -> EditsListingsDelete
 editsListingsDelete pEldPackageName_ pEldLanguage_ pEldEditId_ =
   EditsListingsDelete'
-    { _eldPackageName = pEldPackageName_
+    { _eldXgafv = Nothing
+    , _eldUploadProtocol = Nothing
+    , _eldPackageName = pEldPackageName_
+    , _eldAccessToken = Nothing
+    , _eldUploadType = Nothing
     , _eldLanguage = pEldLanguage_
     , _eldEditId = pEldEditId_
+    , _eldCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+eldXgafv :: Lens' EditsListingsDelete (Maybe Xgafv)
+eldXgafv = lens _eldXgafv (\ s a -> s{_eldXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eldUploadProtocol :: Lens' EditsListingsDelete (Maybe Text)
+eldUploadProtocol
+  = lens _eldUploadProtocol
+      (\ s a -> s{_eldUploadProtocol = a})
+
+-- | Package name of the app.
 eldPackageName :: Lens' EditsListingsDelete Text
 eldPackageName
   = lens _eldPackageName
       (\ s a -> s{_eldPackageName = a})
 
--- | The language code (a BCP-47 language tag) of the localized listing to
--- read or modify. For example, to select Austrian German, pass \"de-AT\".
+-- | OAuth access token.
+eldAccessToken :: Lens' EditsListingsDelete (Maybe Text)
+eldAccessToken
+  = lens _eldAccessToken
+      (\ s a -> s{_eldAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eldUploadType :: Lens' EditsListingsDelete (Maybe Text)
+eldUploadType
+  = lens _eldUploadType
+      (\ s a -> s{_eldUploadType = a})
+
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German).
 eldLanguage :: Lens' EditsListingsDelete Text
 eldLanguage
   = lens _eldLanguage (\ s a -> s{_eldLanguage = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 eldEditId :: Lens' EditsListingsDelete Text
 eldEditId
   = lens _eldEditId (\ s a -> s{_eldEditId = a})
+
+-- | JSONP
+eldCallback :: Lens' EditsListingsDelete (Maybe Text)
+eldCallback
+  = lens _eldCallback (\ s a -> s{_eldCallback = a})
 
 instance GoogleRequest EditsListingsDelete where
         type Rs EditsListingsDelete = ()
@@ -112,6 +168,11 @@ instance GoogleRequest EditsListingsDelete where
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsDelete'{..}
           = go _eldPackageName _eldEditId _eldLanguage
+              _eldXgafv
+              _eldUploadProtocol
+              _eldAccessToken
+              _eldUploadType
+              _eldCallback
               (Just AltJSON)
               androidPublisherService
           where go

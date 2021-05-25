@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.SetAddons
     , plcsaCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.setAddons@ method which the
 -- 'ProjectsLocationsClustersSetAddons' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsClustersSetAddonsResource =
 -- /See:/ 'projectsLocationsClustersSetAddons' smart constructor.
 data ProjectsLocationsClustersSetAddons =
   ProjectsLocationsClustersSetAddons'
-    { _plcsaXgafv          :: !(Maybe Xgafv)
+    { _plcsaXgafv :: !(Maybe Xgafv)
     , _plcsaUploadProtocol :: !(Maybe Text)
-    , _plcsaAccessToken    :: !(Maybe Text)
-    , _plcsaUploadType     :: !(Maybe Text)
-    , _plcsaPayload        :: !SetAddonsConfigRequest
-    , _plcsaName           :: !Text
-    , _plcsaCallback       :: !(Maybe Text)
+    , _plcsaAccessToken :: !(Maybe Text)
+    , _plcsaUploadType :: !(Maybe Text)
+    , _plcsaPayload :: !SetAddonsConfigRequest
+    , _plcsaName :: !Text
+    , _plcsaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ plcsaPayload
   = lens _plcsaPayload (\ s a -> s{_plcsaPayload = a})
 
 -- | The name (project, location, cluster) of the cluster to set addons.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcsaName :: Lens' ProjectsLocationsClustersSetAddons Text
 plcsaName
   = lens _plcsaName (\ s a -> s{_plcsaName = a})

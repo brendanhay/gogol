@@ -16,7 +16,67 @@
 --
 module Network.Google.CloudTrace.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+-- | Optional. Distinguishes between spans generated in a particular context.
+-- For example, two spans with the same name may be distinguished using
+-- \`CLIENT\` (caller) and \`SERVER\` (callee) to identify an RPC call.
+data SpanSpanKind
+    = SpanKindUnspecified
+      -- ^ @SPAN_KIND_UNSPECIFIED@
+      -- Unspecified. Do NOT use as default. Implementations MAY assume
+      -- SpanKind.INTERNAL to be default.
+    | Internal
+      -- ^ @INTERNAL@
+      -- Indicates that the span is used internally. Default value.
+    | Server
+      -- ^ @SERVER@
+      -- Indicates that the span covers server-side handling of an RPC or other
+      -- remote network request.
+    | Client
+      -- ^ @CLIENT@
+      -- Indicates that the span covers the client-side wrapper around an RPC or
+      -- other remote request.
+    | Producer
+      -- ^ @PRODUCER@
+      -- Indicates that the span describes producer sending a message to a
+      -- broker. Unlike client and server, there is no direct critical path
+      -- latency relationship between producer and consumer spans (e.g.
+      -- publishing a message to a pubsub service).
+    | Consumer
+      -- ^ @CONSUMER@
+      -- Indicates that the span describes consumer receiving a message from a
+      -- broker. Unlike client and server, there is no direct critical path
+      -- latency relationship between producer and consumer spans (e.g. receiving
+      -- a message from a pubsub service subscription).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpanSpanKind
+
+instance FromHttpApiData SpanSpanKind where
+    parseQueryParam = \case
+        "SPAN_KIND_UNSPECIFIED" -> Right SpanKindUnspecified
+        "INTERNAL" -> Right Internal
+        "SERVER" -> Right Server
+        "CLIENT" -> Right Client
+        "PRODUCER" -> Right Producer
+        "CONSUMER" -> Right Consumer
+        x -> Left ("Unable to parse SpanSpanKind from: " <> x)
+
+instance ToHttpApiData SpanSpanKind where
+    toQueryParam = \case
+        SpanKindUnspecified -> "SPAN_KIND_UNSPECIFIED"
+        Internal -> "INTERNAL"
+        Server -> "SERVER"
+        Client -> "CLIENT"
+        Producer -> "PRODUCER"
+        Consumer -> "CONSUMER"
+
+instance FromJSON SpanSpanKind where
+    parseJSON = parseJSONText "SpanSpanKind"
+
+instance ToJSON SpanSpanKind where
+    toJSON = toJSONText
 
 -- | Type of MessageEvent. Indicates whether the message was sent or
 -- received.

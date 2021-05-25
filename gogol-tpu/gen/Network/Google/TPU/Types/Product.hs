@@ -17,50 +17,22 @@
 --
 module Network.Google.TPU.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types.Sum
+import Network.Google.Prelude
+import Network.Google.TPU.Types.Sum
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -161,7 +133,7 @@ instance ToJSON OperationSchema where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -257,7 +229,7 @@ instance ToJSON AcceleratorType where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -311,7 +283,8 @@ instance ToJSON ListOperationsResponse where
 data ListAcceleratorTypesResponse =
   ListAcceleratorTypesResponse'
     { _latrAcceleratorTypes :: !(Maybe [AcceleratorType])
-    , _latrNextPageToken    :: !(Maybe Text)
+    , _latrNextPageToken :: !(Maybe Text)
+    , _latrUnreachable :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -323,11 +296,16 @@ data ListAcceleratorTypesResponse =
 -- * 'latrAcceleratorTypes'
 --
 -- * 'latrNextPageToken'
+--
+-- * 'latrUnreachable'
 listAcceleratorTypesResponse
     :: ListAcceleratorTypesResponse
 listAcceleratorTypesResponse =
   ListAcceleratorTypesResponse'
-    {_latrAcceleratorTypes = Nothing, _latrNextPageToken = Nothing}
+    { _latrAcceleratorTypes = Nothing
+    , _latrNextPageToken = Nothing
+    , _latrUnreachable = Nothing
+    }
 
 
 -- | The listed nodes.
@@ -344,31 +322,41 @@ latrNextPageToken
   = lens _latrNextPageToken
       (\ s a -> s{_latrNextPageToken = a})
 
+-- | Locations that could not be reached.
+latrUnreachable :: Lens' ListAcceleratorTypesResponse [Text]
+latrUnreachable
+  = lens _latrUnreachable
+      (\ s a -> s{_latrUnreachable = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON ListAcceleratorTypesResponse where
         parseJSON
           = withObject "ListAcceleratorTypesResponse"
               (\ o ->
                  ListAcceleratorTypesResponse' <$>
                    (o .:? "acceleratorTypes" .!= mempty) <*>
-                     (o .:? "nextPageToken"))
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "unreachable" .!= mempty))
 
 instance ToJSON ListAcceleratorTypesResponse where
         toJSON ListAcceleratorTypesResponse'{..}
           = object
               (catMaybes
                  [("acceleratorTypes" .=) <$> _latrAcceleratorTypes,
-                  ("nextPageToken" .=) <$> _latrNextPageToken])
+                  ("nextPageToken" .=) <$> _latrNextPageToken,
+                  ("unreachable" .=) <$> _latrUnreachable])
 
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -451,10 +439,10 @@ instance ToJSON Location where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -509,7 +497,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -546,7 +535,7 @@ instance ToJSON Operation where
 data NetworkEndpoint =
   NetworkEndpoint'
     { _neIPAddress :: !(Maybe Text)
-    , _nePort      :: !(Maybe (Textual Int32))
+    , _nePort :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -618,22 +607,25 @@ instance ToJSON Empty where
 -- /See:/ 'node' smart constructor.
 data Node =
   Node'
-    { _nAcceleratorType   :: !(Maybe Text)
-    , _nIPAddress         :: !(Maybe Text)
-    , _nState             :: !(Maybe NodeState)
-    , _nNetwork           :: !(Maybe Text)
-    , _nHealth            :: !(Maybe NodeHealth)
-    , _nServiceAccount    :: !(Maybe Text)
-    , _nName              :: !(Maybe Text)
-    , _nSchedulingConfig  :: !(Maybe SchedulingConfig)
+    { _nAcceleratorType :: !(Maybe Text)
+    , _nIPAddress :: !(Maybe Text)
+    , _nState :: !(Maybe NodeState)
+    , _nSymptoms :: !(Maybe [Symptom])
+    , _nAPIVersion :: !(Maybe NodeAPIVersion)
+    , _nUseServiceNetworking :: !(Maybe Bool)
+    , _nNetwork :: !(Maybe Text)
+    , _nHealth :: !(Maybe NodeHealth)
+    , _nServiceAccount :: !(Maybe Text)
+    , _nName :: !(Maybe Text)
+    , _nSchedulingConfig :: !(Maybe SchedulingConfig)
     , _nHealthDescription :: !(Maybe Text)
-    , _nCIdRBlock         :: !(Maybe Text)
-    , _nLabels            :: !(Maybe NodeLabels)
-    , _nNetworkEndpoints  :: !(Maybe [NetworkEndpoint])
-    , _nDescription       :: !(Maybe Text)
-    , _nCreateTime        :: !(Maybe DateTime')
+    , _nCIdRBlock :: !(Maybe Text)
+    , _nLabels :: !(Maybe NodeLabels)
+    , _nNetworkEndpoints :: !(Maybe [NetworkEndpoint])
+    , _nDescription :: !(Maybe Text)
+    , _nCreateTime :: !(Maybe DateTime')
     , _nTensorflowVersion :: !(Maybe Text)
-    , _nPort              :: !(Maybe Text)
+    , _nPort :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -647,6 +639,12 @@ data Node =
 -- * 'nIPAddress'
 --
 -- * 'nState'
+--
+-- * 'nSymptoms'
+--
+-- * 'nAPIVersion'
+--
+-- * 'nUseServiceNetworking'
 --
 -- * 'nNetwork'
 --
@@ -680,6 +678,9 @@ node =
     { _nAcceleratorType = Nothing
     , _nIPAddress = Nothing
     , _nState = Nothing
+    , _nSymptoms = Nothing
+    , _nAPIVersion = Nothing
+    , _nUseServiceNetworking = Nothing
     , _nNetwork = Nothing
     , _nHealth = Nothing
     , _nServiceAccount = Nothing
@@ -696,7 +697,7 @@ node =
     }
 
 
--- | The type of hardware accelerators associated with this node. Required.
+-- | Required. The type of hardware accelerators associated with this node.
 nAcceleratorType :: Lens' Node (Maybe Text)
 nAcceleratorType
   = lens _nAcceleratorType
@@ -711,6 +712,28 @@ nIPAddress
 -- | Output only. The current state for the TPU Node.
 nState :: Lens' Node (Maybe NodeState)
 nState = lens _nState (\ s a -> s{_nState = a})
+
+-- | Output only. The Symptoms that have occurred to the TPU Node.
+nSymptoms :: Lens' Node [Symptom]
+nSymptoms
+  = lens _nSymptoms (\ s a -> s{_nSymptoms = a}) .
+      _Default
+      . _Coerce
+
+-- | Output only. The API version that created this Node.
+nAPIVersion :: Lens' Node (Maybe NodeAPIVersion)
+nAPIVersion
+  = lens _nAPIVersion (\ s a -> s{_nAPIVersion = a})
+
+-- | Whether the VPC peering for the node is set up through Service
+-- Networking API. The VPC Peering should be set up before provisioning the
+-- node. If this field is set, cidr_block field should not be specified. If
+-- the network, that you want to peer the TPU Node to, is Shared VPC
+-- networks, the node must be created with this this field enabled.
+nUseServiceNetworking :: Lens' Node (Maybe Bool)
+nUseServiceNetworking
+  = lens _nUseServiceNetworking
+      (\ s a -> s{_nUseServiceNetworking = a})
 
 -- | The name of a network they wish to peer the TPU node to. It must be a
 -- preexisting Compute Engine network inside of the project on which this
@@ -731,10 +754,11 @@ nServiceAccount
   = lens _nServiceAccount
       (\ s a -> s{_nServiceAccount = a})
 
--- | Output only. The immutable name of the TPU
+-- | Output only. Immutable. The name of the TPU
 nName :: Lens' Node (Maybe Text)
 nName = lens _nName (\ s a -> s{_nName = a})
 
+-- | The scheduling options for this node.
 nSchedulingConfig :: Lens' Node (Maybe SchedulingConfig)
 nSchedulingConfig
   = lens _nSchedulingConfig
@@ -754,7 +778,7 @@ nHealthDescription
 -- block has already been used for a currently existing TPU node, the CIDR
 -- block conflicts with any subnetworks in the user\'s provided network, or
 -- the provided network is peered with another network that is using that
--- CIDR block. Required.
+-- CIDR block.
 nCIdRBlock :: Lens' Node (Maybe Text)
 nCIdRBlock
   = lens _nCIdRBlock (\ s a -> s{_nCIdRBlock = a})
@@ -784,7 +808,7 @@ nCreateTime
   = lens _nCreateTime (\ s a -> s{_nCreateTime = a}) .
       mapping _DateTime
 
--- | The version of Tensorflow running in the Node. Required.
+-- | Required. The version of Tensorflow running in the Node.
 nTensorflowVersion :: Lens' Node (Maybe Text)
 nTensorflowVersion
   = lens _nTensorflowVersion
@@ -802,6 +826,9 @@ instance FromJSON Node where
                  Node' <$>
                    (o .:? "acceleratorType") <*> (o .:? "ipAddress") <*>
                      (o .:? "state")
+                     <*> (o .:? "symptoms" .!= mempty)
+                     <*> (o .:? "apiVersion")
+                     <*> (o .:? "useServiceNetworking")
                      <*> (o .:? "network")
                      <*> (o .:? "health")
                      <*> (o .:? "serviceAccount")
@@ -823,6 +850,10 @@ instance ToJSON Node where
                  [("acceleratorType" .=) <$> _nAcceleratorType,
                   ("ipAddress" .=) <$> _nIPAddress,
                   ("state" .=) <$> _nState,
+                  ("symptoms" .=) <$> _nSymptoms,
+                  ("apiVersion" .=) <$> _nAPIVersion,
+                  ("useServiceNetworking" .=) <$>
+                    _nUseServiceNetworking,
                   ("network" .=) <$> _nNetwork,
                   ("health" .=) <$> _nHealth,
                   ("serviceAccount" .=) <$> _nServiceAccount,
@@ -895,6 +926,82 @@ instance FromJSON StopNodeRequest where
 instance ToJSON StopNodeRequest where
         toJSON = const emptyObject
 
+-- | A Symptom instance.
+--
+-- /See:/ 'symptom' smart constructor.
+data Symptom =
+  Symptom'
+    { _symDetails :: !(Maybe Text)
+    , _symWorkerId :: !(Maybe Text)
+    , _symCreateTime :: !(Maybe DateTime')
+    , _symSymptomType :: !(Maybe SymptomSymptomType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Symptom' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'symDetails'
+--
+-- * 'symWorkerId'
+--
+-- * 'symCreateTime'
+--
+-- * 'symSymptomType'
+symptom
+    :: Symptom
+symptom =
+  Symptom'
+    { _symDetails = Nothing
+    , _symWorkerId = Nothing
+    , _symCreateTime = Nothing
+    , _symSymptomType = Nothing
+    }
+
+
+-- | Detailed information of the current Symptom.
+symDetails :: Lens' Symptom (Maybe Text)
+symDetails
+  = lens _symDetails (\ s a -> s{_symDetails = a})
+
+-- | A string used to uniquely distinguish a worker within a TPU node.
+symWorkerId :: Lens' Symptom (Maybe Text)
+symWorkerId
+  = lens _symWorkerId (\ s a -> s{_symWorkerId = a})
+
+-- | Timestamp when the Symptom is created.
+symCreateTime :: Lens' Symptom (Maybe UTCTime)
+symCreateTime
+  = lens _symCreateTime
+      (\ s a -> s{_symCreateTime = a})
+      . mapping _DateTime
+
+-- | Type of the Symptom.
+symSymptomType :: Lens' Symptom (Maybe SymptomSymptomType)
+symSymptomType
+  = lens _symSymptomType
+      (\ s a -> s{_symSymptomType = a})
+
+instance FromJSON Symptom where
+        parseJSON
+          = withObject "Symptom"
+              (\ o ->
+                 Symptom' <$>
+                   (o .:? "details") <*> (o .:? "workerId") <*>
+                     (o .:? "createTime")
+                     <*> (o .:? "symptomType"))
+
+instance ToJSON Symptom where
+        toJSON Symptom'{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _symDetails,
+                  ("workerId" .=) <$> _symWorkerId,
+                  ("createTime" .=) <$> _symCreateTime,
+                  ("symptomType" .=) <$> _symSymptomType])
+
 -- | Request for ReimageNode.
 --
 -- /See:/ 'reimageNodeRequest' smart constructor.
@@ -939,8 +1046,8 @@ instance ToJSON ReimageNodeRequest where
 data ListNodesResponse =
   ListNodesResponse'
     { _lnrNextPageToken :: !(Maybe Text)
-    , _lnrUnreachable   :: !(Maybe [Text])
-    , _lnrNodes         :: !(Maybe [Node])
+    , _lnrUnreachable :: !(Maybe [Text])
+    , _lnrNodes :: !(Maybe [Node])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1002,11 +1109,12 @@ instance ToJSON ListNodesResponse where
                   ("unreachable" .=) <$> _lnrUnreachable,
                   ("nodes" .=) <$> _lnrNodes])
 
+-- | Sets the scheduling options for this node.
 --
 -- /See:/ 'schedulingConfig' smart constructor.
 data SchedulingConfig =
   SchedulingConfig'
-    { _scReserved    :: !(Maybe Bool)
+    { _scReserved :: !(Maybe Bool)
     , _scPreemptible :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1030,6 +1138,7 @@ scReserved :: Lens' SchedulingConfig (Maybe Bool)
 scReserved
   = lens _scReserved (\ s a -> s{_scReserved = a})
 
+-- | Defines whether the node is preemptible.
 scPreemptible :: Lens' SchedulingConfig (Maybe Bool)
 scPreemptible
   = lens _scPreemptible
@@ -1161,13 +1270,13 @@ instance ToJSON LocationMetadata where
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata =
   OperationMetadata'
-    { _omAPIVersion      :: !(Maybe Text)
-    , _omEndTime         :: !(Maybe DateTime')
-    , _omStatusDetail    :: !(Maybe Text)
-    , _omVerb            :: !(Maybe Text)
+    { _omAPIVersion :: !(Maybe Text)
+    , _omEndTime :: !(Maybe DateTime')
+    , _omStatusDetail :: !(Maybe Text)
+    , _omVerb :: !(Maybe Text)
     , _omCancelRequested :: !(Maybe Bool)
-    , _omTarget          :: !(Maybe Text)
-    , _omCreateTime      :: !(Maybe DateTime')
+    , _omTarget :: !(Maybe Text)
+    , _omCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1203,28 +1312,28 @@ operationMetadata =
     }
 
 
--- | [Output only] API version used to start the operation.
+-- | Output only. API version used to start the operation.
 omAPIVersion :: Lens' OperationMetadata (Maybe Text)
 omAPIVersion
   = lens _omAPIVersion (\ s a -> s{_omAPIVersion = a})
 
--- | [Output only] The time the operation finished running.
+-- | Output only. The time the operation finished running.
 omEndTime :: Lens' OperationMetadata (Maybe UTCTime)
 omEndTime
   = lens _omEndTime (\ s a -> s{_omEndTime = a}) .
       mapping _DateTime
 
--- | [Output only] Human-readable status of the operation, if any.
+-- | Output only. Human-readable status of the operation, if any.
 omStatusDetail :: Lens' OperationMetadata (Maybe Text)
 omStatusDetail
   = lens _omStatusDetail
       (\ s a -> s{_omStatusDetail = a})
 
--- | [Output only] Name of the verb executed by the operation.
+-- | Output only. Name of the verb executed by the operation.
 omVerb :: Lens' OperationMetadata (Maybe Text)
 omVerb = lens _omVerb (\ s a -> s{_omVerb = a})
 
--- | [Output only] Identifies whether the user has requested cancellation of
+-- | Output only. Identifies whether the user has requested cancellation of
 -- the operation. Operations that have successfully been cancelled have
 -- Operation.error value with a google.rpc.Status.code of 1, corresponding
 -- to \`Code.CANCELLED\`.
@@ -1233,12 +1342,12 @@ omCancelRequested
   = lens _omCancelRequested
       (\ s a -> s{_omCancelRequested = a})
 
--- | [Output only] Server-defined resource path for the target of the
+-- | Output only. Server-defined resource path for the target of the
 -- operation.
 omTarget :: Lens' OperationMetadata (Maybe Text)
 omTarget = lens _omTarget (\ s a -> s{_omTarget = a})
 
--- | [Output only] The time the operation was created.
+-- | Output only. The time the operation was created.
 omCreateTime :: Lens' OperationMetadata (Maybe UTCTime)
 omCreateTime
   = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
@@ -1273,7 +1382,8 @@ instance ToJSON OperationMetadata where
 -- /See:/ 'listTensorFlowVersionsResponse' smart constructor.
 data ListTensorFlowVersionsResponse =
   ListTensorFlowVersionsResponse'
-    { _ltfvrNextPageToken      :: !(Maybe Text)
+    { _ltfvrNextPageToken :: !(Maybe Text)
+    , _ltfvrUnreachable :: !(Maybe [Text])
     , _ltfvrTensorflowVersions :: !(Maybe [TensorFlowVersion])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1285,12 +1395,17 @@ data ListTensorFlowVersionsResponse =
 --
 -- * 'ltfvrNextPageToken'
 --
+-- * 'ltfvrUnreachable'
+--
 -- * 'ltfvrTensorflowVersions'
 listTensorFlowVersionsResponse
     :: ListTensorFlowVersionsResponse
 listTensorFlowVersionsResponse =
   ListTensorFlowVersionsResponse'
-    {_ltfvrNextPageToken = Nothing, _ltfvrTensorflowVersions = Nothing}
+    { _ltfvrNextPageToken = Nothing
+    , _ltfvrUnreachable = Nothing
+    , _ltfvrTensorflowVersions = Nothing
+    }
 
 
 -- | The next page token or empty if none.
@@ -1298,6 +1413,14 @@ ltfvrNextPageToken :: Lens' ListTensorFlowVersionsResponse (Maybe Text)
 ltfvrNextPageToken
   = lens _ltfvrNextPageToken
       (\ s a -> s{_ltfvrNextPageToken = a})
+
+-- | Locations that could not be reached.
+ltfvrUnreachable :: Lens' ListTensorFlowVersionsResponse [Text]
+ltfvrUnreachable
+  = lens _ltfvrUnreachable
+      (\ s a -> s{_ltfvrUnreachable = a})
+      . _Default
+      . _Coerce
 
 -- | The listed nodes.
 ltfvrTensorflowVersions :: Lens' ListTensorFlowVersionsResponse [TensorFlowVersion]
@@ -1314,13 +1437,15 @@ instance FromJSON ListTensorFlowVersionsResponse
               (\ o ->
                  ListTensorFlowVersionsResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "tensorflowVersions" .!= mempty))
+                     (o .:? "unreachable" .!= mempty)
+                     <*> (o .:? "tensorflowVersions" .!= mempty))
 
 instance ToJSON ListTensorFlowVersionsResponse where
         toJSON ListTensorFlowVersionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltfvrNextPageToken,
+                  ("unreachable" .=) <$> _ltfvrUnreachable,
                   ("tensorflowVersions" .=) <$>
                     _ltfvrTensorflowVersions])
 
@@ -1372,7 +1497,7 @@ instance ToJSON OperationResponse where
 -- /See:/ 'tensorFlowVersion' smart constructor.
 data TensorFlowVersion =
   TensorFlowVersion'
-    { _tfvName    :: !(Maybe Text)
+    { _tfvName :: !(Maybe Text)
     , _tfvVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

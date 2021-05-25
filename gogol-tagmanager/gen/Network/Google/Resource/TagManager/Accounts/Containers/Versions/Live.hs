@@ -22,7 +22,7 @@
 --
 -- Gets the live (i.e. published) container version
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.live@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.versions.live@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
     (
     -- * REST Resource
@@ -34,10 +34,15 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
 
     -- * Request Lenses
     , acvlParent
+    , acvlXgafv
+    , acvlUploadProtocol
+    , acvlAccessToken
+    , acvlUploadType
+    , acvlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.live@ method which the
 -- 'AccountsContainersVersionsLive' request conforms to.
@@ -46,15 +51,25 @@ type AccountsContainersVersionsLiveResource =
        "v2" :>
          Capture "parent" Text :>
            "versions:live" :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] ContainerVersion
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ContainerVersion
 
 -- | Gets the live (i.e. published) container version
 --
 -- /See:/ 'accountsContainersVersionsLive' smart constructor.
-newtype AccountsContainersVersionsLive =
+data AccountsContainersVersionsLive =
   AccountsContainersVersionsLive'
-    { _acvlParent :: Text
+    { _acvlParent :: !Text
+    , _acvlXgafv :: !(Maybe Xgafv)
+    , _acvlUploadProtocol :: !(Maybe Text)
+    , _acvlAccessToken :: !(Maybe Text)
+    , _acvlUploadType :: !(Maybe Text)
+    , _acvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,11 +79,28 @@ newtype AccountsContainersVersionsLive =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acvlParent'
+--
+-- * 'acvlXgafv'
+--
+-- * 'acvlUploadProtocol'
+--
+-- * 'acvlAccessToken'
+--
+-- * 'acvlUploadType'
+--
+-- * 'acvlCallback'
 accountsContainersVersionsLive
     :: Text -- ^ 'acvlParent'
     -> AccountsContainersVersionsLive
 accountsContainersVersionsLive pAcvlParent_ =
-  AccountsContainersVersionsLive' {_acvlParent = pAcvlParent_}
+  AccountsContainersVersionsLive'
+    { _acvlParent = pAcvlParent_
+    , _acvlXgafv = Nothing
+    , _acvlUploadProtocol = Nothing
+    , _acvlAccessToken = Nothing
+    , _acvlUploadType = Nothing
+    , _acvlCallback = Nothing
+    }
 
 
 -- | GTM Container\'s API relative path. Example:
@@ -76,6 +108,34 @@ accountsContainersVersionsLive pAcvlParent_ =
 acvlParent :: Lens' AccountsContainersVersionsLive Text
 acvlParent
   = lens _acvlParent (\ s a -> s{_acvlParent = a})
+
+-- | V1 error format.
+acvlXgafv :: Lens' AccountsContainersVersionsLive (Maybe Xgafv)
+acvlXgafv
+  = lens _acvlXgafv (\ s a -> s{_acvlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acvlUploadProtocol :: Lens' AccountsContainersVersionsLive (Maybe Text)
+acvlUploadProtocol
+  = lens _acvlUploadProtocol
+      (\ s a -> s{_acvlUploadProtocol = a})
+
+-- | OAuth access token.
+acvlAccessToken :: Lens' AccountsContainersVersionsLive (Maybe Text)
+acvlAccessToken
+  = lens _acvlAccessToken
+      (\ s a -> s{_acvlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acvlUploadType :: Lens' AccountsContainersVersionsLive (Maybe Text)
+acvlUploadType
+  = lens _acvlUploadType
+      (\ s a -> s{_acvlUploadType = a})
+
+-- | JSONP
+acvlCallback :: Lens' AccountsContainersVersionsLive (Maybe Text)
+acvlCallback
+  = lens _acvlCallback (\ s a -> s{_acvlCallback = a})
 
 instance GoogleRequest AccountsContainersVersionsLive
          where
@@ -85,7 +145,12 @@ instance GoogleRequest AccountsContainersVersionsLive
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersVersionsLive'{..}
-          = go _acvlParent (Just AltJSON) tagManagerService
+          = go _acvlParent _acvlXgafv _acvlUploadProtocol
+              _acvlAccessToken
+              _acvlUploadType
+              _acvlCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

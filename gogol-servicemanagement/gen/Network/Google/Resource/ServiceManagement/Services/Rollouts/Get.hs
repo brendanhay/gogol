@@ -42,8 +42,8 @@ module Network.Google.Resource.ServiceManagement.Services.Rollouts.Get
     , srgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.rollouts.get@ method which the
 -- 'ServicesRolloutsGet' request conforms to.
@@ -65,13 +65,13 @@ type ServicesRolloutsGetResource =
 -- /See:/ 'servicesRolloutsGet' smart constructor.
 data ServicesRolloutsGet =
   ServicesRolloutsGet'
-    { _srgXgafv          :: !(Maybe Xgafv)
+    { _srgXgafv :: !(Maybe Xgafv)
     , _srgUploadProtocol :: !(Maybe Text)
-    , _srgAccessToken    :: !(Maybe Text)
-    , _srgUploadType     :: !(Maybe Text)
-    , _srgServiceName    :: !Text
-    , _srgRolloutId      :: !Text
-    , _srgCallback       :: !(Maybe Text)
+    , _srgAccessToken :: !(Maybe Text)
+    , _srgUploadType :: !(Maybe Text)
+    , _srgServiceName :: !Text
+    , _srgRolloutId :: !Text
+    , _srgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,7 +131,7 @@ srgUploadType
   = lens _srgUploadType
       (\ s a -> s{_srgUploadType = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 srgServiceName :: Lens' ServicesRolloutsGet Text
@@ -139,7 +139,7 @@ srgServiceName
   = lens _srgServiceName
       (\ s a -> s{_srgServiceName = a})
 
--- | The id of the rollout resource.
+-- | Required. The id of the rollout resource.
 srgRolloutId :: Lens' ServicesRolloutsGet Text
 srgRolloutId
   = lens _srgRolloutId (\ s a -> s{_srgRolloutId = a})

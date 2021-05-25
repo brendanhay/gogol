@@ -23,7 +23,7 @@
 -- Retrieves a list of account user profiles, possibly filtered. This
 -- method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accountUserProfiles.list@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
     (
     -- * REST Resource
@@ -34,8 +34,12 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
     , AccountUserProFilesList
 
     -- * Request Lenses
+    , aupflXgafv
+    , aupflUploadProtocol
     , aupflUserRoleId
+    , aupflAccessToken
     , aupflSearchString
+    , aupflUploadType
     , aupflIds
     , aupflProFileId
     , aupflSortOrder
@@ -44,34 +48,43 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
     , aupflSortField
     , aupflSubAccountId
     , aupflMaxResults
+    , aupflCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountUserProfiles.list@ method which the
 -- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
-               QueryParam "userRoleId" (Textual Int64) :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" (Textual Int64) :>
-                     QueryParam "sortOrder"
-                       AccountUserProFilesListSortOrder
-                       :>
-                       QueryParam "active" Bool :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             AccountUserProFilesListSortField
-                             :>
-                             QueryParam "subaccountId" (Textual Int64) :>
-                               QueryParam "maxResults" (Textual Int32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] AccountUserProFilesListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "userRoleId" (Textual Int64) :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "ids" (Textual Int64) :>
+                             QueryParam "sortOrder"
+                               AccountUserProFilesListSortOrder
+                               :>
+                               QueryParam "active" Bool :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     AccountUserProFilesListSortField
+                                     :>
+                                     QueryParam "subaccountId" (Textual Int64)
+                                       :>
+                                       QueryParam "maxResults" (Textual Int32)
+                                         :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON]
+                                               AccountUserProFilesListResponse
 
 -- | Retrieves a list of account user profiles, possibly filtered. This
 -- method supports paging.
@@ -79,16 +92,21 @@ type AccountUserProFilesListResource =
 -- /See:/ 'accountUserProFilesList' smart constructor.
 data AccountUserProFilesList =
   AccountUserProFilesList'
-    { _aupflUserRoleId   :: !(Maybe (Textual Int64))
+    { _aupflXgafv :: !(Maybe Xgafv)
+    , _aupflUploadProtocol :: !(Maybe Text)
+    , _aupflUserRoleId :: !(Maybe (Textual Int64))
+    , _aupflAccessToken :: !(Maybe Text)
     , _aupflSearchString :: !(Maybe Text)
-    , _aupflIds          :: !(Maybe [Textual Int64])
-    , _aupflProFileId    :: !(Textual Int64)
-    , _aupflSortOrder    :: !AccountUserProFilesListSortOrder
-    , _aupflActive       :: !(Maybe Bool)
-    , _aupflPageToken    :: !(Maybe Text)
-    , _aupflSortField    :: !AccountUserProFilesListSortField
+    , _aupflUploadType :: !(Maybe Text)
+    , _aupflIds :: !(Maybe [Textual Int64])
+    , _aupflProFileId :: !(Textual Int64)
+    , _aupflSortOrder :: !AccountUserProFilesListSortOrder
+    , _aupflActive :: !(Maybe Bool)
+    , _aupflPageToken :: !(Maybe Text)
+    , _aupflSortField :: !AccountUserProFilesListSortField
     , _aupflSubAccountId :: !(Maybe (Textual Int64))
-    , _aupflMaxResults   :: !(Textual Int32)
+    , _aupflMaxResults :: !(Textual Int32)
+    , _aupflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -97,9 +115,17 @@ data AccountUserProFilesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aupflXgafv'
+--
+-- * 'aupflUploadProtocol'
+--
 -- * 'aupflUserRoleId'
 --
+-- * 'aupflAccessToken'
+--
 -- * 'aupflSearchString'
+--
+-- * 'aupflUploadType'
 --
 -- * 'aupflIds'
 --
@@ -116,13 +142,19 @@ data AccountUserProFilesList =
 -- * 'aupflSubAccountId'
 --
 -- * 'aupflMaxResults'
+--
+-- * 'aupflCallback'
 accountUserProFilesList
     :: Int64 -- ^ 'aupflProFileId'
     -> AccountUserProFilesList
 accountUserProFilesList pAupflProFileId_ =
   AccountUserProFilesList'
-    { _aupflUserRoleId = Nothing
+    { _aupflXgafv = Nothing
+    , _aupflUploadProtocol = Nothing
+    , _aupflUserRoleId = Nothing
+    , _aupflAccessToken = Nothing
     , _aupflSearchString = Nothing
+    , _aupflUploadType = Nothing
     , _aupflIds = Nothing
     , _aupflProFileId = _Coerce # pAupflProFileId_
     , _aupflSortOrder = AUPFLSOAscending
@@ -131,8 +163,20 @@ accountUserProFilesList pAupflProFileId_ =
     , _aupflSortField = AUPFLSFID
     , _aupflSubAccountId = Nothing
     , _aupflMaxResults = 1000
+    , _aupflCallback = Nothing
     }
 
+
+-- | V1 error format.
+aupflXgafv :: Lens' AccountUserProFilesList (Maybe Xgafv)
+aupflXgafv
+  = lens _aupflXgafv (\ s a -> s{_aupflXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aupflUploadProtocol :: Lens' AccountUserProFilesList (Maybe Text)
+aupflUploadProtocol
+  = lens _aupflUploadProtocol
+      (\ s a -> s{_aupflUploadProtocol = a})
 
 -- | Select only user profiles with the specified user role ID.
 aupflUserRoleId :: Lens' AccountUserProFilesList (Maybe Int64)
@@ -140,6 +184,12 @@ aupflUserRoleId
   = lens _aupflUserRoleId
       (\ s a -> s{_aupflUserRoleId = a})
       . mapping _Coerce
+
+-- | OAuth access token.
+aupflAccessToken :: Lens' AccountUserProFilesList (Maybe Text)
+aupflAccessToken
+  = lens _aupflAccessToken
+      (\ s a -> s{_aupflAccessToken = a})
 
 -- | Allows searching for objects by name, ID or email. Wildcards (*) are
 -- allowed. For example, \"user profile*2015\" will return objects with
@@ -152,6 +202,12 @@ aupflSearchString :: Lens' AccountUserProFilesList (Maybe Text)
 aupflSearchString
   = lens _aupflSearchString
       (\ s a -> s{_aupflSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aupflUploadType :: Lens' AccountUserProFilesList (Maybe Text)
+aupflUploadType
+  = lens _aupflUploadType
+      (\ s a -> s{_aupflUploadType = a})
 
 -- | Select only user profiles with these IDs.
 aupflIds :: Lens' AccountUserProFilesList [Int64]
@@ -204,14 +260,23 @@ aupflMaxResults
       (\ s a -> s{_aupflMaxResults = a})
       . _Coerce
 
+-- | JSONP
+aupflCallback :: Lens' AccountUserProFilesList (Maybe Text)
+aupflCallback
+  = lens _aupflCallback
+      (\ s a -> s{_aupflCallback = a})
+
 instance GoogleRequest AccountUserProFilesList where
         type Rs AccountUserProFilesList =
              AccountUserProFilesListResponse
         type Scopes AccountUserProFilesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountUserProFilesList'{..}
-          = go _aupflProFileId _aupflUserRoleId
+          = go _aupflProFileId _aupflXgafv _aupflUploadProtocol
+              _aupflUserRoleId
+              _aupflAccessToken
               _aupflSearchString
+              _aupflUploadType
               (_aupflIds ^. _Default)
               (Just _aupflSortOrder)
               _aupflActive
@@ -219,6 +284,7 @@ instance GoogleRequest AccountUserProFilesList where
               (Just _aupflSortField)
               _aupflSubAccountId
               (Just _aupflMaxResults)
+              _aupflCallback
               (Just AltJSON)
               dFAReportingService
           where go

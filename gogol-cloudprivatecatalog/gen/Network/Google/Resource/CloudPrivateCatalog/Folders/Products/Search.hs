@@ -23,7 +23,7 @@
 -- Search Product resources that consumers have access to, within the scope
 -- of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.products.search@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.products.search@.
 module Network.Google.Resource.CloudPrivateCatalog.Folders.Products.Search
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalog.Folders.Products.Search
     , fpsCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalog.folders.products.search@ method which the
 -- 'FoldersProductsSearch' request conforms to.
@@ -72,15 +72,15 @@ type FoldersProductsSearchResource =
 -- /See:/ 'foldersProductsSearch' smart constructor.
 data FoldersProductsSearch =
   FoldersProductsSearch'
-    { _fpsXgafv          :: !(Maybe Xgafv)
+    { _fpsXgafv :: !(Maybe Xgafv)
     , _fpsUploadProtocol :: !(Maybe Text)
-    , _fpsAccessToken    :: !(Maybe Text)
-    , _fpsUploadType     :: !(Maybe Text)
-    , _fpsResource       :: !Text
-    , _fpsQuery          :: !(Maybe Text)
-    , _fpsPageToken      :: !(Maybe Text)
-    , _fpsPageSize       :: !(Maybe (Textual Int32))
-    , _fpsCallback       :: !(Maybe Text)
+    , _fpsAccessToken :: !(Maybe Text)
+    , _fpsUploadType :: !(Maybe Text)
+    , _fpsResource :: !Text
+    , _fpsQuery :: !(Maybe Text)
+    , _fpsPageToken :: !(Maybe Text)
+    , _fpsPageSize :: !(Maybe (Textual Int32))
+    , _fpsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

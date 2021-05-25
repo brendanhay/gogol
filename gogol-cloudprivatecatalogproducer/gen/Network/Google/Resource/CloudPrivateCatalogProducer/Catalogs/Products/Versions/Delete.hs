@@ -22,7 +22,7 @@
 --
 -- Hard deletes a Version.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.delete@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.delete@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Ver
     , cpvdCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.versions.delete@ method which the
 -- 'CatalogsProductsVersionsDelete' request conforms to.
@@ -62,12 +62,12 @@ type CatalogsProductsVersionsDeleteResource =
 -- /See:/ 'catalogsProductsVersionsDelete' smart constructor.
 data CatalogsProductsVersionsDelete =
   CatalogsProductsVersionsDelete'
-    { _cpvdXgafv          :: !(Maybe Xgafv)
+    { _cpvdXgafv :: !(Maybe Xgafv)
     , _cpvdUploadProtocol :: !(Maybe Text)
-    , _cpvdAccessToken    :: !(Maybe Text)
-    , _cpvdUploadType     :: !(Maybe Text)
-    , _cpvdName           :: !Text
-    , _cpvdCallback       :: !(Maybe Text)
+    , _cpvdAccessToken :: !(Maybe Text)
+    , _cpvdUploadType :: !(Maybe Text)
+    , _cpvdName :: !Text
+    , _cpvdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

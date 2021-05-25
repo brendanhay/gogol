@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.List
     , aclcCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.clients.list@ method which the
 -- 'AccountsClientsList' request conforms to.
@@ -70,15 +70,15 @@ type AccountsClientsListResource =
 -- /See:/ 'accountsClientsList' smart constructor.
 data AccountsClientsList =
   AccountsClientsList'
-    { _aclcXgafv           :: !(Maybe Xgafv)
-    , _aclcUploadProtocol  :: !(Maybe Text)
-    , _aclcAccessToken     :: !(Maybe Text)
-    , _aclcUploadType      :: !(Maybe Text)
-    , _aclcAccountId       :: !(Textual Int64)
+    { _aclcXgafv :: !(Maybe Xgafv)
+    , _aclcUploadProtocol :: !(Maybe Text)
+    , _aclcAccessToken :: !(Maybe Text)
+    , _aclcUploadType :: !(Maybe Text)
+    , _aclcAccountId :: !(Textual Int64)
     , _aclcPartnerClientId :: !(Maybe Text)
-    , _aclcPageToken       :: !(Maybe Text)
-    , _aclcPageSize        :: !(Maybe (Textual Int32))
-    , _aclcCallback        :: !(Maybe Text)
+    , _aclcPageToken :: !(Maybe Text)
+    , _aclcPageSize :: !(Maybe (Textual Int32))
+    , _aclcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

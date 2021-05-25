@@ -47,8 +47,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.G
     , ccwssgCourseWorkId
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.get@ method which the
 -- 'CoursesCourseWorkStudentSubmissionsGet' request conforms to.
@@ -77,14 +77,14 @@ type CoursesCourseWorkStudentSubmissionsGetResource =
 -- /See:/ 'coursesCourseWorkStudentSubmissionsGet' smart constructor.
 data CoursesCourseWorkStudentSubmissionsGet =
   CoursesCourseWorkStudentSubmissionsGet'
-    { _ccwssgXgafv          :: !(Maybe Xgafv)
+    { _ccwssgXgafv :: !(Maybe Xgafv)
     , _ccwssgUploadProtocol :: !(Maybe Text)
-    , _ccwssgCourseId       :: !Text
-    , _ccwssgAccessToken    :: !(Maybe Text)
-    , _ccwssgUploadType     :: !(Maybe Text)
-    , _ccwssgId             :: !Text
-    , _ccwssgCallback       :: !(Maybe Text)
-    , _ccwssgCourseWorkId   :: !Text
+    , _ccwssgCourseId :: !Text
+    , _ccwssgAccessToken :: !(Maybe Text)
+    , _ccwssgUploadType :: !(Maybe Text)
+    , _ccwssgId :: !Text
+    , _ccwssgCallback :: !(Maybe Text)
+    , _ccwssgCourseWorkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

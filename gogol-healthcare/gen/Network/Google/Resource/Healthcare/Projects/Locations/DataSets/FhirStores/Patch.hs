@@ -43,14 +43,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfspCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.patch@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresPatch' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresPatchResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -66,14 +66,14 @@ type ProjectsLocationsDataSetsFhirStoresPatchResource
 -- /See:/ 'projectsLocationsDataSetsFhirStoresPatch' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresPatch =
   ProjectsLocationsDataSetsFhirStoresPatch'
-    { _pldsfspXgafv          :: !(Maybe Xgafv)
+    { _pldsfspXgafv :: !(Maybe Xgafv)
     , _pldsfspUploadProtocol :: !(Maybe Text)
-    , _pldsfspUpdateMask     :: !(Maybe GFieldMask)
-    , _pldsfspAccessToken    :: !(Maybe Text)
-    , _pldsfspUploadType     :: !(Maybe Text)
-    , _pldsfspPayload        :: !FhirStore
-    , _pldsfspName           :: !Text
-    , _pldsfspCallback       :: !(Maybe Text)
+    , _pldsfspUpdateMask :: !(Maybe GFieldMask)
+    , _pldsfspAccessToken :: !(Maybe Text)
+    , _pldsfspUploadType :: !(Maybe Text)
+    , _pldsfspPayload :: !FhirStore
+    , _pldsfspName :: !Text
+    , _pldsfspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

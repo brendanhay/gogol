@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Instances.SetDeletionProtection
     , isdpResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setDeletionProtection@ method which the
 -- 'InstancesSetDeletionProtection' request conforms to.
@@ -64,11 +64,11 @@ type InstancesSetDeletionProtectionResource =
 -- /See:/ 'instancesSetDeletionProtection' smart constructor.
 data InstancesSetDeletionProtection =
   InstancesSetDeletionProtection'
-    { _isdpRequestId          :: !(Maybe Text)
+    { _isdpRequestId :: !(Maybe Text)
     , _isdpDeletionProtection :: !Bool
-    , _isdpProject            :: !Text
-    , _isdpZone               :: !Text
-    , _isdpResource           :: !Text
+    , _isdpProject :: !Text
+    , _isdpZone :: !Text
+    , _isdpResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

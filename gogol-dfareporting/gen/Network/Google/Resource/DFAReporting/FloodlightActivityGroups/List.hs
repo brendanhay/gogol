@@ -23,7 +23,7 @@
 -- Retrieves a list of floodlight activity groups, possibly filtered. This
 -- method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.floodlightActivityGroups.list@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
     (
     -- * REST Resource
@@ -34,9 +34,13 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
     , FloodlightActivityGroupsList
 
     -- * Request Lenses
+    , faglXgafv
+    , faglUploadProtocol
     , faglFloodlightConfigurationId
+    , faglAccessToken
     , faglAdvertiserId
     , faglSearchString
+    , faglUploadType
     , faglIds
     , faglProFileId
     , faglSortOrder
@@ -44,38 +48,46 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
     , faglSortField
     , faglType
     , faglMaxResults
+    , faglCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.list@ method which the
 -- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
-               QueryParam "floodlightConfigurationId"
-                 (Textual Int64)
-                 :>
-                 QueryParam "advertiserId" (Textual Int64) :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "sortOrder"
-                         FloodlightActivityGroupsListSortOrder
-                         :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             FloodlightActivityGroupsListSortField
-                             :>
-                             QueryParam "type" FloodlightActivityGroupsListType
-                               :>
-                               QueryParam "maxResults" (Textual Int32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON]
-                                     FloodlightActivityGroupsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "floodlightConfigurationId"
+                     (Textual Int64)
+                     :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "advertiserId" (Textual Int64) :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "sortOrder"
+                                 FloodlightActivityGroupsListSortOrder
+                                 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     FloodlightActivityGroupsListSortField
+                                     :>
+                                     QueryParam "type"
+                                       FloodlightActivityGroupsListType
+                                       :>
+                                       QueryParam "maxResults" (Textual Int32)
+                                         :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON]
+                                               FloodlightActivityGroupsListResponse
 
 -- | Retrieves a list of floodlight activity groups, possibly filtered. This
 -- method supports paging.
@@ -83,16 +95,21 @@ type FloodlightActivityGroupsListResource =
 -- /See:/ 'floodlightActivityGroupsList' smart constructor.
 data FloodlightActivityGroupsList =
   FloodlightActivityGroupsList'
-    { _faglFloodlightConfigurationId :: !(Maybe (Textual Int64))
-    , _faglAdvertiserId              :: !(Maybe (Textual Int64))
-    , _faglSearchString              :: !(Maybe Text)
-    , _faglIds                       :: !(Maybe [Textual Int64])
-    , _faglProFileId                 :: !(Textual Int64)
-    , _faglSortOrder                 :: !FloodlightActivityGroupsListSortOrder
-    , _faglPageToken                 :: !(Maybe Text)
-    , _faglSortField                 :: !FloodlightActivityGroupsListSortField
-    , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
-    , _faglMaxResults                :: !(Textual Int32)
+    { _faglXgafv :: !(Maybe Xgafv)
+    , _faglUploadProtocol :: !(Maybe Text)
+    , _faglFloodlightConfigurationId :: !(Maybe (Textual Int64))
+    , _faglAccessToken :: !(Maybe Text)
+    , _faglAdvertiserId :: !(Maybe (Textual Int64))
+    , _faglSearchString :: !(Maybe Text)
+    , _faglUploadType :: !(Maybe Text)
+    , _faglIds :: !(Maybe [Textual Int64])
+    , _faglProFileId :: !(Textual Int64)
+    , _faglSortOrder :: !FloodlightActivityGroupsListSortOrder
+    , _faglPageToken :: !(Maybe Text)
+    , _faglSortField :: !FloodlightActivityGroupsListSortField
+    , _faglType :: !(Maybe FloodlightActivityGroupsListType)
+    , _faglMaxResults :: !(Textual Int32)
+    , _faglCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -101,11 +118,19 @@ data FloodlightActivityGroupsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'faglXgafv'
+--
+-- * 'faglUploadProtocol'
+--
 -- * 'faglFloodlightConfigurationId'
+--
+-- * 'faglAccessToken'
 --
 -- * 'faglAdvertiserId'
 --
 -- * 'faglSearchString'
+--
+-- * 'faglUploadType'
 --
 -- * 'faglIds'
 --
@@ -120,14 +145,20 @@ data FloodlightActivityGroupsList =
 -- * 'faglType'
 --
 -- * 'faglMaxResults'
+--
+-- * 'faglCallback'
 floodlightActivityGroupsList
     :: Int64 -- ^ 'faglProFileId'
     -> FloodlightActivityGroupsList
 floodlightActivityGroupsList pFaglProFileId_ =
   FloodlightActivityGroupsList'
-    { _faglFloodlightConfigurationId = Nothing
+    { _faglXgafv = Nothing
+    , _faglUploadProtocol = Nothing
+    , _faglFloodlightConfigurationId = Nothing
+    , _faglAccessToken = Nothing
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing
+    , _faglUploadType = Nothing
     , _faglIds = Nothing
     , _faglProFileId = _Coerce # pFaglProFileId_
     , _faglSortOrder = FAGLSOAscending
@@ -135,8 +166,20 @@ floodlightActivityGroupsList pFaglProFileId_ =
     , _faglSortField = FAGLSFID
     , _faglType = Nothing
     , _faglMaxResults = 1000
+    , _faglCallback = Nothing
     }
 
+
+-- | V1 error format.
+faglXgafv :: Lens' FloodlightActivityGroupsList (Maybe Xgafv)
+faglXgafv
+  = lens _faglXgafv (\ s a -> s{_faglXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+faglUploadProtocol :: Lens' FloodlightActivityGroupsList (Maybe Text)
+faglUploadProtocol
+  = lens _faglUploadProtocol
+      (\ s a -> s{_faglUploadProtocol = a})
 
 -- | Select only floodlight activity groups with the specified floodlight
 -- configuration ID. Must specify either advertiserId, or
@@ -146,6 +189,12 @@ faglFloodlightConfigurationId
   = lens _faglFloodlightConfigurationId
       (\ s a -> s{_faglFloodlightConfigurationId = a})
       . mapping _Coerce
+
+-- | OAuth access token.
+faglAccessToken :: Lens' FloodlightActivityGroupsList (Maybe Text)
+faglAccessToken
+  = lens _faglAccessToken
+      (\ s a -> s{_faglAccessToken = a})
 
 -- | Select only floodlight activity groups with the specified advertiser ID.
 -- Must specify either advertiserId or floodlightConfigurationId for a
@@ -169,6 +218,12 @@ faglSearchString :: Lens' FloodlightActivityGroupsList (Maybe Text)
 faglSearchString
   = lens _faglSearchString
       (\ s a -> s{_faglSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+faglUploadType :: Lens' FloodlightActivityGroupsList (Maybe Text)
+faglUploadType
+  = lens _faglUploadType
+      (\ s a -> s{_faglUploadType = a})
 
 -- | Select only floodlight activity groups with the specified IDs. Must
 -- specify either advertiserId or floodlightConfigurationId for a non-empty
@@ -215,6 +270,11 @@ faglMaxResults
       (\ s a -> s{_faglMaxResults = a})
       . _Coerce
 
+-- | JSONP
+faglCallback :: Lens' FloodlightActivityGroupsList (Maybe Text)
+faglCallback
+  = lens _faglCallback (\ s a -> s{_faglCallback = a})
+
 instance GoogleRequest FloodlightActivityGroupsList
          where
         type Rs FloodlightActivityGroupsList =
@@ -222,15 +282,19 @@ instance GoogleRequest FloodlightActivityGroupsList
         type Scopes FloodlightActivityGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsList'{..}
-          = go _faglProFileId _faglFloodlightConfigurationId
+          = go _faglProFileId _faglXgafv _faglUploadProtocol
+              _faglFloodlightConfigurationId
+              _faglAccessToken
               _faglAdvertiserId
               _faglSearchString
+              _faglUploadType
               (_faglIds ^. _Default)
               (Just _faglSortOrder)
               _faglPageToken
               (Just _faglSortField)
               _faglType
               (Just _faglMaxResults)
+              _faglCallback
               (Just AltJSON)
               dFAReportingService
           where go

@@ -146,6 +146,9 @@ module Network.Google.FirebaseDynamicLinks
     -- ** SuffixOption
     , SuffixOption (..)
 
+    -- ** ManagedShortLinkFlaggedAttributeItem
+    , ManagedShortLinkFlaggedAttributeItem (..)
+
     -- ** DynamicLinkEventStatEvent
     , DynamicLinkEventStatEvent (..)
 
@@ -279,13 +282,13 @@ module Network.Google.FirebaseDynamicLinks
     , ManagedShortLinkVisibility (..)
     ) where
 
-import           Network.Google.FirebaseDynamicLinks.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.FirebaseDynamicLinks.GetLinkStats
-import           Network.Google.Resource.FirebaseDynamicLinks.InstallAttribution
-import           Network.Google.Resource.FirebaseDynamicLinks.ManagedShortLinks.Create
-import           Network.Google.Resource.FirebaseDynamicLinks.ReopenAttribution
-import           Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
+import Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types
+import Network.Google.Resource.FirebaseDynamicLinks.GetLinkStats
+import Network.Google.Resource.FirebaseDynamicLinks.InstallAttribution
+import Network.Google.Resource.FirebaseDynamicLinks.ManagedShortLinks.Create
+import Network.Google.Resource.FirebaseDynamicLinks.ReopenAttribution
+import Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
 
 {- $resources
 TODO

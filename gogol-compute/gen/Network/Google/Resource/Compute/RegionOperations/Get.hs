@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.RegionOperations.Get
     , rogRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionOperations.get@ method which the
 -- 'RegionOperationsGet' request conforms to.
@@ -59,9 +59,9 @@ type RegionOperationsGetResource =
 -- /See:/ 'regionOperationsGet' smart constructor.
 data RegionOperationsGet =
   RegionOperationsGet'
-    { _rogProject   :: !Text
+    { _rogProject :: !Text
     , _rogOperation :: !Text
-    , _rogRegion    :: !Text
+    , _rogRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

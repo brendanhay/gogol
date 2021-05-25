@@ -46,8 +46,8 @@ module Network.Google.Resource.FactCheckTools.Pages.List
     , plCallback
     ) where
 
-import           Network.Google.FactCheckTools.Types
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @factchecktools.pages.list@ method which the
 -- 'PagesList' request conforms to.
@@ -74,16 +74,16 @@ type PagesListResource =
 -- /See:/ 'pagesList' smart constructor.
 data PagesList =
   PagesList'
-    { _plXgafv          :: !(Maybe Xgafv)
+    { _plXgafv :: !(Maybe Xgafv)
     , _plUploadProtocol :: !(Maybe Text)
-    , _plOffSet         :: !(Maybe (Textual Int32))
-    , _plAccessToken    :: !(Maybe Text)
-    , _plURL            :: !(Maybe Text)
-    , _plUploadType     :: !(Maybe Text)
-    , _plPageToken      :: !(Maybe Text)
-    , _plOrganization   :: !(Maybe Text)
-    , _plPageSize       :: !(Maybe (Textual Int32))
-    , _plCallback       :: !(Maybe Text)
+    , _plOffSet :: !(Maybe (Textual Int32))
+    , _plAccessToken :: !(Maybe Text)
+    , _plURL :: !(Maybe Text)
+    , _plUploadType :: !(Maybe Text)
+    , _plPageToken :: !(Maybe Text)
+    , _plOrganization :: !(Maybe Text)
+    , _plPageSize :: !(Maybe (Textual Int32))
+    , _plCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

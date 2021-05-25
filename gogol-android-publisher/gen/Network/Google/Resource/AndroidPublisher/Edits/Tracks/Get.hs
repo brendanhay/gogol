@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Fetches the track configuration for the specified track type. Includes
--- the APK version codes that are in this track.
+-- Gets a track.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.get@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.tracks.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
     (
     -- * REST Resource
@@ -34,13 +33,18 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
     , EditsTracksGet
 
     -- * Request Lenses
+    , etgtXgafv
     , etgtTrack
+    , etgtUploadProtocol
     , etgtPackageName
+    , etgtAccessToken
+    , etgtUploadType
     , etgtEditId
+    , etgtCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.tracks.get@ method which the
 -- 'EditsTracksGet' request conforms to.
@@ -53,17 +57,26 @@ type EditsTracksGetResource =
                Capture "editId" Text :>
                  "tracks" :>
                    Capture "track" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Track
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Track
 
--- | Fetches the track configuration for the specified track type. Includes
--- the APK version codes that are in this track.
+-- | Gets a track.
 --
 -- /See:/ 'editsTracksGet' smart constructor.
 data EditsTracksGet =
   EditsTracksGet'
-    { _etgtTrack       :: !Text
+    { _etgtXgafv :: !(Maybe Xgafv)
+    , _etgtTrack :: !Text
+    , _etgtUploadProtocol :: !(Maybe Text)
     , _etgtPackageName :: !Text
-    , _etgtEditId      :: !Text
+    , _etgtAccessToken :: !(Maybe Text)
+    , _etgtUploadType :: !(Maybe Text)
+    , _etgtEditId :: !Text
+    , _etgtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,11 +85,21 @@ data EditsTracksGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'etgtXgafv'
+--
 -- * 'etgtTrack'
+--
+-- * 'etgtUploadProtocol'
 --
 -- * 'etgtPackageName'
 --
+-- * 'etgtAccessToken'
+--
+-- * 'etgtUploadType'
+--
 -- * 'etgtEditId'
+--
+-- * 'etgtCallback'
 editsTracksGet
     :: Text -- ^ 'etgtTrack'
     -> Text -- ^ 'etgtPackageName'
@@ -84,28 +107,60 @@ editsTracksGet
     -> EditsTracksGet
 editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
   EditsTracksGet'
-    { _etgtTrack = pEtgtTrack_
+    { _etgtXgafv = Nothing
+    , _etgtTrack = pEtgtTrack_
+    , _etgtUploadProtocol = Nothing
     , _etgtPackageName = pEtgtPackageName_
+    , _etgtAccessToken = Nothing
+    , _etgtUploadType = Nothing
     , _etgtEditId = pEtgtEditId_
+    , _etgtCallback = Nothing
     }
 
 
--- | The track to read or modify.
+-- | V1 error format.
+etgtXgafv :: Lens' EditsTracksGet (Maybe Xgafv)
+etgtXgafv
+  = lens _etgtXgafv (\ s a -> s{_etgtXgafv = a})
+
+-- | Identifier of the track.
 etgtTrack :: Lens' EditsTracksGet Text
 etgtTrack
   = lens _etgtTrack (\ s a -> s{_etgtTrack = a})
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+etgtUploadProtocol :: Lens' EditsTracksGet (Maybe Text)
+etgtUploadProtocol
+  = lens _etgtUploadProtocol
+      (\ s a -> s{_etgtUploadProtocol = a})
+
+-- | Package name of the app.
 etgtPackageName :: Lens' EditsTracksGet Text
 etgtPackageName
   = lens _etgtPackageName
       (\ s a -> s{_etgtPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+etgtAccessToken :: Lens' EditsTracksGet (Maybe Text)
+etgtAccessToken
+  = lens _etgtAccessToken
+      (\ s a -> s{_etgtAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+etgtUploadType :: Lens' EditsTracksGet (Maybe Text)
+etgtUploadType
+  = lens _etgtUploadType
+      (\ s a -> s{_etgtUploadType = a})
+
+-- | Identifier of the edit.
 etgtEditId :: Lens' EditsTracksGet Text
 etgtEditId
   = lens _etgtEditId (\ s a -> s{_etgtEditId = a})
+
+-- | JSONP
+etgtCallback :: Lens' EditsTracksGet (Maybe Text)
+etgtCallback
+  = lens _etgtCallback (\ s a -> s{_etgtCallback = a})
 
 instance GoogleRequest EditsTracksGet where
         type Rs EditsTracksGet = Track
@@ -113,6 +168,11 @@ instance GoogleRequest EditsTracksGet where
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTracksGet'{..}
           = go _etgtPackageName _etgtEditId _etgtTrack
+              _etgtXgafv
+              _etgtUploadProtocol
+              _etgtAccessToken
+              _etgtUploadType
+              _etgtCallback
               (Just AltJSON)
               androidPublisherService
           where go

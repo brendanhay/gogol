@@ -41,8 +41,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
     , prdCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.releases.delete@ method which the
 -- 'ProjectsReleasesDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsReleasesDeleteResource =
 -- /See:/ 'projectsReleasesDelete' smart constructor.
 data ProjectsReleasesDelete =
   ProjectsReleasesDelete'
-    { _prdXgafv          :: !(Maybe Xgafv)
+    { _prdXgafv :: !(Maybe Xgafv)
     , _prdUploadProtocol :: !(Maybe Text)
-    , _prdAccessToken    :: !(Maybe Text)
-    , _prdUploadType     :: !(Maybe Text)
-    , _prdName           :: !Text
-    , _prdCallback       :: !(Maybe Text)
+    , _prdAccessToken :: !(Maybe Text)
+    , _prdUploadType :: !(Maybe Text)
+    , _prdName :: !Text
+    , _prdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,7 +122,7 @@ prdUploadType
   = lens _prdUploadType
       (\ s a -> s{_prdUploadType = a})
 
--- | Resource name for the \`Release\` to delete. Format:
+-- | Required. Resource name for the \`Release\` to delete. Format:
 -- \`projects\/{project_id}\/releases\/{release_id}\`
 prdName :: Lens' ProjectsReleasesDelete Text
 prdName = lens _prdName (\ s a -> s{_prdName = a})

@@ -13,9 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Transfers user data from one user to another.
+-- Admin SDK lets administrators of enterprise domains to view and manage
+-- resources like user, groups etc. It also provides audit and usage
+-- reports of domain.
 --
--- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference>
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
 module Network.Google.DataTransfer
     (
     -- * Service Configuration
@@ -62,6 +64,9 @@ module Network.Google.DataTransfer
     , atpValue
     , atpKey
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** ApplicationsListResponse
     , ApplicationsListResponse
     , applicationsListResponse
@@ -98,19 +103,19 @@ module Network.Google.DataTransfer
     , adtApplicationTransferStatus
     ) where
 
-import           Network.Google.DataTransfer.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DataTransfer.Applications.Get
-import           Network.Google.Resource.DataTransfer.Applications.List
-import           Network.Google.Resource.DataTransfer.Transfers.Get
-import           Network.Google.Resource.DataTransfer.Transfers.Insert
-import           Network.Google.Resource.DataTransfer.Transfers.List
+import Network.Google.Prelude
+import Network.Google.DataTransfer.Types
+import Network.Google.Resource.DataTransfer.Applications.Get
+import Network.Google.Resource.DataTransfer.Applications.List
+import Network.Google.Resource.DataTransfer.Transfers.Get
+import Network.Google.Resource.DataTransfer.Transfers.Insert
+import Network.Google.Resource.DataTransfer.Transfers.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Admin Data Transfer API service.
+-- | Represents the entirety of the methods and resources available for the Admin SDK API service.
 type DataTransferAPI =
      TransfersInsertResource :<|> TransfersListResource
        :<|> TransfersGetResource

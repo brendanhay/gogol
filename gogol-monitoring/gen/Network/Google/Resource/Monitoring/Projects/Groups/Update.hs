@@ -23,7 +23,7 @@
 -- Updates an existing group. You can change any group attributes except
 -- name.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.update@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.groups.update@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Update
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Update
     , pguCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.groups.update@ method which the
 -- 'ProjectsGroupsUpdate' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsGroupsUpdateResource =
 -- /See:/ 'projectsGroupsUpdate' smart constructor.
 data ProjectsGroupsUpdate =
   ProjectsGroupsUpdate'
-    { _pguXgafv          :: !(Maybe Xgafv)
-    , _pguValidateOnly   :: !(Maybe Bool)
+    { _pguXgafv :: !(Maybe Xgafv)
+    , _pguValidateOnly :: !(Maybe Bool)
     , _pguUploadProtocol :: !(Maybe Text)
-    , _pguAccessToken    :: !(Maybe Text)
-    , _pguUploadType     :: !(Maybe Text)
-    , _pguPayload        :: !Group
-    , _pguName           :: !Text
-    , _pguCallback       :: !(Maybe Text)
+    , _pguAccessToken :: !(Maybe Text)
+    , _pguUploadType :: !(Maybe Text)
+    , _pguPayload :: !Group
+    , _pguName :: !Text
+    , _pguCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -148,10 +148,10 @@ pguPayload :: Lens' ProjectsGroupsUpdate Group
 pguPayload
   = lens _pguPayload (\ s a -> s{_pguPayload = a})
 
--- | Output only. The name of this group. The format is
--- \"projects\/{project_id_or_number}\/groups\/{group_id}\". When creating
--- a group, this field is ignored and a new name is created consisting of
--- the project specified in the call to CreateGroup and a unique {group_id}
+-- | Output only. The name of this group. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID] When creating a
+-- group, this field is ignored and a new name is created consisting of the
+-- project specified in the call to CreateGroup and a unique [GROUP_ID]
 -- that is generated automatically.
 pguName :: Lens' ProjectsGroupsUpdate Text
 pguName = lens _pguName (\ s a -> s{_pguName = a})

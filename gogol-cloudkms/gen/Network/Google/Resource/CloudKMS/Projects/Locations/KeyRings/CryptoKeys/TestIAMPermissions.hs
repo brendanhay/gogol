@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,8 +47,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.T
     , plkrcktipCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions' request conforms to.
@@ -67,21 +67,21 @@ type ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysTestIAMPermissions' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions =
   ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'
-    { _plkrcktipXgafv          :: !(Maybe Xgafv)
+    { _plkrcktipXgafv :: !(Maybe Xgafv)
     , _plkrcktipUploadProtocol :: !(Maybe Text)
-    , _plkrcktipAccessToken    :: !(Maybe Text)
-    , _plkrcktipUploadType     :: !(Maybe Text)
-    , _plkrcktipPayload        :: !TestIAMPermissionsRequest
-    , _plkrcktipResource       :: !Text
-    , _plkrcktipCallback       :: !(Maybe Text)
+    , _plkrcktipAccessToken :: !(Maybe Text)
+    , _plkrcktipUploadType :: !(Maybe Text)
+    , _plkrcktipPayload :: !TestIAMPermissionsRequest
+    , _plkrcktipResource :: !Text
+    , _plkrcktipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

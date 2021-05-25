@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.HealthChecks.Delete
     , hcdProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.healthChecks.delete@ method which the
 -- 'HealthChecksDelete' request conforms to.
@@ -59,9 +59,9 @@ type HealthChecksDeleteResource =
 -- /See:/ 'healthChecksDelete' smart constructor.
 data HealthChecksDelete =
   HealthChecksDelete'
-    { _hcdRequestId   :: !(Maybe Text)
+    { _hcdRequestId :: !(Maybe Text)
     , _hcdHealthCheck :: !Text
-    , _hcdProject     :: !Text
+    , _hcdProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

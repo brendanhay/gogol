@@ -37,15 +37,17 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.L
     , plkrcklXgafv
     , plkrcklVersionView
     , plkrcklUploadProtocol
+    , plkrcklOrderBy
     , plkrcklAccessToken
     , plkrcklUploadType
+    , plkrcklFilter
     , plkrcklPageToken
     , plkrcklPageSize
     , plkrcklCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.list@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysList' request conforms to.
@@ -55,30 +57,36 @@ type ProjectsLocationsKeyRingsCryptoKeysListResource
        Capture "parent" Text :>
          "cryptoKeys" :>
            QueryParam "$.xgafv" Xgafv :>
-             QueryParam "versionView" Text :>
+             QueryParam "versionView"
+               ProjectsLocationsKeyRingsCryptoKeysListVersionView
+               :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListCryptoKeysResponse
+                 QueryParam "orderBy" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListCryptoKeysResponse
 
 -- | Lists CryptoKeys.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysList' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysList =
   ProjectsLocationsKeyRingsCryptoKeysList'
-    { _plkrcklParent         :: !Text
-    , _plkrcklXgafv          :: !(Maybe Xgafv)
-    , _plkrcklVersionView    :: !(Maybe Text)
+    { _plkrcklParent :: !Text
+    , _plkrcklXgafv :: !(Maybe Xgafv)
+    , _plkrcklVersionView :: !(Maybe ProjectsLocationsKeyRingsCryptoKeysListVersionView)
     , _plkrcklUploadProtocol :: !(Maybe Text)
-    , _plkrcklAccessToken    :: !(Maybe Text)
-    , _plkrcklUploadType     :: !(Maybe Text)
-    , _plkrcklPageToken      :: !(Maybe Text)
-    , _plkrcklPageSize       :: !(Maybe (Textual Int32))
-    , _plkrcklCallback       :: !(Maybe Text)
+    , _plkrcklOrderBy :: !(Maybe Text)
+    , _plkrcklAccessToken :: !(Maybe Text)
+    , _plkrcklUploadType :: !(Maybe Text)
+    , _plkrcklFilter :: !(Maybe Text)
+    , _plkrcklPageToken :: !(Maybe Text)
+    , _plkrcklPageSize :: !(Maybe (Textual Int32))
+    , _plkrcklCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -95,9 +103,13 @@ data ProjectsLocationsKeyRingsCryptoKeysList =
 --
 -- * 'plkrcklUploadProtocol'
 --
+-- * 'plkrcklOrderBy'
+--
 -- * 'plkrcklAccessToken'
 --
 -- * 'plkrcklUploadType'
+--
+-- * 'plkrcklFilter'
 --
 -- * 'plkrcklPageToken'
 --
@@ -113,8 +125,10 @@ projectsLocationsKeyRingsCryptoKeysList pPlkrcklParent_ =
     , _plkrcklXgafv = Nothing
     , _plkrcklVersionView = Nothing
     , _plkrcklUploadProtocol = Nothing
+    , _plkrcklOrderBy = Nothing
     , _plkrcklAccessToken = Nothing
     , _plkrcklUploadType = Nothing
+    , _plkrcklFilter = Nothing
     , _plkrcklPageToken = Nothing
     , _plkrcklPageSize = Nothing
     , _plkrcklCallback = Nothing
@@ -134,7 +148,7 @@ plkrcklXgafv
   = lens _plkrcklXgafv (\ s a -> s{_plkrcklXgafv = a})
 
 -- | The fields of the primary version to include in the response.
-plkrcklVersionView :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Text)
+plkrcklVersionView :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe ProjectsLocationsKeyRingsCryptoKeysListVersionView)
 plkrcklVersionView
   = lens _plkrcklVersionView
       (\ s a -> s{_plkrcklVersionView = a})
@@ -144,6 +158,15 @@ plkrcklUploadProtocol :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Te
 plkrcklUploadProtocol
   = lens _plkrcklUploadProtocol
       (\ s a -> s{_plkrcklUploadProtocol = a})
+
+-- | Optional. Specify how the results should be sorted. If not specified,
+-- the results will be sorted in the default order. For more information,
+-- see [Sorting and filtering list
+-- results](https:\/\/cloud.google.com\/kms\/docs\/sorting-and-filtering).
+plkrcklOrderBy :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Text)
+plkrcklOrderBy
+  = lens _plkrcklOrderBy
+      (\ s a -> s{_plkrcklOrderBy = a})
 
 -- | OAuth access token.
 plkrcklAccessToken :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Text)
@@ -157,16 +180,24 @@ plkrcklUploadType
   = lens _plkrcklUploadType
       (\ s a -> s{_plkrcklUploadType = a})
 
--- | Optional pagination token, returned earlier via
+-- | Optional. Only include resources that match the filter in the response.
+-- For more information, see [Sorting and filtering list
+-- results](https:\/\/cloud.google.com\/kms\/docs\/sorting-and-filtering).
+plkrcklFilter :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Text)
+plkrcklFilter
+  = lens _plkrcklFilter
+      (\ s a -> s{_plkrcklFilter = a})
+
+-- | Optional. Optional pagination token, returned earlier via
 -- ListCryptoKeysResponse.next_page_token.
 plkrcklPageToken :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Text)
 plkrcklPageToken
   = lens _plkrcklPageToken
       (\ s a -> s{_plkrcklPageToken = a})
 
--- | Optional limit on the number of CryptoKeys to include in the response.
--- Further CryptoKeys can subsequently be obtained by including the
--- ListCryptoKeysResponse.next_page_token in a subsequent request. If
+-- | Optional. Optional limit on the number of CryptoKeys to include in the
+-- response. Further CryptoKeys can subsequently be obtained by including
+-- the ListCryptoKeysResponse.next_page_token in a subsequent request. If
 -- unspecified, the server will pick an appropriate default.
 plkrcklPageSize :: Lens' ProjectsLocationsKeyRingsCryptoKeysList (Maybe Int32)
 plkrcklPageSize
@@ -192,8 +223,10 @@ instance GoogleRequest
           ProjectsLocationsKeyRingsCryptoKeysList'{..}
           = go _plkrcklParent _plkrcklXgafv _plkrcklVersionView
               _plkrcklUploadProtocol
+              _plkrcklOrderBy
               _plkrcklAccessToken
               _plkrcklUploadType
+              _plkrcklFilter
               _plkrcklPageToken
               _plkrcklPageSize
               _plkrcklCallback

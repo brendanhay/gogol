@@ -14,9 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Cloud Search provides cloud-based search capabilities over G Suite data.
-    The Cloud Search API allows indexing of non-G Suite data into Cloud
-    Search.
+    Cloud Search provides cloud-based search capabilities over Google
+    Workspace data. The Cloud Search API allows indexing of non-Google
+    Workspace data into Cloud Search.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -56,6 +56,7 @@ library
         , Network.Google.Resource.CloudSearch.Indexing.Datasources.UpdateSchema
         , Network.Google.Resource.CloudSearch.Media.Upload
         , Network.Google.Resource.CloudSearch.Operations.Get
+        , Network.Google.Resource.CloudSearch.Operations.Lro.List
         , Network.Google.Resource.CloudSearch.Query.Search
         , Network.Google.Resource.CloudSearch.Query.Sources.List
         , Network.Google.Resource.CloudSearch.Query.Suggest
@@ -64,14 +65,22 @@ library
         , Network.Google.Resource.CloudSearch.Settings.Datasources.Get
         , Network.Google.Resource.CloudSearch.Settings.Datasources.List
         , Network.Google.Resource.CloudSearch.Settings.Datasources.Update
+        , Network.Google.Resource.CloudSearch.Settings.GetCustomer
         , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Create
         , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Delete
         , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Get
         , Network.Google.Resource.CloudSearch.Settings.SearchApplications.List
         , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Reset
         , Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
+        , Network.Google.Resource.CloudSearch.Settings.UpdateCustomer
         , Network.Google.Resource.CloudSearch.Stats.GetIndex
+        , Network.Google.Resource.CloudSearch.Stats.GetQuery
+        , Network.Google.Resource.CloudSearch.Stats.GetSession
+        , Network.Google.Resource.CloudSearch.Stats.GetUser
         , Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
+        , Network.Google.Resource.CloudSearch.Stats.Query.SearchApplications.Get
+        , Network.Google.Resource.CloudSearch.Stats.Session.SearchApplications.Get
+        , Network.Google.Resource.CloudSearch.Stats.User.SearchApplications.Get
 
     other-modules:
           Network.Google.CloudSearch.Types.Product

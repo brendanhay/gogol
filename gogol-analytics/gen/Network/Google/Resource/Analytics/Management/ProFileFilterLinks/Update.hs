@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
     , mpffluLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.update@ method which the
 -- 'ManagementProFileFilterLinksUpdate' request conforms to.
@@ -67,10 +67,10 @@ type ManagementProFileFilterLinksUpdateResource =
 data ManagementProFileFilterLinksUpdate =
   ManagementProFileFilterLinksUpdate'
     { _mpffluWebPropertyId :: !Text
-    , _mpffluProFileId     :: !Text
-    , _mpffluPayload       :: !ProFileFilterLink
-    , _mpffluAccountId     :: !Text
-    , _mpffluLinkId        :: !Text
+    , _mpffluProFileId :: !Text
+    , _mpffluPayload :: !ProFileFilterLink
+    , _mpffluAccountId :: !Text
+    , _mpffluLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

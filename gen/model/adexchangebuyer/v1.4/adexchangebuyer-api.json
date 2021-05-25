@@ -15,7 +15,7 @@
   "description": "Accesses your bidding-account information, submits creatives for validation, finds available direct deals, and retrieves performance reports.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/ad-exchange/buyer-rest",
-  "etag": "\"J3WqvAcMk4eQjJXvfSI4Yr8VouA/MJwOf3EG-7RF4hB9GZz8eDlZZS0\"",
+  "etag": "\"uWj2hSb4GVjzdDlAnRd2gbM1ZQ8/IVduoBfiyFTIbwq6UMkXBVfkd9k\"",
   "icons": {
     "x16": "https://www.google.com/images/icons/product/doubleclick-16.gif",
     "x32": "https://www.google.com/images/icons/product/doubleclick-32.gif"
@@ -1255,7 +1255,7 @@
       }
     }
   },
-  "revision": "20180823",
+  "revision": "20210516",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "Account": {
@@ -1570,6 +1570,23 @@
           "description": "The link to the Ad Preferences page. This is only supported for native ads.",
           "type": "string"
         },
+        "adTechnologyProviders": {
+          "properties": {
+            "detectedProviderIds": {
+              "description": "The detected ad technology provider IDs for this creative. See https://storage.googleapis.com/adx-rtb-dictionaries/providers.csv for mapping of provider ID to provided name, a privacy policy URL, and a list of domains which can be attributed to the provider. If this creative contains provider IDs that are outside of those listed in the `BidRequest.adslot.consented_providers_settings.consented_providers` field on the  Authorized Buyers Real-Time Bidding protocol or the `BidRequest.user.ext.consented_providers_settings.consented_providers` field on the OpenRTB protocol, a bid submitted for a European Economic Area (EEA) user with this creative is not compliant with the GDPR policies as mentioned in the \"Third-party Ad Technology Vendors\" section of Authorized Buyers Program Guidelines.",
+              "items": {
+                "format": "int64",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "hasUnidentifiedProvider": {
+              "description": "Whether the creative contains an unidentified ad technology provider. If true, a bid submitted for a European Economic Area (EEA) user with this creative is not compliant with the GDPR policies as mentioned in the \"Third-party Ad Technology Vendors\" section of Authorized Buyers Program Guidelines.",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
         "advertiserId": {
           "description": "Detected advertiser id, if any. Read-only. This field should not be set in requests.",
           "items": {
@@ -1584,7 +1601,7 @@
               "adexchangebuyer.creatives.insert"
             ]
           },
-          "description": "The name of the company being advertised in the creative. The value provided must exist in the advertisers.txt file.",
+          "description": "The name of the company being advertised in the creative. A list of advertisers is provided in the advertisers.txt file.",
           "type": "string"
         },
         "agencyId": {
@@ -1847,10 +1864,6 @@
               "format": "double",
               "type": "number"
             },
-            "store": {
-              "description": "The URL to the app store to purchase/download the promoted app.",
-              "type": "string"
-            },
             "videoURL": {
               "description": "The URL of the XML VAST for a native ad. Note this is a separate field from resource.video_url.",
               "type": "string"
@@ -2087,7 +2100,7 @@
       "id": "DealTerms",
       "properties": {
         "brandingType": {
-          "description": "Visibilty of the URL in bid requests.",
+          "description": "Visibility of the URL in bid requests.",
           "type": "string"
         },
         "crossListedExternalDealIdType": {
@@ -2521,6 +2534,9 @@
           "format": "int64",
           "type": "string"
         },
+        "makegoodRequestedReason": {
+          "type": "string"
+        },
         "name": {
           "description": "The name of the deal. (updatable)",
           "type": "string"
@@ -2643,6 +2659,18 @@
         "timestampMs": {
           "description": "The timestamp (ms since epoch) that this note was created. (readonly)",
           "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MobileApplication": {
+      "id": "MobileApplication",
+      "properties": {
+        "appStore": {
+          "type": "string"
+        },
+        "externalAppId": {
           "type": "string"
         }
       },
@@ -2906,6 +2934,11 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "maximumQps": {
+          "description": "The maximum QPS allocated to this pretargeting configuration, used for pretargeting-level QPS limits. By default, this is not set, which indicates that there is no QPS limit at the configuration level (a global or account-level limit may still be imposed).",
+          "format": "int64",
+          "type": "string"
         },
         "minimumViewabilityDecile": {
           "description": "Requests where the predicted viewability is below the specified decile will not match. E.g. if the buyer sets this value to 5, requests from slots where the predicted viewability is below 50% will not match. If the predicted viewability is unknown this field will be ignored.",
@@ -3366,6 +3399,9 @@
           "description": "Exchange where this publisher profile is from. E.g. AdX, Rubicon etc...",
           "type": "string"
         },
+        "forecastInventory": {
+          "type": "string"
+        },
         "googlePlusLink": {
           "description": "Link to publisher's Google+ page.",
           "type": "string"
@@ -3406,6 +3442,21 @@
         "programmaticContact": {
           "description": "Programmatic contact for the publisher profile.",
           "type": "string"
+        },
+        "publisherAppIds": {
+          "description": "The list of app IDs represented in this publisher profile. Empty if this is a parent profile. Deprecated in favor of publisher_app.",
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "publisherApps": {
+          "description": "The list of apps represented in this publisher profile. Empty if this is a parent profile.",
+          "items": {
+            "$ref": "MobileApplication"
+          },
+          "type": "array"
         },
         "publisherDomains": {
           "description": "The list of domains represented in this publisher profile. Empty if this is a parent profile.",
@@ -3532,6 +3583,9 @@
           "format": "int64",
           "type": "string"
         },
+        "requestPlatformTargetingValue": {
+          "$ref": "TargetingValueRequestPlatformTargeting"
+        },
         "stringValue": {
           "description": "The string value to exclude/include.",
           "type": "string"
@@ -3632,6 +3686,18 @@
       "id": "TargetingValueDemogGenderCriteria",
       "properties": {
         "demogGenderCriteriaIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "TargetingValueRequestPlatformTargeting": {
+      "id": "TargetingValueRequestPlatformTargeting",
+      "properties": {
+        "requestPlatforms": {
           "items": {
             "type": "string"
           },

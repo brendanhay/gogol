@@ -41,8 +41,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpd
     , ruliuMaxResults
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.listInstanceUpdates@ method which the
 -- 'RollingUpdatesListInstanceUpdates' request conforms to.
@@ -68,11 +68,11 @@ type RollingUpdatesListInstanceUpdatesResource =
 data RollingUpdatesListInstanceUpdates =
   RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate :: !Text
-    , _ruliuProject       :: !Text
-    , _ruliuZone          :: !Text
-    , _ruliuFilter        :: !(Maybe Text)
-    , _ruliuPageToken     :: !(Maybe Text)
-    , _ruliuMaxResults    :: !(Textual Word32)
+    , _ruliuProject :: !Text
+    , _ruliuZone :: !Text
+    , _ruliuFilter :: !(Maybe Text)
+    , _ruliuPageToken :: !(Maybe Text)
+    , _ruliuMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

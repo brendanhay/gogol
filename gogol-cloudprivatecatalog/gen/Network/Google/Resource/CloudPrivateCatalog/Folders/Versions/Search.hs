@@ -23,7 +23,7 @@
 -- Search Version resources that consumers have access to, within the scope
 -- of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.versions.search@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.versions.search@.
 module Network.Google.Resource.CloudPrivateCatalog.Folders.Versions.Search
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalog.Folders.Versions.Search
     , fvsCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalog.folders.versions.search@ method which the
 -- 'FoldersVersionsSearch' request conforms to.
@@ -72,15 +72,15 @@ type FoldersVersionsSearchResource =
 -- /See:/ 'foldersVersionsSearch' smart constructor.
 data FoldersVersionsSearch =
   FoldersVersionsSearch'
-    { _fvsXgafv          :: !(Maybe Xgafv)
+    { _fvsXgafv :: !(Maybe Xgafv)
     , _fvsUploadProtocol :: !(Maybe Text)
-    , _fvsAccessToken    :: !(Maybe Text)
-    , _fvsUploadType     :: !(Maybe Text)
-    , _fvsResource       :: !Text
-    , _fvsQuery          :: !(Maybe Text)
-    , _fvsPageToken      :: !(Maybe Text)
-    , _fvsPageSize       :: !(Maybe (Textual Int32))
-    , _fvsCallback       :: !(Maybe Text)
+    , _fvsAccessToken :: !(Maybe Text)
+    , _fvsUploadType :: !(Maybe Text)
+    , _fvsResource :: !Text
+    , _fvsQuery :: !(Maybe Text)
+    , _fvsPageToken :: !(Maybe Text)
+    , _fvsPageSize :: !(Maybe (Textual Int32))
+    , _fvsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

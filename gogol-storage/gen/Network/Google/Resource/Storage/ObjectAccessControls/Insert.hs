@@ -37,11 +37,12 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Insert
     , oaciPayload
     , oaciUserProject
     , oaciObject
+    , oaciProvisionalUserProject
     , oaciGeneration
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.insert@ method which the
 -- 'ObjectAccessControlsInsert' request conforms to.
@@ -54,21 +55,23 @@ type ObjectAccessControlsInsertResource =
                Capture "object" Text :>
                  "acl" :>
                    QueryParam "userProject" Text :>
-                     QueryParam "generation" (Textual Int64) :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ObjectAccessControl :>
-                           Post '[JSON] ObjectAccessControl
+                     QueryParam "provisionalUserProject" Text :>
+                       QueryParam "generation" (Textual Int64) :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ObjectAccessControl :>
+                             Post '[JSON] ObjectAccessControl
 
 -- | Creates a new ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsInsert' smart constructor.
 data ObjectAccessControlsInsert =
   ObjectAccessControlsInsert'
-    { _oaciBucket      :: !Text
-    , _oaciPayload     :: !ObjectAccessControl
+    { _oaciBucket :: !Text
+    , _oaciPayload :: !ObjectAccessControl
     , _oaciUserProject :: !(Maybe Text)
-    , _oaciObject      :: !Text
-    , _oaciGeneration  :: !(Maybe (Textual Int64))
+    , _oaciObject :: !Text
+    , _oaciProvisionalUserProject :: !(Maybe Text)
+    , _oaciGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,6 +88,8 @@ data ObjectAccessControlsInsert =
 --
 -- * 'oaciObject'
 --
+-- * 'oaciProvisionalUserProject'
+--
 -- * 'oaciGeneration'
 objectAccessControlsInsert
     :: Text -- ^ 'oaciBucket'
@@ -97,6 +102,7 @@ objectAccessControlsInsert pOaciBucket_ pOaciPayload_ pOaciObject_ =
     , _oaciPayload = pOaciPayload_
     , _oaciUserProject = Nothing
     , _oaciObject = pOaciObject_
+    , _oaciProvisionalUserProject = Nothing
     , _oaciGeneration = Nothing
     }
 
@@ -124,6 +130,13 @@ oaciObject :: Lens' ObjectAccessControlsInsert Text
 oaciObject
   = lens _oaciObject (\ s a -> s{_oaciObject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+oaciProvisionalUserProject :: Lens' ObjectAccessControlsInsert (Maybe Text)
+oaciProvisionalUserProject
+  = lens _oaciProvisionalUserProject
+      (\ s a -> s{_oaciProvisionalUserProject = a})
+
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
 oaciGeneration :: Lens' ObjectAccessControlsInsert (Maybe Int64)
@@ -141,6 +154,7 @@ instance GoogleRequest ObjectAccessControlsInsert
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsInsert'{..}
           = go _oaciBucket _oaciObject _oaciUserProject
+              _oaciProvisionalUserProject
               _oaciGeneration
               (Just AltJSON)
               _oaciPayload

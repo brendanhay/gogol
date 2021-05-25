@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT
+-- and PERMISSION_DENIED
 --
 -- /See:/ <https://cloud.google.com/kubernetes-engine/docs/concepts/add-on/service-broker Service Broker API Reference> for @servicebroker.setIamPolicy@.
 module Network.Google.Resource.ServiceBroker.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.ServiceBroker.SetIAMPolicy
     , sipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceBroker.Types
+import Network.Google.Prelude
+import Network.Google.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.setIamPolicy@ method which the
 -- 'SetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type SetIAMPolicyResource =
                        Post '[JSON] GoogleIAMV1__Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT
+-- and PERMISSION_DENIED
 --
 -- /See:/ 'setIAMPolicy' smart constructor.
 data SetIAMPolicy =
   SetIAMPolicy'
-    { _sipXgafv          :: !(Maybe Xgafv)
+    { _sipXgafv :: !(Maybe Xgafv)
     , _sipUploadProtocol :: !(Maybe Text)
-    , _sipAccessToken    :: !(Maybe Text)
-    , _sipUploadType     :: !(Maybe Text)
-    , _sipPayload        :: !GoogleIAMV1__SetIAMPolicyRequest
-    , _sipResource       :: !Text
-    , _sipCallback       :: !(Maybe Text)
+    , _sipAccessToken :: !(Maybe Text)
+    , _sipUploadType :: !(Maybe Text)
+    , _sipPayload :: !GoogleIAMV1__SetIAMPolicyRequest
+    , _sipResource :: !Text
+    , _sipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

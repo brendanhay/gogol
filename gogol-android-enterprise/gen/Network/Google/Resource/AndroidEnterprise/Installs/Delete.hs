@@ -35,14 +35,19 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Delete
     , InstallsDelete
 
     -- * Request Lenses
+    , idXgafv
+    , idUploadProtocol
     , idEnterpriseId
+    , idAccessToken
+    , idUploadType
     , idUserId
     , idInstallId
     , idDeviceId
+    , idCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.delete@ method which the
 -- 'InstallsDelete' request conforms to.
@@ -57,7 +62,12 @@ type InstallsDeleteResource =
                    Capture "deviceId" Text :>
                      "installs" :>
                        Capture "installId" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Requests to remove an app from a device. A call to get or list will
 -- still show the app as installed on the device until it is actually
@@ -66,10 +76,15 @@ type InstallsDeleteResource =
 -- /See:/ 'installsDelete' smart constructor.
 data InstallsDelete =
   InstallsDelete'
-    { _idEnterpriseId :: !Text
-    , _idUserId       :: !Text
-    , _idInstallId    :: !Text
-    , _idDeviceId     :: !Text
+    { _idXgafv :: !(Maybe Xgafv)
+    , _idUploadProtocol :: !(Maybe Text)
+    , _idEnterpriseId :: !Text
+    , _idAccessToken :: !(Maybe Text)
+    , _idUploadType :: !(Maybe Text)
+    , _idUserId :: !Text
+    , _idInstallId :: !Text
+    , _idDeviceId :: !Text
+    , _idCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,13 +93,23 @@ data InstallsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'idXgafv'
+--
+-- * 'idUploadProtocol'
+--
 -- * 'idEnterpriseId'
+--
+-- * 'idAccessToken'
+--
+-- * 'idUploadType'
 --
 -- * 'idUserId'
 --
 -- * 'idInstallId'
 --
 -- * 'idDeviceId'
+--
+-- * 'idCallback'
 installsDelete
     :: Text -- ^ 'idEnterpriseId'
     -> Text -- ^ 'idUserId'
@@ -93,18 +118,44 @@ installsDelete
     -> InstallsDelete
 installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
   InstallsDelete'
-    { _idEnterpriseId = pIdEnterpriseId_
+    { _idXgafv = Nothing
+    , _idUploadProtocol = Nothing
+    , _idEnterpriseId = pIdEnterpriseId_
+    , _idAccessToken = Nothing
+    , _idUploadType = Nothing
     , _idUserId = pIdUserId_
     , _idInstallId = pIdInstallId_
     , _idDeviceId = pIdDeviceId_
+    , _idCallback = Nothing
     }
 
+
+-- | V1 error format.
+idXgafv :: Lens' InstallsDelete (Maybe Xgafv)
+idXgafv = lens _idXgafv (\ s a -> s{_idXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+idUploadProtocol :: Lens' InstallsDelete (Maybe Text)
+idUploadProtocol
+  = lens _idUploadProtocol
+      (\ s a -> s{_idUploadProtocol = a})
 
 -- | The ID of the enterprise.
 idEnterpriseId :: Lens' InstallsDelete Text
 idEnterpriseId
   = lens _idEnterpriseId
       (\ s a -> s{_idEnterpriseId = a})
+
+-- | OAuth access token.
+idAccessToken :: Lens' InstallsDelete (Maybe Text)
+idAccessToken
+  = lens _idAccessToken
+      (\ s a -> s{_idAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+idUploadType :: Lens' InstallsDelete (Maybe Text)
+idUploadType
+  = lens _idUploadType (\ s a -> s{_idUploadType = a})
 
 -- | The ID of the user.
 idUserId :: Lens' InstallsDelete Text
@@ -121,6 +172,11 @@ idDeviceId :: Lens' InstallsDelete Text
 idDeviceId
   = lens _idDeviceId (\ s a -> s{_idDeviceId = a})
 
+-- | JSONP
+idCallback :: Lens' InstallsDelete (Maybe Text)
+idCallback
+  = lens _idCallback (\ s a -> s{_idCallback = a})
+
 instance GoogleRequest InstallsDelete where
         type Rs InstallsDelete = ()
         type Scopes InstallsDelete =
@@ -128,6 +184,11 @@ instance GoogleRequest InstallsDelete where
         requestClient InstallsDelete'{..}
           = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId
+              _idXgafv
+              _idUploadProtocol
+              _idAccessToken
+              _idUploadType
+              _idCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -45,8 +45,8 @@ module Network.Google.Resource.IAP.SetIAMPolicy
     , sipCallback
     ) where
 
-import           Network.Google.IAP.Types
-import           Network.Google.Prelude
+import Network.Google.IAP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iap.setIamPolicy@ method which the
 -- 'SetIAMPolicy' request conforms to.
@@ -70,13 +70,13 @@ type SetIAMPolicyResource =
 -- /See:/ 'setIAMPolicy' smart constructor.
 data SetIAMPolicy =
   SetIAMPolicy'
-    { _sipXgafv          :: !(Maybe Xgafv)
+    { _sipXgafv :: !(Maybe Xgafv)
     , _sipUploadProtocol :: !(Maybe Text)
-    , _sipAccessToken    :: !(Maybe Text)
-    , _sipUploadType     :: !(Maybe Text)
-    , _sipPayload        :: !SetIAMPolicyRequest
-    , _sipResource       :: !Text
-    , _sipCallback       :: !(Maybe Text)
+    , _sipAccessToken :: !(Maybe Text)
+    , _sipUploadType :: !(Maybe Text)
+    , _sipPayload :: !SetIAMPolicyRequest
+    , _sipResource :: !Text
+    , _sipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

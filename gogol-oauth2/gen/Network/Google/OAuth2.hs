@@ -15,7 +15,7 @@
 --
 -- Obtains end-user authorization grants for use with other Google APIs.
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference>
+-- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference>
 module Network.Google.OAuth2
     (
     -- * Service Configuration
@@ -24,15 +24,12 @@ module Network.Google.OAuth2
     -- * OAuth Scopes
     , userInfoProFileScope
     , userInfoEmailScope
-    , plusMeScope
+    , openidScope
 
     -- * API Declaration
     , OAuth2API
 
     -- * Methods
-
-    -- ** oauth2.getCertForOpenIdConnect
-    , module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
 
     -- ** oauth2.tokeninfo
     , module Network.Google.Method.OAuth2.TokenInfo
@@ -47,37 +44,9 @@ module Network.Google.OAuth2
 
     -- * Types
 
-    -- ** TokenInfo
-    , TokenInfo
-    , tokenInfo
-    , tiAudience
-    , tiEmail
-    , tiExpiresIn
-    , tiAccessType
-    , tiScope
-    , tiVerifiedEmail
-    , tiUserId
-    , tiTokenHandle
-    , tiIssuedTo
-
-    -- ** JWK
-    , JWK
-    , jwk
-    , jKeys
-
-    -- ** JWKKeysItem
-    , JWKKeysItem
-    , jwkKeysItem
-    , jkiAlg
-    , jkiUse
-    , jkiKid
-    , jkiN
-    , jkiE
-    , jkiKty
-
-    -- ** UserInfoplus
-    , UserInfoplus
-    , userInfoplus
+    -- ** UserInfo
+    , UserInfo
+    , userInfo
     , uiHd
     , uiEmail
     , uiLink
@@ -89,14 +58,24 @@ module Network.Google.OAuth2
     , uiName
     , uiVerifiedEmail
     , uiId
+
+    -- ** TokenInfo
+    , TokenInfo
+    , tokenInfo
+    , tiAudience
+    , tiEmail
+    , tiExpiresIn
+    , tiScope
+    , tiVerifiedEmail
+    , tiUserId
+    , tiIssuedTo
     ) where
 
-import           Network.Google.Method.OAuth2.GetCertForOpenIdConnect
-import           Network.Google.Method.OAuth2.TokenInfo
-import           Network.Google.OAuth2.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.OAuth2.UserInfo.Get
-import           Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
+import Network.Google.Prelude
+import Network.Google.Method.OAuth2.TokenInfo
+import Network.Google.OAuth2.Types
+import Network.Google.Resource.OAuth2.UserInfo.Get
+import Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 
 {- $resources
 TODO
@@ -105,5 +84,4 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Google OAuth2 API service.
 type OAuth2API =
      UserInfoV2MeGetResource :<|> UserInfoGetResource :<|>
-       GetCertForOpenIdConnectMethod
-       :<|> TokenInfoMethod
+       TokenInfoMethod

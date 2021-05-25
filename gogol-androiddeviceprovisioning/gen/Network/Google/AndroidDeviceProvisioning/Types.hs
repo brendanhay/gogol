@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -203,11 +203,13 @@ module Network.Google.AndroidDeviceProvisioning.Types
     -- * Company
     , Company
     , company
+    , cLanguageCode
     , cCompanyId
     , cCompanyName
     , cOwnerEmails
     , cTermsStatus
     , cName
+    , cSkipWelcomeEmail
     , cAdminEmails
 
     -- * Xgafv
@@ -226,6 +228,7 @@ module Network.Google.AndroidDeviceProvisioning.Types
     , DeviceClaim
     , deviceClaim
     , dcSectionType
+    , dcAdditionalService
     , dcVacationModeExpireTime
     , dcVacationModeStartTime
     , dcOwnerCompanyId
@@ -321,6 +324,9 @@ module Network.Google.AndroidDeviceProvisioning.Types
     , cldrNextPageToken
     , cldrDevices
 
+    -- * DeviceClaimAdditionalService
+    , DeviceClaimAdditionalService (..)
+
     -- * UpdateDeviceMetadataInBatchRequest
     , UpdateDeviceMetadataInBatchRequest
     , updateDeviceMetadataInBatchRequest
@@ -349,9 +355,9 @@ module Network.Google.AndroidDeviceProvisioning.Types
     , DevicesLongRunningOperationMetadataProcessingStatus (..)
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types.Product
-import           Network.Google.AndroidDeviceProvisioning.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types.Product
+import Network.Google.AndroidDeviceProvisioning.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Android Device Provisioning Partner API. This contains the host and root path used as a starting point for constructing service requests.
 androidDeviceProvisioningService :: ServiceConfig

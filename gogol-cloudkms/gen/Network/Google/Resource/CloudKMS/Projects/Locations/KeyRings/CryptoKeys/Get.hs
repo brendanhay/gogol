@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.G
     , plkrckgCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.get@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysGet' request conforms to.
@@ -63,12 +63,12 @@ type ProjectsLocationsKeyRingsCryptoKeysGetResource =
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysGet' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysGet =
   ProjectsLocationsKeyRingsCryptoKeysGet'
-    { _plkrckgXgafv          :: !(Maybe Xgafv)
+    { _plkrckgXgafv :: !(Maybe Xgafv)
     , _plkrckgUploadProtocol :: !(Maybe Text)
-    , _plkrckgAccessToken    :: !(Maybe Text)
-    , _plkrckgUploadType     :: !(Maybe Text)
-    , _plkrckgName           :: !Text
-    , _plkrckgCallback       :: !(Maybe Text)
+    , _plkrckgAccessToken :: !(Maybe Text)
+    , _plkrckgUploadType :: !(Maybe Text)
+    , _plkrckgName :: !Text
+    , _plkrckgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,7 +125,7 @@ plkrckgUploadType
   = lens _plkrckgUploadType
       (\ s a -> s{_plkrckgUploadType = a})
 
--- | The name of the CryptoKey to get.
+-- | Required. The name of the CryptoKey to get.
 plkrckgName :: Lens' ProjectsLocationsKeyRingsCryptoKeysGet Text
 plkrckgName
   = lens _plkrckgName (\ s a -> s{_plkrckgName = a})

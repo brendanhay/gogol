@@ -55,8 +55,8 @@ module Network.Google.Resource.Slides.Presentations.BatchUpdate
     , pbuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Slides.Types
+import Network.Google.Prelude
+import Network.Google.Slides.Types
 
 -- | A resource alias for @slides.presentations.batchUpdate@ method which the
 -- 'PresentationsBatchUpdate' request conforms to.
@@ -91,13 +91,13 @@ type PresentationsBatchUpdateResource =
 -- /See:/ 'presentationsBatchUpdate' smart constructor.
 data PresentationsBatchUpdate =
   PresentationsBatchUpdate'
-    { _pbuXgafv          :: !(Maybe Xgafv)
+    { _pbuXgafv :: !(Maybe Xgafv)
     , _pbuUploadProtocol :: !(Maybe Text)
-    , _pbuAccessToken    :: !(Maybe Text)
-    , _pbuUploadType     :: !(Maybe Text)
+    , _pbuAccessToken :: !(Maybe Text)
+    , _pbuUploadType :: !(Maybe Text)
     , _pbuPresentationId :: !Text
-    , _pbuPayload        :: !BatchUpdatePresentationRequest
-    , _pbuCallback       :: !(Maybe Text)
+    , _pbuPayload :: !BatchUpdatePresentationRequest
+    , _pbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

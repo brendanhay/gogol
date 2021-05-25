@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the existing snapshots. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
+-- Lists the existing snapshots. Snapshots are used in [Seek](
+-- https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview) operations,
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
@@ -47,8 +47,8 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.List
     , pslsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.snapshots.list@ method which the
 -- 'ProjectsSnapshotsList' request conforms to.
@@ -66,8 +66,8 @@ type ProjectsSnapshotsListResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListSnapshotsResponse
 
--- | Lists the existing snapshots. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
+-- | Lists the existing snapshots. Snapshots are used in [Seek](
+-- https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview) operations,
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
@@ -75,14 +75,14 @@ type ProjectsSnapshotsListResource =
 -- /See:/ 'projectsSnapshotsList' smart constructor.
 data ProjectsSnapshotsList =
   ProjectsSnapshotsList'
-    { _pslsXgafv          :: !(Maybe Xgafv)
+    { _pslsXgafv :: !(Maybe Xgafv)
     , _pslsUploadProtocol :: !(Maybe Text)
-    , _pslsProject        :: !Text
-    , _pslsAccessToken    :: !(Maybe Text)
-    , _pslsUploadType     :: !(Maybe Text)
-    , _pslsPageToken      :: !(Maybe Text)
-    , _pslsPageSize       :: !(Maybe (Textual Int32))
-    , _pslsCallback       :: !(Maybe Text)
+    , _pslsProject :: !Text
+    , _pslsAccessToken :: !(Maybe Text)
+    , _pslsUploadType :: !(Maybe Text)
+    , _pslsPageToken :: !(Maybe Text)
+    , _pslsPageSize :: !(Maybe (Textual Int32))
+    , _pslsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -133,7 +133,7 @@ pslsUploadProtocol
   = lens _pslsUploadProtocol
       (\ s a -> s{_pslsUploadProtocol = a})
 
--- | The name of the project in which to list snapshots. Format is
+-- | Required. The name of the project in which to list snapshots. Format is
 -- \`projects\/{project-id}\`.
 pslsProject :: Lens' ProjectsSnapshotsList Text
 pslsProject

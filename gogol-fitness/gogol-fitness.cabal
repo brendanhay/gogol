@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Stores and accesses user data in the fitness store from apps on any
-    platform.
+    The Fitness API for managing users\' fitness tracking data.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

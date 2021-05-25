@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the permissions testable on a resource. A permission is testable
--- if it can be tested for an identity on a resource.
+-- Lists every permission that you can test on a resource. A permission is
+-- testable if you can check whether a member has that permission on the
+-- resource.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.permissions.queryTestablePermissions@.
 module Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
@@ -42,8 +43,8 @@ module Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
     , pqtpCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.permissions.queryTestablePermissions@ method which the
 -- 'PermissionsQueryTestablePermissions' request conforms to.
@@ -59,18 +60,19 @@ type PermissionsQueryTestablePermissionsResource =
                      ReqBody '[JSON] QueryTestablePermissionsRequest :>
                        Post '[JSON] QueryTestablePermissionsResponse
 
--- | Lists the permissions testable on a resource. A permission is testable
--- if it can be tested for an identity on a resource.
+-- | Lists every permission that you can test on a resource. A permission is
+-- testable if you can check whether a member has that permission on the
+-- resource.
 --
 -- /See:/ 'permissionsQueryTestablePermissions' smart constructor.
 data PermissionsQueryTestablePermissions =
   PermissionsQueryTestablePermissions'
-    { _pqtpXgafv          :: !(Maybe Xgafv)
+    { _pqtpXgafv :: !(Maybe Xgafv)
     , _pqtpUploadProtocol :: !(Maybe Text)
-    , _pqtpAccessToken    :: !(Maybe Text)
-    , _pqtpUploadType     :: !(Maybe Text)
-    , _pqtpPayload        :: !QueryTestablePermissionsRequest
-    , _pqtpCallback       :: !(Maybe Text)
+    , _pqtpAccessToken :: !(Maybe Text)
+    , _pqtpUploadType :: !(Maybe Text)
+    , _pqtpPayload :: !QueryTestablePermissionsRequest
+    , _pqtpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -17,8 +17,8 @@
 --
 module Network.Google.Plus.Types.Product where
 
-import           Network.Google.Plus.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Plus.Types.Sum
+import Network.Google.Prelude
 
 -- | The service provider that initially published this activity.
 --
@@ -58,7 +58,7 @@ instance ToJSON ActivityProvider where
 -- /See:/ 'activityObjectAttachmentsItemEmbed' smart constructor.
 data ActivityObjectAttachmentsItemEmbed =
   ActivityObjectAttachmentsItemEmbed'
-    { _aoaieURL  :: !(Maybe Text)
+    { _aoaieURL :: !(Maybe Text)
     , _aoaieType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -235,7 +235,7 @@ instance ToJSON
 data ActivityObjectPlusoners =
   ActivityObjectPlusoners'
     { _aopTotalItems :: !(Maybe (Textual Word32))
-    , _aopSelfLink   :: !(Maybe Text)
+    , _aopSelfLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -284,7 +284,7 @@ instance ToJSON ActivityObjectPlusoners where
 data PersonEmailsItem =
   PersonEmailsItem'
     { _peiValue :: !(Maybe Text)
-    , _peiType  :: !(Maybe Text)
+    , _peiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -367,9 +367,9 @@ instance ToJSON CommentActorImage where
 data ActivityObjectAttachmentsItemThumbnailsItemImage =
   ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight :: !(Maybe (Textual Word32))
-    , _aoaitiiURL    :: !(Maybe Text)
-    , _aoaitiiWidth  :: !(Maybe (Textual Word32))
-    , _aoaitiiType   :: !(Maybe Text)
+    , _aoaitiiURL :: !(Maybe Text)
+    , _aoaitiiWidth :: !(Maybe (Textual Word32))
+    , _aoaitiiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -448,7 +448,7 @@ instance ToJSON
 -- /See:/ 'placePosition' smart constructor.
 data PlacePosition =
   PlacePosition'
-    { _ppLatitude  :: !(Maybe (Textual Double))
+    { _ppLatitude :: !(Maybe (Textual Double))
     , _ppLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -496,7 +496,7 @@ instance ToJSON PlacePosition where
 -- /See:/ 'personPlacesLivedItem' smart constructor.
 data PersonPlacesLivedItem =
   PersonPlacesLivedItem'
-    { _ppliValue   :: !(Maybe Text)
+    { _ppliValue :: !(Maybe Text)
     , _ppliPrimary :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -589,36 +589,36 @@ instance ToJSON ActivityActorClientSpecificActorInfo
 -- /See:/ 'person' smart constructor.
 data Person =
   Person'
-    { _pCurrentLocation    :: !(Maybe Text)
-    , _pAgeRange           :: !(Maybe PersonAgeRange)
-    , _pEtag               :: !(Maybe Text)
-    , _pImage              :: !(Maybe PersonImage)
-    , _pBraggingRights     :: !(Maybe Text)
-    , _pPlacesLived        :: !(Maybe [PersonPlacesLivedItem])
-    , _pPlusOneCount       :: !(Maybe (Textual Int32))
-    , _pObjectType         :: !(Maybe Text)
-    , _pCover              :: !(Maybe PersonCover)
-    , _pKind               :: !Text
+    { _pCurrentLocation :: !(Maybe Text)
+    , _pAgeRange :: !(Maybe PersonAgeRange)
+    , _pEtag :: !(Maybe Text)
+    , _pImage :: !(Maybe PersonImage)
+    , _pBraggingRights :: !(Maybe Text)
+    , _pPlacesLived :: !(Maybe [PersonPlacesLivedItem])
+    , _pPlusOneCount :: !(Maybe (Textual Int32))
+    , _pObjectType :: !(Maybe Text)
+    , _pCover :: !(Maybe PersonCover)
+    , _pKind :: !Text
     , _pRelationshipStatus :: !(Maybe Text)
-    , _pURLs               :: !(Maybe [PersonURLsItem])
-    , _pDomain             :: !(Maybe Text)
-    , _pURL                :: !(Maybe Text)
-    , _pVerified           :: !(Maybe Bool)
-    , _pBirthday           :: !(Maybe Text)
-    , _pIsPlusUser         :: !(Maybe Bool)
-    , _pTagline            :: !(Maybe Text)
-    , _pGender             :: !(Maybe Text)
-    , _pName               :: !(Maybe PersonName)
-    , _pEmails             :: !(Maybe [PersonEmailsItem])
-    , _pOccupation         :: !(Maybe Text)
-    , _pSkills             :: !(Maybe Text)
-    , _pLanguage           :: !(Maybe Text)
-    , _pAboutMe            :: !(Maybe Text)
-    , _pDisplayName        :: !(Maybe Text)
-    , _pId                 :: !(Maybe Text)
-    , _pNickname           :: !(Maybe Text)
-    , _pOrganizations      :: !(Maybe [PersonOrganizationsItem])
-    , _pCircledByCount     :: !(Maybe (Textual Int32))
+    , _pURLs :: !(Maybe [PersonURLsItem])
+    , _pDomain :: !(Maybe Text)
+    , _pURL :: !(Maybe Text)
+    , _pVerified :: !(Maybe Bool)
+    , _pBirthday :: !(Maybe Text)
+    , _pIsPlusUser :: !(Maybe Bool)
+    , _pTagline :: !(Maybe Text)
+    , _pGender :: !(Maybe Text)
+    , _pName :: !(Maybe PersonName)
+    , _pEmails :: !(Maybe [PersonEmailsItem])
+    , _pOccupation :: !(Maybe Text)
+    , _pSkills :: !(Maybe Text)
+    , _pLanguage :: !(Maybe Text)
+    , _pAboutMe :: !(Maybe Text)
+    , _pDisplayName :: !(Maybe Text)
+    , _pId :: !(Maybe Text)
+    , _pNickname :: !(Maybe Text)
+    , _pOrganizations :: !(Maybe [PersonOrganizationsItem])
+    , _pCircledByCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -967,9 +967,9 @@ instance ToJSON Person where
 data ActivityObjectAttachmentsItemImage =
   ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight :: !(Maybe (Textual Word32))
-    , _aoaiiURL    :: !(Maybe Text)
-    , _aoaiiWidth  :: !(Maybe (Textual Word32))
-    , _aoaiiType   :: !(Maybe Text)
+    , _aoaiiURL :: !(Maybe Text)
+    , _aoaiiWidth :: !(Maybe (Textual Word32))
+    , _aoaiiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1043,11 +1043,11 @@ instance ToJSON ActivityObjectAttachmentsItemImage
 data CommentActor =
   CommentActor'
     { _caClientSpecificActorInfo :: !(Maybe CommentActorClientSpecificActorInfo)
-    , _caImage                   :: !(Maybe CommentActorImage)
-    , _caURL                     :: !(Maybe Text)
-    , _caDisplayName             :: !(Maybe Text)
-    , _caId                      :: !(Maybe Text)
-    , _caVerification            :: !(Maybe CommentActorVerification)
+    , _caImage :: !(Maybe CommentActorImage)
+    , _caURL :: !(Maybe Text)
+    , _caDisplayName :: !(Maybe Text)
+    , _caId :: !(Maybe Text)
+    , _caVerification :: !(Maybe CommentActorVerification)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1137,16 +1137,16 @@ instance ToJSON CommentActor where
 -- /See:/ 'activityObject' smart constructor.
 data ActivityObject =
   ActivityObject'
-    { _aoPlusoners       :: !(Maybe ActivityObjectPlusoners)
-    , _aoAttachments     :: !(Maybe [ActivityObjectAttachmentsItem])
-    , _aoObjectType      :: !(Maybe Text)
+    { _aoPlusoners :: !(Maybe ActivityObjectPlusoners)
+    , _aoAttachments :: !(Maybe [ActivityObjectAttachmentsItem])
+    , _aoObjectType :: !(Maybe Text)
     , _aoOriginalContent :: !(Maybe Text)
-    , _aoURL             :: !(Maybe Text)
-    , _aoActor           :: !(Maybe ActivityObjectActor)
-    , _aoContent         :: !(Maybe Text)
-    , _aoReplies         :: !(Maybe ActivityObjectReplies)
-    , _aoId              :: !(Maybe Text)
-    , _aoResharers       :: !(Maybe ActivityObjectResharers)
+    , _aoURL :: !(Maybe Text)
+    , _aoActor :: !(Maybe ActivityObjectActor)
+    , _aoContent :: !(Maybe Text)
+    , _aoReplies :: !(Maybe ActivityObjectReplies)
+    , _aoId :: !(Maybe Text)
+    , _aoResharers :: !(Maybe ActivityObjectResharers)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1286,11 +1286,11 @@ instance ToJSON ActivityObject where
 data ActivityObjectActor =
   ActivityObjectActor'
     { _aoaClientSpecificActorInfo :: !(Maybe ActivityObjectActorClientSpecificActorInfo)
-    , _aoaImage                   :: !(Maybe ActivityObjectActorImage)
-    , _aoaURL                     :: !(Maybe Text)
-    , _aoaDisplayName             :: !(Maybe Text)
-    , _aoaId                      :: !(Maybe Text)
-    , _aoaVerification            :: !(Maybe ActivityObjectActorVerification)
+    , _aoaImage :: !(Maybe ActivityObjectActorImage)
+    , _aoaURL :: !(Maybe Text)
+    , _aoaDisplayName :: !(Maybe Text)
+    , _aoaId :: !(Maybe Text)
+    , _aoaVerification :: !(Maybe ActivityObjectActorVerification)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1381,9 +1381,9 @@ instance ToJSON ActivityObjectActor where
 data ActivityObjectAttachmentsItemFullImage =
   ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight :: !(Maybe (Textual Word32))
-    , _aoaifiURL    :: !(Maybe Text)
-    , _aoaifiWidth  :: !(Maybe (Textual Word32))
-    , _aoaifiType   :: !(Maybe Text)
+    , _aoaifiURL :: !(Maybe Text)
+    , _aoaifiWidth :: !(Maybe (Textual Word32))
+    , _aoaifiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1493,13 +1493,13 @@ instance ToJSON ActivityActorImage where
 -- /See:/ 'peopleFeed' smart constructor.
 data PeopleFeed =
   PeopleFeed'
-    { _pfTotalItems    :: !(Maybe (Textual Int32))
-    , _pfEtag          :: !(Maybe Text)
+    { _pfTotalItems :: !(Maybe (Textual Int32))
+    , _pfEtag :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
-    , _pfKind          :: !Text
-    , _pfItems         :: !(Maybe [Person])
-    , _pfSelfLink      :: !(Maybe Text)
-    , _pfTitle         :: !(Maybe Text)
+    , _pfKind :: !Text
+    , _pfItems :: !(Maybe [Person])
+    , _pfSelfLink :: !(Maybe Text)
+    , _pfTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1606,8 +1606,8 @@ instance ToJSON PeopleFeed where
 data PersonCoverCoverPhoto =
   PersonCoverCoverPhoto'
     { _pccpHeight :: !(Maybe (Textual Int32))
-    , _pccpURL    :: !(Maybe Text)
-    , _pccpWidth  :: !(Maybe (Textual Int32))
+    , _pccpURL :: !(Maybe Text)
+    , _pccpWidth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1799,7 +1799,7 @@ instance ToJSON
 data ActivityObjectReplies =
   ActivityObjectReplies'
     { _aorTotalItems :: !(Maybe (Textual Word32))
-    , _aorSelfLink   :: !(Maybe Text)
+    , _aorSelfLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1935,15 +1935,15 @@ instance ToJSON
 -- /See:/ 'activityObjectAttachmentsItem' smart constructor.
 data ActivityObjectAttachmentsItem =
   ActivityObjectAttachmentsItem'
-    { _aFullImage   :: !(Maybe ActivityObjectAttachmentsItemFullImage)
-    , _aImage       :: !(Maybe ActivityObjectAttachmentsItemImage)
-    , _aObjectType  :: !(Maybe Text)
-    , _aURL         :: !(Maybe Text)
-    , _aEmbed       :: !(Maybe ActivityObjectAttachmentsItemEmbed)
-    , _aContent     :: !(Maybe Text)
-    , _aThumbnails  :: !(Maybe [ActivityObjectAttachmentsItemThumbnailsItem])
+    { _aFullImage :: !(Maybe ActivityObjectAttachmentsItemFullImage)
+    , _aImage :: !(Maybe ActivityObjectAttachmentsItemImage)
+    , _aObjectType :: !(Maybe Text)
+    , _aURL :: !(Maybe Text)
+    , _aEmbed :: !(Maybe ActivityObjectAttachmentsItemEmbed)
+    , _aContent :: !(Maybe Text)
+    , _aThumbnails :: !(Maybe [ActivityObjectAttachmentsItemThumbnailsItem])
     , _aDisplayName :: !(Maybe Text)
-    , _aId          :: !(Maybe Text)
+    , _aId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2064,15 +2064,15 @@ instance ToJSON ActivityObjectAttachmentsItem where
 -- /See:/ 'activityFeed' smart constructor.
 data ActivityFeed =
   ActivityFeed'
-    { _afEtag          :: !(Maybe Text)
+    { _afEtag :: !(Maybe Text)
     , _afNextPageToken :: !(Maybe Text)
-    , _afNextLink      :: !(Maybe Text)
-    , _afKind          :: !Text
-    , _afItems         :: !(Maybe [Activity])
-    , _afSelfLink      :: !(Maybe Text)
-    , _afId            :: !(Maybe Text)
-    , _afUpdated       :: !(Maybe DateTime')
-    , _afTitle         :: !(Maybe Text)
+    , _afNextLink :: !(Maybe Text)
+    , _afKind :: !Text
+    , _afItems :: !(Maybe [Activity])
+    , _afSelfLink :: !(Maybe Text)
+    , _afId :: !(Maybe Text)
+    , _afUpdated :: !(Maybe DateTime')
+    , _afTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2236,11 +2236,11 @@ instance ToJSON ActivityObjectActorVerification where
 -- /See:/ 'personName' smart constructor.
 data PersonName =
   PersonName'
-    { _pnGivenName       :: !(Maybe Text)
-    , _pnMiddleName      :: !(Maybe Text)
-    , _pnFormatted       :: !(Maybe Text)
+    { _pnGivenName :: !(Maybe Text)
+    , _pnMiddleName :: !(Maybe Text)
+    , _pnFormatted :: !(Maybe Text)
     , _pnHonorificPrefix :: !(Maybe Text)
-    , _pnFamilyName      :: !(Maybe Text)
+    , _pnFamilyName :: !(Maybe Text)
     , _pnHonorificSuffix :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2333,7 +2333,7 @@ instance ToJSON PersonName where
 -- /See:/ 'personImage' smart constructor.
 data PersonImage =
   PersonImage'
-    { _piURL       :: !(Maybe Text)
+    { _piURL :: !(Maybe Text)
     , _piIsDefault :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2428,8 +2428,8 @@ instance ToJSON
 data PlusACLentryResource =
   PlusACLentryResource'
     { _parDisplayName :: !(Maybe Text)
-    , _parId          :: !(Maybe Text)
-    , _parType        :: !(Maybe Text)
+    , _parId :: !(Maybe Text)
+    , _parType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2490,26 +2490,26 @@ instance ToJSON PlusACLentryResource where
 -- /See:/ 'activity' smart constructor.
 data Activity =
   Activity'
-    { _actAccess          :: !(Maybe ACL)
-    , _actPlaceName       :: !(Maybe Text)
-    , _actEtag            :: !(Maybe Text)
-    , _actAnnotation      :: !(Maybe Text)
-    , _actLocation        :: !(Maybe Place)
-    , _actGeocode         :: !(Maybe Text)
-    , _actKind            :: !Text
-    , _actRadius          :: !(Maybe Text)
-    , _actPublished       :: !(Maybe DateTime')
-    , _actURL             :: !(Maybe Text)
-    , _actActor           :: !(Maybe ActivityActor)
-    , _actAddress         :: !(Maybe Text)
-    , _actObject          :: !(Maybe ActivityObject)
-    , _actId              :: !(Maybe Text)
-    , _actUpdated         :: !(Maybe DateTime')
-    , _actTitle           :: !(Maybe Text)
-    , _actVerb            :: !(Maybe Text)
+    { _actAccess :: !(Maybe ACL)
+    , _actPlaceName :: !(Maybe Text)
+    , _actEtag :: !(Maybe Text)
+    , _actAnnotation :: !(Maybe Text)
+    , _actLocation :: !(Maybe Place)
+    , _actGeocode :: !(Maybe Text)
+    , _actKind :: !Text
+    , _actRadius :: !(Maybe Text)
+    , _actPublished :: !(Maybe DateTime')
+    , _actURL :: !(Maybe Text)
+    , _actActor :: !(Maybe ActivityActor)
+    , _actAddress :: !(Maybe Text)
+    , _actObject :: !(Maybe ActivityObject)
+    , _actId :: !(Maybe Text)
+    , _actUpdated :: !(Maybe DateTime')
+    , _actTitle :: !(Maybe Text)
+    , _actVerb :: !(Maybe Text)
     , _actCrosspostSource :: !(Maybe Text)
-    , _actPlaceId         :: !(Maybe Text)
-    , _actProvider        :: !(Maybe ActivityProvider)
+    , _actPlaceId :: !(Maybe Text)
+    , _actProvider :: !(Maybe ActivityProvider)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2776,8 +2776,8 @@ instance ToJSON PlaceAddress where
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItem' smart constructor.
 data ActivityObjectAttachmentsItemThumbnailsItem =
   ActivityObjectAttachmentsItemThumbnailsItem'
-    { _aoaitiImage       :: !(Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
-    , _aoaitiURL         :: !(Maybe Text)
+    { _aoaitiImage :: !(Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
+    , _aoaitiURL :: !(Maybe Text)
     , _aoaitiDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2842,8 +2842,8 @@ instance ToJSON
 -- /See:/ 'personCover' smart constructor.
 data PersonCover =
   PersonCover'
-    { _pcLayout     :: !(Maybe Text)
-    , _pcCoverInfo  :: !(Maybe PersonCoverCoverInfo)
+    { _pcLayout :: !(Maybe Text)
+    , _pcCoverInfo :: !(Maybe PersonCoverCoverInfo)
     , _pcCoverPhoto :: !(Maybe PersonCoverCoverPhoto)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2901,7 +2901,7 @@ instance ToJSON PersonCover where
 data CommentInReplyToItem =
   CommentInReplyToItem'
     { _cirtiURL :: !(Maybe Text)
-    , _cirtiId  :: !(Maybe Text)
+    , _cirtiId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2944,14 +2944,14 @@ instance ToJSON CommentInReplyToItem where
 -- /See:/ 'personOrganizationsItem' smart constructor.
 data PersonOrganizationsItem =
   PersonOrganizationsItem'
-    { _poiDePartment  :: !(Maybe Text)
-    , _poiLocation    :: !(Maybe Text)
-    , _poiEndDate     :: !(Maybe Text)
-    , _poiPrimary     :: !(Maybe Bool)
-    , _poiStartDate   :: !(Maybe Text)
-    , _poiName        :: !(Maybe Text)
-    , _poiTitle       :: !(Maybe Text)
-    , _poiType        :: !(Maybe Text)
+    { _poiDePartment :: !(Maybe Text)
+    , _poiLocation :: !(Maybe Text)
+    , _poiEndDate :: !(Maybe Text)
+    , _poiPrimary :: !(Maybe Bool)
+    , _poiStartDate :: !(Maybe Text)
+    , _poiName :: !(Maybe Text)
+    , _poiTitle :: !(Maybe Text)
+    , _poiType :: !(Maybe Text)
     , _poiDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3073,7 +3073,7 @@ instance ToJSON PersonOrganizationsItem where
 data PersonURLsItem =
   PersonURLsItem'
     { _puiValue :: !(Maybe Text)
-    , _puiType  :: !(Maybe Text)
+    , _puiType :: !(Maybe Text)
     , _puiLabel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3131,7 +3131,7 @@ instance ToJSON PersonURLsItem where
 -- /See:/ 'personCoverCoverInfo' smart constructor.
 data PersonCoverCoverInfo =
   PersonCoverCoverInfo'
-    { _pcciTopImageOffSet  :: !(Maybe (Textual Int32))
+    { _pcciTopImageOffSet :: !(Maybe (Textual Int32))
     , _pcciLeftImageOffSet :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3188,7 +3188,7 @@ instance ToJSON PersonCoverCoverInfo where
 data ActivityObjectResharers =
   ActivityObjectResharers'
     { _aTotalItems :: !(Maybe (Textual Word32))
-    , _aSelfLink   :: !(Maybe Text)
+    , _aSelfLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3235,16 +3235,16 @@ instance ToJSON ActivityObjectResharers where
 -- /See:/ 'comment' smart constructor.
 data Comment =
   Comment'
-    { _cEtag      :: !(Maybe Text)
+    { _cEtag :: !(Maybe Text)
     , _cPlusoners :: !(Maybe CommentPlusoners)
-    , _cKind      :: !Text
+    , _cKind :: !Text
     , _cPublished :: !(Maybe DateTime')
-    , _cActor     :: !(Maybe CommentActor)
-    , _cSelfLink  :: !(Maybe Text)
-    , _cObject    :: !(Maybe CommentObject)
-    , _cId        :: !(Maybe Text)
-    , _cUpdated   :: !(Maybe DateTime')
-    , _cVerb      :: !Text
+    , _cActor :: !(Maybe CommentActor)
+    , _cSelfLink :: !(Maybe Text)
+    , _cObject :: !(Maybe CommentObject)
+    , _cId :: !(Maybe Text)
+    , _cUpdated :: !(Maybe DateTime')
+    , _cVerb :: !Text
     , _cInReplyTo :: !(Maybe [CommentInReplyToItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3384,11 +3384,11 @@ instance ToJSON Comment where
 -- /See:/ 'place' smart constructor.
 data Place =
   Place'
-    { _plaKind        :: !Text
-    , _plaAddress     :: !(Maybe PlaceAddress)
+    { _plaKind :: !Text
+    , _plaAddress :: !(Maybe PlaceAddress)
     , _plaDisplayName :: !(Maybe Text)
-    , _plaId          :: !(Maybe Text)
-    , _plaPosition    :: !(Maybe PlacePosition)
+    , _plaId :: !(Maybe Text)
+    , _plaPosition :: !(Maybe PlacePosition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3466,8 +3466,8 @@ instance ToJSON Place where
 -- /See:/ 'acl' smart constructor.
 data ACL =
   ACL'
-    { _aKind        :: !Text
-    , _aItems       :: !(Maybe [PlusACLentryResource])
+    { _aKind :: !Text
+    , _aItems :: !(Maybe [PlusACLentryResource])
     , _aDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3525,12 +3525,12 @@ instance ToJSON ACL where
 data ActivityActor =
   ActivityActor'
     { _aaClientSpecificActorInfo :: !(Maybe ActivityActorClientSpecificActorInfo)
-    , _aaImage                   :: !(Maybe ActivityActorImage)
-    , _aaURL                     :: !(Maybe Text)
-    , _aaName                    :: !(Maybe ActivityActorName)
-    , _aaDisplayName             :: !(Maybe Text)
-    , _aaId                      :: !(Maybe Text)
-    , _aaVerification            :: !(Maybe ActivityActorVerification)
+    , _aaImage :: !(Maybe ActivityActorImage)
+    , _aaURL :: !(Maybe Text)
+    , _aaName :: !(Maybe ActivityActorName)
+    , _aaDisplayName :: !(Maybe Text)
+    , _aaId :: !(Maybe Text)
+    , _aaVerification :: !(Maybe ActivityActorVerification)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3629,9 +3629,9 @@ instance ToJSON ActivityActor where
 -- /See:/ 'commentObject' smart constructor.
 data CommentObject =
   CommentObject'
-    { _coObjectType      :: !Text
+    { _coObjectType :: !Text
     , _coOriginalContent :: !(Maybe Text)
-    , _coContent         :: !(Maybe Text)
+    , _coContent :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3695,14 +3695,14 @@ instance ToJSON CommentObject where
 -- /See:/ 'commentFeed' smart constructor.
 data CommentFeed =
   CommentFeed'
-    { _cfEtag          :: !(Maybe Text)
+    { _cfEtag :: !(Maybe Text)
     , _cfNextPageToken :: !(Maybe Text)
-    , _cfNextLink      :: !(Maybe Text)
-    , _cfKind          :: !Text
-    , _cfItems         :: !(Maybe [Comment])
-    , _cfId            :: !(Maybe Text)
-    , _cfUpdated       :: !(Maybe DateTime')
-    , _cfTitle         :: !(Maybe Text)
+    , _cfNextLink :: !(Maybe Text)
+    , _cfKind :: !Text
+    , _cfItems :: !(Maybe [Comment])
+    , _cfId :: !(Maybe Text)
+    , _cfUpdated :: !(Maybe DateTime')
+    , _cfTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3853,7 +3853,7 @@ instance ToJSON CommentActorVerification where
 -- /See:/ 'activityActorName' smart constructor.
 data ActivityActorName =
   ActivityActorName'
-    { _aanGivenName  :: !(Maybe Text)
+    { _aanGivenName :: !(Maybe Text)
     , _aanFamilyName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

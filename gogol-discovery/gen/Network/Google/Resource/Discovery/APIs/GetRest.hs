@@ -37,8 +37,8 @@ module Network.Google.Resource.Discovery.APIs.GetRest
     , agrAPI
     ) where
 
-import           Network.Google.Discovery.Types
-import           Network.Google.Prelude
+import Network.Google.Discovery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @discovery.apis.getRest@ method which the
 -- 'APIsGetRest' request conforms to.
@@ -58,7 +58,7 @@ type APIsGetRestResource =
 data APIsGetRest =
   APIsGetRest'
     { _agrVersion :: !Text
-    , _agrAPI     :: !Text
+    , _agrAPI :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

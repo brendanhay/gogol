@@ -37,8 +37,8 @@ module Network.Google.Resource.GroupsSettings.Groups.Update
     , guGroupUniqueId
     ) where
 
-import           Network.Google.GroupsSettings.Types
-import           Network.Google.Prelude
+import Network.Google.GroupsSettings.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @groupsSettings.groups.update@ method which the
 -- 'GroupsUpdate' request conforms to.
@@ -55,7 +55,7 @@ type GroupsUpdateResource =
 -- /See:/ 'groupsUpdate' smart constructor.
 data GroupsUpdate =
   GroupsUpdate'
-    { _guPayload       :: !Groups
+    { _guPayload :: !Groups
     , _guGroupUniqueId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,7 +81,7 @@ guPayload :: Lens' GroupsUpdate Groups
 guPayload
   = lens _guPayload (\ s a -> s{_guPayload = a})
 
--- | The resource ID
+-- | The group\'s email address.
 guGroupUniqueId :: Lens' GroupsUpdate Text
 guGroupUniqueId
   = lens _guGroupUniqueId

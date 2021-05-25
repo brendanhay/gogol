@@ -42,8 +42,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.Stop
     , pCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.stop@ method which the
 -- 'ProjectsLocationsNodesStop' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsNodesStopResource =
 -- /See:/ 'projectsLocationsNodesStop' smart constructor.
 data ProjectsLocationsNodesStop =
   ProjectsLocationsNodesStop'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !StopNodeRequest
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !StopNodeRequest
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -44,8 +44,8 @@ module Network.Google.Resource.Tracing.Projects.Traces.ListSpans
     , ptlsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Tracing.Types
+import Network.Google.Prelude
+import Network.Google.Tracing.Types
 
 -- | A resource alias for @tracing.projects.traces.listSpans@ method which the
 -- 'ProjectsTracesListSpans' request conforms to.
@@ -68,15 +68,15 @@ type ProjectsTracesListSpansResource =
 -- /See:/ 'projectsTracesListSpans' smart constructor.
 data ProjectsTracesListSpans =
   ProjectsTracesListSpans'
-    { _ptlsParent         :: !Text
-    , _ptlsXgafv          :: !(Maybe Xgafv)
+    { _ptlsParent :: !Text
+    , _ptlsXgafv :: !(Maybe Xgafv)
     , _ptlsUploadProtocol :: !(Maybe Text)
-    , _ptlsPp             :: !Bool
-    , _ptlsAccessToken    :: !(Maybe Text)
-    , _ptlsUploadType     :: !(Maybe Text)
-    , _ptlsBearerToken    :: !(Maybe Text)
-    , _ptlsPageToken      :: !(Maybe Text)
-    , _ptlsCallback       :: !(Maybe Text)
+    , _ptlsPp :: !Bool
+    , _ptlsAccessToken :: !(Maybe Text)
+    , _ptlsUploadType :: !(Maybe Text)
+    , _ptlsBearerToken :: !(Maybe Text)
+    , _ptlsPageToken :: !(Maybe Text)
+    , _ptlsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

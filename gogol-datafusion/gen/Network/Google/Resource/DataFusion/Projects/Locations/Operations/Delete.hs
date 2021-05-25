@@ -44,13 +44,13 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Operations.Delete
     , plodCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.operations.delete@ method which the
 -- 'ProjectsLocationsOperationsDelete' request conforms to.
 type ProjectsLocationsOperationsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,12 +67,12 @@ type ProjectsLocationsOperationsDeleteResource =
 -- /See:/ 'projectsLocationsOperationsDelete' smart constructor.
 data ProjectsLocationsOperationsDelete =
   ProjectsLocationsOperationsDelete'
-    { _plodXgafv          :: !(Maybe Xgafv)
+    { _plodXgafv :: !(Maybe Xgafv)
     , _plodUploadProtocol :: !(Maybe Text)
-    , _plodAccessToken    :: !(Maybe Text)
-    , _plodUploadType     :: !(Maybe Text)
-    , _plodName           :: !Text
-    , _plodCallback       :: !(Maybe Text)
+    , _plodAccessToken :: !(Maybe Text)
+    , _plodUploadType :: !(Maybe Text)
+    , _plodName :: !Text
+    , _plodCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

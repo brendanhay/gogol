@@ -44,8 +44,8 @@ module Network.Google.Resource.Indexing.URLNotifications.GetMetadata
     , ungmCallback
     ) where
 
-import           Network.Google.Indexing.Types
-import           Network.Google.Prelude
+import Network.Google.Indexing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @indexing.urlNotifications.getMetadata@ method which the
 -- 'URLNotificationsGetMetadata' request conforms to.
@@ -70,12 +70,12 @@ type URLNotificationsGetMetadataResource =
 -- /See:/ 'urlNotificationsGetMetadata' smart constructor.
 data URLNotificationsGetMetadata =
   URLNotificationsGetMetadata'
-    { _ungmXgafv          :: !(Maybe Xgafv)
+    { _ungmXgafv :: !(Maybe Xgafv)
     , _ungmUploadProtocol :: !(Maybe Text)
-    , _ungmAccessToken    :: !(Maybe Text)
-    , _ungmURL            :: !(Maybe Text)
-    , _ungmUploadType     :: !(Maybe Text)
-    , _ungmCallback       :: !(Maybe Text)
+    , _ungmAccessToken :: !(Maybe Text)
+    , _ungmURL :: !(Maybe Text)
+    , _ungmUploadType :: !(Maybe Text)
+    , _ungmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

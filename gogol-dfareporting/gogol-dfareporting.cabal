@@ -1,6 +1,6 @@
 name:                  gogol-dfareporting
 version:               0.5.0
-synopsis:              Google DCM/DFA Reporting And Trafficking SDK.
+synopsis:              Google Campaign Manager 360 SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,12 +14,13 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Manages your DoubleClick Campaign Manager ad campaigns and reports.
+    Build applications to efficiently manage large or complex trafficking,
+    reporting, and attribution workflows for Campaign Manager 360.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v3.3@
+    This library is compatible with version @v3.5@
     of the API.
 
 source-repository head

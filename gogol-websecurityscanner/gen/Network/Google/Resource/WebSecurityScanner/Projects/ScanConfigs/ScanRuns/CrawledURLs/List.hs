@@ -22,7 +22,7 @@
 --
 -- List CrawledUrls under a given ScanRun.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.CrawledURLs.List
     (
     -- * REST Resource
@@ -43,14 +43,14 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.
     , pscsrculCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list@ method which the
 -- 'ProjectsScanConfigsScanRunsCrawledURLsList' request conforms to.
 type ProjectsScanConfigsScanRunsCrawledURLsListResource
      =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "crawledUrls" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -68,14 +68,14 @@ type ProjectsScanConfigsScanRunsCrawledURLsListResource
 -- /See:/ 'projectsScanConfigsScanRunsCrawledURLsList' smart constructor.
 data ProjectsScanConfigsScanRunsCrawledURLsList =
   ProjectsScanConfigsScanRunsCrawledURLsList'
-    { _pscsrculParent         :: !Text
-    , _pscsrculXgafv          :: !(Maybe Xgafv)
+    { _pscsrculParent :: !Text
+    , _pscsrculXgafv :: !(Maybe Xgafv)
     , _pscsrculUploadProtocol :: !(Maybe Text)
-    , _pscsrculAccessToken    :: !(Maybe Text)
-    , _pscsrculUploadType     :: !(Maybe Text)
-    , _pscsrculPageToken      :: !(Maybe Text)
-    , _pscsrculPageSize       :: !(Maybe (Textual Int32))
-    , _pscsrculCallback       :: !(Maybe Text)
+    , _pscsrculAccessToken :: !(Maybe Text)
+    , _pscsrculUploadType :: !(Maybe Text)
+    , _pscsrculPageToken :: !(Maybe Text)
+    , _pscsrculPageSize :: !(Maybe (Textual Int32))
+    , _pscsrculCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

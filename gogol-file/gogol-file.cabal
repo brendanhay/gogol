@@ -36,12 +36,18 @@ library
     exposed-modules:
           Network.Google.File
         , Network.Google.File.Types
+        , Network.Google.Resource.File.Projects.Locations.Backups.Create
+        , Network.Google.Resource.File.Projects.Locations.Backups.Delete
+        , Network.Google.Resource.File.Projects.Locations.Backups.Get
+        , Network.Google.Resource.File.Projects.Locations.Backups.List
+        , Network.Google.Resource.File.Projects.Locations.Backups.Patch
         , Network.Google.Resource.File.Projects.Locations.Get
         , Network.Google.Resource.File.Projects.Locations.Instances.Create
         , Network.Google.Resource.File.Projects.Locations.Instances.Delete
         , Network.Google.Resource.File.Projects.Locations.Instances.Get
         , Network.Google.Resource.File.Projects.Locations.Instances.List
         , Network.Google.Resource.File.Projects.Locations.Instances.Patch
+        , Network.Google.Resource.File.Projects.Locations.Instances.Restore
         , Network.Google.Resource.File.Projects.Locations.List
         , Network.Google.Resource.File.Projects.Locations.Operations.Cancel
         , Network.Google.Resource.File.Projects.Locations.Operations.Delete

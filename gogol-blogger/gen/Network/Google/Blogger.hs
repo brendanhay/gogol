@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for access to the data within Blogger.
+-- The Blogger API provides access to posts, comments and pages of a
+-- Blogger blog.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference>
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference>
 module Network.Google.Blogger
     (
     -- * Service Configuration
@@ -131,6 +132,9 @@ module Network.Google.Blogger
 
     -- * Types
 
+    -- ** PostStatus
+    , PostStatus (..)
+
     -- ** PostsListOrderBy
     , PostsListOrderBy (..)
 
@@ -146,6 +150,9 @@ module Network.Google.Blogger
     , puiPostUserInfo
     , puiPost
     , puiKind
+
+    -- ** PageStatus
+    , PageStatus (..)
 
     -- ** CommentsListView
     , CommentsListView (..)
@@ -165,6 +172,7 @@ module Network.Google.Blogger
     , plNextPageToken
     , plKind
     , plItems
+    , plPrevPageToken
 
     -- ** CommentInReplyTo
     , CommentInReplyTo
@@ -175,6 +183,9 @@ module Network.Google.Blogger
     , CommentBlog
     , commentBlog
     , cbId
+
+    -- ** PostReaderComments
+    , PostReaderComments (..)
 
     -- ** Pageviews
     , Pageviews
@@ -359,8 +370,23 @@ module Network.Google.Blogger
     , blItems
     , blBlogUserInfos
 
+    -- ** CommentStatus
+    , CommentStatus (..)
+
     -- ** PagesListView
     , PagesListView (..)
+
+    -- ** PageviewsCountsItemTimeRange
+    , PageviewsCountsItemTimeRange (..)
+
+    -- ** BlogStatus
+    , BlogStatus (..)
+
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** BlogPerUserInfoRole
+    , BlogPerUserInfoRole (..)
 
     -- ** PageBlog
     , PageBlog
@@ -483,47 +509,47 @@ module Network.Google.Blogger
     , piiURL
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Blogger.Blogs.Get
-import           Network.Google.Resource.Blogger.Blogs.GetByURL
-import           Network.Google.Resource.Blogger.Blogs.ListByUser
-import           Network.Google.Resource.Blogger.BlogUserInfos.Get
-import           Network.Google.Resource.Blogger.Comments.Approve
-import           Network.Google.Resource.Blogger.Comments.Delete
-import           Network.Google.Resource.Blogger.Comments.Get
-import           Network.Google.Resource.Blogger.Comments.List
-import           Network.Google.Resource.Blogger.Comments.ListByBlog
-import           Network.Google.Resource.Blogger.Comments.MarkAsSpam
-import           Network.Google.Resource.Blogger.Comments.RemoveContent
-import           Network.Google.Resource.Blogger.Pages.Delete
-import           Network.Google.Resource.Blogger.Pages.Get
-import           Network.Google.Resource.Blogger.Pages.Insert
-import           Network.Google.Resource.Blogger.Pages.List
-import           Network.Google.Resource.Blogger.Pages.Patch
-import           Network.Google.Resource.Blogger.Pages.Publish
-import           Network.Google.Resource.Blogger.Pages.Revert
-import           Network.Google.Resource.Blogger.Pages.Update
-import           Network.Google.Resource.Blogger.PageViews.Get
-import           Network.Google.Resource.Blogger.Posts.Delete
-import           Network.Google.Resource.Blogger.Posts.Get
-import           Network.Google.Resource.Blogger.Posts.GetByPath
-import           Network.Google.Resource.Blogger.Posts.Insert
-import           Network.Google.Resource.Blogger.Posts.List
-import           Network.Google.Resource.Blogger.Posts.Patch
-import           Network.Google.Resource.Blogger.Posts.Publish
-import           Network.Google.Resource.Blogger.Posts.Revert
-import           Network.Google.Resource.Blogger.Posts.Search
-import           Network.Google.Resource.Blogger.Posts.Update
-import           Network.Google.Resource.Blogger.PostUserInfos.Get
-import           Network.Google.Resource.Blogger.PostUserInfos.List
-import           Network.Google.Resource.Blogger.Users.Get
+import Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Resource.Blogger.BlogUserInfos.Get
+import Network.Google.Resource.Blogger.Blogs.Get
+import Network.Google.Resource.Blogger.Blogs.GetByURL
+import Network.Google.Resource.Blogger.Blogs.ListByUser
+import Network.Google.Resource.Blogger.Comments.Approve
+import Network.Google.Resource.Blogger.Comments.Delete
+import Network.Google.Resource.Blogger.Comments.Get
+import Network.Google.Resource.Blogger.Comments.List
+import Network.Google.Resource.Blogger.Comments.ListByBlog
+import Network.Google.Resource.Blogger.Comments.MarkAsSpam
+import Network.Google.Resource.Blogger.Comments.RemoveContent
+import Network.Google.Resource.Blogger.PageViews.Get
+import Network.Google.Resource.Blogger.Pages.Delete
+import Network.Google.Resource.Blogger.Pages.Get
+import Network.Google.Resource.Blogger.Pages.Insert
+import Network.Google.Resource.Blogger.Pages.List
+import Network.Google.Resource.Blogger.Pages.Patch
+import Network.Google.Resource.Blogger.Pages.Publish
+import Network.Google.Resource.Blogger.Pages.Revert
+import Network.Google.Resource.Blogger.Pages.Update
+import Network.Google.Resource.Blogger.PostUserInfos.Get
+import Network.Google.Resource.Blogger.PostUserInfos.List
+import Network.Google.Resource.Blogger.Posts.Delete
+import Network.Google.Resource.Blogger.Posts.Get
+import Network.Google.Resource.Blogger.Posts.GetByPath
+import Network.Google.Resource.Blogger.Posts.Insert
+import Network.Google.Resource.Blogger.Posts.List
+import Network.Google.Resource.Blogger.Posts.Patch
+import Network.Google.Resource.Blogger.Posts.Publish
+import Network.Google.Resource.Blogger.Posts.Revert
+import Network.Google.Resource.Blogger.Posts.Search
+import Network.Google.Resource.Blogger.Posts.Update
+import Network.Google.Resource.Blogger.Users.Get
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Blogger API service.
+-- | Represents the entirety of the methods and resources available for the Blogger API v3 service.
 type BloggerAPI =
      PostUserInfosListResource :<|>
        PostUserInfosGetResource

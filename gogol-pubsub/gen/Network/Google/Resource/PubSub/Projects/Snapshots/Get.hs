@@ -20,11 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the configuration details of a snapshot. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot.
+-- Gets the configuration details of a snapshot. Snapshots are used in Seek
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.get@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.Get
@@ -45,8 +44,8 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.Get
     , psgsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.snapshots.get@ method which the
 -- 'ProjectsSnapshotsGet' request conforms to.
@@ -60,21 +59,20 @@ type ProjectsSnapshotsGetResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
--- | Gets the configuration details of a snapshot. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot.
+-- | Gets the configuration details of a snapshot. Snapshots are used in Seek
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot.
 --
 -- /See:/ 'projectsSnapshotsGet' smart constructor.
 data ProjectsSnapshotsGet =
   ProjectsSnapshotsGet'
-    { _psgsXgafv          :: !(Maybe Xgafv)
-    , _psgsSnapshot       :: !Text
+    { _psgsXgafv :: !(Maybe Xgafv)
+    , _psgsSnapshot :: !Text
     , _psgsUploadProtocol :: !(Maybe Text)
-    , _psgsAccessToken    :: !(Maybe Text)
-    , _psgsUploadType     :: !(Maybe Text)
-    , _psgsCallback       :: !(Maybe Text)
+    , _psgsAccessToken :: !(Maybe Text)
+    , _psgsUploadType :: !(Maybe Text)
+    , _psgsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,7 +111,7 @@ psgsXgafv :: Lens' ProjectsSnapshotsGet (Maybe Xgafv)
 psgsXgafv
   = lens _psgsXgafv (\ s a -> s{_psgsXgafv = a})
 
--- | The name of the snapshot to get. Format is
+-- | Required. The name of the snapshot to get. Format is
 -- \`projects\/{project}\/snapshots\/{snap}\`.
 psgsSnapshot :: Lens' ProjectsSnapshotsGet Text
 psgsSnapshot

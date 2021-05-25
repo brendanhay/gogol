@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
     , mwpawllMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.list@ method which the
 -- 'ManagementWebPropertyAdWordsLinksList' request conforms to.
@@ -64,9 +64,9 @@ type ManagementWebPropertyAdWordsLinksListResource =
 data ManagementWebPropertyAdWordsLinksList =
   ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId :: !Text
-    , _mwpawllAccountId     :: !Text
-    , _mwpawllStartIndex    :: !(Maybe (Textual Int32))
-    , _mwpawllMaxResults    :: !(Maybe (Textual Int32))
+    , _mwpawllAccountId :: !Text
+    , _mwpawllStartIndex :: !(Maybe (Textual Int32))
+    , _mwpawllMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

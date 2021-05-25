@@ -25,7 +25,7 @@
 -- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.patch@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.sinks.patch@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Patch
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Patch
     , ospCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.organizations.sinks.patch@ method which the
 -- 'OrganizationsSinksPatch' request conforms to.
@@ -73,15 +73,15 @@ type OrganizationsSinksPatchResource =
 -- /See:/ 'organizationsSinksPatch' smart constructor.
 data OrganizationsSinksPatch =
   OrganizationsSinksPatch'
-    { _ospXgafv                :: !(Maybe Xgafv)
+    { _ospXgafv :: !(Maybe Xgafv)
     , _ospUniqueWriterIdentity :: !(Maybe Bool)
-    , _ospUploadProtocol       :: !(Maybe Text)
-    , _ospUpdateMask           :: !(Maybe GFieldMask)
-    , _ospAccessToken          :: !(Maybe Text)
-    , _ospUploadType           :: !(Maybe Text)
-    , _ospPayload              :: !LogSink
-    , _ospSinkName             :: !Text
-    , _ospCallback             :: !(Maybe Text)
+    , _ospUploadProtocol :: !(Maybe Text)
+    , _ospUpdateMask :: !(Maybe GFieldMask)
+    , _ospAccessToken :: !(Maybe Text)
+    , _ospUploadType :: !(Maybe Text)
+    , _ospPayload :: !LogSink
+    , _ospSinkName :: !Text
+    , _ospCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates a localized store listing. This method supports patch
--- semantics.
+-- Patches a localized store listing.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.patch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.listings.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
     (
     -- * REST Resource
@@ -34,14 +33,19 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
     , EditsListingsPatch
 
     -- * Request Lenses
+    , elpXgafv
+    , elpUploadProtocol
     , elpPackageName
+    , elpAccessToken
+    , elpUploadType
     , elpPayload
     , elpLanguage
     , elpEditId
+    , elpCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.patch@ method which the
 -- 'EditsListingsPatch' request conforms to.
@@ -54,19 +58,29 @@ type EditsListingsPatchResource =
                Capture "editId" Text :>
                  "listings" :>
                    Capture "language" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Listing :> Patch '[JSON] Listing
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Listing :>
+                                   Patch '[JSON] Listing
 
--- | Creates or updates a localized store listing. This method supports patch
--- semantics.
+-- | Patches a localized store listing.
 --
 -- /See:/ 'editsListingsPatch' smart constructor.
 data EditsListingsPatch =
   EditsListingsPatch'
-    { _elpPackageName :: !Text
-    , _elpPayload     :: !Listing
-    , _elpLanguage    :: !Text
-    , _elpEditId      :: !Text
+    { _elpXgafv :: !(Maybe Xgafv)
+    , _elpUploadProtocol :: !(Maybe Text)
+    , _elpPackageName :: !Text
+    , _elpAccessToken :: !(Maybe Text)
+    , _elpUploadType :: !(Maybe Text)
+    , _elpPayload :: !Listing
+    , _elpLanguage :: !Text
+    , _elpEditId :: !Text
+    , _elpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,13 +89,23 @@ data EditsListingsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'elpXgafv'
+--
+-- * 'elpUploadProtocol'
+--
 -- * 'elpPackageName'
+--
+-- * 'elpAccessToken'
+--
+-- * 'elpUploadType'
 --
 -- * 'elpPayload'
 --
 -- * 'elpLanguage'
 --
 -- * 'elpEditId'
+--
+-- * 'elpCallback'
 editsListingsPatch
     :: Text -- ^ 'elpPackageName'
     -> Listing -- ^ 'elpPayload'
@@ -90,35 +114,66 @@ editsListingsPatch
     -> EditsListingsPatch
 editsListingsPatch pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
   EditsListingsPatch'
-    { _elpPackageName = pElpPackageName_
+    { _elpXgafv = Nothing
+    , _elpUploadProtocol = Nothing
+    , _elpPackageName = pElpPackageName_
+    , _elpAccessToken = Nothing
+    , _elpUploadType = Nothing
     , _elpPayload = pElpPayload_
     , _elpLanguage = pElpLanguage_
     , _elpEditId = pElpEditId_
+    , _elpCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+elpXgafv :: Lens' EditsListingsPatch (Maybe Xgafv)
+elpXgafv = lens _elpXgafv (\ s a -> s{_elpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+elpUploadProtocol :: Lens' EditsListingsPatch (Maybe Text)
+elpUploadProtocol
+  = lens _elpUploadProtocol
+      (\ s a -> s{_elpUploadProtocol = a})
+
+-- | Package name of the app.
 elpPackageName :: Lens' EditsListingsPatch Text
 elpPackageName
   = lens _elpPackageName
       (\ s a -> s{_elpPackageName = a})
+
+-- | OAuth access token.
+elpAccessToken :: Lens' EditsListingsPatch (Maybe Text)
+elpAccessToken
+  = lens _elpAccessToken
+      (\ s a -> s{_elpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+elpUploadType :: Lens' EditsListingsPatch (Maybe Text)
+elpUploadType
+  = lens _elpUploadType
+      (\ s a -> s{_elpUploadType = a})
 
 -- | Multipart request metadata.
 elpPayload :: Lens' EditsListingsPatch Listing
 elpPayload
   = lens _elpPayload (\ s a -> s{_elpPayload = a})
 
--- | The language code (a BCP-47 language tag) of the localized listing to
--- read or modify. For example, to select Austrian German, pass \"de-AT\".
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German).
 elpLanguage :: Lens' EditsListingsPatch Text
 elpLanguage
   = lens _elpLanguage (\ s a -> s{_elpLanguage = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 elpEditId :: Lens' EditsListingsPatch Text
 elpEditId
   = lens _elpEditId (\ s a -> s{_elpEditId = a})
+
+-- | JSONP
+elpCallback :: Lens' EditsListingsPatch (Maybe Text)
+elpCallback
+  = lens _elpCallback (\ s a -> s{_elpCallback = a})
 
 instance GoogleRequest EditsListingsPatch where
         type Rs EditsListingsPatch = Listing
@@ -126,6 +181,11 @@ instance GoogleRequest EditsListingsPatch where
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsPatch'{..}
           = go _elpPackageName _elpEditId _elpLanguage
+              _elpXgafv
+              _elpUploadProtocol
+              _elpAccessToken
+              _elpUploadType
+              _elpCallback
               (Just AltJSON)
               _elpPayload
               androidPublisherService

@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -39,18 +39,21 @@ library
         , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Dismiss
         , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Get
         , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.List
+        , Network.Google.Resource.AccessApproval.Folders.DeleteAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Folders.GetAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Approve
         , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Dismiss
         , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Get
         , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.List
+        , Network.Google.Resource.AccessApproval.Organizations.DeleteAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Organizations.GetAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Approve
         , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Dismiss
         , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Get
         , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.List
+        , Network.Google.Resource.AccessApproval.Projects.DeleteAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Projects.GetAccessApprovalSettings
         , Network.Google.Resource.AccessApproval.Projects.UpdateAccessApprovalSettings
 

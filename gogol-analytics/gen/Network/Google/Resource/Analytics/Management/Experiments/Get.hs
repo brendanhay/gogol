@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Get
     , megExperimentId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.get@ method which the
 -- 'ManagementExperimentsGet' request conforms to.
@@ -64,9 +64,9 @@ type ManagementExperimentsGetResource =
 data ManagementExperimentsGet =
   ManagementExperimentsGet'
     { _megWebPropertyId :: !Text
-    , _megProFileId     :: !Text
-    , _megAccountId     :: !Text
-    , _megExperimentId  :: !Text
+    , _megProFileId :: !Text
+    , _megAccountId :: !Text
+    , _megExperimentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

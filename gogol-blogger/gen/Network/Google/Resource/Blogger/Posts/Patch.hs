@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a post. This method supports patch semantics.
+-- Patches a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.patch@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.patch@.
 module Network.Google.Resource.Blogger.Posts.Patch
     (
     -- * REST Resource
@@ -34,48 +34,63 @@ module Network.Google.Resource.Blogger.Posts.Patch
 
     -- * Request Lenses
     , posoFetchBody
+    , posoXgafv
+    , posoUploadProtocol
+    , posoAccessToken
     , posoFetchImages
+    , posoUploadType
     , posoBlogId
     , posoPayload
     , posoMaxComments
     , posoRevert
     , posoPostId
     , posoPublish
+    , posoCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.patch@ method which the
 -- 'PostsPatch' request conforms to.
 type PostsPatchResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "fetchBody" Bool :>
-                   QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" (Textual Word32) :>
-                       QueryParam "revert" Bool :>
-                         QueryParam "publish" Bool :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Post' :> Patch '[JSON] Post'
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               QueryParam "fetchBody" Bool :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "fetchImages" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "maxComments" (Textual Word32) :>
+                             QueryParam "revert" Bool :>
+                               QueryParam "publish" Bool :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Post' :>
+                                       Patch '[JSON] Post'
 
--- | Update a post. This method supports patch semantics.
+-- | Patches a post.
 --
 -- /See:/ 'postsPatch' smart constructor.
 data PostsPatch =
   PostsPatch'
-    { _posoFetchBody   :: !Bool
+    { _posoFetchBody :: !Bool
+    , _posoXgafv :: !(Maybe Xgafv)
+    , _posoUploadProtocol :: !(Maybe Text)
+    , _posoAccessToken :: !(Maybe Text)
     , _posoFetchImages :: !(Maybe Bool)
-    , _posoBlogId      :: !Text
-    , _posoPayload     :: !Post'
+    , _posoUploadType :: !(Maybe Text)
+    , _posoBlogId :: !Text
+    , _posoPayload :: !Post'
     , _posoMaxComments :: !(Maybe (Textual Word32))
-    , _posoRevert      :: !(Maybe Bool)
-    , _posoPostId      :: !Text
-    , _posoPublish     :: !(Maybe Bool)
+    , _posoRevert :: !(Maybe Bool)
+    , _posoPostId :: !Text
+    , _posoPublish :: !(Maybe Bool)
+    , _posoCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -86,7 +101,15 @@ data PostsPatch =
 --
 -- * 'posoFetchBody'
 --
+-- * 'posoXgafv'
+--
+-- * 'posoUploadProtocol'
+--
+-- * 'posoAccessToken'
+--
 -- * 'posoFetchImages'
+--
+-- * 'posoUploadType'
 --
 -- * 'posoBlogId'
 --
@@ -99,6 +122,8 @@ data PostsPatch =
 -- * 'posoPostId'
 --
 -- * 'posoPublish'
+--
+-- * 'posoCallback'
 postsPatch
     :: Text -- ^ 'posoBlogId'
     -> Post' -- ^ 'posoPayload'
@@ -107,31 +132,54 @@ postsPatch
 postsPatch pPosoBlogId_ pPosoPayload_ pPosoPostId_ =
   PostsPatch'
     { _posoFetchBody = True
+    , _posoXgafv = Nothing
+    , _posoUploadProtocol = Nothing
+    , _posoAccessToken = Nothing
     , _posoFetchImages = Nothing
+    , _posoUploadType = Nothing
     , _posoBlogId = pPosoBlogId_
     , _posoPayload = pPosoPayload_
     , _posoMaxComments = Nothing
     , _posoRevert = Nothing
     , _posoPostId = pPosoPostId_
     , _posoPublish = Nothing
+    , _posoCallback = Nothing
     }
 
 
--- | Whether the body content of the post is included with the result
--- (default: true).
 posoFetchBody :: Lens' PostsPatch Bool
 posoFetchBody
   = lens _posoFetchBody
       (\ s a -> s{_posoFetchBody = a})
 
--- | Whether image URL metadata for each post is included in the returned
--- result (default: false).
+-- | V1 error format.
+posoXgafv :: Lens' PostsPatch (Maybe Xgafv)
+posoXgafv
+  = lens _posoXgafv (\ s a -> s{_posoXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+posoUploadProtocol :: Lens' PostsPatch (Maybe Text)
+posoUploadProtocol
+  = lens _posoUploadProtocol
+      (\ s a -> s{_posoUploadProtocol = a})
+
+-- | OAuth access token.
+posoAccessToken :: Lens' PostsPatch (Maybe Text)
+posoAccessToken
+  = lens _posoAccessToken
+      (\ s a -> s{_posoAccessToken = a})
+
 posoFetchImages :: Lens' PostsPatch (Maybe Bool)
 posoFetchImages
   = lens _posoFetchImages
       (\ s a -> s{_posoFetchImages = a})
 
--- | The ID of the Blog.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+posoUploadType :: Lens' PostsPatch (Maybe Text)
+posoUploadType
+  = lens _posoUploadType
+      (\ s a -> s{_posoUploadType = a})
+
 posoBlogId :: Lens' PostsPatch Text
 posoBlogId
   = lens _posoBlogId (\ s a -> s{_posoBlogId = a})
@@ -141,29 +189,28 @@ posoPayload :: Lens' PostsPatch Post'
 posoPayload
   = lens _posoPayload (\ s a -> s{_posoPayload = a})
 
--- | Maximum number of comments to retrieve with the returned post.
 posoMaxComments :: Lens' PostsPatch (Maybe Word32)
 posoMaxComments
   = lens _posoMaxComments
       (\ s a -> s{_posoMaxComments = a})
       . mapping _Coerce
 
--- | Whether a revert action should be performed when the post is updated
--- (default: false).
 posoRevert :: Lens' PostsPatch (Maybe Bool)
 posoRevert
   = lens _posoRevert (\ s a -> s{_posoRevert = a})
 
--- | The ID of the Post.
 posoPostId :: Lens' PostsPatch Text
 posoPostId
   = lens _posoPostId (\ s a -> s{_posoPostId = a})
 
--- | Whether a publish action should be performed when the post is updated
--- (default: false).
 posoPublish :: Lens' PostsPatch (Maybe Bool)
 posoPublish
   = lens _posoPublish (\ s a -> s{_posoPublish = a})
+
+-- | JSONP
+posoCallback :: Lens' PostsPatch (Maybe Text)
+posoCallback
+  = lens _posoCallback (\ s a -> s{_posoCallback = a})
 
 instance GoogleRequest PostsPatch where
         type Rs PostsPatch = Post'
@@ -171,10 +218,15 @@ instance GoogleRequest PostsPatch where
              '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsPatch'{..}
           = go _posoBlogId _posoPostId (Just _posoFetchBody)
+              _posoXgafv
+              _posoUploadProtocol
+              _posoAccessToken
               _posoFetchImages
+              _posoUploadType
               _posoMaxComments
               _posoRevert
               _posoPublish
+              _posoCallback
               (Just AltJSON)
               _posoPayload
               bloggerService

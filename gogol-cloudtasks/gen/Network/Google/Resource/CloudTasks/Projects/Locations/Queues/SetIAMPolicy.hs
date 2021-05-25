@@ -47,8 +47,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.SetIAMPolicy
     , plqsipCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.setIamPolicy@ method which the
 -- 'ProjectsLocationsQueuesSetIAMPolicy' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsLocationsQueuesSetIAMPolicyResource =
 -- /See:/ 'projectsLocationsQueuesSetIAMPolicy' smart constructor.
 data ProjectsLocationsQueuesSetIAMPolicy =
   ProjectsLocationsQueuesSetIAMPolicy'
-    { _plqsipXgafv          :: !(Maybe Xgafv)
+    { _plqsipXgafv :: !(Maybe Xgafv)
     , _plqsipUploadProtocol :: !(Maybe Text)
-    , _plqsipAccessToken    :: !(Maybe Text)
-    , _plqsipUploadType     :: !(Maybe Text)
-    , _plqsipPayload        :: !SetIAMPolicyRequest
-    , _plqsipResource       :: !Text
-    , _plqsipCallback       :: !(Maybe Text)
+    , _plqsipAccessToken :: !(Maybe Text)
+    , _plqsipUploadType :: !(Maybe Text)
+    , _plqsipPayload :: !SetIAMPolicyRequest
+    , _plqsipResource :: !Text
+    , _plqsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

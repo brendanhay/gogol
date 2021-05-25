@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Task.Delete
     , tdTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.task.delete@ method which the
 -- 'TaskDelete' request conforms to.
@@ -58,7 +58,7 @@ type TaskDeleteResource =
 -- /See:/ 'taskDelete' smart constructor.
 data TaskDelete =
   TaskDelete'
-    { _tdTaskId  :: !Text
+    { _tdTaskId :: !Text
     , _tdTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -33,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Messages.Modify
     , UsersMessagesModify
 
     -- * Request Lenses
+    , ummXgafv
+    , ummUploadProtocol
+    , ummAccessToken
+    , ummUploadType
     , ummPayload
     , ummUserId
     , ummId
+    , ummCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.modify@ method which the
 -- 'UsersMessagesModify' request conforms to.
@@ -51,18 +56,28 @@ type UsersMessagesModifyResource =
              "messages" :>
                Capture "id" Text :>
                  "modify" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ModifyMessageRequest :>
-                       Post '[JSON] Message
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] ModifyMessageRequest :>
+                                 Post '[JSON] Message
 
 -- | Modifies the labels on the specified message.
 --
 -- /See:/ 'usersMessagesModify' smart constructor.
 data UsersMessagesModify =
   UsersMessagesModify'
-    { _ummPayload :: !ModifyMessageRequest
-    , _ummUserId  :: !Text
-    , _ummId      :: !Text
+    { _ummXgafv :: !(Maybe Xgafv)
+    , _ummUploadProtocol :: !(Maybe Text)
+    , _ummAccessToken :: !(Maybe Text)
+    , _ummUploadType :: !(Maybe Text)
+    , _ummPayload :: !ModifyMessageRequest
+    , _ummUserId :: !Text
+    , _ummId :: !Text
+    , _ummCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,27 +86,67 @@ data UsersMessagesModify =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ummXgafv'
+--
+-- * 'ummUploadProtocol'
+--
+-- * 'ummAccessToken'
+--
+-- * 'ummUploadType'
+--
 -- * 'ummPayload'
 --
 -- * 'ummUserId'
 --
 -- * 'ummId'
+--
+-- * 'ummCallback'
 usersMessagesModify
     :: ModifyMessageRequest -- ^ 'ummPayload'
     -> Text -- ^ 'ummId'
     -> UsersMessagesModify
 usersMessagesModify pUmmPayload_ pUmmId_ =
   UsersMessagesModify'
-    {_ummPayload = pUmmPayload_, _ummUserId = "me", _ummId = pUmmId_}
+    { _ummXgafv = Nothing
+    , _ummUploadProtocol = Nothing
+    , _ummAccessToken = Nothing
+    , _ummUploadType = Nothing
+    , _ummPayload = pUmmPayload_
+    , _ummUserId = "me"
+    , _ummId = pUmmId_
+    , _ummCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ummXgafv :: Lens' UsersMessagesModify (Maybe Xgafv)
+ummXgafv = lens _ummXgafv (\ s a -> s{_ummXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ummUploadProtocol :: Lens' UsersMessagesModify (Maybe Text)
+ummUploadProtocol
+  = lens _ummUploadProtocol
+      (\ s a -> s{_ummUploadProtocol = a})
+
+-- | OAuth access token.
+ummAccessToken :: Lens' UsersMessagesModify (Maybe Text)
+ummAccessToken
+  = lens _ummAccessToken
+      (\ s a -> s{_ummAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ummUploadType :: Lens' UsersMessagesModify (Maybe Text)
+ummUploadType
+  = lens _ummUploadType
+      (\ s a -> s{_ummUploadType = a})
 
 -- | Multipart request metadata.
 ummPayload :: Lens' UsersMessagesModify ModifyMessageRequest
 ummPayload
   = lens _ummPayload (\ s a -> s{_ummPayload = a})
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 ummUserId :: Lens' UsersMessagesModify Text
 ummUserId
   = lens _ummUserId (\ s a -> s{_ummUserId = a})
@@ -100,13 +155,23 @@ ummUserId
 ummId :: Lens' UsersMessagesModify Text
 ummId = lens _ummId (\ s a -> s{_ummId = a})
 
+-- | JSONP
+ummCallback :: Lens' UsersMessagesModify (Maybe Text)
+ummCallback
+  = lens _ummCallback (\ s a -> s{_ummCallback = a})
+
 instance GoogleRequest UsersMessagesModify where
         type Rs UsersMessagesModify = Message
         type Scopes UsersMessagesModify =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesModify'{..}
-          = go _ummUserId _ummId (Just AltJSON) _ummPayload
+          = go _ummUserId _ummId _ummXgafv _ummUploadProtocol
+              _ummAccessToken
+              _ummUploadType
+              _ummCallback
+              (Just AltJSON)
+              _ummPayload
               gmailService
           where go
                   = buildClient

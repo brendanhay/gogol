@@ -20,8 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs a pipeline. **Note:** Before you can use this method, the Genomics
--- Service Agent must have access to your project. This is done
+-- Runs a pipeline. The returned Operation\'s metadata field will contain a
+-- google.genomics.v2alpha1.Metadata object describing the status of the
+-- pipeline execution. The [response] field will contain a
+-- google.genomics.v2alpha1.RunPipelineResponse object if the pipeline
+-- completes successfully. **Note:** Before you can use this method, the
+-- Genomics Service Agent must have access to your project. This is done
 -- automatically when the Cloud Genomics API is first enabled, but if you
 -- delete this permission, or if you enabled the Cloud Genomics API before
 -- the v2alpha1 API launch, you must disable and re-enable the API to grant
@@ -48,8 +52,8 @@ module Network.Google.Resource.Genomics.Pipelines.Run
     , prCallback
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @genomics.pipelines.run@ method which the
 -- 'PipelinesRun' request conforms to.
@@ -65,8 +69,12 @@ type PipelinesRunResource =
                      ReqBody '[JSON] RunPipelineRequest :>
                        Post '[JSON] Operation
 
--- | Runs a pipeline. **Note:** Before you can use this method, the Genomics
--- Service Agent must have access to your project. This is done
+-- | Runs a pipeline. The returned Operation\'s metadata field will contain a
+-- google.genomics.v2alpha1.Metadata object describing the status of the
+-- pipeline execution. The [response] field will contain a
+-- google.genomics.v2alpha1.RunPipelineResponse object if the pipeline
+-- completes successfully. **Note:** Before you can use this method, the
+-- Genomics Service Agent must have access to your project. This is done
 -- automatically when the Cloud Genomics API is first enabled, but if you
 -- delete this permission, or if you enabled the Cloud Genomics API before
 -- the v2alpha1 API launch, you must disable and re-enable the API to grant
@@ -77,12 +85,12 @@ type PipelinesRunResource =
 -- /See:/ 'pipelinesRun' smart constructor.
 data PipelinesRun =
   PipelinesRun'
-    { _prXgafv          :: !(Maybe Xgafv)
+    { _prXgafv :: !(Maybe Xgafv)
     , _prUploadProtocol :: !(Maybe Text)
-    , _prAccessToken    :: !(Maybe Text)
-    , _prUploadType     :: !(Maybe Text)
-    , _prPayload        :: !RunPipelineRequest
-    , _prCallback       :: !(Maybe Text)
+    , _prAccessToken :: !(Maybe Text)
+    , _prUploadType :: !(Maybe Text)
+    , _prPayload :: !RunPipelineRequest
+    , _prCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Creates a new data transfer configuration.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.create@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.create@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
     (
     -- * REST Resource
@@ -37,6 +37,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Cre
     , ptccXgafv
     , ptccUploadProtocol
     , ptccAccessToken
+    , ptccServiceAccountName
     , ptccUploadType
     , ptccAuthorizationCode
     , ptccPayload
@@ -44,8 +45,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Cre
     , ptccCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.create@ method which the
 -- 'ProjectsTransferConfigsCreate' request conforms to.
@@ -56,28 +57,30 @@ type ProjectsTransferConfigsCreateResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "authorizationCode" Text :>
-                     QueryParam "versionInfo" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TransferConfig :>
-                             Post '[JSON] TransferConfig
+                 QueryParam "serviceAccountName" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "authorizationCode" Text :>
+                       QueryParam "versionInfo" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] TransferConfig :>
+                               Post '[JSON] TransferConfig
 
 -- | Creates a new data transfer configuration.
 --
 -- /See:/ 'projectsTransferConfigsCreate' smart constructor.
 data ProjectsTransferConfigsCreate =
   ProjectsTransferConfigsCreate'
-    { _ptccParent            :: !Text
-    , _ptccXgafv             :: !(Maybe Xgafv)
-    , _ptccUploadProtocol    :: !(Maybe Text)
-    , _ptccAccessToken       :: !(Maybe Text)
-    , _ptccUploadType        :: !(Maybe Text)
+    { _ptccParent :: !Text
+    , _ptccXgafv :: !(Maybe Xgafv)
+    , _ptccUploadProtocol :: !(Maybe Text)
+    , _ptccAccessToken :: !(Maybe Text)
+    , _ptccServiceAccountName :: !(Maybe Text)
+    , _ptccUploadType :: !(Maybe Text)
     , _ptccAuthorizationCode :: !(Maybe Text)
-    , _ptccPayload           :: !TransferConfig
-    , _ptccVersionInfo       :: !(Maybe Text)
-    , _ptccCallback          :: !(Maybe Text)
+    , _ptccPayload :: !TransferConfig
+    , _ptccVersionInfo :: !(Maybe Text)
+    , _ptccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,6 +96,8 @@ data ProjectsTransferConfigsCreate =
 -- * 'ptccUploadProtocol'
 --
 -- * 'ptccAccessToken'
+--
+-- * 'ptccServiceAccountName'
 --
 -- * 'ptccUploadType'
 --
@@ -113,6 +118,7 @@ projectsTransferConfigsCreate pPtccParent_ pPtccPayload_ =
     , _ptccXgafv = Nothing
     , _ptccUploadProtocol = Nothing
     , _ptccAccessToken = Nothing
+    , _ptccServiceAccountName = Nothing
     , _ptccUploadType = Nothing
     , _ptccAuthorizationCode = Nothing
     , _ptccPayload = pPtccPayload_
@@ -121,11 +127,11 @@ projectsTransferConfigsCreate pPtccParent_ pPtccPayload_ =
     }
 
 
--- | The BigQuery project id where the transfer configuration should be
--- created. Must be in the format
--- projects\/{project_id}\/locations\/{location_id} If specified location
--- and location of the destination bigquery dataset do not match - the
--- request will fail.
+-- | Required. The BigQuery project id where the transfer configuration
+-- should be created. Must be in the format
+-- projects\/{project_id}\/locations\/{location_id} or
+-- projects\/{project_id}. If specified location and location of the
+-- destination bigquery dataset do not match - the request will fail.
 ptccParent :: Lens' ProjectsTransferConfigsCreate Text
 ptccParent
   = lens _ptccParent (\ s a -> s{_ptccParent = a})
@@ -146,6 +152,15 @@ ptccAccessToken :: Lens' ProjectsTransferConfigsCreate (Maybe Text)
 ptccAccessToken
   = lens _ptccAccessToken
       (\ s a -> s{_ptccAccessToken = a})
+
+-- | Optional service account name. If this field is set, transfer config
+-- will be created with this service account credentials. It requires that
+-- requesting user calling this API has permissions to act as this service
+-- account.
+ptccServiceAccountName :: Lens' ProjectsTransferConfigsCreate (Maybe Text)
+ptccServiceAccountName
+  = lens _ptccServiceAccountName
+      (\ s a -> s{_ptccServiceAccountName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 ptccUploadType :: Lens' ProjectsTransferConfigsCreate (Maybe Text)
@@ -180,7 +195,7 @@ ptccPayload
 -- | Optional version info. If users want to find a very recent access token,
 -- that is, immediately after approving access, users have to set the
 -- version_info claim in the token request. To obtain the version_info,
--- users must use the “none+gsession” response type. which be return a
+-- users must use the \"none+gsession\" response type. which be return a
 -- version_info back in the authorization response which be be put in a JWT
 -- claim in the token request.
 ptccVersionInfo :: Lens' ProjectsTransferConfigsCreate (Maybe Text)
@@ -202,6 +217,7 @@ instance GoogleRequest ProjectsTransferConfigsCreate
         requestClient ProjectsTransferConfigsCreate'{..}
           = go _ptccParent _ptccXgafv _ptccUploadProtocol
               _ptccAccessToken
+              _ptccServiceAccountName
               _ptccUploadType
               _ptccAuthorizationCode
               _ptccVersionInfo

@@ -41,8 +41,8 @@ module Network.Google.Resource.FactCheckTools.Pages.Get
     , pgCallback
     ) where
 
-import           Network.Google.FactCheckTools.Types
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @factchecktools.pages.get@ method which the
 -- 'PagesGet' request conforms to.
@@ -63,12 +63,12 @@ type PagesGetResource =
 -- /See:/ 'pagesGet' smart constructor.
 data PagesGet =
   PagesGet'
-    { _pgXgafv          :: !(Maybe Xgafv)
+    { _pgXgafv :: !(Maybe Xgafv)
     , _pgUploadProtocol :: !(Maybe Text)
-    , _pgAccessToken    :: !(Maybe Text)
-    , _pgUploadType     :: !(Maybe Text)
-    , _pgName           :: !Text
-    , _pgCallback       :: !(Maybe Text)
+    , _pgAccessToken :: !(Maybe Text)
+    , _pgUploadType :: !(Maybe Text)
+    , _pgName :: !Text
+    , _pgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

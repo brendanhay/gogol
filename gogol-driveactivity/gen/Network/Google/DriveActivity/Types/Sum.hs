@@ -16,11 +16,12 @@
 --
 module Network.Google.DriveActivity.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | Indicates the
--- </drive/web/manage-sharing#roles Google Drive permissions role>. The
--- role determines a user\'s ability to read, write, and comment on items.
+-- | Indicates the [Google Drive permissions
+-- role](https:\/\/developers.google.com\/drive\/web\/manage-sharing#roles).
+-- The role determines a user\'s ability to read, write, and comment on
+-- items.
 data PermissionRole
     = PRRoleUnspecified
       -- ^ @ROLE_UNSPECIFIED@

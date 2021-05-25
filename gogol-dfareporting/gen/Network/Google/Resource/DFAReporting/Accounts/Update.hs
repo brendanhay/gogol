@@ -22,7 +22,7 @@
 --
 -- Updates an existing account.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accounts.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accounts.update@.
 module Network.Google.Resource.DFAReporting.Accounts.Update
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.Accounts.Update
     , AccountsUpdate
 
     -- * Request Lenses
+    , auuXgafv
+    , auuUploadProtocol
+    , auuAccessToken
+    , auuUploadType
     , auuProFileId
     , auuPayload
+    , auuCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accounts.update@ method which the
 -- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Account :> Put '[JSON] Account
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Account :> Put '[JSON] Account
 
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate =
   AccountsUpdate'
-    { _auuProFileId :: !(Textual Int64)
-    , _auuPayload   :: !Account
+    { _auuXgafv :: !(Maybe Xgafv)
+    , _auuUploadProtocol :: !(Maybe Text)
+    , _auuAccessToken :: !(Maybe Text)
+    , _auuUploadType :: !(Maybe Text)
+    , _auuProFileId :: !(Textual Int64)
+    , _auuPayload :: !Account
+    , _auuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,56 @@ data AccountsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'auuXgafv'
+--
+-- * 'auuUploadProtocol'
+--
+-- * 'auuAccessToken'
+--
+-- * 'auuUploadType'
+--
 -- * 'auuProFileId'
 --
 -- * 'auuPayload'
+--
+-- * 'auuCallback'
 accountsUpdate
     :: Int64 -- ^ 'auuProFileId'
     -> Account -- ^ 'auuPayload'
     -> AccountsUpdate
 accountsUpdate pAuuProFileId_ pAuuPayload_ =
   AccountsUpdate'
-    {_auuProFileId = _Coerce # pAuuProFileId_, _auuPayload = pAuuPayload_}
+    { _auuXgafv = Nothing
+    , _auuUploadProtocol = Nothing
+    , _auuAccessToken = Nothing
+    , _auuUploadType = Nothing
+    , _auuProFileId = _Coerce # pAuuProFileId_
+    , _auuPayload = pAuuPayload_
+    , _auuCallback = Nothing
+    }
 
+
+-- | V1 error format.
+auuXgafv :: Lens' AccountsUpdate (Maybe Xgafv)
+auuXgafv = lens _auuXgafv (\ s a -> s{_auuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+auuUploadProtocol :: Lens' AccountsUpdate (Maybe Text)
+auuUploadProtocol
+  = lens _auuUploadProtocol
+      (\ s a -> s{_auuUploadProtocol = a})
+
+-- | OAuth access token.
+auuAccessToken :: Lens' AccountsUpdate (Maybe Text)
+auuAccessToken
+  = lens _auuAccessToken
+      (\ s a -> s{_auuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+auuUploadType :: Lens' AccountsUpdate (Maybe Text)
+auuUploadType
+  = lens _auuUploadType
+      (\ s a -> s{_auuUploadType = a})
 
 -- | User profile ID associated with this request.
 auuProFileId :: Lens' AccountsUpdate Int64
@@ -89,12 +143,22 @@ auuPayload :: Lens' AccountsUpdate Account
 auuPayload
   = lens _auuPayload (\ s a -> s{_auuPayload = a})
 
+-- | JSONP
+auuCallback :: Lens' AccountsUpdate (Maybe Text)
+auuCallback
+  = lens _auuCallback (\ s a -> s{_auuCallback = a})
+
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
         type Scopes AccountsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountsUpdate'{..}
-          = go _auuProFileId (Just AltJSON) _auuPayload
+          = go _auuProFileId _auuXgafv _auuUploadProtocol
+              _auuAccessToken
+              _auuUploadType
+              _auuCallback
+              (Just AltJSON)
+              _auuPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)

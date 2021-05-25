@@ -37,8 +37,8 @@ module Network.Google.Resource.Mirror.Contacts.Update
     , cuId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.update@ method which the
 -- 'ContactsUpdate' request conforms to.
@@ -56,7 +56,7 @@ type ContactsUpdateResource =
 data ContactsUpdate =
   ContactsUpdate'
     { _cuPayload :: !Contact
-    , _cuId      :: !Text
+    , _cuId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

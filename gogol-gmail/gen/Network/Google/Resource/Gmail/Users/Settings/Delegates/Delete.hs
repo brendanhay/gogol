@@ -37,12 +37,17 @@ module Network.Google.Resource.Gmail.Users.Settings.Delegates.Delete
     , UsersSettingsDelegatesDelete
 
     -- * Request Lenses
+    , usddXgafv
+    , usddUploadProtocol
+    , usddAccessToken
+    , usddUploadType
     , usddUserId
     , usddDelegateEmail
+    , usddCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.delegates.delete@ method which the
 -- 'UsersSettingsDelegatesDelete' request conforms to.
@@ -54,7 +59,12 @@ type UsersSettingsDelegatesDeleteResource =
              "settings" :>
                "delegates" :>
                  Capture "delegateEmail" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes the specified delegate (which can be of any verification
 -- status), and revokes any verification that may have been required for
@@ -65,8 +75,13 @@ type UsersSettingsDelegatesDeleteResource =
 -- /See:/ 'usersSettingsDelegatesDelete' smart constructor.
 data UsersSettingsDelegatesDelete =
   UsersSettingsDelegatesDelete'
-    { _usddUserId        :: !Text
+    { _usddXgafv :: !(Maybe Xgafv)
+    , _usddUploadProtocol :: !(Maybe Text)
+    , _usddAccessToken :: !(Maybe Text)
+    , _usddUploadType :: !(Maybe Text)
+    , _usddUserId :: !Text
     , _usddDelegateEmail :: !Text
+    , _usddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,16 +90,56 @@ data UsersSettingsDelegatesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usddXgafv'
+--
+-- * 'usddUploadProtocol'
+--
+-- * 'usddAccessToken'
+--
+-- * 'usddUploadType'
+--
 -- * 'usddUserId'
 --
 -- * 'usddDelegateEmail'
+--
+-- * 'usddCallback'
 usersSettingsDelegatesDelete
     :: Text -- ^ 'usddDelegateEmail'
     -> UsersSettingsDelegatesDelete
 usersSettingsDelegatesDelete pUsddDelegateEmail_ =
   UsersSettingsDelegatesDelete'
-    {_usddUserId = "me", _usddDelegateEmail = pUsddDelegateEmail_}
+    { _usddXgafv = Nothing
+    , _usddUploadProtocol = Nothing
+    , _usddAccessToken = Nothing
+    , _usddUploadType = Nothing
+    , _usddUserId = "me"
+    , _usddDelegateEmail = pUsddDelegateEmail_
+    , _usddCallback = Nothing
+    }
 
+
+-- | V1 error format.
+usddXgafv :: Lens' UsersSettingsDelegatesDelete (Maybe Xgafv)
+usddXgafv
+  = lens _usddXgafv (\ s a -> s{_usddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usddUploadProtocol :: Lens' UsersSettingsDelegatesDelete (Maybe Text)
+usddUploadProtocol
+  = lens _usddUploadProtocol
+      (\ s a -> s{_usddUploadProtocol = a})
+
+-- | OAuth access token.
+usddAccessToken :: Lens' UsersSettingsDelegatesDelete (Maybe Text)
+usddAccessToken
+  = lens _usddAccessToken
+      (\ s a -> s{_usddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usddUploadType :: Lens' UsersSettingsDelegatesDelete (Maybe Text)
+usddUploadType
+  = lens _usddUploadType
+      (\ s a -> s{_usddUploadType = a})
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
@@ -98,13 +153,23 @@ usddDelegateEmail
   = lens _usddDelegateEmail
       (\ s a -> s{_usddDelegateEmail = a})
 
+-- | JSONP
+usddCallback :: Lens' UsersSettingsDelegatesDelete (Maybe Text)
+usddCallback
+  = lens _usddCallback (\ s a -> s{_usddCallback = a})
+
 instance GoogleRequest UsersSettingsDelegatesDelete
          where
         type Rs UsersSettingsDelegatesDelete = ()
         type Scopes UsersSettingsDelegatesDelete =
              '["https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsDelegatesDelete'{..}
-          = go _usddUserId _usddDelegateEmail (Just AltJSON)
+          = go _usddUserId _usddDelegateEmail _usddXgafv
+              _usddUploadProtocol
+              _usddAccessToken
+              _usddUploadType
+              _usddCallback
+              (Just AltJSON)
               gmailService
           where go
                   = buildClient

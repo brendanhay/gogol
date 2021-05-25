@@ -44,8 +44,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.List
     , psclCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.scanConfigs.list@ method which the
 -- 'ProjectsScanConfigsList' request conforms to.
@@ -69,15 +69,15 @@ type ProjectsScanConfigsListResource =
 -- /See:/ 'projectsScanConfigsList' smart constructor.
 data ProjectsScanConfigsList =
   ProjectsScanConfigsList'
-    { _psclParent         :: !Text
-    , _psclXgafv          :: !(Maybe Xgafv)
+    { _psclParent :: !Text
+    , _psclXgafv :: !(Maybe Xgafv)
     , _psclUploadProtocol :: !(Maybe Text)
-    , _psclAccessToken    :: !(Maybe Text)
-    , _psclUploadType     :: !(Maybe Text)
-    , _psclFilter         :: !(Maybe Text)
-    , _psclPageToken      :: !(Maybe Text)
-    , _psclPageSize       :: !(Maybe (Textual Int32))
-    , _psclCallback       :: !(Maybe Text)
+    , _psclAccessToken :: !(Maybe Text)
+    , _psclUploadType :: !(Maybe Text)
+    , _psclFilter :: !(Maybe Text)
+    , _psclPageToken :: !(Maybe Text)
+    , _psclPageSize :: !(Maybe (Textual Int32))
+    , _psclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,8 +120,8 @@ projectsScanConfigsList pPsclParent_ =
     }
 
 
--- | The name of the project to list scan configurations for in the form of
--- \`projects\/[PROJECT_ID]\`.
+-- | Required. The name of the project to list scan configurations for in the
+-- form of \`projects\/[PROJECT_ID]\`.
 psclParent :: Lens' ProjectsScanConfigsList Text
 psclParent
   = lens _psclParent (\ s a -> s{_psclParent = a})
@@ -149,7 +149,7 @@ psclUploadType
   = lens _psclUploadType
       (\ s a -> s{_psclUploadType = a})
 
--- | The filter expression.
+-- | Required. The filter expression.
 psclFilter :: Lens' ProjectsScanConfigsList (Maybe Text)
 psclFilter
   = lens _psclFilter (\ s a -> s{_psclFilter = a})

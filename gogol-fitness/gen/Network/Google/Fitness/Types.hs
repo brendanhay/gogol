@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,12 +22,16 @@ module Network.Google.Fitness.Types
     -- * OAuth Scopes
     , fitnessBodyTemperatureReadScope
     , fitnessBodyReadScope
+    , fitnessHeartRateWriteScope
+    , fitnessSleepWriteScope
     , fitnessNutritionReadScope
     , fitnessReProductiveHealthReadScope
     , fitnessActivityReadScope
     , fitnessReProductiveHealthWriteScope
     , fitnessActivityWriteScope
     , fitnessBloodPressureWriteScope
+    , fitnessSleepReadScope
+    , fitnessHeartRateReadScope
     , fitnessBodyTemperatureWriteScope
     , fitnessOxygenSaturationReadScope
     , fitnessBloodGlucoseWriteScope
@@ -156,6 +160,9 @@ module Network.Google.Fitness.Types
     , listDataSourcesResponse
     , ldsrDataSource
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * DataTypeField
     , DataTypeField
     , dataTypeField
@@ -234,84 +241,114 @@ module Network.Google.Fitness.Types
     , DataTypeFieldFormat (..)
     ) where
 
-import           Network.Google.Fitness.Types.Product
-import           Network.Google.Fitness.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Fitness.Types.Product
+import Network.Google.Fitness.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Fitness. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Fitness API. This contains the host and root path used as a starting point for constructing service requests.
 fitnessService :: ServiceConfig
 fitnessService
   = defaultService (ServiceId "fitness:v1")
-      "www.googleapis.com"
+      "fitness.googleapis.com"
 
--- | View body temperature data in Google Fit
+-- | See info about your body temperature in Google Fit. I consent to Google
+-- sharing my body temperature information with this app.
 fitnessBodyTemperatureReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.read"]
 fitnessBodyTemperatureReadScope = Proxy
 
--- | View body sensor information in Google Fit
+-- | See info about your body measurements and heart rate in Google Fit
 fitnessBodyReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
 fitnessBodyReadScope = Proxy
 
--- | View nutrition information in Google Fit
+-- | Add to your heart rate data in Google Fit. I consent to Google using my
+-- heart rate information with this app.
+fitnessHeartRateWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.write"]
+fitnessHeartRateWriteScope = Proxy
+
+-- | Add to your sleep data in Google Fit. I consent to Google using my sleep
+-- information with this app.
+fitnessSleepWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.sleep.write"]
+fitnessSleepWriteScope = Proxy
+
+-- | See info about your nutrition in Google Fit
 fitnessNutritionReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.read"]
 fitnessNutritionReadScope = Proxy
 
--- | View reproductive health data in Google Fit
+-- | See info about your reproductive health in Google Fit. I consent to
+-- Google sharing my reproductive health information with this app.
 fitnessReProductiveHealthReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.read"]
 fitnessReProductiveHealthReadScope = Proxy
 
--- | View your activity information in Google Fit
+-- | Use Google Fit to see and store your physical activity data
 fitnessActivityReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
 fitnessActivityReadScope = Proxy
 
--- | View and store reproductive health data in Google Fit
+-- | Add info about your reproductive health in Google Fit. I consent to
+-- Google using my reproductive health information with this app.
 fitnessReProductiveHealthWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.write"]
 fitnessReProductiveHealthWriteScope = Proxy
 
--- | View and store your activity information in Google Fit
+-- | Add to your Google Fit physical activity data
 fitnessActivityWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
 fitnessActivityWriteScope = Proxy
 
--- | View and store blood pressure data in Google Fit
+-- | Add info about your blood pressure in Google Fit. I consent to Google
+-- using my blood pressure information with this app.
 fitnessBloodPressureWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.write"]
 fitnessBloodPressureWriteScope = Proxy
 
--- | View and store body temperature data in Google Fit
+-- | See your sleep data in Google Fit. I consent to Google sharing my sleep
+-- information with this app.
+fitnessSleepReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.sleep.read"]
+fitnessSleepReadScope = Proxy
+
+-- | See your heart rate data in Google Fit. I consent to Google sharing my
+-- heart rate information with this app.
+fitnessHeartRateReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.read"]
+fitnessHeartRateReadScope = Proxy
+
+-- | Add to info about your body temperature in Google Fit. I consent to
+-- Google using my body temperature information with this app.
 fitnessBodyTemperatureWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.write"]
 fitnessBodyTemperatureWriteScope = Proxy
 
--- | View oxygen saturation data in Google Fit
+-- | See info about your oxygen saturation in Google Fit. I consent to Google
+-- sharing my oxygen saturation information with this app.
 fitnessOxygenSaturationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.read"]
 fitnessOxygenSaturationReadScope = Proxy
 
--- | View and store blood glucose data in Google Fit
+-- | Add info about your blood glucose to Google Fit. I consent to Google
+-- using my blood glucose information with this app.
 fitnessBloodGlucoseWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.write"]
 fitnessBloodGlucoseWriteScope = Proxy
 
--- | View blood pressure data in Google Fit
+-- | See info about your blood pressure in Google Fit. I consent to Google
+-- sharing my blood pressure information with this app.
 fitnessBloodPressureReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.read"]
 fitnessBloodPressureReadScope = Proxy
 
--- | View your stored location data in Google Fit
+-- | See your Google Fit speed and distance data
 fitnessLocationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
 fitnessLocationReadScope = Proxy
 
--- | View and store your location data in Google Fit
+-- | Add to your Google Fit location data
 fitnessLocationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
 fitnessLocationWriteScope = Proxy
 
--- | View and store nutrition information in Google Fit
+-- | Add to info about your nutrition in Google Fit
 fitnessNutritionWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.write"]
 fitnessNutritionWriteScope = Proxy
 
--- | View and store body sensor data in Google Fit
+-- | Add info about your body measurements and heart rate to Google Fit
 fitnessBodyWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
 fitnessBodyWriteScope = Proxy
 
--- | View blood glucose data in Google Fit
+-- | See info about your blood glucose in Google Fit. I consent to Google
+-- sharing my blood glucose information with this app.
 fitnessBloodGlucoseReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.read"]
 fitnessBloodGlucoseReadScope = Proxy
 
--- | View and store oxygen saturation data in Google Fit
+-- | Add info about your oxygen saturation in Google Fit. I consent to Google
+-- using my oxygen saturation information with this app.
 fitnessOxygenSaturationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.write"]
 fitnessOxygenSaturationWriteScope = Proxy

@@ -33,13 +33,18 @@ module Network.Google.Resource.AndroidEnterprise.Products.Get
     , ProductsGet
 
     -- * Request Lenses
+    , proXgafv
+    , proUploadProtocol
     , proEnterpriseId
+    , proAccessToken
+    , proUploadType
     , proLanguage
     , proProductId
+    , proCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.get@ method which the
 -- 'ProductsGet' request conforms to.
@@ -50,17 +55,27 @@ type ProductsGetResource =
            Capture "enterpriseId" Text :>
              "products" :>
                Capture "productId" Text :>
-                 QueryParam "language" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Product
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "language" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Product
 
 -- | Retrieves details of a product for display to an enterprise admin.
 --
 -- /See:/ 'productsGet' smart constructor.
 data ProductsGet =
   ProductsGet'
-    { _proEnterpriseId :: !Text
-    , _proLanguage     :: !(Maybe Text)
-    , _proProductId    :: !Text
+    { _proXgafv :: !(Maybe Xgafv)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proEnterpriseId :: !Text
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proLanguage :: !(Maybe Text)
+    , _proProductId :: !Text
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,28 +84,65 @@ data ProductsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'proXgafv'
+--
+-- * 'proUploadProtocol'
+--
 -- * 'proEnterpriseId'
+--
+-- * 'proAccessToken'
+--
+-- * 'proUploadType'
 --
 -- * 'proLanguage'
 --
 -- * 'proProductId'
+--
+-- * 'proCallback'
 productsGet
     :: Text -- ^ 'proEnterpriseId'
     -> Text -- ^ 'proProductId'
     -> ProductsGet
 productsGet pProEnterpriseId_ pProProductId_ =
   ProductsGet'
-    { _proEnterpriseId = pProEnterpriseId_
+    { _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proEnterpriseId = pProEnterpriseId_
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
     , _proLanguage = Nothing
     , _proProductId = pProProductId_
+    , _proCallback = Nothing
     }
 
+
+-- | V1 error format.
+proXgafv :: Lens' ProductsGet (Maybe Xgafv)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+proUploadProtocol :: Lens' ProductsGet (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | The ID of the enterprise.
 proEnterpriseId :: Lens' ProductsGet Text
 proEnterpriseId
   = lens _proEnterpriseId
       (\ s a -> s{_proEnterpriseId = a})
+
+-- | OAuth access token.
+proAccessToken :: Lens' ProductsGet (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+proUploadType :: Lens' ProductsGet (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",
 -- \"de\").
@@ -103,12 +155,22 @@ proProductId :: Lens' ProductsGet Text
 proProductId
   = lens _proProductId (\ s a -> s{_proProductId = a})
 
+-- | JSONP
+proCallback :: Lens' ProductsGet (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
+
 instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
         type Scopes ProductsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGet'{..}
-          = go _proEnterpriseId _proProductId _proLanguage
+          = go _proEnterpriseId _proProductId _proXgafv
+              _proUploadProtocol
+              _proAccessToken
+              _proUploadType
+              _proLanguage
+              _proCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -46,13 +46,13 @@ module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Dismiss
     , fardCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.folders.approvalRequests.dismiss@ method which the
 -- 'FoldersApprovalRequestsDismiss' request conforms to.
 type FoldersApprovalRequestsDismissResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "dismiss" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -72,13 +72,13 @@ type FoldersApprovalRequestsDismissResource =
 -- /See:/ 'foldersApprovalRequestsDismiss' smart constructor.
 data FoldersApprovalRequestsDismiss =
   FoldersApprovalRequestsDismiss'
-    { _fardXgafv          :: !(Maybe Xgafv)
+    { _fardXgafv :: !(Maybe Xgafv)
     , _fardUploadProtocol :: !(Maybe Text)
-    , _fardAccessToken    :: !(Maybe Text)
-    , _fardUploadType     :: !(Maybe Text)
-    , _fardPayload        :: !DismissApprovalRequestMessage
-    , _fardName           :: !Text
-    , _fardCallback       :: !(Maybe Text)
+    , _fardAccessToken :: !(Maybe Text)
+    , _fardUploadType :: !(Maybe Text)
+    , _fardPayload :: !DismissApprovalRequestMessage
+    , _fardName :: !Text
+    , _fardCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

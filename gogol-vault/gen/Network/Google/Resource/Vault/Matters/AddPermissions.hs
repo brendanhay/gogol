@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.AddPermissions
     , mapCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.addPermissions@ method which the
 -- 'MattersAddPermissions' request conforms to.
@@ -65,13 +65,13 @@ type MattersAddPermissionsResource =
 -- /See:/ 'mattersAddPermissions' smart constructor.
 data MattersAddPermissions =
   MattersAddPermissions'
-    { _mapXgafv          :: !(Maybe Xgafv)
+    { _mapXgafv :: !(Maybe Xgafv)
     , _mapUploadProtocol :: !(Maybe Text)
-    , _mapAccessToken    :: !(Maybe Text)
-    , _mapUploadType     :: !(Maybe Text)
-    , _mapPayload        :: !AddMatterPermissionsRequest
-    , _mapMatterId       :: !Text
-    , _mapCallback       :: !(Maybe Text)
+    , _mapAccessToken :: !(Maybe Text)
+    , _mapUploadType :: !(Maybe Text)
+    , _mapPayload :: !AddMatterPermissionsRequest
+    , _mapMatterId :: !Text
+    , _mapCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

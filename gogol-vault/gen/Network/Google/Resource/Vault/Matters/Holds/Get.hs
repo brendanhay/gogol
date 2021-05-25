@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a hold by ID.
+-- Gets the specified hold.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.get@.
 module Network.Google.Resource.Vault.Matters.Holds.Get
@@ -43,8 +43,8 @@ module Network.Google.Resource.Vault.Matters.Holds.Get
     , mhgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.get@ method which the
 -- 'MattersHoldsGet' request conforms to.
@@ -58,23 +58,23 @@ type MattersHoldsGetResource =
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "view" Text :>
+                       QueryParam "view" MattersHoldsGetView :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Hold
 
--- | Gets a hold by ID.
+-- | Gets the specified hold.
 --
 -- /See:/ 'mattersHoldsGet' smart constructor.
 data MattersHoldsGet =
   MattersHoldsGet'
-    { _mhgXgafv          :: !(Maybe Xgafv)
+    { _mhgXgafv :: !(Maybe Xgafv)
     , _mhgUploadProtocol :: !(Maybe Text)
-    , _mhgHoldId         :: !Text
-    , _mhgAccessToken    :: !(Maybe Text)
-    , _mhgUploadType     :: !(Maybe Text)
-    , _mhgMatterId       :: !Text
-    , _mhgView           :: !(Maybe Text)
-    , _mhgCallback       :: !(Maybe Text)
+    , _mhgHoldId :: !Text
+    , _mhgAccessToken :: !(Maybe Text)
+    , _mhgUploadType :: !(Maybe Text)
+    , _mhgMatterId :: !Text
+    , _mhgView :: !(Maybe MattersHoldsGetView)
+    , _mhgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,8 +147,8 @@ mhgMatterId :: Lens' MattersHoldsGet Text
 mhgMatterId
   = lens _mhgMatterId (\ s a -> s{_mhgMatterId = a})
 
--- | Specifies which parts of the Hold to return.
-mhgView :: Lens' MattersHoldsGet (Maybe Text)
+-- | The amount of detail to return for a hold.
+mhgView :: Lens' MattersHoldsGet (Maybe MattersHoldsGetView)
 mhgView = lens _mhgView (\ s a -> s{_mhgView = a})
 
 -- | JSONP

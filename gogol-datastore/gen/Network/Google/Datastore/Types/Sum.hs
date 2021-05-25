@@ -16,7 +16,7 @@
 --
 module Network.Google.Datastore.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The direction to order by. Defaults to \`ASCENDING\`.
 data PropertyOrderDirection
@@ -269,8 +269,8 @@ instance FromJSON ValueNullValue where
 instance ToJSON ValueNullValue where
     toJSON = toJSONText
 
--- | The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
--- Required.
+-- | Required. The indexed property\'s direction. Must not be
+-- DIRECTION_UNSPECIFIED.
 data GoogleDatastoreAdminV1IndexedPropertyDirection
     = GDAVIPDDirectionUnspecified
       -- ^ @DIRECTION_UNSPECIFIED@
@@ -306,8 +306,8 @@ instance FromJSON GoogleDatastoreAdminV1IndexedPropertyDirection where
 instance ToJSON GoogleDatastoreAdminV1IndexedPropertyDirection where
     toJSON = toJSONText
 
--- | The index\'s ancestor mode. Must not be ANCESTOR_MODE_UNSPECIFIED.
--- Required.
+-- | Required. The index\'s ancestor mode. Must not be
+-- ANCESTOR_MODE_UNSPECIFIED.
 data GoogleDatastoreAdminV1IndexAncestor
     = AncestorModeUnspecified
       -- ^ @ANCESTOR_MODE_UNSPECIFIED@
@@ -376,7 +376,7 @@ instance FromJSON ReadOptionsReadConsistency where
 instance ToJSON ReadOptionsReadConsistency where
     toJSON = toJSONText
 
--- | The state of the index. Output only.
+-- | Output only. The state of the index.
 data GoogleDatastoreAdminV1IndexState
     = StateUnspecified
       -- ^ @STATE_UNSPECIFIED@

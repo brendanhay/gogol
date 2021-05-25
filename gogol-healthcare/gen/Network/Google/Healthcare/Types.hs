@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -21,6 +21,26 @@ module Network.Google.Healthcare.Types
 
     -- * OAuth Scopes
     , cloudPlatformScope
+
+    -- * Attribute
+    , Attribute
+    , attribute
+    , aValues
+    , aAttributeDefinitionId
+
+    -- * Signature
+    , Signature
+    , signature
+    , sImage
+    , sSignatureTime
+    , sUserId
+    , sMetadata
+
+    -- * ListConsentsResponse
+    , ListConsentsResponse
+    , listConsentsResponse
+    , lcrNextPageToken
+    , lcrConsents
 
     -- * Status
     , Status
@@ -66,28 +86,36 @@ module Network.Google.Healthcare.Types
     , hTTPBodyExtensionsItem
     , httpbeiAddtional
 
+    -- * ListUserDataMAppingsResponse
+    , ListUserDataMAppingsResponse
+    , listUserDataMAppingsResponse
+    , ludmarNextPageToken
+    , ludmarUserDataMAppings
+
+    -- * ListConsentRevisionsResponse
+    , ListConsentRevisionsResponse
+    , listConsentRevisionsResponse
+    , lcrrNextPageToken
+    , lcrrConsents
+
     -- * RedactConfig
     , RedactConfig
     , redactConfig
 
-    -- * DeidentifyErrorDetails
-    , DeidentifyErrorDetails
-    , deidentifyErrorDetails
-    , dedSuccessStoreCount
-    , dedSuccessResourceCount
-    , dedFailureResourceCount
-    , dedFailureStoreCount
+    -- * Image
+    , Image
+    , image
+    , iRawBytes
+    , iGcsURI
 
     -- * NotificationConfig
     , NotificationConfig
     , notificationConfig
     , ncPubsubTopic
 
-    -- * GoogleCloudHealthcareV1beta1FhirRestImportResourcesResponse
-    , GoogleCloudHealthcareV1beta1FhirRestImportResourcesResponse
-    , googleCloudHealthcareV1beta1FhirRestImportResourcesResponse
-    , gchvfrirrFhirStore
-    , gchvfrirrInputSize
+    -- * ImportResourcesResponse
+    , ImportResourcesResponse
+    , importResourcesResponse
 
     -- * FhirConfig
     , FhirConfig
@@ -101,6 +129,12 @@ module Network.Google.Healthcare.Types
     , eExpression
     , eTitle
     , eDescription
+
+    -- * VersionSource
+    , VersionSource
+    , versionSource
+    , vsValue
+    , vsMshField
 
     -- * TextConfig
     , TextConfig
@@ -119,11 +153,15 @@ module Network.Google.Healthcare.Types
     , lorNextPageToken
     , lorOperations
 
-    -- * GoogleCloudHealthcareV1beta1DicomGcsDestination
-    , GoogleCloudHealthcareV1beta1DicomGcsDestination
-    , googleCloudHealthcareV1beta1DicomGcsDestination
-    , gchvdgdURIPrefix
-    , gchvdgdMimeType
+    -- * CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
+
+    -- * Hl7TypesConfig
+    , Hl7TypesConfig
+    , hl7TypesConfig
+    , htcVersion
+    , htcType
 
     -- * FhirStore
     , FhirStore
@@ -133,8 +171,10 @@ module Network.Google.Healthcare.Types
     , fsDisableReferentialIntegrity
     , fsDisableResourceVersioning
     , fsName
+    , fsVersion
+    , fsStreamConfigs
     , fsLabels
-    , fsEnableHistoryImport
+    , fsDefaultSearchHandlingStrict
 
     -- * SegmentFields
     , SegmentFields
@@ -147,10 +187,35 @@ module Network.Google.Healthcare.Types
     , dsName
     , dsTimeZone
 
-    -- * GoogleCloudHealthcareV1beta1FhirRestGcsSource
-    , GoogleCloudHealthcareV1beta1FhirRestGcsSource
-    , googleCloudHealthcareV1beta1FhirRestGcsSource
-    , gchvfrgsURI
+    -- * ImportDicomDataResponse
+    , ImportDicomDataResponse
+    , importDicomDataResponse
+
+    -- * Field
+    , Field
+    , field
+    , fMaxOccurs
+    , fName
+    , fType
+    , fTable
+    , fMinOccurs
+
+    -- * SchemaSegment
+    , SchemaSegment
+    , schemaSegment
+    , ssMaxOccurs
+    , ssType
+    , ssMinOccurs
+
+    -- * UserDataMApping
+    , UserDataMApping
+    , userDataMApping
+    , udmaResourceAttributes
+    , udmaUserId
+    , udmaName
+    , udmaArchiveTime
+    , udmaDataId
+    , udmaArchived
 
     -- * Location
     , Location
@@ -179,23 +244,125 @@ module Network.Google.Healthcare.Types
     , Empty
     , empty
 
+    -- * ResultConsentDetails
+    , ResultConsentDetails
+    , resultConsentDetails
+    , rcdAddtional
+
+    -- * QueryAccessibleDataRequest
+    , QueryAccessibleDataRequest
+    , queryAccessibleDataRequest
+    , qadrResourceAttributes
+    , qadrGcsDestination
+    , qadrRequestAttributes
+
+    -- * RejectConsentRequest
+    , RejectConsentRequest
+    , rejectConsentRequest
+    , rcrConsentArtifact
+
     -- * ImportDicomDataRequest
     , ImportDicomDataRequest
     , importDicomDataRequest
     , iddrGcsSource
 
+    -- * QueryAccessibleDataRequestResourceAttributes
+    , QueryAccessibleDataRequestResourceAttributes
+    , queryAccessibleDataRequestResourceAttributes
+    , qadrraAddtional
+
+    -- * GoogleCloudHealthcareV1DicomBigQueryDestination
+    , GoogleCloudHealthcareV1DicomBigQueryDestination
+    , googleCloudHealthcareV1DicomBigQueryDestination
+    , gchvdbqdForce
+    , gchvdbqdTableURI
+
     -- * Hl7V2Store
     , Hl7V2Store
     , hl7V2Store
-    , hvsNotificationConfig
+    , hvsNotificationConfigs
+    , hvsRejectDuplicateMessage
     , hvsName
     , hvsParserConfig
     , hvsLabels
 
-    -- * GoogleCloudHealthcareV1beta1FhirRestGcsDestination
-    , GoogleCloudHealthcareV1beta1FhirRestGcsDestination
-    , googleCloudHealthcareV1beta1FhirRestGcsDestination
-    , gchvfrgdURIPrefix
+    -- * EvaluateUserConsentsRequestResponseView
+    , EvaluateUserConsentsRequestResponseView (..)
+
+    -- * GoogleCloudHealthcareV1DicomGcsSource
+    , GoogleCloudHealthcareV1DicomGcsSource
+    , googleCloudHealthcareV1DicomGcsSource
+    , gchvdgsURI
+
+    -- * Hl7V2NotificationConfig
+    , Hl7V2NotificationConfig
+    , hl7V2NotificationConfig
+    , hvncPubsubTopic
+    , hvncFilter
+
+    -- * ConsentArtifact
+    , ConsentArtifact
+    , consentArtifact
+    , caUserId
+    , caGuardianSignature
+    , caName
+    , caMetadata
+    , caUserSignature
+    , caConsentContentVersion
+    , caWitnessSignature
+    , caConsentContentScreenshots
+
+    -- * GoogleCloudHealthcareV1DeidentifyDeidentifyFhirStoreSummary
+    , GoogleCloudHealthcareV1DeidentifyDeidentifyFhirStoreSummary
+    , googleCloudHealthcareV1DeidentifyDeidentifyFhirStoreSummary
+
+    -- * GoogleCloudHealthcareV1FhirGcsDestination
+    , GoogleCloudHealthcareV1FhirGcsDestination
+    , googleCloudHealthcareV1FhirGcsDestination
+    , gchvfgdURIPrefix
+
+    -- * GoogleCloudHealthcareV1ConsentPolicy
+    , GoogleCloudHealthcareV1ConsentPolicy
+    , googleCloudHealthcareV1ConsentPolicy
+    , gchvcpResourceAttributes
+    , gchvcpAuthorizationRule
+
+    -- * ConsentMetadata
+    , ConsentMetadata
+    , consentMetadata
+    , cmAddtional
+
+    -- * SchemaPackage
+    , SchemaPackage
+    , schemaPackage
+    , spSchemas
+    , spTypes
+    , spSchematizedParsingType
+    , spIgnoreMinOccurs
+
+    -- * ExportDicomDataResponse
+    , ExportDicomDataResponse
+    , exportDicomDataResponse
+
+    -- * CheckDataAccessRequest
+    , CheckDataAccessRequest
+    , checkDataAccessRequest
+    , cdarResponseView
+    , cdarConsentList
+    , cdarDataId
+    , cdarRequestAttributes
+
+    -- * ListAttributeDefinitionsResponse
+    , ListAttributeDefinitionsResponse
+    , listAttributeDefinitionsResponse
+    , ladrNextPageToken
+    , ladrAttributeDefinitions
+
+    -- * ListConsentStoresResponse
+    , ListConsentStoresResponse
+    , listConsentStoresResponse
+    , lcsrNextPageToken
+    , lcsrConsentStores
 
     -- * StatusDetailsItem
     , StatusDetailsItem
@@ -211,18 +378,48 @@ module Network.Google.Healthcare.Types
     -- * ImageConfigTextRedactionMode
     , ImageConfigTextRedactionMode (..)
 
-    -- * GoogleCloudHealthcareV1beta1FhirRestImportResourcesErrorDetails
-    , GoogleCloudHealthcareV1beta1FhirRestImportResourcesErrorDetails
-    , googleCloudHealthcareV1beta1FhirRestImportResourcesErrorDetails
-    , gchvfriredFhirStore
-    , gchvfriredErrorCount
-    , gchvfriredSuccessCount
-    , gchvfriredInputSize
+    -- * Consent
+    , Consent
+    , consent
+    , cTtl
+    , cState
+    , cRevisionCreateTime
+    , cConsentArtifact
+    , cUserId
+    , cName
+    , cMetadata
+    , cExpireTime
+    , cRevisionId
+    , cPolicies
+
+    -- * EvaluateUserConsentsRequest
+    , EvaluateUserConsentsRequest
+    , evaluateUserConsentsRequest
+    , eucrResourceAttributes
+    , eucrResponseView
+    , eucrUserId
+    , eucrConsentList
+    , eucrPageToken
+    , eucrRequestAttributes
+    , eucrPageSize
 
     -- * DateShiftConfig
     , DateShiftConfig
     , dateShiftConfig
     , dscCryptoKey
+
+    -- * SchemaGroup
+    , SchemaGroup
+    , schemaGroup
+    , sgMaxOccurs
+    , sgMembers
+    , sgName
+    , sgChoice
+    , sgMinOccurs
+
+    -- * ArchiveUserDataMAppingRequest
+    , ArchiveUserDataMAppingRequest
+    , archiveUserDataMAppingRequest
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -230,11 +427,32 @@ module Network.Google.Healthcare.Types
     , siprUpdateMask
     , siprPolicy
 
+    -- * DicomFilterConfig
+    , DicomFilterConfig
+    , dicomFilterConfig
+    , dfcResourcePathsGcsURI
+
     -- * DeidentifySummary
     , DeidentifySummary
     , deidentifySummary
-    , dsSuccessStoreCount
-    , dsSuccessResourceCount
+
+    -- * GoogleCloudHealthcareV1DicomGcsDestination
+    , GoogleCloudHealthcareV1DicomGcsDestination
+    , googleCloudHealthcareV1DicomGcsDestination
+    , gchvdgdURIPrefix
+    , gchvdgdMimeType
+
+    -- * Result
+    , Result
+    , result
+    , rConsentDetails
+    , rConsented
+    , rDataId
+
+    -- * Resources
+    , Resources
+    , resources
+    , rResources
 
     -- * ProgressCounter
     , ProgressCounter
@@ -243,11 +461,80 @@ module Network.Google.Healthcare.Types
     , pcSuccess
     , pcFailure
 
+    -- * AttributeDefinitionCategory
+    , AttributeDefinitionCategory (..)
+
+    -- * ProjectsLocationsDataSetsHl7V2StoresMessagesGetView
+    , ProjectsLocationsDataSetsHl7V2StoresMessagesGetView (..)
+
     -- * ImportResourcesRequestContentStructure
     , ImportResourcesRequestContentStructure (..)
 
+    -- * TypePrimitive
+    , TypePrimitive (..)
+
+    -- * AttributeDefinition
+    , AttributeDefinition
+    , attributeDefinition
+    , adDataMAppingDefaultValue
+    , adCategory
+    , adName
+    , adConsentDefaultValues
+    , adAllowedValues
+    , adDescription
+
+    -- * GroupOrSegment
+    , GroupOrSegment
+    , groupOrSegment
+    , gosGroup
+    , gosSegment
+
+    -- * GoogleCloudHealthcareV1DeidentifyDeidentifyDicomStoreSummary
+    , GoogleCloudHealthcareV1DeidentifyDeidentifyDicomStoreSummary
+    , googleCloudHealthcareV1DeidentifyDeidentifyDicomStoreSummary
+
     -- * FieldMetadataAction
     , FieldMetadataAction (..)
+
+    -- * ConsentStore
+    , ConsentStore
+    , consentStore
+    , csName
+    , csLabels
+    , csEnableConsentCreateOnUpdate
+    , csDefaultConsentTtl
+
+    -- * ConsentList
+    , ConsentList
+    , consentList
+    , clConsents
+
+    -- * EvaluateUserConsentsResponse
+    , EvaluateUserConsentsResponse
+    , evaluateUserConsentsResponse
+    , eucrNextPageToken
+    , eucrResults
+
+    -- * ArchiveUserDataMAppingResponse
+    , ArchiveUserDataMAppingResponse
+    , archiveUserDataMAppingResponse
+
+    -- * ConsentStoreLabels
+    , ConsentStoreLabels
+    , consentStoreLabels
+    , cslAddtional
+
+    -- * SchemaPackageSchematizedParsingType
+    , SchemaPackageSchematizedParsingType (..)
+
+    -- * ConsentEvaluationEvaluationResult
+    , ConsentEvaluationEvaluationResult (..)
+
+    -- * SchematizedData
+    , SchematizedData
+    , schematizedData
+    , sdData
+    , sdError
 
     -- * FieldMetadata
     , FieldMetadata
@@ -263,23 +550,40 @@ module Network.Google.Healthcare.Types
     , dcFhir
     , dcText
 
+    -- * QueryAccessibleDataResponse
+    , QueryAccessibleDataResponse
+    , queryAccessibleDataResponse
+    , qadrGcsURIs
+
+    -- * RevokeConsentRequest
+    , RevokeConsentRequest
+    , revokeConsentRequest
+    , rConsentArtifact
+
     -- * FhirStoreLabels
     , FhirStoreLabels
     , fhirStoreLabels
     , fslAddtional
 
+    -- * DeidentifyDicomStoreRequest
+    , DeidentifyDicomStoreRequest
+    , deidentifyDicomStoreRequest
+    , ddsrConfig
+    , ddsrFilterConfig
+    , ddsrDestinationStore
+
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
-
-    -- * GoogleCloudHealthcareV1beta1FhirBigQueryDestination
-    , GoogleCloudHealthcareV1beta1FhirBigQueryDestination
-    , googleCloudHealthcareV1beta1FhirBigQueryDestination
-    , gchvfbqdSchemaConfig
-    , gchvfbqdDataSetURI
 
     -- * ReplaceWithInfoTypeConfig
     , ReplaceWithInfoTypeConfig
     , replaceWithInfoTypeConfig
+
+    -- * ListConsentArtifactsResponse
+    , ListConsentArtifactsResponse
+    , listConsentArtifactsResponse
+    , lcarNextPageToken
+    , lcarConsentArtifacts
 
     -- * IngestMessageResponse
     , IngestMessageResponse
@@ -304,6 +608,16 @@ module Network.Google.Healthcare.Types
     , lhvsrNextPageToken
     , lhvsrHl7V2Stores
 
+    -- * CheckDataAccessResponseConsentDetails
+    , CheckDataAccessResponseConsentDetails
+    , checkDataAccessResponseConsentDetails
+    , cdarcdAddtional
+
+    -- * ConsentArtifactMetadata
+    , ConsentArtifactMetadata
+    , consentArtifactMetadata
+    , camAddtional
+
     -- * DicomConfigFilterProFile
     , DicomConfigFilterProFile (..)
 
@@ -318,11 +632,28 @@ module Network.Google.Healthcare.Types
     , hl7V2StoreLabels
     , hvslAddtional
 
+    -- * FhirFilter
+    , FhirFilter
+    , fhirFilter
+    , ffResources
+
+    -- * CheckDataAccessRequestResponseView
+    , CheckDataAccessRequestResponseView (..)
+
     -- * ParserConfig
     , ParserConfig
     , parserConfig
     , pcSegmentTerminator
+    , pcSchema
     , pcAllowNullHeader
+
+    -- * ProjectsLocationsDataSetsHl7V2StoresMessagesListView
+    , ProjectsLocationsDataSetsHl7V2StoresMessagesListView (..)
+
+    -- * CheckDataAccessRequestRequestAttributes
+    , CheckDataAccessRequestRequestAttributes
+    , checkDataAccessRequestRequestAttributes
+    , cdarraAddtional
 
     -- * HTTPBody
     , HTTPBody
@@ -346,6 +677,25 @@ module Network.Google.Healthcare.Types
     , listDataSetsResponse
     , ldsrNextPageToken
     , ldsrDataSets
+
+    -- * Hl7SchemaConfig
+    , Hl7SchemaConfig
+    , hl7SchemaConfig
+    , hscMessageSchemaConfigs
+    , hscVersion
+
+    -- * FhirStoreVersion
+    , FhirStoreVersion (..)
+
+    -- * ConsentEvaluation
+    , ConsentEvaluation
+    , consentEvaluation
+    , ceEvaluationResult
+
+    -- * EvaluateUserConsentsRequestRequestAttributes
+    , EvaluateUserConsentsRequestRequestAttributes
+    , evaluateUserConsentsRequestRequestAttributes
+    , eucrraAddtional
 
     -- * Policy
     , Policy
@@ -371,6 +721,13 @@ module Network.Google.Healthcare.Types
     , ingestMessageRequest
     , iMessage
 
+    -- * Type
+    , Type
+    , type'
+    , tName
+    , tPrimitive
+    , tFields
+
     -- * LocationMetadata
     , LocationMetadata
     , locationMetadata
@@ -379,9 +736,11 @@ module Network.Google.Healthcare.Types
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
+    , omLogsURL
     , omCounter
     , omEndTime
     , omAPIMethodName
+    , omCancelRequested
     , omCreateTime
 
     -- * Message
@@ -390,6 +749,7 @@ module Network.Google.Healthcare.Types
     , mData
     , mMessageType
     , mName
+    , mSchematizedData
     , mPatientIds
     , mLabels
     , mSendTime
@@ -397,10 +757,10 @@ module Network.Google.Healthcare.Types
     , mCreateTime
     , mParsedData
 
-    -- * GoogleCloudHealthcareV1beta1DicomGcsSource
-    , GoogleCloudHealthcareV1beta1DicomGcsSource
-    , googleCloudHealthcareV1beta1DicomGcsSource
-    , gchvdgsURI
+    -- * Hl7SchemaConfigMessageSchemaConfigs
+    , Hl7SchemaConfigMessageSchemaConfigs
+    , hl7SchemaConfigMessageSchemaConfigs
+    , hscmscAddtional
 
     -- * CryptoHashConfig
     , CryptoHashConfig
@@ -414,10 +774,15 @@ module Network.Google.Healthcare.Types
     , dName
     , dLabels
 
-    -- * ImportDicomDataErrorDetails
-    , ImportDicomDataErrorDetails
-    , importDicomDataErrorDetails
-    , iddedSampleErrors
+    -- * GoogleCloudHealthcareV1ConsentGcsDestination
+    , GoogleCloudHealthcareV1ConsentGcsDestination
+    , googleCloudHealthcareV1ConsentGcsDestination
+    , gchvcgdURIPrefix
+
+    -- * QueryAccessibleDataRequestRequestAttributes
+    , QueryAccessibleDataRequestRequestAttributes
+    , queryAccessibleDataRequestRequestAttributes
+    , qAddtional
 
     -- * AuditLogConfig
     , AuditLogConfig
@@ -425,11 +790,13 @@ module Network.Google.Healthcare.Types
     , alcLogType
     , alcExemptedMembers
 
-    -- * GoogleCloudHealthcareV1beta1DicomBigQueryDestination
-    , GoogleCloudHealthcareV1beta1DicomBigQueryDestination
-    , googleCloudHealthcareV1beta1DicomBigQueryDestination
-    , gchvdbqdForce
-    , gchvdbqdTableURI
+    -- * EvaluateUserConsentsRequestResourceAttributes
+    , EvaluateUserConsentsRequestResourceAttributes
+    , evaluateUserConsentsRequestResourceAttributes
+    , eAddtional
+
+    -- * GoogleCloudHealthcareV1FhirBigQueryDestinationWriteDisPosition
+    , GoogleCloudHealthcareV1FhirBigQueryDestinationWriteDisPosition (..)
 
     -- * Segment
     , Segment
@@ -451,8 +818,12 @@ module Network.Google.Healthcare.Types
     -- * DeidentifyDataSetRequest
     , DeidentifyDataSetRequest
     , deidentifyDataSetRequest
-    , ddsrConfig
-    , ddsrDestinationDataSet
+    , dConfig
+    , dDestinationDataSet
+
+    -- * ExportResourcesResponse
+    , ExportResourcesResponse
+    , exportResourcesResponse
 
     -- * PatientId
     , PatientId
@@ -460,18 +831,19 @@ module Network.Google.Healthcare.Types
     , piValue
     , piType
 
-    -- * GoogleCloudHealthcareV1beta1FhirRestExportResourcesResponse
-    , GoogleCloudHealthcareV1beta1FhirRestExportResourcesResponse
-    , googleCloudHealthcareV1beta1FhirRestExportResourcesResponse
-    , gchvfrerrFhirStore
-    , gchvfrerrResourceCount
-
     -- * DicomConfig
     , DicomConfig
     , dicomConfig
+    , dcSkipIdRedaction
     , dcKeepList
     , dcRemoveList
     , dcFilterProFile
+
+    -- * StreamConfig
+    , StreamConfig
+    , streamConfig
+    , scBigQueryDestination
+    , scResourceTypes
 
     -- * OperationResponse
     , OperationResponse
@@ -483,6 +855,20 @@ module Network.Google.Healthcare.Types
     , createMessageRequest
     , cmrMessage
 
+    -- * DeidentifyFhirStoreRequest
+    , DeidentifyFhirStoreRequest
+    , deidentifyFhirStoreRequest
+    , dfsrResourceFilter
+    , dfsrConfig
+    , dfsrDestinationStore
+
+    -- * ActivateConsentRequest
+    , ActivateConsentRequest
+    , activateConsentRequest
+    , acrTtl
+    , acrConsentArtifact
+    , acrExpireTime
+
     -- * DicomStoreLabels
     , DicomStoreLabels
     , dicomStoreLabels
@@ -492,13 +878,40 @@ module Network.Google.Healthcare.Types
     , ListMessagesResponse
     , listMessagesResponse
     , lmrNextPageToken
-    , lmrMessages
+    , lmrHl7V2Messages
+
+    -- * GoogleCloudHealthcareV1FhirBigQueryDestination
+    , GoogleCloudHealthcareV1FhirBigQueryDestination
+    , googleCloudHealthcareV1FhirBigQueryDestination
+    , gchvfbqdWriteDisPosition
+    , gchvfbqdForce
+    , gchvfbqdSchemaConfig
+    , gchvfbqdDataSetURI
+
+    -- * CheckDataAccessResponse
+    , CheckDataAccessResponse
+    , checkDataAccessResponse
+    , cdarConsentDetails
+    , cdarConsented
+
+    -- * GoogleCloudHealthcareV1FhirGcsSource
+    , GoogleCloudHealthcareV1FhirGcsSource
+    , googleCloudHealthcareV1FhirGcsSource
+    , gchvfgsURI
 
     -- * ListDicomStoresResponse
     , ListDicomStoresResponse
     , listDicomStoresResponse
     , lNextPageToken
     , lDicomStores
+
+    -- * ConsentState
+    , ConsentState (..)
+
+    -- * SignatureMetadata
+    , SignatureMetadata
+    , signatureMetadata
+    , smAddtional
 
     -- * Binding
     , Binding
@@ -517,24 +930,18 @@ module Network.Google.Healthcare.Types
     , ParsedData
     , parsedData
     , pdSegments
-
-    -- * ErrorDetail
-    , ErrorDetail
-    , errorDetail
-    , edError
-    , edResource
     ) where
 
-import           Network.Google.Healthcare.Types.Product
-import           Network.Google.Healthcare.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types.Product
+import Network.Google.Healthcare.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Cloud Healthcare API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Healthcare API. This contains the host and root path used as a starting point for constructing service requests.
 healthcareService :: ServiceConfig
 healthcareService
-  = defaultService (ServiceId "healthcare:v1beta1")
+  = defaultService (ServiceId "healthcare:v1")
       "healthcare.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Subscriptions.Delete
     , sdId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete' request conforms to.

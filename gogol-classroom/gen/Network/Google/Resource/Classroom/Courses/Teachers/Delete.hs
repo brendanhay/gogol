@@ -47,8 +47,8 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
     , ctdtCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.teachers.delete@ method which the
 -- 'CoursesTeachersDelete' request conforms to.
@@ -75,13 +75,13 @@ type CoursesTeachersDeleteResource =
 -- /See:/ 'coursesTeachersDelete' smart constructor.
 data CoursesTeachersDelete =
   CoursesTeachersDelete'
-    { _ctdtXgafv          :: !(Maybe Xgafv)
+    { _ctdtXgafv :: !(Maybe Xgafv)
     , _ctdtUploadProtocol :: !(Maybe Text)
-    , _ctdtCourseId       :: !Text
-    , _ctdtAccessToken    :: !(Maybe Text)
-    , _ctdtUploadType     :: !(Maybe Text)
-    , _ctdtUserId         :: !Text
-    , _ctdtCallback       :: !(Maybe Text)
+    , _ctdtCourseId :: !Text
+    , _ctdtAccessToken :: !(Maybe Text)
+    , _ctdtUploadType :: !(Maybe Text)
+    , _ctdtUserId :: !Text
+    , _ctdtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

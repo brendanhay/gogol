@@ -50,8 +50,8 @@ module Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
     , sgcrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.generateConfigReport@ method which the
 -- 'ServicesGenerateConfigReport' request conforms to.
@@ -81,12 +81,12 @@ type ServicesGenerateConfigReportResource =
 -- /See:/ 'servicesGenerateConfigReport' smart constructor.
 data ServicesGenerateConfigReport =
   ServicesGenerateConfigReport'
-    { _sgcrXgafv          :: !(Maybe Xgafv)
+    { _sgcrXgafv :: !(Maybe Xgafv)
     , _sgcrUploadProtocol :: !(Maybe Text)
-    , _sgcrAccessToken    :: !(Maybe Text)
-    , _sgcrUploadType     :: !(Maybe Text)
-    , _sgcrPayload        :: !GenerateConfigReportRequest
-    , _sgcrCallback       :: !(Maybe Text)
+    , _sgcrAccessToken :: !(Maybe Text)
+    , _sgcrUploadType :: !(Maybe Text)
+    , _sgcrPayload :: !GenerateConfigReportRequest
+    , _sgcrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

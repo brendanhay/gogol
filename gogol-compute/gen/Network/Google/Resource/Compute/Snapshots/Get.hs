@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Snapshots.Get
     , sggProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.get@ method which the
 -- 'SnapshotsGet' request conforms to.
@@ -60,7 +60,7 @@ type SnapshotsGetResource =
 data SnapshotsGet =
   SnapshotsGet'
     { _sggSnapshot :: !Text
-    , _sggProject  :: !Text
+    , _sggProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/kms/ Cloud Key Management Service (KMS) API Reference> for @cloudkms.projects.locations.keyRings.importJobs.setIamPolicy@.
 module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.S
     , plkrijsipCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.importJobs.setIamPolicy@ method which the
 -- 'ProjectsLocationsKeyRingsImportJobsSetIAMPolicy' request conforms to.
@@ -62,18 +63,19 @@ type ProjectsLocationsKeyRingsImportJobsSetIAMPolicyResource
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsLocationsKeyRingsImportJobsSetIAMPolicy' smart constructor.
 data ProjectsLocationsKeyRingsImportJobsSetIAMPolicy =
   ProjectsLocationsKeyRingsImportJobsSetIAMPolicy'
-    { _plkrijsipXgafv          :: !(Maybe Xgafv)
+    { _plkrijsipXgafv :: !(Maybe Xgafv)
     , _plkrijsipUploadProtocol :: !(Maybe Text)
-    , _plkrijsipAccessToken    :: !(Maybe Text)
-    , _plkrijsipUploadType     :: !(Maybe Text)
-    , _plkrijsipPayload        :: !SetIAMPolicyRequest
-    , _plkrijsipResource       :: !Text
-    , _plkrijsipCallback       :: !(Maybe Text)
+    , _plkrijsipAccessToken :: !(Maybe Text)
+    , _plkrijsipUploadType :: !(Maybe Text)
+    , _plkrijsipPayload :: !SetIAMPolicyRequest
+    , _plkrijsipResource :: !Text
+    , _plkrijsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

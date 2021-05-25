@@ -22,7 +22,7 @@
 --
 -- Updates the state of a finding.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.findings.setState@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.findings.setState@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.SetState
     (
     -- * REST Resource
@@ -42,13 +42,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Set
     , osfssCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.findings.setState@ method which the
 -- 'OrganizationsSourcesFindingsSetState' request conforms to.
 type OrganizationsSourcesFindingsSetStateResource =
-     "v1" :>
+     "v1p1beta1" :>
        CaptureMode "name" "setState" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -57,20 +57,21 @@ type OrganizationsSourcesFindingsSetStateResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] SetFindingStateRequest :>
-                       Post '[JSON] Finding
+                       Post '[JSON]
+                         GoogleCloudSecuritycenterV1p1beta1Finding
 
 -- | Updates the state of a finding.
 --
 -- /See:/ 'organizationsSourcesFindingsSetState' smart constructor.
 data OrganizationsSourcesFindingsSetState =
   OrganizationsSourcesFindingsSetState'
-    { _osfssXgafv          :: !(Maybe Xgafv)
+    { _osfssXgafv :: !(Maybe Xgafv)
     , _osfssUploadProtocol :: !(Maybe Text)
-    , _osfssAccessToken    :: !(Maybe Text)
-    , _osfssUploadType     :: !(Maybe Text)
-    , _osfssPayload        :: !SetFindingStateRequest
-    , _osfssName           :: !Text
-    , _osfssCallback       :: !(Maybe Text)
+    , _osfssAccessToken :: !(Maybe Text)
+    , _osfssUploadType :: !(Maybe Text)
+    , _osfssPayload :: !SetFindingStateRequest
+    , _osfssName :: !Text
+    , _osfssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,9 +137,10 @@ osfssPayload :: Lens' OrganizationsSourcesFindingsSetState SetFindingStateReques
 osfssPayload
   = lens _osfssPayload (\ s a -> s{_osfssPayload = a})
 
--- | The relative resource name of the finding. See:
+-- | Required. The relative resource name of the finding. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/sources\/456\/finding\/789\".
+-- Example:
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/finding\/{finding_id}\".
 osfssName :: Lens' OrganizationsSourcesFindingsSetState Text
 osfssName
   = lens _osfssName (\ s a -> s{_osfssName = a})
@@ -153,7 +155,7 @@ instance GoogleRequest
            OrganizationsSourcesFindingsSetState
          where
         type Rs OrganizationsSourcesFindingsSetState =
-             Finding
+             GoogleCloudSecuritycenterV1p1beta1Finding
         type Scopes OrganizationsSourcesFindingsSetState =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient

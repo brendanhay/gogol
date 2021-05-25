@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.Interconnects.GetDiagnostics
     , igdsInterconnect
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnects.getDiagnostics@ method which the
 -- 'InterconnectsGetDiagnostics' request conforms to.
@@ -59,7 +59,7 @@ type InterconnectsGetDiagnosticsResource =
 -- /See:/ 'interconnectsGetDiagnostics' smart constructor.
 data InterconnectsGetDiagnostics =
   InterconnectsGetDiagnostics'
-    { _igdsProject      :: !Text
+    { _igdsProject :: !Text
     , _igdsInterconnect :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

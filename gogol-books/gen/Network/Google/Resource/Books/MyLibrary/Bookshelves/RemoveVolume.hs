@@ -22,7 +22,7 @@
 --
 -- Removes a volume from a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.removeVolume@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.bookshelves.removeVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
     , MyLibraryBookshelvesRemoveVolume
 
     -- * Request Lenses
+    , mlbrvXgafv
+    , mlbrvUploadProtocol
+    , mlbrvAccessToken
+    , mlbrvUploadType
     , mlbrvReason
     , mlbrvShelf
     , mlbrvVolumeId
     , mlbrvSource
+    , mlbrvCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.removeVolume@ method which the
 -- 'MyLibraryBookshelvesRemoveVolume' request conforms to.
@@ -52,21 +57,31 @@ type MyLibraryBookshelvesRemoveVolumeResource =
              Capture "shelf" Text :>
                "removeVolume" :>
                  QueryParam "volumeId" Text :>
-                   QueryParam "reason"
-                     MyLibraryBookshelvesRemoveVolumeReason
-                     :>
-                     QueryParam "source" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "reason"
+                             MyLibraryBookshelvesRemoveVolumeReason
+                             :>
+                             QueryParam "source" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Removes a volume from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesRemoveVolume' smart constructor.
 data MyLibraryBookshelvesRemoveVolume =
   MyLibraryBookshelvesRemoveVolume'
-    { _mlbrvReason   :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
-    , _mlbrvShelf    :: !Text
+    { _mlbrvXgafv :: !(Maybe Xgafv)
+    , _mlbrvUploadProtocol :: !(Maybe Text)
+    , _mlbrvAccessToken :: !(Maybe Text)
+    , _mlbrvUploadType :: !(Maybe Text)
+    , _mlbrvReason :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
+    , _mlbrvShelf :: !Text
     , _mlbrvVolumeId :: !Text
-    , _mlbrvSource   :: !(Maybe Text)
+    , _mlbrvSource :: !(Maybe Text)
+    , _mlbrvCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,6 +90,14 @@ data MyLibraryBookshelvesRemoveVolume =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlbrvXgafv'
+--
+-- * 'mlbrvUploadProtocol'
+--
+-- * 'mlbrvAccessToken'
+--
+-- * 'mlbrvUploadType'
+--
 -- * 'mlbrvReason'
 --
 -- * 'mlbrvShelf'
@@ -82,18 +105,48 @@ data MyLibraryBookshelvesRemoveVolume =
 -- * 'mlbrvVolumeId'
 --
 -- * 'mlbrvSource'
+--
+-- * 'mlbrvCallback'
 myLibraryBookshelvesRemoveVolume
     :: Text -- ^ 'mlbrvShelf'
     -> Text -- ^ 'mlbrvVolumeId'
     -> MyLibraryBookshelvesRemoveVolume
 myLibraryBookshelvesRemoveVolume pMlbrvShelf_ pMlbrvVolumeId_ =
   MyLibraryBookshelvesRemoveVolume'
-    { _mlbrvReason = Nothing
+    { _mlbrvXgafv = Nothing
+    , _mlbrvUploadProtocol = Nothing
+    , _mlbrvAccessToken = Nothing
+    , _mlbrvUploadType = Nothing
+    , _mlbrvReason = Nothing
     , _mlbrvShelf = pMlbrvShelf_
     , _mlbrvVolumeId = pMlbrvVolumeId_
     , _mlbrvSource = Nothing
+    , _mlbrvCallback = Nothing
     }
 
+
+-- | V1 error format.
+mlbrvXgafv :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Xgafv)
+mlbrvXgafv
+  = lens _mlbrvXgafv (\ s a -> s{_mlbrvXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlbrvUploadProtocol :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Text)
+mlbrvUploadProtocol
+  = lens _mlbrvUploadProtocol
+      (\ s a -> s{_mlbrvUploadProtocol = a})
+
+-- | OAuth access token.
+mlbrvAccessToken :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Text)
+mlbrvAccessToken
+  = lens _mlbrvAccessToken
+      (\ s a -> s{_mlbrvAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlbrvUploadType :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Text)
+mlbrvUploadType
+  = lens _mlbrvUploadType
+      (\ s a -> s{_mlbrvUploadType = a})
 
 -- | The reason for which the book is removed from the library.
 mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe MyLibraryBookshelvesRemoveVolumeReason)
@@ -116,15 +169,26 @@ mlbrvSource :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Text)
 mlbrvSource
   = lens _mlbrvSource (\ s a -> s{_mlbrvSource = a})
 
+-- | JSONP
+mlbrvCallback :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Text)
+mlbrvCallback
+  = lens _mlbrvCallback
+      (\ s a -> s{_mlbrvCallback = a})
+
 instance GoogleRequest
            MyLibraryBookshelvesRemoveVolume
          where
-        type Rs MyLibraryBookshelvesRemoveVolume = ()
+        type Rs MyLibraryBookshelvesRemoveVolume = Empty
         type Scopes MyLibraryBookshelvesRemoveVolume =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesRemoveVolume'{..}
-          = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvReason
+          = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvXgafv
+              _mlbrvUploadProtocol
+              _mlbrvAccessToken
+              _mlbrvUploadType
+              _mlbrvReason
               _mlbrvSource
+              _mlbrvCallback
               (Just AltJSON)
               booksService
           where go

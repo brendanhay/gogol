@@ -24,7 +24,7 @@
 -- include putting it as a child task under a new parent and\/or move it to
 -- a different position among its sibling tasks.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.move@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.move@.
 module Network.Google.Resource.Tasks.Tasks.Move
     (
     -- * REST Resource
@@ -36,13 +36,18 @@ module Network.Google.Resource.Tasks.Tasks.Move
 
     -- * Request Lenses
     , tmParent
+    , tmXgafv
+    , tmUploadProtocol
+    , tmAccessToken
+    , tmUploadType
     , tmTaskList
     , tmTask
+    , tmCallback
     , tmPrevious
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.move@ method which the
 -- 'TasksMove' request conforms to.
@@ -55,8 +60,13 @@ type TasksMoveResource =
                Capture "task" Text :>
                  "move" :>
                    QueryParam "parent" Text :>
-                     QueryParam "previous" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Task
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "previous" Text :>
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Task
 
 -- | Moves the specified task to another position in the task list. This can
 -- include putting it as a child task under a new parent and\/or move it to
@@ -65,9 +75,14 @@ type TasksMoveResource =
 -- /See:/ 'tasksMove' smart constructor.
 data TasksMove =
   TasksMove'
-    { _tmParent   :: !(Maybe Text)
+    { _tmParent :: !(Maybe Text)
+    , _tmXgafv :: !(Maybe Xgafv)
+    , _tmUploadProtocol :: !(Maybe Text)
+    , _tmAccessToken :: !(Maybe Text)
+    , _tmUploadType :: !(Maybe Text)
     , _tmTaskList :: !Text
-    , _tmTask     :: !Text
+    , _tmTask :: !Text
+    , _tmCallback :: !(Maybe Text)
     , _tmPrevious :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -79,9 +94,19 @@ data TasksMove =
 --
 -- * 'tmParent'
 --
+-- * 'tmXgafv'
+--
+-- * 'tmUploadProtocol'
+--
+-- * 'tmAccessToken'
+--
+-- * 'tmUploadType'
+--
 -- * 'tmTaskList'
 --
 -- * 'tmTask'
+--
+-- * 'tmCallback'
 --
 -- * 'tmPrevious'
 tasksMove
@@ -91,8 +116,13 @@ tasksMove
 tasksMove pTmTaskList_ pTmTask_ =
   TasksMove'
     { _tmParent = Nothing
+    , _tmXgafv = Nothing
+    , _tmUploadProtocol = Nothing
+    , _tmAccessToken = Nothing
+    , _tmUploadType = Nothing
     , _tmTaskList = pTmTaskList_
     , _tmTask = pTmTask_
+    , _tmCallback = Nothing
     , _tmPrevious = Nothing
     }
 
@@ -102,6 +132,27 @@ tasksMove pTmTaskList_ pTmTask_ =
 tmParent :: Lens' TasksMove (Maybe Text)
 tmParent = lens _tmParent (\ s a -> s{_tmParent = a})
 
+-- | V1 error format.
+tmXgafv :: Lens' TasksMove (Maybe Xgafv)
+tmXgafv = lens _tmXgafv (\ s a -> s{_tmXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tmUploadProtocol :: Lens' TasksMove (Maybe Text)
+tmUploadProtocol
+  = lens _tmUploadProtocol
+      (\ s a -> s{_tmUploadProtocol = a})
+
+-- | OAuth access token.
+tmAccessToken :: Lens' TasksMove (Maybe Text)
+tmAccessToken
+  = lens _tmAccessToken
+      (\ s a -> s{_tmAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tmUploadType :: Lens' TasksMove (Maybe Text)
+tmUploadType
+  = lens _tmUploadType (\ s a -> s{_tmUploadType = a})
+
 -- | Task list identifier.
 tmTaskList :: Lens' TasksMove Text
 tmTaskList
@@ -110,6 +161,11 @@ tmTaskList
 -- | Task identifier.
 tmTask :: Lens' TasksMove Text
 tmTask = lens _tmTask (\ s a -> s{_tmTask = a})
+
+-- | JSONP
+tmCallback :: Lens' TasksMove (Maybe Text)
+tmCallback
+  = lens _tmCallback (\ s a -> s{_tmCallback = a})
 
 -- | New previous sibling task identifier. If the task is moved to the first
 -- position among its siblings, this parameter is omitted. Optional.
@@ -122,7 +178,12 @@ instance GoogleRequest TasksMove where
         type Scopes TasksMove =
              '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksMove'{..}
-          = go _tmTaskList _tmTask _tmParent _tmPrevious
+          = go _tmTaskList _tmTask _tmParent _tmXgafv
+              _tmUploadProtocol
+              _tmAccessToken
+              _tmUploadType
+              _tmCallback
+              _tmPrevious
               (Just AltJSON)
               appsTasksService
           where go

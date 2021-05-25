@@ -17,17 +17,17 @@
 --
 module Network.Google.AndroidDeviceProvisioning.Types.Product where
 
-import           Network.Google.AndroidDeviceProvisioning.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types.Sum
+import Network.Google.Prelude
 
--- | Identifies metdata updates to one device.
+-- | Identifies metadata updates to one device.
 --
 -- /See:/ 'updateMetadataArguments' smart constructor.
 data UpdateMetadataArguments =
   UpdateMetadataArguments'
     { _umaDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _umaDeviceId         :: !(Maybe (Textual Int64))
-    , _umaDeviceMetadata   :: !(Maybe DeviceMetadata)
+    , _umaDeviceId :: !(Maybe (Textual Int64))
+    , _umaDeviceMetadata :: !(Maybe DeviceMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -51,13 +51,13 @@ updateMetadataArguments =
     }
 
 
--- | Device identifier.
+-- | Required. Device identifier.
 umaDeviceIdentifier :: Lens' UpdateMetadataArguments (Maybe DeviceIdentifier)
 umaDeviceIdentifier
   = lens _umaDeviceIdentifier
       (\ s a -> s{_umaDeviceIdentifier = a})
 
--- | Device ID of the device.
+-- | Required. Device ID of the device.
 umaDeviceId :: Lens' UpdateMetadataArguments (Maybe Int64)
 umaDeviceId
   = lens _umaDeviceId (\ s a -> s{_umaDeviceId = a}) .
@@ -87,45 +87,17 @@ instance ToJSON UpdateMetadataArguments where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -187,9 +159,9 @@ instance ToJSON Status where
 data PartnerClaim =
   PartnerClaim'
     { _pcDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _pcSectionType      :: !(Maybe PartnerClaimSectionType)
-    , _pcCustomerId       :: !(Maybe (Textual Int64))
-    , _pcDeviceMetadata   :: !(Maybe DeviceMetadata)
+    , _pcSectionType :: !(Maybe PartnerClaimSectionType)
+    , _pcCustomerId :: !(Maybe (Textual Int64))
+    , _pcDeviceMetadata :: !(Maybe DeviceMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -216,7 +188,7 @@ partnerClaim =
     }
 
 
--- | Required. Device identifier of the device.
+-- | Required. Required. Device identifier of the device.
 pcDeviceIdentifier :: Lens' PartnerClaim (Maybe DeviceIdentifier)
 pcDeviceIdentifier
   = lens _pcDeviceIdentifier
@@ -300,8 +272,8 @@ instance ToJSON CustomerUnclaimDeviceRequest where
 data FindDevicesByDeviceIdentifierRequest =
   FindDevicesByDeviceIdentifierRequest'
     { _fdbdirDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _fdbdirLimit            :: !(Maybe (Textual Int64))
-    , _fdbdirPageToken        :: !(Maybe Text)
+    , _fdbdirLimit :: !(Maybe (Textual Int64))
+    , _fdbdirPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -325,7 +297,7 @@ findDevicesByDeviceIdentifierRequest =
     }
 
 
--- | Required. The device identifier to search for.
+-- | Required. Required. The device identifier to search for.
 fdbdirDeviceIdentifier :: Lens' FindDevicesByDeviceIdentifierRequest (Maybe DeviceIdentifier)
 fdbdirDeviceIdentifier
   = lens _fdbdirDeviceIdentifier
@@ -369,8 +341,8 @@ instance ToJSON FindDevicesByDeviceIdentifierRequest
 data FindDevicesByOwnerResponse =
   FindDevicesByOwnerResponse'
     { _fdborNextPageToken :: !(Maybe Text)
-    , _fdborTotalSize     :: !(Maybe (Textual Int32))
-    , _fdborDevices       :: !(Maybe [Device])
+    , _fdborTotalSize :: !(Maybe (Textual Int32))
+    , _fdborDevices :: !(Maybe [Device])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -472,11 +444,11 @@ instance ToJSON DeviceMetadataEntries where
 -- /See:/ 'partnerUnclaim' smart constructor.
 data PartnerUnclaim =
   PartnerUnclaim'
-    { _puDeviceIdentifier       :: !(Maybe DeviceIdentifier)
-    , _puSectionType            :: !(Maybe PartnerUnclaimSectionType)
+    { _puDeviceIdentifier :: !(Maybe DeviceIdentifier)
+    , _puSectionType :: !(Maybe PartnerUnclaimSectionType)
     , _puVacationModeExpireTime :: !(Maybe DateTime')
-    , _puVacationModeDays       :: !(Maybe (Textual Int32))
-    , _puDeviceId               :: !(Maybe (Textual Int64))
+    , _puVacationModeDays :: !(Maybe (Textual Int32))
+    , _puDeviceId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -506,7 +478,7 @@ partnerUnclaim =
     }
 
 
--- | Device identifier of the device.
+-- | Required. Device identifier of the device.
 puDeviceIdentifier :: Lens' PartnerUnclaim (Maybe DeviceIdentifier)
 puDeviceIdentifier
   = lens _puDeviceIdentifier
@@ -518,22 +490,22 @@ puSectionType
   = lens _puSectionType
       (\ s a -> s{_puSectionType = a})
 
--- | The expiration time of the vacation unlock.
+-- | Optional. The expiration time of the vacation unlock.
 puVacationModeExpireTime :: Lens' PartnerUnclaim (Maybe UTCTime)
 puVacationModeExpireTime
   = lens _puVacationModeExpireTime
       (\ s a -> s{_puVacationModeExpireTime = a})
       . mapping _DateTime
 
--- | The duration of the vacation unlock starting from when the request is
--- processed. (1 day is treated as 24 hours)
+-- | Optional. The duration of the vacation unlock starting from when the
+-- request is processed. (1 day is treated as 24 hours)
 puVacationModeDays :: Lens' PartnerUnclaim (Maybe Int32)
 puVacationModeDays
   = lens _puVacationModeDays
       (\ s a -> s{_puVacationModeDays = a})
       . mapping _Coerce
 
--- | Device ID of the device.
+-- | Required. Device ID of the device.
 puDeviceId :: Lens' PartnerUnclaim (Maybe Int64)
 puDeviceId
   = lens _puDeviceId (\ s a -> s{_puDeviceId = a}) .
@@ -571,8 +543,8 @@ instance ToJSON PartnerUnclaim where
 data Dpc =
   Dpc'
     { _dPackageName :: !(Maybe Text)
-    , _dName        :: !(Maybe Text)
-    , _dDpcName     :: !(Maybe Text)
+    , _dName :: !(Maybe Text)
+    , _dDpcName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -631,9 +603,9 @@ instance ToJSON Dpc where
 -- /See:/ 'listVendorCustomersResponse' smart constructor.
 data ListVendorCustomersResponse =
   ListVendorCustomersResponse'
-    { _lvcrCustomers     :: !(Maybe [Company])
+    { _lvcrCustomers :: !(Maybe [Company])
     , _lvcrNextPageToken :: !(Maybe Text)
-    , _lvcrTotalSize     :: !(Maybe (Textual Int32))
+    , _lvcrTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -703,9 +675,9 @@ instance ToJSON ListVendorCustomersResponse where
 data OperationPerDevice =
   OperationPerDevice'
     { _opdUpdateMetadata :: !(Maybe UpdateMetadataArguments)
-    , _opdResult         :: !(Maybe PerDeviceStatusInBatch)
-    , _opdClaim          :: !(Maybe PartnerClaim)
-    , _opdUnclaim        :: !(Maybe PartnerUnclaim)
+    , _opdResult :: !(Maybe PerDeviceStatusInBatch)
+    , _opdClaim :: !(Maybe PartnerClaim)
+    , _opdUnclaim :: !(Maybe PartnerUnclaim)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -776,10 +748,10 @@ instance ToJSON OperationPerDevice where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -832,7 +804,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -892,10 +865,10 @@ instance ToJSON Empty where
 -- /See:/ 'perDeviceStatusInBatch' smart constructor.
 data PerDeviceStatusInBatch =
   PerDeviceStatusInBatch'
-    { _pdsibStatus          :: !(Maybe PerDeviceStatusInBatchStatus)
+    { _pdsibStatus :: !(Maybe PerDeviceStatusInBatchStatus)
     , _pdsibErrorIdentifier :: !(Maybe Text)
-    , _pdsibDeviceId        :: !(Maybe (Textual Int64))
-    , _pdsibErrorMessage    :: !(Maybe Text)
+    , _pdsibDeviceId :: !(Maybe (Textual Int64))
+    , _pdsibErrorMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1009,11 +982,11 @@ instance ToJSON ClaimDevicesRequest where
 data Device =
   Device'
     { _devDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _devClaims           :: !(Maybe [DeviceClaim])
-    , _devName             :: !(Maybe Text)
-    , _devDeviceId         :: !(Maybe (Textual Int64))
-    , _devDeviceMetadata   :: !(Maybe DeviceMetadata)
-    , _devConfiguration    :: !(Maybe Text)
+    , _devClaims :: !(Maybe [DeviceClaim])
+    , _devName :: !(Maybe Text)
+    , _devDeviceId :: !(Maybe (Textual Int64))
+    , _devDeviceMetadata :: !(Maybe DeviceMetadata)
+    , _devConfiguration :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1047,7 +1020,8 @@ device =
 
 
 -- | The hardware IDs that identify a manufactured device. To learn more,
--- read [Identifiers](\/zero-touch\/guides\/identifiers).
+-- read
+-- [Identifiers](https:\/\/developers.google.com\/zero-touch\/guides\/identifiers).
 devDeviceIdentifier :: Lens' Device (Maybe DeviceIdentifier)
 devDeviceIdentifier
   = lens _devDeviceIdentifier
@@ -1077,7 +1051,8 @@ devDeviceId
       mapping _Coerce
 
 -- | The metadata attached to the device. Structured as key-value pairs. To
--- learn more, read [Device metadata](\/zero-touch\/guides\/metadata).
+-- learn more, read [Device
+-- metadata](https:\/\/developers.google.com\/zero-touch\/guides\/metadata).
 devDeviceMetadata :: Lens' Device (Maybe DeviceMetadata)
 devDeviceMetadata
   = lens _devDeviceMetadata
@@ -1118,9 +1093,9 @@ instance ToJSON Device where
 data ClaimDeviceRequest =
   ClaimDeviceRequest'
     { _cdrDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _cdrSectionType      :: !(Maybe ClaimDeviceRequestSectionType)
-    , _cdrCustomerId       :: !(Maybe (Textual Int64))
-    , _cdrDeviceMetadata   :: !(Maybe DeviceMetadata)
+    , _cdrSectionType :: !(Maybe ClaimDeviceRequestSectionType)
+    , _cdrCustomerId :: !(Maybe (Textual Int64))
+    , _cdrDeviceMetadata :: !(Maybe DeviceMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1147,7 +1122,7 @@ claimDeviceRequest =
     }
 
 
--- | Required. The device identifier of the device to claim.
+-- | Required. Required. The device identifier of the device to claim.
 cdrDeviceIdentifier :: Lens' ClaimDeviceRequest (Maybe DeviceIdentifier)
 cdrDeviceIdentifier
   = lens _cdrDeviceIdentifier
@@ -1196,13 +1171,14 @@ instance ToJSON ClaimDeviceRequest where
 -- IMEI number, belonging to the manufactured device. Methods that operate
 -- on devices take a \`DeviceReference\` as a parameter type because it\'s
 -- more flexible for the caller. To learn more about device identifiers,
--- read [Identifiers](\/zero-touch\/guides\/identifiers).
+-- read
+-- [Identifiers](https:\/\/developers.google.com\/zero-touch\/guides\/identifiers).
 --
 -- /See:/ 'deviceReference' smart constructor.
 data DeviceReference =
   DeviceReference'
     { _drDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _drDeviceId         :: !(Maybe (Textual Int64))
+    , _drDeviceId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1287,15 +1263,15 @@ instance ToJSON CustomerRemoveConfigurationRequest
 
 -- | Encapsulates hardware and product IDs to identify a manufactured device.
 -- To understand requirements on identifier sets, read
--- [Identifiers](\/zero-touch\/guides\/identifiers).
+-- [Identifiers](https:\/\/developers.google.com\/zero-touch\/guides\/identifiers).
 --
 -- /See:/ 'deviceIdentifier' smart constructor.
 data DeviceIdentifier =
   DeviceIdentifier'
     { _diManufacturer :: !(Maybe Text)
-    , _diModel        :: !(Maybe Text)
-    , _diMeid         :: !(Maybe Text)
-    , _diImei         :: !(Maybe Text)
+    , _diModel :: !(Maybe Text)
+    , _diMeid :: !(Maybe Text)
+    , _diImei :: !(Maybe Text)
     , _diSerialNumber :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1455,8 +1431,8 @@ instance ToJSON StatusDetailsItem where
 data ListVendorsResponse =
   ListVendorsResponse'
     { _lvrNextPageToken :: !(Maybe Text)
-    , _lvrTotalSize     :: !(Maybe (Textual Int32))
-    , _lvrVendors       :: !(Maybe [Company])
+    , _lvrTotalSize :: !(Maybe (Textual Int32))
+    , _lvrVendors :: !(Maybe [Company])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1566,7 +1542,7 @@ instance ToJSON CustomerListConfigurationsResponse
 -- /See:/ 'customerApplyConfigurationRequest' smart constructor.
 data CustomerApplyConfigurationRequest =
   CustomerApplyConfigurationRequest'
-    { _cacrDevice        :: !(Maybe DeviceReference)
+    { _cacrDevice :: !(Maybe DeviceReference)
     , _cacrConfiguration :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1620,11 +1596,13 @@ instance ToJSON CustomerApplyConfigurationRequest
 -- /See:/ 'company' smart constructor.
 data Company =
   Company'
-    { _cCompanyId   :: !(Maybe (Textual Int64))
+    { _cLanguageCode :: !(Maybe Text)
+    , _cCompanyId :: !(Maybe (Textual Int64))
     , _cCompanyName :: !(Maybe Text)
     , _cOwnerEmails :: !(Maybe [Text])
     , _cTermsStatus :: !(Maybe CompanyTermsStatus)
-    , _cName        :: !(Maybe Text)
+    , _cName :: !(Maybe Text)
+    , _cSkipWelcomeEmail :: !(Maybe Bool)
     , _cAdminEmails :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1633,6 +1611,8 @@ data Company =
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cLanguageCode'
 --
 -- * 'cCompanyId'
 --
@@ -1644,19 +1624,39 @@ data Company =
 --
 -- * 'cName'
 --
+-- * 'cSkipWelcomeEmail'
+--
 -- * 'cAdminEmails'
 company
     :: Company
 company =
   Company'
-    { _cCompanyId = Nothing
+    { _cLanguageCode = Nothing
+    , _cCompanyId = Nothing
     , _cCompanyName = Nothing
     , _cOwnerEmails = Nothing
     , _cTermsStatus = Nothing
     , _cName = Nothing
+    , _cSkipWelcomeEmail = Nothing
     , _cAdminEmails = Nothing
     }
 
+
+-- | Input only. The preferred locale of the customer represented as a BCP47
+-- language code. This field is validated on input and requests containing
+-- unsupported language codes will be rejected. Supported language codes:
+-- Arabic (ar) Chinese (Hong Kong) (zh-HK) Chinese (Simplified) (zh-CN)
+-- Chinese (Traditional) (zh-TW) Czech (cs) Danish (da) Dutch (nl) English
+-- (UK) (en-GB) English (US) (en-US) Filipino (fil) Finnish (fi) French
+-- (fr) German (de) Hebrew (iw) Hindi (hi) Hungarian (hu) Indonesian (id)
+-- Italian (it) Japanese (ja) Korean (ko) Norwegian (Bokmal) (no) Polish
+-- (pl) Portuguese (Brazil) (pt-BR) Portuguese (Portugal) (pt-PT) Russian
+-- (ru) Spanish (es) Spanish (Latin America) (es-419) Swedish (sv) Thai
+-- (th) Turkish (tr) Ukrainian (uk) Vietnamese (vi)
+cLanguageCode :: Lens' Company (Maybe Text)
+cLanguageCode
+  = lens _cLanguageCode
+      (\ s a -> s{_cLanguageCode = a})
 
 -- | Output only. The ID of the company. Assigned by the server.
 cCompanyId :: Lens' Company (Maybe Int64)
@@ -1670,10 +1670,10 @@ cCompanyName :: Lens' Company (Maybe Text)
 cCompanyName
   = lens _cCompanyName (\ s a -> s{_cCompanyName = a})
 
--- | Input only. Email address of customer\'s users in the owner role. At
--- least one \`owner_email\` is required. Each email address must be
--- associated with a Google Account. Owners share the same access as admins
--- but can also add, delete, and edit your organization\'s portal users.
+-- | Required. Input only. Email address of customer\'s users in the owner
+-- role. At least one \`owner_email\` is required. Owners share the same
+-- access as admins but can also add, delete, and edit your organization\'s
+-- portal users.
 cOwnerEmails :: Lens' Company [Text]
 cOwnerEmails
   = lens _cOwnerEmails (\ s a -> s{_cOwnerEmails = a})
@@ -1695,8 +1695,18 @@ cTermsStatus
 cName :: Lens' Company (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
 
--- | Input only. Optional. Email address of customer\'s users in the admin
--- role. Each email address must be associated with a Google Account.
+-- | Input only. If set to true, welcome email will not be sent to the
+-- customer. It is recommended to skip the welcome email if devices will be
+-- claimed with additional DEVICE_PROTECTION service, as the customer will
+-- receive separate emails at device claim time. This field is ignored if
+-- this is not a Zero-touch customer.
+cSkipWelcomeEmail :: Lens' Company (Maybe Bool)
+cSkipWelcomeEmail
+  = lens _cSkipWelcomeEmail
+      (\ s a -> s{_cSkipWelcomeEmail = a})
+
+-- | Optional. Email address of customer\'s users in the admin role. Each
+-- email address must be associated with a Google Account.
 cAdminEmails :: Lens' Company [Text]
 cAdminEmails
   = lens _cAdminEmails (\ s a -> s{_cAdminEmails = a})
@@ -1708,21 +1718,25 @@ instance FromJSON Company where
           = withObject "Company"
               (\ o ->
                  Company' <$>
-                   (o .:? "companyId") <*> (o .:? "companyName") <*>
-                     (o .:? "ownerEmails" .!= mempty)
+                   (o .:? "languageCode") <*> (o .:? "companyId") <*>
+                     (o .:? "companyName")
+                     <*> (o .:? "ownerEmails" .!= mempty)
                      <*> (o .:? "termsStatus")
                      <*> (o .:? "name")
+                     <*> (o .:? "skipWelcomeEmail")
                      <*> (o .:? "adminEmails" .!= mempty))
 
 instance ToJSON Company where
         toJSON Company'{..}
           = object
               (catMaybes
-                 [("companyId" .=) <$> _cCompanyId,
+                 [("languageCode" .=) <$> _cLanguageCode,
+                  ("companyId" .=) <$> _cCompanyId,
                   ("companyName" .=) <$> _cCompanyName,
                   ("ownerEmails" .=) <$> _cOwnerEmails,
                   ("termsStatus" .=) <$> _cTermsStatus,
                   ("name" .=) <$> _cName,
+                  ("skipWelcomeEmail" .=) <$> _cSkipWelcomeEmail,
                   ("adminEmails" .=) <$> _cAdminEmails])
 
 -- | Response message for listing my customers.
@@ -1730,7 +1744,7 @@ instance ToJSON Company where
 -- /See:/ 'customerListCustomersResponse' smart constructor.
 data CustomerListCustomersResponse =
   CustomerListCustomersResponse'
-    { _clcrCustomers     :: !(Maybe [Company])
+    { _clcrCustomers :: !(Maybe [Company])
     , _clcrNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1788,11 +1802,12 @@ instance ToJSON CustomerListCustomersResponse where
 -- /See:/ 'deviceClaim' smart constructor.
 data DeviceClaim =
   DeviceClaim'
-    { _dcSectionType            :: !(Maybe DeviceClaimSectionType)
+    { _dcSectionType :: !(Maybe DeviceClaimSectionType)
+    , _dcAdditionalService :: !(Maybe DeviceClaimAdditionalService)
     , _dcVacationModeExpireTime :: !(Maybe DateTime')
-    , _dcVacationModeStartTime  :: !(Maybe DateTime')
-    , _dcOwnerCompanyId         :: !(Maybe (Textual Int64))
-    , _dcResellerId             :: !(Maybe (Textual Int64))
+    , _dcVacationModeStartTime :: !(Maybe DateTime')
+    , _dcOwnerCompanyId :: !(Maybe (Textual Int64))
+    , _dcResellerId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1802,6 +1817,8 @@ data DeviceClaim =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dcSectionType'
+--
+-- * 'dcAdditionalService'
 --
 -- * 'dcVacationModeExpireTime'
 --
@@ -1815,6 +1832,7 @@ deviceClaim
 deviceClaim =
   DeviceClaim'
     { _dcSectionType = Nothing
+    , _dcAdditionalService = Nothing
     , _dcVacationModeExpireTime = Nothing
     , _dcVacationModeStartTime = Nothing
     , _dcOwnerCompanyId = Nothing
@@ -1827,6 +1845,12 @@ dcSectionType :: Lens' DeviceClaim (Maybe DeviceClaimSectionType)
 dcSectionType
   = lens _dcSectionType
       (\ s a -> s{_dcSectionType = a})
+
+-- | The Additional service registered for the device.
+dcAdditionalService :: Lens' DeviceClaim (Maybe DeviceClaimAdditionalService)
+dcAdditionalService
+  = lens _dcAdditionalService
+      (\ s a -> s{_dcAdditionalService = a})
 
 -- | The timestamp when the device will exit ‘vacation mode’. This value is
 -- present iff the device is in \'vacation mode\'.
@@ -1862,8 +1886,8 @@ instance FromJSON DeviceClaim where
           = withObject "DeviceClaim"
               (\ o ->
                  DeviceClaim' <$>
-                   (o .:? "sectionType") <*>
-                     (o .:? "vacationModeExpireTime")
+                   (o .:? "sectionType") <*> (o .:? "additionalService")
+                     <*> (o .:? "vacationModeExpireTime")
                      <*> (o .:? "vacationModeStartTime")
                      <*> (o .:? "ownerCompanyId")
                      <*> (o .:? "resellerId"))
@@ -1873,6 +1897,7 @@ instance ToJSON DeviceClaim where
           = object
               (catMaybes
                  [("sectionType" .=) <$> _dcSectionType,
+                  ("additionalService" .=) <$> _dcAdditionalService,
                   ("vacationModeExpireTime" .=) <$>
                     _dcVacationModeExpireTime,
                   ("vacationModeStartTime" .=) <$>
@@ -1901,7 +1926,7 @@ updateDeviceMetadataRequest =
   UpdateDeviceMetadataRequest' {_udmrDeviceMetadata = Nothing}
 
 
--- | Required. The metdata to attach to the device.
+-- | Required. The metadata to attach to the device.
 udmrDeviceMetadata :: Lens' UpdateDeviceMetadataRequest (Maybe DeviceMetadata)
 udmrDeviceMetadata
   = lens _udmrDeviceMetadata
@@ -1921,7 +1946,8 @@ instance ToJSON UpdateDeviceMetadataRequest where
                  [("deviceMetadata" .=) <$> _udmrDeviceMetadata])
 
 -- | Metadata entries that can be attached to a \`Device\`. To learn more,
--- read [Device metadata](\/zero-touch\/guides\/metadata).
+-- read [Device
+-- metadata](https:\/\/developers.google.com\/zero-touch\/guides\/metadata).
 --
 -- /See:/ 'deviceMetadata' smart constructor.
 newtype DeviceMetadata =
@@ -1961,9 +1987,9 @@ instance ToJSON DeviceMetadata where
 data FindDevicesByOwnerRequest =
   FindDevicesByOwnerRequest'
     { _fdborSectionType :: !(Maybe FindDevicesByOwnerRequestSectionType)
-    , _fdborCustomerId  :: !(Maybe [Textual Int64])
-    , _fdborLimit       :: !(Maybe (Textual Int64))
-    , _fdborPageToken   :: !(Maybe Text)
+    , _fdborCustomerId :: !(Maybe [Textual Int64])
+    , _fdborLimit :: !(Maybe (Textual Int64))
+    , _fdborPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2042,8 +2068,8 @@ instance ToJSON FindDevicesByOwnerRequest where
 data FindDevicesByDeviceIdentifierResponse =
   FindDevicesByDeviceIdentifierResponse'
     { _fdbdirNextPageToken :: !(Maybe Text)
-    , _fdbdirTotalSize     :: !(Maybe (Textual Int32))
-    , _fdbdirDevices       :: !(Maybe [Device])
+    , _fdbdirTotalSize :: !(Maybe (Textual Int32))
+    , _fdbdirDevices :: !(Maybe [Device])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2113,11 +2139,11 @@ instance ToJSON FindDevicesByDeviceIdentifierResponse
 -- /See:/ 'unclaimDeviceRequest' smart constructor.
 data UnclaimDeviceRequest =
   UnclaimDeviceRequest'
-    { _udrDeviceIdentifier       :: !(Maybe DeviceIdentifier)
-    , _udrSectionType            :: !(Maybe UnclaimDeviceRequestSectionType)
+    { _udrDeviceIdentifier :: !(Maybe DeviceIdentifier)
+    , _udrSectionType :: !(Maybe UnclaimDeviceRequestSectionType)
     , _udrVacationModeExpireTime :: !(Maybe DateTime')
-    , _udrVacationModeDays       :: !(Maybe (Textual Int32))
-    , _udrDeviceId               :: !(Maybe (Textual Int64))
+    , _udrVacationModeDays :: !(Maybe (Textual Int32))
+    , _udrDeviceId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2147,7 +2173,7 @@ unclaimDeviceRequest =
     }
 
 
--- | The device identifier you used when you claimed this device.
+-- | Required. The device identifier you used when you claimed this device.
 udrDeviceIdentifier :: Lens' UnclaimDeviceRequest (Maybe DeviceIdentifier)
 udrDeviceIdentifier
   = lens _udrDeviceIdentifier
@@ -2174,7 +2200,7 @@ udrVacationModeDays
       (\ s a -> s{_udrVacationModeDays = a})
       . mapping _Coerce
 
--- | The device ID returned by \`ClaimDevice\`.
+-- | Required. The device ID returned by \`ClaimDevice\`.
 udrDeviceId :: Lens' UnclaimDeviceRequest (Maybe Int64)
 udrDeviceId
   = lens _udrDeviceId (\ s a -> s{_udrDeviceId = a}) .
@@ -2208,7 +2234,7 @@ instance ToJSON UnclaimDeviceRequest where
 -- /See:/ 'devicesLongRunningOperationResponse' smart constructor.
 data DevicesLongRunningOperationResponse =
   DevicesLongRunningOperationResponse'
-    { _dlrorSuccessCount    :: !(Maybe (Textual Int32))
+    { _dlrorSuccessCount :: !(Maybe (Textual Int32))
     , _dlrorPerDeviceStatus :: !(Maybe [OperationPerDevice])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2275,16 +2301,16 @@ instance ToJSON DevicesLongRunningOperationResponse
 -- /See:/ 'configuration' smart constructor.
 data Configuration =
   Configuration'
-    { _conContactPhone      :: !(Maybe Text)
-    , _conContactEmail      :: !(Maybe Text)
+    { _conContactPhone :: !(Maybe Text)
+    , _conContactEmail :: !(Maybe Text)
     , _conConfigurationName :: !(Maybe Text)
-    , _conConfigurationId   :: !(Maybe (Textual Int64))
-    , _conCustomMessage     :: !(Maybe Text)
-    , _conCompanyName       :: !(Maybe Text)
-    , _conDpcExtras         :: !(Maybe Text)
-    , _conName              :: !(Maybe Text)
-    , _conDpcResourcePath   :: !(Maybe Text)
-    , _conIsDefault         :: !(Maybe Bool)
+    , _conConfigurationId :: !(Maybe (Textual Int64))
+    , _conCustomMessage :: !(Maybe Text)
+    , _conCompanyName :: !(Maybe Text)
+    , _conDpcExtras :: !(Maybe Text)
+    , _conName :: !(Maybe Text)
+    , _conDpcResourcePath :: !(Maybe Text)
+    , _conIsDefault :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2478,9 +2504,9 @@ instance ToJSON OperationMetadata where
 -- /See:/ 'listCustomersResponse' smart constructor.
 data ListCustomersResponse =
   ListCustomersResponse'
-    { _lcrCustomers     :: !(Maybe [Company])
+    { _lcrCustomers :: !(Maybe [Company])
     , _lcrNextPageToken :: !(Maybe Text)
-    , _lcrTotalSize     :: !(Maybe (Textual Int32))
+    , _lcrTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2549,8 +2575,8 @@ instance ToJSON ListCustomersResponse where
 -- /See:/ 'devicesLongRunningOperationMetadata' smart constructor.
 data DevicesLongRunningOperationMetadata =
   DevicesLongRunningOperationMetadata'
-    { _dlromProgress         :: !(Maybe (Textual Int32))
-    , _dlromDevicesCount     :: !(Maybe (Textual Int32))
+    { _dlromProgress :: !(Maybe (Textual Int32))
+    , _dlromDevicesCount :: !(Maybe (Textual Int32))
     , _dlromProcessingStatus :: !(Maybe DevicesLongRunningOperationMetadataProcessingStatus)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2661,7 +2687,7 @@ instance ToJSON OperationResponse where
 data CustomerListDevicesResponse =
   CustomerListDevicesResponse'
     { _cldrNextPageToken :: !(Maybe Text)
-    , _cldrDevices       :: !(Maybe [Device])
+    , _cldrDevices :: !(Maybe [Device])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2797,7 +2823,7 @@ instance ToJSON CustomerListDpcsResponse where
 data ClaimDeviceResponse =
   ClaimDeviceResponse'
     { _cdrDeviceName :: !(Maybe Text)
-    , _cdrDeviceId   :: !(Maybe (Textual Int64))
+    , _cdrDeviceId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

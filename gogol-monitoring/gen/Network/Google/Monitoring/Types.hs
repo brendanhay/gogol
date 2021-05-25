@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -28,6 +28,9 @@ module Network.Google.Monitoring.Types
     -- * MetricDescriptorValueType
     , MetricDescriptorValueType (..)
 
+    -- * NotificationChannelDescriptorLaunchStage
+    , NotificationChannelDescriptorLaunchStage (..)
+
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
     , monitoredResourceDescriptor
@@ -36,6 +39,16 @@ module Network.Google.Monitoring.Types
     , mrdLabels
     , mrdType
     , mrdDescription
+    , mrdLaunchStage
+
+    -- * BasicSli
+    , BasicSli
+    , basicSli
+    , bsLocation
+    , bsLatency
+    , bsAvailability
+    , bsMethod
+    , bsVersion
 
     -- * CollectdValueDataSourceType
     , CollectdValueDataSourceType (..)
@@ -47,17 +60,33 @@ module Network.Google.Monitoring.Types
     , sCode
     , sMessage
 
+    -- * ValueDescriptorMetricKind
+    , ValueDescriptorMetricKind (..)
+
+    -- * ServiceLevelObjective
+    , ServiceLevelObjective
+    , serviceLevelObjective
+    , sloUserLabels
+    , sloName
+    , sloCalendarPeriod
+    , sloServiceLevelIndicator
+    , sloGoal
+    , sloDisplayName
+    , sloRollingPeriod
+
     -- * ListNotificationChannelsResponse
     , ListNotificationChannelsResponse
     , listNotificationChannelsResponse
     , lncrNextPageToken
     , lncrNotificationChannels
+    , lncrTotalSize
 
     -- * ListTimeSeriesResponse
     , ListTimeSeriesResponse
     , listTimeSeriesResponse
     , ltsrNextPageToken
     , ltsrExecutionErrors
+    , ltsrUnit
     , ltsrTimeSeries
 
     -- * GetNotificationChannelVerificationCodeResponse
@@ -66,11 +95,36 @@ module Network.Google.Monitoring.Types
     , gncvcrCode
     , gncvcrExpireTime
 
+    -- * Telemetry
+    , Telemetry
+    , telemetry
+    , tResourceName
+
+    -- * MonitoringQueryLanguageCondition
+    , MonitoringQueryLanguageCondition
+    , monitoringQueryLanguageCondition
+    , mqlcQuery
+    , mqlcTrigger
+    , mqlcDuration
+
+    -- * ListServicesResponse
+    , ListServicesResponse
+    , listServicesResponse
+    , lsrNextPageToken
+    , lsrServices
+
     -- * ListNotificationChannelDescriptorsResponse
     , ListNotificationChannelDescriptorsResponse
     , listNotificationChannelDescriptorsResponse
     , lncdrNextPageToken
     , lncdrChannelDescriptors
+
+    -- * TimeSeriesRatio
+    , TimeSeriesRatio
+    , timeSeriesRatio
+    , tsrTotalServiceFilter
+    , tsrGoodServiceFilter
+    , tsrBadServiceFilter
 
     -- * UptimeCheckIPRegion
     , UptimeCheckIPRegion (..)
@@ -78,6 +132,7 @@ module Network.Google.Monitoring.Types
     -- * MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
+    , mdMonitoredResourceTypes
     , mdMetricKind
     , mdName
     , mdMetadata
@@ -87,6 +142,13 @@ module Network.Google.Monitoring.Types
     , mdValueType
     , mdDescription
     , mdUnit
+    , mdLaunchStage
+
+    -- * GoogleMonitoringV3Range
+    , GoogleMonitoringV3Range
+    , googleMonitoringV3Range
+    , gmvrMax
+    , gmvrMin
 
     -- * Group
     , Group
@@ -122,6 +184,9 @@ module Network.Google.Monitoring.Types
     , notificationChannelUserLabels
     , nculAddtional
 
+    -- * ServicesServiceLevelObjectivesGetView
+    , ServicesServiceLevelObjectivesGetView (..)
+
     -- * SourceContext
     , SourceContext
     , sourceContext
@@ -146,6 +211,9 @@ module Network.Google.Monitoring.Types
 
     -- * MetricThresholdComparison
     , MetricThresholdComparison (..)
+
+    -- * ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
+    , ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner (..)
 
     -- * AggregationPerSeriesAligner
     , AggregationPerSeriesAligner (..)
@@ -172,15 +240,43 @@ module Network.Google.Monitoring.Types
     , exemplarAttachmentsItem
     , eaiAddtional
 
+    -- * Service
+    , Service
+    , service
+    , sTelemetry
+    , sCustom
+    , sUserLabels
+    , sIstioCanonicalService
+    , sName
+    , sAppEngine
+    , sClusterIstio
+    , sDisplayName
+    , sMeshIstio
+    , sCloudEndpoints
+
+    -- * QueryTimeSeriesRequest
+    , QueryTimeSeriesRequest
+    , queryTimeSeriesRequest
+    , qtsrQuery
+    , qtsrPageToken
+    , qtsrPageSize
+
     -- * NotificationChannelDescriptor
     , NotificationChannelDescriptor
     , notificationChannelDescriptor
     , ncdName
-    , ncdSupportedTiers
     , ncdDisplayName
     , ncdLabels
     , ncdType
     , ncdDescription
+    , ncdLaunchStage
+
+    -- * LabelValue
+    , LabelValue
+    , labelValue
+    , lvBoolValue
+    , lvStringValue
+    , lvInt64Value
 
     -- * Empty
     , Empty
@@ -198,6 +294,27 @@ module Network.Google.Monitoring.Types
     , lmdrMetricDescriptors
     , lmdrNextPageToken
 
+    -- * WindowsBasedSli
+    , WindowsBasedSli
+    , windowsBasedSli
+    , wbsMetricSumInRange
+    , wbsWindowPeriod
+    , wbsGoodTotalRatioThreshold
+    , wbsGoodBadMetricFilter
+    , wbsMetricMeanInRange
+
+    -- * FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
+    , FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer (..)
+
+    -- * HTTPCheckRequestMethod
+    , HTTPCheckRequestMethod (..)
+
+    -- * Error'
+    , Error'
+    , error'
+    , eStatus
+    , ePointCount
+
     -- * VerifyNotificationChannelRequest
     , VerifyNotificationChannelRequest
     , verifyNotificationChannelRequest
@@ -207,6 +324,21 @@ module Network.Google.Monitoring.Types
     , OptionValue
     , optionValue
     , ovAddtional
+
+    -- * DistributionCut
+    , DistributionCut
+    , distributionCut
+    , dcRange
+    , dcDistributionFilter
+
+    -- * ProjectsTimeSeriesListAggregationPerSeriesAligner
+    , ProjectsTimeSeriesListAggregationPerSeriesAligner (..)
+
+    -- * MetricRange
+    , MetricRange
+    , metricRange
+    , mrRange
+    , mrTimeSeries
 
     -- * AggregationCrossSeriesReducer
     , AggregationCrossSeriesReducer (..)
@@ -223,6 +355,10 @@ module Network.Google.Monitoring.Types
     , CreateTimeSeriesRequest
     , createTimeSeriesRequest
     , ctsrTimeSeries
+
+    -- * Custom
+    , Custom
+    , custom
 
     -- * DroppedLabelsLabel
     , DroppedLabelsLabel
@@ -251,8 +387,21 @@ module Network.Google.Monitoring.Types
     , statusDetailsItem
     , sdiAddtional
 
+    -- * ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+    , ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer (..)
+
+    -- * ValueDescriptorValueType
+    , ValueDescriptorValueType (..)
+
     -- * NotificationChannelVerificationStatus
     , NotificationChannelVerificationStatus (..)
+
+    -- * CreateTimeSeriesSummary
+    , CreateTimeSeriesSummary
+    , createTimeSeriesSummary
+    , ctssTotalPointCount
+    , ctssSuccessPointCount
+    , ctssErrors
 
     -- * MonitoredResourceMetadataUserLabels
     , MonitoredResourceMetadataUserLabels
@@ -272,7 +421,9 @@ module Network.Google.Monitoring.Types
     -- * NotificationChannel
     , NotificationChannel
     , notificationChannel
+    , ncMutationRecords
     , ncEnabled
+    , ncCreationRecord
     , ncUserLabels
     , ncName
     , ncDisplayName
@@ -280,6 +431,15 @@ module Network.Google.Monitoring.Types
     , ncLabels
     , ncType
     , ncDescription
+
+    -- * OrganizationsTimeSeriesListAggregationPerSeriesAligner
+    , OrganizationsTimeSeriesListAggregationPerSeriesAligner (..)
+
+    -- * ListServiceLevelObjectivesResponse
+    , ListServiceLevelObjectivesResponse
+    , listServiceLevelObjectivesResponse
+    , lslorNextPageToken
+    , lslorServiceLevelObjectives
 
     -- * ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
@@ -305,6 +465,9 @@ module Network.Google.Monitoring.Types
     , collectdPayloadMetadata
     , cpmAddtional
 
+    -- * ContentMatcherMatcher
+    , ContentMatcherMatcher (..)
+
     -- * CollectdValue
     , CollectdValue
     , collectdValue
@@ -321,6 +484,24 @@ module Network.Google.Monitoring.Types
 
     -- * TypeSyntax
     , TypeSyntax (..)
+
+    -- * FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
+    , FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner (..)
+
+    -- * OrganizationsTimeSeriesListView
+    , OrganizationsTimeSeriesListView (..)
+
+    -- * ProjectsTimeSeriesListAggregationCrossSeriesReducer
+    , ProjectsTimeSeriesListAggregationCrossSeriesReducer (..)
+
+    -- * PointData
+    , PointData
+    , pointData
+    , pdValues
+    , pdTimeInterval
+
+    -- * OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
+    , OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner (..)
 
     -- * Aggregation
     , Aggregation
@@ -339,6 +520,7 @@ module Network.Google.Monitoring.Types
     , uccName
     , uccMonitoredResource
     , uccSelectedRegions
+    , uccIsInternal
     , uccDisplayName
     , uccResourceGroup
     , uccTimeout
@@ -350,6 +532,9 @@ module Network.Google.Monitoring.Types
     , point
     , pValue
     , pInterval
+
+    -- * FoldersTimeSeriesListView
+    , FoldersTimeSeriesListView (..)
 
     -- * CollectdPayload
     , CollectdPayload
@@ -382,6 +567,12 @@ module Network.Google.Monitoring.Types
     , cpeValueErrors
     , cpeIndex
 
+    -- * ProjectsTimeSeriesListView
+    , ProjectsTimeSeriesListView (..)
+
+    -- * OperationMetadataState
+    , OperationMetadataState (..)
+
     -- * SendNotificationChannelVerificationCodeRequest
     , SendNotificationChannelVerificationCodeRequest
     , sendNotificationChannelVerificationCodeRequest
@@ -393,6 +584,22 @@ module Network.Google.Monitoring.Types
     , eScale
     , eNumFiniteBuckets
 
+    -- * PerformanceThreshold
+    , PerformanceThreshold
+    , performanceThreshold
+    , ptBasicSliPerformance
+    , ptPerformance
+    , ptThreshold
+
+    -- * LogMatch
+    , LogMatch
+    , logMatch
+    , lmLabelExtractors
+    , lmFilter
+
+    -- * HTTPCheckContentType
+    , HTTPCheckContentType (..)
+
     -- * ResourceGroupResourceType
     , ResourceGroupResourceType (..)
 
@@ -401,6 +608,29 @@ module Network.Google.Monitoring.Types
     , range
     , rMax
     , rMin
+
+    -- * IstioCanonicalService
+    , IstioCanonicalService
+    , istioCanonicalService
+    , icsCanonicalService
+    , icsMeshUid
+    , icsCanonicalServiceNamespace
+
+    -- * AppEngine
+    , AppEngine
+    , appEngine
+    , aeModuleId
+
+    -- * QueryTimeSeriesResponse
+    , QueryTimeSeriesResponse
+    , queryTimeSeriesResponse
+    , qtsrNextPageToken
+    , qtsrPartialErrors
+    , qtsrTimeSeriesDescriptor
+    , qtsrTimeSeriesData
+
+    -- * OrganizationsTimeSeriesListAggregationCrossSeriesReducer
+    , OrganizationsTimeSeriesListAggregationCrossSeriesReducer (..)
 
     -- * MonitoredResource
     , MonitoredResource
@@ -414,6 +644,14 @@ module Network.Google.Monitoring.Types
     , uciIPAddress
     , uciLocation
     , uciRegion
+
+    -- * ClusterIstio
+    , ClusterIstio
+    , clusterIstio
+    , ciLocation
+    , ciServiceNamespace
+    , ciServiceName
+    , ciClusterName
 
     -- * AlertPolicyUserLabels
     , AlertPolicyUserLabels
@@ -429,6 +667,15 @@ module Network.Google.Monitoring.Types
     -- * Xgafv
     , Xgafv (..)
 
+    -- * LogMatchLabelExtractors
+    , LogMatchLabelExtractors
+    , logMatchLabelExtractors
+    , lmleAddtional
+
+    -- * AvailabilityCriteria
+    , AvailabilityCriteria
+    , availabilityCriteria
+
     -- * Exemplar
     , Exemplar
     , exemplar
@@ -436,12 +683,27 @@ module Network.Google.Monitoring.Types
     , eValue
     , eTimestamp
 
+    -- * NotificationRateLimit
+    , NotificationRateLimit
+    , notificationRateLimit
+    , nrlPeriod
+
+    -- * FoldersTimeSeriesListAggregationCrossSeriesReducer
+    , FoldersTimeSeriesListAggregationCrossSeriesReducer (..)
+
     -- * MetricDescriptorMetadata
     , MetricDescriptorMetadata
     , metricDescriptorMetadata
     , mdmSamplePeriod
     , mdmIngestDelay
     , mdmLaunchStage
+
+    -- * ServiceLevelIndicator
+    , ServiceLevelIndicator
+    , serviceLevelIndicator
+    , sliBasicSli
+    , sliRequestBased
+    , sliWindowsBased
 
     -- * TimeInterval
     , TimeInterval
@@ -465,6 +727,7 @@ module Network.Google.Monitoring.Types
     -- * ContentMatcher
     , ContentMatcher
     , contentMatcher
+    , cmMatcher
     , cmContent
 
     -- * ListGroupMembersResponse
@@ -473,6 +736,11 @@ module Network.Google.Monitoring.Types
     , lgmrNextPageToken
     , lgmrMembers
     , lgmrTotalSize
+
+    -- * AlertStrategy
+    , AlertStrategy
+    , alertStrategy
+    , asNotificationRateLimit
 
     -- * LabelDescriptor
     , LabelDescriptor
@@ -490,6 +758,9 @@ module Network.Google.Monitoring.Types
     , lOffSet
     , lWidth
     , lNumFiniteBuckets
+
+    -- * MonitoredResourceDescriptorLaunchStage
+    , MonitoredResourceDescriptorLaunchStage (..)
 
     -- * AlertPolicyCombiner
     , AlertPolicyCombiner (..)
@@ -516,6 +787,15 @@ module Network.Google.Monitoring.Types
     , droppedLabels
     , dlLabel
 
+    -- * TimeSeriesDescriptor
+    , TimeSeriesDescriptor
+    , timeSeriesDescriptor
+    , tsdPointDescriptors
+    , tsdLabelDescriptors
+
+    -- * OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+    , OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer (..)
+
     -- * FieldCardinality
     , FieldCardinality (..)
 
@@ -524,6 +804,19 @@ module Network.Google.Monitoring.Types
     , trigger
     , tPercent
     , tCount
+
+    -- * ServiceLevelObjectiveUserLabels
+    , ServiceLevelObjectiveUserLabels
+    , serviceLevelObjectiveUserLabels
+    , sloulAddtional
+
+    -- * ValueDescriptor
+    , ValueDescriptor
+    , valueDescriptor
+    , vdMetricKind
+    , vdKey
+    , vdValueType
+    , vdUnit
 
     -- * Type
     , Type
@@ -535,13 +828,36 @@ module Network.Google.Monitoring.Types
     , tFields
     , tSyntax
 
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omState
+    , omUpdateTime
+    , omCreateTime
+
+    -- * UptimeCheckConfigSelectedRegionsItem
+    , UptimeCheckConfigSelectedRegionsItem (..)
+
     -- * MetricDescriptorMetricKind
     , MetricDescriptorMetricKind (..)
 
     -- * CreateCollectdTimeSeriesResponse
     , CreateCollectdTimeSeriesResponse
     , createCollectdTimeSeriesResponse
+    , cctsrSummary
     , cctsrPayloadErrors
+
+    -- * LatencyCriteria
+    , LatencyCriteria
+    , latencyCriteria
+    , lcThreshold
+
+    -- * MeshIstio
+    , MeshIstio
+    , meshIstio
+    , miMeshUid
+    , miServiceNamespace
+    , miServiceName
 
     -- * Option
     , Option
@@ -549,13 +865,30 @@ module Network.Google.Monitoring.Types
     , oValue
     , oName
 
+    -- * ServiceLevelObjectiveCalendarPeriod
+    , ServiceLevelObjectiveCalendarPeriod (..)
+
+    -- * FoldersTimeSeriesListAggregationPerSeriesAligner
+    , FoldersTimeSeriesListAggregationPerSeriesAligner (..)
+
     -- * Condition
     , Condition
     , condition
     , cConditionAbsent
     , cConditionThreshold
     , cName
+    , cConditionMonitoringQueryLanguage
+    , cConditionMatchedLog
     , cDisplayName
+
+    -- * TimeSeriesData
+    , TimeSeriesData
+    , timeSeriesData
+    , tsdPointData
+    , tsdLabelValues
+
+    -- * ServicesServiceLevelObjectivesListView
+    , ServicesServiceLevelObjectivesListView (..)
 
     -- * BucketOptions
     , BucketOptions
@@ -576,9 +909,13 @@ module Network.Google.Monitoring.Types
     , hTTPCheck
     , httpcUseSSL
     , httpcPath
+    , httpcBody
     , httpcMaskHeaders
     , httpcHeaders
+    , httpcValidateSSL
+    , httpcRequestMethod
     , httpcAuthInfo
+    , httpcContentType
     , httpcPort
 
     -- * TimeSeries
@@ -590,6 +927,10 @@ module Network.Google.Monitoring.Types
     , tsResource
     , tsMetadata
     , tsValueType
+    , tsUnit
+
+    -- * MetricDescriptorLaunchStage
+    , MetricDescriptorLaunchStage (..)
 
     -- * AlertPolicy
     , AlertPolicy
@@ -601,14 +942,28 @@ module Network.Google.Monitoring.Types
     , apUserLabels
     , apName
     , apDocumentation
+    , apValidity
     , apDisplayName
+    , apAlertStrategy
     , apConditions
     , apCombiner
+
+    -- * RequestBasedSli
+    , RequestBasedSli
+    , requestBasedSli
+    , rbsGoodTotalRatio
+    , rbsDistributionCut
+
+    -- * CloudEndpoints
+    , CloudEndpoints
+    , cloudEndpoints
+    , ceService
 
     -- * ListAlertPoliciesResponse
     , ListAlertPoliciesResponse
     , listAlertPoliciesResponse
     , laprNextPageToken
+    , laprTotalSize
     , laprAlertPolicies
 
     -- * TCPCheck
@@ -618,6 +973,11 @@ module Network.Google.Monitoring.Types
 
     -- * InternalCheckerState
     , InternalCheckerState (..)
+
+    -- * ServiceUserLabels
+    , ServiceUserLabels
+    , serviceUserLabels
+    , sulAddtional
 
     -- * MetricAbsence
     , MetricAbsence
@@ -634,11 +994,11 @@ module Network.Google.Monitoring.Types
     , cveIndex
     ) where
 
-import           Network.Google.Monitoring.Types.Product
-import           Network.Google.Monitoring.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types.Product
+import Network.Google.Monitoring.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v3' of the Stackdriver Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3' of the Cloud Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
 monitoringService :: ServiceConfig
 monitoringService
   = defaultService (ServiceId "monitoring:v3")
@@ -649,7 +1009,7 @@ monitoringService
 monitoringReadScope :: Proxy '["https://www.googleapis.com/auth/monitoring.read"]
 monitoringReadScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

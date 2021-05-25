@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NodeTemplates.TestIAMPermissions
     , nttipRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTemplates.testIamPermissions@ method which the
 -- 'NodeTemplatesTestIAMPermissions' request conforms to.
@@ -63,10 +63,10 @@ type NodeTemplatesTestIAMPermissionsResource =
 -- /See:/ 'nodeTemplatesTestIAMPermissions' smart constructor.
 data NodeTemplatesTestIAMPermissions =
   NodeTemplatesTestIAMPermissions'
-    { _nttipProject  :: !Text
-    , _nttipPayload  :: !TestPermissionsRequest
+    { _nttipProject :: !Text
+    , _nttipPayload :: !TestPermissionsRequest
     , _nttipResource :: !Text
-    , _nttipRegion   :: !Text
+    , _nttipRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

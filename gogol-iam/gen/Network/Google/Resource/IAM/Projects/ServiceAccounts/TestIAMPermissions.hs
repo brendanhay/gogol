@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Tests the specified permissions against the IAM access control policy
--- for a ServiceAccount.
+-- Tests whether the caller has the specified permissions on a
+-- ServiceAccount.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.testIamPermissions@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
@@ -43,8 +43,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
     , psatipCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.testIamPermissions@ method which the
 -- 'ProjectsServiceAccountsTestIAMPermissions' request conforms to.
@@ -61,19 +61,19 @@ type ProjectsServiceAccountsTestIAMPermissionsResource
                      ReqBody '[JSON] TestIAMPermissionsRequest :>
                        Post '[JSON] TestIAMPermissionsResponse
 
--- | Tests the specified permissions against the IAM access control policy
--- for a ServiceAccount.
+-- | Tests whether the caller has the specified permissions on a
+-- ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsTestIAMPermissions' smart constructor.
 data ProjectsServiceAccountsTestIAMPermissions =
   ProjectsServiceAccountsTestIAMPermissions'
-    { _psatipXgafv          :: !(Maybe Xgafv)
+    { _psatipXgafv :: !(Maybe Xgafv)
     , _psatipUploadProtocol :: !(Maybe Text)
-    , _psatipAccessToken    :: !(Maybe Text)
-    , _psatipUploadType     :: !(Maybe Text)
-    , _psatipPayload        :: !TestIAMPermissionsRequest
-    , _psatipResource       :: !Text
-    , _psatipCallback       :: !(Maybe Text)
+    , _psatipAccessToken :: !(Maybe Text)
+    , _psatipUploadType :: !(Maybe Text)
+    , _psatipPayload :: !TestIAMPermissionsRequest
+    , _psatipResource :: !Text
+    , _psatipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

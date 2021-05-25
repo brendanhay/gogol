@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update Chrome OS Device. This method supports patch semantics.
+-- Updates a device\'s updatable properties, such as \`annotatedUser\`,
+-- \`annotatedLocation\`, \`notes\`, \`orgUnitPath\`, or
+-- \`annotatedAssetId\`. This method supports [patch
+-- semantics](\/admin-sdk\/directory\/v1\/guides\/performance#patch).
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.chromeosdevices.patch@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.chromeosdevices.patch@.
 module Network.Google.Resource.Directory.ChromeosDevices.Patch
     (
     -- * REST Resource
@@ -33,14 +36,19 @@ module Network.Google.Resource.Directory.ChromeosDevices.Patch
     , ChromeosDevicesPatch
 
     -- * Request Lenses
+    , cdpXgafv
+    , cdpUploadProtocol
+    , cdpAccessToken
+    , cdpUploadType
     , cdpPayload
     , cdpCustomerId
     , cdpDeviceId
     , cdpProjection
+    , cdpCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.chromeosdevices.patch@ method which the
 -- 'ChromeosDevicesPatch' request conforms to.
@@ -53,22 +61,35 @@ type ChromeosDevicesPatchResource =
                "devices" :>
                  "chromeos" :>
                    Capture "deviceId" Text :>
-                     QueryParam "projection"
-                       ChromeosDevicesPatchProjection
-                       :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ChromeOSDevice :>
-                           Patch '[JSON] ChromeOSDevice
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "projection"
+                               ChromeosDevicesPatchProjection
+                               :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ChromeOSDevice :>
+                                     Patch '[JSON] ChromeOSDevice
 
--- | Update Chrome OS Device. This method supports patch semantics.
+-- | Updates a device\'s updatable properties, such as \`annotatedUser\`,
+-- \`annotatedLocation\`, \`notes\`, \`orgUnitPath\`, or
+-- \`annotatedAssetId\`. This method supports [patch
+-- semantics](\/admin-sdk\/directory\/v1\/guides\/performance#patch).
 --
 -- /See:/ 'chromeosDevicesPatch' smart constructor.
 data ChromeosDevicesPatch =
   ChromeosDevicesPatch'
-    { _cdpPayload    :: !ChromeOSDevice
+    { _cdpXgafv :: !(Maybe Xgafv)
+    , _cdpUploadProtocol :: !(Maybe Text)
+    , _cdpAccessToken :: !(Maybe Text)
+    , _cdpUploadType :: !(Maybe Text)
+    , _cdpPayload :: !ChromeOSDevice
     , _cdpCustomerId :: !Text
-    , _cdpDeviceId   :: !Text
+    , _cdpDeviceId :: !Text
     , _cdpProjection :: !(Maybe ChromeosDevicesPatchProjection)
+    , _cdpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +98,14 @@ data ChromeosDevicesPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdpXgafv'
+--
+-- * 'cdpUploadProtocol'
+--
+-- * 'cdpAccessToken'
+--
+-- * 'cdpUploadType'
+--
 -- * 'cdpPayload'
 --
 -- * 'cdpCustomerId'
@@ -84,6 +113,8 @@ data ChromeosDevicesPatch =
 -- * 'cdpDeviceId'
 --
 -- * 'cdpProjection'
+--
+-- * 'cdpCallback'
 chromeosDevicesPatch
     :: ChromeOSDevice -- ^ 'cdpPayload'
     -> Text -- ^ 'cdpCustomerId'
@@ -91,25 +122,59 @@ chromeosDevicesPatch
     -> ChromeosDevicesPatch
 chromeosDevicesPatch pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
   ChromeosDevicesPatch'
-    { _cdpPayload = pCdpPayload_
+    { _cdpXgafv = Nothing
+    , _cdpUploadProtocol = Nothing
+    , _cdpAccessToken = Nothing
+    , _cdpUploadType = Nothing
+    , _cdpPayload = pCdpPayload_
     , _cdpCustomerId = pCdpCustomerId_
     , _cdpDeviceId = pCdpDeviceId_
     , _cdpProjection = Nothing
+    , _cdpCallback = Nothing
     }
 
+
+-- | V1 error format.
+cdpXgafv :: Lens' ChromeosDevicesPatch (Maybe Xgafv)
+cdpXgafv = lens _cdpXgafv (\ s a -> s{_cdpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cdpUploadProtocol :: Lens' ChromeosDevicesPatch (Maybe Text)
+cdpUploadProtocol
+  = lens _cdpUploadProtocol
+      (\ s a -> s{_cdpUploadProtocol = a})
+
+-- | OAuth access token.
+cdpAccessToken :: Lens' ChromeosDevicesPatch (Maybe Text)
+cdpAccessToken
+  = lens _cdpAccessToken
+      (\ s a -> s{_cdpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cdpUploadType :: Lens' ChromeosDevicesPatch (Maybe Text)
+cdpUploadType
+  = lens _cdpUploadType
+      (\ s a -> s{_cdpUploadType = a})
 
 -- | Multipart request metadata.
 cdpPayload :: Lens' ChromeosDevicesPatch ChromeOSDevice
 cdpPayload
   = lens _cdpPayload (\ s a -> s{_cdpPayload = a})
 
--- | Immutable ID of the G Suite account
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s \`customerId\`. The \`customerId\` is also
+-- returned as part of the [Users
+-- resource](\/admin-sdk\/directory\/v1\/reference\/users).
 cdpCustomerId :: Lens' ChromeosDevicesPatch Text
 cdpCustomerId
   = lens _cdpCustomerId
       (\ s a -> s{_cdpCustomerId = a})
 
--- | Immutable ID of Chrome OS Device
+-- | The unique ID of the device. The \`deviceId\`s are returned in the
+-- response from the
+-- [chromeosdevices.list](\/admin-sdk\/v1\/reference\/chromeosdevices\/list)
+-- method.
 cdpDeviceId :: Lens' ChromeosDevicesPatch Text
 cdpDeviceId
   = lens _cdpDeviceId (\ s a -> s{_cdpDeviceId = a})
@@ -120,12 +185,22 @@ cdpProjection
   = lens _cdpProjection
       (\ s a -> s{_cdpProjection = a})
 
+-- | JSONP
+cdpCallback :: Lens' ChromeosDevicesPatch (Maybe Text)
+cdpCallback
+  = lens _cdpCallback (\ s a -> s{_cdpCallback = a})
+
 instance GoogleRequest ChromeosDevicesPatch where
         type Rs ChromeosDevicesPatch = ChromeOSDevice
         type Scopes ChromeosDevicesPatch =
              '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
         requestClient ChromeosDevicesPatch'{..}
-          = go _cdpCustomerId _cdpDeviceId _cdpProjection
+          = go _cdpCustomerId _cdpDeviceId _cdpXgafv
+              _cdpUploadProtocol
+              _cdpAccessToken
+              _cdpUploadType
+              _cdpProjection
+              _cdpCallback
               (Just AltJSON)
               _cdpPayload
               directoryService

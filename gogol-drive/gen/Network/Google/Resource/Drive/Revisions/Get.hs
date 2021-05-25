@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Revisions.Get
     , rggRevisionId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.get@ method which the
 -- 'RevisionsGet' request conforms to.
@@ -69,8 +69,8 @@ type RevisionsGetResource =
 data RevisionsGet =
   RevisionsGet'
     { _rggAcknowledgeAbuse :: !Bool
-    , _rggFileId           :: !Text
-    , _rggRevisionId       :: !Text
+    , _rggFileId :: !Text
+    , _rggRevisionId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

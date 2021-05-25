@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,6 +22,12 @@ module Network.Google.CloudAsset.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * GoogleIdentityAccesscontextManagerV1BasicLevel
+    , GoogleIdentityAccesscontextManagerV1BasicLevel
+    , googleIdentityAccesscontextManagerV1BasicLevel
+    , giamvblConditions
+    , giamvblCombiningFunction
+
     -- * Status
     , Status
     , status
@@ -29,14 +35,30 @@ module Network.Google.CloudAsset.Types
     , sCode
     , sMessage
 
-    -- * ExportAssetsRequestContentType
-    , ExportAssetsRequestContentType (..)
+    -- * GoogleCloudAssetV1p7beta1ExportAssetsRequestContentType
+    , GoogleCloudAssetV1p7beta1ExportAssetsRequestContentType (..)
 
     -- * AuditConfig
     , AuditConfig
     , auditConfig
     , acService
     , acAuditLogConfigs
+
+    -- * AnalyzeIAMPolicyLongrunningResponse
+    , AnalyzeIAMPolicyLongrunningResponse
+    , analyzeIAMPolicyLongrunningResponse
+
+    -- * GoogleCloudAssetV1p7beta1RelatedAssets
+    , GoogleCloudAssetV1p7beta1RelatedAssets
+    , googleCloudAssetV1p7beta1RelatedAssets
+    , gcavraRelationshipAttributes
+    , gcavraAssets
+
+    -- * GoogleIdentityAccesscontextManagerV1IngressPolicy
+    , GoogleIdentityAccesscontextManagerV1IngressPolicy
+    , googleIdentityAccesscontextManagerV1IngressPolicy
+    , giamvipIngressFrom
+    , giamvipIngressTo
 
     -- * Expr
     , Expr
@@ -45,6 +67,34 @@ module Network.Google.CloudAsset.Types
     , eExpression
     , eTitle
     , eDescription
+
+    -- * GoogleIdentityAccesscontextManagerV1ServicePerimeterConfig
+    , GoogleIdentityAccesscontextManagerV1ServicePerimeterConfig
+    , googleIdentityAccesscontextManagerV1ServicePerimeterConfig
+    , giamvspcResources
+    , giamvspcVPCAccessibleServices
+    , giamvspcRestrictedServices
+    , giamvspcEgressPolicies
+    , giamvspcAccessLevels
+    , giamvspcIngressPolicies
+
+    -- * GoogleIdentityAccesscontextManagerV1BasicLevelCombiningFunction
+    , GoogleIdentityAccesscontextManagerV1BasicLevelCombiningFunction (..)
+
+    -- * GoogleIdentityAccesscontextManagerV1IngressSource
+    , GoogleIdentityAccesscontextManagerV1IngressSource
+    , googleIdentityAccesscontextManagerV1IngressSource
+    , giamvisAccessLevel
+    , giamvisResource
+
+    -- * GoogleIdentityAccesscontextManagerV1AccessLevel
+    , GoogleIdentityAccesscontextManagerV1AccessLevel
+    , googleIdentityAccesscontextManagerV1AccessLevel
+    , giamvalBasic
+    , giamvalCustom
+    , giamvalName
+    , giamvalTitle
+    , giamvalDescription
 
     -- * Operation
     , Operation
@@ -55,71 +105,175 @@ module Network.Google.CloudAsset.Types
     , oName
     , oMetadata
 
-    -- * Asset
-    , Asset
-    , asset
-    , aName
-    , aResource
-    , aIAMPolicy
-    , aAssetType
+    -- * GoogleIdentityAccesscontextManagerV1EgressPolicy
+    , GoogleIdentityAccesscontextManagerV1EgressPolicy
+    , googleIdentityAccesscontextManagerV1EgressPolicy
+    , giamvepEgressFrom
+    , giamvepEgressTo
 
-    -- * GcsDestination
-    , GcsDestination
-    , gcsDestination
-    , gdURIPrefix
-    , gdURI
+    -- * GoogleCloudAssetV1p7beta1ExportAssetsRequest
+    , GoogleCloudAssetV1p7beta1ExportAssetsRequest
+    , googleCloudAssetV1p7beta1ExportAssetsRequest
+    , gcavearReadTime
+    , gcavearRelationshipTypes
+    , gcavearAssetTypes
+    , gcavearOutputConfig
+    , gcavearContentType
+
+    -- * GoogleIdentityAccesscontextManagerV1ServicePerimeterPerimeterType
+    , GoogleIdentityAccesscontextManagerV1ServicePerimeterPerimeterType (..)
+
+    -- * GoogleIdentityAccesscontextManagerV1OSConstraintOSType
+    , GoogleIdentityAccesscontextManagerV1OSConstraintOSType (..)
+
+    -- * GoogleCloudAssetV1p7beta1GcsDestination
+    , GoogleCloudAssetV1p7beta1GcsDestination
+    , googleCloudAssetV1p7beta1GcsDestination
+    , gcavgdURIPrefix
+    , gcavgdURI
+
+    -- * GoogleIdentityAccesscontextManagerV1ServicePerimeter
+    , GoogleIdentityAccesscontextManagerV1ServicePerimeter
+    , googleIdentityAccesscontextManagerV1ServicePerimeter
+    , giamvspStatus
+    , giamvspPerimeterType
+    , giamvspName
+    , giamvspSpec
+    , giamvspTitle
+    , giamvspUseExplicitDryRunSpec
+    , giamvspDescription
+
+    -- * GoogleIdentityAccesscontextManagerV1EgressFrom
+    , GoogleIdentityAccesscontextManagerV1EgressFrom
+    , googleIdentityAccesscontextManagerV1EgressFrom
+    , giamvefIdentityType
+    , giamvefIdentities
+
+    -- * GoogleIdentityAccesscontextManagerV1DevicePolicyAllowedDeviceManagementLevelsItem
+    , GoogleIdentityAccesscontextManagerV1DevicePolicyAllowedDeviceManagementLevelsItem (..)
 
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
 
-    -- * ExportAssetsRequest
-    , ExportAssetsRequest
-    , exportAssetsRequest
-    , earReadTime
-    , earAssetTypes
-    , earOutputConfig
-    , earContentType
+    -- * GoogleCloudAssetV1p7beta1OutputConfig
+    , GoogleCloudAssetV1p7beta1OutputConfig
+    , googleCloudAssetV1p7beta1OutputConfig
+    , gcavocBigQueryDestination
+    , gcavocGcsDestination
 
-    -- * TimeWindow
-    , TimeWindow
-    , timeWindow
-    , twStartTime
-    , twEndTime
+    -- * GoogleIdentityAccesscontextManagerV1EgressTo
+    , GoogleIdentityAccesscontextManagerV1EgressTo
+    , googleIdentityAccesscontextManagerV1EgressTo
+    , giamvetResources
+    , giamvetOperations
 
-    -- * TemporalAsset
-    , TemporalAsset
-    , temporalAsset
-    , taWindow
-    , taAsset
-    , taDeleted
+    -- * GoogleIdentityAccesscontextManagerV1IngressFrom
+    , GoogleIdentityAccesscontextManagerV1IngressFrom
+    , googleIdentityAccesscontextManagerV1IngressFrom
+    , giamvifIdentityType
+    , giamvifSources
+    , giamvifIdentities
+
+    -- * GoogleIdentityAccesscontextManagerV1OSConstraint
+    , GoogleIdentityAccesscontextManagerV1OSConstraint
+    , googleIdentityAccesscontextManagerV1OSConstraint
+    , giamvocOSType
+    , giamvocMinimumVersion
+    , giamvocRequireVerifiedChromeOS
+
+    -- * GoogleCloudAssetV1p7beta1RelatedAsset
+    , GoogleCloudAssetV1p7beta1RelatedAsset
+    , googleCloudAssetV1p7beta1RelatedAsset
+    , gcavraAsset
+    , gcavraAssetType
+    , gcavraAncestors
+
+    -- * GoogleIdentityAccesscontextManagerV1IngressTo
+    , GoogleIdentityAccesscontextManagerV1IngressTo
+    , googleIdentityAccesscontextManagerV1IngressTo
+    , giamvitResources
+    , giamvitOperations
+
+    -- * GoogleCloudAssetV1p7beta1PartitionSpec
+    , GoogleCloudAssetV1p7beta1PartitionSpec
+    , googleCloudAssetV1p7beta1PartitionSpec
+    , gcavpsPartitionKey
+
+    -- * GoogleIdentityAccesscontextManagerV1AccessPolicy
+    , GoogleIdentityAccesscontextManagerV1AccessPolicy
+    , googleIdentityAccesscontextManagerV1AccessPolicy
+    , giamvapParent
+    , giamvapEtag
+    , giamvapName
+    , giamvapTitle
+
+    -- * GoogleCloudOrgpolicyV1ListPolicy
+    , GoogleCloudOrgpolicyV1ListPolicy
+    , googleCloudOrgpolicyV1ListPolicy
+    , gcovlpInheritFromParent
+    , gcovlpAllValues
+    , gcovlpDeniedValues
+    , gcovlpAllowedValues
+    , gcovlpSuggestedValue
+
+    -- * GoogleIdentityAccesscontextManagerV1IngressFromIdentityType
+    , GoogleIdentityAccesscontextManagerV1IngressFromIdentityType (..)
 
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
 
-    -- * Resource
-    , Resource
-    , resource
-    , rParent
-    , rData
-    , rVersion
-    , rDiscoveryName
-    , rDiscoveryDocumentURI
-    , rResourceURL
+    -- * GoogleIdentityAccesscontextManagerV1MethodSelector
+    , GoogleIdentityAccesscontextManagerV1MethodSelector
+    , googleIdentityAccesscontextManagerV1MethodSelector
+    , giamvmsMethod
+    , giamvmsPermission
 
     -- * Xgafv
     , Xgafv (..)
 
-    -- * ResourceData
-    , ResourceData
-    , resourceData
-    , rdAddtional
+    -- * GoogleIdentityAccesscontextManagerV1APIOperation
+    , GoogleIdentityAccesscontextManagerV1APIOperation
+    , googleIdentityAccesscontextManagerV1APIOperation
+    , giamvaoMethodSelectors
+    , giamvaoServiceName
 
-    -- * OutputConfig
-    , OutputConfig
-    , outputConfig
-    , ocGcsDestination
+    -- * GoogleIdentityAccesscontextManagerV1CustomLevel
+    , GoogleIdentityAccesscontextManagerV1CustomLevel
+    , googleIdentityAccesscontextManagerV1CustomLevel
+    , giamvclExpr
+
+    -- * GoogleIdentityAccesscontextManagerV1VPCAccessibleServices
+    , GoogleIdentityAccesscontextManagerV1VPCAccessibleServices
+    , googleIdentityAccesscontextManagerV1VPCAccessibleServices
+    , giamvvasAllowedServices
+    , giamvvasEnableRestriction
+
+    -- * GoogleCloudOrgpolicyV1Policy
+    , GoogleCloudOrgpolicyV1Policy
+    , googleCloudOrgpolicyV1Policy
+    , gcovpBooleanPolicy
+    , gcovpEtag
+    , gcovpRestoreDefault
+    , gcovpUpdateTime
+    , gcovpVersion
+    , gcovpListPolicy
+    , gcovpConstraint
+
+    -- * GoogleIdentityAccesscontextManagerV1EgressFromIdentityType
+    , GoogleIdentityAccesscontextManagerV1EgressFromIdentityType (..)
+
+    -- * GoogleCloudAssetV1p7beta1RelationshipAttributes
+    , GoogleCloudAssetV1p7beta1RelationshipAttributes
+    , googleCloudAssetV1p7beta1RelationshipAttributes
+    , gcavraAction
+    , gcavraSourceResourceType
+    , gcavraType
+    , gcavraTargetResourceType
+
+    -- * GoogleIdentityAccesscontextManagerV1DevicePolicyAllowedEncryptionStatusesItem
+    , GoogleIdentityAccesscontextManagerV1DevicePolicyAllowedEncryptionStatusesItem (..)
 
     -- * Policy
     , Policy
@@ -129,10 +283,15 @@ module Network.Google.CloudAsset.Types
     , pVersion
     , pBindings
 
-    -- * BatchGetAssetsHistoryResponse
-    , BatchGetAssetsHistoryResponse
-    , batchGetAssetsHistoryResponse
-    , bgahrAssets
+    -- * GoogleIdentityAccesscontextManagerV1DevicePolicy
+    , GoogleIdentityAccesscontextManagerV1DevicePolicy
+    , googleIdentityAccesscontextManagerV1DevicePolicy
+    , giamvdpOSConstraints
+    , giamvdpRequireAdminApproval
+    , giamvdpRequireCorpOwned
+    , giamvdpRequireScreenlock
+    , giamvdpAllowedEncryptionStatuses
+    , giamvdpAllowedDeviceManagementLevels
 
     -- * OperationMetadata
     , OperationMetadata
@@ -145,10 +304,50 @@ module Network.Google.CloudAsset.Types
     , alcLogType
     , alcExemptedMembers
 
+    -- * GoogleCloudAssetV1p7beta1Asset
+    , GoogleCloudAssetV1p7beta1Asset
+    , googleCloudAssetV1p7beta1Asset
+    , gcavaAccessLevel
+    , gcavaServicePerimeter
+    , gcavaRelatedAssets
+    , gcavaUpdateTime
+    , gcavaAccessPolicy
+    , gcavaName
+    , gcavaResource
+    , gcavaOrgPolicy
+    , gcavaIAMPolicy
+    , gcavaAssetType
+    , gcavaAncestors
+
+    -- * GoogleIdentityAccesscontextManagerV1Condition
+    , GoogleIdentityAccesscontextManagerV1Condition
+    , googleIdentityAccesscontextManagerV1Condition
+    , giamvcMembers
+    , giamvcRegions
+    , giamvcNegate
+    , giamvcIPSubnetworks
+    , giamvcDevicePolicy
+    , giamvcRequiredAccessLevels
+
+    -- * GoogleCloudOrgpolicyV1RestoreDefault
+    , GoogleCloudOrgpolicyV1RestoreDefault
+    , googleCloudOrgpolicyV1RestoreDefault
+
     -- * OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- * GoogleCloudOrgpolicyV1ListPolicyAllValues
+    , GoogleCloudOrgpolicyV1ListPolicyAllValues (..)
+
+    -- * GoogleCloudOrgpolicyV1BooleanPolicy
+    , GoogleCloudOrgpolicyV1BooleanPolicy
+    , googleCloudOrgpolicyV1BooleanPolicy
+    , gcovbpEnforced
+
+    -- * GoogleCloudAssetV1p7beta1PartitionSpecPartitionKey
+    , GoogleCloudAssetV1p7beta1PartitionSpecPartitionKey (..)
 
     -- * Binding
     , Binding
@@ -156,18 +355,43 @@ module Network.Google.CloudAsset.Types
     , bMembers
     , bRole
     , bCondition
+
+    -- * GoogleCloudAssetV1p7beta1ResourceData
+    , GoogleCloudAssetV1p7beta1ResourceData
+    , googleCloudAssetV1p7beta1ResourceData
+    , gcavrdAddtional
+
+    -- * GoogleCloudAssetV1p7beta1BigQueryDestination
+    , GoogleCloudAssetV1p7beta1BigQueryDestination
+    , googleCloudAssetV1p7beta1BigQueryDestination
+    , gcavbqdPartitionSpec
+    , gcavbqdSeparateTablesPerAssetType
+    , gcavbqdDataSet
+    , gcavbqdForce
+    , gcavbqdTable
+
+    -- * GoogleCloudAssetV1p7beta1Resource
+    , GoogleCloudAssetV1p7beta1Resource
+    , googleCloudAssetV1p7beta1Resource
+    , gcavrParent
+    , gcavrLocation
+    , gcavrData
+    , gcavrVersion
+    , gcavrDiscoveryName
+    , gcavrDiscoveryDocumentURI
+    , gcavrResourceURL
     ) where
 
-import           Network.Google.CloudAsset.Types.Product
-import           Network.Google.CloudAsset.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudAsset.Types.Product
+import Network.Google.CloudAsset.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Cloud Asset API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1p7beta1' of the Cloud Asset API. This contains the host and root path used as a starting point for constructing service requests.
 cloudAssetService :: ServiceConfig
 cloudAssetService
-  = defaultService (ServiceId "cloudasset:v1")
+  = defaultService (ServiceId "cloudasset:v1p7beta1")
       "cloudasset.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

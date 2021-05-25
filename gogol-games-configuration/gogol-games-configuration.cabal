@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Publishing API for Google Play Game Services.
+    The Google Play Game Services Publishing API allows developers to
+    configure their games in Game Services.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -39,14 +40,12 @@ library
         , Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
         , Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
         , Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
-        , Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
         , Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
         , Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
         , Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
         , Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
         , Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
         , Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
-        , Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
         , Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
 
     other-modules:

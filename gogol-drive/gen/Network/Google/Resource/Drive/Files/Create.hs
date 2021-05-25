@@ -38,12 +38,14 @@ module Network.Google.Resource.Drive.Files.Create
     , fcOCRLanguage
     , fcKeepRevisionForever
     , fcSupportsAllDrives
+    , fcIncludePermissionsForView
     , fcIgnoreDefaultVisibility
+    , fcEnforceSingleParent
     , fcSupportsTeamDrives
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.create@ method which the
 -- 'FilesCreate' request conforms to.
@@ -55,10 +57,12 @@ type FilesCreateResource =
              QueryParam "ocrLanguage" Text :>
                QueryParam "keepRevisionForever" Bool :>
                  QueryParam "supportsAllDrives" Bool :>
-                   QueryParam "ignoreDefaultVisibility" Bool :>
-                     QueryParam "supportsTeamDrives" Bool :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] File :> Post '[JSON] File
+                   QueryParam "includePermissionsForView" Text :>
+                     QueryParam "ignoreDefaultVisibility" Bool :>
+                       QueryParam "enforceSingleParent" Bool :>
+                         QueryParam "supportsTeamDrives" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] File :> Post '[JSON] File
        :<|>
        "upload" :>
          "drive" :>
@@ -68,25 +72,29 @@ type FilesCreateResource =
                  QueryParam "ocrLanguage" Text :>
                    QueryParam "keepRevisionForever" Bool :>
                      QueryParam "supportsAllDrives" Bool :>
-                       QueryParam "ignoreDefaultVisibility" Bool :>
-                         QueryParam "supportsTeamDrives" Bool :>
-                           QueryParam "alt" AltJSON :>
-                             QueryParam "uploadType" Multipart :>
-                               MultipartRelated '[JSON] File :>
-                                 Post '[JSON] File
+                       QueryParam "includePermissionsForView" Text :>
+                         QueryParam "ignoreDefaultVisibility" Bool :>
+                           QueryParam "enforceSingleParent" Bool :>
+                             QueryParam "supportsTeamDrives" Bool :>
+                               QueryParam "alt" AltJSON :>
+                                 QueryParam "uploadType" Multipart :>
+                                   MultipartRelated '[JSON] File :>
+                                     Post '[JSON] File
 
 -- | Creates a new file.
 --
 -- /See:/ 'filesCreate' smart constructor.
 data FilesCreate =
   FilesCreate'
-    { _fcPayload                   :: !File
+    { _fcPayload :: !File
     , _fcUseContentAsIndexableText :: !Bool
-    , _fcOCRLanguage               :: !(Maybe Text)
-    , _fcKeepRevisionForever       :: !Bool
-    , _fcSupportsAllDrives         :: !Bool
-    , _fcIgnoreDefaultVisibility   :: !Bool
-    , _fcSupportsTeamDrives        :: !Bool
+    , _fcOCRLanguage :: !(Maybe Text)
+    , _fcKeepRevisionForever :: !Bool
+    , _fcSupportsAllDrives :: !Bool
+    , _fcIncludePermissionsForView :: !(Maybe Text)
+    , _fcIgnoreDefaultVisibility :: !Bool
+    , _fcEnforceSingleParent :: !Bool
+    , _fcSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,7 +113,11 @@ data FilesCreate =
 --
 -- * 'fcSupportsAllDrives'
 --
+-- * 'fcIncludePermissionsForView'
+--
 -- * 'fcIgnoreDefaultVisibility'
+--
+-- * 'fcEnforceSingleParent'
 --
 -- * 'fcSupportsTeamDrives'
 filesCreate
@@ -118,7 +130,9 @@ filesCreate pFcPayload_ =
     , _fcOCRLanguage = Nothing
     , _fcKeepRevisionForever = False
     , _fcSupportsAllDrives = False
+    , _fcIncludePermissionsForView = Nothing
     , _fcIgnoreDefaultVisibility = False
+    , _fcEnforceSingleParent = False
     , _fcSupportsTeamDrives = False
     }
 
@@ -141,7 +155,9 @@ fcOCRLanguage
       (\ s a -> s{_fcOCRLanguage = a})
 
 -- | Whether to set the \'keepForever\' field in the new head revision. This
--- is only applicable to files with binary content in Google Drive.
+-- is only applicable to files with binary content in Google Drive. Only
+-- 200 revisions for the file can be kept forever. If the limit is reached,
+-- try deleting pinned revisions.
 fcKeepRevisionForever :: Lens' FilesCreate Bool
 fcKeepRevisionForever
   = lens _fcKeepRevisionForever
@@ -154,6 +170,13 @@ fcSupportsAllDrives
   = lens _fcSupportsAllDrives
       (\ s a -> s{_fcSupportsAllDrives = a})
 
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+fcIncludePermissionsForView :: Lens' FilesCreate (Maybe Text)
+fcIncludePermissionsForView
+  = lens _fcIncludePermissionsForView
+      (\ s a -> s{_fcIncludePermissionsForView = a})
+
 -- | Whether to ignore the domain\'s default visibility settings for the
 -- created file. Domain administrators can choose to make all uploaded
 -- files visible to the domain by default; this parameter bypasses that
@@ -163,6 +186,12 @@ fcIgnoreDefaultVisibility :: Lens' FilesCreate Bool
 fcIgnoreDefaultVisibility
   = lens _fcIgnoreDefaultVisibility
       (\ s a -> s{_fcIgnoreDefaultVisibility = a})
+
+-- | Deprecated. Creating files in multiple folders is no longer supported.
+fcEnforceSingleParent :: Lens' FilesCreate Bool
+fcEnforceSingleParent
+  = lens _fcEnforceSingleParent
+      (\ s a -> s{_fcEnforceSingleParent = a})
 
 -- | Deprecated use supportsAllDrives instead.
 fcSupportsTeamDrives :: Lens' FilesCreate Bool
@@ -181,7 +210,9 @@ instance GoogleRequest FilesCreate where
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
               (Just _fcSupportsAllDrives)
+              _fcIncludePermissionsForView
               (Just _fcIgnoreDefaultVisibility)
+              (Just _fcEnforceSingleParent)
               (Just _fcSupportsTeamDrives)
               (Just AltJSON)
               _fcPayload
@@ -200,7 +231,9 @@ instance GoogleRequest (MediaUpload FilesCreate)
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
               (Just _fcSupportsAllDrives)
+              _fcIncludePermissionsForView
               (Just _fcIgnoreDefaultVisibility)
+              (Just _fcEnforceSingleParent)
               (Just _fcSupportsTeamDrives)
               (Just AltJSON)
               (Just Multipart)

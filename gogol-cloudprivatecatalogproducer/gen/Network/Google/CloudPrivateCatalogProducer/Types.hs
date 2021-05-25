@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -220,9 +220,9 @@ module Network.Google.CloudPrivateCatalogProducer.Types
     , gcpvlarAssociations
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types.Product
-import           Network.Google.CloudPrivateCatalogProducer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types.Product
+import Network.Google.CloudPrivateCatalogProducer.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta1' of the Cloud Private Catalog Producer API. This contains the host and root path used as a starting point for constructing service requests.
 cloudPrivateCatalogProducerService :: ServiceConfig

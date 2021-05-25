@@ -42,20 +42,22 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvsmgCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.messages.get@ method which the
 -- 'ProjectsLocationsDataSetsHl7V2StoresMessagesGet' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresMessagesGetResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "view" Text :>
+                 QueryParam "view"
+                   ProjectsLocationsDataSetsHl7V2StoresMessagesGetView
+                   :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Message
 
@@ -64,13 +66,13 @@ type ProjectsLocationsDataSetsHl7V2StoresMessagesGetResource
 -- /See:/ 'projectsLocationsDataSetsHl7V2StoresMessagesGet' smart constructor.
 data ProjectsLocationsDataSetsHl7V2StoresMessagesGet =
   ProjectsLocationsDataSetsHl7V2StoresMessagesGet'
-    { _pldshvsmgXgafv          :: !(Maybe Xgafv)
+    { _pldshvsmgXgafv :: !(Maybe Xgafv)
     , _pldshvsmgUploadProtocol :: !(Maybe Text)
-    , _pldshvsmgAccessToken    :: !(Maybe Text)
-    , _pldshvsmgUploadType     :: !(Maybe Text)
-    , _pldshvsmgName           :: !Text
-    , _pldshvsmgView           :: !(Maybe Text)
-    , _pldshvsmgCallback       :: !(Maybe Text)
+    , _pldshvsmgAccessToken :: !(Maybe Text)
+    , _pldshvsmgUploadType :: !(Maybe Text)
+    , _pldshvsmgName :: !Text
+    , _pldshvsmgView :: !(Maybe ProjectsLocationsDataSetsHl7V2StoresMessagesGetView)
+    , _pldshvsmgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,9 +139,9 @@ pldshvsmgName
   = lens _pldshvsmgName
       (\ s a -> s{_pldshvsmgName = a})
 
--- | Specifies which parts of the Message resource should be returned in the
--- response.
-pldshvsmgView :: Lens' ProjectsLocationsDataSetsHl7V2StoresMessagesGet (Maybe Text)
+-- | Specifies which parts of the Message resource to return in the response.
+-- When unspecified, equivalent to FULL.
+pldshvsmgView :: Lens' ProjectsLocationsDataSetsHl7V2StoresMessagesGet (Maybe ProjectsLocationsDataSetsHl7V2StoresMessagesGetView)
 pldshvsmgView
   = lens _pldshvsmgView
       (\ s a -> s{_pldshvsmgView = a})

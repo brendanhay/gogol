@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets one comment by ID.
+-- Gets a comment by id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.get@.
 module Network.Google.Resource.Blogger.Comments.Get
     (
     -- * REST Resource
@@ -33,38 +33,52 @@ module Network.Google.Resource.Blogger.Comments.Get
     , CommentsGet
 
     -- * Request Lenses
+    , cgXgafv
+    , cgUploadProtocol
+    , cgAccessToken
+    , cgUploadType
     , cgBlogId
     , cgView
     , cgPostId
     , cgCommentId
+    , cgCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.get@ method which the
 -- 'CommentsGet' request conforms to.
 type CommentsGetResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     QueryParam "view" CommentsGetView :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Comment
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               "comments" :>
+                 Capture "commentId" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "view" CommentsGetView :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
--- | Gets one comment by ID.
+-- | Gets a comment by id.
 --
 -- /See:/ 'commentsGet' smart constructor.
 data CommentsGet =
   CommentsGet'
-    { _cgBlogId    :: !Text
-    , _cgView      :: !(Maybe CommentsGetView)
-    , _cgPostId    :: !Text
+    { _cgXgafv :: !(Maybe Xgafv)
+    , _cgUploadProtocol :: !(Maybe Text)
+    , _cgAccessToken :: !(Maybe Text)
+    , _cgUploadType :: !(Maybe Text)
+    , _cgBlogId :: !Text
+    , _cgView :: !(Maybe CommentsGetView)
+    , _cgPostId :: !Text
     , _cgCommentId :: !Text
+    , _cgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,6 +87,14 @@ data CommentsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cgXgafv'
+--
+-- * 'cgUploadProtocol'
+--
+-- * 'cgAccessToken'
+--
+-- * 'cgUploadType'
+--
 -- * 'cgBlogId'
 --
 -- * 'cgView'
@@ -80,6 +102,8 @@ data CommentsGet =
 -- * 'cgPostId'
 --
 -- * 'cgCommentId'
+--
+-- * 'cgCallback'
 commentsGet
     :: Text -- ^ 'cgBlogId'
     -> Text -- ^ 'cgPostId'
@@ -87,32 +111,56 @@ commentsGet
     -> CommentsGet
 commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
   CommentsGet'
-    { _cgBlogId = pCgBlogId_
+    { _cgXgafv = Nothing
+    , _cgUploadProtocol = Nothing
+    , _cgAccessToken = Nothing
+    , _cgUploadType = Nothing
+    , _cgBlogId = pCgBlogId_
     , _cgView = Nothing
     , _cgPostId = pCgPostId_
     , _cgCommentId = pCgCommentId_
+    , _cgCallback = Nothing
     }
 
 
--- | ID of the blog to containing the comment.
+-- | V1 error format.
+cgXgafv :: Lens' CommentsGet (Maybe Xgafv)
+cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cgUploadProtocol :: Lens' CommentsGet (Maybe Text)
+cgUploadProtocol
+  = lens _cgUploadProtocol
+      (\ s a -> s{_cgUploadProtocol = a})
+
+-- | OAuth access token.
+cgAccessToken :: Lens' CommentsGet (Maybe Text)
+cgAccessToken
+  = lens _cgAccessToken
+      (\ s a -> s{_cgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cgUploadType :: Lens' CommentsGet (Maybe Text)
+cgUploadType
+  = lens _cgUploadType (\ s a -> s{_cgUploadType = a})
+
 cgBlogId :: Lens' CommentsGet Text
 cgBlogId = lens _cgBlogId (\ s a -> s{_cgBlogId = a})
 
--- | Access level for the requested comment (default: READER). Note that some
--- comments will require elevated permissions, for example comments where
--- the parent posts which is in a draft state, or comments that are pending
--- moderation.
 cgView :: Lens' CommentsGet (Maybe CommentsGetView)
 cgView = lens _cgView (\ s a -> s{_cgView = a})
 
--- | ID of the post to fetch posts from.
 cgPostId :: Lens' CommentsGet Text
 cgPostId = lens _cgPostId (\ s a -> s{_cgPostId = a})
 
--- | The ID of the comment to get.
 cgCommentId :: Lens' CommentsGet Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
+
+-- | JSONP
+cgCallback :: Lens' CommentsGet (Maybe Text)
+cgCallback
+  = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
@@ -120,7 +168,12 @@ instance GoogleRequest CommentsGet where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient CommentsGet'{..}
-          = go _cgBlogId _cgPostId _cgCommentId _cgView
+          = go _cgBlogId _cgPostId _cgCommentId _cgXgafv
+              _cgUploadProtocol
+              _cgAccessToken
+              _cgUploadType
+              _cgView
+              _cgCallback
               (Just AltJSON)
               bloggerService
           where go

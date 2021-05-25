@@ -48,8 +48,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
     , pjgmCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.getMetrics@ method which the
 -- 'ProjectsJobsGetMetrics' request conforms to.
@@ -79,15 +79,15 @@ type ProjectsJobsGetMetricsResource =
 -- /See:/ 'projectsJobsGetMetrics' smart constructor.
 data ProjectsJobsGetMetrics =
   ProjectsJobsGetMetrics'
-    { _pjgmXgafv          :: !(Maybe Xgafv)
-    , _pjgmJobId          :: !Text
+    { _pjgmXgafv :: !(Maybe Xgafv)
+    , _pjgmJobId :: !Text
     , _pjgmUploadProtocol :: !(Maybe Text)
-    , _pjgmLocation       :: !(Maybe Text)
-    , _pjgmStartTime      :: !(Maybe DateTime')
-    , _pjgmAccessToken    :: !(Maybe Text)
-    , _pjgmUploadType     :: !(Maybe Text)
-    , _pjgmProjectId      :: !Text
-    , _pjgmCallback       :: !(Maybe Text)
+    , _pjgmLocation :: !(Maybe Text)
+    , _pjgmStartTime :: !(Maybe DateTime')
+    , _pjgmAccessToken :: !(Maybe Text)
+    , _pjgmUploadType :: !(Maybe Text)
+    , _pjgmProjectId :: !Text
+    , _pjgmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,7 +136,7 @@ pjgmXgafv :: Lens' ProjectsJobsGetMetrics (Maybe Xgafv)
 pjgmXgafv
   = lens _pjgmXgafv (\ s a -> s{_pjgmXgafv = a})
 
--- | The job to get messages for.
+-- | The job to get metrics for.
 pjgmJobId :: Lens' ProjectsJobsGetMetrics Text
 pjgmJobId
   = lens _pjgmJobId (\ s a -> s{_pjgmJobId = a})

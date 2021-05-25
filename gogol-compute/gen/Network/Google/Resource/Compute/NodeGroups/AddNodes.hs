@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NodeGroups.AddNodes
     , nganPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.addNodes@ method which the
 -- 'NodeGroupsAddNodes' request conforms to.
@@ -67,9 +67,9 @@ data NodeGroupsAddNodes =
   NodeGroupsAddNodes'
     { _nganRequestId :: !(Maybe Text)
     , _nganNodeGroup :: !Text
-    , _nganProject   :: !Text
-    , _nganZone      :: !Text
-    , _nganPayload   :: !NodeGroupsAddNodesRequest
+    , _nganProject :: !Text
+    , _nganZone :: !Text
+    , _nganPayload :: !NodeGroupsAddNodesRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

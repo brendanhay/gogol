@@ -23,7 +23,7 @@
 -- Retrieves a list of sites, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.sites.list@.
 module Network.Google.Resource.DFAReporting.Sites.List
     (
     -- * REST Resource
@@ -34,11 +34,15 @@ module Network.Google.Resource.DFAReporting.Sites.List
     , SitesList
 
     -- * Request Lenses
+    , sitXgafv
+    , sitUploadProtocol
     , sitUnmAppedSite
+    , sitAccessToken
     , sitCampaignIds
     , sitSearchString
     , sitAcceptsInterstitialPlacements
     , sitAcceptsPublisherPaidPlacements
+    , sitUploadType
     , sitIds
     , sitProFileId
     , sitDirectorySiteIds
@@ -50,40 +54,58 @@ module Network.Google.Resource.DFAReporting.Sites.List
     , sitApproved
     , sitAdWordsSite
     , sitMaxResults
+    , sitCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sites.list@ method which the
 -- 'SitesList' request conforms to.
 type SitesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
-               QueryParam "unmappedSite" Bool :>
-                 QueryParams "campaignIds" (Textual Int64) :>
-                   QueryParam "searchString" Text :>
-                     QueryParam "acceptsInterstitialPlacements" Bool :>
-                       QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                         QueryParams "ids" (Textual Int64) :>
-                           QueryParams "directorySiteIds" (Textual Int64) :>
-                             QueryParam "sortOrder" SitesListSortOrder :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" SitesListSortField :>
-                                   QueryParam "subaccountId" (Textual Int64) :>
-                                     QueryParam "acceptsInStreamVideoPlacements"
-                                       Bool
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "unmappedSite" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParams "campaignIds" (Textual Int64) :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "acceptsInterstitialPlacements" Bool :>
+                             QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParams "ids" (Textual Int64) :>
+                                   QueryParams "directorySiteIds"
+                                     (Textual Int64)
+                                     :>
+                                     QueryParam "sortOrder" SitesListSortOrder
                                        :>
-                                       QueryParam "approved" Bool :>
-                                         QueryParam "adWordsSite" Bool :>
-                                           QueryParam "maxResults"
-                                             (Textual Int32)
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "sortField"
+                                           SitesListSortField
+                                           :>
+                                           QueryParam "subaccountId"
+                                             (Textual Int64)
                                              :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] SitesListResponse
+                                             QueryParam
+                                               "acceptsInStreamVideoPlacements"
+                                               Bool
+                                               :>
+                                               QueryParam "approved" Bool :>
+                                                 QueryParam "adWordsSite" Bool
+                                                   :>
+                                                   QueryParam "maxResults"
+                                                     (Textual Int32)
+                                                     :>
+                                                     QueryParam "callback" Text
+                                                       :>
+                                                       QueryParam "alt" AltJSON
+                                                         :>
+                                                         Get '[JSON]
+                                                           SitesListResponse
 
 -- | Retrieves a list of sites, possibly filtered. This method supports
 -- paging.
@@ -91,22 +113,27 @@ type SitesListResource =
 -- /See:/ 'sitesList' smart constructor.
 data SitesList =
   SitesList'
-    { _sitUnmAppedSite                   :: !(Maybe Bool)
-    , _sitCampaignIds                    :: !(Maybe [Textual Int64])
-    , _sitSearchString                   :: !(Maybe Text)
-    , _sitAcceptsInterstitialPlacements  :: !(Maybe Bool)
+    { _sitXgafv :: !(Maybe Xgafv)
+    , _sitUploadProtocol :: !(Maybe Text)
+    , _sitUnmAppedSite :: !(Maybe Bool)
+    , _sitAccessToken :: !(Maybe Text)
+    , _sitCampaignIds :: !(Maybe [Textual Int64])
+    , _sitSearchString :: !(Maybe Text)
+    , _sitAcceptsInterstitialPlacements :: !(Maybe Bool)
     , _sitAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _sitIds                            :: !(Maybe [Textual Int64])
-    , _sitProFileId                      :: !(Textual Int64)
-    , _sitDirectorySiteIds               :: !(Maybe [Textual Int64])
-    , _sitSortOrder                      :: !SitesListSortOrder
-    , _sitPageToken                      :: !(Maybe Text)
-    , _sitSortField                      :: !SitesListSortField
-    , _sitSubAccountId                   :: !(Maybe (Textual Int64))
+    , _sitUploadType :: !(Maybe Text)
+    , _sitIds :: !(Maybe [Textual Int64])
+    , _sitProFileId :: !(Textual Int64)
+    , _sitDirectorySiteIds :: !(Maybe [Textual Int64])
+    , _sitSortOrder :: !SitesListSortOrder
+    , _sitPageToken :: !(Maybe Text)
+    , _sitSortField :: !SitesListSortField
+    , _sitSubAccountId :: !(Maybe (Textual Int64))
     , _sitAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _sitApproved                       :: !(Maybe Bool)
-    , _sitAdWordsSite                    :: !(Maybe Bool)
-    , _sitMaxResults                     :: !(Textual Int32)
+    , _sitApproved :: !(Maybe Bool)
+    , _sitAdWordsSite :: !(Maybe Bool)
+    , _sitMaxResults :: !(Textual Int32)
+    , _sitCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,7 +142,13 @@ data SitesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sitXgafv'
+--
+-- * 'sitUploadProtocol'
+--
 -- * 'sitUnmAppedSite'
+--
+-- * 'sitAccessToken'
 --
 -- * 'sitCampaignIds'
 --
@@ -124,6 +157,8 @@ data SitesList =
 -- * 'sitAcceptsInterstitialPlacements'
 --
 -- * 'sitAcceptsPublisherPaidPlacements'
+--
+-- * 'sitUploadType'
 --
 -- * 'sitIds'
 --
@@ -146,16 +181,22 @@ data SitesList =
 -- * 'sitAdWordsSite'
 --
 -- * 'sitMaxResults'
+--
+-- * 'sitCallback'
 sitesList
     :: Int64 -- ^ 'sitProFileId'
     -> SitesList
 sitesList pSitProFileId_ =
   SitesList'
-    { _sitUnmAppedSite = Nothing
+    { _sitXgafv = Nothing
+    , _sitUploadProtocol = Nothing
+    , _sitUnmAppedSite = Nothing
+    , _sitAccessToken = Nothing
     , _sitCampaignIds = Nothing
     , _sitSearchString = Nothing
     , _sitAcceptsInterstitialPlacements = Nothing
     , _sitAcceptsPublisherPaidPlacements = Nothing
+    , _sitUploadType = Nothing
     , _sitIds = Nothing
     , _sitProFileId = _Coerce # pSitProFileId_
     , _sitDirectorySiteIds = Nothing
@@ -167,14 +208,31 @@ sitesList pSitProFileId_ =
     , _sitApproved = Nothing
     , _sitAdWordsSite = Nothing
     , _sitMaxResults = 1000
+    , _sitCallback = Nothing
     }
 
+
+-- | V1 error format.
+sitXgafv :: Lens' SitesList (Maybe Xgafv)
+sitXgafv = lens _sitXgafv (\ s a -> s{_sitXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+sitUploadProtocol :: Lens' SitesList (Maybe Text)
+sitUploadProtocol
+  = lens _sitUploadProtocol
+      (\ s a -> s{_sitUploadProtocol = a})
 
 -- | Select only sites that have not been mapped to a directory site.
 sitUnmAppedSite :: Lens' SitesList (Maybe Bool)
 sitUnmAppedSite
   = lens _sitUnmAppedSite
       (\ s a -> s{_sitUnmAppedSite = a})
+
+-- | OAuth access token.
+sitAccessToken :: Lens' SitesList (Maybe Text)
+sitAccessToken
+  = lens _sitAccessToken
+      (\ s a -> s{_sitAccessToken = a})
 
 -- | Select only sites with these campaign IDs.
 sitCampaignIds :: Lens' SitesList [Int64]
@@ -207,6 +265,12 @@ sitAcceptsPublisherPaidPlacements :: Lens' SitesList (Maybe Bool)
 sitAcceptsPublisherPaidPlacements
   = lens _sitAcceptsPublisherPaidPlacements
       (\ s a -> s{_sitAcceptsPublisherPaidPlacements = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+sitUploadType :: Lens' SitesList (Maybe Text)
+sitUploadType
+  = lens _sitUploadType
+      (\ s a -> s{_sitUploadType = a})
 
 -- | Select only sites with these IDs.
 sitIds :: Lens' SitesList [Int64]
@@ -275,16 +339,24 @@ sitMaxResults
       (\ s a -> s{_sitMaxResults = a})
       . _Coerce
 
+-- | JSONP
+sitCallback :: Lens' SitesList (Maybe Text)
+sitCallback
+  = lens _sitCallback (\ s a -> s{_sitCallback = a})
+
 instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
         type Scopes SitesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesList'{..}
-          = go _sitProFileId _sitUnmAppedSite
+          = go _sitProFileId _sitXgafv _sitUploadProtocol
+              _sitUnmAppedSite
+              _sitAccessToken
               (_sitCampaignIds ^. _Default)
               _sitSearchString
               _sitAcceptsInterstitialPlacements
               _sitAcceptsPublisherPaidPlacements
+              _sitUploadType
               (_sitIds ^. _Default)
               (_sitDirectorySiteIds ^. _Default)
               (Just _sitSortOrder)
@@ -295,6 +367,7 @@ instance GoogleRequest SitesList where
               _sitApproved
               _sitAdWordsSite
               (Just _sitMaxResults)
+              _sitCallback
               (Just AltJSON)
               dFAReportingService
           where go

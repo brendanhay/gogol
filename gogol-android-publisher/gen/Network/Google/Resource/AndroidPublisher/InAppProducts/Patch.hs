@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the details of an in-app product. This method supports patch
--- semantics.
+-- Patches an in-app product (i.e. a managed product or a subscriptions).
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.patch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.patch@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
     (
     -- * REST Resource
@@ -34,14 +33,19 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
     , InAppProductsPatch
 
     -- * Request Lenses
+    , iAppXgafv
+    , iAppUploadProtocol
     , iAppAutoConvertMissingPrices
     , iAppPackageName
+    , iAppAccessToken
+    , iAppUploadType
     , iAppPayload
     , iAppSKU
+    , iAppCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.inappproducts.patch@ method which the
 -- 'InAppProductsPatch' request conforms to.
@@ -52,21 +56,30 @@ type InAppProductsPatchResource =
            Capture "packageName" Text :>
              "inappproducts" :>
                Capture "sku" Text :>
-                 QueryParam "autoConvertMissingPrices" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] InAppProduct :>
-                       Patch '[JSON] InAppProduct
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "autoConvertMissingPrices" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] InAppProduct :>
+                                 Patch '[JSON] InAppProduct
 
--- | Updates the details of an in-app product. This method supports patch
--- semantics.
+-- | Patches an in-app product (i.e. a managed product or a subscriptions).
 --
 -- /See:/ 'inAppProductsPatch' smart constructor.
 data InAppProductsPatch =
   InAppProductsPatch'
-    { _iAppAutoConvertMissingPrices :: !(Maybe Bool)
-    , _iAppPackageName              :: !Text
-    , _iAppPayload                  :: !InAppProduct
-    , _iAppSKU                      :: !Text
+    { _iAppXgafv :: !(Maybe Xgafv)
+    , _iAppUploadProtocol :: !(Maybe Text)
+    , _iAppAutoConvertMissingPrices :: !(Maybe Bool)
+    , _iAppPackageName :: !Text
+    , _iAppAccessToken :: !(Maybe Text)
+    , _iAppUploadType :: !(Maybe Text)
+    , _iAppPayload :: !InAppProduct
+    , _iAppSKU :: !Text
+    , _iAppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,13 +88,23 @@ data InAppProductsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'iAppXgafv'
+--
+-- * 'iAppUploadProtocol'
+--
 -- * 'iAppAutoConvertMissingPrices'
 --
 -- * 'iAppPackageName'
 --
+-- * 'iAppAccessToken'
+--
+-- * 'iAppUploadType'
+--
 -- * 'iAppPayload'
 --
 -- * 'iAppSKU'
+--
+-- * 'iAppCallback'
 inAppProductsPatch
     :: Text -- ^ 'iAppPackageName'
     -> InAppProduct -- ^ 'iAppPayload'
@@ -89,12 +112,28 @@ inAppProductsPatch
     -> InAppProductsPatch
 inAppProductsPatch pIAppPackageName_ pIAppPayload_ pIAppSKU_ =
   InAppProductsPatch'
-    { _iAppAutoConvertMissingPrices = Nothing
+    { _iAppXgafv = Nothing
+    , _iAppUploadProtocol = Nothing
+    , _iAppAutoConvertMissingPrices = Nothing
     , _iAppPackageName = pIAppPackageName_
+    , _iAppAccessToken = Nothing
+    , _iAppUploadType = Nothing
     , _iAppPayload = pIAppPayload_
     , _iAppSKU = pIAppSKU_
+    , _iAppCallback = Nothing
     }
 
+
+-- | V1 error format.
+iAppXgafv :: Lens' InAppProductsPatch (Maybe Xgafv)
+iAppXgafv
+  = lens _iAppXgafv (\ s a -> s{_iAppXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+iAppUploadProtocol :: Lens' InAppProductsPatch (Maybe Text)
+iAppUploadProtocol
+  = lens _iAppUploadProtocol
+      (\ s a -> s{_iAppUploadProtocol = a})
 
 -- | If true the prices for all regions targeted by the parent app that
 -- don\'t have a price specified for this in-app product will be auto
@@ -105,12 +144,23 @@ iAppAutoConvertMissingPrices
   = lens _iAppAutoConvertMissingPrices
       (\ s a -> s{_iAppAutoConvertMissingPrices = a})
 
--- | Unique identifier for the Android app with the in-app product; for
--- example, \"com.spiffygame\".
+-- | Package name of the app.
 iAppPackageName :: Lens' InAppProductsPatch Text
 iAppPackageName
   = lens _iAppPackageName
       (\ s a -> s{_iAppPackageName = a})
+
+-- | OAuth access token.
+iAppAccessToken :: Lens' InAppProductsPatch (Maybe Text)
+iAppAccessToken
+  = lens _iAppAccessToken
+      (\ s a -> s{_iAppAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+iAppUploadType :: Lens' InAppProductsPatch (Maybe Text)
+iAppUploadType
+  = lens _iAppUploadType
+      (\ s a -> s{_iAppUploadType = a})
 
 -- | Multipart request metadata.
 iAppPayload :: Lens' InAppProductsPatch InAppProduct
@@ -121,13 +171,22 @@ iAppPayload
 iAppSKU :: Lens' InAppProductsPatch Text
 iAppSKU = lens _iAppSKU (\ s a -> s{_iAppSKU = a})
 
+-- | JSONP
+iAppCallback :: Lens' InAppProductsPatch (Maybe Text)
+iAppCallback
+  = lens _iAppCallback (\ s a -> s{_iAppCallback = a})
+
 instance GoogleRequest InAppProductsPatch where
         type Rs InAppProductsPatch = InAppProduct
         type Scopes InAppProductsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsPatch'{..}
-          = go _iAppPackageName _iAppSKU
+          = go _iAppPackageName _iAppSKU _iAppXgafv
+              _iAppUploadProtocol
               _iAppAutoConvertMissingPrices
+              _iAppAccessToken
+              _iAppUploadType
+              _iAppCallback
               (Just AltJSON)
               _iAppPayload
               androidPublisherService

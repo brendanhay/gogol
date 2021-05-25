@@ -34,13 +34,18 @@ module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Ge
     , ManagedConfigurationsforUserGet
 
     -- * Request Lenses
+    , mcugXgafv
+    , mcugUploadProtocol
     , mcugEnterpriseId
+    , mcugAccessToken
+    , mcugUploadType
     , mcugUserId
     , mcugManagedConfigurationForUserId
+    , mcugCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.managedconfigurationsforuser.get@ method which the
 -- 'ManagedConfigurationsforUserGet' request conforms to.
@@ -53,8 +58,13 @@ type ManagedConfigurationsforUserGetResource =
                Capture "userId" Text :>
                  "managedConfigurationsForUser" :>
                    Capture "managedConfigurationForUserId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ManagedConfiguration
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ManagedConfiguration
 
 -- | Retrieves details of a per-user managed configuration for an app for the
 -- specified user.
@@ -62,9 +72,14 @@ type ManagedConfigurationsforUserGetResource =
 -- /See:/ 'managedConfigurationsforUserGet' smart constructor.
 data ManagedConfigurationsforUserGet =
   ManagedConfigurationsforUserGet'
-    { _mcugEnterpriseId                  :: !Text
-    , _mcugUserId                        :: !Text
+    { _mcugXgafv :: !(Maybe Xgafv)
+    , _mcugUploadProtocol :: !(Maybe Text)
+    , _mcugEnterpriseId :: !Text
+    , _mcugAccessToken :: !(Maybe Text)
+    , _mcugUploadType :: !(Maybe Text)
+    , _mcugUserId :: !Text
     , _mcugManagedConfigurationForUserId :: !Text
+    , _mcugCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,11 +88,21 @@ data ManagedConfigurationsforUserGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mcugXgafv'
+--
+-- * 'mcugUploadProtocol'
+--
 -- * 'mcugEnterpriseId'
+--
+-- * 'mcugAccessToken'
+--
+-- * 'mcugUploadType'
 --
 -- * 'mcugUserId'
 --
 -- * 'mcugManagedConfigurationForUserId'
+--
+-- * 'mcugCallback'
 managedConfigurationsforUserGet
     :: Text -- ^ 'mcugEnterpriseId'
     -> Text -- ^ 'mcugUserId'
@@ -85,17 +110,45 @@ managedConfigurationsforUserGet
     -> ManagedConfigurationsforUserGet
 managedConfigurationsforUserGet pMcugEnterpriseId_ pMcugUserId_ pMcugManagedConfigurationForUserId_ =
   ManagedConfigurationsforUserGet'
-    { _mcugEnterpriseId = pMcugEnterpriseId_
+    { _mcugXgafv = Nothing
+    , _mcugUploadProtocol = Nothing
+    , _mcugEnterpriseId = pMcugEnterpriseId_
+    , _mcugAccessToken = Nothing
+    , _mcugUploadType = Nothing
     , _mcugUserId = pMcugUserId_
     , _mcugManagedConfigurationForUserId = pMcugManagedConfigurationForUserId_
+    , _mcugCallback = Nothing
     }
 
+
+-- | V1 error format.
+mcugXgafv :: Lens' ManagedConfigurationsforUserGet (Maybe Xgafv)
+mcugXgafv
+  = lens _mcugXgafv (\ s a -> s{_mcugXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mcugUploadProtocol :: Lens' ManagedConfigurationsforUserGet (Maybe Text)
+mcugUploadProtocol
+  = lens _mcugUploadProtocol
+      (\ s a -> s{_mcugUploadProtocol = a})
 
 -- | The ID of the enterprise.
 mcugEnterpriseId :: Lens' ManagedConfigurationsforUserGet Text
 mcugEnterpriseId
   = lens _mcugEnterpriseId
       (\ s a -> s{_mcugEnterpriseId = a})
+
+-- | OAuth access token.
+mcugAccessToken :: Lens' ManagedConfigurationsforUserGet (Maybe Text)
+mcugAccessToken
+  = lens _mcugAccessToken
+      (\ s a -> s{_mcugAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mcugUploadType :: Lens' ManagedConfigurationsforUserGet (Maybe Text)
+mcugUploadType
+  = lens _mcugUploadType
+      (\ s a -> s{_mcugUploadType = a})
 
 -- | The ID of the user.
 mcugUserId :: Lens' ManagedConfigurationsforUserGet Text
@@ -109,6 +162,11 @@ mcugManagedConfigurationForUserId
   = lens _mcugManagedConfigurationForUserId
       (\ s a -> s{_mcugManagedConfigurationForUserId = a})
 
+-- | JSONP
+mcugCallback :: Lens' ManagedConfigurationsforUserGet (Maybe Text)
+mcugCallback
+  = lens _mcugCallback (\ s a -> s{_mcugCallback = a})
+
 instance GoogleRequest
            ManagedConfigurationsforUserGet
          where
@@ -119,6 +177,11 @@ instance GoogleRequest
         requestClient ManagedConfigurationsforUserGet'{..}
           = go _mcugEnterpriseId _mcugUserId
               _mcugManagedConfigurationForUserId
+              _mcugXgafv
+              _mcugUploadProtocol
+              _mcugAccessToken
+              _mcugUploadType
+              _mcugCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetServiceAccount
     , issaInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setServiceAccount@ method which the
 -- 'InstancesSetServiceAccount' request conforms to.
@@ -68,10 +68,10 @@ type InstancesSetServiceAccountResource =
 data InstancesSetServiceAccount =
   InstancesSetServiceAccount'
     { _issaRequestId :: !(Maybe Text)
-    , _issaProject   :: !Text
-    , _issaZone      :: !Text
-    , _issaPayload   :: !InstancesSetServiceAccountRequest
-    , _issaInstance  :: !Text
+    , _issaProject :: !Text
+    , _issaZone :: !Text
+    , _issaPayload :: !InstancesSetServiceAccountRequest
+    , _issaInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

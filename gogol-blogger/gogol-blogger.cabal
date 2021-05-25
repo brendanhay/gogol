@@ -1,6 +1,6 @@
 name:                  gogol-blogger
 version:               0.5.0
-synopsis:              Google Blogger SDK.
+synopsis:              Google Blogger API v3 SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,17 +14,14 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    API for access to the data within Blogger.
+    The Blogger API provides access to posts, comments and pages of a
+    Blogger blog.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
     This library is compatible with version @v3@
     of the API.
-    .
-    Labels:
-    .
-    * Limited Availability
 
 source-repository head
     type:     git

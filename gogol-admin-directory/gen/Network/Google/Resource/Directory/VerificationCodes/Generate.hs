@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generate new backup verification codes for the user.
+-- Generates new backup verification codes for the user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.verificationCodes.generate@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.verificationCodes.generate@.
 module Network.Google.Resource.Directory.VerificationCodes.Generate
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Directory.VerificationCodes.Generate
     , VerificationCodesGenerate
 
     -- * Request Lenses
+    , vcgXgafv
+    , vcgUploadProtocol
+    , vcgAccessToken
+    , vcgUploadType
     , vcgUserKey
+    , vcgCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.verificationCodes.generate@ method which the
 -- 'VerificationCodesGenerate' request conforms to.
@@ -49,14 +54,24 @@ type VerificationCodesGenerateResource =
              Capture "userKey" Text :>
                "verificationCodes" :>
                  "generate" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
--- | Generate new backup verification codes for the user.
+-- | Generates new backup verification codes for the user.
 --
 -- /See:/ 'verificationCodesGenerate' smart constructor.
-newtype VerificationCodesGenerate =
+data VerificationCodesGenerate =
   VerificationCodesGenerate'
-    { _vcgUserKey :: Text
+    { _vcgXgafv :: !(Maybe Xgafv)
+    , _vcgUploadProtocol :: !(Maybe Text)
+    , _vcgAccessToken :: !(Maybe Text)
+    , _vcgUploadType :: !(Maybe Text)
+    , _vcgUserKey :: !Text
+    , _vcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,18 +80,62 @@ newtype VerificationCodesGenerate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vcgXgafv'
+--
+-- * 'vcgUploadProtocol'
+--
+-- * 'vcgAccessToken'
+--
+-- * 'vcgUploadType'
+--
 -- * 'vcgUserKey'
+--
+-- * 'vcgCallback'
 verificationCodesGenerate
     :: Text -- ^ 'vcgUserKey'
     -> VerificationCodesGenerate
 verificationCodesGenerate pVcgUserKey_ =
-  VerificationCodesGenerate' {_vcgUserKey = pVcgUserKey_}
+  VerificationCodesGenerate'
+    { _vcgXgafv = Nothing
+    , _vcgUploadProtocol = Nothing
+    , _vcgAccessToken = Nothing
+    , _vcgUploadType = Nothing
+    , _vcgUserKey = pVcgUserKey_
+    , _vcgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+vcgXgafv :: Lens' VerificationCodesGenerate (Maybe Xgafv)
+vcgXgafv = lens _vcgXgafv (\ s a -> s{_vcgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vcgUploadProtocol :: Lens' VerificationCodesGenerate (Maybe Text)
+vcgUploadProtocol
+  = lens _vcgUploadProtocol
+      (\ s a -> s{_vcgUploadProtocol = a})
+
+-- | OAuth access token.
+vcgAccessToken :: Lens' VerificationCodesGenerate (Maybe Text)
+vcgAccessToken
+  = lens _vcgAccessToken
+      (\ s a -> s{_vcgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vcgUploadType :: Lens' VerificationCodesGenerate (Maybe Text)
+vcgUploadType
+  = lens _vcgUploadType
+      (\ s a -> s{_vcgUploadType = a})
 
 -- | Email or immutable ID of the user
 vcgUserKey :: Lens' VerificationCodesGenerate Text
 vcgUserKey
   = lens _vcgUserKey (\ s a -> s{_vcgUserKey = a})
+
+-- | JSONP
+vcgCallback :: Lens' VerificationCodesGenerate (Maybe Text)
+vcgCallback
+  = lens _vcgCallback (\ s a -> s{_vcgCallback = a})
 
 instance GoogleRequest VerificationCodesGenerate
          where
@@ -84,7 +143,12 @@ instance GoogleRequest VerificationCodesGenerate
         type Scopes VerificationCodesGenerate =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient VerificationCodesGenerate'{..}
-          = go _vcgUserKey (Just AltJSON) directoryService
+          = go _vcgUserKey _vcgXgafv _vcgUploadProtocol
+              _vcgAccessToken
+              _vcgUploadType
+              _vcgCallback
+              (Just AltJSON)
+              directoryService
           where go
                   = buildClient
                       (Proxy :: Proxy VerificationCodesGenerateResource)

@@ -39,8 +39,8 @@ module Network.Google.Resource.Calendar.ACL.Patch
     , apSendNotifications
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.patch@ method which the
 -- 'ACLPatch' request conforms to.
@@ -60,9 +60,9 @@ type ACLPatchResource =
 -- /See:/ 'aclPatch' smart constructor.
 data ACLPatch =
   ACLPatch'
-    { _apCalendarId        :: !Text
-    , _apRuleId            :: !Text
-    , _apPayload           :: !ACLRule
+    { _apCalendarId :: !Text
+    , _apRuleId :: !Text
+    , _apPayload :: !ACLRule
     , _apSendNotifications :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

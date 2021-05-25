@@ -36,8 +36,8 @@ module Network.Google.Resource.URLShortener.URL.Insert
     , uiPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.URLShortener.Types
+import Network.Google.Prelude
+import Network.Google.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.insert@ method which the
 -- 'URLInsert' request conforms to.

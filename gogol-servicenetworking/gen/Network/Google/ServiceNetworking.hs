@@ -49,14 +49,59 @@ module Network.Google.ServiceNetworking
     -- ** servicenetworking.services.connections.create
     , module Network.Google.Resource.ServiceNetworking.Services.Connections.Create
 
+    -- ** servicenetworking.services.connections.deleteConnection
+    , module Network.Google.Resource.ServiceNetworking.Services.Connections.DeleteConnection
+
     -- ** servicenetworking.services.connections.list
     , module Network.Google.Resource.ServiceNetworking.Services.Connections.List
 
     -- ** servicenetworking.services.connections.patch
     , module Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
 
+    -- ** servicenetworking.services.disableVpcServiceControls
+    , module Network.Google.Resource.ServiceNetworking.Services.DisableVPCServiceControls
+
+    -- ** servicenetworking.services.dnsRecordSets.add
+    , module Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Add
+
+    -- ** servicenetworking.services.dnsRecordSets.remove
+    , module Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Remove
+
+    -- ** servicenetworking.services.dnsRecordSets.update
+    , module Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Update
+
+    -- ** servicenetworking.services.dnsZones.add
+    , module Network.Google.Resource.ServiceNetworking.Services.DNSZones.Add
+
+    -- ** servicenetworking.services.dnsZones.remove
+    , module Network.Google.Resource.ServiceNetworking.Services.DNSZones.Remove
+
+    -- ** servicenetworking.services.enableVpcServiceControls
+    , module Network.Google.Resource.ServiceNetworking.Services.EnableVPCServiceControls
+
+    -- ** servicenetworking.services.projects.global.networks.get
+    , module Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.Get
+
+    -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.create
+    , module Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.Create
+
+    -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.delete
+    , module Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.Delete
+
+    -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.list
+    , module Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.List
+
+    -- ** servicenetworking.services.projects.global.networks.updateConsumerConfig
+    , module Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.UpdateConsumerConfig
+
+    -- ** servicenetworking.services.roles.add
+    , module Network.Google.Resource.ServiceNetworking.Services.Roles.Add
+
     -- ** servicenetworking.services.searchRange
     , module Network.Google.Resource.ServiceNetworking.Services.SearchRange
+
+    -- ** servicenetworking.services.validate
+    , module Network.Google.Resource.ServiceNetworking.Services.Validate
 
     -- * Types
 
@@ -68,8 +113,19 @@ module Network.Google.ServiceNetworking
     , gcsvsName
     , gcsvsIPCIdRRange
 
+    -- ** JwtLocation
+    , JwtLocation
+    , jwtLocation
+    , jlValuePrefix
+    , jlHeader
+    , jlQuery
+
     -- ** MetricDescriptorValueType
     , MetricDescriptorValueType (..)
+
+    -- ** RemoveDNSZoneMetadata
+    , RemoveDNSZoneMetadata
+    , removeDNSZoneMetadata
 
     -- ** SystemParameter
     , SystemParameter
@@ -86,9 +142,21 @@ module Network.Google.ServiceNetworking
     , mrdLabels
     , mrdType
     , mrdDescription
+    , mrdLaunchStage
+
+    -- ** SecondaryIPRange
+    , SecondaryIPRange
+    , secondaryIPRange
+    , sirRangeName
+    , sirIPCIdRRange
 
     -- ** BackendRulePathTranslation
     , BackendRulePathTranslation (..)
+
+    -- ** EnableVPCServiceControlsRequest
+    , EnableVPCServiceControlsRequest
+    , enableVPCServiceControlsRequest
+    , evscrConsumerNetwork
 
     -- ** ListConnectionsResponse
     , ListConnectionsResponse
@@ -109,6 +177,34 @@ module Network.Google.ServiceNetworking
     , sCode
     , sMessage
 
+    -- ** ConsumerConfig
+    , ConsumerConfig
+    , consumerConfig
+    , ccProducerExportCustomRoutes
+    , ccConsumerImportSubnetRoutesWithPublicIP
+    , ccReservedRanges
+    , ccConsumerExportCustomRoutes
+    , ccVPCScReferenceArchitectureEnabled
+    , ccProducerNetwork
+    , ccProducerImportCustomRoutes
+    , ccProducerExportSubnetRoutesWithPublicIP
+    , ccConsumerImportCustomRoutes
+    , ccProducerImportSubnetRoutesWithPublicIP
+    , ccConsumerExportSubnetRoutesWithPublicIP
+
+    -- ** AddDNSZoneRequest
+    , AddDNSZoneRequest
+    , addDNSZoneRequest
+    , adzrDNSSuffix
+    , adzrName
+    , adzrConsumerNetwork
+
+    -- ** AddRolesRequest
+    , AddRolesRequest
+    , addRolesRequest
+    , arrPolicyBinding
+    , arrConsumerNetwork
+
     -- ** BillingDestination
     , BillingDestination
     , billingDestination
@@ -119,6 +215,18 @@ module Network.Google.ServiceNetworking
     , Control
     , control
     , cEnvironment
+
+    -- ** PeeredDNSDomainMetadata
+    , PeeredDNSDomainMetadata
+    , peeredDNSDomainMetadata
+
+    -- ** RangeReservation
+    , RangeReservation
+    , rangeReservation
+    , rrIPPrefixLength
+    , rrSecondaryRangeIPPrefixLengths
+    , rrRequestedRanges
+    , rrSubnetworkCandidates
 
     -- ** AuthRequirement
     , AuthRequirement
@@ -140,6 +248,7 @@ module Network.Google.ServiceNetworking
     -- ** MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
+    , mdMonitoredResourceTypes
     , mdMetricKind
     , mdName
     , mdMetadata
@@ -149,12 +258,19 @@ module Network.Google.ServiceNetworking
     , mdValueType
     , mdDescription
     , mdUnit
+    , mdLaunchStage
 
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
+
+    -- ** DNSZone
+    , DNSZone
+    , dnsZone
+    , dzDNSSuffix
+    , dzName
 
     -- ** CancelOperationRequest
     , CancelOperationRequest
@@ -165,11 +281,16 @@ module Network.Google.ServiceNetworking
     , backendRule
     , brJwtAudience
     , brSelector
-    , brMinDeadline
     , brAddress
+    , brProtocol
+    , brDisableAuth
     , brOperationDeadline
     , brDeadline
     , brPathTranslation
+
+    -- ** UpdateDNSRecordSetMetadata
+    , UpdateDNSRecordSetMetadata
+    , updateDNSRecordSetMetadata
 
     -- ** SourceContext
     , SourceContext
@@ -212,7 +333,6 @@ module Network.Google.ServiceNetworking
     , sAPIs
     , sTypes
     , sSystemTypes
-    , sExperimental
     , sMonitoredResources
     , sBackend
     , sMonitoring
@@ -247,11 +367,28 @@ module Network.Google.ServiceNetworking
     , Empty
     , empty
 
+    -- ** RemoveDNSRecordSetMetadata
+    , RemoveDNSRecordSetMetadata
+    , removeDNSRecordSetMetadata
+
     -- ** CustomErrorRule
     , CustomErrorRule
     , customErrorRule
     , cerIsErrorType
     , cerSelector
+
+    -- ** ListPeeredDNSDomainsResponse
+    , ListPeeredDNSDomainsResponse
+    , listPeeredDNSDomainsResponse
+    , lpddrPeeredDNSDomains
+
+    -- ** GoogleCloudServicenetworkingV1betaConnection
+    , GoogleCloudServicenetworkingV1betaConnection
+    , googleCloudServicenetworkingV1betaConnection
+    , gcsvcPeering
+    , gcsvcReservedPeeringRanges
+    , gcsvcService
+    , gcsvcNetwork
 
     -- ** OptionValue
     , OptionValue
@@ -274,6 +411,10 @@ module Network.Google.ServiceNetworking
     -- ** MetricDescriptorMetadataLaunchStage
     , MetricDescriptorMetadataLaunchStage (..)
 
+    -- ** AddRolesMetadata
+    , AddRolesMetadata
+    , addRolesMetadata
+
     -- ** Mixin
     , Mixin
     , mixin
@@ -285,6 +426,11 @@ module Network.Google.ServiceNetworking
     , customHTTPPattern
     , chttppPath
     , chttppKind
+
+    -- ** ConsumerProject
+    , ConsumerProject
+    , consumerProject
+    , cpProjectNum
 
     -- ** UsageRule
     , UsageRule
@@ -305,6 +451,17 @@ module Network.Google.ServiceNetworking
     , pContent
     , pName
 
+    -- ** GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
+    , GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
+    , googleCloudServicenetworkingV1ConsumerConfigReservedRange
+    , gcsvccrrIPPrefixLength
+    , gcsvccrrAddress
+    , gcsvccrrName
+
+    -- ** AddDNSZoneMetadata
+    , AddDNSZoneMetadata
+    , addDNSZoneMetadata
+
     -- ** AuthenticationRule
     , AuthenticationRule
     , authenticationRule
@@ -321,6 +478,14 @@ module Network.Google.ServiceNetworking
     , cService
     , cNetwork
 
+    -- ** UpdateDNSRecordSetRequest
+    , UpdateDNSRecordSetRequest
+    , updateDNSRecordSetRequest
+    , udrsrZone
+    , udrsrNewDNSRecordSet
+    , udrsrExistingDNSRecordSet
+    , udrsrConsumerNetwork
+
     -- ** LabelDescriptorValueType
     , LabelDescriptorValueType (..)
 
@@ -329,10 +494,42 @@ module Network.Google.ServiceNetworking
     , metricRuleMetricCosts
     , mrmcAddtional
 
-    -- ** AuthorizationConfig
-    , AuthorizationConfig
-    , authorizationConfig
-    , acProvider
+    -- ** Route
+    , Route
+    , route
+    , rNextHopGateway
+    , rNetwork
+    , rDestRange
+    , rName
+
+    -- ** DisableVPCServiceControlsRequest
+    , DisableVPCServiceControlsRequest
+    , disableVPCServiceControlsRequest
+    , dvscrConsumerNetwork
+
+    -- ** PartialDeleteConnectionMetadata
+    , PartialDeleteConnectionMetadata
+    , partialDeleteConnectionMetadata
+
+    -- ** RemoveDNSRecordSetRequest
+    , RemoveDNSRecordSetRequest
+    , removeDNSRecordSetRequest
+    , rdrsrZone
+    , rdrsrConsumerNetwork
+    , rdrsrDNSRecordSet
+
+    -- ** PolicyBinding
+    , PolicyBinding
+    , policyBinding
+    , pbRole
+    , pbMember
+
+    -- ** ValidateConsumerConfigResponse
+    , ValidateConsumerConfigResponse
+    , validateConsumerConfigResponse
+    , vccrExistingSubnetworkCandidates
+    , vccrValidationError
+    , vccrIsValid
 
     -- ** APISyntax
     , APISyntax (..)
@@ -340,15 +537,15 @@ module Network.Google.ServiceNetworking
     -- ** TypeSyntax
     , TypeSyntax (..)
 
-    -- ** Experimental
-    , Experimental
-    , experimental
-    , eAuthorization
-
     -- ** Backend
     , Backend
     , backend
     , bRules
+
+    -- ** UpdateConsumerConfigRequest
+    , UpdateConsumerConfigRequest
+    , updateConsumerConfigRequest
+    , uccrConsumerConfig
 
     -- ** Monitoring
     , Monitoring
@@ -378,13 +575,21 @@ module Network.Google.ServiceNetworking
     -- ** Range
     , Range
     , range
-    , rNetwork
-    , rIPCIdRRange
+    , ranNetwork
+    , ranIPCIdRRange
 
     -- ** SystemParameters
     , SystemParameters
     , systemParameters
     , spRules
+
+    -- ** DeleteConnectionMetadata
+    , DeleteConnectionMetadata
+    , deleteConnectionMetadata
+
+    -- ** RemoveDNSZoneResponse
+    , RemoveDNSZoneResponse
+    , removeDNSZoneResponse
 
     -- ** Documentation
     , Documentation
@@ -393,10 +598,15 @@ module Network.Google.ServiceNetworking
     , dDocumentationRootURL
     , dRules
     , dPages
+    , dServiceRootURL
     , dOverview
 
     -- ** Xgafv
     , Xgafv (..)
+
+    -- ** AddDNSRecordSetMetadata
+    , AddDNSRecordSetMetadata
+    , addDNSRecordSetMetadata
 
     -- ** MetricDescriptorMetadata
     , MetricDescriptorMetadata
@@ -405,19 +615,32 @@ module Network.Google.ServiceNetworking
     , mdmIngestDelay
     , mdmLaunchStage
 
+    -- ** PeeredDNSDomain
+    , PeeredDNSDomain
+    , peeredDNSDomain
+    , pddDNSSuffix
+    , pddName
+
     -- ** Subnetwork
     , Subnetwork
     , subnetwork
     , subOutsideAllocation
     , subNetwork
     , subName
+    , subSecondaryIPRanges
     , subIPCIdRRange
+    , subRegion
+
+    -- ** ValidateConsumerConfigResponseValidationError
+    , ValidateConsumerConfigResponseValidationError (..)
 
     -- ** AddSubnetworkRequest
     , AddSubnetworkRequest
     , addSubnetworkRequest
     , asrIPPrefixLength
     , asrRequestedAddress
+    , asrRequestedRanges
+    , asrSecondaryIPRangeSpecs
     , asrSubnetwork
     , asrRegion
     , asrSubnetworkUsers
@@ -438,12 +661,32 @@ module Network.Google.ServiceNetworking
     , lValueType
     , lDescription
 
+    -- ** AddRolesResponse
+    , AddRolesResponse
+    , addRolesResponse
+    , aPolicyBinding
+
+    -- ** MonitoredResourceDescriptorLaunchStage
+    , MonitoredResourceDescriptorLaunchStage (..)
+
     -- ** Usage
     , Usage
     , usage
     , uRequirements
     , uRules
     , uProducerNotificationChannel
+
+    -- ** AddDNSZoneResponse
+    , AddDNSZoneResponse
+    , addDNSZoneResponse
+    , adzrConsumerPeeringZone
+    , adzrProducerPrivateZone
+
+    -- ** RemoveDNSZoneRequest
+    , RemoveDNSZoneRequest
+    , removeDNSZoneRequest
+    , rdzrName
+    , rdzrConsumerNetwork
 
     -- ** FieldCardinality
     , FieldCardinality (..)
@@ -495,10 +738,8 @@ module Network.Google.ServiceNetworking
     -- ** Endpoint
     , Endpoint
     , endpoint
-    , eAliases
     , eAllowCORS
     , eName
-    , eFeatures
     , eTarget
 
     -- ** OAuthRequirements
@@ -529,6 +770,10 @@ module Network.Google.ServiceNetworking
     , qlUnit
     , qlMaxLimit
 
+    -- ** RemoveDNSRecordSetResponse
+    , RemoveDNSRecordSetResponse
+    , removeDNSRecordSetResponse
+
     -- ** Option
     , Option
     , option
@@ -550,6 +795,14 @@ module Network.Google.ServiceNetworking
     , quotaLimitValues
     , qlvAddtional
 
+    -- ** ValidateConsumerConfigRequest
+    , ValidateConsumerConfigRequest
+    , validateConsumerConfigRequest
+    , vccrRangeReservation
+    , vccrConsumerProject
+    , vccrValidateNetwork
+    , vccrConsumerNetwork
+
     -- ** Enum'
     , Enum'
     , enum
@@ -568,6 +821,11 @@ module Network.Google.ServiceNetworking
     -- ** MethodSyntax
     , MethodSyntax (..)
 
+    -- ** DeleteConnectionRequest
+    , DeleteConnectionRequest
+    , deleteConnectionRequest
+    , dcrConsumerNetwork
+
     -- ** SourceInfoSourceFilesItem
     , SourceInfoSourceFilesItem
     , sourceInfoSourceFilesItem
@@ -578,6 +836,10 @@ module Network.Google.ServiceNetworking
     , quota
     , qLimits
     , qMetricRules
+
+    -- ** DeletePeeredDNSDomainMetadata
+    , DeletePeeredDNSDomainMetadata
+    , deletePeeredDNSDomainMetadata
 
     -- ** HTTPRule
     , HTTPRule
@@ -593,16 +855,39 @@ module Network.Google.ServiceNetworking
     , httprDelete
     , httprPut
 
+    -- ** DNSRecordSet
+    , DNSRecordSet
+    , dnsRecordSet
+    , drsTtl
+    , drsData
+    , drsDomain
+    , drsType
+
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- ** AddDNSRecordSetRequest
+    , AddDNSRecordSetRequest
+    , addDNSRecordSetRequest
+    , adrsrZone
+    , adrsrConsumerNetwork
+    , adrsrDNSRecordSet
+
+    -- ** MetricDescriptorLaunchStage
+    , MetricDescriptorLaunchStage (..)
+
+    -- ** ConsumerConfigMetadata
+    , ConsumerConfigMetadata
+    , consumerConfigMetadata
 
     -- ** AuthProvider
     , AuthProvider
     , authProvider
     , apJWKsURI
     , apAudiences
+    , apJwtLocations
     , apId
     , apAuthorizationURL
     , apIssuer
@@ -615,19 +900,41 @@ module Network.Google.ServiceNetworking
     , crAllowedRequestExtensions
     , crProvided
     , crAllowedResponseExtensions
+
+    -- ** SecondaryIPRangeSpec
+    , SecondaryIPRangeSpec
+    , secondaryIPRangeSpec
+    , sirsIPPrefixLength
+    , sirsRangeName
+    , sirsRequestedAddress
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.ServiceNetworking.Operations.Cancel
-import           Network.Google.Resource.ServiceNetworking.Operations.Delete
-import           Network.Google.Resource.ServiceNetworking.Operations.Get
-import           Network.Google.Resource.ServiceNetworking.Operations.List
-import           Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
-import           Network.Google.Resource.ServiceNetworking.Services.Connections.Create
-import           Network.Google.Resource.ServiceNetworking.Services.Connections.List
-import           Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
-import           Network.Google.Resource.ServiceNetworking.Services.SearchRange
-import           Network.Google.ServiceNetworking.Types
+import Network.Google.Prelude
+import Network.Google.Resource.ServiceNetworking.Operations.Cancel
+import Network.Google.Resource.ServiceNetworking.Operations.Delete
+import Network.Google.Resource.ServiceNetworking.Operations.Get
+import Network.Google.Resource.ServiceNetworking.Operations.List
+import Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
+import Network.Google.Resource.ServiceNetworking.Services.Connections.Create
+import Network.Google.Resource.ServiceNetworking.Services.Connections.DeleteConnection
+import Network.Google.Resource.ServiceNetworking.Services.Connections.List
+import Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
+import Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Add
+import Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Remove
+import Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Update
+import Network.Google.Resource.ServiceNetworking.Services.DNSZones.Add
+import Network.Google.Resource.ServiceNetworking.Services.DNSZones.Remove
+import Network.Google.Resource.ServiceNetworking.Services.DisableVPCServiceControls
+import Network.Google.Resource.ServiceNetworking.Services.EnableVPCServiceControls
+import Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.Get
+import Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.Create
+import Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.Delete
+import Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.List
+import Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.UpdateConsumerConfig
+import Network.Google.Resource.ServiceNetworking.Services.Roles.Add
+import Network.Google.Resource.ServiceNetworking.Services.SearchRange
+import Network.Google.Resource.ServiceNetworking.Services.Validate
+import Network.Google.ServiceNetworking.Types
 
 {- $resources
 TODO
@@ -638,8 +945,27 @@ type ServiceNetworkingAPI =
      OperationsListResource :<|> OperationsGetResource
        :<|> OperationsCancelResource
        :<|> OperationsDeleteResource
+       :<|> ServicesDNSZonesRemoveResource
+       :<|> ServicesDNSZonesAddResource
+       :<|> ServicesRolesAddResource
+       :<|> ServicesConnectionsDeleteConnectionResource
        :<|> ServicesConnectionsListResource
        :<|> ServicesConnectionsPatchResource
        :<|> ServicesConnectionsCreateResource
+       :<|> ServicesDNSRecordSetsRemoveResource
+       :<|> ServicesDNSRecordSetsAddResource
+       :<|> ServicesDNSRecordSetsUpdateResource
+       :<|>
+       ServicesProjectsGlobalNetworksPeeredDNSDomainsListResource
+       :<|>
+       ServicesProjectsGlobalNetworksPeeredDNSDomainsCreateResource
+       :<|>
+       ServicesProjectsGlobalNetworksPeeredDNSDomainsDeleteResource
+       :<|> ServicesProjectsGlobalNetworksGetResource
+       :<|>
+       ServicesProjectsGlobalNetworksUpdateConsumerConfigResource
+       :<|> ServicesEnableVPCServiceControlsResource
+       :<|> ServicesDisableVPCServiceControlsResource
        :<|> ServicesAddSubnetworkResource
+       :<|> ServicesValidateResource
        :<|> ServicesSearchRangeResource

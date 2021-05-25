@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google G Suite Alert Center.
+A client library for the Google Workspace Alert Center.
 
 
 ## Contribute

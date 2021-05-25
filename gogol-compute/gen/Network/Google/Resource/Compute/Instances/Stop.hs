@@ -44,8 +44,8 @@ module Network.Google.Resource.Compute.Instances.Stop
     , isInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.stop@ method which the
 -- 'InstancesStop' request conforms to.
@@ -73,9 +73,9 @@ type InstancesStopResource =
 data InstancesStop =
   InstancesStop'
     { _isRequestId :: !(Maybe Text)
-    , _isProject   :: !Text
-    , _isZone      :: !Text
-    , _isInstance  :: !Text
+    , _isProject :: !Text
+    , _isZone :: !Text
+    , _isInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

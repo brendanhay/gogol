@@ -17,8 +17,8 @@
 --
 module Network.Google.Billing.Types.Product where
 
-import           Network.Google.Billing.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Billing.Types.Sum
+import Network.Google.Prelude
 
 -- | Specifies the audit configuration for a service. The configuration
 -- determines which permission types are logged, and what identities, if
@@ -28,20 +28,20 @@ import           Network.Google.Prelude
 -- service: the log_types specified in each AuditConfig are enabled, and
 -- the exempted_members in each AuditLogConfig are exempted. Example Policy
 -- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
--- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
--- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
--- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
--- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
--- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
--- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
--- DATA_WRITE logging.
+-- \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\":
+-- \"sampleservice.googleapis.com\", \"audit_log_configs\": [ {
+-- \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\",
+-- \"exempted_members\": [ \"user:aliya\'example.com\" ] } ] } ] } For
+-- sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+-- logging. It also exempts jose\'example.com from DATA_READ logging, and
+-- aliya\'example.com from DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig =
   AuditConfig'
-    { _acService         :: !(Maybe Text)
+    { _acService :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -95,7 +95,7 @@ instance ToJSON AuditConfig where
 data ListServicesResponse =
   ListServicesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrServices      :: !(Maybe [Service])
+    , _lsrServices :: !(Maybe [Service])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,16 +143,30 @@ instance ToJSON ListServicesResponse where
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("services" .=) <$> _lsrServices])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -180,26 +194,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -223,7 +236,56 @@ instance ToJSON Expr where
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
 
--- | A billing account in [GCP
+-- | Encapsulates the geographic taxonomy data for a sku.
+--
+-- /See:/ 'geoTaxonomy' smart constructor.
+data GeoTaxonomy =
+  GeoTaxonomy'
+    { _gtRegions :: !(Maybe [Text])
+    , _gtType :: !(Maybe GeoTaxonomyType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GeoTaxonomy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gtRegions'
+--
+-- * 'gtType'
+geoTaxonomy
+    :: GeoTaxonomy
+geoTaxonomy = GeoTaxonomy' {_gtRegions = Nothing, _gtType = Nothing}
+
+
+-- | The list of regions associated with a sku. Empty for Global skus, which
+-- are associated with all Google Cloud regions.
+gtRegions :: Lens' GeoTaxonomy [Text]
+gtRegions
+  = lens _gtRegions (\ s a -> s{_gtRegions = a}) .
+      _Default
+      . _Coerce
+
+-- | The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
+gtType :: Lens' GeoTaxonomy (Maybe GeoTaxonomyType)
+gtType = lens _gtType (\ s a -> s{_gtType = a})
+
+instance FromJSON GeoTaxonomy where
+        parseJSON
+          = withObject "GeoTaxonomy"
+              (\ o ->
+                 GeoTaxonomy' <$>
+                   (o .:? "regions" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoTaxonomy where
+        toJSON GeoTaxonomy'{..}
+          = object
+              (catMaybes
+                 [("regions" .=) <$> _gtRegions,
+                  ("type" .=) <$> _gtType])
+
+-- | A billing account in the [Google Cloud
 -- Console](https:\/\/console.cloud.google.com\/). You can assign a billing
 -- account to one or more projects.
 --
@@ -231,9 +293,9 @@ instance ToJSON Expr where
 data BillingAccount =
   BillingAccount'
     { _baMasterBillingAccount :: !(Maybe Text)
-    , _baOpen                 :: !(Maybe Bool)
-    , _baName                 :: !(Maybe Text)
-    , _baDisplayName          :: !(Maybe Text)
+    , _baOpen :: !(Maybe Bool)
+    , _baName :: !(Maybe Text)
+    , _baDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -262,29 +324,29 @@ billingAccount =
 
 -- | If this account is a
 -- [subaccount](https:\/\/cloud.google.com\/billing\/docs\/concepts), then
--- this will be the resource name of the master billing account that it is
+-- this will be the resource name of the parent billing account that it is
 -- being resold through. Otherwise this will be empty.
 baMasterBillingAccount :: Lens' BillingAccount (Maybe Text)
 baMasterBillingAccount
   = lens _baMasterBillingAccount
       (\ s a -> s{_baMasterBillingAccount = a})
 
--- | True if the billing account is open, and will therefore be charged for
--- any usage on associated projects. False if the billing account is
--- closed, and therefore projects associated with it will be unable to use
--- paid services.
+-- | Output only. True if the billing account is open, and will therefore be
+-- charged for any usage on associated projects. False if the billing
+-- account is closed, and therefore projects associated with it will be
+-- unable to use paid services.
 baOpen :: Lens' BillingAccount (Maybe Bool)
 baOpen = lens _baOpen (\ s a -> s{_baOpen = a})
 
--- | The resource name of the billing account. The resource name has the form
--- \`billingAccounts\/{billing_account_id}\`. For example,
+-- | Output only. The resource name of the billing account. The resource name
+-- has the form \`billingAccounts\/{billing_account_id}\`. For example,
 -- \`billingAccounts\/012345-567890-ABCDEF\` would be the resource name for
 -- billing account \`012345-567890-ABCDEF\`.
 baName :: Lens' BillingAccount (Maybe Text)
 baName = lens _baName (\ s a -> s{_baName = a})
 
 -- | The display name given to the billing account, such as \`My Billing
--- Account\`. This name is displayed in the GCP Console.
+-- Account\`. This name is displayed in the Google Cloud Console.
 baDisplayName :: Lens' BillingAccount (Maybe Text)
 baDisplayName
   = lens _baDisplayName
@@ -314,9 +376,9 @@ instance ToJSON BillingAccount where
 data Service =
   Service'
     { _sBusinessEntityName :: !(Maybe Text)
-    , _sName               :: !(Maybe Text)
-    , _sDisplayName        :: !(Maybe Text)
-    , _sServiceId          :: !(Maybe Text)
+    , _sName :: !(Maybe Text)
+    , _sDisplayName :: !(Maybe Text)
+    , _sServiceId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -382,17 +444,17 @@ instance ToJSON Service where
                   ("displayName" .=) <$> _sDisplayName,
                   ("serviceId" .=) <$> _sServiceId])
 
--- | Encapsulation of billing information for a GCP Console project. A
--- project has at most one associated billing account at a time (but a
+-- | Encapsulation of billing information for a Google Cloud Console project.
+-- A project has at most one associated billing account at a time (but a
 -- billing account can be assigned to multiple projects).
 --
 -- /See:/ 'projectBillingInfo' smart constructor.
 data ProjectBillingInfo =
   ProjectBillingInfo'
-    { _pbiName               :: !(Maybe Text)
+    { _pbiName :: !(Maybe Text)
     , _pbiBillingAccountName :: !(Maybe Text)
-    , _pbiProjectId          :: !(Maybe Text)
-    , _pbiBillingEnabled     :: !(Maybe Bool)
+    , _pbiProjectId :: !(Maybe Text)
+    , _pbiBillingEnabled :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -473,7 +535,7 @@ instance ToJSON ProjectBillingInfo where
 -- /See:/ 'tierRate' smart constructor.
 data TierRate =
   TierRate'
-    { _trUnitPrice        :: !(Maybe Money)
+    { _trUnitPrice :: !(Maybe Money)
     , _trStartUsageAmount :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -526,8 +588,8 @@ instance ToJSON TierRate where
 data Money =
   Money'
     { _mCurrencyCode :: !(Maybe Text)
-    , _mNanos        :: !(Maybe (Textual Int32))
-    , _mUnits        :: !(Maybe (Textual Int64))
+    , _mNanos :: !(Maybe (Textual Int32))
+    , _mUnits :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -546,7 +608,7 @@ money
 money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
 
 
--- | The 3-letter currency code defined in ISO 4217.
+-- | The three-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
 mCurrencyCode
   = lens _mCurrencyCode
@@ -590,10 +652,10 @@ instance ToJSON Money where
 -- /See:/ 'category' smart constructor.
 data Category =
   Category'
-    { _cResourceFamily     :: !(Maybe Text)
-    , _cUsageType          :: !(Maybe Text)
+    { _cResourceFamily :: !(Maybe Text)
+    , _cUsageType :: !(Maybe Text)
     , _cServiceDisplayName :: !(Maybe Text)
-    , _cResourceGroup      :: !(Maybe Text)
+    , _cResourceGroup :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -670,7 +732,7 @@ instance ToJSON Category where
 data SetIAMPolicyRequest =
   SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
-    , _siprPolicy     :: !(Maybe Policy)
+    , _siprPolicy :: !(Maybe Policy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -690,8 +752,7 @@ setIAMPolicyRequest =
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
--- the following default mask is used: paths: \"bindings, etag\" This field
--- is only used by Cloud IAM.
+-- the following default mask is used: \`paths: \"bindings, etag\"\`
 siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe GFieldMask)
 siprUpdateMask
   = lens _siprUpdateMask
@@ -724,7 +785,7 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'listProjectBillingInfoResponse' smart constructor.
 data ListProjectBillingInfoResponse =
   ListProjectBillingInfoResponse'
-    { _lpbirNextPageToken      :: !(Maybe Text)
+    { _lpbirNextPageToken :: !(Maybe Text)
     , _lpbirProjectBillingInfo :: !(Maybe [ProjectBillingInfo])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -785,7 +846,7 @@ instance ToJSON ListProjectBillingInfoResponse where
 data ListSKUsResponse =
   ListSKUsResponse'
     { _lskurNextPageToken :: !(Maybe Text)
-    , _lskurSKUs          :: !(Maybe [SKU])
+    , _lskurSKUs :: !(Maybe [SKU])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -842,13 +903,13 @@ instance ToJSON ListSKUsResponse where
 -- /See:/ 'pricingExpression' smart constructor.
 data PricingExpression =
   PricingExpression'
-    { _peUsageUnitDescription     :: !(Maybe Text)
-    , _peBaseUnit                 :: !(Maybe Text)
+    { _peUsageUnitDescription :: !(Maybe Text)
+    , _peBaseUnit :: !(Maybe Text)
     , _peBaseUnitConversionFactor :: !(Maybe (Textual Double))
-    , _peDisplayQuantity          :: !(Maybe (Textual Double))
-    , _peTieredRates              :: !(Maybe [TierRate])
-    , _peBaseUnitDescription      :: !(Maybe Text)
-    , _peUsageUnit                :: !(Maybe Text)
+    , _peDisplayQuantity :: !(Maybe (Textual Double))
+    , _peTieredRates :: !(Maybe [TierRate])
+    , _peBaseUnitDescription :: !(Maybe Text)
+    , _peUsageUnit :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1020,8 +1081,8 @@ instance ToJSON TestIAMPermissionsRequest where
 data AggregationInfo =
   AggregationInfo'
     { _aiAggregationInterval :: !(Maybe AggregationInfoAggregationInterval)
-    , _aiAggregationCount    :: !(Maybe (Textual Int32))
-    , _aiAggregationLevel    :: !(Maybe AggregationInfoAggregationLevel)
+    , _aiAggregationCount :: !(Maybe (Textual Int32))
+    , _aiAggregationLevel :: !(Maybe AggregationInfoAggregationLevel)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1087,13 +1148,14 @@ instance ToJSON AggregationInfo where
 -- /See:/ 'sKU' smart constructor.
 data SKU =
   SKU'
-    { _skukCategory            :: !(Maybe Category)
-    , _skukSKUId               :: !(Maybe Text)
+    { _skukGeoTaxonomy :: !(Maybe GeoTaxonomy)
+    , _skukCategory :: !(Maybe Category)
+    , _skukSKUId :: !(Maybe Text)
     , _skukServiceProviderName :: !(Maybe Text)
-    , _skukServiceRegions      :: !(Maybe [Text])
-    , _skukName                :: !(Maybe Text)
-    , _skukPricingInfo         :: !(Maybe [PricingInfo])
-    , _skukDescription         :: !(Maybe Text)
+    , _skukServiceRegions :: !(Maybe [Text])
+    , _skukName :: !(Maybe Text)
+    , _skukPricingInfo :: !(Maybe [PricingInfo])
+    , _skukDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1101,6 +1163,8 @@ data SKU =
 -- | Creates a value of 'SKU' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'skukGeoTaxonomy'
 --
 -- * 'skukCategory'
 --
@@ -1119,7 +1183,8 @@ sKU
     :: SKU
 sKU =
   SKU'
-    { _skukCategory = Nothing
+    { _skukGeoTaxonomy = Nothing
+    , _skukCategory = Nothing
     , _skukSKUId = Nothing
     , _skukServiceProviderName = Nothing
     , _skukServiceRegions = Nothing
@@ -1128,6 +1193,12 @@ sKU =
     , _skukDescription = Nothing
     }
 
+
+-- | The geographic taxonomy for this sku.
+skukGeoTaxonomy :: Lens' SKU (Maybe GeoTaxonomy)
+skukGeoTaxonomy
+  = lens _skukGeoTaxonomy
+      (\ s a -> s{_skukGeoTaxonomy = a})
 
 -- | The category hierarchy of this SKU, purely for organizational purpose.
 skukCategory :: Lens' SKU (Maybe Category)
@@ -1181,8 +1252,9 @@ instance FromJSON SKU where
           = withObject "SKU"
               (\ o ->
                  SKU' <$>
-                   (o .:? "category") <*> (o .:? "skuId") <*>
-                     (o .:? "serviceProviderName")
+                   (o .:? "geoTaxonomy") <*> (o .:? "category") <*>
+                     (o .:? "skuId")
+                     <*> (o .:? "serviceProviderName")
                      <*> (o .:? "serviceRegions" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "pricingInfo" .!= mempty)
@@ -1192,7 +1264,8 @@ instance ToJSON SKU where
         toJSON SKU'{..}
           = object
               (catMaybes
-                 [("category" .=) <$> _skukCategory,
+                 [("geoTaxonomy" .=) <$> _skukGeoTaxonomy,
+                  ("category" .=) <$> _skukCategory,
                   ("skuId" .=) <$> _skukSKUId,
                   ("serviceProviderName" .=) <$>
                     _skukServiceProviderName,
@@ -1244,31 +1317,48 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Bytes)
-    , _pVersion      :: !(Maybe (Textual Int32))
-    , _pBindings     :: !(Maybe [Binding])
+    , _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1310,21 +1400,40 @@ pAuditConfigs
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -1353,7 +1462,7 @@ instance ToJSON Policy where
 -- /See:/ 'listBillingAccountsResponse' smart constructor.
 data ListBillingAccountsResponse =
   ListBillingAccountsResponse'
-    { _lbarNextPageToken   :: !(Maybe Text)
+    { _lbarNextPageToken :: !(Maybe Text)
     , _lbarBillingAccounts :: !(Maybe [BillingAccount])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1407,14 +1516,14 @@ instance ToJSON ListBillingAccountsResponse where
 
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
--- logging, while exempting foo\'gmail.com from DATA_READ logging.
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting jose\'example.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
 data AuditLogConfig =
   AuditLogConfig'
-    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    { _alcLogType :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1467,11 +1576,11 @@ instance ToJSON AuditLogConfig where
 -- /See:/ 'pricingInfo' smart constructor.
 data PricingInfo =
   PricingInfo'
-    { _piSummary                :: !(Maybe Text)
-    , _piAggregationInfo        :: !(Maybe AggregationInfo)
-    , _piPricingExpression      :: !(Maybe PricingExpression)
+    { _piSummary :: !(Maybe Text)
+    , _piAggregationInfo :: !(Maybe AggregationInfo)
+    , _piPricingExpression :: !(Maybe PricingExpression)
     , _piCurrencyConversionRate :: !(Maybe (Textual Double))
-    , _piEffectiveTime          :: !(Maybe DateTime')
+    , _piEffectiveTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1569,8 +1678,8 @@ instance ToJSON PricingInfo where
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1598,13 +1707,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -1616,9 +1742,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

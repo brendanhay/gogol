@@ -16,7 +16,7 @@
 --
 module Network.Google.LibraryAgent.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | V1 error format.
 data Xgafv

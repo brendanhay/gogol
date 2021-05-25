@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Firewalls.Delete
     , fdFirewall
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.delete@ method which the
 -- 'FirewallsDelete' request conforms to.
@@ -60,8 +60,8 @@ type FirewallsDeleteResource =
 data FirewallsDelete =
   FirewallsDelete'
     { _fdRequestId :: !(Maybe Text)
-    , _fdProject   :: !Text
-    , _fdFirewall  :: !Text
+    , _fdProject :: !Text
+    , _fdFirewall :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

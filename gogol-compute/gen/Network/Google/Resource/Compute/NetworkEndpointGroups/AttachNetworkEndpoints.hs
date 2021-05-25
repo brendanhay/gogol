@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.NetworkEndpointGroups.AttachNetworkEndpoi
     , neganeNetworkEndpointGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networkEndpointGroups.attachNetworkEndpoints@ method which the
 -- 'NetworkEndpointGroupsAttachNetworkEndpoints' request conforms to.
@@ -69,10 +69,10 @@ type NetworkEndpointGroupsAttachNetworkEndpointsResource
 -- /See:/ 'networkEndpointGroupsAttachNetworkEndpoints' smart constructor.
 data NetworkEndpointGroupsAttachNetworkEndpoints =
   NetworkEndpointGroupsAttachNetworkEndpoints'
-    { _neganeRequestId            :: !(Maybe Text)
-    , _neganeProject              :: !Text
-    , _neganeZone                 :: !Text
-    , _neganePayload              :: !NetworkEndpointGroupsAttachEndpointsRequest
+    { _neganeRequestId :: !(Maybe Text)
+    , _neganeProject :: !Text
+    , _neganeZone :: !Text
+    , _neganePayload :: !NetworkEndpointGroupsAttachEndpointsRequest
     , _neganeNetworkEndpointGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

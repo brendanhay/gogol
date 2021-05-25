@@ -22,7 +22,7 @@
 --
 -- Retrieves an order from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.get@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.get@.
 module Network.Google.Resource.Content.Orders.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Content.Orders.Get
     , OrdersGet
 
     -- * Request Lenses
+    , ogXgafv
     , ogMerchantId
+    , ogUploadProtocol
+    , ogAccessToken
+    , ogUploadType
     , ogOrderId
+    , ogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.get@ method which the
 -- 'OrdersGet' request conforms to.
@@ -48,15 +53,25 @@ type OrdersGetResource =
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Order
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Retrieves an order from your Merchant Center account.
 --
 -- /See:/ 'ordersGet' smart constructor.
 data OrdersGet =
   OrdersGet'
-    { _ogMerchantId :: !(Textual Word64)
-    , _ogOrderId    :: !Text
+    { _ogXgafv :: !(Maybe Xgafv)
+    , _ogMerchantId :: !(Textual Word64)
+    , _ogUploadProtocol :: !(Maybe Text)
+    , _ogAccessToken :: !(Maybe Text)
+    , _ogUploadType :: !(Maybe Text)
+    , _ogOrderId :: !Text
+    , _ogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,17 +80,38 @@ data OrdersGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ogXgafv'
+--
 -- * 'ogMerchantId'
 --
+-- * 'ogUploadProtocol'
+--
+-- * 'ogAccessToken'
+--
+-- * 'ogUploadType'
+--
 -- * 'ogOrderId'
+--
+-- * 'ogCallback'
 ordersGet
     :: Word64 -- ^ 'ogMerchantId'
     -> Text -- ^ 'ogOrderId'
     -> OrdersGet
 ordersGet pOgMerchantId_ pOgOrderId_ =
   OrdersGet'
-    {_ogMerchantId = _Coerce # pOgMerchantId_, _ogOrderId = pOgOrderId_}
+    { _ogXgafv = Nothing
+    , _ogMerchantId = _Coerce # pOgMerchantId_
+    , _ogUploadProtocol = Nothing
+    , _ogAccessToken = Nothing
+    , _ogUploadType = Nothing
+    , _ogOrderId = pOgOrderId_
+    , _ogCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ogXgafv :: Lens' OrdersGet (Maybe Xgafv)
+ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -84,17 +120,44 @@ ogMerchantId
   = lens _ogMerchantId (\ s a -> s{_ogMerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ogUploadProtocol :: Lens' OrdersGet (Maybe Text)
+ogUploadProtocol
+  = lens _ogUploadProtocol
+      (\ s a -> s{_ogUploadProtocol = a})
+
+-- | OAuth access token.
+ogAccessToken :: Lens' OrdersGet (Maybe Text)
+ogAccessToken
+  = lens _ogAccessToken
+      (\ s a -> s{_ogAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ogUploadType :: Lens' OrdersGet (Maybe Text)
+ogUploadType
+  = lens _ogUploadType (\ s a -> s{_ogUploadType = a})
+
 -- | The ID of the order.
 ogOrderId :: Lens' OrdersGet Text
 ogOrderId
   = lens _ogOrderId (\ s a -> s{_ogOrderId = a})
+
+-- | JSONP
+ogCallback :: Lens' OrdersGet (Maybe Text)
+ogCallback
+  = lens _ogCallback (\ s a -> s{_ogCallback = a})
 
 instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
         type Scopes OrdersGet =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersGet'{..}
-          = go _ogMerchantId _ogOrderId (Just AltJSON)
+          = go _ogMerchantId _ogOrderId _ogXgafv
+              _ogUploadProtocol
+              _ogAccessToken
+              _ogUploadType
+              _ogCallback
+              (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy OrdersGetResource)

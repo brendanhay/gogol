@@ -42,8 +42,8 @@ module Network.Google.Resource.TextToSpeech.Text.Synthesize
     , tsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TextToSpeech.Types
+import Network.Google.Prelude
+import Network.Google.TextToSpeech.Types
 
 -- | A resource alias for @texttospeech.text.synthesize@ method which the
 -- 'TextSynthesize' request conforms to.
@@ -65,12 +65,12 @@ type TextSynthesizeResource =
 -- /See:/ 'textSynthesize' smart constructor.
 data TextSynthesize =
   TextSynthesize'
-    { _tsXgafv          :: !(Maybe Xgafv)
+    { _tsXgafv :: !(Maybe Xgafv)
     , _tsUploadProtocol :: !(Maybe Text)
-    , _tsAccessToken    :: !(Maybe Text)
-    , _tsUploadType     :: !(Maybe Text)
-    , _tsPayload        :: !SynthesizeSpeechRequest
-    , _tsCallback       :: !(Maybe Text)
+    , _tsAccessToken :: !(Maybe Text)
+    , _tsUploadType :: !(Maybe Text)
+    , _tsPayload :: !SynthesizeSpeechRequest
+    , _tsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

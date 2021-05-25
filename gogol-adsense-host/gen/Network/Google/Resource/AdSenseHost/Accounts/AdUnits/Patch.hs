@@ -40,8 +40,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
     , aaupAccountId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.patch@ method which the
 -- 'AccountsAdUnitsPatch' request conforms to.
@@ -63,10 +63,10 @@ type AccountsAdUnitsPatchResource =
 -- /See:/ 'accountsAdUnitsPatch' smart constructor.
 data AccountsAdUnitsPatch =
   AccountsAdUnitsPatch'
-    { _aaupAdUnitId   :: !Text
-    , _aaupPayload    :: !AdUnit
+    { _aaupAdUnitId :: !Text
+    , _aaupPayload :: !AdUnit
     , _aaupAdClientId :: !Text
-    , _aaupAccountId  :: !Text
+    , _aaupAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

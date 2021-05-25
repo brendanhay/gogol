@@ -43,8 +43,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Operations.Get
     , piogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.operations.get@ method which the
 -- 'ProjectsInstancesOperationsGet' request conforms to.
@@ -65,12 +65,12 @@ type ProjectsInstancesOperationsGetResource =
 -- /See:/ 'projectsInstancesOperationsGet' smart constructor.
 data ProjectsInstancesOperationsGet =
   ProjectsInstancesOperationsGet'
-    { _piogXgafv          :: !(Maybe Xgafv)
+    { _piogXgafv :: !(Maybe Xgafv)
     , _piogUploadProtocol :: !(Maybe Text)
-    , _piogAccessToken    :: !(Maybe Text)
-    , _piogUploadType     :: !(Maybe Text)
-    , _piogName           :: !Text
-    , _piogCallback       :: !(Maybe Text)
+    , _piogAccessToken :: !(Maybe Text)
+    , _piogUploadType :: !(Maybe Text)
+    , _piogName :: !Text
+    , _piogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

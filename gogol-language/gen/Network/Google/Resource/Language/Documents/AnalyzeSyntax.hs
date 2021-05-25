@@ -43,8 +43,8 @@ module Network.Google.Resource.Language.Documents.AnalyzeSyntax
     , dCallback
     ) where
 
-import           Network.Google.Language.Types
-import           Network.Google.Prelude
+import Network.Google.Language.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @language.documents.analyzeSyntax@ method which the
 -- 'DocumentsAnalyzeSyntax' request conforms to.
@@ -67,12 +67,12 @@ type DocumentsAnalyzeSyntaxResource =
 -- /See:/ 'documentsAnalyzeSyntax' smart constructor.
 data DocumentsAnalyzeSyntax =
   DocumentsAnalyzeSyntax'
-    { _dXgafv          :: !(Maybe Xgafv)
+    { _dXgafv :: !(Maybe Xgafv)
     , _dUploadProtocol :: !(Maybe Text)
-    , _dAccessToken    :: !(Maybe Text)
-    , _dUploadType     :: !(Maybe Text)
-    , _dPayload        :: !AnalyzeSyntaxRequest
-    , _dCallback       :: !(Maybe Text)
+    , _dAccessToken :: !(Maybe Text)
+    , _dUploadType :: !(Maybe Text)
+    , _dPayload :: !AnalyzeSyntaxRequest
+    , _dCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

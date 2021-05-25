@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
     , eppCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.policies.patch@ method which the
 -- 'EnterprisesPoliciesPatch' request conforms to.
@@ -65,14 +65,14 @@ type EnterprisesPoliciesPatchResource =
 -- /See:/ 'enterprisesPoliciesPatch' smart constructor.
 data EnterprisesPoliciesPatch =
   EnterprisesPoliciesPatch'
-    { _eppXgafv          :: !(Maybe Xgafv)
+    { _eppXgafv :: !(Maybe Xgafv)
     , _eppUploadProtocol :: !(Maybe Text)
-    , _eppUpdateMask     :: !(Maybe GFieldMask)
-    , _eppAccessToken    :: !(Maybe Text)
-    , _eppUploadType     :: !(Maybe Text)
-    , _eppPayload        :: !Policy
-    , _eppName           :: !Text
-    , _eppCallback       :: !(Maybe Text)
+    , _eppUpdateMask :: !(Maybe GFieldMask)
+    , _eppAccessToken :: !(Maybe Text)
+    , _eppUploadType :: !(Maybe Text)
+    , _eppPayload :: !Policy
+    , _eppName :: !Text
+    , _eppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

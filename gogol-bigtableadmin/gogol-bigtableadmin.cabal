@@ -44,10 +44,19 @@ library
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Get
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.List
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Patch
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.GetIAMPolicy
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.Patch
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIAMPolicy
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIAMPermissions
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Create
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Delete
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Get
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Update
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Create
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Delete
@@ -65,10 +74,13 @@ library
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Restore
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.SetIAMPolicy
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPermissions
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
+        , Network.Google.Resource.BigtableAdmin.Projects.Locations.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Locations.List
 
     other-modules:
           Network.Google.BigtableAdmin.Types.Product

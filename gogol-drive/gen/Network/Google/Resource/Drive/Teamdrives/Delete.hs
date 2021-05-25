@@ -36,8 +36,8 @@ module Network.Google.Resource.Drive.Teamdrives.Delete
     , tdTeamDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.teamdrives.delete@ method which the
 -- 'TeamdrivesDelete' request conforms to.

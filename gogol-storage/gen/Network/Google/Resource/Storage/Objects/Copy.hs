@@ -49,12 +49,14 @@ module Network.Google.Resource.Storage.Objects.Copy
     , ocIfMetagenerationNotMatch
     , ocIfSourceGenerationNotMatch
     , ocProjection
+    , ocProvisionalUserProject
     , ocSourceGeneration
+    , ocDestinationKmsKeyName
     , ocDestinationObject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.copy@ method which the
 -- 'ObjectsCopy' request conforms to.
@@ -102,12 +104,22 @@ type ObjectsCopyResource =
                                                QueryParam "projection"
                                                  ObjectsCopyProjection
                                                  :>
-                                                 QueryParam "sourceGeneration"
-                                                   (Textual Int64)
+                                                 QueryParam
+                                                   "provisionalUserProject"
+                                                   Text
                                                    :>
-                                                   QueryParam "alt" AltJSON :>
-                                                     ReqBody '[JSON] Object :>
-                                                       Post '[JSON] Object
+                                                   QueryParam "sourceGeneration"
+                                                     (Textual Int64)
+                                                     :>
+                                                     QueryParam
+                                                       "destinationKmsKeyName"
+                                                       Text
+                                                       :>
+                                                       QueryParam "alt" AltJSON
+                                                         :>
+                                                         ReqBody '[JSON] Object
+                                                           :>
+                                                           Post '[JSON] Object
 
 -- | Copies a source object to a destination object. Optionally overrides
 -- metadata.
@@ -115,23 +127,25 @@ type ObjectsCopyResource =
 -- /See:/ 'objectsCopy' smart constructor.
 data ObjectsCopy =
   ObjectsCopy'
-    { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
-    , _ocIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
-    , _ocIfMetagenerationMatch          :: !(Maybe (Textual Int64))
-    , _ocIfGenerationNotMatch           :: !(Maybe (Textual Int64))
+    { _ocDestinationPredefinedACL :: !(Maybe ObjectsCopyDestinationPredefinedACL)
+    , _ocIfSourceGenerationMatch :: !(Maybe (Textual Int64))
+    , _ocIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _ocIfGenerationNotMatch :: !(Maybe (Textual Int64))
     , _ocIfSourceMetagenerationNotMatch :: !(Maybe (Textual Int64))
-    , _ocIfSourceMetagenerationMatch    :: !(Maybe (Textual Int64))
-    , _ocIfGenerationMatch              :: !(Maybe (Textual Int64))
-    , _ocSourceObject                   :: !Text
-    , _ocSourceBucket                   :: !Text
-    , _ocPayload                        :: !Object
-    , _ocUserProject                    :: !(Maybe Text)
-    , _ocDestinationBucket              :: !Text
-    , _ocIfMetagenerationNotMatch       :: !(Maybe (Textual Int64))
-    , _ocIfSourceGenerationNotMatch     :: !(Maybe (Textual Int64))
-    , _ocProjection                     :: !(Maybe ObjectsCopyProjection)
-    , _ocSourceGeneration               :: !(Maybe (Textual Int64))
-    , _ocDestinationObject              :: !Text
+    , _ocIfSourceMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _ocIfGenerationMatch :: !(Maybe (Textual Int64))
+    , _ocSourceObject :: !Text
+    , _ocSourceBucket :: !Text
+    , _ocPayload :: !Object
+    , _ocUserProject :: !(Maybe Text)
+    , _ocDestinationBucket :: !Text
+    , _ocIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
+    , _ocIfSourceGenerationNotMatch :: !(Maybe (Textual Int64))
+    , _ocProjection :: !(Maybe ObjectsCopyProjection)
+    , _ocProvisionalUserProject :: !(Maybe Text)
+    , _ocSourceGeneration :: !(Maybe (Textual Int64))
+    , _ocDestinationKmsKeyName :: !(Maybe Text)
+    , _ocDestinationObject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -170,7 +184,11 @@ data ObjectsCopy =
 --
 -- * 'ocProjection'
 --
+-- * 'ocProvisionalUserProject'
+--
 -- * 'ocSourceGeneration'
+--
+-- * 'ocDestinationKmsKeyName'
 --
 -- * 'ocDestinationObject'
 objectsCopy
@@ -197,7 +215,9 @@ objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ 
     , _ocIfMetagenerationNotMatch = Nothing
     , _ocIfSourceGenerationNotMatch = Nothing
     , _ocProjection = Nothing
+    , _ocProvisionalUserProject = Nothing
     , _ocSourceGeneration = Nothing
+    , _ocDestinationKmsKeyName = Nothing
     , _ocDestinationObject = pOcDestinationObject_
     }
 
@@ -315,6 +335,13 @@ ocProjection :: Lens' ObjectsCopy (Maybe ObjectsCopyProjection)
 ocProjection
   = lens _ocProjection (\ s a -> s{_ocProjection = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+ocProvisionalUserProject :: Lens' ObjectsCopy (Maybe Text)
+ocProvisionalUserProject
+  = lens _ocProvisionalUserProject
+      (\ s a -> s{_ocProvisionalUserProject = a})
+
 -- | If present, selects a specific revision of the source object (as opposed
 -- to the latest version, the default).
 ocSourceGeneration :: Lens' ObjectsCopy (Maybe Int64)
@@ -322,6 +349,15 @@ ocSourceGeneration
   = lens _ocSourceGeneration
       (\ s a -> s{_ocSourceGeneration = a})
       . mapping _Coerce
+
+-- | Resource name of the Cloud KMS key, of the form
+-- projects\/my-project\/locations\/global\/keyRings\/my-kr\/cryptoKeys\/my-key,
+-- that will be used to encrypt the object. Overrides the object
+-- metadata\'s kms_key_name value, if any.
+ocDestinationKmsKeyName :: Lens' ObjectsCopy (Maybe Text)
+ocDestinationKmsKeyName
+  = lens _ocDestinationKmsKeyName
+      (\ s a -> s{_ocDestinationKmsKeyName = a})
 
 -- | Name of the new object. Required when the object metadata is not
 -- otherwise provided. Overrides the object metadata\'s name value, if any.
@@ -351,7 +387,9 @@ instance GoogleRequest ObjectsCopy where
               _ocIfMetagenerationNotMatch
               _ocIfSourceGenerationNotMatch
               _ocProjection
+              _ocProvisionalUserProject
               _ocSourceGeneration
+              _ocDestinationKmsKeyName
               (Just AltJSON)
               _ocPayload
               storageService

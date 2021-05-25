@@ -39,8 +39,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
     , aauiAccountId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.insert@ method which the
 -- 'AccountsAdUnitsInsert' request conforms to.
@@ -61,9 +61,9 @@ type AccountsAdUnitsInsertResource =
 -- /See:/ 'accountsAdUnitsInsert' smart constructor.
 data AccountsAdUnitsInsert =
   AccountsAdUnitsInsert'
-    { _aauiPayload    :: !AdUnit
+    { _aauiPayload :: !AdUnit
     , _aauiAdClientId :: !Text
-    , _aauiAccountId  :: !Text
+    , _aauiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

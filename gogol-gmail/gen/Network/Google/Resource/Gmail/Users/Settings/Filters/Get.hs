@@ -33,12 +33,17 @@ module Network.Google.Resource.Gmail.Users.Settings.Filters.Get
     , UsersSettingsFiltersGet
 
     -- * Request Lenses
+    , usfgXgafv
+    , usfgUploadProtocol
+    , usfgAccessToken
+    , usfgUploadType
     , usfgUserId
     , usfgId
+    , usfgCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.filters.get@ method which the
 -- 'UsersSettingsFiltersGet' request conforms to.
@@ -50,15 +55,25 @@ type UsersSettingsFiltersGetResource =
              "settings" :>
                "filters" :>
                  Capture "id" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Filter
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Filter
 
 -- | Gets a filter.
 --
 -- /See:/ 'usersSettingsFiltersGet' smart constructor.
 data UsersSettingsFiltersGet =
   UsersSettingsFiltersGet'
-    { _usfgUserId :: !Text
-    , _usfgId     :: !Text
+    { _usfgXgafv :: !(Maybe Xgafv)
+    , _usfgUploadProtocol :: !(Maybe Text)
+    , _usfgAccessToken :: !(Maybe Text)
+    , _usfgUploadType :: !(Maybe Text)
+    , _usfgUserId :: !Text
+    , _usfgId :: !Text
+    , _usfgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,15 +82,56 @@ data UsersSettingsFiltersGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usfgXgafv'
+--
+-- * 'usfgUploadProtocol'
+--
+-- * 'usfgAccessToken'
+--
+-- * 'usfgUploadType'
+--
 -- * 'usfgUserId'
 --
 -- * 'usfgId'
+--
+-- * 'usfgCallback'
 usersSettingsFiltersGet
     :: Text -- ^ 'usfgId'
     -> UsersSettingsFiltersGet
 usersSettingsFiltersGet pUsfgId_ =
-  UsersSettingsFiltersGet' {_usfgUserId = "me", _usfgId = pUsfgId_}
+  UsersSettingsFiltersGet'
+    { _usfgXgafv = Nothing
+    , _usfgUploadProtocol = Nothing
+    , _usfgAccessToken = Nothing
+    , _usfgUploadType = Nothing
+    , _usfgUserId = "me"
+    , _usfgId = pUsfgId_
+    , _usfgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+usfgXgafv :: Lens' UsersSettingsFiltersGet (Maybe Xgafv)
+usfgXgafv
+  = lens _usfgXgafv (\ s a -> s{_usfgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usfgUploadProtocol :: Lens' UsersSettingsFiltersGet (Maybe Text)
+usfgUploadProtocol
+  = lens _usfgUploadProtocol
+      (\ s a -> s{_usfgUploadProtocol = a})
+
+-- | OAuth access token.
+usfgAccessToken :: Lens' UsersSettingsFiltersGet (Maybe Text)
+usfgAccessToken
+  = lens _usfgAccessToken
+      (\ s a -> s{_usfgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usfgUploadType :: Lens' UsersSettingsFiltersGet (Maybe Text)
+usfgUploadType
+  = lens _usfgUploadType
+      (\ s a -> s{_usfgUploadType = a})
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
@@ -87,6 +143,11 @@ usfgUserId
 usfgId :: Lens' UsersSettingsFiltersGet Text
 usfgId = lens _usfgId (\ s a -> s{_usfgId = a})
 
+-- | JSONP
+usfgCallback :: Lens' UsersSettingsFiltersGet (Maybe Text)
+usfgCallback
+  = lens _usfgCallback (\ s a -> s{_usfgCallback = a})
+
 instance GoogleRequest UsersSettingsFiltersGet where
         type Rs UsersSettingsFiltersGet = Filter
         type Scopes UsersSettingsFiltersGet =
@@ -95,7 +156,13 @@ instance GoogleRequest UsersSettingsFiltersGet where
                "https://www.googleapis.com/auth/gmail.readonly",
                "https://www.googleapis.com/auth/gmail.settings.basic"]
         requestClient UsersSettingsFiltersGet'{..}
-          = go _usfgUserId _usfgId (Just AltJSON) gmailService
+          = go _usfgUserId _usfgId _usfgXgafv
+              _usfgUploadProtocol
+              _usfgAccessToken
+              _usfgUploadType
+              _usfgCallback
+              (Just AltJSON)
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersSettingsFiltersGetResource)

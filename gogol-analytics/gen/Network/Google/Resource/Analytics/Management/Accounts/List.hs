@@ -37,8 +37,8 @@ module Network.Google.Resource.Analytics.Management.Accounts.List
     , malMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accounts.list@ method which the
 -- 'ManagementAccountsList' request conforms to.

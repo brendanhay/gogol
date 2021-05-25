@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.InterconnectAttachments.Patch
     , iapInterconnectAttachment
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnectAttachments.patch@ method which the
 -- 'InterconnectAttachmentsPatch' request conforms to.
@@ -68,10 +68,10 @@ type InterconnectAttachmentsPatchResource =
 -- /See:/ 'interconnectAttachmentsPatch' smart constructor.
 data InterconnectAttachmentsPatch =
   InterconnectAttachmentsPatch'
-    { _iapRequestId              :: !(Maybe Text)
-    , _iapProject                :: !Text
-    , _iapPayload                :: !InterconnectAttachment
-    , _iapRegion                 :: !Text
+    { _iapRequestId :: !(Maybe Text)
+    , _iapProject :: !Text
+    , _iapPayload :: !InterconnectAttachment
+    , _iapRegion :: !Text
     , _iapInterconnectAttachment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

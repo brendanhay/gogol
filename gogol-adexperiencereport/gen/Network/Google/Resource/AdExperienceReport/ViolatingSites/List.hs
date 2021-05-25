@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists sites with Ad Experience Report statuses of \"Failing\" or
--- \"Warning\".
+-- Lists sites that are failing in the Ad Experience Report on at least one
+-- platform.
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference> for @adexperiencereport.violatingSites.list@.
 module Network.Google.Resource.AdExperienceReport.ViolatingSites.List
@@ -41,8 +41,8 @@ module Network.Google.Resource.AdExperienceReport.ViolatingSites.List
     , vslCallback
     ) where
 
-import           Network.Google.AdExperienceReport.Types
-import           Network.Google.Prelude
+import Network.Google.AdExperienceReport.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexperiencereport.violatingSites.list@ method which the
 -- 'ViolatingSitesList' request conforms to.
@@ -57,17 +57,17 @@ type ViolatingSitesListResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ViolatingSitesResponse
 
--- | Lists sites with Ad Experience Report statuses of \"Failing\" or
--- \"Warning\".
+-- | Lists sites that are failing in the Ad Experience Report on at least one
+-- platform.
 --
 -- /See:/ 'violatingSitesList' smart constructor.
 data ViolatingSitesList =
   ViolatingSitesList'
-    { _vslXgafv          :: !(Maybe Xgafv)
+    { _vslXgafv :: !(Maybe Xgafv)
     , _vslUploadProtocol :: !(Maybe Text)
-    , _vslAccessToken    :: !(Maybe Text)
-    , _vslUploadType     :: !(Maybe Text)
-    , _vslCallback       :: !(Maybe Text)
+    , _vslAccessToken :: !(Maybe Text)
+    , _vslUploadType :: !(Maybe Text)
+    , _vslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,8 +126,7 @@ vslCallback
 
 instance GoogleRequest ViolatingSitesList where
         type Rs ViolatingSitesList = ViolatingSitesResponse
-        type Scopes ViolatingSitesList =
-             '["https://www.googleapis.com/auth/xapi.zoo"]
+        type Scopes ViolatingSitesList = '[]
         requestClient ViolatingSitesList'{..}
           = go _vslXgafv _vslUploadProtocol _vslAccessToken
               _vslUploadType

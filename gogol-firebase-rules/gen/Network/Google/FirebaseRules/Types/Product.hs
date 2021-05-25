@@ -17,8 +17,8 @@
 --
 module Network.Google.FirebaseRules.Types.Product where
 
-import           Network.Google.FirebaseRules.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types.Sum
+import Network.Google.Prelude
 
 -- | Position in the \`Source\` content including its line, column number,
 -- and an index of the \`File\` in the \`Source\` message. Used for debug
@@ -27,8 +27,10 @@ import           Network.Google.Prelude
 -- /See:/ 'sourcePosition' smart constructor.
 data SourcePosition =
   SourcePosition'
-    { _spLine     :: !(Maybe (Textual Int32))
-    , _spColumn   :: !(Maybe (Textual Int32))
+    { _spCurrentOffSet :: !(Maybe (Textual Int32))
+    , _spLine :: !(Maybe (Textual Int32))
+    , _spEndOffSet :: !(Maybe (Textual Int32))
+    , _spColumn :: !(Maybe (Textual Int32))
     , _spFileName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -38,7 +40,11 @@ data SourcePosition =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'spCurrentOffSet'
+--
 -- * 'spLine'
+--
+-- * 'spEndOffSet'
 --
 -- * 'spColumn'
 --
@@ -47,13 +53,31 @@ sourcePosition
     :: SourcePosition
 sourcePosition =
   SourcePosition'
-    {_spLine = Nothing, _spColumn = Nothing, _spFileName = Nothing}
+    { _spCurrentOffSet = Nothing
+    , _spLine = Nothing
+    , _spEndOffSet = Nothing
+    , _spColumn = Nothing
+    , _spFileName = Nothing
+    }
 
+
+-- | Start position relative to the beginning of the file.
+spCurrentOffSet :: Lens' SourcePosition (Maybe Int32)
+spCurrentOffSet
+  = lens _spCurrentOffSet
+      (\ s a -> s{_spCurrentOffSet = a})
+      . mapping _Coerce
 
 -- | Line number of the source fragment. 1-based.
 spLine :: Lens' SourcePosition (Maybe Int32)
 spLine
   = lens _spLine (\ s a -> s{_spLine = a}) .
+      mapping _Coerce
+
+-- | End position relative to the beginning of the file.
+spEndOffSet :: Lens' SourcePosition (Maybe Int32)
+spEndOffSet
+  = lens _spEndOffSet (\ s a -> s{_spEndOffSet = a}) .
       mapping _Coerce
 
 -- | First column on the source line associated with the source fragment.
@@ -72,16 +96,86 @@ instance FromJSON SourcePosition where
           = withObject "SourcePosition"
               (\ o ->
                  SourcePosition' <$>
-                   (o .:? "line") <*> (o .:? "column") <*>
-                     (o .:? "fileName"))
+                   (o .:? "currentOffset") <*> (o .:? "line") <*>
+                     (o .:? "endOffset")
+                     <*> (o .:? "column")
+                     <*> (o .:? "fileName"))
 
 instance ToJSON SourcePosition where
         toJSON SourcePosition'{..}
           = object
               (catMaybes
-                 [("line" .=) <$> _spLine,
+                 [("currentOffset" .=) <$> _spCurrentOffSet,
+                  ("line" .=) <$> _spLine,
+                  ("endOffset" .=) <$> _spEndOffSet,
                   ("column" .=) <$> _spColumn,
                   ("fileName" .=) <$> _spFileName])
+
+-- | Describes where in a file an expression is found and what it was
+-- evaluated to over the course of its use.
+--
+-- /See:/ 'expressionReport' smart constructor.
+data ExpressionReport =
+  ExpressionReport'
+    { _erSourcePosition :: !(Maybe SourcePosition)
+    , _erValues :: !(Maybe [ValueCount])
+    , _erChildren :: !(Maybe [ExpressionReport])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExpressionReport' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'erSourcePosition'
+--
+-- * 'erValues'
+--
+-- * 'erChildren'
+expressionReport
+    :: ExpressionReport
+expressionReport =
+  ExpressionReport'
+    {_erSourcePosition = Nothing, _erValues = Nothing, _erChildren = Nothing}
+
+
+-- | Position of expression in original rules source.
+erSourcePosition :: Lens' ExpressionReport (Maybe SourcePosition)
+erSourcePosition
+  = lens _erSourcePosition
+      (\ s a -> s{_erSourcePosition = a})
+
+-- | Values that this expression evaluated to when encountered.
+erValues :: Lens' ExpressionReport [ValueCount]
+erValues
+  = lens _erValues (\ s a -> s{_erValues = a}) .
+      _Default
+      . _Coerce
+
+-- | Subexpressions
+erChildren :: Lens' ExpressionReport [ExpressionReport]
+erChildren
+  = lens _erChildren (\ s a -> s{_erChildren = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ExpressionReport where
+        parseJSON
+          = withObject "ExpressionReport"
+              (\ o ->
+                 ExpressionReport' <$>
+                   (o .:? "sourcePosition") <*>
+                     (o .:? "values" .!= mempty)
+                     <*> (o .:? "children" .!= mempty))
+
+instance ToJSON ExpressionReport where
+        toJSON ExpressionReport'{..}
+          = object
+              (catMaybes
+                 [("sourcePosition" .=) <$> _erSourcePosition,
+                  ("values" .=) <$> _erValues,
+                  ("children" .=) <$> _erChildren])
 
 -- | \`TestCase\` messages provide the request context and an expectation as
 -- to whether the given context will be allowed or denied. Test cases may
@@ -94,10 +188,12 @@ instance ToJSON SourcePosition where
 -- /See:/ 'testCase' smart constructor.
 data TestCase =
   TestCase'
-    { _tcResource      :: !(Maybe JSONValue)
-    , _tcExpectation   :: !(Maybe TestCaseExpectation)
+    { _tcExpressionReportLevel :: !(Maybe TestCaseExpressionReportLevel)
+    , _tcPathEncoding :: !(Maybe TestCasePathEncoding)
+    , _tcResource :: !(Maybe JSONValue)
+    , _tcExpectation :: !(Maybe TestCaseExpectation)
     , _tcFunctionMocks :: !(Maybe [FunctionMock])
-    , _tcRequest       :: !(Maybe JSONValue)
+    , _tcRequest :: !(Maybe JSONValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,6 +201,10 @@ data TestCase =
 -- | Creates a value of 'TestCase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tcExpressionReportLevel'
+--
+-- * 'tcPathEncoding'
 --
 -- * 'tcResource'
 --
@@ -117,12 +217,26 @@ testCase
     :: TestCase
 testCase =
   TestCase'
-    { _tcResource = Nothing
+    { _tcExpressionReportLevel = Nothing
+    , _tcPathEncoding = Nothing
+    , _tcResource = Nothing
     , _tcExpectation = Nothing
     , _tcFunctionMocks = Nothing
     , _tcRequest = Nothing
     }
 
+
+-- | Specifies what should be included in the response.
+tcExpressionReportLevel :: Lens' TestCase (Maybe TestCaseExpressionReportLevel)
+tcExpressionReportLevel
+  = lens _tcExpressionReportLevel
+      (\ s a -> s{_tcExpressionReportLevel = a})
+
+-- | Specifies whether paths (such as request.path) are encoded and how.
+tcPathEncoding :: Lens' TestCase (Maybe TestCasePathEncoding)
+tcPathEncoding
+  = lens _tcPathEncoding
+      (\ s a -> s{_tcPathEncoding = a})
 
 -- | Optional resource value as it appears in persistent storage before the
 -- request is fulfilled. The resource type depends on the \`request.path\`
@@ -165,15 +279,21 @@ instance FromJSON TestCase where
           = withObject "TestCase"
               (\ o ->
                  TestCase' <$>
-                   (o .:? "resource") <*> (o .:? "expectation") <*>
-                     (o .:? "functionMocks" .!= mempty)
+                   (o .:? "expressionReportLevel") <*>
+                     (o .:? "pathEncoding")
+                     <*> (o .:? "resource")
+                     <*> (o .:? "expectation")
+                     <*> (o .:? "functionMocks" .!= mempty)
                      <*> (o .:? "request"))
 
 instance ToJSON TestCase where
         toJSON TestCase'{..}
           = object
               (catMaybes
-                 [("resource" .=) <$> _tcResource,
+                 [("expressionReportLevel" .=) <$>
+                    _tcExpressionReportLevel,
+                  ("pathEncoding" .=) <$> _tcPathEncoding,
+                  ("resource" .=) <$> _tcResource,
                   ("expectation" .=) <$> _tcExpectation,
                   ("functionMocks" .=) <$> _tcFunctionMocks,
                   ("request" .=) <$> _tcRequest])
@@ -185,7 +305,7 @@ instance ToJSON TestCase where
 data VisitedExpression =
   VisitedExpression'
     { _veSourcePosition :: !(Maybe SourcePosition)
-    , _veValue          :: !(Maybe JSONValue)
+    , _veValue :: !(Maybe JSONValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -265,9 +385,9 @@ instance ToJSON Empty where
 -- /See:/ 'functionMock' smart constructor.
 data FunctionMock =
   FunctionMock'
-    { _fmArgs     :: !(Maybe [Arg])
+    { _fmArgs :: !(Maybe [Arg])
     , _fmFunction :: !(Maybe Text)
-    , _fmResult   :: !(Maybe Result)
+    , _fmResult :: !(Maybe Result)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -327,7 +447,7 @@ instance ToJSON FunctionMock where
 -- /See:/ 'functionCall' smart constructor.
 data FunctionCall =
   FunctionCall'
-    { _fcArgs     :: !(Maybe [JSONValue])
+    { _fcArgs :: !(Maybe [JSONValue])
     , _fcFunction :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -376,7 +496,7 @@ instance ToJSON FunctionCall where
 data ListReleasesResponse =
   ListReleasesResponse'
     { _lrrNextPageToken :: !(Maybe Text)
-    , _lrrReleases      :: !(Maybe [Release])
+    , _lrrReleases :: !(Maybe [Release])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -428,7 +548,7 @@ instance ToJSON ListReleasesResponse where
 -- /See:/ 'result' smart constructor.
 data Result =
   Result'
-    { _rValue     :: !(Maybe JSONValue)
+    { _rValue :: !(Maybe JSONValue)
     , _rUndefined :: !(Maybe Empty)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -475,7 +595,7 @@ instance ToJSON Result where
 data TestRulesetResponse =
   TestRulesetResponse'
     { _trrTestResults :: !(Maybe [TestResult])
-    , _trrIssues      :: !(Maybe [Issue])
+    , _trrIssues :: !(Maybe [Issue])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -534,9 +654,9 @@ instance ToJSON TestRulesetResponse where
 data Release =
   Release'
     { _rRulesetName :: !(Maybe Text)
-    , _rUpdateTime  :: !(Maybe DateTime')
-    , _rName        :: !(Maybe Text)
-    , _rCreateTime  :: !(Maybe DateTime')
+    , _rUpdateTime :: !(Maybe DateTime')
+    , _rName :: !(Maybe Text)
+    , _rCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -569,33 +689,17 @@ rRulesetName :: Lens' Release (Maybe Text)
 rRulesetName
   = lens _rRulesetName (\ s a -> s{_rRulesetName = a})
 
--- | Time the release was updated. Output only.
+-- | Output only. Time the release was updated.
 rUpdateTime :: Lens' Release (Maybe UTCTime)
 rUpdateTime
   = lens _rUpdateTime (\ s a -> s{_rUpdateTime = a}) .
       mapping _DateTime
 
--- | Resource name for the \`Release\`. \`Release\` names may be structured
--- \`app1\/prod\/v2\` or flat \`app1_prod_v2\` which affords developers a
--- great deal of flexibility in mapping the name to the style that best
--- fits their existing development practices. For example, a name could
--- refer to an environment, an app, a version, or some combination of
--- three. In the table below, for the project name \`projects\/foo\`, the
--- following relative release paths show how flat and structured names
--- might be chosen to match a desired development \/ deployment strategy.
--- Use Case | Flat Name | Structured Name
--- -------------|---------------------|---------------- Environments |
--- releases\/qa | releases\/qa Apps | releases\/app1_qa |
--- releases\/app1\/qa Versions | releases\/app1_v2_qa |
--- releases\/app1\/v2\/qa The delimiter between the release name path
--- elements can be almost anything and it should work equally well with the
--- release name list filter, but in many ways the structured paths provide
--- a clearer picture of the relationship between \`Release\` instances.
--- Format: \`projects\/{project_id}\/releases\/{release_id}\`
+-- | Format: \`projects\/{project_id}\/releases\/{release_id}\`
 rName :: Lens' Release (Maybe Text)
 rName = lens _rName (\ s a -> s{_rName = a})
 
--- | Time the release was created. Output only.
+-- | Output only. Time the release was created.
 rCreateTime :: Lens' Release (Maybe UTCTime)
 rCreateTime
   = lens _rCreateTime (\ s a -> s{_rCreateTime = a}) .
@@ -624,7 +728,7 @@ instance ToJSON Release where
 -- /See:/ 'arg' smart constructor.
 data Arg =
   Arg'
-    { _aAnyValue   :: !(Maybe Empty)
+    { _aAnyValue :: !(Maybe Empty)
     , _aExactValue :: !(Maybe JSONValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -671,8 +775,9 @@ instance ToJSON Arg where
 -- /See:/ 'ruleset' smart constructor.
 data Ruleset =
   Ruleset'
-    { _rulName       :: !(Maybe Text)
-    , _rulSource     :: !(Maybe Source)
+    { _rulName :: !(Maybe Text)
+    , _rulMetadata :: !(Maybe Metadata)
+    , _rulSource :: !(Maybe Source)
     , _rulCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -684,27 +789,39 @@ data Ruleset =
 --
 -- * 'rulName'
 --
+-- * 'rulMetadata'
+--
 -- * 'rulSource'
 --
 -- * 'rulCreateTime'
 ruleset
     :: Ruleset
 ruleset =
-  Ruleset' {_rulName = Nothing, _rulSource = Nothing, _rulCreateTime = Nothing}
+  Ruleset'
+    { _rulName = Nothing
+    , _rulMetadata = Nothing
+    , _rulSource = Nothing
+    , _rulCreateTime = Nothing
+    }
 
 
--- | Name of the \`Ruleset\`. The ruleset_id is auto generated by the
--- service. Format: \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
--- Output only.
+-- | Output only. Name of the \`Ruleset\`. The ruleset_id is auto generated
+-- by the service. Format:
+-- \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
 rulName :: Lens' Ruleset (Maybe Text)
 rulName = lens _rulName (\ s a -> s{_rulName = a})
+
+-- | Output only. The metadata for this ruleset.
+rulMetadata :: Lens' Ruleset (Maybe Metadata)
+rulMetadata
+  = lens _rulMetadata (\ s a -> s{_rulMetadata = a})
 
 -- | \`Source\` for the \`Ruleset\`.
 rulSource :: Lens' Ruleset (Maybe Source)
 rulSource
   = lens _rulSource (\ s a -> s{_rulSource = a})
 
--- | Time the \`Ruleset\` was created. Output only.
+-- | Output only. Time the \`Ruleset\` was created.
 rulCreateTime :: Lens' Ruleset (Maybe UTCTime)
 rulCreateTime
   = lens _rulCreateTime
@@ -716,14 +833,16 @@ instance FromJSON Ruleset where
           = withObject "Ruleset"
               (\ o ->
                  Ruleset' <$>
-                   (o .:? "name") <*> (o .:? "source") <*>
-                     (o .:? "createTime"))
+                   (o .:? "name") <*> (o .:? "metadata") <*>
+                     (o .:? "source")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON Ruleset where
         toJSON Ruleset'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rulName,
+                  ("metadata" .=) <$> _rulMetadata,
                   ("source" .=) <$> _rulSource,
                   ("createTime" .=) <$> _rulCreateTime])
 
@@ -732,12 +851,12 @@ instance ToJSON Ruleset where
 -- /See:/ 'getReleaseExecutableResponse' smart constructor.
 data GetReleaseExecutableResponse =
   GetReleaseExecutableResponse'
-    { _grerExecutable        :: !(Maybe Bytes)
-    , _grerRulesetName       :: !(Maybe Text)
-    , _grerUpdateTime        :: !(Maybe DateTime')
-    , _grerSyncTime          :: !(Maybe DateTime')
+    { _grerExecutable :: !(Maybe Bytes)
+    , _grerRulesetName :: !(Maybe Text)
+    , _grerUpdateTime :: !(Maybe DateTime')
+    , _grerSyncTime :: !(Maybe DateTime')
     , _grerExecutableVersion :: !(Maybe GetReleaseExecutableResponseExecutableVersion)
-    , _grerLanguage          :: !(Maybe GetReleaseExecutableResponseLanguage)
+    , _grerLanguage :: !(Maybe GetReleaseExecutableResponseLanguage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -837,11 +956,12 @@ instance ToJSON GetReleaseExecutableResponse where
 -- /See:/ 'testResult' smart constructor.
 data TestResult =
   TestResult'
-    { _trState              :: !(Maybe TestResultState)
-    , _trFunctionCalls      :: !(Maybe [FunctionCall])
+    { _trState :: !(Maybe TestResultState)
+    , _trExpressionReports :: !(Maybe [ExpressionReport])
+    , _trFunctionCalls :: !(Maybe [FunctionCall])
     , _trVisitedExpressions :: !(Maybe [VisitedExpression])
-    , _trErrorPosition      :: !(Maybe SourcePosition)
-    , _trDebugMessages      :: !(Maybe [Text])
+    , _trErrorPosition :: !(Maybe SourcePosition)
+    , _trDebugMessages :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -851,6 +971,8 @@ data TestResult =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'trState'
+--
+-- * 'trExpressionReports'
 --
 -- * 'trFunctionCalls'
 --
@@ -864,6 +986,7 @@ testResult
 testResult =
   TestResult'
     { _trState = Nothing
+    , _trExpressionReports = Nothing
     , _trFunctionCalls = Nothing
     , _trVisitedExpressions = Nothing
     , _trErrorPosition = Nothing
@@ -874,6 +997,18 @@ testResult =
 -- | State of the test.
 trState :: Lens' TestResult (Maybe TestResultState)
 trState = lens _trState (\ s a -> s{_trState = a})
+
+-- | The mapping from expression in the ruleset AST to the values they were
+-- evaluated to. Partially-nested to mirror AST structure. Note that this
+-- field is actually tracking expressions and not permission statements in
+-- contrast to the \"visited_expressions\" field above. Literal expressions
+-- are omitted.
+trExpressionReports :: Lens' TestResult [ExpressionReport]
+trExpressionReports
+  = lens _trExpressionReports
+      (\ s a -> s{_trExpressionReports = a})
+      . _Default
+      . _Coerce
 
 -- | The set of function calls made to service-defined methods. Function
 -- calls are included in the order in which they are encountered during
@@ -927,7 +1062,8 @@ instance FromJSON TestResult where
               (\ o ->
                  TestResult' <$>
                    (o .:? "state") <*>
-                     (o .:? "functionCalls" .!= mempty)
+                     (o .:? "expressionReports" .!= mempty)
+                     <*> (o .:? "functionCalls" .!= mempty)
                      <*> (o .:? "visitedExpressions" .!= mempty)
                      <*> (o .:? "errorPosition")
                      <*> (o .:? "debugMessages" .!= mempty))
@@ -937,10 +1073,48 @@ instance ToJSON TestResult where
           = object
               (catMaybes
                  [("state" .=) <$> _trState,
+                  ("expressionReports" .=) <$> _trExpressionReports,
                   ("functionCalls" .=) <$> _trFunctionCalls,
                   ("visitedExpressions" .=) <$> _trVisitedExpressions,
                   ("errorPosition" .=) <$> _trErrorPosition,
                   ("debugMessages" .=) <$> _trDebugMessages])
+
+-- | Metadata for a Ruleset.
+--
+-- /See:/ 'metadata' smart constructor.
+newtype Metadata =
+  Metadata'
+    { _mServices :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Metadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mServices'
+metadata
+    :: Metadata
+metadata = Metadata' {_mServices = Nothing}
+
+
+-- | Services that this ruleset has declarations for (e.g.,
+-- \"cloud.firestore\"). There may be 0+ of these.
+mServices :: Lens' Metadata [Text]
+mServices
+  = lens _mServices (\ s a -> s{_mServices = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata"
+              (\ o -> Metadata' <$> (o .:? "services" .!= mempty))
+
+instance ToJSON Metadata where
+        toJSON Metadata'{..}
+          = object (catMaybes [("services" .=) <$> _mServices])
 
 -- | \`Source\` is one or more \`File\` messages comprising a logical set of
 -- rules.
@@ -977,6 +1151,53 @@ instance FromJSON Source where
 instance ToJSON Source where
         toJSON Source'{..}
           = object (catMaybes [("files" .=) <$> _sFiles])
+
+-- | Tuple for how many times an Expression was evaluated to a particular
+-- ExpressionValue.
+--
+-- /See:/ 'valueCount' smart constructor.
+data ValueCount =
+  ValueCount'
+    { _vcValue :: !(Maybe JSONValue)
+    , _vcCount :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValueCount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vcValue'
+--
+-- * 'vcCount'
+valueCount
+    :: ValueCount
+valueCount = ValueCount' {_vcValue = Nothing, _vcCount = Nothing}
+
+
+-- | The return value of the expression
+vcValue :: Lens' ValueCount (Maybe JSONValue)
+vcValue = lens _vcValue (\ s a -> s{_vcValue = a})
+
+-- | The amount of times that expression returned.
+vcCount :: Lens' ValueCount (Maybe Int32)
+vcCount
+  = lens _vcCount (\ s a -> s{_vcCount = a}) .
+      mapping _Coerce
+
+instance FromJSON ValueCount where
+        parseJSON
+          = withObject "ValueCount"
+              (\ o ->
+                 ValueCount' <$> (o .:? "value") <*> (o .:? "count"))
+
+instance ToJSON ValueCount where
+        toJSON ValueCount'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _vcValue,
+                  ("count" .=) <$> _vcCount])
 
 -- | \`TestSuite\` is a collection of \`TestCase\` instances that validate
 -- the logical correctness of a \`Ruleset\`. The \`TestSuite\` may be
@@ -1024,7 +1245,7 @@ instance ToJSON TestSuite where
 -- /See:/ 'testRulesetRequest' smart constructor.
 data TestRulesetRequest =
   TestRulesetRequest'
-    { _trrSource    :: !(Maybe Source)
+    { _trrSource :: !(Maybe Source)
     , _trrTestSuite :: !(Maybe TestSuite)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1049,7 +1270,9 @@ trrSource :: Lens' TestRulesetRequest (Maybe Source)
 trrSource
   = lens _trrSource (\ s a -> s{_trrSource = a})
 
--- | Inline \`TestSuite\` to run.
+-- | The tests to execute against the \`Source\`. When \`Source\` is provided
+-- inline, the test cases will only be run if the \`Source\` is
+-- syntactically and semantically valid. Inline \`TestSuite\` to run.
 trrTestSuite :: Lens' TestRulesetRequest (Maybe TestSuite)
 trrTestSuite
   = lens _trrTestSuite (\ s a -> s{_trrTestSuite = a})
@@ -1074,8 +1297,8 @@ instance ToJSON TestRulesetRequest where
 data File =
   File'
     { _fFingerprint :: !(Maybe Bytes)
-    , _fContent     :: !(Maybe Text)
-    , _fName        :: !(Maybe Text)
+    , _fContent :: !(Maybe Text)
+    , _fName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1129,7 +1352,7 @@ instance ToJSON File where
 -- /See:/ 'listRulesetsResponse' smart constructor.
 data ListRulesetsResponse =
   ListRulesetsResponse'
-    { _lRulesets      :: !(Maybe [Ruleset])
+    { _lRulesets :: !(Maybe [Ruleset])
     , _lNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1183,8 +1406,8 @@ instance ToJSON ListRulesetsResponse where
 data Issue =
   Issue'
     { _iSourcePosition :: !(Maybe SourcePosition)
-    , _iSeverity       :: !(Maybe IssueSeverity)
-    , _iDescription    :: !(Maybe Text)
+    , _iSeverity :: !(Maybe IssueSeverity)
+    , _iDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1237,13 +1460,13 @@ instance ToJSON Issue where
                   ("severity" .=) <$> _iSeverity,
                   ("description" .=) <$> _iDescription])
 
--- | The request for FirebaseRulesService.UpdateReleasePatch.
+-- | The request for FirebaseRulesService.UpdateRelease.
 --
 -- /See:/ 'updateReleaseRequest' smart constructor.
 data UpdateReleaseRequest =
   UpdateReleaseRequest'
     { _urrUpdateMask :: !(Maybe GFieldMask)
-    , _urrRelease    :: !(Maybe Release)
+    , _urrRelease :: !(Maybe Release)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

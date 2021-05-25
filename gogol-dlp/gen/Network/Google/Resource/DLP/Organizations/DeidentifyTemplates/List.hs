@@ -42,12 +42,13 @@ module Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.List
     , odtlAccessToken
     , odtlUploadType
     , odtlPageToken
+    , odtlLocationId
     , odtlPageSize
     , odtlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.deidentifyTemplates.list@ method which the
 -- 'OrganizationsDeidentifyTemplatesList' request conforms to.
@@ -61,11 +62,12 @@ type OrganizationsDeidentifyTemplatesListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
+                       QueryParam "locationId" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
 
 -- | Lists DeidentifyTemplates. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn
@@ -74,15 +76,16 @@ type OrganizationsDeidentifyTemplatesListResource =
 -- /See:/ 'organizationsDeidentifyTemplatesList' smart constructor.
 data OrganizationsDeidentifyTemplatesList =
   OrganizationsDeidentifyTemplatesList'
-    { _odtlParent         :: !Text
-    , _odtlXgafv          :: !(Maybe Xgafv)
+    { _odtlParent :: !Text
+    , _odtlXgafv :: !(Maybe Xgafv)
     , _odtlUploadProtocol :: !(Maybe Text)
-    , _odtlOrderBy        :: !(Maybe Text)
-    , _odtlAccessToken    :: !(Maybe Text)
-    , _odtlUploadType     :: !(Maybe Text)
-    , _odtlPageToken      :: !(Maybe Text)
-    , _odtlPageSize       :: !(Maybe (Textual Int32))
-    , _odtlCallback       :: !(Maybe Text)
+    , _odtlOrderBy :: !(Maybe Text)
+    , _odtlAccessToken :: !(Maybe Text)
+    , _odtlUploadType :: !(Maybe Text)
+    , _odtlPageToken :: !(Maybe Text)
+    , _odtlLocationId :: !(Maybe Text)
+    , _odtlPageSize :: !(Maybe (Textual Int32))
+    , _odtlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,6 +108,8 @@ data OrganizationsDeidentifyTemplatesList =
 --
 -- * 'odtlPageToken'
 --
+-- * 'odtlLocationId'
+--
 -- * 'odtlPageSize'
 --
 -- * 'odtlCallback'
@@ -120,13 +125,26 @@ organizationsDeidentifyTemplatesList pOdtlParent_ =
     , _odtlAccessToken = Nothing
     , _odtlUploadType = Nothing
     , _odtlPageToken = Nothing
+    , _odtlLocationId = Nothing
     , _odtlPageSize = Nothing
     , _odtlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 odtlParent :: Lens' OrganizationsDeidentifyTemplatesList Text
 odtlParent
   = lens _odtlParent (\ s a -> s{_odtlParent = a})
@@ -142,11 +160,11 @@ odtlUploadProtocol
   = lens _odtlUploadProtocol
       (\ s a -> s{_odtlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc,update_time, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the template was created. -
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc,update_time, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the template was created. -
 -- \`update_time\`: corresponds to time the template was last updated. -
 -- \`name\`: corresponds to template\'s name. - \`display_name\`:
 -- corresponds to template\'s display name.
@@ -166,15 +184,21 @@ odtlUploadType
   = lens _odtlUploadType
       (\ s a -> s{_odtlUploadType = a})
 
--- | Optional page token to continue retrieval. Comes from previous call to
+-- | Page token to continue retrieval. Comes from previous call to
 -- \`ListDeidentifyTemplates\`.
 odtlPageToken :: Lens' OrganizationsDeidentifyTemplatesList (Maybe Text)
 odtlPageToken
   = lens _odtlPageToken
       (\ s a -> s{_odtlPageToken = a})
 
--- | Optional size of the page, can be limited by server. If zero server
--- returns a page of max size 100.
+-- | Deprecated. This field has no effect.
+odtlLocationId :: Lens' OrganizationsDeidentifyTemplatesList (Maybe Text)
+odtlLocationId
+  = lens _odtlLocationId
+      (\ s a -> s{_odtlLocationId = a})
+
+-- | Size of the page, can be limited by server. If zero server returns a
+-- page of max size 100.
 odtlPageSize :: Lens' OrganizationsDeidentifyTemplatesList (Maybe Int32)
 odtlPageSize
   = lens _odtlPageSize (\ s a -> s{_odtlPageSize = a})
@@ -199,6 +223,7 @@ instance GoogleRequest
               _odtlAccessToken
               _odtlUploadType
               _odtlPageToken
+              _odtlLocationId
               _odtlPageSize
               _odtlCallback
               (Just AltJSON)

@@ -17,8 +17,8 @@
 --
 module Network.Google.DoubleClickSearch.Types.Product where
 
-import           Network.Google.DoubleClickSearch.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DoubleClickSearch.Types.Sum
+import Network.Google.Prelude
 
 -- | A row in a DoubleClick Search report.
 --
@@ -61,20 +61,20 @@ instance ToJSON ReportRow where
 -- /See:/ 'reportRequest' smart constructor.
 data ReportRequest =
   ReportRequest'
-    { _rrMaxRowsPerFile         :: !(Maybe (Textual Int32))
-    , _rrReportScope            :: !(Maybe ReportRequestReportScope)
-    , _rrStatisticsCurrency     :: !(Maybe Text)
-    , _rrTimeRange              :: !(Maybe ReportRequestTimeRange)
-    , _rrOrderBy                :: !(Maybe [ReportRequestOrderByItem])
-    , _rrFilters                :: !(Maybe [ReportRequestFiltersItem])
-    , _rrIncludeRemovedEntities :: !Bool
-    , _rrIncludeDeletedEntities :: !Bool
-    , _rrDownloadFormat         :: !(Maybe Text)
-    , _rrStartRow               :: !(Textual Int32)
-    , _rrColumns                :: !(Maybe [ReportAPIColumnSpec])
-    , _rrReportType             :: !(Maybe Text)
-    , _rrVerifySingleTimeZone   :: !Bool
-    , _rrRowCount               :: !(Textual Int32)
+    { _rrMaxRowsPerFile :: !(Maybe (Textual Int32))
+    , _rrReportScope :: !(Maybe ReportRequestReportScope)
+    , _rrStatisticsCurrency :: !(Maybe Text)
+    , _rrTimeRange :: !(Maybe ReportRequestTimeRange)
+    , _rrOrderBy :: !(Maybe [ReportRequestOrderByItem])
+    , _rrFilters :: !(Maybe [ReportRequestFiltersItem])
+    , _rrIncludeRemovedEntities :: !(Maybe Bool)
+    , _rrIncludeDeletedEntities :: !(Maybe Bool)
+    , _rrDownloadFormat :: !(Maybe Text)
+    , _rrStartRow :: !(Maybe (Textual Int32))
+    , _rrColumns :: !(Maybe [ReportAPIColumnSpec])
+    , _rrReportType :: !(Maybe Text)
+    , _rrVerifySingleTimeZone :: !(Maybe Bool)
+    , _rrRowCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,20 +120,20 @@ reportRequest =
     , _rrTimeRange = Nothing
     , _rrOrderBy = Nothing
     , _rrFilters = Nothing
-    , _rrIncludeRemovedEntities = False
-    , _rrIncludeDeletedEntities = False
+    , _rrIncludeRemovedEntities = Nothing
+    , _rrIncludeDeletedEntities = Nothing
     , _rrDownloadFormat = Nothing
-    , _rrStartRow = 0
+    , _rrStartRow = Nothing
     , _rrColumns = Nothing
     , _rrReportType = Nothing
-    , _rrVerifySingleTimeZone = False
-    , _rrRowCount = 10000
+    , _rrVerifySingleTimeZone = Nothing
+    , _rrRowCount = Nothing
     }
 
 
 -- | Asynchronous report only. The maximum number of rows per report file. A
 -- large report is split into many files based on this field. Acceptable
--- values are 1000000 to 100000000, inclusive.
+-- values are \`1000000\` to \`100000000\`, inclusive.
 rrMaxRowsPerFile :: Lens' ReportRequest (Maybe Int32)
 rrMaxRowsPerFile
   = lens _rrMaxRowsPerFile
@@ -149,10 +149,10 @@ rrReportScope
       (\ s a -> s{_rrReportScope = a})
 
 -- | Specifies the currency in which monetary will be returned. Possible
--- values are: usd, agency (valid if the report is scoped to agency or
--- lower), advertiser (valid if the report is scoped to * advertiser or
--- lower), or account (valid if the report is scoped to engine account or
--- lower).
+-- values are: \`usd\`, \`agency\` (valid if the report is scoped to agency
+-- or lower), \`advertiser\` (valid if the report is scoped to * advertiser
+-- or lower), or \`account\` (valid if the report is scoped to engine
+-- account or lower).
 rrStatisticsCurrency :: Lens' ReportRequest (Maybe Text)
 rrStatisticsCurrency
   = lens _rrStatisticsCurrency
@@ -165,7 +165,7 @@ rrTimeRange
   = lens _rrTimeRange (\ s a -> s{_rrTimeRange = a})
 
 -- | Synchronous report only. A list of columns and directions defining
--- sorting to be performed on the report rows. The maximum number of
+-- sorting to be performed on the report rows.\\ The maximum number of
 -- orderings per request is 300.
 rrOrderBy :: Lens' ReportRequest [ReportRequestOrderByItem]
 rrOrderBy
@@ -173,7 +173,7 @@ rrOrderBy
       _Default
       . _Coerce
 
--- | A list of filters to be applied to the report. The maximum number of
+-- | A list of filters to be applied to the report.\\ The maximum number of
 -- filters per request is 300.
 rrFilters :: Lens' ReportRequest [ReportRequestFiltersItem]
 rrFilters
@@ -182,40 +182,40 @@ rrFilters
       . _Coerce
 
 -- | Determines if removed entities should be included in the report.
--- Defaults to false.
-rrIncludeRemovedEntities :: Lens' ReportRequest Bool
+-- Defaults to \`false\`.
+rrIncludeRemovedEntities :: Lens' ReportRequest (Maybe Bool)
 rrIncludeRemovedEntities
   = lens _rrIncludeRemovedEntities
       (\ s a -> s{_rrIncludeRemovedEntities = a})
 
 -- | Determines if removed entities should be included in the report.
--- Defaults to false. Deprecated, please use includeRemovedEntities
+-- Defaults to \`false\`. Deprecated, please use \`includeRemovedEntities\`
 -- instead.
-rrIncludeDeletedEntities :: Lens' ReportRequest Bool
+rrIncludeDeletedEntities :: Lens' ReportRequest (Maybe Bool)
 rrIncludeDeletedEntities
   = lens _rrIncludeDeletedEntities
       (\ s a -> s{_rrIncludeDeletedEntities = a})
 
--- | Format that the report should be returned in. Currently csv or tsv is
--- supported.
+-- | Format that the report should be returned in. Currently \`csv\` or
+-- \`tsv\` is supported.
 rrDownloadFormat :: Lens' ReportRequest (Maybe Text)
 rrDownloadFormat
   = lens _rrDownloadFormat
       (\ s a -> s{_rrDownloadFormat = a})
 
 -- | Synchronous report only. Zero-based index of the first row to return.
--- Acceptable values are 0 to 50000, inclusive. Defaults to 0.
-rrStartRow :: Lens' ReportRequest Int32
+-- Acceptable values are \`0\` to \`50000\`, inclusive. Defaults to \`0\`.
+rrStartRow :: Lens' ReportRequest (Maybe Int32)
 rrStartRow
   = lens _rrStartRow (\ s a -> s{_rrStartRow = a}) .
-      _Coerce
+      mapping _Coerce
 
 -- | The columns to include in the report. This includes both DoubleClick
 -- Search columns and saved columns. For DoubleClick Search columns, only
--- the columnName parameter is required. For saved columns only the
--- savedColumnName parameter is required. Both columnName and
--- savedColumnName cannot be set in the same stanza. The maximum number of
--- columns per request is 300.
+-- the \`columnName\` parameter is required. For saved columns only the
+-- \`savedColumnName\` parameter is required. Both \`columnName\` and
+-- \`savedColumnName\` cannot be set in the same stanza.\\ The maximum
+-- number of columns per request is 300.
 rrColumns :: Lens' ReportRequest [ReportAPIColumnSpec]
 rrColumns
   = lens _rrColumns (\ s a -> s{_rrColumns = a}) .
@@ -223,27 +223,28 @@ rrColumns
       . _Coerce
 
 -- | Determines the type of rows that are returned in the report. For
--- example, if you specify reportType: keyword, each row in the report will
--- contain data about a keyword. See the Types of Reports reference for the
--- columns that are available for each type.
+-- example, if you specify \`reportType: keyword\`, each row in the report
+-- will contain data about a keyword. See the [Types of
+-- Reports](\/search-ads\/v2\/report-types\/) reference for the columns
+-- that are available for each type.
 rrReportType :: Lens' ReportRequest (Maybe Text)
 rrReportType
   = lens _rrReportType (\ s a -> s{_rrReportType = a})
 
--- | If true, the report would only be created if all the requested stat data
--- are sourced from a single timezone. Defaults to false.
-rrVerifySingleTimeZone :: Lens' ReportRequest Bool
+-- | If \`true\`, the report would only be created if all the requested stat
+-- data are sourced from a single timezone. Defaults to \`false\`.
+rrVerifySingleTimeZone :: Lens' ReportRequest (Maybe Bool)
 rrVerifySingleTimeZone
   = lens _rrVerifySingleTimeZone
       (\ s a -> s{_rrVerifySingleTimeZone = a})
 
 -- | Synchronous report only. The maximum number of rows to return;
--- additional rows are dropped. Acceptable values are 0 to 10000,
--- inclusive. Defaults to 10000.
-rrRowCount :: Lens' ReportRequest Int32
+-- additional rows are dropped. Acceptable values are \`0\` to \`10000\`,
+-- inclusive. Defaults to \`10000\`.
+rrRowCount :: Lens' ReportRequest (Maybe Int32)
 rrRowCount
   = lens _rrRowCount (\ s a -> s{_rrRowCount = a}) .
-      _Coerce
+      mapping _Coerce
 
 instance FromJSON ReportRequest where
         parseJSON
@@ -255,14 +256,14 @@ instance FromJSON ReportRequest where
                      <*> (o .:? "timeRange")
                      <*> (o .:? "orderBy" .!= mempty)
                      <*> (o .:? "filters" .!= mempty)
-                     <*> (o .:? "includeRemovedEntities" .!= False)
-                     <*> (o .:? "includeDeletedEntities" .!= False)
+                     <*> (o .:? "includeRemovedEntities")
+                     <*> (o .:? "includeDeletedEntities")
                      <*> (o .:? "downloadFormat")
-                     <*> (o .:? "startRow" .!= 0)
+                     <*> (o .:? "startRow")
                      <*> (o .:? "columns" .!= mempty)
                      <*> (o .:? "reportType")
-                     <*> (o .:? "verifySingleTimeZone" .!= False)
-                     <*> (o .:? "rowCount" .!= 10000))
+                     <*> (o .:? "verifySingleTimeZone")
+                     <*> (o .:? "rowCount"))
 
 instance ToJSON ReportRequest where
         toJSON ReportRequest'{..}
@@ -274,26 +275,24 @@ instance ToJSON ReportRequest where
                   ("timeRange" .=) <$> _rrTimeRange,
                   ("orderBy" .=) <$> _rrOrderBy,
                   ("filters" .=) <$> _rrFilters,
-                  Just
-                    ("includeRemovedEntities" .=
-                       _rrIncludeRemovedEntities),
-                  Just
-                    ("includeDeletedEntities" .=
-                       _rrIncludeDeletedEntities),
+                  ("includeRemovedEntities" .=) <$>
+                    _rrIncludeRemovedEntities,
+                  ("includeDeletedEntities" .=) <$>
+                    _rrIncludeDeletedEntities,
                   ("downloadFormat" .=) <$> _rrDownloadFormat,
-                  Just ("startRow" .= _rrStartRow),
+                  ("startRow" .=) <$> _rrStartRow,
                   ("columns" .=) <$> _rrColumns,
                   ("reportType" .=) <$> _rrReportType,
-                  Just
-                    ("verifySingleTimeZone" .= _rrVerifySingleTimeZone),
-                  Just ("rowCount" .= _rrRowCount)])
+                  ("verifySingleTimeZone" .=) <$>
+                    _rrVerifySingleTimeZone,
+                  ("rowCount" .=) <$> _rrRowCount])
 
 --
 -- /See:/ 'reportRequestOrderByItem' smart constructor.
 data ReportRequestOrderByItem =
   ReportRequestOrderByItem'
     { _rrobiSortOrder :: !(Maybe Text)
-    , _rrobiColumn    :: !(Maybe ReportAPIColumnSpec)
+    , _rrobiColumn :: !(Maybe ReportAPIColumnSpec)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -311,7 +310,7 @@ reportRequestOrderByItem =
   ReportRequestOrderByItem' {_rrobiSortOrder = Nothing, _rrobiColumn = Nothing}
 
 
--- | The sort direction, which is either ascending or descending.
+-- | The sort direction, which is either \`ascending\` or \`descending\`.
 rrobiSortOrder :: Lens' ReportRequestOrderByItem (Maybe Text)
 rrobiSortOrder
   = lens _rrobiSortOrder
@@ -344,15 +343,15 @@ instance ToJSON ReportRequestOrderByItem where
 -- /See:/ 'report' smart constructor.
 data Report =
   Report'
-    { _rKind                   :: !Text
-    , _rRows                   :: !(Maybe [ReportRow])
+    { _rKind :: !(Maybe Text)
+    , _rRows :: !(Maybe [ReportRow])
     , _rStatisticsCurrencyCode :: !(Maybe Text)
-    , _rIsReportReady          :: !(Maybe Bool)
-    , _rFiles                  :: !(Maybe [ReportFilesItem])
-    , _rId                     :: !(Maybe Text)
-    , _rStatisticsTimeZone     :: !(Maybe Text)
-    , _rRowCount               :: !(Maybe (Textual Int32))
-    , _rRequest                :: !(Maybe ReportRequest)
+    , _rIsReportReady :: !(Maybe Bool)
+    , _rFiles :: !(Maybe [ReportFilesItem])
+    , _rId :: !(Maybe Text)
+    , _rStatisticsTimeZone :: !(Maybe Text)
+    , _rRowCount :: !(Maybe (Textual Int32))
+    , _rRequest :: !(Maybe ReportRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -382,7 +381,7 @@ report
     :: Report
 report =
   Report'
-    { _rKind = "doubleclicksearch#report"
+    { _rKind = Nothing
     , _rRows = Nothing
     , _rStatisticsCurrencyCode = Nothing
     , _rIsReportReady = Nothing
@@ -395,8 +394,8 @@ report =
 
 
 -- | Identifies this as a Report resource. Value: the fixed string
--- doubleclicksearch#report.
-rKind :: Lens' Report Text
+-- \`doubleclicksearch#report\`.
+rKind :: Lens' Report (Maybe Text)
 rKind = lens _rKind (\ s a -> s{_rKind = a})
 
 -- | Synchronous report only. Generated report rows.
@@ -408,7 +407,7 @@ rRows
 -- | The currency code of all monetary values produced in the report,
 -- including values that are set by users (e.g., keyword bid settings) and
 -- metrics (e.g., cost and revenue). The currency code of a report is
--- determined by the statisticsCurrency field of the report request.
+-- determined by the \`statisticsCurrency\` field of the report request.
 rStatisticsCurrencyCode :: Lens' Report (Maybe Text)
 rStatisticsCurrencyCode
   = lens _rStatisticsCurrencyCode
@@ -422,7 +421,7 @@ rIsReportReady
       (\ s a -> s{_rIsReportReady = a})
 
 -- | Asynchronous report only. Contains a list of generated report files once
--- the report has succesfully completed.
+-- the report has successfully completed.
 rFiles :: Lens' Report [ReportFilesItem]
 rFiles
   = lens _rFiles (\ s a -> s{_rFiles = a}) . _Default .
@@ -456,9 +455,8 @@ instance FromJSON Report where
           = withObject "Report"
               (\ o ->
                  Report' <$>
-                   (o .:? "kind" .!= "doubleclicksearch#report") <*>
-                     (o .:? "rows" .!= mempty)
-                     <*> (o .:? "statisticsCurrencyCode")
+                   (o .:? "kind") <*> (o .:? "rows" .!= mempty) <*>
+                     (o .:? "statisticsCurrencyCode")
                      <*> (o .:? "isReportReady")
                      <*> (o .:? "files" .!= mempty)
                      <*> (o .:? "id")
@@ -470,7 +468,7 @@ instance ToJSON Report where
         toJSON Report'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _rKind), ("rows" .=) <$> _rRows,
+                 [("kind" .=) <$> _rKind, ("rows" .=) <$> _rRows,
                   ("statisticsCurrencyCode" .=) <$>
                     _rStatisticsCurrencyCode,
                   ("isReportReady" .=) <$> _rIsReportReady,
@@ -483,7 +481,7 @@ instance ToJSON Report where
 -- /See:/ 'reportFilesItem' smart constructor.
 data ReportFilesItem =
   ReportFilesItem'
-    { _rfiURL       :: !(Maybe Text)
+    { _rfiURL :: !(Maybe Text)
     , _rfiByteCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -530,8 +528,8 @@ instance ToJSON ReportFilesItem where
 data ReportRequestFiltersItem =
   ReportRequestFiltersItem'
     { _rrfiOperator :: !(Maybe Text)
-    , _rrfiValues   :: !(Maybe [JSONValue])
-    , _rrfiColumn   :: !(Maybe ReportAPIColumnSpec)
+    , _rrfiValues :: !(Maybe [JSONValue])
+    , _rrfiColumn :: !(Maybe ReportAPIColumnSpec)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -558,8 +556,8 @@ rrfiOperator :: Lens' ReportRequestFiltersItem (Maybe Text)
 rrfiOperator
   = lens _rrfiOperator (\ s a -> s{_rrfiOperator = a})
 
--- | A list of values to filter the column value against. The maximum number
--- of filter values per request is 300.
+-- | A list of values to filter the column value against.\\ The maximum
+-- number of filter values per request is 300.
 rrfiValues :: Lens' ReportRequestFiltersItem [JSONValue]
 rrfiValues
   = lens _rrfiValues (\ s a -> s{_rrfiValues = a}) .
@@ -593,12 +591,12 @@ instance ToJSON ReportRequestFiltersItem where
 -- /See:/ 'availability' smart constructor.
 data Availability =
   Availability'
-    { _aAgencyId              :: !(Maybe (Textual Int64))
-    , _aAdvertiserId          :: !(Maybe (Textual Int64))
-    , _aSegmentationId        :: !(Maybe (Textual Int64))
-    , _aSegmentationName      :: !(Maybe Text)
-    , _aAvailabilityTimestamp :: !(Maybe (Textual Word64))
-    , _aSegmentationType      :: !(Maybe Text)
+    { _aAgencyId :: !(Maybe (Textual Int64))
+    , _aAdvertiserId :: !(Maybe (Textual Int64))
+    , _aSegmentationId :: !(Maybe (Textual Int64))
+    , _aSegmentationName :: !(Maybe Text)
+    , _aAvailabilityTimestamp :: !(Maybe (Textual Int64))
+    , _aSegmentationType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -661,14 +659,14 @@ aSegmentationName
 
 -- | The time by which all conversions have been uploaded, in epoch millis
 -- UTC.
-aAvailabilityTimestamp :: Lens' Availability (Maybe Word64)
+aAvailabilityTimestamp :: Lens' Availability (Maybe Int64)
 aAvailabilityTimestamp
   = lens _aAvailabilityTimestamp
       (\ s a -> s{_aAvailabilityTimestamp = a})
       . mapping _Coerce
 
 -- | The segmentation type that this availability is for (its default value
--- is FLOODLIGHT).
+-- is \`FLOODLIGHT\`).
 aSegmentationType :: Lens' Availability (Maybe Text)
 aSegmentationType
   = lens _aSegmentationType
@@ -739,13 +737,13 @@ instance ToJSON UpdateAvailabilityRequest where
               (catMaybes
                  [("availabilities" .=) <$> _uarAvailabilities])
 
--- | A message containing the custome metric.
+-- | A message containing the custom metric.
 --
 -- /See:/ 'customMetric' smart constructor.
 data CustomMetric =
   CustomMetric'
     { _cmValue :: !(Maybe (Textual Double))
-    , _cmName  :: !(Maybe Text)
+    , _cmName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -789,7 +787,7 @@ instance ToJSON CustomMetric where
 -- /See:/ 'conversionList' smart constructor.
 data ConversionList =
   ConversionList'
-    { _clKind       :: !Text
+    { _clKind :: !(Maybe Text)
     , _clConversion :: !(Maybe [Conversion])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -804,14 +802,12 @@ data ConversionList =
 -- * 'clConversion'
 conversionList
     :: ConversionList
-conversionList =
-  ConversionList'
-    {_clKind = "doubleclicksearch#conversionList", _clConversion = Nothing}
+conversionList = ConversionList' {_clKind = Nothing, _clConversion = Nothing}
 
 
 -- | Identifies this as a ConversionList resource. Value: the fixed string
 -- doubleclicksearch#conversionList.
-clKind :: Lens' ConversionList Text
+clKind :: Lens' ConversionList (Maybe Text)
 clKind = lens _clKind (\ s a -> s{_clKind = a})
 
 -- | The conversions being requested.
@@ -826,14 +822,13 @@ instance FromJSON ConversionList where
           = withObject "ConversionList"
               (\ o ->
                  ConversionList' <$>
-                   (o .:? "kind" .!= "doubleclicksearch#conversionList")
-                     <*> (o .:? "conversion" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "conversion" .!= mempty))
 
 instance ToJSON ConversionList where
         toJSON ConversionList'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _clKind),
+                 [("kind" .=) <$> _clKind,
                   ("conversion" .=) <$> _clConversion])
 
 -- | A request object used to create a DoubleClick Search report.
@@ -841,16 +836,16 @@ instance ToJSON ConversionList where
 -- /See:/ 'reportAPIColumnSpec' smart constructor.
 data ReportAPIColumnSpec =
   ReportAPIColumnSpec'
-    { _racsCustomDimensionName      :: !(Maybe Text)
-    , _racsSavedColumnName          :: !(Maybe Text)
-    , _racsGroupByColumn            :: !Bool
-    , _racsCustomMetricName         :: !(Maybe Text)
-    , _racsEndDate                  :: !(Maybe Text)
+    { _racsCustomDimensionName :: !(Maybe Text)
+    , _racsSavedColumnName :: !(Maybe Text)
+    , _racsGroupByColumn :: !(Maybe Bool)
+    , _racsCustomMetricName :: !(Maybe Text)
+    , _racsEndDate :: !(Maybe Text)
     , _racsProductReportPerspective :: !(Maybe Text)
-    , _racsStartDate                :: !(Maybe Text)
-    , _racsHeaderText               :: !(Maybe Text)
-    , _racsPlatformSource           :: !(Maybe Text)
-    , _racsColumnName               :: !(Maybe Text)
+    , _racsStartDate :: !(Maybe Text)
+    , _racsHeaderText :: !(Maybe Text)
+    , _racsPlatformSource :: !(Maybe Text)
+    , _racsColumnName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -884,7 +879,7 @@ reportAPIColumnSpec =
   ReportAPIColumnSpec'
     { _racsCustomDimensionName = Nothing
     , _racsSavedColumnName = Nothing
-    , _racsGroupByColumn = False
+    , _racsGroupByColumn = Nothing
     , _racsCustomMetricName = Nothing
     , _racsEndDate = Nothing
     , _racsProductReportPerspective = Nothing
@@ -898,7 +893,7 @@ reportAPIColumnSpec =
 -- | Segments a report by a custom dimension. The report must be scoped to an
 -- advertiser or lower, and the custom dimension must already be set up in
 -- DoubleClick Search. The custom dimension name, which appears in
--- DoubleClick Search, is case sensitive. If used in a conversion report,
+-- DoubleClick Search, is case sensitive.\\ If used in a conversion report,
 -- returns the value of the specified custom dimension for the given
 -- conversion, if set. This column does not segment the conversion report.
 racsCustomDimensionName :: Lens' ReportAPIColumnSpec (Maybe Text)
@@ -914,9 +909,9 @@ racsSavedColumnName
   = lens _racsSavedColumnName
       (\ s a -> s{_racsSavedColumnName = a})
 
--- | Synchronous report only. Set to true to group by this column. Defaults
--- to false.
-racsGroupByColumn :: Lens' ReportAPIColumnSpec Bool
+-- | Synchronous report only. Set to \`true\` to group by this column.
+-- Defaults to \`false\`.
+racsGroupByColumn :: Lens' ReportAPIColumnSpec (Maybe Bool)
 racsGroupByColumn
   = lens _racsGroupByColumn
       (\ s a -> s{_racsGroupByColumn = a})
@@ -932,15 +927,16 @@ racsCustomMetricName
 
 -- | Inclusive day in YYYY-MM-DD format. When provided, this overrides the
 -- overall time range of the report for this column only. Must be provided
--- together with startDate.
+-- together with \`startDate\`.
 racsEndDate :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsEndDate
   = lens _racsEndDate (\ s a -> s{_racsEndDate = a})
 
 -- | Returns metrics only for a specific type of product activity. Accepted
--- values are: - \"sold\": returns metrics only for products that were sold
--- - \"advertised\": returns metrics only for products that were advertised
--- in a Shopping campaign, and that might or might not have been sold
+-- values are: - \"\`sold\`\": returns metrics only for products that were
+-- sold - \"\`advertised\`\": returns metrics only for products that were
+-- advertised in a Shopping campaign, and that might or might not have been
+-- sold
 racsProductReportPerspective :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsProductReportPerspective
   = lens _racsProductReportPerspective
@@ -948,16 +944,16 @@ racsProductReportPerspective
 
 -- | Inclusive date in YYYY-MM-DD format. When provided, this overrides the
 -- overall time range of the report for this column only. Must be provided
--- together with endDate.
+-- together with \`endDate\`.
 racsStartDate :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsStartDate
   = lens _racsStartDate
       (\ s a -> s{_racsStartDate = a})
 
 -- | Text used to identify this column in the report output; defaults to
--- columnName or savedColumnName when not specified. This can be used to
--- prevent collisions between DoubleClick Search columns and saved columns
--- with the same name.
+-- \`columnName\` or \`savedColumnName\` when not specified. This can be
+-- used to prevent collisions between DoubleClick Search columns and saved
+-- columns with the same name.
 racsHeaderText :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsHeaderText
   = lens _racsHeaderText
@@ -983,7 +979,7 @@ instance FromJSON ReportAPIColumnSpec where
                  ReportAPIColumnSpec' <$>
                    (o .:? "customDimensionName") <*>
                      (o .:? "savedColumnName")
-                     <*> (o .:? "groupByColumn" .!= False)
+                     <*> (o .:? "groupByColumn")
                      <*> (o .:? "customMetricName")
                      <*> (o .:? "endDate")
                      <*> (o .:? "productReportPerspective")
@@ -999,7 +995,7 @@ instance ToJSON ReportAPIColumnSpec where
                  [("customDimensionName" .=) <$>
                     _racsCustomDimensionName,
                   ("savedColumnName" .=) <$> _racsSavedColumnName,
-                  Just ("groupByColumn" .= _racsGroupByColumn),
+                  ("groupByColumn" .=) <$> _racsGroupByColumn,
                   ("customMetricName" .=) <$> _racsCustomMetricName,
                   ("endDate" .=) <$> _racsEndDate,
                   ("productReportPerspective" .=) <$>
@@ -1015,10 +1011,10 @@ instance ToJSON ReportAPIColumnSpec where
 -- /See:/ 'reportRequestTimeRange' smart constructor.
 data ReportRequestTimeRange =
   ReportRequestTimeRange'
-    { _rrtrEndDate                         :: !(Maybe Text)
-    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe DateTime')
-    , _rrtrStartDate                       :: !(Maybe Text)
-    , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe DateTime')
+    { _rrtrEndDate :: !(Maybe Text)
+    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe Text)
+    , _rrtrStartDate :: !(Maybe Text)
+    , _rrtrChangedMetricsSinceTimestamp :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1050,14 +1046,14 @@ rrtrEndDate :: Lens' ReportRequestTimeRange (Maybe Text)
 rrtrEndDate
   = lens _rrtrEndDate (\ s a -> s{_rrtrEndDate = a})
 
--- | Inclusive UTC timestamp in RFC format, e.g., 2013-07-16T10:16:23.555Z.
--- See additional references on how changed attribute reports work.
-rrtrChangedAttributesSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe UTCTime)
+-- | Inclusive UTC timestamp in RFC format, e.g.,
+-- \`2013-07-16T10:16:23.555Z\`. See additional references on how changed
+-- attribute reports work.
+rrtrChangedAttributesSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe Text)
 rrtrChangedAttributesSinceTimestamp
   = lens _rrtrChangedAttributesSinceTimestamp
       (\ s a ->
          s{_rrtrChangedAttributesSinceTimestamp = a})
-      . mapping _DateTime
 
 -- | Inclusive date in YYYY-MM-DD format.
 rrtrStartDate :: Lens' ReportRequestTimeRange (Maybe Text)
@@ -1065,13 +1061,13 @@ rrtrStartDate
   = lens _rrtrStartDate
       (\ s a -> s{_rrtrStartDate = a})
 
--- | Inclusive UTC timestamp in RFC format, e.g., 2013-07-16T10:16:23.555Z.
--- See additional references on how changed metrics reports work.
-rrtrChangedMetricsSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe UTCTime)
+-- | Inclusive UTC timestamp in RFC format, e.g.,
+-- \`2013-07-16T10:16:23.555Z\`. See additional references on how changed
+-- metrics reports work.
+rrtrChangedMetricsSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe Text)
 rrtrChangedMetricsSinceTimestamp
   = lens _rrtrChangedMetricsSinceTimestamp
       (\ s a -> s{_rrtrChangedMetricsSinceTimestamp = a})
-      . mapping _DateTime
 
 instance FromJSON ReportRequestTimeRange where
         parseJSON
@@ -1099,39 +1095,39 @@ instance ToJSON ReportRequestTimeRange where
 -- /See:/ 'conversion' smart constructor.
 data Conversion =
   Conversion'
-    { _cAdGroupId                   :: !(Maybe (Textual Int64))
-    , _cConversionModifiedTimestamp :: !(Maybe (Textual Word64))
-    , _cState                       :: !(Maybe Text)
-    , _cEngineAccountId             :: !(Maybe (Textual Int64))
-    , _cAgencyId                    :: !(Maybe (Textual Int64))
-    , _cCurrencyCode                :: !(Maybe Text)
-    , _cStoreId                     :: !(Maybe Text)
-    , _cDsConversionId              :: !(Maybe (Textual Int64))
-    , _cConversionId                :: !(Maybe Text)
-    , _cAdvertiserId                :: !(Maybe (Textual Int64))
-    , _cSegmentationId              :: !(Maybe (Textual Int64))
-    , _cChannel                     :: !(Maybe Text)
-    , _cProductCountry              :: !(Maybe Text)
-    , _cCampaignId                  :: !(Maybe (Textual Int64))
-    , _cCriterionId                 :: !(Maybe (Textual Int64))
-    , _cConversionTimestamp         :: !(Maybe (Textual Word64))
-    , _cAttributionModel            :: !(Maybe Text)
-    , _cSegmentationName            :: !(Maybe Text)
-    , _cProductLanguage             :: !(Maybe Text)
-    , _cCustomMetric                :: !(Maybe [CustomMetric])
-    , _cCountMillis                 :: !(Maybe (Textual Int64))
-    , _cQuantityMillis              :: !(Maybe (Textual Int64))
-    , _cAdId                        :: !(Maybe (Textual Int64))
-    , _cDeviceType                  :: !(Maybe Text)
-    , _cType                        :: !(Maybe Text)
-    , _cCustomDimension             :: !(Maybe [CustomDimension])
-    , _cFloodlightOrderId           :: !(Maybe Text)
-    , _cRevenueMicros               :: !(Maybe (Textual Int64))
-    , _cClickId                     :: !(Maybe Text)
-    , _cInventoryAccountId          :: !(Maybe (Textual Int64))
-    , _cSegmentationType            :: !(Maybe Text)
-    , _cProductId                   :: !(Maybe Text)
-    , _cProductGroupId              :: !(Maybe (Textual Int64))
+    { _cAdGroupId :: !(Maybe (Textual Int64))
+    , _cConversionModifiedTimestamp :: !(Maybe (Textual Int64))
+    , _cState :: !(Maybe Text)
+    , _cEngineAccountId :: !(Maybe (Textual Int64))
+    , _cAgencyId :: !(Maybe (Textual Int64))
+    , _cCurrencyCode :: !(Maybe Text)
+    , _cStoreId :: !(Maybe Text)
+    , _cDsConversionId :: !(Maybe (Textual Int64))
+    , _cConversionId :: !(Maybe Text)
+    , _cAdvertiserId :: !(Maybe (Textual Int64))
+    , _cSegmentationId :: !(Maybe (Textual Int64))
+    , _cChannel :: !(Maybe Text)
+    , _cProductCountry :: !(Maybe Text)
+    , _cCampaignId :: !(Maybe (Textual Int64))
+    , _cCriterionId :: !(Maybe (Textual Int64))
+    , _cConversionTimestamp :: !(Maybe Text)
+    , _cAttributionModel :: !(Maybe Text)
+    , _cSegmentationName :: !(Maybe Text)
+    , _cProductLanguage :: !(Maybe Text)
+    , _cCustomMetric :: !(Maybe [CustomMetric])
+    , _cCountMillis :: !(Maybe (Textual Int64))
+    , _cQuantityMillis :: !(Maybe (Textual Int64))
+    , _cAdId :: !(Maybe (Textual Int64))
+    , _cDeviceType :: !(Maybe Text)
+    , _cType :: !(Maybe Text)
+    , _cCustomDimension :: !(Maybe [CustomDimension])
+    , _cFloodlightOrderId :: !(Maybe Text)
+    , _cRevenueMicros :: !(Maybe Text)
+    , _cClickId :: !(Maybe Text)
+    , _cInventoryAccountId :: !(Maybe (Textual Int64))
+    , _cSegmentationType :: !(Maybe Text)
+    , _cProductId :: !(Maybe Text)
+    , _cProductGroupId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1252,14 +1248,14 @@ cAdGroupId
       mapping _Coerce
 
 -- | The time at which the conversion was last modified, in epoch millis UTC.
-cConversionModifiedTimestamp :: Lens' Conversion (Maybe Word64)
+cConversionModifiedTimestamp :: Lens' Conversion (Maybe Int64)
 cConversionModifiedTimestamp
   = lens _cConversionModifiedTimestamp
       (\ s a -> s{_cConversionModifiedTimestamp = a})
       . mapping _Coerce
 
--- | The state of the conversion, that is, either ACTIVE or REMOVED. Note:
--- state DELETED is deprecated.
+-- | The state of the conversion, that is, either \`ACTIVE\` or \`REMOVED\`.
+-- Note: state DELETED is deprecated.
 cState :: Lens' Conversion (Maybe Text)
 cState = lens _cState (\ s a -> s{_cState = a})
 
@@ -1284,7 +1280,7 @@ cCurrencyCode
       (\ s a -> s{_cCurrencyCode = a})
 
 -- | The ID of the local store for which the product was advertised.
--- Applicable only when the channel is \"local\".
+-- Applicable only when the channel is \"\`local\`\".
 cStoreId :: Lens' Conversion (Maybe Text)
 cStoreId = lens _cStoreId (\ s a -> s{_cStoreId = a})
 
@@ -1299,8 +1295,9 @@ cDsConversionId
 -- specify any ID that is meaningful to them. Each conversion in a request
 -- must specify a unique ID, and the combination of ID and timestamp must
 -- be unique amongst all conversions within the advertiser. For online
--- conversions, DS copies the dsConversionId or floodlightOrderId into this
--- property depending on the advertiser\'s Floodlight instructions.
+-- conversions, DS copies the \`dsConversionId\` or \`floodlightOrderId\`
+-- into this property depending on the advertiser\'s Floodlight
+-- instructions.
 cConversionId :: Lens' Conversion (Maybe Text)
 cConversionId
   = lens _cConversionId
@@ -1321,8 +1318,8 @@ cSegmentationId
       (\ s a -> s{_cSegmentationId = a})
       . mapping _Coerce
 
--- | Sales channel for the product. Acceptable values are: - \"local\": a
--- physical store - \"online\": an online store
+-- | Sales channel for the product. Acceptable values are: - \"\`local\`\": a
+-- physical store - \"\`online\`\": an online store
 cChannel :: Lens' Conversion (Maybe Text)
 cChannel = lens _cChannel (\ s a -> s{_cChannel = a})
 
@@ -1346,11 +1343,10 @@ cCriterionId
       . mapping _Coerce
 
 -- | The time at which the conversion took place, in epoch millis UTC.
-cConversionTimestamp :: Lens' Conversion (Maybe Word64)
+cConversionTimestamp :: Lens' Conversion (Maybe Text)
 cConversionTimestamp
   = lens _cConversionTimestamp
       (\ s a -> s{_cConversionTimestamp = a})
-      . mapping _Coerce
 
 -- | Available to advertisers only after contacting DoubleClick Search
 -- customer support.
@@ -1406,11 +1402,12 @@ cDeviceType :: Lens' Conversion (Maybe Text)
 cDeviceType
   = lens _cDeviceType (\ s a -> s{_cDeviceType = a})
 
--- | The type of the conversion, that is, either ACTION or TRANSACTION. An
--- ACTION conversion is an action by the user that has no monetarily
--- quantifiable value, while a TRANSACTION conversion is an action that
--- does have a monetarily quantifiable value. Examples are email list
--- signups (ACTION) versus ecommerce purchases (TRANSACTION).
+-- | The type of the conversion, that is, either \`ACTION\` or
+-- \`TRANSACTION\`. An \`ACTION\` conversion is an action by the user that
+-- has no monetarily quantifiable value, while a \`TRANSACTION\` conversion
+-- is an action that does have a monetarily quantifiable value. Examples
+-- are email list signups (\`ACTION\`) versus ecommerce purchases
+-- (\`TRANSACTION\`).
 cType :: Lens' Conversion (Maybe Text)
 cType = lens _cType (\ s a -> s{_cType = a})
 
@@ -1429,14 +1426,13 @@ cFloodlightOrderId
   = lens _cFloodlightOrderId
       (\ s a -> s{_cFloodlightOrderId = a})
 
--- | The revenue amount of this TRANSACTION conversion, in micros (value
+-- | The revenue amount of this \`TRANSACTION\` conversion, in micros (value
 -- multiplied by 1000000, no decimal). For example, to specify a revenue
 -- value of \"10\" enter \"10000000\" (10 million) in your request.
-cRevenueMicros :: Lens' Conversion (Maybe Int64)
+cRevenueMicros :: Lens' Conversion (Maybe Text)
 cRevenueMicros
   = lens _cRevenueMicros
       (\ s a -> s{_cRevenueMicros = a})
-      . mapping _Coerce
 
 -- | DS click ID for the conversion.
 cClickId :: Lens' Conversion (Maybe Text)
@@ -1450,7 +1446,7 @@ cInventoryAccountId
       (\ s a -> s{_cInventoryAccountId = a})
       . mapping _Coerce
 
--- | The segmentation type of this conversion (for example, FLOODLIGHT).
+-- | The segmentation type of this conversion (for example, \`FLOODLIGHT\`).
 cSegmentationType :: Lens' Conversion (Maybe Text)
 cSegmentationType
   = lens _cSegmentationType
@@ -1552,8 +1548,8 @@ instance ToJSON Conversion where
 data SavedColumn =
   SavedColumn'
     { _scSavedColumnName :: !(Maybe Text)
-    , _scKind            :: !Text
-    , _scType            :: !(Maybe Text)
+    , _scKind :: !(Maybe Text)
+    , _scType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1571,10 +1567,7 @@ savedColumn
     :: SavedColumn
 savedColumn =
   SavedColumn'
-    { _scSavedColumnName = Nothing
-    , _scKind = "doubleclicksearch#savedColumn"
-    , _scType = Nothing
-    }
+    {_scSavedColumnName = Nothing, _scKind = Nothing, _scType = Nothing}
 
 
 -- | The name of the saved column.
@@ -1585,7 +1578,7 @@ scSavedColumnName
 
 -- | Identifies this as a SavedColumn resource. Value: the fixed string
 -- doubleclicksearch#savedColumn.
-scKind :: Lens' SavedColumn Text
+scKind :: Lens' SavedColumn (Maybe Text)
 scKind = lens _scKind (\ s a -> s{_scKind = a})
 
 -- | The type of data this saved column will produce.
@@ -1597,24 +1590,23 @@ instance FromJSON SavedColumn where
           = withObject "SavedColumn"
               (\ o ->
                  SavedColumn' <$>
-                   (o .:? "savedColumnName") <*>
-                     (o .:? "kind" .!= "doubleclicksearch#savedColumn")
-                     <*> (o .:? "type"))
+                   (o .:? "savedColumnName") <*> (o .:? "kind") <*>
+                     (o .:? "type"))
 
 instance ToJSON SavedColumn where
         toJSON SavedColumn'{..}
           = object
               (catMaybes
                  [("savedColumnName" .=) <$> _scSavedColumnName,
-                  Just ("kind" .= _scKind), ("type" .=) <$> _scType])
+                  ("kind" .=) <$> _scKind, ("type" .=) <$> _scType])
 
--- | A message containing the custome dimension.
+-- | A message containing the custom dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
 data CustomDimension =
   CustomDimension'
     { _cdValue :: !(Maybe Text)
-    , _cdName  :: !(Maybe Text)
+    , _cdName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1701,13 +1693,13 @@ instance ToJSON UpdateAvailabilityResponse where
 -- /See:/ 'reportRequestReportScope' smart constructor.
 data ReportRequestReportScope =
   ReportRequestReportScope'
-    { _rrrsKeywordId       :: !(Maybe (Textual Int64))
-    , _rrrsAdGroupId       :: !(Maybe (Textual Int64))
+    { _rrrsKeywordId :: !(Maybe (Textual Int64))
+    , _rrrsAdGroupId :: !(Maybe (Textual Int64))
     , _rrrsEngineAccountId :: !(Maybe (Textual Int64))
-    , _rrrsAgencyId        :: !(Maybe (Textual Int64))
-    , _rrrsAdvertiserId    :: !(Maybe (Textual Int64))
-    , _rrrsCampaignId      :: !(Maybe (Textual Int64))
-    , _rrrsAdId            :: !(Maybe (Textual Int64))
+    , _rrrsAgencyId :: !(Maybe (Textual Int64))
+    , _rrrsAdvertiserId :: !(Maybe (Textual Int64))
+    , _rrrsCampaignId :: !(Maybe (Textual Int64))
+    , _rrrsAdId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1822,7 +1814,7 @@ instance ToJSON ReportRequestReportScope where
 -- /See:/ 'savedColumnList' smart constructor.
 data SavedColumnList =
   SavedColumnList'
-    { _sclKind  :: !Text
+    { _sclKind :: !(Maybe Text)
     , _sclItems :: !(Maybe [SavedColumn])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1837,14 +1829,12 @@ data SavedColumnList =
 -- * 'sclItems'
 savedColumnList
     :: SavedColumnList
-savedColumnList =
-  SavedColumnList'
-    {_sclKind = "doubleclicksearch#savedColumnList", _sclItems = Nothing}
+savedColumnList = SavedColumnList' {_sclKind = Nothing, _sclItems = Nothing}
 
 
 -- | Identifies this as a SavedColumnList resource. Value: the fixed string
 -- doubleclicksearch#savedColumnList.
-sclKind :: Lens' SavedColumnList Text
+sclKind :: Lens' SavedColumnList (Maybe Text)
 sclKind = lens _sclKind (\ s a -> s{_sclKind = a})
 
 -- | The saved columns being requested.
@@ -1859,13 +1849,11 @@ instance FromJSON SavedColumnList where
           = withObject "SavedColumnList"
               (\ o ->
                  SavedColumnList' <$>
-                   (o .:? "kind" .!=
-                      "doubleclicksearch#savedColumnList")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON SavedColumnList where
         toJSON SavedColumnList'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _sclKind),
+                 [("kind" .=) <$> _sclKind,
                   ("items" .=) <$> _sclItems])

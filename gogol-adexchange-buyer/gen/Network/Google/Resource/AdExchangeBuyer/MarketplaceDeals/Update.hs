@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
     , mduProposalId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.update@ method which the
 -- 'MarketplaceDealsUpdate' request conforms to.
@@ -58,7 +58,7 @@ type MarketplaceDealsUpdateResource =
 -- /See:/ 'marketplaceDealsUpdate' smart constructor.
 data MarketplaceDealsUpdate =
   MarketplaceDealsUpdate'
-    { _mduPayload    :: !EditAllOrderDealsRequest
+    { _mduPayload :: !EditAllOrderDealsRequest
     , _mduProposalId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

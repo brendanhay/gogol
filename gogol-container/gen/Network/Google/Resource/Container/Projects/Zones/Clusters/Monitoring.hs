@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Monitoring
     , pzcmzCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.monitoring@ method which the
 -- 'ProjectsZonesClustersMonitoring' request conforms to.
@@ -72,15 +72,15 @@ type ProjectsZonesClustersMonitoringResource =
 -- /See:/ 'projectsZonesClustersMonitoring' smart constructor.
 data ProjectsZonesClustersMonitoring =
   ProjectsZonesClustersMonitoring'
-    { _pzcmzXgafv          :: !(Maybe Xgafv)
+    { _pzcmzXgafv :: !(Maybe Xgafv)
     , _pzcmzUploadProtocol :: !(Maybe Text)
-    , _pzcmzAccessToken    :: !(Maybe Text)
-    , _pzcmzUploadType     :: !(Maybe Text)
-    , _pzcmzZone           :: !Text
-    , _pzcmzPayload        :: !SetMonitoringServiceRequest
-    , _pzcmzClusterId      :: !Text
-    , _pzcmzProjectId      :: !Text
-    , _pzcmzCallback       :: !(Maybe Text)
+    , _pzcmzAccessToken :: !(Maybe Text)
+    , _pzcmzUploadType :: !(Maybe Text)
+    , _pzcmzZone :: !Text
+    , _pzcmzPayload :: !SetMonitoringServiceRequest
+    , _pzcmzClusterId :: !Text
+    , _pzcmzProjectId :: !Text
+    , _pzcmzCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,8 +150,9 @@ pzcmzUploadType
       (\ s a -> s{_pzcmzUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcmzZone :: Lens' ProjectsZonesClustersMonitoring Text
 pzcmzZone
   = lens _pzcmzZone (\ s a -> s{_pzcmzZone = a})

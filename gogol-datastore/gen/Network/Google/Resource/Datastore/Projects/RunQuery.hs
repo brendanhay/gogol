@@ -42,8 +42,8 @@ module Network.Google.Resource.Datastore.Projects.RunQuery
     , prqCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.runQuery@ method which the
 -- 'ProjectsRunQuery' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsRunQueryResource =
 -- /See:/ 'projectsRunQuery' smart constructor.
 data ProjectsRunQuery =
   ProjectsRunQuery'
-    { _prqXgafv          :: !(Maybe Xgafv)
+    { _prqXgafv :: !(Maybe Xgafv)
     , _prqUploadProtocol :: !(Maybe Text)
-    , _prqAccessToken    :: !(Maybe Text)
-    , _prqUploadType     :: !(Maybe Text)
-    , _prqPayload        :: !RunQueryRequest
-    , _prqProjectId      :: !Text
-    , _prqCallback       :: !(Maybe Text)
+    , _prqAccessToken :: !(Maybe Text)
+    , _prqUploadType :: !(Maybe Text)
+    , _prqPayload :: !RunQueryRequest
+    , _prqProjectId :: !Text
+    , _prqCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,7 +136,7 @@ prqPayload :: Lens' ProjectsRunQuery RunQueryRequest
 prqPayload
   = lens _prqPayload (\ s a -> s{_prqPayload = a})
 
--- | The ID of the project against which to make the request.
+-- | Required. The ID of the project against which to make the request.
 prqProjectId :: Lens' ProjectsRunQuery Text
 prqProjectId
   = lens _prqProjectId (\ s a -> s{_prqProjectId = a})

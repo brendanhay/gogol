@@ -82,13 +82,28 @@ module Network.Google.Composer
     , lerNextPageToken
     , lerEnvironments
 
+    -- ** WebServerConfig
+    , WebServerConfig
+    , webServerConfig
+    , wscMachineType
+
+    -- ** DatabaseConfig
+    , DatabaseConfig
+    , databaseConfig
+    , dcMachineType
+
     -- ** EnvironmentConfig
     , EnvironmentConfig
     , environmentConfig
+    , ecDatabaseConfig
+    , ecWebServerConfig
     , ecNodeConfig
     , ecNodeCount
+    , ecPrivateEnvironmentConfig
+    , ecEncryptionConfig
     , ecSoftwareConfig
     , ecDagGcsPrefix
+    , ecWebServerNetworkAccessControl
     , ecGkeCluster
     , ecAirflowURI
 
@@ -105,6 +120,7 @@ module Network.Google.Composer
     , ncLocation
     , ncNetwork
     , ncOAuthScopes
+    , ncIPAllocationPolicy
     , ncServiceAccount
     , ncSubnetwork
     , ncMachineType
@@ -134,6 +150,9 @@ module Network.Google.Composer
     -- ** ImageVersion
     , ImageVersion
     , imageVersion
+    , ivUpgradeDisabled
+    , ivCreationDisabled
+    , ivReleaseDate
     , ivImageVersionId
     , ivSupportedPythonVersions
     , ivIsDefault
@@ -159,6 +178,36 @@ module Network.Google.Composer
     , statusDetailsItem
     , sdiAddtional
 
+    -- ** AllowedIPRange
+    , AllowedIPRange
+    , allowedIPRange
+    , airValue
+    , airDescription
+
+    -- ** IPAllocationPolicy
+    , IPAllocationPolicy
+    , ipAllocationPolicy
+    , iapServicesSecondaryRangeName
+    , iapUseIPAliases
+    , iapClusterSecondaryRangeName
+    , iapClusterIPv4CIdRBlock
+    , iapServicesIPv4CIdRBlock
+
+    -- ** CheckUpgradeResponseContainsPypiModulesConflict
+    , CheckUpgradeResponseContainsPypiModulesConflict (..)
+
+    -- ** Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
+
+    -- ** CheckUpgradeResponsePypiDependencies
+    , CheckUpgradeResponsePypiDependencies
+    , checkUpgradeResponsePypiDependencies
+    , curpdAddtional
+
     -- ** SoftwareConfigPypiPackages
     , SoftwareConfigPypiPackages
     , softwareConfigPypiPackages
@@ -173,6 +222,15 @@ module Network.Google.Composer
     -- ** Xgafv
     , Xgafv (..)
 
+    -- ** PrivateEnvironmentConfig
+    , PrivateEnvironmentConfig
+    , privateEnvironmentConfig
+    , pecWebServerIPv4CIdRBlock
+    , pecCloudSQLIPv4CIdRBlock
+    , pecWebServerIPv4ReservedRange
+    , pecPrivateClusterConfig
+    , pecEnablePrivateEnvironment
+
     -- ** SoftwareConfig
     , SoftwareConfig
     , softwareConfig
@@ -181,6 +239,32 @@ module Network.Google.Composer
     , scPypiPackages
     , scAirflowConfigOverrides
     , scEnvVariables
+
+    -- ** PrivateClusterConfig
+    , PrivateClusterConfig
+    , privateClusterConfig
+    , pccEnablePrivateEndpoint
+    , pccMasterIPv4CIdRBlock
+    , pccMasterIPv4ReservedRange
+
+    -- ** EncryptionConfig
+    , EncryptionConfig
+    , encryptionConfig
+    , ecKmsKeyName
+
+    -- ** CheckUpgradeResponse
+    , CheckUpgradeResponse
+    , checkUpgradeResponse
+    , curContainsPypiModulesConflict
+    , curBuildLogURI
+    , curImageVersion
+    , curPypiDependencies
+    , curPypiConflictBuildLogExtract
+
+    -- ** WebServerNetworkAccessControl
+    , WebServerNetworkAccessControl
+    , webServerNetworkAccessControl
+    , wsnacAllowedIPRanges
 
     -- ** EnvironmentLabels
     , EnvironmentLabels
@@ -203,17 +287,17 @@ module Network.Google.Composer
     , orAddtional
     ) where
 
-import           Network.Google.Composer.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Composer.Projects.Locations.Environments.Create
-import           Network.Google.Resource.Composer.Projects.Locations.Environments.Delete
-import           Network.Google.Resource.Composer.Projects.Locations.Environments.Get
-import           Network.Google.Resource.Composer.Projects.Locations.Environments.List
-import           Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
-import           Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
-import           Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
-import           Network.Google.Resource.Composer.Projects.Locations.Operations.Get
-import           Network.Google.Resource.Composer.Projects.Locations.Operations.List
+import Network.Google.Prelude
+import Network.Google.Composer.Types
+import Network.Google.Resource.Composer.Projects.Locations.Environments.Create
+import Network.Google.Resource.Composer.Projects.Locations.Environments.Delete
+import Network.Google.Resource.Composer.Projects.Locations.Environments.Get
+import Network.Google.Resource.Composer.Projects.Locations.Environments.List
+import Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
+import Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
+import Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
+import Network.Google.Resource.Composer.Projects.Locations.Operations.Get
+import Network.Google.Resource.Composer.Projects.Locations.Operations.List
 
 {- $resources
 TODO

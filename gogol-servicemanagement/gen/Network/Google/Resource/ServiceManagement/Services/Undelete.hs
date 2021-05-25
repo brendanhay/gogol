@@ -44,8 +44,8 @@ module Network.Google.Resource.ServiceManagement.Services.Undelete
     , suCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.undelete@ method which the
 -- 'ServicesUndelete' request conforms to.
@@ -68,12 +68,12 @@ type ServicesUndeleteResource =
 -- /See:/ 'servicesUndelete' smart constructor.
 data ServicesUndelete =
   ServicesUndelete'
-    { _suXgafv          :: !(Maybe Xgafv)
+    { _suXgafv :: !(Maybe Xgafv)
     , _suUploadProtocol :: !(Maybe Text)
-    , _suAccessToken    :: !(Maybe Text)
-    , _suUploadType     :: !(Maybe Text)
-    , _suServiceName    :: !Text
-    , _suCallback       :: !(Maybe Text)
+    , _suAccessToken :: !(Maybe Text)
+    , _suUploadType :: !(Maybe Text)
+    , _suServiceName :: !Text
+    , _suCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,7 +128,7 @@ suUploadType :: Lens' ServicesUndelete (Maybe Text)
 suUploadType
   = lens _suUploadType (\ s a -> s{_suUploadType = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 suServiceName :: Lens' ServicesUndelete Text

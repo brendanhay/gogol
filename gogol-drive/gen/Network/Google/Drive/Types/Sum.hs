@@ -16,7 +16,7 @@
 --
 module Network.Google.Drive.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The source of files to list. Deprecated: use \'corpora\' instead.
 data FilesListCorpus
@@ -25,7 +25,9 @@ data FilesListCorpus
       -- Files shared to the user\'s domain.
     | FLCUser
       -- ^ @user@
-      -- Files owned by or shared to the user.
+      -- Files owned by or shared to the user. If a user has permissions on a
+      -- Shared Drive, the files inside it won\'t be retrieved unless the user
+      -- has created, opened, or shared the file.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListCorpus

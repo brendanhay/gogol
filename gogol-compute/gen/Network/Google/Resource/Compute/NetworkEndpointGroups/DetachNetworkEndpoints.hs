@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.NetworkEndpointGroups.DetachNetworkEndpoi
     , negdneNetworkEndpointGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networkEndpointGroups.detachNetworkEndpoints@ method which the
 -- 'NetworkEndpointGroupsDetachNetworkEndpoints' request conforms to.
@@ -69,10 +69,10 @@ type NetworkEndpointGroupsDetachNetworkEndpointsResource
 -- /See:/ 'networkEndpointGroupsDetachNetworkEndpoints' smart constructor.
 data NetworkEndpointGroupsDetachNetworkEndpoints =
   NetworkEndpointGroupsDetachNetworkEndpoints'
-    { _negdneRequestId            :: !(Maybe Text)
-    , _negdneProject              :: !Text
-    , _negdneZone                 :: !Text
-    , _negdnePayload              :: !NetworkEndpointGroupsDetachEndpointsRequest
+    { _negdneRequestId :: !(Maybe Text)
+    , _negdneProject :: !Text
+    , _negdneZone :: !Text
+    , _negdnePayload :: !NetworkEndpointGroupsDetachEndpointsRequest
     , _negdneNetworkEndpointGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

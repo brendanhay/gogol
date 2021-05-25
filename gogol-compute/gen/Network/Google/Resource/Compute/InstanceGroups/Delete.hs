@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.InstanceGroups.Delete
     , igdInstanceGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.delete@ method which the
 -- 'InstanceGroupsDelete' request conforms to.
@@ -65,9 +65,9 @@ type InstanceGroupsDeleteResource =
 -- /See:/ 'instanceGroupsDelete' smart constructor.
 data InstanceGroupsDelete =
   InstanceGroupsDelete'
-    { _igdRequestId     :: !(Maybe Text)
-    , _igdProject       :: !Text
-    , _igdZone          :: !Text
+    { _igdRequestId :: !(Maybe Text)
+    , _igdProject :: !Text
+    , _igdZone :: !Text
     , _igdInstanceGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

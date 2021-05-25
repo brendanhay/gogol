@@ -41,8 +41,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.Delete
     , prdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.delete@ method which the
 -- 'ProjectsReposDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsReposDeleteResource =
 -- /See:/ 'projectsReposDelete' smart constructor.
 data ProjectsReposDelete =
   ProjectsReposDelete'
-    { _prdXgafv          :: !(Maybe Xgafv)
+    { _prdXgafv :: !(Maybe Xgafv)
     , _prdUploadProtocol :: !(Maybe Text)
-    , _prdAccessToken    :: !(Maybe Text)
-    , _prdUploadType     :: !(Maybe Text)
-    , _prdName           :: !Text
-    , _prdCallback       :: !(Maybe Text)
+    , _prdAccessToken :: !(Maybe Text)
+    , _prdUploadType :: !(Maybe Text)
+    , _prdName :: !Text
+    , _prdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

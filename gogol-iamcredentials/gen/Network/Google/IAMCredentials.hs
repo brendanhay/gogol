@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates short-lived, limited-privilege credentials for IAM service
--- accounts.
+-- Creates short-lived credentials for impersonating IAM service accounts.
+-- To enable this API, you must enable the IAM API (iam.googleapis.com).
 --
 -- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference>
 module Network.Google.IAMCredentials
@@ -35,9 +35,6 @@ module Network.Google.IAMCredentials
 
     -- ** iamcredentials.projects.serviceAccounts.generateIdToken
     , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
-
-    -- ** iamcredentials.projects.serviceAccounts.generateIdentityBindingAccessToken
-    , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdentityBindingAccessToken
 
     -- ** iamcredentials.projects.serviceAccounts.signBlob
     , module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignBlob
@@ -75,24 +72,12 @@ module Network.Google.IAMCredentials
     -- ** Xgafv
     , Xgafv (..)
 
-    -- ** GenerateIdentityBindingAccessTokenRequest
-    , GenerateIdentityBindingAccessTokenRequest
-    , generateIdentityBindingAccessTokenRequest
-    , gibatrJwt
-    , gibatrScope
-
     -- ** GenerateAccessTokenRequest
     , GenerateAccessTokenRequest
     , generateAccessTokenRequest
     , gatrDelegates
     , gatrLifetime
     , gatrScope
-
-    -- ** GenerateIdentityBindingAccessTokenResponse
-    , GenerateIdentityBindingAccessTokenResponse
-    , generateIdentityBindingAccessTokenResponse
-    , gibatrAccessToken
-    , gibatrExpireTime
 
     -- ** SignJwtRequest
     , SignJwtRequest
@@ -112,13 +97,12 @@ module Network.Google.IAMCredentials
     , gitrToken
     ) where
 
-import           Network.Google.IAMCredentials.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
-import           Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdentityBindingAccessToken
-import           Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
-import           Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignBlob
-import           Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignJwt
+import Network.Google.Prelude
+import Network.Google.IAMCredentials.Types
+import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
+import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignBlob
+import Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.SignJwt
 
 {- $resources
 TODO
@@ -130,5 +114,3 @@ type IAMCredentialsAPI =
        :<|> ProjectsServiceAccountsSignJwtResource
        :<|> ProjectsServiceAccountsGenerateIdTokenResource
        :<|> ProjectsServiceAccountsSignBlobResource
-       :<|>
-       ProjectsServiceAccountsGenerateIdentityBindingAccessTokenResource

@@ -17,12 +17,12 @@
 --
 module Network.Google.DataFusion.Types.Product where
 
-import           Network.Google.DataFusion.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types.Sum
+import Network.Google.Prelude
 
 -- | The resource labels for instance to use to annotate any related
--- underlying resources such as GCE VMs. The character \'=\' is not allowed
--- to be used within the labels.
+-- underlying resources such as Compute Engine VMs. The character \'=\' is
+-- not allowed to be used within the labels.
 --
 -- /See:/ 'instanceLabels' smart constructor.
 newtype InstanceLabels =
@@ -59,45 +59,17 @@ instance ToJSON InstanceLabels where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -192,66 +164,6 @@ instance FromJSON OperationSchema where
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
 
--- | Increment a streamz counter with the specified metric and field names.
--- Metric names should start with a \'\/\', generally be lowercase-only,
--- and end in \"_count\". Field names should not contain an initial slash.
--- The actual exported metric names will have \"\/iam\/policy\" prepended.
--- Field names correspond to IAM request parameters and field values are
--- their respective values. Supported field names: - \"authority\", which
--- is \"[token]\" if IAMContext.token is present, otherwise the value of
--- IAMContext.authority_selector if present, and otherwise a representation
--- of IAMContext.principal; or - \"iam_principal\", a representation of
--- IAMContext.principal even if a token or authority selector is present;
--- or - \"\" (empty string), resulting in a counter with no fields.
--- Examples: counter { metric: \"\/debug_access_count\" field:
--- \"iam_principal\" } ==> increment counter
--- \/iam\/policy\/backend_debug_access_count {iam_principal=[value of
--- IAMContext.principal]} At this time we do not support multiple field
--- names (though this may be supported in the future).
---
--- /See:/ 'counterOptions' smart constructor.
-data CounterOptions =
-  CounterOptions'
-    { _coField  :: !(Maybe Text)
-    , _coMetric :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CounterOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'coField'
---
--- * 'coMetric'
-counterOptions
-    :: CounterOptions
-counterOptions = CounterOptions' {_coField = Nothing, _coMetric = Nothing}
-
-
--- | The field value to attribute.
-coField :: Lens' CounterOptions (Maybe Text)
-coField = lens _coField (\ s a -> s{_coField = a})
-
--- | The metric to update.
-coMetric :: Lens' CounterOptions (Maybe Text)
-coMetric = lens _coMetric (\ s a -> s{_coMetric = a})
-
-instance FromJSON CounterOptions where
-        parseJSON
-          = withObject "CounterOptions"
-              (\ o ->
-                 CounterOptions' <$>
-                   (o .:? "field") <*> (o .:? "metric"))
-
-instance ToJSON CounterOptions where
-        toJSON CounterOptions'{..}
-          = object
-              (catMaybes
-                 [("field" .=) <$> _coField,
-                  ("metric" .=) <$> _coMetric])
-
 -- | Specifies the audit configuration for a service. The configuration
 -- determines which permission types are logged, and what identities, if
 -- any, are exempted from logging. An AuditConfig must have one or more
@@ -260,22 +172,21 @@ instance ToJSON CounterOptions where
 -- service: the log_types specified in each AuditConfig are enabled, and
 -- the exempted_members in each AuditLogConfig are exempted. Example Policy
 -- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
--- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
--- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
--- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
--- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
--- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
--- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
--- DATA_WRITE logging.
+-- \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\":
+-- \"sampleservice.googleapis.com\", \"audit_log_configs\": [ {
+-- \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\",
+-- \"exempted_members\": [ \"user:aliya\'example.com\" ] } ] } ] } For
+-- sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+-- logging. It also exempts jose\'example.com from DATA_READ logging, and
+-- aliya\'example.com from DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig =
   AuditConfig'
-    { _acService         :: !(Maybe Text)
+    { _acService :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    , _acExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -287,16 +198,9 @@ data AuditConfig =
 -- * 'acService'
 --
 -- * 'acAuditLogConfigs'
---
--- * 'acExemptedMembers'
 auditConfig
     :: AuditConfig
-auditConfig =
-  AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    , _acExemptedMembers = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
 
 
 -- | Specifies a service that will be enabled for audit logging. For example,
@@ -314,40 +218,45 @@ acAuditLogConfigs
       . _Default
       . _Coerce
 
-acExemptedMembers :: Lens' AuditConfig [Text]
-acExemptedMembers
-  = lens _acExemptedMembers
-      (\ s a -> s{_acExemptedMembers = a})
-      . _Default
-      . _Coerce
-
 instance FromJSON AuditConfig where
         parseJSON
           = withObject "AuditConfig"
               (\ o ->
                  AuditConfig' <$>
                    (o .:? "service") <*>
-                     (o .:? "auditLogConfigs" .!= mempty)
-                     <*> (o .:? "exemptedMembers" .!= mempty))
+                     (o .:? "auditLogConfigs" .!= mempty))
 
 instance ToJSON AuditConfig where
         toJSON AuditConfig'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _acService,
-                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs,
-                  ("exemptedMembers" .=) <$> _acExemptedMembers])
+                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -375,26 +284,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -424,7 +332,7 @@ instance ToJSON Expr where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -476,7 +384,7 @@ instance ToJSON ListLocationsResponse where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -552,11 +460,11 @@ instance ToJSON CancelOperationRequest where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -639,10 +547,10 @@ instance ToJSON Location where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -697,7 +605,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -788,125 +697,45 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | A rule to be applied in a Policy.
+-- | The crypto key configuration. This field is used by the Customer-managed
+-- encryption keys (CMEK) feature.
 --
--- /See:/ 'rule' smart constructor.
-data Rule =
-  Rule'
-    { _rAction      :: !(Maybe RuleAction)
-    , _rIn          :: !(Maybe [Text])
-    , _rNotIn       :: !(Maybe [Text])
-    , _rConditions  :: !(Maybe [Condition])
-    , _rPermissions :: !(Maybe [Text])
-    , _rLogConfig   :: !(Maybe [LogConfig])
-    , _rDescription :: !(Maybe Text)
+-- /See:/ 'cryptoKeyConfig' smart constructor.
+newtype CryptoKeyConfig =
+  CryptoKeyConfig'
+    { _ckcKeyReference :: Maybe Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'Rule' with the minimum fields required to make a request.
+-- | Creates a value of 'CryptoKeyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rAction'
---
--- * 'rIn'
---
--- * 'rNotIn'
---
--- * 'rConditions'
---
--- * 'rPermissions'
---
--- * 'rLogConfig'
---
--- * 'rDescription'
-rule
-    :: Rule
-rule =
-  Rule'
-    { _rAction = Nothing
-    , _rIn = Nothing
-    , _rNotIn = Nothing
-    , _rConditions = Nothing
-    , _rPermissions = Nothing
-    , _rLogConfig = Nothing
-    , _rDescription = Nothing
-    }
+-- * 'ckcKeyReference'
+cryptoKeyConfig
+    :: CryptoKeyConfig
+cryptoKeyConfig = CryptoKeyConfig' {_ckcKeyReference = Nothing}
 
 
--- | Required
-rAction :: Lens' Rule (Maybe RuleAction)
-rAction = lens _rAction (\ s a -> s{_rAction = a})
+-- | The name of the key which is used to encrypt\/decrypt customer data. For
+-- key in Cloud KMS, the key should be in the format of
+-- \`projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*\`.
+ckcKeyReference :: Lens' CryptoKeyConfig (Maybe Text)
+ckcKeyReference
+  = lens _ckcKeyReference
+      (\ s a -> s{_ckcKeyReference = a})
 
--- | If one or more \'in\' clauses are specified, the rule matches if the
--- PRINCIPAL\/AUTHORITY_SELECTOR is in at least one of these entries.
-rIn :: Lens' Rule [Text]
-rIn
-  = lens _rIn (\ s a -> s{_rIn = a}) . _Default .
-      _Coerce
-
--- | If one or more \'not_in\' clauses are specified, the rule matches if the
--- PRINCIPAL\/AUTHORITY_SELECTOR is in none of the entries. The format for
--- in and not_in entries can be found at in the Local IAM documentation
--- (see go\/local-iam#features).
-rNotIn :: Lens' Rule [Text]
-rNotIn
-  = lens _rNotIn (\ s a -> s{_rNotIn = a}) . _Default .
-      _Coerce
-
--- | Additional restrictions that must be met. All conditions must pass for
--- the rule to match.
-rConditions :: Lens' Rule [Condition]
-rConditions
-  = lens _rConditions (\ s a -> s{_rConditions = a}) .
-      _Default
-      . _Coerce
-
--- | A permission is a string of form \'..\' (e.g.,
--- \'storage.buckets.list\'). A value of \'*\' matches all permissions, and
--- a verb part of \'*\' (e.g., \'storage.buckets.*\') matches all verbs.
-rPermissions :: Lens' Rule [Text]
-rPermissions
-  = lens _rPermissions (\ s a -> s{_rPermissions = a})
-      . _Default
-      . _Coerce
-
--- | The config returned to callers of tech.iam.IAM.CheckPolicy for any
--- entries that match the LOG action.
-rLogConfig :: Lens' Rule [LogConfig]
-rLogConfig
-  = lens _rLogConfig (\ s a -> s{_rLogConfig = a}) .
-      _Default
-      . _Coerce
-
--- | Human-readable description of the rule.
-rDescription :: Lens' Rule (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
-
-instance FromJSON Rule where
+instance FromJSON CryptoKeyConfig where
         parseJSON
-          = withObject "Rule"
-              (\ o ->
-                 Rule' <$>
-                   (o .:? "action") <*> (o .:? "in" .!= mempty) <*>
-                     (o .:? "notIn" .!= mempty)
-                     <*> (o .:? "conditions" .!= mempty)
-                     <*> (o .:? "permissions" .!= mempty)
-                     <*> (o .:? "logConfig" .!= mempty)
-                     <*> (o .:? "description"))
+          = withObject "CryptoKeyConfig"
+              (\ o -> CryptoKeyConfig' <$> (o .:? "keyReference"))
 
-instance ToJSON Rule where
-        toJSON Rule'{..}
+instance ToJSON CryptoKeyConfig where
+        toJSON CryptoKeyConfig'{..}
           = object
               (catMaybes
-                 [("action" .=) <$> _rAction, ("in" .=) <$> _rIn,
-                  ("notIn" .=) <$> _rNotIn,
-                  ("conditions" .=) <$> _rConditions,
-                  ("permissions" .=) <$> _rPermissions,
-                  ("logConfig" .=) <$> _rLogConfig,
-                  ("description" .=) <$> _rDescription])
+                 [("keyReference" .=) <$> _ckcKeyReference])
 
 -- | Request message for \`SetIamPolicy\` method.
 --
@@ -914,7 +743,7 @@ instance ToJSON Rule where
 data SetIAMPolicyRequest =
   SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
-    , _siprPolicy     :: !(Maybe Policy)
+    , _siprPolicy :: !(Maybe Policy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -934,8 +763,7 @@ setIAMPolicyRequest =
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
--- the following default mask is used: paths: \"bindings, etag\" This field
--- is only used by Cloud IAM.
+-- the following default mask is used: \`paths: \"bindings, etag\"\`
 siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe GFieldMask)
 siprUpdateMask
   = lens _siprUpdateMask
@@ -974,7 +802,7 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'networkConfig' smart constructor.
 data NetworkConfig =
   NetworkConfig'
-    { _ncNetwork      :: !(Maybe Text)
+    { _ncNetwork :: !(Maybe Text)
     , _ncIPAllocation :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -993,14 +821,17 @@ networkConfig = NetworkConfig' {_ncNetwork = Nothing, _ncIPAllocation = Nothing}
 
 
 -- | Name of the network in the customer project with which the Tenant
--- Project will be peered for executing pipelines.
+-- Project will be peered for executing pipelines. In case of shared VPC
+-- where the network resides in another host project the network should
+-- specified in the form of
+-- projects\/{host-project-id}\/global\/networks\/{network}
 ncNetwork :: Lens' NetworkConfig (Maybe Text)
 ncNetwork
   = lens _ncNetwork (\ s a -> s{_ncNetwork = a})
 
 -- | The IP range in CIDR notation to use for the managed Data Fusion
 -- instance nodes. This range must not overlap with any other ranges used
--- in the Data Fusion instance network.
+-- in the customer network.
 ncIPAllocation :: Lens' NetworkConfig (Maybe Text)
 ncIPAllocation
   = lens _ncIPAllocation
@@ -1020,92 +851,52 @@ instance ToJSON NetworkConfig where
                  [("network" .=) <$> _ncNetwork,
                   ("ipAllocation" .=) <$> _ncIPAllocation])
 
--- | Write a Cloud Audit log
+-- | Identifies Data Fusion accelerators for an instance.
 --
--- /See:/ 'cloudAuditOptions' smart constructor.
-data CloudAuditOptions =
-  CloudAuditOptions'
-    { _caoAuthorizationLoggingOptions :: !(Maybe AuthorizationLoggingOptions)
-    , _caoLogName                     :: !(Maybe CloudAuditOptionsLogName)
+-- /See:/ 'accelerator' smart constructor.
+data Accelerator =
+  Accelerator'
+    { _aAcceleratorType :: !(Maybe AcceleratorAcceleratorType)
+    , _aState :: !(Maybe AcceleratorState)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'CloudAuditOptions' with the minimum fields required to make a request.
+-- | Creates a value of 'Accelerator' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'caoAuthorizationLoggingOptions'
+-- * 'aAcceleratorType'
 --
--- * 'caoLogName'
-cloudAuditOptions
-    :: CloudAuditOptions
-cloudAuditOptions =
-  CloudAuditOptions'
-    {_caoAuthorizationLoggingOptions = Nothing, _caoLogName = Nothing}
+-- * 'aState'
+accelerator
+    :: Accelerator
+accelerator = Accelerator' {_aAcceleratorType = Nothing, _aState = Nothing}
 
 
--- | Information used by the Cloud Audit Logging pipeline.
-caoAuthorizationLoggingOptions :: Lens' CloudAuditOptions (Maybe AuthorizationLoggingOptions)
-caoAuthorizationLoggingOptions
-  = lens _caoAuthorizationLoggingOptions
-      (\ s a -> s{_caoAuthorizationLoggingOptions = a})
+-- | The type of an accelator for a CDF instance.
+aAcceleratorType :: Lens' Accelerator (Maybe AcceleratorAcceleratorType)
+aAcceleratorType
+  = lens _aAcceleratorType
+      (\ s a -> s{_aAcceleratorType = a})
 
--- | The log_name to populate in the Cloud Audit Record.
-caoLogName :: Lens' CloudAuditOptions (Maybe CloudAuditOptionsLogName)
-caoLogName
-  = lens _caoLogName (\ s a -> s{_caoLogName = a})
+-- | The state of the accelerator
+aState :: Lens' Accelerator (Maybe AcceleratorState)
+aState = lens _aState (\ s a -> s{_aState = a})
 
-instance FromJSON CloudAuditOptions where
+instance FromJSON Accelerator where
         parseJSON
-          = withObject "CloudAuditOptions"
+          = withObject "Accelerator"
               (\ o ->
-                 CloudAuditOptions' <$>
-                   (o .:? "authorizationLoggingOptions") <*>
-                     (o .:? "logName"))
+                 Accelerator' <$>
+                   (o .:? "acceleratorType") <*> (o .:? "state"))
 
-instance ToJSON CloudAuditOptions where
-        toJSON CloudAuditOptions'{..}
+instance ToJSON Accelerator where
+        toJSON Accelerator'{..}
           = object
               (catMaybes
-                 [("authorizationLoggingOptions" .=) <$>
-                    _caoAuthorizationLoggingOptions,
-                  ("logName" .=) <$> _caoLogName])
-
--- | Write a Data Access (Gin) log
---
--- /See:/ 'dataAccessOptions' smart constructor.
-newtype DataAccessOptions =
-  DataAccessOptions'
-    { _daoLogMode :: Maybe DataAccessOptionsLogMode
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'DataAccessOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'daoLogMode'
-dataAccessOptions
-    :: DataAccessOptions
-dataAccessOptions = DataAccessOptions' {_daoLogMode = Nothing}
-
-
--- | Whether Gin logging should happen in a fail-closed manner at the caller.
--- This is relevant only in the LocalIAM implementation, for now.
-daoLogMode :: Lens' DataAccessOptions (Maybe DataAccessOptionsLogMode)
-daoLogMode
-  = lens _daoLogMode (\ s a -> s{_daoLogMode = a})
-
-instance FromJSON DataAccessOptions where
-        parseJSON
-          = withObject "DataAccessOptions"
-              (\ o -> DataAccessOptions' <$> (o .:? "logMode"))
-
-instance ToJSON DataAccessOptions where
-        toJSON DataAccessOptions'{..}
-          = object (catMaybes [("logMode" .=) <$> _daoLogMode])
+                 [("acceleratorType" .=) <$> _aAcceleratorType,
+                  ("state" .=) <$> _aState])
 
 -- | Request message for restarting a Data Fusion instance.
 --
@@ -1129,6 +920,75 @@ instance FromJSON RestartInstanceRequest where
 
 instance ToJSON RestartInstanceRequest where
         toJSON = const emptyObject
+
+-- | The Data Fusion version. This proto message stores information about
+-- certain Data Fusion version, which is used for Data Fusion version
+-- upgrade.
+--
+-- /See:/ 'version' smart constructor.
+data Version =
+  Version'
+    { _vDefaultVersion :: !(Maybe Bool)
+    , _vVersionNumber :: !(Maybe Text)
+    , _vAvailableFeatures :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Version' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vDefaultVersion'
+--
+-- * 'vVersionNumber'
+--
+-- * 'vAvailableFeatures'
+version
+    :: Version
+version =
+  Version'
+    { _vDefaultVersion = Nothing
+    , _vVersionNumber = Nothing
+    , _vAvailableFeatures = Nothing
+    }
+
+
+-- | Whether this is currently the default version for Cloud Data Fusion
+vDefaultVersion :: Lens' Version (Maybe Bool)
+vDefaultVersion
+  = lens _vDefaultVersion
+      (\ s a -> s{_vDefaultVersion = a})
+
+-- | The version number of the Data Fusion instance, such as \'6.0.1.0\'.
+vVersionNumber :: Lens' Version (Maybe Text)
+vVersionNumber
+  = lens _vVersionNumber
+      (\ s a -> s{_vVersionNumber = a})
+
+-- | Represents a list of available feature names for a given version.
+vAvailableFeatures :: Lens' Version [Text]
+vAvailableFeatures
+  = lens _vAvailableFeatures
+      (\ s a -> s{_vAvailableFeatures = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON Version where
+        parseJSON
+          = withObject "Version"
+              (\ o ->
+                 Version' <$>
+                   (o .:? "defaultVersion") <*> (o .:? "versionNumber")
+                     <*> (o .:? "availableFeatures" .!= mempty))
+
+instance ToJSON Version where
+        toJSON Version'{..}
+          = object
+              (catMaybes
+                 [("defaultVersion" .=) <$> _vDefaultVersion,
+                  ("versionNumber" .=) <$> _vVersionNumber,
+                  ("availableFeatures" .=) <$> _vAvailableFeatures])
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -1174,6 +1034,50 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
+-- | Map to hold any additional status info for the operation If there is an
+-- accelerator being enabled\/disabled\/deleted, this will be populated
+-- with accelerator name as key and status as ENABLING, DISABLING or
+-- DELETING
+--
+-- /See:/ 'operationMetadataAdditionalStatus' smart constructor.
+newtype OperationMetadataAdditionalStatus =
+  OperationMetadataAdditionalStatus'
+    { _omasAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationMetadataAdditionalStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omasAddtional'
+operationMetadataAdditionalStatus
+    :: HashMap Text Text -- ^ 'omasAddtional'
+    -> OperationMetadataAdditionalStatus
+operationMetadataAdditionalStatus pOmasAddtional_ =
+  OperationMetadataAdditionalStatus'
+    {_omasAddtional = _Coerce # pOmasAddtional_}
+
+
+omasAddtional :: Lens' OperationMetadataAdditionalStatus (HashMap Text Text)
+omasAddtional
+  = lens _omasAddtional
+      (\ s a -> s{_omasAddtional = a})
+      . _Coerce
+
+instance FromJSON OperationMetadataAdditionalStatus
+         where
+        parseJSON
+          = withObject "OperationMetadataAdditionalStatus"
+              (\ o ->
+                 OperationMetadataAdditionalStatus' <$>
+                   (parseJSONObject o))
+
+instance ToJSON OperationMetadataAdditionalStatus
+         where
+        toJSON = toJSON . _omasAddtional
+
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
@@ -1217,97 +1121,48 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | Request message for upgrading a Data Fusion instance. To change the
--- instance properties, instance update should be used.
---
--- /See:/ 'upgradeInstanceRequest' smart constructor.
-data UpgradeInstanceRequest =
-  UpgradeInstanceRequest'
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'UpgradeInstanceRequest' with the minimum fields required to make a request.
---
-upgradeInstanceRequest
-    :: UpgradeInstanceRequest
-upgradeInstanceRequest = UpgradeInstanceRequest'
-
-
-instance FromJSON UpgradeInstanceRequest where
-        parseJSON
-          = withObject "UpgradeInstanceRequest"
-              (\ o -> pure UpgradeInstanceRequest')
-
-instance ToJSON UpgradeInstanceRequest where
-        toJSON = const emptyObject
-
--- | Authorization-related information used by Cloud Audit Logging.
---
--- /See:/ 'authorizationLoggingOptions' smart constructor.
-newtype AuthorizationLoggingOptions =
-  AuthorizationLoggingOptions'
-    { _aloPermissionType :: Maybe AuthorizationLoggingOptionsPermissionType
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aloPermissionType'
-authorizationLoggingOptions
-    :: AuthorizationLoggingOptions
-authorizationLoggingOptions =
-  AuthorizationLoggingOptions' {_aloPermissionType = Nothing}
-
-
--- | The type of the permission that was checked.
-aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe AuthorizationLoggingOptionsPermissionType)
-aloPermissionType
-  = lens _aloPermissionType
-      (\ s a -> s{_aloPermissionType = a})
-
-instance FromJSON AuthorizationLoggingOptions where
-        parseJSON
-          = withObject "AuthorizationLoggingOptions"
-              (\ o ->
-                 AuthorizationLoggingOptions' <$>
-                   (o .:? "permissionType"))
-
-instance ToJSON AuthorizationLoggingOptions where
-        toJSON AuthorizationLoggingOptions'{..}
-          = object
-              (catMaybes
-                 [("permissionType" .=) <$> _aloPermissionType])
-
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Bytes)
-    , _pRules        :: !(Maybe [Rule])
-    , _pVersion      :: !(Maybe (Textual Int32))
-    , _pBindings     :: !(Maybe [Binding])
-    , _pIAMOwned     :: !(Maybe Bool)
+    , _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1320,23 +1175,17 @@ data Policy =
 --
 -- * 'pEtag'
 --
--- * 'pRules'
---
 -- * 'pVersion'
 --
 -- * 'pBindings'
---
--- * 'pIAMOwned'
 policy
     :: Policy
 policy =
   Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
-    , _pRules = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
-    , _pIAMOwned = Nothing
     }
 
 
@@ -1355,42 +1204,45 @@ pAuditConfigs
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | If more than one rule is specified, the rules are applied in the
--- following manner: - All matching LOG rules are always applied. - If any
--- DENY\/DENY_WITH_LOG rule matches, permission is denied. Logging will be
--- applied if one or more matching rule requires logging. - Otherwise, if
--- any ALLOW\/ALLOW_WITH_LOG rule matches, permission is granted. Logging
--- will be applied if one or more matching rule requires logging. -
--- Otherwise, if no rule applies, permission is denied.
-pRules :: Lens' Policy [Rule]
-pRules
-  = lens _pRules (\ s a -> s{_pRules = a}) . _Default .
-      _Coerce
-
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
       _Default
       . _Coerce
-
-pIAMOwned :: Lens' Policy (Maybe Bool)
-pIAMOwned
-  = lens _pIAMOwned (\ s a -> s{_pIAMOwned = a})
 
 instance FromJSON Policy where
         parseJSON
@@ -1398,20 +1250,16 @@ instance FromJSON Policy where
               (\ o ->
                  Policy' <$>
                    (o .:? "auditConfigs" .!= mempty) <*> (o .:? "etag")
-                     <*> (o .:? "rules" .!= mempty)
                      <*> (o .:? "version")
-                     <*> (o .:? "bindings" .!= mempty)
-                     <*> (o .:? "iamOwned"))
+                     <*> (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
         toJSON Policy'{..}
           = object
               (catMaybes
                  [("auditConfigs" .=) <$> _pAuditConfigs,
-                  ("etag" .=) <$> _pEtag, ("rules" .=) <$> _pRules,
-                  ("version" .=) <$> _pVersion,
-                  ("bindings" .=) <$> _pBindings,
-                  ("iamOwned" .=) <$> _pIAMOwned])
+                  ("etag" .=) <$> _pEtag, ("version" .=) <$> _pVersion,
+                  ("bindings" .=) <$> _pBindings])
 
 -- | Cross-service attributes for the location. For example
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
@@ -1491,13 +1339,14 @@ instance ToJSON LocationMetadata where
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata =
   OperationMetadata'
-    { _omAPIVersion            :: !(Maybe Text)
+    { _omAPIVersion :: !(Maybe Text)
+    , _omAdditionalStatus :: !(Maybe OperationMetadataAdditionalStatus)
     , _omRequestedCancellation :: !(Maybe Bool)
-    , _omEndTime               :: !(Maybe DateTime')
-    , _omStatusDetail          :: !(Maybe Text)
-    , _omVerb                  :: !(Maybe Text)
-    , _omTarget                :: !(Maybe Text)
-    , _omCreateTime            :: !(Maybe DateTime')
+    , _omEndTime :: !(Maybe DateTime')
+    , _omStatusDetail :: !(Maybe Text)
+    , _omVerb :: !(Maybe Text)
+    , _omTarget :: !(Maybe Text)
+    , _omCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1507,6 +1356,8 @@ data OperationMetadata =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'omAPIVersion'
+--
+-- * 'omAdditionalStatus'
 --
 -- * 'omRequestedCancellation'
 --
@@ -1524,6 +1375,7 @@ operationMetadata
 operationMetadata =
   OperationMetadata'
     { _omAPIVersion = Nothing
+    , _omAdditionalStatus = Nothing
     , _omRequestedCancellation = Nothing
     , _omEndTime = Nothing
     , _omStatusDetail = Nothing
@@ -1537,6 +1389,15 @@ operationMetadata =
 omAPIVersion :: Lens' OperationMetadata (Maybe Text)
 omAPIVersion
   = lens _omAPIVersion (\ s a -> s{_omAPIVersion = a})
+
+-- | Map to hold any additional status info for the operation If there is an
+-- accelerator being enabled\/disabled\/deleted, this will be populated
+-- with accelerator name as key and status as ENABLING, DISABLING or
+-- DELETING
+omAdditionalStatus :: Lens' OperationMetadata (Maybe OperationMetadataAdditionalStatus)
+omAdditionalStatus
+  = lens _omAdditionalStatus
+      (\ s a -> s{_omAdditionalStatus = a})
 
 -- | Identifies whether the user has requested cancellation of the operation.
 -- Operations that have successfully been cancelled have Operation.error
@@ -1578,8 +1439,8 @@ instance FromJSON OperationMetadata where
           = withObject "OperationMetadata"
               (\ o ->
                  OperationMetadata' <$>
-                   (o .:? "apiVersion") <*>
-                     (o .:? "requestedCancellation")
+                   (o .:? "apiVersion") <*> (o .:? "additionalStatus")
+                     <*> (o .:? "requestedCancellation")
                      <*> (o .:? "endTime")
                      <*> (o .:? "statusDetail")
                      <*> (o .:? "verb")
@@ -1591,6 +1452,7 @@ instance ToJSON OperationMetadata where
           = object
               (catMaybes
                  [("apiVersion" .=) <$> _omAPIVersion,
+                  ("additionalStatus" .=) <$> _omAdditionalStatus,
                   ("requestedCancellation" .=) <$>
                     _omRequestedCancellation,
                   ("endTime" .=) <$> _omEndTime,
@@ -1600,14 +1462,14 @@ instance ToJSON OperationMetadata where
 
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
--- logging, while exempting foo\'gmail.com from DATA_READ logging.
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting jose\'example.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
 data AuditLogConfig =
   AuditLogConfig'
-    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    { _alcLogType :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1661,8 +1523,8 @@ instance ToJSON AuditLogConfig where
 data ListInstancesResponse =
   ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
-    , _lirUnreachable   :: !(Maybe [Text])
-    , _lirInstances     :: !(Maybe [Instance])
+    , _lirUnreachable :: !(Maybe [Text])
+    , _lirInstances :: !(Maybe [Instance])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1725,86 +1587,6 @@ instance ToJSON ListInstancesResponse where
                   ("unreachable" .=) <$> _lirUnreachable,
                   ("instances" .=) <$> _lirInstances])
 
--- | A condition to be met.
---
--- /See:/ 'condition' smart constructor.
-data Condition =
-  Condition'
-    { _cOp     :: !(Maybe ConditionOp)
-    , _cIAM    :: !(Maybe ConditionIAM)
-    , _cValues :: !(Maybe [Text])
-    , _cSys    :: !(Maybe ConditionSys)
-    , _cSvc    :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Condition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cOp'
---
--- * 'cIAM'
---
--- * 'cValues'
---
--- * 'cSys'
---
--- * 'cSvc'
-condition
-    :: Condition
-condition =
-  Condition'
-    { _cOp = Nothing
-    , _cIAM = Nothing
-    , _cValues = Nothing
-    , _cSys = Nothing
-    , _cSvc = Nothing
-    }
-
-
--- | An operator to apply the subject with.
-cOp :: Lens' Condition (Maybe ConditionOp)
-cOp = lens _cOp (\ s a -> s{_cOp = a})
-
--- | Trusted attributes supplied by the IAM system.
-cIAM :: Lens' Condition (Maybe ConditionIAM)
-cIAM = lens _cIAM (\ s a -> s{_cIAM = a})
-
--- | The objects of the condition.
-cValues :: Lens' Condition [Text]
-cValues
-  = lens _cValues (\ s a -> s{_cValues = a}) . _Default
-      . _Coerce
-
--- | Trusted attributes supplied by any service that owns resources and uses
--- the IAM system for access control.
-cSys :: Lens' Condition (Maybe ConditionSys)
-cSys = lens _cSys (\ s a -> s{_cSys = a})
-
--- | Trusted attributes discharged by the service.
-cSvc :: Lens' Condition (Maybe Text)
-cSvc = lens _cSvc (\ s a -> s{_cSvc = a})
-
-instance FromJSON Condition where
-        parseJSON
-          = withObject "Condition"
-              (\ o ->
-                 Condition' <$>
-                   (o .:? "op") <*> (o .:? "iam") <*>
-                     (o .:? "values" .!= mempty)
-                     <*> (o .:? "sys")
-                     <*> (o .:? "svc"))
-
-instance ToJSON Condition where
-        toJSON Condition'{..}
-          = object
-              (catMaybes
-                 [("op" .=) <$> _cOp, ("iam" .=) <$> _cIAM,
-                  ("values" .=) <$> _cValues, ("sys" .=) <$> _cSys,
-                  ("svc" .=) <$> _cSvc])
-
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
 -- \`google.protobuf.Empty\`. If the original method is standard
@@ -1848,65 +1630,6 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | Specifies what kind of log the caller must write
---
--- /See:/ 'logConfig' smart constructor.
-data LogConfig =
-  LogConfig'
-    { _lcCloudAudit :: !(Maybe CloudAuditOptions)
-    , _lcDataAccess :: !(Maybe DataAccessOptions)
-    , _lcCounter    :: !(Maybe CounterOptions)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcCloudAudit'
---
--- * 'lcDataAccess'
---
--- * 'lcCounter'
-logConfig
-    :: LogConfig
-logConfig =
-  LogConfig'
-    {_lcCloudAudit = Nothing, _lcDataAccess = Nothing, _lcCounter = Nothing}
-
-
--- | Cloud audit options.
-lcCloudAudit :: Lens' LogConfig (Maybe CloudAuditOptions)
-lcCloudAudit
-  = lens _lcCloudAudit (\ s a -> s{_lcCloudAudit = a})
-
--- | Data access options.
-lcDataAccess :: Lens' LogConfig (Maybe DataAccessOptions)
-lcDataAccess
-  = lens _lcDataAccess (\ s a -> s{_lcDataAccess = a})
-
--- | Counter options.
-lcCounter :: Lens' LogConfig (Maybe CounterOptions)
-lcCounter
-  = lens _lcCounter (\ s a -> s{_lcCounter = a})
-
-instance FromJSON LogConfig where
-        parseJSON
-          = withObject "LogConfig"
-              (\ o ->
-                 LogConfig' <$>
-                   (o .:? "cloudAudit") <*> (o .:? "dataAccess") <*>
-                     (o .:? "counter"))
-
-instance ToJSON LogConfig where
-        toJSON LogConfig'{..}
-          = object
-              (catMaybes
-                 [("cloudAudit" .=) <$> _lcCloudAudit,
-                  ("dataAccess" .=) <$> _lcDataAccess,
-                  ("counter" .=) <$> _lcCounter])
-
 -- | Map of additional options used to configure the behavior of Data Fusion
 -- instance.
 --
@@ -1948,8 +1671,8 @@ instance ToJSON InstanceOptions where
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1977,13 +1700,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -1995,9 +1735,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -2023,24 +1768,33 @@ instance ToJSON Binding where
 -- /See:/ 'instance'' smart constructor.
 data Instance =
   Instance'
-    { _iStateMessage                :: !(Maybe Text)
-    , _iState                       :: !(Maybe InstanceState)
-    , _iEnableStackdriverLogging    :: !(Maybe Bool)
-    , _iServiceEndpoint             :: !(Maybe Text)
-    , _iZone                        :: !(Maybe Text)
-    , _iServiceAccount              :: !(Maybe Text)
-    , _iNetworkConfig               :: !(Maybe NetworkConfig)
-    , _iUpdateTime                  :: !(Maybe DateTime')
-    , _iPrivateInstance             :: !(Maybe Bool)
-    , _iName                        :: !(Maybe Text)
-    , _iVersion                     :: !(Maybe Text)
-    , _iDisplayName                 :: !(Maybe Text)
+    { _iStateMessage :: !(Maybe Text)
+    , _iTenantProjectId :: !(Maybe Text)
+    , _iState :: !(Maybe InstanceState)
+    , _iEnableStackdriverLogging :: !(Maybe Bool)
+    , _iP4ServiceAccount :: !(Maybe Text)
+    , _iEnableRbac :: !(Maybe Bool)
+    , _iAPIEndpoint :: !(Maybe Text)
+    , _iCryptoKeyConfig :: !(Maybe CryptoKeyConfig)
+    , _iServiceEndpoint :: !(Maybe Text)
+    , _iZone :: !(Maybe Text)
+    , _iGcsBucket :: !(Maybe Text)
+    , _iServiceAccount :: !(Maybe Text)
+    , _iNetworkConfig :: !(Maybe NetworkConfig)
+    , _iUpdateTime :: !(Maybe DateTime')
+    , _iAccelerators :: !(Maybe [Accelerator])
+    , _iPrivateInstance :: !(Maybe Bool)
+    , _iName :: !(Maybe Text)
+    , _iVersion :: !(Maybe Text)
+    , _iDataprocServiceAccount :: !(Maybe Text)
+    , _iDisplayName :: !(Maybe Text)
     , _iEnableStackdriverMonitoring :: !(Maybe Bool)
-    , _iLabels                      :: !(Maybe InstanceLabels)
-    , _iOptions                     :: !(Maybe InstanceOptions)
-    , _iType                        :: !(Maybe InstanceType)
-    , _iDescription                 :: !(Maybe Text)
-    , _iCreateTime                  :: !(Maybe DateTime')
+    , _iLabels :: !(Maybe InstanceLabels)
+    , _iOptions :: !(Maybe InstanceOptions)
+    , _iType :: !(Maybe InstanceType)
+    , _iAvailableVersion :: !(Maybe [Version])
+    , _iDescription :: !(Maybe Text)
+    , _iCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2051,13 +1805,25 @@ data Instance =
 --
 -- * 'iStateMessage'
 --
+-- * 'iTenantProjectId'
+--
 -- * 'iState'
 --
 -- * 'iEnableStackdriverLogging'
 --
+-- * 'iP4ServiceAccount'
+--
+-- * 'iEnableRbac'
+--
+-- * 'iAPIEndpoint'
+--
+-- * 'iCryptoKeyConfig'
+--
 -- * 'iServiceEndpoint'
 --
 -- * 'iZone'
+--
+-- * 'iGcsBucket'
 --
 -- * 'iServiceAccount'
 --
@@ -2065,11 +1831,15 @@ data Instance =
 --
 -- * 'iUpdateTime'
 --
+-- * 'iAccelerators'
+--
 -- * 'iPrivateInstance'
 --
 -- * 'iName'
 --
 -- * 'iVersion'
+--
+-- * 'iDataprocServiceAccount'
 --
 -- * 'iDisplayName'
 --
@@ -2081,6 +1851,8 @@ data Instance =
 --
 -- * 'iType'
 --
+-- * 'iAvailableVersion'
+--
 -- * 'iDescription'
 --
 -- * 'iCreateTime'
@@ -2089,21 +1861,30 @@ instance'
 instance' =
   Instance'
     { _iStateMessage = Nothing
+    , _iTenantProjectId = Nothing
     , _iState = Nothing
     , _iEnableStackdriverLogging = Nothing
+    , _iP4ServiceAccount = Nothing
+    , _iEnableRbac = Nothing
+    , _iAPIEndpoint = Nothing
+    , _iCryptoKeyConfig = Nothing
     , _iServiceEndpoint = Nothing
     , _iZone = Nothing
+    , _iGcsBucket = Nothing
     , _iServiceAccount = Nothing
     , _iNetworkConfig = Nothing
     , _iUpdateTime = Nothing
+    , _iAccelerators = Nothing
     , _iPrivateInstance = Nothing
     , _iName = Nothing
     , _iVersion = Nothing
+    , _iDataprocServiceAccount = Nothing
     , _iDisplayName = Nothing
     , _iEnableStackdriverMonitoring = Nothing
     , _iLabels = Nothing
     , _iOptions = Nothing
     , _iType = Nothing
+    , _iAvailableVersion = Nothing
     , _iDescription = Nothing
     , _iCreateTime = Nothing
     }
@@ -2116,6 +1897,12 @@ iStateMessage
   = lens _iStateMessage
       (\ s a -> s{_iStateMessage = a})
 
+-- | Output only. The name of the tenant project.
+iTenantProjectId :: Lens' Instance (Maybe Text)
+iTenantProjectId
+  = lens _iTenantProjectId
+      (\ s a -> s{_iTenantProjectId = a})
+
 -- | Output only. The current state of this Data Fusion instance.
 iState :: Lens' Instance (Maybe InstanceState)
 iState = lens _iState (\ s a -> s{_iState = a})
@@ -2126,19 +1913,48 @@ iEnableStackdriverLogging
   = lens _iEnableStackdriverLogging
       (\ s a -> s{_iEnableStackdriverLogging = a})
 
--- | Output only. Endpoint on which the Data Fusion UI and REST APIs are
--- accessible.
+-- | Output only. P4 service account for the customer project.
+iP4ServiceAccount :: Lens' Instance (Maybe Text)
+iP4ServiceAccount
+  = lens _iP4ServiceAccount
+      (\ s a -> s{_iP4ServiceAccount = a})
+
+-- | Option to enable granular role-based access control.
+iEnableRbac :: Lens' Instance (Maybe Bool)
+iEnableRbac
+  = lens _iEnableRbac (\ s a -> s{_iEnableRbac = a})
+
+-- | Output only. Endpoint on which the REST APIs is accessible.
+iAPIEndpoint :: Lens' Instance (Maybe Text)
+iAPIEndpoint
+  = lens _iAPIEndpoint (\ s a -> s{_iAPIEndpoint = a})
+
+-- | The crypto key configuration. This field is used by the Customer-Managed
+-- Encryption Keys (CMEK) feature.
+iCryptoKeyConfig :: Lens' Instance (Maybe CryptoKeyConfig)
+iCryptoKeyConfig
+  = lens _iCryptoKeyConfig
+      (\ s a -> s{_iCryptoKeyConfig = a})
+
+-- | Output only. Endpoint on which the Data Fusion UI is accessible.
 iServiceEndpoint :: Lens' Instance (Maybe Text)
 iServiceEndpoint
   = lens _iServiceEndpoint
       (\ s a -> s{_iServiceEndpoint = a})
 
--- | Name of the zone in which the Data Fusion instance will be created.
+-- | Name of the zone in which the Data Fusion instance will be created. Only
+-- DEVELOPER instances use this field.
 iZone :: Lens' Instance (Maybe Text)
 iZone = lens _iZone (\ s a -> s{_iZone = a})
 
--- | Output only. Service account which will be used to access resources in
--- the customer project.\"
+-- | Output only. Cloud Storage bucket generated by Data Fusion in the
+-- customer project.
+iGcsBucket :: Lens' Instance (Maybe Text)
+iGcsBucket
+  = lens _iGcsBucket (\ s a -> s{_iGcsBucket = a})
+
+-- | Output only. Deprecated. Use tenant_project_id instead to extract the
+-- tenant project ID.
 iServiceAccount :: Lens' Instance (Maybe Text)
 iServiceAccount
   = lens _iServiceAccount
@@ -2157,6 +1973,14 @@ iUpdateTime
   = lens _iUpdateTime (\ s a -> s{_iUpdateTime = a}) .
       mapping _DateTime
 
+-- | List of accelerators enabled for this CDF instance.
+iAccelerators :: Lens' Instance [Accelerator]
+iAccelerators
+  = lens _iAccelerators
+      (\ s a -> s{_iAccelerators = a})
+      . _Default
+      . _Coerce
+
 -- | Specifies whether the Data Fusion instance should be private. If set to
 -- true, all Data Fusion nodes will have private IP addresses and will not
 -- be able to access the public internet.
@@ -2170,9 +1994,18 @@ iPrivateInstance
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
--- | Output only. Current version of the Data Fusion.
+-- | Current version of the Data Fusion. Only specifiable in Update.
 iVersion :: Lens' Instance (Maybe Text)
 iVersion = lens _iVersion (\ s a -> s{_iVersion = a})
+
+-- | User-managed service account to set on Dataproc when Cloud Data Fusion
+-- creates Dataproc to run data processing pipelines. This allows users to
+-- have fine-grained access control on Dataproc\'s accesses to cloud
+-- resources.
+iDataprocServiceAccount :: Lens' Instance (Maybe Text)
+iDataprocServiceAccount
+  = lens _iDataprocServiceAccount
+      (\ s a -> s{_iDataprocServiceAccount = a})
 
 -- | Display name for an instance.
 iDisplayName :: Lens' Instance (Maybe Text)
@@ -2186,8 +2019,8 @@ iEnableStackdriverMonitoring
       (\ s a -> s{_iEnableStackdriverMonitoring = a})
 
 -- | The resource labels for instance to use to annotate any related
--- underlying resources such as GCE VMs. The character \'=\' is not allowed
--- to be used within the labels.
+-- underlying resources such as Compute Engine VMs. The character \'=\' is
+-- not allowed to be used within the labels.
 iLabels :: Lens' Instance (Maybe InstanceLabels)
 iLabels = lens _iLabels (\ s a -> s{_iLabels = a})
 
@@ -2200,7 +2033,16 @@ iOptions = lens _iOptions (\ s a -> s{_iOptions = a})
 iType :: Lens' Instance (Maybe InstanceType)
 iType = lens _iType (\ s a -> s{_iType = a})
 
--- | An optional description of this instance.
+-- | Available versions that the instance can be upgraded to using
+-- UpdateInstanceRequest.
+iAvailableVersion :: Lens' Instance [Version]
+iAvailableVersion
+  = lens _iAvailableVersion
+      (\ s a -> s{_iAvailableVersion = a})
+      . _Default
+      . _Coerce
+
+-- | A description of this instance.
 iDescription :: Lens' Instance (Maybe Text)
 iDescription
   = lens _iDescription (\ s a -> s{_iDescription = a})
@@ -2216,21 +2058,30 @@ instance FromJSON Instance where
           = withObject "Instance"
               (\ o ->
                  Instance' <$>
-                   (o .:? "stateMessage") <*> (o .:? "state") <*>
-                     (o .:? "enableStackdriverLogging")
+                   (o .:? "stateMessage") <*> (o .:? "tenantProjectId")
+                     <*> (o .:? "state")
+                     <*> (o .:? "enableStackdriverLogging")
+                     <*> (o .:? "p4ServiceAccount")
+                     <*> (o .:? "enableRbac")
+                     <*> (o .:? "apiEndpoint")
+                     <*> (o .:? "cryptoKeyConfig")
                      <*> (o .:? "serviceEndpoint")
                      <*> (o .:? "zone")
+                     <*> (o .:? "gcsBucket")
                      <*> (o .:? "serviceAccount")
                      <*> (o .:? "networkConfig")
                      <*> (o .:? "updateTime")
+                     <*> (o .:? "accelerators" .!= mempty)
                      <*> (o .:? "privateInstance")
                      <*> (o .:? "name")
                      <*> (o .:? "version")
+                     <*> (o .:? "dataprocServiceAccount")
                      <*> (o .:? "displayName")
                      <*> (o .:? "enableStackdriverMonitoring")
                      <*> (o .:? "labels")
                      <*> (o .:? "options")
                      <*> (o .:? "type")
+                     <*> (o .:? "availableVersion" .!= mempty)
                      <*> (o .:? "description")
                      <*> (o .:? "createTime"))
 
@@ -2239,20 +2090,85 @@ instance ToJSON Instance where
           = object
               (catMaybes
                  [("stateMessage" .=) <$> _iStateMessage,
+                  ("tenantProjectId" .=) <$> _iTenantProjectId,
                   ("state" .=) <$> _iState,
                   ("enableStackdriverLogging" .=) <$>
                     _iEnableStackdriverLogging,
+                  ("p4ServiceAccount" .=) <$> _iP4ServiceAccount,
+                  ("enableRbac" .=) <$> _iEnableRbac,
+                  ("apiEndpoint" .=) <$> _iAPIEndpoint,
+                  ("cryptoKeyConfig" .=) <$> _iCryptoKeyConfig,
                   ("serviceEndpoint" .=) <$> _iServiceEndpoint,
                   ("zone" .=) <$> _iZone,
+                  ("gcsBucket" .=) <$> _iGcsBucket,
                   ("serviceAccount" .=) <$> _iServiceAccount,
                   ("networkConfig" .=) <$> _iNetworkConfig,
                   ("updateTime" .=) <$> _iUpdateTime,
+                  ("accelerators" .=) <$> _iAccelerators,
                   ("privateInstance" .=) <$> _iPrivateInstance,
                   ("name" .=) <$> _iName, ("version" .=) <$> _iVersion,
+                  ("dataprocServiceAccount" .=) <$>
+                    _iDataprocServiceAccount,
                   ("displayName" .=) <$> _iDisplayName,
                   ("enableStackdriverMonitoring" .=) <$>
                     _iEnableStackdriverMonitoring,
                   ("labels" .=) <$> _iLabels,
                   ("options" .=) <$> _iOptions, ("type" .=) <$> _iType,
+                  ("availableVersion" .=) <$> _iAvailableVersion,
                   ("description" .=) <$> _iDescription,
                   ("createTime" .=) <$> _iCreateTime])
+
+-- | Response message for the list available versions request.
+--
+-- /See:/ 'listAvailableVersionsResponse' smart constructor.
+data ListAvailableVersionsResponse =
+  ListAvailableVersionsResponse'
+    { _lavrNextPageToken :: !(Maybe Text)
+    , _lavrAvailableVersions :: !(Maybe [Version])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListAvailableVersionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lavrNextPageToken'
+--
+-- * 'lavrAvailableVersions'
+listAvailableVersionsResponse
+    :: ListAvailableVersionsResponse
+listAvailableVersionsResponse =
+  ListAvailableVersionsResponse'
+    {_lavrNextPageToken = Nothing, _lavrAvailableVersions = Nothing}
+
+
+-- | Token to retrieve the next page of results or empty if there are no more
+-- results in the list.
+lavrNextPageToken :: Lens' ListAvailableVersionsResponse (Maybe Text)
+lavrNextPageToken
+  = lens _lavrNextPageToken
+      (\ s a -> s{_lavrNextPageToken = a})
+
+-- | Represents a list of versions that are supported.
+lavrAvailableVersions :: Lens' ListAvailableVersionsResponse [Version]
+lavrAvailableVersions
+  = lens _lavrAvailableVersions
+      (\ s a -> s{_lavrAvailableVersions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListAvailableVersionsResponse where
+        parseJSON
+          = withObject "ListAvailableVersionsResponse"
+              (\ o ->
+                 ListAvailableVersionsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "availableVersions" .!= mempty))
+
+instance ToJSON ListAvailableVersionsResponse where
+        toJSON ListAvailableVersionsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lavrNextPageToken,
+                  ("availableVersions" .=) <$> _lavrAvailableVersions])

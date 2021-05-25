@@ -23,7 +23,7 @@
 -- Retrieves a list of advertisers, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertisers.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.advertisers.list@.
 module Network.Google.Resource.DFAReporting.Advertisers.List
     (
     -- * REST Resource
@@ -35,8 +35,12 @@ module Network.Google.Resource.DFAReporting.Advertisers.List
 
     -- * Request Lenses
     , allStatus
+    , allXgafv
+    , allUploadProtocol
+    , allAccessToken
     , allOnlyParent
     , allSearchString
+    , allUploadType
     , allIds
     , allIncludeAdvertisersWithoutGroupsOnly
     , allProFileId
@@ -47,37 +51,54 @@ module Network.Google.Resource.DFAReporting.Advertisers.List
     , allSubAccountId
     , allFloodlightConfigurationIds
     , allMaxResults
+    , allCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertisers.list@ method which the
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
                QueryParam "status" AdvertisersListStatus :>
-                 QueryParam "onlyParent" Bool :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
-                         :>
-                         QueryParam "sortOrder" AdvertisersListSortOrder :>
-                           QueryParams "advertiserGroupIds" (Textual Int64) :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" AdvertisersListSortField
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "onlyParent" Bool :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "includeAdvertisersWithoutGroupsOnly"
+                                 Bool
                                  :>
-                                 QueryParam "subaccountId" (Textual Int64) :>
-                                   QueryParams "floodlightConfigurationIds"
+                                 QueryParam "sortOrder" AdvertisersListSortOrder
+                                   :>
+                                   QueryParams "advertiserGroupIds"
                                      (Textual Int64)
                                      :>
-                                     QueryParam "maxResults" (Textual Int32) :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] AdvertisersListResponse
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField"
+                                         AdvertisersListSortField
+                                         :>
+                                         QueryParam "subaccountId"
+                                           (Textual Int64)
+                                           :>
+                                           QueryParams
+                                             "floodlightConfigurationIds"
+                                             (Textual Int64)
+                                             :>
+                                             QueryParam "maxResults"
+                                               (Textual Int32)
+                                               :>
+                                               QueryParam "callback" Text :>
+                                                 QueryParam "alt" AltJSON :>
+                                                   Get '[JSON]
+                                                     AdvertisersListResponse
 
 -- | Retrieves a list of advertisers, possibly filtered. This method supports
 -- paging.
@@ -85,19 +106,24 @@ type AdvertisersListResource =
 -- /See:/ 'advertisersList' smart constructor.
 data AdvertisersList =
   AdvertisersList'
-    { _allStatus                              :: !(Maybe AdvertisersListStatus)
-    , _allOnlyParent                          :: !(Maybe Bool)
-    , _allSearchString                        :: !(Maybe Text)
-    , _allIds                                 :: !(Maybe [Textual Int64])
+    { _allStatus :: !(Maybe AdvertisersListStatus)
+    , _allXgafv :: !(Maybe Xgafv)
+    , _allUploadProtocol :: !(Maybe Text)
+    , _allAccessToken :: !(Maybe Text)
+    , _allOnlyParent :: !(Maybe Bool)
+    , _allSearchString :: !(Maybe Text)
+    , _allUploadType :: !(Maybe Text)
+    , _allIds :: !(Maybe [Textual Int64])
     , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
-    , _allProFileId                           :: !(Textual Int64)
-    , _allSortOrder                           :: !AdvertisersListSortOrder
-    , _allAdvertiserGroupIds                  :: !(Maybe [Textual Int64])
-    , _allPageToken                           :: !(Maybe Text)
-    , _allSortField                           :: !AdvertisersListSortField
-    , _allSubAccountId                        :: !(Maybe (Textual Int64))
-    , _allFloodlightConfigurationIds          :: !(Maybe [Textual Int64])
-    , _allMaxResults                          :: !(Textual Int32)
+    , _allProFileId :: !(Textual Int64)
+    , _allSortOrder :: !AdvertisersListSortOrder
+    , _allAdvertiserGroupIds :: !(Maybe [Textual Int64])
+    , _allPageToken :: !(Maybe Text)
+    , _allSortField :: !AdvertisersListSortField
+    , _allSubAccountId :: !(Maybe (Textual Int64))
+    , _allFloodlightConfigurationIds :: !(Maybe [Textual Int64])
+    , _allMaxResults :: !(Textual Int32)
+    , _allCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,9 +134,17 @@ data AdvertisersList =
 --
 -- * 'allStatus'
 --
+-- * 'allXgafv'
+--
+-- * 'allUploadProtocol'
+--
+-- * 'allAccessToken'
+--
 -- * 'allOnlyParent'
 --
 -- * 'allSearchString'
+--
+-- * 'allUploadType'
 --
 -- * 'allIds'
 --
@@ -131,14 +165,20 @@ data AdvertisersList =
 -- * 'allFloodlightConfigurationIds'
 --
 -- * 'allMaxResults'
+--
+-- * 'allCallback'
 advertisersList
     :: Int64 -- ^ 'allProFileId'
     -> AdvertisersList
 advertisersList pAllProFileId_ =
   AdvertisersList'
     { _allStatus = Nothing
+    , _allXgafv = Nothing
+    , _allUploadProtocol = Nothing
+    , _allAccessToken = Nothing
     , _allOnlyParent = Nothing
     , _allSearchString = Nothing
+    , _allUploadType = Nothing
     , _allIds = Nothing
     , _allIncludeAdvertisersWithoutGroupsOnly = Nothing
     , _allProFileId = _Coerce # pAllProFileId_
@@ -149,6 +189,7 @@ advertisersList pAllProFileId_ =
     , _allSubAccountId = Nothing
     , _allFloodlightConfigurationIds = Nothing
     , _allMaxResults = 1000
+    , _allCallback = Nothing
     }
 
 
@@ -156,6 +197,22 @@ advertisersList pAllProFileId_ =
 allStatus :: Lens' AdvertisersList (Maybe AdvertisersListStatus)
 allStatus
   = lens _allStatus (\ s a -> s{_allStatus = a})
+
+-- | V1 error format.
+allXgafv :: Lens' AdvertisersList (Maybe Xgafv)
+allXgafv = lens _allXgafv (\ s a -> s{_allXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+allUploadProtocol :: Lens' AdvertisersList (Maybe Text)
+allUploadProtocol
+  = lens _allUploadProtocol
+      (\ s a -> s{_allUploadProtocol = a})
+
+-- | OAuth access token.
+allAccessToken :: Lens' AdvertisersList (Maybe Text)
+allAccessToken
+  = lens _allAccessToken
+      (\ s a -> s{_allAccessToken = a})
 
 -- | Select only advertisers which use another advertiser\'s floodlight
 -- configuration.
@@ -170,11 +227,17 @@ allOnlyParent
 -- \"advertiser 2015\". Most of the searches also add wildcards implicitly
 -- at the start and the end of the search string. For example, a search
 -- string of \"advertiser\" will match objects with name \"my advertiser\",
--- \"advertiser 2015\", or simply \"advertiser\".
+-- \"advertiser 2015\", or simply \"advertiser\" .
 allSearchString :: Lens' AdvertisersList (Maybe Text)
 allSearchString
   = lens _allSearchString
       (\ s a -> s{_allSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+allUploadType :: Lens' AdvertisersList (Maybe Text)
+allUploadType
+  = lens _allUploadType
+      (\ s a -> s{_allUploadType = a})
 
 -- | Select only advertisers with these IDs.
 allIds :: Lens' AdvertisersList [Int64]
@@ -240,13 +303,22 @@ allMaxResults
       (\ s a -> s{_allMaxResults = a})
       . _Coerce
 
+-- | JSONP
+allCallback :: Lens' AdvertisersList (Maybe Text)
+allCallback
+  = lens _allCallback (\ s a -> s{_allCallback = a})
+
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = AdvertisersListResponse
         type Scopes AdvertisersList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertisersList'{..}
-          = go _allProFileId _allStatus _allOnlyParent
+          = go _allProFileId _allStatus _allXgafv
+              _allUploadProtocol
+              _allAccessToken
+              _allOnlyParent
               _allSearchString
+              _allUploadType
               (_allIds ^. _Default)
               _allIncludeAdvertisersWithoutGroupsOnly
               (Just _allSortOrder)
@@ -256,6 +328,7 @@ instance GoogleRequest AdvertisersList where
               _allSubAccountId
               (_allFloodlightConfigurationIds ^. _Default)
               (Just _allMaxResults)
+              _allCallback
               (Just AltJSON)
               dFAReportingService
           where go

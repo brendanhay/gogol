@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an Export.
+-- Gets an export.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.exports.get@.
 module Network.Google.Resource.Vault.Matters.Exports.Get
@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.Exports.Get
     , megCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.exports.get@ method which the
 -- 'MattersExportsGet' request conforms to.
@@ -60,18 +60,18 @@ type MattersExportsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Export
 
--- | Gets an Export.
+-- | Gets an export.
 --
 -- /See:/ 'mattersExportsGet' smart constructor.
 data MattersExportsGet =
   MattersExportsGet'
-    { _megXgafv          :: !(Maybe Xgafv)
+    { _megXgafv :: !(Maybe Xgafv)
     , _megUploadProtocol :: !(Maybe Text)
-    , _megAccessToken    :: !(Maybe Text)
-    , _megUploadType     :: !(Maybe Text)
-    , _megMatterId       :: !Text
-    , _megExportId       :: !Text
-    , _megCallback       :: !(Maybe Text)
+    , _megAccessToken :: !(Maybe Text)
+    , _megUploadType :: !(Maybe Text)
+    , _megMatterId :: !Text
+    , _megExportId :: !Text
+    , _megCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

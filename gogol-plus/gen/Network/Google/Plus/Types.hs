@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -463,9 +463,9 @@ module Network.Google.Plus.Types
     , aanFamilyName
     ) where
 
-import           Network.Google.Plus.Types.Product
-import           Network.Google.Plus.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Plus.Types.Product
+import Network.Google.Plus.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google+ API. This contains the host and root path used as a starting point for constructing service requests.
 plusService :: ServiceConfig

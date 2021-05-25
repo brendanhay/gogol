@@ -31,7 +31,7 @@
 -- name binding is the parent resource, without the operations collection
 -- id.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.operations.list@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.operations.list@.
 module Network.Google.Resource.Ml.Projects.Operations.List
     (
     -- * REST Resource
@@ -53,8 +53,8 @@ module Network.Google.Resource.Ml.Projects.Operations.List
     , polCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.operations.list@ method which the
 -- 'ProjectsOperationsList' request conforms to.
@@ -88,15 +88,15 @@ type ProjectsOperationsListResource =
 -- /See:/ 'projectsOperationsList' smart constructor.
 data ProjectsOperationsList =
   ProjectsOperationsList'
-    { _polXgafv          :: !(Maybe Xgafv)
+    { _polXgafv :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
-    , _polAccessToken    :: !(Maybe Text)
-    , _polUploadType     :: !(Maybe Text)
-    , _polName           :: !Text
-    , _polFilter         :: !(Maybe Text)
-    , _polPageToken      :: !(Maybe Text)
-    , _polPageSize       :: !(Maybe (Textual Int32))
-    , _polCallback       :: !(Maybe Text)
+    , _polAccessToken :: !(Maybe Text)
+    , _polUploadType :: !(Maybe Text)
+    , _polName :: !Text
+    , _polFilter :: !(Maybe Text)
+    , _polPageToken :: !(Maybe Text)
+    , _polPageSize :: !(Maybe (Textual Int32))
+    , _polCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

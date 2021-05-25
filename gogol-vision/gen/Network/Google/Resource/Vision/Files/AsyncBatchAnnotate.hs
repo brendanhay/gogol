@@ -46,8 +46,8 @@ module Network.Google.Resource.Vision.Files.AsyncBatchAnnotate
     , fabaCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vision.Types
+import Network.Google.Prelude
+import Network.Google.Vision.Types
 
 -- | A resource alias for @vision.files.asyncBatchAnnotate@ method which the
 -- 'FilesAsyncBatchAnnotate' request conforms to.
@@ -74,12 +74,12 @@ type FilesAsyncBatchAnnotateResource =
 -- /See:/ 'filesAsyncBatchAnnotate' smart constructor.
 data FilesAsyncBatchAnnotate =
   FilesAsyncBatchAnnotate'
-    { _fabaXgafv          :: !(Maybe Xgafv)
+    { _fabaXgafv :: !(Maybe Xgafv)
     , _fabaUploadProtocol :: !(Maybe Text)
-    , _fabaAccessToken    :: !(Maybe Text)
-    , _fabaUploadType     :: !(Maybe Text)
-    , _fabaPayload        :: !GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
-    , _fabaCallback       :: !(Maybe Text)
+    , _fabaAccessToken :: !(Maybe Text)
+    , _fabaUploadType :: !(Maybe Text)
+    , _fabaPayload :: !GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
+    , _fabaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -34,6 +34,7 @@ module Network.Google.Resource.Drive.Permissions.List
 
     -- * Request Lenses
     , plSupportsAllDrives
+    , plIncludePermissionsForView
     , plPageToken
     , plUseDomainAdminAccess
     , plFileId
@@ -41,8 +42,8 @@ module Network.Google.Resource.Drive.Permissions.List
     , plSupportsTeamDrives
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.list@ method which the
 -- 'PermissionsList' request conforms to.
@@ -53,24 +54,26 @@ type PermissionsListResource =
            Capture "fileId" Text :>
              "permissions" :>
                QueryParam "supportsAllDrives" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "useDomainAdminAccess" Bool :>
-                     QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "supportsTeamDrives" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] PermissionList
+                 QueryParam "includePermissionsForView" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "useDomainAdminAccess" Bool :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "supportsTeamDrives" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] PermissionList
 
 -- | Lists a file\'s or shared drive\'s permissions.
 --
 -- /See:/ 'permissionsList' smart constructor.
 data PermissionsList =
   PermissionsList'
-    { _plSupportsAllDrives    :: !Bool
-    , _plPageToken            :: !(Maybe Text)
+    { _plSupportsAllDrives :: !Bool
+    , _plIncludePermissionsForView :: !(Maybe Text)
+    , _plPageToken :: !(Maybe Text)
     , _plUseDomainAdminAccess :: !Bool
-    , _plFileId               :: !Text
-    , _plPageSize             :: !(Maybe (Textual Int32))
-    , _plSupportsTeamDrives   :: !Bool
+    , _plFileId :: !Text
+    , _plPageSize :: !(Maybe (Textual Int32))
+    , _plSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,6 +83,8 @@ data PermissionsList =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plSupportsAllDrives'
+--
+-- * 'plIncludePermissionsForView'
 --
 -- * 'plPageToken'
 --
@@ -96,6 +101,7 @@ permissionsList
 permissionsList pPlFileId_ =
   PermissionsList'
     { _plSupportsAllDrives = False
+    , _plIncludePermissionsForView = Nothing
     , _plPageToken = Nothing
     , _plUseDomainAdminAccess = False
     , _plFileId = pPlFileId_
@@ -110,6 +116,13 @@ plSupportsAllDrives :: Lens' PermissionsList Bool
 plSupportsAllDrives
   = lens _plSupportsAllDrives
       (\ s a -> s{_plSupportsAllDrives = a})
+
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+plIncludePermissionsForView :: Lens' PermissionsList (Maybe Text)
+plIncludePermissionsForView
+  = lens _plIncludePermissionsForView
+      (\ s a -> s{_plIncludePermissionsForView = a})
 
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous
@@ -157,6 +170,7 @@ instance GoogleRequest PermissionsList where
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient PermissionsList'{..}
           = go _plFileId (Just _plSupportsAllDrives)
+              _plIncludePermissionsForView
               _plPageToken
               (Just _plUseDomainAdminAccess)
               _plPageSize

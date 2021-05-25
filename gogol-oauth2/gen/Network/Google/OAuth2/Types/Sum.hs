@@ -16,4 +16,4 @@
 --
 module Network.Google.OAuth2.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)

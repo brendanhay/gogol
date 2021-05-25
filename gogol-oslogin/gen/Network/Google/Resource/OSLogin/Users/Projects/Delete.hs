@@ -41,8 +41,8 @@ module Network.Google.Resource.OSLogin.Users.Projects.Delete
     , updCallback
     ) where
 
-import           Network.Google.OSLogin.Types
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oslogin.users.projects.delete@ method which the
 -- 'UsersProjectsDelete' request conforms to.
@@ -61,12 +61,12 @@ type UsersProjectsDeleteResource =
 -- /See:/ 'usersProjectsDelete' smart constructor.
 data UsersProjectsDelete =
   UsersProjectsDelete'
-    { _updXgafv          :: !(Maybe Xgafv)
+    { _updXgafv :: !(Maybe Xgafv)
     , _updUploadProtocol :: !(Maybe Text)
-    , _updAccessToken    :: !(Maybe Text)
-    , _updUploadType     :: !(Maybe Text)
-    , _updName           :: !Text
-    , _updCallback       :: !(Maybe Text)
+    , _updAccessToken :: !(Maybe Text)
+    , _updUploadType :: !(Maybe Text)
+    , _updName :: !Text
+    , _updCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,7 +122,7 @@ updUploadType
   = lens _updUploadType
       (\ s a -> s{_updUploadType = a})
 
--- | A reference to the POSIX account to update. POSIX accounts are
+-- | Required. A reference to the POSIX account to update. POSIX accounts are
 -- identified by the project ID they are associated with. A reference to
 -- the POSIX account is in format \`users\/{user}\/projects\/{project}\`.
 updName :: Lens' UsersProjectsDelete Text

@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Groups Migration Api.
+    The Groups Migration API allows domain administrators to archive emails
+    into Google groups.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

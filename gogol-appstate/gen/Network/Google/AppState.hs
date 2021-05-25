@@ -75,13 +75,13 @@ module Network.Google.AppState
     , urData
     ) where
 
-import           Network.Google.AppState.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AppState.States.Clear
-import           Network.Google.Resource.AppState.States.Delete
-import           Network.Google.Resource.AppState.States.Get
-import           Network.Google.Resource.AppState.States.List
-import           Network.Google.Resource.AppState.States.Update
+import Network.Google.Prelude
+import Network.Google.AppState.Types
+import Network.Google.Resource.AppState.States.Clear
+import Network.Google.Resource.AppState.States.Delete
+import Network.Google.Resource.AppState.States.Get
+import Network.Google.Resource.AppState.States.List
+import Network.Google.Resource.AppState.States.Update
 
 {- $resources
 TODO

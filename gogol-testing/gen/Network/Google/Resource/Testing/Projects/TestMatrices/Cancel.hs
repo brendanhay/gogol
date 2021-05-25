@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Cancels unfinished test executions in a test matrix. This call returns
--- immediately and cancellation proceeds asychronously. If the matrix is
+-- immediately and cancellation proceeds asynchronously. If the matrix is
 -- already final, this operation will have no effect. May return any of the
 -- following canonical error codes: - PERMISSION_DENIED - if the user is
 -- not authorized to read project - INVALID_ARGUMENT - if the request is
@@ -47,8 +47,8 @@ module Network.Google.Resource.Testing.Projects.TestMatrices.Cancel
     , ptmcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types
+import Network.Google.Prelude
+import Network.Google.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.cancel@ method which the
 -- 'ProjectsTestMatricesCancel' request conforms to.
@@ -67,7 +67,7 @@ type ProjectsTestMatricesCancelResource =
                            Post '[JSON] CancelTestMatrixResponse
 
 -- | Cancels unfinished test executions in a test matrix. This call returns
--- immediately and cancellation proceeds asychronously. If the matrix is
+-- immediately and cancellation proceeds asynchronously. If the matrix is
 -- already final, this operation will have no effect. May return any of the
 -- following canonical error codes: - PERMISSION_DENIED - if the user is
 -- not authorized to read project - INVALID_ARGUMENT - if the request is
@@ -76,13 +76,13 @@ type ProjectsTestMatricesCancelResource =
 -- /See:/ 'projectsTestMatricesCancel' smart constructor.
 data ProjectsTestMatricesCancel =
   ProjectsTestMatricesCancel'
-    { _ptmcXgafv          :: !(Maybe Xgafv)
+    { _ptmcXgafv :: !(Maybe Xgafv)
     , _ptmcUploadProtocol :: !(Maybe Text)
-    , _ptmcTestMatrixId   :: !Text
-    , _ptmcAccessToken    :: !(Maybe Text)
-    , _ptmcUploadType     :: !(Maybe Text)
-    , _ptmcProjectId      :: !Text
-    , _ptmcCallback       :: !(Maybe Text)
+    , _ptmcTestMatrixId :: !Text
+    , _ptmcAccessToken :: !(Maybe Text)
+    , _ptmcUploadType :: !(Maybe Text)
+    , _ptmcProjectId :: !Text
+    , _ptmcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

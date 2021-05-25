@@ -49,8 +49,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Dev
     , plrgdlCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.groups.devices.list@ method which the
 -- 'ProjectsLocationsRegistriesGroupsDevicesList' request conforms to.
@@ -72,7 +72,9 @@ type ProjectsLocationsRegistriesGroupsDevicesListResource
                        QueryParam "uploadType" Text :>
                          QueryParams "deviceIds" Text :>
                            QueryParam "fieldMask" GFieldMask :>
-                             QueryParam "gatewayListOptions.gatewayType" Text :>
+                             QueryParam "gatewayListOptions.gatewayType"
+                               ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
+                               :>
                                QueryParam "pageToken" Text :>
                                  QueryParam "pageSize" (Textual Int32) :>
                                    QueryParam "callback" Text :>
@@ -84,20 +86,20 @@ type ProjectsLocationsRegistriesGroupsDevicesListResource
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesList' smart constructor.
 data ProjectsLocationsRegistriesGroupsDevicesList =
   ProjectsLocationsRegistriesGroupsDevicesList'
-    { _plrgdlParent                                  :: !Text
-    , _plrgdlXgafv                                   :: !(Maybe Xgafv)
-    , _plrgdlUploadProtocol                          :: !(Maybe Text)
-    , _plrgdlAccessToken                             :: !(Maybe Text)
-    , _plrgdlDeviceNumIds                            :: !(Maybe [Textual Word64])
-    , _plrgdlGatewayListOptionsAssociationsDeviceId  :: !(Maybe Text)
+    { _plrgdlParent :: !Text
+    , _plrgdlXgafv :: !(Maybe Xgafv)
+    , _plrgdlUploadProtocol :: !(Maybe Text)
+    , _plrgdlAccessToken :: !(Maybe Text)
+    , _plrgdlDeviceNumIds :: !(Maybe [Textual Word64])
+    , _plrgdlGatewayListOptionsAssociationsDeviceId :: !(Maybe Text)
     , _plrgdlGatewayListOptionsAssociationsGatewayId :: !(Maybe Text)
-    , _plrgdlUploadType                              :: !(Maybe Text)
-    , _plrgdlDeviceIds                               :: !(Maybe [Text])
-    , _plrgdlFieldMask                               :: !(Maybe GFieldMask)
-    , _plrgdlGatewayListOptionsGatewayType           :: !(Maybe Text)
-    , _plrgdlPageToken                               :: !(Maybe Text)
-    , _plrgdlPageSize                                :: !(Maybe (Textual Int32))
-    , _plrgdlCallback                                :: !(Maybe Text)
+    , _plrgdlUploadType :: !(Maybe Text)
+    , _plrgdlDeviceIds :: !(Maybe [Text])
+    , _plrgdlFieldMask :: !(Maybe GFieldMask)
+    , _plrgdlGatewayListOptionsGatewayType :: !(Maybe ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType)
+    , _plrgdlPageToken :: !(Maybe Text)
+    , _plrgdlPageSize :: !(Maybe (Textual Int32))
+    , _plrgdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -155,7 +157,7 @@ projectsLocationsRegistriesGroupsDevicesList pPlrgdlParent_ =
     }
 
 
--- | The device registry path. Required. For example,
+-- | Required. The device registry path. Required. For example,
 -- \`projects\/my-project\/locations\/us-central1\/registries\/my-registry\`.
 plrgdlParent :: Lens' ProjectsLocationsRegistriesGroupsDevicesList Text
 plrgdlParent
@@ -226,7 +228,8 @@ plrgdlDeviceIds
 
 -- | The fields of the \`Device\` resource to be returned in the response.
 -- The fields \`id\` and \`num_id\` are always returned, along with any
--- other fields specified.
+-- other fields specified in snake_case format, for example:
+-- \`last_heartbeat_time\`.
 plrgdlFieldMask :: Lens' ProjectsLocationsRegistriesGroupsDevicesList (Maybe GFieldMask)
 plrgdlFieldMask
   = lens _plrgdlFieldMask
@@ -235,7 +238,7 @@ plrgdlFieldMask
 -- | If \`GATEWAY\` is specified, only gateways are returned. If
 -- \`NON_GATEWAY\` is specified, only non-gateway devices are returned. If
 -- \`GATEWAY_TYPE_UNSPECIFIED\` is specified, all devices are returned.
-plrgdlGatewayListOptionsGatewayType :: Lens' ProjectsLocationsRegistriesGroupsDevicesList (Maybe Text)
+plrgdlGatewayListOptionsGatewayType :: Lens' ProjectsLocationsRegistriesGroupsDevicesList (Maybe ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType)
 plrgdlGatewayListOptionsGatewayType
   = lens _plrgdlGatewayListOptionsGatewayType
       (\ s a ->

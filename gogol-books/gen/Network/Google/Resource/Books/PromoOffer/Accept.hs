@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- |
+-- Accepts the promo offer.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.promooffer.accept@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.promooffer.accept@.
 module Network.Google.Resource.Books.PromoOffer.Accept
     (
     -- * REST Resource
@@ -33,18 +33,23 @@ module Network.Google.Resource.Books.PromoOffer.Accept
     , PromoOfferAccept
 
     -- * Request Lenses
+    , poaXgafv
     , poaManufacturer
+    , poaUploadProtocol
     , poaSerial
+    , poaAccessToken
     , poaDevice
+    , poaUploadType
     , poaModel
     , poaVolumeId
     , poaOfferId
     , poaProduct
     , poaAndroidId
+    , poaCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.promooffer.accept@ method which the
 -- 'PromoOfferAccept' request conforms to.
@@ -53,29 +58,40 @@ type PromoOfferAcceptResource =
        "v1" :>
          "promooffer" :>
            "accept" :>
-             QueryParam "manufacturer" Text :>
-               QueryParam "serial" Text :>
-                 QueryParam "device" Text :>
-                   QueryParam "model" Text :>
-                     QueryParam "volumeId" Text :>
-                       QueryParam "offerId" Text :>
-                         QueryParam "product" Text :>
-                           QueryParam "androidId" Text :>
-                             QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "manufacturer" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "serial" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "device" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "model" Text :>
+                             QueryParam "volumeId" Text :>
+                               QueryParam "offerId" Text :>
+                                 QueryParam "product" Text :>
+                                   QueryParam "androidId" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Post '[JSON] Empty
 
--- |
+-- | Accepts the promo offer.
 --
 -- /See:/ 'promoOfferAccept' smart constructor.
 data PromoOfferAccept =
   PromoOfferAccept'
-    { _poaManufacturer :: !(Maybe Text)
-    , _poaSerial       :: !(Maybe Text)
-    , _poaDevice       :: !(Maybe Text)
-    , _poaModel        :: !(Maybe Text)
-    , _poaVolumeId     :: !(Maybe Text)
-    , _poaOfferId      :: !(Maybe Text)
-    , _poaProduct      :: !(Maybe Text)
-    , _poaAndroidId    :: !(Maybe Text)
+    { _poaXgafv :: !(Maybe Xgafv)
+    , _poaManufacturer :: !(Maybe Text)
+    , _poaUploadProtocol :: !(Maybe Text)
+    , _poaSerial :: !(Maybe Text)
+    , _poaAccessToken :: !(Maybe Text)
+    , _poaDevice :: !(Maybe Text)
+    , _poaUploadType :: !(Maybe Text)
+    , _poaModel :: !(Maybe Text)
+    , _poaVolumeId :: !(Maybe Text)
+    , _poaOfferId :: !(Maybe Text)
+    , _poaProduct :: !(Maybe Text)
+    , _poaAndroidId :: !(Maybe Text)
+    , _poaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,11 +100,19 @@ data PromoOfferAccept =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'poaXgafv'
+--
 -- * 'poaManufacturer'
+--
+-- * 'poaUploadProtocol'
 --
 -- * 'poaSerial'
 --
+-- * 'poaAccessToken'
+--
 -- * 'poaDevice'
+--
+-- * 'poaUploadType'
 --
 -- * 'poaModel'
 --
@@ -99,20 +123,31 @@ data PromoOfferAccept =
 -- * 'poaProduct'
 --
 -- * 'poaAndroidId'
+--
+-- * 'poaCallback'
 promoOfferAccept
     :: PromoOfferAccept
 promoOfferAccept =
   PromoOfferAccept'
-    { _poaManufacturer = Nothing
+    { _poaXgafv = Nothing
+    , _poaManufacturer = Nothing
+    , _poaUploadProtocol = Nothing
     , _poaSerial = Nothing
+    , _poaAccessToken = Nothing
     , _poaDevice = Nothing
+    , _poaUploadType = Nothing
     , _poaModel = Nothing
     , _poaVolumeId = Nothing
     , _poaOfferId = Nothing
     , _poaProduct = Nothing
     , _poaAndroidId = Nothing
+    , _poaCallback = Nothing
     }
 
+
+-- | V1 error format.
+poaXgafv :: Lens' PromoOfferAccept (Maybe Xgafv)
+poaXgafv = lens _poaXgafv (\ s a -> s{_poaXgafv = a})
 
 -- | device manufacturer
 poaManufacturer :: Lens' PromoOfferAccept (Maybe Text)
@@ -120,15 +155,33 @@ poaManufacturer
   = lens _poaManufacturer
       (\ s a -> s{_poaManufacturer = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+poaUploadProtocol :: Lens' PromoOfferAccept (Maybe Text)
+poaUploadProtocol
+  = lens _poaUploadProtocol
+      (\ s a -> s{_poaUploadProtocol = a})
+
 -- | device serial
 poaSerial :: Lens' PromoOfferAccept (Maybe Text)
 poaSerial
   = lens _poaSerial (\ s a -> s{_poaSerial = a})
 
+-- | OAuth access token.
+poaAccessToken :: Lens' PromoOfferAccept (Maybe Text)
+poaAccessToken
+  = lens _poaAccessToken
+      (\ s a -> s{_poaAccessToken = a})
+
 -- | device device
 poaDevice :: Lens' PromoOfferAccept (Maybe Text)
 poaDevice
   = lens _poaDevice (\ s a -> s{_poaDevice = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+poaUploadType :: Lens' PromoOfferAccept (Maybe Text)
+poaUploadType
+  = lens _poaUploadType
+      (\ s a -> s{_poaUploadType = a})
 
 -- | device model
 poaModel :: Lens' PromoOfferAccept (Maybe Text)
@@ -153,16 +206,27 @@ poaAndroidId :: Lens' PromoOfferAccept (Maybe Text)
 poaAndroidId
   = lens _poaAndroidId (\ s a -> s{_poaAndroidId = a})
 
+-- | JSONP
+poaCallback :: Lens' PromoOfferAccept (Maybe Text)
+poaCallback
+  = lens _poaCallback (\ s a -> s{_poaCallback = a})
+
 instance GoogleRequest PromoOfferAccept where
-        type Rs PromoOfferAccept = ()
+        type Rs PromoOfferAccept = Empty
         type Scopes PromoOfferAccept =
              '["https://www.googleapis.com/auth/books"]
         requestClient PromoOfferAccept'{..}
-          = go _poaManufacturer _poaSerial _poaDevice _poaModel
+          = go _poaXgafv _poaManufacturer _poaUploadProtocol
+              _poaSerial
+              _poaAccessToken
+              _poaDevice
+              _poaUploadType
+              _poaModel
               _poaVolumeId
               _poaOfferId
               _poaProduct
               _poaAndroidId
+              _poaCallback
               (Just AltJSON)
               booksService
           where go

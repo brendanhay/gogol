@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.SSLCertificates.Get
     , scgSSLCertificate
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslCertificates.get@ method which the
 -- 'SSLCertificatesGet' request conforms to.
@@ -60,7 +60,7 @@ type SSLCertificatesGetResource =
 -- /See:/ 'sslCertificatesGet' smart constructor.
 data SSLCertificatesGet =
   SSLCertificatesGet'
-    { _scgProject        :: !Text
+    { _scgProject :: !Text
     , _scgSSLCertificate :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

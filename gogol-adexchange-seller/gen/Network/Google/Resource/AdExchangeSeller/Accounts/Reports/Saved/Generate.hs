@@ -41,8 +41,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
     , arsgMaxResults
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.reports.saved.generate@ method which the
 -- 'AccountsReportsSavedGenerate' request conforms to.
@@ -64,11 +64,11 @@ type AccountsReportsSavedGenerateResource =
 -- /See:/ 'accountsReportsSavedGenerate' smart constructor.
 data AccountsReportsSavedGenerate =
   AccountsReportsSavedGenerate'
-    { _arsgLocale        :: !(Maybe Text)
+    { _arsgLocale :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
-    , _arsgAccountId     :: !Text
-    , _arsgStartIndex    :: !(Maybe (Textual Int32))
-    , _arsgMaxResults    :: !(Maybe (Textual Int32))
+    , _arsgAccountId :: !Text
+    , _arsgStartIndex :: !(Maybe (Textual Int32))
+    , _arsgMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

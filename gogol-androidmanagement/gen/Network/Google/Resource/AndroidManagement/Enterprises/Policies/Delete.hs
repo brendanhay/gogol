@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Delete
     , epdCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.policies.delete@ method which the
 -- 'EnterprisesPoliciesDelete' request conforms to.
@@ -63,12 +63,12 @@ type EnterprisesPoliciesDeleteResource =
 -- /See:/ 'enterprisesPoliciesDelete' smart constructor.
 data EnterprisesPoliciesDelete =
   EnterprisesPoliciesDelete'
-    { _epdXgafv          :: !(Maybe Xgafv)
+    { _epdXgafv :: !(Maybe Xgafv)
     , _epdUploadProtocol :: !(Maybe Text)
-    , _epdAccessToken    :: !(Maybe Text)
-    , _epdUploadType     :: !(Maybe Text)
-    , _epdName           :: !Text
-    , _epdCallback       :: !(Maybe Text)
+    , _epdAccessToken :: !(Maybe Text)
+    , _epdUploadType :: !(Maybe Text)
+    , _epdName :: !Text
+    , _epdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -33,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
     , UsersSettingsSendAsSmimeInfoDelete
 
     -- * Request Lenses
+    , ussasidXgafv
+    , ussasidUploadProtocol
+    , ussasidAccessToken
+    , ussasidUploadType
     , ussasidUserId
     , ussasidSendAsEmail
     , ussasidId
+    , ussasidCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.smimeInfo.delete@ method which the
 -- 'UsersSettingsSendAsSmimeInfoDelete' request conforms to.
@@ -53,16 +58,26 @@ type UsersSettingsSendAsSmimeInfoDeleteResource =
                  Capture "sendAsEmail" Text :>
                    "smimeInfo" :>
                      Capture "id" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoDelete' smart constructor.
 data UsersSettingsSendAsSmimeInfoDelete =
   UsersSettingsSendAsSmimeInfoDelete'
-    { _ussasidUserId      :: !Text
+    { _ussasidXgafv :: !(Maybe Xgafv)
+    , _ussasidUploadProtocol :: !(Maybe Text)
+    , _ussasidAccessToken :: !(Maybe Text)
+    , _ussasidUploadType :: !(Maybe Text)
+    , _ussasidUserId :: !Text
     , _ussasidSendAsEmail :: !Text
-    , _ussasidId          :: !Text
+    , _ussasidId :: !Text
+    , _ussasidCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,25 +86,63 @@ data UsersSettingsSendAsSmimeInfoDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussasidXgafv'
+--
+-- * 'ussasidUploadProtocol'
+--
+-- * 'ussasidAccessToken'
+--
+-- * 'ussasidUploadType'
+--
 -- * 'ussasidUserId'
 --
 -- * 'ussasidSendAsEmail'
 --
 -- * 'ussasidId'
+--
+-- * 'ussasidCallback'
 usersSettingsSendAsSmimeInfoDelete
     :: Text -- ^ 'ussasidSendAsEmail'
     -> Text -- ^ 'ussasidId'
     -> UsersSettingsSendAsSmimeInfoDelete
 usersSettingsSendAsSmimeInfoDelete pUssasidSendAsEmail_ pUssasidId_ =
   UsersSettingsSendAsSmimeInfoDelete'
-    { _ussasidUserId = "me"
+    { _ussasidXgafv = Nothing
+    , _ussasidUploadProtocol = Nothing
+    , _ussasidAccessToken = Nothing
+    , _ussasidUploadType = Nothing
+    , _ussasidUserId = "me"
     , _ussasidSendAsEmail = pUssasidSendAsEmail_
     , _ussasidId = pUssasidId_
+    , _ussasidCallback = Nothing
     }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+ussasidXgafv :: Lens' UsersSettingsSendAsSmimeInfoDelete (Maybe Xgafv)
+ussasidXgafv
+  = lens _ussasidXgafv (\ s a -> s{_ussasidXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussasidUploadProtocol :: Lens' UsersSettingsSendAsSmimeInfoDelete (Maybe Text)
+ussasidUploadProtocol
+  = lens _ussasidUploadProtocol
+      (\ s a -> s{_ussasidUploadProtocol = a})
+
+-- | OAuth access token.
+ussasidAccessToken :: Lens' UsersSettingsSendAsSmimeInfoDelete (Maybe Text)
+ussasidAccessToken
+  = lens _ussasidAccessToken
+      (\ s a -> s{_ussasidAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussasidUploadType :: Lens' UsersSettingsSendAsSmimeInfoDelete (Maybe Text)
+ussasidUploadType
+  = lens _ussasidUploadType
+      (\ s a -> s{_ussasidUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 ussasidUserId :: Lens' UsersSettingsSendAsSmimeInfoDelete Text
 ussasidUserId
   = lens _ussasidUserId
@@ -107,6 +160,12 @@ ussasidId :: Lens' UsersSettingsSendAsSmimeInfoDelete Text
 ussasidId
   = lens _ussasidId (\ s a -> s{_ussasidId = a})
 
+-- | JSONP
+ussasidCallback :: Lens' UsersSettingsSendAsSmimeInfoDelete (Maybe Text)
+ussasidCallback
+  = lens _ussasidCallback
+      (\ s a -> s{_ussasidCallback = a})
+
 instance GoogleRequest
            UsersSettingsSendAsSmimeInfoDelete
          where
@@ -116,6 +175,11 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsSendAsSmimeInfoDelete'{..}
           = go _ussasidUserId _ussasidSendAsEmail _ussasidId
+              _ussasidXgafv
+              _ussasidUploadProtocol
+              _ussasidAccessToken
+              _ussasidUploadType
+              _ussasidCallback
               (Just AltJSON)
               gmailService
           where go

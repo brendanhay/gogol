@@ -45,10 +45,11 @@ module Network.Google.Resource.Storage.Objects.Insert
     , oiContentEncoding
     , oiKmsKeyName
     , oiProjection
+    , oiProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.insert@ method which the
 -- 'ObjectsInsert' request conforms to.
@@ -71,9 +72,10 @@ type ObjectsInsertResource =
                                QueryParam "kmsKeyName" Text :>
                                  QueryParam "projection" ObjectsInsertProjection
                                    :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Object :>
-                                       Post '[JSON] Object
+                                   QueryParam "provisionalUserProject" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Object :>
+                                         Post '[JSON] Object
        :<|>
        "upload" :>
          "storage" :>
@@ -96,28 +98,31 @@ type ObjectsInsertResource =
                                      QueryParam "projection"
                                        ObjectsInsertProjection
                                        :>
-                                       QueryParam "alt" AltJSON :>
-                                         QueryParam "uploadType" Multipart :>
-                                           MultipartRelated '[JSON] Object :>
-                                             Post '[JSON] Object
+                                       QueryParam "provisionalUserProject" Text
+                                         :>
+                                         QueryParam "alt" AltJSON :>
+                                           QueryParam "uploadType" Multipart :>
+                                             MultipartRelated '[JSON] Object :>
+                                               Post '[JSON] Object
 
 -- | Stores a new object and metadata.
 --
 -- /See:/ 'objectsInsert' smart constructor.
 data ObjectsInsert =
   ObjectsInsert'
-    { _oiIfMetagenerationMatch    :: !(Maybe (Textual Int64))
-    , _oiIfGenerationNotMatch     :: !(Maybe (Textual Int64))
-    , _oiIfGenerationMatch        :: !(Maybe (Textual Int64))
-    , _oiPredefinedACL            :: !(Maybe ObjectsInsertPredefinedACL)
-    , _oiBucket                   :: !Text
-    , _oiPayload                  :: !Object
-    , _oiUserProject              :: !(Maybe Text)
-    , _oiName                     :: !(Maybe Text)
+    { _oiIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _oiIfGenerationNotMatch :: !(Maybe (Textual Int64))
+    , _oiIfGenerationMatch :: !(Maybe (Textual Int64))
+    , _oiPredefinedACL :: !(Maybe ObjectsInsertPredefinedACL)
+    , _oiBucket :: !Text
+    , _oiPayload :: !Object
+    , _oiUserProject :: !(Maybe Text)
+    , _oiName :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
-    , _oiContentEncoding          :: !(Maybe Text)
-    , _oiKmsKeyName               :: !(Maybe Text)
-    , _oiProjection               :: !(Maybe ObjectsInsertProjection)
+    , _oiContentEncoding :: !(Maybe Text)
+    , _oiKmsKeyName :: !(Maybe Text)
+    , _oiProjection :: !(Maybe ObjectsInsertProjection)
+    , _oiProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,6 +154,8 @@ data ObjectsInsert =
 -- * 'oiKmsKeyName'
 --
 -- * 'oiProjection'
+--
+-- * 'oiProvisionalUserProject'
 objectsInsert
     :: Text -- ^ 'oiBucket'
     -> Object -- ^ 'oiPayload'
@@ -167,6 +174,7 @@ objectsInsert pOiBucket_ pOiPayload_ =
     , _oiContentEncoding = Nothing
     , _oiKmsKeyName = Nothing
     , _oiProjection = Nothing
+    , _oiProvisionalUserProject = Nothing
     }
 
 
@@ -259,6 +267,13 @@ oiProjection :: Lens' ObjectsInsert (Maybe ObjectsInsertProjection)
 oiProjection
   = lens _oiProjection (\ s a -> s{_oiProjection = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+oiProvisionalUserProject :: Lens' ObjectsInsert (Maybe Text)
+oiProvisionalUserProject
+  = lens _oiProvisionalUserProject
+      (\ s a -> s{_oiProvisionalUserProject = a})
+
 instance GoogleRequest ObjectsInsert where
         type Rs ObjectsInsert = Object
         type Scopes ObjectsInsert =
@@ -276,6 +291,7 @@ instance GoogleRequest ObjectsInsert where
               _oiContentEncoding
               _oiKmsKeyName
               _oiProjection
+              _oiProvisionalUserProject
               (Just AltJSON)
               _oiPayload
               storageService
@@ -299,6 +315,7 @@ instance GoogleRequest (MediaUpload ObjectsInsert)
               _oiContentEncoding
               _oiKmsKeyName
               _oiProjection
+              _oiProvisionalUserProject
               (Just AltJSON)
               (Just Multipart)
               _oiPayload

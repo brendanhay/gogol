@@ -17,16 +17,16 @@
 --
 module Network.Google.Books.Types.Product where
 
-import           Network.Google.Books.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Books.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'userSettings' smart constructor.
 data UserSettings =
   UserSettings'
     { _usNotification :: !(Maybe UserSettingsNotification)
-    , _usKind         :: !Text
-    , _usNotesExport  :: !(Maybe UserSettingsNotesExport)
+    , _usKind :: !(Maybe Text)
+    , _usNotesExport :: !(Maybe UserSettingsNotesExport)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -44,10 +44,7 @@ userSettings
     :: UserSettings
 userSettings =
   UserSettings'
-    { _usNotification = Nothing
-    , _usKind = "books#usersettings"
-    , _usNotesExport = Nothing
-    }
+    {_usNotification = Nothing, _usKind = Nothing, _usNotesExport = Nothing}
 
 
 usNotification :: Lens' UserSettings (Maybe UserSettingsNotification)
@@ -56,7 +53,7 @@ usNotification
       (\ s a -> s{_usNotification = a})
 
 -- | Resource type.
-usKind :: Lens' UserSettings Text
+usKind :: Lens' UserSettings (Maybe Text)
 usKind = lens _usKind (\ s a -> s{_usKind = a})
 
 -- | User settings in sub-objects, each for different purposes.
@@ -70,26 +67,25 @@ instance FromJSON UserSettings where
           = withObject "UserSettings"
               (\ o ->
                  UserSettings' <$>
-                   (o .:? "notification") <*>
-                     (o .:? "kind" .!= "books#usersettings")
-                     <*> (o .:? "notesExport"))
+                   (o .:? "notification") <*> (o .:? "kind") <*>
+                     (o .:? "notesExport"))
 
 instance ToJSON UserSettings where
         toJSON UserSettings'{..}
           = object
               (catMaybes
                  [("notification" .=) <$> _usNotification,
-                  Just ("kind" .= _usKind),
+                  ("kind" .=) <$> _usKind,
                   ("notesExport" .=) <$> _usNotesExport])
 
 --
 -- /See:/ 'annotations' smart constructor.
 data Annotations =
   Annotations'
-    { _aTotalItems    :: !(Maybe (Textual Int32))
+    { _aTotalItems :: !(Maybe (Textual Int32))
     , _aNextPageToken :: !(Maybe Text)
-    , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Annotation])
+    , _aKind :: !(Maybe Text)
+    , _aItems :: !(Maybe [Annotation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -111,7 +107,7 @@ annotations =
   Annotations'
     { _aTotalItems = Nothing
     , _aNextPageToken = Nothing
-    , _aKind = "books#annotations"
+    , _aKind = Nothing
     , _aItems = Nothing
     }
 
@@ -131,7 +127,7 @@ aNextPageToken
       (\ s a -> s{_aNextPageToken = a})
 
 -- | Resource type.
-aKind :: Lens' Annotations Text
+aKind :: Lens' Annotations (Maybe Text)
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | A list of annotations.
@@ -146,7 +142,7 @@ instance FromJSON Annotations where
               (\ o ->
                  Annotations' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "books#annotations")
+                     (o .:? "kind")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Annotations where
@@ -155,16 +151,142 @@ instance ToJSON Annotations where
               (catMaybes
                  [("totalItems" .=) <$> _aTotalItems,
                   ("nextPageToken" .=) <$> _aNextPageToken,
-                  Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
+                  ("kind" .=) <$> _aKind, ("items" .=) <$> _aItems])
+
+--
+-- /See:/ 'seriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo' smart constructor.
+data SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo =
+  SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo'
+    { _ssissricriReleaseTime :: !(Maybe Text)
+    , _ssissricriCurrencyCode :: !(Maybe Text)
+    , _ssissricriAmountInMicros :: !(Maybe (Textual Double))
+    , _ssissricriReleaseNumber :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssissricriReleaseTime'
+--
+-- * 'ssissricriCurrencyCode'
+--
+-- * 'ssissricriAmountInMicros'
+--
+-- * 'ssissricriReleaseNumber'
+seriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    :: SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+seriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo =
+  SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo'
+    { _ssissricriReleaseTime = Nothing
+    , _ssissricriCurrencyCode = Nothing
+    , _ssissricriAmountInMicros = Nothing
+    , _ssissricriReleaseNumber = Nothing
+    }
+
+
+ssissricriReleaseTime :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo (Maybe Text)
+ssissricriReleaseTime
+  = lens _ssissricriReleaseTime
+      (\ s a -> s{_ssissricriReleaseTime = a})
+
+ssissricriCurrencyCode :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo (Maybe Text)
+ssissricriCurrencyCode
+  = lens _ssissricriCurrencyCode
+      (\ s a -> s{_ssissricriCurrencyCode = a})
+
+ssissricriAmountInMicros :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo (Maybe Double)
+ssissricriAmountInMicros
+  = lens _ssissricriAmountInMicros
+      (\ s a -> s{_ssissricriAmountInMicros = a})
+      . mapping _Coerce
+
+ssissricriReleaseNumber :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo (Maybe Text)
+ssissricriReleaseNumber
+  = lens _ssissricriReleaseNumber
+      (\ s a -> s{_ssissricriReleaseNumber = a})
+
+instance FromJSON
+           SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+         where
+        parseJSON
+          = withObject
+              "SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo"
+              (\ o ->
+                 SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo'
+                   <$>
+                   (o .:? "releaseTime") <*> (o .:? "currencyCode") <*>
+                     (o .:? "amountInMicros")
+                     <*> (o .:? "releaseNumber"))
+
+instance ToJSON
+           SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+         where
+        toJSON
+          SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo'{..}
+          = object
+              (catMaybes
+                 [("releaseTime" .=) <$> _ssissricriReleaseTime,
+                  ("currencyCode" .=) <$> _ssissricriCurrencyCode,
+                  ("amountInMicros" .=) <$> _ssissricriAmountInMicros,
+                  ("releaseNumber" .=) <$> _ssissricriReleaseNumber])
+
+-- | The reading modes available for this volume.
+--
+-- /See:/ 'volumeVolumeInfoReadingModes' smart constructor.
+data VolumeVolumeInfoReadingModes =
+  VolumeVolumeInfoReadingModes'
+    { _vvirmImage :: !(Maybe Bool)
+    , _vvirmText :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VolumeVolumeInfoReadingModes' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vvirmImage'
+--
+-- * 'vvirmText'
+volumeVolumeInfoReadingModes
+    :: VolumeVolumeInfoReadingModes
+volumeVolumeInfoReadingModes =
+  VolumeVolumeInfoReadingModes' {_vvirmImage = Nothing, _vvirmText = Nothing}
+
+
+vvirmImage :: Lens' VolumeVolumeInfoReadingModes (Maybe Bool)
+vvirmImage
+  = lens _vvirmImage (\ s a -> s{_vvirmImage = a})
+
+vvirmText :: Lens' VolumeVolumeInfoReadingModes (Maybe Bool)
+vvirmText
+  = lens _vvirmText (\ s a -> s{_vvirmText = a})
+
+instance FromJSON VolumeVolumeInfoReadingModes where
+        parseJSON
+          = withObject "VolumeVolumeInfoReadingModes"
+              (\ o ->
+                 VolumeVolumeInfoReadingModes' <$>
+                   (o .:? "image") <*> (o .:? "text"))
+
+instance ToJSON VolumeVolumeInfoReadingModes where
+        toJSON VolumeVolumeInfoReadingModes'{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _vvirmImage,
+                  ("text" .=) <$> _vvirmText])
 
 --
 -- /See:/ 'annotationsData' smart constructor.
 data AnnotationsData =
   AnnotationsData'
-    { _adTotalItems    :: !(Maybe (Textual Int32))
+    { _adTotalItems :: !(Maybe (Textual Int32))
     , _adNextPageToken :: !(Maybe Text)
-    , _adKind          :: !Text
-    , _adItems         :: !(Maybe [AnnotationData])
+    , _adKind :: !(Maybe Text)
+    , _adItems :: !(Maybe [GeoAnnotationData])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -186,7 +308,7 @@ annotationsData =
   AnnotationsData'
     { _adTotalItems = Nothing
     , _adNextPageToken = Nothing
-    , _adKind = "books#annotationsdata"
+    , _adKind = Nothing
     , _adItems = Nothing
     }
 
@@ -205,11 +327,11 @@ adNextPageToken
       (\ s a -> s{_adNextPageToken = a})
 
 -- | Resource type
-adKind :: Lens' AnnotationsData Text
+adKind :: Lens' AnnotationsData (Maybe Text)
 adKind = lens _adKind (\ s a -> s{_adKind = a})
 
 -- | A list of Annotation Data.
-adItems :: Lens' AnnotationsData [AnnotationData]
+adItems :: Lens' AnnotationsData [GeoAnnotationData]
 adItems
   = lens _adItems (\ s a -> s{_adItems = a}) . _Default
       . _Coerce
@@ -220,7 +342,7 @@ instance FromJSON AnnotationsData where
               (\ o ->
                  AnnotationsData' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "books#annotationsdata")
+                     (o .:? "kind")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AnnotationsData where
@@ -229,7 +351,7 @@ instance ToJSON AnnotationsData where
               (catMaybes
                  [("totalItems" .=) <$> _adTotalItems,
                   ("nextPageToken" .=) <$> _adNextPageToken,
-                  Just ("kind" .= _adKind), ("items" .=) <$> _adItems])
+                  ("kind" .=) <$> _adKind, ("items" .=) <$> _adItems])
 
 --
 -- /See:/ 'userSettingsNotificationMoreFromAuthors' smart constructor.
@@ -278,11 +400,11 @@ instance ToJSON
 -- /See:/ 'volumeannotations' smart constructor.
 data Volumeannotations =
   Volumeannotations'
-    { _vTotalItems    :: !(Maybe (Textual Int32))
+    { _vTotalItems :: !(Maybe (Textual Int32))
     , _vNextPageToken :: !(Maybe Text)
-    , _vKind          :: !Text
-    , _vItems         :: !(Maybe [Volumeannotation])
-    , _vVersion       :: !(Maybe Text)
+    , _vKind :: !(Maybe Text)
+    , _vItems :: !(Maybe [Volumeannotation])
+    , _vVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -306,7 +428,7 @@ volumeannotations =
   Volumeannotations'
     { _vTotalItems = Nothing
     , _vNextPageToken = Nothing
-    , _vKind = "books#volumeannotations"
+    , _vKind = Nothing
     , _vItems = Nothing
     , _vVersion = Nothing
     }
@@ -326,7 +448,7 @@ vNextPageToken
       (\ s a -> s{_vNextPageToken = a})
 
 -- | Resource type
-vKind :: Lens' Volumeannotations Text
+vKind :: Lens' Volumeannotations (Maybe Text)
 vKind = lens _vKind (\ s a -> s{_vKind = a})
 
 -- | A list of volume annotations.
@@ -348,7 +470,7 @@ instance FromJSON Volumeannotations where
               (\ o ->
                  Volumeannotations' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "books#volumeannotations")
+                     (o .:? "kind")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "version"))
 
@@ -358,7 +480,7 @@ instance ToJSON Volumeannotations where
               (catMaybes
                  [("totalItems" .=) <$> _vTotalItems,
                   ("nextPageToken" .=) <$> _vNextPageToken,
-                  Just ("kind" .= _vKind), ("items" .=) <$> _vItems,
+                  ("kind" .=) <$> _vKind, ("items" .=) <$> _vItems,
                   ("version" .=) <$> _vVersion])
 
 -- | Information regarding the source of this review, when the review is not
@@ -368,8 +490,8 @@ instance ToJSON Volumeannotations where
 data ReviewSource =
   ReviewSource'
     { _rsExtraDescription :: !(Maybe Text)
-    , _rsURL              :: !(Maybe Text)
-    , _rsDescription      :: !(Maybe Text)
+    , _rsURL :: !(Maybe Text)
+    , _rsDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -423,150 +545,23 @@ instance ToJSON ReviewSource where
                   ("description" .=) <$> _rsDescription])
 
 --
--- /See:/ 'annotationData' smart constructor.
-data AnnotationData =
-  AnnotationData'
-    { _annEncodedData    :: !(Maybe Bytes)
-    , _annKind           :: !Text
-    , _annData           :: !(Maybe JSONValue)
-    , _annSelfLink       :: !(Maybe Text)
-    , _annAnnotationType :: !(Maybe Text)
-    , _annVolumeId       :: !(Maybe Text)
-    , _annId             :: !(Maybe Text)
-    , _annUpdated        :: !(Maybe DateTime')
-    , _annLayerId        :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AnnotationData' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'annEncodedData'
---
--- * 'annKind'
---
--- * 'annData'
---
--- * 'annSelfLink'
---
--- * 'annAnnotationType'
---
--- * 'annVolumeId'
---
--- * 'annId'
---
--- * 'annUpdated'
---
--- * 'annLayerId'
-annotationData
-    :: AnnotationData
-annotationData =
-  AnnotationData'
-    { _annEncodedData = Nothing
-    , _annKind = "books#annotationdata"
-    , _annData = Nothing
-    , _annSelfLink = Nothing
-    , _annAnnotationType = Nothing
-    , _annVolumeId = Nothing
-    , _annId = Nothing
-    , _annUpdated = Nothing
-    , _annLayerId = Nothing
-    }
-
-
--- | Base64 encoded data for this annotation data.
-annEncodedData :: Lens' AnnotationData (Maybe ByteString)
-annEncodedData
-  = lens _annEncodedData
-      (\ s a -> s{_annEncodedData = a})
-      . mapping _Bytes
-
--- | Resource Type
-annKind :: Lens' AnnotationData Text
-annKind = lens _annKind (\ s a -> s{_annKind = a})
-
-annData :: Lens' AnnotationData (Maybe JSONValue)
-annData = lens _annData (\ s a -> s{_annData = a})
-
--- | URL for this resource. *
-annSelfLink :: Lens' AnnotationData (Maybe Text)
-annSelfLink
-  = lens _annSelfLink (\ s a -> s{_annSelfLink = a})
-
--- | The type of annotation this data is for.
-annAnnotationType :: Lens' AnnotationData (Maybe Text)
-annAnnotationType
-  = lens _annAnnotationType
-      (\ s a -> s{_annAnnotationType = a})
-
--- | The volume id for this data. *
-annVolumeId :: Lens' AnnotationData (Maybe Text)
-annVolumeId
-  = lens _annVolumeId (\ s a -> s{_annVolumeId = a})
-
--- | Unique id for this annotation data.
-annId :: Lens' AnnotationData (Maybe Text)
-annId = lens _annId (\ s a -> s{_annId = a})
-
--- | Timestamp for the last time this data was updated. (RFC 3339 UTC
--- date-time format).
-annUpdated :: Lens' AnnotationData (Maybe UTCTime)
-annUpdated
-  = lens _annUpdated (\ s a -> s{_annUpdated = a}) .
-      mapping _DateTime
-
--- | The Layer id for this data. *
-annLayerId :: Lens' AnnotationData (Maybe Text)
-annLayerId
-  = lens _annLayerId (\ s a -> s{_annLayerId = a})
-
-instance FromJSON AnnotationData where
-        parseJSON
-          = withObject "AnnotationData"
-              (\ o ->
-                 AnnotationData' <$>
-                   (o .:? "encoded_data") <*>
-                     (o .:? "kind" .!= "books#annotationdata")
-                     <*> (o .:? "data")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "annotationType")
-                     <*> (o .:? "volumeId")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "layerId"))
-
-instance ToJSON AnnotationData where
-        toJSON AnnotationData'{..}
-          = object
-              (catMaybes
-                 [("encoded_data" .=) <$> _annEncodedData,
-                  Just ("kind" .= _annKind), ("data" .=) <$> _annData,
-                  ("selfLink" .=) <$> _annSelfLink,
-                  ("annotationType" .=) <$> _annAnnotationType,
-                  ("volumeId" .=) <$> _annVolumeId,
-                  ("id" .=) <$> _annId, ("updated" .=) <$> _annUpdated,
-                  ("layerId" .=) <$> _annLayerId])
-
---
 -- /See:/ 'volumeannotation' smart constructor.
 data Volumeannotation =
   Volumeannotation'
-    { _volSelectedText       :: !(Maybe Text)
+    { _volSelectedText :: !(Maybe Text)
     , _volAnnotationDataLink :: !(Maybe Text)
-    , _volPageIds            :: !(Maybe [Text])
-    , _volKind               :: !Text
-    , _volData               :: !(Maybe Text)
-    , _volSelfLink           :: !(Maybe Text)
-    , _volAnnotationType     :: !(Maybe Text)
-    , _volAnnotationDataId   :: !(Maybe Text)
-    , _volContentRanges      :: !(Maybe VolumeannotationContentRanges)
-    , _volVolumeId           :: !(Maybe Text)
-    , _volId                 :: !(Maybe Text)
-    , _volDeleted            :: !(Maybe Bool)
-    , _volUpdated            :: !(Maybe DateTime')
-    , _volLayerId            :: !(Maybe Text)
+    , _volPageIds :: !(Maybe [Text])
+    , _volKind :: !(Maybe Text)
+    , _volData :: !(Maybe Text)
+    , _volSelfLink :: !(Maybe Text)
+    , _volAnnotationType :: !(Maybe Text)
+    , _volAnnotationDataId :: !(Maybe Text)
+    , _volContentRanges :: !(Maybe VolumeannotationContentRanges)
+    , _volVolumeId :: !(Maybe Text)
+    , _volId :: !(Maybe Text)
+    , _volDeleted :: !(Maybe Bool)
+    , _volUpdated :: !(Maybe Text)
+    , _volLayerId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -609,7 +604,7 @@ volumeannotation =
     { _volSelectedText = Nothing
     , _volAnnotationDataLink = Nothing
     , _volPageIds = Nothing
-    , _volKind = "books#volumeannotation"
+    , _volKind = Nothing
     , _volData = Nothing
     , _volSelfLink = Nothing
     , _volAnnotationType = Nothing
@@ -643,7 +638,7 @@ volPageIds
       . _Coerce
 
 -- | Resource Type
-volKind :: Lens' Volumeannotation Text
+volKind :: Lens' Volumeannotation (Maybe Text)
 volKind = lens _volKind (\ s a -> s{_volKind = a})
 
 -- | Data for this annotation.
@@ -689,10 +684,9 @@ volDeleted
 
 -- | Timestamp for the last time this anntoation was updated. (RFC 3339 UTC
 -- date-time format).
-volUpdated :: Lens' Volumeannotation (Maybe UTCTime)
+volUpdated :: Lens' Volumeannotation (Maybe Text)
 volUpdated
-  = lens _volUpdated (\ s a -> s{_volUpdated = a}) .
-      mapping _DateTime
+  = lens _volUpdated (\ s a -> s{_volUpdated = a})
 
 -- | The Layer this annotation is for.
 volLayerId :: Lens' Volumeannotation (Maybe Text)
@@ -707,7 +701,7 @@ instance FromJSON Volumeannotation where
                    (o .:? "selectedText") <*>
                      (o .:? "annotationDataLink")
                      <*> (o .:? "pageIds" .!= mempty)
-                     <*> (o .:? "kind" .!= "books#volumeannotation")
+                     <*> (o .:? "kind")
                      <*> (o .:? "data")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "annotationType")
@@ -726,7 +720,7 @@ instance ToJSON Volumeannotation where
                  [("selectedText" .=) <$> _volSelectedText,
                   ("annotationDataLink" .=) <$> _volAnnotationDataLink,
                   ("pageIds" .=) <$> _volPageIds,
-                  Just ("kind" .= _volKind), ("data" .=) <$> _volData,
+                  ("kind" .=) <$> _volKind, ("data" .=) <$> _volData,
                   ("selfLink" .=) <$> _volSelfLink,
                   ("annotationType" .=) <$> _volAnnotationType,
                   ("annotationDataId" .=) <$> _volAnnotationDataId,
@@ -741,9 +735,9 @@ instance ToJSON Volumeannotation where
 data BooksCloudLoadingResource =
   BooksCloudLoadingResource'
     { _bclrProcessingState :: !(Maybe Text)
-    , _bclrVolumeId        :: !(Maybe Text)
-    , _bclrAuthor          :: !(Maybe Text)
-    , _bclrTitle           :: !(Maybe Text)
+    , _bclrVolumeId :: !(Maybe Text)
+    , _bclrAuthor :: !(Maybe Text)
+    , _bclrTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -809,7 +803,7 @@ instance ToJSON BooksCloudLoadingResource where
 -- /See:/ 'volumeseriesInfoVolumeSeriesItemIssueItem' smart constructor.
 data VolumeseriesInfoVolumeSeriesItemIssueItem =
   VolumeseriesInfoVolumeSeriesItemIssueItem'
-    { _vivsiiiIssueOrderNumber   :: !(Maybe (Textual Int32))
+    { _vivsiiiIssueOrderNumber :: !(Maybe (Textual Int32))
     , _vivsiiiIssueDisplayNumber :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -866,23 +860,23 @@ instance ToJSON
 -- /See:/ 'annotation' smart constructor.
 data Annotation =
   Annotation'
-    { _aaSelectedText         :: !(Maybe Text)
-    , _aaLayerSummary         :: !(Maybe AnnotationLayerSummary)
-    , _aaHighlightStyle       :: !(Maybe Text)
-    , _aaClientVersionRanges  :: !(Maybe AnnotationClientVersionRanges)
-    , _aaPageIds              :: !(Maybe [Text])
-    , _aaKind                 :: !Text
-    , _aaData                 :: !(Maybe Text)
-    , _aaCreated              :: !(Maybe DateTime')
-    , _aaAfterSelectedText    :: !(Maybe Text)
-    , _aaSelfLink             :: !(Maybe Text)
-    , _aaCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
-    , _aaVolumeId             :: !(Maybe Text)
-    , _aaBeforeSelectedText   :: !(Maybe Text)
-    , _aaId                   :: !(Maybe Text)
-    , _aaDeleted              :: !(Maybe Bool)
-    , _aaUpdated              :: !(Maybe DateTime')
-    , _aaLayerId              :: !(Maybe Text)
+    { _annSelectedText :: !(Maybe Text)
+    , _annLayerSummary :: !(Maybe AnnotationLayerSummary)
+    , _annHighlightStyle :: !(Maybe Text)
+    , _annClientVersionRanges :: !(Maybe AnnotationClientVersionRanges)
+    , _annPageIds :: !(Maybe [Text])
+    , _annKind :: !(Maybe Text)
+    , _annData :: !(Maybe Text)
+    , _annCreated :: !(Maybe Text)
+    , _annAfterSelectedText :: !(Maybe Text)
+    , _annSelfLink :: !(Maybe Text)
+    , _annCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
+    , _annVolumeId :: !(Maybe Text)
+    , _annBeforeSelectedText :: !(Maybe Text)
+    , _annId :: !(Maybe Text)
+    , _annDeleted :: !(Maybe Bool)
+    , _annUpdated :: !(Maybe Text)
+    , _annLayerId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -891,156 +885,154 @@ data Annotation =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaSelectedText'
+-- * 'annSelectedText'
 --
--- * 'aaLayerSummary'
+-- * 'annLayerSummary'
 --
--- * 'aaHighlightStyle'
+-- * 'annHighlightStyle'
 --
--- * 'aaClientVersionRanges'
+-- * 'annClientVersionRanges'
 --
--- * 'aaPageIds'
+-- * 'annPageIds'
 --
--- * 'aaKind'
+-- * 'annKind'
 --
--- * 'aaData'
+-- * 'annData'
 --
--- * 'aaCreated'
+-- * 'annCreated'
 --
--- * 'aaAfterSelectedText'
+-- * 'annAfterSelectedText'
 --
--- * 'aaSelfLink'
+-- * 'annSelfLink'
 --
--- * 'aaCurrentVersionRanges'
+-- * 'annCurrentVersionRanges'
 --
--- * 'aaVolumeId'
+-- * 'annVolumeId'
 --
--- * 'aaBeforeSelectedText'
+-- * 'annBeforeSelectedText'
 --
--- * 'aaId'
+-- * 'annId'
 --
--- * 'aaDeleted'
+-- * 'annDeleted'
 --
--- * 'aaUpdated'
+-- * 'annUpdated'
 --
--- * 'aaLayerId'
+-- * 'annLayerId'
 annotation
     :: Annotation
 annotation =
   Annotation'
-    { _aaSelectedText = Nothing
-    , _aaLayerSummary = Nothing
-    , _aaHighlightStyle = Nothing
-    , _aaClientVersionRanges = Nothing
-    , _aaPageIds = Nothing
-    , _aaKind = "books#annotation"
-    , _aaData = Nothing
-    , _aaCreated = Nothing
-    , _aaAfterSelectedText = Nothing
-    , _aaSelfLink = Nothing
-    , _aaCurrentVersionRanges = Nothing
-    , _aaVolumeId = Nothing
-    , _aaBeforeSelectedText = Nothing
-    , _aaId = Nothing
-    , _aaDeleted = Nothing
-    , _aaUpdated = Nothing
-    , _aaLayerId = Nothing
+    { _annSelectedText = Nothing
+    , _annLayerSummary = Nothing
+    , _annHighlightStyle = Nothing
+    , _annClientVersionRanges = Nothing
+    , _annPageIds = Nothing
+    , _annKind = Nothing
+    , _annData = Nothing
+    , _annCreated = Nothing
+    , _annAfterSelectedText = Nothing
+    , _annSelfLink = Nothing
+    , _annCurrentVersionRanges = Nothing
+    , _annVolumeId = Nothing
+    , _annBeforeSelectedText = Nothing
+    , _annId = Nothing
+    , _annDeleted = Nothing
+    , _annUpdated = Nothing
+    , _annLayerId = Nothing
     }
 
 
 -- | Excerpt from the volume.
-aaSelectedText :: Lens' Annotation (Maybe Text)
-aaSelectedText
-  = lens _aaSelectedText
-      (\ s a -> s{_aaSelectedText = a})
+annSelectedText :: Lens' Annotation (Maybe Text)
+annSelectedText
+  = lens _annSelectedText
+      (\ s a -> s{_annSelectedText = a})
 
-aaLayerSummary :: Lens' Annotation (Maybe AnnotationLayerSummary)
-aaLayerSummary
-  = lens _aaLayerSummary
-      (\ s a -> s{_aaLayerSummary = a})
+annLayerSummary :: Lens' Annotation (Maybe AnnotationLayerSummary)
+annLayerSummary
+  = lens _annLayerSummary
+      (\ s a -> s{_annLayerSummary = a})
 
 -- | The highlight style for this annotation.
-aaHighlightStyle :: Lens' Annotation (Maybe Text)
-aaHighlightStyle
-  = lens _aaHighlightStyle
-      (\ s a -> s{_aaHighlightStyle = a})
+annHighlightStyle :: Lens' Annotation (Maybe Text)
+annHighlightStyle
+  = lens _annHighlightStyle
+      (\ s a -> s{_annHighlightStyle = a})
 
 -- | Selection ranges sent from the client.
-aaClientVersionRanges :: Lens' Annotation (Maybe AnnotationClientVersionRanges)
-aaClientVersionRanges
-  = lens _aaClientVersionRanges
-      (\ s a -> s{_aaClientVersionRanges = a})
+annClientVersionRanges :: Lens' Annotation (Maybe AnnotationClientVersionRanges)
+annClientVersionRanges
+  = lens _annClientVersionRanges
+      (\ s a -> s{_annClientVersionRanges = a})
 
 -- | Pages that this annotation spans.
-aaPageIds :: Lens' Annotation [Text]
-aaPageIds
-  = lens _aaPageIds (\ s a -> s{_aaPageIds = a}) .
+annPageIds :: Lens' Annotation [Text]
+annPageIds
+  = lens _annPageIds (\ s a -> s{_annPageIds = a}) .
       _Default
       . _Coerce
 
 -- | Resource type.
-aaKind :: Lens' Annotation Text
-aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
+annKind :: Lens' Annotation (Maybe Text)
+annKind = lens _annKind (\ s a -> s{_annKind = a})
 
 -- | User-created data for this annotation.
-aaData :: Lens' Annotation (Maybe Text)
-aaData = lens _aaData (\ s a -> s{_aaData = a})
+annData :: Lens' Annotation (Maybe Text)
+annData = lens _annData (\ s a -> s{_annData = a})
 
 -- | Timestamp for the created time of this annotation.
-aaCreated :: Lens' Annotation (Maybe UTCTime)
-aaCreated
-  = lens _aaCreated (\ s a -> s{_aaCreated = a}) .
-      mapping _DateTime
+annCreated :: Lens' Annotation (Maybe Text)
+annCreated
+  = lens _annCreated (\ s a -> s{_annCreated = a})
 
 -- | Anchor text after excerpt. For requests, if the user bookmarked a screen
 -- that has no flowing text on it, then this field should be empty.
-aaAfterSelectedText :: Lens' Annotation (Maybe Text)
-aaAfterSelectedText
-  = lens _aaAfterSelectedText
-      (\ s a -> s{_aaAfterSelectedText = a})
+annAfterSelectedText :: Lens' Annotation (Maybe Text)
+annAfterSelectedText
+  = lens _annAfterSelectedText
+      (\ s a -> s{_annAfterSelectedText = a})
 
 -- | URL to this resource.
-aaSelfLink :: Lens' Annotation (Maybe Text)
-aaSelfLink
-  = lens _aaSelfLink (\ s a -> s{_aaSelfLink = a})
+annSelfLink :: Lens' Annotation (Maybe Text)
+annSelfLink
+  = lens _annSelfLink (\ s a -> s{_annSelfLink = a})
 
 -- | Selection ranges for the most recent content version.
-aaCurrentVersionRanges :: Lens' Annotation (Maybe AnnotationCurrentVersionRanges)
-aaCurrentVersionRanges
-  = lens _aaCurrentVersionRanges
-      (\ s a -> s{_aaCurrentVersionRanges = a})
+annCurrentVersionRanges :: Lens' Annotation (Maybe AnnotationCurrentVersionRanges)
+annCurrentVersionRanges
+  = lens _annCurrentVersionRanges
+      (\ s a -> s{_annCurrentVersionRanges = a})
 
 -- | The volume that this annotation belongs to.
-aaVolumeId :: Lens' Annotation (Maybe Text)
-aaVolumeId
-  = lens _aaVolumeId (\ s a -> s{_aaVolumeId = a})
+annVolumeId :: Lens' Annotation (Maybe Text)
+annVolumeId
+  = lens _annVolumeId (\ s a -> s{_annVolumeId = a})
 
 -- | Anchor text before excerpt. For requests, if the user bookmarked a
 -- screen that has no flowing text on it, then this field should be empty.
-aaBeforeSelectedText :: Lens' Annotation (Maybe Text)
-aaBeforeSelectedText
-  = lens _aaBeforeSelectedText
-      (\ s a -> s{_aaBeforeSelectedText = a})
+annBeforeSelectedText :: Lens' Annotation (Maybe Text)
+annBeforeSelectedText
+  = lens _annBeforeSelectedText
+      (\ s a -> s{_annBeforeSelectedText = a})
 
 -- | Id of this annotation, in the form of a GUID.
-aaId :: Lens' Annotation (Maybe Text)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
+annId :: Lens' Annotation (Maybe Text)
+annId = lens _annId (\ s a -> s{_annId = a})
 
 -- | Indicates that this annotation is deleted.
-aaDeleted :: Lens' Annotation (Maybe Bool)
-aaDeleted
-  = lens _aaDeleted (\ s a -> s{_aaDeleted = a})
+annDeleted :: Lens' Annotation (Maybe Bool)
+annDeleted
+  = lens _annDeleted (\ s a -> s{_annDeleted = a})
 
 -- | Timestamp for the last time this annotation was modified.
-aaUpdated :: Lens' Annotation (Maybe UTCTime)
-aaUpdated
-  = lens _aaUpdated (\ s a -> s{_aaUpdated = a}) .
-      mapping _DateTime
+annUpdated :: Lens' Annotation (Maybe Text)
+annUpdated
+  = lens _annUpdated (\ s a -> s{_annUpdated = a})
 
 -- | The layer this annotation is for.
-aaLayerId :: Lens' Annotation (Maybe Text)
-aaLayerId
-  = lens _aaLayerId (\ s a -> s{_aaLayerId = a})
+annLayerId :: Lens' Annotation (Maybe Text)
+annLayerId
+  = lens _annLayerId (\ s a -> s{_annLayerId = a})
 
 instance FromJSON Annotation where
         parseJSON
@@ -1051,7 +1043,7 @@ instance FromJSON Annotation where
                      (o .:? "highlightStyle")
                      <*> (o .:? "clientVersionRanges")
                      <*> (o .:? "pageIds" .!= mempty)
-                     <*> (o .:? "kind" .!= "books#annotation")
+                     <*> (o .:? "kind")
                      <*> (o .:? "data")
                      <*> (o .:? "created")
                      <*> (o .:? "afterSelectedText")
@@ -1068,23 +1060,23 @@ instance ToJSON Annotation where
         toJSON Annotation'{..}
           = object
               (catMaybes
-                 [("selectedText" .=) <$> _aaSelectedText,
-                  ("layerSummary" .=) <$> _aaLayerSummary,
-                  ("highlightStyle" .=) <$> _aaHighlightStyle,
+                 [("selectedText" .=) <$> _annSelectedText,
+                  ("layerSummary" .=) <$> _annLayerSummary,
+                  ("highlightStyle" .=) <$> _annHighlightStyle,
                   ("clientVersionRanges" .=) <$>
-                    _aaClientVersionRanges,
-                  ("pageIds" .=) <$> _aaPageIds,
-                  Just ("kind" .= _aaKind), ("data" .=) <$> _aaData,
-                  ("created" .=) <$> _aaCreated,
-                  ("afterSelectedText" .=) <$> _aaAfterSelectedText,
-                  ("selfLink" .=) <$> _aaSelfLink,
+                    _annClientVersionRanges,
+                  ("pageIds" .=) <$> _annPageIds,
+                  ("kind" .=) <$> _annKind, ("data" .=) <$> _annData,
+                  ("created" .=) <$> _annCreated,
+                  ("afterSelectedText" .=) <$> _annAfterSelectedText,
+                  ("selfLink" .=) <$> _annSelfLink,
                   ("currentVersionRanges" .=) <$>
-                    _aaCurrentVersionRanges,
-                  ("volumeId" .=) <$> _aaVolumeId,
-                  ("beforeSelectedText" .=) <$> _aaBeforeSelectedText,
-                  ("id" .=) <$> _aaId, ("deleted" .=) <$> _aaDeleted,
-                  ("updated" .=) <$> _aaUpdated,
-                  ("layerId" .=) <$> _aaLayerId])
+                    _annCurrentVersionRanges,
+                  ("volumeId" .=) <$> _annVolumeId,
+                  ("beforeSelectedText" .=) <$> _annBeforeSelectedText,
+                  ("id" .=) <$> _annId, ("deleted" .=) <$> _annDeleted,
+                  ("updated" .=) <$> _annUpdated,
+                  ("layerId" .=) <$> _annLayerId])
 
 -- | Author of this review.
 --
@@ -1172,24 +1164,24 @@ instance ToJSON GeolayerDataGeoViewport where
 -- /See:/ 'volumeUserInfo' smart constructor.
 data VolumeUserInfo =
   VolumeUserInfo'
-    { _vuiIsFamilySharingAllowed       :: !(Maybe Bool)
-    , _vuiIsFamilySharedToUser         :: !(Maybe Bool)
-    , _vuiCopy                         :: !(Maybe VolumeUserInfoCopy)
-    , _vuiUserUploadedVolumeInfo       :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
-    , _vuiIsPurchased                  :: !(Maybe Bool)
-    , _vuiEntitlementType              :: !(Maybe (Textual Int32))
-    , _vuiAcquisitionType              :: !(Maybe (Textual Int32))
-    , _vuiAcquiredTime                 :: !(Maybe DateTime')
-    , _vuiRentalState                  :: !(Maybe Text)
-    , _vuiIsPreOrdered                 :: !(Maybe Bool)
-    , _vuiReview                       :: !(Maybe Review)
-    , _vuiIsFamilySharedFromUser       :: !(Maybe Bool)
-    , _vuiRentalPeriod                 :: !(Maybe VolumeUserInfoRentalPeriod)
-    , _vuiUpdated                      :: !(Maybe DateTime')
-    , _vuiIsUploaded                   :: !(Maybe Bool)
-    , _vuiIsInMyBooks                  :: !(Maybe Bool)
-    , _vuiReadingPosition              :: !(Maybe ReadingPosition)
-    , _vuiFamilySharing                :: !(Maybe VolumeUserInfoFamilySharing)
+    { _vuiIsFamilySharingAllowed :: !(Maybe Bool)
+    , _vuiIsFamilySharedToUser :: !(Maybe Bool)
+    , _vuiCopy :: !(Maybe VolumeUserInfoCopy)
+    , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
+    , _vuiIsPurchased :: !(Maybe Bool)
+    , _vuiEntitlementType :: !(Maybe (Textual Int32))
+    , _vuiAcquisitionType :: !(Maybe (Textual Int32))
+    , _vuiAcquiredTime :: !(Maybe Text)
+    , _vuiRentalState :: !(Maybe Text)
+    , _vuiIsPreOrdered :: !(Maybe Bool)
+    , _vuiReview :: !(Maybe Review)
+    , _vuiIsFamilySharedFromUser :: !(Maybe Bool)
+    , _vuiRentalPeriod :: !(Maybe VolumeUserInfoRentalPeriod)
+    , _vuiUpdated :: !(Maybe Text)
+    , _vuiIsUploaded :: !(Maybe Bool)
+    , _vuiIsInMyBooks :: !(Maybe Bool)
+    , _vuiReadingPosition :: !(Maybe ReadingPosition)
+    , _vuiFamilySharing :: !(Maybe VolumeUserInfoFamilySharing)
     , _vuiIsFamilySharingDisabledByFop :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1307,11 +1299,10 @@ vuiAcquisitionType
 -- | Timestamp when this volume was acquired by the user. (RFC 3339 UTC
 -- date-time format) Acquiring includes purchase, user upload, receiving
 -- family sharing, etc.
-vuiAcquiredTime :: Lens' VolumeUserInfo (Maybe UTCTime)
+vuiAcquiredTime :: Lens' VolumeUserInfo (Maybe Text)
 vuiAcquiredTime
   = lens _vuiAcquiredTime
       (\ s a -> s{_vuiAcquiredTime = a})
-      . mapping _DateTime
 
 -- | Whether this book is an active or an expired rental.
 vuiRentalState :: Lens' VolumeUserInfo (Maybe Text)
@@ -1346,10 +1337,9 @@ vuiRentalPeriod
 -- | Timestamp when this volume was last modified by a user action, such as a
 -- reading position update, volume purchase or writing a review. (RFC 3339
 -- UTC date-time format).
-vuiUpdated :: Lens' VolumeUserInfo (Maybe UTCTime)
+vuiUpdated :: Lens' VolumeUserInfo (Maybe Text)
 vuiUpdated
-  = lens _vuiUpdated (\ s a -> s{_vuiUpdated = a}) .
-      mapping _DateTime
+  = lens _vuiUpdated (\ s a -> s{_vuiUpdated = a})
 
 -- | Whether or not this volume was user uploaded.
 vuiIsUploaded :: Lens' VolumeUserInfo (Maybe Bool)
@@ -1440,19 +1430,19 @@ instance ToJSON VolumeUserInfo where
 -- /See:/ 'layersummary' smart constructor.
 data Layersummary =
   Layersummary'
-    { _lAnnotationsDataLink      :: !(Maybe Text)
-    , _lAnnotationsLink          :: !(Maybe Text)
-    , _lKind                     :: !Text
-    , _lDataCount                :: !(Maybe (Textual Int32))
-    , _lContentVersion           :: !(Maybe Text)
+    { _lAnnotationsDataLink :: !(Maybe Text)
+    , _lAnnotationsLink :: !(Maybe Text)
+    , _lKind :: !(Maybe Text)
+    , _lDataCount :: !(Maybe (Textual Int32))
+    , _lContentVersion :: !(Maybe Text)
     , _lVolumeAnnotationsVersion :: !(Maybe Text)
-    , _lAnnotationCount          :: !(Maybe (Textual Int32))
-    , _lAnnotationTypes          :: !(Maybe [Text])
-    , _lSelfLink                 :: !(Maybe Text)
-    , _lVolumeId                 :: !(Maybe Text)
-    , _lId                       :: !(Maybe Text)
-    , _lUpdated                  :: !(Maybe DateTime')
-    , _lLayerId                  :: !(Maybe Text)
+    , _lAnnotationCount :: !(Maybe (Textual Int32))
+    , _lAnnotationTypes :: !(Maybe [Text])
+    , _lSelfLink :: !(Maybe Text)
+    , _lVolumeId :: !(Maybe Text)
+    , _lId :: !(Maybe Text)
+    , _lUpdated :: !(Maybe Text)
+    , _lLayerId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1492,7 +1482,7 @@ layersummary =
   Layersummary'
     { _lAnnotationsDataLink = Nothing
     , _lAnnotationsLink = Nothing
-    , _lKind = "books#layersummary"
+    , _lKind = Nothing
     , _lDataCount = Nothing
     , _lContentVersion = Nothing
     , _lVolumeAnnotationsVersion = Nothing
@@ -1519,7 +1509,7 @@ lAnnotationsLink
       (\ s a -> s{_lAnnotationsLink = a})
 
 -- | Resource Type
-lKind :: Lens' Layersummary Text
+lKind :: Lens' Layersummary (Maybe Text)
 lKind = lens _lKind (\ s a -> s{_lKind = a})
 
 -- | The number of data items for this layer.
@@ -1573,10 +1563,8 @@ lId = lens _lId (\ s a -> s{_lId = a})
 
 -- | Timestamp for the last time an item in this layer was updated. (RFC 3339
 -- UTC date-time format).
-lUpdated :: Lens' Layersummary (Maybe UTCTime)
-lUpdated
-  = lens _lUpdated (\ s a -> s{_lUpdated = a}) .
-      mapping _DateTime
+lUpdated :: Lens' Layersummary (Maybe Text)
+lUpdated = lens _lUpdated (\ s a -> s{_lUpdated = a})
 
 -- | The layer id for this summary.
 lLayerId :: Lens' Layersummary (Maybe Text)
@@ -1589,7 +1577,7 @@ instance FromJSON Layersummary where
                  Layersummary' <$>
                    (o .:? "annotationsDataLink") <*>
                      (o .:? "annotationsLink")
-                     <*> (o .:? "kind" .!= "books#layersummary")
+                     <*> (o .:? "kind")
                      <*> (o .:? "dataCount")
                      <*> (o .:? "contentVersion")
                      <*> (o .:? "volumeAnnotationsVersion")
@@ -1608,7 +1596,7 @@ instance ToJSON Layersummary where
                  [("annotationsDataLink" .=) <$>
                     _lAnnotationsDataLink,
                   ("annotationsLink" .=) <$> _lAnnotationsLink,
-                  Just ("kind" .= _lKind),
+                  ("kind" .=) <$> _lKind,
                   ("dataCount" .=) <$> _lDataCount,
                   ("contentVersion" .=) <$> _lContentVersion,
                   ("volumeAnnotationsVersion" .=) <$>
@@ -1625,10 +1613,10 @@ instance ToJSON Layersummary where
 -- /See:/ 'volumeannotationContentRanges' smart constructor.
 data VolumeannotationContentRanges =
   VolumeannotationContentRanges'
-    { _vcrGbImageRange   :: !(Maybe BooksAnnotationsRange)
+    { _vcrGbImageRange :: !(Maybe BooksAnnotationsRange)
     , _vcrContentVersion :: !(Maybe Text)
-    , _vcrGbTextRange    :: !(Maybe BooksAnnotationsRange)
-    , _vcrCfiRange       :: !(Maybe BooksAnnotationsRange)
+    , _vcrGbTextRange :: !(Maybe BooksAnnotationsRange)
+    , _vcrCfiRange :: !(Maybe BooksAnnotationsRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1703,20 +1691,20 @@ instance ToJSON VolumeannotationContentRanges where
 -- /See:/ 'volumeAccessInfo' smart constructor.
 data VolumeAccessInfo =
   VolumeAccessInfo'
-    { _vaiWebReaderLink                    :: !(Maybe Text)
-    , _vaiCountry                          :: !(Maybe Text)
-    , _vaiDriveImportedContentLink         :: !(Maybe Text)
+    { _vaiWebReaderLink :: !(Maybe Text)
+    , _vaiCountry :: !(Maybe Text)
+    , _vaiDriveImportedContentLink :: !(Maybe Text)
     , _vaiExplicitOfflineLicenseManagement :: !(Maybe Bool)
-    , _vaiViewability                      :: !(Maybe Text)
-    , _vaiQuoteSharingAllowed              :: !(Maybe Bool)
-    , _vaiEpub                             :: !(Maybe VolumeAccessInfoEpub)
-    , _vaiPdf                              :: !(Maybe VolumeAccessInfoPdf)
-    , _vaiTextToSpeechPermission           :: !(Maybe Text)
-    , _vaiEmbeddable                       :: !(Maybe Bool)
-    , _vaiAccessViewStatus                 :: !(Maybe Text)
-    , _vaiDownloadAccess                   :: !(Maybe DownloadAccessRestriction)
-    , _vaiViewOrderURL                     :: !(Maybe Text)
-    , _vaiPublicDomain                     :: !(Maybe Bool)
+    , _vaiViewability :: !(Maybe Text)
+    , _vaiQuoteSharingAllowed :: !(Maybe Bool)
+    , _vaiEpub :: !(Maybe VolumeAccessInfoEpub)
+    , _vaiPdf :: !(Maybe VolumeAccessInfoPdf)
+    , _vaiTextToSpeechPermission :: !(Maybe Text)
+    , _vaiEmbeddable :: !(Maybe Bool)
+    , _vaiAccessViewStatus :: !(Maybe Text)
+    , _vaiDownloadAccess :: !(Maybe DownloadAccessRestriction)
+    , _vaiViewOrderURL :: !(Maybe Text)
+    , _vaiPublicDomain :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1914,10 +1902,10 @@ instance ToJSON VolumeAccessInfo where
 -- /See:/ 'volumeVolumeInfoPanelizationSummary' smart constructor.
 data VolumeVolumeInfoPanelizationSummary =
   VolumeVolumeInfoPanelizationSummary'
-    { _vvipsEpubBubbleVersion    :: !(Maybe Text)
+    { _vvipsEpubBubbleVersion :: !(Maybe Text)
     , _vvipsContainsImageBubbles :: !(Maybe Bool)
-    , _vvipsContainsEpubBubbles  :: !(Maybe Bool)
-    , _vvipsImageBubbleVersion   :: !(Maybe Text)
+    , _vvipsContainsEpubBubbles :: !(Maybe Bool)
+    , _vvipsImageBubbleVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1989,17 +1977,97 @@ instance ToJSON VolumeVolumeInfoPanelizationSummary
                   ("imageBubbleVersion" .=) <$>
                     _vvipsImageBubbleVersion])
 
+--
+-- /See:/ 'seriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo' smart constructor.
+data SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo =
+  SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo'
+    { _ssissrinriReleaseTime :: !(Maybe Text)
+    , _ssissrinriCurrencyCode :: !(Maybe Text)
+    , _ssissrinriAmountInMicros :: !(Maybe (Textual Double))
+    , _ssissrinriReleaseNumber :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssissrinriReleaseTime'
+--
+-- * 'ssissrinriCurrencyCode'
+--
+-- * 'ssissrinriAmountInMicros'
+--
+-- * 'ssissrinriReleaseNumber'
+seriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    :: SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+seriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo =
+  SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo'
+    { _ssissrinriReleaseTime = Nothing
+    , _ssissrinriCurrencyCode = Nothing
+    , _ssissrinriAmountInMicros = Nothing
+    , _ssissrinriReleaseNumber = Nothing
+    }
+
+
+ssissrinriReleaseTime :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo (Maybe Text)
+ssissrinriReleaseTime
+  = lens _ssissrinriReleaseTime
+      (\ s a -> s{_ssissrinriReleaseTime = a})
+
+ssissrinriCurrencyCode :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo (Maybe Text)
+ssissrinriCurrencyCode
+  = lens _ssissrinriCurrencyCode
+      (\ s a -> s{_ssissrinriCurrencyCode = a})
+
+ssissrinriAmountInMicros :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo (Maybe Double)
+ssissrinriAmountInMicros
+  = lens _ssissrinriAmountInMicros
+      (\ s a -> s{_ssissrinriAmountInMicros = a})
+      . mapping _Coerce
+
+ssissrinriReleaseNumber :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo (Maybe Text)
+ssissrinriReleaseNumber
+  = lens _ssissrinriReleaseNumber
+      (\ s a -> s{_ssissrinriReleaseNumber = a})
+
+instance FromJSON
+           SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+         where
+        parseJSON
+          = withObject
+              "SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo"
+              (\ o ->
+                 SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo'
+                   <$>
+                   (o .:? "releaseTime") <*> (o .:? "currencyCode") <*>
+                     (o .:? "amountInMicros")
+                     <*> (o .:? "releaseNumber"))
+
+instance ToJSON
+           SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+         where
+        toJSON
+          SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo'{..}
+          = object
+              (catMaybes
+                 [("releaseTime" .=) <$> _ssissrinriReleaseTime,
+                  ("currencyCode" .=) <$> _ssissrinriCurrencyCode,
+                  ("amountInMicros" .=) <$> _ssissrinriAmountInMicros,
+                  ("releaseNumber" .=) <$> _ssissrinriReleaseNumber])
+
 -- | A list of image links for all the sizes that are available. (In LITE
 -- projection.)
 --
 -- /See:/ 'volumeVolumeInfoImageLinks' smart constructor.
 data VolumeVolumeInfoImageLinks =
   VolumeVolumeInfoImageLinks'
-    { _vviilThumbnail      :: !(Maybe Text)
-    , _vviilSmall          :: !(Maybe Text)
-    , _vviilExtraLarge     :: !(Maybe Text)
-    , _vviilLarge          :: !(Maybe Text)
-    , _vviilMedium         :: !(Maybe Text)
+    { _vviilThumbnail :: !(Maybe Text)
+    , _vviilSmall :: !(Maybe Text)
+    , _vviilExtraLarge :: !(Maybe Text)
+    , _vviilLarge :: !(Maybe Text)
+    , _vviilMedium :: !(Maybe Text)
     , _vviilSmallThumbnail :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2137,9 +2205,9 @@ instance ToJSON VolumeUserInfoUserUploadedVolumeInfo
 -- /See:/ 'volumeUserInfoCopy' smart constructor.
 data VolumeUserInfoCopy =
   VolumeUserInfoCopy'
-    { _vuicLimitType               :: !(Maybe Text)
-    , _vuicAllowedCharacterCount   :: !(Maybe (Textual Int32))
-    , _vuicUpdated                 :: !(Maybe DateTime')
+    { _vuicLimitType :: !(Maybe Text)
+    , _vuicAllowedCharacterCount :: !(Maybe (Textual Int32))
+    , _vuicUpdated :: !(Maybe Text)
     , _vuicRemainingCharacterCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2178,10 +2246,9 @@ vuicAllowedCharacterCount
       (\ s a -> s{_vuicAllowedCharacterCount = a})
       . mapping _Coerce
 
-vuicUpdated :: Lens' VolumeUserInfoCopy (Maybe UTCTime)
+vuicUpdated :: Lens' VolumeUserInfoCopy (Maybe Text)
 vuicUpdated
-  = lens _vuicUpdated (\ s a -> s{_vuicUpdated = a}) .
-      mapping _DateTime
+  = lens _vuicUpdated (\ s a -> s{_vuicUpdated = a})
 
 vuicRemainingCharacterCount :: Lens' VolumeUserInfoCopy (Maybe Int32)
 vuicRemainingCharacterCount
@@ -2294,10 +2361,10 @@ instance ToJSON UserSettingsNotificationPriceDrop
 -- /See:/ 'volumeseriesInfo' smart constructor.
 data VolumeseriesInfo =
   VolumeseriesInfo'
-    { _viBookDisplayNumber    :: !(Maybe Text)
-    , _viKind                 :: !Text
+    { _viBookDisplayNumber :: !(Maybe Text)
+    , _viKind :: !(Maybe Text)
     , _viShortSeriesBookTitle :: !(Maybe Text)
-    , _viVolumeSeries         :: !(Maybe [VolumeseriesInfoVolumeSeriesItem])
+    , _viVolumeSeries :: !(Maybe [VolumeseriesInfoVolumeSeriesItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2318,7 +2385,7 @@ volumeseriesInfo
 volumeseriesInfo =
   VolumeseriesInfo'
     { _viBookDisplayNumber = Nothing
-    , _viKind = "books#volume_series_info"
+    , _viKind = Nothing
     , _viShortSeriesBookTitle = Nothing
     , _viVolumeSeries = Nothing
     }
@@ -2332,7 +2399,7 @@ viBookDisplayNumber
       (\ s a -> s{_viBookDisplayNumber = a})
 
 -- | Resource type.
-viKind :: Lens' VolumeseriesInfo Text
+viKind :: Lens' VolumeseriesInfo (Maybe Text)
 viKind = lens _viKind (\ s a -> s{_viKind = a})
 
 -- | Short book title in the context of the series.
@@ -2353,9 +2420,8 @@ instance FromJSON VolumeseriesInfo where
           = withObject "VolumeseriesInfo"
               (\ o ->
                  VolumeseriesInfo' <$>
-                   (o .:? "bookDisplayNumber") <*>
-                     (o .:? "kind" .!= "books#volume_series_info")
-                     <*> (o .:? "shortSeriesBookTitle")
+                   (o .:? "bookDisplayNumber") <*> (o .:? "kind") <*>
+                     (o .:? "shortSeriesBookTitle")
                      <*> (o .:? "volumeSeries" .!= mempty))
 
 instance ToJSON VolumeseriesInfo where
@@ -2363,7 +2429,7 @@ instance ToJSON VolumeseriesInfo where
           = object
               (catMaybes
                  [("bookDisplayNumber" .=) <$> _viBookDisplayNumber,
-                  Just ("kind" .= _viKind),
+                  ("kind" .=) <$> _viKind,
                   ("shortSeriesBookTitle" .=) <$>
                     _viShortSeriesBookTitle,
                   ("volumeSeries" .=) <$> _viVolumeSeries])
@@ -2372,16 +2438,16 @@ instance ToJSON VolumeseriesInfo where
 -- /See:/ 'bookshelf' smart constructor.
 data Bookshelf =
   Bookshelf'
-    { _bAccess             :: !(Maybe Text)
-    , _bVolumesLastUpdated :: !(Maybe DateTime')
-    , _bKind               :: !Text
-    , _bCreated            :: !(Maybe DateTime')
-    , _bVolumeCount        :: !(Maybe (Textual Int32))
-    , _bSelfLink           :: !(Maybe Text)
-    , _bId                 :: !(Maybe (Textual Int32))
-    , _bUpdated            :: !(Maybe DateTime')
-    , _bTitle              :: !(Maybe Text)
-    , _bDescription        :: !(Maybe Text)
+    { _bAccess :: !(Maybe Text)
+    , _bVolumesLastUpdated :: !(Maybe Text)
+    , _bKind :: !(Maybe Text)
+    , _bCreated :: !(Maybe Text)
+    , _bVolumeCount :: !(Maybe (Textual Int32))
+    , _bSelfLink :: !(Maybe Text)
+    , _bId :: !(Maybe (Textual Int32))
+    , _bUpdated :: !(Maybe Text)
+    , _bTitle :: !(Maybe Text)
+    , _bDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2415,7 +2481,7 @@ bookshelf =
   Bookshelf'
     { _bAccess = Nothing
     , _bVolumesLastUpdated = Nothing
-    , _bKind = "books#bookshelf"
+    , _bKind = Nothing
     , _bCreated = Nothing
     , _bVolumeCount = Nothing
     , _bSelfLink = Nothing
@@ -2432,22 +2498,19 @@ bAccess = lens _bAccess (\ s a -> s{_bAccess = a})
 
 -- | Last time a volume was added or removed from this bookshelf (formatted
 -- UTC timestamp with millisecond resolution).
-bVolumesLastUpdated :: Lens' Bookshelf (Maybe UTCTime)
+bVolumesLastUpdated :: Lens' Bookshelf (Maybe Text)
 bVolumesLastUpdated
   = lens _bVolumesLastUpdated
       (\ s a -> s{_bVolumesLastUpdated = a})
-      . mapping _DateTime
 
 -- | Resource type for bookshelf metadata.
-bKind :: Lens' Bookshelf Text
+bKind :: Lens' Bookshelf (Maybe Text)
 bKind = lens _bKind (\ s a -> s{_bKind = a})
 
 -- | Created time for this bookshelf (formatted UTC timestamp with
 -- millisecond resolution).
-bCreated :: Lens' Bookshelf (Maybe UTCTime)
-bCreated
-  = lens _bCreated (\ s a -> s{_bCreated = a}) .
-      mapping _DateTime
+bCreated :: Lens' Bookshelf (Maybe Text)
+bCreated = lens _bCreated (\ s a -> s{_bCreated = a})
 
 -- | Number of volumes in this bookshelf.
 bVolumeCount :: Lens' Bookshelf (Maybe Int32)
@@ -2467,10 +2530,8 @@ bId
 
 -- | Last modified time of this bookshelf (formatted UTC timestamp with
 -- millisecond resolution).
-bUpdated :: Lens' Bookshelf (Maybe UTCTime)
-bUpdated
-  = lens _bUpdated (\ s a -> s{_bUpdated = a}) .
-      mapping _DateTime
+bUpdated :: Lens' Bookshelf (Maybe Text)
+bUpdated = lens _bUpdated (\ s a -> s{_bUpdated = a})
 
 -- | Title of this bookshelf.
 bTitle :: Lens' Bookshelf (Maybe Text)
@@ -2487,7 +2548,7 @@ instance FromJSON Bookshelf where
               (\ o ->
                  Bookshelf' <$>
                    (o .:? "access") <*> (o .:? "volumesLastUpdated") <*>
-                     (o .:? "kind" .!= "books#bookshelf")
+                     (o .:? "kind")
                      <*> (o .:? "created")
                      <*> (o .:? "volumeCount")
                      <*> (o .:? "selfLink")
@@ -2502,34 +2563,58 @@ instance ToJSON Bookshelf where
               (catMaybes
                  [("access" .=) <$> _bAccess,
                   ("volumesLastUpdated" .=) <$> _bVolumesLastUpdated,
-                  Just ("kind" .= _bKind),
-                  ("created" .=) <$> _bCreated,
+                  ("kind" .=) <$> _bKind, ("created" .=) <$> _bCreated,
                   ("volumeCount" .=) <$> _bVolumeCount,
                   ("selfLink" .=) <$> _bSelfLink, ("id" .=) <$> _bId,
                   ("updated" .=) <$> _bUpdated,
                   ("title" .=) <$> _bTitle,
                   ("description" .=) <$> _bDescription])
 
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
 --
 -- /See:/ 'notification' smart constructor.
 data Notification =
   Notification'
-    { _nDocType                        :: !(Maybe Text)
-    , _nTargetURL                      :: !(Maybe Text)
+    { _nDocType :: !(Maybe Text)
+    , _nTargetURL :: !(Maybe Text)
     , _nShowNotificationSettingsAction :: !(Maybe Bool)
-    , _nDocId                          :: !(Maybe Text)
-    , _nKind                           :: !Text
-    , _nBody                           :: !(Maybe Text)
-    , _nCrmExperimentIds               :: !(Maybe [Textual Int64])
-    , _nTimeToExpireMs                 :: !(Maybe (Textual Int64))
-    , _nPcampaignId                    :: !(Maybe Text)
-    , _nReason                         :: !(Maybe Text)
-    , _nIsDocumentMature               :: !(Maybe Bool)
-    , _nDontShowNotification           :: !(Maybe Bool)
-    , _nNotificationType               :: !(Maybe Text)
-    , _nNotificationGroup              :: !(Maybe Text)
-    , _nIconURL                        :: !(Maybe Text)
-    , _nTitle                          :: !(Maybe Text)
+    , _nDocId :: !(Maybe Text)
+    , _nKind :: !(Maybe Text)
+    , _nBody :: !(Maybe Text)
+    , _nCrmExperimentIds :: !(Maybe [Textual Int64])
+    , _nTimeToExpireMs :: !(Maybe (Textual Int64))
+    , _nPcampaignId :: !(Maybe Text)
+    , _nReason :: !(Maybe Text)
+    , _nIsDocumentMature :: !(Maybe Bool)
+    , _nDontShowNotification :: !(Maybe Bool)
+    , _nNotificationType :: !(Maybe Text)
+    , _nNotificationGroup :: !(Maybe Text)
+    , _nIconURL :: !(Maybe Text)
+    , _nTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2577,7 +2662,7 @@ notification =
     , _nTargetURL = Nothing
     , _nShowNotificationSettingsAction = Nothing
     , _nDocId = Nothing
-    , _nKind = "books#notification"
+    , _nKind = Nothing
     , _nBody = Nothing
     , _nCrmExperimentIds = Nothing
     , _nTimeToExpireMs = Nothing
@@ -2608,7 +2693,7 @@ nDocId :: Lens' Notification (Maybe Text)
 nDocId = lens _nDocId (\ s a -> s{_nDocId = a})
 
 -- | Resource type.
-nKind :: Lens' Notification Text
+nKind :: Lens' Notification (Maybe Text)
 nKind = lens _nKind (\ s a -> s{_nKind = a})
 
 nBody :: Lens' Notification (Maybe Text)
@@ -2669,7 +2754,7 @@ instance FromJSON Notification where
                    (o .:? "doc_type") <*> (o .:? "targetUrl") <*>
                      (o .:? "show_notification_settings_action")
                      <*> (o .:? "doc_id")
-                     <*> (o .:? "kind" .!= "books#notification")
+                     <*> (o .:? "kind")
                      <*> (o .:? "body")
                      <*> (o .:? "crmExperimentIds" .!= mempty)
                      <*> (o .:? "timeToExpireMs")
@@ -2690,7 +2775,7 @@ instance ToJSON Notification where
                   ("targetUrl" .=) <$> _nTargetURL,
                   ("show_notification_settings_action" .=) <$>
                     _nShowNotificationSettingsAction,
-                  ("doc_id" .=) <$> _nDocId, Just ("kind" .= _nKind),
+                  ("doc_id" .=) <$> _nDocId, ("kind" .=) <$> _nKind,
                   ("body" .=) <$> _nBody,
                   ("crmExperimentIds" .=) <$> _nCrmExperimentIds,
                   ("timeToExpireMs" .=) <$> _nTimeToExpireMs,
@@ -2708,10 +2793,10 @@ instance ToJSON Notification where
 -- /See:/ 'annotationsSummaryLayersItem' smart constructor.
 data AnnotationsSummaryLayersItem =
   AnnotationsSummaryLayersItem'
-    { _asliLimitType               :: !(Maybe Text)
-    , _asliAllowedCharacterCount   :: !(Maybe (Textual Int32))
-    , _asliUpdated                 :: !(Maybe DateTime')
-    , _asliLayerId                 :: !(Maybe Text)
+    { _asliLimitType :: !(Maybe Text)
+    , _asliAllowedCharacterCount :: !(Maybe (Textual Int32))
+    , _asliUpdated :: !(Maybe Text)
+    , _asliLayerId :: !(Maybe Text)
     , _asliRemainingCharacterCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2753,10 +2838,9 @@ asliAllowedCharacterCount
       (\ s a -> s{_asliAllowedCharacterCount = a})
       . mapping _Coerce
 
-asliUpdated :: Lens' AnnotationsSummaryLayersItem (Maybe UTCTime)
+asliUpdated :: Lens' AnnotationsSummaryLayersItem (Maybe Text)
 asliUpdated
-  = lens _asliUpdated (\ s a -> s{_asliUpdated = a}) .
-      mapping _DateTime
+  = lens _asliUpdated (\ s a -> s{_asliUpdated = a})
 
 asliLayerId :: Lens' AnnotationsSummaryLayersItem (Maybe Text)
 asliLayerId
@@ -2797,7 +2881,7 @@ instance ToJSON AnnotationsSummaryLayersItem where
 data VolumeSaleInfoOffersItemRentalDuration =
   VolumeSaleInfoOffersItemRentalDuration'
     { _vsioirdCount :: !(Maybe (Textual Double))
-    , _vsioirdUnit  :: !(Maybe Text)
+    , _vsioirdUnit :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2847,7 +2931,7 @@ instance ToJSON
 -- /See:/ 'dictlayerDataDictWordsItemExamplesItem' smart constructor.
 data DictlayerDataDictWordsItemExamplesItem =
   DictlayerDataDictWordsItemExamplesItem'
-    { _dddwieiText   :: !(Maybe Text)
+    { _dddwieiText :: !(Maybe Text)
     , _dddwieiSource :: !(Maybe DictlayerDataDictWordsItemExamplesItemSource)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2898,9 +2982,9 @@ instance ToJSON
 -- /See:/ 'offersItemsItem' smart constructor.
 data OffersItemsItem =
   OffersItemsItem'
-    { _oiiItems        :: !(Maybe [OffersItemsItemItemsItem])
-    , _oiiArtURL       :: !(Maybe Text)
-    , _oiiId           :: !(Maybe Text)
+    { _oiiItems :: !(Maybe [OffersItemsItemItemsItem])
+    , _oiiArtURL :: !(Maybe Text)
+    , _oiiId :: !(Maybe Text)
     , _oiiGServicesKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2967,8 +3051,8 @@ instance ToJSON OffersItemsItem where
 -- /See:/ 'annotationLayerSummary' smart constructor.
 data AnnotationLayerSummary =
   AnnotationLayerSummary'
-    { _alsLimitType               :: !(Maybe Text)
-    , _alsAllowedCharacterCount   :: !(Maybe (Textual Int32))
+    { _alsLimitType :: !(Maybe Text)
+    , _alsAllowedCharacterCount :: !(Maybe (Textual Int32))
     , _alsRemainingCharacterCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3074,7 +3158,7 @@ instance ToJSON VolumeSearchInfo where
 -- /See:/ 'annotationsSummary' smart constructor.
 data AnnotationsSummary =
   AnnotationsSummary'
-    { _asKind   :: !Text
+    { _asKind :: !(Maybe Text)
     , _asLayers :: !(Maybe [AnnotationsSummaryLayersItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3090,11 +3174,10 @@ data AnnotationsSummary =
 annotationsSummary
     :: AnnotationsSummary
 annotationsSummary =
-  AnnotationsSummary'
-    {_asKind = "books#annotationsSummary", _asLayers = Nothing}
+  AnnotationsSummary' {_asKind = Nothing, _asLayers = Nothing}
 
 
-asKind :: Lens' AnnotationsSummary Text
+asKind :: Lens' AnnotationsSummary (Maybe Text)
 asKind = lens _asKind (\ s a -> s{_asKind = a})
 
 asLayers :: Lens' AnnotationsSummary [AnnotationsSummaryLayersItem]
@@ -3108,21 +3191,20 @@ instance FromJSON AnnotationsSummary where
           = withObject "AnnotationsSummary"
               (\ o ->
                  AnnotationsSummary' <$>
-                   (o .:? "kind" .!= "books#annotationsSummary") <*>
-                     (o .:? "layers" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "layers" .!= mempty))
 
 instance ToJSON AnnotationsSummary where
         toJSON AnnotationsSummary'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _asKind),
+                 [("kind" .=) <$> _asKind,
                   ("layers" .=) <$> _asLayers])
 
 --
 -- /See:/ 'category' smart constructor.
 data Category =
   Category'
-    { _cKind  :: !Text
+    { _cKind :: !(Maybe Text)
     , _cItems :: !(Maybe [CategoryItemsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3137,11 +3219,11 @@ data Category =
 -- * 'cItems'
 category
     :: Category
-category = Category' {_cKind = "onboarding#category", _cItems = Nothing}
+category = Category' {_cKind = Nothing, _cItems = Nothing}
 
 
 -- | Resource type.
-cKind :: Lens' Category Text
+cKind :: Lens' Category (Maybe Text)
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | A list of onboarding categories.
@@ -3155,25 +3237,24 @@ instance FromJSON Category where
           = withObject "Category"
               (\ o ->
                  Category' <$>
-                   (o .:? "kind" .!= "onboarding#category") <*>
-                     (o .:? "items" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Category where
         toJSON Category'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
+                 [("kind" .=) <$> _cKind, ("items" .=) <$> _cItems])
 
 --
 -- /See:/ 'discoveryclustersClustersItemBanner_with_content_container' smart constructor.
 data DiscoveryclustersClustersItemBanner_with_content_container =
   DiscoveryclustersClustersItemBanner_with_content_container'
-    { _dcibFillColorArgb  :: !(Maybe Text)
-    , _dcibMoreButtonURL  :: !(Maybe Text)
-    , _dcibTextColorArgb  :: !(Maybe Text)
+    { _dcibFillColorArgb :: !(Maybe Text)
+    , _dcibMoreButtonURL :: !(Maybe Text)
+    , _dcibTextColorArgb :: !(Maybe Text)
     , _dcibMoreButtonText :: !(Maybe Text)
-    , _dcibImageURL       :: !(Maybe Text)
-    , _dcibMaskColorArgb  :: !(Maybe Text)
+    , _dcibImageURL :: !(Maybe Text)
+    , _dcibMaskColorArgb :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3268,17 +3349,17 @@ instance ToJSON
 -- /See:/ 'volume' smart constructor.
 data Volume =
   Volume'
-    { _vvUserInfo        :: !(Maybe VolumeUserInfo)
-    , _vvEtag            :: !(Maybe Text)
-    , _vvAccessInfo      :: !(Maybe VolumeAccessInfo)
-    , _vvKind            :: !Text
-    , _vvSearchInfo      :: !(Maybe VolumeSearchInfo)
-    , _vvSelfLink        :: !(Maybe Text)
-    , _vvLayerInfo       :: !(Maybe VolumeLayerInfo)
-    , _vvSaleInfo        :: !(Maybe VolumeSaleInfo)
-    , _vvId              :: !(Maybe Text)
+    { _vvUserInfo :: !(Maybe VolumeUserInfo)
+    , _vvEtag :: !(Maybe Text)
+    , _vvAccessInfo :: !(Maybe VolumeAccessInfo)
+    , _vvKind :: !(Maybe Text)
+    , _vvSearchInfo :: !(Maybe VolumeSearchInfo)
+    , _vvSelfLink :: !(Maybe Text)
+    , _vvLayerInfo :: !(Maybe VolumeLayerInfo)
+    , _vvSaleInfo :: !(Maybe VolumeSaleInfo)
+    , _vvId :: !(Maybe Text)
     , _vvRecommendedInfo :: !(Maybe VolumeRecommendedInfo)
-    , _vvVolumeInfo      :: !(Maybe VolumeVolumeInfo)
+    , _vvVolumeInfo :: !(Maybe VolumeVolumeInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3315,7 +3396,7 @@ volume =
     { _vvUserInfo = Nothing
     , _vvEtag = Nothing
     , _vvAccessInfo = Nothing
-    , _vvKind = "books#volume"
+    , _vvKind = Nothing
     , _vvSearchInfo = Nothing
     , _vvSelfLink = Nothing
     , _vvLayerInfo = Nothing
@@ -3345,7 +3426,7 @@ vvAccessInfo
   = lens _vvAccessInfo (\ s a -> s{_vvAccessInfo = a})
 
 -- | Resource type for a volume. (In LITE projection.)
-vvKind :: Lens' Volume Text
+vvKind :: Lens' Volume (Maybe Text)
 vvKind = lens _vvKind (\ s a -> s{_vvKind = a})
 
 -- | Search result information related to this volume.
@@ -3393,7 +3474,7 @@ instance FromJSON Volume where
                  Volume' <$>
                    (o .:? "userInfo") <*> (o .:? "etag") <*>
                      (o .:? "accessInfo")
-                     <*> (o .:? "kind" .!= "books#volume")
+                     <*> (o .:? "kind")
                      <*> (o .:? "searchInfo")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "layerInfo")
@@ -3409,7 +3490,7 @@ instance ToJSON Volume where
                  [("userInfo" .=) <$> _vvUserInfo,
                   ("etag" .=) <$> _vvEtag,
                   ("accessInfo" .=) <$> _vvAccessInfo,
-                  Just ("kind" .= _vvKind),
+                  ("kind" .=) <$> _vvKind,
                   ("searchInfo" .=) <$> _vvSearchInfo,
                   ("selfLink" .=) <$> _vvSelfLink,
                   ("layerInfo" .=) <$> _vvLayerInfo,
@@ -3418,61 +3499,10 @@ instance ToJSON Volume where
                   ("volumeInfo" .=) <$> _vvVolumeInfo])
 
 --
--- /See:/ 'geolayerDataGeoBoundaryItemItem' smart constructor.
-data GeolayerDataGeoBoundaryItemItem =
-  GeolayerDataGeoBoundaryItemItem'
-    { _gdgbiiLatitude  :: !(Maybe (Textual Word32))
-    , _gdgbiiLongitude :: !(Maybe (Textual Word32))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'GeolayerDataGeoBoundaryItemItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gdgbiiLatitude'
---
--- * 'gdgbiiLongitude'
-geolayerDataGeoBoundaryItemItem
-    :: GeolayerDataGeoBoundaryItemItem
-geolayerDataGeoBoundaryItemItem =
-  GeolayerDataGeoBoundaryItemItem'
-    {_gdgbiiLatitude = Nothing, _gdgbiiLongitude = Nothing}
-
-
-gdgbiiLatitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
-gdgbiiLatitude
-  = lens _gdgbiiLatitude
-      (\ s a -> s{_gdgbiiLatitude = a})
-      . mapping _Coerce
-
-gdgbiiLongitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
-gdgbiiLongitude
-  = lens _gdgbiiLongitude
-      (\ s a -> s{_gdgbiiLongitude = a})
-      . mapping _Coerce
-
-instance FromJSON GeolayerDataGeoBoundaryItemItem
-         where
-        parseJSON
-          = withObject "GeolayerDataGeoBoundaryItemItem"
-              (\ o ->
-                 GeolayerDataGeoBoundaryItemItem' <$>
-                   (o .:? "latitude") <*> (o .:? "longitude"))
-
-instance ToJSON GeolayerDataGeoBoundaryItemItem where
-        toJSON GeolayerDataGeoBoundaryItemItem'{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _gdgbiiLatitude,
-                  ("longitude" .=) <$> _gdgbiiLongitude])
-
---
 -- /See:/ 'series' smart constructor.
 data Series =
   Series'
-    { _sKind   :: !Text
+    { _sKind :: !(Maybe Text)
     , _sSeries :: !(Maybe [SeriesSeriesItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3487,11 +3517,11 @@ data Series =
 -- * 'sSeries'
 series
     :: Series
-series = Series' {_sKind = "books#series", _sSeries = Nothing}
+series = Series' {_sKind = Nothing, _sSeries = Nothing}
 
 
 -- | Resource type.
-sKind :: Lens' Series Text
+sKind :: Lens' Series (Maybe Text)
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 sSeries :: Lens' Series [SeriesSeriesItem]
@@ -3504,26 +3534,24 @@ instance FromJSON Series where
           = withObject "Series"
               (\ o ->
                  Series' <$>
-                   (o .:? "kind" .!= "books#series") <*>
-                     (o .:? "series" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "series" .!= mempty))
 
 instance ToJSON Series where
         toJSON Series'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _sKind),
-                  ("series" .=) <$> _sSeries])
+                 [("kind" .=) <$> _sKind, ("series" .=) <$> _sSeries])
 
 --
 -- /See:/ 'offersItemsItemItemsItem' smart constructor.
 data OffersItemsItemItemsItem =
   OffersItemsItemItemsItem'
     { _oiiiiCanonicalVolumeLink :: !(Maybe Text)
-    , _oiiiiCoverURL            :: !(Maybe Text)
-    , _oiiiiVolumeId            :: !(Maybe Text)
-    , _oiiiiAuthor              :: !(Maybe Text)
-    , _oiiiiTitle               :: !(Maybe Text)
-    , _oiiiiDescription         :: !(Maybe Text)
+    , _oiiiiCoverURL :: !(Maybe Text)
+    , _oiiiiVolumeId :: !(Maybe Text)
+    , _oiiiiAuthor :: !(Maybe Text)
+    , _oiiiiTitle :: !(Maybe Text)
+    , _oiiiiDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3611,7 +3639,7 @@ instance ToJSON OffersItemsItemItemsItem where
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' smart constructor.
 data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource =
   DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource'
-    { _dddwisidieisURL         :: !(Maybe Text)
+    { _dddwisidieisURL :: !(Maybe Text)
     , _dddwisidieisAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3665,10 +3693,10 @@ instance ToJSON
 -- /See:/ 'geolayerDataCommon' smart constructor.
 data GeolayerDataCommon =
   GeolayerDataCommon'
-    { _gdcSnippet         :: !(Maybe Text)
-    , _gdcSnippetURL      :: !(Maybe Text)
-    , _gdcLang            :: !(Maybe Text)
-    , _gdcTitle           :: !(Maybe Text)
+    { _gdcSnippet :: !(Maybe Text)
+    , _gdcSnippetURL :: !(Maybe Text)
+    , _gdcLang :: !(Maybe Text)
+    , _gdcTitle :: !(Maybe Text)
     , _gdcPreviewImageURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3748,14 +3776,14 @@ instance ToJSON GeolayerDataCommon where
 -- /See:/ 'geolayerDataGeo' smart constructor.
 data GeolayerDataGeo =
   GeolayerDataGeo'
-    { _gdgMapType     :: !(Maybe Text)
+    { _gdgMapType :: !(Maybe Text)
     , _gdgCachePolicy :: !(Maybe Text)
-    , _gdgViewport    :: !(Maybe GeolayerDataGeoViewport)
-    , _gdgBoundary    :: !(Maybe [[GeolayerDataGeoBoundaryItemItem]])
-    , _gdgLatitude    :: !(Maybe (Textual Double))
-    , _gdgZoom        :: !(Maybe (Textual Int32))
+    , _gdgViewport :: !(Maybe GeolayerDataGeoViewport)
+    , _gdgBoundary :: !(Maybe [Text])
+    , _gdgLatitude :: !(Maybe (Textual Double))
+    , _gdgZoom :: !(Maybe (Textual Int32))
     , _gdgCountryCode :: !(Maybe Text)
-    , _gdgLongitude   :: !(Maybe (Textual Double))
+    , _gdgLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3815,7 +3843,7 @@ gdgViewport
 
 -- | The boundary of the location as a set of loops containing pairs of
 -- latitude, longitude coordinates.
-gdgBoundary :: Lens' GeolayerDataGeo [[GeolayerDataGeoBoundaryItemItem]]
+gdgBoundary :: Lens' GeolayerDataGeo [Text]
 gdgBoundary
   = lens _gdgBoundary (\ s a -> s{_gdgBoundary = a}) .
       _Default
@@ -3829,8 +3857,8 @@ gdgLatitude
 
 -- | The Zoom level to use for the map. Zoom levels between 0 (the lowest
 -- zoom level, in which the entire world can be seen on one map) to 21+
--- (down to individual buildings). See:
--- https:\/\/developers.google.com\/maps\/documentation\/staticmaps\/#Zoomlevels
+-- (down to individual buildings). See: https:
+-- \/\/developers.google.com\/maps\/documentation\/staticmaps\/#Zoomlevels
 gdgZoom :: Lens' GeolayerDataGeo (Maybe Int32)
 gdgZoom
   = lens _gdgZoom (\ s a -> s{_gdgZoom = a}) .
@@ -3878,10 +3906,10 @@ instance ToJSON GeolayerDataGeo where
 -- /See:/ 'dictlayerDataDictWordsItem' smart constructor.
 data DictlayerDataDictWordsItem =
   DictlayerDataDictWordsItem'
-    { _dddwiSenses      :: !(Maybe [DictlayerDataDictWordsItemSensesItem])
-    , _dddwiSource      :: !(Maybe DictlayerDataDictWordsItemSource)
+    { _dddwiSenses :: !(Maybe [DictlayerDataDictWordsItemSensesItem])
+    , _dddwiSource :: !(Maybe DictlayerDataDictWordsItemSource)
     , _dddwiDerivatives :: !(Maybe [DictlayerDataDictWordsItemDerivativesItem])
-    , _dddwiExamples    :: !(Maybe [DictlayerDataDictWordsItemExamplesItem])
+    , _dddwiExamples :: !(Maybe [DictlayerDataDictWordsItemExamplesItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3956,9 +3984,9 @@ instance ToJSON DictlayerDataDictWordsItem where
 -- /See:/ 'categoryItemsItem' smart constructor.
 data CategoryItemsItem =
   CategoryItemsItem'
-    { _ciiName       :: !(Maybe Text)
+    { _ciiName :: !(Maybe Text)
     , _ciiCategoryId :: !(Maybe Text)
-    , _ciiBadgeURL   :: !(Maybe Text)
+    , _ciiBadgeURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4011,7 +4039,7 @@ instance ToJSON CategoryItemsItem where
 -- /See:/ 'dictlayerDataDictWordsItemDerivativesItemSource' smart constructor.
 data DictlayerDataDictWordsItemDerivativesItemSource =
   DictlayerDataDictWordsItemDerivativesItemSource'
-    { _dddwidisURL         :: !(Maybe Text)
+    { _dddwidisURL :: !(Maybe Text)
     , _dddwidisAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4064,8 +4092,8 @@ instance ToJSON
 -- /See:/ 'geolayerData' smart constructor.
 data GeolayerData =
   GeolayerData'
-    { _gdKind   :: !Text
-    , _gdGeo    :: !(Maybe GeolayerDataGeo)
+    { _gdKind :: !(Maybe Text)
+    , _gdGeo :: !(Maybe GeolayerDataGeo)
     , _gdCommon :: !(Maybe GeolayerDataCommon)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4083,11 +4111,10 @@ data GeolayerData =
 geolayerData
     :: GeolayerData
 geolayerData =
-  GeolayerData'
-    {_gdKind = "books#geolayerdata", _gdGeo = Nothing, _gdCommon = Nothing}
+  GeolayerData' {_gdKind = Nothing, _gdGeo = Nothing, _gdCommon = Nothing}
 
 
-gdKind :: Lens' GeolayerData Text
+gdKind :: Lens' GeolayerData (Maybe Text)
 gdKind = lens _gdKind (\ s a -> s{_gdKind = a})
 
 gdGeo :: Lens' GeolayerData (Maybe GeolayerDataGeo)
@@ -4101,15 +4128,14 @@ instance FromJSON GeolayerData where
           = withObject "GeolayerData"
               (\ o ->
                  GeolayerData' <$>
-                   (o .:? "kind" .!= "books#geolayerdata") <*>
-                     (o .:? "geo")
-                     <*> (o .:? "common"))
+                   (o .:? "kind") <*> (o .:? "geo") <*>
+                     (o .:? "common"))
 
 instance ToJSON GeolayerData where
         toJSON GeolayerData'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _gdKind), ("geo" .=) <$> _gdGeo,
+                 [("kind" .=) <$> _gdKind, ("geo" .=) <$> _gdGeo,
                   ("common" .=) <$> _gdCommon])
 
 -- | The words with different meanings but not related words, e.g. \"go\"
@@ -4118,7 +4144,7 @@ instance ToJSON GeolayerData where
 -- /See:/ 'dictlayerDataDictWordsItemSource' smart constructor.
 data DictlayerDataDictWordsItemSource =
   DictlayerDataDictWordsItemSource'
-    { _dddwisURL         :: !(Maybe Text)
+    { _dddwisURL :: !(Maybe Text)
     , _dddwisAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4167,7 +4193,7 @@ instance ToJSON DictlayerDataDictWordsItemSource
 -- /See:/ 'dictlayerDataDictWordsItemDerivativesItem' smart constructor.
 data DictlayerDataDictWordsItemDerivativesItem =
   DictlayerDataDictWordsItemDerivativesItem'
-    { _dddwidiText   :: !(Maybe Text)
+    { _dddwidiText :: !(Maybe Text)
     , _dddwidiSource :: !(Maybe DictlayerDataDictWordsItemDerivativesItemSource)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4219,7 +4245,7 @@ instance ToJSON
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem' smart constructor.
 data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem =
   DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem'
-    { _dddwisidieiText   :: !(Maybe Text)
+    { _dddwisidieiText :: !(Maybe Text)
     , _dddwisidieiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4315,8 +4341,8 @@ instance ToJSON
 -- /See:/ 'dictlayerData' smart constructor.
 data DictlayerData =
   DictlayerData'
-    { _ddKind   :: !Text
-    , _ddDict   :: !(Maybe DictlayerDataDict)
+    { _ddKind :: !(Maybe Text)
+    , _ddDict :: !(Maybe DictlayerDataDict)
     , _ddCommon :: !(Maybe DictlayerDataCommon)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4334,11 +4360,10 @@ data DictlayerData =
 dictlayerData
     :: DictlayerData
 dictlayerData =
-  DictlayerData'
-    {_ddKind = "books#dictlayerdata", _ddDict = Nothing, _ddCommon = Nothing}
+  DictlayerData' {_ddKind = Nothing, _ddDict = Nothing, _ddCommon = Nothing}
 
 
-ddKind :: Lens' DictlayerData Text
+ddKind :: Lens' DictlayerData (Maybe Text)
 ddKind = lens _ddKind (\ s a -> s{_ddKind = a})
 
 ddDict :: Lens' DictlayerData (Maybe DictlayerDataDict)
@@ -4352,22 +4377,21 @@ instance FromJSON DictlayerData where
           = withObject "DictlayerData"
               (\ o ->
                  DictlayerData' <$>
-                   (o .:? "kind" .!= "books#dictlayerdata") <*>
-                     (o .:? "dict")
-                     <*> (o .:? "common"))
+                   (o .:? "kind") <*> (o .:? "dict") <*>
+                     (o .:? "common"))
 
 instance ToJSON DictlayerData where
         toJSON DictlayerData'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _ddKind), ("dict" .=) <$> _ddDict,
+                 [("kind" .=) <$> _ddKind, ("dict" .=) <$> _ddDict,
                   ("common" .=) <$> _ddCommon])
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItemSource' smart constructor.
 data DictlayerDataDictWordsItemSensesItemSynonymsItemSource =
   DictlayerDataDictWordsItemSensesItemSynonymsItemSource'
-    { _dddwisisisURL         :: !(Maybe Text)
+    { _dddwisisisURL :: !(Maybe Text)
     , _dddwisisisAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4422,8 +4446,8 @@ instance ToJSON
 data Seriesmembership =
   Seriesmembership'
     { _serNextPageToken :: !(Maybe Text)
-    , _serKind          :: !Text
-    , _serMember        :: !(Maybe [Volume])
+    , _serKind :: !(Maybe Text)
+    , _serMember :: !(Maybe [Volume])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4441,10 +4465,7 @@ seriesmembership
     :: Seriesmembership
 seriesmembership =
   Seriesmembership'
-    { _serNextPageToken = Nothing
-    , _serKind = "books#series#membership"
-    , _serMember = Nothing
-    }
+    {_serNextPageToken = Nothing, _serKind = Nothing, _serMember = Nothing}
 
 
 serNextPageToken :: Lens' Seriesmembership (Maybe Text)
@@ -4453,7 +4474,7 @@ serNextPageToken
       (\ s a -> s{_serNextPageToken = a})
 
 -- | Resorce type.
-serKind :: Lens' Seriesmembership Text
+serKind :: Lens' Seriesmembership (Maybe Text)
 serKind = lens _serKind (\ s a -> s{_serKind = a})
 
 serMember :: Lens' Seriesmembership [Volume]
@@ -4467,16 +4488,15 @@ instance FromJSON Seriesmembership where
           = withObject "Seriesmembership"
               (\ o ->
                  Seriesmembership' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "books#series#membership")
-                     <*> (o .:? "member" .!= mempty))
+                   (o .:? "nextPageToken") <*> (o .:? "kind") <*>
+                     (o .:? "member" .!= mempty))
 
 instance ToJSON Seriesmembership where
         toJSON Seriesmembership'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _serNextPageToken,
-                  Just ("kind" .= _serKind),
+                  ("kind" .=) <$> _serKind,
                   ("member" .=) <$> _serMember])
 
 --
@@ -4484,10 +4504,10 @@ instance ToJSON Seriesmembership where
 data UserSettingsNotification =
   UserSettingsNotification'
     { _usnRewardExpirations :: !(Maybe UserSettingsNotificationRewardExpirations)
-    , _usnPriceDrop         :: !(Maybe UserSettingsNotificationPriceDrop)
-    , _usnMatchMyInterests  :: !(Maybe UserSettingsNotificationMatchMyInterests)
-    , _usnMoreFromAuthors   :: !(Maybe UserSettingsNotificationMoreFromAuthors)
-    , _usnMoreFromSeries    :: !(Maybe UserSettingsNotificationMoreFromSeries)
+    , _usnPriceDrop :: !(Maybe UserSettingsNotificationPriceDrop)
+    , _usnMatchMyInterests :: !(Maybe UserSettingsNotificationMatchMyInterests)
+    , _usnMoreFromAuthors :: !(Maybe UserSettingsNotificationMoreFromAuthors)
+    , _usnMoreFromSeries :: !(Maybe UserSettingsNotificationMoreFromSeries)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4565,7 +4585,7 @@ instance ToJSON UserSettingsNotification where
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItem' smart constructor.
 data DictlayerDataDictWordsItemSensesItemSynonymsItem =
   DictlayerDataDictWordsItemSensesItemSynonymsItem'
-    { _dddwisisiText   :: !(Maybe Text)
+    { _dddwisisiText :: !(Maybe Text)
     , _dddwisisiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemSynonymsItemSource)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4619,7 +4639,7 @@ instance ToJSON
 -- /See:/ 'geolayerDataGeoViewportLo' smart constructor.
 data GeolayerDataGeoViewportLo =
   GeolayerDataGeoViewportLo'
-    { _gdgvlLatitude  :: !(Maybe (Textual Double))
+    { _gdgvlLatitude :: !(Maybe (Textual Double))
     , _gdgvlLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4670,7 +4690,7 @@ instance ToJSON GeolayerDataGeoViewportLo where
 -- /See:/ 'volumeSaleInfoOffersItemListPrice' smart constructor.
 data VolumeSaleInfoOffersItemListPrice =
   VolumeSaleInfoOffersItemListPrice'
-    { _vsioilpCurrencyCode   :: !(Maybe Text)
+    { _vsioilpCurrencyCode :: !(Maybe Text)
     , _vsioilpAmountInMicros :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4721,18 +4741,18 @@ instance ToJSON VolumeSaleInfoOffersItemListPrice
 -- /See:/ 'downloadAccessRestriction' smart constructor.
 data DownloadAccessRestriction =
   DownloadAccessRestriction'
-    { _darJustAcquired       :: !(Maybe Bool)
-    , _darSignature          :: !(Maybe Text)
-    , _darKind               :: !Text
+    { _darJustAcquired :: !(Maybe Bool)
+    , _darSignature :: !(Maybe Text)
+    , _darKind :: !(Maybe Text)
     , _darMaxDownloadDevices :: !(Maybe (Textual Int32))
-    , _darDownloadsAcquired  :: !(Maybe (Textual Int32))
-    , _darReasonCode         :: !(Maybe Text)
-    , _darVolumeId           :: !(Maybe Text)
-    , _darRestricted         :: !(Maybe Bool)
-    , _darSource             :: !(Maybe Text)
-    , _darDeviceAllowed      :: !(Maybe Bool)
-    , _darMessage            :: !(Maybe Text)
-    , _darNonce              :: !(Maybe Text)
+    , _darDownloadsAcquired :: !(Maybe (Textual Int32))
+    , _darReasonCode :: !(Maybe Text)
+    , _darVolumeId :: !(Maybe Text)
+    , _darRestricted :: !(Maybe Bool)
+    , _darSource :: !(Maybe Text)
+    , _darDeviceAllowed :: !(Maybe Bool)
+    , _darMessage :: !(Maybe Text)
+    , _darNonce :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4770,7 +4790,7 @@ downloadAccessRestriction =
   DownloadAccessRestriction'
     { _darJustAcquired = Nothing
     , _darSignature = Nothing
-    , _darKind = "books#downloadAccessRestriction"
+    , _darKind = Nothing
     , _darMaxDownloadDevices = Nothing
     , _darDownloadsAcquired = Nothing
     , _darReasonCode = Nothing
@@ -4795,7 +4815,7 @@ darSignature
   = lens _darSignature (\ s a -> s{_darSignature = a})
 
 -- | Resource type.
-darKind :: Lens' DownloadAccessRestriction Text
+darKind :: Lens' DownloadAccessRestriction (Maybe Text)
 darKind = lens _darKind (\ s a -> s{_darKind = a})
 
 -- | If restricted, the maximum number of content download licenses for this
@@ -4862,7 +4882,7 @@ instance FromJSON DownloadAccessRestriction where
               (\ o ->
                  DownloadAccessRestriction' <$>
                    (o .:? "justAcquired") <*> (o .:? "signature") <*>
-                     (o .:? "kind" .!= "books#downloadAccessRestriction")
+                     (o .:? "kind")
                      <*> (o .:? "maxDownloadDevices")
                      <*> (o .:? "downloadsAcquired")
                      <*> (o .:? "reasonCode")
@@ -4879,7 +4899,7 @@ instance ToJSON DownloadAccessRestriction where
               (catMaybes
                  [("justAcquired" .=) <$> _darJustAcquired,
                   ("signature" .=) <$> _darSignature,
-                  Just ("kind" .= _darKind),
+                  ("kind" .=) <$> _darKind,
                   ("maxDownloadDevices" .=) <$> _darMaxDownloadDevices,
                   ("downloadsAcquired" .=) <$> _darDownloadsAcquired,
                   ("reasonCode" .=) <$> _darReasonCode,
@@ -4928,11 +4948,11 @@ instance ToJSON DictlayerDataCommon where
 data DiscoveryclustersClustersItem =
   DiscoveryclustersClustersItem'
     { _dciBannerWithContentContainer :: !(Maybe DiscoveryclustersClustersItemBanner_with_content_container)
-    , _dciUid                        :: !(Maybe Text)
-    , _dciTotalVolumes               :: !(Maybe (Textual Int32))
-    , _dciSubTitle                   :: !(Maybe Text)
-    , _dciTitle                      :: !(Maybe Text)
-    , _dciVolumes                    :: !(Maybe [Volume])
+    , _dciUid :: !(Maybe Text)
+    , _dciTotalVolumes :: !(Maybe (Textual Int32))
+    , _dciSubTitle :: !(Maybe Text)
+    , _dciTitle :: !(Maybe Text)
+    , _dciVolumes :: !(Maybe [Volume])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5023,7 +5043,7 @@ instance ToJSON DiscoveryclustersClustersItem where
 -- /See:/ 'volumeSaleInfoRetailPrice' smart constructor.
 data VolumeSaleInfoRetailPrice =
   VolumeSaleInfoRetailPrice'
-    { _vsirpAmount       :: !(Maybe (Textual Double))
+    { _vsirpAmount :: !(Maybe (Textual Double))
     , _vsirpCurrencyCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5069,12 +5089,139 @@ instance ToJSON VolumeSaleInfoRetailPrice where
                  [("amount" .=) <$> _vsirpAmount,
                   ("currencyCode" .=) <$> _vsirpCurrencyCode])
 
+--
+-- /See:/ 'dictionaryAnnotationData' smart constructor.
+data DictionaryAnnotationData =
+  DictionaryAnnotationData'
+    { _dadKind :: !(Maybe Text)
+    , _dadData :: !(Maybe DictlayerData)
+    , _dadSelfLink :: !(Maybe Text)
+    , _dadAnnotationType :: !(Maybe Text)
+    , _dadEncodedData :: !(Maybe Bytes)
+    , _dadVolumeId :: !(Maybe Text)
+    , _dadId :: !(Maybe Text)
+    , _dadUpdated :: !(Maybe Text)
+    , _dadLayerId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DictionaryAnnotationData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dadKind'
+--
+-- * 'dadData'
+--
+-- * 'dadSelfLink'
+--
+-- * 'dadAnnotationType'
+--
+-- * 'dadEncodedData'
+--
+-- * 'dadVolumeId'
+--
+-- * 'dadId'
+--
+-- * 'dadUpdated'
+--
+-- * 'dadLayerId'
+dictionaryAnnotationData
+    :: DictionaryAnnotationData
+dictionaryAnnotationData =
+  DictionaryAnnotationData'
+    { _dadKind = Nothing
+    , _dadData = Nothing
+    , _dadSelfLink = Nothing
+    , _dadAnnotationType = Nothing
+    , _dadEncodedData = Nothing
+    , _dadVolumeId = Nothing
+    , _dadId = Nothing
+    , _dadUpdated = Nothing
+    , _dadLayerId = Nothing
+    }
+
+
+-- | Resource Type
+dadKind :: Lens' DictionaryAnnotationData (Maybe Text)
+dadKind = lens _dadKind (\ s a -> s{_dadKind = a})
+
+-- | JSON encoded data for this dictionary annotation data. Emitted with name
+-- \'data\' in JSON output. Either this or geo_data will be populated.
+dadData :: Lens' DictionaryAnnotationData (Maybe DictlayerData)
+dadData = lens _dadData (\ s a -> s{_dadData = a})
+
+-- | URL for this resource. *
+dadSelfLink :: Lens' DictionaryAnnotationData (Maybe Text)
+dadSelfLink
+  = lens _dadSelfLink (\ s a -> s{_dadSelfLink = a})
+
+-- | The type of annotation this data is for.
+dadAnnotationType :: Lens' DictionaryAnnotationData (Maybe Text)
+dadAnnotationType
+  = lens _dadAnnotationType
+      (\ s a -> s{_dadAnnotationType = a})
+
+-- | Base64 encoded data for this annotation data.
+dadEncodedData :: Lens' DictionaryAnnotationData (Maybe ByteString)
+dadEncodedData
+  = lens _dadEncodedData
+      (\ s a -> s{_dadEncodedData = a})
+      . mapping _Bytes
+
+-- | The volume id for this data. *
+dadVolumeId :: Lens' DictionaryAnnotationData (Maybe Text)
+dadVolumeId
+  = lens _dadVolumeId (\ s a -> s{_dadVolumeId = a})
+
+-- | Unique id for this annotation data.
+dadId :: Lens' DictionaryAnnotationData (Maybe Text)
+dadId = lens _dadId (\ s a -> s{_dadId = a})
+
+-- | Timestamp for the last time this data was updated. (RFC 3339 UTC
+-- date-time format).
+dadUpdated :: Lens' DictionaryAnnotationData (Maybe Text)
+dadUpdated
+  = lens _dadUpdated (\ s a -> s{_dadUpdated = a})
+
+-- | The Layer id for this data. *
+dadLayerId :: Lens' DictionaryAnnotationData (Maybe Text)
+dadLayerId
+  = lens _dadLayerId (\ s a -> s{_dadLayerId = a})
+
+instance FromJSON DictionaryAnnotationData where
+        parseJSON
+          = withObject "DictionaryAnnotationData"
+              (\ o ->
+                 DictionaryAnnotationData' <$>
+                   (o .:? "kind") <*> (o .:? "data") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "annotationType")
+                     <*> (o .:? "encodedData")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId"))
+
+instance ToJSON DictionaryAnnotationData where
+        toJSON DictionaryAnnotationData'{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _dadKind, ("data" .=) <$> _dadData,
+                  ("selfLink" .=) <$> _dadSelfLink,
+                  ("annotationType" .=) <$> _dadAnnotationType,
+                  ("encodedData" .=) <$> _dadEncodedData,
+                  ("volumeId" .=) <$> _dadVolumeId,
+                  ("id" .=) <$> _dadId, ("updated" .=) <$> _dadUpdated,
+                  ("layerId" .=) <$> _dadLayerId])
+
 -- | Suggested retail price. (In LITE projection.)
 --
 -- /See:/ 'volumeSaleInfoListPrice' smart constructor.
 data VolumeSaleInfoListPrice =
   VolumeSaleInfoListPrice'
-    { _vsilpAmount       :: !(Maybe (Textual Double))
+    { _vsilpAmount :: !(Maybe (Textual Double))
     , _vsilpCurrencyCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5125,7 +5272,7 @@ instance ToJSON VolumeSaleInfoListPrice where
 data DictlayerDataDictWordsItemSensesItemConjugationsItem =
   DictlayerDataDictWordsItemSensesItemConjugationsItem'
     { _dddwisiciValue :: !(Maybe Text)
-    , _dddwisiciType  :: !(Maybe Text)
+    , _dddwisiciType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5180,10 +5327,10 @@ instance ToJSON
 data FamilyInfoMembership =
   FamilyInfoMembership'
     { _fimAllowedMaturityRating :: !(Maybe Text)
-    , _fimAcquirePermission     :: !(Maybe Text)
-    , _fimRole                  :: !(Maybe Text)
-    , _fimAgeGroup              :: !(Maybe Text)
-    , _fimIsInFamily            :: !(Maybe Bool)
+    , _fimAcquirePermission :: !(Maybe Text)
+    , _fimRole :: !(Maybe Text)
+    , _fimAgeGroup :: !(Maybe Text)
+    , _fimIsInFamily :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5262,12 +5409,139 @@ instance ToJSON FamilyInfoMembership where
                   ("isInFamily" .=) <$> _fimIsInFamily])
 
 --
+-- /See:/ 'geoAnnotationData' smart constructor.
+data GeoAnnotationData =
+  GeoAnnotationData'
+    { _gadKind :: !(Maybe Text)
+    , _gadData :: !(Maybe GeolayerData)
+    , _gadSelfLink :: !(Maybe Text)
+    , _gadAnnotationType :: !(Maybe Text)
+    , _gadEncodedData :: !(Maybe Bytes)
+    , _gadVolumeId :: !(Maybe Text)
+    , _gadId :: !(Maybe Text)
+    , _gadUpdated :: !(Maybe Text)
+    , _gadLayerId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GeoAnnotationData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gadKind'
+--
+-- * 'gadData'
+--
+-- * 'gadSelfLink'
+--
+-- * 'gadAnnotationType'
+--
+-- * 'gadEncodedData'
+--
+-- * 'gadVolumeId'
+--
+-- * 'gadId'
+--
+-- * 'gadUpdated'
+--
+-- * 'gadLayerId'
+geoAnnotationData
+    :: GeoAnnotationData
+geoAnnotationData =
+  GeoAnnotationData'
+    { _gadKind = Nothing
+    , _gadData = Nothing
+    , _gadSelfLink = Nothing
+    , _gadAnnotationType = Nothing
+    , _gadEncodedData = Nothing
+    , _gadVolumeId = Nothing
+    , _gadId = Nothing
+    , _gadUpdated = Nothing
+    , _gadLayerId = Nothing
+    }
+
+
+-- | Resource Type
+gadKind :: Lens' GeoAnnotationData (Maybe Text)
+gadKind = lens _gadKind (\ s a -> s{_gadKind = a})
+
+-- | JSON encoded data for this geo annotation data. Emitted with name
+-- \'data\' in JSON output. Either this or dict_data will be populated.
+gadData :: Lens' GeoAnnotationData (Maybe GeolayerData)
+gadData = lens _gadData (\ s a -> s{_gadData = a})
+
+-- | URL for this resource. *
+gadSelfLink :: Lens' GeoAnnotationData (Maybe Text)
+gadSelfLink
+  = lens _gadSelfLink (\ s a -> s{_gadSelfLink = a})
+
+-- | The type of annotation this data is for.
+gadAnnotationType :: Lens' GeoAnnotationData (Maybe Text)
+gadAnnotationType
+  = lens _gadAnnotationType
+      (\ s a -> s{_gadAnnotationType = a})
+
+-- | Base64 encoded data for this annotation data.
+gadEncodedData :: Lens' GeoAnnotationData (Maybe ByteString)
+gadEncodedData
+  = lens _gadEncodedData
+      (\ s a -> s{_gadEncodedData = a})
+      . mapping _Bytes
+
+-- | The volume id for this data. *
+gadVolumeId :: Lens' GeoAnnotationData (Maybe Text)
+gadVolumeId
+  = lens _gadVolumeId (\ s a -> s{_gadVolumeId = a})
+
+-- | Unique id for this annotation data.
+gadId :: Lens' GeoAnnotationData (Maybe Text)
+gadId = lens _gadId (\ s a -> s{_gadId = a})
+
+-- | Timestamp for the last time this data was updated. (RFC 3339 UTC
+-- date-time format).
+gadUpdated :: Lens' GeoAnnotationData (Maybe Text)
+gadUpdated
+  = lens _gadUpdated (\ s a -> s{_gadUpdated = a})
+
+-- | The Layer id for this data. *
+gadLayerId :: Lens' GeoAnnotationData (Maybe Text)
+gadLayerId
+  = lens _gadLayerId (\ s a -> s{_gadLayerId = a})
+
+instance FromJSON GeoAnnotationData where
+        parseJSON
+          = withObject "GeoAnnotationData"
+              (\ o ->
+                 GeoAnnotationData' <$>
+                   (o .:? "kind") <*> (o .:? "data") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "annotationType")
+                     <*> (o .:? "encodedData")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId"))
+
+instance ToJSON GeoAnnotationData where
+        toJSON GeoAnnotationData'{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _gadKind, ("data" .=) <$> _gadData,
+                  ("selfLink" .=) <$> _gadSelfLink,
+                  ("annotationType" .=) <$> _gadAnnotationType,
+                  ("encodedData" .=) <$> _gadEncodedData,
+                  ("volumeId" .=) <$> _gadVolumeId,
+                  ("id" .=) <$> _gadId, ("updated" .=) <$> _gadUpdated,
+                  ("layerId" .=) <$> _gadLayerId])
+
+--
 -- /See:/ 'volume2' smart constructor.
 data Volume2 =
   Volume2'
     { _voloNextPageToken :: !(Maybe Text)
-    , _voloKind          :: !Text
-    , _voloItems         :: !(Maybe [Volume])
+    , _voloKind :: !(Maybe Text)
+    , _voloItems :: !(Maybe [Volume])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5285,10 +5559,7 @@ volume2
     :: Volume2
 volume2 =
   Volume2'
-    { _voloNextPageToken = Nothing
-    , _voloKind = "onboarding#volume"
-    , _voloItems = Nothing
-    }
+    {_voloNextPageToken = Nothing, _voloKind = Nothing, _voloItems = Nothing}
 
 
 voloNextPageToken :: Lens' Volume2 (Maybe Text)
@@ -5297,7 +5568,7 @@ voloNextPageToken
       (\ s a -> s{_voloNextPageToken = a})
 
 -- | Resource type.
-voloKind :: Lens' Volume2 Text
+voloKind :: Lens' Volume2 (Maybe Text)
 voloKind = lens _voloKind (\ s a -> s{_voloKind = a})
 
 -- | A list of volumes.
@@ -5312,32 +5583,31 @@ instance FromJSON Volume2 where
           = withObject "Volume2"
               (\ o ->
                  Volume2' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "onboarding#volume")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "nextPageToken") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty))
 
 instance ToJSON Volume2 where
         toJSON Volume2'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _voloNextPageToken,
-                  Just ("kind" .= _voloKind),
+                  ("kind" .=) <$> _voloKind,
                   ("items" .=) <$> _voloItems])
 
 --
 -- /See:/ 'review' smart constructor.
 data Review =
   Review'
-    { _rRating      :: !(Maybe Text)
-    , _rKind        :: !Text
-    , _rContent     :: !(Maybe Text)
-    , _rDate        :: !(Maybe Text)
-    , _rVolumeId    :: !(Maybe Text)
-    , _rAuthor      :: !(Maybe ReviewAuthor)
-    , _rSource      :: !(Maybe ReviewSource)
+    { _rRating :: !(Maybe Text)
+    , _rKind :: !(Maybe Text)
+    , _rContent :: !(Maybe Text)
+    , _rDate :: !(Maybe Text)
+    , _rVolumeId :: !(Maybe Text)
+    , _rAuthor :: !(Maybe ReviewAuthor)
+    , _rSource :: !(Maybe ReviewSource)
     , _rFullTextURL :: !(Maybe Text)
-    , _rTitle       :: !(Maybe Text)
-    , _rType        :: !(Maybe Text)
+    , _rTitle :: !(Maybe Text)
+    , _rType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5370,7 +5640,7 @@ review
 review =
   Review'
     { _rRating = Nothing
-    , _rKind = "books#review"
+    , _rKind = Nothing
     , _rContent = Nothing
     , _rDate = Nothing
     , _rVolumeId = Nothing
@@ -5388,7 +5658,7 @@ rRating :: Lens' Review (Maybe Text)
 rRating = lens _rRating (\ s a -> s{_rRating = a})
 
 -- | Resource type for a review.
-rKind :: Lens' Review Text
+rKind :: Lens' Review (Maybe Text)
 rKind = lens _rKind (\ s a -> s{_rKind = a})
 
 -- | Review text.
@@ -5432,9 +5702,8 @@ instance FromJSON Review where
           = withObject "Review"
               (\ o ->
                  Review' <$>
-                   (o .:? "rating") <*>
-                     (o .:? "kind" .!= "books#review")
-                     <*> (o .:? "content")
+                   (o .:? "rating") <*> (o .:? "kind") <*>
+                     (o .:? "content")
                      <*> (o .:? "date")
                      <*> (o .:? "volumeId")
                      <*> (o .:? "author")
@@ -5447,7 +5716,7 @@ instance ToJSON Review where
         toJSON Review'{..}
           = object
               (catMaybes
-                 [("rating" .=) <$> _rRating, Just ("kind" .= _rKind),
+                 [("rating" .=) <$> _rRating, ("kind" .=) <$> _rKind,
                   ("content" .=) <$> _rContent, ("date" .=) <$> _rDate,
                   ("volumeId" .=) <$> _rVolumeId,
                   ("author" .=) <$> _rAuthor,
@@ -5460,7 +5729,7 @@ instance ToJSON Review where
 -- /See:/ 'volumeUserInfoRentalPeriod' smart constructor.
 data VolumeUserInfoRentalPeriod =
   VolumeUserInfoRentalPeriod'
-    { _vuirpEndUtcSec   :: !(Maybe (Textual Int64))
+    { _vuirpEndUtcSec :: !(Maybe (Textual Int64))
     , _vuirpStartUtcSec :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5506,6 +5775,87 @@ instance ToJSON VolumeUserInfoRentalPeriod where
                  [("endUtcSec" .=) <$> _vuirpEndUtcSec,
                   ("startUtcSec" .=) <$> _vuirpStartUtcSec])
 
+--
+-- /See:/ 'seriesSeriesItemSeriesSubscriptionReleaseInfo' smart constructor.
+data SeriesSeriesItemSeriesSubscriptionReleaseInfo =
+  SeriesSeriesItemSeriesSubscriptionReleaseInfo'
+    { _ssissriSeriesSubscriptionType :: !(Maybe Text)
+    , _ssissriCancelTime :: !(Maybe Text)
+    , _ssissriCurrentReleaseInfo :: !(Maybe SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo)
+    , _ssissriNextReleaseInfo :: !(Maybe SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SeriesSeriesItemSeriesSubscriptionReleaseInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssissriSeriesSubscriptionType'
+--
+-- * 'ssissriCancelTime'
+--
+-- * 'ssissriCurrentReleaseInfo'
+--
+-- * 'ssissriNextReleaseInfo'
+seriesSeriesItemSeriesSubscriptionReleaseInfo
+    :: SeriesSeriesItemSeriesSubscriptionReleaseInfo
+seriesSeriesItemSeriesSubscriptionReleaseInfo =
+  SeriesSeriesItemSeriesSubscriptionReleaseInfo'
+    { _ssissriSeriesSubscriptionType = Nothing
+    , _ssissriCancelTime = Nothing
+    , _ssissriCurrentReleaseInfo = Nothing
+    , _ssissriNextReleaseInfo = Nothing
+    }
+
+
+ssissriSeriesSubscriptionType :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfo (Maybe Text)
+ssissriSeriesSubscriptionType
+  = lens _ssissriSeriesSubscriptionType
+      (\ s a -> s{_ssissriSeriesSubscriptionType = a})
+
+ssissriCancelTime :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfo (Maybe Text)
+ssissriCancelTime
+  = lens _ssissriCancelTime
+      (\ s a -> s{_ssissriCancelTime = a})
+
+ssissriCurrentReleaseInfo :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfo (Maybe SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo)
+ssissriCurrentReleaseInfo
+  = lens _ssissriCurrentReleaseInfo
+      (\ s a -> s{_ssissriCurrentReleaseInfo = a})
+
+ssissriNextReleaseInfo :: Lens' SeriesSeriesItemSeriesSubscriptionReleaseInfo (Maybe SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo)
+ssissriNextReleaseInfo
+  = lens _ssissriNextReleaseInfo
+      (\ s a -> s{_ssissriNextReleaseInfo = a})
+
+instance FromJSON
+           SeriesSeriesItemSeriesSubscriptionReleaseInfo
+         where
+        parseJSON
+          = withObject
+              "SeriesSeriesItemSeriesSubscriptionReleaseInfo"
+              (\ o ->
+                 SeriesSeriesItemSeriesSubscriptionReleaseInfo' <$>
+                   (o .:? "seriesSubscriptionType") <*>
+                     (o .:? "cancelTime")
+                     <*> (o .:? "currentReleaseInfo")
+                     <*> (o .:? "nextReleaseInfo"))
+
+instance ToJSON
+           SeriesSeriesItemSeriesSubscriptionReleaseInfo
+         where
+        toJSON
+          SeriesSeriesItemSeriesSubscriptionReleaseInfo'{..}
+          = object
+              (catMaybes
+                 [("seriesSubscriptionType" .=) <$>
+                    _ssissriSeriesSubscriptionType,
+                  ("cancelTime" .=) <$> _ssissriCancelTime,
+                  ("currentReleaseInfo" .=) <$>
+                    _ssissriCurrentReleaseInfo,
+                  ("nextReleaseInfo" .=) <$> _ssissriNextReleaseInfo])
+
 -- | Any information about a volume related to the eBookstore and\/or
 -- purchaseability. This information can depend on the country where the
 -- request originates from (i.e. books may not be for sale in certain
@@ -5514,13 +5864,13 @@ instance ToJSON VolumeUserInfoRentalPeriod where
 -- /See:/ 'volumeSaleInfo' smart constructor.
 data VolumeSaleInfo =
   VolumeSaleInfo'
-    { _vsiCountry     :: !(Maybe Text)
-    , _vsiOnSaleDate  :: !(Maybe DateTime')
-    , _vsiListPrice   :: !(Maybe VolumeSaleInfoListPrice)
+    { _vsiCountry :: !(Maybe Text)
+    , _vsiOnSaleDate :: !(Maybe Text)
+    , _vsiListPrice :: !(Maybe VolumeSaleInfoListPrice)
     , _vsiRetailPrice :: !(Maybe VolumeSaleInfoRetailPrice)
-    , _vsiOffers      :: !(Maybe [VolumeSaleInfoOffersItem])
-    , _vsiBuyLink     :: !(Maybe Text)
-    , _vsiIsEbook     :: !(Maybe Bool)
+    , _vsiOffers :: !(Maybe [VolumeSaleInfoOffersItem])
+    , _vsiBuyLink :: !(Maybe Text)
+    , _vsiIsEbook :: !(Maybe Bool)
     , _vsiSaleability :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5567,11 +5917,10 @@ vsiCountry
   = lens _vsiCountry (\ s a -> s{_vsiCountry = a})
 
 -- | The date on which this book is available for sale.
-vsiOnSaleDate :: Lens' VolumeSaleInfo (Maybe UTCTime)
+vsiOnSaleDate :: Lens' VolumeSaleInfo (Maybe Text)
 vsiOnSaleDate
   = lens _vsiOnSaleDate
       (\ s a -> s{_vsiOnSaleDate = a})
-      . mapping _DateTime
 
 -- | Suggested retail price. (In LITE projection.)
 vsiListPrice :: Lens' VolumeSaleInfo (Maybe VolumeSaleInfoListPrice)
@@ -5644,11 +5993,16 @@ instance ToJSON VolumeSaleInfo where
 -- /See:/ 'seriesSeriesItem' smart constructor.
 data SeriesSeriesItem =
   SeriesSeriesItem'
-    { _ssiSeriesId       :: !(Maybe Text)
-    , _ssiImageURL       :: !(Maybe Text)
+    { _ssiIsComplete :: !(Maybe Bool)
+    , _ssiSeriesId :: !(Maybe Text)
+    , _ssiImageURL :: !(Maybe Text)
+    , _ssiSeriesSubscriptionReleaseInfo :: !(Maybe SeriesSeriesItemSeriesSubscriptionReleaseInfo)
+    , _ssiEligibleForSubscription :: !(Maybe Bool)
+    , _ssiSeriesFormatType :: !(Maybe Text)
     , _ssiBannerImageURL :: !(Maybe Text)
-    , _ssiTitle          :: !(Maybe Text)
-    , _ssiSeriesType     :: !(Maybe Text)
+    , _ssiTitle :: !(Maybe Text)
+    , _ssiSeriesType :: !(Maybe Text)
+    , _ssiSubscriptionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5657,26 +6011,46 @@ data SeriesSeriesItem =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ssiIsComplete'
+--
 -- * 'ssiSeriesId'
 --
 -- * 'ssiImageURL'
+--
+-- * 'ssiSeriesSubscriptionReleaseInfo'
+--
+-- * 'ssiEligibleForSubscription'
+--
+-- * 'ssiSeriesFormatType'
 --
 -- * 'ssiBannerImageURL'
 --
 -- * 'ssiTitle'
 --
 -- * 'ssiSeriesType'
+--
+-- * 'ssiSubscriptionId'
 seriesSeriesItem
     :: SeriesSeriesItem
 seriesSeriesItem =
   SeriesSeriesItem'
-    { _ssiSeriesId = Nothing
+    { _ssiIsComplete = Nothing
+    , _ssiSeriesId = Nothing
     , _ssiImageURL = Nothing
+    , _ssiSeriesSubscriptionReleaseInfo = Nothing
+    , _ssiEligibleForSubscription = Nothing
+    , _ssiSeriesFormatType = Nothing
     , _ssiBannerImageURL = Nothing
     , _ssiTitle = Nothing
     , _ssiSeriesType = Nothing
+    , _ssiSubscriptionId = Nothing
     }
 
+
+ssiIsComplete :: Lens' SeriesSeriesItem (Maybe Bool)
+ssiIsComplete
+  = lens _ssiIsComplete
+      (\ s a -> s{_ssiIsComplete = a})
 
 ssiSeriesId :: Lens' SeriesSeriesItem (Maybe Text)
 ssiSeriesId
@@ -5685,6 +6059,21 @@ ssiSeriesId
 ssiImageURL :: Lens' SeriesSeriesItem (Maybe Text)
 ssiImageURL
   = lens _ssiImageURL (\ s a -> s{_ssiImageURL = a})
+
+ssiSeriesSubscriptionReleaseInfo :: Lens' SeriesSeriesItem (Maybe SeriesSeriesItemSeriesSubscriptionReleaseInfo)
+ssiSeriesSubscriptionReleaseInfo
+  = lens _ssiSeriesSubscriptionReleaseInfo
+      (\ s a -> s{_ssiSeriesSubscriptionReleaseInfo = a})
+
+ssiEligibleForSubscription :: Lens' SeriesSeriesItem (Maybe Bool)
+ssiEligibleForSubscription
+  = lens _ssiEligibleForSubscription
+      (\ s a -> s{_ssiEligibleForSubscription = a})
+
+ssiSeriesFormatType :: Lens' SeriesSeriesItem (Maybe Text)
+ssiSeriesFormatType
+  = lens _ssiSeriesFormatType
+      (\ s a -> s{_ssiSeriesFormatType = a})
 
 ssiBannerImageURL :: Lens' SeriesSeriesItem (Maybe Text)
 ssiBannerImageURL
@@ -5699,31 +6088,48 @@ ssiSeriesType
   = lens _ssiSeriesType
       (\ s a -> s{_ssiSeriesType = a})
 
+ssiSubscriptionId :: Lens' SeriesSeriesItem (Maybe Text)
+ssiSubscriptionId
+  = lens _ssiSubscriptionId
+      (\ s a -> s{_ssiSubscriptionId = a})
+
 instance FromJSON SeriesSeriesItem where
         parseJSON
           = withObject "SeriesSeriesItem"
               (\ o ->
                  SeriesSeriesItem' <$>
-                   (o .:? "seriesId") <*> (o .:? "imageUrl") <*>
-                     (o .:? "bannerImageUrl")
+                   (o .:? "isComplete") <*> (o .:? "seriesId") <*>
+                     (o .:? "imageUrl")
+                     <*> (o .:? "seriesSubscriptionReleaseInfo")
+                     <*> (o .:? "eligibleForSubscription")
+                     <*> (o .:? "seriesFormatType")
+                     <*> (o .:? "bannerImageUrl")
                      <*> (o .:? "title")
-                     <*> (o .:? "seriesType"))
+                     <*> (o .:? "seriesType")
+                     <*> (o .:? "subscriptionId"))
 
 instance ToJSON SeriesSeriesItem where
         toJSON SeriesSeriesItem'{..}
           = object
               (catMaybes
-                 [("seriesId" .=) <$> _ssiSeriesId,
+                 [("isComplete" .=) <$> _ssiIsComplete,
+                  ("seriesId" .=) <$> _ssiSeriesId,
                   ("imageUrl" .=) <$> _ssiImageURL,
+                  ("seriesSubscriptionReleaseInfo" .=) <$>
+                    _ssiSeriesSubscriptionReleaseInfo,
+                  ("eligibleForSubscription" .=) <$>
+                    _ssiEligibleForSubscription,
+                  ("seriesFormatType" .=) <$> _ssiSeriesFormatType,
                   ("bannerImageUrl" .=) <$> _ssiBannerImageURL,
                   ("title" .=) <$> _ssiTitle,
-                  ("seriesType" .=) <$> _ssiSeriesType])
+                  ("seriesType" .=) <$> _ssiSeriesType,
+                  ("subscriptionId" .=) <$> _ssiSubscriptionId])
 
 --
 -- /See:/ 'metadata' smart constructor.
 data Metadata =
   Metadata'
-    { _mKind  :: !Text
+    { _mKind :: !(Maybe Text)
     , _mItems :: !(Maybe [MetadataItemsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5738,11 +6144,11 @@ data Metadata =
 -- * 'mItems'
 metadata
     :: Metadata
-metadata = Metadata' {_mKind = "dictionary#metadata", _mItems = Nothing}
+metadata = Metadata' {_mKind = Nothing, _mItems = Nothing}
 
 
 -- | Resource type.
-mKind :: Lens' Metadata Text
+mKind :: Lens' Metadata (Maybe Text)
 mKind = lens _mKind (\ s a -> s{_mKind = a})
 
 -- | A list of offline dictionary metadata.
@@ -5756,14 +6162,13 @@ instance FromJSON Metadata where
           = withObject "Metadata"
               (\ o ->
                  Metadata' <$>
-                   (o .:? "kind" .!= "dictionary#metadata") <*>
-                     (o .:? "items" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Metadata where
         toJSON Metadata'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
+                 [("kind" .=) <$> _mKind, ("items" .=) <$> _mItems])
 
 -- | What layers exist in this volume and high level information about them.
 --
@@ -5808,8 +6213,8 @@ instance ToJSON VolumeLayerInfo where
 -- /See:/ 'volumeVolumeInfoDimensions' smart constructor.
 data VolumeVolumeInfoDimensions =
   VolumeVolumeInfoDimensions'
-    { _vvidHeight    :: !(Maybe Text)
-    , _vvidWidth     :: !(Maybe Text)
+    { _vvidHeight :: !(Maybe Text)
+    , _vvidWidth :: !(Maybe Text)
     , _vvidThickness :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5864,74 +6269,73 @@ instance ToJSON VolumeVolumeInfoDimensions where
                   ("thickness" .=) <$> _vvidThickness])
 
 --
--- /See:/ 'requestAccess' smart constructor.
-data RequestAccess =
-  RequestAccess'
-    { _raConcurrentAccess :: !(Maybe ConcurrentAccessRestriction)
-    , _raKind             :: !Text
-    , _raDownloadAccess   :: !(Maybe DownloadAccessRestriction)
+-- /See:/ 'requestAccessData' smart constructor.
+data RequestAccessData =
+  RequestAccessData'
+    { _radConcurrentAccess :: !(Maybe ConcurrentAccessRestriction)
+    , _radKind :: !(Maybe Text)
+    , _radDownloadAccess :: !(Maybe DownloadAccessRestriction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'RequestAccess' with the minimum fields required to make a request.
+-- | Creates a value of 'RequestAccessData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'raConcurrentAccess'
+-- * 'radConcurrentAccess'
 --
--- * 'raKind'
+-- * 'radKind'
 --
--- * 'raDownloadAccess'
-requestAccess
-    :: RequestAccess
-requestAccess =
-  RequestAccess'
-    { _raConcurrentAccess = Nothing
-    , _raKind = "books#requestAccess"
-    , _raDownloadAccess = Nothing
+-- * 'radDownloadAccess'
+requestAccessData
+    :: RequestAccessData
+requestAccessData =
+  RequestAccessData'
+    { _radConcurrentAccess = Nothing
+    , _radKind = Nothing
+    , _radDownloadAccess = Nothing
     }
 
 
 -- | A concurrent access response.
-raConcurrentAccess :: Lens' RequestAccess (Maybe ConcurrentAccessRestriction)
-raConcurrentAccess
-  = lens _raConcurrentAccess
-      (\ s a -> s{_raConcurrentAccess = a})
+radConcurrentAccess :: Lens' RequestAccessData (Maybe ConcurrentAccessRestriction)
+radConcurrentAccess
+  = lens _radConcurrentAccess
+      (\ s a -> s{_radConcurrentAccess = a})
 
 -- | Resource type.
-raKind :: Lens' RequestAccess Text
-raKind = lens _raKind (\ s a -> s{_raKind = a})
+radKind :: Lens' RequestAccessData (Maybe Text)
+radKind = lens _radKind (\ s a -> s{_radKind = a})
 
 -- | A download access response.
-raDownloadAccess :: Lens' RequestAccess (Maybe DownloadAccessRestriction)
-raDownloadAccess
-  = lens _raDownloadAccess
-      (\ s a -> s{_raDownloadAccess = a})
+radDownloadAccess :: Lens' RequestAccessData (Maybe DownloadAccessRestriction)
+radDownloadAccess
+  = lens _radDownloadAccess
+      (\ s a -> s{_radDownloadAccess = a})
 
-instance FromJSON RequestAccess where
+instance FromJSON RequestAccessData where
         parseJSON
-          = withObject "RequestAccess"
+          = withObject "RequestAccessData"
               (\ o ->
-                 RequestAccess' <$>
-                   (o .:? "concurrentAccess") <*>
-                     (o .:? "kind" .!= "books#requestAccess")
-                     <*> (o .:? "downloadAccess"))
+                 RequestAccessData' <$>
+                   (o .:? "concurrentAccess") <*> (o .:? "kind") <*>
+                     (o .:? "downloadAccess"))
 
-instance ToJSON RequestAccess where
-        toJSON RequestAccess'{..}
+instance ToJSON RequestAccessData where
+        toJSON RequestAccessData'{..}
           = object
               (catMaybes
-                 [("concurrentAccess" .=) <$> _raConcurrentAccess,
-                  Just ("kind" .= _raKind),
-                  ("downloadAccess" .=) <$> _raDownloadAccess])
+                 [("concurrentAccess" .=) <$> _radConcurrentAccess,
+                  ("kind" .=) <$> _radKind,
+                  ("downloadAccess" .=) <$> _radDownloadAccess])
 
 --
 -- /See:/ 'familyInfo' smart constructor.
 data FamilyInfo =
   FamilyInfo'
     { _fiMembership :: !(Maybe FamilyInfoMembership)
-    , _fiKind       :: !Text
+    , _fiKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5945,7 +6349,7 @@ data FamilyInfo =
 -- * 'fiKind'
 familyInfo
     :: FamilyInfo
-familyInfo = FamilyInfo' {_fiMembership = Nothing, _fiKind = "books#familyInfo"}
+familyInfo = FamilyInfo' {_fiMembership = Nothing, _fiKind = Nothing}
 
 
 -- | Family membership info of the user that made the request.
@@ -5954,7 +6358,7 @@ fiMembership
   = lens _fiMembership (\ s a -> s{_fiMembership = a})
 
 -- | Resource type.
-fiKind :: Lens' FamilyInfo Text
+fiKind :: Lens' FamilyInfo (Maybe Text)
 fiKind = lens _fiKind (\ s a -> s{_fiKind = a})
 
 instance FromJSON FamilyInfo where
@@ -5962,26 +6366,25 @@ instance FromJSON FamilyInfo where
           = withObject "FamilyInfo"
               (\ o ->
                  FamilyInfo' <$>
-                   (o .:? "membership") <*>
-                     (o .:? "kind" .!= "books#familyInfo"))
+                   (o .:? "membership") <*> (o .:? "kind"))
 
 instance ToJSON FamilyInfo where
         toJSON FamilyInfo'{..}
           = object
               (catMaybes
                  [("membership" .=) <$> _fiMembership,
-                  Just ("kind" .= _fiKind)])
+                  ("kind" .=) <$> _fiKind])
 
 -- | Selection ranges sent from the client.
 --
 -- /See:/ 'annotationClientVersionRanges' smart constructor.
 data AnnotationClientVersionRanges =
   AnnotationClientVersionRanges'
-    { _acvrGbImageRange   :: !(Maybe BooksAnnotationsRange)
+    { _acvrGbImageRange :: !(Maybe BooksAnnotationsRange)
     , _acvrContentVersion :: !(Maybe Text)
-    , _acvrImageCfiRange  :: !(Maybe BooksAnnotationsRange)
-    , _acvrGbTextRange    :: !(Maybe BooksAnnotationsRange)
-    , _acvrCfiRange       :: !(Maybe BooksAnnotationsRange)
+    , _acvrImageCfiRange :: !(Maybe BooksAnnotationsRange)
+    , _acvrGbTextRange :: !(Maybe BooksAnnotationsRange)
+    , _acvrCfiRange :: !(Maybe BooksAnnotationsRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6065,7 +6468,7 @@ instance ToJSON AnnotationClientVersionRanges where
 data DictlayerDataDictWordsItemSensesItemDefinitionsItem =
   DictlayerDataDictWordsItemSensesItemDefinitionsItem'
     { _dddwisidiDefinition :: !(Maybe Text)
-    , _dddwisidiExamples   :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem])
+    , _dddwisidiExamples :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6123,7 +6526,7 @@ instance ToJSON
 data VolumeLayerInfoLayersItem =
   VolumeLayerInfoLayersItem'
     { _vliliVolumeAnnotationsVersion :: !(Maybe Text)
-    , _vliliLayerId                  :: !(Maybe Text)
+    , _vliliLayerId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6176,11 +6579,11 @@ instance ToJSON VolumeLayerInfoLayersItem where
 -- /See:/ 'annotationCurrentVersionRanges' smart constructor.
 data AnnotationCurrentVersionRanges =
   AnnotationCurrentVersionRanges'
-    { _aGbImageRange   :: !(Maybe BooksAnnotationsRange)
+    { _aGbImageRange :: !(Maybe BooksAnnotationsRange)
     , _aContentVersion :: !(Maybe Text)
-    , _aImageCfiRange  :: !(Maybe BooksAnnotationsRange)
-    , _aGbTextRange    :: !(Maybe BooksAnnotationsRange)
-    , _aCfiRange       :: !(Maybe BooksAnnotationsRange)
+    , _aImageCfiRange :: !(Maybe BooksAnnotationsRange)
+    , _aGbTextRange :: !(Maybe BooksAnnotationsRange)
+    , _aCfiRange :: !(Maybe BooksAnnotationsRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6265,7 +6668,7 @@ instance ToJSON AnnotationCurrentVersionRanges where
 data VolumeAccessInfoPdf =
   VolumeAccessInfoPdf'
     { _vaipAcsTokenLink :: !(Maybe Text)
-    , _vaipIsAvailable  :: !(Maybe Bool)
+    , _vaipIsAvailable :: !(Maybe Bool)
     , _vaipDownloadLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6329,7 +6732,7 @@ instance ToJSON VolumeAccessInfoPdf where
 -- /See:/ 'dictlayerDataDictWordsItemExamplesItemSource' smart constructor.
 data DictlayerDataDictWordsItemExamplesItemSource =
   DictlayerDataDictWordsItemExamplesItemSource'
-    { _dddwieisURL         :: !(Maybe Text)
+    { _dddwieisURL :: !(Maybe Text)
     , _dddwieisAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6384,7 +6787,7 @@ instance ToJSON
 data VolumeAccessInfoEpub =
   VolumeAccessInfoEpub'
     { _vaieAcsTokenLink :: !(Maybe Text)
-    , _vaieIsAvailable  :: !(Maybe Bool)
+    , _vaieIsAvailable :: !(Maybe Bool)
     , _vaieDownloadLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6449,12 +6852,12 @@ instance ToJSON VolumeAccessInfoEpub where
 data ReadingPosition =
   ReadingPosition'
     { _rpEpubCfiPosition :: !(Maybe Text)
-    , _rpKind            :: !Text
+    , _rpKind :: !(Maybe Text)
     , _rpGbImagePosition :: !(Maybe Text)
-    , _rpPdfPosition     :: !(Maybe Text)
-    , _rpVolumeId        :: !(Maybe Text)
-    , _rpUpdated         :: !(Maybe DateTime')
-    , _rpGbTextPosition  :: !(Maybe Text)
+    , _rpPdfPosition :: !(Maybe Text)
+    , _rpVolumeId :: !(Maybe Text)
+    , _rpUpdated :: !(Maybe Text)
+    , _rpGbTextPosition :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6481,7 +6884,7 @@ readingPosition
 readingPosition =
   ReadingPosition'
     { _rpEpubCfiPosition = Nothing
-    , _rpKind = "books#readingPosition"
+    , _rpKind = Nothing
     , _rpGbImagePosition = Nothing
     , _rpPdfPosition = Nothing
     , _rpVolumeId = Nothing
@@ -6497,7 +6900,7 @@ rpEpubCfiPosition
       (\ s a -> s{_rpEpubCfiPosition = a})
 
 -- | Resource type for a reading position.
-rpKind :: Lens' ReadingPosition Text
+rpKind :: Lens' ReadingPosition (Maybe Text)
 rpKind = lens _rpKind (\ s a -> s{_rpKind = a})
 
 -- | Position in a volume for image-based content.
@@ -6519,10 +6922,9 @@ rpVolumeId
 
 -- | Timestamp when this reading position was last updated (formatted UTC
 -- timestamp with millisecond resolution).
-rpUpdated :: Lens' ReadingPosition (Maybe UTCTime)
+rpUpdated :: Lens' ReadingPosition (Maybe Text)
 rpUpdated
-  = lens _rpUpdated (\ s a -> s{_rpUpdated = a}) .
-      mapping _DateTime
+  = lens _rpUpdated (\ s a -> s{_rpUpdated = a})
 
 -- | Position in a volume for text-based content.
 rpGbTextPosition :: Lens' ReadingPosition (Maybe Text)
@@ -6535,9 +6937,8 @@ instance FromJSON ReadingPosition where
           = withObject "ReadingPosition"
               (\ o ->
                  ReadingPosition' <$>
-                   (o .:? "epubCfiPosition") <*>
-                     (o .:? "kind" .!= "books#readingPosition")
-                     <*> (o .:? "gbImagePosition")
+                   (o .:? "epubCfiPosition") <*> (o .:? "kind") <*>
+                     (o .:? "gbImagePosition")
                      <*> (o .:? "pdfPosition")
                      <*> (o .:? "volumeId")
                      <*> (o .:? "updated")
@@ -6548,7 +6949,7 @@ instance ToJSON ReadingPosition where
           = object
               (catMaybes
                  [("epubCfiPosition" .=) <$> _rpEpubCfiPosition,
-                  Just ("kind" .= _rpKind),
+                  ("kind" .=) <$> _rpKind,
                   ("gbImagePosition" .=) <$> _rpGbImagePosition,
                   ("pdfPosition" .=) <$> _rpPdfPosition,
                   ("volumeId" .=) <$> _rpVolumeId,
@@ -6560,10 +6961,10 @@ instance ToJSON ReadingPosition where
 data VolumeSaleInfoOffersItem =
   VolumeSaleInfoOffersItem'
     { _vsioiFinskyOfferType :: !(Maybe (Textual Int32))
-    , _vsioiRentalDuration  :: !(Maybe VolumeSaleInfoOffersItemRentalDuration)
-    , _vsioiListPrice       :: !(Maybe VolumeSaleInfoOffersItemListPrice)
-    , _vsioiRetailPrice     :: !(Maybe VolumeSaleInfoOffersItemRetailPrice)
-    , _vsioiGiftable        :: !(Maybe Bool)
+    , _vsioiRentalDuration :: !(Maybe VolumeSaleInfoOffersItemRentalDuration)
+    , _vsioiListPrice :: !(Maybe VolumeSaleInfoOffersItemListPrice)
+    , _vsioiRetailPrice :: !(Maybe VolumeSaleInfoOffersItemRetailPrice)
+    , _vsioiGiftable :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6650,7 +7051,7 @@ instance ToJSON VolumeSaleInfoOffersItem where
 data DictlayerDataDict =
   DictlayerDataDict'
     { _dddSource :: !(Maybe DictlayerDataDictSource)
-    , _dddWords  :: !(Maybe [DictlayerDataDictWordsItem])
+    , _dddWords :: !(Maybe [DictlayerDataDictWordsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6698,13 +7099,13 @@ instance ToJSON DictlayerDataDict where
 data DictlayerDataDictWordsItemSensesItem =
   DictlayerDataDictWordsItemSensesItem'
     { _dddwisiPronunciationURL :: !(Maybe Text)
-    , _dddwisiConjugations     :: !(Maybe [DictlayerDataDictWordsItemSensesItemConjugationsItem])
-    , _dddwisiPronunciation    :: !(Maybe Text)
-    , _dddwisiSynonyms         :: !(Maybe [DictlayerDataDictWordsItemSensesItemSynonymsItem])
-    , _dddwisiSource           :: !(Maybe DictlayerDataDictWordsItemSensesItemSource)
-    , _dddwisiPartOfSpeech     :: !(Maybe Text)
-    , _dddwisiDefinitions      :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItem])
-    , _dddwisiSyllabification  :: !(Maybe Text)
+    , _dddwisiConjugations :: !(Maybe [DictlayerDataDictWordsItemSensesItemConjugationsItem])
+    , _dddwisiPronunciation :: !(Maybe Text)
+    , _dddwisiSynonyms :: !(Maybe [DictlayerDataDictWordsItemSensesItemSynonymsItem])
+    , _dddwisiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemSource)
+    , _dddwisiPartOfSpeech :: !(Maybe Text)
+    , _dddwisiDefinitions :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItem])
+    , _dddwisiSyllabification :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6861,7 +7262,7 @@ instance ToJSON VolumeRecommendedInfo where
 -- /See:/ 'offers' smart constructor.
 data Offers =
   Offers'
-    { _oKind  :: !Text
+    { _oKind :: !(Maybe Text)
     , _oItems :: !(Maybe [OffersItemsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6876,11 +7277,11 @@ data Offers =
 -- * 'oItems'
 offers
     :: Offers
-offers = Offers' {_oKind = "promooffer#offers", _oItems = Nothing}
+offers = Offers' {_oKind = Nothing, _oItems = Nothing}
 
 
 -- | Resource type.
-oKind :: Lens' Offers Text
+oKind :: Lens' Offers (Maybe Text)
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | A list of offers.
@@ -6894,22 +7295,21 @@ instance FromJSON Offers where
           = withObject "Offers"
               (\ o ->
                  Offers' <$>
-                   (o .:? "kind" .!= "promooffer#offers") <*>
-                     (o .:? "items" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Offers where
         toJSON Offers'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _oKind), ("items" .=) <$> _oItems])
+                 [("kind" .=) <$> _oKind, ("items" .=) <$> _oItems])
 
 --
 -- /See:/ 'discoveryclusters' smart constructor.
 data Discoveryclusters =
   Discoveryclusters'
-    { _dKind          :: !Text
+    { _dKind :: !(Maybe Text)
     , _dTotalClusters :: !(Maybe (Textual Int32))
-    , _dClusters      :: !(Maybe [DiscoveryclustersClustersItem])
+    , _dClusters :: !(Maybe [DiscoveryclustersClustersItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6927,14 +7327,11 @@ discoveryclusters
     :: Discoveryclusters
 discoveryclusters =
   Discoveryclusters'
-    { _dKind = "books#discovery#clusters"
-    , _dTotalClusters = Nothing
-    , _dClusters = Nothing
-    }
+    {_dKind = Nothing, _dTotalClusters = Nothing, _dClusters = Nothing}
 
 
 -- | Resorce type.
-dKind :: Lens' Discoveryclusters Text
+dKind :: Lens' Discoveryclusters (Maybe Text)
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
 dTotalClusters :: Lens' Discoveryclusters (Maybe Int32)
@@ -6954,15 +7351,14 @@ instance FromJSON Discoveryclusters where
           = withObject "Discoveryclusters"
               (\ o ->
                  Discoveryclusters' <$>
-                   (o .:? "kind" .!= "books#discovery#clusters") <*>
-                     (o .:? "totalClusters")
-                     <*> (o .:? "clusters" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "totalClusters") <*>
+                     (o .:? "clusters" .!= mempty))
 
 instance ToJSON Discoveryclusters where
         toJSON Discoveryclusters'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _dKind),
+                 [("kind" .=) <$> _dKind,
                   ("totalClusters" .=) <$> _dTotalClusters,
                   ("clusters" .=) <$> _dClusters])
 
@@ -6970,10 +7366,10 @@ instance ToJSON Discoveryclusters where
 -- /See:/ 'volumeseriesInfoVolumeSeriesItem' smart constructor.
 data VolumeseriesInfoVolumeSeriesItem =
   VolumeseriesInfoVolumeSeriesItem'
-    { _vivsiSeriesId       :: !(Maybe Text)
+    { _vivsiSeriesId :: !(Maybe Text)
     , _vivsiSeriesBookType :: !(Maybe Text)
-    , _vivsiOrderNumber    :: !(Maybe (Textual Int32))
-    , _vivsiIssue          :: !(Maybe [VolumeseriesInfoVolumeSeriesItemIssueItem])
+    , _vivsiOrderNumber :: !(Maybe (Textual Int32))
+    , _vivsiIssue :: !(Maybe [VolumeseriesInfoVolumeSeriesItemIssueItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7053,7 +7449,7 @@ instance ToJSON VolumeseriesInfoVolumeSeriesItem
 data UserSettingsNotesExport =
   UserSettingsNotesExport'
     { _usneFolderName :: !(Maybe Text)
-    , _usneIsEnabled  :: !(Maybe Bool)
+    , _usneIsEnabled :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7100,16 +7496,16 @@ instance ToJSON UserSettingsNotesExport where
 data ConcurrentAccessRestriction =
   ConcurrentAccessRestriction'
     { _carMaxConcurrentDevices :: !(Maybe (Textual Int32))
-    , _carSignature            :: !(Maybe Text)
-    , _carTimeWindowSeconds    :: !(Maybe (Textual Int32))
-    , _carKind                 :: !Text
-    , _carReasonCode           :: !(Maybe Text)
-    , _carVolumeId             :: !(Maybe Text)
-    , _carRestricted           :: !(Maybe Bool)
-    , _carSource               :: !(Maybe Text)
-    , _carDeviceAllowed        :: !(Maybe Bool)
-    , _carMessage              :: !(Maybe Text)
-    , _carNonce                :: !(Maybe Text)
+    , _carSignature :: !(Maybe Text)
+    , _carTimeWindowSeconds :: !(Maybe (Textual Int32))
+    , _carKind :: !(Maybe Text)
+    , _carReasonCode :: !(Maybe Text)
+    , _carVolumeId :: !(Maybe Text)
+    , _carRestricted :: !(Maybe Bool)
+    , _carSource :: !(Maybe Text)
+    , _carDeviceAllowed :: !(Maybe Bool)
+    , _carMessage :: !(Maybe Text)
+    , _carNonce :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7146,7 +7542,7 @@ concurrentAccessRestriction =
     { _carMaxConcurrentDevices = Nothing
     , _carSignature = Nothing
     , _carTimeWindowSeconds = Nothing
-    , _carKind = "books#concurrentAccessRestriction"
+    , _carKind = Nothing
     , _carReasonCode = Nothing
     , _carVolumeId = Nothing
     , _carRestricted = Nothing
@@ -7177,7 +7573,7 @@ carTimeWindowSeconds
       . mapping _Coerce
 
 -- | Resource type.
-carKind :: Lens' ConcurrentAccessRestriction Text
+carKind :: Lens' ConcurrentAccessRestriction (Maybe Text)
 carKind = lens _carKind (\ s a -> s{_carKind = a})
 
 -- | Error\/warning reason code.
@@ -7227,9 +7623,7 @@ instance FromJSON ConcurrentAccessRestriction where
                    (o .:? "maxConcurrentDevices") <*>
                      (o .:? "signature")
                      <*> (o .:? "timeWindowSeconds")
-                     <*>
-                     (o .:? "kind" .!=
-                        "books#concurrentAccessRestriction")
+                     <*> (o .:? "kind")
                      <*> (o .:? "reasonCode")
                      <*> (o .:? "volumeId")
                      <*> (o .:? "restricted")
@@ -7246,7 +7640,7 @@ instance ToJSON ConcurrentAccessRestriction where
                     _carMaxConcurrentDevices,
                   ("signature" .=) <$> _carSignature,
                   ("timeWindowSeconds" .=) <$> _carTimeWindowSeconds,
-                  Just ("kind" .= _carKind),
+                  ("kind" .=) <$> _carKind,
                   ("reasonCode" .=) <$> _carReasonCode,
                   ("volumeId" .=) <$> _carVolumeId,
                   ("restricted" .=) <$> _carRestricted,
@@ -7260,8 +7654,8 @@ instance ToJSON ConcurrentAccessRestriction where
 data Volumes =
   Volumes'
     { _v1TotalItems :: !(Maybe (Textual Int32))
-    , _v1Kind       :: !Text
-    , _v1Items      :: !(Maybe [Volume])
+    , _v1Kind :: !(Maybe Text)
+    , _v1Items :: !(Maybe [Volume])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7278,8 +7672,7 @@ data Volumes =
 volumes
     :: Volumes
 volumes =
-  Volumes'
-    {_v1TotalItems = Nothing, _v1Kind = "books#volumes", _v1Items = Nothing}
+  Volumes' {_v1TotalItems = Nothing, _v1Kind = Nothing, _v1Items = Nothing}
 
 
 -- | Total number of volumes found. This might be greater than the number of
@@ -7290,7 +7683,7 @@ v1TotalItems
       . mapping _Coerce
 
 -- | Resource type.
-v1Kind :: Lens' Volumes Text
+v1Kind :: Lens' Volumes (Maybe Text)
 v1Kind = lens _v1Kind (\ s a -> s{_v1Kind = a})
 
 -- | A list of volumes.
@@ -7304,16 +7697,15 @@ instance FromJSON Volumes where
           = withObject "Volumes"
               (\ o ->
                  Volumes' <$>
-                   (o .:? "totalItems") <*>
-                     (o .:? "kind" .!= "books#volumes")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "totalItems") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty))
 
 instance ToJSON Volumes where
         toJSON Volumes'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _v1TotalItems,
-                  Just ("kind" .= _v1Kind), ("items" .=) <$> _v1Items])
+                  ("kind" .=) <$> _v1Kind, ("items" .=) <$> _v1Items])
 
 --
 -- /See:/ 'userSettingsNotificationMatchMyInterests' smart constructor.
@@ -7362,7 +7754,7 @@ instance ToJSON
 -- /See:/ 'bookshelves' smart constructor.
 data Bookshelves =
   Bookshelves'
-    { _booKind  :: !Text
+    { _booKind :: !(Maybe Text)
     , _booItems :: !(Maybe [Bookshelf])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7377,11 +7769,11 @@ data Bookshelves =
 -- * 'booItems'
 bookshelves
     :: Bookshelves
-bookshelves = Bookshelves' {_booKind = "books#bookshelves", _booItems = Nothing}
+bookshelves = Bookshelves' {_booKind = Nothing, _booItems = Nothing}
 
 
 -- | Resource type.
-booKind :: Lens' Bookshelves Text
+booKind :: Lens' Bookshelves (Maybe Text)
 booKind = lens _booKind (\ s a -> s{_booKind = a})
 
 -- | A list of bookshelves.
@@ -7396,14 +7788,13 @@ instance FromJSON Bookshelves where
           = withObject "Bookshelves"
               (\ o ->
                  Bookshelves' <$>
-                   (o .:? "kind" .!= "books#bookshelves") <*>
-                     (o .:? "items" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Bookshelves where
         toJSON Bookshelves'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _booKind),
+                 [("kind" .=) <$> _booKind,
                   ("items" .=) <$> _booItems])
 
 -- | The source, url and attribution for this dictionary data.
@@ -7411,7 +7802,7 @@ instance ToJSON Bookshelves where
 -- /See:/ 'dictlayerDataDictSource' smart constructor.
 data DictlayerDataDictSource =
   DictlayerDataDictSource'
-    { _dddsURL         :: !(Maybe Text)
+    { _dddsURL :: !(Maybe Text)
     , _dddsAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7456,7 +7847,7 @@ instance ToJSON DictlayerDataDictSource where
 -- /See:/ 'downloadAccesses' smart constructor.
 data DownloadAccesses =
   DownloadAccesses'
-    { _daKind               :: !Text
+    { _daKind :: !(Maybe Text)
     , _daDownloadAccessList :: !(Maybe [DownloadAccessRestriction])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7472,12 +7863,11 @@ data DownloadAccesses =
 downloadAccesses
     :: DownloadAccesses
 downloadAccesses =
-  DownloadAccesses'
-    {_daKind = "books#downloadAccesses", _daDownloadAccessList = Nothing}
+  DownloadAccesses' {_daKind = Nothing, _daDownloadAccessList = Nothing}
 
 
 -- | Resource type.
-daKind :: Lens' DownloadAccesses Text
+daKind :: Lens' DownloadAccesses (Maybe Text)
 daKind = lens _daKind (\ s a -> s{_daKind = a})
 
 -- | A list of download access responses.
@@ -7493,21 +7883,21 @@ instance FromJSON DownloadAccesses where
           = withObject "DownloadAccesses"
               (\ o ->
                  DownloadAccesses' <$>
-                   (o .:? "kind" .!= "books#downloadAccesses") <*>
+                   (o .:? "kind") <*>
                      (o .:? "downloadAccessList" .!= mempty))
 
 instance ToJSON DownloadAccesses where
         toJSON DownloadAccesses'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _daKind),
+                 [("kind" .=) <$> _daKind,
                   ("downloadAccessList" .=) <$> _daDownloadAccessList])
 
 --
 -- /See:/ 'geolayerDataGeoViewportHi' smart constructor.
 data GeolayerDataGeoViewportHi =
   GeolayerDataGeoViewportHi'
-    { _gdgvhLatitude  :: !(Maybe (Textual Double))
+    { _gdgvhLatitude :: !(Maybe (Textual Double))
     , _gdgvhLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7558,34 +7948,34 @@ instance ToJSON GeolayerDataGeoViewportHi where
 -- /See:/ 'volumeVolumeInfo' smart constructor.
 data VolumeVolumeInfo =
   VolumeVolumeInfo'
-    { _vviImageLinks          :: !(Maybe VolumeVolumeInfoImageLinks)
+    { _vviImageLinks :: !(Maybe VolumeVolumeInfoImageLinks)
     , _vviPanelizationSummary :: !(Maybe VolumeVolumeInfoPanelizationSummary)
-    , _vviAverageRating       :: !(Maybe (Textual Double))
-    , _vviRatingsCount        :: !(Maybe (Textual Int32))
+    , _vviAverageRating :: !(Maybe (Textual Double))
+    , _vviRatingsCount :: !(Maybe (Textual Int32))
     , _vviCanonicalVolumeLink :: !(Maybe Text)
-    , _vviReadingModes        :: !(Maybe JSONValue)
+    , _vviReadingModes :: !(Maybe VolumeVolumeInfoReadingModes)
     , _vviIndustryIdentifiers :: !(Maybe [VolumeVolumeInfoIndustryIdentifiersItem])
-    , _vviSeriesInfo          :: !(Maybe VolumeseriesInfo)
-    , _vviPrintedPageCount    :: !(Maybe (Textual Int32))
-    , _vviMainCategory        :: !(Maybe Text)
-    , _vviContentVersion      :: !(Maybe Text)
-    , _vviSamplePageCount     :: !(Maybe (Textual Int32))
-    , _vviCategories          :: !(Maybe [Text])
-    , _vviAuthors             :: !(Maybe [Text])
-    , _vviComicsContent       :: !(Maybe Bool)
-    , _vviAllowAnonLogging    :: !(Maybe Bool)
-    , _vviSubtitle            :: !(Maybe Text)
-    , _vviPublishedDate       :: !(Maybe Text)
-    , _vviMaturityRating      :: !(Maybe Text)
-    , _vviPreviewLink         :: !(Maybe Text)
-    , _vviLanguage            :: !(Maybe Text)
-    , _vviTitle               :: !(Maybe Text)
-    , _vviPageCount           :: !(Maybe (Textual Int32))
-    , _vviDimensions          :: !(Maybe VolumeVolumeInfoDimensions)
-    , _vviInfoLink            :: !(Maybe Text)
-    , _vviPublisher           :: !(Maybe Text)
-    , _vviDescription         :: !(Maybe Text)
-    , _vviPrintType           :: !(Maybe Text)
+    , _vviSeriesInfo :: !(Maybe VolumeseriesInfo)
+    , _vviPrintedPageCount :: !(Maybe (Textual Int32))
+    , _vviMainCategory :: !(Maybe Text)
+    , _vviContentVersion :: !(Maybe Text)
+    , _vviSamplePageCount :: !(Maybe (Textual Int32))
+    , _vviCategories :: !(Maybe [Text])
+    , _vviAuthors :: !(Maybe [Text])
+    , _vviComicsContent :: !(Maybe Bool)
+    , _vviAllowAnonLogging :: !(Maybe Bool)
+    , _vviSubtitle :: !(Maybe Text)
+    , _vviPublishedDate :: !(Maybe Text)
+    , _vviMaturityRating :: !(Maybe Text)
+    , _vviPreviewLink :: !(Maybe Text)
+    , _vviLanguage :: !(Maybe Text)
+    , _vviTitle :: !(Maybe Text)
+    , _vviPageCount :: !(Maybe (Textual Int32))
+    , _vviDimensions :: !(Maybe VolumeVolumeInfoDimensions)
+    , _vviInfoLink :: !(Maybe Text)
+    , _vviPublisher :: !(Maybe Text)
+    , _vviDescription :: !(Maybe Text)
+    , _vviPrintType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7718,7 +8108,7 @@ vviCanonicalVolumeLink
       (\ s a -> s{_vviCanonicalVolumeLink = a})
 
 -- | The reading modes available for this volume.
-vviReadingModes :: Lens' VolumeVolumeInfo (Maybe JSONValue)
+vviReadingModes :: Lens' VolumeVolumeInfo (Maybe VolumeVolumeInfoReadingModes)
 vviReadingModes
   = lens _vviReadingModes
       (\ s a -> s{_vviReadingModes = a})
@@ -7935,10 +8325,10 @@ instance ToJSON VolumeVolumeInfo where
 -- /See:/ 'metadataItemsItem' smart constructor.
 data MetadataItemsItem =
   MetadataItemsItem'
-    { _miiSize         :: !(Maybe (Textual Int64))
-    , _miiVersion      :: !(Maybe (Textual Int64))
-    , _miiLanguage     :: !(Maybe Text)
-    , _miiDownloadURL  :: !(Maybe Text)
+    { _miiSize :: !(Maybe (Textual Int64))
+    , _miiVersion :: !(Maybe (Textual Int64))
+    , _miiLanguage :: !(Maybe Text)
+    , _miiDownloadURL :: !(Maybe Text)
     , _miiEncryptedKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8017,7 +8407,7 @@ instance ToJSON MetadataItemsItem where
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSource' smart constructor.
 data DictlayerDataDictWordsItemSensesItemSource =
   DictlayerDataDictWordsItemSensesItemSource'
-    { _dddwisisURL         :: !(Maybe Text)
+    { _dddwisisURL :: !(Maybe Text)
     , _dddwisisAttribution :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8071,7 +8461,7 @@ instance ToJSON
 -- /See:/ 'volumeSaleInfoOffersItemRetailPrice' smart constructor.
 data VolumeSaleInfoOffersItemRetailPrice =
   VolumeSaleInfoOffersItemRetailPrice'
-    { _vsioirpCurrencyCode   :: !(Maybe Text)
+    { _vsioirpCurrencyCode :: !(Maybe Text)
     , _vsioirpAmountInMicros :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8123,8 +8513,8 @@ instance ToJSON VolumeSaleInfoOffersItemRetailPrice
 -- /See:/ 'volumeUserInfoFamilySharing' smart constructor.
 data VolumeUserInfoFamilySharing =
   VolumeUserInfoFamilySharing'
-    { _vuifsFamilyRole             :: !(Maybe Text)
-    , _vuifsIsSharingAllowed       :: !(Maybe Bool)
+    { _vuifsFamilyRole :: !(Maybe Text)
+    , _vuifsIsSharingAllowed :: !(Maybe Bool)
     , _vuifsIsSharingDisabledByFop :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8234,7 +8624,7 @@ instance ToJSON
 data VolumeVolumeInfoIndustryIdentifiersItem =
   VolumeVolumeInfoIndustryIdentifiersItem'
     { _vviiiiIdentifier :: !(Maybe Text)
-    , _vviiiiType       :: !(Maybe Text)
+    , _vviiiiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8287,9 +8677,9 @@ instance ToJSON
 -- /See:/ 'booksAnnotationsRange' smart constructor.
 data BooksAnnotationsRange =
   BooksAnnotationsRange'
-    { _barStartOffSet   :: !(Maybe Text)
-    , _barEndOffSet     :: !(Maybe Text)
-    , _barEndPosition   :: !(Maybe Text)
+    { _barStartOffSet :: !(Maybe Text)
+    , _barEndOffSet :: !(Maybe Text)
+    , _barEndPosition :: !(Maybe Text)
     , _barStartPosition :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8363,8 +8753,8 @@ instance ToJSON BooksAnnotationsRange where
 data Layersummaries =
   Layersummaries'
     { _layTotalItems :: !(Maybe (Textual Int32))
-    , _layKind       :: !Text
-    , _layItems      :: !(Maybe [Layersummary])
+    , _layKind :: !(Maybe Text)
+    , _layItems :: !(Maybe [Layersummary])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8382,10 +8772,7 @@ layersummaries
     :: Layersummaries
 layersummaries =
   Layersummaries'
-    { _layTotalItems = Nothing
-    , _layKind = "books#layersummaries"
-    , _layItems = Nothing
-    }
+    {_layTotalItems = Nothing, _layKind = Nothing, _layItems = Nothing}
 
 
 -- | The total number of layer summaries found.
@@ -8396,7 +8783,7 @@ layTotalItems
       . mapping _Coerce
 
 -- | Resource type.
-layKind :: Lens' Layersummaries Text
+layKind :: Lens' Layersummaries (Maybe Text)
 layKind = lens _layKind (\ s a -> s{_layKind = a})
 
 -- | A list of layer summary items.
@@ -8411,14 +8798,13 @@ instance FromJSON Layersummaries where
           = withObject "Layersummaries"
               (\ o ->
                  Layersummaries' <$>
-                   (o .:? "totalItems") <*>
-                     (o .:? "kind" .!= "books#layersummaries")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "totalItems") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty))
 
 instance ToJSON Layersummaries where
         toJSON Layersummaries'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _layTotalItems,
-                  Just ("kind" .= _layKind),
+                  ("kind" .=) <$> _layKind,
                   ("items" .=) <$> _layItems])

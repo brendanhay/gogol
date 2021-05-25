@@ -48,8 +48,8 @@ module Network.Google.Resource.RemoteBuildExecution.Operations.WaitExecution
     , oweCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.operations.waitExecution@ method which the
 -- 'OperationsWaitExecution' request conforms to.
@@ -77,13 +77,13 @@ type OperationsWaitExecutionResource =
 -- /See:/ 'operationsWaitExecution' smart constructor.
 data OperationsWaitExecution =
   OperationsWaitExecution'
-    { _oweXgafv          :: !(Maybe Xgafv)
+    { _oweXgafv :: !(Maybe Xgafv)
     , _oweUploadProtocol :: !(Maybe Text)
-    , _oweAccessToken    :: !(Maybe Text)
-    , _oweUploadType     :: !(Maybe Text)
-    , _owePayload        :: !BuildBazelRemoteExecutionV2WaitExecutionRequest
-    , _oweName           :: !Text
-    , _oweCallback       :: !(Maybe Text)
+    , _oweAccessToken :: !(Maybe Text)
+    , _oweUploadType :: !(Maybe Text)
+    , _owePayload :: !BuildBazelRemoteExecutionV2WaitExecutionRequest
+    , _oweName :: !Text
+    , _oweCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -34,12 +34,17 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
     , UsersSettingsSendAsGet
 
     -- * Request Lenses
+    , ussagXgafv
+    , ussagUploadProtocol
+    , ussagAccessToken
+    , ussagUploadType
     , ussagUserId
     , ussagSendAsEmail
+    , ussagCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.get@ method which the
 -- 'UsersSettingsSendAsGet' request conforms to.
@@ -51,7 +56,12 @@ type UsersSettingsSendAsGetResource =
              "settings" :>
                "sendAs" :>
                  Capture "sendAsEmail" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] SendAs
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] SendAs
 
 -- | Gets the specified send-as alias. Fails with an HTTP 404 error if the
 -- specified address is not a member of the collection.
@@ -59,8 +69,13 @@ type UsersSettingsSendAsGetResource =
 -- /See:/ 'usersSettingsSendAsGet' smart constructor.
 data UsersSettingsSendAsGet =
   UsersSettingsSendAsGet'
-    { _ussagUserId      :: !Text
+    { _ussagXgafv :: !(Maybe Xgafv)
+    , _ussagUploadProtocol :: !(Maybe Text)
+    , _ussagAccessToken :: !(Maybe Text)
+    , _ussagUploadType :: !(Maybe Text)
+    , _ussagUserId :: !Text
     , _ussagSendAsEmail :: !Text
+    , _ussagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,16 +84,56 @@ data UsersSettingsSendAsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussagXgafv'
+--
+-- * 'ussagUploadProtocol'
+--
+-- * 'ussagAccessToken'
+--
+-- * 'ussagUploadType'
+--
 -- * 'ussagUserId'
 --
 -- * 'ussagSendAsEmail'
+--
+-- * 'ussagCallback'
 usersSettingsSendAsGet
     :: Text -- ^ 'ussagSendAsEmail'
     -> UsersSettingsSendAsGet
 usersSettingsSendAsGet pUssagSendAsEmail_ =
   UsersSettingsSendAsGet'
-    {_ussagUserId = "me", _ussagSendAsEmail = pUssagSendAsEmail_}
+    { _ussagXgafv = Nothing
+    , _ussagUploadProtocol = Nothing
+    , _ussagAccessToken = Nothing
+    , _ussagUploadType = Nothing
+    , _ussagUserId = "me"
+    , _ussagSendAsEmail = pUssagSendAsEmail_
+    , _ussagCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ussagXgafv :: Lens' UsersSettingsSendAsGet (Maybe Xgafv)
+ussagXgafv
+  = lens _ussagXgafv (\ s a -> s{_ussagXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussagUploadProtocol :: Lens' UsersSettingsSendAsGet (Maybe Text)
+ussagUploadProtocol
+  = lens _ussagUploadProtocol
+      (\ s a -> s{_ussagUploadProtocol = a})
+
+-- | OAuth access token.
+ussagAccessToken :: Lens' UsersSettingsSendAsGet (Maybe Text)
+ussagAccessToken
+  = lens _ussagAccessToken
+      (\ s a -> s{_ussagAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussagUploadType :: Lens' UsersSettingsSendAsGet (Maybe Text)
+ussagUploadType
+  = lens _ussagUploadType
+      (\ s a -> s{_ussagUploadType = a})
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
@@ -92,6 +147,12 @@ ussagSendAsEmail
   = lens _ussagSendAsEmail
       (\ s a -> s{_ussagSendAsEmail = a})
 
+-- | JSONP
+ussagCallback :: Lens' UsersSettingsSendAsGet (Maybe Text)
+ussagCallback
+  = lens _ussagCallback
+      (\ s a -> s{_ussagCallback = a})
+
 instance GoogleRequest UsersSettingsSendAsGet where
         type Rs UsersSettingsSendAsGet = SendAs
         type Scopes UsersSettingsSendAsGet =
@@ -100,7 +161,12 @@ instance GoogleRequest UsersSettingsSendAsGet where
                "https://www.googleapis.com/auth/gmail.readonly",
                "https://www.googleapis.com/auth/gmail.settings.basic"]
         requestClient UsersSettingsSendAsGet'{..}
-          = go _ussagUserId _ussagSendAsEmail (Just AltJSON)
+          = go _ussagUserId _ussagSendAsEmail _ussagXgafv
+              _ussagUploadProtocol
+              _ussagAccessToken
+              _ussagUploadType
+              _ussagCallback
+              (Just AltJSON)
               gmailService
           where go
                   = buildClient

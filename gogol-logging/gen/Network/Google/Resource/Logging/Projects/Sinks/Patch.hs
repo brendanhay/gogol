@@ -25,7 +25,7 @@
 -- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.patch@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.sinks.patch@.
 module Network.Google.Resource.Logging.Projects.Sinks.Patch
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Patch
     , pspCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.sinks.patch@ method which the
 -- 'ProjectsSinksPatch' request conforms to.
@@ -73,15 +73,15 @@ type ProjectsSinksPatchResource =
 -- /See:/ 'projectsSinksPatch' smart constructor.
 data ProjectsSinksPatch =
   ProjectsSinksPatch'
-    { _pspXgafv                :: !(Maybe Xgafv)
+    { _pspXgafv :: !(Maybe Xgafv)
     , _pspUniqueWriterIdentity :: !(Maybe Bool)
-    , _pspUploadProtocol       :: !(Maybe Text)
-    , _pspUpdateMask           :: !(Maybe GFieldMask)
-    , _pspAccessToken          :: !(Maybe Text)
-    , _pspUploadType           :: !(Maybe Text)
-    , _pspPayload              :: !LogSink
-    , _pspSinkName             :: !Text
-    , _pspCallback             :: !(Maybe Text)
+    , _pspUploadProtocol :: !(Maybe Text)
+    , _pspUpdateMask :: !(Maybe GFieldMask)
+    , _pspAccessToken :: !(Maybe Text)
+    , _pspUploadType :: !(Maybe Text)
+    , _pspPayload :: !LogSink
+    , _pspSinkName :: !Text
+    , _pspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

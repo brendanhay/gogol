@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
     , rpcauPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.createAuthUri@ method which the
 -- 'RelyingPartyCreateAuthURI' request conforms to.

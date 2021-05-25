@@ -36,8 +36,8 @@ module Network.Google.Resource.FusionTables.Table.Insert
     , tiPayload
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.insert@ method which the
 -- 'TableInsert' request conforms to.

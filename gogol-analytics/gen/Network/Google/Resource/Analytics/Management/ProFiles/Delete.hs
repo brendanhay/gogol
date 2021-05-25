@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Delete
     , mpfdAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.delete@ method which the
 -- 'ManagementProFilesDelete' request conforms to.
@@ -61,8 +61,8 @@ type ManagementProFilesDeleteResource =
 data ManagementProFilesDelete =
   ManagementProFilesDelete'
     { _mpfdWebPropertyId :: !Text
-    , _mpfdProFileId     :: !Text
-    , _mpfdAccountId     :: !Text
+    , _mpfdProFileId :: !Text
+    , _mpfdAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

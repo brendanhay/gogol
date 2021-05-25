@@ -20,12 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of caption tracks that are associated with a specified
--- video. Note that the API response does not contain the actual captions
--- and that the captions.download method provides the ability to retrieve a
--- caption track.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.captions.list@.
 module Network.Google.Resource.YouTube.Captions.List
     (
     -- * REST Resource
@@ -37,14 +34,19 @@ module Network.Google.Resource.YouTube.Captions.List
 
     -- * Request Lenses
     , clOnBehalfOf
+    , clXgafv
     , clPart
+    , clUploadProtocol
+    , clAccessToken
+    , clUploadType
     , clOnBehalfOfContentOwner
     , clVideoId
     , clId
+    , clCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.list@ method which the
 -- 'CaptionsList' request conforms to.
@@ -52,27 +54,34 @@ type CaptionsListResource =
      "youtube" :>
        "v3" :>
          "captions" :>
-           QueryParam "part" Text :>
+           QueryParams "part" Text :>
              QueryParam "videoId" Text :>
                QueryParam "onBehalfOf" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] CaptionListResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "onBehalfOfContentOwner" Text :>
+                           QueryParams "id" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CaptionListResponse
 
--- | Returns a list of caption tracks that are associated with a specified
--- video. Note that the API response does not contain the actual captions
--- and that the captions.download method provides the ability to retrieve a
--- caption track.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'captionsList' smart constructor.
 data CaptionsList =
   CaptionsList'
-    { _clOnBehalfOf             :: !(Maybe Text)
-    , _clPart                   :: !Text
+    { _clOnBehalfOf :: !(Maybe Text)
+    , _clXgafv :: !(Maybe Xgafv)
+    , _clPart :: ![Text]
+    , _clUploadProtocol :: !(Maybe Text)
+    , _clAccessToken :: !(Maybe Text)
+    , _clUploadType :: !(Maybe Text)
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
-    , _clVideoId                :: !Text
-    , _clId                     :: !(Maybe Text)
+    , _clVideoId :: !Text
+    , _clId :: !(Maybe [Text])
+    , _clCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,24 +92,39 @@ data CaptionsList =
 --
 -- * 'clOnBehalfOf'
 --
+-- * 'clXgafv'
+--
 -- * 'clPart'
+--
+-- * 'clUploadProtocol'
+--
+-- * 'clAccessToken'
+--
+-- * 'clUploadType'
 --
 -- * 'clOnBehalfOfContentOwner'
 --
 -- * 'clVideoId'
 --
 -- * 'clId'
+--
+-- * 'clCallback'
 captionsList
-    :: Text -- ^ 'clPart'
+    :: [Text] -- ^ 'clPart'
     -> Text -- ^ 'clVideoId'
     -> CaptionsList
 captionsList pClPart_ pClVideoId_ =
   CaptionsList'
     { _clOnBehalfOf = Nothing
-    , _clPart = pClPart_
+    , _clXgafv = Nothing
+    , _clPart = _Coerce # pClPart_
+    , _clUploadProtocol = Nothing
+    , _clAccessToken = Nothing
+    , _clUploadType = Nothing
     , _clOnBehalfOfContentOwner = Nothing
     , _clVideoId = pClVideoId_
     , _clId = Nothing
+    , _clCallback = Nothing
     }
 
 
@@ -109,14 +133,36 @@ clOnBehalfOf :: Lens' CaptionsList (Maybe Text)
 clOnBehalfOf
   = lens _clOnBehalfOf (\ s a -> s{_clOnBehalfOf = a})
 
--- | The part parameter specifies a comma-separated list of one or more
+-- | V1 error format.
+clXgafv :: Lens' CaptionsList (Maybe Xgafv)
+clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
+
+-- | The *part* parameter specifies a comma-separated list of one or more
 -- caption resource parts that the API response will include. The part
 -- names that you can include in the parameter value are id and snippet.
-clPart :: Lens' CaptionsList Text
-clPart = lens _clPart (\ s a -> s{_clPart = a})
+clPart :: Lens' CaptionsList [Text]
+clPart
+  = lens _clPart (\ s a -> s{_clPart = a}) . _Coerce
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+clUploadProtocol :: Lens' CaptionsList (Maybe Text)
+clUploadProtocol
+  = lens _clUploadProtocol
+      (\ s a -> s{_clUploadProtocol = a})
+
+-- | OAuth access token.
+clAccessToken :: Lens' CaptionsList (Maybe Text)
+clAccessToken
+  = lens _clAccessToken
+      (\ s a -> s{_clAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+clUploadType :: Lens' CaptionsList (Maybe Text)
+clUploadType
+  = lens _clUploadType (\ s a -> s{_clUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -130,17 +176,21 @@ clOnBehalfOfContentOwner
   = lens _clOnBehalfOfContentOwner
       (\ s a -> s{_clOnBehalfOfContentOwner = a})
 
--- | The videoId parameter specifies the YouTube video ID of the video for
--- which the API should return caption tracks.
+-- | Returns the captions for the specified video.
 clVideoId :: Lens' CaptionsList Text
 clVideoId
   = lens _clVideoId (\ s a -> s{_clVideoId = a})
 
--- | The id parameter specifies a comma-separated list of IDs that identify
--- the caption resources that should be retrieved. Each ID must identify a
--- caption track associated with the specified video.
-clId :: Lens' CaptionsList (Maybe Text)
-clId = lens _clId (\ s a -> s{_clId = a})
+-- | Returns the captions with the given IDs for Stubby or Apiary.
+clId :: Lens' CaptionsList [Text]
+clId
+  = lens _clId (\ s a -> s{_clId = a}) . _Default .
+      _Coerce
+
+-- | JSONP
+clCallback :: Lens' CaptionsList (Maybe Text)
+clCallback
+  = lens _clCallback (\ s a -> s{_clCallback = a})
 
 instance GoogleRequest CaptionsList where
         type Rs CaptionsList = CaptionListResponse
@@ -148,9 +198,13 @@ instance GoogleRequest CaptionsList where
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsList'{..}
-          = go (Just _clPart) (Just _clVideoId) _clOnBehalfOf
+          = go _clPart (Just _clVideoId) _clOnBehalfOf _clXgafv
+              _clUploadProtocol
+              _clAccessToken
+              _clUploadType
               _clOnBehalfOfContentOwner
-              _clId
+              (_clId ^. _Default)
+              _clCallback
               (Just AltJSON)
               youTubeService
           where go

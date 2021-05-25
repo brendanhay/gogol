@@ -17,15 +17,15 @@
 --
 module Network.Google.IdentityToolkit.Types.Product where
 
-import           Network.Google.IdentityToolkit.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'uploadAccountResponseErrorItem' smart constructor.
 data UploadAccountResponseErrorItem =
   UploadAccountResponseErrorItem'
     { _uareiMessage :: !(Maybe Text)
-    , _uareiIndex   :: !(Maybe (Textual Int32))
+    , _uareiIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,14 +74,14 @@ instance ToJSON UploadAccountResponseErrorItem where
 -- /See:/ 'userInfoProviderUserInfoItem' smart constructor.
 data UserInfoProviderUserInfoItem =
   UserInfoProviderUserInfoItem'
-    { _uipuiiProviderId  :: !(Maybe Text)
-    , _uipuiiEmail       :: !(Maybe Text)
-    , _uipuiiPhotoURL    :: !(Maybe Text)
+    { _uipuiiProviderId :: !(Maybe Text)
+    , _uipuiiEmail :: !(Maybe Text)
+    , _uipuiiPhotoURL :: !(Maybe Text)
     , _uipuiiFederatedId :: !(Maybe Text)
     , _uipuiiPhoneNumber :: !(Maybe Text)
     , _uipuiiDisplayName :: !(Maybe Text)
-    , _uipuiiScreenName  :: !(Maybe Text)
-    , _uipuiiRawId       :: !(Maybe Text)
+    , _uipuiiScreenName :: !(Maybe Text)
+    , _uipuiiRawId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -199,11 +199,11 @@ instance ToJSON UserInfoProviderUserInfoItem where
 -- /See:/ 'verifyCustomTokenResponse' smart constructor.
 data VerifyCustomTokenResponse =
   VerifyCustomTokenResponse'
-    { _vctrIsNewUser    :: !(Maybe Bool)
-    , _vctrKind         :: !Text
+    { _vctrIsNewUser :: !(Maybe Bool)
+    , _vctrKind :: !Text
     , _vctrRefreshToken :: !(Maybe Text)
-    , _vctrExpiresIn    :: !(Maybe (Textual Int64))
-    , _vctrIdToken      :: !(Maybe Text)
+    , _vctrExpiresIn :: !(Maybe (Textual Int64))
+    , _vctrIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -289,16 +289,16 @@ instance ToJSON VerifyCustomTokenResponse where
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPhoneNumberResponse' smart constructor.
 data IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse =
   IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse'
-    { _irpvpnrIsNewUser                  :: !(Maybe Bool)
-    , _irpvpnrTemporaryProof             :: !(Maybe Text)
+    { _irpvpnrIsNewUser :: !(Maybe Bool)
+    , _irpvpnrTemporaryProof :: !(Maybe Text)
     , _irpvpnrVerificationProofExpiresIn :: !(Maybe (Textual Int64))
-    , _irpvpnrVerificationProof          :: !(Maybe Text)
-    , _irpvpnrTemporaryProofExpiresIn    :: !(Maybe (Textual Int64))
-    , _irpvpnrRefreshToken               :: !(Maybe Text)
-    , _irpvpnrPhoneNumber                :: !(Maybe Text)
-    , _irpvpnrExpiresIn                  :: !(Maybe (Textual Int64))
-    , _irpvpnrLocalId                    :: !(Maybe Text)
-    , _irpvpnrIdToken                    :: !(Maybe Text)
+    , _irpvpnrVerificationProof :: !(Maybe Text)
+    , _irpvpnrTemporaryProofExpiresIn :: !(Maybe (Textual Int64))
+    , _irpvpnrRefreshToken :: !(Maybe Text)
+    , _irpvpnrPhoneNumber :: !(Maybe Text)
+    , _irpvpnrExpiresIn :: !(Maybe (Textual Int64))
+    , _irpvpnrLocalId :: !(Maybe Text)
+    , _irpvpnrIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -441,12 +441,12 @@ instance ToJSON
 -- /See:/ 'idpConfig' smart constructor.
 data IdpConfig =
   IdpConfig'
-    { _icClientId             :: !(Maybe Text)
-    , _icEnabled              :: !(Maybe Bool)
+    { _icClientId :: !(Maybe Text)
+    , _icEnabled :: !(Maybe Bool)
     , _icWhiteListedAudiences :: !(Maybe [Text])
-    , _icSecret               :: !(Maybe Text)
-    , _icExperimentPercent    :: !(Maybe (Textual Int32))
-    , _icProvider             :: !(Maybe Text)
+    , _icSecret :: !(Maybe Text)
+    , _icExperimentPercent :: !(Maybe (Textual Int32))
+    , _icProvider :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -542,25 +542,25 @@ instance ToJSON IdpConfig where
 -- /See:/ 'userInfo' smart constructor.
 data UserInfo =
   UserInfo'
-    { _uiEmail             :: !(Maybe Text)
-    , _uiLastLoginAt       :: !(Maybe (Textual Int64))
-    , _uiPhotoURL          :: !(Maybe Text)
-    , _uiCreatedAt         :: !(Maybe (Textual Int64))
-    , _uiDisabled          :: !(Maybe Bool)
-    , _uiCustomAuth        :: !(Maybe Bool)
-    , _uiProviderUserInfo  :: !(Maybe [UserInfoProviderUserInfoItem])
-    , _uiCustomAttributes  :: !(Maybe Text)
-    , _uiValidSince        :: !(Maybe (Textual Int64))
+    { _uiEmail :: !(Maybe Text)
+    , _uiLastLoginAt :: !(Maybe (Textual Int64))
+    , _uiPhotoURL :: !(Maybe Text)
+    , _uiCreatedAt :: !(Maybe (Textual Int64))
+    , _uiDisabled :: !(Maybe Bool)
+    , _uiCustomAuth :: !(Maybe Bool)
+    , _uiProviderUserInfo :: !(Maybe [UserInfoProviderUserInfoItem])
+    , _uiCustomAttributes :: !(Maybe Text)
+    , _uiValidSince :: !(Maybe (Textual Int64))
     , _uiPasswordUpdatedAt :: !(Maybe (Textual Double))
-    , _uiPhoneNumber       :: !(Maybe Text)
-    , _uiVersion           :: !(Maybe (Textual Int32))
-    , _uiEmailVerified     :: !(Maybe Bool)
-    , _uiSalt              :: !(Maybe Bytes)
-    , _uiDisplayName       :: !(Maybe Text)
-    , _uiPasswordHash      :: !(Maybe Bytes)
-    , _uiLocalId           :: !(Maybe Text)
-    , _uiRawPassword       :: !(Maybe Text)
-    , _uiScreenName        :: !(Maybe Text)
+    , _uiPhoneNumber :: !(Maybe Text)
+    , _uiVersion :: !(Maybe (Textual Int32))
+    , _uiEmailVerified :: !(Maybe Bool)
+    , _uiSalt :: !(Maybe Bytes)
+    , _uiDisplayName :: !(Maybe Text)
+    , _uiPasswordHash :: !(Maybe Bytes)
+    , _uiLocalId :: !(Maybe Text)
+    , _uiRawPassword :: !(Maybe Text)
+    , _uiScreenName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -843,10 +843,10 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyVerifyCustomTokenRequest' smart constructor.
 data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest =
   IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
-    { _irpvctrInstanceId             :: !(Maybe Text)
+    { _irpvctrInstanceId :: !(Maybe Text)
     , _irpvctrDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpvctrToken                  :: !(Maybe Text)
-    , _irpvctrReturnSecureToken      :: !(Maybe Bool)
+    , _irpvctrToken :: !(Maybe Text)
+    , _irpvctrReturnSecureToken :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -930,8 +930,8 @@ instance ToJSON
 -- /See:/ 'setAccountInfoResponseProviderUserInfoItem' smart constructor.
 data SetAccountInfoResponseProviderUserInfoItem =
   SetAccountInfoResponseProviderUserInfoItem'
-    { _sairpuiiProviderId  :: !(Maybe Text)
-    , _sairpuiiPhotoURL    :: !(Maybe Text)
+    { _sairpuiiProviderId :: !(Maybe Text)
+    , _sairpuiiPhotoURL :: !(Maybe Text)
     , _sairpuiiFederatedId :: !(Maybe Text)
     , _sairpuiiDisplayName :: !(Maybe Text)
     }
@@ -1063,17 +1063,17 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPasswordRequest' smart constructor.
 data IdentitytoolkitRelyingPartyVerifyPasswordRequest =
   IdentitytoolkitRelyingPartyVerifyPasswordRequest'
-    { _irpvprEmail                  :: !(Maybe Text)
-    , _irpvprInstanceId             :: !(Maybe Text)
-    , _irpvprCaptchaChallenge       :: !(Maybe Text)
-    , _irpvprTenantProjectNumber    :: !(Maybe (Textual Word64))
+    { _irpvprEmail :: !(Maybe Text)
+    , _irpvprInstanceId :: !(Maybe Text)
+    , _irpvprCaptchaChallenge :: !(Maybe Text)
+    , _irpvprTenantProjectNumber :: !(Maybe (Textual Word64))
     , _irpvprDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpvprReturnSecureToken      :: !(Maybe Bool)
-    , _irpvprTenantId               :: !(Maybe Text)
-    , _irpvprPassword               :: !(Maybe Text)
-    , _irpvprCaptchaResponse        :: !(Maybe Text)
-    , _irpvprIdToken                :: !(Maybe Text)
-    , _irpvprPendingIdToken         :: !(Maybe Text)
+    , _irpvprReturnSecureToken :: !(Maybe Bool)
+    , _irpvprTenantId :: !(Maybe Text)
+    , _irpvprPassword :: !(Maybe Text)
+    , _irpvprCaptchaResponse :: !(Maybe Text)
+    , _irpvprIdToken :: !(Maybe Text)
+    , _irpvprPendingIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1238,10 +1238,10 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartySendVerificationCodeRequest' smart constructor.
 data IdentitytoolkitRelyingPartySendVerificationCodeRequest =
   IdentitytoolkitRelyingPartySendVerificationCodeRequest'
-    { _irpsvcrPhoneNumber    :: !(Maybe Text)
+    { _irpsvcrPhoneNumber :: !(Maybe Text)
     , _irpsvcrRecaptchaToken :: !(Maybe Text)
-    , _irpsvcrIosSecret      :: !(Maybe Text)
-    , _irpsvcrIosReceipt     :: !(Maybe Text)
+    , _irpsvcrIosSecret :: !(Maybe Text)
+    , _irpsvcrIosReceipt :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1323,13 +1323,13 @@ instance ToJSON
 -- /See:/ 'signupNewUserResponse' smart constructor.
 data SignupNewUserResponse =
   SignupNewUserResponse'
-    { _snurEmail        :: !(Maybe Text)
-    , _snurKind         :: !Text
+    { _snurEmail :: !(Maybe Text)
+    , _snurKind :: !Text
     , _snurRefreshToken :: !(Maybe Text)
-    , _snurExpiresIn    :: !(Maybe (Textual Int64))
-    , _snurDisplayName  :: !(Maybe Text)
-    , _snurLocalId      :: !(Maybe Text)
-    , _snurIdToken      :: !(Maybe Text)
+    , _snurExpiresIn :: !(Maybe (Textual Int64))
+    , _snurDisplayName :: !(Maybe Text)
+    , _snurLocalId :: !(Maybe Text)
+    , _snurIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1435,17 +1435,17 @@ instance ToJSON SignupNewUserResponse where
 -- /See:/ 'identitytoolkitRelyingPartySetProjectConfigRequest' smart constructor.
 data IdentitytoolkitRelyingPartySetProjectConfigRequest =
   IdentitytoolkitRelyingPartySetProjectConfigRequest'
-    { _irpspcrAuthorizedDomains           :: !(Maybe [Text])
-    , _irpspcrAPIKey                      :: !(Maybe Text)
-    , _irpspcrIdpConfig                   :: !(Maybe [IdpConfig])
-    , _irpspcrChangeEmailTemplate         :: !(Maybe EmailTemplate)
-    , _irpspcrDelegatedProjectNumber      :: !(Maybe (Textual Int64))
-    , _irpspcrVerifyEmailTemplate         :: !(Maybe EmailTemplate)
-    , _irpspcrEnableAnonymousUser         :: !(Maybe Bool)
+    { _irpspcrAuthorizedDomains :: !(Maybe [Text])
+    , _irpspcrAPIKey :: !(Maybe Text)
+    , _irpspcrIdpConfig :: !(Maybe [IdpConfig])
+    , _irpspcrChangeEmailTemplate :: !(Maybe EmailTemplate)
+    , _irpspcrDelegatedProjectNumber :: !(Maybe (Textual Int64))
+    , _irpspcrVerifyEmailTemplate :: !(Maybe EmailTemplate)
+    , _irpspcrEnableAnonymousUser :: !(Maybe Bool)
     , _irpspcrLegacyResetPasswordTemplate :: !(Maybe EmailTemplate)
-    , _irpspcrAllowPasswordUser           :: !(Maybe Bool)
-    , _irpspcrResetPasswordTemplate       :: !(Maybe EmailTemplate)
-    , _irpspcrUseEmailSending             :: !(Maybe Bool)
+    , _irpspcrAllowPasswordUser :: !(Maybe Bool)
+    , _irpspcrResetPasswordTemplate :: !(Maybe EmailTemplate)
+    , _irpspcrUseEmailSending :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1619,28 +1619,28 @@ instance ToJSON
 data IdentitytoolkitRelyingPartySetAccountInfoRequest =
   IdentitytoolkitRelyingPartySetAccountInfoRequest'
     { _irpsairUpgradeToFederatedLogin :: !(Maybe Bool)
-    , _irpsairEmail                   :: !(Maybe Text)
-    , _irpsairInstanceId              :: !(Maybe Text)
-    , _irpsairLastLoginAt             :: !(Maybe (Textual Int64))
-    , _irpsairPhotoURL                :: !(Maybe Text)
-    , _irpsairCaptchaChallenge        :: !(Maybe Text)
-    , _irpsairCreatedAt               :: !(Maybe (Textual Int64))
-    , _irpsairDelegatedProjectNumber  :: !(Maybe (Textual Int64))
-    , _irpsairDeleteAttribute         :: !(Maybe [Text])
-    , _irpsairDeleteProvider          :: !(Maybe [Text])
-    , _irpsairReturnSecureToken       :: !(Maybe Bool)
-    , _irpsairCustomAttributes        :: !(Maybe Text)
-    , _irpsairValidSince              :: !(Maybe (Textual Int64))
-    , _irpsairOOBCode                 :: !(Maybe Text)
-    , _irpsairPassword                :: !(Maybe Text)
-    , _irpsairCaptchaResponse         :: !(Maybe Text)
-    , _irpsairPhoneNumber             :: !(Maybe Text)
-    , _irpsairEmailVerified           :: !(Maybe Bool)
-    , _irpsairDisplayName             :: !(Maybe Text)
-    , _irpsairDisableUser             :: !(Maybe Bool)
-    , _irpsairLocalId                 :: !(Maybe Text)
-    , _irpsairIdToken                 :: !(Maybe Text)
-    , _irpsairProvider                :: !(Maybe [Text])
+    , _irpsairEmail :: !(Maybe Text)
+    , _irpsairInstanceId :: !(Maybe Text)
+    , _irpsairLastLoginAt :: !(Maybe (Textual Int64))
+    , _irpsairPhotoURL :: !(Maybe Text)
+    , _irpsairCaptchaChallenge :: !(Maybe Text)
+    , _irpsairCreatedAt :: !(Maybe (Textual Int64))
+    , _irpsairDelegatedProjectNumber :: !(Maybe (Textual Int64))
+    , _irpsairDeleteAttribute :: !(Maybe [Text])
+    , _irpsairDeleteProvider :: !(Maybe [Text])
+    , _irpsairReturnSecureToken :: !(Maybe Bool)
+    , _irpsairCustomAttributes :: !(Maybe Text)
+    , _irpsairValidSince :: !(Maybe (Textual Int64))
+    , _irpsairOOBCode :: !(Maybe Text)
+    , _irpsairPassword :: !(Maybe Text)
+    , _irpsairCaptchaResponse :: !(Maybe Text)
+    , _irpsairPhoneNumber :: !(Maybe Text)
+    , _irpsairEmailVerified :: !(Maybe Bool)
+    , _irpsairDisplayName :: !(Maybe Text)
+    , _irpsairDisableUser :: !(Maybe Bool)
+    , _irpsairLocalId :: !(Maybe Text)
+    , _irpsairIdToken :: !(Maybe Text)
+    , _irpsairProvider :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1942,19 +1942,19 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyVerifyAssertionRequest' smart constructor.
 data IdentitytoolkitRelyingPartyVerifyAssertionRequest =
   IdentitytoolkitRelyingPartyVerifyAssertionRequest'
-    { _irpvarReturnIdpCredential    :: !(Maybe Bool)
-    , _irpvarInstanceId             :: !(Maybe Text)
-    , _irpvarTenantProjectNumber    :: !(Maybe (Textual Word64))
+    { _irpvarReturnIdpCredential :: !(Maybe Bool)
+    , _irpvarInstanceId :: !(Maybe Text)
+    , _irpvarTenantProjectNumber :: !(Maybe (Textual Word64))
     , _irpvarDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpvarPostBody               :: !(Maybe Text)
-    , _irpvarReturnSecureToken      :: !(Maybe Bool)
-    , _irpvarTenantId               :: !(Maybe Text)
-    , _irpvarReturnRefreshToken     :: !(Maybe Bool)
-    , _irpvarRequestURI             :: !(Maybe Text)
-    , _irpvarSessionId              :: !(Maybe Text)
-    , _irpvarAutoCreate             :: !(Maybe Bool)
-    , _irpvarIdToken                :: !(Maybe Text)
-    , _irpvarPendingIdToken         :: !(Maybe Text)
+    , _irpvarPostBody :: !(Maybe Text)
+    , _irpvarReturnSecureToken :: !(Maybe Bool)
+    , _irpvarTenantId :: !(Maybe Text)
+    , _irpvarReturnRefreshToken :: !(Maybe Bool)
+    , _irpvarRequestURI :: !(Maybe Text)
+    , _irpvarSessionId :: !(Maybe Text)
+    , _irpvarAutoCreate :: !(Maybe Bool)
+    , _irpvarIdToken :: !(Maybe Text)
+    , _irpvarPendingIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2151,13 +2151,13 @@ instance ToJSON
 -- /See:/ 'emailLinkSigninResponse' smart constructor.
 data EmailLinkSigninResponse =
   EmailLinkSigninResponse'
-    { _elsrEmail        :: !(Maybe Text)
-    , _elsrIsNewUser    :: !(Maybe Bool)
-    , _elsrKind         :: !Text
+    { _elsrEmail :: !(Maybe Text)
+    , _elsrIsNewUser :: !(Maybe Bool)
+    , _elsrKind :: !Text
     , _elsrRefreshToken :: !(Maybe Text)
-    , _elsrExpiresIn    :: !(Maybe (Textual Int64))
-    , _elsrLocalId      :: !(Maybe Text)
-    , _elsrIdToken      :: !(Maybe Text)
+    , _elsrExpiresIn :: !(Maybe (Textual Int64))
+    , _elsrLocalId :: !(Maybe Text)
+    , _elsrIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2344,8 +2344,8 @@ instance ToJSON
 data DownloadAccountResponse =
   DownloadAccountResponse'
     { _dNextPageToken :: !(Maybe Text)
-    , _dUsers         :: !(Maybe [UserInfo])
-    , _dKind          :: !Text
+    , _dUsers :: !(Maybe [UserInfo])
+    , _dKind :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2409,18 +2409,18 @@ instance ToJSON DownloadAccountResponse where
 -- /See:/ 'identitytoolkitRelyingPartyGetProjectConfigResponse' smart constructor.
 data IdentitytoolkitRelyingPartyGetProjectConfigResponse =
   IdentitytoolkitRelyingPartyGetProjectConfigResponse'
-    { _irpgpcrAuthorizedDomains           :: !(Maybe [Text])
-    , _irpgpcrAPIKey                      :: !(Maybe Text)
-    , _irpgpcrIdpConfig                   :: !(Maybe [IdpConfig])
-    , _irpgpcrChangeEmailTemplate         :: !(Maybe EmailTemplate)
-    , _irpgpcrVerifyEmailTemplate         :: !(Maybe EmailTemplate)
-    , _irpgpcrEnableAnonymousUser         :: !(Maybe Bool)
+    { _irpgpcrAuthorizedDomains :: !(Maybe [Text])
+    , _irpgpcrAPIKey :: !(Maybe Text)
+    , _irpgpcrIdpConfig :: !(Maybe [IdpConfig])
+    , _irpgpcrChangeEmailTemplate :: !(Maybe EmailTemplate)
+    , _irpgpcrVerifyEmailTemplate :: !(Maybe EmailTemplate)
+    , _irpgpcrEnableAnonymousUser :: !(Maybe Bool)
     , _irpgpcrLegacyResetPasswordTemplate :: !(Maybe EmailTemplate)
-    , _irpgpcrAllowPasswordUser           :: !(Maybe Bool)
-    , _irpgpcrResetPasswordTemplate       :: !(Maybe EmailTemplate)
-    , _irpgpcrProjectId                   :: !(Maybe Text)
-    , _irpgpcrUseEmailSending             :: !(Maybe Bool)
-    , _irpgpcrDynamicLinksDomain          :: !(Maybe Text)
+    , _irpgpcrAllowPasswordUser :: !(Maybe Bool)
+    , _irpgpcrResetPasswordTemplate :: !(Maybe EmailTemplate)
+    , _irpgpcrProjectId :: !(Maybe Text)
+    , _irpgpcrUseEmailSending :: !(Maybe Bool)
+    , _irpgpcrDynamicLinksDomain :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2601,10 +2601,10 @@ instance ToJSON
 -- /See:/ 'resetPasswordResponse' smart constructor.
 data ResetPasswordResponse =
   ResetPasswordResponse'
-    { _rprEmail       :: !(Maybe Text)
-    , _rprKind        :: !Text
+    { _rprEmail :: !(Maybe Text)
+    , _rprKind :: !Text
     , _rprRequestType :: !(Maybe Text)
-    , _rprNewEmail    :: !(Maybe Text)
+    , _rprNewEmail :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2676,7 +2676,7 @@ instance ToJSON ResetPasswordResponse where
 -- /See:/ 'uploadAccountResponse' smart constructor.
 data UploadAccountResponse =
   UploadAccountResponse'
-    { _uarKind  :: !Text
+    { _uarKind :: !Text
     , _uarError :: !(Maybe [UploadAccountResponseErrorItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2728,14 +2728,14 @@ instance ToJSON UploadAccountResponse where
 -- /See:/ 'createAuthURIResponse' smart constructor.
 data CreateAuthURIResponse =
   CreateAuthURIResponse'
-    { _caurProviderId          :: !(Maybe Text)
-    , _caurKind                :: !Text
-    , _caurAllProviders        :: !(Maybe [Text])
-    , _caurAuthURI             :: !(Maybe Text)
-    , _caurCaptchaRequired     :: !(Maybe Bool)
-    , _caurSigninMethods       :: !(Maybe [Text])
-    , _caurRegistered          :: !(Maybe Bool)
-    , _caurSessionId           :: !(Maybe Text)
+    { _caurProviderId :: !(Maybe Text)
+    , _caurKind :: !Text
+    , _caurAllProviders :: !(Maybe [Text])
+    , _caurAuthURI :: !(Maybe Text)
+    , _caurCaptchaRequired :: !(Maybe Bool)
+    , _caurSigninMethods :: !(Maybe [Text])
+    , _caurRegistered :: !(Maybe Bool)
+    , _caurSessionId :: !(Maybe Text)
     , _caurForExistingProvider :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2915,21 +2915,21 @@ instance ToJSON
 -- /See:/ 'relyingParty' smart constructor.
 data RelyingParty =
   RelyingParty'
-    { _rpIOSBundleId           :: !(Maybe Text)
-    , _rpEmail                 :: !(Maybe Text)
-    , _rpContinueURL           :: !(Maybe Text)
-    , _rpKind                  :: !Text
-    , _rpUserIP                :: !(Maybe Text)
-    , _rpAndroidInstallApp     :: !(Maybe Bool)
-    , _rpIOSAppStoreId         :: !(Maybe Text)
-    , _rpRequestType           :: !(Maybe Text)
+    { _rpIOSBundleId :: !(Maybe Text)
+    , _rpEmail :: !(Maybe Text)
+    , _rpContinueURL :: !(Maybe Text)
+    , _rpKind :: !Text
+    , _rpUserIP :: !(Maybe Text)
+    , _rpAndroidInstallApp :: !(Maybe Bool)
+    , _rpIOSAppStoreId :: !(Maybe Text)
+    , _rpRequestType :: !(Maybe Text)
     , _rpAndroidMinimumVersion :: !(Maybe Text)
-    , _rpCanHandleCodeInApp    :: !(Maybe Bool)
-    , _rpCaptchaResp           :: !(Maybe Text)
-    , _rpNewEmail              :: !(Maybe Text)
-    , _rpChallenge             :: !(Maybe Text)
-    , _rpIdToken               :: !(Maybe Text)
-    , _rpAndroidPackageName    :: !(Maybe Text)
+    , _rpCanHandleCodeInApp :: !(Maybe Bool)
+    , _rpCaptchaResp :: !(Maybe Text)
+    , _rpNewEmail :: !(Maybe Text)
+    , _rpChallenge :: !(Maybe Text)
+    , _rpIdToken :: !(Maybe Text)
+    , _rpAndroidPackageName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3119,11 +3119,11 @@ instance ToJSON RelyingParty where
 -- /See:/ 'identitytoolkitRelyingPartyGetAccountInfoRequest' smart constructor.
 data IdentitytoolkitRelyingPartyGetAccountInfoRequest =
   IdentitytoolkitRelyingPartyGetAccountInfoRequest'
-    { _irpgairEmail                  :: !(Maybe [Text])
+    { _irpgairEmail :: !(Maybe [Text])
     , _irpgairDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpgairPhoneNumber            :: !(Maybe [Text])
-    , _irpgairLocalId                :: !(Maybe [Text])
-    , _irpgairIdToken                :: !(Maybe Text)
+    , _irpgairPhoneNumber :: !(Maybe [Text])
+    , _irpgairLocalId :: !(Maybe [Text])
+    , _irpgairIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3223,12 +3223,12 @@ instance ToJSON
 -- /See:/ 'emailTemplate' smart constructor.
 data EmailTemplate =
   EmailTemplate'
-    { _etSubject         :: !(Maybe Text)
-    , _etBody            :: !(Maybe Text)
-    , _etFormat          :: !(Maybe Text)
+    { _etSubject :: !(Maybe Text)
+    , _etBody :: !(Maybe Text)
+    , _etFormat :: !(Maybe Text)
     , _etFromDisplayName :: !(Maybe Text)
-    , _etFrom            :: !(Maybe Text)
-    , _etReplyTo         :: !(Maybe Text)
+    , _etFrom :: !(Maybe Text)
+    , _etReplyTo :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3315,20 +3315,20 @@ instance ToJSON EmailTemplate where
 -- /See:/ 'identitytoolkitRelyingPartyUploadAccountRequest' smart constructor.
 data IdentitytoolkitRelyingPartyUploadAccountRequest =
   IdentitytoolkitRelyingPartyUploadAccountRequest'
-    { _irpuarBlockSize              :: !(Maybe (Textual Int32))
-    , _irpuarUsers                  :: !(Maybe [UserInfo])
-    , _irpuarMemoryCost             :: !(Maybe (Textual Int32))
-    , _irpuarAllowOverwrite         :: !(Maybe Bool)
+    { _irpuarBlockSize :: !(Maybe (Textual Int32))
+    , _irpuarUsers :: !(Maybe [UserInfo])
+    , _irpuarMemoryCost :: !(Maybe (Textual Int32))
+    , _irpuarAllowOverwrite :: !(Maybe Bool)
     , _irpuarDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpuarParallelization        :: !(Maybe (Textual Int32))
-    , _irpuarCPUMemCost             :: !(Maybe (Textual Int32))
-    , _irpuarSanityCheck            :: !(Maybe Bool)
-    , _irpuarSaltSeparator          :: !(Maybe Bytes)
-    , _irpuarHashAlgorithm          :: !(Maybe Text)
-    , _irpuarDkLen                  :: !(Maybe (Textual Int32))
-    , _irpuarSignerKey              :: !(Maybe Bytes)
-    , _irpuarRounds                 :: !(Maybe (Textual Int32))
-    , _irpuarTargetProjectId        :: !(Maybe Text)
+    , _irpuarParallelization :: !(Maybe (Textual Int32))
+    , _irpuarCPUMemCost :: !(Maybe (Textual Int32))
+    , _irpuarSanityCheck :: !(Maybe Bool)
+    , _irpuarSaltSeparator :: !(Maybe Bytes)
+    , _irpuarHashAlgorithm :: !(Maybe Text)
+    , _irpuarDkLen :: !(Maybe (Textual Int32))
+    , _irpuarSignerKey :: !(Maybe Bytes)
+    , _irpuarRounds :: !(Maybe (Textual Int32))
+    , _irpuarTargetProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3527,9 +3527,9 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyResetPasswordRequest' smart constructor.
 data IdentitytoolkitRelyingPartyResetPasswordRequest =
   IdentitytoolkitRelyingPartyResetPasswordRequest'
-    { _irprprEmail       :: !(Maybe Text)
+    { _irprprEmail :: !(Maybe Text)
     , _irprprNewPassword :: !(Maybe Text)
-    , _irprprOOBCode     :: !(Maybe Text)
+    , _irprprOOBCode :: !(Maybe Text)
     , _irprprOldPassword :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3609,22 +3609,22 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyCreateAuthURIRequest' smart constructor.
 data IdentitytoolkitRelyingPartyCreateAuthURIRequest =
   IdentitytoolkitRelyingPartyCreateAuthURIRequest'
-    { _irpcaurProviderId          :: !(Maybe Text)
-    , _irpcaurClientId            :: !(Maybe Text)
-    , _irpcaurContext             :: !(Maybe Text)
-    , _irpcaurCustomParameter     :: !(Maybe IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter)
+    { _irpcaurProviderId :: !(Maybe Text)
+    , _irpcaurClientId :: !(Maybe Text)
+    , _irpcaurContext :: !(Maybe Text)
+    , _irpcaurCustomParameter :: !(Maybe IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter)
     , _irpcaurTenantProjectNumber :: !(Maybe (Textual Word64))
-    , _irpcaurIdentifier          :: !(Maybe Text)
-    , _irpcaurOtaApp              :: !(Maybe Text)
-    , _irpcaurOAuthConsumerKey    :: !(Maybe Text)
-    , _irpcaurTenantId            :: !(Maybe Text)
-    , _irpcaurHostedDomain        :: !(Maybe Text)
-    , _irpcaurAppId               :: !(Maybe Text)
-    , _irpcaurContinueURI         :: !(Maybe Text)
-    , _irpcaurAuthFlowType        :: !(Maybe Text)
-    , _irpcaurOAuthScope          :: !(Maybe Text)
-    , _irpcaurSessionId           :: !(Maybe Text)
-    , _irpcaurOpenidRealm         :: !(Maybe Text)
+    , _irpcaurIdentifier :: !(Maybe Text)
+    , _irpcaurOtaApp :: !(Maybe Text)
+    , _irpcaurOAuthConsumerKey :: !(Maybe Text)
+    , _irpcaurTenantId :: !(Maybe Text)
+    , _irpcaurHostedDomain :: !(Maybe Text)
+    , _irpcaurAppId :: !(Maybe Text)
+    , _irpcaurContinueURI :: !(Maybe Text)
+    , _irpcaurAuthFlowType :: !(Maybe Text)
+    , _irpcaurOAuthScope :: !(Maybe Text)
+    , _irpcaurSessionId :: !(Maybe Text)
+    , _irpcaurOpenidRealm :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3900,7 +3900,7 @@ instance ToJSON
 data GetAccountInfoResponse =
   GetAccountInfoResponse'
     { _gairUsers :: !(Maybe [UserInfo])
-    , _gairKind  :: !Text
+    , _gairKind :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3951,13 +3951,13 @@ instance ToJSON GetAccountInfoResponse where
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPhoneNumberRequest' smart constructor.
 data IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest =
   IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest'
-    { _iTemporaryProof    :: !(Maybe Text)
+    { _iTemporaryProof :: !(Maybe Text)
     , _iVerificationProof :: !(Maybe Text)
-    , _iOperation         :: !(Maybe Text)
-    , _iSessionInfo       :: !(Maybe Text)
-    , _iPhoneNumber       :: !(Maybe Text)
-    , _iCode              :: !(Maybe Text)
-    , _iIdToken           :: !(Maybe Text)
+    , _iOperation :: !(Maybe Text)
+    , _iSessionInfo :: !(Maybe Text)
+    , _iPhoneNumber :: !(Maybe Text)
+    , _iCode :: !(Maybe Text)
+    , _iIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4060,7 +4060,7 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyEmailLinkSigninRequest' smart constructor.
 data IdentitytoolkitRelyingPartyEmailLinkSigninRequest =
   IdentitytoolkitRelyingPartyEmailLinkSigninRequest'
-    { _irpelsrEmail   :: !(Maybe Text)
+    { _irpelsrEmail :: !(Maybe Text)
     , _irpelsrOOBCode :: !(Maybe Text)
     , _irpelsrIdToken :: !(Maybe Text)
     }
@@ -4132,8 +4132,8 @@ instance ToJSON
 data IdentitytoolkitRelyingPartyDeleteAccountRequest =
   IdentitytoolkitRelyingPartyDeleteAccountRequest'
     { _irpdarDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpdarLocalId                :: !(Maybe Text)
-    , _irpdarIdToken                :: !(Maybe Text)
+    , _irpdarLocalId :: !(Maybe Text)
+    , _irpdarIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4207,8 +4207,8 @@ instance ToJSON
 -- /See:/ 'getOOBConfirmationCodeResponse' smart constructor.
 data GetOOBConfirmationCodeResponse =
   GetOOBConfirmationCodeResponse'
-    { _goobccrEmail   :: !(Maybe Text)
-    , _goobccrKind    :: !Text
+    { _goobccrEmail :: !(Maybe Text)
+    , _goobccrKind :: !Text
     , _goobccrOOBCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4273,10 +4273,10 @@ instance ToJSON GetOOBConfirmationCodeResponse where
 -- /See:/ 'identitytoolkitRelyingPartyDownloadAccountRequest' smart constructor.
 data IdentitytoolkitRelyingPartyDownloadAccountRequest =
   IdentitytoolkitRelyingPartyDownloadAccountRequest'
-    { _iNextPageToken          :: !(Maybe Text)
+    { _iNextPageToken :: !(Maybe Text)
     , _iDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _iMaxResults             :: !(Maybe (Textual Word32))
-    , _iTargetProjectId        :: !(Maybe Text)
+    , _iMaxResults :: !(Maybe (Textual Word32))
+    , _iTargetProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4363,17 +4363,17 @@ instance ToJSON
 -- /See:/ 'verifyPasswordResponse' smart constructor.
 data VerifyPasswordResponse =
   VerifyPasswordResponse'
-    { _vprEmail                  :: !(Maybe Text)
-    , _vprPhotoURL               :: !(Maybe Text)
-    , _vprOAuthAccessToken       :: !(Maybe Text)
-    , _vprKind                   :: !Text
-    , _vprOAuthExpireIn          :: !(Maybe (Textual Int32))
-    , _vprRefreshToken           :: !(Maybe Text)
-    , _vprExpiresIn              :: !(Maybe (Textual Int64))
-    , _vprDisplayName            :: !(Maybe Text)
-    , _vprLocalId                :: !(Maybe Text)
-    , _vprRegistered             :: !(Maybe Bool)
-    , _vprIdToken                :: !(Maybe Text)
+    { _vprEmail :: !(Maybe Text)
+    , _vprPhotoURL :: !(Maybe Text)
+    , _vprOAuthAccessToken :: !(Maybe Text)
+    , _vprKind :: !Text
+    , _vprOAuthExpireIn :: !(Maybe (Textual Int32))
+    , _vprRefreshToken :: !(Maybe Text)
+    , _vprExpiresIn :: !(Maybe (Textual Int64))
+    , _vprDisplayName :: !(Maybe Text)
+    , _vprLocalId :: !(Maybe Text)
+    , _vprRegistered :: !(Maybe Bool)
+    , _vprIdToken :: !(Maybe Text)
     , _vprOAuthAuthorizationCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4536,18 +4536,18 @@ instance ToJSON VerifyPasswordResponse where
 -- /See:/ 'setAccountInfoResponse' smart constructor.
 data SetAccountInfoResponse =
   SetAccountInfoResponse'
-    { _sairEmail            :: !(Maybe Text)
-    , _sairPhotoURL         :: !(Maybe Text)
-    , _sairKind             :: !Text
-    , _sairRefreshToken     :: !(Maybe Text)
+    { _sairEmail :: !(Maybe Text)
+    , _sairPhotoURL :: !(Maybe Text)
+    , _sairKind :: !Text
+    , _sairRefreshToken :: !(Maybe Text)
     , _sairProviderUserInfo :: !(Maybe [SetAccountInfoResponseProviderUserInfoItem])
-    , _sairExpiresIn        :: !(Maybe (Textual Int64))
-    , _sairEmailVerified    :: !(Maybe Bool)
-    , _sairDisplayName      :: !(Maybe Text)
-    , _sairPasswordHash     :: !(Maybe Bytes)
-    , _sairLocalId          :: !(Maybe Text)
-    , _sairNewEmail         :: !(Maybe Text)
-    , _sairIdToken          :: !(Maybe Text)
+    , _sairExpiresIn :: !(Maybe (Textual Int64))
+    , _sairEmailVerified :: !(Maybe Bool)
+    , _sairDisplayName :: !(Maybe Text)
+    , _sairPasswordHash :: !(Maybe Bytes)
+    , _sairLocalId :: !(Maybe Text)
+    , _sairNewEmail :: !(Maybe Text)
+    , _sairIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4709,20 +4709,20 @@ instance ToJSON SetAccountInfoResponse where
 -- /See:/ 'identitytoolkitRelyingPartySignupNewUserRequest' smart constructor.
 data IdentitytoolkitRelyingPartySignupNewUserRequest =
   IdentitytoolkitRelyingPartySignupNewUserRequest'
-    { _irpsnurEmail               :: !(Maybe Text)
-    , _irpsnurInstanceId          :: !(Maybe Text)
-    , _irpsnurPhotoURL            :: !(Maybe Text)
-    , _irpsnurCaptchaChallenge    :: !(Maybe Text)
+    { _irpsnurEmail :: !(Maybe Text)
+    , _irpsnurInstanceId :: !(Maybe Text)
+    , _irpsnurPhotoURL :: !(Maybe Text)
+    , _irpsnurCaptchaChallenge :: !(Maybe Text)
     , _irpsnurTenantProjectNumber :: !(Maybe (Textual Word64))
-    , _irpsnurDisabled            :: !(Maybe Bool)
-    , _irpsnurTenantId            :: !(Maybe Text)
-    , _irpsnurPassword            :: !(Maybe Text)
-    , _irpsnurCaptchaResponse     :: !(Maybe Text)
-    , _irpsnurPhoneNumber         :: !(Maybe Text)
-    , _irpsnurEmailVerified       :: !(Maybe Bool)
-    , _irpsnurDisplayName         :: !(Maybe Text)
-    , _irpsnurLocalId             :: !(Maybe Text)
-    , _irpsnurIdToken             :: !(Maybe Text)
+    , _irpsnurDisabled :: !(Maybe Bool)
+    , _irpsnurTenantId :: !(Maybe Text)
+    , _irpsnurPassword :: !(Maybe Text)
+    , _irpsnurCaptchaResponse :: !(Maybe Text)
+    , _irpsnurPhoneNumber :: !(Maybe Text)
+    , _irpsnurEmailVerified :: !(Maybe Bool)
+    , _irpsnurDisplayName :: !(Maybe Text)
+    , _irpsnurLocalId :: !(Maybe Text)
+    , _irpsnurIdToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4915,44 +4915,44 @@ instance ToJSON
 -- /See:/ 'verifyAssertionResponse' smart constructor.
 data VerifyAssertionResponse =
   VerifyAssertionResponse'
-    { _varProviderId             :: !(Maybe Text)
-    , _varFullName               :: !(Maybe Text)
-    , _varEmail                  :: !(Maybe Text)
-    , _varIsNewUser              :: !(Maybe Bool)
-    , _varEmailRecycled          :: !(Maybe Bool)
-    , _varPhotoURL               :: !(Maybe Text)
-    , _varVerifiedProvider       :: !(Maybe [Text])
-    , _varContext                :: !(Maybe Text)
-    , _varNeedConfirmation       :: !(Maybe Bool)
-    , _varOriginalEmail          :: !(Maybe Text)
-    , _varLastName               :: !(Maybe Text)
-    , _varOAuthAccessToken       :: !(Maybe Text)
-    , _varDateOfBirth            :: !(Maybe Text)
-    , _varKind                   :: !Text
-    , _varRawUserInfo            :: !(Maybe Text)
-    , _varOAuthExpireIn          :: !(Maybe (Textual Int32))
-    , _varRefreshToken           :: !(Maybe Text)
-    , _varAppInstallationURL     :: !(Maybe Text)
-    , _varAction                 :: !(Maybe Text)
-    , _varNeedEmail              :: !(Maybe Bool)
-    , _varFederatedId            :: !(Maybe Text)
-    , _varOAuthIdToken           :: !(Maybe Text)
-    , _varAppScheme              :: !(Maybe Text)
-    , _varExpiresIn              :: !(Maybe (Textual Int64))
-    , _varInputEmail             :: !(Maybe Text)
-    , _varEmailVerified          :: !(Maybe Bool)
-    , _varOAuthTokenSecret       :: !(Maybe Text)
-    , _varLanguage               :: !(Maybe Text)
-    , _varFirstName              :: !(Maybe Text)
-    , _varDisplayName            :: !(Maybe Text)
-    , _varOAuthRequestToken      :: !(Maybe Text)
-    , _varOAuthScope             :: !(Maybe Text)
-    , _varNickName               :: !(Maybe Text)
-    , _varLocalId                :: !(Maybe Text)
-    , _varTimeZone               :: !(Maybe Text)
-    , _varScreenName             :: !(Maybe Text)
-    , _varErrorMessage           :: !(Maybe Text)
-    , _varIdToken                :: !(Maybe Text)
+    { _varProviderId :: !(Maybe Text)
+    , _varFullName :: !(Maybe Text)
+    , _varEmail :: !(Maybe Text)
+    , _varIsNewUser :: !(Maybe Bool)
+    , _varEmailRecycled :: !(Maybe Bool)
+    , _varPhotoURL :: !(Maybe Text)
+    , _varVerifiedProvider :: !(Maybe [Text])
+    , _varContext :: !(Maybe Text)
+    , _varNeedConfirmation :: !(Maybe Bool)
+    , _varOriginalEmail :: !(Maybe Text)
+    , _varLastName :: !(Maybe Text)
+    , _varOAuthAccessToken :: !(Maybe Text)
+    , _varDateOfBirth :: !(Maybe Text)
+    , _varKind :: !Text
+    , _varRawUserInfo :: !(Maybe Text)
+    , _varOAuthExpireIn :: !(Maybe (Textual Int32))
+    , _varRefreshToken :: !(Maybe Text)
+    , _varAppInstallationURL :: !(Maybe Text)
+    , _varAction :: !(Maybe Text)
+    , _varNeedEmail :: !(Maybe Bool)
+    , _varFederatedId :: !(Maybe Text)
+    , _varOAuthIdToken :: !(Maybe Text)
+    , _varAppScheme :: !(Maybe Text)
+    , _varExpiresIn :: !(Maybe (Textual Int64))
+    , _varInputEmail :: !(Maybe Text)
+    , _varEmailVerified :: !(Maybe Bool)
+    , _varOAuthTokenSecret :: !(Maybe Text)
+    , _varLanguage :: !(Maybe Text)
+    , _varFirstName :: !(Maybe Text)
+    , _varDisplayName :: !(Maybe Text)
+    , _varOAuthRequestToken :: !(Maybe Text)
+    , _varOAuthScope :: !(Maybe Text)
+    , _varNickName :: !(Maybe Text)
+    , _varLocalId :: !(Maybe Text)
+    , _varTimeZone :: !(Maybe Text)
+    , _varScreenName :: !(Maybe Text)
+    , _varErrorMessage :: !(Maybe Text)
+    , _varIdToken :: !(Maybe Text)
     , _varOAuthAuthorizationCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5417,7 +5417,7 @@ instance ToJSON VerifyAssertionResponse where
 data IdentitytoolkitRelyingPartySignOutUserRequest =
   IdentitytoolkitRelyingPartySignOutUserRequest'
     { _iInstanceId :: !(Maybe Text)
-    , _iLocalId    :: !(Maybe Text)
+    , _iLocalId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5471,8 +5471,8 @@ instance ToJSON
 data GetRecaptchaParamResponse =
   GetRecaptchaParamResponse'
     { _grprRecaptchaSiteKey :: !(Maybe Text)
-    , _grprKind             :: !Text
-    , _grprRecaptchaStoken  :: !(Maybe Text)
+    , _grprKind :: !Text
+    , _grprRecaptchaStoken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

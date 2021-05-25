@@ -35,6 +35,14 @@ library
     exposed-modules:
           Network.Google.Dataproc
         , Network.Google.Dataproc.Types
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Create
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Get
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.List
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Update
         , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Create
         , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Delete
         , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Get
@@ -45,14 +53,26 @@ library
         , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.SetIAMPolicy
         , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.TestIAMPermissions
         , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Update
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Create
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Update
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Get
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.InjectCredentials
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Repair
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Start
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Stop
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.TestIAMPermissions
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Delete
@@ -62,6 +82,7 @@ library
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Patch
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.TestIAMPermissions
         , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
         , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete

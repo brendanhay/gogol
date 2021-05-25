@@ -17,18 +17,18 @@
 --
 module Network.Google.BigtableAdmin.Types.Product where
 
-import           Network.Google.BigtableAdmin.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types.Sum
+import Network.Google.Prelude
 
 -- | Unconditionally routes all read\/write requests to a specific cluster.
--- This option preserves read-your-writes consistency, but does not improve
+-- This option preserves read-your-writes consistency but does not improve
 -- availability.
 --
 -- /See:/ 'singleClusterRouting' smart constructor.
 data SingleClusterRouting =
   SingleClusterRouting'
     { _scrAllowTransactionalWrites :: !(Maybe Bool)
-    , _scrClusterId                :: !(Maybe Text)
+    , _scrClusterId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,15 +76,16 @@ instance ToJSON SingleClusterRouting where
                     _scrAllowTransactionalWrites,
                   ("clusterId" .=) <$> _scrClusterId])
 
--- | Labels are a flexible and lightweight mechanism for organizing cloud
--- resources into groups that reflect a customer\'s organizational needs
--- and deployment strategies. They can be used to filter resources and
--- aggregate metrics. * Label keys must be between 1 and 63 characters long
--- and must conform to the regular expression: \`\\p{Ll}\\p{Lo}{0,62}\`. *
--- Label values must be between 0 and 63 characters long and must conform
--- to the regular expression: \`[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}\`. * No more
--- than 64 labels can be associated with a given resource. * Keys and
--- values must both be under 128 bytes.
+-- | Required. Labels are a flexible and lightweight mechanism for organizing
+-- cloud resources into groups that reflect a customer\'s organizational
+-- needs and deployment strategies. They can be used to filter resources
+-- and aggregate metrics. * Label keys must be between 1 and 63 characters
+-- long and must conform to the regular expression:
+-- \`\\p{Ll}\\p{Lo}{0,62}\`. * Label values must be between 0 and 63
+-- characters long and must conform to the regular expression:
+-- \`[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}\`. * No more than 64 labels can be
+-- associated with a given resource. * Keys and values must both be under
+-- 128 bytes.
 --
 -- /See:/ 'instanceLabels' smart constructor.
 newtype InstanceLabels =
@@ -119,47 +120,72 @@ instance FromJSON InstanceLabels where
 instance ToJSON InstanceLabels where
         toJSON = toJSON . _ilAddtional
 
+-- | The response for ListBackups.
+--
+-- /See:/ 'listBackupsResponse' smart constructor.
+data ListBackupsResponse =
+  ListBackupsResponse'
+    { _lbrNextPageToken :: !(Maybe Text)
+    , _lbrBackups :: !(Maybe [Backup])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListBackupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbrNextPageToken'
+--
+-- * 'lbrBackups'
+listBackupsResponse
+    :: ListBackupsResponse
+listBackupsResponse =
+  ListBackupsResponse' {_lbrNextPageToken = Nothing, _lbrBackups = Nothing}
+
+
+-- | \`next_page_token\` can be sent in a subsequent ListBackups call to
+-- fetch more of the matching backups.
+lbrNextPageToken :: Lens' ListBackupsResponse (Maybe Text)
+lbrNextPageToken
+  = lens _lbrNextPageToken
+      (\ s a -> s{_lbrNextPageToken = a})
+
+-- | The list of matching backups.
+lbrBackups :: Lens' ListBackupsResponse [Backup]
+lbrBackups
+  = lens _lbrBackups (\ s a -> s{_lbrBackups = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListBackupsResponse where
+        parseJSON
+          = withObject "ListBackupsResponse"
+              (\ o ->
+                 ListBackupsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "backups" .!= mempty))
+
+instance ToJSON ListBackupsResponse where
+        toJSON ListBackupsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbrNextPageToken,
+                  ("backups" .=) <$> _lbrBackups])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -220,10 +246,10 @@ instance ToJSON Status where
 -- /See:/ 'createInstanceRequest' smart constructor.
 data CreateInstanceRequest =
   CreateInstanceRequest'
-    { _cirParent     :: !(Maybe Text)
+    { _cirParent :: !(Maybe Text)
     , _cirInstanceId :: !(Maybe Text)
-    , _cirClusters   :: !(Maybe CreateInstanceRequestClusters)
-    , _cirInstance   :: !(Maybe Instance)
+    , _cirClusters :: !(Maybe CreateInstanceRequestClusters)
+    , _cirInstance :: !(Maybe Instance)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -250,30 +276,31 @@ createInstanceRequest =
     }
 
 
--- | The unique name of the project in which to create the new instance.
--- Values are of the form \`projects\/\`.
+-- | Required. The unique name of the project in which to create the new
+-- instance. Values are of the form \`projects\/{project}\`.
 cirParent :: Lens' CreateInstanceRequest (Maybe Text)
 cirParent
   = lens _cirParent (\ s a -> s{_cirParent = a})
 
--- | The ID to be used when referring to the new instance within its project,
--- e.g., just \`myinstance\` rather than
+-- | Required. The ID to be used when referring to the new instance within
+-- its project, e.g., just \`myinstance\` rather than
 -- \`projects\/myproject\/instances\/myinstance\`.
 cirInstanceId :: Lens' CreateInstanceRequest (Maybe Text)
 cirInstanceId
   = lens _cirInstanceId
       (\ s a -> s{_cirInstanceId = a})
 
--- | The clusters to be created within the instance, mapped by desired
--- cluster ID, e.g., just \`mycluster\` rather than
+-- | Required. The clusters to be created within the instance, mapped by
+-- desired cluster ID, e.g., just \`mycluster\` rather than
 -- \`projects\/myproject\/instances\/myinstance\/clusters\/mycluster\`.
--- Fields marked \`OutputOnly\` must be left blank. Currently, at most two
+-- Fields marked \`OutputOnly\` must be left blank. Currently, at most four
 -- clusters can be specified.
 cirClusters :: Lens' CreateInstanceRequest (Maybe CreateInstanceRequestClusters)
 cirClusters
   = lens _cirClusters (\ s a -> s{_cirClusters = a})
 
--- | The instance to create. Fields marked \`OutputOnly\` must be left blank.
+-- | Required. The instance to create. Fields marked \`OutputOnly\` must be
+-- left blank.
 cirInstance :: Lens' CreateInstanceRequest (Maybe Instance)
 cirInstance
   = lens _cirInstance (\ s a -> s{_cirInstance = a})
@@ -304,20 +331,20 @@ instance ToJSON CreateInstanceRequest where
 -- service: the log_types specified in each AuditConfig are enabled, and
 -- the exempted_members in each AuditLogConfig are exempted. Example Policy
 -- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
--- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
--- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
--- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
--- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
--- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
--- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
--- DATA_WRITE logging.
+-- \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\":
+-- \"sampleservice.googleapis.com\", \"audit_log_configs\": [ {
+-- \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\",
+-- \"exempted_members\": [ \"user:aliya\'example.com\" ] } ] } ] } For
+-- sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+-- logging. It also exempts jose\'example.com from DATA_READ logging, and
+-- aliya\'example.com from DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig =
   AuditConfig'
-    { _acService         :: !(Maybe Text)
+    { _acService :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -412,8 +439,8 @@ modifyColumnFamiliesRequest =
   ModifyColumnFamiliesRequest' {_mcfrModifications = Nothing}
 
 
--- | Modifications to be atomically applied to the specified table\'s
--- families. Entries are applied in order, meaning that earlier
+-- | Required. Modifications to be atomically applied to the specified
+-- table\'s families. Entries are applied in order, meaning that earlier
 -- modifications can be masked by later ones (in the case of repeated
 -- updates to the same family, for example).
 mcfrModifications :: Lens' ModifyColumnFamiliesRequest [Modification]
@@ -436,16 +463,30 @@ instance ToJSON ModifyColumnFamiliesRequest where
               (catMaybes
                  [("modifications" .=) <$> _mcfrModifications])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -473,26 +514,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -516,13 +556,65 @@ instance ToJSON Expr where
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
 
+-- | The response message for Locations.ListLocations.
+--
+-- /See:/ 'listLocationsResponse' smart constructor.
+data ListLocationsResponse =
+  ListLocationsResponse'
+    { _llrNextPageToken :: !(Maybe Text)
+    , _llrLocations :: !(Maybe [Location])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrNextPageToken'
+--
+-- * 'llrLocations'
+listLocationsResponse
+    :: ListLocationsResponse
+listLocationsResponse =
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
+
+-- | The standard List next-page token.
+llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
+llrNextPageToken
+  = lens _llrNextPageToken
+      (\ s a -> s{_llrNextPageToken = a})
+
+-- | A list of locations that matches the specified filter in the request.
+llrLocations :: Lens' ListLocationsResponse [Location]
+llrLocations
+  = lens _llrLocations (\ s a -> s{_llrLocations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListLocationsResponse where
+        parseJSON
+          = withObject "ListLocationsResponse"
+              (\ o ->
+                 ListLocationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "locations" .!= mempty))
+
+instance ToJSON ListLocationsResponse where
+        toJSON ListLocationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("locations" .=) <$> _llrLocations])
+
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -575,8 +667,8 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'createClusterRequest' smart constructor.
 data CreateClusterRequest =
   CreateClusterRequest'
-    { _ccrParent    :: !(Maybe Text)
-    , _ccrCluster   :: !(Maybe Cluster)
+    { _ccrParent :: !(Maybe Text)
+    , _ccrCluster :: !(Maybe Cluster)
     , _ccrClusterId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -598,20 +690,21 @@ createClusterRequest =
     {_ccrParent = Nothing, _ccrCluster = Nothing, _ccrClusterId = Nothing}
 
 
--- | The unique name of the instance in which to create the new cluster.
--- Values are of the form \`projects\/\/instances\/\`.
+-- | Required. The unique name of the instance in which to create the new
+-- cluster. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\`.
 ccrParent :: Lens' CreateClusterRequest (Maybe Text)
 ccrParent
   = lens _ccrParent (\ s a -> s{_ccrParent = a})
 
--- | The cluster to be created. Fields marked \`OutputOnly\` must be left
--- blank.
+-- | Required. The cluster to be created. Fields marked \`OutputOnly\` must
+-- be left blank.
 ccrCluster :: Lens' CreateClusterRequest (Maybe Cluster)
 ccrCluster
   = lens _ccrCluster (\ s a -> s{_ccrCluster = a})
 
--- | The ID to be used when referring to the new cluster within its instance,
--- e.g., just \`mycluster\` rather than
+-- | Required. The ID to be used when referring to the new cluster within its
+-- instance, e.g., just \`mycluster\` rather than
 -- \`projects\/myproject\/instances\/myinstance\/clusters\/mycluster\`.
 ccrClusterId :: Lens' CreateClusterRequest (Maybe Text)
 ccrClusterId
@@ -636,25 +729,38 @@ instance ToJSON CreateClusterRequest where
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
-data GetIAMPolicyRequest =
+newtype GetIAMPolicyRequest =
   GetIAMPolicyRequest'
+    { _giprOptions :: Maybe GetPolicyOptions
+    }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giprOptions'
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest'
+getIAMPolicyRequest = GetIAMPolicyRequest' {_giprOptions = Nothing}
 
+
+-- | OPTIONAL: A \`GetPolicyOptions\` object for specifying options to
+-- \`GetIamPolicy\`.
+giprOptions :: Lens' GetIAMPolicyRequest (Maybe GetPolicyOptions)
+giprOptions
+  = lens _giprOptions (\ s a -> s{_giprOptions = a})
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest')
+              (\ o -> GetIAMPolicyRequest' <$> (o .:? "options"))
 
 instance ToJSON GetIAMPolicyRequest where
-        toJSON = const emptyObject
+        toJSON GetIAMPolicyRequest'{..}
+          = object
+              (catMaybes [("options" .=) <$> _giprOptions])
 
 -- | A resizable group of nodes in a particular cloud location, capable of
 -- serving all Tables in the parent Instance.
@@ -662,11 +768,12 @@ instance ToJSON GetIAMPolicyRequest where
 -- /See:/ 'cluster' smart constructor.
 data Cluster =
   Cluster'
-    { _cState              :: !(Maybe ClusterType)
+    { _cState :: !(Maybe ClusterType)
     , _cDefaultStorageType :: !(Maybe ClusterDefaultStorageType)
-    , _cLocation           :: !(Maybe Text)
-    , _cServeNodes         :: !(Maybe (Textual Int32))
-    , _cName               :: !(Maybe Text)
+    , _cLocation :: !(Maybe Text)
+    , _cServeNodes :: !(Maybe (Textual Int32))
+    , _cName :: !(Maybe Text)
+    , _cEncryptionConfig :: !(Maybe EncryptionConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -684,6 +791,8 @@ data Cluster =
 -- * 'cServeNodes'
 --
 -- * 'cName'
+--
+-- * 'cEncryptionConfig'
 cluster
     :: Cluster
 cluster =
@@ -693,39 +802,46 @@ cluster =
     , _cLocation = Nothing
     , _cServeNodes = Nothing
     , _cName = Nothing
+    , _cEncryptionConfig = Nothing
     }
 
 
--- | (\`OutputOnly\`) The current state of the cluster.
+-- | Output only. The current state of the cluster.
 cState :: Lens' Cluster (Maybe ClusterType)
 cState = lens _cState (\ s a -> s{_cState = a})
 
--- | (\`CreationOnly\`) The type of storage used by this cluster to serve its
--- parent instance\'s tables, unless explicitly overridden.
+-- | Immutable. The type of storage used by this cluster to serve its parent
+-- instance\'s tables, unless explicitly overridden.
 cDefaultStorageType :: Lens' Cluster (Maybe ClusterDefaultStorageType)
 cDefaultStorageType
   = lens _cDefaultStorageType
       (\ s a -> s{_cDefaultStorageType = a})
 
--- | (\`CreationOnly\`) The location where this cluster\'s nodes and storage
--- reside. For best performance, clients should be located as close as
--- possible to this cluster. Currently only zones are supported, so values
--- should be of the form \`projects\/\/locations\/\`.
+-- | Immutable. The location where this cluster\'s nodes and storage reside.
+-- For best performance, clients should be located as close as possible to
+-- this cluster. Currently only zones are supported, so values should be of
+-- the form \`projects\/{project}\/locations\/{zone}\`.
 cLocation :: Lens' Cluster (Maybe Text)
 cLocation
   = lens _cLocation (\ s a -> s{_cLocation = a})
 
--- | The number of nodes allocated to this cluster. More nodes enable higher
--- throughput and more consistent performance.
+-- | Required. The number of nodes allocated to this cluster. More nodes
+-- enable higher throughput and more consistent performance.
 cServeNodes :: Lens' Cluster (Maybe Int32)
 cServeNodes
   = lens _cServeNodes (\ s a -> s{_cServeNodes = a}) .
       mapping _Coerce
 
--- | (\`OutputOnly\`) The unique name of the cluster. Values are of the form
--- \`projects\/\/instances\/\/clusters\/a-z*\`.
+-- | The unique name of the cluster. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/clusters\/a-z*\`.
 cName :: Lens' Cluster (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | Immutable. The encryption configuration for CMEK-protected clusters.
+cEncryptionConfig :: Lens' Cluster (Maybe EncryptionConfig)
+cEncryptionConfig
+  = lens _cEncryptionConfig
+      (\ s a -> s{_cEncryptionConfig = a})
 
 instance FromJSON Cluster where
         parseJSON
@@ -735,7 +851,8 @@ instance FromJSON Cluster where
                    (o .:? "state") <*> (o .:? "defaultStorageType") <*>
                      (o .:? "location")
                      <*> (o .:? "serveNodes")
-                     <*> (o .:? "name"))
+                     <*> (o .:? "name")
+                     <*> (o .:? "encryptionConfig"))
 
 instance ToJSON Cluster where
         toJSON Cluster'{..}
@@ -745,7 +862,8 @@ instance ToJSON Cluster where
                   ("defaultStorageType" .=) <$> _cDefaultStorageType,
                   ("location" .=) <$> _cLocation,
                   ("serveNodes" .=) <$> _cServeNodes,
-                  ("name" .=) <$> _cName])
+                  ("name" .=) <$> _cName,
+                  ("encryptionConfig" .=) <$> _cEncryptionConfig])
 
 -- | An initial split point for a newly created table.
 --
@@ -781,10 +899,11 @@ instance ToJSON Split where
         toJSON Split'{..}
           = object (catMaybes [("key" .=) <$> _sKey])
 
--- | Read\/write requests may be routed to any cluster in the instance, and
--- will fail over to another cluster in the event of transient errors or
--- delays. Choosing this option sacrifices read-your-writes consistency to
--- improve availability.
+-- | Read\/write requests are routed to the nearest cluster in the instance,
+-- and will fail over to the nearest cluster that is available in the event
+-- of transient errors or delays. Clusters in a region are considered
+-- equidistant. Choosing this option sacrifices read-your-writes
+-- consistency to improve availability.
 --
 -- /See:/ 'multiClusterRoutingUseAny' smart constructor.
 data MultiClusterRoutingUseAny =
@@ -810,9 +929,10 @@ instance ToJSON MultiClusterRoutingUseAny where
 -- | The state of a table\'s data in a particular cluster.
 --
 -- /See:/ 'clusterState' smart constructor.
-newtype ClusterState =
+data ClusterState =
   ClusterState'
-    { _csReplicationState :: Maybe ClusterStateReplicationState
+    { _csReplicationState :: !(Maybe ClusterStateReplicationState)
+    , _csEncryptionInfo :: !(Maybe [EncryptionInfo])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -822,9 +942,12 @@ newtype ClusterState =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'csReplicationState'
+--
+-- * 'csEncryptionInfo'
 clusterState
     :: ClusterState
-clusterState = ClusterState' {_csReplicationState = Nothing}
+clusterState =
+  ClusterState' {_csReplicationState = Nothing, _csEncryptionInfo = Nothing}
 
 
 -- | Output only. The state of replication for the table in this cluster.
@@ -833,16 +956,118 @@ csReplicationState
   = lens _csReplicationState
       (\ s a -> s{_csReplicationState = a})
 
+-- | Output only. The encryption information for the table in this cluster.
+-- If the encryption key protecting this resource is customer managed, then
+-- its version can be rotated in Cloud Key Management Service (Cloud KMS).
+-- The primary version of the key and its status will be reflected here
+-- when changes propagate from Cloud KMS.
+csEncryptionInfo :: Lens' ClusterState [EncryptionInfo]
+csEncryptionInfo
+  = lens _csEncryptionInfo
+      (\ s a -> s{_csEncryptionInfo = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON ClusterState where
         parseJSON
           = withObject "ClusterState"
-              (\ o -> ClusterState' <$> (o .:? "replicationState"))
+              (\ o ->
+                 ClusterState' <$>
+                   (o .:? "replicationState") <*>
+                     (o .:? "encryptionInfo" .!= mempty))
 
 instance ToJSON ClusterState where
         toJSON ClusterState'{..}
           = object
               (catMaybes
-                 [("replicationState" .=) <$> _csReplicationState])
+                 [("replicationState" .=) <$> _csReplicationState,
+                  ("encryptionInfo" .=) <$> _csEncryptionInfo])
+
+-- | A resource that represents Google Cloud Platform location.
+--
+-- /See:/ 'location' smart constructor.
+data Location =
+  Location'
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
+    , _lDisplayName :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lName'
+--
+-- * 'lMetadata'
+--
+-- * 'lDisplayName'
+--
+-- * 'lLabels'
+--
+-- * 'lLocationId'
+location
+    :: Location
+location =
+  Location'
+    { _lName = Nothing
+    , _lMetadata = Nothing
+    , _lDisplayName = Nothing
+    , _lLabels = Nothing
+    , _lLocationId = Nothing
+    }
+
+
+-- | Resource name for the location, which may vary between implementations.
+-- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
+lName :: Lens' Location (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
+
+-- | Service-specific metadata. For example the available capacity at the
+-- given location.
+lMetadata :: Lens' Location (Maybe LocationMetadata)
+lMetadata
+  = lens _lMetadata (\ s a -> s{_lMetadata = a})
+
+-- | The friendly name for this location, typically a nearby city name. For
+-- example, \"Tokyo\".
+lDisplayName :: Lens' Location (Maybe Text)
+lDisplayName
+  = lens _lDisplayName (\ s a -> s{_lDisplayName = a})
+
+-- | Cross-service attributes for the location. For example
+-- {\"cloud.googleapis.com\/region\": \"us-east1\"}
+lLabels :: Lens' Location (Maybe LocationLabels)
+lLabels = lens _lLabels (\ s a -> s{_lLabels = a})
+
+-- | The canonical id for this location. For example: \`\"us-east1\"\`.
+lLocationId :: Lens' Location (Maybe Text)
+lLocationId
+  = lens _lLocationId (\ s a -> s{_lLocationId = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location' <$>
+                   (o .:? "name") <*> (o .:? "metadata") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "locationId"))
+
+instance ToJSON Location where
+        toJSON Location'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lName,
+                  ("metadata" .=) <$> _lMetadata,
+                  ("displayName" .=) <$> _lDisplayName,
+                  ("labels" .=) <$> _lLabels,
+                  ("locationId" .=) <$> _lLocationId])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -850,10 +1075,10 @@ instance ToJSON ClusterState where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -908,7 +1133,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -969,9 +1195,9 @@ instance ToJSON Empty where
 -- /See:/ 'listAppProFilesResponse' smart constructor.
 data ListAppProFilesResponse =
   ListAppProFilesResponse'
-    { _lapfrNextPageToken   :: !(Maybe Text)
+    { _lapfrNextPageToken :: !(Maybe Text)
     , _lapfrFailedLocations :: !(Maybe [Text])
-    , _lapfrAppProFiles     :: !(Maybe [AppProFile])
+    , _lapfrAppProFiles :: !(Maybe [AppProFile])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1039,11 +1265,77 @@ instance ToJSON ListAppProFilesResponse where
                   ("failedLocations" .=) <$> _lapfrFailedLocations,
                   ("appProfiles" .=) <$> _lapfrAppProFiles])
 
+-- | Encapsulates progress related information for a Cloud Bigtable long
+-- running operation.
+--
+-- /See:/ 'operationProgress' smart constructor.
+data OperationProgress =
+  OperationProgress'
+    { _opStartTime :: !(Maybe DateTime')
+    , _opProgressPercent :: !(Maybe (Textual Int32))
+    , _opEndTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'opStartTime'
+--
+-- * 'opProgressPercent'
+--
+-- * 'opEndTime'
+operationProgress
+    :: OperationProgress
+operationProgress =
+  OperationProgress'
+    {_opStartTime = Nothing, _opProgressPercent = Nothing, _opEndTime = Nothing}
+
+
+-- | Time the request was received.
+opStartTime :: Lens' OperationProgress (Maybe UTCTime)
+opStartTime
+  = lens _opStartTime (\ s a -> s{_opStartTime = a}) .
+      mapping _DateTime
+
+-- | Percent completion of the operation. Values are between 0 and 100
+-- inclusive.
+opProgressPercent :: Lens' OperationProgress (Maybe Int32)
+opProgressPercent
+  = lens _opProgressPercent
+      (\ s a -> s{_opProgressPercent = a})
+      . mapping _Coerce
+
+-- | If set, the time at which this operation failed or was completed
+-- successfully.
+opEndTime :: Lens' OperationProgress (Maybe UTCTime)
+opEndTime
+  = lens _opEndTime (\ s a -> s{_opEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON OperationProgress where
+        parseJSON
+          = withObject "OperationProgress"
+              (\ o ->
+                 OperationProgress' <$>
+                   (o .:? "startTime") <*> (o .:? "progressPercent") <*>
+                     (o .:? "endTime"))
+
+instance ToJSON OperationProgress where
+        toJSON OperationProgress'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _opStartTime,
+                  ("progressPercent" .=) <$> _opProgressPercent,
+                  ("endTime" .=) <$> _opEndTime])
+
 -- | Output only. Map from cluster ID to per-cluster table state. If it could
 -- not be determined whether or not the table has data in a particular
 -- cluster (for example, if its zone is unavailable), then there will be an
 -- entry for the cluster with UNKNOWN \`replication_status\`. Views:
--- \`REPLICATION_VIEW\`, \`FULL\`
+-- \`REPLICATION_VIEW\`, \`ENCRYPTION_VIEW\`, \`FULL\`
 --
 -- /See:/ 'tableClusterStates' smart constructor.
 newtype TableClusterStates =
@@ -1078,8 +1370,8 @@ instance FromJSON TableClusterStates where
 instance ToJSON TableClusterStates where
         toJSON = toJSON . _tcsAddtional
 
--- | (\`CreationOnly\`) The column families configured for this table, mapped
--- by column family ID. Views: \`SCHEMA_VIEW\`, \`FULL\`
+-- | The column families configured for this table, mapped by column family
+-- ID. Views: \`SCHEMA_VIEW\`, \`FULL\`
 --
 -- /See:/ 'tableColumnFamilies' smart constructor.
 newtype TableColumnFamilies =
@@ -1121,8 +1413,8 @@ instance ToJSON TableColumnFamilies where
 data CreateTableRequest =
   CreateTableRequest'
     { _ctrInitialSplits :: !(Maybe [Split])
-    , _ctrTableId       :: !(Maybe Text)
-    , _ctrTable         :: !(Maybe Table)
+    , _ctrTableId :: !(Maybe Text)
+    , _ctrTable :: !(Maybe Table)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1161,13 +1453,14 @@ ctrInitialSplits
       . _Default
       . _Coerce
 
--- | The name by which the new table should be referred to within the parent
--- instance, e.g., \`foobar\` rather than \`\/tables\/foobar\`.
+-- | Required. The name by which the new table should be referred to within
+-- the parent instance, e.g., \`foobar\` rather than
+-- \`{parent}\/tables\/foobar\`. Maximum 50 characters.
 ctrTableId :: Lens' CreateTableRequest (Maybe Text)
 ctrTableId
   = lens _ctrTableId (\ s a -> s{_ctrTableId = a})
 
--- | The Table to create.
+-- | Required. The Table to create.
 ctrTable :: Lens' CreateTableRequest (Maybe Table)
 ctrTable = lens _ctrTable (\ s a -> s{_ctrTable = a})
 
@@ -1193,10 +1486,10 @@ instance ToJSON CreateTableRequest where
 -- /See:/ 'createClusterMetadata' smart constructor.
 data CreateClusterMetadata =
   CreateClusterMetadata'
-    { _ccmRequestTime     :: !(Maybe DateTime')
-    , _ccmTables          :: !(Maybe CreateClusterMetadataTables)
+    { _ccmRequestTime :: !(Maybe DateTime')
+    , _ccmTables :: !(Maybe CreateClusterMetadataTables)
     , _ccmOriginalRequest :: !(Maybe CreateClusterRequest)
-    , _ccmFinishTime      :: !(Maybe DateTime')
+    , _ccmFinishTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1231,11 +1524,11 @@ ccmRequestTime
       . mapping _DateTime
 
 -- | Keys: the full \`name\` of each table that existed in the instance when
--- CreateCluster was first called, i.e. \`projects\/\/instances\/\/tables\/
--- \`. Any table added to the instance by a later API call will be created
--- in the new cluster by that API call, not this one. Values: information
--- on how much of a table\'s data has been copied to the newly-created
--- cluster so far.
+-- CreateCluster was first called, i.e.
+-- \`projects\/\/instances\/\/tables\/\`. Any table added to the instance
+-- by a later API call will be created in the new cluster by that API call,
+-- not this one. Values: information on how much of a table\'s data has
+-- been copied to the newly-created cluster so far.
 ccmTables :: Lens' CreateClusterMetadata (Maybe CreateClusterMetadataTables)
 ccmTables
   = lens _ccmTables (\ s a -> s{_ccmTables = a})
@@ -1277,8 +1570,8 @@ instance ToJSON CreateClusterMetadata where
 -- /See:/ 'tableProgress' smart constructor.
 data TableProgress =
   TableProgress'
-    { _tpState                :: !(Maybe TableProgressState)
-    , _tpEstimatedSizeBytes   :: !(Maybe (Textual Int64))
+    { _tpState :: !(Maybe TableProgressState)
+    , _tpEstimatedSizeBytes :: !(Maybe (Textual Int64))
     , _tpEstimatedCopiedBytes :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1410,11 +1703,11 @@ instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
 -- | Keys: the full \`name\` of each table that existed in the instance when
--- CreateCluster was first called, i.e. \`projects\/\/instances\/\/tables\/
--- \`. Any table added to the instance by a later API call will be created
--- in the new cluster by that API call, not this one. Values: information
--- on how much of a table\'s data has been copied to the newly-created
--- cluster so far.
+-- CreateCluster was first called, i.e.
+-- \`projects\/\/instances\/\/tables\/\`. Any table added to the instance
+-- by a later API call will be created in the new cluster by that API call,
+-- not this one. Values: information on how much of a table\'s data has
+-- been copied to the newly-created cluster so far.
 --
 -- /See:/ 'createClusterMetadataTables' smart constructor.
 newtype CreateClusterMetadataTables =
@@ -1474,14 +1767,196 @@ instance FromJSON UpdateAppProFileMetadata where
 instance ToJSON UpdateAppProFileMetadata where
         toJSON = const emptyObject
 
+-- | Encapsulates settings provided to GetIamPolicy.
+--
+-- /See:/ 'getPolicyOptions' smart constructor.
+newtype GetPolicyOptions =
+  GetPolicyOptions'
+    { _gpoRequestedPolicyVersion :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpoRequestedPolicyVersion'
+getPolicyOptions
+    :: GetPolicyOptions
+getPolicyOptions = GetPolicyOptions' {_gpoRequestedPolicyVersion = Nothing}
+
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+gpoRequestedPolicyVersion :: Lens' GetPolicyOptions (Maybe Int32)
+gpoRequestedPolicyVersion
+  = lens _gpoRequestedPolicyVersion
+      (\ s a -> s{_gpoRequestedPolicyVersion = a})
+      . mapping _Coerce
+
+instance FromJSON GetPolicyOptions where
+        parseJSON
+          = withObject "GetPolicyOptions"
+              (\ o ->
+                 GetPolicyOptions' <$>
+                   (o .:? "requestedPolicyVersion"))
+
+instance ToJSON GetPolicyOptions where
+        toJSON GetPolicyOptions'{..}
+          = object
+              (catMaybes
+                 [("requestedPolicyVersion" .=) <$>
+                    _gpoRequestedPolicyVersion])
+
+-- | A backup of a Cloud Bigtable table.
+--
+-- /See:/ 'backup' smart constructor.
+data Backup =
+  Backup'
+    { _bSizeBytes :: !(Maybe (Textual Int64))
+    , _bState :: !(Maybe BackupState)
+    , _bStartTime :: !(Maybe DateTime')
+    , _bSourceTable :: !(Maybe Text)
+    , _bName :: !(Maybe Text)
+    , _bEndTime :: !(Maybe DateTime')
+    , _bExpireTime :: !(Maybe DateTime')
+    , _bEncryptionInfo :: !(Maybe EncryptionInfo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Backup' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bSizeBytes'
+--
+-- * 'bState'
+--
+-- * 'bStartTime'
+--
+-- * 'bSourceTable'
+--
+-- * 'bName'
+--
+-- * 'bEndTime'
+--
+-- * 'bExpireTime'
+--
+-- * 'bEncryptionInfo'
+backup
+    :: Backup
+backup =
+  Backup'
+    { _bSizeBytes = Nothing
+    , _bState = Nothing
+    , _bStartTime = Nothing
+    , _bSourceTable = Nothing
+    , _bName = Nothing
+    , _bEndTime = Nothing
+    , _bExpireTime = Nothing
+    , _bEncryptionInfo = Nothing
+    }
+
+
+-- | Output only. Size of the backup in bytes.
+bSizeBytes :: Lens' Backup (Maybe Int64)
+bSizeBytes
+  = lens _bSizeBytes (\ s a -> s{_bSizeBytes = a}) .
+      mapping _Coerce
+
+-- | Output only. The current state of the backup.
+bState :: Lens' Backup (Maybe BackupState)
+bState = lens _bState (\ s a -> s{_bState = a})
+
+-- | Output only. \`start_time\` is the time that the backup was started
+-- (i.e. approximately the time the CreateBackup request is received). The
+-- row data in this backup will be no older than this timestamp.
+bStartTime :: Lens' Backup (Maybe UTCTime)
+bStartTime
+  = lens _bStartTime (\ s a -> s{_bStartTime = a}) .
+      mapping _DateTime
+
+-- | Required. Immutable. Name of the table from which this backup was
+-- created. This needs to be in the same instance as the backup. Values are
+-- of the form
+-- \`projects\/{project}\/instances\/{instance}\/tables\/{source_table}\`.
+bSourceTable :: Lens' Backup (Maybe Text)
+bSourceTable
+  = lens _bSourceTable (\ s a -> s{_bSourceTable = a})
+
+-- | A globally unique identifier for the backup which cannot be changed.
+-- Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/clusters\/{cluster}\/
+-- backups\/_a-zA-Z0-9*\` The final segment of the name must be between 1
+-- and 50 characters in length. The backup is stored in the cluster
+-- identified by the prefix of the backup name of the form
+-- \`projects\/{project}\/instances\/{instance}\/clusters\/{cluster}\`.
+bName :: Lens' Backup (Maybe Text)
+bName = lens _bName (\ s a -> s{_bName = a})
+
+-- | Output only. \`end_time\` is the time that the backup was finished. The
+-- row data in the backup will be no newer than this timestamp.
+bEndTime :: Lens' Backup (Maybe UTCTime)
+bEndTime
+  = lens _bEndTime (\ s a -> s{_bEndTime = a}) .
+      mapping _DateTime
+
+-- | Required. The expiration time of the backup, with microseconds
+-- granularity that must be at least 6 hours and at most 30 days from the
+-- time the request is received. Once the \`expire_time\` has passed, Cloud
+-- Bigtable will delete the backup and free the resources used by the
+-- backup.
+bExpireTime :: Lens' Backup (Maybe UTCTime)
+bExpireTime
+  = lens _bExpireTime (\ s a -> s{_bExpireTime = a}) .
+      mapping _DateTime
+
+-- | Output only. The encryption information for the backup.
+bEncryptionInfo :: Lens' Backup (Maybe EncryptionInfo)
+bEncryptionInfo
+  = lens _bEncryptionInfo
+      (\ s a -> s{_bEncryptionInfo = a})
+
+instance FromJSON Backup where
+        parseJSON
+          = withObject "Backup"
+              (\ o ->
+                 Backup' <$>
+                   (o .:? "sizeBytes") <*> (o .:? "state") <*>
+                     (o .:? "startTime")
+                     <*> (o .:? "sourceTable")
+                     <*> (o .:? "name")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "expireTime")
+                     <*> (o .:? "encryptionInfo"))
+
+instance ToJSON Backup where
+        toJSON Backup'{..}
+          = object
+              (catMaybes
+                 [("sizeBytes" .=) <$> _bSizeBytes,
+                  ("state" .=) <$> _bState,
+                  ("startTime" .=) <$> _bStartTime,
+                  ("sourceTable" .=) <$> _bSourceTable,
+                  ("name" .=) <$> _bName, ("endTime" .=) <$> _bEndTime,
+                  ("expireTime" .=) <$> _bExpireTime,
+                  ("encryptionInfo" .=) <$> _bEncryptionInfo])
+
 -- | The metadata for the Operation returned by UpdateCluster.
 --
 -- /See:/ 'updateClusterMetadata' smart constructor.
 data UpdateClusterMetadata =
   UpdateClusterMetadata'
-    { _ucmRequestTime     :: !(Maybe DateTime')
+    { _ucmRequestTime :: !(Maybe DateTime')
     , _ucmOriginalRequest :: !(Maybe Cluster)
-    , _ucmFinishTime      :: !(Maybe DateTime')
+    , _ucmFinishTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1548,7 +2023,7 @@ instance ToJSON UpdateClusterMetadata where
 data SetIAMPolicyRequest =
   SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
-    , _siprPolicy     :: !(Maybe Policy)
+    , _siprPolicy :: !(Maybe Policy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1568,8 +2043,7 @@ setIAMPolicyRequest =
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
--- the following default mask is used: paths: \"bindings, etag\" This field
--- is only used by Cloud IAM.
+-- the following default mask is used: \`paths: \"bindings, etag\"\`
 siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe GFieldMask)
 siprUpdateMask
   = lens _siprUpdateMask
@@ -1597,6 +2071,42 @@ instance ToJSON SetIAMPolicyRequest where
                  [("updateMask" .=) <$> _siprUpdateMask,
                   ("policy" .=) <$> _siprPolicy])
 
+-- | Added to the error payload.
+--
+-- /See:/ 'failureTrace' smart constructor.
+newtype FailureTrace =
+  FailureTrace'
+    { _ftFrames :: Maybe [Frame]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FailureTrace' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ftFrames'
+failureTrace
+    :: FailureTrace
+failureTrace = FailureTrace' {_ftFrames = Nothing}
+
+
+ftFrames :: Lens' FailureTrace [Frame]
+ftFrames
+  = lens _ftFrames (\ s a -> s{_ftFrames = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON FailureTrace where
+        parseJSON
+          = withObject "FailureTrace"
+              (\ o ->
+                 FailureTrace' <$> (o .:? "frames" .!= mempty))
+
+instance ToJSON FailureTrace where
+        toJSON FailureTrace'{..}
+          = object (catMaybes [("frames" .=) <$> _ftFrames])
+
 -- | Request message for
 -- google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency
 --
@@ -1619,7 +2129,8 @@ checkConsistencyRequest =
   CheckConsistencyRequest' {_ccrConsistencyToken = Nothing}
 
 
--- | The token created using GenerateConsistencyToken for the Table.
+-- | Required. The token created using GenerateConsistencyToken for the
+-- Table.
 ccrConsistencyToken :: Lens' CheckConsistencyRequest (Maybe Text)
 ccrConsistencyToken
   = lens _ccrConsistencyToken
@@ -1645,7 +2156,7 @@ instance ToJSON CheckConsistencyRequest where
 data ListTablesResponse =
   ListTablesResponse'
     { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrTables        :: !(Maybe [Table])
+    , _ltrTables :: !(Maybe [Table])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1693,13 +2204,139 @@ instance ToJSON ListTablesResponse where
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
                   ("tables" .=) <$> _ltrTables])
 
+-- | The request for RestoreTable.
+--
+-- /See:/ 'restoreTableRequest' smart constructor.
+data RestoreTableRequest =
+  RestoreTableRequest'
+    { _rtrBackup :: !(Maybe Text)
+    , _rtrTableId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreTableRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rtrBackup'
+--
+-- * 'rtrTableId'
+restoreTableRequest
+    :: RestoreTableRequest
+restoreTableRequest =
+  RestoreTableRequest' {_rtrBackup = Nothing, _rtrTableId = Nothing}
+
+
+-- | Name of the backup from which to restore. Values are of the form
+-- \`projects\/\/instances\/\/clusters\/\/backups\/\`.
+rtrBackup :: Lens' RestoreTableRequest (Maybe Text)
+rtrBackup
+  = lens _rtrBackup (\ s a -> s{_rtrBackup = a})
+
+-- | Required. The id of the table to create and restore to. This table must
+-- not already exist. The \`table_id\` appended to \`parent\` forms the
+-- full table name of the form \`projects\/\/instances\/\/tables\/\`.
+rtrTableId :: Lens' RestoreTableRequest (Maybe Text)
+rtrTableId
+  = lens _rtrTableId (\ s a -> s{_rtrTableId = a})
+
+instance FromJSON RestoreTableRequest where
+        parseJSON
+          = withObject "RestoreTableRequest"
+              (\ o ->
+                 RestoreTableRequest' <$>
+                   (o .:? "backup") <*> (o .:? "tableId"))
+
+instance ToJSON RestoreTableRequest where
+        toJSON RestoreTableRequest'{..}
+          = object
+              (catMaybes
+                 [("backup" .=) <$> _rtrBackup,
+                  ("tableId" .=) <$> _rtrTableId])
+
+-- | Metadata type for the operation returned by CreateBackup.
+--
+-- /See:/ 'createBackupMetadata' smart constructor.
+data CreateBackupMetadata =
+  CreateBackupMetadata'
+    { _cbmStartTime :: !(Maybe DateTime')
+    , _cbmSourceTable :: !(Maybe Text)
+    , _cbmName :: !(Maybe Text)
+    , _cbmEndTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CreateBackupMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbmStartTime'
+--
+-- * 'cbmSourceTable'
+--
+-- * 'cbmName'
+--
+-- * 'cbmEndTime'
+createBackupMetadata
+    :: CreateBackupMetadata
+createBackupMetadata =
+  CreateBackupMetadata'
+    { _cbmStartTime = Nothing
+    , _cbmSourceTable = Nothing
+    , _cbmName = Nothing
+    , _cbmEndTime = Nothing
+    }
+
+
+-- | The time at which this operation started.
+cbmStartTime :: Lens' CreateBackupMetadata (Maybe UTCTime)
+cbmStartTime
+  = lens _cbmStartTime (\ s a -> s{_cbmStartTime = a})
+      . mapping _DateTime
+
+-- | The name of the table the backup is created from.
+cbmSourceTable :: Lens' CreateBackupMetadata (Maybe Text)
+cbmSourceTable
+  = lens _cbmSourceTable
+      (\ s a -> s{_cbmSourceTable = a})
+
+-- | The name of the backup being created.
+cbmName :: Lens' CreateBackupMetadata (Maybe Text)
+cbmName = lens _cbmName (\ s a -> s{_cbmName = a})
+
+-- | If set, the time at which this operation finished or was cancelled.
+cbmEndTime :: Lens' CreateBackupMetadata (Maybe UTCTime)
+cbmEndTime
+  = lens _cbmEndTime (\ s a -> s{_cbmEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON CreateBackupMetadata where
+        parseJSON
+          = withObject "CreateBackupMetadata"
+              (\ o ->
+                 CreateBackupMetadata' <$>
+                   (o .:? "startTime") <*> (o .:? "sourceTable") <*>
+                     (o .:? "name")
+                     <*> (o .:? "endTime"))
+
+instance ToJSON CreateBackupMetadata where
+        toJSON CreateBackupMetadata'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _cbmStartTime,
+                  ("sourceTable" .=) <$> _cbmSourceTable,
+                  ("name" .=) <$> _cbmName,
+                  ("endTime" .=) <$> _cbmEndTime])
+
 -- | Request message for BigtableInstanceAdmin.PartialUpdateInstance.
 --
 -- /See:/ 'partialUpdateInstanceRequest' smart constructor.
 data PartialUpdateInstanceRequest =
   PartialUpdateInstanceRequest'
     { _puirUpdateMask :: !(Maybe GFieldMask)
-    , _puirInstance   :: !(Maybe Instance)
+    , _puirInstance :: !(Maybe Instance)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1718,14 +2355,14 @@ partialUpdateInstanceRequest =
     {_puirUpdateMask = Nothing, _puirInstance = Nothing}
 
 
--- | The subset of Instance fields which should be replaced. Must be
--- explicitly set.
+-- | Required. The subset of Instance fields which should be replaced. Must
+-- be explicitly set.
 puirUpdateMask :: Lens' PartialUpdateInstanceRequest (Maybe GFieldMask)
 puirUpdateMask
   = lens _puirUpdateMask
       (\ s a -> s{_puirUpdateMask = a})
 
--- | The Instance which will (partially) replace the current value.
+-- | Required. The Instance which will (partially) replace the current value.
 puirInstance :: Lens' PartialUpdateInstanceRequest (Maybe Instance)
 puirInstance
   = lens _puirInstance (\ s a -> s{_puirInstance = a})
@@ -1749,9 +2386,9 @@ instance ToJSON PartialUpdateInstanceRequest where
 -- /See:/ 'gcRule' smart constructor.
 data GcRule =
   GcRule'
-    { _grMaxAge         :: !(Maybe GDuration)
-    , _grUnion          :: !(Maybe Union)
-    , _grIntersection   :: !(Maybe Intersection)
+    { _grMaxAge :: !(Maybe GDuration)
+    , _grUnion :: !(Maybe Union)
+    , _grIntersection :: !(Maybe Intersection)
     , _grMaxNumVersions :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1871,11 +2508,11 @@ instance ToJSON TestIAMPermissionsRequest where
 -- /See:/ 'appProFile' smart constructor.
 data AppProFile =
   AppProFile'
-    { _apfSingleClusterRouting      :: !(Maybe SingleClusterRouting)
-    , _apfEtag                      :: !(Maybe Text)
+    { _apfSingleClusterRouting :: !(Maybe SingleClusterRouting)
+    , _apfEtag :: !(Maybe Text)
     , _apfMultiClusterRoutingUseAny :: !(Maybe MultiClusterRoutingUseAny)
-    , _apfName                      :: !(Maybe Text)
-    , _apfDescription               :: !(Maybe Text)
+    , _apfName :: !(Maybe Text)
+    , _apfDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1922,18 +2559,18 @@ apfSingleClusterRouting
 apfEtag :: Lens' AppProFile (Maybe Text)
 apfEtag = lens _apfEtag (\ s a -> s{_apfEtag = a})
 
--- | Use a multi-cluster routing policy that may pick any cluster.
+-- | Use a multi-cluster routing policy.
 apfMultiClusterRoutingUseAny :: Lens' AppProFile (Maybe MultiClusterRoutingUseAny)
 apfMultiClusterRoutingUseAny
   = lens _apfMultiClusterRoutingUseAny
       (\ s a -> s{_apfMultiClusterRoutingUseAny = a})
 
--- | (\`OutputOnly\`) The unique name of the app profile. Values are of the
--- form \`projects\/\/instances\/\/appProfiles\/_a-zA-Z0-9*\`.
+-- | The unique name of the app profile. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/appProfiles\/_a-zA-Z0-9*\`.
 apfName :: Lens' AppProFile (Maybe Text)
 apfName = lens _apfName (\ s a -> s{_apfName = a})
 
--- | Optional long form description of the use case for this AppProfile.
+-- | Long form description of the use case for this AppProfile.
 apfDescription :: Lens' AppProFile (Maybe Text)
 apfDescription
   = lens _apfDescription
@@ -1961,10 +2598,64 @@ instance ToJSON AppProFile where
                   ("name" .=) <$> _apfName,
                   ("description" .=) <$> _apfDescription])
 
--- | The clusters to be created within the instance, mapped by desired
--- cluster ID, e.g., just \`mycluster\` rather than
+--
+-- /See:/ 'frame' smart constructor.
+data Frame =
+  Frame'
+    { _fWorkflowGuid :: !(Maybe Text)
+    , _fZoneId :: !(Maybe Text)
+    , _fTargetName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Frame' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fWorkflowGuid'
+--
+-- * 'fZoneId'
+--
+-- * 'fTargetName'
+frame
+    :: Frame
+frame =
+  Frame' {_fWorkflowGuid = Nothing, _fZoneId = Nothing, _fTargetName = Nothing}
+
+
+fWorkflowGuid :: Lens' Frame (Maybe Text)
+fWorkflowGuid
+  = lens _fWorkflowGuid
+      (\ s a -> s{_fWorkflowGuid = a})
+
+fZoneId :: Lens' Frame (Maybe Text)
+fZoneId = lens _fZoneId (\ s a -> s{_fZoneId = a})
+
+fTargetName :: Lens' Frame (Maybe Text)
+fTargetName
+  = lens _fTargetName (\ s a -> s{_fTargetName = a})
+
+instance FromJSON Frame where
+        parseJSON
+          = withObject "Frame"
+              (\ o ->
+                 Frame' <$>
+                   (o .:? "workflowGuid") <*> (o .:? "zoneId") <*>
+                     (o .:? "targetName"))
+
+instance ToJSON Frame where
+        toJSON Frame'{..}
+          = object
+              (catMaybes
+                 [("workflowGuid" .=) <$> _fWorkflowGuid,
+                  ("zoneId" .=) <$> _fZoneId,
+                  ("targetName" .=) <$> _fTargetName])
+
+-- | Required. The clusters to be created within the instance, mapped by
+-- desired cluster ID, e.g., just \`mycluster\` rather than
 -- \`projects\/myproject\/instances\/myinstance\/clusters\/mycluster\`.
--- Fields marked \`OutputOnly\` must be left blank. Currently, at most two
+-- Fields marked \`OutputOnly\` must be left blank. Currently, at most four
 -- clusters can be specified.
 --
 -- /See:/ 'createInstanceRequestClusters' smart constructor.
@@ -2046,13 +2737,57 @@ instance ToJSON GenerateConsistencyTokenResponse
               (catMaybes
                  [("consistencyToken" .=) <$> _gctrConsistencyToken])
 
+-- | Cloud Key Management Service (Cloud KMS) settings for a CMEK-protected
+-- cluster.
+--
+-- /See:/ 'encryptionConfig' smart constructor.
+newtype EncryptionConfig =
+  EncryptionConfig'
+    { _ecKmsKeyName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecKmsKeyName'
+encryptionConfig
+    :: EncryptionConfig
+encryptionConfig = EncryptionConfig' {_ecKmsKeyName = Nothing}
+
+
+-- | Describes the Cloud KMS encryption key that will be used to protect the
+-- destination Bigtable cluster. The requirements for this key are: 1) The
+-- Cloud Bigtable service account associated with the project that contains
+-- this cluster must be granted the
+-- \`cloudkms.cryptoKeyEncrypterDecrypter\` role on the CMEK key. 2) Only
+-- regional keys can be used and the region of the CMEK key must match the
+-- region of the cluster. 3) All clusters within an instance must use the
+-- same CMEK key. Values are of the form
+-- \`projects\/{project}\/locations\/{location}\/keyRings\/{keyring}\/cryptoKeys\/{key}\`
+ecKmsKeyName :: Lens' EncryptionConfig (Maybe Text)
+ecKmsKeyName
+  = lens _ecKmsKeyName (\ s a -> s{_ecKmsKeyName = a})
+
+instance FromJSON EncryptionConfig where
+        parseJSON
+          = withObject "EncryptionConfig"
+              (\ o -> EncryptionConfig' <$> (o .:? "kmsKeyName"))
+
+instance ToJSON EncryptionConfig where
+        toJSON EncryptionConfig'{..}
+          = object
+              (catMaybes [("kmsKeyName" .=) <$> _ecKmsKeyName])
+
 -- | Request message for
 -- google.bigtable.admin.v2.BigtableTableAdmin.DropRowRange
 --
 -- /See:/ 'dropRowRangeRequest' smart constructor.
 data DropRowRangeRequest =
   DropRowRangeRequest'
-    { _drrrRowKeyPrefix           :: !(Maybe Bytes)
+    { _drrrRowKeyPrefix :: !(Maybe Bytes)
     , _drrrDeleteAllDataFromTable :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2107,9 +2842,9 @@ instance ToJSON DropRowRangeRequest where
 -- /See:/ 'updateInstanceMetadata' smart constructor.
 data UpdateInstanceMetadata =
   UpdateInstanceMetadata'
-    { _uimRequestTime     :: !(Maybe DateTime')
+    { _uimRequestTime :: !(Maybe DateTime')
     , _uimOriginalRequest :: !(Maybe PartialUpdateInstanceRequest)
-    , _uimFinishTime      :: !(Maybe DateTime')
+    , _uimFinishTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2289,9 +3024,9 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'listClustersResponse' smart constructor.
 data ListClustersResponse =
   ListClustersResponse'
-    { _lcrNextPageToken   :: !(Maybe Text)
+    { _lcrNextPageToken :: !(Maybe Text)
     , _lcrFailedLocations :: !(Maybe [Text])
-    , _lcrClusters        :: !(Maybe [Cluster])
+    , _lcrClusters :: !(Maybe [Cluster])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2356,31 +3091,125 @@ instance ToJSON ListClustersResponse where
                   ("failedLocations" .=) <$> _lcrFailedLocations,
                   ("clusters" .=) <$> _lcrClusters])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | Information about a backup.
+--
+-- /See:/ 'backupInfo' smart constructor.
+data BackupInfo =
+  BackupInfo'
+    { _biStartTime :: !(Maybe DateTime')
+    , _biSourceTable :: !(Maybe Text)
+    , _biBackup :: !(Maybe Text)
+    , _biEndTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BackupInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'biStartTime'
+--
+-- * 'biSourceTable'
+--
+-- * 'biBackup'
+--
+-- * 'biEndTime'
+backupInfo
+    :: BackupInfo
+backupInfo =
+  BackupInfo'
+    { _biStartTime = Nothing
+    , _biSourceTable = Nothing
+    , _biBackup = Nothing
+    , _biEndTime = Nothing
+    }
+
+
+-- | Output only. The time that the backup was started. Row data in the
+-- backup will be no older than this timestamp.
+biStartTime :: Lens' BackupInfo (Maybe UTCTime)
+biStartTime
+  = lens _biStartTime (\ s a -> s{_biStartTime = a}) .
+      mapping _DateTime
+
+-- | Output only. Name of the table the backup was created from.
+biSourceTable :: Lens' BackupInfo (Maybe Text)
+biSourceTable
+  = lens _biSourceTable
+      (\ s a -> s{_biSourceTable = a})
+
+-- | Output only. Name of the backup.
+biBackup :: Lens' BackupInfo (Maybe Text)
+biBackup = lens _biBackup (\ s a -> s{_biBackup = a})
+
+-- | Output only. This time that the backup was finished. Row data in the
+-- backup will be no newer than this timestamp.
+biEndTime :: Lens' BackupInfo (Maybe UTCTime)
+biEndTime
+  = lens _biEndTime (\ s a -> s{_biEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON BackupInfo where
+        parseJSON
+          = withObject "BackupInfo"
+              (\ o ->
+                 BackupInfo' <$>
+                   (o .:? "startTime") <*> (o .:? "sourceTable") <*>
+                     (o .:? "backup")
+                     <*> (o .:? "endTime"))
+
+instance ToJSON BackupInfo where
+        toJSON BackupInfo'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _biStartTime,
+                  ("sourceTable" .=) <$> _biSourceTable,
+                  ("backup" .=) <$> _biBackup,
+                  ("endTime" .=) <$> _biEndTime])
+
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Bytes)
-    , _pVersion      :: !(Maybe (Textual Int32))
-    , _pBindings     :: !(Maybe [Binding])
+    , _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2422,21 +3251,40 @@ pAuditConfigs
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -2460,14 +3308,50 @@ instance ToJSON Policy where
                   ("etag" .=) <$> _pEtag, ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
 
+-- | Cross-service attributes for the location. For example
+-- {\"cloud.googleapis.com\/region\": \"us-east1\"}
+--
+-- /See:/ 'locationLabels' smart constructor.
+newtype LocationLabels =
+  LocationLabels'
+    { _llAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llAddtional'
+locationLabels
+    :: HashMap Text Text -- ^ 'llAddtional'
+    -> LocationLabels
+locationLabels pLlAddtional_ =
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
+
+llAddtional :: Lens' LocationLabels (HashMap Text Text)
+llAddtional
+  = lens _llAddtional (\ s a -> s{_llAddtional = a}) .
+      _Coerce
+
+instance FromJSON LocationLabels where
+        parseJSON
+          = withObject "LocationLabels"
+              (\ o -> LocationLabels' <$> (parseJSONObject o))
+
+instance ToJSON LocationLabels where
+        toJSON = toJSON . _llAddtional
+
 -- | The metadata for the Operation returned by CreateInstance.
 --
 -- /See:/ 'createInstanceMetadata' smart constructor.
 data CreateInstanceMetadata =
   CreateInstanceMetadata'
-    { _cimRequestTime     :: !(Maybe DateTime')
+    { _cimRequestTime :: !(Maybe DateTime')
     , _cimOriginalRequest :: !(Maybe CreateInstanceRequest)
-    , _cimFinishTime      :: !(Maybe DateTime')
+    , _cimFinishTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2528,6 +3412,43 @@ instance ToJSON CreateInstanceMetadata where
                   ("originalRequest" .=) <$> _cimOriginalRequest,
                   ("finishTime" .=) <$> _cimFinishTime])
 
+-- | Service-specific metadata. For example the available capacity at the
+-- given location.
+--
+-- /See:/ 'locationMetadata' smart constructor.
+newtype LocationMetadata =
+  LocationMetadata'
+    { _lmAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmAddtional'
+locationMetadata
+    :: HashMap Text JSONValue -- ^ 'lmAddtional'
+    -> LocationMetadata
+locationMetadata pLmAddtional_ =
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
+lmAddtional
+  = lens _lmAddtional (\ s a -> s{_lmAddtional = a}) .
+      _Coerce
+
+instance FromJSON LocationMetadata where
+        parseJSON
+          = withObject "LocationMetadata"
+              (\ o -> LocationMetadata' <$> (parseJSONObject o))
+
+instance ToJSON LocationMetadata where
+        toJSON = toJSON . _lmAddtional
+
 -- | Service-specific metadata associated with the operation. It typically
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
@@ -2569,14 +3490,14 @@ instance ToJSON OperationMetadata where
 
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
--- logging, while exempting foo\'gmail.com from DATA_READ logging.
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting jose\'example.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
 data AuditLogConfig =
   AuditLogConfig'
-    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    { _alcLogType :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2629,9 +3550,9 @@ instance ToJSON AuditLogConfig where
 -- /See:/ 'listInstancesResponse' smart constructor.
 data ListInstancesResponse =
   ListInstancesResponse'
-    { _lirNextPageToken   :: !(Maybe Text)
+    { _lirNextPageToken :: !(Maybe Text)
     , _lirFailedLocations :: !(Maybe [Text])
-    , _lirInstances       :: !(Maybe [Instance])
+    , _lirInstances :: !(Maybe [Instance])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2698,6 +3619,100 @@ instance ToJSON ListInstancesResponse where
                   ("failedLocations" .=) <$> _lirFailedLocations,
                   ("instances" .=) <$> _lirInstances])
 
+-- | Metadata type for the long-running operation returned by RestoreTable.
+--
+-- /See:/ 'restoreTableMetadata' smart constructor.
+data RestoreTableMetadata =
+  RestoreTableMetadata'
+    { _rtmOptimizeTableOperationName :: !(Maybe Text)
+    , _rtmSourceType :: !(Maybe RestoreTableMetadataSourceType)
+    , _rtmProgress :: !(Maybe OperationProgress)
+    , _rtmName :: !(Maybe Text)
+    , _rtmBackupInfo :: !(Maybe BackupInfo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreTableMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rtmOptimizeTableOperationName'
+--
+-- * 'rtmSourceType'
+--
+-- * 'rtmProgress'
+--
+-- * 'rtmName'
+--
+-- * 'rtmBackupInfo'
+restoreTableMetadata
+    :: RestoreTableMetadata
+restoreTableMetadata =
+  RestoreTableMetadata'
+    { _rtmOptimizeTableOperationName = Nothing
+    , _rtmSourceType = Nothing
+    , _rtmProgress = Nothing
+    , _rtmName = Nothing
+    , _rtmBackupInfo = Nothing
+    }
+
+
+-- | If exists, the name of the long-running operation that will be used to
+-- track the post-restore optimization process to optimize the performance
+-- of the restored table. The metadata type of the long-running operation
+-- is OptimizeRestoreTableMetadata. The response type is Empty. This
+-- long-running operation may be automatically created by the system if
+-- applicable after the RestoreTable long-running operation completes
+-- successfully. This operation may not be created if the table is already
+-- optimized or the restore was not successful.
+rtmOptimizeTableOperationName :: Lens' RestoreTableMetadata (Maybe Text)
+rtmOptimizeTableOperationName
+  = lens _rtmOptimizeTableOperationName
+      (\ s a -> s{_rtmOptimizeTableOperationName = a})
+
+-- | The type of the restore source.
+rtmSourceType :: Lens' RestoreTableMetadata (Maybe RestoreTableMetadataSourceType)
+rtmSourceType
+  = lens _rtmSourceType
+      (\ s a -> s{_rtmSourceType = a})
+
+-- | The progress of the RestoreTable operation.
+rtmProgress :: Lens' RestoreTableMetadata (Maybe OperationProgress)
+rtmProgress
+  = lens _rtmProgress (\ s a -> s{_rtmProgress = a})
+
+-- | Name of the table being created and restored to.
+rtmName :: Lens' RestoreTableMetadata (Maybe Text)
+rtmName = lens _rtmName (\ s a -> s{_rtmName = a})
+
+rtmBackupInfo :: Lens' RestoreTableMetadata (Maybe BackupInfo)
+rtmBackupInfo
+  = lens _rtmBackupInfo
+      (\ s a -> s{_rtmBackupInfo = a})
+
+instance FromJSON RestoreTableMetadata where
+        parseJSON
+          = withObject "RestoreTableMetadata"
+              (\ o ->
+                 RestoreTableMetadata' <$>
+                   (o .:? "optimizeTableOperationName") <*>
+                     (o .:? "sourceType")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "name")
+                     <*> (o .:? "backupInfo"))
+
+instance ToJSON RestoreTableMetadata where
+        toJSON RestoreTableMetadata'{..}
+          = object
+              (catMaybes
+                 [("optimizeTableOperationName" .=) <$>
+                    _rtmOptimizeTableOperationName,
+                  ("sourceType" .=) <$> _rtmSourceType,
+                  ("progress" .=) <$> _rtmProgress,
+                  ("name" .=) <$> _rtmName,
+                  ("backupInfo" .=) <$> _rtmBackupInfo])
+
 -- | Response message for
 -- google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency
 --
@@ -2743,9 +3758,9 @@ instance ToJSON CheckConsistencyResponse where
 -- /See:/ 'modification' smart constructor.
 data Modification =
   Modification'
-    { _mDrop   :: !(Maybe Bool)
+    { _mDrop :: !(Maybe Bool)
     , _mCreate :: !(Maybe ColumnFamily)
-    , _mId     :: !(Maybe Text)
+    , _mId :: !(Maybe Text)
     , _mUpdate :: !(Maybe ColumnFamily)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2809,9 +3824,10 @@ instance ToJSON Modification where
 -- /See:/ 'table' smart constructor.
 data Table =
   Table'
-    { _tGranularity    :: !(Maybe TableGranularity)
-    , _tName           :: !(Maybe Text)
-    , _tClusterStates  :: !(Maybe TableClusterStates)
+    { _tGranularity :: !(Maybe TableGranularity)
+    , _tName :: !(Maybe Text)
+    , _tRestoreInfo :: !(Maybe RestoreInfo)
+    , _tClusterStates :: !(Maybe TableClusterStates)
     , _tColumnFamilies :: !(Maybe TableColumnFamilies)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2825,6 +3841,8 @@ data Table =
 --
 -- * 'tName'
 --
+-- * 'tRestoreInfo'
+--
 -- * 'tClusterStates'
 --
 -- * 'tColumnFamilies'
@@ -2834,37 +3852,45 @@ table =
   Table'
     { _tGranularity = Nothing
     , _tName = Nothing
+    , _tRestoreInfo = Nothing
     , _tClusterStates = Nothing
     , _tColumnFamilies = Nothing
     }
 
 
--- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
--- are stored in this table. Timestamps not matching the granularity will
--- be rejected. If unspecified at creation time, the value will be set to
+-- | Immutable. The granularity (i.e. \`MILLIS\`) at which timestamps are
+-- stored in this table. Timestamps not matching the granularity will be
+-- rejected. If unspecified at creation time, the value will be set to
 -- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`.
 tGranularity :: Lens' Table (Maybe TableGranularity)
 tGranularity
   = lens _tGranularity (\ s a -> s{_tGranularity = a})
 
--- | Output only. The unique name of the table. Values are of the form
--- \`projects\/\/instances\/\/tables\/_a-zA-Z0-9*\`. Views: \`NAME_ONLY\`,
--- \`SCHEMA_VIEW\`, \`REPLICATION_VIEW\`, \`FULL\`
+-- | The unique name of the table. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/tables\/_a-zA-Z0-9*\`.
+-- Views: \`NAME_ONLY\`, \`SCHEMA_VIEW\`, \`REPLICATION_VIEW\`, \`FULL\`
 tName :: Lens' Table (Maybe Text)
 tName = lens _tName (\ s a -> s{_tName = a})
+
+-- | Output only. If this table was restored from another data source (e.g. a
+-- backup), this field will be populated with information about the
+-- restore.
+tRestoreInfo :: Lens' Table (Maybe RestoreInfo)
+tRestoreInfo
+  = lens _tRestoreInfo (\ s a -> s{_tRestoreInfo = a})
 
 -- | Output only. Map from cluster ID to per-cluster table state. If it could
 -- not be determined whether or not the table has data in a particular
 -- cluster (for example, if its zone is unavailable), then there will be an
 -- entry for the cluster with UNKNOWN \`replication_status\`. Views:
--- \`REPLICATION_VIEW\`, \`FULL\`
+-- \`REPLICATION_VIEW\`, \`ENCRYPTION_VIEW\`, \`FULL\`
 tClusterStates :: Lens' Table (Maybe TableClusterStates)
 tClusterStates
   = lens _tClusterStates
       (\ s a -> s{_tClusterStates = a})
 
--- | (\`CreationOnly\`) The column families configured for this table, mapped
--- by column family ID. Views: \`SCHEMA_VIEW\`, \`FULL\`
+-- | The column families configured for this table, mapped by column family
+-- ID. Views: \`SCHEMA_VIEW\`, \`FULL\`
 tColumnFamilies :: Lens' Table (Maybe TableColumnFamilies)
 tColumnFamilies
   = lens _tColumnFamilies
@@ -2876,7 +3902,8 @@ instance FromJSON Table where
               (\ o ->
                  Table' <$>
                    (o .:? "granularity") <*> (o .:? "name") <*>
-                     (o .:? "clusterStates")
+                     (o .:? "restoreInfo")
+                     <*> (o .:? "clusterStates")
                      <*> (o .:? "columnFamilies"))
 
 instance ToJSON Table where
@@ -2885,8 +3912,107 @@ instance ToJSON Table where
               (catMaybes
                  [("granularity" .=) <$> _tGranularity,
                   ("name" .=) <$> _tName,
+                  ("restoreInfo" .=) <$> _tRestoreInfo,
                   ("clusterStates" .=) <$> _tClusterStates,
                   ("columnFamilies" .=) <$> _tColumnFamilies])
+
+-- | Metadata type for the long-running operation used to track the progress
+-- of optimizations performed on a newly restored table. This long-running
+-- operation is automatically created by the system after the successful
+-- completion of a table restore, and cannot be cancelled.
+--
+-- /See:/ 'optimizeRestoredTableMetadata' smart constructor.
+data OptimizeRestoredTableMetadata =
+  OptimizeRestoredTableMetadata'
+    { _ortmProgress :: !(Maybe OperationProgress)
+    , _ortmName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OptimizeRestoredTableMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ortmProgress'
+--
+-- * 'ortmName'
+optimizeRestoredTableMetadata
+    :: OptimizeRestoredTableMetadata
+optimizeRestoredTableMetadata =
+  OptimizeRestoredTableMetadata' {_ortmProgress = Nothing, _ortmName = Nothing}
+
+
+-- | The progress of the post-restore optimizations.
+ortmProgress :: Lens' OptimizeRestoredTableMetadata (Maybe OperationProgress)
+ortmProgress
+  = lens _ortmProgress (\ s a -> s{_ortmProgress = a})
+
+-- | Name of the restored table being optimized.
+ortmName :: Lens' OptimizeRestoredTableMetadata (Maybe Text)
+ortmName = lens _ortmName (\ s a -> s{_ortmName = a})
+
+instance FromJSON OptimizeRestoredTableMetadata where
+        parseJSON
+          = withObject "OptimizeRestoredTableMetadata"
+              (\ o ->
+                 OptimizeRestoredTableMetadata' <$>
+                   (o .:? "progress") <*> (o .:? "name"))
+
+instance ToJSON OptimizeRestoredTableMetadata where
+        toJSON OptimizeRestoredTableMetadata'{..}
+          = object
+              (catMaybes
+                 [("progress" .=) <$> _ortmProgress,
+                  ("name" .=) <$> _ortmName])
+
+-- | Information about a table restore.
+--
+-- /See:/ 'restoreInfo' smart constructor.
+data RestoreInfo =
+  RestoreInfo'
+    { _riSourceType :: !(Maybe RestoreInfoSourceType)
+    , _riBackupInfo :: !(Maybe BackupInfo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riSourceType'
+--
+-- * 'riBackupInfo'
+restoreInfo
+    :: RestoreInfo
+restoreInfo = RestoreInfo' {_riSourceType = Nothing, _riBackupInfo = Nothing}
+
+
+-- | The type of the restore source.
+riSourceType :: Lens' RestoreInfo (Maybe RestoreInfoSourceType)
+riSourceType
+  = lens _riSourceType (\ s a -> s{_riSourceType = a})
+
+-- | Information about the backup used to restore the table. The backup may
+-- no longer exist.
+riBackupInfo :: Lens' RestoreInfo (Maybe BackupInfo)
+riBackupInfo
+  = lens _riBackupInfo (\ s a -> s{_riBackupInfo = a})
+
+instance FromJSON RestoreInfo where
+        parseJSON
+          = withObject "RestoreInfo"
+              (\ o ->
+                 RestoreInfo' <$>
+                   (o .:? "sourceType") <*> (o .:? "backupInfo"))
+
+instance ToJSON RestoreInfo where
+        toJSON RestoreInfo'{..}
+          = object
+              (catMaybes
+                 [("sourceType" .=) <$> _riSourceType,
+                  ("backupInfo" .=) <$> _riBackupInfo])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -2931,13 +4057,84 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
+-- | Encryption information for a given resource. If this resource is
+-- protected with customer managed encryption, the in-use Cloud Key
+-- Management Service (Cloud KMS) key version is specified along with its
+-- status.
+--
+-- /See:/ 'encryptionInfo' smart constructor.
+data EncryptionInfo =
+  EncryptionInfo'
+    { _eiEncryptionType :: !(Maybe EncryptionInfoEncryptionType)
+    , _eiKmsKeyVersion :: !(Maybe Text)
+    , _eiEncryptionStatus :: !(Maybe Status)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eiEncryptionType'
+--
+-- * 'eiKmsKeyVersion'
+--
+-- * 'eiEncryptionStatus'
+encryptionInfo
+    :: EncryptionInfo
+encryptionInfo =
+  EncryptionInfo'
+    { _eiEncryptionType = Nothing
+    , _eiKmsKeyVersion = Nothing
+    , _eiEncryptionStatus = Nothing
+    }
+
+
+-- | Output only. The type of encryption used to protect this resource.
+eiEncryptionType :: Lens' EncryptionInfo (Maybe EncryptionInfoEncryptionType)
+eiEncryptionType
+  = lens _eiEncryptionType
+      (\ s a -> s{_eiEncryptionType = a})
+
+-- | Output only. The version of the Cloud KMS key specified in the parent
+-- cluster that is in use for the data underlying this table.
+eiKmsKeyVersion :: Lens' EncryptionInfo (Maybe Text)
+eiKmsKeyVersion
+  = lens _eiKmsKeyVersion
+      (\ s a -> s{_eiKmsKeyVersion = a})
+
+-- | Output only. The status of encrypt\/decrypt calls on underlying data for
+-- this resource. Regardless of status, the existing data is always
+-- encrypted at rest.
+eiEncryptionStatus :: Lens' EncryptionInfo (Maybe Status)
+eiEncryptionStatus
+  = lens _eiEncryptionStatus
+      (\ s a -> s{_eiEncryptionStatus = a})
+
+instance FromJSON EncryptionInfo where
+        parseJSON
+          = withObject "EncryptionInfo"
+              (\ o ->
+                 EncryptionInfo' <$>
+                   (o .:? "encryptionType") <*> (o .:? "kmsKeyVersion")
+                     <*> (o .:? "encryptionStatus"))
+
+instance ToJSON EncryptionInfo where
+        toJSON EncryptionInfo'{..}
+          = object
+              (catMaybes
+                 [("encryptionType" .=) <$> _eiEncryptionType,
+                  ("kmsKeyVersion" .=) <$> _eiKmsKeyVersion,
+                  ("encryptionStatus" .=) <$> _eiEncryptionStatus])
+
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2965,13 +4162,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -2983,9 +4197,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -3012,11 +4231,11 @@ instance ToJSON Binding where
 -- /See:/ 'instance'' smart constructor.
 data Instance =
   Instance'
-    { _iState       :: !(Maybe InstanceState)
-    , _iName        :: !(Maybe Text)
+    { _iState :: !(Maybe InstanceState)
+    , _iName :: !(Maybe Text)
     , _iDisplayName :: !(Maybe Text)
-    , _iLabels      :: !(Maybe InstanceLabels)
-    , _iType        :: !(Maybe InstanceType)
+    , _iLabels :: !(Maybe InstanceLabels)
+    , _iType :: !(Maybe InstanceType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3046,35 +4265,36 @@ instance' =
     }
 
 
--- | (\`OutputOnly\`) The current state of the instance.
+-- | Output only. The current state of the instance.
 iState :: Lens' Instance (Maybe InstanceState)
 iState = lens _iState (\ s a -> s{_iState = a})
 
--- | (\`OutputOnly\`) The unique name of the instance. Values are of the form
--- \`projects\/\/instances\/a-z+[a-z0-9]\`.
+-- | The unique name of the instance. Values are of the form
+-- \`projects\/{project}\/instances\/a-z+[a-z0-9]\`.
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
--- | The descriptive name for this instance as it appears in UIs. Can be
--- changed at any time, but should be kept globally unique to avoid
+-- | Required. The descriptive name for this instance as it appears in UIs.
+-- Can be changed at any time, but should be kept globally unique to avoid
 -- confusion.
 iDisplayName :: Lens' Instance (Maybe Text)
 iDisplayName
   = lens _iDisplayName (\ s a -> s{_iDisplayName = a})
 
--- | Labels are a flexible and lightweight mechanism for organizing cloud
--- resources into groups that reflect a customer\'s organizational needs
--- and deployment strategies. They can be used to filter resources and
--- aggregate metrics. * Label keys must be between 1 and 63 characters long
--- and must conform to the regular expression: \`\\p{Ll}\\p{Lo}{0,62}\`. *
--- Label values must be between 0 and 63 characters long and must conform
--- to the regular expression: \`[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}\`. * No more
--- than 64 labels can be associated with a given resource. * Keys and
--- values must both be under 128 bytes.
+-- | Required. Labels are a flexible and lightweight mechanism for organizing
+-- cloud resources into groups that reflect a customer\'s organizational
+-- needs and deployment strategies. They can be used to filter resources
+-- and aggregate metrics. * Label keys must be between 1 and 63 characters
+-- long and must conform to the regular expression:
+-- \`\\p{Ll}\\p{Lo}{0,62}\`. * Label values must be between 0 and 63
+-- characters long and must conform to the regular expression:
+-- \`[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}\`. * No more than 64 labels can be
+-- associated with a given resource. * Keys and values must both be under
+-- 128 bytes.
 iLabels :: Lens' Instance (Maybe InstanceLabels)
 iLabels = lens _iLabels (\ s a -> s{_iLabels = a})
 
--- | The type of the instance. Defaults to \`PRODUCTION\`.
+-- | Required. The type of the instance. Defaults to \`PRODUCTION\`.
 iType :: Lens' Instance (Maybe InstanceType)
 iType = lens _iType (\ s a -> s{_iType = a})
 

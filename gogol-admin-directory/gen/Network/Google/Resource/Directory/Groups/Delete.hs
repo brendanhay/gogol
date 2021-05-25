@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete Group
+-- Deletes a group.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.delete@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.groups.delete@.
 module Network.Google.Resource.Directory.Groups.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Directory.Groups.Delete
     , GroupsDelete
 
     -- * Request Lenses
+    , gdXgafv
+    , gdUploadProtocol
+    , gdAccessToken
     , gdGroupKey
+    , gdUploadType
+    , gdCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.groups.delete@ method which the
 -- 'GroupsDelete' request conforms to.
@@ -47,14 +52,24 @@ type GroupsDeleteResource =
          "v1" :>
            "groups" :>
              Capture "groupKey" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Delete Group
+-- | Deletes a group.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-newtype GroupsDelete =
+data GroupsDelete =
   GroupsDelete'
-    { _gdGroupKey :: Text
+    { _gdXgafv :: !(Maybe Xgafv)
+    , _gdUploadProtocol :: !(Maybe Text)
+    , _gdAccessToken :: !(Maybe Text)
+    , _gdGroupKey :: !Text
+    , _gdUploadType :: !(Maybe Text)
+    , _gdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,24 +78,74 @@ newtype GroupsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gdXgafv'
+--
+-- * 'gdUploadProtocol'
+--
+-- * 'gdAccessToken'
+--
 -- * 'gdGroupKey'
+--
+-- * 'gdUploadType'
+--
+-- * 'gdCallback'
 groupsDelete
     :: Text -- ^ 'gdGroupKey'
     -> GroupsDelete
-groupsDelete pGdGroupKey_ = GroupsDelete' {_gdGroupKey = pGdGroupKey_}
+groupsDelete pGdGroupKey_ =
+  GroupsDelete'
+    { _gdXgafv = Nothing
+    , _gdUploadProtocol = Nothing
+    , _gdAccessToken = Nothing
+    , _gdGroupKey = pGdGroupKey_
+    , _gdUploadType = Nothing
+    , _gdCallback = Nothing
+    }
 
 
--- | Email or immutable ID of the group
+-- | V1 error format.
+gdXgafv :: Lens' GroupsDelete (Maybe Xgafv)
+gdXgafv = lens _gdXgafv (\ s a -> s{_gdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+gdUploadProtocol :: Lens' GroupsDelete (Maybe Text)
+gdUploadProtocol
+  = lens _gdUploadProtocol
+      (\ s a -> s{_gdUploadProtocol = a})
+
+-- | OAuth access token.
+gdAccessToken :: Lens' GroupsDelete (Maybe Text)
+gdAccessToken
+  = lens _gdAccessToken
+      (\ s a -> s{_gdAccessToken = a})
+
+-- | Identifies the group in the API request. The value can be the group\'s
+-- email address, group alias, or the unique group ID.
 gdGroupKey :: Lens' GroupsDelete Text
 gdGroupKey
   = lens _gdGroupKey (\ s a -> s{_gdGroupKey = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+gdUploadType :: Lens' GroupsDelete (Maybe Text)
+gdUploadType
+  = lens _gdUploadType (\ s a -> s{_gdUploadType = a})
+
+-- | JSONP
+gdCallback :: Lens' GroupsDelete (Maybe Text)
+gdCallback
+  = lens _gdCallback (\ s a -> s{_gdCallback = a})
 
 instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = ()
         type Scopes GroupsDelete =
              '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsDelete'{..}
-          = go _gdGroupKey (Just AltJSON) directoryService
+          = go _gdGroupKey _gdXgafv _gdUploadProtocol
+              _gdAccessToken
+              _gdUploadType
+              _gdCallback
+              (Just AltJSON)
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsDeleteResource)
                       mempty

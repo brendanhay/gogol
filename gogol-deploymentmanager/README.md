@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Deployment Manager.
+A client library for the Google Cloud Deployment Manager V2.
 
 
 ## Contribute

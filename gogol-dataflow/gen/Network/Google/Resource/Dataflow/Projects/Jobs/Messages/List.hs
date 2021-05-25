@@ -53,8 +53,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
     , pjmlCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.messages.list@ method which the
 -- 'ProjectsJobsMessagesList' request conforms to.
@@ -72,7 +72,9 @@ type ProjectsJobsMessagesListResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "endTime" DateTime' :>
-                               QueryParam "minimumImportance" Text :>
+                               QueryParam "minimumImportance"
+                                 ProjectsJobsMessagesListMinimumImportance
+                                 :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "pageSize" (Textual Int32) :>
                                      QueryParam "callback" Text :>
@@ -89,19 +91,19 @@ type ProjectsJobsMessagesListResource =
 -- /See:/ 'projectsJobsMessagesList' smart constructor.
 data ProjectsJobsMessagesList =
   ProjectsJobsMessagesList'
-    { _pjmlXgafv             :: !(Maybe Xgafv)
-    , _pjmlJobId             :: !Text
-    , _pjmlUploadProtocol    :: !(Maybe Text)
-    , _pjmlLocation          :: !(Maybe Text)
-    , _pjmlStartTime         :: !(Maybe DateTime')
-    , _pjmlAccessToken       :: !(Maybe Text)
-    , _pjmlUploadType        :: !(Maybe Text)
-    , _pjmlEndTime           :: !(Maybe DateTime')
-    , _pjmlMinimumImportance :: !(Maybe Text)
-    , _pjmlPageToken         :: !(Maybe Text)
-    , _pjmlProjectId         :: !Text
-    , _pjmlPageSize          :: !(Maybe (Textual Int32))
-    , _pjmlCallback          :: !(Maybe Text)
+    { _pjmlXgafv :: !(Maybe Xgafv)
+    , _pjmlJobId :: !Text
+    , _pjmlUploadProtocol :: !(Maybe Text)
+    , _pjmlLocation :: !(Maybe Text)
+    , _pjmlStartTime :: !(Maybe DateTime')
+    , _pjmlAccessToken :: !(Maybe Text)
+    , _pjmlUploadType :: !(Maybe Text)
+    , _pjmlEndTime :: !(Maybe DateTime')
+    , _pjmlMinimumImportance :: !(Maybe ProjectsJobsMessagesListMinimumImportance)
+    , _pjmlPageToken :: !(Maybe Text)
+    , _pjmlProjectId :: !Text
+    , _pjmlPageSize :: !(Maybe (Textual Int32))
+    , _pjmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -208,7 +210,7 @@ pjmlEndTime
       mapping _DateTime
 
 -- | Filter to only get messages with importance >= level
-pjmlMinimumImportance :: Lens' ProjectsJobsMessagesList (Maybe Text)
+pjmlMinimumImportance :: Lens' ProjectsJobsMessagesList (Maybe ProjectsJobsMessagesListMinimumImportance)
 pjmlMinimumImportance
   = lens _pjmlMinimumImportance
       (\ s a -> s{_pjmlMinimumImportance = a})

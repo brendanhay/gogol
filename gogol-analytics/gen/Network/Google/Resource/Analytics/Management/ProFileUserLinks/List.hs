@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
     , mpfullMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileUserLinks.list@ method which the
 -- 'ManagementProFileUserLinksList' request conforms to.
@@ -67,10 +67,10 @@ type ManagementProFileUserLinksListResource =
 data ManagementProFileUserLinksList =
   ManagementProFileUserLinksList'
     { _mpfullWebPropertyId :: !Text
-    , _mpfullProFileId     :: !Text
-    , _mpfullAccountId     :: !Text
-    , _mpfullStartIndex    :: !(Maybe (Textual Int32))
-    , _mpfullMaxResults    :: !(Maybe (Textual Int32))
+    , _mpfullProFileId :: !Text
+    , _mpfullAccountId :: !Text
+    , _mpfullStartIndex :: !(Maybe (Textual Int32))
+    , _mpfullMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

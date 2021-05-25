@@ -36,8 +36,8 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
     , pcatPayload
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.provisioning.createAccountTree@ method which the
 -- 'ProvisioningCreateAccountTree' request conforms to.

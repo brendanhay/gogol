@@ -36,8 +36,8 @@ module Network.Google.Resource.Webmasters.Sites.Delete
     , sSiteURL
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.delete@ method which the
 -- 'SitesDelete' request conforms to.

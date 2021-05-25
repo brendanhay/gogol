@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
     , taiItemId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.insert@ method which the
 -- 'TimelineAttachmentsInsert' request conforms to.

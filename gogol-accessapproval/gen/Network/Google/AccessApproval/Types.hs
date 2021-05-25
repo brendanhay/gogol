@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -43,14 +43,29 @@ module Network.Google.AccessApproval.Types
     -- * DismissDecision
     , DismissDecision
     , dismissDecision
+    , ddImplicit
     , ddDismissTime
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * EnrolledServiceEnrollmentLevel
+    , EnrolledServiceEnrollmentLevel (..)
 
     -- * AccessReasonType
     , AccessReasonType (..)
 
+    -- * ResourceProperties
+    , ResourceProperties
+    , resourceProperties
+    , rpExcludesDescendants
+
     -- * AccessApprovalSettings
     , AccessApprovalSettings
     , accessApprovalSettings
+    , aasEnrolledServices
+    , aasEnrolledAncestor
     , aasName
     , aasNotificationEmails
 
@@ -58,6 +73,7 @@ module Network.Google.AccessApproval.Types
     , ApprovalRequest
     , approvalRequest
     , arRequestedResourceName
+    , arRequestedResourceProperties
     , arRequestedExpiration
     , arRequestTime
     , arRequestedReason
@@ -78,6 +94,12 @@ module Network.Google.AccessApproval.Types
     , approveApprovalRequestMessage
     , aarmExpireTime
 
+    -- * EnrolledService
+    , EnrolledService
+    , enrolledService
+    , esCloudProduct
+    , esEnrollmentLevel
+
     -- * AccessReason
     , AccessReason
     , accessReason
@@ -85,16 +107,16 @@ module Network.Google.AccessApproval.Types
     , arDetail
     ) where
 
-import           Network.Google.AccessApproval.Types.Product
-import           Network.Google.AccessApproval.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types.Product
+import Network.Google.AccessApproval.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Access Approval API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Access Approval API. This contains the host and root path used as a starting point for constructing service requests.
 accessApprovalService :: ServiceConfig
 accessApprovalService
-  = defaultService (ServiceId "accessapproval:v1beta1")
+  = defaultService (ServiceId "accessapproval:v1")
       "accessapproval.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

@@ -41,8 +41,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
     , mpfflpLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.patch@ method which the
 -- 'ManagementProFileFilterLinksPatch' request conforms to.
@@ -69,10 +69,10 @@ type ManagementProFileFilterLinksPatchResource =
 data ManagementProFileFilterLinksPatch =
   ManagementProFileFilterLinksPatch'
     { _mpfflpWebPropertyId :: !Text
-    , _mpfflpProFileId     :: !Text
-    , _mpfflpPayload       :: !ProFileFilterLink
-    , _mpfflpAccountId     :: !Text
-    , _mpfflpLinkId        :: !Text
+    , _mpfflpProFileId :: !Text
+    , _mpfflpPayload :: !ProFileFilterLink
+    , _mpfflpAccountId :: !Text
+    , _mpfflpLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

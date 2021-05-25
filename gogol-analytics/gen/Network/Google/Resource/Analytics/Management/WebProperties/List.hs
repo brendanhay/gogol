@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.List
     , mwplMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.list@ method which the
 -- 'ManagementWebPropertiesList' request conforms to.
@@ -59,7 +59,7 @@ type ManagementWebPropertiesListResource =
 -- /See:/ 'managementWebPropertiesList' smart constructor.
 data ManagementWebPropertiesList =
   ManagementWebPropertiesList'
-    { _mwplAccountId  :: !Text
+    { _mwplAccountId :: !Text
     , _mwplStartIndex :: !(Maybe (Textual Int32))
     , _mwplMaxResults :: !(Maybe (Textual Int32))
     }

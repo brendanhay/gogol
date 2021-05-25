@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the moderation status of one or more comments. The API request must
--- be authorized by the owner of the channel or video associated with the
--- comments.
+-- Sets the moderation status of one or more comments.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.setModerationStatus@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.comments.setModerationStatus@.
 module Network.Google.Resource.YouTube.Comments.SetModerationStatus
     (
     -- * REST Resource
@@ -35,13 +33,18 @@ module Network.Google.Resource.YouTube.Comments.SetModerationStatus
     , CommentsSetModerationStatus
 
     -- * Request Lenses
+    , csmsXgafv
+    , csmsUploadProtocol
     , csmsBanAuthor
     , csmsModerationStatus
+    , csmsAccessToken
+    , csmsUploadType
     , csmsId
+    , csmsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.setModerationStatus@ method which the
 -- 'CommentsSetModerationStatus' request conforms to.
@@ -50,23 +53,31 @@ type CommentsSetModerationStatusResource =
        "v3" :>
          "comments" :>
            "setModerationStatus" :>
-             QueryParam "id" Text :>
+             QueryParams "id" Text :>
                QueryParam "moderationStatus"
                  CommentsSetModerationStatusModerationStatus
                  :>
-                 QueryParam "banAuthor" Bool :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "banAuthor" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
--- | Sets the moderation status of one or more comments. The API request must
--- be authorized by the owner of the channel or video associated with the
--- comments.
+-- | Sets the moderation status of one or more comments.
 --
 -- /See:/ 'commentsSetModerationStatus' smart constructor.
 data CommentsSetModerationStatus =
   CommentsSetModerationStatus'
-    { _csmsBanAuthor        :: !Bool
+    { _csmsXgafv :: !(Maybe Xgafv)
+    , _csmsUploadProtocol :: !(Maybe Text)
+    , _csmsBanAuthor :: !Bool
     , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
-    , _csmsId               :: !Text
+    , _csmsAccessToken :: !(Maybe Text)
+    , _csmsUploadType :: !(Maybe Text)
+    , _csmsId :: ![Text]
+    , _csmsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,42 +86,88 @@ data CommentsSetModerationStatus =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'csmsXgafv'
+--
+-- * 'csmsUploadProtocol'
+--
 -- * 'csmsBanAuthor'
 --
 -- * 'csmsModerationStatus'
 --
+-- * 'csmsAccessToken'
+--
+-- * 'csmsUploadType'
+--
 -- * 'csmsId'
+--
+-- * 'csmsCallback'
 commentsSetModerationStatus
     :: CommentsSetModerationStatusModerationStatus -- ^ 'csmsModerationStatus'
-    -> Text -- ^ 'csmsId'
+    -> [Text] -- ^ 'csmsId'
     -> CommentsSetModerationStatus
 commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
   CommentsSetModerationStatus'
-    { _csmsBanAuthor = False
+    { _csmsXgafv = Nothing
+    , _csmsUploadProtocol = Nothing
+    , _csmsBanAuthor = False
     , _csmsModerationStatus = pCsmsModerationStatus_
-    , _csmsId = pCsmsId_
+    , _csmsAccessToken = Nothing
+    , _csmsUploadType = Nothing
+    , _csmsId = _Coerce # pCsmsId_
+    , _csmsCallback = Nothing
     }
 
 
--- | The banAuthor parameter lets you indicate that you want to automatically
--- reject any additional comments written by the comment\'s author. Set the
--- parameter value to true to ban the author. Note: This parameter is only
--- valid if the moderationStatus parameter is also set to rejected.
+-- | V1 error format.
+csmsXgafv :: Lens' CommentsSetModerationStatus (Maybe Xgafv)
+csmsXgafv
+  = lens _csmsXgafv (\ s a -> s{_csmsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+csmsUploadProtocol :: Lens' CommentsSetModerationStatus (Maybe Text)
+csmsUploadProtocol
+  = lens _csmsUploadProtocol
+      (\ s a -> s{_csmsUploadProtocol = a})
+
+-- | If set to true the author of the comment gets added to the ban list.
+-- This means all future comments of the author will autmomatically be
+-- rejected. Only valid in combination with STATUS_REJECTED.
 csmsBanAuthor :: Lens' CommentsSetModerationStatus Bool
 csmsBanAuthor
   = lens _csmsBanAuthor
       (\ s a -> s{_csmsBanAuthor = a})
 
--- | Identifies the new moderation status of the specified comments.
+-- | Specifies the requested moderation status. Note, comments can be in
+-- statuses, which are not available through this call. For example, this
+-- call does not allow to mark a comment as \'likely spam\'. Valid values:
+-- MODERATION_STATUS_PUBLISHED, MODERATION_STATUS_HELD_FOR_REVIEW,
+-- MODERATION_STATUS_REJECTED.
 csmsModerationStatus :: Lens' CommentsSetModerationStatus CommentsSetModerationStatusModerationStatus
 csmsModerationStatus
   = lens _csmsModerationStatus
       (\ s a -> s{_csmsModerationStatus = a})
 
--- | The id parameter specifies a comma-separated list of IDs that identify
--- the comments for which you are updating the moderation status.
-csmsId :: Lens' CommentsSetModerationStatus Text
-csmsId = lens _csmsId (\ s a -> s{_csmsId = a})
+-- | OAuth access token.
+csmsAccessToken :: Lens' CommentsSetModerationStatus (Maybe Text)
+csmsAccessToken
+  = lens _csmsAccessToken
+      (\ s a -> s{_csmsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+csmsUploadType :: Lens' CommentsSetModerationStatus (Maybe Text)
+csmsUploadType
+  = lens _csmsUploadType
+      (\ s a -> s{_csmsUploadType = a})
+
+-- | Modifies the moderation status of the comments with the given IDs
+csmsId :: Lens' CommentsSetModerationStatus [Text]
+csmsId
+  = lens _csmsId (\ s a -> s{_csmsId = a}) . _Coerce
+
+-- | JSONP
+csmsCallback :: Lens' CommentsSetModerationStatus (Maybe Text)
+csmsCallback
+  = lens _csmsCallback (\ s a -> s{_csmsCallback = a})
 
 instance GoogleRequest CommentsSetModerationStatus
          where
@@ -118,8 +175,12 @@ instance GoogleRequest CommentsSetModerationStatus
         type Scopes CommentsSetModerationStatus =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsSetModerationStatus'{..}
-          = go (Just _csmsId) (Just _csmsModerationStatus)
+          = go _csmsId (Just _csmsModerationStatus) _csmsXgafv
+              _csmsUploadProtocol
               (Just _csmsBanAuthor)
+              _csmsAccessToken
+              _csmsUploadType
+              _csmsCallback
               (Just AltJSON)
               youTubeService
           where go

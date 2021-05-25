@@ -49,8 +49,8 @@ module Network.Google.Resource.Classroom.Courses.Patch
     , cpCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.patch@ method which the
 -- 'CoursesPatch' request conforms to.
@@ -78,14 +78,14 @@ type CoursesPatchResource =
 -- /See:/ 'coursesPatch' smart constructor.
 data CoursesPatch =
   CoursesPatch'
-    { _cpXgafv          :: !(Maybe Xgafv)
+    { _cpXgafv :: !(Maybe Xgafv)
     , _cpUploadProtocol :: !(Maybe Text)
-    , _cpUpdateMask     :: !(Maybe GFieldMask)
-    , _cpAccessToken    :: !(Maybe Text)
-    , _cpUploadType     :: !(Maybe Text)
-    , _cpPayload        :: !Course
-    , _cpId             :: !Text
-    , _cpCallback       :: !(Maybe Text)
+    , _cpUpdateMask :: !(Maybe GFieldMask)
+    , _cpAccessToken :: !(Maybe Text)
+    , _cpUploadType :: !(Maybe Text)
+    , _cpPayload :: !Course
+    , _cpId :: !Text
+    , _cpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

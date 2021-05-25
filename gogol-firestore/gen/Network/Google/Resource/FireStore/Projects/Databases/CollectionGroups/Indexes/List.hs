@@ -44,8 +44,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Ind
     , pdcgilCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.indexes.list@ method which the
 -- 'ProjectsDatabasesCollectionGroupsIndexesList' request conforms to.
@@ -71,15 +71,15 @@ type ProjectsDatabasesCollectionGroupsIndexesListResource
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesList' smart constructor.
 data ProjectsDatabasesCollectionGroupsIndexesList =
   ProjectsDatabasesCollectionGroupsIndexesList'
-    { _pdcgilParent         :: !Text
-    , _pdcgilXgafv          :: !(Maybe Xgafv)
+    { _pdcgilParent :: !Text
+    , _pdcgilXgafv :: !(Maybe Xgafv)
     , _pdcgilUploadProtocol :: !(Maybe Text)
-    , _pdcgilAccessToken    :: !(Maybe Text)
-    , _pdcgilUploadType     :: !(Maybe Text)
-    , _pdcgilFilter         :: !(Maybe Text)
-    , _pdcgilPageToken      :: !(Maybe Text)
-    , _pdcgilPageSize       :: !(Maybe (Textual Int32))
-    , _pdcgilCallback       :: !(Maybe Text)
+    , _pdcgilAccessToken :: !(Maybe Text)
+    , _pdcgilUploadType :: !(Maybe Text)
+    , _pdcgilFilter :: !(Maybe Text)
+    , _pdcgilPageToken :: !(Maybe Text)
+    , _pdcgilPageSize :: !(Maybe (Textual Int32))
+    , _pdcgilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,7 +122,7 @@ projectsDatabasesCollectionGroupsIndexesList pPdcgilParent_ =
     }
 
 
--- | A parent name of the form
+-- | Required. A parent name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\`
 pdcgilParent :: Lens' ProjectsDatabasesCollectionGroupsIndexesList Text
 pdcgilParent

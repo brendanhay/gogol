@@ -43,8 +43,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Del
     , pidsdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.delete@ method which the
 -- 'ProjectsInstancesDatabasesSessionsDelete' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsInstancesDatabasesSessionsDeleteResource
 -- /See:/ 'projectsInstancesDatabasesSessionsDelete' smart constructor.
 data ProjectsInstancesDatabasesSessionsDelete =
   ProjectsInstancesDatabasesSessionsDelete'
-    { _pidsdXgafv          :: !(Maybe Xgafv)
+    { _pidsdXgafv :: !(Maybe Xgafv)
     , _pidsdUploadProtocol :: !(Maybe Text)
-    , _pidsdAccessToken    :: !(Maybe Text)
-    , _pidsdUploadType     :: !(Maybe Text)
-    , _pidsdName           :: !Text
-    , _pidsdCallback       :: !(Maybe Text)
+    , _pidsdAccessToken :: !(Maybe Text)
+    , _pidsdUploadType :: !(Maybe Text)
+    , _pidsdName :: !Text
+    , _pidsdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

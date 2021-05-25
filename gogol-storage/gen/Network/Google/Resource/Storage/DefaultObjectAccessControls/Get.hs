@@ -36,11 +36,12 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
     -- * Request Lenses
     , doacgBucket
     , doacgUserProject
+    , doacgProvisionalUserProject
     , doacgEntity
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.get@ method which the
 -- 'DefaultObjectAccessControlsGet' request conforms to.
@@ -52,8 +53,9 @@ type DefaultObjectAccessControlsGetResource =
              "defaultObjectAcl" :>
                Capture "entity" Text :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ObjectAccessControl
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ObjectAccessControl
 
 -- | Returns the default object ACL entry for the specified entity on the
 -- specified bucket.
@@ -61,9 +63,10 @@ type DefaultObjectAccessControlsGetResource =
 -- /See:/ 'defaultObjectAccessControlsGet' smart constructor.
 data DefaultObjectAccessControlsGet =
   DefaultObjectAccessControlsGet'
-    { _doacgBucket      :: !Text
+    { _doacgBucket :: !Text
     , _doacgUserProject :: !(Maybe Text)
-    , _doacgEntity      :: !Text
+    , _doacgProvisionalUserProject :: !(Maybe Text)
+    , _doacgEntity :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,6 +79,8 @@ data DefaultObjectAccessControlsGet =
 --
 -- * 'doacgUserProject'
 --
+-- * 'doacgProvisionalUserProject'
+--
 -- * 'doacgEntity'
 defaultObjectAccessControlsGet
     :: Text -- ^ 'doacgBucket'
@@ -85,6 +90,7 @@ defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
   DefaultObjectAccessControlsGet'
     { _doacgBucket = pDoacgBucket_
     , _doacgUserProject = Nothing
+    , _doacgProvisionalUserProject = Nothing
     , _doacgEntity = pDoacgEntity_
     }
 
@@ -100,6 +106,13 @@ doacgUserProject :: Lens' DefaultObjectAccessControlsGet (Maybe Text)
 doacgUserProject
   = lens _doacgUserProject
       (\ s a -> s{_doacgUserProject = a})
+
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+doacgProvisionalUserProject :: Lens' DefaultObjectAccessControlsGet (Maybe Text)
+doacgProvisionalUserProject
+  = lens _doacgProvisionalUserProject
+      (\ s a -> s{_doacgProvisionalUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -117,6 +130,7 @@ instance GoogleRequest DefaultObjectAccessControlsGet
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsGet'{..}
           = go _doacgBucket _doacgEntity _doacgUserProject
+              _doacgProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

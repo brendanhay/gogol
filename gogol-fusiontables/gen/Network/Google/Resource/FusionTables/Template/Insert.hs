@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Template.Insert
     , temTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.insert@ method which the
 -- 'TemplateInsert' request conforms to.

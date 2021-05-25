@@ -42,8 +42,8 @@ module Network.Google.Resource.Datastore.Projects.Rollback
     , prCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.rollback@ method which the
 -- 'ProjectsRollback' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsRollbackResource =
 -- /See:/ 'projectsRollback' smart constructor.
 data ProjectsRollback =
   ProjectsRollback'
-    { _prXgafv          :: !(Maybe Xgafv)
+    { _prXgafv :: !(Maybe Xgafv)
     , _prUploadProtocol :: !(Maybe Text)
-    , _prAccessToken    :: !(Maybe Text)
-    , _prUploadType     :: !(Maybe Text)
-    , _prPayload        :: !RollbackRequest
-    , _prProjectId      :: !Text
-    , _prCallback       :: !(Maybe Text)
+    , _prAccessToken :: !(Maybe Text)
+    , _prUploadType :: !(Maybe Text)
+    , _prPayload :: !RollbackRequest
+    , _prProjectId :: !Text
+    , _prCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,7 +135,7 @@ prPayload :: Lens' ProjectsRollback RollbackRequest
 prPayload
   = lens _prPayload (\ s a -> s{_prPayload = a})
 
--- | The ID of the project against which to make the request.
+-- | Required. The ID of the project against which to make the request.
 prProjectId :: Lens' ProjectsRollback Text
 prProjectId
   = lens _prProjectId (\ s a -> s{_prProjectId = a})

@@ -37,10 +37,11 @@ module Network.Google.Resource.Compute.NodeGroups.GetIAMPolicy
     , nggipProject
     , nggipZone
     , nggipResource
+    , nggipOptionsRequestedPolicyVersion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.getIamPolicy@ method which the
 -- 'NodeGroupsGetIAMPolicy' request conforms to.
@@ -54,7 +55,9 @@ type NodeGroupsGetIAMPolicyResource =
                  "nodeGroups" :>
                    Capture "resource" Text :>
                      "getIamPolicy" :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                       QueryParam "optionsRequestedPolicyVersion"
+                         (Textual Int32)
+                         :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -62,9 +65,10 @@ type NodeGroupsGetIAMPolicyResource =
 -- /See:/ 'nodeGroupsGetIAMPolicy' smart constructor.
 data NodeGroupsGetIAMPolicy =
   NodeGroupsGetIAMPolicy'
-    { _nggipProject  :: !Text
-    , _nggipZone     :: !Text
+    { _nggipProject :: !Text
+    , _nggipZone :: !Text
     , _nggipResource :: !Text
+    , _nggipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,6 +82,8 @@ data NodeGroupsGetIAMPolicy =
 -- * 'nggipZone'
 --
 -- * 'nggipResource'
+--
+-- * 'nggipOptionsRequestedPolicyVersion'
 nodeGroupsGetIAMPolicy
     :: Text -- ^ 'nggipProject'
     -> Text -- ^ 'nggipZone'
@@ -88,6 +94,7 @@ nodeGroupsGetIAMPolicy pNggipProject_ pNggipZone_ pNggipResource_ =
     { _nggipProject = pNggipProject_
     , _nggipZone = pNggipZone_
     , _nggipResource = pNggipResource_
+    , _nggipOptionsRequestedPolicyVersion = Nothing
     }
 
 
@@ -107,6 +114,13 @@ nggipResource
   = lens _nggipResource
       (\ s a -> s{_nggipResource = a})
 
+-- | Requested IAM Policy version.
+nggipOptionsRequestedPolicyVersion :: Lens' NodeGroupsGetIAMPolicy (Maybe Int32)
+nggipOptionsRequestedPolicyVersion
+  = lens _nggipOptionsRequestedPolicyVersion
+      (\ s a -> s{_nggipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 instance GoogleRequest NodeGroupsGetIAMPolicy where
         type Rs NodeGroupsGetIAMPolicy = Policy
         type Scopes NodeGroupsGetIAMPolicy =
@@ -115,6 +129,7 @@ instance GoogleRequest NodeGroupsGetIAMPolicy where
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NodeGroupsGetIAMPolicy'{..}
           = go _nggipProject _nggipZone _nggipResource
+              _nggipOptionsRequestedPolicyVersion
               (Just AltJSON)
               computeService
           where go

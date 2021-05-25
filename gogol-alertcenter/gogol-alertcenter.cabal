@@ -1,6 +1,6 @@
 name:                  gogol-alertcenter
 version:               0.5.0
-synopsis:              Google G Suite Alert Center SDK.
+synopsis:              Google Workspace Alert Center SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -35,10 +35,13 @@ library
     exposed-modules:
           Network.Google.AlertCenter
         , Network.Google.AlertCenter.Types
+        , Network.Google.Resource.AlertCenter.Alerts.BatchDelete
+        , Network.Google.Resource.AlertCenter.Alerts.BatchUndelete
         , Network.Google.Resource.AlertCenter.Alerts.Delete
         , Network.Google.Resource.AlertCenter.Alerts.Feedback.Create
         , Network.Google.Resource.AlertCenter.Alerts.Feedback.List
         , Network.Google.Resource.AlertCenter.Alerts.Get
+        , Network.Google.Resource.AlertCenter.Alerts.GetMetadata
         , Network.Google.Resource.AlertCenter.Alerts.List
         , Network.Google.Resource.AlertCenter.Alerts.Undelete
         , Network.Google.Resource.AlertCenter.GetSettings

@@ -38,8 +38,8 @@ module Network.Google.Resource.Calendar.ACL.Insert
     , aiSendNotifications
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.insert@ method which the
 -- 'ACLInsert' request conforms to.
@@ -58,8 +58,8 @@ type ACLInsertResource =
 -- /See:/ 'aclInsert' smart constructor.
 data ACLInsert =
   ACLInsert'
-    { _aiCalendarId        :: !Text
-    , _aiPayload           :: !ACLRule
+    { _aiCalendarId :: !Text
+    , _aiPayload :: !ACLRule
     , _aiSendNotifications :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

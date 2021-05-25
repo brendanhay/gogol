@@ -22,12 +22,12 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.testIamPermissions@.
 module Network.Google.Resource.Ml.Projects.Models.TestIAMPermissions
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Ml.Projects.Models.TestIAMPermissions
     , pmtipCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.testIamPermissions@ method which the
 -- 'ProjectsModelsTestIAMPermissions' request conforms to.
@@ -68,21 +68,21 @@ type ProjectsModelsTestIAMPermissionsResource =
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsModelsTestIAMPermissions' smart constructor.
 data ProjectsModelsTestIAMPermissions =
   ProjectsModelsTestIAMPermissions'
-    { _pmtipXgafv          :: !(Maybe Xgafv)
+    { _pmtipXgafv :: !(Maybe Xgafv)
     , _pmtipUploadProtocol :: !(Maybe Text)
-    , _pmtipAccessToken    :: !(Maybe Text)
-    , _pmtipUploadType     :: !(Maybe Text)
-    , _pmtipPayload        :: !GoogleIAMV1__TestIAMPermissionsRequest
-    , _pmtipResource       :: !Text
-    , _pmtipCallback       :: !(Maybe Text)
+    , _pmtipAccessToken :: !(Maybe Text)
+    , _pmtipUploadType :: !(Maybe Text)
+    , _pmtipPayload :: !GoogleIAMV1__TestIAMPermissionsRequest
+    , _pmtipResource :: !Text
+    , _pmtipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

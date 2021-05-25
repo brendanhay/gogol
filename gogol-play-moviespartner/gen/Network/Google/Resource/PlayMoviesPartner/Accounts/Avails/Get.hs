@@ -44,8 +44,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
     , aagCallback
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.avails.get@ method which the
 -- 'AccountsAvailsGet' request conforms to.
@@ -69,15 +69,15 @@ type AccountsAvailsGetResource =
 -- /See:/ 'accountsAvailsGet' smart constructor.
 data AccountsAvailsGet =
   AccountsAvailsGet'
-    { _aagXgafv          :: !(Maybe Xgafv)
+    { _aagXgafv :: !(Maybe Xgafv)
     , _aagUploadProtocol :: !(Maybe Text)
-    , _aagPp             :: !Bool
-    , _aagAccessToken    :: !(Maybe Text)
-    , _aagUploadType     :: !(Maybe Text)
-    , _aagAvailId        :: !Text
-    , _aagAccountId      :: !Text
-    , _aagBearerToken    :: !(Maybe Text)
-    , _aagCallback       :: !(Maybe Text)
+    , _aagPp :: !Bool
+    , _aagAccessToken :: !(Maybe Text)
+    , _aagUploadType :: !(Maybe Text)
+    , _aagAvailId :: !Text
+    , _aagAccountId :: !Text
+    , _aagBearerToken :: !(Maybe Text)
+    , _aagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

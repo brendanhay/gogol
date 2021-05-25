@@ -37,12 +37,13 @@ module Network.Google.Resource.Spanner.Projects.Instances.Get
     , pigUploadProtocol
     , pigAccessToken
     , pigUploadType
+    , pigFieldMask
     , pigName
     , pigCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.get@ method which the
 -- 'ProjectsInstancesGet' request conforms to.
@@ -53,20 +54,22 @@ type ProjectsInstancesGetResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Instance
+                 QueryParam "fieldMask" GFieldMask :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Instance
 
 -- | Gets information about a particular instance.
 --
 -- /See:/ 'projectsInstancesGet' smart constructor.
 data ProjectsInstancesGet =
   ProjectsInstancesGet'
-    { _pigXgafv          :: !(Maybe Xgafv)
+    { _pigXgafv :: !(Maybe Xgafv)
     , _pigUploadProtocol :: !(Maybe Text)
-    , _pigAccessToken    :: !(Maybe Text)
-    , _pigUploadType     :: !(Maybe Text)
-    , _pigName           :: !Text
-    , _pigCallback       :: !(Maybe Text)
+    , _pigAccessToken :: !(Maybe Text)
+    , _pigUploadType :: !(Maybe Text)
+    , _pigFieldMask :: !(Maybe GFieldMask)
+    , _pigName :: !Text
+    , _pigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,6 +86,8 @@ data ProjectsInstancesGet =
 --
 -- * 'pigUploadType'
 --
+-- * 'pigFieldMask'
+--
 -- * 'pigName'
 --
 -- * 'pigCallback'
@@ -95,6 +100,7 @@ projectsInstancesGet pPigName_ =
     , _pigUploadProtocol = Nothing
     , _pigAccessToken = Nothing
     , _pigUploadType = Nothing
+    , _pigFieldMask = Nothing
     , _pigName = pPigName_
     , _pigCallback = Nothing
     }
@@ -122,6 +128,12 @@ pigUploadType
   = lens _pigUploadType
       (\ s a -> s{_pigUploadType = a})
 
+-- | If field_mask is present, specifies the subset of Instance fields that
+-- should be returned. If absent, all Instance fields are returned.
+pigFieldMask :: Lens' ProjectsInstancesGet (Maybe GFieldMask)
+pigFieldMask
+  = lens _pigFieldMask (\ s a -> s{_pigFieldMask = a})
+
 -- | Required. The name of the requested instance. Values are of the form
 -- \`projects\/\/instances\/\`.
 pigName :: Lens' ProjectsInstancesGet Text
@@ -141,6 +153,7 @@ instance GoogleRequest ProjectsInstancesGet where
           = go _pigName _pigXgafv _pigUploadProtocol
               _pigAccessToken
               _pigUploadType
+              _pigFieldMask
               _pigCallback
               (Just AltJSON)
               spannerService

@@ -20,11 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Requests deletion of a Folder. The Folder is moved into the
+-- Requests deletion of a folder. The folder is moved into the
 -- DELETE_REQUESTED state immediately, and is deleted approximately 30 days
--- later. This method may only be called on an empty Folder in the ACTIVE
--- state, where a Folder is empty if it doesn\'t contain any Folders or
--- Projects in the ACTIVE state. The caller must have
+-- later. This method may only be called on an empty folder, where a folder
+-- is empty if it doesn\'t contain any folders or projects in the ACTIVE
+-- state. If called on a folder in DELETE_REQUESTED state the operation
+-- will result in a no-op success. The caller must have
 -- \`resourcemanager.folders.delete\` permission on the identified folder.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.folders.delete@.
@@ -46,37 +47,38 @@ module Network.Google.Resource.CloudResourceManager.Folders.Delete
     , fdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.delete@ method which the
 -- 'FoldersDelete' request conforms to.
 type FoldersDeleteResource =
-     "v2" :>
+     "v3" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Folder
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Requests deletion of a Folder. The Folder is moved into the
+-- | Requests deletion of a folder. The folder is moved into the
 -- DELETE_REQUESTED state immediately, and is deleted approximately 30 days
--- later. This method may only be called on an empty Folder in the ACTIVE
--- state, where a Folder is empty if it doesn\'t contain any Folders or
--- Projects in the ACTIVE state. The caller must have
+-- later. This method may only be called on an empty folder, where a folder
+-- is empty if it doesn\'t contain any folders or projects in the ACTIVE
+-- state. If called on a folder in DELETE_REQUESTED state the operation
+-- will result in a no-op success. The caller must have
 -- \`resourcemanager.folders.delete\` permission on the identified folder.
 --
 -- /See:/ 'foldersDelete' smart constructor.
 data FoldersDelete =
   FoldersDelete'
-    { _fdXgafv          :: !(Maybe Xgafv)
+    { _fdXgafv :: !(Maybe Xgafv)
     , _fdUploadProtocol :: !(Maybe Text)
-    , _fdAccessToken    :: !(Maybe Text)
-    , _fdUploadType     :: !(Maybe Text)
-    , _fdName           :: !Text
-    , _fdCallback       :: !(Maybe Text)
+    , _fdAccessToken :: !(Maybe Text)
+    , _fdUploadType :: !(Maybe Text)
+    , _fdName :: !Text
+    , _fdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,8 +133,8 @@ fdUploadType :: Lens' FoldersDelete (Maybe Text)
 fdUploadType
   = lens _fdUploadType (\ s a -> s{_fdUploadType = a})
 
--- | the resource name of the Folder to be deleted. Must be of the form
--- \`folders\/{folder_id}\`.
+-- | Required. The resource name of the folder to be deleted. Must be of the
+-- form \`folders\/{folder_id}\`.
 fdName :: Lens' FoldersDelete Text
 fdName = lens _fdName (\ s a -> s{_fdName = a})
 
@@ -142,7 +144,7 @@ fdCallback
   = lens _fdCallback (\ s a -> s{_fdCallback = a})
 
 instance GoogleRequest FoldersDelete where
-        type Rs FoldersDelete = Folder
+        type Rs FoldersDelete = Operation
         type Scopes FoldersDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient FoldersDelete'{..}

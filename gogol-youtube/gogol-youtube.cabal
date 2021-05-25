@@ -1,6 +1,6 @@
 name:                  gogol-youtube
 version:               0.5.0
-synopsis:              Google YouTube Data SDK.
+synopsis:              Google YouTube Data API v3 SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Supports core YouTube features, such as uploading videos, creating and
-    managing playlists, searching for content, and much more.
+    The YouTube Data API v3 is an API that provides access to YouTube data,
+    such as videos, playlists, and channels.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -34,7 +34,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.YouTube.Activities.Insert
+          Network.Google.Resource.YouTube.AbuseReports.Insert
         , Network.Google.Resource.YouTube.Activities.List
         , Network.Google.Resource.YouTube.Captions.Delete
         , Network.Google.Resource.YouTube.Captions.Download
@@ -50,18 +50,15 @@ library
         , Network.Google.Resource.YouTube.Channels.Update
         , Network.Google.Resource.YouTube.CommentThreads.Insert
         , Network.Google.Resource.YouTube.CommentThreads.List
-        , Network.Google.Resource.YouTube.CommentThreads.Update
         , Network.Google.Resource.YouTube.Comments.Delete
         , Network.Google.Resource.YouTube.Comments.Insert
         , Network.Google.Resource.YouTube.Comments.List
         , Network.Google.Resource.YouTube.Comments.MarkAsSpam
         , Network.Google.Resource.YouTube.Comments.SetModerationStatus
         , Network.Google.Resource.YouTube.Comments.Update
-        , Network.Google.Resource.YouTube.GuideCategories.List
         , Network.Google.Resource.YouTube.I18nLanguages.List
         , Network.Google.Resource.YouTube.I18nRegions.List
         , Network.Google.Resource.YouTube.LiveBroadcasts.Bind
-        , Network.Google.Resource.YouTube.LiveBroadcasts.Control
         , Network.Google.Resource.YouTube.LiveBroadcasts.Delete
         , Network.Google.Resource.YouTube.LiveBroadcasts.Insert
         , Network.Google.Resource.YouTube.LiveBroadcasts.List
@@ -79,6 +76,8 @@ library
         , Network.Google.Resource.YouTube.LiveStreams.Insert
         , Network.Google.Resource.YouTube.LiveStreams.List
         , Network.Google.Resource.YouTube.LiveStreams.Update
+        , Network.Google.Resource.YouTube.Members.List
+        , Network.Google.Resource.YouTube.MembershipsLevels.List
         , Network.Google.Resource.YouTube.PlayListItems.Delete
         , Network.Google.Resource.YouTube.PlayListItems.Insert
         , Network.Google.Resource.YouTube.PlayListItems.List
@@ -88,11 +87,15 @@ library
         , Network.Google.Resource.YouTube.PlayLists.List
         , Network.Google.Resource.YouTube.PlayLists.Update
         , Network.Google.Resource.YouTube.Search.List
-        , Network.Google.Resource.YouTube.Sponsors.List
         , Network.Google.Resource.YouTube.Subscriptions.Delete
         , Network.Google.Resource.YouTube.Subscriptions.Insert
         , Network.Google.Resource.YouTube.Subscriptions.List
         , Network.Google.Resource.YouTube.SuperChatEvents.List
+        , Network.Google.Resource.YouTube.Tests.Insert
+        , Network.Google.Resource.YouTube.ThirdPartyLinks.Delete
+        , Network.Google.Resource.YouTube.ThirdPartyLinks.Insert
+        , Network.Google.Resource.YouTube.ThirdPartyLinks.List
+        , Network.Google.Resource.YouTube.ThirdPartyLinks.Update
         , Network.Google.Resource.YouTube.Thumbnails.Set
         , Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
         , Network.Google.Resource.YouTube.VideoCategories.List
@@ -105,6 +108,7 @@ library
         , Network.Google.Resource.YouTube.Videos.Update
         , Network.Google.Resource.YouTube.Watermarks.Set
         , Network.Google.Resource.YouTube.Watermarks.UnSet
+        , Network.Google.Resource.YouTube.YouTube.V3.UpdateCommentThreads
         , Network.Google.YouTube
         , Network.Google.YouTube.Types
 

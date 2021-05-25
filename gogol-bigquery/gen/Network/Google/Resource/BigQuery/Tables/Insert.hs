@@ -38,8 +38,8 @@ module Network.Google.Resource.BigQuery.Tables.Insert
     , tiProjectId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.insert@ method which the
 -- 'TablesInsert' request conforms to.
@@ -59,7 +59,7 @@ type TablesInsertResource =
 -- /See:/ 'tablesInsert' smart constructor.
 data TablesInsert =
   TablesInsert'
-    { _tiPayload   :: !Table
+    { _tiPayload :: !Table
     , _tiDataSetId :: !Text
     , _tiProjectId :: !Text
     }

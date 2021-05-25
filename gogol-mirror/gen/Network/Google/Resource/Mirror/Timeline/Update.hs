@@ -37,8 +37,8 @@ module Network.Google.Resource.Mirror.Timeline.Update
     , tuId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.update@ method which the
 -- 'TimelineUpdate' request conforms to.
@@ -67,7 +67,7 @@ type TimelineUpdateResource =
 data TimelineUpdate =
   TimelineUpdate'
     { _tuPayload :: !TimelineItem
-    , _tuId      :: !Text
+    , _tuId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NodeGroups.TestIAMPermissions
     , ngtipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.testIamPermissions@ method which the
 -- 'NodeGroupsTestIAMPermissions' request conforms to.
@@ -63,9 +63,9 @@ type NodeGroupsTestIAMPermissionsResource =
 -- /See:/ 'nodeGroupsTestIAMPermissions' smart constructor.
 data NodeGroupsTestIAMPermissions =
   NodeGroupsTestIAMPermissions'
-    { _ngtipProject  :: !Text
-    , _ngtipZone     :: !Text
-    , _ngtipPayload  :: !TestPermissionsRequest
+    { _ngtipProject :: !Text
+    , _ngtipZone :: !Text
+    , _ngtipPayload :: !TestPermissionsRequest
     , _ngtipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for books and manages your Google Books library.
+-- The Google Books API allows clients to access the Google Books
+-- repository.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference>
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference>
 module Network.Google.Books
     (
     -- * Service Configuration
@@ -199,11 +200,25 @@ module Network.Google.Books
     , aKind
     , aItems
 
+    -- ** SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    , SeriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    , seriesSeriesItemSeriesSubscriptionReleaseInfoCurrentReleaseInfo
+    , ssissricriReleaseTime
+    , ssissricriCurrencyCode
+    , ssissricriAmountInMicros
+    , ssissricriReleaseNumber
+
     -- ** VolumesListProjection
     , VolumesListProjection (..)
 
     -- ** MyLibraryBookshelvesVolumesListProjection
     , MyLibraryBookshelvesVolumesListProjection (..)
+
+    -- ** VolumeVolumeInfoReadingModes
+    , VolumeVolumeInfoReadingModes
+    , volumeVolumeInfoReadingModes
+    , vvirmImage
+    , vvirmText
 
     -- ** VolumesListOrderBy
     , VolumesListOrderBy (..)
@@ -236,19 +251,6 @@ module Network.Google.Books
     , rsExtraDescription
     , rsURL
     , rsDescription
-
-    -- ** AnnotationData
-    , AnnotationData
-    , annotationData
-    , annEncodedData
-    , annKind
-    , annData
-    , annSelfLink
-    , annAnnotationType
-    , annVolumeId
-    , annId
-    , annUpdated
-    , annLayerId
 
     -- ** Volumeannotation
     , Volumeannotation
@@ -285,23 +287,23 @@ module Network.Google.Books
     -- ** Annotation
     , Annotation
     , annotation
-    , aaSelectedText
-    , aaLayerSummary
-    , aaHighlightStyle
-    , aaClientVersionRanges
-    , aaPageIds
-    , aaKind
-    , aaData
-    , aaCreated
-    , aaAfterSelectedText
-    , aaSelfLink
-    , aaCurrentVersionRanges
-    , aaVolumeId
-    , aaBeforeSelectedText
-    , aaId
-    , aaDeleted
-    , aaUpdated
-    , aaLayerId
+    , annSelectedText
+    , annLayerSummary
+    , annHighlightStyle
+    , annClientVersionRanges
+    , annPageIds
+    , annKind
+    , annData
+    , annCreated
+    , annAfterSelectedText
+    , annSelfLink
+    , annCurrentVersionRanges
+    , annVolumeId
+    , annBeforeSelectedText
+    , annId
+    , annDeleted
+    , annUpdated
+    , annLayerId
 
     -- ** ReviewAuthor
     , ReviewAuthor
@@ -391,6 +393,14 @@ module Network.Google.Books
     , vvipsContainsEpubBubbles
     , vvipsImageBubbleVersion
 
+    -- ** SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    , SeriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    , seriesSeriesItemSeriesSubscriptionReleaseInfoNextReleaseInfo
+    , ssissrinriReleaseTime
+    , ssissrinriCurrencyCode
+    , ssissrinriAmountInMicros
+    , ssissrinriReleaseNumber
+
     -- ** MyLibraryBookshelvesRemoveVolumeReason
     , MyLibraryBookshelvesRemoveVolumeReason (..)
 
@@ -451,6 +461,10 @@ module Network.Google.Books
     , bUpdated
     , bTitle
     , bDescription
+
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** Notification
     , Notification
@@ -558,12 +572,6 @@ module Network.Google.Books
     , vvId
     , vvRecommendedInfo
     , vvVolumeInfo
-
-    -- ** GeolayerDataGeoBoundaryItemItem
-    , GeolayerDataGeoBoundaryItemItem
-    , geolayerDataGeoBoundaryItemItem
-    , gdgbiiLatitude
-    , gdgbiiLongitude
 
     -- ** Series
     , Series
@@ -761,6 +769,19 @@ module Network.Google.Books
     , vsirpAmount
     , vsirpCurrencyCode
 
+    -- ** DictionaryAnnotationData
+    , DictionaryAnnotationData
+    , dictionaryAnnotationData
+    , dadKind
+    , dadData
+    , dadSelfLink
+    , dadAnnotationType
+    , dadEncodedData
+    , dadVolumeId
+    , dadId
+    , dadUpdated
+    , dadLayerId
+
     -- ** VolumeSaleInfoListPrice
     , VolumeSaleInfoListPrice
     , volumeSaleInfoListPrice
@@ -782,12 +803,28 @@ module Network.Google.Books
     , fimAgeGroup
     , fimIsInFamily
 
+    -- ** GeoAnnotationData
+    , GeoAnnotationData
+    , geoAnnotationData
+    , gadKind
+    , gadData
+    , gadSelfLink
+    , gadAnnotationType
+    , gadEncodedData
+    , gadVolumeId
+    , gadId
+    , gadUpdated
+    , gadLayerId
+
     -- ** Volume2
     , Volume2
     , volume2
     , voloNextPageToken
     , voloKind
     , voloItems
+
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** Review
     , Review
@@ -809,6 +846,14 @@ module Network.Google.Books
     , vuirpEndUtcSec
     , vuirpStartUtcSec
 
+    -- ** SeriesSeriesItemSeriesSubscriptionReleaseInfo
+    , SeriesSeriesItemSeriesSubscriptionReleaseInfo
+    , seriesSeriesItemSeriesSubscriptionReleaseInfo
+    , ssissriSeriesSubscriptionType
+    , ssissriCancelTime
+    , ssissriCurrentReleaseInfo
+    , ssissriNextReleaseInfo
+
     -- ** VolumeSaleInfo
     , VolumeSaleInfo
     , volumeSaleInfo
@@ -827,11 +872,16 @@ module Network.Google.Books
     -- ** SeriesSeriesItem
     , SeriesSeriesItem
     , seriesSeriesItem
+    , ssiIsComplete
     , ssiSeriesId
     , ssiImageURL
+    , ssiSeriesSubscriptionReleaseInfo
+    , ssiEligibleForSubscription
+    , ssiSeriesFormatType
     , ssiBannerImageURL
     , ssiTitle
     , ssiSeriesType
+    , ssiSubscriptionId
 
     -- ** Metadata
     , Metadata
@@ -851,12 +901,12 @@ module Network.Google.Books
     , vvidWidth
     , vvidThickness
 
-    -- ** RequestAccess
-    , RequestAccess
-    , requestAccess
-    , raConcurrentAccess
-    , raKind
-    , raDownloadAccess
+    -- ** RequestAccessData
+    , RequestAccessData
+    , requestAccessData
+    , radConcurrentAccess
+    , radKind
+    , radDownloadAccess
 
     -- ** FamilyInfo
     , FamilyInfo
@@ -1143,59 +1193,59 @@ module Network.Google.Books
     , layItems
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Books.Bookshelves.Get
-import           Network.Google.Resource.Books.Bookshelves.List
-import           Network.Google.Resource.Books.Bookshelves.Volumes.List
-import           Network.Google.Resource.Books.CloudLoading.AddBook
-import           Network.Google.Resource.Books.CloudLoading.DeleteBook
-import           Network.Google.Resource.Books.CloudLoading.UpdateBook
-import           Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
-import           Network.Google.Resource.Books.Familysharing.GetFamilyInfo
-import           Network.Google.Resource.Books.Familysharing.Share
-import           Network.Google.Resource.Books.Familysharing.Unshare
-import           Network.Google.Resource.Books.Layers.AnnotationData.Get
-import           Network.Google.Resource.Books.Layers.AnnotationData.List
-import           Network.Google.Resource.Books.Layers.Get
-import           Network.Google.Resource.Books.Layers.List
-import           Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
-import           Network.Google.Resource.Books.Layers.VolumeAnnotations.List
-import           Network.Google.Resource.Books.MyConfig.GetUserSettings
-import           Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
-import           Network.Google.Resource.Books.MyConfig.RequestAccess
-import           Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
-import           Network.Google.Resource.Books.MyConfig.UpdateUserSettings
-import           Network.Google.Resource.Books.MyLibrary.Annotations.Delete
-import           Network.Google.Resource.Books.MyLibrary.Annotations.Insert
-import           Network.Google.Resource.Books.MyLibrary.Annotations.List
-import           Network.Google.Resource.Books.MyLibrary.Annotations.Summary
-import           Network.Google.Resource.Books.MyLibrary.Annotations.Update
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.List
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
-import           Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
-import           Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
-import           Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
-import           Network.Google.Resource.Books.Notification.Get
-import           Network.Google.Resource.Books.Onboarding.ListCategories
-import           Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
-import           Network.Google.Resource.Books.Personalizedstream.Get
-import           Network.Google.Resource.Books.PromoOffer.Accept
-import           Network.Google.Resource.Books.PromoOffer.Dismiss
-import           Network.Google.Resource.Books.PromoOffer.Get
-import           Network.Google.Resource.Books.Series.Get
-import           Network.Google.Resource.Books.Series.Membership.Get
-import           Network.Google.Resource.Books.Volumes.Associated.List
-import           Network.Google.Resource.Books.Volumes.Get
-import           Network.Google.Resource.Books.Volumes.List
-import           Network.Google.Resource.Books.Volumes.Mybooks.List
-import           Network.Google.Resource.Books.Volumes.Recommended.List
-import           Network.Google.Resource.Books.Volumes.Recommended.Rate
-import           Network.Google.Resource.Books.Volumes.UserUploaded.List
+import Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Resource.Books.Bookshelves.Get
+import Network.Google.Resource.Books.Bookshelves.List
+import Network.Google.Resource.Books.Bookshelves.Volumes.List
+import Network.Google.Resource.Books.CloudLoading.AddBook
+import Network.Google.Resource.Books.CloudLoading.DeleteBook
+import Network.Google.Resource.Books.CloudLoading.UpdateBook
+import Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
+import Network.Google.Resource.Books.Familysharing.GetFamilyInfo
+import Network.Google.Resource.Books.Familysharing.Share
+import Network.Google.Resource.Books.Familysharing.Unshare
+import Network.Google.Resource.Books.Layers.AnnotationData.Get
+import Network.Google.Resource.Books.Layers.AnnotationData.List
+import Network.Google.Resource.Books.Layers.Get
+import Network.Google.Resource.Books.Layers.List
+import Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
+import Network.Google.Resource.Books.Layers.VolumeAnnotations.List
+import Network.Google.Resource.Books.MyConfig.GetUserSettings
+import Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
+import Network.Google.Resource.Books.MyConfig.RequestAccess
+import Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
+import Network.Google.Resource.Books.MyConfig.UpdateUserSettings
+import Network.Google.Resource.Books.MyLibrary.Annotations.Delete
+import Network.Google.Resource.Books.MyLibrary.Annotations.Insert
+import Network.Google.Resource.Books.MyLibrary.Annotations.List
+import Network.Google.Resource.Books.MyLibrary.Annotations.Summary
+import Network.Google.Resource.Books.MyLibrary.Annotations.Update
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.List
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
+import Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
+import Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
+import Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
+import Network.Google.Resource.Books.Notification.Get
+import Network.Google.Resource.Books.Onboarding.ListCategories
+import Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
+import Network.Google.Resource.Books.Personalizedstream.Get
+import Network.Google.Resource.Books.PromoOffer.Accept
+import Network.Google.Resource.Books.PromoOffer.Dismiss
+import Network.Google.Resource.Books.PromoOffer.Get
+import Network.Google.Resource.Books.Series.Get
+import Network.Google.Resource.Books.Series.Membership.Get
+import Network.Google.Resource.Books.Volumes.Associated.List
+import Network.Google.Resource.Books.Volumes.Get
+import Network.Google.Resource.Books.Volumes.List
+import Network.Google.Resource.Books.Volumes.Mybooks.List
+import Network.Google.Resource.Books.Volumes.Recommended.List
+import Network.Google.Resource.Books.Volumes.Recommended.Rate
+import Network.Google.Resource.Books.Volumes.UserUploaded.List
 
 {- $resources
 TODO

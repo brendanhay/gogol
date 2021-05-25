@@ -44,8 +44,8 @@ module Network.Google.Resource.ServiceUser.Projects.Services.Disable
     , psdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceUser.Types
+import Network.Google.Prelude
+import Network.Google.ServiceUser.Types
 
 -- | A resource alias for @serviceuser.projects.services.disable@ method which the
 -- 'ProjectsServicesDisable' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsServicesDisableResource =
 -- /See:/ 'projectsServicesDisable' smart constructor.
 data ProjectsServicesDisable =
   ProjectsServicesDisable'
-    { _psdXgafv          :: !(Maybe Xgafv)
+    { _psdXgafv :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
-    , _psdAccessToken    :: !(Maybe Text)
-    , _psdUploadType     :: !(Maybe Text)
-    , _psdPayload        :: !DisableServiceRequest
-    , _psdName           :: !Text
-    , _psdCallback       :: !(Maybe Text)
+    , _psdAccessToken :: !(Maybe Text)
+    , _psdUploadType :: !(Maybe Text)
+    , _psdPayload :: !DisableServiceRequest
+    , _psdName :: !Text
+    , _psdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

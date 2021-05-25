@@ -46,6 +46,20 @@ library
         , Network.Google.Resource.IAM.Organizations.Roles.Patch
         , Network.Google.Resource.IAM.Organizations.Roles.Undelete
         , Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Create
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Delete
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Get
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.List
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Operations.Get
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Patch
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Create
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Delete
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Get
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.List
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Operations.Get
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Patch
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Undelete
+        , Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Undelete
         , Network.Google.Resource.IAM.Projects.Roles.Create
         , Network.Google.Resource.IAM.Projects.Roles.Delete
         , Network.Google.Resource.IAM.Projects.Roles.Get
@@ -62,6 +76,7 @@ library
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Upload
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.List
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy

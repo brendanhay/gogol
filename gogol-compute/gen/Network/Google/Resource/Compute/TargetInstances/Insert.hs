@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetInstances.Insert
     , tiiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetInstances.insert@ method which the
 -- 'TargetInstancesInsert' request conforms to.
@@ -65,9 +65,9 @@ type TargetInstancesInsertResource =
 data TargetInstancesInsert =
   TargetInstancesInsert'
     { _tiiRequestId :: !(Maybe Text)
-    , _tiiProject   :: !Text
-    , _tiiZone      :: !Text
-    , _tiiPayload   :: !TargetInstance
+    , _tiiProject :: !Text
+    , _tiiZone :: !Text
+    , _tiiPayload :: !TargetInstance
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

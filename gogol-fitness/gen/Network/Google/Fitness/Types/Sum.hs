@@ -16,41 +16,53 @@
 --
 module Network.Google.Fitness.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The type of a bucket signifies how the data aggregation is performed in
 -- the bucket.
 data AggregateBucketType
-    = ABTActivitySegment
-      -- ^ @activitySegment@
-    | ABTActivityType
-      -- ^ @activityType@
-    | ABTSession
-      -- ^ @session@
+    = ABTUnknown
+      -- ^ @unknown@
     | ABTTime
       -- ^ @time@
-    | ABTUnknown
-      -- ^ @unknown@
+      -- Denotes that bucketing by time is requested. When this is specified, the
+      -- timeBucketDurationMillis field is used to determine how many buckets
+      -- will be returned.
+    | ABTSession
+      -- ^ @session@
+      -- Denotes that bucketing by session is requested. When this is specified,
+      -- only data that occurs within sessions that begin and end within the
+      -- dataset time frame, is included in the results.
+    | ABTActivityType
+      -- ^ @activityType@
+      -- Denotes that bucketing by activity type is requested. When this is
+      -- specified, there will be one bucket for each unique activity type that a
+      -- user participated in, during the dataset time frame of interest.
+    | ABTActivitySegment
+      -- ^ @activitySegment@
+      -- Denotes that bucketing by individual activity segment is requested. This
+      -- will aggregate data by the time boundaries specified by each activity
+      -- segment occurring within the dataset time frame of interest.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AggregateBucketType
 
 instance FromHttpApiData AggregateBucketType where
     parseQueryParam = \case
-        "activitySegment" -> Right ABTActivitySegment
-        "activityType" -> Right ABTActivityType
-        "session" -> Right ABTSession
-        "time" -> Right ABTTime
         "unknown" -> Right ABTUnknown
+        "time" -> Right ABTTime
+        "session" -> Right ABTSession
+        "activityType" -> Right ABTActivityType
+        "activitySegment" -> Right ABTActivitySegment
         x -> Left ("Unable to parse AggregateBucketType from: " <> x)
 
 instance ToHttpApiData AggregateBucketType where
     toQueryParam = \case
-        ABTActivitySegment -> "activitySegment"
-        ABTActivityType -> "activityType"
-        ABTSession -> "session"
-        ABTTime -> "time"
         ABTUnknown -> "unknown"
+        ABTTime -> "time"
+        ABTSession -> "session"
+        ABTActivityType -> "activityType"
+        ABTActivitySegment -> "activitySegment"
 
 instance FromJSON AggregateBucketType where
     parseJSON = parseJSONText "AggregateBucketType"
@@ -61,24 +73,24 @@ instance ToJSON AggregateBucketType where
 -- | A constant describing the type of this data source. Indicates whether
 -- this data source produces raw or derived data.
 data DataSourceType
-    = Derived
-      -- ^ @derived@
-    | Raw
+    = Raw
       -- ^ @raw@
+    | Derived
+      -- ^ @derived@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataSourceType
 
 instance FromHttpApiData DataSourceType where
     parseQueryParam = \case
-        "derived" -> Right Derived
         "raw" -> Right Raw
+        "derived" -> Right Derived
         x -> Left ("Unable to parse DataSourceType from: " <> x)
 
 instance ToHttpApiData DataSourceType where
     toQueryParam = \case
-        Derived -> "derived"
         Raw -> "raw"
+        Derived -> "derived"
 
 instance FromJSON DataSourceType where
     parseJSON = parseJSONText "DataSourceType"
@@ -89,10 +101,10 @@ instance ToJSON DataSourceType where
 data BucketByTimePeriodType
     = Day
       -- ^ @day@
-    | Month
-      -- ^ @month@
     | Week
       -- ^ @week@
+    | Month
+      -- ^ @month@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketByTimePeriodType
@@ -100,15 +112,15 @@ instance Hashable BucketByTimePeriodType
 instance FromHttpApiData BucketByTimePeriodType where
     parseQueryParam = \case
         "day" -> Right Day
-        "month" -> Right Month
         "week" -> Right Week
+        "month" -> Right Month
         x -> Left ("Unable to parse BucketByTimePeriodType from: " <> x)
 
 instance ToHttpApiData BucketByTimePeriodType where
     toQueryParam = \case
         Day -> "day"
-        Month -> "month"
         Week -> "week"
+        Month -> "month"
 
 instance FromJSON BucketByTimePeriodType where
     parseJSON = parseJSONText "BucketByTimePeriodType"
@@ -116,11 +128,42 @@ instance FromJSON BucketByTimePeriodType where
 instance ToJSON BucketByTimePeriodType where
     toJSON = toJSONText
 
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
 data AggregateRequestFilteredDataQualityStandardItem
-    = DATAQUALITYBLOODGLUCOSEISO151972003
-      -- ^ @dataQualityBloodGlucoseIso151972003@
-    | DATAQUALITYBLOODGLUCOSEISO151972013
-      -- ^ @dataQualityBloodGlucoseIso151972013@
+    = DataQualityUnknown
+      -- ^ @dataQualityUnknown@
+    | DATAQUALITYBLOODPRESSUREESH2002
+      -- ^ @dataQualityBloodPressureEsh2002@
+    | DATAQUALITYBLOODPRESSUREESH2010
+      -- ^ @dataQualityBloodPressureEsh2010@
     | DataQualityBloodPressureAami
       -- ^ @dataQualityBloodPressureAami@
     | DataQualityBloodPressureBhsAA
@@ -131,42 +174,40 @@ data AggregateRequestFilteredDataQualityStandardItem
       -- ^ @dataQualityBloodPressureBhsBA@
     | DataQualityBloodPressureBhsBB
       -- ^ @dataQualityBloodPressureBhsBB@
-    | DATAQUALITYBLOODPRESSUREESH2002
-      -- ^ @dataQualityBloodPressureEsh2002@
-    | DATAQUALITYBLOODPRESSUREESH2010
-      -- ^ @dataQualityBloodPressureEsh2010@
-    | DataQualityUnknown
-      -- ^ @dataQualityUnknown@
+    | DATAQUALITYBLOODGLUCOSEISO151972003
+      -- ^ @dataQualityBloodGlucoseIso151972003@
+    | DATAQUALITYBLOODGLUCOSEISO151972013
+      -- ^ @dataQualityBloodGlucoseIso151972013@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AggregateRequestFilteredDataQualityStandardItem
 
 instance FromHttpApiData AggregateRequestFilteredDataQualityStandardItem where
     parseQueryParam = \case
-        "dataQualityBloodGlucoseIso151972003" -> Right DATAQUALITYBLOODGLUCOSEISO151972003
-        "dataQualityBloodGlucoseIso151972013" -> Right DATAQUALITYBLOODGLUCOSEISO151972013
+        "dataQualityUnknown" -> Right DataQualityUnknown
+        "dataQualityBloodPressureEsh2002" -> Right DATAQUALITYBLOODPRESSUREESH2002
+        "dataQualityBloodPressureEsh2010" -> Right DATAQUALITYBLOODPRESSUREESH2010
         "dataQualityBloodPressureAami" -> Right DataQualityBloodPressureAami
         "dataQualityBloodPressureBhsAA" -> Right DataQualityBloodPressureBhsAA
         "dataQualityBloodPressureBhsAB" -> Right DataQualityBloodPressureBhsAB
         "dataQualityBloodPressureBhsBA" -> Right DataQualityBloodPressureBhsBA
         "dataQualityBloodPressureBhsBB" -> Right DataQualityBloodPressureBhsBB
-        "dataQualityBloodPressureEsh2002" -> Right DATAQUALITYBLOODPRESSUREESH2002
-        "dataQualityBloodPressureEsh2010" -> Right DATAQUALITYBLOODPRESSUREESH2010
-        "dataQualityUnknown" -> Right DataQualityUnknown
+        "dataQualityBloodGlucoseIso151972003" -> Right DATAQUALITYBLOODGLUCOSEISO151972003
+        "dataQualityBloodGlucoseIso151972013" -> Right DATAQUALITYBLOODGLUCOSEISO151972013
         x -> Left ("Unable to parse AggregateRequestFilteredDataQualityStandardItem from: " <> x)
 
 instance ToHttpApiData AggregateRequestFilteredDataQualityStandardItem where
     toQueryParam = \case
-        DATAQUALITYBLOODGLUCOSEISO151972003 -> "dataQualityBloodGlucoseIso151972003"
-        DATAQUALITYBLOODGLUCOSEISO151972013 -> "dataQualityBloodGlucoseIso151972013"
+        DataQualityUnknown -> "dataQualityUnknown"
+        DATAQUALITYBLOODPRESSUREESH2002 -> "dataQualityBloodPressureEsh2002"
+        DATAQUALITYBLOODPRESSUREESH2010 -> "dataQualityBloodPressureEsh2010"
         DataQualityBloodPressureAami -> "dataQualityBloodPressureAami"
         DataQualityBloodPressureBhsAA -> "dataQualityBloodPressureBhsAA"
         DataQualityBloodPressureBhsAB -> "dataQualityBloodPressureBhsAB"
         DataQualityBloodPressureBhsBA -> "dataQualityBloodPressureBhsBA"
         DataQualityBloodPressureBhsBB -> "dataQualityBloodPressureBhsBB"
-        DATAQUALITYBLOODPRESSUREESH2002 -> "dataQualityBloodPressureEsh2002"
-        DATAQUALITYBLOODPRESSUREESH2010 -> "dataQualityBloodPressureEsh2010"
-        DataQualityUnknown -> "dataQualityUnknown"
+        DATAQUALITYBLOODGLUCOSEISO151972003 -> "dataQualityBloodGlucoseIso151972003"
+        DATAQUALITYBLOODGLUCOSEISO151972013 -> "dataQualityBloodGlucoseIso151972013"
 
 instance FromJSON AggregateRequestFilteredDataQualityStandardItem where
     parseJSON = parseJSONText "AggregateRequestFilteredDataQualityStandardItem"
@@ -176,44 +217,56 @@ instance ToJSON AggregateRequestFilteredDataQualityStandardItem where
 
 -- | A constant representing the type of the device.
 data DeviceType
-    = ChestStrap
-      -- ^ @chestStrap@
-    | HeadMounted
-      -- ^ @headMounted@
+    = Unknown
+      -- ^ @unknown@
+      -- Device type is not known.
     | Phone
       -- ^ @phone@
-    | Scale
-      -- ^ @scale@
+      -- An Android phone.
     | Tablet
       -- ^ @tablet@
-    | Unknown
-      -- ^ @unknown@
+      -- An Android tablet.
     | Watch
       -- ^ @watch@
+      -- A watch or other wrist-mounted band.
+    | ChestStrap
+      -- ^ @chestStrap@
+      -- A chest strap.
+    | Scale
+      -- ^ @scale@
+      -- A scale.
+    | HeadMounted
+      -- ^ @headMounted@
+      -- Glass or other head-mounted device.
+    | SmartDisplay
+      -- ^ @smartDisplay@
+      -- A smart display e.g. Nest device.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeviceType
 
 instance FromHttpApiData DeviceType where
     parseQueryParam = \case
-        "chestStrap" -> Right ChestStrap
-        "headMounted" -> Right HeadMounted
-        "phone" -> Right Phone
-        "scale" -> Right Scale
-        "tablet" -> Right Tablet
         "unknown" -> Right Unknown
+        "phone" -> Right Phone
+        "tablet" -> Right Tablet
         "watch" -> Right Watch
+        "chestStrap" -> Right ChestStrap
+        "scale" -> Right Scale
+        "headMounted" -> Right HeadMounted
+        "smartDisplay" -> Right SmartDisplay
         x -> Left ("Unable to parse DeviceType from: " <> x)
 
 instance ToHttpApiData DeviceType where
     toQueryParam = \case
-        ChestStrap -> "chestStrap"
-        HeadMounted -> "headMounted"
-        Phone -> "phone"
-        Scale -> "scale"
-        Tablet -> "tablet"
         Unknown -> "unknown"
+        Phone -> "phone"
+        Tablet -> "tablet"
         Watch -> "watch"
+        ChestStrap -> "chestStrap"
+        Scale -> "scale"
+        HeadMounted -> "headMounted"
+        SmartDisplay -> "smartDisplay"
 
 instance FromJSON DeviceType where
     parseJSON = parseJSONText "DeviceType"
@@ -222,10 +275,12 @@ instance ToJSON DeviceType where
     toJSON = toJSONText
 
 data DataSourceDataQualityStandardItem
-    = DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003
-      -- ^ @dataQualityBloodGlucoseIso151972003@
-    | DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013
-      -- ^ @dataQualityBloodGlucoseIso151972013@
+    = DSDQSIDataQualityUnknown
+      -- ^ @dataQualityUnknown@
+    | DSDQSIDATAQUALITYBLOODPRESSUREESH2002
+      -- ^ @dataQualityBloodPressureEsh2002@
+    | DSDQSIDATAQUALITYBLOODPRESSUREESH2010
+      -- ^ @dataQualityBloodPressureEsh2010@
     | DSDQSIDataQualityBloodPressureAami
       -- ^ @dataQualityBloodPressureAami@
     | DSDQSIDataQualityBloodPressureBhsAA
@@ -236,42 +291,40 @@ data DataSourceDataQualityStandardItem
       -- ^ @dataQualityBloodPressureBhsBA@
     | DSDQSIDataQualityBloodPressureBhsBB
       -- ^ @dataQualityBloodPressureBhsBB@
-    | DSDQSIDATAQUALITYBLOODPRESSUREESH2002
-      -- ^ @dataQualityBloodPressureEsh2002@
-    | DSDQSIDATAQUALITYBLOODPRESSUREESH2010
-      -- ^ @dataQualityBloodPressureEsh2010@
-    | DSDQSIDataQualityUnknown
-      -- ^ @dataQualityUnknown@
+    | DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003
+      -- ^ @dataQualityBloodGlucoseIso151972003@
+    | DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013
+      -- ^ @dataQualityBloodGlucoseIso151972013@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataSourceDataQualityStandardItem
 
 instance FromHttpApiData DataSourceDataQualityStandardItem where
     parseQueryParam = \case
-        "dataQualityBloodGlucoseIso151972003" -> Right DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003
-        "dataQualityBloodGlucoseIso151972013" -> Right DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013
+        "dataQualityUnknown" -> Right DSDQSIDataQualityUnknown
+        "dataQualityBloodPressureEsh2002" -> Right DSDQSIDATAQUALITYBLOODPRESSUREESH2002
+        "dataQualityBloodPressureEsh2010" -> Right DSDQSIDATAQUALITYBLOODPRESSUREESH2010
         "dataQualityBloodPressureAami" -> Right DSDQSIDataQualityBloodPressureAami
         "dataQualityBloodPressureBhsAA" -> Right DSDQSIDataQualityBloodPressureBhsAA
         "dataQualityBloodPressureBhsAB" -> Right DSDQSIDataQualityBloodPressureBhsAB
         "dataQualityBloodPressureBhsBA" -> Right DSDQSIDataQualityBloodPressureBhsBA
         "dataQualityBloodPressureBhsBB" -> Right DSDQSIDataQualityBloodPressureBhsBB
-        "dataQualityBloodPressureEsh2002" -> Right DSDQSIDATAQUALITYBLOODPRESSUREESH2002
-        "dataQualityBloodPressureEsh2010" -> Right DSDQSIDATAQUALITYBLOODPRESSUREESH2010
-        "dataQualityUnknown" -> Right DSDQSIDataQualityUnknown
+        "dataQualityBloodGlucoseIso151972003" -> Right DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003
+        "dataQualityBloodGlucoseIso151972013" -> Right DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013
         x -> Left ("Unable to parse DataSourceDataQualityStandardItem from: " <> x)
 
 instance ToHttpApiData DataSourceDataQualityStandardItem where
     toQueryParam = \case
-        DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003 -> "dataQualityBloodGlucoseIso151972003"
-        DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013 -> "dataQualityBloodGlucoseIso151972013"
+        DSDQSIDataQualityUnknown -> "dataQualityUnknown"
+        DSDQSIDATAQUALITYBLOODPRESSUREESH2002 -> "dataQualityBloodPressureEsh2002"
+        DSDQSIDATAQUALITYBLOODPRESSUREESH2010 -> "dataQualityBloodPressureEsh2010"
         DSDQSIDataQualityBloodPressureAami -> "dataQualityBloodPressureAami"
         DSDQSIDataQualityBloodPressureBhsAA -> "dataQualityBloodPressureBhsAA"
         DSDQSIDataQualityBloodPressureBhsAB -> "dataQualityBloodPressureBhsAB"
         DSDQSIDataQualityBloodPressureBhsBA -> "dataQualityBloodPressureBhsBA"
         DSDQSIDataQualityBloodPressureBhsBB -> "dataQualityBloodPressureBhsBB"
-        DSDQSIDATAQUALITYBLOODPRESSUREESH2002 -> "dataQualityBloodPressureEsh2002"
-        DSDQSIDATAQUALITYBLOODPRESSUREESH2010 -> "dataQualityBloodPressureEsh2010"
-        DSDQSIDataQualityUnknown -> "dataQualityUnknown"
+        DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003 -> "dataQualityBloodGlucoseIso151972003"
+        DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013 -> "dataQualityBloodGlucoseIso151972013"
 
 instance FromJSON DataSourceDataQualityStandardItem where
     parseJSON = parseJSONText "DataSourceDataQualityStandardItem"
@@ -281,44 +334,44 @@ instance ToJSON DataSourceDataQualityStandardItem where
 
 -- | The different supported formats for each field in a data type.
 data DataTypeFieldFormat
-    = Blob
-      -- ^ @blob@
-    | FloatList
-      -- ^ @floatList@
+    = Integer
+      -- ^ @integer@
     | FloatPoint
       -- ^ @floatPoint@
-    | Integer
-      -- ^ @integer@
-    | IntegerList
-      -- ^ @integerList@
-    | Map
-      -- ^ @map@
     | String
       -- ^ @string@
+    | Map
+      -- ^ @map@
+    | IntegerList
+      -- ^ @integerList@
+    | FloatList
+      -- ^ @floatList@
+    | Blob
+      -- ^ @blob@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataTypeFieldFormat
 
 instance FromHttpApiData DataTypeFieldFormat where
     parseQueryParam = \case
-        "blob" -> Right Blob
-        "floatList" -> Right FloatList
-        "floatPoint" -> Right FloatPoint
         "integer" -> Right Integer
-        "integerList" -> Right IntegerList
-        "map" -> Right Map
+        "floatPoint" -> Right FloatPoint
         "string" -> Right String
+        "map" -> Right Map
+        "integerList" -> Right IntegerList
+        "floatList" -> Right FloatList
+        "blob" -> Right Blob
         x -> Left ("Unable to parse DataTypeFieldFormat from: " <> x)
 
 instance ToHttpApiData DataTypeFieldFormat where
     toQueryParam = \case
-        Blob -> "blob"
-        FloatList -> "floatList"
-        FloatPoint -> "floatPoint"
         Integer -> "integer"
-        IntegerList -> "integerList"
-        Map -> "map"
+        FloatPoint -> "floatPoint"
         String -> "string"
+        Map -> "map"
+        IntegerList -> "integerList"
+        FloatList -> "floatList"
+        Blob -> "blob"
 
 instance FromJSON DataTypeFieldFormat where
     parseJSON = parseJSONText "DataTypeFieldFormat"

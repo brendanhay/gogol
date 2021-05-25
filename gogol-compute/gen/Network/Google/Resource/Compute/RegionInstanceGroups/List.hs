@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.RegionInstanceGroups.List
     , RegionInstanceGroupsList
 
     -- * Request Lenses
+    , riglReturnPartialSuccess
     , riglOrderBy
     , riglProject
     , riglFilter
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroups.List
     , riglMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroups.list@ method which the
 -- 'RegionInstanceGroupsList' request conforms to.
@@ -55,12 +56,13 @@ type RegionInstanceGroupsListResource =
              "regions" :>
                Capture "region" Text :>
                  "instanceGroups" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] RegionInstanceGroupList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] RegionInstanceGroupList
 
 -- | Retrieves the list of instance group resources contained within the
 -- specified region.
@@ -68,11 +70,12 @@ type RegionInstanceGroupsListResource =
 -- /See:/ 'regionInstanceGroupsList' smart constructor.
 data RegionInstanceGroupsList =
   RegionInstanceGroupsList'
-    { _riglOrderBy    :: !(Maybe Text)
-    , _riglProject    :: !Text
-    , _riglFilter     :: !(Maybe Text)
-    , _riglRegion     :: !Text
-    , _riglPageToken  :: !(Maybe Text)
+    { _riglReturnPartialSuccess :: !(Maybe Bool)
+    , _riglOrderBy :: !(Maybe Text)
+    , _riglProject :: !Text
+    , _riglFilter :: !(Maybe Text)
+    , _riglRegion :: !Text
+    , _riglPageToken :: !(Maybe Text)
     , _riglMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,6 +84,8 @@ data RegionInstanceGroupsList =
 -- | Creates a value of 'RegionInstanceGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riglReturnPartialSuccess'
 --
 -- * 'riglOrderBy'
 --
@@ -99,7 +104,8 @@ regionInstanceGroupsList
     -> RegionInstanceGroupsList
 regionInstanceGroupsList pRiglProject_ pRiglRegion_ =
   RegionInstanceGroupsList'
-    { _riglOrderBy = Nothing
+    { _riglReturnPartialSuccess = Nothing
+    , _riglOrderBy = Nothing
     , _riglProject = pRiglProject_
     , _riglFilter = Nothing
     , _riglRegion = pRiglRegion_
@@ -108,14 +114,21 @@ regionInstanceGroupsList pRiglProject_ pRiglRegion_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+riglReturnPartialSuccess :: Lens' RegionInstanceGroupsList (Maybe Bool)
+riglReturnPartialSuccess
+  = lens _riglReturnPartialSuccess
+      (\ s a -> s{_riglReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 riglOrderBy :: Lens' RegionInstanceGroupsList (Maybe Text)
 riglOrderBy
   = lens _riglOrderBy (\ s a -> s{_riglOrderBy = a})
@@ -128,19 +141,20 @@ riglProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 riglFilter :: Lens' RegionInstanceGroupsList (Maybe Text)
 riglFilter
   = lens _riglFilter (\ s a -> s{_riglFilter = a})
@@ -150,18 +164,19 @@ riglRegion :: Lens' RegionInstanceGroupsList Text
 riglRegion
   = lens _riglRegion (\ s a -> s{_riglRegion = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 riglPageToken :: Lens' RegionInstanceGroupsList (Maybe Text)
 riglPageToken
   = lens _riglPageToken
       (\ s a -> s{_riglPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 riglMaxResults :: Lens' RegionInstanceGroupsList Word32
 riglMaxResults
   = lens _riglMaxResults
@@ -176,7 +191,9 @@ instance GoogleRequest RegionInstanceGroupsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionInstanceGroupsList'{..}
-          = go _riglProject _riglRegion _riglOrderBy
+          = go _riglProject _riglRegion
+              _riglReturnPartialSuccess
+              _riglOrderBy
               _riglFilter
               _riglPageToken
               (Just _riglMaxResults)

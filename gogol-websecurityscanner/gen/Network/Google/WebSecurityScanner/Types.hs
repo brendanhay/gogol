@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -27,6 +27,11 @@ module Network.Google.WebSecurityScanner.Types
     , findingTypeStats
     , ftsFindingCount
     , ftsFindingType
+
+    -- * IapTestServiceAccountInfo
+    , IapTestServiceAccountInfo
+    , iapTestServiceAccountInfo
+    , itsaiTargetAudienceClientId
 
     -- * ListFindingsResponse
     , ListFindingsResponse
@@ -62,6 +67,7 @@ module Network.Google.WebSecurityScanner.Types
     , fTrackingId
     , fBody
     , fXss
+    , fSeverity
     , fVulnerableParameters
     , fOutdatedLibrary
     , fFuzzedURL
@@ -96,6 +102,8 @@ module Network.Google.WebSecurityScanner.Types
     -- * Xss
     , Xss
     , xss
+    , xStoredXssSeedingURL
+    , xAttackVector
     , xStackTraces
     , xErrorMessage
 
@@ -103,6 +111,7 @@ module Network.Google.WebSecurityScanner.Types
     , Authentication
     , authentication
     , aGoogleAccount
+    , aIapCredential
     , aCustomAccount
 
     -- * ListCrawledURLsResponse
@@ -111,10 +120,18 @@ module Network.Google.WebSecurityScanner.Types
     , lcurNextPageToken
     , lcurCrawledURLs
 
+    -- * IapCredential
+    , IapCredential
+    , iapCredential
+    , icIapTestServiceAccountInfo
+
     -- * VulnerableParameters
     , VulnerableParameters
     , vulnerableParameters
     , vpParameterNames
+
+    -- * XssAttackVector
+    , XssAttackVector (..)
 
     -- * CrawledURL
     , CrawledURL
@@ -175,15 +192,17 @@ module Network.Google.WebSecurityScanner.Types
     -- * ScanConfig
     , ScanConfig
     , scanConfig
-    , scLatestRun
+    , scIgnoreHTTPStatusErrors
     , scSchedule
-    , scTargetPlatforms
     , scStartingURLs
     , scAuthentication
+    , scStaticIPScan
     , scMaxQps
     , scName
+    , scManagedScan
     , scExportToSecurityCommandCenter
     , scDisplayName
+    , scRiskLevel
     , scUserAgent
     , scBlackListPatterns
 
@@ -198,6 +217,9 @@ module Network.Google.WebSecurityScanner.Types
 
     -- * ScanRunResultState
     , ScanRunResultState (..)
+
+    -- * ScanConfigRiskLevel
+    , ScanConfigRiskLevel (..)
 
     -- * VulnerableHeaders
     , VulnerableHeaders
@@ -234,19 +256,21 @@ module Network.Google.WebSecurityScanner.Types
     , srEndTime
     , srExecutionState
     , srErrorTrace
+
+    -- * FindingSeverity
+    , FindingSeverity (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types.Product
-import           Network.Google.WebSecurityScanner.Types.Sum
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types.Product
+import Network.Google.WebSecurityScanner.Types.Sum
 
--- | Default request referring to version 'v1beta' of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
 webSecurityScannerService :: ServiceConfig
 webSecurityScannerService
-  = defaultService
-      (ServiceId "websecurityscanner:v1beta")
+  = defaultService (ServiceId "websecurityscanner:v1")
       "websecurityscanner.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

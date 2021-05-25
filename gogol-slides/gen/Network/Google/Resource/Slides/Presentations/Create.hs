@@ -45,8 +45,8 @@ module Network.Google.Resource.Slides.Presentations.Create
     , pcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Slides.Types
+import Network.Google.Prelude
+import Network.Google.Slides.Types
 
 -- | A resource alias for @slides.presentations.create@ method which the
 -- 'PresentationsCreate' request conforms to.
@@ -71,12 +71,12 @@ type PresentationsCreateResource =
 -- /See:/ 'presentationsCreate' smart constructor.
 data PresentationsCreate =
   PresentationsCreate'
-    { _pcXgafv          :: !(Maybe Xgafv)
+    { _pcXgafv :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcAccessToken    :: !(Maybe Text)
-    , _pcUploadType     :: !(Maybe Text)
-    , _pcPayload        :: !Presentation
-    , _pcCallback       :: !(Maybe Text)
+    , _pcAccessToken :: !(Maybe Text)
+    , _pcUploadType :: !(Maybe Text)
+    , _pcPayload :: !Presentation
+    , _pcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

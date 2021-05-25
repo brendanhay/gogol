@@ -21,9 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes all items in a queue. This method is useful for deleting stale
--- items.
+-- items. This API requires an admin or service account to execute. The
+-- service account used is the one whitelisted in the corresponding data
+-- source.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.deleteQueueItems@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.deleteQueueItems@.
 module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
     (
     -- * REST Resource
@@ -43,8 +45,8 @@ module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.DeleteQueu
     , ididqiCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.indexing.datasources.items.deleteQueueItems@ method which the
 -- 'IndexingDatasourcesItemsDeleteQueueItems' request conforms to.
@@ -64,18 +66,20 @@ type IndexingDatasourcesItemsDeleteQueueItemsResource
                            Post '[JSON] Operation
 
 -- | Deletes all items in a queue. This method is useful for deleting stale
--- items.
+-- items. This API requires an admin or service account to execute. The
+-- service account used is the one whitelisted in the corresponding data
+-- source.
 --
 -- /See:/ 'indexingDatasourcesItemsDeleteQueueItems' smart constructor.
 data IndexingDatasourcesItemsDeleteQueueItems =
   IndexingDatasourcesItemsDeleteQueueItems'
-    { _ididqiXgafv          :: !(Maybe Xgafv)
+    { _ididqiXgafv :: !(Maybe Xgafv)
     , _ididqiUploadProtocol :: !(Maybe Text)
-    , _ididqiAccessToken    :: !(Maybe Text)
-    , _ididqiUploadType     :: !(Maybe Text)
-    , _ididqiPayload        :: !DeleteQueueItemsRequest
-    , _ididqiName           :: !Text
-    , _ididqiCallback       :: !(Maybe Text)
+    , _ididqiAccessToken :: !(Maybe Text)
+    , _ididqiUploadType :: !(Maybe Text)
+    , _ididqiPayload :: !DeleteQueueItemsRequest
+    , _ididqiName :: !Text
+    , _ididqiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

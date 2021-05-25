@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List Memberships within a Group.
+-- Lists the \`Membership\`s within a \`Group\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.memberships.list@.
 module Network.Google.Resource.CloudIdentity.Groups.Memberships.List
@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Memberships.List
     , groCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.memberships.list@ method which the
 -- 'GroupsMembershipsList' request conforms to.
@@ -57,27 +57,27 @@ type GroupsMembershipsListResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "view" Text :>
+                   QueryParam "view" GroupsMembershipsListView :>
                      QueryParam "pageToken" Text :>
                        QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListMembershipsResponse
 
--- | List Memberships within a Group.
+-- | Lists the \`Membership\`s within a \`Group\`.
 --
 -- /See:/ 'groupsMembershipsList' smart constructor.
 data GroupsMembershipsList =
   GroupsMembershipsList'
-    { _groParent         :: !Text
-    , _groXgafv          :: !(Maybe Xgafv)
+    { _groParent :: !Text
+    , _groXgafv :: !(Maybe Xgafv)
     , _groUploadProtocol :: !(Maybe Text)
-    , _groAccessToken    :: !(Maybe Text)
-    , _groUploadType     :: !(Maybe Text)
-    , _groView           :: !(Maybe Text)
-    , _groPageToken      :: !(Maybe Text)
-    , _groPageSize       :: !(Maybe (Textual Int32))
-    , _groCallback       :: !(Maybe Text)
+    , _groAccessToken :: !(Maybe Text)
+    , _groUploadType :: !(Maybe Text)
+    , _groView :: !(Maybe GroupsMembershipsListView)
+    , _groPageToken :: !(Maybe Text)
+    , _groPageSize :: !(Maybe (Textual Int32))
+    , _groCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,10 +120,8 @@ groupsMembershipsList pGroParent_ =
     }
 
 
--- | [Resource
--- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
--- Group to list Memberships within. Format: \`groups\/{group_id}\`, where
--- \`group_id\` is the unique ID assigned to the Group.
+-- | Required. The parent \`Group\` resource under which to lookup the
+-- \`Membership\` name. Must be of the form \`groups\/{group_id}\`.
 groParent :: Lens' GroupsMembershipsList Text
 groParent
   = lens _groParent (\ s a -> s{_groParent = a})
@@ -150,17 +148,24 @@ groUploadType
   = lens _groUploadType
       (\ s a -> s{_groUploadType = a})
 
--- | Membership resource view to be returned. Defaults to View.BASIC.
-groView :: Lens' GroupsMembershipsList (Maybe Text)
+-- | The level of detail to be returned. If unspecified, defaults to
+-- \`View.BASIC\`.
+groView :: Lens' GroupsMembershipsList (Maybe GroupsMembershipsListView)
 groView = lens _groView (\ s a -> s{_groView = a})
 
--- | The next_page_token value returned from a previous list request, if any.
+-- | The \`next_page_token\` value returned from a previous search request,
+-- if any.
 groPageToken :: Lens' GroupsMembershipsList (Maybe Text)
 groPageToken
   = lens _groPageToken (\ s a -> s{_groPageToken = a})
 
--- | The default page size is 200 (max 1000) for the BASIC view, and 50 (max
--- 500) for the FULL view.
+-- | The maximum number of results to return. Note that the number of results
+-- returned may be less than this value even if there are more available
+-- results. To fetch all results, clients must continue calling this method
+-- repeatedly until the response no longer contains a \`next_page_token\`.
+-- If unspecified, defaults to 200 for \`GroupView.BASIC\` and to 50 for
+-- \`GroupView.FULL\`. Must not be greater than 1000 for
+-- \`GroupView.BASIC\` or 500 for \`GroupView.FULL\`.
 groPageSize :: Lens' GroupsMembershipsList (Maybe Int32)
 groPageSize
   = lens _groPageSize (\ s a -> s{_groPageSize = a}) .
@@ -176,7 +181,8 @@ instance GoogleRequest GroupsMembershipsList where
              ListMembershipsResponse
         type Scopes GroupsMembershipsList =
              '["https://www.googleapis.com/auth/cloud-identity.groups",
-               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsMembershipsList'{..}
           = go _groParent _groXgafv _groUploadProtocol
               _groAccessToken

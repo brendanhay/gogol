@@ -22,7 +22,7 @@
 --
 -- Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updateshipment@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.updateshipment@.
 module Network.Google.Resource.Content.Orders.Updateshipment
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Orders.Updateshipment
     , OrdersUpdateshipment
 
     -- * Request Lenses
+    , ouXgafv
     , ouMerchantId
+    , ouUploadProtocol
+    , ouAccessToken
+    , ouUploadType
     , ouPayload
     , ouOrderId
+    , ouCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.updateshipment@ method which the
 -- 'OrdersUpdateshipment' request conforms to.
@@ -50,18 +55,28 @@ type OrdersUpdateshipmentResource =
            "orders" :>
              Capture "orderId" Text :>
                "updateShipment" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersUpdateShipmentRequest :>
-                     Post '[JSON] OrdersUpdateShipmentResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersUpdateShipmentRequest :>
+                               Post '[JSON] OrdersUpdateShipmentResponse
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ 'ordersUpdateshipment' smart constructor.
 data OrdersUpdateshipment =
   OrdersUpdateshipment'
-    { _ouMerchantId :: !(Textual Word64)
-    , _ouPayload    :: !OrdersUpdateShipmentRequest
-    , _ouOrderId    :: !Text
+    { _ouXgafv :: !(Maybe Xgafv)
+    , _ouMerchantId :: !(Textual Word64)
+    , _ouUploadProtocol :: !(Maybe Text)
+    , _ouAccessToken :: !(Maybe Text)
+    , _ouUploadType :: !(Maybe Text)
+    , _ouPayload :: !OrdersUpdateShipmentRequest
+    , _ouOrderId :: !Text
+    , _ouCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +85,21 @@ data OrdersUpdateshipment =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ouXgafv'
+--
 -- * 'ouMerchantId'
+--
+-- * 'ouUploadProtocol'
+--
+-- * 'ouAccessToken'
+--
+-- * 'ouUploadType'
 --
 -- * 'ouPayload'
 --
 -- * 'ouOrderId'
+--
+-- * 'ouCallback'
 ordersUpdateshipment
     :: Word64 -- ^ 'ouMerchantId'
     -> OrdersUpdateShipmentRequest -- ^ 'ouPayload'
@@ -82,11 +107,20 @@ ordersUpdateshipment
     -> OrdersUpdateshipment
 ordersUpdateshipment pOuMerchantId_ pOuPayload_ pOuOrderId_ =
   OrdersUpdateshipment'
-    { _ouMerchantId = _Coerce # pOuMerchantId_
+    { _ouXgafv = Nothing
+    , _ouMerchantId = _Coerce # pOuMerchantId_
+    , _ouUploadProtocol = Nothing
+    , _ouAccessToken = Nothing
+    , _ouUploadType = Nothing
     , _ouPayload = pOuPayload_
     , _ouOrderId = pOuOrderId_
+    , _ouCallback = Nothing
     }
 
+
+-- | V1 error format.
+ouXgafv :: Lens' OrdersUpdateshipment (Maybe Xgafv)
+ouXgafv = lens _ouXgafv (\ s a -> s{_ouXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -94,6 +128,23 @@ ouMerchantId :: Lens' OrdersUpdateshipment Word64
 ouMerchantId
   = lens _ouMerchantId (\ s a -> s{_ouMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ouUploadProtocol :: Lens' OrdersUpdateshipment (Maybe Text)
+ouUploadProtocol
+  = lens _ouUploadProtocol
+      (\ s a -> s{_ouUploadProtocol = a})
+
+-- | OAuth access token.
+ouAccessToken :: Lens' OrdersUpdateshipment (Maybe Text)
+ouAccessToken
+  = lens _ouAccessToken
+      (\ s a -> s{_ouAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ouUploadType :: Lens' OrdersUpdateshipment (Maybe Text)
+ouUploadType
+  = lens _ouUploadType (\ s a -> s{_ouUploadType = a})
 
 -- | Multipart request metadata.
 ouPayload :: Lens' OrdersUpdateshipment OrdersUpdateShipmentRequest
@@ -105,13 +156,23 @@ ouOrderId :: Lens' OrdersUpdateshipment Text
 ouOrderId
   = lens _ouOrderId (\ s a -> s{_ouOrderId = a})
 
+-- | JSONP
+ouCallback :: Lens' OrdersUpdateshipment (Maybe Text)
+ouCallback
+  = lens _ouCallback (\ s a -> s{_ouCallback = a})
+
 instance GoogleRequest OrdersUpdateshipment where
         type Rs OrdersUpdateshipment =
              OrdersUpdateShipmentResponse
         type Scopes OrdersUpdateshipment =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersUpdateshipment'{..}
-          = go _ouMerchantId _ouOrderId (Just AltJSON)
+          = go _ouMerchantId _ouOrderId _ouXgafv
+              _ouUploadProtocol
+              _ouAccessToken
+              _ouUploadType
+              _ouCallback
+              (Just AltJSON)
               _ouPayload
               shoppingContentService
           where go

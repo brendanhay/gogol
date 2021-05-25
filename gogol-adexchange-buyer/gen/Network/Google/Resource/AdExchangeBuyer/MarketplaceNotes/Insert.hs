@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
     , mniProposalId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacenotes.insert@ method which the
 -- 'MarketplaceNotesInsert' request conforms to.
@@ -58,7 +58,7 @@ type MarketplaceNotesInsertResource =
 -- /See:/ 'marketplaceNotesInsert' smart constructor.
 data MarketplaceNotesInsert =
   MarketplaceNotesInsert'
-    { _mniPayload    :: !AddOrderNotesRequest
+    { _mniPayload :: !AddOrderNotesRequest
     , _mniProposalId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

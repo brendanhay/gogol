@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,11 +22,27 @@ module Network.Google.AlertCenter.Types
     -- * OAuth Scopes
     , appsAlertsScope
 
+    -- * UserDefinedDetectorInfo
+    , UserDefinedDetectorInfo
+    , userDefinedDetectorInfo
+    , uddiResourceName
+    , uddiDisplayName
+
     -- * ListAlertsResponse
     , ListAlertsResponse
     , listAlertsResponse
     , larNextPageToken
     , larAlerts
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * RuleViolationInfoDataSource
+    , RuleViolationInfoDataSource (..)
 
     -- * CSVRow
     , CSVRow
@@ -43,6 +59,20 @@ module Network.Google.AlertCenter.Types
     , afType
     , afCreateTime
 
+    -- * DlpRuleViolation
+    , DlpRuleViolation
+    , dlpRuleViolation
+    , drvRuleViolationInfo
+
+    -- * AppsOutage
+    , AppsOutage
+    , appsOutage
+    , aoStatus
+    , aoDashboardURI
+    , aoProducts
+    , aoResolutionTime
+    , aoNextUpdateTime
+
     -- * DeviceCompromised
     , DeviceCompromised
     , deviceCompromised
@@ -54,6 +84,12 @@ module Network.Google.AlertCenter.Types
     , stateSponsoredAttack
     , ssaEmail
 
+    -- * BatchUndeleteAlertsRequest
+    , BatchUndeleteAlertsRequest
+    , batchUndeleteAlertsRequest
+    , buarAlertId
+    , buarCustomerId
+
     -- * BadWhiteList
     , BadWhiteList
     , badWhiteList
@@ -61,6 +97,11 @@ module Network.Google.AlertCenter.Types
     , bwlDomainId
     , bwlMessages
     , bwlMaliciousEntity
+
+    -- * PredefinedDetectorInfo
+    , PredefinedDetectorInfo
+    , predefinedDetectorInfo
+    , pdiDetectorName
 
     -- * SuspiciousActivitySecurityDetail
     , SuspiciousActivitySecurityDetail
@@ -94,6 +135,25 @@ module Network.Google.AlertCenter.Types
     , notification
     , nCloudPubsubTopic
 
+    -- * ReportingRule
+    , ReportingRule
+    , reportingRule
+    , rrAlertDetails
+    , rrName
+    , rrQuery
+
+    -- * MailPhishingSystemActionType
+    , MailPhishingSystemActionType (..)
+
+    -- * BatchUndeleteAlertsResponse
+    , BatchUndeleteAlertsResponse
+    , batchUndeleteAlertsResponse
+    , buarSuccessAlertIds
+    , buarFailedAlertStatus
+
+    -- * RuleViolationInfoTriggeredActionTypesItem
+    , RuleViolationInfoTriggeredActionTypesItem (..)
+
     -- * ActivityRule
     , ActivityRule
     , activityRule
@@ -119,10 +179,22 @@ module Network.Google.AlertCenter.Types
     -- * MailPhishing
     , MailPhishing
     , mailPhishing
+    , mpSystemActionType
     , mpIsInternal
     , mpDomainId
     , mpMessages
     , mpMaliciousEntity
+
+    -- * AlertMetadata
+    , AlertMetadata
+    , alertMetadata
+    , amStatus
+    , amEtag
+    , amSeverity
+    , amAlertId
+    , amAssignee
+    , amCustomerId
+    , amUpdateTime
 
     -- * GmailMessageInfo
     , GmailMessageInfo
@@ -135,6 +207,14 @@ module Network.Google.AlertCenter.Types
     , gmiRecipient
     , gmiMessageBodySnippet
     , gmiMessageId
+
+    -- * AppsOutageStatus
+    , AppsOutageStatus (..)
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
     -- * AlertData
     , AlertData
@@ -161,6 +241,7 @@ module Network.Google.AlertCenter.Types
     -- * Alert
     , Alert
     , alert
+    , aEtag
     , aStartTime
     , aData
     , aAlertId
@@ -168,6 +249,7 @@ module Network.Google.AlertCenter.Types
     , aCustomerId
     , aUpdateTime
     , aEndTime
+    , aMetadata
     , aSource
     , aDeleted
     , aType
@@ -178,11 +260,42 @@ module Network.Google.AlertCenter.Types
     , attachment
     , aCSV
 
+    -- * BatchDeleteAlertsRequest
+    , BatchDeleteAlertsRequest
+    , batchDeleteAlertsRequest
+    , bdarAlertId
+    , bdarCustomerId
+
+    -- * User
+    , User
+    , user
+    , uEmailAddress
+    , uDisplayName
+
+    -- * UserChanges
+    , UserChanges
+    , userChanges
+    , ucName
+
+    -- * ResourceInfo
+    , ResourceInfo
+    , resourceInfo
+    , riDocumentId
+    , riResourceTitle
+
+    -- * RequestInfo
+    , RequestInfo
+    , requestInfo
+    , riNumberOfRequests
+    , riAppDeveloperEmail
+    , riAppKey
+
     -- * GoogleOperations
     , GoogleOperations
     , googleOperations
     , goAttachmentData
     , goAffectedUserEmails
+    , goHeader
     , goTitle
     , goDescription
 
@@ -198,11 +311,27 @@ module Network.Google.AlertCenter.Types
     -- * Xgafv
     , Xgafv (..)
 
+    -- * BatchDeleteAlertsResponseFailedAlertStatus
+    , BatchDeleteAlertsResponseFailedAlertStatus
+    , batchDeleteAlertsResponseFailedAlertStatus
+    , bdarfasAddtional
+
+    -- * AppMakerSQLSetupNotification
+    , AppMakerSQLSetupNotification
+    , appMakerSQLSetupNotification
+    , amsqlsnRequestInfo
+
     -- * DomainWideTakeoutInitiated
     , DomainWideTakeoutInitiated
     , domainWideTakeoutInitiated
     , dwtiEmail
     , dwtiTakeoutRequestId
+
+    -- * MatchInfo
+    , MatchInfo
+    , matchInfo
+    , miPredefinedDetector
+    , miUserDefinedDetector
 
     -- * DomainId
     , DomainId
@@ -220,6 +349,22 @@ module Network.Google.AlertCenter.Types
     , dcsdDeviceType
     , dcsdSerialNumber
 
+    -- * RuleInfo
+    , RuleInfo
+    , ruleInfo
+    , riResourceName
+    , riDisplayName
+
+    -- * ActionInfo
+    , ActionInfo
+    , actionInfo
+
+    -- * BatchDeleteAlertsResponse
+    , BatchDeleteAlertsResponse
+    , batchDeleteAlertsResponse
+    , bdarSuccessAlertIds
+    , bdarFailedAlertStatus
+
     -- * CloudPubsubTopic
     , CloudPubsubTopic
     , cloudPubsubTopic
@@ -231,6 +376,32 @@ module Network.Google.AlertCenter.Types
     , listAlertFeedbackResponse
     , lafrFeedback
 
+    -- * AppSettingsChanged
+    , AppSettingsChanged
+    , appSettingsChanged
+    , ascAlertDetails
+    , ascName
+
+    -- * RuleViolationInfoSuppressedActionTypesItem
+    , RuleViolationInfoSuppressedActionTypesItem (..)
+
+    -- * RuleViolationInfo
+    , RuleViolationInfo
+    , ruleViolationInfo
+    , rviTriggeredActionTypes
+    , rviSuppressedActionTypes
+    , rviTriggeringUserEmail
+    , rviResourceInfo
+    , rviMatchInfo
+    , rviDataSource
+    , rviTrigger
+    , rviRecipients
+    , rviRuleInfo
+    , rviTriggeredActionInfo
+
+    -- * RuleViolationInfoTrigger
+    , RuleViolationInfoTrigger (..)
+
     -- * LoginDetails
     , LoginDetails
     , loginDetails
@@ -241,13 +412,20 @@ module Network.Google.AlertCenter.Types
     , MaliciousEntity
     , maliciousEntity
     , meFromHeader
+    , meDisplayName
+    , meEntity
+
+    -- * BatchUndeleteAlertsResponseFailedAlertStatus
+    , BatchUndeleteAlertsResponseFailedAlertStatus
+    , batchUndeleteAlertsResponseFailedAlertStatus
+    , buarfasAddtional
     ) where
 
-import           Network.Google.AlertCenter.Types.Product
-import           Network.Google.AlertCenter.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types.Product
+import Network.Google.AlertCenter.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the G Suite Alert Center API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1beta1' of the Google Workspace Alert Center API. This contains the host and root path used as a starting point for constructing service requests.
 alertCenterService :: ServiceConfig
 alertCenterService
   = defaultService (ServiceId "alertcenter:v1beta1")

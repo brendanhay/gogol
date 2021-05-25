@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.setIamPolicy@.
 module Network.Google.Resource.DataFusion.Projects.Locations.Instances.SetIAMPolicy
@@ -43,13 +44,13 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Instances.SetIAMPol
     , plisipCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.instances.setIamPolicy@ method which the
 -- 'ProjectsLocationsInstancesSetIAMPolicy' request conforms to.
 type ProjectsLocationsInstancesSetIAMPolicyResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,18 +62,19 @@ type ProjectsLocationsInstancesSetIAMPolicyResource =
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsLocationsInstancesSetIAMPolicy' smart constructor.
 data ProjectsLocationsInstancesSetIAMPolicy =
   ProjectsLocationsInstancesSetIAMPolicy'
-    { _plisipXgafv          :: !(Maybe Xgafv)
+    { _plisipXgafv :: !(Maybe Xgafv)
     , _plisipUploadProtocol :: !(Maybe Text)
-    , _plisipAccessToken    :: !(Maybe Text)
-    , _plisipUploadType     :: !(Maybe Text)
-    , _plisipPayload        :: !SetIAMPolicyRequest
-    , _plisipResource       :: !Text
-    , _plisipCallback       :: !(Maybe Text)
+    , _plisipAccessToken :: !(Maybe Text)
+    , _plisipUploadType :: !(Maybe Text)
+    , _plisipPayload :: !SetIAMPolicyRequest
+    , _plisipResource :: !Text
+    , _plisipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -35,21 +35,21 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Delete
     , ProjectsLocationsDataSetsDelete
 
     -- * Request Lenses
-    , pXgafv
-    , pUploadProtocol
-    , pAccessToken
-    , pUploadType
-    , pName
-    , pCallback
+    , proXgafv
+    , proUploadProtocol
+    , proAccessToken
+    , proUploadType
+    , proName
+    , proCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.delete@ method which the
 -- 'ProjectsLocationsDataSetsDelete' request conforms to.
 type ProjectsLocationsDataSetsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,12 +65,12 @@ type ProjectsLocationsDataSetsDeleteResource =
 -- /See:/ 'projectsLocationsDataSetsDelete' smart constructor.
 data ProjectsLocationsDataSetsDelete =
   ProjectsLocationsDataSetsDelete'
-    { _pXgafv          :: !(Maybe Xgafv)
-    , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    { _proXgafv :: !(Maybe Xgafv)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proName :: !Text
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,60 +79,62 @@ data ProjectsLocationsDataSetsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pXgafv'
+-- * 'proXgafv'
 --
--- * 'pUploadProtocol'
+-- * 'proUploadProtocol'
 --
--- * 'pAccessToken'
+-- * 'proAccessToken'
 --
--- * 'pUploadType'
+-- * 'proUploadType'
 --
--- * 'pName'
+-- * 'proName'
 --
--- * 'pCallback'
+-- * 'proCallback'
 projectsLocationsDataSetsDelete
-    :: Text -- ^ 'pName'
+    :: Text -- ^ 'proName'
     -> ProjectsLocationsDataSetsDelete
-projectsLocationsDataSetsDelete pPName_ =
+projectsLocationsDataSetsDelete pProName_ =
   ProjectsLocationsDataSetsDelete'
-    { _pXgafv = Nothing
-    , _pUploadProtocol = Nothing
-    , _pAccessToken = Nothing
-    , _pUploadType = Nothing
-    , _pName = pPName_
-    , _pCallback = Nothing
+    { _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proName = pProName_
+    , _proCallback = Nothing
     }
 
 
 -- | V1 error format.
-pXgafv :: Lens' ProjectsLocationsDataSetsDelete (Maybe Xgafv)
-pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
+proXgafv :: Lens' ProjectsLocationsDataSetsDelete (Maybe Xgafv)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pUploadProtocol :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
-pUploadProtocol
-  = lens _pUploadProtocol
-      (\ s a -> s{_pUploadProtocol = a})
+proUploadProtocol :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | OAuth access token.
-pAccessToken :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
-pAccessToken
-  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
+proAccessToken :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pUploadType :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
-pUploadType
-  = lens _pUploadType (\ s a -> s{_pUploadType = a})
+proUploadType :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
--- | The name of the dataset to delete (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\`).
-pName :: Lens' ProjectsLocationsDataSetsDelete Text
-pName = lens _pName (\ s a -> s{_pName = a})
+-- | The name of the dataset to delete. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\`.
+proName :: Lens' ProjectsLocationsDataSetsDelete Text
+proName = lens _proName (\ s a -> s{_proName = a})
 
 -- | JSONP
-pCallback :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
-pCallback
-  = lens _pCallback (\ s a -> s{_pCallback = a})
+proCallback :: Lens' ProjectsLocationsDataSetsDelete (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleRequest
            ProjectsLocationsDataSetsDelete
@@ -141,9 +143,10 @@ instance GoogleRequest
         type Scopes ProjectsLocationsDataSetsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsLocationsDataSetsDelete'{..}
-          = go _pName _pXgafv _pUploadProtocol _pAccessToken
-              _pUploadType
-              _pCallback
+          = go _proName _proXgafv _proUploadProtocol
+              _proAccessToken
+              _proUploadType
+              _proCallback
               (Just AltJSON)
               healthcareService
           where go

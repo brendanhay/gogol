@@ -23,7 +23,7 @@
 -- Creates a charge invoice for a shipment group, and triggers a charge
 -- capture for orderinvoice enabled orders.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderinvoices.createchargeinvoice@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orderinvoices.createchargeinvoice@.
 module Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
     , OrderinvoicesCreatechargeinvoice
 
     -- * Request Lenses
-    , oMerchantId
-    , oPayload
-    , oOrderId
+    , ooXgafv
+    , ooMerchantId
+    , ooUploadProtocol
+    , ooAccessToken
+    , ooUploadType
+    , ooPayload
+    , ooOrderId
+    , ooCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orderinvoices.createchargeinvoice@ method which the
 -- 'OrderinvoicesCreatechargeinvoice' request conforms to.
@@ -51,11 +56,17 @@ type OrderinvoicesCreatechargeinvoiceResource =
            "orderinvoices" :>
              Capture "orderId" Text :>
                "createChargeInvoice" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     OrderinvoicesCreateChargeInvoiceRequest
-                     :>
-                     Post '[JSON] OrderinvoicesCreateChargeInvoiceResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON]
+                               OrderinvoicesCreateChargeInvoiceRequest
+                               :>
+                               Post '[JSON]
+                                 OrderinvoicesCreateChargeInvoiceResponse
 
 -- | Creates a charge invoice for a shipment group, and triggers a charge
 -- capture for orderinvoice enabled orders.
@@ -63,9 +74,14 @@ type OrderinvoicesCreatechargeinvoiceResource =
 -- /See:/ 'orderinvoicesCreatechargeinvoice' smart constructor.
 data OrderinvoicesCreatechargeinvoice =
   OrderinvoicesCreatechargeinvoice'
-    { _oMerchantId :: !(Textual Word64)
-    , _oPayload    :: !OrderinvoicesCreateChargeInvoiceRequest
-    , _oOrderId    :: !Text
+    { _ooXgafv :: !(Maybe Xgafv)
+    , _ooMerchantId :: !(Textual Word64)
+    , _ooUploadProtocol :: !(Maybe Text)
+    , _ooAccessToken :: !(Maybe Text)
+    , _ooUploadType :: !(Maybe Text)
+    , _ooPayload :: !OrderinvoicesCreateChargeInvoiceRequest
+    , _ooOrderId :: !Text
+    , _ooCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,38 +90,81 @@ data OrderinvoicesCreatechargeinvoice =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oMerchantId'
+-- * 'ooXgafv'
 --
--- * 'oPayload'
+-- * 'ooMerchantId'
 --
--- * 'oOrderId'
+-- * 'ooUploadProtocol'
+--
+-- * 'ooAccessToken'
+--
+-- * 'ooUploadType'
+--
+-- * 'ooPayload'
+--
+-- * 'ooOrderId'
+--
+-- * 'ooCallback'
 orderinvoicesCreatechargeinvoice
-    :: Word64 -- ^ 'oMerchantId'
-    -> OrderinvoicesCreateChargeInvoiceRequest -- ^ 'oPayload'
-    -> Text -- ^ 'oOrderId'
+    :: Word64 -- ^ 'ooMerchantId'
+    -> OrderinvoicesCreateChargeInvoiceRequest -- ^ 'ooPayload'
+    -> Text -- ^ 'ooOrderId'
     -> OrderinvoicesCreatechargeinvoice
-orderinvoicesCreatechargeinvoice pOMerchantId_ pOPayload_ pOOrderId_ =
+orderinvoicesCreatechargeinvoice pOoMerchantId_ pOoPayload_ pOoOrderId_ =
   OrderinvoicesCreatechargeinvoice'
-    { _oMerchantId = _Coerce # pOMerchantId_
-    , _oPayload = pOPayload_
-    , _oOrderId = pOOrderId_
+    { _ooXgafv = Nothing
+    , _ooMerchantId = _Coerce # pOoMerchantId_
+    , _ooUploadProtocol = Nothing
+    , _ooAccessToken = Nothing
+    , _ooUploadType = Nothing
+    , _ooPayload = pOoPayload_
+    , _ooOrderId = pOoOrderId_
+    , _ooCallback = Nothing
     }
 
 
+-- | V1 error format.
+ooXgafv :: Lens' OrderinvoicesCreatechargeinvoice (Maybe Xgafv)
+ooXgafv = lens _ooXgafv (\ s a -> s{_ooXgafv = a})
+
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-oMerchantId :: Lens' OrderinvoicesCreatechargeinvoice Word64
-oMerchantId
-  = lens _oMerchantId (\ s a -> s{_oMerchantId = a}) .
-      _Coerce
+ooMerchantId :: Lens' OrderinvoicesCreatechargeinvoice Word64
+ooMerchantId
+  = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
+      . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ooUploadProtocol :: Lens' OrderinvoicesCreatechargeinvoice (Maybe Text)
+ooUploadProtocol
+  = lens _ooUploadProtocol
+      (\ s a -> s{_ooUploadProtocol = a})
+
+-- | OAuth access token.
+ooAccessToken :: Lens' OrderinvoicesCreatechargeinvoice (Maybe Text)
+ooAccessToken
+  = lens _ooAccessToken
+      (\ s a -> s{_ooAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ooUploadType :: Lens' OrderinvoicesCreatechargeinvoice (Maybe Text)
+ooUploadType
+  = lens _ooUploadType (\ s a -> s{_ooUploadType = a})
 
 -- | Multipart request metadata.
-oPayload :: Lens' OrderinvoicesCreatechargeinvoice OrderinvoicesCreateChargeInvoiceRequest
-oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
+ooPayload :: Lens' OrderinvoicesCreatechargeinvoice OrderinvoicesCreateChargeInvoiceRequest
+ooPayload
+  = lens _ooPayload (\ s a -> s{_ooPayload = a})
 
 -- | The ID of the order.
-oOrderId :: Lens' OrderinvoicesCreatechargeinvoice Text
-oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
+ooOrderId :: Lens' OrderinvoicesCreatechargeinvoice Text
+ooOrderId
+  = lens _ooOrderId (\ s a -> s{_ooOrderId = a})
+
+-- | JSONP
+ooCallback :: Lens' OrderinvoicesCreatechargeinvoice (Maybe Text)
+ooCallback
+  = lens _ooCallback (\ s a -> s{_ooCallback = a})
 
 instance GoogleRequest
            OrderinvoicesCreatechargeinvoice
@@ -115,7 +174,13 @@ instance GoogleRequest
         type Scopes OrderinvoicesCreatechargeinvoice =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrderinvoicesCreatechargeinvoice'{..}
-          = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
+          = go _ooMerchantId _ooOrderId _ooXgafv
+              _ooUploadProtocol
+              _ooAccessToken
+              _ooUploadType
+              _ooCallback
+              (Just AltJSON)
+              _ooPayload
               shoppingContentService
           where go
                   = buildClient

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the alerts for the specified AdSense account.
+-- Lists all the alerts available in an account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.alerts.list@.
+-- /See:/ <http://code.google.com/apis/adsense/management/ AdSense Management API Reference> for @adsense.accounts.alerts.list@.
 module Network.Google.Resource.AdSense.Accounts.Alerts.List
     (
     -- * REST Resource
@@ -33,31 +33,45 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.List
     , AccountsAlertsList
 
     -- * Request Lenses
-    , aalLocale
-    , aalAccountId
+    , aalParent
+    , aalXgafv
+    , aalLanguageCode
+    , aalUploadProtocol
+    , aalAccessToken
+    , aalUploadType
+    , aalCallback
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.alerts.list@ method which the
 -- 'AccountsAlertsList' request conforms to.
 type AccountsAlertsListResource =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "alerts" :>
-               QueryParam "locale" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Alerts
+     "v2" :>
+       Capture "parent" Text :>
+         "alerts" :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "languageCode" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListAlertsResponse
 
--- | List the alerts for the specified AdSense account.
+-- | Lists all the alerts available in an account.
 --
 -- /See:/ 'accountsAlertsList' smart constructor.
 data AccountsAlertsList =
   AccountsAlertsList'
-    { _aalLocale    :: !(Maybe Text)
-    , _aalAccountId :: !Text
+    { _aalParent :: !Text
+    , _aalXgafv :: !(Maybe Xgafv)
+    , _aalLanguageCode :: !(Maybe Text)
+    , _aalUploadProtocol :: !(Maybe Text)
+    , _aalAccessToken :: !(Maybe Text)
+    , _aalUploadType :: !(Maybe Text)
+    , _aalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,35 +80,89 @@ data AccountsAlertsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aalLocale'
+-- * 'aalParent'
 --
--- * 'aalAccountId'
+-- * 'aalXgafv'
+--
+-- * 'aalLanguageCode'
+--
+-- * 'aalUploadProtocol'
+--
+-- * 'aalAccessToken'
+--
+-- * 'aalUploadType'
+--
+-- * 'aalCallback'
 accountsAlertsList
-    :: Text -- ^ 'aalAccountId'
+    :: Text -- ^ 'aalParent'
     -> AccountsAlertsList
-accountsAlertsList pAalAccountId_ =
-  AccountsAlertsList' {_aalLocale = Nothing, _aalAccountId = pAalAccountId_}
+accountsAlertsList pAalParent_ =
+  AccountsAlertsList'
+    { _aalParent = pAalParent_
+    , _aalXgafv = Nothing
+    , _aalLanguageCode = Nothing
+    , _aalUploadProtocol = Nothing
+    , _aalAccessToken = Nothing
+    , _aalUploadType = Nothing
+    , _aalCallback = Nothing
+    }
 
 
--- | The locale to use for translating alert messages. The account locale
--- will be used if this is not supplied. The AdSense default (English) will
--- be used if the supplied locale is invalid or unsupported.
-aalLocale :: Lens' AccountsAlertsList (Maybe Text)
-aalLocale
-  = lens _aalLocale (\ s a -> s{_aalLocale = a})
+-- | Required. The account which owns the collection of alerts. Format:
+-- accounts\/{account}
+aalParent :: Lens' AccountsAlertsList Text
+aalParent
+  = lens _aalParent (\ s a -> s{_aalParent = a})
 
--- | Account for which to retrieve the alerts.
-aalAccountId :: Lens' AccountsAlertsList Text
-aalAccountId
-  = lens _aalAccountId (\ s a -> s{_aalAccountId = a})
+-- | V1 error format.
+aalXgafv :: Lens' AccountsAlertsList (Maybe Xgafv)
+aalXgafv = lens _aalXgafv (\ s a -> s{_aalXgafv = a})
+
+-- | The language to use for translating alert messages. If unspecified, this
+-- defaults to the user\'s display language. If the given language is not
+-- supported, alerts will be returned in English. The language is specified
+-- as an [IETF BCP-47 language
+-- code](https:\/\/en.wikipedia.org\/wiki\/IETF_language_tag).
+aalLanguageCode :: Lens' AccountsAlertsList (Maybe Text)
+aalLanguageCode
+  = lens _aalLanguageCode
+      (\ s a -> s{_aalLanguageCode = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aalUploadProtocol :: Lens' AccountsAlertsList (Maybe Text)
+aalUploadProtocol
+  = lens _aalUploadProtocol
+      (\ s a -> s{_aalUploadProtocol = a})
+
+-- | OAuth access token.
+aalAccessToken :: Lens' AccountsAlertsList (Maybe Text)
+aalAccessToken
+  = lens _aalAccessToken
+      (\ s a -> s{_aalAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aalUploadType :: Lens' AccountsAlertsList (Maybe Text)
+aalUploadType
+  = lens _aalUploadType
+      (\ s a -> s{_aalUploadType = a})
+
+-- | JSONP
+aalCallback :: Lens' AccountsAlertsList (Maybe Text)
+aalCallback
+  = lens _aalCallback (\ s a -> s{_aalCallback = a})
 
 instance GoogleRequest AccountsAlertsList where
-        type Rs AccountsAlertsList = Alerts
+        type Rs AccountsAlertsList = ListAlertsResponse
         type Scopes AccountsAlertsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsAlertsList'{..}
-          = go _aalAccountId _aalLocale (Just AltJSON)
+          = go _aalParent _aalXgafv _aalLanguageCode
+              _aalUploadProtocol
+              _aalAccessToken
+              _aalUploadType
+              _aalCallback
+              (Just AltJSON)
               adSenseService
           where go
                   = buildClient

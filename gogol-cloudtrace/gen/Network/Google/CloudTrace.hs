@@ -13,14 +13,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sends application trace data to Stackdriver Trace for viewing. Trace
--- data is collected for all App Engine applications by default. Trace data
--- from other applications can be provided using this API. This library is
--- used to interact with the Trace API directly. If you are looking to
--- instrument your application for Stackdriver Trace, we recommend using
+-- Sends application trace data to Cloud Trace for viewing. Trace data is
+-- collected for all App Engine applications by default. Trace data from
+-- other applications can be provided using this API. This library is used
+-- to interact with the Cloud Trace API directly. If you are looking to
+-- instrument your application for Cloud Trace, we recommend using
 -- OpenCensus.
 --
--- /See:/ <https://cloud.google.com/trace Stackdriver Trace API Reference>
+-- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference>
 module Network.Google.CloudTrace
     (
     -- * Service Configuration
@@ -46,6 +46,7 @@ module Network.Google.CloudTrace
     -- ** Span
     , Span
     , span
+    , sSpanKind
     , sStatus
     , sStartTime
     , sChildSpanCount
@@ -102,6 +103,9 @@ module Network.Google.CloudTrace
     -- ** Empty
     , Empty
     , empty
+
+    -- ** SpanSpanKind
+    , SpanSpanKind (..)
 
     -- ** Link
     , Link
@@ -186,16 +190,16 @@ module Network.Google.CloudTrace
     , teTime
     ) where
 
-import           Network.Google.CloudTrace.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
-import           Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
+import Network.Google.Prelude
+import Network.Google.CloudTrace.Types
+import Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
+import Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Stackdriver Trace API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Trace API service.
 type CloudTraceAPI =
      ProjectsTracesSpansCreateSpanResource :<|>
        ProjectsTracesBatchWriteResource

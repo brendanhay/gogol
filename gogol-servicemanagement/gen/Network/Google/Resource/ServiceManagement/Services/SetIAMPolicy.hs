@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.setIamPolicy@.
 module Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
     , ssipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.setIamPolicy@ method which the
 -- 'ServicesSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ServicesSetIAMPolicyResource =
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'servicesSetIAMPolicy' smart constructor.
 data ServicesSetIAMPolicy =
   ServicesSetIAMPolicy'
-    { _ssipXgafv          :: !(Maybe Xgafv)
+    { _ssipXgafv :: !(Maybe Xgafv)
     , _ssipUploadProtocol :: !(Maybe Text)
-    , _ssipAccessToken    :: !(Maybe Text)
-    , _ssipUploadType     :: !(Maybe Text)
-    , _ssipPayload        :: !SetIAMPolicyRequest
-    , _ssipResource       :: !Text
-    , _ssipCallback       :: !(Maybe Text)
+    , _ssipAccessToken :: !(Maybe Text)
+    , _ssipUploadType :: !(Maybe Text)
+    , _ssipPayload :: !SetIAMPolicyRequest
+    , _ssipResource :: !Text
+    , _ssipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

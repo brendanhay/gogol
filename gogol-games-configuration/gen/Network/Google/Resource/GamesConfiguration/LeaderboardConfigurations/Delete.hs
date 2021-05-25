@@ -22,7 +22,7 @@
 --
 -- Delete the leaderboard configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.delete@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.delete@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Dele
     , LeaderboardConfigurationsDelete
 
     -- * Request Lenses
+    , lcdXgafv
+    , lcdUploadProtocol
+    , lcdAccessToken
+    , lcdUploadType
     , lcdLeaderboardId
+    , lcdCallback
     ) where
 
-import           Network.Google.GamesConfiguration.Types
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.delete@ method which the
 -- 'LeaderboardConfigurationsDelete' request conforms to.
@@ -46,14 +51,24 @@ type LeaderboardConfigurationsDeleteResource =
        "v1configuration" :>
          "leaderboards" :>
            Capture "leaderboardId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsDelete' smart constructor.
-newtype LeaderboardConfigurationsDelete =
+data LeaderboardConfigurationsDelete =
   LeaderboardConfigurationsDelete'
-    { _lcdLeaderboardId :: Text
+    { _lcdXgafv :: !(Maybe Xgafv)
+    , _lcdUploadProtocol :: !(Maybe Text)
+    , _lcdAccessToken :: !(Maybe Text)
+    , _lcdUploadType :: !(Maybe Text)
+    , _lcdLeaderboardId :: !Text
+    , _lcdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,19 +77,63 @@ newtype LeaderboardConfigurationsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcdXgafv'
+--
+-- * 'lcdUploadProtocol'
+--
+-- * 'lcdAccessToken'
+--
+-- * 'lcdUploadType'
+--
 -- * 'lcdLeaderboardId'
+--
+-- * 'lcdCallback'
 leaderboardConfigurationsDelete
     :: Text -- ^ 'lcdLeaderboardId'
     -> LeaderboardConfigurationsDelete
 leaderboardConfigurationsDelete pLcdLeaderboardId_ =
-  LeaderboardConfigurationsDelete' {_lcdLeaderboardId = pLcdLeaderboardId_}
+  LeaderboardConfigurationsDelete'
+    { _lcdXgafv = Nothing
+    , _lcdUploadProtocol = Nothing
+    , _lcdAccessToken = Nothing
+    , _lcdUploadType = Nothing
+    , _lcdLeaderboardId = pLcdLeaderboardId_
+    , _lcdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+lcdXgafv :: Lens' LeaderboardConfigurationsDelete (Maybe Xgafv)
+lcdXgafv = lens _lcdXgafv (\ s a -> s{_lcdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lcdUploadProtocol :: Lens' LeaderboardConfigurationsDelete (Maybe Text)
+lcdUploadProtocol
+  = lens _lcdUploadProtocol
+      (\ s a -> s{_lcdUploadProtocol = a})
+
+-- | OAuth access token.
+lcdAccessToken :: Lens' LeaderboardConfigurationsDelete (Maybe Text)
+lcdAccessToken
+  = lens _lcdAccessToken
+      (\ s a -> s{_lcdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lcdUploadType :: Lens' LeaderboardConfigurationsDelete (Maybe Text)
+lcdUploadType
+  = lens _lcdUploadType
+      (\ s a -> s{_lcdUploadType = a})
 
 -- | The ID of the leaderboard.
 lcdLeaderboardId :: Lens' LeaderboardConfigurationsDelete Text
 lcdLeaderboardId
   = lens _lcdLeaderboardId
       (\ s a -> s{_lcdLeaderboardId = a})
+
+-- | JSONP
+lcdCallback :: Lens' LeaderboardConfigurationsDelete (Maybe Text)
+lcdCallback
+  = lens _lcdCallback (\ s a -> s{_lcdCallback = a})
 
 instance GoogleRequest
            LeaderboardConfigurationsDelete
@@ -83,7 +142,11 @@ instance GoogleRequest
         type Scopes LeaderboardConfigurationsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsDelete'{..}
-          = go _lcdLeaderboardId (Just AltJSON)
+          = go _lcdLeaderboardId _lcdXgafv _lcdUploadProtocol
+              _lcdAccessToken
+              _lcdUploadType
+              _lcdCallback
+              (Just AltJSON)
               gamesConfigurationService
           where go
                   = buildClient

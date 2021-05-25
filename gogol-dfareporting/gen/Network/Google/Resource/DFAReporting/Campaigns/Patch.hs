@@ -22,7 +22,7 @@
 --
 -- Updates an existing campaign. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.campaigns.patch@.
 module Network.Google.Resource.DFAReporting.Campaigns.Patch
     (
     -- * REST Resource
@@ -33,34 +33,49 @@ module Network.Google.Resource.DFAReporting.Campaigns.Patch
     , CampaignsPatch
 
     -- * Request Lenses
+    , cpXgafv
+    , cpUploadProtocol
+    , cpAccessToken
+    , cpUploadType
     , cpProFileId
     , cpPayload
     , cpId
+    , cpCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.patch@ method which the
 -- 'CampaignsPatch' request conforms to.
 type CampaignsPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
                QueryParam "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --
 -- /See:/ 'campaignsPatch' smart constructor.
 data CampaignsPatch =
   CampaignsPatch'
-    { _cpProFileId :: !(Textual Int64)
-    , _cpPayload   :: !Campaign
-    , _cpId        :: !(Textual Int64)
+    { _cpXgafv :: !(Maybe Xgafv)
+    , _cpUploadProtocol :: !(Maybe Text)
+    , _cpAccessToken :: !(Maybe Text)
+    , _cpUploadType :: !(Maybe Text)
+    , _cpProFileId :: !(Textual Int64)
+    , _cpPayload :: !Campaign
+    , _cpId :: !(Textual Int64)
+    , _cpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,11 +84,21 @@ data CampaignsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cpXgafv'
+--
+-- * 'cpUploadProtocol'
+--
+-- * 'cpAccessToken'
+--
+-- * 'cpUploadType'
+--
 -- * 'cpProFileId'
 --
 -- * 'cpPayload'
 --
 -- * 'cpId'
+--
+-- * 'cpCallback'
 campaignsPatch
     :: Int64 -- ^ 'cpProFileId'
     -> Campaign -- ^ 'cpPayload'
@@ -81,11 +106,37 @@ campaignsPatch
     -> CampaignsPatch
 campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
   CampaignsPatch'
-    { _cpProFileId = _Coerce # pCpProFileId_
+    { _cpXgafv = Nothing
+    , _cpUploadProtocol = Nothing
+    , _cpAccessToken = Nothing
+    , _cpUploadType = Nothing
+    , _cpProFileId = _Coerce # pCpProFileId_
     , _cpPayload = pCpPayload_
     , _cpId = _Coerce # pCpId_
+    , _cpCallback = Nothing
     }
 
+
+-- | V1 error format.
+cpXgafv :: Lens' CampaignsPatch (Maybe Xgafv)
+cpXgafv = lens _cpXgafv (\ s a -> s{_cpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cpUploadProtocol :: Lens' CampaignsPatch (Maybe Text)
+cpUploadProtocol
+  = lens _cpUploadProtocol
+      (\ s a -> s{_cpUploadProtocol = a})
+
+-- | OAuth access token.
+cpAccessToken :: Lens' CampaignsPatch (Maybe Text)
+cpAccessToken
+  = lens _cpAccessToken
+      (\ s a -> s{_cpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cpUploadType :: Lens' CampaignsPatch (Maybe Text)
+cpUploadType
+  = lens _cpUploadType (\ s a -> s{_cpUploadType = a})
 
 -- | User profile ID associated with this request.
 cpProFileId :: Lens' CampaignsPatch Int64
@@ -102,12 +153,22 @@ cpPayload
 cpId :: Lens' CampaignsPatch Int64
 cpId = lens _cpId (\ s a -> s{_cpId = a}) . _Coerce
 
+-- | JSONP
+cpCallback :: Lens' CampaignsPatch (Maybe Text)
+cpCallback
+  = lens _cpCallback (\ s a -> s{_cpCallback = a})
+
 instance GoogleRequest CampaignsPatch where
         type Rs CampaignsPatch = Campaign
         type Scopes CampaignsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsPatch'{..}
-          = go _cpProFileId (Just _cpId) (Just AltJSON)
+          = go _cpProFileId (Just _cpId) _cpXgafv
+              _cpUploadProtocol
+              _cpAccessToken
+              _cpUploadType
+              _cpCallback
+              (Just AltJSON)
               _cpPayload
               dFAReportingService
           where go

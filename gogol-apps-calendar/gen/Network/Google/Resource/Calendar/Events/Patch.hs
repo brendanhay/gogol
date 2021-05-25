@@ -44,8 +44,8 @@ module Network.Google.Resource.Calendar.Events.Patch
     , epEventId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.patch@ method which the
 -- 'EventsPatch' request conforms to.
@@ -71,14 +71,14 @@ type EventsPatchResource =
 data EventsPatch =
   EventsPatch'
     { _epConferenceDataVersion :: !(Maybe (Textual Int32))
-    , _epCalendarId            :: !Text
-    , _epPayload               :: !Event
-    , _epMaxAttendees          :: !(Maybe (Textual Int32))
-    , _epSendNotifications     :: !(Maybe Bool)
-    , _epSupportsAttachments   :: !(Maybe Bool)
-    , _epSendUpdates           :: !(Maybe EventsPatchSendUpdates)
-    , _epAlwaysIncludeEmail    :: !(Maybe Bool)
-    , _epEventId               :: !Text
+    , _epCalendarId :: !Text
+    , _epPayload :: !Event
+    , _epMaxAttendees :: !(Maybe (Textual Int32))
+    , _epSendNotifications :: !(Maybe Bool)
+    , _epSupportsAttachments :: !(Maybe Bool)
+    , _epSendUpdates :: !(Maybe EventsPatchSendUpdates)
+    , _epAlwaysIncludeEmail :: !(Maybe Bool)
+    , _epEventId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -178,12 +178,10 @@ epSendUpdates
   = lens _epSendUpdates
       (\ s a -> s{_epSendUpdates = a})
 
--- | Whether to always include a value in the email field for the organizer,
--- creator and attendees, even if no real email is available (i.e. a
--- generated, non-working value will be provided). The use of this option
--- is discouraged and should only be used by clients which cannot handle
--- the absence of an email address value in the mentioned places. Optional.
--- The default is False.
+-- | Deprecated and ignored. A value will always be returned in the email
+-- field for the organizer, creator and attendees, even if no real email
+-- address is available (i.e. a generated, non-working value will be
+-- provided).
 epAlwaysIncludeEmail :: Lens' EventsPatch (Maybe Bool)
 epAlwaysIncludeEmail
   = lens _epAlwaysIncludeEmail

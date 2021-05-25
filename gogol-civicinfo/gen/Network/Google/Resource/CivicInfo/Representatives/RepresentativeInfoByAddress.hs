@@ -23,7 +23,7 @@
 -- Looks up political geography and representative information for a single
 -- address.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByAddress@.
+-- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByAddress@.
 module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
     (
     -- * REST Resource
@@ -34,15 +34,19 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
     , RepresentativesRepresentativeInfoByAddress
 
     -- * Request Lenses
+    , rribaXgafv
     , rribaRoles
+    , rribaUploadProtocol
+    , rribaAccessToken
+    , rribaUploadType
     , rribaAddress
-    , rribaPayload
     , rribaIncludeOffices
     , rribaLevels
+    , rribaCallback
     ) where
 
-import           Network.Google.CivicInfo.Types
-import           Network.Google.Prelude
+import Network.Google.CivicInfo.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.representatives.representativeInfoByAddress@ method which the
 -- 'RepresentativesRepresentativeInfoByAddress' request conforms to.
@@ -51,17 +55,21 @@ type RepresentativesRepresentativeInfoByAddressResource
      "civicinfo" :>
        "v2" :>
          "representatives" :>
-           QueryParams "roles"
-             RepresentativesRepresentativeInfoByAddressRoles
-             :>
-             QueryParam "address" Text :>
-               QueryParam "includeOffices" Bool :>
-                 QueryParams "levels"
-                   RepresentativesRepresentativeInfoByAddressLevels
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] RepresentativeInfoRequest :>
-                       Get '[JSON] RepresentativeInfoResponse
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParams "roles"
+               RepresentativesRepresentativeInfoByAddressRoles
+               :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "address" Text :>
+                       QueryParam "includeOffices" Bool :>
+                         QueryParams "levels"
+                           RepresentativesRepresentativeInfoByAddressLevels
+                           :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] RepresentativeInfoResponse
 
 -- | Looks up political geography and representative information for a single
 -- address.
@@ -69,11 +77,15 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- /See:/ 'representativesRepresentativeInfoByAddress' smart constructor.
 data RepresentativesRepresentativeInfoByAddress =
   RepresentativesRepresentativeInfoByAddress'
-    { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
-    , _rribaAddress        :: !(Maybe Text)
-    , _rribaPayload        :: !RepresentativeInfoRequest
+    { _rribaXgafv :: !(Maybe Xgafv)
+    , _rribaRoles :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
+    , _rribaUploadProtocol :: !(Maybe Text)
+    , _rribaAccessToken :: !(Maybe Text)
+    , _rribaUploadType :: !(Maybe Text)
+    , _rribaAddress :: !(Maybe Text)
     , _rribaIncludeOffices :: !Bool
-    , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
+    , _rribaLevels :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
+    , _rribaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -82,27 +94,43 @@ data RepresentativesRepresentativeInfoByAddress =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rribaXgafv'
+--
 -- * 'rribaRoles'
 --
--- * 'rribaAddress'
+-- * 'rribaUploadProtocol'
 --
--- * 'rribaPayload'
+-- * 'rribaAccessToken'
+--
+-- * 'rribaUploadType'
+--
+-- * 'rribaAddress'
 --
 -- * 'rribaIncludeOffices'
 --
 -- * 'rribaLevels'
+--
+-- * 'rribaCallback'
 representativesRepresentativeInfoByAddress
-    :: RepresentativeInfoRequest -- ^ 'rribaPayload'
-    -> RepresentativesRepresentativeInfoByAddress
-representativesRepresentativeInfoByAddress pRribaPayload_ =
+    :: RepresentativesRepresentativeInfoByAddress
+representativesRepresentativeInfoByAddress =
   RepresentativesRepresentativeInfoByAddress'
-    { _rribaRoles = Nothing
+    { _rribaXgafv = Nothing
+    , _rribaRoles = Nothing
+    , _rribaUploadProtocol = Nothing
+    , _rribaAccessToken = Nothing
+    , _rribaUploadType = Nothing
     , _rribaAddress = Nothing
-    , _rribaPayload = pRribaPayload_
     , _rribaIncludeOffices = True
     , _rribaLevels = Nothing
+    , _rribaCallback = Nothing
     }
 
+
+-- | V1 error format.
+rribaXgafv :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Xgafv)
+rribaXgafv
+  = lens _rribaXgafv (\ s a -> s{_rribaXgafv = a})
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
@@ -113,16 +141,29 @@ rribaRoles
       _Default
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rribaUploadProtocol :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
+rribaUploadProtocol
+  = lens _rribaUploadProtocol
+      (\ s a -> s{_rribaUploadProtocol = a})
+
+-- | OAuth access token.
+rribaAccessToken :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
+rribaAccessToken
+  = lens _rribaAccessToken
+      (\ s a -> s{_rribaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rribaUploadType :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
+rribaUploadType
+  = lens _rribaUploadType
+      (\ s a -> s{_rribaUploadType = a})
+
 -- | The address to look up. May only be specified if the field ocdId is not
--- given in the URL.
+-- given in the URL
 rribaAddress :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
 rribaAddress
   = lens _rribaAddress (\ s a -> s{_rribaAddress = a})
-
--- | Multipart request metadata.
-rribaPayload :: Lens' RepresentativesRepresentativeInfoByAddress RepresentativeInfoRequest
-rribaPayload
-  = lens _rribaPayload (\ s a -> s{_rribaPayload = a})
 
 -- | Whether to return information about offices and officials. If false,
 -- only the top-level district information will be returned.
@@ -140,6 +181,12 @@ rribaLevels
       _Default
       . _Coerce
 
+-- | JSONP
+rribaCallback :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
+rribaCallback
+  = lens _rribaCallback
+      (\ s a -> s{_rribaCallback = a})
+
 instance GoogleRequest
            RepresentativesRepresentativeInfoByAddress
          where
@@ -150,11 +197,15 @@ instance GoogleRequest
              = '[]
         requestClient
           RepresentativesRepresentativeInfoByAddress'{..}
-          = go (_rribaRoles ^. _Default) _rribaAddress
+          = go _rribaXgafv (_rribaRoles ^. _Default)
+              _rribaUploadProtocol
+              _rribaAccessToken
+              _rribaUploadType
+              _rribaAddress
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)
+              _rribaCallback
               (Just AltJSON)
-              _rribaPayload
               civicInfoService
           where go
                   = buildClient

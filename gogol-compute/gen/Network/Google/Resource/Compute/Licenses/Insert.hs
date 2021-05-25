@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create a License resource in the specified project.
+-- Create a License resource in the specified project. Caution This
+-- resource is intended for use only by third-party partners who are
+-- creating Cloud Marketplace images.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.licenses.insert@.
 module Network.Google.Resource.Compute.Licenses.Insert
@@ -38,8 +40,8 @@ module Network.Google.Resource.Compute.Licenses.Insert
     , liPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.licenses.insert@ method which the
 -- 'LicensesInsert' request conforms to.
@@ -54,14 +56,16 @@ type LicensesInsertResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] License :> Post '[JSON] Operation
 
--- | Create a License resource in the specified project.
+-- | Create a License resource in the specified project. Caution This
+-- resource is intended for use only by third-party partners who are
+-- creating Cloud Marketplace images.
 --
 -- /See:/ 'licensesInsert' smart constructor.
 data LicensesInsert =
   LicensesInsert'
     { _liRequestId :: !(Maybe Text)
-    , _liProject   :: !Text
-    , _liPayload   :: !License
+    , _liProject :: !Text
+    , _liPayload :: !License
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

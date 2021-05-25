@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
     , maullMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountUserLinks.list@ method which the
 -- 'ManagementAccountUserLinksList' request conforms to.
@@ -60,7 +60,7 @@ type ManagementAccountUserLinksListResource =
 -- /See:/ 'managementAccountUserLinksList' smart constructor.
 data ManagementAccountUserLinksList =
   ManagementAccountUserLinksList'
-    { _maullAccountId  :: !Text
+    { _maullAccountId :: !Text
     , _maullStartIndex :: !(Maybe (Textual Int32))
     , _maullMaxResults :: !(Maybe (Textual Int32))
     }

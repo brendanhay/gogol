@@ -20,13 +20,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the FHIR [capability
--- statement](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/capabilitystatement.html)
--- for the store, which contains a description of functionality supported
--- by the server. Implements the FHIR standard [capabilities
--- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#capabilities).
--- On success, the response body will contain a JSON-encoded representation
--- of a \`CapabilityStatement\` resource.
+-- Gets the FHIR capability statement
+-- ([STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/capabilitystatement.html),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/capabilitystatement.html)),
+-- or the [conformance
+-- statement](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/conformance.html)
+-- in the DSTU2 case for the store, which contains a description of
+-- functionality supported by the server. Implements the FHIR standard
+-- capabilities interaction
+-- ([STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#capabilities),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#capabilities)),
+-- or the [conformance
+-- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#conformance)
+-- in the DSTU2 case. On success, the response body contains a JSON-encoded
+-- representation of a \`CapabilityStatement\` resource.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.fhir.capabilities@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Capabilities
@@ -47,14 +54,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfsfcCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.capabilities@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresFhirCapabilities' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresFhirCapabilitiesResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "fhir" :>
            "metadata" :>
@@ -65,23 +72,30 @@ type ProjectsLocationsDataSetsFhirStoresFhirCapabilitiesResource
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] HTTPBody
 
--- | Gets the FHIR [capability
--- statement](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/capabilitystatement.html)
--- for the store, which contains a description of functionality supported
--- by the server. Implements the FHIR standard [capabilities
--- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#capabilities).
--- On success, the response body will contain a JSON-encoded representation
--- of a \`CapabilityStatement\` resource.
+-- | Gets the FHIR capability statement
+-- ([STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/capabilitystatement.html),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/capabilitystatement.html)),
+-- or the [conformance
+-- statement](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/conformance.html)
+-- in the DSTU2 case for the store, which contains a description of
+-- functionality supported by the server. Implements the FHIR standard
+-- capabilities interaction
+-- ([STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#capabilities),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#capabilities)),
+-- or the [conformance
+-- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#conformance)
+-- in the DSTU2 case. On success, the response body contains a JSON-encoded
+-- representation of a \`CapabilityStatement\` resource.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresFhirCapabilities' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresFhirCapabilities =
   ProjectsLocationsDataSetsFhirStoresFhirCapabilities'
-    { _pldsfsfcXgafv          :: !(Maybe Xgafv)
+    { _pldsfsfcXgafv :: !(Maybe Xgafv)
     , _pldsfsfcUploadProtocol :: !(Maybe Text)
-    , _pldsfsfcAccessToken    :: !(Maybe Text)
-    , _pldsfsfcUploadType     :: !(Maybe Text)
-    , _pldsfsfcName           :: !Text
-    , _pldsfsfcCallback       :: !(Maybe Text)
+    , _pldsfsfcAccessToken :: !(Maybe Text)
+    , _pldsfsfcUploadType :: !(Maybe Text)
+    , _pldsfsfcName :: !Text
+    , _pldsfsfcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,6 +22,12 @@ module Network.Google.BinaryAuthorization.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * Signature
+    , Signature
+    , signature
+    , sSignature
+    , sPublicKeyId
+
     -- * PkixPublicKey
     , PkixPublicKey
     , pkixPublicKey
@@ -36,16 +42,14 @@ module Network.Google.BinaryAuthorization.Types
     , eTitle
     , eDescription
 
-    -- * UserOwnedDrydockNote
-    , UserOwnedDrydockNote
-    , userOwnedDrydockNote
-    , uodnDelegationServiceAccountEmail
-    , uodnPublicKeys
-    , uodnNoteReference
-
     -- * Empty
     , Empty
     , empty
+
+    -- * PolicyKubernetesNamespaceAdmissionRules
+    , PolicyKubernetesNamespaceAdmissionRules
+    , policyKubernetesNamespaceAdmissionRules
+    , pknarAddtional
 
     -- * AdmissionRuleEnforcementMode
     , AdmissionRuleEnforcementMode (..)
@@ -58,16 +62,39 @@ module Network.Google.BinaryAuthorization.Types
     , setIAMPolicyRequest
     , siprPolicy
 
+    -- * ValidateAttestationOccurrenceRequest
+    , ValidateAttestationOccurrenceRequest
+    , validateAttestationOccurrenceRequest
+    , vaorOccurrenceNote
+    , vaorAttestation
+    , vaorOccurrenceResourceURI
+
+    -- * Jwt
+    , Jwt
+    , jwt
+    , jCompactJwt
+
     -- * ListAttestorsResponse
     , ListAttestorsResponse
     , listAttestorsResponse
     , larNextPageToken
     , larAttestors
 
+    -- * ValidateAttestationOccurrenceResponse
+    , ValidateAttestationOccurrenceResponse
+    , validateAttestationOccurrenceResponse
+    , vaorDenialReason
+    , vaorResult
+
     -- * AdmissionWhiteListPattern
     , AdmissionWhiteListPattern
     , admissionWhiteListPattern
     , awlpNamePattern
+
+    -- * PolicyIstioServiceIdentityAdmissionRules
+    , PolicyIstioServiceIdentityAdmissionRules
+    , policyIstioServiceIdentityAdmissionRules
+    , pisiarAddtional
 
     -- * PkixPublicKeySignatureAlgorithm
     , PkixPublicKeySignatureAlgorithm (..)
@@ -90,12 +117,20 @@ module Network.Google.BinaryAuthorization.Types
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- * PolicyKubernetesServiceAccountAdmissionRules
+    , PolicyKubernetesServiceAccountAdmissionRules
+    , policyKubernetesServiceAccountAdmissionRules
+    , pksaarAddtional
+
     -- * IAMPolicy
     , IAMPolicy
     , iamPolicy
     , ipEtag
     , ipVersion
     , ipBindings
+
+    -- * ValidateAttestationOccurrenceResponseResult
+    , ValidateAttestationOccurrenceResponseResult (..)
 
     -- * AttestorPublicKey
     , AttestorPublicKey
@@ -114,12 +149,22 @@ module Network.Google.BinaryAuthorization.Types
     , Policy
     , policy
     , pDefaultAdmissionRule
+    , pIstioServiceIdentityAdmissionRules
     , pAdmissionWhiteListPatterns
+    , pKubernetesServiceAccountAdmissionRules
     , pClusterAdmissionRules
     , pUpdateTime
     , pName
+    , pKubernetesNamespaceAdmissionRules
     , pGlobalPolicyEvaluationMode
     , pDescription
+
+    -- * UserOwnedGrafeasNote
+    , UserOwnedGrafeasNote
+    , userOwnedGrafeasNote
+    , uognDelegationServiceAccountEmail
+    , uognPublicKeys
+    , uognNoteReference
 
     -- * PolicyClusterAdmissionRules
     , PolicyClusterAdmissionRules
@@ -129,10 +174,17 @@ module Network.Google.BinaryAuthorization.Types
     -- * Attestor
     , Attestor
     , attestor
-    , aUserOwnedDrydockNote
     , aUpdateTime
     , aName
+    , aUserOwnedGrafeasNote
     , aDescription
+
+    -- * AttestationOccurrence
+    , AttestationOccurrence
+    , attestationOccurrence
+    , aoSerializedPayload
+    , aoJwts
+    , aoSignatures
 
     -- * Binding
     , Binding
@@ -142,17 +194,16 @@ module Network.Google.BinaryAuthorization.Types
     , bCondition
     ) where
 
-import           Network.Google.BinaryAuthorization.Types.Product
-import           Network.Google.BinaryAuthorization.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types.Product
+import Network.Google.BinaryAuthorization.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
 binaryAuthorizationService :: ServiceConfig
 binaryAuthorizationService
-  = defaultService
-      (ServiceId "binaryauthorization:v1beta1")
+  = defaultService (ServiceId "binaryauthorization:v1")
       "binaryauthorization.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

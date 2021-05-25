@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,6 +22,9 @@ module Network.Google.GamesConfiguration.Types
     -- * OAuth Scopes
     , androidPublisherScope
 
+    -- * LeaderboardConfigurationScoreOrder
+    , LeaderboardConfigurationScoreOrder (..)
+
     -- * ImageConfiguration
     , ImageConfiguration
     , imageConfiguration
@@ -29,6 +32,12 @@ module Network.Google.GamesConfiguration.Types
     , icKind
     , icURL
     , icImageType
+
+    -- * AchievementConfigurationAchievementType
+    , AchievementConfigurationAchievementType (..)
+
+    -- * ImageConfigurationImageType
+    , ImageConfigurationImageType (..)
 
     -- * LeaderboardConfigurationListResponse
     , LeaderboardConfigurationListResponse
@@ -46,6 +55,9 @@ module Network.Google.GamesConfiguration.Types
     , gnacOne
     , gnacZero
     , gnacMany
+
+    -- * AchievementConfigurationInitialState
+    , AchievementConfigurationInitialState (..)
 
     -- * AchievementConfigurationListResponse
     , AchievementConfigurationListResponse
@@ -78,6 +90,9 @@ module Network.Google.GamesConfiguration.Types
     , acDraft
     , acId
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * LocalizedString
     , LocalizedString
     , localizedString
@@ -92,6 +107,9 @@ module Network.Google.GamesConfiguration.Types
     , gnfcCurrencyCode
     , gnfcNumberFormatType
     , gnfcNumDecimalPlaces
+
+    -- * GamesNumberFormatConfigurationNumberFormatType
+    , GamesNumberFormatConfigurationNumberFormatType (..)
 
     -- * ImageConfigurationsUploadImageType
     , ImageConfigurationsUploadImageType (..)
@@ -122,16 +140,16 @@ module Network.Google.GamesConfiguration.Types
     , lsbTranslations
     ) where
 
-import           Network.Google.GamesConfiguration.Types.Product
-import           Network.Google.GamesConfiguration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types.Product
+import Network.Google.GamesConfiguration.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
 gamesConfigurationService :: ServiceConfig
 gamesConfigurationService
   = defaultService
       (ServiceId "gamesConfiguration:v1configuration")
-      "www.googleapis.com"
+      "gamesconfiguration.googleapis.com"
 
 -- | View and manage your Google Play Developer account
 androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]

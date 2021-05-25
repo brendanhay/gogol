@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Dele
     , mwpawldWebPropertyAdWordsLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.delete@ method which the
 -- 'ManagementWebPropertyAdWordsLinksDelete' request conforms to.
@@ -61,8 +61,8 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
 -- /See:/ 'managementWebPropertyAdWordsLinksDelete' smart constructor.
 data ManagementWebPropertyAdWordsLinksDelete =
   ManagementWebPropertyAdWordsLinksDelete'
-    { _mwpawldWebPropertyId            :: !Text
-    , _mwpawldAccountId                :: !Text
+    { _mwpawldWebPropertyId :: !Text
+    , _mwpawldAccountId :: !Text
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

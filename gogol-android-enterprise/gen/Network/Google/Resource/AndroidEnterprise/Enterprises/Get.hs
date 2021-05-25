@@ -33,11 +33,16 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
     , EnterprisesGet
 
     -- * Request Lenses
+    , eXgafv
+    , eUploadProtocol
     , eEnterpriseId
+    , eAccessToken
+    , eUploadType
+    , eCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.get@ method which the
 -- 'EnterprisesGet' request conforms to.
@@ -46,14 +51,24 @@ type EnterprisesGetResource =
        "v1" :>
          "enterprises" :>
            Capture "enterpriseId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Enterprise
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Enterprise
 
 -- | Retrieves the name and domain of an enterprise.
 --
 -- /See:/ 'enterprisesGet' smart constructor.
-newtype EnterprisesGet =
+data EnterprisesGet =
   EnterprisesGet'
-    { _eEnterpriseId :: Text
+    { _eXgafv :: !(Maybe Xgafv)
+    , _eUploadProtocol :: !(Maybe Text)
+    , _eEnterpriseId :: !Text
+    , _eAccessToken :: !(Maybe Text)
+    , _eUploadType :: !(Maybe Text)
+    , _eCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,13 +77,40 @@ newtype EnterprisesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eXgafv'
+--
+-- * 'eUploadProtocol'
+--
 -- * 'eEnterpriseId'
+--
+-- * 'eAccessToken'
+--
+-- * 'eUploadType'
+--
+-- * 'eCallback'
 enterprisesGet
     :: Text -- ^ 'eEnterpriseId'
     -> EnterprisesGet
 enterprisesGet pEEnterpriseId_ =
-  EnterprisesGet' {_eEnterpriseId = pEEnterpriseId_}
+  EnterprisesGet'
+    { _eXgafv = Nothing
+    , _eUploadProtocol = Nothing
+    , _eEnterpriseId = pEEnterpriseId_
+    , _eAccessToken = Nothing
+    , _eUploadType = Nothing
+    , _eCallback = Nothing
+    }
 
+
+-- | V1 error format.
+eXgafv :: Lens' EnterprisesGet (Maybe Xgafv)
+eXgafv = lens _eXgafv (\ s a -> s{_eXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eUploadProtocol :: Lens' EnterprisesGet (Maybe Text)
+eUploadProtocol
+  = lens _eUploadProtocol
+      (\ s a -> s{_eUploadProtocol = a})
 
 -- | The ID of the enterprise.
 eEnterpriseId :: Lens' EnterprisesGet Text
@@ -76,12 +118,31 @@ eEnterpriseId
   = lens _eEnterpriseId
       (\ s a -> s{_eEnterpriseId = a})
 
+-- | OAuth access token.
+eAccessToken :: Lens' EnterprisesGet (Maybe Text)
+eAccessToken
+  = lens _eAccessToken (\ s a -> s{_eAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eUploadType :: Lens' EnterprisesGet (Maybe Text)
+eUploadType
+  = lens _eUploadType (\ s a -> s{_eUploadType = a})
+
+-- | JSONP
+eCallback :: Lens' EnterprisesGet (Maybe Text)
+eCallback
+  = lens _eCallback (\ s a -> s{_eCallback = a})
+
 instance GoogleRequest EnterprisesGet where
         type Rs EnterprisesGet = Enterprise
         type Scopes EnterprisesGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesGet'{..}
-          = go _eEnterpriseId (Just AltJSON)
+          = go _eEnterpriseId _eXgafv _eUploadProtocol
+              _eAccessToken
+              _eUploadType
+              _eCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy EnterprisesGetResource)

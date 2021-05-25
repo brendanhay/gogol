@@ -43,8 +43,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.GetJWKs
     , plcgjCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.getJwks@ method which the
 -- 'ProjectsLocationsClustersGetJWKs' request conforms to.
@@ -67,12 +67,12 @@ type ProjectsLocationsClustersGetJWKsResource =
 -- /See:/ 'projectsLocationsClustersGetJWKs' smart constructor.
 data ProjectsLocationsClustersGetJWKs =
   ProjectsLocationsClustersGetJWKs'
-    { _plcgjParent         :: !Text
-    , _plcgjXgafv          :: !(Maybe Xgafv)
+    { _plcgjParent :: !Text
+    , _plcgjXgafv :: !(Maybe Xgafv)
     , _plcgjUploadProtocol :: !(Maybe Text)
-    , _plcgjAccessToken    :: !(Maybe Text)
-    , _plcgjUploadType     :: !(Maybe Text)
-    , _plcgjCallback       :: !(Maybe Text)
+    , _plcgjAccessToken :: !(Maybe Text)
+    , _plcgjUploadType :: !(Maybe Text)
+    , _plcgjCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -107,7 +107,7 @@ projectsLocationsClustersGetJWKs pPlcgjParent_ =
 
 
 -- | The cluster (project, location, cluster id) to get keys for. Specified
--- in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcgjParent :: Lens' ProjectsLocationsClustersGetJWKs Text
 plcgjParent
   = lens _plcgjParent (\ s a -> s{_plcgjParent = a})
@@ -146,8 +146,7 @@ instance GoogleRequest
          where
         type Rs ProjectsLocationsClustersGetJWKs =
              GetJSONWebKeysResponse
-        type Scopes ProjectsLocationsClustersGetJWKs =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+        type Scopes ProjectsLocationsClustersGetJWKs = '[]
         requestClient ProjectsLocationsClustersGetJWKs'{..}
           = go _plcgjParent _plcgjXgafv _plcgjUploadProtocol
               _plcgjAccessToken

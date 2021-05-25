@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.Snapshots.Get
     , psgSnapshotId
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.snapshots.get@ method which the
 -- 'ProjectsSnapshotsGet' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsSnapshotsGetResource =
 -- /See:/ 'projectsSnapshotsGet' smart constructor.
 data ProjectsSnapshotsGet =
   ProjectsSnapshotsGet'
-    { _psgXgafv          :: !(Maybe Xgafv)
+    { _psgXgafv :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
-    , _psgLocation       :: !(Maybe Text)
-    , _psgAccessToken    :: !(Maybe Text)
-    , _psgUploadType     :: !(Maybe Text)
-    , _psgProjectId      :: !Text
-    , _psgCallback       :: !(Maybe Text)
-    , _psgSnapshotId     :: !Text
+    , _psgLocation :: !(Maybe Text)
+    , _psgAccessToken :: !(Maybe Text)
+    , _psgUploadType :: !(Maybe Text)
+    , _psgProjectId :: !Text
+    , _psgCallback :: !(Maybe Text)
+    , _psgSnapshotId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

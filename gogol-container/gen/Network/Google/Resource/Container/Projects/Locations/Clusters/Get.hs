@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.Get
     , plcgCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.get@ method which the
 -- 'ProjectsLocationsClustersGet' request conforms to.
@@ -67,15 +67,15 @@ type ProjectsLocationsClustersGetResource =
 -- /See:/ 'projectsLocationsClustersGet' smart constructor.
 data ProjectsLocationsClustersGet =
   ProjectsLocationsClustersGet'
-    { _plcgXgafv          :: !(Maybe Xgafv)
+    { _plcgXgafv :: !(Maybe Xgafv)
     , _plcgUploadProtocol :: !(Maybe Text)
-    , _plcgAccessToken    :: !(Maybe Text)
-    , _plcgUploadType     :: !(Maybe Text)
-    , _plcgZone           :: !(Maybe Text)
-    , _plcgName           :: !Text
-    , _plcgClusterId      :: !(Maybe Text)
-    , _plcgProjectId      :: !(Maybe Text)
-    , _plcgCallback       :: !(Maybe Text)
+    , _plcgAccessToken :: !(Maybe Text)
+    , _plcgUploadType :: !(Maybe Text)
+    , _plcgZone :: !(Maybe Text)
+    , _plcgName :: !Text
+    , _plcgClusterId :: !(Maybe Text)
+    , _plcgProjectId :: !(Maybe Text)
+    , _plcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -142,13 +142,14 @@ plcgUploadType
       (\ s a -> s{_plcgUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 plcgZone :: Lens' ProjectsLocationsClustersGet (Maybe Text)
 plcgZone = lens _plcgZone (\ s a -> s{_plcgZone = a})
 
 -- | The name (project, location, cluster) of the cluster to retrieve.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcgName :: Lens' ProjectsLocationsClustersGet Text
 plcgName = lens _plcgName (\ s a -> s{_plcgName = a})
 

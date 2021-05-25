@@ -33,20 +33,23 @@ module Network.Google.Resource.Storage.Objects.WatchAll
     , ObjectsWatchAll
 
     -- * Request Lenses
+    , owaStartOffSet
     , owaPrefix
     , owaBucket
     , owaPayload
     , owaVersions
     , owaUserProject
+    , owaEndOffSet
     , owaIncludeTrailingDelimiter
     , owaProjection
+    , owaProvisionalUserProject
     , owaPageToken
     , owaDelimiter
     , owaMaxResults
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.watchAll@ method which the
 -- 'ObjectsWatchAll' request conforms to.
@@ -57,33 +60,40 @@ type ObjectsWatchAllResource =
            Capture "bucket" Text :>
              "o" :>
                "watch" :>
-                 QueryParam "prefix" Text :>
-                   QueryParam "versions" Bool :>
-                     QueryParam "userProject" Text :>
-                       QueryParam "includeTrailingDelimiter" Bool :>
-                         QueryParam "projection" ObjectsWatchAllProjection :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "delimiter" Text :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Channel :>
-                                     Post '[JSON] Channel
+                 QueryParam "startOffset" Text :>
+                   QueryParam "prefix" Text :>
+                     QueryParam "versions" Bool :>
+                       QueryParam "userProject" Text :>
+                         QueryParam "endOffset" Text :>
+                           QueryParam "includeTrailingDelimiter" Bool :>
+                             QueryParam "projection" ObjectsWatchAllProjection
+                               :>
+                               QueryParam "provisionalUserProject" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "delimiter" Text :>
+                                     QueryParam "maxResults" (Textual Word32) :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Channel :>
+                                           Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ 'objectsWatchAll' smart constructor.
 data ObjectsWatchAll =
   ObjectsWatchAll'
-    { _owaPrefix                   :: !(Maybe Text)
-    , _owaBucket                   :: !Text
-    , _owaPayload                  :: !Channel
-    , _owaVersions                 :: !(Maybe Bool)
-    , _owaUserProject              :: !(Maybe Text)
+    { _owaStartOffSet :: !(Maybe Text)
+    , _owaPrefix :: !(Maybe Text)
+    , _owaBucket :: !Text
+    , _owaPayload :: !Channel
+    , _owaVersions :: !(Maybe Bool)
+    , _owaUserProject :: !(Maybe Text)
+    , _owaEndOffSet :: !(Maybe Text)
     , _owaIncludeTrailingDelimiter :: !(Maybe Bool)
-    , _owaProjection               :: !(Maybe ObjectsWatchAllProjection)
-    , _owaPageToken                :: !(Maybe Text)
-    , _owaDelimiter                :: !(Maybe Text)
-    , _owaMaxResults               :: !(Textual Word32)
+    , _owaProjection :: !(Maybe ObjectsWatchAllProjection)
+    , _owaProvisionalUserProject :: !(Maybe Text)
+    , _owaPageToken :: !(Maybe Text)
+    , _owaDelimiter :: !(Maybe Text)
+    , _owaMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,6 +101,8 @@ data ObjectsWatchAll =
 -- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owaStartOffSet'
 --
 -- * 'owaPrefix'
 --
@@ -102,9 +114,13 @@ data ObjectsWatchAll =
 --
 -- * 'owaUserProject'
 --
+-- * 'owaEndOffSet'
+--
 -- * 'owaIncludeTrailingDelimiter'
 --
 -- * 'owaProjection'
+--
+-- * 'owaProvisionalUserProject'
 --
 -- * 'owaPageToken'
 --
@@ -117,18 +133,29 @@ objectsWatchAll
     -> ObjectsWatchAll
 objectsWatchAll pOwaBucket_ pOwaPayload_ =
   ObjectsWatchAll'
-    { _owaPrefix = Nothing
+    { _owaStartOffSet = Nothing
+    , _owaPrefix = Nothing
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_
     , _owaVersions = Nothing
     , _owaUserProject = Nothing
+    , _owaEndOffSet = Nothing
     , _owaIncludeTrailingDelimiter = Nothing
     , _owaProjection = Nothing
+    , _owaProvisionalUserProject = Nothing
     , _owaPageToken = Nothing
     , _owaDelimiter = Nothing
     , _owaMaxResults = 1000
     }
 
+
+-- | Filter results to objects whose names are lexicographically equal to or
+-- after startOffset. If endOffset is also set, the objects listed will
+-- have names between startOffset (inclusive) and endOffset (exclusive).
+owaStartOffSet :: Lens' ObjectsWatchAll (Maybe Text)
+owaStartOffSet
+  = lens _owaStartOffSet
+      (\ s a -> s{_owaStartOffSet = a})
 
 -- | Filter results to objects whose names begin with this prefix.
 owaPrefix :: Lens' ObjectsWatchAll (Maybe Text)
@@ -158,6 +185,13 @@ owaUserProject
   = lens _owaUserProject
       (\ s a -> s{_owaUserProject = a})
 
+-- | Filter results to objects whose names are lexicographically before
+-- endOffset. If startOffset is also set, the objects listed will have
+-- names between startOffset (inclusive) and endOffset (exclusive).
+owaEndOffSet :: Lens' ObjectsWatchAll (Maybe Text)
+owaEndOffSet
+  = lens _owaEndOffSet (\ s a -> s{_owaEndOffSet = a})
+
 -- | If true, objects that end in exactly one instance of delimiter will have
 -- their metadata included in items in addition to prefixes.
 owaIncludeTrailingDelimiter :: Lens' ObjectsWatchAll (Maybe Bool)
@@ -170,6 +204,13 @@ owaProjection :: Lens' ObjectsWatchAll (Maybe ObjectsWatchAllProjection)
 owaProjection
   = lens _owaProjection
       (\ s a -> s{_owaProjection = a})
+
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+owaProvisionalUserProject :: Lens' ObjectsWatchAll (Maybe Text)
+owaProvisionalUserProject
+  = lens _owaProvisionalUserProject
+      (\ s a -> s{_owaProvisionalUserProject = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
@@ -205,10 +246,13 @@ instance GoogleRequest ObjectsWatchAll where
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsWatchAll'{..}
-          = go _owaBucket _owaPrefix _owaVersions
+          = go _owaBucket _owaStartOffSet _owaPrefix
+              _owaVersions
               _owaUserProject
+              _owaEndOffSet
               _owaIncludeTrailingDelimiter
               _owaProjection
+              _owaProvisionalUserProject
               _owaPageToken
               _owaDelimiter
               (Just _owaMaxResults)

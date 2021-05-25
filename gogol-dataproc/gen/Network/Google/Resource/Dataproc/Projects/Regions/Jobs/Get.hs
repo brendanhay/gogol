@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
     , prjgCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.jobs.get@ method which the
 -- 'ProjectsRegionsJobsGet' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsRegionsJobsGetResource =
 -- /See:/ 'projectsRegionsJobsGet' smart constructor.
 data ProjectsRegionsJobsGet =
   ProjectsRegionsJobsGet'
-    { _prjgXgafv          :: !(Maybe Xgafv)
-    , _prjgJobId          :: !Text
+    { _prjgXgafv :: !(Maybe Xgafv)
+    , _prjgJobId :: !Text
     , _prjgUploadProtocol :: !(Maybe Text)
-    , _prjgAccessToken    :: !(Maybe Text)
-    , _prjgUploadType     :: !(Maybe Text)
-    , _prjgRegion         :: !Text
-    , _prjgProjectId      :: !Text
-    , _prjgCallback       :: !(Maybe Text)
+    , _prjgAccessToken :: !(Maybe Text)
+    , _prjgUploadType :: !(Maybe Text)
+    , _prjgRegion :: !Text
+    , _prjgProjectId :: !Text
+    , _prjgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -145,7 +145,7 @@ prjgUploadType
   = lens _prjgUploadType
       (\ s a -> s{_prjgUploadType = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prjgRegion :: Lens' ProjectsRegionsJobsGet Text
 prjgRegion
   = lens _prjgRegion (\ s a -> s{_prjgRegion = a})

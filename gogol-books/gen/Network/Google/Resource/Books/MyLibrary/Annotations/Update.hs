@@ -22,7 +22,7 @@
 --
 -- Updates an existing annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.update@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.annotations.update@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Update
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Update
     , MyLibraryAnnotationsUpdate
 
     -- * Request Lenses
+    , mlauXgafv
+    , mlauUploadProtocol
+    , mlauAccessToken
+    , mlauUploadType
     , mlauPayload
     , mlauAnnotationId
     , mlauSource
+    , mlauCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.update@ method which the
 -- 'MyLibraryAnnotationsUpdate' request conforms to.
@@ -49,18 +54,29 @@ type MyLibraryAnnotationsUpdateResource =
          "mylibrary" :>
            "annotations" :>
              Capture "annotationId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Annotation :>
+                               Put '[JSON] Annotation
 
 -- | Updates an existing annotation.
 --
 -- /See:/ 'myLibraryAnnotationsUpdate' smart constructor.
 data MyLibraryAnnotationsUpdate =
   MyLibraryAnnotationsUpdate'
-    { _mlauPayload      :: !Annotation
+    { _mlauXgafv :: !(Maybe Xgafv)
+    , _mlauUploadProtocol :: !(Maybe Text)
+    , _mlauAccessToken :: !(Maybe Text)
+    , _mlauUploadType :: !(Maybe Text)
+    , _mlauPayload :: !Annotation
     , _mlauAnnotationId :: !Text
-    , _mlauSource       :: !(Maybe Text)
+    , _mlauSource :: !(Maybe Text)
+    , _mlauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,22 +85,60 @@ data MyLibraryAnnotationsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlauXgafv'
+--
+-- * 'mlauUploadProtocol'
+--
+-- * 'mlauAccessToken'
+--
+-- * 'mlauUploadType'
+--
 -- * 'mlauPayload'
 --
 -- * 'mlauAnnotationId'
 --
 -- * 'mlauSource'
+--
+-- * 'mlauCallback'
 myLibraryAnnotationsUpdate
     :: Annotation -- ^ 'mlauPayload'
     -> Text -- ^ 'mlauAnnotationId'
     -> MyLibraryAnnotationsUpdate
 myLibraryAnnotationsUpdate pMlauPayload_ pMlauAnnotationId_ =
   MyLibraryAnnotationsUpdate'
-    { _mlauPayload = pMlauPayload_
+    { _mlauXgafv = Nothing
+    , _mlauUploadProtocol = Nothing
+    , _mlauAccessToken = Nothing
+    , _mlauUploadType = Nothing
+    , _mlauPayload = pMlauPayload_
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing
+    , _mlauCallback = Nothing
     }
 
+
+-- | V1 error format.
+mlauXgafv :: Lens' MyLibraryAnnotationsUpdate (Maybe Xgafv)
+mlauXgafv
+  = lens _mlauXgafv (\ s a -> s{_mlauXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlauUploadProtocol :: Lens' MyLibraryAnnotationsUpdate (Maybe Text)
+mlauUploadProtocol
+  = lens _mlauUploadProtocol
+      (\ s a -> s{_mlauUploadProtocol = a})
+
+-- | OAuth access token.
+mlauAccessToken :: Lens' MyLibraryAnnotationsUpdate (Maybe Text)
+mlauAccessToken
+  = lens _mlauAccessToken
+      (\ s a -> s{_mlauAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlauUploadType :: Lens' MyLibraryAnnotationsUpdate (Maybe Text)
+mlauUploadType
+  = lens _mlauUploadType
+      (\ s a -> s{_mlauUploadType = a})
 
 -- | Multipart request metadata.
 mlauPayload :: Lens' MyLibraryAnnotationsUpdate Annotation
@@ -102,13 +156,23 @@ mlauSource :: Lens' MyLibraryAnnotationsUpdate (Maybe Text)
 mlauSource
   = lens _mlauSource (\ s a -> s{_mlauSource = a})
 
+-- | JSONP
+mlauCallback :: Lens' MyLibraryAnnotationsUpdate (Maybe Text)
+mlauCallback
+  = lens _mlauCallback (\ s a -> s{_mlauCallback = a})
+
 instance GoogleRequest MyLibraryAnnotationsUpdate
          where
         type Rs MyLibraryAnnotationsUpdate = Annotation
         type Scopes MyLibraryAnnotationsUpdate =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsUpdate'{..}
-          = go _mlauAnnotationId _mlauSource (Just AltJSON)
+          = go _mlauAnnotationId _mlauXgafv _mlauUploadProtocol
+              _mlauAccessToken
+              _mlauUploadType
+              _mlauSource
+              _mlauCallback
+              (Just AltJSON)
               _mlauPayload
               booksService
           where go

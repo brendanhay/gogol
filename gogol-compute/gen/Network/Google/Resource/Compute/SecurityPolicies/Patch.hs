@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches the specified policy with the data included in the request.
+-- Patches the specified policy with the data included in the request. This
+-- cannot be used to be update the rules in the policy. Please use the per
+-- rule methods like addRule, patchRule, and removeRule instead.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.securityPolicies.patch@.
 module Network.Google.Resource.Compute.SecurityPolicies.Patch
@@ -39,8 +41,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.Patch
     , sSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.patch@ method which the
 -- 'SecurityPoliciesPatch' request conforms to.
@@ -57,14 +59,16 @@ type SecurityPoliciesPatchResource =
                        ReqBody '[JSON] SecurityPolicy :>
                          Patch '[JSON] Operation
 
--- | Patches the specified policy with the data included in the request.
+-- | Patches the specified policy with the data included in the request. This
+-- cannot be used to be update the rules in the policy. Please use the per
+-- rule methods like addRule, patchRule, and removeRule instead.
 --
 -- /See:/ 'securityPoliciesPatch' smart constructor.
 data SecurityPoliciesPatch =
   SecurityPoliciesPatch'
-    { _sRequestId      :: !(Maybe Text)
-    , _sProject        :: !Text
-    , _sPayload        :: !SecurityPolicy
+    { _sRequestId :: !(Maybe Text)
+    , _sProject :: !Text
+    , _sPayload :: !SecurityPolicy
     , _sSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

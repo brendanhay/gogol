@@ -40,8 +40,8 @@ module Network.Google.Resource.PlusDomains.Activities.List
     , alMaxResults
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.activities.list@ method which the
 -- 'ActivitiesList' request conforms to.
@@ -63,8 +63,8 @@ type ActivitiesListResource =
 data ActivitiesList =
   ActivitiesList'
     { _alCollection :: !ActivitiesListCollection
-    , _alUserId     :: !Text
-    , _alPageToken  :: !(Maybe Text)
+    , _alUserId :: !Text
+    , _alPageToken :: !(Maybe Text)
     , _alMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

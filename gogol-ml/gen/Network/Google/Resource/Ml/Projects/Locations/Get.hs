@@ -23,7 +23,7 @@
 -- Get the complete list of CMLE capabilities in a location, along with
 -- their location-specific properties.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.locations.get@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.locations.get@.
 module Network.Google.Resource.Ml.Projects.Locations.Get
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Ml.Projects.Locations.Get
     , plgCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.locations.get@ method which the
 -- 'ProjectsLocationsGet' request conforms to.
@@ -64,12 +64,12 @@ type ProjectsLocationsGetResource =
 -- /See:/ 'projectsLocationsGet' smart constructor.
 data ProjectsLocationsGet =
   ProjectsLocationsGet'
-    { _plgXgafv          :: !(Maybe Xgafv)
+    { _plgXgafv :: !(Maybe Xgafv)
     , _plgUploadProtocol :: !(Maybe Text)
-    , _plgAccessToken    :: !(Maybe Text)
-    , _plgUploadType     :: !(Maybe Text)
-    , _plgName           :: !Text
-    , _plgCallback       :: !(Maybe Text)
+    , _plgAccessToken :: !(Maybe Text)
+    , _plgUploadType :: !(Maybe Text)
+    , _plgName :: !Text
+    , _plgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,7 +138,8 @@ instance GoogleRequest ProjectsLocationsGet where
         type Rs ProjectsLocationsGet =
              GoogleCloudMlV1__Location
         type Scopes ProjectsLocationsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsLocationsGet'{..}
           = go _plgName _plgXgafv _plgUploadProtocol
               _plgAccessToken

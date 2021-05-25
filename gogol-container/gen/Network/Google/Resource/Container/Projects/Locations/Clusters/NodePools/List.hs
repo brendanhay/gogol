@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.L
     , plcnplCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.list@ method which the
 -- 'ProjectsLocationsClustersNodePoolsList' request conforms to.
@@ -69,15 +69,15 @@ type ProjectsLocationsClustersNodePoolsListResource =
 -- /See:/ 'projectsLocationsClustersNodePoolsList' smart constructor.
 data ProjectsLocationsClustersNodePoolsList =
   ProjectsLocationsClustersNodePoolsList'
-    { _plcnplParent         :: !Text
-    , _plcnplXgafv          :: !(Maybe Xgafv)
+    { _plcnplParent :: !Text
+    , _plcnplXgafv :: !(Maybe Xgafv)
     , _plcnplUploadProtocol :: !(Maybe Text)
-    , _plcnplAccessToken    :: !(Maybe Text)
-    , _plcnplUploadType     :: !(Maybe Text)
-    , _plcnplZone           :: !(Maybe Text)
-    , _plcnplClusterId      :: !(Maybe Text)
-    , _plcnplProjectId      :: !(Maybe Text)
-    , _plcnplCallback       :: !(Maybe Text)
+    , _plcnplAccessToken :: !(Maybe Text)
+    , _plcnplUploadType :: !(Maybe Text)
+    , _plcnplZone :: !(Maybe Text)
+    , _plcnplClusterId :: !(Maybe Text)
+    , _plcnplProjectId :: !(Maybe Text)
+    , _plcnplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,7 +122,7 @@ projectsLocationsClustersNodePoolsList pPlcnplParent_ =
 
 -- | The parent (project, location, cluster id) where the node pools will be
 -- listed. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\`.
 plcnplParent :: Lens' ProjectsLocationsClustersNodePoolsList Text
 plcnplParent
   = lens _plcnplParent (\ s a -> s{_plcnplParent = a})
@@ -151,8 +151,9 @@ plcnplUploadType
       (\ s a -> s{_plcnplUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the parent field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the parent field.
 plcnplZone :: Lens' ProjectsLocationsClustersNodePoolsList (Maybe Text)
 plcnplZone
   = lens _plcnplZone (\ s a -> s{_plcnplZone = a})

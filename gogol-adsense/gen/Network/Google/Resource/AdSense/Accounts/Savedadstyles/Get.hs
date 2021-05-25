@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
     , asgAccountId
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.savedadstyles.get@ method which the
 -- 'AccountsSavedadstylesGet' request conforms to.
@@ -57,7 +57,7 @@ type AccountsSavedadstylesGetResource =
 data AccountsSavedadstylesGet =
   AccountsSavedadstylesGet'
     { _asgSavedAdStyleId :: !Text
-    , _asgAccountId      :: !Text
+    , _asgAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

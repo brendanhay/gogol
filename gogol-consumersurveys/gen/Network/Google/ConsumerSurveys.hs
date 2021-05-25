@@ -220,19 +220,19 @@ module Network.Google.ConsumerSurveys
     , sqLowValueLabel
     ) where
 
-import           Network.Google.ConsumerSurveys.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.ConsumerSurveys.MobileApppanels.Get
-import           Network.Google.Resource.ConsumerSurveys.MobileApppanels.List
-import           Network.Google.Resource.ConsumerSurveys.MobileApppanels.Update
-import           Network.Google.Resource.ConsumerSurveys.Results.Get
-import           Network.Google.Resource.ConsumerSurveys.Surveys.Delete
-import           Network.Google.Resource.ConsumerSurveys.Surveys.Get
-import           Network.Google.Resource.ConsumerSurveys.Surveys.Insert
-import           Network.Google.Resource.ConsumerSurveys.Surveys.List
-import           Network.Google.Resource.ConsumerSurveys.Surveys.Start
-import           Network.Google.Resource.ConsumerSurveys.Surveys.Stop
-import           Network.Google.Resource.ConsumerSurveys.Surveys.Update
+import Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types
+import Network.Google.Resource.ConsumerSurveys.MobileApppanels.Get
+import Network.Google.Resource.ConsumerSurveys.MobileApppanels.List
+import Network.Google.Resource.ConsumerSurveys.MobileApppanels.Update
+import Network.Google.Resource.ConsumerSurveys.Results.Get
+import Network.Google.Resource.ConsumerSurveys.Surveys.Delete
+import Network.Google.Resource.ConsumerSurveys.Surveys.Get
+import Network.Google.Resource.ConsumerSurveys.Surveys.Insert
+import Network.Google.Resource.ConsumerSurveys.Surveys.List
+import Network.Google.Resource.ConsumerSurveys.Surveys.Start
+import Network.Google.Resource.ConsumerSurveys.Surveys.Stop
+import Network.Google.Resource.ConsumerSurveys.Surveys.Update
 
 {- $resources
 TODO

@@ -499,17 +499,17 @@ module Network.Google.Plus
     , aanFamilyName
     ) where
 
-import           Network.Google.Plus.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Plus.Activities.Get
-import           Network.Google.Resource.Plus.Activities.List
-import           Network.Google.Resource.Plus.Activities.Search
-import           Network.Google.Resource.Plus.Comments.Get
-import           Network.Google.Resource.Plus.Comments.List
-import           Network.Google.Resource.Plus.People.Get
-import           Network.Google.Resource.Plus.People.List
-import           Network.Google.Resource.Plus.People.ListByActivity
-import           Network.Google.Resource.Plus.People.Search
+import Network.Google.Prelude
+import Network.Google.Plus.Types
+import Network.Google.Resource.Plus.Activities.Get
+import Network.Google.Resource.Plus.Activities.List
+import Network.Google.Resource.Plus.Activities.Search
+import Network.Google.Resource.Plus.Comments.Get
+import Network.Google.Resource.Plus.Comments.List
+import Network.Google.Resource.Plus.People.Get
+import Network.Google.Resource.Plus.People.List
+import Network.Google.Resource.Plus.People.ListByActivity
+import Network.Google.Resource.Plus.People.Search
 
 {- $resources
 TODO

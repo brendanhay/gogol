@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Comments.Delete
     , cdCommentId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.delete@ method which the
 -- 'CommentsDelete' request conforms to.
@@ -56,7 +56,7 @@ type CommentsDeleteResource =
 -- /See:/ 'commentsDelete' smart constructor.
 data CommentsDelete =
   CommentsDelete'
-    { _cdFileId    :: !Text
+    { _cdFileId :: !Text
     , _cdCommentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

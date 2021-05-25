@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -81,6 +81,7 @@ module Network.Google.AppsCalendar.Types
     , eGuestsCanInviteOthers
     , eRecurrence
     , eGadget
+    , eEventType
     , eSequence
     , eICalUId
     , eEnd
@@ -477,9 +478,9 @@ module Network.Google.AppsCalendar.Types
     , esTitle
     ) where
 
-import           Network.Google.AppsCalendar.Types.Product
-import           Network.Google.AppsCalendar.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types.Product
+import Network.Google.AppsCalendar.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Calendar API. This contains the host and root path used as a starting point for constructing service requests.
 appsCalendarService :: ServiceConfig
@@ -492,7 +493,7 @@ appsCalendarService
 calendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
 calendarScope = Proxy
 
--- | View your calendars
+-- | See and download any calendar you can access using your Google Calendar
 calendarReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
 calendarReadOnlyScope = Proxy
 

@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the specified matter. This updates only the name and description
--- of the matter, identified by matter id. Changes to any other fields are
+-- of the matter, identified by matter ID. Changes to any other fields are
 -- ignored. Returns the default view of the matter.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.update@.
@@ -35,17 +35,17 @@ module Network.Google.Resource.Vault.Matters.Update
     , MattersUpdate
 
     -- * Request Lenses
-    , matXgafv
-    , matUploadProtocol
-    , matAccessToken
-    , matUploadType
-    , matPayload
-    , matMatterId
-    , matCallback
+    , muuXgafv
+    , muuUploadProtocol
+    , muuAccessToken
+    , muuUploadType
+    , muuPayload
+    , muuMatterId
+    , muuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.update@ method which the
 -- 'MattersUpdate' request conforms to.
@@ -62,19 +62,19 @@ type MattersUpdateResource =
                        ReqBody '[JSON] Matter :> Put '[JSON] Matter
 
 -- | Updates the specified matter. This updates only the name and description
--- of the matter, identified by matter id. Changes to any other fields are
+-- of the matter, identified by matter ID. Changes to any other fields are
 -- ignored. Returns the default view of the matter.
 --
 -- /See:/ 'mattersUpdate' smart constructor.
 data MattersUpdate =
   MattersUpdate'
-    { _matXgafv          :: !(Maybe Xgafv)
-    , _matUploadProtocol :: !(Maybe Text)
-    , _matAccessToken    :: !(Maybe Text)
-    , _matUploadType     :: !(Maybe Text)
-    , _matPayload        :: !Matter
-    , _matMatterId       :: !Text
-    , _matCallback       :: !(Maybe Text)
+    { _muuXgafv :: !(Maybe Xgafv)
+    , _muuUploadProtocol :: !(Maybe Text)
+    , _muuAccessToken :: !(Maybe Text)
+    , _muuUploadType :: !(Maybe Text)
+    , _muuPayload :: !Matter
+    , _muuMatterId :: !Text
+    , _muuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,83 +83,83 @@ data MattersUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'matXgafv'
+-- * 'muuXgafv'
 --
--- * 'matUploadProtocol'
+-- * 'muuUploadProtocol'
 --
--- * 'matAccessToken'
+-- * 'muuAccessToken'
 --
--- * 'matUploadType'
+-- * 'muuUploadType'
 --
--- * 'matPayload'
+-- * 'muuPayload'
 --
--- * 'matMatterId'
+-- * 'muuMatterId'
 --
--- * 'matCallback'
+-- * 'muuCallback'
 mattersUpdate
-    :: Matter -- ^ 'matPayload'
-    -> Text -- ^ 'matMatterId'
+    :: Matter -- ^ 'muuPayload'
+    -> Text -- ^ 'muuMatterId'
     -> MattersUpdate
-mattersUpdate pMatPayload_ pMatMatterId_ =
+mattersUpdate pMuuPayload_ pMuuMatterId_ =
   MattersUpdate'
-    { _matXgafv = Nothing
-    , _matUploadProtocol = Nothing
-    , _matAccessToken = Nothing
-    , _matUploadType = Nothing
-    , _matPayload = pMatPayload_
-    , _matMatterId = pMatMatterId_
-    , _matCallback = Nothing
+    { _muuXgafv = Nothing
+    , _muuUploadProtocol = Nothing
+    , _muuAccessToken = Nothing
+    , _muuUploadType = Nothing
+    , _muuPayload = pMuuPayload_
+    , _muuMatterId = pMuuMatterId_
+    , _muuCallback = Nothing
     }
 
 
 -- | V1 error format.
-matXgafv :: Lens' MattersUpdate (Maybe Xgafv)
-matXgafv = lens _matXgafv (\ s a -> s{_matXgafv = a})
+muuXgafv :: Lens' MattersUpdate (Maybe Xgafv)
+muuXgafv = lens _muuXgafv (\ s a -> s{_muuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-matUploadProtocol :: Lens' MattersUpdate (Maybe Text)
-matUploadProtocol
-  = lens _matUploadProtocol
-      (\ s a -> s{_matUploadProtocol = a})
+muuUploadProtocol :: Lens' MattersUpdate (Maybe Text)
+muuUploadProtocol
+  = lens _muuUploadProtocol
+      (\ s a -> s{_muuUploadProtocol = a})
 
 -- | OAuth access token.
-matAccessToken :: Lens' MattersUpdate (Maybe Text)
-matAccessToken
-  = lens _matAccessToken
-      (\ s a -> s{_matAccessToken = a})
+muuAccessToken :: Lens' MattersUpdate (Maybe Text)
+muuAccessToken
+  = lens _muuAccessToken
+      (\ s a -> s{_muuAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-matUploadType :: Lens' MattersUpdate (Maybe Text)
-matUploadType
-  = lens _matUploadType
-      (\ s a -> s{_matUploadType = a})
+muuUploadType :: Lens' MattersUpdate (Maybe Text)
+muuUploadType
+  = lens _muuUploadType
+      (\ s a -> s{_muuUploadType = a})
 
 -- | Multipart request metadata.
-matPayload :: Lens' MattersUpdate Matter
-matPayload
-  = lens _matPayload (\ s a -> s{_matPayload = a})
+muuPayload :: Lens' MattersUpdate Matter
+muuPayload
+  = lens _muuPayload (\ s a -> s{_muuPayload = a})
 
 -- | The matter ID.
-matMatterId :: Lens' MattersUpdate Text
-matMatterId
-  = lens _matMatterId (\ s a -> s{_matMatterId = a})
+muuMatterId :: Lens' MattersUpdate Text
+muuMatterId
+  = lens _muuMatterId (\ s a -> s{_muuMatterId = a})
 
 -- | JSONP
-matCallback :: Lens' MattersUpdate (Maybe Text)
-matCallback
-  = lens _matCallback (\ s a -> s{_matCallback = a})
+muuCallback :: Lens' MattersUpdate (Maybe Text)
+muuCallback
+  = lens _muuCallback (\ s a -> s{_muuCallback = a})
 
 instance GoogleRequest MattersUpdate where
         type Rs MattersUpdate = Matter
         type Scopes MattersUpdate =
              '["https://www.googleapis.com/auth/ediscovery"]
         requestClient MattersUpdate'{..}
-          = go _matMatterId _matXgafv _matUploadProtocol
-              _matAccessToken
-              _matUploadType
-              _matCallback
+          = go _muuMatterId _muuXgafv _muuUploadProtocol
+              _muuAccessToken
+              _muuUploadType
+              _muuCallback
               (Just AltJSON)
-              _matPayload
+              _muuPayload
               vaultService
           where go
                   = buildClient (Proxy :: Proxy MattersUpdateResource)

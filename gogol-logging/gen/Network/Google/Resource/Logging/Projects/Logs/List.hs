@@ -23,7 +23,7 @@
 -- Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.logs.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.logs.list@.
 module Network.Google.Resource.Logging.Projects.Logs.List
     (
     -- * REST Resource
@@ -34,18 +34,19 @@ module Network.Google.Resource.Logging.Projects.Logs.List
     , ProjectsLogsList
 
     -- * Request Lenses
-    , pllParent
-    , pllXgafv
-    , pllUploadProtocol
-    , pllAccessToken
-    , pllUploadType
-    , pllPageToken
-    , pllPageSize
-    , pllCallback
+    , pParent
+    , pXgafv
+    , pUploadProtocol
+    , pAccessToken
+    , pUploadType
+    , pPageToken
+    , pPageSize
+    , pResourceNames
+    , pCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.logs.list@ method which the
 -- 'ProjectsLogsList' request conforms to.
@@ -59,9 +60,10 @@ type ProjectsLogsListResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListLogsResponse
+                       QueryParams "resourceNames" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
@@ -69,14 +71,15 @@ type ProjectsLogsListResource =
 -- /See:/ 'projectsLogsList' smart constructor.
 data ProjectsLogsList =
   ProjectsLogsList'
-    { _pllParent         :: !Text
-    , _pllXgafv          :: !(Maybe Xgafv)
-    , _pllUploadProtocol :: !(Maybe Text)
-    , _pllAccessToken    :: !(Maybe Text)
-    , _pllUploadType     :: !(Maybe Text)
-    , _pllPageToken      :: !(Maybe Text)
-    , _pllPageSize       :: !(Maybe (Textual Int32))
-    , _pllCallback       :: !(Maybe Text)
+    { _pParent :: !Text
+    , _pXgafv :: !(Maybe Xgafv)
+    , _pUploadProtocol :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPageToken :: !(Maybe Text)
+    , _pPageSize :: !(Maybe (Textual Int32))
+    , _pResourceNames :: !(Maybe [Text])
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,86 +88,101 @@ data ProjectsLogsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pllParent'
+-- * 'pParent'
 --
--- * 'pllXgafv'
+-- * 'pXgafv'
 --
--- * 'pllUploadProtocol'
+-- * 'pUploadProtocol'
 --
--- * 'pllAccessToken'
+-- * 'pAccessToken'
 --
--- * 'pllUploadType'
+-- * 'pUploadType'
 --
--- * 'pllPageToken'
+-- * 'pPageToken'
 --
--- * 'pllPageSize'
+-- * 'pPageSize'
 --
--- * 'pllCallback'
+-- * 'pResourceNames'
+--
+-- * 'pCallback'
 projectsLogsList
-    :: Text -- ^ 'pllParent'
+    :: Text -- ^ 'pParent'
     -> ProjectsLogsList
-projectsLogsList pPllParent_ =
+projectsLogsList pPParent_ =
   ProjectsLogsList'
-    { _pllParent = pPllParent_
-    , _pllXgafv = Nothing
-    , _pllUploadProtocol = Nothing
-    , _pllAccessToken = Nothing
-    , _pllUploadType = Nothing
-    , _pllPageToken = Nothing
-    , _pllPageSize = Nothing
-    , _pllCallback = Nothing
+    { _pParent = pPParent_
+    , _pXgafv = Nothing
+    , _pUploadProtocol = Nothing
+    , _pAccessToken = Nothing
+    , _pUploadType = Nothing
+    , _pPageToken = Nothing
+    , _pPageSize = Nothing
+    , _pResourceNames = Nothing
+    , _pCallback = Nothing
     }
 
 
--- | Required. The resource name that owns the logs:
--- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
-pllParent :: Lens' ProjectsLogsList Text
-pllParent
-  = lens _pllParent (\ s a -> s{_pllParent = a})
+-- | Required. The resource name that owns the logs: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
+pParent :: Lens' ProjectsLogsList Text
+pParent = lens _pParent (\ s a -> s{_pParent = a})
 
 -- | V1 error format.
-pllXgafv :: Lens' ProjectsLogsList (Maybe Xgafv)
-pllXgafv = lens _pllXgafv (\ s a -> s{_pllXgafv = a})
+pXgafv :: Lens' ProjectsLogsList (Maybe Xgafv)
+pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pllUploadProtocol :: Lens' ProjectsLogsList (Maybe Text)
-pllUploadProtocol
-  = lens _pllUploadProtocol
-      (\ s a -> s{_pllUploadProtocol = a})
+pUploadProtocol :: Lens' ProjectsLogsList (Maybe Text)
+pUploadProtocol
+  = lens _pUploadProtocol
+      (\ s a -> s{_pUploadProtocol = a})
 
 -- | OAuth access token.
-pllAccessToken :: Lens' ProjectsLogsList (Maybe Text)
-pllAccessToken
-  = lens _pllAccessToken
-      (\ s a -> s{_pllAccessToken = a})
+pAccessToken :: Lens' ProjectsLogsList (Maybe Text)
+pAccessToken
+  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pllUploadType :: Lens' ProjectsLogsList (Maybe Text)
-pllUploadType
-  = lens _pllUploadType
-      (\ s a -> s{_pllUploadType = a})
+pUploadType :: Lens' ProjectsLogsList (Maybe Text)
+pUploadType
+  = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
 -- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
-pllPageToken :: Lens' ProjectsLogsList (Maybe Text)
-pllPageToken
-  = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
+pPageToken :: Lens' ProjectsLogsList (Maybe Text)
+pPageToken
+  = lens _pPageToken (\ s a -> s{_pPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
 -- Non-positive values are ignored. The presence of nextPageToken in the
 -- response indicates that more results might be available.
-pllPageSize :: Lens' ProjectsLogsList (Maybe Int32)
-pllPageSize
-  = lens _pllPageSize (\ s a -> s{_pllPageSize = a}) .
+pPageSize :: Lens' ProjectsLogsList (Maybe Int32)
+pPageSize
+  = lens _pPageSize (\ s a -> s{_pPageSize = a}) .
       mapping _Coerce
 
+-- | Optional. The resource name that owns the logs:
+-- projects\/[PROJECT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- organizations\/[ORGANIZATION_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- folders\/[FOLDER_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]To
+-- support legacy queries, it could also be: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
+pResourceNames :: Lens' ProjectsLogsList [Text]
+pResourceNames
+  = lens _pResourceNames
+      (\ s a -> s{_pResourceNames = a})
+      . _Default
+      . _Coerce
+
 -- | JSONP
-pllCallback :: Lens' ProjectsLogsList (Maybe Text)
-pllCallback
-  = lens _pllCallback (\ s a -> s{_pllCallback = a})
+pCallback :: Lens' ProjectsLogsList (Maybe Text)
+pCallback
+  = lens _pCallback (\ s a -> s{_pCallback = a})
 
 instance GoogleRequest ProjectsLogsList where
         type Rs ProjectsLogsList = ListLogsResponse
@@ -174,12 +192,12 @@ instance GoogleRequest ProjectsLogsList where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsLogsList'{..}
-          = go _pllParent _pllXgafv _pllUploadProtocol
-              _pllAccessToken
-              _pllUploadType
-              _pllPageToken
-              _pllPageSize
-              _pllCallback
+          = go _pParent _pXgafv _pUploadProtocol _pAccessToken
+              _pUploadType
+              _pPageToken
+              _pPageSize
+              (_pResourceNames ^. _Default)
+              _pCallback
               (Just AltJSON)
               loggingService
           where go

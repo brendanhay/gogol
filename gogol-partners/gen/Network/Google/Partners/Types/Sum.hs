@@ -16,7 +16,7 @@
 --
 module Network.Google.Partners.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Type of the offer
 data OfferCustomerOfferType

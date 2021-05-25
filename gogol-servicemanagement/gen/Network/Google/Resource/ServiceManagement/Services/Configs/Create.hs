@@ -47,8 +47,8 @@ module Network.Google.Resource.ServiceManagement.Services.Configs.Create
     , sccCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.configs.create@ method which the
 -- 'ServicesConfigsCreate' request conforms to.
@@ -75,13 +75,13 @@ type ServicesConfigsCreateResource =
 -- /See:/ 'servicesConfigsCreate' smart constructor.
 data ServicesConfigsCreate =
   ServicesConfigsCreate'
-    { _sccXgafv          :: !(Maybe Xgafv)
+    { _sccXgafv :: !(Maybe Xgafv)
     , _sccUploadProtocol :: !(Maybe Text)
-    , _sccAccessToken    :: !(Maybe Text)
-    , _sccUploadType     :: !(Maybe Text)
-    , _sccPayload        :: !Service
-    , _sccServiceName    :: !Text
-    , _sccCallback       :: !(Maybe Text)
+    , _sccAccessToken :: !(Maybe Text)
+    , _sccUploadType :: !(Maybe Text)
+    , _sccPayload :: !Service
+    , _sccServiceName :: !Text
+    , _sccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,7 +146,7 @@ sccPayload :: Lens' ServicesConfigsCreate Service
 sccPayload
   = lens _sccPayload (\ s a -> s{_sccPayload = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 sccServiceName :: Lens' ServicesConfigsCreate Text

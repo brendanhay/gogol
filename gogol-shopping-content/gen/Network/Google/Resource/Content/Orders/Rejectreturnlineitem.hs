@@ -22,7 +22,7 @@
 --
 -- Rejects return on an line item.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.rejectreturnlineitem@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.rejectreturnlineitem@.
 module Network.Google.Resource.Content.Orders.Rejectreturnlineitem
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Orders.Rejectreturnlineitem
     , OrdersRejectreturnlineitem
 
     -- * Request Lenses
-    , orrMerchantId
-    , orrPayload
-    , orrOrderId
+    , or1Xgafv
+    , or1MerchantId
+    , or1UploadProtocol
+    , or1AccessToken
+    , or1UploadType
+    , or1Payload
+    , or1OrderId
+    , or1Callback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.rejectreturnlineitem@ method which the
 -- 'OrdersRejectreturnlineitem' request conforms to.
@@ -50,18 +55,29 @@ type OrdersRejectreturnlineitemResource =
            "orders" :>
              Capture "orderId" Text :>
                "rejectReturnLineItem" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersRejectReturnLineItemRequest :>
-                     Post '[JSON] OrdersRejectReturnLineItemResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersRejectReturnLineItemRequest
+                               :>
+                               Post '[JSON] OrdersRejectReturnLineItemResponse
 
 -- | Rejects return on an line item.
 --
 -- /See:/ 'ordersRejectreturnlineitem' smart constructor.
 data OrdersRejectreturnlineitem =
   OrdersRejectreturnlineitem'
-    { _orrMerchantId :: !(Textual Word64)
-    , _orrPayload    :: !OrdersRejectReturnLineItemRequest
-    , _orrOrderId    :: !Text
+    { _or1Xgafv :: !(Maybe Xgafv)
+    , _or1MerchantId :: !(Textual Word64)
+    , _or1UploadProtocol :: !(Maybe Text)
+    , _or1AccessToken :: !(Maybe Text)
+    , _or1UploadType :: !(Maybe Text)
+    , _or1Payload :: !OrdersRejectReturnLineItemRequest
+    , _or1OrderId :: !Text
+    , _or1Callback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,41 +86,83 @@ data OrdersRejectreturnlineitem =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orrMerchantId'
+-- * 'or1Xgafv'
 --
--- * 'orrPayload'
+-- * 'or1MerchantId'
 --
--- * 'orrOrderId'
+-- * 'or1UploadProtocol'
+--
+-- * 'or1AccessToken'
+--
+-- * 'or1UploadType'
+--
+-- * 'or1Payload'
+--
+-- * 'or1OrderId'
+--
+-- * 'or1Callback'
 ordersRejectreturnlineitem
-    :: Word64 -- ^ 'orrMerchantId'
-    -> OrdersRejectReturnLineItemRequest -- ^ 'orrPayload'
-    -> Text -- ^ 'orrOrderId'
+    :: Word64 -- ^ 'or1MerchantId'
+    -> OrdersRejectReturnLineItemRequest -- ^ 'or1Payload'
+    -> Text -- ^ 'or1OrderId'
     -> OrdersRejectreturnlineitem
-ordersRejectreturnlineitem pOrrMerchantId_ pOrrPayload_ pOrrOrderId_ =
+ordersRejectreturnlineitem pOr1MerchantId_ pOr1Payload_ pOr1OrderId_ =
   OrdersRejectreturnlineitem'
-    { _orrMerchantId = _Coerce # pOrrMerchantId_
-    , _orrPayload = pOrrPayload_
-    , _orrOrderId = pOrrOrderId_
+    { _or1Xgafv = Nothing
+    , _or1MerchantId = _Coerce # pOr1MerchantId_
+    , _or1UploadProtocol = Nothing
+    , _or1AccessToken = Nothing
+    , _or1UploadType = Nothing
+    , _or1Payload = pOr1Payload_
+    , _or1OrderId = pOr1OrderId_
+    , _or1Callback = Nothing
     }
 
 
+-- | V1 error format.
+or1Xgafv :: Lens' OrdersRejectreturnlineitem (Maybe Xgafv)
+or1Xgafv = lens _or1Xgafv (\ s a -> s{_or1Xgafv = a})
+
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-orrMerchantId :: Lens' OrdersRejectreturnlineitem Word64
-orrMerchantId
-  = lens _orrMerchantId
-      (\ s a -> s{_orrMerchantId = a})
+or1MerchantId :: Lens' OrdersRejectreturnlineitem Word64
+or1MerchantId
+  = lens _or1MerchantId
+      (\ s a -> s{_or1MerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+or1UploadProtocol :: Lens' OrdersRejectreturnlineitem (Maybe Text)
+or1UploadProtocol
+  = lens _or1UploadProtocol
+      (\ s a -> s{_or1UploadProtocol = a})
+
+-- | OAuth access token.
+or1AccessToken :: Lens' OrdersRejectreturnlineitem (Maybe Text)
+or1AccessToken
+  = lens _or1AccessToken
+      (\ s a -> s{_or1AccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+or1UploadType :: Lens' OrdersRejectreturnlineitem (Maybe Text)
+or1UploadType
+  = lens _or1UploadType
+      (\ s a -> s{_or1UploadType = a})
+
 -- | Multipart request metadata.
-orrPayload :: Lens' OrdersRejectreturnlineitem OrdersRejectReturnLineItemRequest
-orrPayload
-  = lens _orrPayload (\ s a -> s{_orrPayload = a})
+or1Payload :: Lens' OrdersRejectreturnlineitem OrdersRejectReturnLineItemRequest
+or1Payload
+  = lens _or1Payload (\ s a -> s{_or1Payload = a})
 
 -- | The ID of the order.
-orrOrderId :: Lens' OrdersRejectreturnlineitem Text
-orrOrderId
-  = lens _orrOrderId (\ s a -> s{_orrOrderId = a})
+or1OrderId :: Lens' OrdersRejectreturnlineitem Text
+or1OrderId
+  = lens _or1OrderId (\ s a -> s{_or1OrderId = a})
+
+-- | JSONP
+or1Callback :: Lens' OrdersRejectreturnlineitem (Maybe Text)
+or1Callback
+  = lens _or1Callback (\ s a -> s{_or1Callback = a})
 
 instance GoogleRequest OrdersRejectreturnlineitem
          where
@@ -113,8 +171,13 @@ instance GoogleRequest OrdersRejectreturnlineitem
         type Scopes OrdersRejectreturnlineitem =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersRejectreturnlineitem'{..}
-          = go _orrMerchantId _orrOrderId (Just AltJSON)
-              _orrPayload
+          = go _or1MerchantId _or1OrderId _or1Xgafv
+              _or1UploadProtocol
+              _or1AccessToken
+              _or1UploadType
+              _or1Callback
+              (Just AltJSON)
+              _or1Payload
               shoppingContentService
           where go
                   = buildClient

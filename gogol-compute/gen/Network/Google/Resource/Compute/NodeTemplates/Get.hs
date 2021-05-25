@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NodeTemplates.Get
     , nodRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTemplates.get@ method which the
 -- 'NodeTemplatesGet' request conforms to.
@@ -61,9 +61,9 @@ type NodeTemplatesGetResource =
 -- /See:/ 'nodeTemplatesGet' smart constructor.
 data NodeTemplatesGet =
   NodeTemplatesGet'
-    { _nodProject      :: !Text
+    { _nodProject :: !Text
     , _nodNodeTemplate :: !Text
-    , _nodRegion       :: !Text
+    , _nodRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
     , thttppdTargetHTTPProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpProxies.delete@ method which the
 -- 'TargetHTTPProxiesDelete' request conforms to.
@@ -59,8 +59,8 @@ type TargetHTTPProxiesDeleteResource =
 -- /See:/ 'targetHTTPProxiesDelete' smart constructor.
 data TargetHTTPProxiesDelete =
   TargetHTTPProxiesDelete'
-    { _thttppdRequestId       :: !(Maybe Text)
-    , _thttppdProject         :: !Text
+    { _thttppdRequestId :: !(Maybe Text)
+    , _thttppdProject :: !Text
     , _thttppdTargetHTTPProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

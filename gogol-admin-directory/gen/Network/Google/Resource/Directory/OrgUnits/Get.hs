@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve organizational unit
+-- Retrieves an organizational unit.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.orgunits.get@.
 module Network.Google.Resource.Directory.OrgUnits.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.OrgUnits.Get
     , OrgUnitsGet
 
     -- * Request Lenses
+    , ougXgafv
+    , ougUploadProtocol
+    , ougAccessToken
+    , ougUploadType
     , ougOrgUnitPath
     , ougCustomerId
+    , ougCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.orgunits.get@ method which the
 -- 'OrgUnitsGet' request conforms to.
@@ -49,16 +54,26 @@ type OrgUnitsGetResource =
            "customer" :>
              Capture "customerId" Text :>
                "orgunits" :>
-                 Captures "orgUnitPath" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] OrgUnit
+                 Capture "orgUnitPath" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] OrgUnit
 
--- | Retrieve organizational unit
+-- | Retrieves an organizational unit.
 --
 -- /See:/ 'orgUnitsGet' smart constructor.
 data OrgUnitsGet =
   OrgUnitsGet'
-    { _ougOrgUnitPath :: ![Text]
-    , _ougCustomerId  :: !Text
+    { _ougXgafv :: !(Maybe Xgafv)
+    , _ougUploadProtocol :: !(Maybe Text)
+    , _ougAccessToken :: !(Maybe Text)
+    , _ougUploadType :: !(Maybe Text)
+    , _ougOrgUnitPath :: !Text
+    , _ougCustomerId :: !Text
+    , _ougCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,32 +82,77 @@ data OrgUnitsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ougXgafv'
+--
+-- * 'ougUploadProtocol'
+--
+-- * 'ougAccessToken'
+--
+-- * 'ougUploadType'
+--
 -- * 'ougOrgUnitPath'
 --
 -- * 'ougCustomerId'
+--
+-- * 'ougCallback'
 orgUnitsGet
-    :: [Text] -- ^ 'ougOrgUnitPath'
+    :: Text -- ^ 'ougOrgUnitPath'
     -> Text -- ^ 'ougCustomerId'
     -> OrgUnitsGet
 orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
   OrgUnitsGet'
-    { _ougOrgUnitPath = _Coerce # pOugOrgUnitPath_
+    { _ougXgafv = Nothing
+    , _ougUploadProtocol = Nothing
+    , _ougAccessToken = Nothing
+    , _ougUploadType = Nothing
+    , _ougOrgUnitPath = pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
+    , _ougCallback = Nothing
     }
 
 
--- | Full path of the organizational unit or its ID
-ougOrgUnitPath :: Lens' OrgUnitsGet [Text]
+-- | V1 error format.
+ougXgafv :: Lens' OrgUnitsGet (Maybe Xgafv)
+ougXgafv = lens _ougXgafv (\ s a -> s{_ougXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ougUploadProtocol :: Lens' OrgUnitsGet (Maybe Text)
+ougUploadProtocol
+  = lens _ougUploadProtocol
+      (\ s a -> s{_ougUploadProtocol = a})
+
+-- | OAuth access token.
+ougAccessToken :: Lens' OrgUnitsGet (Maybe Text)
+ougAccessToken
+  = lens _ougAccessToken
+      (\ s a -> s{_ougAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ougUploadType :: Lens' OrgUnitsGet (Maybe Text)
+ougUploadType
+  = lens _ougUploadType
+      (\ s a -> s{_ougUploadType = a})
+
+-- | The full path of the organizational unit or its unique ID.
+ougOrgUnitPath :: Lens' OrgUnitsGet Text
 ougOrgUnitPath
   = lens _ougOrgUnitPath
       (\ s a -> s{_ougOrgUnitPath = a})
-      . _Coerce
 
--- | Immutable ID of the G Suite account
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s \`customerId\`. The \`customerId\` is also
+-- returned as part of the [Users
+-- resource](\/admin-sdk\/directory\/v1\/reference\/users).
 ougCustomerId :: Lens' OrgUnitsGet Text
 ougCustomerId
   = lens _ougCustomerId
       (\ s a -> s{_ougCustomerId = a})
+
+-- | JSONP
+ougCallback :: Lens' OrgUnitsGet (Maybe Text)
+ougCallback
+  = lens _ougCallback (\ s a -> s{_ougCallback = a})
 
 instance GoogleRequest OrgUnitsGet where
         type Rs OrgUnitsGet = OrgUnit
@@ -100,7 +160,12 @@ instance GoogleRequest OrgUnitsGet where
              '["https://www.googleapis.com/auth/admin.directory.orgunit",
                "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
         requestClient OrgUnitsGet'{..}
-          = go _ougCustomerId _ougOrgUnitPath (Just AltJSON)
+          = go _ougCustomerId _ougOrgUnitPath _ougXgafv
+              _ougUploadProtocol
+              _ougAccessToken
+              _ougUploadType
+              _ougCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy OrgUnitsGetResource)

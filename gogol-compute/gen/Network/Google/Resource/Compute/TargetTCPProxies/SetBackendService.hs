@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetTCPProxies.SetBackendService
     , ttpsbsTargetTCPProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetTcpProxies.setBackendService@ method which the
 -- 'TargetTCPProxiesSetBackendService' request conforms to.
@@ -64,9 +64,9 @@ type TargetTCPProxiesSetBackendServiceResource =
 -- /See:/ 'targetTCPProxiesSetBackendService' smart constructor.
 data TargetTCPProxiesSetBackendService =
   TargetTCPProxiesSetBackendService'
-    { _ttpsbsRequestId      :: !(Maybe Text)
-    , _ttpsbsProject        :: !Text
-    , _ttpsbsPayload        :: !TargetTCPProxiesSetBackendServiceRequest
+    { _ttpsbsRequestId :: !(Maybe Text)
+    , _ttpsbsProject :: !Text
+    , _ttpsbsPayload :: !TargetTCPProxiesSetBackendServiceRequest
     , _ttpsbsTargetTCPProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

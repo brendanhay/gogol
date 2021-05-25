@@ -23,7 +23,7 @@
 -- Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.logs.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.logs.list@.
 module Network.Google.Resource.Logging.Folders.Logs.List
     (
     -- * REST Resource
@@ -41,11 +41,12 @@ module Network.Google.Resource.Logging.Folders.Logs.List
     , fllUploadType
     , fllPageToken
     , fllPageSize
+    , fllResourceNames
     , fllCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.logs.list@ method which the
 -- 'FoldersLogsList' request conforms to.
@@ -59,9 +60,10 @@ type FoldersLogsListResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListLogsResponse
+                       QueryParams "resourceNames" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
@@ -69,14 +71,15 @@ type FoldersLogsListResource =
 -- /See:/ 'foldersLogsList' smart constructor.
 data FoldersLogsList =
   FoldersLogsList'
-    { _fllParent         :: !Text
-    , _fllXgafv          :: !(Maybe Xgafv)
+    { _fllParent :: !Text
+    , _fllXgafv :: !(Maybe Xgafv)
     , _fllUploadProtocol :: !(Maybe Text)
-    , _fllAccessToken    :: !(Maybe Text)
-    , _fllUploadType     :: !(Maybe Text)
-    , _fllPageToken      :: !(Maybe Text)
-    , _fllPageSize       :: !(Maybe (Textual Int32))
-    , _fllCallback       :: !(Maybe Text)
+    , _fllAccessToken :: !(Maybe Text)
+    , _fllUploadType :: !(Maybe Text)
+    , _fllPageToken :: !(Maybe Text)
+    , _fllPageSize :: !(Maybe (Textual Int32))
+    , _fllResourceNames :: !(Maybe [Text])
+    , _fllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,6 +102,8 @@ data FoldersLogsList =
 --
 -- * 'fllPageSize'
 --
+-- * 'fllResourceNames'
+--
 -- * 'fllCallback'
 foldersLogsList
     :: Text -- ^ 'fllParent'
@@ -112,13 +117,14 @@ foldersLogsList pFllParent_ =
     , _fllUploadType = Nothing
     , _fllPageToken = Nothing
     , _fllPageSize = Nothing
+    , _fllResourceNames = Nothing
     , _fllCallback = Nothing
     }
 
 
--- | Required. The resource name that owns the logs:
--- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
+-- | Required. The resource name that owns the logs: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
 fllParent :: Lens' FoldersLogsList Text
 fllParent
   = lens _fllParent (\ s a -> s{_fllParent = a})
@@ -161,6 +167,21 @@ fllPageSize
   = lens _fllPageSize (\ s a -> s{_fllPageSize = a}) .
       mapping _Coerce
 
+-- | Optional. The resource name that owns the logs:
+-- projects\/[PROJECT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- organizations\/[ORGANIZATION_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- folders\/[FOLDER_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]To
+-- support legacy queries, it could also be: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
+fllResourceNames :: Lens' FoldersLogsList [Text]
+fllResourceNames
+  = lens _fllResourceNames
+      (\ s a -> s{_fllResourceNames = a})
+      . _Default
+      . _Coerce
+
 -- | JSONP
 fllCallback :: Lens' FoldersLogsList (Maybe Text)
 fllCallback
@@ -179,6 +200,7 @@ instance GoogleRequest FoldersLogsList where
               _fllUploadType
               _fllPageToken
               _fllPageSize
+              (_fllResourceNames ^. _Default)
               _fllCallback
               (Just AltJSON)
               loggingService

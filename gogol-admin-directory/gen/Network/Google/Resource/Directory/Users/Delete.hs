@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete user
+-- Deletes a user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.delete@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.users.delete@.
 module Network.Google.Resource.Directory.Users.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Directory.Users.Delete
     , UsersDelete
 
     -- * Request Lenses
+    , udXgafv
+    , udUploadProtocol
+    , udAccessToken
+    , udUploadType
     , udUserKey
+    , udCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.users.delete@ method which the
 -- 'UsersDelete' request conforms to.
@@ -47,14 +52,24 @@ type UsersDeleteResource =
          "v1" :>
            "users" :>
              Capture "userKey" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Delete user
+-- | Deletes a user.
 --
 -- /See:/ 'usersDelete' smart constructor.
-newtype UsersDelete =
+data UsersDelete =
   UsersDelete'
-    { _udUserKey :: Text
+    { _udXgafv :: !(Maybe Xgafv)
+    , _udUploadProtocol :: !(Maybe Text)
+    , _udAccessToken :: !(Maybe Text)
+    , _udUploadType :: !(Maybe Text)
+    , _udUserKey :: !Text
+    , _udCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,24 +78,74 @@ newtype UsersDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'udXgafv'
+--
+-- * 'udUploadProtocol'
+--
+-- * 'udAccessToken'
+--
+-- * 'udUploadType'
+--
 -- * 'udUserKey'
+--
+-- * 'udCallback'
 usersDelete
     :: Text -- ^ 'udUserKey'
     -> UsersDelete
-usersDelete pUdUserKey_ = UsersDelete' {_udUserKey = pUdUserKey_}
+usersDelete pUdUserKey_ =
+  UsersDelete'
+    { _udXgafv = Nothing
+    , _udUploadProtocol = Nothing
+    , _udAccessToken = Nothing
+    , _udUploadType = Nothing
+    , _udUserKey = pUdUserKey_
+    , _udCallback = Nothing
+    }
 
 
--- | Email or immutable ID of the user
+-- | V1 error format.
+udXgafv :: Lens' UsersDelete (Maybe Xgafv)
+udXgafv = lens _udXgafv (\ s a -> s{_udXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+udUploadProtocol :: Lens' UsersDelete (Maybe Text)
+udUploadProtocol
+  = lens _udUploadProtocol
+      (\ s a -> s{_udUploadProtocol = a})
+
+-- | OAuth access token.
+udAccessToken :: Lens' UsersDelete (Maybe Text)
+udAccessToken
+  = lens _udAccessToken
+      (\ s a -> s{_udAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+udUploadType :: Lens' UsersDelete (Maybe Text)
+udUploadType
+  = lens _udUploadType (\ s a -> s{_udUploadType = a})
+
+-- | Identifies the user in the API request. The value can be the user\'s
+-- primary email address, alias email address, or unique user ID.
 udUserKey :: Lens' UsersDelete Text
 udUserKey
   = lens _udUserKey (\ s a -> s{_udUserKey = a})
+
+-- | JSONP
+udCallback :: Lens' UsersDelete (Maybe Text)
+udCallback
+  = lens _udCallback (\ s a -> s{_udCallback = a})
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = ()
         type Scopes UsersDelete =
              '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersDelete'{..}
-          = go _udUserKey (Just AltJSON) directoryService
+          = go _udUserKey _udXgafv _udUploadProtocol
+              _udAccessToken
+              _udUploadType
+              _udCallback
+              (Just AltJSON)
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)
                       mempty

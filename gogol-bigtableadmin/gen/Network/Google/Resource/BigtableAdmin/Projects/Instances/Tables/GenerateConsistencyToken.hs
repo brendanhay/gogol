@@ -45,8 +45,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GenerateC
     , pitgctCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.generateConsistencyToken@ method which the
 -- 'ProjectsInstancesTablesGenerateConsistencyToken' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsInstancesTablesGenerateConsistencyTokenResource
 -- /See:/ 'projectsInstancesTablesGenerateConsistencyToken' smart constructor.
 data ProjectsInstancesTablesGenerateConsistencyToken =
   ProjectsInstancesTablesGenerateConsistencyToken'
-    { _pitgctXgafv          :: !(Maybe Xgafv)
+    { _pitgctXgafv :: !(Maybe Xgafv)
     , _pitgctUploadProtocol :: !(Maybe Text)
-    , _pitgctAccessToken    :: !(Maybe Text)
-    , _pitgctUploadType     :: !(Maybe Text)
-    , _pitgctPayload        :: !GenerateConsistencyTokenRequest
-    , _pitgctName           :: !Text
-    , _pitgctCallback       :: !(Maybe Text)
+    , _pitgctAccessToken :: !(Maybe Text)
+    , _pitgctUploadType :: !(Maybe Text)
+    , _pitgctPayload :: !GenerateConsistencyTokenRequest
+    , _pitgctName :: !Text
+    , _pitgctCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,9 +144,9 @@ pitgctPayload
   = lens _pitgctPayload
       (\ s a -> s{_pitgctPayload = a})
 
--- | The unique name of the Table for which to create a consistency token.
--- Values are of the form \`projects\/\/instances\/\/tables\/
--- \`.
+-- | Required. The unique name of the Table for which to create a consistency
+-- token. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/tables\/{table}\`.
 pitgctName :: Lens' ProjectsInstancesTablesGenerateConsistencyToken Text
 pitgctName
   = lens _pitgctName (\ s a -> s{_pitgctName = a})

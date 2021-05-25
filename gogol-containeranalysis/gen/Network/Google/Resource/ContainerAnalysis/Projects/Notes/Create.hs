@@ -43,8 +43,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Create
     , pncCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.create@ method which the
 -- 'ProjectsNotesCreate' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsNotesCreateResource =
 -- /See:/ 'projectsNotesCreate' smart constructor.
 data ProjectsNotesCreate =
   ProjectsNotesCreate'
-    { _pncParent         :: !Text
-    , _pncXgafv          :: !(Maybe Xgafv)
+    { _pncParent :: !Text
+    , _pncXgafv :: !(Maybe Xgafv)
     , _pncUploadProtocol :: !(Maybe Text)
-    , _pncAccessToken    :: !(Maybe Text)
-    , _pncUploadType     :: !(Maybe Text)
-    , _pncPayload        :: !Note
-    , _pncNoteId         :: !(Maybe Text)
-    , _pncCallback       :: !(Maybe Text)
+    , _pncAccessToken :: !(Maybe Text)
+    , _pncUploadType :: !(Maybe Text)
+    , _pncPayload :: !Note
+    , _pncNoteId :: !(Maybe Text)
+    , _pncCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,8 +114,8 @@ projectsNotesCreate pPncParent_ pPncPayload_ =
     }
 
 
--- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
--- which the note is to be created.
+-- | Required. The name of the project in the form of
+-- \`projects\/[PROJECT_ID]\`, under which the note is to be created.
 pncParent :: Lens' ProjectsNotesCreate Text
 pncParent
   = lens _pncParent (\ s a -> s{_pncParent = a})
@@ -147,7 +147,7 @@ pncPayload :: Lens' ProjectsNotesCreate Note
 pncPayload
   = lens _pncPayload (\ s a -> s{_pncPayload = a})
 
--- | The ID to use for this note.
+-- | Required. The ID to use for this note.
 pncNoteId :: Lens' ProjectsNotesCreate (Maybe Text)
 pncNoteId
   = lens _pncNoteId (\ s a -> s{_pncNoteId = a})

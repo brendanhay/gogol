@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a \`Release\` via PATCH. Only updates to the \`ruleset_name\` and
--- \`test_suite_name\` fields will be honored. \`Release\` rename is not
--- supported. To create a \`Release\` use the CreateRelease method.
+-- Update a \`Release\` via PATCH. Only updates to \`ruleset_name\` will be
+-- honored. \`Release\` rename is not supported. To create a \`Release\`
+-- use the CreateRelease method.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.patch@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Patch
@@ -44,8 +44,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Patch
     , prpCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.releases.patch@ method which the
 -- 'ProjectsReleasesPatch' request conforms to.
@@ -61,20 +61,20 @@ type ProjectsReleasesPatchResource =
                      ReqBody '[JSON] UpdateReleaseRequest :>
                        Patch '[JSON] Release
 
--- | Update a \`Release\` via PATCH. Only updates to the \`ruleset_name\` and
--- \`test_suite_name\` fields will be honored. \`Release\` rename is not
--- supported. To create a \`Release\` use the CreateRelease method.
+-- | Update a \`Release\` via PATCH. Only updates to \`ruleset_name\` will be
+-- honored. \`Release\` rename is not supported. To create a \`Release\`
+-- use the CreateRelease method.
 --
 -- /See:/ 'projectsReleasesPatch' smart constructor.
 data ProjectsReleasesPatch =
   ProjectsReleasesPatch'
-    { _prpXgafv          :: !(Maybe Xgafv)
+    { _prpXgafv :: !(Maybe Xgafv)
     , _prpUploadProtocol :: !(Maybe Text)
-    , _prpAccessToken    :: !(Maybe Text)
-    , _prpUploadType     :: !(Maybe Text)
-    , _prpPayload        :: !UpdateReleaseRequest
-    , _prpName           :: !Text
-    , _prpCallback       :: !(Maybe Text)
+    , _prpAccessToken :: !(Maybe Text)
+    , _prpUploadType :: !(Maybe Text)
+    , _prpPayload :: !UpdateReleaseRequest
+    , _prpName :: !Text
+    , _prpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,8 +139,8 @@ prpPayload :: Lens' ProjectsReleasesPatch UpdateReleaseRequest
 prpPayload
   = lens _prpPayload (\ s a -> s{_prpPayload = a})
 
--- | Resource name for the project which owns this \`Release\`. Format:
--- \`projects\/{project_id}\`
+-- | Required. Resource name for the project which owns this \`Release\`.
+-- Format: \`projects\/{project_id}\`
 prpName :: Lens' ProjectsReleasesPatch Text
 prpName = lens _prpName (\ s a -> s{_prpName = a})
 

@@ -1,6 +1,6 @@
 name:                  gogol-apps-reseller
 version:               0.5.0
-synopsis:              Google Enterprise Apps Reseller SDK.
+synopsis:              Google Workspace Reseller SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,17 +14,14 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Creates and manages your customers and their subscriptions.
+    Perform common functions that are available on the Channel Services
+    console at scale, like placing orders and viewing customer information
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
     This library is compatible with version @v1@
     of the API.
-    .
-    Labels:
-    .
-    * Limited Availability
 
 source-repository head
     type:     git

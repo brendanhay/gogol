@@ -22,7 +22,7 @@
 --
 -- Lists all sources belonging to an organization.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.list@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.list@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.List
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.List
     , oslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.list@ method which the
 -- 'OrganizationsSourcesList' request conforms to.
 type OrganizationsSourcesListResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "parent" Text :>
          "sources" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,14 +67,14 @@ type OrganizationsSourcesListResource =
 -- /See:/ 'organizationsSourcesList' smart constructor.
 data OrganizationsSourcesList =
   OrganizationsSourcesList'
-    { _oslParent         :: !Text
-    , _oslXgafv          :: !(Maybe Xgafv)
+    { _oslParent :: !Text
+    , _oslXgafv :: !(Maybe Xgafv)
     , _oslUploadProtocol :: !(Maybe Text)
-    , _oslAccessToken    :: !(Maybe Text)
-    , _oslUploadType     :: !(Maybe Text)
-    , _oslPageToken      :: !(Maybe Text)
-    , _oslPageSize       :: !(Maybe (Textual Int32))
-    , _oslCallback       :: !(Maybe Text)
+    , _oslAccessToken :: !(Maybe Text)
+    , _oslUploadType :: !(Maybe Text)
+    , _oslPageToken :: !(Maybe Text)
+    , _oslPageSize :: !(Maybe (Textual Int32))
+    , _oslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,8 +114,8 @@ organizationsSourcesList pOslParent_ =
     }
 
 
--- | Resource name of the parent of sources to list. Its format should be
--- \"organizations\/[organization_id]\".
+-- | Required. Resource name of the parent of sources to list. Its format
+-- should be \"organizations\/[organization_id]\".
 oslParent :: Lens' OrganizationsSourcesList Text
 oslParent
   = lens _oslParent (\ s a -> s{_oslParent = a})

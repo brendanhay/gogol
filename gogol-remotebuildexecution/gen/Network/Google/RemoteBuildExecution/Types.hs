@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -40,24 +40,12 @@ module Network.Google.RemoteBuildExecution.Types
     , googleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
     , gdravgwprName
 
-    -- * GoogleDevtoolsRemoteexecutionV1testOutputDirectory
-    , GoogleDevtoolsRemoteexecutionV1testOutputDirectory
-    , googleDevtoolsRemoteexecutionV1testOutputDirectory
-    , gdrvodPath
-    , gdrvodDigest
-    , gdrvodTreeDigest
-
     -- * BuildBazelRemoteExecutionV2OutputSymlink
     , BuildBazelRemoteExecutionV2OutputSymlink
     , buildBazelRemoteExecutionV2OutputSymlink
     , bbrevosPath
+    , bbrevosNodeProperties
     , bbrevosTarget
-
-    -- * GoogleDevtoolsRemoteexecutionV1testTree
-    , GoogleDevtoolsRemoteexecutionV1testTree
-    , googleDevtoolsRemoteexecutionV1testTree
-    , gdrvtChildren
-    , gdrvtRoot
 
     -- * GoogleDevtoolsRemoteworkersV1test2FileMetadata
     , GoogleDevtoolsRemoteworkersV1test2FileMetadata
@@ -93,11 +81,16 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevscDeprecatedAPIVersion
     , bbrevscLowAPIVersion
 
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyLinuxIsolation
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyLinuxIsolation (..)
+
     -- * BuildBazelRemoteExecutionV2Action
     , BuildBazelRemoteExecutionV2Action
     , buildBazelRemoteExecutionV2Action
+    , bbrevaPlatform
     , bbrevaDoNotCache
     , bbrevaCommandDigest
+    , bbrevaSalt
     , bbrevaInputRootDigest
     , bbrevaTimeout
 
@@ -107,28 +100,11 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevodPath
     , bbrevodTreeDigest
 
-    -- * GoogleDevtoolsRemoteexecutionV1testDigest
-    , GoogleDevtoolsRemoteexecutionV1testDigest
-    , googleDevtoolsRemoteexecutionV1testDigest
-    , gSizeBytes
-    , gHash
-
     -- * BuildBazelRemoteExecutionV2Tree
     , BuildBazelRemoteExecutionV2Tree
     , buildBazelRemoteExecutionV2Tree
     , bbrevtChildren
     , bbrevtRoot
-
-    -- * GoogleDevtoolsRemoteexecutionV1testActionResult
-    , GoogleDevtoolsRemoteexecutionV1testActionResult
-    , googleDevtoolsRemoteexecutionV1testActionResult
-    , gdrvarOutputDirectories
-    , gdrvarOutputFiles
-    , gdrvarStderrRaw
-    , gdrvarExitCode
-    , gdrvarStdoutDigest
-    , gdrvarStderrDigest
-    , gdrvarStdoutRaw
 
     -- * BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
     , BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
@@ -139,9 +115,11 @@ module Network.Google.RemoteBuildExecution.Types
     -- * BuildBazelRemoteExecutionV2OutputFile
     , BuildBazelRemoteExecutionV2OutputFile
     , buildBazelRemoteExecutionV2OutputFile
+    , bbrevofContents
     , bbrevofPath
     , bbrevofIsExecutable
     , bbrevofDigest
+    , bbrevofNodeProperties
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
@@ -156,12 +134,20 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevdDirectories
     , bbrevdSymlinks
     , bbrevdFiles
+    , bbrevdNodeProperties
 
     -- * BuildBazelRemoteExecutionV2DirectoryNode
     , BuildBazelRemoteExecutionV2DirectoryNode
     , buildBazelRemoteExecutionV2DirectoryNode
     , bbrevdnName
     , bbrevdnDigest
+
+    -- * BuildBazelRemoteExecutionV2NodeProperties
+    , BuildBazelRemoteExecutionV2NodeProperties
+    , buildBazelRemoteExecutionV2NodeProperties
+    , bbrevnpMtime
+    , bbrevnpUnixMode
+    , bbrevnpProperties
 
     -- * GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
     , GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
@@ -175,18 +161,22 @@ module Network.Google.RemoteBuildExecution.Types
     , googleDevtoolsRemotebuildexecutionAdminV1alphaInstance
     , gdraviState
     , gdraviLocation
+    , gdraviFeaturePolicy
     , gdraviName
     , gdraviLoggingEnabled
 
-    -- * GoogleDevtoolsRemoteexecutionV1testToolDetails
-    , GoogleDevtoolsRemoteexecutionV1testToolDetails
-    , googleDevtoolsRemoteexecutionV1testToolDetails
-    , gdrvtdToolName
-    , gdrvtdToolVersion
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfigLabels
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfigLabels
+    , googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfigLabels
+    , gdravwclAddtional
+
+    -- * GoogleDevtoolsRemotebuildbotCommandStatusCode
+    , GoogleDevtoolsRemotebuildbotCommandStatusCode (..)
 
     -- * BuildBazelRemoteExecutionV2ExecutionCapabilities
     , BuildBazelRemoteExecutionV2ExecutionCapabilities
     , buildBazelRemoteExecutionV2ExecutionCapabilities
+    , bbrevecSupportedNodeProperties
     , bbrevecExecutionPriorityCapabilities
     , bbrevecExecEnabled
     , bbrevecDigestFunction
@@ -202,26 +192,21 @@ module Network.Google.RemoteBuildExecution.Types
     , buildBazelRemoteExecutionV2BatchReadBlobsRequest
     , bbrevbrbrDigests
 
-    -- * GoogleDevtoolsRemoteexecutionV1testOutputFile
-    , GoogleDevtoolsRemoteexecutionV1testOutputFile
-    , googleDevtoolsRemoteexecutionV1testOutputFile
-    , gdrvofPath
-    , gdrvofContent
-    , gdrvofIsExecutable
-    , gdrvofDigest
-
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
     , googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
     , gdravwpWorkerConfig
     , gdravwpState
     , gdravwpWorkerCount
+    , gdravwpChannel
     , gdravwpName
+    , gdravwpAutoscale
 
     -- * BuildBazelRemoteExecutionV2SymlinkNode
     , BuildBazelRemoteExecutionV2SymlinkNode
     , buildBazelRemoteExecutionV2SymlinkNode
     , bbrevsnName
+    , bbrevsnNodeProperties
     , bbrevsnTarget
 
     -- * GoogleRpcStatusDetailsItem
@@ -229,23 +214,11 @@ module Network.Google.RemoteBuildExecution.Types
     , googleRpcStatusDetailsItem
     , grsdiAddtional
 
-    -- * GoogleDevtoolsRemoteexecutionV1testDirectoryNode
-    , GoogleDevtoolsRemoteexecutionV1testDirectoryNode
-    , googleDevtoolsRemoteexecutionV1testDirectoryNode
-    , gdrvdnName
-    , gdrvdnDigest
-
     -- * GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
     , GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
     , googleDevtoolsRemoteworkersV1test2DirectoryMetadata
     , gdrvdmPath
     , gdrvdmDigest
-
-    -- * GoogleDevtoolsRemoteexecutionV1testDirectory
-    , GoogleDevtoolsRemoteexecutionV1testDirectory
-    , googleDevtoolsRemoteexecutionV1testDirectory
-    , gdrvdDirectories
-    , gdrvdFiles
 
     -- * BuildBazelRemoteExecutionV2ActionResult
     , BuildBazelRemoteExecutionV2ActionResult
@@ -254,6 +227,7 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevarOutputDirectorySymlinks
     , bbrevarOutputFileSymlinks
     , bbrevarOutputDirectories
+    , bbrevarOutputSymlinks
     , bbrevarOutputFiles
     , bbrevarStderrRaw
     , bbrevarExitCode
@@ -272,13 +246,11 @@ module Network.Google.RemoteBuildExecution.Types
     , gdrvctievValue
     , gdrvctievName
 
-    -- * GoogleDevtoolsRemoteexecutionV1testExecuteResponse
-    , GoogleDevtoolsRemoteexecutionV1testExecuteResponse
-    , googleDevtoolsRemoteexecutionV1testExecuteResponse
-    , gdrverStatus
-    , gdrverServerLogs
-    , gdrverResult
-    , gdrverCachedResult
+    -- * GoogleDevtoolsRemotebuildbotResourceUsageStat
+    , GoogleDevtoolsRemotebuildbotResourceUsageStat
+    , googleDevtoolsRemotebuildbotResourceUsageStat
+    , gdrrusUsed
+    , gdrrusTotal
 
     -- * BuildBazelSemverSemVer
     , BuildBazelSemverSemVer
@@ -300,18 +272,28 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevlfHumanReadable
     , bbrevlfDigest
 
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
+    , googleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
+    , gdravaMaxSize
+    , gdravaMinSize
+
+    -- * GoogleDevtoolsRemotebuildbotResourceUsageIOStats
+    , GoogleDevtoolsRemotebuildbotResourceUsageIOStats
+    , googleDevtoolsRemotebuildbotResourceUsageIOStats
+    , gdrruioWriteBytesCount
+    , gdrruioReadBytesCount
+    , gdrruioWriteCount
+    , gdrruioReadTimeMs
+    , gdrruioReadCount
+    , gdrruioWriteTimeMs
+
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
     , googleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
     , gdravcwprParent
     , gdravcwprPoolId
     , gdravcwprWorkerPool
-
-    -- * GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
-    , GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
-    , googleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
-    , gdrvcevValue
-    , gdrvcevName
 
     -- * BuildBazelRemoteExecutionV2FindMissingBlobsResponse
     , BuildBazelRemoteExecutionV2FindMissingBlobsResponse
@@ -321,16 +303,8 @@ module Network.Google.RemoteBuildExecution.Types
     -- * GoogleDevtoolsRemoteworkersV1test2Directory
     , GoogleDevtoolsRemoteworkersV1test2Directory
     , googleDevtoolsRemoteworkersV1test2Directory
-    , gDirectories
-    , gFiles
-
-    -- * GoogleDevtoolsRemoteexecutionV1testRequestMetadata
-    , GoogleDevtoolsRemoteexecutionV1testRequestMetadata
-    , googleDevtoolsRemoteexecutionV1testRequestMetadata
-    , gdrvrmCorrelatedInvocationsId
-    , gdrvrmToolInvocationId
-    , gdrvrmActionId
-    , gdrvrmToolDetails
+    , gdrvdDirectories
+    , gdrvdFiles
 
     -- * BuildBazelRemoteExecutionV2ExecutionPolicy
     , BuildBazelRemoteExecutionV2ExecutionPolicy
@@ -341,6 +315,9 @@ module Network.Google.RemoteBuildExecution.Types
     , BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
     , buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
     , bbrevacucUpdateEnabled
+
+    -- * BuildBazelRemoteExecutionV2CacheCapabilitiesDigestFunctionItem
+    , BuildBazelRemoteExecutionV2CacheCapabilitiesDigestFunctionItem (..)
 
     -- * GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
     , GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
@@ -368,15 +345,17 @@ module Network.Google.RemoteBuildExecution.Types
     , gdrvcrMetadata
     , gdrvcrDuration
 
-    -- * GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage
-    , GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage (..)
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
+    , googleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
+    , gdravfpfPolicy
+    , gdravfpfAllowedValues
 
-    -- * GoogleDevtoolsRemoteexecutionV1testFileNode
-    , GoogleDevtoolsRemoteexecutionV1testFileNode
-    , googleDevtoolsRemoteexecutionV1testFileNode
-    , gdrvfnName
-    , gdrvfnIsExecutable
-    , gdrvfnDigest
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
+    , googleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
+    , gdravacAcceleratorCount
+    , gdravacAcceleratorType
 
     -- * GoogleDevtoolsRemoteworkersV1test2AdminTemp
     , GoogleDevtoolsRemoteworkersV1test2AdminTemp
@@ -384,16 +363,25 @@ module Network.Google.RemoteBuildExecution.Types
     , gdrvatCommand
     , gdrvatArg
 
+    -- * GoogleDevtoolsRemotebuildbotCommandEventsOutputLocation
+    , GoogleDevtoolsRemotebuildbotCommandEventsOutputLocation (..)
+
     -- * GoogleDevtoolsRemotebuildbotCommandDurations
     , GoogleDevtoolsRemotebuildbotCommandDurations
     , googleDevtoolsRemotebuildbotCommandDurations
     , gdrcdStdout
+    , gdrcdCasRelease
     , gdrcdDockerPrep
+    , gdrcdDockerPrepStartTime
+    , gdrcdExecStartTime
     , gdrcdDownload
     , gdrcdOverall
     , gdrcdExecution
     , gdrcdIsoPrepDone
+    , gdrcdCmWaitForAssignment
     , gdrcdUpload
+    , gdrcdUploadStartTime
+    , gdrcdDownloadStartTime
 
     -- * BuildBazelRemoteExecutionV2PlatformProperty
     , BuildBazelRemoteExecutionV2PlatformProperty
@@ -418,6 +406,7 @@ module Network.Google.RemoteBuildExecution.Types
     , BuildBazelRemoteExecutionV2ExecutedActionMetadata
     , buildBazelRemoteExecutionV2ExecutedActionMetadata
     , bbreveamOutputUploadCompletedTimestamp
+    , bbreveamAuxiliaryMetadata
     , bbreveamOutputUploadStartTimestamp
     , bbreveamWorkerCompletedTimestamp
     , bbreveamWorkerStartTimestamp
@@ -438,11 +427,6 @@ module Network.Google.RemoteBuildExecution.Types
     , BuildBazelRemoteExecutionV2FindMissingBlobsRequest
     , buildBazelRemoteExecutionV2FindMissingBlobsRequest
     , bbrevfmbrBlobDigests
-
-    -- * GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
-    , GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
-    , googleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
-    , gdrverslAddtional
 
     -- * BuildBazelRemoteExecutionV2GetTreeResponse
     , BuildBazelRemoteExecutionV2GetTreeResponse
@@ -502,6 +486,7 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevfnName
     , bbrevfnIsExecutable
     , bbrevfnDigest
+    , bbrevfnNodeProperties
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
@@ -515,27 +500,41 @@ module Network.Google.RemoteBuildExecution.Types
     , gdrvctExpectedOutputs
     , gdrvctTimeouts
 
-    -- * GoogleDevtoolsRemoteexecutionV1testCommand
-    , GoogleDevtoolsRemoteexecutionV1testCommand
-    , googleDevtoolsRemoteexecutionV1testCommand
-    , gdrvcArguments
-    , gdrvcEnvironmentVariables
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
+    , googleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
+    , gdravfpDockerSiblingContainers
+    , gdravfpDockerNetwork
+    , gdravfpContainerImageSources
+    , gdravfpDockerRunAsRoot
+    , gdravfpDockerChrootPath
+    , gdravfpDockerPrivileged
+    , gdravfpLinuxIsolation
+    , gdravfpDockerRuntime
+    , gdravfpDockerAddCapabilities
 
-    -- * GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
-    , GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
-    , googleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
-    , gdrveomStage
-    , gdrveomStderrStreamName
-    , gdrveomStdoutStreamName
-    , gdrveomActionDigest
+    -- * GoogleDevtoolsRemotebuildbotCommandEventsCmUsage
+    , GoogleDevtoolsRemotebuildbotCommandEventsCmUsage (..)
+
+    -- * GoogleDevtoolsRemotebuildbotCommandStatus
+    , GoogleDevtoolsRemotebuildbotCommandStatus
+    , googleDevtoolsRemotebuildbotCommandStatus
+    , gdrcsCode
+    , gdrcsMessage
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
     , googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
     , gdravwcDiskSizeGb
+    , gdravwcSoleTenantNodeType
     , gdravwcReserved
+    , gdravwcVMImage
+    , gdravwcAccelerator
+    , gdravwcMaxConcurrentActions
+    , gdravwcNetworkAccess
     , gdravwcMachineType
     , gdravwcDiskType
+    , gdravwcLabels
     , gdravwcMinCPUPlatform
 
     -- * BuildBazelRemoteExecutionV2ExecuteResponse
@@ -546,6 +545,14 @@ module Network.Google.RemoteBuildExecution.Types
     , bbreverResult
     , bbreverCachedResult
     , bbreverMessage
+
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest
+    , googleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest
+    , gdravuirUpdateMask
+    , gdravuirName
+    , gdravuirLoggingEnabled
+    , gdravuirInstance
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
@@ -585,18 +592,15 @@ module Network.Google.RemoteBuildExecution.Types
     , buildBazelRemoteExecutionV2BatchUpdateBlobsRequest
     , bbrevbubrRequests
 
-    -- * GoogleDevtoolsRemoteexecutionV1testLogFile
-    , GoogleDevtoolsRemoteexecutionV1testLogFile
-    , googleDevtoolsRemoteexecutionV1testLogFile
-    , gdrvlfHumanReadable
-    , gdrvlfDigest
-
     -- * BuildBazelRemoteExecutionV2RequestMetadata
     , BuildBazelRemoteExecutionV2RequestMetadata
     , buildBazelRemoteExecutionV2RequestMetadata
+    , bbrevrmTargetId
     , bbrevrmCorrelatedInvocationsId
+    , bbrevrmConfigurationId
     , bbrevrmToolInvocationId
     , bbrevrmActionId
+    , bbrevrmActionMnemonic
     , bbrevrmToolDetails
 
     -- * BuildBazelRemoteExecutionV2Platform
@@ -619,6 +623,7 @@ module Network.Google.RemoteBuildExecution.Types
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
     , googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
     , gdravlwprParent
+    , gdravlwprFilter
 
     -- * BuildBazelRemoteExecutionV2Command
     , BuildBazelRemoteExecutionV2Command
@@ -627,8 +632,19 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevcOutputDirectories
     , bbrevcWorkingDirectory
     , bbrevcArguments
+    , bbrevcOutputPaths
     , bbrevcOutputFiles
     , bbrevcEnvironmentVariables
+    , bbrevcOutputNodeProperties
+
+    -- * BuildBazelRemoteExecutionV2NodeProperty
+    , BuildBazelRemoteExecutionV2NodeProperty
+    , buildBazelRemoteExecutionV2NodeProperty
+    , bbrevnpValue
+    , bbrevnpName
+
+    -- * BuildBazelRemoteExecutionV2CacheCapabilitiesSupportedCompressorItem
+    , BuildBazelRemoteExecutionV2CacheCapabilitiesSupportedCompressorItem (..)
 
     -- * BuildBazelRemoteExecutionV2ToolDetails
     , BuildBazelRemoteExecutionV2ToolDetails
@@ -636,22 +652,32 @@ module Network.Google.RemoteBuildExecution.Types
     , bbrevtdToolName
     , bbrevtdToolVersion
 
+    -- * BuildBazelRemoteExecutionV2ExecutedActionMetadataAuxiliaryMetadataItem
+    , BuildBazelRemoteExecutionV2ExecutedActionMetadataAuxiliaryMetadataItem
+    , buildBazelRemoteExecutionV2ExecutedActionMetadataAuxiliaryMetadataItem
+    , bbreveamamiAddtional
+
     -- * BuildBazelRemoteExecutionV2CacheCapabilities
     , BuildBazelRemoteExecutionV2CacheCapabilities
     , buildBazelRemoteExecutionV2CacheCapabilities
     , bbrevccSymlinkAbsolutePathStrategy
     , bbrevccMaxBatchTotalSizeBytes
     , bbrevccDigestFunction
+    , bbrevccSupportedCompressor
     , bbrevccActionCacheUpdateCapabilities
     , bbrevccCachePriorityCapabilities
 
     -- * GoogleDevtoolsRemotebuildbotCommandEvents
     , GoogleDevtoolsRemotebuildbotCommandEvents
     , googleDevtoolsRemotebuildbotCommandEvents
+    , gdrceDockerImageName
     , gdrceDockerCacheHit
     , gdrceNumErrors
     , gdrceInputCacheMiss
     , gdrceNumWarnings
+    , gdrceOutputLocation
+    , gdrceCmUsage
+    , gdrceUsedAsyncContainer
 
     -- * GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
     , GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
@@ -670,6 +696,9 @@ module Network.Google.RemoteBuildExecution.Types
     , gloName
     , gloMetadata
 
+    -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicy
+    , GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicy (..)
+
     -- * BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
     , BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
     , buildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
@@ -680,11 +709,19 @@ module Network.Google.RemoteBuildExecution.Types
     , BuildBazelRemoteExecutionV2BatchReadBlobsResponse
     , buildBazelRemoteExecutionV2BatchReadBlobsResponse
     , bbrevbrbrResponses
+
+    -- * GoogleDevtoolsRemotebuildbotResourceUsage
+    , GoogleDevtoolsRemotebuildbotResourceUsage
+    , googleDevtoolsRemotebuildbotResourceUsage
+    , gdrruMemoryUsage
+    , gdrruDiskUsage
+    , gdrruCPUUsedPercent
+    , gdrruTotalDiskIoStats
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types.Product
-import           Network.Google.RemoteBuildExecution.Types.Sum
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types.Product
+import Network.Google.RemoteBuildExecution.Types.Sum
 
 -- | Default request referring to version 'v2' of the Remote Build Execution API. This contains the host and root path used as a starting point for constructing service requests.
 remoteBuildExecutionService :: ServiceConfig
@@ -693,6 +730,6 @@ remoteBuildExecutionService
       (ServiceId "remotebuildexecution:v2")
       "remotebuildexecution.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

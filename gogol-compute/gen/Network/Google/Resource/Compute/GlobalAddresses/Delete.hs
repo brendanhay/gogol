@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.GlobalAddresses.Delete
     , gadAddress
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalAddresses.delete@ method which the
 -- 'GlobalAddressesDelete' request conforms to.
@@ -60,8 +60,8 @@ type GlobalAddressesDeleteResource =
 data GlobalAddressesDelete =
   GlobalAddressesDelete'
     { _gadRequestId :: !(Maybe Text)
-    , _gadProject   :: !Text
-    , _gadAddress   :: !Text
+    , _gadProject :: !Text
+    , _gadAddress :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

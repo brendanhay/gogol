@@ -36,8 +36,8 @@ module Network.Google.Resource.Drive.Drives.Hide
     , dhDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.drives.hide@ method which the
 -- 'DrivesHide' request conforms to.

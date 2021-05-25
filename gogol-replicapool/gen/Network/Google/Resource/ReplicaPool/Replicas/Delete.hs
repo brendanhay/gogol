@@ -40,8 +40,8 @@ module Network.Google.Resource.ReplicaPool.Replicas.Delete
     , rdProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.replicas.delete@ method which the
 -- 'ReplicasDelete' request conforms to.
@@ -65,9 +65,9 @@ type ReplicasDeleteResource =
 -- /See:/ 'replicasDelete' smart constructor.
 data ReplicasDelete =
   ReplicasDelete'
-    { _rdPoolName    :: !Text
-    , _rdZone        :: !Text
-    , _rdPayload     :: !ReplicasDeleteRequest
+    { _rdPoolName :: !Text
+    , _rdZone :: !Text
+    , _rdPayload :: !ReplicasDeleteRequest
     , _rdReplicaName :: !Text
     , _rdProjectName :: !Text
     }

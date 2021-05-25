@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.setIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
     , pssipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.setIamPolicy@ method which the
 -- 'ProjectsSubscriptionsSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ProjectsSubscriptionsSetIAMPolicyResource =
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsSubscriptionsSetIAMPolicy' smart constructor.
 data ProjectsSubscriptionsSetIAMPolicy =
   ProjectsSubscriptionsSetIAMPolicy'
-    { _pssipXgafv          :: !(Maybe Xgafv)
+    { _pssipXgafv :: !(Maybe Xgafv)
     , _pssipUploadProtocol :: !(Maybe Text)
-    , _pssipAccessToken    :: !(Maybe Text)
-    , _pssipUploadType     :: !(Maybe Text)
-    , _pssipPayload        :: !SetIAMPolicyRequest
-    , _pssipResource       :: !Text
-    , _pssipCallback       :: !(Maybe Text)
+    , _pssipAccessToken :: !(Maybe Text)
+    , _pssipUploadType :: !(Maybe Text)
+    , _pssipPayload :: !SetIAMPolicyRequest
+    , _pssipResource :: !Text
+    , _pssipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

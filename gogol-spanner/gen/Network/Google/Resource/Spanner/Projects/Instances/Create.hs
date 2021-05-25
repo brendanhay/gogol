@@ -59,8 +59,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Create
     , picCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.create@ method which the
 -- 'ProjectsInstancesCreate' request conforms to.
@@ -99,13 +99,13 @@ type ProjectsInstancesCreateResource =
 -- /See:/ 'projectsInstancesCreate' smart constructor.
 data ProjectsInstancesCreate =
   ProjectsInstancesCreate'
-    { _picParent         :: !Text
-    , _picXgafv          :: !(Maybe Xgafv)
+    { _picParent :: !Text
+    , _picXgafv :: !(Maybe Xgafv)
     , _picUploadProtocol :: !(Maybe Text)
-    , _picAccessToken    :: !(Maybe Text)
-    , _picUploadType     :: !(Maybe Text)
-    , _picPayload        :: !CreateInstanceRequest
-    , _picCallback       :: !(Maybe Text)
+    , _picAccessToken :: !(Maybe Text)
+    , _picUploadType :: !(Maybe Text)
+    , _picPayload :: !CreateInstanceRequest
+    , _picCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -301,14 +301,14 @@ module Network.Google.Language
     , sText
     ) where
 
-import           Network.Google.Language.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Language.Documents.AnalyzeEntities
-import           Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
-import           Network.Google.Resource.Language.Documents.AnalyzeSentiment
-import           Network.Google.Resource.Language.Documents.AnalyzeSyntax
-import           Network.Google.Resource.Language.Documents.AnnotateText
-import           Network.Google.Resource.Language.Documents.ClassifyText
+import Network.Google.Prelude
+import Network.Google.Language.Types
+import Network.Google.Resource.Language.Documents.AnalyzeEntities
+import Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
+import Network.Google.Resource.Language.Documents.AnalyzeSentiment
+import Network.Google.Resource.Language.Documents.AnalyzeSyntax
+import Network.Google.Resource.Language.Documents.AnnotateText
+import Network.Google.Resource.Language.Documents.ClassifyText
 
 {- $resources
 TODO

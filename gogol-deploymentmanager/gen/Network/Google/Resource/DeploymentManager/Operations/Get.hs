@@ -22,7 +22,7 @@
 --
 -- Gets information about a specific operation.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.operations.get@.
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.operations.get@.
 module Network.Google.Resource.DeploymentManager.Operations.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.DeploymentManager.Operations.Get
     , OperationsGet
 
     -- * Request Lenses
+    , ogXgafv
+    , ogUploadProtocol
     , ogProject
     , ogOperation
+    , ogAccessToken
+    , ogUploadType
+    , ogCallback
     ) where
 
-import           Network.Google.DeploymentManager.Types
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
@@ -50,15 +55,25 @@ type OperationsGetResource =
              "global" :>
                "operations" :>
                  Capture "operation" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets information about a specific operation.
 --
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet =
   OperationsGet'
-    { _ogProject   :: !Text
+    { _ogXgafv :: !(Maybe Xgafv)
+    , _ogUploadProtocol :: !(Maybe Text)
+    , _ogProject :: !Text
     , _ogOperation :: !Text
+    , _ogAccessToken :: !(Maybe Text)
+    , _ogUploadType :: !(Maybe Text)
+    , _ogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,16 +82,44 @@ data OperationsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ogXgafv'
+--
+-- * 'ogUploadProtocol'
+--
 -- * 'ogProject'
 --
 -- * 'ogOperation'
+--
+-- * 'ogAccessToken'
+--
+-- * 'ogUploadType'
+--
+-- * 'ogCallback'
 operationsGet
     :: Text -- ^ 'ogProject'
     -> Text -- ^ 'ogOperation'
     -> OperationsGet
 operationsGet pOgProject_ pOgOperation_ =
-  OperationsGet' {_ogProject = pOgProject_, _ogOperation = pOgOperation_}
+  OperationsGet'
+    { _ogXgafv = Nothing
+    , _ogUploadProtocol = Nothing
+    , _ogProject = pOgProject_
+    , _ogOperation = pOgOperation_
+    , _ogAccessToken = Nothing
+    , _ogUploadType = Nothing
+    , _ogCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ogXgafv :: Lens' OperationsGet (Maybe Xgafv)
+ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ogUploadProtocol :: Lens' OperationsGet (Maybe Text)
+ogUploadProtocol
+  = lens _ogUploadProtocol
+      (\ s a -> s{_ogUploadProtocol = a})
 
 -- | The project ID for this request.
 ogProject :: Lens' OperationsGet Text
@@ -88,6 +131,22 @@ ogOperation :: Lens' OperationsGet Text
 ogOperation
   = lens _ogOperation (\ s a -> s{_ogOperation = a})
 
+-- | OAuth access token.
+ogAccessToken :: Lens' OperationsGet (Maybe Text)
+ogAccessToken
+  = lens _ogAccessToken
+      (\ s a -> s{_ogAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ogUploadType :: Lens' OperationsGet (Maybe Text)
+ogUploadType
+  = lens _ogUploadType (\ s a -> s{_ogUploadType = a})
+
+-- | JSONP
+ogCallback :: Lens' OperationsGet (Maybe Text)
+ogCallback
+  = lens _ogCallback (\ s a -> s{_ogCallback = a})
+
 instance GoogleRequest OperationsGet where
         type Rs OperationsGet = Operation
         type Scopes OperationsGet =
@@ -96,7 +155,12 @@ instance GoogleRequest OperationsGet where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient OperationsGet'{..}
-          = go _ogProject _ogOperation (Just AltJSON)
+          = go _ogProject _ogOperation _ogXgafv
+              _ogUploadProtocol
+              _ogAccessToken
+              _ogUploadType
+              _ogCallback
+              (Just AltJSON)
               deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy OperationsGetResource)

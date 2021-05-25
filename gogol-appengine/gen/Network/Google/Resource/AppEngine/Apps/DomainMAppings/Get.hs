@@ -42,8 +42,8 @@ module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Get
     , admagCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.domainMappings.get@ method which the
 -- 'AppsDomainMAppingsGet' request conforms to.
@@ -65,13 +65,13 @@ type AppsDomainMAppingsGetResource =
 -- /See:/ 'appsDomainMAppingsGet' smart constructor.
 data AppsDomainMAppingsGet =
   AppsDomainMAppingsGet'
-    { _admagXgafv            :: !(Maybe Xgafv)
-    , _admagUploadProtocol   :: !(Maybe Text)
-    , _admagAccessToken      :: !(Maybe Text)
-    , _admagUploadType       :: !(Maybe Text)
-    , _admagAppsId           :: !Text
+    { _admagXgafv :: !(Maybe Xgafv)
+    , _admagUploadProtocol :: !(Maybe Text)
+    , _admagAccessToken :: !(Maybe Text)
+    , _admagUploadType :: !(Maybe Text)
+    , _admagAppsId :: !Text
     , _admagDomainMAppingsId :: !Text
-    , _admagCallback         :: !(Maybe Text)
+    , _admagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.Calendar.Settings.Watch
     , swMaxResults
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.settings.watch@ method which the
 -- 'SettingsWatch' request conforms to.
@@ -62,9 +62,9 @@ type SettingsWatchResource =
 -- /See:/ 'settingsWatch' smart constructor.
 data SettingsWatch =
   SettingsWatch'
-    { _swSyncToken  :: !(Maybe Text)
-    , _swPayload    :: !Channel
-    , _swPageToken  :: !(Maybe Text)
+    { _swSyncToken :: !(Maybe Text)
+    , _swPayload :: !Channel
+    , _swPageToken :: !(Maybe Text)
     , _swMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

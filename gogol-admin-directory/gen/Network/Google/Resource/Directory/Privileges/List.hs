@@ -22,7 +22,7 @@
 --
 -- Retrieves a paginated list of all privileges for a customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.privileges.list@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.privileges.list@.
 module Network.Google.Resource.Directory.Privileges.List
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Directory.Privileges.List
     , PrivilegesList
 
     -- * Request Lenses
+    , plXgafv
+    , plUploadProtocol
+    , plAccessToken
+    , plUploadType
     , plCustomer
+    , plCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.privileges.list@ method which the
 -- 'PrivilegesList' request conforms to.
@@ -50,14 +55,25 @@ type PrivilegesListResource =
                "roles" :>
                  "ALL" :>
                    "privileges" :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Privileges
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] Privileges
 
 -- | Retrieves a paginated list of all privileges for a customer.
 --
 -- /See:/ 'privilegesList' smart constructor.
-newtype PrivilegesList =
+data PrivilegesList =
   PrivilegesList'
-    { _plCustomer :: Text
+    { _plXgafv :: !(Maybe Xgafv)
+    , _plUploadProtocol :: !(Maybe Text)
+    , _plAccessToken :: !(Maybe Text)
+    , _plUploadType :: !(Maybe Text)
+    , _plCustomer :: !Text
+    , _plCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +82,61 @@ newtype PrivilegesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'plXgafv'
+--
+-- * 'plUploadProtocol'
+--
+-- * 'plAccessToken'
+--
+-- * 'plUploadType'
+--
 -- * 'plCustomer'
+--
+-- * 'plCallback'
 privilegesList
     :: Text -- ^ 'plCustomer'
     -> PrivilegesList
-privilegesList pPlCustomer_ = PrivilegesList' {_plCustomer = pPlCustomer_}
+privilegesList pPlCustomer_ =
+  PrivilegesList'
+    { _plXgafv = Nothing
+    , _plUploadProtocol = Nothing
+    , _plAccessToken = Nothing
+    , _plUploadType = Nothing
+    , _plCustomer = pPlCustomer_
+    , _plCallback = Nothing
+    }
 
 
--- | Immutable ID of the G Suite account.
+-- | V1 error format.
+plXgafv :: Lens' PrivilegesList (Maybe Xgafv)
+plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+plUploadProtocol :: Lens' PrivilegesList (Maybe Text)
+plUploadProtocol
+  = lens _plUploadProtocol
+      (\ s a -> s{_plUploadProtocol = a})
+
+-- | OAuth access token.
+plAccessToken :: Lens' PrivilegesList (Maybe Text)
+plAccessToken
+  = lens _plAccessToken
+      (\ s a -> s{_plAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+plUploadType :: Lens' PrivilegesList (Maybe Text)
+plUploadType
+  = lens _plUploadType (\ s a -> s{_plUploadType = a})
+
+-- | Immutable ID of the Google Workspace account.
 plCustomer :: Lens' PrivilegesList Text
 plCustomer
   = lens _plCustomer (\ s a -> s{_plCustomer = a})
+
+-- | JSONP
+plCallback :: Lens' PrivilegesList (Maybe Text)
+plCallback
+  = lens _plCallback (\ s a -> s{_plCallback = a})
 
 instance GoogleRequest PrivilegesList where
         type Rs PrivilegesList = Privileges
@@ -84,7 +144,12 @@ instance GoogleRequest PrivilegesList where
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient PrivilegesList'{..}
-          = go _plCustomer (Just AltJSON) directoryService
+          = go _plCustomer _plXgafv _plUploadProtocol
+              _plAccessToken
+              _plUploadType
+              _plCallback
+              (Just AltJSON)
+              directoryService
           where go
                   = buildClient (Proxy :: Proxy PrivilegesListResource)
                       mempty

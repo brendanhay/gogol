@@ -22,7 +22,7 @@
 --
 -- Enumerate DnsKeys to a ResourceRecordSet collection.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.dnsKeys.list@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.dnsKeys.list@.
 module Network.Google.Resource.DNS.DNSKeys.List
     (
     -- * REST Resource
@@ -33,15 +33,20 @@ module Network.Google.Resource.DNS.DNSKeys.List
     , DNSKeysList
 
     -- * Request Lenses
+    , dklXgafv
+    , dklUploadProtocol
     , dklProject
+    , dklAccessToken
     , dklDigestType
+    , dklUploadType
     , dklPageToken
     , dklManagedZone
     , dklMaxResults
+    , dklCallback
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.dnsKeys.list@ method which the
 -- 'DNSKeysList' request conforms to.
@@ -53,22 +58,32 @@ type DNSKeysListResource =
              "managedZones" :>
                Capture "managedZone" Text :>
                  "dnsKeys" :>
-                   QueryParam "digestType" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] DNSKeysListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "digestType" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] DNSKeysListResponse
 
 -- | Enumerate DnsKeys to a ResourceRecordSet collection.
 --
 -- /See:/ 'dnsKeysList' smart constructor.
 data DNSKeysList =
   DNSKeysList'
-    { _dklProject     :: !Text
-    , _dklDigestType  :: !(Maybe Text)
-    , _dklPageToken   :: !(Maybe Text)
+    { _dklXgafv :: !(Maybe Xgafv)
+    , _dklUploadProtocol :: !(Maybe Text)
+    , _dklProject :: !Text
+    , _dklAccessToken :: !(Maybe Text)
+    , _dklDigestType :: !(Maybe Text)
+    , _dklUploadType :: !(Maybe Text)
+    , _dklPageToken :: !(Maybe Text)
     , _dklManagedZone :: !Text
-    , _dklMaxResults  :: !(Maybe (Textual Int32))
+    , _dklMaxResults :: !(Maybe (Textual Int32))
+    , _dklCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,33 +92,64 @@ data DNSKeysList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dklXgafv'
+--
+-- * 'dklUploadProtocol'
+--
 -- * 'dklProject'
 --
+-- * 'dklAccessToken'
+--
 -- * 'dklDigestType'
+--
+-- * 'dklUploadType'
 --
 -- * 'dklPageToken'
 --
 -- * 'dklManagedZone'
 --
 -- * 'dklMaxResults'
+--
+-- * 'dklCallback'
 dnsKeysList
     :: Text -- ^ 'dklProject'
     -> Text -- ^ 'dklManagedZone'
     -> DNSKeysList
 dnsKeysList pDklProject_ pDklManagedZone_ =
   DNSKeysList'
-    { _dklProject = pDklProject_
+    { _dklXgafv = Nothing
+    , _dklUploadProtocol = Nothing
+    , _dklProject = pDklProject_
+    , _dklAccessToken = Nothing
     , _dklDigestType = Nothing
+    , _dklUploadType = Nothing
     , _dklPageToken = Nothing
     , _dklManagedZone = pDklManagedZone_
     , _dklMaxResults = Nothing
+    , _dklCallback = Nothing
     }
 
+
+-- | V1 error format.
+dklXgafv :: Lens' DNSKeysList (Maybe Xgafv)
+dklXgafv = lens _dklXgafv (\ s a -> s{_dklXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dklUploadProtocol :: Lens' DNSKeysList (Maybe Text)
+dklUploadProtocol
+  = lens _dklUploadProtocol
+      (\ s a -> s{_dklUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 dklProject :: Lens' DNSKeysList Text
 dklProject
   = lens _dklProject (\ s a -> s{_dklProject = a})
+
+-- | OAuth access token.
+dklAccessToken :: Lens' DNSKeysList (Maybe Text)
+dklAccessToken
+  = lens _dklAccessToken
+      (\ s a -> s{_dklAccessToken = a})
 
 -- | An optional comma-separated list of digest types to compute and display
 -- for key signing keys. If omitted, the recommended digest type will be
@@ -112,6 +158,12 @@ dklDigestType :: Lens' DNSKeysList (Maybe Text)
 dklDigestType
   = lens _dklDigestType
       (\ s a -> s{_dklDigestType = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dklUploadType :: Lens' DNSKeysList (Maybe Text)
+dklUploadType
+  = lens _dklUploadType
+      (\ s a -> s{_dklUploadType = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
 -- Use this parameter to continue a previous list request.
@@ -134,6 +186,11 @@ dklMaxResults
       (\ s a -> s{_dklMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+dklCallback :: Lens' DNSKeysList (Maybe Text)
+dklCallback
+  = lens _dklCallback (\ s a -> s{_dklCallback = a})
+
 instance GoogleRequest DNSKeysList where
         type Rs DNSKeysList = DNSKeysListResponse
         type Scopes DNSKeysList =
@@ -142,9 +199,14 @@ instance GoogleRequest DNSKeysList where
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient DNSKeysList'{..}
-          = go _dklProject _dklManagedZone _dklDigestType
+          = go _dklProject _dklManagedZone _dklXgafv
+              _dklUploadProtocol
+              _dklAccessToken
+              _dklDigestType
+              _dklUploadType
               _dklPageToken
               _dklMaxResults
+              _dklCallback
               (Just AltJSON)
               dNSService
           where go

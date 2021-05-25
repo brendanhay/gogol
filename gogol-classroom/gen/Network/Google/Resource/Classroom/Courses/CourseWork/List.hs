@@ -51,8 +51,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.List
     , ccwlCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.list@ method which the
 -- 'CoursesCourseWorkList' request conforms to.
@@ -65,7 +65,9 @@ type CoursesCourseWorkListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
                    QueryParam "access_token" Text :>
-                     QueryParams "courseWorkStates" Text :>
+                     QueryParams "courseWorkStates"
+                       CoursesCourseWorkListCourseWorkStates
+                       :>
                        QueryParam "uploadType" Text :>
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" (Textual Int32) :>
@@ -84,16 +86,16 @@ type CoursesCourseWorkListResource =
 -- /See:/ 'coursesCourseWorkList' smart constructor.
 data CoursesCourseWorkList =
   CoursesCourseWorkList'
-    { _ccwlXgafv            :: !(Maybe Xgafv)
-    , _ccwlUploadProtocol   :: !(Maybe Text)
-    , _ccwlOrderBy          :: !(Maybe Text)
-    , _ccwlCourseId         :: !Text
-    , _ccwlAccessToken      :: !(Maybe Text)
-    , _ccwlCourseWorkStates :: !(Maybe [Text])
-    , _ccwlUploadType       :: !(Maybe Text)
-    , _ccwlPageToken        :: !(Maybe Text)
-    , _ccwlPageSize         :: !(Maybe (Textual Int32))
-    , _ccwlCallback         :: !(Maybe Text)
+    { _ccwlXgafv :: !(Maybe Xgafv)
+    , _ccwlUploadProtocol :: !(Maybe Text)
+    , _ccwlOrderBy :: !(Maybe Text)
+    , _ccwlCourseId :: !Text
+    , _ccwlAccessToken :: !(Maybe Text)
+    , _ccwlCourseWorkStates :: !(Maybe [CoursesCourseWorkListCourseWorkStates])
+    , _ccwlUploadType :: !(Maybe Text)
+    , _ccwlPageToken :: !(Maybe Text)
+    , _ccwlPageSize :: !(Maybe (Textual Int32))
+    , _ccwlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -175,7 +177,7 @@ ccwlAccessToken
 -- | Restriction on the work status to return. Only courseWork that matches
 -- is returned. If unspecified, items with a work status of \`PUBLISHED\`
 -- is returned.
-ccwlCourseWorkStates :: Lens' CoursesCourseWorkList [Text]
+ccwlCourseWorkStates :: Lens' CoursesCourseWorkList [CoursesCourseWorkListCourseWorkStates]
 ccwlCourseWorkStates
   = lens _ccwlCourseWorkStates
       (\ s a -> s{_ccwlCourseWorkStates = a})

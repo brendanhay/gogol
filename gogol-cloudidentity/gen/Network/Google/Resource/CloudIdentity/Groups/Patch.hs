@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Group.
+-- Updates a \`Group\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.patch@.
 module Network.Google.Resource.CloudIdentity.Groups.Patch
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Patch
     , gpCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.patch@ method which the
 -- 'GroupsPatch' request conforms to.
@@ -60,19 +60,19 @@ type GroupsPatchResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Group :> Patch '[JSON] Operation
 
--- | Updates a Group.
+-- | Updates a \`Group\`.
 --
 -- /See:/ 'groupsPatch' smart constructor.
 data GroupsPatch =
   GroupsPatch'
-    { _gpXgafv          :: !(Maybe Xgafv)
+    { _gpXgafv :: !(Maybe Xgafv)
     , _gpUploadProtocol :: !(Maybe Text)
-    , _gpUpdateMask     :: !(Maybe GFieldMask)
-    , _gpAccessToken    :: !(Maybe Text)
-    , _gpUploadType     :: !(Maybe Text)
-    , _gpPayload        :: !Group
-    , _gpName           :: !Text
-    , _gpCallback       :: !(Maybe Text)
+    , _gpUpdateMask :: !(Maybe GFieldMask)
+    , _gpAccessToken :: !(Maybe Text)
+    , _gpUploadType :: !(Maybe Text)
+    , _gpPayload :: !Group
+    , _gpName :: !Text
+    , _gpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,8 @@ gpUploadProtocol
   = lens _gpUploadProtocol
       (\ s a -> s{_gpUploadProtocol = a})
 
--- | Editable fields: \`display_name\`, \`description\`
+-- | Required. The names of fields to update. May only contain the following
+-- fields: \`display_name\`, \`description\`, \`labels\`.
 gpUpdateMask :: Lens' GroupsPatch (Maybe GFieldMask)
 gpUpdateMask
   = lens _gpUpdateMask (\ s a -> s{_gpUpdateMask = a})
@@ -144,11 +145,9 @@ gpPayload :: Lens' GroupsPatch Group
 gpPayload
   = lens _gpPayload (\ s a -> s{_gpPayload = a})
 
--- | [Resource
+-- | Output only. The [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
--- Group in the format: \`groups\/{group_id}\`, where group_id is the
--- unique ID assigned to the Group. Must be left blank while creating a
--- Group.
+-- \`Group\`. Shall be of the form \`groups\/{group_id}\`.
 gpName :: Lens' GroupsPatch Text
 gpName = lens _gpName (\ s a -> s{_gpName = a})
 
@@ -160,7 +159,8 @@ gpCallback
 instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Operation
         type Scopes GroupsPatch =
-             '["https://www.googleapis.com/auth/cloud-identity.groups"]
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsPatch'{..}
           = go _gpName _gpXgafv _gpUploadProtocol _gpUpdateMask
               _gpAccessToken

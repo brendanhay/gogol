@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Filt
     , bafsfblCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.accounts.filterSets.filteredBids.list@ method which the
 -- 'BiddersAccountsFilterSetsFilteredBidsList' request conforms to.
@@ -70,14 +70,14 @@ type BiddersAccountsFilterSetsFilteredBidsListResource
 -- /See:/ 'biddersAccountsFilterSetsFilteredBidsList' smart constructor.
 data BiddersAccountsFilterSetsFilteredBidsList =
   BiddersAccountsFilterSetsFilteredBidsList'
-    { _bafsfblXgafv          :: !(Maybe Xgafv)
+    { _bafsfblXgafv :: !(Maybe Xgafv)
     , _bafsfblUploadProtocol :: !(Maybe Text)
-    , _bafsfblFilterSetName  :: !Text
-    , _bafsfblAccessToken    :: !(Maybe Text)
-    , _bafsfblUploadType     :: !(Maybe Text)
-    , _bafsfblPageToken      :: !(Maybe Text)
-    , _bafsfblPageSize       :: !(Maybe (Textual Int32))
-    , _bafsfblCallback       :: !(Maybe Text)
+    , _bafsfblFilterSetName :: !Text
+    , _bafsfblAccessToken :: !(Maybe Text)
+    , _bafsfblUploadType :: !(Maybe Text)
+    , _bafsfblPageToken :: !(Maybe Text)
+    , _bafsfblPageSize :: !(Maybe (Textual Int32))
+    , _bafsfblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

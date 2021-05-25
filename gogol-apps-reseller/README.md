@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Enterprise Apps Reseller.
+A client library for the Google Workspace Reseller.
 
 
 ## Contribute

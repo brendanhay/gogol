@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google DCM/DFA Reporting And Trafficking.
+A client library for the Google Campaign Manager 360.
 
 
 ## Contribute

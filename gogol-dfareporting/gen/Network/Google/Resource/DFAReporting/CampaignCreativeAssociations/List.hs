@@ -23,7 +23,7 @@
 -- Retrieves the list of creative IDs associated with the specified
 -- campaign. This method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.campaignCreativeAssociations.list@.
 module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
     (
     -- * REST Resource
@@ -34,33 +34,44 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
     , CampaignCreativeAssociationsList
 
     -- * Request Lenses
+    , ccalXgafv
+    , ccalUploadProtocol
+    , ccalAccessToken
+    , ccalUploadType
     , ccalCampaignId
     , ccalProFileId
     , ccalSortOrder
     , ccalPageToken
     , ccalMaxResults
+    , ccalCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaignCreativeAssociations.list@ method which the
 -- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
                Capture "campaignId" (Textual Int64) :>
                  "campaignCreativeAssociations" :>
-                   QueryParam "sortOrder"
-                     CampaignCreativeAssociationsListSortOrder
-                     :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] CampaignCreativeAssociationsListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "sortOrder"
+                             CampaignCreativeAssociationsListSortOrder
+                             :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON]
+                                       CampaignCreativeAssociationsListResponse
 
 -- | Retrieves the list of creative IDs associated with the specified
 -- campaign. This method supports paging.
@@ -68,11 +79,16 @@ type CampaignCreativeAssociationsListResource =
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
 data CampaignCreativeAssociationsList =
   CampaignCreativeAssociationsList'
-    { _ccalCampaignId :: !(Textual Int64)
-    , _ccalProFileId  :: !(Textual Int64)
-    , _ccalSortOrder  :: !CampaignCreativeAssociationsListSortOrder
-    , _ccalPageToken  :: !(Maybe Text)
+    { _ccalXgafv :: !(Maybe Xgafv)
+    , _ccalUploadProtocol :: !(Maybe Text)
+    , _ccalAccessToken :: !(Maybe Text)
+    , _ccalUploadType :: !(Maybe Text)
+    , _ccalCampaignId :: !(Textual Int64)
+    , _ccalProFileId :: !(Textual Int64)
+    , _ccalSortOrder :: !CampaignCreativeAssociationsListSortOrder
+    , _ccalPageToken :: !(Maybe Text)
     , _ccalMaxResults :: !(Textual Int32)
+    , _ccalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,6 +96,14 @@ data CampaignCreativeAssociationsList =
 -- | Creates a value of 'CampaignCreativeAssociationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccalXgafv'
+--
+-- * 'ccalUploadProtocol'
+--
+-- * 'ccalAccessToken'
+--
+-- * 'ccalUploadType'
 --
 -- * 'ccalCampaignId'
 --
@@ -90,19 +114,49 @@ data CampaignCreativeAssociationsList =
 -- * 'ccalPageToken'
 --
 -- * 'ccalMaxResults'
+--
+-- * 'ccalCallback'
 campaignCreativeAssociationsList
     :: Int64 -- ^ 'ccalCampaignId'
     -> Int64 -- ^ 'ccalProFileId'
     -> CampaignCreativeAssociationsList
 campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
   CampaignCreativeAssociationsList'
-    { _ccalCampaignId = _Coerce # pCcalCampaignId_
+    { _ccalXgafv = Nothing
+    , _ccalUploadProtocol = Nothing
+    , _ccalAccessToken = Nothing
+    , _ccalUploadType = Nothing
+    , _ccalCampaignId = _Coerce # pCcalCampaignId_
     , _ccalProFileId = _Coerce # pCcalProFileId_
     , _ccalSortOrder = CCALSOAscending
     , _ccalPageToken = Nothing
     , _ccalMaxResults = 1000
+    , _ccalCallback = Nothing
     }
 
+
+-- | V1 error format.
+ccalXgafv :: Lens' CampaignCreativeAssociationsList (Maybe Xgafv)
+ccalXgafv
+  = lens _ccalXgafv (\ s a -> s{_ccalXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ccalUploadProtocol :: Lens' CampaignCreativeAssociationsList (Maybe Text)
+ccalUploadProtocol
+  = lens _ccalUploadProtocol
+      (\ s a -> s{_ccalUploadProtocol = a})
+
+-- | OAuth access token.
+ccalAccessToken :: Lens' CampaignCreativeAssociationsList (Maybe Text)
+ccalAccessToken
+  = lens _ccalAccessToken
+      (\ s a -> s{_ccalAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ccalUploadType :: Lens' CampaignCreativeAssociationsList (Maybe Text)
+ccalUploadType
+  = lens _ccalUploadType
+      (\ s a -> s{_ccalUploadType = a})
 
 -- | Campaign ID in this association.
 ccalCampaignId :: Lens' CampaignCreativeAssociationsList Int64
@@ -137,6 +191,11 @@ ccalMaxResults
       (\ s a -> s{_ccalMaxResults = a})
       . _Coerce
 
+-- | JSONP
+ccalCallback :: Lens' CampaignCreativeAssociationsList (Maybe Text)
+ccalCallback
+  = lens _ccalCallback (\ s a -> s{_ccalCallback = a})
+
 instance GoogleRequest
            CampaignCreativeAssociationsList
          where
@@ -145,10 +204,14 @@ instance GoogleRequest
         type Scopes CampaignCreativeAssociationsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignCreativeAssociationsList'{..}
-          = go _ccalProFileId _ccalCampaignId
+          = go _ccalProFileId _ccalCampaignId _ccalXgafv
+              _ccalUploadProtocol
+              _ccalAccessToken
+              _ccalUploadType
               (Just _ccalSortOrder)
               _ccalPageToken
               (Just _ccalMaxResults)
+              _ccalCallback
               (Just AltJSON)
               dFAReportingService
           where go

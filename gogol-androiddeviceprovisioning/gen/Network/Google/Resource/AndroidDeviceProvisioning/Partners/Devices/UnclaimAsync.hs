@@ -44,8 +44,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Unclai
     , pduaCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.unclaimAsync@ method which the
 -- 'PartnersDevicesUnclaimAsync' request conforms to.
@@ -70,13 +70,13 @@ type PartnersDevicesUnclaimAsyncResource =
 -- /See:/ 'partnersDevicesUnclaimAsync' smart constructor.
 data PartnersDevicesUnclaimAsync =
   PartnersDevicesUnclaimAsync'
-    { _pduaXgafv          :: !(Maybe Xgafv)
+    { _pduaXgafv :: !(Maybe Xgafv)
     , _pduaUploadProtocol :: !(Maybe Text)
-    , _pduaAccessToken    :: !(Maybe Text)
-    , _pduaPartnerId      :: !(Textual Int64)
-    , _pduaUploadType     :: !(Maybe Text)
-    , _pduaPayload        :: !UnclaimDevicesRequest
-    , _pduaCallback       :: !(Maybe Text)
+    , _pduaAccessToken :: !(Maybe Text)
+    , _pduaPartnerId :: !(Textual Int64)
+    , _pduaUploadType :: !(Maybe Text)
+    , _pduaPayload :: !UnclaimDevicesRequest
+    , _pduaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

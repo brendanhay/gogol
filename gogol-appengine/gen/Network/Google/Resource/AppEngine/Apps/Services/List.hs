@@ -43,8 +43,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.List
     , aslCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.list@ method which the
 -- 'AppsServicesList' request conforms to.
@@ -68,14 +68,14 @@ type AppsServicesListResource =
 -- /See:/ 'appsServicesList' smart constructor.
 data AppsServicesList =
   AppsServicesList'
-    { _aslXgafv          :: !(Maybe Xgafv)
+    { _aslXgafv :: !(Maybe Xgafv)
     , _aslUploadProtocol :: !(Maybe Text)
-    , _aslAccessToken    :: !(Maybe Text)
-    , _aslUploadType     :: !(Maybe Text)
-    , _aslAppsId         :: !Text
-    , _aslPageToken      :: !(Maybe Text)
-    , _aslPageSize       :: !(Maybe (Textual Int32))
-    , _aslCallback       :: !(Maybe Text)
+    , _aslAccessToken :: !(Maybe Text)
+    , _aslUploadType :: !(Maybe Text)
+    , _aslAppsId :: !Text
+    , _aslPageToken :: !(Maybe Text)
+    , _aslPageSize :: !(Maybe (Textual Int32))
+    , _aslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

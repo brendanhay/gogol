@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NodeGroups.SetNodeTemplate
     , ngsntPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.setNodeTemplate@ method which the
 -- 'NodeGroupsSetNodeTemplate' request conforms to.
@@ -67,9 +67,9 @@ data NodeGroupsSetNodeTemplate =
   NodeGroupsSetNodeTemplate'
     { _ngsntRequestId :: !(Maybe Text)
     , _ngsntNodeGroup :: !Text
-    , _ngsntProject   :: !Text
-    , _ngsntZone      :: !Text
-    , _ngsntPayload   :: !NodeGroupsSetNodeTemplateRequest
+    , _ngsntProject :: !Text
+    , _ngsntZone :: !Text
+    , _ngsntPayload :: !NodeGroupsSetNodeTemplateRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- List the jobs of a project. To list the jobs of a project in a region,
--- we recommend using \`projects.locations.jobs.get\` with a [regional
+-- we recommend using \`projects.locations.jobs.list\` with a [regional
 -- endpoint]
 -- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
 -- To list the all jobs across all regions, use
@@ -53,8 +53,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
     , pljlCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.jobs.list@ method which the
 -- 'ProjectsLocationsJobsList' request conforms to.
@@ -69,8 +69,9 @@ type ProjectsLocationsJobsListResource =
                    QueryParam "upload_protocol" Text :>
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "view" Text :>
-                           QueryParam "filter" Text :>
+                         QueryParam "view" ProjectsLocationsJobsListView :>
+                           QueryParam "filter" ProjectsLocationsJobsListFilter
+                             :>
                              QueryParam "pageToken" Text :>
                                QueryParam "pageSize" (Textual Int32) :>
                                  QueryParam "callback" Text :>
@@ -78,7 +79,7 @@ type ProjectsLocationsJobsListResource =
                                      Get '[JSON] ListJobsResponse
 
 -- | List the jobs of a project. To list the jobs of a project in a region,
--- we recommend using \`projects.locations.jobs.get\` with a [regional
+-- we recommend using \`projects.locations.jobs.list\` with a [regional
 -- endpoint]
 -- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
 -- To list the all jobs across all regions, use
@@ -89,17 +90,17 @@ type ProjectsLocationsJobsListResource =
 -- /See:/ 'projectsLocationsJobsList' smart constructor.
 data ProjectsLocationsJobsList =
   ProjectsLocationsJobsList'
-    { _pljlXgafv          :: !(Maybe Xgafv)
+    { _pljlXgafv :: !(Maybe Xgafv)
     , _pljlUploadProtocol :: !(Maybe Text)
-    , _pljlLocation       :: !Text
-    , _pljlAccessToken    :: !(Maybe Text)
-    , _pljlUploadType     :: !(Maybe Text)
-    , _pljlView           :: !(Maybe Text)
-    , _pljlFilter         :: !(Maybe Text)
-    , _pljlPageToken      :: !(Maybe Text)
-    , _pljlProjectId      :: !Text
-    , _pljlPageSize       :: !(Maybe (Textual Int32))
-    , _pljlCallback       :: !(Maybe Text)
+    , _pljlLocation :: !Text
+    , _pljlAccessToken :: !(Maybe Text)
+    , _pljlUploadType :: !(Maybe Text)
+    , _pljlView :: !(Maybe ProjectsLocationsJobsListView)
+    , _pljlFilter :: !(Maybe ProjectsLocationsJobsListFilter)
+    , _pljlPageToken :: !(Maybe Text)
+    , _pljlProjectId :: !Text
+    , _pljlPageSize :: !(Maybe (Textual Int32))
+    , _pljlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -179,13 +180,13 @@ pljlUploadType
   = lens _pljlUploadType
       (\ s a -> s{_pljlUploadType = a})
 
--- | Level of information requested in response. Default is
--- \`JOB_VIEW_SUMMARY\`.
-pljlView :: Lens' ProjectsLocationsJobsList (Maybe Text)
+-- | Deprecated. ListJobs always returns summaries now. Use GetJob for other
+-- JobViews.
+pljlView :: Lens' ProjectsLocationsJobsList (Maybe ProjectsLocationsJobsListView)
 pljlView = lens _pljlView (\ s a -> s{_pljlView = a})
 
 -- | The kind of filter to use.
-pljlFilter :: Lens' ProjectsLocationsJobsList (Maybe Text)
+pljlFilter :: Lens' ProjectsLocationsJobsList (Maybe ProjectsLocationsJobsListFilter)
 pljlFilter
   = lens _pljlFilter (\ s a -> s{_pljlFilter = a})
 

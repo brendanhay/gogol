@@ -22,7 +22,7 @@
 --
 -- Deletes an existing ScanConfig and its child resources.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.delete@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.delete@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.Delete
     (
     -- * REST Resource
@@ -41,13 +41,13 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.Delete
     , pscdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.delete@ method which the
 -- 'ProjectsScanConfigsDelete' request conforms to.
 type ProjectsScanConfigsDeleteResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsScanConfigsDeleteResource =
 -- /See:/ 'projectsScanConfigsDelete' smart constructor.
 data ProjectsScanConfigsDelete =
   ProjectsScanConfigsDelete'
-    { _pscdXgafv          :: !(Maybe Xgafv)
+    { _pscdXgafv :: !(Maybe Xgafv)
     , _pscdUploadProtocol :: !(Maybe Text)
-    , _pscdAccessToken    :: !(Maybe Text)
-    , _pscdUploadType     :: !(Maybe Text)
-    , _pscdName           :: !Text
-    , _pscdCallback       :: !(Maybe Text)
+    , _pscdAccessToken :: !(Maybe Text)
+    , _pscdUploadType :: !(Maybe Text)
+    , _pscdName :: !Text
+    , _pscdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

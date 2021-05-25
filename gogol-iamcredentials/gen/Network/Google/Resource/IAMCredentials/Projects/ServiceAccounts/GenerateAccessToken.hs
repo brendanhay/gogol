@@ -42,8 +42,8 @@ module Network.Google.Resource.IAMCredentials.Projects.ServiceAccounts.GenerateA
     , psagatCallback
     ) where
 
-import           Network.Google.IAMCredentials.Types
-import           Network.Google.Prelude
+import Network.Google.IAMCredentials.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iamcredentials.projects.serviceAccounts.generateAccessToken@ method which the
 -- 'ProjectsServiceAccountsGenerateAccessToken' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsServiceAccountsGenerateAccessTokenResource
 -- /See:/ 'projectsServiceAccountsGenerateAccessToken' smart constructor.
 data ProjectsServiceAccountsGenerateAccessToken =
   ProjectsServiceAccountsGenerateAccessToken'
-    { _psagatXgafv          :: !(Maybe Xgafv)
+    { _psagatXgafv :: !(Maybe Xgafv)
     , _psagatUploadProtocol :: !(Maybe Text)
-    , _psagatAccessToken    :: !(Maybe Text)
-    , _psagatUploadType     :: !(Maybe Text)
-    , _psagatPayload        :: !GenerateAccessTokenRequest
-    , _psagatName           :: !Text
-    , _psagatCallback       :: !(Maybe Text)
+    , _psagatAccessToken :: !(Maybe Text)
+    , _psagatUploadType :: !(Maybe Text)
+    , _psagatPayload :: !GenerateAccessTokenRequest
+    , _psagatName :: !Text
+    , _psagatCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,8 +138,8 @@ psagatPayload
   = lens _psagatPayload
       (\ s a -> s{_psagatPayload = a})
 
--- | The resource name of the service account for which the credentials are
--- requested, in the following format:
+-- | Required. The resource name of the service account for which the
+-- credentials are requested, in the following format:
 -- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
 -- wildcard character is required; replacing it with a project ID is
 -- invalid.

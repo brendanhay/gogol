@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Images.TestIAMPermissions
     , itiampResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.testIamPermissions@ method which the
 -- 'ImagesTestIAMPermissions' request conforms to.
@@ -61,8 +61,8 @@ type ImagesTestIAMPermissionsResource =
 -- /See:/ 'imagesTestIAMPermissions' smart constructor.
 data ImagesTestIAMPermissions =
   ImagesTestIAMPermissions'
-    { _itiampProject  :: !Text
-    , _itiampPayload  :: !TestPermissionsRequest
+    { _itiampProject :: !Text
+    , _itiampPayload :: !TestPermissionsRequest
     , _itiampResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

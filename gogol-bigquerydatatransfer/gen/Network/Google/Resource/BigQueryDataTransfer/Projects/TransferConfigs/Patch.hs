@@ -23,7 +23,7 @@
 -- Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.patch@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.patch@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Patch
     (
     -- * REST Resource
@@ -38,6 +38,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Pat
     , ptcpUploadProtocol
     , ptcpUpdateMask
     , ptcpAccessToken
+    , ptcpServiceAccountName
     , ptcpUploadType
     , ptcpAuthorizationCode
     , ptcpPayload
@@ -46,8 +47,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Pat
     , ptcpCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.patch@ method which the
 -- 'ProjectsTransferConfigsPatch' request conforms to.
@@ -58,13 +59,14 @@ type ProjectsTransferConfigsPatchResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "updateMask" GFieldMask :>
                QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "authorizationCode" Text :>
-                     QueryParam "versionInfo" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TransferConfig :>
-                             Patch '[JSON] TransferConfig
+                 QueryParam "serviceAccountName" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "authorizationCode" Text :>
+                       QueryParam "versionInfo" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] TransferConfig :>
+                               Patch '[JSON] TransferConfig
 
 -- | Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
@@ -72,16 +74,17 @@ type ProjectsTransferConfigsPatchResource =
 -- /See:/ 'projectsTransferConfigsPatch' smart constructor.
 data ProjectsTransferConfigsPatch =
   ProjectsTransferConfigsPatch'
-    { _ptcpXgafv             :: !(Maybe Xgafv)
-    , _ptcpUploadProtocol    :: !(Maybe Text)
-    , _ptcpUpdateMask        :: !(Maybe GFieldMask)
-    , _ptcpAccessToken       :: !(Maybe Text)
-    , _ptcpUploadType        :: !(Maybe Text)
+    { _ptcpXgafv :: !(Maybe Xgafv)
+    , _ptcpUploadProtocol :: !(Maybe Text)
+    , _ptcpUpdateMask :: !(Maybe GFieldMask)
+    , _ptcpAccessToken :: !(Maybe Text)
+    , _ptcpServiceAccountName :: !(Maybe Text)
+    , _ptcpUploadType :: !(Maybe Text)
     , _ptcpAuthorizationCode :: !(Maybe Text)
-    , _ptcpPayload           :: !TransferConfig
-    , _ptcpVersionInfo       :: !(Maybe Text)
-    , _ptcpName              :: !Text
-    , _ptcpCallback          :: !(Maybe Text)
+    , _ptcpPayload :: !TransferConfig
+    , _ptcpVersionInfo :: !(Maybe Text)
+    , _ptcpName :: !Text
+    , _ptcpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -97,6 +100,8 @@ data ProjectsTransferConfigsPatch =
 -- * 'ptcpUpdateMask'
 --
 -- * 'ptcpAccessToken'
+--
+-- * 'ptcpServiceAccountName'
 --
 -- * 'ptcpUploadType'
 --
@@ -119,6 +124,7 @@ projectsTransferConfigsPatch pPtcpPayload_ pPtcpName_ =
     , _ptcpUploadProtocol = Nothing
     , _ptcpUpdateMask = Nothing
     , _ptcpAccessToken = Nothing
+    , _ptcpServiceAccountName = Nothing
     , _ptcpUploadType = Nothing
     , _ptcpAuthorizationCode = Nothing
     , _ptcpPayload = pPtcpPayload_
@@ -139,7 +145,7 @@ ptcpUploadProtocol
   = lens _ptcpUploadProtocol
       (\ s a -> s{_ptcpUploadProtocol = a})
 
--- | Required list of fields to be updated in this request.
+-- | Required. Required list of fields to be updated in this request.
 ptcpUpdateMask :: Lens' ProjectsTransferConfigsPatch (Maybe GFieldMask)
 ptcpUpdateMask
   = lens _ptcpUpdateMask
@@ -150,6 +156,16 @@ ptcpAccessToken :: Lens' ProjectsTransferConfigsPatch (Maybe Text)
 ptcpAccessToken
   = lens _ptcpAccessToken
       (\ s a -> s{_ptcpAccessToken = a})
+
+-- | Optional service account name. If this field is set and
+-- \"service_account_name\" is set in update_mask, transfer config will be
+-- updated to use this service account credentials. It requires that
+-- requesting user calling this API has permissions to act as this service
+-- account.
+ptcpServiceAccountName :: Lens' ProjectsTransferConfigsPatch (Maybe Text)
+ptcpServiceAccountName
+  = lens _ptcpServiceAccountName
+      (\ s a -> s{_ptcpServiceAccountName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 ptcpUploadType :: Lens' ProjectsTransferConfigsPatch (Maybe Text)
@@ -184,7 +200,7 @@ ptcpPayload
 -- | Optional version info. If users want to find a very recent access token,
 -- that is, immediately after approving access, users have to set the
 -- version_info claim in the token request. To obtain the version_info,
--- users must use the “none+gsession” response type. which be return a
+-- users must use the \"none+gsession\" response type. which be return a
 -- version_info back in the authorization response which be be put in a JWT
 -- claim in the token request.
 ptcpVersionInfo :: Lens' ProjectsTransferConfigsPatch (Maybe Text)
@@ -193,12 +209,10 @@ ptcpVersionInfo
       (\ s a -> s{_ptcpVersionInfo = a})
 
 -- | The resource name of the transfer config. Transfer config names have the
--- form of
+-- form
 -- \`projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}\`.
--- The name is automatically generated based on the config_id specified in
--- CreateTransferConfigRequest along with project_id and region. If
--- config_id is not provided, usually a uuid, even though it is not
--- guaranteed or required, will be generated for config_id.
+-- Where \`config_id\` is usually a uuid, even though it is not guaranteed
+-- or required. The name is ignored when creating a transfer config.
 ptcpName :: Lens' ProjectsTransferConfigsPatch Text
 ptcpName = lens _ptcpName (\ s a -> s{_ptcpName = a})
 
@@ -216,6 +230,7 @@ instance GoogleRequest ProjectsTransferConfigsPatch
           = go _ptcpName _ptcpXgafv _ptcpUploadProtocol
               _ptcpUpdateMask
               _ptcpAccessToken
+              _ptcpServiceAccountName
               _ptcpUploadType
               _ptcpAuthorizationCode
               _ptcpVersionInfo

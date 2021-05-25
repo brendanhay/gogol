@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.List
     , appflCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.publisherProfiles.list@ method which the
 -- 'AccountsPublisherProFilesList' request conforms to.
@@ -68,14 +68,14 @@ type AccountsPublisherProFilesListResource =
 -- /See:/ 'accountsPublisherProFilesList' smart constructor.
 data AccountsPublisherProFilesList =
   AccountsPublisherProFilesList'
-    { _appflXgafv          :: !(Maybe Xgafv)
+    { _appflXgafv :: !(Maybe Xgafv)
     , _appflUploadProtocol :: !(Maybe Text)
-    , _appflAccessToken    :: !(Maybe Text)
-    , _appflUploadType     :: !(Maybe Text)
-    , _appflAccountId      :: !Text
-    , _appflPageToken      :: !(Maybe Text)
-    , _appflPageSize       :: !(Maybe (Textual Int32))
-    , _appflCallback       :: !(Maybe Text)
+    , _appflAccessToken :: !(Maybe Text)
+    , _appflUploadType :: !(Maybe Text)
+    , _appflAccountId :: !Text
+    , _appflPageToken :: !(Maybe Text)
+    , _appflPageSize :: !(Maybe (Textual Int32))
+    , _appflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

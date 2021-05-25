@@ -42,8 +42,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.Listen
     , pddlCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.listen@ method which the
 -- 'ProjectsDatabasesDocumentsListen' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsDatabasesDocumentsListenResource =
 -- /See:/ 'projectsDatabasesDocumentsListen' smart constructor.
 data ProjectsDatabasesDocumentsListen =
   ProjectsDatabasesDocumentsListen'
-    { _pddlXgafv          :: !(Maybe Xgafv)
+    { _pddlXgafv :: !(Maybe Xgafv)
     , _pddlUploadProtocol :: !(Maybe Text)
-    , _pddlDatabase       :: !Text
-    , _pddlAccessToken    :: !(Maybe Text)
-    , _pddlUploadType     :: !(Maybe Text)
-    , _pddlPayload        :: !ListenRequest
-    , _pddlCallback       :: !(Maybe Text)
+    , _pddlDatabase :: !Text
+    , _pddlAccessToken :: !(Maybe Text)
+    , _pddlUploadType :: !(Maybe Text)
+    , _pddlPayload :: !ListenRequest
+    , _pddlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,7 +120,7 @@ pddlUploadProtocol
   = lens _pddlUploadProtocol
       (\ s a -> s{_pddlUploadProtocol = a})
 
--- | The database name. In the format:
+-- | Required. The database name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\`.
 pddlDatabase :: Lens' ProjectsDatabasesDocumentsListen Text
 pddlDatabase

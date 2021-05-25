@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionDisks.Resize
     , rdrRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.resize@ method which the
 -- 'RegionDisksResize' request conforms to.
@@ -66,10 +66,10 @@ type RegionDisksResizeResource =
 data RegionDisksResize =
   RegionDisksResize'
     { _rdrRequestId :: !(Maybe Text)
-    , _rdrProject   :: !Text
-    , _rdrDisk      :: !Text
-    , _rdrPayload   :: !RegionDisksResizeRequest
-    , _rdrRegion    :: !Text
+    , _rdrProject :: !Text
+    , _rdrDisk :: !Text
+    , _rdrPayload :: !RegionDisksResizeRequest
+    , _rdrRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.AdExchangeBuyer.Proposals.Update
     , puProposalId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.proposals.update@ method which the
 -- 'ProposalsUpdate' request conforms to.
@@ -59,10 +59,10 @@ type ProposalsUpdateResource =
 -- /See:/ 'proposalsUpdate' smart constructor.
 data ProposalsUpdate =
   ProposalsUpdate'
-    { _puUpdateAction   :: !ProposalsUpdateUpdateAction
+    { _puUpdateAction :: !ProposalsUpdateUpdateAction
     , _puRevisionNumber :: !(Textual Int64)
-    , _puPayload        :: !Proposal
-    , _puProposalId     :: !Text
+    , _puPayload :: !Proposal
+    , _puProposalId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -42,8 +42,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     , torCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.resume@ method which the
 -- 'TransferOperationsResume' request conforms to.
@@ -64,13 +64,13 @@ type TransferOperationsResumeResource =
 -- /See:/ 'transferOperationsResume' smart constructor.
 data TransferOperationsResume =
   TransferOperationsResume'
-    { _torXgafv          :: !(Maybe Xgafv)
+    { _torXgafv :: !(Maybe Xgafv)
     , _torUploadProtocol :: !(Maybe Text)
-    , _torAccessToken    :: !(Maybe Text)
-    , _torUploadType     :: !(Maybe Text)
-    , _torPayload        :: !ResumeTransferOperationRequest
-    , _torName           :: !Text
-    , _torCallback       :: !(Maybe Text)
+    , _torAccessToken :: !(Maybe Text)
+    , _torUploadType :: !(Maybe Text)
+    , _torPayload :: !ResumeTransferOperationRequest
+    , _torName :: !Text
+    , _torCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,7 +135,7 @@ torPayload :: Lens' TransferOperationsResume ResumeTransferOperationRequest
 torPayload
   = lens _torPayload (\ s a -> s{_torPayload = a})
 
--- | The name of the transfer operation. Required.
+-- | Required. The name of the transfer operation.
 torName :: Lens' TransferOperationsResume Text
 torName = lens _torName (\ s a -> s{_torName = a})
 

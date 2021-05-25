@@ -42,8 +42,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.GetExecutable
     , prgeCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.releases.getExecutable@ method which the
 -- 'ProjectsReleasesGetExecutable' request conforms to.
@@ -54,7 +54,9 @@ type ProjectsReleasesGetExecutableResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "executableVersion" Text :>
+                 QueryParam "executableVersion"
+                   ProjectsReleasesGetExecutableExecutableVersion
+                   :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] GetReleaseExecutableResponse
@@ -64,13 +66,13 @@ type ProjectsReleasesGetExecutableResource =
 -- /See:/ 'projectsReleasesGetExecutable' smart constructor.
 data ProjectsReleasesGetExecutable =
   ProjectsReleasesGetExecutable'
-    { _prgeXgafv             :: !(Maybe Xgafv)
-    , _prgeUploadProtocol    :: !(Maybe Text)
-    , _prgeAccessToken       :: !(Maybe Text)
-    , _prgeUploadType        :: !(Maybe Text)
-    , _prgeName              :: !Text
-    , _prgeExecutableVersion :: !(Maybe Text)
-    , _prgeCallback          :: !(Maybe Text)
+    { _prgeXgafv :: !(Maybe Xgafv)
+    , _prgeUploadProtocol :: !(Maybe Text)
+    , _prgeAccessToken :: !(Maybe Text)
+    , _prgeUploadType :: !(Maybe Text)
+    , _prgeName :: !Text
+    , _prgeExecutableVersion :: !(Maybe ProjectsReleasesGetExecutableExecutableVersion)
+    , _prgeCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,14 +132,14 @@ prgeUploadType
   = lens _prgeUploadType
       (\ s a -> s{_prgeUploadType = a})
 
--- | Resource name of the \`Release\`. Format:
+-- | Required. Resource name of the \`Release\`. Format:
 -- \`projects\/{project_id}\/releases\/{release_id}\`
 prgeName :: Lens' ProjectsReleasesGetExecutable Text
 prgeName = lens _prgeName (\ s a -> s{_prgeName = a})
 
 -- | The requested runtime executable version. Defaults to
 -- FIREBASE_RULES_EXECUTABLE_V1.
-prgeExecutableVersion :: Lens' ProjectsReleasesGetExecutable (Maybe Text)
+prgeExecutableVersion :: Lens' ProjectsReleasesGetExecutable (Maybe ProjectsReleasesGetExecutableExecutableVersion)
 prgeExecutableVersion
   = lens _prgeExecutableVersion
       (\ s a -> s{_prgeExecutableVersion = a})

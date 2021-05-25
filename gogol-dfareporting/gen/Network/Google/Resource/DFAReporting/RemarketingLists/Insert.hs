@@ -22,7 +22,7 @@
 --
 -- Inserts a new remarketing list.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.remarketingLists.insert@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     , RemarketingListsInsert
 
     -- * Request Lenses
+    , rliXgafv
+    , rliUploadProtocol
+    , rliAccessToken
+    , rliUploadType
     , rliProFileId
     , rliPayload
+    , rliCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.insert@ method which the
 -- 'RemarketingListsInsert' request conforms to.
 type RemarketingListsInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] RemarketingList :>
-                   Post '[JSON] RemarketingList
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] RemarketingList :>
+                             Post '[JSON] RemarketingList
 
 -- | Inserts a new remarketing list.
 --
 -- /See:/ 'remarketingListsInsert' smart constructor.
 data RemarketingListsInsert =
   RemarketingListsInsert'
-    { _rliProFileId :: !(Textual Int64)
-    , _rliPayload   :: !RemarketingList
+    { _rliXgafv :: !(Maybe Xgafv)
+    , _rliUploadProtocol :: !(Maybe Text)
+    , _rliAccessToken :: !(Maybe Text)
+    , _rliUploadType :: !(Maybe Text)
+    , _rliProFileId :: !(Textual Int64)
+    , _rliPayload :: !RemarketingList
+    , _rliCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data RemarketingListsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rliXgafv'
+--
+-- * 'rliUploadProtocol'
+--
+-- * 'rliAccessToken'
+--
+-- * 'rliUploadType'
+--
 -- * 'rliProFileId'
 --
 -- * 'rliPayload'
+--
+-- * 'rliCallback'
 remarketingListsInsert
     :: Int64 -- ^ 'rliProFileId'
     -> RemarketingList -- ^ 'rliPayload'
     -> RemarketingListsInsert
 remarketingListsInsert pRliProFileId_ pRliPayload_ =
   RemarketingListsInsert'
-    {_rliProFileId = _Coerce # pRliProFileId_, _rliPayload = pRliPayload_}
+    { _rliXgafv = Nothing
+    , _rliUploadProtocol = Nothing
+    , _rliAccessToken = Nothing
+    , _rliUploadType = Nothing
+    , _rliProFileId = _Coerce # pRliProFileId_
+    , _rliPayload = pRliPayload_
+    , _rliCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rliXgafv :: Lens' RemarketingListsInsert (Maybe Xgafv)
+rliXgafv = lens _rliXgafv (\ s a -> s{_rliXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rliUploadProtocol :: Lens' RemarketingListsInsert (Maybe Text)
+rliUploadProtocol
+  = lens _rliUploadProtocol
+      (\ s a -> s{_rliUploadProtocol = a})
+
+-- | OAuth access token.
+rliAccessToken :: Lens' RemarketingListsInsert (Maybe Text)
+rliAccessToken
+  = lens _rliAccessToken
+      (\ s a -> s{_rliAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rliUploadType :: Lens' RemarketingListsInsert (Maybe Text)
+rliUploadType
+  = lens _rliUploadType
+      (\ s a -> s{_rliUploadType = a})
 
 -- | User profile ID associated with this request.
 rliProFileId :: Lens' RemarketingListsInsert Int64
@@ -90,12 +144,22 @@ rliPayload :: Lens' RemarketingListsInsert RemarketingList
 rliPayload
   = lens _rliPayload (\ s a -> s{_rliPayload = a})
 
+-- | JSONP
+rliCallback :: Lens' RemarketingListsInsert (Maybe Text)
+rliCallback
+  = lens _rliCallback (\ s a -> s{_rliCallback = a})
+
 instance GoogleRequest RemarketingListsInsert where
         type Rs RemarketingListsInsert = RemarketingList
         type Scopes RemarketingListsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListsInsert'{..}
-          = go _rliProFileId (Just AltJSON) _rliPayload
+          = go _rliProFileId _rliXgafv _rliUploadProtocol
+              _rliAccessToken
+              _rliUploadType
+              _rliCallback
+              (Just AltJSON)
+              _rliPayload
               dFAReportingService
           where go
                   = buildClient

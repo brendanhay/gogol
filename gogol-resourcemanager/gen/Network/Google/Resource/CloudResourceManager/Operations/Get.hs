@@ -43,13 +43,13 @@ module Network.Google.Resource.CloudResourceManager.Operations.Get
     , ogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
 type OperationsGetResource =
-     "v1" :>
+     "v3" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,12 +65,12 @@ type OperationsGetResource =
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet =
   OperationsGet'
-    { _ogXgafv          :: !(Maybe Xgafv)
+    { _ogXgafv :: !(Maybe Xgafv)
     , _ogUploadProtocol :: !(Maybe Text)
-    , _ogAccessToken    :: !(Maybe Text)
-    , _ogUploadType     :: !(Maybe Text)
-    , _ogName           :: !Text
-    , _ogCallback       :: !(Maybe Text)
+    , _ogAccessToken :: !(Maybe Text)
+    , _ogUploadType :: !(Maybe Text)
+    , _ogName :: !Text
+    , _ogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

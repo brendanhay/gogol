@@ -26,7 +26,7 @@
 -- whether we have OAuth token for the particular user, which is a
 -- pre-requisite before user can create a transfer config.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.checkValidCreds@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.checkValidCreds@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSourc
     , pldscvcCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.dataSources.checkValidCreds@ method which the
 -- 'ProjectsLocationsDataSourcesCheckValidCreds' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsLocationsDataSourcesCheckValidCredsResource
 -- /See:/ 'projectsLocationsDataSourcesCheckValidCreds' smart constructor.
 data ProjectsLocationsDataSourcesCheckValidCreds =
   ProjectsLocationsDataSourcesCheckValidCreds'
-    { _pldscvcXgafv          :: !(Maybe Xgafv)
+    { _pldscvcXgafv :: !(Maybe Xgafv)
     , _pldscvcUploadProtocol :: !(Maybe Text)
-    , _pldscvcAccessToken    :: !(Maybe Text)
-    , _pldscvcUploadType     :: !(Maybe Text)
-    , _pldscvcPayload        :: !CheckValidCredsRequest
-    , _pldscvcName           :: !Text
-    , _pldscvcCallback       :: !(Maybe Text)
+    , _pldscvcAccessToken :: !(Maybe Text)
+    , _pldscvcUploadType :: !(Maybe Text)
+    , _pldscvcPayload :: !CheckValidCredsRequest
+    , _pldscvcName :: !Text
+    , _pldscvcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,8 +146,9 @@ pldscvcPayload
   = lens _pldscvcPayload
       (\ s a -> s{_pldscvcPayload = a})
 
--- | The data source in the form:
--- \`projects\/{project_id}\/dataSources\/{data_source_id}\`
+-- | Required. The data source in the form:
+-- \`projects\/{project_id}\/dataSources\/{data_source_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}\`.
 pldscvcName :: Lens' ProjectsLocationsDataSourcesCheckValidCreds Text
 pldscvcName
   = lens _pldscvcName (\ s a -> s{_pldscvcName = a})

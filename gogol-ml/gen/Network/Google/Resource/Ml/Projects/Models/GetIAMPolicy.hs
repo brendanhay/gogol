@@ -23,7 +23,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.getIamPolicy@.
 module Network.Google.Resource.Ml.Projects.Models.GetIAMPolicy
     (
     -- * REST Resource
@@ -34,6 +34,7 @@ module Network.Google.Resource.Ml.Projects.Models.GetIAMPolicy
     , ProjectsModelsGetIAMPolicy
 
     -- * Request Lenses
+    , pmgipOptionsRequestedPolicyVersion
     , pmgipXgafv
     , pmgipUploadProtocol
     , pmgipAccessToken
@@ -42,21 +43,24 @@ module Network.Google.Resource.Ml.Projects.Models.GetIAMPolicy
     , pmgipCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.getIamPolicy@ method which the
 -- 'ProjectsModelsGetIAMPolicy' request conforms to.
 type ProjectsModelsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] GoogleIAMV1__Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] GoogleIAMV1__Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -64,12 +68,13 @@ type ProjectsModelsGetIAMPolicyResource =
 -- /See:/ 'projectsModelsGetIAMPolicy' smart constructor.
 data ProjectsModelsGetIAMPolicy =
   ProjectsModelsGetIAMPolicy'
-    { _pmgipXgafv          :: !(Maybe Xgafv)
+    { _pmgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _pmgipXgafv :: !(Maybe Xgafv)
     , _pmgipUploadProtocol :: !(Maybe Text)
-    , _pmgipAccessToken    :: !(Maybe Text)
-    , _pmgipUploadType     :: !(Maybe Text)
-    , _pmgipResource       :: !Text
-    , _pmgipCallback       :: !(Maybe Text)
+    , _pmgipAccessToken :: !(Maybe Text)
+    , _pmgipUploadType :: !(Maybe Text)
+    , _pmgipResource :: !Text
+    , _pmgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +82,8 @@ data ProjectsModelsGetIAMPolicy =
 -- | Creates a value of 'ProjectsModelsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmgipOptionsRequestedPolicyVersion'
 --
 -- * 'pmgipXgafv'
 --
@@ -94,7 +101,8 @@ projectsModelsGetIAMPolicy
     -> ProjectsModelsGetIAMPolicy
 projectsModelsGetIAMPolicy pPmgipResource_ =
   ProjectsModelsGetIAMPolicy'
-    { _pmgipXgafv = Nothing
+    { _pmgipOptionsRequestedPolicyVersion = Nothing
+    , _pmgipXgafv = Nothing
     , _pmgipUploadProtocol = Nothing
     , _pmgipAccessToken = Nothing
     , _pmgipUploadType = Nothing
@@ -102,6 +110,19 @@ projectsModelsGetIAMPolicy pPmgipResource_ =
     , _pmgipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+pmgipOptionsRequestedPolicyVersion :: Lens' ProjectsModelsGetIAMPolicy (Maybe Int32)
+pmgipOptionsRequestedPolicyVersion
+  = lens _pmgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_pmgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 pmgipXgafv :: Lens' ProjectsModelsGetIAMPolicy (Maybe Xgafv)
@@ -146,7 +167,10 @@ instance GoogleRequest ProjectsModelsGetIAMPolicy
         type Scopes ProjectsModelsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsModelsGetIAMPolicy'{..}
-          = go _pmgipResource _pmgipXgafv _pmgipUploadProtocol
+          = go _pmgipResource
+              _pmgipOptionsRequestedPolicyVersion
+              _pmgipXgafv
+              _pmgipUploadProtocol
               _pmgipAccessToken
               _pmgipUploadType
               _pmgipCallback

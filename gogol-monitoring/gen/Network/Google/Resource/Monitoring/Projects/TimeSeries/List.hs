@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists time series that match a filter. This method does not require a
--- Stackdriver account.
+-- Workspace.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.timeSeries.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.timeSeries.list@.
 module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
     (
     -- * REST Resource
@@ -40,9 +40,13 @@ module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
     , ptslOrderBy
     , ptslAccessToken
     , ptslUploadType
+    , ptslSecondaryAggregationPerSeriesAligner
     , ptslAggregationPerSeriesAligner
     , ptslName
+    , ptslSecondaryAggregationCrossSeriesReducer
     , ptslAggregationGroupByFields
+    , ptslSecondaryAggregationAlignmentPeriod
+    , ptslSecondaryAggregationGroupByFields
     , ptslView
     , ptslAggregationCrossSeriesReducer
     , ptslFilter
@@ -53,8 +57,8 @@ module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
     , ptslCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.timeSeries.list@ method which the
 -- 'ProjectsTimeSeriesList' request conforms to.
@@ -68,44 +72,72 @@ type ProjectsTimeSeriesListResource =
                  QueryParam "orderBy" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "aggregation.perSeriesAligner" Text :>
-                         QueryParams "aggregation.groupByFields" Text :>
-                           QueryParam "view" Text :>
-                             QueryParam "aggregation.crossSeriesReducer" Text :>
-                               QueryParam "filter" Text :>
-                                 QueryParam "aggregation.alignmentPeriod"
-                                   GDuration
+                       QueryParam "secondaryAggregation.perSeriesAligner"
+                         ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
+                         :>
+                         QueryParam "aggregation.perSeriesAligner"
+                           ProjectsTimeSeriesListAggregationPerSeriesAligner
+                           :>
+                           QueryParam "secondaryAggregation.crossSeriesReducer"
+                             ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+                             :>
+                             QueryParams "aggregation.groupByFields" Text :>
+                               QueryParam "secondaryAggregation.alignmentPeriod"
+                                 GDuration
+                                 :>
+                                 QueryParams
+                                   "secondaryAggregation.groupByFields"
+                                   Text
                                    :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "interval.endTime" DateTime' :>
-                                       QueryParam "pageSize" (Textual Int32) :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] ListTimeSeriesResponse
+                                   QueryParam "view" ProjectsTimeSeriesListView
+                                     :>
+                                     QueryParam "aggregation.crossSeriesReducer"
+                                       ProjectsTimeSeriesListAggregationCrossSeriesReducer
+                                       :>
+                                       QueryParam "filter" Text :>
+                                         QueryParam
+                                           "aggregation.alignmentPeriod"
+                                           GDuration
+                                           :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "interval.endTime"
+                                               DateTime'
+                                               :>
+                                               QueryParam "pageSize"
+                                                 (Textual Int32)
+                                                 :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" AltJSON :>
+                                                     Get '[JSON]
+                                                       ListTimeSeriesResponse
 
 -- | Lists time series that match a filter. This method does not require a
--- Stackdriver account.
+-- Workspace.
 --
 -- /See:/ 'projectsTimeSeriesList' smart constructor.
 data ProjectsTimeSeriesList =
   ProjectsTimeSeriesList'
-    { _ptslIntervalStartTime             :: !(Maybe DateTime')
-    , _ptslXgafv                         :: !(Maybe Xgafv)
-    , _ptslUploadProtocol                :: !(Maybe Text)
-    , _ptslOrderBy                       :: !(Maybe Text)
-    , _ptslAccessToken                   :: !(Maybe Text)
-    , _ptslUploadType                    :: !(Maybe Text)
-    , _ptslAggregationPerSeriesAligner   :: !(Maybe Text)
-    , _ptslName                          :: !Text
-    , _ptslAggregationGroupByFields      :: !(Maybe [Text])
-    , _ptslView                          :: !(Maybe Text)
-    , _ptslAggregationCrossSeriesReducer :: !(Maybe Text)
-    , _ptslFilter                        :: !(Maybe Text)
-    , _ptslAggregationAlignmentPeriod    :: !(Maybe GDuration)
-    , _ptslPageToken                     :: !(Maybe Text)
-    , _ptslIntervalEndTime               :: !(Maybe DateTime')
-    , _ptslPageSize                      :: !(Maybe (Textual Int32))
-    , _ptslCallback                      :: !(Maybe Text)
+    { _ptslIntervalStartTime :: !(Maybe DateTime')
+    , _ptslXgafv :: !(Maybe Xgafv)
+    , _ptslUploadProtocol :: !(Maybe Text)
+    , _ptslOrderBy :: !(Maybe Text)
+    , _ptslAccessToken :: !(Maybe Text)
+    , _ptslUploadType :: !(Maybe Text)
+    , _ptslSecondaryAggregationPerSeriesAligner :: !(Maybe ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner)
+    , _ptslAggregationPerSeriesAligner :: !(Maybe ProjectsTimeSeriesListAggregationPerSeriesAligner)
+    , _ptslName :: !Text
+    , _ptslSecondaryAggregationCrossSeriesReducer :: !(Maybe ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer)
+    , _ptslAggregationGroupByFields :: !(Maybe [Text])
+    , _ptslSecondaryAggregationAlignmentPeriod :: !(Maybe GDuration)
+    , _ptslSecondaryAggregationGroupByFields :: !(Maybe [Text])
+    , _ptslView :: !(Maybe ProjectsTimeSeriesListView)
+    , _ptslAggregationCrossSeriesReducer :: !(Maybe ProjectsTimeSeriesListAggregationCrossSeriesReducer)
+    , _ptslFilter :: !(Maybe Text)
+    , _ptslAggregationAlignmentPeriod :: !(Maybe GDuration)
+    , _ptslPageToken :: !(Maybe Text)
+    , _ptslIntervalEndTime :: !(Maybe DateTime')
+    , _ptslPageSize :: !(Maybe (Textual Int32))
+    , _ptslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,11 +158,19 @@ data ProjectsTimeSeriesList =
 --
 -- * 'ptslUploadType'
 --
+-- * 'ptslSecondaryAggregationPerSeriesAligner'
+--
 -- * 'ptslAggregationPerSeriesAligner'
 --
 -- * 'ptslName'
 --
+-- * 'ptslSecondaryAggregationCrossSeriesReducer'
+--
 -- * 'ptslAggregationGroupByFields'
+--
+-- * 'ptslSecondaryAggregationAlignmentPeriod'
+--
+-- * 'ptslSecondaryAggregationGroupByFields'
 --
 -- * 'ptslView'
 --
@@ -158,9 +198,13 @@ projectsTimeSeriesList pPtslName_ =
     , _ptslOrderBy = Nothing
     , _ptslAccessToken = Nothing
     , _ptslUploadType = Nothing
+    , _ptslSecondaryAggregationPerSeriesAligner = Nothing
     , _ptslAggregationPerSeriesAligner = Nothing
     , _ptslName = pPtslName_
+    , _ptslSecondaryAggregationCrossSeriesReducer = Nothing
     , _ptslAggregationGroupByFields = Nothing
+    , _ptslSecondaryAggregationAlignmentPeriod = Nothing
+    , _ptslSecondaryAggregationGroupByFields = Nothing
     , _ptslView = Nothing
     , _ptslAggregationCrossSeriesReducer = Nothing
     , _ptslFilter = Nothing
@@ -193,7 +237,7 @@ ptslUploadProtocol
       (\ s a -> s{_ptslUploadProtocol = a})
 
 -- | Unsupported: must be left blank. The points in each time series are
--- returned in reverse time order.
+-- currently returned in reverse time order (most recent to oldest).
 ptslOrderBy :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslOrderBy
   = lens _ptslOrderBy (\ s a -> s{_ptslOrderBy = a})
@@ -210,36 +254,79 @@ ptslUploadType
   = lens _ptslUploadType
       (\ s a -> s{_ptslUploadType = a})
 
--- | The approach to be used to align individual time series. Not all
--- alignment functions may be applied to all time series, depending on the
--- metric type and value type of the original time series. Alignment may
--- change the metric type or the value type of the time series.Time series
--- data must be aligned in order to perform cross-time series reduction. If
--- crossSeriesReducer is specified, then perSeriesAligner must be specified
--- and not equal ALIGN_NONE and alignmentPeriod must be specified;
--- otherwise, an error is returned.
-ptslAggregationPerSeriesAligner :: Lens' ProjectsTimeSeriesList (Maybe Text)
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+ptslSecondaryAggregationPerSeriesAligner :: Lens' ProjectsTimeSeriesList (Maybe ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner)
+ptslSecondaryAggregationPerSeriesAligner
+  = lens _ptslSecondaryAggregationPerSeriesAligner
+      (\ s a ->
+         s{_ptslSecondaryAggregationPerSeriesAligner = a})
+
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+ptslAggregationPerSeriesAligner :: Lens' ProjectsTimeSeriesList (Maybe ProjectsTimeSeriesListAggregationPerSeriesAligner)
 ptslAggregationPerSeriesAligner
   = lens _ptslAggregationPerSeriesAligner
       (\ s a -> s{_ptslAggregationPerSeriesAligner = a})
 
--- | The project on which to execute the request. The format is
--- \"projects\/{project_id_or_number}\".
+-- | Required. The project
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3#project_name),
+-- organization or folder on which to execute the request. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER] organizations\/[ORGANIZATION_ID]
+-- folders\/[FOLDER_ID]
 ptslName :: Lens' ProjectsTimeSeriesList Text
 ptslName = lens _ptslName (\ s a -> s{_ptslName = a})
 
--- | The set of fields to preserve when crossSeriesReducer is specified. The
--- groupByFields determine how the time series are partitioned into subsets
--- prior to applying the aggregation function. Each subset contains time
--- series that have the same value for each of the grouping fields. Each
--- individual time series is a member of exactly one subset. The
--- crossSeriesReducer is applied to each subset of time series. It is not
--- possible to reduce across different resource types, so this field
--- implicitly contains resource.type. Fields not specified in groupByFields
--- are aggregated away. If groupByFields is not specified and all the time
--- series have the same resource type, then the time series are aggregated
--- into a single output time series. If crossSeriesReducer is not defined,
--- this field is ignored.
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+ptslSecondaryAggregationCrossSeriesReducer :: Lens' ProjectsTimeSeriesList (Maybe ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer)
+ptslSecondaryAggregationCrossSeriesReducer
+  = lens _ptslSecondaryAggregationCrossSeriesReducer
+      (\ s a ->
+         s{_ptslSecondaryAggregationCrossSeriesReducer = a})
+
+-- | The set of fields to preserve when cross_series_reducer is specified.
+-- The group_by_fields determine how the time series are partitioned into
+-- subsets prior to applying the aggregation operation. Each subset
+-- contains time series that have the same value for each of the grouping
+-- fields. Each individual time series is a member of exactly one subset.
+-- The cross_series_reducer is applied to each subset of time series. It is
+-- not possible to reduce across different resource types, so this field
+-- implicitly contains resource.type. Fields not specified in
+-- group_by_fields are aggregated away. If group_by_fields is not specified
+-- and all the time series have the same resource type, then the time
+-- series are aggregated into a single output time series. If
+-- cross_series_reducer is not defined, this field is ignored.
 ptslAggregationGroupByFields :: Lens' ProjectsTimeSeriesList [Text]
 ptslAggregationGroupByFields
   = lens _ptslAggregationGroupByFields
@@ -247,39 +334,83 @@ ptslAggregationGroupByFields
       . _Default
       . _Coerce
 
--- | Specifies which information is returned about the time series.
-ptslView :: Lens' ProjectsTimeSeriesList (Maybe Text)
+-- | The alignment_period specifies a time interval, in seconds, that is used
+-- to divide the data in all the time series into consistent blocks of
+-- time. This will be done before the per-series aligner can be applied to
+-- the data.The value must be at least 60 seconds. If a per-series aligner
+-- other than ALIGN_NONE is specified, this field is required or an error
+-- is returned. If no per-series aligner is specified, or the aligner
+-- ALIGN_NONE is specified, then this field is ignored.The maximum value of
+-- the alignment_period is 104 weeks (2 years) for charts, and 90,000
+-- seconds (25 hours) for alerting policies.
+ptslSecondaryAggregationAlignmentPeriod :: Lens' ProjectsTimeSeriesList (Maybe Scientific)
+ptslSecondaryAggregationAlignmentPeriod
+  = lens _ptslSecondaryAggregationAlignmentPeriod
+      (\ s a ->
+         s{_ptslSecondaryAggregationAlignmentPeriod = a})
+      . mapping _GDuration
+
+-- | The set of fields to preserve when cross_series_reducer is specified.
+-- The group_by_fields determine how the time series are partitioned into
+-- subsets prior to applying the aggregation operation. Each subset
+-- contains time series that have the same value for each of the grouping
+-- fields. Each individual time series is a member of exactly one subset.
+-- The cross_series_reducer is applied to each subset of time series. It is
+-- not possible to reduce across different resource types, so this field
+-- implicitly contains resource.type. Fields not specified in
+-- group_by_fields are aggregated away. If group_by_fields is not specified
+-- and all the time series have the same resource type, then the time
+-- series are aggregated into a single output time series. If
+-- cross_series_reducer is not defined, this field is ignored.
+ptslSecondaryAggregationGroupByFields :: Lens' ProjectsTimeSeriesList [Text]
+ptslSecondaryAggregationGroupByFields
+  = lens _ptslSecondaryAggregationGroupByFields
+      (\ s a ->
+         s{_ptslSecondaryAggregationGroupByFields = a})
+      . _Default
+      . _Coerce
+
+-- | Required. Specifies which information is returned about the time series.
+ptslView :: Lens' ProjectsTimeSeriesList (Maybe ProjectsTimeSeriesListView)
 ptslView = lens _ptslView (\ s a -> s{_ptslView = a})
 
--- | The approach to be used to combine time series. Not all reducer
--- functions may be applied to all time series, depending on the metric
--- type and the value type of the original time series. Reduction may
--- change the metric type of value type of the time series.Time series data
--- must be aligned in order to perform cross-time series reduction. If
--- crossSeriesReducer is specified, then perSeriesAligner must be specified
--- and not equal ALIGN_NONE and alignmentPeriod must be specified;
--- otherwise, an error is returned.
-ptslAggregationCrossSeriesReducer :: Lens' ProjectsTimeSeriesList (Maybe Text)
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+ptslAggregationCrossSeriesReducer :: Lens' ProjectsTimeSeriesList (Maybe ProjectsTimeSeriesListAggregationCrossSeriesReducer)
 ptslAggregationCrossSeriesReducer
   = lens _ptslAggregationCrossSeriesReducer
       (\ s a -> s{_ptslAggregationCrossSeriesReducer = a})
 
--- | A monitoring filter that specifies which time series should be returned.
--- The filter must specify a single metric type, and can additionally
--- specify metric labels and other information. For example: metric.type =
+-- | Required. A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that
+-- specifies which time series should be returned. The filter must specify
+-- a single metric type, and can additionally specify metric labels and
+-- other information. For example: metric.type =
 -- \"compute.googleapis.com\/instance\/cpu\/usage_time\" AND
--- metric.label.instance_name = \"my-instance-name\"
+-- metric.labels.instance_name = \"my-instance-name\"
 ptslFilter :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslFilter
   = lens _ptslFilter (\ s a -> s{_ptslFilter = a})
 
--- | The alignment period for per-time series alignment. If present,
--- alignmentPeriod must be at least 60 seconds. After per-time series
--- alignment, each time series will contain data points only on the period
--- boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE,
--- then this field is ignored. If perSeriesAligner is specified and does
--- not equal ALIGN_NONE, then this field must be defined; otherwise an
--- error is returned.
+-- | The alignment_period specifies a time interval, in seconds, that is used
+-- to divide the data in all the time series into consistent blocks of
+-- time. This will be done before the per-series aligner can be applied to
+-- the data.The value must be at least 60 seconds. If a per-series aligner
+-- other than ALIGN_NONE is specified, this field is required or an error
+-- is returned. If no per-series aligner is specified, or the aligner
+-- ALIGN_NONE is specified, then this field is ignored.The maximum value of
+-- the alignment_period is 104 weeks (2 years) for charts, and 90,000
+-- seconds (25 hours) for alerting policies.
 ptslAggregationAlignmentPeriod :: Lens' ProjectsTimeSeriesList (Maybe Scientific)
 ptslAggregationAlignmentPeriod
   = lens _ptslAggregationAlignmentPeriod
@@ -329,8 +460,12 @@ instance GoogleRequest ProjectsTimeSeriesList where
               _ptslOrderBy
               _ptslAccessToken
               _ptslUploadType
+              _ptslSecondaryAggregationPerSeriesAligner
               _ptslAggregationPerSeriesAligner
+              _ptslSecondaryAggregationCrossSeriesReducer
               (_ptslAggregationGroupByFields ^. _Default)
+              _ptslSecondaryAggregationAlignmentPeriod
+              (_ptslSecondaryAggregationGroupByFields ^. _Default)
               _ptslView
               _ptslAggregationCrossSeriesReducer
               _ptslFilter

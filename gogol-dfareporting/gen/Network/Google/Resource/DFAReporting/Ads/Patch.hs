@@ -22,7 +22,7 @@
 --
 -- Updates an existing ad. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.ads.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.ads.patch@.
 module Network.Google.Resource.DFAReporting.Ads.Patch
     (
     -- * REST Resource
@@ -33,34 +33,49 @@ module Network.Google.Resource.DFAReporting.Ads.Patch
     , AdsPatch
 
     -- * Request Lenses
+    , adsdXgafv
+    , adsdUploadProtocol
+    , adsdAccessToken
+    , adsdUploadType
     , adsdProFileId
     , adsdPayload
     , adsdId
+    , adsdCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.patch@ method which the
 -- 'AdsPatch' request conforms to.
 type AdsPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
                QueryParam "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Ad :> Patch '[JSON] Ad
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Ad :> Patch '[JSON] Ad
 
 -- | Updates an existing ad. This method supports patch semantics.
 --
 -- /See:/ 'adsPatch' smart constructor.
 data AdsPatch =
   AdsPatch'
-    { _adsdProFileId :: !(Textual Int64)
-    , _adsdPayload   :: !Ad
-    , _adsdId        :: !(Textual Int64)
+    { _adsdXgafv :: !(Maybe Xgafv)
+    , _adsdUploadProtocol :: !(Maybe Text)
+    , _adsdAccessToken :: !(Maybe Text)
+    , _adsdUploadType :: !(Maybe Text)
+    , _adsdProFileId :: !(Textual Int64)
+    , _adsdPayload :: !Ad
+    , _adsdId :: !(Textual Int64)
+    , _adsdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,11 +84,21 @@ data AdsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'adsdXgafv'
+--
+-- * 'adsdUploadProtocol'
+--
+-- * 'adsdAccessToken'
+--
+-- * 'adsdUploadType'
+--
 -- * 'adsdProFileId'
 --
 -- * 'adsdPayload'
 --
 -- * 'adsdId'
+--
+-- * 'adsdCallback'
 adsPatch
     :: Int64 -- ^ 'adsdProFileId'
     -> Ad -- ^ 'adsdPayload'
@@ -81,11 +106,39 @@ adsPatch
     -> AdsPatch
 adsPatch pAdsdProFileId_ pAdsdPayload_ pAdsdId_ =
   AdsPatch'
-    { _adsdProFileId = _Coerce # pAdsdProFileId_
+    { _adsdXgafv = Nothing
+    , _adsdUploadProtocol = Nothing
+    , _adsdAccessToken = Nothing
+    , _adsdUploadType = Nothing
+    , _adsdProFileId = _Coerce # pAdsdProFileId_
     , _adsdPayload = pAdsdPayload_
     , _adsdId = _Coerce # pAdsdId_
+    , _adsdCallback = Nothing
     }
 
+
+-- | V1 error format.
+adsdXgafv :: Lens' AdsPatch (Maybe Xgafv)
+adsdXgafv
+  = lens _adsdXgafv (\ s a -> s{_adsdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+adsdUploadProtocol :: Lens' AdsPatch (Maybe Text)
+adsdUploadProtocol
+  = lens _adsdUploadProtocol
+      (\ s a -> s{_adsdUploadProtocol = a})
+
+-- | OAuth access token.
+adsdAccessToken :: Lens' AdsPatch (Maybe Text)
+adsdAccessToken
+  = lens _adsdAccessToken
+      (\ s a -> s{_adsdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+adsdUploadType :: Lens' AdsPatch (Maybe Text)
+adsdUploadType
+  = lens _adsdUploadType
+      (\ s a -> s{_adsdUploadType = a})
 
 -- | User profile ID associated with this request.
 adsdProFileId :: Lens' AdsPatch Int64
@@ -104,12 +157,22 @@ adsdId :: Lens' AdsPatch Int64
 adsdId
   = lens _adsdId (\ s a -> s{_adsdId = a}) . _Coerce
 
+-- | JSONP
+adsdCallback :: Lens' AdsPatch (Maybe Text)
+adsdCallback
+  = lens _adsdCallback (\ s a -> s{_adsdCallback = a})
+
 instance GoogleRequest AdsPatch where
         type Rs AdsPatch = Ad
         type Scopes AdsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsPatch'{..}
-          = go _adsdProFileId (Just _adsdId) (Just AltJSON)
+          = go _adsdProFileId (Just _adsdId) _adsdXgafv
+              _adsdUploadProtocol
+              _adsdAccessToken
+              _adsdUploadType
+              _adsdCallback
+              (Just AltJSON)
               _adsdPayload
               dFAReportingService
           where go

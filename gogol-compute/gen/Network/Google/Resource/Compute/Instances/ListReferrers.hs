@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of referrers to instances contained within the
--- specified zone. For more information, read Viewing Referrers to VM
--- Instances.
+-- Retrieves a list of resources that refer to the VM instance specified in
+-- the request. For example, if the VM instance is part of a managed or
+-- unmanaged instance group, the referrers list includes the instance
+-- group. For more information, read Viewing referrers to VM instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.listReferrers@.
 module Network.Google.Resource.Compute.Instances.ListReferrers
@@ -35,6 +36,7 @@ module Network.Google.Resource.Compute.Instances.ListReferrers
     , InstancesListReferrers
 
     -- * Request Lenses
+    , ilrReturnPartialSuccess
     , ilrOrderBy
     , ilrProject
     , ilrZone
@@ -44,8 +46,8 @@ module Network.Google.Resource.Compute.Instances.ListReferrers
     , ilrInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.listReferrers@ method which the
 -- 'InstancesListReferrers' request conforms to.
@@ -59,27 +61,30 @@ type InstancesListReferrersResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "referrers" :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" (Textual Word32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] InstanceListReferrers
+                       QueryParam "returnPartialSuccess" Bool :>
+                         QueryParam "orderBy" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] InstanceListReferrers
 
--- | Retrieves the list of referrers to instances contained within the
--- specified zone. For more information, read Viewing Referrers to VM
--- Instances.
+-- | Retrieves a list of resources that refer to the VM instance specified in
+-- the request. For example, if the VM instance is part of a managed or
+-- unmanaged instance group, the referrers list includes the instance
+-- group. For more information, read Viewing referrers to VM instances.
 --
 -- /See:/ 'instancesListReferrers' smart constructor.
 data InstancesListReferrers =
   InstancesListReferrers'
-    { _ilrOrderBy    :: !(Maybe Text)
-    , _ilrProject    :: !Text
-    , _ilrZone       :: !Text
-    , _ilrFilter     :: !(Maybe Text)
-    , _ilrPageToken  :: !(Maybe Text)
+    { _ilrReturnPartialSuccess :: !(Maybe Bool)
+    , _ilrOrderBy :: !(Maybe Text)
+    , _ilrProject :: !Text
+    , _ilrZone :: !Text
+    , _ilrFilter :: !(Maybe Text)
+    , _ilrPageToken :: !(Maybe Text)
     , _ilrMaxResults :: !(Textual Word32)
-    , _ilrInstance   :: !Text
+    , _ilrInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,6 +92,8 @@ data InstancesListReferrers =
 -- | Creates a value of 'InstancesListReferrers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ilrReturnPartialSuccess'
 --
 -- * 'ilrOrderBy'
 --
@@ -108,7 +115,8 @@ instancesListReferrers
     -> InstancesListReferrers
 instancesListReferrers pIlrProject_ pIlrZone_ pIlrInstance_ =
   InstancesListReferrers'
-    { _ilrOrderBy = Nothing
+    { _ilrReturnPartialSuccess = Nothing
+    , _ilrOrderBy = Nothing
     , _ilrProject = pIlrProject_
     , _ilrZone = pIlrZone_
     , _ilrFilter = Nothing
@@ -118,14 +126,21 @@ instancesListReferrers pIlrProject_ pIlrZone_ pIlrInstance_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+ilrReturnPartialSuccess :: Lens' InstancesListReferrers (Maybe Bool)
+ilrReturnPartialSuccess
+  = lens _ilrReturnPartialSuccess
+      (\ s a -> s{_ilrReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 ilrOrderBy :: Lens' InstancesListReferrers (Maybe Text)
 ilrOrderBy
   = lens _ilrOrderBy (\ s a -> s{_ilrOrderBy = a})
@@ -142,34 +157,36 @@ ilrZone = lens _ilrZone (\ s a -> s{_ilrZone = a})
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 ilrFilter :: Lens' InstancesListReferrers (Maybe Text)
 ilrFilter
   = lens _ilrFilter (\ s a -> s{_ilrFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 ilrPageToken :: Lens' InstancesListReferrers (Maybe Text)
 ilrPageToken
   = lens _ilrPageToken (\ s a -> s{_ilrPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 ilrMaxResults :: Lens' InstancesListReferrers Word32
 ilrMaxResults
   = lens _ilrMaxResults
@@ -190,7 +207,9 @@ instance GoogleRequest InstancesListReferrers where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesListReferrers'{..}
-          = go _ilrProject _ilrZone _ilrInstance _ilrOrderBy
+          = go _ilrProject _ilrZone _ilrInstance
+              _ilrReturnPartialSuccess
+              _ilrOrderBy
               _ilrFilter
               _ilrPageToken
               (Just _ilrMaxResults)

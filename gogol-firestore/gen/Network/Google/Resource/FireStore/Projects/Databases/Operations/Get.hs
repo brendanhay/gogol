@@ -43,8 +43,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Operations.Get
     , pdogCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.operations.get@ method which the
 -- 'ProjectsDatabasesOperationsGet' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsDatabasesOperationsGetResource =
 -- /See:/ 'projectsDatabasesOperationsGet' smart constructor.
 data ProjectsDatabasesOperationsGet =
   ProjectsDatabasesOperationsGet'
-    { _pdogXgafv          :: !(Maybe Xgafv)
+    { _pdogXgafv :: !(Maybe Xgafv)
     , _pdogUploadProtocol :: !(Maybe Text)
-    , _pdogAccessToken    :: !(Maybe Text)
-    , _pdogUploadType     :: !(Maybe Text)
-    , _pdogName           :: !Text
-    , _pdogCallback       :: !(Maybe Text)
+    , _pdogAccessToken :: !(Maybe Text)
+    , _pdogUploadType :: !(Maybe Text)
+    , _pdogName :: !Text
+    , _pdogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

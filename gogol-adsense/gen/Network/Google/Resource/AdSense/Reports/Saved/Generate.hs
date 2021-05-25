@@ -40,8 +40,8 @@ module Network.Google.Resource.AdSense.Reports.Saved.Generate
     , rsgMaxResults
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.reports.saved.generate@ method which the
 -- 'ReportsSavedGenerate' request conforms to.
@@ -62,10 +62,10 @@ type ReportsSavedGenerateResource =
 -- /See:/ 'reportsSavedGenerate' smart constructor.
 data ReportsSavedGenerate =
   ReportsSavedGenerate'
-    { _rsgLocale        :: !(Maybe Text)
+    { _rsgLocale :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
-    , _rsgStartIndex    :: !(Maybe (Textual Int32))
-    , _rsgMaxResults    :: !(Maybe (Textual Int32))
+    , _rsgStartIndex :: !(Maybe (Textual Int32))
+    , _rsgMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Insert
     , mpfiAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.insert@ method which the
 -- 'ManagementProFilesInsert' request conforms to.
@@ -61,8 +61,8 @@ type ManagementProFilesInsertResource =
 data ManagementProFilesInsert =
   ManagementProFilesInsert'
     { _mpfiWebPropertyId :: !Text
-    , _mpfiPayload       :: !ProFile
-    , _mpfiAccountId     :: !Text
+    , _mpfiPayload :: !ProFile
+    , _mpfiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

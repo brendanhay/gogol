@@ -17,17 +17,17 @@
 --
 module Network.Google.AdExchangeSeller.Types.Product where
 
-import           Network.Google.AdExchangeSeller.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'adClients' smart constructor.
 data AdClients =
   AdClients'
-    { _acEtag          :: !(Maybe Text)
+    { _acEtag :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
-    , _acKind          :: !Text
-    , _acItems         :: !(Maybe [AdClient])
+    , _acKind :: !Text
+    , _acItems :: !(Maybe [AdClient])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -96,13 +96,13 @@ instance ToJSON AdClients where
 -- /See:/ 'reportingMetadataEntry' smart constructor.
 data ReportingMetadataEntry =
   ReportingMetadataEntry'
-    { _rmeKind                 :: !Text
-    , _rmeRequiredMetrics      :: !(Maybe [Text])
-    , _rmeCompatibleMetrics    :: !(Maybe [Text])
-    , _rmeRequiredDimensions   :: !(Maybe [Text])
-    , _rmeId                   :: !(Maybe Text)
+    { _rmeKind :: !Text
+    , _rmeRequiredMetrics :: !(Maybe [Text])
+    , _rmeCompatibleMetrics :: !(Maybe [Text])
+    , _rmeRequiredDimensions :: !(Maybe [Text])
+    , _rmeId :: !(Maybe Text)
     , _rmeCompatibleDimensions :: !(Maybe [Text])
-    , _rmeSupportedProducts    :: !(Maybe [Text])
+    , _rmeSupportedProducts :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -229,10 +229,10 @@ instance ToJSON ReportingMetadataEntry where
 -- /See:/ 'accounts' smart constructor.
 data Accounts =
   Accounts'
-    { _aEtag          :: !(Maybe Text)
+    { _aEtag :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
-    , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Account])
+    , _aKind :: !Text
+    , _aItems :: !(Maybe [Account])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -301,7 +301,7 @@ instance ToJSON Accounts where
 -- /See:/ 'alerts' smart constructor.
 data Alerts =
   Alerts'
-    { _aleKind  :: !Text
+    { _aleKind :: !Text
     , _aleItems :: !(Maybe [Alert])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -349,10 +349,10 @@ instance ToJSON Alerts where
 -- /See:/ 'savedReports' smart constructor.
 data SavedReports =
   SavedReports'
-    { _srEtag          :: !(Maybe Text)
+    { _srEtag :: !(Maybe Text)
     , _srNextPageToken :: !(Maybe Text)
-    , _srKind          :: !Text
-    , _srItems         :: !(Maybe [SavedReport])
+    , _srKind :: !Text
+    , _srItems :: !(Maybe [SavedReport])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -424,7 +424,7 @@ data SavedReport =
   SavedReport'
     { _sKind :: !Text
     , _sName :: !(Maybe Text)
-    , _sId   :: !(Maybe Text)
+    , _sId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -477,10 +477,10 @@ instance ToJSON SavedReport where
 -- /See:/ 'urlChannels' smart constructor.
 data URLChannels =
   URLChannels'
-    { _ucEtag          :: !(Maybe Text)
+    { _ucEtag :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
-    , _ucKind          :: !Text
-    , _ucItems         :: !(Maybe [URLChannel])
+    , _ucKind :: !Text
+    , _ucItems :: !(Maybe [URLChannel])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -550,10 +550,10 @@ instance ToJSON URLChannels where
 -- /See:/ 'customChannels' smart constructor.
 data CustomChannels =
   CustomChannels'
-    { _ccEtag          :: !(Maybe Text)
+    { _ccEtag :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
-    , _ccKind          :: !Text
-    , _ccItems         :: !(Maybe [CustomChannel])
+    , _ccKind :: !Text
+    , _ccItems :: !(Maybe [CustomChannel])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -623,12 +623,12 @@ instance ToJSON CustomChannels where
 -- /See:/ 'report' smart constructor.
 data Report =
   Report'
-    { _rKind             :: !Text
-    , _rAverages         :: !(Maybe [Text])
-    , _rWarnings         :: !(Maybe [Text])
-    , _rRows             :: !(Maybe [[Text]])
-    , _rTotals           :: !(Maybe [Text])
-    , _rHeaders          :: !(Maybe [ReportHeadersItem])
+    { _rKind :: !Text
+    , _rAverages :: !(Maybe [Text])
+    , _rWarnings :: !(Maybe [Text])
+    , _rRows :: !(Maybe [[Text]])
+    , _rTotals :: !(Maybe [Text])
+    , _rHeaders :: !(Maybe [ReportHeadersItem])
     , _rTotalMatchedRows :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -746,11 +746,11 @@ instance ToJSON Report where
 -- /See:/ 'alert' smart constructor.
 data Alert =
   Alert'
-    { _aaKind     :: !Text
+    { _aaKind :: !Text
     , _aaSeverity :: !(Maybe Text)
-    , _aaId       :: !(Maybe Text)
-    , _aaType     :: !(Maybe Text)
-    , _aaMessage  :: !(Maybe Text)
+    , _aaId :: !(Maybe Text)
+    , _aaType :: !(Maybe Text)
+    , _aaMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -831,7 +831,7 @@ data Account =
   Account'
     { _accKind :: !Text
     , _accName :: !(Maybe Text)
-    , _accId   :: !(Maybe Text)
+    , _accId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -887,11 +887,11 @@ instance ToJSON Account where
 -- /See:/ 'adClient' smart constructor.
 data AdClient =
   AdClient'
-    { _adKind              :: !Text
-    , _adArcOptIn          :: !(Maybe Bool)
+    { _adKind :: !Text
+    , _adArcOptIn :: !(Maybe Bool)
     , _adSupportsReporting :: !(Maybe Bool)
-    , _adId                :: !(Maybe Text)
-    , _adProductCode       :: !(Maybe Text)
+    , _adId :: !(Maybe Text)
+    , _adProductCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -972,9 +972,9 @@ instance ToJSON AdClient where
 -- /See:/ 'reportHeadersItem' smart constructor.
 data ReportHeadersItem =
   ReportHeadersItem'
-    { _rhiName     :: !(Maybe Text)
+    { _rhiName :: !(Maybe Text)
     , _rhiCurrency :: !(Maybe Text)
-    , _rhiType     :: !(Maybe Text)
+    , _rhiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1031,10 +1031,10 @@ instance ToJSON ReportHeadersItem where
 -- /See:/ 'customChannelTargetingInfo' smart constructor.
 data CustomChannelTargetingInfo =
   CustomChannelTargetingInfo'
-    { _cctiLocation     :: !(Maybe Text)
+    { _cctiLocation :: !(Maybe Text)
     , _cctiSiteLanguage :: !(Maybe Text)
-    , _cctiAdsAppearOn  :: !(Maybe Text)
-    , _cctiDescription  :: !(Maybe Text)
+    , _cctiAdsAppearOn :: !(Maybe Text)
+    , _cctiDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1111,7 +1111,7 @@ instance ToJSON CustomChannelTargetingInfo where
 -- /See:/ 'preferredDeals' smart constructor.
 data PreferredDeals =
   PreferredDeals'
-    { _pdKind  :: !Text
+    { _pdKind :: !Text
     , _pdItems :: !(Maybe [PreferredDeal])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1160,7 +1160,7 @@ instance ToJSON PreferredDeals where
 -- /See:/ 'metadata' smart constructor.
 data Metadata =
   Metadata'
-    { _mKind  :: !Text
+    { _mKind :: !Text
     , _mItems :: !(Maybe [ReportingMetadataEntry])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1206,10 +1206,10 @@ instance ToJSON Metadata where
 data CustomChannel =
   CustomChannel'
     { _cTargetingInfo :: !(Maybe CustomChannelTargetingInfo)
-    , _cKind          :: !Text
-    , _cName          :: !(Maybe Text)
-    , _cCode          :: !(Maybe Text)
-    , _cId            :: !(Maybe Text)
+    , _cKind :: !Text
+    , _cName :: !(Maybe Text)
+    , _cCode :: !(Maybe Text)
+    , _cId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1286,8 +1286,8 @@ instance ToJSON CustomChannel where
 -- /See:/ 'urlChannel' smart constructor.
 data URLChannel =
   URLChannel'
-    { _urlcKind       :: !Text
-    , _urlcId         :: !(Maybe Text)
+    { _urlcKind :: !Text
+    , _urlcId :: !(Maybe Text)
     , _urlcURLPattern :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1349,14 +1349,14 @@ instance ToJSON URLChannel where
 -- /See:/ 'preferredDeal' smart constructor.
 data PreferredDeal =
   PreferredDeal'
-    { _pAdvertiserName   :: !(Maybe Text)
-    , _pCurrencyCode     :: !(Maybe Text)
-    , _pStartTime        :: !(Maybe (Textual Word64))
-    , _pKind             :: !Text
+    { _pAdvertiserName :: !(Maybe Text)
+    , _pCurrencyCode :: !(Maybe Text)
+    , _pStartTime :: !(Maybe (Textual Word64))
+    , _pKind :: !Text
     , _pBuyerNetworkName :: !(Maybe Text)
-    , _pEndTime          :: !(Maybe (Textual Word64))
-    , _pId               :: !(Maybe (Textual Int64))
-    , _pFixedCpm         :: !(Maybe (Textual Int64))
+    , _pEndTime :: !(Maybe (Textual Word64))
+    , _pId :: !(Maybe (Textual Int64))
+    , _pFixedCpm :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

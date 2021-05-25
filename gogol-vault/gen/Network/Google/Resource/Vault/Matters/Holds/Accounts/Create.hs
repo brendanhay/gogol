@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a HeldAccount to a hold. Accounts can only be added to a hold that
--- has no held_org_unit set. Attempting to add an account to an OU-based
--- hold will result in an error.
+-- Adds an account to a hold. Accounts can be added only to a hold that
+-- does not have an organizational unit set. If you try to add an account
+-- to an organizational unit-based hold, an error is returned.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.accounts.create@.
 module Network.Google.Resource.Vault.Matters.Holds.Accounts.Create
@@ -45,8 +45,8 @@ module Network.Google.Resource.Vault.Matters.Holds.Accounts.Create
     , mhacCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.accounts.create@ method which the
 -- 'MattersHoldsAccountsCreate' request conforms to.
@@ -66,21 +66,21 @@ type MattersHoldsAccountsCreateResource =
                              ReqBody '[JSON] HeldAccount :>
                                Post '[JSON] HeldAccount
 
--- | Adds a HeldAccount to a hold. Accounts can only be added to a hold that
--- has no held_org_unit set. Attempting to add an account to an OU-based
--- hold will result in an error.
+-- | Adds an account to a hold. Accounts can be added only to a hold that
+-- does not have an organizational unit set. If you try to add an account
+-- to an organizational unit-based hold, an error is returned.
 --
 -- /See:/ 'mattersHoldsAccountsCreate' smart constructor.
 data MattersHoldsAccountsCreate =
   MattersHoldsAccountsCreate'
-    { _mhacXgafv          :: !(Maybe Xgafv)
+    { _mhacXgafv :: !(Maybe Xgafv)
     , _mhacUploadProtocol :: !(Maybe Text)
-    , _mhacHoldId         :: !Text
-    , _mhacAccessToken    :: !(Maybe Text)
-    , _mhacUploadType     :: !(Maybe Text)
-    , _mhacPayload        :: !HeldAccount
-    , _mhacMatterId       :: !Text
-    , _mhacCallback       :: !(Maybe Text)
+    , _mhacHoldId :: !Text
+    , _mhacAccessToken :: !(Maybe Text)
+    , _mhacUploadType :: !(Maybe Text)
+    , _mhacPayload :: !HeldAccount
+    , _mhacMatterId :: !Text
+    , _mhacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

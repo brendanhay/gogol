@@ -22,7 +22,7 @@
 --
 -- Lists human memberships in a space.
 --
--- /See:/ <https://developers.google.com/hangouts/chat Hangouts Chat API Reference> for @chat.spaces.members.list@.
+-- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.members.list@.
 module Network.Google.Resource.Chat.Spaces.Members.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Chat.Spaces.Members.List
     , smlCallback
     ) where
 
-import           Network.Google.Chat.Types
-import           Network.Google.Prelude
+import Network.Google.Chat.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @chat.spaces.members.list@ method which the
 -- 'SpacesMembersList' request conforms to.
@@ -67,14 +67,14 @@ type SpacesMembersListResource =
 -- /See:/ 'spacesMembersList' smart constructor.
 data SpacesMembersList =
   SpacesMembersList'
-    { _smlParent         :: !Text
-    , _smlXgafv          :: !(Maybe Xgafv)
+    { _smlParent :: !Text
+    , _smlXgafv :: !(Maybe Xgafv)
     , _smlUploadProtocol :: !(Maybe Text)
-    , _smlAccessToken    :: !(Maybe Text)
-    , _smlUploadType     :: !(Maybe Text)
-    , _smlPageToken      :: !(Maybe Text)
-    , _smlPageSize       :: !(Maybe (Textual Int32))
-    , _smlCallback       :: !(Maybe Text)
+    , _smlAccessToken :: !(Maybe Text)
+    , _smlUploadType :: !(Maybe Text)
+    , _smlPageToken :: !(Maybe Text)
+    , _smlPageSize :: !(Maybe (Textual Int32))
+    , _smlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

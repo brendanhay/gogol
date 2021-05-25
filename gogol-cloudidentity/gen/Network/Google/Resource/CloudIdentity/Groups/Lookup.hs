@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up [resource
+-- Looks up the [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of a
--- Group by its EntityKey.
+-- \`Group\` by its \`EntityKey\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.lookup@.
 module Network.Google.Resource.CloudIdentity.Groups.Lookup
@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Lookup
     , glCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.lookup@ method which the
 -- 'GroupsLookup' request conforms to.
@@ -62,20 +62,20 @@ type GroupsLookupResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] LookupGroupNameResponse
 
--- | Looks up [resource
+-- | Looks up the [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of a
--- Group by its EntityKey.
+-- \`Group\` by its \`EntityKey\`.
 --
 -- /See:/ 'groupsLookup' smart constructor.
 data GroupsLookup =
   GroupsLookup'
-    { _glXgafv             :: !(Maybe Xgafv)
-    , _glUploadProtocol    :: !(Maybe Text)
-    , _glAccessToken       :: !(Maybe Text)
-    , _glGroupKeyId        :: !(Maybe Text)
-    , _glUploadType        :: !(Maybe Text)
+    { _glXgafv :: !(Maybe Xgafv)
+    , _glUploadProtocol :: !(Maybe Text)
+    , _glAccessToken :: !(Maybe Text)
+    , _glGroupKeyId :: !(Maybe Text)
+    , _glUploadType :: !(Maybe Text)
     , _glGroupKeyNamespace :: !(Maybe Text)
-    , _glCallback          :: !(Maybe Text)
+    , _glCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,8 +127,11 @@ glAccessToken
   = lens _glAccessToken
       (\ s a -> s{_glAccessToken = a})
 
--- | The ID of the entity within the given namespace. The ID must be unique
--- within its namespace.
+-- | The ID of the entity. For Google-managed entities, the \`id\` should be
+-- the email address of an existing group or user. For
+-- external-identity-mapped entities, the \`id\` must be a string
+-- conforming to the Identity Source\'s requirements. Must be unique within
+-- a \`namespace\`.
 glGroupKeyId :: Lens' GroupsLookup (Maybe Text)
 glGroupKeyId
   = lens _glGroupKeyId (\ s a -> s{_glGroupKeyId = a})
@@ -138,11 +141,12 @@ glUploadType :: Lens' GroupsLookup (Maybe Text)
 glUploadType
   = lens _glUploadType (\ s a -> s{_glUploadType = a})
 
--- | Namespaces provide isolation for IDs, so an ID only needs to be unique
--- within its namespace. Namespaces are currently only created as part of
--- IdentitySource creation from Admin Console. A namespace
--- \`\"identitysources\/{identity_source_id}\"\` is created corresponding
--- to every Identity Source \`identity_source_id\`.
+-- | The namespace in which the entity exists. If not specified, the
+-- \`EntityKey\` represents a Google-managed entity such as a Google user
+-- or a Google Group. If specified, the \`EntityKey\` represents an
+-- external-identity-mapped group. The namespace must correspond to an
+-- identity source created in Admin Console and must be in the form of
+-- \`identitysources\/{identity_source_id}\`.
 glGroupKeyNamespace :: Lens' GroupsLookup (Maybe Text)
 glGroupKeyNamespace
   = lens _glGroupKeyNamespace
@@ -157,7 +161,8 @@ instance GoogleRequest GroupsLookup where
         type Rs GroupsLookup = LookupGroupNameResponse
         type Scopes GroupsLookup =
              '["https://www.googleapis.com/auth/cloud-identity.groups",
-               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsLookup'{..}
           = go _glXgafv _glUploadProtocol _glAccessToken
               _glGroupKeyId

@@ -46,8 +46,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
     , igmiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.insert@ method which the
 -- 'InstanceGroupManagersInsert' request conforms to.
@@ -77,9 +77,9 @@ type InstanceGroupManagersInsertResource =
 data InstanceGroupManagersInsert =
   InstanceGroupManagersInsert'
     { _igmiRequestId :: !(Maybe Text)
-    , _igmiProject   :: !Text
-    , _igmiZone      :: !Text
-    , _igmiPayload   :: !InstanceGroupManager
+    , _igmiProject :: !Text
+    , _igmiZone :: !Text
+    , _igmiPayload :: !InstanceGroupManager
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

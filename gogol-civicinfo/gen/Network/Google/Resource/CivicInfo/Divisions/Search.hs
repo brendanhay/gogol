@@ -22,7 +22,7 @@
 --
 -- Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.divisions.search@.
+-- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference> for @civicinfo.divisions.search@.
 module Network.Google.Resource.CivicInfo.Divisions.Search
     (
     -- * REST Resource
@@ -33,12 +33,16 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
     , DivisionsSearch
 
     -- * Request Lenses
-    , dsPayload
+    , dsXgafv
+    , dsUploadProtocol
+    , dsAccessToken
+    , dsUploadType
     , dsQuery
+    , dsCallback
     ) where
 
-import           Network.Google.CivicInfo.Types
-import           Network.Google.Prelude
+import Network.Google.CivicInfo.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.divisions.search@ method which the
 -- 'DivisionsSearch' request conforms to.
@@ -46,18 +50,26 @@ type DivisionsSearchResource =
      "civicinfo" :>
        "v2" :>
          "divisions" :>
-           QueryParam "query" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] DivisionSearchRequest :>
-                 Get '[JSON] DivisionSearchResponse
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "query" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] DivisionSearchResponse
 
 -- | Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ 'divisionsSearch' smart constructor.
 data DivisionsSearch =
   DivisionsSearch'
-    { _dsPayload :: !DivisionSearchRequest
-    , _dsQuery   :: !(Maybe Text)
+    { _dsXgafv :: !(Maybe Xgafv)
+    , _dsUploadProtocol :: !(Maybe Text)
+    , _dsAccessToken :: !(Maybe Text)
+    , _dsUploadType :: !(Maybe Text)
+    , _dsQuery :: !(Maybe Text)
+    , _dsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,20 +78,50 @@ data DivisionsSearch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsPayload'
+-- * 'dsXgafv'
+--
+-- * 'dsUploadProtocol'
+--
+-- * 'dsAccessToken'
+--
+-- * 'dsUploadType'
 --
 -- * 'dsQuery'
+--
+-- * 'dsCallback'
 divisionsSearch
-    :: DivisionSearchRequest -- ^ 'dsPayload'
-    -> DivisionsSearch
-divisionsSearch pDsPayload_ =
-  DivisionsSearch' {_dsPayload = pDsPayload_, _dsQuery = Nothing}
+    :: DivisionsSearch
+divisionsSearch =
+  DivisionsSearch'
+    { _dsXgafv = Nothing
+    , _dsUploadProtocol = Nothing
+    , _dsAccessToken = Nothing
+    , _dsUploadType = Nothing
+    , _dsQuery = Nothing
+    , _dsCallback = Nothing
+    }
 
 
--- | Multipart request metadata.
-dsPayload :: Lens' DivisionsSearch DivisionSearchRequest
-dsPayload
-  = lens _dsPayload (\ s a -> s{_dsPayload = a})
+-- | V1 error format.
+dsXgafv :: Lens' DivisionsSearch (Maybe Xgafv)
+dsXgafv = lens _dsXgafv (\ s a -> s{_dsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dsUploadProtocol :: Lens' DivisionsSearch (Maybe Text)
+dsUploadProtocol
+  = lens _dsUploadProtocol
+      (\ s a -> s{_dsUploadProtocol = a})
+
+-- | OAuth access token.
+dsAccessToken :: Lens' DivisionsSearch (Maybe Text)
+dsAccessToken
+  = lens _dsAccessToken
+      (\ s a -> s{_dsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dsUploadType :: Lens' DivisionsSearch (Maybe Text)
+dsUploadType
+  = lens _dsUploadType (\ s a -> s{_dsUploadType = a})
 
 -- | The search query. Queries can cover any parts of a OCD ID or a human
 -- readable division name. All words given in the query are treated as
@@ -89,11 +131,20 @@ dsPayload
 dsQuery :: Lens' DivisionsSearch (Maybe Text)
 dsQuery = lens _dsQuery (\ s a -> s{_dsQuery = a})
 
+-- | JSONP
+dsCallback :: Lens' DivisionsSearch (Maybe Text)
+dsCallback
+  = lens _dsCallback (\ s a -> s{_dsCallback = a})
+
 instance GoogleRequest DivisionsSearch where
         type Rs DivisionsSearch = DivisionSearchResponse
         type Scopes DivisionsSearch = '[]
         requestClient DivisionsSearch'{..}
-          = go _dsQuery (Just AltJSON) _dsPayload
+          = go _dsXgafv _dsUploadProtocol _dsAccessToken
+              _dsUploadType
+              _dsQuery
+              _dsCallback
+              (Just AltJSON)
               civicInfoService
           where go
                   = buildClient

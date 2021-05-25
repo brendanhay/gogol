@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Addons
     , pzcaCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.addons@ method which the
 -- 'ProjectsZonesClustersAddons' request conforms to.
@@ -72,15 +72,15 @@ type ProjectsZonesClustersAddonsResource =
 -- /See:/ 'projectsZonesClustersAddons' smart constructor.
 data ProjectsZonesClustersAddons =
   ProjectsZonesClustersAddons'
-    { _pzcaXgafv          :: !(Maybe Xgafv)
+    { _pzcaXgafv :: !(Maybe Xgafv)
     , _pzcaUploadProtocol :: !(Maybe Text)
-    , _pzcaAccessToken    :: !(Maybe Text)
-    , _pzcaUploadType     :: !(Maybe Text)
-    , _pzcaZone           :: !Text
-    , _pzcaPayload        :: !SetAddonsConfigRequest
-    , _pzcaClusterId      :: !Text
-    , _pzcaProjectId      :: !Text
-    , _pzcaCallback       :: !(Maybe Text)
+    , _pzcaAccessToken :: !(Maybe Text)
+    , _pzcaUploadType :: !(Maybe Text)
+    , _pzcaZone :: !Text
+    , _pzcaPayload :: !SetAddonsConfigRequest
+    , _pzcaClusterId :: !Text
+    , _pzcaProjectId :: !Text
+    , _pzcaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,8 +150,9 @@ pzcaUploadType
       (\ s a -> s{_pzcaUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcaZone :: Lens' ProjectsZonesClustersAddons Text
 pzcaZone = lens _pzcaZone (\ s a -> s{_pzcaZone = a})
 

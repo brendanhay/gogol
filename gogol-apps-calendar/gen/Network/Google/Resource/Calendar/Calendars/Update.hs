@@ -37,8 +37,8 @@ module Network.Google.Resource.Calendar.Calendars.Update
     , cuPayload
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.update@ method which the
 -- 'CalendarsUpdate' request conforms to.
@@ -56,7 +56,7 @@ type CalendarsUpdateResource =
 data CalendarsUpdate =
   CalendarsUpdate'
     { _cuCalendarId :: !Text
-    , _cuPayload    :: !Calendar
+    , _cuPayload :: !Calendar
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

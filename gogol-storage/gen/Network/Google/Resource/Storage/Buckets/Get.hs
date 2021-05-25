@@ -38,10 +38,11 @@ module Network.Google.Resource.Storage.Buckets.Get
     , bgUserProject
     , bgIfMetagenerationNotMatch
     , bgProjection
+    , bgProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.get@ method which the
 -- 'BucketsGet' request conforms to.
@@ -55,18 +56,20 @@ type BucketsGetResource =
                  QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                    :>
                    QueryParam "projection" BucketsGetProjection :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Bucket
+                     QueryParam "provisionalUserProject" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Bucket
 
 -- | Returns metadata for the specified bucket.
 --
 -- /See:/ 'bucketsGet' smart constructor.
 data BucketsGet =
   BucketsGet'
-    { _bgIfMetagenerationMatch    :: !(Maybe (Textual Int64))
-    , _bgBucket                   :: !Text
-    , _bgUserProject              :: !(Maybe Text)
+    { _bgIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _bgBucket :: !Text
+    , _bgUserProject :: !(Maybe Text)
     , _bgIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
-    , _bgProjection               :: !(Maybe BucketsGetProjection)
+    , _bgProjection :: !(Maybe BucketsGetProjection)
+    , _bgProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,6 +87,8 @@ data BucketsGet =
 -- * 'bgIfMetagenerationNotMatch'
 --
 -- * 'bgProjection'
+--
+-- * 'bgProvisionalUserProject'
 bucketsGet
     :: Text -- ^ 'bgBucket'
     -> BucketsGet
@@ -94,6 +99,7 @@ bucketsGet pBgBucket_ =
     , _bgUserProject = Nothing
     , _bgIfMetagenerationNotMatch = Nothing
     , _bgProjection = Nothing
+    , _bgProvisionalUserProject = Nothing
     }
 
 
@@ -129,6 +135,13 @@ bgProjection :: Lens' BucketsGet (Maybe BucketsGetProjection)
 bgProjection
   = lens _bgProjection (\ s a -> s{_bgProjection = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+bgProvisionalUserProject :: Lens' BucketsGet (Maybe Text)
+bgProvisionalUserProject
+  = lens _bgProvisionalUserProject
+      (\ s a -> s{_bgProvisionalUserProject = a})
+
 instance GoogleRequest BucketsGet where
         type Rs BucketsGet = Bucket
         type Scopes BucketsGet =
@@ -142,6 +155,7 @@ instance GoogleRequest BucketsGet where
               _bgUserProject
               _bgIfMetagenerationNotMatch
               _bgProjection
+              _bgProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

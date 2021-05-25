@@ -16,7 +16,7 @@
 --
 module Network.Google.Monitoring.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Whether the measurement is an integer, a floating-point number, etc.
 -- Some combinations of metric_kind and value_type might not be supported.
@@ -75,6 +75,87 @@ instance FromJSON MetricDescriptorValueType where
 instance ToJSON MetricDescriptorValueType where
     toJSON = toJSONText
 
+-- | The product launch stage for channels of this type.
+data NotificationChannelDescriptorLaunchStage
+    = LaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | Unimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | Prelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | EarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | Alpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | Beta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | GA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | Deprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our Terms of
+      -- Service (https:\/\/cloud.google.com\/terms\/) and the Google Cloud
+      -- Platform Subject to the Deprecation Policy
+      -- (https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NotificationChannelDescriptorLaunchStage
+
+instance FromHttpApiData NotificationChannelDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right LaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right Unimplemented
+        "PRELAUNCH" -> Right Prelaunch
+        "EARLY_ACCESS" -> Right EarlyAccess
+        "ALPHA" -> Right Alpha
+        "BETA" -> Right Beta
+        "GA" -> Right GA
+        "DEPRECATED" -> Right Deprecated
+        x -> Left ("Unable to parse NotificationChannelDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData NotificationChannelDescriptorLaunchStage where
+    toQueryParam = \case
+        LaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        Unimplemented -> "UNIMPLEMENTED"
+        Prelaunch -> "PRELAUNCH"
+        EarlyAccess -> "EARLY_ACCESS"
+        Alpha -> "ALPHA"
+        Beta -> "BETA"
+        GA -> "GA"
+        Deprecated -> "DEPRECATED"
+
+instance FromJSON NotificationChannelDescriptorLaunchStage where
+    parseJSON = parseJSONText "NotificationChannelDescriptorLaunchStage"
+
+instance ToJSON NotificationChannelDescriptorLaunchStage where
+    toJSON = toJSONText
+
 -- | The type of measurement.
 data CollectdValueDataSourceType
     = UnspecifiedDataSourceType
@@ -123,11 +204,53 @@ instance FromJSON CollectdValueDataSourceType where
 instance ToJSON CollectdValueDataSourceType where
     toJSON = toJSONText
 
+-- | The value stream kind.
+data ValueDescriptorMetricKind
+    = VDMKMetricKindUnspecified
+      -- ^ @METRIC_KIND_UNSPECIFIED@
+      -- Do not use this default value.
+    | VDMKGauge
+      -- ^ @GAUGE@
+      -- An instantaneous measurement of a value.
+    | VDMKDelta
+      -- ^ @DELTA@
+      -- The change in a value during a time interval.
+    | VDMKCumulative
+      -- ^ @CUMULATIVE@
+      -- A value accumulated over a time interval. Cumulative measurements in a
+      -- time series should have the same start time and increasing end times,
+      -- until an event resets the cumulative value to zero and sets a new start
+      -- time for the following points.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ValueDescriptorMetricKind
+
+instance FromHttpApiData ValueDescriptorMetricKind where
+    parseQueryParam = \case
+        "METRIC_KIND_UNSPECIFIED" -> Right VDMKMetricKindUnspecified
+        "GAUGE" -> Right VDMKGauge
+        "DELTA" -> Right VDMKDelta
+        "CUMULATIVE" -> Right VDMKCumulative
+        x -> Left ("Unable to parse ValueDescriptorMetricKind from: " <> x)
+
+instance ToHttpApiData ValueDescriptorMetricKind where
+    toQueryParam = \case
+        VDMKMetricKindUnspecified -> "METRIC_KIND_UNSPECIFIED"
+        VDMKGauge -> "GAUGE"
+        VDMKDelta -> "DELTA"
+        VDMKCumulative -> "CUMULATIVE"
+
+instance FromJSON ValueDescriptorMetricKind where
+    parseJSON = parseJSONText "ValueDescriptorMetricKind"
+
+instance ToJSON ValueDescriptorMetricKind where
+    toJSON = toJSONText
+
 -- | A broad region category in which the IP address is located.
 data UptimeCheckIPRegion
     = RegionUnspecified
       -- ^ @REGION_UNSPECIFIED@
-      -- Default value if no region is specified. Will result in uptime checks
+      -- Default value if no region is specified. Will result in Uptime checks
       -- running from all regions.
     | Usa
       -- ^ @USA@
@@ -170,6 +293,47 @@ instance FromJSON UptimeCheckIPRegion where
 instance ToJSON UptimeCheckIPRegion where
     toJSON = toJSONText
 
+-- | View of the ServiceLevelObjective to return. If DEFAULT, return the
+-- ServiceLevelObjective as originally defined. If EXPLICIT and the
+-- ServiceLevelObjective is defined in terms of a BasicSli, replace the
+-- BasicSli with a RequestBasedSli spelling out how the SLI is computed.
+data ServicesServiceLevelObjectivesGetView
+    = SSLOGVViewUnspecified
+      -- ^ @VIEW_UNSPECIFIED@
+      -- Same as FULL.
+    | SSLOGVFull
+      -- ^ @FULL@
+      -- Return the embedded ServiceLevelIndicator in the form in which it was
+      -- defined. If it was defined using a BasicSli, return that BasicSli.
+    | SSLOGVExplicit
+      -- ^ @EXPLICIT@
+      -- For ServiceLevelIndicators using BasicSli articulation, instead return
+      -- the ServiceLevelIndicator with its mode of computation fully spelled out
+      -- as a RequestBasedSli. For ServiceLevelIndicators using RequestBasedSli
+      -- or WindowsBasedSli, return the ServiceLevelIndicator as it was provided.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServicesServiceLevelObjectivesGetView
+
+instance FromHttpApiData ServicesServiceLevelObjectivesGetView where
+    parseQueryParam = \case
+        "VIEW_UNSPECIFIED" -> Right SSLOGVViewUnspecified
+        "FULL" -> Right SSLOGVFull
+        "EXPLICIT" -> Right SSLOGVExplicit
+        x -> Left ("Unable to parse ServicesServiceLevelObjectivesGetView from: " <> x)
+
+instance ToHttpApiData ServicesServiceLevelObjectivesGetView where
+    toQueryParam = \case
+        SSLOGVViewUnspecified -> "VIEW_UNSPECIFIED"
+        SSLOGVFull -> "FULL"
+        SSLOGVExplicit -> "EXPLICIT"
+
+instance FromJSON ServicesServiceLevelObjectivesGetView where
+    parseJSON = parseJSONText "ServicesServiceLevelObjectivesGetView"
+
+instance ToJSON ServicesServiceLevelObjectivesGetView where
+    toJSON = toJSONText
+
 -- | The comparison to apply between the time series (indicated by filter and
 -- aggregation) and the threshold (indicated by threshold_value). The
 -- comparison is applied on each time series, with the time series on the
@@ -181,22 +345,23 @@ data MetricThresholdComparison
       -- No ordering relationship is specified.
     | ComparisonGT
       -- ^ @COMPARISON_GT@
-      -- The left argument is greater than the right argument.
+      -- True if the left argument is greater than the right argument.
     | ComparisonGe
       -- ^ @COMPARISON_GE@
-      -- The left argument is greater than or equal to the right argument.
+      -- True if the left argument is greater than or equal to the right
+      -- argument.
     | ComparisonLT
       -- ^ @COMPARISON_LT@
-      -- The left argument is less than the right argument.
+      -- True if the left argument is less than the right argument.
     | ComparisonLe
       -- ^ @COMPARISON_LE@
-      -- The left argument is less than or equal to the right argument.
+      -- True if the left argument is less than or equal to the right argument.
     | ComparisonEQ
       -- ^ @COMPARISON_EQ@
-      -- The left argument is equal to the right argument.
+      -- True if the left argument is equal to the right argument.
     | ComparisonNe
       -- ^ @COMPARISON_NE@
-      -- The left argument is not equal to the right argument.
+      -- True if the left argument is not equal to the right argument.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MetricThresholdComparison
@@ -228,150 +393,156 @@ instance FromJSON MetricThresholdComparison where
 instance ToJSON MetricThresholdComparison where
     toJSON = toJSONText
 
--- | The approach to be used to align individual time series. Not all
--- alignment functions may be applied to all time series, depending on the
--- metric type and value type of the original time series. Alignment may
--- change the metric type or the value type of the time series.Time series
--- data must be aligned in order to perform cross-time series reduction. If
--- crossSeriesReducer is specified, then perSeriesAligner must be specified
--- and not equal ALIGN_NONE and alignmentPeriod must be specified;
--- otherwise, an error is returned.
-data AggregationPerSeriesAligner
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
     = AlignNone
       -- ^ @ALIGN_NONE@
-      -- No alignment. Raw data is returned. Not valid if cross-time series
-      -- reduction is requested. The value type of the result is the same as the
-      -- value type of the input.
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
     | AlignDelta
       -- ^ @ALIGN_DELTA@
-      -- Align and convert to delta metric type. This alignment is valid for
-      -- cumulative metrics and delta metrics. Aligning an existing delta metric
-      -- to a delta metric requires that the alignment period be increased. The
-      -- value type of the result is the same as the value type of the input.One
-      -- can think of this aligner as a rate but without time units; that is, the
-      -- output is conceptually (second_point - first_point).
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
     | AlignRate
       -- ^ @ALIGN_RATE@
-      -- Align and convert to a rate. This alignment is valid for cumulative
-      -- metrics and delta metrics with numeric values. The output is a gauge
-      -- metric with value type DOUBLE.One can think of this aligner as
-      -- conceptually providing the slope of the line that passes through the
-      -- value at the start and end of the window. In other words, this is
-      -- conceptually ((y1 - y0)\/(t1 - t0)), and the output unit is one that has
-      -- a \"\/time\" dimension.If, by rate, you are looking for percentage
-      -- change, see the ALIGN_PERCENT_CHANGE aligner option.
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
     | AlignInterpolate
       -- ^ @ALIGN_INTERPOLATE@
-      -- Align by interpolating between adjacent points around the period
-      -- boundary. This alignment is valid for gauge metrics with numeric values.
-      -- The value type of the result is the same as the value type of the input.
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
     | AlignNextOlder
       -- ^ @ALIGN_NEXT_OLDER@
-      -- Align by shifting the oldest data point before the period boundary to
-      -- the boundary. This alignment is valid for gauge metrics. The value type
-      -- of the result is the same as the value type of the input.
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
     | AlignMin
       -- ^ @ALIGN_MIN@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the minimum of all data points in the period. This
-      -- alignment is valid for gauge and delta metrics with numeric values. The
-      -- value type of the result is the same as the value type of the input.
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
     | AlignMax
       -- ^ @ALIGN_MAX@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the maximum of all data points in the period. This
-      -- alignment is valid for gauge and delta metrics with numeric values. The
-      -- value type of the result is the same as the value type of the input.
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
     | AlignMean
       -- ^ @ALIGN_MEAN@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the average or arithmetic mean of all data points in
-      -- the period. This alignment is valid for gauge and delta metrics with
-      -- numeric values. The value type of the output is DOUBLE.
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
     | AlignCount
       -- ^ @ALIGN_COUNT@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the count of all data points in the period. This
-      -- alignment is valid for gauge and delta metrics with numeric or Boolean
-      -- values. The value type of the output is INT64.
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
     | AlignSum
       -- ^ @ALIGN_SUM@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the sum of all data points in the period. This
-      -- alignment is valid for gauge and delta metrics with numeric and
-      -- distribution values. The value type of the output is the same as the
-      -- value type of the input.
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
     | AlignStddev
       -- ^ @ALIGN_STDDEV@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the standard deviation of all data points in the
-      -- period. This alignment is valid for gauge and delta metrics with numeric
-      -- values. The value type of the output is DOUBLE.
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
     | AlignCountTrue
       -- ^ @ALIGN_COUNT_TRUE@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the count of True-valued data points in the period.
-      -- This alignment is valid for gauge metrics with Boolean values. The value
-      -- type of the output is INT64.
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
     | AlignCountFalse
       -- ^ @ALIGN_COUNT_FALSE@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the count of False-valued data points in the period.
-      -- This alignment is valid for gauge metrics with Boolean values. The value
-      -- type of the output is INT64.
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
     | AlignFractionTrue
       -- ^ @ALIGN_FRACTION_TRUE@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the fraction of True-valued data points in the
-      -- period. This alignment is valid for gauge metrics with Boolean values.
-      -- The output value is in the range 0, 1 and has value type DOUBLE.
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
     | AlignPercentile99
       -- ^ @ALIGN_PERCENTILE_99@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the 99th percentile of all data points in the
-      -- period. This alignment is valid for gauge and delta metrics with
-      -- distribution values. The output is a gauge metric with value type
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
       -- DOUBLE.
     | AlignPercentile95
       -- ^ @ALIGN_PERCENTILE_95@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the 95th percentile of all data points in the
-      -- period. This alignment is valid for gauge and delta metrics with
-      -- distribution values. The output is a gauge metric with value type
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
       -- DOUBLE.
     | AlignPercentile50
       -- ^ @ALIGN_PERCENTILE_50@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the 50th percentile of all data points in the
-      -- period. This alignment is valid for gauge and delta metrics with
-      -- distribution values. The output is a gauge metric with value type
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
       -- DOUBLE.
     | AlignPercentile05
       -- ^ @ALIGN_PERCENTILE_05@
-      -- Align time series via aggregation. The resulting data point in the
-      -- alignment period is the 5th percentile of all data points in the period.
-      -- This alignment is valid for gauge and delta metrics with distribution
-      -- values. The output is a gauge metric with value type DOUBLE.
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
     | AlignPercentChange
       -- ^ @ALIGN_PERCENT_CHANGE@
-      -- Align and convert to a percentage change. This alignment is valid for
-      -- gauge and delta metrics with numeric values. This alignment conceptually
-      -- computes the equivalent of \"((current - previous)\/previous)*100\"
-      -- where previous value is determined based on the alignmentPeriod. In the
-      -- event that previous is 0 the calculated value is infinity with the
-      -- exception that if both (current - previous) and previous are 0 the
-      -- calculated value is 0. A 10 minute moving mean is computed at each point
-      -- of the time window prior to the above calculation to smooth the metric
-      -- and prevent false positives from very short lived spikes. Only
-      -- applicable for data that is >= 0. Any values \< 0 are treated as no
-      -- data. While delta metrics are accepted by this alignment special care
-      -- should be taken that the values for the metric will always be positive.
-      -- The output is a gauge metric with value type DOUBLE.
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable AggregationPerSeriesAligner
+instance Hashable ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
 
-instance FromHttpApiData AggregationPerSeriesAligner where
+instance FromHttpApiData ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner where
     parseQueryParam = \case
         "ALIGN_NONE" -> Right AlignNone
         "ALIGN_DELTA" -> Right AlignDelta
@@ -392,9 +563,9 @@ instance FromHttpApiData AggregationPerSeriesAligner where
         "ALIGN_PERCENTILE_50" -> Right AlignPercentile50
         "ALIGN_PERCENTILE_05" -> Right AlignPercentile05
         "ALIGN_PERCENT_CHANGE" -> Right AlignPercentChange
-        x -> Left ("Unable to parse AggregationPerSeriesAligner from: " <> x)
+        x -> Left ("Unable to parse ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner from: " <> x)
 
-instance ToHttpApiData AggregationPerSeriesAligner where
+instance ToHttpApiData ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner where
     toQueryParam = \case
         AlignNone -> "ALIGN_NONE"
         AlignDelta -> "ALIGN_DELTA"
@@ -415,6 +586,206 @@ instance ToHttpApiData AggregationPerSeriesAligner where
         AlignPercentile50 -> "ALIGN_PERCENTILE_50"
         AlignPercentile05 -> "ALIGN_PERCENTILE_05"
         AlignPercentChange -> "ALIGN_PERCENT_CHANGE"
+
+instance FromJSON ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    parseJSON = parseJSONText "ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner"
+
+instance ToJSON ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    toJSON = toJSONText
+
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data AggregationPerSeriesAligner
+    = APSAAlignNone
+      -- ^ @ALIGN_NONE@
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
+    | APSAAlignDelta
+      -- ^ @ALIGN_DELTA@
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | APSAAlignRate
+      -- ^ @ALIGN_RATE@
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
+    | APSAAlignInterpolate
+      -- ^ @ALIGN_INTERPOLATE@
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | APSAAlignNextOlder
+      -- ^ @ALIGN_NEXT_OLDER@
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | APSAAlignMin
+      -- ^ @ALIGN_MIN@
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | APSAAlignMax
+      -- ^ @ALIGN_MAX@
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | APSAAlignMean
+      -- ^ @ALIGN_MEAN@
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
+    | APSAAlignCount
+      -- ^ @ALIGN_COUNT@
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
+    | APSAAlignSum
+      -- ^ @ALIGN_SUM@
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
+    | APSAAlignStddev
+      -- ^ @ALIGN_STDDEV@
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
+    | APSAAlignCountTrue
+      -- ^ @ALIGN_COUNT_TRUE@
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | APSAAlignCountFalse
+      -- ^ @ALIGN_COUNT_FALSE@
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | APSAAlignFractionTrue
+      -- ^ @ALIGN_FRACTION_TRUE@
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | APSAAlignPercentile99
+      -- ^ @ALIGN_PERCENTILE_99@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | APSAAlignPercentile95
+      -- ^ @ALIGN_PERCENTILE_95@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | APSAAlignPercentile50
+      -- ^ @ALIGN_PERCENTILE_50@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | APSAAlignPercentile05
+      -- ^ @ALIGN_PERCENTILE_05@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | APSAAlignPercentChange
+      -- ^ @ALIGN_PERCENT_CHANGE@
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AggregationPerSeriesAligner
+
+instance FromHttpApiData AggregationPerSeriesAligner where
+    parseQueryParam = \case
+        "ALIGN_NONE" -> Right APSAAlignNone
+        "ALIGN_DELTA" -> Right APSAAlignDelta
+        "ALIGN_RATE" -> Right APSAAlignRate
+        "ALIGN_INTERPOLATE" -> Right APSAAlignInterpolate
+        "ALIGN_NEXT_OLDER" -> Right APSAAlignNextOlder
+        "ALIGN_MIN" -> Right APSAAlignMin
+        "ALIGN_MAX" -> Right APSAAlignMax
+        "ALIGN_MEAN" -> Right APSAAlignMean
+        "ALIGN_COUNT" -> Right APSAAlignCount
+        "ALIGN_SUM" -> Right APSAAlignSum
+        "ALIGN_STDDEV" -> Right APSAAlignStddev
+        "ALIGN_COUNT_TRUE" -> Right APSAAlignCountTrue
+        "ALIGN_COUNT_FALSE" -> Right APSAAlignCountFalse
+        "ALIGN_FRACTION_TRUE" -> Right APSAAlignFractionTrue
+        "ALIGN_PERCENTILE_99" -> Right APSAAlignPercentile99
+        "ALIGN_PERCENTILE_95" -> Right APSAAlignPercentile95
+        "ALIGN_PERCENTILE_50" -> Right APSAAlignPercentile50
+        "ALIGN_PERCENTILE_05" -> Right APSAAlignPercentile05
+        "ALIGN_PERCENT_CHANGE" -> Right APSAAlignPercentChange
+        x -> Left ("Unable to parse AggregationPerSeriesAligner from: " <> x)
+
+instance ToHttpApiData AggregationPerSeriesAligner where
+    toQueryParam = \case
+        APSAAlignNone -> "ALIGN_NONE"
+        APSAAlignDelta -> "ALIGN_DELTA"
+        APSAAlignRate -> "ALIGN_RATE"
+        APSAAlignInterpolate -> "ALIGN_INTERPOLATE"
+        APSAAlignNextOlder -> "ALIGN_NEXT_OLDER"
+        APSAAlignMin -> "ALIGN_MIN"
+        APSAAlignMax -> "ALIGN_MAX"
+        APSAAlignMean -> "ALIGN_MEAN"
+        APSAAlignCount -> "ALIGN_COUNT"
+        APSAAlignSum -> "ALIGN_SUM"
+        APSAAlignStddev -> "ALIGN_STDDEV"
+        APSAAlignCountTrue -> "ALIGN_COUNT_TRUE"
+        APSAAlignCountFalse -> "ALIGN_COUNT_FALSE"
+        APSAAlignFractionTrue -> "ALIGN_FRACTION_TRUE"
+        APSAAlignPercentile99 -> "ALIGN_PERCENTILE_99"
+        APSAAlignPercentile95 -> "ALIGN_PERCENTILE_95"
+        APSAAlignPercentile50 -> "ALIGN_PERCENTILE_50"
+        APSAAlignPercentile05 -> "ALIGN_PERCENTILE_05"
+        APSAAlignPercentChange -> "ALIGN_PERCENT_CHANGE"
 
 instance FromJSON AggregationPerSeriesAligner where
     parseJSON = parseJSONText "AggregationPerSeriesAligner"
@@ -536,98 +907,107 @@ instance FromJSON FieldKind where
 instance ToJSON FieldKind where
     toJSON = toJSONText
 
--- | The approach to be used to combine time series. Not all reducer
--- functions may be applied to all time series, depending on the metric
--- type and the value type of the original time series. Reduction may
--- change the metric type of value type of the time series.Time series data
--- must be aligned in order to perform cross-time series reduction. If
--- crossSeriesReducer is specified, then perSeriesAligner must be specified
--- and not equal ALIGN_NONE and alignmentPeriod must be specified;
--- otherwise, an error is returned.
-data AggregationCrossSeriesReducer
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
     = ReduceNone
       -- ^ @REDUCE_NONE@
-      -- No cross-time series reduction. The output of the aligner is returned.
+      -- No cross-time series reduction. The output of the Aligner is returned.
     | ReduceMean
       -- ^ @REDUCE_MEAN@
-      -- Reduce by computing the mean across time series for each alignment
-      -- period. This reducer is valid for delta and gauge metrics with numeric
-      -- or distribution values. The value type of the output is DOUBLE.
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
     | ReduceMin
       -- ^ @REDUCE_MIN@
-      -- Reduce by computing the minimum across time series for each alignment
-      -- period. This reducer is valid for delta and gauge metrics with numeric
-      -- values. The value type of the output is the same as the value type of
-      -- the input.
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
     | ReduceMax
       -- ^ @REDUCE_MAX@
-      -- Reduce by computing the maximum across time series for each alignment
-      -- period. This reducer is valid for delta and gauge metrics with numeric
-      -- values. The value type of the output is the same as the value type of
-      -- the input.
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
     | ReduceSum
       -- ^ @REDUCE_SUM@
       -- Reduce by computing the sum across time series for each alignment
-      -- period. This reducer is valid for delta and gauge metrics with numeric
-      -- and distribution values. The value type of the output is the same as the
-      -- value type of the input.
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
     | ReduceStddev
       -- ^ @REDUCE_STDDEV@
       -- Reduce by computing the standard deviation across time series for each
-      -- alignment period. This reducer is valid for delta and gauge metrics with
-      -- numeric or distribution values. The value type of the output is DOUBLE.
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
     | ReduceCount
       -- ^ @REDUCE_COUNT@
-      -- Reduce by computing the count of data points across time series for each
-      -- alignment period. This reducer is valid for delta and gauge metrics of
-      -- numeric, Boolean, distribution, and string value type. The value type of
-      -- the output is INT64.
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
     | ReduceCountTrue
       -- ^ @REDUCE_COUNT_TRUE@
-      -- Reduce by computing the count of True-valued data points across time
-      -- series for each alignment period. This reducer is valid for delta and
-      -- gauge metrics of Boolean value type. The value type of the output is
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
       -- INT64.
     | ReduceCountFalse
       -- ^ @REDUCE_COUNT_FALSE@
-      -- Reduce by computing the count of False-valued data points across time
-      -- series for each alignment period. This reducer is valid for delta and
-      -- gauge metrics of Boolean value type. The value type of the output is
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
       -- INT64.
     | ReduceFractionTrue
       -- ^ @REDUCE_FRACTION_TRUE@
-      -- Reduce by computing the fraction of True-valued data points across time
-      -- series for each alignment period. This reducer is valid for delta and
-      -- gauge metrics of Boolean value type. The output value is in the range 0,
-      -- 1 and has value type DOUBLE.
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
     | ReducePercentile99
       -- ^ @REDUCE_PERCENTILE_99@
-      -- Reduce by computing 99th percentile of data points across time series
-      -- for each alignment period. This reducer is valid for gauge and delta
-      -- metrics of numeric and distribution type. The value of the output is
-      -- DOUBLE
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
     | ReducePercentile95
       -- ^ @REDUCE_PERCENTILE_95@
-      -- Reduce by computing 95th percentile of data points across time series
-      -- for each alignment period. This reducer is valid for gauge and delta
-      -- metrics of numeric and distribution type. The value of the output is
-      -- DOUBLE
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
     | ReducePercentile50
       -- ^ @REDUCE_PERCENTILE_50@
-      -- Reduce by computing 50th percentile of data points across time series
-      -- for each alignment period. This reducer is valid for gauge and delta
-      -- metrics of numeric and distribution type. The value of the output is
-      -- DOUBLE
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
     | ReducePercentile05
       -- ^ @REDUCE_PERCENTILE_05@
-      -- Reduce by computing 5th percentile of data points across time series for
-      -- each alignment period. This reducer is valid for gauge and delta metrics
-      -- of numeric and distribution type. The value of the output is DOUBLE
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable AggregationCrossSeriesReducer
+instance Hashable FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
 
-instance FromHttpApiData AggregationCrossSeriesReducer where
+instance FromHttpApiData FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer where
     parseQueryParam = \case
         "REDUCE_NONE" -> Right ReduceNone
         "REDUCE_MEAN" -> Right ReduceMean
@@ -643,9 +1023,9 @@ instance FromHttpApiData AggregationCrossSeriesReducer where
         "REDUCE_PERCENTILE_95" -> Right ReducePercentile95
         "REDUCE_PERCENTILE_50" -> Right ReducePercentile50
         "REDUCE_PERCENTILE_05" -> Right ReducePercentile05
-        x -> Left ("Unable to parse AggregationCrossSeriesReducer from: " <> x)
+        x -> Left ("Unable to parse FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer from: " <> x)
 
-instance ToHttpApiData AggregationCrossSeriesReducer where
+instance ToHttpApiData FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer where
     toQueryParam = \case
         ReduceNone -> "REDUCE_NONE"
         ReduceMean -> "REDUCE_MEAN"
@@ -662,47 +1042,430 @@ instance ToHttpApiData AggregationCrossSeriesReducer where
         ReducePercentile50 -> "REDUCE_PERCENTILE_50"
         ReducePercentile05 -> "REDUCE_PERCENTILE_05"
 
+instance FromJSON FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    parseJSON = parseJSONText "FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer"
+
+instance ToJSON FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    toJSON = toJSONText
+
+-- | The HTTP request method to use for the check. If set to
+-- METHOD_UNSPECIFIED then request_method defaults to GET.
+data HTTPCheckRequestMethod
+    = MethodUnspecified
+      -- ^ @METHOD_UNSPECIFIED@
+      -- No request method specified.
+    | Get'
+      -- ^ @GET@
+      -- GET request.
+    | Post'
+      -- ^ @POST@
+      -- POST request.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPCheckRequestMethod
+
+instance FromHttpApiData HTTPCheckRequestMethod where
+    parseQueryParam = \case
+        "METHOD_UNSPECIFIED" -> Right MethodUnspecified
+        "GET" -> Right Get'
+        "POST" -> Right Post'
+        x -> Left ("Unable to parse HTTPCheckRequestMethod from: " <> x)
+
+instance ToHttpApiData HTTPCheckRequestMethod where
+    toQueryParam = \case
+        MethodUnspecified -> "METHOD_UNSPECIFIED"
+        Get' -> "GET"
+        Post' -> "POST"
+
+instance FromJSON HTTPCheckRequestMethod where
+    parseJSON = parseJSONText "HTTPCheckRequestMethod"
+
+instance ToJSON HTTPCheckRequestMethod where
+    toJSON = toJSONText
+
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data ProjectsTimeSeriesListAggregationPerSeriesAligner
+    = PTSLAPSAAlignNone
+      -- ^ @ALIGN_NONE@
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
+    | PTSLAPSAAlignDelta
+      -- ^ @ALIGN_DELTA@
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | PTSLAPSAAlignRate
+      -- ^ @ALIGN_RATE@
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
+    | PTSLAPSAAlignInterpolate
+      -- ^ @ALIGN_INTERPOLATE@
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | PTSLAPSAAlignNextOlder
+      -- ^ @ALIGN_NEXT_OLDER@
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | PTSLAPSAAlignMin
+      -- ^ @ALIGN_MIN@
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | PTSLAPSAAlignMax
+      -- ^ @ALIGN_MAX@
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | PTSLAPSAAlignMean
+      -- ^ @ALIGN_MEAN@
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
+    | PTSLAPSAAlignCount
+      -- ^ @ALIGN_COUNT@
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
+    | PTSLAPSAAlignSum
+      -- ^ @ALIGN_SUM@
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
+    | PTSLAPSAAlignStddev
+      -- ^ @ALIGN_STDDEV@
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
+    | PTSLAPSAAlignCountTrue
+      -- ^ @ALIGN_COUNT_TRUE@
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | PTSLAPSAAlignCountFalse
+      -- ^ @ALIGN_COUNT_FALSE@
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | PTSLAPSAAlignFractionTrue
+      -- ^ @ALIGN_FRACTION_TRUE@
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | PTSLAPSAAlignPercentile99
+      -- ^ @ALIGN_PERCENTILE_99@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | PTSLAPSAAlignPercentile95
+      -- ^ @ALIGN_PERCENTILE_95@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | PTSLAPSAAlignPercentile50
+      -- ^ @ALIGN_PERCENTILE_50@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | PTSLAPSAAlignPercentile05
+      -- ^ @ALIGN_PERCENTILE_05@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | PTSLAPSAAlignPercentChange
+      -- ^ @ALIGN_PERCENT_CHANGE@
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTimeSeriesListAggregationPerSeriesAligner
+
+instance FromHttpApiData ProjectsTimeSeriesListAggregationPerSeriesAligner where
+    parseQueryParam = \case
+        "ALIGN_NONE" -> Right PTSLAPSAAlignNone
+        "ALIGN_DELTA" -> Right PTSLAPSAAlignDelta
+        "ALIGN_RATE" -> Right PTSLAPSAAlignRate
+        "ALIGN_INTERPOLATE" -> Right PTSLAPSAAlignInterpolate
+        "ALIGN_NEXT_OLDER" -> Right PTSLAPSAAlignNextOlder
+        "ALIGN_MIN" -> Right PTSLAPSAAlignMin
+        "ALIGN_MAX" -> Right PTSLAPSAAlignMax
+        "ALIGN_MEAN" -> Right PTSLAPSAAlignMean
+        "ALIGN_COUNT" -> Right PTSLAPSAAlignCount
+        "ALIGN_SUM" -> Right PTSLAPSAAlignSum
+        "ALIGN_STDDEV" -> Right PTSLAPSAAlignStddev
+        "ALIGN_COUNT_TRUE" -> Right PTSLAPSAAlignCountTrue
+        "ALIGN_COUNT_FALSE" -> Right PTSLAPSAAlignCountFalse
+        "ALIGN_FRACTION_TRUE" -> Right PTSLAPSAAlignFractionTrue
+        "ALIGN_PERCENTILE_99" -> Right PTSLAPSAAlignPercentile99
+        "ALIGN_PERCENTILE_95" -> Right PTSLAPSAAlignPercentile95
+        "ALIGN_PERCENTILE_50" -> Right PTSLAPSAAlignPercentile50
+        "ALIGN_PERCENTILE_05" -> Right PTSLAPSAAlignPercentile05
+        "ALIGN_PERCENT_CHANGE" -> Right PTSLAPSAAlignPercentChange
+        x -> Left ("Unable to parse ProjectsTimeSeriesListAggregationPerSeriesAligner from: " <> x)
+
+instance ToHttpApiData ProjectsTimeSeriesListAggregationPerSeriesAligner where
+    toQueryParam = \case
+        PTSLAPSAAlignNone -> "ALIGN_NONE"
+        PTSLAPSAAlignDelta -> "ALIGN_DELTA"
+        PTSLAPSAAlignRate -> "ALIGN_RATE"
+        PTSLAPSAAlignInterpolate -> "ALIGN_INTERPOLATE"
+        PTSLAPSAAlignNextOlder -> "ALIGN_NEXT_OLDER"
+        PTSLAPSAAlignMin -> "ALIGN_MIN"
+        PTSLAPSAAlignMax -> "ALIGN_MAX"
+        PTSLAPSAAlignMean -> "ALIGN_MEAN"
+        PTSLAPSAAlignCount -> "ALIGN_COUNT"
+        PTSLAPSAAlignSum -> "ALIGN_SUM"
+        PTSLAPSAAlignStddev -> "ALIGN_STDDEV"
+        PTSLAPSAAlignCountTrue -> "ALIGN_COUNT_TRUE"
+        PTSLAPSAAlignCountFalse -> "ALIGN_COUNT_FALSE"
+        PTSLAPSAAlignFractionTrue -> "ALIGN_FRACTION_TRUE"
+        PTSLAPSAAlignPercentile99 -> "ALIGN_PERCENTILE_99"
+        PTSLAPSAAlignPercentile95 -> "ALIGN_PERCENTILE_95"
+        PTSLAPSAAlignPercentile50 -> "ALIGN_PERCENTILE_50"
+        PTSLAPSAAlignPercentile05 -> "ALIGN_PERCENTILE_05"
+        PTSLAPSAAlignPercentChange -> "ALIGN_PERCENT_CHANGE"
+
+instance FromJSON ProjectsTimeSeriesListAggregationPerSeriesAligner where
+    parseJSON = parseJSONText "ProjectsTimeSeriesListAggregationPerSeriesAligner"
+
+instance ToJSON ProjectsTimeSeriesListAggregationPerSeriesAligner where
+    toJSON = toJSONText
+
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data AggregationCrossSeriesReducer
+    = ACSRReduceNone
+      -- ^ @REDUCE_NONE@
+      -- No cross-time series reduction. The output of the Aligner is returned.
+    | ACSRReduceMean
+      -- ^ @REDUCE_MEAN@
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
+    | ACSRReduceMin
+      -- ^ @REDUCE_MIN@
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | ACSRReduceMax
+      -- ^ @REDUCE_MAX@
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | ACSRReduceSum
+      -- ^ @REDUCE_SUM@
+      -- Reduce by computing the sum across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | ACSRReduceStddev
+      -- ^ @REDUCE_STDDEV@
+      -- Reduce by computing the standard deviation across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
+    | ACSRReduceCount
+      -- ^ @REDUCE_COUNT@
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
+    | ACSRReduceCountTrue
+      -- ^ @REDUCE_COUNT_TRUE@
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | ACSRReduceCountFalse
+      -- ^ @REDUCE_COUNT_FALSE@
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | ACSRReduceFractionTrue
+      -- ^ @REDUCE_FRACTION_TRUE@
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | ACSRReducePercentile99
+      -- ^ @REDUCE_PERCENTILE_99@
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | ACSRReducePercentile95
+      -- ^ @REDUCE_PERCENTILE_95@
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | ACSRReducePercentile50
+      -- ^ @REDUCE_PERCENTILE_50@
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | ACSRReducePercentile05
+      -- ^ @REDUCE_PERCENTILE_05@
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AggregationCrossSeriesReducer
+
+instance FromHttpApiData AggregationCrossSeriesReducer where
+    parseQueryParam = \case
+        "REDUCE_NONE" -> Right ACSRReduceNone
+        "REDUCE_MEAN" -> Right ACSRReduceMean
+        "REDUCE_MIN" -> Right ACSRReduceMin
+        "REDUCE_MAX" -> Right ACSRReduceMax
+        "REDUCE_SUM" -> Right ACSRReduceSum
+        "REDUCE_STDDEV" -> Right ACSRReduceStddev
+        "REDUCE_COUNT" -> Right ACSRReduceCount
+        "REDUCE_COUNT_TRUE" -> Right ACSRReduceCountTrue
+        "REDUCE_COUNT_FALSE" -> Right ACSRReduceCountFalse
+        "REDUCE_FRACTION_TRUE" -> Right ACSRReduceFractionTrue
+        "REDUCE_PERCENTILE_99" -> Right ACSRReducePercentile99
+        "REDUCE_PERCENTILE_95" -> Right ACSRReducePercentile95
+        "REDUCE_PERCENTILE_50" -> Right ACSRReducePercentile50
+        "REDUCE_PERCENTILE_05" -> Right ACSRReducePercentile05
+        x -> Left ("Unable to parse AggregationCrossSeriesReducer from: " <> x)
+
+instance ToHttpApiData AggregationCrossSeriesReducer where
+    toQueryParam = \case
+        ACSRReduceNone -> "REDUCE_NONE"
+        ACSRReduceMean -> "REDUCE_MEAN"
+        ACSRReduceMin -> "REDUCE_MIN"
+        ACSRReduceMax -> "REDUCE_MAX"
+        ACSRReduceSum -> "REDUCE_SUM"
+        ACSRReduceStddev -> "REDUCE_STDDEV"
+        ACSRReduceCount -> "REDUCE_COUNT"
+        ACSRReduceCountTrue -> "REDUCE_COUNT_TRUE"
+        ACSRReduceCountFalse -> "REDUCE_COUNT_FALSE"
+        ACSRReduceFractionTrue -> "REDUCE_FRACTION_TRUE"
+        ACSRReducePercentile99 -> "REDUCE_PERCENTILE_99"
+        ACSRReducePercentile95 -> "REDUCE_PERCENTILE_95"
+        ACSRReducePercentile50 -> "REDUCE_PERCENTILE_50"
+        ACSRReducePercentile05 -> "REDUCE_PERCENTILE_05"
+
 instance FromJSON AggregationCrossSeriesReducer where
     parseJSON = parseJSONText "AggregationCrossSeriesReducer"
 
 instance ToJSON AggregationCrossSeriesReducer where
     toJSON = toJSONText
 
--- | The launch stage of the metric definition.
+-- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
 data MetricDescriptorMetadataLaunchStage
-    = LaunchStageUnspecified
+    = MDMLSLaunchStageUnspecified
       -- ^ @LAUNCH_STAGE_UNSPECIFIED@
       -- Do not use this default value.
-    | EarlyAccess
+    | MDMLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MDMLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MDMLSEarlyAccess
       -- ^ @EARLY_ACCESS@
       -- Early Access features are limited to a closed group of testers. To use
       -- these features, you must sign up in advance and sign a Trusted Tester
       -- agreement (which includes confidentiality provisions). These features
       -- may be unstable, changed in backward-incompatible ways, and are not
       -- guaranteed to be released.
-    | Alpha
+    | MDMLSAlpha
       -- ^ @ALPHA@
       -- Alpha is a limited availability test for releases before they are
       -- cleared for widespread use. By Alpha, all significant design issues are
       -- resolved and we are in the process of verifying functionality. Alpha
       -- customers need to apply for access, agree to applicable terms, and have
-      -- their projects whitelisted. Alpha releases don’t have to be feature
+      -- their projects allowlisted. Alpha releases don’t have to be feature
       -- complete, no SLAs are provided, and there are no technical support
       -- obligations, but they will be far enough along that customers can
       -- actually use them in test environments or for limited-use tests -- just
       -- like they would in normal production cases.
-    | Beta
+    | MDMLSBeta
       -- ^ @BETA@
       -- Beta is the point at which we are ready to open a release for any
       -- customer to use. There are no SLA or technical support obligations in a
       -- Beta release. Products will be complete from a feature perspective, but
       -- may have some open outstanding issues. Beta releases are suitable for
       -- limited production use cases.
-    | GA
+    | MDMLSGA
       -- ^ @GA@
       -- GA features are open to all developers and are considered stable and
       -- fully qualified for production use.
-    | Deprecated
+    | MDMLSDeprecated
       -- ^ @DEPRECATED@
       -- Deprecated features are scheduled to be shut down and removed. For more
       -- information, see the “Deprecation Policy” section of our Terms of
@@ -715,27 +1478,228 @@ instance Hashable MetricDescriptorMetadataLaunchStage
 
 instance FromHttpApiData MetricDescriptorMetadataLaunchStage where
     parseQueryParam = \case
-        "LAUNCH_STAGE_UNSPECIFIED" -> Right LaunchStageUnspecified
-        "EARLY_ACCESS" -> Right EarlyAccess
-        "ALPHA" -> Right Alpha
-        "BETA" -> Right Beta
-        "GA" -> Right GA
-        "DEPRECATED" -> Right Deprecated
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MDMLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MDMLSUnimplemented
+        "PRELAUNCH" -> Right MDMLSPrelaunch
+        "EARLY_ACCESS" -> Right MDMLSEarlyAccess
+        "ALPHA" -> Right MDMLSAlpha
+        "BETA" -> Right MDMLSBeta
+        "GA" -> Right MDMLSGA
+        "DEPRECATED" -> Right MDMLSDeprecated
         x -> Left ("Unable to parse MetricDescriptorMetadataLaunchStage from: " <> x)
 
 instance ToHttpApiData MetricDescriptorMetadataLaunchStage where
     toQueryParam = \case
-        LaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
-        EarlyAccess -> "EARLY_ACCESS"
-        Alpha -> "ALPHA"
-        Beta -> "BETA"
-        GA -> "GA"
-        Deprecated -> "DEPRECATED"
+        MDMLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MDMLSUnimplemented -> "UNIMPLEMENTED"
+        MDMLSPrelaunch -> "PRELAUNCH"
+        MDMLSEarlyAccess -> "EARLY_ACCESS"
+        MDMLSAlpha -> "ALPHA"
+        MDMLSBeta -> "BETA"
+        MDMLSGA -> "GA"
+        MDMLSDeprecated -> "DEPRECATED"
 
 instance FromJSON MetricDescriptorMetadataLaunchStage where
     parseJSON = parseJSONText "MetricDescriptorMetadataLaunchStage"
 
 instance ToJSON MetricDescriptorMetadataLaunchStage where
+    toJSON = toJSONText
+
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+    = PTSLSACSRReduceNone
+      -- ^ @REDUCE_NONE@
+      -- No cross-time series reduction. The output of the Aligner is returned.
+    | PTSLSACSRReduceMean
+      -- ^ @REDUCE_MEAN@
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
+    | PTSLSACSRReduceMin
+      -- ^ @REDUCE_MIN@
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | PTSLSACSRReduceMax
+      -- ^ @REDUCE_MAX@
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | PTSLSACSRReduceSum
+      -- ^ @REDUCE_SUM@
+      -- Reduce by computing the sum across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | PTSLSACSRReduceStddev
+      -- ^ @REDUCE_STDDEV@
+      -- Reduce by computing the standard deviation across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
+    | PTSLSACSRReduceCount
+      -- ^ @REDUCE_COUNT@
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
+    | PTSLSACSRReduceCountTrue
+      -- ^ @REDUCE_COUNT_TRUE@
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | PTSLSACSRReduceCountFalse
+      -- ^ @REDUCE_COUNT_FALSE@
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | PTSLSACSRReduceFractionTrue
+      -- ^ @REDUCE_FRACTION_TRUE@
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | PTSLSACSRReducePercentile99
+      -- ^ @REDUCE_PERCENTILE_99@
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | PTSLSACSRReducePercentile95
+      -- ^ @REDUCE_PERCENTILE_95@
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | PTSLSACSRReducePercentile50
+      -- ^ @REDUCE_PERCENTILE_50@
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | PTSLSACSRReducePercentile05
+      -- ^ @REDUCE_PERCENTILE_05@
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+
+instance FromHttpApiData ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    parseQueryParam = \case
+        "REDUCE_NONE" -> Right PTSLSACSRReduceNone
+        "REDUCE_MEAN" -> Right PTSLSACSRReduceMean
+        "REDUCE_MIN" -> Right PTSLSACSRReduceMin
+        "REDUCE_MAX" -> Right PTSLSACSRReduceMax
+        "REDUCE_SUM" -> Right PTSLSACSRReduceSum
+        "REDUCE_STDDEV" -> Right PTSLSACSRReduceStddev
+        "REDUCE_COUNT" -> Right PTSLSACSRReduceCount
+        "REDUCE_COUNT_TRUE" -> Right PTSLSACSRReduceCountTrue
+        "REDUCE_COUNT_FALSE" -> Right PTSLSACSRReduceCountFalse
+        "REDUCE_FRACTION_TRUE" -> Right PTSLSACSRReduceFractionTrue
+        "REDUCE_PERCENTILE_99" -> Right PTSLSACSRReducePercentile99
+        "REDUCE_PERCENTILE_95" -> Right PTSLSACSRReducePercentile95
+        "REDUCE_PERCENTILE_50" -> Right PTSLSACSRReducePercentile50
+        "REDUCE_PERCENTILE_05" -> Right PTSLSACSRReducePercentile05
+        x -> Left ("Unable to parse ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer from: " <> x)
+
+instance ToHttpApiData ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    toQueryParam = \case
+        PTSLSACSRReduceNone -> "REDUCE_NONE"
+        PTSLSACSRReduceMean -> "REDUCE_MEAN"
+        PTSLSACSRReduceMin -> "REDUCE_MIN"
+        PTSLSACSRReduceMax -> "REDUCE_MAX"
+        PTSLSACSRReduceSum -> "REDUCE_SUM"
+        PTSLSACSRReduceStddev -> "REDUCE_STDDEV"
+        PTSLSACSRReduceCount -> "REDUCE_COUNT"
+        PTSLSACSRReduceCountTrue -> "REDUCE_COUNT_TRUE"
+        PTSLSACSRReduceCountFalse -> "REDUCE_COUNT_FALSE"
+        PTSLSACSRReduceFractionTrue -> "REDUCE_FRACTION_TRUE"
+        PTSLSACSRReducePercentile99 -> "REDUCE_PERCENTILE_99"
+        PTSLSACSRReducePercentile95 -> "REDUCE_PERCENTILE_95"
+        PTSLSACSRReducePercentile50 -> "REDUCE_PERCENTILE_50"
+        PTSLSACSRReducePercentile05 -> "REDUCE_PERCENTILE_05"
+
+instance FromJSON ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    parseJSON = parseJSONText "ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer"
+
+instance ToJSON ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    toJSON = toJSONText
+
+-- | The value type.
+data ValueDescriptorValueType
+    = VDVTValueTypeUnspecified
+      -- ^ @VALUE_TYPE_UNSPECIFIED@
+      -- Do not use this default value.
+    | VDVTBool
+      -- ^ @BOOL@
+      -- The value is a boolean. This value type can be used only if the metric
+      -- kind is GAUGE.
+    | VDVTINT64
+      -- ^ @INT64@
+      -- The value is a signed 64-bit integer.
+    | VDVTDouble
+      -- ^ @DOUBLE@
+      -- The value is a double precision floating point number.
+    | VDVTString
+      -- ^ @STRING@
+      -- The value is a text string. This value type can be used only if the
+      -- metric kind is GAUGE.
+    | VDVTDistribution
+      -- ^ @DISTRIBUTION@
+      -- The value is a Distribution.
+    | VDVTMoney
+      -- ^ @MONEY@
+      -- The value is money.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ValueDescriptorValueType
+
+instance FromHttpApiData ValueDescriptorValueType where
+    parseQueryParam = \case
+        "VALUE_TYPE_UNSPECIFIED" -> Right VDVTValueTypeUnspecified
+        "BOOL" -> Right VDVTBool
+        "INT64" -> Right VDVTINT64
+        "DOUBLE" -> Right VDVTDouble
+        "STRING" -> Right VDVTString
+        "DISTRIBUTION" -> Right VDVTDistribution
+        "MONEY" -> Right VDVTMoney
+        x -> Left ("Unable to parse ValueDescriptorValueType from: " <> x)
+
+instance ToHttpApiData ValueDescriptorValueType where
+    toQueryParam = \case
+        VDVTValueTypeUnspecified -> "VALUE_TYPE_UNSPECIFIED"
+        VDVTBool -> "BOOL"
+        VDVTINT64 -> "INT64"
+        VDVTDouble -> "DOUBLE"
+        VDVTString -> "STRING"
+        VDVTDistribution -> "DISTRIBUTION"
+        VDVTMoney -> "MONEY"
+
+instance FromJSON ValueDescriptorValueType where
+    parseJSON = parseJSONText "ValueDescriptorValueType"
+
+instance ToJSON ValueDescriptorValueType where
     toJSON = toJSONText
 
 -- | Indicates whether this channel has been verified or not. On a
@@ -791,11 +1755,212 @@ instance FromJSON NotificationChannelVerificationStatus where
 instance ToJSON NotificationChannelVerificationStatus where
     toJSON = toJSONText
 
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data OrganizationsTimeSeriesListAggregationPerSeriesAligner
+    = OTSLAPSAAlignNone
+      -- ^ @ALIGN_NONE@
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
+    | OTSLAPSAAlignDelta
+      -- ^ @ALIGN_DELTA@
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | OTSLAPSAAlignRate
+      -- ^ @ALIGN_RATE@
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
+    | OTSLAPSAAlignInterpolate
+      -- ^ @ALIGN_INTERPOLATE@
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | OTSLAPSAAlignNextOlder
+      -- ^ @ALIGN_NEXT_OLDER@
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | OTSLAPSAAlignMin
+      -- ^ @ALIGN_MIN@
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | OTSLAPSAAlignMax
+      -- ^ @ALIGN_MAX@
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | OTSLAPSAAlignMean
+      -- ^ @ALIGN_MEAN@
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
+    | OTSLAPSAAlignCount
+      -- ^ @ALIGN_COUNT@
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
+    | OTSLAPSAAlignSum
+      -- ^ @ALIGN_SUM@
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
+    | OTSLAPSAAlignStddev
+      -- ^ @ALIGN_STDDEV@
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
+    | OTSLAPSAAlignCountTrue
+      -- ^ @ALIGN_COUNT_TRUE@
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | OTSLAPSAAlignCountFalse
+      -- ^ @ALIGN_COUNT_FALSE@
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | OTSLAPSAAlignFractionTrue
+      -- ^ @ALIGN_FRACTION_TRUE@
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | OTSLAPSAAlignPercentile99
+      -- ^ @ALIGN_PERCENTILE_99@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLAPSAAlignPercentile95
+      -- ^ @ALIGN_PERCENTILE_95@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLAPSAAlignPercentile50
+      -- ^ @ALIGN_PERCENTILE_50@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLAPSAAlignPercentile05
+      -- ^ @ALIGN_PERCENTILE_05@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLAPSAAlignPercentChange
+      -- ^ @ALIGN_PERCENT_CHANGE@
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsTimeSeriesListAggregationPerSeriesAligner
+
+instance FromHttpApiData OrganizationsTimeSeriesListAggregationPerSeriesAligner where
+    parseQueryParam = \case
+        "ALIGN_NONE" -> Right OTSLAPSAAlignNone
+        "ALIGN_DELTA" -> Right OTSLAPSAAlignDelta
+        "ALIGN_RATE" -> Right OTSLAPSAAlignRate
+        "ALIGN_INTERPOLATE" -> Right OTSLAPSAAlignInterpolate
+        "ALIGN_NEXT_OLDER" -> Right OTSLAPSAAlignNextOlder
+        "ALIGN_MIN" -> Right OTSLAPSAAlignMin
+        "ALIGN_MAX" -> Right OTSLAPSAAlignMax
+        "ALIGN_MEAN" -> Right OTSLAPSAAlignMean
+        "ALIGN_COUNT" -> Right OTSLAPSAAlignCount
+        "ALIGN_SUM" -> Right OTSLAPSAAlignSum
+        "ALIGN_STDDEV" -> Right OTSLAPSAAlignStddev
+        "ALIGN_COUNT_TRUE" -> Right OTSLAPSAAlignCountTrue
+        "ALIGN_COUNT_FALSE" -> Right OTSLAPSAAlignCountFalse
+        "ALIGN_FRACTION_TRUE" -> Right OTSLAPSAAlignFractionTrue
+        "ALIGN_PERCENTILE_99" -> Right OTSLAPSAAlignPercentile99
+        "ALIGN_PERCENTILE_95" -> Right OTSLAPSAAlignPercentile95
+        "ALIGN_PERCENTILE_50" -> Right OTSLAPSAAlignPercentile50
+        "ALIGN_PERCENTILE_05" -> Right OTSLAPSAAlignPercentile05
+        "ALIGN_PERCENT_CHANGE" -> Right OTSLAPSAAlignPercentChange
+        x -> Left ("Unable to parse OrganizationsTimeSeriesListAggregationPerSeriesAligner from: " <> x)
+
+instance ToHttpApiData OrganizationsTimeSeriesListAggregationPerSeriesAligner where
+    toQueryParam = \case
+        OTSLAPSAAlignNone -> "ALIGN_NONE"
+        OTSLAPSAAlignDelta -> "ALIGN_DELTA"
+        OTSLAPSAAlignRate -> "ALIGN_RATE"
+        OTSLAPSAAlignInterpolate -> "ALIGN_INTERPOLATE"
+        OTSLAPSAAlignNextOlder -> "ALIGN_NEXT_OLDER"
+        OTSLAPSAAlignMin -> "ALIGN_MIN"
+        OTSLAPSAAlignMax -> "ALIGN_MAX"
+        OTSLAPSAAlignMean -> "ALIGN_MEAN"
+        OTSLAPSAAlignCount -> "ALIGN_COUNT"
+        OTSLAPSAAlignSum -> "ALIGN_SUM"
+        OTSLAPSAAlignStddev -> "ALIGN_STDDEV"
+        OTSLAPSAAlignCountTrue -> "ALIGN_COUNT_TRUE"
+        OTSLAPSAAlignCountFalse -> "ALIGN_COUNT_FALSE"
+        OTSLAPSAAlignFractionTrue -> "ALIGN_FRACTION_TRUE"
+        OTSLAPSAAlignPercentile99 -> "ALIGN_PERCENTILE_99"
+        OTSLAPSAAlignPercentile95 -> "ALIGN_PERCENTILE_95"
+        OTSLAPSAAlignPercentile50 -> "ALIGN_PERCENTILE_50"
+        OTSLAPSAAlignPercentile05 -> "ALIGN_PERCENTILE_05"
+        OTSLAPSAAlignPercentChange -> "ALIGN_PERCENT_CHANGE"
+
+instance FromJSON OrganizationsTimeSeriesListAggregationPerSeriesAligner where
+    parseJSON = parseJSONText "OrganizationsTimeSeriesListAggregationPerSeriesAligner"
+
+instance ToJSON OrganizationsTimeSeriesListAggregationPerSeriesAligner where
+    toJSON = toJSONText
+
 -- | The type of data that can be assigned to the label.
 data LabelDescriptorValueType
     = String
       -- ^ @STRING@
-      -- A variable-length string. This is the default.
+      -- A variable-length string, not to exceed 1,024 characters. This is the
+      -- default value type.
     | Bool
       -- ^ @BOOL@
       -- Boolean; true or false.
@@ -825,6 +1990,61 @@ instance FromJSON LabelDescriptorValueType where
 instance ToJSON LabelDescriptorValueType where
     toJSON = toJSONText
 
+-- | The type of content matcher that will be applied to the server output,
+-- compared to the content string when the check is run.
+data ContentMatcherMatcher
+    = ContentMatcherOptionUnspecified
+      -- ^ @CONTENT_MATCHER_OPTION_UNSPECIFIED@
+      -- No content matcher type specified (maintained for backward
+      -- compatibility, but deprecated for future use). Treated as
+      -- CONTAINS_STRING.
+    | ContainsString
+      -- ^ @CONTAINS_STRING@
+      -- Selects substring matching. The match succeeds if the output contains
+      -- the content string. This is the default value for checks without a
+      -- matcher option, or where the value of matcher is
+      -- CONTENT_MATCHER_OPTION_UNSPECIFIED.
+    | NotContainsString
+      -- ^ @NOT_CONTAINS_STRING@
+      -- Selects negation of substring matching. The match succeeds if the output
+      -- does NOT contain the content string.
+    | MatchesRegex
+      -- ^ @MATCHES_REGEX@
+      -- Selects regular-expression matching. The match succeeds of the output
+      -- matches the regular expression specified in the content string. Regex
+      -- matching is only supported for HTTP\/HTTPS checks.
+    | NotMatchesRegex
+      -- ^ @NOT_MATCHES_REGEX@
+      -- Selects negation of regular-expression matching. The match succeeds if
+      -- the output does NOT match the regular expression specified in the
+      -- content string. Regex matching is only supported for HTTP\/HTTPS checks.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ContentMatcherMatcher
+
+instance FromHttpApiData ContentMatcherMatcher where
+    parseQueryParam = \case
+        "CONTENT_MATCHER_OPTION_UNSPECIFIED" -> Right ContentMatcherOptionUnspecified
+        "CONTAINS_STRING" -> Right ContainsString
+        "NOT_CONTAINS_STRING" -> Right NotContainsString
+        "MATCHES_REGEX" -> Right MatchesRegex
+        "NOT_MATCHES_REGEX" -> Right NotMatchesRegex
+        x -> Left ("Unable to parse ContentMatcherMatcher from: " <> x)
+
+instance ToHttpApiData ContentMatcherMatcher where
+    toQueryParam = \case
+        ContentMatcherOptionUnspecified -> "CONTENT_MATCHER_OPTION_UNSPECIFIED"
+        ContainsString -> "CONTAINS_STRING"
+        NotContainsString -> "NOT_CONTAINS_STRING"
+        MatchesRegex -> "MATCHES_REGEX"
+        NotMatchesRegex -> "NOT_MATCHES_REGEX"
+
+instance FromJSON ContentMatcherMatcher where
+    parseJSON = parseJSONText "ContentMatcherMatcher"
+
+instance ToJSON ContentMatcherMatcher where
+    toJSON = toJSONText
+
 -- | The source syntax.
 data TypeSyntax
     = SyntaxPROTO2
@@ -852,6 +2072,720 @@ instance FromJSON TypeSyntax where
     parseJSON = parseJSONText "TypeSyntax"
 
 instance ToJSON TypeSyntax where
+    toJSON = toJSONText
+
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
+    = FTSLSAPSAAlignNone
+      -- ^ @ALIGN_NONE@
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
+    | FTSLSAPSAAlignDelta
+      -- ^ @ALIGN_DELTA@
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | FTSLSAPSAAlignRate
+      -- ^ @ALIGN_RATE@
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
+    | FTSLSAPSAAlignInterpolate
+      -- ^ @ALIGN_INTERPOLATE@
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | FTSLSAPSAAlignNextOlder
+      -- ^ @ALIGN_NEXT_OLDER@
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | FTSLSAPSAAlignMin
+      -- ^ @ALIGN_MIN@
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | FTSLSAPSAAlignMax
+      -- ^ @ALIGN_MAX@
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | FTSLSAPSAAlignMean
+      -- ^ @ALIGN_MEAN@
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
+    | FTSLSAPSAAlignCount
+      -- ^ @ALIGN_COUNT@
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
+    | FTSLSAPSAAlignSum
+      -- ^ @ALIGN_SUM@
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
+    | FTSLSAPSAAlignStddev
+      -- ^ @ALIGN_STDDEV@
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
+    | FTSLSAPSAAlignCountTrue
+      -- ^ @ALIGN_COUNT_TRUE@
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | FTSLSAPSAAlignCountFalse
+      -- ^ @ALIGN_COUNT_FALSE@
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | FTSLSAPSAAlignFractionTrue
+      -- ^ @ALIGN_FRACTION_TRUE@
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | FTSLSAPSAAlignPercentile99
+      -- ^ @ALIGN_PERCENTILE_99@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLSAPSAAlignPercentile95
+      -- ^ @ALIGN_PERCENTILE_95@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLSAPSAAlignPercentile50
+      -- ^ @ALIGN_PERCENTILE_50@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLSAPSAAlignPercentile05
+      -- ^ @ALIGN_PERCENTILE_05@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLSAPSAAlignPercentChange
+      -- ^ @ALIGN_PERCENT_CHANGE@
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
+
+instance FromHttpApiData FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    parseQueryParam = \case
+        "ALIGN_NONE" -> Right FTSLSAPSAAlignNone
+        "ALIGN_DELTA" -> Right FTSLSAPSAAlignDelta
+        "ALIGN_RATE" -> Right FTSLSAPSAAlignRate
+        "ALIGN_INTERPOLATE" -> Right FTSLSAPSAAlignInterpolate
+        "ALIGN_NEXT_OLDER" -> Right FTSLSAPSAAlignNextOlder
+        "ALIGN_MIN" -> Right FTSLSAPSAAlignMin
+        "ALIGN_MAX" -> Right FTSLSAPSAAlignMax
+        "ALIGN_MEAN" -> Right FTSLSAPSAAlignMean
+        "ALIGN_COUNT" -> Right FTSLSAPSAAlignCount
+        "ALIGN_SUM" -> Right FTSLSAPSAAlignSum
+        "ALIGN_STDDEV" -> Right FTSLSAPSAAlignStddev
+        "ALIGN_COUNT_TRUE" -> Right FTSLSAPSAAlignCountTrue
+        "ALIGN_COUNT_FALSE" -> Right FTSLSAPSAAlignCountFalse
+        "ALIGN_FRACTION_TRUE" -> Right FTSLSAPSAAlignFractionTrue
+        "ALIGN_PERCENTILE_99" -> Right FTSLSAPSAAlignPercentile99
+        "ALIGN_PERCENTILE_95" -> Right FTSLSAPSAAlignPercentile95
+        "ALIGN_PERCENTILE_50" -> Right FTSLSAPSAAlignPercentile50
+        "ALIGN_PERCENTILE_05" -> Right FTSLSAPSAAlignPercentile05
+        "ALIGN_PERCENT_CHANGE" -> Right FTSLSAPSAAlignPercentChange
+        x -> Left ("Unable to parse FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner from: " <> x)
+
+instance ToHttpApiData FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    toQueryParam = \case
+        FTSLSAPSAAlignNone -> "ALIGN_NONE"
+        FTSLSAPSAAlignDelta -> "ALIGN_DELTA"
+        FTSLSAPSAAlignRate -> "ALIGN_RATE"
+        FTSLSAPSAAlignInterpolate -> "ALIGN_INTERPOLATE"
+        FTSLSAPSAAlignNextOlder -> "ALIGN_NEXT_OLDER"
+        FTSLSAPSAAlignMin -> "ALIGN_MIN"
+        FTSLSAPSAAlignMax -> "ALIGN_MAX"
+        FTSLSAPSAAlignMean -> "ALIGN_MEAN"
+        FTSLSAPSAAlignCount -> "ALIGN_COUNT"
+        FTSLSAPSAAlignSum -> "ALIGN_SUM"
+        FTSLSAPSAAlignStddev -> "ALIGN_STDDEV"
+        FTSLSAPSAAlignCountTrue -> "ALIGN_COUNT_TRUE"
+        FTSLSAPSAAlignCountFalse -> "ALIGN_COUNT_FALSE"
+        FTSLSAPSAAlignFractionTrue -> "ALIGN_FRACTION_TRUE"
+        FTSLSAPSAAlignPercentile99 -> "ALIGN_PERCENTILE_99"
+        FTSLSAPSAAlignPercentile95 -> "ALIGN_PERCENTILE_95"
+        FTSLSAPSAAlignPercentile50 -> "ALIGN_PERCENTILE_50"
+        FTSLSAPSAAlignPercentile05 -> "ALIGN_PERCENTILE_05"
+        FTSLSAPSAAlignPercentChange -> "ALIGN_PERCENT_CHANGE"
+
+instance FromJSON FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    parseJSON = parseJSONText "FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner"
+
+instance ToJSON FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    toJSON = toJSONText
+
+-- | Required. Specifies which information is returned about the time series.
+data OrganizationsTimeSeriesListView
+    = Full
+      -- ^ @FULL@
+      -- Returns the identity of the metric(s), the time series, and the time
+      -- series data.
+    | Headers
+      -- ^ @HEADERS@
+      -- Returns the identity of the metric and the time series resource, but not
+      -- the time series data.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsTimeSeriesListView
+
+instance FromHttpApiData OrganizationsTimeSeriesListView where
+    parseQueryParam = \case
+        "FULL" -> Right Full
+        "HEADERS" -> Right Headers
+        x -> Left ("Unable to parse OrganizationsTimeSeriesListView from: " <> x)
+
+instance ToHttpApiData OrganizationsTimeSeriesListView where
+    toQueryParam = \case
+        Full -> "FULL"
+        Headers -> "HEADERS"
+
+instance FromJSON OrganizationsTimeSeriesListView where
+    parseJSON = parseJSONText "OrganizationsTimeSeriesListView"
+
+instance ToJSON OrganizationsTimeSeriesListView where
+    toJSON = toJSONText
+
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data ProjectsTimeSeriesListAggregationCrossSeriesReducer
+    = PTSLACSRReduceNone
+      -- ^ @REDUCE_NONE@
+      -- No cross-time series reduction. The output of the Aligner is returned.
+    | PTSLACSRReduceMean
+      -- ^ @REDUCE_MEAN@
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
+    | PTSLACSRReduceMin
+      -- ^ @REDUCE_MIN@
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | PTSLACSRReduceMax
+      -- ^ @REDUCE_MAX@
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | PTSLACSRReduceSum
+      -- ^ @REDUCE_SUM@
+      -- Reduce by computing the sum across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | PTSLACSRReduceStddev
+      -- ^ @REDUCE_STDDEV@
+      -- Reduce by computing the standard deviation across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
+    | PTSLACSRReduceCount
+      -- ^ @REDUCE_COUNT@
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
+    | PTSLACSRReduceCountTrue
+      -- ^ @REDUCE_COUNT_TRUE@
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | PTSLACSRReduceCountFalse
+      -- ^ @REDUCE_COUNT_FALSE@
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | PTSLACSRReduceFractionTrue
+      -- ^ @REDUCE_FRACTION_TRUE@
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | PTSLACSRReducePercentile99
+      -- ^ @REDUCE_PERCENTILE_99@
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | PTSLACSRReducePercentile95
+      -- ^ @REDUCE_PERCENTILE_95@
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | PTSLACSRReducePercentile50
+      -- ^ @REDUCE_PERCENTILE_50@
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | PTSLACSRReducePercentile05
+      -- ^ @REDUCE_PERCENTILE_05@
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTimeSeriesListAggregationCrossSeriesReducer
+
+instance FromHttpApiData ProjectsTimeSeriesListAggregationCrossSeriesReducer where
+    parseQueryParam = \case
+        "REDUCE_NONE" -> Right PTSLACSRReduceNone
+        "REDUCE_MEAN" -> Right PTSLACSRReduceMean
+        "REDUCE_MIN" -> Right PTSLACSRReduceMin
+        "REDUCE_MAX" -> Right PTSLACSRReduceMax
+        "REDUCE_SUM" -> Right PTSLACSRReduceSum
+        "REDUCE_STDDEV" -> Right PTSLACSRReduceStddev
+        "REDUCE_COUNT" -> Right PTSLACSRReduceCount
+        "REDUCE_COUNT_TRUE" -> Right PTSLACSRReduceCountTrue
+        "REDUCE_COUNT_FALSE" -> Right PTSLACSRReduceCountFalse
+        "REDUCE_FRACTION_TRUE" -> Right PTSLACSRReduceFractionTrue
+        "REDUCE_PERCENTILE_99" -> Right PTSLACSRReducePercentile99
+        "REDUCE_PERCENTILE_95" -> Right PTSLACSRReducePercentile95
+        "REDUCE_PERCENTILE_50" -> Right PTSLACSRReducePercentile50
+        "REDUCE_PERCENTILE_05" -> Right PTSLACSRReducePercentile05
+        x -> Left ("Unable to parse ProjectsTimeSeriesListAggregationCrossSeriesReducer from: " <> x)
+
+instance ToHttpApiData ProjectsTimeSeriesListAggregationCrossSeriesReducer where
+    toQueryParam = \case
+        PTSLACSRReduceNone -> "REDUCE_NONE"
+        PTSLACSRReduceMean -> "REDUCE_MEAN"
+        PTSLACSRReduceMin -> "REDUCE_MIN"
+        PTSLACSRReduceMax -> "REDUCE_MAX"
+        PTSLACSRReduceSum -> "REDUCE_SUM"
+        PTSLACSRReduceStddev -> "REDUCE_STDDEV"
+        PTSLACSRReduceCount -> "REDUCE_COUNT"
+        PTSLACSRReduceCountTrue -> "REDUCE_COUNT_TRUE"
+        PTSLACSRReduceCountFalse -> "REDUCE_COUNT_FALSE"
+        PTSLACSRReduceFractionTrue -> "REDUCE_FRACTION_TRUE"
+        PTSLACSRReducePercentile99 -> "REDUCE_PERCENTILE_99"
+        PTSLACSRReducePercentile95 -> "REDUCE_PERCENTILE_95"
+        PTSLACSRReducePercentile50 -> "REDUCE_PERCENTILE_50"
+        PTSLACSRReducePercentile05 -> "REDUCE_PERCENTILE_05"
+
+instance FromJSON ProjectsTimeSeriesListAggregationCrossSeriesReducer where
+    parseJSON = parseJSONText "ProjectsTimeSeriesListAggregationCrossSeriesReducer"
+
+instance ToJSON ProjectsTimeSeriesListAggregationCrossSeriesReducer where
+    toJSON = toJSONText
+
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
+    = OTSLSAPSAAlignNone
+      -- ^ @ALIGN_NONE@
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
+    | OTSLSAPSAAlignDelta
+      -- ^ @ALIGN_DELTA@
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | OTSLSAPSAAlignRate
+      -- ^ @ALIGN_RATE@
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
+    | OTSLSAPSAAlignInterpolate
+      -- ^ @ALIGN_INTERPOLATE@
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | OTSLSAPSAAlignNextOlder
+      -- ^ @ALIGN_NEXT_OLDER@
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | OTSLSAPSAAlignMin
+      -- ^ @ALIGN_MIN@
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | OTSLSAPSAAlignMax
+      -- ^ @ALIGN_MAX@
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | OTSLSAPSAAlignMean
+      -- ^ @ALIGN_MEAN@
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
+    | OTSLSAPSAAlignCount
+      -- ^ @ALIGN_COUNT@
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
+    | OTSLSAPSAAlignSum
+      -- ^ @ALIGN_SUM@
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
+    | OTSLSAPSAAlignStddev
+      -- ^ @ALIGN_STDDEV@
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
+    | OTSLSAPSAAlignCountTrue
+      -- ^ @ALIGN_COUNT_TRUE@
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | OTSLSAPSAAlignCountFalse
+      -- ^ @ALIGN_COUNT_FALSE@
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | OTSLSAPSAAlignFractionTrue
+      -- ^ @ALIGN_FRACTION_TRUE@
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | OTSLSAPSAAlignPercentile99
+      -- ^ @ALIGN_PERCENTILE_99@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLSAPSAAlignPercentile95
+      -- ^ @ALIGN_PERCENTILE_95@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLSAPSAAlignPercentile50
+      -- ^ @ALIGN_PERCENTILE_50@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLSAPSAAlignPercentile05
+      -- ^ @ALIGN_PERCENTILE_05@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | OTSLSAPSAAlignPercentChange
+      -- ^ @ALIGN_PERCENT_CHANGE@
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
+
+instance FromHttpApiData OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    parseQueryParam = \case
+        "ALIGN_NONE" -> Right OTSLSAPSAAlignNone
+        "ALIGN_DELTA" -> Right OTSLSAPSAAlignDelta
+        "ALIGN_RATE" -> Right OTSLSAPSAAlignRate
+        "ALIGN_INTERPOLATE" -> Right OTSLSAPSAAlignInterpolate
+        "ALIGN_NEXT_OLDER" -> Right OTSLSAPSAAlignNextOlder
+        "ALIGN_MIN" -> Right OTSLSAPSAAlignMin
+        "ALIGN_MAX" -> Right OTSLSAPSAAlignMax
+        "ALIGN_MEAN" -> Right OTSLSAPSAAlignMean
+        "ALIGN_COUNT" -> Right OTSLSAPSAAlignCount
+        "ALIGN_SUM" -> Right OTSLSAPSAAlignSum
+        "ALIGN_STDDEV" -> Right OTSLSAPSAAlignStddev
+        "ALIGN_COUNT_TRUE" -> Right OTSLSAPSAAlignCountTrue
+        "ALIGN_COUNT_FALSE" -> Right OTSLSAPSAAlignCountFalse
+        "ALIGN_FRACTION_TRUE" -> Right OTSLSAPSAAlignFractionTrue
+        "ALIGN_PERCENTILE_99" -> Right OTSLSAPSAAlignPercentile99
+        "ALIGN_PERCENTILE_95" -> Right OTSLSAPSAAlignPercentile95
+        "ALIGN_PERCENTILE_50" -> Right OTSLSAPSAAlignPercentile50
+        "ALIGN_PERCENTILE_05" -> Right OTSLSAPSAAlignPercentile05
+        "ALIGN_PERCENT_CHANGE" -> Right OTSLSAPSAAlignPercentChange
+        x -> Left ("Unable to parse OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner from: " <> x)
+
+instance ToHttpApiData OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    toQueryParam = \case
+        OTSLSAPSAAlignNone -> "ALIGN_NONE"
+        OTSLSAPSAAlignDelta -> "ALIGN_DELTA"
+        OTSLSAPSAAlignRate -> "ALIGN_RATE"
+        OTSLSAPSAAlignInterpolate -> "ALIGN_INTERPOLATE"
+        OTSLSAPSAAlignNextOlder -> "ALIGN_NEXT_OLDER"
+        OTSLSAPSAAlignMin -> "ALIGN_MIN"
+        OTSLSAPSAAlignMax -> "ALIGN_MAX"
+        OTSLSAPSAAlignMean -> "ALIGN_MEAN"
+        OTSLSAPSAAlignCount -> "ALIGN_COUNT"
+        OTSLSAPSAAlignSum -> "ALIGN_SUM"
+        OTSLSAPSAAlignStddev -> "ALIGN_STDDEV"
+        OTSLSAPSAAlignCountTrue -> "ALIGN_COUNT_TRUE"
+        OTSLSAPSAAlignCountFalse -> "ALIGN_COUNT_FALSE"
+        OTSLSAPSAAlignFractionTrue -> "ALIGN_FRACTION_TRUE"
+        OTSLSAPSAAlignPercentile99 -> "ALIGN_PERCENTILE_99"
+        OTSLSAPSAAlignPercentile95 -> "ALIGN_PERCENTILE_95"
+        OTSLSAPSAAlignPercentile50 -> "ALIGN_PERCENTILE_50"
+        OTSLSAPSAAlignPercentile05 -> "ALIGN_PERCENTILE_05"
+        OTSLSAPSAAlignPercentChange -> "ALIGN_PERCENT_CHANGE"
+
+instance FromJSON OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    parseJSON = parseJSONText "OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner"
+
+instance ToJSON OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner where
+    toJSON = toJSONText
+
+-- | Required. Specifies which information is returned about the time series.
+data FoldersTimeSeriesListView
+    = FTSLVFull
+      -- ^ @FULL@
+      -- Returns the identity of the metric(s), the time series, and the time
+      -- series data.
+    | FTSLVHeaders
+      -- ^ @HEADERS@
+      -- Returns the identity of the metric and the time series resource, but not
+      -- the time series data.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FoldersTimeSeriesListView
+
+instance FromHttpApiData FoldersTimeSeriesListView where
+    parseQueryParam = \case
+        "FULL" -> Right FTSLVFull
+        "HEADERS" -> Right FTSLVHeaders
+        x -> Left ("Unable to parse FoldersTimeSeriesListView from: " <> x)
+
+instance ToHttpApiData FoldersTimeSeriesListView where
+    toQueryParam = \case
+        FTSLVFull -> "FULL"
+        FTSLVHeaders -> "HEADERS"
+
+instance FromJSON FoldersTimeSeriesListView where
+    parseJSON = parseJSONText "FoldersTimeSeriesListView"
+
+instance ToJSON FoldersTimeSeriesListView where
+    toJSON = toJSONText
+
+-- | Required. Specifies which information is returned about the time series.
+data ProjectsTimeSeriesListView
+    = PTSLVFull
+      -- ^ @FULL@
+      -- Returns the identity of the metric(s), the time series, and the time
+      -- series data.
+    | PTSLVHeaders
+      -- ^ @HEADERS@
+      -- Returns the identity of the metric and the time series resource, but not
+      -- the time series data.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTimeSeriesListView
+
+instance FromHttpApiData ProjectsTimeSeriesListView where
+    parseQueryParam = \case
+        "FULL" -> Right PTSLVFull
+        "HEADERS" -> Right PTSLVHeaders
+        x -> Left ("Unable to parse ProjectsTimeSeriesListView from: " <> x)
+
+instance ToHttpApiData ProjectsTimeSeriesListView where
+    toQueryParam = \case
+        PTSLVFull -> "FULL"
+        PTSLVHeaders -> "HEADERS"
+
+instance FromJSON ProjectsTimeSeriesListView where
+    parseJSON = parseJSONText "ProjectsTimeSeriesListView"
+
+instance ToJSON ProjectsTimeSeriesListView where
+    toJSON = toJSONText
+
+-- | Current state of the batch operation.
+data OperationMetadataState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Invalid.
+    | Created
+      -- ^ @CREATED@
+      -- Request has been received.
+    | Running
+      -- ^ @RUNNING@
+      -- Request is actively being processed.
+    | Done
+      -- ^ @DONE@
+      -- The batch processing is done.
+    | Cancelled
+      -- ^ @CANCELLED@
+      -- The batch processing was cancelled.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OperationMetadataState
+
+instance FromHttpApiData OperationMetadataState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "CREATED" -> Right Created
+        "RUNNING" -> Right Running
+        "DONE" -> Right Done
+        "CANCELLED" -> Right Cancelled
+        x -> Left ("Unable to parse OperationMetadataState from: " <> x)
+
+instance ToHttpApiData OperationMetadataState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Created -> "CREATED"
+        Running -> "RUNNING"
+        Done -> "DONE"
+        Cancelled -> "CANCELLED"
+
+instance FromJSON OperationMetadataState where
+    parseJSON = parseJSONText "OperationMetadataState"
+
+instance ToJSON OperationMetadataState where
+    toJSON = toJSONText
+
+-- | The content type header to use for the check. The following
+-- configurations result in errors: 1. Content type is specified in both
+-- the headers field and the content_type field. 2. Request method is GET
+-- and content_type is not TYPE_UNSPECIFIED 3. Request method is POST and
+-- content_type is TYPE_UNSPECIFIED. 4. Request method is POST and a
+-- \"Content-Type\" header is provided via headers field. The content_type
+-- field should be used instead.
+data HTTPCheckContentType
+    = TypeUnspecified
+      -- ^ @TYPE_UNSPECIFIED@
+      -- No content type specified.
+    | URLEncoded
+      -- ^ @URL_ENCODED@
+      -- body is in URL-encoded form. Equivalent to setting the Content-Type to
+      -- application\/x-www-form-urlencoded in the HTTP request.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPCheckContentType
+
+instance FromHttpApiData HTTPCheckContentType where
+    parseQueryParam = \case
+        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
+        "URL_ENCODED" -> Right URLEncoded
+        x -> Left ("Unable to parse HTTPCheckContentType from: " <> x)
+
+instance ToHttpApiData HTTPCheckContentType where
+    toQueryParam = \case
+        TypeUnspecified -> "TYPE_UNSPECIFIED"
+        URLEncoded -> "URL_ENCODED"
+
+instance FromJSON HTTPCheckContentType where
+    parseJSON = parseJSONText "HTTPCheckContentType"
+
+instance ToJSON HTTPCheckContentType where
     toJSON = toJSONText
 
 -- | The resource type of the group members.
@@ -889,6 +2823,147 @@ instance FromJSON ResourceGroupResourceType where
 instance ToJSON ResourceGroupResourceType where
     toJSON = toJSONText
 
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data OrganizationsTimeSeriesListAggregationCrossSeriesReducer
+    = OTSLACSRReduceNone
+      -- ^ @REDUCE_NONE@
+      -- No cross-time series reduction. The output of the Aligner is returned.
+    | OTSLACSRReduceMean
+      -- ^ @REDUCE_MEAN@
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
+    | OTSLACSRReduceMin
+      -- ^ @REDUCE_MIN@
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | OTSLACSRReduceMax
+      -- ^ @REDUCE_MAX@
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | OTSLACSRReduceSum
+      -- ^ @REDUCE_SUM@
+      -- Reduce by computing the sum across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | OTSLACSRReduceStddev
+      -- ^ @REDUCE_STDDEV@
+      -- Reduce by computing the standard deviation across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
+    | OTSLACSRReduceCount
+      -- ^ @REDUCE_COUNT@
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
+    | OTSLACSRReduceCountTrue
+      -- ^ @REDUCE_COUNT_TRUE@
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | OTSLACSRReduceCountFalse
+      -- ^ @REDUCE_COUNT_FALSE@
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | OTSLACSRReduceFractionTrue
+      -- ^ @REDUCE_FRACTION_TRUE@
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | OTSLACSRReducePercentile99
+      -- ^ @REDUCE_PERCENTILE_99@
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | OTSLACSRReducePercentile95
+      -- ^ @REDUCE_PERCENTILE_95@
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | OTSLACSRReducePercentile50
+      -- ^ @REDUCE_PERCENTILE_50@
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | OTSLACSRReducePercentile05
+      -- ^ @REDUCE_PERCENTILE_05@
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsTimeSeriesListAggregationCrossSeriesReducer
+
+instance FromHttpApiData OrganizationsTimeSeriesListAggregationCrossSeriesReducer where
+    parseQueryParam = \case
+        "REDUCE_NONE" -> Right OTSLACSRReduceNone
+        "REDUCE_MEAN" -> Right OTSLACSRReduceMean
+        "REDUCE_MIN" -> Right OTSLACSRReduceMin
+        "REDUCE_MAX" -> Right OTSLACSRReduceMax
+        "REDUCE_SUM" -> Right OTSLACSRReduceSum
+        "REDUCE_STDDEV" -> Right OTSLACSRReduceStddev
+        "REDUCE_COUNT" -> Right OTSLACSRReduceCount
+        "REDUCE_COUNT_TRUE" -> Right OTSLACSRReduceCountTrue
+        "REDUCE_COUNT_FALSE" -> Right OTSLACSRReduceCountFalse
+        "REDUCE_FRACTION_TRUE" -> Right OTSLACSRReduceFractionTrue
+        "REDUCE_PERCENTILE_99" -> Right OTSLACSRReducePercentile99
+        "REDUCE_PERCENTILE_95" -> Right OTSLACSRReducePercentile95
+        "REDUCE_PERCENTILE_50" -> Right OTSLACSRReducePercentile50
+        "REDUCE_PERCENTILE_05" -> Right OTSLACSRReducePercentile05
+        x -> Left ("Unable to parse OrganizationsTimeSeriesListAggregationCrossSeriesReducer from: " <> x)
+
+instance ToHttpApiData OrganizationsTimeSeriesListAggregationCrossSeriesReducer where
+    toQueryParam = \case
+        OTSLACSRReduceNone -> "REDUCE_NONE"
+        OTSLACSRReduceMean -> "REDUCE_MEAN"
+        OTSLACSRReduceMin -> "REDUCE_MIN"
+        OTSLACSRReduceMax -> "REDUCE_MAX"
+        OTSLACSRReduceSum -> "REDUCE_SUM"
+        OTSLACSRReduceStddev -> "REDUCE_STDDEV"
+        OTSLACSRReduceCount -> "REDUCE_COUNT"
+        OTSLACSRReduceCountTrue -> "REDUCE_COUNT_TRUE"
+        OTSLACSRReduceCountFalse -> "REDUCE_COUNT_FALSE"
+        OTSLACSRReduceFractionTrue -> "REDUCE_FRACTION_TRUE"
+        OTSLACSRReducePercentile99 -> "REDUCE_PERCENTILE_99"
+        OTSLACSRReducePercentile95 -> "REDUCE_PERCENTILE_95"
+        OTSLACSRReducePercentile50 -> "REDUCE_PERCENTILE_50"
+        OTSLACSRReducePercentile05 -> "REDUCE_PERCENTILE_05"
+
+instance FromJSON OrganizationsTimeSeriesListAggregationCrossSeriesReducer where
+    parseJSON = parseJSONText "OrganizationsTimeSeriesListAggregationCrossSeriesReducer"
+
+instance ToJSON OrganizationsTimeSeriesListAggregationCrossSeriesReducer where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1
@@ -916,6 +2991,147 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data FoldersTimeSeriesListAggregationCrossSeriesReducer
+    = FTSLACSRReduceNone
+      -- ^ @REDUCE_NONE@
+      -- No cross-time series reduction. The output of the Aligner is returned.
+    | FTSLACSRReduceMean
+      -- ^ @REDUCE_MEAN@
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
+    | FTSLACSRReduceMin
+      -- ^ @REDUCE_MIN@
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | FTSLACSRReduceMax
+      -- ^ @REDUCE_MAX@
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | FTSLACSRReduceSum
+      -- ^ @REDUCE_SUM@
+      -- Reduce by computing the sum across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | FTSLACSRReduceStddev
+      -- ^ @REDUCE_STDDEV@
+      -- Reduce by computing the standard deviation across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
+    | FTSLACSRReduceCount
+      -- ^ @REDUCE_COUNT@
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
+    | FTSLACSRReduceCountTrue
+      -- ^ @REDUCE_COUNT_TRUE@
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | FTSLACSRReduceCountFalse
+      -- ^ @REDUCE_COUNT_FALSE@
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | FTSLACSRReduceFractionTrue
+      -- ^ @REDUCE_FRACTION_TRUE@
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | FTSLACSRReducePercentile99
+      -- ^ @REDUCE_PERCENTILE_99@
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | FTSLACSRReducePercentile95
+      -- ^ @REDUCE_PERCENTILE_95@
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | FTSLACSRReducePercentile50
+      -- ^ @REDUCE_PERCENTILE_50@
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | FTSLACSRReducePercentile05
+      -- ^ @REDUCE_PERCENTILE_05@
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FoldersTimeSeriesListAggregationCrossSeriesReducer
+
+instance FromHttpApiData FoldersTimeSeriesListAggregationCrossSeriesReducer where
+    parseQueryParam = \case
+        "REDUCE_NONE" -> Right FTSLACSRReduceNone
+        "REDUCE_MEAN" -> Right FTSLACSRReduceMean
+        "REDUCE_MIN" -> Right FTSLACSRReduceMin
+        "REDUCE_MAX" -> Right FTSLACSRReduceMax
+        "REDUCE_SUM" -> Right FTSLACSRReduceSum
+        "REDUCE_STDDEV" -> Right FTSLACSRReduceStddev
+        "REDUCE_COUNT" -> Right FTSLACSRReduceCount
+        "REDUCE_COUNT_TRUE" -> Right FTSLACSRReduceCountTrue
+        "REDUCE_COUNT_FALSE" -> Right FTSLACSRReduceCountFalse
+        "REDUCE_FRACTION_TRUE" -> Right FTSLACSRReduceFractionTrue
+        "REDUCE_PERCENTILE_99" -> Right FTSLACSRReducePercentile99
+        "REDUCE_PERCENTILE_95" -> Right FTSLACSRReducePercentile95
+        "REDUCE_PERCENTILE_50" -> Right FTSLACSRReducePercentile50
+        "REDUCE_PERCENTILE_05" -> Right FTSLACSRReducePercentile05
+        x -> Left ("Unable to parse FoldersTimeSeriesListAggregationCrossSeriesReducer from: " <> x)
+
+instance ToHttpApiData FoldersTimeSeriesListAggregationCrossSeriesReducer where
+    toQueryParam = \case
+        FTSLACSRReduceNone -> "REDUCE_NONE"
+        FTSLACSRReduceMean -> "REDUCE_MEAN"
+        FTSLACSRReduceMin -> "REDUCE_MIN"
+        FTSLACSRReduceMax -> "REDUCE_MAX"
+        FTSLACSRReduceSum -> "REDUCE_SUM"
+        FTSLACSRReduceStddev -> "REDUCE_STDDEV"
+        FTSLACSRReduceCount -> "REDUCE_COUNT"
+        FTSLACSRReduceCountTrue -> "REDUCE_COUNT_TRUE"
+        FTSLACSRReduceCountFalse -> "REDUCE_COUNT_FALSE"
+        FTSLACSRReduceFractionTrue -> "REDUCE_FRACTION_TRUE"
+        FTSLACSRReducePercentile99 -> "REDUCE_PERCENTILE_99"
+        FTSLACSRReducePercentile95 -> "REDUCE_PERCENTILE_95"
+        FTSLACSRReducePercentile50 -> "REDUCE_PERCENTILE_50"
+        FTSLACSRReducePercentile05 -> "REDUCE_PERCENTILE_05"
+
+instance FromJSON FoldersTimeSeriesListAggregationCrossSeriesReducer where
+    parseJSON = parseJSONText "FoldersTimeSeriesListAggregationCrossSeriesReducer"
+
+instance ToJSON FoldersTimeSeriesListAggregationCrossSeriesReducer where
     toJSON = toJSONText
 
 -- | The metric kind of the time series. When listing time series, this
@@ -1027,8 +3243,90 @@ instance FromJSON TimeSeriesValueType where
 instance ToJSON TimeSeriesValueType where
     toJSON = toJSONText
 
+-- | Optional. The launch stage of the monitored resource definition.
+data MonitoredResourceDescriptorLaunchStage
+    = MRDLSLaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | MRDLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MRDLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MRDLSEarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | MRDLSAlpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | MRDLSBeta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | MRDLSGA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | MRDLSDeprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our Terms of
+      -- Service (https:\/\/cloud.google.com\/terms\/) and the Google Cloud
+      -- Platform Subject to the Deprecation Policy
+      -- (https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MonitoredResourceDescriptorLaunchStage
+
+instance FromHttpApiData MonitoredResourceDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MRDLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MRDLSUnimplemented
+        "PRELAUNCH" -> Right MRDLSPrelaunch
+        "EARLY_ACCESS" -> Right MRDLSEarlyAccess
+        "ALPHA" -> Right MRDLSAlpha
+        "BETA" -> Right MRDLSBeta
+        "GA" -> Right MRDLSGA
+        "DEPRECATED" -> Right MRDLSDeprecated
+        x -> Left ("Unable to parse MonitoredResourceDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData MonitoredResourceDescriptorLaunchStage where
+    toQueryParam = \case
+        MRDLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MRDLSUnimplemented -> "UNIMPLEMENTED"
+        MRDLSPrelaunch -> "PRELAUNCH"
+        MRDLSEarlyAccess -> "EARLY_ACCESS"
+        MRDLSAlpha -> "ALPHA"
+        MRDLSBeta -> "BETA"
+        MRDLSGA -> "GA"
+        MRDLSDeprecated -> "DEPRECATED"
+
+instance FromJSON MonitoredResourceDescriptorLaunchStage where
+    parseJSON = parseJSONText "MonitoredResourceDescriptorLaunchStage"
+
+instance ToJSON MonitoredResourceDescriptorLaunchStage where
+    toJSON = toJSONText
+
 -- | How to combine the results of multiple conditions to determine if an
--- incident should be opened.
+-- incident should be opened. If condition_time_series_query_language is
+-- present, this must be COMBINE_UNSPECIFIED.
 data AlertPolicyCombiner
     = CombineUnspecified
       -- ^ @COMBINE_UNSPECIFIED@
@@ -1036,9 +3334,9 @@ data AlertPolicyCombiner
     | And
       -- ^ @AND@
       -- Combine conditions using the logical AND operator. An incident is
-      -- created only if all conditions are met simultaneously. This combiner is
-      -- satisfied if all conditions are met, even if they are met on completely
-      -- different resources.
+      -- created only if all the conditions are met simultaneously. This combiner
+      -- is satisfied if all conditions are met, even if they are met on
+      -- completely different resources.
     | OR
       -- ^ @OR@
       -- Combine conditions using the logical OR operator. An incident is created
@@ -1071,6 +3369,147 @@ instance FromJSON AlertPolicyCombiner where
     parseJSON = parseJSONText "AlertPolicyCombiner"
 
 instance ToJSON AlertPolicyCombiner where
+    toJSON = toJSONText
+
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
+data OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+    = OTSLSACSRReduceNone
+      -- ^ @REDUCE_NONE@
+      -- No cross-time series reduction. The output of the Aligner is returned.
+    | OTSLSACSRReduceMean
+      -- ^ @REDUCE_MEAN@
+      -- Reduce by computing the mean value across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- or distribution values. The value_type of the output is DOUBLE.
+    | OTSLSACSRReduceMin
+      -- ^ @REDUCE_MIN@
+      -- Reduce by computing the minimum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | OTSLSACSRReduceMax
+      -- ^ @REDUCE_MAX@
+      -- Reduce by computing the maximum value across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | OTSLSACSRReduceSum
+      -- ^ @REDUCE_SUM@
+      -- Reduce by computing the sum across time series for each alignment
+      -- period. This reducer is valid for DELTA and GAUGE metrics with numeric
+      -- and distribution values. The value_type of the output is the same as the
+      -- value_type of the input.
+    | OTSLSACSRReduceStddev
+      -- ^ @REDUCE_STDDEV@
+      -- Reduce by computing the standard deviation across time series for each
+      -- alignment period. This reducer is valid for DELTA and GAUGE metrics with
+      -- numeric or distribution values. The value_type of the output is DOUBLE.
+    | OTSLSACSRReduceCount
+      -- ^ @REDUCE_COUNT@
+      -- Reduce by computing the number of data points across time series for
+      -- each alignment period. This reducer is valid for DELTA and GAUGE metrics
+      -- of numeric, Boolean, distribution, and string value_type. The value_type
+      -- of the output is INT64.
+    | OTSLSACSRReduceCountTrue
+      -- ^ @REDUCE_COUNT_TRUE@
+      -- Reduce by computing the number of True-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | OTSLSACSRReduceCountFalse
+      -- ^ @REDUCE_COUNT_FALSE@
+      -- Reduce by computing the number of False-valued data points across time
+      -- series for each alignment period. This reducer is valid for DELTA and
+      -- GAUGE metrics of Boolean value_type. The value_type of the output is
+      -- INT64.
+    | OTSLSACSRReduceFractionTrue
+      -- ^ @REDUCE_FRACTION_TRUE@
+      -- Reduce by computing the ratio of the number of True-valued data points
+      -- to the total number of data points for each alignment period. This
+      -- reducer is valid for DELTA and GAUGE metrics of Boolean value_type. The
+      -- output value is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | OTSLSACSRReducePercentile99
+      -- ^ @REDUCE_PERCENTILE_99@
+      -- Reduce by computing the 99th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | OTSLSACSRReducePercentile95
+      -- ^ @REDUCE_PERCENTILE_95@
+      -- Reduce by computing the 95th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | OTSLSACSRReducePercentile50
+      -- ^ @REDUCE_PERCENTILE_50@
+      -- Reduce by computing the 50th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+    | OTSLSACSRReducePercentile05
+      -- ^ @REDUCE_PERCENTILE_05@
+      -- Reduce by computing the 5th percentile
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile) of data points across
+      -- time series for each alignment period. This reducer is valid for GAUGE
+      -- and DELTA metrics of numeric and distribution type. The value of the
+      -- output is DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
+
+instance FromHttpApiData OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    parseQueryParam = \case
+        "REDUCE_NONE" -> Right OTSLSACSRReduceNone
+        "REDUCE_MEAN" -> Right OTSLSACSRReduceMean
+        "REDUCE_MIN" -> Right OTSLSACSRReduceMin
+        "REDUCE_MAX" -> Right OTSLSACSRReduceMax
+        "REDUCE_SUM" -> Right OTSLSACSRReduceSum
+        "REDUCE_STDDEV" -> Right OTSLSACSRReduceStddev
+        "REDUCE_COUNT" -> Right OTSLSACSRReduceCount
+        "REDUCE_COUNT_TRUE" -> Right OTSLSACSRReduceCountTrue
+        "REDUCE_COUNT_FALSE" -> Right OTSLSACSRReduceCountFalse
+        "REDUCE_FRACTION_TRUE" -> Right OTSLSACSRReduceFractionTrue
+        "REDUCE_PERCENTILE_99" -> Right OTSLSACSRReducePercentile99
+        "REDUCE_PERCENTILE_95" -> Right OTSLSACSRReducePercentile95
+        "REDUCE_PERCENTILE_50" -> Right OTSLSACSRReducePercentile50
+        "REDUCE_PERCENTILE_05" -> Right OTSLSACSRReducePercentile05
+        x -> Left ("Unable to parse OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer from: " <> x)
+
+instance ToHttpApiData OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    toQueryParam = \case
+        OTSLSACSRReduceNone -> "REDUCE_NONE"
+        OTSLSACSRReduceMean -> "REDUCE_MEAN"
+        OTSLSACSRReduceMin -> "REDUCE_MIN"
+        OTSLSACSRReduceMax -> "REDUCE_MAX"
+        OTSLSACSRReduceSum -> "REDUCE_SUM"
+        OTSLSACSRReduceStddev -> "REDUCE_STDDEV"
+        OTSLSACSRReduceCount -> "REDUCE_COUNT"
+        OTSLSACSRReduceCountTrue -> "REDUCE_COUNT_TRUE"
+        OTSLSACSRReduceCountFalse -> "REDUCE_COUNT_FALSE"
+        OTSLSACSRReduceFractionTrue -> "REDUCE_FRACTION_TRUE"
+        OTSLSACSRReducePercentile99 -> "REDUCE_PERCENTILE_99"
+        OTSLSACSRReducePercentile95 -> "REDUCE_PERCENTILE_95"
+        OTSLSACSRReducePercentile50 -> "REDUCE_PERCENTILE_50"
+        OTSLSACSRReducePercentile05 -> "REDUCE_PERCENTILE_05"
+
+instance FromJSON OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
+    parseJSON = parseJSONText "OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer"
+
+instance ToJSON OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer where
     toJSON = toJSONText
 
 -- | The field cardinality.
@@ -1110,6 +3549,52 @@ instance FromJSON FieldCardinality where
     parseJSON = parseJSONText "FieldCardinality"
 
 instance ToJSON FieldCardinality where
+    toJSON = toJSONText
+
+data UptimeCheckConfigSelectedRegionsItem
+    = UCCSRIRegionUnspecified
+      -- ^ @REGION_UNSPECIFIED@
+      -- Default value if no region is specified. Will result in Uptime checks
+      -- running from all regions.
+    | UCCSRIUsa
+      -- ^ @USA@
+      -- Allows checks to run from locations within the United States of America.
+    | UCCSRIEurope
+      -- ^ @EUROPE@
+      -- Allows checks to run from locations within the continent of Europe.
+    | UCCSRISouthAmerica
+      -- ^ @SOUTH_AMERICA@
+      -- Allows checks to run from locations within the continent of South
+      -- America.
+    | UCCSRIAsiaPacific
+      -- ^ @ASIA_PACIFIC@
+      -- Allows checks to run from locations within the Asia Pacific area (ex:
+      -- Singapore).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable UptimeCheckConfigSelectedRegionsItem
+
+instance FromHttpApiData UptimeCheckConfigSelectedRegionsItem where
+    parseQueryParam = \case
+        "REGION_UNSPECIFIED" -> Right UCCSRIRegionUnspecified
+        "USA" -> Right UCCSRIUsa
+        "EUROPE" -> Right UCCSRIEurope
+        "SOUTH_AMERICA" -> Right UCCSRISouthAmerica
+        "ASIA_PACIFIC" -> Right UCCSRIAsiaPacific
+        x -> Left ("Unable to parse UptimeCheckConfigSelectedRegionsItem from: " <> x)
+
+instance ToHttpApiData UptimeCheckConfigSelectedRegionsItem where
+    toQueryParam = \case
+        UCCSRIRegionUnspecified -> "REGION_UNSPECIFIED"
+        UCCSRIUsa -> "USA"
+        UCCSRIEurope -> "EUROPE"
+        UCCSRISouthAmerica -> "SOUTH_AMERICA"
+        UCCSRIAsiaPacific -> "ASIA_PACIFIC"
+
+instance FromJSON UptimeCheckConfigSelectedRegionsItem where
+    parseJSON = parseJSONText "UptimeCheckConfigSelectedRegionsItem"
+
+instance ToJSON UptimeCheckConfigSelectedRegionsItem where
     toJSON = toJSONText
 
 -- | Whether the metric records instantaneous values, changes to a value,
@@ -1156,40 +3641,428 @@ instance FromJSON MetricDescriptorMetricKind where
 instance ToJSON MetricDescriptorMetricKind where
     toJSON = toJSONText
 
+-- | A calendar period, semantically \"since the start of the current \". At
+-- this time, only DAY, WEEK, FORTNIGHT, and MONTH are supported.
+data ServiceLevelObjectiveCalendarPeriod
+    = CalendarPeriodUnspecified
+      -- ^ @CALENDAR_PERIOD_UNSPECIFIED@
+      -- Undefined period, raises an error.
+    | Day
+      -- ^ @DAY@
+      -- A day.
+    | Week
+      -- ^ @WEEK@
+      -- A week. Weeks begin on Monday, following ISO 8601
+      -- (https:\/\/en.wikipedia.org\/wiki\/ISO_week_date).
+    | Fortnight
+      -- ^ @FORTNIGHT@
+      -- A fortnight. The first calendar fortnight of the year begins at the
+      -- start of week 1 according to ISO 8601
+      -- (https:\/\/en.wikipedia.org\/wiki\/ISO_week_date).
+    | Month
+      -- ^ @MONTH@
+      -- A month.
+    | Quarter
+      -- ^ @QUARTER@
+      -- A quarter. Quarters start on dates 1-Jan, 1-Apr, 1-Jul, and 1-Oct of
+      -- each year.
+    | Half
+      -- ^ @HALF@
+      -- A half-year. Half-years start on dates 1-Jan and 1-Jul.
+    | Year
+      -- ^ @YEAR@
+      -- A year.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServiceLevelObjectiveCalendarPeriod
+
+instance FromHttpApiData ServiceLevelObjectiveCalendarPeriod where
+    parseQueryParam = \case
+        "CALENDAR_PERIOD_UNSPECIFIED" -> Right CalendarPeriodUnspecified
+        "DAY" -> Right Day
+        "WEEK" -> Right Week
+        "FORTNIGHT" -> Right Fortnight
+        "MONTH" -> Right Month
+        "QUARTER" -> Right Quarter
+        "HALF" -> Right Half
+        "YEAR" -> Right Year
+        x -> Left ("Unable to parse ServiceLevelObjectiveCalendarPeriod from: " <> x)
+
+instance ToHttpApiData ServiceLevelObjectiveCalendarPeriod where
+    toQueryParam = \case
+        CalendarPeriodUnspecified -> "CALENDAR_PERIOD_UNSPECIFIED"
+        Day -> "DAY"
+        Week -> "WEEK"
+        Fortnight -> "FORTNIGHT"
+        Month -> "MONTH"
+        Quarter -> "QUARTER"
+        Half -> "HALF"
+        Year -> "YEAR"
+
+instance FromJSON ServiceLevelObjectiveCalendarPeriod where
+    parseJSON = parseJSONText "ServiceLevelObjectiveCalendarPeriod"
+
+instance ToJSON ServiceLevelObjectiveCalendarPeriod where
+    toJSON = toJSONText
+
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
+data FoldersTimeSeriesListAggregationPerSeriesAligner
+    = FTSLAPSAAlignNone
+      -- ^ @ALIGN_NONE@
+      -- No alignment. Raw data is returned. Not valid if cross-series reduction
+      -- is requested. The value_type of the result is the same as the value_type
+      -- of the input.
+    | FTSLAPSAAlignDelta
+      -- ^ @ALIGN_DELTA@
+      -- Align and convert to DELTA. The output is delta = y1 - y0.This alignment
+      -- is valid for CUMULATIVE and DELTA metrics. If the selected alignment
+      -- period results in periods with no data, then the aligned value for such
+      -- a period is created by interpolation. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | FTSLAPSAAlignRate
+      -- ^ @ALIGN_RATE@
+      -- Align and convert to a rate. The result is computed as rate = (y1 -
+      -- y0)\/(t1 - t0), or \"delta over time\". Think of this aligner as
+      -- providing the slope of the line that passes through the value at the
+      -- start and at the end of the alignment_period.This aligner is valid for
+      -- CUMULATIVE and DELTA metrics with numeric values. If the selected
+      -- alignment period results in periods with no data, then the aligned value
+      -- for such a period is created by interpolation. The output is a GAUGE
+      -- metric with value_type DOUBLE.If, by \"rate\", you mean \"percentage
+      -- change\", see the ALIGN_PERCENT_CHANGE aligner instead.
+    | FTSLAPSAAlignInterpolate
+      -- ^ @ALIGN_INTERPOLATE@
+      -- Align by interpolating between adjacent points around the alignment
+      -- period boundary. This aligner is valid for GAUGE metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | FTSLAPSAAlignNextOlder
+      -- ^ @ALIGN_NEXT_OLDER@
+      -- Align by moving the most recent data point before the end of the
+      -- alignment period to the boundary at the end of the alignment period.
+      -- This aligner is valid for GAUGE metrics. The value_type of the aligned
+      -- result is the same as the value_type of the input.
+    | FTSLAPSAAlignMin
+      -- ^ @ALIGN_MIN@
+      -- Align the time series by returning the minimum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | FTSLAPSAAlignMax
+      -- ^ @ALIGN_MAX@
+      -- Align the time series by returning the maximum value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is the same as the
+      -- value_type of the input.
+    | FTSLAPSAAlignMean
+      -- ^ @ALIGN_MEAN@
+      -- Align the time series by returning the mean value in each alignment
+      -- period. This aligner is valid for GAUGE and DELTA metrics with numeric
+      -- values. The value_type of the aligned result is DOUBLE.
+    | FTSLAPSAAlignCount
+      -- ^ @ALIGN_COUNT@
+      -- Align the time series by returning the number of values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric or Boolean values. The value_type of the aligned result is
+      -- INT64.
+    | FTSLAPSAAlignSum
+      -- ^ @ALIGN_SUM@
+      -- Align the time series by returning the sum of the values in each
+      -- alignment period. This aligner is valid for GAUGE and DELTA metrics with
+      -- numeric and distribution values. The value_type of the aligned result is
+      -- the same as the value_type of the input.
+    | FTSLAPSAAlignStddev
+      -- ^ @ALIGN_STDDEV@
+      -- Align the time series by returning the standard deviation of the values
+      -- in each alignment period. This aligner is valid for GAUGE and DELTA
+      -- metrics with numeric values. The value_type of the output is DOUBLE.
+    | FTSLAPSAAlignCountTrue
+      -- ^ @ALIGN_COUNT_TRUE@
+      -- Align the time series by returning the number of True values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | FTSLAPSAAlignCountFalse
+      -- ^ @ALIGN_COUNT_FALSE@
+      -- Align the time series by returning the number of False values in each
+      -- alignment period. This aligner is valid for GAUGE metrics with Boolean
+      -- values. The value_type of the output is INT64.
+    | FTSLAPSAAlignFractionTrue
+      -- ^ @ALIGN_FRACTION_TRUE@
+      -- Align the time series by returning the ratio of the number of True
+      -- values to the total number of values in each alignment period. This
+      -- aligner is valid for GAUGE metrics with Boolean values. The output value
+      -- is in the range 0.0, 1.0 and has value_type DOUBLE.
+    | FTSLAPSAAlignPercentile99
+      -- ^ @ALIGN_PERCENTILE_99@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 99th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLAPSAAlignPercentile95
+      -- ^ @ALIGN_PERCENTILE_95@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 95th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLAPSAAlignPercentile50
+      -- ^ @ALIGN_PERCENTILE_50@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 50th percentile of all data points in
+      -- the period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLAPSAAlignPercentile05
+      -- ^ @ALIGN_PERCENTILE_05@
+      -- Align the time series by using percentile aggregation
+      -- (https:\/\/en.wikipedia.org\/wiki\/Percentile). The resulting data point
+      -- in each alignment period is the 5th percentile of all data points in the
+      -- period. This aligner is valid for GAUGE and DELTA metrics with
+      -- distribution values. The output is a GAUGE metric with value_type
+      -- DOUBLE.
+    | FTSLAPSAAlignPercentChange
+      -- ^ @ALIGN_PERCENT_CHANGE@
+      -- Align and convert to a percentage change. This aligner is valid for
+      -- GAUGE and DELTA metrics with numeric values. This alignment returns
+      -- ((current - previous)\/previous) * 100, where the value of previous is
+      -- determined based on the alignment_period.If the values of current and
+      -- previous are both 0, then the returned value is 0. If only previous is
+      -- 0, the returned value is infinity.A 10-minute moving mean is computed at
+      -- each point of the alignment period prior to the above calculation to
+      -- smooth the metric and prevent false positives from very short-lived
+      -- spikes. The moving mean is only applicable for data whose values are >=
+      -- 0. Any values \< 0 are treated as a missing datapoint, and are ignored.
+      -- While DELTA metrics are accepted by this alignment, special care should
+      -- be taken that the values for the metric will always be positive. The
+      -- output is a GAUGE metric with value_type DOUBLE.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FoldersTimeSeriesListAggregationPerSeriesAligner
+
+instance FromHttpApiData FoldersTimeSeriesListAggregationPerSeriesAligner where
+    parseQueryParam = \case
+        "ALIGN_NONE" -> Right FTSLAPSAAlignNone
+        "ALIGN_DELTA" -> Right FTSLAPSAAlignDelta
+        "ALIGN_RATE" -> Right FTSLAPSAAlignRate
+        "ALIGN_INTERPOLATE" -> Right FTSLAPSAAlignInterpolate
+        "ALIGN_NEXT_OLDER" -> Right FTSLAPSAAlignNextOlder
+        "ALIGN_MIN" -> Right FTSLAPSAAlignMin
+        "ALIGN_MAX" -> Right FTSLAPSAAlignMax
+        "ALIGN_MEAN" -> Right FTSLAPSAAlignMean
+        "ALIGN_COUNT" -> Right FTSLAPSAAlignCount
+        "ALIGN_SUM" -> Right FTSLAPSAAlignSum
+        "ALIGN_STDDEV" -> Right FTSLAPSAAlignStddev
+        "ALIGN_COUNT_TRUE" -> Right FTSLAPSAAlignCountTrue
+        "ALIGN_COUNT_FALSE" -> Right FTSLAPSAAlignCountFalse
+        "ALIGN_FRACTION_TRUE" -> Right FTSLAPSAAlignFractionTrue
+        "ALIGN_PERCENTILE_99" -> Right FTSLAPSAAlignPercentile99
+        "ALIGN_PERCENTILE_95" -> Right FTSLAPSAAlignPercentile95
+        "ALIGN_PERCENTILE_50" -> Right FTSLAPSAAlignPercentile50
+        "ALIGN_PERCENTILE_05" -> Right FTSLAPSAAlignPercentile05
+        "ALIGN_PERCENT_CHANGE" -> Right FTSLAPSAAlignPercentChange
+        x -> Left ("Unable to parse FoldersTimeSeriesListAggregationPerSeriesAligner from: " <> x)
+
+instance ToHttpApiData FoldersTimeSeriesListAggregationPerSeriesAligner where
+    toQueryParam = \case
+        FTSLAPSAAlignNone -> "ALIGN_NONE"
+        FTSLAPSAAlignDelta -> "ALIGN_DELTA"
+        FTSLAPSAAlignRate -> "ALIGN_RATE"
+        FTSLAPSAAlignInterpolate -> "ALIGN_INTERPOLATE"
+        FTSLAPSAAlignNextOlder -> "ALIGN_NEXT_OLDER"
+        FTSLAPSAAlignMin -> "ALIGN_MIN"
+        FTSLAPSAAlignMax -> "ALIGN_MAX"
+        FTSLAPSAAlignMean -> "ALIGN_MEAN"
+        FTSLAPSAAlignCount -> "ALIGN_COUNT"
+        FTSLAPSAAlignSum -> "ALIGN_SUM"
+        FTSLAPSAAlignStddev -> "ALIGN_STDDEV"
+        FTSLAPSAAlignCountTrue -> "ALIGN_COUNT_TRUE"
+        FTSLAPSAAlignCountFalse -> "ALIGN_COUNT_FALSE"
+        FTSLAPSAAlignFractionTrue -> "ALIGN_FRACTION_TRUE"
+        FTSLAPSAAlignPercentile99 -> "ALIGN_PERCENTILE_99"
+        FTSLAPSAAlignPercentile95 -> "ALIGN_PERCENTILE_95"
+        FTSLAPSAAlignPercentile50 -> "ALIGN_PERCENTILE_50"
+        FTSLAPSAAlignPercentile05 -> "ALIGN_PERCENTILE_05"
+        FTSLAPSAAlignPercentChange -> "ALIGN_PERCENT_CHANGE"
+
+instance FromJSON FoldersTimeSeriesListAggregationPerSeriesAligner where
+    parseJSON = parseJSONText "FoldersTimeSeriesListAggregationPerSeriesAligner"
+
+instance ToJSON FoldersTimeSeriesListAggregationPerSeriesAligner where
+    toJSON = toJSONText
+
+-- | View of the ServiceLevelObjectives to return. If DEFAULT, return each
+-- ServiceLevelObjective as originally defined. If EXPLICIT and the
+-- ServiceLevelObjective is defined in terms of a BasicSli, replace the
+-- BasicSli with a RequestBasedSli spelling out how the SLI is computed.
+data ServicesServiceLevelObjectivesListView
+    = SSLOLVViewUnspecified
+      -- ^ @VIEW_UNSPECIFIED@
+      -- Same as FULL.
+    | SSLOLVFull
+      -- ^ @FULL@
+      -- Return the embedded ServiceLevelIndicator in the form in which it was
+      -- defined. If it was defined using a BasicSli, return that BasicSli.
+    | SSLOLVExplicit
+      -- ^ @EXPLICIT@
+      -- For ServiceLevelIndicators using BasicSli articulation, instead return
+      -- the ServiceLevelIndicator with its mode of computation fully spelled out
+      -- as a RequestBasedSli. For ServiceLevelIndicators using RequestBasedSli
+      -- or WindowsBasedSli, return the ServiceLevelIndicator as it was provided.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServicesServiceLevelObjectivesListView
+
+instance FromHttpApiData ServicesServiceLevelObjectivesListView where
+    parseQueryParam = \case
+        "VIEW_UNSPECIFIED" -> Right SSLOLVViewUnspecified
+        "FULL" -> Right SSLOLVFull
+        "EXPLICIT" -> Right SSLOLVExplicit
+        x -> Left ("Unable to parse ServicesServiceLevelObjectivesListView from: " <> x)
+
+instance ToHttpApiData ServicesServiceLevelObjectivesListView where
+    toQueryParam = \case
+        SSLOLVViewUnspecified -> "VIEW_UNSPECIFIED"
+        SSLOLVFull -> "FULL"
+        SSLOLVExplicit -> "EXPLICIT"
+
+instance FromJSON ServicesServiceLevelObjectivesListView where
+    parseJSON = parseJSONText "ServicesServiceLevelObjectivesListView"
+
+instance ToJSON ServicesServiceLevelObjectivesListView where
+    toJSON = toJSONText
+
+-- | Optional. The launch stage of the metric definition.
+data MetricDescriptorLaunchStage
+    = MDLSLaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | MDLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MDLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MDLSEarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | MDLSAlpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | MDLSBeta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | MDLSGA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | MDLSDeprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our Terms of
+      -- Service (https:\/\/cloud.google.com\/terms\/) and the Google Cloud
+      -- Platform Subject to the Deprecation Policy
+      -- (https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MetricDescriptorLaunchStage
+
+instance FromHttpApiData MetricDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MDLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MDLSUnimplemented
+        "PRELAUNCH" -> Right MDLSPrelaunch
+        "EARLY_ACCESS" -> Right MDLSEarlyAccess
+        "ALPHA" -> Right MDLSAlpha
+        "BETA" -> Right MDLSBeta
+        "GA" -> Right MDLSGA
+        "DEPRECATED" -> Right MDLSDeprecated
+        x -> Left ("Unable to parse MetricDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData MetricDescriptorLaunchStage where
+    toQueryParam = \case
+        MDLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MDLSUnimplemented -> "UNIMPLEMENTED"
+        MDLSPrelaunch -> "PRELAUNCH"
+        MDLSEarlyAccess -> "EARLY_ACCESS"
+        MDLSAlpha -> "ALPHA"
+        MDLSBeta -> "BETA"
+        MDLSGA -> "GA"
+        MDLSDeprecated -> "DEPRECATED"
+
+instance FromJSON MetricDescriptorLaunchStage where
+    parseJSON = parseJSONText "MetricDescriptorLaunchStage"
+
+instance ToJSON MetricDescriptorLaunchStage where
+    toJSON = toJSONText
+
 -- | The current operational state of the internal checker.
 data InternalCheckerState
-    = Unspecified
+    = ICSUnspecified
       -- ^ @UNSPECIFIED@
       -- An internal checker should never be in the unspecified state.
-    | Creating
+    | ICSCreating
       -- ^ @CREATING@
       -- The checker is being created, provisioned, and configured. A checker in
       -- this state can be returned by ListInternalCheckers or
-      -- GetInternalChecker, as well as by examining the longrunning.Operation
+      -- GetInternalChecker, as well as by examining the long running Operation
+      -- (https:\/\/cloud.google.com\/apis\/design\/design_patterns#long_running_operations)
       -- that created it.
-    | Running
+    | ICSRunning
       -- ^ @RUNNING@
       -- The checker is running and available for use. A checker in this state
       -- can be returned by ListInternalCheckers or GetInternalChecker as well as
-      -- by examining the longrunning.Operation that created it. If a checker is
-      -- being torn down, it is neither visible nor usable, so there is no
-      -- \"deleting\" or \"down\" state.
+      -- by examining the long running Operation
+      -- (https:\/\/cloud.google.com\/apis\/design\/design_patterns#long_running_operations)
+      -- that created it. If a checker is being torn down, it is neither visible
+      -- nor usable, so there is no \"deleting\" or \"down\" state.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InternalCheckerState
 
 instance FromHttpApiData InternalCheckerState where
     parseQueryParam = \case
-        "UNSPECIFIED" -> Right Unspecified
-        "CREATING" -> Right Creating
-        "RUNNING" -> Right Running
+        "UNSPECIFIED" -> Right ICSUnspecified
+        "CREATING" -> Right ICSCreating
+        "RUNNING" -> Right ICSRunning
         x -> Left ("Unable to parse InternalCheckerState from: " <> x)
 
 instance ToHttpApiData InternalCheckerState where
     toQueryParam = \case
-        Unspecified -> "UNSPECIFIED"
-        Creating -> "CREATING"
-        Running -> "RUNNING"
+        ICSUnspecified -> "UNSPECIFIED"
+        ICSCreating -> "CREATING"
+        ICSRunning -> "RUNNING"
 
 instance FromJSON InternalCheckerState where
     parseJSON = parseJSONText "InternalCheckerState"

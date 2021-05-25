@@ -55,8 +55,8 @@ module Network.Google.Resource.Docs.Documents.BatchUpdate
     , dbuCallback
     ) where
 
-import           Network.Google.Docs.Types
-import           Network.Google.Prelude
+import Network.Google.Docs.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @docs.documents.batchUpdate@ method which the
 -- 'DocumentsBatchUpdate' request conforms to.
@@ -91,13 +91,13 @@ type DocumentsBatchUpdateResource =
 -- /See:/ 'documentsBatchUpdate' smart constructor.
 data DocumentsBatchUpdate =
   DocumentsBatchUpdate'
-    { _dbuXgafv          :: !(Maybe Xgafv)
-    , _dbuDocumentId     :: !Text
+    { _dbuXgafv :: !(Maybe Xgafv)
+    , _dbuDocumentId :: !Text
     , _dbuUploadProtocol :: !(Maybe Text)
-    , _dbuAccessToken    :: !(Maybe Text)
-    , _dbuUploadType     :: !(Maybe Text)
-    , _dbuPayload        :: !BatchUpdateDocumentRequest
-    , _dbuCallback       :: !(Maybe Text)
+    , _dbuAccessToken :: !(Maybe Text)
+    , _dbuUploadType :: !(Maybe Text)
+    , _dbuPayload :: !BatchUpdateDocumentRequest
+    , _dbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

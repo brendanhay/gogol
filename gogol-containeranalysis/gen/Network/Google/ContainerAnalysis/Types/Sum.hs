@@ -16,7 +16,7 @@
 --
 module Network.Google.ContainerAnalysis.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Required. The recovered Dockerfile directive used to construct this
 -- layer.
@@ -262,7 +262,7 @@ instance ToJSON GrafeasV1beta1VulnerabilityDetailsSeverity where
 data OccurrenceKind
     = OKNoteKindUnspecified
       -- ^ @NOTE_KIND_UNSPECIFIED@
-      -- Unknown.
+      -- Default value. This value is unused.
     | OKVulnerability
       -- ^ @VULNERABILITY@
       -- The note and occurrence represent a package vulnerability.
@@ -285,6 +285,9 @@ data OccurrenceKind
     | OKAttestation
       -- ^ @ATTESTATION@
       -- This represents a logical \"role\" that can attest to artifacts.
+    | OKIntoto
+      -- ^ @INTOTO@
+      -- This represents an in-toto link.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OccurrenceKind
@@ -299,6 +302,7 @@ instance FromHttpApiData OccurrenceKind where
         "DEPLOYMENT" -> Right OKDeployment
         "DISCOVERY" -> Right OKDiscovery
         "ATTESTATION" -> Right OKAttestation
+        "INTOTO" -> Right OKIntoto
         x -> Left ("Unable to parse OccurrenceKind from: " <> x)
 
 instance ToHttpApiData OccurrenceKind where
@@ -311,6 +315,7 @@ instance ToHttpApiData OccurrenceKind where
         OKDeployment -> "DEPLOYMENT"
         OKDiscovery -> "DISCOVERY"
         OKAttestation -> "ATTESTATION"
+        OKIntoto -> "INTOTO"
 
 instance FromJSON OccurrenceKind where
     parseJSON = parseJSONText "OccurrenceKind"
@@ -474,7 +479,7 @@ instance ToJSON CVSSv3PrivilegesRequired where
 data NoteKind
     = NKNoteKindUnspecified
       -- ^ @NOTE_KIND_UNSPECIFIED@
-      -- Unknown.
+      -- Default value. This value is unused.
     | NKVulnerability
       -- ^ @VULNERABILITY@
       -- The note and occurrence represent a package vulnerability.
@@ -497,6 +502,9 @@ data NoteKind
     | NKAttestation
       -- ^ @ATTESTATION@
       -- This represents a logical \"role\" that can attest to artifacts.
+    | NKIntoto
+      -- ^ @INTOTO@
+      -- This represents an in-toto link.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable NoteKind
@@ -511,6 +519,7 @@ instance FromHttpApiData NoteKind where
         "DEPLOYMENT" -> Right NKDeployment
         "DISCOVERY" -> Right NKDiscovery
         "ATTESTATION" -> Right NKAttestation
+        "INTOTO" -> Right NKIntoto
         x -> Left ("Unable to parse NoteKind from: " <> x)
 
 instance ToHttpApiData NoteKind where
@@ -523,6 +532,7 @@ instance ToHttpApiData NoteKind where
         NKDeployment -> "DEPLOYMENT"
         NKDiscovery -> "DISCOVERY"
         NKAttestation -> "ATTESTATION"
+        NKIntoto -> "INTOTO"
 
 instance FromJSON NoteKind where
     parseJSON = parseJSONText "NoteKind"
@@ -844,45 +854,6 @@ instance FromJSON FixableTotalByDigestSeverity where
 instance ToJSON FixableTotalByDigestSeverity where
     toJSON = toJSONText
 
--- | The log type that this config enables.
-data AuditLogConfigLogType
-    = LogTypeUnspecified
-      -- ^ @LOG_TYPE_UNSPECIFIED@
-      -- Default case. Should never be this.
-    | AdminRead
-      -- ^ @ADMIN_READ@
-      -- Admin reads. Example: CloudIAM getIamPolicy
-    | DataWrite
-      -- ^ @DATA_WRITE@
-      -- Data writes. Example: CloudSQL Users create
-    | DataRead
-      -- ^ @DATA_READ@
-      -- Data reads. Example: CloudSQL Users list
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable AuditLogConfigLogType
-
-instance FromHttpApiData AuditLogConfigLogType where
-    parseQueryParam = \case
-        "LOG_TYPE_UNSPECIFIED" -> Right LogTypeUnspecified
-        "ADMIN_READ" -> Right AdminRead
-        "DATA_WRITE" -> Right DataWrite
-        "DATA_READ" -> Right DataRead
-        x -> Left ("Unable to parse AuditLogConfigLogType from: " <> x)
-
-instance ToHttpApiData AuditLogConfigLogType where
-    toQueryParam = \case
-        LogTypeUnspecified -> "LOG_TYPE_UNSPECIFIED"
-        AdminRead -> "ADMIN_READ"
-        DataWrite -> "DATA_WRITE"
-        DataRead -> "DATA_READ"
-
-instance FromJSON AuditLogConfigLogType where
-    parseJSON = parseJSONText "AuditLogConfigLogType"
-
-instance ToJSON AuditLogConfigLogType where
-    toJSON = toJSONText
-
 data CVSSv3Scope
     = ScopeUnspecified
       -- ^ @SCOPE_UNSPECIFIED@
@@ -1086,7 +1057,7 @@ instance ToJSON BuildSignatureKeyType where
 data DiscoveryAnalysisKind
     = DAKNoteKindUnspecified
       -- ^ @NOTE_KIND_UNSPECIFIED@
-      -- Unknown.
+      -- Default value. This value is unused.
     | DAKVulnerability
       -- ^ @VULNERABILITY@
       -- The note and occurrence represent a package vulnerability.
@@ -1109,6 +1080,9 @@ data DiscoveryAnalysisKind
     | DAKAttestation
       -- ^ @ATTESTATION@
       -- This represents a logical \"role\" that can attest to artifacts.
+    | DAKIntoto
+      -- ^ @INTOTO@
+      -- This represents an in-toto link.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DiscoveryAnalysisKind
@@ -1123,6 +1097,7 @@ instance FromHttpApiData DiscoveryAnalysisKind where
         "DEPLOYMENT" -> Right DAKDeployment
         "DISCOVERY" -> Right DAKDiscovery
         "ATTESTATION" -> Right DAKAttestation
+        "INTOTO" -> Right DAKIntoto
         x -> Left ("Unable to parse DiscoveryAnalysisKind from: " <> x)
 
 instance ToHttpApiData DiscoveryAnalysisKind where
@@ -1135,6 +1110,7 @@ instance ToHttpApiData DiscoveryAnalysisKind where
         DAKDeployment -> "DEPLOYMENT"
         DAKDiscovery -> "DISCOVERY"
         DAKAttestation -> "ATTESTATION"
+        DAKIntoto -> "INTOTO"
 
 instance FromJSON DiscoveryAnalysisKind where
     parseJSON = parseJSONText "DiscoveryAnalysisKind"

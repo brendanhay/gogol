@@ -34,6 +34,7 @@ module Network.Google.Resource.ServiceBroker.GetIAMPolicy
     , GetIAMPolicy
 
     -- * Request Lenses
+    , gipOptionsRequestedPolicyVersion
     , gipXgafv
     , gipUploadProtocol
     , gipAccessToken
@@ -42,21 +43,24 @@ module Network.Google.Resource.ServiceBroker.GetIAMPolicy
     , gipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceBroker.Types
+import Network.Google.Prelude
+import Network.Google.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.getIamPolicy@ method which the
 -- 'GetIAMPolicy' request conforms to.
 type GetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] GoogleIAMV1__Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] GoogleIAMV1__Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -64,12 +68,13 @@ type GetIAMPolicyResource =
 -- /See:/ 'getIAMPolicy' smart constructor.
 data GetIAMPolicy =
   GetIAMPolicy'
-    { _gipXgafv          :: !(Maybe Xgafv)
+    { _gipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _gipXgafv :: !(Maybe Xgafv)
     , _gipUploadProtocol :: !(Maybe Text)
-    , _gipAccessToken    :: !(Maybe Text)
-    , _gipUploadType     :: !(Maybe Text)
-    , _gipResource       :: !Text
-    , _gipCallback       :: !(Maybe Text)
+    , _gipAccessToken :: !(Maybe Text)
+    , _gipUploadType :: !(Maybe Text)
+    , _gipResource :: !Text
+    , _gipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +82,8 @@ data GetIAMPolicy =
 -- | Creates a value of 'GetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gipOptionsRequestedPolicyVersion'
 --
 -- * 'gipXgafv'
 --
@@ -94,7 +101,8 @@ getIAMPolicy
     -> GetIAMPolicy
 getIAMPolicy pGipResource_ =
   GetIAMPolicy'
-    { _gipXgafv = Nothing
+    { _gipOptionsRequestedPolicyVersion = Nothing
+    , _gipXgafv = Nothing
     , _gipUploadProtocol = Nothing
     , _gipAccessToken = Nothing
     , _gipUploadType = Nothing
@@ -102,6 +110,17 @@ getIAMPolicy pGipResource_ =
     , _gipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset.
+gipOptionsRequestedPolicyVersion :: Lens' GetIAMPolicy (Maybe Int32)
+gipOptionsRequestedPolicyVersion
+  = lens _gipOptionsRequestedPolicyVersion
+      (\ s a -> s{_gipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 gipXgafv :: Lens' GetIAMPolicy (Maybe Xgafv)
@@ -141,7 +160,9 @@ instance GoogleRequest GetIAMPolicy where
         type Scopes GetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient GetIAMPolicy'{..}
-          = go _gipResource _gipXgafv _gipUploadProtocol
+          = go _gipResource _gipOptionsRequestedPolicyVersion
+              _gipXgafv
+              _gipUploadProtocol
               _gipAccessToken
               _gipUploadType
               _gipCallback

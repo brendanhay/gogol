@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a resource containing information about a database inside a
--- Cloud SQL instance. This method supports patch semantics.
+-- Partially updates a resource containing information about a database
+-- inside a Cloud SQL instance. This method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.databases.patch@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.databases.patch@.
 module Network.Google.Resource.SQL.Databases.Patch
     (
     -- * REST Resource
@@ -34,38 +34,53 @@ module Network.Google.Resource.SQL.Databases.Patch
     , DatabasesPatch
 
     -- * Request Lenses
+    , dpXgafv
+    , dpUploadProtocol
     , dpProject
     , dpDatabase
+    , dpAccessToken
+    , dpUploadType
     , dpPayload
+    , dpCallback
     , dpInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.patch@ method which the
 -- 'DatabasesPatch' request conforms to.
 type DatabasesPatchResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   Capture "database" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Database :> Patch '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "databases" :>
+                 Capture "database" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Database :>
+                                 Patch '[JSON] Operation
 
--- | Updates a resource containing information about a database inside a
--- Cloud SQL instance. This method supports patch semantics.
+-- | Partially updates a resource containing information about a database
+-- inside a Cloud SQL instance. This method supports patch semantics.
 --
 -- /See:/ 'databasesPatch' smart constructor.
 data DatabasesPatch =
   DatabasesPatch'
-    { _dpProject  :: !Text
+    { _dpXgafv :: !(Maybe Xgafv)
+    , _dpUploadProtocol :: !(Maybe Text)
+    , _dpProject :: !Text
     , _dpDatabase :: !Text
-    , _dpPayload  :: !Database
+    , _dpAccessToken :: !(Maybe Text)
+    , _dpUploadType :: !(Maybe Text)
+    , _dpPayload :: !Database
+    , _dpCallback :: !(Maybe Text)
     , _dpInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -75,11 +90,21 @@ data DatabasesPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dpXgafv'
+--
+-- * 'dpUploadProtocol'
+--
 -- * 'dpProject'
 --
 -- * 'dpDatabase'
 --
+-- * 'dpAccessToken'
+--
+-- * 'dpUploadType'
+--
 -- * 'dpPayload'
+--
+-- * 'dpCallback'
 --
 -- * 'dpInstance'
 databasesPatch
@@ -90,12 +115,27 @@ databasesPatch
     -> DatabasesPatch
 databasesPatch pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
   DatabasesPatch'
-    { _dpProject = pDpProject_
+    { _dpXgafv = Nothing
+    , _dpUploadProtocol = Nothing
+    , _dpProject = pDpProject_
     , _dpDatabase = pDpDatabase_
+    , _dpAccessToken = Nothing
+    , _dpUploadType = Nothing
     , _dpPayload = pDpPayload_
+    , _dpCallback = Nothing
     , _dpInstance = pDpInstance_
     }
 
+
+-- | V1 error format.
+dpXgafv :: Lens' DatabasesPatch (Maybe Xgafv)
+dpXgafv = lens _dpXgafv (\ s a -> s{_dpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dpUploadProtocol :: Lens' DatabasesPatch (Maybe Text)
+dpUploadProtocol
+  = lens _dpUploadProtocol
+      (\ s a -> s{_dpUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 dpProject :: Lens' DatabasesPatch Text
@@ -107,10 +147,26 @@ dpDatabase :: Lens' DatabasesPatch Text
 dpDatabase
   = lens _dpDatabase (\ s a -> s{_dpDatabase = a})
 
+-- | OAuth access token.
+dpAccessToken :: Lens' DatabasesPatch (Maybe Text)
+dpAccessToken
+  = lens _dpAccessToken
+      (\ s a -> s{_dpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dpUploadType :: Lens' DatabasesPatch (Maybe Text)
+dpUploadType
+  = lens _dpUploadType (\ s a -> s{_dpUploadType = a})
+
 -- | Multipart request metadata.
 dpPayload :: Lens' DatabasesPatch Database
 dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
+
+-- | JSONP
+dpCallback :: Lens' DatabasesPatch (Maybe Text)
+dpCallback
+  = lens _dpCallback (\ s a -> s{_dpCallback = a})
 
 -- | Database instance ID. This does not include the project ID.
 dpInstance :: Lens' DatabasesPatch Text
@@ -123,7 +179,11 @@ instance GoogleRequest DatabasesPatch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesPatch'{..}
-          = go _dpProject _dpInstance _dpDatabase
+          = go _dpProject _dpInstance _dpDatabase _dpXgafv
+              _dpUploadProtocol
+              _dpAccessToken
+              _dpUploadType
+              _dpCallback
               (Just AltJSON)
               _dpPayload
               sQLAdminService

@@ -55,6 +55,9 @@ module Network.Google.FireStore
     -- ** firestore.projects.databases.documents.batchGet
     , module Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchGet
 
+    -- ** firestore.projects.databases.documents.batchWrite
+    , module Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchWrite
+
     -- ** firestore.projects.databases.documents.beginTransaction
     , module Network.Google.Resource.FireStore.Projects.Databases.Documents.BeginTransaction
 
@@ -78,6 +81,9 @@ module Network.Google.FireStore
 
     -- ** firestore.projects.databases.documents.listen
     , module Network.Google.Resource.FireStore.Projects.Databases.Documents.Listen
+
+    -- ** firestore.projects.databases.documents.partitionQuery
+    , module Network.Google.Resource.FireStore.Projects.Databases.Documents.PartitionQuery
 
     -- ** firestore.projects.databases.documents.patch
     , module Network.Google.Resource.FireStore.Projects.Databases.Documents.Patch
@@ -227,6 +233,12 @@ module Network.Google.FireStore
     , gfavidmEndTime
     , gfavidmOperationState
 
+    -- ** BatchWriteResponse
+    , BatchWriteResponse
+    , batchWriteResponse
+    , bwrStatus
+    , bwrWriteResults
+
     -- ** BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
@@ -267,6 +279,7 @@ module Network.Google.FireStore
     , wTransform
     , wUpdateMask
     , wCurrentDocument
+    , wUpdateTransforms
     , wDelete
     , wUpdate
 
@@ -328,6 +341,12 @@ module Network.Google.FireStore
     , rTransaction
     , rDocument
 
+    -- ** BatchWriteRequest
+    , BatchWriteRequest
+    , batchWriteRequest
+    , bwrLabels
+    , bwrWrites
+
     -- ** GoogleFirestoreAdminV1IndexQueryScope
     , GoogleFirestoreAdminV1IndexQueryScope (..)
 
@@ -379,6 +398,12 @@ module Network.Google.FireStore
 
     -- ** ValueNullValue
     , ValueNullValue (..)
+
+    -- ** PartitionQueryResponse
+    , PartitionQueryResponse
+    , partitionQueryResponse
+    , pqrNextPageToken
+    , pqrPartitions
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
@@ -551,6 +576,11 @@ module Network.Google.FireStore
     -- ** FieldFilterOp
     , FieldFilterOp (..)
 
+    -- ** BatchWriteRequestLabels
+    , BatchWriteRequestLabels
+    , batchWriteRequestLabels
+    , bwrlAddtional
+
     -- ** Projection
     , Projection
     , projection
@@ -700,6 +730,14 @@ module Network.Google.FireStore
     -- ** GoogleFirestoreAdminV1ExportDocumentsMetadataOperationState
     , GoogleFirestoreAdminV1ExportDocumentsMetadataOperationState (..)
 
+    -- ** PartitionQueryRequest
+    , PartitionQueryRequest
+    , partitionQueryRequest
+    , pqrStructuredQuery
+    , pqrPageToken
+    , pqrPageSize
+    , pqrPartitionCount
+
     -- ** UnaryFilter
     , UnaryFilter
     , unaryFilter
@@ -707,36 +745,38 @@ module Network.Google.FireStore
     , ufField
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.Get
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.List
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
-import           Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.List
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchGet
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.BeginTransaction
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Commit
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.CreateDocument
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Delete
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Get
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.List
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.ListCollectionIds
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Listen
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Patch
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Rollback
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.RunQuery
-import           Network.Google.Resource.FireStore.Projects.Databases.Documents.Write
-import           Network.Google.Resource.FireStore.Projects.Databases.ExportDocuments
-import           Network.Google.Resource.FireStore.Projects.Databases.ImportDocuments
-import           Network.Google.Resource.FireStore.Projects.Databases.Operations.Cancel
-import           Network.Google.Resource.FireStore.Projects.Databases.Operations.Delete
-import           Network.Google.Resource.FireStore.Projects.Databases.Operations.Get
-import           Network.Google.Resource.FireStore.Projects.Databases.Operations.List
-import           Network.Google.Resource.FireStore.Projects.Locations.Get
-import           Network.Google.Resource.FireStore.Projects.Locations.List
+import Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.Get
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.List
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
+import Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.List
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchGet
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchWrite
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.BeginTransaction
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Commit
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.CreateDocument
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Delete
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Get
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.List
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.ListCollectionIds
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Listen
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.PartitionQuery
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Patch
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Rollback
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.RunQuery
+import Network.Google.Resource.FireStore.Projects.Databases.Documents.Write
+import Network.Google.Resource.FireStore.Projects.Databases.ExportDocuments
+import Network.Google.Resource.FireStore.Projects.Databases.ImportDocuments
+import Network.Google.Resource.FireStore.Projects.Databases.Operations.Cancel
+import Network.Google.Resource.FireStore.Projects.Databases.Operations.Delete
+import Network.Google.Resource.FireStore.Projects.Databases.Operations.Get
+import Network.Google.Resource.FireStore.Projects.Databases.Operations.List
+import Network.Google.Resource.FireStore.Projects.Locations.Get
+import Network.Google.Resource.FireStore.Projects.Locations.List
 
 {- $resources
 TODO
@@ -750,6 +790,7 @@ type FireStoreAPI =
        ProjectsDatabasesDocumentsListCollectionIdsResource
        :<|> ProjectsDatabasesDocumentsListResource
        :<|> ProjectsDatabasesDocumentsWriteResource
+       :<|> ProjectsDatabasesDocumentsPartitionQueryResource
        :<|> ProjectsDatabasesDocumentsCreateDocumentResource
        :<|>
        ProjectsDatabasesDocumentsBeginTransactionResource
@@ -757,6 +798,7 @@ type FireStoreAPI =
        :<|> ProjectsDatabasesDocumentsPatchResource
        :<|> ProjectsDatabasesDocumentsGetResource
        :<|> ProjectsDatabasesDocumentsRollbackResource
+       :<|> ProjectsDatabasesDocumentsBatchWriteResource
        :<|> ProjectsDatabasesDocumentsBatchGetResource
        :<|> ProjectsDatabasesDocumentsDeleteResource
        :<|> ProjectsDatabasesDocumentsListenResource

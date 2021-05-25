@@ -17,18 +17,18 @@
 --
 module Network.Google.FusionTables.Types.Product where
 
-import           Network.Google.FusionTables.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types.Sum
+import Network.Google.Prelude
 
 -- | Represents a list of columns in a table.
 --
 -- /See:/ 'columnList' smart constructor.
 data ColumnList =
   ColumnList'
-    { _clTotalItems    :: !(Maybe (Textual Int32))
+    { _clTotalItems :: !(Maybe (Textual Int32))
     , _clNextPageToken :: !(Maybe Text)
-    , _clKind          :: !Text
-    , _clItems         :: !(Maybe [Column])
+    , _clKind :: !Text
+    , _clItems :: !(Maybe [Column])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -102,8 +102,8 @@ instance ToJSON ColumnList where
 data TableList =
   TableList'
     { _tlNextPageToken :: !(Maybe Text)
-    , _tlKind          :: !Text
-    , _tlItems         :: !(Maybe [Table])
+    , _tlKind :: !Text
+    , _tlItems :: !(Maybe [Table])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -166,9 +166,9 @@ instance ToJSON TableList where
 -- /See:/ 'styleFunction' smart constructor.
 data StyleFunction =
   StyleFunction'
-    { _sfBuckets    :: !(Maybe [Bucket])
-    , _sfKind       :: !(Maybe Text)
-    , _sfGradient   :: !(Maybe StyleFunctionGradient)
+    { _sfBuckets :: !(Maybe [Bucket])
+    , _sfKind :: !(Maybe Text)
+    , _sfGradient :: !(Maybe StyleFunctionGradient)
     , _sfColumnName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -250,7 +250,7 @@ instance ToJSON StyleFunction where
 data ColumnBaseColumn =
   ColumnBaseColumn'
     { _cbcTableIndex :: !(Maybe (Textual Int32))
-    , _cbcColumnId   :: !(Maybe (Textual Int32))
+    , _cbcColumnId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -301,8 +301,8 @@ instance ToJSON ColumnBaseColumn where
 -- /See:/ 'sQLresponse' smart constructor.
 data SQLresponse =
   SQLresponse'
-    { _sqlKind    :: !Text
-    , _sqlRows    :: !(Maybe [[JSONValue]])
+    { _sqlKind :: !Text
+    , _sqlRows :: !(Maybe [[JSONValue]])
     , _sqlColumns :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -367,7 +367,7 @@ instance ToJSON SQLresponse where
 -- /See:/ 'styleFunctionGradientColorsItem' smart constructor.
 data StyleFunctionGradientColorsItem =
   StyleFunctionGradientColorsItem'
-    { _sfgciColor   :: !(Maybe Text)
+    { _sfgciColor :: !(Maybe Text)
     , _sfgciOpacity :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -418,10 +418,10 @@ instance ToJSON StyleFunctionGradientColorsItem where
 -- /See:/ 'styleSettingList' smart constructor.
 data StyleSettingList =
   StyleSettingList'
-    { _sslTotalItems    :: !(Maybe (Textual Int32))
+    { _sslTotalItems :: !(Maybe (Textual Int32))
     , _sslNextPageToken :: !(Maybe Text)
-    , _sslKind          :: !Text
-    , _sslItems         :: !(Maybe [StyleSetting])
+    , _sslKind :: !Text
+    , _sslItems :: !(Maybe [StyleSetting])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -498,12 +498,12 @@ instance ToJSON StyleSettingList where
 -- /See:/ 'bucket' smart constructor.
 data Bucket =
   Bucket'
-    { _bMax     :: !(Maybe (Textual Double))
-    , _bColor   :: !(Maybe Text)
-    , _bWeight  :: !(Maybe (Textual Int32))
-    , _bIcon    :: !(Maybe Text)
+    { _bMax :: !(Maybe (Textual Double))
+    , _bColor :: !(Maybe Text)
+    , _bWeight :: !(Maybe (Textual Int32))
+    , _bIcon :: !(Maybe Text)
     , _bOpacity :: !(Maybe (Textual Double))
-    , _bMin     :: !(Maybe (Textual Double))
+    , _bMin :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -595,7 +595,7 @@ instance ToJSON Bucket where
 data Line =
   Line'
     { _lCoordinates :: !(Maybe [[Textual Double]])
-    , _lType        :: !Text
+    , _lType :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -645,12 +645,12 @@ instance ToJSON Line where
 data StyleSetting =
   StyleSetting'
     { _ssPolylineOptions :: !(Maybe LineStyle)
-    , _ssPolygonOptions  :: !(Maybe PolygonStyle)
-    , _ssMarkerOptions   :: !(Maybe PointStyle)
-    , _ssKind            :: !Text
-    , _ssName            :: !(Maybe Text)
-    , _ssStyleId         :: !(Maybe (Textual Int32))
-    , _ssTableId         :: !(Maybe Text)
+    , _ssPolygonOptions :: !(Maybe PolygonStyle)
+    , _ssMarkerOptions :: !(Maybe PointStyle)
+    , _ssKind :: !Text
+    , _ssName :: !(Maybe Text)
+    , _ssStyleId :: !(Maybe (Textual Int32))
+    , _ssTableId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -756,7 +756,7 @@ instance ToJSON StyleSetting where
 data Point =
   Point'
     { _pCoordinates :: !(Maybe [Textual Double])
-    , _pType        :: !Text
+    , _pType :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -805,7 +805,7 @@ instance ToJSON Point where
 data Polygon =
   Polygon'
     { _polCoordinates :: !(Maybe [[[Textual Double]]])
-    , _polType        :: !Text
+    , _polType :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -854,10 +854,10 @@ instance ToJSON Polygon where
 -- /See:/ 'taskList' smart constructor.
 data TaskList =
   TaskList'
-    { _tTotalItems    :: !(Maybe (Textual Int32))
+    { _tTotalItems :: !(Maybe (Textual Int32))
     , _tNextPageToken :: !(Maybe Text)
-    , _tKind          :: !Text
-    , _tItems         :: !(Maybe [Task])
+    , _tKind :: !Text
+    , _tItems :: !(Maybe [Task])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -930,8 +930,8 @@ instance ToJSON TaskList where
 data Geometry =
   Geometry'
     { _gGeometries :: !(Maybe [JSONValue])
-    , _gGeometry   :: !(Maybe JSONValue)
-    , _gType       :: !Text
+    , _gGeometry :: !(Maybe JSONValue)
+    , _gType :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -992,10 +992,10 @@ instance ToJSON Geometry where
 -- /See:/ 'templateList' smart constructor.
 data TemplateList =
   TemplateList'
-    { _temTotalItems    :: !(Maybe (Textual Int32))
+    { _temTotalItems :: !(Maybe (Textual Int32))
     , _temNextPageToken :: !(Maybe Text)
-    , _temKind          :: !Text
-    , _temItems         :: !(Maybe [Template])
+    , _temKind :: !Text
+    , _temItems :: !(Maybe [Template])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1071,7 +1071,7 @@ instance ToJSON TemplateList where
 -- /See:/ 'import'' smart constructor.
 data Import =
   Import'
-    { _iKind            :: !Text
+    { _iKind :: !Text
     , _iNumRowsReceived :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1123,10 +1123,10 @@ instance ToJSON Import where
 data Task =
   Task'
     { _tasProgress :: !(Maybe Text)
-    , _tasTaskId   :: !(Maybe (Textual Int64))
-    , _tasKind     :: !Text
-    , _tasType     :: !(Maybe Text)
-    , _tasStarted  :: !(Maybe Bool)
+    , _tasTaskId :: !(Maybe (Textual Int64))
+    , _tasKind :: !Text
+    , _tasType :: !(Maybe Text)
+    , _tasStarted :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1206,11 +1206,11 @@ instance ToJSON Task where
 data Template =
   Template'
     { _ttAutomaticColumnNames :: !(Maybe [Text])
-    , _ttTemplateId           :: !(Maybe (Textual Int32))
-    , _ttKind                 :: !Text
-    , _ttBody                 :: !(Maybe Text)
-    , _ttName                 :: !(Maybe Text)
-    , _ttTableId              :: !(Maybe Text)
+    , _ttTemplateId :: !(Maybe (Textual Int32))
+    , _ttKind :: !Text
+    , _ttBody :: !(Maybe Text)
+    , _ttName :: !(Maybe Text)
+    , _ttTableId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1308,7 +1308,7 @@ instance ToJSON Template where
 -- /See:/ 'pointStyle' smart constructor.
 data PointStyle =
   PointStyle'
-    { _psIconName   :: !(Maybe Text)
+    { _psIconName :: !(Maybe Text)
     , _psIconStyler :: !(Maybe StyleFunction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1356,14 +1356,14 @@ instance ToJSON PointStyle where
 -- /See:/ 'polygonStyle' smart constructor.
 data PolygonStyle =
   PolygonStyle'
-    { _psFillColorStyler    :: !(Maybe StyleFunction)
-    , _psFillColor          :: !(Maybe Text)
-    , _psStrokeColorStyler  :: !(Maybe StyleFunction)
-    , _psStrokeWeight       :: !(Maybe (Textual Int32))
-    , _psStrokeOpacity      :: !(Maybe (Textual Double))
-    , _psFillOpacity        :: !(Maybe (Textual Double))
+    { _psFillColorStyler :: !(Maybe StyleFunction)
+    , _psFillColor :: !(Maybe Text)
+    , _psStrokeColorStyler :: !(Maybe StyleFunction)
+    , _psStrokeWeight :: !(Maybe (Textual Int32))
+    , _psStrokeOpacity :: !(Maybe (Textual Double))
+    , _psFillOpacity :: !(Maybe (Textual Double))
     , _psStrokeWeightStyler :: !(Maybe StyleFunction)
-    , _psStrokeColor        :: !(Maybe Text)
+    , _psStrokeColor :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1488,8 +1488,8 @@ instance ToJSON PolygonStyle where
 -- /See:/ 'styleFunctionGradient' smart constructor.
 data StyleFunctionGradient =
   StyleFunctionGradient'
-    { _sfgMax    :: !(Maybe (Textual Double))
-    , _sfgMin    :: !(Maybe (Textual Double))
+    { _sfgMax :: !(Maybe (Textual Double))
+    , _sfgMin :: !(Maybe (Textual Double))
     , _sfgColors :: !(Maybe [StyleFunctionGradientColorsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1552,18 +1552,18 @@ instance ToJSON StyleFunctionGradient where
 -- /See:/ 'column' smart constructor.
 data Column =
   Column'
-    { _cColumnJSONSchema     :: !(Maybe Text)
-    , _cGraphPredicate       :: !(Maybe Text)
-    , _cKind                 :: !Text
-    , _cBaseColumn           :: !(Maybe ColumnBaseColumn)
+    { _cColumnJSONSchema :: !(Maybe Text)
+    , _cGraphPredicate :: !(Maybe Text)
+    , _cKind :: !Text
+    , _cBaseColumn :: !(Maybe ColumnBaseColumn)
     , _cColumnPropertiesJSON :: !(Maybe Text)
-    , _cName                 :: !(Maybe Text)
-    , _cType                 :: !(Maybe Text)
-    , _cFormatPattern        :: !(Maybe Text)
-    , _cColumnId             :: !(Maybe (Textual Int32))
-    , _cValidValues          :: !(Maybe [Text])
-    , _cValidateData         :: !(Maybe Bool)
-    , _cDescription          :: !(Maybe Text)
+    , _cName :: !(Maybe Text)
+    , _cType :: !(Maybe Text)
+    , _cFormatPattern :: !(Maybe Text)
+    , _cColumnId :: !(Maybe (Textual Int32))
+    , _cValidValues :: !(Maybe [Text])
+    , _cValidateData :: !(Maybe Bool)
+    , _cDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1748,19 +1748,19 @@ instance ToJSON Column where
 -- /See:/ 'table' smart constructor.
 data Table =
   Table'
-    { _tabaIsExportable               :: !(Maybe Bool)
-    , _tabaKind                       :: !Text
+    { _tabaIsExportable :: !(Maybe Bool)
+    , _tabaKind :: !Text
     , _tabaColumnPropertiesJSONSchema :: !(Maybe Text)
-    , _tabaTablePropertiesJSONSchema  :: !(Maybe Text)
-    , _tabaName                       :: !(Maybe Text)
-    , _tabaTablePropertiesJSON        :: !(Maybe Text)
-    , _tabaColumns                    :: !(Maybe [Column])
-    , _tabaBaseTableIds               :: !(Maybe [Text])
-    , _tabaTableId                    :: !(Maybe Text)
-    , _tabaSQL                        :: !(Maybe Text)
-    , _tabaDescription                :: !(Maybe Text)
-    , _tabaAttribution                :: !(Maybe Text)
-    , _tabaAttributionLink            :: !(Maybe Text)
+    , _tabaTablePropertiesJSONSchema :: !(Maybe Text)
+    , _tabaName :: !(Maybe Text)
+    , _tabaTablePropertiesJSON :: !(Maybe Text)
+    , _tabaColumns :: !(Maybe [Column])
+    , _tabaBaseTableIds :: !(Maybe [Text])
+    , _tabaTableId :: !(Maybe Text)
+    , _tabaSQL :: !(Maybe Text)
+    , _tabaDescription :: !(Maybe Text)
+    , _tabaAttribution :: !(Maybe Text)
+    , _tabaAttributionLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1934,11 +1934,11 @@ instance ToJSON Table where
 -- /See:/ 'lineStyle' smart constructor.
 data LineStyle =
   LineStyle'
-    { _lsStrokeColorStyler  :: !(Maybe StyleFunction)
-    , _lsStrokeWeight       :: !(Maybe (Textual Int32))
-    , _lsStrokeOpacity      :: !(Maybe (Textual Double))
+    { _lsStrokeColorStyler :: !(Maybe StyleFunction)
+    , _lsStrokeWeight :: !(Maybe (Textual Int32))
+    , _lsStrokeOpacity :: !(Maybe (Textual Double))
     , _lsStrokeWeightStyler :: !(Maybe StyleFunction)
-    , _lsStrokeColor        :: !(Maybe Text)
+    , _lsStrokeColor :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

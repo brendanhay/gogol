@@ -23,7 +23,7 @@
 -- Cancels and removes the preview currently associated with the
 -- deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.cancelPreview@.
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.cancelPreview@.
 module Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
     , DeploymentsCancelPreview
 
     -- * Request Lenses
+    , dcpXgafv
+    , dcpUploadProtocol
     , dcpProject
+    , dcpAccessToken
+    , dcpUploadType
     , dcpPayload
+    , dcpCallback
     , dcpDeployment
     ) where
 
-import           Network.Google.DeploymentManager.Types
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.cancelPreview@ method which the
 -- 'DeploymentsCancelPreview' request conforms to.
@@ -53,9 +58,14 @@ type DeploymentsCancelPreviewResource =
                "deployments" :>
                  Capture "deployment" Text :>
                    "cancelPreview" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] DeploymentsCancelPreviewRequest :>
-                         Post '[JSON] Operation
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] DeploymentsCancelPreviewRequest
+                                   :> Post '[JSON] Operation
 
 -- | Cancels and removes the preview currently associated with the
 -- deployment.
@@ -63,8 +73,13 @@ type DeploymentsCancelPreviewResource =
 -- /See:/ 'deploymentsCancelPreview' smart constructor.
 data DeploymentsCancelPreview =
   DeploymentsCancelPreview'
-    { _dcpProject    :: !Text
-    , _dcpPayload    :: !DeploymentsCancelPreviewRequest
+    { _dcpXgafv :: !(Maybe Xgafv)
+    , _dcpUploadProtocol :: !(Maybe Text)
+    , _dcpProject :: !Text
+    , _dcpAccessToken :: !(Maybe Text)
+    , _dcpUploadType :: !(Maybe Text)
+    , _dcpPayload :: !DeploymentsCancelPreviewRequest
+    , _dcpCallback :: !(Maybe Text)
     , _dcpDeployment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -74,9 +89,19 @@ data DeploymentsCancelPreview =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dcpXgafv'
+--
+-- * 'dcpUploadProtocol'
+--
 -- * 'dcpProject'
 --
+-- * 'dcpAccessToken'
+--
+-- * 'dcpUploadType'
+--
 -- * 'dcpPayload'
+--
+-- * 'dcpCallback'
 --
 -- * 'dcpDeployment'
 deploymentsCancelPreview
@@ -86,21 +111,53 @@ deploymentsCancelPreview
     -> DeploymentsCancelPreview
 deploymentsCancelPreview pDcpProject_ pDcpPayload_ pDcpDeployment_ =
   DeploymentsCancelPreview'
-    { _dcpProject = pDcpProject_
+    { _dcpXgafv = Nothing
+    , _dcpUploadProtocol = Nothing
+    , _dcpProject = pDcpProject_
+    , _dcpAccessToken = Nothing
+    , _dcpUploadType = Nothing
     , _dcpPayload = pDcpPayload_
+    , _dcpCallback = Nothing
     , _dcpDeployment = pDcpDeployment_
     }
 
+
+-- | V1 error format.
+dcpXgafv :: Lens' DeploymentsCancelPreview (Maybe Xgafv)
+dcpXgafv = lens _dcpXgafv (\ s a -> s{_dcpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dcpUploadProtocol :: Lens' DeploymentsCancelPreview (Maybe Text)
+dcpUploadProtocol
+  = lens _dcpUploadProtocol
+      (\ s a -> s{_dcpUploadProtocol = a})
 
 -- | The project ID for this request.
 dcpProject :: Lens' DeploymentsCancelPreview Text
 dcpProject
   = lens _dcpProject (\ s a -> s{_dcpProject = a})
 
+-- | OAuth access token.
+dcpAccessToken :: Lens' DeploymentsCancelPreview (Maybe Text)
+dcpAccessToken
+  = lens _dcpAccessToken
+      (\ s a -> s{_dcpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dcpUploadType :: Lens' DeploymentsCancelPreview (Maybe Text)
+dcpUploadType
+  = lens _dcpUploadType
+      (\ s a -> s{_dcpUploadType = a})
+
 -- | Multipart request metadata.
 dcpPayload :: Lens' DeploymentsCancelPreview DeploymentsCancelPreviewRequest
 dcpPayload
   = lens _dcpPayload (\ s a -> s{_dcpPayload = a})
+
+-- | JSONP
+dcpCallback :: Lens' DeploymentsCancelPreview (Maybe Text)
+dcpCallback
+  = lens _dcpCallback (\ s a -> s{_dcpCallback = a})
 
 -- | The name of the deployment for this request.
 dcpDeployment :: Lens' DeploymentsCancelPreview Text
@@ -114,7 +171,12 @@ instance GoogleRequest DeploymentsCancelPreview where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsCancelPreview'{..}
-          = go _dcpProject _dcpDeployment (Just AltJSON)
+          = go _dcpProject _dcpDeployment _dcpXgafv
+              _dcpUploadProtocol
+              _dcpAccessToken
+              _dcpUploadType
+              _dcpCallback
+              (Just AltJSON)
               _dcpPayload
               deploymentManagerService
           where go

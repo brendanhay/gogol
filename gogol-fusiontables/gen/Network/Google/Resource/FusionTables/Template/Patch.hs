@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Template.Patch
     , tppTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.patch@ method which the
 -- 'TemplatePatch' request conforms to.
@@ -59,8 +59,8 @@ type TemplatePatchResource =
 data TemplatePatch =
   TemplatePatch'
     { _tppTemplateId :: !(Textual Int32)
-    , _tppPayload    :: !Template
-    , _tppTableId    :: !Text
+    , _tppPayload :: !Template
+    , _tppTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a comment by ID.
+-- Deletes a comment by blog id, post id and comment id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.delete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.delete@.
 module Network.Google.Resource.Blogger.Comments.Delete
     (
     -- * REST Resource
@@ -33,35 +33,49 @@ module Network.Google.Resource.Blogger.Comments.Delete
     , CommentsDelete
 
     -- * Request Lenses
+    , cdXgafv
+    , cdUploadProtocol
+    , cdAccessToken
+    , cdUploadType
     , cdBlogId
     , cdPostId
     , cdCommentId
+    , cdCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.delete@ method which the
 -- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               "comments" :>
+                 Capture "commentId" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Delete a comment by ID.
+-- | Deletes a comment by blog id, post id and comment id.
 --
 -- /See:/ 'commentsDelete' smart constructor.
 data CommentsDelete =
   CommentsDelete'
-    { _cdBlogId    :: !Text
-    , _cdPostId    :: !Text
+    { _cdXgafv :: !(Maybe Xgafv)
+    , _cdUploadProtocol :: !(Maybe Text)
+    , _cdAccessToken :: !(Maybe Text)
+    , _cdUploadType :: !(Maybe Text)
+    , _cdBlogId :: !Text
+    , _cdPostId :: !Text
     , _cdCommentId :: !Text
+    , _cdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +84,21 @@ data CommentsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdXgafv'
+--
+-- * 'cdUploadProtocol'
+--
+-- * 'cdAccessToken'
+--
+-- * 'cdUploadType'
+--
 -- * 'cdBlogId'
 --
 -- * 'cdPostId'
 --
 -- * 'cdCommentId'
+--
+-- * 'cdCallback'
 commentsDelete
     :: Text -- ^ 'cdBlogId'
     -> Text -- ^ 'cdPostId'
@@ -82,31 +106,64 @@ commentsDelete
     -> CommentsDelete
 commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
   CommentsDelete'
-    { _cdBlogId = pCdBlogId_
+    { _cdXgafv = Nothing
+    , _cdUploadProtocol = Nothing
+    , _cdAccessToken = Nothing
+    , _cdUploadType = Nothing
+    , _cdBlogId = pCdBlogId_
     , _cdPostId = pCdPostId_
     , _cdCommentId = pCdCommentId_
+    , _cdCallback = Nothing
     }
 
 
--- | The ID of the Blog.
+-- | V1 error format.
+cdXgafv :: Lens' CommentsDelete (Maybe Xgafv)
+cdXgafv = lens _cdXgafv (\ s a -> s{_cdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cdUploadProtocol :: Lens' CommentsDelete (Maybe Text)
+cdUploadProtocol
+  = lens _cdUploadProtocol
+      (\ s a -> s{_cdUploadProtocol = a})
+
+-- | OAuth access token.
+cdAccessToken :: Lens' CommentsDelete (Maybe Text)
+cdAccessToken
+  = lens _cdAccessToken
+      (\ s a -> s{_cdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cdUploadType :: Lens' CommentsDelete (Maybe Text)
+cdUploadType
+  = lens _cdUploadType (\ s a -> s{_cdUploadType = a})
+
 cdBlogId :: Lens' CommentsDelete Text
 cdBlogId = lens _cdBlogId (\ s a -> s{_cdBlogId = a})
 
--- | The ID of the Post.
 cdPostId :: Lens' CommentsDelete Text
 cdPostId = lens _cdPostId (\ s a -> s{_cdPostId = a})
 
--- | The ID of the comment to delete.
 cdCommentId :: Lens' CommentsDelete Text
 cdCommentId
   = lens _cdCommentId (\ s a -> s{_cdCommentId = a})
+
+-- | JSONP
+cdCallback :: Lens' CommentsDelete (Maybe Text)
+cdCallback
+  = lens _cdCallback (\ s a -> s{_cdCallback = a})
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
         type Scopes CommentsDelete =
              '["https://www.googleapis.com/auth/blogger"]
         requestClient CommentsDelete'{..}
-          = go _cdBlogId _cdPostId _cdCommentId (Just AltJSON)
+          = go _cdBlogId _cdPostId _cdCommentId _cdXgafv
+              _cdUploadProtocol
+              _cdAccessToken
+              _cdUploadType
+              _cdCallback
+              (Just AltJSON)
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)

@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.SetQuicOverride
     , thpsqoTargetHTTPSProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.setQuicOverride@ method which the
 -- 'TargetHTTPSProxiesSetQuicOverride' request conforms to.
@@ -64,9 +64,9 @@ type TargetHTTPSProxiesSetQuicOverrideResource =
 -- /See:/ 'targetHTTPSProxiesSetQuicOverride' smart constructor.
 data TargetHTTPSProxiesSetQuicOverride =
   TargetHTTPSProxiesSetQuicOverride'
-    { _thpsqoRequestId        :: !(Maybe Text)
-    , _thpsqoProject          :: !Text
-    , _thpsqoPayload          :: !TargetHTTPSProxiesSetQuicOverrideRequest
+    { _thpsqoRequestId :: !(Maybe Text)
+    , _thpsqoProject :: !Text
+    , _thpsqoPayload :: !TargetHTTPSProxiesSetQuicOverrideRequest
     , _thpsqoTargetHTTPSProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

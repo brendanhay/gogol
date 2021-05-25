@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2@
+    This library is compatible with version @v3@
     of the API.
 
 source-repository head
@@ -45,7 +45,46 @@ library
         , Network.Google.Resource.CloudResourceManager.Folders.SetIAMPolicy
         , Network.Google.Resource.CloudResourceManager.Folders.TestIAMPermissions
         , Network.Google.Resource.CloudResourceManager.Folders.Undelete
+        , Network.Google.Resource.CloudResourceManager.Liens.Create
+        , Network.Google.Resource.CloudResourceManager.Liens.Delete
+        , Network.Google.Resource.CloudResourceManager.Liens.Get
+        , Network.Google.Resource.CloudResourceManager.Liens.List
         , Network.Google.Resource.CloudResourceManager.Operations.Get
+        , Network.Google.Resource.CloudResourceManager.Organizations.Get
+        , Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Organizations.Search
+        , Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
+        , Network.Google.Resource.CloudResourceManager.Projects.Create
+        , Network.Google.Resource.CloudResourceManager.Projects.Delete
+        , Network.Google.Resource.CloudResourceManager.Projects.Get
+        , Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Projects.List
+        , Network.Google.Resource.CloudResourceManager.Projects.Move
+        , Network.Google.Resource.CloudResourceManager.Projects.Patch
+        , Network.Google.Resource.CloudResourceManager.Projects.Search
+        , Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
+        , Network.Google.Resource.CloudResourceManager.Projects.Undelete
+        , Network.Google.Resource.CloudResourceManager.TagBindings.Create
+        , Network.Google.Resource.CloudResourceManager.TagBindings.Delete
+        , Network.Google.Resource.CloudResourceManager.TagBindings.List
+        , Network.Google.Resource.CloudResourceManager.TagKeys.Create
+        , Network.Google.Resource.CloudResourceManager.TagKeys.Delete
+        , Network.Google.Resource.CloudResourceManager.TagKeys.Get
+        , Network.Google.Resource.CloudResourceManager.TagKeys.GetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.TagKeys.List
+        , Network.Google.Resource.CloudResourceManager.TagKeys.Patch
+        , Network.Google.Resource.CloudResourceManager.TagKeys.SetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.TagKeys.TestIAMPermissions
+        , Network.Google.Resource.CloudResourceManager.TagValues.Create
+        , Network.Google.Resource.CloudResourceManager.TagValues.Delete
+        , Network.Google.Resource.CloudResourceManager.TagValues.Get
+        , Network.Google.Resource.CloudResourceManager.TagValues.GetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.TagValues.List
+        , Network.Google.Resource.CloudResourceManager.TagValues.Patch
+        , Network.Google.Resource.CloudResourceManager.TagValues.SetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.TagValues.TestIAMPermissions
         , Network.Google.ResourceManager
         , Network.Google.ResourceManager.Types
 

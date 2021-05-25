@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,14 +47,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvstipCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.testIamPermissions@ method which the
 -- 'ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissions' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissionsResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,21 +67,21 @@ type ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsLocationsDataSetsHl7V2StoresTestIAMPermissions' smart constructor.
 data ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissions =
   ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissions'
-    { _pldshvstipXgafv          :: !(Maybe Xgafv)
+    { _pldshvstipXgafv :: !(Maybe Xgafv)
     , _pldshvstipUploadProtocol :: !(Maybe Text)
-    , _pldshvstipAccessToken    :: !(Maybe Text)
-    , _pldshvstipUploadType     :: !(Maybe Text)
-    , _pldshvstipPayload        :: !TestIAMPermissionsRequest
-    , _pldshvstipResource       :: !Text
-    , _pldshvstipCallback       :: !(Maybe Text)
+    , _pldshvstipAccessToken :: !(Maybe Text)
+    , _pldshvstipUploadType :: !(Maybe Text)
+    , _pldshvstipPayload :: !TestIAMPermissionsRequest
+    , _pldshvstipResource :: !Text
+    , _pldshvstipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

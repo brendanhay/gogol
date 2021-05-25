@@ -55,8 +55,8 @@ module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.A
     , stuapcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.applyProjectConfig@ method which the
 -- 'ServicesTenancyUnitsApplyProjectConfig' request conforms to.
@@ -90,13 +90,13 @@ type ServicesTenancyUnitsApplyProjectConfigResource =
 -- /See:/ 'servicesTenancyUnitsApplyProjectConfig' smart constructor.
 data ServicesTenancyUnitsApplyProjectConfig =
   ServicesTenancyUnitsApplyProjectConfig'
-    { _stuapcXgafv          :: !(Maybe Xgafv)
+    { _stuapcXgafv :: !(Maybe Xgafv)
     , _stuapcUploadProtocol :: !(Maybe Text)
-    , _stuapcAccessToken    :: !(Maybe Text)
-    , _stuapcUploadType     :: !(Maybe Text)
-    , _stuapcPayload        :: !ApplyTenantProjectConfigRequest
-    , _stuapcName           :: !Text
-    , _stuapcCallback       :: !(Maybe Text)
+    , _stuapcAccessToken :: !(Maybe Text)
+    , _stuapcUploadType :: !(Maybe Text)
+    , _stuapcPayload :: !ApplyTenantProjectConfigRequest
+    , _stuapcName :: !Text
+    , _stuapcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -163,7 +163,7 @@ stuapcPayload
   = lens _stuapcPayload
       (\ s a -> s{_stuapcPayload = a})
 
--- | Name of the tenancy unit. Such as
+-- | Required. Name of the tenancy unit. Such as
 -- \'services\/service.googleapis.com\/projects\/12345\/tenancyUnits\/abcd\'.
 stuapcName :: Lens' ServicesTenancyUnitsApplyProjectConfig Text
 stuapcName

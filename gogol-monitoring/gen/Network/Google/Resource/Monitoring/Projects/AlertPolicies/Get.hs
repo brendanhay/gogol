@@ -22,7 +22,7 @@
 --
 -- Gets a single alerting policy.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.alertPolicies.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.get@.
 module Network.Google.Resource.Monitoring.Projects.AlertPolicies.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Monitoring.Projects.AlertPolicies.Get
     , papgCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.alertPolicies.get@ method which the
 -- 'ProjectsAlertPoliciesGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsAlertPoliciesGetResource =
 -- /See:/ 'projectsAlertPoliciesGet' smart constructor.
 data ProjectsAlertPoliciesGet =
   ProjectsAlertPoliciesGet'
-    { _papgXgafv          :: !(Maybe Xgafv)
+    { _papgXgafv :: !(Maybe Xgafv)
     , _papgUploadProtocol :: !(Maybe Text)
-    , _papgAccessToken    :: !(Maybe Text)
-    , _papgUploadType     :: !(Maybe Text)
-    , _papgName           :: !Text
-    , _papgCallback       :: !(Maybe Text)
+    , _papgAccessToken :: !(Maybe Text)
+    , _papgUploadType :: !(Maybe Text)
+    , _papgName :: !Text
+    , _papgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,8 +123,8 @@ papgUploadType
   = lens _papgUploadType
       (\ s a -> s{_papgUploadType = a})
 
--- | The alerting policy to retrieve. The format is
--- projects\/[PROJECT_ID]\/alertPolicies\/[ALERT_POLICY_ID]
+-- | Required. The alerting policy to retrieve. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/alertPolicies\/[ALERT_POLICY_ID]
 papgName :: Lens' ProjectsAlertPoliciesGet Text
 papgName = lens _papgName (\ s a -> s{_papgName = a})
 

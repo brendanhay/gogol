@@ -37,8 +37,8 @@ module Network.Google.Resource.Webmasters.Sitemaps.Delete
     , sdSiteURL
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sitemaps.delete@ method which the
 -- 'SitemapsDelete' request conforms to.
@@ -57,7 +57,7 @@ type SitemapsDeleteResource =
 data SitemapsDelete =
   SitemapsDelete'
     { _sdFeedpath :: !Text
-    , _sdSiteURL  :: !Text
+    , _sdSiteURL :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

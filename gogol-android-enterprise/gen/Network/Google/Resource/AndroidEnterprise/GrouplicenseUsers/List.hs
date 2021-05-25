@@ -34,12 +34,17 @@ module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
     , GrouplicenseUsersList
 
     -- * Request Lenses
+    , gulXgafv
+    , gulUploadProtocol
     , gulEnterpriseId
+    , gulAccessToken
+    , gulUploadType
     , gulGroupLicenseId
+    , gulCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.grouplicenseusers.list@ method which the
 -- 'GrouplicenseUsersList' request conforms to.
@@ -51,8 +56,13 @@ type GrouplicenseUsersListResource =
              "groupLicenses" :>
                Capture "groupLicenseId" Text :>
                  "users" :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] GroupLicenseUsersListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] GroupLicenseUsersListResponse
 
 -- | Retrieves the IDs of the users who have been granted entitlements under
 -- the license.
@@ -60,8 +70,13 @@ type GrouplicenseUsersListResource =
 -- /See:/ 'grouplicenseUsersList' smart constructor.
 data GrouplicenseUsersList =
   GrouplicenseUsersList'
-    { _gulEnterpriseId   :: !Text
+    { _gulXgafv :: !(Maybe Xgafv)
+    , _gulUploadProtocol :: !(Maybe Text)
+    , _gulEnterpriseId :: !Text
+    , _gulAccessToken :: !(Maybe Text)
+    , _gulUploadType :: !(Maybe Text)
     , _gulGroupLicenseId :: !Text
+    , _gulCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,25 +85,62 @@ data GrouplicenseUsersList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gulXgafv'
+--
+-- * 'gulUploadProtocol'
+--
 -- * 'gulEnterpriseId'
 --
+-- * 'gulAccessToken'
+--
+-- * 'gulUploadType'
+--
 -- * 'gulGroupLicenseId'
+--
+-- * 'gulCallback'
 grouplicenseUsersList
     :: Text -- ^ 'gulEnterpriseId'
     -> Text -- ^ 'gulGroupLicenseId'
     -> GrouplicenseUsersList
 grouplicenseUsersList pGulEnterpriseId_ pGulGroupLicenseId_ =
   GrouplicenseUsersList'
-    { _gulEnterpriseId = pGulEnterpriseId_
+    { _gulXgafv = Nothing
+    , _gulUploadProtocol = Nothing
+    , _gulEnterpriseId = pGulEnterpriseId_
+    , _gulAccessToken = Nothing
+    , _gulUploadType = Nothing
     , _gulGroupLicenseId = pGulGroupLicenseId_
+    , _gulCallback = Nothing
     }
 
+
+-- | V1 error format.
+gulXgafv :: Lens' GrouplicenseUsersList (Maybe Xgafv)
+gulXgafv = lens _gulXgafv (\ s a -> s{_gulXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+gulUploadProtocol :: Lens' GrouplicenseUsersList (Maybe Text)
+gulUploadProtocol
+  = lens _gulUploadProtocol
+      (\ s a -> s{_gulUploadProtocol = a})
 
 -- | The ID of the enterprise.
 gulEnterpriseId :: Lens' GrouplicenseUsersList Text
 gulEnterpriseId
   = lens _gulEnterpriseId
       (\ s a -> s{_gulEnterpriseId = a})
+
+-- | OAuth access token.
+gulAccessToken :: Lens' GrouplicenseUsersList (Maybe Text)
+gulAccessToken
+  = lens _gulAccessToken
+      (\ s a -> s{_gulAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+gulUploadType :: Lens' GrouplicenseUsersList (Maybe Text)
+gulUploadType
+  = lens _gulUploadType
+      (\ s a -> s{_gulUploadType = a})
 
 -- | The ID of the product the group license is for, e.g.
 -- \"app:com.google.android.gm\".
@@ -97,13 +149,22 @@ gulGroupLicenseId
   = lens _gulGroupLicenseId
       (\ s a -> s{_gulGroupLicenseId = a})
 
+-- | JSONP
+gulCallback :: Lens' GrouplicenseUsersList (Maybe Text)
+gulCallback
+  = lens _gulCallback (\ s a -> s{_gulCallback = a})
+
 instance GoogleRequest GrouplicenseUsersList where
         type Rs GrouplicenseUsersList =
              GroupLicenseUsersListResponse
         type Scopes GrouplicenseUsersList =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient GrouplicenseUsersList'{..}
-          = go _gulEnterpriseId _gulGroupLicenseId
+          = go _gulEnterpriseId _gulGroupLicenseId _gulXgafv
+              _gulUploadProtocol
+              _gulAccessToken
+              _gulUploadType
+              _gulCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

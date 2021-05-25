@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uploads a new image and adds it to the list of images for the specified
--- language and image type.
+-- Uploads an image of the specified language and image type, and adds to
+-- the edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.upload@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.images.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
     (
     -- * REST Resource
@@ -34,14 +34,19 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
     , EditsImagesUpload
 
     -- * Request Lenses
+    , eiuXgafv
+    , eiuUploadProtocol
     , eiuPackageName
+    , eiuAccessToken
+    , eiuUploadType
     , eiuImageType
     , eiuLanguage
     , eiuEditId
+    , eiuCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.images.upload@ method which the
 -- 'EditsImagesUpload' request conforms to.
@@ -55,8 +60,13 @@ type EditsImagesUploadResource =
                  "listings" :>
                    Capture "language" Text :>
                      Capture "imageType" EditsImagesUploadImageType :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] ImagesUploadResponse
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Post '[JSON] ImagesUploadResponse
        :<|>
        "upload" :>
          "androidpublisher" :>
@@ -68,20 +78,31 @@ type EditsImagesUploadResource =
                      "listings" :>
                        Capture "language" Text :>
                          Capture "imageType" EditsImagesUploadImageType :>
-                           QueryParam "alt" AltJSON :>
-                             QueryParam "uploadType" AltMedia :>
-                               AltMedia :> Post '[JSON] ImagesUploadResponse
+                           QueryParam "$.xgafv" Xgafv :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "access_token" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       QueryParam "uploadType" AltMedia :>
+                                         AltMedia :>
+                                           Post '[JSON] ImagesUploadResponse
 
--- | Uploads a new image and adds it to the list of images for the specified
--- language and image type.
+-- | Uploads an image of the specified language and image type, and adds to
+-- the edit.
 --
 -- /See:/ 'editsImagesUpload' smart constructor.
 data EditsImagesUpload =
   EditsImagesUpload'
-    { _eiuPackageName :: !Text
-    , _eiuImageType   :: !EditsImagesUploadImageType
-    , _eiuLanguage    :: !Text
-    , _eiuEditId      :: !Text
+    { _eiuXgafv :: !(Maybe Xgafv)
+    , _eiuUploadProtocol :: !(Maybe Text)
+    , _eiuPackageName :: !Text
+    , _eiuAccessToken :: !(Maybe Text)
+    , _eiuUploadType :: !(Maybe Text)
+    , _eiuImageType :: !EditsImagesUploadImageType
+    , _eiuLanguage :: !Text
+    , _eiuEditId :: !Text
+    , _eiuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,13 +111,23 @@ data EditsImagesUpload =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eiuXgafv'
+--
+-- * 'eiuUploadProtocol'
+--
 -- * 'eiuPackageName'
+--
+-- * 'eiuAccessToken'
+--
+-- * 'eiuUploadType'
 --
 -- * 'eiuImageType'
 --
 -- * 'eiuLanguage'
 --
 -- * 'eiuEditId'
+--
+-- * 'eiuCallback'
 editsImagesUpload
     :: Text -- ^ 'eiuPackageName'
     -> EditsImagesUploadImageType -- ^ 'eiuImageType'
@@ -105,35 +136,67 @@ editsImagesUpload
     -> EditsImagesUpload
 editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
   EditsImagesUpload'
-    { _eiuPackageName = pEiuPackageName_
+    { _eiuXgafv = Nothing
+    , _eiuUploadProtocol = Nothing
+    , _eiuPackageName = pEiuPackageName_
+    , _eiuAccessToken = Nothing
+    , _eiuUploadType = Nothing
     , _eiuImageType = pEiuImageType_
     , _eiuLanguage = pEiuLanguage_
     , _eiuEditId = pEiuEditId_
+    , _eiuCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+eiuXgafv :: Lens' EditsImagesUpload (Maybe Xgafv)
+eiuXgafv = lens _eiuXgafv (\ s a -> s{_eiuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eiuUploadProtocol :: Lens' EditsImagesUpload (Maybe Text)
+eiuUploadProtocol
+  = lens _eiuUploadProtocol
+      (\ s a -> s{_eiuUploadProtocol = a})
+
+-- | Package name of the app.
 eiuPackageName :: Lens' EditsImagesUpload Text
 eiuPackageName
   = lens _eiuPackageName
       (\ s a -> s{_eiuPackageName = a})
 
+-- | OAuth access token.
+eiuAccessToken :: Lens' EditsImagesUpload (Maybe Text)
+eiuAccessToken
+  = lens _eiuAccessToken
+      (\ s a -> s{_eiuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eiuUploadType :: Lens' EditsImagesUpload (Maybe Text)
+eiuUploadType
+  = lens _eiuUploadType
+      (\ s a -> s{_eiuUploadType = a})
+
+-- | Type of the Image.
 eiuImageType :: Lens' EditsImagesUpload EditsImagesUploadImageType
 eiuImageType
   = lens _eiuImageType (\ s a -> s{_eiuImageType = a})
 
--- | The language code (a BCP-47 language tag) of the localized listing whose
--- images are to read or modified. For example, to select Austrian German,
--- pass \"de-AT\".
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German). Providing a language that is not
+-- supported by the App is a no-op.
 eiuLanguage :: Lens' EditsImagesUpload Text
 eiuLanguage
   = lens _eiuLanguage (\ s a -> s{_eiuLanguage = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 eiuEditId :: Lens' EditsImagesUpload Text
 eiuEditId
   = lens _eiuEditId (\ s a -> s{_eiuEditId = a})
+
+-- | JSONP
+eiuCallback :: Lens' EditsImagesUpload (Maybe Text)
+eiuCallback
+  = lens _eiuCallback (\ s a -> s{_eiuCallback = a})
 
 instance GoogleRequest EditsImagesUpload where
         type Rs EditsImagesUpload = ImagesUploadResponse
@@ -142,6 +205,11 @@ instance GoogleRequest EditsImagesUpload where
         requestClient EditsImagesUpload'{..}
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
+              _eiuXgafv
+              _eiuUploadProtocol
+              _eiuAccessToken
+              _eiuUploadType
+              _eiuCallback
               (Just AltJSON)
               androidPublisherService
           where go :<|> _
@@ -160,6 +228,11 @@ instance GoogleRequest
           (MediaUpload EditsImagesUpload'{..} body)
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
+              _eiuXgafv
+              _eiuUploadProtocol
+              _eiuAccessToken
+              _eiuUploadType
+              _eiuCallback
               (Just AltJSON)
               (Just AltMedia)
               body

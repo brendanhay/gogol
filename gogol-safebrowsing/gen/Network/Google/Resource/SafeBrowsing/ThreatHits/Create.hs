@@ -42,8 +42,8 @@ module Network.Google.Resource.SafeBrowsing.ThreatHits.Create
     , thcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SafeBrowsing.Types
+import Network.Google.Prelude
+import Network.Google.SafeBrowsing.Types
 
 -- | A resource alias for @safebrowsing.threatHits.create@ method which the
 -- 'ThreatHitsCreate' request conforms to.
@@ -56,7 +56,8 @@ type ThreatHitsCreateResource =
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ThreatHit :> Post '[JSON] Empty
+                     ReqBody '[JSON] GoogleSecuritySafebrowsingV4ThreatHit
+                       :> Post '[JSON] GoogleProtobufEmpty
 
 -- | Reports a Safe Browsing threat list hit to Google. Only projects with
 -- TRUSTED_REPORTER visibility can use this method.
@@ -64,12 +65,12 @@ type ThreatHitsCreateResource =
 -- /See:/ 'threatHitsCreate' smart constructor.
 data ThreatHitsCreate =
   ThreatHitsCreate'
-    { _thcXgafv          :: !(Maybe Xgafv)
+    { _thcXgafv :: !(Maybe Xgafv)
     , _thcUploadProtocol :: !(Maybe Text)
-    , _thcAccessToken    :: !(Maybe Text)
-    , _thcUploadType     :: !(Maybe Text)
-    , _thcPayload        :: !ThreatHit
-    , _thcCallback       :: !(Maybe Text)
+    , _thcAccessToken :: !(Maybe Text)
+    , _thcUploadType :: !(Maybe Text)
+    , _thcPayload :: !GoogleSecuritySafebrowsingV4ThreatHit
+    , _thcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,7 +91,7 @@ data ThreatHitsCreate =
 --
 -- * 'thcCallback'
 threatHitsCreate
-    :: ThreatHit -- ^ 'thcPayload'
+    :: GoogleSecuritySafebrowsingV4ThreatHit -- ^ 'thcPayload'
     -> ThreatHitsCreate
 threatHitsCreate pThcPayload_ =
   ThreatHitsCreate'
@@ -126,7 +127,7 @@ thcUploadType
       (\ s a -> s{_thcUploadType = a})
 
 -- | Multipart request metadata.
-thcPayload :: Lens' ThreatHitsCreate ThreatHit
+thcPayload :: Lens' ThreatHitsCreate GoogleSecuritySafebrowsingV4ThreatHit
 thcPayload
   = lens _thcPayload (\ s a -> s{_thcPayload = a})
 
@@ -136,7 +137,7 @@ thcCallback
   = lens _thcCallback (\ s a -> s{_thcCallback = a})
 
 instance GoogleRequest ThreatHitsCreate where
-        type Rs ThreatHitsCreate = Empty
+        type Rs ThreatHitsCreate = GoogleProtobufEmpty
         type Scopes ThreatHitsCreate = '[]
         requestClient ThreatHitsCreate'{..}
           = go _thcXgafv _thcUploadProtocol _thcAccessToken

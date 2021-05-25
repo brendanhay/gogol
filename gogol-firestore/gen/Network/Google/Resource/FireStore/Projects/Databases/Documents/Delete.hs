@@ -43,8 +43,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.Delete
     , pdddCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.delete@ method which the
 -- 'ProjectsDatabasesDocumentsDelete' request conforms to.
@@ -65,14 +65,14 @@ type ProjectsDatabasesDocumentsDeleteResource =
 -- /See:/ 'projectsDatabasesDocumentsDelete' smart constructor.
 data ProjectsDatabasesDocumentsDelete =
   ProjectsDatabasesDocumentsDelete'
-    { _pdddXgafv                     :: !(Maybe Xgafv)
-    , _pdddUploadProtocol            :: !(Maybe Text)
-    , _pdddCurrentDocumentExists     :: !(Maybe Bool)
-    , _pdddAccessToken               :: !(Maybe Text)
-    , _pdddUploadType                :: !(Maybe Text)
+    { _pdddXgafv :: !(Maybe Xgafv)
+    , _pdddUploadProtocol :: !(Maybe Text)
+    , _pdddCurrentDocumentExists :: !(Maybe Bool)
+    , _pdddAccessToken :: !(Maybe Text)
+    , _pdddUploadType :: !(Maybe Text)
     , _pdddCurrentDocumentUpdateTime :: !(Maybe DateTime')
-    , _pdddName                      :: !Text
-    , _pdddCallback                  :: !(Maybe Text)
+    , _pdddName :: !Text
+    , _pdddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,7 +150,7 @@ pdddCurrentDocumentUpdateTime
       (\ s a -> s{_pdddCurrentDocumentUpdateTime = a})
       . mapping _DateTime
 
--- | The resource name of the Document to delete. In the format:
+-- | Required. The resource name of the Document to delete. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
 pdddName :: Lens' ProjectsDatabasesDocumentsDelete Text
 pdddName = lens _pdddName (\ s a -> s{_pdddName = a})

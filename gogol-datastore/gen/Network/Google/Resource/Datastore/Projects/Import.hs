@@ -46,8 +46,8 @@ module Network.Google.Resource.Datastore.Projects.Import
     , pCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.import@ method which the
 -- 'ProjectsImport' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsImportResource =
 -- /See:/ 'projectsImport' smart constructor.
 data ProjectsImport =
   ProjectsImport'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !GoogleDatastoreAdminV1ImportEntitiesRequest
-    , _pProjectId      :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !GoogleDatastoreAdminV1ImportEntitiesRequest
+    , _pProjectId :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -142,7 +142,7 @@ pUploadType
 pPayload :: Lens' ProjectsImport GoogleDatastoreAdminV1ImportEntitiesRequest
 pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
--- | Project ID against which to make the request.
+-- | Required. Project ID against which to make the request.
 pProjectId :: Lens' ProjectsImport Text
 pProjectId
   = lens _pProjectId (\ s a -> s{_pProjectId = a})

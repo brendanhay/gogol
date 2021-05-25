@@ -17,50 +17,22 @@
 --
 module Network.Google.Composer.Types.Product where
 
-import           Network.Google.Composer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Composer.Types.Sum
+import Network.Google.Prelude
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -215,7 +187,7 @@ instance ToJSON ListImageVersionsResponse where
 data ListEnvironmentsResponse =
   ListEnvironmentsResponse'
     { _lerNextPageToken :: !(Maybe Text)
-    , _lerEnvironments  :: !(Maybe [Environment])
+    , _lerEnvironments :: !(Maybe [Environment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -263,17 +235,102 @@ instance ToJSON ListEnvironmentsResponse where
                  [("nextPageToken" .=) <$> _lerNextPageToken,
                   ("environments" .=) <$> _lerEnvironments])
 
+-- | The configuration settings for the Airflow web server App Engine
+-- instance.
+--
+-- /See:/ 'webServerConfig' smart constructor.
+newtype WebServerConfig =
+  WebServerConfig'
+    { _wscMachineType :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WebServerConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wscMachineType'
+webServerConfig
+    :: WebServerConfig
+webServerConfig = WebServerConfig' {_wscMachineType = Nothing}
+
+
+-- | Optional. Machine type on which Airflow web server is running. It has to
+-- be one of: composer-n1-webserver-2, composer-n1-webserver-4 or
+-- composer-n1-webserver-8. If not specified, composer-n1-webserver-2 will
+-- be used. Value custom is returned only in response, if Airflow web
+-- server parameters were manually changed to a non-standard values.
+wscMachineType :: Lens' WebServerConfig (Maybe Text)
+wscMachineType
+  = lens _wscMachineType
+      (\ s a -> s{_wscMachineType = a})
+
+instance FromJSON WebServerConfig where
+        parseJSON
+          = withObject "WebServerConfig"
+              (\ o -> WebServerConfig' <$> (o .:? "machineType"))
+
+instance ToJSON WebServerConfig where
+        toJSON WebServerConfig'{..}
+          = object
+              (catMaybes [("machineType" .=) <$> _wscMachineType])
+
+-- | The configuration of Cloud SQL instance that is used by the Apache
+-- Airflow software.
+--
+-- /See:/ 'databaseConfig' smart constructor.
+newtype DatabaseConfig =
+  DatabaseConfig'
+    { _dcMachineType :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DatabaseConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcMachineType'
+databaseConfig
+    :: DatabaseConfig
+databaseConfig = DatabaseConfig' {_dcMachineType = Nothing}
+
+
+-- | Optional. Cloud SQL machine type used by Airflow database. It has to be
+-- one of: db-n1-standard-2, db-n1-standard-4, db-n1-standard-8 or
+-- db-n1-standard-16. If not specified, db-n1-standard-2 will be used.
+dcMachineType :: Lens' DatabaseConfig (Maybe Text)
+dcMachineType
+  = lens _dcMachineType
+      (\ s a -> s{_dcMachineType = a})
+
+instance FromJSON DatabaseConfig where
+        parseJSON
+          = withObject "DatabaseConfig"
+              (\ o -> DatabaseConfig' <$> (o .:? "machineType"))
+
+instance ToJSON DatabaseConfig where
+        toJSON DatabaseConfig'{..}
+          = object
+              (catMaybes [("machineType" .=) <$> _dcMachineType])
+
 -- | Configuration information for an environment.
 --
 -- /See:/ 'environmentConfig' smart constructor.
 data EnvironmentConfig =
   EnvironmentConfig'
-    { _ecNodeConfig     :: !(Maybe NodeConfig)
-    , _ecNodeCount      :: !(Maybe (Textual Int32))
+    { _ecDatabaseConfig :: !(Maybe DatabaseConfig)
+    , _ecWebServerConfig :: !(Maybe WebServerConfig)
+    , _ecNodeConfig :: !(Maybe NodeConfig)
+    , _ecNodeCount :: !(Maybe (Textual Int32))
+    , _ecPrivateEnvironmentConfig :: !(Maybe PrivateEnvironmentConfig)
+    , _ecEncryptionConfig :: !(Maybe EncryptionConfig)
     , _ecSoftwareConfig :: !(Maybe SoftwareConfig)
-    , _ecDagGcsPrefix   :: !(Maybe Text)
-    , _ecGkeCluster     :: !(Maybe Text)
-    , _ecAirflowURI     :: !(Maybe Text)
+    , _ecDagGcsPrefix :: !(Maybe Text)
+    , _ecWebServerNetworkAccessControl :: !(Maybe WebServerNetworkAccessControl)
+    , _ecGkeCluster :: !(Maybe Text)
+    , _ecAirflowURI :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -282,13 +339,23 @@ data EnvironmentConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ecDatabaseConfig'
+--
+-- * 'ecWebServerConfig'
+--
 -- * 'ecNodeConfig'
 --
 -- * 'ecNodeCount'
 --
+-- * 'ecPrivateEnvironmentConfig'
+--
+-- * 'ecEncryptionConfig'
+--
 -- * 'ecSoftwareConfig'
 --
 -- * 'ecDagGcsPrefix'
+--
+-- * 'ecWebServerNetworkAccessControl'
 --
 -- * 'ecGkeCluster'
 --
@@ -297,14 +364,33 @@ environmentConfig
     :: EnvironmentConfig
 environmentConfig =
   EnvironmentConfig'
-    { _ecNodeConfig = Nothing
+    { _ecDatabaseConfig = Nothing
+    , _ecWebServerConfig = Nothing
+    , _ecNodeConfig = Nothing
     , _ecNodeCount = Nothing
+    , _ecPrivateEnvironmentConfig = Nothing
+    , _ecEncryptionConfig = Nothing
     , _ecSoftwareConfig = Nothing
     , _ecDagGcsPrefix = Nothing
+    , _ecWebServerNetworkAccessControl = Nothing
     , _ecGkeCluster = Nothing
     , _ecAirflowURI = Nothing
     }
 
+
+-- | Optional. The configuration settings for Cloud SQL instance used
+-- internally by Apache Airflow software.
+ecDatabaseConfig :: Lens' EnvironmentConfig (Maybe DatabaseConfig)
+ecDatabaseConfig
+  = lens _ecDatabaseConfig
+      (\ s a -> s{_ecDatabaseConfig = a})
+
+-- | Optional. The configuration settings for the Airflow web server App
+-- Engine instance.
+ecWebServerConfig :: Lens' EnvironmentConfig (Maybe WebServerConfig)
+ecWebServerConfig
+  = lens _ecWebServerConfig
+      (\ s a -> s{_ecWebServerConfig = a})
 
 -- | The configuration used for the Kubernetes Engine cluster.
 ecNodeConfig :: Lens' EnvironmentConfig (Maybe NodeConfig)
@@ -317,6 +403,19 @@ ecNodeCount :: Lens' EnvironmentConfig (Maybe Int32)
 ecNodeCount
   = lens _ecNodeCount (\ s a -> s{_ecNodeCount = a}) .
       mapping _Coerce
+
+-- | The configuration used for the Private IP Cloud Composer environment.
+ecPrivateEnvironmentConfig :: Lens' EnvironmentConfig (Maybe PrivateEnvironmentConfig)
+ecPrivateEnvironmentConfig
+  = lens _ecPrivateEnvironmentConfig
+      (\ s a -> s{_ecPrivateEnvironmentConfig = a})
+
+-- | Optional. The encryption options for the Cloud Composer environment and
+-- its dependencies. Cannot be updated.
+ecEncryptionConfig :: Lens' EnvironmentConfig (Maybe EncryptionConfig)
+ecEncryptionConfig
+  = lens _ecEncryptionConfig
+      (\ s a -> s{_ecEncryptionConfig = a})
 
 -- | The configuration settings for software inside the environment.
 ecSoftwareConfig :: Lens' EnvironmentConfig (Maybe SoftwareConfig)
@@ -333,6 +432,14 @@ ecDagGcsPrefix :: Lens' EnvironmentConfig (Maybe Text)
 ecDagGcsPrefix
   = lens _ecDagGcsPrefix
       (\ s a -> s{_ecDagGcsPrefix = a})
+
+-- | Optional. The network-level access control policy for the Airflow web
+-- server. If unspecified, no network-level access restrictions will be
+-- applied.
+ecWebServerNetworkAccessControl :: Lens' EnvironmentConfig (Maybe WebServerNetworkAccessControl)
+ecWebServerNetworkAccessControl
+  = lens _ecWebServerNetworkAccessControl
+      (\ s a -> s{_ecWebServerNetworkAccessControl = a})
 
 -- | Output only. The Kubernetes Engine cluster used to run this environment.
 ecGkeCluster :: Lens' EnvironmentConfig (Maybe Text)
@@ -351,9 +458,15 @@ instance FromJSON EnvironmentConfig where
           = withObject "EnvironmentConfig"
               (\ o ->
                  EnvironmentConfig' <$>
-                   (o .:? "nodeConfig") <*> (o .:? "nodeCount") <*>
-                     (o .:? "softwareConfig")
+                   (o .:? "databaseConfig") <*>
+                     (o .:? "webServerConfig")
+                     <*> (o .:? "nodeConfig")
+                     <*> (o .:? "nodeCount")
+                     <*> (o .:? "privateEnvironmentConfig")
+                     <*> (o .:? "encryptionConfig")
+                     <*> (o .:? "softwareConfig")
                      <*> (o .:? "dagGcsPrefix")
+                     <*> (o .:? "webServerNetworkAccessControl")
                      <*> (o .:? "gkeCluster")
                      <*> (o .:? "airflowUri"))
 
@@ -361,10 +474,17 @@ instance ToJSON EnvironmentConfig where
         toJSON EnvironmentConfig'{..}
           = object
               (catMaybes
-                 [("nodeConfig" .=) <$> _ecNodeConfig,
+                 [("databaseConfig" .=) <$> _ecDatabaseConfig,
+                  ("webServerConfig" .=) <$> _ecWebServerConfig,
+                  ("nodeConfig" .=) <$> _ecNodeConfig,
                   ("nodeCount" .=) <$> _ecNodeCount,
+                  ("privateEnvironmentConfig" .=) <$>
+                    _ecPrivateEnvironmentConfig,
+                  ("encryptionConfig" .=) <$> _ecEncryptionConfig,
                   ("softwareConfig" .=) <$> _ecSoftwareConfig,
                   ("dagGcsPrefix" .=) <$> _ecDagGcsPrefix,
+                  ("webServerNetworkAccessControl" .=) <$>
+                    _ecWebServerNetworkAccessControl,
                   ("gkeCluster" .=) <$> _ecGkeCluster,
                   ("airflowUri" .=) <$> _ecAirflowURI])
 
@@ -374,7 +494,7 @@ instance ToJSON EnvironmentConfig where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -428,14 +548,15 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig =
   NodeConfig'
-    { _ncDiskSizeGb     :: !(Maybe (Textual Int32))
-    , _ncLocation       :: !(Maybe Text)
-    , _ncNetwork        :: !(Maybe Text)
-    , _ncOAuthScopes    :: !(Maybe [Text])
+    { _ncDiskSizeGb :: !(Maybe (Textual Int32))
+    , _ncLocation :: !(Maybe Text)
+    , _ncNetwork :: !(Maybe Text)
+    , _ncOAuthScopes :: !(Maybe [Text])
+    , _ncIPAllocationPolicy :: !(Maybe IPAllocationPolicy)
     , _ncServiceAccount :: !(Maybe Text)
-    , _ncSubnetwork     :: !(Maybe Text)
-    , _ncMachineType    :: !(Maybe Text)
-    , _ncTags           :: !(Maybe [Text])
+    , _ncSubnetwork :: !(Maybe Text)
+    , _ncMachineType :: !(Maybe Text)
+    , _ncTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -452,6 +573,8 @@ data NodeConfig =
 --
 -- * 'ncOAuthScopes'
 --
+-- * 'ncIPAllocationPolicy'
+--
 -- * 'ncServiceAccount'
 --
 -- * 'ncSubnetwork'
@@ -467,6 +590,7 @@ nodeConfig =
     , _ncLocation = Nothing
     , _ncNetwork = Nothing
     , _ncOAuthScopes = Nothing
+    , _ncIPAllocationPolicy = Nothing
     , _ncServiceAccount = Nothing
     , _ncSubnetwork = Nothing
     , _ncMachineType = Nothing
@@ -501,12 +625,13 @@ ncLocation
 -- | Optional. The Compute Engine network to be used for machine
 -- communications, specified as a [relative resource
 -- name](\/apis\/design\/resource_names#relative_resource_name). For
--- example: \"projects\/{projectId}\/global\/networks\/{networkId}\".
--- [Shared VPC](\/vpc\/docs\/shared-vpc) is not currently supported. The
--- network must belong to the environment\'s project. If unspecified, the
--- \"default\" network ID in the environment\'s project is used. If a
--- [Custom Subnet Network](\/vpc\/docs\/vpc#vpc_networks_and_subnets) is
--- provided, \`nodeConfig.subnetwork\` must also be provided.
+-- example: \"projects\/{projectId}\/global\/networks\/{networkId}\". If
+-- unspecified, the \"default\" network ID in the environment\'s project is
+-- used. If a [Custom Subnet
+-- Network](\/vpc\/docs\/vpc#vpc_networks_and_subnets) is provided,
+-- \`nodeConfig.subnetwork\` must also be provided. For [Shared
+-- VPC](\/vpc\/docs\/shared-vpc) subnetwork requirements, see
+-- \`nodeConfig.subnetwork\`.
 ncNetwork :: Lens' NodeConfig (Maybe Text)
 ncNetwork
   = lens _ncNetwork (\ s a -> s{_ncNetwork = a})
@@ -521,6 +646,13 @@ ncOAuthScopes
       (\ s a -> s{_ncOAuthScopes = a})
       . _Default
       . _Coerce
+
+-- | Optional. The configuration for controlling how IPs are allocated in the
+-- GKE cluster.
+ncIPAllocationPolicy :: Lens' NodeConfig (Maybe IPAllocationPolicy)
+ncIPAllocationPolicy
+  = lens _ncIPAllocationPolicy
+      (\ s a -> s{_ncIPAllocationPolicy = a})
 
 -- | Optional. The Google Cloud Platform Service Account to be used by the
 -- node VMs. If a service account is not specified, the \"default\" Compute
@@ -556,8 +688,9 @@ ncSubnetwork
 -- location, and propagate that choice to both fields. If exactly one of
 -- this field and \`nodeConfig.location\` is specified, the location
 -- information from the specified field will be propagated to the
--- unspecified field. If this field is unspecified, the \`machineTypeId\`
--- defaults to \"n1-standard-1\".
+-- unspecified field. The \`machineTypeId\` must not be a [shared-core
+-- machine type](\/compute\/docs\/machine-types#sharedcore). If this field
+-- is unspecified, the \`machineTypeId\` defaults to \"n1-standard-1\".
 ncMachineType :: Lens' NodeConfig (Maybe Text)
 ncMachineType
   = lens _ncMachineType
@@ -580,6 +713,7 @@ instance FromJSON NodeConfig where
                    (o .:? "diskSizeGb") <*> (o .:? "location") <*>
                      (o .:? "network")
                      <*> (o .:? "oauthScopes" .!= mempty)
+                     <*> (o .:? "ipAllocationPolicy")
                      <*> (o .:? "serviceAccount")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "machineType")
@@ -593,6 +727,7 @@ instance ToJSON NodeConfig where
                   ("location" .=) <$> _ncLocation,
                   ("network" .=) <$> _ncNetwork,
                   ("oauthScopes" .=) <$> _ncOAuthScopes,
+                  ("ipAllocationPolicy" .=) <$> _ncIPAllocationPolicy,
                   ("serviceAccount" .=) <$> _ncServiceAccount,
                   ("subnetwork" .=) <$> _ncSubnetwork,
                   ("machineType" .=) <$> _ncMachineType,
@@ -604,10 +739,10 @@ instance ToJSON NodeConfig where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -662,7 +797,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -769,9 +905,12 @@ instance ToJSON SoftwareConfigEnvVariables where
 -- /See:/ 'imageVersion' smart constructor.
 data ImageVersion =
   ImageVersion'
-    { _ivImageVersionId          :: !(Maybe Text)
+    { _ivUpgradeDisabled :: !(Maybe Bool)
+    , _ivCreationDisabled :: !(Maybe Bool)
+    , _ivReleaseDate :: !(Maybe Date)
+    , _ivImageVersionId :: !(Maybe Text)
     , _ivSupportedPythonVersions :: !(Maybe [Text])
-    , _ivIsDefault               :: !(Maybe Bool)
+    , _ivIsDefault :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -779,6 +918,12 @@ data ImageVersion =
 -- | Creates a value of 'ImageVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ivUpgradeDisabled'
+--
+-- * 'ivCreationDisabled'
+--
+-- * 'ivReleaseDate'
 --
 -- * 'ivImageVersionId'
 --
@@ -789,11 +934,34 @@ imageVersion
     :: ImageVersion
 imageVersion =
   ImageVersion'
-    { _ivImageVersionId = Nothing
+    { _ivUpgradeDisabled = Nothing
+    , _ivCreationDisabled = Nothing
+    , _ivReleaseDate = Nothing
+    , _ivImageVersionId = Nothing
     , _ivSupportedPythonVersions = Nothing
     , _ivIsDefault = Nothing
     }
 
+
+-- | Whether it is impossible to upgrade an environment running with the
+-- image version.
+ivUpgradeDisabled :: Lens' ImageVersion (Maybe Bool)
+ivUpgradeDisabled
+  = lens _ivUpgradeDisabled
+      (\ s a -> s{_ivUpgradeDisabled = a})
+
+-- | Whether it is impossible to create an environment with the image
+-- version.
+ivCreationDisabled :: Lens' ImageVersion (Maybe Bool)
+ivCreationDisabled
+  = lens _ivCreationDisabled
+      (\ s a -> s{_ivCreationDisabled = a})
+
+-- | The date of the version release.
+ivReleaseDate :: Lens' ImageVersion (Maybe Date)
+ivReleaseDate
+  = lens _ivReleaseDate
+      (\ s a -> s{_ivReleaseDate = a})
 
 -- | The string identifier of the ImageVersion, in the form:
 -- \"composer-x.y.z-airflow-a.b(.c)\"
@@ -821,15 +989,21 @@ instance FromJSON ImageVersion where
           = withObject "ImageVersion"
               (\ o ->
                  ImageVersion' <$>
-                   (o .:? "imageVersionId") <*>
-                     (o .:? "supportedPythonVersions" .!= mempty)
+                   (o .:? "upgradeDisabled") <*>
+                     (o .:? "creationDisabled")
+                     <*> (o .:? "releaseDate")
+                     <*> (o .:? "imageVersionId")
+                     <*> (o .:? "supportedPythonVersions" .!= mempty)
                      <*> (o .:? "isDefault"))
 
 instance ToJSON ImageVersion where
         toJSON ImageVersion'{..}
           = object
               (catMaybes
-                 [("imageVersionId" .=) <$> _ivImageVersionId,
+                 [("upgradeDisabled" .=) <$> _ivUpgradeDisabled,
+                  ("creationDisabled" .=) <$> _ivCreationDisabled,
+                  ("releaseDate" .=) <$> _ivReleaseDate,
+                  ("imageVersionId" .=) <$> _ivImageVersionId,
                   ("supportedPythonVersions" .=) <$>
                     _ivSupportedPythonVersions,
                   ("isDefault" .=) <$> _ivIsDefault])
@@ -839,12 +1013,12 @@ instance ToJSON ImageVersion where
 -- /See:/ 'environment' smart constructor.
 data Environment =
   Environment'
-    { _eState      :: !(Maybe EnvironmentState)
-    , _eConfig     :: !(Maybe EnvironmentConfig)
-    , _eUuid       :: !(Maybe Text)
+    { _eState :: !(Maybe EnvironmentState)
+    , _eConfig :: !(Maybe EnvironmentConfig)
+    , _eUuid :: !(Maybe Text)
     , _eUpdateTime :: !(Maybe DateTime')
-    , _eName       :: !(Maybe Text)
-    , _eLabels     :: !(Maybe EnvironmentLabels)
+    , _eName :: !(Maybe Text)
+    , _eLabels :: !(Maybe EnvironmentLabels)
     , _eCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -903,6 +1077,8 @@ eUpdateTime
 
 -- | The resource name of the environment, in the form:
 -- \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\"
+-- EnvironmentId must start with a lowercase letter followed by up to 63
+-- lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
 eName :: Lens' Environment (Maybe Text)
 eName = lens _eName (\ s a -> s{_eName = a})
 
@@ -954,8 +1130,8 @@ instance ToJSON Environment where
 -- [snake_case](https:\/\/en.wikipedia.org\/wiki\/Snake_case). Property
 -- values can contain any character, and can be written in any lower\/upper
 -- case format. Certain Apache Airflow configuration property values are
--- [blacklisted](\/composer\/docs\/how-to\/managing\/setting-airflow-configurations#airflow_configuration_blacklists),
--- and cannot be overridden.
+-- [blocked](\/composer\/docs\/concepts\/airflow-configurations), and
+-- cannot be overridden.
 --
 -- /See:/ 'softwareConfigAirflowConfigOverrides' smart constructor.
 newtype SoftwareConfigAirflowConfigOverrides =
@@ -1032,6 +1208,289 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | Allowed IP range with user-provided description.
+--
+-- /See:/ 'allowedIPRange' smart constructor.
+data AllowedIPRange =
+  AllowedIPRange'
+    { _airValue :: !(Maybe Text)
+    , _airDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AllowedIPRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'airValue'
+--
+-- * 'airDescription'
+allowedIPRange
+    :: AllowedIPRange
+allowedIPRange =
+  AllowedIPRange' {_airValue = Nothing, _airDescription = Nothing}
+
+
+-- | IP address or range, defined using CIDR notation, of requests that this
+-- rule applies to. Examples: \`192.168.1.1\` or \`192.168.0.0\/16\` or
+-- \`2001:db8::\/32\` or \`2001:0db8:0000:0042:0000:8a2e:0370:7334\`. IP
+-- range prefixes should be properly truncated. For example,
+-- \`1.2.3.4\/24\` should be truncated to \`1.2.3.0\/24\`. Similarly, for
+-- IPv6, \`2001:db8::1\/32\` should be truncated to \`2001:db8::\/32\`.
+airValue :: Lens' AllowedIPRange (Maybe Text)
+airValue = lens _airValue (\ s a -> s{_airValue = a})
+
+-- | Optional. User-provided description. It must contain at most 300
+-- characters.
+airDescription :: Lens' AllowedIPRange (Maybe Text)
+airDescription
+  = lens _airDescription
+      (\ s a -> s{_airDescription = a})
+
+instance FromJSON AllowedIPRange where
+        parseJSON
+          = withObject "AllowedIPRange"
+              (\ o ->
+                 AllowedIPRange' <$>
+                   (o .:? "value") <*> (o .:? "description"))
+
+instance ToJSON AllowedIPRange where
+        toJSON AllowedIPRange'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _airValue,
+                  ("description" .=) <$> _airDescription])
+
+-- | Configuration for controlling how IPs are allocated in the GKE cluster
+-- running the Apache Airflow software.
+--
+-- /See:/ 'ipAllocationPolicy' smart constructor.
+data IPAllocationPolicy =
+  IPAllocationPolicy'
+    { _iapServicesSecondaryRangeName :: !(Maybe Text)
+    , _iapUseIPAliases :: !(Maybe Bool)
+    , _iapClusterSecondaryRangeName :: !(Maybe Text)
+    , _iapClusterIPv4CIdRBlock :: !(Maybe Text)
+    , _iapServicesIPv4CIdRBlock :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IPAllocationPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iapServicesSecondaryRangeName'
+--
+-- * 'iapUseIPAliases'
+--
+-- * 'iapClusterSecondaryRangeName'
+--
+-- * 'iapClusterIPv4CIdRBlock'
+--
+-- * 'iapServicesIPv4CIdRBlock'
+ipAllocationPolicy
+    :: IPAllocationPolicy
+ipAllocationPolicy =
+  IPAllocationPolicy'
+    { _iapServicesSecondaryRangeName = Nothing
+    , _iapUseIPAliases = Nothing
+    , _iapClusterSecondaryRangeName = Nothing
+    , _iapClusterIPv4CIdRBlock = Nothing
+    , _iapServicesIPv4CIdRBlock = Nothing
+    }
+
+
+-- | Optional. The name of the services\' secondary range used to allocate IP
+-- addresses to the GKE cluster. This field is applicable only when
+-- \`use_ip_aliases\` is true.
+iapServicesSecondaryRangeName :: Lens' IPAllocationPolicy (Maybe Text)
+iapServicesSecondaryRangeName
+  = lens _iapServicesSecondaryRangeName
+      (\ s a -> s{_iapServicesSecondaryRangeName = a})
+
+-- | Optional. Whether or not to enable Alias IPs in the GKE cluster. If
+-- \`true\`, a VPC-native cluster is created.
+iapUseIPAliases :: Lens' IPAllocationPolicy (Maybe Bool)
+iapUseIPAliases
+  = lens _iapUseIPAliases
+      (\ s a -> s{_iapUseIPAliases = a})
+
+-- | Optional. The name of the GKE cluster\'s secondary range used to
+-- allocate IP addresses to pods. This field is applicable only when
+-- \`use_ip_aliases\` is true.
+iapClusterSecondaryRangeName :: Lens' IPAllocationPolicy (Maybe Text)
+iapClusterSecondaryRangeName
+  = lens _iapClusterSecondaryRangeName
+      (\ s a -> s{_iapClusterSecondaryRangeName = a})
+
+-- | Optional. The IP address range used to allocate IP addresses to pods in
+-- the GKE cluster. This field is applicable only when \`use_ip_aliases\`
+-- is true. Set to blank to have GKE choose a range with the default size.
+-- Set to \/netmask (e.g. \`\/14\`) to have GKE choose a range with a
+-- specific netmask. Set to a
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`10.96.0.0\/14\`) from the RFC-1918 private networks
+-- (e.g. \`10.0.0.0\/8\`, \`172.16.0.0\/12\`, \`192.168.0.0\/16\`) to pick
+-- a specific range to use.
+iapClusterIPv4CIdRBlock :: Lens' IPAllocationPolicy (Maybe Text)
+iapClusterIPv4CIdRBlock
+  = lens _iapClusterIPv4CIdRBlock
+      (\ s a -> s{_iapClusterIPv4CIdRBlock = a})
+
+-- | Optional. The IP address range of the services IP addresses in this GKE
+-- cluster. This field is applicable only when \`use_ip_aliases\` is true.
+-- Set to blank to have GKE choose a range with the default size. Set to
+-- \/netmask (e.g. \`\/14\`) to have GKE choose a range with a specific
+-- netmask. Set to a
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`10.96.0.0\/14\`) from the RFC-1918 private networks
+-- (e.g. \`10.0.0.0\/8\`, \`172.16.0.0\/12\`, \`192.168.0.0\/16\`) to pick
+-- a specific range to use.
+iapServicesIPv4CIdRBlock :: Lens' IPAllocationPolicy (Maybe Text)
+iapServicesIPv4CIdRBlock
+  = lens _iapServicesIPv4CIdRBlock
+      (\ s a -> s{_iapServicesIPv4CIdRBlock = a})
+
+instance FromJSON IPAllocationPolicy where
+        parseJSON
+          = withObject "IPAllocationPolicy"
+              (\ o ->
+                 IPAllocationPolicy' <$>
+                   (o .:? "servicesSecondaryRangeName") <*>
+                     (o .:? "useIpAliases")
+                     <*> (o .:? "clusterSecondaryRangeName")
+                     <*> (o .:? "clusterIpv4CidrBlock")
+                     <*> (o .:? "servicesIpv4CidrBlock"))
+
+instance ToJSON IPAllocationPolicy where
+        toJSON IPAllocationPolicy'{..}
+          = object
+              (catMaybes
+                 [("servicesSecondaryRangeName" .=) <$>
+                    _iapServicesSecondaryRangeName,
+                  ("useIpAliases" .=) <$> _iapUseIPAliases,
+                  ("clusterSecondaryRangeName" .=) <$>
+                    _iapClusterSecondaryRangeName,
+                  ("clusterIpv4CidrBlock" .=) <$>
+                    _iapClusterIPv4CIdRBlock,
+                  ("servicesIpv4CidrBlock" .=) <$>
+                    _iapServicesIPv4CIdRBlock])
+
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: * A full date, with non-zero year,
+-- month, and day values * A month and day value, with a zero year, such as
+-- an anniversary * A year on its own, with zero month and day values * A
+-- year and month value, with a zero day, such as a credit card expiration
+-- date Related types are google.type.TimeOfDay and
+-- \`google.protobuf.Timestamp\`.
+--
+-- /See:/ 'date' smart constructor.
+data Date =
+  Date'
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
+    , _dMonth :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dDay'
+--
+-- * 'dYear'
+--
+-- * 'dMonth'
+date
+    :: Date
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
+
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
+dDay :: Lens' Date (Maybe Int32)
+dDay
+  = lens _dDay (\ s a -> s{_dDay = a}) .
+      mapping _Coerce
+
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+-- a year.
+dYear :: Lens' Date (Maybe Int32)
+dYear
+  = lens _dYear (\ s a -> s{_dYear = a}) .
+      mapping _Coerce
+
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+-- month and day.
+dMonth :: Lens' Date (Maybe Int32)
+dMonth
+  = lens _dMonth (\ s a -> s{_dMonth = a}) .
+      mapping _Coerce
+
+instance FromJSON Date where
+        parseJSON
+          = withObject "Date"
+              (\ o ->
+                 Date' <$>
+                   (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
+
+instance ToJSON Date where
+        toJSON Date'{..}
+          = object
+              (catMaybes
+                 [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
+                  ("month" .=) <$> _dMonth])
+
+-- | Pypi dependencies specified in the environment configuration, at the
+-- time when the build was triggered.
+--
+-- /See:/ 'checkUpgradeResponsePypiDependencies' smart constructor.
+newtype CheckUpgradeResponsePypiDependencies =
+  CheckUpgradeResponsePypiDependencies'
+    { _curpdAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CheckUpgradeResponsePypiDependencies' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'curpdAddtional'
+checkUpgradeResponsePypiDependencies
+    :: HashMap Text Text -- ^ 'curpdAddtional'
+    -> CheckUpgradeResponsePypiDependencies
+checkUpgradeResponsePypiDependencies pCurpdAddtional_ =
+  CheckUpgradeResponsePypiDependencies'
+    {_curpdAddtional = _Coerce # pCurpdAddtional_}
+
+
+curpdAddtional :: Lens' CheckUpgradeResponsePypiDependencies (HashMap Text Text)
+curpdAddtional
+  = lens _curpdAddtional
+      (\ s a -> s{_curpdAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           CheckUpgradeResponsePypiDependencies
+         where
+        parseJSON
+          = withObject "CheckUpgradeResponsePypiDependencies"
+              (\ o ->
+                 CheckUpgradeResponsePypiDependencies' <$>
+                   (parseJSONObject o))
+
+instance ToJSON CheckUpgradeResponsePypiDependencies
+         where
+        toJSON = toJSON . _curpdAddtional
+
 -- | Optional. Custom Python Package Index (PyPI) packages to be installed in
 -- the environment. Keys refer to the lowercase package name such as
 -- \"numpy\" and values are the lowercase extras and version specifier such
@@ -1074,17 +1533,122 @@ instance FromJSON SoftwareConfigPypiPackages where
 instance ToJSON SoftwareConfigPypiPackages where
         toJSON = toJSON . _scppAddtional
 
+-- | The configuration information for configuring a Private IP Cloud
+-- Composer environment.
+--
+-- /See:/ 'privateEnvironmentConfig' smart constructor.
+data PrivateEnvironmentConfig =
+  PrivateEnvironmentConfig'
+    { _pecWebServerIPv4CIdRBlock :: !(Maybe Text)
+    , _pecCloudSQLIPv4CIdRBlock :: !(Maybe Text)
+    , _pecWebServerIPv4ReservedRange :: !(Maybe Text)
+    , _pecPrivateClusterConfig :: !(Maybe PrivateClusterConfig)
+    , _pecEnablePrivateEnvironment :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PrivateEnvironmentConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pecWebServerIPv4CIdRBlock'
+--
+-- * 'pecCloudSQLIPv4CIdRBlock'
+--
+-- * 'pecWebServerIPv4ReservedRange'
+--
+-- * 'pecPrivateClusterConfig'
+--
+-- * 'pecEnablePrivateEnvironment'
+privateEnvironmentConfig
+    :: PrivateEnvironmentConfig
+privateEnvironmentConfig =
+  PrivateEnvironmentConfig'
+    { _pecWebServerIPv4CIdRBlock = Nothing
+    , _pecCloudSQLIPv4CIdRBlock = Nothing
+    , _pecWebServerIPv4ReservedRange = Nothing
+    , _pecPrivateClusterConfig = Nothing
+    , _pecEnablePrivateEnvironment = Nothing
+    }
+
+
+-- | Optional. The CIDR block from which IP range for web server will be
+-- reserved. Needs to be disjoint from
+-- \`private_cluster_config.master_ipv4_cidr_block\` and
+-- \`cloud_sql_ipv4_cidr_block\`.
+pecWebServerIPv4CIdRBlock :: Lens' PrivateEnvironmentConfig (Maybe Text)
+pecWebServerIPv4CIdRBlock
+  = lens _pecWebServerIPv4CIdRBlock
+      (\ s a -> s{_pecWebServerIPv4CIdRBlock = a})
+
+-- | Optional. The CIDR block from which IP range in tenant project will be
+-- reserved for Cloud SQL. Needs to be disjoint from
+-- \`web_server_ipv4_cidr_block\`.
+pecCloudSQLIPv4CIdRBlock :: Lens' PrivateEnvironmentConfig (Maybe Text)
+pecCloudSQLIPv4CIdRBlock
+  = lens _pecCloudSQLIPv4CIdRBlock
+      (\ s a -> s{_pecCloudSQLIPv4CIdRBlock = a})
+
+-- | Output only. The IP range reserved for the tenant project\'s App Engine
+-- VMs.
+pecWebServerIPv4ReservedRange :: Lens' PrivateEnvironmentConfig (Maybe Text)
+pecWebServerIPv4ReservedRange
+  = lens _pecWebServerIPv4ReservedRange
+      (\ s a -> s{_pecWebServerIPv4ReservedRange = a})
+
+-- | Optional. Configuration for the private GKE cluster for a Private IP
+-- Cloud Composer environment.
+pecPrivateClusterConfig :: Lens' PrivateEnvironmentConfig (Maybe PrivateClusterConfig)
+pecPrivateClusterConfig
+  = lens _pecPrivateClusterConfig
+      (\ s a -> s{_pecPrivateClusterConfig = a})
+
+-- | Optional. If \`true\`, a Private IP Cloud Composer environment is
+-- created. If this field is set to true,
+-- \`IPAllocationPolicy.use_ip_aliases\` must be set to true.
+pecEnablePrivateEnvironment :: Lens' PrivateEnvironmentConfig (Maybe Bool)
+pecEnablePrivateEnvironment
+  = lens _pecEnablePrivateEnvironment
+      (\ s a -> s{_pecEnablePrivateEnvironment = a})
+
+instance FromJSON PrivateEnvironmentConfig where
+        parseJSON
+          = withObject "PrivateEnvironmentConfig"
+              (\ o ->
+                 PrivateEnvironmentConfig' <$>
+                   (o .:? "webServerIpv4CidrBlock") <*>
+                     (o .:? "cloudSqlIpv4CidrBlock")
+                     <*> (o .:? "webServerIpv4ReservedRange")
+                     <*> (o .:? "privateClusterConfig")
+                     <*> (o .:? "enablePrivateEnvironment"))
+
+instance ToJSON PrivateEnvironmentConfig where
+        toJSON PrivateEnvironmentConfig'{..}
+          = object
+              (catMaybes
+                 [("webServerIpv4CidrBlock" .=) <$>
+                    _pecWebServerIPv4CIdRBlock,
+                  ("cloudSqlIpv4CidrBlock" .=) <$>
+                    _pecCloudSQLIPv4CIdRBlock,
+                  ("webServerIpv4ReservedRange" .=) <$>
+                    _pecWebServerIPv4ReservedRange,
+                  ("privateClusterConfig" .=) <$>
+                    _pecPrivateClusterConfig,
+                  ("enablePrivateEnvironment" .=) <$>
+                    _pecEnablePrivateEnvironment])
+
 -- | Specifies the selection and configuration of software inside the
 -- environment.
 --
 -- /See:/ 'softwareConfig' smart constructor.
 data SoftwareConfig =
   SoftwareConfig'
-    { _scImageVersion           :: !(Maybe Text)
-    , _scPythonVersion          :: !(Maybe Text)
-    , _scPypiPackages           :: !(Maybe SoftwareConfigPypiPackages)
+    { _scImageVersion :: !(Maybe Text)
+    , _scPythonVersion :: !(Maybe Text)
+    , _scPypiPackages :: !(Maybe SoftwareConfigPypiPackages)
     , _scAirflowConfigOverrides :: !(Maybe SoftwareConfigAirflowConfigOverrides)
-    , _scEnvVariables           :: !(Maybe SoftwareConfigEnvVariables)
+    , _scEnvVariables :: !(Maybe SoftwareConfigEnvVariables)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1126,7 +1690,7 @@ softwareConfig =
 -- \`latest\` is provided instead of an explicit version number, the server
 -- replaces \`latest\` with the current Cloud Composer version and stores
 -- that version number in the same field. The portion of the image version
--- that follows /airflow-/ is an official Apache Airflow repository
+-- that follows *airflow-* is an official Apache Airflow repository
 -- [release
 -- name](https:\/\/github.com\/apache\/incubator-airflow\/releases). See
 -- also [Version
@@ -1138,7 +1702,7 @@ scImageVersion
 
 -- | Optional. The major version of Python used to run the Apache Airflow
 -- scheduler, worker, and webserver processes. Can be set to \'2\' or
--- \'3\'. If not specified, the default is \'2\'. Cannot be updated.
+-- \'3\'. If not specified, the default is \'3\'. Cannot be updated.
 scPythonVersion :: Lens' SoftwareConfig (Maybe Text)
 scPythonVersion
   = lens _scPythonVersion
@@ -1166,8 +1730,8 @@ scPypiPackages
 -- [snake_case](https:\/\/en.wikipedia.org\/wiki\/Snake_case). Property
 -- values can contain any character, and can be written in any lower\/upper
 -- case format. Certain Apache Airflow configuration property values are
--- [blacklisted](\/composer\/docs\/how-to\/managing\/setting-airflow-configurations#airflow_configuration_blacklists),
--- and cannot be overridden.
+-- [blocked](\/composer\/docs\/concepts\/airflow-configurations), and
+-- cannot be overridden.
 scAirflowConfigOverrides :: Lens' SoftwareConfig (Maybe SoftwareConfigAirflowConfigOverrides)
 scAirflowConfigOverrides
   = lens _scAirflowConfigOverrides
@@ -1208,6 +1772,258 @@ instance ToJSON SoftwareConfig where
                   ("airflowConfigOverrides" .=) <$>
                     _scAirflowConfigOverrides,
                   ("envVariables" .=) <$> _scEnvVariables])
+
+-- | Configuration options for the private GKE cluster in a Cloud Composer
+-- environment.
+--
+-- /See:/ 'privateClusterConfig' smart constructor.
+data PrivateClusterConfig =
+  PrivateClusterConfig'
+    { _pccEnablePrivateEndpoint :: !(Maybe Bool)
+    , _pccMasterIPv4CIdRBlock :: !(Maybe Text)
+    , _pccMasterIPv4ReservedRange :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PrivateClusterConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pccEnablePrivateEndpoint'
+--
+-- * 'pccMasterIPv4CIdRBlock'
+--
+-- * 'pccMasterIPv4ReservedRange'
+privateClusterConfig
+    :: PrivateClusterConfig
+privateClusterConfig =
+  PrivateClusterConfig'
+    { _pccEnablePrivateEndpoint = Nothing
+    , _pccMasterIPv4CIdRBlock = Nothing
+    , _pccMasterIPv4ReservedRange = Nothing
+    }
+
+
+-- | Optional. If \`true\`, access to the public endpoint of the GKE cluster
+-- is denied.
+pccEnablePrivateEndpoint :: Lens' PrivateClusterConfig (Maybe Bool)
+pccEnablePrivateEndpoint
+  = lens _pccEnablePrivateEndpoint
+      (\ s a -> s{_pccEnablePrivateEndpoint = a})
+
+-- | Optional. The CIDR block from which IPv4 range for GKE master will be
+-- reserved. If left blank, the default value of \'172.16.0.0\/23\' is
+-- used.
+pccMasterIPv4CIdRBlock :: Lens' PrivateClusterConfig (Maybe Text)
+pccMasterIPv4CIdRBlock
+  = lens _pccMasterIPv4CIdRBlock
+      (\ s a -> s{_pccMasterIPv4CIdRBlock = a})
+
+-- | Output only. The IP range in CIDR notation to use for the hosted master
+-- network. This range is used for assigning internal IP addresses to the
+-- GKE cluster master or set of masters and to the internal load balancer
+-- virtual IP. This range must not overlap with any other ranges in use
+-- within the cluster\'s network.
+pccMasterIPv4ReservedRange :: Lens' PrivateClusterConfig (Maybe Text)
+pccMasterIPv4ReservedRange
+  = lens _pccMasterIPv4ReservedRange
+      (\ s a -> s{_pccMasterIPv4ReservedRange = a})
+
+instance FromJSON PrivateClusterConfig where
+        parseJSON
+          = withObject "PrivateClusterConfig"
+              (\ o ->
+                 PrivateClusterConfig' <$>
+                   (o .:? "enablePrivateEndpoint") <*>
+                     (o .:? "masterIpv4CidrBlock")
+                     <*> (o .:? "masterIpv4ReservedRange"))
+
+instance ToJSON PrivateClusterConfig where
+        toJSON PrivateClusterConfig'{..}
+          = object
+              (catMaybes
+                 [("enablePrivateEndpoint" .=) <$>
+                    _pccEnablePrivateEndpoint,
+                  ("masterIpv4CidrBlock" .=) <$>
+                    _pccMasterIPv4CIdRBlock,
+                  ("masterIpv4ReservedRange" .=) <$>
+                    _pccMasterIPv4ReservedRange])
+
+-- | The encryption options for the Cloud Composer environment and its
+-- dependencies.
+--
+-- /See:/ 'encryptionConfig' smart constructor.
+newtype EncryptionConfig =
+  EncryptionConfig'
+    { _ecKmsKeyName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecKmsKeyName'
+encryptionConfig
+    :: EncryptionConfig
+encryptionConfig = EncryptionConfig' {_ecKmsKeyName = Nothing}
+
+
+-- | Optional. Customer-managed Encryption Key available through Google\'s
+-- Key Management Service. Cannot be updated. If not specified,
+-- Google-managed key will be used.
+ecKmsKeyName :: Lens' EncryptionConfig (Maybe Text)
+ecKmsKeyName
+  = lens _ecKmsKeyName (\ s a -> s{_ecKmsKeyName = a})
+
+instance FromJSON EncryptionConfig where
+        parseJSON
+          = withObject "EncryptionConfig"
+              (\ o -> EncryptionConfig' <$> (o .:? "kmsKeyName"))
+
+instance ToJSON EncryptionConfig where
+        toJSON EncryptionConfig'{..}
+          = object
+              (catMaybes [("kmsKeyName" .=) <$> _ecKmsKeyName])
+
+-- | Message containing information about the result of an upgrade check
+-- operation.
+--
+-- /See:/ 'checkUpgradeResponse' smart constructor.
+data CheckUpgradeResponse =
+  CheckUpgradeResponse'
+    { _curContainsPypiModulesConflict :: !(Maybe CheckUpgradeResponseContainsPypiModulesConflict)
+    , _curBuildLogURI :: !(Maybe Text)
+    , _curImageVersion :: !(Maybe Text)
+    , _curPypiDependencies :: !(Maybe CheckUpgradeResponsePypiDependencies)
+    , _curPypiConflictBuildLogExtract :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CheckUpgradeResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'curContainsPypiModulesConflict'
+--
+-- * 'curBuildLogURI'
+--
+-- * 'curImageVersion'
+--
+-- * 'curPypiDependencies'
+--
+-- * 'curPypiConflictBuildLogExtract'
+checkUpgradeResponse
+    :: CheckUpgradeResponse
+checkUpgradeResponse =
+  CheckUpgradeResponse'
+    { _curContainsPypiModulesConflict = Nothing
+    , _curBuildLogURI = Nothing
+    , _curImageVersion = Nothing
+    , _curPypiDependencies = Nothing
+    , _curPypiConflictBuildLogExtract = Nothing
+    }
+
+
+-- | Output only. Whether build has succeeded or failed on modules conflicts.
+curContainsPypiModulesConflict :: Lens' CheckUpgradeResponse (Maybe CheckUpgradeResponseContainsPypiModulesConflict)
+curContainsPypiModulesConflict
+  = lens _curContainsPypiModulesConflict
+      (\ s a -> s{_curContainsPypiModulesConflict = a})
+
+-- | Output only. Url for a docker build log of an upgraded image.
+curBuildLogURI :: Lens' CheckUpgradeResponse (Maybe Text)
+curBuildLogURI
+  = lens _curBuildLogURI
+      (\ s a -> s{_curBuildLogURI = a})
+
+-- | Composer image for which the build was happening.
+curImageVersion :: Lens' CheckUpgradeResponse (Maybe Text)
+curImageVersion
+  = lens _curImageVersion
+      (\ s a -> s{_curImageVersion = a})
+
+-- | Pypi dependencies specified in the environment configuration, at the
+-- time when the build was triggered.
+curPypiDependencies :: Lens' CheckUpgradeResponse (Maybe CheckUpgradeResponsePypiDependencies)
+curPypiDependencies
+  = lens _curPypiDependencies
+      (\ s a -> s{_curPypiDependencies = a})
+
+-- | Output only. Extract from a docker image build log containing
+-- information about pypi modules conflicts.
+curPypiConflictBuildLogExtract :: Lens' CheckUpgradeResponse (Maybe Text)
+curPypiConflictBuildLogExtract
+  = lens _curPypiConflictBuildLogExtract
+      (\ s a -> s{_curPypiConflictBuildLogExtract = a})
+
+instance FromJSON CheckUpgradeResponse where
+        parseJSON
+          = withObject "CheckUpgradeResponse"
+              (\ o ->
+                 CheckUpgradeResponse' <$>
+                   (o .:? "containsPypiModulesConflict") <*>
+                     (o .:? "buildLogUri")
+                     <*> (o .:? "imageVersion")
+                     <*> (o .:? "pypiDependencies")
+                     <*> (o .:? "pypiConflictBuildLogExtract"))
+
+instance ToJSON CheckUpgradeResponse where
+        toJSON CheckUpgradeResponse'{..}
+          = object
+              (catMaybes
+                 [("containsPypiModulesConflict" .=) <$>
+                    _curContainsPypiModulesConflict,
+                  ("buildLogUri" .=) <$> _curBuildLogURI,
+                  ("imageVersion" .=) <$> _curImageVersion,
+                  ("pypiDependencies" .=) <$> _curPypiDependencies,
+                  ("pypiConflictBuildLogExtract" .=) <$>
+                    _curPypiConflictBuildLogExtract])
+
+-- | Network-level access control policy for the Airflow web server.
+--
+-- /See:/ 'webServerNetworkAccessControl' smart constructor.
+newtype WebServerNetworkAccessControl =
+  WebServerNetworkAccessControl'
+    { _wsnacAllowedIPRanges :: Maybe [AllowedIPRange]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WebServerNetworkAccessControl' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wsnacAllowedIPRanges'
+webServerNetworkAccessControl
+    :: WebServerNetworkAccessControl
+webServerNetworkAccessControl =
+  WebServerNetworkAccessControl' {_wsnacAllowedIPRanges = Nothing}
+
+
+-- | A collection of allowed IP ranges with descriptions.
+wsnacAllowedIPRanges :: Lens' WebServerNetworkAccessControl [AllowedIPRange]
+wsnacAllowedIPRanges
+  = lens _wsnacAllowedIPRanges
+      (\ s a -> s{_wsnacAllowedIPRanges = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON WebServerNetworkAccessControl where
+        parseJSON
+          = withObject "WebServerNetworkAccessControl"
+              (\ o ->
+                 WebServerNetworkAccessControl' <$>
+                   (o .:? "allowedIpRanges" .!= mempty))
+
+instance ToJSON WebServerNetworkAccessControl where
+        toJSON WebServerNetworkAccessControl'{..}
+          = object
+              (catMaybes
+                 [("allowedIpRanges" .=) <$> _wsnacAllowedIPRanges])
 
 -- | Optional. User-defined labels for this environment. The labels map can
 -- contain no more than 64 entries. Entries of the labels map are UTF8
@@ -1254,12 +2070,12 @@ instance ToJSON EnvironmentLabels where
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata =
   OperationMetadata'
-    { _omState         :: !(Maybe OperationMetadataState)
-    , _omResourceUuid  :: !(Maybe Text)
-    , _omResource      :: !(Maybe Text)
-    , _omEndTime       :: !(Maybe DateTime')
+    { _omState :: !(Maybe OperationMetadataState)
+    , _omResourceUuid :: !(Maybe Text)
+    , _omResource :: !(Maybe Text)
+    , _omEndTime :: !(Maybe DateTime')
     , _omOperationType :: !(Maybe OperationMetadataOperationType)
-    , _omCreateTime    :: !(Maybe DateTime')
+    , _omCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

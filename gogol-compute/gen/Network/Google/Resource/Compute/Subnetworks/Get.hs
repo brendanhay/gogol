@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Subnetworks.Get
     , sgRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.get@ method which the
 -- 'SubnetworksGet' request conforms to.
@@ -61,9 +61,9 @@ type SubnetworksGetResource =
 -- /See:/ 'subnetworksGet' smart constructor.
 data SubnetworksGet =
   SubnetworksGet'
-    { _sgProject    :: !Text
+    { _sgProject :: !Text
     , _sgSubnetwork :: !Text
-    , _sgRegion     :: !Text
+    , _sgRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

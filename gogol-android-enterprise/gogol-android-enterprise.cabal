@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Manages the deployment of apps to Android for Work users.
+    Manages the deployment of apps to Android Enterprise devices.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -35,10 +35,10 @@ library
     exposed-modules:
           Network.Google.AndroidEnterprise
         , Network.Google.AndroidEnterprise.Types
+        , Network.Google.Resource.AndroidEnterprise.Devices.ForceReportUpload
         , Network.Google.Resource.AndroidEnterprise.Devices.Get
         , Network.Google.Resource.AndroidEnterprise.Devices.GetState
         , Network.Google.Resource.AndroidEnterprise.Devices.List
-        , Network.Google.Resource.AndroidEnterprise.Devices.Patch
         , Network.Google.Resource.AndroidEnterprise.Devices.SetState
         , Network.Google.Resource.AndroidEnterprise.Devices.Update
         , Network.Google.Resource.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
@@ -58,7 +58,6 @@ library
         , Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
         , Network.Google.Resource.AndroidEnterprise.Entitlements.Get
         , Network.Google.Resource.AndroidEnterprise.Entitlements.List
-        , Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
         , Network.Google.Resource.AndroidEnterprise.Entitlements.Update
         , Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
         , Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
@@ -66,17 +65,14 @@ library
         , Network.Google.Resource.AndroidEnterprise.Installs.Delete
         , Network.Google.Resource.AndroidEnterprise.Installs.Get
         , Network.Google.Resource.AndroidEnterprise.Installs.List
-        , Network.Google.Resource.AndroidEnterprise.Installs.Patch
         , Network.Google.Resource.AndroidEnterprise.Installs.Update
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Delete
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Get
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.List
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Patch
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.Update
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Delete
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Get
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.List
-        , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Patch
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Update
         , Network.Google.Resource.AndroidEnterprise.ManagedConfigurationssettings.List
         , Network.Google.Resource.AndroidEnterprise.Permissions.Get
@@ -94,31 +90,25 @@ library
         , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get
         , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Insert
         , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.List
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Patch
         , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Update
         , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Delete
         , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Get
         , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Insert
         , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.List
-        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Patch
         , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Update
         , Network.Google.Resource.AndroidEnterprise.Users.Delete
         , Network.Google.Resource.AndroidEnterprise.Users.GenerateAuthenticationToken
-        , Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
         , Network.Google.Resource.AndroidEnterprise.Users.Get
         , Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
         , Network.Google.Resource.AndroidEnterprise.Users.Insert
         , Network.Google.Resource.AndroidEnterprise.Users.List
-        , Network.Google.Resource.AndroidEnterprise.Users.Patch
         , Network.Google.Resource.AndroidEnterprise.Users.RevokeDeviceAccess
-        , Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
         , Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
         , Network.Google.Resource.AndroidEnterprise.Users.Update
         , Network.Google.Resource.AndroidEnterprise.WebApps.Delete
         , Network.Google.Resource.AndroidEnterprise.WebApps.Get
         , Network.Google.Resource.AndroidEnterprise.WebApps.Insert
         , Network.Google.Resource.AndroidEnterprise.WebApps.List
-        , Network.Google.Resource.AndroidEnterprise.WebApps.Patch
         , Network.Google.Resource.AndroidEnterprise.WebApps.Update
 
     other-modules:

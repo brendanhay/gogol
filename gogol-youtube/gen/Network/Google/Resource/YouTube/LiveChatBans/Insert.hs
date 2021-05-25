@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a new ban to the chat.
+-- Inserts a new resource into this collection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveChatBans.insert@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveChatBans.insert@.
 module Network.Google.Resource.YouTube.LiveChatBans.Insert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.YouTube.LiveChatBans.Insert
     , LiveChatBansInsert
 
     -- * Request Lenses
+    , lcbiXgafv
     , lcbiPart
+    , lcbiUploadProtocol
+    , lcbiAccessToken
+    , lcbiUploadType
     , lcbiPayload
+    , lcbiCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatBans.insert@ method which the
 -- 'LiveChatBansInsert' request conforms to.
@@ -47,18 +52,28 @@ type LiveChatBansInsertResource =
        "v3" :>
          "liveChat" :>
            "bans" :>
-             QueryParam "part" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LiveChatBan :>
-                   Post '[JSON] LiveChatBan
+             QueryParams "part" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LiveChatBan :>
+                             Post '[JSON] LiveChatBan
 
--- | Adds a new ban to the chat.
+-- | Inserts a new resource into this collection.
 --
 -- /See:/ 'liveChatBansInsert' smart constructor.
 data LiveChatBansInsert =
   LiveChatBansInsert'
-    { _lcbiPart    :: !Text
+    { _lcbiXgafv :: !(Maybe Xgafv)
+    , _lcbiPart :: ![Text]
+    , _lcbiUploadProtocol :: !(Maybe Text)
+    , _lcbiAccessToken :: !(Maybe Text)
+    , _lcbiUploadType :: !(Maybe Text)
     , _lcbiPayload :: !LiveChatBan
+    , _lcbiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,28 +82,76 @@ data LiveChatBansInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcbiXgafv'
+--
 -- * 'lcbiPart'
 --
+-- * 'lcbiUploadProtocol'
+--
+-- * 'lcbiAccessToken'
+--
+-- * 'lcbiUploadType'
+--
 -- * 'lcbiPayload'
+--
+-- * 'lcbiCallback'
 liveChatBansInsert
-    :: Text -- ^ 'lcbiPart'
+    :: [Text] -- ^ 'lcbiPart'
     -> LiveChatBan -- ^ 'lcbiPayload'
     -> LiveChatBansInsert
 liveChatBansInsert pLcbiPart_ pLcbiPayload_ =
-  LiveChatBansInsert' {_lcbiPart = pLcbiPart_, _lcbiPayload = pLcbiPayload_}
+  LiveChatBansInsert'
+    { _lcbiXgafv = Nothing
+    , _lcbiPart = _Coerce # pLcbiPart_
+    , _lcbiUploadProtocol = Nothing
+    , _lcbiAccessToken = Nothing
+    , _lcbiUploadType = Nothing
+    , _lcbiPayload = pLcbiPayload_
+    , _lcbiCallback = Nothing
+    }
 
 
--- | The part parameter serves two purposes in this operation. It identifies
--- the properties that the write operation will set as well as the
--- properties that the API response returns. Set the parameter value to
+-- | V1 error format.
+lcbiXgafv :: Lens' LiveChatBansInsert (Maybe Xgafv)
+lcbiXgafv
+  = lens _lcbiXgafv (\ s a -> s{_lcbiXgafv = a})
+
+-- | The *part* parameter serves two purposes in this operation. It
+-- identifies the properties that the write operation will set as well as
+-- the properties that the API response returns. Set the parameter value to
 -- snippet.
-lcbiPart :: Lens' LiveChatBansInsert Text
-lcbiPart = lens _lcbiPart (\ s a -> s{_lcbiPart = a})
+lcbiPart :: Lens' LiveChatBansInsert [Text]
+lcbiPart
+  = lens _lcbiPart (\ s a -> s{_lcbiPart = a}) .
+      _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lcbiUploadProtocol :: Lens' LiveChatBansInsert (Maybe Text)
+lcbiUploadProtocol
+  = lens _lcbiUploadProtocol
+      (\ s a -> s{_lcbiUploadProtocol = a})
+
+-- | OAuth access token.
+lcbiAccessToken :: Lens' LiveChatBansInsert (Maybe Text)
+lcbiAccessToken
+  = lens _lcbiAccessToken
+      (\ s a -> s{_lcbiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lcbiUploadType :: Lens' LiveChatBansInsert (Maybe Text)
+lcbiUploadType
+  = lens _lcbiUploadType
+      (\ s a -> s{_lcbiUploadType = a})
 
 -- | Multipart request metadata.
 lcbiPayload :: Lens' LiveChatBansInsert LiveChatBan
 lcbiPayload
   = lens _lcbiPayload (\ s a -> s{_lcbiPayload = a})
+
+-- | JSONP
+lcbiCallback :: Lens' LiveChatBansInsert (Maybe Text)
+lcbiCallback
+  = lens _lcbiCallback (\ s a -> s{_lcbiCallback = a})
 
 instance GoogleRequest LiveChatBansInsert where
         type Rs LiveChatBansInsert = LiveChatBan
@@ -96,7 +159,12 @@ instance GoogleRequest LiveChatBansInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatBansInsert'{..}
-          = go (Just _lcbiPart) (Just AltJSON) _lcbiPayload
+          = go _lcbiPart _lcbiXgafv _lcbiUploadProtocol
+              _lcbiAccessToken
+              _lcbiUploadType
+              _lcbiCallback
+              (Just AltJSON)
+              _lcbiPayload
               youTubeService
           where go
                   = buildClient

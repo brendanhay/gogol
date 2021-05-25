@@ -22,7 +22,7 @@
 --
 -- Creates a training or a batch prediction job.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.create@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.jobs.create@.
 module Network.Google.Resource.Ml.Projects.Jobs.Create
     (
     -- * REST Resource
@@ -33,17 +33,17 @@ module Network.Google.Resource.Ml.Projects.Jobs.Create
     , ProjectsJobsCreate
 
     -- * Request Lenses
-    , pParent
-    , pXgafv
-    , pUploadProtocol
-    , pAccessToken
-    , pUploadType
-    , pPayload
-    , pCallback
+    , pjcjParent
+    , pjcjXgafv
+    , pjcjUploadProtocol
+    , pjcjAccessToken
+    , pjcjUploadType
+    , pjcjPayload
+    , pjcjCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.jobs.create@ method which the
 -- 'ProjectsJobsCreate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsJobsCreateResource =
 -- /See:/ 'projectsJobsCreate' smart constructor.
 data ProjectsJobsCreate =
   ProjectsJobsCreate'
-    { _pParent         :: !Text
-    , _pXgafv          :: !(Maybe Xgafv)
-    , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !GoogleCloudMlV1__Job
-    , _pCallback       :: !(Maybe Text)
+    { _pjcjParent :: !Text
+    , _pjcjXgafv :: !(Maybe Xgafv)
+    , _pjcjUploadProtocol :: !(Maybe Text)
+    , _pjcjAccessToken :: !(Maybe Text)
+    , _pjcjUploadType :: !(Maybe Text)
+    , _pjcjPayload :: !GoogleCloudMlV1__Job
+    , _pjcjCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,78 +80,84 @@ data ProjectsJobsCreate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pParent'
+-- * 'pjcjParent'
 --
--- * 'pXgafv'
+-- * 'pjcjXgafv'
 --
--- * 'pUploadProtocol'
+-- * 'pjcjUploadProtocol'
 --
--- * 'pAccessToken'
+-- * 'pjcjAccessToken'
 --
--- * 'pUploadType'
+-- * 'pjcjUploadType'
 --
--- * 'pPayload'
+-- * 'pjcjPayload'
 --
--- * 'pCallback'
+-- * 'pjcjCallback'
 projectsJobsCreate
-    :: Text -- ^ 'pParent'
-    -> GoogleCloudMlV1__Job -- ^ 'pPayload'
+    :: Text -- ^ 'pjcjParent'
+    -> GoogleCloudMlV1__Job -- ^ 'pjcjPayload'
     -> ProjectsJobsCreate
-projectsJobsCreate pPParent_ pPPayload_ =
+projectsJobsCreate pPjcjParent_ pPjcjPayload_ =
   ProjectsJobsCreate'
-    { _pParent = pPParent_
-    , _pXgafv = Nothing
-    , _pUploadProtocol = Nothing
-    , _pAccessToken = Nothing
-    , _pUploadType = Nothing
-    , _pPayload = pPPayload_
-    , _pCallback = Nothing
+    { _pjcjParent = pPjcjParent_
+    , _pjcjXgafv = Nothing
+    , _pjcjUploadProtocol = Nothing
+    , _pjcjAccessToken = Nothing
+    , _pjcjUploadType = Nothing
+    , _pjcjPayload = pPjcjPayload_
+    , _pjcjCallback = Nothing
     }
 
 
 -- | Required. The project name.
-pParent :: Lens' ProjectsJobsCreate Text
-pParent = lens _pParent (\ s a -> s{_pParent = a})
+pjcjParent :: Lens' ProjectsJobsCreate Text
+pjcjParent
+  = lens _pjcjParent (\ s a -> s{_pjcjParent = a})
 
 -- | V1 error format.
-pXgafv :: Lens' ProjectsJobsCreate (Maybe Xgafv)
-pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
+pjcjXgafv :: Lens' ProjectsJobsCreate (Maybe Xgafv)
+pjcjXgafv
+  = lens _pjcjXgafv (\ s a -> s{_pjcjXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pUploadProtocol :: Lens' ProjectsJobsCreate (Maybe Text)
-pUploadProtocol
-  = lens _pUploadProtocol
-      (\ s a -> s{_pUploadProtocol = a})
+pjcjUploadProtocol :: Lens' ProjectsJobsCreate (Maybe Text)
+pjcjUploadProtocol
+  = lens _pjcjUploadProtocol
+      (\ s a -> s{_pjcjUploadProtocol = a})
 
 -- | OAuth access token.
-pAccessToken :: Lens' ProjectsJobsCreate (Maybe Text)
-pAccessToken
-  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
+pjcjAccessToken :: Lens' ProjectsJobsCreate (Maybe Text)
+pjcjAccessToken
+  = lens _pjcjAccessToken
+      (\ s a -> s{_pjcjAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pUploadType :: Lens' ProjectsJobsCreate (Maybe Text)
-pUploadType
-  = lens _pUploadType (\ s a -> s{_pUploadType = a})
+pjcjUploadType :: Lens' ProjectsJobsCreate (Maybe Text)
+pjcjUploadType
+  = lens _pjcjUploadType
+      (\ s a -> s{_pjcjUploadType = a})
 
 -- | Multipart request metadata.
-pPayload :: Lens' ProjectsJobsCreate GoogleCloudMlV1__Job
-pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
+pjcjPayload :: Lens' ProjectsJobsCreate GoogleCloudMlV1__Job
+pjcjPayload
+  = lens _pjcjPayload (\ s a -> s{_pjcjPayload = a})
 
 -- | JSONP
-pCallback :: Lens' ProjectsJobsCreate (Maybe Text)
-pCallback
-  = lens _pCallback (\ s a -> s{_pCallback = a})
+pjcjCallback :: Lens' ProjectsJobsCreate (Maybe Text)
+pjcjCallback
+  = lens _pjcjCallback (\ s a -> s{_pjcjCallback = a})
 
 instance GoogleRequest ProjectsJobsCreate where
         type Rs ProjectsJobsCreate = GoogleCloudMlV1__Job
         type Scopes ProjectsJobsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsJobsCreate'{..}
-          = go _pParent _pXgafv _pUploadProtocol _pAccessToken
-              _pUploadType
-              _pCallback
+          = go _pjcjParent _pjcjXgafv _pjcjUploadProtocol
+              _pjcjAccessToken
+              _pjcjUploadType
+              _pjcjCallback
               (Just AltJSON)
-              _pPayload
+              _pjcjPayload
               machineLearningService
           where go
                   = buildClient

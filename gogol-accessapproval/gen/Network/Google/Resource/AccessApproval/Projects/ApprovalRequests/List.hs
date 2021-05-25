@@ -46,13 +46,13 @@ module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.List
     , parlCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.projects.approvalRequests.list@ method which the
 -- 'ProjectsApprovalRequestsList' request conforms to.
 type ProjectsApprovalRequestsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "approvalRequests" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -73,15 +73,15 @@ type ProjectsApprovalRequestsListResource =
 -- /See:/ 'projectsApprovalRequestsList' smart constructor.
 data ProjectsApprovalRequestsList =
   ProjectsApprovalRequestsList'
-    { _parlParent         :: !Text
-    , _parlXgafv          :: !(Maybe Xgafv)
+    { _parlParent :: !Text
+    , _parlXgafv :: !(Maybe Xgafv)
     , _parlUploadProtocol :: !(Maybe Text)
-    , _parlAccessToken    :: !(Maybe Text)
-    , _parlUploadType     :: !(Maybe Text)
-    , _parlFilter         :: !(Maybe Text)
-    , _parlPageToken      :: !(Maybe Text)
-    , _parlPageSize       :: !(Maybe (Textual Int32))
-    , _parlCallback       :: !(Maybe Text)
+    , _parlAccessToken :: !(Maybe Text)
+    , _parlUploadType :: !(Maybe Text)
+    , _parlFilter :: !(Maybe Text)
+    , _parlPageToken :: !(Maybe Text)
+    , _parlPageSize :: !(Maybe (Textual Int32))
+    , _parlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ projectsApprovalRequestsList pParlParent_ =
     }
 
 
--- | The parent resource. This may be \"projects\/{project_id}\",
--- \"folders\/{folder_id}\", or \"organizations\/{organization_id}\".
+-- | The parent resource. This may be \"projects\/{project}\",
+-- \"folders\/{folder}\", or \"organizations\/{organization}\".
 parlParent :: Lens' ProjectsApprovalRequestsList Text
 parlParent
   = lens _parlParent (\ s a -> s{_parlParent = a})
@@ -154,13 +154,13 @@ parlUploadType
       (\ s a -> s{_parlUploadType = a})
 
 -- | A filter on the type of approval requests to retrieve. Must be one of
--- the following values:
---
--- 1.  [not set]: Requests that are pending or have active approvals.
--- 2.  ALL: All requests.
--- 3.  PENDING: Only pending requests.
--- 4.  ACTIVE: Only active (i.e. currently approved) requests.
--- 5.  DISMISSED: Only dismissed (including expired) requests.
+-- the following values: * [not set]: Requests that are pending or have
+-- active approvals. * ALL: All requests. * PENDING: Only pending requests.
+-- * ACTIVE: Only active (i.e. currently approved) requests. * DISMISSED:
+-- Only requests that have been dismissed, or requests that are not
+-- approved and past expiration. * EXPIRED: Only requests that have been
+-- approved, and the approval has expired. * HISTORY: Active, dismissed and
+-- expired requests.
 parlFilter :: Lens' ProjectsApprovalRequestsList (Maybe Text)
 parlFilter
   = lens _parlFilter (\ s a -> s{_parlFilter = a})

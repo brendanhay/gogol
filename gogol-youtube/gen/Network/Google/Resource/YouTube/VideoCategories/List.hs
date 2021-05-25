@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of categories that can be associated with YouTube videos.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videoCategories.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videoCategories.list@.
 module Network.Google.Resource.YouTube.VideoCategories.List
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.YouTube.VideoCategories.List
     , VideoCategoriesList
 
     -- * Request Lenses
+    , vclXgafv
     , vclPart
+    , vclUploadProtocol
     , vclRegionCode
+    , vclAccessToken
+    , vclUploadType
     , vclHl
     , vclId
+    , vclCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videoCategories.list@ method which the
 -- 'VideoCategoriesList' request conforms to.
@@ -48,22 +53,32 @@ type VideoCategoriesListResource =
      "youtube" :>
        "v3" :>
          "videoCategories" :>
-           QueryParam "part" Text :>
-             QueryParam "regionCode" Text :>
-               QueryParam "hl" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] VideoCategoryListResponse
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "regionCode" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "hl" Text :>
+                         QueryParams "id" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] VideoCategoryListResponse
 
--- | Returns a list of categories that can be associated with YouTube videos.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'videoCategoriesList' smart constructor.
 data VideoCategoriesList =
   VideoCategoriesList'
-    { _vclPart       :: !Text
+    { _vclXgafv :: !(Maybe Xgafv)
+    , _vclPart :: ![Text]
+    , _vclUploadProtocol :: !(Maybe Text)
     , _vclRegionCode :: !(Maybe Text)
-    , _vclHl         :: !Text
-    , _vclId         :: !(Maybe Text)
+    , _vclAccessToken :: !(Maybe Text)
+    , _vclUploadType :: !(Maybe Text)
+    , _vclHl :: !Text
+    , _vclId :: !(Maybe [Text])
+    , _vclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,47 +87,86 @@ data VideoCategoriesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vclXgafv'
+--
 -- * 'vclPart'
 --
+-- * 'vclUploadProtocol'
+--
 -- * 'vclRegionCode'
+--
+-- * 'vclAccessToken'
+--
+-- * 'vclUploadType'
 --
 -- * 'vclHl'
 --
 -- * 'vclId'
+--
+-- * 'vclCallback'
 videoCategoriesList
-    :: Text -- ^ 'vclPart'
+    :: [Text] -- ^ 'vclPart'
     -> VideoCategoriesList
 videoCategoriesList pVclPart_ =
   VideoCategoriesList'
-    { _vclPart = pVclPart_
+    { _vclXgafv = Nothing
+    , _vclPart = _Coerce # pVclPart_
+    , _vclUploadProtocol = Nothing
     , _vclRegionCode = Nothing
-    , _vclHl = "en_US"
+    , _vclAccessToken = Nothing
+    , _vclUploadType = Nothing
+    , _vclHl = "en-US"
     , _vclId = Nothing
+    , _vclCallback = Nothing
     }
 
 
--- | The part parameter specifies the videoCategory resource properties that
--- the API response will include. Set the parameter value to snippet.
-vclPart :: Lens' VideoCategoriesList Text
-vclPart = lens _vclPart (\ s a -> s{_vclPart = a})
+-- | V1 error format.
+vclXgafv :: Lens' VideoCategoriesList (Maybe Xgafv)
+vclXgafv = lens _vclXgafv (\ s a -> s{_vclXgafv = a})
 
--- | The regionCode parameter instructs the API to return the list of video
--- categories available in the specified country. The parameter value is an
--- ISO 3166-1 alpha-2 country code.
+-- | The *part* parameter specifies the videoCategory resource properties
+-- that the API response will include. Set the parameter value to snippet.
+vclPart :: Lens' VideoCategoriesList [Text]
+vclPart
+  = lens _vclPart (\ s a -> s{_vclPart = a}) . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vclUploadProtocol :: Lens' VideoCategoriesList (Maybe Text)
+vclUploadProtocol
+  = lens _vclUploadProtocol
+      (\ s a -> s{_vclUploadProtocol = a})
+
 vclRegionCode :: Lens' VideoCategoriesList (Maybe Text)
 vclRegionCode
   = lens _vclRegionCode
       (\ s a -> s{_vclRegionCode = a})
 
--- | The hl parameter specifies the language that should be used for text
--- values in the API response.
+-- | OAuth access token.
+vclAccessToken :: Lens' VideoCategoriesList (Maybe Text)
+vclAccessToken
+  = lens _vclAccessToken
+      (\ s a -> s{_vclAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vclUploadType :: Lens' VideoCategoriesList (Maybe Text)
+vclUploadType
+  = lens _vclUploadType
+      (\ s a -> s{_vclUploadType = a})
+
 vclHl :: Lens' VideoCategoriesList Text
 vclHl = lens _vclHl (\ s a -> s{_vclHl = a})
 
--- | The id parameter specifies a comma-separated list of video category IDs
--- for the resources that you are retrieving.
-vclId :: Lens' VideoCategoriesList (Maybe Text)
-vclId = lens _vclId (\ s a -> s{_vclId = a})
+-- | Returns the video categories with the given IDs for Stubby or Apiary.
+vclId :: Lens' VideoCategoriesList [Text]
+vclId
+  = lens _vclId (\ s a -> s{_vclId = a}) . _Default .
+      _Coerce
+
+-- | JSONP
+vclCallback :: Lens' VideoCategoriesList (Maybe Text)
+vclCallback
+  = lens _vclCallback (\ s a -> s{_vclCallback = a})
 
 instance GoogleRequest VideoCategoriesList where
         type Rs VideoCategoriesList =
@@ -123,8 +177,13 @@ instance GoogleRequest VideoCategoriesList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideoCategoriesList'{..}
-          = go (Just _vclPart) _vclRegionCode (Just _vclHl)
-              _vclId
+          = go _vclPart _vclXgafv _vclUploadProtocol
+              _vclRegionCode
+              _vclAccessToken
+              _vclUploadType
+              (Just _vclHl)
+              (_vclId ^. _Default)
+              _vclCallback
               (Just AltJSON)
               youTubeService
           where go

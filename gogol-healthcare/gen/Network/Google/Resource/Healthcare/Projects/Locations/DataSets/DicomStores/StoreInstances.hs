@@ -21,8 +21,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- StoreInstances stores DICOM instances associated with study instance
--- unique identifiers (SUID). See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.6.1.
+-- unique identifiers (SUID). See [Store Transaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5).
+-- For details on the implementation of StoreInstances, see [Store
+-- transaction](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#store_transaction)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call StoreInstances, see [Storing DICOM
+-- data](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#storing_dicom_data).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.storeInstances@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.StoreInstances
@@ -45,14 +50,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdssiDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.storeInstances@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStoreInstances' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStoreInstancesResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -65,20 +70,25 @@ type ProjectsLocationsDataSetsDicomStoresStoreInstancesResource
                          ReqBody '[JSON] HTTPBody :> Post '[JSON] HTTPBody
 
 -- | StoreInstances stores DICOM instances associated with study instance
--- unique identifiers (SUID). See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.6.1.
+-- unique identifiers (SUID). See [Store Transaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5).
+-- For details on the implementation of StoreInstances, see [Store
+-- transaction](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#store_transaction)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call StoreInstances, see [Storing DICOM
+-- data](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#storing_dicom_data).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStoreInstances' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStoreInstances =
   ProjectsLocationsDataSetsDicomStoresStoreInstances'
-    { _pldsdssiParent         :: !Text
-    , _pldsdssiXgafv          :: !(Maybe Xgafv)
+    { _pldsdssiParent :: !Text
+    , _pldsdssiXgafv :: !(Maybe Xgafv)
     , _pldsdssiUploadProtocol :: !(Maybe Text)
-    , _pldsdssiAccessToken    :: !(Maybe Text)
-    , _pldsdssiUploadType     :: !(Maybe Text)
-    , _pldsdssiPayload        :: !HTTPBody
-    , _pldsdssiCallback       :: !(Maybe Text)
-    , _pldsdssiDicomWebPath   :: !Text
+    , _pldsdssiAccessToken :: !(Maybe Text)
+    , _pldsdssiUploadType :: !(Maybe Text)
+    , _pldsdssiPayload :: !HTTPBody
+    , _pldsdssiCallback :: !(Maybe Text)
+    , _pldsdssiDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,8 +130,8 @@ projectsLocationsDataSetsDicomStoresStoreInstances pPldsdssiParent_ pPldsdssiPay
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdssiParent :: Lens' ProjectsLocationsDataSetsDicomStoresStoreInstances Text
 pldsdssiParent
   = lens _pldsdssiParent
@@ -163,8 +173,8 @@ pldsdssiCallback
   = lens _pldsdssiCallback
       (\ s a -> s{_pldsdssiCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g., \`studies\/{study_id}\`).
+-- | The path of the StoreInstances DICOMweb request. For example,
+-- \`studies\/[{study_uid}]\`. Note that the \`study_uid\` is optional.
 pldsdssiDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStoreInstances Text
 pldsdssiDicomWebPath
   = lens _pldsdssiDicomWebPath

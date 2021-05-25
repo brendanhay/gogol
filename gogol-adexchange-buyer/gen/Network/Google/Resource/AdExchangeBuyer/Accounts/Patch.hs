@@ -38,8 +38,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
     , apId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.accounts.patch@ method which the
 -- 'AccountsPatch' request conforms to.
@@ -57,9 +57,9 @@ type AccountsPatchResource =
 -- /See:/ 'accountsPatch' smart constructor.
 data AccountsPatch =
   AccountsPatch'
-    { _apPayload                    :: !Account
+    { _apPayload :: !Account
     , _apConfirmUnsafeAccountChange :: !(Maybe Bool)
-    , _apId                         :: !(Textual Int32)
+    , _apId :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

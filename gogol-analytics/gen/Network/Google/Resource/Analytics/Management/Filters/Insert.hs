@@ -37,8 +37,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Insert
     , mfiAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.insert@ method which the
 -- 'ManagementFiltersInsert' request conforms to.
@@ -57,7 +57,7 @@ type ManagementFiltersInsertResource =
 -- /See:/ 'managementFiltersInsert' smart constructor.
 data ManagementFiltersInsert =
   ManagementFiltersInsert'
-    { _mfiPayload   :: !Filter
+    { _mfiPayload :: !Filter
     , _mfiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

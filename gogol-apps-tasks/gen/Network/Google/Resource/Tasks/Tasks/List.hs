@@ -22,7 +22,7 @@
 --
 -- Returns all tasks in the specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.list@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.list@.
 module Network.Google.Resource.Tasks.Tasks.List
     (
     -- * REST Resource
@@ -33,7 +33,11 @@ module Network.Google.Resource.Tasks.Tasks.List
     , TasksList
 
     -- * Request Lenses
+    , tlXgafv
+    , tlUploadProtocol
+    , tlAccessToken
     , tlDueMax
+    , tlUploadType
     , tlShowDeleted
     , tlShowCompleted
     , tlDueMin
@@ -44,10 +48,11 @@ module Network.Google.Resource.Tasks.Tasks.List
     , tlCompletedMin
     , tlPageToken
     , tlMaxResults
+    , tlCallback
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.list@ method which the
 -- 'TasksList' request conforms to.
@@ -57,34 +62,46 @@ type TasksListResource =
          "lists" :>
            Capture "tasklist" Text :>
              "tasks" :>
-               QueryParam "dueMax" Text :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "showCompleted" Bool :>
-                     QueryParam "dueMin" Text :>
-                       QueryParam "showHidden" Bool :>
-                         QueryParam "completedMax" Text :>
-                           QueryParam "updatedMin" Text :>
-                             QueryParam "completedMin" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "maxResults" (Textual Int64) :>
-                                   QueryParam "alt" AltJSON :> Get '[JSON] Tasks
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "dueMax" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "showDeleted" Bool :>
+                           QueryParam "showCompleted" Bool :>
+                             QueryParam "dueMin" Text :>
+                               QueryParam "showHidden" Bool :>
+                                 QueryParam "completedMax" Text :>
+                                   QueryParam "updatedMin" Text :>
+                                     QueryParam "completedMin" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "maxResults" (Textual Int32)
+                                           :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON] Tasks
 
 -- | Returns all tasks in the specified task list.
 --
 -- /See:/ 'tasksList' smart constructor.
 data TasksList =
   TasksList'
-    { _tlDueMax        :: !(Maybe Text)
-    , _tlShowDeleted   :: !(Maybe Bool)
+    { _tlXgafv :: !(Maybe Xgafv)
+    , _tlUploadProtocol :: !(Maybe Text)
+    , _tlAccessToken :: !(Maybe Text)
+    , _tlDueMax :: !(Maybe Text)
+    , _tlUploadType :: !(Maybe Text)
+    , _tlShowDeleted :: !(Maybe Bool)
     , _tlShowCompleted :: !(Maybe Bool)
-    , _tlDueMin        :: !(Maybe Text)
-    , _tlShowHidden    :: !(Maybe Bool)
-    , _tlCompletedMax  :: !(Maybe Text)
-    , _tlUpdatedMin    :: !(Maybe Text)
-    , _tlTaskList      :: !Text
-    , _tlCompletedMin  :: !(Maybe Text)
-    , _tlPageToken     :: !(Maybe Text)
-    , _tlMaxResults    :: !(Maybe (Textual Int64))
+    , _tlDueMin :: !(Maybe Text)
+    , _tlShowHidden :: !(Maybe Bool)
+    , _tlCompletedMax :: !(Maybe Text)
+    , _tlUpdatedMin :: !(Maybe Text)
+    , _tlTaskList :: !Text
+    , _tlCompletedMin :: !(Maybe Text)
+    , _tlPageToken :: !(Maybe Text)
+    , _tlMaxResults :: !(Maybe (Textual Int32))
+    , _tlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,7 +110,15 @@ data TasksList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tlXgafv'
+--
+-- * 'tlUploadProtocol'
+--
+-- * 'tlAccessToken'
+--
 -- * 'tlDueMax'
+--
+-- * 'tlUploadType'
 --
 -- * 'tlShowDeleted'
 --
@@ -114,12 +139,18 @@ data TasksList =
 -- * 'tlPageToken'
 --
 -- * 'tlMaxResults'
+--
+-- * 'tlCallback'
 tasksList
     :: Text -- ^ 'tlTaskList'
     -> TasksList
 tasksList pTlTaskList_ =
   TasksList'
-    { _tlDueMax = Nothing
+    { _tlXgafv = Nothing
+    , _tlUploadProtocol = Nothing
+    , _tlAccessToken = Nothing
+    , _tlDueMax = Nothing
+    , _tlUploadType = Nothing
     , _tlShowDeleted = Nothing
     , _tlShowCompleted = Nothing
     , _tlDueMin = Nothing
@@ -130,13 +161,35 @@ tasksList pTlTaskList_ =
     , _tlCompletedMin = Nothing
     , _tlPageToken = Nothing
     , _tlMaxResults = Nothing
+    , _tlCallback = Nothing
     }
 
+
+-- | V1 error format.
+tlXgafv :: Lens' TasksList (Maybe Xgafv)
+tlXgafv = lens _tlXgafv (\ s a -> s{_tlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tlUploadProtocol :: Lens' TasksList (Maybe Text)
+tlUploadProtocol
+  = lens _tlUploadProtocol
+      (\ s a -> s{_tlUploadProtocol = a})
+
+-- | OAuth access token.
+tlAccessToken :: Lens' TasksList (Maybe Text)
+tlAccessToken
+  = lens _tlAccessToken
+      (\ s a -> s{_tlAccessToken = a})
 
 -- | Upper bound for a task\'s due date (as a RFC 3339 timestamp) to filter
 -- by. Optional. The default is not to filter by due date.
 tlDueMax :: Lens' TasksList (Maybe Text)
 tlDueMax = lens _tlDueMax (\ s a -> s{_tlDueMax = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tlUploadType :: Lens' TasksList (Maybe Text)
+tlUploadType
+  = lens _tlUploadType (\ s a -> s{_tlUploadType = a})
 
 -- | Flag indicating whether deleted tasks are returned in the result.
 -- Optional. The default is False.
@@ -146,7 +199,9 @@ tlShowDeleted
       (\ s a -> s{_tlShowDeleted = a})
 
 -- | Flag indicating whether completed tasks are returned in the result.
--- Optional. The default is True.
+-- Optional. The default is True. Note that showHidden must also be True to
+-- show tasks completed in first party clients, such as the web UI and
+-- Google\'s mobile apps.
 tlShowCompleted :: Lens' TasksList (Maybe Bool)
 tlShowCompleted
   = lens _tlShowCompleted
@@ -196,10 +251,15 @@ tlPageToken
 
 -- | Maximum number of task lists returned on one page. Optional. The default
 -- is 20 (max allowed: 100).
-tlMaxResults :: Lens' TasksList (Maybe Int64)
+tlMaxResults :: Lens' TasksList (Maybe Int32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+tlCallback :: Lens' TasksList (Maybe Text)
+tlCallback
+  = lens _tlCallback (\ s a -> s{_tlCallback = a})
 
 instance GoogleRequest TasksList where
         type Rs TasksList = Tasks
@@ -207,7 +267,11 @@ instance GoogleRequest TasksList where
              '["https://www.googleapis.com/auth/tasks",
                "https://www.googleapis.com/auth/tasks.readonly"]
         requestClient TasksList'{..}
-          = go _tlTaskList _tlDueMax _tlShowDeleted
+          = go _tlTaskList _tlXgafv _tlUploadProtocol
+              _tlAccessToken
+              _tlDueMax
+              _tlUploadType
+              _tlShowDeleted
               _tlShowCompleted
               _tlDueMin
               _tlShowHidden
@@ -216,6 +280,7 @@ instance GoogleRequest TasksList where
               _tlCompletedMin
               _tlPageToken
               _tlMaxResults
+              _tlCallback
               (Just AltJSON)
               appsTasksService
           where go

@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQuery.DataSets.List
     , dslMaxResults
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.list@ method which the
 -- 'DataSetsList' request conforms to.
@@ -64,10 +64,10 @@ type DataSetsListResource =
 -- /See:/ 'dataSetsList' smart constructor.
 data DataSetsList =
   DataSetsList'
-    { _dslAll        :: !(Maybe Bool)
-    , _dslFilter     :: !(Maybe Text)
-    , _dslPageToken  :: !(Maybe Text)
-    , _dslProjectId  :: !Text
+    { _dslAll :: !(Maybe Bool)
+    , _dslFilter :: !(Maybe Text)
+    , _dslPageToken :: !(Maybe Text)
+    , _dslProjectId :: !Text
     , _dslMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

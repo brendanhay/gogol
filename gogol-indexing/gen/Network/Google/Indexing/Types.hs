@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -48,9 +48,9 @@ module Network.Google.Indexing.Types
     , unType
     ) where
 
-import           Network.Google.Indexing.Types.Product
-import           Network.Google.Indexing.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Indexing.Types.Product
+import Network.Google.Indexing.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Indexing API. This contains the host and root path used as a starting point for constructing service requests.
 indexingService :: ServiceConfig

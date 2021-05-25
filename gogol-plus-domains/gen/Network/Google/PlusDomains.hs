@@ -609,18 +609,18 @@ module Network.Google.PlusDomains
     , aanFamilyName
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.PlusDomains.Activities.Get
-import           Network.Google.Resource.PlusDomains.Activities.List
-import           Network.Google.Resource.PlusDomains.Audiences.List
-import           Network.Google.Resource.PlusDomains.Circles.List
-import           Network.Google.Resource.PlusDomains.Comments.Get
-import           Network.Google.Resource.PlusDomains.Comments.List
-import           Network.Google.Resource.PlusDomains.Media.Insert
-import           Network.Google.Resource.PlusDomains.People.Get
-import           Network.Google.Resource.PlusDomains.People.List
-import           Network.Google.Resource.PlusDomains.People.ListByActivity
+import Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Resource.PlusDomains.Activities.Get
+import Network.Google.Resource.PlusDomains.Activities.List
+import Network.Google.Resource.PlusDomains.Audiences.List
+import Network.Google.Resource.PlusDomains.Circles.List
+import Network.Google.Resource.PlusDomains.Comments.Get
+import Network.Google.Resource.PlusDomains.Comments.List
+import Network.Google.Resource.PlusDomains.Media.Insert
+import Network.Google.Resource.PlusDomains.People.Get
+import Network.Google.Resource.PlusDomains.People.List
+import Network.Google.Resource.PlusDomains.People.ListByActivity
 
 {- $resources
 TODO

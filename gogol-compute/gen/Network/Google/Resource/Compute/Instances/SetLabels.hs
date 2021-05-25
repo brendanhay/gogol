@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetLabels
     , islInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setLabels@ method which the
 -- 'InstancesSetLabels' request conforms to.
@@ -68,10 +68,10 @@ type InstancesSetLabelsResource =
 data InstancesSetLabels =
   InstancesSetLabels'
     { _islRequestId :: !(Maybe Text)
-    , _islProject   :: !Text
-    , _islZone      :: !Text
-    , _islPayload   :: !InstancesSetLabelsRequest
-    , _islInstance  :: !Text
+    , _islProject :: !Text
+    , _islZone :: !Text
+    , _islPayload :: !InstancesSetLabelsRequest
+    , _islInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

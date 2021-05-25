@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Snapshots.SetLabels
     , sslResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.setLabels@ method which the
 -- 'SnapshotsSetLabels' request conforms to.
@@ -63,8 +63,8 @@ type SnapshotsSetLabelsResource =
 -- /See:/ 'snapshotsSetLabels' smart constructor.
 data SnapshotsSetLabels =
   SnapshotsSetLabels'
-    { _sslProject  :: !Text
-    , _sslPayload  :: !GlobalSetLabelsRequest
+    { _sslProject :: !Text
+    , _sslPayload :: !GlobalSetLabelsRequest
     , _sslResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

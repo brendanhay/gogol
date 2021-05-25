@@ -13,11 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cloud Search provides cloud-based search capabilities over G Suite data.
--- The Cloud Search API allows indexing of non-G Suite data into Cloud
--- Search.
+-- Cloud Search provides cloud-based search capabilities over Google
+-- Workspace data. The Cloud Search API allows indexing of non-Google
+-- Workspace data into Cloud Search.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference>
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference>
 module Network.Google.CloudSearch
     (
     -- * Service Configuration
@@ -96,6 +96,9 @@ module Network.Google.CloudSearch
     -- ** cloudsearch.operations.get
     , module Network.Google.Resource.CloudSearch.Operations.Get
 
+    -- ** cloudsearch.operations.lro.list
+    , module Network.Google.Resource.CloudSearch.Operations.Lro.List
+
     -- ** cloudsearch.query.search
     , module Network.Google.Resource.CloudSearch.Query.Search
 
@@ -120,6 +123,9 @@ module Network.Google.CloudSearch
     -- ** cloudsearch.settings.datasources.update
     , module Network.Google.Resource.CloudSearch.Settings.Datasources.Update
 
+    -- ** cloudsearch.settings.getCustomer
+    , module Network.Google.Resource.CloudSearch.Settings.GetCustomer
+
     -- ** cloudsearch.settings.searchapplications.create
     , module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Create
 
@@ -138,24 +144,43 @@ module Network.Google.CloudSearch
     -- ** cloudsearch.settings.searchapplications.update
     , module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
 
+    -- ** cloudsearch.settings.updateCustomer
+    , module Network.Google.Resource.CloudSearch.Settings.UpdateCustomer
+
     -- ** cloudsearch.stats.getIndex
     , module Network.Google.Resource.CloudSearch.Stats.GetIndex
+
+    -- ** cloudsearch.stats.getQuery
+    , module Network.Google.Resource.CloudSearch.Stats.GetQuery
+
+    -- ** cloudsearch.stats.getSession
+    , module Network.Google.Resource.CloudSearch.Stats.GetSession
+
+    -- ** cloudsearch.stats.getUser
+    , module Network.Google.Resource.CloudSearch.Stats.GetUser
 
     -- ** cloudsearch.stats.index.datasources.get
     , module Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
 
+    -- ** cloudsearch.stats.query.searchapplications.get
+    , module Network.Google.Resource.CloudSearch.Stats.Query.SearchApplications.Get
+
+    -- ** cloudsearch.stats.session.searchapplications.get
+    , module Network.Google.Resource.CloudSearch.Stats.Session.SearchApplications.Get
+
+    -- ** cloudsearch.stats.user.searchapplications.get
+    , module Network.Google.Resource.CloudSearch.Stats.User.SearchApplications.Get
+
     -- * Types
+
+    -- ** QueryInterpretationReason
+    , QueryInterpretationReason (..)
 
     -- ** DriveMimeTypeRestrictType
     , DriveMimeTypeRestrictType (..)
 
     -- ** DriveFollowUpRestrictType
     , DriveFollowUpRestrictType (..)
-
-    -- ** GmailFolderRestrict
-    , GmailFolderRestrict
-    , gmailFolderRestrict
-    , gfrType
 
     -- ** ItemContent
     , ItemContent
@@ -164,6 +189,14 @@ module Network.Google.CloudSearch
     , icContentFormat
     , icContentDataRef
     , icInlineContent
+
+    -- ** CustomerUserStats
+    , CustomerUserStats
+    , customerUserStats
+    , cusThirtyDaysActiveUsersCount
+    , cusDate
+    , cusOneDayActiveUsersCount
+    , cusSevenDaysActiveUsersCount
 
     -- ** Photo
     , Photo
@@ -186,7 +219,9 @@ module Network.Google.CloudSearch
     , saScoringConfig
     , saName
     , saSourceConfig
+    , saQueryInterpretationConfig
     , saDisplayName
+    , saEnableAuditLog
     , saDefaultSortOptions
 
     -- ** BooleanOperatorOptions
@@ -210,11 +245,6 @@ module Network.Google.CloudSearch
 
     -- ** ItemStatusCode
     , ItemStatusCode (..)
-
-    -- ** GmailActionRestrict
-    , GmailActionRestrict
-    , gmailActionRestrict
-    , garType
 
     -- ** UnreserveItemsRequest
     , UnreserveItemsRequest
@@ -245,6 +275,12 @@ module Network.Google.CloudSearch
     , QueryItem
     , queryItem
     , qiIsSynthetic
+
+    -- ** CustomerQueryStats
+    , CustomerQueryStats
+    , customerQueryStats
+    , cqsQueryCountByStatus
+    , cqsDate
 
     -- ** ListUnmAppedIdentitiesResponse
     , ListUnmAppedIdentitiesResponse
@@ -287,13 +323,21 @@ module Network.Google.CloudSearch
     , qsSource
     , qsOperators
 
-    -- ** GmailTimeRestrictType
-    , GmailTimeRestrictType (..)
+    -- ** ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
 
     -- ** SuggestResponse
     , SuggestResponse
     , suggestResponse
     , srSuggestResults
+
+    -- ** GetSearchApplicationQueryStatsResponse
+    , GetSearchApplicationQueryStatsResponse
+    , getSearchApplicationQueryStatsResponse
+    , gsaqsrStats
 
     -- ** RepositoryError
     , RepositoryError
@@ -314,12 +358,14 @@ module Network.Google.CloudSearch
     -- ** PropertyDefinition
     , PropertyDefinition
     , propertyDefinition
+    , pdIsSuggestable
     , pdEnumPropertyOptions
     , pdHTMLPropertyOptions
     , pdObjectPropertyOptions
     , pdIsReturnable
     , pdTimestampPropertyOptions
     , pdIntegerPropertyOptions
+    , pdIsWildcardSearchable
     , pdName
     , pdIsRepeatable
     , pdDoublePropertyOptions
@@ -391,9 +437,6 @@ module Network.Google.CloudSearch
     , doubleOperatorOptions
     , dOperatorName
 
-    -- ** GmailIntelligentRestrictType
-    , GmailIntelligentRestrictType (..)
-
     -- ** Operation
     , Operation
     , operation
@@ -447,6 +490,8 @@ module Network.Google.CloudSearch
     , QueryInterpretationOptions
     , queryInterpretationOptions
     , qioDisableNlInterpretation
+    , qioEnableVerbatimMode
+    , qioDisableSupplementalResults
 
     -- ** ResetSearchApplicationRequest
     , ResetSearchApplicationRequest
@@ -467,6 +512,7 @@ module Network.Google.CloudSearch
     , imMimeType
     , imUpdateTime
     , imKeywords
+    , imContextAttributes
     , imTitle
     , imContentLanguage
     , imSearchQualityMetadata
@@ -530,13 +576,16 @@ module Network.Google.CloudSearch
     -- ** SourceScoringConfigSourceImportance
     , SourceScoringConfigSourceImportance (..)
 
-    -- ** GmailAttachmentRestrictType
-    , GmailAttachmentRestrictType (..)
-
     -- ** Metaline
     , Metaline
     , metaline
     , mProperties
+
+    -- ** SearchApplicationSessionStats
+    , SearchApplicationSessionStats
+    , searchApplicationSessionStats
+    , sassSearchSessionsCount
+    , sassDate
 
     -- ** FacetBucket
     , FacetBucket
@@ -550,6 +599,14 @@ module Network.Google.CloudSearch
     , statusDetailsItem
     , sdiAddtional
 
+    -- ** AuditLoggingSettings
+    , AuditLoggingSettings
+    , auditLoggingSettings
+    , alsProject
+    , alsLogDataReadActions
+    , alsLogDataWriteActions
+    , alsLogAdminReadActions
+
     -- ** RetrievalImportanceImportance
     , RetrievalImportanceImportance (..)
 
@@ -562,6 +619,11 @@ module Network.Google.CloudSearch
 
     -- ** ProcessingErrorCode
     , ProcessingErrorCode (..)
+
+    -- ** GetSearchApplicationSessionStatsResponse
+    , GetSearchApplicationSessionStatsResponse
+    , getSearchApplicationSessionStatsResponse
+    , gsassrStats
 
     -- ** IntegerOperatorOptions
     , IntegerOperatorOptions
@@ -587,6 +649,12 @@ module Network.Google.CloudSearch
     , ResultDebugInfo
     , resultDebugInfo
     , rdiFormattedDebugInfo
+
+    -- ** QueryCountByStatus
+    , QueryCountByStatus
+    , queryCountByStatus
+    , qcbsCount
+    , qcbsStatusCode
 
     -- ** ItemCountByStatus
     , ItemCountByStatus
@@ -635,6 +703,11 @@ module Network.Google.CloudSearch
     , sObjectDefinitions
     , sOperationIds
 
+    -- ** GetSearchApplicationUserStatsResponse
+    , GetSearchApplicationUserStatsResponse
+    , getSearchApplicationUserStatsResponse
+    , gsausrStats
+
     -- ** DriveTimeSpanRestrict
     , DriveTimeSpanRestrict
     , driveTimeSpanRestrict
@@ -661,13 +734,13 @@ module Network.Google.CloudSearch
     , dYear
     , dMonth
 
+    -- ** IndexingDatasourcesItemsDeleteMode
+    , IndexingDatasourcesItemsDeleteMode (..)
+
     -- ** DisplayedProperty
     , DisplayedProperty
     , displayedProperty
     , dpPropertyName
-
-    -- ** GmailActionRestrictType
-    , GmailActionRestrictType (..)
 
     -- ** FacetResult
     , FacetResult
@@ -708,8 +781,13 @@ module Network.Google.CloudSearch
     , dateValues
     , dValues
 
-    -- ** GmailFolderRestrictType
-    , GmailFolderRestrictType (..)
+    -- ** SearchApplicationUserStats
+    , SearchApplicationUserStats
+    , searchApplicationUserStats
+    , sausThirtyDaysActiveUsersCount
+    , sausDate
+    , sausOneDayActiveUsersCount
+    , sausSevenDaysActiveUsersCount
 
     -- ** NamedProperty
     , NamedProperty
@@ -724,6 +802,9 @@ module Network.Google.CloudSearch
     , npEnumValues
     , npTimestampValues
     , npIntegerValues
+
+    -- ** DebugIdentitysourcesUnmAppedidsListResolutionStatusCode
+    , DebugIdentitysourcesUnmAppedidsListResolutionStatusCode (..)
 
     -- ** MatchRange
     , MatchRange
@@ -751,6 +832,7 @@ module Network.Google.CloudSearch
     , srStart
     , srQuery
     , srFacetOptions
+    , srContextAttributes
     , srPageSize
     , srRequestOptions
 
@@ -766,6 +848,15 @@ module Network.Google.CloudSearch
     , srcResultCountExact
     , srcResultCountEstimate
     , srcSource
+
+    -- ** PollItemsRequestStatusCodesItem
+    , PollItemsRequestStatusCodesItem (..)
+
+    -- ** SearchApplicationQueryStats
+    , SearchApplicationQueryStats
+    , searchApplicationQueryStats
+    , saqsQueryCountByStatus
+    , saqsDate
 
     -- ** SourceConfig
     , SourceConfig
@@ -800,17 +891,17 @@ module Network.Google.CloudSearch
     , uploadItemRef
     , uirName
 
-    -- ** GmailTimeRestrict
-    , GmailTimeRestrict
-    , gmailTimeRestrict
-    , gtrType
-
     -- ** PushItemRequest
     , PushItemRequest
     , pushItemRequest
     , pirDebugOptions
     , pirConnectorName
     , pirItem
+
+    -- ** GetCustomerQueryStatsResponse
+    , GetCustomerQueryStatsResponse
+    , getCustomerQueryStatsResponse
+    , gcqsrStats
 
     -- ** DoublePropertyOptions
     , DoublePropertyOptions
@@ -822,6 +913,7 @@ module Network.Google.CloudSearch
     , queryOperator
     , qoIsSuggestable
     , qoIsReturnable
+    , qoObjectType
     , qoIsRepeatable
     , qoOperatorName
     , qoIsSortable
@@ -864,10 +956,14 @@ module Network.Google.CloudSearch
     -- ** SourceCrowdingConfig
     , SourceCrowdingConfig
     , sourceCrowdingConfig
-    , sccField
     , sccNumSuggestions
     , sccNumResults
-    , sccSource
+
+    -- ** QueryInterpretationConfig
+    , QueryInterpretationConfig
+    , queryInterpretationConfig
+    , qicForceDisableSupplementalResults
+    , qicForceVerbatimMode
 
     -- ** Interaction
     , Interaction
@@ -945,11 +1041,6 @@ module Network.Google.CloudSearch
     , htmlValues
     , hvValues
 
-    -- ** GmailIntelligentRestrict
-    , GmailIntelligentRestrict
-    , gmailIntelligentRestrict
-    , girType
-
     -- ** HTMLOperatorOptions
     , HTMLOperatorOptions
     , htmlOperatorOptions
@@ -1025,6 +1116,11 @@ module Network.Google.CloudSearch
     -- ** ItemCountByStatusStatusCode
     , ItemCountByStatusStatusCode (..)
 
+    -- ** VPCSettings
+    , VPCSettings
+    , vpcSettings
+    , vsProject
+
     -- ** PollItemsRequest
     , PollItemsRequest
     , pollItemsRequest
@@ -1038,6 +1134,7 @@ module Network.Google.CloudSearch
     , QueryInterpretation
     , queryInterpretation
     , qiInterpretedQuery
+    , qiReason
     , qiInterpretationType
 
     -- ** UnmAppedIdentity
@@ -1068,6 +1165,12 @@ module Network.Google.CloudSearch
     , piMetadataHash
     , piType
 
+    -- ** CustomerSessionStats
+    , CustomerSessionStats
+    , customerSessionStats
+    , cssSearchSessionsCount
+    , cssDate
+
     -- ** ErrorMessage
     , ErrorMessage
     , errorMessage
@@ -1090,10 +1193,11 @@ module Network.Google.CloudSearch
     , enumOperatorOptions
     , eooOperatorName
 
-    -- ** GmailAttachmentRestrict
-    , GmailAttachmentRestrict
-    , gmailAttachmentRestrict
-    , gType
+    -- ** ContextAttribute
+    , ContextAttribute
+    , contextAttribute
+    , caValues
+    , caName
 
     -- ** DatePropertyOptions
     , DatePropertyOptions
@@ -1151,6 +1255,11 @@ module Network.Google.CloudSearch
     , integerValues
     , ivValues
 
+    -- ** GetCustomerSessionStatsResponse
+    , GetCustomerSessionStatsResponse
+    , getCustomerSessionStatsResponse
+    , gcssrStats
+
     -- ** SearchItemsByViewURLResponse
     , SearchItemsByViewURLResponse
     , searchItemsByViewURLResponse
@@ -1168,15 +1277,10 @@ module Network.Google.CloudSearch
     -- ** RestrictItem
     , RestrictItem
     , restrictItem
-    , riGmailFolderRestrict
-    , riGmailActionRestrict
     , riDriveLocationRestrict
     , riDriveTimeSpanRestrict
     , riDriveMimeTypeRestrict
     , riDriveFollowUpRestrict
-    , riGmailTimeRestrict
-    , riGmailIntelligentRestrict
-    , riGmailAttachmentRestrict
     , riSearchOperator
 
     -- ** DriveTimeSpanRestrictType
@@ -1184,6 +1288,12 @@ module Network.Google.CloudSearch
 
     -- ** IndexItemRequestMode
     , IndexItemRequestMode (..)
+
+    -- ** CustomerSettings
+    , CustomerSettings
+    , customerSettings
+    , csAuditLoggingSettings
+    , csVPCSettings
 
     -- ** ItemACLACLInheritanceType
     , ItemACLACLInheritanceType (..)
@@ -1207,45 +1317,59 @@ module Network.Google.CloudSearch
     , isProcessingErrors
     , isCode
     , isRepositoryErrors
+
+    -- ** GetCustomerUserStatsResponse
+    , GetCustomerUserStatsResponse
+    , getCustomerUserStatsResponse
+    , gcusrStats
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudSearch.Debug.Datasources.Items.CheckAccess
-import           Network.Google.Resource.CloudSearch.Debug.Datasources.Items.SearchByViewURL
-import           Network.Google.Resource.CloudSearch.Debug.Datasources.Items.UnmAppedids.List
-import           Network.Google.Resource.CloudSearch.Debug.Identitysources.Items.ListForunmAppedidentity
-import           Network.Google.Resource.CloudSearch.Debug.Identitysources.UnmAppedids.List
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.DeleteSchema
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.GetSchema
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Delete
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Get
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Index
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.List
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Poll
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Push
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Unreserve
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Upload
-import           Network.Google.Resource.CloudSearch.Indexing.Datasources.UpdateSchema
-import           Network.Google.Resource.CloudSearch.Media.Upload
-import           Network.Google.Resource.CloudSearch.Operations.Get
-import           Network.Google.Resource.CloudSearch.Query.Search
-import           Network.Google.Resource.CloudSearch.Query.Sources.List
-import           Network.Google.Resource.CloudSearch.Query.Suggest
-import           Network.Google.Resource.CloudSearch.Settings.Datasources.Create
-import           Network.Google.Resource.CloudSearch.Settings.Datasources.Delete
-import           Network.Google.Resource.CloudSearch.Settings.Datasources.Get
-import           Network.Google.Resource.CloudSearch.Settings.Datasources.List
-import           Network.Google.Resource.CloudSearch.Settings.Datasources.Update
-import           Network.Google.Resource.CloudSearch.Settings.SearchApplications.Create
-import           Network.Google.Resource.CloudSearch.Settings.SearchApplications.Delete
-import           Network.Google.Resource.CloudSearch.Settings.SearchApplications.Get
-import           Network.Google.Resource.CloudSearch.Settings.SearchApplications.List
-import           Network.Google.Resource.CloudSearch.Settings.SearchApplications.Reset
-import           Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
-import           Network.Google.Resource.CloudSearch.Stats.GetIndex
-import           Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
+import Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Resource.CloudSearch.Debug.Datasources.Items.CheckAccess
+import Network.Google.Resource.CloudSearch.Debug.Datasources.Items.SearchByViewURL
+import Network.Google.Resource.CloudSearch.Debug.Datasources.Items.UnmAppedids.List
+import Network.Google.Resource.CloudSearch.Debug.Identitysources.Items.ListForunmAppedidentity
+import Network.Google.Resource.CloudSearch.Debug.Identitysources.UnmAppedids.List
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.DeleteSchema
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.GetSchema
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Delete
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Get
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Index
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.List
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Poll
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Push
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Unreserve
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Upload
+import Network.Google.Resource.CloudSearch.Indexing.Datasources.UpdateSchema
+import Network.Google.Resource.CloudSearch.Media.Upload
+import Network.Google.Resource.CloudSearch.Operations.Get
+import Network.Google.Resource.CloudSearch.Operations.Lro.List
+import Network.Google.Resource.CloudSearch.Query.Search
+import Network.Google.Resource.CloudSearch.Query.Sources.List
+import Network.Google.Resource.CloudSearch.Query.Suggest
+import Network.Google.Resource.CloudSearch.Settings.Datasources.Create
+import Network.Google.Resource.CloudSearch.Settings.Datasources.Delete
+import Network.Google.Resource.CloudSearch.Settings.Datasources.Get
+import Network.Google.Resource.CloudSearch.Settings.Datasources.List
+import Network.Google.Resource.CloudSearch.Settings.Datasources.Update
+import Network.Google.Resource.CloudSearch.Settings.GetCustomer
+import Network.Google.Resource.CloudSearch.Settings.SearchApplications.Create
+import Network.Google.Resource.CloudSearch.Settings.SearchApplications.Delete
+import Network.Google.Resource.CloudSearch.Settings.SearchApplications.Get
+import Network.Google.Resource.CloudSearch.Settings.SearchApplications.List
+import Network.Google.Resource.CloudSearch.Settings.SearchApplications.Reset
+import Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
+import Network.Google.Resource.CloudSearch.Settings.UpdateCustomer
+import Network.Google.Resource.CloudSearch.Stats.GetIndex
+import Network.Google.Resource.CloudSearch.Stats.GetQuery
+import Network.Google.Resource.CloudSearch.Stats.GetSession
+import Network.Google.Resource.CloudSearch.Stats.GetUser
+import Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
+import Network.Google.Resource.CloudSearch.Stats.Query.SearchApplications.Get
+import Network.Google.Resource.CloudSearch.Stats.Session.SearchApplications.Get
+import Network.Google.Resource.CloudSearch.Stats.User.SearchApplications.Get
 
 {- $resources
 TODO
@@ -1264,8 +1388,16 @@ type CloudSearchAPI =
        :<|> SettingsSearchApplicationsResetResource
        :<|> SettingsSearchApplicationsDeleteResource
        :<|> SettingsSearchApplicationsUpdateResource
+       :<|> SettingsGetCustomerResource
+       :<|> SettingsUpdateCustomerResource
+       :<|> StatsUserSearchApplicationsGetResource
+       :<|> StatsQuerySearchApplicationsGetResource
        :<|> StatsIndexDatasourcesGetResource
+       :<|> StatsSessionSearchApplicationsGetResource
+       :<|> StatsGetQueryResource
+       :<|> StatsGetUserResource
        :<|> StatsGetIndexResource
+       :<|> StatsGetSessionResource
        :<|> DebugDatasourcesItemsUnmAppedidsListResource
        :<|> DebugDatasourcesItemsCheckAccessResource
        :<|> DebugDatasourcesItemsSearchByViewURLResource
@@ -1276,6 +1408,7 @@ type CloudSearchAPI =
        :<|> QuerySourcesListResource
        :<|> QuerySuggestResource
        :<|> QuerySearchResource
+       :<|> OperationsLroListResource
        :<|> OperationsGetResource
        :<|> IndexingDatasourcesItemsListResource
        :<|> IndexingDatasourcesItemsUnreserveResource

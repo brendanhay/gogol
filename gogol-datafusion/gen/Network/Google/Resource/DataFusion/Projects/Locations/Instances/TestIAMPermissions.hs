@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,14 +47,14 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Instances.TestIAMPe
     , plitipCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.instances.testIamPermissions@ method which the
 -- 'ProjectsLocationsInstancesTestIAMPermissions' request conforms to.
 type ProjectsLocationsInstancesTestIAMPermissionsResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,21 +67,21 @@ type ProjectsLocationsInstancesTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsLocationsInstancesTestIAMPermissions' smart constructor.
 data ProjectsLocationsInstancesTestIAMPermissions =
   ProjectsLocationsInstancesTestIAMPermissions'
-    { _plitipXgafv          :: !(Maybe Xgafv)
+    { _plitipXgafv :: !(Maybe Xgafv)
     , _plitipUploadProtocol :: !(Maybe Text)
-    , _plitipAccessToken    :: !(Maybe Text)
-    , _plitipUploadType     :: !(Maybe Text)
-    , _plitipPayload        :: !TestIAMPermissionsRequest
-    , _plitipResource       :: !Text
-    , _plitipCallback       :: !(Maybe Text)
+    , _plitipAccessToken :: !(Maybe Text)
+    , _plitipUploadType :: !(Maybe Text)
+    , _plitipPayload :: !TestIAMPermissionsRequest
+    , _plitipResource :: !Text
+    , _plitipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

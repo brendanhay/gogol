@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.TargetSSLProxies.Get
     , tspgTargetSSLProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetSslProxies.get@ method which the
 -- 'TargetSSLProxiesGet' request conforms to.
@@ -60,7 +60,7 @@ type TargetSSLProxiesGetResource =
 -- /See:/ 'targetSSLProxiesGet' smart constructor.
 data TargetSSLProxiesGet =
   TargetSSLProxiesGet'
-    { _tspgProject        :: !Text
+    { _tspgProject :: !Text
     , _tspgTargetSSLProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

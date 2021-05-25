@@ -22,7 +22,7 @@
 --
 -- Gets volume information for a single volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.get@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.volumes.get@.
 module Network.Google.Resource.Books.Volumes.Get
     (
     -- * REST Resource
@@ -33,17 +33,22 @@ module Network.Google.Resource.Books.Volumes.Get
     , VolumesGet
 
     -- * Request Lenses
+    , vgXgafv
+    , vgUploadProtocol
     , vgCountry
     , vgIncludeNonComicsSeries
+    , vgAccessToken
+    , vgUploadType
     , vgPartner
     , vgVolumeId
     , vgSource
     , vgProjection
     , vgUserLibraryConsistentRead
+    , vgCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.get@ method which the
 -- 'VolumesGet' request conforms to.
@@ -52,26 +57,37 @@ type VolumesGetResource =
        "v1" :>
          "volumes" :>
            Capture "volumeId" Text :>
-             QueryParam "country" Text :>
-               QueryParam "includeNonComicsSeries" Bool :>
-                 QueryParam "partner" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "projection" VolumesGetProjection :>
-                       QueryParam "user_library_consistent_read" Bool :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Volume
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "country" Text :>
+                   QueryParam "includeNonComicsSeries" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "partner" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "projection" VolumesGetProjection :>
+                               QueryParam "user_library_consistent_read" Bool :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Volume
 
 -- | Gets volume information for a single volume.
 --
 -- /See:/ 'volumesGet' smart constructor.
 data VolumesGet =
   VolumesGet'
-    { _vgCountry                   :: !(Maybe Text)
-    , _vgIncludeNonComicsSeries    :: !(Maybe Bool)
-    , _vgPartner                   :: !(Maybe Text)
-    , _vgVolumeId                  :: !Text
-    , _vgSource                    :: !(Maybe Text)
-    , _vgProjection                :: !(Maybe VolumesGetProjection)
+    { _vgXgafv :: !(Maybe Xgafv)
+    , _vgUploadProtocol :: !(Maybe Text)
+    , _vgCountry :: !(Maybe Text)
+    , _vgIncludeNonComicsSeries :: !(Maybe Bool)
+    , _vgAccessToken :: !(Maybe Text)
+    , _vgUploadType :: !(Maybe Text)
+    , _vgPartner :: !(Maybe Text)
+    , _vgVolumeId :: !Text
+    , _vgSource :: !(Maybe Text)
+    , _vgProjection :: !(Maybe VolumesGetProjection)
     , _vgUserLibraryConsistentRead :: !(Maybe Bool)
+    , _vgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,9 +96,17 @@ data VolumesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vgXgafv'
+--
+-- * 'vgUploadProtocol'
+--
 -- * 'vgCountry'
 --
 -- * 'vgIncludeNonComicsSeries'
+--
+-- * 'vgAccessToken'
+--
+-- * 'vgUploadType'
 --
 -- * 'vgPartner'
 --
@@ -93,20 +117,37 @@ data VolumesGet =
 -- * 'vgProjection'
 --
 -- * 'vgUserLibraryConsistentRead'
+--
+-- * 'vgCallback'
 volumesGet
     :: Text -- ^ 'vgVolumeId'
     -> VolumesGet
 volumesGet pVgVolumeId_ =
   VolumesGet'
-    { _vgCountry = Nothing
+    { _vgXgafv = Nothing
+    , _vgUploadProtocol = Nothing
+    , _vgCountry = Nothing
     , _vgIncludeNonComicsSeries = Nothing
+    , _vgAccessToken = Nothing
+    , _vgUploadType = Nothing
     , _vgPartner = Nothing
     , _vgVolumeId = pVgVolumeId_
     , _vgSource = Nothing
     , _vgProjection = Nothing
     , _vgUserLibraryConsistentRead = Nothing
+    , _vgCallback = Nothing
     }
 
+
+-- | V1 error format.
+vgXgafv :: Lens' VolumesGet (Maybe Xgafv)
+vgXgafv = lens _vgXgafv (\ s a -> s{_vgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vgUploadProtocol :: Lens' VolumesGet (Maybe Text)
+vgUploadProtocol
+  = lens _vgUploadProtocol
+      (\ s a -> s{_vgUploadProtocol = a})
 
 -- | ISO-3166-1 code to override the IP-based location.
 vgCountry :: Lens' VolumesGet (Maybe Text)
@@ -119,6 +160,17 @@ vgIncludeNonComicsSeries
   = lens _vgIncludeNonComicsSeries
       (\ s a -> s{_vgIncludeNonComicsSeries = a})
 
+-- | OAuth access token.
+vgAccessToken :: Lens' VolumesGet (Maybe Text)
+vgAccessToken
+  = lens _vgAccessToken
+      (\ s a -> s{_vgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vgUploadType :: Lens' VolumesGet (Maybe Text)
+vgUploadType
+  = lens _vgUploadType (\ s a -> s{_vgUploadType = a})
+
 -- | Brand results for partner ID.
 vgPartner :: Lens' VolumesGet (Maybe Text)
 vgPartner
@@ -129,7 +181,7 @@ vgVolumeId :: Lens' VolumesGet Text
 vgVolumeId
   = lens _vgVolumeId (\ s a -> s{_vgVolumeId = a})
 
--- | String to identify the originator of this request.
+-- | string to identify the originator of this request.
 vgSource :: Lens' VolumesGet (Maybe Text)
 vgSource = lens _vgSource (\ s a -> s{_vgSource = a})
 
@@ -143,16 +195,26 @@ vgUserLibraryConsistentRead
   = lens _vgUserLibraryConsistentRead
       (\ s a -> s{_vgUserLibraryConsistentRead = a})
 
+-- | JSONP
+vgCallback :: Lens' VolumesGet (Maybe Text)
+vgCallback
+  = lens _vgCallback (\ s a -> s{_vgCallback = a})
+
 instance GoogleRequest VolumesGet where
         type Rs VolumesGet = Volume
         type Scopes VolumesGet =
              '["https://www.googleapis.com/auth/books"]
         requestClient VolumesGet'{..}
-          = go _vgVolumeId _vgCountry _vgIncludeNonComicsSeries
+          = go _vgVolumeId _vgXgafv _vgUploadProtocol
+              _vgCountry
+              _vgIncludeNonComicsSeries
+              _vgAccessToken
+              _vgUploadType
               _vgPartner
               _vgSource
               _vgProjection
               _vgUserLibraryConsistentRead
+              _vgCallback
               (Just AltJSON)
               booksService
           where go

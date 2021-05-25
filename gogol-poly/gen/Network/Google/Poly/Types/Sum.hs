@@ -16,7 +16,7 @@
 --
 module Network.Google.Poly.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The type of image error encountered. Optional for older image errors.
 data ImageErrorCode
@@ -55,6 +55,41 @@ instance FromJSON ImageErrorCode where
     parseJSON = parseJSONText "ImageErrorCode"
 
 instance ToJSON ImageErrorCode where
+    toJSON = toJSONText
+
+-- | The visibility of the assets to be returned. Defaults to
+-- VISIBILITY_UNSPECIFIED which returns all assets.
+data UsersAssetsListVisibility
+    = VisibilityUnspecified
+      -- ^ @VISIBILITY_UNSPECIFIED@
+      -- No visibility specified. Returns all assets.
+    | Published
+      -- ^ @PUBLISHED@
+      -- Returns only published assets.
+    | Private
+      -- ^ @PRIVATE@
+      -- Returns only private assets.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable UsersAssetsListVisibility
+
+instance FromHttpApiData UsersAssetsListVisibility where
+    parseQueryParam = \case
+        "VISIBILITY_UNSPECIFIED" -> Right VisibilityUnspecified
+        "PUBLISHED" -> Right Published
+        "PRIVATE" -> Right Private
+        x -> Left ("Unable to parse UsersAssetsListVisibility from: " <> x)
+
+instance ToHttpApiData UsersAssetsListVisibility where
+    toQueryParam = \case
+        VisibilityUnspecified -> "VISIBILITY_UNSPECIFIED"
+        Published -> "PUBLISHED"
+        Private -> "PRIVATE"
+
+instance FromJSON UsersAssetsListVisibility where
+    parseJSON = parseJSONText "UsersAssetsListVisibility"
+
+instance ToJSON UsersAssetsListVisibility where
     toJSON = toJSONText
 
 -- | The code associated with this message.
@@ -140,20 +175,20 @@ instance ToJSON AssetImportMessageCode where
 
 -- | The visibility of the asset and who can access it.
 data AssetVisibility
-    = VisibilityUnspecified
+    = AVVisibilityUnspecified
       -- ^ @VISIBILITY_UNSPECIFIED@
       -- Unknown (and invalid) visibility.
-    | Private
+    | AVPrivate
       -- ^ @PRIVATE@
       -- Access to the asset and its underlying files and resources is restricted
       -- to the author. **Authentication:** You must supply an OAuth token that
       -- corresponds to the author\'s account.
-    | UnListed
+    | AVUnListed
       -- ^ @UNLISTED@
       -- Access to the asset and its underlying files and resources is available
       -- to anyone with the asset\'s name. Unlisted assets are **not** returned
       -- by List Assets.
-    | Public
+    | AVPublic
       -- ^ @PUBLIC@
       -- Access to the asset and its underlying files and resources is available
       -- to anyone.
@@ -163,18 +198,18 @@ instance Hashable AssetVisibility
 
 instance FromHttpApiData AssetVisibility where
     parseQueryParam = \case
-        "VISIBILITY_UNSPECIFIED" -> Right VisibilityUnspecified
-        "PRIVATE" -> Right Private
-        "UNLISTED" -> Right UnListed
-        "PUBLIC" -> Right Public
+        "VISIBILITY_UNSPECIFIED" -> Right AVVisibilityUnspecified
+        "PRIVATE" -> Right AVPrivate
+        "UNLISTED" -> Right AVUnListed
+        "PUBLIC" -> Right AVPublic
         x -> Left ("Unable to parse AssetVisibility from: " <> x)
 
 instance ToHttpApiData AssetVisibility where
     toQueryParam = \case
-        VisibilityUnspecified -> "VISIBILITY_UNSPECIFIED"
-        Private -> "PRIVATE"
-        UnListed -> "UNLISTED"
-        Public -> "PUBLIC"
+        AVVisibilityUnspecified -> "VISIBILITY_UNSPECIFIED"
+        AVPrivate -> "PRIVATE"
+        AVUnListed -> "UNLISTED"
+        AVPublic -> "PUBLIC"
 
 instance FromJSON AssetVisibility where
     parseJSON = parseJSONText "AssetVisibility"
@@ -434,4 +469,45 @@ instance FromJSON PresentationParamsColorSpace where
     parseJSON = parseJSONText "PresentationParamsColorSpace"
 
 instance ToJSON PresentationParamsColorSpace where
+    toJSON = toJSONText
+
+-- | Returns assets that are of the specified complexity or less. Defaults to
+-- COMPLEX. For example, a request for MEDIUM assets also includes SIMPLE
+-- assets.
+data AssetsListMaxComplexity
+    = ComplexityUnspecified
+      -- ^ @COMPLEXITY_UNSPECIFIED@
+      -- No complexity specified. This is equivalent to omitting the filter.
+    | Complex
+      -- ^ @COMPLEX@
+      -- Highly-complex.
+    | Medium
+      -- ^ @MEDIUM@
+      -- Averagely-complex.
+    | Simple
+      -- ^ @SIMPLE@
+      -- Simple.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AssetsListMaxComplexity
+
+instance FromHttpApiData AssetsListMaxComplexity where
+    parseQueryParam = \case
+        "COMPLEXITY_UNSPECIFIED" -> Right ComplexityUnspecified
+        "COMPLEX" -> Right Complex
+        "MEDIUM" -> Right Medium
+        "SIMPLE" -> Right Simple
+        x -> Left ("Unable to parse AssetsListMaxComplexity from: " <> x)
+
+instance ToHttpApiData AssetsListMaxComplexity where
+    toQueryParam = \case
+        ComplexityUnspecified -> "COMPLEXITY_UNSPECIFIED"
+        Complex -> "COMPLEX"
+        Medium -> "MEDIUM"
+        Simple -> "SIMPLE"
+
+instance FromJSON AssetsListMaxComplexity where
+    parseJSON = parseJSONText "AssetsListMaxComplexity"
+
+instance ToJSON AssetsListMaxComplexity where
     toJSON = toJSONText

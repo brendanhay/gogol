@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Lis
     , plwtlCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.locations.workflowTemplates.list@ method which the
 -- 'ProjectsLocationsWorkflowTemplatesList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsWorkflowTemplatesListResource =
 -- /See:/ 'projectsLocationsWorkflowTemplatesList' smart constructor.
 data ProjectsLocationsWorkflowTemplatesList =
   ProjectsLocationsWorkflowTemplatesList'
-    { _plwtlParent         :: !Text
-    , _plwtlXgafv          :: !(Maybe Xgafv)
+    { _plwtlParent :: !Text
+    , _plwtlXgafv :: !(Maybe Xgafv)
     , _plwtlUploadProtocol :: !(Maybe Text)
-    , _plwtlAccessToken    :: !(Maybe Text)
-    , _plwtlUploadType     :: !(Maybe Text)
-    , _plwtlPageToken      :: !(Maybe Text)
-    , _plwtlPageSize       :: !(Maybe (Textual Int32))
-    , _plwtlCallback       :: !(Maybe Text)
+    , _plwtlAccessToken :: !(Maybe Text)
+    , _plwtlUploadType :: !(Maybe Text)
+    , _plwtlPageToken :: !(Maybe Text)
+    , _plwtlPageSize :: !(Maybe (Textual Int32))
+    , _plwtlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,9 +114,13 @@ projectsLocationsWorkflowTemplatesList pPlwtlParent_ =
     }
 
 
--- | Required. The \"resource name\" of the region, as described in
--- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
--- projects\/{project_id}\/regions\/{region}
+-- | Required. The resource name of the region or location, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates,list, the resource name of the region
+-- has the following format: projects\/{project_id}\/regions\/{region} For
+-- projects.locations.workflowTemplates.list, the resource name of the
+-- location has the following format:
+-- projects\/{project_id}\/locations\/{location}
 plwtlParent :: Lens' ProjectsLocationsWorkflowTemplatesList Text
 plwtlParent
   = lens _plwtlParent (\ s a -> s{_plwtlParent = a})

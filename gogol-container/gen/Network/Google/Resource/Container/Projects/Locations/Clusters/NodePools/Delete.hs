@@ -45,8 +45,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.D
     , plcnpdCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.delete@ method which the
 -- 'ProjectsLocationsClustersNodePoolsDelete' request conforms to.
@@ -70,16 +70,16 @@ type ProjectsLocationsClustersNodePoolsDeleteResource
 -- /See:/ 'projectsLocationsClustersNodePoolsDelete' smart constructor.
 data ProjectsLocationsClustersNodePoolsDelete =
   ProjectsLocationsClustersNodePoolsDelete'
-    { _plcnpdXgafv          :: !(Maybe Xgafv)
+    { _plcnpdXgafv :: !(Maybe Xgafv)
     , _plcnpdUploadProtocol :: !(Maybe Text)
-    , _plcnpdAccessToken    :: !(Maybe Text)
-    , _plcnpdUploadType     :: !(Maybe Text)
-    , _plcnpdZone           :: !(Maybe Text)
-    , _plcnpdNodePoolId     :: !(Maybe Text)
-    , _plcnpdName           :: !Text
-    , _plcnpdClusterId      :: !(Maybe Text)
-    , _plcnpdProjectId      :: !(Maybe Text)
-    , _plcnpdCallback       :: !(Maybe Text)
+    , _plcnpdAccessToken :: !(Maybe Text)
+    , _plcnpdUploadType :: !(Maybe Text)
+    , _plcnpdZone :: !(Maybe Text)
+    , _plcnpdNodePoolId :: !(Maybe Text)
+    , _plcnpdName :: !Text
+    , _plcnpdClusterId :: !(Maybe Text)
+    , _plcnpdProjectId :: !(Maybe Text)
+    , _plcnpdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,8 +149,9 @@ plcnpdUploadType
       (\ s a -> s{_plcnpdUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 plcnpdZone :: Lens' ProjectsLocationsClustersNodePoolsDelete (Maybe Text)
 plcnpdZone
   = lens _plcnpdZone (\ s a -> s{_plcnpdZone = a})
@@ -164,7 +165,7 @@ plcnpdNodePoolId
 
 -- | The name (project, location, cluster, node pool id) of the node pool to
 -- delete. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\`.
 plcnpdName :: Lens' ProjectsLocationsClustersNodePoolsDelete Text
 plcnpdName
   = lens _plcnpdName (\ s a -> s{_plcnpdName = a})

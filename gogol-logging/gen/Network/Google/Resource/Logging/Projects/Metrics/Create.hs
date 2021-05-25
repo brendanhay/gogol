@@ -22,7 +22,7 @@
 --
 -- Creates a logs-based metric.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.metrics.create@.
 module Network.Google.Resource.Logging.Projects.Metrics.Create
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Logging.Projects.Metrics.Create
     , pmcCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.metrics.create@ method which the
 -- 'ProjectsMetricsCreate' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsMetricsCreateResource =
 -- /See:/ 'projectsMetricsCreate' smart constructor.
 data ProjectsMetricsCreate =
   ProjectsMetricsCreate'
-    { _pmcParent         :: !Text
-    , _pmcXgafv          :: !(Maybe Xgafv)
+    { _pmcParent :: !Text
+    , _pmcXgafv :: !(Maybe Xgafv)
     , _pmcUploadProtocol :: !(Maybe Text)
-    , _pmcAccessToken    :: !(Maybe Text)
-    , _pmcUploadType     :: !(Maybe Text)
-    , _pmcPayload        :: !LogMetric
-    , _pmcCallback       :: !(Maybe Text)
+    , _pmcAccessToken :: !(Maybe Text)
+    , _pmcUploadType :: !(Maybe Text)
+    , _pmcPayload :: !LogMetric
+    , _pmcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,9 +108,9 @@ projectsMetricsCreate pPmcParent_ pPmcPayload_ =
     }
 
 
--- | The resource name of the project in which to create the metric:
--- \"projects\/[PROJECT_ID]\" The new metric must be provided in the
--- request.
+-- | Required. The resource name of the project in which to create the
+-- metric: \"projects\/[PROJECT_ID]\" The new metric must be provided in
+-- the request.
 pmcParent :: Lens' ProjectsMetricsCreate Text
 pmcParent
   = lens _pmcParent (\ s a -> s{_pmcParent = a})

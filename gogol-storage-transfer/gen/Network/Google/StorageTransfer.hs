@@ -45,11 +45,11 @@ module Network.Google.StorageTransfer
     -- ** storagetransfer.transferJobs.patch
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
 
+    -- ** storagetransfer.transferJobs.run
+    , module Network.Google.Resource.StorageTransfer.TransferJobs.Run
+
     -- ** storagetransfer.transferOperations.cancel
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
-
-    -- ** storagetransfer.transferOperations.delete
-    , module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 
     -- ** storagetransfer.transferOperations.get
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Get
@@ -72,6 +72,11 @@ module Network.Google.StorageTransfer
     , esErrorCode
     , esErrorLogEntries
 
+    -- ** RunTransferJobRequest
+    , RunTransferJobRequest
+    , runTransferJobRequest
+    , rtjrProjectId
+
     -- ** Status
     , Status
     , status
@@ -79,29 +84,47 @@ module Network.Google.StorageTransfer
     , sCode
     , sMessage
 
+    -- ** NotificationConfig
+    , NotificationConfig
+    , notificationConfig
+    , ncEventTypes
+    , ncPubsubTopic
+    , ncPayloadFormat
+
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
 
+    -- ** CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
+
     -- ** TransferOperationStatus
     , TransferOperationStatus (..)
+
+    -- ** NotificationConfigPayloadFormat
+    , NotificationConfigPayloadFormat (..)
 
     -- ** Schedule
     , Schedule
     , schedule
+    , sRepeatInterval
     , sScheduleEndDate
     , sScheduleStartDate
+    , sEndTimeOfDay
     , sStartTimeOfDay
 
     -- ** ObjectConditions
     , ObjectConditions
     , objectConditions
+    , ocLastModifiedBefore
     , ocMinTimeElapsedSinceLastModification
     , ocIncludePrefixes
     , ocMaxTimeElapsedSinceLastModification
     , ocExcludePrefixes
+    , ocLastModifiedSince
 
     -- ** Operation
     , Operation
@@ -124,11 +147,17 @@ module Network.Google.StorageTransfer
     , GoogleServiceAccount
     , googleServiceAccount
     , gsaAccountEmail
+    , gsaSubjectId
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** AzureCredentials
+    , AzureCredentials
+    , azureCredentials
+    , acSasToken
 
     -- ** Date
     , Date
@@ -169,6 +198,7 @@ module Network.Google.StorageTransfer
     , transferJob
     , tjCreationTime
     , tjStatus
+    , tjNotificationConfig
     , tjSchedule
     , tjDeletionTime
     , tjName
@@ -176,20 +206,27 @@ module Network.Google.StorageTransfer
     , tjTransferSpec
     , tjDescription
     , tjLastModificationTime
+    , tjLatestOperationName
 
     -- ** GcsData
     , GcsData
     , gcsData
+    , gdPath
     , gdBucketName
 
     -- ** Xgafv
     , Xgafv (..)
 
+    -- ** NotificationConfigEventTypesItem
+    , NotificationConfigEventTypesItem (..)
+
     -- ** AwsS3Data
     , AwsS3Data
     , awsS3Data
+    , asdPath
     , asdBucketName
     , asdAwsAccessKey
+    , asdRoleArn
 
     -- ** TransferJobStatus
     , TransferJobStatus (..)
@@ -218,6 +255,14 @@ module Network.Google.StorageTransfer
     , operationMetadata
     , omAddtional
 
+    -- ** AzureBlobStorageData
+    , AzureBlobStorageData
+    , azureBlobStorageData
+    , absdPath
+    , absdAzureCredentials
+    , absdContainer
+    , absdStorageAccount
+
     -- ** TransferOptions
     , TransferOptions
     , transferOptions
@@ -230,6 +275,7 @@ module Network.Google.StorageTransfer
     , transferOperation
     , toStatus
     , toCounters
+    , toNotificationConfig
     , toStartTime
     , toTransferJobName
     , toName
@@ -247,6 +293,7 @@ module Network.Google.StorageTransfer
     , tsAwsS3DataSource
     , tsGcsDataSink
     , tsTransferOptions
+    , tsAzureBlobStorageDataSource
 
     -- ** ListTransferJobsResponse
     , ListTransferJobsResponse
@@ -273,19 +320,19 @@ module Network.Google.StorageTransfer
     , ErrorSummaryErrorCode (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
-import           Network.Google.Resource.StorageTransfer.TransferJobs.Create
-import           Network.Google.Resource.StorageTransfer.TransferJobs.Get
-import           Network.Google.Resource.StorageTransfer.TransferJobs.List
-import           Network.Google.Resource.StorageTransfer.TransferJobs.Patch
-import           Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
-import           Network.Google.Resource.StorageTransfer.TransferOperations.Delete
-import           Network.Google.Resource.StorageTransfer.TransferOperations.Get
-import           Network.Google.Resource.StorageTransfer.TransferOperations.List
-import           Network.Google.Resource.StorageTransfer.TransferOperations.Pause
-import           Network.Google.Resource.StorageTransfer.TransferOperations.Resume
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
+import Network.Google.Resource.StorageTransfer.TransferJobs.Create
+import Network.Google.Resource.StorageTransfer.TransferJobs.Get
+import Network.Google.Resource.StorageTransfer.TransferJobs.List
+import Network.Google.Resource.StorageTransfer.TransferJobs.Patch
+import Network.Google.Resource.StorageTransfer.TransferJobs.Run
+import Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
+import Network.Google.Resource.StorageTransfer.TransferOperations.Get
+import Network.Google.Resource.StorageTransfer.TransferOperations.List
+import Network.Google.Resource.StorageTransfer.TransferOperations.Pause
+import Network.Google.Resource.StorageTransfer.TransferOperations.Resume
+import Network.Google.StorageTransfer.Types
 
 {- $resources
 TODO
@@ -296,11 +343,11 @@ type StorageTransferAPI =
      TransferJobsListResource :<|>
        TransferJobsPatchResource
        :<|> TransferJobsGetResource
+       :<|> TransferJobsRunResource
        :<|> TransferJobsCreateResource
        :<|> TransferOperationsListResource
        :<|> TransferOperationsGetResource
        :<|> TransferOperationsPauseResource
        :<|> TransferOperationsCancelResource
-       :<|> TransferOperationsDeleteResource
        :<|> TransferOperationsResumeResource
        :<|> GoogleServiceAccountsGetResource

@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Patch
     , ewapCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.webApps.patch@ method which the
 -- 'EnterprisesWebAppsPatch' request conforms to.
@@ -65,14 +65,14 @@ type EnterprisesWebAppsPatchResource =
 -- /See:/ 'enterprisesWebAppsPatch' smart constructor.
 data EnterprisesWebAppsPatch =
   EnterprisesWebAppsPatch'
-    { _ewapXgafv          :: !(Maybe Xgafv)
+    { _ewapXgafv :: !(Maybe Xgafv)
     , _ewapUploadProtocol :: !(Maybe Text)
-    , _ewapUpdateMask     :: !(Maybe GFieldMask)
-    , _ewapAccessToken    :: !(Maybe Text)
-    , _ewapUploadType     :: !(Maybe Text)
-    , _ewapPayload        :: !WebApp
-    , _ewapName           :: !Text
-    , _ewapCallback       :: !(Maybe Text)
+    , _ewapUpdateMask :: !(Maybe GFieldMask)
+    , _ewapAccessToken :: !(Maybe Text)
+    , _ewapUploadType :: !(Maybe Text)
+    , _ewapPayload :: !WebApp
+    , _ewapName :: !Text
+    , _ewapCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

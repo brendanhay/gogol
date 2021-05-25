@@ -45,8 +45,8 @@ module Network.Google.Resource.FactCheckTools.Pages.Update
     , puCallback
     ) where
 
-import           Network.Google.FactCheckTools.Types
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @factchecktools.pages.update@ method which the
 -- 'PagesUpdate' request conforms to.
@@ -73,13 +73,13 @@ type PagesUpdateResource =
 -- /See:/ 'pagesUpdate' smart constructor.
 data PagesUpdate =
   PagesUpdate'
-    { _puXgafv          :: !(Maybe Xgafv)
+    { _puXgafv :: !(Maybe Xgafv)
     , _puUploadProtocol :: !(Maybe Text)
-    , _puAccessToken    :: !(Maybe Text)
-    , _puUploadType     :: !(Maybe Text)
-    , _puPayload        :: !GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
-    , _puName           :: !Text
-    , _puCallback       :: !(Maybe Text)
+    , _puAccessToken :: !(Maybe Text)
+    , _puUploadType :: !(Maybe Text)
+    , _puPayload :: !GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
+    , _puName :: !Text
+    , _puCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

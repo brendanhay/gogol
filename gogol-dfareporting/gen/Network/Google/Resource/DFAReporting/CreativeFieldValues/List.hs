@@ -23,7 +23,7 @@
 -- Retrieves a list of creative field values, possibly filtered. This
 -- method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFieldValues.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeFieldValues.list@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
     (
     -- * REST Resource
@@ -35,40 +35,51 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
 
     -- * Request Lenses
     , cfvlCreativeFieldId
+    , cfvlXgafv
+    , cfvlUploadProtocol
+    , cfvlAccessToken
     , cfvlSearchString
+    , cfvlUploadType
     , cfvlIds
     , cfvlProFileId
     , cfvlSortOrder
     , cfvlPageToken
     , cfvlSortField
     , cfvlMaxResults
+    , cfvlCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFieldValues.list@ method which the
 -- 'CreativeFieldValuesList' request conforms to.
 type CreativeFieldValuesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
                Capture "creativeFieldId" (Textual Int64) :>
                  "creativeFieldValues" :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "sortOrder"
-                         CreativeFieldValuesListSortOrder
-                         :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             CreativeFieldValuesListSortField
-                             :>
-                             QueryParam "maxResults" (Textual Int32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] CreativeFieldValuesListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "sortOrder"
+                                 CreativeFieldValuesListSortOrder
+                                 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     CreativeFieldValuesListSortField
+                                     :>
+                                     QueryParam "maxResults" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON]
+                                             CreativeFieldValuesListResponse
 
 -- | Retrieves a list of creative field values, possibly filtered. This
 -- method supports paging.
@@ -77,13 +88,18 @@ type CreativeFieldValuesListResource =
 data CreativeFieldValuesList =
   CreativeFieldValuesList'
     { _cfvlCreativeFieldId :: !(Textual Int64)
-    , _cfvlSearchString    :: !(Maybe Text)
-    , _cfvlIds             :: !(Maybe [Textual Int64])
-    , _cfvlProFileId       :: !(Textual Int64)
-    , _cfvlSortOrder       :: !CreativeFieldValuesListSortOrder
-    , _cfvlPageToken       :: !(Maybe Text)
-    , _cfvlSortField       :: !CreativeFieldValuesListSortField
-    , _cfvlMaxResults      :: !(Textual Int32)
+    , _cfvlXgafv :: !(Maybe Xgafv)
+    , _cfvlUploadProtocol :: !(Maybe Text)
+    , _cfvlAccessToken :: !(Maybe Text)
+    , _cfvlSearchString :: !(Maybe Text)
+    , _cfvlUploadType :: !(Maybe Text)
+    , _cfvlIds :: !(Maybe [Textual Int64])
+    , _cfvlProFileId :: !(Textual Int64)
+    , _cfvlSortOrder :: !CreativeFieldValuesListSortOrder
+    , _cfvlPageToken :: !(Maybe Text)
+    , _cfvlSortField :: !CreativeFieldValuesListSortField
+    , _cfvlMaxResults :: !(Textual Int32)
+    , _cfvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -94,7 +110,15 @@ data CreativeFieldValuesList =
 --
 -- * 'cfvlCreativeFieldId'
 --
+-- * 'cfvlXgafv'
+--
+-- * 'cfvlUploadProtocol'
+--
+-- * 'cfvlAccessToken'
+--
 -- * 'cfvlSearchString'
+--
+-- * 'cfvlUploadType'
 --
 -- * 'cfvlIds'
 --
@@ -107,6 +131,8 @@ data CreativeFieldValuesList =
 -- * 'cfvlSortField'
 --
 -- * 'cfvlMaxResults'
+--
+-- * 'cfvlCallback'
 creativeFieldValuesList
     :: Int64 -- ^ 'cfvlCreativeFieldId'
     -> Int64 -- ^ 'cfvlProFileId'
@@ -114,13 +140,18 @@ creativeFieldValuesList
 creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
   CreativeFieldValuesList'
     { _cfvlCreativeFieldId = _Coerce # pCfvlCreativeFieldId_
+    , _cfvlXgafv = Nothing
+    , _cfvlUploadProtocol = Nothing
+    , _cfvlAccessToken = Nothing
     , _cfvlSearchString = Nothing
+    , _cfvlUploadType = Nothing
     , _cfvlIds = Nothing
     , _cfvlProFileId = _Coerce # pCfvlProFileId_
     , _cfvlSortOrder = CFVLSOAscending
     , _cfvlPageToken = Nothing
     , _cfvlSortField = CFVLSFID
     , _cfvlMaxResults = 1000
+    , _cfvlCallback = Nothing
     }
 
 
@@ -131,12 +162,35 @@ cfvlCreativeFieldId
       (\ s a -> s{_cfvlCreativeFieldId = a})
       . _Coerce
 
+-- | V1 error format.
+cfvlXgafv :: Lens' CreativeFieldValuesList (Maybe Xgafv)
+cfvlXgafv
+  = lens _cfvlXgafv (\ s a -> s{_cfvlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cfvlUploadProtocol :: Lens' CreativeFieldValuesList (Maybe Text)
+cfvlUploadProtocol
+  = lens _cfvlUploadProtocol
+      (\ s a -> s{_cfvlUploadProtocol = a})
+
+-- | OAuth access token.
+cfvlAccessToken :: Lens' CreativeFieldValuesList (Maybe Text)
+cfvlAccessToken
+  = lens _cfvlAccessToken
+      (\ s a -> s{_cfvlAccessToken = a})
+
 -- | Allows searching for creative field values by their values. Wildcards
 -- (e.g. *) are not allowed.
 cfvlSearchString :: Lens' CreativeFieldValuesList (Maybe Text)
 cfvlSearchString
   = lens _cfvlSearchString
       (\ s a -> s{_cfvlSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cfvlUploadType :: Lens' CreativeFieldValuesList (Maybe Text)
+cfvlUploadType
+  = lens _cfvlUploadType
+      (\ s a -> s{_cfvlUploadType = a})
 
 -- | Select only creative field values with these IDs.
 cfvlIds :: Lens' CreativeFieldValuesList [Int64]
@@ -176,19 +230,28 @@ cfvlMaxResults
       (\ s a -> s{_cfvlMaxResults = a})
       . _Coerce
 
+-- | JSONP
+cfvlCallback :: Lens' CreativeFieldValuesList (Maybe Text)
+cfvlCallback
+  = lens _cfvlCallback (\ s a -> s{_cfvlCallback = a})
+
 instance GoogleRequest CreativeFieldValuesList where
         type Rs CreativeFieldValuesList =
              CreativeFieldValuesListResponse
         type Scopes CreativeFieldValuesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesList'{..}
-          = go _cfvlProFileId _cfvlCreativeFieldId
+          = go _cfvlProFileId _cfvlCreativeFieldId _cfvlXgafv
+              _cfvlUploadProtocol
+              _cfvlAccessToken
               _cfvlSearchString
+              _cfvlUploadType
               (_cfvlIds ^. _Default)
               (Just _cfvlSortOrder)
               _cfvlPageToken
               (Just _cfvlSortField)
               (Just _cfvlMaxResults)
+              _cfvlCallback
               (Just AltJSON)
               dFAReportingService
           where go

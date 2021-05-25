@@ -50,8 +50,8 @@ module Network.Google.Resource.Classroom.Courses.Announcements.Patch
     , capCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.announcements.patch@ method which the
 -- 'CoursesAnnouncementsPatch' request conforms to.
@@ -82,15 +82,15 @@ type CoursesAnnouncementsPatchResource =
 -- /See:/ 'coursesAnnouncementsPatch' smart constructor.
 data CoursesAnnouncementsPatch =
   CoursesAnnouncementsPatch'
-    { _capXgafv          :: !(Maybe Xgafv)
+    { _capXgafv :: !(Maybe Xgafv)
     , _capUploadProtocol :: !(Maybe Text)
-    , _capUpdateMask     :: !(Maybe GFieldMask)
-    , _capCourseId       :: !Text
-    , _capAccessToken    :: !(Maybe Text)
-    , _capUploadType     :: !(Maybe Text)
-    , _capPayload        :: !Announcement
-    , _capId             :: !Text
-    , _capCallback       :: !(Maybe Text)
+    , _capUpdateMask :: !(Maybe GFieldMask)
+    , _capCourseId :: !Text
+    , _capAccessToken :: !(Maybe Text)
+    , _capUploadType :: !(Maybe Text)
+    , _capPayload :: !Announcement
+    , _capId :: !Text
+    , _capCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -151,8 +151,8 @@ capUploadProtocol
 -- specifying it in the update mask and not in the Announcement object. If
 -- a field that does not support empty values is included in the update
 -- mask and not set in the Announcement object, an \`INVALID_ARGUMENT\`
--- error will be returned. The following fields may be specified by
--- teachers: * \`text\` * \`state\` * \`scheduled_time\`
+-- error is returned. The following fields may be specified by teachers: *
+-- \`text\` * \`state\` * \`scheduled_time\`
 capUpdateMask :: Lens' CoursesAnnouncementsPatch (Maybe GFieldMask)
 capUpdateMask
   = lens _capUpdateMask

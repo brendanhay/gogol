@@ -22,7 +22,7 @@
 --
 -- Updates a message.
 --
--- /See:/ <https://developers.google.com/hangouts/chat Hangouts Chat API Reference> for @chat.spaces.messages.update@.
+-- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.update@.
 module Network.Google.Resource.Chat.Spaces.Messages.Update
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Chat.Spaces.Messages.Update
     , smuCallback
     ) where
 
-import           Network.Google.Chat.Types
-import           Network.Google.Prelude
+import Network.Google.Chat.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @chat.spaces.messages.update@ method which the
 -- 'SpacesMessagesUpdate' request conforms to.
@@ -65,14 +65,14 @@ type SpacesMessagesUpdateResource =
 -- /See:/ 'spacesMessagesUpdate' smart constructor.
 data SpacesMessagesUpdate =
   SpacesMessagesUpdate'
-    { _smuXgafv          :: !(Maybe Xgafv)
+    { _smuXgafv :: !(Maybe Xgafv)
     , _smuUploadProtocol :: !(Maybe Text)
-    , _smuUpdateMask     :: !(Maybe GFieldMask)
-    , _smuAccessToken    :: !(Maybe Text)
-    , _smuUploadType     :: !(Maybe Text)
-    , _smuPayload        :: !Message
-    , _smuName           :: !Text
-    , _smuCallback       :: !(Maybe Text)
+    , _smuUpdateMask :: !(Maybe GFieldMask)
+    , _smuAccessToken :: !(Maybe Text)
+    , _smuUploadType :: !(Maybe Text)
+    , _smuPayload :: !Message
+    , _smuName :: !Text
+    , _smuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,8 +123,8 @@ smuUploadProtocol
   = lens _smuUploadProtocol
       (\ s a -> s{_smuUploadProtocol = a})
 
--- | Required. The field paths to be updated. Currently supported field
--- paths: \"text\", \"cards\".
+-- | Required. The field paths to be updated, comma separated if there are
+-- multiple. Currently supported field paths: * text * cards
 smuUpdateMask :: Lens' SpacesMessagesUpdate (Maybe GFieldMask)
 smuUpdateMask
   = lens _smuUpdateMask
@@ -147,8 +147,6 @@ smuPayload :: Lens' SpacesMessagesUpdate Message
 smuPayload
   = lens _smuPayload (\ s a -> s{_smuPayload = a})
 
--- | Resource name, in the form \"spaces\/*\/messages\/*\". Example:
--- spaces\/AAAAMpdlehY\/messages\/UMxbHmzDlr4.UMxbHmzDlr4
 smuName :: Lens' SpacesMessagesUpdate Text
 smuName = lens _smuName (\ s a -> s{_smuName = a})
 

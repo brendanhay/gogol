@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,8 +47,8 @@ module Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
     , stipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.testIamPermissions@ method which the
 -- 'ServicesTestIAMPermissions' request conforms to.
@@ -66,21 +66,21 @@ type ServicesTestIAMPermissionsResource =
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'servicesTestIAMPermissions' smart constructor.
 data ServicesTestIAMPermissions =
   ServicesTestIAMPermissions'
-    { _stipXgafv          :: !(Maybe Xgafv)
+    { _stipXgafv :: !(Maybe Xgafv)
     , _stipUploadProtocol :: !(Maybe Text)
-    , _stipAccessToken    :: !(Maybe Text)
-    , _stipUploadType     :: !(Maybe Text)
-    , _stipPayload        :: !TestIAMPermissionsRequest
-    , _stipResource       :: !Text
-    , _stipCallback       :: !(Maybe Text)
+    , _stipAccessToken :: !(Maybe Text)
+    , _stipUploadType :: !(Maybe Text)
+    , _stipPayload :: !TestIAMPermissionsRequest
+    , _stipResource :: !Text
+    , _stipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

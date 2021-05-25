@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.SSLPolicies.Delete
     , spdProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslPolicies.delete@ method which the
 -- 'SSLPoliciesDelete' request conforms to.
@@ -65,7 +65,7 @@ data SSLPoliciesDelete =
   SSLPoliciesDelete'
     { _spdSSLPolicy :: !Text
     , _spdRequestId :: !(Maybe Text)
-    , _spdProject   :: !Text
+    , _spdProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -42,8 +42,8 @@ module Network.Google.Resource.DLP.Organizations.InspectTemplates.Get
     , oitgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.inspectTemplates.get@ method which the
 -- 'OrganizationsInspectTemplatesGet' request conforms to.
@@ -64,12 +64,12 @@ type OrganizationsInspectTemplatesGetResource =
 -- /See:/ 'organizationsInspectTemplatesGet' smart constructor.
 data OrganizationsInspectTemplatesGet =
   OrganizationsInspectTemplatesGet'
-    { _oitgXgafv          :: !(Maybe Xgafv)
+    { _oitgXgafv :: !(Maybe Xgafv)
     , _oitgUploadProtocol :: !(Maybe Text)
-    , _oitgAccessToken    :: !(Maybe Text)
-    , _oitgUploadType     :: !(Maybe Text)
-    , _oitgName           :: !Text
-    , _oitgCallback       :: !(Maybe Text)
+    , _oitgAccessToken :: !(Maybe Text)
+    , _oitgUploadType :: !(Maybe Text)
+    , _oitgName :: !Text
+    , _oitgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,8 +126,9 @@ oitgUploadType
   = lens _oitgUploadType
       (\ s a -> s{_oitgUploadType = a})
 
--- | Resource name of the organization and inspectTemplate to be read, for
--- example \`organizations\/433245324\/inspectTemplates\/432452342\` or
+-- | Required. Resource name of the organization and inspectTemplate to be
+-- read, for example
+-- \`organizations\/433245324\/inspectTemplates\/432452342\` or
 -- projects\/project-id\/inspectTemplates\/432452342.
 oitgName :: Lens' OrganizationsInspectTemplatesGet Text
 oitgName = lens _oitgName (\ s a -> s{_oitgName = a})

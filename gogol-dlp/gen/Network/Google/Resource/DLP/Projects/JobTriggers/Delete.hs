@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Projects.JobTriggers.Delete
     , pjtdCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.jobTriggers.delete@ method which the
 -- 'ProjectsJobTriggersDelete' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsJobTriggersDeleteResource =
 -- /See:/ 'projectsJobTriggersDelete' smart constructor.
 data ProjectsJobTriggersDelete =
   ProjectsJobTriggersDelete'
-    { _pjtdXgafv          :: !(Maybe Xgafv)
+    { _pjtdXgafv :: !(Maybe Xgafv)
     , _pjtdUploadProtocol :: !(Maybe Text)
-    , _pjtdAccessToken    :: !(Maybe Text)
-    , _pjtdUploadType     :: !(Maybe Text)
-    , _pjtdName           :: !Text
-    , _pjtdCallback       :: !(Maybe Text)
+    , _pjtdAccessToken :: !(Maybe Text)
+    , _pjtdUploadType :: !(Maybe Text)
+    , _pjtdName :: !Text
+    , _pjtdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,7 +128,7 @@ pjtdUploadType
   = lens _pjtdUploadType
       (\ s a -> s{_pjtdUploadType = a})
 
--- | Resource name of the project and the triggeredJob, for example
+-- | Required. Resource name of the project and the triggeredJob, for example
 -- \`projects\/dlp-test-project\/jobTriggers\/53234423\`.
 pjtdName :: Lens' ProjectsJobTriggersDelete Text
 pjtdName = lens _pjtdName (\ s a -> s{_pjtdName = a})

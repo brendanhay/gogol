@@ -24,7 +24,7 @@
 -- tasks will be marked as \'hidden\' and no longer be returned by default
 -- when retrieving all tasks for a task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.clear@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.clear@.
 module Network.Google.Resource.Tasks.Tasks.Clear
     (
     -- * REST Resource
@@ -35,11 +35,16 @@ module Network.Google.Resource.Tasks.Tasks.Clear
     , TasksClear
 
     -- * Request Lenses
+    , tcXgafv
+    , tcUploadProtocol
+    , tcAccessToken
+    , tcUploadType
     , tcTaskList
+    , tcCallback
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.clear@ method which the
 -- 'TasksClear' request conforms to.
@@ -49,16 +54,26 @@ type TasksClearResource =
          "lists" :>
            Capture "tasklist" Text :>
              "clear" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears all completed tasks from the specified task list. The affected
 -- tasks will be marked as \'hidden\' and no longer be returned by default
 -- when retrieving all tasks for a task list.
 --
 -- /See:/ 'tasksClear' smart constructor.
-newtype TasksClear =
+data TasksClear =
   TasksClear'
-    { _tcTaskList :: Text
+    { _tcXgafv :: !(Maybe Xgafv)
+    , _tcUploadProtocol :: !(Maybe Text)
+    , _tcAccessToken :: !(Maybe Text)
+    , _tcUploadType :: !(Maybe Text)
+    , _tcTaskList :: !Text
+    , _tcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,24 +82,73 @@ newtype TasksClear =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tcXgafv'
+--
+-- * 'tcUploadProtocol'
+--
+-- * 'tcAccessToken'
+--
+-- * 'tcUploadType'
+--
 -- * 'tcTaskList'
+--
+-- * 'tcCallback'
 tasksClear
     :: Text -- ^ 'tcTaskList'
     -> TasksClear
-tasksClear pTcTaskList_ = TasksClear' {_tcTaskList = pTcTaskList_}
+tasksClear pTcTaskList_ =
+  TasksClear'
+    { _tcXgafv = Nothing
+    , _tcUploadProtocol = Nothing
+    , _tcAccessToken = Nothing
+    , _tcUploadType = Nothing
+    , _tcTaskList = pTcTaskList_
+    , _tcCallback = Nothing
+    }
 
+
+-- | V1 error format.
+tcXgafv :: Lens' TasksClear (Maybe Xgafv)
+tcXgafv = lens _tcXgafv (\ s a -> s{_tcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tcUploadProtocol :: Lens' TasksClear (Maybe Text)
+tcUploadProtocol
+  = lens _tcUploadProtocol
+      (\ s a -> s{_tcUploadProtocol = a})
+
+-- | OAuth access token.
+tcAccessToken :: Lens' TasksClear (Maybe Text)
+tcAccessToken
+  = lens _tcAccessToken
+      (\ s a -> s{_tcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tcUploadType :: Lens' TasksClear (Maybe Text)
+tcUploadType
+  = lens _tcUploadType (\ s a -> s{_tcUploadType = a})
 
 -- | Task list identifier.
 tcTaskList :: Lens' TasksClear Text
 tcTaskList
   = lens _tcTaskList (\ s a -> s{_tcTaskList = a})
 
+-- | JSONP
+tcCallback :: Lens' TasksClear (Maybe Text)
+tcCallback
+  = lens _tcCallback (\ s a -> s{_tcCallback = a})
+
 instance GoogleRequest TasksClear where
         type Rs TasksClear = ()
         type Scopes TasksClear =
              '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksClear'{..}
-          = go _tcTaskList (Just AltJSON) appsTasksService
+          = go _tcTaskList _tcXgafv _tcUploadProtocol
+              _tcAccessToken
+              _tcUploadType
+              _tcCallback
+              (Just AltJSON)
+              appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TasksClearResource)
                       mempty

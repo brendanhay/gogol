@@ -44,8 +44,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Patch
     , ptpCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.triggers.patch@ method which the
 -- 'ProjectsTriggersPatch' request conforms to.
@@ -70,14 +70,14 @@ type ProjectsTriggersPatchResource =
 -- /See:/ 'projectsTriggersPatch' smart constructor.
 data ProjectsTriggersPatch =
   ProjectsTriggersPatch'
-    { _ptpXgafv          :: !(Maybe Xgafv)
+    { _ptpXgafv :: !(Maybe Xgafv)
     , _ptpUploadProtocol :: !(Maybe Text)
-    , _ptpTriggerId      :: !Text
-    , _ptpAccessToken    :: !(Maybe Text)
-    , _ptpUploadType     :: !(Maybe Text)
-    , _ptpPayload        :: !BuildTrigger
-    , _ptpProjectId      :: !Text
-    , _ptpCallback       :: !(Maybe Text)
+    , _ptpTriggerId :: !Text
+    , _ptpAccessToken :: !(Maybe Text)
+    , _ptpUploadType :: !(Maybe Text)
+    , _ptpPayload :: !BuildTrigger
+    , _ptpProjectId :: !Text
+    , _ptpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -129,7 +129,7 @@ ptpUploadProtocol
   = lens _ptpUploadProtocol
       (\ s a -> s{_ptpUploadProtocol = a})
 
--- | ID of the \`BuildTrigger\` to update.
+-- | Required. ID of the \`BuildTrigger\` to update.
 ptpTriggerId :: Lens' ProjectsTriggersPatch Text
 ptpTriggerId
   = lens _ptpTriggerId (\ s a -> s{_ptpTriggerId = a})
@@ -151,7 +151,7 @@ ptpPayload :: Lens' ProjectsTriggersPatch BuildTrigger
 ptpPayload
   = lens _ptpPayload (\ s a -> s{_ptpPayload = a})
 
--- | ID of the project that owns the trigger.
+-- | Required. ID of the project that owns the trigger.
 ptpProjectId :: Lens' ProjectsTriggersPatch Text
 ptpProjectId
   = lens _ptpProjectId (\ s a -> s{_ptpProjectId = a})

@@ -44,8 +44,8 @@ module Network.Google.Resource.StreetViewPublish.Photo.Delete
     , pdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.delete@ method which the
 -- 'PhotoDelete' request conforms to.
@@ -68,12 +68,12 @@ type PhotoDeleteResource =
 -- /See:/ 'photoDelete' smart constructor.
 data PhotoDelete =
   PhotoDelete'
-    { _pdXgafv          :: !(Maybe Xgafv)
+    { _pdXgafv :: !(Maybe Xgafv)
     , _pdUploadProtocol :: !(Maybe Text)
-    , _pdAccessToken    :: !(Maybe Text)
-    , _pdUploadType     :: !(Maybe Text)
-    , _pdPhotoId        :: !Text
-    , _pdCallback       :: !(Maybe Text)
+    , _pdAccessToken :: !(Maybe Text)
+    , _pdUploadType :: !(Maybe Text)
+    , _pdPhotoId :: !Text
+    , _pdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

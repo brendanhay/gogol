@@ -36,8 +36,8 @@ module Network.Google.Resource.ConsumerSurveys.Surveys.Get
     , sgSurveyURLId
     ) where
 
-import           Network.Google.ConsumerSurveys.Types
-import           Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @consumersurveys.surveys.get@ method which the
 -- 'SurveysGet' request conforms to.

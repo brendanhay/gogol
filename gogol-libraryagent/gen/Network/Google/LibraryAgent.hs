@@ -79,14 +79,14 @@ module Network.Google.LibraryAgent
     , gelvbTitle
     ) where
 
-import           Network.Google.LibraryAgent.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.LibraryAgent.Shelves.Books.Borrow
-import           Network.Google.Resource.LibraryAgent.Shelves.Books.Get
-import           Network.Google.Resource.LibraryAgent.Shelves.Books.List
-import           Network.Google.Resource.LibraryAgent.Shelves.Books.Return
-import           Network.Google.Resource.LibraryAgent.Shelves.Get
-import           Network.Google.Resource.LibraryAgent.Shelves.List
+import Network.Google.Prelude
+import Network.Google.LibraryAgent.Types
+import Network.Google.Resource.LibraryAgent.Shelves.Books.Borrow
+import Network.Google.Resource.LibraryAgent.Shelves.Books.Get
+import Network.Google.Resource.LibraryAgent.Shelves.Books.List
+import Network.Google.Resource.LibraryAgent.Shelves.Books.Return
+import Network.Google.Resource.LibraryAgent.Shelves.Get
+import Network.Google.Resource.LibraryAgent.Shelves.List
 
 {- $resources
 TODO

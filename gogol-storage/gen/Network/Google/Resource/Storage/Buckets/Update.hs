@@ -42,10 +42,11 @@ module Network.Google.Resource.Storage.Buckets.Update
     , buUserProject
     , buIfMetagenerationNotMatch
     , buProjection
+    , buProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.update@ method which the
 -- 'BucketsUpdate' request conforms to.
@@ -64,8 +65,9 @@ type BucketsUpdateResource =
                      QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                        :>
                        QueryParam "projection" BucketsUpdateProjection :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
+                         QueryParam "provisionalUserProject" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
 -- | Updates a bucket. Changes to the bucket will be readable immediately
 -- after writing, but configuration changes may take time to propagate.
@@ -73,14 +75,15 @@ type BucketsUpdateResource =
 -- /See:/ 'bucketsUpdate' smart constructor.
 data BucketsUpdate =
   BucketsUpdate'
-    { _buIfMetagenerationMatch      :: !(Maybe (Textual Int64))
-    , _buPredefinedACL              :: !(Maybe BucketsUpdatePredefinedACL)
-    , _buBucket                     :: !Text
-    , _buPayload                    :: !Bucket
+    { _buIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _buPredefinedACL :: !(Maybe BucketsUpdatePredefinedACL)
+    , _buBucket :: !Text
+    , _buPayload :: !Bucket
     , _buPredefinedDefaultObjectACL :: !(Maybe BucketsUpdatePredefinedDefaultObjectACL)
-    , _buUserProject                :: !(Maybe Text)
-    , _buIfMetagenerationNotMatch   :: !(Maybe (Textual Int64))
-    , _buProjection                 :: !(Maybe BucketsUpdateProjection)
+    , _buUserProject :: !(Maybe Text)
+    , _buIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
+    , _buProjection :: !(Maybe BucketsUpdateProjection)
+    , _buProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -104,6 +107,8 @@ data BucketsUpdate =
 -- * 'buIfMetagenerationNotMatch'
 --
 -- * 'buProjection'
+--
+-- * 'buProvisionalUserProject'
 bucketsUpdate
     :: Text -- ^ 'buBucket'
     -> Bucket -- ^ 'buPayload'
@@ -118,6 +123,7 @@ bucketsUpdate pBuBucket_ pBuPayload_ =
     , _buUserProject = Nothing
     , _buIfMetagenerationNotMatch = Nothing
     , _buProjection = Nothing
+    , _buProvisionalUserProject = Nothing
     }
 
 
@@ -170,6 +176,13 @@ buProjection :: Lens' BucketsUpdate (Maybe BucketsUpdateProjection)
 buProjection
   = lens _buProjection (\ s a -> s{_buProjection = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+buProvisionalUserProject :: Lens' BucketsUpdate (Maybe Text)
+buProvisionalUserProject
+  = lens _buProvisionalUserProject
+      (\ s a -> s{_buProvisionalUserProject = a})
+
 instance GoogleRequest BucketsUpdate where
         type Rs BucketsUpdate = Bucket
         type Scopes BucketsUpdate =
@@ -182,6 +195,7 @@ instance GoogleRequest BucketsUpdate where
               _buUserProject
               _buIfMetagenerationNotMatch
               _buProjection
+              _buProvisionalUserProject
               (Just AltJSON)
               _buPayload
               storageService

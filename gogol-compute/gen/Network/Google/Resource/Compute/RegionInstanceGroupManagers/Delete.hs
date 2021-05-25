@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
     , rigmdRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.delete@ method which the
 -- 'RegionInstanceGroupManagersDelete' request conforms to.
@@ -63,10 +63,10 @@ type RegionInstanceGroupManagersDeleteResource =
 -- /See:/ 'regionInstanceGroupManagersDelete' smart constructor.
 data RegionInstanceGroupManagersDelete =
   RegionInstanceGroupManagersDelete'
-    { _rigmdRequestId            :: !(Maybe Text)
-    , _rigmdProject              :: !Text
+    { _rigmdRequestId :: !(Maybe Text)
+    , _rigmdProject :: !Text
     , _rigmdInstanceGroupManager :: !Text
-    , _rigmdRegion               :: !Text
+    , _rigmdRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.SetIAMPolicy
@@ -43,14 +44,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvssipCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy@ method which the
 -- 'ProjectsLocationsDataSetsHl7V2StoresSetIAMPolicy' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresSetIAMPolicyResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,18 +63,19 @@ type ProjectsLocationsDataSetsHl7V2StoresSetIAMPolicyResource
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsLocationsDataSetsHl7V2StoresSetIAMPolicy' smart constructor.
 data ProjectsLocationsDataSetsHl7V2StoresSetIAMPolicy =
   ProjectsLocationsDataSetsHl7V2StoresSetIAMPolicy'
-    { _pldshvssipXgafv          :: !(Maybe Xgafv)
+    { _pldshvssipXgafv :: !(Maybe Xgafv)
     , _pldshvssipUploadProtocol :: !(Maybe Text)
-    , _pldshvssipAccessToken    :: !(Maybe Text)
-    , _pldshvssipUploadType     :: !(Maybe Text)
-    , _pldshvssipPayload        :: !SetIAMPolicyRequest
-    , _pldshvssipResource       :: !Text
-    , _pldshvssipCallback       :: !(Maybe Text)
+    , _pldshvssipAccessToken :: !(Maybe Text)
+    , _pldshvssipUploadType :: !(Maybe Text)
+    , _pldshvssipPayload :: !SetIAMPolicyRequest
+    , _pldshvssipResource :: !Text
+    , _pldshvssipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

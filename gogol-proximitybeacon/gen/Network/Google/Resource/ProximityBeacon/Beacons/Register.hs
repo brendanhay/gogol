@@ -47,8 +47,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
     , brCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.register@ method which the
 -- 'BeaconsRegister' request conforms to.
@@ -74,13 +74,13 @@ type BeaconsRegisterResource =
 -- /See:/ 'beaconsRegister' smart constructor.
 data BeaconsRegister =
   BeaconsRegister'
-    { _brXgafv          :: !(Maybe Xgafv)
+    { _brXgafv :: !(Maybe Xgafv)
     , _brUploadProtocol :: !(Maybe Text)
-    , _brAccessToken    :: !(Maybe Text)
-    , _brUploadType     :: !(Maybe Text)
-    , _brPayload        :: !Beacon
-    , _brProjectId      :: !(Maybe Text)
-    , _brCallback       :: !(Maybe Text)
+    , _brAccessToken :: !(Maybe Text)
+    , _brUploadType :: !(Maybe Text)
+    , _brPayload :: !Beacon
+    , _brProjectId :: !(Maybe Text)
+    , _brCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

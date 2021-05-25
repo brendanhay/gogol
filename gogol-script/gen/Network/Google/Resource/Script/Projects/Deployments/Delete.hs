@@ -42,8 +42,8 @@ module Network.Google.Resource.Script.Projects.Deployments.Delete
     , pddCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.deployments.delete@ method which the
 -- 'ProjectsDeploymentsDelete' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsDeploymentsDeleteResource =
 -- /See:/ 'projectsDeploymentsDelete' smart constructor.
 data ProjectsDeploymentsDelete =
   ProjectsDeploymentsDelete'
-    { _pddDeploymentId   :: !Text
-    , _pddXgafv          :: !(Maybe Xgafv)
+    { _pddDeploymentId :: !Text
+    , _pddXgafv :: !(Maybe Xgafv)
     , _pddUploadProtocol :: !(Maybe Text)
-    , _pddAccessToken    :: !(Maybe Text)
-    , _pddUploadType     :: !(Maybe Text)
-    , _pddScriptId       :: !Text
-    , _pddCallback       :: !(Maybe Text)
+    , _pddAccessToken :: !(Maybe Text)
+    , _pddUploadType :: !(Maybe Text)
+    , _pddScriptId :: !Text
+    , _pddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of event tags, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.eventTags.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.eventTags.list@.
 module Network.Google.Resource.DFAReporting.EventTags.List
     (
     -- * REST Resource
@@ -33,62 +33,80 @@ module Network.Google.Resource.DFAReporting.EventTags.List
     , EventTagsList
 
     -- * Request Lenses
+    , etlXgafv
     , etlDefinitionsOnly
+    , etlUploadProtocol
     , etlEventTagTypes
     , etlEnabled
+    , etlAccessToken
     , etlAdvertiserId
     , etlSearchString
+    , etlUploadType
     , etlCampaignId
     , etlIds
     , etlProFileId
     , etlSortOrder
     , etlAdId
     , etlSortField
+    , etlCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.eventTags.list@ method which the
 -- 'EventTagsList' request conforms to.
 type EventTagsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
-               QueryParam "definitionsOnly" Bool :>
-                 QueryParams "eventTagTypes"
-                   EventTagsListEventTagTypes
-                   :>
-                   QueryParam "enabled" Bool :>
-                     QueryParam "advertiserId" (Textual Int64) :>
-                       QueryParam "searchString" Text :>
-                         QueryParam "campaignId" (Textual Int64) :>
-                           QueryParams "ids" (Textual Int64) :>
-                             QueryParam "sortOrder" EventTagsListSortOrder :>
-                               QueryParam "adId" (Textual Int64) :>
-                                 QueryParam "sortField" EventTagsListSortField
-                                   :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] EventTagsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "definitionsOnly" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParams "eventTagTypes"
+                       EventTagsListEventTagTypes
+                       :>
+                       QueryParam "enabled" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "advertiserId" (Textual Int64) :>
+                             QueryParam "searchString" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "campaignId" (Textual Int64) :>
+                                   QueryParams "ids" (Textual Int64) :>
+                                     QueryParam "sortOrder"
+                                       EventTagsListSortOrder
+                                       :>
+                                       QueryParam "adId" (Textual Int64) :>
+                                         QueryParam "sortField"
+                                           EventTagsListSortField
+                                           :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON] EventTagsListResponse
 
 -- | Retrieves a list of event tags, possibly filtered.
 --
 -- /See:/ 'eventTagsList' smart constructor.
 data EventTagsList =
   EventTagsList'
-    { _etlDefinitionsOnly :: !(Maybe Bool)
-    , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
-    , _etlEnabled         :: !(Maybe Bool)
-    , _etlAdvertiserId    :: !(Maybe (Textual Int64))
-    , _etlSearchString    :: !(Maybe Text)
-    , _etlCampaignId      :: !(Maybe (Textual Int64))
-    , _etlIds             :: !(Maybe [Textual Int64])
-    , _etlProFileId       :: !(Textual Int64)
-    , _etlSortOrder       :: !EventTagsListSortOrder
-    , _etlAdId            :: !(Maybe (Textual Int64))
-    , _etlSortField       :: !EventTagsListSortField
+    { _etlXgafv :: !(Maybe Xgafv)
+    , _etlDefinitionsOnly :: !(Maybe Bool)
+    , _etlUploadProtocol :: !(Maybe Text)
+    , _etlEventTagTypes :: !(Maybe [EventTagsListEventTagTypes])
+    , _etlEnabled :: !(Maybe Bool)
+    , _etlAccessToken :: !(Maybe Text)
+    , _etlAdvertiserId :: !(Maybe (Textual Int64))
+    , _etlSearchString :: !(Maybe Text)
+    , _etlUploadType :: !(Maybe Text)
+    , _etlCampaignId :: !(Maybe (Textual Int64))
+    , _etlIds :: !(Maybe [Textual Int64])
+    , _etlProFileId :: !(Textual Int64)
+    , _etlSortOrder :: !EventTagsListSortOrder
+    , _etlAdId :: !(Maybe (Textual Int64))
+    , _etlSortField :: !EventTagsListSortField
+    , _etlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -97,15 +115,23 @@ data EventTagsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'etlXgafv'
+--
 -- * 'etlDefinitionsOnly'
+--
+-- * 'etlUploadProtocol'
 --
 -- * 'etlEventTagTypes'
 --
 -- * 'etlEnabled'
 --
+-- * 'etlAccessToken'
+--
 -- * 'etlAdvertiserId'
 --
 -- * 'etlSearchString'
+--
+-- * 'etlUploadType'
 --
 -- * 'etlCampaignId'
 --
@@ -118,24 +144,35 @@ data EventTagsList =
 -- * 'etlAdId'
 --
 -- * 'etlSortField'
+--
+-- * 'etlCallback'
 eventTagsList
     :: Int64 -- ^ 'etlProFileId'
     -> EventTagsList
 eventTagsList pEtlProFileId_ =
   EventTagsList'
-    { _etlDefinitionsOnly = Nothing
+    { _etlXgafv = Nothing
+    , _etlDefinitionsOnly = Nothing
+    , _etlUploadProtocol = Nothing
     , _etlEventTagTypes = Nothing
     , _etlEnabled = Nothing
+    , _etlAccessToken = Nothing
     , _etlAdvertiserId = Nothing
     , _etlSearchString = Nothing
+    , _etlUploadType = Nothing
     , _etlCampaignId = Nothing
     , _etlIds = Nothing
     , _etlProFileId = _Coerce # pEtlProFileId_
     , _etlSortOrder = ETLSOAscending
     , _etlAdId = Nothing
     , _etlSortField = ETLSFID
+    , _etlCallback = Nothing
     }
 
+
+-- | V1 error format.
+etlXgafv :: Lens' EventTagsList (Maybe Xgafv)
+etlXgafv = lens _etlXgafv (\ s a -> s{_etlXgafv = a})
 
 -- | Examine only the specified campaign or advertiser\'s event tags for
 -- matching selector criteria. When set to false, the parent advertiser and
@@ -147,6 +184,12 @@ etlDefinitionsOnly :: Lens' EventTagsList (Maybe Bool)
 etlDefinitionsOnly
   = lens _etlDefinitionsOnly
       (\ s a -> s{_etlDefinitionsOnly = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+etlUploadProtocol :: Lens' EventTagsList (Maybe Text)
+etlUploadProtocol
+  = lens _etlUploadProtocol
+      (\ s a -> s{_etlUploadProtocol = a})
 
 -- | Select only event tags with the specified event tag types. Event tag
 -- types can be used to specify whether to use a third-party pixel, a
@@ -170,6 +213,12 @@ etlEnabled :: Lens' EventTagsList (Maybe Bool)
 etlEnabled
   = lens _etlEnabled (\ s a -> s{_etlEnabled = a})
 
+-- | OAuth access token.
+etlAccessToken :: Lens' EventTagsList (Maybe Text)
+etlAccessToken
+  = lens _etlAccessToken
+      (\ s a -> s{_etlAccessToken = a})
+
 -- | Select only event tags that belong to this advertiser.
 etlAdvertiserId :: Lens' EventTagsList (Maybe Int64)
 etlAdvertiserId
@@ -188,6 +237,12 @@ etlSearchString :: Lens' EventTagsList (Maybe Text)
 etlSearchString
   = lens _etlSearchString
       (\ s a -> s{_etlSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+etlUploadType :: Lens' EventTagsList (Maybe Text)
+etlUploadType
+  = lens _etlUploadType
+      (\ s a -> s{_etlUploadType = a})
 
 -- | Select only event tags that belong to this campaign.
 etlCampaignId :: Lens' EventTagsList (Maybe Int64)
@@ -224,21 +279,30 @@ etlSortField :: Lens' EventTagsList EventTagsListSortField
 etlSortField
   = lens _etlSortField (\ s a -> s{_etlSortField = a})
 
+-- | JSONP
+etlCallback :: Lens' EventTagsList (Maybe Text)
+etlCallback
+  = lens _etlCallback (\ s a -> s{_etlCallback = a})
+
 instance GoogleRequest EventTagsList where
         type Rs EventTagsList = EventTagsListResponse
         type Scopes EventTagsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsList'{..}
-          = go _etlProFileId _etlDefinitionsOnly
+          = go _etlProFileId _etlXgafv _etlDefinitionsOnly
+              _etlUploadProtocol
               (_etlEventTagTypes ^. _Default)
               _etlEnabled
+              _etlAccessToken
               _etlAdvertiserId
               _etlSearchString
+              _etlUploadType
               _etlCampaignId
               (_etlIds ^. _Default)
               (Just _etlSortOrder)
               _etlAdId
               (Just _etlSortField)
+              _etlCallback
               (Just AltJSON)
               dFAReportingService
           where go

@@ -34,14 +34,14 @@ module Network.Google.Resource.Compute.Routers.Preview
     , RoutersPreview
 
     -- * Request Lenses
-    , rppProject
-    , rppRouter
-    , rppPayload
-    , rppRegion
+    , rp1Project
+    , rp1Router
+    , rp1Payload
+    , rp1Region
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.preview@ method which the
 -- 'RoutersPreview' request conforms to.
@@ -65,10 +65,10 @@ type RoutersPreviewResource =
 -- /See:/ 'routersPreview' smart constructor.
 data RoutersPreview =
   RoutersPreview'
-    { _rppProject :: !Text
-    , _rppRouter  :: !Text
-    , _rppPayload :: !Router
-    , _rppRegion  :: !Text
+    { _rp1Project :: !Text
+    , _rp1Router :: !Text
+    , _rp1Payload :: !Router
+    , _rp1Region :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,47 +77,47 @@ data RoutersPreview =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rppProject'
+-- * 'rp1Project'
 --
--- * 'rppRouter'
+-- * 'rp1Router'
 --
--- * 'rppPayload'
+-- * 'rp1Payload'
 --
--- * 'rppRegion'
+-- * 'rp1Region'
 routersPreview
-    :: Text -- ^ 'rppProject'
-    -> Text -- ^ 'rppRouter'
-    -> Router -- ^ 'rppPayload'
-    -> Text -- ^ 'rppRegion'
+    :: Text -- ^ 'rp1Project'
+    -> Text -- ^ 'rp1Router'
+    -> Router -- ^ 'rp1Payload'
+    -> Text -- ^ 'rp1Region'
     -> RoutersPreview
-routersPreview pRppProject_ pRppRouter_ pRppPayload_ pRppRegion_ =
+routersPreview pRp1Project_ pRp1Router_ pRp1Payload_ pRp1Region_ =
   RoutersPreview'
-    { _rppProject = pRppProject_
-    , _rppRouter = pRppRouter_
-    , _rppPayload = pRppPayload_
-    , _rppRegion = pRppRegion_
+    { _rp1Project = pRp1Project_
+    , _rp1Router = pRp1Router_
+    , _rp1Payload = pRp1Payload_
+    , _rp1Region = pRp1Region_
     }
 
 
 -- | Project ID for this request.
-rppProject :: Lens' RoutersPreview Text
-rppProject
-  = lens _rppProject (\ s a -> s{_rppProject = a})
+rp1Project :: Lens' RoutersPreview Text
+rp1Project
+  = lens _rp1Project (\ s a -> s{_rp1Project = a})
 
 -- | Name of the Router resource to query.
-rppRouter :: Lens' RoutersPreview Text
-rppRouter
-  = lens _rppRouter (\ s a -> s{_rppRouter = a})
+rp1Router :: Lens' RoutersPreview Text
+rp1Router
+  = lens _rp1Router (\ s a -> s{_rp1Router = a})
 
 -- | Multipart request metadata.
-rppPayload :: Lens' RoutersPreview Router
-rppPayload
-  = lens _rppPayload (\ s a -> s{_rppPayload = a})
+rp1Payload :: Lens' RoutersPreview Router
+rp1Payload
+  = lens _rp1Payload (\ s a -> s{_rp1Payload = a})
 
 -- | Name of the region for this request.
-rppRegion :: Lens' RoutersPreview Text
-rppRegion
-  = lens _rppRegion (\ s a -> s{_rppRegion = a})
+rp1Region :: Lens' RoutersPreview Text
+rp1Region
+  = lens _rp1Region (\ s a -> s{_rp1Region = a})
 
 instance GoogleRequest RoutersPreview where
         type Rs RoutersPreview = RoutersPreviewResponse
@@ -126,8 +126,8 @@ instance GoogleRequest RoutersPreview where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutersPreview'{..}
-          = go _rppProject _rppRegion _rppRouter (Just AltJSON)
-              _rppPayload
+          = go _rp1Project _rp1Region _rp1Router (Just AltJSON)
+              _rp1Payload
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutersPreviewResource)

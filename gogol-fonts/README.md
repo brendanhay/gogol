@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Fonts Developer.
+A client library for the Google Web Fonts Developer.
 
 
 ## Contribute

@@ -20,18 +20,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Folder, changing its display_name. Changes to the folder
--- display_name will be rejected if they violate either the display_name
--- formatting rules or naming constraints described in the CreateFolder
--- documentation. The Folder\'s display name must start and end with a
--- letter or digit, may contain letters, digits, spaces, hyphens and
--- underscores and can be no longer than 30 characters. This is captured by
--- the regular expression: [\\p{L}\\p{N}]([\\p{L}\\p{N}_-
--- ]{0,28}[\\p{L}\\p{N}])?. The caller must have
+-- Updates a folder, changing its \`display_name\`. Changes to the folder
+-- \`display_name\` will be rejected if they violate either the
+-- \`display_name\` formatting rules or the naming constraints described in
+-- the CreateFolder documentation. The folder\'s \`display_name\` must
+-- start and end with a letter or digit, may contain letters, digits,
+-- spaces, hyphens and underscores and can be between 3 and 30 characters.
+-- This is captured by the regular expression:
+-- \`\\p{L}\\p{N}{1,28}[\\p{L}\\p{N}]\`. The caller must have
 -- \`resourcemanager.folders.update\` permission on the identified folder.
 -- If the update fails due to the unique name constraint then a
--- PreconditionFailure explaining this violation will be returned in the
--- Status.details field.
+-- \`PreconditionFailure\` explaining this violation will be returned in
+-- the Status.details field.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.folders.patch@.
 module Network.Google.Resource.CloudResourceManager.Folders.Patch
@@ -54,13 +54,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.Patch
     , fpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.patch@ method which the
 -- 'FoldersPatch' request conforms to.
 type FoldersPatchResource =
-     "v2" :>
+     "v3" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -69,32 +69,32 @@ type FoldersPatchResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Folder :> Patch '[JSON] Folder
+                       ReqBody '[JSON] Folder :> Patch '[JSON] Operation
 
--- | Updates a Folder, changing its display_name. Changes to the folder
--- display_name will be rejected if they violate either the display_name
--- formatting rules or naming constraints described in the CreateFolder
--- documentation. The Folder\'s display name must start and end with a
--- letter or digit, may contain letters, digits, spaces, hyphens and
--- underscores and can be no longer than 30 characters. This is captured by
--- the regular expression: [\\p{L}\\p{N}]([\\p{L}\\p{N}_-
--- ]{0,28}[\\p{L}\\p{N}])?. The caller must have
+-- | Updates a folder, changing its \`display_name\`. Changes to the folder
+-- \`display_name\` will be rejected if they violate either the
+-- \`display_name\` formatting rules or the naming constraints described in
+-- the CreateFolder documentation. The folder\'s \`display_name\` must
+-- start and end with a letter or digit, may contain letters, digits,
+-- spaces, hyphens and underscores and can be between 3 and 30 characters.
+-- This is captured by the regular expression:
+-- \`\\p{L}\\p{N}{1,28}[\\p{L}\\p{N}]\`. The caller must have
 -- \`resourcemanager.folders.update\` permission on the identified folder.
 -- If the update fails due to the unique name constraint then a
--- PreconditionFailure explaining this violation will be returned in the
--- Status.details field.
+-- \`PreconditionFailure\` explaining this violation will be returned in
+-- the Status.details field.
 --
 -- /See:/ 'foldersPatch' smart constructor.
 data FoldersPatch =
   FoldersPatch'
-    { _fpXgafv          :: !(Maybe Xgafv)
+    { _fpXgafv :: !(Maybe Xgafv)
     , _fpUploadProtocol :: !(Maybe Text)
-    , _fpUpdateMask     :: !(Maybe GFieldMask)
-    , _fpAccessToken    :: !(Maybe Text)
-    , _fpUploadType     :: !(Maybe Text)
-    , _fpPayload        :: !Folder
-    , _fpName           :: !Text
-    , _fpCallback       :: !(Maybe Text)
+    , _fpUpdateMask :: !(Maybe GFieldMask)
+    , _fpAccessToken :: !(Maybe Text)
+    , _fpUploadType :: !(Maybe Text)
+    , _fpPayload :: !Folder
+    , _fpName :: !Text
+    , _fpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -145,7 +145,8 @@ fpUploadProtocol
   = lens _fpUploadProtocol
       (\ s a -> s{_fpUploadProtocol = a})
 
--- | Fields to be updated. Only the \`display_name\` can be updated.
+-- | Required. Fields to be updated. Only the \`display_name\` can be
+-- updated.
 fpUpdateMask :: Lens' FoldersPatch (Maybe GFieldMask)
 fpUpdateMask
   = lens _fpUpdateMask (\ s a -> s{_fpUpdateMask = a})
@@ -166,7 +167,7 @@ fpPayload :: Lens' FoldersPatch Folder
 fpPayload
   = lens _fpPayload (\ s a -> s{_fpPayload = a})
 
--- | Output only. The resource name of the Folder. Its format is
+-- | Output only. The resource name of the folder. Its format is
 -- \`folders\/{folder_id}\`, for example: \"folders\/1234\".
 fpName :: Lens' FoldersPatch Text
 fpName = lens _fpName (\ s a -> s{_fpName = a})
@@ -177,7 +178,7 @@ fpCallback
   = lens _fpCallback (\ s a -> s{_fpCallback = a})
 
 instance GoogleRequest FoldersPatch where
-        type Rs FoldersPatch = Folder
+        type Rs FoldersPatch = Operation
         type Scopes FoldersPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient FoldersPatch'{..}

@@ -22,7 +22,7 @@
 --
 -- Moves a volume within a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.moveVolume@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.bookshelves.moveVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
     , MyLibraryBookshelvesMoveVolume
 
     -- * Request Lenses
+    , mlbmvXgafv
+    , mlbmvUploadProtocol
+    , mlbmvAccessToken
+    , mlbmvUploadType
     , mlbmvShelf
     , mlbmvVolumeId
     , mlbmvSource
     , mlbmvVolumePosition
+    , mlbmvCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.moveVolume@ method which the
 -- 'MyLibraryBookshelvesMoveVolume' request conforms to.
@@ -53,18 +58,28 @@ type MyLibraryBookshelvesMoveVolumeResource =
                "moveVolume" :>
                  QueryParam "volumeId" Text :>
                    QueryParam "volumePosition" (Textual Int32) :>
-                     QueryParam "source" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] ()
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Moves a volume within a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesMoveVolume' smart constructor.
 data MyLibraryBookshelvesMoveVolume =
   MyLibraryBookshelvesMoveVolume'
-    { _mlbmvShelf          :: !Text
-    , _mlbmvVolumeId       :: !Text
-    , _mlbmvSource         :: !(Maybe Text)
+    { _mlbmvXgafv :: !(Maybe Xgafv)
+    , _mlbmvUploadProtocol :: !(Maybe Text)
+    , _mlbmvAccessToken :: !(Maybe Text)
+    , _mlbmvUploadType :: !(Maybe Text)
+    , _mlbmvShelf :: !Text
+    , _mlbmvVolumeId :: !Text
+    , _mlbmvSource :: !(Maybe Text)
     , _mlbmvVolumePosition :: !(Textual Int32)
+    , _mlbmvCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,6 +88,14 @@ data MyLibraryBookshelvesMoveVolume =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlbmvXgafv'
+--
+-- * 'mlbmvUploadProtocol'
+--
+-- * 'mlbmvAccessToken'
+--
+-- * 'mlbmvUploadType'
+--
 -- * 'mlbmvShelf'
 --
 -- * 'mlbmvVolumeId'
@@ -80,6 +103,8 @@ data MyLibraryBookshelvesMoveVolume =
 -- * 'mlbmvSource'
 --
 -- * 'mlbmvVolumePosition'
+--
+-- * 'mlbmvCallback'
 myLibraryBookshelvesMoveVolume
     :: Text -- ^ 'mlbmvShelf'
     -> Text -- ^ 'mlbmvVolumeId'
@@ -87,12 +112,40 @@ myLibraryBookshelvesMoveVolume
     -> MyLibraryBookshelvesMoveVolume
 myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
   MyLibraryBookshelvesMoveVolume'
-    { _mlbmvShelf = pMlbmvShelf_
+    { _mlbmvXgafv = Nothing
+    , _mlbmvUploadProtocol = Nothing
+    , _mlbmvAccessToken = Nothing
+    , _mlbmvUploadType = Nothing
+    , _mlbmvShelf = pMlbmvShelf_
     , _mlbmvVolumeId = pMlbmvVolumeId_
     , _mlbmvSource = Nothing
     , _mlbmvVolumePosition = _Coerce # pMlbmvVolumePosition_
+    , _mlbmvCallback = Nothing
     }
 
+
+-- | V1 error format.
+mlbmvXgafv :: Lens' MyLibraryBookshelvesMoveVolume (Maybe Xgafv)
+mlbmvXgafv
+  = lens _mlbmvXgafv (\ s a -> s{_mlbmvXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlbmvUploadProtocol :: Lens' MyLibraryBookshelvesMoveVolume (Maybe Text)
+mlbmvUploadProtocol
+  = lens _mlbmvUploadProtocol
+      (\ s a -> s{_mlbmvUploadProtocol = a})
+
+-- | OAuth access token.
+mlbmvAccessToken :: Lens' MyLibraryBookshelvesMoveVolume (Maybe Text)
+mlbmvAccessToken
+  = lens _mlbmvAccessToken
+      (\ s a -> s{_mlbmvAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlbmvUploadType :: Lens' MyLibraryBookshelvesMoveVolume (Maybe Text)
+mlbmvUploadType
+  = lens _mlbmvUploadType
+      (\ s a -> s{_mlbmvUploadType = a})
 
 -- | ID of bookshelf with the volume.
 mlbmvShelf :: Lens' MyLibraryBookshelvesMoveVolume Text
@@ -118,15 +171,26 @@ mlbmvVolumePosition
       (\ s a -> s{_mlbmvVolumePosition = a})
       . _Coerce
 
+-- | JSONP
+mlbmvCallback :: Lens' MyLibraryBookshelvesMoveVolume (Maybe Text)
+mlbmvCallback
+  = lens _mlbmvCallback
+      (\ s a -> s{_mlbmvCallback = a})
+
 instance GoogleRequest MyLibraryBookshelvesMoveVolume
          where
-        type Rs MyLibraryBookshelvesMoveVolume = ()
+        type Rs MyLibraryBookshelvesMoveVolume = Empty
         type Scopes MyLibraryBookshelvesMoveVolume =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesMoveVolume'{..}
           = go _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)
+              _mlbmvXgafv
+              _mlbmvUploadProtocol
+              _mlbmvAccessToken
+              _mlbmvUploadType
               _mlbmvSource
+              _mlbmvCallback
               (Just AltJSON)
               booksService
           where go

@@ -22,14 +22,18 @@ module Network.Google.People
       peopleService
 
     -- * OAuth Scopes
+    , contactsOtherReadOnlyScope
+    , directoryReadOnlyScope
     , userBirthdayReadScope
     , userInfoProFileScope
     , userPhoneNumbersReadScope
     , userInfoEmailScope
     , contactsReadOnlyScope
     , userAddressesReadScope
+    , userOrganizationReadScope
     , contactsScope
     , userEmailsReadScope
+    , userGenderReadScope
 
     -- * API Declaration
     , PeopleAPI
@@ -57,6 +61,24 @@ module Network.Google.People
     -- ** people.contactGroups.update
     , module Network.Google.Resource.People.ContactGroups.Update
 
+    -- ** people.otherContacts.copyOtherContactToMyContactsGroup
+    , module Network.Google.Resource.People.OtherContacts.CopyOtherContactToMyContactsGroup
+
+    -- ** people.otherContacts.list
+    , module Network.Google.Resource.People.OtherContacts.List
+
+    -- ** people.otherContacts.search
+    , module Network.Google.Resource.People.OtherContacts.Search
+
+    -- ** people.people.batchCreateContacts
+    , module Network.Google.Resource.People.People.BatchCreateContacts
+
+    -- ** people.people.batchDeleteContacts
+    , module Network.Google.Resource.People.People.BatchDeleteContacts
+
+    -- ** people.people.batchUpdateContacts
+    , module Network.Google.Resource.People.People.BatchUpdateContacts
+
     -- ** people.people.connections.list
     , module Network.Google.Resource.People.People.Connections.List
 
@@ -66,16 +88,37 @@ module Network.Google.People
     -- ** people.people.deleteContact
     , module Network.Google.Resource.People.People.DeleteContact
 
+    -- ** people.people.deleteContactPhoto
+    , module Network.Google.Resource.People.People.DeleteContactPhoto
+
     -- ** people.people.get
     , module Network.Google.Resource.People.People.Get
 
     -- ** people.people.getBatchGet
     , module Network.Google.Resource.People.People.GetBatchGet
 
+    -- ** people.people.listDirectoryPeople
+    , module Network.Google.Resource.People.People.ListDirectoryPeople
+
+    -- ** people.people.searchContacts
+    , module Network.Google.Resource.People.People.SearchContacts
+
+    -- ** people.people.searchDirectoryPeople
+    , module Network.Google.Resource.People.People.SearchDirectoryPeople
+
     -- ** people.people.updateContact
     , module Network.Google.Resource.People.People.UpdateContact
 
+    -- ** people.people.updateContactPhoto
+    , module Network.Google.Resource.People.People.UpdateContactPhoto
+
     -- * Types
+
+    -- ** BatchUpdateContactsRequestSourcesItem
+    , BatchUpdateContactsRequestSourcesItem (..)
+
+    -- ** PeopleUpdateContactSources
+    , PeopleUpdateContactSources (..)
 
     -- ** SipAddress
     , SipAddress
@@ -84,6 +127,11 @@ module Network.Google.People
     , saMetadata
     , saType
     , saFormattedType
+
+    -- ** BatchUpdateContactsRequestContacts
+    , BatchUpdateContactsRequestContacts
+    , batchUpdateContactsRequestContacts
+    , bucrcAddtional
 
     -- ** Photo
     , Photo
@@ -123,6 +171,12 @@ module Network.Google.People
     , cgrContactGroup
     , cgrRequestedResourceName
 
+    -- ** FileAs
+    , FileAs
+    , fileAs
+    , faValue
+    , faMetadata
+
     -- ** ContactGroup
     , ContactGroup
     , contactGroup
@@ -134,21 +188,33 @@ module Network.Google.People
     , cgGroupType
     , cgMetadata
     , cgMemberCount
+    , cgClientData
 
     -- ** ModifyContactGroupMembersResponse
     , ModifyContactGroupMembersResponse
     , modifyContactGroupMembersResponse
+    , mcgmrCanNotRemoveLastContactGroupResourceNames
     , mcgmrNotFoundResourceNames
 
     -- ** UpdateContactGroupRequest
     , UpdateContactGroupRequest
     , updateContactGroupRequest
     , ucgrContactGroup
+    , ucgrReadGroupFields
+    , ucgrUpdateGroupFields
+
+    -- ** SearchResult
+    , SearchResult
+    , searchResult
+    , srPerson
 
     -- ** DomainMembership
     , DomainMembership
     , domainMembership
     , dmInViewerDomain
+
+    -- ** PeopleConnectionsListSources
+    , PeopleConnectionsListSources (..)
 
     -- ** RelationshipInterest
     , RelationshipInterest
@@ -163,12 +229,44 @@ module Network.Google.People
     , brValue
     , brMetadata
 
+    -- ** BatchCreateContactsRequest
+    , BatchCreateContactsRequest
+    , batchCreateContactsRequest
+    , bccrReadMask
+    , bccrSources
+    , bccrContacts
+
     -- ** Membership
     , Membership
     , membership
     , mDomainMembership
     , mContactGroupMembership
     , mMetadata
+
+    -- ** SearchResponse
+    , SearchResponse
+    , searchResponse
+    , srResults
+
+    -- ** PeopleListDirectoryPeopleMergeSources
+    , PeopleListDirectoryPeopleMergeSources (..)
+
+    -- ** BatchUpdateContactsResponse
+    , BatchUpdateContactsResponse
+    , batchUpdateContactsResponse
+    , bucrUpdateResult
+
+    -- ** Location
+    , Location
+    , location
+    , lFloor
+    , lBuildingId
+    , lValue
+    , lCurrent
+    , lDeskCode
+    , lMetadata
+    , lType
+    , lFloorSection
 
     -- ** Person
     , Person
@@ -187,6 +285,7 @@ module Network.Google.People
     , perAddresses
     , perUserDefined
     , perNicknames
+    , perExternalIds
     , perRelationshipStatuses
     , perImClients
     , perPhoneNumbers
@@ -196,6 +295,8 @@ module Network.Google.People
     , perPhotos
     , perAgeRanges
     , perEvents
+    , perCalendarURLs
+    , perFileAses
     , perCoverPhotos
     , perSkills
     , perSipAddresses
@@ -203,12 +304,18 @@ module Network.Google.People
     , perInterests
     , perOrganizations
     , perLocales
+    , perLocations
+    , perMiscKeywords
     , perMemberships
     , perRelationshipInterests
+    , perClientData
 
     -- ** Empty
     , Empty
     , empty
+
+    -- ** PeopleListDirectoryPeopleSources
+    , PeopleListDirectoryPeopleSources (..)
 
     -- ** SourceType
     , SourceType (..)
@@ -227,6 +334,19 @@ module Network.Google.People
     , cgmContactGroupResourceName
     , cgmContactGroupId
 
+    -- ** MiscKeyword
+    , MiscKeyword
+    , miscKeyword
+    , mkValue
+    , mkMetadata
+    , mkType
+    , mkFormattedType
+
+    -- ** BatchCreateContactsResponse
+    , BatchCreateContactsResponse
+    , batchCreateContactsResponse
+    , bccrCreatedPeople
+
     -- ** ContactGroupGroupType
     , ContactGroupGroupType (..)
 
@@ -237,14 +357,23 @@ module Network.Google.People
     , udKey
     , udMetadata
 
+    -- ** PeopleSearchContactsSources
+    , PeopleSearchContactsSources (..)
+
+    -- ** CopyOtherContactToMyContactsGroupRequestSourcesItem
+    , CopyOtherContactToMyContactsGroupRequestSourcesItem (..)
+
     -- ** NicknameType
     , NicknameType (..)
 
     -- ** Locale
     , Locale
     , locale
-    , lValue
-    , lMetadata
+    , locValue
+    , locMetadata
+
+    -- ** PeopleConnectionsListSortOrder
+    , PeopleConnectionsListSortOrder (..)
 
     -- ** RelationshipStatus
     , RelationshipStatus
@@ -252,6 +381,9 @@ module Network.Google.People
     , rsValue
     , rsMetadata
     , rsFormattedValue
+
+    -- ** PeopleDeleteContactPhotoSources
+    , PeopleDeleteContactPhotoSources (..)
 
     -- ** URL
     , URL
@@ -261,10 +393,29 @@ module Network.Google.People
     , uType
     , uFormattedType
 
+    -- ** PeopleGetSources
+    , PeopleGetSources (..)
+
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** DeleteContactPhotoResponse
+    , DeleteContactPhotoResponse
+    , deleteContactPhotoResponse
+    , dcprPerson
+
+    -- ** UpdateContactPhotoResponse
+    , UpdateContactPhotoResponse
+    , updateContactPhotoResponse
+    , ucprPerson
+
+    -- ** GroupClientData
+    , GroupClientData
+    , groupClientData
+    , gcdValue
+    , gcdKey
 
     -- ** Address
     , Address
@@ -301,6 +452,20 @@ module Network.Google.People
     , getPeopleResponse
     , gprResponses
 
+    -- ** ListOtherContactsResponse
+    , ListOtherContactsResponse
+    , listOtherContactsResponse
+    , locrNextPageToken
+    , locrOtherContacts
+    , locrTotalSize
+    , locrNextSyncToken
+
+    -- ** PeopleSearchDirectoryPeopleSources
+    , PeopleSearchDirectoryPeopleSources (..)
+
+    -- ** BatchCreateContactsRequestSourcesItem
+    , BatchCreateContactsRequestSourcesItem (..)
+
     -- ** Birthday
     , Birthday
     , birthday
@@ -308,8 +473,14 @@ module Network.Google.People
     , bDate
     , bMetadata
 
+    -- ** PeopleCreateContactSources
+    , PeopleCreateContactSources (..)
+
     -- ** PersonAgeRange
     , PersonAgeRange (..)
+
+    -- ** PeopleSearchDirectoryPeopleMergeSources
+    , PeopleSearchDirectoryPeopleMergeSources (..)
 
     -- ** Date
     , Date
@@ -331,6 +502,13 @@ module Network.Google.People
     , resCurrent
     , resMetadata
 
+    -- ** UpdateContactPhotoRequest
+    , UpdateContactPhotoRequest
+    , updateContactPhotoRequest
+    , ucprSources
+    , ucprPersonFields
+    , ucprPhotoBytes
+
     -- ** AgeRangeType
     , AgeRangeType
     , ageRangeType
@@ -341,8 +519,12 @@ module Network.Google.People
     , Gender
     , gender
     , gValue
+    , gAddressMeAs
     , gMetadata
     , gFormattedValue
+
+    -- ** UpdateContactPhotoRequestSourcesItem
+    , UpdateContactPhotoRequestSourcesItem (..)
 
     -- ** Name
     , Name
@@ -350,6 +532,7 @@ module Network.Google.People
     , nGivenName
     , nPhoneticHonorificSuffix
     , nMiddleName
+    , nUnstructuredName
     , nPhoneticMiddleName
     , nPhoneticFamilyName
     , nPhoneticHonorificPrefix
@@ -362,12 +545,33 @@ module Network.Google.People
     , nHonorificSuffix
     , nPhoneticFullName
 
+    -- ** BatchDeleteContactsRequest
+    , BatchDeleteContactsRequest
+    , batchDeleteContactsRequest
+    , bdcrResourceNames
+
     -- ** FieldMetadata
     , FieldMetadata
     , fieldMetadata
     , fmVerified
     , fmPrimary
     , fmSource
+    , fmSourcePrimary
+
+    -- ** BatchUpdateContactsRequest
+    , BatchUpdateContactsRequest
+    , batchUpdateContactsRequest
+    , bucrUpdateMask
+    , bucrReadMask
+    , bucrSources
+    , bucrContacts
+
+    -- ** SearchDirectoryPeopleResponse
+    , SearchDirectoryPeopleResponse
+    , searchDirectoryPeopleResponse
+    , sdprNextPageToken
+    , sdprPeople
+    , sdprTotalSize
 
     -- ** PhoneNumber
     , PhoneNumber
@@ -377,6 +581,11 @@ module Network.Google.People
     , pnMetadata
     , pnType
     , pnFormattedType
+
+    -- ** ContactToCreate
+    , ContactToCreate
+    , contactToCreate
+    , ctcContactPerson
 
     -- ** Occupation
     , Occupation
@@ -400,6 +609,7 @@ module Network.Google.People
     , CreateContactGroupRequest
     , createContactGroupRequest
     , ccgrContactGroup
+    , ccgrReadGroupFields
 
     -- ** ContactGroupMetadata
     , ContactGroupMetadata
@@ -413,6 +623,11 @@ module Network.Google.People
     , mcgmrResourceNamesToAdd
     , mcgmrResourceNamesToRemove
 
+    -- ** BatchUpdateContactsResponseUpdateResult
+    , BatchUpdateContactsResponseUpdateResult
+    , batchUpdateContactsResponseUpdateResult
+    , bucrurAddtional
+
     -- ** PersonMetadataObjectType
     , PersonMetadataObjectType (..)
 
@@ -424,6 +639,9 @@ module Network.Google.People
     , sUpdateTime
     , sId
     , sType
+
+    -- ** MiscKeywordType
+    , MiscKeywordType (..)
 
     -- ** ImClient
     , ImClient
@@ -462,8 +680,30 @@ module Network.Google.People
     , nicMetadata
     , nicType
 
+    -- ** ExternalId
+    , ExternalId
+    , externalId
+    , eiValue
+    , eiMetadata
+    , eiType
+    , eiFormattedType
+
     -- ** ProFileMetadataObjectType
     , ProFileMetadataObjectType (..)
+
+    -- ** ListDirectoryPeopleResponse
+    , ListDirectoryPeopleResponse
+    , listDirectoryPeopleResponse
+    , ldprNextPageToken
+    , ldprPeople
+    , ldprNextSyncToken
+
+    -- ** CopyOtherContactToMyContactsGroupRequest
+    , CopyOtherContactToMyContactsGroupRequest
+    , copyOtherContactToMyContactsGroupRequest
+    , coctmcgrReadMask
+    , coctmcgrSources
+    , coctmcgrCopyMask
 
     -- ** Organization
     , Organization
@@ -483,6 +723,9 @@ module Network.Google.People
     , orgType
     , orgFormattedType
 
+    -- ** OtherContactsListSources
+    , OtherContactsListSources (..)
+
     -- ** Interest
     , Interest
     , interest
@@ -496,6 +739,27 @@ module Network.Google.People
     , prRequestedResourceName
     , prPerson
     , prHTTPStatusCode
+
+    -- ** CalendarURL
+    , CalendarURL
+    , calendarURL
+    , cuURL
+    , cuMetadata
+    , cuType
+    , cuFormattedType
+
+    -- ** ClientData
+    , ClientData
+    , clientData
+    , cdValue
+    , cdKey
+    , cdMetadata
+
+    -- ** PeopleGetBatchGetSources
+    , PeopleGetBatchGetSources (..)
+
+    -- ** ProFileMetadataUserTypesItem
+    , ProFileMetadataUserTypesItem (..)
 
     -- ** Skill
     , Skill
@@ -518,21 +782,32 @@ module Network.Google.People
     , cpMetadata
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.People.ContactGroups.BatchGet
-import           Network.Google.Resource.People.ContactGroups.Create
-import           Network.Google.Resource.People.ContactGroups.Delete
-import           Network.Google.Resource.People.ContactGroups.Get
-import           Network.Google.Resource.People.ContactGroups.List
-import           Network.Google.Resource.People.ContactGroups.Members.Modify
-import           Network.Google.Resource.People.ContactGroups.Update
-import           Network.Google.Resource.People.People.Connections.List
-import           Network.Google.Resource.People.People.CreateContact
-import           Network.Google.Resource.People.People.DeleteContact
-import           Network.Google.Resource.People.People.Get
-import           Network.Google.Resource.People.People.GetBatchGet
-import           Network.Google.Resource.People.People.UpdateContact
+import Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Resource.People.ContactGroups.BatchGet
+import Network.Google.Resource.People.ContactGroups.Create
+import Network.Google.Resource.People.ContactGroups.Delete
+import Network.Google.Resource.People.ContactGroups.Get
+import Network.Google.Resource.People.ContactGroups.List
+import Network.Google.Resource.People.ContactGroups.Members.Modify
+import Network.Google.Resource.People.ContactGroups.Update
+import Network.Google.Resource.People.OtherContacts.CopyOtherContactToMyContactsGroup
+import Network.Google.Resource.People.OtherContacts.List
+import Network.Google.Resource.People.OtherContacts.Search
+import Network.Google.Resource.People.People.BatchCreateContacts
+import Network.Google.Resource.People.People.BatchDeleteContacts
+import Network.Google.Resource.People.People.BatchUpdateContacts
+import Network.Google.Resource.People.People.Connections.List
+import Network.Google.Resource.People.People.CreateContact
+import Network.Google.Resource.People.People.DeleteContact
+import Network.Google.Resource.People.People.DeleteContactPhoto
+import Network.Google.Resource.People.People.Get
+import Network.Google.Resource.People.People.GetBatchGet
+import Network.Google.Resource.People.People.ListDirectoryPeople
+import Network.Google.Resource.People.People.SearchContacts
+import Network.Google.Resource.People.People.SearchDirectoryPeople
+import Network.Google.Resource.People.People.UpdateContact
+import Network.Google.Resource.People.People.UpdateContactPhoto
 
 {- $resources
 TODO
@@ -549,7 +824,19 @@ type PeopleAPI =
        :<|> ContactGroupsUpdateResource
        :<|> PeopleConnectionsListResource
        :<|> PeopleGetBatchGetResource
+       :<|> PeopleBatchCreateContactsResource
        :<|> PeopleGetResource
        :<|> PeopleDeleteContactResource
        :<|> PeopleUpdateContactResource
+       :<|> PeopleSearchDirectoryPeopleResource
        :<|> PeopleCreateContactResource
+       :<|> PeopleDeleteContactPhotoResource
+       :<|> PeopleUpdateContactPhotoResource
+       :<|> PeopleSearchContactsResource
+       :<|> PeopleListDirectoryPeopleResource
+       :<|> PeopleBatchDeleteContactsResource
+       :<|> PeopleBatchUpdateContactsResource
+       :<|>
+       OtherContactsCopyOtherContactToMyContactsGroupResource
+       :<|> OtherContactsListResource
+       :<|> OtherContactsSearchResource

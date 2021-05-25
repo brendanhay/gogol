@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Projects.EnableXpnResource
     , pexrPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.enableXpnResource@ method which the
 -- 'ProjectsEnableXpnResource' request conforms to.
@@ -64,8 +64,8 @@ type ProjectsEnableXpnResourceResource =
 data ProjectsEnableXpnResource =
   ProjectsEnableXpnResource'
     { _pexrRequestId :: !(Maybe Text)
-    , _pexrProject   :: !Text
-    , _pexrPayload   :: !ProjectsEnableXpnResourceRequest
+    , _pexrProject :: !Text
+    , _pexrPayload :: !ProjectsEnableXpnResourceRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

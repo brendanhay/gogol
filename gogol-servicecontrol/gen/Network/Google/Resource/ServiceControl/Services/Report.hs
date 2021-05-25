@@ -20,17 +20,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reports operation results to Google Service Control, such as logs and
--- metrics. It should be called after an operation is completed. If
--- feasible, the client should aggregate reporting data for up to 5 seconds
--- to reduce API traffic. Limiting aggregation to 5 seconds is to reduce
--- data loss during client crashes. Clients should carefully choose the
--- aggregation time window to avoid data loss risk more than 0.01% for
--- business and compliance reasons. NOTE: the ReportRequest has the size
--- limit of 1MB. This method requires the
--- \`servicemanagement.services.report\` permission on the specified
--- service. For more information, see [Google Cloud
--- IAM](https:\/\/cloud.google.com\/iam).
+-- Private Preview. This feature is only available for approved services.
+-- This method provides telemetry reporting for services that are
+-- integrated with [Service Infrastructure](\/service-infrastructure). It
+-- reports a list of operations that have occurred on a service. It must be
+-- called after the operations have been executed. For more information,
+-- see [Telemetry
+-- Reporting](\/service-infrastructure\/docs\/telemetry-reporting). NOTE:
+-- The telemetry reporting has a hard limit of 1000 operations and 1MB per
+-- Report call. It is recommended to have no more than 100 operations per
+-- call. This method requires the \`servicemanagement.services.report\`
+-- permission on the specified service. For more information, see [Service
+-- Control API Access
+-- Control](https:\/\/cloud.google.com\/service-infrastructure\/docs\/service-control\/access-control).
 --
 -- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference> for @servicecontrol.services.report@.
 module Network.Google.Resource.ServiceControl.Services.Report
@@ -52,13 +54,13 @@ module Network.Google.Resource.ServiceControl.Services.Report
     , srCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceControl.Types
+import Network.Google.Prelude
+import Network.Google.ServiceControl.Types
 
 -- | A resource alias for @servicecontrol.services.report@ method which the
 -- 'ServicesReport' request conforms to.
 type ServicesReportResource =
-     "v1" :>
+     "v2" :>
        "services" :>
          CaptureMode "serviceName" "report" Text :>
            QueryParam "$.xgafv" Xgafv :>
@@ -70,28 +72,30 @@ type ServicesReportResource =
                        ReqBody '[JSON] ReportRequest :>
                          Post '[JSON] ReportResponse
 
--- | Reports operation results to Google Service Control, such as logs and
--- metrics. It should be called after an operation is completed. If
--- feasible, the client should aggregate reporting data for up to 5 seconds
--- to reduce API traffic. Limiting aggregation to 5 seconds is to reduce
--- data loss during client crashes. Clients should carefully choose the
--- aggregation time window to avoid data loss risk more than 0.01% for
--- business and compliance reasons. NOTE: the ReportRequest has the size
--- limit of 1MB. This method requires the
--- \`servicemanagement.services.report\` permission on the specified
--- service. For more information, see [Google Cloud
--- IAM](https:\/\/cloud.google.com\/iam).
+-- | Private Preview. This feature is only available for approved services.
+-- This method provides telemetry reporting for services that are
+-- integrated with [Service Infrastructure](\/service-infrastructure). It
+-- reports a list of operations that have occurred on a service. It must be
+-- called after the operations have been executed. For more information,
+-- see [Telemetry
+-- Reporting](\/service-infrastructure\/docs\/telemetry-reporting). NOTE:
+-- The telemetry reporting has a hard limit of 1000 operations and 1MB per
+-- Report call. It is recommended to have no more than 100 operations per
+-- call. This method requires the \`servicemanagement.services.report\`
+-- permission on the specified service. For more information, see [Service
+-- Control API Access
+-- Control](https:\/\/cloud.google.com\/service-infrastructure\/docs\/service-control\/access-control).
 --
 -- /See:/ 'servicesReport' smart constructor.
 data ServicesReport =
   ServicesReport'
-    { _srXgafv          :: !(Maybe Xgafv)
+    { _srXgafv :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
-    , _srAccessToken    :: !(Maybe Text)
-    , _srUploadType     :: !(Maybe Text)
-    , _srPayload        :: !ReportRequest
-    , _srServiceName    :: !Text
-    , _srCallback       :: !(Maybe Text)
+    , _srAccessToken :: !(Maybe Text)
+    , _srUploadType :: !(Maybe Text)
+    , _srPayload :: !ReportRequest
+    , _srServiceName :: !Text
+    , _srCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a copy of a file and applies any requested updates with patch
--- semantics.
+-- semantics. Folders cannot be copied.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.copy@.
 module Network.Google.Resource.Drive.Files.Copy
@@ -38,13 +38,15 @@ module Network.Google.Resource.Drive.Files.Copy
     , fOCRLanguage
     , fKeepRevisionForever
     , fSupportsAllDrives
+    , fIncludePermissionsForView
     , fIgnoreDefaultVisibility
+    , fEnforceSingleParent
     , fFileId
     , fSupportsTeamDrives
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.copy@ method which the
 -- 'FilesCopy' request conforms to.
@@ -57,24 +59,28 @@ type FilesCopyResource =
                QueryParam "ocrLanguage" Text :>
                  QueryParam "keepRevisionForever" Bool :>
                    QueryParam "supportsAllDrives" Bool :>
-                     QueryParam "ignoreDefaultVisibility" Bool :>
-                       QueryParam "supportsTeamDrives" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] File :> Post '[JSON] File
+                     QueryParam "includePermissionsForView" Text :>
+                       QueryParam "ignoreDefaultVisibility" Bool :>
+                         QueryParam "enforceSingleParent" Bool :>
+                           QueryParam "supportsTeamDrives" Bool :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] File :> Post '[JSON] File
 
 -- | Creates a copy of a file and applies any requested updates with patch
--- semantics.
+-- semantics. Folders cannot be copied.
 --
 -- /See:/ 'filesCopy' smart constructor.
 data FilesCopy =
   FilesCopy'
-    { _fPayload                 :: !File
-    , _fOCRLanguage             :: !(Maybe Text)
-    , _fKeepRevisionForever     :: !Bool
-    , _fSupportsAllDrives       :: !Bool
+    { _fPayload :: !File
+    , _fOCRLanguage :: !(Maybe Text)
+    , _fKeepRevisionForever :: !Bool
+    , _fSupportsAllDrives :: !Bool
+    , _fIncludePermissionsForView :: !(Maybe Text)
     , _fIgnoreDefaultVisibility :: !Bool
-    , _fFileId                  :: !Text
-    , _fSupportsTeamDrives      :: !Bool
+    , _fEnforceSingleParent :: !Bool
+    , _fFileId :: !Text
+    , _fSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,7 +97,11 @@ data FilesCopy =
 --
 -- * 'fSupportsAllDrives'
 --
+-- * 'fIncludePermissionsForView'
+--
 -- * 'fIgnoreDefaultVisibility'
+--
+-- * 'fEnforceSingleParent'
 --
 -- * 'fFileId'
 --
@@ -106,7 +116,9 @@ filesCopy pFPayload_ pFFileId_ =
     , _fOCRLanguage = Nothing
     , _fKeepRevisionForever = False
     , _fSupportsAllDrives = False
+    , _fIncludePermissionsForView = Nothing
     , _fIgnoreDefaultVisibility = False
+    , _fEnforceSingleParent = False
     , _fFileId = pFFileId_
     , _fSupportsTeamDrives = False
     }
@@ -122,7 +134,9 @@ fOCRLanguage
   = lens _fOCRLanguage (\ s a -> s{_fOCRLanguage = a})
 
 -- | Whether to set the \'keepForever\' field in the new head revision. This
--- is only applicable to files with binary content in Google Drive.
+-- is only applicable to files with binary content in Google Drive. Only
+-- 200 revisions for the file can be kept forever. If the limit is reached,
+-- try deleting pinned revisions.
 fKeepRevisionForever :: Lens' FilesCopy Bool
 fKeepRevisionForever
   = lens _fKeepRevisionForever
@@ -135,6 +149,13 @@ fSupportsAllDrives
   = lens _fSupportsAllDrives
       (\ s a -> s{_fSupportsAllDrives = a})
 
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+fIncludePermissionsForView :: Lens' FilesCopy (Maybe Text)
+fIncludePermissionsForView
+  = lens _fIncludePermissionsForView
+      (\ s a -> s{_fIncludePermissionsForView = a})
+
 -- | Whether to ignore the domain\'s default visibility settings for the
 -- created file. Domain administrators can choose to make all uploaded
 -- files visible to the domain by default; this parameter bypasses that
@@ -144,6 +165,13 @@ fIgnoreDefaultVisibility :: Lens' FilesCopy Bool
 fIgnoreDefaultVisibility
   = lens _fIgnoreDefaultVisibility
       (\ s a -> s{_fIgnoreDefaultVisibility = a})
+
+-- | Deprecated. Copying files into multiple folders is no longer supported.
+-- Use shortcuts instead.
+fEnforceSingleParent :: Lens' FilesCopy Bool
+fEnforceSingleParent
+  = lens _fEnforceSingleParent
+      (\ s a -> s{_fEnforceSingleParent = a})
 
 -- | The ID of the file.
 fFileId :: Lens' FilesCopy Text
@@ -166,7 +194,9 @@ instance GoogleRequest FilesCopy where
           = go _fFileId _fOCRLanguage
               (Just _fKeepRevisionForever)
               (Just _fSupportsAllDrives)
+              _fIncludePermissionsForView
               (Just _fIgnoreDefaultVisibility)
+              (Just _fEnforceSingleParent)
               (Just _fSupportsTeamDrives)
               (Just AltJSON)
               _fPayload

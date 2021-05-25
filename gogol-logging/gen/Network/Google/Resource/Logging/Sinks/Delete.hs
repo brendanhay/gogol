@@ -23,7 +23,7 @@
 -- Deletes a sink. If the sink has a unique writer_identity, then that
 -- service account is also deleted.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.sinks.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.sinks.delete@.
 module Network.Google.Resource.Logging.Sinks.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Logging.Sinks.Delete
     , sdCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.sinks.delete@ method which the
 -- 'SinksDelete' request conforms to.
@@ -63,12 +63,12 @@ type SinksDeleteResource =
 -- /See:/ 'sinksDelete' smart constructor.
 data SinksDelete =
   SinksDelete'
-    { _sdXgafv          :: !(Maybe Xgafv)
+    { _sdXgafv :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
-    , _sdAccessToken    :: !(Maybe Text)
-    , _sdUploadType     :: !(Maybe Text)
-    , _sdSinkName       :: !Text
-    , _sdCallback       :: !(Maybe Text)
+    , _sdAccessToken :: !(Maybe Text)
+    , _sdUploadType :: !(Maybe Text)
+    , _sdSinkName :: !Text
+    , _sdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -36,25 +36,6 @@ module Network.Google.WebmasterTools.Types
     , afgFilters
     , afgGroupType
 
-    -- * URLSampleDetails
-    , URLSampleDetails
-    , urlSampleDetails
-    , usdLinkedFromURLs
-    , usdContainingSitemaps
-
-    -- * URLCrawlErrorsSamplesMarkAsFixedCategory
-    , URLCrawlErrorsSamplesMarkAsFixedCategory (..)
-
-    -- * URLCrawlErrorCountsPerType
-    , URLCrawlErrorCountsPerType
-    , urlCrawlErrorCountsPerType
-    , ucecptPlatform
-    , ucecptEntries
-    , ucecptCategory
-
-    -- * URLCrawlErrorsSamplesGetPlatform
-    , URLCrawlErrorsSamplesGetPlatform (..)
-
     -- * APIDataRow
     , APIDataRow
     , apiDataRow
@@ -71,48 +52,11 @@ module Network.Google.WebmasterTools.Types
     , afDimension
     , afExpression
 
-    -- * URLCrawlErrorsSamplesMarkAsFixedPlatform
-    , URLCrawlErrorsSamplesMarkAsFixedPlatform (..)
-
-    -- * URLCrawlErrorsSamplesGetCategory
-    , URLCrawlErrorsSamplesGetCategory (..)
-
-    -- * URLCrawlErrorCount
-    , URLCrawlErrorCount
-    , urlCrawlErrorCount
-    , ucecCount
-    , ucecTimestamp
-
-    -- * URLCrawlErrorscountsQueryPlatform
-    , URLCrawlErrorscountsQueryPlatform (..)
-
     -- * SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
     , searchAnalyticsQueryResponse
     , saqrRows
     , saqrResponseAggregationType
-
-    -- * URLCrawlErrorsSamplesListCategory
-    , URLCrawlErrorsSamplesListCategory (..)
-
-    -- * URLCrawlErrorsSamplesListResponse
-    , URLCrawlErrorsSamplesListResponse
-    , urlCrawlErrorsSamplesListResponse
-    , uceslrURLCrawlErrorSample
-
-    -- * URLCrawlErrorsCountsQueryResponse
-    , URLCrawlErrorsCountsQueryResponse
-    , urlCrawlErrorsCountsQueryResponse
-    , ucecqrCountPerTypes
-
-    -- * URLCrawlErrorsSample
-    , URLCrawlErrorsSample
-    , urlCrawlErrorsSample
-    , ucesResponseCode
-    , ucesURLDetails
-    , ucesLastCrawled
-    , ucesPageURL
-    , ucesFirstDetected
 
     -- * WmxSitemap
     , WmxSitemap
@@ -136,6 +80,7 @@ module Network.Google.WebmasterTools.Types
     , SearchAnalyticsQueryRequest
     , searchAnalyticsQueryRequest
     , saqrAggregationType
+    , saqrDataState
     , saqrRowLimit
     , saqrEndDate
     , saqrSearchType
@@ -143,9 +88,6 @@ module Network.Google.WebmasterTools.Types
     , saqrStartDate
     , saqrStartRow
     , saqrDimensions
-
-    -- * URLCrawlErrorsSamplesListPlatform
-    , URLCrawlErrorsSamplesListPlatform (..)
 
     -- * SitesListResponse
     , SitesListResponse
@@ -157,14 +99,11 @@ module Network.Google.WebmasterTools.Types
     , wmxSite
     , wsPermissionLevel
     , wsSiteURL
-
-    -- * URLCrawlErrorscountsQueryCategory
-    , URLCrawlErrorscountsQueryCategory (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types.Product
-import           Network.Google.WebmasterTools.Types.Sum
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types.Product
+import Network.Google.WebmasterTools.Types.Sum
 
 -- | Default request referring to version 'v3' of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
 webmasterToolsService :: ServiceConfig

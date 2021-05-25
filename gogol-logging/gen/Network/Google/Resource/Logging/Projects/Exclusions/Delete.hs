@@ -22,7 +22,7 @@
 --
 -- Deletes an exclusion.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.exclusions.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.exclusions.delete@.
 module Network.Google.Resource.Logging.Projects.Exclusions.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.Projects.Exclusions.Delete
     , pedCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.exclusions.delete@ method which the
 -- 'ProjectsExclusionsDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsExclusionsDeleteResource =
 -- /See:/ 'projectsExclusionsDelete' smart constructor.
 data ProjectsExclusionsDelete =
   ProjectsExclusionsDelete'
-    { _pedXgafv          :: !(Maybe Xgafv)
+    { _pedXgafv :: !(Maybe Xgafv)
     , _pedUploadProtocol :: !(Maybe Text)
-    , _pedAccessToken    :: !(Maybe Text)
-    , _pedUploadType     :: !(Maybe Text)
-    , _pedName           :: !Text
-    , _pedCallback       :: !(Maybe Text)
+    , _pedAccessToken :: !(Maybe Text)
+    , _pedUploadType :: !(Maybe Text)
+    , _pedName :: !Text
+    , _pedCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

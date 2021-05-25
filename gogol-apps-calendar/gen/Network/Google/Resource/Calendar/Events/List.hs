@@ -53,8 +53,8 @@ module Network.Google.Resource.Calendar.Events.List
     , elTimeMax
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.list@ method which the
 -- 'EventsList' request conforms to.
@@ -94,24 +94,24 @@ type EventsListResource =
 -- /See:/ 'eventsList' smart constructor.
 data EventsList =
   EventsList'
-    { _elSyncToken               :: !(Maybe Text)
-    , _elCalendarId              :: !Text
-    , _elTimeMin                 :: !(Maybe DateTime')
-    , _elOrderBy                 :: !(Maybe EventsListOrderBy)
-    , _elSingleEvents            :: !(Maybe Bool)
+    { _elSyncToken :: !(Maybe Text)
+    , _elCalendarId :: !Text
+    , _elTimeMin :: !(Maybe DateTime')
+    , _elOrderBy :: !(Maybe EventsListOrderBy)
+    , _elSingleEvents :: !(Maybe Bool)
     , _elPrivateExtendedProperty :: !(Maybe [Text])
-    , _elShowDeleted             :: !(Maybe Bool)
-    , _elQ                       :: !(Maybe Text)
-    , _elSharedExtendedProperty  :: !(Maybe [Text])
-    , _elMaxAttendees            :: !(Maybe (Textual Int32))
-    , _elICalUId                 :: !(Maybe Text)
-    , _elUpdatedMin              :: !(Maybe DateTime')
-    , _elPageToken               :: !(Maybe Text)
-    , _elTimeZone                :: !(Maybe Text)
-    , _elShowHiddenInvitations   :: !(Maybe Bool)
-    , _elMaxResults              :: !(Textual Int32)
-    , _elAlwaysIncludeEmail      :: !(Maybe Bool)
-    , _elTimeMax                 :: !(Maybe DateTime')
+    , _elShowDeleted :: !(Maybe Bool)
+    , _elQ :: !(Maybe Text)
+    , _elSharedExtendedProperty :: !(Maybe [Text])
+    , _elMaxAttendees :: !(Maybe (Textual Int32))
+    , _elICalUId :: !(Maybe Text)
+    , _elUpdatedMin :: !(Maybe DateTime')
+    , _elPageToken :: !(Maybe Text)
+    , _elTimeZone :: !(Maybe Text)
+    , _elShowHiddenInvitations :: !(Maybe Bool)
+    , _elMaxResults :: !(Textual Int32)
+    , _elAlwaysIncludeEmail :: !(Maybe Bool)
+    , _elTimeMax :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -205,12 +205,11 @@ elCalendarId :: Lens' EventsList Text
 elCalendarId
   = lens _elCalendarId (\ s a -> s{_elCalendarId = a})
 
--- | Lower bound (inclusive) for an event\'s start time to filter by.
--- Optional. The default is not to filter by start time. Must be an RFC3339
--- timestamp with mandatory time zone offset, for example,
--- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
--- provided but are ignored. If timeMax is set, timeMin must be smaller
--- than timeMax.
+-- | Lower bound (exclusive) for an event\'s end time to filter by. Optional.
+-- The default is not to filter by end time. Must be an RFC3339 timestamp
+-- with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00,
+-- 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If
+-- timeMax is set, timeMin must be smaller than timeMax.
 elTimeMin :: Lens' EventsList (Maybe UTCTime)
 elTimeMin
   = lens _elTimeMin (\ s a -> s{_elTimeMin = a}) .
@@ -319,22 +318,21 @@ elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
       . _Coerce
 
--- | Whether to always include a value in the email field for the organizer,
--- creator and attendees, even if no real email is available (i.e. a
--- generated, non-working value will be provided). The use of this option
--- is discouraged and should only be used by clients which cannot handle
--- the absence of an email address value in the mentioned places. Optional.
--- The default is False.
+-- | Deprecated and ignored. A value will always be returned in the email
+-- field for the organizer, creator and attendees, even if no real email
+-- address is available (i.e. a generated, non-working value will be
+-- provided).
 elAlwaysIncludeEmail :: Lens' EventsList (Maybe Bool)
 elAlwaysIncludeEmail
   = lens _elAlwaysIncludeEmail
       (\ s a -> s{_elAlwaysIncludeEmail = a})
 
--- | Upper bound (exclusive) for an event\'s end time to filter by. Optional.
--- The default is not to filter by end time. Must be an RFC3339 timestamp
--- with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00,
--- 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If
--- timeMin is set, timeMax must be greater than timeMin.
+-- | Upper bound (exclusive) for an event\'s start time to filter by.
+-- Optional. The default is not to filter by start time. Must be an RFC3339
+-- timestamp with mandatory time zone offset, for example,
+-- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+-- provided but are ignored. If timeMin is set, timeMax must be greater
+-- than timeMin.
 elTimeMax :: Lens' EventsList (Maybe UTCTime)
 elTimeMax
   = lens _elTimeMax (\ s a -> s{_elTimeMax = a}) .

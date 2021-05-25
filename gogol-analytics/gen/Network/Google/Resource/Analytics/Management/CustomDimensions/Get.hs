@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
     , mcdgCustomDimensionId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customDimensions.get@ method which the
 -- 'ManagementCustomDimensionsGet' request conforms to.
@@ -61,8 +61,8 @@ type ManagementCustomDimensionsGetResource =
 -- /See:/ 'managementCustomDimensionsGet' smart constructor.
 data ManagementCustomDimensionsGet =
   ManagementCustomDimensionsGet'
-    { _mcdgWebPropertyId     :: !Text
-    , _mcdgAccountId         :: !Text
+    { _mcdgWebPropertyId :: !Text
+    , _mcdgAccountId :: !Text
     , _mcdgCustomDimensionId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

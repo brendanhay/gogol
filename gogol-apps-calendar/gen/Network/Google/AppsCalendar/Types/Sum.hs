@@ -16,7 +16,7 @@
 --
 module Network.Google.AppsCalendar.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Guests who should receive notifications about the event update (for
 -- example, title changes, etc.).
@@ -29,9 +29,8 @@ data EventsPatchSendUpdates
       -- Notifications are sent to non-Google Calendar guests only.
     | None
       -- ^ @none@
-      -- No notifications are sent. This value should only be used for migration
-      -- use cases (note that in most migration cases the import method should be
-      -- used).
+      -- No notifications are sent. For calendar migration tasks, consider using
+      -- the Events.import method instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsPatchSendUpdates
@@ -66,9 +65,8 @@ data EventsQuickAddSendUpdates
       -- Notifications are sent to non-Google Calendar guests only.
     | EQASUNone
       -- ^ @none@
-      -- No notifications are sent. This value should only be used for migration
-      -- use cases (note that in most migration cases the import method should be
-      -- used).
+      -- No notifications are sent. For calendar migration tasks, consider using
+      -- the Events.import method instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsQuickAddSendUpdates
@@ -103,9 +101,8 @@ data EventsUpdateSendUpdates
       -- Notifications are sent to non-Google Calendar guests only.
     | EUSUNone
       -- ^ @none@
-      -- No notifications are sent. This value should only be used for migration
-      -- use cases (note that in most migration cases the import method should be
-      -- used).
+      -- No notifications are sent. For calendar migration tasks, consider using
+      -- the Events.import method instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsUpdateSendUpdates
@@ -140,9 +137,8 @@ data EventsMoveSendUpdates
       -- Notifications are sent to non-Google Calendar guests only.
     | EMSUNone
       -- ^ @none@
-      -- No notifications are sent. This value should only be used for migration
-      -- use cases (note that in most migration cases the import method should be
-      -- used).
+      -- No notifications are sent. For calendar migration tasks, consider using
+      -- the Events.import method instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsMoveSendUpdates
@@ -207,9 +203,8 @@ data EventsDeleteSendUpdates
       -- Notifications are sent to non-Google Calendar guests only.
     | EDSUNone
       -- ^ @none@
-      -- No notifications are sent. This value should only be used for migration
-      -- use cases (note that in most migration cases the import method should be
-      -- used).
+      -- No notifications are sent. For calendar migration tasks, consider using
+      -- the Events.import method instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsDeleteSendUpdates
@@ -244,9 +239,8 @@ data EventsInsertSendUpdates
       -- Notifications are sent to non-Google Calendar guests only.
     | EISUNone
       -- ^ @none@
-      -- No notifications are sent. This value should only be used for migration
-      -- use cases (note that in most migration cases the import method should be
-      -- used).
+      -- No notifications are sent. For calendar migration tasks, consider using
+      -- the Events.import method instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsInsertSendUpdates

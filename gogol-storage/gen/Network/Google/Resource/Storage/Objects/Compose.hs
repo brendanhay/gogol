@@ -41,11 +41,12 @@ module Network.Google.Resource.Storage.Objects.Compose
     , oUserProject
     , oDestinationBucket
     , oKmsKeyName
+    , oProvisionalUserProject
     , oDestinationObject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.compose@ method which the
 -- 'ObjectsCompose' request conforms to.
@@ -64,9 +65,10 @@ type ObjectsComposeResource =
                        QueryParam "ifGenerationMatch" (Textual Int64) :>
                          QueryParam "userProject" Text :>
                            QueryParam "kmsKeyName" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] ComposeRequest :>
-                                 Post '[JSON] Object
+                             QueryParam "provisionalUserProject" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] ComposeRequest :>
+                                   Post '[JSON] Object
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
@@ -75,13 +77,14 @@ type ObjectsComposeResource =
 data ObjectsCompose =
   ObjectsCompose'
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
-    , _oIfMetagenerationMatch    :: !(Maybe (Textual Int64))
-    , _oIfGenerationMatch        :: !(Maybe (Textual Int64))
-    , _oPayload                  :: !ComposeRequest
-    , _oUserProject              :: !(Maybe Text)
-    , _oDestinationBucket        :: !Text
-    , _oKmsKeyName               :: !(Maybe Text)
-    , _oDestinationObject        :: !Text
+    , _oIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _oIfGenerationMatch :: !(Maybe (Textual Int64))
+    , _oPayload :: !ComposeRequest
+    , _oUserProject :: !(Maybe Text)
+    , _oDestinationBucket :: !Text
+    , _oKmsKeyName :: !(Maybe Text)
+    , _oProvisionalUserProject :: !(Maybe Text)
+    , _oDestinationObject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -104,6 +107,8 @@ data ObjectsCompose =
 --
 -- * 'oKmsKeyName'
 --
+-- * 'oProvisionalUserProject'
+--
 -- * 'oDestinationObject'
 objectsCompose
     :: ComposeRequest -- ^ 'oPayload'
@@ -119,6 +124,7 @@ objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
     , _oUserProject = Nothing
     , _oDestinationBucket = pODestinationBucket_
     , _oKmsKeyName = Nothing
+    , _oProvisionalUserProject = Nothing
     , _oDestinationObject = pODestinationObject_
     }
 
@@ -171,6 +177,13 @@ oKmsKeyName :: Lens' ObjectsCompose (Maybe Text)
 oKmsKeyName
   = lens _oKmsKeyName (\ s a -> s{_oKmsKeyName = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+oProvisionalUserProject :: Lens' ObjectsCompose (Maybe Text)
+oProvisionalUserProject
+  = lens _oProvisionalUserProject
+      (\ s a -> s{_oProvisionalUserProject = a})
+
 -- | Name of the new object. For information about how to URL encode object
 -- names to be path safe, see Encoding URI Path Parts.
 oDestinationObject :: Lens' ObjectsCompose Text
@@ -191,6 +204,7 @@ instance GoogleRequest ObjectsCompose where
               _oIfGenerationMatch
               _oUserProject
               _oKmsKeyName
+              _oProvisionalUserProject
               (Just AltJSON)
               _oPayload
               storageService

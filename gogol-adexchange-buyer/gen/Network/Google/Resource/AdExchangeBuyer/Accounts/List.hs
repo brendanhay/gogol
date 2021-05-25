@@ -34,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.List
 
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.

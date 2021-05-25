@@ -45,8 +45,8 @@ module Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.List
     , platlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.acceleratorTypes.list@ method which the
 -- 'ProjectsLocationsAcceleratorTypesList' request conforms to.
@@ -71,16 +71,16 @@ type ProjectsLocationsAcceleratorTypesListResource =
 -- /See:/ 'projectsLocationsAcceleratorTypesList' smart constructor.
 data ProjectsLocationsAcceleratorTypesList =
   ProjectsLocationsAcceleratorTypesList'
-    { _platlParent         :: !Text
-    , _platlXgafv          :: !(Maybe Xgafv)
+    { _platlParent :: !Text
+    , _platlXgafv :: !(Maybe Xgafv)
     , _platlUploadProtocol :: !(Maybe Text)
-    , _platlOrderBy        :: !(Maybe Text)
-    , _platlAccessToken    :: !(Maybe Text)
-    , _platlUploadType     :: !(Maybe Text)
-    , _platlFilter         :: !(Maybe Text)
-    , _platlPageToken      :: !(Maybe Text)
-    , _platlPageSize       :: !(Maybe (Textual Int32))
-    , _platlCallback       :: !(Maybe Text)
+    , _platlOrderBy :: !(Maybe Text)
+    , _platlAccessToken :: !(Maybe Text)
+    , _platlUploadType :: !(Maybe Text)
+    , _platlFilter :: !(Maybe Text)
+    , _platlPageToken :: !(Maybe Text)
+    , _platlPageSize :: !(Maybe (Textual Int32))
+    , _platlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,7 +126,7 @@ projectsLocationsAcceleratorTypesList pPlatlParent_ =
     }
 
 
--- | The parent resource name.
+-- | Required. The parent resource name.
 platlParent :: Lens' ProjectsLocationsAcceleratorTypesList Text
 platlParent
   = lens _platlParent (\ s a -> s{_platlParent = a})

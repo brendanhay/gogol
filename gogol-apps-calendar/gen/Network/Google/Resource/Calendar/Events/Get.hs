@@ -40,8 +40,8 @@ module Network.Google.Resource.Calendar.Events.Get
     , egEventId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.get@ method which the
 -- 'EventsGet' request conforms to.
@@ -62,11 +62,11 @@ type EventsGetResource =
 -- /See:/ 'eventsGet' smart constructor.
 data EventsGet =
   EventsGet'
-    { _egCalendarId         :: !Text
-    , _egMaxAttendees       :: !(Maybe (Textual Int32))
-    , _egTimeZone           :: !(Maybe Text)
+    { _egCalendarId :: !Text
+    , _egMaxAttendees :: !(Maybe (Textual Int32))
+    , _egTimeZone :: !(Maybe Text)
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
-    , _egEventId            :: !Text
+    , _egEventId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,12 +120,10 @@ egTimeZone :: Lens' EventsGet (Maybe Text)
 egTimeZone
   = lens _egTimeZone (\ s a -> s{_egTimeZone = a})
 
--- | Whether to always include a value in the email field for the organizer,
--- creator and attendees, even if no real email is available (i.e. a
--- generated, non-working value will be provided). The use of this option
--- is discouraged and should only be used by clients which cannot handle
--- the absence of an email address value in the mentioned places. Optional.
--- The default is False.
+-- | Deprecated and ignored. A value will always be returned in the email
+-- field for the organizer, creator and attendees, even if no real email
+-- address is available (i.e. a generated, non-working value will be
+-- provided).
 egAlwaysIncludeEmail :: Lens' EventsGet (Maybe Bool)
 egAlwaysIncludeEmail
   = lens _egAlwaysIncludeEmail

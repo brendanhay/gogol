@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.NetworkEndpointGroups.Delete
     , negdNetworkEndpointGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networkEndpointGroups.delete@ method which the
 -- 'NetworkEndpointGroupsDelete' request conforms to.
@@ -67,9 +67,9 @@ type NetworkEndpointGroupsDeleteResource =
 -- /See:/ 'networkEndpointGroupsDelete' smart constructor.
 data NetworkEndpointGroupsDelete =
   NetworkEndpointGroupsDelete'
-    { _negdRequestId            :: !(Maybe Text)
-    , _negdProject              :: !Text
-    , _negdZone                 :: !Text
+    { _negdRequestId :: !(Maybe Text)
+    , _negdProject :: !Text
+    , _negdZone :: !Text
     , _negdNetworkEndpointGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

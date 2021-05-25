@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a cluster in a project.
+-- Creates a cluster in a project. The returned Operation.metadata will be
+-- ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.create@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
@@ -44,8 +46,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
     , prccCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.clusters.create@ method which the
 -- 'ProjectsRegionsClustersCreate' request conforms to.
@@ -65,20 +67,22 @@ type ProjectsRegionsClustersCreateResource =
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Cluster :> Post '[JSON] Operation
 
--- | Creates a cluster in a project.
+-- | Creates a cluster in a project. The returned Operation.metadata will be
+-- ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
 --
 -- /See:/ 'projectsRegionsClustersCreate' smart constructor.
 data ProjectsRegionsClustersCreate =
   ProjectsRegionsClustersCreate'
-    { _prccXgafv          :: !(Maybe Xgafv)
-    , _prccRequestId      :: !(Maybe Text)
+    { _prccXgafv :: !(Maybe Xgafv)
+    , _prccRequestId :: !(Maybe Text)
     , _prccUploadProtocol :: !(Maybe Text)
-    , _prccAccessToken    :: !(Maybe Text)
-    , _prccUploadType     :: !(Maybe Text)
-    , _prccPayload        :: !Cluster
-    , _prccRegion         :: !Text
-    , _prccProjectId      :: !Text
-    , _prccCallback       :: !(Maybe Text)
+    , _prccAccessToken :: !(Maybe Text)
+    , _prccUploadType :: !(Maybe Text)
+    , _prccPayload :: !Cluster
+    , _prccRegion :: !Text
+    , _prccProjectId :: !Text
+    , _prccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,12 +132,13 @@ prccXgafv :: Lens' ProjectsRegionsClustersCreate (Maybe Xgafv)
 prccXgafv
   = lens _prccXgafv (\ s a -> s{_prccXgafv = a})
 
--- | Optional. A unique id used to identify the request. If the server
--- receives two CreateClusterRequest requests with the same id, then the
--- second request will be ignored and the first
+-- | Optional. A unique ID used to identify the request. If the server
+-- receives two CreateClusterRequest
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
+-- with the same id, then the second request will be ignored and the first
 -- google.longrunning.Operation created and stored in the backend is
 -- returned.It is recommended to always set this value to a UUID
--- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The id
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The ID
 -- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
 -- and hyphens (-). The maximum length is 40 characters.
 prccRequestId :: Lens' ProjectsRegionsClustersCreate (Maybe Text)
@@ -164,7 +169,7 @@ prccPayload :: Lens' ProjectsRegionsClustersCreate Cluster
 prccPayload
   = lens _prccPayload (\ s a -> s{_prccPayload = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prccRegion :: Lens' ProjectsRegionsClustersCreate Text
 prccRegion
   = lens _prccRegion (\ s a -> s{_prccRegion = a})

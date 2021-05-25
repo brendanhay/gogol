@@ -53,8 +53,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
     , aolCallback
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.orders.list@ method which the
 -- 'AccountsOrdersList' request conforms to.
@@ -88,22 +88,22 @@ type AccountsOrdersListResource =
 -- /See:/ 'accountsOrdersList' smart constructor.
 data AccountsOrdersList =
   AccountsOrdersList'
-    { _aolStatus         :: !(Maybe [Text])
-    , _aolPphNames       :: !(Maybe [Text])
-    , _aolXgafv          :: !(Maybe Xgafv)
-    , _aolStudioNames    :: !(Maybe [Text])
-    , _aolVideoIds       :: !(Maybe [Text])
+    { _aolStatus :: !(Maybe [Text])
+    , _aolPphNames :: !(Maybe [Text])
+    , _aolXgafv :: !(Maybe Xgafv)
+    , _aolStudioNames :: !(Maybe [Text])
+    , _aolVideoIds :: !(Maybe [Text])
     , _aolUploadProtocol :: !(Maybe Text)
-    , _aolPp             :: !Bool
-    , _aolAccessToken    :: !(Maybe Text)
-    , _aolUploadType     :: !(Maybe Text)
-    , _aolCustomId       :: !(Maybe Text)
-    , _aolAccountId      :: !Text
-    , _aolBearerToken    :: !(Maybe Text)
-    , _aolName           :: !(Maybe Text)
-    , _aolPageToken      :: !(Maybe Text)
-    , _aolPageSize       :: !(Maybe (Textual Int32))
-    , _aolCallback       :: !(Maybe Text)
+    , _aolPp :: !Bool
+    , _aolAccessToken :: !(Maybe Text)
+    , _aolUploadType :: !(Maybe Text)
+    , _aolCustomId :: !(Maybe Text)
+    , _aolAccountId :: !Text
+    , _aolBearerToken :: !(Maybe Text)
+    , _aolName :: !(Maybe Text)
+    , _aolPageToken :: !(Maybe Text)
+    , _aolPageSize :: !(Maybe (Textual Int32))
+    , _aolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

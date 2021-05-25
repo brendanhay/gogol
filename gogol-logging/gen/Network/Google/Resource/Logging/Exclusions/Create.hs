@@ -24,7 +24,7 @@
 -- belonging to that resource can be excluded. You can have up to 10
 -- exclusions in a resource.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.exclusions.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.exclusions.create@.
 module Network.Google.Resource.Logging.Exclusions.Create
     (
     -- * REST Resource
@@ -35,17 +35,17 @@ module Network.Google.Resource.Logging.Exclusions.Create
     , ExclusionsCreate
 
     -- * Request Lenses
-    , ecParent
-    , ecXgafv
-    , ecUploadProtocol
-    , ecAccessToken
-    , ecUploadType
-    , ecPayload
-    , ecCallback
+    , eParent
+    , eXgafv
+    , eUploadProtocol
+    , eAccessToken
+    , eUploadType
+    , ePayload
+    , eCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.exclusions.create@ method which the
 -- 'ExclusionsCreate' request conforms to.
@@ -69,13 +69,13 @@ type ExclusionsCreateResource =
 -- /See:/ 'exclusionsCreate' smart constructor.
 data ExclusionsCreate =
   ExclusionsCreate'
-    { _ecParent         :: !Text
-    , _ecXgafv          :: !(Maybe Xgafv)
-    , _ecUploadProtocol :: !(Maybe Text)
-    , _ecAccessToken    :: !(Maybe Text)
-    , _ecUploadType     :: !(Maybe Text)
-    , _ecPayload        :: !LogExclusion
-    , _ecCallback       :: !(Maybe Text)
+    { _eParent :: !Text
+    , _eXgafv :: !(Maybe Xgafv)
+    , _eUploadProtocol :: !(Maybe Text)
+    , _eAccessToken :: !(Maybe Text)
+    , _eUploadType :: !(Maybe Text)
+    , _ePayload :: !LogExclusion
+    , _eCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,32 +84,32 @@ data ExclusionsCreate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ecParent'
+-- * 'eParent'
 --
--- * 'ecXgafv'
+-- * 'eXgafv'
 --
--- * 'ecUploadProtocol'
+-- * 'eUploadProtocol'
 --
--- * 'ecAccessToken'
+-- * 'eAccessToken'
 --
--- * 'ecUploadType'
+-- * 'eUploadType'
 --
--- * 'ecPayload'
+-- * 'ePayload'
 --
--- * 'ecCallback'
+-- * 'eCallback'
 exclusionsCreate
-    :: Text -- ^ 'ecParent'
-    -> LogExclusion -- ^ 'ecPayload'
+    :: Text -- ^ 'eParent'
+    -> LogExclusion -- ^ 'ePayload'
     -> ExclusionsCreate
-exclusionsCreate pEcParent_ pEcPayload_ =
+exclusionsCreate pEParent_ pEPayload_ =
   ExclusionsCreate'
-    { _ecParent = pEcParent_
-    , _ecXgafv = Nothing
-    , _ecUploadProtocol = Nothing
-    , _ecAccessToken = Nothing
-    , _ecUploadType = Nothing
-    , _ecPayload = pEcPayload_
-    , _ecCallback = Nothing
+    { _eParent = pEParent_
+    , _eXgafv = Nothing
+    , _eUploadProtocol = Nothing
+    , _eAccessToken = Nothing
+    , _eUploadType = Nothing
+    , _ePayload = pEPayload_
+    , _eCallback = Nothing
     }
 
 
@@ -118,39 +118,37 @@ exclusionsCreate pEcParent_ pEcPayload_ =
 -- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 -- Examples: \"projects\/my-logging-project\",
 -- \"organizations\/123456789\".
-ecParent :: Lens' ExclusionsCreate Text
-ecParent = lens _ecParent (\ s a -> s{_ecParent = a})
+eParent :: Lens' ExclusionsCreate Text
+eParent = lens _eParent (\ s a -> s{_eParent = a})
 
 -- | V1 error format.
-ecXgafv :: Lens' ExclusionsCreate (Maybe Xgafv)
-ecXgafv = lens _ecXgafv (\ s a -> s{_ecXgafv = a})
+eXgafv :: Lens' ExclusionsCreate (Maybe Xgafv)
+eXgafv = lens _eXgafv (\ s a -> s{_eXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ecUploadProtocol :: Lens' ExclusionsCreate (Maybe Text)
-ecUploadProtocol
-  = lens _ecUploadProtocol
-      (\ s a -> s{_ecUploadProtocol = a})
+eUploadProtocol :: Lens' ExclusionsCreate (Maybe Text)
+eUploadProtocol
+  = lens _eUploadProtocol
+      (\ s a -> s{_eUploadProtocol = a})
 
 -- | OAuth access token.
-ecAccessToken :: Lens' ExclusionsCreate (Maybe Text)
-ecAccessToken
-  = lens _ecAccessToken
-      (\ s a -> s{_ecAccessToken = a})
+eAccessToken :: Lens' ExclusionsCreate (Maybe Text)
+eAccessToken
+  = lens _eAccessToken (\ s a -> s{_eAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ecUploadType :: Lens' ExclusionsCreate (Maybe Text)
-ecUploadType
-  = lens _ecUploadType (\ s a -> s{_ecUploadType = a})
+eUploadType :: Lens' ExclusionsCreate (Maybe Text)
+eUploadType
+  = lens _eUploadType (\ s a -> s{_eUploadType = a})
 
 -- | Multipart request metadata.
-ecPayload :: Lens' ExclusionsCreate LogExclusion
-ecPayload
-  = lens _ecPayload (\ s a -> s{_ecPayload = a})
+ePayload :: Lens' ExclusionsCreate LogExclusion
+ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
 
 -- | JSONP
-ecCallback :: Lens' ExclusionsCreate (Maybe Text)
-ecCallback
-  = lens _ecCallback (\ s a -> s{_ecCallback = a})
+eCallback :: Lens' ExclusionsCreate (Maybe Text)
+eCallback
+  = lens _eCallback (\ s a -> s{_eCallback = a})
 
 instance GoogleRequest ExclusionsCreate where
         type Rs ExclusionsCreate = LogExclusion
@@ -158,12 +156,11 @@ instance GoogleRequest ExclusionsCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient ExclusionsCreate'{..}
-          = go _ecParent _ecXgafv _ecUploadProtocol
-              _ecAccessToken
-              _ecUploadType
-              _ecCallback
+          = go _eParent _eXgafv _eUploadProtocol _eAccessToken
+              _eUploadType
+              _eCallback
               (Just AltJSON)
-              _ecPayload
+              _ePayload
               loggingService
           where go
                   = buildClient

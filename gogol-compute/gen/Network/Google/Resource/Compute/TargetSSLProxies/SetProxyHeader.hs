@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetSSLProxies.SetProxyHeader
     , tspsphTargetSSLProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetSslProxies.setProxyHeader@ method which the
 -- 'TargetSSLProxiesSetProxyHeader' request conforms to.
@@ -63,9 +63,9 @@ type TargetSSLProxiesSetProxyHeaderResource =
 -- /See:/ 'targetSSLProxiesSetProxyHeader' smart constructor.
 data TargetSSLProxiesSetProxyHeader =
   TargetSSLProxiesSetProxyHeader'
-    { _tspsphRequestId      :: !(Maybe Text)
-    , _tspsphProject        :: !Text
-    , _tspsphPayload        :: !TargetSSLProxiesSetProxyHeaderRequest
+    { _tspsphRequestId :: !(Maybe Text)
+    , _tspsphProject :: !Text
+    , _tspsphPayload :: !TargetSSLProxiesSetProxyHeaderRequest
     , _tspsphTargetSSLProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

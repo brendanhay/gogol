@@ -23,7 +23,7 @@
 -- Gets a list of subaccounts, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.subaccounts.list@.
 module Network.Google.Resource.DFAReporting.SubAccounts.List
     (
     -- * REST Resource
@@ -34,34 +34,45 @@ module Network.Google.Resource.DFAReporting.SubAccounts.List
     , SubAccountsList
 
     -- * Request Lenses
+    , salXgafv
+    , salUploadProtocol
+    , salAccessToken
     , salSearchString
+    , salUploadType
     , salIds
     , salProFileId
     , salSortOrder
     , salPageToken
     , salSortField
     , salMaxResults
+    , salCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.subaccounts.list@ method which the
 -- 'SubAccountsList' request conforms to.
 type SubAccountsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" (Textual Int64) :>
-                   QueryParam "sortOrder" SubAccountsListSortOrder :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" SubAccountsListSortField :>
-                         QueryParam "maxResults" (Textual Int32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] SubAccountsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParam "sortOrder" SubAccountsListSortOrder :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" SubAccountsListSortField
+                                 :>
+                                 QueryParam "maxResults" (Textual Int32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] SubAccountsListResponse
 
 -- | Gets a list of subaccounts, possibly filtered. This method supports
 -- paging.
@@ -69,13 +80,18 @@ type SubAccountsListResource =
 -- /See:/ 'subAccountsList' smart constructor.
 data SubAccountsList =
   SubAccountsList'
-    { _salSearchString :: !(Maybe Text)
-    , _salIds          :: !(Maybe [Textual Int64])
-    , _salProFileId    :: !(Textual Int64)
-    , _salSortOrder    :: !SubAccountsListSortOrder
-    , _salPageToken    :: !(Maybe Text)
-    , _salSortField    :: !SubAccountsListSortField
-    , _salMaxResults   :: !(Textual Int32)
+    { _salXgafv :: !(Maybe Xgafv)
+    , _salUploadProtocol :: !(Maybe Text)
+    , _salAccessToken :: !(Maybe Text)
+    , _salSearchString :: !(Maybe Text)
+    , _salUploadType :: !(Maybe Text)
+    , _salIds :: !(Maybe [Textual Int64])
+    , _salProFileId :: !(Textual Int64)
+    , _salSortOrder :: !SubAccountsListSortOrder
+    , _salPageToken :: !(Maybe Text)
+    , _salSortField :: !SubAccountsListSortField
+    , _salMaxResults :: !(Textual Int32)
+    , _salCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,7 +100,15 @@ data SubAccountsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'salXgafv'
+--
+-- * 'salUploadProtocol'
+--
+-- * 'salAccessToken'
+--
 -- * 'salSearchString'
+--
+-- * 'salUploadType'
 --
 -- * 'salIds'
 --
@@ -97,20 +121,43 @@ data SubAccountsList =
 -- * 'salSortField'
 --
 -- * 'salMaxResults'
+--
+-- * 'salCallback'
 subAccountsList
     :: Int64 -- ^ 'salProFileId'
     -> SubAccountsList
 subAccountsList pSalProFileId_ =
   SubAccountsList'
-    { _salSearchString = Nothing
+    { _salXgafv = Nothing
+    , _salUploadProtocol = Nothing
+    , _salAccessToken = Nothing
+    , _salSearchString = Nothing
+    , _salUploadType = Nothing
     , _salIds = Nothing
     , _salProFileId = _Coerce # pSalProFileId_
     , _salSortOrder = SALSOAscending
     , _salPageToken = Nothing
     , _salSortField = SALSFID
     , _salMaxResults = 1000
+    , _salCallback = Nothing
     }
 
+
+-- | V1 error format.
+salXgafv :: Lens' SubAccountsList (Maybe Xgafv)
+salXgafv = lens _salXgafv (\ s a -> s{_salXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+salUploadProtocol :: Lens' SubAccountsList (Maybe Text)
+salUploadProtocol
+  = lens _salUploadProtocol
+      (\ s a -> s{_salUploadProtocol = a})
+
+-- | OAuth access token.
+salAccessToken :: Lens' SubAccountsList (Maybe Text)
+salAccessToken
+  = lens _salAccessToken
+      (\ s a -> s{_salAccessToken = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"subaccount*2015\" will return objects with names like
@@ -118,11 +165,17 @@ subAccountsList pSalProFileId_ =
 -- \"subaccount 2015\". Most of the searches also add wildcards implicitly
 -- at the start and the end of the search string. For example, a search
 -- string of \"subaccount\" will match objects with name \"my subaccount\",
--- \"subaccount 2015\", or simply \"subaccount\".
+-- \"subaccount 2015\", or simply \"subaccount\" .
 salSearchString :: Lens' SubAccountsList (Maybe Text)
 salSearchString
   = lens _salSearchString
       (\ s a -> s{_salSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+salUploadType :: Lens' SubAccountsList (Maybe Text)
+salUploadType
+  = lens _salUploadType
+      (\ s a -> s{_salUploadType = a})
 
 -- | Select only subaccounts with these IDs.
 salIds :: Lens' SubAccountsList [Int64]
@@ -158,17 +211,26 @@ salMaxResults
       (\ s a -> s{_salMaxResults = a})
       . _Coerce
 
+-- | JSONP
+salCallback :: Lens' SubAccountsList (Maybe Text)
+salCallback
+  = lens _salCallback (\ s a -> s{_salCallback = a})
+
 instance GoogleRequest SubAccountsList where
         type Rs SubAccountsList = SubAccountsListResponse
         type Scopes SubAccountsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsList'{..}
-          = go _salProFileId _salSearchString
+          = go _salProFileId _salXgafv _salUploadProtocol
+              _salAccessToken
+              _salSearchString
+              _salUploadType
               (_salIds ^. _Default)
               (Just _salSortOrder)
               _salPageToken
               (Just _salSortField)
               (Just _salMaxResults)
+              _salCallback
               (Just AltJSON)
               dFAReportingService
           where go

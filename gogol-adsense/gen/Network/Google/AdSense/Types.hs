@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -23,274 +23,282 @@ module Network.Google.AdSense.Types
     , adSenseReadOnlyScope
     , adSenseScope
 
-    -- * AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
+    -- * SiteState
+    , SiteState (..)
 
-    -- * ReportingMetadataEntry
-    , ReportingMetadataEntry
-    , reportingMetadataEntry
-    , rmeKind
-    , rmeRequiredMetrics
-    , rmeCompatibleMetrics
-    , rmeRequiredDimensions
-    , rmeId
-    , rmeCompatibleDimensions
-    , rmeSupportedProducts
+    -- * ListAlertsResponse
+    , ListAlertsResponse
+    , listAlertsResponse
+    , larAlerts
 
-    -- * AdsenseReportsGenerateResponseHeadersItem
-    , AdsenseReportsGenerateResponseHeadersItem
-    , adsenseReportsGenerateResponseHeadersItem
-    , argrhiName
-    , argrhiCurrency
-    , argrhiType
+    -- * AdClientAdCode
+    , AdClientAdCode
+    , adClientAdCode
+    , acacAmpHead
+    , acacAmpBody
+    , acacAdCode
+
+    -- * AccountsReportsSavedGenerateReportingTimeZone
+    , AccountsReportsSavedGenerateReportingTimeZone (..)
+
+    -- * AccountsReportsSavedGenerateCSVDateRange
+    , AccountsReportsSavedGenerateCSVDateRange (..)
+
+    -- * HTTPBodyExtensionsItem
+    , HTTPBodyExtensionsItem
+    , hTTPBodyExtensionsItem
+    , httpbeiAddtional
+
+    -- * AccountsReportsGenerateCSVReportingTimeZone
+    , AccountsReportsGenerateCSVReportingTimeZone (..)
+
+    -- * AccountsReportsGenerateDimensions
+    , AccountsReportsGenerateDimensions (..)
+
+    -- * HeaderType
+    , HeaderType (..)
+
+    -- * ListURLChannelsResponse
+    , ListURLChannelsResponse
+    , listURLChannelsResponse
+    , lucrNextPageToken
+    , lucrURLChannels
 
     -- * Payment
     , Payment
     , payment
-    , pPaymentAmountCurrencyCode
-    , pKind
-    , pPaymentDate
-    , pId
-    , pPaymentAmount
+    , pAmount
+    , pDate
+    , pName
 
-    -- * Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- * AccountsReportsSavedGenerateCSVReportingTimeZone
+    , AccountsReportsSavedGenerateCSVReportingTimeZone (..)
 
-    -- * Alerts
-    , Alerts
-    , alerts
-    , aleKind
-    , aleItems
+    -- * ContentAdsSettingsType
+    , ContentAdsSettingsType (..)
 
-    -- * SavedReports
-    , SavedReports
-    , savedReports
-    , srEtag
-    , srNextPageToken
-    , srKind
-    , srItems
+    -- * ListCustomChannelsResponse
+    , ListCustomChannelsResponse
+    , listCustomChannelsResponse
+    , lccrNextPageToken
+    , lccrCustomChannels
 
-    -- * AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- * AccountsReportsSavedGenerateDateRange
+    , AccountsReportsSavedGenerateDateRange (..)
+
+    -- * AccountsReportsGenerateCSVMetrics
+    , AccountsReportsGenerateCSVMetrics (..)
+
+    -- * ListLinkedAdUnitsResponse
+    , ListLinkedAdUnitsResponse
+    , listLinkedAdUnitsResponse
+    , llaurNextPageToken
+    , llaurAdUnits
+
+    -- * ListAccountsResponse
+    , ListAccountsResponse
+    , listAccountsResponse
+    , larNextPageToken
+    , larAccounts
 
     -- * SavedReport
     , SavedReport
     , savedReport
-    , sKind
-    , sName
-    , sId
-
-    -- * URLChannels
-    , URLChannels
-    , urlChannels
-    , ucEtag
-    , ucNextPageToken
-    , ucKind
-    , ucItems
-
-    -- * CustomChannels
-    , CustomChannels
-    , customChannels
-    , ccEtag
-    , ccNextPageToken
-    , ccKind
-    , ccItems
+    , srName
+    , srTitle
 
     -- * AdUnit
     , AdUnit
     , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuFeedAdsSettings
-    , auuCustomStyle
-    , auuSavedStyleId
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
+    , auState
+    , auReportingDimensionId
+    , auName
+    , auContentAdsSettings
+    , auDisplayName
+
+    -- * Cell
+    , Cell
+    , cell
+    , cValue
 
     -- * Alert
     , Alert
     , alert
-    , aaIsDismissible
-    , aaKind
-    , aaSeverity
-    , aaId
-    , aaType
-    , aaMessage
+    , aSeverity
+    , aName
+    , aType
+    , aMessage
 
-    -- * AdStyleFont
-    , AdStyleFont
-    , adStyleFont
-    , asfSize
-    , asfFamily
+    -- * ListSavedReportsResponse
+    , ListSavedReportsResponse
+    , listSavedReportsResponse
+    , lsrrNextPageToken
+    , lsrrSavedReports
+
+    -- * ListChildAccountsResponse
+    , ListChildAccountsResponse
+    , listChildAccountsResponse
+    , lcarNextPageToken
+    , lcarAccounts
 
     -- * Account
     , Account
     , account
-    , accKind
-    , accCreationTime
     , accPremium
+    , accPendingTasks
     , accName
-    , accId
-    , accTimezone
-    , accSubAccounts
+    , accDisplayName
+    , accTimeZone
+    , accCreateTime
 
-    -- * AdUnitMobileContentAdsSettings
-    , AdUnitMobileContentAdsSettings
-    , adUnitMobileContentAdsSettings
-    , aumcasSize
-    , aumcasScriptingLanguage
-    , aumcasMarkupLanguage
-    , aumcasType
+    -- * AccountsReportsGenerateCSVDateRange
+    , AccountsReportsGenerateCSVDateRange (..)
 
-    -- * SavedAdStyles
-    , SavedAdStyles
-    , savedAdStyles
-    , sasEtag
-    , sasNextPageToken
-    , sasKind
-    , sasItems
+    -- * ListAdUnitsResponse
+    , ListAdUnitsResponse
+    , listAdUnitsResponse
+    , laurNextPageToken
+    , laurAdUnits
 
-    -- * AdStyleColors
-    , AdStyleColors
-    , adStyleColors
-    , ascText
-    , ascURL
-    , ascBOrder
-    , ascTitle
-    , ascBackgRound
+    -- * Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
 
-    -- * AdUnitContentAdsSettingsBackupOption
-    , AdUnitContentAdsSettingsBackupOption
-    , adUnitContentAdsSettingsBackupOption
-    , aucasboColor
-    , aucasboURL
-    , aucasboType
+    -- * AdUnitState
+    , AdUnitState (..)
 
     -- * AdClient
     , AdClient
     , adClient
-    , adKind
-    , adArcOptIn
-    , adSupportsReporting
-    , adId
-    , adProductCode
+    , acReportingDimensionId
+    , acName
+    , acProductCode
 
-    -- * SavedAdStyle
-    , SavedAdStyle
-    , savedAdStyle
-    , savKind
-    , savName
-    , savAdStyle
-    , savId
+    -- * ReportResult
+    , ReportResult
+    , reportResult
+    , rrAverages
+    , rrEndDate
+    , rrWarnings
+    , rrRows
+    , rrTotals
+    , rrStartDate
+    , rrHeaders
+    , rrTotalMatchedRows
 
-    -- * CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
+    -- * Header
+    , Header
+    , header
+    , hCurrencyCode
+    , hName
+    , hType
 
-    -- * AdStyle
-    , AdStyle
-    , adStyle
-    , asCorners
-    , asKind
-    , asFont
-    , asColors
+    -- * AccountsReportsGenerateDateRange
+    , AccountsReportsGenerateDateRange (..)
 
-    -- * AdUnitFeedAdsSettings
-    , AdUnitFeedAdsSettings
-    , adUnitFeedAdsSettings
-    , aufasFrequency
-    , aufasAdPosition
-    , aufasType
-    , aufasMinimumWordCount
+    -- * ContentAdsSettings
+    , ContentAdsSettings
+    , contentAdsSettings
+    , casSize
+    , casType
 
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * Row
+    , Row
+    , row
+    , rCells
+
+    -- * AlertSeverity
+    , AlertSeverity (..)
 
     -- * CustomChannel
     , CustomChannel
     , customChannel
-    , cTargetingInfo
-    , cKind
-    , cName
-    , cCode
-    , cId
+    , ccReportingDimensionId
+    , ccName
+    , ccDisplayName
 
     -- * URLChannel
     , URLChannel
     , urlChannel
-    , urlcKind
-    , urlcId
-    , urlcURLPattern
+    , ucReportingDimensionId
+    , ucURIPattern
+    , ucName
 
-    -- * AdCode
-    , AdCode
-    , adCode
-    , addKind
-    , addAmpHead
-    , addAmpBody
-    , addAdCode
+    -- * ListPaymentsResponse
+    , ListPaymentsResponse
+    , listPaymentsResponse
+    , lprPayments
 
-    -- * AdsenseReportsGenerateResponse
-    , AdsenseReportsGenerateResponse
-    , adsenseReportsGenerateResponse
-    , argrKind
-    , argrAverages
-    , argrEndDate
-    , argrWarnings
-    , argrRows
-    , argrTotals
-    , argrStartDate
-    , argrHeaders
-    , argrTotalMatchedRows
+    -- * HTTPBody
+    , HTTPBody
+    , hTTPBody
+    , httpbExtensions
+    , httpbData
+    , httpbContentType
 
-    -- * AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
+    -- * ListLinkedCustomChannelsResponse
+    , ListLinkedCustomChannelsResponse
+    , listLinkedCustomChannelsResponse
+    , llccrNextPageToken
+    , llccrCustomChannels
 
-    -- * Payments
-    , Payments
-    , payments
-    , payKind
-    , payItems
+    -- * AdUnitAdCode
+    , AdUnitAdCode
+    , adUnitAdCode
+    , auacAdCode
+
+    -- * TimeZone
+    , TimeZone
+    , timeZone
+    , tzVersion
+    , tzId
+
+    -- * AccountsReportsGenerateMetrics
+    , AccountsReportsGenerateMetrics (..)
+
+    -- * Site
+    , Site
+    , site
+    , sAutoAdsEnabled
+    , sState
+    , sDomain
+    , sReportingDimensionId
+    , sName
+
+    -- * ListAdClientsResponse
+    , ListAdClientsResponse
+    , listAdClientsResponse
+    , lacrNextPageToken
+    , lacrAdClients
+
+    -- * AccountsReportsGenerateCSVDimensions
+    , AccountsReportsGenerateCSVDimensions (..)
+
+    -- * AccountsReportsGenerateReportingTimeZone
+    , AccountsReportsGenerateReportingTimeZone (..)
+
+    -- * ListSitesResponse
+    , ListSitesResponse
+    , listSitesResponse
+    , lsrNextPageToken
+    , lsrSites
     ) where
 
-import           Network.Google.AdSense.Types.Product
-import           Network.Google.AdSense.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types.Product
+import Network.Google.AdSense.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1.4' of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
 adSenseService :: ServiceConfig
 adSenseService
-  = defaultService (ServiceId "adsense:v1.4")
-      "www.googleapis.com"
+  = defaultService (ServiceId "adsense:v2")
+      "adsense.googleapis.com"
 
 -- | View your AdSense data
 adSenseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adsense.readonly"]

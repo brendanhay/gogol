@@ -13,9 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Configures and serves authoritative DNS records.
+-- -- |
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference>
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference>
 module Network.Google.DNS
     (
     -- * Service Configuration
@@ -71,6 +71,24 @@ module Network.Google.DNS
     -- ** dns.managedZones.update
     , module Network.Google.Resource.DNS.ManagedZones.Update
 
+    -- ** dns.policies.create
+    , module Network.Google.Resource.DNS.Policies.Create
+
+    -- ** dns.policies.delete
+    , module Network.Google.Resource.DNS.Policies.Delete
+
+    -- ** dns.policies.get
+    , module Network.Google.Resource.DNS.Policies.Get
+
+    -- ** dns.policies.list
+    , module Network.Google.Resource.DNS.Policies.List
+
+    -- ** dns.policies.patch
+    , module Network.Google.Resource.DNS.Policies.Patch
+
+    -- ** dns.policies.update
+    , module Network.Google.Resource.DNS.Policies.Update
+
     -- ** dns.projects.get
     , module Network.Google.Resource.DNS.Projects.Get
 
@@ -81,6 +99,13 @@ module Network.Google.DNS
 
     -- ** DNSKeySpecAlgorithm
     , DNSKeySpecAlgorithm (..)
+
+    -- ** PolicyAlternativeNameServerConfigTargetNameServer
+    , PolicyAlternativeNameServerConfigTargetNameServer
+    , policyAlternativeNameServerConfigTargetNameServer
+    , pansctnsKind
+    , pansctnsForwardingPath
+    , pansctnsIPv4Address
 
     -- ** ManagedZoneDNSSecConfigNonExistence
     , ManagedZoneDNSSecConfigNonExistence (..)
@@ -96,6 +121,13 @@ module Network.Google.DNS
     , managedZonePrivateVisibilityConfigNetwork
     , mzpvcnKind
     , mzpvcnNetworkURL
+
+    -- ** ManagedZonePeeringConfigTargetNetwork
+    , ManagedZonePeeringConfigTargetNetwork
+    , managedZonePeeringConfigTargetNetwork
+    , mzpctnDeactivateTime
+    , mzpctnKind
+    , mzpctnNetworkURL
 
     -- ** DNSKeysListResponse
     , DNSKeysListResponse
@@ -113,8 +145,25 @@ module Network.Google.DNS
     , clrKind
     , clrHeader
 
+    -- ** PoliciesListResponse
+    , PoliciesListResponse
+    , policiesListResponse
+    , plrNextPageToken
+    , plrKind
+    , plrHeader
+    , plrPolicies
+
+    -- ** ManagedZoneForwardingConfigNameServerTargetForwardingPath
+    , ManagedZoneForwardingConfigNameServerTargetForwardingPath (..)
+
     -- ** ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
+
+    -- ** ManagedZoneForwardingConfig
+    , ManagedZoneForwardingConfig
+    , managedZoneForwardingConfig
+    , mzfcKind
+    , mzfcTargetNameServers
 
     -- ** ManagedZoneVisibility
     , ManagedZoneVisibility (..)
@@ -139,6 +188,12 @@ module Network.Google.DNS
     , oZoneContext
     , oDNSKeyContext
 
+    -- ** ManagedZonePeeringConfig
+    , ManagedZonePeeringConfig
+    , managedZonePeeringConfig
+    , mzpcKind
+    , mzpcTargetNetwork
+
     -- ** DNSKeySpec
     , DNSKeySpec
     , dnsKeySpec
@@ -146,6 +201,11 @@ module Network.Google.DNS
     , dksKind
     , dksAlgorithm
     , dksKeyLength
+
+    -- ** ManagedZoneReverseLookupConfig
+    , ManagedZoneReverseLookupConfig
+    , managedZoneReverseLookupConfig
+    , mzrlcKind
 
     -- ** ChangesListSortBy
     , ChangesListSortBy (..)
@@ -196,6 +256,12 @@ module Network.Google.DNS
     , responseHeader
     , rhOperationId
 
+    -- ** PoliciesUpdateResponse
+    , PoliciesUpdateResponse
+    , policiesUpdateResponse
+    , purHeader
+    , purPolicy
+
     -- ** DNSKeySpecKeyType
     , DNSKeySpecKeyType (..)
 
@@ -215,14 +281,26 @@ module Network.Google.DNS
     , rrslrHeader
     , rrslrRrSets
 
+    -- ** PolicyAlternativeNameServerConfig
+    , PolicyAlternativeNameServerConfig
+    , policyAlternativeNameServerConfig
+    , panscKind
+    , panscTargetNameServers
+
     -- ** ChangeStatus
     , ChangeStatus (..)
+
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** ManagedZonePrivateVisibilityConfig
     , ManagedZonePrivateVisibilityConfig
     , managedZonePrivateVisibilityConfig
     , mzpvcNetworks
     , mzpvcKind
+
+    -- ** PolicyAlternativeNameServerConfigTargetNameServerForwardingPath
+    , PolicyAlternativeNameServerConfigTargetNameServerForwardingPath (..)
 
     -- ** ManagedZoneDNSSecConfig
     , ManagedZoneDNSSecConfig
@@ -242,11 +320,25 @@ module Network.Google.DNS
     , rrsType
     , rrsRrDatas
 
+    -- ** Policy
+    , Policy
+    , policy
+    , polAlternativeNameServerConfig
+    , polEnableInboundForwarding
+    , polEnableLogging
+    , polNetworks
+    , polKind
+    , polName
+    , polId
+    , polDescription
+
     -- ** ManagedZone
     , ManagedZone
     , managedZone
     , mzCreationTime
     , mzKind
+    , mzPeeringConfig
+    , mzReverseLookupConfig
     , mzNameServerSet
     , mzVisibility
     , mzName
@@ -257,6 +349,13 @@ module Network.Google.DNS
     , mzDNSsecConfig
     , mzNameServers
     , mzPrivateVisibilityConfig
+    , mzForwardingConfig
+
+    -- ** PoliciesPatchResponse
+    , PoliciesPatchResponse
+    , policiesPatchResponse
+    , pprHeader
+    , pprPolicy
 
     -- ** ManagedZoneLabels
     , ManagedZoneLabels
@@ -267,14 +366,18 @@ module Network.Google.DNS
     , Quota
     , quota
     , qRrSetDeletionsPerChange
+    , qTargetNameServersPerManagedZone
     , qWhiteListedKeySpecs
     , qRrSetsPerManagedZone
     , qKind
     , qResourceRecordsPerRrSet
     , qManagedZonesPerNetwork
     , qRrSetAdditionsPerChange
+    , qTargetNameServersPerPolicy
+    , qNetworksPerPolicy
     , qManagedZones
     , qTotalRrDataSizePerChange
+    , qPolicies
     , qDNSKeysPerManagedZone
     , qNetworksPerManagedZone
 
@@ -287,8 +390,21 @@ module Network.Google.DNS
     , dkdDigest
     , dkdType
 
+    -- ** PolicyNetwork
+    , PolicyNetwork
+    , policyNetwork
+    , pnKind
+    , pnNetworkURL
+
     -- ** ManagedZoneOperationsListSortBy
     , ManagedZoneOperationsListSortBy (..)
+
+    -- ** ManagedZoneForwardingConfigNameServerTarget
+    , ManagedZoneForwardingConfigNameServerTarget
+    , managedZoneForwardingConfigNameServerTarget
+    , mzfcnstKind
+    , mzfcnstForwardingPath
+    , mzfcnstIPv4Address
 
     -- ** ManagedZonesListResponse
     , ManagedZonesListResponse
@@ -299,29 +415,35 @@ module Network.Google.DNS
     , mzlrManagedZones
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DNS.Changes.Create
-import           Network.Google.Resource.DNS.Changes.Get
-import           Network.Google.Resource.DNS.Changes.List
-import           Network.Google.Resource.DNS.DNSKeys.Get
-import           Network.Google.Resource.DNS.DNSKeys.List
-import           Network.Google.Resource.DNS.ManagedZoneOperations.Get
-import           Network.Google.Resource.DNS.ManagedZoneOperations.List
-import           Network.Google.Resource.DNS.ManagedZones.Create
-import           Network.Google.Resource.DNS.ManagedZones.Delete
-import           Network.Google.Resource.DNS.ManagedZones.Get
-import           Network.Google.Resource.DNS.ManagedZones.List
-import           Network.Google.Resource.DNS.ManagedZones.Patch
-import           Network.Google.Resource.DNS.ManagedZones.Update
-import           Network.Google.Resource.DNS.Projects.Get
-import           Network.Google.Resource.DNS.ResourceRecordSets.List
+import Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Resource.DNS.Changes.Create
+import Network.Google.Resource.DNS.Changes.Get
+import Network.Google.Resource.DNS.Changes.List
+import Network.Google.Resource.DNS.DNSKeys.Get
+import Network.Google.Resource.DNS.DNSKeys.List
+import Network.Google.Resource.DNS.ManagedZoneOperations.Get
+import Network.Google.Resource.DNS.ManagedZoneOperations.List
+import Network.Google.Resource.DNS.ManagedZones.Create
+import Network.Google.Resource.DNS.ManagedZones.Delete
+import Network.Google.Resource.DNS.ManagedZones.Get
+import Network.Google.Resource.DNS.ManagedZones.List
+import Network.Google.Resource.DNS.ManagedZones.Patch
+import Network.Google.Resource.DNS.ManagedZones.Update
+import Network.Google.Resource.DNS.Policies.Create
+import Network.Google.Resource.DNS.Policies.Delete
+import Network.Google.Resource.DNS.Policies.Get
+import Network.Google.Resource.DNS.Policies.List
+import Network.Google.Resource.DNS.Policies.Patch
+import Network.Google.Resource.DNS.Policies.Update
+import Network.Google.Resource.DNS.Projects.Get
+import Network.Google.Resource.DNS.ResourceRecordSets.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud DNS API service.
+-- | Represents the entirety of the methods and resources available for the Cloud DNS API service.
 type DNSAPI =
      DNSKeysListResource :<|> DNSKeysGetResource :<|>
        ChangesListResource
@@ -337,3 +459,9 @@ type DNSAPI =
        :<|> ManagedZonesDeleteResource
        :<|> ManagedZonesUpdateResource
        :<|> ProjectsGetResource
+       :<|> PoliciesListResource
+       :<|> PoliciesPatchResource
+       :<|> PoliciesGetResource
+       :<|> PoliciesCreateResource
+       :<|> PoliciesDeleteResource
+       :<|> PoliciesUpdateResource

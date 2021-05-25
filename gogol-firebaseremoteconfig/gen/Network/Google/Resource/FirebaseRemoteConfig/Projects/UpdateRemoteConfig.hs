@@ -59,8 +59,8 @@ module Network.Google.Resource.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
     , purcCallback
     ) where
 
-import           Network.Google.FirebaseRemoteConfig.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRemoteConfig.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaseremoteconfig.projects.updateRemoteConfig@ method which the
 -- 'ProjectsUpdateRemoteConfig' request conforms to.
@@ -99,16 +99,16 @@ type ProjectsUpdateRemoteConfigResource =
 -- /See:/ 'projectsUpdateRemoteConfig' smart constructor.
 data ProjectsUpdateRemoteConfig =
   ProjectsUpdateRemoteConfig'
-    { _purcXgafv          :: !(Maybe Xgafv)
-    , _purcValidateOnly   :: !(Maybe Bool)
+    { _purcXgafv :: !(Maybe Xgafv)
+    , _purcValidateOnly :: !(Maybe Bool)
     , _purcUploadProtocol :: !(Maybe Text)
-    , _purcProject        :: !Text
-    , _purcPp             :: !Bool
-    , _purcAccessToken    :: !(Maybe Text)
-    , _purcUploadType     :: !(Maybe Text)
-    , _purcPayload        :: !RemoteConfig
-    , _purcBearerToken    :: !(Maybe Text)
-    , _purcCallback       :: !(Maybe Text)
+    , _purcProject :: !Text
+    , _purcPp :: !Bool
+    , _purcAccessToken :: !(Maybe Text)
+    , _purcUploadType :: !(Maybe Text)
+    , _purcPayload :: !RemoteConfig
+    , _purcBearerToken :: !(Maybe Text)
+    , _purcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

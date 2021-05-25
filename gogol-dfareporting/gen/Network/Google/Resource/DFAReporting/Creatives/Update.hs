@@ -22,7 +22,7 @@
 --
 -- Updates an existing creative.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creatives.update@.
 module Network.Google.Resource.DFAReporting.Creatives.Update
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
     , CreativesUpdate
 
     -- * Request Lenses
+    , creXgafv
+    , creUploadProtocol
+    , creAccessToken
+    , creUploadType
     , creProFileId
     , crePayload
+    , creCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creatives.update@ method which the
 -- 'CreativesUpdate' request conforms to.
 type CreativesUpdateResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Creative :> Put '[JSON] Creative
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Creative :> Put '[JSON] Creative
 
 -- | Updates an existing creative.
 --
 -- /See:/ 'creativesUpdate' smart constructor.
 data CreativesUpdate =
   CreativesUpdate'
-    { _creProFileId :: !(Textual Int64)
-    , _crePayload   :: !Creative
+    { _creXgafv :: !(Maybe Xgafv)
+    , _creUploadProtocol :: !(Maybe Text)
+    , _creAccessToken :: !(Maybe Text)
+    , _creUploadType :: !(Maybe Text)
+    , _creProFileId :: !(Textual Int64)
+    , _crePayload :: !Creative
+    , _creCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,56 @@ data CreativesUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'creXgafv'
+--
+-- * 'creUploadProtocol'
+--
+-- * 'creAccessToken'
+--
+-- * 'creUploadType'
+--
 -- * 'creProFileId'
 --
 -- * 'crePayload'
+--
+-- * 'creCallback'
 creativesUpdate
     :: Int64 -- ^ 'creProFileId'
     -> Creative -- ^ 'crePayload'
     -> CreativesUpdate
 creativesUpdate pCreProFileId_ pCrePayload_ =
   CreativesUpdate'
-    {_creProFileId = _Coerce # pCreProFileId_, _crePayload = pCrePayload_}
+    { _creXgafv = Nothing
+    , _creUploadProtocol = Nothing
+    , _creAccessToken = Nothing
+    , _creUploadType = Nothing
+    , _creProFileId = _Coerce # pCreProFileId_
+    , _crePayload = pCrePayload_
+    , _creCallback = Nothing
+    }
 
+
+-- | V1 error format.
+creXgafv :: Lens' CreativesUpdate (Maybe Xgafv)
+creXgafv = lens _creXgafv (\ s a -> s{_creXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+creUploadProtocol :: Lens' CreativesUpdate (Maybe Text)
+creUploadProtocol
+  = lens _creUploadProtocol
+      (\ s a -> s{_creUploadProtocol = a})
+
+-- | OAuth access token.
+creAccessToken :: Lens' CreativesUpdate (Maybe Text)
+creAccessToken
+  = lens _creAccessToken
+      (\ s a -> s{_creAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+creUploadType :: Lens' CreativesUpdate (Maybe Text)
+creUploadType
+  = lens _creUploadType
+      (\ s a -> s{_creUploadType = a})
 
 -- | User profile ID associated with this request.
 creProFileId :: Lens' CreativesUpdate Int64
@@ -89,12 +143,22 @@ crePayload :: Lens' CreativesUpdate Creative
 crePayload
   = lens _crePayload (\ s a -> s{_crePayload = a})
 
+-- | JSONP
+creCallback :: Lens' CreativesUpdate (Maybe Text)
+creCallback
+  = lens _creCallback (\ s a -> s{_creCallback = a})
+
 instance GoogleRequest CreativesUpdate where
         type Rs CreativesUpdate = Creative
         type Scopes CreativesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesUpdate'{..}
-          = go _creProFileId (Just AltJSON) _crePayload
+          = go _creProFileId _creXgafv _creUploadProtocol
+              _creAccessToken
+              _creUploadType
+              _creCallback
+              (Just AltJSON)
+              _crePayload
               dFAReportingService
           where go
                   = buildClient

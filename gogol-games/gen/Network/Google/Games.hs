@@ -13,9 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The API for Google Play Game Services.
+-- The Google Play games service allows developers to enhance games with
+-- social leaderboards, achievements, game state, sign-in with Google, and
+-- more.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference>
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference>
 module Network.Google.Games
     (
     -- * Service Configuration
@@ -24,7 +26,6 @@ module Network.Google.Games
     -- * OAuth Scopes
     , gamesScope
     , driveAppDataScope
-    , plusMeScope
 
     -- * API Declaration
     , GamesAPI
@@ -54,6 +55,9 @@ module Network.Google.Games
 
     -- ** games.applications.get
     , module Network.Google.Resource.Games.Applications.Get
+
+    -- ** games.applications.getEndPoint
+    , module Network.Google.Resource.Games.Applications.GetEndPoint
 
     -- ** games.applications.played
     , module Network.Google.Resource.Games.Applications.Played
@@ -88,47 +92,8 @@ module Network.Google.Games
     -- ** games.players.list
     , module Network.Google.Resource.Games.Players.List
 
-    -- ** games.pushtokens.remove
-    , module Network.Google.Resource.Games.Pushtokens.Remove
-
-    -- ** games.pushtokens.update
-    , module Network.Google.Resource.Games.Pushtokens.Update
-
-    -- ** games.questMilestones.claim
-    , module Network.Google.Resource.Games.QuestMilestones.Claim
-
-    -- ** games.quests.accept
-    , module Network.Google.Resource.Games.Quests.Accept
-
-    -- ** games.quests.list
-    , module Network.Google.Resource.Games.Quests.List
-
     -- ** games.revisions.check
     , module Network.Google.Resource.Games.Revisions.Check
-
-    -- ** games.rooms.create
-    , module Network.Google.Resource.Games.Rooms.Create
-
-    -- ** games.rooms.decline
-    , module Network.Google.Resource.Games.Rooms.Decline
-
-    -- ** games.rooms.dismiss
-    , module Network.Google.Resource.Games.Rooms.Dismiss
-
-    -- ** games.rooms.get
-    , module Network.Google.Resource.Games.Rooms.Get
-
-    -- ** games.rooms.join
-    , module Network.Google.Resource.Games.Rooms.Join
-
-    -- ** games.rooms.leave
-    , module Network.Google.Resource.Games.Rooms.Leave
-
-    -- ** games.rooms.list
-    , module Network.Google.Resource.Games.Rooms.List
-
-    -- ** games.rooms.reportStatus
-    , module Network.Google.Resource.Games.Rooms.ReportStatus
 
     -- ** games.scores.get
     , module Network.Google.Resource.Games.Scores.Get
@@ -151,63 +116,25 @@ module Network.Google.Games
     -- ** games.snapshots.list
     , module Network.Google.Resource.Games.Snapshots.List
 
-    -- ** games.turnBasedMatches.cancel
-    , module Network.Google.Resource.Games.TurnBasedMatches.Cancel
-
-    -- ** games.turnBasedMatches.create
-    , module Network.Google.Resource.Games.TurnBasedMatches.Create
-
-    -- ** games.turnBasedMatches.decline
-    , module Network.Google.Resource.Games.TurnBasedMatches.Decline
-
-    -- ** games.turnBasedMatches.dismiss
-    , module Network.Google.Resource.Games.TurnBasedMatches.Dismiss
-
-    -- ** games.turnBasedMatches.finish
-    , module Network.Google.Resource.Games.TurnBasedMatches.Finish
-
-    -- ** games.turnBasedMatches.get
-    , module Network.Google.Resource.Games.TurnBasedMatches.Get
-
-    -- ** games.turnBasedMatches.join
-    , module Network.Google.Resource.Games.TurnBasedMatches.Join
-
-    -- ** games.turnBasedMatches.leave
-    , module Network.Google.Resource.Games.TurnBasedMatches.Leave
-
-    -- ** games.turnBasedMatches.leaveTurn
-    , module Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
-
-    -- ** games.turnBasedMatches.list
-    , module Network.Google.Resource.Games.TurnBasedMatches.List
-
-    -- ** games.turnBasedMatches.rematch
-    , module Network.Google.Resource.Games.TurnBasedMatches.Rematch
-
-    -- ** games.turnBasedMatches.sync
-    , module Network.Google.Resource.Games.TurnBasedMatches.Sync
-
-    -- ** games.turnBasedMatches.takeTurn
-    , module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
+    -- ** games.stats.get
+    , module Network.Google.Resource.Games.Stats.Get
 
     -- * Types
 
     -- ** PlayersListCollection
     , PlayersListCollection (..)
 
-    -- ** RoomJoinRequest
-    , RoomJoinRequest
-    , roomJoinRequest
-    , rjrNetworkDiagnostics
-    , rjrKind
-    , rjrClientAddress
-    , rjrCapabilities
+    -- ** LeaderboardEntryTimeSpan
+    , LeaderboardEntryTimeSpan (..)
 
     -- ** PlayerName
     , PlayerName
     , playerName
     , pnGivenName
     , pnFamilyName
+
+    -- ** EventBatchRecordFailureFailureCause
+    , EventBatchRecordFailureFailureCause (..)
 
     -- ** Snapshot
     , Snapshot
@@ -224,61 +151,6 @@ module Network.Google.Games
     , sDescription
     , sDriveId
 
-    -- ** Room
-    , Room
-    , room
-    , rStatus
-    , rVariant
-    , rKind
-    , rAutoMatchingStatus
-    , rCreationDetails
-    , rInviterId
-    , rLastUpdateDetails
-    , rRoomStatusVersion
-    , rParticipants
-    , rApplicationId
-    , rAutoMatchingCriteria
-    , rRoomId
-    , rDescription
-
-    -- ** QuestListResponse
-    , QuestListResponse
-    , questListResponse
-    , qlrNextPageToken
-    , qlrKind
-    , qlrItems
-
-    -- ** TurnBasedMatch
-    , TurnBasedMatch
-    , turnBasedMatch
-    , tbmStatus
-    , tbmVariant
-    , tbmResults
-    , tbmMatchNumber
-    , tbmKind
-    , tbmData
-    , tbmWithParticipantId
-    , tbmCreationDetails
-    , tbmInviterId
-    , tbmLastUpdateDetails
-    , tbmParticipants
-    , tbmApplicationId
-    , tbmAutoMatchingCriteria
-    , tbmPreviousMatchData
-    , tbmPendingParticipantId
-    , tbmUserMatchStatus
-    , tbmMatchId
-    , tbmDescription
-    , tbmRematchId
-    , tbmMatchVersion
-
-    -- ** TurnBasedMatchData
-    , TurnBasedMatchData
-    , turnBasedMatchData
-    , tbmdKind
-    , tbmdData
-    , tbmdDataAvailable
-
     -- ** ScoresListCollection
     , ScoresListCollection (..)
 
@@ -291,6 +163,24 @@ module Network.Google.Games
     , peDefinitionId
     , pePlayerId
 
+    -- ** ApplicationsGetEndPointEndPointType
+    , ApplicationsGetEndPointEndPointType (..)
+
+    -- ** StatsResponse
+    , StatsResponse
+    , statsResponse
+    , srTotalSpendNext28Days
+    , srDaysSinceLastPlayed
+    , srKind
+    , srSpendPercentile
+    , srNumPurchases
+    , srNumSessions
+    , srHighSpenderProbability
+    , srAvgSessionLengthMinutes
+    , srNumSessionsPercentile
+    , srChurnProbability
+    , srSpendProbability
+
     -- ** PlayerLeaderboardScore
     , PlayerLeaderboardScore
     , playerLeaderboardScore
@@ -299,6 +189,7 @@ module Network.Google.Games
     , plsKind
     , plsScoreValue
     , plsTimeSpan
+    , plsFriendsRank
     , plsPublicRank
     , plsSocialRank
     , plsLeaderboardId
@@ -328,74 +219,14 @@ module Network.Google.Games
     , acKind
     , acPrimary
 
+    -- ** PlayerScoreTimeSpan
+    , PlayerScoreTimeSpan (..)
+
     -- ** PlayerScoreListResponse
     , PlayerScoreListResponse
     , playerScoreListResponse
     , pslrSubmittedScores
     , pslrKind
-
-    -- ** NetworkDiagnostics
-    , NetworkDiagnostics
-    , networkDiagnostics
-    , ndAndroidNetworkType
-    , ndKind
-    , ndNetworkOperatorCode
-    , ndNetworkOperatorName
-    , ndRegistrationLatencyMillis
-    , ndIosNetworkType
-    , ndAndroidNetworkSubtype
-
-    -- ** TurnBasedMatchTurn
-    , TurnBasedMatchTurn
-    , turnBasedMatchTurn
-    , tbmtResults
-    , tbmtKind
-    , tbmtData
-    , tbmtPendingParticipantId
-    , tbmtMatchVersion
-
-    -- ** QuestCriterion
-    , QuestCriterion
-    , questCriterion
-    , qcCurrentContribution
-    , qcCompletionContribution
-    , qcKind
-    , qcInitialPlayerProgress
-    , qcEventId
-
-    -- ** TurnBasedMatchList
-    , TurnBasedMatchList
-    , turnBasedMatchList
-    , tbmlNextPageToken
-    , tbmlKind
-    , tbmlItems
-
-    -- ** PeerChannelDiagnostics
-    , PeerChannelDiagnostics
-    , peerChannelDiagnostics
-    , pcdNumMessagesLost
-    , pcdBytesSent
-    , pcdKind
-    , pcdRoundtripLatencyMillis
-    , pcdBytesReceived
-    , pcdNumMessagesReceived
-    , pcdNumSendFailures
-    , pcdNumMessagesSent
-
-    -- ** RoomList
-    , RoomList
-    , roomList
-    , rlNextPageToken
-    , rlKind
-    , rlItems
-
-    -- ** PushToken
-    , PushToken
-    , pushToken
-    , ptClientRevision
-    , ptKind
-    , ptLanguage
-    , ptId
 
     -- ** AchievementUpdateResponse
     , AchievementUpdateResponse
@@ -435,25 +266,14 @@ module Network.Google.Games
     , plMinExperiencePoints
     , plLevel
 
+    -- ** ApplicationEnabledFeaturesItem
+    , ApplicationEnabledFeaturesItem (..)
+
     -- ** AchievementUpdateMultipleResponse
     , AchievementUpdateMultipleResponse
     , achievementUpdateMultipleResponse
     , aumrKind
     , aumrUpdatedAchievements
-
-    -- ** RoomParticipant
-    , RoomParticipant
-    , roomParticipant
-    , rpStatus
-    , rpConnected
-    , rpLeaveReason
-    , rpKind
-    , rpClientAddress
-    , rpId
-    , rpAutoMatched
-    , rpPlayer
-    , rpCapabilities
-    , rpAutoMatchedPlayer
 
     -- ** ApplicationsGetPlatformType
     , ApplicationsGetPlatformType (..)
@@ -480,16 +300,6 @@ module Network.Google.Games
     , iadKind
     , iadEnablePiracyCheck
 
-    -- ** TurnBasedMatchParticipant
-    , TurnBasedMatchParticipant
-    , turnBasedMatchParticipant
-    , tbmpStatus
-    , tbmpKind
-    , tbmpId
-    , tbmpAutoMatched
-    , tbmpPlayer
-    , tbmpAutoMatchedPlayer
-
     -- ** AchievementDefinitionsListResponse
     , AchievementDefinitionsListResponse
     , achievementDefinitionsListResponse
@@ -507,32 +317,18 @@ module Network.Google.Games
     , psrBeatenScoreTimeSpans
     , psrUnbeatenScores
 
-    -- ** AnonymousPlayer
-    , AnonymousPlayer
-    , anonymousPlayer
-    , apAvatarImageURL
-    , apKind
-    , apDisplayName
-
-    -- ** QuestContribution
-    , QuestContribution
-    , questContribution
-    , qKind
-    , qValue
-    , qFormattedValue
-
-    -- ** RoomClientAddress
-    , RoomClientAddress
-    , roomClientAddress
-    , rcaKind
-    , rcaXmppAddress
-
     -- ** LeaderboardListResponse
     , LeaderboardListResponse
     , leaderboardListResponse
     , llrNextPageToken
     , llrKind
     , llrItems
+
+    -- ** EventRecordFailureFailureCause
+    , EventRecordFailureFailureCause (..)
+
+    -- ** PlayerLeaderboardScoreTimeSpan
+    , PlayerLeaderboardScoreTimeSpan (..)
 
     -- ** PlayerScore
     , PlayerScore
@@ -543,16 +339,14 @@ module Network.Google.Games
     , psFormattedScore
     , psTimeSpan
 
+    -- ** AchievementRevealResponseCurrentState
+    , AchievementRevealResponseCurrentState (..)
+
+    -- ** ProFileSettingsFriendsListVisibility
+    , ProFileSettingsFriendsListVisibility (..)
+
     -- ** ScoresListWindowCollection
     , ScoresListWindowCollection (..)
-
-    -- ** TurnBasedAutoMatchingCriteria
-    , TurnBasedAutoMatchingCriteria
-    , turnBasedAutoMatchingCriteria
-    , tbamcKind
-    , tbamcExclusiveBitmask
-    , tbamcMaxAutoMatchingPlayers
-    , tbamcMinAutoMatchingPlayers
 
     -- ** SnapshotImage
     , SnapshotImage
@@ -562,16 +356,6 @@ module Network.Google.Games
     , siURL
     , siMimeType
     , siWidth
-
-    -- ** RoomStatus
-    , RoomStatus
-    , roomStatus
-    , rsStatus
-    , rsKind
-    , rsAutoMatchingStatus
-    , rsStatusVersion
-    , rsParticipants
-    , rsRoomId
 
     -- ** PlayerLeaderboardScoreListResponse
     , PlayerLeaderboardScoreListResponse
@@ -592,6 +376,9 @@ module Network.Google.Games
     , iidPreferredForIPhone
     , iidBundleIdentifier
 
+    -- ** AchievementUpdateRequestUpdateType
+    , AchievementUpdateRequestUpdateType (..)
+
     -- ** EventUpdateResponse
     , EventUpdateResponse
     , eventUpdateResponse
@@ -606,14 +393,6 @@ module Network.Google.Games
     , rcrAPIVersion
     , rcrKind
     , rcrRevisionStatus
-
-    -- ** ParticipantResult
-    , ParticipantResult
-    , participantResult
-    , prParticipantId
-    , prKind
-    , prResult
-    , prPlacing
 
     -- ** Leaderboard
     , Leaderboard
@@ -639,24 +418,6 @@ module Network.Google.Games
     , clrKind
     , clrItems
 
-    -- ** RoomP2PStatus
-    , RoomP2PStatus
-    , roomP2PStatus
-    , rppsStatus
-    , rppsParticipantId
-    , rppsKind
-    , rppsError
-    , rppsErrorReason
-    , rppsConnectionSetupLatencyMillis
-    , rppsUnreliableRoundtripLatencyMillis
-
-    -- ** TurnBasedMatchModification
-    , TurnBasedMatchModification
-    , turnBasedMatchModification
-    , tbmmParticipantId
-    , tbmmKind
-    , tbmmModifiedTimestampMillis
-
     -- ** EventDefinition
     , EventDefinition
     , eventDefinition
@@ -669,12 +430,11 @@ module Network.Google.Games
     , edChildEvents
     , edDescription
 
-    -- ** RoomModification
-    , RoomModification
-    , roomModification
-    , rmParticipantId
-    , rmKind
-    , rmModifiedTimestampMillis
+    -- ** RevisionCheckResponseRevisionStatus
+    , RevisionCheckResponseRevisionStatus (..)
+
+    -- ** SnapshotType
+    , SnapshotType (..)
 
     -- ** ScoresListWindowTimeSpan
     , ScoresListWindowTimeSpan (..)
@@ -685,6 +445,9 @@ module Network.Google.Games
     , eUpdateCount
     , eKind
     , eDefinitionId
+
+    -- ** PlayerAchievementAchievementState
+    , PlayerAchievementAchievementState (..)
 
     -- ** AchievementUnlockResponse
     , AchievementUnlockResponse
@@ -706,11 +469,8 @@ module Network.Google.Games
     , paCurrentSteps
     , paLastUpdatedTimestamp
 
-    -- ** RoomP2PStatuses
-    , RoomP2PStatuses
-    , roomP2PStatuses
-    , rppssKind
-    , rppssUpdates
+    -- ** EventDefinitionVisibility
+    , EventDefinitionVisibility (..)
 
     -- ** ImageAsset
     , ImageAsset
@@ -727,11 +487,8 @@ module Network.Google.Games
     , aumruKind
     , aumruUpdates
 
-    -- ** RoomAutoMatchStatus
-    , RoomAutoMatchStatus
-    , roomAutoMatchStatus
-    , ramsKind
-    , ramsWaitEstimateSeconds
+    -- ** LeaderboardOrder
+    , LeaderboardOrder (..)
 
     -- ** AchievementUpdateRequest
     , AchievementUpdateRequest
@@ -754,17 +511,8 @@ module Network.Google.Games
     , lsrFormattedNumScores
     , lsrRank
 
-    -- ** RoomCreateRequest
-    , RoomCreateRequest
-    , roomCreateRequest
-    , rooRequestId
-    , rooVariant
-    , rooNetworkDiagnostics
-    , rooKind
-    , rooInvitedPlayerIds
-    , rooClientAddress
-    , rooAutoMatchingCriteria
-    , rooCapabilities
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** PlayerListResponse
     , PlayerListResponse
@@ -800,14 +548,8 @@ module Network.Google.Games
     , adIsRevealedIconURLDefault
     , adUnlockedIconURL
 
-    -- ** TurnBasedMatchCreateRequest
-    , TurnBasedMatchCreateRequest
-    , turnBasedMatchCreateRequest
-    , tbmcrRequestId
-    , tbmcrVariant
-    , tbmcrKind
-    , tbmcrInvitedPlayerIds
-    , tbmcrAutoMatchingCriteria
+    -- ** AchievementDefinitionAchievementType
+    , AchievementDefinitionAchievementType (..)
 
     -- ** EventBatchRecordFailure
     , EventBatchRecordFailure
@@ -816,33 +558,8 @@ module Network.Google.Games
     , ebrfRange
     , ebrfFailureCause
 
-    -- ** TurnBasedMatchResults
-    , TurnBasedMatchResults
-    , turnBasedMatchResults
-    , tbmrResults
-    , tbmrKind
-    , tbmrData
-    , tbmrMatchVersion
-
-    -- ** PushTokenIdIos
-    , PushTokenIdIos
-    , pushTokenIdIos
-    , ptiiAPNSDeviceToken
-    , ptiiAPNSEnvironment
-
-    -- ** RoomLeaveRequest
-    , RoomLeaveRequest
-    , roomLeaveRequest
-    , rlrKind
-    , rlrReason
-    , rlrLeaveDiagnostics
-
-    -- ** Played
-    , Played
-    , played
-    , pKind
-    , pAutoMatched
-    , pTimeMillis
+    -- ** PlayerFriendStatus
+    , PlayerFriendStatus (..)
 
     -- ** AchievementIncrementResponse
     , AchievementIncrementResponse
@@ -879,40 +596,8 @@ module Network.Google.Games
     , errCurrentTimeMillis
     , errTimePeriods
 
-    -- ** RoomAutoMatchingCriteria
-    , RoomAutoMatchingCriteria
-    , roomAutoMatchingCriteria
-    , ramcKind
-    , ramcExclusiveBitmask
-    , ramcMaxAutoMatchingPlayers
-    , ramcMinAutoMatchingPlayers
-
     -- ** ScoresListTimeSpan
     , ScoresListTimeSpan (..)
-
-    -- ** QuestMilestone
-    , QuestMilestone
-    , questMilestone
-    , qmState
-    , qmKind
-    , qmId
-    , qmCompletionRewardData
-    , qmCriteria
-
-    -- ** PeerSessionDiagnostics
-    , PeerSessionDiagnostics
-    , peerSessionDiagnostics
-    , psdConnectedTimestampMillis
-    , psdParticipantId
-    , psdKind
-    , psdUnreliableChannel
-    , psdReliableChannel
-
-    -- ** PushTokenId
-    , PushTokenId
-    , pushTokenId
-    , ptiIos
-    , ptiKind
 
     -- ** EventPeriodUpdate
     , EventPeriodUpdate
@@ -920,14 +605,6 @@ module Network.Google.Games
     , epuKind
     , epuTimePeriod
     , epuUpdates
-
-    -- ** TurnBasedMatchSync
-    , TurnBasedMatchSync
-    , turnBasedMatchSync
-    , tbmsMoreAvailable
-    , tbmsNextPageToken
-    , tbmsKind
-    , tbmsItems
 
     -- ** ScoreSubmission
     , ScoreSubmission
@@ -938,26 +615,10 @@ module Network.Google.Games
     , scoKind
     , scoLeaderboardId
 
-    -- ** RoomLeaveDiagnostics
-    , RoomLeaveDiagnostics
-    , roomLeaveDiagnostics
-    , rldPeerSession
-    , rldAndroidNetworkType
-    , rldKind
-    , rldNetworkOperatorCode
-    , rldNetworkOperatorName
-    , rldSocketsUsed
-    , rldIosNetworkType
-    , rldAndroidNetworkSubtype
-
-    -- ** AggregateStats
-    , AggregateStats
-    , aggregateStats
-    , asMax
-    , asKind
-    , asCount
-    , asMin
-    , asSum
+    -- ** EndPoint
+    , EndPoint
+    , endPoint
+    , epURL
 
     -- ** InstanceWebDetails
     , InstanceWebDetails
@@ -965,13 +626,6 @@ module Network.Google.Games
     , iwdPreferred
     , iwdKind
     , iwdLaunchURL
-
-    -- ** TurnBasedMatchRematch
-    , TurnBasedMatchRematch
-    , turnBasedMatchRematch
-    , tRematch
-    , tKind
-    , tPreviousMatch
 
     -- ** PlayerExperienceInfo
     , PlayerExperienceInfo
@@ -988,21 +642,27 @@ module Network.Google.Games
     , gassalKind
     , gassalSteps
 
+    -- ** AchievementUpdateResponseCurrentState
+    , AchievementUpdateResponseCurrentState (..)
+
+    -- ** AchievementDefinitionInitialState
+    , AchievementDefinitionInitialState (..)
+
     -- ** Player
     , Player
     , player
-    , plaBannerURLLandscape
-    , plaLastPlayedWith
-    , plaAvatarImageURL
-    , plaKind
-    , plaExperienceInfo
-    , plaName
-    , plaOriginalPlayerId
-    , plaDisplayName
-    , plaTitle
-    , plaBannerURLPortrait
-    , plaPlayerId
-    , plaProFileSettings
+    , pBannerURLLandscape
+    , pAvatarImageURL
+    , pKind
+    , pExperienceInfo
+    , pName
+    , pOriginalPlayerId
+    , pDisplayName
+    , pTitle
+    , pBannerURLPortrait
+    , pPlayerId
+    , pProFileSettings
+    , pFriendStatus
 
     -- ** GamesAchievementIncrement
     , GamesAchievementIncrement
@@ -1010,26 +670,6 @@ module Network.Google.Games
     , gaiRequestId
     , gaiKind
     , gaiSteps
-
-    -- ** Quest
-    , Quest
-    , quest
-    , queLastUpdatedTimestampMillis
-    , queBannerURL
-    , queState
-    , queMilestones
-    , queKind
-    , queApplicationId
-    , queEndTimestampMillis
-    , queName
-    , queId
-    , queIconURL
-    , queStartTimestampMillis
-    , queNotifyTimestampMillis
-    , queDescription
-    , queIsDefaultBannerURL
-    , queIsDefaultIconURL
-    , queAcceptedTimestampMillis
 
     -- ** EventChild
     , EventChild
@@ -1051,16 +691,14 @@ module Network.Google.Games
     , pelrKind
     , pelrItems
 
-    -- ** TurnBasedMatchDataRequest
-    , TurnBasedMatchDataRequest
-    , turnBasedMatchDataRequest
-    , tbmdrKind
-    , tbmdrData
+    -- ** PlayerScoreResponseBeatenScoreTimeSpansItem
+    , PlayerScoreResponseBeatenScoreTimeSpansItem (..)
 
     -- ** ProFileSettings
     , ProFileSettings
     , proFileSettings
     , pfsProFileVisible
+    , pfsFriendsListVisibility
     , pfsKind
 
     -- ** EventPeriodRange
@@ -1069,6 +707,9 @@ module Network.Google.Games
     , eprKind
     , eprPeriodStartMillis
     , eprPeriodEndMillis
+
+    -- ** InstancePlatformType
+    , InstancePlatformType (..)
 
     -- ** MetagameListCategoriesByPlayerCollection
     , MetagameListCategoriesByPlayerCollection (..)
@@ -1103,80 +744,48 @@ module Network.Google.Games
     , iRealtimePlay
     ) where
 
-import           Network.Google.Games.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Games.AchievementDefinitions.List
-import           Network.Google.Resource.Games.Achievements.Increment
-import           Network.Google.Resource.Games.Achievements.List
-import           Network.Google.Resource.Games.Achievements.Reveal
-import           Network.Google.Resource.Games.Achievements.SetStepsAtLeast
-import           Network.Google.Resource.Games.Achievements.Unlock
-import           Network.Google.Resource.Games.Achievements.UpdateMultiple
-import           Network.Google.Resource.Games.Applications.Get
-import           Network.Google.Resource.Games.Applications.Played
-import           Network.Google.Resource.Games.Applications.Verify
-import           Network.Google.Resource.Games.Events.ListByPlayer
-import           Network.Google.Resource.Games.Events.ListDefinitions
-import           Network.Google.Resource.Games.Events.Record
-import           Network.Google.Resource.Games.Leaderboards.Get
-import           Network.Google.Resource.Games.Leaderboards.List
-import           Network.Google.Resource.Games.Metagame.GetMetagameConfig
-import           Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
-import           Network.Google.Resource.Games.Players.Get
-import           Network.Google.Resource.Games.Players.List
-import           Network.Google.Resource.Games.Pushtokens.Remove
-import           Network.Google.Resource.Games.Pushtokens.Update
-import           Network.Google.Resource.Games.QuestMilestones.Claim
-import           Network.Google.Resource.Games.Quests.Accept
-import           Network.Google.Resource.Games.Quests.List
-import           Network.Google.Resource.Games.Revisions.Check
-import           Network.Google.Resource.Games.Rooms.Create
-import           Network.Google.Resource.Games.Rooms.Decline
-import           Network.Google.Resource.Games.Rooms.Dismiss
-import           Network.Google.Resource.Games.Rooms.Get
-import           Network.Google.Resource.Games.Rooms.Join
-import           Network.Google.Resource.Games.Rooms.Leave
-import           Network.Google.Resource.Games.Rooms.List
-import           Network.Google.Resource.Games.Rooms.ReportStatus
-import           Network.Google.Resource.Games.Scores.Get
-import           Network.Google.Resource.Games.Scores.List
-import           Network.Google.Resource.Games.Scores.ListWindow
-import           Network.Google.Resource.Games.Scores.Submit
-import           Network.Google.Resource.Games.Scores.SubmitMultiple
-import           Network.Google.Resource.Games.Snapshots.Get
-import           Network.Google.Resource.Games.Snapshots.List
-import           Network.Google.Resource.Games.TurnBasedMatches.Cancel
-import           Network.Google.Resource.Games.TurnBasedMatches.Create
-import           Network.Google.Resource.Games.TurnBasedMatches.Decline
-import           Network.Google.Resource.Games.TurnBasedMatches.Dismiss
-import           Network.Google.Resource.Games.TurnBasedMatches.Finish
-import           Network.Google.Resource.Games.TurnBasedMatches.Get
-import           Network.Google.Resource.Games.TurnBasedMatches.Join
-import           Network.Google.Resource.Games.TurnBasedMatches.Leave
-import           Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
-import           Network.Google.Resource.Games.TurnBasedMatches.List
-import           Network.Google.Resource.Games.TurnBasedMatches.Rematch
-import           Network.Google.Resource.Games.TurnBasedMatches.Sync
-import           Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
+import Network.Google.Prelude
+import Network.Google.Games.Types
+import Network.Google.Resource.Games.AchievementDefinitions.List
+import Network.Google.Resource.Games.Achievements.Increment
+import Network.Google.Resource.Games.Achievements.List
+import Network.Google.Resource.Games.Achievements.Reveal
+import Network.Google.Resource.Games.Achievements.SetStepsAtLeast
+import Network.Google.Resource.Games.Achievements.Unlock
+import Network.Google.Resource.Games.Achievements.UpdateMultiple
+import Network.Google.Resource.Games.Applications.Get
+import Network.Google.Resource.Games.Applications.GetEndPoint
+import Network.Google.Resource.Games.Applications.Played
+import Network.Google.Resource.Games.Applications.Verify
+import Network.Google.Resource.Games.Events.ListByPlayer
+import Network.Google.Resource.Games.Events.ListDefinitions
+import Network.Google.Resource.Games.Events.Record
+import Network.Google.Resource.Games.Leaderboards.Get
+import Network.Google.Resource.Games.Leaderboards.List
+import Network.Google.Resource.Games.Metagame.GetMetagameConfig
+import Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
+import Network.Google.Resource.Games.Players.Get
+import Network.Google.Resource.Games.Players.List
+import Network.Google.Resource.Games.Revisions.Check
+import Network.Google.Resource.Games.Scores.Get
+import Network.Google.Resource.Games.Scores.List
+import Network.Google.Resource.Games.Scores.ListWindow
+import Network.Google.Resource.Games.Scores.Submit
+import Network.Google.Resource.Games.Scores.SubmitMultiple
+import Network.Google.Resource.Games.Snapshots.Get
+import Network.Google.Resource.Games.Snapshots.List
+import Network.Google.Resource.Games.Stats.Get
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Play Game Services API service.
+-- | Represents the entirety of the methods and resources available for the Google Play Game Services service.
 type GamesAPI =
-     RoomsListResource :<|> RoomsJoinResource :<|>
-       RoomsGetResource
-       :<|> RoomsCreateResource
-       :<|> RoomsDeclineResource
-       :<|> RoomsDismissResource
-       :<|> RoomsReportStatusResource
-       :<|> RoomsLeaveResource
-       :<|> LeaderboardsListResource
-       :<|> LeaderboardsGetResource
+     LeaderboardsListResource :<|> LeaderboardsGetResource
        :<|> MetagameListCategoriesByPlayerResource
        :<|> MetagameGetMetagameConfigResource
-       :<|> QuestMilestonesClaimResource
+       :<|> StatsGetResource
        :<|> AchievementDefinitionsListResource
        :<|> AchievementsListResource
        :<|> AchievementsUnlockResource
@@ -1189,8 +798,6 @@ type GamesAPI =
        :<|> EventsListDefinitionsResource
        :<|> EventsListByPlayerResource
        :<|> EventsRecordResource
-       :<|> QuestsListResource
-       :<|> QuestsAcceptResource
        :<|> PlayersListResource
        :<|> PlayersGetResource
        :<|> RevisionsCheckResource
@@ -1199,21 +806,7 @@ type GamesAPI =
        :<|> ScoresSubmitResource
        :<|> ScoresSubmitMultipleResource
        :<|> ScoresListWindowResource
-       :<|> PushtokensRemoveResource
-       :<|> PushtokensUpdateResource
-       :<|> TurnBasedMatchesRematchResource
-       :<|> TurnBasedMatchesListResource
-       :<|> TurnBasedMatchesJoinResource
-       :<|> TurnBasedMatchesFinishResource
-       :<|> TurnBasedMatchesTakeTurnResource
-       :<|> TurnBasedMatchesLeaveTurnResource
-       :<|> TurnBasedMatchesGetResource
-       :<|> TurnBasedMatchesCreateResource
-       :<|> TurnBasedMatchesDeclineResource
-       :<|> TurnBasedMatchesSyncResource
-       :<|> TurnBasedMatchesDismissResource
-       :<|> TurnBasedMatchesLeaveResource
-       :<|> TurnBasedMatchesCancelResource
        :<|> ApplicationsVerifyResource
+       :<|> ApplicationsGetEndPointResource
        :<|> ApplicationsGetResource
        :<|> ApplicationsPlayedResource

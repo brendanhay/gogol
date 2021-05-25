@@ -20,10 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a report which is a collection of properties \/ statistics for
--- a set of objects.
+-- Retrieves a report which is a collection of properties and statistics
+-- for entities used by users within the account. For more information, see
+-- the Entities Usage Report guide. For more information about the entities
+-- report\'s parameters, see the Entities Usage parameters reference
+-- guides.
 --
--- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @reports.entityUsageReports.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @reports.entityUsageReports.get@.
 module Network.Google.Resource.Reports.EntityUsageReports.Get
     (
     -- * REST Resource
@@ -34,18 +37,23 @@ module Network.Google.Resource.Reports.EntityUsageReports.Get
     , EntityUsageReportsGet
 
     -- * Request Lenses
+    , eurgXgafv
+    , eurgUploadProtocol
+    , eurgAccessToken
     , eurgEntityType
     , eurgFilters
+    , eurgUploadType
     , eurgCustomerId
     , eurgDate
     , eurgEntityKey
     , eurgParameters
     , eurgPageToken
     , eurgMaxResults
+    , eurgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Reports.Types
+import Network.Google.Prelude
+import Network.Google.Reports.Types
 
 -- | A resource alias for @reports.entityUsageReports.get@ method which the
 -- 'EntityUsageReportsGet' request conforms to.
@@ -54,32 +62,46 @@ type EntityUsageReportsGetResource =
        "reports" :>
          "v1" :>
            "usage" :>
-             Capture "entityType" Text :>
-               Capture "entityKey" Text :>
+             Capture "entityType" EntityUsageReportsGetEntityType
+               :>
+               Capture "entityKey" EntityUsageReportsGetEntityKey :>
                  "dates" :>
                    Capture "date" Text :>
-                     QueryParam "filters" Text :>
-                       QueryParam "customerId" Text :>
-                         QueryParam "parameters" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" (Textual Word32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] UsageReports
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "filters" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "customerId" Text :>
+                                 QueryParam "parameters" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "maxResults" (Textual Word32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] UsageReports
 
--- | Retrieves a report which is a collection of properties \/ statistics for
--- a set of objects.
+-- | Retrieves a report which is a collection of properties and statistics
+-- for entities used by users within the account. For more information, see
+-- the Entities Usage Report guide. For more information about the entities
+-- report\'s parameters, see the Entities Usage parameters reference
+-- guides.
 --
 -- /See:/ 'entityUsageReportsGet' smart constructor.
 data EntityUsageReportsGet =
   EntityUsageReportsGet'
-    { _eurgEntityType :: !Text
-    , _eurgFilters    :: !(Maybe Text)
+    { _eurgXgafv :: !(Maybe Xgafv)
+    , _eurgUploadProtocol :: !(Maybe Text)
+    , _eurgAccessToken :: !(Maybe Text)
+    , _eurgEntityType :: !EntityUsageReportsGetEntityType
+    , _eurgFilters :: !(Maybe Text)
+    , _eurgUploadType :: !(Maybe Text)
     , _eurgCustomerId :: !(Maybe Text)
-    , _eurgDate       :: !Text
-    , _eurgEntityKey  :: !Text
+    , _eurgDate :: !Text
+    , _eurgEntityKey :: !EntityUsageReportsGetEntityKey
     , _eurgParameters :: !(Maybe Text)
-    , _eurgPageToken  :: !(Maybe Text)
-    , _eurgMaxResults :: !(Maybe (Textual Word32))
+    , _eurgPageToken :: !(Maybe Text)
+    , _eurgMaxResults :: !(Textual Word32)
+    , _eurgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -88,9 +110,17 @@ data EntityUsageReportsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eurgXgafv'
+--
+-- * 'eurgUploadProtocol'
+--
+-- * 'eurgAccessToken'
+--
 -- * 'eurgEntityType'
 --
 -- * 'eurgFilters'
+--
+-- * 'eurgUploadType'
 --
 -- * 'eurgCustomerId'
 --
@@ -103,71 +133,141 @@ data EntityUsageReportsGet =
 -- * 'eurgPageToken'
 --
 -- * 'eurgMaxResults'
+--
+-- * 'eurgCallback'
 entityUsageReportsGet
-    :: Text -- ^ 'eurgEntityType'
+    :: EntityUsageReportsGetEntityType -- ^ 'eurgEntityType'
     -> Text -- ^ 'eurgDate'
-    -> Text -- ^ 'eurgEntityKey'
+    -> EntityUsageReportsGetEntityKey -- ^ 'eurgEntityKey'
     -> EntityUsageReportsGet
 entityUsageReportsGet pEurgEntityType_ pEurgDate_ pEurgEntityKey_ =
   EntityUsageReportsGet'
-    { _eurgEntityType = pEurgEntityType_
+    { _eurgXgafv = Nothing
+    , _eurgUploadProtocol = Nothing
+    , _eurgAccessToken = Nothing
+    , _eurgEntityType = pEurgEntityType_
     , _eurgFilters = Nothing
+    , _eurgUploadType = Nothing
     , _eurgCustomerId = Nothing
     , _eurgDate = pEurgDate_
     , _eurgEntityKey = pEurgEntityKey_
     , _eurgParameters = Nothing
     , _eurgPageToken = Nothing
-    , _eurgMaxResults = Nothing
+    , _eurgMaxResults = 1000
+    , _eurgCallback = Nothing
     }
 
 
--- | Type of object. Should be one of - gplus_communities.
-eurgEntityType :: Lens' EntityUsageReportsGet Text
+-- | V1 error format.
+eurgXgafv :: Lens' EntityUsageReportsGet (Maybe Xgafv)
+eurgXgafv
+  = lens _eurgXgafv (\ s a -> s{_eurgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eurgUploadProtocol :: Lens' EntityUsageReportsGet (Maybe Text)
+eurgUploadProtocol
+  = lens _eurgUploadProtocol
+      (\ s a -> s{_eurgUploadProtocol = a})
+
+-- | OAuth access token.
+eurgAccessToken :: Lens' EntityUsageReportsGet (Maybe Text)
+eurgAccessToken
+  = lens _eurgAccessToken
+      (\ s a -> s{_eurgAccessToken = a})
+
+-- | Represents the type of entity for the report.
+eurgEntityType :: Lens' EntityUsageReportsGet EntityUsageReportsGetEntityType
 eurgEntityType
   = lens _eurgEntityType
       (\ s a -> s{_eurgEntityType = a})
 
--- | Represents the set of filters including parameter operator value.
+-- | The \`filters\` query string is a comma-separated list of an
+-- application\'s event parameters where the parameter\'s value is
+-- manipulated by a relational operator. The \`filters\` query string
+-- includes the name of the application whose usage is returned in the
+-- report. The application values for the Entities usage report include
+-- \`accounts\`, \`docs\`, and \`gmail\`. Filters are in the form
+-- \`[application name]:parameter name[parameter value],...\`. In this
+-- example, the \`\<>\` \'not equal to\' operator is URL-encoded in the
+-- request\'s query string (%3C%3E): GET
+-- https:\/\/www.googleapis.com\/admin\/reports\/v1\/usage\/gplus_communities\/all\/dates\/2017-12-01
+-- ?parameters=gplus:community_name,gplus:num_total_members
+-- &filters=gplus:num_total_members%3C%3E0 The relational operators
+-- include: - \`==\` - \'equal to\'. - \`\<>\` - \'not equal to\'. It is
+-- URL-encoded (%3C%3E). - \`\<\` - \'less than\'. It is URL-encoded (%3C).
+-- - \`\<=\` - \'less than or equal to\'. It is URL-encoded (%3C=). - \`>\`
+-- - \'greater than\'. It is URL-encoded (%3E). - \`>=\` - \'greater than
+-- or equal to\'. It is URL-encoded (%3E=). Filters can only be applied to
+-- numeric parameters.
 eurgFilters :: Lens' EntityUsageReportsGet (Maybe Text)
 eurgFilters
   = lens _eurgFilters (\ s a -> s{_eurgFilters = a})
 
--- | Represents the customer for which the data is to be fetched.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eurgUploadType :: Lens' EntityUsageReportsGet (Maybe Text)
+eurgUploadType
+  = lens _eurgUploadType
+      (\ s a -> s{_eurgUploadType = a})
+
+-- | The unique ID of the customer to retrieve data for.
 eurgCustomerId :: Lens' EntityUsageReportsGet (Maybe Text)
 eurgCustomerId
   = lens _eurgCustomerId
       (\ s a -> s{_eurgCustomerId = a})
 
--- | Represents the date in yyyy-mm-dd format for which the data is to be
--- fetched.
+-- | Represents the date the usage occurred. The timestamp is in the ISO 8601
+-- format, yyyy-mm-dd. We recommend you use your account\'s time zone for
+-- this.
 eurgDate :: Lens' EntityUsageReportsGet Text
 eurgDate = lens _eurgDate (\ s a -> s{_eurgDate = a})
 
--- | Represents the key of object for which the data should be filtered.
-eurgEntityKey :: Lens' EntityUsageReportsGet Text
+-- | Represents the key of the object to filter the data with.
+eurgEntityKey :: Lens' EntityUsageReportsGet EntityUsageReportsGetEntityKey
 eurgEntityKey
   = lens _eurgEntityKey
       (\ s a -> s{_eurgEntityKey = a})
 
--- | Represents the application name, parameter name pairs to fetch in csv as
--- app_name1:param_name1, app_name2:param_name2.
+-- | The \`parameters\` query string is a comma-separated list of event
+-- parameters that refine a report\'s results. The parameter is associated
+-- with a specific application. The application values for the Entities
+-- usage report are only \`gplus\`. A \`parameter\` query string is in the
+-- CSV form of \`[app_name1:param_name1], [app_name2:param_name2]...\`.
+-- *Note:* The API doesn\'t accept multiple values of a parameter. If a
+-- particular parameter is supplied more than once in the API request, the
+-- API only accepts the last value of that request parameter. In addition,
+-- if an invalid request parameter is supplied in the API request, the API
+-- ignores that request parameter and returns the response corresponding to
+-- the remaining valid request parameters. An example of an invalid request
+-- parameter is one that does not belong to the application. If no
+-- parameters are requested, all parameters are returned.
 eurgParameters :: Lens' EntityUsageReportsGet (Maybe Text)
 eurgParameters
   = lens _eurgParameters
       (\ s a -> s{_eurgParameters = a})
 
--- | Token to specify next page.
+-- | Token to specify next page. A report with multiple pages has a
+-- \`nextPageToken\` property in the response. In your follow-on request
+-- getting the next page of the report, enter the \`nextPageToken\` value
+-- in the \`pageToken\` query string.
 eurgPageToken :: Lens' EntityUsageReportsGet (Maybe Text)
 eurgPageToken
   = lens _eurgPageToken
       (\ s a -> s{_eurgPageToken = a})
 
--- | Maximum number of results to return. Maximum allowed is 1000
-eurgMaxResults :: Lens' EntityUsageReportsGet (Maybe Word32)
+-- | Determines how many activity records are shown on each response page.
+-- For example, if the request sets \`maxResults=1\` and the report has two
+-- activities, the report has two pages. The response\'s \`nextPageToken\`
+-- property has the token to the second page.
+eurgMaxResults :: Lens' EntityUsageReportsGet Word32
 eurgMaxResults
   = lens _eurgMaxResults
       (\ s a -> s{_eurgMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
+
+-- | JSONP
+eurgCallback :: Lens' EntityUsageReportsGet (Maybe Text)
+eurgCallback
+  = lens _eurgCallback (\ s a -> s{_eurgCallback = a})
 
 instance GoogleRequest EntityUsageReportsGet where
         type Rs EntityUsageReportsGet = UsageReports
@@ -175,11 +275,16 @@ instance GoogleRequest EntityUsageReportsGet where
              '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
         requestClient EntityUsageReportsGet'{..}
           = go _eurgEntityType _eurgEntityKey _eurgDate
+              _eurgXgafv
+              _eurgUploadProtocol
+              _eurgAccessToken
               _eurgFilters
+              _eurgUploadType
               _eurgCustomerId
               _eurgParameters
               _eurgPageToken
-              _eurgMaxResults
+              (Just _eurgMaxResults)
+              _eurgCallback
               (Just AltJSON)
               reportsService
           where go

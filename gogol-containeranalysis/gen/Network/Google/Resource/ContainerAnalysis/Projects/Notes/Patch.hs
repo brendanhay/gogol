@@ -43,8 +43,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Patch
     , pnpCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.patch@ method which the
 -- 'ProjectsNotesPatch' request conforms to.
@@ -65,14 +65,14 @@ type ProjectsNotesPatchResource =
 -- /See:/ 'projectsNotesPatch' smart constructor.
 data ProjectsNotesPatch =
   ProjectsNotesPatch'
-    { _pnpXgafv          :: !(Maybe Xgafv)
+    { _pnpXgafv :: !(Maybe Xgafv)
     , _pnpUploadProtocol :: !(Maybe Text)
-    , _pnpUpdateMask     :: !(Maybe GFieldMask)
-    , _pnpAccessToken    :: !(Maybe Text)
-    , _pnpUploadType     :: !(Maybe Text)
-    , _pnpPayload        :: !Note
-    , _pnpName           :: !Text
-    , _pnpCallback       :: !(Maybe Text)
+    , _pnpUpdateMask :: !(Maybe GFieldMask)
+    , _pnpAccessToken :: !(Maybe Text)
+    , _pnpUploadType :: !(Maybe Text)
+    , _pnpPayload :: !Note
+    , _pnpName :: !Text
+    , _pnpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,7 +146,7 @@ pnpPayload :: Lens' ProjectsNotesPatch Note
 pnpPayload
   = lens _pnpPayload (\ s a -> s{_pnpPayload = a})
 
--- | The name of the note in the form of
+-- | Required. The name of the note in the form of
 -- \`projects\/[PROVIDER_ID]\/notes\/[NOTE_ID]\`.
 pnpName :: Lens' ProjectsNotesPatch Text
 pnpName = lens _pnpName (\ s a -> s{_pnpName = a})

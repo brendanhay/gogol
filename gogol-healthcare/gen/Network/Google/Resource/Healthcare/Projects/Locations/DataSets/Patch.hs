@@ -43,13 +43,13 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Patch
     , pldspCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.patch@ method which the
 -- 'ProjectsLocationsDataSetsPatch' request conforms to.
 type ProjectsLocationsDataSetsPatchResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,14 +65,14 @@ type ProjectsLocationsDataSetsPatchResource =
 -- /See:/ 'projectsLocationsDataSetsPatch' smart constructor.
 data ProjectsLocationsDataSetsPatch =
   ProjectsLocationsDataSetsPatch'
-    { _pldspXgafv          :: !(Maybe Xgafv)
+    { _pldspXgafv :: !(Maybe Xgafv)
     , _pldspUploadProtocol :: !(Maybe Text)
-    , _pldspUpdateMask     :: !(Maybe GFieldMask)
-    , _pldspAccessToken    :: !(Maybe Text)
-    , _pldspUploadType     :: !(Maybe Text)
-    , _pldspPayload        :: !DataSet
-    , _pldspName           :: !Text
-    , _pldspCallback       :: !(Maybe Text)
+    , _pldspUpdateMask :: !(Maybe GFieldMask)
+    , _pldspAccessToken :: !(Maybe Text)
+    , _pldspUploadType :: !(Maybe Text)
+    , _pldspPayload :: !DataSet
+    , _pldspName :: !Text
+    , _pldspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,7 +149,7 @@ pldspPayload :: Lens' ProjectsLocationsDataSetsPatch DataSet
 pldspPayload
   = lens _pldspPayload (\ s a -> s{_pldspPayload = a})
 
--- | Output only. Resource name of the dataset, of the form
+-- | Resource name of the dataset, of the form
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\`.
 pldspName :: Lens' ProjectsLocationsDataSetsPatch Text
 pldspName

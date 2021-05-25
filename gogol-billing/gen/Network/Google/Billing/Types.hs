@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -20,7 +20,9 @@ module Network.Google.Billing.Types
       billingService
 
     -- * OAuth Scopes
+    , cloudBillingReadOnlyScope
     , cloudPlatformScope
+    , cloudBillingScope
 
     -- * AuditConfig
     , AuditConfig
@@ -41,6 +43,12 @@ module Network.Google.Billing.Types
     , eExpression
     , eTitle
     , eDescription
+
+    -- * GeoTaxonomy
+    , GeoTaxonomy
+    , geoTaxonomy
+    , gtRegions
+    , gtType
 
     -- * BillingAccount
     , BillingAccount
@@ -111,6 +119,9 @@ module Network.Google.Billing.Types
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
 
+    -- * GeoTaxonomyType
+    , GeoTaxonomyType (..)
+
     -- * PricingExpression
     , PricingExpression
     , pricingExpression
@@ -140,6 +151,7 @@ module Network.Google.Billing.Types
     -- * SKU
     , SKU
     , sKU
+    , skukGeoTaxonomy
     , skukCategory
     , skukSKUId
     , skukServiceProviderName
@@ -193,9 +205,9 @@ module Network.Google.Billing.Types
     , bCondition
     ) where
 
-import           Network.Google.Billing.Types.Product
-import           Network.Google.Billing.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Billing.Types.Product
+import Network.Google.Billing.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
 billingService :: ServiceConfig
@@ -203,6 +215,14 @@ billingService
   = defaultService (ServiceId "cloudbilling:v1")
       "cloudbilling.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | View your Google Cloud Platform billing accounts
+cloudBillingReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-billing.readonly"]
+cloudBillingReadOnlyScope = Proxy
+
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
+
+-- | View and manage your Google Cloud Platform billing accounts
+cloudBillingScope :: Proxy '["https://www.googleapis.com/auth/cloud-billing"]
+cloudBillingScope = Proxy

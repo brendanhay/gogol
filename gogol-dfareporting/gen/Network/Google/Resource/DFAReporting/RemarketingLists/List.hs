@@ -23,7 +23,7 @@
 -- Retrieves a list of remarketing lists, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.remarketingLists.list@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.List
     (
     -- * REST Resource
@@ -34,8 +34,12 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.List
     , RemarketingListsList
 
     -- * Request Lenses
+    , rllXgafv
+    , rllUploadProtocol
     , rllFloodlightActivityId
+    , rllAccessToken
     , rllAdvertiserId
+    , rllUploadType
     , rllProFileId
     , rllSortOrder
     , rllActive
@@ -43,31 +47,39 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.List
     , rllPageToken
     , rllSortField
     , rllMaxResults
+    , rllCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.list@ method which the
 -- 'RemarketingListsList' request conforms to.
 type RemarketingListsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
                QueryParam "advertiserId" (Textual Int64) :>
-                 QueryParam "floodlightActivityId" (Textual Int64) :>
-                   QueryParam "sortOrder" RemarketingListsListSortOrder
-                     :>
-                     QueryParam "active" Bool :>
-                       QueryParam "name" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" RemarketingListsListSortField
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "floodlightActivityId" (Textual Int64) :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "sortOrder" RemarketingListsListSortOrder
                              :>
-                             QueryParam "maxResults" (Textual Int32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] RemarketingListsListResponse
+                             QueryParam "active" Bool :>
+                               QueryParam "name" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     RemarketingListsListSortField
+                                     :>
+                                     QueryParam "maxResults" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON]
+                                             RemarketingListsListResponse
 
 -- | Retrieves a list of remarketing lists, possibly filtered. This method
 -- supports paging.
@@ -75,15 +87,20 @@ type RemarketingListsListResource =
 -- /See:/ 'remarketingListsList' smart constructor.
 data RemarketingListsList =
   RemarketingListsList'
-    { _rllFloodlightActivityId :: !(Maybe (Textual Int64))
-    , _rllAdvertiserId         :: !(Textual Int64)
-    , _rllProFileId            :: !(Textual Int64)
-    , _rllSortOrder            :: !RemarketingListsListSortOrder
-    , _rllActive               :: !(Maybe Bool)
-    , _rllName                 :: !(Maybe Text)
-    , _rllPageToken            :: !(Maybe Text)
-    , _rllSortField            :: !RemarketingListsListSortField
-    , _rllMaxResults           :: !(Textual Int32)
+    { _rllXgafv :: !(Maybe Xgafv)
+    , _rllUploadProtocol :: !(Maybe Text)
+    , _rllFloodlightActivityId :: !(Maybe (Textual Int64))
+    , _rllAccessToken :: !(Maybe Text)
+    , _rllAdvertiserId :: !(Textual Int64)
+    , _rllUploadType :: !(Maybe Text)
+    , _rllProFileId :: !(Textual Int64)
+    , _rllSortOrder :: !RemarketingListsListSortOrder
+    , _rllActive :: !(Maybe Bool)
+    , _rllName :: !(Maybe Text)
+    , _rllPageToken :: !(Maybe Text)
+    , _rllSortField :: !RemarketingListsListSortField
+    , _rllMaxResults :: !(Textual Int32)
+    , _rllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,9 +109,17 @@ data RemarketingListsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rllXgafv'
+--
+-- * 'rllUploadProtocol'
+--
 -- * 'rllFloodlightActivityId'
 --
+-- * 'rllAccessToken'
+--
 -- * 'rllAdvertiserId'
+--
+-- * 'rllUploadType'
 --
 -- * 'rllProFileId'
 --
@@ -109,14 +134,20 @@ data RemarketingListsList =
 -- * 'rllSortField'
 --
 -- * 'rllMaxResults'
+--
+-- * 'rllCallback'
 remarketingListsList
     :: Int64 -- ^ 'rllAdvertiserId'
     -> Int64 -- ^ 'rllProFileId'
     -> RemarketingListsList
 remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
   RemarketingListsList'
-    { _rllFloodlightActivityId = Nothing
+    { _rllXgafv = Nothing
+    , _rllUploadProtocol = Nothing
+    , _rllFloodlightActivityId = Nothing
+    , _rllAccessToken = Nothing
     , _rllAdvertiserId = _Coerce # pRllAdvertiserId_
+    , _rllUploadType = Nothing
     , _rllProFileId = _Coerce # pRllProFileId_
     , _rllSortOrder = RLLSOAscending
     , _rllActive = Nothing
@@ -124,8 +155,19 @@ remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
     , _rllPageToken = Nothing
     , _rllSortField = RLLSFID
     , _rllMaxResults = 1000
+    , _rllCallback = Nothing
     }
 
+
+-- | V1 error format.
+rllXgafv :: Lens' RemarketingListsList (Maybe Xgafv)
+rllXgafv = lens _rllXgafv (\ s a -> s{_rllXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rllUploadProtocol :: Lens' RemarketingListsList (Maybe Text)
+rllUploadProtocol
+  = lens _rllUploadProtocol
+      (\ s a -> s{_rllUploadProtocol = a})
 
 -- | Select only remarketing lists that have this floodlight activity ID.
 rllFloodlightActivityId :: Lens' RemarketingListsList (Maybe Int64)
@@ -134,12 +176,24 @@ rllFloodlightActivityId
       (\ s a -> s{_rllFloodlightActivityId = a})
       . mapping _Coerce
 
+-- | OAuth access token.
+rllAccessToken :: Lens' RemarketingListsList (Maybe Text)
+rllAccessToken
+  = lens _rllAccessToken
+      (\ s a -> s{_rllAccessToken = a})
+
 -- | Select only remarketing lists owned by this advertiser.
 rllAdvertiserId :: Lens' RemarketingListsList Int64
 rllAdvertiserId
   = lens _rllAdvertiserId
       (\ s a -> s{_rllAdvertiserId = a})
       . _Coerce
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rllUploadType :: Lens' RemarketingListsList (Maybe Text)
+rllUploadType
+  = lens _rllUploadType
+      (\ s a -> s{_rllUploadType = a})
 
 -- | User profile ID associated with this request.
 rllProFileId :: Lens' RemarketingListsList Int64
@@ -185,20 +239,29 @@ rllMaxResults
       (\ s a -> s{_rllMaxResults = a})
       . _Coerce
 
+-- | JSONP
+rllCallback :: Lens' RemarketingListsList (Maybe Text)
+rllCallback
+  = lens _rllCallback (\ s a -> s{_rllCallback = a})
+
 instance GoogleRequest RemarketingListsList where
         type Rs RemarketingListsList =
              RemarketingListsListResponse
         type Scopes RemarketingListsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListsList'{..}
-          = go _rllProFileId (Just _rllAdvertiserId)
+          = go _rllProFileId (Just _rllAdvertiserId) _rllXgafv
+              _rllUploadProtocol
               _rllFloodlightActivityId
+              _rllAccessToken
+              _rllUploadType
               (Just _rllSortOrder)
               _rllActive
               _rllName
               _rllPageToken
               (Just _rllSortField)
               (Just _rllMaxResults)
+              _rllCallback
               (Just AltJSON)
               dFAReportingService
           where go

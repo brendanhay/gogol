@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
     , mepExperimentId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.patch@ method which the
 -- 'ManagementExperimentsPatch' request conforms to.
@@ -67,10 +67,10 @@ type ManagementExperimentsPatchResource =
 data ManagementExperimentsPatch =
   ManagementExperimentsPatch'
     { _mepWebPropertyId :: !Text
-    , _mepProFileId     :: !Text
-    , _mepPayload       :: !Experiment
-    , _mepAccountId     :: !Text
-    , _mepExperimentId  :: !Text
+    , _mepProFileId :: !Text
+    , _mepPayload :: !Experiment
+    , _mepAccountId :: !Text
+    , _mepExperimentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

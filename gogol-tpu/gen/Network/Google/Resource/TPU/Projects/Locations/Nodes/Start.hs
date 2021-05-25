@@ -42,8 +42,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.Start
     , plnsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.start@ method which the
 -- 'ProjectsLocationsNodesStart' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsNodesStartResource =
 -- /See:/ 'projectsLocationsNodesStart' smart constructor.
 data ProjectsLocationsNodesStart =
   ProjectsLocationsNodesStart'
-    { _plnsXgafv          :: !(Maybe Xgafv)
+    { _plnsXgafv :: !(Maybe Xgafv)
     , _plnsUploadProtocol :: !(Maybe Text)
-    , _plnsAccessToken    :: !(Maybe Text)
-    , _plnsUploadType     :: !(Maybe Text)
-    , _plnsPayload        :: !StartNodeRequest
-    , _plnsName           :: !Text
-    , _plnsCallback       :: !(Maybe Text)
+    , _plnsAccessToken :: !(Maybe Text)
+    , _plnsUploadType :: !(Maybe Text)
+    , _plnsPayload :: !StartNodeRequest
+    , _plnsName :: !Text
+    , _plnsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

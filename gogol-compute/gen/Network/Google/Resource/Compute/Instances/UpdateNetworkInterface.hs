@@ -20,8 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an instance\'s network interface. This method follows PATCH
--- semantics.
+-- Updates an instance\'s network interface. This method can only update an
+-- interface\'s alias IP range and attached network. See Modifying alias IP
+-- ranges for an existing instance for instructions on changing alias IP
+-- ranges. See Migrating a VM between networks for instructions on
+-- migrating an interface. This method follows PATCH semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.updateNetworkInterface@.
 module Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
@@ -42,8 +45,8 @@ module Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
     , iuniInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.updateNetworkInterface@ method which the
 -- 'InstancesUpdateNetworkInterface' request conforms to.
@@ -63,18 +66,21 @@ type InstancesUpdateNetworkInterfaceResource =
                              ReqBody '[JSON] NetworkInterface :>
                                Patch '[JSON] Operation
 
--- | Updates an instance\'s network interface. This method follows PATCH
--- semantics.
+-- | Updates an instance\'s network interface. This method can only update an
+-- interface\'s alias IP range and attached network. See Modifying alias IP
+-- ranges for an existing instance for instructions on changing alias IP
+-- ranges. See Migrating a VM between networks for instructions on
+-- migrating an interface. This method follows PATCH semantics.
 --
 -- /See:/ 'instancesUpdateNetworkInterface' smart constructor.
 data InstancesUpdateNetworkInterface =
   InstancesUpdateNetworkInterface'
-    { _iuniRequestId        :: !(Maybe Text)
-    , _iuniProject          :: !Text
+    { _iuniRequestId :: !(Maybe Text)
+    , _iuniProject :: !Text
     , _iuniNetworkInterface :: !Text
-    , _iuniZone             :: !Text
-    , _iuniPayload          :: !NetworkInterface
-    , _iuniInstance         :: !Text
+    , _iuniZone :: !Text
+    , _iuniPayload :: !NetworkInterface
+    , _iuniInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

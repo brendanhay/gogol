@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.VPNTunnels.Insert
     , vtiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.insert@ method which the
 -- 'VPNTunnelsInsert' request conforms to.
@@ -64,9 +64,9 @@ type VPNTunnelsInsertResource =
 data VPNTunnelsInsert =
   VPNTunnelsInsert'
     { _vtiRequestId :: !(Maybe Text)
-    , _vtiProject   :: !Text
-    , _vtiPayload   :: !VPNTunnel
-    , _vtiRegion    :: !Text
+    , _vtiProject :: !Text
+    , _vtiPayload :: !VPNTunnel
+    , _vtiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.List
     , talItemId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.list@ method which the
 -- 'TimelineAttachmentsList' request conforms to.

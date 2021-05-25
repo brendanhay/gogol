@@ -42,8 +42,8 @@ module Network.Google.Resource.DLP.Projects.InspectTemplates.Delete
     , pitdCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.inspectTemplates.delete@ method which the
 -- 'ProjectsInspectTemplatesDelete' request conforms to.
@@ -64,12 +64,12 @@ type ProjectsInspectTemplatesDeleteResource =
 -- /See:/ 'projectsInspectTemplatesDelete' smart constructor.
 data ProjectsInspectTemplatesDelete =
   ProjectsInspectTemplatesDelete'
-    { _pitdXgafv          :: !(Maybe Xgafv)
+    { _pitdXgafv :: !(Maybe Xgafv)
     , _pitdUploadProtocol :: !(Maybe Text)
-    , _pitdAccessToken    :: !(Maybe Text)
-    , _pitdUploadType     :: !(Maybe Text)
-    , _pitdName           :: !Text
-    , _pitdCallback       :: !(Maybe Text)
+    , _pitdAccessToken :: !(Maybe Text)
+    , _pitdUploadType :: !(Maybe Text)
+    , _pitdName :: !Text
+    , _pitdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,8 +126,9 @@ pitdUploadType
   = lens _pitdUploadType
       (\ s a -> s{_pitdUploadType = a})
 
--- | Resource name of the organization and inspectTemplate to be deleted, for
--- example \`organizations\/433245324\/inspectTemplates\/432452342\` or
+-- | Required. Resource name of the organization and inspectTemplate to be
+-- deleted, for example
+-- \`organizations\/433245324\/inspectTemplates\/432452342\` or
 -- projects\/project-id\/inspectTemplates\/432452342.
 pitdName :: Lens' ProjectsInspectTemplatesDelete Text
 pitdName = lens _pitdName (\ s a -> s{_pitdName = a})

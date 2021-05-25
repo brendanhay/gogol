@@ -36,11 +36,12 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
     , doacuBucket
     , doacuPayload
     , doacuUserProject
+    , doacuProvisionalUserProject
     , doacuEntity
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.update@ method which the
 -- 'DefaultObjectAccessControlsUpdate' request conforms to.
@@ -52,19 +53,21 @@ type DefaultObjectAccessControlsUpdateResource =
              "defaultObjectAcl" :>
                Capture "entity" Text :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ObjectAccessControl :>
-                       Put '[JSON] ObjectAccessControl
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ObjectAccessControl :>
+                         Put '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsUpdate' smart constructor.
 data DefaultObjectAccessControlsUpdate =
   DefaultObjectAccessControlsUpdate'
-    { _doacuBucket      :: !Text
-    , _doacuPayload     :: !ObjectAccessControl
+    { _doacuBucket :: !Text
+    , _doacuPayload :: !ObjectAccessControl
     , _doacuUserProject :: !(Maybe Text)
-    , _doacuEntity      :: !Text
+    , _doacuProvisionalUserProject :: !(Maybe Text)
+    , _doacuEntity :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,6 +82,8 @@ data DefaultObjectAccessControlsUpdate =
 --
 -- * 'doacuUserProject'
 --
+-- * 'doacuProvisionalUserProject'
+--
 -- * 'doacuEntity'
 defaultObjectAccessControlsUpdate
     :: Text -- ^ 'doacuBucket'
@@ -90,6 +95,7 @@ defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
     { _doacuBucket = pDoacuBucket_
     , _doacuPayload = pDoacuPayload_
     , _doacuUserProject = Nothing
+    , _doacuProvisionalUserProject = Nothing
     , _doacuEntity = pDoacuEntity_
     }
 
@@ -111,6 +117,13 @@ doacuUserProject
   = lens _doacuUserProject
       (\ s a -> s{_doacuUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+doacuProvisionalUserProject :: Lens' DefaultObjectAccessControlsUpdate (Maybe Text)
+doacuProvisionalUserProject
+  = lens _doacuProvisionalUserProject
+      (\ s a -> s{_doacuProvisionalUserProject = a})
+
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
@@ -128,6 +141,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsUpdate'{..}
           = go _doacuBucket _doacuEntity _doacuUserProject
+              _doacuProvisionalUserProject
               (Just AltJSON)
               _doacuPayload
               storageService

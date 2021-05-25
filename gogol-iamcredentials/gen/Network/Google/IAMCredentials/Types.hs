@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -50,24 +50,12 @@ module Network.Google.IAMCredentials.Types
     -- * Xgafv
     , Xgafv (..)
 
-    -- * GenerateIdentityBindingAccessTokenRequest
-    , GenerateIdentityBindingAccessTokenRequest
-    , generateIdentityBindingAccessTokenRequest
-    , gibatrJwt
-    , gibatrScope
-
     -- * GenerateAccessTokenRequest
     , GenerateAccessTokenRequest
     , generateAccessTokenRequest
     , gatrDelegates
     , gatrLifetime
     , gatrScope
-
-    -- * GenerateIdentityBindingAccessTokenResponse
-    , GenerateIdentityBindingAccessTokenResponse
-    , generateIdentityBindingAccessTokenResponse
-    , gibatrAccessToken
-    , gibatrExpireTime
 
     -- * SignJwtRequest
     , SignJwtRequest
@@ -87,9 +75,9 @@ module Network.Google.IAMCredentials.Types
     , gitrToken
     ) where
 
-import           Network.Google.IAMCredentials.Types.Product
-import           Network.Google.IAMCredentials.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.IAMCredentials.Types.Product
+import Network.Google.IAMCredentials.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the IAM Service Account Credentials API. This contains the host and root path used as a starting point for constructing service requests.
 iAMCredentialsService :: ServiceConfig
@@ -97,6 +85,6 @@ iAMCredentialsService
   = defaultService (ServiceId "iamcredentials:v1")
       "iamcredentials.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

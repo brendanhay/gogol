@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an address resource in the specified project using the data
+-- Creates an address resource in the specified project by using the data
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.addresses.insert@.
@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Addresses.Insert
     , aiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.insert@ method which the
 -- 'AddressesInsert' request conforms to.
@@ -57,16 +57,16 @@ type AddressesInsertResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Address :> Post '[JSON] Operation
 
--- | Creates an address resource in the specified project using the data
+-- | Creates an address resource in the specified project by using the data
 -- included in the request.
 --
 -- /See:/ 'addressesInsert' smart constructor.
 data AddressesInsert =
   AddressesInsert'
     { _aiRequestId :: !(Maybe Text)
-    , _aiProject   :: !Text
-    , _aiPayload   :: !Address
-    , _aiRegion    :: !Text
+    , _aiProject :: !Text
+    , _aiPayload :: !Address
+    , _aiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

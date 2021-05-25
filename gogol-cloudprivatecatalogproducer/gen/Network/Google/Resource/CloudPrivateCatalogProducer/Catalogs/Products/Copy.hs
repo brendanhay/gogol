@@ -22,7 +22,7 @@
 --
 -- Copies a Product under another Catalog.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.copy@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.copy@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Copy
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Cop
     , cCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.copy@ method which the
 -- 'CatalogsProductsCopy' request conforms to.
@@ -65,13 +65,13 @@ type CatalogsProductsCopyResource =
 -- /See:/ 'catalogsProductsCopy' smart constructor.
 data CatalogsProductsCopy =
   CatalogsProductsCopy'
-    { _cXgafv          :: !(Maybe Xgafv)
+    { _cXgafv :: !(Maybe Xgafv)
     , _cUploadProtocol :: !(Maybe Text)
-    , _cAccessToken    :: !(Maybe Text)
-    , _cUploadType     :: !(Maybe Text)
-    , _cPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , _cName           :: !Text
-    , _cCallback       :: !(Maybe Text)
+    , _cAccessToken :: !(Maybe Text)
+    , _cUploadType :: !(Maybe Text)
+    , _cPayload :: !GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
+    , _cName :: !Text
+    , _cCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

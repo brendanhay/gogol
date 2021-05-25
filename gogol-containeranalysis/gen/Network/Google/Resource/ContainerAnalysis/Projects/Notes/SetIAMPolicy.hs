@@ -48,8 +48,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.SetIAMPolicy
     , pnsipCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.setIamPolicy@ method which the
 -- 'ProjectsNotesSetIAMPolicy' request conforms to.
@@ -76,13 +76,13 @@ type ProjectsNotesSetIAMPolicyResource =
 -- /See:/ 'projectsNotesSetIAMPolicy' smart constructor.
 data ProjectsNotesSetIAMPolicy =
   ProjectsNotesSetIAMPolicy'
-    { _pnsipXgafv          :: !(Maybe Xgafv)
+    { _pnsipXgafv :: !(Maybe Xgafv)
     , _pnsipUploadProtocol :: !(Maybe Text)
-    , _pnsipAccessToken    :: !(Maybe Text)
-    , _pnsipUploadType     :: !(Maybe Text)
-    , _pnsipPayload        :: !SetIAMPolicyRequest
-    , _pnsipResource       :: !Text
-    , _pnsipCallback       :: !(Maybe Text)
+    , _pnsipAccessToken :: !(Maybe Text)
+    , _pnsipUploadType :: !(Maybe Text)
+    , _pnsipPayload :: !SetIAMPolicyRequest
+    , _pnsipResource :: !Text
+    , _pnsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

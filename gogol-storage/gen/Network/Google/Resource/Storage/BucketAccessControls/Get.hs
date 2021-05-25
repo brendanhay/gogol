@@ -35,11 +35,12 @@ module Network.Google.Resource.Storage.BucketAccessControls.Get
     -- * Request Lenses
     , bacgBucket
     , bacgUserProject
+    , bacgProvisionalUserProject
     , bacgEntity
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.get@ method which the
 -- 'BucketAccessControlsGet' request conforms to.
@@ -51,17 +52,19 @@ type BucketAccessControlsGetResource =
              "acl" :>
                Capture "entity" Text :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] BucketAccessControl
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] BucketAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsGet' smart constructor.
 data BucketAccessControlsGet =
   BucketAccessControlsGet'
-    { _bacgBucket      :: !Text
+    { _bacgBucket :: !Text
     , _bacgUserProject :: !(Maybe Text)
-    , _bacgEntity      :: !Text
+    , _bacgProvisionalUserProject :: !(Maybe Text)
+    , _bacgEntity :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,6 +77,8 @@ data BucketAccessControlsGet =
 --
 -- * 'bacgUserProject'
 --
+-- * 'bacgProvisionalUserProject'
+--
 -- * 'bacgEntity'
 bucketAccessControlsGet
     :: Text -- ^ 'bacgBucket'
@@ -83,6 +88,7 @@ bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
   BucketAccessControlsGet'
     { _bacgBucket = pBacgBucket_
     , _bacgUserProject = Nothing
+    , _bacgProvisionalUserProject = Nothing
     , _bacgEntity = pBacgEntity_
     }
 
@@ -99,6 +105,13 @@ bacgUserProject
   = lens _bacgUserProject
       (\ s a -> s{_bacgUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+bacgProvisionalUserProject :: Lens' BucketAccessControlsGet (Maybe Text)
+bacgProvisionalUserProject
+  = lens _bacgProvisionalUserProject
+      (\ s a -> s{_bacgProvisionalUserProject = a})
+
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
@@ -113,6 +126,7 @@ instance GoogleRequest BucketAccessControlsGet where
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsGet'{..}
           = go _bacgBucket _bacgEntity _bacgUserProject
+              _bacgProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

@@ -14,12 +14,12 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Reads and publishes results from Firebase Test Lab.
+    API to publish and access results from developer tools.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta3@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -33,33 +33,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.ToolResults.Projects.GetSettings
-        , Network.Google.Resource.ToolResults.Projects.Histories.Create
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.Get
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Create
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Get
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Patch
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Create
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Get
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.GetPerfMetricsSummary
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Patch
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfMetricsSummary.Create
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Create
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Get
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
-        , Network.Google.Resource.ToolResults.Projects.Histories.Get
-        , Network.Google.Resource.ToolResults.Projects.Histories.List
-        , Network.Google.Resource.ToolResults.Projects.InitializeSettings
-        , Network.Google.ToolResults
+          Network.Google.ToolResults
         , Network.Google.ToolResults.Types
 
     other-modules:

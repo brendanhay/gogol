@@ -42,8 +42,8 @@ module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Delete
     , afirdCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.delete@ method which the
 -- 'AppsFirewallIngressRulesDelete' request conforms to.
@@ -66,13 +66,13 @@ type AppsFirewallIngressRulesDeleteResource =
 -- /See:/ 'appsFirewallIngressRulesDelete' smart constructor.
 data AppsFirewallIngressRulesDelete =
   AppsFirewallIngressRulesDelete'
-    { _afirdXgafv          :: !(Maybe Xgafv)
+    { _afirdXgafv :: !(Maybe Xgafv)
     , _afirdUploadProtocol :: !(Maybe Text)
-    , _afirdAccessToken    :: !(Maybe Text)
-    , _afirdUploadType     :: !(Maybe Text)
+    , _afirdAccessToken :: !(Maybe Text)
+    , _afirdUploadType :: !(Maybe Text)
     , _afirdIngressRulesId :: !Text
-    , _afirdAppsId         :: !Text
-    , _afirdCallback       :: !(Maybe Text)
+    , _afirdAppsId :: !Text
+    , _afirdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

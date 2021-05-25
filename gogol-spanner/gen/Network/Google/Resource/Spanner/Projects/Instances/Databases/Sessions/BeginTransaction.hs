@@ -43,8 +43,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Beg
     , pidsbtCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.beginTransaction@ method which the
 -- 'ProjectsInstancesDatabasesSessionsBeginTransaction' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsInstancesDatabasesSessionsBeginTransactionResource
 -- /See:/ 'projectsInstancesDatabasesSessionsBeginTransaction' smart constructor.
 data ProjectsInstancesDatabasesSessionsBeginTransaction =
   ProjectsInstancesDatabasesSessionsBeginTransaction'
-    { _pidsbtXgafv          :: !(Maybe Xgafv)
+    { _pidsbtXgafv :: !(Maybe Xgafv)
     , _pidsbtUploadProtocol :: !(Maybe Text)
-    , _pidsbtAccessToken    :: !(Maybe Text)
-    , _pidsbtUploadType     :: !(Maybe Text)
-    , _pidsbtPayload        :: !BeginTransactionRequest
-    , _pidsbtSession        :: !Text
-    , _pidsbtCallback       :: !(Maybe Text)
+    , _pidsbtAccessToken :: !(Maybe Text)
+    , _pidsbtUploadType :: !(Maybe Text)
+    , _pidsbtPayload :: !BeginTransactionRequest
+    , _pidsbtSession :: !Text
+    , _pidsbtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

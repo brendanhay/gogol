@@ -17,18 +17,18 @@
 --
 module Network.Google.FactCheckTools.Types.Product where
 
-import           Network.Google.FactCheckTools.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types.Sum
+import Network.Google.Prelude
 
 -- | Information about the claim.
 --
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1Claim' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1Claim =
   GoogleFactcheckingFactchecktoolsV1alpha1Claim'
-    { _gffvcText        :: !(Maybe Text)
+    { _gffvcText :: !(Maybe Text)
     , _gffvcClaimReview :: !(Maybe [GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview])
-    , _gffvcClaimDate   :: !(Maybe DateTime')
-    , _gffvcClaimant    :: !(Maybe Text)
+    , _gffvcClaimDate :: !(Maybe DateTime')
+    , _gffvcClaimant :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -110,10 +110,11 @@ instance ToJSON
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1ClaimRating' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating'
-    { _gffvcrWorstRating   :: !(Maybe (Textual Int32))
-    , _gffvcrRatingValue   :: !(Maybe (Textual Int32))
-    , _gffvcrImageURL      :: !(Maybe Text)
-    , _gffvcrBestRating    :: !(Maybe (Textual Int32))
+    { _gffvcrWorstRating :: !(Maybe (Textual Int32))
+    , _gffvcrRatingExplanation :: !(Maybe Text)
+    , _gffvcrRatingValue :: !(Maybe (Textual Int32))
+    , _gffvcrImageURL :: !(Maybe Text)
+    , _gffvcrBestRating :: !(Maybe (Textual Int32))
     , _gffvcrTextualRating :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -124,6 +125,8 @@ data GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gffvcrWorstRating'
+--
+-- * 'gffvcrRatingExplanation'
 --
 -- * 'gffvcrRatingValue'
 --
@@ -137,6 +140,7 @@ googleFactcheckingFactchecktoolsV1alpha1ClaimRating
 googleFactcheckingFactchecktoolsV1alpha1ClaimRating =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating'
     { _gffvcrWorstRating = Nothing
+    , _gffvcrRatingExplanation = Nothing
     , _gffvcrRatingValue = Nothing
     , _gffvcrImageURL = Nothing
     , _gffvcrBestRating = Nothing
@@ -145,17 +149,21 @@ googleFactcheckingFactchecktoolsV1alpha1ClaimRating =
 
 
 -- | For numeric ratings, the worst value possible in the scale from worst to
--- best.
--- Corresponds to \`ClaimReview.reviewRating.worstRating\`.
+-- best. Corresponds to \`ClaimReview.reviewRating.worstRating\`.
 gffvcrWorstRating :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (Maybe Int32)
 gffvcrWorstRating
   = lens _gffvcrWorstRating
       (\ s a -> s{_gffvcrWorstRating = a})
       . mapping _Coerce
 
+-- | Corresponds to \`ClaimReview.reviewRating.ratingExplanation\`.
+gffvcrRatingExplanation :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (Maybe Text)
+gffvcrRatingExplanation
+  = lens _gffvcrRatingExplanation
+      (\ s a -> s{_gffvcrRatingExplanation = a})
+
 -- | A numeric rating of this claim, in the range worstRating — bestRating
--- inclusive.
--- Corresponds to \`ClaimReview.reviewRating.ratingValue\`.
+-- inclusive. Corresponds to \`ClaimReview.reviewRating.ratingValue\`.
 gffvcrRatingValue :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (Maybe Int32)
 gffvcrRatingValue
   = lens _gffvcrRatingValue
@@ -169,8 +177,7 @@ gffvcrImageURL
       (\ s a -> s{_gffvcrImageURL = a})
 
 -- | For numeric ratings, the best value possible in the scale from worst to
--- best.
--- Corresponds to \`ClaimReview.reviewRating.bestRating\`.
+-- best. Corresponds to \`ClaimReview.reviewRating.bestRating\`.
 gffvcrBestRating :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating (Maybe Int32)
 gffvcrBestRating
   = lens _gffvcrBestRating
@@ -193,8 +200,9 @@ instance FromJSON
               (\ o ->
                  GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating'
                    <$>
-                   (o .:? "worstRating") <*> (o .:? "ratingValue") <*>
-                     (o .:? "imageUrl")
+                   (o .:? "worstRating") <*> (o .:? "ratingExplanation")
+                     <*> (o .:? "ratingValue")
+                     <*> (o .:? "imageUrl")
                      <*> (o .:? "bestRating")
                      <*> (o .:? "textualRating"))
 
@@ -206,6 +214,8 @@ instance ToJSON
           = object
               (catMaybes
                  [("worstRating" .=) <$> _gffvcrWorstRating,
+                  ("ratingExplanation" .=) <$>
+                    _gffvcrRatingExplanation,
                   ("ratingValue" .=) <$> _gffvcrRatingValue,
                   ("imageUrl" .=) <$> _gffvcrImageURL,
                   ("bestRating" .=) <$> _gffvcrBestRating,
@@ -217,7 +227,7 @@ instance ToJSON
 data GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor'
     { _gffvcraImageURL :: !(Maybe Text)
-    , _gffvcraName     :: !(Maybe Text)
+    , _gffvcraName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -242,8 +252,8 @@ gffvcraImageURL
   = lens _gffvcraImageURL
       (\ s a -> s{_gffvcraImageURL = a})
 
--- | Name of the organization that is publishing the fact check.
--- Corresponds to \`ClaimReview.author.name\`.
+-- | Name of the organization that is publishing the fact check. Corresponds
+-- to \`ClaimReview.author.name\`.
 gffvcraName :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor (Maybe Text)
 gffvcraName
   = lens _gffvcraName (\ s a -> s{_gffvcraName = a})
@@ -274,7 +284,7 @@ instance ToJSON
 data GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse =
   GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse'
     { _gffvfccsrNextPageToken :: !(Maybe Text)
-    , _gffvfccsrClaims        :: !(Maybe [GoogleFactcheckingFactchecktoolsV1alpha1Claim])
+    , _gffvfccsrClaims :: !(Maybe [GoogleFactcheckingFactchecktoolsV1alpha1Claim])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -420,9 +430,9 @@ instance ToJSON
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1ClaimAuthor' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor'
-    { _gffvcaSameAs   :: !(Maybe Text)
+    { _gffvcaSameAs :: !(Maybe Text)
     , _gffvcaImageURL :: !(Maybe Text)
-    , _gffvcaName     :: !(Maybe Text)
+    , _gffvcaName :: !(Maybe Text)
     , _gffvcaJobTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -503,12 +513,12 @@ instance ToJSON
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1ClaimReview' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview'
-    { _gLanguageCode  :: !(Maybe Text)
-    , _gURL           :: !(Maybe Text)
+    { _gLanguageCode :: !(Maybe Text)
+    , _gURL :: !(Maybe Text)
     , _gTextualRating :: !(Maybe Text)
-    , _gTitle         :: !(Maybe Text)
-    , _gPublisher     :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1Publisher)
-    , _gReviewDate    :: !(Maybe DateTime')
+    , _gTitle :: !(Maybe Text)
+    , _gPublisher :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1Publisher)
+    , _gReviewDate :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -609,14 +619,14 @@ instance ToJSON
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup'
-    { _gffvcrmRating               :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating)
-    , _gffvcrmClaimAuthor          :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor)
-    , _gffvcrmURL                  :: !(Maybe Text)
-    , _gffvcrmClaimAppearances     :: !(Maybe [Text])
-    , _gffvcrmClaimLocation        :: !(Maybe Text)
+    { _gffvcrmRating :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating)
+    , _gffvcrmClaimAuthor :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor)
+    , _gffvcrmURL :: !(Maybe Text)
+    , _gffvcrmClaimAppearances :: !(Maybe [Text])
+    , _gffvcrmClaimLocation :: !(Maybe Text)
     , _gffvcrmClaimFirstAppearance :: !(Maybe Text)
-    , _gffvcrmClaimDate            :: !(Maybe Text)
-    , _gffvcrmClaimReviewed        :: !(Maybe Text)
+    , _gffvcrmClaimDate :: !(Maybe Text)
+    , _gffvcrmClaimReviewed :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -670,15 +680,13 @@ gffvcrmClaimAuthor
 -- | This field is optional, and will default to the page URL. We provide
 -- this field to allow you the override the default value, but the only
 -- permitted override is the page URL plus an optional anchor link (\"page
--- jump\").
--- Corresponds to \`ClaimReview.url\`
+-- jump\"). Corresponds to \`ClaimReview.url\`
 gffvcrmURL :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (Maybe Text)
 gffvcrmURL
   = lens _gffvcrmURL (\ s a -> s{_gffvcrmURL = a})
 
 -- | A list of links to works in which this claim appears, aside from the one
--- specified in \`claim_first_appearance\`.
--- Corresponds to
+-- specified in \`claim_first_appearance\`. Corresponds to
 -- \`ClaimReview.itemReviewed[\'type=Claim].appearance.url\`.
 gffvcrmClaimAppearances :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup [Text]
 gffvcrmClaimAppearances
@@ -687,15 +695,14 @@ gffvcrmClaimAppearances
       . _Default
       . _Coerce
 
--- | The location where this claim was made.
--- Corresponds to \`ClaimReview.itemReviewed.name\`.
+-- | The location where this claim was made. Corresponds to
+-- \`ClaimReview.itemReviewed.name\`.
 gffvcrmClaimLocation :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (Maybe Text)
 gffvcrmClaimLocation
   = lens _gffvcrmClaimLocation
       (\ s a -> s{_gffvcrmClaimLocation = a})
 
--- | A link to a work in which this claim first appears.
--- Corresponds to
+-- | A link to a work in which this claim first appears. Corresponds to
 -- \`ClaimReview.itemReviewed[\'type=Claim].firstAppearance.url\`.
 gffvcrmClaimFirstAppearance :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (Maybe Text)
 gffvcrmClaimFirstAppearance
@@ -709,8 +716,8 @@ gffvcrmClaimDate
   = lens _gffvcrmClaimDate
       (\ s a -> s{_gffvcrmClaimDate = a})
 
--- | A short summary of the claim being evaluated.
--- Corresponds to \`ClaimReview.claimReviewed\`.
+-- | A short summary of the claim being evaluated. Corresponds to
+-- \`ClaimReview.claimReviewed\`.
 gffvcrmClaimReviewed :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup (Maybe Text)
 gffvcrmClaimReviewed
   = lens _gffvcrmClaimReviewed
@@ -755,11 +762,11 @@ instance ToJSON
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage'
-    { _gffvcrmpVersionId          :: !(Maybe Text)
-    , _gffvcrmpPublishDate        :: !(Maybe Text)
-    , _gffvcrmpName               :: !(Maybe Text)
-    , _gffvcrmpClaimReviewAuthor  :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor)
-    , _gffvcrmpPageURL            :: !(Maybe Text)
+    { _gffvcrmpVersionId :: !(Maybe Text)
+    , _gffvcrmpPublishDate :: !(Maybe Text)
+    , _gffvcrmpName :: !(Maybe Text)
+    , _gffvcrmpClaimReviewAuthor :: !(Maybe GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor)
+    , _gffvcrmpPageURL :: !(Maybe Text)
     , _gffvcrmpClaimReviewMarkups :: !(Maybe [GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -802,8 +809,8 @@ gffvcrmpVersionId
 
 -- | The date when the fact check was published. Similar to the URL,
 -- semantically this is a page-level field, and each \`ClaimReview\` on
--- this page will contain the same value.
--- Corresponds to \`ClaimReview.datePublished\`
+-- this page will contain the same value. Corresponds to
+-- \`ClaimReview.datePublished\`
 gffvcrmpPublishDate :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (Maybe Text)
 gffvcrmpPublishDate
   = lens _gffvcrmpPublishDate
@@ -827,8 +834,8 @@ gffvcrmpClaimReviewAuthor
 -- | The URL of the page associated with this \`ClaimReview\` markup. While
 -- every individual \`ClaimReview\` has its own URL field, semantically
 -- this is a page-level field, and each \`ClaimReview\` on this page will
--- use this value unless individually overridden.
--- Corresponds to \`ClaimReview.url\`
+-- use this value unless individually overridden. Corresponds to
+-- \`ClaimReview.url\`
 gffvcrmpPageURL :: Lens' GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (Maybe Text)
 gffvcrmpPageURL
   = lens _gffvcrmpPageURL
@@ -879,7 +886,7 @@ instance ToJSON
 -- /See:/ 'googleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse =
   GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse'
-    { _gffvlcrmprNextPageToken          :: !(Maybe Text)
+    { _gffvlcrmprNextPageToken :: !(Maybe Text)
     , _gffvlcrmprClaimReviewMarkupPages :: !(Maybe [GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage])
     }
   deriving (Eq, Show, Data, Typeable, Generic)

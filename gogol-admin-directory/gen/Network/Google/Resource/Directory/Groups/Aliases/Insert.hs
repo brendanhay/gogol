@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add a alias for the group
+-- Adds an alias for the group.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.aliases.insert@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.groups.aliases.insert@.
 module Network.Google.Resource.Directory.Groups.Aliases.Insert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Groups.Aliases.Insert
     , GroupsAliasesInsert
 
     -- * Request Lenses
+    , gaiXgafv
+    , gaiUploadProtocol
+    , gaiAccessToken
     , gaiGroupKey
+    , gaiUploadType
     , gaiPayload
+    , gaiCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.groups.aliases.insert@ method which the
 -- 'GroupsAliasesInsert' request conforms to.
@@ -49,16 +54,26 @@ type GroupsAliasesInsertResource =
            "groups" :>
              Capture "groupKey" Text :>
                "aliases" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Alias :> Post '[JSON] Alias
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
--- | Add a alias for the group
+-- | Adds an alias for the group.
 --
 -- /See:/ 'groupsAliasesInsert' smart constructor.
 data GroupsAliasesInsert =
   GroupsAliasesInsert'
-    { _gaiGroupKey :: !Text
-    , _gaiPayload  :: !Alias
+    { _gaiXgafv :: !(Maybe Xgafv)
+    , _gaiUploadProtocol :: !(Maybe Text)
+    , _gaiAccessToken :: !(Maybe Text)
+    , _gaiGroupKey :: !Text
+    , _gaiUploadType :: !(Maybe Text)
+    , _gaiPayload :: !Alias
+    , _gaiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,34 +82,84 @@ data GroupsAliasesInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gaiXgafv'
+--
+-- * 'gaiUploadProtocol'
+--
+-- * 'gaiAccessToken'
+--
 -- * 'gaiGroupKey'
 --
+-- * 'gaiUploadType'
+--
 -- * 'gaiPayload'
+--
+-- * 'gaiCallback'
 groupsAliasesInsert
     :: Text -- ^ 'gaiGroupKey'
     -> Alias -- ^ 'gaiPayload'
     -> GroupsAliasesInsert
 groupsAliasesInsert pGaiGroupKey_ pGaiPayload_ =
   GroupsAliasesInsert'
-    {_gaiGroupKey = pGaiGroupKey_, _gaiPayload = pGaiPayload_}
+    { _gaiXgafv = Nothing
+    , _gaiUploadProtocol = Nothing
+    , _gaiAccessToken = Nothing
+    , _gaiGroupKey = pGaiGroupKey_
+    , _gaiUploadType = Nothing
+    , _gaiPayload = pGaiPayload_
+    , _gaiCallback = Nothing
+    }
 
 
--- | Email or immutable ID of the group
+-- | V1 error format.
+gaiXgafv :: Lens' GroupsAliasesInsert (Maybe Xgafv)
+gaiXgafv = lens _gaiXgafv (\ s a -> s{_gaiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+gaiUploadProtocol :: Lens' GroupsAliasesInsert (Maybe Text)
+gaiUploadProtocol
+  = lens _gaiUploadProtocol
+      (\ s a -> s{_gaiUploadProtocol = a})
+
+-- | OAuth access token.
+gaiAccessToken :: Lens' GroupsAliasesInsert (Maybe Text)
+gaiAccessToken
+  = lens _gaiAccessToken
+      (\ s a -> s{_gaiAccessToken = a})
+
+-- | Identifies the group in the API request. The value can be the group\'s
+-- email address, group alias, or the unique group ID.
 gaiGroupKey :: Lens' GroupsAliasesInsert Text
 gaiGroupKey
   = lens _gaiGroupKey (\ s a -> s{_gaiGroupKey = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+gaiUploadType :: Lens' GroupsAliasesInsert (Maybe Text)
+gaiUploadType
+  = lens _gaiUploadType
+      (\ s a -> s{_gaiUploadType = a})
 
 -- | Multipart request metadata.
 gaiPayload :: Lens' GroupsAliasesInsert Alias
 gaiPayload
   = lens _gaiPayload (\ s a -> s{_gaiPayload = a})
 
+-- | JSONP
+gaiCallback :: Lens' GroupsAliasesInsert (Maybe Text)
+gaiCallback
+  = lens _gaiCallback (\ s a -> s{_gaiCallback = a})
+
 instance GoogleRequest GroupsAliasesInsert where
         type Rs GroupsAliasesInsert = Alias
         type Scopes GroupsAliasesInsert =
              '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsAliasesInsert'{..}
-          = go _gaiGroupKey (Just AltJSON) _gaiPayload
+          = go _gaiGroupKey _gaiXgafv _gaiUploadProtocol
+              _gaiAccessToken
+              _gaiUploadType
+              _gaiCallback
+              (Just AltJSON)
+              _gaiPayload
               directoryService
           where go
                   = buildClient

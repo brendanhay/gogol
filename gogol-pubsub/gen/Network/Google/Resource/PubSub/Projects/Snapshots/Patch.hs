@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing snapshot. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
+-- Updates an existing snapshot. Snapshots are used in Seek operations,
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
@@ -46,8 +45,8 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.Patch
     , ppCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.snapshots.patch@ method which the
 -- 'ProjectsSnapshotsPatch' request conforms to.
@@ -63,8 +62,7 @@ type ProjectsSnapshotsPatchResource =
                      ReqBody '[JSON] UpdateSnapshotRequest :>
                        Patch '[JSON] Snapshot
 
--- | Updates an existing snapshot. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
+-- | Updates an existing snapshot. Snapshots are used in Seek operations,
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
@@ -72,13 +70,13 @@ type ProjectsSnapshotsPatchResource =
 -- /See:/ 'projectsSnapshotsPatch' smart constructor.
 data ProjectsSnapshotsPatch =
   ProjectsSnapshotsPatch'
-    { _ppXgafv          :: !(Maybe Xgafv)
+    { _ppXgafv :: !(Maybe Xgafv)
     , _ppUploadProtocol :: !(Maybe Text)
-    , _ppAccessToken    :: !(Maybe Text)
-    , _ppUploadType     :: !(Maybe Text)
-    , _ppPayload        :: !UpdateSnapshotRequest
-    , _ppName           :: !Text
-    , _ppCallback       :: !(Maybe Text)
+    , _ppAccessToken :: !(Maybe Text)
+    , _ppUploadType :: !(Maybe Text)
+    , _ppPayload :: !UpdateSnapshotRequest
+    , _ppName :: !Text
+    , _ppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

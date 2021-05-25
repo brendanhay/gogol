@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Initiates a cache invalidation operation, invalidating the specified
--- path, scoped to the specified UrlMap.
+-- path, scoped to the specified UrlMap. For more information, see
+-- [Invalidating cached content](\/cdn\/docs\/invalidating-cached-content).
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.invalidateCache@.
 module Network.Google.Resource.Compute.URLMaps.InvalidateCache
@@ -40,8 +41,8 @@ module Network.Google.Resource.Compute.URLMaps.InvalidateCache
     , umicPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.invalidateCache@ method which the
 -- 'URLMapsInvalidateCache' request conforms to.
@@ -60,15 +61,16 @@ type URLMapsInvalidateCacheResource =
                            Post '[JSON] Operation
 
 -- | Initiates a cache invalidation operation, invalidating the specified
--- path, scoped to the specified UrlMap.
+-- path, scoped to the specified UrlMap. For more information, see
+-- [Invalidating cached content](\/cdn\/docs\/invalidating-cached-content).
 --
 -- /See:/ 'urlMapsInvalidateCache' smart constructor.
 data URLMapsInvalidateCache =
   URLMapsInvalidateCache'
     { _umicRequestId :: !(Maybe Text)
-    , _umicURLMap    :: !Text
-    , _umicProject   :: !Text
-    , _umicPayload   :: !CacheInvalidationRule
+    , _umicURLMap :: !Text
+    , _umicProject :: !Text
+    , _umicPayload :: !CacheInvalidationRule
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

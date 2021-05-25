@@ -142,6 +142,9 @@ module Network.Google.Docs
     -- ** TableColumnPropertiesWidthType
     , TableColumnPropertiesWidthType (..)
 
+    -- ** SectionStyleSectionType
+    , SectionStyleSectionType (..)
+
     -- ** TableRowSuggestedTableRowStyleChanges
     , TableRowSuggestedTableRowStyleChanges
     , tableRowSuggestedTableRowStyleChanges
@@ -152,6 +155,12 @@ module Network.Google.Docs
     , positionedObjectPropertiesSuggestionState
     , popssPositioningSuggestionState
     , popssEmbeddedObjectSuggestionState
+
+    -- ** CreateFootNoteRequest
+    , CreateFootNoteRequest
+    , createFootNoteRequest
+    , cfnrLocation
+    , cfnrEndOfSegmentLocation
 
     -- ** PositionedObjectPositioningSuggestionState
     , PositionedObjectPositioningSuggestionState
@@ -175,6 +184,13 @@ module Network.Google.Docs
     , cpAngle
     , cpOffSetTop
     , cpOffSetLeft
+
+    -- ** ReplaceImageRequest
+    , ReplaceImageRequest
+    , replaceImageRequest
+    , rirImageReplaceMethod
+    , rirImageObjectId
+    , rirURI
 
     -- ** ParagraphStyleSuggestionState
     , ParagraphStyleSuggestionState
@@ -214,6 +230,12 @@ module Network.Google.Docs
     , atSuggestedDeletionIds
     , atTextStyle
     , atType
+
+    -- ** CreateHeaderRequest
+    , CreateHeaderRequest
+    , createHeaderRequest
+    , chrSectionBreakLocation
+    , chrType
 
     -- ** List
     , List
@@ -255,6 +277,11 @@ module Network.Google.Docs
     , ipbrLocation
     , ipbrEndOfSegmentLocation
 
+    -- ** CreateFooterResponse
+    , CreateFooterResponse
+    , createFooterResponse
+    , cfrFooterId
+
     -- ** CreateParagraphBulletsRequestBulletPreset
     , CreateParagraphBulletsRequestBulletPreset (..)
 
@@ -285,6 +312,16 @@ module Network.Google.Docs
     , location
     , lIndex
     , lSegmentId
+
+    -- ** Person
+    , Person
+    , person
+    , pSuggestedInsertionIds
+    , pSuggestedTextStyleChanges
+    , pPersonProperties
+    , pSuggestedDeletionIds
+    , pTextStyle
+    , pPersonId
 
     -- ** TableOfContents
     , TableOfContents
@@ -339,6 +376,13 @@ module Network.Google.Docs
     , paragraphSuggestedPositionedObjectIds
     , pspoiAddtional
 
+    -- ** InsertSectionBreakRequest
+    , InsertSectionBreakRequest
+    , insertSectionBreakRequest
+    , isbrLocation
+    , isbrEndOfSegmentLocation
+    , isbrSectionType
+
     -- ** Link
     , Link
     , link
@@ -374,9 +418,12 @@ module Network.Google.Docs
     -- ** DocumentStyle
     , DocumentStyle
     , documentStyle
+    , dsUseCustomHeaderFooterMargins
     , dsMarginTop
     , dsDefaultFooterId
     , dsFirstPageHeaderId
+    , dsMarginFooter
+    , dsMarginHeader
     , dsFirstPageFooterId
     , dsDefaultHeaderId
     , dsUseEvenPageHeaderFooter
@@ -395,6 +442,18 @@ module Network.Google.Docs
     , body
     , bContent
 
+    -- ** UpdateDocumentStyleRequest
+    , UpdateDocumentStyleRequest
+    , updateDocumentStyleRequest
+    , udsrDocumentStyle
+    , udsrFields
+
+    -- ** CreateFooterRequest
+    , CreateFooterRequest
+    , createFooterRequest
+    , cfrSectionBreakLocation
+    , cfrType
+
     -- ** ListPropertiesSuggestionState
     , ListPropertiesSuggestionState
     , listPropertiesSuggestionState
@@ -405,11 +464,27 @@ module Network.Google.Docs
     , paragraphSuggestedBulletChanges
     , psbcAddtional
 
+    -- ** CreateHeaderResponse
+    , CreateHeaderResponse
+    , createHeaderResponse
+    , chrHeaderId
+
+    -- ** UpdateTableRowStyleRequest
+    , UpdateTableRowStyleRequest
+    , updateTableRowStyleRequest
+    , utrsrRowIndices
+    , utrsrTableStartLocation
+    , utrsrTableRowStyle
+    , utrsrFields
+
     -- ** Response
     , Response
     , response
     , rReplaceAllText
     , rCreateNamedRange
+    , rCreateHeader
+    , rCreateFootNote
+    , rCreateFooter
     , rInsertInlineImage
     , rInsertInlineSheetsChart
 
@@ -453,6 +528,9 @@ module Network.Google.Docs
     , eoDescription
     , eoMarginBottom
 
+    -- ** DocumentsGetSuggestionsViewMode
+    , DocumentsGetSuggestionsViewMode (..)
+
     -- ** ReplaceAllTextResponse
     , ReplaceAllTextResponse
     , replaceAllTextResponse
@@ -461,9 +539,11 @@ module Network.Google.Docs
     -- ** DocumentStyleSuggestionState
     , DocumentStyleSuggestionState
     , documentStyleSuggestionState
+    , dsssMarginHeaderSuggested
     , dsssFirstPageFooterIdSuggested
     , dsssDefaultHeaderIdSuggested
     , dsssUseEvenPageHeaderFooterSuggested
+    , dsssUseCustomHeaderFooterMarginsSuggested
     , dsssPageNumberStartSuggested
     , dsssBackgRoundSuggestionState
     , dsssUseFirstPageHeaderFooterSuggested
@@ -474,6 +554,7 @@ module Network.Google.Docs
     , dsssEvenPageHeaderIdSuggested
     , dsssMarginLeftSuggested
     , dsssMarginRightSuggested
+    , dsssMarginFooterSuggested
     , dsssFirstPageHeaderIdSuggested
     , dsssDefaultFooterIdSuggested
 
@@ -541,6 +622,13 @@ module Network.Google.Docs
     , documentFootNotes
     , dfnAddtional
 
+    -- ** UpdateSectionStyleRequest
+    , UpdateSectionStyleRequest
+    , updateSectionStyleRequest
+    , ussrRange
+    , ussrSectionStyle
+    , ussrFields
+
     -- ** ImageProperties
     , ImageProperties
     , imageProperties
@@ -551,6 +639,12 @@ module Network.Google.Docs
     , ipContrast
     , ipSourceURI
     , ipBrightness
+
+    -- ** InsertTableColumnRequest
+    , InsertTableColumnRequest
+    , insertTableColumnRequest
+    , itcrInsertRight
+    , itcrTableCellLocation
 
     -- ** ParagraphStyleAlignment
     , ParagraphStyleAlignment (..)
@@ -577,6 +671,29 @@ module Network.Google.Docs
     , TableStyle
     , tableStyle
     , tsTableColumnProperties
+
+    -- ** UnmergeTableCellsRequest
+    , UnmergeTableCellsRequest
+    , unmergeTableCellsRequest
+    , utcrTableRange
+
+    -- ** RichLinkProperties
+    , RichLinkProperties
+    , richLinkProperties
+    , rlpURI
+    , rlpMimeType
+    , rlpTitle
+
+    -- ** InsertSectionBreakRequestSectionType
+    , InsertSectionBreakRequestSectionType (..)
+
+    -- ** UpdateTableColumnPropertiesRequest
+    , UpdateTableColumnPropertiesRequest
+    , updateTableColumnPropertiesRequest
+    , utcprTableStartLocation
+    , utcprTableColumnProperties
+    , utcprFields
+    , utcprColumnIndices
 
     -- ** FootNoteReference
     , FootNoteReference
@@ -613,6 +730,12 @@ module Network.Google.Docs
     , nNamedRangeId
     , nRanges
     , nName
+
+    -- ** PersonProperties
+    , PersonProperties
+    , personProperties
+    , ppEmail
+    , ppName
 
     -- ** CropPropertiesSuggestionState
     , CropPropertiesSuggestionState
@@ -698,6 +821,11 @@ module Network.Google.Docs
     , tcsContentAlignment
     , tcsPaddingRight
 
+    -- ** PersonSuggestedTextStyleChanges
+    , PersonSuggestedTextStyleChanges
+    , personSuggestedTextStyleChanges
+    , pstscAddtional
+
     -- ** Header
     , Header
     , header
@@ -736,6 +864,11 @@ module Network.Google.Docs
     , documentSuggestedDocumentStyleChanges
     , dsdscAddtional
 
+    -- ** DeleteHeaderRequest
+    , DeleteHeaderRequest
+    , deleteHeaderRequest
+    , dhrHeaderId
+
     -- ** NamedStyles
     , NamedStyles
     , namedStyles
@@ -750,11 +883,22 @@ module Network.Google.Docs
     , EmbeddedDrawingProperties
     , embeddedDrawingProperties
 
+    -- ** UpdateTableCellStyleRequest
+    , UpdateTableCellStyleRequest
+    , updateTableCellStyleRequest
+    , utcsrTableStartLocation
+    , utcsrTableCellStyle
+    , utcsrTableRange
+    , utcsrFields
+
     -- ** SuggestedTextStyle
     , SuggestedTextStyle
     , suggestedTextStyle
     , stsTextStyle
     , stsTextStyleSuggestionState
+
+    -- ** CreateHeaderRequestType
+    , CreateHeaderRequestType (..)
 
     -- ** SectionStyleColumnSeparatorStyle
     , SectionStyleColumnSeparatorStyle (..)
@@ -770,6 +914,11 @@ module Network.Google.Docs
     , suggestedNamedStyles
     , snsNamedStylesSuggestionState
     , snsNamedStyles
+
+    -- ** MergeTableCellsRequest
+    , MergeTableCellsRequest
+    , mergeTableCellsRequest
+    , mtcrTableRange
 
     -- ** Xgafv
     , Xgafv (..)
@@ -810,6 +959,11 @@ module Network.Google.Docs
     , utsrTextStyle
     , utsrFields
 
+    -- ** RichLinkSuggestedTextStyleChanges
+    , RichLinkSuggestedTextStyleChanges
+    , richLinkSuggestedTextStyleChanges
+    , rlstscAddtional
+
     -- ** InlineObjectElement
     , InlineObjectElement
     , inlineObjectElement
@@ -834,12 +988,22 @@ module Network.Google.Docs
     , nlGlyphType
     , nlStartNumber
 
+    -- ** DeleteFooterRequest
+    , DeleteFooterRequest
+    , deleteFooterRequest
+    , dfrFooterId
+
     -- ** TableCellLocation
     , TableCellLocation
     , tableCellLocation
     , tclColumnIndex
     , tclTableStartLocation
     , tclRowIndex
+
+    -- ** CreateFootNoteResponse
+    , CreateFootNoteResponse
+    , createFootNoteResponse
+    , cfnrFootNoteId
 
     -- ** DeletePositionedObjectRequest
     , DeletePositionedObjectRequest
@@ -911,10 +1075,14 @@ module Network.Google.Docs
     , scrssChartIdSuggested
     , scrssSpreadsheetIdSuggested
 
+    -- ** CreateFooterRequestType
+    , CreateFooterRequestType (..)
+
     -- ** ParagraphElement
     , ParagraphElement
     , paragraphElement
     , peAutoText
+    , pePerson
     , peEndIndex
     , peFootNoteReference
     , peColumnBreak
@@ -922,6 +1090,7 @@ module Network.Google.Docs
     , peEquation
     , pePageBreak
     , peInlineObjectElement
+    , peRichLink
     , peHorizontalRule
     , peStartIndex
 
@@ -951,6 +1120,16 @@ module Network.Google.Docs
     , eossDescriptionSuggested
     , eossMarginRightSuggested
 
+    -- ** RichLink
+    , RichLink
+    , richLink
+    , rlSuggestedInsertionIds
+    , rlSuggestedTextStyleChanges
+    , rlRichLinkId
+    , rlRichLinkProperties
+    , rlSuggestedDeletionIds
+    , rlTextStyle
+
     -- ** InsertTableRequest
     , InsertTableRequest
     , insertTableRequest
@@ -969,6 +1148,13 @@ module Network.Google.Docs
     , LinkedContentReferenceSuggestionState
     , linkedContentReferenceSuggestionState
     , lcrssSheetsChartReferenceSuggestionState
+
+    -- ** ReplaceNamedRangeContentRequest
+    , ReplaceNamedRangeContentRequest
+    , replaceNamedRangeContentRequest
+    , rnrcrText
+    , rnrcrNamedRangeName
+    , rnrcrNamedRangeId
 
     -- ** InlineObjectElementSuggestedTextStyleChanges
     , InlineObjectElementSuggestedTextStyleChanges
@@ -1063,9 +1249,24 @@ module Network.Google.Docs
     -- ** SectionStyle
     , SectionStyle
     , sectionStyle
+    , ssMarginTop
+    , ssDefaultFooterId
+    , ssFirstPageHeaderId
+    , ssMarginFooter
+    , ssMarginHeader
+    , ssFirstPageFooterId
+    , ssSectionType
+    , ssDefaultHeaderId
     , ssColumnSeparatorStyle
     , ssContentDirection
     , ssColumnProperties
+    , ssMarginLeft
+    , ssPageNumberStart
+    , ssUseFirstPageHeaderFooter
+    , ssEvenPageFooterId
+    , ssMarginRight
+    , ssMarginBottom
+    , ssEvenPageHeaderId
 
     -- ** PositionedObjectPositioningLayout
     , PositionedObjectPositioningLayout (..)
@@ -1095,6 +1296,9 @@ module Network.Google.Docs
 
     -- ** DimensionUnit
     , DimensionUnit (..)
+
+    -- ** ReplaceImageRequestImageReplaceMethod
+    , ReplaceImageRequestImageReplaceMethod (..)
 
     -- ** DocumentFooters
     , DocumentFooters
@@ -1192,10 +1396,18 @@ module Network.Google.Docs
     , documentPositionedObjects
     , dpoAddtional
 
+    -- ** TableRange
+    , TableRange
+    , tableRange
+    , trColumnSpan
+    , trRowSpan
+    , trTableCellLocation
+
     -- ** Request'
     , Request'
     , request'
     , reqDeletePositionedObject
+    , reqDeleteFooter
     , reqCreateParagraphBullets
     , reqInsertText
     , reqDeleteParagraphBullets
@@ -1204,12 +1416,27 @@ module Network.Google.Docs
     , reqReplaceAllText
     , reqUpdateParagraphStyle
     , reqCreateNamedRange
+    , reqReplaceImage
+    , reqCreateHeader
     , reqInsertPageBreak
+    , reqCreateFootNote
+    , reqInsertSectionBreak
+    , reqCreateFooter
     , reqDeleteTableColumn
     , reqInsertInlineImage
+    , reqUpdateDocumentStyle
+    , reqUpdateSectionStyle
     , reqDeleteContentRange
+    , reqInsertTableColumn
+    , reqUpdateTableRowStyle
+    , reqUpdateTableColumnProperties
+    , reqUnmergeTableCells
+    , reqMergeTableCells
     , reqInsertTableRow
     , reqUpdateTextStyle
+    , reqDeleteHeader
+    , reqUpdateTableCellStyle
+    , reqReplaceNamedRangeContent
     , reqInsertTable
 
     -- ** PositionedObjectSuggestedPositionedObjectPropertiesChanges
@@ -1224,11 +1451,11 @@ module Network.Google.Docs
     , smcText
     ) where
 
-import           Network.Google.Docs.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Docs.Documents.BatchUpdate
-import           Network.Google.Resource.Docs.Documents.Create
-import           Network.Google.Resource.Docs.Documents.Get
+import Network.Google.Prelude
+import Network.Google.Docs.Types
+import Network.Google.Resource.Docs.Documents.BatchUpdate
+import Network.Google.Resource.Docs.Documents.Create
+import Network.Google.Resource.Docs.Documents.Get
 
 {- $resources
 TODO

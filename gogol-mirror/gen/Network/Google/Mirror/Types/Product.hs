@@ -17,8 +17,8 @@
 --
 module Network.Google.Mirror.Types.Product where
 
-import           Network.Google.Mirror.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types.Sum
+import Network.Google.Prelude
 
 -- | Controls how notifications for a timeline item are presented to the
 -- user.
@@ -27,7 +27,7 @@ import           Network.Google.Prelude
 data NotificationConfig =
   NotificationConfig'
     { _ncDeliveryTime :: !(Maybe DateTime')
-    , _ncLevel        :: !(Maybe Text)
+    , _ncLevel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,7 +115,7 @@ instance ToJSON Command where
 -- /See:/ 'locationsListResponse' smart constructor.
 data LocationsListResponse =
   LocationsListResponse'
-    { _llrKind  :: !Text
+    { _llrKind :: !Text
     , _llrItems :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -166,14 +166,14 @@ instance ToJSON LocationsListResponse where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lKind        :: !Text
-    , _lLatitude    :: !(Maybe (Textual Double))
-    , _lAddress     :: !(Maybe Text)
+    { _lKind :: !Text
+    , _lLatitude :: !(Maybe (Textual Double))
+    , _lAddress :: !(Maybe Text)
     , _lDisplayName :: !(Maybe Text)
-    , _lId          :: !(Maybe Text)
-    , _lAccuracy    :: !(Maybe (Textual Double))
-    , _lLongitude   :: !(Maybe (Textual Double))
-    , _lTimestamp   :: !(Maybe DateTime')
+    , _lId :: !(Maybe Text)
+    , _lAccuracy :: !(Maybe (Textual Double))
+    , _lLongitude :: !(Maybe (Textual Double))
+    , _lTimestamp :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -286,12 +286,12 @@ instance ToJSON Location where
 -- /See:/ 'notification' smart constructor.
 data Notification =
   Notification'
-    { _nOperation   :: !(Maybe Text)
-    , _nItemId      :: !(Maybe Text)
-    , _nCollection  :: !(Maybe Text)
+    { _nOperation :: !(Maybe Text)
+    , _nItemId :: !(Maybe Text)
+    , _nCollection :: !(Maybe Text)
     , _nUserActions :: !(Maybe [UserAction])
     , _nVerifyToken :: !(Maybe Text)
-    , _nUserToken   :: !(Maybe Text)
+    , _nUserToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -384,18 +384,18 @@ instance ToJSON Notification where
 -- /See:/ 'contact' smart constructor.
 data Contact =
   Contact'
-    { _conAcceptCommands  :: !(Maybe [Command])
+    { _conAcceptCommands :: !(Maybe [Command])
     , _conSharingFeatures :: !(Maybe [Text])
-    , _conImageURLs       :: !(Maybe [Text])
-    , _conPriority        :: !(Maybe (Textual Word32))
-    , _conKind            :: !Text
-    , _conAcceptTypes     :: !(Maybe [Text])
-    , _conPhoneNumber     :: !(Maybe Text)
-    , _conDisplayName     :: !(Maybe Text)
-    , _conSource          :: !(Maybe Text)
-    , _conId              :: !(Maybe Text)
-    , _conType            :: !(Maybe Text)
-    , _conSpeakableName   :: !(Maybe Text)
+    , _conImageURLs :: !(Maybe [Text])
+    , _conPriority :: !(Maybe (Textual Word32))
+    , _conKind :: !Text
+    , _conAcceptTypes :: !(Maybe [Text])
+    , _conPhoneNumber :: !(Maybe Text)
+    , _conDisplayName :: !(Maybe Text)
+    , _conSource :: !(Maybe Text)
+    , _conId :: !(Maybe Text)
+    , _conType :: !(Maybe Text)
+    , _conSpeakableName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -577,7 +577,7 @@ instance ToJSON Contact where
 data AuthToken =
   AuthToken'
     { _atAuthToken :: !(Maybe Text)
-    , _atType      :: !(Maybe Text)
+    , _atType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -621,7 +621,7 @@ instance ToJSON AuthToken where
 -- /See:/ 'attachmentsListResponse' smart constructor.
 data AttachmentsListResponse =
   AttachmentsListResponse'
-    { _alrKind  :: !Text
+    { _alrKind :: !Text
     , _alrItems :: !(Maybe [Attachment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -672,12 +672,12 @@ instance ToJSON AttachmentsListResponse where
 -- /See:/ 'menuItem' smart constructor.
 data MenuItem =
   MenuItem'
-    { _miValues             :: !(Maybe [MenuValue])
+    { _miValues :: !(Maybe [MenuValue])
     , _miRemoveWhenSelected :: !(Maybe Bool)
-    , _miAction             :: !(Maybe Text)
-    , _miPayload            :: !(Maybe Text)
-    , _miContextualCommand  :: !(Maybe Text)
-    , _miId                 :: !(Maybe Text)
+    , _miAction :: !(Maybe Text)
+    , _miPayload :: !(Maybe Text)
+    , _miContextualCommand :: !(Maybe Text)
+    , _miId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -810,9 +810,9 @@ instance ToJSON MenuItem where
 -- /See:/ 'setting' smart constructor.
 data Setting =
   Setting'
-    { _sKind  :: !Text
+    { _sKind :: !Text
     , _sValue :: !(Maybe Text)
-    , _sId    :: !(Maybe Text)
+    , _sId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -870,10 +870,10 @@ instance ToJSON Setting where
 -- /See:/ 'attachment' smart constructor.
 data Attachment =
   Attachment'
-    { _aContentURL          :: !(Maybe Text)
-    , _aId                  :: !(Maybe Text)
+    { _aContentURL :: !(Maybe Text)
+    , _aId :: !(Maybe Text)
     , _aIsProcessingContent :: !(Maybe Bool)
-    , _aContentType         :: !(Maybe Text)
+    , _aContentType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -946,9 +946,9 @@ instance ToJSON Attachment where
 data Account =
   Account'
     { _aAuthTokens :: !(Maybe [AuthToken])
-    , _aUserData   :: !(Maybe [UserData])
-    , _aPassword   :: !(Maybe Text)
-    , _aFeatures   :: !(Maybe [Text])
+    , _aUserData :: !(Maybe [UserData])
+    , _aPassword :: !(Maybe Text)
+    , _aFeatures :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1021,7 +1021,7 @@ instance ToJSON Account where
 data UserData =
   UserData'
     { _udValue :: !(Maybe Text)
-    , _udKey   :: !(Maybe Text)
+    , _udKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1062,7 +1062,7 @@ instance ToJSON UserData where
 data UserAction =
   UserAction'
     { _uaPayload :: !(Maybe Text)
-    , _uaType    :: !(Maybe Text)
+    , _uaType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1116,8 +1116,8 @@ instance ToJSON UserAction where
 data TimelineListResponse =
   TimelineListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
-    , _tlrKind          :: !Text
-    , _tlrItems         :: !(Maybe [TimelineItem])
+    , _tlrKind :: !Text
+    , _tlrItems :: !(Maybe [TimelineItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1182,7 +1182,7 @@ instance ToJSON TimelineListResponse where
 -- /See:/ 'contactsListResponse' smart constructor.
 data ContactsListResponse =
   ContactsListResponse'
-    { _clrKind  :: !Text
+    { _clrKind :: !Text
     , _clrItems :: !(Maybe [Contact])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1232,9 +1232,9 @@ instance ToJSON ContactsListResponse where
 -- /See:/ 'menuValue' smart constructor.
 data MenuValue =
   MenuValue'
-    { _mvState       :: !(Maybe Text)
+    { _mvState :: !(Maybe Text)
     , _mvDisplayName :: !(Maybe Text)
-    , _mvIconURL     :: !(Maybe Text)
+    , _mvIconURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1297,15 +1297,15 @@ instance ToJSON MenuValue where
 -- /See:/ 'subscription' smart constructor.
 data Subscription =
   Subscription'
-    { _subCallbackURL  :: !(Maybe Text)
-    , _subOperation    :: !(Maybe [Text])
+    { _subCallbackURL :: !(Maybe Text)
+    , _subOperation :: !(Maybe [Text])
     , _subNotification :: !(Maybe Notification)
-    , _subKind         :: !Text
-    , _subCollection   :: !(Maybe Text)
-    , _subVerifyToken  :: !(Maybe Text)
-    , _subUserToken    :: !(Maybe Text)
-    , _subId           :: !(Maybe Text)
-    , _subUpdated      :: !(Maybe DateTime')
+    , _subKind :: !Text
+    , _subCollection :: !(Maybe Text)
+    , _subVerifyToken :: !(Maybe Text)
+    , _subUserToken :: !(Maybe Text)
+    , _subId :: !(Maybe Text)
+    , _subUpdated :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1443,32 +1443,32 @@ instance ToJSON Subscription where
 -- /See:/ 'timelineItem' smart constructor.
 data TimelineItem =
   TimelineItem'
-    { _tiCreator       :: !(Maybe Contact)
-    , _tiDisplayTime   :: !(Maybe DateTime')
-    , _tiEtag          :: !(Maybe Text)
-    , _tiIsDeleted     :: !(Maybe Bool)
-    , _tiPinScore      :: !(Maybe (Textual Int32))
-    , _tiAttachments   :: !(Maybe [Attachment])
-    , _tiLocation      :: !(Maybe Location)
-    , _tiMenuItems     :: !(Maybe [MenuItem])
-    , _tiNotification  :: !(Maybe NotificationConfig)
-    , _tiText          :: !(Maybe Text)
-    , _tiKind          :: !Text
-    , _tiCreated       :: !(Maybe DateTime')
+    { _tiCreator :: !(Maybe Contact)
+    , _tiDisplayTime :: !(Maybe DateTime')
+    , _tiEtag :: !(Maybe Text)
+    , _tiIsDeleted :: !(Maybe Bool)
+    , _tiPinScore :: !(Maybe (Textual Int32))
+    , _tiAttachments :: !(Maybe [Attachment])
+    , _tiLocation :: !(Maybe Location)
+    , _tiMenuItems :: !(Maybe [MenuItem])
+    , _tiNotification :: !(Maybe NotificationConfig)
+    , _tiText :: !(Maybe Text)
+    , _tiKind :: !Text
+    , _tiCreated :: !(Maybe DateTime')
     , _tiSpeakableText :: !(Maybe Text)
     , _tiIsBundleCover :: !(Maybe Bool)
     , _tiSpeakableType :: !(Maybe Text)
-    , _tiBundleId      :: !(Maybe Text)
-    , _tiCanonicalURL  :: !(Maybe Text)
-    , _tiSelfLink      :: !(Maybe Text)
-    , _tiIsPinned      :: !(Maybe Bool)
-    , _tiSourceItemId  :: !(Maybe Text)
-    , _tiId            :: !(Maybe Text)
-    , _tiHTML          :: !(Maybe Text)
-    , _tiUpdated       :: !(Maybe DateTime')
-    , _tiRecipients    :: !(Maybe [Contact])
-    , _tiTitle         :: !(Maybe Text)
-    , _tiInReplyTo     :: !(Maybe Text)
+    , _tiBundleId :: !(Maybe Text)
+    , _tiCanonicalURL :: !(Maybe Text)
+    , _tiSelfLink :: !(Maybe Text)
+    , _tiIsPinned :: !(Maybe Bool)
+    , _tiSourceItemId :: !(Maybe Text)
+    , _tiId :: !(Maybe Text)
+    , _tiHTML :: !(Maybe Text)
+    , _tiUpdated :: !(Maybe DateTime')
+    , _tiRecipients :: !(Maybe [Contact])
+    , _tiTitle :: !(Maybe Text)
+    , _tiInReplyTo :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1827,7 +1827,7 @@ instance ToJSON TimelineItem where
 -- /See:/ 'subscriptionsListResponse' smart constructor.
 data SubscriptionsListResponse =
   SubscriptionsListResponse'
-    { _slrKind  :: !Text
+    { _slrKind :: !Text
     , _slrItems :: !(Maybe [Subscription])
     }
   deriving (Eq, Show, Data, Typeable, Generic)

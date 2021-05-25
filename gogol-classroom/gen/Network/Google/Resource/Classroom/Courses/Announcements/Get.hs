@@ -46,8 +46,8 @@ module Network.Google.Resource.Classroom.Courses.Announcements.Get
     , cagCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.announcements.get@ method which the
 -- 'CoursesAnnouncementsGet' request conforms to.
@@ -73,13 +73,13 @@ type CoursesAnnouncementsGetResource =
 -- /See:/ 'coursesAnnouncementsGet' smart constructor.
 data CoursesAnnouncementsGet =
   CoursesAnnouncementsGet'
-    { _cagXgafv          :: !(Maybe Xgafv)
+    { _cagXgafv :: !(Maybe Xgafv)
     , _cagUploadProtocol :: !(Maybe Text)
-    , _cagCourseId       :: !Text
-    , _cagAccessToken    :: !(Maybe Text)
-    , _cagUploadType     :: !(Maybe Text)
-    , _cagId             :: !Text
-    , _cagCallback       :: !(Maybe Text)
+    , _cagCourseId :: !Text
+    , _cagAccessToken :: !(Maybe Text)
+    , _cagUploadType :: !(Maybe Text)
+    , _cagId :: !Text
+    , _cagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

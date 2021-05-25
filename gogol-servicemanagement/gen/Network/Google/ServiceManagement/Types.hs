@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -24,6 +24,13 @@ module Network.Google.ServiceManagement.Types
     , cloudPlatformScope
     , serviceManagementReadOnlyScope
     , serviceManagementScope
+
+    -- * JwtLocation
+    , JwtLocation
+    , jwtLocation
+    , jlValuePrefix
+    , jlHeader
+    , jlQuery
 
     -- * MetricDescriptorValueType
     , MetricDescriptorValueType (..)
@@ -60,9 +67,13 @@ module Network.Google.ServiceManagement.Types
     , mrdLabels
     , mrdType
     , mrdDescription
+    , mrdLaunchStage
 
     -- * BackendRulePathTranslation
     , BackendRulePathTranslation (..)
+
+    -- * ServicesConfigsGetView
+    , ServicesConfigsGetView (..)
 
     -- * DocumentationRule
     , DocumentationRule
@@ -146,6 +157,7 @@ module Network.Google.ServiceManagement.Types
     -- * MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
+    , mdMonitoredResourceTypes
     , mdMetricKind
     , mdName
     , mdMetadata
@@ -155,6 +167,7 @@ module Network.Google.ServiceManagement.Types
     , mdValueType
     , mdDescription
     , mdUnit
+    , mdLaunchStage
 
     -- * ListOperationsResponse
     , ListOperationsResponse
@@ -162,17 +175,22 @@ module Network.Google.ServiceManagement.Types
     , lorNextPageToken
     , lorOperations
 
+    -- * ServicesGetConfigView
+    , ServicesGetConfigView (..)
+
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
 
     -- * BackendRule
     , BackendRule
     , backendRule
     , brJwtAudience
     , brSelector
-    , brMinDeadline
     , brAddress
+    , brProtocol
+    , brDisableAuth
     , brOperationDeadline
     , brDeadline
     , brPathTranslation
@@ -229,7 +247,6 @@ module Network.Google.ServiceManagement.Types
     , sAPIs
     , sTypes
     , sSystemTypes
-    , sExperimental
     , sMonitoredResources
     , sBackend
     , sMonitoring
@@ -259,11 +276,6 @@ module Network.Google.ServiceManagement.Types
     , oResponse
     , oName
     , oMetadata
-
-    -- * EnableServiceRequest
-    , EnableServiceRequest
-    , enableServiceRequest
-    , esrConsumerId
 
     -- * ListServiceConfigsResponse
     , ListServiceConfigsResponse
@@ -314,6 +326,12 @@ module Network.Google.ServiceManagement.Types
     , mRoot
     , mName
 
+    -- * OperationInfo
+    , OperationInfo
+    , operationInfo
+    , oiMetadataType
+    , oiResponseType
+
     -- * CustomHTTPPattern
     , CustomHTTPPattern
     , customHTTPPattern
@@ -352,6 +370,11 @@ module Network.Google.ServiceManagement.Types
     , arAllowWithoutCredential
     , arOAuth
 
+    -- * GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
+
     -- * StepStatus
     , StepStatus (..)
 
@@ -374,21 +397,11 @@ module Network.Google.ServiceManagement.Types
     , trafficPercentStrategyPercentages
     , tpspAddtional
 
-    -- * AuthorizationConfig
-    , AuthorizationConfig
-    , authorizationConfig
-    , acProvider
-
     -- * APISyntax
     , APISyntax (..)
 
     -- * TypeSyntax
     , TypeSyntax (..)
-
-    -- * Experimental
-    , Experimental
-    , experimental
-    , eAuthorization
 
     -- * ListServiceRolloutsResponse
     , ListServiceRolloutsResponse
@@ -459,6 +472,10 @@ module Network.Google.ServiceManagement.Types
     , csFiles
     , csId
 
+    -- * EnableServiceResponse
+    , EnableServiceResponse
+    , enableServiceResponse
+
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
 
@@ -469,6 +486,7 @@ module Network.Google.ServiceManagement.Types
     , dDocumentationRootURL
     , dRules
     , dPages
+    , dServiceRootURL
     , dOverview
 
     -- * Step
@@ -511,6 +529,9 @@ module Network.Google.ServiceManagement.Types
     , lValueType
     , lDescription
 
+    -- * MonitoredResourceDescriptorLaunchStage
+    , MonitoredResourceDescriptorLaunchStage (..)
+
     -- * Usage
     , Usage
     , usage
@@ -526,6 +547,12 @@ module Network.Google.ServiceManagement.Types
     , testIAMPermissionsResponse
     , tiamprPermissions
 
+    -- * FlowErrorDetails
+    , FlowErrorDetails
+    , flowErrorDetails
+    , fedFlowStepId
+    , fedExceptionType
+
     -- * GenerateConfigReportRequestNewConfig
     , GenerateConfigReportRequestNewConfig
     , generateConfigReportRequestNewConfig
@@ -536,11 +563,6 @@ module Network.Google.ServiceManagement.Types
     , hTTP
     , hRules
     , hFullyDecodeReservedExpansion
-
-    -- * DisableServiceRequest
-    , DisableServiceRequest
-    , disableServiceRequest
-    , dsrConsumerId
 
     -- * Policy
     , Policy
@@ -594,10 +616,8 @@ module Network.Google.ServiceManagement.Types
     -- * Endpoint
     , Endpoint
     , endpoint
-    , eAliases
     , eAllowCORS
     , eName
-    , eFeatures
     , eTarget
 
     -- * OAuthRequirements
@@ -725,11 +745,21 @@ module Network.Google.ServiceManagement.Types
     , operationResponse
     , orAddtional
 
+    -- * MetricDescriptorLaunchStage
+    , MetricDescriptorLaunchStage (..)
+
+    -- * ResourceReference
+    , ResourceReference
+    , resourceReference
+    , rrChildType
+    , rrType
+
     -- * AuthProvider
     , AuthProvider
     , authProvider
     , apJWKsURI
     , apAudiences
+    , apJwtLocations
     , apId
     , apAuthorizationURL
     , apIssuer
@@ -751,9 +781,9 @@ module Network.Google.ServiceManagement.Types
     , crAllowedResponseExtensions
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types.Product
-import           Network.Google.ServiceManagement.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types.Product
+import Network.Google.ServiceManagement.Types.Sum
 
 -- | Default request referring to version 'v1' of the Service Management API. This contains the host and root path used as a starting point for constructing service requests.
 serviceManagementService :: ServiceConfig
@@ -765,7 +795,7 @@ serviceManagementService
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
 cloudPlatformReadOnlyScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
     , mgpAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.patch@ method which the
 -- 'ManagementGoalsPatch' request conforms to.
@@ -66,10 +66,10 @@ type ManagementGoalsPatchResource =
 data ManagementGoalsPatch =
   ManagementGoalsPatch'
     { _mgpWebPropertyId :: !Text
-    , _mgpGoalId        :: !Text
-    , _mgpProFileId     :: !Text
-    , _mgpPayload       :: !Goal
-    , _mgpAccountId     :: !Text
+    , _mgpGoalId :: !Text
+    , _mgpProFileId :: !Text
+    , _mgpPayload :: !Goal
+    , _mgpAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

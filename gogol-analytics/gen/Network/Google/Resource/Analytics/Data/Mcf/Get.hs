@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Data.Mcf.Get
     , dmgStartDate
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.data.mcf.get@ method which the
 -- 'DataMcfGet' request conforms to.
@@ -72,16 +72,16 @@ type DataMcfGetResource =
 -- /See:/ 'dataMcfGet' smart constructor.
 data DataMcfGet =
   DataMcfGet'
-    { _dmgMetrics       :: !Text
+    { _dmgMetrics :: !Text
     , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
-    , _dmgFilters       :: !(Maybe Text)
-    , _dmgIds           :: !Text
-    , _dmgEndDate       :: !Text
-    , _dmgSort          :: !(Maybe Text)
-    , _dmgDimensions    :: !(Maybe Text)
-    , _dmgStartIndex    :: !(Maybe (Textual Int32))
-    , _dmgMaxResults    :: !(Maybe (Textual Int32))
-    , _dmgStartDate     :: !Text
+    , _dmgFilters :: !(Maybe Text)
+    , _dmgIds :: !Text
+    , _dmgEndDate :: !Text
+    , _dmgSort :: !(Maybe Text)
+    , _dmgDimensions :: !(Maybe Text)
+    , _dmgStartIndex :: !(Maybe (Textual Int32))
+    , _dmgMaxResults :: !(Maybe (Textual Int32))
+    , _dmgStartDate :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

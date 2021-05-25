@@ -42,12 +42,13 @@ module Network.Google.Resource.DLP.Projects.DeidentifyTemplates.List
     , pdtlAccessToken
     , pdtlUploadType
     , pdtlPageToken
+    , pdtlLocationId
     , pdtlPageSize
     , pdtlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.deidentifyTemplates.list@ method which the
 -- 'ProjectsDeidentifyTemplatesList' request conforms to.
@@ -61,11 +62,12 @@ type ProjectsDeidentifyTemplatesListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
+                       QueryParam "locationId" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
 
 -- | Lists DeidentifyTemplates. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn
@@ -74,15 +76,16 @@ type ProjectsDeidentifyTemplatesListResource =
 -- /See:/ 'projectsDeidentifyTemplatesList' smart constructor.
 data ProjectsDeidentifyTemplatesList =
   ProjectsDeidentifyTemplatesList'
-    { _pdtlParent         :: !Text
-    , _pdtlXgafv          :: !(Maybe Xgafv)
+    { _pdtlParent :: !Text
+    , _pdtlXgafv :: !(Maybe Xgafv)
     , _pdtlUploadProtocol :: !(Maybe Text)
-    , _pdtlOrderBy        :: !(Maybe Text)
-    , _pdtlAccessToken    :: !(Maybe Text)
-    , _pdtlUploadType     :: !(Maybe Text)
-    , _pdtlPageToken      :: !(Maybe Text)
-    , _pdtlPageSize       :: !(Maybe (Textual Int32))
-    , _pdtlCallback       :: !(Maybe Text)
+    , _pdtlOrderBy :: !(Maybe Text)
+    , _pdtlAccessToken :: !(Maybe Text)
+    , _pdtlUploadType :: !(Maybe Text)
+    , _pdtlPageToken :: !(Maybe Text)
+    , _pdtlLocationId :: !(Maybe Text)
+    , _pdtlPageSize :: !(Maybe (Textual Int32))
+    , _pdtlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,6 +108,8 @@ data ProjectsDeidentifyTemplatesList =
 --
 -- * 'pdtlPageToken'
 --
+-- * 'pdtlLocationId'
+--
 -- * 'pdtlPageSize'
 --
 -- * 'pdtlCallback'
@@ -120,13 +125,26 @@ projectsDeidentifyTemplatesList pPdtlParent_ =
     , _pdtlAccessToken = Nothing
     , _pdtlUploadType = Nothing
     , _pdtlPageToken = Nothing
+    , _pdtlLocationId = Nothing
     , _pdtlPageSize = Nothing
     , _pdtlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pdtlParent :: Lens' ProjectsDeidentifyTemplatesList Text
 pdtlParent
   = lens _pdtlParent (\ s a -> s{_pdtlParent = a})
@@ -142,11 +160,11 @@ pdtlUploadProtocol
   = lens _pdtlUploadProtocol
       (\ s a -> s{_pdtlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc,update_time, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the template was created. -
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc,update_time, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the template was created. -
 -- \`update_time\`: corresponds to time the template was last updated. -
 -- \`name\`: corresponds to template\'s name. - \`display_name\`:
 -- corresponds to template\'s display name.
@@ -166,15 +184,21 @@ pdtlUploadType
   = lens _pdtlUploadType
       (\ s a -> s{_pdtlUploadType = a})
 
--- | Optional page token to continue retrieval. Comes from previous call to
+-- | Page token to continue retrieval. Comes from previous call to
 -- \`ListDeidentifyTemplates\`.
 pdtlPageToken :: Lens' ProjectsDeidentifyTemplatesList (Maybe Text)
 pdtlPageToken
   = lens _pdtlPageToken
       (\ s a -> s{_pdtlPageToken = a})
 
--- | Optional size of the page, can be limited by server. If zero server
--- returns a page of max size 100.
+-- | Deprecated. This field has no effect.
+pdtlLocationId :: Lens' ProjectsDeidentifyTemplatesList (Maybe Text)
+pdtlLocationId
+  = lens _pdtlLocationId
+      (\ s a -> s{_pdtlLocationId = a})
+
+-- | Size of the page, can be limited by server. If zero server returns a
+-- page of max size 100.
 pdtlPageSize :: Lens' ProjectsDeidentifyTemplatesList (Maybe Int32)
 pdtlPageSize
   = lens _pdtlPageSize (\ s a -> s{_pdtlPageSize = a})
@@ -198,6 +222,7 @@ instance GoogleRequest
               _pdtlAccessToken
               _pdtlUploadType
               _pdtlPageToken
+              _pdtlLocationId
               _pdtlPageSize
               _pdtlCallback
               (Just AltJSON)

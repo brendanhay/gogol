@@ -35,8 +35,8 @@ module Network.Google.Resource.Drive.About.Get
 
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.about.get@ method which the
 -- 'AboutGet' request conforms to.

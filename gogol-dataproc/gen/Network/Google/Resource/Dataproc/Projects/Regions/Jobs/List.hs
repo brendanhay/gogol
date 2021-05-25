@@ -47,8 +47,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.List
     , prjlCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.jobs.list@ method which the
 -- 'ProjectsRegionsJobsList' request conforms to.
@@ -59,7 +59,9 @@ type ProjectsRegionsJobsListResource =
            "regions" :>
              Capture "region" Text :>
                "jobs" :>
-                 QueryParam "jobStateMatcher" Text :>
+                 QueryParam "jobStateMatcher"
+                   ProjectsRegionsJobsListJobStateMatcher
+                   :>
                    QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
                        QueryParam "access_token" Text :>
@@ -77,18 +79,18 @@ type ProjectsRegionsJobsListResource =
 -- /See:/ 'projectsRegionsJobsList' smart constructor.
 data ProjectsRegionsJobsList =
   ProjectsRegionsJobsList'
-    { _prjlJobStateMatcher :: !(Maybe Text)
-    , _prjlXgafv           :: !(Maybe Xgafv)
-    , _prjlUploadProtocol  :: !(Maybe Text)
-    , _prjlAccessToken     :: !(Maybe Text)
-    , _prjlUploadType      :: !(Maybe Text)
-    , _prjlClusterName     :: !(Maybe Text)
-    , _prjlFilter          :: !(Maybe Text)
-    , _prjlRegion          :: !Text
-    , _prjlPageToken       :: !(Maybe Text)
-    , _prjlProjectId       :: !Text
-    , _prjlPageSize        :: !(Maybe (Textual Int32))
-    , _prjlCallback        :: !(Maybe Text)
+    { _prjlJobStateMatcher :: !(Maybe ProjectsRegionsJobsListJobStateMatcher)
+    , _prjlXgafv :: !(Maybe Xgafv)
+    , _prjlUploadProtocol :: !(Maybe Text)
+    , _prjlAccessToken :: !(Maybe Text)
+    , _prjlUploadType :: !(Maybe Text)
+    , _prjlClusterName :: !(Maybe Text)
+    , _prjlFilter :: !(Maybe Text)
+    , _prjlRegion :: !Text
+    , _prjlPageToken :: !(Maybe Text)
+    , _prjlProjectId :: !Text
+    , _prjlPageSize :: !(Maybe (Textual Int32))
+    , _prjlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,7 +145,7 @@ projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
 
 -- | Optional. Specifies enumerated categories of jobs to list. (default =
 -- match ALL jobs).If filter is provided, jobStateMatcher will be ignored.
-prjlJobStateMatcher :: Lens' ProjectsRegionsJobsList (Maybe Text)
+prjlJobStateMatcher :: Lens' ProjectsRegionsJobsList (Maybe ProjectsRegionsJobsListJobStateMatcher)
 prjlJobStateMatcher
   = lens _prjlJobStateMatcher
       (\ s a -> s{_prjlJobStateMatcher = a})
@@ -190,7 +192,7 @@ prjlFilter :: Lens' ProjectsRegionsJobsList (Maybe Text)
 prjlFilter
   = lens _prjlFilter (\ s a -> s{_prjlFilter = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prjlRegion :: Lens' ProjectsRegionsJobsList Text
 prjlRegion
   = lens _prjlRegion (\ s a -> s{_prjlRegion = a})

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -52,9 +52,9 @@ module Network.Google.LibraryAgent.Types
     , gelvbTitle
     ) where
 
-import           Network.Google.LibraryAgent.Types.Product
-import           Network.Google.LibraryAgent.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.LibraryAgent.Types.Product
+import Network.Google.LibraryAgent.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Library Agent API. This contains the host and root path used as a starting point for constructing service requests.
 libraryAgentService :: ServiceConfig
@@ -62,6 +62,6 @@ libraryAgentService
   = defaultService (ServiceId "libraryagent:v1")
       "libraryagent.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

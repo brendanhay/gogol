@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Disks.Get
     , dgZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.get@ method which the
 -- 'DisksGet' request conforms to.
@@ -62,8 +62,8 @@ type DisksGetResource =
 data DisksGet =
   DisksGet'
     { _dgProject :: !Text
-    , _dgDisk    :: !Text
-    , _dgZone    :: !Text
+    , _dgDisk :: !Text
+    , _dgZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -48,8 +48,8 @@ module Network.Google.Resource.Genomics.Projects.Operations.Cancel
     , pocCallback
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @genomics.projects.operations.cancel@ method which the
 -- 'ProjectsOperationsCancel' request conforms to.
@@ -76,13 +76,13 @@ type ProjectsOperationsCancelResource =
 -- /See:/ 'projectsOperationsCancel' smart constructor.
 data ProjectsOperationsCancel =
   ProjectsOperationsCancel'
-    { _pocXgafv          :: !(Maybe Xgafv)
+    { _pocXgafv :: !(Maybe Xgafv)
     , _pocUploadProtocol :: !(Maybe Text)
-    , _pocAccessToken    :: !(Maybe Text)
-    , _pocUploadType     :: !(Maybe Text)
-    , _pocPayload        :: !CancelOperationRequest
-    , _pocName           :: !Text
-    , _pocCallback       :: !(Maybe Text)
+    , _pocAccessToken :: !(Maybe Text)
+    , _pocUploadType :: !(Maybe Text)
+    , _pocPayload :: !CancelOperationRequest
+    , _pocName :: !Text
+    , _pocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

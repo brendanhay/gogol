@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
     , hhcpHTTPSHealthCheck
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.httpsHealthChecks.patch@ method which the
 -- 'HTTPSHealthChecksPatch' request conforms to.
@@ -66,9 +66,9 @@ type HTTPSHealthChecksPatchResource =
 -- /See:/ 'httpsHealthChecksPatch' smart constructor.
 data HTTPSHealthChecksPatch =
   HTTPSHealthChecksPatch'
-    { _hhcpRequestId        :: !(Maybe Text)
-    , _hhcpProject          :: !Text
-    , _hhcpPayload          :: !HTTPSHealthCheck
+    { _hhcpRequestId :: !(Maybe Text)
+    , _hhcpProject :: !Text
+    , _hhcpPayload :: !HTTPSHealthCheck
     , _hhcpHTTPSHealthCheck :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

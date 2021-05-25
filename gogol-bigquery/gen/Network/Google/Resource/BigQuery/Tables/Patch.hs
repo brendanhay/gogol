@@ -42,8 +42,8 @@ module Network.Google.Resource.BigQuery.Tables.Patch
     , tpTableId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.patch@ method which the
 -- 'TablesPatch' request conforms to.
@@ -67,10 +67,10 @@ type TablesPatchResource =
 -- /See:/ 'tablesPatch' smart constructor.
 data TablesPatch =
   TablesPatch'
-    { _tpPayload   :: !Table
+    { _tpPayload :: !Table
     , _tpDataSetId :: !Text
     , _tpProjectId :: !Text
-    , _tpTableId   :: !Text
+    , _tpTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

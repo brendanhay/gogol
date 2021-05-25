@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.Custom
     , pvclCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.vendors.customers.list@ method which the
 -- 'PartnersVendorsCustomersList' request conforms to.
@@ -67,14 +67,14 @@ type PartnersVendorsCustomersListResource =
 -- /See:/ 'partnersVendorsCustomersList' smart constructor.
 data PartnersVendorsCustomersList =
   PartnersVendorsCustomersList'
-    { _pvclParent         :: !Text
-    , _pvclXgafv          :: !(Maybe Xgafv)
+    { _pvclParent :: !Text
+    , _pvclXgafv :: !(Maybe Xgafv)
     , _pvclUploadProtocol :: !(Maybe Text)
-    , _pvclAccessToken    :: !(Maybe Text)
-    , _pvclUploadType     :: !(Maybe Text)
-    , _pvclPageToken      :: !(Maybe Text)
-    , _pvclPageSize       :: !(Maybe (Textual Int32))
-    , _pvclCallback       :: !(Maybe Text)
+    , _pvclAccessToken :: !(Maybe Text)
+    , _pvclUploadType :: !(Maybe Text)
+    , _pvclPageToken :: !(Maybe Text)
+    , _pvclPageSize :: !(Maybe (Textual Int32))
+    , _pvclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

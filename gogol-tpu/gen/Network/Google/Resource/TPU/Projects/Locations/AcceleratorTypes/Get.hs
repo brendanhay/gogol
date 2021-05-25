@@ -41,8 +41,8 @@ module Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.Get
     , platgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.acceleratorTypes.get@ method which the
 -- 'ProjectsLocationsAcceleratorTypesGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsLocationsAcceleratorTypesGetResource =
 -- /See:/ 'projectsLocationsAcceleratorTypesGet' smart constructor.
 data ProjectsLocationsAcceleratorTypesGet =
   ProjectsLocationsAcceleratorTypesGet'
-    { _platgXgafv          :: !(Maybe Xgafv)
+    { _platgXgafv :: !(Maybe Xgafv)
     , _platgUploadProtocol :: !(Maybe Text)
-    , _platgAccessToken    :: !(Maybe Text)
-    , _platgUploadType     :: !(Maybe Text)
-    , _platgName           :: !Text
-    , _platgCallback       :: !(Maybe Text)
+    , _platgAccessToken :: !(Maybe Text)
+    , _platgUploadType :: !(Maybe Text)
+    , _platgName :: !Text
+    , _platgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,7 +124,7 @@ platgUploadType
   = lens _platgUploadType
       (\ s a -> s{_platgUploadType = a})
 
--- | The resource name.
+-- | Required. The resource name.
 platgName :: Lens' ProjectsLocationsAcceleratorTypesGet Text
 platgName
   = lens _platgName (\ s a -> s{_platgName = a})

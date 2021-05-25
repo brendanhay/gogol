@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -33,6 +33,7 @@ module Network.Google.Analytics.Types
     , userDeletionRequest
     , udrWebPropertyId
     , udrKind
+    , udrPropertyId
     , udrId
     , udrFirebaseProjectId
     , udrDeletionRequestTime
@@ -1145,15 +1146,15 @@ module Network.Google.Analytics.Types
     , caAddtional
     ) where
 
-import           Network.Google.Analytics.Types.Product
-import           Network.Google.Analytics.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types.Product
+import Network.Google.Analytics.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsService :: ServiceConfig
 analyticsService
   = defaultService (ServiceId "analytics:v3")
-      "www.googleapis.com"
+      "analytics.googleapis.com"
 
 -- | Manage Google Analytics Account users by email address
 analyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]

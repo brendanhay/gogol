@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
     , rpvaPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.verifyAssertion@ method which the
 -- 'RelyingPartyVerifyAssertion' request conforms to.

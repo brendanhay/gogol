@@ -44,8 +44,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Ind
     , pdcgicCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.indexes.create@ method which the
 -- 'ProjectsDatabasesCollectionGroupsIndexesCreate' request conforms to.
@@ -70,13 +70,13 @@ type ProjectsDatabasesCollectionGroupsIndexesCreateResource
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesCreate' smart constructor.
 data ProjectsDatabasesCollectionGroupsIndexesCreate =
   ProjectsDatabasesCollectionGroupsIndexesCreate'
-    { _pdcgicParent         :: !Text
-    , _pdcgicXgafv          :: !(Maybe Xgafv)
+    { _pdcgicParent :: !Text
+    , _pdcgicXgafv :: !(Maybe Xgafv)
     , _pdcgicUploadProtocol :: !(Maybe Text)
-    , _pdcgicAccessToken    :: !(Maybe Text)
-    , _pdcgicUploadType     :: !(Maybe Text)
-    , _pdcgicPayload        :: !GoogleFirestoreAdminV1Index
-    , _pdcgicCallback       :: !(Maybe Text)
+    , _pdcgicAccessToken :: !(Maybe Text)
+    , _pdcgicUploadType :: !(Maybe Text)
+    , _pdcgicPayload :: !GoogleFirestoreAdminV1Index
+    , _pdcgicCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,7 +114,7 @@ projectsDatabasesCollectionGroupsIndexesCreate pPdcgicParent_ pPdcgicPayload_ =
     }
 
 
--- | A parent name of the form
+-- | Required. A parent name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\`
 pdcgicParent :: Lens' ProjectsDatabasesCollectionGroupsIndexesCreate Text
 pdcgicParent

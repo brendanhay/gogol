@@ -27,9 +27,7 @@
 -- to find a non-conflicting IP address range. The method will reuse a
 -- subnet if subsequent calls contain the same subnet name, region, and
 -- prefix length. This method will make producer\'s tenant project to be a
--- shared VPC service project as needed. The response from the \`get\`
--- operation will be of type \`Subnetwork\` if the operation successfully
--- completes.
+-- shared VPC service project as needed.
 --
 -- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.services.addSubnetwork@.
 module Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
@@ -51,8 +49,8 @@ module Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
     , sasCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceNetworking.Types
+import Network.Google.Prelude
+import Network.Google.ServiceNetworking.Types
 
 -- | A resource alias for @servicenetworking.services.addSubnetwork@ method which the
 -- 'ServicesAddSubnetwork' request conforms to.
@@ -75,20 +73,18 @@ type ServicesAddSubnetworkResource =
 -- to find a non-conflicting IP address range. The method will reuse a
 -- subnet if subsequent calls contain the same subnet name, region, and
 -- prefix length. This method will make producer\'s tenant project to be a
--- shared VPC service project as needed. The response from the \`get\`
--- operation will be of type \`Subnetwork\` if the operation successfully
--- completes.
+-- shared VPC service project as needed.
 --
 -- /See:/ 'servicesAddSubnetwork' smart constructor.
 data ServicesAddSubnetwork =
   ServicesAddSubnetwork'
-    { _sasParent         :: !Text
-    , _sasXgafv          :: !(Maybe Xgafv)
+    { _sasParent :: !Text
+    , _sasXgafv :: !(Maybe Xgafv)
     , _sasUploadProtocol :: !(Maybe Text)
-    , _sasAccessToken    :: !(Maybe Text)
-    , _sasUploadType     :: !(Maybe Text)
-    , _sasPayload        :: !AddSubnetworkRequest
-    , _sasCallback       :: !(Maybe Text)
+    , _sasAccessToken :: !(Maybe Text)
+    , _sasUploadType :: !(Maybe Text)
+    , _sasPayload :: !AddSubnetworkRequest
+    , _sasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

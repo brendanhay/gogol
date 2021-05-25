@@ -42,8 +42,8 @@ module Network.Google.Resource.Docs.Documents.Get
     , dgCallback
     ) where
 
-import           Network.Google.Docs.Types
-import           Network.Google.Prelude
+import Network.Google.Docs.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @docs.documents.get@ method which the
 -- 'DocumentsGet' request conforms to.
@@ -55,7 +55,9 @@ type DocumentsGetResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "suggestionsViewMode" Text :>
+                   QueryParam "suggestionsViewMode"
+                     DocumentsGetSuggestionsViewMode
+                     :>
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Document
 
@@ -64,13 +66,13 @@ type DocumentsGetResource =
 -- /See:/ 'documentsGet' smart constructor.
 data DocumentsGet =
   DocumentsGet'
-    { _dgXgafv               :: !(Maybe Xgafv)
-    , _dgDocumentId          :: !Text
-    , _dgUploadProtocol      :: !(Maybe Text)
-    , _dgAccessToken         :: !(Maybe Text)
-    , _dgUploadType          :: !(Maybe Text)
-    , _dgSuggestionsViewMode :: !(Maybe Text)
-    , _dgCallback            :: !(Maybe Text)
+    { _dgXgafv :: !(Maybe Xgafv)
+    , _dgDocumentId :: !Text
+    , _dgUploadProtocol :: !(Maybe Text)
+    , _dgAccessToken :: !(Maybe Text)
+    , _dgUploadType :: !(Maybe Text)
+    , _dgSuggestionsViewMode :: !(Maybe DocumentsGetSuggestionsViewMode)
+    , _dgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,7 +138,7 @@ dgUploadType
 -- | The suggestions view mode to apply to the document. This allows viewing
 -- the document with all suggestions inline, accepted or rejected. If one
 -- is not specified, DEFAULT_FOR_CURRENT_ACCESS is used.
-dgSuggestionsViewMode :: Lens' DocumentsGet (Maybe Text)
+dgSuggestionsViewMode :: Lens' DocumentsGet (Maybe DocumentsGetSuggestionsViewMode)
 dgSuggestionsViewMode
   = lens _dgSuggestionsViewMode
       (\ s a -> s{_dgSuggestionsViewMode = a})

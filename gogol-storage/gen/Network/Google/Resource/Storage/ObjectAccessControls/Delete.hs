@@ -37,12 +37,13 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Delete
     , oacdBucket
     , oacdUserProject
     , oacdObject
+    , oacdProvisionalUserProject
     , oacdEntity
     , oacdGeneration
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.delete@ method which the
 -- 'ObjectAccessControlsDelete' request conforms to.
@@ -56,8 +57,9 @@ type ObjectAccessControlsDeleteResource =
                  "acl" :>
                    Capture "entity" Text :>
                      QueryParam "userProject" Text :>
-                       QueryParam "generation" (Textual Int64) :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                       QueryParam "provisionalUserProject" Text :>
+                         QueryParam "generation" (Textual Int64) :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified object.
@@ -65,11 +67,12 @@ type ObjectAccessControlsDeleteResource =
 -- /See:/ 'objectAccessControlsDelete' smart constructor.
 data ObjectAccessControlsDelete =
   ObjectAccessControlsDelete'
-    { _oacdBucket      :: !Text
+    { _oacdBucket :: !Text
     , _oacdUserProject :: !(Maybe Text)
-    , _oacdObject      :: !Text
-    , _oacdEntity      :: !Text
-    , _oacdGeneration  :: !(Maybe (Textual Int64))
+    , _oacdObject :: !Text
+    , _oacdProvisionalUserProject :: !(Maybe Text)
+    , _oacdEntity :: !Text
+    , _oacdGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,6 +87,8 @@ data ObjectAccessControlsDelete =
 --
 -- * 'oacdObject'
 --
+-- * 'oacdProvisionalUserProject'
+--
 -- * 'oacdEntity'
 --
 -- * 'oacdGeneration'
@@ -97,6 +102,7 @@ objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
     { _oacdBucket = pOacdBucket_
     , _oacdUserProject = Nothing
     , _oacdObject = pOacdObject_
+    , _oacdProvisionalUserProject = Nothing
     , _oacdEntity = pOacdEntity_
     , _oacdGeneration = Nothing
     }
@@ -119,6 +125,13 @@ oacdUserProject
 oacdObject :: Lens' ObjectAccessControlsDelete Text
 oacdObject
   = lens _oacdObject (\ s a -> s{_oacdObject = a})
+
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+oacdProvisionalUserProject :: Lens' ObjectAccessControlsDelete (Maybe Text)
+oacdProvisionalUserProject
+  = lens _oacdProvisionalUserProject
+      (\ s a -> s{_oacdProvisionalUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -144,6 +157,7 @@ instance GoogleRequest ObjectAccessControlsDelete
         requestClient ObjectAccessControlsDelete'{..}
           = go _oacdBucket _oacdObject _oacdEntity
               _oacdUserProject
+              _oacdProvisionalUserProject
               _oacdGeneration
               (Just AltJSON)
               storageService

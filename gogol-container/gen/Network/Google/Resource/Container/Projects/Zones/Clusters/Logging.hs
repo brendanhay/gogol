@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Logging
     , pzclCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.logging@ method which the
 -- 'ProjectsZonesClustersLogging' request conforms to.
@@ -72,15 +72,15 @@ type ProjectsZonesClustersLoggingResource =
 -- /See:/ 'projectsZonesClustersLogging' smart constructor.
 data ProjectsZonesClustersLogging =
   ProjectsZonesClustersLogging'
-    { _pzclXgafv          :: !(Maybe Xgafv)
+    { _pzclXgafv :: !(Maybe Xgafv)
     , _pzclUploadProtocol :: !(Maybe Text)
-    , _pzclAccessToken    :: !(Maybe Text)
-    , _pzclUploadType     :: !(Maybe Text)
-    , _pzclZone           :: !Text
-    , _pzclPayload        :: !SetLoggingServiceRequest
-    , _pzclClusterId      :: !Text
-    , _pzclProjectId      :: !Text
-    , _pzclCallback       :: !(Maybe Text)
+    , _pzclAccessToken :: !(Maybe Text)
+    , _pzclUploadType :: !(Maybe Text)
+    , _pzclZone :: !Text
+    , _pzclPayload :: !SetLoggingServiceRequest
+    , _pzclClusterId :: !Text
+    , _pzclProjectId :: !Text
+    , _pzclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,8 +150,9 @@ pzclUploadType
       (\ s a -> s{_pzclUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzclZone :: Lens' ProjectsZonesClustersLogging Text
 pzclZone = lens _pzclZone (\ s a -> s{_pzclZone = a})
 

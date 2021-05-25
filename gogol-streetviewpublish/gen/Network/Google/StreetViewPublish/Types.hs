@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -57,6 +57,9 @@ module Network.Google.StreetViewPublish.Types
     , sCode
     , sMessage
 
+    -- * PhotoGetView
+    , PhotoGetView (..)
+
     -- * PhotoResponse
     , PhotoResponse
     , photoResponse
@@ -75,6 +78,9 @@ module Network.Google.StreetViewPublish.Types
     -- * Empty
     , Empty
     , empty
+
+    -- * PhotosListView
+    , PhotosListView (..)
 
     -- * StatusDetailsItem
     , StatusDetailsItem
@@ -120,6 +126,9 @@ module Network.Google.StreetViewPublish.Types
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * PhotosBatchGetView
+    , PhotosBatchGetView (..)
 
     -- * OperationMetadata
     , OperationMetadata
@@ -171,9 +180,9 @@ module Network.Google.StreetViewPublish.Types
     , piId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types.Product
-import           Network.Google.StreetViewPublish.Types.Sum
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types.Product
+import Network.Google.StreetViewPublish.Types.Sum
 
 -- | Default request referring to version 'v1' of the Street View Publish API. This contains the host and root path used as a starting point for constructing service requests.
 streetViewPublishService :: ServiceConfig

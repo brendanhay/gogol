@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Updat
     , prwtuCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.update@ method which the
 -- 'ProjectsRegionsWorkflowTemplatesUpdate' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsRegionsWorkflowTemplatesUpdateResource =
 -- /See:/ 'projectsRegionsWorkflowTemplatesUpdate' smart constructor.
 data ProjectsRegionsWorkflowTemplatesUpdate =
   ProjectsRegionsWorkflowTemplatesUpdate'
-    { _prwtuXgafv          :: !(Maybe Xgafv)
+    { _prwtuXgafv :: !(Maybe Xgafv)
     , _prwtuUploadProtocol :: !(Maybe Text)
-    , _prwtuAccessToken    :: !(Maybe Text)
-    , _prwtuUploadType     :: !(Maybe Text)
-    , _prwtuPayload        :: !WorkflowTemplate
-    , _prwtuName           :: !Text
-    , _prwtuCallback       :: !(Maybe Text)
+    , _prwtuAccessToken :: !(Maybe Text)
+    , _prwtuUploadType :: !(Maybe Text)
+    , _prwtuPayload :: !WorkflowTemplate
+    , _prwtuName :: !Text
+    , _prwtuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,9 +138,14 @@ prwtuPayload :: Lens' ProjectsRegionsWorkflowTemplatesUpdate WorkflowTemplate
 prwtuPayload
   = lens _prwtuPayload (\ s a -> s{_prwtuPayload = a})
 
--- | Output only. The \"resource name\" of the template, as described in
--- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
+-- | Output only. The resource name of the workflow template, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates, the resource name of the template
+-- has the following format:
 -- projects\/{project_id}\/regions\/{region}\/workflowTemplates\/{template_id}
+-- For projects.locations.workflowTemplates, the resource name of the
+-- template has the following format:
+-- projects\/{project_id}\/locations\/{location}\/workflowTemplates\/{template_id}
 prwtuName :: Lens' ProjectsRegionsWorkflowTemplatesUpdate Text
 prwtuName
   = lens _prwtuName (\ s a -> s{_prwtuName = a})

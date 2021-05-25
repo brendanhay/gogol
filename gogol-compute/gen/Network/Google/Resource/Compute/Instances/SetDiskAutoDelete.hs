@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
     , isdadInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setDiskAutoDelete@ method which the
 -- 'InstancesSetDiskAutoDelete' request conforms to.
@@ -66,12 +66,12 @@ type InstancesSetDiskAutoDeleteResource =
 -- /See:/ 'instancesSetDiskAutoDelete' smart constructor.
 data InstancesSetDiskAutoDelete =
   InstancesSetDiskAutoDelete'
-    { _isdadRequestId  :: !(Maybe Text)
-    , _isdadProject    :: !Text
+    { _isdadRequestId :: !(Maybe Text)
+    , _isdadProject :: !Text
     , _isdadAutoDelete :: !Bool
-    , _isdadZone       :: !Text
+    , _isdadZone :: !Text
     , _isdadDeviceName :: !Text
-    , _isdadInstance   :: !Text
+    , _isdadInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

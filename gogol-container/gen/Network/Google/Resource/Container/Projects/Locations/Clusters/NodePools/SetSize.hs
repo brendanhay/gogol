@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the size for a specific node pool.
+-- Sets the size for a specific node pool. The new size will be used for
+-- all replicas, including future replicas created by modifying
+-- NodePool.locations.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.setSize@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.SetSize
@@ -42,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.S
     , plcnpssCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.setSize@ method which the
 -- 'ProjectsLocationsClustersNodePoolsSetSize' request conforms to.
@@ -60,18 +62,20 @@ type ProjectsLocationsClustersNodePoolsSetSizeResource
                      ReqBody '[JSON] SetNodePoolSizeRequest :>
                        Post '[JSON] Operation
 
--- | Sets the size for a specific node pool.
+-- | Sets the size for a specific node pool. The new size will be used for
+-- all replicas, including future replicas created by modifying
+-- NodePool.locations.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsSetSize' smart constructor.
 data ProjectsLocationsClustersNodePoolsSetSize =
   ProjectsLocationsClustersNodePoolsSetSize'
-    { _plcnpssXgafv          :: !(Maybe Xgafv)
+    { _plcnpssXgafv :: !(Maybe Xgafv)
     , _plcnpssUploadProtocol :: !(Maybe Text)
-    , _plcnpssAccessToken    :: !(Maybe Text)
-    , _plcnpssUploadType     :: !(Maybe Text)
-    , _plcnpssPayload        :: !SetNodePoolSizeRequest
-    , _plcnpssName           :: !Text
-    , _plcnpssCallback       :: !(Maybe Text)
+    , _plcnpssAccessToken :: !(Maybe Text)
+    , _plcnpssUploadType :: !(Maybe Text)
+    , _plcnpssPayload :: !SetNodePoolSizeRequest
+    , _plcnpssName :: !Text
+    , _plcnpssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +144,7 @@ plcnpssPayload
 
 -- | The name (project, location, cluster, node pool id) of the node pool to
 -- set size. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\`.
 plcnpssName :: Lens' ProjectsLocationsClustersNodePoolsSetSize Text
 plcnpssName
   = lens _plcnpssName (\ s a -> s{_plcnpssName = a})

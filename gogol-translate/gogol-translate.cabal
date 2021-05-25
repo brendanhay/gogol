@@ -14,13 +14,12 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Google Cloud Translation API lets websites and programs integrate
-    with Google Translate programmatically.
+    Integrates text translation into your website or application.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2@
+    This library is compatible with version @v3@
     of the API.
 
 source-repository head
@@ -34,11 +33,24 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Language.Detections.Detect
-        , Network.Google.Resource.Language.Detections.List
-        , Network.Google.Resource.Language.Languages.List
-        , Network.Google.Resource.Language.Translations.List
-        , Network.Google.Resource.Language.Translations.Translate
+          Network.Google.Resource.Translate.Projects.DetectLanguage
+        , Network.Google.Resource.Translate.Projects.GetSupportedLanguages
+        , Network.Google.Resource.Translate.Projects.Locations.BatchTranslateText
+        , Network.Google.Resource.Translate.Projects.Locations.DetectLanguage
+        , Network.Google.Resource.Translate.Projects.Locations.Get
+        , Network.Google.Resource.Translate.Projects.Locations.GetSupportedLanguages
+        , Network.Google.Resource.Translate.Projects.Locations.Glossaries.Create
+        , Network.Google.Resource.Translate.Projects.Locations.Glossaries.Delete
+        , Network.Google.Resource.Translate.Projects.Locations.Glossaries.Get
+        , Network.Google.Resource.Translate.Projects.Locations.Glossaries.List
+        , Network.Google.Resource.Translate.Projects.Locations.List
+        , Network.Google.Resource.Translate.Projects.Locations.Operations.Cancel
+        , Network.Google.Resource.Translate.Projects.Locations.Operations.Delete
+        , Network.Google.Resource.Translate.Projects.Locations.Operations.Get
+        , Network.Google.Resource.Translate.Projects.Locations.Operations.List
+        , Network.Google.Resource.Translate.Projects.Locations.Operations.Wait
+        , Network.Google.Resource.Translate.Projects.Locations.TranslateText
+        , Network.Google.Resource.Translate.Projects.TranslateText
         , Network.Google.Translate
         , Network.Google.Translate.Types
 

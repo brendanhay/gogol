@@ -47,8 +47,8 @@ module Network.Google.Resource.ServiceBroker.TestIAMPermissions
     , tipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceBroker.Types
+import Network.Google.Prelude
+import Network.Google.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.testIamPermissions@ method which the
 -- 'TestIAMPermissions' request conforms to.
@@ -76,13 +76,13 @@ type TestIAMPermissionsResource =
 -- /See:/ 'testIAMPermissions' smart constructor.
 data TestIAMPermissions =
   TestIAMPermissions'
-    { _tipXgafv          :: !(Maybe Xgafv)
+    { _tipXgafv :: !(Maybe Xgafv)
     , _tipUploadProtocol :: !(Maybe Text)
-    , _tipAccessToken    :: !(Maybe Text)
-    , _tipUploadType     :: !(Maybe Text)
-    , _tipPayload        :: !GoogleIAMV1__TestIAMPermissionsRequest
-    , _tipResource       :: !Text
-    , _tipCallback       :: !(Maybe Text)
+    , _tipAccessToken :: !(Maybe Text)
+    , _tipUploadType :: !(Maybe Text)
+    , _tipPayload :: !GoogleIAMV1__TestIAMPermissionsRequest
+    , _tipResource :: !Text
+    , _tipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

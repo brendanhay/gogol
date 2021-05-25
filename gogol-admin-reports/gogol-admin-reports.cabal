@@ -1,6 +1,6 @@
 name:                  gogol-admin-reports
 version:               0.5.0
-synopsis:              Google Admin Reports SDK.
+synopsis:              Google Admin SDK SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Fetches reports for the administrators of G Suite customers about the
-    usage, collaboration, security, and risk for their users.
+    Admin SDK lets administrators of enterprise domains to view and manage
+    resources like user, groups etc. It also provides audit and usage
+    reports of domain.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

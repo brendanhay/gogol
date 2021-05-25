@@ -57,6 +57,11 @@ library
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Create
+        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Delete
+        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Get
+        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.List
+        , Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Patch
         , Network.Google.Resource.Classroom.Courses.Create
         , Network.Google.Resource.Classroom.Courses.Delete
         , Network.Google.Resource.Classroom.Courses.Get

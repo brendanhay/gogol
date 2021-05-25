@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.SetIAMPolicy
     , itsipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.setIamPolicy@ method which the
 -- 'InstanceTemplatesSetIAMPolicy' request conforms to.
@@ -63,8 +63,8 @@ type InstanceTemplatesSetIAMPolicyResource =
 -- /See:/ 'instanceTemplatesSetIAMPolicy' smart constructor.
 data InstanceTemplatesSetIAMPolicy =
   InstanceTemplatesSetIAMPolicy'
-    { _itsipProject  :: !Text
-    , _itsipPayload  :: !GlobalSetPolicyRequest
+    { _itsipProject :: !Text
+    , _itsipPayload :: !GlobalSetPolicyRequest
     , _itsipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

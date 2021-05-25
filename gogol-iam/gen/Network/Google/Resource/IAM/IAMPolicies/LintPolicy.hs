@@ -20,23 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lints a Cloud IAM policy object or its sub fields. Currently supports
--- google.iam.v1.Policy, google.iam.v1.Binding and
--- google.iam.v1.Binding.condition. Each lint operation consists of
--- multiple lint validation units. Validation units have the following
--- properties: - Each unit inspects the input object in regard to a
--- particular linting aspect and issues a google.iam.admin.v1.LintResult
--- disclosing the result. - Domain of discourse of each unit can be either
--- google.iam.v1.Policy, google.iam.v1.Binding, or
--- google.iam.v1.Binding.condition depending on the purpose of the
--- validation. - A unit may require additional data (like the list of all
--- possible enumerable values of a particular attribute used in the policy
--- instance) which shall be provided by the caller. Refer to the comments
--- of google.iam.admin.v1.LintPolicyRequest.context for more details. The
--- set of applicable validation units is determined by the Cloud IAM server
--- and is not configurable. Regardless of any lint issues or their
--- severities, successful calls to \`lintPolicy\` return an HTTP 200 OK
--- status code.
+-- Lints, or validates, an IAM policy. Currently checks the
+-- google.iam.v1.Binding.condition field, which contains a condition
+-- expression for a role binding. Successful calls to this method always
+-- return an HTTP \`200 OK\` status code, even if the linter detects an
+-- issue in the IAM policy.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.iamPolicies.lintPolicy@.
 module Network.Google.Resource.IAM.IAMPolicies.LintPolicy
@@ -57,8 +45,8 @@ module Network.Google.Resource.IAM.IAMPolicies.LintPolicy
     , iplpCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.iamPolicies.lintPolicy@ method which the
 -- 'IAMPoliciesLintPolicy' request conforms to.
@@ -74,33 +62,21 @@ type IAMPoliciesLintPolicyResource =
                      ReqBody '[JSON] LintPolicyRequest :>
                        Post '[JSON] LintPolicyResponse
 
--- | Lints a Cloud IAM policy object or its sub fields. Currently supports
--- google.iam.v1.Policy, google.iam.v1.Binding and
--- google.iam.v1.Binding.condition. Each lint operation consists of
--- multiple lint validation units. Validation units have the following
--- properties: - Each unit inspects the input object in regard to a
--- particular linting aspect and issues a google.iam.admin.v1.LintResult
--- disclosing the result. - Domain of discourse of each unit can be either
--- google.iam.v1.Policy, google.iam.v1.Binding, or
--- google.iam.v1.Binding.condition depending on the purpose of the
--- validation. - A unit may require additional data (like the list of all
--- possible enumerable values of a particular attribute used in the policy
--- instance) which shall be provided by the caller. Refer to the comments
--- of google.iam.admin.v1.LintPolicyRequest.context for more details. The
--- set of applicable validation units is determined by the Cloud IAM server
--- and is not configurable. Regardless of any lint issues or their
--- severities, successful calls to \`lintPolicy\` return an HTTP 200 OK
--- status code.
+-- | Lints, or validates, an IAM policy. Currently checks the
+-- google.iam.v1.Binding.condition field, which contains a condition
+-- expression for a role binding. Successful calls to this method always
+-- return an HTTP \`200 OK\` status code, even if the linter detects an
+-- issue in the IAM policy.
 --
 -- /See:/ 'iamPoliciesLintPolicy' smart constructor.
 data IAMPoliciesLintPolicy =
   IAMPoliciesLintPolicy'
-    { _iplpXgafv          :: !(Maybe Xgafv)
+    { _iplpXgafv :: !(Maybe Xgafv)
     , _iplpUploadProtocol :: !(Maybe Text)
-    , _iplpAccessToken    :: !(Maybe Text)
-    , _iplpUploadType     :: !(Maybe Text)
-    , _iplpPayload        :: !LintPolicyRequest
-    , _iplpCallback       :: !(Maybe Text)
+    , _iplpAccessToken :: !(Maybe Text)
+    , _iplpUploadType :: !(Maybe Text)
+    , _iplpPayload :: !LintPolicyRequest
+    , _iplpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

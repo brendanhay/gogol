@@ -51,8 +51,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     , balCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.attachments.list@ method which the
 -- 'BeaconsAttachmentsList' request conforms to.
@@ -83,14 +83,14 @@ type BeaconsAttachmentsListResource =
 -- /See:/ 'beaconsAttachmentsList' smart constructor.
 data BeaconsAttachmentsList =
   BeaconsAttachmentsList'
-    { _balXgafv          :: !(Maybe Xgafv)
+    { _balXgafv :: !(Maybe Xgafv)
     , _balUploadProtocol :: !(Maybe Text)
-    , _balAccessToken    :: !(Maybe Text)
-    , _balBeaconName     :: !Text
-    , _balUploadType     :: !(Maybe Text)
+    , _balAccessToken :: !(Maybe Text)
+    , _balBeaconName :: !Text
+    , _balUploadType :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
-    , _balProjectId      :: !(Maybe Text)
-    , _balCallback       :: !(Maybe Text)
+    , _balProjectId :: !(Maybe Text)
+    , _balCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -164,7 +164,7 @@ balUploadType
       (\ s a -> s{_balUploadType = a})
 
 -- | Specifies the namespace and type of attachment to include in response in
--- namespace\/type format. Accepts \`*\/*\` to specify \"all types in all
+-- 'namespace\/type' format. Accepts \`*\/*\` to specify \"all types in all
 -- namespaces\".
 balNamespacedType :: Lens' BeaconsAttachmentsList (Maybe Text)
 balNamespacedType

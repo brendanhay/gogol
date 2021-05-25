@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
     , ismInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setMetadata@ method which the
 -- 'InstancesSetMetadata' request conforms to.
@@ -67,10 +67,10 @@ type InstancesSetMetadataResource =
 data InstancesSetMetadata =
   InstancesSetMetadata'
     { _ismRequestId :: !(Maybe Text)
-    , _ismProject   :: !Text
-    , _ismZone      :: !Text
-    , _ismPayload   :: !Metadata
-    , _ismInstance  :: !Text
+    , _ismProject :: !Text
+    , _ismZone :: !Text
+    , _ismPayload :: !Metadata
+    , _ismInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

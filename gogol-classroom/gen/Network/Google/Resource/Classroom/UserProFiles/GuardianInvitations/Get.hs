@@ -52,8 +52,8 @@ module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
     , upfgigCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.guardianInvitations.get@ method which the
 -- 'UserProFilesGuardianInvitationsGet' request conforms to.
@@ -86,13 +86,13 @@ type UserProFilesGuardianInvitationsGetResource =
 -- /See:/ 'userProFilesGuardianInvitationsGet' smart constructor.
 data UserProFilesGuardianInvitationsGet =
   UserProFilesGuardianInvitationsGet'
-    { _upfgigStudentId      :: !Text
-    , _upfgigXgafv          :: !(Maybe Xgafv)
+    { _upfgigStudentId :: !Text
+    , _upfgigXgafv :: !(Maybe Xgafv)
     , _upfgigUploadProtocol :: !(Maybe Text)
-    , _upfgigAccessToken    :: !(Maybe Text)
-    , _upfgigUploadType     :: !(Maybe Text)
-    , _upfgigInvitationId   :: !Text
-    , _upfgigCallback       :: !(Maybe Text)
+    , _upfgigAccessToken :: !(Maybe Text)
+    , _upfgigUploadType :: !(Maybe Text)
+    , _upfgigInvitationId :: !Text
+    , _upfgigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

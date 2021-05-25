@@ -16,7 +16,36 @@
 --
 module Network.Google.AccessApproval.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+-- | The enrollment level of the service.
+data EnrolledServiceEnrollmentLevel
+    = EnrollmentLevelUnspecified
+      -- ^ @ENROLLMENT_LEVEL_UNSPECIFIED@
+      -- Default value for proto, shouldn\'t be used.
+    | BlockAll
+      -- ^ @BLOCK_ALL@
+      -- Service is enrolled in Access Approval for all requests
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EnrolledServiceEnrollmentLevel
+
+instance FromHttpApiData EnrolledServiceEnrollmentLevel where
+    parseQueryParam = \case
+        "ENROLLMENT_LEVEL_UNSPECIFIED" -> Right EnrollmentLevelUnspecified
+        "BLOCK_ALL" -> Right BlockAll
+        x -> Left ("Unable to parse EnrolledServiceEnrollmentLevel from: " <> x)
+
+instance ToHttpApiData EnrolledServiceEnrollmentLevel where
+    toQueryParam = \case
+        EnrollmentLevelUnspecified -> "ENROLLMENT_LEVEL_UNSPECIFIED"
+        BlockAll -> "BLOCK_ALL"
+
+instance FromJSON EnrolledServiceEnrollmentLevel where
+    parseJSON = parseJSONText "EnrolledServiceEnrollmentLevel"
+
+instance ToJSON EnrolledServiceEnrollmentLevel where
+    toJSON = toJSONText
 
 -- | Type of access justification.
 data AccessReasonType
@@ -27,14 +56,9 @@ data AccessReasonType
       -- ^ @CUSTOMER_INITIATED_SUPPORT@
       -- Customer made a request or raised an issue that required the principal
       -- to access customer data. \`detail\` is of the form (\"#####\" is the
-      -- issue ID):
-      --
-      -- 1.  \"Feedback Report: #####\"
-      -- 2.  \"Case Number: #####\"
-      -- 3.  \"Case ID: #####\"
-      -- 4.  \"E-PIN Reference: #####\"
-      -- 5.  \"Google-#####\"
-      -- 6.  \"T-#####\"
+      -- issue ID): * \"Feedback Report: #####\" * \"Case Number: #####\" *
+      -- \"Case ID: #####\" * \"E-PIN Reference: #####\" * \"Google-#####\" *
+      -- \"T-#####\"
     | GoogleInitiatedService
       -- ^ @GOOGLE_INITIATED_SERVICE@
       -- The principal accessed customer data in order to diagnose or resolve a

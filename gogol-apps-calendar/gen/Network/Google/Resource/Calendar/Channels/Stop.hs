@@ -36,8 +36,8 @@ module Network.Google.Resource.Calendar.Channels.Stop
     , csPayload
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.channels.stop@ method which the
 -- 'ChannelsStop' request conforms to.

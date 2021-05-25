@@ -45,8 +45,8 @@ module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Create
     , admacCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.domainMappings.create@ method which the
 -- 'AppsDomainMAppingsCreate' request conforms to.
@@ -59,7 +59,9 @@ type AppsDomainMAppingsCreateResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "overrideStrategy" Text :>
+                     QueryParam "overrideStrategy"
+                       AppsDomainMAppingsCreateOverrideStrategy
+                       :>
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] DomainMApping :>
@@ -72,14 +74,14 @@ type AppsDomainMAppingsCreateResource =
 -- /See:/ 'appsDomainMAppingsCreate' smart constructor.
 data AppsDomainMAppingsCreate =
   AppsDomainMAppingsCreate'
-    { _admacXgafv            :: !(Maybe Xgafv)
-    , _admacUploadProtocol   :: !(Maybe Text)
-    , _admacAccessToken      :: !(Maybe Text)
-    , _admacUploadType       :: !(Maybe Text)
-    , _admacPayload          :: !DomainMApping
-    , _admacOverrideStrategy :: !(Maybe Text)
-    , _admacAppsId           :: !Text
-    , _admacCallback         :: !(Maybe Text)
+    { _admacXgafv :: !(Maybe Xgafv)
+    , _admacUploadProtocol :: !(Maybe Text)
+    , _admacAccessToken :: !(Maybe Text)
+    , _admacUploadType :: !(Maybe Text)
+    , _admacPayload :: !DomainMApping
+    , _admacOverrideStrategy :: !(Maybe AppsDomainMAppingsCreateOverrideStrategy)
+    , _admacAppsId :: !Text
+    , _admacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,7 +152,7 @@ admacPayload
 
 -- | Whether the domain creation should override any existing mappings for
 -- this domain. By default, overrides are rejected.
-admacOverrideStrategy :: Lens' AppsDomainMAppingsCreate (Maybe Text)
+admacOverrideStrategy :: Lens' AppsDomainMAppingsCreate (Maybe AppsDomainMAppingsCreateOverrideStrategy)
 admacOverrideStrategy
   = lens _admacOverrideStrategy
       (\ s a -> s{_admacOverrideStrategy = a})

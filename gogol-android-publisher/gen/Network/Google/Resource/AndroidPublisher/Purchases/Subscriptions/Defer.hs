@@ -23,7 +23,7 @@
 -- Defers a user\'s subscription purchase until a specified future
 -- expiration time.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.subscriptions.defer@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.purchases.subscriptions.defer@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
     (
     -- * REST Resource
@@ -34,14 +34,19 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
     , PurchasesSubscriptionsDefer
 
     -- * Request Lenses
+    , psdXgafv
+    , psdUploadProtocol
     , psdPackageName
+    , psdAccessToken
     , psdToken
+    , psdUploadType
     , psdPayload
     , psdSubscriptionId
+    , psdCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.purchases.subscriptions.defer@ method which the
 -- 'PurchasesSubscriptionsDefer' request conforms to.
@@ -55,9 +60,17 @@ type PurchasesSubscriptionsDeferResource =
                  Capture "subscriptionId" Text :>
                    "tokens" :>
                      CaptureMode "token" "defer" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SubscriptionPurchasesDeferRequest :>
-                           Post '[JSON] SubscriptionPurchasesDeferResponse
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON]
+                                     SubscriptionPurchasesDeferRequest
+                                     :>
+                                     Post '[JSON]
+                                       SubscriptionPurchasesDeferResponse
 
 -- | Defers a user\'s subscription purchase until a specified future
 -- expiration time.
@@ -65,10 +78,15 @@ type PurchasesSubscriptionsDeferResource =
 -- /See:/ 'purchasesSubscriptionsDefer' smart constructor.
 data PurchasesSubscriptionsDefer =
   PurchasesSubscriptionsDefer'
-    { _psdPackageName    :: !Text
-    , _psdToken          :: !Text
-    , _psdPayload        :: !SubscriptionPurchasesDeferRequest
+    { _psdXgafv :: !(Maybe Xgafv)
+    , _psdUploadProtocol :: !(Maybe Text)
+    , _psdPackageName :: !Text
+    , _psdAccessToken :: !(Maybe Text)
+    , _psdToken :: !Text
+    , _psdUploadType :: !(Maybe Text)
+    , _psdPayload :: !SubscriptionPurchasesDeferRequest
     , _psdSubscriptionId :: !Text
+    , _psdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,13 +95,23 @@ data PurchasesSubscriptionsDefer =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'psdXgafv'
+--
+-- * 'psdUploadProtocol'
+--
 -- * 'psdPackageName'
 --
+-- * 'psdAccessToken'
+--
 -- * 'psdToken'
+--
+-- * 'psdUploadType'
 --
 -- * 'psdPayload'
 --
 -- * 'psdSubscriptionId'
+--
+-- * 'psdCallback'
 purchasesSubscriptionsDefer
     :: Text -- ^ 'psdPackageName'
     -> Text -- ^ 'psdToken'
@@ -92,12 +120,27 @@ purchasesSubscriptionsDefer
     -> PurchasesSubscriptionsDefer
 purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
   PurchasesSubscriptionsDefer'
-    { _psdPackageName = pPsdPackageName_
+    { _psdXgafv = Nothing
+    , _psdUploadProtocol = Nothing
+    , _psdPackageName = pPsdPackageName_
+    , _psdAccessToken = Nothing
     , _psdToken = pPsdToken_
+    , _psdUploadType = Nothing
     , _psdPayload = pPsdPayload_
     , _psdSubscriptionId = pPsdSubscriptionId_
+    , _psdCallback = Nothing
     }
 
+
+-- | V1 error format.
+psdXgafv :: Lens' PurchasesSubscriptionsDefer (Maybe Xgafv)
+psdXgafv = lens _psdXgafv (\ s a -> s{_psdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+psdUploadProtocol :: Lens' PurchasesSubscriptionsDefer (Maybe Text)
+psdUploadProtocol
+  = lens _psdUploadProtocol
+      (\ s a -> s{_psdUploadProtocol = a})
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
@@ -106,10 +149,22 @@ psdPackageName
   = lens _psdPackageName
       (\ s a -> s{_psdPackageName = a})
 
+-- | OAuth access token.
+psdAccessToken :: Lens' PurchasesSubscriptionsDefer (Maybe Text)
+psdAccessToken
+  = lens _psdAccessToken
+      (\ s a -> s{_psdAccessToken = a})
+
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
 psdToken :: Lens' PurchasesSubscriptionsDefer Text
 psdToken = lens _psdToken (\ s a -> s{_psdToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+psdUploadType :: Lens' PurchasesSubscriptionsDefer (Maybe Text)
+psdUploadType
+  = lens _psdUploadType
+      (\ s a -> s{_psdUploadType = a})
 
 -- | Multipart request metadata.
 psdPayload :: Lens' PurchasesSubscriptionsDefer SubscriptionPurchasesDeferRequest
@@ -122,6 +177,11 @@ psdSubscriptionId
   = lens _psdSubscriptionId
       (\ s a -> s{_psdSubscriptionId = a})
 
+-- | JSONP
+psdCallback :: Lens' PurchasesSubscriptionsDefer (Maybe Text)
+psdCallback
+  = lens _psdCallback (\ s a -> s{_psdCallback = a})
+
 instance GoogleRequest PurchasesSubscriptionsDefer
          where
         type Rs PurchasesSubscriptionsDefer =
@@ -130,6 +190,11 @@ instance GoogleRequest PurchasesSubscriptionsDefer
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesSubscriptionsDefer'{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
+              _psdXgafv
+              _psdUploadProtocol
+              _psdAccessToken
+              _psdUploadType
+              _psdCallback
               (Just AltJSON)
               _psdPayload
               androidPublisherService

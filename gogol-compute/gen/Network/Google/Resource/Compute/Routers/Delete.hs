@@ -33,14 +33,14 @@ module Network.Google.Resource.Compute.Routers.Delete
     , RoutersDelete
 
     -- * Request Lenses
-    , rouoRequestId
-    , rouoProject
-    , rouoRouter
-    , rouoRegion
+    , rd1RequestId
+    , rd1Project
+    , rd1Router
+    , rd1Region
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.delete@ method which the
 -- 'RoutersDelete' request conforms to.
@@ -61,10 +61,10 @@ type RoutersDeleteResource =
 -- /See:/ 'routersDelete' smart constructor.
 data RoutersDelete =
   RoutersDelete'
-    { _rouoRequestId :: !(Maybe Text)
-    , _rouoProject   :: !Text
-    , _rouoRouter    :: !Text
-    , _rouoRegion    :: !Text
+    { _rd1RequestId :: !(Maybe Text)
+    , _rd1Project :: !Text
+    , _rd1Router :: !Text
+    , _rd1Region :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,24 +73,24 @@ data RoutersDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rouoRequestId'
+-- * 'rd1RequestId'
 --
--- * 'rouoProject'
+-- * 'rd1Project'
 --
--- * 'rouoRouter'
+-- * 'rd1Router'
 --
--- * 'rouoRegion'
+-- * 'rd1Region'
 routersDelete
-    :: Text -- ^ 'rouoProject'
-    -> Text -- ^ 'rouoRouter'
-    -> Text -- ^ 'rouoRegion'
+    :: Text -- ^ 'rd1Project'
+    -> Text -- ^ 'rd1Router'
+    -> Text -- ^ 'rd1Region'
     -> RoutersDelete
-routersDelete pRouoProject_ pRouoRouter_ pRouoRegion_ =
+routersDelete pRd1Project_ pRd1Router_ pRd1Region_ =
   RoutersDelete'
-    { _rouoRequestId = Nothing
-    , _rouoProject = pRouoProject_
-    , _rouoRouter = pRouoRouter_
-    , _rouoRegion = pRouoRegion_
+    { _rd1RequestId = Nothing
+    , _rd1Project = pRd1Project_
+    , _rd1Router = pRd1Router_
+    , _rd1Region = pRd1Region_
     }
 
 
@@ -104,25 +104,24 @@ routersDelete pRouoProject_ pRouoRouter_ pRouoRegion_ =
 -- accidentally creating duplicate commitments. The request ID must be a
 -- valid UUID with the exception that zero UUID is not supported
 -- (00000000-0000-0000-0000-000000000000).
-rouoRequestId :: Lens' RoutersDelete (Maybe Text)
-rouoRequestId
-  = lens _rouoRequestId
-      (\ s a -> s{_rouoRequestId = a})
+rd1RequestId :: Lens' RoutersDelete (Maybe Text)
+rd1RequestId
+  = lens _rd1RequestId (\ s a -> s{_rd1RequestId = a})
 
 -- | Project ID for this request.
-rouoProject :: Lens' RoutersDelete Text
-rouoProject
-  = lens _rouoProject (\ s a -> s{_rouoProject = a})
+rd1Project :: Lens' RoutersDelete Text
+rd1Project
+  = lens _rd1Project (\ s a -> s{_rd1Project = a})
 
 -- | Name of the Router resource to delete.
-rouoRouter :: Lens' RoutersDelete Text
-rouoRouter
-  = lens _rouoRouter (\ s a -> s{_rouoRouter = a})
+rd1Router :: Lens' RoutersDelete Text
+rd1Router
+  = lens _rd1Router (\ s a -> s{_rd1Router = a})
 
 -- | Name of the region for this request.
-rouoRegion :: Lens' RoutersDelete Text
-rouoRegion
-  = lens _rouoRegion (\ s a -> s{_rouoRegion = a})
+rd1Region :: Lens' RoutersDelete Text
+rd1Region
+  = lens _rd1Region (\ s a -> s{_rd1Region = a})
 
 instance GoogleRequest RoutersDelete where
         type Rs RoutersDelete = Operation
@@ -130,8 +129,7 @@ instance GoogleRequest RoutersDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutersDelete'{..}
-          = go _rouoProject _rouoRegion _rouoRouter
-              _rouoRequestId
+          = go _rd1Project _rd1Region _rd1Router _rd1RequestId
               (Just AltJSON)
               computeService
           where go

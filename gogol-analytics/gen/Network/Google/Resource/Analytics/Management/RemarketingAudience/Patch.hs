@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.RemarketingAudience.Patch
     , mrapRemarketingAudienceId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.remarketingAudience.patch@ method which the
 -- 'ManagementRemarketingAudiencePatch' request conforms to.
@@ -65,9 +65,9 @@ type ManagementRemarketingAudiencePatchResource =
 -- /See:/ 'managementRemarketingAudiencePatch' smart constructor.
 data ManagementRemarketingAudiencePatch =
   ManagementRemarketingAudiencePatch'
-    { _mrapWebPropertyId         :: !Text
-    , _mrapPayload               :: !RemarketingAudience
-    , _mrapAccountId             :: !Text
+    { _mrapWebPropertyId :: !Text
+    , _mrapPayload :: !RemarketingAudience
+    , _mrapAccountId :: !Text
     , _mrapRemarketingAudienceId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

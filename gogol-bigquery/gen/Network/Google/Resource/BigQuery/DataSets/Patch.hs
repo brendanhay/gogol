@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQuery.DataSets.Patch
     , dspProjectId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.patch@ method which the
 -- 'DataSetsPatch' request conforms to.
@@ -64,7 +64,7 @@ type DataSetsPatchResource =
 -- /See:/ 'dataSetsPatch' smart constructor.
 data DataSetsPatch =
   DataSetsPatch'
-    { _dspPayload   :: !DataSet
+    { _dspPayload :: !DataSet
     , _dspDataSetId :: !Text
     , _dspProjectId :: !Text
     }

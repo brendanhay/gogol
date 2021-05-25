@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Images.GetFromFamily
     , igffFamily
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.getFromFamily@ method which the
 -- 'ImagesGetFromFamily' request conforms to.
@@ -61,7 +61,7 @@ type ImagesGetFromFamilyResource =
 data ImagesGetFromFamily =
   ImagesGetFromFamily'
     { _igffProject :: !Text
-    , _igffFamily  :: !Text
+    , _igffFamily :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

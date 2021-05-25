@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.S
     , plcnpsmCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.setManagement@ method which the
 -- 'ProjectsLocationsClustersNodePoolsSetManagement' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsLocationsClustersNodePoolsSetManagementResource
 -- /See:/ 'projectsLocationsClustersNodePoolsSetManagement' smart constructor.
 data ProjectsLocationsClustersNodePoolsSetManagement =
   ProjectsLocationsClustersNodePoolsSetManagement'
-    { _plcnpsmXgafv          :: !(Maybe Xgafv)
+    { _plcnpsmXgafv :: !(Maybe Xgafv)
     , _plcnpsmUploadProtocol :: !(Maybe Text)
-    , _plcnpsmAccessToken    :: !(Maybe Text)
-    , _plcnpsmUploadType     :: !(Maybe Text)
-    , _plcnpsmPayload        :: !SetNodePoolManagementRequest
-    , _plcnpsmName           :: !Text
-    , _plcnpsmCallback       :: !(Maybe Text)
+    , _plcnpsmAccessToken :: !(Maybe Text)
+    , _plcnpsmUploadType :: !(Maybe Text)
+    , _plcnpsmPayload :: !SetNodePoolManagementRequest
+    , _plcnpsmName :: !Text
+    , _plcnpsmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +140,7 @@ plcnpsmPayload
 
 -- | The name (project, location, cluster, node pool id) of the node pool to
 -- set management properties. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\`.
 plcnpsmName :: Lens' ProjectsLocationsClustersNodePoolsSetManagement Text
 plcnpsmName
   = lens _plcnpsmName (\ s a -> s{_plcnpsmName = a})

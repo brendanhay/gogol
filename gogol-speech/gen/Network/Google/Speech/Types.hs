@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -26,6 +26,7 @@ module Network.Google.Speech.Types
     , LongRunningRecognizeMetadata
     , longRunningRecognizeMetadata
     , lrrmStartTime
+    , lrrmURI
     , lrrmProgressPercent
     , lrrmLastUpdateTime
 
@@ -36,39 +37,11 @@ module Network.Google.Speech.Types
     , sCode
     , sMessage
 
-    -- * SpeechContext
-    , SpeechContext
-    , speechContext
-    , scPhrases
-
-    -- * RecognitionMetadataOriginalMediaType
-    , RecognitionMetadataOriginalMediaType (..)
-
     -- * ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
-
-    -- * RecognitionMetadata
-    , RecognitionMetadata
-    , recognitionMetadata
-    , rmAudioTopic
-    , rmInteractionType
-    , rmOriginalMediaType
-    , rmOriginalMimeType
-    , rmIndustryNaicsCodeOfAudio
-    , rmObfuscatedId
-    , rmRecordingDeviceName
-    , rmRecordingDeviceType
-    , rmMicrophoneDistance
-
-    -- * RecognizeRequest
-    , RecognizeRequest
-    , recognizeRequest
-    , rrConfig
-    , rrName
-    , rrAudio
 
     -- * Operation
     , Operation
@@ -89,14 +62,11 @@ module Network.Google.Speech.Types
     -- * WordInfo
     , WordInfo
     , wordInfo
-    , wiStartTime
+    , wiStartOffSet
     , wiConfidence
-    , wiEndTime
+    , wiEndOffSet
     , wiWord
     , wiSpeakerTag
-
-    -- * RecognitionMetadataInteractionType
-    , RecognitionMetadataInteractionType (..)
 
     -- * StatusDetailsItem
     , StatusDetailsItem
@@ -110,23 +80,6 @@ module Network.Google.Speech.Types
     , srrLanguageCode
     , srrChannelTag
 
-    -- * RecognitionAudio
-    , RecognitionAudio
-    , recognitionAudio
-    , raURI
-    , raContent
-
-    -- * RecognizeResponse
-    , RecognizeResponse
-    , recognizeResponse
-    , rrResults
-
-    -- * RecognitionMetadataRecordingDeviceType
-    , RecognitionMetadataRecordingDeviceType (..)
-
-    -- * RecognitionMetadataMicrophoneDistance
-    , RecognitionMetadataMicrophoneDistance (..)
-
     -- * Xgafv
     , Xgafv (..)
 
@@ -135,65 +88,27 @@ module Network.Google.Speech.Types
     , longRunningRecognizeResponse
     , lrrrResults
 
-    -- * RecognitionConfig
-    , RecognitionConfig
-    , recognitionConfig
-    , rcEnableWordTimeOffSets
-    , rcSpeechContexts
-    , rcLanguageCode
-    , rcDiarizationConfig
-    , rcSampleRateHertz
-    , rcEnableAutomaticPunctuation
-    , rcMaxAlternatives
-    , rcAudioChannelCount
-    , rcEnableSeparateRecognitionPerChannel
-    , rcModel
-    , rcEnableSpeakerDiarization
-    , rcMetadata
-    , rcUseEnhanced
-    , rcProfanityFilter
-    , rcDiarizationSpeakerCount
-    , rcEncoding
-    , rcAlternativeLanguageCodes
-    , rcEnableWordConfidence
-
-    -- * LongRunningRecognizeRequest
-    , LongRunningRecognizeRequest
-    , longRunningRecognizeRequest
-    , lrrrConfig
-    , lrrrAudio
-
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
     , omAddtional
 
-    -- * RecognitionConfigEncoding
-    , RecognitionConfigEncoding (..)
-
     -- * OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
-
-    -- * SpeakerDiarizationConfig
-    , SpeakerDiarizationConfig
-    , speakerDiarizationConfig
-    , sdcMinSpeakerCount
-    , sdcMaxSpeakerCount
-    , sdcEnableSpeakerDiarization
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Speech.Types.Product
-import           Network.Google.Speech.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Speech.Types.Product
+import Network.Google.Speech.Types.Sum
 
--- | Default request referring to version 'v1p1beta1' of the Cloud Speech-to-Text API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2beta1' of the Cloud Speech-to-Text API. This contains the host and root path used as a starting point for constructing service requests.
 speechService :: ServiceConfig
 speechService
-  = defaultService (ServiceId "speech:v1p1beta1")
+  = defaultService (ServiceId "speech:v2beta1")
       "speech.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

@@ -23,7 +23,7 @@
 -- Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.logs.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.logs.list@.
 module Network.Google.Resource.Logging.BillingAccounts.Logs.List
     (
     -- * REST Resource
@@ -41,11 +41,12 @@ module Network.Google.Resource.Logging.BillingAccounts.Logs.List
     , ballUploadType
     , ballPageToken
     , ballPageSize
+    , ballResourceNames
     , ballCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.logs.list@ method which the
 -- 'BillingAccountsLogsList' request conforms to.
@@ -59,9 +60,10 @@ type BillingAccountsLogsListResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListLogsResponse
+                       QueryParams "resourceNames" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
@@ -69,14 +71,15 @@ type BillingAccountsLogsListResource =
 -- /See:/ 'billingAccountsLogsList' smart constructor.
 data BillingAccountsLogsList =
   BillingAccountsLogsList'
-    { _ballParent         :: !Text
-    , _ballXgafv          :: !(Maybe Xgafv)
+    { _ballParent :: !Text
+    , _ballXgafv :: !(Maybe Xgafv)
     , _ballUploadProtocol :: !(Maybe Text)
-    , _ballAccessToken    :: !(Maybe Text)
-    , _ballUploadType     :: !(Maybe Text)
-    , _ballPageToken      :: !(Maybe Text)
-    , _ballPageSize       :: !(Maybe (Textual Int32))
-    , _ballCallback       :: !(Maybe Text)
+    , _ballAccessToken :: !(Maybe Text)
+    , _ballUploadType :: !(Maybe Text)
+    , _ballPageToken :: !(Maybe Text)
+    , _ballPageSize :: !(Maybe (Textual Int32))
+    , _ballResourceNames :: !(Maybe [Text])
+    , _ballCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,6 +102,8 @@ data BillingAccountsLogsList =
 --
 -- * 'ballPageSize'
 --
+-- * 'ballResourceNames'
+--
 -- * 'ballCallback'
 billingAccountsLogsList
     :: Text -- ^ 'ballParent'
@@ -112,13 +117,14 @@ billingAccountsLogsList pBallParent_ =
     , _ballUploadType = Nothing
     , _ballPageToken = Nothing
     , _ballPageSize = Nothing
+    , _ballResourceNames = Nothing
     , _ballCallback = Nothing
     }
 
 
--- | Required. The resource name that owns the logs:
--- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
+-- | Required. The resource name that owns the logs: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
 ballParent :: Lens' BillingAccountsLogsList Text
 ballParent
   = lens _ballParent (\ s a -> s{_ballParent = a})
@@ -163,6 +169,21 @@ ballPageSize
   = lens _ballPageSize (\ s a -> s{_ballPageSize = a})
       . mapping _Coerce
 
+-- | Optional. The resource name that owns the logs:
+-- projects\/[PROJECT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- organizations\/[ORGANIZATION_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- folders\/[FOLDER_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]To
+-- support legacy queries, it could also be: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
+ballResourceNames :: Lens' BillingAccountsLogsList [Text]
+ballResourceNames
+  = lens _ballResourceNames
+      (\ s a -> s{_ballResourceNames = a})
+      . _Default
+      . _Coerce
+
 -- | JSONP
 ballCallback :: Lens' BillingAccountsLogsList (Maybe Text)
 ballCallback
@@ -181,6 +202,7 @@ instance GoogleRequest BillingAccountsLogsList where
               _ballUploadType
               _ballPageToken
               _ballPageSize
+              (_ballResourceNames ^. _Default)
               _ballCallback
               (Just AltJSON)
               loggingService

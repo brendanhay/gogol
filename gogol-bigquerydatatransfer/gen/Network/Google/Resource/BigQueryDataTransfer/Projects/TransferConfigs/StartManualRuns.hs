@@ -25,7 +25,7 @@
 -- the run_time is between start_time (inclusive) and end_time (exclusive),
 -- or for a specific run_time.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.startManualRuns@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.startManualRuns@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Sta
     , ptcsmrCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.startManualRuns@ method which the
 -- 'ProjectsTransferConfigsStartManualRuns' request conforms to.
@@ -70,13 +70,13 @@ type ProjectsTransferConfigsStartManualRunsResource =
 -- /See:/ 'projectsTransferConfigsStartManualRuns' smart constructor.
 data ProjectsTransferConfigsStartManualRuns =
   ProjectsTransferConfigsStartManualRuns'
-    { _ptcsmrParent         :: !Text
-    , _ptcsmrXgafv          :: !(Maybe Xgafv)
+    { _ptcsmrParent :: !Text
+    , _ptcsmrXgafv :: !(Maybe Xgafv)
     , _ptcsmrUploadProtocol :: !(Maybe Text)
-    , _ptcsmrAccessToken    :: !(Maybe Text)
-    , _ptcsmrUploadType     :: !(Maybe Text)
-    , _ptcsmrPayload        :: !StartManualTransferRunsRequest
-    , _ptcsmrCallback       :: !(Maybe Text)
+    , _ptcsmrAccessToken :: !(Maybe Text)
+    , _ptcsmrUploadType :: !(Maybe Text)
+    , _ptcsmrPayload :: !StartManualTransferRunsRequest
+    , _ptcsmrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,7 +115,8 @@ projectsTransferConfigsStartManualRuns pPtcsmrParent_ pPtcsmrPayload_ =
 
 
 -- | Transfer configuration name in the form:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`.
+-- \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`.
 ptcsmrParent :: Lens' ProjectsTransferConfigsStartManualRuns Text
 ptcsmrParent
   = lens _ptcsmrParent (\ s a -> s{_ptcsmrParent = a})

@@ -23,7 +23,7 @@
 -- Lists Version resources that the producer has access to, within the
 -- scope of the parent Product.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.list@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.list@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Ver
     , cpvlCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.versions.list@ method which the
 -- 'CatalogsProductsVersionsList' request conforms to.
@@ -70,14 +70,14 @@ type CatalogsProductsVersionsListResource =
 -- /See:/ 'catalogsProductsVersionsList' smart constructor.
 data CatalogsProductsVersionsList =
   CatalogsProductsVersionsList'
-    { _cpvlParent         :: !Text
-    , _cpvlXgafv          :: !(Maybe Xgafv)
+    { _cpvlParent :: !Text
+    , _cpvlXgafv :: !(Maybe Xgafv)
     , _cpvlUploadProtocol :: !(Maybe Text)
-    , _cpvlAccessToken    :: !(Maybe Text)
-    , _cpvlUploadType     :: !(Maybe Text)
-    , _cpvlPageToken      :: !(Maybe Text)
-    , _cpvlPageSize       :: !(Maybe (Textual Int32))
-    , _cpvlCallback       :: !(Maybe Text)
+    , _cpvlAccessToken :: !(Maybe Text)
+    , _cpvlUploadType :: !(Maybe Text)
+    , _cpvlPageToken :: !(Maybe Text)
+    , _cpvlPageSize :: !(Maybe (Textual Int32))
+    , _cpvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

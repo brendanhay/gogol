@@ -73,29 +73,8 @@ module Network.Google.CloudIOT
     -- ** cloudiot.projects.locations.registries.getIamPolicy
     , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.GetIAMPolicy
 
-    -- ** cloudiot.projects.locations.registries.groups.bindDeviceToGateway
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.BindDeviceToGateway
-
-    -- ** cloudiot.projects.locations.registries.groups.devices.configVersions.list
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.ConfigVersions.List
-
-    -- ** cloudiot.projects.locations.registries.groups.devices.get
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.Get
-
     -- ** cloudiot.projects.locations.registries.groups.devices.list
     , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
-
-    -- ** cloudiot.projects.locations.registries.groups.devices.modifyCloudToDeviceConfig
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.ModifyCloudToDeviceConfig
-
-    -- ** cloudiot.projects.locations.registries.groups.devices.patch
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.Patch
-
-    -- ** cloudiot.projects.locations.registries.groups.devices.sendCommandToDevice
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.SendCommandToDevice
-
-    -- ** cloudiot.projects.locations.registries.groups.devices.states.list
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.States.List
 
     -- ** cloudiot.projects.locations.registries.groups.getIamPolicy
     , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.GetIAMPolicy
@@ -105,9 +84,6 @@ module Network.Google.CloudIOT
 
     -- ** cloudiot.projects.locations.registries.groups.testIamPermissions
     , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.TestIAMPermissions
-
-    -- ** cloudiot.projects.locations.registries.groups.unbindDeviceFromGateway
-    , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.UnbindDeviceFromGateway
 
     -- ** cloudiot.projects.locations.registries.list
     , module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.List
@@ -133,6 +109,9 @@ module Network.Google.CloudIOT
     , sCode
     , sMessage
 
+    -- ** ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
+    , ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..)
+
     -- ** UnbindDeviceFromGatewayResponse
     , UnbindDeviceFromGatewayResponse
     , unbindDeviceFromGatewayResponse
@@ -154,6 +133,7 @@ module Network.Google.CloudIOT
     -- ** GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
 
     -- ** ListDeviceRegistriesResponse
     , ListDeviceRegistriesResponse
@@ -193,6 +173,9 @@ module Network.Google.CloudIOT
     -- ** Empty
     , Empty
     , empty
+
+    -- ** ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
+    , ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..)
 
     -- ** StateNotificationConfig
     , StateNotificationConfig
@@ -259,6 +242,11 @@ module Network.Google.CloudIOT
 
     -- ** PublicKeyCredentialFormat
     , PublicKeyCredentialFormat (..)
+
+    -- ** GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
 
     -- ** MqttConfig
     , MqttConfig
@@ -384,39 +372,31 @@ module Network.Google.CloudIOT
     , bCondition
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Create
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Delete
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Create
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Delete
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Get
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Patch
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.States.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Get
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.GetIAMPolicy
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.BindDeviceToGateway
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.ConfigVersions.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.Get
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.ModifyCloudToDeviceConfig
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.Patch
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.SendCommandToDevice
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.States.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.GetIAMPolicy
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.SetIAMPolicy
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.TestIAMPermissions
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.UnbindDeviceFromGateway
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.List
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Patch
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.SetIAMPolicy
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.TestIAMPermissions
-import           Network.Google.Resource.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
+import Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Create
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Delete
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Create
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Delete
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Get
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.List
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Patch
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.States.List
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Get
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.GetIAMPolicy
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.GetIAMPolicy
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.SetIAMPolicy
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.TestIAMPermissions
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.List
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Patch
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.SetIAMPolicy
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.TestIAMPermissions
+import Network.Google.Resource.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
 
 {- $resources
 TODO
@@ -424,23 +404,7 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud IoT API service.
 type CloudIOTAPI =
-     ProjectsLocationsRegistriesGroupsDevicesStatesListResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsDevicesConfigVersionsListResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsDevicesListResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfigResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsDevicesPatchResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsDevicesGetResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsDevicesSendCommandToDeviceResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsUnbindDeviceFromGatewayResource
-       :<|>
-       ProjectsLocationsRegistriesGroupsBindDeviceToGatewayResource
+     ProjectsLocationsRegistriesGroupsDevicesListResource
        :<|>
        ProjectsLocationsRegistriesGroupsGetIAMPolicyResource
        :<|>

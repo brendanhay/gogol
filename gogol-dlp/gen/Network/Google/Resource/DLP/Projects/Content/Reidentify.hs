@@ -44,8 +44,8 @@ module Network.Google.Resource.DLP.Projects.Content.Reidentify
     , pcrCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.content.reidentify@ method which the
 -- 'ProjectsContentReidentify' request conforms to.
@@ -72,13 +72,13 @@ type ProjectsContentReidentifyResource =
 -- /See:/ 'projectsContentReidentify' smart constructor.
 data ProjectsContentReidentify =
   ProjectsContentReidentify'
-    { _pcrParent         :: !Text
-    , _pcrXgafv          :: !(Maybe Xgafv)
+    { _pcrParent :: !Text
+    , _pcrXgafv :: !(Maybe Xgafv)
     , _pcrUploadProtocol :: !(Maybe Text)
-    , _pcrAccessToken    :: !(Maybe Text)
-    , _pcrUploadType     :: !(Maybe Text)
-    , _pcrPayload        :: !GooglePrivacyDlpV2ReidentifyContentRequest
-    , _pcrCallback       :: !(Maybe Text)
+    , _pcrAccessToken :: !(Maybe Text)
+    , _pcrUploadType :: !(Maybe Text)
+    , _pcrPayload :: !GooglePrivacyDlpV2ReidentifyContentRequest
+    , _pcrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,7 +116,16 @@ projectsContentReidentify pPcrParent_ pPcrPayload_ =
     }
 
 
--- | The parent resource name.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID The
+-- following example \`parent\` string specifies a parent project with the
+-- identifier \`example-project\`, and specifies the \`europe-west3\`
+-- location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pcrParent :: Lens' ProjectsContentReidentify Text
 pcrParent
   = lens _pcrParent (\ s a -> s{_pcrParent = a})

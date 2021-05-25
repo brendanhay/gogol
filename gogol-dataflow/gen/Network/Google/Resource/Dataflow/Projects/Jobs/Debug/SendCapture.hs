@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
     , pjdscCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.debug.sendCapture@ method which the
 -- 'ProjectsJobsDebugSendCapture' request conforms to.
@@ -70,14 +70,14 @@ type ProjectsJobsDebugSendCaptureResource =
 -- /See:/ 'projectsJobsDebugSendCapture' smart constructor.
 data ProjectsJobsDebugSendCapture =
   ProjectsJobsDebugSendCapture'
-    { _pjdscXgafv          :: !(Maybe Xgafv)
-    , _pjdscJobId          :: !Text
+    { _pjdscXgafv :: !(Maybe Xgafv)
+    , _pjdscJobId :: !Text
     , _pjdscUploadProtocol :: !(Maybe Text)
-    , _pjdscAccessToken    :: !(Maybe Text)
-    , _pjdscUploadType     :: !(Maybe Text)
-    , _pjdscPayload        :: !SendDebugCaptureRequest
-    , _pjdscProjectId      :: !Text
-    , _pjdscCallback       :: !(Maybe Text)
+    , _pjdscAccessToken :: !(Maybe Text)
+    , _pjdscUploadType :: !(Maybe Text)
+    , _pjdscPayload :: !SendDebugCaptureRequest
+    , _pjdscProjectId :: !Text
+    , _pjdscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

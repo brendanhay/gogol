@@ -44,8 +44,8 @@ module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.List
     , afirlCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.list@ method which the
 -- 'AppsFirewallIngressRulesList' request conforms to.
@@ -71,15 +71,15 @@ type AppsFirewallIngressRulesListResource =
 -- /See:/ 'appsFirewallIngressRulesList' smart constructor.
 data AppsFirewallIngressRulesList =
   AppsFirewallIngressRulesList'
-    { _afirlXgafv           :: !(Maybe Xgafv)
-    , _afirlUploadProtocol  :: !(Maybe Text)
+    { _afirlXgafv :: !(Maybe Xgafv)
+    , _afirlUploadProtocol :: !(Maybe Text)
     , _afirlMatchingAddress :: !(Maybe Text)
-    , _afirlAccessToken     :: !(Maybe Text)
-    , _afirlUploadType      :: !(Maybe Text)
-    , _afirlAppsId          :: !Text
-    , _afirlPageToken       :: !(Maybe Text)
-    , _afirlPageSize        :: !(Maybe (Textual Int32))
-    , _afirlCallback        :: !(Maybe Text)
+    , _afirlAccessToken :: !(Maybe Text)
+    , _afirlUploadType :: !(Maybe Text)
+    , _afirlAppsId :: !Text
+    , _afirlPageToken :: !(Maybe Text)
+    , _afirlPageSize :: !(Maybe (Textual Int32))
+    , _afirlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

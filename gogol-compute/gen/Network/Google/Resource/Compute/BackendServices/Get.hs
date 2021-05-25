@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.BackendServices.Get
     , bsgBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.get@ method which the
 -- 'BackendServicesGet' request conforms to.
@@ -60,7 +60,7 @@ type BackendServicesGetResource =
 -- /See:/ 'backendServicesGet' smart constructor.
 data BackendServicesGet =
   BackendServicesGet'
-    { _bsgProject        :: !Text
+    { _bsgProject :: !Text
     , _bsgBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

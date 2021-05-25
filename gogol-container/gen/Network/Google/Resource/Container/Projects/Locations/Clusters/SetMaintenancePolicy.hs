@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.SetMaintena
     , plcsmpCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.setMaintenancePolicy@ method which the
 -- 'ProjectsLocationsClustersSetMaintenancePolicy' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsLocationsClustersSetMaintenancePolicyResource
 -- /See:/ 'projectsLocationsClustersSetMaintenancePolicy' smart constructor.
 data ProjectsLocationsClustersSetMaintenancePolicy =
   ProjectsLocationsClustersSetMaintenancePolicy'
-    { _plcsmpXgafv          :: !(Maybe Xgafv)
+    { _plcsmpXgafv :: !(Maybe Xgafv)
     , _plcsmpUploadProtocol :: !(Maybe Text)
-    , _plcsmpAccessToken    :: !(Maybe Text)
-    , _plcsmpUploadType     :: !(Maybe Text)
-    , _plcsmpPayload        :: !SetMaintenancePolicyRequest
-    , _plcsmpName           :: !Text
-    , _plcsmpCallback       :: !(Maybe Text)
+    , _plcsmpAccessToken :: !(Maybe Text)
+    , _plcsmpUploadType :: !(Maybe Text)
+    , _plcsmpPayload :: !SetMaintenancePolicyRequest
+    , _plcsmpName :: !Text
+    , _plcsmpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +140,7 @@ plcsmpPayload
 
 -- | The name (project, location, cluster id) of the cluster to set
 -- maintenance policy. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\`.
 plcsmpName :: Lens' ProjectsLocationsClustersSetMaintenancePolicy Text
 plcsmpName
   = lens _plcsmpName (\ s a -> s{_plcsmpName = a})

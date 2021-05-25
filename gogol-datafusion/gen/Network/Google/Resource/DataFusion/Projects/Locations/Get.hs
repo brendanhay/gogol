@@ -41,13 +41,13 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Get
     , plgCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.get@ method which the
 -- 'ProjectsLocationsGet' request conforms to.
 type ProjectsLocationsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsLocationsGetResource =
 -- /See:/ 'projectsLocationsGet' smart constructor.
 data ProjectsLocationsGet =
   ProjectsLocationsGet'
-    { _plgXgafv          :: !(Maybe Xgafv)
+    { _plgXgafv :: !(Maybe Xgafv)
     , _plgUploadProtocol :: !(Maybe Text)
-    , _plgAccessToken    :: !(Maybe Text)
-    , _plgUploadType     :: !(Maybe Text)
-    , _plgName           :: !Text
-    , _plgCallback       :: !(Maybe Text)
+    , _plgAccessToken :: !(Maybe Text)
+    , _plgUploadType :: !(Maybe Text)
+    , _plgName :: !Text
+    , _plgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

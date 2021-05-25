@@ -34,14 +34,19 @@ module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.
     , ManagedConfigurationsforDeviceDelete
 
     -- * Request Lenses
+    , mcddXgafv
+    , mcddUploadProtocol
     , mcddEnterpriseId
+    , mcddAccessToken
+    , mcddUploadType
     , mcddUserId
     , mcddDeviceId
     , mcddManagedConfigurationForDeviceId
+    , mcddCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.managedconfigurationsfordevice.delete@ method which the
 -- 'ManagedConfigurationsforDeviceDelete' request conforms to.
@@ -56,7 +61,12 @@ type ManagedConfigurationsforDeviceDeleteResource =
                    Capture "deviceId" Text :>
                      "managedConfigurationsForDevice" :>
                        Capture "managedConfigurationForDeviceId" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a per-device managed configuration for an app for the specified
 -- device.
@@ -64,10 +74,15 @@ type ManagedConfigurationsforDeviceDeleteResource =
 -- /See:/ 'managedConfigurationsforDeviceDelete' smart constructor.
 data ManagedConfigurationsforDeviceDelete =
   ManagedConfigurationsforDeviceDelete'
-    { _mcddEnterpriseId                    :: !Text
-    , _mcddUserId                          :: !Text
-    , _mcddDeviceId                        :: !Text
+    { _mcddXgafv :: !(Maybe Xgafv)
+    , _mcddUploadProtocol :: !(Maybe Text)
+    , _mcddEnterpriseId :: !Text
+    , _mcddAccessToken :: !(Maybe Text)
+    , _mcddUploadType :: !(Maybe Text)
+    , _mcddUserId :: !Text
+    , _mcddDeviceId :: !Text
     , _mcddManagedConfigurationForDeviceId :: !Text
+    , _mcddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,13 +91,23 @@ data ManagedConfigurationsforDeviceDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mcddXgafv'
+--
+-- * 'mcddUploadProtocol'
+--
 -- * 'mcddEnterpriseId'
+--
+-- * 'mcddAccessToken'
+--
+-- * 'mcddUploadType'
 --
 -- * 'mcddUserId'
 --
 -- * 'mcddDeviceId'
 --
 -- * 'mcddManagedConfigurationForDeviceId'
+--
+-- * 'mcddCallback'
 managedConfigurationsforDeviceDelete
     :: Text -- ^ 'mcddEnterpriseId'
     -> Text -- ^ 'mcddUserId'
@@ -91,19 +116,47 @@ managedConfigurationsforDeviceDelete
     -> ManagedConfigurationsforDeviceDelete
 managedConfigurationsforDeviceDelete pMcddEnterpriseId_ pMcddUserId_ pMcddDeviceId_ pMcddManagedConfigurationForDeviceId_ =
   ManagedConfigurationsforDeviceDelete'
-    { _mcddEnterpriseId = pMcddEnterpriseId_
+    { _mcddXgafv = Nothing
+    , _mcddUploadProtocol = Nothing
+    , _mcddEnterpriseId = pMcddEnterpriseId_
+    , _mcddAccessToken = Nothing
+    , _mcddUploadType = Nothing
     , _mcddUserId = pMcddUserId_
     , _mcddDeviceId = pMcddDeviceId_
     , _mcddManagedConfigurationForDeviceId =
         pMcddManagedConfigurationForDeviceId_
+    , _mcddCallback = Nothing
     }
 
+
+-- | V1 error format.
+mcddXgafv :: Lens' ManagedConfigurationsforDeviceDelete (Maybe Xgafv)
+mcddXgafv
+  = lens _mcddXgafv (\ s a -> s{_mcddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mcddUploadProtocol :: Lens' ManagedConfigurationsforDeviceDelete (Maybe Text)
+mcddUploadProtocol
+  = lens _mcddUploadProtocol
+      (\ s a -> s{_mcddUploadProtocol = a})
 
 -- | The ID of the enterprise.
 mcddEnterpriseId :: Lens' ManagedConfigurationsforDeviceDelete Text
 mcddEnterpriseId
   = lens _mcddEnterpriseId
       (\ s a -> s{_mcddEnterpriseId = a})
+
+-- | OAuth access token.
+mcddAccessToken :: Lens' ManagedConfigurationsforDeviceDelete (Maybe Text)
+mcddAccessToken
+  = lens _mcddAccessToken
+      (\ s a -> s{_mcddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mcddUploadType :: Lens' ManagedConfigurationsforDeviceDelete (Maybe Text)
+mcddUploadType
+  = lens _mcddUploadType
+      (\ s a -> s{_mcddUploadType = a})
 
 -- | The ID of the user.
 mcddUserId :: Lens' ManagedConfigurationsforDeviceDelete Text
@@ -123,6 +176,11 @@ mcddManagedConfigurationForDeviceId
       (\ s a ->
          s{_mcddManagedConfigurationForDeviceId = a})
 
+-- | JSONP
+mcddCallback :: Lens' ManagedConfigurationsforDeviceDelete (Maybe Text)
+mcddCallback
+  = lens _mcddCallback (\ s a -> s{_mcddCallback = a})
+
 instance GoogleRequest
            ManagedConfigurationsforDeviceDelete
          where
@@ -133,6 +191,11 @@ instance GoogleRequest
           ManagedConfigurationsforDeviceDelete'{..}
           = go _mcddEnterpriseId _mcddUserId _mcddDeviceId
               _mcddManagedConfigurationForDeviceId
+              _mcddXgafv
+              _mcddUploadProtocol
+              _mcddAccessToken
+              _mcddUploadType
+              _mcddCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

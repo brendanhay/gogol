@@ -22,7 +22,7 @@
 --
 -- Returns a message.
 --
--- /See:/ <https://developers.google.com/hangouts/chat Hangouts Chat API Reference> for @chat.spaces.messages.get@.
+-- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.get@.
 module Network.Google.Resource.Chat.Spaces.Messages.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Chat.Spaces.Messages.Get
     , smgCallback
     ) where
 
-import           Network.Google.Chat.Types
-import           Network.Google.Prelude
+import Network.Google.Chat.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @chat.spaces.messages.get@ method which the
 -- 'SpacesMessagesGet' request conforms to.
@@ -61,12 +61,12 @@ type SpacesMessagesGetResource =
 -- /See:/ 'spacesMessagesGet' smart constructor.
 data SpacesMessagesGet =
   SpacesMessagesGet'
-    { _smgXgafv          :: !(Maybe Xgafv)
+    { _smgXgafv :: !(Maybe Xgafv)
     , _smgUploadProtocol :: !(Maybe Text)
-    , _smgAccessToken    :: !(Maybe Text)
-    , _smgUploadType     :: !(Maybe Text)
-    , _smgName           :: !Text
-    , _smgCallback       :: !(Maybe Text)
+    , _smgAccessToken :: !(Maybe Text)
+    , _smgUploadType :: !(Maybe Text)
+    , _smgName :: !Text
+    , _smgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

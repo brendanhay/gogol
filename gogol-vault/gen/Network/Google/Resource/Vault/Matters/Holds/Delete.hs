@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a hold by ID. This will release any HeldAccounts on this Hold.
+-- Removes the specified hold and releases the accounts or organizational
+-- unit covered by the hold. If the data is not preserved by another hold
+-- or retention rule, it might be purged.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.delete@.
 module Network.Google.Resource.Vault.Matters.Holds.Delete
@@ -42,8 +44,8 @@ module Network.Google.Resource.Vault.Matters.Holds.Delete
     , mhdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.delete@ method which the
 -- 'MattersHoldsDelete' request conforms to.
@@ -60,18 +62,20 @@ type MattersHoldsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Removes a hold by ID. This will release any HeldAccounts on this Hold.
+-- | Removes the specified hold and releases the accounts or organizational
+-- unit covered by the hold. If the data is not preserved by another hold
+-- or retention rule, it might be purged.
 --
 -- /See:/ 'mattersHoldsDelete' smart constructor.
 data MattersHoldsDelete =
   MattersHoldsDelete'
-    { _mhdXgafv          :: !(Maybe Xgafv)
+    { _mhdXgafv :: !(Maybe Xgafv)
     , _mhdUploadProtocol :: !(Maybe Text)
-    , _mhdHoldId         :: !Text
-    , _mhdAccessToken    :: !(Maybe Text)
-    , _mhdUploadType     :: !(Maybe Text)
-    , _mhdMatterId       :: !Text
-    , _mhdCallback       :: !(Maybe Text)
+    , _mhdHoldId :: !Text
+    , _mhdAccessToken :: !(Maybe Text)
+    , _mhdUploadType :: !(Maybe Text)
+    , _mhdMatterId :: !Text
+    , _mhdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

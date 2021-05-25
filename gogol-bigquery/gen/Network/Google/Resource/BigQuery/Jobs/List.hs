@@ -44,11 +44,12 @@ module Network.Google.Resource.BigQuery.Jobs.List
     , jlPageToken
     , jlProjectId
     , jlAllUsers
+    , jlParentJobId
     , jlMaxResults
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.list@ method which the
 -- 'JobsList' request conforms to.
@@ -64,8 +65,9 @@ type JobsListResource =
                      QueryParam "projection" JobsListProjection :>
                        QueryParam "pageToken" Text :>
                          QueryParam "allUsers" Bool :>
-                           QueryParam "maxResults" (Textual Word32) :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] JobList
+                           QueryParam "parentJobId" Text :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] JobList
 
 -- | Lists all jobs that you started in the specified project. Job
 -- information is available for a six month period after creation. The job
@@ -78,12 +80,13 @@ data JobsList =
   JobsList'
     { _jlMaxCreationTime :: !(Maybe (Textual Word64))
     , _jlMinCreationTime :: !(Maybe (Textual Word64))
-    , _jlStateFilter     :: !(Maybe [JobsListStateFilter])
-    , _jlProjection      :: !(Maybe JobsListProjection)
-    , _jlPageToken       :: !(Maybe Text)
-    , _jlProjectId       :: !Text
-    , _jlAllUsers        :: !(Maybe Bool)
-    , _jlMaxResults      :: !(Maybe (Textual Word32))
+    , _jlStateFilter :: !(Maybe [JobsListStateFilter])
+    , _jlProjection :: !(Maybe JobsListProjection)
+    , _jlPageToken :: !(Maybe Text)
+    , _jlProjectId :: !Text
+    , _jlAllUsers :: !(Maybe Bool)
+    , _jlParentJobId :: !(Maybe Text)
+    , _jlMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -106,6 +109,8 @@ data JobsList =
 --
 -- * 'jlAllUsers'
 --
+-- * 'jlParentJobId'
+--
 -- * 'jlMaxResults'
 jobsList
     :: Text -- ^ 'jlProjectId'
@@ -119,6 +124,7 @@ jobsList pJlProjectId_ =
     , _jlPageToken = Nothing
     , _jlProjectId = pJlProjectId_
     , _jlAllUsers = Nothing
+    , _jlParentJobId = Nothing
     , _jlMaxResults = Nothing
     }
 
@@ -168,6 +174,13 @@ jlAllUsers :: Lens' JobsList (Maybe Bool)
 jlAllUsers
   = lens _jlAllUsers (\ s a -> s{_jlAllUsers = a})
 
+-- | If set, retrieves only jobs whose parent is this job. Otherwise,
+-- retrieves only jobs which have no parent
+jlParentJobId :: Lens' JobsList (Maybe Text)
+jlParentJobId
+  = lens _jlParentJobId
+      (\ s a -> s{_jlParentJobId = a})
+
 -- | Maximum number of results to return
 jlMaxResults :: Lens' JobsList (Maybe Word32)
 jlMaxResults
@@ -187,6 +200,7 @@ instance GoogleRequest JobsList where
               _jlProjection
               _jlPageToken
               _jlAllUsers
+              _jlParentJobId
               _jlMaxResults
               (Just AltJSON)
               bigQueryService

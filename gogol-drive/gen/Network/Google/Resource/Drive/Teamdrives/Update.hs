@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Teamdrives.Update
     , tuUseDomainAdminAccess
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.teamdrives.update@ method which the
 -- 'TeamdrivesUpdate' request conforms to.
@@ -57,8 +57,8 @@ type TeamdrivesUpdateResource =
 -- /See:/ 'teamdrivesUpdate' smart constructor.
 data TeamdrivesUpdate =
   TeamdrivesUpdate'
-    { _tuPayload              :: !TeamDrive
-    , _tuTeamDriveId          :: !Text
+    { _tuPayload :: !TeamDrive
+    , _tuTeamDriveId :: !Text
     , _tuUseDomainAdminAccess :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)

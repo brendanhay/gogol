@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Projects.JobTriggers.Get
     , pjtgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.jobTriggers.get@ method which the
 -- 'ProjectsJobTriggersGet' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsJobTriggersGetResource =
 -- /See:/ 'projectsJobTriggersGet' smart constructor.
 data ProjectsJobTriggersGet =
   ProjectsJobTriggersGet'
-    { _pjtgXgafv          :: !(Maybe Xgafv)
+    { _pjtgXgafv :: !(Maybe Xgafv)
     , _pjtgUploadProtocol :: !(Maybe Text)
-    , _pjtgAccessToken    :: !(Maybe Text)
-    , _pjtgUploadType     :: !(Maybe Text)
-    , _pjtgName           :: !Text
-    , _pjtgCallback       :: !(Maybe Text)
+    , _pjtgAccessToken :: !(Maybe Text)
+    , _pjtgUploadType :: !(Maybe Text)
+    , _pjtgName :: !Text
+    , _pjtgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,7 +128,7 @@ pjtgUploadType
   = lens _pjtgUploadType
       (\ s a -> s{_pjtgUploadType = a})
 
--- | Resource name of the project and the triggeredJob, for example
+-- | Required. Resource name of the project and the triggeredJob, for example
 -- \`projects\/dlp-test-project\/jobTriggers\/53234423\`.
 pjtgName :: Lens' ProjectsJobTriggersGet Text
 pjtgName = lens _pjtgName (\ s a -> s{_pjtgName = a})

@@ -16,41 +16,40 @@
 --
 module Network.Google.ResourceManager.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | Output only. The lifecycle state of the folder. Updates to the
--- lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
-data FolderLifecycleState
-    = LifecycleStateUnspecified
-      -- ^ @LIFECYCLE_STATE_UNSPECIFIED@
-      -- Unspecified state.
+-- | Output only. The organization\'s current lifecycle state.
+data OrganizationState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified state. This is only useful for distinguishing unset values.
     | Active
       -- ^ @ACTIVE@
       -- The normal and active state.
     | DeleteRequested
       -- ^ @DELETE_REQUESTED@
-      -- The folder has been marked for deletion by the user.
+      -- The organization has been marked for deletion by the user.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable FolderLifecycleState
+instance Hashable OrganizationState
 
-instance FromHttpApiData FolderLifecycleState where
+instance FromHttpApiData OrganizationState where
     parseQueryParam = \case
-        "LIFECYCLE_STATE_UNSPECIFIED" -> Right LifecycleStateUnspecified
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
         "ACTIVE" -> Right Active
         "DELETE_REQUESTED" -> Right DeleteRequested
-        x -> Left ("Unable to parse FolderLifecycleState from: " <> x)
+        x -> Left ("Unable to parse OrganizationState from: " <> x)
 
-instance ToHttpApiData FolderLifecycleState where
+instance ToHttpApiData OrganizationState where
     toQueryParam = \case
-        LifecycleStateUnspecified -> "LIFECYCLE_STATE_UNSPECIFIED"
+        StateUnspecified -> "STATE_UNSPECIFIED"
         Active -> "ACTIVE"
         DeleteRequested -> "DELETE_REQUESTED"
 
-instance FromJSON FolderLifecycleState where
-    parseJSON = parseJSONText "FolderLifecycleState"
+instance FromJSON OrganizationState where
+    parseJSON = parseJSONText "OrganizationState"
 
-instance ToJSON FolderLifecycleState where
+instance ToJSON OrganizationState where
     toJSON = toJSONText
 
 -- | The type of operation error experienced.
@@ -224,4 +223,144 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | Output only. The project lifecycle state.
+data ProjectState
+    = PSStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified state. This is only used\/useful for distinguishing unset
+      -- values.
+    | PSActive
+      -- ^ @ACTIVE@
+      -- The normal and active state.
+    | PSDeleteRequested
+      -- ^ @DELETE_REQUESTED@
+      -- The project has been marked for deletion by the user (by invoking
+      -- DeleteProject) or by the system (Google Cloud Platform). This can
+      -- generally be reversed by invoking UndeleteProject.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectState
+
+instance FromHttpApiData ProjectState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right PSStateUnspecified
+        "ACTIVE" -> Right PSActive
+        "DELETE_REQUESTED" -> Right PSDeleteRequested
+        x -> Left ("Unable to parse ProjectState from: " <> x)
+
+instance ToHttpApiData ProjectState where
+    toQueryParam = \case
+        PSStateUnspecified -> "STATE_UNSPECIFIED"
+        PSActive -> "ACTIVE"
+        PSDeleteRequested -> "DELETE_REQUESTED"
+
+instance FromJSON ProjectState where
+    parseJSON = parseJSONText "ProjectState"
+
+instance ToJSON ProjectState where
+    toJSON = toJSONText
+
+-- | The type of this operation.
+data CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType
+    = CRMGCRMVFOOTOperationTypeUnspecified
+      -- ^ @OPERATION_TYPE_UNSPECIFIED@
+      -- Operation type not specified.
+    | CRMGCRMVFOOTCreate
+      -- ^ @CREATE@
+      -- A create folder operation.
+    | CRMGCRMVFOOTMove
+      -- ^ @MOVE@
+      -- A move folder operation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType
+
+instance FromHttpApiData CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType where
+    parseQueryParam = \case
+        "OPERATION_TYPE_UNSPECIFIED" -> Right CRMGCRMVFOOTOperationTypeUnspecified
+        "CREATE" -> Right CRMGCRMVFOOTCreate
+        "MOVE" -> Right CRMGCRMVFOOTMove
+        x -> Left ("Unable to parse CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType from: " <> x)
+
+instance ToHttpApiData CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType where
+    toQueryParam = \case
+        CRMGCRMVFOOTOperationTypeUnspecified -> "OPERATION_TYPE_UNSPECIFIED"
+        CRMGCRMVFOOTCreate -> "CREATE"
+        CRMGCRMVFOOTMove -> "MOVE"
+
+instance FromJSON CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType where
+    parseJSON = parseJSONText "CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType"
+
+instance ToJSON CloudResourceManagerGoogleCloudResourceManagerV2beta1FolderOperationOperationType where
+    toJSON = toJSONText
+
+-- | The type of this operation.
+data CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType
+    = COperationTypeUnspecified
+      -- ^ @OPERATION_TYPE_UNSPECIFIED@
+      -- Operation type not specified.
+    | CCreate
+      -- ^ @CREATE@
+      -- A create folder operation.
+    | CMove
+      -- ^ @MOVE@
+      -- A move folder operation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType
+
+instance FromHttpApiData CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType where
+    parseQueryParam = \case
+        "OPERATION_TYPE_UNSPECIFIED" -> Right COperationTypeUnspecified
+        "CREATE" -> Right CCreate
+        "MOVE" -> Right CMove
+        x -> Left ("Unable to parse CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType from: " <> x)
+
+instance ToHttpApiData CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType where
+    toQueryParam = \case
+        COperationTypeUnspecified -> "OPERATION_TYPE_UNSPECIFIED"
+        CCreate -> "CREATE"
+        CMove -> "MOVE"
+
+instance FromJSON CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType where
+    parseJSON = parseJSONText "CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType"
+
+instance ToJSON CloudResourceManagerGoogleCloudResourceManagerV2alpha1FolderOperationOperationType where
+    toJSON = toJSONText
+
+-- | Output only. The lifecycle state of the folder. Updates to the state
+-- must be performed using DeleteFolder and UndeleteFolder.
+data FolderState
+    = FSStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified state.
+    | FSActive
+      -- ^ @ACTIVE@
+      -- The normal and active state.
+    | FSDeleteRequested
+      -- ^ @DELETE_REQUESTED@
+      -- The folder has been marked for deletion by the user.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FolderState
+
+instance FromHttpApiData FolderState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right FSStateUnspecified
+        "ACTIVE" -> Right FSActive
+        "DELETE_REQUESTED" -> Right FSDeleteRequested
+        x -> Left ("Unable to parse FolderState from: " <> x)
+
+instance ToHttpApiData FolderState where
+    toQueryParam = \case
+        FSStateUnspecified -> "STATE_UNSPECIFIED"
+        FSActive -> "ACTIVE"
+        FSDeleteRequested -> "DELETE_REQUESTED"
+
+instance FromJSON FolderState where
+    parseJSON = parseJSONText "FolderState"
+
+instance ToJSON FolderState where
     toJSON = toJSONText

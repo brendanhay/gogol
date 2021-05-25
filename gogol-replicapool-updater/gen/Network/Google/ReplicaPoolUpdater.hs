@@ -203,18 +203,18 @@ module Network.Google.ReplicaPoolUpdater
     , owiMessage
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
-import           Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
-import           Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
-import           Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
+import Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
+import Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
+import Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
 
 {- $resources
 TODO

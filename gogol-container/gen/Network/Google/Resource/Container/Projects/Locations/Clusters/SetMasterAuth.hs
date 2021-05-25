@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.SetMasterAu
     , plcsmaCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.setMasterAuth@ method which the
 -- 'ProjectsLocationsClustersSetMasterAuth' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsLocationsClustersSetMasterAuthResource =
 -- /See:/ 'projectsLocationsClustersSetMasterAuth' smart constructor.
 data ProjectsLocationsClustersSetMasterAuth =
   ProjectsLocationsClustersSetMasterAuth'
-    { _plcsmaXgafv          :: !(Maybe Xgafv)
+    { _plcsmaXgafv :: !(Maybe Xgafv)
     , _plcsmaUploadProtocol :: !(Maybe Text)
-    , _plcsmaAccessToken    :: !(Maybe Text)
-    , _plcsmaUploadType     :: !(Maybe Text)
-    , _plcsmaPayload        :: !SetMasterAuthRequest
-    , _plcsmaName           :: !Text
-    , _plcsmaCallback       :: !(Maybe Text)
+    , _plcsmaAccessToken :: !(Maybe Text)
+    , _plcsmaUploadType :: !(Maybe Text)
+    , _plcsmaPayload :: !SetMasterAuthRequest
+    , _plcsmaName :: !Text
+    , _plcsmaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -142,7 +142,7 @@ plcsmaPayload
       (\ s a -> s{_plcsmaPayload = a})
 
 -- | The name (project, location, cluster) of the cluster to set auth.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcsmaName :: Lens' ProjectsLocationsClustersSetMasterAuth Text
 plcsmaName
   = lens _plcsmaName (\ s a -> s{_plcsmaName = a})

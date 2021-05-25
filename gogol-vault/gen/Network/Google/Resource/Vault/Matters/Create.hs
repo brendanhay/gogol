@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new matter with the given name and description. The initial
--- state is open, and the owner is the method caller. Returns the created
--- matter with default view.
+-- Creates a matter with the given name and description. The initial state
+-- is open, and the owner is the method caller. Returns the created matter
+-- with default view.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.create@.
 module Network.Google.Resource.Vault.Matters.Create
@@ -43,8 +43,8 @@ module Network.Google.Resource.Vault.Matters.Create
     , mCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.create@ method which the
 -- 'MattersCreate' request conforms to.
@@ -59,19 +59,19 @@ type MattersCreateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Matter :> Post '[JSON] Matter
 
--- | Creates a new matter with the given name and description. The initial
--- state is open, and the owner is the method caller. Returns the created
--- matter with default view.
+-- | Creates a matter with the given name and description. The initial state
+-- is open, and the owner is the method caller. Returns the created matter
+-- with default view.
 --
 -- /See:/ 'mattersCreate' smart constructor.
 data MattersCreate =
   MattersCreate'
-    { _mXgafv          :: !(Maybe Xgafv)
+    { _mXgafv :: !(Maybe Xgafv)
     , _mUploadProtocol :: !(Maybe Text)
-    , _mAccessToken    :: !(Maybe Text)
-    , _mUploadType     :: !(Maybe Text)
-    , _mPayload        :: !Matter
-    , _mCallback       :: !(Maybe Text)
+    , _mAccessToken :: !(Maybe Text)
+    , _mUploadType :: !(Maybe Text)
+    , _mPayload :: !Matter
+    , _mCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified transfer run.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.runs.delete@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.runs.delete@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcrdCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.runs.delete@ method which the
 -- 'ProjectsLocationsTransferConfigsRunsDelete' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsLocationsTransferConfigsRunsDeleteResource
 -- /See:/ 'projectsLocationsTransferConfigsRunsDelete' smart constructor.
 data ProjectsLocationsTransferConfigsRunsDelete =
   ProjectsLocationsTransferConfigsRunsDelete'
-    { _pltcrdXgafv          :: !(Maybe Xgafv)
+    { _pltcrdXgafv :: !(Maybe Xgafv)
     , _pltcrdUploadProtocol :: !(Maybe Text)
-    , _pltcrdAccessToken    :: !(Maybe Text)
-    , _pltcrdUploadType     :: !(Maybe Text)
-    , _pltcrdName           :: !Text
-    , _pltcrdCallback       :: !(Maybe Text)
+    , _pltcrdAccessToken :: !(Maybe Text)
+    , _pltcrdUploadType :: !(Maybe Text)
+    , _pltcrdName :: !Text
+    , _pltcrdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,11 @@ pltcrdUploadType
   = lens _pltcrdUploadType
       (\ s a -> s{_pltcrdUploadType = a})
 
--- | The field will contain name of the resource requested, for example:
+-- | Required. The field will contain name of the resource requested, for
+-- example:
 -- \`projects\/{project_id}\/transferConfigs\/{config_id}\/runs\/{run_id}\`
+-- or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\/runs\/{run_id}\`
 pltcrdName :: Lens' ProjectsLocationsTransferConfigsRunsDelete Text
 pltcrdName
   = lens _pltcrdName (\ s a -> s{_pltcrdName = a})

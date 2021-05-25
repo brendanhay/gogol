@@ -49,8 +49,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Operations.Cancel
     , piocCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.operations.cancel@ method which the
 -- 'ProjectsInstancesOperationsCancel' request conforms to.
@@ -77,12 +77,12 @@ type ProjectsInstancesOperationsCancelResource =
 -- /See:/ 'projectsInstancesOperationsCancel' smart constructor.
 data ProjectsInstancesOperationsCancel =
   ProjectsInstancesOperationsCancel'
-    { _piocXgafv          :: !(Maybe Xgafv)
+    { _piocXgafv :: !(Maybe Xgafv)
     , _piocUploadProtocol :: !(Maybe Text)
-    , _piocAccessToken    :: !(Maybe Text)
-    , _piocUploadType     :: !(Maybe Text)
-    , _piocName           :: !Text
-    , _piocCallback       :: !(Maybe Text)
+    , _piocAccessToken :: !(Maybe Text)
+    , _piocUploadType :: !(Maybe Text)
+    , _piocName :: !Text
+    , _piocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

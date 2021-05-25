@@ -22,7 +22,7 @@
 --
 -- Gets one video format by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.videoFormats.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.videoFormats.get@.
 module Network.Google.Resource.DFAReporting.VideoFormats.Get
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.VideoFormats.Get
     , VideoFormatsGet
 
     -- * Request Lenses
+    , vfgXgafv
+    , vfgUploadProtocol
+    , vfgAccessToken
+    , vfgUploadType
     , vfgProFileId
     , vfgId
+    , vfgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.videoFormats.get@ method which the
 -- 'VideoFormatsGet' request conforms to.
 type VideoFormatsGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "videoFormats" :>
                Capture "id" (Textual Int32) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] VideoFormat
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] VideoFormat
 
 -- | Gets one video format by ID.
 --
 -- /See:/ 'videoFormatsGet' smart constructor.
 data VideoFormatsGet =
   VideoFormatsGet'
-    { _vfgProFileId :: !(Textual Int64)
-    , _vfgId        :: !(Textual Int32)
+    { _vfgXgafv :: !(Maybe Xgafv)
+    , _vfgUploadProtocol :: !(Maybe Text)
+    , _vfgAccessToken :: !(Maybe Text)
+    , _vfgUploadType :: !(Maybe Text)
+    , _vfgProFileId :: !(Textual Int64)
+    , _vfgId :: !(Textual Int32)
+    , _vfgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,56 @@ data VideoFormatsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vfgXgafv'
+--
+-- * 'vfgUploadProtocol'
+--
+-- * 'vfgAccessToken'
+--
+-- * 'vfgUploadType'
+--
 -- * 'vfgProFileId'
 --
 -- * 'vfgId'
+--
+-- * 'vfgCallback'
 videoFormatsGet
     :: Int64 -- ^ 'vfgProFileId'
     -> Int32 -- ^ 'vfgId'
     -> VideoFormatsGet
 videoFormatsGet pVfgProFileId_ pVfgId_ =
   VideoFormatsGet'
-    {_vfgProFileId = _Coerce # pVfgProFileId_, _vfgId = _Coerce # pVfgId_}
+    { _vfgXgafv = Nothing
+    , _vfgUploadProtocol = Nothing
+    , _vfgAccessToken = Nothing
+    , _vfgUploadType = Nothing
+    , _vfgProFileId = _Coerce # pVfgProFileId_
+    , _vfgId = _Coerce # pVfgId_
+    , _vfgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+vfgXgafv :: Lens' VideoFormatsGet (Maybe Xgafv)
+vfgXgafv = lens _vfgXgafv (\ s a -> s{_vfgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vfgUploadProtocol :: Lens' VideoFormatsGet (Maybe Text)
+vfgUploadProtocol
+  = lens _vfgUploadProtocol
+      (\ s a -> s{_vfgUploadProtocol = a})
+
+-- | OAuth access token.
+vfgAccessToken :: Lens' VideoFormatsGet (Maybe Text)
+vfgAccessToken
+  = lens _vfgAccessToken
+      (\ s a -> s{_vfgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vfgUploadType :: Lens' VideoFormatsGet (Maybe Text)
+vfgUploadType
+  = lens _vfgUploadType
+      (\ s a -> s{_vfgUploadType = a})
 
 -- | User profile ID associated with this request.
 vfgProFileId :: Lens' VideoFormatsGet Int64
@@ -89,12 +143,22 @@ vfgId :: Lens' VideoFormatsGet Int32
 vfgId
   = lens _vfgId (\ s a -> s{_vfgId = a}) . _Coerce
 
+-- | JSONP
+vfgCallback :: Lens' VideoFormatsGet (Maybe Text)
+vfgCallback
+  = lens _vfgCallback (\ s a -> s{_vfgCallback = a})
+
 instance GoogleRequest VideoFormatsGet where
         type Rs VideoFormatsGet = VideoFormat
         type Scopes VideoFormatsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient VideoFormatsGet'{..}
-          = go _vfgProFileId _vfgId (Just AltJSON)
+          = go _vfgProFileId _vfgId _vfgXgafv
+              _vfgUploadProtocol
+              _vfgAccessToken
+              _vfgUploadType
+              _vfgCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

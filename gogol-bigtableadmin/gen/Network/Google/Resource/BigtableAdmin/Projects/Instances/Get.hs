@@ -41,8 +41,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Get
     , pigCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.get@ method which the
 -- 'ProjectsInstancesGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsInstancesGetResource =
 -- /See:/ 'projectsInstancesGet' smart constructor.
 data ProjectsInstancesGet =
   ProjectsInstancesGet'
-    { _pigXgafv          :: !(Maybe Xgafv)
+    { _pigXgafv :: !(Maybe Xgafv)
     , _pigUploadProtocol :: !(Maybe Text)
-    , _pigAccessToken    :: !(Maybe Text)
-    , _pigUploadType     :: !(Maybe Text)
-    , _pigName           :: !Text
-    , _pigCallback       :: !(Maybe Text)
+    , _pigAccessToken :: !(Maybe Text)
+    , _pigUploadType :: !(Maybe Text)
+    , _pigName :: !Text
+    , _pigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,8 +122,8 @@ pigUploadType
   = lens _pigUploadType
       (\ s a -> s{_pigUploadType = a})
 
--- | The unique name of the requested instance. Values are of the form
--- \`projects\/\/instances\/\`.
+-- | Required. The unique name of the requested instance. Values are of the
+-- form \`projects\/{project}\/instances\/{instance}\`.
 pigName :: Lens' ProjectsInstancesGet Text
 pigName = lens _pigName (\ s a -> s{_pigName = a})
 

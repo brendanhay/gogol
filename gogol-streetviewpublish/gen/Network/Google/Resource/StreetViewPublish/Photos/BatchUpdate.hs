@@ -30,9 +30,9 @@
 -- that can occur per photo. Only the fields specified in updateMask field
 -- are used. If \`updateMask\` is not present, the update applies to all
 -- fields. The number of UpdatePhotoRequest messages in a
--- BatchUpdatePhotosRequest must not exceed 20.
--- __Note:__ To update Pose.altitude, Pose.latLngPair has to be filled as
--- well. Otherwise, the request will fail.
+-- BatchUpdatePhotosRequest must not exceed 20. *Note:* To update
+-- Pose.altitude, Pose.latLngPair has to be filled as well. Otherwise, the
+-- request will fail.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.batchUpdate@.
 module Network.Google.Resource.StreetViewPublish.Photos.BatchUpdate
@@ -53,8 +53,8 @@ module Network.Google.Resource.StreetViewPublish.Photos.BatchUpdate
     , pbuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.batchUpdate@ method which the
 -- 'PhotosBatchUpdate' request conforms to.
@@ -80,19 +80,19 @@ type PhotosBatchUpdateResource =
 -- that can occur per photo. Only the fields specified in updateMask field
 -- are used. If \`updateMask\` is not present, the update applies to all
 -- fields. The number of UpdatePhotoRequest messages in a
--- BatchUpdatePhotosRequest must not exceed 20.
--- __Note:__ To update Pose.altitude, Pose.latLngPair has to be filled as
--- well. Otherwise, the request will fail.
+-- BatchUpdatePhotosRequest must not exceed 20. *Note:* To update
+-- Pose.altitude, Pose.latLngPair has to be filled as well. Otherwise, the
+-- request will fail.
 --
 -- /See:/ 'photosBatchUpdate' smart constructor.
 data PhotosBatchUpdate =
   PhotosBatchUpdate'
-    { _pbuXgafv          :: !(Maybe Xgafv)
+    { _pbuXgafv :: !(Maybe Xgafv)
     , _pbuUploadProtocol :: !(Maybe Text)
-    , _pbuAccessToken    :: !(Maybe Text)
-    , _pbuUploadType     :: !(Maybe Text)
-    , _pbuPayload        :: !BatchUpdatePhotosRequest
-    , _pbuCallback       :: !(Maybe Text)
+    , _pbuAccessToken :: !(Maybe Text)
+    , _pbuUploadType :: !(Maybe Text)
+    , _pbuPayload :: !BatchUpdatePhotosRequest
+    , _pbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

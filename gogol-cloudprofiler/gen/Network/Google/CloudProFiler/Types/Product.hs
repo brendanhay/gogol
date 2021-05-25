@@ -17,8 +17,8 @@
 --
 module Network.Google.CloudProFiler.Types.Product where
 
-import           Network.Google.CloudProFiler.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudProFiler.Types.Sum
+import Network.Google.Prelude
 
 -- | Labels identify the deployment within the user universe and same target.
 -- Validation regex for label names:
@@ -71,11 +71,11 @@ instance ToJSON DeploymentLabels where
 data ProFile =
   ProFile'
     { _pfProFileBytes :: !(Maybe Bytes)
-    , _pfName         :: !(Maybe Text)
-    , _pfLabels       :: !(Maybe ProFileLabels)
-    , _pfProFileType  :: !(Maybe ProFileProFileType)
-    , _pfDuration     :: !(Maybe GDuration)
-    , _pfDeployment   :: !(Maybe Deployment)
+    , _pfName :: !(Maybe Text)
+    , _pfLabels :: !(Maybe ProFileLabels)
+    , _pfProFileType :: !(Maybe ProFileProFileType)
+    , _pfDuration :: !(Maybe GDuration)
+    , _pfDeployment :: !(Maybe Deployment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -180,8 +180,8 @@ instance ToJSON ProFile where
 -- /See:/ 'createProFileRequest' smart constructor.
 data CreateProFileRequest =
   CreateProFileRequest'
-    { _cpfrProFileType :: !(Maybe [Text])
-    , _cpfrDeployment  :: !(Maybe Deployment)
+    { _cpfrProFileType :: !(Maybe [CreateProFileRequestProFileTypeItem])
+    , _cpfrDeployment :: !(Maybe Deployment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -200,7 +200,7 @@ createProFileRequest =
 
 
 -- | One or more profile types that the agent is capable of providing.
-cpfrProFileType :: Lens' CreateProFileRequest [Text]
+cpfrProFileType :: Lens' CreateProFileRequest [CreateProFileRequestProFileTypeItem]
 cpfrProFileType
   = lens _cpfrProFileType
       (\ s a -> s{_cpfrProFileType = a})
@@ -270,9 +270,9 @@ instance ToJSON ProFileLabels where
 -- /See:/ 'deployment' smart constructor.
 data Deployment =
   Deployment'
-    { _dLabels    :: !(Maybe DeploymentLabels)
+    { _dLabels :: !(Maybe DeploymentLabels)
     , _dProjectId :: !(Maybe Text)
-    , _dTarget    :: !(Maybe Text)
+    , _dTarget :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

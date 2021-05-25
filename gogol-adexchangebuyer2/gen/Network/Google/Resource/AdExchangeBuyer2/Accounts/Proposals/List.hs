@@ -50,8 +50,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.List
     , aplCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.list@ method which the
 -- 'AccountsProposalsList' request conforms to.
@@ -64,7 +64,9 @@ type AccountsProposalsListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "filterSyntax" Text :>
+                     QueryParam "filterSyntax"
+                       AccountsProposalsListFilterSyntax
+                       :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" (Textual Int32) :>
@@ -82,16 +84,16 @@ type AccountsProposalsListResource =
 -- /See:/ 'accountsProposalsList' smart constructor.
 data AccountsProposalsList =
   AccountsProposalsList'
-    { _aplXgafv          :: !(Maybe Xgafv)
+    { _aplXgafv :: !(Maybe Xgafv)
     , _aplUploadProtocol :: !(Maybe Text)
-    , _aplAccessToken    :: !(Maybe Text)
-    , _aplUploadType     :: !(Maybe Text)
-    , _aplFilterSyntax   :: !(Maybe Text)
-    , _aplAccountId      :: !Text
-    , _aplFilter         :: !(Maybe Text)
-    , _aplPageToken      :: !(Maybe Text)
-    , _aplPageSize       :: !(Maybe (Textual Int32))
-    , _aplCallback       :: !(Maybe Text)
+    , _aplAccessToken :: !(Maybe Text)
+    , _aplUploadType :: !(Maybe Text)
+    , _aplFilterSyntax :: !(Maybe AccountsProposalsListFilterSyntax)
+    , _aplAccountId :: !Text
+    , _aplFilter :: !(Maybe Text)
+    , _aplPageToken :: !(Maybe Text)
+    , _aplPageSize :: !(Maybe (Textual Int32))
+    , _aplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -161,7 +163,7 @@ aplUploadType
 
 -- | Syntax the filter is written in. Current implementation defaults to PQL
 -- but in the future it will be LIST_FILTER.
-aplFilterSyntax :: Lens' AccountsProposalsList (Maybe Text)
+aplFilterSyntax :: Lens' AccountsProposalsList (Maybe AccountsProposalsListFilterSyntax)
 aplFilterSyntax
   = lens _aplFilterSyntax
       (\ s a -> s{_aplFilterSyntax = a})

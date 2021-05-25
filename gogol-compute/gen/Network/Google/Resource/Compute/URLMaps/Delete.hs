@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.URLMaps.Delete
     , umdProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.delete@ method which the
 -- 'URLMapsDelete' request conforms to.
@@ -60,8 +60,8 @@ type URLMapsDeleteResource =
 data URLMapsDelete =
   URLMapsDelete'
     { _umdRequestId :: !(Maybe Text)
-    , _umdURLMap    :: !Text
-    , _umdProject   :: !Text
+    , _umdURLMap :: !Text
+    , _umdProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

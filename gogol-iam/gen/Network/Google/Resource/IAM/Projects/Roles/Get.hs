@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a Role definition.
+-- Gets the definition of a Role.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.roles.get@.
 module Network.Google.Resource.IAM.Projects.Roles.Get
@@ -41,8 +41,8 @@ module Network.Google.Resource.IAM.Projects.Roles.Get
     , prgCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.roles.get@ method which the
 -- 'ProjectsRolesGet' request conforms to.
@@ -56,17 +56,17 @@ type ProjectsRolesGetResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Role
 
--- | Gets a Role definition.
+-- | Gets the definition of a Role.
 --
 -- /See:/ 'projectsRolesGet' smart constructor.
 data ProjectsRolesGet =
   ProjectsRolesGet'
-    { _prgXgafv          :: !(Maybe Xgafv)
+    { _prgXgafv :: !(Maybe Xgafv)
     , _prgUploadProtocol :: !(Maybe Text)
-    , _prgAccessToken    :: !(Maybe Text)
-    , _prgUploadType     :: !(Maybe Text)
-    , _prgName           :: !Text
-    , _prgCallback       :: !(Maybe Text)
+    , _prgAccessToken :: !(Maybe Text)
+    , _prgUploadType :: !(Maybe Text)
+    , _prgName :: !Text
+    , _prgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,10 +122,30 @@ prgUploadType
   = lens _prgUploadType
       (\ s a -> s{_prgUploadType = a})
 
--- | The resource name of the role in one of the following formats:
--- \`roles\/{ROLE_NAME}\`
--- \`organizations\/{ORGANIZATION_ID}\/roles\/{ROLE_NAME}\`
--- \`projects\/{PROJECT_ID}\/roles\/{ROLE_NAME}\`
+-- | The \`name\` parameter\'s value depends on the target resource for the
+-- request, namely [\`roles\`](\/iam\/reference\/rest\/v1\/roles),
+-- [\`projects\`](\/iam\/reference\/rest\/v1\/projects.roles), or
+-- [\`organizations\`](\/iam\/reference\/rest\/v1\/organizations.roles).
+-- Each resource type\'s \`name\` value format is described below: *
+-- [\`roles.get()\`](\/iam\/reference\/rest\/v1\/roles\/get):
+-- \`roles\/{ROLE_NAME}\`. This method returns results from all [predefined
+-- roles](\/iam\/docs\/understanding-roles#predefined_roles) in Cloud IAM.
+-- Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/roles\/{ROLE_NAME}\` *
+-- [\`projects.roles.get()\`](\/iam\/reference\/rest\/v1\/projects.roles\/get):
+-- \`projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This method returns
+-- only [custom roles](\/iam\/docs\/understanding-custom-roles) that have
+-- been created at the project level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- *
+-- [\`organizations.roles.get()\`](\/iam\/reference\/rest\/v1\/organizations.roles\/get):
+-- \`organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This
+-- method returns only [custom
+-- roles](\/iam\/docs\/understanding-custom-roles) that have been created
+-- at the organization level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- Note: Wildcard (*) values are invalid; you must specify a complete
+-- project ID or organization ID.
 prgName :: Lens' ProjectsRolesGet Text
 prgName = lens _prgName (\ s a -> s{_prgName = a})
 

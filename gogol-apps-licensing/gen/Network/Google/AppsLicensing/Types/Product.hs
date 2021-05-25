@@ -17,10 +17,10 @@
 --
 module Network.Google.AppsLicensing.Types.Product where
 
-import           Network.Google.AppsLicensing.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsLicensing.Types.Sum
+import Network.Google.Prelude
 
--- | Template for LicenseAssignment Insert request
+-- | Representation of a license assignment.
 --
 -- /See:/ 'licenseAssignmentInsert' smart constructor.
 newtype LicenseAssignmentInsert =
@@ -55,15 +55,14 @@ instance ToJSON LicenseAssignmentInsert where
         toJSON LicenseAssignmentInsert'{..}
           = object (catMaybes [("userId" .=) <$> _laiUserId])
 
--- | LicesnseAssignment List for a given product\/sku for a customer.
 --
 -- /See:/ 'licenseAssignmentList' smart constructor.
 data LicenseAssignmentList =
   LicenseAssignmentList'
-    { _lalEtag          :: !(Maybe Text)
+    { _lalEtag :: !(Maybe Text)
     , _lalNextPageToken :: !(Maybe Text)
-    , _lalKind          :: !Text
-    , _lalItems         :: !(Maybe [LicenseAssignment])
+    , _lalKind :: !Text
+    , _lalItems :: !(Maybe [LicenseAssignment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -94,8 +93,11 @@ licenseAssignmentList =
 lalEtag :: Lens' LicenseAssignmentList (Maybe Text)
 lalEtag = lens _lalEtag (\ s a -> s{_lalEtag = a})
 
--- | The continuation token, used to page through large result sets. Provide
--- this value in a subsequent request to return the next page of results.
+-- | The token that you must submit in a subsequent request to retrieve
+-- additional license results matching your query parameters. The
+-- \`maxResults\` query string is related to the \`nextPageToken\` since
+-- \`maxResults\` determines how many entries are returned on each next
+-- page.
 lalNextPageToken :: Lens' LicenseAssignmentList (Maybe Text)
 lalNextPageToken
   = lens _lalNextPageToken
@@ -130,19 +132,44 @@ instance ToJSON LicenseAssignmentList where
                   Just ("kind" .= _lalKind),
                   ("items" .=) <$> _lalItems])
 
--- | Template for LiscenseAssignment Resource
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
+-- | Representation of a license assignment.
 --
 -- /See:/ 'licenseAssignment' smart constructor.
 data LicenseAssignment =
   LicenseAssignment'
     { _laProductName :: !(Maybe Text)
-    , _laEtags       :: !(Maybe Text)
-    , _laSKUName     :: !(Maybe Text)
-    , _laKind        :: !Text
-    , _laSKUId       :: !(Maybe Text)
-    , _laUserId      :: !(Maybe Text)
-    , _laSelfLink    :: !(Maybe Text)
-    , _laProductId   :: !(Maybe Text)
+    , _laEtags :: !(Maybe Text)
+    , _laSKUName :: !(Maybe Text)
+    , _laKind :: !Text
+    , _laSKUId :: !(Maybe Text)
+    , _laUserId :: !(Maybe Text)
+    , _laSelfLink :: !(Maybe Text)
+    , _laProductId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -196,15 +223,22 @@ laSKUName :: Lens' LicenseAssignment (Maybe Text)
 laSKUName
   = lens _laSKUName (\ s a -> s{_laSKUName = a})
 
--- | Identifies the resource as a LicenseAssignment.
+-- | Identifies the resource as a LicenseAssignment, which is
+-- \`licensing#licenseAssignment\`.
 laKind :: Lens' LicenseAssignment Text
 laKind = lens _laKind (\ s a -> s{_laKind = a})
 
--- | Id of the sku of the product.
+-- | A product SKU\'s unique identifier. For more information about available
+-- SKUs in this version of the API, see Products and SKUs.
 laSKUId :: Lens' LicenseAssignment (Maybe Text)
 laSKUId = lens _laSKUId (\ s a -> s{_laSKUId = a})
 
--- | Email id of the user.
+-- | The user\'s current primary email address. If the user\'s email address
+-- changes, use the new email address in your API requests. Since a
+-- \`userId\` is subject to change, do not use a \`userId\` value as a key
+-- for persistent data. This key could break if the current user\'s email
+-- address changes. If the \`userId\` is suspended, the license status
+-- changes.
 laUserId :: Lens' LicenseAssignment (Maybe Text)
 laUserId = lens _laUserId (\ s a -> s{_laUserId = a})
 
@@ -213,7 +247,8 @@ laSelfLink :: Lens' LicenseAssignment (Maybe Text)
 laSelfLink
   = lens _laSelfLink (\ s a -> s{_laSelfLink = a})
 
--- | Id of the product.
+-- | A product\'s unique identifier. For more information about products in
+-- this version of the API, see Product and SKU IDs.
 laProductId :: Lens' LicenseAssignment (Maybe Text)
 laProductId
   = lens _laProductId (\ s a -> s{_laProductId = a})

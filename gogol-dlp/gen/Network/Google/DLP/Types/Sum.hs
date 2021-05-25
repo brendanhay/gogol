@@ -16,7 +16,7 @@
 --
 module Network.Google.DLP.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Likelihood to return for this CustomInfoType. This base value can be
 -- altered by a detection rule if the finding meets the criteria specified
@@ -192,9 +192,11 @@ instance FromJSON GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood where
 instance ToJSON GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood where
     toJSON = toJSONText
 
+-- | The part of the time to keep.
 data GooglePrivacyDlpV2TimePartConfigPartToExtract
     = TimePartUnspecified
       -- ^ @TIME_PART_UNSPECIFIED@
+      -- Unused
     | Year
       -- ^ @YEAR@
       -- [0-9999]
@@ -209,7 +211,7 @@ data GooglePrivacyDlpV2TimePartConfigPartToExtract
       -- [1-7]
     | WeekOfYear
       -- ^ @WEEK_OF_YEAR@
-      -- [1-52]
+      -- [1-53]
     | HourOfDay
       -- ^ @HOUR_OF_DAY@
       -- [0-23]
@@ -244,10 +246,11 @@ instance FromJSON GooglePrivacyDlpV2TimePartConfigPartToExtract where
 instance ToJSON GooglePrivacyDlpV2TimePartConfigPartToExtract where
     toJSON = toJSONText
 
--- | Operator used to compare the field or infoType to the value. [required]
+-- | Required. Operator used to compare the field or infoType to the value.
 data GooglePrivacyDlpV2ConditionOperator
     = RelationalOperatorUnspecified
       -- ^ @RELATIONAL_OPERATOR_UNSPECIFIED@
+      -- Unused
     | EqualTo
       -- ^ @EQUAL_TO@
       -- Equal. Attempts to match even with incompatible types.
@@ -302,31 +305,129 @@ instance FromJSON GooglePrivacyDlpV2ConditionOperator where
 instance ToJSON GooglePrivacyDlpV2ConditionOperator where
     toJSON = toJSONText
 
+-- | The type of job. Defaults to \`DlpJobType.INSPECT\`
+data OrganizationsLocationsDlpJobsListType
+    = DlpJobTypeUnspecified
+      -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
+      -- Defaults to INSPECT_JOB.
+    | InspectJob
+      -- ^ @INSPECT_JOB@
+      -- The job inspected Google Cloud for sensitive data.
+    | RiskAnalysisJob
+      -- ^ @RISK_ANALYSIS_JOB@
+      -- The job executed a Risk Analysis computation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsLocationsDlpJobsListType
+
+instance FromHttpApiData OrganizationsLocationsDlpJobsListType where
+    parseQueryParam = \case
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right DlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right InspectJob
+        "RISK_ANALYSIS_JOB" -> Right RiskAnalysisJob
+        x -> Left ("Unable to parse OrganizationsLocationsDlpJobsListType from: " <> x)
+
+instance ToHttpApiData OrganizationsLocationsDlpJobsListType where
+    toQueryParam = \case
+        DlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        InspectJob -> "INSPECT_JOB"
+        RiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+
+instance FromJSON OrganizationsLocationsDlpJobsListType where
+    parseJSON = parseJSONText "OrganizationsLocationsDlpJobsListType"
+
+instance ToJSON OrganizationsLocationsDlpJobsListType where
+    toJSON = toJSONText
+
+-- | The type of jobs. Will use \`DlpJobType.INSPECT\` if not set.
+data ProjectsJobTriggersListType
+    = PJTLTDlpJobTypeUnspecified
+      -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
+      -- Defaults to INSPECT_JOB.
+    | PJTLTInspectJob
+      -- ^ @INSPECT_JOB@
+      -- The job inspected Google Cloud for sensitive data.
+    | PJTLTRiskAnalysisJob
+      -- ^ @RISK_ANALYSIS_JOB@
+      -- The job executed a Risk Analysis computation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsJobTriggersListType
+
+instance FromHttpApiData ProjectsJobTriggersListType where
+    parseQueryParam = \case
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right PJTLTDlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right PJTLTInspectJob
+        "RISK_ANALYSIS_JOB" -> Right PJTLTRiskAnalysisJob
+        x -> Left ("Unable to parse ProjectsJobTriggersListType from: " <> x)
+
+instance ToHttpApiData ProjectsJobTriggersListType where
+    toQueryParam = \case
+        PJTLTDlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        PJTLTInspectJob -> "INSPECT_JOB"
+        PJTLTRiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+
+instance FromJSON ProjectsJobTriggersListType where
+    parseJSON = parseJSONText "ProjectsJobTriggersListType"
+
+instance ToJSON ProjectsJobTriggersListType where
+    toJSON = toJSONText
+
+-- | Type of metadata containing the finding.
+data GooglePrivacyDlpV2MetadataLocationType
+    = MetadatatypeUnspecified
+      -- ^ @METADATATYPE_UNSPECIFIED@
+      -- Unused
+    | StorageMetadata
+      -- ^ @STORAGE_METADATA@
+      -- General file metadata provided by Cloud Storage.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GooglePrivacyDlpV2MetadataLocationType
+
+instance FromHttpApiData GooglePrivacyDlpV2MetadataLocationType where
+    parseQueryParam = \case
+        "METADATATYPE_UNSPECIFIED" -> Right MetadatatypeUnspecified
+        "STORAGE_METADATA" -> Right StorageMetadata
+        x -> Left ("Unable to parse GooglePrivacyDlpV2MetadataLocationType from: " <> x)
+
+instance ToHttpApiData GooglePrivacyDlpV2MetadataLocationType where
+    toQueryParam = \case
+        MetadatatypeUnspecified -> "METADATATYPE_UNSPECIFIED"
+        StorageMetadata -> "STORAGE_METADATA"
+
+instance FromJSON GooglePrivacyDlpV2MetadataLocationType where
+    parseJSON = parseJSONText "GooglePrivacyDlpV2MetadataLocationType"
+
+instance ToJSON GooglePrivacyDlpV2MetadataLocationType where
+    toJSON = toJSONText
+
+-- | Day of week
 data GooglePrivacyDlpV2DateTimeDayOfWeek
     = DayOfWeekUnspecified
       -- ^ @DAY_OF_WEEK_UNSPECIFIED@
-      -- The unspecified day-of-week.
+      -- The day of the week is unspecified.
     | Monday
       -- ^ @MONDAY@
-      -- The day-of-week of Monday.
+      -- Monday
     | Tuesday
       -- ^ @TUESDAY@
-      -- The day-of-week of Tuesday.
+      -- Tuesday
     | Wednesday
       -- ^ @WEDNESDAY@
-      -- The day-of-week of Wednesday.
+      -- Wednesday
     | Thursday
       -- ^ @THURSDAY@
-      -- The day-of-week of Thursday.
+      -- Thursday
     | Friday
       -- ^ @FRIDAY@
-      -- The day-of-week of Friday.
+      -- Friday
     | Saturday
       -- ^ @SATURDAY@
-      -- The day-of-week of Saturday.
+      -- Saturday
     | Sunday
       -- ^ @SUNDAY@
-      -- The day-of-week of Sunday.
+      -- Sunday
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2DateTimeDayOfWeek
@@ -360,16 +461,94 @@ instance FromJSON GooglePrivacyDlpV2DateTimeDayOfWeek where
 instance ToJSON GooglePrivacyDlpV2DateTimeDayOfWeek where
     toJSON = toJSONText
 
+data GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem
+    = FileTypeUnspecified
+      -- ^ @FILE_TYPE_UNSPECIFIED@
+      -- Includes all files.
+    | BinaryFile
+      -- ^ @BINARY_FILE@
+      -- Includes all file extensions not covered by another entry. Binary
+      -- scanning attempts to convert the content of the file to utf_8 to scan
+      -- the file. If you wish to avoid this fall back, specify one or more of
+      -- the other FileType\'s in your storage scan.
+    | TextFile
+      -- ^ @TEXT_FILE@
+      -- Included file extensions: asc,asp, aspx, brf, c, cc,cfm, cgi, cpp, csv,
+      -- cxx, c++, cs, css, dart, dat, dot, eml,, epbub, ged, go, h, hh, hpp,
+      -- hxx, h++, hs, html, htm, mkd, markdown, m, ml, mli, perl, pl, plist, pm,
+      -- php, phtml, pht, properties, py, pyw, rb, rbw, rs, rss, rc, scala, sh,
+      -- sql, swift, tex, shtml, shtm, xhtml, lhs, ics, ini, java, js, json, kix,
+      -- kml, ocaml, md, txt, text, tsv, vb, vcard, vcs, wml, xcodeproj, xml,
+      -- xsl, xsd, yml, yaml.
+    | Image
+      -- ^ @IMAGE@
+      -- Included file extensions: bmp, gif, jpg, jpeg, jpe, png.
+      -- bytes_limit_per_file has no effect on image files. Image inspection is
+      -- restricted to \'global\', \'us\', \'asia\', and \'europe\'.
+    | Word
+      -- ^ @WORD@
+      -- Word files >30 MB will be scanned as binary files. Included file
+      -- extensions: docx, dotx, docm, dotm
+    | Pdf
+      -- ^ @PDF@
+      -- PDF files >30 MB will be scanned as binary files. Included file
+      -- extensions: pdf
+    | Avro
+      -- ^ @AVRO@
+      -- Included file extensions: avro
+    | CSV
+      -- ^ @CSV@
+      -- Included file extensions: csv
+    | Tsv
+      -- ^ @TSV@
+      -- Included file extensions: tsv
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem
+
+instance FromHttpApiData GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem where
+    parseQueryParam = \case
+        "FILE_TYPE_UNSPECIFIED" -> Right FileTypeUnspecified
+        "BINARY_FILE" -> Right BinaryFile
+        "TEXT_FILE" -> Right TextFile
+        "IMAGE" -> Right Image
+        "WORD" -> Right Word
+        "PDF" -> Right Pdf
+        "AVRO" -> Right Avro
+        "CSV" -> Right CSV
+        "TSV" -> Right Tsv
+        x -> Left ("Unable to parse GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem from: " <> x)
+
+instance ToHttpApiData GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem where
+    toQueryParam = \case
+        FileTypeUnspecified -> "FILE_TYPE_UNSPECIFIED"
+        BinaryFile -> "BINARY_FILE"
+        TextFile -> "TEXT_FILE"
+        Image -> "IMAGE"
+        Word -> "WORD"
+        Pdf -> "PDF"
+        Avro -> "AVRO"
+        CSV -> "CSV"
+        Tsv -> "TSV"
+
+instance FromJSON GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem where
+    parseJSON = parseJSONText "GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem"
+
+instance ToJSON GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem where
+    toJSON = toJSONText
+
 -- | State of a job.
 data GooglePrivacyDlpV2DlpJobState
     = JobStateUnspecified
       -- ^ @JOB_STATE_UNSPECIFIED@
+      -- Unused.
     | Pending
       -- ^ @PENDING@
       -- The job has not yet started.
     | Running
       -- ^ @RUNNING@
-      -- The job is currently running.
+      -- The job is currently running. Once a job has finished it will transition
+      -- to FAILED or DONE.
     | Done
       -- ^ @DONE@
       -- The job is no longer running.
@@ -379,6 +558,12 @@ data GooglePrivacyDlpV2DlpJobState
     | Failed
       -- ^ @FAILED@
       -- The job had an error and did not complete.
+    | Active
+      -- ^ @ACTIVE@
+      -- The job is currently accepting findings via hybridInspect. A hybrid job
+      -- in ACTIVE state may continue to have findings added to it through
+      -- calling of hybridInspect. After the job has finished no more calls to
+      -- hybridInspect may be made. ACTIVE jobs can transition to DONE.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2DlpJobState
@@ -391,6 +576,7 @@ instance FromHttpApiData GooglePrivacyDlpV2DlpJobState where
         "DONE" -> Right Done
         "CANCELED" -> Right Canceled
         "FAILED" -> Right Failed
+        "ACTIVE" -> Right Active
         x -> Left ("Unable to parse GooglePrivacyDlpV2DlpJobState from: " <> x)
 
 instance ToHttpApiData GooglePrivacyDlpV2DlpJobState where
@@ -401,6 +587,7 @@ instance ToHttpApiData GooglePrivacyDlpV2DlpJobState where
         Done -> "DONE"
         Canceled -> "CANCELED"
         Failed -> "FAILED"
+        Active -> "ACTIVE"
 
 instance FromJSON GooglePrivacyDlpV2DlpJobState where
     parseJSON = parseJSONText "GooglePrivacyDlpV2DlpJobState"
@@ -408,13 +595,17 @@ instance FromJSON GooglePrivacyDlpV2DlpJobState where
 instance ToJSON GooglePrivacyDlpV2DlpJobState where
     toJSON = toJSONText
 
+-- | Outcome of the transformation.
 data GooglePrivacyDlpV2SummaryResultCode
     = TransformationResultCodeUnspecified
       -- ^ @TRANSFORMATION_RESULT_CODE_UNSPECIFIED@
+      -- Unused
     | Success
       -- ^ @SUCCESS@
+      -- Transformation completed without an error.
     | Error'
       -- ^ @ERROR@
+      -- Transformation had an error.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2SummaryResultCode
@@ -438,6 +629,40 @@ instance FromJSON GooglePrivacyDlpV2SummaryResultCode where
 instance ToJSON GooglePrivacyDlpV2SummaryResultCode where
     toJSON = toJSONText
 
+-- | The type of job. Defaults to \`DlpJobType.INSPECT\`
+data ProjectsLocationsDlpJobsListType
+    = PLDJLTDlpJobTypeUnspecified
+      -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
+      -- Defaults to INSPECT_JOB.
+    | PLDJLTInspectJob
+      -- ^ @INSPECT_JOB@
+      -- The job inspected Google Cloud for sensitive data.
+    | PLDJLTRiskAnalysisJob
+      -- ^ @RISK_ANALYSIS_JOB@
+      -- The job executed a Risk Analysis computation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsDlpJobsListType
+
+instance FromHttpApiData ProjectsLocationsDlpJobsListType where
+    parseQueryParam = \case
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right PLDJLTDlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right PLDJLTInspectJob
+        "RISK_ANALYSIS_JOB" -> Right PLDJLTRiskAnalysisJob
+        x -> Left ("Unable to parse ProjectsLocationsDlpJobsListType from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsDlpJobsListType where
+    toQueryParam = \case
+        PLDJLTDlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        PLDJLTInspectJob -> "INSPECT_JOB"
+        PLDJLTRiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+
+instance FromJSON ProjectsLocationsDlpJobsListType where
+    parseJSON = parseJSONText "ProjectsLocationsDlpJobsListType"
+
+instance ToJSON ProjectsLocationsDlpJobsListType where
+    toJSON = toJSONText
+
 -- | Schema used for writing the findings for Inspect jobs. This field is
 -- only used for Inspect and must be unspecified for Risk jobs. Columns are
 -- derived from the \`Finding\` object. If appending to an existing table,
@@ -445,10 +670,11 @@ instance ToJSON GooglePrivacyDlpV2SummaryResultCode where
 -- No columns in the existing table will be deleted. If unspecified, then
 -- all available columns will be used for a new table or an (existing)
 -- table with no schema, and no changes will be made to an existing table
--- that has a schema.
+-- that has a schema. Only for use with external storage.
 data GooglePrivacyDlpV2OutputStorageConfigOutputSchema
     = OutputSchemaUnspecified
       -- ^ @OUTPUT_SCHEMA_UNSPECIFIED@
+      -- Unused.
     | BasicColumns
       -- ^ @BASIC_COLUMNS@
       -- Basic schema including only \`info_type\`, \`quote\`, \`certainty\`, and
@@ -499,11 +725,12 @@ data GooglePrivacyDlpV2BigQueryOptionsSampleMethod
       -- ^ @SAMPLE_METHOD_UNSPECIFIED@
     | Top
       -- ^ @TOP@
-      -- Scan from the top (default).
+      -- Scan groups of rows in the order BigQuery provides (default). Multiple
+      -- groups of rows may be scanned in parallel, so results may not appear in
+      -- the same order the rows are read.
     | RandomStart
       -- ^ @RANDOM_START@
-      -- Randomly pick the row to start scanning. The scanned rows are
-      -- contiguous.
+      -- Randomly pick groups of rows to scan.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2BigQueryOptionsSampleMethod
@@ -529,12 +756,13 @@ instance ToJSON GooglePrivacyDlpV2BigQueryOptionsSampleMethod where
 
 -- | The type of job.
 data GooglePrivacyDlpV2DlpJobType
-    = DlpJobTypeUnspecified
+    = GPDVDJTDlpJobTypeUnspecified
       -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
-    | InspectJob
+      -- Defaults to INSPECT_JOB.
+    | GPDVDJTInspectJob
       -- ^ @INSPECT_JOB@
       -- The job inspected Google Cloud for sensitive data.
-    | RiskAnalysisJob
+    | GPDVDJTRiskAnalysisJob
       -- ^ @RISK_ANALYSIS_JOB@
       -- The job executed a Risk Analysis computation.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -543,16 +771,16 @@ instance Hashable GooglePrivacyDlpV2DlpJobType
 
 instance FromHttpApiData GooglePrivacyDlpV2DlpJobType where
     parseQueryParam = \case
-        "DLP_JOB_TYPE_UNSPECIFIED" -> Right DlpJobTypeUnspecified
-        "INSPECT_JOB" -> Right InspectJob
-        "RISK_ANALYSIS_JOB" -> Right RiskAnalysisJob
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right GPDVDJTDlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right GPDVDJTInspectJob
+        "RISK_ANALYSIS_JOB" -> Right GPDVDJTRiskAnalysisJob
         x -> Left ("Unable to parse GooglePrivacyDlpV2DlpJobType from: " <> x)
 
 instance ToHttpApiData GooglePrivacyDlpV2DlpJobType where
     toQueryParam = \case
-        DlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
-        InspectJob -> "INSPECT_JOB"
-        RiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+        GPDVDJTDlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        GPDVDJTInspectJob -> "INSPECT_JOB"
+        GPDVDJTRiskAnalysisJob -> "RISK_ANALYSIS_JOB"
 
 instance FromJSON GooglePrivacyDlpV2DlpJobType where
     parseJSON = parseJSONText "GooglePrivacyDlpV2DlpJobType"
@@ -609,9 +837,12 @@ instance FromJSON GooglePrivacyDlpV2InspectConfigMinLikelihood where
 instance ToJSON GooglePrivacyDlpV2InspectConfigMinLikelihood where
     toJSON = toJSONText
 
+-- | Common characters to not transform when masking. Useful to avoid
+-- removing punctuation.
 data GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore
     = CommonCharsToIgnoreUnspecified
       -- ^ @COMMON_CHARS_TO_IGNORE_UNSPECIFIED@
+      -- Unused.
     | Numeric
       -- ^ @NUMERIC@
       -- 0-9
@@ -656,21 +887,23 @@ instance FromJSON GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore where
 instance ToJSON GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore where
     toJSON = toJSONText
 
+-- | Common alphabets.
 data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabet
     = GPDVCRFFCCAFfxCommonNATiveAlphabetUnspecified
       -- ^ @FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED@
+      -- Unused.
     | GPDVCRFFCCANumeric
       -- ^ @NUMERIC@
-      -- [0-9] (radix of 10)
+      -- \`[0-9]\` (radix of 10)
     | GPDVCRFFCCAHexadecimal
       -- ^ @HEXADECIMAL@
-      -- [0-9A-F] (radix of 16)
+      -- \`[0-9A-F]\` (radix of 16)
     | GPDVCRFFCCAUpperCaseAlphaNumeric
       -- ^ @UPPER_CASE_ALPHA_NUMERIC@
-      -- [0-9A-Z] (radix of 36)
+      -- \`[0-9A-Z]\` (radix of 36)
     | GPDVCRFFCCAAlphaNumeric
       -- ^ @ALPHA_NUMERIC@
-      -- [0-9A-Za-z] (radix of 62)
+      -- \`[0-9A-Za-z]\` (radix of 62)
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabet
@@ -805,31 +1038,32 @@ instance FromJSON GooglePrivacyDlpV2ExclusionRuleMatchingType where
 instance ToJSON GooglePrivacyDlpV2ExclusionRuleMatchingType where
     toJSON = toJSONText
 
+-- | day of week
 data GooglePrivacyDlpV2ValueDayOfWeekValue
     = GPDVVDOWVDayOfWeekUnspecified
       -- ^ @DAY_OF_WEEK_UNSPECIFIED@
-      -- The unspecified day-of-week.
+      -- The day of the week is unspecified.
     | GPDVVDOWVMonday
       -- ^ @MONDAY@
-      -- The day-of-week of Monday.
+      -- Monday
     | GPDVVDOWVTuesday
       -- ^ @TUESDAY@
-      -- The day-of-week of Tuesday.
+      -- Tuesday
     | GPDVVDOWVWednesday
       -- ^ @WEDNESDAY@
-      -- The day-of-week of Wednesday.
+      -- Wednesday
     | GPDVVDOWVThursday
       -- ^ @THURSDAY@
-      -- The day-of-week of Thursday.
+      -- Thursday
     | GPDVVDOWVFriday
       -- ^ @FRIDAY@
-      -- The day-of-week of Friday.
+      -- Friday
     | GPDVVDOWVSaturday
       -- ^ @SATURDAY@
-      -- The day-of-week of Saturday.
+      -- Saturday
     | GPDVVDOWVSunday
       -- ^ @SUNDAY@
-      -- The day-of-week of Sunday.
+      -- Sunday
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2ValueDayOfWeekValue
@@ -865,44 +1099,76 @@ instance ToJSON GooglePrivacyDlpV2ValueDayOfWeekValue where
 
 -- | The type of data stored in the bytes string. Default will be TEXT_UTF8.
 data GooglePrivacyDlpV2ByteContentItemType
-    = BytesTypeUnspecified
+    = GPDVBCITBytesTypeUnspecified
       -- ^ @BYTES_TYPE_UNSPECIFIED@
-    | Image
+      -- Unused
+    | GPDVBCITImage
       -- ^ @IMAGE@
-    | ImageJpeg
+      -- Any image type.
+    | GPDVBCITImageJpeg
       -- ^ @IMAGE_JPEG@
-    | ImageBmp
+      -- jpeg
+    | GPDVBCITImageBmp
       -- ^ @IMAGE_BMP@
-    | ImagePng
+      -- bmp
+    | GPDVBCITImagePng
       -- ^ @IMAGE_PNG@
-    | ImageSvg
+      -- png
+    | GPDVBCITImageSvg
       -- ^ @IMAGE_SVG@
-    | TextUTF8
+      -- svg
+    | GPDVBCITTextUTF8
       -- ^ @TEXT_UTF8@
+      -- plain text
+    | GPDVBCITWordDocument
+      -- ^ @WORD_DOCUMENT@
+      -- docx, docm, dotx, dotm
+    | GPDVBCITPdf
+      -- ^ @PDF@
+      -- pdf
+    | GPDVBCITAvro
+      -- ^ @AVRO@
+      -- avro
+    | GPDVBCITCSV
+      -- ^ @CSV@
+      -- csv
+    | GPDVBCITTsv
+      -- ^ @TSV@
+      -- tsv
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2ByteContentItemType
 
 instance FromHttpApiData GooglePrivacyDlpV2ByteContentItemType where
     parseQueryParam = \case
-        "BYTES_TYPE_UNSPECIFIED" -> Right BytesTypeUnspecified
-        "IMAGE" -> Right Image
-        "IMAGE_JPEG" -> Right ImageJpeg
-        "IMAGE_BMP" -> Right ImageBmp
-        "IMAGE_PNG" -> Right ImagePng
-        "IMAGE_SVG" -> Right ImageSvg
-        "TEXT_UTF8" -> Right TextUTF8
+        "BYTES_TYPE_UNSPECIFIED" -> Right GPDVBCITBytesTypeUnspecified
+        "IMAGE" -> Right GPDVBCITImage
+        "IMAGE_JPEG" -> Right GPDVBCITImageJpeg
+        "IMAGE_BMP" -> Right GPDVBCITImageBmp
+        "IMAGE_PNG" -> Right GPDVBCITImagePng
+        "IMAGE_SVG" -> Right GPDVBCITImageSvg
+        "TEXT_UTF8" -> Right GPDVBCITTextUTF8
+        "WORD_DOCUMENT" -> Right GPDVBCITWordDocument
+        "PDF" -> Right GPDVBCITPdf
+        "AVRO" -> Right GPDVBCITAvro
+        "CSV" -> Right GPDVBCITCSV
+        "TSV" -> Right GPDVBCITTsv
         x -> Left ("Unable to parse GooglePrivacyDlpV2ByteContentItemType from: " <> x)
 
 instance ToHttpApiData GooglePrivacyDlpV2ByteContentItemType where
     toQueryParam = \case
-        BytesTypeUnspecified -> "BYTES_TYPE_UNSPECIFIED"
-        Image -> "IMAGE"
-        ImageJpeg -> "IMAGE_JPEG"
-        ImageBmp -> "IMAGE_BMP"
-        ImagePng -> "IMAGE_PNG"
-        ImageSvg -> "IMAGE_SVG"
-        TextUTF8 -> "TEXT_UTF8"
+        GPDVBCITBytesTypeUnspecified -> "BYTES_TYPE_UNSPECIFIED"
+        GPDVBCITImage -> "IMAGE"
+        GPDVBCITImageJpeg -> "IMAGE_JPEG"
+        GPDVBCITImageBmp -> "IMAGE_BMP"
+        GPDVBCITImagePng -> "IMAGE_PNG"
+        GPDVBCITImageSvg -> "IMAGE_SVG"
+        GPDVBCITTextUTF8 -> "TEXT_UTF8"
+        GPDVBCITWordDocument -> "WORD_DOCUMENT"
+        GPDVBCITPdf -> "PDF"
+        GPDVBCITAvro -> "AVRO"
+        GPDVBCITCSV -> "CSV"
+        GPDVBCITTsv -> "TSV"
 
 instance FromJSON GooglePrivacyDlpV2ByteContentItemType where
     parseJSON = parseJSONText "GooglePrivacyDlpV2ByteContentItemType"
@@ -910,10 +1176,11 @@ instance FromJSON GooglePrivacyDlpV2ByteContentItemType where
 instance ToJSON GooglePrivacyDlpV2ByteContentItemType where
     toJSON = toJSONText
 
--- | A status for this trigger. [required]
+-- | Required. A status for this trigger.
 data GooglePrivacyDlpV2JobTriggerStatus
     = StatusUnspecified
       -- ^ @STATUS_UNSPECIFIED@
+      -- Unused.
     | Healthy
       -- ^ @HEALTHY@
       -- Trigger is healthy.
@@ -948,11 +1215,146 @@ instance FromJSON GooglePrivacyDlpV2JobTriggerStatus where
 instance ToJSON GooglePrivacyDlpV2JobTriggerStatus where
     toJSON = toJSONText
 
+-- | The type of job. Defaults to \`DlpJobType.INSPECT\`
+data ProjectsDlpJobsListType
+    = PDJLTDlpJobTypeUnspecified
+      -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
+      -- Defaults to INSPECT_JOB.
+    | PDJLTInspectJob
+      -- ^ @INSPECT_JOB@
+      -- The job inspected Google Cloud for sensitive data.
+    | PDJLTRiskAnalysisJob
+      -- ^ @RISK_ANALYSIS_JOB@
+      -- The job executed a Risk Analysis computation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsDlpJobsListType
+
+instance FromHttpApiData ProjectsDlpJobsListType where
+    parseQueryParam = \case
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right PDJLTDlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right PDJLTInspectJob
+        "RISK_ANALYSIS_JOB" -> Right PDJLTRiskAnalysisJob
+        x -> Left ("Unable to parse ProjectsDlpJobsListType from: " <> x)
+
+instance ToHttpApiData ProjectsDlpJobsListType where
+    toQueryParam = \case
+        PDJLTDlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        PDJLTInspectJob -> "INSPECT_JOB"
+        PDJLTRiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+
+instance FromJSON ProjectsDlpJobsListType where
+    parseJSON = parseJSONText "ProjectsDlpJobsListType"
+
+instance ToJSON ProjectsDlpJobsListType where
+    toJSON = toJSONText
+
+-- | The type of jobs. Will use \`DlpJobType.INSPECT\` if not set.
+data OrganizationsLocationsJobTriggersListType
+    = OLJTLTDlpJobTypeUnspecified
+      -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
+      -- Defaults to INSPECT_JOB.
+    | OLJTLTInspectJob
+      -- ^ @INSPECT_JOB@
+      -- The job inspected Google Cloud for sensitive data.
+    | OLJTLTRiskAnalysisJob
+      -- ^ @RISK_ANALYSIS_JOB@
+      -- The job executed a Risk Analysis computation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrganizationsLocationsJobTriggersListType
+
+instance FromHttpApiData OrganizationsLocationsJobTriggersListType where
+    parseQueryParam = \case
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right OLJTLTDlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right OLJTLTInspectJob
+        "RISK_ANALYSIS_JOB" -> Right OLJTLTRiskAnalysisJob
+        x -> Left ("Unable to parse OrganizationsLocationsJobTriggersListType from: " <> x)
+
+instance ToHttpApiData OrganizationsLocationsJobTriggersListType where
+    toQueryParam = \case
+        OLJTLTDlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        OLJTLTInspectJob -> "INSPECT_JOB"
+        OLJTLTRiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+
+instance FromJSON OrganizationsLocationsJobTriggersListType where
+    parseJSON = parseJSONText "OrganizationsLocationsJobTriggersListType"
+
+instance ToJSON OrganizationsLocationsJobTriggersListType where
+    toJSON = toJSONText
+
+data GooglePrivacyDlpV2InspectConfigContentOptionsItem
+    = ContentUnspecified
+      -- ^ @CONTENT_UNSPECIFIED@
+      -- Includes entire content of a file or a data stream.
+    | ContentText
+      -- ^ @CONTENT_TEXT@
+      -- Text content within the data, excluding any metadata.
+    | ContentImage
+      -- ^ @CONTENT_IMAGE@
+      -- Images found in the data.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GooglePrivacyDlpV2InspectConfigContentOptionsItem
+
+instance FromHttpApiData GooglePrivacyDlpV2InspectConfigContentOptionsItem where
+    parseQueryParam = \case
+        "CONTENT_UNSPECIFIED" -> Right ContentUnspecified
+        "CONTENT_TEXT" -> Right ContentText
+        "CONTENT_IMAGE" -> Right ContentImage
+        x -> Left ("Unable to parse GooglePrivacyDlpV2InspectConfigContentOptionsItem from: " <> x)
+
+instance ToHttpApiData GooglePrivacyDlpV2InspectConfigContentOptionsItem where
+    toQueryParam = \case
+        ContentUnspecified -> "CONTENT_UNSPECIFIED"
+        ContentText -> "CONTENT_TEXT"
+        ContentImage -> "CONTENT_IMAGE"
+
+instance FromJSON GooglePrivacyDlpV2InspectConfigContentOptionsItem where
+    parseJSON = parseJSONText "GooglePrivacyDlpV2InspectConfigContentOptionsItem"
+
+instance ToJSON GooglePrivacyDlpV2InspectConfigContentOptionsItem where
+    toJSON = toJSONText
+
+data GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem
+    = EnumTypeUnspecified
+      -- ^ @ENUM_TYPE_UNSPECIFIED@
+      -- Unused.
+    | Inspect
+      -- ^ @INSPECT@
+      -- Supported by the inspect operations.
+    | RiskAnalysis
+      -- ^ @RISK_ANALYSIS@
+      -- Supported by the risk analysis operations.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem
+
+instance FromHttpApiData GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem where
+    parseQueryParam = \case
+        "ENUM_TYPE_UNSPECIFIED" -> Right EnumTypeUnspecified
+        "INSPECT" -> Right Inspect
+        "RISK_ANALYSIS" -> Right RiskAnalysis
+        x -> Left ("Unable to parse GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem from: " <> x)
+
+instance ToHttpApiData GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem where
+    toQueryParam = \case
+        EnumTypeUnspecified -> "ENUM_TYPE_UNSPECIFIED"
+        Inspect -> "INSPECT"
+        RiskAnalysis -> "RISK_ANALYSIS"
+
+instance FromJSON GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem where
+    parseJSON = parseJSONText "GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem"
+
+instance ToJSON GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem where
+    toJSON = toJSONText
+
 -- | Stored info type version state. Read-only, updated by the system during
 -- dictionary creation.
 data GooglePrivacyDlpV2StoredInfoTypeVersionState
     = GPDVSITVSStoredInfoTypeStateUnspecified
       -- ^ @STORED_INFO_TYPE_STATE_UNSPECIFIED@
+      -- Unused
     | GPDVSITVSPending
       -- ^ @PENDING@
       -- StoredInfoType version is being created.
@@ -995,13 +1397,49 @@ instance FromJSON GooglePrivacyDlpV2StoredInfoTypeVersionState where
 instance ToJSON GooglePrivacyDlpV2StoredInfoTypeVersionState where
     toJSON = toJSONText
 
+-- | The type of jobs. Will use \`DlpJobType.INSPECT\` if not set.
+data ProjectsLocationsJobTriggersListType
+    = PLJTLTDlpJobTypeUnspecified
+      -- ^ @DLP_JOB_TYPE_UNSPECIFIED@
+      -- Defaults to INSPECT_JOB.
+    | PLJTLTInspectJob
+      -- ^ @INSPECT_JOB@
+      -- The job inspected Google Cloud for sensitive data.
+    | PLJTLTRiskAnalysisJob
+      -- ^ @RISK_ANALYSIS_JOB@
+      -- The job executed a Risk Analysis computation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsJobTriggersListType
+
+instance FromHttpApiData ProjectsLocationsJobTriggersListType where
+    parseQueryParam = \case
+        "DLP_JOB_TYPE_UNSPECIFIED" -> Right PLJTLTDlpJobTypeUnspecified
+        "INSPECT_JOB" -> Right PLJTLTInspectJob
+        "RISK_ANALYSIS_JOB" -> Right PLJTLTRiskAnalysisJob
+        x -> Left ("Unable to parse ProjectsLocationsJobTriggersListType from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsJobTriggersListType where
+    toQueryParam = \case
+        PLJTLTDlpJobTypeUnspecified -> "DLP_JOB_TYPE_UNSPECIFIED"
+        PLJTLTInspectJob -> "INSPECT_JOB"
+        PLJTLTRiskAnalysisJob -> "RISK_ANALYSIS_JOB"
+
+instance FromJSON ProjectsLocationsJobTriggersListType where
+    parseJSON = parseJSONText "ProjectsLocationsJobTriggersListType"
+
+instance ToJSON ProjectsLocationsJobTriggersListType where
+    toJSON = toJSONText
+
 -- | The operator to apply to the result of conditions. Default and currently
 -- only supported value is \`AND\`.
 data GooglePrivacyDlpV2ExpressionsLogicalOperator
     = LogicalOperatorUnspecified
       -- ^ @LOGICAL_OPERATOR_UNSPECIFIED@
+      -- Unused
     | And
       -- ^ @AND@
+      -- Conditional AND
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GooglePrivacyDlpV2ExpressionsLogicalOperator

@@ -22,7 +22,7 @@
 --
 -- Returns a list of the achievement configurations in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.list@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.list@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
     , AchievementConfigurationsList
 
     -- * Request Lenses
+    , aclXgafv
+    , aclUploadProtocol
+    , aclAccessToken
+    , aclUploadType
     , aclApplicationId
     , aclPageToken
     , aclMaxResults
+    , aclCallback
     ) where
 
-import           Network.Google.GamesConfiguration.Types
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.list@ method which the
 -- 'AchievementConfigurationsList' request conforms to.
@@ -49,19 +54,29 @@ type AchievementConfigurationsListResource =
          "applications" :>
            Capture "applicationId" Text :>
              "achievements" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Int32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] AchievementConfigurationListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] AchievementConfigurationListResponse
 
 -- | Returns a list of the achievement configurations in this application.
 --
 -- /See:/ 'achievementConfigurationsList' smart constructor.
 data AchievementConfigurationsList =
   AchievementConfigurationsList'
-    { _aclApplicationId :: !Text
-    , _aclPageToken     :: !(Maybe Text)
-    , _aclMaxResults    :: !(Maybe (Textual Int32))
+    { _aclXgafv :: !(Maybe Xgafv)
+    , _aclUploadProtocol :: !(Maybe Text)
+    , _aclAccessToken :: !(Maybe Text)
+    , _aclUploadType :: !(Maybe Text)
+    , _aclApplicationId :: !Text
+    , _aclPageToken :: !(Maybe Text)
+    , _aclMaxResults :: !(Maybe (Textual Int32))
+    , _aclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,21 +85,58 @@ data AchievementConfigurationsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aclXgafv'
+--
+-- * 'aclUploadProtocol'
+--
+-- * 'aclAccessToken'
+--
+-- * 'aclUploadType'
+--
 -- * 'aclApplicationId'
 --
 -- * 'aclPageToken'
 --
 -- * 'aclMaxResults'
+--
+-- * 'aclCallback'
 achievementConfigurationsList
     :: Text -- ^ 'aclApplicationId'
     -> AchievementConfigurationsList
 achievementConfigurationsList pAclApplicationId_ =
   AchievementConfigurationsList'
-    { _aclApplicationId = pAclApplicationId_
+    { _aclXgafv = Nothing
+    , _aclUploadProtocol = Nothing
+    , _aclAccessToken = Nothing
+    , _aclUploadType = Nothing
+    , _aclApplicationId = pAclApplicationId_
     , _aclPageToken = Nothing
     , _aclMaxResults = Nothing
+    , _aclCallback = Nothing
     }
 
+
+-- | V1 error format.
+aclXgafv :: Lens' AchievementConfigurationsList (Maybe Xgafv)
+aclXgafv = lens _aclXgafv (\ s a -> s{_aclXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aclUploadProtocol :: Lens' AchievementConfigurationsList (Maybe Text)
+aclUploadProtocol
+  = lens _aclUploadProtocol
+      (\ s a -> s{_aclUploadProtocol = a})
+
+-- | OAuth access token.
+aclAccessToken :: Lens' AchievementConfigurationsList (Maybe Text)
+aclAccessToken
+  = lens _aclAccessToken
+      (\ s a -> s{_aclAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aclUploadType :: Lens' AchievementConfigurationsList (Maybe Text)
+aclUploadType
+  = lens _aclUploadType
+      (\ s a -> s{_aclUploadType = a})
 
 -- | The application ID from the Google Play developer console.
 aclApplicationId :: Lens' AchievementConfigurationsList Text
@@ -99,12 +151,17 @@ aclPageToken
 
 -- | The maximum number of resource configurations to return in the response,
 -- used for paging. For any response, the actual number of resources
--- returned may be less than the specified maxResults.
+-- returned may be less than the specified \`maxResults\`.
 aclMaxResults :: Lens' AchievementConfigurationsList (Maybe Int32)
 aclMaxResults
   = lens _aclMaxResults
       (\ s a -> s{_aclMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+aclCallback :: Lens' AchievementConfigurationsList (Maybe Text)
+aclCallback
+  = lens _aclCallback (\ s a -> s{_aclCallback = a})
 
 instance GoogleRequest AchievementConfigurationsList
          where
@@ -113,7 +170,12 @@ instance GoogleRequest AchievementConfigurationsList
         type Scopes AchievementConfigurationsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AchievementConfigurationsList'{..}
-          = go _aclApplicationId _aclPageToken _aclMaxResults
+          = go _aclApplicationId _aclXgafv _aclUploadProtocol
+              _aclAccessToken
+              _aclUploadType
+              _aclPageToken
+              _aclMaxResults
+              _aclCallback
               (Just AltJSON)
               gamesConfigurationService
           where go

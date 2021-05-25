@@ -23,7 +23,7 @@
 -- Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.setIamPolicy@.
 module Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
     , DeploymentsSetIAMPolicy
 
     -- * Request Lenses
+    , dsipXgafv
+    , dsipUploadProtocol
     , dsipProject
+    , dsipAccessToken
+    , dsipUploadType
     , dsipPayload
     , dsipResource
+    , dsipCallback
     ) where
 
-import           Network.Google.DeploymentManager.Types
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.setIamPolicy@ method which the
 -- 'DeploymentsSetIAMPolicy' request conforms to.
@@ -53,9 +58,14 @@ type DeploymentsSetIAMPolicyResource =
                "deployments" :>
                  Capture "resource" Text :>
                    "setIamPolicy" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] GlobalSetPolicyRequest :>
-                         Post '[JSON] Policy
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] GlobalSetPolicyRequest :>
+                                   Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
@@ -63,9 +73,14 @@ type DeploymentsSetIAMPolicyResource =
 -- /See:/ 'deploymentsSetIAMPolicy' smart constructor.
 data DeploymentsSetIAMPolicy =
   DeploymentsSetIAMPolicy'
-    { _dsipProject  :: !Text
-    , _dsipPayload  :: !GlobalSetPolicyRequest
+    { _dsipXgafv :: !(Maybe Xgafv)
+    , _dsipUploadProtocol :: !(Maybe Text)
+    , _dsipProject :: !Text
+    , _dsipAccessToken :: !(Maybe Text)
+    , _dsipUploadType :: !(Maybe Text)
+    , _dsipPayload :: !GlobalSetPolicyRequest
     , _dsipResource :: !Text
+    , _dsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,11 +89,21 @@ data DeploymentsSetIAMPolicy =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dsipXgafv'
+--
+-- * 'dsipUploadProtocol'
+--
 -- * 'dsipProject'
+--
+-- * 'dsipAccessToken'
+--
+-- * 'dsipUploadType'
 --
 -- * 'dsipPayload'
 --
 -- * 'dsipResource'
+--
+-- * 'dsipCallback'
 deploymentsSetIAMPolicy
     :: Text -- ^ 'dsipProject'
     -> GlobalSetPolicyRequest -- ^ 'dsipPayload'
@@ -86,16 +111,44 @@ deploymentsSetIAMPolicy
     -> DeploymentsSetIAMPolicy
 deploymentsSetIAMPolicy pDsipProject_ pDsipPayload_ pDsipResource_ =
   DeploymentsSetIAMPolicy'
-    { _dsipProject = pDsipProject_
+    { _dsipXgafv = Nothing
+    , _dsipUploadProtocol = Nothing
+    , _dsipProject = pDsipProject_
+    , _dsipAccessToken = Nothing
+    , _dsipUploadType = Nothing
     , _dsipPayload = pDsipPayload_
     , _dsipResource = pDsipResource_
+    , _dsipCallback = Nothing
     }
 
+
+-- | V1 error format.
+dsipXgafv :: Lens' DeploymentsSetIAMPolicy (Maybe Xgafv)
+dsipXgafv
+  = lens _dsipXgafv (\ s a -> s{_dsipXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dsipUploadProtocol :: Lens' DeploymentsSetIAMPolicy (Maybe Text)
+dsipUploadProtocol
+  = lens _dsipUploadProtocol
+      (\ s a -> s{_dsipUploadProtocol = a})
 
 -- | Project ID for this request.
 dsipProject :: Lens' DeploymentsSetIAMPolicy Text
 dsipProject
   = lens _dsipProject (\ s a -> s{_dsipProject = a})
+
+-- | OAuth access token.
+dsipAccessToken :: Lens' DeploymentsSetIAMPolicy (Maybe Text)
+dsipAccessToken
+  = lens _dsipAccessToken
+      (\ s a -> s{_dsipAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dsipUploadType :: Lens' DeploymentsSetIAMPolicy (Maybe Text)
+dsipUploadType
+  = lens _dsipUploadType
+      (\ s a -> s{_dsipUploadType = a})
 
 -- | Multipart request metadata.
 dsipPayload :: Lens' DeploymentsSetIAMPolicy GlobalSetPolicyRequest
@@ -107,13 +160,23 @@ dsipResource :: Lens' DeploymentsSetIAMPolicy Text
 dsipResource
   = lens _dsipResource (\ s a -> s{_dsipResource = a})
 
+-- | JSONP
+dsipCallback :: Lens' DeploymentsSetIAMPolicy (Maybe Text)
+dsipCallback
+  = lens _dsipCallback (\ s a -> s{_dsipCallback = a})
+
 instance GoogleRequest DeploymentsSetIAMPolicy where
         type Rs DeploymentsSetIAMPolicy = Policy
         type Scopes DeploymentsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsSetIAMPolicy'{..}
-          = go _dsipProject _dsipResource (Just AltJSON)
+          = go _dsipProject _dsipResource _dsipXgafv
+              _dsipUploadProtocol
+              _dsipAccessToken
+              _dsipUploadType
+              _dsipCallback
+              (Just AltJSON)
               _dsipPayload
               deploymentManagerService
           where go

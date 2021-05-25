@@ -35,13 +35,14 @@ module Network.Google.Resource.Compute.InterconnectAttachments.Insert
 
     -- * Request Lenses
     , iaiRequestId
+    , iaiValidateOnly
     , iaiProject
     , iaiPayload
     , iaiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnectAttachments.insert@ method which the
 -- 'InterconnectAttachmentsInsert' request conforms to.
@@ -54,9 +55,10 @@ type InterconnectAttachmentsInsertResource =
                Capture "region" Text :>
                  "interconnectAttachments" :>
                    QueryParam "requestId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] InterconnectAttachment :>
-                         Post '[JSON] Operation
+                     QueryParam "validateOnly" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] InterconnectAttachment :>
+                           Post '[JSON] Operation
 
 -- | Creates an InterconnectAttachment in the specified project using the
 -- data included in the request.
@@ -65,9 +67,10 @@ type InterconnectAttachmentsInsertResource =
 data InterconnectAttachmentsInsert =
   InterconnectAttachmentsInsert'
     { _iaiRequestId :: !(Maybe Text)
-    , _iaiProject   :: !Text
-    , _iaiPayload   :: !InterconnectAttachment
-    , _iaiRegion    :: !Text
+    , _iaiValidateOnly :: !(Maybe Bool)
+    , _iaiProject :: !Text
+    , _iaiPayload :: !InterconnectAttachment
+    , _iaiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +80,8 @@ data InterconnectAttachmentsInsert =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'iaiRequestId'
+--
+-- * 'iaiValidateOnly'
 --
 -- * 'iaiProject'
 --
@@ -91,6 +96,7 @@ interconnectAttachmentsInsert
 interconnectAttachmentsInsert pIaiProject_ pIaiPayload_ pIaiRegion_ =
   InterconnectAttachmentsInsert'
     { _iaiRequestId = Nothing
+    , _iaiValidateOnly = Nothing
     , _iaiProject = pIaiProject_
     , _iaiPayload = pIaiPayload_
     , _iaiRegion = pIaiRegion_
@@ -110,6 +116,12 @@ interconnectAttachmentsInsert pIaiProject_ pIaiPayload_ pIaiRegion_ =
 iaiRequestId :: Lens' InterconnectAttachmentsInsert (Maybe Text)
 iaiRequestId
   = lens _iaiRequestId (\ s a -> s{_iaiRequestId = a})
+
+-- | If true, the request will not be committed.
+iaiValidateOnly :: Lens' InterconnectAttachmentsInsert (Maybe Bool)
+iaiValidateOnly
+  = lens _iaiValidateOnly
+      (\ s a -> s{_iaiValidateOnly = a})
 
 -- | Project ID for this request.
 iaiProject :: Lens' InterconnectAttachmentsInsert Text
@@ -134,6 +146,7 @@ instance GoogleRequest InterconnectAttachmentsInsert
                "https://www.googleapis.com/auth/compute"]
         requestClient InterconnectAttachmentsInsert'{..}
           = go _iaiProject _iaiRegion _iaiRequestId
+              _iaiValidateOnly
               (Just AltJSON)
               _iaiPayload
               computeService

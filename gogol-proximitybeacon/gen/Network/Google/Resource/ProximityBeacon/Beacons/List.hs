@@ -49,8 +49,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
     , blCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.list@ method which the
 -- 'BeaconsList' request conforms to.
@@ -79,15 +79,15 @@ type BeaconsListResource =
 -- /See:/ 'beaconsList' smart constructor.
 data BeaconsList =
   BeaconsList'
-    { _blXgafv          :: !(Maybe Xgafv)
+    { _blXgafv :: !(Maybe Xgafv)
     , _blUploadProtocol :: !(Maybe Text)
-    , _blAccessToken    :: !(Maybe Text)
-    , _blUploadType     :: !(Maybe Text)
-    , _blQ              :: !(Maybe Text)
-    , _blPageToken      :: !(Maybe Text)
-    , _blProjectId      :: !(Maybe Text)
-    , _blPageSize       :: !(Maybe (Textual Int32))
-    , _blCallback       :: !(Maybe Text)
+    , _blAccessToken :: !(Maybe Text)
+    , _blUploadType :: !(Maybe Text)
+    , _blQ :: !(Maybe Text)
+    , _blPageToken :: !(Maybe Text)
+    , _blProjectId :: !(Maybe Text)
+    , _blPageSize :: !(Maybe (Textual Int32))
+    , _blCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

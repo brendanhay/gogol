@@ -44,8 +44,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Uncla
     , cduCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.devices.unclaim@ method which the
 -- 'CustomersDevicesUnclaim' request conforms to.
@@ -69,13 +69,13 @@ type CustomersDevicesUnclaimResource =
 -- /See:/ 'customersDevicesUnclaim' smart constructor.
 data CustomersDevicesUnclaim =
   CustomersDevicesUnclaim'
-    { _cduParent         :: !Text
-    , _cduXgafv          :: !(Maybe Xgafv)
+    { _cduParent :: !Text
+    , _cduXgafv :: !(Maybe Xgafv)
     , _cduUploadProtocol :: !(Maybe Text)
-    , _cduAccessToken    :: !(Maybe Text)
-    , _cduUploadType     :: !(Maybe Text)
-    , _cduPayload        :: !CustomerUnclaimDeviceRequest
-    , _cduCallback       :: !(Maybe Text)
+    , _cduAccessToken :: !(Maybe Text)
+    , _cduUploadType :: !(Maybe Text)
+    , _cduPayload :: !CustomerUnclaimDeviceRequest
+    , _cduCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

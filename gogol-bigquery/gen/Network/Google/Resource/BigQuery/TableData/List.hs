@@ -43,8 +43,8 @@ module Network.Google.Resource.BigQuery.TableData.List
     , tMaxResults
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tabledata.list@ method which the
 -- 'TableDataList'' request conforms to.
@@ -71,13 +71,13 @@ type TableDataListResource =
 -- /See:/ 'tableDataList'' smart constructor.
 data TableDataList' =
   TableDataList''
-    { _tDataSetId      :: !Text
-    , _tPageToken      :: !(Maybe Text)
-    , _tProjectId      :: !Text
+    { _tDataSetId :: !Text
+    , _tPageToken :: !(Maybe Text)
+    , _tProjectId :: !Text
     , _tSelectedFields :: !(Maybe Text)
-    , _tTableId        :: !Text
-    , _tStartIndex     :: !(Maybe (Textual Word64))
-    , _tMaxResults     :: !(Maybe (Textual Word32))
+    , _tTableId :: !Text
+    , _tStartIndex :: !(Maybe (Textual Word64))
+    , _tMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

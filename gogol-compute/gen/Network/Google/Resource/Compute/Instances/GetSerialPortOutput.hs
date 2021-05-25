@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
     , igspoInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.getSerialPortOutput@ method which the
 -- 'InstancesGetSerialPortOutput' request conforms to.
@@ -65,10 +65,10 @@ type InstancesGetSerialPortOutputResource =
 -- /See:/ 'instancesGetSerialPortOutput' smart constructor.
 data InstancesGetSerialPortOutput =
   InstancesGetSerialPortOutput'
-    { _igspoProject  :: !Text
-    , _igspoStart    :: !(Maybe (Textual Int64))
-    , _igspoZone     :: !Text
-    , _igspoPort     :: !(Textual Int32)
+    { _igspoProject :: !Text
+    , _igspoStart :: !(Maybe (Textual Int64))
+    , _igspoZone :: !Text
+    , _igspoPort :: !(Textual Int32)
     , _igspoInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -107,11 +107,18 @@ igspoProject :: Lens' InstancesGetSerialPortOutput Text
 igspoProject
   = lens _igspoProject (\ s a -> s{_igspoProject = a})
 
--- | Returns output starting from a specific byte position. Use this to page
--- through output when the output is too large to return in a single
--- request. For the initial request, leave this field unspecified. For
--- subsequent calls, this field should be set to the next value returned in
--- the previous call.
+-- | Specifies the starting byte position of the output to return. To start
+-- with the first byte of output to the specified port, omit this field or
+-- set it to \`0\`. If the output for that byte position is available, this
+-- field matches the \`start\` parameter sent with the request. If the
+-- amount of serial console output exceeds the size of the buffer (1 MB),
+-- the oldest output is discarded and is no longer available. If the
+-- requested start position refers to discarded output, the start position
+-- is adjusted to the oldest output still available, and the adjusted start
+-- position is returned as the \`start\` property value. You can also
+-- provide a negative start position, which translates to the most recent
+-- number of bytes written to the serial port. For example, -3 is
+-- interpreted as the most recent 3 bytes written to the serial console.
 igspoStart :: Lens' InstancesGetSerialPortOutput (Maybe Int64)
 igspoStart
   = lens _igspoStart (\ s a -> s{_igspoStart = a}) .
@@ -128,7 +135,7 @@ igspoPort
   = lens _igspoPort (\ s a -> s{_igspoPort = a}) .
       _Coerce
 
--- | Name of the instance scoping this request.
+-- | Name of the instance for this request.
 igspoInstance :: Lens' InstancesGetSerialPortOutput Text
 igspoInstance
   = lens _igspoInstance

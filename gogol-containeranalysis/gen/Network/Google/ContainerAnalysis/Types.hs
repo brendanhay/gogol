@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -21,6 +21,14 @@ module Network.Google.ContainerAnalysis.Types
 
     -- * OAuth Scopes
     , cloudPlatformScope
+
+    -- * SigningKey
+    , SigningKey
+    , signingKey
+    , skKeyType
+    , skKeyId
+    , skKeyScheme
+    , skPublicKeyValue
 
     -- * LayerDirective
     , LayerDirective (..)
@@ -49,6 +57,7 @@ module Network.Google.ContainerAnalysis.Types
     , vCvssScore
     , vCvssV3
     , vSeverity
+    , vSourceUpdateTime
     , vDetails
     , vWindowsDetails
 
@@ -87,12 +96,6 @@ module Network.Google.ContainerAnalysis.Types
     , bpCreateTime
     , bpLogsURI
 
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
     -- * Occurrence
     , Occurrence
     , occurrence
@@ -106,6 +109,7 @@ module Network.Google.ContainerAnalysis.Types
     , oName
     , oNoteName
     , oRemediation
+    , oIntoto
     , oResource
     , oDiscovered
     , oCreateTime
@@ -158,6 +162,7 @@ module Network.Google.ContainerAnalysis.Types
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
 
     -- * Discovery
     , Discovery
@@ -176,10 +181,21 @@ module Network.Google.ContainerAnalysis.Types
     , bFingerprint
     , bResourceURL
 
+    -- * GrafeasV1beta1IntotoSignature
+    , GrafeasV1beta1IntotoSignature
+    , grafeasV1beta1IntotoSignature
+    , gvisKeyid
+    , gvisSig
+
     -- * BatchCreateNotesRequest
     , BatchCreateNotesRequest
     , batchCreateNotesRequest
     , bcnrNotes
+
+    -- * ArtifactHashes
+    , ArtifactHashes
+    , artifactHashes
+    , ahSha256
 
     -- * SourceContext
     , SourceContext
@@ -241,6 +257,11 @@ module Network.Google.ContainerAnalysis.Types
     -- * DiscoveredContinuousAnalysis
     , DiscoveredContinuousAnalysis (..)
 
+    -- * Environment
+    , Environment
+    , environment
+    , eCustomValues
+
     -- * CVSSv3PrivilegesRequired
     , CVSSv3PrivilegesRequired (..)
 
@@ -268,6 +289,7 @@ module Network.Google.ContainerAnalysis.Types
     , nUpdateTime
     , nShortDescription
     , nName
+    , nIntoto
     , nBaseImage
     , nPackage
     , nExpirationTime
@@ -288,6 +310,15 @@ module Network.Google.ContainerAnalysis.Types
     , cvssAvailabilityImpact
     , cvssExploitabilityScore
 
+    -- * Link
+    , Link
+    , link
+    , lCommand
+    , lEnvironment
+    , lMaterials
+    , lProducts
+    , lByProducts
+
     -- * BatchCreateNotesResponse
     , BatchCreateNotesResponse
     , batchCreateNotesResponse
@@ -305,6 +336,11 @@ module Network.Google.ContainerAnalysis.Types
     , fV2Name
     , fV2Blob
     , fV1Name
+
+    -- * ArtifactRule
+    , ArtifactRule
+    , artifactRule
+    , arArtifactRule
 
     -- * CVSSv3UserInteraction
     , CVSSv3UserInteraction (..)
@@ -341,6 +377,11 @@ module Network.Google.ContainerAnalysis.Types
     -- * DeploymentPlatform
     , DeploymentPlatform (..)
 
+    -- * GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
+
     -- * Artifact
     , Artifact
     , artifact
@@ -351,7 +392,6 @@ module Network.Google.ContainerAnalysis.Types
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
-    , siprUpdateMask
     , siprPolicy
 
     -- * GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity
@@ -402,6 +442,12 @@ module Network.Google.ContainerAnalysis.Types
     , ruURL
     , ruLabel
 
+    -- * GrafeasV1beta1IntotoDetails
+    , GrafeasV1beta1IntotoDetails
+    , grafeasV1beta1IntotoDetails
+    , gvidSigned
+    , gvidSignatures
+
     -- * GrafeasV1beta1ImageDetails
     , GrafeasV1beta1ImageDetails
     , grafeasV1beta1ImageDetails
@@ -426,15 +472,23 @@ module Network.Google.ContainerAnalysis.Types
     , lscrNextPageToken
     , lscrScanConfigs
 
+    -- * InToto
+    , InToto
+    , inToto
+    , itStepName
+    , itExpectedProducts
+    , itExpectedCommand
+    , itThreshold
+    , itSigningKeys
+    , itExpectedMaterials
+
     -- * FixableTotalByDigestSeverity
     , FixableTotalByDigestSeverity (..)
-
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
 
     -- * Version
     , Version
     , version
+    , vInclusive
     , vKind
     , vName
     , vRevision
@@ -557,6 +611,12 @@ module Network.Google.ContainerAnalysis.Types
     , gsaSignatures
     , gsaContentType
 
+    -- * GrafeasV1beta1IntotoArtifact
+    , GrafeasV1beta1IntotoArtifact
+    , grafeasV1beta1IntotoArtifact
+    , gviaResourceURI
+    , gviaHashes
+
     -- * GitSourceContext
     , GitSourceContext
     , gitSourceContext
@@ -568,10 +628,14 @@ module Network.Google.ContainerAnalysis.Types
     , testIAMPermissionsResponse
     , tiamprPermissions
 
+    -- * ByProductsCustomValues
+    , ByProductsCustomValues
+    , byProductsCustomValues
+    , bpcvAddtional
+
     -- * Policy
     , Policy
     , policy
-    , pAuditConfigs
     , pEtag
     , pVersion
     , pBindings
@@ -592,18 +656,17 @@ module Network.Google.ContainerAnalysis.Types
     , crscRevisionId
     , crscAliasContext
 
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
-
     -- * PgpSignedAttestation
     , PgpSignedAttestation
     , pgpSignedAttestation
     , psaSignature
     , psaPgpKeyId
     , psaContentType
+
+    -- * ByProducts
+    , ByProducts
+    , byProducts
+    , bpCustomValues
 
     -- * CVSSv3AvailabilityImpact
     , CVSSv3AvailabilityImpact (..)
@@ -615,6 +678,11 @@ module Network.Google.ContainerAnalysis.Types
     , wdFixingKbs
     , wdCpeURI
     , wdDescription
+
+    -- * EnvironmentCustomValues
+    , EnvironmentCustomValues
+    , environmentCustomValues
+    , ecvAddtional
 
     -- * BatchCreateNotesRequestNotes
     , BatchCreateNotesRequestNotes
@@ -640,13 +708,16 @@ module Network.Google.ContainerAnalysis.Types
     -- * Detail
     , Detail
     , detail
+    , detVendor
     , detMinAffectedVersion
     , detPackageType
     , detIsObsolete
     , detFixedLocation
+    , detSourceUpdateTime
     , detSeverityName
     , detMaxAffectedVersion
     , detPackage
+    , detSource
     , detCpeURI
     , detDescription
 
@@ -672,9 +743,9 @@ module Network.Google.ContainerAnalysis.Types
     , depUserEmail
     ) where
 
-import           Network.Google.ContainerAnalysis.Types.Product
-import           Network.Google.ContainerAnalysis.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types.Product
+import Network.Google.ContainerAnalysis.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta1' of the Container Analysis API. This contains the host and root path used as a starting point for constructing service requests.
 containerAnalysisService :: ServiceConfig
@@ -683,6 +754,6 @@ containerAnalysisService
       (ServiceId "containeranalysis:v1beta1")
       "containeranalysis.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

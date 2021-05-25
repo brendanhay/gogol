@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -29,6 +29,26 @@ module Network.Google.IAM.Types
 
     -- * CreateServiceAccountKeyRequestPrivateKeyType
     , CreateServiceAccountKeyRequestPrivateKeyType (..)
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * WorkLoadIdentityPoolProvider
+    , WorkLoadIdentityPoolProvider
+    , workLoadIdentityPoolProvider
+    , wlippState
+    , wlippAws
+    , wlippDisabled
+    , wlippAttributeCondition
+    , wlippName
+    , wlippDisplayName
+    , wlippAttributeMApping
+    , wlippDescription
+    , wlippOidc
 
     -- * UndeleteRoleRequest
     , UndeleteRoleRequest
@@ -61,10 +81,25 @@ module Network.Google.IAM.Types
     , auditableService
     , asName
 
+    -- * WorkLoadIdentityPoolState
+    , WorkLoadIdentityPoolState (..)
+
     -- * QueryAuditableServicesRequest
     , QueryAuditableServicesRequest
     , queryAuditableServicesRequest
     , qasrFullResourceName
+
+    -- * ProjectsServiceAccountsKeysGetPublicKeyType
+    , ProjectsServiceAccountsKeysGetPublicKeyType (..)
+
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
 
     -- * QueryGrantableRolesRequestView
     , QueryGrantableRolesRequestView (..)
@@ -72,6 +107,11 @@ module Network.Google.IAM.Types
     -- * Empty
     , Empty
     , empty
+
+    -- * Aws
+    , Aws
+    , aws
+    , aAccountId
 
     -- * QueryTestablePermissionsResponse
     , QueryTestablePermissionsResponse
@@ -84,21 +124,46 @@ module Network.Google.IAM.Types
     , auditData
     , adPolicyDelta
 
+    -- * OrganizationsRolesListView
+    , OrganizationsRolesListView (..)
+
     -- * QueryAuditableServicesResponse
     , QueryAuditableServicesResponse
     , queryAuditableServicesResponse
     , qasrServices
 
+    -- * ServiceAccountKeyKeyOrigin
+    , ServiceAccountKeyKeyOrigin (..)
+
     -- * ServiceAccountKey
     , ServiceAccountKey
     , serviceAccountKey
     , sakValidAfterTime
+    , sakKeyType
     , sakPrivateKeyData
     , sakPublicKeyData
     , sakName
     , sakPrivateKeyType
     , sakValidBeforeTime
     , sakKeyAlgorithm
+    , sakKeyOrigin
+
+    -- * WorkLoadIdentityPoolProviderState
+    , WorkLoadIdentityPoolProviderState (..)
+
+    -- * PermissionDelta
+    , PermissionDelta
+    , permissionDelta
+    , pdAddedPermissions
+    , pdRemovedPermissions
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- * ProjectsRolesListView
+    , ProjectsRolesListView (..)
 
     -- * LintResult
     , LintResult
@@ -107,9 +172,18 @@ module Network.Google.IAM.Types
     , lrDebugMessage
     , lrLocationOffSet
     , lrSeverity
-    , lrBindingOrdinal
     , lrFieldName
     , lrLevel
+
+    -- * UndeleteWorkLoadIdentityPoolRequest
+    , UndeleteWorkLoadIdentityPoolRequest
+    , undeleteWorkLoadIdentityPoolRequest
+
+    -- * ListWorkLoadIdentityPoolProvidersResponse
+    , ListWorkLoadIdentityPoolProvidersResponse
+    , listWorkLoadIdentityPoolProvidersResponse
+    , lwlipprNextPageToken
+    , lwlipprWorkLoadIdentityPoolProviders
 
     -- * CreateServiceAccountKeyRequest
     , CreateServiceAccountKeyRequest
@@ -137,11 +211,6 @@ module Network.Google.IAM.Types
     , bdMember
     , bdCondition
 
-    -- * LintPolicyRequestContext
-    , LintPolicyRequestContext
-    , lintPolicyRequestContext
-    , lprcAddtional
-
     -- * SignBlobRequest
     , SignBlobRequest
     , signBlobRequest
@@ -167,6 +236,9 @@ module Network.Google.IAM.Types
     , rTitle
     , rDescription
 
+    -- * ServiceAccountKeyKeyType
+    , ServiceAccountKeyKeyType (..)
+
     -- * ServiceAccount
     , ServiceAccount
     , serviceAccount
@@ -180,6 +252,17 @@ module Network.Google.IAM.Types
     , saDescription
     , saOAuth2ClientId
 
+    -- * WorkLoadIdentityPoolProviderAttributeMApping
+    , WorkLoadIdentityPoolProviderAttributeMApping
+    , workLoadIdentityPoolProviderAttributeMApping
+    , wlippamaAddtional
+
+    -- * ListWorkLoadIdentityPoolsResponse
+    , ListWorkLoadIdentityPoolsResponse
+    , listWorkLoadIdentityPoolsResponse
+    , lwliprNextPageToken
+    , lwliprWorkLoadIdentityPools
+
     -- * QueryTestablePermissionsRequest
     , QueryTestablePermissionsRequest
     , queryTestablePermissionsRequest
@@ -189,6 +272,10 @@ module Network.Google.IAM.Types
 
     -- * BindingDeltaAction
     , BindingDeltaAction (..)
+
+    -- * UndeleteWorkLoadIdentityPoolProviderRequest
+    , UndeleteWorkLoadIdentityPoolProviderRequest
+    , undeleteWorkLoadIdentityPoolProviderRequest
 
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
@@ -207,6 +294,11 @@ module Network.Google.IAM.Types
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- * AdminAuditData
+    , AdminAuditData
+    , adminAuditData
+    , aadPermissionDelta
+
     -- * LintResultSeverity
     , LintResultSeverity (..)
 
@@ -214,6 +306,18 @@ module Network.Google.IAM.Types
     , UndeleteServiceAccountResponse
     , undeleteServiceAccountResponse
     , usarRestoredAccount
+
+    -- * WorkLoadIdentityPool
+    , WorkLoadIdentityPool
+    , workLoadIdentityPool
+    , wlipState
+    , wlipDisabled
+    , wlipName
+    , wlipDisplayName
+    , wlipDescription
+
+    -- * RolesListView
+    , RolesListView (..)
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -247,6 +351,11 @@ module Network.Google.IAM.Types
     , qgrrPageToken
     , qgrrPageSize
 
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
     -- * SignJwtRequest
     , SignJwtRequest
     , signJwtRequest
@@ -267,10 +376,14 @@ module Network.Google.IAM.Types
     , alcLogType
     , alcExemptedMembers
 
+    -- * ProjectsServiceAccountsKeysListKeyTypes
+    , ProjectsServiceAccountsKeysListKeyTypes (..)
+
     -- * Permission
     , Permission
     , permission
     , perStage
+    , perPrimaryPermission
     , perOnlyInPredefinedRoles
     , perCustomRolesSupportLevel
     , perName
@@ -293,17 +406,19 @@ module Network.Google.IAM.Types
     -- * LintPolicyRequest
     , LintPolicyRequest
     , lintPolicyRequest
-    , lprContext
     , lprFullResourceName
-    , lprPolicy
     , lprCondition
-    , lprBinding
 
     -- * ListRolesResponse
     , ListRolesResponse
     , listRolesResponse
     , lrrRoles
     , lrrNextPageToken
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- * CreateServiceAccountKeyRequestKeyAlgorithm
     , CreateServiceAccountKeyRequestKeyAlgorithm (..)
@@ -317,6 +432,12 @@ module Network.Google.IAM.Types
     , csarServiceAccount
     , csarAccountId
 
+    -- * Oidc
+    , Oidc
+    , oidc
+    , oAllowedAudiences
+    , oIssuerURI
+
     -- * CreateRoleRequest
     , CreateRoleRequest
     , createRoleRequest
@@ -325,6 +446,11 @@ module Network.Google.IAM.Types
 
     -- * ServiceAccountKeyPrivateKeyType
     , ServiceAccountKeyPrivateKeyType (..)
+
+    -- * UploadServiceAccountKeyRequest
+    , UploadServiceAccountKeyRequest
+    , uploadServiceAccountKeyRequest
+    , usakrPublicKeyData
 
     -- * Binding
     , Binding
@@ -338,9 +464,9 @@ module Network.Google.IAM.Types
     , disableServiceAccountRequest
     ) where
 
-import           Network.Google.IAM.Types.Product
-import           Network.Google.IAM.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.IAM.Types.Product
+import Network.Google.IAM.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
 iAMService :: ServiceConfig
@@ -348,6 +474,6 @@ iAMService
   = defaultService (ServiceId "iam:v1")
       "iam.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

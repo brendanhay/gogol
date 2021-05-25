@@ -46,8 +46,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
     , baplCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.projects.list@ method which the
 -- 'BillingAccountsProjectsList' request conforms to.
@@ -73,14 +73,14 @@ type BillingAccountsProjectsListResource =
 -- /See:/ 'billingAccountsProjectsList' smart constructor.
 data BillingAccountsProjectsList =
   BillingAccountsProjectsList'
-    { _baplXgafv          :: !(Maybe Xgafv)
+    { _baplXgafv :: !(Maybe Xgafv)
     , _baplUploadProtocol :: !(Maybe Text)
-    , _baplAccessToken    :: !(Maybe Text)
-    , _baplUploadType     :: !(Maybe Text)
-    , _baplName           :: !Text
-    , _baplPageToken      :: !(Maybe Text)
-    , _baplPageSize       :: !(Maybe (Textual Int32))
-    , _baplCallback       :: !(Maybe Text)
+    , _baplAccessToken :: !(Maybe Text)
+    , _baplUploadType :: !(Maybe Text)
+    , _baplName :: !Text
+    , _baplPageToken :: !(Maybe Text)
+    , _baplPageSize :: !(Maybe (Textual Int32))
+    , _baplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,8 +143,8 @@ baplUploadType
   = lens _baplUploadType
       (\ s a -> s{_baplUploadType = a})
 
--- | The resource name of the billing account associated with the projects
--- that you want to list. For example,
+-- | Required. The resource name of the billing account associated with the
+-- projects that you want to list. For example,
 -- \`billingAccounts\/012345-567890-ABCDEF\`.
 baplName :: Lens' BillingAccountsProjectsList Text
 baplName = lens _baplName (\ s a -> s{_baplName = a})
@@ -175,7 +175,9 @@ instance GoogleRequest BillingAccountsProjectsList
         type Rs BillingAccountsProjectsList =
              ListProjectBillingInfoResponse
         type Scopes BillingAccountsProjectsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsProjectsList'{..}
           = go _baplName _baplXgafv _baplUploadProtocol
               _baplAccessToken

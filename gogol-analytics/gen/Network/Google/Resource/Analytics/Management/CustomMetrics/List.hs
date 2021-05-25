@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.List
     , mcmlMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customMetrics.list@ method which the
 -- 'ManagementCustomMetricsList' request conforms to.
@@ -63,9 +63,9 @@ type ManagementCustomMetricsListResource =
 data ManagementCustomMetricsList =
   ManagementCustomMetricsList'
     { _mcmlWebPropertyId :: !Text
-    , _mcmlAccountId     :: !Text
-    , _mcmlStartIndex    :: !(Maybe (Textual Int32))
-    , _mcmlMaxResults    :: !(Maybe (Textual Int32))
+    , _mcmlAccountId :: !Text
+    , _mcmlStartIndex :: !(Maybe (Textual Int32))
+    , _mcmlMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -40,8 +40,8 @@ module Network.Google.Resource.BigQuery.Jobs.Cancel
     , jcProjectId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.cancel@ method which the
 -- 'JobsCancel' request conforms to.
@@ -64,8 +64,8 @@ type JobsCancelResource =
 -- /See:/ 'jobsCancel' smart constructor.
 data JobsCancel =
   JobsCancel'
-    { _jcJobId     :: !Text
-    , _jcLocation  :: !(Maybe Text)
+    { _jcJobId :: !Text
+    , _jcLocation :: !(Maybe Text)
     , _jcProjectId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

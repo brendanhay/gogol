@@ -58,8 +58,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.Append
     , svaResponseValueRenderOption
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.append@ method which the
 -- 'SpreadsheetsValuesAppend' request conforms to.
@@ -73,12 +73,20 @@ type SpreadsheetsValuesAppendResource =
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "valueInputOption" Text :>
-                         QueryParam "insertDataOption" Text :>
+                       QueryParam "valueInputOption"
+                         SpreadsheetsValuesAppendValueInputOption
+                         :>
+                         QueryParam "insertDataOption"
+                           SpreadsheetsValuesAppendInsertDataOption
+                           :>
                            QueryParam "includeValuesInResponse" Bool :>
-                             QueryParam "responseDateTimeRenderOption" Text :>
+                             QueryParam "responseDateTimeRenderOption"
+                               SpreadsheetsValuesAppendResponseDateTimeRenderOption
+                               :>
                                QueryParam "callback" Text :>
-                                 QueryParam "responseValueRenderOption" Text :>
+                                 QueryParam "responseValueRenderOption"
+                                   SpreadsheetsValuesAppendResponseValueRenderOption
+                                   :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] ValueRange :>
                                        Post '[JSON] AppendValuesResponse
@@ -98,19 +106,19 @@ type SpreadsheetsValuesAppendResource =
 -- /See:/ 'spreadsheetsValuesAppend' smart constructor.
 data SpreadsheetsValuesAppend =
   SpreadsheetsValuesAppend'
-    { _svaXgafv                        :: !(Maybe Xgafv)
-    , _svaUploadProtocol               :: !(Maybe Text)
-    , _svaAccessToken                  :: !(Maybe Text)
-    , _svaSpreadsheetId                :: !Text
-    , _svaUploadType                   :: !(Maybe Text)
-    , _svaValueInputOption             :: !(Maybe Text)
-    , _svaPayload                      :: !ValueRange
-    , _svaInsertDataOption             :: !(Maybe Text)
-    , _svaRange                        :: !Text
-    , _svaIncludeValuesInResponse      :: !(Maybe Bool)
-    , _svaResponseDateTimeRenderOption :: !(Maybe Text)
-    , _svaCallback                     :: !(Maybe Text)
-    , _svaResponseValueRenderOption    :: !(Maybe Text)
+    { _svaXgafv :: !(Maybe Xgafv)
+    , _svaUploadProtocol :: !(Maybe Text)
+    , _svaAccessToken :: !(Maybe Text)
+    , _svaSpreadsheetId :: !Text
+    , _svaUploadType :: !(Maybe Text)
+    , _svaValueInputOption :: !(Maybe SpreadsheetsValuesAppendValueInputOption)
+    , _svaPayload :: !ValueRange
+    , _svaInsertDataOption :: !(Maybe SpreadsheetsValuesAppendInsertDataOption)
+    , _svaRange :: !Text
+    , _svaIncludeValuesInResponse :: !(Maybe Bool)
+    , _svaResponseDateTimeRenderOption :: !(Maybe SpreadsheetsValuesAppendResponseDateTimeRenderOption)
+    , _svaCallback :: !(Maybe Text)
+    , _svaResponseValueRenderOption :: !(Maybe SpreadsheetsValuesAppendResponseValueRenderOption)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -196,7 +204,7 @@ svaUploadType
       (\ s a -> s{_svaUploadType = a})
 
 -- | How the input data should be interpreted.
-svaValueInputOption :: Lens' SpreadsheetsValuesAppend (Maybe Text)
+svaValueInputOption :: Lens' SpreadsheetsValuesAppend (Maybe SpreadsheetsValuesAppendValueInputOption)
 svaValueInputOption
   = lens _svaValueInputOption
       (\ s a -> s{_svaValueInputOption = a})
@@ -207,13 +215,13 @@ svaPayload
   = lens _svaPayload (\ s a -> s{_svaPayload = a})
 
 -- | How the input data should be inserted.
-svaInsertDataOption :: Lens' SpreadsheetsValuesAppend (Maybe Text)
+svaInsertDataOption :: Lens' SpreadsheetsValuesAppend (Maybe SpreadsheetsValuesAppendInsertDataOption)
 svaInsertDataOption
   = lens _svaInsertDataOption
       (\ s a -> s{_svaInsertDataOption = a})
 
 -- | The A1 notation of a range to search for a logical table of data. Values
--- will be appended after the last row of the table.
+-- are appended after the last row of the table.
 svaRange :: Lens' SpreadsheetsValuesAppend Text
 svaRange = lens _svaRange (\ s a -> s{_svaRange = a})
 
@@ -227,9 +235,8 @@ svaIncludeValuesInResponse
 
 -- | Determines how dates, times, and durations in the response should be
 -- rendered. This is ignored if response_value_render_option is
--- FORMATTED_VALUE. The default dateTime render option is
--- [DateTimeRenderOption.SERIAL_NUMBER].
-svaResponseDateTimeRenderOption :: Lens' SpreadsheetsValuesAppend (Maybe Text)
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
+svaResponseDateTimeRenderOption :: Lens' SpreadsheetsValuesAppend (Maybe SpreadsheetsValuesAppendResponseDateTimeRenderOption)
 svaResponseDateTimeRenderOption
   = lens _svaResponseDateTimeRenderOption
       (\ s a -> s{_svaResponseDateTimeRenderOption = a})
@@ -240,8 +247,8 @@ svaCallback
   = lens _svaCallback (\ s a -> s{_svaCallback = a})
 
 -- | Determines how values in the response should be rendered. The default
--- render option is ValueRenderOption.FORMATTED_VALUE.
-svaResponseValueRenderOption :: Lens' SpreadsheetsValuesAppend (Maybe Text)
+-- render option is FORMATTED_VALUE.
+svaResponseValueRenderOption :: Lens' SpreadsheetsValuesAppend (Maybe SpreadsheetsValuesAppendResponseValueRenderOption)
 svaResponseValueRenderOption
   = lens _svaResponseValueRenderOption
       (\ s a -> s{_svaResponseValueRenderOption = a})

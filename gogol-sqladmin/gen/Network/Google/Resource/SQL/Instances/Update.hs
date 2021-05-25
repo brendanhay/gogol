@@ -20,11 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates settings of a Cloud SQL instance. Caution: This is not a partial
--- update, so you must include values for all the settings that you want to
--- retain. For partial updates, use patch.
+-- Updates settings of a Cloud SQL instance. Using this operation might
+-- cause your instance to restart.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.update@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.instances.update@.
 module Network.Google.Resource.SQL.Instances.Update
     (
     -- * REST Resource
@@ -35,36 +34,49 @@ module Network.Google.Resource.SQL.Instances.Update
     , InstancesUpdate
 
     -- * Request Lenses
+    , iuXgafv
+    , iuUploadProtocol
     , iuProject
+    , iuAccessToken
+    , iuUploadType
     , iuPayload
+    , iuCallback
     , iuInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.update@ method which the
 -- 'InstancesUpdate' request conforms to.
 type InstancesUpdateResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] DatabaseInstance :>
-                     Put '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] DatabaseInstance :>
+                             Put '[JSON] Operation
 
--- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
--- update, so you must include values for all the settings that you want to
--- retain. For partial updates, use patch.
+-- | Updates settings of a Cloud SQL instance. Using this operation might
+-- cause your instance to restart.
 --
 -- /See:/ 'instancesUpdate' smart constructor.
 data InstancesUpdate =
   InstancesUpdate'
-    { _iuProject  :: !Text
-    , _iuPayload  :: !DatabaseInstance
+    { _iuXgafv :: !(Maybe Xgafv)
+    , _iuUploadProtocol :: !(Maybe Text)
+    , _iuProject :: !Text
+    , _iuAccessToken :: !(Maybe Text)
+    , _iuUploadType :: !(Maybe Text)
+    , _iuPayload :: !DatabaseInstance
+    , _iuCallback :: !(Maybe Text)
     , _iuInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -74,9 +86,19 @@ data InstancesUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'iuXgafv'
+--
+-- * 'iuUploadProtocol'
+--
 -- * 'iuProject'
 --
+-- * 'iuAccessToken'
+--
+-- * 'iuUploadType'
+--
 -- * 'iuPayload'
+--
+-- * 'iuCallback'
 --
 -- * 'iuInstance'
 instancesUpdate
@@ -86,21 +108,52 @@ instancesUpdate
     -> InstancesUpdate
 instancesUpdate pIuProject_ pIuPayload_ pIuInstance_ =
   InstancesUpdate'
-    { _iuProject = pIuProject_
+    { _iuXgafv = Nothing
+    , _iuUploadProtocol = Nothing
+    , _iuProject = pIuProject_
+    , _iuAccessToken = Nothing
+    , _iuUploadType = Nothing
     , _iuPayload = pIuPayload_
+    , _iuCallback = Nothing
     , _iuInstance = pIuInstance_
     }
 
+
+-- | V1 error format.
+iuXgafv :: Lens' InstancesUpdate (Maybe Xgafv)
+iuXgafv = lens _iuXgafv (\ s a -> s{_iuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+iuUploadProtocol :: Lens' InstancesUpdate (Maybe Text)
+iuUploadProtocol
+  = lens _iuUploadProtocol
+      (\ s a -> s{_iuUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 iuProject :: Lens' InstancesUpdate Text
 iuProject
   = lens _iuProject (\ s a -> s{_iuProject = a})
 
+-- | OAuth access token.
+iuAccessToken :: Lens' InstancesUpdate (Maybe Text)
+iuAccessToken
+  = lens _iuAccessToken
+      (\ s a -> s{_iuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+iuUploadType :: Lens' InstancesUpdate (Maybe Text)
+iuUploadType
+  = lens _iuUploadType (\ s a -> s{_iuUploadType = a})
+
 -- | Multipart request metadata.
 iuPayload :: Lens' InstancesUpdate DatabaseInstance
 iuPayload
   = lens _iuPayload (\ s a -> s{_iuPayload = a})
+
+-- | JSONP
+iuCallback :: Lens' InstancesUpdate (Maybe Text)
+iuCallback
+  = lens _iuCallback (\ s a -> s{_iuCallback = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 iuInstance :: Lens' InstancesUpdate Text
@@ -113,7 +166,13 @@ instance GoogleRequest InstancesUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesUpdate'{..}
-          = go _iuProject _iuInstance (Just AltJSON) _iuPayload
+          = go _iuProject _iuInstance _iuXgafv
+              _iuUploadProtocol
+              _iuAccessToken
+              _iuUploadType
+              _iuCallback
+              (Just AltJSON)
+              _iuPayload
               sQLAdminService
           where go
                   = buildClient

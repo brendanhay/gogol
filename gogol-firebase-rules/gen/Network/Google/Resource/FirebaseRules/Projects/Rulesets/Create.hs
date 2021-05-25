@@ -46,8 +46,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
     , prcCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.rulesets.create@ method which the
 -- 'ProjectsRulesetsCreate' request conforms to.
@@ -72,13 +72,13 @@ type ProjectsRulesetsCreateResource =
 -- /See:/ 'projectsRulesetsCreate' smart constructor.
 data ProjectsRulesetsCreate =
   ProjectsRulesetsCreate'
-    { _prcXgafv          :: !(Maybe Xgafv)
+    { _prcXgafv :: !(Maybe Xgafv)
     , _prcUploadProtocol :: !(Maybe Text)
-    , _prcAccessToken    :: !(Maybe Text)
-    , _prcUploadType     :: !(Maybe Text)
-    , _prcPayload        :: !Ruleset
-    , _prcName           :: !Text
-    , _prcCallback       :: !(Maybe Text)
+    , _prcAccessToken :: !(Maybe Text)
+    , _prcUploadType :: !(Maybe Text)
+    , _prcPayload :: !Ruleset
+    , _prcName :: !Text
+    , _prcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,7 +143,7 @@ prcPayload :: Lens' ProjectsRulesetsCreate Ruleset
 prcPayload
   = lens _prcPayload (\ s a -> s{_prcPayload = a})
 
--- | Resource name for Project which owns this \`Ruleset\`. Format:
+-- | Required. Resource name for Project which owns this \`Ruleset\`. Format:
 -- \`projects\/{project_id}\`
 prcName :: Lens' ProjectsRulesetsCreate Text
 prcName = lens _prcName (\ s a -> s{_prcName = a})

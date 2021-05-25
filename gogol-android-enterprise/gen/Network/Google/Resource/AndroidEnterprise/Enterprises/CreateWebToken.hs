@@ -36,12 +36,17 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWebToken
     , EnterprisesCreateWebToken
 
     -- * Request Lenses
+    , ecwtXgafv
+    , ecwtUploadProtocol
     , ecwtEnterpriseId
+    , ecwtAccessToken
+    , ecwtUploadType
     , ecwtPayload
+    , ecwtCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.createWebToken@ method which the
 -- 'EnterprisesCreateWebToken' request conforms to.
@@ -51,9 +56,14 @@ type EnterprisesCreateWebTokenResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "createWebToken" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] AdministratorWebTokenSpec :>
-                   Post '[JSON] AdministratorWebToken
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AdministratorWebTokenSpec :>
+                             Post '[JSON] AdministratorWebToken
 
 -- | Returns a unique token to access an embeddable UI. To generate a web UI,
 -- pass the generated token into the managed Google Play javascript API.
@@ -63,8 +73,13 @@ type EnterprisesCreateWebTokenResource =
 -- /See:/ 'enterprisesCreateWebToken' smart constructor.
 data EnterprisesCreateWebToken =
   EnterprisesCreateWebToken'
-    { _ecwtEnterpriseId :: !Text
-    , _ecwtPayload      :: !AdministratorWebTokenSpec
+    { _ecwtXgafv :: !(Maybe Xgafv)
+    , _ecwtUploadProtocol :: !(Maybe Text)
+    , _ecwtEnterpriseId :: !Text
+    , _ecwtAccessToken :: !(Maybe Text)
+    , _ecwtUploadType :: !(Maybe Text)
+    , _ecwtPayload :: !AdministratorWebTokenSpec
+    , _ecwtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,17 +88,45 @@ data EnterprisesCreateWebToken =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ecwtXgafv'
+--
+-- * 'ecwtUploadProtocol'
+--
 -- * 'ecwtEnterpriseId'
 --
+-- * 'ecwtAccessToken'
+--
+-- * 'ecwtUploadType'
+--
 -- * 'ecwtPayload'
+--
+-- * 'ecwtCallback'
 enterprisesCreateWebToken
     :: Text -- ^ 'ecwtEnterpriseId'
     -> AdministratorWebTokenSpec -- ^ 'ecwtPayload'
     -> EnterprisesCreateWebToken
 enterprisesCreateWebToken pEcwtEnterpriseId_ pEcwtPayload_ =
   EnterprisesCreateWebToken'
-    {_ecwtEnterpriseId = pEcwtEnterpriseId_, _ecwtPayload = pEcwtPayload_}
+    { _ecwtXgafv = Nothing
+    , _ecwtUploadProtocol = Nothing
+    , _ecwtEnterpriseId = pEcwtEnterpriseId_
+    , _ecwtAccessToken = Nothing
+    , _ecwtUploadType = Nothing
+    , _ecwtPayload = pEcwtPayload_
+    , _ecwtCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ecwtXgafv :: Lens' EnterprisesCreateWebToken (Maybe Xgafv)
+ecwtXgafv
+  = lens _ecwtXgafv (\ s a -> s{_ecwtXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ecwtUploadProtocol :: Lens' EnterprisesCreateWebToken (Maybe Text)
+ecwtUploadProtocol
+  = lens _ecwtUploadProtocol
+      (\ s a -> s{_ecwtUploadProtocol = a})
 
 -- | The ID of the enterprise.
 ecwtEnterpriseId :: Lens' EnterprisesCreateWebToken Text
@@ -91,10 +134,27 @@ ecwtEnterpriseId
   = lens _ecwtEnterpriseId
       (\ s a -> s{_ecwtEnterpriseId = a})
 
+-- | OAuth access token.
+ecwtAccessToken :: Lens' EnterprisesCreateWebToken (Maybe Text)
+ecwtAccessToken
+  = lens _ecwtAccessToken
+      (\ s a -> s{_ecwtAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ecwtUploadType :: Lens' EnterprisesCreateWebToken (Maybe Text)
+ecwtUploadType
+  = lens _ecwtUploadType
+      (\ s a -> s{_ecwtUploadType = a})
+
 -- | Multipart request metadata.
 ecwtPayload :: Lens' EnterprisesCreateWebToken AdministratorWebTokenSpec
 ecwtPayload
   = lens _ecwtPayload (\ s a -> s{_ecwtPayload = a})
+
+-- | JSONP
+ecwtCallback :: Lens' EnterprisesCreateWebToken (Maybe Text)
+ecwtCallback
+  = lens _ecwtCallback (\ s a -> s{_ecwtCallback = a})
 
 instance GoogleRequest EnterprisesCreateWebToken
          where
@@ -103,7 +163,12 @@ instance GoogleRequest EnterprisesCreateWebToken
         type Scopes EnterprisesCreateWebToken =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesCreateWebToken'{..}
-          = go _ecwtEnterpriseId (Just AltJSON) _ecwtPayload
+          = go _ecwtEnterpriseId _ecwtXgafv _ecwtUploadProtocol
+              _ecwtAccessToken
+              _ecwtUploadType
+              _ecwtCallback
+              (Just AltJSON)
+              _ecwtPayload
               androidEnterpriseService
           where go
                   = buildClient

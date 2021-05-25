@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets one blog and user info pair by blogId and userId.
+-- Gets one blog and user info pair by blog id and user id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogUserInfos.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.blogUserInfos.get@.
 module Network.Google.Resource.Blogger.BlogUserInfos.Get
     (
     -- * REST Resource
@@ -33,34 +33,48 @@ module Network.Google.Resource.Blogger.BlogUserInfos.Get
     , BlogUserInfosGet
 
     -- * Request Lenses
+    , buigXgafv
+    , buigUploadProtocol
+    , buigAccessToken
+    , buigUploadType
     , buigBlogId
     , buigUserId
     , buigMaxPosts
+    , buigCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.blogUserInfos.get@ method which the
 -- 'BlogUserInfosGet' request conforms to.
 type BlogUserInfosGetResource =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               Capture "blogId" Text :>
-                 QueryParam "maxPosts" (Textual Word32) :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
+     "v3" :>
+       "users" :>
+         Capture "userId" Text :>
+           "blogs" :>
+             Capture "blogId" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "maxPosts" (Textual Word32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
 
--- | Gets one blog and user info pair by blogId and userId.
+-- | Gets one blog and user info pair by blog id and user id.
 --
 -- /See:/ 'blogUserInfosGet' smart constructor.
 data BlogUserInfosGet =
   BlogUserInfosGet'
-    { _buigBlogId   :: !Text
-    , _buigUserId   :: !Text
+    { _buigXgafv :: !(Maybe Xgafv)
+    , _buigUploadProtocol :: !(Maybe Text)
+    , _buigAccessToken :: !(Maybe Text)
+    , _buigUploadType :: !(Maybe Text)
+    , _buigBlogId :: !Text
+    , _buigUserId :: !Text
     , _buigMaxPosts :: !(Maybe (Textual Word32))
+    , _buigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,39 +83,78 @@ data BlogUserInfosGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'buigXgafv'
+--
+-- * 'buigUploadProtocol'
+--
+-- * 'buigAccessToken'
+--
+-- * 'buigUploadType'
+--
 -- * 'buigBlogId'
 --
 -- * 'buigUserId'
 --
 -- * 'buigMaxPosts'
+--
+-- * 'buigCallback'
 blogUserInfosGet
     :: Text -- ^ 'buigBlogId'
     -> Text -- ^ 'buigUserId'
     -> BlogUserInfosGet
 blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
   BlogUserInfosGet'
-    { _buigBlogId = pBuigBlogId_
+    { _buigXgafv = Nothing
+    , _buigUploadProtocol = Nothing
+    , _buigAccessToken = Nothing
+    , _buigUploadType = Nothing
+    , _buigBlogId = pBuigBlogId_
     , _buigUserId = pBuigUserId_
     , _buigMaxPosts = Nothing
+    , _buigCallback = Nothing
     }
 
 
--- | The ID of the blog to get.
+-- | V1 error format.
+buigXgafv :: Lens' BlogUserInfosGet (Maybe Xgafv)
+buigXgafv
+  = lens _buigXgafv (\ s a -> s{_buigXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+buigUploadProtocol :: Lens' BlogUserInfosGet (Maybe Text)
+buigUploadProtocol
+  = lens _buigUploadProtocol
+      (\ s a -> s{_buigUploadProtocol = a})
+
+-- | OAuth access token.
+buigAccessToken :: Lens' BlogUserInfosGet (Maybe Text)
+buigAccessToken
+  = lens _buigAccessToken
+      (\ s a -> s{_buigAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+buigUploadType :: Lens' BlogUserInfosGet (Maybe Text)
+buigUploadType
+  = lens _buigUploadType
+      (\ s a -> s{_buigUploadType = a})
+
 buigBlogId :: Lens' BlogUserInfosGet Text
 buigBlogId
   = lens _buigBlogId (\ s a -> s{_buigBlogId = a})
 
--- | ID of the user whose blogs are to be fetched. Either the word \'self\'
--- (sans quote marks) or the user\'s profile identifier.
 buigUserId :: Lens' BlogUserInfosGet Text
 buigUserId
   = lens _buigUserId (\ s a -> s{_buigUserId = a})
 
--- | Maximum number of posts to pull back with the blog.
 buigMaxPosts :: Lens' BlogUserInfosGet (Maybe Word32)
 buigMaxPosts
   = lens _buigMaxPosts (\ s a -> s{_buigMaxPosts = a})
       . mapping _Coerce
+
+-- | JSONP
+buigCallback :: Lens' BlogUserInfosGet (Maybe Text)
+buigCallback
+  = lens _buigCallback (\ s a -> s{_buigCallback = a})
 
 instance GoogleRequest BlogUserInfosGet where
         type Rs BlogUserInfosGet = BlogUserInfo
@@ -109,7 +162,12 @@ instance GoogleRequest BlogUserInfosGet where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient BlogUserInfosGet'{..}
-          = go _buigUserId _buigBlogId _buigMaxPosts
+          = go _buigUserId _buigBlogId _buigXgafv
+              _buigUploadProtocol
+              _buigAccessToken
+              _buigUploadType
+              _buigMaxPosts
+              _buigCallback
               (Just AltJSON)
               bloggerService
           where go

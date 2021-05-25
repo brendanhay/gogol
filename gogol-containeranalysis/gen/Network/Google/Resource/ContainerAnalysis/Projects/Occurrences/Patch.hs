@@ -43,8 +43,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Patch
     , popCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.patch@ method which the
 -- 'ProjectsOccurrencesPatch' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsOccurrencesPatchResource =
 -- /See:/ 'projectsOccurrencesPatch' smart constructor.
 data ProjectsOccurrencesPatch =
   ProjectsOccurrencesPatch'
-    { _popXgafv          :: !(Maybe Xgafv)
+    { _popXgafv :: !(Maybe Xgafv)
     , _popUploadProtocol :: !(Maybe Text)
-    , _popUpdateMask     :: !(Maybe GFieldMask)
-    , _popAccessToken    :: !(Maybe Text)
-    , _popUploadType     :: !(Maybe Text)
-    , _popPayload        :: !Occurrence
-    , _popName           :: !Text
-    , _popCallback       :: !(Maybe Text)
+    , _popUpdateMask :: !(Maybe GFieldMask)
+    , _popAccessToken :: !(Maybe Text)
+    , _popUploadType :: !(Maybe Text)
+    , _popPayload :: !Occurrence
+    , _popName :: !Text
+    , _popCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,7 +147,7 @@ popPayload :: Lens' ProjectsOccurrencesPatch Occurrence
 popPayload
   = lens _popPayload (\ s a -> s{_popPayload = a})
 
--- | The name of the occurrence in the form of
+-- | Required. The name of the occurrence in the form of
 -- \`projects\/[PROJECT_ID]\/occurrences\/[OCCURRENCE_ID]\`.
 popName :: Lens' ProjectsOccurrencesPatch Text
 popName = lens _popName (\ s a -> s{_popName = a})

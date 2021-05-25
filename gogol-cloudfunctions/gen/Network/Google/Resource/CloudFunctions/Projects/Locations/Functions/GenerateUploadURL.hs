@@ -57,8 +57,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Gener
     , plfguuCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.generateUploadUrl@ method which the
 -- 'ProjectsLocationsFunctionsGenerateUploadURL' request conforms to.
@@ -96,13 +96,13 @@ type ProjectsLocationsFunctionsGenerateUploadURLResource
 -- /See:/ 'projectsLocationsFunctionsGenerateUploadURL' smart constructor.
 data ProjectsLocationsFunctionsGenerateUploadURL =
   ProjectsLocationsFunctionsGenerateUploadURL'
-    { _plfguuParent         :: !Text
-    , _plfguuXgafv          :: !(Maybe Xgafv)
+    { _plfguuParent :: !Text
+    , _plfguuXgafv :: !(Maybe Xgafv)
     , _plfguuUploadProtocol :: !(Maybe Text)
-    , _plfguuAccessToken    :: !(Maybe Text)
-    , _plfguuUploadType     :: !(Maybe Text)
-    , _plfguuPayload        :: !GenerateUploadURLRequest
-    , _plfguuCallback       :: !(Maybe Text)
+    , _plfguuAccessToken :: !(Maybe Text)
+    , _plfguuUploadType :: !(Maybe Text)
+    , _plfguuPayload :: !GenerateUploadURLRequest
+    , _plfguuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

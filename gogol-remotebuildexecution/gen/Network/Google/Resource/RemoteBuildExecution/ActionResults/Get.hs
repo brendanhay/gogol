@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve a cached execution result. Errors: * \`NOT_FOUND\`: The
+-- Retrieve a cached execution result. Implementations SHOULD ensure that
+-- any blobs referenced from the ContentAddressableStorage are available at
+-- the time of returning the ActionResult and will be for some period of
+-- time afterwards. The lifetimes of the referenced blobs SHOULD be
+-- increased if necessary and applicable. Errors: * \`NOT_FOUND\`: The
 -- requested \`ActionResult\` is not in the cache.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actionResults.get@.
@@ -34,18 +38,21 @@ module Network.Google.Resource.RemoteBuildExecution.ActionResults.Get
     , ActionResultsGet
 
     -- * Request Lenses
+    , argInlineStdout
     , argSizeBytes
     , argXgafv
     , argHash
     , argUploadProtocol
     , argAccessToken
+    , argInlineOutputFiles
     , argUploadType
+    , argInlineStderr
     , argInstanceName
     , argCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actionResults.get@ method which the
 -- 'ActionResultsGet' request conforms to.
@@ -55,28 +62,39 @@ type ActionResultsGetResource =
          "actionResults" :>
            Capture "hash" Text :>
              Capture "sizeBytes" (Textual Int64) :>
-               QueryParam "$.xgafv" Xgafv :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] BuildBazelRemoteExecutionV2ActionResult
+               QueryParam "inlineStdout" Bool :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParams "inlineOutputFiles" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "inlineStderr" Bool :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON]
+                                   BuildBazelRemoteExecutionV2ActionResult
 
--- | Retrieve a cached execution result. Errors: * \`NOT_FOUND\`: The
+-- | Retrieve a cached execution result. Implementations SHOULD ensure that
+-- any blobs referenced from the ContentAddressableStorage are available at
+-- the time of returning the ActionResult and will be for some period of
+-- time afterwards. The lifetimes of the referenced blobs SHOULD be
+-- increased if necessary and applicable. Errors: * \`NOT_FOUND\`: The
 -- requested \`ActionResult\` is not in the cache.
 --
 -- /See:/ 'actionResultsGet' smart constructor.
 data ActionResultsGet =
   ActionResultsGet'
-    { _argSizeBytes      :: !(Textual Int64)
-    , _argXgafv          :: !(Maybe Xgafv)
-    , _argHash           :: !Text
+    { _argInlineStdout :: !(Maybe Bool)
+    , _argSizeBytes :: !(Textual Int64)
+    , _argXgafv :: !(Maybe Xgafv)
+    , _argHash :: !Text
     , _argUploadProtocol :: !(Maybe Text)
-    , _argAccessToken    :: !(Maybe Text)
-    , _argUploadType     :: !(Maybe Text)
-    , _argInstanceName   :: !Text
-    , _argCallback       :: !(Maybe Text)
+    , _argAccessToken :: !(Maybe Text)
+    , _argInlineOutputFiles :: !(Maybe [Text])
+    , _argUploadType :: !(Maybe Text)
+    , _argInlineStderr :: !(Maybe Bool)
+    , _argInstanceName :: !Text
+    , _argCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,6 +102,8 @@ data ActionResultsGet =
 -- | Creates a value of 'ActionResultsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'argInlineStdout'
 --
 -- * 'argSizeBytes'
 --
@@ -95,7 +115,11 @@ data ActionResultsGet =
 --
 -- * 'argAccessToken'
 --
+-- * 'argInlineOutputFiles'
+--
 -- * 'argUploadType'
+--
+-- * 'argInlineStderr'
 --
 -- * 'argInstanceName'
 --
@@ -107,16 +131,26 @@ actionResultsGet
     -> ActionResultsGet
 actionResultsGet pArgSizeBytes_ pArgHash_ pArgInstanceName_ =
   ActionResultsGet'
-    { _argSizeBytes = _Coerce # pArgSizeBytes_
+    { _argInlineStdout = Nothing
+    , _argSizeBytes = _Coerce # pArgSizeBytes_
     , _argXgafv = Nothing
     , _argHash = pArgHash_
     , _argUploadProtocol = Nothing
     , _argAccessToken = Nothing
+    , _argInlineOutputFiles = Nothing
     , _argUploadType = Nothing
+    , _argInlineStderr = Nothing
     , _argInstanceName = pArgInstanceName_
     , _argCallback = Nothing
     }
 
+
+-- | A hint to the server to request inlining stdout in the ActionResult
+-- message.
+argInlineStdout :: Lens' ActionResultsGet (Maybe Bool)
+argInlineStdout
+  = lens _argInlineStdout
+      (\ s a -> s{_argInlineStdout = a})
 
 -- | The size of the blob, in bytes.
 argSizeBytes :: Lens' ActionResultsGet Int64
@@ -145,11 +179,29 @@ argAccessToken
   = lens _argAccessToken
       (\ s a -> s{_argAccessToken = a})
 
+-- | A hint to the server to inline the contents of the listed output files.
+-- Each path needs to exactly match one file path in either
+-- \`output_paths\` or \`output_files\` (DEPRECATED since v2.1) in the
+-- Command message.
+argInlineOutputFiles :: Lens' ActionResultsGet [Text]
+argInlineOutputFiles
+  = lens _argInlineOutputFiles
+      (\ s a -> s{_argInlineOutputFiles = a})
+      . _Default
+      . _Coerce
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 argUploadType :: Lens' ActionResultsGet (Maybe Text)
 argUploadType
   = lens _argUploadType
       (\ s a -> s{_argUploadType = a})
+
+-- | A hint to the server to request inlining stderr in the ActionResult
+-- message.
+argInlineStderr :: Lens' ActionResultsGet (Maybe Bool)
+argInlineStderr
+  = lens _argInlineStderr
+      (\ s a -> s{_argInlineStderr = a})
 
 -- | The instance of the execution system to operate against. A server may
 -- support multiple instances of the execution system (with their own
@@ -173,10 +225,13 @@ instance GoogleRequest ActionResultsGet where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ActionResultsGet'{..}
           = go _argInstanceName _argHash _argSizeBytes
+              _argInlineStdout
               _argXgafv
               _argUploadProtocol
               _argAccessToken
+              (_argInlineOutputFiles ^. _Default)
               _argUploadType
+              _argInlineStderr
               _argCallback
               (Just AltJSON)
               remoteBuildExecutionService

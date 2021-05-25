@@ -22,7 +22,7 @@
 --
 -- Reverts changes to a GTM Folder in a GTM Workspace.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.folders.revert@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.folders.revert@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders
     , AccountsContainersWorkspacesFoldersRevert
 
     -- * Request Lenses
+    , acwfrXgafv
+    , acwfrUploadProtocol
     , acwfrPath
     , acwfrFingerprint
+    , acwfrAccessToken
+    , acwfrUploadType
+    , acwfrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.folders.revert@ method which the
 -- 'AccountsContainersWorkspacesFoldersRevert' request conforms to.
@@ -47,17 +52,27 @@ type AccountsContainersWorkspacesFoldersRevertResource
      "tagmanager" :>
        "v2" :>
          CaptureMode "path" "revert" Text :>
-           QueryParam "fingerprint" Text :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] RevertFolderResponse
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] RevertFolderResponse
 
 -- | Reverts changes to a GTM Folder in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersRevert' smart constructor.
 data AccountsContainersWorkspacesFoldersRevert =
   AccountsContainersWorkspacesFoldersRevert'
-    { _acwfrPath        :: !Text
+    { _acwfrXgafv :: !(Maybe Xgafv)
+    , _acwfrUploadProtocol :: !(Maybe Text)
+    , _acwfrPath :: !Text
     , _acwfrFingerprint :: !(Maybe Text)
+    , _acwfrAccessToken :: !(Maybe Text)
+    , _acwfrUploadType :: !(Maybe Text)
+    , _acwfrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,16 +81,44 @@ data AccountsContainersWorkspacesFoldersRevert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acwfrXgafv'
+--
+-- * 'acwfrUploadProtocol'
+--
 -- * 'acwfrPath'
 --
 -- * 'acwfrFingerprint'
+--
+-- * 'acwfrAccessToken'
+--
+-- * 'acwfrUploadType'
+--
+-- * 'acwfrCallback'
 accountsContainersWorkspacesFoldersRevert
     :: Text -- ^ 'acwfrPath'
     -> AccountsContainersWorkspacesFoldersRevert
 accountsContainersWorkspacesFoldersRevert pAcwfrPath_ =
   AccountsContainersWorkspacesFoldersRevert'
-    {_acwfrPath = pAcwfrPath_, _acwfrFingerprint = Nothing}
+    { _acwfrXgafv = Nothing
+    , _acwfrUploadProtocol = Nothing
+    , _acwfrPath = pAcwfrPath_
+    , _acwfrFingerprint = Nothing
+    , _acwfrAccessToken = Nothing
+    , _acwfrUploadType = Nothing
+    , _acwfrCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acwfrXgafv :: Lens' AccountsContainersWorkspacesFoldersRevert (Maybe Xgafv)
+acwfrXgafv
+  = lens _acwfrXgafv (\ s a -> s{_acwfrXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwfrUploadProtocol :: Lens' AccountsContainersWorkspacesFoldersRevert (Maybe Text)
+acwfrUploadProtocol
+  = lens _acwfrUploadProtocol
+      (\ s a -> s{_acwfrUploadProtocol = a})
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
@@ -90,6 +133,24 @@ acwfrFingerprint
   = lens _acwfrFingerprint
       (\ s a -> s{_acwfrFingerprint = a})
 
+-- | OAuth access token.
+acwfrAccessToken :: Lens' AccountsContainersWorkspacesFoldersRevert (Maybe Text)
+acwfrAccessToken
+  = lens _acwfrAccessToken
+      (\ s a -> s{_acwfrAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwfrUploadType :: Lens' AccountsContainersWorkspacesFoldersRevert (Maybe Text)
+acwfrUploadType
+  = lens _acwfrUploadType
+      (\ s a -> s{_acwfrUploadType = a})
+
+-- | JSONP
+acwfrCallback :: Lens' AccountsContainersWorkspacesFoldersRevert (Maybe Text)
+acwfrCallback
+  = lens _acwfrCallback
+      (\ s a -> s{_acwfrCallback = a})
+
 instance GoogleRequest
            AccountsContainersWorkspacesFoldersRevert
          where
@@ -100,7 +161,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesFoldersRevert'{..}
-          = go _acwfrPath _acwfrFingerprint (Just AltJSON)
+          = go _acwfrPath _acwfrXgafv _acwfrUploadProtocol
+              _acwfrFingerprint
+              _acwfrAccessToken
+              _acwfrUploadType
+              _acwfrCallback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

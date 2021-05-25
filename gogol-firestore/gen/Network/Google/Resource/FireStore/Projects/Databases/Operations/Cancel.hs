@@ -50,8 +50,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Operations.Cancel
     , pdocCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.operations.cancel@ method which the
 -- 'ProjectsDatabasesOperationsCancel' request conforms to.
@@ -81,13 +81,13 @@ type ProjectsDatabasesOperationsCancelResource =
 -- /See:/ 'projectsDatabasesOperationsCancel' smart constructor.
 data ProjectsDatabasesOperationsCancel =
   ProjectsDatabasesOperationsCancel'
-    { _pdocXgafv          :: !(Maybe Xgafv)
+    { _pdocXgafv :: !(Maybe Xgafv)
     , _pdocUploadProtocol :: !(Maybe Text)
-    , _pdocAccessToken    :: !(Maybe Text)
-    , _pdocUploadType     :: !(Maybe Text)
-    , _pdocPayload        :: !GoogleLongrunningCancelOperationRequest
-    , _pdocName           :: !Text
-    , _pdocCallback       :: !(Maybe Text)
+    , _pdocAccessToken :: !(Maybe Text)
+    , _pdocUploadType :: !(Maybe Text)
+    , _pdocPayload :: !GoogleLongrunningCancelOperationRequest
+    , _pdocName :: !Text
+    , _pdocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

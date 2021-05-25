@@ -23,7 +23,7 @@
 -- Retrieves a list of creative fields, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFields.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeFields.list@.
 module Network.Google.Resource.DFAReporting.CreativeFields.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.CreativeFields.List
     , CreativeFieldsList
 
     -- * Request Lenses
+    , cflXgafv
+    , cflUploadProtocol
+    , cflAccessToken
     , cflSearchString
+    , cflUploadType
     , cflIds
     , cflProFileId
     , cflSortOrder
@@ -42,28 +46,36 @@ module Network.Google.Resource.DFAReporting.CreativeFields.List
     , cflSortField
     , cflAdvertiserIds
     , cflMaxResults
+    , cflCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFields.list@ method which the
 -- 'CreativeFieldsList' request conforms to.
 type CreativeFieldsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" (Textual Int64) :>
-                   QueryParam "sortOrder" CreativeFieldsListSortOrder :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" CreativeFieldsListSortField :>
-                         QueryParams "advertiserIds" (Textual Int64) :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] CreativeFieldsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParam "sortOrder" CreativeFieldsListSortOrder :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 CreativeFieldsListSortField
+                                 :>
+                                 QueryParams "advertiserIds" (Textual Int64) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] CreativeFieldsListResponse
 
 -- | Retrieves a list of creative fields, possibly filtered. This method
 -- supports paging.
@@ -71,14 +83,19 @@ type CreativeFieldsListResource =
 -- /See:/ 'creativeFieldsList' smart constructor.
 data CreativeFieldsList =
   CreativeFieldsList'
-    { _cflSearchString  :: !(Maybe Text)
-    , _cflIds           :: !(Maybe [Textual Int64])
-    , _cflProFileId     :: !(Textual Int64)
-    , _cflSortOrder     :: !CreativeFieldsListSortOrder
-    , _cflPageToken     :: !(Maybe Text)
-    , _cflSortField     :: !CreativeFieldsListSortField
+    { _cflXgafv :: !(Maybe Xgafv)
+    , _cflUploadProtocol :: !(Maybe Text)
+    , _cflAccessToken :: !(Maybe Text)
+    , _cflSearchString :: !(Maybe Text)
+    , _cflUploadType :: !(Maybe Text)
+    , _cflIds :: !(Maybe [Textual Int64])
+    , _cflProFileId :: !(Textual Int64)
+    , _cflSortOrder :: !CreativeFieldsListSortOrder
+    , _cflPageToken :: !(Maybe Text)
+    , _cflSortField :: !CreativeFieldsListSortField
     , _cflAdvertiserIds :: !(Maybe [Textual Int64])
-    , _cflMaxResults    :: !(Textual Int32)
+    , _cflMaxResults :: !(Textual Int32)
+    , _cflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,7 +104,15 @@ data CreativeFieldsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cflXgafv'
+--
+-- * 'cflUploadProtocol'
+--
+-- * 'cflAccessToken'
+--
 -- * 'cflSearchString'
+--
+-- * 'cflUploadType'
 --
 -- * 'cflIds'
 --
@@ -102,12 +127,18 @@ data CreativeFieldsList =
 -- * 'cflAdvertiserIds'
 --
 -- * 'cflMaxResults'
+--
+-- * 'cflCallback'
 creativeFieldsList
     :: Int64 -- ^ 'cflProFileId'
     -> CreativeFieldsList
 creativeFieldsList pCflProFileId_ =
   CreativeFieldsList'
-    { _cflSearchString = Nothing
+    { _cflXgafv = Nothing
+    , _cflUploadProtocol = Nothing
+    , _cflAccessToken = Nothing
+    , _cflSearchString = Nothing
+    , _cflUploadType = Nothing
     , _cflIds = Nothing
     , _cflProFileId = _Coerce # pCflProFileId_
     , _cflSortOrder = CFLSOAscending
@@ -115,8 +146,25 @@ creativeFieldsList pCflProFileId_ =
     , _cflSortField = CFLSFID
     , _cflAdvertiserIds = Nothing
     , _cflMaxResults = 1000
+    , _cflCallback = Nothing
     }
 
+
+-- | V1 error format.
+cflXgafv :: Lens' CreativeFieldsList (Maybe Xgafv)
+cflXgafv = lens _cflXgafv (\ s a -> s{_cflXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cflUploadProtocol :: Lens' CreativeFieldsList (Maybe Text)
+cflUploadProtocol
+  = lens _cflUploadProtocol
+      (\ s a -> s{_cflUploadProtocol = a})
+
+-- | OAuth access token.
+cflAccessToken :: Lens' CreativeFieldsList (Maybe Text)
+cflAccessToken
+  = lens _cflAccessToken
+      (\ s a -> s{_cflAccessToken = a})
 
 -- | Allows searching for creative fields by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativefield*2015\" will return creative fields
@@ -130,6 +178,12 @@ cflSearchString :: Lens' CreativeFieldsList (Maybe Text)
 cflSearchString
   = lens _cflSearchString
       (\ s a -> s{_cflSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cflUploadType :: Lens' CreativeFieldsList (Maybe Text)
+cflUploadType
+  = lens _cflUploadType
+      (\ s a -> s{_cflUploadType = a})
 
 -- | Select only creative fields with these IDs.
 cflIds :: Lens' CreativeFieldsList [Int64]
@@ -173,19 +227,28 @@ cflMaxResults
       (\ s a -> s{_cflMaxResults = a})
       . _Coerce
 
+-- | JSONP
+cflCallback :: Lens' CreativeFieldsList (Maybe Text)
+cflCallback
+  = lens _cflCallback (\ s a -> s{_cflCallback = a})
+
 instance GoogleRequest CreativeFieldsList where
         type Rs CreativeFieldsList =
              CreativeFieldsListResponse
         type Scopes CreativeFieldsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldsList'{..}
-          = go _cflProFileId _cflSearchString
+          = go _cflProFileId _cflXgafv _cflUploadProtocol
+              _cflAccessToken
+              _cflSearchString
+              _cflUploadType
               (_cflIds ^. _Default)
               (Just _cflSortOrder)
               _cflPageToken
               (Just _cflSortField)
               (_cflAdvertiserIds ^. _Default)
               (Just _cflMaxResults)
+              _cflCallback
               (Just AltJSON)
               dFAReportingService
           where go

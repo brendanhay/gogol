@@ -22,7 +22,7 @@
 --
 -- Gets information about a specific deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.get@.
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.get@.
 module Network.Google.Resource.DeploymentManager.Deployments.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.DeploymentManager.Deployments.Get
     , DeploymentsGet
 
     -- * Request Lenses
+    , dgXgafv
+    , dgUploadProtocol
     , dgProject
+    , dgAccessToken
+    , dgUploadType
+    , dgCallback
     , dgDeployment
     ) where
 
-import           Network.Google.DeploymentManager.Types
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.get@ method which the
 -- 'DeploymentsGet' request conforms to.
@@ -50,14 +55,24 @@ type DeploymentsGetResource =
              "global" :>
                "deployments" :>
                  Capture "deployment" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Deployment
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Deployment
 
 -- | Gets information about a specific deployment.
 --
 -- /See:/ 'deploymentsGet' smart constructor.
 data DeploymentsGet =
   DeploymentsGet'
-    { _dgProject    :: !Text
+    { _dgXgafv :: !(Maybe Xgafv)
+    , _dgUploadProtocol :: !(Maybe Text)
+    , _dgProject :: !Text
+    , _dgAccessToken :: !(Maybe Text)
+    , _dgUploadType :: !(Maybe Text)
+    , _dgCallback :: !(Maybe Text)
     , _dgDeployment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -67,7 +82,17 @@ data DeploymentsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dgXgafv'
+--
+-- * 'dgUploadProtocol'
+--
 -- * 'dgProject'
+--
+-- * 'dgAccessToken'
+--
+-- * 'dgUploadType'
+--
+-- * 'dgCallback'
 --
 -- * 'dgDeployment'
 deploymentsGet
@@ -75,13 +100,47 @@ deploymentsGet
     -> Text -- ^ 'dgDeployment'
     -> DeploymentsGet
 deploymentsGet pDgProject_ pDgDeployment_ =
-  DeploymentsGet' {_dgProject = pDgProject_, _dgDeployment = pDgDeployment_}
+  DeploymentsGet'
+    { _dgXgafv = Nothing
+    , _dgUploadProtocol = Nothing
+    , _dgProject = pDgProject_
+    , _dgAccessToken = Nothing
+    , _dgUploadType = Nothing
+    , _dgCallback = Nothing
+    , _dgDeployment = pDgDeployment_
+    }
 
+
+-- | V1 error format.
+dgXgafv :: Lens' DeploymentsGet (Maybe Xgafv)
+dgXgafv = lens _dgXgafv (\ s a -> s{_dgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dgUploadProtocol :: Lens' DeploymentsGet (Maybe Text)
+dgUploadProtocol
+  = lens _dgUploadProtocol
+      (\ s a -> s{_dgUploadProtocol = a})
 
 -- | The project ID for this request.
 dgProject :: Lens' DeploymentsGet Text
 dgProject
   = lens _dgProject (\ s a -> s{_dgProject = a})
+
+-- | OAuth access token.
+dgAccessToken :: Lens' DeploymentsGet (Maybe Text)
+dgAccessToken
+  = lens _dgAccessToken
+      (\ s a -> s{_dgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dgUploadType :: Lens' DeploymentsGet (Maybe Text)
+dgUploadType
+  = lens _dgUploadType (\ s a -> s{_dgUploadType = a})
+
+-- | JSONP
+dgCallback :: Lens' DeploymentsGet (Maybe Text)
+dgCallback
+  = lens _dgCallback (\ s a -> s{_dgCallback = a})
 
 -- | The name of the deployment for this request.
 dgDeployment :: Lens' DeploymentsGet Text
@@ -96,7 +155,12 @@ instance GoogleRequest DeploymentsGet where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient DeploymentsGet'{..}
-          = go _dgProject _dgDeployment (Just AltJSON)
+          = go _dgProject _dgDeployment _dgXgafv
+              _dgUploadProtocol
+              _dgAccessToken
+              _dgUploadType
+              _dgCallback
+              (Just AltJSON)
               deploymentManagerService
           where go
                   = buildClient (Proxy :: Proxy DeploymentsGetResource)

@@ -22,7 +22,7 @@
 --
 -- List the layer summaries for a volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.layers.list@.
 module Network.Google.Resource.Books.Layers.List
     (
     -- * REST Resource
@@ -33,15 +33,20 @@ module Network.Google.Resource.Books.Layers.List
     , LayersList
 
     -- * Request Lenses
+    , llXgafv
+    , llUploadProtocol
+    , llAccessToken
     , llContentVersion
+    , llUploadType
     , llVolumeId
     , llSource
     , llPageToken
     , llMaxResults
+    , llCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.layers.list@ method which the
 -- 'LayersList' request conforms to.
@@ -51,23 +56,33 @@ type LayersListResource =
          "volumes" :>
            Capture "volumeId" Text :>
              "layersummary" :>
-               QueryParam "contentVersion" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] Layersummaries
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "contentVersion" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Layersummaries
 
 -- | List the layer summaries for a volume.
 --
 -- /See:/ 'layersList' smart constructor.
 data LayersList =
   LayersList'
-    { _llContentVersion :: !(Maybe Text)
-    , _llVolumeId       :: !Text
-    , _llSource         :: !(Maybe Text)
-    , _llPageToken      :: !(Maybe Text)
-    , _llMaxResults     :: !(Maybe (Textual Word32))
+    { _llXgafv :: !(Maybe Xgafv)
+    , _llUploadProtocol :: !(Maybe Text)
+    , _llAccessToken :: !(Maybe Text)
+    , _llContentVersion :: !(Maybe Text)
+    , _llUploadType :: !(Maybe Text)
+    , _llVolumeId :: !Text
+    , _llSource :: !(Maybe Text)
+    , _llPageToken :: !(Maybe Text)
+    , _llMaxResults :: !(Maybe (Textual Word32))
+    , _llCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,7 +91,15 @@ data LayersList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'llXgafv'
+--
+-- * 'llUploadProtocol'
+--
+-- * 'llAccessToken'
+--
 -- * 'llContentVersion'
+--
+-- * 'llUploadType'
 --
 -- * 'llVolumeId'
 --
@@ -85,24 +108,52 @@ data LayersList =
 -- * 'llPageToken'
 --
 -- * 'llMaxResults'
+--
+-- * 'llCallback'
 layersList
     :: Text -- ^ 'llVolumeId'
     -> LayersList
 layersList pLlVolumeId_ =
   LayersList'
-    { _llContentVersion = Nothing
+    { _llXgafv = Nothing
+    , _llUploadProtocol = Nothing
+    , _llAccessToken = Nothing
+    , _llContentVersion = Nothing
+    , _llUploadType = Nothing
     , _llVolumeId = pLlVolumeId_
     , _llSource = Nothing
     , _llPageToken = Nothing
     , _llMaxResults = Nothing
+    , _llCallback = Nothing
     }
 
+
+-- | V1 error format.
+llXgafv :: Lens' LayersList (Maybe Xgafv)
+llXgafv = lens _llXgafv (\ s a -> s{_llXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+llUploadProtocol :: Lens' LayersList (Maybe Text)
+llUploadProtocol
+  = lens _llUploadProtocol
+      (\ s a -> s{_llUploadProtocol = a})
+
+-- | OAuth access token.
+llAccessToken :: Lens' LayersList (Maybe Text)
+llAccessToken
+  = lens _llAccessToken
+      (\ s a -> s{_llAccessToken = a})
 
 -- | The content version for the requested volume.
 llContentVersion :: Lens' LayersList (Maybe Text)
 llContentVersion
   = lens _llContentVersion
       (\ s a -> s{_llContentVersion = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+llUploadType :: Lens' LayersList (Maybe Text)
+llUploadType
+  = lens _llUploadType (\ s a -> s{_llUploadType = a})
 
 -- | The volume to retrieve layers for.
 llVolumeId :: Lens' LayersList Text
@@ -124,14 +175,24 @@ llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+llCallback :: Lens' LayersList (Maybe Text)
+llCallback
+  = lens _llCallback (\ s a -> s{_llCallback = a})
+
 instance GoogleRequest LayersList where
         type Rs LayersList = Layersummaries
         type Scopes LayersList =
              '["https://www.googleapis.com/auth/books"]
         requestClient LayersList'{..}
-          = go _llVolumeId _llContentVersion _llSource
+          = go _llVolumeId _llXgafv _llUploadProtocol
+              _llAccessToken
+              _llContentVersion
+              _llUploadType
+              _llSource
               _llPageToken
               _llMaxResults
+              _llCallback
               (Just AltJSON)
               booksService
           where go

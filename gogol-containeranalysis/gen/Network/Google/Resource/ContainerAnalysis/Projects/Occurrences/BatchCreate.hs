@@ -42,8 +42,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.BatchCreat
     , pobcCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.batchCreate@ method which the
 -- 'ProjectsOccurrencesBatchCreate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsOccurrencesBatchCreateResource =
 -- /See:/ 'projectsOccurrencesBatchCreate' smart constructor.
 data ProjectsOccurrencesBatchCreate =
   ProjectsOccurrencesBatchCreate'
-    { _pobcParent         :: !Text
-    , _pobcXgafv          :: !(Maybe Xgafv)
+    { _pobcParent :: !Text
+    , _pobcXgafv :: !(Maybe Xgafv)
     , _pobcUploadProtocol :: !(Maybe Text)
-    , _pobcAccessToken    :: !(Maybe Text)
-    , _pobcUploadType     :: !(Maybe Text)
-    , _pobcPayload        :: !BatchCreateOccurrencesRequest
-    , _pobcCallback       :: !(Maybe Text)
+    , _pobcAccessToken :: !(Maybe Text)
+    , _pobcUploadType :: !(Maybe Text)
+    , _pobcPayload :: !BatchCreateOccurrencesRequest
+    , _pobcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,8 +109,9 @@ projectsOccurrencesBatchCreate pPobcParent_ pPobcPayload_ =
     }
 
 
--- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
--- which the occurrences are to be created.
+-- | Required. The name of the project in the form of
+-- \`projects\/[PROJECT_ID]\`, under which the occurrences are to be
+-- created.
 pobcParent :: Lens' ProjectsOccurrencesBatchCreate Text
 pobcParent
   = lens _pobcParent (\ s a -> s{_pobcParent = a})

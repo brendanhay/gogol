@@ -43,8 +43,8 @@ module Network.Google.Resource.ServiceConsumerManagement.Operations.Get
     , ogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
@@ -65,12 +65,12 @@ type OperationsGetResource =
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet =
   OperationsGet'
-    { _ogXgafv          :: !(Maybe Xgafv)
+    { _ogXgafv :: !(Maybe Xgafv)
     , _ogUploadProtocol :: !(Maybe Text)
-    , _ogAccessToken    :: !(Maybe Text)
-    , _ogUploadType     :: !(Maybe Text)
-    , _ogName           :: !Text
-    , _ogCallback       :: !(Maybe Text)
+    , _ogAccessToken :: !(Maybe Text)
+    , _ogUploadType :: !(Maybe Text)
+    , _ogName :: !Text
+    , _ogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

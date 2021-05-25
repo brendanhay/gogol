@@ -42,12 +42,13 @@ module Network.Google.Resource.DLP.Organizations.StoredInfoTypes.List
     , ositlAccessToken
     , ositlUploadType
     , ositlPageToken
+    , ositlLocationId
     , ositlPageSize
     , ositlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.storedInfoTypes.list@ method which the
 -- 'OrganizationsStoredInfoTypesList' request conforms to.
@@ -61,11 +62,12 @@ type OrganizationsStoredInfoTypesListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListStoredInfoTypesResponse
+                       QueryParam "locationId" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListStoredInfoTypesResponse
 
 -- | Lists stored infoTypes. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to
@@ -74,15 +76,16 @@ type OrganizationsStoredInfoTypesListResource =
 -- /See:/ 'organizationsStoredInfoTypesList' smart constructor.
 data OrganizationsStoredInfoTypesList =
   OrganizationsStoredInfoTypesList'
-    { _ositlParent         :: !Text
-    , _ositlXgafv          :: !(Maybe Xgafv)
+    { _ositlParent :: !Text
+    , _ositlXgafv :: !(Maybe Xgafv)
     , _ositlUploadProtocol :: !(Maybe Text)
-    , _ositlOrderBy        :: !(Maybe Text)
-    , _ositlAccessToken    :: !(Maybe Text)
-    , _ositlUploadType     :: !(Maybe Text)
-    , _ositlPageToken      :: !(Maybe Text)
-    , _ositlPageSize       :: !(Maybe (Textual Int32))
-    , _ositlCallback       :: !(Maybe Text)
+    , _ositlOrderBy :: !(Maybe Text)
+    , _ositlAccessToken :: !(Maybe Text)
+    , _ositlUploadType :: !(Maybe Text)
+    , _ositlPageToken :: !(Maybe Text)
+    , _ositlLocationId :: !(Maybe Text)
+    , _ositlPageSize :: !(Maybe (Textual Int32))
+    , _ositlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,6 +108,8 @@ data OrganizationsStoredInfoTypesList =
 --
 -- * 'ositlPageToken'
 --
+-- * 'ositlLocationId'
+--
 -- * 'ositlPageSize'
 --
 -- * 'ositlCallback'
@@ -120,13 +125,26 @@ organizationsStoredInfoTypesList pOsitlParent_ =
     , _ositlAccessToken = Nothing
     , _ositlUploadType = Nothing
     , _ositlPageToken = Nothing
+    , _ositlLocationId = Nothing
     , _ositlPageSize = Nothing
     , _ositlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 ositlParent :: Lens' OrganizationsStoredInfoTypesList Text
 ositlParent
   = lens _ositlParent (\ s a -> s{_ositlParent = a})
@@ -142,12 +160,12 @@ ositlUploadProtocol
   = lens _ositlUploadProtocol
       (\ s a -> s{_ositlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc, display_name, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the most recent version of
--- the resource was created. - \`state\`: corresponds to the state of the
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc, display_name, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the most recent version of the
+-- resource was created. - \`state\`: corresponds to the state of the
 -- resource. - \`name\`: corresponds to resource name. - \`display_name\`:
 -- corresponds to info type\'s display name.
 ositlOrderBy :: Lens' OrganizationsStoredInfoTypesList (Maybe Text)
@@ -166,15 +184,21 @@ ositlUploadType
   = lens _ositlUploadType
       (\ s a -> s{_ositlUploadType = a})
 
--- | Optional page token to continue retrieval. Comes from previous call to
+-- | Page token to continue retrieval. Comes from previous call to
 -- \`ListStoredInfoTypes\`.
 ositlPageToken :: Lens' OrganizationsStoredInfoTypesList (Maybe Text)
 ositlPageToken
   = lens _ositlPageToken
       (\ s a -> s{_ositlPageToken = a})
 
--- | Optional size of the page, can be limited by server. If zero server
--- returns a page of max size 100.
+-- | Deprecated. This field has no effect.
+ositlLocationId :: Lens' OrganizationsStoredInfoTypesList (Maybe Text)
+ositlLocationId
+  = lens _ositlLocationId
+      (\ s a -> s{_ositlLocationId = a})
+
+-- | Size of the page, can be limited by server. If zero server returns a
+-- page of max size 100.
 ositlPageSize :: Lens' OrganizationsStoredInfoTypesList (Maybe Int32)
 ositlPageSize
   = lens _ositlPageSize
@@ -200,6 +224,7 @@ instance GoogleRequest
               _ositlAccessToken
               _ositlUploadType
               _ositlPageToken
+              _ositlLocationId
               _ositlPageSize
               _ositlCallback
               (Just AltJSON)

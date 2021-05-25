@@ -20,16 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists operations that match the specified filter in the request. If the
--- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding allows API services to override the binding to use
--- different resource name schemes, such as \`users\/*\/operations\`. To
--- override the binding, API services can add a binding such as
--- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
--- configuration. For backwards compatibility, the default name includes
--- the operations collection id, however overriding users must ensure the
--- name binding is the parent resource, without the operations collection
--- id.
+-- Lists transfer operations. Operations are ordered by their creation time
+-- in reverse chronological order.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.list@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.List
@@ -53,48 +45,40 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.List
     , tolCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.list@ method which the
 -- 'TransferOperationsList' request conforms to.
 type TransferOperationsListResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "filter" Text :>
+         QueryParam "filter" Text :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "pageSize" (Textual Int32) :>
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListOperationsResponse
 
--- | Lists operations that match the specified filter in the request. If the
--- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding allows API services to override the binding to use
--- different resource name schemes, such as \`users\/*\/operations\`. To
--- override the binding, API services can add a binding such as
--- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
--- configuration. For backwards compatibility, the default name includes
--- the operations collection id, however overriding users must ensure the
--- name binding is the parent resource, without the operations collection
--- id.
+-- | Lists transfer operations. Operations are ordered by their creation time
+-- in reverse chronological order.
 --
 -- /See:/ 'transferOperationsList' smart constructor.
 data TransferOperationsList =
   TransferOperationsList'
-    { _tolXgafv          :: !(Maybe Xgafv)
+    { _tolXgafv :: !(Maybe Xgafv)
     , _tolUploadProtocol :: !(Maybe Text)
-    , _tolAccessToken    :: !(Maybe Text)
-    , _tolUploadType     :: !(Maybe Text)
-    , _tolName           :: !Text
-    , _tolFilter         :: !(Maybe Text)
-    , _tolPageToken      :: !(Maybe Text)
-    , _tolPageSize       :: !(Maybe (Textual Int32))
-    , _tolCallback       :: !(Maybe Text)
+    , _tolAccessToken :: !(Maybe Text)
+    , _tolUploadType :: !(Maybe Text)
+    , _tolName :: !Text
+    , _tolFilter :: !Text
+    , _tolPageToken :: !(Maybe Text)
+    , _tolPageSize :: !(Maybe (Textual Int32))
+    , _tolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,15 +106,16 @@ data TransferOperationsList =
 -- * 'tolCallback'
 transferOperationsList
     :: Text -- ^ 'tolName'
+    -> Text -- ^ 'tolFilter'
     -> TransferOperationsList
-transferOperationsList pTolName_ =
+transferOperationsList pTolName_ pTolFilter_ =
   TransferOperationsList'
     { _tolXgafv = Nothing
     , _tolUploadProtocol = Nothing
     , _tolAccessToken = Nothing
     , _tolUploadType = Nothing
     , _tolName = pTolName_
-    , _tolFilter = Nothing
+    , _tolFilter = pTolFilter_
     , _tolPageToken = Nothing
     , _tolPageSize = Nothing
     , _tolCallback = Nothing
@@ -159,20 +144,22 @@ tolUploadType
   = lens _tolUploadType
       (\ s a -> s{_tolUploadType = a})
 
--- | The value \`transferOperations\`.
+-- | Not used.
 tolName :: Lens' TransferOperationsList Text
 tolName = lens _tolName (\ s a -> s{_tolName = a})
 
--- | A list of query parameters specified as JSON text in the form of
--- {\\\"project_id\\\" : \\\"my_project_id\\\", \\\"job_names\\\" :
--- [\\\"jobid1\\\", \\\"jobid2\\\",...], \\\"operation_names\\\" :
--- [\\\"opid1\\\", \\\"opid2\\\",...],
--- \\\"transfer_statuses\\\":[\\\"status1\\\", \\\"status2\\\",...]}. Since
--- \`job_names\`, \`operation_names\`, and \`transfer_statuses\` support
+-- | Required. A list of query parameters specified as JSON text in the form
+-- of: \`{\"projectId\":\"my_project_id\",
+-- \"jobNames\":[\"jobid1\",\"jobid2\",...],
+-- \"operationNames\":[\"opid1\",\"opid2\",...],
+-- \"transferStatuses\":[\"status1\",\"status2\",...]}\` Since
+-- \`jobNames\`, \`operationNames\`, and \`transferStatuses\` support
 -- multiple values, they must be specified with array notation.
--- \`job_names\`, \`operation_names\`, and \`transfer_statuses\` are
--- optional.
-tolFilter :: Lens' TransferOperationsList (Maybe Text)
+-- \`projectId\` is required. \`jobNames\`, \`operationNames\`, and
+-- \`transferStatuses\` are optional. The valid values for
+-- \`transferStatuses\` are case-insensitive: IN_PROGRESS, PAUSED, SUCCESS,
+-- FAILED, and ABORTED.
+tolFilter :: Lens' TransferOperationsList Text
 tolFilter
   = lens _tolFilter (\ s a -> s{_tolFilter = a})
 
@@ -198,10 +185,10 @@ instance GoogleRequest TransferOperationsList where
         type Scopes TransferOperationsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsList'{..}
-          = go _tolName _tolXgafv _tolUploadProtocol
+          = go _tolName (Just _tolFilter) _tolXgafv
+              _tolUploadProtocol
               _tolAccessToken
               _tolUploadType
-              _tolFilter
               _tolPageToken
               _tolPageSize
               _tolCallback

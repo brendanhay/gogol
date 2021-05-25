@@ -25,7 +25,7 @@
 -- sink\'s writer_identity is not permitted to write to the destination. A
 -- sink can export log entries only from the resource owning the sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.sinks.create@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Create
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Create
     , oscCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.organizations.sinks.create@ method which the
 -- 'OrganizationsSinksCreate' request conforms to.
@@ -72,14 +72,14 @@ type OrganizationsSinksCreateResource =
 -- /See:/ 'organizationsSinksCreate' smart constructor.
 data OrganizationsSinksCreate =
   OrganizationsSinksCreate'
-    { _oscParent               :: !Text
-    , _oscXgafv                :: !(Maybe Xgafv)
+    { _oscParent :: !Text
+    , _oscXgafv :: !(Maybe Xgafv)
     , _oscUniqueWriterIdentity :: !(Maybe Bool)
-    , _oscUploadProtocol       :: !(Maybe Text)
-    , _oscAccessToken          :: !(Maybe Text)
-    , _oscUploadType           :: !(Maybe Text)
-    , _oscPayload              :: !LogSink
-    , _oscCallback             :: !(Maybe Text)
+    , _oscUploadProtocol :: !(Maybe Text)
+    , _oscAccessToken :: !(Maybe Text)
+    , _oscUploadType :: !(Maybe Text)
+    , _oscPayload :: !LogSink
+    , _oscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

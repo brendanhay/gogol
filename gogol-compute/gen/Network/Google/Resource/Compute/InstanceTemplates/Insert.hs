@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.Insert
     , itiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.insert@ method which the
 -- 'InstanceTemplatesInsert' request conforms to.
@@ -69,8 +69,8 @@ type InstanceTemplatesInsertResource =
 data InstanceTemplatesInsert =
   InstanceTemplatesInsert'
     { _itiRequestId :: !(Maybe Text)
-    , _itiProject   :: !Text
-    , _itiPayload   :: !InstanceTemplate
+    , _itiProject :: !Text
+    , _itiPayload :: !InstanceTemplate
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,13 +41,13 @@ module Network.Google.Resource.AccessApproval.Organizations.GetAccessApprovalSet
     , ogaasCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.organizations.getAccessApprovalSettings@ method which the
 -- 'OrganizationsGetAccessApprovalSettings' request conforms to.
 type OrganizationsGetAccessApprovalSettingsResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,12 +62,12 @@ type OrganizationsGetAccessApprovalSettingsResource =
 -- /See:/ 'organizationsGetAccessApprovalSettings' smart constructor.
 data OrganizationsGetAccessApprovalSettings =
   OrganizationsGetAccessApprovalSettings'
-    { _ogaasXgafv          :: !(Maybe Xgafv)
+    { _ogaasXgafv :: !(Maybe Xgafv)
     , _ogaasUploadProtocol :: !(Maybe Text)
-    , _ogaasAccessToken    :: !(Maybe Text)
-    , _ogaasUploadType     :: !(Maybe Text)
-    , _ogaasName           :: !Text
-    , _ogaasCallback       :: !(Maybe Text)
+    , _ogaasAccessToken :: !(Maybe Text)
+    , _ogaasUploadType :: !(Maybe Text)
+    , _ogaasName :: !Text
+    , _ogaasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

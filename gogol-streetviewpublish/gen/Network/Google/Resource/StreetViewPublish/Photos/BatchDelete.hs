@@ -46,8 +46,8 @@ module Network.Google.Resource.StreetViewPublish.Photos.BatchDelete
     , pbdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.batchDelete@ method which the
 -- 'PhotosBatchDelete' request conforms to.
@@ -73,12 +73,12 @@ type PhotosBatchDeleteResource =
 -- /See:/ 'photosBatchDelete' smart constructor.
 data PhotosBatchDelete =
   PhotosBatchDelete'
-    { _pbdXgafv          :: !(Maybe Xgafv)
+    { _pbdXgafv :: !(Maybe Xgafv)
     , _pbdUploadProtocol :: !(Maybe Text)
-    , _pbdAccessToken    :: !(Maybe Text)
-    , _pbdUploadType     :: !(Maybe Text)
-    , _pbdPayload        :: !BatchDeletePhotosRequest
-    , _pbdCallback       :: !(Maybe Text)
+    , _pbdAccessToken :: !(Maybe Text)
+    , _pbdUploadType :: !(Maybe Text)
+    , _pbdPayload :: !BatchDeletePhotosRequest
+    , _pbdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a metric descriptor. Only user-created custom metrics can be
--- deleted.
+-- Deletes a metric descriptor. Only user-created custom metrics
+-- (https:\/\/cloud.google.com\/monitoring\/custom-metrics) can be deleted.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.delete@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.metricDescriptors.delete@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
     , pmddCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.metricDescriptors.delete@ method which the
 -- 'ProjectsMetricDescriptorsDelete' request conforms to.
@@ -57,18 +57,18 @@ type ProjectsMetricDescriptorsDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a metric descriptor. Only user-created custom metrics can be
--- deleted.
+-- | Deletes a metric descriptor. Only user-created custom metrics
+-- (https:\/\/cloud.google.com\/monitoring\/custom-metrics) can be deleted.
 --
 -- /See:/ 'projectsMetricDescriptorsDelete' smart constructor.
 data ProjectsMetricDescriptorsDelete =
   ProjectsMetricDescriptorsDelete'
-    { _pmddXgafv          :: !(Maybe Xgafv)
+    { _pmddXgafv :: !(Maybe Xgafv)
     , _pmddUploadProtocol :: !(Maybe Text)
-    , _pmddAccessToken    :: !(Maybe Text)
-    , _pmddUploadType     :: !(Maybe Text)
-    , _pmddName           :: !Text
-    , _pmddCallback       :: !(Maybe Text)
+    , _pmddAccessToken :: !(Maybe Text)
+    , _pmddUploadType :: !(Maybe Text)
+    , _pmddName :: !Text
+    , _pmddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,9 +125,10 @@ pmddUploadType
   = lens _pmddUploadType
       (\ s a -> s{_pmddUploadType = a})
 
--- | The metric descriptor on which to execute the request. The format is
--- \"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\". An
--- example of {metric_id} is: \"custom.googleapis.com\/my_test_metric\".
+-- | Required. The metric descriptor on which to execute the request. The
+-- format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/metricDescriptors\/[METRIC_ID] An
+-- example of [METRIC_ID] is: \"custom.googleapis.com\/my_test_metric\".
 pmddName :: Lens' ProjectsMetricDescriptorsDelete Text
 pmddName = lens _pmddName (\ s a -> s{_pmddName = a})
 

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a playlist item.
+-- Deletes a resource.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlistItems.delete@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.playlistItems.delete@.
 module Network.Google.Resource.YouTube.PlayListItems.Delete
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.YouTube.PlayListItems.Delete
     , PlayListItemsDelete
 
     -- * Request Lenses
+    , plidXgafv
+    , plidUploadProtocol
+    , plidAccessToken
+    , plidUploadType
     , plidOnBehalfOfContentOwner
     , plidId
+    , plidCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.delete@ method which the
 -- 'PlayListItemsDelete' request conforms to.
@@ -47,16 +52,26 @@ type PlayListItemsDeleteResource =
        "v3" :>
          "playlistItems" :>
            QueryParam "id" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a playlist item.
+-- | Deletes a resource.
 --
 -- /See:/ 'playListItemsDelete' smart constructor.
 data PlayListItemsDelete =
   PlayListItemsDelete'
-    { _plidOnBehalfOfContentOwner :: !(Maybe Text)
-    , _plidId                     :: !Text
+    { _plidXgafv :: !(Maybe Xgafv)
+    , _plidUploadProtocol :: !(Maybe Text)
+    , _plidAccessToken :: !(Maybe Text)
+    , _plidUploadType :: !(Maybe Text)
+    , _plidOnBehalfOfContentOwner :: !(Maybe Text)
+    , _plidId :: !Text
+    , _plidCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,19 +80,59 @@ data PlayListItemsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'plidXgafv'
+--
+-- * 'plidUploadProtocol'
+--
+-- * 'plidAccessToken'
+--
+-- * 'plidUploadType'
+--
 -- * 'plidOnBehalfOfContentOwner'
 --
 -- * 'plidId'
+--
+-- * 'plidCallback'
 playListItemsDelete
     :: Text -- ^ 'plidId'
     -> PlayListItemsDelete
 playListItemsDelete pPlidId_ =
   PlayListItemsDelete'
-    {_plidOnBehalfOfContentOwner = Nothing, _plidId = pPlidId_}
+    { _plidXgafv = Nothing
+    , _plidUploadProtocol = Nothing
+    , _plidAccessToken = Nothing
+    , _plidUploadType = Nothing
+    , _plidOnBehalfOfContentOwner = Nothing
+    , _plidId = pPlidId_
+    , _plidCallback = Nothing
+    }
 
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | V1 error format.
+plidXgafv :: Lens' PlayListItemsDelete (Maybe Xgafv)
+plidXgafv
+  = lens _plidXgafv (\ s a -> s{_plidXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+plidUploadProtocol :: Lens' PlayListItemsDelete (Maybe Text)
+plidUploadProtocol
+  = lens _plidUploadProtocol
+      (\ s a -> s{_plidUploadProtocol = a})
+
+-- | OAuth access token.
+plidAccessToken :: Lens' PlayListItemsDelete (Maybe Text)
+plidAccessToken
+  = lens _plidAccessToken
+      (\ s a -> s{_plidAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+plidUploadType :: Lens' PlayListItemsDelete (Maybe Text)
+plidUploadType
+  = lens _plidUploadType
+      (\ s a -> s{_plidUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -91,11 +146,13 @@ plidOnBehalfOfContentOwner
   = lens _plidOnBehalfOfContentOwner
       (\ s a -> s{_plidOnBehalfOfContentOwner = a})
 
--- | The id parameter specifies the YouTube playlist item ID for the playlist
--- item that is being deleted. In a playlistItem resource, the id property
--- specifies the playlist item\'s ID.
 plidId :: Lens' PlayListItemsDelete Text
 plidId = lens _plidId (\ s a -> s{_plidId = a})
+
+-- | JSONP
+plidCallback :: Lens' PlayListItemsDelete (Maybe Text)
+plidCallback
+  = lens _plidCallback (\ s a -> s{_plidCallback = a})
 
 instance GoogleRequest PlayListItemsDelete where
         type Rs PlayListItemsDelete = ()
@@ -104,7 +161,11 @@ instance GoogleRequest PlayListItemsDelete where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListItemsDelete'{..}
-          = go (Just _plidId) _plidOnBehalfOfContentOwner
+          = go (Just _plidId) _plidXgafv _plidUploadProtocol
+              _plidAccessToken
+              _plidUploadType
+              _plidOnBehalfOfContentOwner
+              _plidCallback
               (Just AltJSON)
               youTubeService
           where go

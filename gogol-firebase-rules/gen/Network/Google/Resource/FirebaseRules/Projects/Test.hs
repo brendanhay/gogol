@@ -54,8 +54,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Test
     , ptCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.test@ method which the
 -- 'ProjectsTest' request conforms to.
@@ -88,13 +88,13 @@ type ProjectsTestResource =
 -- /See:/ 'projectsTest' smart constructor.
 data ProjectsTest =
   ProjectsTest'
-    { _ptXgafv          :: !(Maybe Xgafv)
+    { _ptXgafv :: !(Maybe Xgafv)
     , _ptUploadProtocol :: !(Maybe Text)
-    , _ptAccessToken    :: !(Maybe Text)
-    , _ptUploadType     :: !(Maybe Text)
-    , _ptPayload        :: !TestRulesetRequest
-    , _ptName           :: !Text
-    , _ptCallback       :: !(Maybe Text)
+    , _ptAccessToken :: !(Maybe Text)
+    , _ptUploadType :: !(Maybe Text)
+    , _ptPayload :: !TestRulesetRequest
+    , _ptName :: !Text
+    , _ptCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,10 +158,10 @@ ptPayload :: Lens' ProjectsTest TestRulesetRequest
 ptPayload
   = lens _ptPayload (\ s a -> s{_ptPayload = a})
 
--- | Tests may either provide \`source\` or a \`Ruleset\` resource name. For
--- tests against \`source\`, the resource name must refer to the project:
--- Format: \`projects\/{project_id}\` For tests against a \`Ruleset\`, this
--- must be the \`Ruleset\` resource name: Format:
+-- | Required. Tests may either provide \`source\` or a \`Ruleset\` resource
+-- name. For tests against \`source\`, the resource name must refer to the
+-- project: Format: \`projects\/{project_id}\` For tests against a
+-- \`Ruleset\`, this must be the \`Ruleset\` resource name: Format:
 -- \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
 ptName :: Lens' ProjectsTest Text
 ptName = lens _ptName (\ s a -> s{_ptName = a})

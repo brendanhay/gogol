@@ -40,8 +40,8 @@ module Network.Google.Resource.Calendar.Events.Import
     , eiSupportsAttachments
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.import@ method which the
 -- 'EventsImport' request conforms to.
@@ -64,9 +64,9 @@ type EventsImportResource =
 data EventsImport =
   EventsImport'
     { _eiConferenceDataVersion :: !(Maybe (Textual Int32))
-    , _eiCalendarId            :: !Text
-    , _eiPayload               :: !Event
-    , _eiSupportsAttachments   :: !(Maybe Bool)
+    , _eiCalendarId :: !Text
+    , _eiPayload :: !Event
+    , _eiSupportsAttachments :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

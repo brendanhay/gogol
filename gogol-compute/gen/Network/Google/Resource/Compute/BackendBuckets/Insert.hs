@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.BackendBuckets.Insert
     , bbiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendBuckets.insert@ method which the
 -- 'BackendBucketsInsert' request conforms to.
@@ -63,8 +63,8 @@ type BackendBucketsInsertResource =
 data BackendBucketsInsert =
   BackendBucketsInsert'
     { _bbiRequestId :: !(Maybe Text)
-    , _bbiProject   :: !Text
-    , _bbiPayload   :: !BackendBucket
+    , _bbiProject :: !Text
+    , _bbiPayload :: !BackendBucket
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

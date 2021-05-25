@@ -44,8 +44,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.SetIAMPolicy
     , pisipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.setIamPolicy@ method which the
 -- 'ProjectsInstancesSetIAMPolicy' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsInstancesSetIAMPolicyResource =
 -- /See:/ 'projectsInstancesSetIAMPolicy' smart constructor.
 data ProjectsInstancesSetIAMPolicy =
   ProjectsInstancesSetIAMPolicy'
-    { _pisipXgafv          :: !(Maybe Xgafv)
+    { _pisipXgafv :: !(Maybe Xgafv)
     , _pisipUploadProtocol :: !(Maybe Text)
-    , _pisipAccessToken    :: !(Maybe Text)
-    , _pisipUploadType     :: !(Maybe Text)
-    , _pisipPayload        :: !SetIAMPolicyRequest
-    , _pisipResource       :: !Text
-    , _pisipCallback       :: !(Maybe Text)
+    , _pisipAccessToken :: !(Maybe Text)
+    , _pisipUploadType :: !(Maybe Text)
+    , _pisipPayload :: !SetIAMPolicyRequest
+    , _pisipResource :: !Text
+    , _pisipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

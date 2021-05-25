@@ -17,8 +17,8 @@
 --
 module Network.Google.StorageTransfer.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types.Sum
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types.Sum
 
 -- | A summary of errors by error code, plus a count and sample error log
 -- entries.
@@ -26,8 +26,8 @@ import           Network.Google.StorageTransfer.Types.Sum
 -- /See:/ 'errorSummary' smart constructor.
 data ErrorSummary =
   ErrorSummary'
-    { _esErrorCount      :: !(Maybe (Textual Int64))
-    , _esErrorCode       :: !(Maybe ErrorSummaryErrorCode)
+    { _esErrorCount :: !(Maybe (Textual Int64))
+    , _esErrorCode :: !(Maybe ErrorSummaryErrorCode)
     , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -52,7 +52,7 @@ errorSummary =
     }
 
 
--- | Count of this type of error. Required.
+-- | Required. Count of this type of error.
 esErrorCount :: Lens' ErrorSummary (Maybe Int64)
 esErrorCount
   = lens _esErrorCount (\ s a -> s{_esErrorCount = a})
@@ -63,8 +63,8 @@ esErrorCode :: Lens' ErrorSummary (Maybe ErrorSummaryErrorCode)
 esErrorCode
   = lens _esErrorCode (\ s a -> s{_esErrorCode = a})
 
--- | Error samples. No more than 100 error log entries may be recorded for a
--- given error code for a single task.
+-- | Error samples. At most 5 error log entries are recorded for a given
+-- error code for a single transfer operation.
 esErrorLogEntries :: Lens' ErrorSummary [ErrorLogEntry]
 esErrorLogEntries
   = lens _esErrorLogEntries
@@ -88,47 +88,57 @@ instance ToJSON ErrorSummary where
                   ("errorCode" .=) <$> _esErrorCode,
                   ("errorLogEntries" .=) <$> _esErrorLogEntries])
 
+-- | Request passed to RunTransferJob.
+--
+-- /See:/ 'runTransferJobRequest' smart constructor.
+newtype RunTransferJobRequest =
+  RunTransferJobRequest'
+    { _rtjrProjectId :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RunTransferJobRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rtjrProjectId'
+runTransferJobRequest
+    :: RunTransferJobRequest
+runTransferJobRequest = RunTransferJobRequest' {_rtjrProjectId = Nothing}
+
+
+-- | Required. The ID of the Google Cloud Platform Console project that owns
+-- the transfer job.
+rtjrProjectId :: Lens' RunTransferJobRequest (Maybe Text)
+rtjrProjectId
+  = lens _rtjrProjectId
+      (\ s a -> s{_rtjrProjectId = a})
+
+instance FromJSON RunTransferJobRequest where
+        parseJSON
+          = withObject "RunTransferJobRequest"
+              (\ o ->
+                 RunTransferJobRequest' <$> (o .:? "projectId"))
+
+instance ToJSON RunTransferJobRequest where
+        toJSON RunTransferJobRequest'{..}
+          = object
+              (catMaybes [("projectId" .=) <$> _rtjrProjectId])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -184,13 +194,93 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | Specification to configure notifications published to Pub\/Sub.
+-- Notifications are published to the customer-provided topic using the
+-- following \`PubsubMessage.attributes\`: * \`\"eventType\"\`: one of the
+-- EventType values * \`\"payloadFormat\"\`: one of the PayloadFormat
+-- values * \`\"projectId\"\`: the project_id of the \`TransferOperation\`
+-- * \`\"transferJobName\"\`: the transfer_job_name of the
+-- \`TransferOperation\` * \`\"transferOperationName\"\`: the name of the
+-- \`TransferOperation\` The \`PubsubMessage.data\` contains a
+-- TransferOperation resource formatted according to the specified
+-- \`PayloadFormat\`.
+--
+-- /See:/ 'notificationConfig' smart constructor.
+data NotificationConfig =
+  NotificationConfig'
+    { _ncEventTypes :: !(Maybe [NotificationConfigEventTypesItem])
+    , _ncPubsubTopic :: !(Maybe Text)
+    , _ncPayloadFormat :: !(Maybe NotificationConfigPayloadFormat)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ncEventTypes'
+--
+-- * 'ncPubsubTopic'
+--
+-- * 'ncPayloadFormat'
+notificationConfig
+    :: NotificationConfig
+notificationConfig =
+  NotificationConfig'
+    { _ncEventTypes = Nothing
+    , _ncPubsubTopic = Nothing
+    , _ncPayloadFormat = Nothing
+    }
+
+
+-- | Event types for which a notification is desired. If empty, send
+-- notifications for all event types.
+ncEventTypes :: Lens' NotificationConfig [NotificationConfigEventTypesItem]
+ncEventTypes
+  = lens _ncEventTypes (\ s a -> s{_ncEventTypes = a})
+      . _Default
+      . _Coerce
+
+-- | Required. The \`Topic.name\` of the Pub\/Sub topic to which to publish
+-- notifications. Must be of the format:
+-- \`projects\/{project}\/topics\/{topic}\`. Not matching this format
+-- results in an INVALID_ARGUMENT error.
+ncPubsubTopic :: Lens' NotificationConfig (Maybe Text)
+ncPubsubTopic
+  = lens _ncPubsubTopic
+      (\ s a -> s{_ncPubsubTopic = a})
+
+-- | Required. The desired format of the notification message payloads.
+ncPayloadFormat :: Lens' NotificationConfig (Maybe NotificationConfigPayloadFormat)
+ncPayloadFormat
+  = lens _ncPayloadFormat
+      (\ s a -> s{_ncPayloadFormat = a})
+
+instance FromJSON NotificationConfig where
+        parseJSON
+          = withObject "NotificationConfig"
+              (\ o ->
+                 NotificationConfig' <$>
+                   (o .:? "eventTypes" .!= mempty) <*>
+                     (o .:? "pubsubTopic")
+                     <*> (o .:? "payloadFormat"))
+
+instance ToJSON NotificationConfig where
+        toJSON NotificationConfig'{..}
+          = object
+              (catMaybes
+                 [("eventTypes" .=) <$> _ncEventTypes,
+                  ("pubsubTopic" .=) <$> _ncPubsubTopic,
+                  ("payloadFormat" .=) <$> _ncPayloadFormat])
+
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -238,14 +328,39 @@ instance ToJSON ListOperationsResponse where
                  [("nextPageToken" .=) <$> _lorNextPageToken,
                   ("operations" .=) <$> _lorOperations])
 
+-- | The request message for Operations.CancelOperation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
+
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest')
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
+
 -- | Transfers can be scheduled to recur or to run just once.
 --
 -- /See:/ 'schedule' smart constructor.
 data Schedule =
   Schedule'
-    { _sScheduleEndDate   :: !(Maybe Date)
+    { _sRepeatInterval :: !(Maybe GDuration)
+    , _sScheduleEndDate :: !(Maybe Date)
     , _sScheduleStartDate :: !(Maybe Date)
-    , _sStartTimeOfDay    :: !(Maybe TimeOfDay')
+    , _sEndTimeOfDay :: !(Maybe TimeOfDay')
+    , _sStartTimeOfDay :: !(Maybe TimeOfDay')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -254,44 +369,85 @@ data Schedule =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sRepeatInterval'
+--
 -- * 'sScheduleEndDate'
 --
 -- * 'sScheduleStartDate'
+--
+-- * 'sEndTimeOfDay'
 --
 -- * 'sStartTimeOfDay'
 schedule
     :: Schedule
 schedule =
   Schedule'
-    { _sScheduleEndDate = Nothing
+    { _sRepeatInterval = Nothing
+    , _sScheduleEndDate = Nothing
     , _sScheduleStartDate = Nothing
+    , _sEndTimeOfDay = Nothing
     , _sStartTimeOfDay = Nothing
     }
 
 
--- | The last day the recurring transfer will be run. If \`scheduleEndDate\`
--- is the same as \`scheduleStartDate\`, the transfer will be executed only
--- once.
+-- | Interval between the start of each scheduled TransferOperation. If
+-- unspecified, the default value is 24 hours. This value may not be less
+-- than 1 hour.
+sRepeatInterval :: Lens' Schedule (Maybe Scientific)
+sRepeatInterval
+  = lens _sRepeatInterval
+      (\ s a -> s{_sRepeatInterval = a})
+      . mapping _GDuration
+
+-- | The last day a transfer runs. Date boundaries are determined relative to
+-- UTC time. A job runs once per 24 hours within the following guidelines:
+-- * If \`schedule_end_date\` and schedule_start_date are the same and in
+-- the future relative to UTC, the transfer is executed only one time. * If
+-- \`schedule_end_date\` is later than \`schedule_start_date\` and
+-- \`schedule_end_date\` is in the future relative to UTC, the job runs
+-- each day at start_time_of_day through \`schedule_end_date\`.
 sScheduleEndDate :: Lens' Schedule (Maybe Date)
 sScheduleEndDate
   = lens _sScheduleEndDate
       (\ s a -> s{_sScheduleEndDate = a})
 
--- | The first day the recurring transfer is scheduled to run. If
--- \`scheduleStartDate\` is in the past, the transfer will run for the
--- first time on the following day. Required.
+-- | Required. The start date of a transfer. Date boundaries are determined
+-- relative to UTC time. If \`schedule_start_date\` and start_time_of_day
+-- are in the past relative to the job\'s creation time, the transfer
+-- starts the day after you schedule the transfer request. **Note:** When
+-- starting jobs at or near midnight UTC it is possible that a job starts
+-- later than expected. For example, if you send an outbound request on
+-- June 1 one millisecond prior to midnight UTC and the Storage Transfer
+-- Service server receives the request on June 2, then it creates a
+-- TransferJob with \`schedule_start_date\` set to June 2 and a
+-- \`start_time_of_day\` set to midnight UTC. The first scheduled
+-- TransferOperation takes place on June 3 at midnight UTC.
 sScheduleStartDate :: Lens' Schedule (Maybe Date)
 sScheduleStartDate
   = lens _sScheduleStartDate
       (\ s a -> s{_sScheduleStartDate = a})
 
--- | The time in UTC at which the transfer will be scheduled to start in a
--- day. Transfers may start later than this time. If not specified,
--- recurring and one-time transfers that are scheduled to run today will
--- run immediately; recurring transfers that are scheduled to run on a
--- future date will start at approximately midnight UTC on that date. Note
--- that when configuring a transfer with the Cloud Platform Console, the
--- transfer\'s start time in a day is specified in your local timezone.
+-- | The time in UTC that no further transfer operations are scheduled.
+-- Combined with schedule_end_date, \`end_time_of_day\` specifies the end
+-- date and time for starting new transfer operations. This field must be
+-- greater than or equal to the timestamp corresponding to the combintation
+-- of schedule_start_date and start_time_of_day, and is subject to the
+-- following: * If \`end_time_of_day\` is not set and \`schedule_end_date\`
+-- is set, then a default value of \`23:59:59\` is used for
+-- \`end_time_of_day\`. * If \`end_time_of_day\` is set and
+-- \`schedule_end_date\` is not set, then INVALID_ARGUMENT is returned.
+sEndTimeOfDay :: Lens' Schedule (Maybe TimeOfDay')
+sEndTimeOfDay
+  = lens _sEndTimeOfDay
+      (\ s a -> s{_sEndTimeOfDay = a})
+
+-- | The time in UTC that a transfer job is scheduled to run. Transfers may
+-- start later than this time. If \`start_time_of_day\` is not specified: *
+-- One-time transfers run immediately. * Recurring transfers run
+-- immediately, and each day at midnight UTC, through schedule_end_date. If
+-- \`start_time_of_day\` is specified: * One-time transfers run at the
+-- specified time. * Recurring transfers run at the specified time each
+-- day, through \`schedule_end_date\`.
 sStartTimeOfDay :: Lens' Schedule (Maybe TimeOfDay')
 sStartTimeOfDay
   = lens _sStartTimeOfDay
@@ -302,28 +458,39 @@ instance FromJSON Schedule where
           = withObject "Schedule"
               (\ o ->
                  Schedule' <$>
-                   (o .:? "scheduleEndDate") <*>
-                     (o .:? "scheduleStartDate")
+                   (o .:? "repeatInterval") <*>
+                     (o .:? "scheduleEndDate")
+                     <*> (o .:? "scheduleStartDate")
+                     <*> (o .:? "endTimeOfDay")
                      <*> (o .:? "startTimeOfDay"))
 
 instance ToJSON Schedule where
         toJSON Schedule'{..}
           = object
               (catMaybes
-                 [("scheduleEndDate" .=) <$> _sScheduleEndDate,
+                 [("repeatInterval" .=) <$> _sRepeatInterval,
+                  ("scheduleEndDate" .=) <$> _sScheduleEndDate,
                   ("scheduleStartDate" .=) <$> _sScheduleStartDate,
+                  ("endTimeOfDay" .=) <$> _sEndTimeOfDay,
                   ("startTimeOfDay" .=) <$> _sStartTimeOfDay])
 
--- | Conditions that determine which objects will be transferred. Applies
--- only to S3 and GCS objects.
+-- | Conditions that determine which objects are transferred. Applies only to
+-- Cloud Data Sources such as S3, Azure, and Cloud Storage. The \"last
+-- modification time\" refers to the time of the last change to the
+-- object\'s content or metadata — specifically, this is the \`updated\`
+-- property of Cloud Storage objects, the \`LastModified\` field of S3
+-- objects, and the \`Last-Modified\` header of Azure blobs. This is not
+-- supported for transfers involving PosixFilesystem.
 --
 -- /See:/ 'objectConditions' smart constructor.
 data ObjectConditions =
   ObjectConditions'
-    { _ocMinTimeElapsedSinceLastModification :: !(Maybe GDuration)
-    , _ocIncludePrefixes                     :: !(Maybe [Text])
+    { _ocLastModifiedBefore :: !(Maybe DateTime')
+    , _ocMinTimeElapsedSinceLastModification :: !(Maybe GDuration)
+    , _ocIncludePrefixes :: !(Maybe [Text])
     , _ocMaxTimeElapsedSinceLastModification :: !(Maybe GDuration)
-    , _ocExcludePrefixes                     :: !(Maybe [Text])
+    , _ocExcludePrefixes :: !(Maybe [Text])
+    , _ocLastModifiedSince :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -332,6 +499,8 @@ data ObjectConditions =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ocLastModifiedBefore'
+--
 -- * 'ocMinTimeElapsedSinceLastModification'
 --
 -- * 'ocIncludePrefixes'
@@ -339,25 +508,35 @@ data ObjectConditions =
 -- * 'ocMaxTimeElapsedSinceLastModification'
 --
 -- * 'ocExcludePrefixes'
+--
+-- * 'ocLastModifiedSince'
 objectConditions
     :: ObjectConditions
 objectConditions =
   ObjectConditions'
-    { _ocMinTimeElapsedSinceLastModification = Nothing
+    { _ocLastModifiedBefore = Nothing
+    , _ocMinTimeElapsedSinceLastModification = Nothing
     , _ocIncludePrefixes = Nothing
     , _ocMaxTimeElapsedSinceLastModification = Nothing
     , _ocExcludePrefixes = Nothing
+    , _ocLastModifiedSince = Nothing
     }
 
 
--- | If specified, only objects with a \`lastModificationTime\` before
--- \`NOW\` - \`minTimeElapsedSinceLastModification\` and objects that
--- don\'t have a \`lastModificationTime\` are transferred. Note that
--- \`NOW\` refers to the creation time of the transfer job, and
--- \`lastModificationTime\` refers to the time of the last change to the
--- object\'s content or metadata. Specifically, this would be the
--- \`updated\` property of GCS objects and the \`LastModified\` field of S3
--- objects.
+-- | If specified, only objects with a \"last modification time\" before this
+-- timestamp and objects that don\'t have a \"last modification time\" are
+-- transferred.
+ocLastModifiedBefore :: Lens' ObjectConditions (Maybe UTCTime)
+ocLastModifiedBefore
+  = lens _ocLastModifiedBefore
+      (\ s a -> s{_ocLastModifiedBefore = a})
+      . mapping _DateTime
+
+-- | If specified, only objects with a \"last modification time\" before
+-- \`NOW\` - \`min_time_elapsed_since_last_modification\` and objects that
+-- don\'t have a \"last modification time\" are transferred. For each
+-- TransferOperation started by this TransferJob, \`NOW\` refers to the
+-- start_time of the \`TransferOperation\`.
 ocMinTimeElapsedSinceLastModification :: Lens' ObjectConditions (Maybe Scientific)
 ocMinTimeElapsedSinceLastModification
   = lens _ocMinTimeElapsedSinceLastModification
@@ -365,28 +544,26 @@ ocMinTimeElapsedSinceLastModification
          s{_ocMinTimeElapsedSinceLastModification = a})
       . mapping _GDuration
 
--- | If \`includePrefixes\` is specified, objects that satisfy the object
--- conditions must have names that start with one of the
--- \`includePrefixes\` and that do not start with any of the
--- \`excludePrefixes\`. If \`includePrefixes\` is not specified, all
--- objects except those that have names starting with one of the
--- \`excludePrefixes\` must satisfy the object conditions. Requirements: *
--- Each include-prefix and exclude-prefix can contain any sequence of
--- Unicode characters, of max length 1024 bytes when UTF8-encoded, and must
--- not contain Carriage Return or Line Feed characters. Wildcard matching
--- and regular expression matching are not supported. * Each include-prefix
--- and exclude-prefix must omit the leading slash. For example, to include
--- the \`requests.gz\` object in a transfer from
--- \`s3:\/\/my-aws-bucket\/logs\/y=2015\/requests.gz\`, specify the include
--- prefix as \`logs\/y=2015\/requests.gz\`. * None of the include-prefix or
--- the exclude-prefix values can be empty, if specified. * Each
--- include-prefix must include a distinct portion of the object namespace,
--- i.e., no include-prefix may be a prefix of another include-prefix. *
--- Each exclude-prefix must exclude a distinct portion of the object
--- namespace, i.e., no exclude-prefix may be a prefix of another
--- exclude-prefix. * If \`includePrefixes\` is specified, then each
--- exclude-prefix must start with the value of a path explicitly included
--- by \`includePrefixes\`. The max size of \`includePrefixes\` is 1000.
+-- | If you specify \`include_prefixes\`, Storage Transfer Service uses the
+-- items in the \`include_prefixes\` array to determine which objects to
+-- include in a transfer. Objects must start with one of the matching
+-- \`include_prefixes\` for inclusion in the transfer. If exclude_prefixes
+-- is specified, objects must not start with any of the
+-- \`exclude_prefixes\` specified for inclusion in the transfer. The
+-- following are requirements of \`include_prefixes\`: * Each
+-- include-prefix can contain any sequence of Unicode characters, to a max
+-- length of 1024 bytes when UTF8-encoded, and must not contain Carriage
+-- Return or Line Feed characters. Wildcard matching and regular expression
+-- matching are not supported. * Each include-prefix must omit the leading
+-- slash. For example, to include the object
+-- \`s3:\/\/my-aws-bucket\/logs\/y=2015\/requests.gz\`, specify the
+-- include-prefix as \`logs\/y=2015\/requests.gz\`. * None of the
+-- include-prefix values can be empty, if specified. * Each include-prefix
+-- must include a distinct portion of the object namespace. No
+-- include-prefix may be a prefix of another include-prefix. The max size
+-- of \`include_prefixes\` is 1000. For more information, see [Filtering
+-- objects from
+-- transfers](\/storage-transfer\/docs\/filtering-objects-from-transfers).
 ocIncludePrefixes :: Lens' ObjectConditions [Text]
 ocIncludePrefixes
   = lens _ocIncludePrefixes
@@ -394,14 +571,11 @@ ocIncludePrefixes
       . _Default
       . _Coerce
 
--- | If specified, only objects with a \`lastModificationTime\` on or after
--- \`NOW\` - \`maxTimeElapsedSinceLastModification\` and objects that
--- don\'t have a \`lastModificationTime\` are transferred. Note that
--- \`NOW\` refers to the creation time of the transfer job, and
--- \`lastModificationTime\` refers to the time of the last change to the
--- object\'s content or metadata. Specifically, this would be the
--- \`updated\` property of GCS objects and the \`LastModified\` field of S3
--- objects.
+-- | If specified, only objects with a \"last modification time\" on or after
+-- \`NOW\` - \`max_time_elapsed_since_last_modification\` and objects that
+-- don\'t have a \"last modification time\" are transferred. For each
+-- TransferOperation started by this TransferJob, \`NOW\` refers to the
+-- start_time of the \`TransferOperation\`.
 ocMaxTimeElapsedSinceLastModification :: Lens' ObjectConditions (Maybe Scientific)
 ocMaxTimeElapsedSinceLastModification
   = lens _ocMaxTimeElapsedSinceLastModification
@@ -409,8 +583,26 @@ ocMaxTimeElapsedSinceLastModification
          s{_ocMaxTimeElapsedSinceLastModification = a})
       . mapping _GDuration
 
--- | \`excludePrefixes\` must follow the requirements described for
--- \`includePrefixes\`. The max size of \`excludePrefixes\` is 1000.
+-- | If you specify \`exclude_prefixes\`, Storage Transfer Service uses the
+-- items in the \`exclude_prefixes\` array to determine which objects to
+-- exclude from a transfer. Objects must not start with one of the matching
+-- \`exclude_prefixes\` for inclusion in a transfer. The following are
+-- requirements of \`exclude_prefixes\`: * Each exclude-prefix can contain
+-- any sequence of Unicode characters, to a max length of 1024 bytes when
+-- UTF8-encoded, and must not contain Carriage Return or Line Feed
+-- characters. Wildcard matching and regular expression matching are not
+-- supported. * Each exclude-prefix must omit the leading slash. For
+-- example, to exclude the object
+-- \`s3:\/\/my-aws-bucket\/logs\/y=2015\/requests.gz\`, specify the
+-- exclude-prefix as \`logs\/y=2015\/requests.gz\`. * None of the
+-- exclude-prefix values can be empty, if specified. * Each exclude-prefix
+-- must exclude a distinct portion of the object namespace. No
+-- exclude-prefix may be a prefix of another exclude-prefix. * If
+-- include_prefixes is specified, then each exclude-prefix must start with
+-- the value of a path explicitly included by \`include_prefixes\`. The max
+-- size of \`exclude_prefixes\` is 1000. For more information, see
+-- [Filtering objects from
+-- transfers](\/storage-transfer\/docs\/filtering-objects-from-transfers).
 ocExcludePrefixes :: Lens' ObjectConditions [Text]
 ocExcludePrefixes
   = lens _ocExcludePrefixes
@@ -418,26 +610,44 @@ ocExcludePrefixes
       . _Default
       . _Coerce
 
+-- | If specified, only objects with a \"last modification time\" on or after
+-- this timestamp and objects that don\'t have a \"last modification time\"
+-- are transferred. The \`last_modified_since\` and
+-- \`last_modified_before\` fields can be used together for chunked data
+-- processing. For example, consider a script that processes each day\'s
+-- worth of data at a time. For that you\'d set each of the fields as
+-- follows: * \`last_modified_since\` to the start of the day *
+-- \`last_modified_before\` to the end of the day
+ocLastModifiedSince :: Lens' ObjectConditions (Maybe UTCTime)
+ocLastModifiedSince
+  = lens _ocLastModifiedSince
+      (\ s a -> s{_ocLastModifiedSince = a})
+      . mapping _DateTime
+
 instance FromJSON ObjectConditions where
         parseJSON
           = withObject "ObjectConditions"
               (\ o ->
                  ObjectConditions' <$>
-                   (o .:? "minTimeElapsedSinceLastModification") <*>
-                     (o .:? "includePrefixes" .!= mempty)
+                   (o .:? "lastModifiedBefore") <*>
+                     (o .:? "minTimeElapsedSinceLastModification")
+                     <*> (o .:? "includePrefixes" .!= mempty)
                      <*> (o .:? "maxTimeElapsedSinceLastModification")
-                     <*> (o .:? "excludePrefixes" .!= mempty))
+                     <*> (o .:? "excludePrefixes" .!= mempty)
+                     <*> (o .:? "lastModifiedSince"))
 
 instance ToJSON ObjectConditions where
         toJSON ObjectConditions'{..}
           = object
               (catMaybes
-                 [("minTimeElapsedSinceLastModification" .=) <$>
+                 [("lastModifiedBefore" .=) <$> _ocLastModifiedBefore,
+                  ("minTimeElapsedSinceLastModification" .=) <$>
                     _ocMinTimeElapsedSinceLastModification,
                   ("includePrefixes" .=) <$> _ocIncludePrefixes,
                   ("maxTimeElapsedSinceLastModification" .=) <$>
                     _ocMaxTimeElapsedSinceLastModification,
-                  ("excludePrefixes" .=) <$> _ocExcludePrefixes])
+                  ("excludePrefixes" .=) <$> _ocExcludePrefixes,
+                  ("lastModifiedSince" .=) <$> _ocLastModifiedSince])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -445,10 +655,10 @@ instance ToJSON ObjectConditions where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -501,14 +711,13 @@ oResponse :: Lens' Operation (Maybe OperationResponse)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
 
--- | The server-assigned name, which is only unique within the same service
--- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of
+-- | The server-assigned unique name. The format of \`name\` is
 -- \`transferOperations\/some\/unique\/name\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
--- | Represents the transfer operation object.
+-- | Represents the transfer operation object. To request a TransferOperation
+-- object, use transferOperations.get.
 oMetadata :: Lens' Operation (Maybe OperationMetadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
@@ -583,9 +792,10 @@ instance ToJSON PauseTransferOperationRequest where
 -- | Google service account
 --
 -- /See:/ 'googleServiceAccount' smart constructor.
-newtype GoogleServiceAccount =
+data GoogleServiceAccount =
   GoogleServiceAccount'
-    { _gsaAccountEmail :: Maybe Text
+    { _gsaAccountEmail :: !(Maybe Text)
+    , _gsaSubjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -595,28 +805,38 @@ newtype GoogleServiceAccount =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gsaAccountEmail'
+--
+-- * 'gsaSubjectId'
 googleServiceAccount
     :: GoogleServiceAccount
-googleServiceAccount = GoogleServiceAccount' {_gsaAccountEmail = Nothing}
+googleServiceAccount =
+  GoogleServiceAccount' {_gsaAccountEmail = Nothing, _gsaSubjectId = Nothing}
 
 
--- | Required.
+-- | Email address of the service account.
 gsaAccountEmail :: Lens' GoogleServiceAccount (Maybe Text)
 gsaAccountEmail
   = lens _gsaAccountEmail
       (\ s a -> s{_gsaAccountEmail = a})
 
+-- | Unique identifier for the service account.
+gsaSubjectId :: Lens' GoogleServiceAccount (Maybe Text)
+gsaSubjectId
+  = lens _gsaSubjectId (\ s a -> s{_gsaSubjectId = a})
+
 instance FromJSON GoogleServiceAccount where
         parseJSON
           = withObject "GoogleServiceAccount"
               (\ o ->
-                 GoogleServiceAccount' <$> (o .:? "accountEmail"))
+                 GoogleServiceAccount' <$>
+                   (o .:? "accountEmail") <*> (o .:? "subjectId"))
 
 instance ToJSON GoogleServiceAccount where
         toJSON GoogleServiceAccount'{..}
           = object
               (catMaybes
-                 [("accountEmail" .=) <$> _gsaAccountEmail])
+                 [("accountEmail" .=) <$> _gsaAccountEmail,
+                  ("subjectId" .=) <$> _gsaSubjectId])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -653,20 +873,64 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | Represents a whole or partial calendar date, e.g. a birthday. The time
--- of day and time zone are either specified elsewhere or are not
--- significant. The date is relative to the Proleptic Gregorian Calendar.
--- This can represent: * A full date, with non-zero year, month and day
--- values * A month and day value, with a zero year, e.g. an anniversary *
--- A year on its own, with zero month and day values * A year and month
--- value, with a zero day, e.g. a credit card expiration date Related types
--- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
+-- | Azure credentials For information on our data retention policy for user
+-- credentials, see [User
+-- credentials](\/storage-transfer\/docs\/data-retention#user-credentials).
+--
+-- /See:/ 'azureCredentials' smart constructor.
+newtype AzureCredentials =
+  AzureCredentials'
+    { _acSasToken :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AzureCredentials' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acSasToken'
+azureCredentials
+    :: AzureCredentials
+azureCredentials = AzureCredentials' {_acSasToken = Nothing}
+
+
+-- | Required. Azure shared access signature (SAS). *Note:*Copying data from
+-- Azure Data Lake Storage (ADLS) Gen 2 is in
+-- [Preview](\/products\/#product-launch-stages). During Preview, if you
+-- are copying data from ADLS Gen 2, you must use an account SAS. For more
+-- information about SAS, see [Grant limited access to Azure Storage
+-- resources using shared access signatures
+-- (SAS)](https:\/\/docs.microsoft.com\/en-us\/azure\/storage\/common\/storage-sas-overview).
+acSasToken :: Lens' AzureCredentials (Maybe Text)
+acSasToken
+  = lens _acSasToken (\ s a -> s{_acSasToken = a})
+
+instance FromJSON AzureCredentials where
+        parseJSON
+          = withObject "AzureCredentials"
+              (\ o -> AzureCredentials' <$> (o .:? "sasToken"))
+
+instance ToJSON AzureCredentials where
+        toJSON AzureCredentials'{..}
+          = object
+              (catMaybes [("sasToken" .=) <$> _acSasToken])
+
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: * A full date, with non-zero year,
+-- month, and day values * A month and day value, with a zero year, such as
+-- an anniversary * A year on its own, with zero month and day values * A
+-- year and month value, with a zero day, such as a credit card expiration
+-- date Related types are google.type.TimeOfDay and
+-- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
 data Date =
   Date'
-    { _dDay   :: !(Maybe (Textual Int32))
-    , _dYear  :: !(Maybe (Textual Int32))
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -686,22 +950,22 @@ date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
 
 
--- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year by itself or a year and month where the day is
--- not significant.
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
 dDay :: Lens' Date (Maybe Int32)
 dDay
   = lens _dDay (\ s a -> s{_dDay = a}) .
       mapping _Coerce
 
--- | Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
 -- a year.
 dYear :: Lens' Date (Maybe Int32)
 dYear
   = lens _dYear (\ s a -> s{_dYear = a}) .
       mapping _Coerce
 
--- | Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
 -- month and day.
 dMonth :: Lens' Date (Maybe Int32)
 dMonth
@@ -727,8 +991,8 @@ instance ToJSON Date where
 -- /See:/ 'updateTransferJobRequest' smart constructor.
 data UpdateTransferJobRequest =
   UpdateTransferJobRequest'
-    { _utjrTransferJob                :: !(Maybe TransferJob)
-    , _utjrProjectId                  :: !(Maybe Text)
+    { _utjrTransferJob :: !(Maybe TransferJob)
+    , _utjrProjectId :: !(Maybe Text)
     , _utjrUpdateTransferJobFieldMask :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -753,17 +1017,18 @@ updateTransferJobRequest =
     }
 
 
--- | The job to update. \`transferJob\` is expected to specify only three
--- fields: \`description\`, \`transferSpec\`, and \`status\`. An
--- UpdateTransferJobRequest that specifies other fields will be rejected
--- with an error \`INVALID_ARGUMENT\`. Required.
+-- | Required. The job to update. \`transferJob\` is expected to specify only
+-- four fields: description, transfer_spec, notification_config, and
+-- status. An \`UpdateTransferJobRequest\` that specifies other fields are
+-- rejected with the error INVALID_ARGUMENT. Updating a job status to
+-- DELETED requires \`storagetransfer.jobs.delete\` permissions.
 utjrTransferJob :: Lens' UpdateTransferJobRequest (Maybe TransferJob)
 utjrTransferJob
   = lens _utjrTransferJob
       (\ s a -> s{_utjrTransferJob = a})
 
--- | The ID of the Google Cloud Platform Console project that owns the job.
--- Required.
+-- | Required. The ID of the Google Cloud Platform Console project that owns
+-- the job.
 utjrProjectId :: Lens' UpdateTransferJobRequest (Maybe Text)
 utjrProjectId
   = lens _utjrProjectId
@@ -771,10 +1036,10 @@ utjrProjectId
 
 -- | The field mask of the fields in \`transferJob\` that are to be updated
 -- in this request. Fields in \`transferJob\` that can be updated are:
--- \`description\`, \`transferSpec\`, and \`status\`. To update the
--- \`transferSpec\` of the job, a complete transfer specification has to be
--- provided. An incomplete specification which misses any required fields
--- will be rejected with the error \`INVALID_ARGUMENT\`.
+-- description, transfer_spec, notification_config, and status. To update
+-- the \`transfer_spec\` of the job, a complete transfer specification must
+-- be provided. An incomplete specification missing any required fields is
+-- rejected with the error INVALID_ARGUMENT.
 utjrUpdateTransferJobFieldMask :: Lens' UpdateTransferJobRequest (Maybe GFieldMask)
 utjrUpdateTransferJobFieldMask
   = lens _utjrUpdateTransferJobFieldMask
@@ -803,21 +1068,21 @@ instance ToJSON UpdateTransferJobRequest where
 -- /See:/ 'transferCounters' smart constructor.
 data TransferCounters =
   TransferCounters'
-    { _tcBytesFoundOnlyFromSink         :: !(Maybe (Textual Int64))
-    , _tcBytesDeletedFromSink           :: !(Maybe (Textual Int64))
-    , _tcObjectsDeletedFromSource       :: !(Maybe (Textual Int64))
-    , _tcObjectsFoundFromSource         :: !(Maybe (Textual Int64))
-    , _tcBytesFailedToDeleteFromSink    :: !(Maybe (Textual Int64))
-    , _tcBytesFromSourceFailed          :: !(Maybe (Textual Int64))
-    , _tcBytesCopiedToSink              :: !(Maybe (Textual Int64))
-    , _tcBytesFoundFromSource           :: !(Maybe (Textual Int64))
-    , _tcBytesDeletedFromSource         :: !(Maybe (Textual Int64))
-    , _tcObjectsDeletedFromSink         :: !(Maybe (Textual Int64))
-    , _tcObjectsFoundOnlyFromSink       :: !(Maybe (Textual Int64))
-    , _tcBytesFromSourceSkippedBySync   :: !(Maybe (Textual Int64))
-    , _tcObjectsCopiedToSink            :: !(Maybe (Textual Int64))
-    , _tcObjectsFromSourceFailed        :: !(Maybe (Textual Int64))
-    , _tcObjectsFailedToDeleteFromSink  :: !(Maybe (Textual Int64))
+    { _tcBytesFoundOnlyFromSink :: !(Maybe (Textual Int64))
+    , _tcBytesDeletedFromSink :: !(Maybe (Textual Int64))
+    , _tcObjectsDeletedFromSource :: !(Maybe (Textual Int64))
+    , _tcObjectsFoundFromSource :: !(Maybe (Textual Int64))
+    , _tcBytesFailedToDeleteFromSink :: !(Maybe (Textual Int64))
+    , _tcBytesFromSourceFailed :: !(Maybe (Textual Int64))
+    , _tcBytesCopiedToSink :: !(Maybe (Textual Int64))
+    , _tcBytesFoundFromSource :: !(Maybe (Textual Int64))
+    , _tcBytesDeletedFromSource :: !(Maybe (Textual Int64))
+    , _tcObjectsDeletedFromSink :: !(Maybe (Textual Int64))
+    , _tcObjectsFoundOnlyFromSink :: !(Maybe (Textual Int64))
+    , _tcBytesFromSourceSkippedBySync :: !(Maybe (Textual Int64))
+    , _tcObjectsCopiedToSink :: !(Maybe (Textual Int64))
+    , _tcObjectsFromSourceFailed :: !(Maybe (Textual Int64))
+    , _tcObjectsFailedToDeleteFromSink :: !(Maybe (Textual Int64))
     , _tcObjectsFromSourceSkippedBySync :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1065,15 +1330,17 @@ instance ToJSON TransferCounters where
 -- /See:/ 'transferJob' smart constructor.
 data TransferJob =
   TransferJob'
-    { _tjCreationTime         :: !(Maybe DateTime')
-    , _tjStatus               :: !(Maybe TransferJobStatus)
-    , _tjSchedule             :: !(Maybe Schedule)
-    , _tjDeletionTime         :: !(Maybe DateTime')
-    , _tjName                 :: !(Maybe Text)
-    , _tjProjectId            :: !(Maybe Text)
-    , _tjTransferSpec         :: !(Maybe TransferSpec)
-    , _tjDescription          :: !(Maybe Text)
+    { _tjCreationTime :: !(Maybe DateTime')
+    , _tjStatus :: !(Maybe TransferJobStatus)
+    , _tjNotificationConfig :: !(Maybe NotificationConfig)
+    , _tjSchedule :: !(Maybe Schedule)
+    , _tjDeletionTime :: !(Maybe DateTime')
+    , _tjName :: !(Maybe Text)
+    , _tjProjectId :: !(Maybe Text)
+    , _tjTransferSpec :: !(Maybe TransferSpec)
+    , _tjDescription :: !(Maybe Text)
     , _tjLastModificationTime :: !(Maybe DateTime')
+    , _tjLatestOperationName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1085,6 +1352,8 @@ data TransferJob =
 -- * 'tjCreationTime'
 --
 -- * 'tjStatus'
+--
+-- * 'tjNotificationConfig'
 --
 -- * 'tjSchedule'
 --
@@ -1099,12 +1368,15 @@ data TransferJob =
 -- * 'tjDescription'
 --
 -- * 'tjLastModificationTime'
+--
+-- * 'tjLatestOperationName'
 transferJob
     :: TransferJob
 transferJob =
   TransferJob'
     { _tjCreationTime = Nothing
     , _tjStatus = Nothing
+    , _tjNotificationConfig = Nothing
     , _tjSchedule = Nothing
     , _tjDeletionTime = Nothing
     , _tjName = Nothing
@@ -1112,10 +1384,11 @@ transferJob =
     , _tjTransferSpec = Nothing
     , _tjDescription = Nothing
     , _tjLastModificationTime = Nothing
+    , _tjLatestOperationName = Nothing
     }
 
 
--- | This field cannot be changed by user requests.
+-- | Output only. The time that the transfer job was created.
 tjCreationTime :: Lens' TransferJob (Maybe UTCTime)
 tjCreationTime
   = lens _tjCreationTime
@@ -1123,30 +1396,51 @@ tjCreationTime
       . mapping _DateTime
 
 -- | Status of the job. This value MUST be specified for
--- \`CreateTransferJobRequests\`. NOTE: The effect of the new job status
--- takes place during a subsequent job run. For example, if you change the
--- job status from \`ENABLED\` to \`DISABLED\`, and an operation spawned by
--- the transfer is running, the status change would not affect the current
--- operation.
+-- \`CreateTransferJobRequests\`. **Note:** The effect of the new job
+-- status takes place during a subsequent job run. For example, if you
+-- change the job status from ENABLED to DISABLED, and an operation spawned
+-- by the transfer is running, the status change would not affect the
+-- current operation.
 tjStatus :: Lens' TransferJob (Maybe TransferJobStatus)
 tjStatus = lens _tjStatus (\ s a -> s{_tjStatus = a})
 
--- | Schedule specification.
+-- | Notification configuration. This is not supported for transfers
+-- involving PosixFilesystem.
+tjNotificationConfig :: Lens' TransferJob (Maybe NotificationConfig)
+tjNotificationConfig
+  = lens _tjNotificationConfig
+      (\ s a -> s{_tjNotificationConfig = a})
+
+-- | Specifies schedule for the transfer job. This is an optional field. When
+-- the field is not set, the job never executes a transfer, unless you
+-- invoke RunTransferJob or update the job to have a non-empty schedule.
 tjSchedule :: Lens' TransferJob (Maybe Schedule)
 tjSchedule
   = lens _tjSchedule (\ s a -> s{_tjSchedule = a})
 
--- | This field cannot be changed by user requests.
+-- | Output only. The time that the transfer job was deleted.
 tjDeletionTime :: Lens' TransferJob (Maybe UTCTime)
 tjDeletionTime
   = lens _tjDeletionTime
       (\ s a -> s{_tjDeletionTime = a})
       . mapping _DateTime
 
--- | A globally unique name assigned by Storage Transfer Service when the job
--- is created. This field should be left empty in requests to create a new
--- transfer job; otherwise, the requests result in an \`INVALID_ARGUMENT\`
--- error.
+-- | A unique name (within the transfer project) assigned when the job is
+-- created. If this field is empty in a CreateTransferJobRequest, Storage
+-- Transfer Service assigns a unique name. Otherwise, the specified name is
+-- used as the unique name for this job. If the specified name is in use by
+-- a job, the creation request fails with an ALREADY_EXISTS error. This
+-- name must start with \`\"transferJobs\/\"\` prefix and end with a letter
+-- or a number, and should be no more than 128 characters. For transfers
+-- involving PosixFilesystem, this name must start with
+-- \'transferJobs\/OPI\' specifically. For all other transfer types, this
+-- name must not start with \'transferJobs\/OPI\'. \'transferJobs\/OPI\' is
+-- a reserved prefix for PosixFilesystem transfers. Non-PosixFilesystem
+-- example: \`\"transferJobs\/^(?!OPI)[A-Za-z0-9-._~]*[A-Za-z0-9]$\"\`
+-- PosixFilesystem example:
+-- \`\"transferJobs\/OPI^[A-Za-z0-9-._~]*[A-Za-z0-9]$\"\` Applications must
+-- not rely on the enforcement of naming requirements involving OPI.
+-- Invalid job names fail with an INVALID_ARGUMENT error.
 tjName :: Lens' TransferJob (Maybe Text)
 tjName = lens _tjName (\ s a -> s{_tjName = a})
 
@@ -1168,12 +1462,20 @@ tjDescription
   = lens _tjDescription
       (\ s a -> s{_tjDescription = a})
 
--- | This field cannot be changed by user requests.
+-- | Output only. The time that the transfer job was last modified.
 tjLastModificationTime :: Lens' TransferJob (Maybe UTCTime)
 tjLastModificationTime
   = lens _tjLastModificationTime
       (\ s a -> s{_tjLastModificationTime = a})
       . mapping _DateTime
+
+-- | The name of the most recently started TransferOperation of this
+-- JobConfig. Present if a TransferOperation has been created for this
+-- JobConfig.
+tjLatestOperationName :: Lens' TransferJob (Maybe Text)
+tjLatestOperationName
+  = lens _tjLatestOperationName
+      (\ s a -> s{_tjLatestOperationName = a})
 
 instance FromJSON TransferJob where
         parseJSON
@@ -1181,13 +1483,15 @@ instance FromJSON TransferJob where
               (\ o ->
                  TransferJob' <$>
                    (o .:? "creationTime") <*> (o .:? "status") <*>
-                     (o .:? "schedule")
+                     (o .:? "notificationConfig")
+                     <*> (o .:? "schedule")
                      <*> (o .:? "deletionTime")
                      <*> (o .:? "name")
                      <*> (o .:? "projectId")
                      <*> (o .:? "transferSpec")
                      <*> (o .:? "description")
-                     <*> (o .:? "lastModificationTime"))
+                     <*> (o .:? "lastModificationTime")
+                     <*> (o .:? "latestOperationName"))
 
 instance ToJSON TransferJob where
         toJSON TransferJob'{..}
@@ -1195,6 +1499,7 @@ instance ToJSON TransferJob where
               (catMaybes
                  [("creationTime" .=) <$> _tjCreationTime,
                   ("status" .=) <$> _tjStatus,
+                  ("notificationConfig" .=) <$> _tjNotificationConfig,
                   ("schedule" .=) <$> _tjSchedule,
                   ("deletionTime" .=) <$> _tjDeletionTime,
                   ("name" .=) <$> _tjName,
@@ -1202,17 +1507,20 @@ instance ToJSON TransferJob where
                   ("transferSpec" .=) <$> _tjTransferSpec,
                   ("description" .=) <$> _tjDescription,
                   ("lastModificationTime" .=) <$>
-                    _tjLastModificationTime])
+                    _tjLastModificationTime,
+                  ("latestOperationName" .=) <$>
+                    _tjLatestOperationName])
 
--- | In a GcsData resource, an object\'s name is the Google Cloud Storage
--- object\'s name and its \`lastModificationTime\` refers to the object\'s
--- updated time, which changes when the content or the metadata of the
--- object is updated.
+-- | In a GcsData resource, an object\'s name is the Cloud Storage object\'s
+-- name and its \"last modification time\" refers to the object\'s
+-- \`updated\` property of Cloud Storage objects, which changes when the
+-- content or the metadata of the object is updated.
 --
 -- /See:/ 'gcsData' smart constructor.
-newtype GcsData =
+data GcsData =
   GcsData'
-    { _gdBucketName :: Maybe Text
+    { _gdPath :: !(Maybe Text)
+    , _gdBucketName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1221,15 +1529,24 @@ newtype GcsData =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gdPath'
+--
 -- * 'gdBucketName'
 gcsData
     :: GcsData
-gcsData = GcsData' {_gdBucketName = Nothing}
+gcsData = GcsData' {_gdPath = Nothing, _gdBucketName = Nothing}
 
 
--- | Google Cloud Storage bucket name (see [Bucket Name
--- Requirements](https:\/\/cloud.google.com\/storage\/docs\/naming#requirements)).
--- Required.
+-- | Root path to transfer objects. Must be an empty string or full path name
+-- that ends with a \'\/\'. This field is treated as an object prefix. As
+-- such, it should generally not begin with a \'\/\'. The root path value
+-- must meet [Object Name
+-- Requirements](\/storage\/docs\/naming#objectnames).
+gdPath :: Lens' GcsData (Maybe Text)
+gdPath = lens _gdPath (\ s a -> s{_gdPath = a})
+
+-- | Required. Cloud Storage bucket name. Must meet [Bucket Name
+-- Requirements](\/storage\/docs\/naming#requirements).
 gdBucketName :: Lens' GcsData (Maybe Text)
 gdBucketName
   = lens _gdBucketName (\ s a -> s{_gdBucketName = a})
@@ -1237,12 +1554,15 @@ gdBucketName
 instance FromJSON GcsData where
         parseJSON
           = withObject "GcsData"
-              (\ o -> GcsData' <$> (o .:? "bucketName"))
+              (\ o ->
+                 GcsData' <$> (o .:? "path") <*> (o .:? "bucketName"))
 
 instance ToJSON GcsData where
         toJSON GcsData'{..}
           = object
-              (catMaybes [("bucketName" .=) <$> _gdBucketName])
+              (catMaybes
+                 [("path" .=) <$> _gdPath,
+                  ("bucketName" .=) <$> _gdBucketName])
 
 -- | An AwsS3Data resource can be a data source, but not a data sink. In an
 -- AwsS3Data resource, an object\'s name is the S3 object\'s key name.
@@ -1250,8 +1570,10 @@ instance ToJSON GcsData where
 -- /See:/ 'awsS3Data' smart constructor.
 data AwsS3Data =
   AwsS3Data'
-    { _asdBucketName   :: !(Maybe Text)
+    { _asdPath :: !(Maybe Text)
+    , _asdBucketName :: !(Maybe Text)
     , _asdAwsAccessKey :: !(Maybe AwsAccessKey)
+    , _asdRoleArn :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1260,71 +1582,100 @@ data AwsS3Data =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'asdPath'
+--
 -- * 'asdBucketName'
 --
 -- * 'asdAwsAccessKey'
+--
+-- * 'asdRoleArn'
 awsS3Data
     :: AwsS3Data
-awsS3Data = AwsS3Data' {_asdBucketName = Nothing, _asdAwsAccessKey = Nothing}
+awsS3Data =
+  AwsS3Data'
+    { _asdPath = Nothing
+    , _asdBucketName = Nothing
+    , _asdAwsAccessKey = Nothing
+    , _asdRoleArn = Nothing
+    }
 
 
--- | S3 Bucket name (see [Creating a
--- bucket](http:\/\/docs.aws.amazon.com\/AmazonS3\/latest\/dev\/create-bucket-get-location-example.html)).
--- Required.
+-- | Root path to transfer objects. Must be an empty string or full path name
+-- that ends with a \'\/\'. This field is treated as an object prefix. As
+-- such, it should generally not begin with a \'\/\'.
+asdPath :: Lens' AwsS3Data (Maybe Text)
+asdPath = lens _asdPath (\ s a -> s{_asdPath = a})
+
+-- | Required. S3 Bucket name (see [Creating a
+-- bucket](https:\/\/docs.aws.amazon.com\/AmazonS3\/latest\/dev\/create-bucket-get-location-example.html)).
 asdBucketName :: Lens' AwsS3Data (Maybe Text)
 asdBucketName
   = lens _asdBucketName
       (\ s a -> s{_asdBucketName = a})
 
--- | AWS access key used to sign the API requests to the AWS S3 bucket.
--- Permissions on the bucket must be granted to the access ID of the AWS
--- access key. Required.
+-- | Input only. AWS access key used to sign the API requests to the AWS S3
+-- bucket. Permissions on the bucket must be granted to the access ID of
+-- the AWS access key. This field is required. For information on our data
+-- retention policy for user credentials, see [User
+-- credentials](\/storage-transfer\/docs\/data-retention#user-credentials).
 asdAwsAccessKey :: Lens' AwsS3Data (Maybe AwsAccessKey)
 asdAwsAccessKey
   = lens _asdAwsAccessKey
       (\ s a -> s{_asdAwsAccessKey = a})
+
+-- | Input only. The Amazon Resource Name (ARN) of the role to support
+-- temporary credentials via \`AssumeRoleWithWebIdentity\`. For more
+-- information about ARNs, see [IAM
+-- ARNs](https:\/\/docs.aws.amazon.com\/IAM\/latest\/UserGuide\/reference_identifiers.html#identifiers-arns).
+-- When a role ARN is provided, Transfer Service fetches temporary
+-- credentials for the session using a \`AssumeRoleWithWebIdentity\` call
+-- for the provided role using the GoogleServiceAccount for this project.
+asdRoleArn :: Lens' AwsS3Data (Maybe Text)
+asdRoleArn
+  = lens _asdRoleArn (\ s a -> s{_asdRoleArn = a})
 
 instance FromJSON AwsS3Data where
         parseJSON
           = withObject "AwsS3Data"
               (\ o ->
                  AwsS3Data' <$>
-                   (o .:? "bucketName") <*> (o .:? "awsAccessKey"))
+                   (o .:? "path") <*> (o .:? "bucketName") <*>
+                     (o .:? "awsAccessKey")
+                     <*> (o .:? "roleArn"))
 
 instance ToJSON AwsS3Data where
         toJSON AwsS3Data'{..}
           = object
               (catMaybes
-                 [("bucketName" .=) <$> _asdBucketName,
-                  ("awsAccessKey" .=) <$> _asdAwsAccessKey])
+                 [("path" .=) <$> _asdPath,
+                  ("bucketName" .=) <$> _asdBucketName,
+                  ("awsAccessKey" .=) <$> _asdAwsAccessKey,
+                  ("roleArn" .=) <$> _asdRoleArn])
 
 -- | An HttpData resource specifies a list of objects on the web to be
 -- transferred over HTTP. The information of the objects to be transferred
 -- is contained in a file referenced by a URL. The first line in the file
--- must be \"TsvHttpData-1.0\", which specifies the format of the file.
+-- must be \`\"TsvHttpData-1.0\"\`, which specifies the format of the file.
 -- Subsequent lines specify the information of the list of objects, one
 -- object per list entry. Each entry has the following tab-delimited
--- fields: * HTTP URL - The location of the object. * Length - The size of
--- the object in bytes. * MD5 - The base64-encoded MD5 hash of the object.
--- For an example of a valid TSV file, see [Transferring data from
--- URLs](https:\/\/cloud.google.com\/storage\/transfer\/create-url-list).
+-- fields: * **HTTP URL** — The location of the object. * **Length** — The
+-- size of the object in bytes. * **MD5** — The base64-encoded MD5 hash of
+-- the object. For an example of a valid TSV file, see [Transferring data
+-- from
+-- URLs](https:\/\/cloud.google.com\/storage-transfer\/docs\/create-url-list).
 -- When transferring data based on a URL list, keep the following in mind:
 -- * When an object located at \`http(s):\/\/hostname:port\/\` is
 -- transferred to a data sink, the name of the object at the data sink is
 -- \`\/\`. * If the specified size of an object does not match the actual
--- size of the object fetched, the object will not be transferred. * If the
+-- size of the object fetched, the object is not transferred. * If the
 -- specified MD5 does not match the MD5 computed from the transferred
--- bytes, the object transfer will fail. For more information, see
--- [Generating MD5
--- hashes](https:\/\/cloud.google.com\/storage\/transfer\/#md5) * Ensure
--- that each URL you specify is publicly accessible. For example, in Google
--- Cloud Storage you can [share an object publicly]
--- (https:\/\/cloud.google.com\/storage\/docs\/cloud-console#_sharingdata)
--- and get a link to it. * Storage Transfer Service obeys \`robots.txt\`
--- rules and requires the source HTTP server to support \`Range\` requests
--- and to return a \`Content-Length\` header in each response. *
--- [ObjectConditions](#ObjectConditions) have no effect when filtering
--- objects to transfer.
+-- bytes, the object transfer fails. * Ensure that each URL you specify is
+-- publicly accessible. For example, in Cloud Storage you can [share an
+-- object publicly] (\/storage\/docs\/cloud-console#_sharingdata) and get a
+-- link to it. * Storage Transfer Service obeys \`robots.txt\` rules and
+-- requires the source HTTP server to support \`Range\` requests and to
+-- return a \`Content-Length\` header in each response. * ObjectConditions
+-- have no effect when filtering objects to transfer.
 --
 -- /See:/ 'hTTPData' smart constructor.
 newtype HTTPData =
@@ -1344,9 +1695,9 @@ hTTPData
 hTTPData = HTTPData' {_httpdListURL = Nothing}
 
 
--- | The URL that points to the file that stores the object list entries.
--- This file must allow public access. Currently, only URLs with HTTP and
--- HTTPS schemes are supported. Required.
+-- | Required. The URL that points to the file that stores the object list
+-- entries. This file must allow public access. Currently, only URLs with
+-- HTTP and HTTPS schemes are supported.
 httpdListURL :: Lens' HTTPData (Maybe Text)
 httpdListURL
   = lens _httpdListURL (\ s a -> s{_httpdListURL = a})
@@ -1369,8 +1720,8 @@ instance ToJSON HTTPData where
 -- /See:/ 'timeOfDay' smart constructor.
 data TimeOfDay' =
   TimeOfDay''
-    { _todNanos   :: !(Maybe (Textual Int32))
-    , _todHours   :: !(Maybe (Textual Int32))
+    { _todNanos :: !(Maybe (Textual Int32))
+    , _todHours :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
     , _todSeconds :: !(Maybe (Textual Int32))
     }
@@ -1449,7 +1800,7 @@ instance ToJSON TimeOfDay' where
 -- /See:/ 'errorLogEntry' smart constructor.
 data ErrorLogEntry =
   ErrorLogEntry'
-    { _eleURL          :: !(Maybe Text)
+    { _eleURL :: !(Maybe Text)
     , _eleErrorDetails :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1467,8 +1818,8 @@ errorLogEntry
 errorLogEntry = ErrorLogEntry' {_eleURL = Nothing, _eleErrorDetails = Nothing}
 
 
--- | A URL that refers to the target (a data source, a data sink, or an
--- object) with which the error is associated. Required.
+-- | Required. A URL that refers to the target (a data source, a data sink,
+-- or an object) with which the error is associated.
 eleURL :: Lens' ErrorLogEntry (Maybe Text)
 eleURL = lens _eleURL (\ s a -> s{_eleURL = a})
 
@@ -1494,7 +1845,8 @@ instance ToJSON ErrorLogEntry where
                  [("url" .=) <$> _eleURL,
                   ("errorDetails" .=) <$> _eleErrorDetails])
 
--- | Represents the transfer operation object.
+-- | Represents the transfer operation object. To request a TransferOperation
+-- object, use transferOperations.get.
 --
 -- /See:/ 'operationMetadata' smart constructor.
 newtype OperationMetadata =
@@ -1530,14 +1882,100 @@ instance FromJSON OperationMetadata where
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
 
--- | TransferOptions uses three boolean parameters to define the actions to
--- be performed on objects in a transfer.
+-- | An AzureBlobStorageData resource can be a data source, but not a data
+-- sink. An AzureBlobStorageData resource represents one Azure container.
+-- The storage account determines the [Azure
+-- endpoint](https:\/\/docs.microsoft.com\/en-us\/azure\/storage\/common\/storage-create-storage-account#storage-account-endpoints).
+-- In an AzureBlobStorageData resource, a blobs\'s name is the [Azure Blob
+-- Storage blob\'s key
+-- name](https:\/\/docs.microsoft.com\/en-us\/rest\/api\/storageservices\/naming-and-referencing-containers--blobs--and-metadata#blob-names).
+--
+-- /See:/ 'azureBlobStorageData' smart constructor.
+data AzureBlobStorageData =
+  AzureBlobStorageData'
+    { _absdPath :: !(Maybe Text)
+    , _absdAzureCredentials :: !(Maybe AzureCredentials)
+    , _absdContainer :: !(Maybe Text)
+    , _absdStorageAccount :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AzureBlobStorageData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'absdPath'
+--
+-- * 'absdAzureCredentials'
+--
+-- * 'absdContainer'
+--
+-- * 'absdStorageAccount'
+azureBlobStorageData
+    :: AzureBlobStorageData
+azureBlobStorageData =
+  AzureBlobStorageData'
+    { _absdPath = Nothing
+    , _absdAzureCredentials = Nothing
+    , _absdContainer = Nothing
+    , _absdStorageAccount = Nothing
+    }
+
+
+-- | Root path to transfer objects. Must be an empty string or full path name
+-- that ends with a \'\/\'. This field is treated as an object prefix. As
+-- such, it should generally not begin with a \'\/\'.
+absdPath :: Lens' AzureBlobStorageData (Maybe Text)
+absdPath = lens _absdPath (\ s a -> s{_absdPath = a})
+
+-- | Required. Input only. Credentials used to authenticate API requests to
+-- Azure. For information on our data retention policy for user
+-- credentials, see [User
+-- credentials](\/storage-transfer\/docs\/data-retention#user-credentials).
+absdAzureCredentials :: Lens' AzureBlobStorageData (Maybe AzureCredentials)
+absdAzureCredentials
+  = lens _absdAzureCredentials
+      (\ s a -> s{_absdAzureCredentials = a})
+
+-- | Required. The container to transfer from the Azure Storage account.
+absdContainer :: Lens' AzureBlobStorageData (Maybe Text)
+absdContainer
+  = lens _absdContainer
+      (\ s a -> s{_absdContainer = a})
+
+-- | Required. The name of the Azure Storage account.
+absdStorageAccount :: Lens' AzureBlobStorageData (Maybe Text)
+absdStorageAccount
+  = lens _absdStorageAccount
+      (\ s a -> s{_absdStorageAccount = a})
+
+instance FromJSON AzureBlobStorageData where
+        parseJSON
+          = withObject "AzureBlobStorageData"
+              (\ o ->
+                 AzureBlobStorageData' <$>
+                   (o .:? "path") <*> (o .:? "azureCredentials") <*>
+                     (o .:? "container")
+                     <*> (o .:? "storageAccount"))
+
+instance ToJSON AzureBlobStorageData where
+        toJSON AzureBlobStorageData'{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _absdPath,
+                  ("azureCredentials" .=) <$> _absdAzureCredentials,
+                  ("container" .=) <$> _absdContainer,
+                  ("storageAccount" .=) <$> _absdStorageAccount])
+
+-- | TransferOptions define the actions to be performed on objects in a
+-- transfer.
 --
 -- /See:/ 'transferOptions' smart constructor.
 data TransferOptions =
   TransferOptions'
-    { _toDeleteObjectsUniqueInSink             :: !(Maybe Bool)
-    , _toDeleteObjectsFromSourceAfterTransfer  :: !(Maybe Bool)
+    { _toDeleteObjectsUniqueInSink :: !(Maybe Bool)
+    , _toDeleteObjectsFromSourceAfterTransfer :: !(Maybe Bool)
     , _toOverwriteObjectsAlreadyExistingInSink :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1562,8 +2000,8 @@ transferOptions =
     }
 
 
--- | Whether objects that exist only in the sink should be deleted. Note that
--- this option and \`deleteObjectsFromSourceAfterTransfer\` are mutually
+-- | Whether objects that exist only in the sink should be deleted. **Note:**
+-- This option and delete_objects_from_source_after_transfer are mutually
 -- exclusive.
 toDeleteObjectsUniqueInSink :: Lens' TransferOptions (Maybe Bool)
 toDeleteObjectsUniqueInSink
@@ -1571,15 +2009,18 @@ toDeleteObjectsUniqueInSink
       (\ s a -> s{_toDeleteObjectsUniqueInSink = a})
 
 -- | Whether objects should be deleted from the source after they are
--- transferred to the sink. Note that this option and
--- \`deleteObjectsUniqueInSink\` are mutually exclusive.
+-- transferred to the sink. **Note:** This option and
+-- delete_objects_unique_in_sink are mutually exclusive.
 toDeleteObjectsFromSourceAfterTransfer :: Lens' TransferOptions (Maybe Bool)
 toDeleteObjectsFromSourceAfterTransfer
   = lens _toDeleteObjectsFromSourceAfterTransfer
       (\ s a ->
          s{_toDeleteObjectsFromSourceAfterTransfer = a})
 
--- | Whether overwriting objects that already exist in the sink is allowed.
+-- | When to overwrite objects that already exist in the sink. The default is
+-- that only objects that are different from the source are ovewritten. If
+-- true, all objects in the sink whose name matches an object in the source
+-- are overwritten with the source object.
 toOverwriteObjectsAlreadyExistingInSink :: Lens' TransferOptions (Maybe Bool)
 toOverwriteObjectsAlreadyExistingInSink
   = lens _toOverwriteObjectsAlreadyExistingInSink
@@ -1611,14 +2052,15 @@ instance ToJSON TransferOptions where
 -- /See:/ 'transferOperation' smart constructor.
 data TransferOperation =
   TransferOperation'
-    { _toStatus          :: !(Maybe TransferOperationStatus)
-    , _toCounters        :: !(Maybe TransferCounters)
-    , _toStartTime       :: !(Maybe DateTime')
+    { _toStatus :: !(Maybe TransferOperationStatus)
+    , _toCounters :: !(Maybe TransferCounters)
+    , _toNotificationConfig :: !(Maybe NotificationConfig)
+    , _toStartTime :: !(Maybe DateTime')
     , _toTransferJobName :: !(Maybe Text)
-    , _toName            :: !(Maybe Text)
-    , _toEndTime         :: !(Maybe DateTime')
-    , _toProjectId       :: !(Maybe Text)
-    , _toTransferSpec    :: !(Maybe TransferSpec)
+    , _toName :: !(Maybe Text)
+    , _toEndTime :: !(Maybe DateTime')
+    , _toProjectId :: !(Maybe Text)
+    , _toTransferSpec :: !(Maybe TransferSpec)
     , _toErrorBreakdowns :: !(Maybe [ErrorSummary])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1631,6 +2073,8 @@ data TransferOperation =
 -- * 'toStatus'
 --
 -- * 'toCounters'
+--
+-- * 'toNotificationConfig'
 --
 -- * 'toStartTime'
 --
@@ -1651,6 +2095,7 @@ transferOperation =
   TransferOperation'
     { _toStatus = Nothing
     , _toCounters = Nothing
+    , _toNotificationConfig = Nothing
     , _toStartTime = Nothing
     , _toTransferJobName = Nothing
     , _toName = Nothing
@@ -1669,6 +2114,12 @@ toStatus = lens _toStatus (\ s a -> s{_toStatus = a})
 toCounters :: Lens' TransferOperation (Maybe TransferCounters)
 toCounters
   = lens _toCounters (\ s a -> s{_toCounters = a})
+
+-- | Notification configuration.
+toNotificationConfig :: Lens' TransferOperation (Maybe NotificationConfig)
+toNotificationConfig
+  = lens _toNotificationConfig
+      (\ s a -> s{_toNotificationConfig = a})
 
 -- | Start time of this transfer execution.
 toStartTime :: Lens' TransferOperation (Maybe UTCTime)
@@ -1693,12 +2144,11 @@ toEndTime
       mapping _DateTime
 
 -- | The ID of the Google Cloud Platform Project that owns the operation.
--- Required.
 toProjectId :: Lens' TransferOperation (Maybe Text)
 toProjectId
   = lens _toProjectId (\ s a -> s{_toProjectId = a})
 
--- | Transfer specification. Required.
+-- | Transfer specification.
 toTransferSpec :: Lens' TransferOperation (Maybe TransferSpec)
 toTransferSpec
   = lens _toTransferSpec
@@ -1718,7 +2168,8 @@ instance FromJSON TransferOperation where
               (\ o ->
                  TransferOperation' <$>
                    (o .:? "status") <*> (o .:? "counters") <*>
-                     (o .:? "startTime")
+                     (o .:? "notificationConfig")
+                     <*> (o .:? "startTime")
                      <*> (o .:? "transferJobName")
                      <*> (o .:? "name")
                      <*> (o .:? "endTime")
@@ -1732,6 +2183,7 @@ instance ToJSON TransferOperation where
               (catMaybes
                  [("status" .=) <$> _toStatus,
                   ("counters" .=) <$> _toCounters,
+                  ("notificationConfig" .=) <$> _toNotificationConfig,
                   ("startTime" .=) <$> _toStartTime,
                   ("transferJobName" .=) <$> _toTransferJobName,
                   ("name" .=) <$> _toName,
@@ -1745,12 +2197,13 @@ instance ToJSON TransferOperation where
 -- /See:/ 'transferSpec' smart constructor.
 data TransferSpec =
   TransferSpec'
-    { _tsGcsDataSource    :: !(Maybe GcsData)
+    { _tsGcsDataSource :: !(Maybe GcsData)
     , _tsObjectConditions :: !(Maybe ObjectConditions)
-    , _tsHTTPDataSource   :: !(Maybe HTTPData)
-    , _tsAwsS3DataSource  :: !(Maybe AwsS3Data)
-    , _tsGcsDataSink      :: !(Maybe GcsData)
-    , _tsTransferOptions  :: !(Maybe TransferOptions)
+    , _tsHTTPDataSource :: !(Maybe HTTPData)
+    , _tsAwsS3DataSource :: !(Maybe AwsS3Data)
+    , _tsGcsDataSink :: !(Maybe GcsData)
+    , _tsTransferOptions :: !(Maybe TransferOptions)
+    , _tsAzureBlobStorageDataSource :: !(Maybe AzureBlobStorageData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1770,6 +2223,8 @@ data TransferSpec =
 -- * 'tsGcsDataSink'
 --
 -- * 'tsTransferOptions'
+--
+-- * 'tsAzureBlobStorageDataSource'
 transferSpec
     :: TransferSpec
 transferSpec =
@@ -1780,10 +2235,11 @@ transferSpec =
     , _tsAwsS3DataSource = Nothing
     , _tsGcsDataSink = Nothing
     , _tsTransferOptions = Nothing
+    , _tsAzureBlobStorageDataSource = Nothing
     }
 
 
--- | A Google Cloud Storage data source.
+-- | A Cloud Storage data source.
 tsGcsDataSource :: Lens' TransferSpec (Maybe GcsData)
 tsGcsDataSource
   = lens _tsGcsDataSource
@@ -1791,7 +2247,7 @@ tsGcsDataSource
 
 -- | Only objects that satisfy these object conditions are included in the
 -- set of data source and data sink objects. Object conditions based on
--- objects\' \`lastModificationTime\` do not exclude objects in a data
+-- objects\' \"last modification time\" do not exclude objects in a data
 -- sink.
 tsObjectConditions :: Lens' TransferSpec (Maybe ObjectConditions)
 tsObjectConditions
@@ -1810,19 +2266,25 @@ tsAwsS3DataSource
   = lens _tsAwsS3DataSource
       (\ s a -> s{_tsAwsS3DataSource = a})
 
--- | A Google Cloud Storage data sink.
+-- | A Cloud Storage data sink.
 tsGcsDataSink :: Lens' TransferSpec (Maybe GcsData)
 tsGcsDataSink
   = lens _tsGcsDataSink
       (\ s a -> s{_tsGcsDataSink = a})
 
--- | If the option \`deleteObjectsUniqueInSink\` is \`true\`, object
--- conditions based on objects\' \`lastModificationTime\` are ignored and
--- do not exclude objects in a data source or a data sink.
+-- | If the option delete_objects_unique_in_sink is \`true\` and time-based
+-- object conditions such as \'last modification time\' are specified, the
+-- request fails with an INVALID_ARGUMENT error.
 tsTransferOptions :: Lens' TransferSpec (Maybe TransferOptions)
 tsTransferOptions
   = lens _tsTransferOptions
       (\ s a -> s{_tsTransferOptions = a})
+
+-- | An Azure Blob Storage data source.
+tsAzureBlobStorageDataSource :: Lens' TransferSpec (Maybe AzureBlobStorageData)
+tsAzureBlobStorageDataSource
+  = lens _tsAzureBlobStorageDataSource
+      (\ s a -> s{_tsAzureBlobStorageDataSource = a})
 
 instance FromJSON TransferSpec where
         parseJSON
@@ -1834,7 +2296,8 @@ instance FromJSON TransferSpec where
                      <*> (o .:? "httpDataSource")
                      <*> (o .:? "awsS3DataSource")
                      <*> (o .:? "gcsDataSink")
-                     <*> (o .:? "transferOptions"))
+                     <*> (o .:? "transferOptions")
+                     <*> (o .:? "azureBlobStorageDataSource"))
 
 instance ToJSON TransferSpec where
         toJSON TransferSpec'{..}
@@ -1845,7 +2308,9 @@ instance ToJSON TransferSpec where
                   ("httpDataSource" .=) <$> _tsHTTPDataSource,
                   ("awsS3DataSource" .=) <$> _tsAwsS3DataSource,
                   ("gcsDataSink" .=) <$> _tsGcsDataSink,
-                  ("transferOptions" .=) <$> _tsTransferOptions])
+                  ("transferOptions" .=) <$> _tsTransferOptions,
+                  ("azureBlobStorageDataSource" .=) <$>
+                    _tsAzureBlobStorageDataSource])
 
 -- | Response from ListTransferJobs.
 --
@@ -1853,7 +2318,7 @@ instance ToJSON TransferSpec where
 data ListTransferJobsResponse =
   ListTransferJobsResponse'
     { _ltjrNextPageToken :: !(Maybe Text)
-    , _ltjrTransferJobs  :: !(Maybe [TransferJob])
+    , _ltjrTransferJobs :: !(Maybe [TransferJob])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1969,13 +2434,16 @@ instance ToJSON ResumeTransferOperationRequest where
         toJSON = const emptyObject
 
 -- | AWS access key (see [AWS Security
--- Credentials](http:\/\/docs.aws.amazon.com\/general\/latest\/gr\/aws-security-credentials.html)).
+-- Credentials](https:\/\/docs.aws.amazon.com\/general\/latest\/gr\/aws-security-credentials.html)).
+-- For information on our data retention policy for user credentials, see
+-- [User
+-- credentials](\/storage-transfer\/docs\/data-retention#user-credentials).
 --
 -- /See:/ 'awsAccessKey' smart constructor.
 data AwsAccessKey =
   AwsAccessKey'
     { _aakSecretAccessKey :: !(Maybe Text)
-    , _aakAccessKeyId     :: !(Maybe Text)
+    , _aakAccessKeyId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1993,14 +2461,14 @@ awsAccessKey =
   AwsAccessKey' {_aakSecretAccessKey = Nothing, _aakAccessKeyId = Nothing}
 
 
--- | AWS secret access key. This field is not returned in RPC responses.
--- Required.
+-- | Required. AWS secret access key. This field is not returned in RPC
+-- responses.
 aakSecretAccessKey :: Lens' AwsAccessKey (Maybe Text)
 aakSecretAccessKey
   = lens _aakSecretAccessKey
       (\ s a -> s{_aakSecretAccessKey = a})
 
--- | AWS access key ID. Required.
+-- | Required. AWS access key ID.
 aakAccessKeyId :: Lens' AwsAccessKey (Maybe Text)
 aakAccessKeyId
   = lens _aakAccessKeyId

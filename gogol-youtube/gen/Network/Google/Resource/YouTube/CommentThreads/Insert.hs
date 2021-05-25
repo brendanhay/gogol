@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new top-level comment. To add a reply to an existing comment,
--- use the comments.insert method instead.
+-- Inserts a new resource into this collection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.commentThreads.insert@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.commentThreads.insert@.
 module Network.Google.Resource.YouTube.CommentThreads.Insert
     (
     -- * REST Resource
@@ -34,12 +33,17 @@ module Network.Google.Resource.YouTube.CommentThreads.Insert
     , CommentThreadsInsert
 
     -- * Request Lenses
+    , ctiXgafv
     , ctiPart
+    , ctiUploadProtocol
+    , ctiAccessToken
+    , ctiUploadType
     , ctiPayload
+    , ctiCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.commentThreads.insert@ method which the
 -- 'CommentThreadsInsert' request conforms to.
@@ -47,19 +51,28 @@ type CommentThreadsInsertResource =
      "youtube" :>
        "v3" :>
          "commentThreads" :>
-           QueryParam "part" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] CommentThread :>
-                 Post '[JSON] CommentThread
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CommentThread :>
+                           Post '[JSON] CommentThread
 
--- | Creates a new top-level comment. To add a reply to an existing comment,
--- use the comments.insert method instead.
+-- | Inserts a new resource into this collection.
 --
 -- /See:/ 'commentThreadsInsert' smart constructor.
 data CommentThreadsInsert =
   CommentThreadsInsert'
-    { _ctiPart    :: !Text
+    { _ctiXgafv :: !(Maybe Xgafv)
+    , _ctiPart :: ![Text]
+    , _ctiUploadProtocol :: !(Maybe Text)
+    , _ctiAccessToken :: !(Maybe Text)
+    , _ctiUploadType :: !(Maybe Text)
     , _ctiPayload :: !CommentThread
+    , _ctiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,34 +81,85 @@ data CommentThreadsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ctiXgafv'
+--
 -- * 'ctiPart'
 --
+-- * 'ctiUploadProtocol'
+--
+-- * 'ctiAccessToken'
+--
+-- * 'ctiUploadType'
+--
 -- * 'ctiPayload'
+--
+-- * 'ctiCallback'
 commentThreadsInsert
-    :: Text -- ^ 'ctiPart'
+    :: [Text] -- ^ 'ctiPart'
     -> CommentThread -- ^ 'ctiPayload'
     -> CommentThreadsInsert
 commentThreadsInsert pCtiPart_ pCtiPayload_ =
-  CommentThreadsInsert' {_ctiPart = pCtiPart_, _ctiPayload = pCtiPayload_}
+  CommentThreadsInsert'
+    { _ctiXgafv = Nothing
+    , _ctiPart = _Coerce # pCtiPart_
+    , _ctiUploadProtocol = Nothing
+    , _ctiAccessToken = Nothing
+    , _ctiUploadType = Nothing
+    , _ctiPayload = pCtiPayload_
+    , _ctiCallback = Nothing
+    }
 
 
--- | The part parameter identifies the properties that the API response will
--- include. Set the parameter value to snippet. The snippet part has a
+-- | V1 error format.
+ctiXgafv :: Lens' CommentThreadsInsert (Maybe Xgafv)
+ctiXgafv = lens _ctiXgafv (\ s a -> s{_ctiXgafv = a})
+
+-- | The *part* parameter identifies the properties that the API response
+-- will include. Set the parameter value to snippet. The snippet part has a
 -- quota cost of 2 units.
-ctiPart :: Lens' CommentThreadsInsert Text
-ctiPart = lens _ctiPart (\ s a -> s{_ctiPart = a})
+ctiPart :: Lens' CommentThreadsInsert [Text]
+ctiPart
+  = lens _ctiPart (\ s a -> s{_ctiPart = a}) . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ctiUploadProtocol :: Lens' CommentThreadsInsert (Maybe Text)
+ctiUploadProtocol
+  = lens _ctiUploadProtocol
+      (\ s a -> s{_ctiUploadProtocol = a})
+
+-- | OAuth access token.
+ctiAccessToken :: Lens' CommentThreadsInsert (Maybe Text)
+ctiAccessToken
+  = lens _ctiAccessToken
+      (\ s a -> s{_ctiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ctiUploadType :: Lens' CommentThreadsInsert (Maybe Text)
+ctiUploadType
+  = lens _ctiUploadType
+      (\ s a -> s{_ctiUploadType = a})
 
 -- | Multipart request metadata.
 ctiPayload :: Lens' CommentThreadsInsert CommentThread
 ctiPayload
   = lens _ctiPayload (\ s a -> s{_ctiPayload = a})
 
+-- | JSONP
+ctiCallback :: Lens' CommentThreadsInsert (Maybe Text)
+ctiCallback
+  = lens _ctiCallback (\ s a -> s{_ctiCallback = a})
+
 instance GoogleRequest CommentThreadsInsert where
         type Rs CommentThreadsInsert = CommentThread
         type Scopes CommentThreadsInsert =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentThreadsInsert'{..}
-          = go (Just _ctiPart) (Just AltJSON) _ctiPayload
+          = go _ctiPart _ctiXgafv _ctiUploadProtocol
+              _ctiAccessToken
+              _ctiUploadType
+              _ctiCallback
+              (Just AltJSON)
+              _ctiPayload
               youTubeService
           where go
                   = buildClient

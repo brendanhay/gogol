@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.PubproFiles.List
     , pflAccountId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pubprofiles.list@ method which the
 -- 'PubproFilesList' request conforms to.

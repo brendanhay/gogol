@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the track configuration for the specified track type. This
--- method supports patch semantics.
+-- Patches a track.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.patch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.tracks.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
     (
     -- * REST Resource
@@ -34,14 +33,19 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
     , EditsTracksPatch
 
     -- * Request Lenses
+    , etptXgafv
     , etptTrack
+    , etptUploadProtocol
     , etptPackageName
+    , etptAccessToken
+    , etptUploadType
     , etptPayload
     , etptEditId
+    , etptCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.tracks.patch@ method which the
 -- 'EditsTracksPatch' request conforms to.
@@ -54,19 +58,28 @@ type EditsTracksPatchResource =
                Capture "editId" Text :>
                  "tracks" :>
                    Capture "track" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Track :> Patch '[JSON] Track
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Track :> Patch '[JSON] Track
 
--- | Updates the track configuration for the specified track type. This
--- method supports patch semantics.
+-- | Patches a track.
 --
 -- /See:/ 'editsTracksPatch' smart constructor.
 data EditsTracksPatch =
   EditsTracksPatch'
-    { _etptTrack       :: !Text
+    { _etptXgafv :: !(Maybe Xgafv)
+    , _etptTrack :: !Text
+    , _etptUploadProtocol :: !(Maybe Text)
     , _etptPackageName :: !Text
-    , _etptPayload     :: !Track
-    , _etptEditId      :: !Text
+    , _etptAccessToken :: !(Maybe Text)
+    , _etptUploadType :: !(Maybe Text)
+    , _etptPayload :: !Track
+    , _etptEditId :: !Text
+    , _etptCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,13 +88,23 @@ data EditsTracksPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'etptXgafv'
+--
 -- * 'etptTrack'
 --
+-- * 'etptUploadProtocol'
+--
 -- * 'etptPackageName'
+--
+-- * 'etptAccessToken'
+--
+-- * 'etptUploadType'
 --
 -- * 'etptPayload'
 --
 -- * 'etptEditId'
+--
+-- * 'etptCallback'
 editsTracksPatch
     :: Text -- ^ 'etptTrack'
     -> Text -- ^ 'etptPackageName'
@@ -90,34 +113,66 @@ editsTracksPatch
     -> EditsTracksPatch
 editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
   EditsTracksPatch'
-    { _etptTrack = pEtptTrack_
+    { _etptXgafv = Nothing
+    , _etptTrack = pEtptTrack_
+    , _etptUploadProtocol = Nothing
     , _etptPackageName = pEtptPackageName_
+    , _etptAccessToken = Nothing
+    , _etptUploadType = Nothing
     , _etptPayload = pEtptPayload_
     , _etptEditId = pEtptEditId_
+    , _etptCallback = Nothing
     }
 
 
--- | The track to read or modify.
+-- | V1 error format.
+etptXgafv :: Lens' EditsTracksPatch (Maybe Xgafv)
+etptXgafv
+  = lens _etptXgafv (\ s a -> s{_etptXgafv = a})
+
+-- | Identifier of the track.
 etptTrack :: Lens' EditsTracksPatch Text
 etptTrack
   = lens _etptTrack (\ s a -> s{_etptTrack = a})
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+etptUploadProtocol :: Lens' EditsTracksPatch (Maybe Text)
+etptUploadProtocol
+  = lens _etptUploadProtocol
+      (\ s a -> s{_etptUploadProtocol = a})
+
+-- | Package name of the app.
 etptPackageName :: Lens' EditsTracksPatch Text
 etptPackageName
   = lens _etptPackageName
       (\ s a -> s{_etptPackageName = a})
+
+-- | OAuth access token.
+etptAccessToken :: Lens' EditsTracksPatch (Maybe Text)
+etptAccessToken
+  = lens _etptAccessToken
+      (\ s a -> s{_etptAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+etptUploadType :: Lens' EditsTracksPatch (Maybe Text)
+etptUploadType
+  = lens _etptUploadType
+      (\ s a -> s{_etptUploadType = a})
 
 -- | Multipart request metadata.
 etptPayload :: Lens' EditsTracksPatch Track
 etptPayload
   = lens _etptPayload (\ s a -> s{_etptPayload = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 etptEditId :: Lens' EditsTracksPatch Text
 etptEditId
   = lens _etptEditId (\ s a -> s{_etptEditId = a})
+
+-- | JSONP
+etptCallback :: Lens' EditsTracksPatch (Maybe Text)
+etptCallback
+  = lens _etptCallback (\ s a -> s{_etptCallback = a})
 
 instance GoogleRequest EditsTracksPatch where
         type Rs EditsTracksPatch = Track
@@ -125,6 +180,11 @@ instance GoogleRequest EditsTracksPatch where
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTracksPatch'{..}
           = go _etptPackageName _etptEditId _etptTrack
+              _etptXgafv
+              _etptUploadProtocol
+              _etptAccessToken
+              _etptUploadType
+              _etptCallback
               (Just AltJSON)
               _etptPayload
               androidPublisherService

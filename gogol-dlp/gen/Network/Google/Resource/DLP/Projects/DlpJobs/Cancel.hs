@@ -46,8 +46,8 @@ module Network.Google.Resource.DLP.Projects.DlpJobs.Cancel
     , pdjcCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.dlpJobs.cancel@ method which the
 -- 'ProjectsDlpJobsCancel' request conforms to.
@@ -72,13 +72,13 @@ type ProjectsDlpJobsCancelResource =
 -- /See:/ 'projectsDlpJobsCancel' smart constructor.
 data ProjectsDlpJobsCancel =
   ProjectsDlpJobsCancel'
-    { _pdjcXgafv          :: !(Maybe Xgafv)
+    { _pdjcXgafv :: !(Maybe Xgafv)
     , _pdjcUploadProtocol :: !(Maybe Text)
-    , _pdjcAccessToken    :: !(Maybe Text)
-    , _pdjcUploadType     :: !(Maybe Text)
-    , _pdjcPayload        :: !GooglePrivacyDlpV2CancelDlpJobRequest
-    , _pdjcName           :: !Text
-    , _pdjcCallback       :: !(Maybe Text)
+    , _pdjcAccessToken :: !(Maybe Text)
+    , _pdjcUploadType :: !(Maybe Text)
+    , _pdjcPayload :: !GooglePrivacyDlpV2CancelDlpJobRequest
+    , _pdjcName :: !Text
+    , _pdjcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,7 +144,7 @@ pdjcPayload :: Lens' ProjectsDlpJobsCancel GooglePrivacyDlpV2CancelDlpJobRequest
 pdjcPayload
   = lens _pdjcPayload (\ s a -> s{_pdjcPayload = a})
 
--- | The name of the DlpJob resource to be cancelled.
+-- | Required. The name of the DlpJob resource to be cancelled.
 pdjcName :: Lens' ProjectsDlpJobsCancel Text
 pdjcName = lens _pdjcName (\ s a -> s{_pdjcName = a})
 

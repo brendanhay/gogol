@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a ServiceAccountKey.
+-- Deletes a ServiceAccountKey. Deleting a service account key does not
+-- revoke short-lived credentials that have been issued based on the
+-- service account key.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.delete@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
@@ -41,8 +43,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
     , psakdCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.keys.delete@ method which the
 -- 'ProjectsServiceAccountsKeysDelete' request conforms to.
@@ -56,17 +58,19 @@ type ProjectsServiceAccountsKeysDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a ServiceAccountKey.
+-- | Deletes a ServiceAccountKey. Deleting a service account key does not
+-- revoke short-lived credentials that have been issued based on the
+-- service account key.
 --
 -- /See:/ 'projectsServiceAccountsKeysDelete' smart constructor.
 data ProjectsServiceAccountsKeysDelete =
   ProjectsServiceAccountsKeysDelete'
-    { _psakdXgafv          :: !(Maybe Xgafv)
+    { _psakdXgafv :: !(Maybe Xgafv)
     , _psakdUploadProtocol :: !(Maybe Text)
-    , _psakdAccessToken    :: !(Maybe Text)
-    , _psakdUploadType     :: !(Maybe Text)
-    , _psakdName           :: !Text
-    , _psakdCallback       :: !(Maybe Text)
+    , _psakdAccessToken :: !(Maybe Text)
+    , _psakdUploadType :: !(Maybe Text)
+    , _psakdName :: !Text
+    , _psakdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +127,8 @@ psakdUploadType
   = lens _psakdUploadType
       (\ s a -> s{_psakdUploadType = a})
 
--- | The resource name of the service account key in the following format:
+-- | Required. The resource name of the service account key in the following
+-- format:
 -- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}\`.
 -- Using \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project
 -- from the account. The \`ACCOUNT\` value can be the \`email\` address or

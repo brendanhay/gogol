@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
     , thpsscTargetHTTPSProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.setSslCertificates@ method which the
 -- 'TargetHTTPSProxiesSetSSLCertificates' request conforms to.
@@ -63,9 +63,9 @@ type TargetHTTPSProxiesSetSSLCertificatesResource =
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificates' smart constructor.
 data TargetHTTPSProxiesSetSSLCertificates =
   TargetHTTPSProxiesSetSSLCertificates'
-    { _thpsscRequestId        :: !(Maybe Text)
-    , _thpsscProject          :: !Text
-    , _thpsscPayload          :: !TargetHTTPSProxiesSetSSLCertificatesRequest
+    { _thpsscRequestId :: !(Maybe Text)
+    , _thpsscProject :: !Text
+    , _thpsscPayload :: !TargetHTTPSProxiesSetSSLCertificatesRequest
     , _thpsscTargetHTTPSProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

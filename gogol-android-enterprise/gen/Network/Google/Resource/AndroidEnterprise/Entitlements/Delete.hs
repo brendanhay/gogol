@@ -34,12 +34,17 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
 
     -- * Request Lenses
     , edEntitlementId
+    , edXgafv
+    , edUploadProtocol
     , edEnterpriseId
+    , edAccessToken
+    , edUploadType
     , edUserId
+    , edCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.delete@ method which the
 -- 'EntitlementsDelete' request conforms to.
@@ -52,7 +57,12 @@ type EntitlementsDeleteResource =
                Capture "userId" Text :>
                  "entitlements" :>
                    Capture "entitlementId" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes an entitlement to an app for a user.
 --
@@ -60,8 +70,13 @@ type EntitlementsDeleteResource =
 data EntitlementsDelete =
   EntitlementsDelete'
     { _edEntitlementId :: !Text
-    , _edEnterpriseId  :: !Text
-    , _edUserId        :: !Text
+    , _edXgafv :: !(Maybe Xgafv)
+    , _edUploadProtocol :: !(Maybe Text)
+    , _edEnterpriseId :: !Text
+    , _edAccessToken :: !(Maybe Text)
+    , _edUploadType :: !(Maybe Text)
+    , _edUserId :: !Text
+    , _edCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,9 +87,19 @@ data EntitlementsDelete =
 --
 -- * 'edEntitlementId'
 --
+-- * 'edXgafv'
+--
+-- * 'edUploadProtocol'
+--
 -- * 'edEnterpriseId'
 --
+-- * 'edAccessToken'
+--
+-- * 'edUploadType'
+--
 -- * 'edUserId'
+--
+-- * 'edCallback'
 entitlementsDelete
     :: Text -- ^ 'edEntitlementId'
     -> Text -- ^ 'edEnterpriseId'
@@ -83,8 +108,13 @@ entitlementsDelete
 entitlementsDelete pEdEntitlementId_ pEdEnterpriseId_ pEdUserId_ =
   EntitlementsDelete'
     { _edEntitlementId = pEdEntitlementId_
+    , _edXgafv = Nothing
+    , _edUploadProtocol = Nothing
     , _edEnterpriseId = pEdEnterpriseId_
+    , _edAccessToken = Nothing
+    , _edUploadType = Nothing
     , _edUserId = pEdUserId_
+    , _edCallback = Nothing
     }
 
 
@@ -95,15 +125,41 @@ edEntitlementId
   = lens _edEntitlementId
       (\ s a -> s{_edEntitlementId = a})
 
+-- | V1 error format.
+edXgafv :: Lens' EntitlementsDelete (Maybe Xgafv)
+edXgafv = lens _edXgafv (\ s a -> s{_edXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+edUploadProtocol :: Lens' EntitlementsDelete (Maybe Text)
+edUploadProtocol
+  = lens _edUploadProtocol
+      (\ s a -> s{_edUploadProtocol = a})
+
 -- | The ID of the enterprise.
 edEnterpriseId :: Lens' EntitlementsDelete Text
 edEnterpriseId
   = lens _edEnterpriseId
       (\ s a -> s{_edEnterpriseId = a})
 
+-- | OAuth access token.
+edAccessToken :: Lens' EntitlementsDelete (Maybe Text)
+edAccessToken
+  = lens _edAccessToken
+      (\ s a -> s{_edAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+edUploadType :: Lens' EntitlementsDelete (Maybe Text)
+edUploadType
+  = lens _edUploadType (\ s a -> s{_edUploadType = a})
+
 -- | The ID of the user.
 edUserId :: Lens' EntitlementsDelete Text
 edUserId = lens _edUserId (\ s a -> s{_edUserId = a})
+
+-- | JSONP
+edCallback :: Lens' EntitlementsDelete (Maybe Text)
+edCallback
+  = lens _edCallback (\ s a -> s{_edCallback = a})
 
 instance GoogleRequest EntitlementsDelete where
         type Rs EntitlementsDelete = ()
@@ -111,6 +167,11 @@ instance GoogleRequest EntitlementsDelete where
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EntitlementsDelete'{..}
           = go _edEnterpriseId _edUserId _edEntitlementId
+              _edXgafv
+              _edUploadProtocol
+              _edAccessToken
+              _edUploadType
+              _edCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -53,8 +53,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Update
     , apuCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.update@ method which the
 -- 'AccountsProposalsUpdate' request conforms to.
@@ -87,14 +87,14 @@ type AccountsProposalsUpdateResource =
 -- /See:/ 'accountsProposalsUpdate' smart constructor.
 data AccountsProposalsUpdate =
   AccountsProposalsUpdate'
-    { _apuXgafv          :: !(Maybe Xgafv)
+    { _apuXgafv :: !(Maybe Xgafv)
     , _apuUploadProtocol :: !(Maybe Text)
-    , _apuAccessToken    :: !(Maybe Text)
-    , _apuUploadType     :: !(Maybe Text)
-    , _apuPayload        :: !Proposal
-    , _apuProposalId     :: !Text
-    , _apuAccountId      :: !Text
-    , _apuCallback       :: !(Maybe Text)
+    , _apuAccessToken :: !(Maybe Text)
+    , _apuUploadType :: !(Maybe Text)
+    , _apuPayload :: !Proposal
+    , _apuProposalId :: !Text
+    , _apuAccountId :: !Text
+    , _apuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

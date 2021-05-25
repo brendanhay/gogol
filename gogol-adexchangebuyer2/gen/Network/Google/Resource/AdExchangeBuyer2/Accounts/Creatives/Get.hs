@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Get
     , acgCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.get@ method which the
 -- 'AccountsCreativesGet' request conforms to.
@@ -65,13 +65,13 @@ type AccountsCreativesGetResource =
 -- /See:/ 'accountsCreativesGet' smart constructor.
 data AccountsCreativesGet =
   AccountsCreativesGet'
-    { _acgXgafv          :: !(Maybe Xgafv)
+    { _acgXgafv :: !(Maybe Xgafv)
     , _acgUploadProtocol :: !(Maybe Text)
-    , _acgAccessToken    :: !(Maybe Text)
-    , _acgUploadType     :: !(Maybe Text)
-    , _acgCreativeId     :: !Text
-    , _acgAccountId      :: !Text
-    , _acgCallback       :: !(Maybe Text)
+    , _acgAccessToken :: !(Maybe Text)
+    , _acgUploadType :: !(Maybe Text)
+    , _acgCreativeId :: !Text
+    , _acgAccountId :: !Text
+    , _acgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

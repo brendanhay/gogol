@@ -46,8 +46,8 @@ module Network.Google.Resource.File.Projects.Locations.Instances.List
     , plilCallback
     ) where
 
-import           Network.Google.File.Types
-import           Network.Google.Prelude
+import Network.Google.File.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @file.projects.locations.instances.list@ method which the
 -- 'ProjectsLocationsInstancesList' request conforms to.
@@ -73,16 +73,16 @@ type ProjectsLocationsInstancesListResource =
 -- /See:/ 'projectsLocationsInstancesList' smart constructor.
 data ProjectsLocationsInstancesList =
   ProjectsLocationsInstancesList'
-    { _plilParent         :: !Text
-    , _plilXgafv          :: !(Maybe Xgafv)
+    { _plilParent :: !Text
+    , _plilXgafv :: !(Maybe Xgafv)
     , _plilUploadProtocol :: !(Maybe Text)
-    , _plilOrderBy        :: !(Maybe Text)
-    , _plilAccessToken    :: !(Maybe Text)
-    , _plilUploadType     :: !(Maybe Text)
-    , _plilFilter         :: !(Maybe Text)
-    , _plilPageToken      :: !(Maybe Text)
-    , _plilPageSize       :: !(Maybe (Textual Int32))
-    , _plilCallback       :: !(Maybe Text)
+    , _plilOrderBy :: !(Maybe Text)
+    , _plilAccessToken :: !(Maybe Text)
+    , _plilUploadType :: !(Maybe Text)
+    , _plilFilter :: !(Maybe Text)
+    , _plilPageToken :: !(Maybe Text)
+    , _plilPageSize :: !(Maybe (Textual Int32))
+    , _plilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,11 +128,12 @@ projectsLocationsInstancesList pPlilParent_ =
     }
 
 
--- | The project and location for which to retrieve instance information, in
--- the format projects\/{project_id}\/locations\/{location}. In Cloud
--- Filestore, locations map to GCP zones, for example **us-west1-b**. To
--- retrieve instance information for all locations, use \"-\" for the
--- {location} value.
+-- | Required. The project and location for which to retrieve instance
+-- information, in the format
+-- projects\/{project_id}\/locations\/{location}. In Cloud Filestore,
+-- locations map to GCP zones, for example **us-west1-b**. To retrieve
+-- instance information for all locations, use \"-\" for the {location}
+-- value.
 plilParent :: Lens' ProjectsLocationsInstancesList Text
 plilParent
   = lens _plilParent (\ s a -> s{_plilParent = a})

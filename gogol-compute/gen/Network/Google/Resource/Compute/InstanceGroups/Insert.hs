@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
     , igiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.insert@ method which the
 -- 'InstanceGroupsInsert' request conforms to.
@@ -65,9 +65,9 @@ type InstanceGroupsInsertResource =
 data InstanceGroupsInsert =
   InstanceGroupsInsert'
     { _igiRequestId :: !(Maybe Text)
-    , _igiProject   :: !Text
-    , _igiZone      :: !Text
-    , _igiPayload   :: !InstanceGroup
+    , _igiProject :: !Text
+    , _igiZone :: !Text
+    , _igiPayload :: !InstanceGroup
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

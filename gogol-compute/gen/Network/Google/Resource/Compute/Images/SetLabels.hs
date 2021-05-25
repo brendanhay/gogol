@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Images.SetLabels
     , islsResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.setLabels@ method which the
 -- 'ImagesSetLabels' request conforms to.
@@ -63,8 +63,8 @@ type ImagesSetLabelsResource =
 -- /See:/ 'imagesSetLabels' smart constructor.
 data ImagesSetLabels =
   ImagesSetLabels'
-    { _islsProject  :: !Text
-    , _islsPayload  :: !GlobalSetLabelsRequest
+    { _islsProject :: !Text
+    , _islsPayload :: !GlobalSetLabelsRequest
     , _islsResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

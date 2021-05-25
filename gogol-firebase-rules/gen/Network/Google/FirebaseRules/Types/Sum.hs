@@ -16,7 +16,82 @@
 --
 module Network.Google.FirebaseRules.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+-- | The requested runtime executable version. Defaults to
+-- FIREBASE_RULES_EXECUTABLE_V1.
+data ProjectsReleasesGetExecutableExecutableVersion
+    = ReleaseExecutableVersionUnspecified
+      -- ^ @RELEASE_EXECUTABLE_VERSION_UNSPECIFIED@
+      -- Executable format unspecified. Defaults to FIREBASE_RULES_EXECUTABLE_V1
+    | FirebaseRulesExecutableV1
+      -- ^ @FIREBASE_RULES_EXECUTABLE_V1@
+      -- Firebase Rules syntax \'rules2\' executable versions: Custom AST for use
+      -- with Java clients.
+    | FirebaseRulesExecutableV2
+      -- ^ @FIREBASE_RULES_EXECUTABLE_V2@
+      -- CEL-based executable for use with C++ clients.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsReleasesGetExecutableExecutableVersion
+
+instance FromHttpApiData ProjectsReleasesGetExecutableExecutableVersion where
+    parseQueryParam = \case
+        "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED" -> Right ReleaseExecutableVersionUnspecified
+        "FIREBASE_RULES_EXECUTABLE_V1" -> Right FirebaseRulesExecutableV1
+        "FIREBASE_RULES_EXECUTABLE_V2" -> Right FirebaseRulesExecutableV2
+        x -> Left ("Unable to parse ProjectsReleasesGetExecutableExecutableVersion from: " <> x)
+
+instance ToHttpApiData ProjectsReleasesGetExecutableExecutableVersion where
+    toQueryParam = \case
+        ReleaseExecutableVersionUnspecified -> "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED"
+        FirebaseRulesExecutableV1 -> "FIREBASE_RULES_EXECUTABLE_V1"
+        FirebaseRulesExecutableV2 -> "FIREBASE_RULES_EXECUTABLE_V2"
+
+instance FromJSON ProjectsReleasesGetExecutableExecutableVersion where
+    parseJSON = parseJSONText "ProjectsReleasesGetExecutableExecutableVersion"
+
+instance ToJSON ProjectsReleasesGetExecutableExecutableVersion where
+    toJSON = toJSONText
+
+-- | Specifies what should be included in the response.
+data TestCaseExpressionReportLevel
+    = LevelUnspecified
+      -- ^ @LEVEL_UNSPECIFIED@
+      -- No level has been specified. Defaults to \"NONE\" behavior.
+    | None
+      -- ^ @NONE@
+      -- Do not include any additional information.
+    | Full
+      -- ^ @FULL@
+      -- Include detailed reporting on expressions evaluated.
+    | Visited
+      -- ^ @VISITED@
+      -- Only include the expressions that were visited during evaluation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TestCaseExpressionReportLevel
+
+instance FromHttpApiData TestCaseExpressionReportLevel where
+    parseQueryParam = \case
+        "LEVEL_UNSPECIFIED" -> Right LevelUnspecified
+        "NONE" -> Right None
+        "FULL" -> Right Full
+        "VISITED" -> Right Visited
+        x -> Left ("Unable to parse TestCaseExpressionReportLevel from: " <> x)
+
+instance ToHttpApiData TestCaseExpressionReportLevel where
+    toQueryParam = \case
+        LevelUnspecified -> "LEVEL_UNSPECIFIED"
+        None -> "NONE"
+        Full -> "FULL"
+        Visited -> "VISITED"
+
+instance FromJSON TestCaseExpressionReportLevel where
+    parseJSON = parseJSONText "TestCaseExpressionReportLevel"
+
+instance ToJSON TestCaseExpressionReportLevel where
+    toJSON = toJSONText
 
 -- | State of the test.
 data TestResultState
@@ -50,6 +125,41 @@ instance FromJSON TestResultState where
     parseJSON = parseJSONText "TestResultState"
 
 instance ToJSON TestResultState where
+    toJSON = toJSONText
+
+-- | Specifies whether paths (such as request.path) are encoded and how.
+data TestCasePathEncoding
+    = EncodingUnspecified
+      -- ^ @ENCODING_UNSPECIFIED@
+      -- No encoding has been specified. Defaults to \"URL_ENCODED\" behavior.
+    | URLEncoded
+      -- ^ @URL_ENCODED@
+      -- Treats path segments as URL encoded but with non-encoded separators
+      -- (\"\/\"). This is the default behavior.
+    | Plain
+      -- ^ @PLAIN@
+      -- Treats total path as non-URL encoded e.g. raw.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TestCasePathEncoding
+
+instance FromHttpApiData TestCasePathEncoding where
+    parseQueryParam = \case
+        "ENCODING_UNSPECIFIED" -> Right EncodingUnspecified
+        "URL_ENCODED" -> Right URLEncoded
+        "PLAIN" -> Right Plain
+        x -> Left ("Unable to parse TestCasePathEncoding from: " <> x)
+
+instance ToHttpApiData TestCasePathEncoding where
+    toQueryParam = \case
+        EncodingUnspecified -> "ENCODING_UNSPECIFIED"
+        URLEncoded -> "URL_ENCODED"
+        Plain -> "PLAIN"
+
+instance FromJSON TestCasePathEncoding where
+    parseJSON = parseJSONText "TestCasePathEncoding"
+
+instance ToJSON TestCasePathEncoding where
     toJSON = toJSONText
 
 -- | V1 error format.
@@ -157,14 +267,14 @@ instance ToJSON TestCaseExpectation where
 
 -- | The Rules runtime version of the executable.
 data GetReleaseExecutableResponseExecutableVersion
-    = ReleaseExecutableVersionUnspecified
+    = GREREVReleaseExecutableVersionUnspecified
       -- ^ @RELEASE_EXECUTABLE_VERSION_UNSPECIFIED@
       -- Executable format unspecified. Defaults to FIREBASE_RULES_EXECUTABLE_V1
-    | FirebaseRulesExecutableV1
+    | GREREVFirebaseRulesExecutableV1
       -- ^ @FIREBASE_RULES_EXECUTABLE_V1@
       -- Firebase Rules syntax \'rules2\' executable versions: Custom AST for use
       -- with Java clients.
-    | FirebaseRulesExecutableV2
+    | GREREVFirebaseRulesExecutableV2
       -- ^ @FIREBASE_RULES_EXECUTABLE_V2@
       -- CEL-based executable for use with C++ clients.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -173,16 +283,16 @@ instance Hashable GetReleaseExecutableResponseExecutableVersion
 
 instance FromHttpApiData GetReleaseExecutableResponseExecutableVersion where
     parseQueryParam = \case
-        "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED" -> Right ReleaseExecutableVersionUnspecified
-        "FIREBASE_RULES_EXECUTABLE_V1" -> Right FirebaseRulesExecutableV1
-        "FIREBASE_RULES_EXECUTABLE_V2" -> Right FirebaseRulesExecutableV2
+        "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED" -> Right GREREVReleaseExecutableVersionUnspecified
+        "FIREBASE_RULES_EXECUTABLE_V1" -> Right GREREVFirebaseRulesExecutableV1
+        "FIREBASE_RULES_EXECUTABLE_V2" -> Right GREREVFirebaseRulesExecutableV2
         x -> Left ("Unable to parse GetReleaseExecutableResponseExecutableVersion from: " <> x)
 
 instance ToHttpApiData GetReleaseExecutableResponseExecutableVersion where
     toQueryParam = \case
-        ReleaseExecutableVersionUnspecified -> "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED"
-        FirebaseRulesExecutableV1 -> "FIREBASE_RULES_EXECUTABLE_V1"
-        FirebaseRulesExecutableV2 -> "FIREBASE_RULES_EXECUTABLE_V2"
+        GREREVReleaseExecutableVersionUnspecified -> "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED"
+        GREREVFirebaseRulesExecutableV1 -> "FIREBASE_RULES_EXECUTABLE_V1"
+        GREREVFirebaseRulesExecutableV2 -> "FIREBASE_RULES_EXECUTABLE_V2"
 
 instance FromJSON GetReleaseExecutableResponseExecutableVersion where
     parseJSON = parseJSONText "GetReleaseExecutableResponseExecutableVersion"

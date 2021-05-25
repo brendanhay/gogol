@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
     , mraiAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.remarketingAudience.insert@ method which the
 -- 'ManagementRemarketingAudienceInsert' request conforms to.
@@ -62,8 +62,8 @@ type ManagementRemarketingAudienceInsertResource =
 data ManagementRemarketingAudienceInsert =
   ManagementRemarketingAudienceInsert'
     { _mraiWebPropertyId :: !Text
-    , _mraiPayload       :: !RemarketingAudience
-    , _mraiAccountId     :: !Text
+    , _mraiPayload :: !RemarketingAudience
+    , _mraiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetSSLProxies.Insert
     , tspiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetSslProxies.insert@ method which the
 -- 'TargetSSLProxiesInsert' request conforms to.
@@ -63,8 +63,8 @@ type TargetSSLProxiesInsertResource =
 data TargetSSLProxiesInsert =
   TargetSSLProxiesInsert'
     { _tspiRequestId :: !(Maybe Text)
-    , _tspiProject   :: !Text
-    , _tspiPayload   :: !TargetSSLProxy
+    , _tspiProject :: !Text
+    , _tspiPayload :: !TargetSSLProxy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

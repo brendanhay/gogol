@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.GlobalOperations.Delete
     , godOperation
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalOperations.delete@ method which the
 -- 'GlobalOperationsDelete' request conforms to.
@@ -57,7 +57,7 @@ type GlobalOperationsDeleteResource =
 -- /See:/ 'globalOperationsDelete' smart constructor.
 data GlobalOperationsDelete =
   GlobalOperationsDelete'
-    { _godProject   :: !Text
+    { _godProject :: !Text
     , _godOperation :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

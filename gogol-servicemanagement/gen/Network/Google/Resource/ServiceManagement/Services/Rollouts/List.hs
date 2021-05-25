@@ -45,8 +45,8 @@ module Network.Google.Resource.ServiceManagement.Services.Rollouts.List
     , srlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.rollouts.list@ method which the
 -- 'ServicesRolloutsList' request conforms to.
@@ -72,15 +72,15 @@ type ServicesRolloutsListResource =
 -- /See:/ 'servicesRolloutsList' smart constructor.
 data ServicesRolloutsList =
   ServicesRolloutsList'
-    { _srlXgafv          :: !(Maybe Xgafv)
+    { _srlXgafv :: !(Maybe Xgafv)
     , _srlUploadProtocol :: !(Maybe Text)
-    , _srlAccessToken    :: !(Maybe Text)
-    , _srlUploadType     :: !(Maybe Text)
-    , _srlServiceName    :: !Text
-    , _srlFilter         :: !(Maybe Text)
-    , _srlPageToken      :: !(Maybe Text)
-    , _srlPageSize       :: !(Maybe (Textual Int32))
-    , _srlCallback       :: !(Maybe Text)
+    , _srlAccessToken :: !(Maybe Text)
+    , _srlUploadType :: !(Maybe Text)
+    , _srlServiceName :: !Text
+    , _srlFilter :: !(Maybe Text)
+    , _srlPageToken :: !(Maybe Text)
+    , _srlPageSize :: !(Maybe (Textual Int32))
+    , _srlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -145,7 +145,7 @@ srlUploadType
   = lens _srlUploadType
       (\ s a -> s{_srlUploadType = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 srlServiceName :: Lens' ServicesRolloutsList Text
@@ -153,8 +153,8 @@ srlServiceName
   = lens _srlServiceName
       (\ s a -> s{_srlServiceName = a})
 
--- | Use \`filter\` to return subset of rollouts. The following filters are
--- supported: -- To limit the results to only those in
+-- | Required. Use \`filter\` to return subset of rollouts. The following
+-- filters are supported: -- To limit the results to only those in
 -- [status](google.api.servicemanagement.v1.RolloutStatus) \'SUCCESS\', use
 -- filter=\'status=SUCCESS\' -- To limit the results to those in
 -- [status](google.api.servicemanagement.v1.RolloutStatus) \'CANCELLED\' or

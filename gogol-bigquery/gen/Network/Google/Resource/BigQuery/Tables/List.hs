@@ -40,8 +40,8 @@ module Network.Google.Resource.BigQuery.Tables.List
     , tlMaxResults
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.list@ method which the
 -- 'TablesList' request conforms to.
@@ -63,9 +63,9 @@ type TablesListResource =
 -- /See:/ 'tablesList' smart constructor.
 data TablesList =
   TablesList'
-    { _tlDataSetId  :: !Text
-    , _tlPageToken  :: !(Maybe Text)
-    , _tlProjectId  :: !Text
+    { _tlDataSetId :: !Text
+    , _tlPageToken :: !(Maybe Text)
+    , _tlProjectId :: !Text
     , _tlMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

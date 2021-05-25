@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy.Can return NOT_FOUND, INVALID_ARGUMENT, and
+-- PERMISSION_DENIED errors.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.workflowTemplates.setIamPolicy@.
 module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.SetIA
     , prwtsipCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.setIamPolicy@ method which the
 -- 'ProjectsRegionsWorkflowTemplatesSetIAMPolicy' request conforms to.
@@ -62,18 +63,19 @@ type ProjectsRegionsWorkflowTemplatesSetIAMPolicyResource
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy.Can return NOT_FOUND, INVALID_ARGUMENT, and
+-- PERMISSION_DENIED errors.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesSetIAMPolicy' smart constructor.
 data ProjectsRegionsWorkflowTemplatesSetIAMPolicy =
   ProjectsRegionsWorkflowTemplatesSetIAMPolicy'
-    { _prwtsipXgafv          :: !(Maybe Xgafv)
+    { _prwtsipXgafv :: !(Maybe Xgafv)
     , _prwtsipUploadProtocol :: !(Maybe Text)
-    , _prwtsipAccessToken    :: !(Maybe Text)
-    , _prwtsipUploadType     :: !(Maybe Text)
-    , _prwtsipPayload        :: !SetIAMPolicyRequest
-    , _prwtsipResource       :: !Text
-    , _prwtsipCallback       :: !(Maybe Text)
+    , _prwtsipAccessToken :: !(Maybe Text)
+    , _prwtsipUploadType :: !(Maybe Text)
+    , _prwtsipPayload :: !SetIAMPolicyRequest
+    , _prwtsipResource :: !Text
+    , _prwtsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

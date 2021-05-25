@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetMachineResources
     , ismrInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setMachineResources@ method which the
 -- 'InstancesSetMachineResources' request conforms to.
@@ -68,10 +68,10 @@ type InstancesSetMachineResourcesResource =
 data InstancesSetMachineResources =
   InstancesSetMachineResources'
     { _ismrRequestId :: !(Maybe Text)
-    , _ismrProject   :: !Text
-    , _ismrZone      :: !Text
-    , _ismrPayload   :: !InstancesSetMachineResourcesRequest
-    , _ismrInstance  :: !Text
+    , _ismrProject :: !Text
+    , _ismrZone :: !Text
+    , _ismrPayload :: !InstancesSetMachineResourcesRequest
+    , _ismrInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.List
     , mcdlMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customDimensions.list@ method which the
 -- 'ManagementCustomDimensionsList' request conforms to.
@@ -64,9 +64,9 @@ type ManagementCustomDimensionsListResource =
 data ManagementCustomDimensionsList =
   ManagementCustomDimensionsList'
     { _mcdlWebPropertyId :: !Text
-    , _mcdlAccountId     :: !Text
-    , _mcdlStartIndex    :: !(Maybe (Textual Int32))
-    , _mcdlMaxResults    :: !(Maybe (Textual Int32))
+    , _mcdlAccountId :: !Text
+    , _mcdlStartIndex :: !(Maybe (Textual Int32))
+    , _mcdlMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

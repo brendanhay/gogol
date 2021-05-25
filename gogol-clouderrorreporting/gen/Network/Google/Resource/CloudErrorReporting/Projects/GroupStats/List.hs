@@ -22,7 +22,7 @@
 --
 -- Lists the specified groups.
 --
--- /See:/ <https://cloud.google.com/error-reporting/ Stackdriver Error Reporting API Reference> for @clouderrorreporting.projects.groupStats.list@.
+-- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.groupStats.list@.
 module Network.Google.Resource.CloudErrorReporting.Projects.GroupStats.List
     (
     -- * REST Resource
@@ -52,8 +52,8 @@ module Network.Google.Resource.CloudErrorReporting.Projects.GroupStats.List
     , pgslTimeRangePeriod
     ) where
 
-import           Network.Google.CloudErrorReporting.Types
-import           Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouderrorreporting.projects.groupStats.list@ method which the
 -- 'ProjectsGroupStatsList' request conforms to.
@@ -66,19 +66,24 @@ type ProjectsGroupStatsListResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "timedCountDuration" GDuration :>
-                     QueryParam "alignment" Text :>
+                     QueryParam "alignment"
+                       ProjectsGroupStatsListAlignment
+                       :>
                        QueryParams "groupId" Text :>
                          QueryParam "alignmentTime" DateTime' :>
                            QueryParam "pageToken" Text :>
                              QueryParam "pageSize" (Textual Int32) :>
                                QueryParam "serviceFilter.service" Text :>
-                                 QueryParam "order" Text :>
+                                 QueryParam "order" ProjectsGroupStatsListOrder
+                                   :>
                                    QueryParam "serviceFilter.resourceType" Text
                                      :>
                                      QueryParam "callback" Text :>
                                        QueryParam "serviceFilter.version" Text
                                          :>
-                                         QueryParam "timeRange.period" Text :>
+                                         QueryParam "timeRange.period"
+                                           ProjectsGroupStatsListTimeRangePeriod
+                                           :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListGroupStatsResponse
 
@@ -87,23 +92,23 @@ type ProjectsGroupStatsListResource =
 -- /See:/ 'projectsGroupStatsList' smart constructor.
 data ProjectsGroupStatsList =
   ProjectsGroupStatsList'
-    { _pgslXgafv                     :: !(Maybe Xgafv)
-    , _pgslUploadProtocol            :: !(Maybe Text)
-    , _pgslAccessToken               :: !(Maybe Text)
-    , _pgslUploadType                :: !(Maybe Text)
-    , _pgslTimedCountDuration        :: !(Maybe GDuration)
-    , _pgslAlignment                 :: !(Maybe Text)
-    , _pgslProjectName               :: !Text
-    , _pgslGroupId                   :: !(Maybe [Text])
-    , _pgslAlignmentTime             :: !(Maybe DateTime')
-    , _pgslPageToken                 :: !(Maybe Text)
-    , _pgslPageSize                  :: !(Maybe (Textual Int32))
-    , _pgslServiceFilterService      :: !(Maybe Text)
-    , _pgslOrder                     :: !(Maybe Text)
+    { _pgslXgafv :: !(Maybe Xgafv)
+    , _pgslUploadProtocol :: !(Maybe Text)
+    , _pgslAccessToken :: !(Maybe Text)
+    , _pgslUploadType :: !(Maybe Text)
+    , _pgslTimedCountDuration :: !(Maybe GDuration)
+    , _pgslAlignment :: !(Maybe ProjectsGroupStatsListAlignment)
+    , _pgslProjectName :: !Text
+    , _pgslGroupId :: !(Maybe [Text])
+    , _pgslAlignmentTime :: !(Maybe DateTime')
+    , _pgslPageToken :: !(Maybe Text)
+    , _pgslPageSize :: !(Maybe (Textual Int32))
+    , _pgslServiceFilterService :: !(Maybe Text)
+    , _pgslOrder :: !(Maybe ProjectsGroupStatsListOrder)
     , _pgslServiceFilterResourceType :: !(Maybe Text)
-    , _pgslCallback                  :: !(Maybe Text)
-    , _pgslServiceFilterVersion      :: !(Maybe Text)
-    , _pgslTimeRangePeriod           :: !(Maybe Text)
+    , _pgslCallback :: !(Maybe Text)
+    , _pgslServiceFilterVersion :: !(Maybe Text)
+    , _pgslTimeRangePeriod :: !(Maybe ProjectsGroupStatsListTimeRangePeriod)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -193,7 +198,7 @@ pgslUploadType
   = lens _pgslUploadType
       (\ s a -> s{_pgslUploadType = a})
 
--- | [Optional] The preferred duration for a single returned \`TimedCount\`.
+-- | Optional. The preferred duration for a single returned \`TimedCount\`.
 -- If not set, no timed counts are returned.
 pgslTimedCountDuration :: Lens' ProjectsGroupStatsList (Maybe Scientific)
 pgslTimedCountDuration
@@ -201,30 +206,32 @@ pgslTimedCountDuration
       (\ s a -> s{_pgslTimedCountDuration = a})
       . mapping _GDuration
 
--- | [Optional] The alignment of the timed counts to be returned. Default is
+-- | Optional. The alignment of the timed counts to be returned. Default is
 -- \`ALIGNMENT_EQUAL_AT_END\`.
-pgslAlignment :: Lens' ProjectsGroupStatsList (Maybe Text)
+pgslAlignment :: Lens' ProjectsGroupStatsList (Maybe ProjectsGroupStatsListAlignment)
 pgslAlignment
   = lens _pgslAlignment
       (\ s a -> s{_pgslAlignment = a})
 
--- | [Required] The resource name of the Google Cloud Platform project.
--- Written as 'projects\/' plus the
--- <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID>.
--- Example: 'projects\/my-project-123'.
+-- | Required. The resource name of the Google Cloud Platform project.
+-- Written as \`projects\/{projectID}\` or \`projects\/{projectNumber}\`,
+-- where \`{projectID}\` and \`{projectNumber}\` can be found in the
+-- [Google Cloud
+-- Console](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- Examples: \`projects\/my-project-123\`, \`projects\/5551234\`.
 pgslProjectName :: Lens' ProjectsGroupStatsList Text
 pgslProjectName
   = lens _pgslProjectName
       (\ s a -> s{_pgslProjectName = a})
 
--- | [Optional] List all 'ErrorGroupStats' with these IDs.
+-- | Optional. List all ErrorGroupStats with these IDs.
 pgslGroupId :: Lens' ProjectsGroupStatsList [Text]
 pgslGroupId
   = lens _pgslGroupId (\ s a -> s{_pgslGroupId = a}) .
       _Default
       . _Coerce
 
--- | [Optional] Time where the timed counts shall be aligned if rounded
+-- | Optional. Time where the timed counts shall be aligned if rounded
 -- alignment is chosen. Default is 00:00 UTC.
 pgslAlignmentTime :: Lens' ProjectsGroupStatsList (Maybe UTCTime)
 pgslAlignmentTime
@@ -232,35 +239,35 @@ pgslAlignmentTime
       (\ s a -> s{_pgslAlignmentTime = a})
       . mapping _DateTime
 
--- | [Optional] A \`next_page_token\` provided by a previous response. To
--- view additional results, pass this token along with the identical query
+-- | Optional. A \`next_page_token\` provided by a previous response. To view
+-- additional results, pass this token along with the identical query
 -- parameters as the first request.
 pgslPageToken :: Lens' ProjectsGroupStatsList (Maybe Text)
 pgslPageToken
   = lens _pgslPageToken
       (\ s a -> s{_pgslPageToken = a})
 
--- | [Optional] The maximum number of results to return per response. Default
+-- | Optional. The maximum number of results to return per response. Default
 -- is 20.
 pgslPageSize :: Lens' ProjectsGroupStatsList (Maybe Int32)
 pgslPageSize
   = lens _pgslPageSize (\ s a -> s{_pgslPageSize = a})
       . mapping _Coerce
 
--- | [Optional] The exact value to match against
+-- | Optional. The exact value to match against
 -- [\`ServiceContext.service\`](\/error-reporting\/reference\/rest\/v1beta1\/ServiceContext#FIELDS.service).
 pgslServiceFilterService :: Lens' ProjectsGroupStatsList (Maybe Text)
 pgslServiceFilterService
   = lens _pgslServiceFilterService
       (\ s a -> s{_pgslServiceFilterService = a})
 
--- | [Optional] The sort order in which the results are returned. Default is
+-- | Optional. The sort order in which the results are returned. Default is
 -- \`COUNT_DESC\`.
-pgslOrder :: Lens' ProjectsGroupStatsList (Maybe Text)
+pgslOrder :: Lens' ProjectsGroupStatsList (Maybe ProjectsGroupStatsListOrder)
 pgslOrder
   = lens _pgslOrder (\ s a -> s{_pgslOrder = a})
 
--- | [Optional] The exact value to match against
+-- | Optional. The exact value to match against
 -- [\`ServiceContext.resource_type\`](\/error-reporting\/reference\/rest\/v1beta1\/ServiceContext#FIELDS.resource_type).
 pgslServiceFilterResourceType :: Lens' ProjectsGroupStatsList (Maybe Text)
 pgslServiceFilterResourceType
@@ -272,7 +279,7 @@ pgslCallback :: Lens' ProjectsGroupStatsList (Maybe Text)
 pgslCallback
   = lens _pgslCallback (\ s a -> s{_pgslCallback = a})
 
--- | [Optional] The exact value to match against
+-- | Optional. The exact value to match against
 -- [\`ServiceContext.version\`](\/error-reporting\/reference\/rest\/v1beta1\/ServiceContext#FIELDS.version).
 pgslServiceFilterVersion :: Lens' ProjectsGroupStatsList (Maybe Text)
 pgslServiceFilterVersion
@@ -280,7 +287,7 @@ pgslServiceFilterVersion
       (\ s a -> s{_pgslServiceFilterVersion = a})
 
 -- | Restricts the query to the specified time range.
-pgslTimeRangePeriod :: Lens' ProjectsGroupStatsList (Maybe Text)
+pgslTimeRangePeriod :: Lens' ProjectsGroupStatsList (Maybe ProjectsGroupStatsListTimeRangePeriod)
 pgslTimeRangePeriod
   = lens _pgslTimeRangePeriod
       (\ s a -> s{_pgslTimeRangePeriod = a})

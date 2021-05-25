@@ -42,8 +42,8 @@ module Network.Google.Resource.FusionTables.Table.ReplaceRows
     , trrIsStrict
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.replaceRows@ method which the
 -- 'TableReplaceRows' request conforms to.
@@ -82,11 +82,11 @@ type TableReplaceRowsResource =
 data TableReplaceRows =
   TableReplaceRows'
     { _trrStartLine :: !(Maybe (Textual Int32))
-    , _trrEndLine   :: !(Maybe (Textual Int32))
-    , _trrTableId   :: !Text
+    , _trrEndLine :: !(Maybe (Textual Int32))
+    , _trrTableId :: !Text
     , _trrDelimiter :: !(Maybe Text)
-    , _trrEncoding  :: !(Maybe Text)
-    , _trrIsStrict  :: !(Maybe Bool)
+    , _trrEncoding :: !(Maybe Text)
+    , _trrIsStrict :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

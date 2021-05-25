@@ -39,8 +39,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
     , buBillingId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.budget.update@ method which the
 -- 'BudgetUpdate' request conforms to.
@@ -59,7 +59,7 @@ type BudgetUpdateResource =
 -- /See:/ 'budgetUpdate' smart constructor.
 data BudgetUpdate =
   BudgetUpdate'
-    { _buPayload   :: !Budget
+    { _buPayload :: !Budget
     , _buAccountId :: !(Textual Int64)
     , _buBillingId :: !(Textual Int64)
     }

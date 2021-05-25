@@ -16,7 +16,7 @@
 --
 module Network.Google.CloudProFiler.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Type of profile. For offline mode, this must be specified when creating
 -- the profile. For online mode it is assigned and returned by the server.
@@ -111,4 +111,68 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+data CreateProFileRequestProFileTypeItem
+    = CPFRPFTIProFileTypeUnspecified
+      -- ^ @PROFILE_TYPE_UNSPECIFIED@
+      -- Unspecified profile type.
+    | CPFRPFTICPU
+      -- ^ @CPU@
+      -- Thread CPU time sampling.
+    | CPFRPFTIWall
+      -- ^ @WALL@
+      -- Wallclock time sampling. More expensive as stops all threads.
+    | CPFRPFTIHeap
+      -- ^ @HEAP@
+      -- In-use heap profile. Represents a snapshot of the allocations that are
+      -- live at the time of the profiling.
+    | CPFRPFTIThreads
+      -- ^ @THREADS@
+      -- Single-shot collection of all thread stacks.
+    | CPFRPFTIContention
+      -- ^ @CONTENTION@
+      -- Synchronization contention profile.
+    | CPFRPFTIPeakHeap
+      -- ^ @PEAK_HEAP@
+      -- Peak heap profile.
+    | CPFRPFTIHeapAlloc
+      -- ^ @HEAP_ALLOC@
+      -- Heap allocation profile. It represents the aggregation of all
+      -- allocations made over the duration of the profile. All allocations are
+      -- included, including those that might have been freed by the end of the
+      -- profiling interval. The profile is in particular useful for garbage
+      -- collecting languages to understand which parts of the code create most
+      -- of the garbage collection pressure to see if those can be optimized.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreateProFileRequestProFileTypeItem
+
+instance FromHttpApiData CreateProFileRequestProFileTypeItem where
+    parseQueryParam = \case
+        "PROFILE_TYPE_UNSPECIFIED" -> Right CPFRPFTIProFileTypeUnspecified
+        "CPU" -> Right CPFRPFTICPU
+        "WALL" -> Right CPFRPFTIWall
+        "HEAP" -> Right CPFRPFTIHeap
+        "THREADS" -> Right CPFRPFTIThreads
+        "CONTENTION" -> Right CPFRPFTIContention
+        "PEAK_HEAP" -> Right CPFRPFTIPeakHeap
+        "HEAP_ALLOC" -> Right CPFRPFTIHeapAlloc
+        x -> Left ("Unable to parse CreateProFileRequestProFileTypeItem from: " <> x)
+
+instance ToHttpApiData CreateProFileRequestProFileTypeItem where
+    toQueryParam = \case
+        CPFRPFTIProFileTypeUnspecified -> "PROFILE_TYPE_UNSPECIFIED"
+        CPFRPFTICPU -> "CPU"
+        CPFRPFTIWall -> "WALL"
+        CPFRPFTIHeap -> "HEAP"
+        CPFRPFTIThreads -> "THREADS"
+        CPFRPFTIContention -> "CONTENTION"
+        CPFRPFTIPeakHeap -> "PEAK_HEAP"
+        CPFRPFTIHeapAlloc -> "HEAP_ALLOC"
+
+instance FromJSON CreateProFileRequestProFileTypeItem where
+    parseJSON = parseJSONText "CreateProFileRequestProFileTypeItem"
+
+instance ToJSON CreateProFileRequestProFileTypeItem where
     toJSON = toJSONText

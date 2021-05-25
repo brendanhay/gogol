@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Template.Get
     , temeTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.get@ method which the
 -- 'TemplateGet' request conforms to.
@@ -57,7 +57,7 @@ type TemplateGetResource =
 data TemplateGet =
   TemplateGet'
     { _temeTemplateId :: !(Textual Int32)
-    , _temeTableId    :: !Text
+    , _temeTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

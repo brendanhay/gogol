@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Template.List
     , tllMaxResults
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.list@ method which the
 -- 'TemplateList'' request conforms to.
@@ -58,8 +58,8 @@ type TemplateListResource =
 -- /See:/ 'templateList'' smart constructor.
 data TemplateList' =
   TemplateList''
-    { _tllPageToken  :: !(Maybe Text)
-    , _tllTableId    :: !Text
+    { _tllPageToken :: !(Maybe Text)
+    , _tllTableId :: !Text
     , _tllMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -16,7 +16,7 @@
 --
 module Network.Google.ServiceManagement.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Whether the measurement is an integer, a floating-point number, etc.
 -- Some combinations of \`metric_kind\` and \`value_type\` might not be
@@ -127,6 +127,70 @@ instance FromJSON BackendRulePathTranslation where
     parseJSON = parseJSONText "BackendRulePathTranslation"
 
 instance ToJSON BackendRulePathTranslation where
+    toJSON = toJSONText
+
+-- | Specifies which parts of the Service Config should be returned in the
+-- response.
+data ServicesConfigsGetView
+    = Basic
+      -- ^ @BASIC@
+      -- Server response includes all fields except SourceInfo.
+    | Full
+      -- ^ @FULL@
+      -- Server response includes all fields including SourceInfo. SourceFiles
+      -- are of type \'google.api.servicemanagement.v1.ConfigFile\' and are only
+      -- available for configs created using the SubmitConfigSource method.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServicesConfigsGetView
+
+instance FromHttpApiData ServicesConfigsGetView where
+    parseQueryParam = \case
+        "BASIC" -> Right Basic
+        "FULL" -> Right Full
+        x -> Left ("Unable to parse ServicesConfigsGetView from: " <> x)
+
+instance ToHttpApiData ServicesConfigsGetView where
+    toQueryParam = \case
+        Basic -> "BASIC"
+        Full -> "FULL"
+
+instance FromJSON ServicesConfigsGetView where
+    parseJSON = parseJSONText "ServicesConfigsGetView"
+
+instance ToJSON ServicesConfigsGetView where
+    toJSON = toJSONText
+
+-- | Specifies which parts of the Service Config should be returned in the
+-- response.
+data ServicesGetConfigView
+    = SGCVBasic
+      -- ^ @BASIC@
+      -- Server response includes all fields except SourceInfo.
+    | SGCVFull
+      -- ^ @FULL@
+      -- Server response includes all fields including SourceInfo. SourceFiles
+      -- are of type \'google.api.servicemanagement.v1.ConfigFile\' and are only
+      -- available for configs created using the SubmitConfigSource method.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServicesGetConfigView
+
+instance FromHttpApiData ServicesGetConfigView where
+    parseQueryParam = \case
+        "BASIC" -> Right SGCVBasic
+        "FULL" -> Right SGCVFull
+        x -> Left ("Unable to parse ServicesGetConfigView from: " <> x)
+
+instance ToHttpApiData ServicesGetConfigView where
+    toQueryParam = \case
+        SGCVBasic -> "BASIC"
+        SGCVFull -> "FULL"
+
+instance FromJSON ServicesGetConfigView where
+    parseJSON = parseJSONText "ServicesGetConfigView"
+
+instance ToJSON ServicesGetConfigView where
     toJSON = toJSONText
 
 -- | The field type.
@@ -272,11 +336,18 @@ instance FromJSON EnumSyntax where
 instance ToJSON EnumSyntax where
     toJSON = toJSONText
 
--- | The launch stage of the metric definition.
+-- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
 data MetricDescriptorMetadataLaunchStage
     = LaunchStageUnspecified
       -- ^ @LAUNCH_STAGE_UNSPECIFIED@
       -- Do not use this default value.
+    | Unimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | Prelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
     | EarlyAccess
       -- ^ @EARLY_ACCESS@
       -- Early Access features are limited to a closed group of testers. To use
@@ -290,7 +361,7 @@ data MetricDescriptorMetadataLaunchStage
       -- cleared for widespread use. By Alpha, all significant design issues are
       -- resolved and we are in the process of verifying functionality. Alpha
       -- customers need to apply for access, agree to applicable terms, and have
-      -- their projects whitelisted. Alpha releases don’t have to be feature
+      -- their projects allowlisted. Alpha releases don’t have to be feature
       -- complete, no SLAs are provided, and there are no technical support
       -- obligations, but they will be far enough along that customers can
       -- actually use them in test environments or for limited-use tests -- just
@@ -320,6 +391,8 @@ instance Hashable MetricDescriptorMetadataLaunchStage
 instance FromHttpApiData MetricDescriptorMetadataLaunchStage where
     parseQueryParam = \case
         "LAUNCH_STAGE_UNSPECIFIED" -> Right LaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right Unimplemented
+        "PRELAUNCH" -> Right Prelaunch
         "EARLY_ACCESS" -> Right EarlyAccess
         "ALPHA" -> Right Alpha
         "BETA" -> Right Beta
@@ -330,6 +403,8 @@ instance FromHttpApiData MetricDescriptorMetadataLaunchStage where
 instance ToHttpApiData MetricDescriptorMetadataLaunchStage where
     toQueryParam = \case
         LaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        Unimplemented -> "UNIMPLEMENTED"
+        Prelaunch -> "PRELAUNCH"
         EarlyAccess -> "EARLY_ACCESS"
         Alpha -> "ALPHA"
         Beta -> "BETA"
@@ -737,6 +812,87 @@ instance FromJSON ConfigChangeChangeType where
 instance ToJSON ConfigChangeChangeType where
     toJSON = toJSONText
 
+-- | Optional. The launch stage of the monitored resource definition.
+data MonitoredResourceDescriptorLaunchStage
+    = MRDLSLaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | MRDLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MRDLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MRDLSEarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | MRDLSAlpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | MRDLSBeta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | MRDLSGA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | MRDLSDeprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our [Terms of
+      -- Service](https:\/\/cloud.google.com\/terms\/) and the [Google Cloud
+      -- Platform Subject to the Deprecation
+      -- Policy](https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MonitoredResourceDescriptorLaunchStage
+
+instance FromHttpApiData MonitoredResourceDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MRDLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MRDLSUnimplemented
+        "PRELAUNCH" -> Right MRDLSPrelaunch
+        "EARLY_ACCESS" -> Right MRDLSEarlyAccess
+        "ALPHA" -> Right MRDLSAlpha
+        "BETA" -> Right MRDLSBeta
+        "GA" -> Right MRDLSGA
+        "DEPRECATED" -> Right MRDLSDeprecated
+        x -> Left ("Unable to parse MonitoredResourceDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData MonitoredResourceDescriptorLaunchStage where
+    toQueryParam = \case
+        MRDLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MRDLSUnimplemented -> "UNIMPLEMENTED"
+        MRDLSPrelaunch -> "PRELAUNCH"
+        MRDLSEarlyAccess -> "EARLY_ACCESS"
+        MRDLSAlpha -> "ALPHA"
+        MRDLSBeta -> "BETA"
+        MRDLSGA -> "GA"
+        MRDLSDeprecated -> "DEPRECATED"
+
+instance FromJSON MonitoredResourceDescriptorLaunchStage where
+    parseJSON = parseJSONText "MonitoredResourceDescriptorLaunchStage"
+
+instance ToJSON MonitoredResourceDescriptorLaunchStage where
+    toJSON = toJSONText
+
 -- | The field cardinality.
 data FieldCardinality
     = CardinalityUnknown
@@ -847,4 +1003,85 @@ instance FromJSON MethodSyntax where
     parseJSON = parseJSONText "MethodSyntax"
 
 instance ToJSON MethodSyntax where
+    toJSON = toJSONText
+
+-- | Optional. The launch stage of the metric definition.
+data MetricDescriptorLaunchStage
+    = MDLSLaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | MDLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MDLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MDLSEarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | MDLSAlpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | MDLSBeta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | MDLSGA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | MDLSDeprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our [Terms of
+      -- Service](https:\/\/cloud.google.com\/terms\/) and the [Google Cloud
+      -- Platform Subject to the Deprecation
+      -- Policy](https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MetricDescriptorLaunchStage
+
+instance FromHttpApiData MetricDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MDLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MDLSUnimplemented
+        "PRELAUNCH" -> Right MDLSPrelaunch
+        "EARLY_ACCESS" -> Right MDLSEarlyAccess
+        "ALPHA" -> Right MDLSAlpha
+        "BETA" -> Right MDLSBeta
+        "GA" -> Right MDLSGA
+        "DEPRECATED" -> Right MDLSDeprecated
+        x -> Left ("Unable to parse MetricDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData MetricDescriptorLaunchStage where
+    toQueryParam = \case
+        MDLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MDLSUnimplemented -> "UNIMPLEMENTED"
+        MDLSPrelaunch -> "PRELAUNCH"
+        MDLSEarlyAccess -> "EARLY_ACCESS"
+        MDLSAlpha -> "ALPHA"
+        MDLSBeta -> "BETA"
+        MDLSGA -> "GA"
+        MDLSDeprecated -> "DEPRECATED"
+
+instance FromJSON MetricDescriptorLaunchStage where
+    parseJSON = parseJSONText "MetricDescriptorLaunchStage"
+
+instance ToJSON MetricDescriptorLaunchStage where
     toJSON = toJSONText

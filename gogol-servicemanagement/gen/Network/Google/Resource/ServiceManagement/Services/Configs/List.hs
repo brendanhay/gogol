@@ -44,8 +44,8 @@ module Network.Google.Resource.ServiceManagement.Services.Configs.List
     , sclCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.configs.list@ method which the
 -- 'ServicesConfigsList' request conforms to.
@@ -70,14 +70,14 @@ type ServicesConfigsListResource =
 -- /See:/ 'servicesConfigsList' smart constructor.
 data ServicesConfigsList =
   ServicesConfigsList'
-    { _sclXgafv          :: !(Maybe Xgafv)
+    { _sclXgafv :: !(Maybe Xgafv)
     , _sclUploadProtocol :: !(Maybe Text)
-    , _sclAccessToken    :: !(Maybe Text)
-    , _sclUploadType     :: !(Maybe Text)
-    , _sclServiceName    :: !Text
-    , _sclPageToken      :: !(Maybe Text)
-    , _sclPageSize       :: !(Maybe (Textual Int32))
-    , _sclCallback       :: !(Maybe Text)
+    , _sclAccessToken :: !(Maybe Text)
+    , _sclUploadType :: !(Maybe Text)
+    , _sclServiceName :: !Text
+    , _sclPageToken :: !(Maybe Text)
+    , _sclPageSize :: !(Maybe (Textual Int32))
+    , _sclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,7 +139,7 @@ sclUploadType
   = lens _sclUploadType
       (\ s a -> s{_sclUploadType = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 sclServiceName :: Lens' ServicesConfigsList Text

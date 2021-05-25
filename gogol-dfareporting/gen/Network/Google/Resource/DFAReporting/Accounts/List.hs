@@ -23,7 +23,7 @@
 -- Retrieves the list of accounts, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accounts.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accounts.list@.
 module Network.Google.Resource.DFAReporting.Accounts.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.Accounts.List
     , AccountsList
 
     -- * Request Lenses
+    , accXgafv
+    , accUploadProtocol
+    , accAccessToken
     , accSearchString
+    , accUploadType
     , accIds
     , accProFileId
     , accSortOrder
@@ -42,28 +46,34 @@ module Network.Google.Resource.DFAReporting.Accounts.List
     , accPageToken
     , accSortField
     , accMaxResults
+    , accCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" (Textual Int64) :>
-                   QueryParam "sortOrder" AccountsListSortOrder :>
-                     QueryParam "active" Bool :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField" AccountsListSortField :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] AccountsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParam "sortOrder" AccountsListSortOrder :>
+                             QueryParam "active" Bool :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" AccountsListSortField :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] AccountsListResponse
 
 -- | Retrieves the list of accounts, possibly filtered. This method supports
 -- paging.
@@ -71,14 +81,19 @@ type AccountsListResource =
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList =
   AccountsList'
-    { _accSearchString :: !(Maybe Text)
-    , _accIds          :: !(Maybe [Textual Int64])
-    , _accProFileId    :: !(Textual Int64)
-    , _accSortOrder    :: !AccountsListSortOrder
-    , _accActive       :: !(Maybe Bool)
-    , _accPageToken    :: !(Maybe Text)
-    , _accSortField    :: !AccountsListSortField
-    , _accMaxResults   :: !(Textual Int32)
+    { _accXgafv :: !(Maybe Xgafv)
+    , _accUploadProtocol :: !(Maybe Text)
+    , _accAccessToken :: !(Maybe Text)
+    , _accSearchString :: !(Maybe Text)
+    , _accUploadType :: !(Maybe Text)
+    , _accIds :: !(Maybe [Textual Int64])
+    , _accProFileId :: !(Textual Int64)
+    , _accSortOrder :: !AccountsListSortOrder
+    , _accActive :: !(Maybe Bool)
+    , _accPageToken :: !(Maybe Text)
+    , _accSortField :: !AccountsListSortField
+    , _accMaxResults :: !(Textual Int32)
+    , _accCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,7 +102,15 @@ data AccountsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'accXgafv'
+--
+-- * 'accUploadProtocol'
+--
+-- * 'accAccessToken'
+--
 -- * 'accSearchString'
+--
+-- * 'accUploadType'
 --
 -- * 'accIds'
 --
@@ -102,12 +125,18 @@ data AccountsList =
 -- * 'accSortField'
 --
 -- * 'accMaxResults'
+--
+-- * 'accCallback'
 accountsList
     :: Int64 -- ^ 'accProFileId'
     -> AccountsList
 accountsList pAccProFileId_ =
   AccountsList'
-    { _accSearchString = Nothing
+    { _accXgafv = Nothing
+    , _accUploadProtocol = Nothing
+    , _accAccessToken = Nothing
+    , _accSearchString = Nothing
+    , _accUploadType = Nothing
     , _accIds = Nothing
     , _accProFileId = _Coerce # pAccProFileId_
     , _accSortOrder = AAscending
@@ -115,8 +144,25 @@ accountsList pAccProFileId_ =
     , _accPageToken = Nothing
     , _accSortField = AID
     , _accMaxResults = 1000
+    , _accCallback = Nothing
     }
 
+
+-- | V1 error format.
+accXgafv :: Lens' AccountsList (Maybe Xgafv)
+accXgafv = lens _accXgafv (\ s a -> s{_accXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+accUploadProtocol :: Lens' AccountsList (Maybe Text)
+accUploadProtocol
+  = lens _accUploadProtocol
+      (\ s a -> s{_accUploadProtocol = a})
+
+-- | OAuth access token.
+accAccessToken :: Lens' AccountsList (Maybe Text)
+accAccessToken
+  = lens _accAccessToken
+      (\ s a -> s{_accAccessToken = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"account*2015\" will return objects with names like
@@ -129,6 +175,12 @@ accSearchString :: Lens' AccountsList (Maybe Text)
 accSearchString
   = lens _accSearchString
       (\ s a -> s{_accSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+accUploadType :: Lens' AccountsList (Maybe Text)
+accUploadType
+  = lens _accUploadType
+      (\ s a -> s{_accUploadType = a})
 
 -- | Select only accounts with these IDs.
 accIds :: Lens' AccountsList [Int64]
@@ -170,18 +222,27 @@ accMaxResults
       (\ s a -> s{_accMaxResults = a})
       . _Coerce
 
+-- | JSONP
+accCallback :: Lens' AccountsList (Maybe Text)
+accCallback
+  = lens _accCallback (\ s a -> s{_accCallback = a})
+
 instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse
         type Scopes AccountsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountsList'{..}
-          = go _accProFileId _accSearchString
+          = go _accProFileId _accXgafv _accUploadProtocol
+              _accAccessToken
+              _accSearchString
+              _accUploadType
               (_accIds ^. _Default)
               (Just _accSortOrder)
               _accActive
               _accPageToken
               (Just _accSortField)
               (Just _accMaxResults)
+              _accCallback
               (Just AltJSON)
               dFAReportingService
           where go

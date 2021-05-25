@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Comments.Update
     , cuCommentId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.update@ method which the
 -- 'CommentsUpdate' request conforms to.
@@ -58,8 +58,8 @@ type CommentsUpdateResource =
 -- /See:/ 'commentsUpdate' smart constructor.
 data CommentsUpdate =
   CommentsUpdate'
-    { _cuPayload   :: !Comment
-    , _cuFileId    :: !Text
+    { _cuPayload :: !Comment
+    , _cuFileId :: !Text
     , _cuCommentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

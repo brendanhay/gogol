@@ -49,8 +49,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
     , rigmrRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.resize@ method which the
 -- 'RegionInstanceGroupManagersResize' request conforms to.
@@ -82,11 +82,11 @@ type RegionInstanceGroupManagersResizeResource =
 -- /See:/ 'regionInstanceGroupManagersResize' smart constructor.
 data RegionInstanceGroupManagersResize =
   RegionInstanceGroupManagersResize'
-    { _rigmrRequestId            :: !(Maybe Text)
-    , _rigmrProject              :: !Text
-    , _rigmrSize                 :: !(Textual Int32)
+    { _rigmrRequestId :: !(Maybe Text)
+    , _rigmrProject :: !Text
+    , _rigmrSize :: !(Textual Int32)
     , _rigmrInstanceGroupManager :: !Text
-    , _rigmrRegion               :: !Text
+    , _rigmrRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

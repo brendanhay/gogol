@@ -23,7 +23,7 @@
 -- Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.patch@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.patch@.
 module Network.Google.Resource.Tasks.TaskLists.Patch
     (
     -- * REST Resource
@@ -34,12 +34,17 @@ module Network.Google.Resource.Tasks.TaskLists.Patch
     , TaskListsPatch
 
     -- * Request Lenses
+    , tlpXgafv
+    , tlpUploadProtocol
+    , tlpAccessToken
+    , tlpUploadType
     , tlpPayload
     , tlpTaskList
+    , tlpCallback
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.patch@ method which the
 -- 'TaskListsPatch' request conforms to.
@@ -50,8 +55,13 @@ type TaskListsPatchResource =
            "@me" :>
              "lists" :>
                Capture "tasklist" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] TaskList :> Patch '[JSON] TaskList
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] TaskList :> Patch '[JSON] TaskList
 
 -- | Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.
@@ -59,8 +69,13 @@ type TaskListsPatchResource =
 -- /See:/ 'taskListsPatch' smart constructor.
 data TaskListsPatch =
   TaskListsPatch'
-    { _tlpPayload  :: !TaskList
+    { _tlpXgafv :: !(Maybe Xgafv)
+    , _tlpUploadProtocol :: !(Maybe Text)
+    , _tlpAccessToken :: !(Maybe Text)
+    , _tlpUploadType :: !(Maybe Text)
+    , _tlpPayload :: !TaskList
     , _tlpTaskList :: !Text
+    , _tlpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,16 +84,56 @@ data TaskListsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tlpXgafv'
+--
+-- * 'tlpUploadProtocol'
+--
+-- * 'tlpAccessToken'
+--
+-- * 'tlpUploadType'
+--
 -- * 'tlpPayload'
 --
 -- * 'tlpTaskList'
+--
+-- * 'tlpCallback'
 taskListsPatch
     :: TaskList -- ^ 'tlpPayload'
     -> Text -- ^ 'tlpTaskList'
     -> TaskListsPatch
 taskListsPatch pTlpPayload_ pTlpTaskList_ =
-  TaskListsPatch' {_tlpPayload = pTlpPayload_, _tlpTaskList = pTlpTaskList_}
+  TaskListsPatch'
+    { _tlpXgafv = Nothing
+    , _tlpUploadProtocol = Nothing
+    , _tlpAccessToken = Nothing
+    , _tlpUploadType = Nothing
+    , _tlpPayload = pTlpPayload_
+    , _tlpTaskList = pTlpTaskList_
+    , _tlpCallback = Nothing
+    }
 
+
+-- | V1 error format.
+tlpXgafv :: Lens' TaskListsPatch (Maybe Xgafv)
+tlpXgafv = lens _tlpXgafv (\ s a -> s{_tlpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tlpUploadProtocol :: Lens' TaskListsPatch (Maybe Text)
+tlpUploadProtocol
+  = lens _tlpUploadProtocol
+      (\ s a -> s{_tlpUploadProtocol = a})
+
+-- | OAuth access token.
+tlpAccessToken :: Lens' TaskListsPatch (Maybe Text)
+tlpAccessToken
+  = lens _tlpAccessToken
+      (\ s a -> s{_tlpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tlpUploadType :: Lens' TaskListsPatch (Maybe Text)
+tlpUploadType
+  = lens _tlpUploadType
+      (\ s a -> s{_tlpUploadType = a})
 
 -- | Multipart request metadata.
 tlpPayload :: Lens' TaskListsPatch TaskList
@@ -90,12 +145,22 @@ tlpTaskList :: Lens' TaskListsPatch Text
 tlpTaskList
   = lens _tlpTaskList (\ s a -> s{_tlpTaskList = a})
 
+-- | JSONP
+tlpCallback :: Lens' TaskListsPatch (Maybe Text)
+tlpCallback
+  = lens _tlpCallback (\ s a -> s{_tlpCallback = a})
+
 instance GoogleRequest TaskListsPatch where
         type Rs TaskListsPatch = TaskList
         type Scopes TaskListsPatch =
              '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsPatch'{..}
-          = go _tlpTaskList (Just AltJSON) _tlpPayload
+          = go _tlpTaskList _tlpXgafv _tlpUploadProtocol
+              _tlpAccessToken
+              _tlpUploadType
+              _tlpCallback
+              (Just AltJSON)
+              _tlpPayload
               appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsPatchResource)

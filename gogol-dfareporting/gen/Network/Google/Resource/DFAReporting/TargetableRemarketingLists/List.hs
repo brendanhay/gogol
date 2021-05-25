@@ -23,7 +23,7 @@
 -- Retrieves a list of targetable remarketing lists, possibly filtered.
 -- This method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetableRemarketingLists.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.targetableRemarketingLists.list@.
 module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
     , TargetableRemarketingListsList
 
     -- * Request Lenses
+    , trllXgafv
+    , trllUploadProtocol
+    , trllAccessToken
     , trllAdvertiserId
+    , trllUploadType
     , trllProFileId
     , trllSortOrder
     , trllActive
@@ -42,33 +46,39 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
     , trllPageToken
     , trllSortField
     , trllMaxResults
+    , trllCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.targetableRemarketingLists.list@ method which the
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
                QueryParam "advertiserId" (Textual Int64) :>
-                 QueryParam "sortOrder"
-                   TargetableRemarketingListsListSortOrder
-                   :>
-                   QueryParam "active" Bool :>
-                     QueryParam "name" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField"
-                           TargetableRemarketingListsListSortField
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "sortOrder"
+                           TargetableRemarketingListsListSortOrder
                            :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON]
-                                 TargetableRemarketingListsListResponse
+                           QueryParam "active" Bool :>
+                             QueryParam "name" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField"
+                                   TargetableRemarketingListsListSortField
+                                   :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON]
+                                           TargetableRemarketingListsListResponse
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 -- This method supports paging.
@@ -76,14 +86,19 @@ type TargetableRemarketingListsListResource =
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
 data TargetableRemarketingListsList =
   TargetableRemarketingListsList'
-    { _trllAdvertiserId :: !(Textual Int64)
-    , _trllProFileId    :: !(Textual Int64)
-    , _trllSortOrder    :: !TargetableRemarketingListsListSortOrder
-    , _trllActive       :: !(Maybe Bool)
-    , _trllName         :: !(Maybe Text)
-    , _trllPageToken    :: !(Maybe Text)
-    , _trllSortField    :: !TargetableRemarketingListsListSortField
-    , _trllMaxResults   :: !(Textual Int32)
+    { _trllXgafv :: !(Maybe Xgafv)
+    , _trllUploadProtocol :: !(Maybe Text)
+    , _trllAccessToken :: !(Maybe Text)
+    , _trllAdvertiserId :: !(Textual Int64)
+    , _trllUploadType :: !(Maybe Text)
+    , _trllProFileId :: !(Textual Int64)
+    , _trllSortOrder :: !TargetableRemarketingListsListSortOrder
+    , _trllActive :: !(Maybe Bool)
+    , _trllName :: !(Maybe Text)
+    , _trllPageToken :: !(Maybe Text)
+    , _trllSortField :: !TargetableRemarketingListsListSortField
+    , _trllMaxResults :: !(Textual Int32)
+    , _trllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,7 +107,15 @@ data TargetableRemarketingListsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'trllXgafv'
+--
+-- * 'trllUploadProtocol'
+--
+-- * 'trllAccessToken'
+--
 -- * 'trllAdvertiserId'
+--
+-- * 'trllUploadType'
 --
 -- * 'trllProFileId'
 --
@@ -107,13 +130,19 @@ data TargetableRemarketingListsList =
 -- * 'trllSortField'
 --
 -- * 'trllMaxResults'
+--
+-- * 'trllCallback'
 targetableRemarketingListsList
     :: Int64 -- ^ 'trllAdvertiserId'
     -> Int64 -- ^ 'trllProFileId'
     -> TargetableRemarketingListsList
 targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
   TargetableRemarketingListsList'
-    { _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
+    { _trllXgafv = Nothing
+    , _trllUploadProtocol = Nothing
+    , _trllAccessToken = Nothing
+    , _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
+    , _trllUploadType = Nothing
     , _trllProFileId = _Coerce # pTrllProFileId_
     , _trllSortOrder = TRLLSOAscending
     , _trllActive = Nothing
@@ -121,8 +150,26 @@ targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
     , _trllPageToken = Nothing
     , _trllSortField = TRLLSFID
     , _trllMaxResults = 1000
+    , _trllCallback = Nothing
     }
 
+
+-- | V1 error format.
+trllXgafv :: Lens' TargetableRemarketingListsList (Maybe Xgafv)
+trllXgafv
+  = lens _trllXgafv (\ s a -> s{_trllXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+trllUploadProtocol :: Lens' TargetableRemarketingListsList (Maybe Text)
+trllUploadProtocol
+  = lens _trllUploadProtocol
+      (\ s a -> s{_trllUploadProtocol = a})
+
+-- | OAuth access token.
+trllAccessToken :: Lens' TargetableRemarketingListsList (Maybe Text)
+trllAccessToken
+  = lens _trllAccessToken
+      (\ s a -> s{_trllAccessToken = a})
 
 -- | Select only targetable remarketing lists targetable by these
 -- advertisers.
@@ -131,6 +178,12 @@ trllAdvertiserId
   = lens _trllAdvertiserId
       (\ s a -> s{_trllAdvertiserId = a})
       . _Coerce
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+trllUploadType :: Lens' TargetableRemarketingListsList (Maybe Text)
+trllUploadType
+  = lens _trllUploadType
+      (\ s a -> s{_trllUploadType = a})
 
 -- | User profile ID associated with this request.
 trllProFileId :: Lens' TargetableRemarketingListsList Int64
@@ -180,6 +233,11 @@ trllMaxResults
       (\ s a -> s{_trllMaxResults = a})
       . _Coerce
 
+-- | JSONP
+trllCallback :: Lens' TargetableRemarketingListsList (Maybe Text)
+trllCallback
+  = lens _trllCallback (\ s a -> s{_trllCallback = a})
+
 instance GoogleRequest TargetableRemarketingListsList
          where
         type Rs TargetableRemarketingListsList =
@@ -188,12 +246,17 @@ instance GoogleRequest TargetableRemarketingListsList
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient TargetableRemarketingListsList'{..}
           = go _trllProFileId (Just _trllAdvertiserId)
+              _trllXgafv
+              _trllUploadProtocol
+              _trllAccessToken
+              _trllUploadType
               (Just _trllSortOrder)
               _trllActive
               _trllName
               _trllPageToken
               (Just _trllSortField)
               (Just _trllMaxResults)
+              _trllCallback
               (Just AltJSON)
               dFAReportingService
           where go

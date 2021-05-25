@@ -34,6 +34,7 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
 
     -- * Request Lenses
     , plslXgafv
+    , plslJobId
     , plslUploadProtocol
     , plslLocation
     , plslAccessToken
@@ -42,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
     , plslCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.snapshots.list@ method which the
 -- 'ProjectsLocationsSnapshotsList' request conforms to.
@@ -55,25 +56,27 @@ type ProjectsLocationsSnapshotsListResource =
              Capture "location" Text :>
                "snapshots" :>
                  QueryParam "$.xgafv" Xgafv :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListSnapshotsResponse
+                   QueryParam "jobId" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListSnapshotsResponse
 
 -- | Lists snapshots.
 --
 -- /See:/ 'projectsLocationsSnapshotsList' smart constructor.
 data ProjectsLocationsSnapshotsList =
   ProjectsLocationsSnapshotsList'
-    { _plslXgafv          :: !(Maybe Xgafv)
+    { _plslXgafv :: !(Maybe Xgafv)
+    , _plslJobId :: !(Maybe Text)
     , _plslUploadProtocol :: !(Maybe Text)
-    , _plslLocation       :: !Text
-    , _plslAccessToken    :: !(Maybe Text)
-    , _plslUploadType     :: !(Maybe Text)
-    , _plslProjectId      :: !Text
-    , _plslCallback       :: !(Maybe Text)
+    , _plslLocation :: !Text
+    , _plslAccessToken :: !(Maybe Text)
+    , _plslUploadType :: !(Maybe Text)
+    , _plslProjectId :: !Text
+    , _plslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,6 +86,8 @@ data ProjectsLocationsSnapshotsList =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plslXgafv'
+--
+-- * 'plslJobId'
 --
 -- * 'plslUploadProtocol'
 --
@@ -102,6 +107,7 @@ projectsLocationsSnapshotsList
 projectsLocationsSnapshotsList pPlslLocation_ pPlslProjectId_ =
   ProjectsLocationsSnapshotsList'
     { _plslXgafv = Nothing
+    , _plslJobId = Nothing
     , _plslUploadProtocol = Nothing
     , _plslLocation = pPlslLocation_
     , _plslAccessToken = Nothing
@@ -115,6 +121,11 @@ projectsLocationsSnapshotsList pPlslLocation_ pPlslProjectId_ =
 plslXgafv :: Lens' ProjectsLocationsSnapshotsList (Maybe Xgafv)
 plslXgafv
   = lens _plslXgafv (\ s a -> s{_plslXgafv = a})
+
+-- | If specified, list snapshots created from this job.
+plslJobId :: Lens' ProjectsLocationsSnapshotsList (Maybe Text)
+plslJobId
+  = lens _plslJobId (\ s a -> s{_plslJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 plslUploadProtocol :: Lens' ProjectsLocationsSnapshotsList (Maybe Text)
@@ -161,6 +172,7 @@ instance GoogleRequest ProjectsLocationsSnapshotsList
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsLocationsSnapshotsList'{..}
           = go _plslProjectId _plslLocation _plslXgafv
+              _plslJobId
               _plslUploadProtocol
               _plslAccessToken
               _plslUploadType

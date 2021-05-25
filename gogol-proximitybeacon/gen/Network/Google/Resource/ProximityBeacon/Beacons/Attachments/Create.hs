@@ -56,8 +56,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
     , bacCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.attachments.create@ method which the
 -- 'BeaconsAttachmentsCreate' request conforms to.
@@ -93,14 +93,14 @@ type BeaconsAttachmentsCreateResource =
 -- /See:/ 'beaconsAttachmentsCreate' smart constructor.
 data BeaconsAttachmentsCreate =
   BeaconsAttachmentsCreate'
-    { _bacXgafv          :: !(Maybe Xgafv)
+    { _bacXgafv :: !(Maybe Xgafv)
     , _bacUploadProtocol :: !(Maybe Text)
-    , _bacAccessToken    :: !(Maybe Text)
-    , _bacBeaconName     :: !Text
-    , _bacUploadType     :: !(Maybe Text)
-    , _bacPayload        :: !BeaconAttachment
-    , _bacProjectId      :: !(Maybe Text)
-    , _bacCallback       :: !(Maybe Text)
+    , _bacAccessToken :: !(Maybe Text)
+    , _bacBeaconName :: !Text
+    , _bacUploadType :: !(Maybe Text)
+    , _bacPayload :: !BeaconAttachment
+    , _bacProjectId :: !(Maybe Text)
+    , _bacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

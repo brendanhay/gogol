@@ -16,7 +16,7 @@
 --
 module Network.Google.AndroidDeviceProvisioning.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The result status of the device after processing.
 data PerDeviceStatusInBatchStatus
@@ -316,6 +316,37 @@ instance FromJSON CompanyTermsStatus where
     parseJSON = parseJSONText "CompanyTermsStatus"
 
 instance ToJSON CompanyTermsStatus where
+    toJSON = toJSONText
+
+-- | The Additional service registered for the device.
+data DeviceClaimAdditionalService
+    = AdditionalServiceUnspecified
+      -- ^ @ADDITIONAL_SERVICE_UNSPECIFIED@
+      -- No additional service.
+    | DeviceProtection
+      -- ^ @DEVICE_PROTECTION@
+      -- Device protection service, as known as Android Enterprise Essentials. To
+      -- claim a device with the device protection service you must enroll with
+      -- the partnership team.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeviceClaimAdditionalService
+
+instance FromHttpApiData DeviceClaimAdditionalService where
+    parseQueryParam = \case
+        "ADDITIONAL_SERVICE_UNSPECIFIED" -> Right AdditionalServiceUnspecified
+        "DEVICE_PROTECTION" -> Right DeviceProtection
+        x -> Left ("Unable to parse DeviceClaimAdditionalService from: " <> x)
+
+instance ToHttpApiData DeviceClaimAdditionalService where
+    toQueryParam = \case
+        AdditionalServiceUnspecified -> "ADDITIONAL_SERVICE_UNSPECIFIED"
+        DeviceProtection -> "DEVICE_PROTECTION"
+
+instance FromJSON DeviceClaimAdditionalService where
+    parseJSON = parseJSONText "DeviceClaimAdditionalService"
+
+instance ToJSON DeviceClaimAdditionalService where
     toJSON = toJSONText
 
 -- | Required. The section type of the device\'s provisioning record.

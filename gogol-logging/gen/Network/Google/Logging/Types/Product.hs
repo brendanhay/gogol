@@ -17,8 +17,8 @@
 --
 module Network.Google.Logging.Types.Product where
 
-import           Network.Google.Logging.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Logging.Types.Sum
+import Network.Google.Prelude
 
 -- | An object that describes the schema of a MonitoredResource object using
 -- a type name and a set of labels. For example, the monitored resource
@@ -31,11 +31,12 @@ import           Network.Google.Prelude
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
 data MonitoredResourceDescriptor =
   MonitoredResourceDescriptor'
-    { _mrdName        :: !(Maybe Text)
+    { _mrdName :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
-    , _mrdLabels      :: !(Maybe [LabelDescriptor])
-    , _mrdType        :: !(Maybe Text)
+    , _mrdLabels :: !(Maybe [LabelDescriptor])
+    , _mrdType :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
+    , _mrdLaunchStage :: !(Maybe MonitoredResourceDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -53,6 +54,8 @@ data MonitoredResourceDescriptor =
 -- * 'mrdType'
 --
 -- * 'mrdDescription'
+--
+-- * 'mrdLaunchStage'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
@@ -62,6 +65,7 @@ monitoredResourceDescriptor =
     , _mrdLabels = Nothing
     , _mrdType = Nothing
     , _mrdDescription = Nothing
+    , _mrdLaunchStage = Nothing
     }
 
 
@@ -93,8 +97,7 @@ mrdLabels
       . _Coerce
 
 -- | Required. The monitored resource type. For example, the type
--- \"cloudsql_database\" represents databases in Google Cloud SQL. The
--- maximum length of this value is 256 characters.
+-- \"cloudsql_database\" represents databases in Google Cloud SQL.
 mrdType :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdType = lens _mrdType (\ s a -> s{_mrdType = a})
 
@@ -105,6 +108,12 @@ mrdDescription
   = lens _mrdDescription
       (\ s a -> s{_mrdDescription = a})
 
+-- | Optional. The launch stage of the monitored resource definition.
+mrdLaunchStage :: Lens' MonitoredResourceDescriptor (Maybe MonitoredResourceDescriptorLaunchStage)
+mrdLaunchStage
+  = lens _mrdLaunchStage
+      (\ s a -> s{_mrdLaunchStage = a})
+
 instance FromJSON MonitoredResourceDescriptor where
         parseJSON
           = withObject "MonitoredResourceDescriptor"
@@ -113,7 +122,8 @@ instance FromJSON MonitoredResourceDescriptor where
                    (o .:? "name") <*> (o .:? "displayName") <*>
                      (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "description")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON MonitoredResourceDescriptor where
         toJSON MonitoredResourceDescriptor'{..}
@@ -123,7 +133,130 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("displayName" .=) <$> _mrdDisplayName,
                   ("labels" .=) <$> _mrdLabels,
                   ("type" .=) <$> _mrdType,
-                  ("description" .=) <$> _mrdDescription])
+                  ("description" .=) <$> _mrdDescription,
+                  ("launchStage" .=) <$> _mrdLaunchStage])
+
+-- | The response from ListBuckets.
+--
+-- /See:/ 'listBucketsResponse' smart constructor.
+data ListBucketsResponse =
+  ListBucketsResponse'
+    { _lbrNextPageToken :: !(Maybe Text)
+    , _lbrBuckets :: !(Maybe [LogBucket])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListBucketsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbrNextPageToken'
+--
+-- * 'lbrBuckets'
+listBucketsResponse
+    :: ListBucketsResponse
+listBucketsResponse =
+  ListBucketsResponse' {_lbrNextPageToken = Nothing, _lbrBuckets = Nothing}
+
+
+-- | If there might be more results than appear in this response, then
+-- nextPageToken is included. To get the next set of results, call the same
+-- method again using the value of nextPageToken as pageToken.
+lbrNextPageToken :: Lens' ListBucketsResponse (Maybe Text)
+lbrNextPageToken
+  = lens _lbrNextPageToken
+      (\ s a -> s{_lbrNextPageToken = a})
+
+-- | A list of buckets.
+lbrBuckets :: Lens' ListBucketsResponse [LogBucket]
+lbrBuckets
+  = lens _lbrBuckets (\ s a -> s{_lbrBuckets = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListBucketsResponse where
+        parseJSON
+          = withObject "ListBucketsResponse"
+              (\ o ->
+                 ListBucketsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "buckets" .!= mempty))
+
+instance ToJSON ListBucketsResponse where
+        toJSON ListBucketsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbrNextPageToken,
+                  ("buckets" .=) <$> _lbrBuckets])
+
+-- | The Status type defines a logical error model that is suitable for
+-- different programming environments, including REST APIs and RPC APIs. It
+-- is used by gRPC (https:\/\/github.com\/grpc). Each Status message
+-- contains three pieces of data: error code, error message, and error
+-- details.You can find out more about this error model and how to work
+-- with it in the API Design Guide
+-- (https:\/\/cloud.google.com\/apis\/design\/errors).
+--
+-- /See:/ 'status' smart constructor.
+data Status =
+  Status'
+    { _sDetails :: !(Maybe [StatusDetailsItem])
+    , _sCode :: !(Maybe (Textual Int32))
+    , _sMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sDetails'
+--
+-- * 'sCode'
+--
+-- * 'sMessage'
+status
+    :: Status
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
+
+-- | A list of messages that carry the error details. There is a common set
+-- of message types for APIs to use.
+sDetails :: Lens' Status [StatusDetailsItem]
+sDetails
+  = lens _sDetails (\ s a -> s{_sDetails = a}) .
+      _Default
+      . _Coerce
+
+-- | The status code, which should be an enum value of google.rpc.Code.
+sCode :: Lens' Status (Maybe Int32)
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
+
+-- | A developer-facing error message, which should be in English. Any
+-- user-facing error message should be localized and sent in the
+-- google.rpc.Status.details field, or localized by the client.
+sMessage :: Lens' Status (Maybe Text)
+sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
+
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status' <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status'{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
 
 -- | Result returned from ListLogEntries.
 --
@@ -131,7 +264,7 @@ instance ToJSON MonitoredResourceDescriptor where
 data ListLogEntriesResponse =
   ListLogEntriesResponse'
     { _llerNextPageToken :: !(Maybe Text)
-    , _llerEntries       :: !(Maybe [LogEntry])
+    , _llerEntries :: !(Maybe [LogEntry])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -194,15 +327,17 @@ instance ToJSON ListLogEntriesResponse where
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor =
   MetricDescriptor'
-    { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
-    , _mdName        :: !(Maybe Text)
-    , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
+    { _mdMonitoredResourceTypes :: !(Maybe [Text])
+    , _mdMetricKind :: !(Maybe MetricDescriptorMetricKind)
+    , _mdName :: !(Maybe Text)
+    , _mdMetadata :: !(Maybe MetricDescriptorMetadata)
     , _mdDisplayName :: !(Maybe Text)
-    , _mdLabels      :: !(Maybe [LabelDescriptor])
-    , _mdType        :: !(Maybe Text)
-    , _mdValueType   :: !(Maybe MetricDescriptorValueType)
+    , _mdLabels :: !(Maybe [LabelDescriptor])
+    , _mdType :: !(Maybe Text)
+    , _mdValueType :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
-    , _mdUnit        :: !(Maybe Text)
+    , _mdUnit :: !(Maybe Text)
+    , _mdLaunchStage :: !(Maybe MetricDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -210,6 +345,8 @@ data MetricDescriptor =
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdMonitoredResourceTypes'
 --
 -- * 'mdMetricKind'
 --
@@ -228,11 +365,14 @@ data MetricDescriptor =
 -- * 'mdDescription'
 --
 -- * 'mdUnit'
+--
+-- * 'mdLaunchStage'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
   MetricDescriptor'
-    { _mdMetricKind = Nothing
+    { _mdMonitoredResourceTypes = Nothing
+    , _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
     , _mdDisplayName = Nothing
@@ -241,8 +381,20 @@ metricDescriptor =
     , _mdValueType = Nothing
     , _mdDescription = Nothing
     , _mdUnit = Nothing
+    , _mdLaunchStage = Nothing
     }
 
+
+-- | Read-only. If present, then a time series, which is identified partially
+-- by a metric type and a MonitoredResourceDescriptor, that is associated
+-- with this metric type can only be associated with one of the monitored
+-- resource types listed here.
+mdMonitoredResourceTypes :: Lens' MetricDescriptor [Text]
+mdMonitoredResourceTypes
+  = lens _mdMonitoredResourceTypes
+      (\ s a -> s{_mdMonitoredResourceTypes = a})
+      . _Default
+      . _Coerce
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of metric_kind and value_type might not be
@@ -304,56 +456,285 @@ mdDescription
   = lens _mdDescription
       (\ s a -> s{_mdDescription = a})
 
--- | The unit in which the metric value is reported. It is only applicable if
--- the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units
--- are a subset of The Unified Code for Units of Measure
--- (http:\/\/unitsofmeasure.org\/ucum.html) standard:Basic units (UNIT) bit
--- bit By byte s second min minute h hour d dayPrefixes (PREFIX) k kilo
--- (10**3) M mega (10**6) G giga (10**9) T tera (10**12) P peta (10**15) E
--- exa (10**18) Z zetta (10**21) Y yotta (10**24) m milli (10**-3) u micro
--- (10**-6) n nano (10**-9) p pico (10**-12) f femto (10**-15) a atto
--- (10**-18) z zepto (10**-21) y yocto (10**-24) Ki kibi (2**10) Mi mebi
--- (2**20) Gi gibi (2**30) Ti tebi (2**40)GrammarThe grammar also includes
--- these connectors: \/ division (as an infix operator, e.g. 1\/s). .
--- multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit
--- is as follows: Expression = Component { \".\" Component } { \"\/\"
--- Component } ; Component = ( [ PREFIX ] UNIT | \"%\" ) [ Annotation ] |
--- Annotation | \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: Annotation
--- is just a comment if it follows a UNIT and is equivalent to 1 if it is
--- used alone. For examples, {requests}\/s == 1\/s, By{transmitted}\/s ==
--- By\/s. NAME is a sequence of non-blank printable ASCII characters not
--- containing \'{\' or \'}\'. 1 represents dimensionless value 1, such as
--- in 1\/s. % represents dimensionless value 1\/100, and annotates values
--- giving a percentage.
+-- | The units in which the metric value is reported. It is only applicable
+-- if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines
+-- the representation of the stored metric values.Different systems might
+-- scale the values to be more easily displayed (so a value of 0.02kBy
+-- might be displayed as 20By, and a value of 3523kBy might be displayed as
+-- 3.5MBy). However, if the unit is kBy, then the value of the metric is
+-- always in thousands of bytes, no matter how it might be displayed.If you
+-- want a custom metric to record the exact number of CPU-seconds used by a
+-- job, you can create an INT64 CUMULATIVE metric whose unit is s{CPU} (or
+-- equivalently 1s{CPU} or just s). If the job uses 12,005 CPU-seconds,
+-- then the value is written as 12005.Alternatively, if you want a custom
+-- metric to record data in a more granular way, you can create a DOUBLE
+-- CUMULATIVE metric whose unit is ks{CPU}, and then write the value 12.005
+-- (which is 12005\/1000), or use Kis{CPU} and write 11.723 (which is
+-- 12005\/1024).The supported units are a subset of The Unified Code for
+-- Units of Measure (https:\/\/unitsofmeasure.org\/ucum.html)
+-- standard:Basic units (UNIT) bit bit By byte s second min minute h hour d
+-- day 1 dimensionlessPrefixes (PREFIX) k kilo (10^3) M mega (10^6) G giga
+-- (10^9) T tera (10^12) P peta (10^15) E exa (10^18) Z zetta (10^21) Y
+-- yotta (10^24) m milli (10^-3) u micro (10^-6) n nano (10^-9) p pico
+-- (10^-12) f femto (10^-15) a atto (10^-18) z zepto (10^-21) y yocto
+-- (10^-24) Ki kibi (2^10) Mi mebi (2^20) Gi gibi (2^30) Ti tebi (2^40) Pi
+-- pebi (2^50)GrammarThe grammar also includes these connectors: \/
+-- division or ratio (as an infix operator). For examples, kBy\/{email} or
+-- MiBy\/10ms (although you should almost never have \/s in a metric unit;
+-- rates should always be computed at query time from the underlying
+-- cumulative or delta value). . multiplication or composition (as an infix
+-- operator). For examples, GBy.d or k{watt}.h.The grammar for a unit is as
+-- follows: Expression = Component { \".\" Component } { \"\/\" Component }
+-- ; Component = ( [ PREFIX ] UNIT | \"%\" ) [ Annotation ] | Annotation |
+-- \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: Annotation is just a
+-- comment if it follows a UNIT. If the annotation is used alone, then the
+-- unit is equivalent to 1. For examples, {request}\/s == 1\/s,
+-- By{transmitted}\/s == By\/s. NAME is a sequence of non-blank printable
+-- ASCII characters not containing { or }. 1 represents a unitary
+-- dimensionless unit
+-- (https:\/\/en.wikipedia.org\/wiki\/Dimensionless_quantity) of 1, such as
+-- in 1\/s. It is typically used when none of the basic units are
+-- appropriate. For example, \"new users per day\" can be represented as
+-- 1\/d or {new-users}\/d (and a metric value 5 would mean \"5 new users).
+-- Alternatively, \"thousands of page views per day\" would be represented
+-- as 1000\/d or k1\/d or k{page_views}\/d (and a metric value of 5.3 would
+-- mean \"5300 page views per day\"). % represents dimensionless value of
+-- 1\/100, and annotates values giving a percentage (so the metric values
+-- are typically in the range of 0..100, and a metric value 3 means \"3
+-- percent\"). 10^2.% indicates a metric contains a ratio, typically in the
+-- range 0..1, that will be multiplied by 100 and displayed as a percentage
+-- (so a metric value 0.03 means \"3 percent\").
 mdUnit :: Lens' MetricDescriptor (Maybe Text)
 mdUnit = lens _mdUnit (\ s a -> s{_mdUnit = a})
+
+-- | Optional. The launch stage of the metric definition.
+mdLaunchStage :: Lens' MetricDescriptor (Maybe MetricDescriptorLaunchStage)
+mdLaunchStage
+  = lens _mdLaunchStage
+      (\ s a -> s{_mdLaunchStage = a})
 
 instance FromJSON MetricDescriptor where
         parseJSON
           = withObject "MetricDescriptor"
               (\ o ->
                  MetricDescriptor' <$>
-                   (o .:? "metricKind") <*> (o .:? "name") <*>
-                     (o .:? "metadata")
+                   (o .:? "monitoredResourceTypes" .!= mempty) <*>
+                     (o .:? "metricKind")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata")
                      <*> (o .:? "displayName")
                      <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
                      <*> (o .:? "valueType")
                      <*> (o .:? "description")
-                     <*> (o .:? "unit"))
+                     <*> (o .:? "unit")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON MetricDescriptor where
         toJSON MetricDescriptor'{..}
           = object
               (catMaybes
-                 [("metricKind" .=) <$> _mdMetricKind,
+                 [("monitoredResourceTypes" .=) <$>
+                    _mdMonitoredResourceTypes,
+                  ("metricKind" .=) <$> _mdMetricKind,
                   ("name" .=) <$> _mdName,
                   ("metadata" .=) <$> _mdMetadata,
                   ("displayName" .=) <$> _mdDisplayName,
                   ("labels" .=) <$> _mdLabels, ("type" .=) <$> _mdType,
                   ("valueType" .=) <$> _mdValueType,
                   ("description" .=) <$> _mdDescription,
-                  ("unit" .=) <$> _mdUnit])
+                  ("unit" .=) <$> _mdUnit,
+                  ("launchStage" .=) <$> _mdLaunchStage])
+
+-- | The response message for Locations.ListLocations.
+--
+-- /See:/ 'listLocationsResponse' smart constructor.
+data ListLocationsResponse =
+  ListLocationsResponse'
+    { _llrNextPageToken :: !(Maybe Text)
+    , _llrLocations :: !(Maybe [Location])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrNextPageToken'
+--
+-- * 'llrLocations'
+listLocationsResponse
+    :: ListLocationsResponse
+listLocationsResponse =
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
+
+-- | The standard List next-page token.
+llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
+llrNextPageToken
+  = lens _llrNextPageToken
+      (\ s a -> s{_llrNextPageToken = a})
+
+-- | A list of locations that matches the specified filter in the request.
+llrLocations :: Lens' ListLocationsResponse [Location]
+llrLocations
+  = lens _llrLocations (\ s a -> s{_llrLocations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListLocationsResponse where
+        parseJSON
+          = withObject "ListLocationsResponse"
+              (\ o ->
+                 ListLocationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "locations" .!= mempty))
+
+instance ToJSON ListLocationsResponse where
+        toJSON ListLocationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("locations" .=) <$> _llrLocations])
+
+-- | The response message for Operations.ListOperations.
+--
+-- /See:/ 'listOperationsResponse' smart constructor.
+data ListOperationsResponse =
+  ListOperationsResponse'
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOperations :: !(Maybe [Operation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lorNextPageToken'
+--
+-- * 'lorOperations'
+listOperationsResponse
+    :: ListOperationsResponse
+listOperationsResponse =
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
+
+-- | The standard List next-page token.
+lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
+
+-- | A list of operations that matches the specified filter in the request.
+lorOperations :: Lens' ListOperationsResponse [Operation]
+lorOperations
+  = lens _lorOperations
+      (\ s a -> s{_lorOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
+
+-- | The parameters to TailLogEntries.
+--
+-- /See:/ 'tailLogEntriesRequest' smart constructor.
+data TailLogEntriesRequest =
+  TailLogEntriesRequest'
+    { _tlerBufferWindow :: !(Maybe GDuration)
+    , _tlerFilter :: !(Maybe Text)
+    , _tlerResourceNames :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TailLogEntriesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlerBufferWindow'
+--
+-- * 'tlerFilter'
+--
+-- * 'tlerResourceNames'
+tailLogEntriesRequest
+    :: TailLogEntriesRequest
+tailLogEntriesRequest =
+  TailLogEntriesRequest'
+    { _tlerBufferWindow = Nothing
+    , _tlerFilter = Nothing
+    , _tlerResourceNames = Nothing
+    }
+
+
+-- | Optional. The amount of time to buffer log entries at the server before
+-- being returned to prevent out of order results due to late arriving log
+-- entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
+-- milliseconds.
+tlerBufferWindow :: Lens' TailLogEntriesRequest (Maybe Scientific)
+tlerBufferWindow
+  = lens _tlerBufferWindow
+      (\ s a -> s{_tlerBufferWindow = a})
+      . mapping _GDuration
+
+-- | Optional. A filter that chooses which log entries to return. See
+-- Advanced Logs Filters
+-- (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced_filters).
+-- Only log entries that match the filter are returned. An empty filter
+-- matches all log entries in the resources listed in resource_names.
+-- Referencing a parent resource that is not in resource_names will cause
+-- the filter to return no results. The maximum length of the filter is
+-- 20000 characters.
+tlerFilter :: Lens' TailLogEntriesRequest (Maybe Text)
+tlerFilter
+  = lens _tlerFilter (\ s a -> s{_tlerFilter = a})
+
+-- | Required. Name of a parent resource from which to retrieve log entries:
+-- projects\/[PROJECT_ID] organizations\/[ORGANIZATION_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID] folders\/[FOLDER_ID]May
+-- alternatively be one or more views:
+-- projects\/[PROJECT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- organizations\/[ORGANIZATION_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- folders\/[FOLDER_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+tlerResourceNames :: Lens' TailLogEntriesRequest [Text]
+tlerResourceNames
+  = lens _tlerResourceNames
+      (\ s a -> s{_tlerResourceNames = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TailLogEntriesRequest where
+        parseJSON
+          = withObject "TailLogEntriesRequest"
+              (\ o ->
+                 TailLogEntriesRequest' <$>
+                   (o .:? "bufferWindow") <*> (o .:? "filter") <*>
+                     (o .:? "resourceNames" .!= mempty))
+
+instance ToJSON TailLogEntriesRequest where
+        toJSON TailLogEntriesRequest'{..}
+          = object
+              (catMaybes
+                 [("bufferWindow" .=) <$> _tlerBufferWindow,
+                  ("filter" .=) <$> _tlerFilter,
+                  ("resourceNames" .=) <$> _tlerResourceNames])
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Compute Engine VM instances
@@ -393,6 +774,29 @@ instance FromJSON MonitoredResourceLabels where
 instance ToJSON MonitoredResourceLabels where
         toJSON = toJSON . _mrlAddtional
 
+-- | The request message for Operations.CancelOperation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
+
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest')
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
+
 -- | Auxiliary metadata for a MonitoredResource object. MonitoredResource
 -- objects contain the minimum set of information to uniquely identify a
 -- monitored resource instance. There is some other useful auxiliary
@@ -403,7 +807,7 @@ instance ToJSON MonitoredResourceLabels where
 -- /See:/ 'monitoredResourceMetadata' smart constructor.
 data MonitoredResourceMetadata =
   MonitoredResourceMetadata'
-    { _mrmUserLabels   :: !(Maybe MonitoredResourceMetadataUserLabels)
+    { _mrmUserLabels :: !(Maybe MonitoredResourceMetadataUserLabels)
     , _mrmSystemLabels :: !(Maybe MonitoredResourceMetadataSystemLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -459,7 +863,7 @@ instance ToJSON MonitoredResourceMetadata where
 -- /See:/ 'listLogMetricsResponse' smart constructor.
 data ListLogMetricsResponse =
   ListLogMetricsResponse'
-    { _llmrMetrics       :: !(Maybe [LogMetric])
+    { _llmrMetrics :: !(Maybe [LogMetric])
     , _llmrNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -513,12 +917,12 @@ instance ToJSON ListLogMetricsResponse where
 -- /See:/ 'writeLogEntriesRequest' smart constructor.
 data WriteLogEntriesRequest =
   WriteLogEntriesRequest'
-    { _wlerEntries        :: !(Maybe [LogEntry])
+    { _wlerEntries :: !(Maybe [LogEntry])
     , _wlerPartialSuccess :: !(Maybe Bool)
-    , _wlerResource       :: !(Maybe MonitoredResource)
-    , _wlerLabels         :: !(Maybe WriteLogEntriesRequestLabels)
-    , _wlerLogName        :: !(Maybe Text)
-    , _wlerDryRun         :: !(Maybe Bool)
+    , _wlerResource :: !(Maybe MonitoredResource)
+    , _wlerLabels :: !(Maybe WriteLogEntriesRequestLabels)
+    , _wlerLogName :: !(Maybe Text)
+    , _wlerDryRun :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -561,13 +965,15 @@ writeLogEntriesRequest =
 -- values are chosen so that, among the log entries that did not supply
 -- their own values, the entries earlier in the list will sort before the
 -- entries later in the list. See the entries.list method.Log entries with
--- timestamps that are more than the logs retention period in the past or
--- more than 24 hours in the future will not be available when calling
--- entries.list. However, those log entries can still be exported with
--- LogSinks.To improve throughput and to avoid exceeding the quota limit
--- for calls to entries.write, you should try to include several log
--- entries in this list, rather than calling this method for each
--- individual log entry.
+-- timestamps that are more than the logs retention period
+-- (https:\/\/cloud.google.com\/logging\/quotas) in the past or more than
+-- 24 hours in the future will not be available when calling entries.list.
+-- However, those log entries can still be exported with LogSinks
+-- (https:\/\/cloud.google.com\/logging\/docs\/api\/tasks\/exporting-logs).To
+-- improve throughput and to avoid exceeding the quota limit
+-- (https:\/\/cloud.google.com\/logging\/quotas) for calls to
+-- entries.write, you should try to include several log entries in this
+-- list, rather than calling this method for each individual log entry.
 wlerEntries :: Lens' WriteLogEntriesRequest [LogEntry]
 wlerEntries
   = lens _wlerEntries (\ s a -> s{_wlerEntries = a}) .
@@ -603,15 +1009,15 @@ wlerLabels
 
 -- | Optional. A default log resource name that is assigned to all log
 -- entries in entries that do not specify a value for log_name:
--- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]\"
--- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be URL-encoded.
--- For example: \"projects\/my-project-id\/logs\/syslog\"
--- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\"
--- The permission 'logging.logEntries.create' is needed on each project,
+-- projects\/[PROJECT_ID]\/logs\/[LOG_ID]
+-- organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]
+-- folders\/[FOLDER_ID]\/logs\/[LOG_ID][LOG_ID] must be URL-encoded. For
+-- example: \"projects\/my-project-id\/logs\/syslog\"
+-- \"organizations\/123\/logs\/cloudaudit.googleapis.com%2Factivity\" The
+-- permission logging.logEntries.create is needed on each project,
 -- organization, billing account, or folder that is receiving new log
--- entries, whether the resource is specified in 'logName' or in an
+-- entries, whether the resource is specified in logName or in an
 -- individual log entry.
 wlerLogName :: Lens' WriteLogEntriesRequest (Maybe Text)
 wlerLogName
@@ -647,6 +1053,177 @@ instance ToJSON WriteLogEntriesRequest where
                   ("labels" .=) <$> _wlerLabels,
                   ("logName" .=) <$> _wlerLogName,
                   ("dryRun" .=) <$> _wlerDryRun])
+
+-- | The parameters to CopyLogEntries.
+--
+-- /See:/ 'copyLogEntriesRequest' smart constructor.
+data CopyLogEntriesRequest =
+  CopyLogEntriesRequest'
+    { _clerDestination :: !(Maybe Text)
+    , _clerName :: !(Maybe Text)
+    , _clerFilter :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CopyLogEntriesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clerDestination'
+--
+-- * 'clerName'
+--
+-- * 'clerFilter'
+copyLogEntriesRequest
+    :: CopyLogEntriesRequest
+copyLogEntriesRequest =
+  CopyLogEntriesRequest'
+    {_clerDestination = Nothing, _clerName = Nothing, _clerFilter = Nothing}
+
+
+-- | Required. Destination to which to copy logs.
+clerDestination :: Lens' CopyLogEntriesRequest (Maybe Text)
+clerDestination
+  = lens _clerDestination
+      (\ s a -> s{_clerDestination = a})
+
+-- | Required. Bucket from which to copy logs. e.g.
+-- \"projects\/my-project\/locations\/my-location\/buckets\/my-source-bucket
+clerName :: Lens' CopyLogEntriesRequest (Maybe Text)
+clerName = lens _clerName (\ s a -> s{_clerName = a})
+
+-- | Optional. A filter specifying which log entries to copy. The filter must
+-- be no more than 20k characters. An empty filter matches all log entries.
+clerFilter :: Lens' CopyLogEntriesRequest (Maybe Text)
+clerFilter
+  = lens _clerFilter (\ s a -> s{_clerFilter = a})
+
+instance FromJSON CopyLogEntriesRequest where
+        parseJSON
+          = withObject "CopyLogEntriesRequest"
+              (\ o ->
+                 CopyLogEntriesRequest' <$>
+                   (o .:? "destination") <*> (o .:? "name") <*>
+                     (o .:? "filter"))
+
+instance ToJSON CopyLogEntriesRequest where
+        toJSON CopyLogEntriesRequest'{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _clerDestination,
+                  ("name" .=) <$> _clerName,
+                  ("filter" .=) <$> _clerFilter])
+
+-- | The parameters to UndeleteBucket.
+--
+-- /See:/ 'undeleteBucketRequest' smart constructor.
+data UndeleteBucketRequest =
+  UndeleteBucketRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UndeleteBucketRequest' with the minimum fields required to make a request.
+--
+undeleteBucketRequest
+    :: UndeleteBucketRequest
+undeleteBucketRequest = UndeleteBucketRequest'
+
+
+instance FromJSON UndeleteBucketRequest where
+        parseJSON
+          = withObject "UndeleteBucketRequest"
+              (\ o -> pure UndeleteBucketRequest')
+
+instance ToJSON UndeleteBucketRequest where
+        toJSON = const emptyObject
+
+-- | Describes the customer-managed encryption key (CMEK) settings associated
+-- with a project, folder, organization, billing account, or flexible
+-- resource.Note: CMEK for the Logs Router can currently only be configured
+-- for GCP organizations. Once configured, it applies to all projects and
+-- folders in the GCP organization.See Enabling CMEK for Logs Router
+-- (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption)
+-- for more information.
+--
+-- /See:/ 'cmekSettings' smart constructor.
+data CmekSettings =
+  CmekSettings'
+    { _csServiceAccountId :: !(Maybe Text)
+    , _csName :: !(Maybe Text)
+    , _csKmsKeyName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CmekSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csServiceAccountId'
+--
+-- * 'csName'
+--
+-- * 'csKmsKeyName'
+cmekSettings
+    :: CmekSettings
+cmekSettings =
+  CmekSettings'
+    {_csServiceAccountId = Nothing, _csName = Nothing, _csKmsKeyName = Nothing}
+
+
+-- | Output only. The service account that will be used by the Logs Router to
+-- access your Cloud KMS key.Before enabling CMEK for Logs Router, you must
+-- first assign the role roles\/cloudkms.cryptoKeyEncrypterDecrypter to the
+-- service account that the Logs Router will use to access your Cloud KMS
+-- key. Use GetCmekSettings to obtain the service account ID.See Enabling
+-- CMEK for Logs Router
+-- (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption)
+-- for more information.
+csServiceAccountId :: Lens' CmekSettings (Maybe Text)
+csServiceAccountId
+  = lens _csServiceAccountId
+      (\ s a -> s{_csServiceAccountId = a})
+
+-- | Output only. The resource name of the CMEK settings.
+csName :: Lens' CmekSettings (Maybe Text)
+csName = lens _csName (\ s a -> s{_csName = a})
+
+-- | The resource name for the configured Cloud KMS key.KMS key name format:
+-- \"projects\/PROJECT_ID\/locations\/LOCATION\/keyRings\/KEYRING\/cryptoKeys\/KEY\"For
+-- example:
+-- \"projects\/my-project-id\/locations\/my-region\/keyRings\/key-ring-name\/cryptoKeys\/key-name\"To
+-- enable CMEK for the Logs Router, set this field to a valid kms_key_name
+-- for which the associated service account has the required
+-- roles\/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the
+-- key.The Cloud KMS key used by the Log Router can be updated by changing
+-- the kms_key_name to a new valid key name. Encryption operations that are
+-- in progress will be completed with the key that was in use when they
+-- started. Decryption operations will be completed using the key that was
+-- used at the time of encryption unless access to that key has been
+-- revoked.To disable CMEK for the Logs Router, set this field to an empty
+-- string.See Enabling CMEK for Logs Router
+-- (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption)
+-- for more information.
+csKmsKeyName :: Lens' CmekSettings (Maybe Text)
+csKmsKeyName
+  = lens _csKmsKeyName (\ s a -> s{_csKmsKeyName = a})
+
+instance FromJSON CmekSettings where
+        parseJSON
+          = withObject "CmekSettings"
+              (\ o ->
+                 CmekSettings' <$>
+                   (o .:? "serviceAccountId") <*> (o .:? "name") <*>
+                     (o .:? "kmsKeyName"))
+
+instance ToJSON CmekSettings where
+        toJSON CmekSettings'{..}
+          = object
+              (catMaybes
+                 [("serviceAccountId" .=) <$> _csServiceAccountId,
+                  ("name" .=) <$> _csName,
+                  ("kmsKeyName" .=) <$> _csKmsKeyName])
 
 -- | Optional. A map from a label key string to an extractor expression which
 -- is used to extract data from a log entry field and assign as the label
@@ -695,6 +1272,186 @@ instance FromJSON LogMetricLabelExtractors where
 instance ToJSON LogMetricLabelExtractors where
         toJSON = toJSON . _lmleAddtional
 
+-- | A resource that represents Google Cloud Platform location.
+--
+-- /See:/ 'location' smart constructor.
+data Location =
+  Location'
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
+    , _lDisplayName :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lName'
+--
+-- * 'lMetadata'
+--
+-- * 'lDisplayName'
+--
+-- * 'lLabels'
+--
+-- * 'lLocationId'
+location
+    :: Location
+location =
+  Location'
+    { _lName = Nothing
+    , _lMetadata = Nothing
+    , _lDisplayName = Nothing
+    , _lLabels = Nothing
+    , _lLocationId = Nothing
+    }
+
+
+-- | Resource name for the location, which may vary between implementations.
+-- For example: \"projects\/example-project\/locations\/us-east1\"
+lName :: Lens' Location (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
+
+-- | Service-specific metadata. For example the available capacity at the
+-- given location.
+lMetadata :: Lens' Location (Maybe LocationMetadata)
+lMetadata
+  = lens _lMetadata (\ s a -> s{_lMetadata = a})
+
+-- | The friendly name for this location, typically a nearby city name. For
+-- example, \"Tokyo\".
+lDisplayName :: Lens' Location (Maybe Text)
+lDisplayName
+  = lens _lDisplayName (\ s a -> s{_lDisplayName = a})
+
+-- | Cross-service attributes for the location. For example
+-- {\"cloud.googleapis.com\/region\": \"us-east1\"}
+lLabels :: Lens' Location (Maybe LocationLabels)
+lLabels = lens _lLabels (\ s a -> s{_lLabels = a})
+
+-- | The canonical id for this location. For example: \"us-east1\".
+lLocationId :: Lens' Location (Maybe Text)
+lLocationId
+  = lens _lLocationId (\ s a -> s{_lLocationId = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location' <$>
+                   (o .:? "name") <*> (o .:? "metadata") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "locationId"))
+
+instance ToJSON Location where
+        toJSON Location'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lName,
+                  ("metadata" .=) <$> _lMetadata,
+                  ("displayName" .=) <$> _lDisplayName,
+                  ("labels" .=) <$> _lLabels,
+                  ("locationId" .=) <$> _lLocationId])
+
+-- | This resource represents a long-running operation that is the result of
+-- a network API call.
+--
+-- /See:/ 'operation' smart constructor.
+data Operation =
+  Operation'
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
+    , _oResponse :: !(Maybe OperationResponse)
+    , _oName :: !(Maybe Text)
+    , _oMetadata :: !(Maybe OperationMetadata)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Operation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oDone'
+--
+-- * 'oError'
+--
+-- * 'oResponse'
+--
+-- * 'oName'
+--
+-- * 'oMetadata'
+operation
+    :: Operation
+operation =
+  Operation'
+    { _oDone = Nothing
+    , _oError = Nothing
+    , _oResponse = Nothing
+    , _oName = Nothing
+    , _oMetadata = Nothing
+    }
+
+
+-- | If the value is false, it means the operation is still in progress. If
+-- true, the operation is completed, and either error or response is
+-- available.
+oDone :: Lens' Operation (Maybe Bool)
+oDone = lens _oDone (\ s a -> s{_oDone = a})
+
+-- | The error result of the operation in case of failure or cancellation.
+oError :: Lens' Operation (Maybe Status)
+oError = lens _oError (\ s a -> s{_oError = a})
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as Delete, the response is
+-- google.protobuf.Empty. If the original method is standard
+-- Get\/Create\/Update, the response should be the resource. For other
+-- methods, the response should have the type XxxResponse, where Xxx is the
+-- original method name. For example, if the original method name is
+-- TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
+oResponse :: Lens' Operation (Maybe OperationResponse)
+oResponse
+  = lens _oResponse (\ s a -> s{_oResponse = a})
+
+-- | The server-assigned name, which is only unique within the same service
+-- that originally returns it. If you use the default HTTP mapping, the
+-- name should be a resource name ending with operations\/{unique_id}.
+oName :: Lens' Operation (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+oMetadata :: Lens' Operation (Maybe OperationMetadata)
+oMetadata
+  = lens _oMetadata (\ s a -> s{_oMetadata = a})
+
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation' <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Operation where
+        toJSON Operation'{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
+                  ("response" .=) <$> _oResponse,
+                  ("name" .=) <$> _oName,
+                  ("metadata" .=) <$> _oMetadata])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -720,8 +1477,16 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | Optional. A set of user-defined (key, value) data that provides
--- additional information about the log entry.
+-- | Optional. A map of key, value pairs that provides additional information
+-- about the log entry. The labels can be user-defined or
+-- system-defined.User-defined labels are arbitrary key, value pairs that
+-- you can use to classify logs.System-defined labels are defined by GCP
+-- services for platform logs. They have two components - a service
+-- namespace component and the attribute name. For example:
+-- compute.googleapis.com\/resource_name.Cloud Logging truncates label keys
+-- that exceed 512 B and label values that exceed 64 KB upon their
+-- associated log entry being written. The truncation is indicated by an
+-- ellipsis at the end of the character string.
 --
 -- /See:/ 'logEntryLabels' smart constructor.
 newtype LogEntryLabels =
@@ -761,7 +1526,7 @@ instance ToJSON LogEntryLabels where
 -- /See:/ 'listSinksResponse' smart constructor.
 data ListSinksResponse =
   ListSinksResponse'
-    { _lsrSinks         :: !(Maybe [LogSink])
+    { _lsrSinks :: !(Maybe [LogSink])
     , _lsrNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -816,39 +1581,39 @@ instance ToJSON ListSinksResponse where
 -- /See:/ 'requestLog' smart constructor.
 data RequestLog =
   RequestLog'
-    { _rlTraceId           :: !(Maybe Text)
-    , _rlInstanceId        :: !(Maybe Text)
-    , _rlStatus            :: !(Maybe (Textual Int32))
-    , _rlRequestId         :: !(Maybe Text)
-    , _rlInstanceIndex     :: !(Maybe (Textual Int32))
-    , _rlModuleId          :: !(Maybe Text)
-    , _rlVersionId         :: !(Maybe Text)
-    , _rlHTTPVersion       :: !(Maybe Text)
-    , _rlTaskName          :: !(Maybe Text)
-    , _rlPendingTime       :: !(Maybe GDuration)
+    { _rlTraceId :: !(Maybe Text)
+    , _rlInstanceId :: !(Maybe Text)
+    , _rlStatus :: !(Maybe (Textual Int32))
+    , _rlRequestId :: !(Maybe Text)
+    , _rlInstanceIndex :: !(Maybe (Textual Int32))
+    , _rlModuleId :: !(Maybe Text)
+    , _rlVersionId :: !(Maybe Text)
+    , _rlHTTPVersion :: !(Maybe Text)
+    , _rlTaskName :: !(Maybe Text)
+    , _rlPendingTime :: !(Maybe GDuration)
     , _rlWasLoadingRequest :: !(Maybe Bool)
-    , _rlFirst             :: !(Maybe Bool)
-    , _rlStartTime         :: !(Maybe DateTime')
-    , _rlLatency           :: !(Maybe GDuration)
-    , _rlURLMapEntry       :: !(Maybe Text)
-    , _rlCost              :: !(Maybe (Textual Double))
-    , _rlReferrer          :: !(Maybe Text)
-    , _rlLine              :: !(Maybe [LogLine])
-    , _rlIP                :: !(Maybe Text)
-    , _rlAppId             :: !(Maybe Text)
-    , _rlMethod            :: !(Maybe Text)
-    , _rlResource          :: !(Maybe Text)
-    , _rlEndTime           :: !(Maybe DateTime')
-    , _rlFinished          :: !(Maybe Bool)
-    , _rlMegaCycles        :: !(Maybe (Textual Int64))
-    , _rlUserAgent         :: !(Maybe Text)
-    , _rlNickname          :: !(Maybe Text)
-    , _rlHost              :: !(Maybe Text)
-    , _rlTraceSampled      :: !(Maybe Bool)
-    , _rlTaskQueueName     :: !(Maybe Text)
-    , _rlResponseSize      :: !(Maybe (Textual Int64))
-    , _rlSourceReference   :: !(Maybe [SourceReference])
-    , _rlAppEngineRelease  :: !(Maybe Text)
+    , _rlFirst :: !(Maybe Bool)
+    , _rlStartTime :: !(Maybe DateTime')
+    , _rlLatency :: !(Maybe GDuration)
+    , _rlURLMapEntry :: !(Maybe Text)
+    , _rlCost :: !(Maybe (Textual Double))
+    , _rlReferrer :: !(Maybe Text)
+    , _rlLine :: !(Maybe [LogLine])
+    , _rlIP :: !(Maybe Text)
+    , _rlAppId :: !(Maybe Text)
+    , _rlMethod :: !(Maybe Text)
+    , _rlResource :: !(Maybe Text)
+    , _rlEndTime :: !(Maybe DateTime')
+    , _rlFinished :: !(Maybe Bool)
+    , _rlMegaCycles :: !(Maybe (Textual Int64))
+    , _rlUserAgent :: !(Maybe Text)
+    , _rlNickname :: !(Maybe Text)
+    , _rlHost :: !(Maybe Text)
+    , _rlTraceSampled :: !(Maybe Bool)
+    , _rlTaskQueueName :: !(Maybe Text)
+    , _rlResponseSize :: !(Maybe (Textual Int64))
+    , _rlSourceReference :: !(Maybe [SourceReference])
+    , _rlAppEngineRelease :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1239,7 +2004,10 @@ instance ToJSON RequestLog where
                   ("appEngineRelease" .=) <$> _rlAppEngineRelease])
 
 -- | The log entry payload, represented as a protocol buffer. Some Google
--- Cloud Platform services use this field for their log entry payloads.
+-- Cloud Platform services use this field for their log entry payloads.The
+-- following protocol buffer types are supported; user-defined types are
+-- not supported:\"type.googleapis.com\/google.cloud.audit.AuditLog\"
+-- \"type.googleapis.com\/google.appengine.logging.v1.RequestLog\"
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
 newtype LogEntryProtoPayload =
@@ -1284,8 +2052,8 @@ instance ToJSON LogEntryProtoPayload where
 data LogEntrySourceLocation =
   LogEntrySourceLocation'
     { _leslFunction :: !(Maybe Text)
-    , _leslLine     :: !(Maybe (Textual Int64))
-    , _leslFile     :: !(Maybe Text)
+    , _leslLine :: !(Maybe (Textual Int64))
+    , _leslFile :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1345,21 +2113,21 @@ instance ToJSON LogEntrySourceLocation where
                   ("file" .=) <$> _leslFile])
 
 -- | Specifies a set of log entries that are not to be stored in Logging. If
--- your project receives a large volume of logs, you might be able to use
+-- your GCP resource receives a large volume of logs, you can use
 -- exclusions to reduce your chargeable logs. Exclusions are processed
 -- after log sinks, so you can export log entries before they are excluded.
--- Audit log entries and log entries from Amazon Web Services are never
--- excluded.
+-- Note that organization-level and folder-level exclusions don\'t apply to
+-- child resources, and that you can\'t exclude audit log entries.
 --
 -- /See:/ 'logExclusion' smart constructor.
 data LogExclusion =
   LogExclusion'
-    { _leDisabled    :: !(Maybe Bool)
-    , _leUpdateTime  :: !(Maybe DateTime')
-    , _leName        :: !(Maybe Text)
-    , _leFilter      :: !(Maybe Text)
+    { _leDisabled :: !(Maybe Bool)
+    , _leUpdateTime :: !(Maybe DateTime')
+    , _leName :: !(Maybe Text)
+    , _leFilter :: !(Maybe Text)
     , _leDescription :: !(Maybe Text)
-    , _leCreateTime  :: !(Maybe DateTime')
+    , _leCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1409,14 +2177,17 @@ leUpdateTime
 -- | Required. A client-assigned identifier, such as
 -- \"load-balancer-exclusion\". Identifiers are limited to 100 characters
 -- and can include only letters, digits, underscores, hyphens, and periods.
+-- First character has to be alphanumeric.
 leName :: Lens' LogExclusion (Maybe Text)
 leName = lens _leName (\ s a -> s{_leName = a})
 
--- | Required. An advanced logs filter that matches the log entries to be
--- excluded. By using the sample function, you can exclude less than 100%
--- of the matching log entries. For example, the following filter matches
--- 99% of low-severity log entries from load
--- balancers:\"resource.type=http_load_balancer severity
+-- | Required. An advanced logs filter
+-- (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced-queries) that
+-- matches the log entries to be excluded. By using the sample function
+-- (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced-queries#sample),
+-- you can exclude less than 100% of the matching log entries. For example,
+-- the following query matches 99% of low-severity log entries from Google
+-- Cloud Storage buckets:\"resource.type=gcs_bucket severity
 leFilter :: Lens' LogExclusion (Maybe Text)
 leFilter = lens _leFilter (\ s a -> s{_leFilter = a})
 
@@ -1454,7 +2225,7 @@ instance ToJSON LogExclusion where
                   ("description" .=) <$> _leDescription,
                   ("createTime" .=) <$> _leCreateTime])
 
--- | Result returned from WriteLogEntries. empty
+-- | Result returned from WriteLogEntries.
 --
 -- /See:/ 'writeLogEntriesResponse' smart constructor.
 data WriteLogEntriesResponse =
@@ -1477,23 +2248,69 @@ instance FromJSON WriteLogEntriesResponse where
 instance ToJSON WriteLogEntriesResponse where
         toJSON = const emptyObject
 
+-- | Response type for CopyLogEntries long running operations.
+--
+-- /See:/ 'copyLogEntriesResponse' smart constructor.
+newtype CopyLogEntriesResponse =
+  CopyLogEntriesResponse'
+    { _clerLogEntriesCopiedCount :: Maybe (Textual Int64)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CopyLogEntriesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clerLogEntriesCopiedCount'
+copyLogEntriesResponse
+    :: CopyLogEntriesResponse
+copyLogEntriesResponse =
+  CopyLogEntriesResponse' {_clerLogEntriesCopiedCount = Nothing}
+
+
+-- | Number of log entries copied.
+clerLogEntriesCopiedCount :: Lens' CopyLogEntriesResponse (Maybe Int64)
+clerLogEntriesCopiedCount
+  = lens _clerLogEntriesCopiedCount
+      (\ s a -> s{_clerLogEntriesCopiedCount = a})
+      . mapping _Coerce
+
+instance FromJSON CopyLogEntriesResponse where
+        parseJSON
+          = withObject "CopyLogEntriesResponse"
+              (\ o ->
+                 CopyLogEntriesResponse' <$>
+                   (o .:? "logEntriesCopiedCount"))
+
+instance ToJSON CopyLogEntriesResponse where
+        toJSON CopyLogEntriesResponse'{..}
+          = object
+              (catMaybes
+                 [("logEntriesCopiedCount" .=) <$>
+                    _clerLogEntriesCopiedCount])
+
 -- | Describes a sink used to export log entries to one of the following
 -- destinations in any project: a Cloud Storage bucket, a BigQuery dataset,
--- or a Cloud Pub\/Sub topic. A logs filter controls which log entries are
--- exported. The sink must be created within a project, organization,
--- billing account, or folder.
+-- a Cloud Pub\/Sub topic or a Cloud Logging Bucket. A logs filter controls
+-- which log entries are exported. The sink must be created within a
+-- project, organization, billing account, or folder.
 --
 -- /See:/ 'logSink' smart constructor.
 data LogSink =
   LogSink'
-    { _lsDestination         :: !(Maybe Text)
-    , _lsIncludeChildren     :: !(Maybe Bool)
+    { _lsDestination :: !(Maybe Text)
+    , _lsIncludeChildren :: !(Maybe Bool)
+    , _lsDisabled :: !(Maybe Bool)
     , _lsOutputVersionFormat :: !(Maybe LogSinkOutputVersionFormat)
-    , _lsWriterIdentity      :: !(Maybe Text)
-    , _lsUpdateTime          :: !(Maybe DateTime')
-    , _lsName                :: !(Maybe Text)
-    , _lsFilter              :: !(Maybe Text)
-    , _lsCreateTime          :: !(Maybe DateTime')
+    , _lsBigQueryOptions :: !(Maybe BigQueryOptions)
+    , _lsWriterIdentity :: !(Maybe Text)
+    , _lsUpdateTime :: !(Maybe DateTime')
+    , _lsName :: !(Maybe Text)
+    , _lsExclusions :: !(Maybe [LogExclusion])
+    , _lsFilter :: !(Maybe Text)
+    , _lsDescription :: !(Maybe Text)
+    , _lsCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1506,7 +2323,11 @@ data LogSink =
 --
 -- * 'lsIncludeChildren'
 --
+-- * 'lsDisabled'
+--
 -- * 'lsOutputVersionFormat'
+--
+-- * 'lsBigQueryOptions'
 --
 -- * 'lsWriterIdentity'
 --
@@ -1514,7 +2335,11 @@ data LogSink =
 --
 -- * 'lsName'
 --
+-- * 'lsExclusions'
+--
 -- * 'lsFilter'
+--
+-- * 'lsDescription'
 --
 -- * 'lsCreateTime'
 logSink
@@ -1523,11 +2348,15 @@ logSink =
   LogSink'
     { _lsDestination = Nothing
     , _lsIncludeChildren = Nothing
+    , _lsDisabled = Nothing
     , _lsOutputVersionFormat = Nothing
+    , _lsBigQueryOptions = Nothing
     , _lsWriterIdentity = Nothing
     , _lsUpdateTime = Nothing
     , _lsName = Nothing
+    , _lsExclusions = Nothing
     , _lsFilter = Nothing
+    , _lsDescription = Nothing
     , _lsCreateTime = Nothing
     }
 
@@ -1538,7 +2367,8 @@ logSink =
 -- \"pubsub.googleapis.com\/projects\/[PROJECT_ID]\/topics\/[TOPIC_ID]\"
 -- The sink\'s writer_identity, set when the sink is created, must have
 -- permission to write to the destination or else the log entries are not
--- exported. For more information, see Exporting Logs with Sinks.
+-- exported. For more information, see Exporting Logs with Sinks
+-- (https:\/\/cloud.google.com\/logging\/docs\/api\/tasks\/exporting-logs).
 lsDestination :: Lens' LogSink (Maybe Text)
 lsDestination
   = lens _lsDestination
@@ -1561,21 +2391,33 @@ lsIncludeChildren
   = lens _lsIncludeChildren
       (\ s a -> s{_lsIncludeChildren = a})
 
--- | Deprecated. The log entry format to use for this sink\'s exported log
--- entries. The v2 format is used by default and cannot be changed.
+-- | Optional. If set to True, then this sink is disabled and it does not
+-- export any log entries.
+lsDisabled :: Lens' LogSink (Maybe Bool)
+lsDisabled
+  = lens _lsDisabled (\ s a -> s{_lsDisabled = a})
+
+-- | Deprecated. This field is unused.
 lsOutputVersionFormat :: Lens' LogSink (Maybe LogSinkOutputVersionFormat)
 lsOutputVersionFormat
   = lens _lsOutputVersionFormat
       (\ s a -> s{_lsOutputVersionFormat = a})
+
+-- | Optional. Options that affect sinks exporting data to BigQuery.
+lsBigQueryOptions :: Lens' LogSink (Maybe BigQueryOptions)
+lsBigQueryOptions
+  = lens _lsBigQueryOptions
+      (\ s a -> s{_lsBigQueryOptions = a})
 
 -- | Output only. An IAM identity—a service account or group—under which
 -- Logging writes the exported log entries to the sink\'s destination. This
 -- field is set by sinks.create and sinks.update based on the value of
 -- unique_writer_identity in those methods.Until you grant this identity
 -- write-access to the destination, log entry exports from this sink will
--- fail. For more information, see Granting Access for a Resource. Consult
--- the destination service\'s documentation to determine the appropriate
--- IAM roles to assign to the identity.
+-- fail. For more information, see Granting Access for a Resource
+-- (https:\/\/cloud.google.com\/iam\/docs\/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+-- Consult the destination service\'s documentation to determine the
+-- appropriate IAM roles to assign to the identity.
 lsWriterIdentity :: Lens' LogSink (Maybe Text)
 lsWriterIdentity
   = lens _lsWriterIdentity
@@ -1592,16 +2434,33 @@ lsUpdateTime
 -- project. Example: \"my-syslog-errors-to-pubsub\". Sink identifiers are
 -- limited to 100 characters and can include only the following characters:
 -- upper and lower-case alphanumeric characters, underscores, hyphens, and
--- periods.
+-- periods. First character has to be alphanumeric.
 lsName :: Lens' LogSink (Maybe Text)
 lsName = lens _lsName (\ s a -> s{_lsName = a})
 
--- | Optional. An advanced logs filter. The only exported log entries are
--- those that are in the resource owning the sink and that match the
--- filter. For example: logName=\"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
--- AND severity>=ERROR
+-- | Optional. Log entries that match any of the exclusion filters will not
+-- be exported. If a log entry is matched by both filter and one of
+-- exclusion_filters it will not be exported.
+lsExclusions :: Lens' LogSink [LogExclusion]
+lsExclusions
+  = lens _lsExclusions (\ s a -> s{_lsExclusions = a})
+      . _Default
+      . _Coerce
+
+-- | Optional. An advanced logs filter
+-- (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced-queries). The
+-- only exported log entries are those that are in the resource owning the
+-- sink and that match the filter. For example:
+-- logName=\"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\" AND severity>=ERROR
 lsFilter :: Lens' LogSink (Maybe Text)
 lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
+
+-- | Optional. A description of this sink. The maximum length of the
+-- description is 8000 characters.
+lsDescription :: Lens' LogSink (Maybe Text)
+lsDescription
+  = lens _lsDescription
+      (\ s a -> s{_lsDescription = a})
 
 -- | Output only. The creation timestamp of the sink.This field may not be
 -- present for older sinks.
@@ -1616,11 +2475,15 @@ instance FromJSON LogSink where
               (\ o ->
                  LogSink' <$>
                    (o .:? "destination") <*> (o .:? "includeChildren")
+                     <*> (o .:? "disabled")
                      <*> (o .:? "outputVersionFormat")
+                     <*> (o .:? "bigqueryOptions")
                      <*> (o .:? "writerIdentity")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
+                     <*> (o .:? "exclusions" .!= mempty)
                      <*> (o .:? "filter")
+                     <*> (o .:? "description")
                      <*> (o .:? "createTime"))
 
 instance ToJSON LogSink where
@@ -1629,12 +2492,52 @@ instance ToJSON LogSink where
               (catMaybes
                  [("destination" .=) <$> _lsDestination,
                   ("includeChildren" .=) <$> _lsIncludeChildren,
+                  ("disabled" .=) <$> _lsDisabled,
                   ("outputVersionFormat" .=) <$>
                     _lsOutputVersionFormat,
+                  ("bigqueryOptions" .=) <$> _lsBigQueryOptions,
                   ("writerIdentity" .=) <$> _lsWriterIdentity,
                   ("updateTime" .=) <$> _lsUpdateTime,
-                  ("name" .=) <$> _lsName, ("filter" .=) <$> _lsFilter,
+                  ("name" .=) <$> _lsName,
+                  ("exclusions" .=) <$> _lsExclusions,
+                  ("filter" .=) <$> _lsFilter,
+                  ("description" .=) <$> _lsDescription,
                   ("createTime" .=) <$> _lsCreateTime])
+
+--
+-- /See:/ 'statusDetailsItem' smart constructor.
+newtype StatusDetailsItem =
+  StatusDetailsItem'
+    { _sdiAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiAddtional'
+statusDetailsItem
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
+    -> StatusDetailsItem
+statusDetailsItem pSdiAddtional_ =
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
+
+instance FromJSON StatusDetailsItem where
+        parseJSON
+          = withObject "StatusDetailsItem"
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
+
+instance ToJSON StatusDetailsItem where
+        toJSON = toJSON . _sdiAddtional
 
 -- | Output only. A map of user-defined metadata labels.
 --
@@ -1683,7 +2586,7 @@ instance ToJSON MonitoredResourceMetadataUserLabels
 data ListExclusionsResponse =
   ListExclusionsResponse'
     { _lerNextPageToken :: !(Maybe Text)
-    , _lerExclusions    :: !(Maybe [LogExclusion])
+    , _lerExclusions :: !(Maybe [LogExclusion])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1738,8 +2641,8 @@ instance ToJSON ListExclusionsResponse where
 -- /See:/ 'listLogsResponse' smart constructor.
 data ListLogsResponse =
   ListLogsResponse'
-    { _llrNextPageToken :: !(Maybe Text)
-    , _llrLogNames      :: !(Maybe [Text])
+    { _lNextPageToken :: !(Maybe Text)
+    , _lLogNames :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1748,28 +2651,29 @@ data ListLogsResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'llrNextPageToken'
+-- * 'lNextPageToken'
 --
--- * 'llrLogNames'
+-- * 'lLogNames'
 listLogsResponse
     :: ListLogsResponse
 listLogsResponse =
-  ListLogsResponse' {_llrNextPageToken = Nothing, _llrLogNames = Nothing}
+  ListLogsResponse' {_lNextPageToken = Nothing, _lLogNames = Nothing}
 
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
 -- this method again using the value of nextPageToken as pageToken.
-llrNextPageToken :: Lens' ListLogsResponse (Maybe Text)
-llrNextPageToken
-  = lens _llrNextPageToken
-      (\ s a -> s{_llrNextPageToken = a})
+lNextPageToken :: Lens' ListLogsResponse (Maybe Text)
+lNextPageToken
+  = lens _lNextPageToken
+      (\ s a -> s{_lNextPageToken = a})
 
--- | A list of log names. For example, \"projects\/my-project\/syslog\" or
--- \"organizations\/123\/cloudresourcemanager.googleapis.com%2Factivity\".
-llrLogNames :: Lens' ListLogsResponse [Text]
-llrLogNames
-  = lens _llrLogNames (\ s a -> s{_llrLogNames = a}) .
+-- | A list of log names. For example, \"projects\/my-project\/logs\/syslog\"
+-- or
+-- \"organizations\/123\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
+lLogNames :: Lens' ListLogsResponse [Text]
+lLogNames
+  = lens _lLogNames (\ s a -> s{_lLogNames = a}) .
       _Default
       . _Coerce
 
@@ -1785,15 +2689,131 @@ instance ToJSON ListLogsResponse where
         toJSON ListLogsResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _llrNextPageToken,
-                  ("logNames" .=) <$> _llrLogNames])
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  ("logNames" .=) <$> _lLogNames])
+
+-- | Metadata for CopyLogEntries long running operations.
+--
+-- /See:/ 'copyLogEntriesMetadata' smart constructor.
+data CopyLogEntriesMetadata =
+  CopyLogEntriesMetadata'
+    { _clemState :: !(Maybe CopyLogEntriesMetadataState)
+    , _clemCancellationRequested :: !(Maybe Bool)
+    , _clemProgress :: !(Maybe (Textual Int32))
+    , _clemStartTime :: !(Maybe DateTime')
+    , _clemWriterIdentity :: !(Maybe Text)
+    , _clemEndTime :: !(Maybe DateTime')
+    , _clemRequest :: !(Maybe CopyLogEntriesRequest)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CopyLogEntriesMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clemState'
+--
+-- * 'clemCancellationRequested'
+--
+-- * 'clemProgress'
+--
+-- * 'clemStartTime'
+--
+-- * 'clemWriterIdentity'
+--
+-- * 'clemEndTime'
+--
+-- * 'clemRequest'
+copyLogEntriesMetadata
+    :: CopyLogEntriesMetadata
+copyLogEntriesMetadata =
+  CopyLogEntriesMetadata'
+    { _clemState = Nothing
+    , _clemCancellationRequested = Nothing
+    , _clemProgress = Nothing
+    , _clemStartTime = Nothing
+    , _clemWriterIdentity = Nothing
+    , _clemEndTime = Nothing
+    , _clemRequest = Nothing
+    }
+
+
+-- | State of an operation.
+clemState :: Lens' CopyLogEntriesMetadata (Maybe CopyLogEntriesMetadataState)
+clemState
+  = lens _clemState (\ s a -> s{_clemState = a})
+
+-- | Identifies whether the user has requested cancellation of the operation.
+clemCancellationRequested :: Lens' CopyLogEntriesMetadata (Maybe Bool)
+clemCancellationRequested
+  = lens _clemCancellationRequested
+      (\ s a -> s{_clemCancellationRequested = a})
+
+-- | Estimated progress of the operation (0 - 100%).
+clemProgress :: Lens' CopyLogEntriesMetadata (Maybe Int32)
+clemProgress
+  = lens _clemProgress (\ s a -> s{_clemProgress = a})
+      . mapping _Coerce
+
+-- | The create time of an operation.
+clemStartTime :: Lens' CopyLogEntriesMetadata (Maybe UTCTime)
+clemStartTime
+  = lens _clemStartTime
+      (\ s a -> s{_clemStartTime = a})
+      . mapping _DateTime
+
+-- | The IAM identity of a service account that must be granted access to the
+-- destination. If the service account is not granted permission to the
+-- destination within an hour, the operation will be cancelled. Example:
+-- \"serviceAccount:foo\'bar.com\"
+clemWriterIdentity :: Lens' CopyLogEntriesMetadata (Maybe Text)
+clemWriterIdentity
+  = lens _clemWriterIdentity
+      (\ s a -> s{_clemWriterIdentity = a})
+
+-- | The end time of an operation.
+clemEndTime :: Lens' CopyLogEntriesMetadata (Maybe UTCTime)
+clemEndTime
+  = lens _clemEndTime (\ s a -> s{_clemEndTime = a}) .
+      mapping _DateTime
+
+-- | CopyLogEntries RPC request.
+clemRequest :: Lens' CopyLogEntriesMetadata (Maybe CopyLogEntriesRequest)
+clemRequest
+  = lens _clemRequest (\ s a -> s{_clemRequest = a})
+
+instance FromJSON CopyLogEntriesMetadata where
+        parseJSON
+          = withObject "CopyLogEntriesMetadata"
+              (\ o ->
+                 CopyLogEntriesMetadata' <$>
+                   (o .:? "state") <*> (o .:? "cancellationRequested")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "writerIdentity")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "request"))
+
+instance ToJSON CopyLogEntriesMetadata where
+        toJSON CopyLogEntriesMetadata'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _clemState,
+                  ("cancellationRequested" .=) <$>
+                    _clemCancellationRequested,
+                  ("progress" .=) <$> _clemProgress,
+                  ("startTime" .=) <$> _clemStartTime,
+                  ("writerIdentity" .=) <$> _clemWriterIdentity,
+                  ("endTime" .=) <$> _clemEndTime,
+                  ("request" .=) <$> _clemRequest])
 
 -- | Result returned from ListMonitoredResourceDescriptors.
 --
 -- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
 data ListMonitoredResourceDescriptorsResponse =
   ListMonitoredResourceDescriptorsResponse'
-    { _lmrdrNextPageToken       :: !(Maybe Text)
+    { _lmrdrNextPageToken :: !(Maybe Text)
     , _lmrdrResourceDescriptors :: !(Maybe [MonitoredResourceDescriptor])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1850,6 +2870,74 @@ instance ToJSON
                   ("resourceDescriptors" .=) <$>
                     _lmrdrResourceDescriptors])
 
+-- | Options that change functionality of a sink exporting data to BigQuery.
+--
+-- /See:/ 'bigQueryOptions' smart constructor.
+data BigQueryOptions =
+  BigQueryOptions'
+    { _bqoUsePartitionedTables :: !(Maybe Bool)
+    , _bqoUsesTimestampColumnPartitioning :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BigQueryOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bqoUsePartitionedTables'
+--
+-- * 'bqoUsesTimestampColumnPartitioning'
+bigQueryOptions
+    :: BigQueryOptions
+bigQueryOptions =
+  BigQueryOptions'
+    { _bqoUsePartitionedTables = Nothing
+    , _bqoUsesTimestampColumnPartitioning = Nothing
+    }
+
+
+-- | Optional. Whether to use BigQuery\'s partition tables
+-- (https:\/\/cloud.google.com\/bigquery\/docs\/partitioned-tables). By
+-- default, Logging creates dated tables based on the log entries\'
+-- timestamps, e.g. syslog_20170523. With partitioned tables the date
+-- suffix is no longer present and special query syntax
+-- (https:\/\/cloud.google.com\/bigquery\/docs\/querying-partitioned-tables)
+-- has to be used instead. In both cases, tables are sharded based on UTC
+-- timezone.
+bqoUsePartitionedTables :: Lens' BigQueryOptions (Maybe Bool)
+bqoUsePartitionedTables
+  = lens _bqoUsePartitionedTables
+      (\ s a -> s{_bqoUsePartitionedTables = a})
+
+-- | Output only. True if new timestamp column based partitioning is in use,
+-- false if legacy ingestion-time partitioning is in use. All new sinks
+-- will have this field set true and will use timestamp column based
+-- partitioning. If use_partitioned_tables is false, this value has no
+-- meaning and will be false. Legacy sinks using partitioned tables will
+-- have this field set to false.
+bqoUsesTimestampColumnPartitioning :: Lens' BigQueryOptions (Maybe Bool)
+bqoUsesTimestampColumnPartitioning
+  = lens _bqoUsesTimestampColumnPartitioning
+      (\ s a -> s{_bqoUsesTimestampColumnPartitioning = a})
+
+instance FromJSON BigQueryOptions where
+        parseJSON
+          = withObject "BigQueryOptions"
+              (\ o ->
+                 BigQueryOptions' <$>
+                   (o .:? "usePartitionedTables") <*>
+                     (o .:? "usesTimestampColumnPartitioning"))
+
+instance ToJSON BigQueryOptions where
+        toJSON BigQueryOptions'{..}
+          = object
+              (catMaybes
+                 [("usePartitionedTables" .=) <$>
+                    _bqoUsePartitionedTables,
+                  ("usesTimestampColumnPartitioning" .=) <$>
+                    _bqoUsesTimestampColumnPartitioning])
+
 -- | Specifies a set of buckets with arbitrary widths.There are size(bounds)
 -- + 1 (= N) buckets. Bucket i has the following boundaries:Upper bound (0
 -- \<= i \< N-1): boundsi Lower bound (1 \<= i \< N); boundsi - 1The bounds
@@ -1897,21 +2985,21 @@ instance ToJSON Explicit where
 -- /See:/ 'hTTPRequest' smart constructor.
 data HTTPRequest =
   HTTPRequest'
-    { _httprStatus                         :: !(Maybe (Textual Int32))
-    , _httprRequestURL                     :: !(Maybe Text)
-    , _httprCacheFillBytes                 :: !(Maybe (Textual Int64))
-    , _httprRemoteIP                       :: !(Maybe Text)
-    , _httprLatency                        :: !(Maybe GDuration)
-    , _httprProtocol                       :: !(Maybe Text)
-    , _httprServerIP                       :: !(Maybe Text)
-    , _httprRequestSize                    :: !(Maybe (Textual Int64))
+    { _httprStatus :: !(Maybe (Textual Int32))
+    , _httprRequestURL :: !(Maybe Text)
+    , _httprCacheFillBytes :: !(Maybe (Textual Int64))
+    , _httprRemoteIP :: !(Maybe Text)
+    , _httprLatency :: !(Maybe GDuration)
+    , _httprProtocol :: !(Maybe Text)
+    , _httprServerIP :: !(Maybe Text)
+    , _httprRequestSize :: !(Maybe (Textual Int64))
     , _httprCacheValidatedWithOriginServer :: !(Maybe Bool)
-    , _httprUserAgent                      :: !(Maybe Text)
-    , _httprCacheLookup                    :: !(Maybe Bool)
-    , _httprResponseSize                   :: !(Maybe (Textual Int64))
-    , _httprRequestMethod                  :: !(Maybe Text)
-    , _httprCacheHit                       :: !(Maybe Bool)
-    , _httprReferer                        :: !(Maybe Text)
+    , _httprUserAgent :: !(Maybe Text)
+    , _httprCacheLookup :: !(Maybe Bool)
+    , _httprResponseSize :: !(Maybe (Textual Int64))
+    , _httprRequestMethod :: !(Maybe Text)
+    , _httprCacheHit :: !(Maybe Bool)
+    , _httprReferer :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1994,7 +3082,8 @@ httprCacheFillBytes
       . mapping _Coerce
 
 -- | The IP address (IPv4 or IPv6) of the client that issued the HTTP
--- request. Examples: \"192.168.1.1\", \"FE80::0202:B3FF:FE1E:8329\".
+-- request. This field can include port information. Examples:
+-- \"192.168.1.1\", \"10.0.0.1:80\", \"FE80::0202:B3FF:FE1E:8329\".
 httprRemoteIP :: Lens' HTTPRequest (Maybe Text)
 httprRemoteIP
   = lens _httprRemoteIP
@@ -2015,7 +3104,8 @@ httprProtocol
       (\ s a -> s{_httprProtocol = a})
 
 -- | The IP address (IPv4 or IPv6) of the origin server that the request was
--- sent to.
+-- sent to. This field can include port information. Examples:
+-- \"192.168.1.1\", \"10.0.0.1:80\", \"FE80::0202:B3FF:FE1E:8329\".
 httprServerIP :: Lens' HTTPRequest (Maybe Text)
 httprServerIP
   = lens _httprServerIP
@@ -2130,8 +3220,8 @@ instance ToJSON HTTPRequest where
 -- /See:/ 'exponential' smart constructor.
 data Exponential =
   Exponential'
-    { _eGrowthFactor     :: !(Maybe (Textual Double))
-    , _eScale            :: !(Maybe (Textual Double))
+    { _eGrowthFactor :: !(Maybe (Textual Double))
+    , _eScale :: !(Maybe (Textual Double))
     , _eNumFiniteBuckets :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2230,6 +3320,109 @@ instance FromJSON WriteLogEntriesRequestLabels where
 instance ToJSON WriteLogEntriesRequestLabels where
         toJSON = toJSON . _wlerlAddtional
 
+-- | Information about entries that were omitted from the session.
+--
+-- /See:/ 'suppressionInfo' smart constructor.
+data SuppressionInfo =
+  SuppressionInfo'
+    { _siReason :: !(Maybe SuppressionInfoReason)
+    , _siSuppressedCount :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SuppressionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siReason'
+--
+-- * 'siSuppressedCount'
+suppressionInfo
+    :: SuppressionInfo
+suppressionInfo =
+  SuppressionInfo' {_siReason = Nothing, _siSuppressedCount = Nothing}
+
+
+-- | The reason that entries were omitted from the session.
+siReason :: Lens' SuppressionInfo (Maybe SuppressionInfoReason)
+siReason = lens _siReason (\ s a -> s{_siReason = a})
+
+-- | A lower bound on the count of entries omitted due to reason.
+siSuppressedCount :: Lens' SuppressionInfo (Maybe Int32)
+siSuppressedCount
+  = lens _siSuppressedCount
+      (\ s a -> s{_siSuppressedCount = a})
+      . mapping _Coerce
+
+instance FromJSON SuppressionInfo where
+        parseJSON
+          = withObject "SuppressionInfo"
+              (\ o ->
+                 SuppressionInfo' <$>
+                   (o .:? "reason") <*> (o .:? "suppressedCount"))
+
+instance ToJSON SuppressionInfo where
+        toJSON SuppressionInfo'{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _siReason,
+                  ("suppressedCount" .=) <$> _siSuppressedCount])
+
+-- | The response from ListViews.
+--
+-- /See:/ 'listViewsResponse' smart constructor.
+data ListViewsResponse =
+  ListViewsResponse'
+    { _lvrNextPageToken :: !(Maybe Text)
+    , _lvrViews :: !(Maybe [LogView])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListViewsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lvrNextPageToken'
+--
+-- * 'lvrViews'
+listViewsResponse
+    :: ListViewsResponse
+listViewsResponse =
+  ListViewsResponse' {_lvrNextPageToken = Nothing, _lvrViews = Nothing}
+
+
+-- | If there might be more results than appear in this response, then
+-- nextPageToken is included. To get the next set of results, call the same
+-- method again using the value of nextPageToken as pageToken.
+lvrNextPageToken :: Lens' ListViewsResponse (Maybe Text)
+lvrNextPageToken
+  = lens _lvrNextPageToken
+      (\ s a -> s{_lvrNextPageToken = a})
+
+-- | A list of views.
+lvrViews :: Lens' ListViewsResponse [LogView]
+lvrViews
+  = lens _lvrViews (\ s a -> s{_lvrViews = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListViewsResponse where
+        parseJSON
+          = withObject "ListViewsResponse"
+              (\ o ->
+                 ListViewsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "views" .!= mempty))
+
+instance ToJSON ListViewsResponse where
+        toJSON ListViewsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lvrNextPageToken,
+                  ("views" .=) <$> _lvrViews])
+
 -- | An object representing a resource that can be used for monitoring,
 -- logging, billing, or other purposes. Examples include virtual machine
 -- instances, databases, and storage devices such as disks. The type field
@@ -2246,7 +3439,7 @@ instance ToJSON WriteLogEntriesRequestLabels where
 data MonitoredResource =
   MonitoredResource'
     { _mrLabels :: !(Maybe MonitoredResourceLabels)
-    , _mrType   :: !(Maybe Text)
+    , _mrType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2289,14 +3482,154 @@ instance ToJSON MonitoredResource where
                  [("labels" .=) <$> _mrLabels,
                   ("type" .=) <$> _mrType])
 
+-- | Describes a repository of logs.
+--
+-- /See:/ 'logBucket' smart constructor.
+data LogBucket =
+  LogBucket'
+    { _lbRestrictedFields :: !(Maybe [Text])
+    , _lbLocked :: !(Maybe Bool)
+    , _lbRetentionDays :: !(Maybe (Textual Int32))
+    , _lbUpdateTime :: !(Maybe DateTime')
+    , _lbName :: !(Maybe Text)
+    , _lbDescription :: !(Maybe Text)
+    , _lbLifecycleState :: !(Maybe LogBucketLifecycleState)
+    , _lbCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LogBucket' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbRestrictedFields'
+--
+-- * 'lbLocked'
+--
+-- * 'lbRetentionDays'
+--
+-- * 'lbUpdateTime'
+--
+-- * 'lbName'
+--
+-- * 'lbDescription'
+--
+-- * 'lbLifecycleState'
+--
+-- * 'lbCreateTime'
+logBucket
+    :: LogBucket
+logBucket =
+  LogBucket'
+    { _lbRestrictedFields = Nothing
+    , _lbLocked = Nothing
+    , _lbRetentionDays = Nothing
+    , _lbUpdateTime = Nothing
+    , _lbName = Nothing
+    , _lbDescription = Nothing
+    , _lbLifecycleState = Nothing
+    , _lbCreateTime = Nothing
+    }
+
+
+-- | Log entry field paths that are denied access in this bucket. The
+-- following fields and their children are eligible: textPayload,
+-- jsonPayload, protoPayload, httpRequest, labels, sourceLocation.
+-- Restricting a repeated field will restrict all values. Adding a parent
+-- will block all child fields e.g. foo.bar will block foo.bar.baz.
+lbRestrictedFields :: Lens' LogBucket [Text]
+lbRestrictedFields
+  = lens _lbRestrictedFields
+      (\ s a -> s{_lbRestrictedFields = a})
+      . _Default
+      . _Coerce
+
+-- | Whether the bucket has been locked. The retention period on a locked
+-- bucket may not be changed. Locked buckets may only be deleted if they
+-- are empty.
+lbLocked :: Lens' LogBucket (Maybe Bool)
+lbLocked = lens _lbLocked (\ s a -> s{_lbLocked = a})
+
+-- | Logs will be retained by default for this amount of time, after which
+-- they will automatically be deleted. The minimum retention period is 1
+-- day. If this value is set to zero at bucket creation time, the default
+-- time of 30 days will be used.
+lbRetentionDays :: Lens' LogBucket (Maybe Int32)
+lbRetentionDays
+  = lens _lbRetentionDays
+      (\ s a -> s{_lbRetentionDays = a})
+      . mapping _Coerce
+
+-- | Output only. The last update timestamp of the bucket.
+lbUpdateTime :: Lens' LogBucket (Maybe UTCTime)
+lbUpdateTime
+  = lens _lbUpdateTime (\ s a -> s{_lbUpdateTime = a})
+      . mapping _DateTime
+
+-- | Output only. The resource name of the bucket. For example:
+-- \"projects\/my-project-id\/locations\/my-location\/buckets\/my-bucket-id\"
+-- The supported locations are: global, us-central1, us-east1, us-west1,
+-- asia-east1, europe-west1.For the location of global it is unspecified
+-- where logs are actually stored. Once a bucket has been created, the
+-- location can not be changed.
+lbName :: Lens' LogBucket (Maybe Text)
+lbName = lens _lbName (\ s a -> s{_lbName = a})
+
+-- | Describes this bucket.
+lbDescription :: Lens' LogBucket (Maybe Text)
+lbDescription
+  = lens _lbDescription
+      (\ s a -> s{_lbDescription = a})
+
+-- | Output only. The bucket lifecycle state.
+lbLifecycleState :: Lens' LogBucket (Maybe LogBucketLifecycleState)
+lbLifecycleState
+  = lens _lbLifecycleState
+      (\ s a -> s{_lbLifecycleState = a})
+
+-- | Output only. The creation timestamp of the bucket. This is not set for
+-- any of the default buckets.
+lbCreateTime :: Lens' LogBucket (Maybe UTCTime)
+lbCreateTime
+  = lens _lbCreateTime (\ s a -> s{_lbCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON LogBucket where
+        parseJSON
+          = withObject "LogBucket"
+              (\ o ->
+                 LogBucket' <$>
+                   (o .:? "restrictedFields" .!= mempty) <*>
+                     (o .:? "locked")
+                     <*> (o .:? "retentionDays")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "description")
+                     <*> (o .:? "lifecycleState")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON LogBucket where
+        toJSON LogBucket'{..}
+          = object
+              (catMaybes
+                 [("restrictedFields" .=) <$> _lbRestrictedFields,
+                  ("locked" .=) <$> _lbLocked,
+                  ("retentionDays" .=) <$> _lbRetentionDays,
+                  ("updateTime" .=) <$> _lbUpdateTime,
+                  ("name" .=) <$> _lbName,
+                  ("description" .=) <$> _lbDescription,
+                  ("lifecycleState" .=) <$> _lbLifecycleState,
+                  ("createTime" .=) <$> _lbCreateTime])
+
 -- | Application log line emitted while processing a request.
 --
 -- /See:/ 'logLine' smart constructor.
 data LogLine =
   LogLine'
-    { _llTime           :: !(Maybe DateTime')
-    , _llSeverity       :: !(Maybe LogLineSeverity)
-    , _llLogMessage     :: !(Maybe Text)
+    { _llTime :: !(Maybe DateTime')
+    , _llSeverity :: !(Maybe LogLineSeverity)
+    , _llLogMessage :: !(Maybe Text)
     , _llSourceLocation :: !(Maybe SourceLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2370,8 +3703,8 @@ instance ToJSON LogLine where
 data MetricDescriptorMetadata =
   MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
-    , _mdmIngestDelay  :: !(Maybe GDuration)
-    , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
+    , _mdmIngestDelay :: !(Maybe GDuration)
+    , _mdmLaunchStage :: !(Maybe MetricDescriptorMetadataLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2414,7 +3747,7 @@ mdmIngestDelay
       (\ s a -> s{_mdmIngestDelay = a})
       . mapping _GDuration
 
--- | The launch stage of the metric definition.
+-- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
 mdmLaunchStage :: Lens' MetricDescriptorMetadata (Maybe MetricDescriptorMetadataLaunchStage)
 mdmLaunchStage
   = lens _mdmLaunchStage
@@ -2489,8 +3822,8 @@ instance ToJSON MonitoredResourceMetadataSystemLabels
 -- /See:/ 'labelDescriptor' smart constructor.
 data LabelDescriptor =
   LabelDescriptor'
-    { _ldKey         :: !(Maybe Text)
-    , _ldValueType   :: !(Maybe LabelDescriptorValueType)
+    { _ldKey :: !(Maybe Text)
+    , _ldValueType :: !(Maybe LabelDescriptorValueType)
     , _ldDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2553,8 +3886,8 @@ instance ToJSON LabelDescriptor where
 -- /See:/ 'linear' smart constructor.
 data Linear =
   Linear'
-    { _lOffSet           :: !(Maybe (Textual Double))
-    , _lWidth            :: !(Maybe (Textual Double))
+    { _lOffSet :: !(Maybe (Textual Double))
+    , _lWidth :: !(Maybe (Textual Double))
     , _lNumFiniteBuckets :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2615,11 +3948,11 @@ instance ToJSON Linear where
 -- /See:/ 'listLogEntriesRequest' smart constructor.
 data ListLogEntriesRequest =
   ListLogEntriesRequest'
-    { _llerOrderBy       :: !(Maybe Text)
-    , _llerProjectIds    :: !(Maybe [Text])
-    , _llerFilter        :: !(Maybe Text)
-    , _llerPageToken     :: !(Maybe Text)
-    , _llerPageSize      :: !(Maybe (Textual Int32))
+    { _llerOrderBy :: !(Maybe Text)
+    , _llerProjectIds :: !(Maybe [Text])
+    , _llerFilter :: !(Maybe Text)
+    , _llerPageToken :: !(Maybe Text)
+    , _llerPageSize :: !(Maybe (Textual Int32))
     , _llerResourceNames :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2663,9 +3996,9 @@ llerOrderBy :: Lens' ListLogEntriesRequest (Maybe Text)
 llerOrderBy
   = lens _llerOrderBy (\ s a -> s{_llerOrderBy = a})
 
--- | Deprecated. Use resource_names instead. One or more project identifiers
--- or project numbers from which to retrieve log entries. Example:
--- \"my-project-1A\".
+-- | Optional. Deprecated. Use resource_names instead. One or more project
+-- identifiers or project numbers from which to retrieve log entries.
+-- Example: \"my-project-1A\".
 llerProjectIds :: Lens' ListLogEntriesRequest [Text]
 llerProjectIds
   = lens _llerProjectIds
@@ -2674,11 +4007,13 @@ llerProjectIds
       . _Coerce
 
 -- | Optional. A filter that chooses which log entries to return. See
--- Advanced Logs Filters. Only log entries that match the filter are
--- returned. An empty filter matches all log entries in the resources
--- listed in resource_names. Referencing a parent resource that is not
--- listed in resource_names will cause the filter to return no results. The
--- maximum length of the filter is 20000 characters.
+-- Advanced Logs Queries
+-- (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced-queries).
+-- Only log entries that match the filter are returned. An empty filter
+-- matches all log entries in the resources listed in resource_names.
+-- Referencing a parent resource that is not listed in resource_names will
+-- cause the filter to return no results. The maximum length of the filter
+-- is 20000 characters.
 llerFilter :: Lens' ListLogEntriesRequest (Maybe Text)
 llerFilter
   = lens _llerFilter (\ s a -> s{_llerFilter = a})
@@ -2693,18 +4028,23 @@ llerPageToken
       (\ s a -> s{_llerPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of next_page_token in the
--- response indicates that more results might be available.
+-- Default is 50. If the value is negative or exceeds 1000, the request is
+-- rejected. The presence of next_page_token in the response indicates that
+-- more results might be available.
 llerPageSize :: Lens' ListLogEntriesRequest (Maybe Int32)
 llerPageSize
   = lens _llerPageSize (\ s a -> s{_llerPageSize = a})
       . mapping _Coerce
 
 -- | Required. Names of one or more parent resources from which to retrieve
--- log entries: \"projects\/[PROJECT_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
--- Projects listed in the project_ids field are added to this list.
+-- log entries: projects\/[PROJECT_ID] organizations\/[ORGANIZATION_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID] folders\/[FOLDER_ID]May
+-- alternatively be one or more views:
+-- projects\/[PROJECT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- organizations\/[ORGANIZATION_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- folders\/[FOLDER_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]Projects
+-- listed in the project_ids field are added to this list.
 llerResourceNames :: Lens' ListLogEntriesRequest [Text]
 llerResourceNames
   = lens _llerResourceNames
@@ -2734,16 +4074,77 @@ instance ToJSON ListLogEntriesRequest where
                   ("pageSize" .=) <$> _llerPageSize,
                   ("resourceNames" .=) <$> _llerResourceNames])
 
+-- | Result returned from TailLogEntries.
+--
+-- /See:/ 'tailLogEntriesResponse' smart constructor.
+data TailLogEntriesResponse =
+  TailLogEntriesResponse'
+    { _tlerEntries :: !(Maybe [LogEntry])
+    , _tlerSuppressionInfo :: !(Maybe [SuppressionInfo])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TailLogEntriesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlerEntries'
+--
+-- * 'tlerSuppressionInfo'
+tailLogEntriesResponse
+    :: TailLogEntriesResponse
+tailLogEntriesResponse =
+  TailLogEntriesResponse'
+    {_tlerEntries = Nothing, _tlerSuppressionInfo = Nothing}
+
+
+-- | A list of log entries. Each response in the stream will order entries
+-- with increasing values of LogEntry.timestamp. Ordering is not guaranteed
+-- between separate responses.
+tlerEntries :: Lens' TailLogEntriesResponse [LogEntry]
+tlerEntries
+  = lens _tlerEntries (\ s a -> s{_tlerEntries = a}) .
+      _Default
+      . _Coerce
+
+-- | If entries that otherwise would have been included in the session were
+-- not sent back to the client, counts of relevant entries omitted from the
+-- session with the reason that they were not included. There will be at
+-- most one of each reason per response. The counts represent the number of
+-- suppressed entries since the last streamed response.
+tlerSuppressionInfo :: Lens' TailLogEntriesResponse [SuppressionInfo]
+tlerSuppressionInfo
+  = lens _tlerSuppressionInfo
+      (\ s a -> s{_tlerSuppressionInfo = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TailLogEntriesResponse where
+        parseJSON
+          = withObject "TailLogEntriesResponse"
+              (\ o ->
+                 TailLogEntriesResponse' <$>
+                   (o .:? "entries" .!= mempty) <*>
+                     (o .:? "suppressionInfo" .!= mempty))
+
+instance ToJSON TailLogEntriesResponse where
+        toJSON TailLogEntriesResponse'{..}
+          = object
+              (catMaybes
+                 [("entries" .=) <$> _tlerEntries,
+                  ("suppressionInfo" .=) <$> _tlerSuppressionInfo])
+
 -- | Additional information about a potentially long-running operation with
 -- which a log entry is associated.
 --
 -- /See:/ 'logEntryOperation' smart constructor.
 data LogEntryOperation =
   LogEntryOperation'
-    { _leoFirst    :: !(Maybe Bool)
+    { _leoFirst :: !(Maybe Bool)
     , _leoProducer :: !(Maybe Text)
-    , _leoLast     :: !(Maybe Bool)
-    , _leoId       :: !(Maybe Text)
+    , _leoLast :: !(Maybe Bool)
+    , _leoId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2812,7 +4213,7 @@ instance ToJSON LogEntryOperation where
 
 -- | Describes a logs-based metric. The value of the metric is the number of
 -- log entries that match a logs filter in a given time interval.Logs-based
--- metric can also be used to extract values from logs and create a a
+-- metrics can also be used to extract values from logs and create a
 -- distribution of the values. The distribution records the statistics of
 -- the extracted values along with an optional histogram of the values as
 -- specified by the bucket options.
@@ -2821,15 +4222,16 @@ instance ToJSON LogEntryOperation where
 data LogMetric =
   LogMetric'
     { _lmMetricDescriptor :: !(Maybe MetricDescriptor)
-    , _lmUpdateTime       :: !(Maybe DateTime')
-    , _lmName             :: !(Maybe Text)
-    , _lmVersion          :: !(Maybe LogMetricVersion)
-    , _lmLabelExtractors  :: !(Maybe LogMetricLabelExtractors)
-    , _lmFilter           :: !(Maybe Text)
-    , _lmValueExtractor   :: !(Maybe Text)
-    , _lmBucketOptions    :: !(Maybe BucketOptions)
-    , _lmDescription      :: !(Maybe Text)
-    , _lmCreateTime       :: !(Maybe DateTime')
+    , _lmDisabled :: !(Maybe Bool)
+    , _lmUpdateTime :: !(Maybe DateTime')
+    , _lmName :: !(Maybe Text)
+    , _lmVersion :: !(Maybe LogMetricVersion)
+    , _lmLabelExtractors :: !(Maybe LogMetricLabelExtractors)
+    , _lmFilter :: !(Maybe Text)
+    , _lmValueExtractor :: !(Maybe Text)
+    , _lmBucketOptions :: !(Maybe BucketOptions)
+    , _lmDescription :: !(Maybe Text)
+    , _lmCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2839,6 +4241,8 @@ data LogMetric =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lmMetricDescriptor'
+--
+-- * 'lmDisabled'
 --
 -- * 'lmUpdateTime'
 --
@@ -2862,6 +4266,7 @@ logMetric
 logMetric =
   LogMetric'
     { _lmMetricDescriptor = Nothing
+    , _lmDisabled = Nothing
     , _lmUpdateTime = Nothing
     , _lmName = Nothing
     , _lmVersion = Nothing
@@ -2893,6 +4298,12 @@ lmMetricDescriptor :: Lens' LogMetric (Maybe MetricDescriptor)
 lmMetricDescriptor
   = lens _lmMetricDescriptor
       (\ s a -> s{_lmMetricDescriptor = a})
+
+-- | Optional. If set to True, then this metric is disabled and it does not
+-- generate any points.
+lmDisabled :: Lens' LogMetric (Maybe Bool)
+lmDisabled
+  = lens _lmDisabled (\ s a -> s{_lmDisabled = a})
 
 -- | Output only. The last update timestamp of the metric.This field may not
 -- be present for older metrics.
@@ -2937,9 +4348,10 @@ lmLabelExtractors
   = lens _lmLabelExtractors
       (\ s a -> s{_lmLabelExtractors = a})
 
--- | Required. An advanced logs filter which is used to match log entries.
--- Example: \"resource.type=gae_app AND severity>=ERROR\" The maximum
--- length of the filter is 20000 characters.
+-- | Required. An advanced logs filter
+-- (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced_filters)
+-- which is used to match log entries. Example: \"resource.type=gae_app AND
+-- severity>=ERROR\" The maximum length of the filter is 20000 characters.
 lmFilter :: Lens' LogMetric (Maybe Text)
 lmFilter = lens _lmFilter (\ s a -> s{_lmFilter = a})
 
@@ -2990,7 +4402,8 @@ instance FromJSON LogMetric where
           = withObject "LogMetric"
               (\ o ->
                  LogMetric' <$>
-                   (o .:? "metricDescriptor") <*> (o .:? "updateTime")
+                   (o .:? "metricDescriptor") <*> (o .:? "disabled") <*>
+                     (o .:? "updateTime")
                      <*> (o .:? "name")
                      <*> (o .:? "version")
                      <*> (o .:? "labelExtractors")
@@ -3005,6 +4418,7 @@ instance ToJSON LogMetric where
           = object
               (catMaybes
                  [("metricDescriptor" .=) <$> _lmMetricDescriptor,
+                  ("disabled" .=) <$> _lmDisabled,
                   ("updateTime" .=) <$> _lmUpdateTime,
                   ("name" .=) <$> _lmName,
                   ("version" .=) <$> _lmVersion,
@@ -3020,23 +4434,23 @@ instance ToJSON LogMetric where
 -- /See:/ 'logEntry' smart constructor.
 data LogEntry =
   LogEntry'
-    { _leOperation        :: !(Maybe LogEntryOperation)
-    , _leSeverity         :: !(Maybe LogEntrySeverity)
-    , _leTextPayload      :: !(Maybe Text)
-    , _leJSONPayload      :: !(Maybe LogEntryJSONPayload)
-    , _leHTTPRequest      :: !(Maybe HTTPRequest)
-    , _leResource         :: !(Maybe MonitoredResource)
-    , _leInsertId         :: !(Maybe Text)
-    , _leMetadata         :: !(Maybe MonitoredResourceMetadata)
+    { _leOperation :: !(Maybe LogEntryOperation)
+    , _leSeverity :: !(Maybe LogEntrySeverity)
+    , _leTextPayload :: !(Maybe Text)
+    , _leJSONPayload :: !(Maybe LogEntryJSONPayload)
+    , _leHTTPRequest :: !(Maybe HTTPRequest)
+    , _leResource :: !(Maybe MonitoredResource)
+    , _leInsertId :: !(Maybe Text)
+    , _leMetadata :: !(Maybe MonitoredResourceMetadata)
     , _leReceiveTimestamp :: !(Maybe DateTime')
-    , _leLabels           :: !(Maybe LogEntryLabels)
-    , _leProtoPayload     :: !(Maybe LogEntryProtoPayload)
-    , _leSourceLocation   :: !(Maybe LogEntrySourceLocation)
-    , _leTraceSampled     :: !(Maybe Bool)
-    , _leLogName          :: !(Maybe Text)
-    , _leTimestamp        :: !(Maybe DateTime')
-    , _leTrace            :: !(Maybe Text)
-    , _leSpanId           :: !(Maybe Text)
+    , _leLabels :: !(Maybe LogEntryLabels)
+    , _leProtoPayload :: !(Maybe LogEntryProtoPayload)
+    , _leSourceLocation :: !(Maybe LogEntrySourceLocation)
+    , _leTraceSampled :: !(Maybe Bool)
+    , _leLogName :: !(Maybe Text)
+    , _leTimestamp :: !(Maybe DateTime')
+    , _leTrace :: !(Maybe Text)
+    , _leSpanId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3134,32 +4548,28 @@ leHTTPRequest
   = lens _leHTTPRequest
       (\ s a -> s{_leHTTPRequest = a})
 
--- | Required. The primary monitored resource associated with this log
--- entry.Example: a log entry that reports a database error would be
--- associated with the monitored resource designating the particular
--- database that reported the error.
+-- | Required. The monitored resource that produced this log entry.Example: a
+-- log entry that reports a database error would be associated with the
+-- monitored resource designating the particular database that reported the
+-- error.
 leResource :: Lens' LogEntry (Maybe MonitoredResource)
 leResource
   = lens _leResource (\ s a -> s{_leResource = a})
 
 -- | Optional. A unique identifier for the log entry. If you provide a value,
 -- then Logging considers other log entries in the same project, with the
--- same timestamp, and with the same insert_id to be duplicates which can
--- be removed. If omitted in new log entries, then Logging assigns its own
--- unique identifier. The insert_id is also used to order log entries that
--- have the same timestamp value.
+-- same timestamp, and with the same insert_id to be duplicates which are
+-- removed in a single query result. However, there are no guarantees of
+-- de-duplication in the export of logs.If the insert_id is omitted when
+-- writing a log entry, the Logging API assigns its own unique identifier
+-- in this field.In queries, the insert_id is also used to order log
+-- entries that have the same log_name and timestamp values.
 leInsertId :: Lens' LogEntry (Maybe Text)
 leInsertId
   = lens _leInsertId (\ s a -> s{_leInsertId = a})
 
--- | Deprecated. Output only. Additional metadata about the monitored
--- resource.Only k8s_container, k8s_pod, and k8s_node MonitoredResources
--- have this field populated for GKE versions older than 1.12.6. For GKE
--- versions 1.12.6 and above, the metadata field has been deprecated. The
--- Kubernetes pod labels that used to be in metadata.userLabels will now be
--- present in the labels field with a key prefix of k8s-pod\/. The
--- Stackdriver system labels that were present in the metadata.systemLabels
--- field will no longer be available in the LogEntry.
+-- | Output only. Deprecated. This field is not used by Logging. Any value
+-- written to it is cleared.
 leMetadata :: Lens' LogEntry (Maybe MonitoredResourceMetadata)
 leMetadata
   = lens _leMetadata (\ s a -> s{_leMetadata = a})
@@ -3171,13 +4581,24 @@ leReceiveTimestamp
       (\ s a -> s{_leReceiveTimestamp = a})
       . mapping _DateTime
 
--- | Optional. A set of user-defined (key, value) data that provides
--- additional information about the log entry.
+-- | Optional. A map of key, value pairs that provides additional information
+-- about the log entry. The labels can be user-defined or
+-- system-defined.User-defined labels are arbitrary key, value pairs that
+-- you can use to classify logs.System-defined labels are defined by GCP
+-- services for platform logs. They have two components - a service
+-- namespace component and the attribute name. For example:
+-- compute.googleapis.com\/resource_name.Cloud Logging truncates label keys
+-- that exceed 512 B and label values that exceed 64 KB upon their
+-- associated log entry being written. The truncation is indicated by an
+-- ellipsis at the end of the character string.
 leLabels :: Lens' LogEntry (Maybe LogEntryLabels)
 leLabels = lens _leLabels (\ s a -> s{_leLabels = a})
 
 -- | The log entry payload, represented as a protocol buffer. Some Google
--- Cloud Platform services use this field for their log entry payloads.
+-- Cloud Platform services use this field for their log entry payloads.The
+-- following protocol buffer types are supported; user-defined types are
+-- not supported:\"type.googleapis.com\/google.cloud.audit.AuditLog\"
+-- \"type.googleapis.com\/google.appengine.logging.v1.RequestLog\"
 leProtoPayload :: Lens' LogEntry (Maybe LogEntryProtoPayload)
 leProtoPayload
   = lens _leProtoPayload
@@ -3205,20 +4626,19 @@ leTraceSampled
 -- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
 -- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\"
 -- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]\"
--- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" A project number may optionally
--- be used in place of PROJECT_ID. The project number is translated to its
+-- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" A project number may be used in
+-- place of PROJECT_ID. The project number is translated to its
 -- corresponding PROJECT_ID internally and the log_name field will contain
 -- PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within
 -- log_name. Example:
--- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
--- [LOG_ID] must be less than 512 characters long and can only include the
--- following characters: upper and lower case alphanumeric characters,
--- forward-slash, underscore, hyphen, and period.For backward
--- compatibility, if log_name begins with a forward-slash, such as
--- \/projects\/..., then the log entry is ingested as usual but the
--- forward-slash is removed. Listing the log entry will not show the
--- leading slash and filtering for a log name with a leading slash will
--- never return any results.
+-- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".[LOG_ID]
+-- must be less than 512 characters long and can only include the following
+-- characters: upper and lower case alphanumeric characters, forward-slash,
+-- underscore, hyphen, and period.For backward compatibility, if log_name
+-- begins with a forward-slash, such as \/projects\/..., then the log entry
+-- is ingested as usual, but the forward-slash is removed. Listing the log
+-- entry will not show the leading slash and filtering for a log name with
+-- a leading slash will never return any results.
 leLogName :: Lens' LogEntry (Maybe Text)
 leLogName
   = lens _leLogName (\ s a -> s{_leLogName = a})
@@ -3228,11 +4648,11 @@ leLogName
 -- retention period. If this field is omitted in a new log entry, then
 -- Logging assigns it the current time. Timestamps have nanosecond
 -- accuracy, but trailing zeros in the fractional seconds might be omitted
--- when the timestamp is displayed.Incoming log entries should have
--- timestamps that are no more than the logs retention period in the past,
--- and no more than 24 hours in the future. Log entries outside those time
--- boundaries will not be available when calling entries.list, but those
--- log entries can still be exported with LogSinks.
+-- when the timestamp is displayed.Incoming log entries must have
+-- timestamps that don\'t exceed the logs retention period
+-- (https:\/\/cloud.google.com\/logging\/quotas#logs_retention_periods) in
+-- the past, and that don\'t exceed 24 hours in the future. Log entries
+-- outside those time boundaries aren\'t ingested by Logging.
 leTimestamp :: Lens' LogEntry (Maybe UTCTime)
 leTimestamp
   = lens _leTimestamp (\ s a -> s{_leTimestamp = a}) .
@@ -3248,7 +4668,7 @@ leTrace = lens _leTrace (\ s a -> s{_leTrace = a})
 -- | Optional. The span ID within the trace associated with the log entry.For
 -- Trace spans, this is the same format that the Trace API v2 uses: a
 -- 16-character hexadecimal encoding of an 8-byte array, such as
--- '\"000000000000004a\"'.
+-- 000000000000004a.
 leSpanId :: Lens' LogEntry (Maybe Text)
 leSpanId = lens _leSpanId (\ s a -> s{_leSpanId = a})
 
@@ -3296,14 +4716,50 @@ instance ToJSON LogEntry where
                   ("trace" .=) <$> _leTrace,
                   ("spanId" .=) <$> _leSpanId])
 
+-- | Cross-service attributes for the location. For example
+-- {\"cloud.googleapis.com\/region\": \"us-east1\"}
+--
+-- /See:/ 'locationLabels' smart constructor.
+newtype LocationLabels =
+  LocationLabels'
+    { _llAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llAddtional'
+locationLabels
+    :: HashMap Text Text -- ^ 'llAddtional'
+    -> LocationLabels
+locationLabels pLlAddtional_ =
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
+
+llAddtional :: Lens' LocationLabels (HashMap Text Text)
+llAddtional
+  = lens _llAddtional (\ s a -> s{_llAddtional = a}) .
+      _Coerce
+
+instance FromJSON LocationLabels where
+        parseJSON
+          = withObject "LocationLabels"
+              (\ o -> LocationLabels' <$> (parseJSONObject o))
+
+instance ToJSON LocationLabels where
+        toJSON = toJSON . _llAddtional
+
 -- | Specifies a location in a source code file.
 --
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation =
   SourceLocation'
-    { _slLine         :: !(Maybe (Textual Int64))
+    { _slLine :: !(Maybe (Textual Int64))
     , _slFunctionName :: !(Maybe Text)
-    , _slFile         :: !(Maybe Text)
+    , _slFile :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3362,6 +4818,82 @@ instance ToJSON SourceLocation where
                   ("functionName" .=) <$> _slFunctionName,
                   ("file" .=) <$> _slFile])
 
+-- | Service-specific metadata. For example the available capacity at the
+-- given location.
+--
+-- /See:/ 'locationMetadata' smart constructor.
+newtype LocationMetadata =
+  LocationMetadata'
+    { _lmAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmAddtional'
+locationMetadata
+    :: HashMap Text JSONValue -- ^ 'lmAddtional'
+    -> LocationMetadata
+locationMetadata pLmAddtional_ =
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
+lmAddtional
+  = lens _lmAddtional (\ s a -> s{_lmAddtional = a}) .
+      _Coerce
+
+instance FromJSON LocationMetadata where
+        parseJSON
+          = withObject "LocationMetadata"
+              (\ o -> LocationMetadata' <$> (parseJSONObject o))
+
+instance ToJSON LocationMetadata where
+        toJSON = toJSON . _lmAddtional
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'operationMetadata' smart constructor.
+newtype OperationMetadata =
+  OperationMetadata'
+    { _omAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omAddtional'
+operationMetadata
+    :: HashMap Text JSONValue -- ^ 'omAddtional'
+    -> OperationMetadata
+operationMetadata pOmAddtional_ =
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
+omAddtional
+  = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
+      _Coerce
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> OperationMetadata' <$> (parseJSONObject o))
+
+instance ToJSON OperationMetadata where
+        toJSON = toJSON . _omAddtional
+
 -- | BucketOptions describes the bucket boundaries used to create a histogram
 -- for the distribution. The buckets can be in a linear sequence, an
 -- exponential sequence, or each bucket can be specified explicitly.
@@ -3381,8 +4913,8 @@ instance ToJSON SourceLocation where
 data BucketOptions =
   BucketOptions'
     { _boExponentialBuckets :: !(Maybe Exponential)
-    , _boLinearBuckets      :: !(Maybe Linear)
-    , _boExplicitBuckets    :: !(Maybe Explicit)
+    , _boLinearBuckets :: !(Maybe Linear)
+    , _boExplicitBuckets :: !(Maybe Explicit)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3529,3 +5061,134 @@ instance FromJSON LogEntryJSONPayload where
 
 instance ToJSON LogEntryJSONPayload where
         toJSON = toJSON . _lejpAddtional
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as Delete, the response is
+-- google.protobuf.Empty. If the original method is standard
+-- Get\/Create\/Update, the response should be the resource. For other
+-- methods, the response should have the type XxxResponse, where Xxx is the
+-- original method name. For example, if the original method name is
+-- TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
+--
+-- /See:/ 'operationResponse' smart constructor.
+newtype OperationResponse =
+  OperationResponse'
+    { _orAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'orAddtional'
+operationResponse
+    :: HashMap Text JSONValue -- ^ 'orAddtional'
+    -> OperationResponse
+operationResponse pOrAddtional_ =
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
+orAddtional
+  = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
+      _Coerce
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
+
+instance ToJSON OperationResponse where
+        toJSON = toJSON . _orAddtional
+
+-- | Describes a view over logs in a bucket.
+--
+-- /See:/ 'logView' smart constructor.
+data LogView =
+  LogView'
+    { _lvUpdateTime :: !(Maybe DateTime')
+    , _lvName :: !(Maybe Text)
+    , _lvFilter :: !(Maybe Text)
+    , _lvDescription :: !(Maybe Text)
+    , _lvCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LogView' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lvUpdateTime'
+--
+-- * 'lvName'
+--
+-- * 'lvFilter'
+--
+-- * 'lvDescription'
+--
+-- * 'lvCreateTime'
+logView
+    :: LogView
+logView =
+  LogView'
+    { _lvUpdateTime = Nothing
+    , _lvName = Nothing
+    , _lvFilter = Nothing
+    , _lvDescription = Nothing
+    , _lvCreateTime = Nothing
+    }
+
+
+-- | Output only. The last update timestamp of the view.
+lvUpdateTime :: Lens' LogView (Maybe UTCTime)
+lvUpdateTime
+  = lens _lvUpdateTime (\ s a -> s{_lvUpdateTime = a})
+      . mapping _DateTime
+
+-- | The resource name of the view. For example
+-- \"projects\/my-project-id\/locations\/my-location\/buckets\/my-bucket-id\/views\/my-view
+lvName :: Lens' LogView (Maybe Text)
+lvName = lens _lvName (\ s a -> s{_lvName = a})
+
+-- | Filter that restricts which log entries in a bucket are visible in this
+-- view. Filters are restricted to be a logical AND of ==\/!= of any of the
+-- following: originating project\/folder\/organization\/billing account.
+-- resource type log id Example: SOURCE(\"projects\/myproject\") AND
+-- resource.type = \"gce_instance\" AND LOG_ID(\"stdout\")
+lvFilter :: Lens' LogView (Maybe Text)
+lvFilter = lens _lvFilter (\ s a -> s{_lvFilter = a})
+
+-- | Describes this view.
+lvDescription :: Lens' LogView (Maybe Text)
+lvDescription
+  = lens _lvDescription
+      (\ s a -> s{_lvDescription = a})
+
+-- | Output only. The creation timestamp of the view.
+lvCreateTime :: Lens' LogView (Maybe UTCTime)
+lvCreateTime
+  = lens _lvCreateTime (\ s a -> s{_lvCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON LogView where
+        parseJSON
+          = withObject "LogView"
+              (\ o ->
+                 LogView' <$>
+                   (o .:? "updateTime") <*> (o .:? "name") <*>
+                     (o .:? "filter")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON LogView where
+        toJSON LogView'{..}
+          = object
+              (catMaybes
+                 [("updateTime" .=) <$> _lvUpdateTime,
+                  ("name" .=) <$> _lvName, ("filter" .=) <$> _lvFilter,
+                  ("description" .=) <$> _lvDescription,
+                  ("createTime" .=) <$> _lvCreateTime])

@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Update
     , ccuAdClientId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.customchannels.update@ method which the
 -- 'CustomChannelsUpdate' request conforms to.
@@ -57,7 +57,7 @@ type CustomChannelsUpdateResource =
 -- /See:/ 'customChannelsUpdate' smart constructor.
 data CustomChannelsUpdate =
   CustomChannelsUpdate'
-    { _ccuPayload    :: !CustomChannel
+    { _ccuPayload :: !CustomChannel
     , _ccuAdClientId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -46,8 +46,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.SetMasterAuth
     , pzcsmaCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.setMasterAuth@ method which the
 -- 'ProjectsZonesClustersSetMasterAuth' request conforms to.
@@ -75,15 +75,15 @@ type ProjectsZonesClustersSetMasterAuthResource =
 -- /See:/ 'projectsZonesClustersSetMasterAuth' smart constructor.
 data ProjectsZonesClustersSetMasterAuth =
   ProjectsZonesClustersSetMasterAuth'
-    { _pzcsmaXgafv          :: !(Maybe Xgafv)
+    { _pzcsmaXgafv :: !(Maybe Xgafv)
     , _pzcsmaUploadProtocol :: !(Maybe Text)
-    , _pzcsmaAccessToken    :: !(Maybe Text)
-    , _pzcsmaUploadType     :: !(Maybe Text)
-    , _pzcsmaZone           :: !Text
-    , _pzcsmaPayload        :: !SetMasterAuthRequest
-    , _pzcsmaClusterId      :: !Text
-    , _pzcsmaProjectId      :: !Text
-    , _pzcsmaCallback       :: !(Maybe Text)
+    , _pzcsmaAccessToken :: !(Maybe Text)
+    , _pzcsmaUploadType :: !(Maybe Text)
+    , _pzcsmaZone :: !Text
+    , _pzcsmaPayload :: !SetMasterAuthRequest
+    , _pzcsmaClusterId :: !Text
+    , _pzcsmaProjectId :: !Text
+    , _pzcsmaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -153,8 +153,9 @@ pzcsmaUploadType
       (\ s a -> s{_pzcsmaUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcsmaZone :: Lens' ProjectsZonesClustersSetMasterAuth Text
 pzcsmaZone
   = lens _pzcsmaZone (\ s a -> s{_pzcsmaZone = a})

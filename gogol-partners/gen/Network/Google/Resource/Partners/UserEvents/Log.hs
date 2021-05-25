@@ -41,8 +41,8 @@ module Network.Google.Resource.Partners.UserEvents.Log
     , uelCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.userEvents.log@ method which the
 -- 'UserEventsLog' request conforms to.
@@ -63,12 +63,12 @@ type UserEventsLogResource =
 -- /See:/ 'userEventsLog' smart constructor.
 data UserEventsLog =
   UserEventsLog'
-    { _uelXgafv          :: !(Maybe Xgafv)
+    { _uelXgafv :: !(Maybe Xgafv)
     , _uelUploadProtocol :: !(Maybe Text)
-    , _uelAccessToken    :: !(Maybe Text)
-    , _uelUploadType     :: !(Maybe Text)
-    , _uelPayload        :: !LogUserEventRequest
-    , _uelCallback       :: !(Maybe Text)
+    , _uelAccessToken :: !(Maybe Text)
+    , _uelUploadType :: !(Maybe Text)
+    , _uelPayload :: !LogUserEventRequest
+    , _uelCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

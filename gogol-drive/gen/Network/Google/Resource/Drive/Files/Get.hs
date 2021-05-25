@@ -34,13 +34,14 @@ module Network.Google.Resource.Drive.Files.Get
 
     -- * Request Lenses
     , fgSupportsAllDrives
+    , fgIncludePermissionsForView
     , fgAcknowledgeAbuse
     , fgFileId
     , fgSupportsTeamDrives
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.get@ method which the
 -- 'FilesGet' request conforms to.
@@ -50,28 +51,31 @@ type FilesGetResource =
          "files" :>
            Capture "fileId" Text :>
              QueryParam "supportsAllDrives" Bool :>
-               QueryParam "acknowledgeAbuse" Bool :>
-                 QueryParam "supportsTeamDrives" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] File
+               QueryParam "includePermissionsForView" Text :>
+                 QueryParam "acknowledgeAbuse" Bool :>
+                   QueryParam "supportsTeamDrives" Bool :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "drive" :>
          "v3" :>
            "files" :>
              Capture "fileId" Text :>
                QueryParam "supportsAllDrives" Bool :>
-                 QueryParam "acknowledgeAbuse" Bool :>
-                   QueryParam "supportsTeamDrives" Bool :>
-                     QueryParam "alt" AltMedia :>
-                       Get '[OctetStream] Stream
+                 QueryParam "includePermissionsForView" Text :>
+                   QueryParam "acknowledgeAbuse" Bool :>
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltMedia :>
+                         Get '[OctetStream] Stream
 
 -- | Gets a file\'s metadata or content by ID.
 --
 -- /See:/ 'filesGet' smart constructor.
 data FilesGet =
   FilesGet'
-    { _fgSupportsAllDrives  :: !Bool
-    , _fgAcknowledgeAbuse   :: !Bool
-    , _fgFileId             :: !Text
+    { _fgSupportsAllDrives :: !Bool
+    , _fgIncludePermissionsForView :: !(Maybe Text)
+    , _fgAcknowledgeAbuse :: !Bool
+    , _fgFileId :: !Text
     , _fgSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -82,6 +86,8 @@ data FilesGet =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fgSupportsAllDrives'
+--
+-- * 'fgIncludePermissionsForView'
 --
 -- * 'fgAcknowledgeAbuse'
 --
@@ -94,6 +100,7 @@ filesGet
 filesGet pFgFileId_ =
   FilesGet'
     { _fgSupportsAllDrives = False
+    , _fgIncludePermissionsForView = Nothing
     , _fgAcknowledgeAbuse = False
     , _fgFileId = pFgFileId_
     , _fgSupportsTeamDrives = False
@@ -106,6 +113,13 @@ fgSupportsAllDrives :: Lens' FilesGet Bool
 fgSupportsAllDrives
   = lens _fgSupportsAllDrives
       (\ s a -> s{_fgSupportsAllDrives = a})
+
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+fgIncludePermissionsForView :: Lens' FilesGet (Maybe Text)
+fgIncludePermissionsForView
+  = lens _fgIncludePermissionsForView
+      (\ s a -> s{_fgIncludePermissionsForView = a})
 
 -- | Whether the user is acknowledging the risk of downloading known malware
 -- or other abusive files. This is only applicable when alt=media.
@@ -136,6 +150,7 @@ instance GoogleRequest FilesGet where
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient FilesGet'{..}
           = go _fgFileId (Just _fgSupportsAllDrives)
+              _fgIncludePermissionsForView
               (Just _fgAcknowledgeAbuse)
               (Just _fgSupportsTeamDrives)
               (Just AltJSON)
@@ -150,6 +165,7 @@ instance GoogleRequest (MediaDownload FilesGet) where
              Scopes FilesGet
         requestClient (MediaDownload FilesGet'{..})
           = go _fgFileId (Just _fgSupportsAllDrives)
+              _fgIncludePermissionsForView
               (Just _fgAcknowledgeAbuse)
               (Just _fgSupportsTeamDrives)
               (Just AltMedia)

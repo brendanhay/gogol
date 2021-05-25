@@ -22,7 +22,14 @@
 --
 -- RetrieveStudyMetadata returns instance associated with the given study
 -- presented as metadata with the bulk data removed. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.6.
+-- [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4).
+-- For details on the implementation of RetrieveStudyMetadata, see
+-- [Metadata
+-- resources](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#metadata_resources)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveStudyMetadata, see [Retrieving
+-- metadata](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_metadata).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.retrieveMetadata@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.RetrieveMetadata
@@ -44,14 +51,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdssrmDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.retrieveMetadata@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadataResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -64,18 +71,25 @@ type ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadataResource
 
 -- | RetrieveStudyMetadata returns instance associated with the given study
 -- presented as metadata with the bulk data removed. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.6.
+-- [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4).
+-- For details on the implementation of RetrieveStudyMetadata, see
+-- [Metadata
+-- resources](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#metadata_resources)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveStudyMetadata, see [Retrieving
+-- metadata](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_metadata).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata =
   ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata'
-    { _pldsdssrmParent         :: !Text
-    , _pldsdssrmXgafv          :: !(Maybe Xgafv)
+    { _pldsdssrmParent :: !Text
+    , _pldsdssrmXgafv :: !(Maybe Xgafv)
     , _pldsdssrmUploadProtocol :: !(Maybe Text)
-    , _pldsdssrmAccessToken    :: !(Maybe Text)
-    , _pldsdssrmUploadType     :: !(Maybe Text)
-    , _pldsdssrmCallback       :: !(Maybe Text)
-    , _pldsdssrmDicomWebPath   :: !Text
+    , _pldsdssrmAccessToken :: !(Maybe Text)
+    , _pldsdssrmUploadType :: !(Maybe Text)
+    , _pldsdssrmCallback :: !(Maybe Text)
+    , _pldsdssrmDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,8 +127,8 @@ projectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata pPldsdssrmParent_ pP
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdssrmParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata Text
 pldsdssrmParent
   = lens _pldsdssrmParent
@@ -150,8 +164,8 @@ pldsdssrmCallback
   = lens _pldsdssrmCallback
       (\ s a -> s{_pldsdssrmCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g., \`studies\/{study_id}\/metadata\`.
+-- | The path of the RetrieveStudyMetadata DICOMweb request. For example,
+-- \`studies\/{study_uid}\/metadata\`.
 pldsdssrmDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesRetrieveMetadata Text
 pldsdssrmDicomWebPath
   = lens _pldsdssrmDicomWebPath

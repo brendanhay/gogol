@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a YouTube video.
+-- Deletes a resource.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.delete@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videos.delete@.
 module Network.Google.Resource.YouTube.Videos.Delete
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.YouTube.Videos.Delete
     , VideosDelete
 
     -- * Request Lenses
+    , vdXgafv
+    , vdUploadProtocol
+    , vdAccessToken
+    , vdUploadType
     , vdOnBehalfOfContentOwner
     , vdId
+    , vdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.delete@ method which the
 -- 'VideosDelete' request conforms to.
@@ -47,16 +52,26 @@ type VideosDeleteResource =
        "v3" :>
          "videos" :>
            QueryParam "id" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a YouTube video.
+-- | Deletes a resource.
 --
 -- /See:/ 'videosDelete' smart constructor.
 data VideosDelete =
   VideosDelete'
-    { _vdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vdId                     :: !Text
+    { _vdXgafv :: !(Maybe Xgafv)
+    , _vdUploadProtocol :: !(Maybe Text)
+    , _vdAccessToken :: !(Maybe Text)
+    , _vdUploadType :: !(Maybe Text)
+    , _vdOnBehalfOfContentOwner :: !(Maybe Text)
+    , _vdId :: !Text
+    , _vdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,18 +80,57 @@ data VideosDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vdXgafv'
+--
+-- * 'vdUploadProtocol'
+--
+-- * 'vdAccessToken'
+--
+-- * 'vdUploadType'
+--
 -- * 'vdOnBehalfOfContentOwner'
 --
 -- * 'vdId'
+--
+-- * 'vdCallback'
 videosDelete
     :: Text -- ^ 'vdId'
     -> VideosDelete
 videosDelete pVdId_ =
-  VideosDelete' {_vdOnBehalfOfContentOwner = Nothing, _vdId = pVdId_}
+  VideosDelete'
+    { _vdXgafv = Nothing
+    , _vdUploadProtocol = Nothing
+    , _vdAccessToken = Nothing
+    , _vdUploadType = Nothing
+    , _vdOnBehalfOfContentOwner = Nothing
+    , _vdId = pVdId_
+    , _vdCallback = Nothing
+    }
 
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | V1 error format.
+vdXgafv :: Lens' VideosDelete (Maybe Xgafv)
+vdXgafv = lens _vdXgafv (\ s a -> s{_vdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vdUploadProtocol :: Lens' VideosDelete (Maybe Text)
+vdUploadProtocol
+  = lens _vdUploadProtocol
+      (\ s a -> s{_vdUploadProtocol = a})
+
+-- | OAuth access token.
+vdAccessToken :: Lens' VideosDelete (Maybe Text)
+vdAccessToken
+  = lens _vdAccessToken
+      (\ s a -> s{_vdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vdUploadType :: Lens' VideosDelete (Maybe Text)
+vdUploadType
+  = lens _vdUploadType (\ s a -> s{_vdUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -90,11 +144,13 @@ vdOnBehalfOfContentOwner
   = lens _vdOnBehalfOfContentOwner
       (\ s a -> s{_vdOnBehalfOfContentOwner = a})
 
--- | The id parameter specifies the YouTube video ID for the resource that is
--- being deleted. In a video resource, the id property specifies the
--- video\'s ID.
 vdId :: Lens' VideosDelete Text
 vdId = lens _vdId (\ s a -> s{_vdId = a})
+
+-- | JSONP
+vdCallback :: Lens' VideosDelete (Maybe Text)
+vdCallback
+  = lens _vdCallback (\ s a -> s{_vdCallback = a})
 
 instance GoogleRequest VideosDelete where
         type Rs VideosDelete = ()
@@ -103,7 +159,11 @@ instance GoogleRequest VideosDelete where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosDelete'{..}
-          = go (Just _vdId) _vdOnBehalfOfContentOwner
+          = go (Just _vdId) _vdXgafv _vdUploadProtocol
+              _vdAccessToken
+              _vdUploadType
+              _vdOnBehalfOfContentOwner
+              _vdCallback
               (Just AltJSON)
               youTubeService
           where go

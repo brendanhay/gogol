@@ -49,8 +49,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     , pjgCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.get@ method which the
 -- 'ProjectsJobsGet' request conforms to.
@@ -65,7 +65,7 @@ type ProjectsJobsGetResource =
                    QueryParam "location" Text :>
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "view" Text :>
+                         QueryParam "view" ProjectsJobsGetView :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Job
 
@@ -79,15 +79,15 @@ type ProjectsJobsGetResource =
 -- /See:/ 'projectsJobsGet' smart constructor.
 data ProjectsJobsGet =
   ProjectsJobsGet'
-    { _pjgXgafv          :: !(Maybe Xgafv)
-    , _pjgJobId          :: !Text
+    { _pjgXgafv :: !(Maybe Xgafv)
+    , _pjgJobId :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
-    , _pjgLocation       :: !(Maybe Text)
-    , _pjgAccessToken    :: !(Maybe Text)
-    , _pjgUploadType     :: !(Maybe Text)
-    , _pjgView           :: !(Maybe Text)
-    , _pjgProjectId      :: !Text
-    , _pjgCallback       :: !(Maybe Text)
+    , _pjgLocation :: !(Maybe Text)
+    , _pjgAccessToken :: !(Maybe Text)
+    , _pjgUploadType :: !(Maybe Text)
+    , _pjgView :: !(Maybe ProjectsJobsGetView)
+    , _pjgProjectId :: !Text
+    , _pjgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -165,7 +165,7 @@ pjgUploadType
       (\ s a -> s{_pjgUploadType = a})
 
 -- | The level of information requested in response.
-pjgView :: Lens' ProjectsJobsGet (Maybe Text)
+pjgView :: Lens' ProjectsJobsGet (Maybe ProjectsJobsGetView)
 pjgView = lens _pjgView (\ s a -> s{_pjgView = a})
 
 -- | The ID of the Cloud Platform project that the job belongs to.

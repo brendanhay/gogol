@@ -22,7 +22,7 @@
 --
 -- Returns the requested Product resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.get@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.get@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
     , cpgCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.get@ method which the
 -- 'CatalogsProductsGet' request conforms to.
@@ -63,12 +63,12 @@ type CatalogsProductsGetResource =
 -- /See:/ 'catalogsProductsGet' smart constructor.
 data CatalogsProductsGet =
   CatalogsProductsGet'
-    { _cpgXgafv          :: !(Maybe Xgafv)
+    { _cpgXgafv :: !(Maybe Xgafv)
     , _cpgUploadProtocol :: !(Maybe Text)
-    , _cpgAccessToken    :: !(Maybe Text)
-    , _cpgUploadType     :: !(Maybe Text)
-    , _cpgName           :: !Text
-    , _cpgCallback       :: !(Maybe Text)
+    , _cpgAccessToken :: !(Maybe Text)
+    , _cpgUploadType :: !(Maybe Text)
+    , _cpgName :: !Text
+    , _cpgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

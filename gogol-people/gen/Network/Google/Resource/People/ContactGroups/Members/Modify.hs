@@ -45,8 +45,8 @@ module Network.Google.Resource.People.ContactGroups.Members.Modify
     , cgmmCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.contactGroups.members.modify@ method which the
 -- 'ContactGroupsMembersModify' request conforms to.
@@ -71,13 +71,13 @@ type ContactGroupsMembersModifyResource =
 -- /See:/ 'contactGroupsMembersModify' smart constructor.
 data ContactGroupsMembersModify =
   ContactGroupsMembersModify'
-    { _cgmmXgafv          :: !(Maybe Xgafv)
+    { _cgmmXgafv :: !(Maybe Xgafv)
     , _cgmmUploadProtocol :: !(Maybe Text)
-    , _cgmmResourceName   :: !Text
-    , _cgmmAccessToken    :: !(Maybe Text)
-    , _cgmmUploadType     :: !(Maybe Text)
-    , _cgmmPayload        :: !ModifyContactGroupMembersRequest
-    , _cgmmCallback       :: !(Maybe Text)
+    , _cgmmResourceName :: !Text
+    , _cgmmAccessToken :: !(Maybe Text)
+    , _cgmmUploadType :: !(Maybe Text)
+    , _cgmmPayload :: !ModifyContactGroupMembersRequest
+    , _cgmmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,7 +126,7 @@ cgmmUploadProtocol
   = lens _cgmmUploadProtocol
       (\ s a -> s{_cgmmUploadProtocol = a})
 
--- | The resource name of the contact group to modify.
+-- | Required. The resource name of the contact group to modify.
 cgmmResourceName :: Lens' ContactGroupsMembersModify Text
 cgmmResourceName
   = lens _cgmmResourceName

@@ -54,8 +54,8 @@ module Network.Google.Resource.Calendar.Events.Watch
     , ewTimeMax
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.watch@ method which the
 -- 'EventsWatch' request conforms to.
@@ -99,25 +99,25 @@ type EventsWatchResource =
 -- /See:/ 'eventsWatch' smart constructor.
 data EventsWatch =
   EventsWatch'
-    { _ewSyncToken               :: !(Maybe Text)
-    , _ewCalendarId              :: !Text
-    , _ewTimeMin                 :: !(Maybe DateTime')
-    , _ewOrderBy                 :: !(Maybe EventsWatchOrderBy)
-    , _ewSingleEvents            :: !(Maybe Bool)
+    { _ewSyncToken :: !(Maybe Text)
+    , _ewCalendarId :: !Text
+    , _ewTimeMin :: !(Maybe DateTime')
+    , _ewOrderBy :: !(Maybe EventsWatchOrderBy)
+    , _ewSingleEvents :: !(Maybe Bool)
     , _ewPrivateExtendedProperty :: !(Maybe [Text])
-    , _ewShowDeleted             :: !(Maybe Bool)
-    , _ewPayload                 :: !Channel
-    , _ewQ                       :: !(Maybe Text)
-    , _ewSharedExtendedProperty  :: !(Maybe [Text])
-    , _ewMaxAttendees            :: !(Maybe (Textual Int32))
-    , _ewICalUId                 :: !(Maybe Text)
-    , _ewUpdatedMin              :: !(Maybe DateTime')
-    , _ewPageToken               :: !(Maybe Text)
-    , _ewTimeZone                :: !(Maybe Text)
-    , _ewShowHiddenInvitations   :: !(Maybe Bool)
-    , _ewMaxResults              :: !(Textual Int32)
-    , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
-    , _ewTimeMax                 :: !(Maybe DateTime')
+    , _ewShowDeleted :: !(Maybe Bool)
+    , _ewPayload :: !Channel
+    , _ewQ :: !(Maybe Text)
+    , _ewSharedExtendedProperty :: !(Maybe [Text])
+    , _ewMaxAttendees :: !(Maybe (Textual Int32))
+    , _ewICalUId :: !(Maybe Text)
+    , _ewUpdatedMin :: !(Maybe DateTime')
+    , _ewPageToken :: !(Maybe Text)
+    , _ewTimeZone :: !(Maybe Text)
+    , _ewShowHiddenInvitations :: !(Maybe Bool)
+    , _ewMaxResults :: !(Textual Int32)
+    , _ewAlwaysIncludeEmail :: !(Maybe Bool)
+    , _ewTimeMax :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -215,12 +215,11 @@ ewCalendarId :: Lens' EventsWatch Text
 ewCalendarId
   = lens _ewCalendarId (\ s a -> s{_ewCalendarId = a})
 
--- | Lower bound (inclusive) for an event\'s start time to filter by.
--- Optional. The default is not to filter by start time. Must be an RFC3339
--- timestamp with mandatory time zone offset, for example,
--- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
--- provided but are ignored. If timeMax is set, timeMin must be smaller
--- than timeMax.
+-- | Lower bound (exclusive) for an event\'s end time to filter by. Optional.
+-- The default is not to filter by end time. Must be an RFC3339 timestamp
+-- with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00,
+-- 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If
+-- timeMax is set, timeMin must be smaller than timeMax.
 ewTimeMin :: Lens' EventsWatch (Maybe UTCTime)
 ewTimeMin
   = lens _ewTimeMin (\ s a -> s{_ewTimeMin = a}) .
@@ -334,22 +333,21 @@ ewMaxResults
   = lens _ewMaxResults (\ s a -> s{_ewMaxResults = a})
       . _Coerce
 
--- | Whether to always include a value in the email field for the organizer,
--- creator and attendees, even if no real email is available (i.e. a
--- generated, non-working value will be provided). The use of this option
--- is discouraged and should only be used by clients which cannot handle
--- the absence of an email address value in the mentioned places. Optional.
--- The default is False.
+-- | Deprecated and ignored. A value will always be returned in the email
+-- field for the organizer, creator and attendees, even if no real email
+-- address is available (i.e. a generated, non-working value will be
+-- provided).
 ewAlwaysIncludeEmail :: Lens' EventsWatch (Maybe Bool)
 ewAlwaysIncludeEmail
   = lens _ewAlwaysIncludeEmail
       (\ s a -> s{_ewAlwaysIncludeEmail = a})
 
--- | Upper bound (exclusive) for an event\'s end time to filter by. Optional.
--- The default is not to filter by end time. Must be an RFC3339 timestamp
--- with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00,
--- 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If
--- timeMin is set, timeMax must be greater than timeMin.
+-- | Upper bound (exclusive) for an event\'s start time to filter by.
+-- Optional. The default is not to filter by start time. Must be an RFC3339
+-- timestamp with mandatory time zone offset, for example,
+-- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+-- provided but are ignored. If timeMin is set, timeMax must be greater
+-- than timeMin.
 ewTimeMax :: Lens' EventsWatch (Maybe UTCTime)
 ewTimeMax
   = lens _ewTimeMax (\ s a -> s{_ewTimeMax = a}) .

@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
     , hhcdHTTPSHealthCheck
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.httpsHealthChecks.delete@ method which the
 -- 'HTTPSHealthChecksDelete' request conforms to.
@@ -59,8 +59,8 @@ type HTTPSHealthChecksDeleteResource =
 -- /See:/ 'httpsHealthChecksDelete' smart constructor.
 data HTTPSHealthChecksDelete =
   HTTPSHealthChecksDelete'
-    { _hhcdRequestId        :: !(Maybe Text)
-    , _hhcdProject          :: !Text
+    { _hhcdRequestId :: !(Maybe Text)
+    , _hhcdProject :: !Text
     , _hhcdHTTPSHealthCheck :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

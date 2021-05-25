@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NodeGroups.Get
     , nggZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.get@ method which the
 -- 'NodeGroupsGet' request conforms to.
@@ -64,8 +64,8 @@ type NodeGroupsGetResource =
 data NodeGroupsGet =
   NodeGroupsGet'
     { _nggNodeGroup :: !Text
-    , _nggProject   :: !Text
-    , _nggZone      :: !Text
+    , _nggProject :: !Text
+    , _nggZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

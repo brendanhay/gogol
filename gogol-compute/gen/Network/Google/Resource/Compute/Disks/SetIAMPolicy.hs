@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Disks.SetIAMPolicy
     , dsipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.setIamPolicy@ method which the
 -- 'DisksSetIAMPolicy' request conforms to.
@@ -65,9 +65,9 @@ type DisksSetIAMPolicyResource =
 -- /See:/ 'disksSetIAMPolicy' smart constructor.
 data DisksSetIAMPolicy =
   DisksSetIAMPolicy'
-    { _dsipProject  :: !Text
-    , _dsipZone     :: !Text
-    , _dsipPayload  :: !ZoneSetPolicyRequest
+    { _dsipProject :: !Text
+    , _dsipZone :: !Text
+    , _dsipPayload :: !ZoneSetPolicyRequest
     , _dsipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Update
     , mpfuAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.update@ method which the
 -- 'ManagementProFilesUpdate' request conforms to.
@@ -63,9 +63,9 @@ type ManagementProFilesUpdateResource =
 data ManagementProFilesUpdate =
   ManagementProFilesUpdate'
     { _mpfuWebPropertyId :: !Text
-    , _mpfuProFileId     :: !Text
-    , _mpfuPayload       :: !ProFile
-    , _mpfuAccountId     :: !Text
+    , _mpfuProFileId :: !Text
+    , _mpfuPayload :: !ProFile
+    , _mpfuAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

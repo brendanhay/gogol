@@ -119,6 +119,11 @@ module Network.Google.Script
     -- ** GoogleAppsScriptTypeProcessUserAccessLevel
     , GoogleAppsScriptTypeProcessUserAccessLevel (..)
 
+    -- ** ScriptExecutionResult
+    , ScriptExecutionResult
+    , scriptExecutionResult
+    , serReturnValue
+
     -- ** Metrics
     , Metrics
     , metrics
@@ -136,6 +141,14 @@ module Network.Google.Script
     , gastpUserAccessLevel
     , gastpProcessType
     , gastpDuration
+
+    -- ** Struct
+    , Struct
+    , struct
+    , sFields
+
+    -- ** ProcessesListScriptProcessesScriptProcessFilterTypes
+    , ProcessesListScriptProcessesScriptProcessFilterTypes (..)
 
     -- ** GoogleAppsScriptTypeWebAppConfigExecuteAs
     , GoogleAppsScriptTypeWebAppConfigExecuteAs (..)
@@ -176,6 +189,11 @@ module Network.Google.Script
     , gastuDomain
     , gastuName
 
+    -- ** ExecuteStreamResponse
+    , ExecuteStreamResponse
+    , executeStreamResponse
+    , esrResult
+
     -- ** EntryPoint
     , EntryPoint
     , entryPoint
@@ -193,6 +211,9 @@ module Network.Google.Script
     -- ** GoogleAppsScriptTypeExecutionAPIConfigAccess
     , GoogleAppsScriptTypeExecutionAPIConfigAccess (..)
 
+    -- ** ProcessesListScriptProcessesScriptProcessFilterStatuses
+    , ProcessesListScriptProcessesScriptProcessFilterStatuses (..)
+
     -- ** ExecutionRequest
     , ExecutionRequest
     , executionRequest
@@ -206,6 +227,22 @@ module Network.Google.Script
     , listScriptProcessesResponse
     , lsprNextPageToken
     , lsprProcesses
+
+    -- ** Value
+    , Value
+    , value
+    , vBytesValue
+    , vProtoValue
+    , vBoolValue
+    , vNumberValue
+    , vStringValue
+    , vListValue
+    , vStructValue
+    , vDateValue
+    , vNullValue
+
+    -- ** ValueNullValue
+    , ValueNullValue (..)
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
@@ -221,11 +258,30 @@ module Network.Google.Script
     , ssteFunction
     , ssteLineNumber
 
+    -- ** StructFields
+    , StructFields
+    , structFields
+    , sfAddtional
+
+    -- ** ProcessesListUserProcessFilterTypes
+    , ProcessesListUserProcessFilterTypes (..)
+
+    -- ** ListValue
+    , ListValue
+    , listValue
+    , lvValues
+
+    -- ** ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
+    , ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels (..)
+
     -- ** Content
     , Content
     , content
     , cScriptId
     , cFiles
+
+    -- ** ProjectsGetMetricsMetricsGranularity
+    , ProjectsGetMetricsMetricsGranularity (..)
 
     -- ** GoogleAppsScriptTypeAddOnEntryPointAddOnType
     , GoogleAppsScriptTypeAddOnEntryPointAddOnType (..)
@@ -246,6 +302,9 @@ module Network.Google.Script
     , gastaoepHelpURL
     , gastaoepTitle
     , gastaoepDescription
+
+    -- ** ProcessesListUserProcessFilterStatuses
+    , ProcessesListUserProcessFilterStatuses (..)
 
     -- ** GoogleAppsScriptTypeWebAppConfig
     , GoogleAppsScriptTypeWebAppConfig
@@ -276,6 +335,9 @@ module Network.Google.Script
     , googleAppsScriptTypeWebAppEntryPoint
     , gastwaepEntryPointConfig
     , gastwaepURL
+
+    -- ** ProcessesListUserProcessFilterUserAccessLevels
+    , ProcessesListUserProcessFilterUserAccessLevels (..)
 
     -- ** EntryPointEntryPointType
     , EntryPointEntryPointType (..)
@@ -310,6 +372,11 @@ module Network.Google.Script
     , GoogleAppsScriptTypeFunction
     , googleAppsScriptTypeFunction
     , gastfName
+
+    -- ** ValueProtoValue
+    , ValueProtoValue
+    , valueProtoValue
+    , vpvAddtional
 
     -- ** File
     , File
@@ -351,24 +418,24 @@ module Network.Google.Script
     , udrDeploymentConfig
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Script.Processes.List
-import           Network.Google.Resource.Script.Processes.ListScriptProcesses
-import           Network.Google.Resource.Script.Projects.Create
-import           Network.Google.Resource.Script.Projects.Deployments.Create
-import           Network.Google.Resource.Script.Projects.Deployments.Delete
-import           Network.Google.Resource.Script.Projects.Deployments.Get
-import           Network.Google.Resource.Script.Projects.Deployments.List
-import           Network.Google.Resource.Script.Projects.Deployments.Update
-import           Network.Google.Resource.Script.Projects.Get
-import           Network.Google.Resource.Script.Projects.GetContent
-import           Network.Google.Resource.Script.Projects.GetMetrics
-import           Network.Google.Resource.Script.Projects.UpdateContent
-import           Network.Google.Resource.Script.Projects.Versions.Create
-import           Network.Google.Resource.Script.Projects.Versions.Get
-import           Network.Google.Resource.Script.Projects.Versions.List
-import           Network.Google.Resource.Script.Scripts.Run
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Script.Processes.List
+import Network.Google.Resource.Script.Processes.ListScriptProcesses
+import Network.Google.Resource.Script.Projects.Create
+import Network.Google.Resource.Script.Projects.Deployments.Create
+import Network.Google.Resource.Script.Projects.Deployments.Delete
+import Network.Google.Resource.Script.Projects.Deployments.Get
+import Network.Google.Resource.Script.Projects.Deployments.List
+import Network.Google.Resource.Script.Projects.Deployments.Update
+import Network.Google.Resource.Script.Projects.Get
+import Network.Google.Resource.Script.Projects.GetContent
+import Network.Google.Resource.Script.Projects.GetMetrics
+import Network.Google.Resource.Script.Projects.UpdateContent
+import Network.Google.Resource.Script.Projects.Versions.Create
+import Network.Google.Resource.Script.Projects.Versions.Get
+import Network.Google.Resource.Script.Projects.Versions.List
+import Network.Google.Resource.Script.Scripts.Run
+import Network.Google.Script.Types
 
 {- $resources
 TODO

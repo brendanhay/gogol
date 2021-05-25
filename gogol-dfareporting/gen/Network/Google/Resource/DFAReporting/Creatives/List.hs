@@ -23,7 +23,7 @@
 -- Retrieves a list of creatives, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creatives.list@.
 module Network.Google.Resource.DFAReporting.Creatives.List
     (
     -- * REST Resource
@@ -35,10 +35,14 @@ module Network.Google.Resource.DFAReporting.Creatives.List
 
     -- * Request Lenses
     , cRenderingIds
+    , cXgafv
+    , cUploadProtocol
+    , cAccessToken
     , cAdvertiserId
     , cSearchString
     , cSizeIds
     , cCompanionCreativeIds
+    , cUploadType
     , cCampaignId
     , cTypes
     , cIds
@@ -51,46 +55,59 @@ module Network.Google.Resource.DFAReporting.Creatives.List
     , cStudioCreativeId
     , cArchived
     , cMaxResults
+    , cCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creatives.list@ method which the
 -- 'CreativesList' request conforms to.
 type CreativesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
                QueryParams "renderingIds" (Textual Int64) :>
-                 QueryParam "advertiserId" (Textual Int64) :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "sizeIds" (Textual Int64) :>
-                       QueryParams "companionCreativeIds" (Textual Int64) :>
-                         QueryParam "campaignId" (Textual Int64) :>
-                           QueryParams "types" CreativesListTypes :>
-                             QueryParams "ids" (Textual Int64) :>
-                               QueryParam "sortOrder" CreativesListSortOrder :>
-                                 QueryParam "active" Bool :>
-                                   QueryParams "creativeFieldIds"
-                                     (Textual Int64)
-                                     :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "sortField"
-                                         CreativesListSortField
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "advertiserId" (Textual Int64) :>
+                         QueryParam "searchString" Text :>
+                           QueryParams "sizeIds" (Textual Int64) :>
+                             QueryParams "companionCreativeIds" (Textual Int64)
+                               :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "campaignId" (Textual Int64) :>
+                                   QueryParams "types" CreativesListTypes :>
+                                     QueryParams "ids" (Textual Int64) :>
+                                       QueryParam "sortOrder"
+                                         CreativesListSortOrder
                                          :>
-                                         QueryParam "studioCreativeId"
-                                           (Textual Int64)
-                                           :>
-                                           QueryParam "archived" Bool :>
-                                             QueryParam "maxResults"
-                                               (Textual Int32)
-                                               :>
-                                               QueryParam "alt" AltJSON :>
-                                                 Get '[JSON]
-                                                   CreativesListResponse
+                                         QueryParam "active" Bool :>
+                                           QueryParams "creativeFieldIds"
+                                             (Textual Int64)
+                                             :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "sortField"
+                                                 CreativesListSortField
+                                                 :>
+                                                 QueryParam "studioCreativeId"
+                                                   (Textual Int64)
+                                                   :>
+                                                   QueryParam "archived" Bool :>
+                                                     QueryParam "maxResults"
+                                                       (Textual Int32)
+                                                       :>
+                                                       QueryParam "callback"
+                                                         Text
+                                                         :>
+                                                         QueryParam "alt"
+                                                           AltJSON
+                                                           :>
+                                                           Get '[JSON]
+                                                             CreativesListResponse
 
 -- | Retrieves a list of creatives, possibly filtered. This method supports
 -- paging.
@@ -98,23 +115,28 @@ type CreativesListResource =
 -- /See:/ 'creativesList' smart constructor.
 data CreativesList =
   CreativesList'
-    { _cRenderingIds         :: !(Maybe [Textual Int64])
-    , _cAdvertiserId         :: !(Maybe (Textual Int64))
-    , _cSearchString         :: !(Maybe Text)
-    , _cSizeIds              :: !(Maybe [Textual Int64])
+    { _cRenderingIds :: !(Maybe [Textual Int64])
+    , _cXgafv :: !(Maybe Xgafv)
+    , _cUploadProtocol :: !(Maybe Text)
+    , _cAccessToken :: !(Maybe Text)
+    , _cAdvertiserId :: !(Maybe (Textual Int64))
+    , _cSearchString :: !(Maybe Text)
+    , _cSizeIds :: !(Maybe [Textual Int64])
     , _cCompanionCreativeIds :: !(Maybe [Textual Int64])
-    , _cCampaignId           :: !(Maybe (Textual Int64))
-    , _cTypes                :: !(Maybe [CreativesListTypes])
-    , _cIds                  :: !(Maybe [Textual Int64])
-    , _cProFileId            :: !(Textual Int64)
-    , _cSortOrder            :: !CreativesListSortOrder
-    , _cActive               :: !(Maybe Bool)
-    , _cCreativeFieldIds     :: !(Maybe [Textual Int64])
-    , _cPageToken            :: !(Maybe Text)
-    , _cSortField            :: !CreativesListSortField
-    , _cStudioCreativeId     :: !(Maybe (Textual Int64))
-    , _cArchived             :: !(Maybe Bool)
-    , _cMaxResults           :: !(Textual Int32)
+    , _cUploadType :: !(Maybe Text)
+    , _cCampaignId :: !(Maybe (Textual Int64))
+    , _cTypes :: !(Maybe [CreativesListTypes])
+    , _cIds :: !(Maybe [Textual Int64])
+    , _cProFileId :: !(Textual Int64)
+    , _cSortOrder :: !CreativesListSortOrder
+    , _cActive :: !(Maybe Bool)
+    , _cCreativeFieldIds :: !(Maybe [Textual Int64])
+    , _cPageToken :: !(Maybe Text)
+    , _cSortField :: !CreativesListSortField
+    , _cStudioCreativeId :: !(Maybe (Textual Int64))
+    , _cArchived :: !(Maybe Bool)
+    , _cMaxResults :: !(Textual Int32)
+    , _cCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,6 +147,12 @@ data CreativesList =
 --
 -- * 'cRenderingIds'
 --
+-- * 'cXgafv'
+--
+-- * 'cUploadProtocol'
+--
+-- * 'cAccessToken'
+--
 -- * 'cAdvertiserId'
 --
 -- * 'cSearchString'
@@ -132,6 +160,8 @@ data CreativesList =
 -- * 'cSizeIds'
 --
 -- * 'cCompanionCreativeIds'
+--
+-- * 'cUploadType'
 --
 -- * 'cCampaignId'
 --
@@ -156,16 +186,22 @@ data CreativesList =
 -- * 'cArchived'
 --
 -- * 'cMaxResults'
+--
+-- * 'cCallback'
 creativesList
     :: Int64 -- ^ 'cProFileId'
     -> CreativesList
 creativesList pCProFileId_ =
   CreativesList'
     { _cRenderingIds = Nothing
+    , _cXgafv = Nothing
+    , _cUploadProtocol = Nothing
+    , _cAccessToken = Nothing
     , _cAdvertiserId = Nothing
     , _cSearchString = Nothing
     , _cSizeIds = Nothing
     , _cCompanionCreativeIds = Nothing
+    , _cUploadType = Nothing
     , _cCampaignId = Nothing
     , _cTypes = Nothing
     , _cIds = Nothing
@@ -178,6 +214,7 @@ creativesList pCProFileId_ =
     , _cStudioCreativeId = Nothing
     , _cArchived = Nothing
     , _cMaxResults = 1000
+    , _cCallback = Nothing
     }
 
 
@@ -188,6 +225,21 @@ cRenderingIds
       (\ s a -> s{_cRenderingIds = a})
       . _Default
       . _Coerce
+
+-- | V1 error format.
+cXgafv :: Lens' CreativesList (Maybe Xgafv)
+cXgafv = lens _cXgafv (\ s a -> s{_cXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cUploadProtocol :: Lens' CreativesList (Maybe Text)
+cUploadProtocol
+  = lens _cUploadProtocol
+      (\ s a -> s{_cUploadProtocol = a})
+
+-- | OAuth access token.
+cAccessToken :: Lens' CreativesList (Maybe Text)
+cAccessToken
+  = lens _cAccessToken (\ s a -> s{_cAccessToken = a})
 
 -- | Select only creatives with this advertiser ID.
 cAdvertiserId :: Lens' CreativesList (Maybe Int64)
@@ -222,6 +274,11 @@ cCompanionCreativeIds
       (\ s a -> s{_cCompanionCreativeIds = a})
       . _Default
       . _Coerce
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cUploadType :: Lens' CreativesList (Maybe Text)
+cUploadType
+  = lens _cUploadType (\ s a -> s{_cUploadType = a})
 
 -- | Select only creatives with this campaign ID.
 cCampaignId :: Lens' CreativesList (Maybe Int64)
@@ -294,16 +351,24 @@ cMaxResults
   = lens _cMaxResults (\ s a -> s{_cMaxResults = a}) .
       _Coerce
 
+-- | JSONP
+cCallback :: Lens' CreativesList (Maybe Text)
+cCallback
+  = lens _cCallback (\ s a -> s{_cCallback = a})
+
 instance GoogleRequest CreativesList where
         type Rs CreativesList = CreativesListResponse
         type Scopes CreativesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesList'{..}
-          = go _cProFileId (_cRenderingIds ^. _Default)
+          = go _cProFileId (_cRenderingIds ^. _Default) _cXgafv
+              _cUploadProtocol
+              _cAccessToken
               _cAdvertiserId
               _cSearchString
               (_cSizeIds ^. _Default)
               (_cCompanionCreativeIds ^. _Default)
+              _cUploadType
               _cCampaignId
               (_cTypes ^. _Default)
               (_cIds ^. _Default)
@@ -315,6 +380,7 @@ instance GoogleRequest CreativesList where
               _cStudioCreativeId
               _cArchived
               (Just _cMaxResults)
+              _cCallback
               (Just AltJSON)
               dFAReportingService
           where go

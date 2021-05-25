@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.InterconnectAttachments.Delete
     , iadInterconnectAttachment
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnectAttachments.delete@ method which the
 -- 'InterconnectAttachmentsDelete' request conforms to.
@@ -61,9 +61,9 @@ type InterconnectAttachmentsDeleteResource =
 -- /See:/ 'interconnectAttachmentsDelete' smart constructor.
 data InterconnectAttachmentsDelete =
   InterconnectAttachmentsDelete'
-    { _iadRequestId              :: !(Maybe Text)
-    , _iadProject                :: !Text
-    , _iadRegion                 :: !Text
+    { _iadRequestId :: !(Maybe Text)
+    , _iadProject :: !Text
+    , _iadRegion :: !Text
     , _iadInterconnectAttachment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -43,14 +43,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdspCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.patch@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresPatch' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresPatchResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,14 +67,14 @@ type ProjectsLocationsDataSetsDicomStoresPatchResource
 -- /See:/ 'projectsLocationsDataSetsDicomStoresPatch' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresPatch =
   ProjectsLocationsDataSetsDicomStoresPatch'
-    { _pldsdspXgafv          :: !(Maybe Xgafv)
+    { _pldsdspXgafv :: !(Maybe Xgafv)
     , _pldsdspUploadProtocol :: !(Maybe Text)
-    , _pldsdspUpdateMask     :: !(Maybe GFieldMask)
-    , _pldsdspAccessToken    :: !(Maybe Text)
-    , _pldsdspUploadType     :: !(Maybe Text)
-    , _pldsdspPayload        :: !DicomStore
-    , _pldsdspName           :: !Text
-    , _pldsdspCallback       :: !(Maybe Text)
+    , _pldsdspUpdateMask :: !(Maybe GFieldMask)
+    , _pldsdspAccessToken :: !(Maybe Text)
+    , _pldsdspUploadType :: !(Maybe Text)
+    , _pldsdspPayload :: !DicomStore
+    , _pldsdspName :: !Text
+    , _pldsdspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -152,7 +152,7 @@ pldsdspPayload
   = lens _pldsdspPayload
       (\ s a -> s{_pldsdspPayload = a})
 
--- | Output only. Resource name of the DICOM store, of the form
+-- | Resource name of the DICOM store, of the form
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdspName :: Lens' ProjectsLocationsDataSetsDicomStoresPatch Text
 pldsdspName

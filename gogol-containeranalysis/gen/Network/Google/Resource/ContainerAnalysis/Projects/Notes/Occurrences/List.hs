@@ -46,8 +46,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.Occurrences.List
     , pnolCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.occurrences.list@ method which the
 -- 'ProjectsNotesOccurrencesList' request conforms to.
@@ -73,15 +73,15 @@ type ProjectsNotesOccurrencesListResource =
 -- /See:/ 'projectsNotesOccurrencesList' smart constructor.
 data ProjectsNotesOccurrencesList =
   ProjectsNotesOccurrencesList'
-    { _pnolXgafv          :: !(Maybe Xgafv)
+    { _pnolXgafv :: !(Maybe Xgafv)
     , _pnolUploadProtocol :: !(Maybe Text)
-    , _pnolAccessToken    :: !(Maybe Text)
-    , _pnolUploadType     :: !(Maybe Text)
-    , _pnolName           :: !Text
-    , _pnolFilter         :: !(Maybe Text)
-    , _pnolPageToken      :: !(Maybe Text)
-    , _pnolPageSize       :: !(Maybe (Textual Int32))
-    , _pnolCallback       :: !(Maybe Text)
+    , _pnolAccessToken :: !(Maybe Text)
+    , _pnolUploadType :: !(Maybe Text)
+    , _pnolName :: !Text
+    , _pnolFilter :: !(Maybe Text)
+    , _pnolPageToken :: !(Maybe Text)
+    , _pnolPageSize :: !(Maybe (Textual Int32))
+    , _pnolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,7 +147,7 @@ pnolUploadType
   = lens _pnolUploadType
       (\ s a -> s{_pnolUploadType = a})
 
--- | The name of the note to list occurrences for in the form of
+-- | Required. The name of the note to list occurrences for in the form of
 -- \`projects\/[PROVIDER_ID]\/notes\/[NOTE_ID]\`.
 pnolName :: Lens' ProjectsNotesOccurrencesList Text
 pnolName = lens _pnolName (\ s a -> s{_pnolName = a})

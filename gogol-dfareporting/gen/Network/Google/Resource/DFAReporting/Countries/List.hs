@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of countries.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.countries.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.countries.list@.
 module Network.Google.Resource.DFAReporting.Countries.List
     (
     -- * REST Resource
@@ -33,29 +33,44 @@ module Network.Google.Resource.DFAReporting.Countries.List
     , CountriesList
 
     -- * Request Lenses
+    , couXgafv
+    , couUploadProtocol
+    , couAccessToken
+    , couUploadType
     , couProFileId
+    , couCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.countries.list@ method which the
 -- 'CountriesList' request conforms to.
 type CountriesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] CountriesListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] CountriesListResponse
 
 -- | Retrieves a list of countries.
 --
 -- /See:/ 'countriesList' smart constructor.
-newtype CountriesList =
+data CountriesList =
   CountriesList'
-    { _couProFileId :: Textual Int64
+    { _couXgafv :: !(Maybe Xgafv)
+    , _couUploadProtocol :: !(Maybe Text)
+    , _couAccessToken :: !(Maybe Text)
+    , _couUploadType :: !(Maybe Text)
+    , _couProFileId :: !(Textual Int64)
+    , _couCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,13 +79,52 @@ newtype CountriesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'couXgafv'
+--
+-- * 'couUploadProtocol'
+--
+-- * 'couAccessToken'
+--
+-- * 'couUploadType'
+--
 -- * 'couProFileId'
+--
+-- * 'couCallback'
 countriesList
     :: Int64 -- ^ 'couProFileId'
     -> CountriesList
 countriesList pCouProFileId_ =
-  CountriesList' {_couProFileId = _Coerce # pCouProFileId_}
+  CountriesList'
+    { _couXgafv = Nothing
+    , _couUploadProtocol = Nothing
+    , _couAccessToken = Nothing
+    , _couUploadType = Nothing
+    , _couProFileId = _Coerce # pCouProFileId_
+    , _couCallback = Nothing
+    }
 
+
+-- | V1 error format.
+couXgafv :: Lens' CountriesList (Maybe Xgafv)
+couXgafv = lens _couXgafv (\ s a -> s{_couXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+couUploadProtocol :: Lens' CountriesList (Maybe Text)
+couUploadProtocol
+  = lens _couUploadProtocol
+      (\ s a -> s{_couUploadProtocol = a})
+
+-- | OAuth access token.
+couAccessToken :: Lens' CountriesList (Maybe Text)
+couAccessToken
+  = lens _couAccessToken
+      (\ s a -> s{_couAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+couUploadType :: Lens' CountriesList (Maybe Text)
+couUploadType
+  = lens _couUploadType
+      (\ s a -> s{_couUploadType = a})
 
 -- | User profile ID associated with this request.
 couProFileId :: Lens' CountriesList Int64
@@ -78,12 +132,22 @@ couProFileId
   = lens _couProFileId (\ s a -> s{_couProFileId = a})
       . _Coerce
 
+-- | JSONP
+couCallback :: Lens' CountriesList (Maybe Text)
+couCallback
+  = lens _couCallback (\ s a -> s{_couCallback = a})
+
 instance GoogleRequest CountriesList where
         type Rs CountriesList = CountriesListResponse
         type Scopes CountriesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CountriesList'{..}
-          = go _couProFileId (Just AltJSON) dFAReportingService
+          = go _couProFileId _couXgafv _couUploadProtocol
+              _couAccessToken
+              _couUploadType
+              _couCallback
+              (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CountriesListResource)
                       mempty

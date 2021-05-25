@@ -49,8 +49,8 @@ module Network.Google.Resource.Tracing.Projects.Traces.List
     , ptlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Tracing.Types
+import Network.Google.Prelude
+import Network.Google.Tracing.Types
 
 -- | A resource alias for @tracing.projects.traces.list@ method which the
 -- 'ProjectsTracesList' request conforms to.
@@ -79,20 +79,20 @@ type ProjectsTracesListResource =
 -- /See:/ 'projectsTracesList' smart constructor.
 data ProjectsTracesList =
   ProjectsTracesList'
-    { _ptlParent         :: !Text
-    , _ptlXgafv          :: !(Maybe Xgafv)
+    { _ptlParent :: !Text
+    , _ptlXgafv :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
-    , _ptlOrderBy        :: !(Maybe Text)
-    , _ptlStartTime      :: !(Maybe DateTime')
-    , _ptlPp             :: !Bool
-    , _ptlAccessToken    :: !(Maybe Text)
-    , _ptlUploadType     :: !(Maybe Text)
-    , _ptlBearerToken    :: !(Maybe Text)
-    , _ptlEndTime        :: !(Maybe DateTime')
-    , _ptlFilter         :: !(Maybe Text)
-    , _ptlPageToken      :: !(Maybe Text)
-    , _ptlPageSize       :: !(Maybe (Textual Int32))
-    , _ptlCallback       :: !(Maybe Text)
+    , _ptlOrderBy :: !(Maybe Text)
+    , _ptlStartTime :: !(Maybe DateTime')
+    , _ptlPp :: !Bool
+    , _ptlAccessToken :: !(Maybe Text)
+    , _ptlUploadType :: !(Maybe Text)
+    , _ptlBearerToken :: !(Maybe Text)
+    , _ptlEndTime :: !(Maybe DateTime')
+    , _ptlFilter :: !(Maybe Text)
+    , _ptlPageToken :: !(Maybe Text)
+    , _ptlPageSize :: !(Maybe (Textual Int32))
+    , _ptlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,8 +43,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Create
     , piccCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.clusters.create@ method which the
 -- 'ProjectsInstancesClustersCreate' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsInstancesClustersCreateResource =
 -- /See:/ 'projectsInstancesClustersCreate' smart constructor.
 data ProjectsInstancesClustersCreate =
   ProjectsInstancesClustersCreate'
-    { _piccParent         :: !Text
-    , _piccXgafv          :: !(Maybe Xgafv)
+    { _piccParent :: !Text
+    , _piccXgafv :: !(Maybe Xgafv)
     , _piccUploadProtocol :: !(Maybe Text)
-    , _piccAccessToken    :: !(Maybe Text)
-    , _piccUploadType     :: !(Maybe Text)
-    , _piccPayload        :: !Cluster
-    , _piccClusterId      :: !(Maybe Text)
-    , _piccCallback       :: !(Maybe Text)
+    , _piccAccessToken :: !(Maybe Text)
+    , _piccUploadType :: !(Maybe Text)
+    , _piccPayload :: !Cluster
+    , _piccClusterId :: !(Maybe Text)
+    , _piccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,8 +114,9 @@ projectsInstancesClustersCreate pPiccParent_ pPiccPayload_ =
     }
 
 
--- | The unique name of the instance in which to create the new cluster.
--- Values are of the form \`projects\/\/instances\/\`.
+-- | Required. The unique name of the instance in which to create the new
+-- cluster. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\`.
 piccParent :: Lens' ProjectsInstancesClustersCreate Text
 piccParent
   = lens _piccParent (\ s a -> s{_piccParent = a})
@@ -148,8 +149,8 @@ piccPayload :: Lens' ProjectsInstancesClustersCreate Cluster
 piccPayload
   = lens _piccPayload (\ s a -> s{_piccPayload = a})
 
--- | The ID to be used when referring to the new cluster within its instance,
--- e.g., just \`mycluster\` rather than
+-- | Required. The ID to be used when referring to the new cluster within its
+-- instance, e.g., just \`mycluster\` rather than
 -- \`projects\/myproject\/instances\/myinstance\/clusters\/mycluster\`.
 piccClusterId :: Lens' ProjectsInstancesClustersCreate (Maybe Text)
 piccClusterId

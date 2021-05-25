@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add a like or dislike rating to a video or remove a rating from a video.
+-- Adds a like or dislike rating to a video or removes a rating from a
+-- video.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.rate@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videos.rate@.
 module Network.Google.Resource.YouTube.Videos.Rate
     (
     -- * REST Resource
@@ -33,12 +34,17 @@ module Network.Google.Resource.YouTube.Videos.Rate
     , VideosRate
 
     -- * Request Lenses
+    , vrXgafv
     , vrRating
+    , vrUploadProtocol
+    , vrAccessToken
+    , vrUploadType
     , vrId
+    , vrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.rate@ method which the
 -- 'VideosRate' request conforms to.
@@ -49,15 +55,26 @@ type VideosRateResource =
            "rate" :>
              QueryParam "id" Text :>
                QueryParam "rating" VideosRateRating :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] ()
 
--- | Add a like or dislike rating to a video or remove a rating from a video.
+-- | Adds a like or dislike rating to a video or removes a rating from a
+-- video.
 --
 -- /See:/ 'videosRate' smart constructor.
 data VideosRate =
   VideosRate'
-    { _vrRating :: !VideosRateRating
-    , _vrId     :: !Text
+    { _vrXgafv :: !(Maybe Xgafv)
+    , _vrRating :: !VideosRateRating
+    , _vrUploadProtocol :: !(Maybe Text)
+    , _vrAccessToken :: !(Maybe Text)
+    , _vrUploadType :: !(Maybe Text)
+    , _vrId :: !Text
+    , _vrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,25 +83,66 @@ data VideosRate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vrXgafv'
+--
 -- * 'vrRating'
 --
+-- * 'vrUploadProtocol'
+--
+-- * 'vrAccessToken'
+--
+-- * 'vrUploadType'
+--
 -- * 'vrId'
+--
+-- * 'vrCallback'
 videosRate
     :: VideosRateRating -- ^ 'vrRating'
     -> Text -- ^ 'vrId'
     -> VideosRate
 videosRate pVrRating_ pVrId_ =
-  VideosRate' {_vrRating = pVrRating_, _vrId = pVrId_}
+  VideosRate'
+    { _vrXgafv = Nothing
+    , _vrRating = pVrRating_
+    , _vrUploadProtocol = Nothing
+    , _vrAccessToken = Nothing
+    , _vrUploadType = Nothing
+    , _vrId = pVrId_
+    , _vrCallback = Nothing
+    }
 
 
--- | Specifies the rating to record.
+-- | V1 error format.
+vrXgafv :: Lens' VideosRate (Maybe Xgafv)
+vrXgafv = lens _vrXgafv (\ s a -> s{_vrXgafv = a})
+
 vrRating :: Lens' VideosRate VideosRateRating
 vrRating = lens _vrRating (\ s a -> s{_vrRating = a})
 
--- | The id parameter specifies the YouTube video ID of the video that is
--- being rated or having its rating removed.
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vrUploadProtocol :: Lens' VideosRate (Maybe Text)
+vrUploadProtocol
+  = lens _vrUploadProtocol
+      (\ s a -> s{_vrUploadProtocol = a})
+
+-- | OAuth access token.
+vrAccessToken :: Lens' VideosRate (Maybe Text)
+vrAccessToken
+  = lens _vrAccessToken
+      (\ s a -> s{_vrAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vrUploadType :: Lens' VideosRate (Maybe Text)
+vrUploadType
+  = lens _vrUploadType (\ s a -> s{_vrUploadType = a})
+
 vrId :: Lens' VideosRate Text
 vrId = lens _vrId (\ s a -> s{_vrId = a})
+
+-- | JSONP
+vrCallback :: Lens' VideosRate (Maybe Text)
+vrCallback
+  = lens _vrCallback (\ s a -> s{_vrCallback = a})
 
 instance GoogleRequest VideosRate where
         type Rs VideosRate = ()
@@ -93,7 +151,12 @@ instance GoogleRequest VideosRate where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosRate'{..}
-          = go (Just _vrId) (Just _vrRating) (Just AltJSON)
+          = go (Just _vrId) (Just _vrRating) _vrXgafv
+              _vrUploadProtocol
+              _vrAccessToken
+              _vrUploadType
+              _vrCallback
+              (Just AltJSON)
               youTubeService
           where go
                   = buildClient (Proxy :: Proxy VideosRateResource)

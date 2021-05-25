@@ -37,10 +37,11 @@ module Network.Google.Resource.Storage.Buckets.TestIAMPermissions
     , btipBucket
     , btipUserProject
     , btipPermissions
+    , btipProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.testIamPermissions@ method which the
 -- 'BucketsTestIAMPermissions' request conforms to.
@@ -53,8 +54,9 @@ type BucketsTestIAMPermissionsResource =
                "testPermissions" :>
                  QueryParams "permissions" Text :>
                    QueryParam "userProject" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] TestIAMPermissionsResponse
+                     QueryParam "provisionalUserProject" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TestIAMPermissionsResponse
 
 -- | Tests a set of permissions on the given bucket to see which, if any, are
 -- held by the caller.
@@ -62,9 +64,10 @@ type BucketsTestIAMPermissionsResource =
 -- /See:/ 'bucketsTestIAMPermissions' smart constructor.
 data BucketsTestIAMPermissions =
   BucketsTestIAMPermissions'
-    { _btipBucket      :: !Text
+    { _btipBucket :: !Text
     , _btipUserProject :: !(Maybe Text)
     , _btipPermissions :: ![Text]
+    , _btipProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,6 +81,8 @@ data BucketsTestIAMPermissions =
 -- * 'btipUserProject'
 --
 -- * 'btipPermissions'
+--
+-- * 'btipProvisionalUserProject'
 bucketsTestIAMPermissions
     :: Text -- ^ 'btipBucket'
     -> [Text] -- ^ 'btipPermissions'
@@ -87,6 +92,7 @@ bucketsTestIAMPermissions pBtipBucket_ pBtipPermissions_ =
     { _btipBucket = pBtipBucket_
     , _btipUserProject = Nothing
     , _btipPermissions = _Coerce # pBtipPermissions_
+    , _btipProvisionalUserProject = Nothing
     }
 
 
@@ -109,6 +115,13 @@ btipPermissions
       (\ s a -> s{_btipPermissions = a})
       . _Coerce
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+btipProvisionalUserProject :: Lens' BucketsTestIAMPermissions (Maybe Text)
+btipProvisionalUserProject
+  = lens _btipProvisionalUserProject
+      (\ s a -> s{_btipProvisionalUserProject = a})
+
 instance GoogleRequest BucketsTestIAMPermissions
          where
         type Rs BucketsTestIAMPermissions =
@@ -121,6 +134,7 @@ instance GoogleRequest BucketsTestIAMPermissions
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient BucketsTestIAMPermissions'{..}
           = go _btipBucket _btipPermissions _btipUserProject
+              _btipProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

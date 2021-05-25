@@ -22,7 +22,7 @@
 --
 -- Performs a book search.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.volumes.list@.
 module Network.Google.Resource.Books.Volumes.List
     (
     -- * REST Resource
@@ -33,9 +33,13 @@ module Network.Google.Resource.Books.Volumes.List
     , VolumesList
 
     -- * Request Lenses
+    , vlXgafv
+    , vlUploadProtocol
     , vlOrderBy
+    , vlAccessToken
     , vlMaxAllowedMaturityRating
     , vlLibraryRestrict
+    , vlUploadType
     , vlPartner
     , vlQ
     , vlDownload
@@ -47,10 +51,11 @@ module Network.Google.Resource.Books.Volumes.List
     , vlMaxResults
     , vlShowPreOrders
     , vlPrintType
+    , vlCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.list@ method which the
 -- 'VolumesList' request conforms to.
@@ -59,46 +64,61 @@ type VolumesListResource =
        "v1" :>
          "volumes" :>
            QueryParam "q" Text :>
-             QueryParam "orderBy" VolumesListOrderBy :>
-               QueryParam "maxAllowedMaturityRating"
-                 VolumesListMaxAllowedMaturityRating
-                 :>
-                 QueryParam "libraryRestrict"
-                   VolumesListLibraryRestrict
-                   :>
-                   QueryParam "partner" Text :>
-                     QueryParam "download" VolumesListDownload :>
-                       QueryParam "source" Text :>
-                         QueryParam "projection" VolumesListProjection :>
-                           QueryParam "filter" VolumesListFilter :>
-                             QueryParam "langRestrict" Text :>
-                               QueryParam "startIndex" (Textual Word32) :>
-                                 QueryParam "maxResults" (Textual Word32) :>
-                                   QueryParam "showPreorders" Bool :>
-                                     QueryParam "printType" VolumesListPrintType
-                                       :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Volumes
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "orderBy" VolumesListOrderBy :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "maxAllowedMaturityRating"
+                       VolumesListMaxAllowedMaturityRating
+                       :>
+                       QueryParam "libraryRestrict"
+                         VolumesListLibraryRestrict
+                         :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "partner" Text :>
+                             QueryParam "download" VolumesListDownload :>
+                               QueryParam "source" Text :>
+                                 QueryParam "projection" VolumesListProjection
+                                   :>
+                                   QueryParam "filter" VolumesListFilter :>
+                                     QueryParam "langRestrict" Text :>
+                                       QueryParam "startIndex" (Textual Word32)
+                                         :>
+                                         QueryParam "maxResults"
+                                           (Textual Word32)
+                                           :>
+                                           QueryParam "showPreorders" Bool :>
+                                             QueryParam "printType"
+                                               VolumesListPrintType
+                                               :>
+                                               QueryParam "callback" Text :>
+                                                 QueryParam "alt" AltJSON :>
+                                                   Get '[JSON] Volumes
 
 -- | Performs a book search.
 --
 -- /See:/ 'volumesList' smart constructor.
 data VolumesList =
   VolumesList'
-    { _vlOrderBy                  :: !(Maybe VolumesListOrderBy)
+    { _vlXgafv :: !(Maybe Xgafv)
+    , _vlUploadProtocol :: !(Maybe Text)
+    , _vlOrderBy :: !(Maybe VolumesListOrderBy)
+    , _vlAccessToken :: !(Maybe Text)
     , _vlMaxAllowedMaturityRating :: !(Maybe VolumesListMaxAllowedMaturityRating)
-    , _vlLibraryRestrict          :: !(Maybe VolumesListLibraryRestrict)
-    , _vlPartner                  :: !(Maybe Text)
-    , _vlQ                        :: !Text
-    , _vlDownload                 :: !(Maybe VolumesListDownload)
-    , _vlSource                   :: !(Maybe Text)
-    , _vlProjection               :: !(Maybe VolumesListProjection)
-    , _vlFilter                   :: !(Maybe VolumesListFilter)
-    , _vlLangRestrict             :: !(Maybe Text)
-    , _vlStartIndex               :: !(Maybe (Textual Word32))
-    , _vlMaxResults               :: !(Maybe (Textual Word32))
-    , _vlShowPreOrders            :: !(Maybe Bool)
-    , _vlPrintType                :: !(Maybe VolumesListPrintType)
+    , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
+    , _vlUploadType :: !(Maybe Text)
+    , _vlPartner :: !(Maybe Text)
+    , _vlQ :: !Text
+    , _vlDownload :: !(Maybe VolumesListDownload)
+    , _vlSource :: !(Maybe Text)
+    , _vlProjection :: !(Maybe VolumesListProjection)
+    , _vlFilter :: !(Maybe VolumesListFilter)
+    , _vlLangRestrict :: !(Maybe Text)
+    , _vlStartIndex :: !(Maybe (Textual Word32))
+    , _vlMaxResults :: !(Maybe (Textual Word32))
+    , _vlShowPreOrders :: !(Maybe Bool)
+    , _vlPrintType :: !(Maybe VolumesListPrintType)
+    , _vlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -107,11 +127,19 @@ data VolumesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vlXgafv'
+--
+-- * 'vlUploadProtocol'
+--
 -- * 'vlOrderBy'
+--
+-- * 'vlAccessToken'
 --
 -- * 'vlMaxAllowedMaturityRating'
 --
 -- * 'vlLibraryRestrict'
+--
+-- * 'vlUploadType'
 --
 -- * 'vlPartner'
 --
@@ -134,14 +162,20 @@ data VolumesList =
 -- * 'vlShowPreOrders'
 --
 -- * 'vlPrintType'
+--
+-- * 'vlCallback'
 volumesList
     :: Text -- ^ 'vlQ'
     -> VolumesList
 volumesList pVlQ_ =
   VolumesList'
-    { _vlOrderBy = Nothing
+    { _vlXgafv = Nothing
+    , _vlUploadProtocol = Nothing
+    , _vlOrderBy = Nothing
+    , _vlAccessToken = Nothing
     , _vlMaxAllowedMaturityRating = Nothing
     , _vlLibraryRestrict = Nothing
+    , _vlUploadType = Nothing
     , _vlPartner = Nothing
     , _vlQ = pVlQ_
     , _vlDownload = Nothing
@@ -153,13 +187,30 @@ volumesList pVlQ_ =
     , _vlMaxResults = Nothing
     , _vlShowPreOrders = Nothing
     , _vlPrintType = Nothing
+    , _vlCallback = Nothing
     }
 
+
+-- | V1 error format.
+vlXgafv :: Lens' VolumesList (Maybe Xgafv)
+vlXgafv = lens _vlXgafv (\ s a -> s{_vlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vlUploadProtocol :: Lens' VolumesList (Maybe Text)
+vlUploadProtocol
+  = lens _vlUploadProtocol
+      (\ s a -> s{_vlUploadProtocol = a})
 
 -- | Sort search results.
 vlOrderBy :: Lens' VolumesList (Maybe VolumesListOrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
+
+-- | OAuth access token.
+vlAccessToken :: Lens' VolumesList (Maybe Text)
+vlAccessToken
+  = lens _vlAccessToken
+      (\ s a -> s{_vlAccessToken = a})
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
@@ -173,6 +224,11 @@ vlLibraryRestrict :: Lens' VolumesList (Maybe VolumesListLibraryRestrict)
 vlLibraryRestrict
   = lens _vlLibraryRestrict
       (\ s a -> s{_vlLibraryRestrict = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vlUploadType :: Lens' VolumesList (Maybe Text)
+vlUploadType
+  = lens _vlUploadType (\ s a -> s{_vlUploadType = a})
 
 -- | Restrict and brand results for partner ID.
 vlPartner :: Lens' VolumesList (Maybe Text)
@@ -230,14 +286,22 @@ vlPrintType :: Lens' VolumesList (Maybe VolumesListPrintType)
 vlPrintType
   = lens _vlPrintType (\ s a -> s{_vlPrintType = a})
 
+-- | JSONP
+vlCallback :: Lens' VolumesList (Maybe Text)
+vlCallback
+  = lens _vlCallback (\ s a -> s{_vlCallback = a})
+
 instance GoogleRequest VolumesList where
         type Rs VolumesList = Volumes
         type Scopes VolumesList =
              '["https://www.googleapis.com/auth/books"]
         requestClient VolumesList'{..}
-          = go (Just _vlQ) _vlOrderBy
+          = go (Just _vlQ) _vlXgafv _vlUploadProtocol
+              _vlOrderBy
+              _vlAccessToken
               _vlMaxAllowedMaturityRating
               _vlLibraryRestrict
+              _vlUploadType
               _vlPartner
               _vlDownload
               _vlSource
@@ -248,6 +312,7 @@ instance GoogleRequest VolumesList where
               _vlMaxResults
               _vlShowPreOrders
               _vlPrintType
+              _vlCallback
               (Just AltJSON)
               booksService
           where go

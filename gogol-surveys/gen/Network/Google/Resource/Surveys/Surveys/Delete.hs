@@ -36,8 +36,8 @@ module Network.Google.Resource.Surveys.Surveys.Delete
     , sdSurveyURLId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.delete@ method which the
 -- 'SurveysDelete' request conforms to.

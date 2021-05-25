@@ -22,9 +22,10 @@
 --
 -- Filters an organization or source\'s findings and groups them by their
 -- specified properties. To group across all sources provide a \`-\` as the
--- source id. Example: \/v1\/organizations\/123\/sources\/-\/findings
+-- source id. Example:
+-- \/v1p1beta1\/organizations\/{organization_id}\/sources\/-\/findings
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.findings.group@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.findings.group@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Group
     (
     -- * REST Resource
@@ -44,13 +45,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Gro
     , osfgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.findings.group@ method which the
 -- 'OrganizationsSourcesFindingsGroup' request conforms to.
 type OrganizationsSourcesFindingsGroupResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "parent" Text :>
          "findings:group" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -64,18 +65,19 @@ type OrganizationsSourcesFindingsGroupResource =
 
 -- | Filters an organization or source\'s findings and groups them by their
 -- specified properties. To group across all sources provide a \`-\` as the
--- source id. Example: \/v1\/organizations\/123\/sources\/-\/findings
+-- source id. Example:
+-- \/v1p1beta1\/organizations\/{organization_id}\/sources\/-\/findings
 --
 -- /See:/ 'organizationsSourcesFindingsGroup' smart constructor.
 data OrganizationsSourcesFindingsGroup =
   OrganizationsSourcesFindingsGroup'
-    { _osfgParent         :: !Text
-    , _osfgXgafv          :: !(Maybe Xgafv)
+    { _osfgParent :: !Text
+    , _osfgXgafv :: !(Maybe Xgafv)
     , _osfgUploadProtocol :: !(Maybe Text)
-    , _osfgAccessToken    :: !(Maybe Text)
-    , _osfgUploadType     :: !(Maybe Text)
-    , _osfgPayload        :: !GroupFindingsRequest
-    , _osfgCallback       :: !(Maybe Text)
+    , _osfgAccessToken :: !(Maybe Text)
+    , _osfgUploadType :: !(Maybe Text)
+    , _osfgPayload :: !GroupFindingsRequest
+    , _osfgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,10 +115,10 @@ organizationsSourcesFindingsGroup pOsfgParent_ pOsfgPayload_ =
     }
 
 
--- | Name of the source to groupBy. Its format is
+-- | Required. Name of the source to groupBy. Its format is
 -- \"organizations\/[organization_id]\/sources\/[source_id]\". To groupBy
 -- across all sources provide a source_id of \`-\`. For example:
--- organizations\/123\/sources\/-
+-- organizations\/{organization_id}\/sources\/-
 osfgParent :: Lens' OrganizationsSourcesFindingsGroup Text
 osfgParent
   = lens _osfgParent (\ s a -> s{_osfgParent = a})

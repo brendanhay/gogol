@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.MachineTypes.List
     , MachineTypesList
 
     -- * Request Lenses
+    , mtlReturnPartialSuccess
     , mtlOrderBy
     , mtlProject
     , mtlZone
@@ -41,8 +42,8 @@ module Network.Google.Resource.Compute.MachineTypes.List
     , mtlMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.machineTypes.list@ method which the
 -- 'MachineTypesList' request conforms to.
@@ -54,23 +55,25 @@ type MachineTypesListResource =
              "zones" :>
                Capture "zone" Text :>
                  "machineTypes" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] MachineTypeList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] MachineTypeList
 
 -- | Retrieves a list of machine types available to the specified project.
 --
 -- /See:/ 'machineTypesList' smart constructor.
 data MachineTypesList =
   MachineTypesList'
-    { _mtlOrderBy    :: !(Maybe Text)
-    , _mtlProject    :: !Text
-    , _mtlZone       :: !Text
-    , _mtlFilter     :: !(Maybe Text)
-    , _mtlPageToken  :: !(Maybe Text)
+    { _mtlReturnPartialSuccess :: !(Maybe Bool)
+    , _mtlOrderBy :: !(Maybe Text)
+    , _mtlProject :: !Text
+    , _mtlZone :: !Text
+    , _mtlFilter :: !(Maybe Text)
+    , _mtlPageToken :: !(Maybe Text)
     , _mtlMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -79,6 +82,8 @@ data MachineTypesList =
 -- | Creates a value of 'MachineTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtlReturnPartialSuccess'
 --
 -- * 'mtlOrderBy'
 --
@@ -97,7 +102,8 @@ machineTypesList
     -> MachineTypesList
 machineTypesList pMtlProject_ pMtlZone_ =
   MachineTypesList'
-    { _mtlOrderBy = Nothing
+    { _mtlReturnPartialSuccess = Nothing
+    , _mtlOrderBy = Nothing
     , _mtlProject = pMtlProject_
     , _mtlZone = pMtlZone_
     , _mtlFilter = Nothing
@@ -106,14 +112,21 @@ machineTypesList pMtlProject_ pMtlZone_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+mtlReturnPartialSuccess :: Lens' MachineTypesList (Maybe Bool)
+mtlReturnPartialSuccess
+  = lens _mtlReturnPartialSuccess
+      (\ s a -> s{_mtlReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 mtlOrderBy :: Lens' MachineTypesList (Maybe Text)
 mtlOrderBy
   = lens _mtlOrderBy (\ s a -> s{_mtlOrderBy = a})
@@ -130,34 +143,36 @@ mtlZone = lens _mtlZone (\ s a -> s{_mtlZone = a})
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 mtlFilter :: Lens' MachineTypesList (Maybe Text)
 mtlFilter
   = lens _mtlFilter (\ s a -> s{_mtlFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 mtlPageToken :: Lens' MachineTypesList (Maybe Text)
 mtlPageToken
   = lens _mtlPageToken (\ s a -> s{_mtlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 mtlMaxResults :: Lens' MachineTypesList Word32
 mtlMaxResults
   = lens _mtlMaxResults
@@ -171,7 +186,9 @@ instance GoogleRequest MachineTypesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient MachineTypesList'{..}
-          = go _mtlProject _mtlZone _mtlOrderBy _mtlFilter
+          = go _mtlProject _mtlZone _mtlReturnPartialSuccess
+              _mtlOrderBy
+              _mtlFilter
               _mtlPageToken
               (Just _mtlMaxResults)
               (Just AltJSON)

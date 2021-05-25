@@ -20,9 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the Photos that belong to the user.
--- __Note:__ Recently created photos that are still being indexed are not
--- returned in the response.
+-- Lists all the Photos that belong to the user. *Note:* Recently created
+-- photos that are still being indexed are not returned in the response.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.list@.
 module Network.Google.Resource.StreetViewPublish.Photos.List
@@ -47,8 +46,8 @@ module Network.Google.Resource.StreetViewPublish.Photos.List
     , plCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.list@ method which the
 -- 'PhotosList' request conforms to.
@@ -60,7 +59,7 @@ type PhotosListResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "view" Text :>
+                   QueryParam "view" PhotosListView :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" (Textual Int32) :>
@@ -68,23 +67,22 @@ type PhotosListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListPhotosResponse
 
--- | Lists all the Photos that belong to the user.
--- __Note:__ Recently created photos that are still being indexed are not
--- returned in the response.
+-- | Lists all the Photos that belong to the user. *Note:* Recently created
+-- photos that are still being indexed are not returned in the response.
 --
 -- /See:/ 'photosList' smart constructor.
 data PhotosList =
   PhotosList'
-    { _plXgafv          :: !(Maybe Xgafv)
-    , _plLanguageCode   :: !(Maybe Text)
+    { _plXgafv :: !(Maybe Xgafv)
+    , _plLanguageCode :: !(Maybe Text)
     , _plUploadProtocol :: !(Maybe Text)
-    , _plAccessToken    :: !(Maybe Text)
-    , _plUploadType     :: !(Maybe Text)
-    , _plView           :: !(Maybe Text)
-    , _plFilter         :: !(Maybe Text)
-    , _plPageToken      :: !(Maybe Text)
-    , _plPageSize       :: !(Maybe (Textual Int32))
-    , _plCallback       :: !(Maybe Text)
+    , _plAccessToken :: !(Maybe Text)
+    , _plUploadType :: !(Maybe Text)
+    , _plView :: !(Maybe PhotosListView)
+    , _plFilter :: !(Maybe Text)
+    , _plPageToken :: !(Maybe Text)
+    , _plPageSize :: !(Maybe (Textual Int32))
+    , _plCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,12 +158,12 @@ plUploadType :: Lens' PhotosList (Maybe Text)
 plUploadType
   = lens _plUploadType (\ s a -> s{_plUploadType = a})
 
--- | Specifies if a download URL for the photos bytes should be returned in
--- the Photos response.
-plView :: Lens' PhotosList (Maybe Text)
+-- | Required. Specifies if a download URL for the photos bytes should be
+-- returned in the Photos response.
+plView :: Lens' PhotosList (Maybe PhotosListView)
 plView = lens _plView (\ s a -> s{_plView = a})
 
--- | The filter expression. For example:
+-- | Required. The filter expression. For example:
 -- \`placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw\`. The only filter supported at
 -- the moment is \`placeId\`.
 plFilter :: Lens' PhotosList (Maybe Text)

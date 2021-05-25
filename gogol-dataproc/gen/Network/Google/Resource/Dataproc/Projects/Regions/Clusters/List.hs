@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all regions\/{region}\/clusters in a project.
+-- Lists all regions\/{region}\/clusters in a project alphabetically.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.list@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
@@ -45,8 +45,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
     , prclCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.clusters.list@ method which the
 -- 'ProjectsRegionsClustersList' request conforms to.
@@ -68,21 +68,21 @@ type ProjectsRegionsClustersListResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListClustersResponse
 
--- | Lists all regions\/{region}\/clusters in a project.
+-- | Lists all regions\/{region}\/clusters in a project alphabetically.
 --
 -- /See:/ 'projectsRegionsClustersList' smart constructor.
 data ProjectsRegionsClustersList =
   ProjectsRegionsClustersList'
-    { _prclXgafv          :: !(Maybe Xgafv)
+    { _prclXgafv :: !(Maybe Xgafv)
     , _prclUploadProtocol :: !(Maybe Text)
-    , _prclAccessToken    :: !(Maybe Text)
-    , _prclUploadType     :: !(Maybe Text)
-    , _prclFilter         :: !(Maybe Text)
-    , _prclRegion         :: !Text
-    , _prclPageToken      :: !(Maybe Text)
-    , _prclProjectId      :: !Text
-    , _prclPageSize       :: !(Maybe (Textual Int32))
-    , _prclCallback       :: !(Maybe Text)
+    , _prclAccessToken :: !(Maybe Text)
+    , _prclUploadType :: !(Maybe Text)
+    , _prclFilter :: !(Maybe Text)
+    , _prclRegion :: !Text
+    , _prclPageToken :: !(Maybe Text)
+    , _prclProjectId :: !Text
+    , _prclPageSize :: !(Maybe (Textual Int32))
+    , _prclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -168,7 +168,7 @@ prclFilter :: Lens' ProjectsRegionsClustersList (Maybe Text)
 prclFilter
   = lens _prclFilter (\ s a -> s{_prclFilter = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prclRegion :: Lens' ProjectsRegionsClustersList Text
 prclRegion
   = lens _prclRegion (\ s a -> s{_prclRegion = a})

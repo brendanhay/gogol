@@ -22,7 +22,7 @@
 --
 -- Deletes a domain of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domains.delete@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.domains.delete@.
 module Network.Google.Resource.Directory.Domains.Delete
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Domains.Delete
     , DomainsDelete
 
     -- * Request Lenses
+    , ddXgafv
+    , ddUploadProtocol
+    , ddAccessToken
+    , ddUploadType
     , ddCustomer
     , ddDomainName
+    , ddCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.domains.delete@ method which the
 -- 'DomainsDelete' request conforms to.
@@ -50,15 +55,25 @@ type DomainsDeleteResource =
              Capture "customer" Text :>
                "domains" :>
                  Capture "domainName" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a domain of the customer.
 --
 -- /See:/ 'domainsDelete' smart constructor.
 data DomainsDelete =
   DomainsDelete'
-    { _ddCustomer   :: !Text
+    { _ddXgafv :: !(Maybe Xgafv)
+    , _ddUploadProtocol :: !(Maybe Text)
+    , _ddAccessToken :: !(Maybe Text)
+    , _ddUploadType :: !(Maybe Text)
+    , _ddCustomer :: !Text
     , _ddDomainName :: !Text
+    , _ddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,18 +82,57 @@ data DomainsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ddXgafv'
+--
+-- * 'ddUploadProtocol'
+--
+-- * 'ddAccessToken'
+--
+-- * 'ddUploadType'
+--
 -- * 'ddCustomer'
 --
 -- * 'ddDomainName'
+--
+-- * 'ddCallback'
 domainsDelete
     :: Text -- ^ 'ddCustomer'
     -> Text -- ^ 'ddDomainName'
     -> DomainsDelete
 domainsDelete pDdCustomer_ pDdDomainName_ =
-  DomainsDelete' {_ddCustomer = pDdCustomer_, _ddDomainName = pDdDomainName_}
+  DomainsDelete'
+    { _ddXgafv = Nothing
+    , _ddUploadProtocol = Nothing
+    , _ddAccessToken = Nothing
+    , _ddUploadType = Nothing
+    , _ddCustomer = pDdCustomer_
+    , _ddDomainName = pDdDomainName_
+    , _ddCallback = Nothing
+    }
 
 
--- | Immutable ID of the G Suite account.
+-- | V1 error format.
+ddXgafv :: Lens' DomainsDelete (Maybe Xgafv)
+ddXgafv = lens _ddXgafv (\ s a -> s{_ddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ddUploadProtocol :: Lens' DomainsDelete (Maybe Text)
+ddUploadProtocol
+  = lens _ddUploadProtocol
+      (\ s a -> s{_ddUploadProtocol = a})
+
+-- | OAuth access token.
+ddAccessToken :: Lens' DomainsDelete (Maybe Text)
+ddAccessToken
+  = lens _ddAccessToken
+      (\ s a -> s{_ddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ddUploadType :: Lens' DomainsDelete (Maybe Text)
+ddUploadType
+  = lens _ddUploadType (\ s a -> s{_ddUploadType = a})
+
+-- | Immutable ID of the Google Workspace account.
 ddCustomer :: Lens' DomainsDelete Text
 ddCustomer
   = lens _ddCustomer (\ s a -> s{_ddCustomer = a})
@@ -88,12 +142,22 @@ ddDomainName :: Lens' DomainsDelete Text
 ddDomainName
   = lens _ddDomainName (\ s a -> s{_ddDomainName = a})
 
+-- | JSONP
+ddCallback :: Lens' DomainsDelete (Maybe Text)
+ddCallback
+  = lens _ddCallback (\ s a -> s{_ddCallback = a})
+
 instance GoogleRequest DomainsDelete where
         type Rs DomainsDelete = ()
         type Scopes DomainsDelete =
              '["https://www.googleapis.com/auth/admin.directory.domain"]
         requestClient DomainsDelete'{..}
-          = go _ddCustomer _ddDomainName (Just AltJSON)
+          = go _ddCustomer _ddDomainName _ddXgafv
+              _ddUploadProtocol
+              _ddAccessToken
+              _ddUploadType
+              _ddCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy DomainsDeleteResource)

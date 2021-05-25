@@ -38,17 +38,17 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Rol
     , ProjectsInstancesDatabasesSessionsRollback
 
     -- * Request Lenses
-    , proXgafv
-    , proUploadProtocol
-    , proAccessToken
-    , proUploadType
-    , proPayload
-    , proSession
-    , proCallback
+    , pidsriXgafv
+    , pidsriUploadProtocol
+    , pidsriAccessToken
+    , pidsriUploadType
+    , pidsriPayload
+    , pidsriSession
+    , pidsriCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.rollback@ method which the
 -- 'ProjectsInstancesDatabasesSessionsRollback' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsInstancesDatabasesSessionsRollbackResource
 -- /See:/ 'projectsInstancesDatabasesSessionsRollback' smart constructor.
 data ProjectsInstancesDatabasesSessionsRollback =
   ProjectsInstancesDatabasesSessionsRollback'
-    { _proXgafv          :: !(Maybe Xgafv)
-    , _proUploadProtocol :: !(Maybe Text)
-    , _proAccessToken    :: !(Maybe Text)
-    , _proUploadType     :: !(Maybe Text)
-    , _proPayload        :: !RollbackRequest
-    , _proSession        :: !Text
-    , _proCallback       :: !(Maybe Text)
+    { _pidsriXgafv :: !(Maybe Xgafv)
+    , _pidsriUploadProtocol :: !(Maybe Text)
+    , _pidsriAccessToken :: !(Maybe Text)
+    , _pidsriUploadType :: !(Maybe Text)
+    , _pidsriPayload :: !RollbackRequest
+    , _pidsriSession :: !Text
+    , _pidsriCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -89,71 +89,75 @@ data ProjectsInstancesDatabasesSessionsRollback =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proXgafv'
+-- * 'pidsriXgafv'
 --
--- * 'proUploadProtocol'
+-- * 'pidsriUploadProtocol'
 --
--- * 'proAccessToken'
+-- * 'pidsriAccessToken'
 --
--- * 'proUploadType'
+-- * 'pidsriUploadType'
 --
--- * 'proPayload'
+-- * 'pidsriPayload'
 --
--- * 'proSession'
+-- * 'pidsriSession'
 --
--- * 'proCallback'
+-- * 'pidsriCallback'
 projectsInstancesDatabasesSessionsRollback
-    :: RollbackRequest -- ^ 'proPayload'
-    -> Text -- ^ 'proSession'
+    :: RollbackRequest -- ^ 'pidsriPayload'
+    -> Text -- ^ 'pidsriSession'
     -> ProjectsInstancesDatabasesSessionsRollback
-projectsInstancesDatabasesSessionsRollback pProPayload_ pProSession_ =
+projectsInstancesDatabasesSessionsRollback pPidsriPayload_ pPidsriSession_ =
   ProjectsInstancesDatabasesSessionsRollback'
-    { _proXgafv = Nothing
-    , _proUploadProtocol = Nothing
-    , _proAccessToken = Nothing
-    , _proUploadType = Nothing
-    , _proPayload = pProPayload_
-    , _proSession = pProSession_
-    , _proCallback = Nothing
+    { _pidsriXgafv = Nothing
+    , _pidsriUploadProtocol = Nothing
+    , _pidsriAccessToken = Nothing
+    , _pidsriUploadType = Nothing
+    , _pidsriPayload = pPidsriPayload_
+    , _pidsriSession = pPidsriSession_
+    , _pidsriCallback = Nothing
     }
 
 
 -- | V1 error format.
-proXgafv :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Xgafv)
-proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
+pidsriXgafv :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Xgafv)
+pidsriXgafv
+  = lens _pidsriXgafv (\ s a -> s{_pidsriXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-proUploadProtocol :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
-proUploadProtocol
-  = lens _proUploadProtocol
-      (\ s a -> s{_proUploadProtocol = a})
+pidsriUploadProtocol :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
+pidsriUploadProtocol
+  = lens _pidsriUploadProtocol
+      (\ s a -> s{_pidsriUploadProtocol = a})
 
 -- | OAuth access token.
-proAccessToken :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
-proAccessToken
-  = lens _proAccessToken
-      (\ s a -> s{_proAccessToken = a})
+pidsriAccessToken :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
+pidsriAccessToken
+  = lens _pidsriAccessToken
+      (\ s a -> s{_pidsriAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-proUploadType :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
-proUploadType
-  = lens _proUploadType
-      (\ s a -> s{_proUploadType = a})
+pidsriUploadType :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
+pidsriUploadType
+  = lens _pidsriUploadType
+      (\ s a -> s{_pidsriUploadType = a})
 
 -- | Multipart request metadata.
-proPayload :: Lens' ProjectsInstancesDatabasesSessionsRollback RollbackRequest
-proPayload
-  = lens _proPayload (\ s a -> s{_proPayload = a})
+pidsriPayload :: Lens' ProjectsInstancesDatabasesSessionsRollback RollbackRequest
+pidsriPayload
+  = lens _pidsriPayload
+      (\ s a -> s{_pidsriPayload = a})
 
 -- | Required. The session in which the transaction to roll back is running.
-proSession :: Lens' ProjectsInstancesDatabasesSessionsRollback Text
-proSession
-  = lens _proSession (\ s a -> s{_proSession = a})
+pidsriSession :: Lens' ProjectsInstancesDatabasesSessionsRollback Text
+pidsriSession
+  = lens _pidsriSession
+      (\ s a -> s{_pidsriSession = a})
 
 -- | JSONP
-proCallback :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
-proCallback
-  = lens _proCallback (\ s a -> s{_proCallback = a})
+pidsriCallback :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Text)
+pidsriCallback
+  = lens _pidsriCallback
+      (\ s a -> s{_pidsriCallback = a})
 
 instance GoogleRequest
            ProjectsInstancesDatabasesSessionsRollback
@@ -167,12 +171,13 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/spanner.data"]
         requestClient
           ProjectsInstancesDatabasesSessionsRollback'{..}
-          = go _proSession _proXgafv _proUploadProtocol
-              _proAccessToken
-              _proUploadType
-              _proCallback
+          = go _pidsriSession _pidsriXgafv
+              _pidsriUploadProtocol
+              _pidsriAccessToken
+              _pidsriUploadType
+              _pidsriCallback
               (Just AltJSON)
-              _proPayload
+              _pidsriPayload
               spannerService
           where go
                   = buildClient

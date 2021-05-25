@@ -33,11 +33,16 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.GenerateSignupURL
     , EnterprisesGenerateSignupURL
 
     -- * Request Lenses
+    , egsuXgafv
+    , egsuUploadProtocol
     , egsuCallbackURL
+    , egsuAccessToken
+    , egsuUploadType
+    , egsuCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.generateSignupUrl@ method which the
 -- 'EnterprisesGenerateSignupURL' request conforms to.
@@ -46,15 +51,25 @@ type EnterprisesGenerateSignupURLResource =
        "v1" :>
          "enterprises" :>
            "signupUrl" :>
-             QueryParam "callbackUrl" Text :>
-               QueryParam "alt" AltJSON :> Post '[JSON] SignupInfo
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "callbackUrl" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] SignupInfo
 
 -- | Generates a sign-up URL.
 --
 -- /See:/ 'enterprisesGenerateSignupURL' smart constructor.
-newtype EnterprisesGenerateSignupURL =
+data EnterprisesGenerateSignupURL =
   EnterprisesGenerateSignupURL'
-    { _egsuCallbackURL :: Maybe Text
+    { _egsuXgafv :: !(Maybe Xgafv)
+    , _egsuUploadProtocol :: !(Maybe Text)
+    , _egsuCallbackURL :: !(Maybe Text)
+    , _egsuAccessToken :: !(Maybe Text)
+    , _egsuUploadType :: !(Maybe Text)
+    , _egsuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,12 +78,40 @@ newtype EnterprisesGenerateSignupURL =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'egsuXgafv'
+--
+-- * 'egsuUploadProtocol'
+--
 -- * 'egsuCallbackURL'
+--
+-- * 'egsuAccessToken'
+--
+-- * 'egsuUploadType'
+--
+-- * 'egsuCallback'
 enterprisesGenerateSignupURL
     :: EnterprisesGenerateSignupURL
 enterprisesGenerateSignupURL =
-  EnterprisesGenerateSignupURL' {_egsuCallbackURL = Nothing}
+  EnterprisesGenerateSignupURL'
+    { _egsuXgafv = Nothing
+    , _egsuUploadProtocol = Nothing
+    , _egsuCallbackURL = Nothing
+    , _egsuAccessToken = Nothing
+    , _egsuUploadType = Nothing
+    , _egsuCallback = Nothing
+    }
 
+
+-- | V1 error format.
+egsuXgafv :: Lens' EnterprisesGenerateSignupURL (Maybe Xgafv)
+egsuXgafv
+  = lens _egsuXgafv (\ s a -> s{_egsuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+egsuUploadProtocol :: Lens' EnterprisesGenerateSignupURL (Maybe Text)
+egsuUploadProtocol
+  = lens _egsuUploadProtocol
+      (\ s a -> s{_egsuUploadProtocol = a})
 
 -- | The callback URL to which the Admin will be redirected after
 -- successfully creating an enterprise. Before redirecting there the system
@@ -83,13 +126,34 @@ egsuCallbackURL
   = lens _egsuCallbackURL
       (\ s a -> s{_egsuCallbackURL = a})
 
+-- | OAuth access token.
+egsuAccessToken :: Lens' EnterprisesGenerateSignupURL (Maybe Text)
+egsuAccessToken
+  = lens _egsuAccessToken
+      (\ s a -> s{_egsuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+egsuUploadType :: Lens' EnterprisesGenerateSignupURL (Maybe Text)
+egsuUploadType
+  = lens _egsuUploadType
+      (\ s a -> s{_egsuUploadType = a})
+
+-- | JSONP
+egsuCallback :: Lens' EnterprisesGenerateSignupURL (Maybe Text)
+egsuCallback
+  = lens _egsuCallback (\ s a -> s{_egsuCallback = a})
+
 instance GoogleRequest EnterprisesGenerateSignupURL
          where
         type Rs EnterprisesGenerateSignupURL = SignupInfo
         type Scopes EnterprisesGenerateSignupURL =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesGenerateSignupURL'{..}
-          = go _egsuCallbackURL (Just AltJSON)
+          = go _egsuXgafv _egsuUploadProtocol _egsuCallbackURL
+              _egsuAccessToken
+              _egsuUploadType
+              _egsuCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

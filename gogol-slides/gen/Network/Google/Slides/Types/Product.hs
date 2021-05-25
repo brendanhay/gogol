@@ -17,15 +17,95 @@
 --
 module Network.Google.Slides.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Slides.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Slides.Types.Sum
+
+-- | The autofit properties of a Shape.
+--
+-- /See:/ 'autofit' smart constructor.
+data Autofit =
+  Autofit'
+    { _aFontScale :: !(Maybe (Textual Double))
+    , _aLineSpacingReduction :: !(Maybe (Textual Double))
+    , _aAutofitType :: !(Maybe AutofitAutofitType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Autofit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aFontScale'
+--
+-- * 'aLineSpacingReduction'
+--
+-- * 'aAutofitType'
+autofit
+    :: Autofit
+autofit =
+  Autofit'
+    { _aFontScale = Nothing
+    , _aLineSpacingReduction = Nothing
+    , _aAutofitType = Nothing
+    }
+
+
+-- | The font scale applied to the shape. For shapes with autofit_type NONE
+-- or SHAPE_AUTOFIT, this value is the default value of 1. For
+-- TEXT_AUTOFIT, this value multiplied by the font_size gives the font size
+-- that is rendered in the editor. This property is read-only.
+aFontScale :: Lens' Autofit (Maybe Double)
+aFontScale
+  = lens _aFontScale (\ s a -> s{_aFontScale = a}) .
+      mapping _Coerce
+
+-- | The line spacing reduction applied to the shape. For shapes with
+-- autofit_type NONE or SHAPE_AUTOFIT, this value is the default value of
+-- 0. For TEXT_AUTOFIT, this value subtracted from the line_spacing gives
+-- the line spacing that is rendered in the editor. This property is
+-- read-only.
+aLineSpacingReduction :: Lens' Autofit (Maybe Double)
+aLineSpacingReduction
+  = lens _aLineSpacingReduction
+      (\ s a -> s{_aLineSpacingReduction = a})
+      . mapping _Coerce
+
+-- | The autofit type of the shape. If the autofit type is
+-- AUTOFIT_TYPE_UNSPECIFIED, the autofit type is inherited from a parent
+-- placeholder if it exists. The field is automatically set to NONE if a
+-- request is made that might affect text fitting within its bounding text
+-- box. In this case the font_scale is applied to the font_size and the
+-- line_spacing_reduction is applied to the line_spacing. Both properties
+-- are also reset to default values.
+aAutofitType :: Lens' Autofit (Maybe AutofitAutofitType)
+aAutofitType
+  = lens _aAutofitType (\ s a -> s{_aAutofitType = a})
+
+instance FromJSON Autofit where
+        parseJSON
+          = withObject "Autofit"
+              (\ o ->
+                 Autofit' <$>
+                   (o .:? "fontScale") <*>
+                     (o .:? "lineSpacingReduction")
+                     <*> (o .:? "autofitType"))
+
+instance ToJSON Autofit where
+        toJSON Autofit'{..}
+          = object
+              (catMaybes
+                 [("fontScale" .=) <$> _aFontScale,
+                  ("lineSpacingReduction" .=) <$>
+                    _aLineSpacingReduction,
+                  ("autofitType" .=) <$> _aAutofitType])
 
 -- | A TextElement kind that represents the beginning of a new paragraph.
 --
 -- /See:/ 'paragraphMarker' smart constructor.
 data ParagraphMarker =
   ParagraphMarker'
-    { _pmStyle  :: !(Maybe ParagraphStyle)
+    { _pmStyle :: !(Maybe ParagraphStyle)
     , _pmBullet :: !(Maybe Bullet)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -71,7 +151,7 @@ instance ToJSON ParagraphMarker where
 -- /See:/ 'deleteTableRowRequest' smart constructor.
 data DeleteTableRowRequest =
   DeleteTableRowRequest'
-    { _dtrrCellLocation  :: !(Maybe TableCellLocation)
+    { _dtrrCellLocation :: !(Maybe TableCellLocation)
     , _dtrrTableObjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -125,8 +205,8 @@ instance ToJSON DeleteTableRowRequest where
 -- /See:/ 'thumbnail' smart constructor.
 data Thumbnail =
   Thumbnail'
-    { _tHeight     :: !(Maybe (Textual Int32))
-    , _tWidth      :: !(Maybe (Textual Int32))
+    { _tHeight :: !(Maybe (Textual Int32))
+    , _tWidth :: !(Maybe (Textual Int32))
     , _tContentURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -190,7 +270,7 @@ instance ToJSON Thumbnail where
 -- /See:/ 'tableBOrderCell' smart constructor.
 data TableBOrderCell =
   TableBOrderCell'
-    { _tbocLocation              :: !(Maybe TableCellLocation)
+    { _tbocLocation :: !(Maybe TableCellLocation)
     , _tbocTableBOrderProperties :: !(Maybe TableBOrderProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -244,8 +324,8 @@ instance ToJSON TableBOrderCell where
 -- /See:/ 'pageElementProperties' smart constructor.
 data PageElementProperties =
   PageElementProperties'
-    { _pepTransform    :: !(Maybe AffineTransform)
-    , _pepSize         :: !(Maybe Size)
+    { _pepTransform :: !(Maybe AffineTransform)
+    , _pepSize :: !(Maybe Size)
     , _pepPageObjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -383,8 +463,8 @@ instance ToJSON OutlineFill where
 data Image =
   Image'
     { _iImageProperties :: !(Maybe ImageProperties)
-    , _iContentURL      :: !(Maybe Text)
-    , _iSourceURL       :: !(Maybe Text)
+    , _iContentURL :: !(Maybe Text)
+    , _iSourceURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -447,8 +527,8 @@ instance ToJSON Image where
 data UpdateLinePropertiesRequest =
   UpdateLinePropertiesRequest'
     { _ulprLineProperties :: !(Maybe LineProperties)
-    , _ulprObjectId       :: !(Maybe Text)
-    , _ulprFields         :: !(Maybe GFieldMask)
+    , _ulprObjectId :: !(Maybe Text)
+    , _ulprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -530,10 +610,10 @@ instance ToJSON UpdateLinePropertiesRequest where
 data CropProperties =
   CropProperties'
     { _cpBottomOffSet :: !(Maybe (Textual Double))
-    , _cpTopOffSet    :: !(Maybe (Textual Double))
-    , _cpAngle        :: !(Maybe (Textual Double))
-    , _cpRightOffSet  :: !(Maybe (Textual Double))
-    , _cpLeftOffSet   :: !(Maybe (Textual Double))
+    , _cpTopOffSet :: !(Maybe (Textual Double))
+    , _cpAngle :: !(Maybe (Textual Double))
+    , _cpRightOffSet :: !(Maybe (Textual Double))
+    , _cpLeftOffSet :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -630,14 +710,14 @@ instance ToJSON CropProperties where
 -- /See:/ 'lineProperties' smart constructor.
 data LineProperties =
   LineProperties'
-    { _lpWeight          :: !(Maybe Dimension)
-    , _lpLink            :: !(Maybe Link)
+    { _lpWeight :: !(Maybe Dimension)
+    , _lpLink :: !(Maybe Link)
     , _lpStartConnection :: !(Maybe LineConnection)
-    , _lpDashStyle       :: !(Maybe LinePropertiesDashStyle)
-    , _lpStartArrow      :: !(Maybe LinePropertiesStartArrow)
-    , _lpLineFill        :: !(Maybe LineFill)
-    , _lpEndConnection   :: !(Maybe LineConnection)
-    , _lpEndArrow        :: !(Maybe LinePropertiesEndArrow)
+    , _lpDashStyle :: !(Maybe LinePropertiesDashStyle)
+    , _lpStartArrow :: !(Maybe LinePropertiesStartArrow)
+    , _lpLineFill :: !(Maybe LineFill)
+    , _lpEndConnection :: !(Maybe LineConnection)
+    , _lpEndArrow :: !(Maybe LinePropertiesEndArrow)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -791,8 +871,8 @@ instance ToJSON Group where
 data ReplaceImageRequest =
   ReplaceImageRequest'
     { _rirImageReplaceMethod :: !(Maybe ReplaceImageRequestImageReplaceMethod)
-    , _rirImageObjectId      :: !(Maybe Text)
-    , _rirURL                :: !(Maybe Text)
+    , _rirImageObjectId :: !(Maybe Text)
+    , _rirURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -828,12 +908,12 @@ rirImageObjectId
   = lens _rirImageObjectId
       (\ s a -> s{_rirImageObjectId = a})
 
--- | The URL of the new image. The image is fetched once at insertion time
--- and a copy is stored for display inside the presentation. Images must be
--- less than 50MB in size, cannot exceed 25 megapixels, and must be in one
--- of PNG, JPEG, or GIF format. The provided URL can be at most 2 kB in
--- length. The URL itself is saved with the image, and exposed via the
--- Image.source_url field.
+-- | The image URL. The image is fetched once at insertion time and a copy is
+-- stored for display inside the presentation. Images must be less than
+-- 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG,
+-- JPEG, or GIF format. The provided URL can be at most 2 kB in length. The
+-- URL itself is saved with the image, and exposed via the Image.source_url
+-- field.
 rirURL :: Lens' ReplaceImageRequest (Maybe Text)
 rirURL = lens _rirURL (\ s a -> s{_rirURL = a})
 
@@ -860,7 +940,7 @@ instance ToJSON ReplaceImageRequest where
 -- /See:/ 'batchUpdatePresentationRequest' smart constructor.
 data BatchUpdatePresentationRequest =
   BatchUpdatePresentationRequest'
-    { _buprRequests     :: !(Maybe [Request'])
+    { _buprRequests :: !(Maybe [Request'])
     , _buprWriteControl :: !(Maybe WriteControl)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -916,7 +996,7 @@ instance ToJSON BatchUpdatePresentationRequest where
 -- /See:/ 'updatePageElementsZOrderRequest' smart constructor.
 data UpdatePageElementsZOrderRequest =
   UpdatePageElementsZOrderRequest'
-    { _upezorOperation            :: !(Maybe UpdatePageElementsZOrderRequestOperation)
+    { _upezorOperation :: !(Maybe UpdatePageElementsZOrderRequestOperation)
     , _upezorPageElementObjectIds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -975,8 +1055,8 @@ instance ToJSON UpdatePageElementsZOrderRequest where
 -- /See:/ 'createShapeRequest' smart constructor.
 data CreateShapeRequest =
   CreateShapeRequest'
-    { _csrShapeType         :: !(Maybe CreateShapeRequestShapeType)
-    , _csrObjectId          :: !(Maybe Text)
+    { _csrShapeType :: !(Maybe CreateShapeRequestShapeType)
+    , _csrObjectId :: !(Maybe Text)
     , _csrElementProperties :: !(Maybe PageElementProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1044,9 +1124,9 @@ instance ToJSON CreateShapeRequest where
 -- /See:/ 'autoText' smart constructor.
 data AutoText =
   AutoText'
-    { _atStyle   :: !(Maybe TextStyle)
+    { _atStyle :: !(Maybe TextStyle)
     , _atContent :: !(Maybe Text)
-    , _atType    :: !(Maybe AutoTextType)
+    , _atType :: !(Maybe AutoTextType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1106,9 +1186,9 @@ data ReplaceAllShapesWithSheetsChartRequest =
   ReplaceAllShapesWithSheetsChartRequest'
     { _raswscrPageObjectIds :: !(Maybe [Text])
     , _raswscrSpreadsheetId :: !(Maybe Text)
-    , _raswscrLinkingMode   :: !(Maybe ReplaceAllShapesWithSheetsChartRequestLinkingMode)
-    , _raswscrContainsText  :: !(Maybe SubstringMatchCriteria)
-    , _raswscrChartId       :: !(Maybe (Textual Int32))
+    , _raswscrLinkingMode :: !(Maybe ReplaceAllShapesWithSheetsChartRequestLinkingMode)
+    , _raswscrContainsText :: !(Maybe SubstringMatchCriteria)
+    , _raswscrChartId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1208,7 +1288,7 @@ instance ToJSON
 -- /See:/ 'list' smart constructor.
 data List =
   List'
-    { _lListId       :: !(Maybe Text)
+    { _lListId :: !(Maybe Text)
     , _lNestingLevel :: !(Maybe ListNestingLevel)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1337,9 +1417,9 @@ instance ToJSON GroupObjectsResponse where
 -- /See:/ 'rgbColor' smart constructor.
 data RgbColor =
   RgbColor'
-    { _rcRed   :: !(Maybe (Textual Double))
+    { _rcRed :: !(Maybe (Textual Double))
     , _rcGreen :: !(Maybe (Textual Double))
-    , _rcBlue  :: !(Maybe (Textual Double))
+    , _rcBlue :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1395,9 +1475,9 @@ instance ToJSON RgbColor where
 -- /See:/ 'updatePagePropertiesRequest' smart constructor.
 data UpdatePagePropertiesRequest =
   UpdatePagePropertiesRequest'
-    { _upprObjectId       :: !(Maybe Text)
+    { _upprObjectId :: !(Maybe Text)
     , _upprPageProperties :: !(Maybe PageProperties)
-    , _upprFields         :: !(Maybe GFieldMask)
+    , _upprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1466,11 +1546,11 @@ instance ToJSON UpdatePagePropertiesRequest where
 -- /See:/ 'createSheetsChartRequest' smart constructor.
 data CreateSheetsChartRequest =
   CreateSheetsChartRequest'
-    { _cscrObjectId          :: !(Maybe Text)
-    , _cscrSpreadsheetId     :: !(Maybe Text)
-    , _cscrLinkingMode       :: !(Maybe CreateSheetsChartRequestLinkingMode)
+    { _cscrObjectId :: !(Maybe Text)
+    , _cscrSpreadsheetId :: !(Maybe Text)
+    , _cscrLinkingMode :: !(Maybe CreateSheetsChartRequestLinkingMode)
     , _cscrElementProperties :: !(Maybe PageElementProperties)
-    , _cscrChartId           :: !(Maybe (Textual Int32))
+    , _cscrChartId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1510,7 +1590,11 @@ cscrObjectId :: Lens' CreateSheetsChartRequest (Maybe Text)
 cscrObjectId
   = lens _cscrObjectId (\ s a -> s{_cscrObjectId = a})
 
--- | The ID of the Google Sheets spreadsheet that contains the chart.
+-- | The ID of the Google Sheets spreadsheet that contains the chart. You
+-- might need to add a resource key to the HTTP header for a subset of old
+-- files. For more information, see [Access link-shared files using
+-- resource
+-- keys](https:\/\/developers.google.com\/drive\/api\/v3\/resource-keys).
 cscrSpreadsheetId :: Lens' CreateSheetsChartRequest (Maybe Text)
 cscrSpreadsheetId
   = lens _cscrSpreadsheetId
@@ -1604,9 +1688,9 @@ instance ToJSON TableRowProperties where
 data UpdateTableRowPropertiesRequest =
   UpdateTableRowPropertiesRequest'
     { _utrprTableRowProperties :: !(Maybe TableRowProperties)
-    , _utrprRowIndices         :: !(Maybe [Textual Int32])
-    , _utrprObjectId           :: !(Maybe Text)
-    , _utrprFields             :: !(Maybe GFieldMask)
+    , _utrprRowIndices :: !(Maybe [Textual Int32])
+    , _utrprObjectId :: !(Maybe Text)
+    , _utrprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1728,8 +1812,8 @@ instance ToJSON MasterProperties where
 -- /See:/ 'deleteTextRequest' smart constructor.
 data DeleteTextRequest =
   DeleteTextRequest'
-    { _dtrTextRange    :: !(Maybe Range)
-    , _dtrObjectId     :: !(Maybe Text)
+    { _dtrTextRange :: !(Maybe Range)
+    , _dtrObjectId :: !(Maybe Text)
     , _dtrCellLocation :: !(Maybe TableCellLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1803,9 +1887,9 @@ instance ToJSON DeleteTextRequest where
 -- /See:/ 'insertTableColumnsRequest' smart constructor.
 data InsertTableColumnsRequest =
   InsertTableColumnsRequest'
-    { _itcrInsertRight   :: !(Maybe Bool)
-    , _itcrNumber        :: !(Maybe (Textual Int32))
-    , _itcrCellLocation  :: !(Maybe TableCellLocation)
+    { _itcrInsertRight :: !(Maybe Bool)
+    , _itcrNumber :: !(Maybe (Textual Int32))
+    , _itcrCellLocation :: !(Maybe TableCellLocation)
     , _itcrTableObjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1921,7 +2005,7 @@ instance ToJSON TextContentLists where
 data Size =
   Size'
     { _sHeight :: !(Maybe Dimension)
-    , _sWidth  :: !(Maybe Dimension)
+    , _sWidth :: !(Maybe Dimension)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1966,7 +2050,7 @@ instance ToJSON Size where
 -- /See:/ 'stretchedPictureFill' smart constructor.
 data StretchedPictureFill =
   StretchedPictureFill'
-    { _spfSize       :: !(Maybe Size)
+    { _spfSize :: !(Maybe Size)
     , _spfContentURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2059,10 +2143,10 @@ instance ToJSON TableBOrderFill where
 -- /See:/ 'sheetsChart' smart constructor.
 data SheetsChart =
   SheetsChart'
-    { _scSpreadsheetId         :: !(Maybe Text)
-    , _scContentURL            :: !(Maybe Text)
+    { _scSpreadsheetId :: !(Maybe Text)
+    , _scContentURL :: !(Maybe Text)
     , _scSheetsChartProperties :: !(Maybe SheetsChartProperties)
-    , _scChartId               :: !(Maybe (Textual Int32))
+    , _scChartId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2175,7 +2259,7 @@ instance ToJSON CreateShapeResponse where
 -- /See:/ 'deleteTableColumnRequest' smart constructor.
 data DeleteTableColumnRequest =
   DeleteTableColumnRequest'
-    { _dtcrCellLocation  :: !(Maybe TableCellLocation)
+    { _dtcrCellLocation :: !(Maybe TableCellLocation)
     , _dtcrTableObjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2271,7 +2355,7 @@ instance ToJSON TableBOrderRow where
 -- /See:/ 'lineConnection' smart constructor.
 data LineConnection =
   LineConnection'
-    { _lcConnectedObjectId   :: !(Maybe Text)
+    { _lcConnectedObjectId :: !(Maybe Text)
     , _lcConnectionSiteIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2336,10 +2420,10 @@ instance ToJSON LineConnection where
 -- /See:/ 'link' smart constructor.
 data Link =
   Link'
-    { _lURL          :: !(Maybe Text)
+    { _lURL :: !(Maybe Text)
     , _lPageObjectId :: !(Maybe Text)
     , _lRelativeLink :: !(Maybe LinkRelativeLink)
-    , _lSlideIndex   :: !(Maybe (Textual Int32))
+    , _lSlideIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2415,7 +2499,7 @@ instance ToJSON Link where
 -- /See:/ 'groupObjectsRequest' smart constructor.
 data GroupObjectsRequest =
   GroupObjectsRequest'
-    { _gorGroupObjectId     :: !(Maybe Text)
+    { _gorGroupObjectId :: !(Maybe Text)
     , _gorChildrenObjectIds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2450,7 +2534,7 @@ gorGroupObjectId
 -- | The object IDs of the objects to group. Only page elements can be
 -- grouped. There should be at least two page elements on the same page
 -- that are not already in another group. Some page elements, such as
--- videos, tables and placeholder shapes cannot be grouped.
+-- videos, tables and placeholders cannot be grouped.
 gorChildrenObjectIds :: Lens' GroupObjectsRequest [Text]
 gorChildrenObjectIds
   = lens _gorChildrenObjectIds
@@ -2479,7 +2563,7 @@ instance ToJSON GroupObjectsRequest where
 data Dimension =
   Dimension'
     { _dMagnitude :: !(Maybe (Textual Double))
-    , _dUnit      :: !(Maybe DimensionUnit)
+    , _dUnit :: !(Maybe DimensionUnit)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2526,8 +2610,8 @@ instance ToJSON Dimension where
 data BatchUpdatePresentationResponse =
   BatchUpdatePresentationResponse'
     { _bPresentationId :: !(Maybe Text)
-    , _bReplies        :: !(Maybe [Response])
-    , _bWriteControl   :: !(Maybe WriteControl)
+    , _bReplies :: !(Maybe [Response])
+    , _bWriteControl :: !(Maybe WriteControl)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2693,10 +2777,10 @@ instance ToJSON
 -- /See:/ 'createTableRequest' smart constructor.
 data CreateTableRequest =
   CreateTableRequest'
-    { _ctrObjectId          :: !(Maybe Text)
-    , _ctrRows              :: !(Maybe (Textual Int32))
+    { _ctrObjectId :: !(Maybe Text)
+    , _ctrRows :: !(Maybe (Textual Int32))
     , _ctrElementProperties :: !(Maybe PageElementProperties)
-    , _ctrColumns           :: !(Maybe (Textual Int32))
+    , _ctrColumns :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2780,8 +2864,8 @@ instance ToJSON CreateTableRequest where
 data TableBOrderProperties =
   TableBOrderProperties'
     { _tbopTableBOrderFill :: !(Maybe TableBOrderFill)
-    , _tbopWeight          :: !(Maybe Dimension)
-    , _tbopDashStyle       :: !(Maybe TableBOrderPropertiesDashStyle)
+    , _tbopWeight :: !(Maybe Dimension)
+    , _tbopDashStyle :: !(Maybe TableBOrderPropertiesDashStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2843,18 +2927,18 @@ instance ToJSON TableBOrderProperties where
 -- /See:/ 'response' smart constructor.
 data Response =
   Response'
-    { _rReplaceAllShapesWithImage       :: !(Maybe ReplaceAllShapesWithImageResponse)
-    , _rCreateLine                      :: !(Maybe CreateLineResponse)
-    , _rReplaceAllText                  :: !(Maybe ReplaceAllTextResponse)
+    { _rReplaceAllShapesWithImage :: !(Maybe ReplaceAllShapesWithImageResponse)
+    , _rCreateLine :: !(Maybe CreateLineResponse)
+    , _rReplaceAllText :: !(Maybe ReplaceAllTextResponse)
     , _rReplaceAllShapesWithSheetsChart :: !(Maybe ReplaceAllShapesWithSheetsChartResponse)
-    , _rCreateShape                     :: !(Maybe CreateShapeResponse)
-    , _rGroupObjects                    :: !(Maybe GroupObjectsResponse)
-    , _rCreateSheetsChart               :: !(Maybe CreateSheetsChartResponse)
-    , _rDuplicateObject                 :: !(Maybe DuplicateObjectResponse)
-    , _rCreateTable                     :: !(Maybe CreateTableResponse)
-    , _rCreateVideo                     :: !(Maybe CreateVideoResponse)
-    , _rCreateImage                     :: !(Maybe CreateImageResponse)
-    , _rCreateSlide                     :: !(Maybe CreateSlideResponse)
+    , _rCreateShape :: !(Maybe CreateShapeResponse)
+    , _rGroupObjects :: !(Maybe GroupObjectsResponse)
+    , _rCreateSheetsChart :: !(Maybe CreateSheetsChartResponse)
+    , _rDuplicateObject :: !(Maybe DuplicateObjectResponse)
+    , _rCreateTable :: !(Maybe CreateTableResponse)
+    , _rCreateVideo :: !(Maybe CreateVideoResponse)
+    , _rCreateImage :: !(Maybe CreateImageResponse)
+    , _rCreateSlide :: !(Maybe CreateSlideResponse)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3054,7 +3138,7 @@ instance ToJSON OptionalColor where
 -- /See:/ 'duplicateObjectRequest' smart constructor.
 data DuplicateObjectRequest =
   DuplicateObjectRequest'
-    { _dorObjectId  :: !(Maybe Text)
+    { _dorObjectId :: !(Maybe Text)
     , _dorObjectIds :: !(Maybe DuplicateObjectRequestObjectIds)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3159,15 +3243,15 @@ instance ToJSON UnGroupObjectsRequest where
 -- /See:/ 'page' smart constructor.
 data Page =
   Page'
-    { _pNotesProperties  :: !(Maybe NotesProperties)
+    { _pNotesProperties :: !(Maybe NotesProperties)
     , _pMasterProperties :: !(Maybe MasterProperties)
-    , _pObjectId         :: !(Maybe Text)
-    , _pPageElements     :: !(Maybe [PageElement])
-    , _pSlideProperties  :: !(Maybe SlideProperties)
-    , _pPageProperties   :: !(Maybe PageProperties)
+    , _pObjectId :: !(Maybe Text)
+    , _pPageElements :: !(Maybe [PageElement])
+    , _pSlideProperties :: !(Maybe SlideProperties)
+    , _pPageProperties :: !(Maybe PageProperties)
     , _pLayoutProperties :: !(Maybe LayoutProperties)
-    , _pPageType         :: !(Maybe PagePageType)
-    , _pRevisionId       :: !(Maybe Text)
+    , _pPageType :: !(Maybe PagePageType)
+    , _pRevisionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3349,10 +3433,10 @@ instance ToJSON ReplaceAllTextResponse where
 -- /See:/ 'bullet' smart constructor.
 data Bullet =
   Bullet'
-    { _bGlyph        :: !(Maybe Text)
-    , _bListId       :: !(Maybe Text)
+    { _bGlyph :: !(Maybe Text)
+    , _bListId :: !(Maybe Text)
     , _bNestingLevel :: !(Maybe (Textual Int32))
-    , _bBulletStyle  :: !(Maybe TextStyle)
+    , _bBulletStyle :: !(Maybe TextStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3422,9 +3506,9 @@ instance ToJSON Bullet where
 -- /See:/ 'updateImagePropertiesRequest' smart constructor.
 data UpdateImagePropertiesRequest =
   UpdateImagePropertiesRequest'
-    { _uiprObjectId        :: !(Maybe Text)
+    { _uiprObjectId :: !(Maybe Text)
     , _uiprImageProperties :: !(Maybe ImageProperties)
-    , _uiprFields          :: !(Maybe GFieldMask)
+    , _uiprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3494,7 +3578,8 @@ data SlideProperties =
   SlideProperties'
     { _spLayoutObjectId :: !(Maybe Text)
     , _spMasterObjectId :: !(Maybe Text)
-    , _spNotesPage      :: !(Maybe Page)
+    , _spIsSkipped :: !(Maybe Bool)
+    , _spNotesPage :: !(Maybe Page)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3507,6 +3592,8 @@ data SlideProperties =
 --
 -- * 'spMasterObjectId'
 --
+-- * 'spIsSkipped'
+--
 -- * 'spNotesPage'
 slideProperties
     :: SlideProperties
@@ -3514,6 +3601,7 @@ slideProperties =
   SlideProperties'
     { _spLayoutObjectId = Nothing
     , _spMasterObjectId = Nothing
+    , _spIsSkipped = Nothing
     , _spNotesPage = Nothing
     }
 
@@ -3531,6 +3619,12 @@ spMasterObjectId :: Lens' SlideProperties (Maybe Text)
 spMasterObjectId
   = lens _spMasterObjectId
       (\ s a -> s{_spMasterObjectId = a})
+
+-- | Whether the slide is skipped in the presentation mode. Defaults to
+-- false.
+spIsSkipped :: Lens' SlideProperties (Maybe Bool)
+spIsSkipped
+  = lens _spIsSkipped (\ s a -> s{_spIsSkipped = a})
 
 -- | The notes page that this slide is associated with. It defines the visual
 -- appearance of a notes page when printing or exporting slides with
@@ -3550,6 +3644,7 @@ instance FromJSON SlideProperties where
               (\ o ->
                  SlideProperties' <$>
                    (o .:? "layoutObjectId") <*> (o .:? "masterObjectId")
+                     <*> (o .:? "isSkipped")
                      <*> (o .:? "notesPage"))
 
 instance ToJSON SlideProperties where
@@ -3558,6 +3653,7 @@ instance ToJSON SlideProperties where
               (catMaybes
                  [("layoutObjectId" .=) <$> _spLayoutObjectId,
                   ("masterObjectId" .=) <$> _spMasterObjectId,
+                  ("isSkipped" .=) <$> _spIsSkipped,
                   ("notesPage" .=) <$> _spNotesPage])
 
 -- | A Google Slides presentation.
@@ -3565,15 +3661,15 @@ instance ToJSON SlideProperties where
 -- /See:/ 'presentation' smart constructor.
 data Presentation =
   Presentation'
-    { _preSlides         :: !(Maybe [Page])
-    , _preNotesMaster    :: !(Maybe Page)
-    , _preMasters        :: !(Maybe [Page])
-    , _preLocale         :: !(Maybe Text)
+    { _preSlides :: !(Maybe [Page])
+    , _preNotesMaster :: !(Maybe Page)
+    , _preMasters :: !(Maybe [Page])
+    , _preLocale :: !(Maybe Text)
     , _prePresentationId :: !(Maybe Text)
-    , _preTitle          :: !(Maybe Text)
-    , _preRevisionId     :: !(Maybe Text)
-    , _prePageSize       :: !(Maybe Size)
-    , _preLayouts        :: !(Maybe [Page])
+    , _preTitle :: !(Maybe Text)
+    , _preRevisionId :: !(Maybe Text)
+    , _prePageSize :: !(Maybe Size)
+    , _preLayouts :: !(Maybe [Page])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3629,8 +3725,8 @@ preSlides
 -- a \`SLIDE_IMAGE\` placeholder shape contains the slide thumbnail, and a
 -- \`BODY\` placeholder shape contains the speaker notes. - The notes
 -- master page properties define the common page properties inherited by
--- all notes pages. - Any other shapes on the notes master will appear on
--- all notes pages. The notes master is read-only.
+-- all notes pages. - Any other shapes on the notes master appear on all
+-- notes pages. The notes master is read-only.
 preNotesMaster :: Lens' Presentation (Maybe Page)
 preNotesMaster
   = lens _preNotesMaster
@@ -3642,8 +3738,8 @@ preNotesMaster
 -- default text styles and shape properties of all placeholder shapes on
 -- pages that use that master. - The master page properties define the
 -- common page properties inherited by its layouts. - Any other shapes on
--- the master slide will appear on all slides using that master, regardless
--- of their layout.
+-- the master slide appear on all slides using that master, regardless of
+-- their layout.
 preMasters :: Lens' Presentation [Page]
 preMasters
   = lens _preMasters (\ s a -> s{_preMasters = a}) .
@@ -3729,7 +3825,7 @@ instance ToJSON Presentation where
 data ThemeColorPair =
   ThemeColorPair'
     { _tcpColor :: !(Maybe RgbColor)
-    , _tcpType  :: !(Maybe ThemeColorPairType)
+    , _tcpType :: !(Maybe ThemeColorPairType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3776,14 +3872,14 @@ instance ToJSON ThemeColorPair where
 -- /See:/ 'shadow' smart constructor.
 data Shadow =
   Shadow'
-    { _sTransform       :: !(Maybe AffineTransform)
-    , _sColor           :: !(Maybe OpaqueColor)
-    , _sBlurRadius      :: !(Maybe Dimension)
+    { _sTransform :: !(Maybe AffineTransform)
+    , _sColor :: !(Maybe OpaqueColor)
+    , _sBlurRadius :: !(Maybe Dimension)
     , _sRotateWithShape :: !(Maybe Bool)
-    , _sAlpha           :: !(Maybe (Textual Double))
-    , _sAlignment       :: !(Maybe ShadowAlignment)
-    , _sPropertyState   :: !(Maybe ShadowPropertyState)
-    , _sType            :: !(Maybe ShadowType)
+    , _sAlpha :: !(Maybe (Textual Double))
+    , _sAlignment :: !(Maybe ShadowAlignment)
+    , _sPropertyState :: !(Maybe ShadowPropertyState)
+    , _sType :: !(Maybe ShadowType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3897,19 +3993,87 @@ instance ToJSON Shadow where
                   ("propertyState" .=) <$> _sPropertyState,
                   ("type" .=) <$> _sType])
 
+-- | Updates the properties of a Slide.
+--
+-- /See:/ 'updateSlidePropertiesRequest' smart constructor.
+data UpdateSlidePropertiesRequest =
+  UpdateSlidePropertiesRequest'
+    { _usprObjectId :: !(Maybe Text)
+    , _usprSlideProperties :: !(Maybe SlideProperties)
+    , _usprFields :: !(Maybe GFieldMask)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UpdateSlidePropertiesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usprObjectId'
+--
+-- * 'usprSlideProperties'
+--
+-- * 'usprFields'
+updateSlidePropertiesRequest
+    :: UpdateSlidePropertiesRequest
+updateSlidePropertiesRequest =
+  UpdateSlidePropertiesRequest'
+    { _usprObjectId = Nothing
+    , _usprSlideProperties = Nothing
+    , _usprFields = Nothing
+    }
+
+
+-- | The object ID of the slide the update is applied to.
+usprObjectId :: Lens' UpdateSlidePropertiesRequest (Maybe Text)
+usprObjectId
+  = lens _usprObjectId (\ s a -> s{_usprObjectId = a})
+
+-- | The slide properties to update.
+usprSlideProperties :: Lens' UpdateSlidePropertiesRequest (Maybe SlideProperties)
+usprSlideProperties
+  = lens _usprSlideProperties
+      (\ s a -> s{_usprSlideProperties = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \'slideProperties\' is implied and should not be specified. A
+-- single \`\"*\"\` can be used as short-hand for listing every field. For
+-- example to update whether a slide is skipped, set \`fields\` to
+-- \`\"isSkipped\"\`. To reset a property to its default value, include its
+-- field name in the field mask but leave the field itself unset.
+usprFields :: Lens' UpdateSlidePropertiesRequest (Maybe GFieldMask)
+usprFields
+  = lens _usprFields (\ s a -> s{_usprFields = a})
+
+instance FromJSON UpdateSlidePropertiesRequest where
+        parseJSON
+          = withObject "UpdateSlidePropertiesRequest"
+              (\ o ->
+                 UpdateSlidePropertiesRequest' <$>
+                   (o .:? "objectId") <*> (o .:? "slideProperties") <*>
+                     (o .:? "fields"))
+
+instance ToJSON UpdateSlidePropertiesRequest where
+        toJSON UpdateSlidePropertiesRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _usprObjectId,
+                  ("slideProperties" .=) <$> _usprSlideProperties,
+                  ("fields" .=) <$> _usprFields])
+
 -- | The properties of the Image.
 --
 -- /See:/ 'imageProperties' smart constructor.
 data ImageProperties =
   ImageProperties'
     { _ipCropProperties :: !(Maybe CropProperties)
-    , _ipLink           :: !(Maybe Link)
-    , _ipTransparency   :: !(Maybe (Textual Double))
-    , _ipShadow         :: !(Maybe Shadow)
-    , _ipContrast       :: !(Maybe (Textual Double))
-    , _ipRecolor        :: !(Maybe Recolor)
-    , _ipOutline        :: !(Maybe Outline)
-    , _ipBrightness     :: !(Maybe (Textual Double))
+    , _ipLink :: !(Maybe Link)
+    , _ipTransparency :: !(Maybe (Textual Double))
+    , _ipShadow :: !(Maybe Shadow)
+    , _ipContrast :: !(Maybe (Textual Double))
+    , _ipRecolor :: !(Maybe Recolor)
+    , _ipOutline :: !(Maybe Outline)
+    , _ipBrightness :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4031,8 +4195,8 @@ instance ToJSON ImageProperties where
 data Line =
   Line'
     { _lLineProperties :: !(Maybe LineProperties)
-    , _lLineCategory   :: !(Maybe LineLineCategory)
-    , _lLineType       :: !(Maybe LineLineType)
+    , _lLineCategory :: !(Maybe LineLineCategory)
+    , _lLineType :: !(Maybe LineLineType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4129,7 +4293,7 @@ instance ToJSON CreateVideoResponse where
 data LayoutReference =
   LayoutReference'
     { _lrPredefinedLayout :: !(Maybe LayoutReferencePredefinedLayout)
-    , _lrLayoutId         :: !(Maybe Text)
+    , _lrLayoutId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4216,7 +4380,7 @@ instance ToJSON LineFill where
 data UpdatePageElementTransformRequest =
   UpdatePageElementTransformRequest'
     { _upetrTransform :: !(Maybe AffineTransform)
-    , _upetrObjectId  :: !(Maybe Text)
+    , _upetrObjectId :: !(Maybe Text)
     , _upetrApplyMode :: !(Maybe UpdatePageElementTransformRequestApplyMode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4282,9 +4446,9 @@ instance ToJSON UpdatePageElementTransformRequest
 -- /See:/ 'insertTableRowsRequest' smart constructor.
 data InsertTableRowsRequest =
   InsertTableRowsRequest'
-    { _itrrInsertBelow   :: !(Maybe Bool)
-    , _itrrNumber        :: !(Maybe (Textual Int32))
-    , _itrrCellLocation  :: !(Maybe TableCellLocation)
+    { _itrrInsertBelow :: !(Maybe Bool)
+    , _itrrNumber :: !(Maybe (Textual Int32))
+    , _itrrCellLocation :: !(Maybe TableCellLocation)
     , _itrrTableObjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4363,7 +4527,7 @@ instance ToJSON InsertTableRowsRequest where
 -- /See:/ 'unmergeTableCellsRequest' smart constructor.
 data UnmergeTableCellsRequest =
   UnmergeTableCellsRequest'
-    { _utcrObjectId   :: !(Maybe Text)
+    { _utcrObjectId :: !(Maybe Text)
     , _utcrTableRange :: !(Maybe TableRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4417,9 +4581,9 @@ instance ToJSON UnmergeTableCellsRequest where
 -- /See:/ 'video' smart constructor.
 data Video =
   Video'
-    { _vURL             :: !(Maybe Text)
-    , _vSource          :: !(Maybe VideoSource)
-    , _vId              :: !(Maybe Text)
+    { _vURL :: !(Maybe Text)
+    , _vSource :: !(Maybe VideoSource)
+    , _vId :: !(Maybe Text)
     , _vVideoProperties :: !(Maybe VideoProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4487,10 +4651,10 @@ instance ToJSON Video where
 -- /See:/ 'updateTableColumnPropertiesRequest' smart constructor.
 data UpdateTableColumnPropertiesRequest =
   UpdateTableColumnPropertiesRequest'
-    { _utcprObjectId              :: !(Maybe Text)
+    { _utcprObjectId :: !(Maybe Text)
     , _utcprTableColumnProperties :: !(Maybe TableColumnProperties)
-    , _utcprFields                :: !(Maybe GFieldMask)
-    , _utcprColumnIndices         :: !(Maybe [Textual Int32])
+    , _utcprFields :: !(Maybe GFieldMask)
+    , _utcprColumnIndices :: !(Maybe [Textual Int32])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4579,7 +4743,7 @@ instance ToJSON UpdateTableColumnPropertiesRequest
 data TableCellProperties =
   TableCellProperties'
     { _tcpTableCellBackgRoundFill :: !(Maybe TableCellBackgRoundFill)
-    , _tcpContentAlignment        :: !(Maybe TableCellPropertiesContentAlignment)
+    , _tcpContentAlignment :: !(Maybe TableCellPropertiesContentAlignment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4705,7 +4869,7 @@ instance ToJSON WordArt where
 -- /See:/ 'tableCellBackgRoundFill' smart constructor.
 data TableCellBackgRoundFill =
   TableCellBackgRoundFill'
-    { _tcbrfSolidFill     :: !(Maybe SolidFill)
+    { _tcbrfSolidFill :: !(Maybe SolidFill)
     , _tcbrfPropertyState :: !(Maybe TableCellBackgRoundFillPropertyState)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4761,7 +4925,7 @@ instance ToJSON TableCellBackgRoundFill where
 -- /See:/ 'textRun' smart constructor.
 data TextRun =
   TextRun'
-    { _trStyle   :: !(Maybe TextStyle)
+    { _trStyle :: !(Maybe TextStyle)
     , _trContent :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4846,8 +5010,8 @@ instance ToJSON RefreshSheetsChartRequest where
 data TableRow =
   TableRow'
     { _trTableRowProperties :: !(Maybe TableRowProperties)
-    , _trTableCells         :: !(Maybe [TableCell])
-    , _trRowHeight          :: !(Maybe Dimension)
+    , _trTableCells :: !(Maybe [TableCell])
+    , _trRowHeight :: !(Maybe Dimension)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4915,7 +5079,7 @@ instance ToJSON TableRow where
 data WeightedFontFamily =
   WeightedFontFamily'
     { _wffFontFamily :: !(Maybe Text)
-    , _wffWeight     :: !(Maybe (Textual Int32))
+    , _wffWeight :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4976,10 +5140,10 @@ instance ToJSON WeightedFontFamily where
 -- /See:/ 'createVideoRequest' smart constructor.
 data CreateVideoRequest =
   CreateVideoRequest'
-    { _creObjectId          :: !(Maybe Text)
+    { _creObjectId :: !(Maybe Text)
     , _creElementProperties :: !(Maybe PageElementProperties)
-    , _creSource            :: !(Maybe CreateVideoRequestSource)
-    , _creId                :: !(Maybe Text)
+    , _creSource :: !(Maybe CreateVideoRequestSource)
+    , _creId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5037,7 +5201,11 @@ creSource
 -- video https:\/\/www.youtube.com\/watch?v=7U3axjORYZ0, the ID is
 -- 7U3axjORYZ0. For a Google Drive video
 -- https:\/\/drive.google.com\/file\/d\/1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q
--- the ID is 1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q.
+-- the ID is 1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q. To access a Google Drive
+-- video file, you might need to add a resource key to the HTTP header for
+-- a subset of old files. For more information, see [Access link-shared
+-- files using resource
+-- keys](https:\/\/developers.google.com\/drive\/api\/v3\/resource-keys).
 creId :: Lens' CreateVideoRequest (Maybe Text)
 creId = lens _creId (\ s a -> s{_creId = a})
 
@@ -5065,7 +5233,7 @@ instance ToJSON CreateVideoRequest where
 data TextContent =
   TextContent'
     { _tcTextElements :: !(Maybe [TextElement])
-    , _tcLists        :: !(Maybe TextContentLists)
+    , _tcLists :: !(Maybe TextContentLists)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5116,9 +5284,9 @@ instance ToJSON TextContent where
 -- /See:/ 'shape' smart constructor.
 data Shape =
   Shape'
-    { _sShapeType       :: !(Maybe ShapeShapeType)
-    , _sText            :: !(Maybe TextContent)
-    , _sPlaceholder     :: !(Maybe Placeholder)
+    { _sShapeType :: !(Maybe ShapeShapeType)
+    , _sText :: !(Maybe TextContent)
+    , _sPlaceholder :: !(Maybe Placeholder)
     , _sShapeProperties :: !(Maybe ShapeProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5155,10 +5323,10 @@ sShapeType
 sText :: Lens' Shape (Maybe TextContent)
 sText = lens _sText (\ s a -> s{_sText = a})
 
--- | Placeholders are shapes that are inherit from corresponding placeholders
--- on layouts and masters. If set, the shape is a placeholder shape and any
--- inherited properties can be resolved by looking at the parent
--- placeholder identified by the Placeholder.parent_object_id field.
+-- | Placeholders are page elements that inherit from corresponding
+-- placeholders on layouts and masters. If set, the shape is a placeholder
+-- shape and any inherited properties can be resolved by looking at the
+-- parent placeholder identified by the Placeholder.parent_object_id field.
 sPlaceholder :: Lens' Shape (Maybe Placeholder)
 sPlaceholder
   = lens _sPlaceholder (\ s a -> s{_sPlaceholder = a})
@@ -5198,12 +5366,12 @@ instance ToJSON Shape where
 data AffineTransform =
   AffineTransform'
     { _atTranslateX :: !(Maybe (Textual Double))
-    , _atShearY     :: !(Maybe (Textual Double))
+    , _atShearY :: !(Maybe (Textual Double))
     , _atTranslateY :: !(Maybe (Textual Double))
-    , _atShearX     :: !(Maybe (Textual Double))
-    , _atScaleX     :: !(Maybe (Textual Double))
-    , _atUnit       :: !(Maybe AffineTransformUnit)
-    , _atScaleY     :: !(Maybe (Textual Double))
+    , _atShearX :: !(Maybe (Textual Double))
+    , _atScaleX :: !(Maybe (Textual Double))
+    , _atUnit :: !(Maybe AffineTransformUnit)
+    , _atScaleY :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5346,8 +5514,8 @@ instance ToJSON CreateSheetsChartResponse where
 -- /See:/ 'range' smart constructor.
 data Range =
   Range'
-    { _rEndIndex   :: !(Maybe (Textual Int32))
-    , _rType       :: !(Maybe RangeType)
+    { _rEndIndex :: !(Maybe (Textual Int32))
+    , _rType :: !(Maybe RangeType)
     , _rStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5406,8 +5574,8 @@ instance ToJSON Range where
 -- /See:/ 'createImageRequest' smart constructor.
 data CreateImageRequest =
   CreateImageRequest'
-    { _cirObjectId          :: !(Maybe Text)
-    , _cirURL               :: !(Maybe Text)
+    { _cirObjectId :: !(Maybe Text)
+    , _cirURL :: !(Maybe Text)
     , _cirElementProperties :: !(Maybe PageElementProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5484,7 +5652,7 @@ instance ToJSON CreateImageRequest where
 -- /See:/ 'mergeTableCellsRequest' smart constructor.
 data MergeTableCellsRequest =
   MergeTableCellsRequest'
-    { _mtcrObjectId   :: !(Maybe Text)
+    { _mtcrObjectId :: !(Maybe Text)
     , _mtcrTableRange :: !(Maybe TableRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5591,18 +5759,18 @@ instance ToJSON WriteControl where
 -- /See:/ 'textStyle' smart constructor.
 data TextStyle =
   TextStyle'
-    { _tsFontFamily         :: !(Maybe Text)
-    , _tsLink               :: !(Maybe Link)
-    , _tsBackgRoundColor    :: !(Maybe OptionalColor)
-    , _tsBaselineOffSet     :: !(Maybe TextStyleBaselineOffSet)
-    , _tsForegRoundColor    :: !(Maybe OptionalColor)
-    , _tsFontSize           :: !(Maybe Dimension)
-    , _tsSmallCaps          :: !(Maybe Bool)
-    , _tsUnderline          :: !(Maybe Bool)
+    { _tsFontFamily :: !(Maybe Text)
+    , _tsLink :: !(Maybe Link)
+    , _tsBackgRoundColor :: !(Maybe OptionalColor)
+    , _tsBaselineOffSet :: !(Maybe TextStyleBaselineOffSet)
+    , _tsForegRoundColor :: !(Maybe OptionalColor)
+    , _tsFontSize :: !(Maybe Dimension)
+    , _tsSmallCaps :: !(Maybe Bool)
+    , _tsUnderline :: !(Maybe Bool)
     , _tsWeightedFontFamily :: !(Maybe WeightedFontFamily)
-    , _tsItalic             :: !(Maybe Bool)
-    , _tsBold               :: !(Maybe Bool)
-    , _tsStrikethrough      :: !(Maybe Bool)
+    , _tsItalic :: !(Maybe Bool)
+    , _tsBold :: !(Maybe Bool)
+    , _tsStrikethrough :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5854,11 +6022,11 @@ instance ToJSON SolidFill where
 -- /See:/ 'updateTextStyleRequest' smart constructor.
 data UpdateTextStyleRequest =
   UpdateTextStyleRequest'
-    { _utsrStyle        :: !(Maybe TextStyle)
-    , _utsrTextRange    :: !(Maybe Range)
-    , _utsrObjectId     :: !(Maybe Text)
+    { _utsrStyle :: !(Maybe TextStyle)
+    , _utsrTextRange :: !(Maybe Range)
+    , _utsrObjectId :: !(Maybe Text)
     , _utsrCellLocation :: !(Maybe TableCellLocation)
-    , _utsrFields       :: !(Maybe GFieldMask)
+    , _utsrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5954,7 +6122,7 @@ instance ToJSON UpdateTextStyleRequest where
 -- /See:/ 'recolor' smart constructor.
 data Recolor =
   Recolor'
-    { _rName         :: !(Maybe RecolorName)
+    { _rName :: !(Maybe RecolorName)
     , _rRecolorStops :: !(Maybe [ColorStop])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6011,7 +6179,7 @@ instance ToJSON Recolor where
 data PageProperties =
   PageProperties'
     { _ppPageBackgRoundFill :: !(Maybe PageBackgRoundFill)
-    , _ppColorScheme        :: !(Maybe ColorScheme)
+    , _ppColorScheme :: !(Maybe ColorScheme)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6040,7 +6208,12 @@ ppPageBackgRoundFill
 
 -- | The color scheme of the page. If unset, the color scheme is inherited
 -- from a parent page. If the page has no parent, the color scheme uses a
--- default Slides color scheme. This field is read-only.
+-- default Slides color scheme, matching the defaults in the Slides editor.
+-- Only the concrete colors of the first 12 ThemeColorTypes are editable.
+-- In addition, only the color scheme on \`Master\` pages can be updated.
+-- To update the field, a color scheme containing mappings from all the
+-- first 12 ThemeColorTypes to their concrete colors must be provided.
+-- Colors for the remaining ThemeColorTypes will be ignored.
 ppColorScheme :: Lens' PageProperties (Maybe ColorScheme)
 ppColorScheme
   = lens _ppColorScheme
@@ -6067,8 +6240,8 @@ instance ToJSON PageProperties where
 data PageBackgRoundFill =
   PageBackgRoundFill'
     { _pbrfStretchedPictureFill :: !(Maybe StretchedPictureFill)
-    , _pbrfSolidFill            :: !(Maybe SolidFill)
-    , _pbrfPropertyState        :: !(Maybe PageBackgRoundFillPropertyState)
+    , _pbrfSolidFill :: !(Maybe SolidFill)
+    , _pbrfPropertyState :: !(Maybe PageBackgRoundFillPropertyState)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6175,7 +6348,7 @@ instance ToJSON NestingLevel where
 data OpaqueColor =
   OpaqueColor'
     { _ocThemeColor :: !(Maybe OpaqueColorThemeColor)
-    , _ocRgbColor   :: !(Maybe RgbColor)
+    , _ocRgbColor :: !(Maybe RgbColor)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6221,9 +6394,9 @@ instance ToJSON OpaqueColor where
 -- /See:/ 'createSlideRequest' smart constructor.
 data CreateSlideRequest =
   CreateSlideRequest'
-    { _csrsObjectId              :: !(Maybe Text)
-    , _csrsSlideLayoutReference  :: !(Maybe LayoutReference)
-    , _csrsInsertionIndex        :: !(Maybe (Textual Int32))
+    { _csrsObjectId :: !(Maybe Text)
+    , _csrsSlideLayoutReference :: !(Maybe LayoutReference)
+    , _csrsInsertionIndex :: !(Maybe (Textual Int32))
     , _csrsPlaceholderIdMAppings :: !(Maybe [LayoutPlaceholderIdMApping])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6319,7 +6492,7 @@ instance ToJSON CreateSlideRequest where
 data TableCellLocation =
   TableCellLocation'
     { _tclColumnIndex :: !(Maybe (Textual Int32))
-    , _tclRowIndex    :: !(Maybe (Textual Int32))
+    , _tclRowIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6432,10 +6605,10 @@ instance ToJSON UpdateSlidesPositionRequest where
 data ReplaceAllShapesWithImageRequest =
   ReplaceAllShapesWithImageRequest'
     { _raswirImageReplaceMethod :: !(Maybe ReplaceAllShapesWithImageRequestImageReplaceMethod)
-    , _raswirPageObjectIds      :: !(Maybe [Text])
-    , _raswirContainsText       :: !(Maybe SubstringMatchCriteria)
-    , _raswirImageURL           :: !(Maybe Text)
-    , _raswirReplaceMethod      :: !(Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
+    , _raswirPageObjectIds :: !(Maybe [Text])
+    , _raswirContainsText :: !(Maybe SubstringMatchCriteria)
+    , _raswirImageURL :: !(Maybe Text)
+    , _raswirReplaceMethod :: !(Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6505,8 +6678,8 @@ raswirImageURL
   = lens _raswirImageURL
       (\ s a -> s{_raswirImageURL = a})
 
--- | The replace method. __Deprecated__: use \`image_replace_method\`
--- instead. If you specify both a \`replace_method\` and an
+-- | The replace method. *Deprecated*: use \`image_replace_method\` instead.
+-- If you specify both a \`replace_method\` and an
 -- \`image_replace_method\`, the \`image_replace_method\` takes precedence.
 raswirReplaceMethod :: Lens' ReplaceAllShapesWithImageRequest (Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
 raswirReplaceMethod
@@ -6542,19 +6715,19 @@ instance ToJSON ReplaceAllShapesWithImageRequest
 -- /See:/ 'pageElement' smart constructor.
 data PageElement =
   PageElement'
-    { _peTransform    :: !(Maybe AffineTransform)
-    , _peImage        :: !(Maybe Image)
-    , _peSize         :: !(Maybe Size)
-    , _peSheetsChart  :: !(Maybe SheetsChart)
-    , _peObjectId     :: !(Maybe Text)
-    , _peLine         :: !(Maybe Line)
+    { _peTransform :: !(Maybe AffineTransform)
+    , _peImage :: !(Maybe Image)
+    , _peSize :: !(Maybe Size)
+    , _peSheetsChart :: !(Maybe SheetsChart)
+    , _peObjectId :: !(Maybe Text)
+    , _peLine :: !(Maybe Line)
     , _peElementGroup :: !(Maybe Group)
-    , _peVideo        :: !(Maybe Video)
-    , _peWordArt      :: !(Maybe WordArt)
-    , _peShape        :: !(Maybe Shape)
-    , _peTitle        :: !(Maybe Text)
-    , _peTable        :: !(Maybe Table)
-    , _peDescription  :: !(Maybe Text)
+    , _peVideo :: !(Maybe Video)
+    , _peWordArt :: !(Maybe WordArt)
+    , _peShape :: !(Maybe Shape)
+    , _peTitle :: !(Maybe Text)
+    , _peTable :: !(Maybe Table)
+    , _peDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6665,7 +6838,7 @@ peShape :: Lens' PageElement (Maybe Shape)
 peShape = lens _peShape (\ s a -> s{_peShape = a})
 
 -- | The title of the page element. Combined with description to display alt
--- text.
+-- text. The field is not supported for Group elements.
 peTitle :: Lens' PageElement (Maybe Text)
 peTitle = lens _peTitle (\ s a -> s{_peTitle = a})
 
@@ -6674,7 +6847,7 @@ peTable :: Lens' PageElement (Maybe Table)
 peTable = lens _peTable (\ s a -> s{_peTable = a})
 
 -- | The description of the page element. Combined with title to display alt
--- text.
+-- text. The field is not supported for Group elements.
 peDescription :: Lens' PageElement (Maybe Text)
 peDescription
   = lens _peDescription
@@ -6719,8 +6892,8 @@ instance ToJSON PageElement where
 -- /See:/ 'colorStop' smart constructor.
 data ColorStop =
   ColorStop'
-    { _csColor    :: !(Maybe OpaqueColor)
-    , _csAlpha    :: !(Maybe (Textual Double))
+    { _csColor :: !(Maybe OpaqueColor)
+    , _csAlpha :: !(Maybe (Textual Double))
     , _csPosition :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6798,7 +6971,7 @@ deleteObjectRequest = DeleteObjectRequest' {_dObjectId = Nothing}
 -- | The object ID of the page or page element to delete. If after a delete
 -- operation a group contains only 1 or no page elements, the group is also
 -- deleted. If a placeholder is deleted on a layout, any empty inheriting
--- shapes are also deleted.
+-- placeholders are also deleted.
 dObjectId :: Lens' DeleteObjectRequest (Maybe Text)
 dObjectId
   = lens _dObjectId (\ s a -> s{_dObjectId = a})
@@ -6888,10 +7061,10 @@ instance ToJSON ColorScheme where
 -- /See:/ 'tableCell' smart constructor.
 data TableCell =
   TableCell'
-    { _tcColumnSpan          :: !(Maybe (Textual Int32))
-    , _tcLocation            :: !(Maybe TableCellLocation)
-    , _tcText                :: !(Maybe TextContent)
-    , _tcRowSpan             :: !(Maybe (Textual Int32))
+    { _tcColumnSpan :: !(Maybe (Textual Int32))
+    , _tcLocation :: !(Maybe TableCellLocation)
+    , _tcText :: !(Maybe TextContent)
+    , _tcRowSpan :: !(Maybe (Textual Int32))
     , _tcTableCellProperties :: !(Maybe TableCellProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7015,9 +7188,9 @@ instance ToJSON ListNestingLevel where
 -- /See:/ 'outline' smart constructor.
 data Outline =
   Outline'
-    { _oOutlineFill   :: !(Maybe OutlineFill)
-    , _oWeight        :: !(Maybe Dimension)
-    , _oDashStyle     :: !(Maybe OutlineDashStyle)
+    { _oOutlineFill :: !(Maybe OutlineFill)
+    , _oWeight :: !(Maybe Dimension)
+    , _oDashStyle :: !(Maybe OutlineDashStyle)
     , _oPropertyState :: !(Maybe OutlinePropertyState)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7092,9 +7265,9 @@ instance ToJSON Outline where
 -- /See:/ 'updateVideoPropertiesRequest' smart constructor.
 data UpdateVideoPropertiesRequest =
   UpdateVideoPropertiesRequest'
-    { _uvprObjectId        :: !(Maybe Text)
+    { _uvprObjectId :: !(Maybe Text)
     , _uvprVideoProperties :: !(Maybe VideoProperties)
-    , _uvprFields          :: !(Maybe GFieldMask)
+    , _uvprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7161,11 +7334,11 @@ instance ToJSON UpdateVideoPropertiesRequest where
 -- /See:/ 'videoProperties' smart constructor.
 data VideoProperties =
   VideoProperties'
-    { _vpStart    :: !(Maybe (Textual Word32))
+    { _vpStart :: !(Maybe (Textual Word32))
     , _vpAutoPlay :: !(Maybe Bool)
-    , _vpMute     :: !(Maybe Bool)
-    , _vpEnd      :: !(Maybe (Textual Word32))
-    , _vpOutline  :: !(Maybe Outline)
+    , _vpMute :: !(Maybe Bool)
+    , _vpEnd :: !(Maybe (Textual Word32))
+    , _vpOutline :: !(Maybe Outline)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7255,9 +7428,9 @@ instance ToJSON VideoProperties where
 -- /See:/ 'layoutPlaceholderIdMApping' smart constructor.
 data LayoutPlaceholderIdMApping =
   LayoutPlaceholderIdMApping'
-    { _lpimaObjectId                  :: !(Maybe Text)
+    { _lpimaObjectId :: !(Maybe Text)
     , _lpimaLayoutPlaceholderObjectId :: !(Maybe Text)
-    , _lpimaLayoutPlaceholder         :: !(Maybe Placeholder)
+    , _lpimaLayoutPlaceholder :: !(Maybe Placeholder)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7371,10 +7544,10 @@ instance ToJSON CreateImageResponse where
 data TextElement =
   TextElement'
     { _teParagraphMarker :: !(Maybe ParagraphMarker)
-    , _teAutoText        :: !(Maybe AutoText)
-    , _teEndIndex        :: !(Maybe (Textual Int32))
-    , _teTextRun         :: !(Maybe TextRun)
-    , _teStartIndex      :: !(Maybe (Textual Int32))
+    , _teAutoText :: !(Maybe AutoText)
+    , _teEndIndex :: !(Maybe (Textual Int32))
+    , _teTextRun :: !(Maybe TextRun)
+    , _teStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7470,8 +7643,8 @@ instance ToJSON TextElement where
 -- /See:/ 'deleteParagraphBulletsRequest' smart constructor.
 data DeleteParagraphBulletsRequest =
   DeleteParagraphBulletsRequest'
-    { _dpbrTextRange    :: !(Maybe Range)
-    , _dpbrObjectId     :: !(Maybe Text)
+    { _dpbrTextRange :: !(Maybe Range)
+    , _dpbrObjectId :: !(Maybe Text)
     , _dpbrCellLocation :: !(Maybe TableCellLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7536,10 +7709,10 @@ instance ToJSON DeleteParagraphBulletsRequest where
 -- /See:/ 'insertTextRequest' smart constructor.
 data InsertTextRequest =
   InsertTextRequest'
-    { _itrText           :: !(Maybe Text)
-    , _itrObjectId       :: !(Maybe Text)
+    { _itrText :: !(Maybe Text)
+    , _itrObjectId :: !(Maybe Text)
     , _itrInsertionIndex :: !(Maybe (Textual Int32))
-    , _itrCellLocation   :: !(Maybe TableCellLocation)
+    , _itrCellLocation :: !(Maybe TableCellLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7625,11 +7798,11 @@ instance ToJSON InsertTextRequest where
 -- /See:/ 'updateTableBOrderPropertiesRequest' smart constructor.
 data UpdateTableBOrderPropertiesRequest =
   UpdateTableBOrderPropertiesRequest'
-    { _utboprBOrderPosition        :: !(Maybe UpdateTableBOrderPropertiesRequestBOrderPosition)
-    , _utboprObjectId              :: !(Maybe Text)
+    { _utboprBOrderPosition :: !(Maybe UpdateTableBOrderPropertiesRequestBOrderPosition)
+    , _utboprObjectId :: !(Maybe Text)
     , _utboprTableBOrderProperties :: !(Maybe TableBOrderProperties)
-    , _utboprTableRange            :: !(Maybe TableRange)
-    , _utboprFields                :: !(Maybe GFieldMask)
+    , _utboprTableRange :: !(Maybe TableRange)
+    , _utboprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7726,9 +7899,9 @@ instance ToJSON UpdateTableBOrderPropertiesRequest
 -- /See:/ 'createLineRequest' smart constructor.
 data CreateLineRequest =
   CreateLineRequest'
-    { _clrlCategory          :: !(Maybe CreateLineRequestCategory)
-    , _clrlObjectId          :: !(Maybe Text)
-    , _clrlLineCategory      :: !(Maybe CreateLineRequestLineCategory)
+    { _clrlCategory :: !(Maybe CreateLineRequestCategory)
+    , _clrlObjectId :: !(Maybe Text)
+    , _clrlLineCategory :: !(Maybe CreateLineRequestLineCategory)
     , _clrlElementProperties :: !(Maybe PageElementProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7778,7 +7951,7 @@ clrlObjectId :: Lens' CreateLineRequest (Maybe Text)
 clrlObjectId
   = lens _clrlObjectId (\ s a -> s{_clrlObjectId = a})
 
--- | The category of the line to be created. __Deprecated__: use \`category\`
+-- | The category of the line to be created. *Deprecated*: use \`category\`
 -- instead. The exact line type created is determined based on the category
 -- and how it\'s routed to connect to other page elements. If you specify
 -- both a \`category\` and a \`line_category\`, the \`category\` takes
@@ -7819,8 +7992,8 @@ instance ToJSON CreateLineRequest where
 data Placeholder =
   Placeholder'
     { _pParentObjectId :: !(Maybe Text)
-    , _pType           :: !(Maybe PlaceholderType)
-    , _pIndex          :: !(Maybe (Textual Int32))
+    , _pType :: !(Maybe PlaceholderType)
+    , _pIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7881,8 +8054,8 @@ instance ToJSON Placeholder where
 data LayoutProperties =
   LayoutProperties'
     { _lpMasterObjectId :: !(Maybe Text)
-    , _lpName           :: !(Maybe Text)
-    , _lpDisplayName    :: !(Maybe Text)
+    , _lpName :: !(Maybe Text)
+    , _lpDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7940,9 +8113,9 @@ instance ToJSON LayoutProperties where
 -- /See:/ 'updateShapePropertiesRequest' smart constructor.
 data UpdateShapePropertiesRequest =
   UpdateShapePropertiesRequest'
-    { _usprObjectId        :: !(Maybe Text)
-    , _usprShapeProperties :: !(Maybe ShapeProperties)
-    , _usprFields          :: !(Maybe GFieldMask)
+    { _uObjectId :: !(Maybe Text)
+    , _uShapeProperties :: !(Maybe ShapeProperties)
+    , _uFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7951,31 +8124,28 @@ data UpdateShapePropertiesRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usprObjectId'
+-- * 'uObjectId'
 --
--- * 'usprShapeProperties'
+-- * 'uShapeProperties'
 --
--- * 'usprFields'
+-- * 'uFields'
 updateShapePropertiesRequest
     :: UpdateShapePropertiesRequest
 updateShapePropertiesRequest =
   UpdateShapePropertiesRequest'
-    { _usprObjectId = Nothing
-    , _usprShapeProperties = Nothing
-    , _usprFields = Nothing
-    }
+    {_uObjectId = Nothing, _uShapeProperties = Nothing, _uFields = Nothing}
 
 
 -- | The object ID of the shape the updates are applied to.
-usprObjectId :: Lens' UpdateShapePropertiesRequest (Maybe Text)
-usprObjectId
-  = lens _usprObjectId (\ s a -> s{_usprObjectId = a})
+uObjectId :: Lens' UpdateShapePropertiesRequest (Maybe Text)
+uObjectId
+  = lens _uObjectId (\ s a -> s{_uObjectId = a})
 
 -- | The shape properties to update.
-usprShapeProperties :: Lens' UpdateShapePropertiesRequest (Maybe ShapeProperties)
-usprShapeProperties
-  = lens _usprShapeProperties
-      (\ s a -> s{_usprShapeProperties = a})
+uShapeProperties :: Lens' UpdateShapePropertiesRequest (Maybe ShapeProperties)
+uShapeProperties
+  = lens _uShapeProperties
+      (\ s a -> s{_uShapeProperties = a})
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`shapeProperties\` is implied and should not be specified. A
@@ -7984,9 +8154,8 @@ usprShapeProperties
 -- to \`\"shapeBackgroundFill.solidFill.color\"\`. To reset a property to
 -- its default value, include its field name in the field mask but leave
 -- the field itself unset.
-usprFields :: Lens' UpdateShapePropertiesRequest (Maybe GFieldMask)
-usprFields
-  = lens _usprFields (\ s a -> s{_usprFields = a})
+uFields :: Lens' UpdateShapePropertiesRequest (Maybe GFieldMask)
+uFields = lens _uFields (\ s a -> s{_uFields = a})
 
 instance FromJSON UpdateShapePropertiesRequest where
         parseJSON
@@ -8000,21 +8169,21 @@ instance ToJSON UpdateShapePropertiesRequest where
         toJSON UpdateShapePropertiesRequest'{..}
           = object
               (catMaybes
-                 [("objectId" .=) <$> _usprObjectId,
-                  ("shapeProperties" .=) <$> _usprShapeProperties,
-                  ("fields" .=) <$> _usprFields])
+                 [("objectId" .=) <$> _uObjectId,
+                  ("shapeProperties" .=) <$> _uShapeProperties,
+                  ("fields" .=) <$> _uFields])
 
 -- | A PageElement kind representing a table.
 --
 -- /See:/ 'table' smart constructor.
 data Table =
   Table'
-    { _tTableRows            :: !(Maybe [TableRow])
-    , _tVerticalBOrderRows   :: !(Maybe [TableBOrderRow])
-    , _tRows                 :: !(Maybe (Textual Int32))
-    , _tColumns              :: !(Maybe (Textual Int32))
+    { _tTableRows :: !(Maybe [TableRow])
+    , _tVerticalBOrderRows :: !(Maybe [TableBOrderRow])
+    , _tRows :: !(Maybe (Textual Int32))
+    , _tColumns :: !(Maybe (Textual Int32))
     , _tHorizontalBOrderRows :: !(Maybe [TableBOrderRow])
-    , _tTableColumns         :: !(Maybe [TableColumnProperties])
+    , _tTableColumns :: !(Maybe [TableColumnProperties])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8127,7 +8296,7 @@ instance ToJSON Table where
 -- /See:/ 'updateLineCategoryRequest' smart constructor.
 data UpdateLineCategoryRequest =
   UpdateLineCategoryRequest'
-    { _ulcrObjectId     :: !(Maybe Text)
+    { _ulcrObjectId :: !(Maybe Text)
     , _ulcrLineCategory :: !(Maybe UpdateLineCategoryRequestLineCategory)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8180,15 +8349,17 @@ instance ToJSON UpdateLineCategoryRequest where
 -- determined by the placeholder field, then these properties may be
 -- inherited from a parent placeholder shape. Determining the rendered
 -- value of the property depends on the corresponding property_state field
--- value.
+-- value. Any text autofit settings on the shape are automatically
+-- deactivated by requests that can impact how text fits in the shape.
 --
 -- /See:/ 'shapeProperties' smart constructor.
 data ShapeProperties =
   ShapeProperties'
-    { _spLink                :: !(Maybe Link)
-    , _spShadow              :: !(Maybe Shadow)
-    , _spOutline             :: !(Maybe Outline)
-    , _spContentAlignment    :: !(Maybe ShapePropertiesContentAlignment)
+    { _spAutofit :: !(Maybe Autofit)
+    , _spLink :: !(Maybe Link)
+    , _spShadow :: !(Maybe Shadow)
+    , _spOutline :: !(Maybe Outline)
+    , _spContentAlignment :: !(Maybe ShapePropertiesContentAlignment)
     , _spShapeBackgRoundFill :: !(Maybe ShapeBackgRoundFill)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8197,6 +8368,8 @@ data ShapeProperties =
 -- | Creates a value of 'ShapeProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spAutofit'
 --
 -- * 'spLink'
 --
@@ -8211,13 +8384,20 @@ shapeProperties
     :: ShapeProperties
 shapeProperties =
   ShapeProperties'
-    { _spLink = Nothing
+    { _spAutofit = Nothing
+    , _spLink = Nothing
     , _spShadow = Nothing
     , _spOutline = Nothing
     , _spContentAlignment = Nothing
     , _spShapeBackgRoundFill = Nothing
     }
 
+
+-- | The autofit properties of the shape. This property is only set for
+-- shapes that allow text.
+spAutofit :: Lens' ShapeProperties (Maybe Autofit)
+spAutofit
+  = lens _spAutofit (\ s a -> s{_spAutofit = a})
 
 -- | The hyperlink destination of the shape. If unset, there is no link.
 -- Links are not inherited from parent placeholders.
@@ -8262,8 +8442,9 @@ instance FromJSON ShapeProperties where
           = withObject "ShapeProperties"
               (\ o ->
                  ShapeProperties' <$>
-                   (o .:? "link") <*> (o .:? "shadow") <*>
-                     (o .:? "outline")
+                   (o .:? "autofit") <*> (o .:? "link") <*>
+                     (o .:? "shadow")
+                     <*> (o .:? "outline")
                      <*> (o .:? "contentAlignment")
                      <*> (o .:? "shapeBackgroundFill"))
 
@@ -8271,8 +8452,8 @@ instance ToJSON ShapeProperties where
         toJSON ShapeProperties'{..}
           = object
               (catMaybes
-                 [("link" .=) <$> _spLink,
-                  ("shadow" .=) <$> _spShadow,
+                 [("autofit" .=) <$> _spAutofit,
+                  ("link" .=) <$> _spLink, ("shadow" .=) <$> _spShadow,
                   ("outline" .=) <$> _spOutline,
                   ("contentAlignment" .=) <$> _spContentAlignment,
                   ("shapeBackgroundFill" .=) <$>
@@ -8283,7 +8464,7 @@ instance ToJSON ShapeProperties where
 -- /See:/ 'shapeBackgRoundFill' smart constructor.
 data ShapeBackgRoundFill =
   ShapeBackgRoundFill'
-    { _sbrfSolidFill     :: !(Maybe SolidFill)
+    { _sbrfSolidFill :: !(Maybe SolidFill)
     , _sbrfPropertyState :: !(Maybe ShapeBackgRoundFillPropertyState)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8344,8 +8525,8 @@ instance ToJSON ShapeBackgRoundFill where
 -- /See:/ 'createParagraphBulletsRequest' smart constructor.
 data CreateParagraphBulletsRequest =
   CreateParagraphBulletsRequest'
-    { _cpbrTextRange    :: !(Maybe Range)
-    , _cpbrObjectId     :: !(Maybe Text)
+    { _cpbrTextRange :: !(Maybe Range)
+    , _cpbrObjectId :: !(Maybe Text)
     , _cpbrBulletPreset :: !(Maybe CreateParagraphBulletsRequestBulletPreset)
     , _cpbrCellLocation :: !(Maybe TableCellLocation)
     }
@@ -8424,8 +8605,8 @@ instance ToJSON CreateParagraphBulletsRequest where
 -- /See:/ 'updatePageElementAltTextRequest' smart constructor.
 data UpdatePageElementAltTextRequest =
   UpdatePageElementAltTextRequest'
-    { _upeatrObjectId    :: !(Maybe Text)
-    , _upeatrTitle       :: !(Maybe Text)
+    { _upeatrObjectId :: !(Maybe Text)
+    , _upeatrTitle :: !(Maybe Text)
     , _upeatrDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8495,10 +8676,10 @@ instance ToJSON UpdatePageElementAltTextRequest where
 -- /See:/ 'updateTableCellPropertiesRequest' smart constructor.
 data UpdateTableCellPropertiesRequest =
   UpdateTableCellPropertiesRequest'
-    { _uObjectId            :: !(Maybe Text)
-    , _uTableCellProperties :: !(Maybe TableCellProperties)
-    , _uTableRange          :: !(Maybe TableRange)
-    , _uFields              :: !(Maybe GFieldMask)
+    { _updObjectId :: !(Maybe Text)
+    , _updTableCellProperties :: !(Maybe TableCellProperties)
+    , _updTableRange :: !(Maybe TableRange)
+    , _updFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8507,41 +8688,42 @@ data UpdateTableCellPropertiesRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uObjectId'
+-- * 'updObjectId'
 --
--- * 'uTableCellProperties'
+-- * 'updTableCellProperties'
 --
--- * 'uTableRange'
+-- * 'updTableRange'
 --
--- * 'uFields'
+-- * 'updFields'
 updateTableCellPropertiesRequest
     :: UpdateTableCellPropertiesRequest
 updateTableCellPropertiesRequest =
   UpdateTableCellPropertiesRequest'
-    { _uObjectId = Nothing
-    , _uTableCellProperties = Nothing
-    , _uTableRange = Nothing
-    , _uFields = Nothing
+    { _updObjectId = Nothing
+    , _updTableCellProperties = Nothing
+    , _updTableRange = Nothing
+    , _updFields = Nothing
     }
 
 
 -- | The object ID of the table.
-uObjectId :: Lens' UpdateTableCellPropertiesRequest (Maybe Text)
-uObjectId
-  = lens _uObjectId (\ s a -> s{_uObjectId = a})
+updObjectId :: Lens' UpdateTableCellPropertiesRequest (Maybe Text)
+updObjectId
+  = lens _updObjectId (\ s a -> s{_updObjectId = a})
 
 -- | The table cell properties to update.
-uTableCellProperties :: Lens' UpdateTableCellPropertiesRequest (Maybe TableCellProperties)
-uTableCellProperties
-  = lens _uTableCellProperties
-      (\ s a -> s{_uTableCellProperties = a})
+updTableCellProperties :: Lens' UpdateTableCellPropertiesRequest (Maybe TableCellProperties)
+updTableCellProperties
+  = lens _updTableCellProperties
+      (\ s a -> s{_updTableCellProperties = a})
 
 -- | The table range representing the subset of the table to which the
 -- updates are applied. If a table range is not specified, the updates will
 -- apply to the entire table.
-uTableRange :: Lens' UpdateTableCellPropertiesRequest (Maybe TableRange)
-uTableRange
-  = lens _uTableRange (\ s a -> s{_uTableRange = a})
+updTableRange :: Lens' UpdateTableCellPropertiesRequest (Maybe TableRange)
+updTableRange
+  = lens _updTableRange
+      (\ s a -> s{_updTableRange = a})
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`tableCellProperties\` is implied and should not be specified.
@@ -8550,8 +8732,9 @@ uTableRange
 -- \`fields\` to \`\"tableCellBackgroundFill.solidFill.color\"\`. To reset
 -- a property to its default value, include its field name in the field
 -- mask but leave the field itself unset.
-uFields :: Lens' UpdateTableCellPropertiesRequest (Maybe GFieldMask)
-uFields = lens _uFields (\ s a -> s{_uFields = a})
+updFields :: Lens' UpdateTableCellPropertiesRequest (Maybe GFieldMask)
+updFields
+  = lens _updFields (\ s a -> s{_updFields = a})
 
 instance FromJSON UpdateTableCellPropertiesRequest
          where
@@ -8568,10 +8751,11 @@ instance ToJSON UpdateTableCellPropertiesRequest
         toJSON UpdateTableCellPropertiesRequest'{..}
           = object
               (catMaybes
-                 [("objectId" .=) <$> _uObjectId,
-                  ("tableCellProperties" .=) <$> _uTableCellProperties,
-                  ("tableRange" .=) <$> _uTableRange,
-                  ("fields" .=) <$> _uFields])
+                 [("objectId" .=) <$> _updObjectId,
+                  ("tableCellProperties" .=) <$>
+                    _updTableCellProperties,
+                  ("tableRange" .=) <$> _updTableRange,
+                  ("fields" .=) <$> _updFields])
 
 -- | The properties of the SheetsChart.
 --
@@ -8627,15 +8811,15 @@ instance ToJSON SheetsChartProperties where
 -- /See:/ 'paragraphStyle' smart constructor.
 data ParagraphStyle =
   ParagraphStyle'
-    { _psLineSpacing     :: !(Maybe (Textual Double))
-    , _psDirection       :: !(Maybe ParagraphStyleDirection)
+    { _psLineSpacing :: !(Maybe (Textual Double))
+    , _psDirection :: !(Maybe ParagraphStyleDirection)
     , _psIndentFirstLine :: !(Maybe Dimension)
-    , _psIndentEnd       :: !(Maybe Dimension)
-    , _psIndentStart     :: !(Maybe Dimension)
-    , _psAlignment       :: !(Maybe ParagraphStyleAlignment)
-    , _psSpaceBelow      :: !(Maybe Dimension)
-    , _psSpacingMode     :: !(Maybe ParagraphStyleSpacingMode)
-    , _psSpaceAbove      :: !(Maybe Dimension)
+    , _psIndentEnd :: !(Maybe Dimension)
+    , _psIndentStart :: !(Maybe Dimension)
+    , _psAlignment :: !(Maybe ParagraphStyleAlignment)
+    , _psSpaceBelow :: !(Maybe Dimension)
+    , _psSpacingMode :: !(Maybe ParagraphStyleSpacingMode)
+    , _psSpaceAbove :: !(Maybe Dimension)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8917,11 +9101,11 @@ instance ToJSON DuplicateObjectResponse where
 -- /See:/ 'updateParagraphStyleRequest' smart constructor.
 data UpdateParagraphStyleRequest =
   UpdateParagraphStyleRequest'
-    { _upsrStyle        :: !(Maybe ParagraphStyle)
-    , _upsrTextRange    :: !(Maybe Range)
-    , _upsrObjectId     :: !(Maybe Text)
+    { _upsrStyle :: !(Maybe ParagraphStyle)
+    , _upsrTextRange :: !(Maybe Range)
+    , _upsrObjectId :: !(Maybe Text)
     , _upsrCellLocation :: !(Maybe TableCellLocation)
-    , _upsrFields       :: !(Maybe GFieldMask)
+    , _upsrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9011,8 +9195,8 @@ instance ToJSON UpdateParagraphStyleRequest where
 data ReplaceAllTextRequest =
   ReplaceAllTextRequest'
     { _ratrPageObjectIds :: !(Maybe [Text])
-    , _ratrContainsText  :: !(Maybe SubstringMatchCriteria)
-    , _ratrReplaceText   :: !(Maybe Text)
+    , _ratrContainsText :: !(Maybe SubstringMatchCriteria)
+    , _ratrReplaceText :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9087,8 +9271,8 @@ instance ToJSON ReplaceAllTextRequest where
 data TableRange =
   TableRange'
     { _trColumnSpan :: !(Maybe (Textual Int32))
-    , _trLocation   :: !(Maybe TableCellLocation)
-    , _trRowSpan    :: !(Maybe (Textual Int32))
+    , _trLocation :: !(Maybe TableCellLocation)
+    , _trRowSpan :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9147,49 +9331,50 @@ instance ToJSON TableRange where
 -- /See:/ 'request'' smart constructor.
 data Request' =
   Request''
-    { _reqReplaceAllShapesWithImage       :: !(Maybe ReplaceAllShapesWithImageRequest)
-    , _reqDeleteObject                    :: !(Maybe DeleteObjectRequest)
-    , _reqUpdateSlidesPosition            :: !(Maybe UpdateSlidesPositionRequest)
-    , _reqUpdateShapeProperties           :: !(Maybe UpdateShapePropertiesRequest)
-    , _reqCreateParagraphBullets          :: !(Maybe CreateParagraphBulletsRequest)
-    , _reqUpdateLineCategory              :: !(Maybe UpdateLineCategoryRequest)
-    , _reqCreateLine                      :: !(Maybe CreateLineRequest)
-    , _reqInsertText                      :: !(Maybe InsertTextRequest)
-    , _reqUpdateTableBOrderProperties     :: !(Maybe UpdateTableBOrderPropertiesRequest)
-    , _reqDeleteParagraphBullets          :: !(Maybe DeleteParagraphBulletsRequest)
-    , _reqDeleteTableRow                  :: !(Maybe DeleteTableRowRequest)
-    , _reqUpdateTableCellProperties       :: !(Maybe UpdateTableCellPropertiesRequest)
-    , _reqReplaceAllText                  :: !(Maybe ReplaceAllTextRequest)
-    , _reqUpdatePageElementAltText        :: !(Maybe UpdatePageElementAltTextRequest)
-    , _reqUpdateParagraphStyle            :: !(Maybe UpdateParagraphStyleRequest)
-    , _reqRerouteLine                     :: !(Maybe RerouteLineRequest)
-    , _reqReplaceImage                    :: !(Maybe ReplaceImageRequest)
+    { _reqReplaceAllShapesWithImage :: !(Maybe ReplaceAllShapesWithImageRequest)
+    , _reqDeleteObject :: !(Maybe DeleteObjectRequest)
+    , _reqUpdateSlidesPosition :: !(Maybe UpdateSlidesPositionRequest)
+    , _reqUpdateShapeProperties :: !(Maybe UpdateShapePropertiesRequest)
+    , _reqCreateParagraphBullets :: !(Maybe CreateParagraphBulletsRequest)
+    , _reqUpdateLineCategory :: !(Maybe UpdateLineCategoryRequest)
+    , _reqCreateLine :: !(Maybe CreateLineRequest)
+    , _reqInsertText :: !(Maybe InsertTextRequest)
+    , _reqUpdateTableBOrderProperties :: !(Maybe UpdateTableBOrderPropertiesRequest)
+    , _reqDeleteParagraphBullets :: !(Maybe DeleteParagraphBulletsRequest)
+    , _reqDeleteTableRow :: !(Maybe DeleteTableRowRequest)
+    , _reqUpdateTableCellProperties :: !(Maybe UpdateTableCellPropertiesRequest)
+    , _reqReplaceAllText :: !(Maybe ReplaceAllTextRequest)
+    , _reqUpdatePageElementAltText :: !(Maybe UpdatePageElementAltTextRequest)
+    , _reqUpdateParagraphStyle :: !(Maybe UpdateParagraphStyleRequest)
+    , _reqRerouteLine :: !(Maybe RerouteLineRequest)
+    , _reqReplaceImage :: !(Maybe ReplaceImageRequest)
     , _reqReplaceAllShapesWithSheetsChart :: !(Maybe ReplaceAllShapesWithSheetsChartRequest)
-    , _reqCreateShape                     :: !(Maybe CreateShapeRequest)
-    , _reqUpdatePageElementsZOrder        :: !(Maybe UpdatePageElementsZOrderRequest)
-    , _reqUpdatePageProperties            :: !(Maybe UpdatePagePropertiesRequest)
-    , _reqUpdateLineProperties            :: !(Maybe UpdateLinePropertiesRequest)
-    , _reqDeleteTableColumn               :: !(Maybe DeleteTableColumnRequest)
-    , _reqGroupObjects                    :: !(Maybe GroupObjectsRequest)
-    , _reqDeleteText                      :: !(Maybe DeleteTextRequest)
-    , _reqUpdateTableRowProperties        :: !(Maybe UpdateTableRowPropertiesRequest)
-    , _reqCreateSheetsChart               :: !(Maybe CreateSheetsChartRequest)
-    , _reqInsertTableColumns              :: !(Maybe InsertTableColumnsRequest)
-    , _reqUpdateImageProperties           :: !(Maybe UpdateImagePropertiesRequest)
-    , _reqUnGroupObjects                  :: !(Maybe UnGroupObjectsRequest)
-    , _reqDuplicateObject                 :: !(Maybe DuplicateObjectRequest)
-    , _reqCreateTable                     :: !(Maybe CreateTableRequest)
-    , _reqCreateVideo                     :: !(Maybe CreateVideoRequest)
-    , _reqRefreshSheetsChart              :: !(Maybe RefreshSheetsChartRequest)
-    , _reqUpdateTableColumnProperties     :: !(Maybe UpdateTableColumnPropertiesRequest)
-    , _reqUnmergeTableCells               :: !(Maybe UnmergeTableCellsRequest)
-    , _reqUpdatePageElementTransform      :: !(Maybe UpdatePageElementTransformRequest)
-    , _reqInsertTableRows                 :: !(Maybe InsertTableRowsRequest)
-    , _reqCreateImage                     :: !(Maybe CreateImageRequest)
-    , _reqMergeTableCells                 :: !(Maybe MergeTableCellsRequest)
-    , _reqCreateSlide                     :: !(Maybe CreateSlideRequest)
-    , _reqUpdateTextStyle                 :: !(Maybe UpdateTextStyleRequest)
-    , _reqUpdateVideoProperties           :: !(Maybe UpdateVideoPropertiesRequest)
+    , _reqCreateShape :: !(Maybe CreateShapeRequest)
+    , _reqUpdatePageElementsZOrder :: !(Maybe UpdatePageElementsZOrderRequest)
+    , _reqUpdatePageProperties :: !(Maybe UpdatePagePropertiesRequest)
+    , _reqUpdateLineProperties :: !(Maybe UpdateLinePropertiesRequest)
+    , _reqDeleteTableColumn :: !(Maybe DeleteTableColumnRequest)
+    , _reqGroupObjects :: !(Maybe GroupObjectsRequest)
+    , _reqDeleteText :: !(Maybe DeleteTextRequest)
+    , _reqUpdateTableRowProperties :: !(Maybe UpdateTableRowPropertiesRequest)
+    , _reqCreateSheetsChart :: !(Maybe CreateSheetsChartRequest)
+    , _reqInsertTableColumns :: !(Maybe InsertTableColumnsRequest)
+    , _reqUpdateSlideProperties :: !(Maybe UpdateSlidePropertiesRequest)
+    , _reqUpdateImageProperties :: !(Maybe UpdateImagePropertiesRequest)
+    , _reqUnGroupObjects :: !(Maybe UnGroupObjectsRequest)
+    , _reqDuplicateObject :: !(Maybe DuplicateObjectRequest)
+    , _reqCreateTable :: !(Maybe CreateTableRequest)
+    , _reqCreateVideo :: !(Maybe CreateVideoRequest)
+    , _reqRefreshSheetsChart :: !(Maybe RefreshSheetsChartRequest)
+    , _reqUpdateTableColumnProperties :: !(Maybe UpdateTableColumnPropertiesRequest)
+    , _reqUnmergeTableCells :: !(Maybe UnmergeTableCellsRequest)
+    , _reqUpdatePageElementTransform :: !(Maybe UpdatePageElementTransformRequest)
+    , _reqInsertTableRows :: !(Maybe InsertTableRowsRequest)
+    , _reqCreateImage :: !(Maybe CreateImageRequest)
+    , _reqMergeTableCells :: !(Maybe MergeTableCellsRequest)
+    , _reqCreateSlide :: !(Maybe CreateSlideRequest)
+    , _reqUpdateTextStyle :: !(Maybe UpdateTextStyleRequest)
+    , _reqUpdateVideoProperties :: !(Maybe UpdateVideoPropertiesRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9254,6 +9439,8 @@ data Request' =
 --
 -- * 'reqInsertTableColumns'
 --
+-- * 'reqUpdateSlideProperties'
+--
 -- * 'reqUpdateImageProperties'
 --
 -- * 'reqUnGroupObjects'
@@ -9315,6 +9502,7 @@ request' =
     , _reqUpdateTableRowProperties = Nothing
     , _reqCreateSheetsChart = Nothing
     , _reqInsertTableColumns = Nothing
+    , _reqUpdateSlideProperties = Nothing
     , _reqUpdateImageProperties = Nothing
     , _reqUnGroupObjects = Nothing
     , _reqDuplicateObject = Nothing
@@ -9502,6 +9690,12 @@ reqInsertTableColumns
   = lens _reqInsertTableColumns
       (\ s a -> s{_reqInsertTableColumns = a})
 
+-- | Updates the properties of a Slide
+reqUpdateSlideProperties :: Lens' Request' (Maybe UpdateSlidePropertiesRequest)
+reqUpdateSlideProperties
+  = lens _reqUpdateSlideProperties
+      (\ s a -> s{_reqUpdateSlideProperties = a})
+
 -- | Updates the properties of an Image.
 reqUpdateImageProperties :: Lens' Request' (Maybe UpdateImagePropertiesRequest)
 reqUpdateImageProperties
@@ -9625,6 +9819,7 @@ instance FromJSON Request' where
                      <*> (o .:? "updateTableRowProperties")
                      <*> (o .:? "createSheetsChart")
                      <*> (o .:? "insertTableColumns")
+                     <*> (o .:? "updateSlideProperties")
                      <*> (o .:? "updateImageProperties")
                      <*> (o .:? "ungroupObjects")
                      <*> (o .:? "duplicateObject")
@@ -9687,6 +9882,8 @@ instance ToJSON Request' where
                     _reqUpdateTableRowProperties,
                   ("createSheetsChart" .=) <$> _reqCreateSheetsChart,
                   ("insertTableColumns" .=) <$> _reqInsertTableColumns,
+                  ("updateSlideProperties" .=) <$>
+                    _reqUpdateSlideProperties,
                   ("updateImageProperties" .=) <$>
                     _reqUpdateImageProperties,
                   ("ungroupObjects" .=) <$> _reqUnGroupObjects,
@@ -9713,7 +9910,7 @@ instance ToJSON Request' where
 data SubstringMatchCriteria =
   SubstringMatchCriteria'
     { _smcMatchCase :: !(Maybe Bool)
-    , _smcText      :: !(Maybe Text)
+    , _smcText :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

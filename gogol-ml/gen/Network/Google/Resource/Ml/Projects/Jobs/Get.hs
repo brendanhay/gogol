@@ -22,7 +22,7 @@
 --
 -- Describes a job.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.get@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.jobs.get@.
 module Network.Google.Resource.Ml.Projects.Jobs.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Ml.Projects.Jobs.Get
     , pjgCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.jobs.get@ method which the
 -- 'ProjectsJobsGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsJobsGetResource =
 -- /See:/ 'projectsJobsGet' smart constructor.
 data ProjectsJobsGet =
   ProjectsJobsGet'
-    { _pjgXgafv          :: !(Maybe Xgafv)
+    { _pjgXgafv :: !(Maybe Xgafv)
     , _pjgUploadProtocol :: !(Maybe Text)
-    , _pjgAccessToken    :: !(Maybe Text)
-    , _pjgUploadType     :: !(Maybe Text)
-    , _pjgName           :: !Text
-    , _pjgCallback       :: !(Maybe Text)
+    , _pjgAccessToken :: !(Maybe Text)
+    , _pjgUploadType :: !(Maybe Text)
+    , _pjgName :: !Text
+    , _pjgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,7 +135,8 @@ pjgCallback
 instance GoogleRequest ProjectsJobsGet where
         type Rs ProjectsJobsGet = GoogleCloudMlV1__Job
         type Scopes ProjectsJobsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsJobsGet'{..}
           = go _pjgName _pjgXgafv _pjgUploadProtocol
               _pjgAccessToken

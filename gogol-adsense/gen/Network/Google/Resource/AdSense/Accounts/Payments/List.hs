@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the payments for the specified AdSense account.
+-- Lists all the payments available for an account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.payments.list@.
+-- /See:/ <http://code.google.com/apis/adsense/management/ AdSense Management API Reference> for @adsense.accounts.payments.list@.
 module Network.Google.Resource.AdSense.Accounts.Payments.List
     (
     -- * REST Resource
@@ -33,28 +33,42 @@ module Network.Google.Resource.AdSense.Accounts.Payments.List
     , AccountsPaymentsList
 
     -- * Request Lenses
-    , aplAccountId
+    , aplParent
+    , aplXgafv
+    , aplUploadProtocol
+    , aplAccessToken
+    , aplUploadType
+    , aplCallback
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.payments.list@ method which the
 -- 'AccountsPaymentsList' request conforms to.
 type AccountsPaymentsListResource =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "payments" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Payments
+     "v2" :>
+       Capture "parent" Text :>
+         "payments" :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ListPaymentsResponse
 
--- | List the payments for the specified AdSense account.
+-- | Lists all the payments available for an account.
 --
 -- /See:/ 'accountsPaymentsList' smart constructor.
-newtype AccountsPaymentsList =
+data AccountsPaymentsList =
   AccountsPaymentsList'
-    { _aplAccountId :: Text
+    { _aplParent :: !Text
+    , _aplXgafv :: !(Maybe Xgafv)
+    , _aplUploadProtocol :: !(Maybe Text)
+    , _aplAccessToken :: !(Maybe Text)
+    , _aplUploadType :: !(Maybe Text)
+    , _aplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,26 +77,76 @@ newtype AccountsPaymentsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aplAccountId'
+-- * 'aplParent'
+--
+-- * 'aplXgafv'
+--
+-- * 'aplUploadProtocol'
+--
+-- * 'aplAccessToken'
+--
+-- * 'aplUploadType'
+--
+-- * 'aplCallback'
 accountsPaymentsList
-    :: Text -- ^ 'aplAccountId'
+    :: Text -- ^ 'aplParent'
     -> AccountsPaymentsList
-accountsPaymentsList pAplAccountId_ =
-  AccountsPaymentsList' {_aplAccountId = pAplAccountId_}
+accountsPaymentsList pAplParent_ =
+  AccountsPaymentsList'
+    { _aplParent = pAplParent_
+    , _aplXgafv = Nothing
+    , _aplUploadProtocol = Nothing
+    , _aplAccessToken = Nothing
+    , _aplUploadType = Nothing
+    , _aplCallback = Nothing
+    }
 
 
--- | Account for which to retrieve the payments.
-aplAccountId :: Lens' AccountsPaymentsList Text
-aplAccountId
-  = lens _aplAccountId (\ s a -> s{_aplAccountId = a})
+-- | Required. The account which owns the collection of payments. Format:
+-- accounts\/{account}
+aplParent :: Lens' AccountsPaymentsList Text
+aplParent
+  = lens _aplParent (\ s a -> s{_aplParent = a})
+
+-- | V1 error format.
+aplXgafv :: Lens' AccountsPaymentsList (Maybe Xgafv)
+aplXgafv = lens _aplXgafv (\ s a -> s{_aplXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aplUploadProtocol :: Lens' AccountsPaymentsList (Maybe Text)
+aplUploadProtocol
+  = lens _aplUploadProtocol
+      (\ s a -> s{_aplUploadProtocol = a})
+
+-- | OAuth access token.
+aplAccessToken :: Lens' AccountsPaymentsList (Maybe Text)
+aplAccessToken
+  = lens _aplAccessToken
+      (\ s a -> s{_aplAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aplUploadType :: Lens' AccountsPaymentsList (Maybe Text)
+aplUploadType
+  = lens _aplUploadType
+      (\ s a -> s{_aplUploadType = a})
+
+-- | JSONP
+aplCallback :: Lens' AccountsPaymentsList (Maybe Text)
+aplCallback
+  = lens _aplCallback (\ s a -> s{_aplCallback = a})
 
 instance GoogleRequest AccountsPaymentsList where
-        type Rs AccountsPaymentsList = Payments
+        type Rs AccountsPaymentsList = ListPaymentsResponse
         type Scopes AccountsPaymentsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsPaymentsList'{..}
-          = go _aplAccountId (Just AltJSON) adSenseService
+          = go _aplParent _aplXgafv _aplUploadProtocol
+              _aplAccessToken
+              _aplUploadType
+              _aplCallback
+              (Just AltJSON)
+              adSenseService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsPaymentsListResource)

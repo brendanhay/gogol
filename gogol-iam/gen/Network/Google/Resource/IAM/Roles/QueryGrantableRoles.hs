@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Queries roles that can be granted on a particular resource. A role is
--- grantable if it can be used as the role in a binding for a policy for
--- that resource.
+-- Lists roles that can be granted on a Google Cloud resource. A role is
+-- grantable if the IAM policy for the resource can contain bindings to the
+-- role.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.roles.queryGrantableRoles@.
 module Network.Google.Resource.IAM.Roles.QueryGrantableRoles
@@ -43,8 +43,8 @@ module Network.Google.Resource.IAM.Roles.QueryGrantableRoles
     , rqgrCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.roles.queryGrantableRoles@ method which the
 -- 'RolesQueryGrantableRoles' request conforms to.
@@ -60,19 +60,19 @@ type RolesQueryGrantableRolesResource =
                      ReqBody '[JSON] QueryGrantableRolesRequest :>
                        Post '[JSON] QueryGrantableRolesResponse
 
--- | Queries roles that can be granted on a particular resource. A role is
--- grantable if it can be used as the role in a binding for a policy for
--- that resource.
+-- | Lists roles that can be granted on a Google Cloud resource. A role is
+-- grantable if the IAM policy for the resource can contain bindings to the
+-- role.
 --
 -- /See:/ 'rolesQueryGrantableRoles' smart constructor.
 data RolesQueryGrantableRoles =
   RolesQueryGrantableRoles'
-    { _rqgrXgafv          :: !(Maybe Xgafv)
+    { _rqgrXgafv :: !(Maybe Xgafv)
     , _rqgrUploadProtocol :: !(Maybe Text)
-    , _rqgrAccessToken    :: !(Maybe Text)
-    , _rqgrUploadType     :: !(Maybe Text)
-    , _rqgrPayload        :: !QueryGrantableRolesRequest
-    , _rqgrCallback       :: !(Maybe Text)
+    , _rqgrAccessToken :: !(Maybe Text)
+    , _rqgrUploadType :: !(Maybe Text)
+    , _rqgrPayload :: !QueryGrantableRolesRequest
+    , _rqgrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

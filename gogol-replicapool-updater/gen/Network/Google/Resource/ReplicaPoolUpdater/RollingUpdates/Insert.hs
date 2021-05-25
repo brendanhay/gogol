@@ -38,8 +38,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
     , ruiPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.insert@ method which the
 -- 'RollingUpdatesInsert' request conforms to.
@@ -61,7 +61,7 @@ type RollingUpdatesInsertResource =
 data RollingUpdatesInsert =
   RollingUpdatesInsert'
     { _ruiProject :: !Text
-    , _ruiZone    :: !Text
+    , _ruiZone :: !Text
     , _ruiPayload :: !RollingUpdate
     }
   deriving (Eq, Show, Data, Typeable, Generic)

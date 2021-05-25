@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Networks.Delete
     , ndNetwork
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.delete@ method which the
 -- 'NetworksDelete' request conforms to.
@@ -60,8 +60,8 @@ type NetworksDeleteResource =
 data NetworksDelete =
   NetworksDelete'
     { _ndRequestId :: !(Maybe Text)
-    , _ndProject   :: !Text
-    , _ndNetwork   :: !Text
+    , _ndProject :: !Text
+    , _ndNetwork :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -37,14 +37,19 @@ module Network.Google.Resource.AndroidEnterprise.Devices.SetState
     , DevicesSetState
 
     -- * Request Lenses
+    , dssXgafv
+    , dssUploadProtocol
     , dssEnterpriseId
+    , dssAccessToken
+    , dssUploadType
     , dssPayload
     , dssUserId
     , dssDeviceId
+    , dssCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.devices.setState@ method which the
 -- 'DevicesSetState' request conforms to.
@@ -58,9 +63,14 @@ type DevicesSetStateResource =
                  "devices" :>
                    Capture "deviceId" Text :>
                      "state" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DeviceState :>
-                           Put '[JSON] DeviceState
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] DeviceState :>
+                                     Put '[JSON] DeviceState
 
 -- | Sets whether a device\'s access to Google services is enabled or
 -- disabled. The device state takes effect only if enforcing EMM policies
@@ -71,10 +81,15 @@ type DevicesSetStateResource =
 -- /See:/ 'devicesSetState' smart constructor.
 data DevicesSetState =
   DevicesSetState'
-    { _dssEnterpriseId :: !Text
-    , _dssPayload      :: !DeviceState
-    , _dssUserId       :: !Text
-    , _dssDeviceId     :: !Text
+    { _dssXgafv :: !(Maybe Xgafv)
+    , _dssUploadProtocol :: !(Maybe Text)
+    , _dssEnterpriseId :: !Text
+    , _dssAccessToken :: !(Maybe Text)
+    , _dssUploadType :: !(Maybe Text)
+    , _dssPayload :: !DeviceState
+    , _dssUserId :: !Text
+    , _dssDeviceId :: !Text
+    , _dssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,13 +98,23 @@ data DevicesSetState =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dssXgafv'
+--
+-- * 'dssUploadProtocol'
+--
 -- * 'dssEnterpriseId'
+--
+-- * 'dssAccessToken'
+--
+-- * 'dssUploadType'
 --
 -- * 'dssPayload'
 --
 -- * 'dssUserId'
 --
 -- * 'dssDeviceId'
+--
+-- * 'dssCallback'
 devicesSetState
     :: Text -- ^ 'dssEnterpriseId'
     -> DeviceState -- ^ 'dssPayload'
@@ -98,18 +123,45 @@ devicesSetState
     -> DevicesSetState
 devicesSetState pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
   DevicesSetState'
-    { _dssEnterpriseId = pDssEnterpriseId_
+    { _dssXgafv = Nothing
+    , _dssUploadProtocol = Nothing
+    , _dssEnterpriseId = pDssEnterpriseId_
+    , _dssAccessToken = Nothing
+    , _dssUploadType = Nothing
     , _dssPayload = pDssPayload_
     , _dssUserId = pDssUserId_
     , _dssDeviceId = pDssDeviceId_
+    , _dssCallback = Nothing
     }
 
+
+-- | V1 error format.
+dssXgafv :: Lens' DevicesSetState (Maybe Xgafv)
+dssXgafv = lens _dssXgafv (\ s a -> s{_dssXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dssUploadProtocol :: Lens' DevicesSetState (Maybe Text)
+dssUploadProtocol
+  = lens _dssUploadProtocol
+      (\ s a -> s{_dssUploadProtocol = a})
 
 -- | The ID of the enterprise.
 dssEnterpriseId :: Lens' DevicesSetState Text
 dssEnterpriseId
   = lens _dssEnterpriseId
       (\ s a -> s{_dssEnterpriseId = a})
+
+-- | OAuth access token.
+dssAccessToken :: Lens' DevicesSetState (Maybe Text)
+dssAccessToken
+  = lens _dssAccessToken
+      (\ s a -> s{_dssAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dssUploadType :: Lens' DevicesSetState (Maybe Text)
+dssUploadType
+  = lens _dssUploadType
+      (\ s a -> s{_dssUploadType = a})
 
 -- | Multipart request metadata.
 dssPayload :: Lens' DevicesSetState DeviceState
@@ -126,12 +178,22 @@ dssDeviceId :: Lens' DevicesSetState Text
 dssDeviceId
   = lens _dssDeviceId (\ s a -> s{_dssDeviceId = a})
 
+-- | JSONP
+dssCallback :: Lens' DevicesSetState (Maybe Text)
+dssCallback
+  = lens _dssCallback (\ s a -> s{_dssCallback = a})
+
 instance GoogleRequest DevicesSetState where
         type Rs DevicesSetState = DeviceState
         type Scopes DevicesSetState =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient DevicesSetState'{..}
           = go _dssEnterpriseId _dssUserId _dssDeviceId
+              _dssXgafv
+              _dssUploadProtocol
+              _dssAccessToken
+              _dssUploadType
+              _dssCallback
               (Just AltJSON)
               _dssPayload
               androidEnterpriseService

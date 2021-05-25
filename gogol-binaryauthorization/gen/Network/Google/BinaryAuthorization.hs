@@ -54,6 +54,9 @@ module Network.Google.BinaryAuthorization
     -- ** binaryauthorization.projects.attestors.update
     , module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Update
 
+    -- ** binaryauthorization.projects.attestors.validateAttestationOccurrence
+    , module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
+
     -- ** binaryauthorization.projects.getPolicy
     , module Network.Google.Resource.BinaryAuthorization.Projects.GetPolicy
 
@@ -69,7 +72,16 @@ module Network.Google.BinaryAuthorization
     -- ** binaryauthorization.projects.updatePolicy
     , module Network.Google.Resource.BinaryAuthorization.Projects.UpdatePolicy
 
+    -- ** binaryauthorization.systempolicy.getPolicy
+    , module Network.Google.Resource.BinaryAuthorization.Systempolicy.GetPolicy
+
     -- * Types
+
+    -- ** Signature
+    , Signature
+    , signature
+    , sSignature
+    , sPublicKeyId
 
     -- ** PkixPublicKey
     , PkixPublicKey
@@ -85,16 +97,14 @@ module Network.Google.BinaryAuthorization
     , eTitle
     , eDescription
 
-    -- ** UserOwnedDrydockNote
-    , UserOwnedDrydockNote
-    , userOwnedDrydockNote
-    , uodnDelegationServiceAccountEmail
-    , uodnPublicKeys
-    , uodnNoteReference
-
     -- ** Empty
     , Empty
     , empty
+
+    -- ** PolicyKubernetesNamespaceAdmissionRules
+    , PolicyKubernetesNamespaceAdmissionRules
+    , policyKubernetesNamespaceAdmissionRules
+    , pknarAddtional
 
     -- ** AdmissionRuleEnforcementMode
     , AdmissionRuleEnforcementMode (..)
@@ -107,16 +117,39 @@ module Network.Google.BinaryAuthorization
     , setIAMPolicyRequest
     , siprPolicy
 
+    -- ** ValidateAttestationOccurrenceRequest
+    , ValidateAttestationOccurrenceRequest
+    , validateAttestationOccurrenceRequest
+    , vaorOccurrenceNote
+    , vaorAttestation
+    , vaorOccurrenceResourceURI
+
+    -- ** Jwt
+    , Jwt
+    , jwt
+    , jCompactJwt
+
     -- ** ListAttestorsResponse
     , ListAttestorsResponse
     , listAttestorsResponse
     , larNextPageToken
     , larAttestors
 
+    -- ** ValidateAttestationOccurrenceResponse
+    , ValidateAttestationOccurrenceResponse
+    , validateAttestationOccurrenceResponse
+    , vaorDenialReason
+    , vaorResult
+
     -- ** AdmissionWhiteListPattern
     , AdmissionWhiteListPattern
     , admissionWhiteListPattern
     , awlpNamePattern
+
+    -- ** PolicyIstioServiceIdentityAdmissionRules
+    , PolicyIstioServiceIdentityAdmissionRules
+    , policyIstioServiceIdentityAdmissionRules
+    , pisiarAddtional
 
     -- ** PkixPublicKeySignatureAlgorithm
     , PkixPublicKeySignatureAlgorithm (..)
@@ -139,12 +172,20 @@ module Network.Google.BinaryAuthorization
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- ** PolicyKubernetesServiceAccountAdmissionRules
+    , PolicyKubernetesServiceAccountAdmissionRules
+    , policyKubernetesServiceAccountAdmissionRules
+    , pksaarAddtional
+
     -- ** IAMPolicy
     , IAMPolicy
     , iamPolicy
     , ipEtag
     , ipVersion
     , ipBindings
+
+    -- ** ValidateAttestationOccurrenceResponseResult
+    , ValidateAttestationOccurrenceResponseResult (..)
 
     -- ** AttestorPublicKey
     , AttestorPublicKey
@@ -163,12 +204,22 @@ module Network.Google.BinaryAuthorization
     , Policy
     , policy
     , pDefaultAdmissionRule
+    , pIstioServiceIdentityAdmissionRules
     , pAdmissionWhiteListPatterns
+    , pKubernetesServiceAccountAdmissionRules
     , pClusterAdmissionRules
     , pUpdateTime
     , pName
+    , pKubernetesNamespaceAdmissionRules
     , pGlobalPolicyEvaluationMode
     , pDescription
+
+    -- ** UserOwnedGrafeasNote
+    , UserOwnedGrafeasNote
+    , userOwnedGrafeasNote
+    , uognDelegationServiceAccountEmail
+    , uognPublicKeys
+    , uognNoteReference
 
     -- ** PolicyClusterAdmissionRules
     , PolicyClusterAdmissionRules
@@ -178,10 +229,17 @@ module Network.Google.BinaryAuthorization
     -- ** Attestor
     , Attestor
     , attestor
-    , aUserOwnedDrydockNote
     , aUpdateTime
     , aName
+    , aUserOwnedGrafeasNote
     , aDescription
+
+    -- ** AttestationOccurrence
+    , AttestationOccurrence
+    , attestationOccurrence
+    , aoSerializedPayload
+    , aoJwts
+    , aoSignatures
 
     -- ** Binding
     , Binding
@@ -191,21 +249,23 @@ module Network.Google.BinaryAuthorization
     , bCondition
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Create
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Delete
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Get
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.GetIAMPolicy
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.List
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.SetIAMPolicy
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.TestIAMPermissions
-import           Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Update
-import           Network.Google.Resource.BinaryAuthorization.Projects.GetPolicy
-import           Network.Google.Resource.BinaryAuthorization.Projects.Policy.GetIAMPolicy
-import           Network.Google.Resource.BinaryAuthorization.Projects.Policy.SetIAMPolicy
-import           Network.Google.Resource.BinaryAuthorization.Projects.Policy.TestIAMPermissions
-import           Network.Google.Resource.BinaryAuthorization.Projects.UpdatePolicy
+import Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Create
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Delete
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Get
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.GetIAMPolicy
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.List
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.SetIAMPolicy
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.TestIAMPermissions
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Update
+import Network.Google.Resource.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
+import Network.Google.Resource.BinaryAuthorization.Projects.GetPolicy
+import Network.Google.Resource.BinaryAuthorization.Projects.Policy.GetIAMPolicy
+import Network.Google.Resource.BinaryAuthorization.Projects.Policy.SetIAMPolicy
+import Network.Google.Resource.BinaryAuthorization.Projects.Policy.TestIAMPermissions
+import Network.Google.Resource.BinaryAuthorization.Projects.UpdatePolicy
+import Network.Google.Resource.BinaryAuthorization.Systempolicy.GetPolicy
 
 {- $resources
 TODO
@@ -213,10 +273,13 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Binary Authorization API service.
 type BinaryAuthorizationAPI =
-     ProjectsAttestorsListResource :<|>
-       ProjectsAttestorsGetIAMPolicyResource
+     SystempolicyGetPolicyResource :<|>
+       ProjectsAttestorsListResource
+       :<|> ProjectsAttestorsGetIAMPolicyResource
        :<|> ProjectsAttestorsGetResource
        :<|> ProjectsAttestorsCreateResource
+       :<|>
+       ProjectsAttestorsValidateAttestationOccurrenceResource
        :<|> ProjectsAttestorsSetIAMPolicyResource
        :<|> ProjectsAttestorsTestIAMPermissionsResource
        :<|> ProjectsAttestorsDeleteResource

@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Delete
     , plrdCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.delete@ method which the
 -- 'ProjectsLocationsRegistriesDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsRegistriesDeleteResource =
 -- /See:/ 'projectsLocationsRegistriesDelete' smart constructor.
 data ProjectsLocationsRegistriesDelete =
   ProjectsLocationsRegistriesDelete'
-    { _plrdXgafv          :: !(Maybe Xgafv)
+    { _plrdXgafv :: !(Maybe Xgafv)
     , _plrdUploadProtocol :: !(Maybe Text)
-    , _plrdAccessToken    :: !(Maybe Text)
-    , _plrdUploadType     :: !(Maybe Text)
-    , _plrdName           :: !Text
-    , _plrdCallback       :: !(Maybe Text)
+    , _plrdAccessToken :: !(Maybe Text)
+    , _plrdUploadType :: !(Maybe Text)
+    , _plrdName :: !Text
+    , _plrdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ plrdUploadType
   = lens _plrdUploadType
       (\ s a -> s{_plrdUploadType = a})
 
--- | The name of the device registry. For example,
+-- | Required. The name of the device registry. For example,
 -- \`projects\/example-project\/locations\/us-central1\/registries\/my-registry\`.
 plrdName :: Lens' ProjectsLocationsRegistriesDelete Text
 plrdName = lens _plrdName (\ s a -> s{_plrdName = a})

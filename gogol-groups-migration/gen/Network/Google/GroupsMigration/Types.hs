@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -27,18 +27,21 @@ module Network.Google.GroupsMigration.Types
     , groups
     , gKind
     , gResponseCode
+
+    -- * Xgafv
+    , Xgafv (..)
     ) where
 
-import           Network.Google.GroupsMigration.Types.Product
-import           Network.Google.GroupsMigration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GroupsMigration.Types.Product
+import Network.Google.GroupsMigration.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
 groupsMigrationService :: ServiceConfig
 groupsMigrationService
   = defaultService (ServiceId "groupsmigration:v1")
-      "www.googleapis.com"
+      "groupsmigration.googleapis.com"
 
--- | Manage messages in groups on your domain
+-- | Upload messages to any Google group in your domain
 appsGroupsMigrationScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]
 appsGroupsMigrationScope = Proxy

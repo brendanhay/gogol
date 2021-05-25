@@ -23,7 +23,7 @@
 -- Lists all the feedback for an alert. Attempting to list feedbacks for a
 -- non-existent alert returns \`NOT_FOUND\` error.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.feedback.list@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.feedback.list@.
 module Network.Google.Resource.AlertCenter.Alerts.Feedback.List
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.AlertCenter.Alerts.Feedback.List
     , aflCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.alerts.feedback.list@ method which the
 -- 'AlertsFeedbackList' request conforms to.
@@ -70,14 +70,14 @@ type AlertsFeedbackListResource =
 -- /See:/ 'alertsFeedbackList' smart constructor.
 data AlertsFeedbackList =
   AlertsFeedbackList'
-    { _aflXgafv          :: !(Maybe Xgafv)
+    { _aflXgafv :: !(Maybe Xgafv)
     , _aflUploadProtocol :: !(Maybe Text)
-    , _aflAccessToken    :: !(Maybe Text)
-    , _aflAlertId        :: !Text
-    , _aflUploadType     :: !(Maybe Text)
-    , _aflCustomerId     :: !(Maybe Text)
-    , _aflFilter         :: !(Maybe Text)
-    , _aflCallback       :: !(Maybe Text)
+    , _aflAccessToken :: !(Maybe Text)
+    , _aflAlertId :: !Text
+    , _aflUploadType :: !(Maybe Text)
+    , _aflCustomerId :: !(Maybe Text)
+    , _aflFilter :: !(Maybe Text)
+    , _aflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -145,9 +145,9 @@ aflUploadType
   = lens _aflUploadType
       (\ s a -> s{_aflUploadType = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alert feedback are associated with. Inferred from the
--- caller identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alert feedback are associated with. Inferred
+-- from the caller identity if not provided.
 aflCustomerId :: Lens' AlertsFeedbackList (Maybe Text)
 aflCustomerId
   = lens _aflCustomerId
@@ -155,9 +155,9 @@ aflCustomerId
 
 -- | Optional. A query string for filtering alert feedback results. For more
 -- details, see [Query
--- filters](\/admin-sdk\/alertcenter\/guides\/query-filters) and [Supported
--- query filter
--- fields](\/admin-sdk\/alertcenter\/reference\/filter-fields#alerts.feedback.list).
+-- filters](https:\/\/developers.google.com\/admin-sdk\/alertcenter\/guides\/query-filters)
+-- and [Supported query filter
+-- fields](https:\/\/developers.google.com\/admin-sdk\/alertcenter\/reference\/filter-fields#alerts.feedback.list).
 aflFilter :: Lens' AlertsFeedbackList (Maybe Text)
 aflFilter
   = lens _aflFilter (\ s a -> s{_aflFilter = a})

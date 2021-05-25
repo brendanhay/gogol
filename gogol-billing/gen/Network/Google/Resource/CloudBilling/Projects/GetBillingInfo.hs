@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
     , pgbiCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.projects.getBillingInfo@ method which the
 -- 'ProjectsGetBillingInfo' request conforms to.
@@ -69,12 +69,12 @@ type ProjectsGetBillingInfoResource =
 -- /See:/ 'projectsGetBillingInfo' smart constructor.
 data ProjectsGetBillingInfo =
   ProjectsGetBillingInfo'
-    { _pgbiXgafv          :: !(Maybe Xgafv)
+    { _pgbiXgafv :: !(Maybe Xgafv)
     , _pgbiUploadProtocol :: !(Maybe Text)
-    , _pgbiAccessToken    :: !(Maybe Text)
-    , _pgbiUploadType     :: !(Maybe Text)
-    , _pgbiName           :: !Text
-    , _pgbiCallback       :: !(Maybe Text)
+    , _pgbiAccessToken :: !(Maybe Text)
+    , _pgbiUploadType :: !(Maybe Text)
+    , _pgbiName :: !Text
+    , _pgbiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,8 +131,8 @@ pgbiUploadType
   = lens _pgbiUploadType
       (\ s a -> s{_pgbiUploadType = a})
 
--- | The resource name of the project for which billing information is
--- retrieved. For example, \`projects\/tokyo-rain-123\`.
+-- | Required. The resource name of the project for which billing information
+-- is retrieved. For example, \`projects\/tokyo-rain-123\`.
 pgbiName :: Lens' ProjectsGetBillingInfo Text
 pgbiName = lens _pgbiName (\ s a -> s{_pgbiName = a})
 
@@ -144,7 +144,9 @@ pgbiCallback
 instance GoogleRequest ProjectsGetBillingInfo where
         type Rs ProjectsGetBillingInfo = ProjectBillingInfo
         type Scopes ProjectsGetBillingInfo =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsGetBillingInfo'{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               _pgbiAccessToken

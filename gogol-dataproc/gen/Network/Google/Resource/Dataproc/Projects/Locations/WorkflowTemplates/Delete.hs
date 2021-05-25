@@ -42,8 +42,8 @@ module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Del
     , plwtdCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.locations.workflowTemplates.delete@ method which the
 -- 'ProjectsLocationsWorkflowTemplatesDelete' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsWorkflowTemplatesDeleteResource
 -- /See:/ 'projectsLocationsWorkflowTemplatesDelete' smart constructor.
 data ProjectsLocationsWorkflowTemplatesDelete =
   ProjectsLocationsWorkflowTemplatesDelete'
-    { _plwtdXgafv          :: !(Maybe Xgafv)
+    { _plwtdXgafv :: !(Maybe Xgafv)
     , _plwtdUploadProtocol :: !(Maybe Text)
-    , _plwtdAccessToken    :: !(Maybe Text)
-    , _plwtdUploadType     :: !(Maybe Text)
-    , _plwtdName           :: !Text
-    , _plwtdVersion        :: !(Maybe (Textual Int32))
-    , _plwtdCallback       :: !(Maybe Text)
+    , _plwtdAccessToken :: !(Maybe Text)
+    , _plwtdUploadType :: !(Maybe Text)
+    , _plwtdName :: !Text
+    , _plwtdVersion :: !(Maybe (Textual Int32))
+    , _plwtdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,9 +130,14 @@ plwtdUploadType
   = lens _plwtdUploadType
       (\ s a -> s{_plwtdUploadType = a})
 
--- | Required. The \"resource name\" of the workflow template, as described
--- in https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
+-- | Required. The resource name of the workflow template, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates.delete, the resource name of the
+-- template has the following format:
 -- projects\/{project_id}\/regions\/{region}\/workflowTemplates\/{template_id}
+-- For projects.locations.workflowTemplates.instantiate, the resource name
+-- of the template has the following format:
+-- projects\/{project_id}\/locations\/{location}\/workflowTemplates\/{template_id}
 plwtdName :: Lens' ProjectsLocationsWorkflowTemplatesDelete Text
 plwtdName
   = lens _plwtdName (\ s a -> s{_plwtdName = a})

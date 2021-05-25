@@ -16,7 +16,7 @@
 --
 module Network.Google.Language.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The grammatical properness.
 data PartOfSpeechProper

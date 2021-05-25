@@ -34,8 +34,8 @@ module Network.Google.Resource.AdSense.Metadata.Metrics.List
 
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.metadata.metrics.list@ method which the
 -- 'MetadataMetricsList' request conforms to.

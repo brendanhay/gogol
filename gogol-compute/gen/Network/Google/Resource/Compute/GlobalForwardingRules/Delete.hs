@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
     , gfrdForwardingRule
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.delete@ method which the
 -- 'GlobalForwardingRulesDelete' request conforms to.
@@ -59,8 +59,8 @@ type GlobalForwardingRulesDeleteResource =
 -- /See:/ 'globalForwardingRulesDelete' smart constructor.
 data GlobalForwardingRulesDelete =
   GlobalForwardingRulesDelete'
-    { _gfrdRequestId      :: !(Maybe Text)
-    , _gfrdProject        :: !Text
+    { _gfrdRequestId :: !(Maybe Text)
+    , _gfrdProject :: !Text
     , _gfrdForwardingRule :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

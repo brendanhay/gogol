@@ -55,8 +55,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.T
     , ccwsstiCourseWorkId
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.turnIn@ method which the
 -- 'CoursesCourseWorkStudentSubmissionsTurnIn' request conforms to.
@@ -94,15 +94,15 @@ type CoursesCourseWorkStudentSubmissionsTurnInResource
 -- /See:/ 'coursesCourseWorkStudentSubmissionsTurnIn' smart constructor.
 data CoursesCourseWorkStudentSubmissionsTurnIn =
   CoursesCourseWorkStudentSubmissionsTurnIn'
-    { _ccwsstiXgafv          :: !(Maybe Xgafv)
+    { _ccwsstiXgafv :: !(Maybe Xgafv)
     , _ccwsstiUploadProtocol :: !(Maybe Text)
-    , _ccwsstiCourseId       :: !Text
-    , _ccwsstiAccessToken    :: !(Maybe Text)
-    , _ccwsstiUploadType     :: !(Maybe Text)
-    , _ccwsstiPayload        :: !TurnInStudentSubmissionRequest
-    , _ccwsstiId             :: !Text
-    , _ccwsstiCallback       :: !(Maybe Text)
-    , _ccwsstiCourseWorkId   :: !Text
+    , _ccwsstiCourseId :: !Text
+    , _ccwsstiAccessToken :: !(Maybe Text)
+    , _ccwsstiUploadType :: !(Maybe Text)
+    , _ccwsstiPayload :: !TurnInStudentSubmissionRequest
+    , _ccwsstiId :: !Text
+    , _ccwsstiCallback :: !(Maybe Text)
+    , _ccwsstiCourseWorkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.ForwardingRules.SetTarget
     , frstRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.setTarget@ method which the
 -- 'ForwardingRulesSetTarget' request conforms to.
@@ -67,11 +67,11 @@ type ForwardingRulesSetTargetResource =
 -- /See:/ 'forwardingRulesSetTarget' smart constructor.
 data ForwardingRulesSetTarget =
   ForwardingRulesSetTarget'
-    { _frstRequestId      :: !(Maybe Text)
-    , _frstProject        :: !Text
+    { _frstRequestId :: !(Maybe Text)
+    , _frstProject :: !Text
     , _frstForwardingRule :: !Text
-    , _frstPayload        :: !TargetReference
-    , _frstRegion         :: !Text
+    , _frstPayload :: !TargetReference
+    , _frstRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

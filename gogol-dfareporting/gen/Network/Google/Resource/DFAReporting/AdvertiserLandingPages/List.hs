@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of landing pages.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserLandingPages.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.advertiserLandingPages.list@.
 module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
     (
     -- * REST Resource
@@ -33,8 +33,12 @@ module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
     , AdvertiserLandingPagesList
 
     -- * Request Lenses
+    , alplXgafv
+    , alplUploadProtocol
+    , alplAccessToken
     , alplCampaignIds
     , alplSearchString
+    , alplUploadType
     , alplIds
     , alplProFileId
     , alplSortOrder
@@ -44,53 +48,66 @@ module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
     , alplAdvertiserIds
     , alplArchived
     , alplMaxResults
+    , alplCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserLandingPages.list@ method which the
 -- 'AdvertiserLandingPagesList' request conforms to.
 type AdvertiserLandingPagesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserLandingPages" :>
-               QueryParams "campaignIds" (Textual Int64) :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" (Textual Int64) :>
-                     QueryParam "sortOrder"
-                       AdvertiserLandingPagesListSortOrder
-                       :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField"
-                           AdvertiserLandingPagesListSortField
-                           :>
-                           QueryParam "subaccountId" (Textual Int64) :>
-                             QueryParams "advertiserIds" (Textual Int64) :>
-                               QueryParam "archived" Bool :>
-                                 QueryParam "maxResults" (Textual Int32) :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON]
-                                       AdvertiserLandingPagesListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParams "campaignIds" (Textual Int64) :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "ids" (Textual Int64) :>
+                             QueryParam "sortOrder"
+                               AdvertiserLandingPagesListSortOrder
+                               :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField"
+                                   AdvertiserLandingPagesListSortField
+                                   :>
+                                   QueryParam "subaccountId" (Textual Int64) :>
+                                     QueryParams "advertiserIds" (Textual Int64)
+                                       :>
+                                       QueryParam "archived" Bool :>
+                                         QueryParam "maxResults" (Textual Int32)
+                                           :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON]
+                                                 AdvertiserLandingPagesListResponse
 
 -- | Retrieves a list of landing pages.
 --
 -- /See:/ 'advertiserLandingPagesList' smart constructor.
 data AdvertiserLandingPagesList =
   AdvertiserLandingPagesList'
-    { _alplCampaignIds   :: !(Maybe [Textual Int64])
-    , _alplSearchString  :: !(Maybe Text)
-    , _alplIds           :: !(Maybe [Textual Int64])
-    , _alplProFileId     :: !(Textual Int64)
-    , _alplSortOrder     :: !AdvertiserLandingPagesListSortOrder
-    , _alplPageToken     :: !(Maybe Text)
-    , _alplSortField     :: !AdvertiserLandingPagesListSortField
-    , _alplSubAccountId  :: !(Maybe (Textual Int64))
+    { _alplXgafv :: !(Maybe Xgafv)
+    , _alplUploadProtocol :: !(Maybe Text)
+    , _alplAccessToken :: !(Maybe Text)
+    , _alplCampaignIds :: !(Maybe [Textual Int64])
+    , _alplSearchString :: !(Maybe Text)
+    , _alplUploadType :: !(Maybe Text)
+    , _alplIds :: !(Maybe [Textual Int64])
+    , _alplProFileId :: !(Textual Int64)
+    , _alplSortOrder :: !AdvertiserLandingPagesListSortOrder
+    , _alplPageToken :: !(Maybe Text)
+    , _alplSortField :: !AdvertiserLandingPagesListSortField
+    , _alplSubAccountId :: !(Maybe (Textual Int64))
     , _alplAdvertiserIds :: !(Maybe [Textual Int64])
-    , _alplArchived      :: !(Maybe Bool)
-    , _alplMaxResults    :: !(Textual Int32)
+    , _alplArchived :: !(Maybe Bool)
+    , _alplMaxResults :: !(Textual Int32)
+    , _alplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,9 +116,17 @@ data AdvertiserLandingPagesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'alplXgafv'
+--
+-- * 'alplUploadProtocol'
+--
+-- * 'alplAccessToken'
+--
 -- * 'alplCampaignIds'
 --
 -- * 'alplSearchString'
+--
+-- * 'alplUploadType'
 --
 -- * 'alplIds'
 --
@@ -120,13 +145,19 @@ data AdvertiserLandingPagesList =
 -- * 'alplArchived'
 --
 -- * 'alplMaxResults'
+--
+-- * 'alplCallback'
 advertiserLandingPagesList
     :: Int64 -- ^ 'alplProFileId'
     -> AdvertiserLandingPagesList
 advertiserLandingPagesList pAlplProFileId_ =
   AdvertiserLandingPagesList'
-    { _alplCampaignIds = Nothing
+    { _alplXgafv = Nothing
+    , _alplUploadProtocol = Nothing
+    , _alplAccessToken = Nothing
+    , _alplCampaignIds = Nothing
     , _alplSearchString = Nothing
+    , _alplUploadType = Nothing
     , _alplIds = Nothing
     , _alplProFileId = _Coerce # pAlplProFileId_
     , _alplSortOrder = ALPLSOAscending
@@ -136,8 +167,26 @@ advertiserLandingPagesList pAlplProFileId_ =
     , _alplAdvertiserIds = Nothing
     , _alplArchived = Nothing
     , _alplMaxResults = 1000
+    , _alplCallback = Nothing
     }
 
+
+-- | V1 error format.
+alplXgafv :: Lens' AdvertiserLandingPagesList (Maybe Xgafv)
+alplXgafv
+  = lens _alplXgafv (\ s a -> s{_alplXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+alplUploadProtocol :: Lens' AdvertiserLandingPagesList (Maybe Text)
+alplUploadProtocol
+  = lens _alplUploadProtocol
+      (\ s a -> s{_alplUploadProtocol = a})
+
+-- | OAuth access token.
+alplAccessToken :: Lens' AdvertiserLandingPagesList (Maybe Text)
+alplAccessToken
+  = lens _alplAccessToken
+      (\ s a -> s{_alplAccessToken = a})
 
 -- | Select only landing pages that are associated with these campaigns.
 alplCampaignIds :: Lens' AdvertiserLandingPagesList [Int64]
@@ -158,6 +207,12 @@ alplSearchString :: Lens' AdvertiserLandingPagesList (Maybe Text)
 alplSearchString
   = lens _alplSearchString
       (\ s a -> s{_alplSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+alplUploadType :: Lens' AdvertiserLandingPagesList (Maybe Text)
+alplUploadType
+  = lens _alplUploadType
+      (\ s a -> s{_alplUploadType = a})
 
 -- | Select only landing pages with these IDs.
 alplIds :: Lens' AdvertiserLandingPagesList [Int64]
@@ -218,6 +273,11 @@ alplMaxResults
       (\ s a -> s{_alplMaxResults = a})
       . _Coerce
 
+-- | JSONP
+alplCallback :: Lens' AdvertiserLandingPagesList (Maybe Text)
+alplCallback
+  = lens _alplCallback (\ s a -> s{_alplCallback = a})
+
 instance GoogleRequest AdvertiserLandingPagesList
          where
         type Rs AdvertiserLandingPagesList =
@@ -225,8 +285,11 @@ instance GoogleRequest AdvertiserLandingPagesList
         type Scopes AdvertiserLandingPagesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserLandingPagesList'{..}
-          = go _alplProFileId (_alplCampaignIds ^. _Default)
+          = go _alplProFileId _alplXgafv _alplUploadProtocol
+              _alplAccessToken
+              (_alplCampaignIds ^. _Default)
               _alplSearchString
+              _alplUploadType
               (_alplIds ^. _Default)
               (Just _alplSortOrder)
               _alplPageToken
@@ -235,6 +298,7 @@ instance GoogleRequest AdvertiserLandingPagesList
               (_alplAdvertiserIds ^. _Default)
               _alplArchived
               (Just _alplMaxResults)
+              _alplCallback
               (Just AltJSON)
               dFAReportingService
           where go

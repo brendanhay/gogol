@@ -48,8 +48,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.Delete
     , plcdCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.delete@ method which the
 -- 'ProjectsLocationsClustersDelete' request conforms to.
@@ -75,15 +75,15 @@ type ProjectsLocationsClustersDeleteResource =
 -- /See:/ 'projectsLocationsClustersDelete' smart constructor.
 data ProjectsLocationsClustersDelete =
   ProjectsLocationsClustersDelete'
-    { _plcdXgafv          :: !(Maybe Xgafv)
+    { _plcdXgafv :: !(Maybe Xgafv)
     , _plcdUploadProtocol :: !(Maybe Text)
-    , _plcdAccessToken    :: !(Maybe Text)
-    , _plcdUploadType     :: !(Maybe Text)
-    , _plcdZone           :: !(Maybe Text)
-    , _plcdName           :: !Text
-    , _plcdClusterId      :: !(Maybe Text)
-    , _plcdProjectId      :: !(Maybe Text)
-    , _plcdCallback       :: !(Maybe Text)
+    , _plcdAccessToken :: !(Maybe Text)
+    , _plcdUploadType :: !(Maybe Text)
+    , _plcdZone :: !(Maybe Text)
+    , _plcdName :: !Text
+    , _plcdClusterId :: !(Maybe Text)
+    , _plcdProjectId :: !(Maybe Text)
+    , _plcdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,13 +150,14 @@ plcdUploadType
       (\ s a -> s{_plcdUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 plcdZone :: Lens' ProjectsLocationsClustersDelete (Maybe Text)
 plcdZone = lens _plcdZone (\ s a -> s{_plcdZone = a})
 
 -- | The name (project, location, cluster) of the cluster to delete.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcdName :: Lens' ProjectsLocationsClustersDelete Text
 plcdName = lens _plcdName (\ s a -> s{_plcdName = a})
 

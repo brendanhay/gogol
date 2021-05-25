@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Membership.
+-- Creates a \`Membership\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.memberships.create@.
 module Network.Google.Resource.CloudIdentity.Groups.Memberships.Create
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Memberships.Create
     , gmcCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.memberships.create@ method which the
 -- 'GroupsMembershipsCreate' request conforms to.
@@ -59,18 +59,18 @@ type GroupsMembershipsCreateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Membership :> Post '[JSON] Operation
 
--- | Creates a Membership.
+-- | Creates a \`Membership\`.
 --
 -- /See:/ 'groupsMembershipsCreate' smart constructor.
 data GroupsMembershipsCreate =
   GroupsMembershipsCreate'
-    { _gmcParent         :: !Text
-    , _gmcXgafv          :: !(Maybe Xgafv)
+    { _gmcParent :: !Text
+    , _gmcXgafv :: !(Maybe Xgafv)
     , _gmcUploadProtocol :: !(Maybe Text)
-    , _gmcAccessToken    :: !(Maybe Text)
-    , _gmcUploadType     :: !(Maybe Text)
-    , _gmcPayload        :: !Membership
-    , _gmcCallback       :: !(Maybe Text)
+    , _gmcAccessToken :: !(Maybe Text)
+    , _gmcUploadType :: !(Maybe Text)
+    , _gmcPayload :: !Membership
+    , _gmcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,10 +108,8 @@ groupsMembershipsCreate pGmcParent_ pGmcPayload_ =
     }
 
 
--- | [Resource
--- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
--- Group to create Membership within. Format: \`groups\/{group_id}\`, where
--- \`group_id\` is the unique ID assigned to the Group.
+-- | Required. The parent \`Group\` resource under which to create the
+-- \`Membership\`. Must be of the form \`groups\/{group_id}\`.
 gmcParent :: Lens' GroupsMembershipsCreate Text
 gmcParent
   = lens _gmcParent (\ s a -> s{_gmcParent = a})
@@ -151,7 +149,8 @@ gmcCallback
 instance GoogleRequest GroupsMembershipsCreate where
         type Rs GroupsMembershipsCreate = Operation
         type Scopes GroupsMembershipsCreate =
-             '["https://www.googleapis.com/auth/cloud-identity.groups"]
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsMembershipsCreate'{..}
           = go _gmcParent _gmcXgafv _gmcUploadProtocol
               _gmcAccessToken

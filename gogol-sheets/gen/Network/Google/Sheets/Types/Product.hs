@@ -17,8 +17,50 @@
 --
 module Network.Google.Sheets.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Sheets.Types.Sum
+
+-- | A schedule for data to refresh every day in a given time interval.
+--
+-- /See:/ 'dataSourceRefreshDailySchedule' smart constructor.
+newtype DataSourceRefreshDailySchedule =
+  DataSourceRefreshDailySchedule'
+    { _dsrdsStartTime :: Maybe TimeOfDay'
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceRefreshDailySchedule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsrdsStartTime'
+dataSourceRefreshDailySchedule
+    :: DataSourceRefreshDailySchedule
+dataSourceRefreshDailySchedule =
+  DataSourceRefreshDailySchedule' {_dsrdsStartTime = Nothing}
+
+
+-- | The start time of a time interval in which a data source refresh is
+-- scheduled. Only \`hours\` part is used. The time interval size defaults
+-- to that in the Sheets editor.
+dsrdsStartTime :: Lens' DataSourceRefreshDailySchedule (Maybe TimeOfDay')
+dsrdsStartTime
+  = lens _dsrdsStartTime
+      (\ s a -> s{_dsrdsStartTime = a})
+
+instance FromJSON DataSourceRefreshDailySchedule
+         where
+        parseJSON
+          = withObject "DataSourceRefreshDailySchedule"
+              (\ o ->
+                 DataSourceRefreshDailySchedule' <$>
+                   (o .:? "startTime"))
+
+instance ToJSON DataSourceRefreshDailySchedule where
+        toJSON DataSourceRefreshDailySchedule'{..}
+          = object
+              (catMaybes [("startTime" .=) <$> _dsrdsStartTime])
 
 -- | Information about which values in a pivot group should be used for
 -- sorting.
@@ -26,7 +68,7 @@ import           Network.Google.Sheets.Types.Sum
 -- /See:/ 'pivotGroupSortValueBucket' smart constructor.
 data PivotGroupSortValueBucket =
   PivotGroupSortValueBucket'
-    { _pgsvbBuckets     :: !(Maybe [ExtendedValue])
+    { _pgsvbBuckets :: !(Maybe [ExtendedValue])
     , _pgsvbValuesIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -88,8 +130,8 @@ instance ToJSON PivotGroupSortValueBucket where
 -- /See:/ 'valueRange' smart constructor.
 data ValueRange =
   ValueRange'
-    { _vrValues         :: !(Maybe [[JSONValue]])
-    , _vrRange          :: !(Maybe Text)
+    { _vrValues :: !(Maybe [[JSONValue]])
+    , _vrRange :: !(Maybe Text)
     , _vrMajorDimension :: !(Maybe ValueRangeMajorDimension)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -168,7 +210,7 @@ instance ToJSON ValueRange where
 data SortRangeRequest =
   SortRangeRequest'
     { _srrSortSpecs :: !(Maybe [SortSpec])
-    , _srrRange     :: !(Maybe GridRange)
+    , _srrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -256,7 +298,7 @@ instance ToJSON DeleteNamedRangeRequest where
 data UpdateNamedRangeRequest =
   UpdateNamedRangeRequest'
     { _unrrNamedRange :: !(Maybe NamedRange)
-    , _unrrFields     :: !(Maybe GFieldMask)
+    , _unrrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -304,9 +346,12 @@ instance ToJSON UpdateNamedRangeRequest where
 -- | The data included in a domain or series.
 --
 -- /See:/ 'chartData' smart constructor.
-newtype ChartData =
+data ChartData =
   ChartData'
-    { _cdSourceRange :: Maybe ChartSourceRange
+    { _cdColumnReference :: !(Maybe DataSourceColumnReference)
+    , _cdSourceRange :: !(Maybe ChartSourceRange)
+    , _cdAggregateType :: !(Maybe ChartDataAggregateType)
+    , _cdGroupRule :: !(Maybe ChartGroupRule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -315,11 +360,29 @@ newtype ChartData =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdColumnReference'
+--
 -- * 'cdSourceRange'
+--
+-- * 'cdAggregateType'
+--
+-- * 'cdGroupRule'
 chartData
     :: ChartData
-chartData = ChartData' {_cdSourceRange = Nothing}
+chartData =
+  ChartData'
+    { _cdColumnReference = Nothing
+    , _cdSourceRange = Nothing
+    , _cdAggregateType = Nothing
+    , _cdGroupRule = Nothing
+    }
 
+
+-- | The reference to the data source column that the data reads from.
+cdColumnReference :: Lens' ChartData (Maybe DataSourceColumnReference)
+cdColumnReference
+  = lens _cdColumnReference
+      (\ s a -> s{_cdColumnReference = a})
 
 -- | The source ranges of the data.
 cdSourceRange :: Lens' ChartData (Maybe ChartSourceRange)
@@ -327,15 +390,36 @@ cdSourceRange
   = lens _cdSourceRange
       (\ s a -> s{_cdSourceRange = a})
 
+-- | The aggregation type for the series of a data source chart. Only
+-- supported for data source charts.
+cdAggregateType :: Lens' ChartData (Maybe ChartDataAggregateType)
+cdAggregateType
+  = lens _cdAggregateType
+      (\ s a -> s{_cdAggregateType = a})
+
+-- | The rule to group the data by if the ChartData backs the domain of a
+-- data source chart. Only supported for data source charts.
+cdGroupRule :: Lens' ChartData (Maybe ChartGroupRule)
+cdGroupRule
+  = lens _cdGroupRule (\ s a -> s{_cdGroupRule = a})
+
 instance FromJSON ChartData where
         parseJSON
           = withObject "ChartData"
-              (\ o -> ChartData' <$> (o .:? "sourceRange"))
+              (\ o ->
+                 ChartData' <$>
+                   (o .:? "columnReference") <*> (o .:? "sourceRange")
+                     <*> (o .:? "aggregateType")
+                     <*> (o .:? "groupRule"))
 
 instance ToJSON ChartData where
         toJSON ChartData'{..}
           = object
-              (catMaybes [("sourceRange" .=) <$> _cdSourceRange])
+              (catMaybes
+                 [("columnReference" .=) <$> _cdColumnReference,
+                  ("sourceRange" .=) <$> _cdSourceRange,
+                  ("aggregateType" .=) <$> _cdAggregateType,
+                  ("groupRule" .=) <$> _cdGroupRule])
 
 -- | The request for clearing more than one range of values in a spreadsheet.
 --
@@ -357,7 +441,7 @@ batchClearValuesRequest
 batchClearValuesRequest = BatchClearValuesRequest' {_bcvrRanges = Nothing}
 
 
--- | The ranges to clear, in A1 notation.
+-- | The ranges to clear, in A1 or R1C1 notation.
 bcvrRanges :: Lens' BatchClearValuesRequest [Text]
 bcvrRanges
   = lens _bcvrRanges (\ s a -> s{_bcvrRanges = a}) .
@@ -465,12 +549,13 @@ instance ToJSON DateTimeRule where
 -- /See:/ 'spreadsheetProperties' smart constructor.
 data SpreadsheetProperties =
   SpreadsheetProperties'
-    { _spDefaultFormat                :: !(Maybe CellFormat)
-    , _spLocale                       :: !(Maybe Text)
+    { _spSpreadsheetTheme :: !(Maybe SpreadsheetTheme)
+    , _spDefaultFormat :: !(Maybe CellFormat)
+    , _spLocale :: !(Maybe Text)
     , _spIterativeCalculationSettings :: !(Maybe IterativeCalculationSettings)
-    , _spAutoRecalc                   :: !(Maybe SpreadsheetPropertiesAutoRecalc)
-    , _spTitle                        :: !(Maybe Text)
-    , _spTimeZone                     :: !(Maybe Text)
+    , _spAutoRecalc :: !(Maybe SpreadsheetPropertiesAutoRecalc)
+    , _spTitle :: !(Maybe Text)
+    , _spTimeZone :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -478,6 +563,8 @@ data SpreadsheetProperties =
 -- | Creates a value of 'SpreadsheetProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spSpreadsheetTheme'
 --
 -- * 'spDefaultFormat'
 --
@@ -494,7 +581,8 @@ spreadsheetProperties
     :: SpreadsheetProperties
 spreadsheetProperties =
   SpreadsheetProperties'
-    { _spDefaultFormat = Nothing
+    { _spSpreadsheetTheme = Nothing
+    , _spDefaultFormat = Nothing
     , _spLocale = Nothing
     , _spIterativeCalculationSettings = Nothing
     , _spAutoRecalc = Nothing
@@ -502,6 +590,12 @@ spreadsheetProperties =
     , _spTimeZone = Nothing
     }
 
+
+-- | Theme applied to the spreadsheet.
+spSpreadsheetTheme :: Lens' SpreadsheetProperties (Maybe SpreadsheetTheme)
+spSpreadsheetTheme
+  = lens _spSpreadsheetTheme
+      (\ s a -> s{_spSpreadsheetTheme = a})
 
 -- | The default format of all cells in the spreadsheet.
 -- CellData.effectiveFormat will not be set if the cell\'s format is equal
@@ -521,7 +615,7 @@ spLocale = lens _spLocale (\ s a -> s{_spLocale = a})
 
 -- | Determines whether and how circular references are resolved with
 -- iterative calculation. Absence of this field means that circular
--- references will result in calculation errors.
+-- references result in calculation errors.
 spIterativeCalculationSettings :: Lens' SpreadsheetProperties (Maybe IterativeCalculationSettings)
 spIterativeCalculationSettings
   = lens _spIterativeCalculationSettings
@@ -548,8 +642,10 @@ instance FromJSON SpreadsheetProperties where
           = withObject "SpreadsheetProperties"
               (\ o ->
                  SpreadsheetProperties' <$>
-                   (o .:? "defaultFormat") <*> (o .:? "locale") <*>
-                     (o .:? "iterativeCalculationSettings")
+                   (o .:? "spreadsheetTheme") <*>
+                     (o .:? "defaultFormat")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "iterativeCalculationSettings")
                      <*> (o .:? "autoRecalc")
                      <*> (o .:? "title")
                      <*> (o .:? "timeZone"))
@@ -558,7 +654,8 @@ instance ToJSON SpreadsheetProperties where
         toJSON SpreadsheetProperties'{..}
           = object
               (catMaybes
-                 [("defaultFormat" .=) <$> _spDefaultFormat,
+                 [("spreadsheetTheme" .=) <$> _spSpreadsheetTheme,
+                  ("defaultFormat" .=) <$> _spDefaultFormat,
                   ("locale" .=) <$> _spLocale,
                   ("iterativeCalculationSettings" .=) <$>
                     _spIterativeCalculationSettings,
@@ -572,9 +669,9 @@ instance ToJSON SpreadsheetProperties where
 data BOrders =
   BOrders'
     { _boBottom :: !(Maybe BOrder)
-    , _boLeft   :: !(Maybe BOrder)
-    , _boRight  :: !(Maybe BOrder)
-    , _boTop    :: !(Maybe BOrder)
+    , _boLeft :: !(Maybe BOrder)
+    , _boRight :: !(Maybe BOrder)
+    , _boTop :: !(Maybe BOrder)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -685,7 +782,7 @@ instance ToJSON BatchClearValuesByDataFilterRequest
 -- /See:/ 'textFormatRun' smart constructor.
 data TextFormatRun =
   TextFormatRun'
-    { _tfrFormat     :: !(Maybe TextFormat)
+    { _tfrFormat :: !(Maybe TextFormat)
     , _tfrStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -775,7 +872,7 @@ instance ToJSON DeleteDimensionGroupRequest where
 data UpdateDimensionGroupRequest =
   UpdateDimensionGroupRequest'
     { _udgrDimensionGroup :: !(Maybe DimensionGroup)
-    , _udgrFields         :: !(Maybe GFieldMask)
+    , _udgrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -870,8 +967,13 @@ instance ToJSON AddSheetRequest where
 -- /See:/ 'sortSpec' smart constructor.
 data SortSpec =
   SortSpec'
-    { _ssSortOrder      :: !(Maybe SortSpecSortOrder)
+    { _ssDataSourceColumnReference :: !(Maybe DataSourceColumnReference)
+    , _ssBackgRoundColor :: !(Maybe Color)
+    , _ssForegRoundColor :: !(Maybe Color)
+    , _ssSortOrder :: !(Maybe SortSpecSortOrder)
+    , _ssBackgRoundColorStyle :: !(Maybe ColorStyle)
     , _ssDimensionIndex :: !(Maybe (Textual Int32))
+    , _ssForegRoundColorStyle :: !(Maybe ColorStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -880,18 +982,66 @@ data SortSpec =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ssDataSourceColumnReference'
+--
+-- * 'ssBackgRoundColor'
+--
+-- * 'ssForegRoundColor'
+--
 -- * 'ssSortOrder'
 --
+-- * 'ssBackgRoundColorStyle'
+--
 -- * 'ssDimensionIndex'
+--
+-- * 'ssForegRoundColorStyle'
 sortSpec
     :: SortSpec
-sortSpec = SortSpec' {_ssSortOrder = Nothing, _ssDimensionIndex = Nothing}
+sortSpec =
+  SortSpec'
+    { _ssDataSourceColumnReference = Nothing
+    , _ssBackgRoundColor = Nothing
+    , _ssForegRoundColor = Nothing
+    , _ssSortOrder = Nothing
+    , _ssBackgRoundColorStyle = Nothing
+    , _ssDimensionIndex = Nothing
+    , _ssForegRoundColorStyle = Nothing
+    }
 
+
+-- | Reference to a data source column.
+ssDataSourceColumnReference :: Lens' SortSpec (Maybe DataSourceColumnReference)
+ssDataSourceColumnReference
+  = lens _ssDataSourceColumnReference
+      (\ s a -> s{_ssDataSourceColumnReference = a})
+
+-- | The background fill color to sort by; cells with this fill color are
+-- sorted to the top. Mutually exclusive with foreground_color.
+ssBackgRoundColor :: Lens' SortSpec (Maybe Color)
+ssBackgRoundColor
+  = lens _ssBackgRoundColor
+      (\ s a -> s{_ssBackgRoundColor = a})
+
+-- | The foreground color to sort by; cells with this foreground color are
+-- sorted to the top. Mutually exclusive with background_color.
+ssForegRoundColor :: Lens' SortSpec (Maybe Color)
+ssForegRoundColor
+  = lens _ssForegRoundColor
+      (\ s a -> s{_ssForegRoundColor = a})
 
 -- | The order data should be sorted.
 ssSortOrder :: Lens' SortSpec (Maybe SortSpecSortOrder)
 ssSortOrder
   = lens _ssSortOrder (\ s a -> s{_ssSortOrder = a})
+
+-- | The background fill color to sort by; cells with this fill color are
+-- sorted to the top. Mutually exclusive with foreground_color, and must be
+-- an RGB-type color. If background_color is also set, this field takes
+-- precedence.
+ssBackgRoundColorStyle :: Lens' SortSpec (Maybe ColorStyle)
+ssBackgRoundColorStyle
+  = lens _ssBackgRoundColorStyle
+      (\ s a -> s{_ssBackgRoundColorStyle = a})
 
 -- | The dimension the sort should be applied to.
 ssDimensionIndex :: Lens' SortSpec (Maybe Int32)
@@ -900,19 +1050,42 @@ ssDimensionIndex
       (\ s a -> s{_ssDimensionIndex = a})
       . mapping _Coerce
 
+-- | The foreground color to sort by; cells with this foreground color are
+-- sorted to the top. Mutually exclusive with background_color, and must be
+-- an RGB-type color. If foreground_color is also set, this field takes
+-- precedence.
+ssForegRoundColorStyle :: Lens' SortSpec (Maybe ColorStyle)
+ssForegRoundColorStyle
+  = lens _ssForegRoundColorStyle
+      (\ s a -> s{_ssForegRoundColorStyle = a})
+
 instance FromJSON SortSpec where
         parseJSON
           = withObject "SortSpec"
               (\ o ->
                  SortSpec' <$>
-                   (o .:? "sortOrder") <*> (o .:? "dimensionIndex"))
+                   (o .:? "dataSourceColumnReference") <*>
+                     (o .:? "backgroundColor")
+                     <*> (o .:? "foregroundColor")
+                     <*> (o .:? "sortOrder")
+                     <*> (o .:? "backgroundColorStyle")
+                     <*> (o .:? "dimensionIndex")
+                     <*> (o .:? "foregroundColorStyle"))
 
 instance ToJSON SortSpec where
         toJSON SortSpec'{..}
           = object
               (catMaybes
-                 [("sortOrder" .=) <$> _ssSortOrder,
-                  ("dimensionIndex" .=) <$> _ssDimensionIndex])
+                 [("dataSourceColumnReference" .=) <$>
+                    _ssDataSourceColumnReference,
+                  ("backgroundColor" .=) <$> _ssBackgRoundColor,
+                  ("foregroundColor" .=) <$> _ssForegRoundColor,
+                  ("sortOrder" .=) <$> _ssSortOrder,
+                  ("backgroundColorStyle" .=) <$>
+                    _ssBackgRoundColorStyle,
+                  ("dimensionIndex" .=) <$> _ssDimensionIndex,
+                  ("foregroundColorStyle" .=) <$>
+                    _ssForegRoundColorStyle])
 
 -- | A group over an interval of rows or columns on a sheet, which can
 -- contain or be contained within other groups. A group can be collapsed or
@@ -922,8 +1095,8 @@ instance ToJSON SortSpec where
 data DimensionGroup =
   DimensionGroup'
     { _dgCollapsed :: !(Maybe Bool)
-    , _dgRange     :: !(Maybe DimensionRange)
-    , _dgDepth     :: !(Maybe (Textual Int32))
+    , _dgRange :: !(Maybe DimensionRange)
+    , _dgDepth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -982,15 +1155,65 @@ instance ToJSON DimensionGroup where
                   ("range" .=) <$> _dgRange,
                   ("depth" .=) <$> _dgDepth])
 
+-- | Formatting options for key value.
+--
+-- /See:/ 'keyValueFormat' smart constructor.
+data KeyValueFormat =
+  KeyValueFormat'
+    { _kvfTextFormat :: !(Maybe TextFormat)
+    , _kvfPosition :: !(Maybe TextPosition)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KeyValueFormat' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kvfTextFormat'
+--
+-- * 'kvfPosition'
+keyValueFormat
+    :: KeyValueFormat
+keyValueFormat =
+  KeyValueFormat' {_kvfTextFormat = Nothing, _kvfPosition = Nothing}
+
+
+-- | Text formatting options for key value. The link field is not supported.
+kvfTextFormat :: Lens' KeyValueFormat (Maybe TextFormat)
+kvfTextFormat
+  = lens _kvfTextFormat
+      (\ s a -> s{_kvfTextFormat = a})
+
+-- | Specifies the horizontal text positioning of key value. This field is
+-- optional. If not specified, default positioning is used.
+kvfPosition :: Lens' KeyValueFormat (Maybe TextPosition)
+kvfPosition
+  = lens _kvfPosition (\ s a -> s{_kvfPosition = a})
+
+instance FromJSON KeyValueFormat where
+        parseJSON
+          = withObject "KeyValueFormat"
+              (\ o ->
+                 KeyValueFormat' <$>
+                   (o .:? "textFormat") <*> (o .:? "position"))
+
+instance ToJSON KeyValueFormat where
+        toJSON KeyValueFormat'{..}
+          = object
+              (catMaybes
+                 [("textFormat" .=) <$> _kvfTextFormat,
+                  ("position" .=) <$> _kvfPosition])
+
 -- | Copies data from the source to the destination.
 --
 -- /See:/ 'copyPasteRequest' smart constructor.
 data CopyPasteRequest =
   CopyPasteRequest'
-    { _cprDestination      :: !(Maybe GridRange)
-    , _cprSource           :: !(Maybe GridRange)
+    { _cprDestination :: !(Maybe GridRange)
+    , _cprSource :: !(Maybe GridRange)
     , _cprPasteOrientation :: !(Maybe CopyPasteRequestPasteOrientation)
-    , _cprPasteType        :: !(Maybe CopyPasteRequestPasteType)
+    , _cprPasteType :: !(Maybe CopyPasteRequestPasteType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1062,7 +1285,7 @@ instance ToJSON CopyPasteRequest where
                   ("pasteType" .=) <$> _cprPasteType])
 
 -- | A range on a sheet. All indexes are zero-based. Indexes are half open,
--- e.g the start index is inclusive and the end index is exclusive --
+-- i.e. the start index is inclusive and the end index is exclusive --
 -- [start_index, end_index). Missing indexes indicate the range is
 -- unbounded on that side. For example, if \`\"Sheet1\"\` is sheet ID 0,
 -- then: \`Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index:
@@ -1079,11 +1302,11 @@ instance ToJSON CopyPasteRequest where
 -- /See:/ 'gridRange' smart constructor.
 data GridRange =
   GridRange'
-    { _grEndColumnIndex   :: !(Maybe (Textual Int32))
+    { _grEndColumnIndex :: !(Maybe (Textual Int32))
     , _grStartColumnIndex :: !(Maybe (Textual Int32))
-    , _grEndRowIndex      :: !(Maybe (Textual Int32))
-    , _grStartRowIndex    :: !(Maybe (Textual Int32))
-    , _grSheetId          :: !(Maybe (Textual Int32))
+    , _grEndRowIndex :: !(Maybe (Textual Int32))
+    , _grStartRowIndex :: !(Maybe (Textual Int32))
+    , _grSheetId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1202,6 +1425,59 @@ instance ToJSON AddFilterViewResponse where
         toJSON AddFilterViewResponse'{..}
           = object (catMaybes [("filter" .=) <$> _afvrFilter])
 
+-- | The response from updating data source.
+--
+-- /See:/ 'updateDataSourceResponse' smart constructor.
+data UpdateDataSourceResponse =
+  UpdateDataSourceResponse'
+    { _udsrDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    , _udsrDataSource :: !(Maybe DataSource)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UpdateDataSourceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'udsrDataExecutionStatus'
+--
+-- * 'udsrDataSource'
+updateDataSourceResponse
+    :: UpdateDataSourceResponse
+updateDataSourceResponse =
+  UpdateDataSourceResponse'
+    {_udsrDataExecutionStatus = Nothing, _udsrDataSource = Nothing}
+
+
+-- | The data execution status.
+udsrDataExecutionStatus :: Lens' UpdateDataSourceResponse (Maybe DataExecutionStatus)
+udsrDataExecutionStatus
+  = lens _udsrDataExecutionStatus
+      (\ s a -> s{_udsrDataExecutionStatus = a})
+
+-- | The updated data source.
+udsrDataSource :: Lens' UpdateDataSourceResponse (Maybe DataSource)
+udsrDataSource
+  = lens _udsrDataSource
+      (\ s a -> s{_udsrDataSource = a})
+
+instance FromJSON UpdateDataSourceResponse where
+        parseJSON
+          = withObject "UpdateDataSourceResponse"
+              (\ o ->
+                 UpdateDataSourceResponse' <$>
+                   (o .:? "dataExecutionStatus") <*>
+                     (o .:? "dataSource"))
+
+instance ToJSON UpdateDataSourceResponse where
+        toJSON UpdateDataSourceResponse'{..}
+          = object
+              (catMaybes
+                 [("dataExecutionStatus" .=) <$>
+                    _udsrDataExecutionStatus,
+                  ("dataSource" .=) <$> _udsrDataSource])
+
 -- | A condition that can evaluate to true or false. BooleanConditions are
 -- used by conditional formatting, data validation, and the criteria in
 -- filters.
@@ -1210,7 +1486,7 @@ instance ToJSON AddFilterViewResponse where
 data BooleanCondition =
   BooleanCondition'
     { _bcValues :: !(Maybe [ConditionValue])
-    , _bcType   :: !(Maybe BooleanConditionType)
+    , _bcType :: !(Maybe BooleanConditionType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1258,9 +1534,10 @@ instance ToJSON BooleanCondition where
 -- the cells in that dimension.
 --
 -- /See:/ 'autoResizeDimensionsRequest' smart constructor.
-newtype AutoResizeDimensionsRequest =
+data AutoResizeDimensionsRequest =
   AutoResizeDimensionsRequest'
-    { _ardrDimensions :: Maybe DimensionRange
+    { _ardrDimensions :: !(Maybe DimensionRange)
+    , _ardrDataSourceSheetDimensions :: !(Maybe DataSourceSheetDimensionRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1270,10 +1547,13 @@ newtype AutoResizeDimensionsRequest =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ardrDimensions'
+--
+-- * 'ardrDataSourceSheetDimensions'
 autoResizeDimensionsRequest
     :: AutoResizeDimensionsRequest
 autoResizeDimensionsRequest =
-  AutoResizeDimensionsRequest' {_ardrDimensions = Nothing}
+  AutoResizeDimensionsRequest'
+    {_ardrDimensions = Nothing, _ardrDataSourceSheetDimensions = Nothing}
 
 
 -- | The dimensions to automatically resize.
@@ -1282,34 +1562,45 @@ ardrDimensions
   = lens _ardrDimensions
       (\ s a -> s{_ardrDimensions = a})
 
+-- | The dimensions on a data source sheet to automatically resize.
+ardrDataSourceSheetDimensions :: Lens' AutoResizeDimensionsRequest (Maybe DataSourceSheetDimensionRange)
+ardrDataSourceSheetDimensions
+  = lens _ardrDataSourceSheetDimensions
+      (\ s a -> s{_ardrDataSourceSheetDimensions = a})
+
 instance FromJSON AutoResizeDimensionsRequest where
         parseJSON
           = withObject "AutoResizeDimensionsRequest"
               (\ o ->
                  AutoResizeDimensionsRequest' <$>
-                   (o .:? "dimensions"))
+                   (o .:? "dimensions") <*>
+                     (o .:? "dataSourceSheetDimensions"))
 
 instance ToJSON AutoResizeDimensionsRequest where
         toJSON AutoResizeDimensionsRequest'{..}
           = object
-              (catMaybes [("dimensions" .=) <$> _ardrDimensions])
+              (catMaybes
+                 [("dimensions" .=) <$> _ardrDimensions,
+                  ("dataSourceSheetDimensions" .=) <$>
+                    _ardrDataSourceSheetDimensions])
 
--- | A </chart/interactive/docs/gallery/bubblechart bubble chart>.
+-- | A bubble chart.
 --
 -- /See:/ 'bubbleChartSpec' smart constructor.
 data BubbleChartSpec =
   BubbleChartSpec'
-    { _bcsBubbleTextStyle     :: !(Maybe TextFormat)
-    , _bcsBubbleBOrderColor   :: !(Maybe Color)
-    , _bcsLegendPosition      :: !(Maybe BubbleChartSpecLegendPosition)
-    , _bcsDomain              :: !(Maybe ChartData)
-    , _bcsSeries              :: !(Maybe ChartData)
-    , _bcsBubbleLabels        :: !(Maybe ChartData)
-    , _bcsGroupIds            :: !(Maybe ChartData)
+    { _bcsBubbleTextStyle :: !(Maybe TextFormat)
+    , _bcsBubbleBOrderColor :: !(Maybe Color)
+    , _bcsLegendPosition :: !(Maybe BubbleChartSpecLegendPosition)
+    , _bcsDomain :: !(Maybe ChartData)
+    , _bcsSeries :: !(Maybe ChartData)
+    , _bcsBubbleLabels :: !(Maybe ChartData)
+    , _bcsGroupIds :: !(Maybe ChartData)
     , _bcsBubbleMinRadiusSize :: !(Maybe (Textual Int32))
     , _bcsBubbleMaxRadiusSize :: !(Maybe (Textual Int32))
-    , _bcsBubbleOpacity       :: !(Maybe (Textual Double))
-    , _bcsBubbleSizes         :: !(Maybe ChartData)
+    , _bcsBubbleOpacity :: !(Maybe (Textual Double))
+    , _bcsBubbleSizes :: !(Maybe ChartData)
+    , _bcsBubbleBOrderColorStyle :: !(Maybe ColorStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1339,6 +1630,8 @@ data BubbleChartSpec =
 -- * 'bcsBubbleOpacity'
 --
 -- * 'bcsBubbleSizes'
+--
+-- * 'bcsBubbleBOrderColorStyle'
 bubbleChartSpec
     :: BubbleChartSpec
 bubbleChartSpec =
@@ -1354,11 +1647,12 @@ bubbleChartSpec =
     , _bcsBubbleMaxRadiusSize = Nothing
     , _bcsBubbleOpacity = Nothing
     , _bcsBubbleSizes = Nothing
+    , _bcsBubbleBOrderColorStyle = Nothing
     }
 
 
--- | The format of the text inside the bubbles. Underline and Strikethrough
--- are not supported.
+-- | The format of the text inside the bubbles. Strikethrough, underline, and
+-- link are not supported.
 bcsBubbleTextStyle :: Lens' BubbleChartSpec (Maybe TextFormat)
 bcsBubbleTextStyle
   = lens _bcsBubbleTextStyle
@@ -1382,7 +1676,7 @@ bcsDomain :: Lens' BubbleChartSpec (Maybe ChartData)
 bcsDomain
   = lens _bcsDomain (\ s a -> s{_bcsDomain = a})
 
--- | The data contianing the bubble y-values. These values locate the bubbles
+-- | The data containing the bubble y-values. These values locate the bubbles
 -- in the chart vertically.
 bcsSeries :: Lens' BubbleChartSpec (Maybe ChartData)
 bcsSeries
@@ -1426,13 +1720,20 @@ bcsBubbleOpacity
       (\ s a -> s{_bcsBubbleOpacity = a})
       . mapping _Coerce
 
--- | The data contianing the bubble sizes. Bubble sizes are used to draw the
+-- | The data containing the bubble sizes. Bubble sizes are used to draw the
 -- bubbles at different sizes relative to each other. If specified,
 -- group_ids must also be specified. This field is optional.
 bcsBubbleSizes :: Lens' BubbleChartSpec (Maybe ChartData)
 bcsBubbleSizes
   = lens _bcsBubbleSizes
       (\ s a -> s{_bcsBubbleSizes = a})
+
+-- | The bubble border color. If bubble_border_color is also set, this field
+-- takes precedence.
+bcsBubbleBOrderColorStyle :: Lens' BubbleChartSpec (Maybe ColorStyle)
+bcsBubbleBOrderColorStyle
+  = lens _bcsBubbleBOrderColorStyle
+      (\ s a -> s{_bcsBubbleBOrderColorStyle = a})
 
 instance FromJSON BubbleChartSpec where
         parseJSON
@@ -1449,7 +1750,8 @@ instance FromJSON BubbleChartSpec where
                      <*> (o .:? "bubbleMinRadiusSize")
                      <*> (o .:? "bubbleMaxRadiusSize")
                      <*> (o .:? "bubbleOpacity")
-                     <*> (o .:? "bubbleSizes"))
+                     <*> (o .:? "bubbleSizes")
+                     <*> (o .:? "bubbleBorderColorStyle"))
 
 instance ToJSON BubbleChartSpec where
         toJSON BubbleChartSpec'{..}
@@ -1467,7 +1769,9 @@ instance ToJSON BubbleChartSpec where
                   ("bubbleMaxRadiusSize" .=) <$>
                     _bcsBubbleMaxRadiusSize,
                   ("bubbleOpacity" .=) <$> _bcsBubbleOpacity,
-                  ("bubbleSizes" .=) <$> _bcsBubbleSizes])
+                  ("bubbleSizes" .=) <$> _bcsBubbleSizes,
+                  ("bubbleBorderColorStyle" .=) <$>
+                    _bcsBubbleBOrderColorStyle])
 
 -- | Deletes a range of cells, shifting other cells into the deleted area.
 --
@@ -1475,7 +1779,7 @@ instance ToJSON BubbleChartSpec where
 data DeleteRangeRequest =
   DeleteRangeRequest'
     { _drrShiftDimension :: !(Maybe DeleteRangeRequestShiftDimension)
-    , _drrRange          :: !(Maybe GridRange)
+    , _drrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1520,23 +1824,78 @@ instance ToJSON DeleteRangeRequest where
                  [("shiftDimension" .=) <$> _drrShiftDimension,
                   ("range" .=) <$> _drrRange])
 
+-- | Represents spreadsheet theme
+--
+-- /See:/ 'spreadsheetTheme' smart constructor.
+data SpreadsheetTheme =
+  SpreadsheetTheme'
+    { _stThemeColors :: !(Maybe [ThemeColorPair])
+    , _stPrimaryFontFamily :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SpreadsheetTheme' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'stThemeColors'
+--
+-- * 'stPrimaryFontFamily'
+spreadsheetTheme
+    :: SpreadsheetTheme
+spreadsheetTheme =
+  SpreadsheetTheme' {_stThemeColors = Nothing, _stPrimaryFontFamily = Nothing}
+
+
+-- | The spreadsheet theme color pairs. To update you must provide all theme
+-- color pairs.
+stThemeColors :: Lens' SpreadsheetTheme [ThemeColorPair]
+stThemeColors
+  = lens _stThemeColors
+      (\ s a -> s{_stThemeColors = a})
+      . _Default
+      . _Coerce
+
+-- | Name of the primary font family.
+stPrimaryFontFamily :: Lens' SpreadsheetTheme (Maybe Text)
+stPrimaryFontFamily
+  = lens _stPrimaryFontFamily
+      (\ s a -> s{_stPrimaryFontFamily = a})
+
+instance FromJSON SpreadsheetTheme where
+        parseJSON
+          = withObject "SpreadsheetTheme"
+              (\ o ->
+                 SpreadsheetTheme' <$>
+                   (o .:? "themeColors" .!= mempty) <*>
+                     (o .:? "primaryFontFamily"))
+
+instance ToJSON SpreadsheetTheme where
+        toJSON SpreadsheetTheme'{..}
+          = object
+              (catMaybes
+                 [("themeColors" .=) <$> _stThemeColors,
+                  ("primaryFontFamily" .=) <$> _stPrimaryFontFamily])
+
 -- | A sheet in a spreadsheet.
 --
 -- /See:/ 'sheet' smart constructor.
 data Sheet =
   Sheet'
-    { _sColumnGroups       :: !(Maybe [DimensionGroup])
-    , _sData               :: !(Maybe [GridData])
-    , _sMerges             :: !(Maybe [GridRange])
-    , _sRowGroups          :: !(Maybe [DimensionGroup])
-    , _sProtectedRanges    :: !(Maybe [ProtectedRange])
-    , _sBandedRanges       :: !(Maybe [BandedRange])
-    , _sCharts             :: !(Maybe [EmbeddedChart])
-    , _sBasicFilter        :: !(Maybe BasicFilter)
-    , _sDeveloperMetadata  :: !(Maybe [DeveloperMetadata])
+    { _sColumnGroups :: !(Maybe [DimensionGroup])
+    , _sData :: !(Maybe [GridData])
+    , _sMerges :: !(Maybe [GridRange])
+    , _sRowGroups :: !(Maybe [DimensionGroup])
+    , _sProtectedRanges :: !(Maybe [ProtectedRange])
+    , _sBandedRanges :: !(Maybe [BandedRange])
+    , _sCharts :: !(Maybe [EmbeddedChart])
+    , _sBasicFilter :: !(Maybe BasicFilter)
+    , _sDeveloperMetadata :: !(Maybe [DeveloperMetadata])
     , _sConditionalFormats :: !(Maybe [ConditionalFormatRule])
-    , _sFilterViews        :: !(Maybe [FilterView])
-    , _sProperties         :: !(Maybe SheetProperties)
+    , _sFilterViews :: !(Maybe [FilterView])
+    , _sSlicers :: !(Maybe [Slicer])
+    , _sProperties :: !(Maybe SheetProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1567,6 +1926,8 @@ data Sheet =
 --
 -- * 'sFilterViews'
 --
+-- * 'sSlicers'
+--
 -- * 'sProperties'
 sheet
     :: Sheet
@@ -1583,6 +1944,7 @@ sheet =
     , _sDeveloperMetadata = Nothing
     , _sConditionalFormats = Nothing
     , _sFilterViews = Nothing
+    , _sSlicers = Nothing
     , _sProperties = Nothing
     }
 
@@ -1603,7 +1965,8 @@ sColumnGroups
 -- \`Sheet1!D15:E20\`, then the first GridData will have a
 -- startRow\/startColumn of \`0\`, while the second one will have
 -- \`startRow 14\` (zero-based row 15), and \`startColumn 3\` (zero-based
--- column D).
+-- column D). For a DATA_SOURCE sheet, you can not request a specific
+-- range, the GridData contains all the values.
 sData :: Lens' Sheet [GridData]
 sData
   = lens _sData (\ s a -> s{_sData = a}) . _Default .
@@ -1673,6 +2036,13 @@ sFilterViews
       . _Default
       . _Coerce
 
+-- | The slicers on this sheet.
+sSlicers :: Lens' Sheet [Slicer]
+sSlicers
+  = lens _sSlicers (\ s a -> s{_sSlicers = a}) .
+      _Default
+      . _Coerce
+
 -- | The properties of the sheet.
 sProperties :: Lens' Sheet (Maybe SheetProperties)
 sProperties
@@ -1694,6 +2064,7 @@ instance FromJSON Sheet where
                      <*> (o .:? "developerMetadata" .!= mempty)
                      <*> (o .:? "conditionalFormats" .!= mempty)
                      <*> (o .:? "filterViews" .!= mempty)
+                     <*> (o .:? "slicers" .!= mempty)
                      <*> (o .:? "properties"))
 
 instance ToJSON Sheet where
@@ -1710,6 +2081,7 @@ instance ToJSON Sheet where
                   ("developerMetadata" .=) <$> _sDeveloperMetadata,
                   ("conditionalFormats" .=) <$> _sConditionalFormats,
                   ("filterViews" .=) <$> _sFilterViews,
+                  ("slicers" .=) <$> _sSlicers,
                   ("properties" .=) <$> _sProperties])
 
 -- | A coordinate in a sheet. All indexes are zero-based.
@@ -1718,8 +2090,8 @@ instance ToJSON Sheet where
 data GridCoordinate =
   GridCoordinate'
     { _gcColumnIndex :: !(Maybe (Textual Int32))
-    , _gcRowIndex    :: !(Maybe (Textual Int32))
-    , _gcSheetId     :: !(Maybe (Textual Int32))
+    , _gcRowIndex :: !(Maybe (Textual Int32))
+    , _gcSheetId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1780,7 +2152,7 @@ instance ToJSON GridCoordinate where
 -- /See:/ 'clearValuesResponse' smart constructor.
 data ClearValuesResponse =
   ClearValuesResponse'
-    { _cvrClearedRange  :: !(Maybe Text)
+    { _cvrClearedRange :: !(Maybe Text)
     , _cvrSpreadsheetId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1865,6 +2237,111 @@ instance ToJSON ClearBasicFilterRequest where
           = object
               (catMaybes [("sheetId" .=) <$> _cbfrSheetId])
 
+-- | Adds a slicer to a sheet in the spreadsheet.
+--
+-- /See:/ 'addSlicerRequest' smart constructor.
+newtype AddSlicerRequest =
+  AddSlicerRequest'
+    { _asrSlicer :: Maybe Slicer
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddSlicerRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asrSlicer'
+addSlicerRequest
+    :: AddSlicerRequest
+addSlicerRequest = AddSlicerRequest' {_asrSlicer = Nothing}
+
+
+-- | The slicer that should be added to the spreadsheet, including the
+-- position where it should be placed. The slicerId field is optional; if
+-- one is not set, an id will be randomly generated. (It is an error to
+-- specify the ID of a slicer that already exists.)
+asrSlicer :: Lens' AddSlicerRequest (Maybe Slicer)
+asrSlicer
+  = lens _asrSlicer (\ s a -> s{_asrSlicer = a})
+
+instance FromJSON AddSlicerRequest where
+        parseJSON
+          = withObject "AddSlicerRequest"
+              (\ o -> AddSlicerRequest' <$> (o .:? "slicer"))
+
+instance ToJSON AddSlicerRequest where
+        toJSON AddSlicerRequest'{..}
+          = object (catMaybes [("slicer" .=) <$> _asrSlicer])
+
+-- | Allows you to organize numeric values in a source data column into
+-- buckets of constant size.
+--
+-- /See:/ 'chartHistogramRule' smart constructor.
+data ChartHistogramRule =
+  ChartHistogramRule'
+    { _chrMaxValue :: !(Maybe (Textual Double))
+    , _chrIntervalSize :: !(Maybe (Textual Double))
+    , _chrMinValue :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ChartHistogramRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'chrMaxValue'
+--
+-- * 'chrIntervalSize'
+--
+-- * 'chrMinValue'
+chartHistogramRule
+    :: ChartHistogramRule
+chartHistogramRule =
+  ChartHistogramRule'
+    {_chrMaxValue = Nothing, _chrIntervalSize = Nothing, _chrMinValue = Nothing}
+
+
+-- | The maximum value at which items are placed into buckets. Values greater
+-- than the maximum are grouped into a single bucket. If omitted, it is
+-- determined by the maximum item value.
+chrMaxValue :: Lens' ChartHistogramRule (Maybe Double)
+chrMaxValue
+  = lens _chrMaxValue (\ s a -> s{_chrMaxValue = a}) .
+      mapping _Coerce
+
+-- | The size of the buckets that are created. Must be positive.
+chrIntervalSize :: Lens' ChartHistogramRule (Maybe Double)
+chrIntervalSize
+  = lens _chrIntervalSize
+      (\ s a -> s{_chrIntervalSize = a})
+      . mapping _Coerce
+
+-- | The minimum value at which items are placed into buckets. Values that
+-- are less than the minimum are grouped into a single bucket. If omitted,
+-- it is determined by the minimum item value.
+chrMinValue :: Lens' ChartHistogramRule (Maybe Double)
+chrMinValue
+  = lens _chrMinValue (\ s a -> s{_chrMinValue = a}) .
+      mapping _Coerce
+
+instance FromJSON ChartHistogramRule where
+        parseJSON
+          = withObject "ChartHistogramRule"
+              (\ o ->
+                 ChartHistogramRule' <$>
+                   (o .:? "maxValue") <*> (o .:? "intervalSize") <*>
+                     (o .:? "minValue"))
+
+instance ToJSON ChartHistogramRule where
+        toJSON ChartHistogramRule'{..}
+          = object
+              (catMaybes
+                 [("maxValue" .=) <$> _chrMaxValue,
+                  ("intervalSize" .=) <$> _chrIntervalSize,
+                  ("minValue" .=) <$> _chrMinValue])
+
 -- | Update an embedded object\'s position (such as a moving or resizing a
 -- chart or image).
 --
@@ -1872,8 +2349,8 @@ instance ToJSON ClearBasicFilterRequest where
 data UpdateEmbeddedObjectPositionRequest =
   UpdateEmbeddedObjectPositionRequest'
     { _ueoprNewPosition :: !(Maybe EmbeddedObjectPosition)
-    , _ueoprObjectId    :: !(Maybe (Textual Int32))
-    , _ueoprFields      :: !(Maybe GFieldMask)
+    , _ueoprObjectId :: !(Maybe (Textual Int32))
+    , _ueoprFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1945,7 +2422,7 @@ instance ToJSON UpdateEmbeddedObjectPositionRequest
 -- /See:/ 'booleanRule' smart constructor.
 data BooleanRule =
   BooleanRule'
-    { _brFormat    :: !(Maybe CellFormat)
+    { _brFormat :: !(Maybe CellFormat)
     , _brCondition :: !(Maybe BooleanCondition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1989,6 +2466,65 @@ instance ToJSON BooleanRule where
                  [("format" .=) <$> _brFormat,
                   ("condition" .=) <$> _brCondition])
 
+-- | A slicer in a sheet.
+--
+-- /See:/ 'slicer' smart constructor.
+data Slicer =
+  Slicer'
+    { _sSlicerId :: !(Maybe (Textual Int32))
+    , _sSpec :: !(Maybe SlicerSpec)
+    , _sPosition :: !(Maybe EmbeddedObjectPosition)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Slicer' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sSlicerId'
+--
+-- * 'sSpec'
+--
+-- * 'sPosition'
+slicer
+    :: Slicer
+slicer = Slicer' {_sSlicerId = Nothing, _sSpec = Nothing, _sPosition = Nothing}
+
+
+-- | The ID of the slicer.
+sSlicerId :: Lens' Slicer (Maybe Int32)
+sSlicerId
+  = lens _sSlicerId (\ s a -> s{_sSlicerId = a}) .
+      mapping _Coerce
+
+-- | The specification of the slicer.
+sSpec :: Lens' Slicer (Maybe SlicerSpec)
+sSpec = lens _sSpec (\ s a -> s{_sSpec = a})
+
+-- | The position of the slicer. Note that slicer can be positioned only on
+-- existing sheet. Also, width and height of slicer can be automatically
+-- adjusted to keep it within permitted limits.
+sPosition :: Lens' Slicer (Maybe EmbeddedObjectPosition)
+sPosition
+  = lens _sPosition (\ s a -> s{_sPosition = a})
+
+instance FromJSON Slicer where
+        parseJSON
+          = withObject "Slicer"
+              (\ o ->
+                 Slicer' <$>
+                   (o .:? "slicerId") <*> (o .:? "spec") <*>
+                     (o .:? "position"))
+
+instance ToJSON Slicer where
+        toJSON Slicer'{..}
+          = object
+              (catMaybes
+                 [("slicerId" .=) <$> _sSlicerId,
+                  ("spec" .=) <$> _sSpec,
+                  ("position" .=) <$> _sPosition])
+
 -- | The response when retrieving more than one range of values in a
 -- spreadsheet selected by DataFilters.
 --
@@ -1996,7 +2532,7 @@ instance ToJSON BooleanRule where
 data BatchGetValuesByDataFilterResponse =
   BatchGetValuesByDataFilterResponse'
     { _bgvbdfrSpreadsheetId :: !(Maybe Text)
-    , _bgvbdfrValueRanges   :: !(Maybe [MatchedValueRange])
+    , _bgvbdfrValueRanges :: !(Maybe [MatchedValueRange])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2051,8 +2587,8 @@ instance ToJSON BatchGetValuesByDataFilterResponse
 -- /See:/ 'sourceAndDestination' smart constructor.
 data SourceAndDestination =
   SourceAndDestination'
-    { _sadDimension  :: !(Maybe SourceAndDestinationDimension)
-    , _sadSource     :: !(Maybe GridRange)
+    { _sadDimension :: !(Maybe SourceAndDestinationDimension)
+    , _sadSource :: !(Maybe GridRange)
     , _sadFillLength :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2115,11 +2651,11 @@ instance ToJSON SourceAndDestination where
 -- /See:/ 'pasteDataRequest' smart constructor.
 data PasteDataRequest =
   PasteDataRequest'
-    { _pdrData       :: !(Maybe Text)
+    { _pdrData :: !(Maybe Text)
     , _pdrCoordinate :: !(Maybe GridCoordinate)
-    , _pdrHTML       :: !(Maybe Bool)
-    , _pdrType       :: !(Maybe PasteDataRequestType)
-    , _pdrDelimiter  :: !(Maybe Text)
+    , _pdrHTML :: !(Maybe Bool)
+    , _pdrType :: !(Maybe PasteDataRequestType)
+    , _pdrDelimiter :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2197,9 +2733,9 @@ instance ToJSON PasteDataRequest where
 -- /See:/ 'appendCellsRequest' smart constructor.
 data AppendCellsRequest =
   AppendCellsRequest'
-    { _acrRows    :: !(Maybe [RowData])
+    { _acrRows :: !(Maybe [RowData])
     , _acrSheetId :: !(Maybe (Textual Int32))
-    , _acrFields  :: !(Maybe GFieldMask)
+    , _acrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2261,10 +2797,10 @@ instance ToJSON AppendCellsRequest where
 -- /See:/ 'findReplaceResponse' smart constructor.
 data FindReplaceResponse =
   FindReplaceResponse'
-    { _frrValuesChanged      :: !(Maybe (Textual Int32))
-    , _frrFormulasChanged    :: !(Maybe (Textual Int32))
-    , _frrRowsChanged        :: !(Maybe (Textual Int32))
-    , _frrSheetsChanged      :: !(Maybe (Textual Int32))
+    { _frrValuesChanged :: !(Maybe (Textual Int32))
+    , _frrFormulasChanged :: !(Maybe (Textual Int32))
+    , _frrRowsChanged :: !(Maybe (Textual Int32))
+    , _frrSheetsChanged :: !(Maybe (Textual Int32))
     , _frrOccurrencesChanged :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2396,15 +2932,15 @@ instance ToJSON AddDimensionGroupResponse where
               (catMaybes
                  [("dimensionGroups" .=) <$> _adgrDimensionGroups])
 
--- | A </chart/interactive/docs/gallery/piechart pie chart>.
+-- | A pie chart.
 --
 -- /See:/ 'pieChartSpec' smart constructor.
 data PieChartSpec =
   PieChartSpec'
-    { _pcsPieHole          :: !(Maybe (Textual Double))
-    , _pcsLegendPosition   :: !(Maybe PieChartSpecLegendPosition)
-    , _pcsDomain           :: !(Maybe ChartData)
-    , _pcsSeries           :: !(Maybe ChartData)
+    { _pcsPieHole :: !(Maybe (Textual Double))
+    , _pcsLegendPosition :: !(Maybe PieChartSpecLegendPosition)
+    , _pcsDomain :: !(Maybe ChartData)
+    , _pcsSeries :: !(Maybe ChartData)
     , _pcsThreeDimensional :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2489,11 +3025,11 @@ instance ToJSON PieChartSpec where
 data BatchUpdateValuesByDataFilterResponse =
   BatchUpdateValuesByDataFilterResponse'
     { _buvbdfrTotalUpdatedColumns :: !(Maybe (Textual Int32))
-    , _buvbdfrResponses           :: !(Maybe [UpdateValuesByDataFilterResponse])
-    , _buvbdfrSpreadsheetId       :: !(Maybe Text)
-    , _buvbdfrTotalUpdatedSheets  :: !(Maybe (Textual Int32))
-    , _buvbdfrTotalUpdatedCells   :: !(Maybe (Textual Int32))
-    , _buvbdfrTotalUpdatedRows    :: !(Maybe (Textual Int32))
+    , _buvbdfrResponses :: !(Maybe [UpdateValuesByDataFilterResponse])
+    , _buvbdfrSpreadsheetId :: !(Maybe Text)
+    , _buvbdfrTotalUpdatedSheets :: !(Maybe (Textual Int32))
+    , _buvbdfrTotalUpdatedCells :: !(Maybe (Textual Int32))
+    , _buvbdfrTotalUpdatedRows :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2606,8 +3142,8 @@ instance ToJSON BatchUpdateValuesByDataFilterResponse
 data AppendValuesResponse =
   AppendValuesResponse'
     { _avrSpreadsheetId :: !(Maybe Text)
-    , _avrUpdates       :: !(Maybe UpdateValuesResponse)
-    , _avrTableRange    :: !(Maybe Text)
+    , _avrUpdates :: !(Maybe UpdateValuesResponse)
+    , _avrTableRange :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2672,8 +3208,8 @@ data DataValidationRule =
   DataValidationRule'
     { _dvrShowCustomUi :: !(Maybe Bool)
     , _dvrInputMessage :: !(Maybe Text)
-    , _dvrStrict       :: !(Maybe Bool)
-    , _dvrCondition    :: !(Maybe BooleanCondition)
+    , _dvrStrict :: !(Maybe Bool)
+    , _dvrCondition :: !(Maybe BooleanCondition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2746,12 +3282,13 @@ instance ToJSON DataValidationRule where
 -- /See:/ 'filterView' smart constructor.
 data FilterView =
   FilterView'
-    { _fvSortSpecs    :: !(Maybe [SortSpec])
+    { _fvSortSpecs :: !(Maybe [SortSpec])
     , _fvNamedRangeId :: !(Maybe Text)
-    , _fvRange        :: !(Maybe GridRange)
+    , _fvRange :: !(Maybe GridRange)
     , _fvFilterViewId :: !(Maybe (Textual Int32))
-    , _fvTitle        :: !(Maybe Text)
-    , _fvCriteria     :: !(Maybe FilterViewCriteria)
+    , _fvTitle :: !(Maybe Text)
+    , _fvCriteria :: !(Maybe FilterViewCriteria)
+    , _fvFilterSpecs :: !(Maybe [FilterSpec])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2771,6 +3308,8 @@ data FilterView =
 -- * 'fvTitle'
 --
 -- * 'fvCriteria'
+--
+-- * 'fvFilterSpecs'
 filterView
     :: FilterView
 filterView =
@@ -2781,6 +3320,7 @@ filterView =
     , _fvFilterViewId = Nothing
     , _fvTitle = Nothing
     , _fvCriteria = Nothing
+    , _fvFilterSpecs = Nothing
     }
 
 
@@ -2816,10 +3356,21 @@ fvTitle :: Lens' FilterView (Maybe Text)
 fvTitle = lens _fvTitle (\ s a -> s{_fvTitle = a})
 
 -- | The criteria for showing\/hiding values per column. The map\'s key is
--- the column index, and the value is the criteria for that column.
+-- the column index, and the value is the criteria for that column. This
+-- field is deprecated in favor of filter_specs.
 fvCriteria :: Lens' FilterView (Maybe FilterViewCriteria)
 fvCriteria
   = lens _fvCriteria (\ s a -> s{_fvCriteria = a})
+
+-- | The filter criteria for showing\/hiding values per column. Both criteria
+-- and filter_specs are populated in responses. If both fields are
+-- specified in an update request, this field takes precedence.
+fvFilterSpecs :: Lens' FilterView [FilterSpec]
+fvFilterSpecs
+  = lens _fvFilterSpecs
+      (\ s a -> s{_fvFilterSpecs = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON FilterView where
         parseJSON
@@ -2831,7 +3382,8 @@ instance FromJSON FilterView where
                      <*> (o .:? "range")
                      <*> (o .:? "filterViewId")
                      <*> (o .:? "title")
-                     <*> (o .:? "criteria"))
+                     <*> (o .:? "criteria")
+                     <*> (o .:? "filterSpecs" .!= mempty))
 
 instance ToJSON FilterView where
         toJSON FilterView'{..}
@@ -2842,30 +3394,136 @@ instance ToJSON FilterView where
                   ("range" .=) <$> _fvRange,
                   ("filterViewId" .=) <$> _fvFilterViewId,
                   ("title" .=) <$> _fvTitle,
-                  ("criteria" .=) <$> _fvCriteria])
+                  ("criteria" .=) <$> _fvCriteria,
+                  ("filterSpecs" .=) <$> _fvFilterSpecs])
+
+-- | Schedule for refreshing the data source. Data sources in the spreadsheet
+-- are refreshed within a time interval. You can specify the start time by
+-- clicking the Scheduled Refresh button in the Sheets editor, but the
+-- interval is fixed at 4 hours. For example, if you specify a start time
+-- of 8am , the refresh will take place between 8am and 12pm every day.
+--
+-- /See:/ 'dataSourceRefreshSchedule' smart constructor.
+data DataSourceRefreshSchedule =
+  DataSourceRefreshSchedule'
+    { _dsrsDailySchedule :: !(Maybe DataSourceRefreshDailySchedule)
+    , _dsrsRefreshScope :: !(Maybe DataSourceRefreshScheduleRefreshScope)
+    , _dsrsEnabled :: !(Maybe Bool)
+    , _dsrsMonthlySchedule :: !(Maybe DataSourceRefreshMonthlySchedule)
+    , _dsrsNextRun :: !(Maybe Interval)
+    , _dsrsWeeklySchedule :: !(Maybe DataSourceRefreshWeeklySchedule)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceRefreshSchedule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsrsDailySchedule'
+--
+-- * 'dsrsRefreshScope'
+--
+-- * 'dsrsEnabled'
+--
+-- * 'dsrsMonthlySchedule'
+--
+-- * 'dsrsNextRun'
+--
+-- * 'dsrsWeeklySchedule'
+dataSourceRefreshSchedule
+    :: DataSourceRefreshSchedule
+dataSourceRefreshSchedule =
+  DataSourceRefreshSchedule'
+    { _dsrsDailySchedule = Nothing
+    , _dsrsRefreshScope = Nothing
+    , _dsrsEnabled = Nothing
+    , _dsrsMonthlySchedule = Nothing
+    , _dsrsNextRun = Nothing
+    , _dsrsWeeklySchedule = Nothing
+    }
+
+
+-- | Daily refresh schedule.
+dsrsDailySchedule :: Lens' DataSourceRefreshSchedule (Maybe DataSourceRefreshDailySchedule)
+dsrsDailySchedule
+  = lens _dsrsDailySchedule
+      (\ s a -> s{_dsrsDailySchedule = a})
+
+-- | The scope of the refresh. Must be ALL_DATA_SOURCES.
+dsrsRefreshScope :: Lens' DataSourceRefreshSchedule (Maybe DataSourceRefreshScheduleRefreshScope)
+dsrsRefreshScope
+  = lens _dsrsRefreshScope
+      (\ s a -> s{_dsrsRefreshScope = a})
+
+-- | True if the refresh schedule is enabled, or false otherwise.
+dsrsEnabled :: Lens' DataSourceRefreshSchedule (Maybe Bool)
+dsrsEnabled
+  = lens _dsrsEnabled (\ s a -> s{_dsrsEnabled = a})
+
+-- | Monthly refresh schedule.
+dsrsMonthlySchedule :: Lens' DataSourceRefreshSchedule (Maybe DataSourceRefreshMonthlySchedule)
+dsrsMonthlySchedule
+  = lens _dsrsMonthlySchedule
+      (\ s a -> s{_dsrsMonthlySchedule = a})
+
+-- | Output only. The time interval of the next run.
+dsrsNextRun :: Lens' DataSourceRefreshSchedule (Maybe Interval)
+dsrsNextRun
+  = lens _dsrsNextRun (\ s a -> s{_dsrsNextRun = a})
+
+-- | Weekly refresh schedule.
+dsrsWeeklySchedule :: Lens' DataSourceRefreshSchedule (Maybe DataSourceRefreshWeeklySchedule)
+dsrsWeeklySchedule
+  = lens _dsrsWeeklySchedule
+      (\ s a -> s{_dsrsWeeklySchedule = a})
+
+instance FromJSON DataSourceRefreshSchedule where
+        parseJSON
+          = withObject "DataSourceRefreshSchedule"
+              (\ o ->
+                 DataSourceRefreshSchedule' <$>
+                   (o .:? "dailySchedule") <*> (o .:? "refreshScope")
+                     <*> (o .:? "enabled")
+                     <*> (o .:? "monthlySchedule")
+                     <*> (o .:? "nextRun")
+                     <*> (o .:? "weeklySchedule"))
+
+instance ToJSON DataSourceRefreshSchedule where
+        toJSON DataSourceRefreshSchedule'{..}
+          = object
+              (catMaybes
+                 [("dailySchedule" .=) <$> _dsrsDailySchedule,
+                  ("refreshScope" .=) <$> _dsrsRefreshScope,
+                  ("enabled" .=) <$> _dsrsEnabled,
+                  ("monthlySchedule" .=) <$> _dsrsMonthlySchedule,
+                  ("nextRun" .=) <$> _dsrsNextRun,
+                  ("weeklySchedule" .=) <$> _dsrsWeeklySchedule])
 
 -- | Represents a color in the RGBA color space. This representation is
 -- designed for simplicity of conversion to\/from color representations in
--- various languages over compactness; for example, the fields of this
+-- various languages over compactness. For example, the fields of this
 -- representation can be trivially provided to the constructor of
--- \"java.awt.Color\" in Java; it can also be trivially provided to
--- UIColor\'s \"+colorWithRed:green:blue:alpha\" method in iOS; and, with
--- just a little work, it can be easily formatted into a CSS \"rgba()\"
--- string in JavaScript, as well. Note: this proto does not carry
--- information about the absolute color space that should be used to
--- interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.).
--- By default, applications SHOULD assume the sRGB color space. Example
--- (Java): import com.google.type.Color; \/\/ ... public static
--- java.awt.Color fromProto(Color protocolor) { float alpha =
--- protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return
--- new java.awt.Color( protocolor.getRed(), protocolor.getGreen(),
--- protocolor.getBlue(), alpha); } public static Color
--- toProto(java.awt.Color color) { float red = (float) color.getRed();
--- float green = (float) color.getGreen(); float blue = (float)
--- color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder
--- = Color .newBuilder() .setRed(red \/ denominator) .setGreen(green \/
--- denominator) .setBlue(blue \/ denominator); int alpha =
--- color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue
+-- \`java.awt.Color\` in Java; it can also be trivially provided to
+-- UIColor\'s \`+colorWithRed:green:blue:alpha\` method in iOS; and, with
+-- just a little work, it can be easily formatted into a CSS \`rgba()\`
+-- string in JavaScript. This reference page doesn\'t carry information
+-- about the absolute color space that should be used to interpret the RGB
+-- value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default,
+-- applications should assume the sRGB color space. When color equality
+-- needs to be decided, implementations, unless documented otherwise, treat
+-- two colors as equal if all their red, green, blue, and alpha values each
+-- differ by at most 1e-5. Example (Java): import com.google.type.Color;
+-- \/\/ ... public static java.awt.Color fromProto(Color protocolor) {
+-- float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() :
+-- 1.0; return new java.awt.Color( protocolor.getRed(),
+-- protocolor.getGreen(), protocolor.getBlue(), alpha); } public static
+-- Color toProto(java.awt.Color color) { float red = (float)
+-- color.getRed(); float green = (float) color.getGreen(); float blue =
+-- (float) color.getBlue(); float denominator = 255.0; Color.Builder
+-- resultBuilder = Color .newBuilder() .setRed(red \/ denominator)
+-- .setGreen(green \/ denominator) .setBlue(blue \/ denominator); int alpha
+-- = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue
 -- .newBuilder() .setValue(((float) alpha) \/ denominator) .build()); }
 -- return resultBuilder.build(); } \/\/ ... Example (iOS \/ Obj-C): \/\/
 -- ... static UIColor* fromProto(Color* protocolor) { float red =
@@ -2883,10 +3541,10 @@ instance ToJSON FilterView where
 -- 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac =
 -- rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green =
 -- Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if
--- (!(\'alpha\' in rgb_color)) { return rgbToCssColor_(red, green, blue); }
+-- (!(\'alpha\' in rgb_color)) { return rgbToCssColor(red, green, blue); }
 -- var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red,
 -- green, blue].join(\',\'); return [\'rgba(\', rgbParams, \',\',
--- alphaFrac, \')\'].join(\'\'); }; var rgbToCssColor_ = function(red,
+-- alphaFrac, \')\'].join(\'\'); }; var rgbToCssColor = function(red,
 -- green, blue) { var rgbNumber = new Number((red \<\< 16) | (green \<\< 8)
 -- | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 -
 -- hexString.length; var resultBuilder = [\'#\']; for (var i = 0; i \<
@@ -2897,10 +3555,10 @@ instance ToJSON FilterView where
 -- /See:/ 'color' smart constructor.
 data Color =
   Color'
-    { _cRed   :: !(Maybe (Textual Double))
+    { _cRed :: !(Maybe (Textual Double))
     , _cAlpha :: !(Maybe (Textual Double))
     , _cGreen :: !(Maybe (Textual Double))
-    , _cBlue  :: !(Maybe (Textual Double))
+    , _cBlue :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2930,14 +3588,14 @@ cRed
       mapping _Coerce
 
 -- | The fraction of this color that should be applied to the pixel. That is,
--- the final pixel color is defined by the equation: pixel color = alpha *
--- (this color) + (1.0 - alpha) * (background color) This means that a
+-- the final pixel color is defined by the equation: \`pixel color = alpha
+-- * (this color) + (1.0 - alpha) * (background color)\` This means that a
 -- value of 1.0 corresponds to a solid color, whereas a value of 0.0
 -- corresponds to a completely transparent color. This uses a wrapper
 -- message rather than a simple float scalar so that it is possible to
 -- distinguish between a default value and the value being unset. If
--- omitted, this color object is to be rendered as a solid color (as if the
--- alpha value had been explicitly given with a value of 1.0).
+-- omitted, this color object is rendered as a solid color (as if the alpha
+-- value had been explicitly given a value of 1.0).
 cAlpha :: Lens' Color (Maybe Double)
 cAlpha
   = lens _cAlpha (\ s a -> s{_cAlpha = a}) .
@@ -2969,6 +3627,46 @@ instance ToJSON Color where
               (catMaybes
                  [("red" .=) <$> _cRed, ("alpha" .=) <$> _cAlpha,
                   ("green" .=) <$> _cGreen, ("blue" .=) <$> _cBlue])
+
+-- | Adds a data source. After the data source is added successfully, an
+-- associated DATA_SOURCE sheet is created and an execution is triggered to
+-- refresh the sheet to read data from the data source. The request
+-- requires an additional \`bigquery.readonly\` OAuth scope.
+--
+-- /See:/ 'addDataSourceRequest' smart constructor.
+newtype AddDataSourceRequest =
+  AddDataSourceRequest'
+    { _adsrDataSource :: Maybe DataSource
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddDataSourceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'adsrDataSource'
+addDataSourceRequest
+    :: AddDataSourceRequest
+addDataSourceRequest = AddDataSourceRequest' {_adsrDataSource = Nothing}
+
+
+-- | The data source to add.
+adsrDataSource :: Lens' AddDataSourceRequest (Maybe DataSource)
+adsrDataSource
+  = lens _adsrDataSource
+      (\ s a -> s{_adsrDataSource = a})
+
+instance FromJSON AddDataSourceRequest where
+        parseJSON
+          = withObject "AddDataSourceRequest"
+              (\ o ->
+                 AddDataSourceRequest' <$> (o .:? "dataSource"))
+
+instance ToJSON AddDataSourceRequest where
+        toJSON AddDataSourceRequest'{..}
+          = object
+              (catMaybes [("dataSource" .=) <$> _adsrDataSource])
 
 -- | Deletes a particular filter view.
 --
@@ -3065,10 +3763,14 @@ instance ToJSON UpdateFilterViewRequest where
 data BasicChartSeries =
   BasicChartSeries'
     { _bTargetAxis :: !(Maybe BasicChartSeriesTargetAxis)
-    , _bColor      :: !(Maybe Color)
-    , _bSeries     :: !(Maybe ChartData)
-    , _bType       :: !(Maybe BasicChartSeriesType)
-    , _bLineStyle  :: !(Maybe LineStyle)
+    , _bColor :: !(Maybe Color)
+    , _bSeries :: !(Maybe ChartData)
+    , _bColorStyle :: !(Maybe ColorStyle)
+    , _bStyleOverrides :: !(Maybe [BasicSeriesDataPointStyleOverride])
+    , _bType :: !(Maybe BasicChartSeriesType)
+    , _bPointStyle :: !(Maybe PointStyle)
+    , _bDataLabel :: !(Maybe DataLabel)
+    , _bLineStyle :: !(Maybe LineStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3083,7 +3785,15 @@ data BasicChartSeries =
 --
 -- * 'bSeries'
 --
+-- * 'bColorStyle'
+--
+-- * 'bStyleOverrides'
+--
 -- * 'bType'
+--
+-- * 'bPointStyle'
+--
+-- * 'bDataLabel'
 --
 -- * 'bLineStyle'
 basicChartSeries
@@ -3093,7 +3803,11 @@ basicChartSeries =
     { _bTargetAxis = Nothing
     , _bColor = Nothing
     , _bSeries = Nothing
+    , _bColorStyle = Nothing
+    , _bStyleOverrides = Nothing
     , _bType = Nothing
+    , _bPointStyle = Nothing
+    , _bDataLabel = Nothing
     , _bLineStyle = Nothing
     }
 
@@ -3108,8 +3822,8 @@ bTargetAxis :: Lens' BasicChartSeries (Maybe BasicChartSeriesTargetAxis)
 bTargetAxis
   = lens _bTargetAxis (\ s a -> s{_bTargetAxis = a})
 
--- | The color for elements (i.e. bars, lines, points) associated with this
--- series. If empty, a default color is used.
+-- | The color for elements (such as bars, lines, and points) associated with
+-- this series. If empty, a default color is used.
 bColor :: Lens' BasicChartSeries (Maybe Color)
 bColor = lens _bColor (\ s a -> s{_bColor = a})
 
@@ -3117,11 +3831,39 @@ bColor = lens _bColor (\ s a -> s{_bColor = a})
 bSeries :: Lens' BasicChartSeries (Maybe ChartData)
 bSeries = lens _bSeries (\ s a -> s{_bSeries = a})
 
+-- | The color for elements (such as bars, lines, and points) associated with
+-- this series. If empty, a default color is used. If color is also set,
+-- this field takes precedence.
+bColorStyle :: Lens' BasicChartSeries (Maybe ColorStyle)
+bColorStyle
+  = lens _bColorStyle (\ s a -> s{_bColorStyle = a})
+
+-- | Style override settings for series data points.
+bStyleOverrides :: Lens' BasicChartSeries [BasicSeriesDataPointStyleOverride]
+bStyleOverrides
+  = lens _bStyleOverrides
+      (\ s a -> s{_bStyleOverrides = a})
+      . _Default
+      . _Coerce
+
 -- | The type of this series. Valid only if the chartType is COMBO. Different
 -- types will change the way the series is visualized. Only LINE, AREA, and
 -- COLUMN are supported.
 bType :: Lens' BasicChartSeries (Maybe BasicChartSeriesType)
 bType = lens _bType (\ s a -> s{_bType = a})
+
+-- | The style for points associated with this series. Valid only if the
+-- chartType is AREA, LINE, or SCATTER. COMBO charts are also supported if
+-- the series chart type is AREA, LINE, or SCATTER. If empty, a default
+-- point style is used.
+bPointStyle :: Lens' BasicChartSeries (Maybe PointStyle)
+bPointStyle
+  = lens _bPointStyle (\ s a -> s{_bPointStyle = a})
+
+-- | Information about the data labels for this series.
+bDataLabel :: Lens' BasicChartSeries (Maybe DataLabel)
+bDataLabel
+  = lens _bDataLabel (\ s a -> s{_bDataLabel = a})
 
 -- | The line style of this series. Valid only if the chartType is AREA,
 -- LINE, or SCATTER. COMBO charts are also supported if the series chart
@@ -3137,7 +3879,11 @@ instance FromJSON BasicChartSeries where
                  BasicChartSeries' <$>
                    (o .:? "targetAxis") <*> (o .:? "color") <*>
                      (o .:? "series")
+                     <*> (o .:? "colorStyle")
+                     <*> (o .:? "styleOverrides" .!= mempty)
                      <*> (o .:? "type")
+                     <*> (o .:? "pointStyle")
+                     <*> (o .:? "dataLabel")
                      <*> (o .:? "lineStyle"))
 
 instance ToJSON BasicChartSeries where
@@ -3146,8 +3892,80 @@ instance ToJSON BasicChartSeries where
               (catMaybes
                  [("targetAxis" .=) <$> _bTargetAxis,
                   ("color" .=) <$> _bColor, ("series" .=) <$> _bSeries,
+                  ("colorStyle" .=) <$> _bColorStyle,
+                  ("styleOverrides" .=) <$> _bStyleOverrides,
                   ("type" .=) <$> _bType,
+                  ("pointStyle" .=) <$> _bPointStyle,
+                  ("dataLabel" .=) <$> _bDataLabel,
                   ("lineStyle" .=) <$> _bLineStyle])
+
+-- | The filter criteria associated with a specific column.
+--
+-- /See:/ 'filterSpec' smart constructor.
+data FilterSpec =
+  FilterSpec'
+    { _fsDataSourceColumnReference :: !(Maybe DataSourceColumnReference)
+    , _fsColumnIndex :: !(Maybe (Textual Int32))
+    , _fsFilterCriteria :: !(Maybe FilterCriteria)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FilterSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fsDataSourceColumnReference'
+--
+-- * 'fsColumnIndex'
+--
+-- * 'fsFilterCriteria'
+filterSpec
+    :: FilterSpec
+filterSpec =
+  FilterSpec'
+    { _fsDataSourceColumnReference = Nothing
+    , _fsColumnIndex = Nothing
+    , _fsFilterCriteria = Nothing
+    }
+
+
+-- | Reference to a data source column.
+fsDataSourceColumnReference :: Lens' FilterSpec (Maybe DataSourceColumnReference)
+fsDataSourceColumnReference
+  = lens _fsDataSourceColumnReference
+      (\ s a -> s{_fsDataSourceColumnReference = a})
+
+-- | The column index.
+fsColumnIndex :: Lens' FilterSpec (Maybe Int32)
+fsColumnIndex
+  = lens _fsColumnIndex
+      (\ s a -> s{_fsColumnIndex = a})
+      . mapping _Coerce
+
+-- | The criteria for the column.
+fsFilterCriteria :: Lens' FilterSpec (Maybe FilterCriteria)
+fsFilterCriteria
+  = lens _fsFilterCriteria
+      (\ s a -> s{_fsFilterCriteria = a})
+
+instance FromJSON FilterSpec where
+        parseJSON
+          = withObject "FilterSpec"
+              (\ o ->
+                 FilterSpec' <$>
+                   (o .:? "dataSourceColumnReference") <*>
+                     (o .:? "columnIndex")
+                     <*> (o .:? "filterCriteria"))
+
+instance ToJSON FilterSpec where
+        toJSON FilterSpec'{..}
+          = object
+              (catMaybes
+                 [("dataSourceColumnReference" .=) <$>
+                    _fsDataSourceColumnReference,
+                  ("columnIndex" .=) <$> _fsColumnIndex,
+                  ("filterCriteria" .=) <$> _fsFilterCriteria])
 
 -- | An optional setting on a PivotGroup that defines buckets for the values
 -- in the source data column rather than breaking out each individual
@@ -3158,8 +3976,8 @@ instance ToJSON BasicChartSeries where
 -- /See:/ 'pivotGroupRule' smart constructor.
 data PivotGroupRule =
   PivotGroupRule'
-    { _pgrDateTimeRule  :: !(Maybe DateTimeRule)
-    , _pgrManualRule    :: !(Maybe ManualRule)
+    { _pgrDateTimeRule :: !(Maybe DateTimeRule)
+    , _pgrManualRule :: !(Maybe ManualRule)
     , _pgrHistogramRule :: !(Maybe HistogramRule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3273,8 +4091,8 @@ instance ToJSON AddProtectedRangeRequest where
 -- /See:/ 'repeatCellRequest' smart constructor.
 data RepeatCellRequest =
   RepeatCellRequest'
-    { _rcrCell   :: !(Maybe CellData)
-    , _rcrRange  :: !(Maybe GridRange)
+    { _rcrCell :: !(Maybe CellData)
+    , _rcrRange :: !(Maybe GridRange)
     , _rcrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3332,7 +4150,7 @@ instance ToJSON RepeatCellRequest where
 -- /See:/ 'conditionValue' smart constructor.
 data ConditionValue =
   ConditionValue'
-    { _cvRelativeDate     :: !(Maybe ConditionValueRelativeDate)
+    { _cvRelativeDate :: !(Maybe ConditionValueRelativeDate)
     , _cvUserEnteredValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3444,15 +4262,15 @@ instance ToJSON ClearValuesRequest where
 -- /See:/ 'findReplaceRequest' smart constructor.
 data FindReplaceRequest =
   FindReplaceRequest'
-    { _frrMatchCase       :: !(Maybe Bool)
-    , _frrAllSheets       :: !(Maybe Bool)
+    { _frrMatchCase :: !(Maybe Bool)
+    , _frrAllSheets :: !(Maybe Bool)
     , _frrIncludeFormulas :: !(Maybe Bool)
     , _frrMatchEntireCell :: !(Maybe Bool)
-    , _frrRange           :: !(Maybe GridRange)
-    , _frrSheetId         :: !(Maybe (Textual Int32))
-    , _frrFind            :: !(Maybe Text)
-    , _frrSearchByRegex   :: !(Maybe Bool)
-    , _frrReplacement     :: !(Maybe Text)
+    , _frrRange :: !(Maybe GridRange)
+    , _frrSheetId :: !(Maybe (Textual Int32))
+    , _frrFind :: !(Maybe Text)
+    , _frrSearchByRegex :: !(Maybe Bool)
+    , _frrReplacement :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3578,13 +4396,73 @@ instance ToJSON FindReplaceRequest where
                   ("searchByRegex" .=) <$> _frrSearchByRegex,
                   ("replacement" .=) <$> _frrReplacement])
 
+-- | A monthly schedule for data to refresh on specific days in the month in
+-- a given time interval.
+--
+-- /See:/ 'dataSourceRefreshMonthlySchedule' smart constructor.
+data DataSourceRefreshMonthlySchedule =
+  DataSourceRefreshMonthlySchedule'
+    { _dsrmsStartTime :: !(Maybe TimeOfDay')
+    , _dsrmsDaysOfMonth :: !(Maybe [Textual Int32])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceRefreshMonthlySchedule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsrmsStartTime'
+--
+-- * 'dsrmsDaysOfMonth'
+dataSourceRefreshMonthlySchedule
+    :: DataSourceRefreshMonthlySchedule
+dataSourceRefreshMonthlySchedule =
+  DataSourceRefreshMonthlySchedule'
+    {_dsrmsStartTime = Nothing, _dsrmsDaysOfMonth = Nothing}
+
+
+-- | The start time of a time interval in which a data source refresh is
+-- scheduled. Only \`hours\` part is used. The time interval size defaults
+-- to that in the Sheets editor.
+dsrmsStartTime :: Lens' DataSourceRefreshMonthlySchedule (Maybe TimeOfDay')
+dsrmsStartTime
+  = lens _dsrmsStartTime
+      (\ s a -> s{_dsrmsStartTime = a})
+
+-- | Days of the month to refresh. Only 1-28 are supported, mapping to the
+-- 1st to the 28th day. At lesat one day must be specified.
+dsrmsDaysOfMonth :: Lens' DataSourceRefreshMonthlySchedule [Int32]
+dsrmsDaysOfMonth
+  = lens _dsrmsDaysOfMonth
+      (\ s a -> s{_dsrmsDaysOfMonth = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DataSourceRefreshMonthlySchedule
+         where
+        parseJSON
+          = withObject "DataSourceRefreshMonthlySchedule"
+              (\ o ->
+                 DataSourceRefreshMonthlySchedule' <$>
+                   (o .:? "startTime") <*>
+                     (o .:? "daysOfMonth" .!= mempty))
+
+instance ToJSON DataSourceRefreshMonthlySchedule
+         where
+        toJSON DataSourceRefreshMonthlySchedule'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _dsrmsStartTime,
+                  ("daysOfMonth" .=) <$> _dsrmsDaysOfMonth])
+
 -- | Moves one or more rows or columns.
 --
 -- /See:/ 'moveDimensionRequest' smart constructor.
 data MoveDimensionRequest =
   MoveDimensionRequest'
     { _mdrDestinationIndex :: !(Maybe (Textual Int32))
-    , _mdrSource           :: !(Maybe DimensionRange)
+    , _mdrSource :: !(Maybe DimensionRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3643,10 +4521,10 @@ instance ToJSON MoveDimensionRequest where
 -- /See:/ 'batchGetValuesByDataFilterRequest' smart constructor.
 data BatchGetValuesByDataFilterRequest =
   BatchGetValuesByDataFilterRequest'
-    { _bgvbdfrValueRenderOption    :: !(Maybe BatchGetValuesByDataFilterRequestValueRenderOption)
-    , _bgvbdfrDataFilters          :: !(Maybe [DataFilter])
+    { _bgvbdfrValueRenderOption :: !(Maybe BatchGetValuesByDataFilterRequestValueRenderOption)
+    , _bgvbdfrDataFilters :: !(Maybe [DataFilter])
     , _bgvbdfrDateTimeRenderOption :: !(Maybe BatchGetValuesByDataFilterRequestDateTimeRenderOption)
-    , _bgvbdfrMajorDimension       :: !(Maybe BatchGetValuesByDataFilterRequestMajorDimension)
+    , _bgvbdfrMajorDimension :: !(Maybe BatchGetValuesByDataFilterRequestMajorDimension)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3674,14 +4552,14 @@ batchGetValuesByDataFilterRequest =
 
 
 -- | How values should be represented in the output. The default render
--- option is ValueRenderOption.FORMATTED_VALUE.
+-- option is FORMATTED_VALUE.
 bgvbdfrValueRenderOption :: Lens' BatchGetValuesByDataFilterRequest (Maybe BatchGetValuesByDataFilterRequestValueRenderOption)
 bgvbdfrValueRenderOption
   = lens _bgvbdfrValueRenderOption
       (\ s a -> s{_bgvbdfrValueRenderOption = a})
 
 -- | The data filters used to match the ranges of values to retrieve. Ranges
--- that match any of the specified data filters will be included in the
+-- that match any of the specified data filters are included in the
 -- response.
 bgvbdfrDataFilters :: Lens' BatchGetValuesByDataFilterRequest [DataFilter]
 bgvbdfrDataFilters
@@ -3692,7 +4570,7 @@ bgvbdfrDataFilters
 
 -- | How dates, times, and durations should be represented in the output.
 -- This is ignored if value_render_option is FORMATTED_VALUE. The default
--- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+-- dateTime render option is SERIAL_NUMBER.
 bgvbdfrDateTimeRenderOption :: Lens' BatchGetValuesByDataFilterRequest (Maybe BatchGetValuesByDataFilterRequestDateTimeRenderOption)
 bgvbdfrDateTimeRenderOption
   = lens _bgvbdfrDateTimeRenderOption
@@ -3700,9 +4578,9 @@ bgvbdfrDateTimeRenderOption
 
 -- | The major dimension that results should use. For example, if the
 -- spreadsheet data is: \`A1=1,B1=2,A2=3,B2=4\`, then a request that
--- selects that range and sets \`majorDimension=ROWS\` will return
+-- selects that range and sets \`majorDimension=ROWS\` returns
 -- \`[[1,2],[3,4]]\`, whereas a request that sets
--- \`majorDimension=COLUMNS\` will return \`[[1,3],[2,4]]\`.
+-- \`majorDimension=COLUMNS\` returns \`[[1,3],[2,4]]\`.
 bgvbdfrMajorDimension :: Lens' BatchGetValuesByDataFilterRequest (Maybe BatchGetValuesByDataFilterRequestMajorDimension)
 bgvbdfrMajorDimension
   = lens _bgvbdfrMajorDimension
@@ -3730,6 +4608,126 @@ instance ToJSON BatchGetValuesByDataFilterRequest
                   ("dateTimeRenderOption" .=) <$>
                     _bgvbdfrDateTimeRenderOption,
                   ("majorDimension" .=) <$> _bgvbdfrMajorDimension])
+
+-- | This specifies the details of the data source. For example, for
+-- BigQuery, this specifies information about the BigQuery source.
+--
+-- /See:/ 'dataSourceSpec' smart constructor.
+data DataSourceSpec =
+  DataSourceSpec'
+    { _dssParameters :: !(Maybe [DataSourceParameter])
+    , _dssBigQuery :: !(Maybe BigQueryDataSourceSpec)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dssParameters'
+--
+-- * 'dssBigQuery'
+dataSourceSpec
+    :: DataSourceSpec
+dataSourceSpec =
+  DataSourceSpec' {_dssParameters = Nothing, _dssBigQuery = Nothing}
+
+
+-- | The parameters of the data source, used when querying the data source.
+dssParameters :: Lens' DataSourceSpec [DataSourceParameter]
+dssParameters
+  = lens _dssParameters
+      (\ s a -> s{_dssParameters = a})
+      . _Default
+      . _Coerce
+
+-- | A BigQueryDataSourceSpec.
+dssBigQuery :: Lens' DataSourceSpec (Maybe BigQueryDataSourceSpec)
+dssBigQuery
+  = lens _dssBigQuery (\ s a -> s{_dssBigQuery = a})
+
+instance FromJSON DataSourceSpec where
+        parseJSON
+          = withObject "DataSourceSpec"
+              (\ o ->
+                 DataSourceSpec' <$>
+                   (o .:? "parameters" .!= mempty) <*>
+                     (o .:? "bigQuery"))
+
+instance ToJSON DataSourceSpec where
+        toJSON DataSourceSpec'{..}
+          = object
+              (catMaybes
+                 [("parameters" .=) <$> _dssParameters,
+                  ("bigQuery" .=) <$> _dssBigQuery])
+
+-- | An external or local reference.
+--
+-- /See:/ 'link' smart constructor.
+newtype Link =
+  Link'
+    { _lURI :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Link' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lURI'
+link
+    :: Link
+link = Link' {_lURI = Nothing}
+
+
+-- | The link identifier.
+lURI :: Lens' Link (Maybe Text)
+lURI = lens _lURI (\ s a -> s{_lURI = a})
+
+instance FromJSON Link where
+        parseJSON
+          = withObject "Link" (\ o -> Link' <$> (o .:? "uri"))
+
+instance ToJSON Link where
+        toJSON Link'{..}
+          = object (catMaybes [("uri" .=) <$> _lURI])
+
+-- | An unique identifier that references a data source column.
+--
+-- /See:/ 'dataSourceColumnReference' smart constructor.
+newtype DataSourceColumnReference =
+  DataSourceColumnReference'
+    { _dscrName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceColumnReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dscrName'
+dataSourceColumnReference
+    :: DataSourceColumnReference
+dataSourceColumnReference = DataSourceColumnReference' {_dscrName = Nothing}
+
+
+-- | The display name of the column. It should be unique within a data
+-- source.
+dscrName :: Lens' DataSourceColumnReference (Maybe Text)
+dscrName = lens _dscrName (\ s a -> s{_dscrName = a})
+
+instance FromJSON DataSourceColumnReference where
+        parseJSON
+          = withObject "DataSourceColumnReference"
+              (\ o ->
+                 DataSourceColumnReference' <$> (o .:? "name"))
+
+instance ToJSON DataSourceColumnReference where
+        toJSON DataSourceColumnReference'{..}
+          = object (catMaybes [("name" .=) <$> _dscrName])
 
 -- | A rule that applies a gradient color scale format, based on the
 -- interpolation points listed. The format of a cell will vary based on its
@@ -3792,14 +4790,55 @@ instance ToJSON GradientRule where
                   ("maxpoint" .=) <$> _grMaxpoint,
                   ("minpoint" .=) <$> _grMinpoint])
 
+-- | A list of references to data source objects.
+--
+-- /See:/ 'dataSourceObjectReferences' smart constructor.
+newtype DataSourceObjectReferences =
+  DataSourceObjectReferences'
+    { _dsorReferences :: Maybe [DataSourceObjectReference]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceObjectReferences' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsorReferences'
+dataSourceObjectReferences
+    :: DataSourceObjectReferences
+dataSourceObjectReferences =
+  DataSourceObjectReferences' {_dsorReferences = Nothing}
+
+
+-- | The references.
+dsorReferences :: Lens' DataSourceObjectReferences [DataSourceObjectReference]
+dsorReferences
+  = lens _dsorReferences
+      (\ s a -> s{_dsorReferences = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DataSourceObjectReferences where
+        parseJSON
+          = withObject "DataSourceObjectReferences"
+              (\ o ->
+                 DataSourceObjectReferences' <$>
+                   (o .:? "references" .!= mempty))
+
+instance ToJSON DataSourceObjectReferences where
+        toJSON DataSourceObjectReferences'{..}
+          = object
+              (catMaybes [("references" .=) <$> _dsorReferences])
+
 -- | Moves data from the source to the destination.
 --
 -- /See:/ 'cutPasteRequest' smart constructor.
 data CutPasteRequest =
   CutPasteRequest'
     { _cDestination :: !(Maybe GridCoordinate)
-    , _cSource      :: !(Maybe GridRange)
-    , _cPasteType   :: !(Maybe CutPasteRequestPasteType)
+    , _cSource :: !(Maybe GridRange)
+    , _cPasteType :: !(Maybe CutPasteRequestPasteType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3893,14 +4932,47 @@ instance ToJSON UpdateEmbeddedObjectPositionResponse
           = object
               (catMaybes [("position" .=) <$> _ueoprPosition])
 
+-- | The result of adding a slicer to a spreadsheet.
+--
+-- /See:/ 'addSlicerResponse' smart constructor.
+newtype AddSlicerResponse =
+  AddSlicerResponse'
+    { _aSlicer :: Maybe Slicer
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddSlicerResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aSlicer'
+addSlicerResponse
+    :: AddSlicerResponse
+addSlicerResponse = AddSlicerResponse' {_aSlicer = Nothing}
+
+
+-- | The newly added slicer.
+aSlicer :: Lens' AddSlicerResponse (Maybe Slicer)
+aSlicer = lens _aSlicer (\ s a -> s{_aSlicer = a})
+
+instance FromJSON AddSlicerResponse where
+        parseJSON
+          = withObject "AddSlicerResponse"
+              (\ o -> AddSlicerResponse' <$> (o .:? "slicer"))
+
+instance ToJSON AddSlicerResponse where
+        toJSON AddSlicerResponse'{..}
+          = object (catMaybes [("slicer" .=) <$> _aSlicer])
+
 -- | A custom subtotal column for a waterfall chart series.
 --
 -- /See:/ 'waterfallChartCustomSubtotal' smart constructor.
 data WaterfallChartCustomSubtotal =
   WaterfallChartCustomSubtotal'
     { _wccsDataIsSubtotal :: !(Maybe Bool)
-    , _wccsSubtotalIndex  :: !(Maybe (Textual Int32))
-    , _wccsLabel          :: !(Maybe Text)
+    , _wccsSubtotalIndex :: !(Maybe (Textual Int32))
+    , _wccsLabel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3971,23 +5043,29 @@ instance ToJSON WaterfallChartCustomSubtotal where
 -- /See:/ 'response' smart constructor.
 data Response =
   Response'
-    { _rAddFilterView                :: !(Maybe AddFilterViewResponse)
-    , _rCreateDeveloperMetadata      :: !(Maybe CreateDeveloperMetadataResponse)
-    , _rDuplicateFilterView          :: !(Maybe DuplicateFilterViewResponse)
+    { _rAddFilterView :: !(Maybe AddFilterViewResponse)
+    , _rUpdateDataSource :: !(Maybe UpdateDataSourceResponse)
+    , _rCreateDeveloperMetadata :: !(Maybe CreateDeveloperMetadataResponse)
+    , _rDuplicateFilterView :: !(Maybe DuplicateFilterViewResponse)
+    , _rAddSlicer :: !(Maybe AddSlicerResponse)
     , _rUpdateEmbeddedObjectPosition :: !(Maybe UpdateEmbeddedObjectPositionResponse)
-    , _rDeleteDimensionGroup         :: !(Maybe DeleteDimensionGroupResponse)
-    , _rAddSheet                     :: !(Maybe AddSheetResponse)
-    , _rFindReplace                  :: !(Maybe FindReplaceResponse)
-    , _rAddProtectedRange            :: !(Maybe AddProtectedRangeResponse)
-    , _rDeleteConditionalFormatRule  :: !(Maybe DeleteConditionalFormatRuleResponse)
-    , _rUpdateConditionalFormatRule  :: !(Maybe UpdateConditionalFormatRuleResponse)
-    , _rDeleteDeveloperMetadata      :: !(Maybe DeleteDeveloperMetadataResponse)
-    , _rUpdateDeveloperMetadata      :: !(Maybe UpdateDeveloperMetadataResponse)
-    , _rAddNamedRange                :: !(Maybe AddNamedRangeResponse)
-    , _rAddChart                     :: !(Maybe AddChartResponse)
-    , _rAddBanding                   :: !(Maybe AddBandingResponse)
-    , _rDuplicateSheet               :: !(Maybe DuplicateSheetResponse)
-    , _rAddDimensionGroup            :: !(Maybe AddDimensionGroupResponse)
+    , _rDeleteDimensionGroup :: !(Maybe DeleteDimensionGroupResponse)
+    , _rAddSheet :: !(Maybe AddSheetResponse)
+    , _rFindReplace :: !(Maybe FindReplaceResponse)
+    , _rAddProtectedRange :: !(Maybe AddProtectedRangeResponse)
+    , _rAddDataSource :: !(Maybe AddDataSourceResponse)
+    , _rDeleteConditionalFormatRule :: !(Maybe DeleteConditionalFormatRuleResponse)
+    , _rUpdateConditionalFormatRule :: !(Maybe UpdateConditionalFormatRuleResponse)
+    , _rDeleteDeveloperMetadata :: !(Maybe DeleteDeveloperMetadataResponse)
+    , _rUpdateDeveloperMetadata :: !(Maybe UpdateDeveloperMetadataResponse)
+    , _rAddNamedRange :: !(Maybe AddNamedRangeResponse)
+    , _rAddChart :: !(Maybe AddChartResponse)
+    , _rDeleteDuplicates :: !(Maybe DeleteDuplicatesResponse)
+    , _rAddBanding :: !(Maybe AddBandingResponse)
+    , _rDuplicateSheet :: !(Maybe DuplicateSheetResponse)
+    , _rRefreshDataSource :: !(Maybe RefreshDataSourceResponse)
+    , _rAddDimensionGroup :: !(Maybe AddDimensionGroupResponse)
+    , _rTrimWhitespace :: !(Maybe TrimWhitespaceResponse)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3998,9 +5076,13 @@ data Response =
 --
 -- * 'rAddFilterView'
 --
+-- * 'rUpdateDataSource'
+--
 -- * 'rCreateDeveloperMetadata'
 --
 -- * 'rDuplicateFilterView'
+--
+-- * 'rAddSlicer'
 --
 -- * 'rUpdateEmbeddedObjectPosition'
 --
@@ -4011,6 +5093,8 @@ data Response =
 -- * 'rFindReplace'
 --
 -- * 'rAddProtectedRange'
+--
+-- * 'rAddDataSource'
 --
 -- * 'rDeleteConditionalFormatRule'
 --
@@ -4024,32 +5108,44 @@ data Response =
 --
 -- * 'rAddChart'
 --
+-- * 'rDeleteDuplicates'
+--
 -- * 'rAddBanding'
 --
 -- * 'rDuplicateSheet'
 --
+-- * 'rRefreshDataSource'
+--
 -- * 'rAddDimensionGroup'
+--
+-- * 'rTrimWhitespace'
 response
     :: Response
 response =
   Response'
     { _rAddFilterView = Nothing
+    , _rUpdateDataSource = Nothing
     , _rCreateDeveloperMetadata = Nothing
     , _rDuplicateFilterView = Nothing
+    , _rAddSlicer = Nothing
     , _rUpdateEmbeddedObjectPosition = Nothing
     , _rDeleteDimensionGroup = Nothing
     , _rAddSheet = Nothing
     , _rFindReplace = Nothing
     , _rAddProtectedRange = Nothing
+    , _rAddDataSource = Nothing
     , _rDeleteConditionalFormatRule = Nothing
     , _rUpdateConditionalFormatRule = Nothing
     , _rDeleteDeveloperMetadata = Nothing
     , _rUpdateDeveloperMetadata = Nothing
     , _rAddNamedRange = Nothing
     , _rAddChart = Nothing
+    , _rDeleteDuplicates = Nothing
     , _rAddBanding = Nothing
     , _rDuplicateSheet = Nothing
+    , _rRefreshDataSource = Nothing
     , _rAddDimensionGroup = Nothing
+    , _rTrimWhitespace = Nothing
     }
 
 
@@ -4058,6 +5154,12 @@ rAddFilterView :: Lens' Response (Maybe AddFilterViewResponse)
 rAddFilterView
   = lens _rAddFilterView
       (\ s a -> s{_rAddFilterView = a})
+
+-- | A reply from updating a data source.
+rUpdateDataSource :: Lens' Response (Maybe UpdateDataSourceResponse)
+rUpdateDataSource
+  = lens _rUpdateDataSource
+      (\ s a -> s{_rUpdateDataSource = a})
 
 -- | A reply from creating a developer metadata entry.
 rCreateDeveloperMetadata :: Lens' Response (Maybe CreateDeveloperMetadataResponse)
@@ -4070,6 +5172,11 @@ rDuplicateFilterView :: Lens' Response (Maybe DuplicateFilterViewResponse)
 rDuplicateFilterView
   = lens _rDuplicateFilterView
       (\ s a -> s{_rDuplicateFilterView = a})
+
+-- | A reply from adding a slicer.
+rAddSlicer :: Lens' Response (Maybe AddSlicerResponse)
+rAddSlicer
+  = lens _rAddSlicer (\ s a -> s{_rAddSlicer = a})
 
 -- | A reply from updating an embedded object\'s position.
 rUpdateEmbeddedObjectPosition :: Lens' Response (Maybe UpdateEmbeddedObjectPositionResponse)
@@ -4098,6 +5205,12 @@ rAddProtectedRange :: Lens' Response (Maybe AddProtectedRangeResponse)
 rAddProtectedRange
   = lens _rAddProtectedRange
       (\ s a -> s{_rAddProtectedRange = a})
+
+-- | A reply from adding a data source.
+rAddDataSource :: Lens' Response (Maybe AddDataSourceResponse)
+rAddDataSource
+  = lens _rAddDataSource
+      (\ s a -> s{_rAddDataSource = a})
 
 -- | A reply from deleting a conditional format rule.
 rDeleteConditionalFormatRule :: Lens' Response (Maybe DeleteConditionalFormatRuleResponse)
@@ -4134,6 +5247,12 @@ rAddChart :: Lens' Response (Maybe AddChartResponse)
 rAddChart
   = lens _rAddChart (\ s a -> s{_rAddChart = a})
 
+-- | A reply from removing rows containing duplicate values.
+rDeleteDuplicates :: Lens' Response (Maybe DeleteDuplicatesResponse)
+rDeleteDuplicates
+  = lens _rDeleteDuplicates
+      (\ s a -> s{_rDeleteDuplicates = a})
+
 -- | A reply from adding a banded range.
 rAddBanding :: Lens' Response (Maybe AddBandingResponse)
 rAddBanding
@@ -4145,11 +5264,23 @@ rDuplicateSheet
   = lens _rDuplicateSheet
       (\ s a -> s{_rDuplicateSheet = a})
 
+-- | A reply from refreshing data source objects.
+rRefreshDataSource :: Lens' Response (Maybe RefreshDataSourceResponse)
+rRefreshDataSource
+  = lens _rRefreshDataSource
+      (\ s a -> s{_rRefreshDataSource = a})
+
 -- | A reply from adding a dimension group.
 rAddDimensionGroup :: Lens' Response (Maybe AddDimensionGroupResponse)
 rAddDimensionGroup
   = lens _rAddDimensionGroup
       (\ s a -> s{_rAddDimensionGroup = a})
+
+-- | A reply from trimming whitespace.
+rTrimWhitespace :: Lens' Response (Maybe TrimWhitespaceResponse)
+rTrimWhitespace
+  = lens _rTrimWhitespace
+      (\ s a -> s{_rTrimWhitespace = a})
 
 instance FromJSON Response where
         parseJSON
@@ -4157,31 +5288,39 @@ instance FromJSON Response where
               (\ o ->
                  Response' <$>
                    (o .:? "addFilterView") <*>
-                     (o .:? "createDeveloperMetadata")
+                     (o .:? "updateDataSource")
+                     <*> (o .:? "createDeveloperMetadata")
                      <*> (o .:? "duplicateFilterView")
+                     <*> (o .:? "addSlicer")
                      <*> (o .:? "updateEmbeddedObjectPosition")
                      <*> (o .:? "deleteDimensionGroup")
                      <*> (o .:? "addSheet")
                      <*> (o .:? "findReplace")
                      <*> (o .:? "addProtectedRange")
+                     <*> (o .:? "addDataSource")
                      <*> (o .:? "deleteConditionalFormatRule")
                      <*> (o .:? "updateConditionalFormatRule")
                      <*> (o .:? "deleteDeveloperMetadata")
                      <*> (o .:? "updateDeveloperMetadata")
                      <*> (o .:? "addNamedRange")
                      <*> (o .:? "addChart")
+                     <*> (o .:? "deleteDuplicates")
                      <*> (o .:? "addBanding")
                      <*> (o .:? "duplicateSheet")
-                     <*> (o .:? "addDimensionGroup"))
+                     <*> (o .:? "refreshDataSource")
+                     <*> (o .:? "addDimensionGroup")
+                     <*> (o .:? "trimWhitespace"))
 
 instance ToJSON Response where
         toJSON Response'{..}
           = object
               (catMaybes
                  [("addFilterView" .=) <$> _rAddFilterView,
+                  ("updateDataSource" .=) <$> _rUpdateDataSource,
                   ("createDeveloperMetadata" .=) <$>
                     _rCreateDeveloperMetadata,
                   ("duplicateFilterView" .=) <$> _rDuplicateFilterView,
+                  ("addSlicer" .=) <$> _rAddSlicer,
                   ("updateEmbeddedObjectPosition" .=) <$>
                     _rUpdateEmbeddedObjectPosition,
                   ("deleteDimensionGroup" .=) <$>
@@ -4189,6 +5328,7 @@ instance ToJSON Response where
                   ("addSheet" .=) <$> _rAddSheet,
                   ("findReplace" .=) <$> _rFindReplace,
                   ("addProtectedRange" .=) <$> _rAddProtectedRange,
+                  ("addDataSource" .=) <$> _rAddDataSource,
                   ("deleteConditionalFormatRule" .=) <$>
                     _rDeleteConditionalFormatRule,
                   ("updateConditionalFormatRule" .=) <$>
@@ -4199,17 +5339,58 @@ instance ToJSON Response where
                     _rUpdateDeveloperMetadata,
                   ("addNamedRange" .=) <$> _rAddNamedRange,
                   ("addChart" .=) <$> _rAddChart,
+                  ("deleteDuplicates" .=) <$> _rDeleteDuplicates,
                   ("addBanding" .=) <$> _rAddBanding,
                   ("duplicateSheet" .=) <$> _rDuplicateSheet,
-                  ("addDimensionGroup" .=) <$> _rAddDimensionGroup])
+                  ("refreshDataSource" .=) <$> _rRefreshDataSource,
+                  ("addDimensionGroup" .=) <$> _rAddDimensionGroup,
+                  ("trimWhitespace" .=) <$> _rTrimWhitespace])
+
+-- | Allows you to organize the date-time values in a source data column into
+-- buckets based on selected parts of their date or time values.
+--
+-- /See:/ 'chartDateTimeRule' smart constructor.
+newtype ChartDateTimeRule =
+  ChartDateTimeRule'
+    { _cdtrType :: Maybe ChartDateTimeRuleType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ChartDateTimeRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdtrType'
+chartDateTimeRule
+    :: ChartDateTimeRule
+chartDateTimeRule = ChartDateTimeRule' {_cdtrType = Nothing}
+
+
+-- | The type of date-time grouping to apply.
+cdtrType :: Lens' ChartDateTimeRule (Maybe ChartDateTimeRuleType)
+cdtrType = lens _cdtrType (\ s a -> s{_cdtrType = a})
+
+instance FromJSON ChartDateTimeRule where
+        parseJSON
+          = withObject "ChartDateTimeRule"
+              (\ o -> ChartDateTimeRule' <$> (o .:? "type"))
+
+instance ToJSON ChartDateTimeRule where
+        toJSON ChartDateTimeRule'{..}
+          = object (catMaybes [("type" .=) <$> _cdtrType])
 
 -- | Criteria for showing\/hiding rows in a filter or filter view.
 --
 -- /See:/ 'filterCriteria' smart constructor.
 data FilterCriteria =
   FilterCriteria'
-    { _fcHiddenValues :: !(Maybe [Text])
-    , _fcCondition    :: !(Maybe BooleanCondition)
+    { _fcVisibleForegRoundColorStyle :: !(Maybe ColorStyle)
+    , _fcVisibleBackgRoundColorStyle :: !(Maybe ColorStyle)
+    , _fcVisibleForegRoundColor :: !(Maybe Color)
+    , _fcHiddenValues :: !(Maybe [Text])
+    , _fcVisibleBackgRoundColor :: !(Maybe Color)
+    , _fcCondition :: !(Maybe BooleanCondition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4218,14 +5399,54 @@ data FilterCriteria =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fcVisibleForegRoundColorStyle'
+--
+-- * 'fcVisibleBackgRoundColorStyle'
+--
+-- * 'fcVisibleForegRoundColor'
+--
 -- * 'fcHiddenValues'
+--
+-- * 'fcVisibleBackgRoundColor'
 --
 -- * 'fcCondition'
 filterCriteria
     :: FilterCriteria
 filterCriteria =
-  FilterCriteria' {_fcHiddenValues = Nothing, _fcCondition = Nothing}
+  FilterCriteria'
+    { _fcVisibleForegRoundColorStyle = Nothing
+    , _fcVisibleBackgRoundColorStyle = Nothing
+    , _fcVisibleForegRoundColor = Nothing
+    , _fcHiddenValues = Nothing
+    , _fcVisibleBackgRoundColor = Nothing
+    , _fcCondition = Nothing
+    }
 
+
+-- | The foreground color to filter by; only cells with this foreground color
+-- are shown. This field is mutually exclusive with
+-- visible_background_color, and must be set to an RGB-type color. If
+-- visible_foreground_color is also set, this field takes precedence.
+fcVisibleForegRoundColorStyle :: Lens' FilterCriteria (Maybe ColorStyle)
+fcVisibleForegRoundColorStyle
+  = lens _fcVisibleForegRoundColorStyle
+      (\ s a -> s{_fcVisibleForegRoundColorStyle = a})
+
+-- | The background fill color to filter by; only cells with this fill color
+-- are shown. This field is mutually exclusive with
+-- visible_foreground_color, and must be set to an RGB-type color. If
+-- visible_background_color is also set, this field takes precedence.
+fcVisibleBackgRoundColorStyle :: Lens' FilterCriteria (Maybe ColorStyle)
+fcVisibleBackgRoundColorStyle
+  = lens _fcVisibleBackgRoundColorStyle
+      (\ s a -> s{_fcVisibleBackgRoundColorStyle = a})
+
+-- | The foreground color to filter by; only cells with this foreground color
+-- are shown. Mutually exclusive with visible_background_color.
+fcVisibleForegRoundColor :: Lens' FilterCriteria (Maybe Color)
+fcVisibleForegRoundColor
+  = lens _fcVisibleForegRoundColor
+      (\ s a -> s{_fcVisibleForegRoundColor = a})
 
 -- | Values that should be hidden.
 fcHiddenValues :: Lens' FilterCriteria [Text]
@@ -4235,8 +5456,15 @@ fcHiddenValues
       . _Default
       . _Coerce
 
+-- | The background fill color to filter by; only cells with this fill color
+-- are shown. Mutually exclusive with visible_foreground_color.
+fcVisibleBackgRoundColor :: Lens' FilterCriteria (Maybe Color)
+fcVisibleBackgRoundColor
+  = lens _fcVisibleBackgRoundColor
+      (\ s a -> s{_fcVisibleBackgRoundColor = a})
+
 -- | A condition that must be true for values to be shown. (This does not
--- override hiddenValues -- if a value is listed there, it will still be
+-- override hidden_values -- if a value is listed there, it will still be
 -- hidden.)
 fcCondition :: Lens' FilterCriteria (Maybe BooleanCondition)
 fcCondition
@@ -4247,22 +5475,261 @@ instance FromJSON FilterCriteria where
           = withObject "FilterCriteria"
               (\ o ->
                  FilterCriteria' <$>
-                   (o .:? "hiddenValues" .!= mempty) <*>
-                     (o .:? "condition"))
+                   (o .:? "visibleForegroundColorStyle") <*>
+                     (o .:? "visibleBackgroundColorStyle")
+                     <*> (o .:? "visibleForegroundColor")
+                     <*> (o .:? "hiddenValues" .!= mempty)
+                     <*> (o .:? "visibleBackgroundColor")
+                     <*> (o .:? "condition"))
 
 instance ToJSON FilterCriteria where
         toJSON FilterCriteria'{..}
           = object
               (catMaybes
-                 [("hiddenValues" .=) <$> _fcHiddenValues,
+                 [("visibleForegroundColorStyle" .=) <$>
+                    _fcVisibleForegRoundColorStyle,
+                  ("visibleBackgroundColorStyle" .=) <$>
+                    _fcVisibleBackgRoundColorStyle,
+                  ("visibleForegroundColor" .=) <$>
+                    _fcVisibleForegRoundColor,
+                  ("hiddenValues" .=) <$> _fcHiddenValues,
+                  ("visibleBackgroundColor" .=) <$>
+                    _fcVisibleBackgRoundColor,
                   ("condition" .=) <$> _fcCondition])
+
+-- | Reference to a data source object.
+--
+-- /See:/ 'dataSourceObjectReference' smart constructor.
+data DataSourceObjectReference =
+  DataSourceObjectReference'
+    { _dsorDataSourceFormulaCell :: !(Maybe GridCoordinate)
+    , _dsorDataSourceTableAnchorCell :: !(Maybe GridCoordinate)
+    , _dsorSheetId :: !(Maybe Text)
+    , _dsorDataSourcePivotTableAnchorCell :: !(Maybe GridCoordinate)
+    , _dsorChartId :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceObjectReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsorDataSourceFormulaCell'
+--
+-- * 'dsorDataSourceTableAnchorCell'
+--
+-- * 'dsorSheetId'
+--
+-- * 'dsorDataSourcePivotTableAnchorCell'
+--
+-- * 'dsorChartId'
+dataSourceObjectReference
+    :: DataSourceObjectReference
+dataSourceObjectReference =
+  DataSourceObjectReference'
+    { _dsorDataSourceFormulaCell = Nothing
+    , _dsorDataSourceTableAnchorCell = Nothing
+    , _dsorSheetId = Nothing
+    , _dsorDataSourcePivotTableAnchorCell = Nothing
+    , _dsorChartId = Nothing
+    }
+
+
+-- | References to a cell containing DataSourceFormula.
+dsorDataSourceFormulaCell :: Lens' DataSourceObjectReference (Maybe GridCoordinate)
+dsorDataSourceFormulaCell
+  = lens _dsorDataSourceFormulaCell
+      (\ s a -> s{_dsorDataSourceFormulaCell = a})
+
+-- | References to a DataSourceTable anchored at the cell.
+dsorDataSourceTableAnchorCell :: Lens' DataSourceObjectReference (Maybe GridCoordinate)
+dsorDataSourceTableAnchorCell
+  = lens _dsorDataSourceTableAnchorCell
+      (\ s a -> s{_dsorDataSourceTableAnchorCell = a})
+
+-- | References to a DATA_SOURCE sheet.
+dsorSheetId :: Lens' DataSourceObjectReference (Maybe Text)
+dsorSheetId
+  = lens _dsorSheetId (\ s a -> s{_dsorSheetId = a})
+
+-- | References to a data source PivotTable anchored at the cell.
+dsorDataSourcePivotTableAnchorCell :: Lens' DataSourceObjectReference (Maybe GridCoordinate)
+dsorDataSourcePivotTableAnchorCell
+  = lens _dsorDataSourcePivotTableAnchorCell
+      (\ s a -> s{_dsorDataSourcePivotTableAnchorCell = a})
+
+-- | References to a data source chart.
+dsorChartId :: Lens' DataSourceObjectReference (Maybe Int32)
+dsorChartId
+  = lens _dsorChartId (\ s a -> s{_dsorChartId = a}) .
+      mapping _Coerce
+
+instance FromJSON DataSourceObjectReference where
+        parseJSON
+          = withObject "DataSourceObjectReference"
+              (\ o ->
+                 DataSourceObjectReference' <$>
+                   (o .:? "dataSourceFormulaCell") <*>
+                     (o .:? "dataSourceTableAnchorCell")
+                     <*> (o .:? "sheetId")
+                     <*> (o .:? "dataSourcePivotTableAnchorCell")
+                     <*> (o .:? "chartId"))
+
+instance ToJSON DataSourceObjectReference where
+        toJSON DataSourceObjectReference'{..}
+          = object
+              (catMaybes
+                 [("dataSourceFormulaCell" .=) <$>
+                    _dsorDataSourceFormulaCell,
+                  ("dataSourceTableAnchorCell" .=) <$>
+                    _dsorDataSourceTableAnchorCell,
+                  ("sheetId" .=) <$> _dsorSheetId,
+                  ("dataSourcePivotTableAnchorCell" .=) <$>
+                    _dsorDataSourcePivotTableAnchorCell,
+                  ("chartId" .=) <$> _dsorChartId])
+
+-- | Formatting options for baseline value.
+--
+-- /See:/ 'baselineValueFormat' smart constructor.
+data BaselineValueFormat =
+  BaselineValueFormat'
+    { _bvfNegativeColor :: !(Maybe Color)
+    , _bvfPositiveColorStyle :: !(Maybe ColorStyle)
+    , _bvfPositiveColor :: !(Maybe Color)
+    , _bvfTextFormat :: !(Maybe TextFormat)
+    , _bvfDescription :: !(Maybe Text)
+    , _bvfComparisonType :: !(Maybe BaselineValueFormatComparisonType)
+    , _bvfPosition :: !(Maybe TextPosition)
+    , _bvfNegativeColorStyle :: !(Maybe ColorStyle)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BaselineValueFormat' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bvfNegativeColor'
+--
+-- * 'bvfPositiveColorStyle'
+--
+-- * 'bvfPositiveColor'
+--
+-- * 'bvfTextFormat'
+--
+-- * 'bvfDescription'
+--
+-- * 'bvfComparisonType'
+--
+-- * 'bvfPosition'
+--
+-- * 'bvfNegativeColorStyle'
+baselineValueFormat
+    :: BaselineValueFormat
+baselineValueFormat =
+  BaselineValueFormat'
+    { _bvfNegativeColor = Nothing
+    , _bvfPositiveColorStyle = Nothing
+    , _bvfPositiveColor = Nothing
+    , _bvfTextFormat = Nothing
+    , _bvfDescription = Nothing
+    , _bvfComparisonType = Nothing
+    , _bvfPosition = Nothing
+    , _bvfNegativeColorStyle = Nothing
+    }
+
+
+-- | Color to be used, in case baseline value represents a negative change
+-- for key value. This field is optional.
+bvfNegativeColor :: Lens' BaselineValueFormat (Maybe Color)
+bvfNegativeColor
+  = lens _bvfNegativeColor
+      (\ s a -> s{_bvfNegativeColor = a})
+
+-- | Color to be used, in case baseline value represents a positive change
+-- for key value. This field is optional. If positive_color is also set,
+-- this field takes precedence.
+bvfPositiveColorStyle :: Lens' BaselineValueFormat (Maybe ColorStyle)
+bvfPositiveColorStyle
+  = lens _bvfPositiveColorStyle
+      (\ s a -> s{_bvfPositiveColorStyle = a})
+
+-- | Color to be used, in case baseline value represents a positive change
+-- for key value. This field is optional.
+bvfPositiveColor :: Lens' BaselineValueFormat (Maybe Color)
+bvfPositiveColor
+  = lens _bvfPositiveColor
+      (\ s a -> s{_bvfPositiveColor = a})
+
+-- | Text formatting options for baseline value. The link field is not
+-- supported.
+bvfTextFormat :: Lens' BaselineValueFormat (Maybe TextFormat)
+bvfTextFormat
+  = lens _bvfTextFormat
+      (\ s a -> s{_bvfTextFormat = a})
+
+-- | Description which is appended after the baseline value. This field is
+-- optional.
+bvfDescription :: Lens' BaselineValueFormat (Maybe Text)
+bvfDescription
+  = lens _bvfDescription
+      (\ s a -> s{_bvfDescription = a})
+
+-- | The comparison type of key value with baseline value.
+bvfComparisonType :: Lens' BaselineValueFormat (Maybe BaselineValueFormatComparisonType)
+bvfComparisonType
+  = lens _bvfComparisonType
+      (\ s a -> s{_bvfComparisonType = a})
+
+-- | Specifies the horizontal text positioning of baseline value. This field
+-- is optional. If not specified, default positioning is used.
+bvfPosition :: Lens' BaselineValueFormat (Maybe TextPosition)
+bvfPosition
+  = lens _bvfPosition (\ s a -> s{_bvfPosition = a})
+
+-- | Color to be used, in case baseline value represents a negative change
+-- for key value. This field is optional. If negative_color is also set,
+-- this field takes precedence.
+bvfNegativeColorStyle :: Lens' BaselineValueFormat (Maybe ColorStyle)
+bvfNegativeColorStyle
+  = lens _bvfNegativeColorStyle
+      (\ s a -> s{_bvfNegativeColorStyle = a})
+
+instance FromJSON BaselineValueFormat where
+        parseJSON
+          = withObject "BaselineValueFormat"
+              (\ o ->
+                 BaselineValueFormat' <$>
+                   (o .:? "negativeColor") <*>
+                     (o .:? "positiveColorStyle")
+                     <*> (o .:? "positiveColor")
+                     <*> (o .:? "textFormat")
+                     <*> (o .:? "description")
+                     <*> (o .:? "comparisonType")
+                     <*> (o .:? "position")
+                     <*> (o .:? "negativeColorStyle"))
+
+instance ToJSON BaselineValueFormat where
+        toJSON BaselineValueFormat'{..}
+          = object
+              (catMaybes
+                 [("negativeColor" .=) <$> _bvfNegativeColor,
+                  ("positiveColorStyle" .=) <$> _bvfPositiveColorStyle,
+                  ("positiveColor" .=) <$> _bvfPositiveColor,
+                  ("textFormat" .=) <$> _bvfTextFormat,
+                  ("description" .=) <$> _bvfDescription,
+                  ("comparisonType" .=) <$> _bvfComparisonType,
+                  ("position" .=) <$> _bvfPosition,
+                  ("negativeColorStyle" .=) <$>
+                    _bvfNegativeColorStyle])
 
 -- | An error in a cell.
 --
 -- /See:/ 'errorValue' smart constructor.
 data ErrorValue =
   ErrorValue'
-    { _evType    :: !(Maybe ErrorValueType)
+    { _evType :: !(Maybe ErrorValueType)
     , _evMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4303,16 +5770,73 @@ instance ToJSON ErrorValue where
                  [("type" .=) <$> _evType,
                   ("message" .=) <$> _evMessage])
 
+-- | The execution status of refreshing one data source object.
+--
+-- /See:/ 'refreshDataSourceObjectExecutionStatus' smart constructor.
+data RefreshDataSourceObjectExecutionStatus =
+  RefreshDataSourceObjectExecutionStatus'
+    { _rdsoesReference :: !(Maybe DataSourceObjectReference)
+    , _rdsoesDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RefreshDataSourceObjectExecutionStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdsoesReference'
+--
+-- * 'rdsoesDataExecutionStatus'
+refreshDataSourceObjectExecutionStatus
+    :: RefreshDataSourceObjectExecutionStatus
+refreshDataSourceObjectExecutionStatus =
+  RefreshDataSourceObjectExecutionStatus'
+    {_rdsoesReference = Nothing, _rdsoesDataExecutionStatus = Nothing}
+
+
+-- | Reference to a data source object being refreshed.
+rdsoesReference :: Lens' RefreshDataSourceObjectExecutionStatus (Maybe DataSourceObjectReference)
+rdsoesReference
+  = lens _rdsoesReference
+      (\ s a -> s{_rdsoesReference = a})
+
+-- | The data execution status.
+rdsoesDataExecutionStatus :: Lens' RefreshDataSourceObjectExecutionStatus (Maybe DataExecutionStatus)
+rdsoesDataExecutionStatus
+  = lens _rdsoesDataExecutionStatus
+      (\ s a -> s{_rdsoesDataExecutionStatus = a})
+
+instance FromJSON
+           RefreshDataSourceObjectExecutionStatus
+         where
+        parseJSON
+          = withObject "RefreshDataSourceObjectExecutionStatus"
+              (\ o ->
+                 RefreshDataSourceObjectExecutionStatus' <$>
+                   (o .:? "reference") <*>
+                     (o .:? "dataExecutionStatus"))
+
+instance ToJSON
+           RefreshDataSourceObjectExecutionStatus
+         where
+        toJSON RefreshDataSourceObjectExecutionStatus'{..}
+          = object
+              (catMaybes
+                 [("reference" .=) <$> _rdsoesReference,
+                  ("dataExecutionStatus" .=) <$>
+                    _rdsoesDataExecutionStatus])
+
 -- | Updates a conditional format rule at the given index, or moves a
 -- conditional format rule to another index.
 --
 -- /See:/ 'updateConditionalFormatRuleRequest' smart constructor.
 data UpdateConditionalFormatRuleRequest =
   UpdateConditionalFormatRuleRequest'
-    { _ucfrrRule     :: !(Maybe ConditionalFormatRule)
+    { _ucfrrRule :: !(Maybe ConditionalFormatRule)
     , _ucfrrNewIndex :: !(Maybe (Textual Int32))
-    , _ucfrrSheetId  :: !(Maybe (Textual Int32))
-    , _ucfrrIndex    :: !(Maybe (Textual Int32))
+    , _ucfrrSheetId :: !(Maybe (Textual Int32))
+    , _ucfrrIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4391,7 +5915,7 @@ instance ToJSON UpdateConditionalFormatRuleRequest
 data DeleteConditionalFormatRuleRequest =
   DeleteConditionalFormatRuleRequest'
     { _dcfrrSheetId :: !(Maybe (Textual Int32))
-    , _dcfrrIndex   :: !(Maybe (Textual Int32))
+    , _dcfrrIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4438,6 +5962,131 @@ instance ToJSON DeleteConditionalFormatRuleRequest
                  [("sheetId" .=) <$> _dcfrrSheetId,
                   ("index" .=) <$> _dcfrrIndex])
 
+-- | A data source table, which allows the user to import a static table of
+-- data from the DataSource into Sheets. This is also known as \"Extract\"
+-- in the Sheets editor.
+--
+-- /See:/ 'dataSourceTable' smart constructor.
+data DataSourceTable =
+  DataSourceTable'
+    { _dstSortSpecs :: !(Maybe [SortSpec])
+    , _dstRowLimit :: !(Maybe (Textual Int32))
+    , _dstDataSourceId :: !(Maybe Text)
+    , _dstDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    , _dstColumns :: !(Maybe [DataSourceColumnReference])
+    , _dstFilterSpecs :: !(Maybe [FilterSpec])
+    , _dstColumnSelectionType :: !(Maybe DataSourceTableColumnSelectionType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceTable' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dstSortSpecs'
+--
+-- * 'dstRowLimit'
+--
+-- * 'dstDataSourceId'
+--
+-- * 'dstDataExecutionStatus'
+--
+-- * 'dstColumns'
+--
+-- * 'dstFilterSpecs'
+--
+-- * 'dstColumnSelectionType'
+dataSourceTable
+    :: DataSourceTable
+dataSourceTable =
+  DataSourceTable'
+    { _dstSortSpecs = Nothing
+    , _dstRowLimit = Nothing
+    , _dstDataSourceId = Nothing
+    , _dstDataExecutionStatus = Nothing
+    , _dstColumns = Nothing
+    , _dstFilterSpecs = Nothing
+    , _dstColumnSelectionType = Nothing
+    }
+
+
+-- | Sort specifications in the data source table. The result of the data
+-- source table is sorted based on the sort specifications in order.
+dstSortSpecs :: Lens' DataSourceTable [SortSpec]
+dstSortSpecs
+  = lens _dstSortSpecs (\ s a -> s{_dstSortSpecs = a})
+      . _Default
+      . _Coerce
+
+-- | The limit of rows to return. If not set, a default limit is applied.
+-- Please refer to the Sheets editor for the default and max limit.
+dstRowLimit :: Lens' DataSourceTable (Maybe Int32)
+dstRowLimit
+  = lens _dstRowLimit (\ s a -> s{_dstRowLimit = a}) .
+      mapping _Coerce
+
+-- | The ID of the data source the data source table is associated with.
+dstDataSourceId :: Lens' DataSourceTable (Maybe Text)
+dstDataSourceId
+  = lens _dstDataSourceId
+      (\ s a -> s{_dstDataSourceId = a})
+
+-- | Output only. The data execution status.
+dstDataExecutionStatus :: Lens' DataSourceTable (Maybe DataExecutionStatus)
+dstDataExecutionStatus
+  = lens _dstDataExecutionStatus
+      (\ s a -> s{_dstDataExecutionStatus = a})
+
+-- | Columns selected for the data source table. The column_selection_type
+-- must be SELECTED.
+dstColumns :: Lens' DataSourceTable [DataSourceColumnReference]
+dstColumns
+  = lens _dstColumns (\ s a -> s{_dstColumns = a}) .
+      _Default
+      . _Coerce
+
+-- | Filter specifications in the data source table.
+dstFilterSpecs :: Lens' DataSourceTable [FilterSpec]
+dstFilterSpecs
+  = lens _dstFilterSpecs
+      (\ s a -> s{_dstFilterSpecs = a})
+      . _Default
+      . _Coerce
+
+-- | The type to select columns for the data source table. Defaults to
+-- SELECTED.
+dstColumnSelectionType :: Lens' DataSourceTable (Maybe DataSourceTableColumnSelectionType)
+dstColumnSelectionType
+  = lens _dstColumnSelectionType
+      (\ s a -> s{_dstColumnSelectionType = a})
+
+instance FromJSON DataSourceTable where
+        parseJSON
+          = withObject "DataSourceTable"
+              (\ o ->
+                 DataSourceTable' <$>
+                   (o .:? "sortSpecs" .!= mempty) <*> (o .:? "rowLimit")
+                     <*> (o .:? "dataSourceId")
+                     <*> (o .:? "dataExecutionStatus")
+                     <*> (o .:? "columns" .!= mempty)
+                     <*> (o .:? "filterSpecs" .!= mempty)
+                     <*> (o .:? "columnSelectionType"))
+
+instance ToJSON DataSourceTable where
+        toJSON DataSourceTable'{..}
+          = object
+              (catMaybes
+                 [("sortSpecs" .=) <$> _dstSortSpecs,
+                  ("rowLimit" .=) <$> _dstRowLimit,
+                  ("dataSourceId" .=) <$> _dstDataSourceId,
+                  ("dataExecutionStatus" .=) <$>
+                    _dstDataExecutionStatus,
+                  ("columns" .=) <$> _dstColumns,
+                  ("filterSpecs" .=) <$> _dstFilterSpecs,
+                  ("columnSelectionType" .=) <$>
+                    _dstColumnSelectionType])
+
 -- | A request to update properties of developer metadata. Updates the
 -- properties of the developer metadata selected by the filters to the
 -- values provided in the DeveloperMetadata resource. Callers must specify
@@ -4448,9 +6097,9 @@ instance ToJSON DeleteConditionalFormatRuleRequest
 -- /See:/ 'updateDeveloperMetadataRequest' smart constructor.
 data UpdateDeveloperMetadataRequest =
   UpdateDeveloperMetadataRequest'
-    { _udmrDataFilters       :: !(Maybe [DataFilter])
+    { _udmrDataFilters :: !(Maybe [DataFilter])
     , _udmrDeveloperMetadata :: !(Maybe DeveloperMetadata)
-    , _udmrFields            :: !(Maybe GFieldMask)
+    , _udmrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4560,12 +6209,13 @@ instance ToJSON DeleteDeveloperMetadataRequest where
 -- /See:/ 'waterfallChartSpec' smart constructor.
 data WaterfallChartSpec =
   WaterfallChartSpec'
-    { _wcsStackedType        :: !(Maybe WaterfallChartSpecStackedType)
+    { _wcsStackedType :: !(Maybe WaterfallChartSpecStackedType)
     , _wcsConnectorLineStyle :: !(Maybe LineStyle)
-    , _wcsDomain             :: !(Maybe WaterfallChartDomain)
-    , _wcsSeries             :: !(Maybe [WaterfallChartSeries])
+    , _wcsDomain :: !(Maybe WaterfallChartDomain)
+    , _wcsSeries :: !(Maybe [WaterfallChartSeries])
     , _wcsHideConnectorLines :: !(Maybe Bool)
-    , _wcsFirstValueIsTotal  :: !(Maybe Bool)
+    , _wcsTotalDataLabel :: !(Maybe DataLabel)
+    , _wcsFirstValueIsTotal :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4584,6 +6234,8 @@ data WaterfallChartSpec =
 --
 -- * 'wcsHideConnectorLines'
 --
+-- * 'wcsTotalDataLabel'
+--
 -- * 'wcsFirstValueIsTotal'
 waterfallChartSpec
     :: WaterfallChartSpec
@@ -4594,6 +6246,7 @@ waterfallChartSpec =
     , _wcsDomain = Nothing
     , _wcsSeries = Nothing
     , _wcsHideConnectorLines = Nothing
+    , _wcsTotalDataLabel = Nothing
     , _wcsFirstValueIsTotal = Nothing
     }
 
@@ -4628,6 +6281,15 @@ wcsHideConnectorLines
   = lens _wcsHideConnectorLines
       (\ s a -> s{_wcsHideConnectorLines = a})
 
+-- | Controls whether to display additional data labels on stacked charts
+-- which sum the total value of all stacked values at each value along the
+-- domain axis. stacked_type must be STACKED and neither CUSTOM nor
+-- placement can be set on the total_data_label.
+wcsTotalDataLabel :: Lens' WaterfallChartSpec (Maybe DataLabel)
+wcsTotalDataLabel
+  = lens _wcsTotalDataLabel
+      (\ s a -> s{_wcsTotalDataLabel = a})
+
 -- | True to interpret the first value as a total.
 wcsFirstValueIsTotal :: Lens' WaterfallChartSpec (Maybe Bool)
 wcsFirstValueIsTotal
@@ -4644,6 +6306,7 @@ instance FromJSON WaterfallChartSpec where
                      <*> (o .:? "domain")
                      <*> (o .:? "series" .!= mempty)
                      <*> (o .:? "hideConnectorLines")
+                     <*> (o .:? "totalDataLabel")
                      <*> (o .:? "firstValueIsTotal"))
 
 instance ToJSON WaterfallChartSpec where
@@ -4655,6 +6318,7 @@ instance ToJSON WaterfallChartSpec where
                   ("domain" .=) <$> _wcsDomain,
                   ("series" .=) <$> _wcsSeries,
                   ("hideConnectorLines" .=) <$> _wcsHideConnectorLines,
+                  ("totalDataLabel" .=) <$> _wcsTotalDataLabel,
                   ("firstValueIsTotal" .=) <$> _wcsFirstValueIsTotal])
 
 -- | The location an object is overlaid on top of a grid.
@@ -4662,10 +6326,10 @@ instance ToJSON WaterfallChartSpec where
 -- /See:/ 'overlayPosition' smart constructor.
 data OverlayPosition =
   OverlayPosition'
-    { _opHeightPixels  :: !(Maybe (Textual Int32))
+    { _opHeightPixels :: !(Maybe (Textual Int32))
     , _opOffSetYPixels :: !(Maybe (Textual Int32))
-    , _opAnchorCell    :: !(Maybe GridCoordinate)
-    , _opWidthPixels   :: !(Maybe (Textual Int32))
+    , _opAnchorCell :: !(Maybe GridCoordinate)
+    , _opWidthPixels :: !(Maybe (Textual Int32))
     , _opOffSetXPixels :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4794,10 +6458,10 @@ instance ToJSON DeleteEmbeddedObjectRequest where
 -- /See:/ 'developerMetadataLocation' smart constructor.
 data DeveloperMetadataLocation =
   DeveloperMetadataLocation'
-    { _dmlSpreadsheet    :: !(Maybe Bool)
+    { _dmlSpreadsheet :: !(Maybe Bool)
     , _dmlDimensionRange :: !(Maybe DimensionRange)
-    , _dmlSheetId        :: !(Maybe (Textual Int32))
-    , _dmlLocationType   :: !(Maybe DeveloperMetadataLocationLocationType)
+    , _dmlSheetId :: !(Maybe (Textual Int32))
+    , _dmlLocationType :: !(Maybe DeveloperMetadataLocationLocationType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4873,14 +6537,16 @@ instance ToJSON DeveloperMetadataLocation where
 -- /See:/ 'sheetProperties' smart constructor.
 data SheetProperties =
   SheetProperties'
-    { _sTabColor       :: !(Maybe Color)
+    { _sTabColor :: !(Maybe Color)
+    , _sTabColorStyle :: !(Maybe ColorStyle)
     , _sGridProperties :: !(Maybe GridProperties)
-    , _sSheetType      :: !(Maybe SheetPropertiesSheetType)
-    , _sHidden         :: !(Maybe Bool)
-    , _sSheetId        :: !(Maybe (Textual Int32))
-    , _sTitle          :: !(Maybe Text)
-    , _sRightToLeft    :: !(Maybe Bool)
-    , _sIndex          :: !(Maybe (Textual Int32))
+    , _sSheetType :: !(Maybe SheetPropertiesSheetType)
+    , _sHidden :: !(Maybe Bool)
+    , _sSheetId :: !(Maybe (Textual Int32))
+    , _sTitle :: !(Maybe Text)
+    , _sRightToLeft :: !(Maybe Bool)
+    , _sDataSourceSheetProperties :: !(Maybe DataSourceSheetProperties)
+    , _sIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4890,6 +6556,8 @@ data SheetProperties =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sTabColor'
+--
+-- * 'sTabColorStyle'
 --
 -- * 'sGridProperties'
 --
@@ -4903,18 +6571,22 @@ data SheetProperties =
 --
 -- * 'sRightToLeft'
 --
+-- * 'sDataSourceSheetProperties'
+--
 -- * 'sIndex'
 sheetProperties
     :: SheetProperties
 sheetProperties =
   SheetProperties'
     { _sTabColor = Nothing
+    , _sTabColorStyle = Nothing
     , _sGridProperties = Nothing
     , _sSheetType = Nothing
     , _sHidden = Nothing
     , _sSheetId = Nothing
     , _sTitle = Nothing
     , _sRightToLeft = Nothing
+    , _sDataSourceSheetProperties = Nothing
     , _sIndex = Nothing
     }
 
@@ -4924,10 +6596,19 @@ sTabColor :: Lens' SheetProperties (Maybe Color)
 sTabColor
   = lens _sTabColor (\ s a -> s{_sTabColor = a})
 
+-- | The color of the tab in the UI. If tab_color is also set, this field
+-- takes precedence.
+sTabColorStyle :: Lens' SheetProperties (Maybe ColorStyle)
+sTabColorStyle
+  = lens _sTabColorStyle
+      (\ s a -> s{_sTabColorStyle = a})
+
 -- | Additional properties of the sheet if this sheet is a grid. (If the
 -- sheet is an object sheet, containing a chart or image, then this field
 -- will be absent.) When writing it is an error to set any grid properties
--- on non-grid sheets.
+-- on non-grid sheets. If this sheet is a DATA_SOURCE sheet, this field is
+-- output only but contains the properties that reflect how a data source
+-- sheet is rendered in the UI, e.g. row_count.
 sGridProperties :: Lens' SheetProperties (Maybe GridProperties)
 sGridProperties
   = lens _sGridProperties
@@ -4959,6 +6640,13 @@ sRightToLeft :: Lens' SheetProperties (Maybe Bool)
 sRightToLeft
   = lens _sRightToLeft (\ s a -> s{_sRightToLeft = a})
 
+-- | Output only. If present, the field contains DATA_SOURCE sheet specific
+-- properties.
+sDataSourceSheetProperties :: Lens' SheetProperties (Maybe DataSourceSheetProperties)
+sDataSourceSheetProperties
+  = lens _sDataSourceSheetProperties
+      (\ s a -> s{_sDataSourceSheetProperties = a})
+
 -- | The index of the sheet within the spreadsheet. When adding or updating
 -- sheet properties, if this field is excluded then the sheet is added or
 -- moved to the end of the sheet list. When updating sheet indices or
@@ -4978,12 +6666,14 @@ instance FromJSON SheetProperties where
           = withObject "SheetProperties"
               (\ o ->
                  SheetProperties' <$>
-                   (o .:? "tabColor") <*> (o .:? "gridProperties") <*>
-                     (o .:? "sheetType")
+                   (o .:? "tabColor") <*> (o .:? "tabColorStyle") <*>
+                     (o .:? "gridProperties")
+                     <*> (o .:? "sheetType")
                      <*> (o .:? "hidden")
                      <*> (o .:? "sheetId")
                      <*> (o .:? "title")
                      <*> (o .:? "rightToLeft")
+                     <*> (o .:? "dataSourceSheetProperties")
                      <*> (o .:? "index"))
 
 instance ToJSON SheetProperties where
@@ -4991,16 +6681,20 @@ instance ToJSON SheetProperties where
           = object
               (catMaybes
                  [("tabColor" .=) <$> _sTabColor,
+                  ("tabColorStyle" .=) <$> _sTabColorStyle,
                   ("gridProperties" .=) <$> _sGridProperties,
                   ("sheetType" .=) <$> _sSheetType,
                   ("hidden" .=) <$> _sHidden,
                   ("sheetId" .=) <$> _sSheetId,
                   ("title" .=) <$> _sTitle,
                   ("rightToLeft" .=) <$> _sRightToLeft,
+                  ("dataSourceSheetProperties" .=) <$>
+                    _sDataSourceSheetProperties,
                   ("index" .=) <$> _sIndex])
 
 -- | The criteria for showing\/hiding values per column. The map\'s key is
--- the column index, and the value is the criteria for that column.
+-- the column index, and the value is the criteria for that column. This
+-- field is deprecated in favor of filter_specs.
 --
 -- /See:/ 'filterViewCriteria' smart constructor.
 newtype FilterViewCriteria =
@@ -5041,11 +6735,11 @@ instance ToJSON FilterViewCriteria where
 data BatchUpdateValuesResponse =
   BatchUpdateValuesResponse'
     { _buvrTotalUpdatedColumns :: !(Maybe (Textual Int32))
-    , _buvrResponses           :: !(Maybe [UpdateValuesResponse])
-    , _buvrSpreadsheetId       :: !(Maybe Text)
-    , _buvrTotalUpdatedSheets  :: !(Maybe (Textual Int32))
-    , _buvrTotalUpdatedCells   :: !(Maybe (Textual Int32))
-    , _buvrTotalUpdatedRows    :: !(Maybe (Textual Int32))
+    , _buvrResponses :: !(Maybe [UpdateValuesResponse])
+    , _buvrSpreadsheetId :: !(Maybe Text)
+    , _buvrTotalUpdatedSheets :: !(Maybe (Textual Int32))
+    , _buvrTotalUpdatedCells :: !(Maybe (Textual Int32))
+    , _buvrTotalUpdatedRows :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5153,7 +6847,7 @@ instance ToJSON BatchUpdateValuesResponse where
 -- /See:/ 'updateSheetPropertiesRequest' smart constructor.
 data UpdateSheetPropertiesRequest =
   UpdateSheetPropertiesRequest'
-    { _usprFields     :: !(Maybe GFieldMask)
+    { _usprFields :: !(Maybe GFieldMask)
     , _usprProperties :: !(Maybe SheetProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5205,12 +6899,14 @@ instance ToJSON UpdateSheetPropertiesRequest where
 -- /See:/ 'spreadsheet' smart constructor.
 data Spreadsheet =
   Spreadsheet'
-    { _sprSheets            :: !(Maybe [Sheet])
-    , _sprNamedRanges       :: !(Maybe [NamedRange])
-    , _sprSpreadsheetId     :: !(Maybe Text)
-    , _sprSpreadsheetURL    :: !(Maybe Text)
+    { _sprSheets :: !(Maybe [Sheet])
+    , _sprNamedRanges :: !(Maybe [NamedRange])
+    , _sprSpreadsheetId :: !(Maybe Text)
+    , _sprDataSourceSchedules :: !(Maybe [DataSourceRefreshSchedule])
+    , _sprDataSources :: !(Maybe [DataSource])
+    , _sprSpreadsheetURL :: !(Maybe Text)
     , _sprDeveloperMetadata :: !(Maybe [DeveloperMetadata])
-    , _sprProperties        :: !(Maybe SpreadsheetProperties)
+    , _sprProperties :: !(Maybe SpreadsheetProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5225,6 +6921,10 @@ data Spreadsheet =
 --
 -- * 'sprSpreadsheetId'
 --
+-- * 'sprDataSourceSchedules'
+--
+-- * 'sprDataSources'
+--
 -- * 'sprSpreadsheetURL'
 --
 -- * 'sprDeveloperMetadata'
@@ -5237,6 +6937,8 @@ spreadsheet =
     { _sprSheets = Nothing
     , _sprNamedRanges = Nothing
     , _sprSpreadsheetId = Nothing
+    , _sprDataSourceSchedules = Nothing
+    , _sprDataSources = Nothing
     , _sprSpreadsheetURL = Nothing
     , _sprDeveloperMetadata = Nothing
     , _sprProperties = Nothing
@@ -5263,6 +6965,22 @@ sprSpreadsheetId :: Lens' Spreadsheet (Maybe Text)
 sprSpreadsheetId
   = lens _sprSpreadsheetId
       (\ s a -> s{_sprSpreadsheetId = a})
+
+-- | Output only. A list of data source refresh schedules.
+sprDataSourceSchedules :: Lens' Spreadsheet [DataSourceRefreshSchedule]
+sprDataSourceSchedules
+  = lens _sprDataSourceSchedules
+      (\ s a -> s{_sprDataSourceSchedules = a})
+      . _Default
+      . _Coerce
+
+-- | A list of external data sources connected with the spreadsheet.
+sprDataSources :: Lens' Spreadsheet [DataSource]
+sprDataSources
+  = lens _sprDataSources
+      (\ s a -> s{_sprDataSources = a})
+      . _Default
+      . _Coerce
 
 -- | The url of the spreadsheet. This field is read-only.
 sprSpreadsheetURL :: Lens' Spreadsheet (Maybe Text)
@@ -5292,6 +7010,8 @@ instance FromJSON Spreadsheet where
                    (o .:? "sheets" .!= mempty) <*>
                      (o .:? "namedRanges" .!= mempty)
                      <*> (o .:? "spreadsheetId")
+                     <*> (o .:? "dataSourceSchedules" .!= mempty)
+                     <*> (o .:? "dataSources" .!= mempty)
                      <*> (o .:? "spreadsheetUrl")
                      <*> (o .:? "developerMetadata" .!= mempty)
                      <*> (o .:? "properties"))
@@ -5303,16 +7023,19 @@ instance ToJSON Spreadsheet where
                  [("sheets" .=) <$> _sprSheets,
                   ("namedRanges" .=) <$> _sprNamedRanges,
                   ("spreadsheetId" .=) <$> _sprSpreadsheetId,
+                  ("dataSourceSchedules" .=) <$>
+                    _sprDataSourceSchedules,
+                  ("dataSources" .=) <$> _sprDataSources,
                   ("spreadsheetUrl" .=) <$> _sprSpreadsheetURL,
                   ("developerMetadata" .=) <$> _sprDeveloperMetadata,
                   ("properties" .=) <$> _sprProperties])
 
--- | A </chart/interactive/docs/gallery/candlestickchart candlestick chart>.
+-- | A candlestick chart.
 --
 -- /See:/ 'candlestickChartSpec' smart constructor.
 data CandlestickChartSpec =
   CandlestickChartSpec'
-    { _ccsData   :: !(Maybe [CandlestickData])
+    { _ccsData :: !(Maybe [CandlestickData])
     , _ccsDomain :: !(Maybe CandlestickDomain)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5358,12 +7081,59 @@ instance ToJSON CandlestickChartSpec where
                  [("data" .=) <$> _ccsData,
                   ("domain" .=) <$> _ccsDomain])
 
+-- | A pair mapping a spreadsheet theme color type to the concrete color it
+-- represents.
+--
+-- /See:/ 'themeColorPair' smart constructor.
+data ThemeColorPair =
+  ThemeColorPair'
+    { _tcpColor :: !(Maybe ColorStyle)
+    , _tcpColorType :: !(Maybe ThemeColorPairColorType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ThemeColorPair' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tcpColor'
+--
+-- * 'tcpColorType'
+themeColorPair
+    :: ThemeColorPair
+themeColorPair = ThemeColorPair' {_tcpColor = Nothing, _tcpColorType = Nothing}
+
+
+-- | The concrete color corresponding to the theme color type.
+tcpColor :: Lens' ThemeColorPair (Maybe ColorStyle)
+tcpColor = lens _tcpColor (\ s a -> s{_tcpColor = a})
+
+-- | The type of the spreadsheet theme color.
+tcpColorType :: Lens' ThemeColorPair (Maybe ThemeColorPairColorType)
+tcpColorType
+  = lens _tcpColorType (\ s a -> s{_tcpColorType = a})
+
+instance FromJSON ThemeColorPair where
+        parseJSON
+          = withObject "ThemeColorPair"
+              (\ o ->
+                 ThemeColorPair' <$>
+                   (o .:? "color") <*> (o .:? "colorType"))
+
+instance ToJSON ThemeColorPair where
+        toJSON ThemeColorPair'{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _tcpColor,
+                  ("colorType" .=) <$> _tcpColorType])
+
 -- | Inserts rows or columns in a sheet at a particular index.
 --
 -- /See:/ 'insertDimensionRequest' smart constructor.
 data InsertDimensionRequest =
   InsertDimensionRequest'
-    { _idrRange             :: !(Maybe DimensionRange)
+    { _idrRange :: !(Maybe DimensionRange)
     , _idrInheritFromBefore :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5468,7 +7238,8 @@ data InterpolationPoint =
   InterpolationPoint'
     { _ipColor :: !(Maybe Color)
     , _ipValue :: !(Maybe Text)
-    , _ipType  :: !(Maybe InterpolationPointType)
+    , _ipColorStyle :: !(Maybe ColorStyle)
+    , _ipType :: !(Maybe InterpolationPointType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5481,12 +7252,18 @@ data InterpolationPoint =
 --
 -- * 'ipValue'
 --
+-- * 'ipColorStyle'
+--
 -- * 'ipType'
 interpolationPoint
     :: InterpolationPoint
 interpolationPoint =
   InterpolationPoint'
-    {_ipColor = Nothing, _ipValue = Nothing, _ipType = Nothing}
+    { _ipColor = Nothing
+    , _ipValue = Nothing
+    , _ipColorStyle = Nothing
+    , _ipType = Nothing
+    }
 
 
 -- | The color this interpolation point should use.
@@ -5498,6 +7275,12 @@ ipColor = lens _ipColor (\ s a -> s{_ipColor = a})
 ipValue :: Lens' InterpolationPoint (Maybe Text)
 ipValue = lens _ipValue (\ s a -> s{_ipValue = a})
 
+-- | The color this interpolation point should use. If color is also set,
+-- this field takes precedence.
+ipColorStyle :: Lens' InterpolationPoint (Maybe ColorStyle)
+ipColorStyle
+  = lens _ipColorStyle (\ s a -> s{_ipColorStyle = a})
+
 -- | How the value should be interpreted.
 ipType :: Lens' InterpolationPoint (Maybe InterpolationPointType)
 ipType = lens _ipType (\ s a -> s{_ipType = a})
@@ -5508,30 +7291,77 @@ instance FromJSON InterpolationPoint where
               (\ o ->
                  InterpolationPoint' <$>
                    (o .:? "color") <*> (o .:? "value") <*>
-                     (o .:? "type"))
+                     (o .:? "colorStyle")
+                     <*> (o .:? "type"))
 
 instance ToJSON InterpolationPoint where
         toJSON InterpolationPoint'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _ipColor,
-                  ("value" .=) <$> _ipValue, ("type" .=) <$> _ipType])
+                  ("value" .=) <$> _ipValue,
+                  ("colorStyle" .=) <$> _ipColorStyle,
+                  ("type" .=) <$> _ipType])
+
+-- | The result of removing duplicates in a range.
+--
+-- /See:/ 'deleteDuplicatesResponse' smart constructor.
+newtype DeleteDuplicatesResponse =
+  DeleteDuplicatesResponse'
+    { _ddrDuplicatesRemovedCount :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeleteDuplicatesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddrDuplicatesRemovedCount'
+deleteDuplicatesResponse
+    :: DeleteDuplicatesResponse
+deleteDuplicatesResponse =
+  DeleteDuplicatesResponse' {_ddrDuplicatesRemovedCount = Nothing}
+
+
+-- | The number of duplicate rows removed.
+ddrDuplicatesRemovedCount :: Lens' DeleteDuplicatesResponse (Maybe Int32)
+ddrDuplicatesRemovedCount
+  = lens _ddrDuplicatesRemovedCount
+      (\ s a -> s{_ddrDuplicatesRemovedCount = a})
+      . mapping _Coerce
+
+instance FromJSON DeleteDuplicatesResponse where
+        parseJSON
+          = withObject "DeleteDuplicatesResponse"
+              (\ o ->
+                 DeleteDuplicatesResponse' <$>
+                   (o .:? "duplicatesRemovedCount"))
+
+instance ToJSON DeleteDuplicatesResponse where
+        toJSON DeleteDuplicatesResponse'{..}
+          = object
+              (catMaybes
+                 [("duplicatesRemovedCount" .=) <$>
+                    _ddrDuplicatesRemovedCount])
 
 -- | Data about a specific cell.
 --
 -- /See:/ 'cellData' smart constructor.
 data CellData =
   CellData'
-    { _cdTextFormatRuns    :: !(Maybe [TextFormatRun])
-    , _cdNote              :: !(Maybe Text)
-    , _cdUserEnteredValue  :: !(Maybe ExtendedValue)
+    { _cdTextFormatRuns :: !(Maybe [TextFormatRun])
+    , _cdNote :: !(Maybe Text)
+    , _cdUserEnteredValue :: !(Maybe ExtendedValue)
     , _cdUserEnteredFormat :: !(Maybe CellFormat)
-    , _cdEffectiveFormat   :: !(Maybe CellFormat)
-    , _cdPivotTable        :: !(Maybe PivotTable)
-    , _cdFormattedValue    :: !(Maybe Text)
-    , _cdDataValidation    :: !(Maybe DataValidationRule)
-    , _cdHyperlink         :: !(Maybe Text)
-    , _cdEffectiveValue    :: !(Maybe ExtendedValue)
+    , _cdDataSourceTable :: !(Maybe DataSourceTable)
+    , _cdEffectiveFormat :: !(Maybe CellFormat)
+    , _cdPivotTable :: !(Maybe PivotTable)
+    , _cdFormattedValue :: !(Maybe Text)
+    , _cdDataValidation :: !(Maybe DataValidationRule)
+    , _cdDataSourceFormula :: !(Maybe DataSourceFormula)
+    , _cdHyperlink :: !(Maybe Text)
+    , _cdEffectiveValue :: !(Maybe ExtendedValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5548,6 +7378,8 @@ data CellData =
 --
 -- * 'cdUserEnteredFormat'
 --
+-- * 'cdDataSourceTable'
+--
 -- * 'cdEffectiveFormat'
 --
 -- * 'cdPivotTable'
@@ -5555,6 +7387,8 @@ data CellData =
 -- * 'cdFormattedValue'
 --
 -- * 'cdDataValidation'
+--
+-- * 'cdDataSourceFormula'
 --
 -- * 'cdHyperlink'
 --
@@ -5567,23 +7401,23 @@ cellData =
     , _cdNote = Nothing
     , _cdUserEnteredValue = Nothing
     , _cdUserEnteredFormat = Nothing
+    , _cdDataSourceTable = Nothing
     , _cdEffectiveFormat = Nothing
     , _cdPivotTable = Nothing
     , _cdFormattedValue = Nothing
     , _cdDataValidation = Nothing
+    , _cdDataSourceFormula = Nothing
     , _cdHyperlink = Nothing
     , _cdEffectiveValue = Nothing
     }
 
 
 -- | Runs of rich text applied to subsections of the cell. Runs are only
--- valid on user entered strings, not formulas, bools, or numbers. Runs
--- start at specific indexes in the text and continue until the next run.
--- Properties of a run will continue unless explicitly changed in a
--- subsequent run (and properties of the first run will continue the
--- properties of the cell unless explicitly changed). When writing, the new
--- runs will overwrite any prior runs. When writing a new
--- user_entered_value, previous runs are erased.
+-- valid on user entered strings, not formulas, bools, or numbers.
+-- Properties of a run start at a specific index in the text and continue
+-- until the next run. Runs will inherit the properties of the cell unless
+-- explicitly changed. When writing, the new runs will overwrite any prior
+-- runs. When writing a new user_entered_value, previous runs are erased.
 cdTextFormatRuns :: Lens' CellData [TextFormatRun]
 cdTextFormatRuns
   = lens _cdTextFormatRuns
@@ -5609,6 +7443,16 @@ cdUserEnteredFormat :: Lens' CellData (Maybe CellFormat)
 cdUserEnteredFormat
   = lens _cdUserEnteredFormat
       (\ s a -> s{_cdUserEnteredFormat = a})
+
+-- | A data source table anchored at this cell. The size of data source table
+-- itself is computed dynamically based on its configuration. Only the
+-- first cell of the data source table contains the data source table
+-- definition. The other cells will contain the display values of the data
+-- source table result in their effective_value fields.
+cdDataSourceTable :: Lens' CellData (Maybe DataSourceTable)
+cdDataSourceTable
+  = lens _cdDataSourceTable
+      (\ s a -> s{_cdDataSourceTable = a})
 
 -- | The effective format being used by the cell. This includes the results
 -- of applying any conditional formatting and, if the cell contains a
@@ -5643,9 +7487,20 @@ cdDataValidation
   = lens _cdDataValidation
       (\ s a -> s{_cdDataValidation = a})
 
--- | A hyperlink this cell points to, if any. This field is read-only. (To
--- set it, use a \`=HYPERLINK\` formula in the
--- userEnteredValue.formulaValue field.)
+-- | Output only. Information about a data source formula on the cell. The
+-- field is set if user_entered_value is a formula referencing some
+-- DATA_SOURCE sheet, e.g. \`=SUM(DataSheet!Column)\`.
+cdDataSourceFormula :: Lens' CellData (Maybe DataSourceFormula)
+cdDataSourceFormula
+  = lens _cdDataSourceFormula
+      (\ s a -> s{_cdDataSourceFormula = a})
+
+-- | A hyperlink this cell points to, if any. If the cell contains multiple
+-- hyperlinks, this field will be empty. This field is read-only. To set
+-- it, use a \`=HYPERLINK\` formula in the userEnteredValue.formulaValue
+-- field. A cell-level link can also be set from the
+-- userEnteredFormat.textFormat field. Alternatively, set a hyperlink in
+-- the textFormatRun.format.link field that spans the entire cell.
 cdHyperlink :: Lens' CellData (Maybe Text)
 cdHyperlink
   = lens _cdHyperlink (\ s a -> s{_cdHyperlink = a})
@@ -5667,10 +7522,12 @@ instance FromJSON CellData where
                      (o .:? "note")
                      <*> (o .:? "userEnteredValue")
                      <*> (o .:? "userEnteredFormat")
+                     <*> (o .:? "dataSourceTable")
                      <*> (o .:? "effectiveFormat")
                      <*> (o .:? "pivotTable")
                      <*> (o .:? "formattedValue")
                      <*> (o .:? "dataValidation")
+                     <*> (o .:? "dataSourceFormula")
                      <*> (o .:? "hyperlink")
                      <*> (o .:? "effectiveValue"))
 
@@ -5682,10 +7539,12 @@ instance ToJSON CellData where
                   ("note" .=) <$> _cdNote,
                   ("userEnteredValue" .=) <$> _cdUserEnteredValue,
                   ("userEnteredFormat" .=) <$> _cdUserEnteredFormat,
+                  ("dataSourceTable" .=) <$> _cdDataSourceTable,
                   ("effectiveFormat" .=) <$> _cdEffectiveFormat,
                   ("pivotTable" .=) <$> _cdPivotTable,
                   ("formattedValue" .=) <$> _cdFormattedValue,
                   ("dataValidation" .=) <$> _cdDataValidation,
+                  ("dataSourceFormula" .=) <$> _cdDataSourceFormula,
                   ("hyperlink" .=) <$> _cdHyperlink,
                   ("effectiveValue" .=) <$> _cdEffectiveValue])
 
@@ -5777,7 +7636,7 @@ instance ToJSON AddNamedRangeResponse where
 data WaterfallChartDomain =
   WaterfallChartDomain'
     { _wcdReversed :: !(Maybe Bool)
-    , _wcdData     :: !(Maybe ChartData)
+    , _wcdData :: !(Maybe ChartData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5818,6 +7677,220 @@ instance ToJSON WaterfallChartDomain where
                  [("reversed" .=) <$> _wcdReversed,
                   ("data" .=) <$> _wcdData])
 
+-- | The options that define a \"view window\" for a chart (such as the
+-- visible values in an axis).
+--
+-- /See:/ 'chartAxisViewWindowOptions' smart constructor.
+data ChartAxisViewWindowOptions =
+  ChartAxisViewWindowOptions'
+    { _cavwoViewWindowMax :: !(Maybe (Textual Double))
+    , _cavwoViewWindowMode :: !(Maybe ChartAxisViewWindowOptionsViewWindowMode)
+    , _cavwoViewWindowMin :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ChartAxisViewWindowOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cavwoViewWindowMax'
+--
+-- * 'cavwoViewWindowMode'
+--
+-- * 'cavwoViewWindowMin'
+chartAxisViewWindowOptions
+    :: ChartAxisViewWindowOptions
+chartAxisViewWindowOptions =
+  ChartAxisViewWindowOptions'
+    { _cavwoViewWindowMax = Nothing
+    , _cavwoViewWindowMode = Nothing
+    , _cavwoViewWindowMin = Nothing
+    }
+
+
+-- | The maximum numeric value to be shown in this view window. If unset,
+-- will automatically determine a maximum value that looks good for the
+-- data.
+cavwoViewWindowMax :: Lens' ChartAxisViewWindowOptions (Maybe Double)
+cavwoViewWindowMax
+  = lens _cavwoViewWindowMax
+      (\ s a -> s{_cavwoViewWindowMax = a})
+      . mapping _Coerce
+
+-- | The view window\'s mode.
+cavwoViewWindowMode :: Lens' ChartAxisViewWindowOptions (Maybe ChartAxisViewWindowOptionsViewWindowMode)
+cavwoViewWindowMode
+  = lens _cavwoViewWindowMode
+      (\ s a -> s{_cavwoViewWindowMode = a})
+
+-- | The minimum numeric value to be shown in this view window. If unset,
+-- will automatically determine a minimum value that looks good for the
+-- data.
+cavwoViewWindowMin :: Lens' ChartAxisViewWindowOptions (Maybe Double)
+cavwoViewWindowMin
+  = lens _cavwoViewWindowMin
+      (\ s a -> s{_cavwoViewWindowMin = a})
+      . mapping _Coerce
+
+instance FromJSON ChartAxisViewWindowOptions where
+        parseJSON
+          = withObject "ChartAxisViewWindowOptions"
+              (\ o ->
+                 ChartAxisViewWindowOptions' <$>
+                   (o .:? "viewWindowMax") <*> (o .:? "viewWindowMode")
+                     <*> (o .:? "viewWindowMin"))
+
+instance ToJSON ChartAxisViewWindowOptions where
+        toJSON ChartAxisViewWindowOptions'{..}
+          = object
+              (catMaybes
+                 [("viewWindowMax" .=) <$> _cavwoViewWindowMax,
+                  ("viewWindowMode" .=) <$> _cavwoViewWindowMode,
+                  ("viewWindowMin" .=) <$> _cavwoViewWindowMin])
+
+-- | The data execution status. A data execution is created to sync a data
+-- source object with the latest data from a DataSource. It is usually
+-- scheduled to run at background, you can check its state to tell if an
+-- execution completes There are several scenarios where a data execution
+-- is triggered to run: * Adding a data source creates an associated data
+-- source sheet as well as a data execution to sync the data from the data
+-- source to the sheet. * Updating a data source creates a data execution
+-- to refresh the associated data source sheet similarly. * You can send
+-- refresh request to explicitly refresh one or multiple data source
+-- objects.
+--
+-- /See:/ 'dataExecutionStatus' smart constructor.
+data DataExecutionStatus =
+  DataExecutionStatus'
+    { _desState :: !(Maybe DataExecutionStatusState)
+    , _desLastRefreshTime :: !(Maybe DateTime')
+    , _desErrorCode :: !(Maybe DataExecutionStatusErrorCode)
+    , _desErrorMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataExecutionStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'desState'
+--
+-- * 'desLastRefreshTime'
+--
+-- * 'desErrorCode'
+--
+-- * 'desErrorMessage'
+dataExecutionStatus
+    :: DataExecutionStatus
+dataExecutionStatus =
+  DataExecutionStatus'
+    { _desState = Nothing
+    , _desLastRefreshTime = Nothing
+    , _desErrorCode = Nothing
+    , _desErrorMessage = Nothing
+    }
+
+
+-- | The state of the data execution.
+desState :: Lens' DataExecutionStatus (Maybe DataExecutionStatusState)
+desState = lens _desState (\ s a -> s{_desState = a})
+
+-- | Gets the time the data last successfully refreshed.
+desLastRefreshTime :: Lens' DataExecutionStatus (Maybe UTCTime)
+desLastRefreshTime
+  = lens _desLastRefreshTime
+      (\ s a -> s{_desLastRefreshTime = a})
+      . mapping _DateTime
+
+-- | The error code.
+desErrorCode :: Lens' DataExecutionStatus (Maybe DataExecutionStatusErrorCode)
+desErrorCode
+  = lens _desErrorCode (\ s a -> s{_desErrorCode = a})
+
+-- | The error message, which may be empty.
+desErrorMessage :: Lens' DataExecutionStatus (Maybe Text)
+desErrorMessage
+  = lens _desErrorMessage
+      (\ s a -> s{_desErrorMessage = a})
+
+instance FromJSON DataExecutionStatus where
+        parseJSON
+          = withObject "DataExecutionStatus"
+              (\ o ->
+                 DataExecutionStatus' <$>
+                   (o .:? "state") <*> (o .:? "lastRefreshTime") <*>
+                     (o .:? "errorCode")
+                     <*> (o .:? "errorMessage"))
+
+instance ToJSON DataExecutionStatus where
+        toJSON DataExecutionStatus'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _desState,
+                  ("lastRefreshTime" .=) <$> _desLastRefreshTime,
+                  ("errorCode" .=) <$> _desErrorCode,
+                  ("errorMessage" .=) <$> _desErrorMessage])
+
+-- | The count limit on rows or columns in the pivot group.
+--
+-- /See:/ 'pivotGroupLimit' smart constructor.
+data PivotGroupLimit =
+  PivotGroupLimit'
+    { _pglApplyOrder :: !(Maybe (Textual Int32))
+    , _pglCountLimit :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PivotGroupLimit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pglApplyOrder'
+--
+-- * 'pglCountLimit'
+pivotGroupLimit
+    :: PivotGroupLimit
+pivotGroupLimit =
+  PivotGroupLimit' {_pglApplyOrder = Nothing, _pglCountLimit = Nothing}
+
+
+-- | The order in which the group limit is applied to the pivot table. Pivot
+-- group limits are applied from lower to higher order number. Order
+-- numbers are normalized to consecutive integers from 0. For write
+-- request, to fully customize the applying orders, all pivot group limits
+-- should have this field set with an unique number. Otherwise, the order
+-- is determined by the index in the PivotTable.rows list and then the
+-- PivotTable.columns list.
+pglApplyOrder :: Lens' PivotGroupLimit (Maybe Int32)
+pglApplyOrder
+  = lens _pglApplyOrder
+      (\ s a -> s{_pglApplyOrder = a})
+      . mapping _Coerce
+
+-- | The count limit.
+pglCountLimit :: Lens' PivotGroupLimit (Maybe Int32)
+pglCountLimit
+  = lens _pglCountLimit
+      (\ s a -> s{_pglCountLimit = a})
+      . mapping _Coerce
+
+instance FromJSON PivotGroupLimit where
+        parseJSON
+          = withObject "PivotGroupLimit"
+              (\ o ->
+                 PivotGroupLimit' <$>
+                   (o .:? "applyOrder") <*> (o .:? "countLimit"))
+
+instance ToJSON PivotGroupLimit where
+        toJSON PivotGroupLimit'{..}
+          = object
+              (catMaybes
+                 [("applyOrder" .=) <$> _pglApplyOrder,
+                  ("countLimit" .=) <$> _pglCountLimit])
+
 -- | The result of adding a chart to a spreadsheet.
 --
 -- /See:/ 'addChartResponse' smart constructor.
@@ -5851,6 +7924,41 @@ instance ToJSON AddChartResponse where
         toJSON AddChartResponse'{..}
           = object (catMaybes [("chart" .=) <$> _acrChart])
 
+-- | Specifies a custom BigQuery query.
+--
+-- /See:/ 'bigQueryQuerySpec' smart constructor.
+newtype BigQueryQuerySpec =
+  BigQueryQuerySpec'
+    { _bqqsRawQuery :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BigQueryQuerySpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bqqsRawQuery'
+bigQueryQuerySpec
+    :: BigQueryQuerySpec
+bigQueryQuerySpec = BigQueryQuerySpec' {_bqqsRawQuery = Nothing}
+
+
+-- | The raw query string.
+bqqsRawQuery :: Lens' BigQueryQuerySpec (Maybe Text)
+bqqsRawQuery
+  = lens _bqqsRawQuery (\ s a -> s{_bqqsRawQuery = a})
+
+instance FromJSON BigQueryQuerySpec where
+        parseJSON
+          = withObject "BigQueryQuerySpec"
+              (\ o -> BigQueryQuerySpec' <$> (o .:? "rawQuery"))
+
+instance ToJSON BigQueryQuerySpec where
+        toJSON BigQueryQuerySpec'{..}
+          = object
+              (catMaybes [("rawQuery" .=) <$> _bqqsRawQuery])
+
 -- | Updates a chart\'s specifications. (This does not move or resize a
 -- chart. To move or resize a chart, use
 -- UpdateEmbeddedObjectPositionRequest.)
@@ -5858,7 +7966,7 @@ instance ToJSON AddChartResponse where
 -- /See:/ 'updateChartSpecRequest' smart constructor.
 data UpdateChartSpecRequest =
   UpdateChartSpecRequest'
-    { _ucsrSpec    :: !(Maybe ChartSpec)
+    { _ucsrSpec :: !(Maybe ChartSpec)
     , _ucsrChartId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5941,7 +8049,7 @@ instance ToJSON SetBasicFilterRequest where
 -- /See:/ 'iterativeCalculationSettings' smart constructor.
 data IterativeCalculationSettings =
   IterativeCalculationSettings'
-    { _icsMaxIterations        :: !(Maybe (Textual Int32))
+    { _icsMaxIterations :: !(Maybe (Textual Int32))
     , _icsConvergenceThreshold :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5993,18 +8101,101 @@ instance ToJSON IterativeCalculationSettings where
                   ("convergenceThreshold" .=) <$>
                     _icsConvergenceThreshold])
 
+-- | Refreshes one or multiple data source objects in the spreadsheet by the
+-- specified references. The request requires an additional
+-- \`bigquery.readonly\` OAuth scope. If there are multiple refresh
+-- requests referencing the same data source objects in one batch, only the
+-- last refresh request is processed, and all those requests will have the
+-- same response accordingly.
+--
+-- /See:/ 'refreshDataSourceRequest' smart constructor.
+data RefreshDataSourceRequest =
+  RefreshDataSourceRequest'
+    { _rdsrForce :: !(Maybe Bool)
+    , _rdsrReferences :: !(Maybe DataSourceObjectReferences)
+    , _rdsrDataSourceId :: !(Maybe Text)
+    , _rdsrIsAll :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RefreshDataSourceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdsrForce'
+--
+-- * 'rdsrReferences'
+--
+-- * 'rdsrDataSourceId'
+--
+-- * 'rdsrIsAll'
+refreshDataSourceRequest
+    :: RefreshDataSourceRequest
+refreshDataSourceRequest =
+  RefreshDataSourceRequest'
+    { _rdsrForce = Nothing
+    , _rdsrReferences = Nothing
+    , _rdsrDataSourceId = Nothing
+    , _rdsrIsAll = Nothing
+    }
+
+
+-- | Refreshes the data source objects regardless of the current state. If
+-- not set and a referenced data source object was in error state, the
+-- refresh will fail immediately.
+rdsrForce :: Lens' RefreshDataSourceRequest (Maybe Bool)
+rdsrForce
+  = lens _rdsrForce (\ s a -> s{_rdsrForce = a})
+
+-- | References to data source objects to refresh.
+rdsrReferences :: Lens' RefreshDataSourceRequest (Maybe DataSourceObjectReferences)
+rdsrReferences
+  = lens _rdsrReferences
+      (\ s a -> s{_rdsrReferences = a})
+
+-- | Reference to a DataSource. If specified, refreshes all associated data
+-- source objects for the data source.
+rdsrDataSourceId :: Lens' RefreshDataSourceRequest (Maybe Text)
+rdsrDataSourceId
+  = lens _rdsrDataSourceId
+      (\ s a -> s{_rdsrDataSourceId = a})
+
+-- | Refreshes all existing data source objects in the spreadsheet.
+rdsrIsAll :: Lens' RefreshDataSourceRequest (Maybe Bool)
+rdsrIsAll
+  = lens _rdsrIsAll (\ s a -> s{_rdsrIsAll = a})
+
+instance FromJSON RefreshDataSourceRequest where
+        parseJSON
+          = withObject "RefreshDataSourceRequest"
+              (\ o ->
+                 RefreshDataSourceRequest' <$>
+                   (o .:? "force") <*> (o .:? "references") <*>
+                     (o .:? "dataSourceId")
+                     <*> (o .:? "isAll"))
+
+instance ToJSON RefreshDataSourceRequest where
+        toJSON RefreshDataSourceRequest'{..}
+          = object
+              (catMaybes
+                 [("force" .=) <$> _rdsrForce,
+                  ("references" .=) <$> _rdsrReferences,
+                  ("dataSourceId" .=) <$> _rdsrDataSourceId,
+                  ("isAll" .=) <$> _rdsrIsAll])
+
 -- | The response when updating a range of values by a data filter in a
 -- spreadsheet.
 --
 -- /See:/ 'updateValuesByDataFilterResponse' smart constructor.
 data UpdateValuesByDataFilterResponse =
   UpdateValuesByDataFilterResponse'
-    { _uvbdfrUpdatedCells   :: !(Maybe (Textual Int32))
-    , _uvbdfrUpdatedRows    :: !(Maybe (Textual Int32))
-    , _uvbdfrUpdatedRange   :: !(Maybe Text)
-    , _uvbdfrUpdatedData    :: !(Maybe ValueRange)
+    { _uvbdfrUpdatedCells :: !(Maybe (Textual Int32))
+    , _uvbdfrUpdatedRows :: !(Maybe (Textual Int32))
+    , _uvbdfrUpdatedRange :: !(Maybe Text)
+    , _uvbdfrUpdatedData :: !(Maybe ValueRange)
     , _uvbdfrUpdatedColumns :: !(Maybe (Textual Int32))
-    , _uvbdfrDataFilter     :: !(Maybe DataFilter)
+    , _uvbdfrDataFilter :: !(Maybe DataFilter)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6107,13 +8298,13 @@ instance ToJSON UpdateValuesByDataFilterResponse
 -- /See:/ 'gridProperties' smart constructor.
 data GridProperties =
   GridProperties'
-    { _gpFrozenColumnCount       :: !(Maybe (Textual Int32))
-    , _gpColumnCount             :: !(Maybe (Textual Int32))
+    { _gpFrozenColumnCount :: !(Maybe (Textual Int32))
+    , _gpColumnCount :: !(Maybe (Textual Int32))
     , _gpColumnGroupControlAfter :: !(Maybe Bool)
-    , _gpHideGridlines           :: !(Maybe Bool)
-    , _gpFrozenRowCount          :: !(Maybe (Textual Int32))
-    , _gpRowGroupControlAfter    :: !(Maybe Bool)
-    , _gpRowCount                :: !(Maybe (Textual Int32))
+    , _gpHideGridlines :: !(Maybe Bool)
+    , _gpFrozenRowCount :: !(Maybe (Textual Int32))
+    , _gpRowGroupControlAfter :: !(Maybe Bool)
+    , _gpRowCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6220,21 +8411,20 @@ instance ToJSON GridProperties where
                     _gpRowGroupControlAfter,
                   ("rowCount" .=) <$> _gpRowCount])
 
--- | A </chart/interactive/docs/gallery/histogram histogram chart>. A
--- histogram chart groups data items into bins, displaying each bin as a
--- column of stacked items. Histograms are used to display the distribution
--- of a dataset. Each column of items represents a range into which those
--- items fall. The number of bins can be chosen automatically or specified
--- explicitly.
+-- | A histogram chart. A histogram chart groups data items into bins,
+-- displaying each bin as a column of stacked items. Histograms are used to
+-- display the distribution of a dataset. Each column of items represents a
+-- range into which those items fall. The number of bins can be chosen
+-- automatically or specified explicitly.
 --
 -- /See:/ 'histogramChartSpec' smart constructor.
 data HistogramChartSpec =
   HistogramChartSpec'
-    { _hcsLegendPosition    :: !(Maybe HistogramChartSpecLegendPosition)
-    , _hcsSeries            :: !(Maybe [HistogramSeries])
-    , _hcsShowItemDividers  :: !(Maybe Bool)
+    { _hcsLegendPosition :: !(Maybe HistogramChartSpecLegendPosition)
+    , _hcsSeries :: !(Maybe [HistogramSeries])
+    , _hcsShowItemDividers :: !(Maybe Bool)
     , _hcsOutlierPercentile :: !(Maybe (Textual Double))
-    , _hcsBucketSize        :: !(Maybe (Textual Double))
+    , _hcsBucketSize :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6331,7 +8521,8 @@ instance ToJSON HistogramChartSpec where
                   ("bucketSize" .=) <$> _hcsBucketSize])
 
 -- | The criteria for showing\/hiding values per column. The map\'s key is
--- the column index, and the value is the criteria for that column.
+-- the column index, and the value is the criteria for that column. This
+-- field is deprecated in favor of filter_specs.
 --
 -- /See:/ 'basicFilterCriteria' smart constructor.
 newtype BasicFilterCriteria =
@@ -6409,8 +8600,9 @@ instance ToJSON AddBandingRequest where
 -- /See:/ 'updateDimensionPropertiesRequest' smart constructor.
 data UpdateDimensionPropertiesRequest =
   UpdateDimensionPropertiesRequest'
-    { _udprRange      :: !(Maybe DimensionRange)
-    , _udprFields     :: !(Maybe GFieldMask)
+    { _udprRange :: !(Maybe DimensionRange)
+    , _udprDataSourceSheetRange :: !(Maybe DataSourceSheetDimensionRange)
+    , _udprFields :: !(Maybe GFieldMask)
     , _udprProperties :: !(Maybe DimensionProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6422,6 +8614,8 @@ data UpdateDimensionPropertiesRequest =
 --
 -- * 'udprRange'
 --
+-- * 'udprDataSourceSheetRange'
+--
 -- * 'udprFields'
 --
 -- * 'udprProperties'
@@ -6429,13 +8623,23 @@ updateDimensionPropertiesRequest
     :: UpdateDimensionPropertiesRequest
 updateDimensionPropertiesRequest =
   UpdateDimensionPropertiesRequest'
-    {_udprRange = Nothing, _udprFields = Nothing, _udprProperties = Nothing}
+    { _udprRange = Nothing
+    , _udprDataSourceSheetRange = Nothing
+    , _udprFields = Nothing
+    , _udprProperties = Nothing
+    }
 
 
 -- | The rows or columns to update.
 udprRange :: Lens' UpdateDimensionPropertiesRequest (Maybe DimensionRange)
 udprRange
   = lens _udprRange (\ s a -> s{_udprRange = a})
+
+-- | The columns on a data source sheet to update.
+udprDataSourceSheetRange :: Lens' UpdateDimensionPropertiesRequest (Maybe DataSourceSheetDimensionRange)
+udprDataSourceSheetRange
+  = lens _udprDataSourceSheetRange
+      (\ s a -> s{_udprDataSourceSheetRange = a})
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`properties\` is implied and should not be specified. A single
@@ -6456,8 +8660,9 @@ instance FromJSON UpdateDimensionPropertiesRequest
           = withObject "UpdateDimensionPropertiesRequest"
               (\ o ->
                  UpdateDimensionPropertiesRequest' <$>
-                   (o .:? "range") <*> (o .:? "fields") <*>
-                     (o .:? "properties"))
+                   (o .:? "range") <*> (o .:? "dataSourceSheetRange")
+                     <*> (o .:? "fields")
+                     <*> (o .:? "properties"))
 
 instance ToJSON UpdateDimensionPropertiesRequest
          where
@@ -6465,6 +8670,8 @@ instance ToJSON UpdateDimensionPropertiesRequest
           = object
               (catMaybes
                  [("range" .=) <$> _udprRange,
+                  ("dataSourceSheetRange" .=) <$>
+                    _udprDataSourceSheetRange,
                   ("fields" .=) <$> _udprFields,
                   ("properties" .=) <$> _udprProperties])
 
@@ -6473,7 +8680,8 @@ instance ToJSON UpdateDimensionPropertiesRequest
 -- the column offset of the source range that you want to filter, and the
 -- value is the criteria for that column. For example, if the source was
 -- \`C10:E15\`, a key of \`0\` will have the filter for column \`C\`,
--- whereas the key \`1\` is for column \`D\`.
+-- whereas the key \`1\` is for column \`D\`. This field is deprecated in
+-- favor of filter_specs.
 --
 -- /See:/ 'pivotTableCriteria' smart constructor.
 newtype PivotTableCriteria =
@@ -6514,8 +8722,8 @@ instance ToJSON PivotTableCriteria where
 data AutoFillRequest =
   AutoFillRequest'
     { _afrSourceAndDestination :: !(Maybe SourceAndDestination)
-    , _afrUseAlternateSeries   :: !(Maybe Bool)
-    , _afrRange                :: !(Maybe GridRange)
+    , _afrUseAlternateSeries :: !(Maybe Bool)
+    , _afrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6591,12 +8799,12 @@ instance ToJSON AutoFillRequest where
 data DeveloperMetadataLookup =
   DeveloperMetadataLookup'
     { _dLocationMatchingStrategy :: !(Maybe DeveloperMetadataLookupLocationMatchingStrategy)
-    , _dMetadataId               :: !(Maybe (Textual Int32))
-    , _dVisibility               :: !(Maybe DeveloperMetadataLookupVisibility)
-    , _dMetadataKey              :: !(Maybe Text)
-    , _dLocationType             :: !(Maybe DeveloperMetadataLookupLocationType)
-    , _dMetadataLocation         :: !(Maybe DeveloperMetadataLocation)
-    , _dMetadataValue            :: !(Maybe Text)
+    , _dMetadataId :: !(Maybe (Textual Int32))
+    , _dVisibility :: !(Maybe DeveloperMetadataLookupVisibility)
+    , _dMetadataKey :: !(Maybe Text)
+    , _dLocationType :: !(Maybe DeveloperMetadataLookupLocationType)
+    , _dMetadataLocation :: !(Maybe DeveloperMetadataLocation)
+    , _dMetadataValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6725,10 +8933,10 @@ instance ToJSON DeveloperMetadataLookup where
 -- /See:/ 'duplicateSheetRequest' smart constructor.
 data DuplicateSheetRequest =
   DuplicateSheetRequest'
-    { _dsrNewSheetName     :: !(Maybe Text)
+    { _dsrNewSheetName :: !(Maybe Text)
     , _dsrInsertSheetIndex :: !(Maybe (Textual Int32))
-    , _dsrSourceSheetId    :: !(Maybe (Textual Int32))
-    , _dsrNewSheetId       :: !(Maybe (Textual Int32))
+    , _dsrSourceSheetId :: !(Maybe (Textual Int32))
+    , _dsrNewSheetId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6769,7 +8977,11 @@ dsrInsertSheetIndex
       (\ s a -> s{_dsrInsertSheetIndex = a})
       . mapping _Coerce
 
--- | The sheet to duplicate.
+-- | The sheet to duplicate. If the source sheet is of DATA_SOURCE type, its
+-- backing DataSource is also duplicated and associated with the new copy
+-- of the sheet. No data execution is triggered, the grid data of this
+-- sheet is also copied over but only available after the batch request
+-- completes.
 dsrSourceSheetId :: Lens' DuplicateSheetRequest (Maybe Int32)
 dsrSourceSheetId
   = lens _dsrSourceSheetId
@@ -6808,7 +9020,7 @@ instance ToJSON DuplicateSheetRequest where
 -- /See:/ 'textRotation' smart constructor.
 data TextRotation =
   TextRotation'
-    { _trAngle    :: !(Maybe (Textual Int32))
+    { _trAngle :: !(Maybe (Textual Int32))
     , _trVertical :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6898,11 +9110,11 @@ instance ToJSON DuplicateFilterViewResponse where
 -- /See:/ 'batchUpdateValuesRequest' smart constructor.
 data BatchUpdateValuesRequest =
   BatchUpdateValuesRequest'
-    { _buvrData                         :: !(Maybe [ValueRange])
-    , _buvrValueInputOption             :: !(Maybe BatchUpdateValuesRequestValueInputOption)
-    , _buvrIncludeValuesInResponse      :: !(Maybe Bool)
+    { _buvrData :: !(Maybe [ValueRange])
+    , _buvrValueInputOption :: !(Maybe BatchUpdateValuesRequestValueInputOption)
+    , _buvrIncludeValuesInResponse :: !(Maybe Bool)
     , _buvrResponseDateTimeRenderOption :: !(Maybe BatchUpdateValuesRequestResponseDateTimeRenderOption)
-    , _buvrResponseValueRenderOption    :: !(Maybe BatchUpdateValuesRequestResponseValueRenderOption)
+    , _buvrResponseValueRenderOption :: !(Maybe BatchUpdateValuesRequestResponseValueRenderOption)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6948,10 +9160,10 @@ buvrValueInputOption
 -- | Determines if the update response should include the values of the cells
 -- that were updated. By default, responses do not include the updated
 -- values. The \`updatedData\` field within each of the
--- BatchUpdateValuesResponse.responses will contain the updated values. If
--- the range to write was larger than than the range actually written, the
--- response will include all values in the requested range (excluding
--- trailing empty rows and columns).
+-- BatchUpdateValuesResponse.responses contains the updated values. If the
+-- range to write was larger than the range actually written, the response
+-- includes all values in the requested range (excluding trailing empty
+-- rows and columns).
 buvrIncludeValuesInResponse :: Lens' BatchUpdateValuesRequest (Maybe Bool)
 buvrIncludeValuesInResponse
   = lens _buvrIncludeValuesInResponse
@@ -6959,15 +9171,14 @@ buvrIncludeValuesInResponse
 
 -- | Determines how dates, times, and durations in the response should be
 -- rendered. This is ignored if response_value_render_option is
--- FORMATTED_VALUE. The default dateTime render option is
--- DateTimeRenderOption.SERIAL_NUMBER.
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
 buvrResponseDateTimeRenderOption :: Lens' BatchUpdateValuesRequest (Maybe BatchUpdateValuesRequestResponseDateTimeRenderOption)
 buvrResponseDateTimeRenderOption
   = lens _buvrResponseDateTimeRenderOption
       (\ s a -> s{_buvrResponseDateTimeRenderOption = a})
 
 -- | Determines how values in the response should be rendered. The default
--- render option is ValueRenderOption.FORMATTED_VALUE.
+-- render option is FORMATTED_VALUE.
 buvrResponseValueRenderOption :: Lens' BatchUpdateValuesRequest (Maybe BatchUpdateValuesRequestResponseValueRenderOption)
 buvrResponseValueRenderOption
   = lens _buvrResponseValueRenderOption
@@ -7002,8 +9213,8 @@ instance ToJSON BatchUpdateValuesRequest where
 -- /See:/ 'dataFilterValueRange' smart constructor.
 data DataFilterValueRange =
   DataFilterValueRange'
-    { _dfvrValues         :: !(Maybe [[JSONValue]])
-    , _dfvrDataFilter     :: !(Maybe DataFilter)
+    { _dfvrValues :: !(Maybe [[JSONValue]])
+    , _dfvrDataFilter :: !(Maybe DataFilter)
     , _dfvrMajorDimension :: !(Maybe DataFilterValueRangeMajorDimension)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7029,10 +9240,9 @@ dataFilterValueRange =
 
 
 -- | The data to be written. If the provided values exceed any of the ranges
--- matched by the data filter then the request will fail. If the provided
--- values are less than the matched ranges only the specified values will
--- be written, existing values in the matched ranges will remain
--- unaffected.
+-- matched by the data filter then the request fails. If the provided
+-- values are less than the matched ranges only the specified values are
+-- written, existing values in the matched ranges remain unaffected.
 dfvrValues :: Lens' DataFilterValueRange [[JSONValue]]
 dfvrValues
   = lens _dfvrValues (\ s a -> s{_dfvrValues = a}) .
@@ -7068,6 +9278,124 @@ instance ToJSON DataFilterValueRange where
                   ("dataFilter" .=) <$> _dfvrDataFilter,
                   ("majorDimension" .=) <$> _dfvrMajorDimension])
 
+-- | Removes rows within this range that contain values in the specified
+-- columns that are duplicates of values in any previous row. Rows with
+-- identical values but different letter cases, formatting, or formulas are
+-- considered to be duplicates. This request also removes duplicate rows
+-- hidden from view (for example, due to a filter). When removing
+-- duplicates, the first instance of each duplicate row scanning from the
+-- top downwards is kept in the resulting range. Content outside of the
+-- specified range isn\'t removed, and rows considered duplicates do not
+-- have to be adjacent to each other in the range.
+--
+-- /See:/ 'deleteDuplicatesRequest' smart constructor.
+data DeleteDuplicatesRequest =
+  DeleteDuplicatesRequest'
+    { _dComparisonColumns :: !(Maybe [DimensionRange])
+    , _dRange :: !(Maybe GridRange)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeleteDuplicatesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dComparisonColumns'
+--
+-- * 'dRange'
+deleteDuplicatesRequest
+    :: DeleteDuplicatesRequest
+deleteDuplicatesRequest =
+  DeleteDuplicatesRequest' {_dComparisonColumns = Nothing, _dRange = Nothing}
+
+
+-- | The columns in the range to analyze for duplicate values. If no columns
+-- are selected then all columns are analyzed for duplicates.
+dComparisonColumns :: Lens' DeleteDuplicatesRequest [DimensionRange]
+dComparisonColumns
+  = lens _dComparisonColumns
+      (\ s a -> s{_dComparisonColumns = a})
+      . _Default
+      . _Coerce
+
+-- | The range to remove duplicates rows from.
+dRange :: Lens' DeleteDuplicatesRequest (Maybe GridRange)
+dRange = lens _dRange (\ s a -> s{_dRange = a})
+
+instance FromJSON DeleteDuplicatesRequest where
+        parseJSON
+          = withObject "DeleteDuplicatesRequest"
+              (\ o ->
+                 DeleteDuplicatesRequest' <$>
+                   (o .:? "comparisonColumns" .!= mempty) <*>
+                     (o .:? "range"))
+
+instance ToJSON DeleteDuplicatesRequest where
+        toJSON DeleteDuplicatesRequest'{..}
+          = object
+              (catMaybes
+                 [("comparisonColumns" .=) <$> _dComparisonColumns,
+                  ("range" .=) <$> _dRange])
+
+-- | A weekly schedule for data to refresh on specific days in a given time
+-- interval.
+--
+-- /See:/ 'dataSourceRefreshWeeklySchedule' smart constructor.
+data DataSourceRefreshWeeklySchedule =
+  DataSourceRefreshWeeklySchedule'
+    { _dsrwsDaysOfWeek :: !(Maybe [DataSourceRefreshWeeklyScheduleDaysOfWeekItem])
+    , _dsrwsStartTime :: !(Maybe TimeOfDay')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceRefreshWeeklySchedule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsrwsDaysOfWeek'
+--
+-- * 'dsrwsStartTime'
+dataSourceRefreshWeeklySchedule
+    :: DataSourceRefreshWeeklySchedule
+dataSourceRefreshWeeklySchedule =
+  DataSourceRefreshWeeklySchedule'
+    {_dsrwsDaysOfWeek = Nothing, _dsrwsStartTime = Nothing}
+
+
+-- | Days of the week to refresh. At least one day must be specified.
+dsrwsDaysOfWeek :: Lens' DataSourceRefreshWeeklySchedule [DataSourceRefreshWeeklyScheduleDaysOfWeekItem]
+dsrwsDaysOfWeek
+  = lens _dsrwsDaysOfWeek
+      (\ s a -> s{_dsrwsDaysOfWeek = a})
+      . _Default
+      . _Coerce
+
+-- | The start time of a time interval in which a data source refresh is
+-- scheduled. Only \`hours\` part is used. The time interval size defaults
+-- to that in the Sheets editor.
+dsrwsStartTime :: Lens' DataSourceRefreshWeeklySchedule (Maybe TimeOfDay')
+dsrwsStartTime
+  = lens _dsrwsStartTime
+      (\ s a -> s{_dsrwsStartTime = a})
+
+instance FromJSON DataSourceRefreshWeeklySchedule
+         where
+        parseJSON
+          = withObject "DataSourceRefreshWeeklySchedule"
+              (\ o ->
+                 DataSourceRefreshWeeklySchedule' <$>
+                   (o .:? "daysOfWeek" .!= mempty) <*>
+                     (o .:? "startTime"))
+
+instance ToJSON DataSourceRefreshWeeklySchedule where
+        toJSON DataSourceRefreshWeeklySchedule'{..}
+          = object
+              (catMaybes
+                 [("daysOfWeek" .=) <$> _dsrwsDaysOfWeek,
+                  ("startTime" .=) <$> _dsrwsStartTime])
+
 -- | Adds a chart to a sheet in the spreadsheet.
 --
 -- /See:/ 'addChartRequest' smart constructor.
@@ -7091,7 +9419,7 @@ addChartRequest = AddChartRequest' {_aChart = Nothing}
 -- | The chart that should be added to the spreadsheet, including the
 -- position where it should be placed. The chartId field is optional; if
 -- one is not set, an id will be randomly generated. (It is an error to
--- specify the ID of a chart that already exists.)
+-- specify the ID of an embedded object that already exists.)
 aChart :: Lens' AddChartRequest (Maybe EmbeddedChart)
 aChart = lens _aChart (\ s a -> s{_aChart = a})
 
@@ -7110,8 +9438,8 @@ instance ToJSON AddChartRequest where
 data NamedRange =
   NamedRange'
     { _nrNamedRangeId :: !(Maybe Text)
-    , _nrName         :: !(Maybe Text)
-    , _nrRange        :: !(Maybe GridRange)
+    , _nrName :: !(Maybe Text)
+    , _nrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7166,7 +9494,7 @@ instance ToJSON NamedRange where
 data MergeCellsRequest =
   MergeCellsRequest'
     { _mcrMergeType :: !(Maybe MergeCellsRequestMergeType)
-    , _mcrRange     :: !(Maybe GridRange)
+    , _mcrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7303,6 +9631,7 @@ data BOrder =
     { _boStyle :: !(Maybe BOrderStyle)
     , _boColor :: !(Maybe Color)
     , _boWidth :: !(Maybe (Textual Int32))
+    , _boColorStyle :: !(Maybe ColorStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7316,9 +9645,17 @@ data BOrder =
 -- * 'boColor'
 --
 -- * 'boWidth'
+--
+-- * 'boColorStyle'
 bOrder
     :: BOrder
-bOrder = BOrder' {_boStyle = Nothing, _boColor = Nothing, _boWidth = Nothing}
+bOrder =
+  BOrder'
+    { _boStyle = Nothing
+    , _boColor = Nothing
+    , _boWidth = Nothing
+    , _boColorStyle = Nothing
+    }
 
 
 -- | The style of the border.
@@ -7336,21 +9673,28 @@ boWidth
   = lens _boWidth (\ s a -> s{_boWidth = a}) .
       mapping _Coerce
 
+-- | The color of the border. If color is also set, this field takes
+-- precedence.
+boColorStyle :: Lens' BOrder (Maybe ColorStyle)
+boColorStyle
+  = lens _boColorStyle (\ s a -> s{_boColorStyle = a})
+
 instance FromJSON BOrder where
         parseJSON
           = withObject "BOrder"
               (\ o ->
                  BOrder' <$>
                    (o .:? "style") <*> (o .:? "color") <*>
-                     (o .:? "width"))
+                     (o .:? "width")
+                     <*> (o .:? "colorStyle"))
 
 instance ToJSON BOrder where
         toJSON BOrder'{..}
           = object
               (catMaybes
                  [("style" .=) <$> _boStyle,
-                  ("color" .=) <$> _boColor,
-                  ("width" .=) <$> _boWidth])
+                  ("color" .=) <$> _boColor, ("width" .=) <$> _boWidth,
+                  ("colorStyle" .=) <$> _boColorStyle])
 
 -- | A request to retrieve all developer metadata matching the set of
 -- specified criteria.
@@ -7376,7 +9720,7 @@ searchDeveloperMetadataRequest =
 
 -- | The data filters describing the criteria used to determine which
 -- DeveloperMetadata entries to return. DeveloperMetadata matching any of
--- the specified filters will be included in the response.
+-- the specified filters are included in the response.
 sdmrDataFilters :: Lens' SearchDeveloperMetadataRequest [DataFilter]
 sdmrDataFilters
   = lens _sdmrDataFilters
@@ -7396,6 +9740,67 @@ instance ToJSON SearchDeveloperMetadataRequest where
         toJSON SearchDeveloperMetadataRequest'{..}
           = object
               (catMaybes [("dataFilters" .=) <$> _sdmrDataFilters])
+
+-- | A parameter in a data source\'s query. The parameter allows the user to
+-- pass in values from the spreadsheet into a query.
+--
+-- /See:/ 'dataSourceParameter' smart constructor.
+data DataSourceParameter =
+  DataSourceParameter'
+    { _dspNamedRangeId :: !(Maybe Text)
+    , _dspName :: !(Maybe Text)
+    , _dspRange :: !(Maybe GridRange)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceParameter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dspNamedRangeId'
+--
+-- * 'dspName'
+--
+-- * 'dspRange'
+dataSourceParameter
+    :: DataSourceParameter
+dataSourceParameter =
+  DataSourceParameter'
+    {_dspNamedRangeId = Nothing, _dspName = Nothing, _dspRange = Nothing}
+
+
+-- | ID of a NamedRange. Its size must be 1x1.
+dspNamedRangeId :: Lens' DataSourceParameter (Maybe Text)
+dspNamedRangeId
+  = lens _dspNamedRangeId
+      (\ s a -> s{_dspNamedRangeId = a})
+
+-- | Named parameter. Must be a legitimate identifier for the DataSource that
+-- supports it. For example, [BigQuery
+-- identifier](https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/lexical#identifiers).
+dspName :: Lens' DataSourceParameter (Maybe Text)
+dspName = lens _dspName (\ s a -> s{_dspName = a})
+
+-- | A range that contains the value of the parameter. Its size must be 1x1.
+dspRange :: Lens' DataSourceParameter (Maybe GridRange)
+dspRange = lens _dspRange (\ s a -> s{_dspRange = a})
+
+instance FromJSON DataSourceParameter where
+        parseJSON
+          = withObject "DataSourceParameter"
+              (\ o ->
+                 DataSourceParameter' <$>
+                   (o .:? "namedRangeId") <*> (o .:? "name") <*>
+                     (o .:? "range"))
+
+instance ToJSON DataSourceParameter where
+        toJSON DataSourceParameter'{..}
+          = object
+              (catMaybes
+                 [("namedRangeId" .=) <$> _dspNamedRangeId,
+                  ("name" .=) <$> _dspName,
+                  ("range" .=) <$> _dspRange])
 
 -- | The series of a CandlestickData.
 --
@@ -7435,10 +9840,10 @@ instance ToJSON CandlestickSeries where
 -- /See:/ 'extendedValue' smart constructor.
 data ExtendedValue =
   ExtendedValue'
-    { _evBoolValue    :: !(Maybe Bool)
-    , _evNumberValue  :: !(Maybe (Textual Double))
-    , _evErrorValue   :: !(Maybe ErrorValue)
-    , _evStringValue  :: !(Maybe Text)
+    { _evBoolValue :: !(Maybe Bool)
+    , _evNumberValue :: !(Maybe (Textual Double))
+    , _evErrorValue :: !(Maybe ErrorValue)
+    , _evStringValue :: !(Maybe Text)
     , _evFormulaValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7475,7 +9880,7 @@ evBoolValue
   = lens _evBoolValue (\ s a -> s{_evBoolValue = a})
 
 -- | Represents a double value. Note: Dates, Times and DateTimes are
--- represented as doubles in \"serial number\" format.
+-- represented as doubles in SERIAL_NUMBER format.
 evNumberValue :: Lens' ExtendedValue (Maybe Double)
 evNumberValue
   = lens _evNumberValue
@@ -7562,9 +9967,11 @@ instance ToJSON AddNamedRangeRequest where
 -- | Criteria for showing\/hiding rows in a pivot table.
 --
 -- /See:/ 'pivotFilterCriteria' smart constructor.
-newtype PivotFilterCriteria =
+data PivotFilterCriteria =
   PivotFilterCriteria'
-    { _pfcVisibleValues :: Maybe [Text]
+    { _pfcVisibleValues :: !(Maybe [Text])
+    , _pfcCondition :: !(Maybe BooleanCondition)
+    , _pfcVisibleByDefault :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7574,9 +9981,18 @@ newtype PivotFilterCriteria =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pfcVisibleValues'
+--
+-- * 'pfcCondition'
+--
+-- * 'pfcVisibleByDefault'
 pivotFilterCriteria
     :: PivotFilterCriteria
-pivotFilterCriteria = PivotFilterCriteria' {_pfcVisibleValues = Nothing}
+pivotFilterCriteria =
+  PivotFilterCriteria'
+    { _pfcVisibleValues = Nothing
+    , _pfcCondition = Nothing
+    , _pfcVisibleByDefault = Nothing
+    }
 
 
 -- | Values that should be included. Values not listed here are excluded.
@@ -7587,18 +10003,47 @@ pfcVisibleValues
       . _Default
       . _Coerce
 
+-- | A condition that must be true for values to be shown. (\`visibleValues\`
+-- does not override this -- even if a value is listed there, it is still
+-- hidden if it does not meet the condition.) Condition values that refer
+-- to ranges in A1-notation are evaluated relative to the pivot table
+-- sheet. References are treated absolutely, so are not filled down the
+-- pivot table. For example, a condition value of \`=A1\` on \"Pivot Table
+-- 1\" is treated as \`\'Pivot Table 1\'!$A$1\`. The source data of the
+-- pivot table can be referenced by column header name. For example, if the
+-- source data has columns named \"Revenue\" and \"Cost\" and a condition
+-- is applied to the \"Revenue\" column with type \`NUMBER_GREATER\` and
+-- value \`=Cost\`, then only columns where \"Revenue\" > \"Cost\" are
+-- included.
+pfcCondition :: Lens' PivotFilterCriteria (Maybe BooleanCondition)
+pfcCondition
+  = lens _pfcCondition (\ s a -> s{_pfcCondition = a})
+
+-- | Whether values are visible by default. If true, the visible_values are
+-- ignored, all values that meet condition (if specified) are shown. If
+-- false, values that are both in visible_values and meet condition are
+-- shown.
+pfcVisibleByDefault :: Lens' PivotFilterCriteria (Maybe Bool)
+pfcVisibleByDefault
+  = lens _pfcVisibleByDefault
+      (\ s a -> s{_pfcVisibleByDefault = a})
+
 instance FromJSON PivotFilterCriteria where
         parseJSON
           = withObject "PivotFilterCriteria"
               (\ o ->
                  PivotFilterCriteria' <$>
-                   (o .:? "visibleValues" .!= mempty))
+                   (o .:? "visibleValues" .!= mempty) <*>
+                     (o .:? "condition")
+                     <*> (o .:? "visibleByDefault"))
 
 instance ToJSON PivotFilterCriteria where
         toJSON PivotFilterCriteria'{..}
           = object
               (catMaybes
-                 [("visibleValues" .=) <$> _pfcVisibleValues])
+                 [("visibleValues" .=) <$> _pfcVisibleValues,
+                  ("condition" .=) <$> _pfcCondition,
+                  ("visibleByDefault" .=) <$> _pfcVisibleByDefault])
 
 -- | A range along a single dimension on a sheet. All indexes are zero-based.
 -- Indexes are half open: the start index is inclusive and the end index is
@@ -7607,9 +10052,9 @@ instance ToJSON PivotFilterCriteria where
 -- /See:/ 'dimensionRange' smart constructor.
 data DimensionRange =
   DimensionRange'
-    { _drDimension  :: !(Maybe DimensionRangeDimension)
-    , _drEndIndex   :: !(Maybe (Textual Int32))
-    , _drSheetId    :: !(Maybe (Textual Int32))
+    { _drDimension :: !(Maybe DimensionRangeDimension)
+    , _drEndIndex :: !(Maybe (Textual Int32))
+    , _drSheetId :: !(Maybe (Textual Int32))
     , _drStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7683,7 +10128,7 @@ instance ToJSON DimensionRange where
 -- /See:/ 'updateSpreadsheetPropertiesRequest' smart constructor.
 data UpdateSpreadsheetPropertiesRequest =
   UpdateSpreadsheetPropertiesRequest'
-    { _uFields     :: !(Maybe GFieldMask)
+    { _uFields :: !(Maybe GFieldMask)
     , _uProperties :: !(Maybe SpreadsheetProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7730,13 +10175,63 @@ instance ToJSON UpdateSpreadsheetPropertiesRequest
                  [("fields" .=) <$> _uFields,
                   ("properties" .=) <$> _uProperties])
 
+-- | A border along an embedded object.
+--
+-- /See:/ 'embeddedObjectBOrder' smart constructor.
+data EmbeddedObjectBOrder =
+  EmbeddedObjectBOrder'
+    { _eoboColor :: !(Maybe Color)
+    , _eoboColorStyle :: !(Maybe ColorStyle)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EmbeddedObjectBOrder' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eoboColor'
+--
+-- * 'eoboColorStyle'
+embeddedObjectBOrder
+    :: EmbeddedObjectBOrder
+embeddedObjectBOrder =
+  EmbeddedObjectBOrder' {_eoboColor = Nothing, _eoboColorStyle = Nothing}
+
+
+-- | The color of the border.
+eoboColor :: Lens' EmbeddedObjectBOrder (Maybe Color)
+eoboColor
+  = lens _eoboColor (\ s a -> s{_eoboColor = a})
+
+-- | The color of the border. If color is also set, this field takes
+-- precedence.
+eoboColorStyle :: Lens' EmbeddedObjectBOrder (Maybe ColorStyle)
+eoboColorStyle
+  = lens _eoboColorStyle
+      (\ s a -> s{_eoboColorStyle = a})
+
+instance FromJSON EmbeddedObjectBOrder where
+        parseJSON
+          = withObject "EmbeddedObjectBOrder"
+              (\ o ->
+                 EmbeddedObjectBOrder' <$>
+                   (o .:? "color") <*> (o .:? "colorStyle"))
+
+instance ToJSON EmbeddedObjectBOrder where
+        toJSON EmbeddedObjectBOrder'{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _eoboColor,
+                  ("colorStyle" .=) <$> _eoboColorStyle])
+
 -- | The domain of a CandlestickChart.
 --
 -- /See:/ 'candlestickDomain' smart constructor.
 data CandlestickDomain =
   CandlestickDomain'
     { _cdReversed :: !(Maybe Bool)
-    , _cdData     :: !(Maybe ChartData)
+    , _cdData :: !(Maybe ChartData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7817,14 +10312,69 @@ instance ToJSON AddProtectedRangeResponse where
               (catMaybes
                  [("protectedRange" .=) <$> _aProtectedRange])
 
+-- | Represents a time interval, encoded as a Timestamp start (inclusive) and
+-- a Timestamp end (exclusive). The start must be less than or equal to the
+-- end. When the start equals the end, the interval is empty (matches no
+-- time). When both start and end are unspecified, the interval matches any
+-- time.
+--
+-- /See:/ 'interval' smart constructor.
+data Interval =
+  Interval'
+    { _iStartTime :: !(Maybe DateTime')
+    , _iEndTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Interval' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iStartTime'
+--
+-- * 'iEndTime'
+interval
+    :: Interval
+interval = Interval' {_iStartTime = Nothing, _iEndTime = Nothing}
+
+
+-- | Optional. Inclusive start of the interval. If specified, a Timestamp
+-- matching this interval will have to be the same or after the start.
+iStartTime :: Lens' Interval (Maybe UTCTime)
+iStartTime
+  = lens _iStartTime (\ s a -> s{_iStartTime = a}) .
+      mapping _DateTime
+
+-- | Optional. Exclusive end of the interval. If specified, a Timestamp
+-- matching this interval will have to be before the end.
+iEndTime :: Lens' Interval (Maybe UTCTime)
+iEndTime
+  = lens _iEndTime (\ s a -> s{_iEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON Interval where
+        parseJSON
+          = withObject "Interval"
+              (\ o ->
+                 Interval' <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON Interval where
+        toJSON Interval'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _iStartTime,
+                  ("endTime" .=) <$> _iEndTime])
+
 -- | Appends rows or columns to the end of a sheet.
 --
 -- /See:/ 'appendDimensionRequest' smart constructor.
 data AppendDimensionRequest =
   AppendDimensionRequest'
-    { _adrLength    :: !(Maybe (Textual Int32))
+    { _adrLength :: !(Maybe (Textual Int32))
     , _adrDimension :: !(Maybe AppendDimensionRequestDimension)
-    , _adrSheetId   :: !(Maybe (Textual Int32))
+    , _adrSheetId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7883,11 +10433,12 @@ instance ToJSON AppendDimensionRequest where
 -- /See:/ 'pivotValue' smart constructor.
 data PivotValue =
   PivotValue'
-    { _pvSourceColumnOffSet    :: !(Maybe (Textual Int32))
-    , _pvFormula               :: !(Maybe Text)
-    , _pvName                  :: !(Maybe Text)
+    { _pvDataSourceColumnReference :: !(Maybe DataSourceColumnReference)
+    , _pvSourceColumnOffSet :: !(Maybe (Textual Int32))
+    , _pvFormula :: !(Maybe Text)
+    , _pvName :: !(Maybe Text)
     , _pvCalculatedDisplayType :: !(Maybe PivotValueCalculatedDisplayType)
-    , _pvSummarizeFunction     :: !(Maybe PivotValueSummarizeFunction)
+    , _pvSummarizeFunction :: !(Maybe PivotValueSummarizeFunction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7895,6 +10446,8 @@ data PivotValue =
 -- | Creates a value of 'PivotValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pvDataSourceColumnReference'
 --
 -- * 'pvSourceColumnOffSet'
 --
@@ -7909,13 +10462,20 @@ pivotValue
     :: PivotValue
 pivotValue =
   PivotValue'
-    { _pvSourceColumnOffSet = Nothing
+    { _pvDataSourceColumnReference = Nothing
+    , _pvSourceColumnOffSet = Nothing
     , _pvFormula = Nothing
     , _pvName = Nothing
     , _pvCalculatedDisplayType = Nothing
     , _pvSummarizeFunction = Nothing
     }
 
+
+-- | The reference to the data source column that this value reads from.
+pvDataSourceColumnReference :: Lens' PivotValue (Maybe DataSourceColumnReference)
+pvDataSourceColumnReference
+  = lens _pvDataSourceColumnReference
+      (\ s a -> s{_pvDataSourceColumnReference = a})
 
 -- | The column offset of the source range that this value reads from. For
 -- example, if the source was \`C10:E15\`, a \`sourceColumnOffset\` of
@@ -7941,8 +10501,8 @@ pvName = lens _pvName (\ s a -> s{_pvName = a})
 -- result of a calculation with another pivot value. For example, if
 -- calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the
 -- pivot values are displayed as the percentage of the grand total. In the
--- Sheets UI, this is referred to as \"Show As\" in the value section of a
--- pivot table.
+-- Sheets editor, this is referred to as \"Show As\" in the value section
+-- of a pivot table.
 pvCalculatedDisplayType :: Lens' PivotValue (Maybe PivotValueCalculatedDisplayType)
 pvCalculatedDisplayType
   = lens _pvCalculatedDisplayType
@@ -7961,7 +10521,9 @@ instance FromJSON PivotValue where
           = withObject "PivotValue"
               (\ o ->
                  PivotValue' <$>
-                   (o .:? "sourceColumnOffset") <*> (o .:? "formula")
+                   (o .:? "dataSourceColumnReference") <*>
+                     (o .:? "sourceColumnOffset")
+                     <*> (o .:? "formula")
                      <*> (o .:? "name")
                      <*> (o .:? "calculatedDisplayType")
                      <*> (o .:? "summarizeFunction"))
@@ -7970,12 +10532,66 @@ instance ToJSON PivotValue where
         toJSON PivotValue'{..}
           = object
               (catMaybes
-                 [("sourceColumnOffset" .=) <$> _pvSourceColumnOffSet,
+                 [("dataSourceColumnReference" .=) <$>
+                    _pvDataSourceColumnReference,
+                  ("sourceColumnOffset" .=) <$> _pvSourceColumnOffSet,
                   ("formula" .=) <$> _pvFormula,
                   ("name" .=) <$> _pvName,
                   ("calculatedDisplayType" .=) <$>
                     _pvCalculatedDisplayType,
                   ("summarizeFunction" .=) <$> _pvSummarizeFunction])
+
+-- | The result of adding a data source.
+--
+-- /See:/ 'addDataSourceResponse' smart constructor.
+data AddDataSourceResponse =
+  AddDataSourceResponse'
+    { _aDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    , _aDataSource :: !(Maybe DataSource)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddDataSourceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aDataExecutionStatus'
+--
+-- * 'aDataSource'
+addDataSourceResponse
+    :: AddDataSourceResponse
+addDataSourceResponse =
+  AddDataSourceResponse'
+    {_aDataExecutionStatus = Nothing, _aDataSource = Nothing}
+
+
+-- | The data execution status.
+aDataExecutionStatus :: Lens' AddDataSourceResponse (Maybe DataExecutionStatus)
+aDataExecutionStatus
+  = lens _aDataExecutionStatus
+      (\ s a -> s{_aDataExecutionStatus = a})
+
+-- | The data source that was created.
+aDataSource :: Lens' AddDataSourceResponse (Maybe DataSource)
+aDataSource
+  = lens _aDataSource (\ s a -> s{_aDataSource = a})
+
+instance FromJSON AddDataSourceResponse where
+        parseJSON
+          = withObject "AddDataSourceResponse"
+              (\ o ->
+                 AddDataSourceResponse' <$>
+                   (o .:? "dataExecutionStatus") <*>
+                     (o .:? "dataSource"))
+
+instance ToJSON AddDataSourceResponse where
+        toJSON AddDataSourceResponse'{..}
+          = object
+              (catMaybes
+                 [("dataExecutionStatus" .=) <$>
+                    _aDataExecutionStatus,
+                  ("dataSource" .=) <$> _aDataSource])
 
 -- | Unmerges cells in the given range.
 --
@@ -8032,7 +10648,8 @@ deleteSheetRequest
 deleteSheetRequest = DeleteSheetRequest' {_dsrSheetId = Nothing}
 
 
--- | The ID of the sheet to delete.
+-- | The ID of the sheet to delete. If the sheet is of DATA_SOURCE type, the
+-- associated DataSource is also deleted.
 dsrSheetId :: Lens' DeleteSheetRequest (Maybe Int32)
 dsrSheetId
   = lens _dsrSheetId (\ s a -> s{_dsrSheetId = a}) .
@@ -8095,12 +10712,81 @@ instance ToJSON AddDimensionGroupRequest where
         toJSON AddDimensionGroupRequest'{..}
           = object (catMaybes [("range" .=) <$> _adgrRange])
 
+-- | Updates an embedded object\'s border property.
+--
+-- /See:/ 'updateEmbeddedObjectBOrderRequest' smart constructor.
+data UpdateEmbeddedObjectBOrderRequest =
+  UpdateEmbeddedObjectBOrderRequest'
+    { _ueoborObjectId :: !(Maybe (Textual Int32))
+    , _ueoborBOrder :: !(Maybe EmbeddedObjectBOrder)
+    , _ueoborFields :: !(Maybe GFieldMask)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UpdateEmbeddedObjectBOrderRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ueoborObjectId'
+--
+-- * 'ueoborBOrder'
+--
+-- * 'ueoborFields'
+updateEmbeddedObjectBOrderRequest
+    :: UpdateEmbeddedObjectBOrderRequest
+updateEmbeddedObjectBOrderRequest =
+  UpdateEmbeddedObjectBOrderRequest'
+    { _ueoborObjectId = Nothing
+    , _ueoborBOrder = Nothing
+    , _ueoborFields = Nothing
+    }
+
+
+-- | The ID of the embedded object to update.
+ueoborObjectId :: Lens' UpdateEmbeddedObjectBOrderRequest (Maybe Int32)
+ueoborObjectId
+  = lens _ueoborObjectId
+      (\ s a -> s{_ueoborObjectId = a})
+      . mapping _Coerce
+
+-- | The border that applies to the embedded object.
+ueoborBOrder :: Lens' UpdateEmbeddedObjectBOrderRequest (Maybe EmbeddedObjectBOrder)
+ueoborBOrder
+  = lens _ueoborBOrder (\ s a -> s{_ueoborBOrder = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`border\` is implied and should not be specified. A single
+-- \`\"*\"\` can be used as short-hand for listing every field.
+ueoborFields :: Lens' UpdateEmbeddedObjectBOrderRequest (Maybe GFieldMask)
+ueoborFields
+  = lens _ueoborFields (\ s a -> s{_ueoborFields = a})
+
+instance FromJSON UpdateEmbeddedObjectBOrderRequest
+         where
+        parseJSON
+          = withObject "UpdateEmbeddedObjectBOrderRequest"
+              (\ o ->
+                 UpdateEmbeddedObjectBOrderRequest' <$>
+                   (o .:? "objectId") <*> (o .:? "border") <*>
+                     (o .:? "fields"))
+
+instance ToJSON UpdateEmbeddedObjectBOrderRequest
+         where
+        toJSON UpdateEmbeddedObjectBOrderRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _ueoborObjectId,
+                  ("border" .=) <$> _ueoborBOrder,
+                  ("fields" .=) <$> _ueoborFields])
+
 -- | Styles for a waterfall chart column.
 --
 -- /See:/ 'waterfallChartColumnStyle' smart constructor.
 data WaterfallChartColumnStyle =
   WaterfallChartColumnStyle'
     { _wColor :: !(Maybe Color)
+    , _wColorStyle :: !(Maybe ColorStyle)
     , _wLabel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8112,16 +10798,25 @@ data WaterfallChartColumnStyle =
 --
 -- * 'wColor'
 --
+-- * 'wColorStyle'
+--
 -- * 'wLabel'
 waterfallChartColumnStyle
     :: WaterfallChartColumnStyle
 waterfallChartColumnStyle =
-  WaterfallChartColumnStyle' {_wColor = Nothing, _wLabel = Nothing}
+  WaterfallChartColumnStyle'
+    {_wColor = Nothing, _wColorStyle = Nothing, _wLabel = Nothing}
 
 
 -- | The color of the column.
 wColor :: Lens' WaterfallChartColumnStyle (Maybe Color)
 wColor = lens _wColor (\ s a -> s{_wColor = a})
+
+-- | The color of the column. If color is also set, this field takes
+-- precedence.
+wColorStyle :: Lens' WaterfallChartColumnStyle (Maybe ColorStyle)
+wColorStyle
+  = lens _wColorStyle (\ s a -> s{_wColorStyle = a})
 
 -- | The label of the column\'s legend.
 wLabel :: Lens' WaterfallChartColumnStyle (Maybe Text)
@@ -8132,13 +10827,219 @@ instance FromJSON WaterfallChartColumnStyle where
           = withObject "WaterfallChartColumnStyle"
               (\ o ->
                  WaterfallChartColumnStyle' <$>
-                   (o .:? "color") <*> (o .:? "label"))
+                   (o .:? "color") <*> (o .:? "colorStyle") <*>
+                     (o .:? "label"))
 
 instance ToJSON WaterfallChartColumnStyle where
         toJSON WaterfallChartColumnStyle'{..}
           = object
               (catMaybes
-                 [("color" .=) <$> _wColor, ("label" .=) <$> _wLabel])
+                 [("color" .=) <$> _wColor,
+                  ("colorStyle" .=) <$> _wColorStyle,
+                  ("label" .=) <$> _wLabel])
+
+-- | Updates a slicer\'s specifications. (This does not move or resize a
+-- slicer. To move or resize a slicer use
+-- UpdateEmbeddedObjectPositionRequest.
+--
+-- /See:/ 'updateSlicerSpecRequest' smart constructor.
+data UpdateSlicerSpecRequest =
+  UpdateSlicerSpecRequest'
+    { _ussrSlicerId :: !(Maybe (Textual Int32))
+    , _ussrSpec :: !(Maybe SlicerSpec)
+    , _ussrFields :: !(Maybe GFieldMask)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UpdateSlicerSpecRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ussrSlicerId'
+--
+-- * 'ussrSpec'
+--
+-- * 'ussrFields'
+updateSlicerSpecRequest
+    :: UpdateSlicerSpecRequest
+updateSlicerSpecRequest =
+  UpdateSlicerSpecRequest'
+    {_ussrSlicerId = Nothing, _ussrSpec = Nothing, _ussrFields = Nothing}
+
+
+-- | The id of the slicer to update.
+ussrSlicerId :: Lens' UpdateSlicerSpecRequest (Maybe Int32)
+ussrSlicerId
+  = lens _ussrSlicerId (\ s a -> s{_ussrSlicerId = a})
+      . mapping _Coerce
+
+-- | The specification to apply to the slicer.
+ussrSpec :: Lens' UpdateSlicerSpecRequest (Maybe SlicerSpec)
+ussrSpec = lens _ussrSpec (\ s a -> s{_ussrSpec = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`SlicerSpec\` is implied and should not be specified. A single
+-- \"*\"\` can be used as short-hand for listing every field.
+ussrFields :: Lens' UpdateSlicerSpecRequest (Maybe GFieldMask)
+ussrFields
+  = lens _ussrFields (\ s a -> s{_ussrFields = a})
+
+instance FromJSON UpdateSlicerSpecRequest where
+        parseJSON
+          = withObject "UpdateSlicerSpecRequest"
+              (\ o ->
+                 UpdateSlicerSpecRequest' <$>
+                   (o .:? "slicerId") <*> (o .:? "spec") <*>
+                     (o .:? "fields"))
+
+instance ToJSON UpdateSlicerSpecRequest where
+        toJSON UpdateSlicerSpecRequest'{..}
+          = object
+              (catMaybes
+                 [("slicerId" .=) <$> _ussrSlicerId,
+                  ("spec" .=) <$> _ussrSpec,
+                  ("fields" .=) <$> _ussrFields])
+
+-- | The specifications of a slicer.
+--
+-- /See:/ 'slicerSpec' smart constructor.
+data SlicerSpec =
+  SlicerSpec'
+    { _sliColumnIndex :: !(Maybe (Textual Int32))
+    , _sliBackgRoundColor :: !(Maybe Color)
+    , _sliFilterCriteria :: !(Maybe FilterCriteria)
+    , _sliBackgRoundColorStyle :: !(Maybe ColorStyle)
+    , _sliDataRange :: !(Maybe GridRange)
+    , _sliTitle :: !(Maybe Text)
+    , _sliApplyToPivotTables :: !(Maybe Bool)
+    , _sliTextFormat :: !(Maybe TextFormat)
+    , _sliHorizontalAlignment :: !(Maybe SlicerSpecHorizontalAlignment)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SlicerSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sliColumnIndex'
+--
+-- * 'sliBackgRoundColor'
+--
+-- * 'sliFilterCriteria'
+--
+-- * 'sliBackgRoundColorStyle'
+--
+-- * 'sliDataRange'
+--
+-- * 'sliTitle'
+--
+-- * 'sliApplyToPivotTables'
+--
+-- * 'sliTextFormat'
+--
+-- * 'sliHorizontalAlignment'
+slicerSpec
+    :: SlicerSpec
+slicerSpec =
+  SlicerSpec'
+    { _sliColumnIndex = Nothing
+    , _sliBackgRoundColor = Nothing
+    , _sliFilterCriteria = Nothing
+    , _sliBackgRoundColorStyle = Nothing
+    , _sliDataRange = Nothing
+    , _sliTitle = Nothing
+    , _sliApplyToPivotTables = Nothing
+    , _sliTextFormat = Nothing
+    , _sliHorizontalAlignment = Nothing
+    }
+
+
+-- | The column index in the data table on which the filter is applied to.
+sliColumnIndex :: Lens' SlicerSpec (Maybe Int32)
+sliColumnIndex
+  = lens _sliColumnIndex
+      (\ s a -> s{_sliColumnIndex = a})
+      . mapping _Coerce
+
+-- | The background color of the slicer.
+sliBackgRoundColor :: Lens' SlicerSpec (Maybe Color)
+sliBackgRoundColor
+  = lens _sliBackgRoundColor
+      (\ s a -> s{_sliBackgRoundColor = a})
+
+-- | The filtering criteria of the slicer.
+sliFilterCriteria :: Lens' SlicerSpec (Maybe FilterCriteria)
+sliFilterCriteria
+  = lens _sliFilterCriteria
+      (\ s a -> s{_sliFilterCriteria = a})
+
+-- | The background color of the slicer. If background_color is also set,
+-- this field takes precedence.
+sliBackgRoundColorStyle :: Lens' SlicerSpec (Maybe ColorStyle)
+sliBackgRoundColorStyle
+  = lens _sliBackgRoundColorStyle
+      (\ s a -> s{_sliBackgRoundColorStyle = a})
+
+-- | The data range of the slicer.
+sliDataRange :: Lens' SlicerSpec (Maybe GridRange)
+sliDataRange
+  = lens _sliDataRange (\ s a -> s{_sliDataRange = a})
+
+-- | The title of the slicer.
+sliTitle :: Lens' SlicerSpec (Maybe Text)
+sliTitle = lens _sliTitle (\ s a -> s{_sliTitle = a})
+
+-- | True if the filter should apply to pivot tables. If not set, default to
+-- \`True\`.
+sliApplyToPivotTables :: Lens' SlicerSpec (Maybe Bool)
+sliApplyToPivotTables
+  = lens _sliApplyToPivotTables
+      (\ s a -> s{_sliApplyToPivotTables = a})
+
+-- | The text format of title in the slicer. The link field is not supported.
+sliTextFormat :: Lens' SlicerSpec (Maybe TextFormat)
+sliTextFormat
+  = lens _sliTextFormat
+      (\ s a -> s{_sliTextFormat = a})
+
+-- | The horizontal alignment of title in the slicer. If unspecified,
+-- defaults to \`LEFT\`
+sliHorizontalAlignment :: Lens' SlicerSpec (Maybe SlicerSpecHorizontalAlignment)
+sliHorizontalAlignment
+  = lens _sliHorizontalAlignment
+      (\ s a -> s{_sliHorizontalAlignment = a})
+
+instance FromJSON SlicerSpec where
+        parseJSON
+          = withObject "SlicerSpec"
+              (\ o ->
+                 SlicerSpec' <$>
+                   (o .:? "columnIndex") <*> (o .:? "backgroundColor")
+                     <*> (o .:? "filterCriteria")
+                     <*> (o .:? "backgroundColorStyle")
+                     <*> (o .:? "dataRange")
+                     <*> (o .:? "title")
+                     <*> (o .:? "applyToPivotTables")
+                     <*> (o .:? "textFormat")
+                     <*> (o .:? "horizontalAlignment"))
+
+instance ToJSON SlicerSpec where
+        toJSON SlicerSpec'{..}
+          = object
+              (catMaybes
+                 [("columnIndex" .=) <$> _sliColumnIndex,
+                  ("backgroundColor" .=) <$> _sliBackgRoundColor,
+                  ("filterCriteria" .=) <$> _sliFilterCriteria,
+                  ("backgroundColorStyle" .=) <$>
+                    _sliBackgRoundColorStyle,
+                  ("dataRange" .=) <$> _sliDataRange,
+                  ("title" .=) <$> _sliTitle,
+                  ("applyToPivotTables" .=) <$> _sliApplyToPivotTables,
+                  ("textFormat" .=) <$> _sliTextFormat,
+                  ("horizontalAlignment" .=) <$>
+                    _sliHorizontalAlignment])
 
 -- | The Candlestick chart data, each containing the low, open, close, and
 -- high values for a series.
@@ -8146,9 +11047,9 @@ instance ToJSON WaterfallChartColumnStyle where
 -- /See:/ 'candlestickData' smart constructor.
 data CandlestickData =
   CandlestickData'
-    { _cdLowSeries   :: !(Maybe CandlestickSeries)
-    , _cdHighSeries  :: !(Maybe CandlestickSeries)
-    , _cdOpenSeries  :: !(Maybe CandlestickSeries)
+    { _cdLowSeries :: !(Maybe CandlestickSeries)
+    , _cdHighSeries :: !(Maybe CandlestickSeries)
+    , _cdOpenSeries :: !(Maybe CandlestickSeries)
     , _cdCloseSeries :: !(Maybe CandlestickSeries)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8226,9 +11127,9 @@ instance ToJSON CandlestickData where
 -- /See:/ 'bandedRange' smart constructor.
 data BandedRange =
   BandedRange'
-    { _brBandedRangeId    :: !(Maybe (Textual Int32))
-    , _brRowProperties    :: !(Maybe BandingProperties)
-    , _brRange            :: !(Maybe GridRange)
+    { _brBandedRangeId :: !(Maybe (Textual Int32))
+    , _brRowProperties :: !(Maybe BandingProperties)
+    , _brRange :: !(Maybe GridRange)
     , _brColumnProperties :: !(Maybe BandingProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8311,13 +11212,13 @@ instance ToJSON BandedRange where
 -- /See:/ 'updateBOrdersRequest' smart constructor.
 data UpdateBOrdersRequest =
   UpdateBOrdersRequest'
-    { _uborBottom          :: !(Maybe BOrder)
+    { _uborBottom :: !(Maybe BOrder)
     , _uborInnerHorizontal :: !(Maybe BOrder)
-    , _uborLeft            :: !(Maybe BOrder)
-    , _uborInnerVertical   :: !(Maybe BOrder)
-    , _uborRange           :: !(Maybe GridRange)
-    , _uborRight           :: !(Maybe BOrder)
-    , _uborTop             :: !(Maybe BOrder)
+    , _uborLeft :: !(Maybe BOrder)
+    , _uborInnerVertical :: !(Maybe BOrder)
+    , _uborRange :: !(Maybe GridRange)
+    , _uborRight :: !(Maybe BOrder)
+    , _uborTop :: !(Maybe BOrder)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8417,11 +11318,11 @@ instance ToJSON UpdateBOrdersRequest where
 -- /See:/ 'batchUpdateValuesByDataFilterRequest' smart constructor.
 data BatchUpdateValuesByDataFilterRequest =
   BatchUpdateValuesByDataFilterRequest'
-    { _buvbdfrData                         :: !(Maybe [DataFilterValueRange])
-    , _buvbdfrValueInputOption             :: !(Maybe BatchUpdateValuesByDataFilterRequestValueInputOption)
-    , _buvbdfrIncludeValuesInResponse      :: !(Maybe Bool)
+    { _buvbdfrData :: !(Maybe [DataFilterValueRange])
+    , _buvbdfrValueInputOption :: !(Maybe BatchUpdateValuesByDataFilterRequestValueInputOption)
+    , _buvbdfrIncludeValuesInResponse :: !(Maybe Bool)
     , _buvbdfrResponseDateTimeRenderOption :: !(Maybe BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption)
-    , _buvbdfrResponseValueRenderOption    :: !(Maybe BatchUpdateValuesByDataFilterRequestResponseValueRenderOption)
+    , _buvbdfrResponseValueRenderOption :: !(Maybe BatchUpdateValuesByDataFilterRequestResponseValueRenderOption)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8452,8 +11353,8 @@ batchUpdateValuesByDataFilterRequest =
 
 
 -- | The new values to apply to the spreadsheet. If more than one range is
--- matched by the specified DataFilter the specified values will be applied
--- to all of those ranges.
+-- matched by the specified DataFilter the specified values are applied to
+-- all of those ranges.
 buvbdfrData :: Lens' BatchUpdateValuesByDataFilterRequest [DataFilterValueRange]
 buvbdfrData
   = lens _buvbdfrData (\ s a -> s{_buvbdfrData = a}) .
@@ -8469,10 +11370,10 @@ buvbdfrValueInputOption
 -- | Determines if the update response should include the values of the cells
 -- that were updated. By default, responses do not include the updated
 -- values. The \`updatedData\` field within each of the
--- BatchUpdateValuesResponse.responses will contain the updated values. If
--- the range to write was larger than than the range actually written, the
--- response will include all values in the requested range (excluding
--- trailing empty rows and columns).
+-- BatchUpdateValuesResponse.responses contains the updated values. If the
+-- range to write was larger than the range actually written, the response
+-- includes all values in the requested range (excluding trailing empty
+-- rows and columns).
 buvbdfrIncludeValuesInResponse :: Lens' BatchUpdateValuesByDataFilterRequest (Maybe Bool)
 buvbdfrIncludeValuesInResponse
   = lens _buvbdfrIncludeValuesInResponse
@@ -8480,8 +11381,7 @@ buvbdfrIncludeValuesInResponse
 
 -- | Determines how dates, times, and durations in the response should be
 -- rendered. This is ignored if response_value_render_option is
--- FORMATTED_VALUE. The default dateTime render option is
--- DateTimeRenderOption.SERIAL_NUMBER.
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
 buvbdfrResponseDateTimeRenderOption :: Lens' BatchUpdateValuesByDataFilterRequest (Maybe BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption)
 buvbdfrResponseDateTimeRenderOption
   = lens _buvbdfrResponseDateTimeRenderOption
@@ -8489,7 +11389,7 @@ buvbdfrResponseDateTimeRenderOption
          s{_buvbdfrResponseDateTimeRenderOption = a})
 
 -- | Determines how values in the response should be rendered. The default
--- render option is ValueRenderOption.FORMATTED_VALUE.
+-- render option is FORMATTED_VALUE.
 buvbdfrResponseValueRenderOption :: Lens' BatchUpdateValuesByDataFilterRequest (Maybe BatchUpdateValuesByDataFilterRequestResponseValueRenderOption)
 buvbdfrResponseValueRenderOption
   = lens _buvbdfrResponseValueRenderOption
@@ -8522,14 +11422,67 @@ instance ToJSON BatchUpdateValuesByDataFilterRequest
                   ("responseValueRenderOption" .=) <$>
                     _buvbdfrResponseValueRenderOption])
 
+-- | Custom number formatting options for chart attributes.
+--
+-- /See:/ 'chartCustomNumberFormatOptions' smart constructor.
+data ChartCustomNumberFormatOptions =
+  ChartCustomNumberFormatOptions'
+    { _ccnfoSuffix :: !(Maybe Text)
+    , _ccnfoPrefix :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ChartCustomNumberFormatOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccnfoSuffix'
+--
+-- * 'ccnfoPrefix'
+chartCustomNumberFormatOptions
+    :: ChartCustomNumberFormatOptions
+chartCustomNumberFormatOptions =
+  ChartCustomNumberFormatOptions'
+    {_ccnfoSuffix = Nothing, _ccnfoPrefix = Nothing}
+
+
+-- | Custom suffix to be appended to the chart attribute. This field is
+-- optional.
+ccnfoSuffix :: Lens' ChartCustomNumberFormatOptions (Maybe Text)
+ccnfoSuffix
+  = lens _ccnfoSuffix (\ s a -> s{_ccnfoSuffix = a})
+
+-- | Custom prefix to be prepended to the chart attribute. This field is
+-- optional.
+ccnfoPrefix :: Lens' ChartCustomNumberFormatOptions (Maybe Text)
+ccnfoPrefix
+  = lens _ccnfoPrefix (\ s a -> s{_ccnfoPrefix = a})
+
+instance FromJSON ChartCustomNumberFormatOptions
+         where
+        parseJSON
+          = withObject "ChartCustomNumberFormatOptions"
+              (\ o ->
+                 ChartCustomNumberFormatOptions' <$>
+                   (o .:? "suffix") <*> (o .:? "prefix"))
+
+instance ToJSON ChartCustomNumberFormatOptions where
+        toJSON ChartCustomNumberFormatOptions'{..}
+          = object
+              (catMaybes
+                 [("suffix" .=) <$> _ccnfoSuffix,
+                  ("prefix" .=) <$> _ccnfoPrefix])
+
 -- | A chart embedded in a sheet.
 --
 -- /See:/ 'embeddedChart' smart constructor.
 data EmbeddedChart =
   EmbeddedChart'
-    { _ecSpec     :: !(Maybe ChartSpec)
+    { _ecBOrder :: !(Maybe EmbeddedObjectBOrder)
+    , _ecSpec :: !(Maybe ChartSpec)
     , _ecPosition :: !(Maybe EmbeddedObjectPosition)
-    , _ecChartId  :: !(Maybe (Textual Int32))
+    , _ecChartId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8537,6 +11490,8 @@ data EmbeddedChart =
 -- | Creates a value of 'EmbeddedChart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecBOrder'
 --
 -- * 'ecSpec'
 --
@@ -8547,8 +11502,16 @@ embeddedChart
     :: EmbeddedChart
 embeddedChart =
   EmbeddedChart'
-    {_ecSpec = Nothing, _ecPosition = Nothing, _ecChartId = Nothing}
+    { _ecBOrder = Nothing
+    , _ecSpec = Nothing
+    , _ecPosition = Nothing
+    , _ecChartId = Nothing
+    }
 
+
+-- | The border of the chart.
+ecBOrder :: Lens' EmbeddedChart (Maybe EmbeddedObjectBOrder)
+ecBOrder = lens _ecBOrder (\ s a -> s{_ecBOrder = a})
 
 -- | The specification of the chart.
 ecSpec :: Lens' EmbeddedChart (Maybe ChartSpec)
@@ -8570,14 +11533,16 @@ instance FromJSON EmbeddedChart where
           = withObject "EmbeddedChart"
               (\ o ->
                  EmbeddedChart' <$>
-                   (o .:? "spec") <*> (o .:? "position") <*>
-                     (o .:? "chartId"))
+                   (o .:? "border") <*> (o .:? "spec") <*>
+                     (o .:? "position")
+                     <*> (o .:? "chartId"))
 
 instance ToJSON EmbeddedChart where
         toJSON EmbeddedChart'{..}
           = object
               (catMaybes
-                 [("spec" .=) <$> _ecSpec,
+                 [("border" .=) <$> _ecBOrder,
+                  ("spec" .=) <$> _ecSpec,
                   ("position" .=) <$> _ecPosition,
                   ("chartId" .=) <$> _ecChartId])
 
@@ -8622,8 +11587,8 @@ instance ToJSON RowData where
 -- /See:/ 'editors' smart constructor.
 data Editors =
   Editors'
-    { _eGroups             :: !(Maybe [Text])
-    , _eUsers              :: !(Maybe [Text])
+    { _eGroups :: !(Maybe [Text])
+    , _eUsers :: !(Maybe [Text])
     , _eDomainUsersCanEdit :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8687,12 +11652,15 @@ instance ToJSON Editors where
 -- /See:/ 'pivotTable' smart constructor.
 data PivotTable =
   PivotTable'
-    { _ptValues      :: !(Maybe [PivotValue])
+    { _ptValues :: !(Maybe [PivotValue])
+    , _ptDataSourceId :: !(Maybe Text)
+    , _ptDataExecutionStatus :: !(Maybe DataExecutionStatus)
     , _ptValueLayout :: !(Maybe PivotTableValueLayout)
-    , _ptRows        :: !(Maybe [PivotGroup])
-    , _ptSource      :: !(Maybe GridRange)
-    , _ptColumns     :: !(Maybe [PivotGroup])
-    , _ptCriteria    :: !(Maybe PivotTableCriteria)
+    , _ptRows :: !(Maybe [PivotGroup])
+    , _ptSource :: !(Maybe GridRange)
+    , _ptColumns :: !(Maybe [PivotGroup])
+    , _ptCriteria :: !(Maybe PivotTableCriteria)
+    , _ptFilterSpecs :: !(Maybe [PivotFilterSpec])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8703,6 +11671,10 @@ data PivotTable =
 --
 -- * 'ptValues'
 --
+-- * 'ptDataSourceId'
+--
+-- * 'ptDataExecutionStatus'
+--
 -- * 'ptValueLayout'
 --
 -- * 'ptRows'
@@ -8712,16 +11684,21 @@ data PivotTable =
 -- * 'ptColumns'
 --
 -- * 'ptCriteria'
+--
+-- * 'ptFilterSpecs'
 pivotTable
     :: PivotTable
 pivotTable =
   PivotTable'
     { _ptValues = Nothing
+    , _ptDataSourceId = Nothing
+    , _ptDataExecutionStatus = Nothing
     , _ptValueLayout = Nothing
     , _ptRows = Nothing
     , _ptSource = Nothing
     , _ptColumns = Nothing
     , _ptCriteria = Nothing
+    , _ptFilterSpecs = Nothing
     }
 
 
@@ -8731,6 +11708,18 @@ ptValues
   = lens _ptValues (\ s a -> s{_ptValues = a}) .
       _Default
       . _Coerce
+
+-- | The ID of the data source the pivot table is reading data from.
+ptDataSourceId :: Lens' PivotTable (Maybe Text)
+ptDataSourceId
+  = lens _ptDataSourceId
+      (\ s a -> s{_ptDataSourceId = a})
+
+-- | Output only. The data execution status for data source pivot tables.
+ptDataExecutionStatus :: Lens' PivotTable (Maybe DataExecutionStatus)
+ptDataExecutionStatus
+  = lens _ptDataExecutionStatus
+      (\ s a -> s{_ptDataExecutionStatus = a})
 
 -- | Whether values should be listed horizontally (as columns) or vertically
 -- (as rows).
@@ -8761,31 +11750,51 @@ ptColumns
 -- the column offset of the source range that you want to filter, and the
 -- value is the criteria for that column. For example, if the source was
 -- \`C10:E15\`, a key of \`0\` will have the filter for column \`C\`,
--- whereas the key \`1\` is for column \`D\`.
+-- whereas the key \`1\` is for column \`D\`. This field is deprecated in
+-- favor of filter_specs.
 ptCriteria :: Lens' PivotTable (Maybe PivotTableCriteria)
 ptCriteria
   = lens _ptCriteria (\ s a -> s{_ptCriteria = a})
+
+-- | The filters applied to the source columns before aggregating data for
+-- the pivot table. Both criteria and filter_specs are populated in
+-- responses. If both fields are specified in an update request, this field
+-- takes precedence.
+ptFilterSpecs :: Lens' PivotTable [PivotFilterSpec]
+ptFilterSpecs
+  = lens _ptFilterSpecs
+      (\ s a -> s{_ptFilterSpecs = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON PivotTable where
         parseJSON
           = withObject "PivotTable"
               (\ o ->
                  PivotTable' <$>
-                   (o .:? "values" .!= mempty) <*> (o .:? "valueLayout")
+                   (o .:? "values" .!= mempty) <*>
+                     (o .:? "dataSourceId")
+                     <*> (o .:? "dataExecutionStatus")
+                     <*> (o .:? "valueLayout")
                      <*> (o .:? "rows" .!= mempty)
                      <*> (o .:? "source")
                      <*> (o .:? "columns" .!= mempty)
-                     <*> (o .:? "criteria"))
+                     <*> (o .:? "criteria")
+                     <*> (o .:? "filterSpecs" .!= mempty))
 
 instance ToJSON PivotTable where
         toJSON PivotTable'{..}
           = object
               (catMaybes
                  [("values" .=) <$> _ptValues,
+                  ("dataSourceId" .=) <$> _ptDataSourceId,
+                  ("dataExecutionStatus" .=) <$>
+                    _ptDataExecutionStatus,
                   ("valueLayout" .=) <$> _ptValueLayout,
                   ("rows" .=) <$> _ptRows, ("source" .=) <$> _ptSource,
                   ("columns" .=) <$> _ptColumns,
-                  ("criteria" .=) <$> _ptCriteria])
+                  ("criteria" .=) <$> _ptCriteria,
+                  ("filterSpecs" .=) <$> _ptFilterSpecs])
 
 -- | The position of an embedded object such as a chart.
 --
@@ -8793,8 +11802,8 @@ instance ToJSON PivotTable where
 data EmbeddedObjectPosition =
   EmbeddedObjectPosition'
     { _eopOverlayPosition :: !(Maybe OverlayPosition)
-    , _eopSheetId         :: !(Maybe (Textual Int32))
-    , _eopNewSheet        :: !(Maybe Bool)
+    , _eopSheetId :: !(Maybe (Textual Int32))
+    , _eopNewSheet :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8859,8 +11868,9 @@ instance ToJSON EmbeddedObjectPosition where
 data BasicFilter =
   BasicFilter'
     { _bfSortSpecs :: !(Maybe [SortSpec])
-    , _bfRange     :: !(Maybe GridRange)
-    , _bfCriteria  :: !(Maybe BasicFilterCriteria)
+    , _bfRange :: !(Maybe GridRange)
+    , _bfCriteria :: !(Maybe BasicFilterCriteria)
+    , _bfFilterSpecs :: !(Maybe [FilterSpec])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8874,11 +11884,17 @@ data BasicFilter =
 -- * 'bfRange'
 --
 -- * 'bfCriteria'
+--
+-- * 'bfFilterSpecs'
 basicFilter
     :: BasicFilter
 basicFilter =
   BasicFilter'
-    {_bfSortSpecs = Nothing, _bfRange = Nothing, _bfCriteria = Nothing}
+    { _bfSortSpecs = Nothing
+    , _bfRange = Nothing
+    , _bfCriteria = Nothing
+    , _bfFilterSpecs = Nothing
+    }
 
 
 -- | The sort order per column. Later specifications are used when values are
@@ -8894,10 +11910,21 @@ bfRange :: Lens' BasicFilter (Maybe GridRange)
 bfRange = lens _bfRange (\ s a -> s{_bfRange = a})
 
 -- | The criteria for showing\/hiding values per column. The map\'s key is
--- the column index, and the value is the criteria for that column.
+-- the column index, and the value is the criteria for that column. This
+-- field is deprecated in favor of filter_specs.
 bfCriteria :: Lens' BasicFilter (Maybe BasicFilterCriteria)
 bfCriteria
   = lens _bfCriteria (\ s a -> s{_bfCriteria = a})
+
+-- | The filter criteria per column. Both criteria and filter_specs are
+-- populated in responses. If both fields are specified in an update
+-- request, this field takes precedence.
+bfFilterSpecs :: Lens' BasicFilter [FilterSpec]
+bfFilterSpecs
+  = lens _bfFilterSpecs
+      (\ s a -> s{_bfFilterSpecs = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON BasicFilter where
         parseJSON
@@ -8905,7 +11932,8 @@ instance FromJSON BasicFilter where
               (\ o ->
                  BasicFilter' <$>
                    (o .:? "sortSpecs" .!= mempty) <*> (o .:? "range")
-                     <*> (o .:? "criteria"))
+                     <*> (o .:? "criteria")
+                     <*> (o .:? "filterSpecs" .!= mempty))
 
 instance ToJSON BasicFilter where
         toJSON BasicFilter'{..}
@@ -8913,7 +11941,8 @@ instance ToJSON BasicFilter where
               (catMaybes
                  [("sortSpecs" .=) <$> _bfSortSpecs,
                   ("range" .=) <$> _bfRange,
-                  ("criteria" .=) <$> _bfCriteria])
+                  ("criteria" .=) <$> _bfCriteria,
+                  ("filterSpecs" .=) <$> _bfFilterSpecs])
 
 -- | Splits a column of text into multiple columns, based on a delimiter in
 -- each cell.
@@ -8922,8 +11951,8 @@ instance ToJSON BasicFilter where
 data TextToColumnsRequest =
   TextToColumnsRequest'
     { _ttcrDelimiterType :: !(Maybe TextToColumnsRequestDelimiterType)
-    , _ttcrSource        :: !(Maybe GridRange)
-    , _ttcrDelimiter     :: !(Maybe Text)
+    , _ttcrSource :: !(Maybe GridRange)
+    , _ttcrDelimiter :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8980,12 +12009,53 @@ instance ToJSON TextToColumnsRequest where
                   ("source" .=) <$> _ttcrSource,
                   ("delimiter" .=) <$> _ttcrDelimiter])
 
+-- | The result of trimming whitespace in cells.
+--
+-- /See:/ 'trimWhitespaceResponse' smart constructor.
+newtype TrimWhitespaceResponse =
+  TrimWhitespaceResponse'
+    { _twrCellsChangedCount :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TrimWhitespaceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'twrCellsChangedCount'
+trimWhitespaceResponse
+    :: TrimWhitespaceResponse
+trimWhitespaceResponse =
+  TrimWhitespaceResponse' {_twrCellsChangedCount = Nothing}
+
+
+-- | The number of cells that were trimmed of whitespace.
+twrCellsChangedCount :: Lens' TrimWhitespaceResponse (Maybe Int32)
+twrCellsChangedCount
+  = lens _twrCellsChangedCount
+      (\ s a -> s{_twrCellsChangedCount = a})
+      . mapping _Coerce
+
+instance FromJSON TrimWhitespaceResponse where
+        parseJSON
+          = withObject "TrimWhitespaceResponse"
+              (\ o ->
+                 TrimWhitespaceResponse' <$>
+                   (o .:? "cellsChangedCount"))
+
+instance ToJSON TrimWhitespaceResponse where
+        toJSON TrimWhitespaceResponse'{..}
+          = object
+              (catMaybes
+                 [("cellsChangedCount" .=) <$> _twrCellsChangedCount])
+
 -- | The request for retrieving a Spreadsheet.
 --
 -- /See:/ 'getSpreadsheetByDataFilterRequest' smart constructor.
 data GetSpreadsheetByDataFilterRequest =
   GetSpreadsheetByDataFilterRequest'
-    { _gsbdfrDataFilters     :: !(Maybe [DataFilter])
+    { _gsbdfrDataFilters :: !(Maybe [DataFilter])
     , _gsbdfrIncludeGridData :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9038,14 +12108,61 @@ instance ToJSON GetSpreadsheetByDataFilterRequest
                  [("dataFilters" .=) <$> _gsbdfrDataFilters,
                   ("includeGridData" .=) <$> _gsbdfrIncludeGridData])
 
+-- | A color value.
+--
+-- /See:/ 'colorStyle' smart constructor.
+data ColorStyle =
+  ColorStyle'
+    { _csThemeColor :: !(Maybe ColorStyleThemeColor)
+    , _csRgbColor :: !(Maybe Color)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ColorStyle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csThemeColor'
+--
+-- * 'csRgbColor'
+colorStyle
+    :: ColorStyle
+colorStyle = ColorStyle' {_csThemeColor = Nothing, _csRgbColor = Nothing}
+
+
+-- | Theme color.
+csThemeColor :: Lens' ColorStyle (Maybe ColorStyleThemeColor)
+csThemeColor
+  = lens _csThemeColor (\ s a -> s{_csThemeColor = a})
+
+-- | RGB color.
+csRgbColor :: Lens' ColorStyle (Maybe Color)
+csRgbColor
+  = lens _csRgbColor (\ s a -> s{_csRgbColor = a})
+
+instance FromJSON ColorStyle where
+        parseJSON
+          = withObject "ColorStyle"
+              (\ o ->
+                 ColorStyle' <$>
+                   (o .:? "themeColor") <*> (o .:? "rgbColor"))
+
+instance ToJSON ColorStyle where
+        toJSON ColorStyle'{..}
+          = object
+              (catMaybes
+                 [("themeColor" .=) <$> _csThemeColor,
+                  ("rgbColor" .=) <$> _csRgbColor])
+
 -- | The request for updating any aspect of a spreadsheet.
 --
 -- /See:/ 'batchUpdateSpreadsheetRequest' smart constructor.
 data BatchUpdateSpreadsheetRequest =
   BatchUpdateSpreadsheetRequest'
-    { _busrResponseIncludeGridData      :: !(Maybe Bool)
-    , _busrResponseRanges               :: !(Maybe [Text])
-    , _busrRequests                     :: !(Maybe [Request'])
+    { _busrResponseIncludeGridData :: !(Maybe Bool)
+    , _busrResponseRanges :: !(Maybe [Text])
+    , _busrRequests :: !(Maybe [Request'])
     , _busrIncludeSpreadsheetInResponse :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9073,7 +12190,7 @@ batchUpdateSpreadsheetRequest =
     }
 
 
--- | True if grid data should be returned. Meaningful only if if
+-- | True if grid data should be returned. Meaningful only if
 -- include_spreadsheet_in_response is \'true\'. This parameter is ignored
 -- if a field mask was set in the request.
 busrResponseIncludeGridData :: Lens' BatchUpdateSpreadsheetRequest (Maybe Bool)
@@ -9082,7 +12199,7 @@ busrResponseIncludeGridData
       (\ s a -> s{_busrResponseIncludeGridData = a})
 
 -- | Limits the ranges included in the response spreadsheet. Meaningful only
--- if include_spreadsheet_response is \'true\'.
+-- if include_spreadsheet_in_response is \'true\'.
 busrResponseRanges :: Lens' BatchUpdateSpreadsheetRequest [Text]
 busrResponseRanges
   = lens _busrResponseRanges
@@ -9132,11 +12249,11 @@ instance ToJSON BatchUpdateSpreadsheetRequest where
 -- /See:/ 'updateValuesResponse' smart constructor.
 data UpdateValuesResponse =
   UpdateValuesResponse'
-    { _uvrUpdatedCells   :: !(Maybe (Textual Int32))
-    , _uvrSpreadsheetId  :: !(Maybe Text)
-    , _uvrUpdatedRows    :: !(Maybe (Textual Int32))
-    , _uvrUpdatedRange   :: !(Maybe Text)
-    , _uvrUpdatedData    :: !(Maybe ValueRange)
+    { _uvrUpdatedCells :: !(Maybe (Textual Int32))
+    , _uvrSpreadsheetId :: !(Maybe Text)
+    , _uvrUpdatedRows :: !(Maybe (Textual Int32))
+    , _uvrUpdatedRange :: !(Maybe Text)
+    , _uvrUpdatedData :: !(Maybe ValueRange)
     , _uvrUpdatedColumns :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9233,6 +12350,149 @@ instance ToJSON UpdateValuesResponse where
                   ("updatedData" .=) <$> _uvrUpdatedData,
                   ("updatedColumns" .=) <$> _uvrUpdatedColumns])
 
+-- | A scorecard chart. Scorecard charts are used to highlight key
+-- performance indicators, known as KPIs, on the spreadsheet. A scorecard
+-- chart can represent things like total sales, average cost, or a top
+-- selling item. You can specify a single data value, or aggregate over a
+-- range of data. Percentage or absolute difference from a baseline value
+-- can be highlighted, like changes over time.
+--
+-- /See:/ 'scorecardChartSpec' smart constructor.
+data ScorecardChartSpec =
+  ScorecardChartSpec'
+    { _scsKeyValueData :: !(Maybe ChartData)
+    , _scsKeyValueFormat :: !(Maybe KeyValueFormat)
+    , _scsNumberFormatSource :: !(Maybe ScorecardChartSpecNumberFormatSource)
+    , _scsScaleFactor :: !(Maybe (Textual Double))
+    , _scsBaselineValueData :: !(Maybe ChartData)
+    , _scsBaselineValueFormat :: !(Maybe BaselineValueFormat)
+    , _scsCustomFormatOptions :: !(Maybe ChartCustomNumberFormatOptions)
+    , _scsAggregateType :: !(Maybe ScorecardChartSpecAggregateType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScorecardChartSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scsKeyValueData'
+--
+-- * 'scsKeyValueFormat'
+--
+-- * 'scsNumberFormatSource'
+--
+-- * 'scsScaleFactor'
+--
+-- * 'scsBaselineValueData'
+--
+-- * 'scsBaselineValueFormat'
+--
+-- * 'scsCustomFormatOptions'
+--
+-- * 'scsAggregateType'
+scorecardChartSpec
+    :: ScorecardChartSpec
+scorecardChartSpec =
+  ScorecardChartSpec'
+    { _scsKeyValueData = Nothing
+    , _scsKeyValueFormat = Nothing
+    , _scsNumberFormatSource = Nothing
+    , _scsScaleFactor = Nothing
+    , _scsBaselineValueData = Nothing
+    , _scsBaselineValueFormat = Nothing
+    , _scsCustomFormatOptions = Nothing
+    , _scsAggregateType = Nothing
+    }
+
+
+-- | The data for scorecard key value.
+scsKeyValueData :: Lens' ScorecardChartSpec (Maybe ChartData)
+scsKeyValueData
+  = lens _scsKeyValueData
+      (\ s a -> s{_scsKeyValueData = a})
+
+-- | Formatting options for key value.
+scsKeyValueFormat :: Lens' ScorecardChartSpec (Maybe KeyValueFormat)
+scsKeyValueFormat
+  = lens _scsKeyValueFormat
+      (\ s a -> s{_scsKeyValueFormat = a})
+
+-- | The number format source used in the scorecard chart. This field is
+-- optional.
+scsNumberFormatSource :: Lens' ScorecardChartSpec (Maybe ScorecardChartSpecNumberFormatSource)
+scsNumberFormatSource
+  = lens _scsNumberFormatSource
+      (\ s a -> s{_scsNumberFormatSource = a})
+
+-- | Value to scale scorecard key and baseline value. For example, a factor
+-- of 10 can be used to divide all values in the chart by 10. This field is
+-- optional.
+scsScaleFactor :: Lens' ScorecardChartSpec (Maybe Double)
+scsScaleFactor
+  = lens _scsScaleFactor
+      (\ s a -> s{_scsScaleFactor = a})
+      . mapping _Coerce
+
+-- | The data for scorecard baseline value. This field is optional.
+scsBaselineValueData :: Lens' ScorecardChartSpec (Maybe ChartData)
+scsBaselineValueData
+  = lens _scsBaselineValueData
+      (\ s a -> s{_scsBaselineValueData = a})
+
+-- | Formatting options for baseline value. This field is needed only if
+-- baseline_value_data is specified.
+scsBaselineValueFormat :: Lens' ScorecardChartSpec (Maybe BaselineValueFormat)
+scsBaselineValueFormat
+  = lens _scsBaselineValueFormat
+      (\ s a -> s{_scsBaselineValueFormat = a})
+
+-- | Custom formatting options for numeric key\/baseline values in scorecard
+-- chart. This field is used only when number_format_source is set to
+-- CUSTOM. This field is optional.
+scsCustomFormatOptions :: Lens' ScorecardChartSpec (Maybe ChartCustomNumberFormatOptions)
+scsCustomFormatOptions
+  = lens _scsCustomFormatOptions
+      (\ s a -> s{_scsCustomFormatOptions = a})
+
+-- | The aggregation type for key and baseline chart data in scorecard chart.
+-- This field is not supported for data source charts. Use the
+-- ChartData.aggregateType field of the key_value_data or
+-- baseline_value_data instead for data source charts. This field is
+-- optional.
+scsAggregateType :: Lens' ScorecardChartSpec (Maybe ScorecardChartSpecAggregateType)
+scsAggregateType
+  = lens _scsAggregateType
+      (\ s a -> s{_scsAggregateType = a})
+
+instance FromJSON ScorecardChartSpec where
+        parseJSON
+          = withObject "ScorecardChartSpec"
+              (\ o ->
+                 ScorecardChartSpec' <$>
+                   (o .:? "keyValueData") <*> (o .:? "keyValueFormat")
+                     <*> (o .:? "numberFormatSource")
+                     <*> (o .:? "scaleFactor")
+                     <*> (o .:? "baselineValueData")
+                     <*> (o .:? "baselineValueFormat")
+                     <*> (o .:? "customFormatOptions")
+                     <*> (o .:? "aggregateType"))
+
+instance ToJSON ScorecardChartSpec where
+        toJSON ScorecardChartSpec'{..}
+          = object
+              (catMaybes
+                 [("keyValueData" .=) <$> _scsKeyValueData,
+                  ("keyValueFormat" .=) <$> _scsKeyValueFormat,
+                  ("numberFormatSource" .=) <$> _scsNumberFormatSource,
+                  ("scaleFactor" .=) <$> _scsScaleFactor,
+                  ("baselineValueData" .=) <$> _scsBaselineValueData,
+                  ("baselineValueFormat" .=) <$>
+                    _scsBaselineValueFormat,
+                  ("customFormatOptions" .=) <$>
+                    _scsCustomFormatOptions,
+                  ("aggregateType" .=) <$> _scsAggregateType])
+
 -- | The result of deleting a group.
 --
 -- /See:/ 'deleteDimensionGroupResponse' smart constructor.
@@ -9320,6 +12580,45 @@ instance ToJSON CopySheetToAnotherSpreadsheetRequest
                  [("destinationSpreadsheetId" .=) <$>
                     _cstasrDestinationSpreadsheetId])
 
+-- | Deletes a data source. The request also deletes the associated data
+-- source sheet, and unlinks all associated data source objects.
+--
+-- /See:/ 'deleteDataSourceRequest' smart constructor.
+newtype DeleteDataSourceRequest =
+  DeleteDataSourceRequest'
+    { _ddsrDataSourceId :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeleteDataSourceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddsrDataSourceId'
+deleteDataSourceRequest
+    :: DeleteDataSourceRequest
+deleteDataSourceRequest = DeleteDataSourceRequest' {_ddsrDataSourceId = Nothing}
+
+
+-- | The ID of the data source to delete.
+ddsrDataSourceId :: Lens' DeleteDataSourceRequest (Maybe Text)
+ddsrDataSourceId
+  = lens _ddsrDataSourceId
+      (\ s a -> s{_ddsrDataSourceId = a})
+
+instance FromJSON DeleteDataSourceRequest where
+        parseJSON
+          = withObject "DeleteDataSourceRequest"
+              (\ o ->
+                 DeleteDataSourceRequest' <$> (o .:? "dataSourceId"))
+
+instance ToJSON DeleteDataSourceRequest where
+        toJSON DeleteDataSourceRequest'{..}
+          = object
+              (catMaybes
+                 [("dataSourceId" .=) <$> _ddsrDataSourceId])
+
 -- | Adds a filter view.
 --
 -- /See:/ 'addFilterViewRequest' smart constructor.
@@ -9355,12 +12654,66 @@ instance ToJSON AddFilterViewRequest where
         toJSON AddFilterViewRequest'{..}
           = object (catMaybes [("filter" .=) <$> _aFilter])
 
+-- | Updates a data source. After the data source is updated successfully, an
+-- execution is triggered to refresh the associated DATA_SOURCE sheet to
+-- read data from the updated data source. The request requires an
+-- additional \`bigquery.readonly\` OAuth scope.
+--
+-- /See:/ 'updateDataSourceRequest' smart constructor.
+data UpdateDataSourceRequest =
+  UpdateDataSourceRequest'
+    { _updDataSource :: !(Maybe DataSource)
+    , _updFields :: !(Maybe GFieldMask)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UpdateDataSourceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'updDataSource'
+--
+-- * 'updFields'
+updateDataSourceRequest
+    :: UpdateDataSourceRequest
+updateDataSourceRequest =
+  UpdateDataSourceRequest' {_updDataSource = Nothing, _updFields = Nothing}
+
+
+-- | The data source to update.
+updDataSource :: Lens' UpdateDataSourceRequest (Maybe DataSource)
+updDataSource
+  = lens _updDataSource
+      (\ s a -> s{_updDataSource = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`dataSource\` is implied and should not be specified. A single
+-- \`\"*\"\` can be used as short-hand for listing every field.
+updFields :: Lens' UpdateDataSourceRequest (Maybe GFieldMask)
+updFields
+  = lens _updFields (\ s a -> s{_updFields = a})
+
+instance FromJSON UpdateDataSourceRequest where
+        parseJSON
+          = withObject "UpdateDataSourceRequest"
+              (\ o ->
+                 UpdateDataSourceRequest' <$>
+                   (o .:? "dataSource") <*> (o .:? "fields"))
+
+instance ToJSON UpdateDataSourceRequest where
+        toJSON UpdateDataSourceRequest'{..}
+          = object
+              (catMaybes
+                 [("dataSource" .=) <$> _updDataSource,
+                  ("fields" .=) <$> _updFields])
+
 -- | Metadata about a value in a pivot grouping.
 --
 -- /See:/ 'pivotGroupValueMetadata' smart constructor.
 data PivotGroupValueMetadata =
   PivotGroupValueMetadata'
-    { _pgvmValue     :: !(Maybe ExtendedValue)
+    { _pgvmValue :: !(Maybe ExtendedValue)
     , _pgvmCollapsed :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9405,6 +12758,87 @@ instance ToJSON PivotGroupValueMetadata where
                  [("value" .=) <$> _pgvmValue,
                   ("collapsed" .=) <$> _pgvmCollapsed])
 
+-- | Information about an external data source in the spreadsheet.
+--
+-- /See:/ 'dataSource' smart constructor.
+data DataSource =
+  DataSource'
+    { _dsDataSourceId :: !(Maybe Text)
+    , _dsSheetId :: !(Maybe (Textual Int32))
+    , _dsSpec :: !(Maybe DataSourceSpec)
+    , _dsCalculatedColumns :: !(Maybe [DataSourceColumn])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsDataSourceId'
+--
+-- * 'dsSheetId'
+--
+-- * 'dsSpec'
+--
+-- * 'dsCalculatedColumns'
+dataSource
+    :: DataSource
+dataSource =
+  DataSource'
+    { _dsDataSourceId = Nothing
+    , _dsSheetId = Nothing
+    , _dsSpec = Nothing
+    , _dsCalculatedColumns = Nothing
+    }
+
+
+-- | The spreadsheet-scoped unique ID that identifies the data source.
+-- Example: 1080547365.
+dsDataSourceId :: Lens' DataSource (Maybe Text)
+dsDataSourceId
+  = lens _dsDataSourceId
+      (\ s a -> s{_dsDataSourceId = a})
+
+-- | The ID of the Sheet connected with the data source. The field cannot be
+-- changed once set. When creating a data source, an associated DATA_SOURCE
+-- sheet is also created, if the field is not specified, the ID of the
+-- created sheet will be randomly generated.
+dsSheetId :: Lens' DataSource (Maybe Int32)
+dsSheetId
+  = lens _dsSheetId (\ s a -> s{_dsSheetId = a}) .
+      mapping _Coerce
+
+-- | The DataSourceSpec for the data source connected with this spreadsheet.
+dsSpec :: Lens' DataSource (Maybe DataSourceSpec)
+dsSpec = lens _dsSpec (\ s a -> s{_dsSpec = a})
+
+-- | All calculated columns in the data source.
+dsCalculatedColumns :: Lens' DataSource [DataSourceColumn]
+dsCalculatedColumns
+  = lens _dsCalculatedColumns
+      (\ s a -> s{_dsCalculatedColumns = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DataSource where
+        parseJSON
+          = withObject "DataSource"
+              (\ o ->
+                 DataSource' <$>
+                   (o .:? "dataSourceId") <*> (o .:? "sheetId") <*>
+                     (o .:? "spec")
+                     <*> (o .:? "calculatedColumns" .!= mempty))
+
+instance ToJSON DataSource where
+        toJSON DataSource'{..}
+          = object
+              (catMaybes
+                 [("dataSourceId" .=) <$> _dsDataSourceId,
+                  ("sheetId" .=) <$> _dsSheetId,
+                  ("spec" .=) <$> _dsSpec,
+                  ("calculatedColumns" .=) <$> _dsCalculatedColumns])
+
 -- | The response when clearing a range of values selected with DataFilters
 -- in a spreadsheet.
 --
@@ -9431,10 +12865,9 @@ batchClearValuesByDataFilterResponse =
     {_bcvbdfrClearedRanges = Nothing, _bcvbdfrSpreadsheetId = Nothing}
 
 
--- | The ranges that were cleared, in A1 notation. (If the requests were for
--- an unbounded range or a ranger larger than the bounds of the sheet, this
--- will be the actual ranges that were cleared, bounded to the sheet\'s
--- limits.)
+-- | The ranges that were cleared, in A1 notation. If the requests are for an
+-- unbounded range or a ranger larger than the bounds of the sheet, this is
+-- the actual ranges that were cleared, bounded to the sheet\'s limits.
 bcvbdfrClearedRanges :: Lens' BatchClearValuesByDataFilterResponse [Text]
 bcvbdfrClearedRanges
   = lens _bcvbdfrClearedRanges
@@ -9466,16 +12899,71 @@ instance ToJSON BatchClearValuesByDataFilterResponse
                  [("clearedRanges" .=) <$> _bcvbdfrClearedRanges,
                   ("spreadsheetId" .=) <$> _bcvbdfrSpreadsheetId])
 
+-- | A range along a single dimension on a DATA_SOURCE sheet.
+--
+-- /See:/ 'dataSourceSheetDimensionRange' smart constructor.
+data DataSourceSheetDimensionRange =
+  DataSourceSheetDimensionRange'
+    { _dssdrSheetId :: !(Maybe (Textual Int32))
+    , _dssdrColumnReferences :: !(Maybe [DataSourceColumnReference])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceSheetDimensionRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dssdrSheetId'
+--
+-- * 'dssdrColumnReferences'
+dataSourceSheetDimensionRange
+    :: DataSourceSheetDimensionRange
+dataSourceSheetDimensionRange =
+  DataSourceSheetDimensionRange'
+    {_dssdrSheetId = Nothing, _dssdrColumnReferences = Nothing}
+
+
+-- | The ID of the data source sheet the range is on.
+dssdrSheetId :: Lens' DataSourceSheetDimensionRange (Maybe Int32)
+dssdrSheetId
+  = lens _dssdrSheetId (\ s a -> s{_dssdrSheetId = a})
+      . mapping _Coerce
+
+-- | The columns on the data source sheet.
+dssdrColumnReferences :: Lens' DataSourceSheetDimensionRange [DataSourceColumnReference]
+dssdrColumnReferences
+  = lens _dssdrColumnReferences
+      (\ s a -> s{_dssdrColumnReferences = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DataSourceSheetDimensionRange where
+        parseJSON
+          = withObject "DataSourceSheetDimensionRange"
+              (\ o ->
+                 DataSourceSheetDimensionRange' <$>
+                   (o .:? "sheetId") <*>
+                     (o .:? "columnReferences" .!= mempty))
+
+instance ToJSON DataSourceSheetDimensionRange where
+        toJSON DataSourceSheetDimensionRange'{..}
+          = object
+              (catMaybes
+                 [("sheetId" .=) <$> _dssdrSheetId,
+                  ("columnReferences" .=) <$> _dssdrColumnReferences])
+
 -- | A single series of data for a waterfall chart.
 --
 -- /See:/ 'waterfallChartSeries' smart constructor.
 data WaterfallChartSeries =
   WaterfallChartSeries'
-    { _wcsData                 :: !(Maybe ChartData)
-    , _wcsCustomSubtotals      :: !(Maybe [WaterfallChartCustomSubtotal])
+    { _wcsData :: !(Maybe ChartData)
+    , _wcsCustomSubtotals :: !(Maybe [WaterfallChartCustomSubtotal])
     , _wcsNegativeColumnsStyle :: !(Maybe WaterfallChartColumnStyle)
     , _wcsHideTrailingSubtotal :: !(Maybe Bool)
     , _wcsSubtotalColumnsStyle :: !(Maybe WaterfallChartColumnStyle)
+    , _wcsDataLabel :: !(Maybe DataLabel)
     , _wcsPositiveColumnsStyle :: !(Maybe WaterfallChartColumnStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9495,6 +12983,8 @@ data WaterfallChartSeries =
 --
 -- * 'wcsSubtotalColumnsStyle'
 --
+-- * 'wcsDataLabel'
+--
 -- * 'wcsPositiveColumnsStyle'
 waterfallChartSeries
     :: WaterfallChartSeries
@@ -9505,6 +12995,7 @@ waterfallChartSeries =
     , _wcsNegativeColumnsStyle = Nothing
     , _wcsHideTrailingSubtotal = Nothing
     , _wcsSubtotalColumnsStyle = Nothing
+    , _wcsDataLabel = Nothing
     , _wcsPositiveColumnsStyle = Nothing
     }
 
@@ -9543,6 +13034,11 @@ wcsSubtotalColumnsStyle
   = lens _wcsSubtotalColumnsStyle
       (\ s a -> s{_wcsSubtotalColumnsStyle = a})
 
+-- | Information about the data labels for this series.
+wcsDataLabel :: Lens' WaterfallChartSeries (Maybe DataLabel)
+wcsDataLabel
+  = lens _wcsDataLabel (\ s a -> s{_wcsDataLabel = a})
+
 -- | Styles for all columns in this series with positive values.
 wcsPositiveColumnsStyle :: Lens' WaterfallChartSeries (Maybe WaterfallChartColumnStyle)
 wcsPositiveColumnsStyle
@@ -9559,6 +13055,7 @@ instance FromJSON WaterfallChartSeries where
                      <*> (o .:? "negativeColumnsStyle")
                      <*> (o .:? "hideTrailingSubtotal")
                      <*> (o .:? "subtotalColumnsStyle")
+                     <*> (o .:? "dataLabel")
                      <*> (o .:? "positiveColumnsStyle"))
 
 instance ToJSON WaterfallChartSeries where
@@ -9573,18 +13070,86 @@ instance ToJSON WaterfallChartSeries where
                     _wcsHideTrailingSubtotal,
                   ("subtotalColumnsStyle" .=) <$>
                     _wcsSubtotalColumnsStyle,
+                  ("dataLabel" .=) <$> _wcsDataLabel,
                   ("positiveColumnsStyle" .=) <$>
                     _wcsPositiveColumnsStyle])
+
+-- | Specifies a BigQuery table definition. Only [native
+-- tables](https:\/\/cloud.google.com\/bigquery\/docs\/tables-intro) is
+-- allowed.
+--
+-- /See:/ 'bigQueryTableSpec' smart constructor.
+data BigQueryTableSpec =
+  BigQueryTableSpec'
+    { _bqtsTableProjectId :: !(Maybe Text)
+    , _bqtsDataSetId :: !(Maybe Text)
+    , _bqtsTableId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BigQueryTableSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bqtsTableProjectId'
+--
+-- * 'bqtsDataSetId'
+--
+-- * 'bqtsTableId'
+bigQueryTableSpec
+    :: BigQueryTableSpec
+bigQueryTableSpec =
+  BigQueryTableSpec'
+    { _bqtsTableProjectId = Nothing
+    , _bqtsDataSetId = Nothing
+    , _bqtsTableId = Nothing
+    }
+
+
+-- | The ID of a BigQuery project the table belongs to. If not specified, the
+-- project_id is assumed.
+bqtsTableProjectId :: Lens' BigQueryTableSpec (Maybe Text)
+bqtsTableProjectId
+  = lens _bqtsTableProjectId
+      (\ s a -> s{_bqtsTableProjectId = a})
+
+-- | The BigQuery dataset id.
+bqtsDataSetId :: Lens' BigQueryTableSpec (Maybe Text)
+bqtsDataSetId
+  = lens _bqtsDataSetId
+      (\ s a -> s{_bqtsDataSetId = a})
+
+-- | The BigQuery table id.
+bqtsTableId :: Lens' BigQueryTableSpec (Maybe Text)
+bqtsTableId
+  = lens _bqtsTableId (\ s a -> s{_bqtsTableId = a})
+
+instance FromJSON BigQueryTableSpec where
+        parseJSON
+          = withObject "BigQueryTableSpec"
+              (\ o ->
+                 BigQueryTableSpec' <$>
+                   (o .:? "tableProjectId") <*> (o .:? "datasetId") <*>
+                     (o .:? "tableId"))
+
+instance ToJSON BigQueryTableSpec where
+        toJSON BigQueryTableSpec'{..}
+          = object
+              (catMaybes
+                 [("tableProjectId" .=) <$> _bqtsTableProjectId,
+                  ("datasetId" .=) <$> _bqtsDataSetId,
+                  ("tableId" .=) <$> _bqtsTableId])
 
 -- | Updates all cells in a range with new data.
 --
 -- /See:/ 'updateCellsRequest' smart constructor.
 data UpdateCellsRequest =
   UpdateCellsRequest'
-    { _updStart  :: !(Maybe GridCoordinate)
-    , _updRows   :: !(Maybe [RowData])
-    , _updRange  :: !(Maybe GridRange)
-    , _updFields :: !(Maybe GFieldMask)
+    { _ucrcStart :: !(Maybe GridCoordinate)
+    , _ucrcRows :: !(Maybe [RowData])
+    , _ucrcRange :: !(Maybe GridRange)
+    , _ucrcFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9593,48 +13158,51 @@ data UpdateCellsRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'updStart'
+-- * 'ucrcStart'
 --
--- * 'updRows'
+-- * 'ucrcRows'
 --
--- * 'updRange'
+-- * 'ucrcRange'
 --
--- * 'updFields'
+-- * 'ucrcFields'
 updateCellsRequest
     :: UpdateCellsRequest
 updateCellsRequest =
   UpdateCellsRequest'
-    { _updStart = Nothing
-    , _updRows = Nothing
-    , _updRange = Nothing
-    , _updFields = Nothing
+    { _ucrcStart = Nothing
+    , _ucrcRows = Nothing
+    , _ucrcRange = Nothing
+    , _ucrcFields = Nothing
     }
 
 
 -- | The coordinate to start writing data at. Any number of rows and columns
 -- (including a different number of columns per row) may be written.
-updStart :: Lens' UpdateCellsRequest (Maybe GridCoordinate)
-updStart = lens _updStart (\ s a -> s{_updStart = a})
+ucrcStart :: Lens' UpdateCellsRequest (Maybe GridCoordinate)
+ucrcStart
+  = lens _ucrcStart (\ s a -> s{_ucrcStart = a})
 
 -- | The data to write.
-updRows :: Lens' UpdateCellsRequest [RowData]
-updRows
-  = lens _updRows (\ s a -> s{_updRows = a}) . _Default
+ucrcRows :: Lens' UpdateCellsRequest [RowData]
+ucrcRows
+  = lens _ucrcRows (\ s a -> s{_ucrcRows = a}) .
+      _Default
       . _Coerce
 
 -- | The range to write data to. If the data in rows does not cover the
 -- entire requested range, the fields matching those set in fields will be
 -- cleared.
-updRange :: Lens' UpdateCellsRequest (Maybe GridRange)
-updRange = lens _updRange (\ s a -> s{_updRange = a})
+ucrcRange :: Lens' UpdateCellsRequest (Maybe GridRange)
+ucrcRange
+  = lens _ucrcRange (\ s a -> s{_ucrcRange = a})
 
 -- | The fields of CellData that should be updated. At least one field must
 -- be specified. The root is the CellData; \'row.values.\' should not be
 -- specified. A single \`\"*\"\` can be used as short-hand for listing
 -- every field.
-updFields :: Lens' UpdateCellsRequest (Maybe GFieldMask)
-updFields
-  = lens _updFields (\ s a -> s{_updFields = a})
+ucrcFields :: Lens' UpdateCellsRequest (Maybe GFieldMask)
+ucrcFields
+  = lens _ucrcFields (\ s a -> s{_ucrcFields = a})
 
 instance FromJSON UpdateCellsRequest where
         parseJSON
@@ -9649,26 +13217,28 @@ instance ToJSON UpdateCellsRequest where
         toJSON UpdateCellsRequest'{..}
           = object
               (catMaybes
-                 [("start" .=) <$> _updStart,
-                  ("rows" .=) <$> _updRows, ("range" .=) <$> _updRange,
-                  ("fields" .=) <$> _updFields])
+                 [("start" .=) <$> _ucrcStart,
+                  ("rows" .=) <$> _ucrcRows,
+                  ("range" .=) <$> _ucrcRange,
+                  ("fields" .=) <$> _ucrcFields])
 
 -- | The format of a cell.
 --
 -- /See:/ 'cellFormat' smart constructor.
 data CellFormat =
   CellFormat'
-    { _cfBOrders              :: !(Maybe BOrders)
-    , _cfVerticalAlignment    :: !(Maybe CellFormatVerticalAlignment)
-    , _cfBackgRoundColor      :: !(Maybe Color)
-    , _cfTextRotation         :: !(Maybe TextRotation)
+    { _cfBOrders :: !(Maybe BOrders)
+    , _cfVerticalAlignment :: !(Maybe CellFormatVerticalAlignment)
+    , _cfBackgRoundColor :: !(Maybe Color)
+    , _cfTextRotation :: !(Maybe TextRotation)
+    , _cfBackgRoundColorStyle :: !(Maybe ColorStyle)
     , _cfHyperlinkDisplayType :: !(Maybe CellFormatHyperlinkDisplayType)
-    , _cfWrapStrategy         :: !(Maybe CellFormatWrapStrategy)
-    , _cfNumberFormat         :: !(Maybe NumberFormat)
-    , _cfTextDirection        :: !(Maybe CellFormatTextDirection)
-    , _cfTextFormat           :: !(Maybe TextFormat)
-    , _cfHorizontalAlignment  :: !(Maybe CellFormatHorizontalAlignment)
-    , _cfPadding              :: !(Maybe Padding)
+    , _cfWrapStrategy :: !(Maybe CellFormatWrapStrategy)
+    , _cfNumberFormat :: !(Maybe NumberFormat)
+    , _cfTextDirection :: !(Maybe CellFormatTextDirection)
+    , _cfTextFormat :: !(Maybe TextFormat)
+    , _cfHorizontalAlignment :: !(Maybe CellFormatHorizontalAlignment)
+    , _cfPadding :: !(Maybe Padding)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9684,6 +13254,8 @@ data CellFormat =
 -- * 'cfBackgRoundColor'
 --
 -- * 'cfTextRotation'
+--
+-- * 'cfBackgRoundColorStyle'
 --
 -- * 'cfHyperlinkDisplayType'
 --
@@ -9706,6 +13278,7 @@ cellFormat =
     , _cfVerticalAlignment = Nothing
     , _cfBackgRoundColor = Nothing
     , _cfTextRotation = Nothing
+    , _cfBackgRoundColorStyle = Nothing
     , _cfHyperlinkDisplayType = Nothing
     , _cfWrapStrategy = Nothing
     , _cfNumberFormat = Nothing
@@ -9739,6 +13312,13 @@ cfTextRotation
   = lens _cfTextRotation
       (\ s a -> s{_cfTextRotation = a})
 
+-- | The background color of the cell. If background_color is also set, this
+-- field takes precedence.
+cfBackgRoundColorStyle :: Lens' CellFormat (Maybe ColorStyle)
+cfBackgRoundColorStyle
+  = lens _cfBackgRoundColorStyle
+      (\ s a -> s{_cfBackgRoundColorStyle = a})
+
 -- | How a hyperlink, if it exists, should be displayed in the cell.
 cfHyperlinkDisplayType :: Lens' CellFormat (Maybe CellFormatHyperlinkDisplayType)
 cfHyperlinkDisplayType
@@ -9764,6 +13344,9 @@ cfTextDirection
       (\ s a -> s{_cfTextDirection = a})
 
 -- | The format of the text in the cell (unless overridden by a format run).
+-- Setting a cell-level link here will clear the cell\'s existing links.
+-- Setting the link field in a TextFormatRun will take precedence over the
+-- cell-level link.
 cfTextFormat :: Lens' CellFormat (Maybe TextFormat)
 cfTextFormat
   = lens _cfTextFormat (\ s a -> s{_cfTextFormat = a})
@@ -9787,6 +13370,7 @@ instance FromJSON CellFormat where
                    (o .:? "borders") <*> (o .:? "verticalAlignment") <*>
                      (o .:? "backgroundColor")
                      <*> (o .:? "textRotation")
+                     <*> (o .:? "backgroundColorStyle")
                      <*> (o .:? "hyperlinkDisplayType")
                      <*> (o .:? "wrapStrategy")
                      <*> (o .:? "numberFormat")
@@ -9803,6 +13387,8 @@ instance ToJSON CellFormat where
                   ("verticalAlignment" .=) <$> _cfVerticalAlignment,
                   ("backgroundColor" .=) <$> _cfBackgRoundColor,
                   ("textRotation" .=) <$> _cfTextRotation,
+                  ("backgroundColorStyle" .=) <$>
+                    _cfBackgRoundColorStyle,
                   ("hyperlinkDisplayType" .=) <$>
                     _cfHyperlinkDisplayType,
                   ("wrapStrategy" .=) <$> _cfWrapStrategy,
@@ -9860,7 +13446,7 @@ instance ToJSON DeleteProtectedRangeRequest where
 data UpdateProtectedRangeRequest =
   UpdateProtectedRangeRequest'
     { _uprrProtectedRange :: !(Maybe ProtectedRange)
-    , _uprrFields         :: !(Maybe GFieldMask)
+    , _uprrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9946,14 +13532,14 @@ instance ToJSON AddSheetResponse where
 -- /See:/ 'protectedRange' smart constructor.
 data ProtectedRange =
   ProtectedRange'
-    { _prProtectedRangeId      :: !(Maybe (Textual Int32))
-    , _prWarningOnly           :: !(Maybe Bool)
-    , _prNamedRangeId          :: !(Maybe Text)
-    , _prRange                 :: !(Maybe GridRange)
-    , _prEditors               :: !(Maybe Editors)
-    , _prUnprotectedRanges     :: !(Maybe [GridRange])
+    { _prProtectedRangeId :: !(Maybe (Textual Int32))
+    , _prWarningOnly :: !(Maybe Bool)
+    , _prNamedRangeId :: !(Maybe Text)
+    , _prRange :: !(Maybe GridRange)
+    , _prEditors :: !(Maybe Editors)
+    , _prUnprotectedRanges :: !(Maybe [GridRange])
     , _prRequestingUserCanEdit :: !(Maybe Bool)
-    , _prDescription           :: !(Maybe Text)
+    , _prDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10080,6 +13666,62 @@ instance ToJSON ProtectedRange where
                     _prRequestingUserCanEdit,
                   ("description" .=) <$> _prDescription])
 
+-- | An optional setting on the ChartData of the domain of a data source
+-- chart that defines buckets for the values in the domain rather than
+-- breaking out each individual value. For example, when plotting a data
+-- source chart, you can specify a histogram rule on the domain (it should
+-- only contain numeric values), grouping its values into buckets. Any
+-- values of a chart series that fall into the same bucket are aggregated
+-- based on the aggregate_type.
+--
+-- /See:/ 'chartGroupRule' smart constructor.
+data ChartGroupRule =
+  ChartGroupRule'
+    { _cgrDateTimeRule :: !(Maybe ChartDateTimeRule)
+    , _cgrHistogramRule :: !(Maybe ChartHistogramRule)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ChartGroupRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cgrDateTimeRule'
+--
+-- * 'cgrHistogramRule'
+chartGroupRule
+    :: ChartGroupRule
+chartGroupRule =
+  ChartGroupRule' {_cgrDateTimeRule = Nothing, _cgrHistogramRule = Nothing}
+
+
+-- | A ChartDateTimeRule.
+cgrDateTimeRule :: Lens' ChartGroupRule (Maybe ChartDateTimeRule)
+cgrDateTimeRule
+  = lens _cgrDateTimeRule
+      (\ s a -> s{_cgrDateTimeRule = a})
+
+-- | A ChartHistogramRule
+cgrHistogramRule :: Lens' ChartGroupRule (Maybe ChartHistogramRule)
+cgrHistogramRule
+  = lens _cgrHistogramRule
+      (\ s a -> s{_cgrHistogramRule = a})
+
+instance FromJSON ChartGroupRule where
+        parseJSON
+          = withObject "ChartGroupRule"
+              (\ o ->
+                 ChartGroupRule' <$>
+                   (o .:? "dateTimeRule") <*> (o .:? "histogramRule"))
+
+instance ToJSON ChartGroupRule where
+        toJSON ChartGroupRule'{..}
+          = object
+              (catMaybes
+                 [("dateTimeRule" .=) <$> _cgrDateTimeRule,
+                  ("histogramRule" .=) <$> _cgrHistogramRule])
+
 -- | An axis of the chart. A chart may not have more than one axis per axis
 -- position.
 --
@@ -10087,9 +13729,10 @@ instance ToJSON ProtectedRange where
 data BasicChartAxis =
   BasicChartAxis'
     { _bcaTitleTextPosition :: !(Maybe TextPosition)
-    , _bcaFormat            :: !(Maybe TextFormat)
-    , _bcaTitle             :: !(Maybe Text)
-    , _bcaPosition          :: !(Maybe BasicChartAxisPosition)
+    , _bcaFormat :: !(Maybe TextFormat)
+    , _bcaTitle :: !(Maybe Text)
+    , _bcaViewWindowOptions :: !(Maybe ChartAxisViewWindowOptions)
+    , _bcaPosition :: !(Maybe BasicChartAxisPosition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10104,6 +13747,8 @@ data BasicChartAxis =
 --
 -- * 'bcaTitle'
 --
+-- * 'bcaViewWindowOptions'
+--
 -- * 'bcaPosition'
 basicChartAxis
     :: BasicChartAxis
@@ -10112,6 +13757,7 @@ basicChartAxis =
     { _bcaTitleTextPosition = Nothing
     , _bcaFormat = Nothing
     , _bcaTitle = Nothing
+    , _bcaViewWindowOptions = Nothing
     , _bcaPosition = Nothing
     }
 
@@ -10123,7 +13769,7 @@ bcaTitleTextPosition
       (\ s a -> s{_bcaTitleTextPosition = a})
 
 -- | The format of the title. Only valid if the axis is not associated with
--- the domain.
+-- the domain. The link field is not supported.
 bcaFormat :: Lens' BasicChartAxis (Maybe TextFormat)
 bcaFormat
   = lens _bcaFormat (\ s a -> s{_bcaFormat = a})
@@ -10132,6 +13778,12 @@ bcaFormat
 -- headers of the data.
 bcaTitle :: Lens' BasicChartAxis (Maybe Text)
 bcaTitle = lens _bcaTitle (\ s a -> s{_bcaTitle = a})
+
+-- | The view window options for this axis.
+bcaViewWindowOptions :: Lens' BasicChartAxis (Maybe ChartAxisViewWindowOptions)
+bcaViewWindowOptions
+  = lens _bcaViewWindowOptions
+      (\ s a -> s{_bcaViewWindowOptions = a})
 
 -- | The position of this axis.
 bcaPosition :: Lens' BasicChartAxis (Maybe BasicChartAxisPosition)
@@ -10145,6 +13797,7 @@ instance FromJSON BasicChartAxis where
                  BasicChartAxis' <$>
                    (o .:? "titleTextPosition") <*> (o .:? "format") <*>
                      (o .:? "title")
+                     <*> (o .:? "viewWindowOptions")
                      <*> (o .:? "position"))
 
 instance ToJSON BasicChartAxis where
@@ -10154,6 +13807,7 @@ instance ToJSON BasicChartAxis where
                  [("titleTextPosition" .=) <$> _bcaTitleTextPosition,
                   ("format" .=) <$> _bcaFormat,
                   ("title" .=) <$> _bcaTitle,
+                  ("viewWindowOptions" .=) <$> _bcaViewWindowOptions,
                   ("position" .=) <$> _bcaPosition])
 
 -- | Data in the grid, as well as metadata about the dimensions.
@@ -10161,11 +13815,11 @@ instance ToJSON BasicChartAxis where
 -- /See:/ 'gridData' smart constructor.
 data GridData =
   GridData'
-    { _gdRowMetadata    :: !(Maybe [DimensionProperties])
-    , _gdStartRow       :: !(Maybe (Textual Int32))
-    , _gdRowData        :: !(Maybe [RowData])
+    { _gdRowMetadata :: !(Maybe [DimensionProperties])
+    , _gdStartRow :: !(Maybe (Textual Int32))
+    , _gdRowData :: !(Maybe [RowData])
     , _gdColumnMetadata :: !(Maybe [DimensionProperties])
-    , _gdStartColumn    :: !(Maybe (Textual Int32))
+    , _gdStartColumn :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10256,13 +13910,66 @@ instance ToJSON GridData where
                   ("columnMetadata" .=) <$> _gdColumnMetadata,
                   ("startColumn" .=) <$> _gdStartColumn])
 
+-- | Properties of a data source chart.
+--
+-- /See:/ 'dataSourceChartProperties' smart constructor.
+data DataSourceChartProperties =
+  DataSourceChartProperties'
+    { _dscpDataSourceId :: !(Maybe Text)
+    , _dscpDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceChartProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dscpDataSourceId'
+--
+-- * 'dscpDataExecutionStatus'
+dataSourceChartProperties
+    :: DataSourceChartProperties
+dataSourceChartProperties =
+  DataSourceChartProperties'
+    {_dscpDataSourceId = Nothing, _dscpDataExecutionStatus = Nothing}
+
+
+-- | ID of the data source that the chart is associated with.
+dscpDataSourceId :: Lens' DataSourceChartProperties (Maybe Text)
+dscpDataSourceId
+  = lens _dscpDataSourceId
+      (\ s a -> s{_dscpDataSourceId = a})
+
+-- | Output only. The data execution status.
+dscpDataExecutionStatus :: Lens' DataSourceChartProperties (Maybe DataExecutionStatus)
+dscpDataExecutionStatus
+  = lens _dscpDataExecutionStatus
+      (\ s a -> s{_dscpDataExecutionStatus = a})
+
+instance FromJSON DataSourceChartProperties where
+        parseJSON
+          = withObject "DataSourceChartProperties"
+              (\ o ->
+                 DataSourceChartProperties' <$>
+                   (o .:? "dataSourceId") <*>
+                     (o .:? "dataExecutionStatus"))
+
+instance ToJSON DataSourceChartProperties where
+        toJSON DataSourceChartProperties'{..}
+          = object
+              (catMaybes
+                 [("dataSourceId" .=) <$> _dscpDataSourceId,
+                  ("dataExecutionStatus" .=) <$>
+                    _dscpDataExecutionStatus])
+
 -- | The number format of a cell.
 --
 -- /See:/ 'numberFormat' smart constructor.
 data NumberFormat =
   NumberFormat'
     { _nfPattern :: !(Maybe Text)
-    , _nfType    :: !(Maybe NumberFormatType)
+    , _nfType :: !(Maybe NumberFormatType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10305,13 +14012,134 @@ instance ToJSON NumberFormat where
                  [("pattern" .=) <$> _nfPattern,
                   ("type" .=) <$> _nfType])
 
+-- | Represents a time of day. The date and time zone are either not
+-- significant or are specified elsewhere. An API may choose to allow leap
+-- seconds. Related types are google.type.Date and
+-- \`google.protobuf.Timestamp\`.
+--
+-- /See:/ 'timeOfDay' smart constructor.
+data TimeOfDay' =
+  TimeOfDay''
+    { _todNanos :: !(Maybe (Textual Int32))
+    , _todHours :: !(Maybe (Textual Int32))
+    , _todMinutes :: !(Maybe (Textual Int32))
+    , _todSeconds :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'todNanos'
+--
+-- * 'todHours'
+--
+-- * 'todMinutes'
+--
+-- * 'todSeconds'
+timeOfDay
+    :: TimeOfDay'
+timeOfDay =
+  TimeOfDay''
+    { _todNanos = Nothing
+    , _todHours = Nothing
+    , _todMinutes = Nothing
+    , _todSeconds = Nothing
+    }
+
+
+-- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+todNanos :: Lens' TimeOfDay' (Maybe Int32)
+todNanos
+  = lens _todNanos (\ s a -> s{_todNanos = a}) .
+      mapping _Coerce
+
+-- | Hours of day in 24 hour format. Should be from 0 to 23. An API may
+-- choose to allow the value \"24:00:00\" for scenarios like business
+-- closing time.
+todHours :: Lens' TimeOfDay' (Maybe Int32)
+todHours
+  = lens _todHours (\ s a -> s{_todHours = a}) .
+      mapping _Coerce
+
+-- | Minutes of hour of day. Must be from 0 to 59.
+todMinutes :: Lens' TimeOfDay' (Maybe Int32)
+todMinutes
+  = lens _todMinutes (\ s a -> s{_todMinutes = a}) .
+      mapping _Coerce
+
+-- | Seconds of minutes of the time. Must normally be from 0 to 59. An API
+-- may allow the value 60 if it allows leap-seconds.
+todSeconds :: Lens' TimeOfDay' (Maybe Int32)
+todSeconds
+  = lens _todSeconds (\ s a -> s{_todSeconds = a}) .
+      mapping _Coerce
+
+instance FromJSON TimeOfDay' where
+        parseJSON
+          = withObject "TimeOfDay"
+              (\ o ->
+                 TimeOfDay'' <$>
+                   (o .:? "nanos") <*> (o .:? "hours") <*>
+                     (o .:? "minutes")
+                     <*> (o .:? "seconds"))
+
+instance ToJSON TimeOfDay' where
+        toJSON TimeOfDay''{..}
+          = object
+              (catMaybes
+                 [("nanos" .=) <$> _todNanos,
+                  ("hours" .=) <$> _todHours,
+                  ("minutes" .=) <$> _todMinutes,
+                  ("seconds" .=) <$> _todSeconds])
+
+-- | Trims the whitespace (such as spaces, tabs, or new lines) in every cell
+-- in the specified range. This request removes all whitespace from the
+-- start and end of each cell\'s text, and reduces any subsequence of
+-- remaining whitespace characters to a single space. If the resulting
+-- trimmed text starts with a \'+\' or \'=\' character, the text remains as
+-- a string value and isn\'t interpreted as a formula.
+--
+-- /See:/ 'trimWhitespaceRequest' smart constructor.
+newtype TrimWhitespaceRequest =
+  TrimWhitespaceRequest'
+    { _twrRange :: Maybe GridRange
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TrimWhitespaceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'twrRange'
+trimWhitespaceRequest
+    :: TrimWhitespaceRequest
+trimWhitespaceRequest = TrimWhitespaceRequest' {_twrRange = Nothing}
+
+
+-- | The range whose cells to trim.
+twrRange :: Lens' TrimWhitespaceRequest (Maybe GridRange)
+twrRange = lens _twrRange (\ s a -> s{_twrRange = a})
+
+instance FromJSON TrimWhitespaceRequest where
+        parseJSON
+          = withObject "TrimWhitespaceRequest"
+              (\ o -> TrimWhitespaceRequest' <$> (o .:? "range"))
+
+instance ToJSON TrimWhitespaceRequest where
+        toJSON TrimWhitespaceRequest'{..}
+          = object (catMaybes [("range" .=) <$> _twrRange])
+
 -- | The reply for batch updating a spreadsheet.
 --
 -- /See:/ 'batchUpdateSpreadsheetResponse' smart constructor.
 data BatchUpdateSpreadsheetResponse =
   BatchUpdateSpreadsheetResponse'
-    { _busrSpreadsheetId      :: !(Maybe Text)
-    , _busrReplies            :: !(Maybe [Response])
+    { _busrSpreadsheetId :: !(Maybe Text)
+    , _busrReplies :: !(Maybe [Response])
     , _busrUpdatedSpreadsheet :: !(Maybe Spreadsheet)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10351,7 +14179,7 @@ busrReplies
       . _Coerce
 
 -- | The spreadsheet after updates were applied. This is only set if
--- [BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response] is
+-- BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response is
 -- \`true\`.
 busrUpdatedSpreadsheet :: Lens' BatchUpdateSpreadsheetResponse (Maybe Spreadsheet)
 busrUpdatedSpreadsheet
@@ -10383,8 +14211,8 @@ instance ToJSON BatchUpdateSpreadsheetResponse where
 -- /See:/ 'dataFilter' smart constructor.
 data DataFilter =
   DataFilter'
-    { _dfGridRange               :: !(Maybe GridRange)
-    , _dfA1Range                 :: !(Maybe Text)
+    { _dfGridRange :: !(Maybe GridRange)
+    , _dfA1Range :: !(Maybe Text)
     , _dfDeveloperMetadataLookup :: !(Maybe DeveloperMetadataLookup)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10449,7 +14277,7 @@ instance ToJSON DataFilter where
 -- /See:/ 'setDataValidationRequest' smart constructor.
 data SetDataValidationRequest =
   SetDataValidationRequest'
-    { _sdvrRule  :: !(Maybe DataValidationRule)
+    { _sdvrRule :: !(Maybe DataValidationRule)
     , _sdvrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10508,9 +14336,13 @@ instance ToJSON SetDataValidationRequest where
 data BandingProperties =
   BandingProperties'
     { _bpSecondBandColor :: !(Maybe Color)
-    , _bpHeaderColor     :: !(Maybe Color)
-    , _bpFooterColor     :: !(Maybe Color)
-    , _bpFirstBandColor  :: !(Maybe Color)
+    , _bpFooterColorStyle :: !(Maybe ColorStyle)
+    , _bpHeaderColor :: !(Maybe Color)
+    , _bpHeaderColorStyle :: !(Maybe ColorStyle)
+    , _bpFooterColor :: !(Maybe Color)
+    , _bpSecondBandColorStyle :: !(Maybe ColorStyle)
+    , _bpFirstBandColorStyle :: !(Maybe ColorStyle)
+    , _bpFirstBandColor :: !(Maybe Color)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10521,9 +14353,17 @@ data BandingProperties =
 --
 -- * 'bpSecondBandColor'
 --
+-- * 'bpFooterColorStyle'
+--
 -- * 'bpHeaderColor'
 --
+-- * 'bpHeaderColorStyle'
+--
 -- * 'bpFooterColor'
+--
+-- * 'bpSecondBandColorStyle'
+--
+-- * 'bpFirstBandColorStyle'
 --
 -- * 'bpFirstBandColor'
 bandingProperties
@@ -10531,8 +14371,12 @@ bandingProperties
 bandingProperties =
   BandingProperties'
     { _bpSecondBandColor = Nothing
+    , _bpFooterColorStyle = Nothing
     , _bpHeaderColor = Nothing
+    , _bpHeaderColorStyle = Nothing
     , _bpFooterColor = Nothing
+    , _bpSecondBandColorStyle = Nothing
+    , _bpFirstBandColorStyle = Nothing
     , _bpFirstBandColor = Nothing
     }
 
@@ -10543,24 +14387,58 @@ bpSecondBandColor
   = lens _bpSecondBandColor
       (\ s a -> s{_bpSecondBandColor = a})
 
+-- | The color of the last row or column. If this field is not set, the last
+-- row or column is filled with either first_band_color or
+-- second_band_color, depending on the color of the previous row or column.
+-- If footer_color is also set, this field takes precedence.
+bpFooterColorStyle :: Lens' BandingProperties (Maybe ColorStyle)
+bpFooterColorStyle
+  = lens _bpFooterColorStyle
+      (\ s a -> s{_bpFooterColorStyle = a})
+
 -- | The color of the first row or column. If this field is set, the first
--- row or column will be filled with this color and the colors will
--- alternate between first_band_color and second_band_color starting from
--- the second row or column. Otherwise, the first row or column will be
--- filled with first_band_color and the colors will proceed to alternate as
--- they normally would.
+-- row or column is filled with this color and the colors alternate between
+-- first_band_color and second_band_color starting from the second row or
+-- column. Otherwise, the first row or column is filled with
+-- first_band_color and the colors proceed to alternate as they normally
+-- would.
 bpHeaderColor :: Lens' BandingProperties (Maybe Color)
 bpHeaderColor
   = lens _bpHeaderColor
       (\ s a -> s{_bpHeaderColor = a})
 
+-- | The color of the first row or column. If this field is set, the first
+-- row or column is filled with this color and the colors alternate between
+-- first_band_color and second_band_color starting from the second row or
+-- column. Otherwise, the first row or column is filled with
+-- first_band_color and the colors proceed to alternate as they normally
+-- would. If header_color is also set, this field takes precedence.
+bpHeaderColorStyle :: Lens' BandingProperties (Maybe ColorStyle)
+bpHeaderColorStyle
+  = lens _bpHeaderColorStyle
+      (\ s a -> s{_bpHeaderColorStyle = a})
+
 -- | The color of the last row or column. If this field is not set, the last
--- row or column will be filled with either first_band_color or
+-- row or column is filled with either first_band_color or
 -- second_band_color, depending on the color of the previous row or column.
 bpFooterColor :: Lens' BandingProperties (Maybe Color)
 bpFooterColor
   = lens _bpFooterColor
       (\ s a -> s{_bpFooterColor = a})
+
+-- | The second color that is alternating. (Required) If second_band_color is
+-- also set, this field takes precedence.
+bpSecondBandColorStyle :: Lens' BandingProperties (Maybe ColorStyle)
+bpSecondBandColorStyle
+  = lens _bpSecondBandColorStyle
+      (\ s a -> s{_bpSecondBandColorStyle = a})
+
+-- | The first color that is alternating. (Required) If first_band_color is
+-- also set, this field takes precedence.
+bpFirstBandColorStyle :: Lens' BandingProperties (Maybe ColorStyle)
+bpFirstBandColorStyle
+  = lens _bpFirstBandColorStyle
+      (\ s a -> s{_bpFirstBandColorStyle = a})
 
 -- | The first color that is alternating. (Required)
 bpFirstBandColor :: Lens' BandingProperties (Maybe Color)
@@ -10573,8 +14451,13 @@ instance FromJSON BandingProperties where
           = withObject "BandingProperties"
               (\ o ->
                  BandingProperties' <$>
-                   (o .:? "secondBandColor") <*> (o .:? "headerColor")
+                   (o .:? "secondBandColor") <*>
+                     (o .:? "footerColorStyle")
+                     <*> (o .:? "headerColor")
+                     <*> (o .:? "headerColorStyle")
                      <*> (o .:? "footerColor")
+                     <*> (o .:? "secondBandColorStyle")
+                     <*> (o .:? "firstBandColorStyle")
                      <*> (o .:? "firstBandColor"))
 
 instance ToJSON BandingProperties where
@@ -10582,8 +14465,14 @@ instance ToJSON BandingProperties where
           = object
               (catMaybes
                  [("secondBandColor" .=) <$> _bpSecondBandColor,
+                  ("footerColorStyle" .=) <$> _bpFooterColorStyle,
                   ("headerColor" .=) <$> _bpHeaderColor,
+                  ("headerColorStyle" .=) <$> _bpHeaderColorStyle,
                   ("footerColor" .=) <$> _bpFooterColor,
+                  ("secondBandColorStyle" .=) <$>
+                    _bpSecondBandColorStyle,
+                  ("firstBandColorStyle" .=) <$>
+                    _bpFirstBandColorStyle,
                   ("firstBandColor" .=) <$> _bpFirstBandColor])
 
 -- | Duplicates a particular filter view.
@@ -10622,19 +14511,90 @@ instance ToJSON DuplicateFilterViewRequest where
         toJSON DuplicateFilterViewRequest'{..}
           = object (catMaybes [("filterId" .=) <$> _dFilterId])
 
+-- | Additional properties of a DATA_SOURCE sheet.
+--
+-- /See:/ 'dataSourceSheetProperties' smart constructor.
+data DataSourceSheetProperties =
+  DataSourceSheetProperties'
+    { _dsspDataSourceId :: !(Maybe Text)
+    , _dsspDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    , _dsspColumns :: !(Maybe [DataSourceColumn])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceSheetProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsspDataSourceId'
+--
+-- * 'dsspDataExecutionStatus'
+--
+-- * 'dsspColumns'
+dataSourceSheetProperties
+    :: DataSourceSheetProperties
+dataSourceSheetProperties =
+  DataSourceSheetProperties'
+    { _dsspDataSourceId = Nothing
+    , _dsspDataExecutionStatus = Nothing
+    , _dsspColumns = Nothing
+    }
+
+
+-- | ID of the DataSource the sheet is connected to.
+dsspDataSourceId :: Lens' DataSourceSheetProperties (Maybe Text)
+dsspDataSourceId
+  = lens _dsspDataSourceId
+      (\ s a -> s{_dsspDataSourceId = a})
+
+-- | The data execution status.
+dsspDataExecutionStatus :: Lens' DataSourceSheetProperties (Maybe DataExecutionStatus)
+dsspDataExecutionStatus
+  = lens _dsspDataExecutionStatus
+      (\ s a -> s{_dsspDataExecutionStatus = a})
+
+-- | The columns displayed on the sheet, corresponding to the values in
+-- RowData.
+dsspColumns :: Lens' DataSourceSheetProperties [DataSourceColumn]
+dsspColumns
+  = lens _dsspColumns (\ s a -> s{_dsspColumns = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON DataSourceSheetProperties where
+        parseJSON
+          = withObject "DataSourceSheetProperties"
+              (\ o ->
+                 DataSourceSheetProperties' <$>
+                   (o .:? "dataSourceId") <*>
+                     (o .:? "dataExecutionStatus")
+                     <*> (o .:? "columns" .!= mempty))
+
+instance ToJSON DataSourceSheetProperties where
+        toJSON DataSourceSheetProperties'{..}
+          = object
+              (catMaybes
+                 [("dataSourceId" .=) <$> _dsspDataSourceId,
+                  ("dataExecutionStatus" .=) <$>
+                    _dsspDataExecutionStatus,
+                  ("columns" .=) <$> _dsspColumns])
+
 -- | A single grouping (either row or column) in a pivot table.
 --
 -- /See:/ 'pivotGroup' smart constructor.
 data PivotGroup =
   PivotGroup'
-    { _pgRepeatHeadings     :: !(Maybe Bool)
-    , _pgValueMetadata      :: !(Maybe [PivotGroupValueMetadata])
+    { _pgRepeatHeadings :: !(Maybe Bool)
+    , _pgGroupLimit :: !(Maybe PivotGroupLimit)
+    , _pgDataSourceColumnReference :: !(Maybe DataSourceColumnReference)
+    , _pgValueMetadata :: !(Maybe [PivotGroupValueMetadata])
     , _pgSourceColumnOffSet :: !(Maybe (Textual Int32))
-    , _pgSortOrder          :: !(Maybe PivotGroupSortOrder)
-    , _pgShowTotals         :: !(Maybe Bool)
-    , _pgValueBucket        :: !(Maybe PivotGroupSortValueBucket)
-    , _pgLabel              :: !(Maybe Text)
-    , _pgGroupRule          :: !(Maybe PivotGroupRule)
+    , _pgSortOrder :: !(Maybe PivotGroupSortOrder)
+    , _pgShowTotals :: !(Maybe Bool)
+    , _pgValueBucket :: !(Maybe PivotGroupSortValueBucket)
+    , _pgLabel :: !(Maybe Text)
+    , _pgGroupRule :: !(Maybe PivotGroupRule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10644,6 +14604,10 @@ data PivotGroup =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgRepeatHeadings'
+--
+-- * 'pgGroupLimit'
+--
+-- * 'pgDataSourceColumnReference'
 --
 -- * 'pgValueMetadata'
 --
@@ -10663,6 +14627,8 @@ pivotGroup
 pivotGroup =
   PivotGroup'
     { _pgRepeatHeadings = Nothing
+    , _pgGroupLimit = Nothing
+    , _pgDataSourceColumnReference = Nothing
     , _pgValueMetadata = Nothing
     , _pgSourceColumnOffSet = Nothing
     , _pgSortOrder = Nothing
@@ -10675,7 +14641,7 @@ pivotGroup =
 
 -- | True if the headings in this pivot group should be repeated. This is
 -- only valid for row groupings and is ignored by columns. By default, we
--- minimize repitition of headings by not showing higher level headings
+-- minimize repetition of headings by not showing higher level headings
 -- where they are the same. For example, even though the third row below
 -- corresponds to \"Q1 Mar\", \"Q1\" is not shown because it is redundant
 -- with previous rows. Setting repeat_headings to true would cause \"Q1\"
@@ -10685,6 +14651,17 @@ pgRepeatHeadings :: Lens' PivotGroup (Maybe Bool)
 pgRepeatHeadings
   = lens _pgRepeatHeadings
       (\ s a -> s{_pgRepeatHeadings = a})
+
+-- | The count limit on rows or columns to apply to this pivot group.
+pgGroupLimit :: Lens' PivotGroup (Maybe PivotGroupLimit)
+pgGroupLimit
+  = lens _pgGroupLimit (\ s a -> s{_pgGroupLimit = a})
+
+-- | The reference to the data source column this grouping is based on.
+pgDataSourceColumnReference :: Lens' PivotGroup (Maybe DataSourceColumnReference)
+pgDataSourceColumnReference
+  = lens _pgDataSourceColumnReference
+      (\ s a -> s{_pgDataSourceColumnReference = a})
 
 -- | Metadata about values in the grouping.
 pgValueMetadata :: Lens' PivotGroup [PivotGroupValueMetadata]
@@ -10746,8 +14723,9 @@ instance FromJSON PivotGroup where
           = withObject "PivotGroup"
               (\ o ->
                  PivotGroup' <$>
-                   (o .:? "repeatHeadings") <*>
-                     (o .:? "valueMetadata" .!= mempty)
+                   (o .:? "repeatHeadings") <*> (o .:? "groupLimit") <*>
+                     (o .:? "dataSourceColumnReference")
+                     <*> (o .:? "valueMetadata" .!= mempty)
                      <*> (o .:? "sourceColumnOffset")
                      <*> (o .:? "sortOrder")
                      <*> (o .:? "showTotals")
@@ -10760,6 +14738,9 @@ instance ToJSON PivotGroup where
           = object
               (catMaybes
                  [("repeatHeadings" .=) <$> _pgRepeatHeadings,
+                  ("groupLimit" .=) <$> _pgGroupLimit,
+                  ("dataSourceColumnReference" .=) <$>
+                    _pgDataSourceColumnReference,
                   ("valueMetadata" .=) <$> _pgValueMetadata,
                   ("sourceColumnOffset" .=) <$> _pgSourceColumnOffSet,
                   ("sortOrder" .=) <$> _pgSortOrder,
@@ -10804,25 +14785,27 @@ instance ToJSON AddBandingResponse where
           = object
               (catMaybes [("bandedRange" .=) <$> _aBandedRange])
 
--- | An </chart/interactive/docs/gallery/orgchart org chart>. Org charts
--- require a unique set of labels in labels and may optionally include
--- parent_labels and tooltips. parent_labels contain, for each node, the
--- label identifying the parent node. tooltips contain, for each node, an
--- optional tooltip. For example, to describe an OrgChart with Alice as the
--- CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales
--- (also reporting to Alice), have labels contain \"Alice\", \"Bob\",
--- \"Cathy\", parent_labels contain \"\", \"Alice\", \"Alice\" and tooltips
--- contain \"CEO\", \"President\", \"VP Sales\".
+-- | An org chart. Org charts require a unique set of labels in labels and
+-- may optionally include parent_labels and tooltips. parent_labels
+-- contain, for each node, the label identifying the parent node. tooltips
+-- contain, for each node, an optional tooltip. For example, to describe an
+-- OrgChart with Alice as the CEO, Bob as the President (reporting to
+-- Alice) and Cathy as VP of Sales (also reporting to Alice), have labels
+-- contain \"Alice\", \"Bob\", \"Cathy\", parent_labels contain \"\",
+-- \"Alice\", \"Alice\" and tooltips contain \"CEO\", \"President\", \"VP
+-- Sales\".
 --
 -- /See:/ 'orgChartSpec' smart constructor.
 data OrgChartSpec =
   OrgChartSpec'
-    { _ocsNodeColor         :: !(Maybe Color)
-    , _ocsNodeSize          :: !(Maybe OrgChartSpecNodeSize)
-    , _ocsTooltips          :: !(Maybe ChartData)
+    { _ocsNodeColor :: !(Maybe Color)
+    , _ocsNodeSize :: !(Maybe OrgChartSpecNodeSize)
+    , _ocsTooltips :: !(Maybe ChartData)
     , _ocsSelectedNodeColor :: !(Maybe Color)
-    , _ocsLabels            :: !(Maybe ChartData)
-    , _ocsParentLabels      :: !(Maybe ChartData)
+    , _ocsNodeColorStyle :: !(Maybe ColorStyle)
+    , _ocsLabels :: !(Maybe ChartData)
+    , _ocsSelectedNodeColorStyle :: !(Maybe ColorStyle)
+    , _ocsParentLabels :: !(Maybe ChartData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10839,7 +14822,11 @@ data OrgChartSpec =
 --
 -- * 'ocsSelectedNodeColor'
 --
+-- * 'ocsNodeColorStyle'
+--
 -- * 'ocsLabels'
+--
+-- * 'ocsSelectedNodeColorStyle'
 --
 -- * 'ocsParentLabels'
 orgChartSpec
@@ -10850,7 +14837,9 @@ orgChartSpec =
     , _ocsNodeSize = Nothing
     , _ocsTooltips = Nothing
     , _ocsSelectedNodeColor = Nothing
+    , _ocsNodeColorStyle = Nothing
     , _ocsLabels = Nothing
+    , _ocsSelectedNodeColorStyle = Nothing
     , _ocsParentLabels = Nothing
     }
 
@@ -10878,11 +14867,25 @@ ocsSelectedNodeColor
   = lens _ocsSelectedNodeColor
       (\ s a -> s{_ocsSelectedNodeColor = a})
 
+-- | The color of the org chart nodes. If node_color is also set, this field
+-- takes precedence.
+ocsNodeColorStyle :: Lens' OrgChartSpec (Maybe ColorStyle)
+ocsNodeColorStyle
+  = lens _ocsNodeColorStyle
+      (\ s a -> s{_ocsNodeColorStyle = a})
+
 -- | The data containing the labels for all the nodes in the chart. Labels
 -- must be unique.
 ocsLabels :: Lens' OrgChartSpec (Maybe ChartData)
 ocsLabels
   = lens _ocsLabels (\ s a -> s{_ocsLabels = a})
+
+-- | The color of the selected org chart nodes. If selected_node_color is
+-- also set, this field takes precedence.
+ocsSelectedNodeColorStyle :: Lens' OrgChartSpec (Maybe ColorStyle)
+ocsSelectedNodeColorStyle
+  = lens _ocsSelectedNodeColorStyle
+      (\ s a -> s{_ocsSelectedNodeColorStyle = a})
 
 -- | The data containing the label of the parent for the corresponding node.
 -- A blank value indicates that the node has no parent and is a top-level
@@ -10900,7 +14903,9 @@ instance FromJSON OrgChartSpec where
                    (o .:? "nodeColor") <*> (o .:? "nodeSize") <*>
                      (o .:? "tooltips")
                      <*> (o .:? "selectedNodeColor")
+                     <*> (o .:? "nodeColorStyle")
                      <*> (o .:? "labels")
+                     <*> (o .:? "selectedNodeColorStyle")
                      <*> (o .:? "parentLabels"))
 
 instance ToJSON OrgChartSpec where
@@ -10911,7 +14916,10 @@ instance ToJSON OrgChartSpec where
                   ("nodeSize" .=) <$> _ocsNodeSize,
                   ("tooltips" .=) <$> _ocsTooltips,
                   ("selectedNodeColor" .=) <$> _ocsSelectedNodeColor,
+                  ("nodeColorStyle" .=) <$> _ocsNodeColorStyle,
                   ("labels" .=) <$> _ocsLabels,
+                  ("selectedNodeColorStyle" .=) <$>
+                    _ocsSelectedNodeColorStyle,
                   ("parentLabels" .=) <$> _ocsParentLabels])
 
 -- | Randomizes the order of the rows in a range.
@@ -10947,13 +14955,59 @@ instance ToJSON RandomizeRangeRequest where
         toJSON RandomizeRangeRequest'{..}
           = object (catMaybes [("range" .=) <$> _rrrRange])
 
+-- | The style of a point on the chart.
+--
+-- /See:/ 'pointStyle' smart constructor.
+data PointStyle =
+  PointStyle'
+    { _psSize :: !(Maybe (Textual Double))
+    , _psShape :: !(Maybe PointStyleShape)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psSize'
+--
+-- * 'psShape'
+pointStyle
+    :: PointStyle
+pointStyle = PointStyle' {_psSize = Nothing, _psShape = Nothing}
+
+
+-- | The point size. If empty, a default size is used.
+psSize :: Lens' PointStyle (Maybe Double)
+psSize
+  = lens _psSize (\ s a -> s{_psSize = a}) .
+      mapping _Coerce
+
+-- | The point shape. If empty or unspecified, a default shape is used.
+psShape :: Lens' PointStyle (Maybe PointStyleShape)
+psShape = lens _psShape (\ s a -> s{_psShape = a})
+
+instance FromJSON PointStyle where
+        parseJSON
+          = withObject "PointStyle"
+              (\ o ->
+                 PointStyle' <$> (o .:? "size") <*> (o .:? "shape"))
+
+instance ToJSON PointStyle where
+        toJSON PointStyle'{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _psSize, ("shape" .=) <$> _psShape])
+
 -- | A histogram series containing the series color and data.
 --
 -- /See:/ 'histogramSeries' smart constructor.
 data HistogramSeries =
   HistogramSeries'
     { _hsBarColor :: !(Maybe Color)
-    , _hsData     :: !(Maybe ChartData)
+    , _hsData :: !(Maybe ChartData)
+    , _hsBarColorStyle :: !(Maybe ColorStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10965,9 +15019,13 @@ data HistogramSeries =
 -- * 'hsBarColor'
 --
 -- * 'hsData'
+--
+-- * 'hsBarColorStyle'
 histogramSeries
     :: HistogramSeries
-histogramSeries = HistogramSeries' {_hsBarColor = Nothing, _hsData = Nothing}
+histogramSeries =
+  HistogramSeries'
+    {_hsBarColor = Nothing, _hsData = Nothing, _hsBarColorStyle = Nothing}
 
 
 -- | The color of the column representing this series in each bucket. This
@@ -10980,36 +15038,47 @@ hsBarColor
 hsData :: Lens' HistogramSeries (Maybe ChartData)
 hsData = lens _hsData (\ s a -> s{_hsData = a})
 
+-- | The color of the column representing this series in each bucket. This
+-- field is optional. If bar_color is also set, this field takes
+-- precedence.
+hsBarColorStyle :: Lens' HistogramSeries (Maybe ColorStyle)
+hsBarColorStyle
+  = lens _hsBarColorStyle
+      (\ s a -> s{_hsBarColorStyle = a})
+
 instance FromJSON HistogramSeries where
         parseJSON
           = withObject "HistogramSeries"
               (\ o ->
                  HistogramSeries' <$>
-                   (o .:? "barColor") <*> (o .:? "data"))
+                   (o .:? "barColor") <*> (o .:? "data") <*>
+                     (o .:? "barColorStyle"))
 
 instance ToJSON HistogramSeries where
         toJSON HistogramSeries'{..}
           = object
               (catMaybes
                  [("barColor" .=) <$> _hsBarColor,
-                  ("data" .=) <$> _hsData])
+                  ("data" .=) <$> _hsData,
+                  ("barColorStyle" .=) <$> _hsBarColorStyle])
 
--- | A </chart/interactive/docs/gallery/treemap Treemap chart>.
+-- | A Treemap chart.
 --
 -- /See:/ 'treemapChartSpec' smart constructor.
 data TreemapChartSpec =
   TreemapChartSpec'
     { _tcsHintedLevels :: !(Maybe (Textual Int32))
-    , _tcsMaxValue     :: !(Maybe (Textual Double))
-    , _tcsHeaderColor  :: !(Maybe Color)
-    , _tcsSizeData     :: !(Maybe ChartData)
-    , _tcsColorData    :: !(Maybe ChartData)
+    , _tcsMaxValue :: !(Maybe (Textual Double))
+    , _tcsHeaderColor :: !(Maybe Color)
+    , _tcsSizeData :: !(Maybe ChartData)
+    , _tcsColorData :: !(Maybe ChartData)
+    , _tcsHeaderColorStyle :: !(Maybe ColorStyle)
     , _tcsHideTooltips :: !(Maybe Bool)
-    , _tcsLevels       :: !(Maybe (Textual Int32))
-    , _tcsLabels       :: !(Maybe ChartData)
-    , _tcsColorScale   :: !(Maybe TreemapChartColorScale)
-    , _tcsTextFormat   :: !(Maybe TextFormat)
-    , _tcsMinValue     :: !(Maybe (Textual Double))
+    , _tcsLevels :: !(Maybe (Textual Int32))
+    , _tcsLabels :: !(Maybe ChartData)
+    , _tcsColorScale :: !(Maybe TreemapChartColorScale)
+    , _tcsTextFormat :: !(Maybe TextFormat)
+    , _tcsMinValue :: !(Maybe (Textual Double))
     , _tcsParentLabels :: !(Maybe ChartData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11028,6 +15097,8 @@ data TreemapChartSpec =
 -- * 'tcsSizeData'
 --
 -- * 'tcsColorData'
+--
+-- * 'tcsHeaderColorStyle'
 --
 -- * 'tcsHideTooltips'
 --
@@ -11051,6 +15122,7 @@ treemapChartSpec =
     , _tcsHeaderColor = Nothing
     , _tcsSizeData = Nothing
     , _tcsColorData = Nothing
+    , _tcsHeaderColorStyle = Nothing
     , _tcsHideTooltips = Nothing
     , _tcsLevels = Nothing
     , _tcsLabels = Nothing
@@ -11102,6 +15174,13 @@ tcsColorData :: Lens' TreemapChartSpec (Maybe ChartData)
 tcsColorData
   = lens _tcsColorData (\ s a -> s{_tcsColorData = a})
 
+-- | The background color for header cells. If header_color is also set, this
+-- field takes precedence.
+tcsHeaderColorStyle :: Lens' TreemapChartSpec (Maybe ColorStyle)
+tcsHeaderColorStyle
+  = lens _tcsHeaderColorStyle
+      (\ s a -> s{_tcsHeaderColorStyle = a})
+
 -- | True to hide tooltips.
 tcsHideTooltips :: Lens' TreemapChartSpec (Maybe Bool)
 tcsHideTooltips
@@ -11137,7 +15216,8 @@ tcsColorScale
   = lens _tcsColorScale
       (\ s a -> s{_tcsColorScale = a})
 
--- | The text format for all labels on the chart.
+-- | The text format for all labels on the chart. The link field is not
+-- supported.
 tcsTextFormat :: Lens' TreemapChartSpec (Maybe TextFormat)
 tcsTextFormat
   = lens _tcsTextFormat
@@ -11167,6 +15247,7 @@ instance FromJSON TreemapChartSpec where
                      (o .:? "headerColor")
                      <*> (o .:? "sizeData")
                      <*> (o .:? "colorData")
+                     <*> (o .:? "headerColorStyle")
                      <*> (o .:? "hideTooltips")
                      <*> (o .:? "levels")
                      <*> (o .:? "labels")
@@ -11184,6 +15265,7 @@ instance ToJSON TreemapChartSpec where
                   ("headerColor" .=) <$> _tcsHeaderColor,
                   ("sizeData" .=) <$> _tcsSizeData,
                   ("colorData" .=) <$> _tcsColorData,
+                  ("headerColorStyle" .=) <$> _tcsHeaderColorStyle,
                   ("hideTooltips" .=) <$> _tcsHideTooltips,
                   ("levels" .=) <$> _tcsLevels,
                   ("labels" .=) <$> _tcsLabels,
@@ -11192,14 +15274,55 @@ instance ToJSON TreemapChartSpec where
                   ("minValue" .=) <$> _tcsMinValue,
                   ("parentLabels" .=) <$> _tcsParentLabels])
 
+-- | The response from refreshing one or multiple data source objects.
+--
+-- /See:/ 'refreshDataSourceResponse' smart constructor.
+newtype RefreshDataSourceResponse =
+  RefreshDataSourceResponse'
+    { _rdsrStatuses :: Maybe [RefreshDataSourceObjectExecutionStatus]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RefreshDataSourceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdsrStatuses'
+refreshDataSourceResponse
+    :: RefreshDataSourceResponse
+refreshDataSourceResponse = RefreshDataSourceResponse' {_rdsrStatuses = Nothing}
+
+
+-- | All the refresh status for the data source object references specified
+-- in the request. If is_all is specified, the field contains only those in
+-- failure status.
+rdsrStatuses :: Lens' RefreshDataSourceResponse [RefreshDataSourceObjectExecutionStatus]
+rdsrStatuses
+  = lens _rdsrStatuses (\ s a -> s{_rdsrStatuses = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON RefreshDataSourceResponse where
+        parseJSON
+          = withObject "RefreshDataSourceResponse"
+              (\ o ->
+                 RefreshDataSourceResponse' <$>
+                   (o .:? "statuses" .!= mempty))
+
+instance ToJSON RefreshDataSourceResponse where
+        toJSON RefreshDataSourceResponse'{..}
+          = object
+              (catMaybes [("statuses" .=) <$> _rdsrStatuses])
+
 -- | A rule describing a conditional format.
 --
 -- /See:/ 'conditionalFormatRule' smart constructor.
 data ConditionalFormatRule =
   ConditionalFormatRule'
-    { _cfrBooleanRule  :: !(Maybe BooleanRule)
+    { _cfrBooleanRule :: !(Maybe BooleanRule)
     , _cfrGradientRule :: !(Maybe GradientRule)
-    , _cfrRanges       :: !(Maybe [GridRange])
+    , _cfrRanges :: !(Maybe [GridRange])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11265,17 +15388,18 @@ instance ToJSON ConditionalFormatRule where
 -- /See:/ 'basicChartSpec' smart constructor.
 data BasicChartSpec =
   BasicChartSpec'
-    { _basHeaderCount      :: !(Maybe (Textual Int32))
-    , _basLineSmoothing    :: !(Maybe Bool)
+    { _basHeaderCount :: !(Maybe (Textual Int32))
+    , _basLineSmoothing :: !(Maybe Bool)
     , _basInterpolateNulls :: !(Maybe Bool)
-    , _basStackedType      :: !(Maybe BasicChartSpecStackedType)
-    , _basLegendPosition   :: !(Maybe BasicChartSpecLegendPosition)
-    , _basSeries           :: !(Maybe [BasicChartSeries])
-    , _basCompareMode      :: !(Maybe BasicChartSpecCompareMode)
-    , _basChartType        :: !(Maybe BasicChartSpecChartType)
+    , _basStackedType :: !(Maybe BasicChartSpecStackedType)
+    , _basLegendPosition :: !(Maybe BasicChartSpecLegendPosition)
+    , _basSeries :: !(Maybe [BasicChartSeries])
+    , _basTotalDataLabel :: !(Maybe DataLabel)
+    , _basCompareMode :: !(Maybe BasicChartSpecCompareMode)
+    , _basChartType :: !(Maybe BasicChartSpecChartType)
     , _basThreeDimensional :: !(Maybe Bool)
-    , _basDomains          :: !(Maybe [BasicChartDomain])
-    , _basAxis             :: !(Maybe [BasicChartAxis])
+    , _basDomains :: !(Maybe [BasicChartDomain])
+    , _basAxis :: !(Maybe [BasicChartAxis])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11296,6 +15420,8 @@ data BasicChartSpec =
 --
 -- * 'basSeries'
 --
+-- * 'basTotalDataLabel'
+--
 -- * 'basCompareMode'
 --
 -- * 'basChartType'
@@ -11315,6 +15441,7 @@ basicChartSpec =
     , _basStackedType = Nothing
     , _basLegendPosition = Nothing
     , _basSeries = Nothing
+    , _basTotalDataLabel = Nothing
     , _basCompareMode = Nothing
     , _basChartType = Nothing
     , _basThreeDimensional = Nothing
@@ -11368,6 +15495,22 @@ basSeries
       _Default
       . _Coerce
 
+-- | Controls whether to display additional data labels on stacked charts
+-- which sum the total value of all stacked values at each value along the
+-- domain axis. These data labels can only be set when chart_type is one of
+-- AREA, BAR, COLUMN, COMBO or STEPPED_AREA and stacked_type is either
+-- STACKED or PERCENT_STACKED. In addition, for COMBO, this will only be
+-- supported if there is only one type of stackable series type or one type
+-- has more series than the others and each of the other types have no more
+-- than one series. For example, if a chart has two stacked bar series and
+-- one area series, the total data labels will be supported. If it has
+-- three bar series and two area series, total data labels are not allowed.
+-- Neither CUSTOM nor placement can be set on the total_data_label.
+basTotalDataLabel :: Lens' BasicChartSpec (Maybe DataLabel)
+basTotalDataLabel
+  = lens _basTotalDataLabel
+      (\ s a -> s{_basTotalDataLabel = a})
+
 -- | The behavior of tooltips and data highlighting when hovering on data and
 -- chart area.
 basCompareMode :: Lens' BasicChartSpec (Maybe BasicChartSpecCompareMode)
@@ -11409,6 +15552,7 @@ instance FromJSON BasicChartSpec where
                      <*> (o .:? "stackedType")
                      <*> (o .:? "legendPosition")
                      <*> (o .:? "series" .!= mempty)
+                     <*> (o .:? "totalDataLabel")
                      <*> (o .:? "compareMode")
                      <*> (o .:? "chartType")
                      <*> (o .:? "threeDimensional")
@@ -11425,6 +15569,7 @@ instance ToJSON BasicChartSpec where
                   ("stackedType" .=) <$> _basStackedType,
                   ("legendPosition" .=) <$> _basLegendPosition,
                   ("series" .=) <$> _basSeries,
+                  ("totalDataLabel" .=) <$> _basTotalDataLabel,
                   ("compareMode" .=) <$> _basCompareMode,
                   ("chartType" .=) <$> _basChartType,
                   ("threeDimensional" .=) <$> _basThreeDimensional,
@@ -11437,7 +15582,7 @@ instance ToJSON BasicChartSpec where
 -- /See:/ 'manualRuleGroup' smart constructor.
 data ManualRuleGroup =
   ManualRuleGroup'
-    { _mrgItems     :: !(Maybe [ExtendedValue])
+    { _mrgItems :: !(Maybe [ExtendedValue])
     , _mrgGroupName :: !(Maybe ExtendedValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11486,13 +15631,66 @@ instance ToJSON ManualRuleGroup where
                  [("items" .=) <$> _mrgItems,
                   ("groupName" .=) <$> _mrgGroupName])
 
+-- | A data source formula.
+--
+-- /See:/ 'dataSourceFormula' smart constructor.
+data DataSourceFormula =
+  DataSourceFormula'
+    { _dsfDataSourceId :: !(Maybe Text)
+    , _dsfDataExecutionStatus :: !(Maybe DataExecutionStatus)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceFormula' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsfDataSourceId'
+--
+-- * 'dsfDataExecutionStatus'
+dataSourceFormula
+    :: DataSourceFormula
+dataSourceFormula =
+  DataSourceFormula'
+    {_dsfDataSourceId = Nothing, _dsfDataExecutionStatus = Nothing}
+
+
+-- | The ID of the data source the formula is associated with.
+dsfDataSourceId :: Lens' DataSourceFormula (Maybe Text)
+dsfDataSourceId
+  = lens _dsfDataSourceId
+      (\ s a -> s{_dsfDataSourceId = a})
+
+-- | Output only. The data execution status.
+dsfDataExecutionStatus :: Lens' DataSourceFormula (Maybe DataExecutionStatus)
+dsfDataExecutionStatus
+  = lens _dsfDataExecutionStatus
+      (\ s a -> s{_dsfDataExecutionStatus = a})
+
+instance FromJSON DataSourceFormula where
+        parseJSON
+          = withObject "DataSourceFormula"
+              (\ o ->
+                 DataSourceFormula' <$>
+                   (o .:? "dataSourceId") <*>
+                     (o .:? "dataExecutionStatus"))
+
+instance ToJSON DataSourceFormula where
+        toJSON DataSourceFormula'{..}
+          = object
+              (catMaybes
+                 [("dataSourceId" .=) <$> _dsfDataSourceId,
+                  ("dataExecutionStatus" .=) <$>
+                    _dsfDataExecutionStatus])
+
 -- | Adds a new conditional format rule at the given index. All subsequent
 -- rules\' indexes are incremented.
 --
 -- /See:/ 'addConditionalFormatRuleRequest' smart constructor.
 data AddConditionalFormatRuleRequest =
   AddConditionalFormatRuleRequest'
-    { _acfrrRule  :: !(Maybe ConditionalFormatRule)
+    { _acfrrRule :: !(Maybe ConditionalFormatRule)
     , _acfrrIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11550,10 +15748,10 @@ instance ToJSON AddConditionalFormatRuleRequest where
 -- /See:/ 'developerMetadata' smart constructor.
 data DeveloperMetadata =
   DeveloperMetadata'
-    { _dmLocation      :: !(Maybe DeveloperMetadataLocation)
-    , _dmMetadataId    :: !(Maybe (Textual Int32))
-    , _dmVisibility    :: !(Maybe DeveloperMetadataVisibility)
-    , _dmMetadataKey   :: !(Maybe Text)
+    { _dmLocation :: !(Maybe DeveloperMetadataLocation)
+    , _dmMetadataId :: !(Maybe (Textual Int32))
+    , _dmVisibility :: !(Maybe DeveloperMetadataVisibility)
+    , _dmMetadataKey :: !(Maybe Text)
     , _dmMetadataValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11642,8 +15840,12 @@ instance ToJSON DeveloperMetadata where
 data TreemapChartColorScale =
   TreemapChartColorScale'
     { _tccsMinValueColor :: !(Maybe Color)
-    , _tccsNoDataColor   :: !(Maybe Color)
+    , _tccsMinValueColorStyle :: !(Maybe ColorStyle)
+    , _tccsMidValueColorStyle :: !(Maybe ColorStyle)
+    , _tccsNoDataColor :: !(Maybe Color)
     , _tccsMaxValueColor :: !(Maybe Color)
+    , _tccsMaxValueColorStyle :: !(Maybe ColorStyle)
+    , _tccsNoDataColorStyle :: !(Maybe ColorStyle)
     , _tccsMidValueColor :: !(Maybe Color)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11655,9 +15857,17 @@ data TreemapChartColorScale =
 --
 -- * 'tccsMinValueColor'
 --
+-- * 'tccsMinValueColorStyle'
+--
+-- * 'tccsMidValueColorStyle'
+--
 -- * 'tccsNoDataColor'
 --
 -- * 'tccsMaxValueColor'
+--
+-- * 'tccsMaxValueColorStyle'
+--
+-- * 'tccsNoDataColorStyle'
 --
 -- * 'tccsMidValueColor'
 treemapChartColorScale
@@ -11665,8 +15875,12 @@ treemapChartColorScale
 treemapChartColorScale =
   TreemapChartColorScale'
     { _tccsMinValueColor = Nothing
+    , _tccsMinValueColorStyle = Nothing
+    , _tccsMidValueColorStyle = Nothing
     , _tccsNoDataColor = Nothing
     , _tccsMaxValueColor = Nothing
+    , _tccsMaxValueColorStyle = Nothing
+    , _tccsNoDataColorStyle = Nothing
     , _tccsMidValueColor = Nothing
     }
 
@@ -11677,6 +15891,22 @@ tccsMinValueColor :: Lens' TreemapChartColorScale (Maybe Color)
 tccsMinValueColor
   = lens _tccsMinValueColor
       (\ s a -> s{_tccsMinValueColor = a})
+
+-- | The background color for cells with a color value less than or equal to
+-- minValue. Defaults to #dc3912 if not specified. If min_value_color is
+-- also set, this field takes precedence.
+tccsMinValueColorStyle :: Lens' TreemapChartColorScale (Maybe ColorStyle)
+tccsMinValueColorStyle
+  = lens _tccsMinValueColorStyle
+      (\ s a -> s{_tccsMinValueColorStyle = a})
+
+-- | The background color for cells with a color value at the midpoint
+-- between minValue and maxValue. Defaults to #efe6dc if not specified. If
+-- mid_value_color is also set, this field takes precedence.
+tccsMidValueColorStyle :: Lens' TreemapChartColorScale (Maybe ColorStyle)
+tccsMidValueColorStyle
+  = lens _tccsMidValueColorStyle
+      (\ s a -> s{_tccsMidValueColorStyle = a})
 
 -- | The background color for cells that have no color data associated with
 -- them. Defaults to #000000 if not specified.
@@ -11692,6 +15922,22 @@ tccsMaxValueColor
   = lens _tccsMaxValueColor
       (\ s a -> s{_tccsMaxValueColor = a})
 
+-- | The background color for cells with a color value greater than or equal
+-- to maxValue. Defaults to #109618 if not specified. If max_value_color is
+-- also set, this field takes precedence.
+tccsMaxValueColorStyle :: Lens' TreemapChartColorScale (Maybe ColorStyle)
+tccsMaxValueColorStyle
+  = lens _tccsMaxValueColorStyle
+      (\ s a -> s{_tccsMaxValueColorStyle = a})
+
+-- | The background color for cells that have no color data associated with
+-- them. Defaults to #000000 if not specified. If no_data_color is also
+-- set, this field takes precedence.
+tccsNoDataColorStyle :: Lens' TreemapChartColorScale (Maybe ColorStyle)
+tccsNoDataColorStyle
+  = lens _tccsNoDataColorStyle
+      (\ s a -> s{_tccsNoDataColorStyle = a})
+
 -- | The background color for cells with a color value at the midpoint
 -- between minValue and maxValue. Defaults to #efe6dc if not specified.
 tccsMidValueColor :: Lens' TreemapChartColorScale (Maybe Color)
@@ -11704,8 +15950,13 @@ instance FromJSON TreemapChartColorScale where
           = withObject "TreemapChartColorScale"
               (\ o ->
                  TreemapChartColorScale' <$>
-                   (o .:? "minValueColor") <*> (o .:? "noDataColor") <*>
-                     (o .:? "maxValueColor")
+                   (o .:? "minValueColor") <*>
+                     (o .:? "minValueColorStyle")
+                     <*> (o .:? "midValueColorStyle")
+                     <*> (o .:? "noDataColor")
+                     <*> (o .:? "maxValueColor")
+                     <*> (o .:? "maxValueColorStyle")
+                     <*> (o .:? "noDataColorStyle")
                      <*> (o .:? "midValueColor"))
 
 instance ToJSON TreemapChartColorScale where
@@ -11713,9 +15964,64 @@ instance ToJSON TreemapChartColorScale where
           = object
               (catMaybes
                  [("minValueColor" .=) <$> _tccsMinValueColor,
+                  ("minValueColorStyle" .=) <$>
+                    _tccsMinValueColorStyle,
+                  ("midValueColorStyle" .=) <$>
+                    _tccsMidValueColorStyle,
                   ("noDataColor" .=) <$> _tccsNoDataColor,
                   ("maxValueColor" .=) <$> _tccsMaxValueColor,
+                  ("maxValueColorStyle" .=) <$>
+                    _tccsMaxValueColorStyle,
+                  ("noDataColorStyle" .=) <$> _tccsNoDataColorStyle,
                   ("midValueColor" .=) <$> _tccsMidValueColor])
+
+-- | A column in a data source.
+--
+-- /See:/ 'dataSourceColumn' smart constructor.
+data DataSourceColumn =
+  DataSourceColumn'
+    { _dscReference :: !(Maybe DataSourceColumnReference)
+    , _dscFormula :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataSourceColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dscReference'
+--
+-- * 'dscFormula'
+dataSourceColumn
+    :: DataSourceColumn
+dataSourceColumn =
+  DataSourceColumn' {_dscReference = Nothing, _dscFormula = Nothing}
+
+
+-- | The column reference.
+dscReference :: Lens' DataSourceColumn (Maybe DataSourceColumnReference)
+dscReference
+  = lens _dscReference (\ s a -> s{_dscReference = a})
+
+-- | The formula of the calculated column.
+dscFormula :: Lens' DataSourceColumn (Maybe Text)
+dscFormula
+  = lens _dscFormula (\ s a -> s{_dscFormula = a})
+
+instance FromJSON DataSourceColumn where
+        parseJSON
+          = withObject "DataSourceColumn"
+              (\ o ->
+                 DataSourceColumn' <$>
+                   (o .:? "reference") <*> (o .:? "formula"))
+
+instance ToJSON DataSourceColumn where
+        toJSON DataSourceColumn'{..}
+          = object
+              (catMaybes
+                 [("reference" .=) <$> _dscReference,
+                  ("formula" .=) <$> _dscFormula])
 
 -- | The result of duplicating a sheet.
 --
@@ -11760,13 +16066,15 @@ instance ToJSON DuplicateSheetResponse where
 -- /See:/ 'textFormat' smart constructor.
 data TextFormat =
   TextFormat'
-    { _tfFontFamily      :: !(Maybe Text)
+    { _tfFontFamily :: !(Maybe Text)
+    , _tfLink :: !(Maybe Link)
     , _tfForegRoundColor :: !(Maybe Color)
-    , _tfFontSize        :: !(Maybe (Textual Int32))
-    , _tfUnderline       :: !(Maybe Bool)
-    , _tfItalic          :: !(Maybe Bool)
-    , _tfBold            :: !(Maybe Bool)
-    , _tfStrikethrough   :: !(Maybe Bool)
+    , _tfFontSize :: !(Maybe (Textual Int32))
+    , _tfUnderline :: !(Maybe Bool)
+    , _tfItalic :: !(Maybe Bool)
+    , _tfBold :: !(Maybe Bool)
+    , _tfForegRoundColorStyle :: !(Maybe ColorStyle)
+    , _tfStrikethrough :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11776,6 +16084,8 @@ data TextFormat =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tfFontFamily'
+--
+-- * 'tfLink'
 --
 -- * 'tfForegRoundColor'
 --
@@ -11787,17 +16097,21 @@ data TextFormat =
 --
 -- * 'tfBold'
 --
+-- * 'tfForegRoundColorStyle'
+--
 -- * 'tfStrikethrough'
 textFormat
     :: TextFormat
 textFormat =
   TextFormat'
     { _tfFontFamily = Nothing
+    , _tfLink = Nothing
     , _tfForegRoundColor = Nothing
     , _tfFontSize = Nothing
     , _tfUnderline = Nothing
     , _tfItalic = Nothing
     , _tfBold = Nothing
+    , _tfForegRoundColorStyle = Nothing
     , _tfStrikethrough = Nothing
     }
 
@@ -11806,6 +16120,15 @@ textFormat =
 tfFontFamily :: Lens' TextFormat (Maybe Text)
 tfFontFamily
   = lens _tfFontFamily (\ s a -> s{_tfFontFamily = a})
+
+-- | The link destination of the text, if any. Setting the link field in a
+-- TextFormatRun will clear the cell\'s existing links or a cell-level link
+-- set in the same request. When a link is set, the text foreground color
+-- will be set to the default link color and the text will be underlined.
+-- If these fields are modified in the same request, those values will be
+-- used instead of the link defaults.
+tfLink :: Lens' TextFormat (Maybe Link)
+tfLink = lens _tfLink (\ s a -> s{_tfLink = a})
 
 -- | The foreground color of the text.
 tfForegRoundColor :: Lens' TextFormat (Maybe Color)
@@ -11832,6 +16155,13 @@ tfItalic = lens _tfItalic (\ s a -> s{_tfItalic = a})
 tfBold :: Lens' TextFormat (Maybe Bool)
 tfBold = lens _tfBold (\ s a -> s{_tfBold = a})
 
+-- | The foreground color of the text. If foreground_color is also set, this
+-- field takes precedence.
+tfForegRoundColorStyle :: Lens' TextFormat (Maybe ColorStyle)
+tfForegRoundColorStyle
+  = lens _tfForegRoundColorStyle
+      (\ s a -> s{_tfForegRoundColorStyle = a})
+
 -- | True if the text has a strikethrough.
 tfStrikethrough :: Lens' TextFormat (Maybe Bool)
 tfStrikethrough
@@ -11843,11 +16173,13 @@ instance FromJSON TextFormat where
           = withObject "TextFormat"
               (\ o ->
                  TextFormat' <$>
-                   (o .:? "fontFamily") <*> (o .:? "foregroundColor")
+                   (o .:? "fontFamily") <*> (o .:? "link") <*>
+                     (o .:? "foregroundColor")
                      <*> (o .:? "fontSize")
                      <*> (o .:? "underline")
                      <*> (o .:? "italic")
                      <*> (o .:? "bold")
+                     <*> (o .:? "foregroundColorStyle")
                      <*> (o .:? "strikethrough"))
 
 instance ToJSON TextFormat where
@@ -11855,11 +16187,96 @@ instance ToJSON TextFormat where
           = object
               (catMaybes
                  [("fontFamily" .=) <$> _tfFontFamily,
+                  ("link" .=) <$> _tfLink,
                   ("foregroundColor" .=) <$> _tfForegRoundColor,
                   ("fontSize" .=) <$> _tfFontSize,
                   ("underline" .=) <$> _tfUnderline,
                   ("italic" .=) <$> _tfItalic, ("bold" .=) <$> _tfBold,
+                  ("foregroundColorStyle" .=) <$>
+                    _tfForegRoundColorStyle,
                   ("strikethrough" .=) <$> _tfStrikethrough])
+
+-- | Settings for one set of data labels. Data labels are annotations that
+-- appear next to a set of data, such as the points on a line chart, and
+-- provide additional information about what the data represents, such as a
+-- text representation of the value behind that point on the graph.
+--
+-- /See:/ 'dataLabel' smart constructor.
+data DataLabel =
+  DataLabel'
+    { _dlCustomLabelData :: !(Maybe ChartData)
+    , _dlType :: !(Maybe DataLabelType)
+    , _dlTextFormat :: !(Maybe TextFormat)
+    , _dlPlacement :: !(Maybe DataLabelPlacement)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataLabel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlCustomLabelData'
+--
+-- * 'dlType'
+--
+-- * 'dlTextFormat'
+--
+-- * 'dlPlacement'
+dataLabel
+    :: DataLabel
+dataLabel =
+  DataLabel'
+    { _dlCustomLabelData = Nothing
+    , _dlType = Nothing
+    , _dlTextFormat = Nothing
+    , _dlPlacement = Nothing
+    }
+
+
+-- | Data to use for custom labels. Only used if type is set to CUSTOM. This
+-- data must be the same length as the series or other element this data
+-- label is applied to. In addition, if the series is split into multiple
+-- source ranges, this source data must come from the next column in the
+-- source data. For example, if the series is B2:B4,E6:E8 then this data
+-- must come from C2:C4,F6:F8.
+dlCustomLabelData :: Lens' DataLabel (Maybe ChartData)
+dlCustomLabelData
+  = lens _dlCustomLabelData
+      (\ s a -> s{_dlCustomLabelData = a})
+
+-- | The type of the data label.
+dlType :: Lens' DataLabel (Maybe DataLabelType)
+dlType = lens _dlType (\ s a -> s{_dlType = a})
+
+-- | The text format used for the data label. The link field is not
+-- supported.
+dlTextFormat :: Lens' DataLabel (Maybe TextFormat)
+dlTextFormat
+  = lens _dlTextFormat (\ s a -> s{_dlTextFormat = a})
+
+-- | The placement of the data label relative to the labeled data.
+dlPlacement :: Lens' DataLabel (Maybe DataLabelPlacement)
+dlPlacement
+  = lens _dlPlacement (\ s a -> s{_dlPlacement = a})
+
+instance FromJSON DataLabel where
+        parseJSON
+          = withObject "DataLabel"
+              (\ o ->
+                 DataLabel' <$>
+                   (o .:? "customLabelData") <*> (o .:? "type") <*>
+                     (o .:? "textFormat")
+                     <*> (o .:? "placement"))
+
+instance ToJSON DataLabel where
+        toJSON DataLabel'{..}
+          = object
+              (catMaybes
+                 [("customLabelData" .=) <$> _dlCustomLabelData,
+                  ("type" .=) <$> _dlType,
+                  ("textFormat" .=) <$> _dlTextFormat,
+                  ("placement" .=) <$> _dlPlacement])
 
 -- | A request to create developer metadata.
 --
@@ -11902,6 +16319,88 @@ instance ToJSON CreateDeveloperMetadataRequest where
               (catMaybes
                  [("developerMetadata" .=) <$> _cDeveloperMetadata])
 
+-- | Style override settings for a single series data point.
+--
+-- /See:/ 'basicSeriesDataPointStyleOverride' smart constructor.
+data BasicSeriesDataPointStyleOverride =
+  BasicSeriesDataPointStyleOverride'
+    { _bsdpsoColor :: !(Maybe Color)
+    , _bsdpsoColorStyle :: !(Maybe ColorStyle)
+    , _bsdpsoPointStyle :: !(Maybe PointStyle)
+    , _bsdpsoIndex :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BasicSeriesDataPointStyleOverride' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsdpsoColor'
+--
+-- * 'bsdpsoColorStyle'
+--
+-- * 'bsdpsoPointStyle'
+--
+-- * 'bsdpsoIndex'
+basicSeriesDataPointStyleOverride
+    :: BasicSeriesDataPointStyleOverride
+basicSeriesDataPointStyleOverride =
+  BasicSeriesDataPointStyleOverride'
+    { _bsdpsoColor = Nothing
+    , _bsdpsoColorStyle = Nothing
+    , _bsdpsoPointStyle = Nothing
+    , _bsdpsoIndex = Nothing
+    }
+
+
+-- | Color of the series data point. If empty, the series default is used.
+bsdpsoColor :: Lens' BasicSeriesDataPointStyleOverride (Maybe Color)
+bsdpsoColor
+  = lens _bsdpsoColor (\ s a -> s{_bsdpsoColor = a})
+
+-- | Color of the series data point. If empty, the series default is used. If
+-- color is also set, this field takes precedence.
+bsdpsoColorStyle :: Lens' BasicSeriesDataPointStyleOverride (Maybe ColorStyle)
+bsdpsoColorStyle
+  = lens _bsdpsoColorStyle
+      (\ s a -> s{_bsdpsoColorStyle = a})
+
+-- | Point style of the series data point. Valid only if the chartType is
+-- AREA, LINE, or SCATTER. COMBO charts are also supported if the series
+-- chart type is AREA, LINE, or SCATTER. If empty, the series default is
+-- used.
+bsdpsoPointStyle :: Lens' BasicSeriesDataPointStyleOverride (Maybe PointStyle)
+bsdpsoPointStyle
+  = lens _bsdpsoPointStyle
+      (\ s a -> s{_bsdpsoPointStyle = a})
+
+-- | Zero based index of the series data point.
+bsdpsoIndex :: Lens' BasicSeriesDataPointStyleOverride (Maybe Int32)
+bsdpsoIndex
+  = lens _bsdpsoIndex (\ s a -> s{_bsdpsoIndex = a}) .
+      mapping _Coerce
+
+instance FromJSON BasicSeriesDataPointStyleOverride
+         where
+        parseJSON
+          = withObject "BasicSeriesDataPointStyleOverride"
+              (\ o ->
+                 BasicSeriesDataPointStyleOverride' <$>
+                   (o .:? "color") <*> (o .:? "colorStyle") <*>
+                     (o .:? "pointStyle")
+                     <*> (o .:? "index"))
+
+instance ToJSON BasicSeriesDataPointStyleOverride
+         where
+        toJSON BasicSeriesDataPointStyleOverride'{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _bsdpsoColor,
+                  ("colorStyle" .=) <$> _bsdpsoColorStyle,
+                  ("pointStyle" .=) <$> _bsdpsoPointStyle,
+                  ("index" .=) <$> _bsdpsoIndex])
+
 -- | The response when clearing a range of values in a spreadsheet.
 --
 -- /See:/ 'batchClearValuesResponse' smart constructor.
@@ -11927,10 +16426,9 @@ batchClearValuesResponse =
     {_bcvrClearedRanges = Nothing, _bcvrSpreadsheetId = Nothing}
 
 
--- | The ranges that were cleared, in A1 notation. (If the requests were for
--- an unbounded range or a ranger larger than the bounds of the sheet, this
--- will be the actual ranges that were cleared, bounded to the sheet\'s
--- limits.)
+-- | The ranges that were cleared, in A1 notation. If the requests are for an
+-- unbounded range or a ranger larger than the bounds of the sheet, this is
+-- the actual ranges that were cleared, bounded to the sheet\'s limits.
 bcvrClearedRanges :: Lens' BatchClearValuesResponse [Text]
 bcvrClearedRanges
   = lens _bcvrClearedRanges
@@ -11964,7 +16462,7 @@ instance ToJSON BatchClearValuesResponse where
 -- /See:/ 'matchedValueRange' smart constructor.
 data MatchedValueRange =
   MatchedValueRange'
-    { _mvrValueRange  :: !(Maybe ValueRange)
+    { _mvrValueRange :: !(Maybe ValueRange)
     , _mvrDataFilters :: !(Maybe [DataFilter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -12019,7 +16517,7 @@ instance ToJSON MatchedValueRange where
 data BasicChartDomain =
   BasicChartDomain'
     { _bcdReversed :: !(Maybe Bool)
-    , _bcdDomain   :: !(Maybe ChartData)
+    , _bcdDomain :: !(Maybe ChartData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12062,6 +16560,74 @@ instance ToJSON BasicChartDomain where
                  [("reversed" .=) <$> _bcdReversed,
                   ("domain" .=) <$> _bcdDomain])
 
+-- | The specification of a BigQuery data source that\'s connected to a
+-- sheet.
+--
+-- /See:/ 'bigQueryDataSourceSpec' smart constructor.
+data BigQueryDataSourceSpec =
+  BigQueryDataSourceSpec'
+    { _bqdssQuerySpec :: !(Maybe BigQueryQuerySpec)
+    , _bqdssProjectId :: !(Maybe Text)
+    , _bqdssTableSpec :: !(Maybe BigQueryTableSpec)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BigQueryDataSourceSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bqdssQuerySpec'
+--
+-- * 'bqdssProjectId'
+--
+-- * 'bqdssTableSpec'
+bigQueryDataSourceSpec
+    :: BigQueryDataSourceSpec
+bigQueryDataSourceSpec =
+  BigQueryDataSourceSpec'
+    { _bqdssQuerySpec = Nothing
+    , _bqdssProjectId = Nothing
+    , _bqdssTableSpec = Nothing
+    }
+
+
+-- | A BigQueryQuerySpec.
+bqdssQuerySpec :: Lens' BigQueryDataSourceSpec (Maybe BigQueryQuerySpec)
+bqdssQuerySpec
+  = lens _bqdssQuerySpec
+      (\ s a -> s{_bqdssQuerySpec = a})
+
+-- | The ID of a BigQuery enabled GCP project with a billing account
+-- attached. For any queries executed against the data source, the project
+-- is charged.
+bqdssProjectId :: Lens' BigQueryDataSourceSpec (Maybe Text)
+bqdssProjectId
+  = lens _bqdssProjectId
+      (\ s a -> s{_bqdssProjectId = a})
+
+-- | A BigQueryTableSpec.
+bqdssTableSpec :: Lens' BigQueryDataSourceSpec (Maybe BigQueryTableSpec)
+bqdssTableSpec
+  = lens _bqdssTableSpec
+      (\ s a -> s{_bqdssTableSpec = a})
+
+instance FromJSON BigQueryDataSourceSpec where
+        parseJSON
+          = withObject "BigQueryDataSourceSpec"
+              (\ o ->
+                 BigQueryDataSourceSpec' <$>
+                   (o .:? "querySpec") <*> (o .:? "projectId") <*>
+                     (o .:? "tableSpec"))
+
+instance ToJSON BigQueryDataSourceSpec where
+        toJSON BigQueryDataSourceSpec'{..}
+          = object
+              (catMaybes
+                 [("querySpec" .=) <$> _bqdssQuerySpec,
+                  ("projectId" .=) <$> _bqdssProjectId,
+                  ("tableSpec" .=) <$> _bqdssTableSpec])
+
 -- | Allows you to organize the numeric values in a source data column into
 -- buckets of a constant size. All values from HistogramRule.start to
 -- HistogramRule.end are placed into groups of size HistogramRule.interval.
@@ -12085,9 +16651,9 @@ instance ToJSON BasicChartDomain where
 -- /See:/ 'histogramRule' smart constructor.
 data HistogramRule =
   HistogramRule'
-    { _hrStart    :: !(Maybe (Textual Double))
+    { _hrStart :: !(Maybe (Textual Double))
     , _hrInterval :: !(Maybe (Textual Double))
-    , _hrEnd      :: !(Maybe (Textual Double))
+    , _hrEnd :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12151,7 +16717,7 @@ instance ToJSON HistogramRule where
 -- /See:/ 'matchedDeveloperMetadata' smart constructor.
 data MatchedDeveloperMetadata =
   MatchedDeveloperMetadata'
-    { _mdmDataFilters       :: !(Maybe [DataFilter])
+    { _mdmDataFilters :: !(Maybe [DataFilter])
     , _mdmDeveloperMetadata :: !(Maybe DeveloperMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -12200,13 +16766,82 @@ instance ToJSON MatchedDeveloperMetadata where
                  [("dataFilters" .=) <$> _mdmDataFilters,
                   ("developerMetadata" .=) <$> _mdmDeveloperMetadata])
 
+-- | The pivot table filter criteria associated with a specific source column
+-- offset.
+--
+-- /See:/ 'pivotFilterSpec' smart constructor.
+data PivotFilterSpec =
+  PivotFilterSpec'
+    { _pfsDataSourceColumnReference :: !(Maybe DataSourceColumnReference)
+    , _pfsFilterCriteria :: !(Maybe PivotFilterCriteria)
+    , _pfsColumnOffSetIndex :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PivotFilterSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pfsDataSourceColumnReference'
+--
+-- * 'pfsFilterCriteria'
+--
+-- * 'pfsColumnOffSetIndex'
+pivotFilterSpec
+    :: PivotFilterSpec
+pivotFilterSpec =
+  PivotFilterSpec'
+    { _pfsDataSourceColumnReference = Nothing
+    , _pfsFilterCriteria = Nothing
+    , _pfsColumnOffSetIndex = Nothing
+    }
+
+
+-- | The reference to the data source column.
+pfsDataSourceColumnReference :: Lens' PivotFilterSpec (Maybe DataSourceColumnReference)
+pfsDataSourceColumnReference
+  = lens _pfsDataSourceColumnReference
+      (\ s a -> s{_pfsDataSourceColumnReference = a})
+
+-- | The criteria for the column.
+pfsFilterCriteria :: Lens' PivotFilterSpec (Maybe PivotFilterCriteria)
+pfsFilterCriteria
+  = lens _pfsFilterCriteria
+      (\ s a -> s{_pfsFilterCriteria = a})
+
+-- | The column offset of the source range.
+pfsColumnOffSetIndex :: Lens' PivotFilterSpec (Maybe Int32)
+pfsColumnOffSetIndex
+  = lens _pfsColumnOffSetIndex
+      (\ s a -> s{_pfsColumnOffSetIndex = a})
+      . mapping _Coerce
+
+instance FromJSON PivotFilterSpec where
+        parseJSON
+          = withObject "PivotFilterSpec"
+              (\ o ->
+                 PivotFilterSpec' <$>
+                   (o .:? "dataSourceColumnReference") <*>
+                     (o .:? "filterCriteria")
+                     <*> (o .:? "columnOffsetIndex"))
+
+instance ToJSON PivotFilterSpec where
+        toJSON PivotFilterSpec'{..}
+          = object
+              (catMaybes
+                 [("dataSourceColumnReference" .=) <$>
+                    _pfsDataSourceColumnReference,
+                  ("filterCriteria" .=) <$> _pfsFilterCriteria,
+                  ("columnOffsetIndex" .=) <$> _pfsColumnOffSetIndex])
+
 -- | Inserts cells into a range, shifting the existing cells over or down.
 --
 -- /See:/ 'insertRangeRequest' smart constructor.
 data InsertRangeRequest =
   InsertRangeRequest'
     { _irrShiftDimension :: !(Maybe InsertRangeRequestShiftDimension)
-    , _irrRange          :: !(Maybe GridRange)
+    , _irrRange :: !(Maybe GridRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12257,9 +16892,9 @@ instance ToJSON InsertRangeRequest where
 data Padding =
   Padding'
     { _pBottom :: !(Maybe (Textual Int32))
-    , _pLeft   :: !(Maybe (Textual Int32))
-    , _pRight  :: !(Maybe (Textual Int32))
-    , _pTop    :: !(Maybe (Textual Int32))
+    , _pLeft :: !(Maybe (Textual Int32))
+    , _pRight :: !(Maybe (Textual Int32))
+    , _pTop :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12327,24 +16962,29 @@ instance ToJSON Padding where
 -- /See:/ 'chartSpec' smart constructor.
 data ChartSpec =
   ChartSpec'
-    { _csTitleTextPosition       :: !(Maybe TextPosition)
-    , _csFontName                :: !(Maybe Text)
-    , _csSubtitleTextPosition    :: !(Maybe TextPosition)
-    , _csBackgRoundColor         :: !(Maybe Color)
-    , _csCandlestickChart        :: !(Maybe CandlestickChartSpec)
-    , _csWaterfallChart          :: !(Maybe WaterfallChartSpec)
-    , _csTitleTextFormat         :: !(Maybe TextFormat)
-    , _csSubtitle                :: !(Maybe Text)
-    , _csAltText                 :: !(Maybe Text)
-    , _csHistogramChart          :: !(Maybe HistogramChartSpec)
-    , _csBubbleChart             :: !(Maybe BubbleChartSpec)
-    , _csMaximized               :: !(Maybe Bool)
-    , _csSubtitleTextFormat      :: !(Maybe TextFormat)
-    , _csTitle                   :: !(Maybe Text)
-    , _csPieChart                :: !(Maybe PieChartSpec)
-    , _csOrgChart                :: !(Maybe OrgChartSpec)
-    , _csTreemapChart            :: !(Maybe TreemapChartSpec)
-    , _csBasicChart              :: !(Maybe BasicChartSpec)
+    { _csSortSpecs :: !(Maybe [SortSpec])
+    , _csTitleTextPosition :: !(Maybe TextPosition)
+    , _csFontName :: !(Maybe Text)
+    , _csScorecardChart :: !(Maybe ScorecardChartSpec)
+    , _csSubtitleTextPosition :: !(Maybe TextPosition)
+    , _csBackgRoundColor :: !(Maybe Color)
+    , _csCandlestickChart :: !(Maybe CandlestickChartSpec)
+    , _csWaterfallChart :: !(Maybe WaterfallChartSpec)
+    , _csTitleTextFormat :: !(Maybe TextFormat)
+    , _csSubtitle :: !(Maybe Text)
+    , _csAltText :: !(Maybe Text)
+    , _csBackgRoundColorStyle :: !(Maybe ColorStyle)
+    , _csHistogramChart :: !(Maybe HistogramChartSpec)
+    , _csBubbleChart :: !(Maybe BubbleChartSpec)
+    , _csMaximized :: !(Maybe Bool)
+    , _csSubtitleTextFormat :: !(Maybe TextFormat)
+    , _csDataSourceChartProperties :: !(Maybe DataSourceChartProperties)
+    , _csTitle :: !(Maybe Text)
+    , _csPieChart :: !(Maybe PieChartSpec)
+    , _csFilterSpecs :: !(Maybe [FilterSpec])
+    , _csOrgChart :: !(Maybe OrgChartSpec)
+    , _csTreemapChart :: !(Maybe TreemapChartSpec)
+    , _csBasicChart :: !(Maybe BasicChartSpec)
     , _csHiddenDimensionStrategy :: !(Maybe ChartSpecHiddenDimensionStrategy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -12354,9 +16994,13 @@ data ChartSpec =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'csSortSpecs'
+--
 -- * 'csTitleTextPosition'
 --
 -- * 'csFontName'
+--
+-- * 'csScorecardChart'
 --
 -- * 'csSubtitleTextPosition'
 --
@@ -12372,6 +17016,8 @@ data ChartSpec =
 --
 -- * 'csAltText'
 --
+-- * 'csBackgRoundColorStyle'
+--
 -- * 'csHistogramChart'
 --
 -- * 'csBubbleChart'
@@ -12380,9 +17026,13 @@ data ChartSpec =
 --
 -- * 'csSubtitleTextFormat'
 --
+-- * 'csDataSourceChartProperties'
+--
 -- * 'csTitle'
 --
 -- * 'csPieChart'
+--
+-- * 'csFilterSpecs'
 --
 -- * 'csOrgChart'
 --
@@ -12395,8 +17045,10 @@ chartSpec
     :: ChartSpec
 chartSpec =
   ChartSpec'
-    { _csTitleTextPosition = Nothing
+    { _csSortSpecs = Nothing
+    , _csTitleTextPosition = Nothing
     , _csFontName = Nothing
+    , _csScorecardChart = Nothing
     , _csSubtitleTextPosition = Nothing
     , _csBackgRoundColor = Nothing
     , _csCandlestickChart = Nothing
@@ -12404,18 +17056,29 @@ chartSpec =
     , _csTitleTextFormat = Nothing
     , _csSubtitle = Nothing
     , _csAltText = Nothing
+    , _csBackgRoundColorStyle = Nothing
     , _csHistogramChart = Nothing
     , _csBubbleChart = Nothing
     , _csMaximized = Nothing
     , _csSubtitleTextFormat = Nothing
+    , _csDataSourceChartProperties = Nothing
     , _csTitle = Nothing
     , _csPieChart = Nothing
+    , _csFilterSpecs = Nothing
     , _csOrgChart = Nothing
     , _csTreemapChart = Nothing
     , _csBasicChart = Nothing
     , _csHiddenDimensionStrategy = Nothing
     }
 
+
+-- | The order to sort the chart data by. Only a single sort spec is
+-- supported. Only supported for data source charts.
+csSortSpecs :: Lens' ChartSpec [SortSpec]
+csSortSpecs
+  = lens _csSortSpecs (\ s a -> s{_csSortSpecs = a}) .
+      _Default
+      . _Coerce
 
 -- | The title text position. This field is optional.
 csTitleTextPosition :: Lens' ChartSpec (Maybe TextPosition)
@@ -12429,6 +17092,12 @@ csTitleTextPosition
 csFontName :: Lens' ChartSpec (Maybe Text)
 csFontName
   = lens _csFontName (\ s a -> s{_csFontName = a})
+
+-- | A scorecard chart specification.
+csScorecardChart :: Lens' ChartSpec (Maybe ScorecardChartSpec)
+csScorecardChart
+  = lens _csScorecardChart
+      (\ s a -> s{_csScorecardChart = a})
 
 -- | The subtitle text position. This field is optional.
 csSubtitleTextPosition :: Lens' ChartSpec (Maybe TextPosition)
@@ -12454,7 +17123,8 @@ csWaterfallChart
   = lens _csWaterfallChart
       (\ s a -> s{_csWaterfallChart = a})
 
--- | The title text format. Strikethrough and underline are not supported.
+-- | The title text format. Strikethrough, underline, and link are not
+-- supported.
 csTitleTextFormat :: Lens' ChartSpec (Maybe TextFormat)
 csTitleTextFormat
   = lens _csTitleTextFormat
@@ -12470,6 +17140,13 @@ csSubtitle
 csAltText :: Lens' ChartSpec (Maybe Text)
 csAltText
   = lens _csAltText (\ s a -> s{_csAltText = a})
+
+-- | The background color of the entire chart. Not applicable to Org charts.
+-- If background_color is also set, this field takes precedence.
+csBackgRoundColorStyle :: Lens' ChartSpec (Maybe ColorStyle)
+csBackgRoundColorStyle
+  = lens _csBackgRoundColorStyle
+      (\ s a -> s{_csBackgRoundColorStyle = a})
 
 -- | A histogram chart specification.
 csHistogramChart :: Lens' ChartSpec (Maybe HistogramChartSpec)
@@ -12490,11 +17167,18 @@ csMaximized :: Lens' ChartSpec (Maybe Bool)
 csMaximized
   = lens _csMaximized (\ s a -> s{_csMaximized = a})
 
--- | The subtitle text format. Strikethrough and underline are not supported.
+-- | The subtitle text format. Strikethrough, underline, and link are not
+-- supported.
 csSubtitleTextFormat :: Lens' ChartSpec (Maybe TextFormat)
 csSubtitleTextFormat
   = lens _csSubtitleTextFormat
       (\ s a -> s{_csSubtitleTextFormat = a})
+
+-- | If present, the field contains data source chart specific properties.
+csDataSourceChartProperties :: Lens' ChartSpec (Maybe DataSourceChartProperties)
+csDataSourceChartProperties
+  = lens _csDataSourceChartProperties
+      (\ s a -> s{_csDataSourceChartProperties = a})
 
 -- | The title of the chart.
 csTitle :: Lens' ChartSpec (Maybe Text)
@@ -12504,6 +17188,15 @@ csTitle = lens _csTitle (\ s a -> s{_csTitle = a})
 csPieChart :: Lens' ChartSpec (Maybe PieChartSpec)
 csPieChart
   = lens _csPieChart (\ s a -> s{_csPieChart = a})
+
+-- | The filters applied to the source data of the chart. Only supported for
+-- data source charts.
+csFilterSpecs :: Lens' ChartSpec [FilterSpec]
+csFilterSpecs
+  = lens _csFilterSpecs
+      (\ s a -> s{_csFilterSpecs = a})
+      . _Default
+      . _Coerce
 
 -- | An org chart specification.
 csOrgChart :: Lens' ChartSpec (Maybe OrgChartSpec)
@@ -12533,7 +17226,10 @@ instance FromJSON ChartSpec where
           = withObject "ChartSpec"
               (\ o ->
                  ChartSpec' <$>
-                   (o .:? "titleTextPosition") <*> (o .:? "fontName")
+                   (o .:? "sortSpecs" .!= mempty) <*>
+                     (o .:? "titleTextPosition")
+                     <*> (o .:? "fontName")
+                     <*> (o .:? "scorecardChart")
                      <*> (o .:? "subtitleTextPosition")
                      <*> (o .:? "backgroundColor")
                      <*> (o .:? "candlestickChart")
@@ -12541,12 +17237,15 @@ instance FromJSON ChartSpec where
                      <*> (o .:? "titleTextFormat")
                      <*> (o .:? "subtitle")
                      <*> (o .:? "altText")
+                     <*> (o .:? "backgroundColorStyle")
                      <*> (o .:? "histogramChart")
                      <*> (o .:? "bubbleChart")
                      <*> (o .:? "maximized")
                      <*> (o .:? "subtitleTextFormat")
+                     <*> (o .:? "dataSourceChartProperties")
                      <*> (o .:? "title")
                      <*> (o .:? "pieChart")
+                     <*> (o .:? "filterSpecs" .!= mempty)
                      <*> (o .:? "orgChart")
                      <*> (o .:? "treemapChart")
                      <*> (o .:? "basicChart")
@@ -12556,8 +17255,10 @@ instance ToJSON ChartSpec where
         toJSON ChartSpec'{..}
           = object
               (catMaybes
-                 [("titleTextPosition" .=) <$> _csTitleTextPosition,
+                 [("sortSpecs" .=) <$> _csSortSpecs,
+                  ("titleTextPosition" .=) <$> _csTitleTextPosition,
                   ("fontName" .=) <$> _csFontName,
+                  ("scorecardChart" .=) <$> _csScorecardChart,
                   ("subtitleTextPosition" .=) <$>
                     _csSubtitleTextPosition,
                   ("backgroundColor" .=) <$> _csBackgRoundColor,
@@ -12566,12 +17267,17 @@ instance ToJSON ChartSpec where
                   ("titleTextFormat" .=) <$> _csTitleTextFormat,
                   ("subtitle" .=) <$> _csSubtitle,
                   ("altText" .=) <$> _csAltText,
+                  ("backgroundColorStyle" .=) <$>
+                    _csBackgRoundColorStyle,
                   ("histogramChart" .=) <$> _csHistogramChart,
                   ("bubbleChart" .=) <$> _csBubbleChart,
                   ("maximized" .=) <$> _csMaximized,
                   ("subtitleTextFormat" .=) <$> _csSubtitleTextFormat,
+                  ("dataSourceChartProperties" .=) <$>
+                    _csDataSourceChartProperties,
                   ("title" .=) <$> _csTitle,
                   ("pieChart" .=) <$> _csPieChart,
+                  ("filterSpecs" .=) <$> _csFilterSpecs,
                   ("orgChart" .=) <$> _csOrgChart,
                   ("treemapChart" .=) <$> _csTreemapChart,
                   ("basicChart" .=) <$> _csBasicChart,
@@ -12583,9 +17289,10 @@ instance ToJSON ChartSpec where
 -- /See:/ 'dimensionProperties' smart constructor.
 data DimensionProperties =
   DimensionProperties'
-    { _dpHiddenByFilter    :: !(Maybe Bool)
-    , _dpPixelSize         :: !(Maybe (Textual Int32))
-    , _dpHiddenByUser      :: !(Maybe Bool)
+    { _dpDataSourceColumnReference :: !(Maybe DataSourceColumnReference)
+    , _dpHiddenByFilter :: !(Maybe Bool)
+    , _dpPixelSize :: !(Maybe (Textual Int32))
+    , _dpHiddenByUser :: !(Maybe Bool)
     , _dpDeveloperMetadata :: !(Maybe [DeveloperMetadata])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -12594,6 +17301,8 @@ data DimensionProperties =
 -- | Creates a value of 'DimensionProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dpDataSourceColumnReference'
 --
 -- * 'dpHiddenByFilter'
 --
@@ -12606,12 +17315,19 @@ dimensionProperties
     :: DimensionProperties
 dimensionProperties =
   DimensionProperties'
-    { _dpHiddenByFilter = Nothing
+    { _dpDataSourceColumnReference = Nothing
+    , _dpHiddenByFilter = Nothing
     , _dpPixelSize = Nothing
     , _dpHiddenByUser = Nothing
     , _dpDeveloperMetadata = Nothing
     }
 
+
+-- | Output only. If set, this is a column in a data source sheet.
+dpDataSourceColumnReference :: Lens' DimensionProperties (Maybe DataSourceColumnReference)
+dpDataSourceColumnReference
+  = lens _dpDataSourceColumnReference
+      (\ s a -> s{_dpDataSourceColumnReference = a})
 
 -- | True if this dimension is being filtered. This field is read-only.
 dpHiddenByFilter :: Lens' DimensionProperties (Maybe Bool)
@@ -12644,15 +17360,19 @@ instance FromJSON DimensionProperties where
           = withObject "DimensionProperties"
               (\ o ->
                  DimensionProperties' <$>
-                   (o .:? "hiddenByFilter") <*> (o .:? "pixelSize") <*>
-                     (o .:? "hiddenByUser")
+                   (o .:? "dataSourceColumnReference") <*>
+                     (o .:? "hiddenByFilter")
+                     <*> (o .:? "pixelSize")
+                     <*> (o .:? "hiddenByUser")
                      <*> (o .:? "developerMetadata" .!= mempty))
 
 instance ToJSON DimensionProperties where
         toJSON DimensionProperties'{..}
           = object
               (catMaybes
-                 [("hiddenByFilter" .=) <$> _dpHiddenByFilter,
+                 [("dataSourceColumnReference" .=) <$>
+                    _dpDataSourceColumnReference,
+                  ("hiddenByFilter" .=) <$> _dpHiddenByFilter,
                   ("pixelSize" .=) <$> _dpPixelSize,
                   ("hiddenByUser" .=) <$> _dpHiddenByUser,
                   ("developerMetadata" .=) <$> _dpDeveloperMetadata])
@@ -12663,7 +17383,7 @@ instance ToJSON DimensionProperties where
 data UpdateBandingRequest =
   UpdateBandingRequest'
     { _ubrBandedRange :: !(Maybe BandedRange)
-    , _ubrFields      :: !(Maybe GFieldMask)
+    , _ubrFields :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12715,7 +17435,7 @@ instance ToJSON UpdateBandingRequest where
 data BatchGetValuesResponse =
   BatchGetValuesResponse'
     { _bgvrSpreadsheetId :: !(Maybe Text)
-    , _bgvrValueRanges   :: !(Maybe [ValueRange])
+    , _bgvrValueRanges :: !(Maybe [ValueRange])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12895,62 +17615,71 @@ instance ToJSON UpdateDeveloperMetadataResponse where
 -- /See:/ 'request'' smart constructor.
 data Request' =
   Request''
-    { _reqAddFilterView                :: !(Maybe AddFilterViewRequest)
-    , _reqDeleteProtectedRange         :: !(Maybe DeleteProtectedRangeRequest)
-    , _reqUpdateProtectedRange         :: !(Maybe UpdateProtectedRangeRequest)
-    , _reqUpdateCells                  :: !(Maybe UpdateCellsRequest)
-    , _reqCreateDeveloperMetadata      :: !(Maybe CreateDeveloperMetadataRequest)
-    , _reqDuplicateFilterView          :: !(Maybe DuplicateFilterViewRequest)
-    , _reqAddConditionalFormatRule     :: !(Maybe AddConditionalFormatRuleRequest)
-    , _reqRandomizeRange               :: !(Maybe RandomizeRangeRequest)
-    , _reqSortRange                    :: !(Maybe SortRangeRequest)
-    , _reqUpdateNamedRange             :: !(Maybe UpdateNamedRangeRequest)
-    , _reqDeleteNamedRange             :: !(Maybe DeleteNamedRangeRequest)
-    , _reqInsertRange                  :: !(Maybe InsertRangeRequest)
-    , _reqDeleteBanding                :: !(Maybe DeleteBandingRequest)
-    , _reqUpdateBanding                :: !(Maybe UpdateBandingRequest)
-    , _reqClearBasicFilter             :: !(Maybe ClearBasicFilterRequest)
-    , _reqAppendCells                  :: !(Maybe AppendCellsRequest)
-    , _reqPasteData                    :: !(Maybe PasteDataRequest)
+    { _reqAddFilterView :: !(Maybe AddFilterViewRequest)
+    , _reqDeleteProtectedRange :: !(Maybe DeleteProtectedRangeRequest)
+    , _reqUpdateProtectedRange :: !(Maybe UpdateProtectedRangeRequest)
+    , _reqUpdateCells :: !(Maybe UpdateCellsRequest)
+    , _reqDeleteDataSource :: !(Maybe DeleteDataSourceRequest)
+    , _reqUpdateDataSource :: !(Maybe UpdateDataSourceRequest)
+    , _reqCreateDeveloperMetadata :: !(Maybe CreateDeveloperMetadataRequest)
+    , _reqDuplicateFilterView :: !(Maybe DuplicateFilterViewRequest)
+    , _reqAddConditionalFormatRule :: !(Maybe AddConditionalFormatRuleRequest)
+    , _reqRandomizeRange :: !(Maybe RandomizeRangeRequest)
+    , _reqSortRange :: !(Maybe SortRangeRequest)
+    , _reqUpdateNamedRange :: !(Maybe UpdateNamedRangeRequest)
+    , _reqDeleteNamedRange :: !(Maybe DeleteNamedRangeRequest)
+    , _reqInsertRange :: !(Maybe InsertRangeRequest)
+    , _reqDeleteBanding :: !(Maybe DeleteBandingRequest)
+    , _reqUpdateBanding :: !(Maybe UpdateBandingRequest)
+    , _reqClearBasicFilter :: !(Maybe ClearBasicFilterRequest)
+    , _reqAppendCells :: !(Maybe AppendCellsRequest)
+    , _reqPasteData :: !(Maybe PasteDataRequest)
+    , _reqAddSlicer :: !(Maybe AddSlicerRequest)
     , _reqUpdateEmbeddedObjectPosition :: !(Maybe UpdateEmbeddedObjectPositionRequest)
-    , _reqDeleteRange                  :: !(Maybe DeleteRangeRequest)
-    , _reqCopyPaste                    :: !(Maybe CopyPasteRequest)
-    , _reqUpdateDimensionGroup         :: !(Maybe UpdateDimensionGroupRequest)
-    , _reqDeleteDimensionGroup         :: !(Maybe DeleteDimensionGroupRequest)
-    , _reqAutoResizeDimensions         :: !(Maybe AutoResizeDimensionsRequest)
-    , _reqAddSheet                     :: !(Maybe AddSheetRequest)
-    , _reqFindReplace                  :: !(Maybe FindReplaceRequest)
-    , _reqDeleteDimension              :: !(Maybe DeleteDimensionRequest)
-    , _reqCutPaste                     :: !(Maybe CutPasteRequest)
-    , _reqMoveDimension                :: !(Maybe MoveDimensionRequest)
-    , _reqRepeatCell                   :: !(Maybe RepeatCellRequest)
-    , _reqAddProtectedRange            :: !(Maybe AddProtectedRangeRequest)
-    , _reqUpdateFilterView             :: !(Maybe UpdateFilterViewRequest)
-    , _reqDeleteFilterView             :: !(Maybe DeleteFilterViewRequest)
-    , _reqInsertDimension              :: !(Maybe InsertDimensionRequest)
-    , _reqUpdateSheetProperties        :: !(Maybe UpdateSheetPropertiesRequest)
-    , _reqDeleteConditionalFormatRule  :: !(Maybe DeleteConditionalFormatRuleRequest)
-    , _reqUpdateConditionalFormatRule  :: !(Maybe UpdateConditionalFormatRuleRequest)
-    , _reqDeleteEmbeddedObject         :: !(Maybe DeleteEmbeddedObjectRequest)
-    , _reqDeleteDeveloperMetadata      :: !(Maybe DeleteDeveloperMetadataRequest)
-    , _reqUpdateDeveloperMetadata      :: !(Maybe UpdateDeveloperMetadataRequest)
-    , _reqMergeCells                   :: !(Maybe MergeCellsRequest)
-    , _reqAddNamedRange                :: !(Maybe AddNamedRangeRequest)
-    , _reqAddChart                     :: !(Maybe AddChartRequest)
-    , _reqAddBanding                   :: !(Maybe AddBandingRequest)
-    , _reqDuplicateSheet               :: !(Maybe DuplicateSheetRequest)
-    , _reqAutoFill                     :: !(Maybe AutoFillRequest)
-    , _reqUpdateDimensionProperties    :: !(Maybe UpdateDimensionPropertiesRequest)
-    , _reqUpdateChartSpec              :: !(Maybe UpdateChartSpecRequest)
-    , _reqSetBasicFilter               :: !(Maybe SetBasicFilterRequest)
-    , _reqTextToColumns                :: !(Maybe TextToColumnsRequest)
-    , _reqAddDimensionGroup            :: !(Maybe AddDimensionGroupRequest)
-    , _reqUpdateSpreadsheetProperties  :: !(Maybe UpdateSpreadsheetPropertiesRequest)
-    , _reqDeleteSheet                  :: !(Maybe DeleteSheetRequest)
-    , _reqUnmergeCells                 :: !(Maybe UnmergeCellsRequest)
-    , _reqUpdateBOrders                :: !(Maybe UpdateBOrdersRequest)
-    , _reqAppendDimension              :: !(Maybe AppendDimensionRequest)
-    , _reqSetDataValidation            :: !(Maybe SetDataValidationRequest)
+    , _reqDeleteRange :: !(Maybe DeleteRangeRequest)
+    , _reqCopyPaste :: !(Maybe CopyPasteRequest)
+    , _reqUpdateDimensionGroup :: !(Maybe UpdateDimensionGroupRequest)
+    , _reqDeleteDimensionGroup :: !(Maybe DeleteDimensionGroupRequest)
+    , _reqAutoResizeDimensions :: !(Maybe AutoResizeDimensionsRequest)
+    , _reqAddSheet :: !(Maybe AddSheetRequest)
+    , _reqFindReplace :: !(Maybe FindReplaceRequest)
+    , _reqDeleteDimension :: !(Maybe DeleteDimensionRequest)
+    , _reqCutPaste :: !(Maybe CutPasteRequest)
+    , _reqMoveDimension :: !(Maybe MoveDimensionRequest)
+    , _reqRepeatCell :: !(Maybe RepeatCellRequest)
+    , _reqAddProtectedRange :: !(Maybe AddProtectedRangeRequest)
+    , _reqUpdateFilterView :: !(Maybe UpdateFilterViewRequest)
+    , _reqDeleteFilterView :: !(Maybe DeleteFilterViewRequest)
+    , _reqAddDataSource :: !(Maybe AddDataSourceRequest)
+    , _reqInsertDimension :: !(Maybe InsertDimensionRequest)
+    , _reqUpdateSheetProperties :: !(Maybe UpdateSheetPropertiesRequest)
+    , _reqDeleteConditionalFormatRule :: !(Maybe DeleteConditionalFormatRuleRequest)
+    , _reqUpdateConditionalFormatRule :: !(Maybe UpdateConditionalFormatRuleRequest)
+    , _reqDeleteEmbeddedObject :: !(Maybe DeleteEmbeddedObjectRequest)
+    , _reqDeleteDeveloperMetadata :: !(Maybe DeleteDeveloperMetadataRequest)
+    , _reqUpdateDeveloperMetadata :: !(Maybe UpdateDeveloperMetadataRequest)
+    , _reqMergeCells :: !(Maybe MergeCellsRequest)
+    , _reqAddNamedRange :: !(Maybe AddNamedRangeRequest)
+    , _reqAddChart :: !(Maybe AddChartRequest)
+    , _reqDeleteDuplicates :: !(Maybe DeleteDuplicatesRequest)
+    , _reqAddBanding :: !(Maybe AddBandingRequest)
+    , _reqDuplicateSheet :: !(Maybe DuplicateSheetRequest)
+    , _reqRefreshDataSource :: !(Maybe RefreshDataSourceRequest)
+    , _reqAutoFill :: !(Maybe AutoFillRequest)
+    , _reqUpdateDimensionProperties :: !(Maybe UpdateDimensionPropertiesRequest)
+    , _reqUpdateChartSpec :: !(Maybe UpdateChartSpecRequest)
+    , _reqSetBasicFilter :: !(Maybe SetBasicFilterRequest)
+    , _reqTextToColumns :: !(Maybe TextToColumnsRequest)
+    , _reqAddDimensionGroup :: !(Maybe AddDimensionGroupRequest)
+    , _reqUpdateSpreadsheetProperties :: !(Maybe UpdateSpreadsheetPropertiesRequest)
+    , _reqUpdateEmbeddedObjectBOrder :: !(Maybe UpdateEmbeddedObjectBOrderRequest)
+    , _reqDeleteSheet :: !(Maybe DeleteSheetRequest)
+    , _reqUpdateSlicerSpec :: !(Maybe UpdateSlicerSpecRequest)
+    , _reqUnmergeCells :: !(Maybe UnmergeCellsRequest)
+    , _reqUpdateBOrders :: !(Maybe UpdateBOrdersRequest)
+    , _reqAppendDimension :: !(Maybe AppendDimensionRequest)
+    , _reqSetDataValidation :: !(Maybe SetDataValidationRequest)
+    , _reqTrimWhitespace :: !(Maybe TrimWhitespaceRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12966,6 +17695,10 @@ data Request' =
 -- * 'reqUpdateProtectedRange'
 --
 -- * 'reqUpdateCells'
+--
+-- * 'reqDeleteDataSource'
+--
+-- * 'reqUpdateDataSource'
 --
 -- * 'reqCreateDeveloperMetadata'
 --
@@ -12992,6 +17725,8 @@ data Request' =
 -- * 'reqAppendCells'
 --
 -- * 'reqPasteData'
+--
+-- * 'reqAddSlicer'
 --
 -- * 'reqUpdateEmbeddedObjectPosition'
 --
@@ -13023,6 +17758,8 @@ data Request' =
 --
 -- * 'reqDeleteFilterView'
 --
+-- * 'reqAddDataSource'
+--
 -- * 'reqInsertDimension'
 --
 -- * 'reqUpdateSheetProperties'
@@ -13043,9 +17780,13 @@ data Request' =
 --
 -- * 'reqAddChart'
 --
+-- * 'reqDeleteDuplicates'
+--
 -- * 'reqAddBanding'
 --
 -- * 'reqDuplicateSheet'
+--
+-- * 'reqRefreshDataSource'
 --
 -- * 'reqAutoFill'
 --
@@ -13061,7 +17802,11 @@ data Request' =
 --
 -- * 'reqUpdateSpreadsheetProperties'
 --
+-- * 'reqUpdateEmbeddedObjectBOrder'
+--
 -- * 'reqDeleteSheet'
+--
+-- * 'reqUpdateSlicerSpec'
 --
 -- * 'reqUnmergeCells'
 --
@@ -13070,6 +17815,8 @@ data Request' =
 -- * 'reqAppendDimension'
 --
 -- * 'reqSetDataValidation'
+--
+-- * 'reqTrimWhitespace'
 request'
     :: Request'
 request' =
@@ -13078,6 +17825,8 @@ request' =
     , _reqDeleteProtectedRange = Nothing
     , _reqUpdateProtectedRange = Nothing
     , _reqUpdateCells = Nothing
+    , _reqDeleteDataSource = Nothing
+    , _reqUpdateDataSource = Nothing
     , _reqCreateDeveloperMetadata = Nothing
     , _reqDuplicateFilterView = Nothing
     , _reqAddConditionalFormatRule = Nothing
@@ -13091,6 +17840,7 @@ request' =
     , _reqClearBasicFilter = Nothing
     , _reqAppendCells = Nothing
     , _reqPasteData = Nothing
+    , _reqAddSlicer = Nothing
     , _reqUpdateEmbeddedObjectPosition = Nothing
     , _reqDeleteRange = Nothing
     , _reqCopyPaste = Nothing
@@ -13106,6 +17856,7 @@ request' =
     , _reqAddProtectedRange = Nothing
     , _reqUpdateFilterView = Nothing
     , _reqDeleteFilterView = Nothing
+    , _reqAddDataSource = Nothing
     , _reqInsertDimension = Nothing
     , _reqUpdateSheetProperties = Nothing
     , _reqDeleteConditionalFormatRule = Nothing
@@ -13116,8 +17867,10 @@ request' =
     , _reqMergeCells = Nothing
     , _reqAddNamedRange = Nothing
     , _reqAddChart = Nothing
+    , _reqDeleteDuplicates = Nothing
     , _reqAddBanding = Nothing
     , _reqDuplicateSheet = Nothing
+    , _reqRefreshDataSource = Nothing
     , _reqAutoFill = Nothing
     , _reqUpdateDimensionProperties = Nothing
     , _reqUpdateChartSpec = Nothing
@@ -13125,11 +17878,14 @@ request' =
     , _reqTextToColumns = Nothing
     , _reqAddDimensionGroup = Nothing
     , _reqUpdateSpreadsheetProperties = Nothing
+    , _reqUpdateEmbeddedObjectBOrder = Nothing
     , _reqDeleteSheet = Nothing
+    , _reqUpdateSlicerSpec = Nothing
     , _reqUnmergeCells = Nothing
     , _reqUpdateBOrders = Nothing
     , _reqAppendDimension = Nothing
     , _reqSetDataValidation = Nothing
+    , _reqTrimWhitespace = Nothing
     }
 
 
@@ -13156,6 +17912,18 @@ reqUpdateCells :: Lens' Request' (Maybe UpdateCellsRequest)
 reqUpdateCells
   = lens _reqUpdateCells
       (\ s a -> s{_reqUpdateCells = a})
+
+-- | Deletes a data source.
+reqDeleteDataSource :: Lens' Request' (Maybe DeleteDataSourceRequest)
+reqDeleteDataSource
+  = lens _reqDeleteDataSource
+      (\ s a -> s{_reqDeleteDataSource = a})
+
+-- | Updates a data source.
+reqUpdateDataSource :: Lens' Request' (Maybe UpdateDataSourceRequest)
+reqUpdateDataSource
+  = lens _reqUpdateDataSource
+      (\ s a -> s{_reqUpdateDataSource = a})
 
 -- | Creates new developer metadata
 reqCreateDeveloperMetadata :: Lens' Request' (Maybe CreateDeveloperMetadataRequest)
@@ -13232,6 +18000,11 @@ reqAppendCells
 reqPasteData :: Lens' Request' (Maybe PasteDataRequest)
 reqPasteData
   = lens _reqPasteData (\ s a -> s{_reqPasteData = a})
+
+-- | Adds a slicer.
+reqAddSlicer :: Lens' Request' (Maybe AddSlicerRequest)
+reqAddSlicer
+  = lens _reqAddSlicer (\ s a -> s{_reqAddSlicer = a})
 
 -- | Updates an embedded object\'s (e.g. chart, image) position.
 reqUpdateEmbeddedObjectPosition :: Lens' Request' (Maybe UpdateEmbeddedObjectPositionRequest)
@@ -13321,6 +18094,12 @@ reqDeleteFilterView
   = lens _reqDeleteFilterView
       (\ s a -> s{_reqDeleteFilterView = a})
 
+-- | Adds a data source.
+reqAddDataSource :: Lens' Request' (Maybe AddDataSourceRequest)
+reqAddDataSource
+  = lens _reqAddDataSource
+      (\ s a -> s{_reqAddDataSource = a})
+
 -- | Inserts new rows or columns in a sheet.
 reqInsertDimension :: Lens' Request' (Maybe InsertDimensionRequest)
 reqInsertDimension
@@ -13380,6 +18159,13 @@ reqAddChart :: Lens' Request' (Maybe AddChartRequest)
 reqAddChart
   = lens _reqAddChart (\ s a -> s{_reqAddChart = a})
 
+-- | Removes rows containing duplicate values in specified columns of a cell
+-- range.
+reqDeleteDuplicates :: Lens' Request' (Maybe DeleteDuplicatesRequest)
+reqDeleteDuplicates
+  = lens _reqDeleteDuplicates
+      (\ s a -> s{_reqDeleteDuplicates = a})
+
 -- | Adds a new banded range
 reqAddBanding :: Lens' Request' (Maybe AddBandingRequest)
 reqAddBanding
@@ -13391,6 +18177,12 @@ reqDuplicateSheet :: Lens' Request' (Maybe DuplicateSheetRequest)
 reqDuplicateSheet
   = lens _reqDuplicateSheet
       (\ s a -> s{_reqDuplicateSheet = a})
+
+-- | Refreshs one or multiple data sources and associated dbobjects.
+reqRefreshDataSource :: Lens' Request' (Maybe RefreshDataSourceRequest)
+reqRefreshDataSource
+  = lens _reqRefreshDataSource
+      (\ s a -> s{_reqRefreshDataSource = a})
 
 -- | Automatically fills in more data based on existing data.
 reqAutoFill :: Lens' Request' (Maybe AutoFillRequest)
@@ -13433,11 +18225,23 @@ reqUpdateSpreadsheetProperties
   = lens _reqUpdateSpreadsheetProperties
       (\ s a -> s{_reqUpdateSpreadsheetProperties = a})
 
+-- | Updates an embedded object\'s border.
+reqUpdateEmbeddedObjectBOrder :: Lens' Request' (Maybe UpdateEmbeddedObjectBOrderRequest)
+reqUpdateEmbeddedObjectBOrder
+  = lens _reqUpdateEmbeddedObjectBOrder
+      (\ s a -> s{_reqUpdateEmbeddedObjectBOrder = a})
+
 -- | Deletes a sheet.
 reqDeleteSheet :: Lens' Request' (Maybe DeleteSheetRequest)
 reqDeleteSheet
   = lens _reqDeleteSheet
       (\ s a -> s{_reqDeleteSheet = a})
+
+-- | Updates a slicer\'s specifications.
+reqUpdateSlicerSpec :: Lens' Request' (Maybe UpdateSlicerSpecRequest)
+reqUpdateSlicerSpec
+  = lens _reqUpdateSlicerSpec
+      (\ s a -> s{_reqUpdateSlicerSpec = a})
 
 -- | Unmerges merged cells.
 reqUnmergeCells :: Lens' Request' (Maybe UnmergeCellsRequest)
@@ -13463,6 +18267,12 @@ reqSetDataValidation
   = lens _reqSetDataValidation
       (\ s a -> s{_reqSetDataValidation = a})
 
+-- | Trims cells of whitespace (such as spaces, tabs, or new lines).
+reqTrimWhitespace :: Lens' Request' (Maybe TrimWhitespaceRequest)
+reqTrimWhitespace
+  = lens _reqTrimWhitespace
+      (\ s a -> s{_reqTrimWhitespace = a})
+
 instance FromJSON Request' where
         parseJSON
           = withObject "Request"
@@ -13472,6 +18282,8 @@ instance FromJSON Request' where
                      (o .:? "deleteProtectedRange")
                      <*> (o .:? "updateProtectedRange")
                      <*> (o .:? "updateCells")
+                     <*> (o .:? "deleteDataSource")
+                     <*> (o .:? "updateDataSource")
                      <*> (o .:? "createDeveloperMetadata")
                      <*> (o .:? "duplicateFilterView")
                      <*> (o .:? "addConditionalFormatRule")
@@ -13485,6 +18297,7 @@ instance FromJSON Request' where
                      <*> (o .:? "clearBasicFilter")
                      <*> (o .:? "appendCells")
                      <*> (o .:? "pasteData")
+                     <*> (o .:? "addSlicer")
                      <*> (o .:? "updateEmbeddedObjectPosition")
                      <*> (o .:? "deleteRange")
                      <*> (o .:? "copyPaste")
@@ -13500,6 +18313,7 @@ instance FromJSON Request' where
                      <*> (o .:? "addProtectedRange")
                      <*> (o .:? "updateFilterView")
                      <*> (o .:? "deleteFilterView")
+                     <*> (o .:? "addDataSource")
                      <*> (o .:? "insertDimension")
                      <*> (o .:? "updateSheetProperties")
                      <*> (o .:? "deleteConditionalFormatRule")
@@ -13510,8 +18324,10 @@ instance FromJSON Request' where
                      <*> (o .:? "mergeCells")
                      <*> (o .:? "addNamedRange")
                      <*> (o .:? "addChart")
+                     <*> (o .:? "deleteDuplicates")
                      <*> (o .:? "addBanding")
                      <*> (o .:? "duplicateSheet")
+                     <*> (o .:? "refreshDataSource")
                      <*> (o .:? "autoFill")
                      <*> (o .:? "updateDimensionProperties")
                      <*> (o .:? "updateChartSpec")
@@ -13519,11 +18335,14 @@ instance FromJSON Request' where
                      <*> (o .:? "textToColumns")
                      <*> (o .:? "addDimensionGroup")
                      <*> (o .:? "updateSpreadsheetProperties")
+                     <*> (o .:? "updateEmbeddedObjectBorder")
                      <*> (o .:? "deleteSheet")
+                     <*> (o .:? "updateSlicerSpec")
                      <*> (o .:? "unmergeCells")
                      <*> (o .:? "updateBorders")
                      <*> (o .:? "appendDimension")
-                     <*> (o .:? "setDataValidation"))
+                     <*> (o .:? "setDataValidation")
+                     <*> (o .:? "trimWhitespace"))
 
 instance ToJSON Request' where
         toJSON Request''{..}
@@ -13535,6 +18354,8 @@ instance ToJSON Request' where
                   ("updateProtectedRange" .=) <$>
                     _reqUpdateProtectedRange,
                   ("updateCells" .=) <$> _reqUpdateCells,
+                  ("deleteDataSource" .=) <$> _reqDeleteDataSource,
+                  ("updateDataSource" .=) <$> _reqUpdateDataSource,
                   ("createDeveloperMetadata" .=) <$>
                     _reqCreateDeveloperMetadata,
                   ("duplicateFilterView" .=) <$>
@@ -13551,6 +18372,7 @@ instance ToJSON Request' where
                   ("clearBasicFilter" .=) <$> _reqClearBasicFilter,
                   ("appendCells" .=) <$> _reqAppendCells,
                   ("pasteData" .=) <$> _reqPasteData,
+                  ("addSlicer" .=) <$> _reqAddSlicer,
                   ("updateEmbeddedObjectPosition" .=) <$>
                     _reqUpdateEmbeddedObjectPosition,
                   ("deleteRange" .=) <$> _reqDeleteRange,
@@ -13570,6 +18392,7 @@ instance ToJSON Request' where
                   ("addProtectedRange" .=) <$> _reqAddProtectedRange,
                   ("updateFilterView" .=) <$> _reqUpdateFilterView,
                   ("deleteFilterView" .=) <$> _reqDeleteFilterView,
+                  ("addDataSource" .=) <$> _reqAddDataSource,
                   ("insertDimension" .=) <$> _reqInsertDimension,
                   ("updateSheetProperties" .=) <$>
                     _reqUpdateSheetProperties,
@@ -13586,8 +18409,10 @@ instance ToJSON Request' where
                   ("mergeCells" .=) <$> _reqMergeCells,
                   ("addNamedRange" .=) <$> _reqAddNamedRange,
                   ("addChart" .=) <$> _reqAddChart,
+                  ("deleteDuplicates" .=) <$> _reqDeleteDuplicates,
                   ("addBanding" .=) <$> _reqAddBanding,
                   ("duplicateSheet" .=) <$> _reqDuplicateSheet,
+                  ("refreshDataSource" .=) <$> _reqRefreshDataSource,
                   ("autoFill" .=) <$> _reqAutoFill,
                   ("updateDimensionProperties" .=) <$>
                     _reqUpdateDimensionProperties,
@@ -13597,11 +18422,15 @@ instance ToJSON Request' where
                   ("addDimensionGroup" .=) <$> _reqAddDimensionGroup,
                   ("updateSpreadsheetProperties" .=) <$>
                     _reqUpdateSpreadsheetProperties,
+                  ("updateEmbeddedObjectBorder" .=) <$>
+                    _reqUpdateEmbeddedObjectBOrder,
                   ("deleteSheet" .=) <$> _reqDeleteSheet,
+                  ("updateSlicerSpec" .=) <$> _reqUpdateSlicerSpec,
                   ("unmergeCells" .=) <$> _reqUnmergeCells,
                   ("updateBorders" .=) <$> _reqUpdateBOrders,
                   ("appendDimension" .=) <$> _reqAppendDimension,
-                  ("setDataValidation" .=) <$> _reqSetDataValidation])
+                  ("setDataValidation" .=) <$> _reqSetDataValidation,
+                  ("trimWhitespace" .=) <$> _reqTrimWhitespace])
 
 -- | Properties that describe the style of a line.
 --
@@ -13609,7 +18438,7 @@ instance ToJSON Request' where
 data LineStyle =
   LineStyle'
     { _lsWidth :: !(Maybe (Textual Int32))
-    , _lsType  :: !(Maybe LineStyleType)
+    , _lsType :: !(Maybe LineStyleType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -13692,10 +18521,10 @@ instance ToJSON DeleteConditionalFormatRuleResponse
 -- /See:/ 'updateConditionalFormatRuleResponse' smart constructor.
 data UpdateConditionalFormatRuleResponse =
   UpdateConditionalFormatRuleResponse'
-    { _uNewRule  :: !(Maybe ConditionalFormatRule)
+    { _uNewRule :: !(Maybe ConditionalFormatRule)
     , _uNewIndex :: !(Maybe (Textual Int32))
     , _uOldIndex :: !(Maybe (Textual Int32))
-    , _uOldRule  :: !(Maybe ConditionalFormatRule)
+    , _uOldRule :: !(Maybe ConditionalFormatRule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Call
     , pCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.call@ method which the
 -- 'ProjectsLocationsFunctionsCall' request conforms to.
@@ -70,13 +70,13 @@ type ProjectsLocationsFunctionsCallResource =
 -- /See:/ 'projectsLocationsFunctionsCall' smart constructor.
 data ProjectsLocationsFunctionsCall =
   ProjectsLocationsFunctionsCall'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !CallFunctionRequest
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !CallFunctionRequest
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,7 +138,7 @@ pUploadType
 pPayload :: Lens' ProjectsLocationsFunctionsCall CallFunctionRequest
 pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
--- | The name of the function to be called.
+-- | Required. The name of the function to be called.
 pName :: Lens' ProjectsLocationsFunctionsCall Text
 pName = lens _pName (\ s a -> s{_pName = a})
 

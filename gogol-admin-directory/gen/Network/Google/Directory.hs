@@ -13,10 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages enterprise resources such as users and groups, administrative
--- notifications, security features, and more.
+-- Admin SDK lets administrators of enterprise domains to view and manage
+-- resources like user, groups etc. It also provides audit and usage
+-- reports of domain.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference>
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
 module Network.Google.Directory
     (
     -- * Service Configuration
@@ -37,6 +38,7 @@ module Network.Google.Directory
     , adminDirectoryUserschemaScope
     , adminDirectoryUserschemaReadOnlyScope
     , adminDirectoryDomainScope
+    , cloudPlatformScope
     , adminDirectoryRoleManagementScope
     , adminDirectoryGroupScope
     , adminDirectoryOrgUnitReadOnlyScope
@@ -47,9 +49,10 @@ module Network.Google.Directory
     , adminDirectoryUserAliasReadOnlyScope
     , adminDirectoryUserSecurityScope
     , adminDirectoryGroupMemberScope
-    , adminDirectoryNotificationsScope
     , adminDirectoryDeviceMobileScope
     , adminDirectoryDeviceMobileReadOnlyScope
+    , adminChromePrintersReadOnlyScope
+    , adminChromePrintersScope
 
     -- * API Declaration
     , DirectoryAPI
@@ -58,6 +61,36 @@ module Network.Google.Directory
 
     -- ** admin.channels.stop
     , module Network.Google.Resource.Admin.Channels.Stop
+
+    -- ** admin.customer.devices.chromeos.commands.get
+    , module Network.Google.Resource.Admin.Customer.Devices.Chromeos.Commands.Get
+
+    -- ** admin.customer.devices.chromeos.issueCommand
+    , module Network.Google.Resource.Admin.Customer.Devices.Chromeos.IssueCommand
+
+    -- ** admin.customers.chrome.printers.batchCreatePrinters
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchCreatePrinters
+
+    -- ** admin.customers.chrome.printers.batchDeletePrinters
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchDeletePrinters
+
+    -- ** admin.customers.chrome.printers.create
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.Create
+
+    -- ** admin.customers.chrome.printers.delete
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.Delete
+
+    -- ** admin.customers.chrome.printers.get
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.Get
+
+    -- ** admin.customers.chrome.printers.list
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.List
+
+    -- ** admin.customers.chrome.printers.listPrinterModels
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.ListPrinterModels
+
+    -- ** admin.customers.chrome.printers.patch
+    , module Network.Google.Resource.Admin.Customers.Chrome.Printers.Patch
 
     -- ** directory.asps.delete
     , module Network.Google.Resource.Directory.Asps.Delete
@@ -179,21 +212,6 @@ module Network.Google.Directory
     -- ** directory.mobiledevices.list
     , module Network.Google.Resource.Directory.MobileDevices.List
 
-    -- ** directory.notifications.delete
-    , module Network.Google.Resource.Directory.Notifications.Delete
-
-    -- ** directory.notifications.get
-    , module Network.Google.Resource.Directory.Notifications.Get
-
-    -- ** directory.notifications.list
-    , module Network.Google.Resource.Directory.Notifications.List
-
-    -- ** directory.notifications.patch
-    , module Network.Google.Resource.Directory.Notifications.Patch
-
-    -- ** directory.notifications.update
-    , module Network.Google.Resource.Directory.Notifications.Update
-
     -- ** directory.orgunits.delete
     , module Network.Google.Resource.Directory.OrgUnits.Delete
 
@@ -214,12 +232,6 @@ module Network.Google.Directory
 
     -- ** directory.privileges.list
     , module Network.Google.Resource.Directory.Privileges.List
-
-    -- ** directory.resolvedAppAccessSettings.GetSettings
-    , module Network.Google.Resource.Directory.ResolvedAppAccessSettings.GetSettings
-
-    -- ** directory.resolvedAppAccessSettings.ListTrustedApps
-    , module Network.Google.Resource.Directory.ResolvedAppAccessSettings.ListTrustedApps
 
     -- ** directory.resources.buildings.delete
     , module Network.Google.Resource.Directory.Resources.Buildings.Delete
@@ -335,6 +347,9 @@ module Network.Google.Directory
     -- ** directory.tokens.list
     , module Network.Google.Resource.Directory.Tokens.List
 
+    -- ** directory.twoStepVerification.turnOff
+    , module Network.Google.Resource.Directory.TwoStepVerification.TurnOff
+
     -- ** directory.users.aliases.delete
     , module Network.Google.Resource.Directory.Users.Aliases.Delete
 
@@ -376,6 +391,9 @@ module Network.Google.Directory
 
     -- ** directory.users.photos.update
     , module Network.Google.Resource.Directory.Users.Photos.Update
+
+    -- ** directory.users.signOut
+    , module Network.Google.Resource.Directory.Users.SignOut
 
     -- ** directory.users.undelete
     , module Network.Google.Resource.Directory.Users.Undelete
@@ -450,6 +468,12 @@ module Network.Google.Directory
     -- ** UsersListEvent
     , UsersListEvent (..)
 
+    -- ** ListPrintersResponse
+    , ListPrintersResponse
+    , listPrintersResponse
+    , lprNextPageToken
+    , lprPrinters
+
     -- ** Privileges
     , Privileges
     , privileges
@@ -523,6 +547,12 @@ module Network.Google.Directory
     , uaCustomType
     , uaSourceIsStructured
 
+    -- ** DirectoryChromeosDevicesIssueCommandRequest
+    , DirectoryChromeosDevicesIssueCommandRequest
+    , directoryChromeosDevicesIssueCommandRequest
+    , dcdicrPayload
+    , dcdicrCommandType
+
     -- ** CustomerPostalAddress
     , CustomerPostalAddress
     , customerPostalAddress
@@ -561,6 +591,9 @@ module Network.Google.Directory
     , groId
     , groDescription
 
+    -- ** DirectoryChromeosDevicesCommandType
+    , DirectoryChromeosDevicesCommandType (..)
+
     -- ** ChromeOSDevice
     , ChromeOSDevice
     , chromeOSDevice
@@ -569,9 +602,11 @@ module Network.Google.Directory
     , codCPUStatusReports
     , codAnnotatedUser
     , codSystemRamFreeReports
+    , codDockMACAddress
     , codPlatformVersion
     , codLastSync
     , codActiveTimeRanges
+    , codEthernetMACAddress0
     , codKind
     , codEthernetMACAddress
     , codLastEnrollmentTime
@@ -581,12 +616,14 @@ module Network.Google.Directory
     , codRecentUsers
     , codSupportEndDate
     , codModel
+    , codLastKnownNetwork
     , codWillAutoRenew
     , codMeid
     , codDeviceFiles
     , codDeviceId
     , codBootMode
     , codTpmVersionInfo
+    , codAutoUpdateExpiration
     , codOrderNumber
     , codDiskVolumeReports
     , codAnnotatedAssetId
@@ -594,6 +631,8 @@ module Network.Google.Directory
     , codSerialNumber
     , codFirmwareVersion
     , codOSVersion
+    , codManufactureDate
+    , codScreenshotFiles
     , codSystemRamTotal
 
     -- ** ChromeosDevicesPatchProjection
@@ -621,6 +660,9 @@ module Network.Google.Directory
     , aName
     , aLastTimeUsed
     , aUserKey
+
+    -- ** AuxiliaryMessageSeverity
+    , AuxiliaryMessageSeverity (..)
 
     -- ** Schemas
     , Schemas
@@ -651,17 +693,9 @@ module Network.Google.Directory
     -- ** OrgUnitsListType
     , OrgUnitsListType (..)
 
-    -- ** Notification
-    , Notification
-    , notification
-    , nSubject
-    , nEtag
-    , nKind
-    , nBody
-    , nFromAddress
-    , nIsUnread
-    , nNotificationId
-    , nSendTime
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** MobileDevicesListSortOrder
     , MobileDevicesListSortOrder (..)
@@ -678,6 +712,9 @@ module Network.Google.Directory
 
     -- ** UsersListOrderBy
     , UsersListOrderBy (..)
+
+    -- ** DirectoryChromeosDevicesIssueCommandRequestCommandType
+    , DirectoryChromeosDevicesIssueCommandRequestCommandType (..)
 
     -- ** BuildingAddress
     , BuildingAddress
@@ -716,12 +753,21 @@ module Network.Google.Directory
     , daKind
     , daDomainAliases
 
+    -- ** ChromeOSDeviceLastKnownNetworkItem
+    , ChromeOSDeviceLastKnownNetworkItem
+    , chromeOSDeviceLastKnownNetworkItem
+    , codlkniWanIPAddress
+    , codlkniIPAddress
+
     -- ** Aliases
     , Aliases
     , aliases
     , aliEtag
     , aliKind
     , aliAliases
+
+    -- ** DirectoryChromeosDevicesCommandState
+    , DirectoryChromeosDevicesCommandState (..)
 
     -- ** CalendarResource
     , CalendarResource
@@ -750,6 +796,9 @@ module Network.Google.Directory
     , userUndelete
     , uuOrgUnitPath
 
+    -- ** FailureInfoErrorCode
+    , FailureInfoErrorCode (..)
+
     -- ** Members
     , Members
     , members
@@ -771,6 +820,12 @@ module Network.Google.Directory
     , cParams
     , cId
     , cType
+
+    -- ** ListPrinterModelsResponse
+    , ListPrinterModelsResponse
+    , listPrinterModelsResponse
+    , lpmrNextPageToken
+    , lpmrPrinterModels
 
     -- ** MobileDevices
     , MobileDevices
@@ -823,6 +878,14 @@ module Network.Google.Directory
     , codruiEmail
     , codruiType
 
+    -- ** FailureInfo
+    , FailureInfo
+    , failureInfo
+    , fiPrinterId
+    , fiPrinter
+    , fiErrorCode
+    , fiErrorMessage
+
     -- ** DomainAlias
     , DomainAlias
     , domainAlias
@@ -832,6 +895,19 @@ module Network.Google.Directory
     , dVerified
     , dDomainAliasName
     , dParentDomainName
+
+    -- ** DirectoryChromeosDevicesCommandResult
+    , DirectoryChromeosDevicesCommandResult
+    , directoryChromeosDevicesCommandResult
+    , dcdcrExecuteTime
+    , dcdcrResult
+    , dcdcrErrorMessage
+
+    -- ** BatchCreatePrintersResponse
+    , BatchCreatePrintersResponse
+    , batchCreatePrintersResponse
+    , bcprPrinters
+    , bcprFailures
 
     -- ** UserGender
     , UserGender
@@ -849,6 +925,20 @@ module Network.Google.Directory
     , aaId
     , aaPrimaryEmail
 
+    -- ** Printer
+    , Printer
+    , printer
+    , pAuxiliaryMessages
+    , pUseDriverlessConfig
+    , pURI
+    , pMakeAndModel
+    , pName
+    , pDisplayName
+    , pId
+    , pDescription
+    , pCreateTime
+    , pOrgUnitId
+
     -- ** UsersGetProjection
     , UsersGetProjection (..)
 
@@ -862,6 +952,18 @@ module Network.Google.Directory
     , schDisplayName
     , schFields
 
+    -- ** PrinterModel
+    , PrinterModel
+    , printerModel
+    , pmManufacturer
+    , pmMakeAndModel
+    , pmDisplayName
+
+    -- ** BatchDeletePrintersRequest
+    , BatchDeletePrintersRequest
+    , batchDeletePrintersRequest
+    , bdprPrinterIds
+
     -- ** ChromeOSMoveDevicesToOu
     , ChromeOSMoveDevicesToOu
     , chromeOSMoveDevicesToOu
@@ -869,6 +971,13 @@ module Network.Google.Directory
 
     -- ** ResourcesBuildingsUpdateCoordinatesSource
     , ResourcesBuildingsUpdateCoordinatesSource (..)
+
+    -- ** AuxiliaryMessage
+    , AuxiliaryMessage
+    , auxiliaryMessage
+    , amSeverity
+    , amFieldMask
+    , amAuxiliaryMessage
 
     -- ** User
     , User
@@ -899,9 +1008,11 @@ module Network.Google.Directory
     , useIncludeInGlobalAddressList
     , useGender
     , usePhones
+    , useRecoveryEmail
     , useName
     , usePassword
     , useEmails
+    , useRecoveryPhone
     , useIms
     , useKeywords
     , useIsAdmin
@@ -966,6 +1077,11 @@ module Network.Google.Directory
     , mdaiDisplayName
     , mdaiPermission
 
+    -- ** BatchCreatePrintersRequest
+    , BatchCreatePrintersRequest
+    , batchCreatePrintersRequest
+    , bcprRequests
+
     -- ** ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
     , ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
     , chromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
@@ -996,6 +1112,17 @@ module Network.Google.Directory
     , uspkKey
     , uspkExpirationTimeUsec
 
+    -- ** DirectoryChromeosDevicesCommand
+    , DirectoryChromeosDevicesCommand
+    , directoryChromeosDevicesCommand
+    , dcdcState
+    , dcdcPayload
+    , dcdcCommandExpireTime
+    , dcdcIssueTime
+    , dcdcCommandId
+    , dcdcType
+    , dcdcCommandResult
+
     -- ** VerificationCodes
     , VerificationCodes
     , verificationCodes
@@ -1019,13 +1146,8 @@ module Network.Google.Directory
     , urType
     , urCustomType
 
-    -- ** TrustedApps
-    , TrustedApps
-    , trustedApps
-    , taEtag
-    , taNextPageToken
-    , taKind
-    , taTrustedApps
+    -- ** DirectoryChromeosDevicesCommandResultResult
+    , DirectoryChromeosDevicesCommandResultResult (..)
 
     -- ** UsersWatchSortOrder
     , UsersWatchSortOrder (..)
@@ -1080,11 +1202,19 @@ module Network.Google.Directory
     -- ** GroupsListSortOrder
     , GroupsListSortOrder (..)
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** ChromeOSDeviceActiveTimeRangesItem
     , ChromeOSDeviceActiveTimeRangesItem
     , chromeOSDeviceActiveTimeRangesItem
     , codatriDate
     , codatriActiveTime
+
+    -- ** DirectoryChromeosDevicesIssueCommandResponse
+    , DirectoryChromeosDevicesIssueCommandResponse
+    , directoryChromeosDevicesIssueCommandResponse
+    , dcdicrCommandId
 
     -- ** UserEmail
     , UserEmail
@@ -1211,18 +1341,6 @@ module Network.Google.Directory
     , memId
     , memType
 
-    -- ** AppAccessCollections
-    , AppAccessCollections
-    , appAccessCollections
-    , aacEtag
-    , aacResourceId
-    , aacEnforceSettingsForAndroidDrive
-    , aacResourceName
-    , aacKind
-    , aacTrustDomainOwnedApps
-    , aacBlockedAPIAccessBuckets
-    , aacErrorMessage
-
     -- ** UserCustomProperties
     , UserCustomProperties
     , userCustomProperties
@@ -1245,6 +1363,18 @@ module Network.Google.Directory
     , domDomainName
     , domIsPrimary
 
+    -- ** BatchDeletePrintersResponse
+    , BatchDeletePrintersResponse
+    , batchDeletePrintersResponse
+    , bPrinterIds
+    , bFailedPrinters
+
+    -- ** CreatePrinterRequest
+    , CreatePrinterRequest
+    , createPrinterRequest
+    , cprParent
+    , cprPrinter
+
     -- ** CalendarResources
     , CalendarResources
     , calendarResources
@@ -1261,15 +1391,6 @@ module Network.Google.Directory
 
     -- ** UsersWatchOrderBy
     , UsersWatchOrderBy (..)
-
-    -- ** Notifications
-    , Notifications
-    , notifications
-    , notEtag
-    , notNextPageToken
-    , notKind
-    , notItems
-    , notUnreadNotificationsCount
 
     -- ** ChromeosDevicesListProjection
     , ChromeosDevicesListProjection (..)
@@ -1299,6 +1420,14 @@ module Network.Google.Directory
     , sfsDisplayName
     , sfsMultiValued
 
+    -- ** ChromeOSDeviceScreenshotFilesItem
+    , ChromeOSDeviceScreenshotFilesItem
+    , chromeOSDeviceScreenshotFilesItem
+    , codsfiName
+    , codsfiDownloadURL
+    , codsfiType
+    , codsfiCreateTime
+
     -- ** ChromeOSDevices
     , ChromeOSDevices
     , chromeOSDevices
@@ -1311,15 +1440,6 @@ module Network.Google.Directory
     , MembersHasMember
     , membersHasMember
     , mhmIsMember
-
-    -- ** TrustedAppId
-    , TrustedAppId
-    , trustedAppId
-    , taiCertificateHashSHA256
-    , taiEtag
-    , taiKind
-    , taiCertificateHashSHA1
-    , taiAndroidPackageName
 
     -- ** UserExternalId
     , UserExternalId
@@ -1358,127 +1478,132 @@ module Network.Google.Directory
     , ddDomains
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Admin.Channels.Stop
-import           Network.Google.Resource.Directory.Asps.Delete
-import           Network.Google.Resource.Directory.Asps.Get
-import           Network.Google.Resource.Directory.Asps.List
-import           Network.Google.Resource.Directory.ChromeosDevices.Action
-import           Network.Google.Resource.Directory.ChromeosDevices.Get
-import           Network.Google.Resource.Directory.ChromeosDevices.List
-import           Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
-import           Network.Google.Resource.Directory.ChromeosDevices.Patch
-import           Network.Google.Resource.Directory.ChromeosDevices.Update
-import           Network.Google.Resource.Directory.Customers.Get
-import           Network.Google.Resource.Directory.Customers.Patch
-import           Network.Google.Resource.Directory.Customers.Update
-import           Network.Google.Resource.Directory.DomainAliases.Delete
-import           Network.Google.Resource.Directory.DomainAliases.Get
-import           Network.Google.Resource.Directory.DomainAliases.Insert
-import           Network.Google.Resource.Directory.DomainAliases.List
-import           Network.Google.Resource.Directory.Domains.Delete
-import           Network.Google.Resource.Directory.Domains.Get
-import           Network.Google.Resource.Directory.Domains.Insert
-import           Network.Google.Resource.Directory.Domains.List
-import           Network.Google.Resource.Directory.Groups.Aliases.Delete
-import           Network.Google.Resource.Directory.Groups.Aliases.Insert
-import           Network.Google.Resource.Directory.Groups.Aliases.List
-import           Network.Google.Resource.Directory.Groups.Delete
-import           Network.Google.Resource.Directory.Groups.Get
-import           Network.Google.Resource.Directory.Groups.Insert
-import           Network.Google.Resource.Directory.Groups.List
-import           Network.Google.Resource.Directory.Groups.Patch
-import           Network.Google.Resource.Directory.Groups.Update
-import           Network.Google.Resource.Directory.Members.Delete
-import           Network.Google.Resource.Directory.Members.Get
-import           Network.Google.Resource.Directory.Members.HasMember
-import           Network.Google.Resource.Directory.Members.Insert
-import           Network.Google.Resource.Directory.Members.List
-import           Network.Google.Resource.Directory.Members.Patch
-import           Network.Google.Resource.Directory.Members.Update
-import           Network.Google.Resource.Directory.MobileDevices.Action
-import           Network.Google.Resource.Directory.MobileDevices.Delete
-import           Network.Google.Resource.Directory.MobileDevices.Get
-import           Network.Google.Resource.Directory.MobileDevices.List
-import           Network.Google.Resource.Directory.Notifications.Delete
-import           Network.Google.Resource.Directory.Notifications.Get
-import           Network.Google.Resource.Directory.Notifications.List
-import           Network.Google.Resource.Directory.Notifications.Patch
-import           Network.Google.Resource.Directory.Notifications.Update
-import           Network.Google.Resource.Directory.OrgUnits.Delete
-import           Network.Google.Resource.Directory.OrgUnits.Get
-import           Network.Google.Resource.Directory.OrgUnits.Insert
-import           Network.Google.Resource.Directory.OrgUnits.List
-import           Network.Google.Resource.Directory.OrgUnits.Patch
-import           Network.Google.Resource.Directory.OrgUnits.Update
-import           Network.Google.Resource.Directory.Privileges.List
-import           Network.Google.Resource.Directory.ResolvedAppAccessSettings.GetSettings
-import           Network.Google.Resource.Directory.ResolvedAppAccessSettings.ListTrustedApps
-import           Network.Google.Resource.Directory.Resources.Buildings.Delete
-import           Network.Google.Resource.Directory.Resources.Buildings.Get
-import           Network.Google.Resource.Directory.Resources.Buildings.Insert
-import           Network.Google.Resource.Directory.Resources.Buildings.List
-import           Network.Google.Resource.Directory.Resources.Buildings.Patch
-import           Network.Google.Resource.Directory.Resources.Buildings.Update
-import           Network.Google.Resource.Directory.Resources.Calendars.Delete
-import           Network.Google.Resource.Directory.Resources.Calendars.Get
-import           Network.Google.Resource.Directory.Resources.Calendars.Insert
-import           Network.Google.Resource.Directory.Resources.Calendars.List
-import           Network.Google.Resource.Directory.Resources.Calendars.Patch
-import           Network.Google.Resource.Directory.Resources.Calendars.Update
-import           Network.Google.Resource.Directory.Resources.Features.Delete
-import           Network.Google.Resource.Directory.Resources.Features.Get
-import           Network.Google.Resource.Directory.Resources.Features.Insert
-import           Network.Google.Resource.Directory.Resources.Features.List
-import           Network.Google.Resource.Directory.Resources.Features.Patch
-import           Network.Google.Resource.Directory.Resources.Features.Rename
-import           Network.Google.Resource.Directory.Resources.Features.Update
-import           Network.Google.Resource.Directory.RoleAssignments.Delete
-import           Network.Google.Resource.Directory.RoleAssignments.Get
-import           Network.Google.Resource.Directory.RoleAssignments.Insert
-import           Network.Google.Resource.Directory.RoleAssignments.List
-import           Network.Google.Resource.Directory.Roles.Delete
-import           Network.Google.Resource.Directory.Roles.Get
-import           Network.Google.Resource.Directory.Roles.Insert
-import           Network.Google.Resource.Directory.Roles.List
-import           Network.Google.Resource.Directory.Roles.Patch
-import           Network.Google.Resource.Directory.Roles.Update
-import           Network.Google.Resource.Directory.Schemas.Delete
-import           Network.Google.Resource.Directory.Schemas.Get
-import           Network.Google.Resource.Directory.Schemas.Insert
-import           Network.Google.Resource.Directory.Schemas.List
-import           Network.Google.Resource.Directory.Schemas.Patch
-import           Network.Google.Resource.Directory.Schemas.Update
-import           Network.Google.Resource.Directory.Tokens.Delete
-import           Network.Google.Resource.Directory.Tokens.Get
-import           Network.Google.Resource.Directory.Tokens.List
-import           Network.Google.Resource.Directory.Users.Aliases.Delete
-import           Network.Google.Resource.Directory.Users.Aliases.Insert
-import           Network.Google.Resource.Directory.Users.Aliases.List
-import           Network.Google.Resource.Directory.Users.Aliases.Watch
-import           Network.Google.Resource.Directory.Users.Delete
-import           Network.Google.Resource.Directory.Users.Get
-import           Network.Google.Resource.Directory.Users.Insert
-import           Network.Google.Resource.Directory.Users.List
-import           Network.Google.Resource.Directory.Users.MakeAdmin
-import           Network.Google.Resource.Directory.Users.Patch
-import           Network.Google.Resource.Directory.Users.Photos.Delete
-import           Network.Google.Resource.Directory.Users.Photos.Get
-import           Network.Google.Resource.Directory.Users.Photos.Patch
-import           Network.Google.Resource.Directory.Users.Photos.Update
-import           Network.Google.Resource.Directory.Users.Undelete
-import           Network.Google.Resource.Directory.Users.Update
-import           Network.Google.Resource.Directory.Users.Watch
-import           Network.Google.Resource.Directory.VerificationCodes.Generate
-import           Network.Google.Resource.Directory.VerificationCodes.Invalidate
-import           Network.Google.Resource.Directory.VerificationCodes.List
+import Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Resource.Admin.Channels.Stop
+import Network.Google.Resource.Admin.Customer.Devices.Chromeos.Commands.Get
+import Network.Google.Resource.Admin.Customer.Devices.Chromeos.IssueCommand
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchCreatePrinters
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchDeletePrinters
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.Create
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.Delete
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.Get
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.List
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.ListPrinterModels
+import Network.Google.Resource.Admin.Customers.Chrome.Printers.Patch
+import Network.Google.Resource.Directory.Asps.Delete
+import Network.Google.Resource.Directory.Asps.Get
+import Network.Google.Resource.Directory.Asps.List
+import Network.Google.Resource.Directory.ChromeosDevices.Action
+import Network.Google.Resource.Directory.ChromeosDevices.Get
+import Network.Google.Resource.Directory.ChromeosDevices.List
+import Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
+import Network.Google.Resource.Directory.ChromeosDevices.Patch
+import Network.Google.Resource.Directory.ChromeosDevices.Update
+import Network.Google.Resource.Directory.Customers.Get
+import Network.Google.Resource.Directory.Customers.Patch
+import Network.Google.Resource.Directory.Customers.Update
+import Network.Google.Resource.Directory.DomainAliases.Delete
+import Network.Google.Resource.Directory.DomainAliases.Get
+import Network.Google.Resource.Directory.DomainAliases.Insert
+import Network.Google.Resource.Directory.DomainAliases.List
+import Network.Google.Resource.Directory.Domains.Delete
+import Network.Google.Resource.Directory.Domains.Get
+import Network.Google.Resource.Directory.Domains.Insert
+import Network.Google.Resource.Directory.Domains.List
+import Network.Google.Resource.Directory.Groups.Aliases.Delete
+import Network.Google.Resource.Directory.Groups.Aliases.Insert
+import Network.Google.Resource.Directory.Groups.Aliases.List
+import Network.Google.Resource.Directory.Groups.Delete
+import Network.Google.Resource.Directory.Groups.Get
+import Network.Google.Resource.Directory.Groups.Insert
+import Network.Google.Resource.Directory.Groups.List
+import Network.Google.Resource.Directory.Groups.Patch
+import Network.Google.Resource.Directory.Groups.Update
+import Network.Google.Resource.Directory.Members.Delete
+import Network.Google.Resource.Directory.Members.Get
+import Network.Google.Resource.Directory.Members.HasMember
+import Network.Google.Resource.Directory.Members.Insert
+import Network.Google.Resource.Directory.Members.List
+import Network.Google.Resource.Directory.Members.Patch
+import Network.Google.Resource.Directory.Members.Update
+import Network.Google.Resource.Directory.MobileDevices.Action
+import Network.Google.Resource.Directory.MobileDevices.Delete
+import Network.Google.Resource.Directory.MobileDevices.Get
+import Network.Google.Resource.Directory.MobileDevices.List
+import Network.Google.Resource.Directory.OrgUnits.Delete
+import Network.Google.Resource.Directory.OrgUnits.Get
+import Network.Google.Resource.Directory.OrgUnits.Insert
+import Network.Google.Resource.Directory.OrgUnits.List
+import Network.Google.Resource.Directory.OrgUnits.Patch
+import Network.Google.Resource.Directory.OrgUnits.Update
+import Network.Google.Resource.Directory.Privileges.List
+import Network.Google.Resource.Directory.Resources.Buildings.Delete
+import Network.Google.Resource.Directory.Resources.Buildings.Get
+import Network.Google.Resource.Directory.Resources.Buildings.Insert
+import Network.Google.Resource.Directory.Resources.Buildings.List
+import Network.Google.Resource.Directory.Resources.Buildings.Patch
+import Network.Google.Resource.Directory.Resources.Buildings.Update
+import Network.Google.Resource.Directory.Resources.Calendars.Delete
+import Network.Google.Resource.Directory.Resources.Calendars.Get
+import Network.Google.Resource.Directory.Resources.Calendars.Insert
+import Network.Google.Resource.Directory.Resources.Calendars.List
+import Network.Google.Resource.Directory.Resources.Calendars.Patch
+import Network.Google.Resource.Directory.Resources.Calendars.Update
+import Network.Google.Resource.Directory.Resources.Features.Delete
+import Network.Google.Resource.Directory.Resources.Features.Get
+import Network.Google.Resource.Directory.Resources.Features.Insert
+import Network.Google.Resource.Directory.Resources.Features.List
+import Network.Google.Resource.Directory.Resources.Features.Patch
+import Network.Google.Resource.Directory.Resources.Features.Rename
+import Network.Google.Resource.Directory.Resources.Features.Update
+import Network.Google.Resource.Directory.RoleAssignments.Delete
+import Network.Google.Resource.Directory.RoleAssignments.Get
+import Network.Google.Resource.Directory.RoleAssignments.Insert
+import Network.Google.Resource.Directory.RoleAssignments.List
+import Network.Google.Resource.Directory.Roles.Delete
+import Network.Google.Resource.Directory.Roles.Get
+import Network.Google.Resource.Directory.Roles.Insert
+import Network.Google.Resource.Directory.Roles.List
+import Network.Google.Resource.Directory.Roles.Patch
+import Network.Google.Resource.Directory.Roles.Update
+import Network.Google.Resource.Directory.Schemas.Delete
+import Network.Google.Resource.Directory.Schemas.Get
+import Network.Google.Resource.Directory.Schemas.Insert
+import Network.Google.Resource.Directory.Schemas.List
+import Network.Google.Resource.Directory.Schemas.Patch
+import Network.Google.Resource.Directory.Schemas.Update
+import Network.Google.Resource.Directory.Tokens.Delete
+import Network.Google.Resource.Directory.Tokens.Get
+import Network.Google.Resource.Directory.Tokens.List
+import Network.Google.Resource.Directory.TwoStepVerification.TurnOff
+import Network.Google.Resource.Directory.Users.Aliases.Delete
+import Network.Google.Resource.Directory.Users.Aliases.Insert
+import Network.Google.Resource.Directory.Users.Aliases.List
+import Network.Google.Resource.Directory.Users.Aliases.Watch
+import Network.Google.Resource.Directory.Users.Delete
+import Network.Google.Resource.Directory.Users.Get
+import Network.Google.Resource.Directory.Users.Insert
+import Network.Google.Resource.Directory.Users.List
+import Network.Google.Resource.Directory.Users.MakeAdmin
+import Network.Google.Resource.Directory.Users.Patch
+import Network.Google.Resource.Directory.Users.Photos.Delete
+import Network.Google.Resource.Directory.Users.Photos.Get
+import Network.Google.Resource.Directory.Users.Photos.Patch
+import Network.Google.Resource.Directory.Users.Photos.Update
+import Network.Google.Resource.Directory.Users.SignOut
+import Network.Google.Resource.Directory.Users.Undelete
+import Network.Google.Resource.Directory.Users.Update
+import Network.Google.Resource.Directory.Users.Watch
+import Network.Google.Resource.Directory.VerificationCodes.Generate
+import Network.Google.Resource.Directory.VerificationCodes.Invalidate
+import Network.Google.Resource.Directory.VerificationCodes.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Admin Directory API service.
+-- | Represents the entirety of the methods and resources available for the Admin SDK API service.
 type DirectoryAPI =
      PrivilegesListResource :<|>
        GroupsAliasesInsertResource
@@ -1500,6 +1625,16 @@ type DirectoryAPI =
        :<|> RolesGetResource
        :<|> RolesDeleteResource
        :<|> RolesUpdateResource
+       :<|> CustomersChromePrintersListResource
+       :<|> CustomersChromePrintersListPrinterModelsResource
+       :<|> CustomersChromePrintersPatchResource
+       :<|> CustomersChromePrintersGetResource
+       :<|> CustomersChromePrintersCreateResource
+       :<|>
+       CustomersChromePrintersBatchCreatePrintersResource
+       :<|>
+       CustomersChromePrintersBatchDeletePrintersResource
+       :<|> CustomersChromePrintersDeleteResource
        :<|> CustomersPatchResource
        :<|> CustomersGetResource
        :<|> CustomersUpdateResource
@@ -1514,6 +1649,7 @@ type DirectoryAPI =
        :<|> UsersInsertResource
        :<|> UsersListResource
        :<|> UsersUndeleteResource
+       :<|> UsersSignOutResource
        :<|> UsersPatchResource
        :<|> UsersGetResource
        :<|> UsersMakeAdminResource
@@ -1526,8 +1662,6 @@ type DirectoryAPI =
        :<|> SchemasGetResource
        :<|> SchemasDeleteResource
        :<|> SchemasUpdateResource
-       :<|> ResolvedAppAccessSettingsListTrustedAppsResource
-       :<|> ResolvedAppAccessSettingsGetSettingsResource
        :<|> TokensListResource
        :<|> TokensGetResource
        :<|> TokensDeleteResource
@@ -1566,6 +1700,9 @@ type DirectoryAPI =
        :<|> ResourcesFeaturesRenameResource
        :<|> ResourcesFeaturesDeleteResource
        :<|> ResourcesFeaturesUpdateResource
+       :<|> CustomerDevicesChromeosCommandsGetResource
+       :<|> CustomerDevicesChromeosIssueCommandResource
+       :<|> TwoStepVerificationTurnOffResource
        :<|> OrgUnitsInsertResource
        :<|> OrgUnitsListResource
        :<|> OrgUnitsPatchResource
@@ -1579,11 +1716,6 @@ type DirectoryAPI =
        :<|> DomainsListResource
        :<|> DomainsGetResource
        :<|> DomainsDeleteResource
-       :<|> NotificationsListResource
-       :<|> NotificationsPatchResource
-       :<|> NotificationsGetResource
-       :<|> NotificationsDeleteResource
-       :<|> NotificationsUpdateResource
        :<|> ChromeosDevicesListResource
        :<|> ChromeosDevicesMoveDevicesToOuResource
        :<|> ChromeosDevicesPatchResource

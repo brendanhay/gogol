@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -36,12 +36,14 @@ module Network.Google.DeploymentManager.Types
     , configFile
     , cfContent
 
+    -- * OperationWarningsItemCode
+    , OperationWarningsItemCode (..)
+
     -- * AuditConfig
     , AuditConfig
     , auditConfig
     , acService
     , acAuditLogConfigs
-    , acExemptedMembers
 
     -- * DeploymentsUpdateCreatePolicy
     , DeploymentsUpdateCreatePolicy (..)
@@ -66,6 +68,9 @@ module Network.Google.DeploymentManager.Types
     , ruwidiValue
     , ruwidiKey
 
+    -- * ResourceUpdateWarningsItemCode
+    , ResourceUpdateWarningsItemCode (..)
+
     -- * DeploymentsDeleteDeletePolicy
     , DeploymentsDeleteDeletePolicy (..)
 
@@ -74,12 +79,6 @@ module Network.Google.DeploymentManager.Types
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
-
-    -- * LogConfigCounterOptions
-    , LogConfigCounterOptions
-    , logConfigCounterOptions
-    , lccoField
-    , lccoMetric
 
     -- * DeploymentsUpdateDeletePolicy
     , DeploymentsUpdateDeletePolicy (..)
@@ -92,6 +91,7 @@ module Network.Google.DeploymentManager.Types
     , operation
     , oTargetId
     , oStatus
+    , oOperationGroupId
     , oInsertTime
     , oProgress
     , oStartTime
@@ -153,16 +153,14 @@ module Network.Google.DeploymentManager.Types
     , dleValue
     , dleKey
 
-    -- * Rule
-    , Rule
-    , rule
-    , rAction
-    , rNotIns
-    , rIns
-    , rLogConfigs
-    , rConditions
-    , rPermissions
-    , rDescription
+    -- * OperationStatus
+    , OperationStatus (..)
+
+    -- * ResourceUpdateState
+    , ResourceUpdateState (..)
+
+    -- * ResourceUpdateIntent
+    , ResourceUpdateIntent (..)
 
     -- * TestPermissionsRequest
     , TestPermissionsRequest
@@ -176,10 +174,12 @@ module Network.Google.DeploymentManager.Types
     , mLayout
     , mConfig
     , mExpandedConfig
+    , mManifestSizeBytes
     , mImports
     , mSelfLink
     , mName
     , mId
+    , mManifestSizeLimitBytes
 
     -- * ResourceUpdateWarningsItem
     , ResourceUpdateWarningsItem
@@ -193,11 +193,8 @@ module Network.Google.DeploymentManager.Types
     , deploymentsCancelPreviewRequest
     , dcprFingerprint
 
-    -- * LogConfigCloudAuditOptions
-    , LogConfigCloudAuditOptions
-    , logConfigCloudAuditOptions
-    , lccaoAuthorizationLoggingOptions
-    , lccaoLogName
+    -- * AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
 
     -- * Resource
     , Resource
@@ -215,10 +212,8 @@ module Network.Google.DeploymentManager.Types
     , rUpdate
     , rProperties
 
-    -- * LogConfigDataAccessOptions
-    , LogConfigDataAccessOptions
-    , logConfigDataAccessOptions
-    , lcdaoLogMode
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * DeploymentUpdateLabelEntry
     , DeploymentUpdateLabelEntry
@@ -251,20 +246,13 @@ module Network.Google.DeploymentManager.Types
     , gsprBindings
     , gsprPolicy
 
-    -- * AuthorizationLoggingOptions
-    , AuthorizationLoggingOptions
-    , authorizationLoggingOptions
-    , aloPermissionType
-
     -- * Policy
     , Policy
     , policy
     , pAuditConfigs
     , pEtag
-    , pRules
     , pVersion
     , pBindings
-    , pIAMOwned
 
     -- * Type
     , Type
@@ -310,15 +298,8 @@ module Network.Google.DeploymentManager.Types
     , resourceUpdateError
     , rueErrors
 
-    -- * Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cValue
-    , cSys
-    , cSvc
+    -- * ResourceWarningsItemCode
+    , ResourceWarningsItemCode (..)
 
     -- * DeploymentsListResponse
     , DeploymentsListResponse
@@ -332,13 +313,6 @@ module Network.Google.DeploymentManager.Types
     , rwiData
     , rwiCode
     , rwiMessage
-
-    -- * LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
 
     -- * ResourceAccessControl
     , ResourceAccessControl
@@ -385,21 +359,21 @@ module Network.Google.DeploymentManager.Types
     , DeploymentsInsertCreatePolicy (..)
     ) where
 
-import           Network.Google.DeploymentManager.Types.Product
-import           Network.Google.DeploymentManager.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types.Product
+import Network.Google.DeploymentManager.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Cloud Deployment Manager V2 API. This contains the host and root path used as a starting point for constructing service requests.
 deploymentManagerService :: ServiceConfig
 deploymentManagerService
   = defaultService (ServiceId "deploymentmanager:v2")
-      "www.googleapis.com"
+      "deploymentmanager.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
 cloudPlatformReadOnlyScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

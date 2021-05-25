@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an instance.
+-- Creates an instance. When creating from a backup, the capacity of the
+-- new instance needs to be equal to or larger than the capacity of the
+-- backup (and also equal to or larger than the minimum capacity of the
+-- tier).
 --
 -- /See:/ <https://cloud.google.com/filestore/ Cloud Filestore API Reference> for @file.projects.locations.instances.create@.
 module Network.Google.Resource.File.Projects.Locations.Instances.Create
@@ -43,8 +46,8 @@ module Network.Google.Resource.File.Projects.Locations.Instances.Create
     , plicCallback
     ) where
 
-import           Network.Google.File.Types
-import           Network.Google.Prelude
+import Network.Google.File.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @file.projects.locations.instances.create@ method which the
 -- 'ProjectsLocationsInstancesCreate' request conforms to.
@@ -61,19 +64,22 @@ type ProjectsLocationsInstancesCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Instance :> Post '[JSON] Operation
 
--- | Creates an instance.
+-- | Creates an instance. When creating from a backup, the capacity of the
+-- new instance needs to be equal to or larger than the capacity of the
+-- backup (and also equal to or larger than the minimum capacity of the
+-- tier).
 --
 -- /See:/ 'projectsLocationsInstancesCreate' smart constructor.
 data ProjectsLocationsInstancesCreate =
   ProjectsLocationsInstancesCreate'
-    { _plicParent         :: !Text
-    , _plicInstanceId     :: !(Maybe Text)
-    , _plicXgafv          :: !(Maybe Xgafv)
+    { _plicParent :: !Text
+    , _plicInstanceId :: !(Maybe Text)
+    , _plicXgafv :: !(Maybe Xgafv)
     , _plicUploadProtocol :: !(Maybe Text)
-    , _plicAccessToken    :: !(Maybe Text)
-    , _plicUploadType     :: !(Maybe Text)
-    , _plicPayload        :: !Instance
-    , _plicCallback       :: !(Maybe Text)
+    , _plicAccessToken :: !(Maybe Text)
+    , _plicUploadType :: !(Maybe Text)
+    , _plicPayload :: !Instance
+    , _plicCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,15 +120,15 @@ projectsLocationsInstancesCreate pPlicParent_ pPlicPayload_ =
     }
 
 
--- | The instance\'s project and location, in the format
+-- | Required. The instance\'s project and location, in the format
 -- projects\/{project_id}\/locations\/{location}. In Cloud Filestore,
 -- locations map to GCP zones, for example **us-west1-b**.
 plicParent :: Lens' ProjectsLocationsInstancesCreate Text
 plicParent
   = lens _plicParent (\ s a -> s{_plicParent = a})
 
--- | The name of the instance to create. The name must be unique for the
--- specified project and location.
+-- | Required. The name of the instance to create. The name must be unique
+-- for the specified project and location.
 plicInstanceId :: Lens' ProjectsLocationsInstancesCreate (Maybe Text)
 plicInstanceId
   = lens _plicInstanceId

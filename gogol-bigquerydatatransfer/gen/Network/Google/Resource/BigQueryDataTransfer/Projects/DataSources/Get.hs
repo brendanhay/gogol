@@ -23,7 +23,7 @@
 -- Retrieves a supported data source and returns its settings, which can be
 -- used for UI rendering.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.dataSources.get@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.dataSources.get@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.Get
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.Get
     , pdsgCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.dataSources.get@ method which the
 -- 'ProjectsDataSourcesGet' request conforms to.
@@ -63,12 +63,12 @@ type ProjectsDataSourcesGetResource =
 -- /See:/ 'projectsDataSourcesGet' smart constructor.
 data ProjectsDataSourcesGet =
   ProjectsDataSourcesGet'
-    { _pdsgXgafv          :: !(Maybe Xgafv)
+    { _pdsgXgafv :: !(Maybe Xgafv)
     , _pdsgUploadProtocol :: !(Maybe Text)
-    , _pdsgAccessToken    :: !(Maybe Text)
-    , _pdsgUploadType     :: !(Maybe Text)
-    , _pdsgName           :: !Text
-    , _pdsgCallback       :: !(Maybe Text)
+    , _pdsgAccessToken :: !(Maybe Text)
+    , _pdsgUploadType :: !(Maybe Text)
+    , _pdsgName :: !Text
+    , _pdsgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,8 +125,9 @@ pdsgUploadType
   = lens _pdsgUploadType
       (\ s a -> s{_pdsgUploadType = a})
 
--- | The field will contain name of the resource requested, for example:
--- \`projects\/{project_id}\/dataSources\/{data_source_id}\`
+-- | Required. The field will contain name of the resource requested, for
+-- example: \`projects\/{project_id}\/dataSources\/{data_source_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}\`
 pdsgName :: Lens' ProjectsDataSourcesGet Text
 pdsgName = lens _pdsgName (\ s a -> s{_pdsgName = a})
 

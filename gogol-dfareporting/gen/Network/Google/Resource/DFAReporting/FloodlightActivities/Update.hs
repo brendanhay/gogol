@@ -22,7 +22,7 @@
 --
 -- Updates an existing floodlight activity.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.floodlightActivities.update@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     , FloodlightActivitiesUpdate
 
     -- * Request Lenses
+    , fauXgafv
+    , fauUploadProtocol
+    , fauAccessToken
+    , fauUploadType
     , fauProFileId
     , fauPayload
+    , fauCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.update@ method which the
 -- 'FloodlightActivitiesUpdate' request conforms to.
 type FloodlightActivitiesUpdateResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] FloodlightActivity :>
-                   Put '[JSON] FloodlightActivity
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] FloodlightActivity :>
+                             Put '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesUpdate' smart constructor.
 data FloodlightActivitiesUpdate =
   FloodlightActivitiesUpdate'
-    { _fauProFileId :: !(Textual Int64)
-    , _fauPayload   :: !FloodlightActivity
+    { _fauXgafv :: !(Maybe Xgafv)
+    , _fauUploadProtocol :: !(Maybe Text)
+    , _fauAccessToken :: !(Maybe Text)
+    , _fauUploadType :: !(Maybe Text)
+    , _fauProFileId :: !(Textual Int64)
+    , _fauPayload :: !FloodlightActivity
+    , _fauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data FloodlightActivitiesUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fauXgafv'
+--
+-- * 'fauUploadProtocol'
+--
+-- * 'fauAccessToken'
+--
+-- * 'fauUploadType'
+--
 -- * 'fauProFileId'
 --
 -- * 'fauPayload'
+--
+-- * 'fauCallback'
 floodlightActivitiesUpdate
     :: Int64 -- ^ 'fauProFileId'
     -> FloodlightActivity -- ^ 'fauPayload'
     -> FloodlightActivitiesUpdate
 floodlightActivitiesUpdate pFauProFileId_ pFauPayload_ =
   FloodlightActivitiesUpdate'
-    {_fauProFileId = _Coerce # pFauProFileId_, _fauPayload = pFauPayload_}
+    { _fauXgafv = Nothing
+    , _fauUploadProtocol = Nothing
+    , _fauAccessToken = Nothing
+    , _fauUploadType = Nothing
+    , _fauProFileId = _Coerce # pFauProFileId_
+    , _fauPayload = pFauPayload_
+    , _fauCallback = Nothing
+    }
 
+
+-- | V1 error format.
+fauXgafv :: Lens' FloodlightActivitiesUpdate (Maybe Xgafv)
+fauXgafv = lens _fauXgafv (\ s a -> s{_fauXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+fauUploadProtocol :: Lens' FloodlightActivitiesUpdate (Maybe Text)
+fauUploadProtocol
+  = lens _fauUploadProtocol
+      (\ s a -> s{_fauUploadProtocol = a})
+
+-- | OAuth access token.
+fauAccessToken :: Lens' FloodlightActivitiesUpdate (Maybe Text)
+fauAccessToken
+  = lens _fauAccessToken
+      (\ s a -> s{_fauAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+fauUploadType :: Lens' FloodlightActivitiesUpdate (Maybe Text)
+fauUploadType
+  = lens _fauUploadType
+      (\ s a -> s{_fauUploadType = a})
 
 -- | User profile ID associated with this request.
 fauProFileId :: Lens' FloodlightActivitiesUpdate Int64
@@ -90,6 +144,11 @@ fauPayload :: Lens' FloodlightActivitiesUpdate FloodlightActivity
 fauPayload
   = lens _fauPayload (\ s a -> s{_fauPayload = a})
 
+-- | JSONP
+fauCallback :: Lens' FloodlightActivitiesUpdate (Maybe Text)
+fauCallback
+  = lens _fauCallback (\ s a -> s{_fauCallback = a})
+
 instance GoogleRequest FloodlightActivitiesUpdate
          where
         type Rs FloodlightActivitiesUpdate =
@@ -97,7 +156,12 @@ instance GoogleRequest FloodlightActivitiesUpdate
         type Scopes FloodlightActivitiesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivitiesUpdate'{..}
-          = go _fauProFileId (Just AltJSON) _fauPayload
+          = go _fauProFileId _fauXgafv _fauUploadProtocol
+              _fauAccessToken
+              _fauUploadType
+              _fauCallback
+              (Just AltJSON)
+              _fauPayload
               dFAReportingService
           where go
                   = buildClient

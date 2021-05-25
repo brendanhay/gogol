@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.DeleteSnapshots
     , pdsSnapshotId
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.deleteSnapshots@ method which the
 -- 'ProjectsDeleteSnapshots' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsDeleteSnapshotsResource =
 -- /See:/ 'projectsDeleteSnapshots' smart constructor.
 data ProjectsDeleteSnapshots =
   ProjectsDeleteSnapshots'
-    { _pdsXgafv          :: !(Maybe Xgafv)
+    { _pdsXgafv :: !(Maybe Xgafv)
     , _pdsUploadProtocol :: !(Maybe Text)
-    , _pdsLocation       :: !(Maybe Text)
-    , _pdsAccessToken    :: !(Maybe Text)
-    , _pdsUploadType     :: !(Maybe Text)
-    , _pdsProjectId      :: !Text
-    , _pdsCallback       :: !(Maybe Text)
-    , _pdsSnapshotId     :: !(Maybe Text)
+    , _pdsLocation :: !(Maybe Text)
+    , _pdsAccessToken :: !(Maybe Text)
+    , _pdsUploadType :: !(Maybe Text)
+    , _pdsProjectId :: !Text
+    , _pdsCallback :: !(Maybe Text)
+    , _pdsSnapshotId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

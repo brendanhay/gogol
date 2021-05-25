@@ -36,8 +36,8 @@ module Network.Google.Resource.Calendar.Settings.Get
     , sgSetting
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.settings.get@ method which the
 -- 'SettingsGet' request conforms to.

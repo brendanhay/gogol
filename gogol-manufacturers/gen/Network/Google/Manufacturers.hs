@@ -80,6 +80,9 @@ module Network.Google.Manufacturers
     , dsDestination
     , dsStatus
 
+    -- ** AccountsProductsGetInclude
+    , AccountsProductsGetInclude (..)
+
     -- ** ImageStatus
     , ImageStatus (..)
 
@@ -88,6 +91,9 @@ module Network.Google.Manufacturers
     , count
     , cValue
     , cUnit
+
+    -- ** AccountsProductsListInclude
+    , AccountsProductsListInclude (..)
 
     -- ** Capacity
     , Capacity
@@ -112,6 +118,7 @@ module Network.Google.Manufacturers
     , aFlavor
     , aPattern
     , aSizeSystem
+    , aProductHighlight
     , aMaterial
     , aFormat
     , aProductType
@@ -128,6 +135,7 @@ module Network.Google.Manufacturers
     , aGender
     , aSuggestedRetailPrice
     , aItemGroupId
+    , aRichProductContent
     , aTargetClientId
     , aSizeType
     , aReleaseDate
@@ -180,12 +188,12 @@ module Network.Google.Manufacturers
     , lprProducts
     ) where
 
-import           Network.Google.Manufacturers.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Manufacturers.Accounts.Products.Delete
-import           Network.Google.Resource.Manufacturers.Accounts.Products.Get
-import           Network.Google.Resource.Manufacturers.Accounts.Products.List
-import           Network.Google.Resource.Manufacturers.Accounts.Products.Update
+import Network.Google.Prelude
+import Network.Google.Manufacturers.Types
+import Network.Google.Resource.Manufacturers.Accounts.Products.Delete
+import Network.Google.Resource.Manufacturers.Accounts.Products.Get
+import Network.Google.Resource.Manufacturers.Accounts.Products.List
+import Network.Google.Resource.Manufacturers.Accounts.Products.Update
 
 {- $resources
 TODO

@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an edit for an app. Creating a new edit will automatically
--- delete any of your previous edits so this method need only be called if
--- you want to preemptively abandon an edit.
+-- Deletes an app edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.delete@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.delete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Delete
     (
     -- * REST Resource
@@ -35,12 +33,17 @@ module Network.Google.Resource.AndroidPublisher.Edits.Delete
     , EditsDelete
 
     -- * Request Lenses
+    , edXgafv
+    , edUploadProtocol
     , edPackageName
+    , edAccessToken
+    , edUploadType
     , edEditId
+    , edCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.delete@ method which the
 -- 'EditsDelete' request conforms to.
@@ -51,17 +54,25 @@ type EditsDeleteResource =
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes an edit for an app. Creating a new edit will automatically
--- delete any of your previous edits so this method need only be called if
--- you want to preemptively abandon an edit.
+-- | Deletes an app edit.
 --
 -- /See:/ 'editsDelete' smart constructor.
 data EditsDelete =
   EditsDelete'
-    { _edPackageName :: !Text
-    , _edEditId      :: !Text
+    { _edXgafv :: !(Maybe Xgafv)
+    , _edUploadProtocol :: !(Maybe Text)
+    , _edPackageName :: !Text
+    , _edAccessToken :: !(Maybe Text)
+    , _edUploadType :: !(Maybe Text)
+    , _edEditId :: !Text
+    , _edCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,34 +81,82 @@ data EditsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'edXgafv'
+--
+-- * 'edUploadProtocol'
+--
 -- * 'edPackageName'
 --
+-- * 'edAccessToken'
+--
+-- * 'edUploadType'
+--
 -- * 'edEditId'
+--
+-- * 'edCallback'
 editsDelete
     :: Text -- ^ 'edPackageName'
     -> Text -- ^ 'edEditId'
     -> EditsDelete
 editsDelete pEdPackageName_ pEdEditId_ =
-  EditsDelete' {_edPackageName = pEdPackageName_, _edEditId = pEdEditId_}
+  EditsDelete'
+    { _edXgafv = Nothing
+    , _edUploadProtocol = Nothing
+    , _edPackageName = pEdPackageName_
+    , _edAccessToken = Nothing
+    , _edUploadType = Nothing
+    , _edEditId = pEdEditId_
+    , _edCallback = Nothing
+    }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+edXgafv :: Lens' EditsDelete (Maybe Xgafv)
+edXgafv = lens _edXgafv (\ s a -> s{_edXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+edUploadProtocol :: Lens' EditsDelete (Maybe Text)
+edUploadProtocol
+  = lens _edUploadProtocol
+      (\ s a -> s{_edUploadProtocol = a})
+
+-- | Package name of the app.
 edPackageName :: Lens' EditsDelete Text
 edPackageName
   = lens _edPackageName
       (\ s a -> s{_edPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+edAccessToken :: Lens' EditsDelete (Maybe Text)
+edAccessToken
+  = lens _edAccessToken
+      (\ s a -> s{_edAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+edUploadType :: Lens' EditsDelete (Maybe Text)
+edUploadType
+  = lens _edUploadType (\ s a -> s{_edUploadType = a})
+
+-- | Identifier of the edit.
 edEditId :: Lens' EditsDelete Text
 edEditId = lens _edEditId (\ s a -> s{_edEditId = a})
+
+-- | JSONP
+edCallback :: Lens' EditsDelete (Maybe Text)
+edCallback
+  = lens _edCallback (\ s a -> s{_edCallback = a})
 
 instance GoogleRequest EditsDelete where
         type Rs EditsDelete = ()
         type Scopes EditsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsDelete'{..}
-          = go _edPackageName _edEditId (Just AltJSON)
+          = go _edPackageName _edEditId _edXgafv
+              _edUploadProtocol
+              _edAccessToken
+              _edUploadType
+              _edCallback
+              (Just AltJSON)
               androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy EditsDeleteResource)

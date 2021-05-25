@@ -45,15 +45,17 @@ module Network.Google.Resource.Testing.TestEnvironmentCatalog.Get
     , tecgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types
+import Network.Google.Prelude
+import Network.Google.Testing.Types
 
 -- | A resource alias for @testing.testEnvironmentCatalog.get@ method which the
 -- 'TestEnvironmentCatalogGet' request conforms to.
 type TestEnvironmentCatalogGetResource =
      "v1" :>
        "testEnvironmentCatalog" :>
-         Capture "environmentType" Text :>
+         Capture "environmentType"
+           TestEnvironmentCatalogGetEnvironmentType
+           :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
@@ -71,13 +73,13 @@ type TestEnvironmentCatalogGetResource =
 -- /See:/ 'testEnvironmentCatalogGet' smart constructor.
 data TestEnvironmentCatalogGet =
   TestEnvironmentCatalogGet'
-    { _tecgXgafv           :: !(Maybe Xgafv)
-    , _tecgUploadProtocol  :: !(Maybe Text)
-    , _tecgAccessToken     :: !(Maybe Text)
-    , _tecgUploadType      :: !(Maybe Text)
-    , _tecgEnvironmentType :: !Text
-    , _tecgProjectId       :: !(Maybe Text)
-    , _tecgCallback        :: !(Maybe Text)
+    { _tecgXgafv :: !(Maybe Xgafv)
+    , _tecgUploadProtocol :: !(Maybe Text)
+    , _tecgAccessToken :: !(Maybe Text)
+    , _tecgUploadType :: !(Maybe Text)
+    , _tecgEnvironmentType :: !TestEnvironmentCatalogGetEnvironmentType
+    , _tecgProjectId :: !(Maybe Text)
+    , _tecgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -100,7 +102,7 @@ data TestEnvironmentCatalogGet =
 --
 -- * 'tecgCallback'
 testEnvironmentCatalogGet
-    :: Text -- ^ 'tecgEnvironmentType'
+    :: TestEnvironmentCatalogGetEnvironmentType -- ^ 'tecgEnvironmentType'
     -> TestEnvironmentCatalogGet
 testEnvironmentCatalogGet pTecgEnvironmentType_ =
   TestEnvironmentCatalogGet'
@@ -138,7 +140,7 @@ tecgUploadType
       (\ s a -> s{_tecgUploadType = a})
 
 -- | Required. The type of environment that should be listed.
-tecgEnvironmentType :: Lens' TestEnvironmentCatalogGet Text
+tecgEnvironmentType :: Lens' TestEnvironmentCatalogGet TestEnvironmentCatalogGetEnvironmentType
 tecgEnvironmentType
   = lens _tecgEnvironmentType
       (\ s a -> s{_tecgEnvironmentType = a})

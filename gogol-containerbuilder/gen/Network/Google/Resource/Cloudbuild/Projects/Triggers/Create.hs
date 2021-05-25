@@ -33,6 +33,7 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
     , ProjectsTriggersCreate
 
     -- * Request Lenses
+    , ptcParent
     , ptcXgafv
     , ptcUploadProtocol
     , ptcAccessToken
@@ -42,8 +43,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
     , ptcCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.triggers.create@ method which the
 -- 'ProjectsTriggersCreate' request conforms to.
@@ -52,27 +53,29 @@ type ProjectsTriggersCreateResource =
        "projects" :>
          Capture "projectId" Text :>
            "triggers" :>
-             QueryParam "$.xgafv" Xgafv :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] BuildTrigger :>
-                           Post '[JSON] BuildTrigger
+             QueryParam "parent" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] BuildTrigger :>
+                             Post '[JSON] BuildTrigger
 
 -- | Creates a new \`BuildTrigger\`. This API is experimental.
 --
 -- /See:/ 'projectsTriggersCreate' smart constructor.
 data ProjectsTriggersCreate =
   ProjectsTriggersCreate'
-    { _ptcXgafv          :: !(Maybe Xgafv)
+    { _ptcParent :: !(Maybe Text)
+    , _ptcXgafv :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
-    , _ptcAccessToken    :: !(Maybe Text)
-    , _ptcUploadType     :: !(Maybe Text)
-    , _ptcPayload        :: !BuildTrigger
-    , _ptcProjectId      :: !Text
-    , _ptcCallback       :: !(Maybe Text)
+    , _ptcAccessToken :: !(Maybe Text)
+    , _ptcUploadType :: !(Maybe Text)
+    , _ptcPayload :: !BuildTrigger
+    , _ptcProjectId :: !Text
+    , _ptcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,6 +83,8 @@ data ProjectsTriggersCreate =
 -- | Creates a value of 'ProjectsTriggersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptcParent'
 --
 -- * 'ptcXgafv'
 --
@@ -100,7 +105,8 @@ projectsTriggersCreate
     -> ProjectsTriggersCreate
 projectsTriggersCreate pPtcPayload_ pPtcProjectId_ =
   ProjectsTriggersCreate'
-    { _ptcXgafv = Nothing
+    { _ptcParent = Nothing
+    , _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcAccessToken = Nothing
     , _ptcUploadType = Nothing
@@ -109,6 +115,12 @@ projectsTriggersCreate pPtcPayload_ pPtcProjectId_ =
     , _ptcCallback = Nothing
     }
 
+
+-- | The parent resource where this trigger will be created. Format:
+-- \`projects\/{project}\/locations\/{location}\`
+ptcParent :: Lens' ProjectsTriggersCreate (Maybe Text)
+ptcParent
+  = lens _ptcParent (\ s a -> s{_ptcParent = a})
 
 -- | V1 error format.
 ptcXgafv :: Lens' ProjectsTriggersCreate (Maybe Xgafv)
@@ -137,7 +149,7 @@ ptcPayload :: Lens' ProjectsTriggersCreate BuildTrigger
 ptcPayload
   = lens _ptcPayload (\ s a -> s{_ptcPayload = a})
 
--- | ID of the project for which to configure automatic builds.
+-- | Required. ID of the project for which to configure automatic builds.
 ptcProjectId :: Lens' ProjectsTriggersCreate Text
 ptcProjectId
   = lens _ptcProjectId (\ s a -> s{_ptcProjectId = a})
@@ -152,7 +164,8 @@ instance GoogleRequest ProjectsTriggersCreate where
         type Scopes ProjectsTriggersCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsTriggersCreate'{..}
-          = go _ptcProjectId _ptcXgafv _ptcUploadProtocol
+          = go _ptcProjectId _ptcParent _ptcXgafv
+              _ptcUploadProtocol
               _ptcAccessToken
               _ptcUploadType
               _ptcCallback

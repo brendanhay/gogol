@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the list of IPs that checkers run from
+-- Returns the list of IP addresses that checkers run from
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.uptimeCheckIps.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.uptimeCheckIps.list@.
 module Network.Google.Resource.Monitoring.UptimeCheckIPs.List
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Monitoring.UptimeCheckIPs.List
     , ucilCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.uptimeCheckIps.list@ method which the
 -- 'UptimeCheckIPsList' request conforms to.
@@ -60,18 +60,18 @@ type UptimeCheckIPsListResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListUptimeCheckIPsResponse
 
--- | Returns the list of IPs that checkers run from
+-- | Returns the list of IP addresses that checkers run from
 --
 -- /See:/ 'uptimeCheckIPsList' smart constructor.
 data UptimeCheckIPsList =
   UptimeCheckIPsList'
-    { _ucilXgafv          :: !(Maybe Xgafv)
+    { _ucilXgafv :: !(Maybe Xgafv)
     , _ucilUploadProtocol :: !(Maybe Text)
-    , _ucilAccessToken    :: !(Maybe Text)
-    , _ucilUploadType     :: !(Maybe Text)
-    , _ucilPageToken      :: !(Maybe Text)
-    , _ucilPageSize       :: !(Maybe (Textual Int32))
-    , _ucilCallback       :: !(Maybe Text)
+    , _ucilAccessToken :: !(Maybe Text)
+    , _ucilUploadType :: !(Maybe Text)
+    , _ucilPageToken :: !(Maybe Text)
+    , _ucilPageSize :: !(Maybe (Textual Int32))
+    , _ucilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

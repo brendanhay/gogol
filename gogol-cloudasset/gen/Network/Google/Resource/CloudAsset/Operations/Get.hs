@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/quickstart-cloud-asset-inventory Cloud Asset API Reference> for @cloudasset.operations.get@.
+-- /See:/ <https://cloud.google.com/asset-inventory/docs/quickstart Cloud Asset API Reference> for @cloudasset.operations.get@.
 module Network.Google.Resource.CloudAsset.Operations.Get
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.CloudAsset.Operations.Get
     , ogCallback
     ) where
 
-import           Network.Google.CloudAsset.Types
-import           Network.Google.Prelude
+import Network.Google.CloudAsset.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudasset.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
 type OperationsGetResource =
-     "v1" :>
+     "v1p7beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,12 +65,12 @@ type OperationsGetResource =
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet =
   OperationsGet'
-    { _ogXgafv          :: !(Maybe Xgafv)
+    { _ogXgafv :: !(Maybe Xgafv)
     , _ogUploadProtocol :: !(Maybe Text)
-    , _ogAccessToken    :: !(Maybe Text)
-    , _ogUploadType     :: !(Maybe Text)
-    , _ogName           :: !Text
-    , _ogCallback       :: !(Maybe Text)
+    , _ogAccessToken :: !(Maybe Text)
+    , _ogUploadType :: !(Maybe Text)
+    , _ogName :: !Text
+    , _ogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

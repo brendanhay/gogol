@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Checks whether an item is accessible by specified principal.
+-- Checks whether an item is accessible by specified principal. **Note:**
+-- This API requires an admin account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.checkAccess@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.checkAccess@.
 module Network.Google.Resource.CloudSearch.Debug.Datasources.Items.CheckAccess
     (
     -- * REST Resource
@@ -43,8 +44,8 @@ module Network.Google.Resource.CloudSearch.Debug.Datasources.Items.CheckAccess
     , ddicaCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.debug.datasources.items.checkAccess@ method which the
 -- 'DebugDatasourcesItemsCheckAccess' request conforms to.
@@ -62,19 +63,20 @@ type DebugDatasourcesItemsCheckAccessResource =
                          ReqBody '[JSON] Principal :>
                            Post '[JSON] CheckAccessResponse
 
--- | Checks whether an item is accessible by specified principal.
+-- | Checks whether an item is accessible by specified principal. **Note:**
+-- This API requires an admin account to execute.
 --
 -- /See:/ 'debugDatasourcesItemsCheckAccess' smart constructor.
 data DebugDatasourcesItemsCheckAccess =
   DebugDatasourcesItemsCheckAccess'
-    { _ddicaXgafv                       :: !(Maybe Xgafv)
-    , _ddicaUploadProtocol              :: !(Maybe Text)
-    , _ddicaAccessToken                 :: !(Maybe Text)
-    , _ddicaUploadType                  :: !(Maybe Text)
-    , _ddicaPayload                     :: !Principal
-    , _ddicaName                        :: !Text
+    { _ddicaXgafv :: !(Maybe Xgafv)
+    , _ddicaUploadProtocol :: !(Maybe Text)
+    , _ddicaAccessToken :: !(Maybe Text)
+    , _ddicaUploadType :: !(Maybe Text)
+    , _ddicaPayload :: !Principal
+    , _ddicaName :: !Text
     , _ddicaDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _ddicaCallback                    :: !(Maybe Text)
+    , _ddicaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

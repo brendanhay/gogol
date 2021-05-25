@@ -55,8 +55,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     , asilCallback
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.list@ method which the
 -- 'AccountsStoreInfosList' request conforms to.
@@ -94,24 +94,24 @@ type AccountsStoreInfosListResource =
 -- /See:/ 'accountsStoreInfosList' smart constructor.
 data AccountsStoreInfosList =
   AccountsStoreInfosList'
-    { _asilPphNames       :: !(Maybe [Text])
-    , _asilXgafv          :: !(Maybe Xgafv)
-    , _asilStudioNames    :: !(Maybe [Text])
-    , _asilVideoIds       :: !(Maybe [Text])
+    { _asilPphNames :: !(Maybe [Text])
+    , _asilXgafv :: !(Maybe Xgafv)
+    , _asilStudioNames :: !(Maybe [Text])
+    , _asilVideoIds :: !(Maybe [Text])
     , _asilUploadProtocol :: !(Maybe Text)
-    , _asilPp             :: !Bool
-    , _asilAccessToken    :: !(Maybe Text)
-    , _asilSeasonIds      :: !(Maybe [Text])
-    , _asilMids           :: !(Maybe [Text])
-    , _asilUploadType     :: !(Maybe Text)
-    , _asilCountries      :: !(Maybe [Text])
-    , _asilVideoId        :: !(Maybe Text)
-    , _asilAccountId      :: !Text
-    , _asilBearerToken    :: !(Maybe Text)
-    , _asilName           :: !(Maybe Text)
-    , _asilPageToken      :: !(Maybe Text)
-    , _asilPageSize       :: !(Maybe (Textual Int32))
-    , _asilCallback       :: !(Maybe Text)
+    , _asilPp :: !Bool
+    , _asilAccessToken :: !(Maybe Text)
+    , _asilSeasonIds :: !(Maybe [Text])
+    , _asilMids :: !(Maybe [Text])
+    , _asilUploadType :: !(Maybe Text)
+    , _asilCountries :: !(Maybe [Text])
+    , _asilVideoId :: !(Maybe Text)
+    , _asilAccountId :: !Text
+    , _asilBearerToken :: !(Maybe Text)
+    , _asilName :: !(Maybe Text)
+    , _asilPageToken :: !(Maybe Text)
+    , _asilPageSize :: !(Maybe (Textual Int32))
+    , _asilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

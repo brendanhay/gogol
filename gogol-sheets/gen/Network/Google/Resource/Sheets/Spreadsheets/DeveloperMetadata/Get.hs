@@ -44,8 +44,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Get
     , sdmgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.developerMetadata.get@ method which the
 -- 'SpreadsheetsDeveloperMetadataGet' request conforms to.
@@ -70,13 +70,13 @@ type SpreadsheetsDeveloperMetadataGetResource =
 -- /See:/ 'spreadsheetsDeveloperMetadataGet' smart constructor.
 data SpreadsheetsDeveloperMetadataGet =
   SpreadsheetsDeveloperMetadataGet'
-    { _sdmgXgafv          :: !(Maybe Xgafv)
+    { _sdmgXgafv :: !(Maybe Xgafv)
     , _sdmgUploadProtocol :: !(Maybe Text)
-    , _sdmgMetadataId     :: !(Textual Int32)
-    , _sdmgAccessToken    :: !(Maybe Text)
-    , _sdmgSpreadsheetId  :: !Text
-    , _sdmgUploadType     :: !(Maybe Text)
-    , _sdmgCallback       :: !(Maybe Text)
+    , _sdmgMetadataId :: !(Textual Int32)
+    , _sdmgAccessToken :: !(Maybe Text)
+    , _sdmgSpreadsheetId :: !Text
+    , _sdmgUploadType :: !(Maybe Text)
+    , _sdmgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

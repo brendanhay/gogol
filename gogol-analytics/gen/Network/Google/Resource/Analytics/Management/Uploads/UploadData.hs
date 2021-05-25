@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
     , muudAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.uploads.uploadData@ method which the
 -- 'ManagementUploadsUploadData' request conforms to.
@@ -76,9 +76,9 @@ type ManagementUploadsUploadDataResource =
 -- /See:/ 'managementUploadsUploadData' smart constructor.
 data ManagementUploadsUploadData =
   ManagementUploadsUploadData'
-    { _muudWebPropertyId      :: !Text
+    { _muudWebPropertyId :: !Text
     , _muudCustomDataSourceId :: !Text
-    , _muudAccountId          :: !Text
+    , _muudAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

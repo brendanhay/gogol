@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.C
     , plkrckckvadCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricDecrypt@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecryptResour
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt =
   ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'
-    { _plkrckckvadXgafv          :: !(Maybe Xgafv)
+    { _plkrckckvadXgafv :: !(Maybe Xgafv)
     , _plkrckckvadUploadProtocol :: !(Maybe Text)
-    , _plkrckckvadAccessToken    :: !(Maybe Text)
-    , _plkrckckvadUploadType     :: !(Maybe Text)
-    , _plkrckckvadPayload        :: !AsymmetricDecryptRequest
-    , _plkrckckvadName           :: !Text
-    , _plkrckckvadCallback       :: !(Maybe Text)
+    , _plkrckckvadAccessToken :: !(Maybe Text)
+    , _plkrckckvadUploadType :: !(Maybe Text)
+    , _plkrckckvadPayload :: !AsymmetricDecryptRequest
+    , _plkrckckvadName :: !Text
+    , _plkrckckvadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

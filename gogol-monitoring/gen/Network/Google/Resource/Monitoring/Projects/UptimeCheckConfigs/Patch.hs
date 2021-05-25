@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an uptime check configuration. You can either replace the entire
+-- Updates an Uptime check configuration. You can either replace the entire
 -- configuration with a new one or replace only certain fields in the
 -- current configuration by specifying the fields to be updated via
--- \"updateMask\". Returns the updated configuration.
+-- updateMask. Returns the updated configuration.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.patch@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.patch@.
 module Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Patch
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Patch
     , puccpCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.uptimeCheckConfigs.patch@ method which the
 -- 'ProjectsUptimeCheckConfigsPatch' request conforms to.
@@ -64,22 +64,22 @@ type ProjectsUptimeCheckConfigsPatchResource =
                        ReqBody '[JSON] UptimeCheckConfig :>
                          Patch '[JSON] UptimeCheckConfig
 
--- | Updates an uptime check configuration. You can either replace the entire
+-- | Updates an Uptime check configuration. You can either replace the entire
 -- configuration with a new one or replace only certain fields in the
 -- current configuration by specifying the fields to be updated via
--- \"updateMask\". Returns the updated configuration.
+-- updateMask. Returns the updated configuration.
 --
 -- /See:/ 'projectsUptimeCheckConfigsPatch' smart constructor.
 data ProjectsUptimeCheckConfigsPatch =
   ProjectsUptimeCheckConfigsPatch'
-    { _puccpXgafv          :: !(Maybe Xgafv)
+    { _puccpXgafv :: !(Maybe Xgafv)
     , _puccpUploadProtocol :: !(Maybe Text)
-    , _puccpUpdateMask     :: !(Maybe GFieldMask)
-    , _puccpAccessToken    :: !(Maybe Text)
-    , _puccpUploadType     :: !(Maybe Text)
-    , _puccpPayload        :: !UptimeCheckConfig
-    , _puccpName           :: !Text
-    , _puccpCallback       :: !(Maybe Text)
+    , _puccpUpdateMask :: !(Maybe GFieldMask)
+    , _puccpAccessToken :: !(Maybe Text)
+    , _puccpUploadType :: !(Maybe Text)
+    , _puccpPayload :: !UptimeCheckConfig
+    , _puccpName :: !Text
+    , _puccpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,7 +131,7 @@ puccpUploadProtocol
   = lens _puccpUploadProtocol
       (\ s a -> s{_puccpUploadProtocol = a})
 
--- | Optional. If present, only the listed fields in the current uptime check
+-- | Optional. If present, only the listed fields in the current Uptime check
 -- configuration are updated with values from the new configuration. If
 -- this field is empty, then the current configuration is completely
 -- replaced with the new configuration.
@@ -157,11 +157,13 @@ puccpPayload :: Lens' ProjectsUptimeCheckConfigsPatch UptimeCheckConfig
 puccpPayload
   = lens _puccpPayload (\ s a -> s{_puccpPayload = a})
 
--- | A unique resource name for this UptimeCheckConfig. The format
--- is:projects\/[PROJECT_ID]\/uptimeCheckConfigs\/[UPTIME_CHECK_ID].This
--- field should be omitted when creating the uptime check configuration; on
--- create, the resource name is assigned by the server and included in the
--- response.
+-- | A unique resource name for this Uptime check configuration. The format
+-- is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/uptimeCheckConfigs\/[UPTIME_CHECK_ID]
+-- [PROJECT_ID_OR_NUMBER] is the Workspace host project associated with the
+-- Uptime check.This field should be omitted when creating the Uptime check
+-- configuration; on create, the resource name is assigned by the server
+-- and included in the response.
 puccpName :: Lens' ProjectsUptimeCheckConfigsPatch Text
 puccpName
   = lens _puccpName (\ s a -> s{_puccpName = a})

@@ -22,10 +22,7 @@
 --
 -- Lists managed services. Returns all public services. For authenticated
 -- users, also returns all services the calling user has
--- \"servicemanagement.services.get\" permission for. **BETA:** If the
--- caller specifies the \`consumer_id\`, it returns only the services
--- enabled on the consumer. The \`consumer_id\` must have the format of
--- \"project:{PROJECT-ID}\".
+-- \"servicemanagement.services.get\" permission for.
 --
 -- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.list@.
 module Network.Google.Resource.ServiceManagement.Services.List
@@ -49,8 +46,8 @@ module Network.Google.Resource.ServiceManagement.Services.List
     , slCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.list@ method which the
 -- 'ServicesList' request conforms to.
@@ -71,23 +68,20 @@ type ServicesListResource =
 
 -- | Lists managed services. Returns all public services. For authenticated
 -- users, also returns all services the calling user has
--- \"servicemanagement.services.get\" permission for. **BETA:** If the
--- caller specifies the \`consumer_id\`, it returns only the services
--- enabled on the consumer. The \`consumer_id\` must have the format of
--- \"project:{PROJECT-ID}\".
+-- \"servicemanagement.services.get\" permission for.
 --
 -- /See:/ 'servicesList' smart constructor.
 data ServicesList =
   ServicesList'
-    { _slXgafv             :: !(Maybe Xgafv)
-    , _slUploadProtocol    :: !(Maybe Text)
-    , _slAccessToken       :: !(Maybe Text)
-    , _slUploadType        :: !(Maybe Text)
-    , _slPageToken         :: !(Maybe Text)
+    { _slXgafv :: !(Maybe Xgafv)
+    , _slUploadProtocol :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slPageToken :: !(Maybe Text)
     , _slProducerProjectId :: !(Maybe Text)
-    , _slConsumerId        :: !(Maybe Text)
-    , _slPageSize          :: !(Maybe (Textual Int32))
-    , _slCallback          :: !(Maybe Text)
+    , _slConsumerId :: !(Maybe Text)
+    , _slPageSize :: !(Maybe (Textual Int32))
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

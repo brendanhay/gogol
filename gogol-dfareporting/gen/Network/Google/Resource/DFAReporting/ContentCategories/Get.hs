@@ -22,7 +22,7 @@
 --
 -- Gets one content category by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.contentCategories.get@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Get
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Get
     , ContentCategoriesGet
 
     -- * Request Lenses
+    , ccgXgafv
+    , ccgUploadProtocol
+    , ccgAccessToken
+    , ccgUploadType
     , ccgProFileId
     , ccgId
+    , ccgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.get@ method which the
 -- 'ContentCategoriesGet' request conforms to.
 type ContentCategoriesGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
                Capture "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ContentCategory
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ContentCategory
 
 -- | Gets one content category by ID.
 --
 -- /See:/ 'contentCategoriesGet' smart constructor.
 data ContentCategoriesGet =
   ContentCategoriesGet'
-    { _ccgProFileId :: !(Textual Int64)
-    , _ccgId        :: !(Textual Int64)
+    { _ccgXgafv :: !(Maybe Xgafv)
+    , _ccgUploadProtocol :: !(Maybe Text)
+    , _ccgAccessToken :: !(Maybe Text)
+    , _ccgUploadType :: !(Maybe Text)
+    , _ccgProFileId :: !(Textual Int64)
+    , _ccgId :: !(Textual Int64)
+    , _ccgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data ContentCategoriesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ccgXgafv'
+--
+-- * 'ccgUploadProtocol'
+--
+-- * 'ccgAccessToken'
+--
+-- * 'ccgUploadType'
+--
 -- * 'ccgProFileId'
 --
 -- * 'ccgId'
+--
+-- * 'ccgCallback'
 contentCategoriesGet
     :: Int64 -- ^ 'ccgProFileId'
     -> Int64 -- ^ 'ccgId'
     -> ContentCategoriesGet
 contentCategoriesGet pCcgProFileId_ pCcgId_ =
   ContentCategoriesGet'
-    {_ccgProFileId = _Coerce # pCcgProFileId_, _ccgId = _Coerce # pCcgId_}
+    { _ccgXgafv = Nothing
+    , _ccgUploadProtocol = Nothing
+    , _ccgAccessToken = Nothing
+    , _ccgUploadType = Nothing
+    , _ccgProFileId = _Coerce # pCcgProFileId_
+    , _ccgId = _Coerce # pCcgId_
+    , _ccgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ccgXgafv :: Lens' ContentCategoriesGet (Maybe Xgafv)
+ccgXgafv = lens _ccgXgafv (\ s a -> s{_ccgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ccgUploadProtocol :: Lens' ContentCategoriesGet (Maybe Text)
+ccgUploadProtocol
+  = lens _ccgUploadProtocol
+      (\ s a -> s{_ccgUploadProtocol = a})
+
+-- | OAuth access token.
+ccgAccessToken :: Lens' ContentCategoriesGet (Maybe Text)
+ccgAccessToken
+  = lens _ccgAccessToken
+      (\ s a -> s{_ccgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ccgUploadType :: Lens' ContentCategoriesGet (Maybe Text)
+ccgUploadType
+  = lens _ccgUploadType
+      (\ s a -> s{_ccgUploadType = a})
 
 -- | User profile ID associated with this request.
 ccgProFileId :: Lens' ContentCategoriesGet Int64
@@ -90,12 +144,22 @@ ccgId :: Lens' ContentCategoriesGet Int64
 ccgId
   = lens _ccgId (\ s a -> s{_ccgId = a}) . _Coerce
 
+-- | JSONP
+ccgCallback :: Lens' ContentCategoriesGet (Maybe Text)
+ccgCallback
+  = lens _ccgCallback (\ s a -> s{_ccgCallback = a})
+
 instance GoogleRequest ContentCategoriesGet where
         type Rs ContentCategoriesGet = ContentCategory
         type Scopes ContentCategoriesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesGet'{..}
-          = go _ccgProFileId _ccgId (Just AltJSON)
+          = go _ccgProFileId _ccgId _ccgXgafv
+              _ccgUploadProtocol
+              _ccgAccessToken
+              _ccgUploadType
+              _ccgCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

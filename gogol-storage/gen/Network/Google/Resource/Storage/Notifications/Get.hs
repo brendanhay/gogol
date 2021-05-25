@@ -36,10 +36,11 @@ module Network.Google.Resource.Storage.Notifications.Get
     , ngNotification
     , ngBucket
     , ngUserProject
+    , ngProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.notifications.get@ method which the
 -- 'NotificationsGet' request conforms to.
@@ -51,7 +52,8 @@ type NotificationsGetResource =
              "notificationConfigs" :>
                Capture "notification" Text :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Notification
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Notification
 
 -- | View a notification configuration.
 --
@@ -59,8 +61,9 @@ type NotificationsGetResource =
 data NotificationsGet =
   NotificationsGet'
     { _ngNotification :: !Text
-    , _ngBucket       :: !Text
-    , _ngUserProject  :: !(Maybe Text)
+    , _ngBucket :: !Text
+    , _ngUserProject :: !(Maybe Text)
+    , _ngProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,6 +77,8 @@ data NotificationsGet =
 -- * 'ngBucket'
 --
 -- * 'ngUserProject'
+--
+-- * 'ngProvisionalUserProject'
 notificationsGet
     :: Text -- ^ 'ngNotification'
     -> Text -- ^ 'ngBucket'
@@ -83,6 +88,7 @@ notificationsGet pNgNotification_ pNgBucket_ =
     { _ngNotification = pNgNotification_
     , _ngBucket = pNgBucket_
     , _ngUserProject = Nothing
+    , _ngProvisionalUserProject = Nothing
     }
 
 
@@ -103,6 +109,13 @@ ngUserProject
   = lens _ngUserProject
       (\ s a -> s{_ngUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+ngProvisionalUserProject :: Lens' NotificationsGet (Maybe Text)
+ngProvisionalUserProject
+  = lens _ngProvisionalUserProject
+      (\ s a -> s{_ngProvisionalUserProject = a})
+
 instance GoogleRequest NotificationsGet where
         type Rs NotificationsGet = Notification
         type Scopes NotificationsGet =
@@ -113,6 +126,7 @@ instance GoogleRequest NotificationsGet where
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient NotificationsGet'{..}
           = go _ngBucket _ngNotification _ngUserProject
+              _ngProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

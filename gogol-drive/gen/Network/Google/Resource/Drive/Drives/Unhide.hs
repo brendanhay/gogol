@@ -36,8 +36,8 @@ module Network.Google.Resource.Drive.Drives.Unhide
     , duDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.drives.unhide@ method which the
 -- 'DrivesUnhide' request conforms to.

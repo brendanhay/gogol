@@ -43,8 +43,8 @@ module Network.Google.Resource.Script.Projects.Versions.List
     , pvlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.versions.list@ method which the
 -- 'ProjectsVersionsList' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsVersionsListResource =
 -- /See:/ 'projectsVersionsList' smart constructor.
 data ProjectsVersionsList =
   ProjectsVersionsList'
-    { _pvlXgafv          :: !(Maybe Xgafv)
+    { _pvlXgafv :: !(Maybe Xgafv)
     , _pvlUploadProtocol :: !(Maybe Text)
-    , _pvlAccessToken    :: !(Maybe Text)
-    , _pvlUploadType     :: !(Maybe Text)
-    , _pvlScriptId       :: !Text
-    , _pvlPageToken      :: !(Maybe Text)
-    , _pvlPageSize       :: !(Maybe (Textual Int32))
-    , _pvlCallback       :: !(Maybe Text)
+    , _pvlAccessToken :: !(Maybe Text)
+    , _pvlUploadType :: !(Maybe Text)
+    , _pvlScriptId :: !Text
+    , _pvlPageToken :: !(Maybe Text)
+    , _pvlPageSize :: !(Maybe (Textual Int32))
+    , _pvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

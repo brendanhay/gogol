@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks a comment as not spam.
+-- Marks a comment as not spam by blog id, post id and comment id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.approve@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.approve@.
 module Network.Google.Resource.Blogger.Comments.Approve
     (
     -- * REST Resource
@@ -33,36 +33,50 @@ module Network.Google.Resource.Blogger.Comments.Approve
     , CommentsApprove
 
     -- * Request Lenses
+    , caXgafv
+    , caUploadProtocol
+    , caAccessToken
+    , caUploadType
     , caBlogId
     , caPostId
     , caCommentId
+    , caCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.approve@ method which the
 -- 'CommentsApprove' request conforms to.
 type CommentsApproveResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     "approve" :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Comment
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               "comments" :>
+                 Capture "commentId" Text :>
+                   "approve" :>
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
--- | Marks a comment as not spam.
+-- | Marks a comment as not spam by blog id, post id and comment id.
 --
 -- /See:/ 'commentsApprove' smart constructor.
 data CommentsApprove =
   CommentsApprove'
-    { _caBlogId    :: !Text
-    , _caPostId    :: !Text
+    { _caXgafv :: !(Maybe Xgafv)
+    , _caUploadProtocol :: !(Maybe Text)
+    , _caAccessToken :: !(Maybe Text)
+    , _caUploadType :: !(Maybe Text)
+    , _caBlogId :: !Text
+    , _caPostId :: !Text
     , _caCommentId :: !Text
+    , _caCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,11 +85,21 @@ data CommentsApprove =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'caXgafv'
+--
+-- * 'caUploadProtocol'
+--
+-- * 'caAccessToken'
+--
+-- * 'caUploadType'
+--
 -- * 'caBlogId'
 --
 -- * 'caPostId'
 --
 -- * 'caCommentId'
+--
+-- * 'caCallback'
 commentsApprove
     :: Text -- ^ 'caBlogId'
     -> Text -- ^ 'caPostId'
@@ -83,31 +107,64 @@ commentsApprove
     -> CommentsApprove
 commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
   CommentsApprove'
-    { _caBlogId = pCaBlogId_
+    { _caXgafv = Nothing
+    , _caUploadProtocol = Nothing
+    , _caAccessToken = Nothing
+    , _caUploadType = Nothing
+    , _caBlogId = pCaBlogId_
     , _caPostId = pCaPostId_
     , _caCommentId = pCaCommentId_
+    , _caCallback = Nothing
     }
 
 
--- | The ID of the Blog.
+-- | V1 error format.
+caXgafv :: Lens' CommentsApprove (Maybe Xgafv)
+caXgafv = lens _caXgafv (\ s a -> s{_caXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+caUploadProtocol :: Lens' CommentsApprove (Maybe Text)
+caUploadProtocol
+  = lens _caUploadProtocol
+      (\ s a -> s{_caUploadProtocol = a})
+
+-- | OAuth access token.
+caAccessToken :: Lens' CommentsApprove (Maybe Text)
+caAccessToken
+  = lens _caAccessToken
+      (\ s a -> s{_caAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+caUploadType :: Lens' CommentsApprove (Maybe Text)
+caUploadType
+  = lens _caUploadType (\ s a -> s{_caUploadType = a})
+
 caBlogId :: Lens' CommentsApprove Text
 caBlogId = lens _caBlogId (\ s a -> s{_caBlogId = a})
 
--- | The ID of the Post.
 caPostId :: Lens' CommentsApprove Text
 caPostId = lens _caPostId (\ s a -> s{_caPostId = a})
 
--- | The ID of the comment to mark as not spam.
 caCommentId :: Lens' CommentsApprove Text
 caCommentId
   = lens _caCommentId (\ s a -> s{_caCommentId = a})
+
+-- | JSONP
+caCallback :: Lens' CommentsApprove (Maybe Text)
+caCallback
+  = lens _caCallback (\ s a -> s{_caCallback = a})
 
 instance GoogleRequest CommentsApprove where
         type Rs CommentsApprove = Comment
         type Scopes CommentsApprove =
              '["https://www.googleapis.com/auth/blogger"]
         requestClient CommentsApprove'{..}
-          = go _caBlogId _caPostId _caCommentId (Just AltJSON)
+          = go _caBlogId _caPostId _caCommentId _caXgafv
+              _caUploadProtocol
+              _caAccessToken
+              _caUploadType
+              _caCallback
+              (Just AltJSON)
               bloggerService
           where go
                   = buildClient

@@ -23,12 +23,12 @@
 -- Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
--- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the Kubelet creates
--- routes for each node to allow the containers on that node to communicate
--- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range the cluster
--- is using.
+-- network](https:\/\/cloud.google.com\/compute\/docs\/networks-and-firewalls#networks).
+-- One firewall is added for the cluster. After cluster creation, the
+-- Kubelet creates routes for each node to allow the containers on that
+-- node to communicate with all other instances in the cluster. Finally, an
+-- entry is added to the project\'s global metadata indicating which CIDR
+-- range the cluster is using.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.create@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.Create
@@ -50,8 +50,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.Create
     , plccCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.create@ method which the
 -- 'ProjectsLocationsClustersCreate' request conforms to.
@@ -71,23 +71,23 @@ type ProjectsLocationsClustersCreateResource =
 -- | Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
--- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the Kubelet creates
--- routes for each node to allow the containers on that node to communicate
--- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range the cluster
--- is using.
+-- network](https:\/\/cloud.google.com\/compute\/docs\/networks-and-firewalls#networks).
+-- One firewall is added for the cluster. After cluster creation, the
+-- Kubelet creates routes for each node to allow the containers on that
+-- node to communicate with all other instances in the cluster. Finally, an
+-- entry is added to the project\'s global metadata indicating which CIDR
+-- range the cluster is using.
 --
 -- /See:/ 'projectsLocationsClustersCreate' smart constructor.
 data ProjectsLocationsClustersCreate =
   ProjectsLocationsClustersCreate'
-    { _plccParent         :: !Text
-    , _plccXgafv          :: !(Maybe Xgafv)
+    { _plccParent :: !Text
+    , _plccXgafv :: !(Maybe Xgafv)
     , _plccUploadProtocol :: !(Maybe Text)
-    , _plccAccessToken    :: !(Maybe Text)
-    , _plccUploadType     :: !(Maybe Text)
-    , _plccPayload        :: !CreateClusterRequest
-    , _plccCallback       :: !(Maybe Text)
+    , _plccAccessToken :: !(Maybe Text)
+    , _plccUploadType :: !(Maybe Text)
+    , _plccPayload :: !CreateClusterRequest
+    , _plccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,7 +126,7 @@ projectsLocationsClustersCreate pPlccParent_ pPlccPayload_ =
 
 
 -- | The parent (project and location) where the cluster will be created.
--- Specified in the format \'projects\/*\/locations\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\`.
 plccParent :: Lens' ProjectsLocationsClustersCreate Text
 plccParent
   = lens _plccParent (\ s a -> s{_plccParent = a})

@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Get
     , bagCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.get@ method which the
 -- 'BillingAccountsGet' request conforms to.
@@ -66,12 +66,12 @@ type BillingAccountsGetResource =
 -- /See:/ 'billingAccountsGet' smart constructor.
 data BillingAccountsGet =
   BillingAccountsGet'
-    { _bagXgafv          :: !(Maybe Xgafv)
+    { _bagXgafv :: !(Maybe Xgafv)
     , _bagUploadProtocol :: !(Maybe Text)
-    , _bagAccessToken    :: !(Maybe Text)
-    , _bagUploadType     :: !(Maybe Text)
-    , _bagName           :: !Text
-    , _bagCallback       :: !(Maybe Text)
+    , _bagAccessToken :: !(Maybe Text)
+    , _bagUploadType :: !(Maybe Text)
+    , _bagName :: !Text
+    , _bagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,8 +127,8 @@ bagUploadType
   = lens _bagUploadType
       (\ s a -> s{_bagUploadType = a})
 
--- | The resource name of the billing account to retrieve. For example,
--- \`billingAccounts\/012345-567890-ABCDEF\`.
+-- | Required. The resource name of the billing account to retrieve. For
+-- example, \`billingAccounts\/012345-567890-ABCDEF\`.
 bagName :: Lens' BillingAccountsGet Text
 bagName = lens _bagName (\ s a -> s{_bagName = a})
 
@@ -140,7 +140,9 @@ bagCallback
 instance GoogleRequest BillingAccountsGet where
         type Rs BillingAccountsGet = BillingAccount
         type Scopes BillingAccountsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsGet'{..}
           = go _bagName _bagXgafv _bagUploadProtocol
               _bagAccessToken

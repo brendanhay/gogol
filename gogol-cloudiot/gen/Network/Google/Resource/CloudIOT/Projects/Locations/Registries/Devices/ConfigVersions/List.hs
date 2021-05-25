@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Co
     , plrdcvlCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.devices.configVersions.list@ method which the
 -- 'ProjectsLocationsRegistriesDevicesConfigVersionsList' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsLocationsRegistriesDevicesConfigVersionsListResource
 -- /See:/ 'projectsLocationsRegistriesDevicesConfigVersionsList' smart constructor.
 data ProjectsLocationsRegistriesDevicesConfigVersionsList =
   ProjectsLocationsRegistriesDevicesConfigVersionsList'
-    { _plrdcvlXgafv          :: !(Maybe Xgafv)
+    { _plrdcvlXgafv :: !(Maybe Xgafv)
     , _plrdcvlUploadProtocol :: !(Maybe Text)
-    , _plrdcvlAccessToken    :: !(Maybe Text)
-    , _plrdcvlUploadType     :: !(Maybe Text)
-    , _plrdcvlNumVersions    :: !(Maybe (Textual Int32))
-    , _plrdcvlName           :: !Text
-    , _plrdcvlCallback       :: !(Maybe Text)
+    , _plrdcvlAccessToken :: !(Maybe Text)
+    , _plrdcvlUploadType :: !(Maybe Text)
+    , _plrdcvlNumVersions :: !(Maybe (Textual Int32))
+    , _plrdcvlName :: !Text
+    , _plrdcvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,7 +143,7 @@ plrdcvlNumVersions
       (\ s a -> s{_plrdcvlNumVersions = a})
       . mapping _Coerce
 
--- | The name of the device. For example,
+-- | Required. The name of the device. For example,
 -- \`projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/device0\`
 -- or
 -- \`projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/{num_id}\`.

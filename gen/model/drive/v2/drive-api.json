@@ -6,19 +6,19 @@
           "description": "See, edit, create, and delete all of your Google Drive files"
         },
         "https://www.googleapis.com/auth/drive.appdata": {
-          "description": "View and manage its own configuration data in your Google Drive"
+          "description": "See, create, and delete its own configuration data in your Google Drive"
         },
         "https://www.googleapis.com/auth/drive.apps.readonly": {
           "description": "View your Google Drive apps"
         },
         "https://www.googleapis.com/auth/drive.file": {
-          "description": "View and manage Google Drive files and folders that you have opened or created with this app"
+          "description": "See, edit, create, and delete only the specific Google Drive files you use with this app"
         },
         "https://www.googleapis.com/auth/drive.metadata": {
           "description": "View and manage metadata of files in your Google Drive"
         },
         "https://www.googleapis.com/auth/drive.metadata.readonly": {
-          "description": "View metadata for files in your Google Drive"
+          "description": "See information about your Google Drive files"
         },
         "https://www.googleapis.com/auth/drive.photos.readonly": {
           "description": "View the photos, videos and albums in your Google Photos"
@@ -38,7 +38,7 @@
   "description": "Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/drive/",
-  "etag": "\"VPK3KBfpaEgZ16pozGOoMYfKc0U/hsVC9ZXMn4MD97V8ehCW4FF2Fws\"",
+  "etag": "\"uWj2hSb4GVjzdDlAnRd2gbM1ZQ8/7zuaUfXirFVWkGho-Mu7JhTtJxI\"",
   "icons": {
     "x16": "https://ssl.gstatic.com/docs/doclist/images/drive_icon_16.png",
     "x32": "https://ssl.gstatic.com/docs/doclist/images/drive_icon_32.png"
@@ -219,7 +219,7 @@
               "type": "string"
             },
             "driveId": {
-              "description": "The shared drive from which the change will be returned.",
+              "description": "The shared drive from which the change is returned.",
               "location": "query",
               "type": "string"
             },
@@ -262,7 +262,7 @@
           "id": "drive.changes.getStartPageToken",
           "parameters": {
             "driveId": {
-              "description": "The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive will be returned.",
+              "description": "The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.",
               "location": "query",
               "type": "string"
             },
@@ -305,7 +305,7 @@
           "id": "drive.changes.list",
           "parameters": {
             "driveId": {
-              "description": "The shared drive from which changes will be returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
+              "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
               "location": "query",
               "type": "string"
             },
@@ -327,9 +327,14 @@
               "location": "query",
               "type": "boolean"
             },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
+              "type": "string"
+            },
             "includeSubscribed": {
               "default": "true",
-              "description": "Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive will be omitted from the result.",
+              "description": "Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive are omitted from the result.",
               "location": "query",
               "type": "boolean"
             },
@@ -403,7 +408,7 @@
           "id": "drive.changes.watch",
           "parameters": {
             "driveId": {
-              "description": "The shared drive from which changes will be returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
+              "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
               "location": "query",
               "type": "string"
             },
@@ -425,9 +430,14 @@
               "location": "query",
               "type": "boolean"
             },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
+              "type": "string"
+            },
             "includeSubscribed": {
               "default": "true",
-              "description": "Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive will be omitted from the result.",
+              "description": "Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive are omitted from the result.",
               "location": "query",
               "type": "boolean"
             },
@@ -542,6 +552,12 @@
               "required": true,
               "type": "string"
             },
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
+              "location": "query",
+              "type": "boolean"
+            },
             "folderId": {
               "description": "The ID of the folder.",
               "location": "path",
@@ -599,6 +615,12 @@
             "folderId"
           ],
           "parameters": {
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.",
+              "location": "query",
+              "type": "boolean"
+            },
             "folderId": {
               "description": "The ID of the folder.",
               "location": "path",
@@ -831,7 +853,7 @@
           ]
         },
         "patch": {
-          "description": "Updates an existing comment. This method supports patch semantics.",
+          "description": "Updates an existing comment.",
           "httpMethod": "PATCH",
           "id": "drive.comments.patch",
           "parameterOrder": [
@@ -1008,7 +1030,7 @@
           "parameters": {
             "maxResults": {
               "default": "10",
-              "description": "Maximum number of shared drives to return.",
+              "description": "Maximum number of shared drives to return per page.",
               "format": "int32",
               "location": "query",
               "maximum": "100",
@@ -1101,7 +1123,7 @@
     "files": {
       "methods": {
         "copy": {
-          "description": "Creates a copy of the specified file.",
+          "description": "Creates a copy of the specified file. Folders cannot be copied.",
           "httpMethod": "POST",
           "id": "drive.files.copy",
           "parameterOrder": [
@@ -1110,7 +1132,13 @@
           "parameters": {
             "convert": {
               "default": "false",
-              "description": "Whether to convert this file to the corresponding Google Docs format.",
+              "description": "Whether to convert this file to the corresponding Docs Editors format.",
+              "location": "query",
+              "type": "boolean"
+            },
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.",
               "location": "query",
               "type": "boolean"
             },
@@ -1118,6 +1146,11 @@
               "description": "The ID of the file to copy.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "ocr": {
@@ -1197,6 +1230,12 @@
             "fileId"
           ],
           "parameters": {
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
+              "location": "query",
+              "type": "boolean"
+            },
             "fileId": {
               "description": "The ID of the file to delete.",
               "location": "path",
@@ -1227,6 +1266,14 @@
           "description": "Permanently deletes all of the user's trashed files.",
           "httpMethod": "DELETE",
           "id": "drive.files.emptyTrash",
+          "parameters": {
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
+              "location": "query",
+              "type": "boolean"
+            }
+          },
           "path": "files/trash",
           "scopes": [
             "https://www.googleapis.com/auth/drive"
@@ -1263,7 +1310,7 @@
           "supportsMediaDownload": true
         },
         "generateIds": {
-          "description": "Generates a set of file IDs which can be provided in insert requests.",
+          "description": "Generates a set of file IDs which can be provided in insert or copy requests.",
           "httpMethod": "GET",
           "id": "drive.files.generateIds",
           "parameters": {
@@ -1278,7 +1325,13 @@
             },
             "space": {
               "default": "drive",
-              "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.",
+              "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')",
+              "location": "query",
+              "type": "string"
+            },
+            "type": {
+              "default": "files",
+              "description": "The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')",
               "location": "query",
               "type": "string"
             }
@@ -1294,7 +1347,7 @@
           ]
         },
         "get": {
-          "description": "Gets a file's metadata by ID.",
+          "description": "Gets a file's metadata or content by ID.",
           "httpMethod": "GET",
           "id": "drive.files.get",
           "parameterOrder": [
@@ -1311,6 +1364,11 @@
               "description": "The ID for the file in question.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "projection": {
@@ -1390,9 +1448,20 @@
           "parameters": {
             "convert": {
               "default": "false",
-              "description": "Whether to convert this file to the corresponding Google Docs format.",
+              "description": "Whether to convert this file to the corresponding Docs Editors format.",
               "location": "query",
               "type": "boolean"
+            },
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. Creating files in multiple folders is no longer supported.",
+              "location": "query",
+              "type": "boolean"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
+              "type": "string"
             },
             "ocr": {
               "default": "false",
@@ -1476,7 +1545,7 @@
           "id": "drive.files.list",
           "parameters": {
             "corpora": {
-              "description": "Bodies of items (files/documents) to which the query applies. Supported bodies are 'default', 'domain', 'drive' and 'allDrives'. Prefer 'default' or 'drive' to 'allDrives' for efficiency.",
+              "description": "Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.",
               "location": "query",
               "type": "string"
             },
@@ -1503,6 +1572,11 @@
               "description": "Whether both My Drive and shared drive items should be included in results.",
               "location": "query",
               "type": "boolean"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
+              "type": "string"
             },
             "includeTeamDriveItems": {
               "default": "false",
@@ -1603,10 +1677,21 @@
               "location": "query",
               "type": "boolean"
             },
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.",
+              "location": "query",
+              "type": "boolean"
+            },
             "fileId": {
               "description": "The ID of the file to update.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "modifiedDateBehavior": {
@@ -1632,7 +1717,7 @@
             },
             "newRevision": {
               "default": "true",
-              "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center.",
+              "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center. Note that this field is ignored if there is no payload in the request.",
               "location": "query",
               "type": "boolean"
             },
@@ -1649,7 +1734,7 @@
             },
             "pinned": {
               "default": "false",
-              "description": "Whether to pin the new revision. A file can have a maximum of 200 pinned revisions.",
+              "description": "Whether to pin the new revision. A file can have a maximum of 200 pinned revisions. Note that this field is ignored if there is no payload in the request.",
               "location": "query",
               "type": "boolean"
             },
@@ -1729,6 +1814,11 @@
               "required": true,
               "type": "string"
             },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
+              "type": "string"
+            },
             "supportsAllDrives": {
               "default": "false",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
@@ -1755,7 +1845,7 @@
           ]
         },
         "trash": {
-          "description": "Moves a file to the trash. The currently authenticated user must own the file or be at least a fileOrganizer on the parent for shared drive files.",
+          "description": "Moves a file to the trash. The currently authenticated user must own the file or be at least a fileOrganizer on the parent for shared drive files. Only the owner may trash a file. The trashed item is excluded from all files.list responses returned for any user who does not own the file. However, all users with access to the file can see the trashed item metadata in an API response. All users with access can copy, download, export, and share the file.",
           "httpMethod": "POST",
           "id": "drive.files.trash",
           "parameterOrder": [
@@ -1766,6 +1856,11 @@
               "description": "The ID of the file to trash.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "supportsAllDrives": {
@@ -1793,7 +1888,7 @@
           ]
         },
         "untrash": {
-          "description": "Restores a file from the trash.",
+          "description": "Restores a file from the trash. The currently authenticated user must own the file or be at least a fileOrganizer on the parent for shared drive files. Only the owner may untrash a file.",
           "httpMethod": "POST",
           "id": "drive.files.untrash",
           "parameterOrder": [
@@ -1804,6 +1899,11 @@
               "description": "The ID of the file to untrash.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "supportsAllDrives": {
@@ -1865,10 +1965,21 @@
               "location": "query",
               "type": "boolean"
             },
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.",
+              "location": "query",
+              "type": "boolean"
+            },
             "fileId": {
               "description": "The ID of the file to update.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "modifiedDateBehavior": {
@@ -1894,7 +2005,7 @@
             },
             "newRevision": {
               "default": "true",
-              "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center.",
+              "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center. Note that this field is ignored if there is no payload in the request.",
               "location": "query",
               "type": "boolean"
             },
@@ -1911,7 +2022,7 @@
             },
             "pinned": {
               "default": "false",
-              "description": "Whether to pin the new revision. A file can have a maximum of 200 pinned revisions.",
+              "description": "Whether to pin the new revision. A file can have a maximum of 200 pinned revisions. Note that this field is ignored if there is no payload in the request.",
               "location": "query",
               "type": "boolean"
             },
@@ -1998,6 +2109,11 @@
               "required": true,
               "type": "string"
             },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
+              "type": "string"
+            },
             "projection": {
               "description": "This parameter is deprecated and has no function.",
               "enum": [
@@ -2069,6 +2185,12 @@
             "parentId"
           ],
           "parameters": {
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
+              "location": "query",
+              "type": "boolean"
+            },
             "fileId": {
               "description": "The ID of the file.",
               "location": "path",
@@ -2132,6 +2254,12 @@
             "fileId"
           ],
           "parameters": {
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.",
+              "location": "query",
+              "type": "boolean"
+            },
             "fileId": {
               "description": "The ID of the file.",
               "location": "path",
@@ -2339,11 +2467,23 @@
               "location": "query",
               "type": "string"
             },
+            "enforceSingleParent": {
+              "default": "false",
+              "description": "Deprecated. See moveToNewOwnersRoot for details.",
+              "location": "query",
+              "type": "boolean"
+            },
             "fileId": {
               "description": "The ID for the file or shared drive.",
               "location": "path",
               "required": true,
               "type": "string"
+            },
+            "moveToNewOwnersRoot": {
+              "default": "false",
+              "description": "This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. If set to true, the item will be moved to the new owner's My Drive root folder and all prior parents removed. If set to false, parents are not changed.",
+              "location": "query",
+              "type": "boolean"
             },
             "sendNotificationEmails": {
               "default": "true",
@@ -2394,6 +2534,11 @@
               "description": "The ID for the file or shared drive.",
               "location": "path",
               "required": true,
+              "type": "string"
+            },
+            "includePermissionsForView": {
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
+              "location": "query",
               "type": "string"
             },
             "maxResults": {
@@ -2546,7 +2691,7 @@
             },
             "transferOwnership": {
               "default": "false",
-              "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
+              "description": "Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.",
               "location": "query",
               "type": "boolean"
             },
@@ -2795,83 +2940,6 @@
         }
       }
     },
-    "realtime": {
-      "methods": {
-        "get": {
-          "description": "Exports the contents of the Realtime API data model associated with this file as JSON.",
-          "httpMethod": "GET",
-          "id": "drive.realtime.get",
-          "parameterOrder": [
-            "fileId"
-          ],
-          "parameters": {
-            "fileId": {
-              "description": "The ID of the file that the Realtime API data model is associated with.",
-              "location": "path",
-              "required": true,
-              "type": "string"
-            },
-            "revision": {
-              "description": "The revision of the Realtime API data model to export. Revisions start at 1 (the initial empty data model) and are incremented with each change. If this parameter is excluded, the most recent data model will be returned.",
-              "format": "int32",
-              "location": "query",
-              "minimum": "1",
-              "type": "integer"
-            }
-          },
-          "path": "files/{fileId}/realtime",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsMediaDownload": true
-        },
-        "update": {
-          "description": "Overwrites the Realtime API data model associated with this file with the provided JSON data model.",
-          "httpMethod": "PUT",
-          "id": "drive.realtime.update",
-          "mediaUpload": {
-            "accept": [
-              "*/*"
-            ],
-            "maxSize": "10MB",
-            "protocols": {
-              "resumable": {
-                "multipart": true,
-                "path": "/resumable/upload/drive/v2/files/{fileId}/realtime"
-              },
-              "simple": {
-                "multipart": true,
-                "path": "/upload/drive/v2/files/{fileId}/realtime"
-              }
-            }
-          },
-          "parameterOrder": [
-            "fileId"
-          ],
-          "parameters": {
-            "baseRevision": {
-              "description": "The revision of the model to diff the uploaded model against. If set, the uploaded model is diffed against the provided revision and those differences are merged with any changes made to the model after the provided revision. If not set, the uploaded model replaces the current model on the server.",
-              "location": "query",
-              "type": "string"
-            },
-            "fileId": {
-              "description": "The ID of the file that the Realtime API data model is associated with.",
-              "location": "path",
-              "required": true,
-              "type": "string"
-            }
-          },
-          "path": "files/{fileId}/realtime",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ],
-          "supportsMediaUpload": true
-        }
-      }
-    },
     "replies": {
       "methods": {
         "delete": {
@@ -3041,7 +3109,7 @@
           ]
         },
         "patch": {
-          "description": "Updates an existing reply. This method supports patch semantics.",
+          "description": "Updates an existing reply.",
           "httpMethod": "PATCH",
           "id": "drive.replies.patch",
           "parameterOrder": [
@@ -3235,7 +3303,7 @@
           ]
         },
         "patch": {
-          "description": "Updates a revision. This method supports patch semantics.",
+          "description": "Updates a revision.",
           "httpMethod": "PATCH",
           "id": "drive.revisions.patch",
           "parameterOrder": [
@@ -3459,7 +3527,7 @@
       }
     }
   },
-  "revision": "20190416",
+  "revision": "20210707",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "About": {
@@ -3664,7 +3732,7 @@
           "type": "array"
         },
         "quotaBytesTotal": {
-          "description": "The total number of quota bytes.",
+          "description": "The total number of quota bytes. This is only relevant when quotaType is LIMITED.",
           "format": "int64",
           "type": "string"
         },
@@ -3705,15 +3773,15 @@
           "items": {
             "properties": {
               "backgroundImageLink": {
-                "description": "A link to this Team Drive theme's background image.",
+                "description": "Deprecated - use driveThemes/backgroundImageLink instead.",
                 "type": "string"
               },
               "colorRgb": {
-                "description": "The color of this Team Drive theme as an RGB hex string.",
+                "description": "Deprecated - use driveThemes/colorRgb instead.",
                 "type": "string"
               },
               "id": {
-                "description": "The ID of the theme.",
+                "description": "Deprecated - use driveThemes/id instead.",
                 "type": "string"
               }
             },
@@ -3844,7 +3912,7 @@
           "type": "boolean"
         },
         "supportsImport": {
-          "description": "Whether this app supports importing Google Docs.",
+          "description": "Whether this app supports importing from Docs Editors.",
           "type": "boolean"
         },
         "supportsMultiOpen": {
@@ -4021,7 +4089,7 @@
         },
         "kind": {
           "default": "api#channel",
-          "description": "Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string \"api#channel\".",
+          "description": "Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\".",
           "type": "string"
         },
         "params": {
@@ -4049,7 +4117,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The type of delivery mechanism used for this channel.",
+          "description": "The type of delivery mechanism used for this channel. Valid values are \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http requests are used to deliver messages.",
           "type": "string"
         }
       },
@@ -4124,12 +4192,12 @@
       "id": "Comment",
       "properties": {
         "anchor": {
-          "description": "A region of the document represented as a JSON string. See anchor documentation for details on how to define and interpret anchor properties.",
+          "description": "A region of the document represented as a JSON string. For details on defining anchor properties, refer to  Add comments and replies.",
           "type": "string"
         },
         "author": {
           "$ref": "User",
-          "description": "The user who wrote this comment."
+          "description": "The author of the comment. The author's email address and permission ID will not be populated."
         },
         "commentId": {
           "description": "The ID of the comment.",
@@ -4246,7 +4314,7 @@
       "properties": {
         "author": {
           "$ref": "User",
-          "description": "The user who wrote this reply."
+          "description": "The author of the reply. The author's email address and permission ID will not be populated."
         },
         "content": {
           "annotations": {
@@ -4318,6 +4386,34 @@
         },
         "selfLink": {
           "description": "A link back to this list.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ContentRestriction": {
+      "description": "A restriction for accessing the content of the file.",
+      "id": "ContentRestriction",
+      "properties": {
+        "readOnly": {
+          "description": "Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Reason for why the content of the file is restricted. This is only mutable on requests that also set readOnly=true.",
+          "type": "string"
+        },
+        "restrictingUser": {
+          "$ref": "User",
+          "description": "The user who set the content restriction. Only populated if readOnly is true."
+        },
+        "restrictionDate": {
+          "description": "The time at which the content restriction was set (formatted RFC 3339 timestamp). Only populated if readOnly is true.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the content restriction. Currently the only possible value is globalContentRestriction.",
           "type": "string"
         }
       },
@@ -4544,12 +4640,24 @@
               "description": "Whether the current user can add children to this folder. This is always false when the item is not a folder.",
               "type": "boolean"
             },
+            "canAddFolderFromAnotherDrive": {
+              "description": "Whether the current user can add a folder from another drive (different shared drive or My Drive) to this folder. This is false when the item is not a folder. Only populated for items in shared drives.",
+              "type": "boolean"
+            },
+            "canAddMyDriveParent": {
+              "description": "Whether the current user can add a parent for the item without removing an existing parent in the same request. Not populated for shared drive files.",
+              "type": "boolean"
+            },
             "canChangeCopyRequiresWriterPermission": {
               "description": "Whether the current user can change the copyRequiresWriterPermission restriction of this file.",
               "type": "boolean"
             },
             "canChangeRestrictedDownload": {
               "description": "Deprecated",
+              "type": "boolean"
+            },
+            "canChangeSecurityUpdateEnabled": {
+              "description": "Whether the current user can change the securityUpdateEnabled field on link share metadata.",
               "type": "boolean"
             },
             "canComment": {
@@ -4573,11 +4681,19 @@
               "type": "boolean"
             },
             "canEdit": {
-              "description": "Whether the current user can edit this file.",
+              "description": "Whether the current user can edit this file. Other factors may limit the type of changes a user can make to a file. For example, see canChangeCopyRequiresWriterPermission or canModifyContent.",
               "type": "boolean"
             },
             "canListChildren": {
               "description": "Whether the current user can list the children of this folder. This is always false when the item is not a folder.",
+              "type": "boolean"
+            },
+            "canModifyContent": {
+              "description": "Whether the current user can modify the content of this file.",
+              "type": "boolean"
+            },
+            "canModifyContentRestriction": {
+              "description": "Whether the current user can modify restrictions on content of this file.",
               "type": "boolean"
             },
             "canMoveChildrenOutOfDrive": {
@@ -4589,7 +4705,7 @@
               "type": "boolean"
             },
             "canMoveChildrenWithinDrive": {
-              "description": "Whether the current user can move children of this folder within the shared drive. This is false when the item is not a folder. Only populated for items in shared drives.",
+              "description": "Whether the current user can move children of this folder within this drive. This is false when the item is not a folder. Note that a request to move the child may still fail depending on the current user's access to the child and to the destination folder.",
               "type": "boolean"
             },
             "canMoveChildrenWithinTeamDrive": {
@@ -4609,7 +4725,7 @@
               "type": "boolean"
             },
             "canMoveItemWithinDrive": {
-              "description": "Whether the current user can move this item within this shared drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added. Only populated for items in shared drives.",
+              "description": "Whether the current user can move this item within this drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added and the parent that is being removed.",
               "type": "boolean"
             },
             "canMoveItemWithinTeamDrive": {
@@ -4636,6 +4752,10 @@
               "description": "Whether the current user can remove children from this folder. This is always false when the item is not a folder. For a folder in a shared drive, use canDeleteChildren or canTrashChildren instead.",
               "type": "boolean"
             },
+            "canRemoveMyDriveParent": {
+              "description": "Whether the current user can remove a parent from the item without adding another parent in the same request. Not populated for shared drive files.",
+              "type": "boolean"
+            },
             "canRename": {
               "description": "Whether the current user can rename this file.",
               "type": "boolean"
@@ -4659,6 +4779,13 @@
           },
           "type": "object"
         },
+        "contentRestrictions": {
+          "description": "Restrictions for accessing the content of the file. Only populated if such a restriction exists.",
+          "items": {
+            "$ref": "ContentRestriction"
+          },
+          "type": "array"
+        },
         "copyRequiresWriterPermission": {
           "description": "Whether the options to copy, print, or download this file, should be disabled for readers and commenters.",
           "type": "boolean"
@@ -4681,7 +4808,7 @@
           "type": "string"
         },
         "downloadUrl": {
-          "description": "Short lived download URL for the file. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.",
+          "description": "Short lived download URL for the file. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.",
           "type": "string"
         },
         "driveId": {
@@ -4709,15 +4836,16 @@
             "description": "A mapping from export format to URL",
             "type": "string"
           },
-          "description": "Links for exporting Google Docs to specific formats.",
+          "description": "Links for exporting Docs Editors files to specific formats.",
+          "readOnly": true,
           "type": "object"
         },
         "fileExtension": {
-          "description": "The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.",
+          "description": "The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.",
           "type": "string"
         },
         "fileSize": {
-          "description": "The size of the file in bytes. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.",
+          "description": "The size of the file in bytes. This field is populated for files with content stored in Google Drive and for files in Docs Editors; it is not populated for shortcut files.",
           "format": "int64",
           "type": "string"
         },
@@ -4726,11 +4854,11 @@
           "type": "string"
         },
         "fullFileExtension": {
-          "description": "The full file extension; extracted from the title. May contain multiple concatenated extensions, such as \"tar.gz\". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.",
+          "description": "The full file extension; extracted from the title. May contain multiple concatenated extensions, such as \"tar.gz\". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.",
           "type": "string"
         },
         "hasAugmentedPermissions": {
-          "description": "Whether any users are granted file access directly on this file. This field is only populated for items in shared drives.",
+          "description": "Whether there are permissions directly on this file. This field is only populated for items in shared drives.",
           "type": "boolean"
         },
         "hasThumbnail": {
@@ -4738,7 +4866,7 @@
           "type": "boolean"
         },
         "headRevisionId": {
-          "description": "The ID of the file's head revision. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.",
+          "description": "The ID of the file's head revision. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.",
           "type": "string"
         },
         "iconLink": {
@@ -4841,7 +4969,7 @@
               "type": "string"
             },
             "rotation": {
-              "description": "The rotation in clockwise degrees from the image's original orientation.",
+              "description": "The number of clockwise 90 degree rotations applied from the image's original orientation.",
               "format": "int32",
               "type": "integer"
             },
@@ -4905,7 +5033,7 @@
               "type": "boolean"
             },
             "trashed": {
-              "description": "Whether this file has been trashed. This label applies to all users accessing the file; however, only owners are allowed to see and untrash files.",
+              "description": "Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file. The trashed item is excluded from all files.list responses returned for any user who does not own the file. However, all users with access to the file can see the trashed item metadata in an API response. All users with access can copy, download, export, and share the file.",
               "type": "boolean"
             },
             "viewed": {
@@ -4928,13 +5056,27 @@
           "format": "date-time",
           "type": "string"
         },
+        "linkShareMetadata": {
+          "description": "Contains details about the link URLs that clients are using to refer to this item.",
+          "properties": {
+            "securityUpdateEligible": {
+              "description": "Whether the file is eligible for security update.",
+              "type": "boolean"
+            },
+            "securityUpdateEnabled": {
+              "description": "Whether the security update is enabled for this file.",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
         "markedViewedByMeDate": {
           "description": "Deprecated.",
           "format": "date-time",
           "type": "string"
         },
         "md5Checksum": {
-          "description": "An MD5 checksum for the content of this file. This field is only populated for files with content stored in Google Drive; it is not populated for Google Docs or shortcut files.",
+          "description": "An MD5 checksum for the content of this file. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.",
           "type": "string"
         },
         "mimeType": {
@@ -4974,7 +5116,7 @@
           "type": "array"
         },
         "owners": {
-          "description": "The owner(s) of this file. Not populated for items in shared drives.",
+          "description": "The owner of this file. Only certain legacy files may have more than one owner. This field isn't populated for items in shared drives.",
           "items": {
             "$ref": "User"
           },
@@ -5013,6 +5155,10 @@
           "format": "int64",
           "type": "string"
         },
+        "resourceKey": {
+          "description": "A key needed to access the item via a shared link.",
+          "type": "string"
+        },
         "selfLink": {
           "description": "A link back to this file.",
           "type": "string"
@@ -5033,6 +5179,24 @@
         "sharingUser": {
           "$ref": "User",
           "description": "User that shared the item with the current user, if available."
+        },
+        "shortcutDetails": {
+          "description": "Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.",
+          "properties": {
+            "targetId": {
+              "description": "The ID of the file that this shortcut points to.",
+              "type": "string"
+            },
+            "targetMimeType": {
+              "description": "The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target's MIME type, captured when the shortcut is created.",
+              "type": "string"
+            },
+            "targetResourceKey": {
+              "description": "The ResourceKey for the target file.",
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
         "spaces": {
           "description": "The list of spaces which contain the file. Supported values are 'drive', 'appDataFolder' and 'photos'.",
@@ -5061,7 +5225,7 @@
           "type": "object"
         },
         "thumbnailLink": {
-          "description": "A short-lived link to the file's thumbnail. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content.",
+          "description": "A short-lived link to the file's thumbnail. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content. If the file isn't shared publicly, the URL returned in Files.thumbnailLink must be fetched using a credentialed request.",
           "type": "string"
         },
         "thumbnailVersion": {
@@ -5281,7 +5445,7 @@
           "type": "string"
         },
         "expirationDate": {
-          "description": "The time at which this permission will expire (RFC 3339 date-time). Expiration dates have the following restrictions:  \n- They can only be set on user and group permissions \n- The date must be in the future \n- The date cannot be more than a year in the future \n- The date can only be set on drive.permissions.update or drive.permissions.patch requests",
+          "description": "The time at which this permission will expire (RFC 3339 date-time). Expiration dates have the following restrictions:  \n- They cannot be set on shared drive items \n- They can only be set on user and group permissions \n- The date must be in the future \n- The date cannot be more than a year in the future \n- The date can only be set on drive.permissions.update or drive.permissions.patch requests",
           "format": "date-time",
           "type": "string"
         },
@@ -5314,7 +5478,7 @@
                 "type": "boolean"
               },
               "inheritedFrom": {
-                "description": "The ID of the item from which this permission is inherited. This is an output-only field and is only populated for members of the shared drive.",
+                "description": "The ID of the item from which this permission is inherited. This is an output-only field.",
                 "type": "string"
               },
               "permissionType": {
@@ -5328,6 +5492,7 @@
             },
             "type": "object"
           },
+          "readOnly": true,
           "type": "array"
         },
         "photoLink": {
@@ -5352,31 +5517,32 @@
           "items": {
             "properties": {
               "additionalRoles": {
-                "description": "Additional roles for this user. Only commenter is currently possible, though more may be supported in the future.",
+                "description": "Deprecated - use permissionDetails/additionalRoles instead.",
                 "items": {
                   "type": "string"
                 },
                 "type": "array"
               },
               "inherited": {
-                "description": "Whether this permission is inherited. This field is always populated. This is an output-only field.",
+                "description": "Deprecated - use permissionDetails/inherited instead.",
                 "type": "boolean"
               },
               "inheritedFrom": {
-                "description": "The ID of the item from which this permission is inherited. This is an output-only field and is only populated for members of the Team Drive.",
+                "description": "Deprecated - use permissionDetails/inheritedFrom instead.",
                 "type": "string"
               },
               "role": {
-                "description": "The primary role for this user. While new values may be added in the future, the following are currently possible:  \n- organizer \n- fileOrganizer \n- writer \n- reader",
+                "description": "Deprecated - use permissionDetails/role instead.",
                 "type": "string"
               },
               "teamDrivePermissionType": {
-                "description": "The Team Drive permission type for this user. While new values may be added in future, the following are currently possible:  \n- file \n- member",
+                "description": "Deprecated - use permissionDetails/permissionType instead.",
                 "type": "string"
               }
             },
             "type": "object"
           },
+          "readOnly": true,
           "type": "array"
         },
         "type": {
@@ -5390,6 +5556,10 @@
         },
         "value": {
           "description": "The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type is anyone, in which case both id and value are ignored.",
+          "type": "string"
+        },
+        "view": {
+          "description": "Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value.",
           "type": "string"
         },
         "withLink": {
@@ -5477,7 +5647,7 @@
           "type": "string"
         },
         "visibility": {
-          "description": "The visibility of this property. Allowed values are PRIVATE and PUBLIC. (Default: PRIVATE)",
+          "description": "The visibility of this property. Allowed values are PRIVATE and PUBLIC. (Default: PRIVATE). Private properties can only be retrieved using an authenticated request. An authenticated request uses an access token obtained with a OAuth 2 client ID. You cannot use an API key to retrieve private properties.",
           "type": "string"
         }
       },
@@ -5515,7 +5685,6 @@
       "id": "Revision",
       "properties": {
         "downloadUrl": {
-          "description": "Short term download URL for the file. This will only be populated on files with content stored in Drive.",
           "type": "string"
         },
         "etag": {
@@ -5527,7 +5696,7 @@
             "description": "A mapping from export format to URL",
             "type": "string"
           },
-          "description": "Links for exporting Google Docs to specific formats.",
+          "description": "Links for exporting Docs Editors files to specific formats.",
           "type": "object"
         },
         "fileSize": {
@@ -5570,23 +5739,23 @@
           "type": "string"
         },
         "pinned": {
-          "description": "Whether this revision is pinned to prevent automatic purging. This will only be populated and can only be modified on files with content stored in Drive which are not Google Docs. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter.",
+          "description": "Whether this revision is pinned to prevent automatic purging. If not set, the revision is automatically purged 30 days after newer content is uploaded. This field can only be modified on files with content stored in Drive, excluding Docs Editors files. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter. Pinned revisions are stored indefinitely using additional storage quota, up to a maximum of 200 revisions.",
           "type": "boolean"
         },
         "publishAuto": {
-          "description": "Whether subsequent revisions will be automatically republished. This is only populated and can only be modified for Google Docs.",
+          "description": "Whether subsequent revisions will be automatically republished. This is only populated and can only be modified for Docs Editors files.",
           "type": "boolean"
         },
         "published": {
-          "description": "Whether this revision is published. This is only populated and can only be modified for Google Docs.",
+          "description": "Whether this revision is published. This is only populated and can only be modified for Docs Editors files.",
           "type": "boolean"
         },
         "publishedLink": {
-          "description": "A link to the published revision.",
+          "description": "A link to the published revision. This is only populated for Google Sites files.",
           "type": "string"
         },
         "publishedOutsideDomain": {
-          "description": "Whether this revision is published outside the domain. This is only populated and can only be modified for Google Docs.",
+          "description": "Whether this revision is published outside the domain. This is only populated and can only be modified for Docs Editors files.",
           "type": "boolean"
         },
         "selfLink": {
@@ -5643,7 +5812,7 @@
       "type": "object"
     },
     "TeamDrive": {
-      "description": "Representation of a Team Drive.",
+      "description": "Deprecated: use the drive collection instead.",
       "id": "TeamDrive",
       "properties": {
         "backgroundImageFile": {

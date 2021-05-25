@@ -24,7 +24,7 @@
 -- meaning you only need to include the fields you wish to update. Fields
 -- that are not present in the request will be preserved.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.resources.calendars.update@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.resources.calendars.update@.
 module Network.Google.Resource.Directory.Resources.Calendars.Update
     (
     -- * REST Resource
@@ -35,13 +35,18 @@ module Network.Google.Resource.Directory.Resources.Calendars.Update
     , ResourcesCalendarsUpdate
 
     -- * Request Lenses
+    , rcuXgafv
+    , rcuUploadProtocol
+    , rcuAccessToken
+    , rcuUploadType
     , rcuPayload
     , rcuCustomer
     , rcuCalendarResourceId
+    , rcuCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.resources.calendars.update@ method which the
 -- 'ResourcesCalendarsUpdate' request conforms to.
@@ -54,9 +59,14 @@ type ResourcesCalendarsUpdateResource =
                "resources" :>
                  "calendars" :>
                    Capture "calendarResourceId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CalendarResource :>
-                         Put '[JSON] CalendarResource
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] CalendarResource :>
+                                   Put '[JSON] CalendarResource
 
 -- | Updates a calendar resource. This method supports patch semantics,
 -- meaning you only need to include the fields you wish to update. Fields
@@ -65,9 +75,14 @@ type ResourcesCalendarsUpdateResource =
 -- /See:/ 'resourcesCalendarsUpdate' smart constructor.
 data ResourcesCalendarsUpdate =
   ResourcesCalendarsUpdate'
-    { _rcuPayload            :: !CalendarResource
-    , _rcuCustomer           :: !Text
+    { _rcuXgafv :: !(Maybe Xgafv)
+    , _rcuUploadProtocol :: !(Maybe Text)
+    , _rcuAccessToken :: !(Maybe Text)
+    , _rcuUploadType :: !(Maybe Text)
+    , _rcuPayload :: !CalendarResource
+    , _rcuCustomer :: !Text
     , _rcuCalendarResourceId :: !Text
+    , _rcuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,11 +91,21 @@ data ResourcesCalendarsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rcuXgafv'
+--
+-- * 'rcuUploadProtocol'
+--
+-- * 'rcuAccessToken'
+--
+-- * 'rcuUploadType'
+--
 -- * 'rcuPayload'
 --
 -- * 'rcuCustomer'
 --
 -- * 'rcuCalendarResourceId'
+--
+-- * 'rcuCallback'
 resourcesCalendarsUpdate
     :: CalendarResource -- ^ 'rcuPayload'
     -> Text -- ^ 'rcuCustomer'
@@ -88,20 +113,47 @@ resourcesCalendarsUpdate
     -> ResourcesCalendarsUpdate
 resourcesCalendarsUpdate pRcuPayload_ pRcuCustomer_ pRcuCalendarResourceId_ =
   ResourcesCalendarsUpdate'
-    { _rcuPayload = pRcuPayload_
+    { _rcuXgafv = Nothing
+    , _rcuUploadProtocol = Nothing
+    , _rcuAccessToken = Nothing
+    , _rcuUploadType = Nothing
+    , _rcuPayload = pRcuPayload_
     , _rcuCustomer = pRcuCustomer_
     , _rcuCalendarResourceId = pRcuCalendarResourceId_
+    , _rcuCallback = Nothing
     }
 
+
+-- | V1 error format.
+rcuXgafv :: Lens' ResourcesCalendarsUpdate (Maybe Xgafv)
+rcuXgafv = lens _rcuXgafv (\ s a -> s{_rcuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rcuUploadProtocol :: Lens' ResourcesCalendarsUpdate (Maybe Text)
+rcuUploadProtocol
+  = lens _rcuUploadProtocol
+      (\ s a -> s{_rcuUploadProtocol = a})
+
+-- | OAuth access token.
+rcuAccessToken :: Lens' ResourcesCalendarsUpdate (Maybe Text)
+rcuAccessToken
+  = lens _rcuAccessToken
+      (\ s a -> s{_rcuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rcuUploadType :: Lens' ResourcesCalendarsUpdate (Maybe Text)
+rcuUploadType
+  = lens _rcuUploadType
+      (\ s a -> s{_rcuUploadType = a})
 
 -- | Multipart request metadata.
 rcuPayload :: Lens' ResourcesCalendarsUpdate CalendarResource
 rcuPayload
   = lens _rcuPayload (\ s a -> s{_rcuPayload = a})
 
--- | The unique ID for the customer\'s G Suite account. As an account
--- administrator, you can also use the my_customer alias to represent your
--- account\'s customer ID.
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s customer ID.
 rcuCustomer :: Lens' ResourcesCalendarsUpdate Text
 rcuCustomer
   = lens _rcuCustomer (\ s a -> s{_rcuCustomer = a})
@@ -112,12 +164,21 @@ rcuCalendarResourceId
   = lens _rcuCalendarResourceId
       (\ s a -> s{_rcuCalendarResourceId = a})
 
+-- | JSONP
+rcuCallback :: Lens' ResourcesCalendarsUpdate (Maybe Text)
+rcuCallback
+  = lens _rcuCallback (\ s a -> s{_rcuCallback = a})
+
 instance GoogleRequest ResourcesCalendarsUpdate where
         type Rs ResourcesCalendarsUpdate = CalendarResource
         type Scopes ResourcesCalendarsUpdate =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesCalendarsUpdate'{..}
-          = go _rcuCustomer _rcuCalendarResourceId
+          = go _rcuCustomer _rcuCalendarResourceId _rcuXgafv
+              _rcuUploadProtocol
+              _rcuAccessToken
+              _rcuUploadType
+              _rcuCallback
               (Just AltJSON)
               _rcuPayload
               directoryService

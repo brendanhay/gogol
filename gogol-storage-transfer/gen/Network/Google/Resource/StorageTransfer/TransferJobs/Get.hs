@@ -42,19 +42,19 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Get
     , tjgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferJobs.get@ method which the
 -- 'TransferJobsGet' request conforms to.
 type TransferJobsGetResource =
      "v1" :>
        Capture "jobName" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "projectId" Text :>
+         QueryParam "projectId" Text :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TransferJob
 
@@ -63,13 +63,13 @@ type TransferJobsGetResource =
 -- /See:/ 'transferJobsGet' smart constructor.
 data TransferJobsGet =
   TransferJobsGet'
-    { _tjgXgafv          :: !(Maybe Xgafv)
+    { _tjgXgafv :: !(Maybe Xgafv)
     , _tjgUploadProtocol :: !(Maybe Text)
-    , _tjgAccessToken    :: !(Maybe Text)
-    , _tjgJobName        :: !Text
-    , _tjgUploadType     :: !(Maybe Text)
-    , _tjgProjectId      :: !(Maybe Text)
-    , _tjgCallback       :: !(Maybe Text)
+    , _tjgAccessToken :: !(Maybe Text)
+    , _tjgJobName :: !Text
+    , _tjgUploadType :: !(Maybe Text)
+    , _tjgProjectId :: !Text
+    , _tjgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,15 +93,16 @@ data TransferJobsGet =
 -- * 'tjgCallback'
 transferJobsGet
     :: Text -- ^ 'tjgJobName'
+    -> Text -- ^ 'tjgProjectId'
     -> TransferJobsGet
-transferJobsGet pTjgJobName_ =
+transferJobsGet pTjgJobName_ pTjgProjectId_ =
   TransferJobsGet'
     { _tjgXgafv = Nothing
     , _tjgUploadProtocol = Nothing
     , _tjgAccessToken = Nothing
     , _tjgJobName = pTjgJobName_
     , _tjgUploadType = Nothing
-    , _tjgProjectId = Nothing
+    , _tjgProjectId = pTjgProjectId_
     , _tjgCallback = Nothing
     }
 
@@ -122,7 +123,7 @@ tjgAccessToken
   = lens _tjgAccessToken
       (\ s a -> s{_tjgAccessToken = a})
 
--- | The job to get. Required.
+-- | Required. \" The job to get.
 tjgJobName :: Lens' TransferJobsGet Text
 tjgJobName
   = lens _tjgJobName (\ s a -> s{_tjgJobName = a})
@@ -133,9 +134,9 @@ tjgUploadType
   = lens _tjgUploadType
       (\ s a -> s{_tjgUploadType = a})
 
--- | The ID of the Google Cloud Platform Console project that owns the job.
--- Required.
-tjgProjectId :: Lens' TransferJobsGet (Maybe Text)
+-- | Required. The ID of the Google Cloud Platform Console project that owns
+-- the job.
+tjgProjectId :: Lens' TransferJobsGet Text
 tjgProjectId
   = lens _tjgProjectId (\ s a -> s{_tjgProjectId = a})
 
@@ -149,10 +150,10 @@ instance GoogleRequest TransferJobsGet where
         type Scopes TransferJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferJobsGet'{..}
-          = go _tjgJobName _tjgXgafv _tjgUploadProtocol
+          = go _tjgJobName (Just _tjgProjectId) _tjgXgafv
+              _tjgUploadProtocol
               _tjgAccessToken
               _tjgUploadType
-              _tjgProjectId
               _tjgCallback
               (Just AltJSON)
               storageTransferService

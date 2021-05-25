@@ -45,8 +45,8 @@ module Network.Google.Resource.Genomics.Projects.Operations.Get
     , pogCallback
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @genomics.projects.operations.get@ method which the
 -- 'ProjectsOperationsGet' request conforms to.
@@ -69,12 +69,12 @@ type ProjectsOperationsGetResource =
 -- /See:/ 'projectsOperationsGet' smart constructor.
 data ProjectsOperationsGet =
   ProjectsOperationsGet'
-    { _pogXgafv          :: !(Maybe Xgafv)
+    { _pogXgafv :: !(Maybe Xgafv)
     , _pogUploadProtocol :: !(Maybe Text)
-    , _pogAccessToken    :: !(Maybe Text)
-    , _pogUploadType     :: !(Maybe Text)
-    , _pogName           :: !Text
-    , _pogCallback       :: !(Maybe Text)
+    , _pogAccessToken :: !(Maybe Text)
+    , _pogUploadType :: !(Maybe Text)
+    , _pogName :: !Text
+    , _pogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

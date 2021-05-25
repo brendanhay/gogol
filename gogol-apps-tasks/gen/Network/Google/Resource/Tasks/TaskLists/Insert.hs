@@ -23,7 +23,7 @@
 -- Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.insert@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.insert@.
 module Network.Google.Resource.Tasks.TaskLists.Insert
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.Tasks.TaskLists.Insert
     , TaskListsInsert
 
     -- * Request Lenses
+    , tliXgafv
+    , tliUploadProtocol
+    , tliAccessToken
+    , tliUploadType
     , tliPayload
+    , tliCallback
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.insert@ method which the
 -- 'TaskListsInsert' request conforms to.
@@ -48,16 +53,26 @@ type TaskListsInsertResource =
          "users" :>
            "@me" :>
              "lists" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] TaskList :> Post '[JSON] TaskList
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TaskList :> Post '[JSON] TaskList
 
 -- | Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 --
 -- /See:/ 'taskListsInsert' smart constructor.
-newtype TaskListsInsert =
+data TaskListsInsert =
   TaskListsInsert'
-    { _tliPayload :: TaskList
+    { _tliXgafv :: !(Maybe Xgafv)
+    , _tliUploadProtocol :: !(Maybe Text)
+    , _tliAccessToken :: !(Maybe Text)
+    , _tliUploadType :: !(Maybe Text)
+    , _tliPayload :: !TaskList
+    , _tliCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,24 +81,74 @@ newtype TaskListsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tliXgafv'
+--
+-- * 'tliUploadProtocol'
+--
+-- * 'tliAccessToken'
+--
+-- * 'tliUploadType'
+--
 -- * 'tliPayload'
+--
+-- * 'tliCallback'
 taskListsInsert
     :: TaskList -- ^ 'tliPayload'
     -> TaskListsInsert
-taskListsInsert pTliPayload_ = TaskListsInsert' {_tliPayload = pTliPayload_}
+taskListsInsert pTliPayload_ =
+  TaskListsInsert'
+    { _tliXgafv = Nothing
+    , _tliUploadProtocol = Nothing
+    , _tliAccessToken = Nothing
+    , _tliUploadType = Nothing
+    , _tliPayload = pTliPayload_
+    , _tliCallback = Nothing
+    }
 
+
+-- | V1 error format.
+tliXgafv :: Lens' TaskListsInsert (Maybe Xgafv)
+tliXgafv = lens _tliXgafv (\ s a -> s{_tliXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tliUploadProtocol :: Lens' TaskListsInsert (Maybe Text)
+tliUploadProtocol
+  = lens _tliUploadProtocol
+      (\ s a -> s{_tliUploadProtocol = a})
+
+-- | OAuth access token.
+tliAccessToken :: Lens' TaskListsInsert (Maybe Text)
+tliAccessToken
+  = lens _tliAccessToken
+      (\ s a -> s{_tliAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tliUploadType :: Lens' TaskListsInsert (Maybe Text)
+tliUploadType
+  = lens _tliUploadType
+      (\ s a -> s{_tliUploadType = a})
 
 -- | Multipart request metadata.
 tliPayload :: Lens' TaskListsInsert TaskList
 tliPayload
   = lens _tliPayload (\ s a -> s{_tliPayload = a})
 
+-- | JSONP
+tliCallback :: Lens' TaskListsInsert (Maybe Text)
+tliCallback
+  = lens _tliCallback (\ s a -> s{_tliCallback = a})
+
 instance GoogleRequest TaskListsInsert where
         type Rs TaskListsInsert = TaskList
         type Scopes TaskListsInsert =
              '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsInsert'{..}
-          = go (Just AltJSON) _tliPayload appsTasksService
+          = go _tliXgafv _tliUploadProtocol _tliAccessToken
+              _tliUploadType
+              _tliCallback
+              (Just AltJSON)
+              _tliPayload
+              appsTasksService
           where go
                   = buildClient
                       (Proxy :: Proxy TaskListsInsertResource)

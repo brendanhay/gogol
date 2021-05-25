@@ -44,8 +44,8 @@ module Network.Google.Resource.Compute.Instances.AttachDisk
     , insInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.attachDisk@ method which the
 -- 'InstancesAttachDisk' request conforms to.
@@ -73,12 +73,12 @@ type InstancesAttachDiskResource =
 -- /See:/ 'instancesAttachDisk' smart constructor.
 data InstancesAttachDisk =
   InstancesAttachDisk'
-    { _insRequestId   :: !(Maybe Text)
-    , _insProject     :: !Text
-    , _insZone        :: !Text
-    , _insPayload     :: !AttachedDisk
+    { _insRequestId :: !(Maybe Text)
+    , _insProject :: !Text
+    , _insZone :: !Text
+    , _insPayload :: !AttachedDisk
     , _insForceAttach :: !(Maybe Bool)
-    , _insInstance    :: !Text
+    , _insInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,8 +143,9 @@ insPayload :: Lens' InstancesAttachDisk AttachedDisk
 insPayload
   = lens _insPayload (\ s a -> s{_insPayload = a})
 
--- | Whether to force attach the disk even if it\'s currently attached to
--- another instance.
+-- | Whether to force attach the regional disk even if it\'s currently
+-- attached to another instance. If you try to force attach a zonal disk to
+-- an instance, you will receive an error.
 insForceAttach :: Lens' InstancesAttachDisk (Maybe Bool)
 insForceAttach
   = lens _insForceAttach

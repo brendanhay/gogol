@@ -26,7 +26,7 @@
 -- creates a new Icon instance, associates the newly created Icon with the
 -- given Product and deletes the old icon.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.icons.upload@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.icons.upload@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Ico
     , cpiuCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.icons.upload@ method which the
 -- 'CatalogsProductsIconsUpload' request conforms to.
@@ -74,13 +74,13 @@ type CatalogsProductsIconsUploadResource =
 -- /See:/ 'catalogsProductsIconsUpload' smart constructor.
 data CatalogsProductsIconsUpload =
   CatalogsProductsIconsUpload'
-    { _cpiuXgafv          :: !(Maybe Xgafv)
+    { _cpiuXgafv :: !(Maybe Xgafv)
     , _cpiuUploadProtocol :: !(Maybe Text)
-    , _cpiuAccessToken    :: !(Maybe Text)
-    , _cpiuUploadType     :: !(Maybe Text)
-    , _cpiuPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , _cpiuProduct        :: !Text
-    , _cpiuCallback       :: !(Maybe Text)
+    , _cpiuAccessToken :: !(Maybe Text)
+    , _cpiuUploadType :: !(Maybe Text)
+    , _cpiuPayload :: !GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
+    , _cpiuProduct :: !Text
+    , _cpiuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

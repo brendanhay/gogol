@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the comments for a post, possibly filtered.
+-- Lists comments.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.list@.
 module Network.Google.Resource.Blogger.Comments.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.Blogger.Comments.List
 
     -- * Request Lenses
     , clStatus
+    , clXgafv
+    , clUploadProtocol
+    , clAccessToken
     , clEndDate
+    , clUploadType
     , clBlogId
     , clStartDate
     , clFetchBodies
@@ -42,45 +46,55 @@ module Network.Google.Resource.Blogger.Comments.List
     , clPostId
     , clPageToken
     , clMaxResults
+    , clCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.list@ method which the
 -- 'CommentsList' request conforms to.
 type CommentsListResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   QueryParams "status" CommentsListStatus :>
-                     QueryParam "endDate" DateTime' :>
-                       QueryParam "startDate" DateTime' :>
-                         QueryParam "fetchBodies" Bool :>
-                           QueryParam "view" CommentsListView :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] CommentList
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               "comments" :>
+                 QueryParam "status" CommentsListStatus :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "endDate" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "startDate" Text :>
+                               QueryParam "fetchBodies" Bool :>
+                                 QueryParam "view" CommentsListView :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "maxResults" (Textual Word32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] CommentList
 
--- | Retrieves the comments for a post, possibly filtered.
+-- | Lists comments.
 --
 -- /See:/ 'commentsList' smart constructor.
 data CommentsList =
   CommentsList'
-    { _clStatus      :: !(Maybe [CommentsListStatus])
-    , _clEndDate     :: !(Maybe DateTime')
-    , _clBlogId      :: !Text
-    , _clStartDate   :: !(Maybe DateTime')
+    { _clStatus :: !(Maybe CommentsListStatus)
+    , _clXgafv :: !(Maybe Xgafv)
+    , _clUploadProtocol :: !(Maybe Text)
+    , _clAccessToken :: !(Maybe Text)
+    , _clEndDate :: !(Maybe Text)
+    , _clUploadType :: !(Maybe Text)
+    , _clBlogId :: !Text
+    , _clStartDate :: !(Maybe Text)
     , _clFetchBodies :: !(Maybe Bool)
-    , _clView        :: !(Maybe CommentsListView)
-    , _clPostId      :: !Text
-    , _clPageToken   :: !(Maybe Text)
-    , _clMaxResults  :: !(Maybe (Textual Word32))
+    , _clView :: !(Maybe CommentsListView)
+    , _clPostId :: !Text
+    , _clPageToken :: !(Maybe Text)
+    , _clMaxResults :: !(Maybe (Textual Word32))
+    , _clCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,7 +105,15 @@ data CommentsList =
 --
 -- * 'clStatus'
 --
+-- * 'clXgafv'
+--
+-- * 'clUploadProtocol'
+--
+-- * 'clAccessToken'
+--
 -- * 'clEndDate'
+--
+-- * 'clUploadType'
 --
 -- * 'clBlogId'
 --
@@ -106,6 +128,8 @@ data CommentsList =
 -- * 'clPageToken'
 --
 -- * 'clMaxResults'
+--
+-- * 'clCallback'
 commentsList
     :: Text -- ^ 'clBlogId'
     -> Text -- ^ 'clPostId'
@@ -113,7 +137,11 @@ commentsList
 commentsList pClBlogId_ pClPostId_ =
   CommentsList'
     { _clStatus = Nothing
+    , _clXgafv = Nothing
+    , _clUploadProtocol = Nothing
+    , _clAccessToken = Nothing
     , _clEndDate = Nothing
+    , _clUploadType = Nothing
     , _clBlogId = pClBlogId_
     , _clStartDate = Nothing
     , _clFetchBodies = Nothing
@@ -121,56 +149,69 @@ commentsList pClBlogId_ pClPostId_ =
     , _clPostId = pClPostId_
     , _clPageToken = Nothing
     , _clMaxResults = Nothing
+    , _clCallback = Nothing
     }
 
 
-clStatus :: Lens' CommentsList [CommentsListStatus]
-clStatus
-  = lens _clStatus (\ s a -> s{_clStatus = a}) .
-      _Default
-      . _Coerce
+clStatus :: Lens' CommentsList (Maybe CommentsListStatus)
+clStatus = lens _clStatus (\ s a -> s{_clStatus = a})
 
--- | Latest date of comment to fetch, a date-time with RFC 3339 formatting.
-clEndDate :: Lens' CommentsList (Maybe UTCTime)
+-- | V1 error format.
+clXgafv :: Lens' CommentsList (Maybe Xgafv)
+clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+clUploadProtocol :: Lens' CommentsList (Maybe Text)
+clUploadProtocol
+  = lens _clUploadProtocol
+      (\ s a -> s{_clUploadProtocol = a})
+
+-- | OAuth access token.
+clAccessToken :: Lens' CommentsList (Maybe Text)
+clAccessToken
+  = lens _clAccessToken
+      (\ s a -> s{_clAccessToken = a})
+
+clEndDate :: Lens' CommentsList (Maybe Text)
 clEndDate
-  = lens _clEndDate (\ s a -> s{_clEndDate = a}) .
-      mapping _DateTime
+  = lens _clEndDate (\ s a -> s{_clEndDate = a})
 
--- | ID of the blog to fetch comments from.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+clUploadType :: Lens' CommentsList (Maybe Text)
+clUploadType
+  = lens _clUploadType (\ s a -> s{_clUploadType = a})
+
 clBlogId :: Lens' CommentsList Text
 clBlogId = lens _clBlogId (\ s a -> s{_clBlogId = a})
 
--- | Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
-clStartDate :: Lens' CommentsList (Maybe UTCTime)
+clStartDate :: Lens' CommentsList (Maybe Text)
 clStartDate
-  = lens _clStartDate (\ s a -> s{_clStartDate = a}) .
-      mapping _DateTime
+  = lens _clStartDate (\ s a -> s{_clStartDate = a})
 
--- | Whether the body content of the comments is included.
 clFetchBodies :: Lens' CommentsList (Maybe Bool)
 clFetchBodies
   = lens _clFetchBodies
       (\ s a -> s{_clFetchBodies = a})
 
--- | Access level with which to view the returned result. Note that some
--- fields require elevated access.
 clView :: Lens' CommentsList (Maybe CommentsListView)
 clView = lens _clView (\ s a -> s{_clView = a})
 
--- | ID of the post to fetch posts from.
 clPostId :: Lens' CommentsList Text
 clPostId = lens _clPostId (\ s a -> s{_clPostId = a})
 
--- | Continuation token if request is paged.
 clPageToken :: Lens' CommentsList (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
--- | Maximum number of comments to include in the result.
 clMaxResults :: Lens' CommentsList (Maybe Word32)
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+clCallback :: Lens' CommentsList (Maybe Text)
+clCallback
+  = lens _clCallback (\ s a -> s{_clCallback = a})
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentList
@@ -178,13 +219,17 @@ instance GoogleRequest CommentsList where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient CommentsList'{..}
-          = go _clBlogId _clPostId (_clStatus ^. _Default)
+          = go _clBlogId _clPostId _clStatus _clXgafv
+              _clUploadProtocol
+              _clAccessToken
               _clEndDate
+              _clUploadType
               _clStartDate
               _clFetchBodies
               _clView
               _clPageToken
               _clMaxResults
+              _clCallback
               (Just AltJSON)
               bloggerService
           where go

@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
     , mgiAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.insert@ method which the
 -- 'ManagementGoalsInsert' request conforms to.
@@ -64,9 +64,9 @@ type ManagementGoalsInsertResource =
 data ManagementGoalsInsert =
   ManagementGoalsInsert'
     { _mgiWebPropertyId :: !Text
-    , _mgiProFileId     :: !Text
-    , _mgiPayload       :: !Goal
-    , _mgiAccountId     :: !Text
+    , _mgiProFileId :: !Text
+    , _mgiPayload :: !Goal
+    , _mgiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

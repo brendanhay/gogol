@@ -54,8 +54,8 @@ module Network.Google.Resource.Manufacturers.Accounts.Products.Update
     , apuCallback
     ) where
 
-import           Network.Google.Manufacturers.Types
-import           Network.Google.Prelude
+import Network.Google.Manufacturers.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @manufacturers.accounts.products.update@ method which the
 -- 'AccountsProductsUpdate' request conforms to.
@@ -88,14 +88,14 @@ type AccountsProductsUpdateResource =
 -- /See:/ 'accountsProductsUpdate' smart constructor.
 data AccountsProductsUpdate =
   AccountsProductsUpdate'
-    { _apuParent         :: !Text
-    , _apuXgafv          :: !(Maybe Xgafv)
+    { _apuParent :: !Text
+    , _apuXgafv :: !(Maybe Xgafv)
     , _apuUploadProtocol :: !(Maybe Text)
-    , _apuAccessToken    :: !(Maybe Text)
-    , _apuUploadType     :: !(Maybe Text)
-    , _apuPayload        :: !Attributes
-    , _apuName           :: !Text
-    , _apuCallback       :: !(Maybe Text)
+    , _apuAccessToken :: !(Maybe Text)
+    , _apuUploadType :: !(Maybe Text)
+    , _apuPayload :: !Attributes
+    , _apuName :: !Text
+    , _apuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

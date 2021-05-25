@@ -22,7 +22,7 @@
 --
 -- Creates an Association instance under a given Catalog.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.associations.create@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.associations.create@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Create
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations
     , cacCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.associations.create@ method which the
 -- 'CatalogsAssociationsCreate' request conforms to.
@@ -68,13 +68,13 @@ type CatalogsAssociationsCreateResource =
 -- /See:/ 'catalogsAssociationsCreate' smart constructor.
 data CatalogsAssociationsCreate =
   CatalogsAssociationsCreate'
-    { _cacParent         :: !Text
-    , _cacXgafv          :: !(Maybe Xgafv)
+    { _cacParent :: !Text
+    , _cacXgafv :: !(Maybe Xgafv)
     , _cacUploadProtocol :: !(Maybe Text)
-    , _cacAccessToken    :: !(Maybe Text)
-    , _cacUploadType     :: !(Maybe Text)
-    , _cacPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , _cacCallback       :: !(Maybe Text)
+    , _cacAccessToken :: !(Maybe Text)
+    , _cacUploadType :: !(Maybe Text)
+    , _cacPayload :: !GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
+    , _cacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

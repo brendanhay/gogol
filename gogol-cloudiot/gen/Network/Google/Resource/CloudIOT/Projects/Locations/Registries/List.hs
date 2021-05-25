@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.List
     , plrlCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.list@ method which the
 -- 'ProjectsLocationsRegistriesList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsRegistriesListResource =
 -- /See:/ 'projectsLocationsRegistriesList' smart constructor.
 data ProjectsLocationsRegistriesList =
   ProjectsLocationsRegistriesList'
-    { _plrlParent         :: !Text
-    , _plrlXgafv          :: !(Maybe Xgafv)
+    { _plrlParent :: !Text
+    , _plrlXgafv :: !(Maybe Xgafv)
     , _plrlUploadProtocol :: !(Maybe Text)
-    , _plrlAccessToken    :: !(Maybe Text)
-    , _plrlUploadType     :: !(Maybe Text)
-    , _plrlPageToken      :: !(Maybe Text)
-    , _plrlPageSize       :: !(Maybe (Textual Int32))
-    , _plrlCallback       :: !(Maybe Text)
+    , _plrlAccessToken :: !(Maybe Text)
+    , _plrlUploadType :: !(Maybe Text)
+    , _plrlPageToken :: !(Maybe Text)
+    , _plrlPageSize :: !(Maybe (Textual Int32))
+    , _plrlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,7 +114,7 @@ projectsLocationsRegistriesList pPlrlParent_ =
     }
 
 
--- | The project and cloud region path. For example,
+-- | Required. The project and cloud region path. For example,
 -- \`projects\/example-project\/locations\/us-central1\`.
 plrlParent :: Lens' ProjectsLocationsRegistriesList Text
 plrlParent

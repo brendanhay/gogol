@@ -46,8 +46,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.Patch
     , appCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.patch@ method which the
 -- 'AccessPoliciesPatch' request conforms to.
@@ -72,14 +72,14 @@ type AccessPoliciesPatchResource =
 -- /See:/ 'accessPoliciesPatch' smart constructor.
 data AccessPoliciesPatch =
   AccessPoliciesPatch'
-    { _appXgafv          :: !(Maybe Xgafv)
+    { _appXgafv :: !(Maybe Xgafv)
     , _appUploadProtocol :: !(Maybe Text)
-    , _appUpdateMask     :: !(Maybe GFieldMask)
-    , _appAccessToken    :: !(Maybe Text)
-    , _appUploadType     :: !(Maybe Text)
-    , _appPayload        :: !AccessPolicy
-    , _appName           :: !Text
-    , _appCallback       :: !(Maybe Text)
+    , _appUpdateMask :: !(Maybe GFieldMask)
+    , _appAccessToken :: !(Maybe Text)
+    , _appUploadType :: !(Maybe Text)
+    , _appPayload :: !AccessPolicy
+    , _appName :: !Text
+    , _appCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

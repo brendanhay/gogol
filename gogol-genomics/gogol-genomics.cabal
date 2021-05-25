@@ -39,6 +39,7 @@ library
         , Network.Google.Resource.Genomics.Projects.Operations.Cancel
         , Network.Google.Resource.Genomics.Projects.Operations.Get
         , Network.Google.Resource.Genomics.Projects.Operations.List
+        , Network.Google.Resource.Genomics.Projects.Workers.CheckIn
         , Network.Google.Resource.Genomics.Workers.CheckIn
 
     other-modules:

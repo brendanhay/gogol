@@ -45,8 +45,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.CancelNegotia
     , apcnCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.cancelNegotiation@ method which the
 -- 'AccountsProposalsCancelNegotiation' request conforms to.
@@ -72,14 +72,14 @@ type AccountsProposalsCancelNegotiationResource =
 -- /See:/ 'accountsProposalsCancelNegotiation' smart constructor.
 data AccountsProposalsCancelNegotiation =
   AccountsProposalsCancelNegotiation'
-    { _apcnXgafv          :: !(Maybe Xgafv)
+    { _apcnXgafv :: !(Maybe Xgafv)
     , _apcnUploadProtocol :: !(Maybe Text)
-    , _apcnAccessToken    :: !(Maybe Text)
-    , _apcnUploadType     :: !(Maybe Text)
-    , _apcnPayload        :: !CancelNegotiationRequest
-    , _apcnProposalId     :: !Text
-    , _apcnAccountId      :: !Text
-    , _apcnCallback       :: !(Maybe Text)
+    , _apcnAccessToken :: !(Maybe Text)
+    , _apcnUploadType :: !(Maybe Text)
+    , _apcnPayload :: !CancelNegotiationRequest
+    , _apcnProposalId :: !Text
+    , _apcnAccountId :: !Text
+    , _apcnCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

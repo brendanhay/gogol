@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Get
     , ewagCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.webApps.get@ method which the
 -- 'EnterprisesWebAppsGet' request conforms to.
@@ -61,12 +61,12 @@ type EnterprisesWebAppsGetResource =
 -- /See:/ 'enterprisesWebAppsGet' smart constructor.
 data EnterprisesWebAppsGet =
   EnterprisesWebAppsGet'
-    { _ewagXgafv          :: !(Maybe Xgafv)
+    { _ewagXgafv :: !(Maybe Xgafv)
     , _ewagUploadProtocol :: !(Maybe Text)
-    , _ewagAccessToken    :: !(Maybe Text)
-    , _ewagUploadType     :: !(Maybe Text)
-    , _ewagName           :: !Text
-    , _ewagCallback       :: !(Maybe Text)
+    , _ewagAccessToken :: !(Maybe Text)
+    , _ewagUploadType :: !(Maybe Text)
+    , _ewagName :: !Text
+    , _ewagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

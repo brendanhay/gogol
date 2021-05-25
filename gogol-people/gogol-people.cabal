@@ -42,12 +42,23 @@ library
         , Network.Google.Resource.People.ContactGroups.List
         , Network.Google.Resource.People.ContactGroups.Members.Modify
         , Network.Google.Resource.People.ContactGroups.Update
+        , Network.Google.Resource.People.OtherContacts.CopyOtherContactToMyContactsGroup
+        , Network.Google.Resource.People.OtherContacts.List
+        , Network.Google.Resource.People.OtherContacts.Search
+        , Network.Google.Resource.People.People.BatchCreateContacts
+        , Network.Google.Resource.People.People.BatchDeleteContacts
+        , Network.Google.Resource.People.People.BatchUpdateContacts
         , Network.Google.Resource.People.People.Connections.List
         , Network.Google.Resource.People.People.CreateContact
         , Network.Google.Resource.People.People.DeleteContact
+        , Network.Google.Resource.People.People.DeleteContactPhoto
         , Network.Google.Resource.People.People.Get
         , Network.Google.Resource.People.People.GetBatchGet
+        , Network.Google.Resource.People.People.ListDirectoryPeople
+        , Network.Google.Resource.People.People.SearchContacts
+        , Network.Google.Resource.People.People.SearchDirectoryPeople
         , Network.Google.Resource.People.People.UpdateContact
+        , Network.Google.Resource.People.People.UpdateContactPhoto
 
     other-modules:
           Network.Google.People.Types.Product

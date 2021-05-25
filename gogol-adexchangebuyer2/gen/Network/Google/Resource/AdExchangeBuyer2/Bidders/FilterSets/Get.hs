@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.Get
     , bfsgCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.get@ method which the
 -- 'BiddersFilterSetsGet' request conforms to.
@@ -63,12 +63,12 @@ type BiddersFilterSetsGetResource =
 -- /See:/ 'biddersFilterSetsGet' smart constructor.
 data BiddersFilterSetsGet =
   BiddersFilterSetsGet'
-    { _bfsgXgafv          :: !(Maybe Xgafv)
+    { _bfsgXgafv :: !(Maybe Xgafv)
     , _bfsgUploadProtocol :: !(Maybe Text)
-    , _bfsgAccessToken    :: !(Maybe Text)
-    , _bfsgUploadType     :: !(Maybe Text)
-    , _bfsgName           :: !Text
-    , _bfsgCallback       :: !(Maybe Text)
+    , _bfsgAccessToken :: !(Maybe Text)
+    , _bfsgUploadType :: !(Maybe Text)
+    , _bfsgName :: !Text
+    , _bfsgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Delete
     , uspkdCallback
     ) where
 
-import           Network.Google.OSLogin.Types
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oslogin.users.sshPublicKeys.delete@ method which the
 -- 'UsersSSHPublicKeysDelete' request conforms to.
@@ -61,12 +61,12 @@ type UsersSSHPublicKeysDeleteResource =
 -- /See:/ 'usersSSHPublicKeysDelete' smart constructor.
 data UsersSSHPublicKeysDelete =
   UsersSSHPublicKeysDelete'
-    { _uspkdXgafv          :: !(Maybe Xgafv)
+    { _uspkdXgafv :: !(Maybe Xgafv)
     , _uspkdUploadProtocol :: !(Maybe Text)
-    , _uspkdAccessToken    :: !(Maybe Text)
-    , _uspkdUploadType     :: !(Maybe Text)
-    , _uspkdName           :: !Text
-    , _uspkdCallback       :: !(Maybe Text)
+    , _uspkdAccessToken :: !(Maybe Text)
+    , _uspkdUploadType :: !(Maybe Text)
+    , _uspkdName :: !Text
+    , _uspkdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,9 +123,9 @@ uspkdUploadType
   = lens _uspkdUploadType
       (\ s a -> s{_uspkdUploadType = a})
 
--- | The fingerprint of the public key to update. Public keys are identified
--- by their SHA-256 fingerprint. The fingerprint of the public key is in
--- format \`users\/{user}\/sshPublicKeys\/{fingerprint}\`.
+-- | Required. The fingerprint of the public key to update. Public keys are
+-- identified by their SHA-256 fingerprint. The fingerprint of the public
+-- key is in format \`users\/{user}\/sshPublicKeys\/{fingerprint}\`.
 uspkdName :: Lens' UsersSSHPublicKeysDelete Text
 uspkdName
   = lens _uspkdName (\ s a -> s{_uspkdName = a})

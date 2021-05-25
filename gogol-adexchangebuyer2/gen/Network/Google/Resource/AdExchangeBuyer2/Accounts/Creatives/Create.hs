@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Create
     , acccCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.create@ method which the
 -- 'AccountsCreativesCreate' request conforms to.
@@ -57,7 +57,9 @@ type AccountsCreativesCreateResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "duplicateIdMode" Text :>
+                     QueryParam "duplicateIdMode"
+                       AccountsCreativesCreateDuplicateIdMode
+                       :>
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Creative :> Post '[JSON] Creative
@@ -67,14 +69,14 @@ type AccountsCreativesCreateResource =
 -- /See:/ 'accountsCreativesCreate' smart constructor.
 data AccountsCreativesCreate =
   AccountsCreativesCreate'
-    { _acccXgafv           :: !(Maybe Xgafv)
-    , _acccUploadProtocol  :: !(Maybe Text)
-    , _acccAccessToken     :: !(Maybe Text)
-    , _acccUploadType      :: !(Maybe Text)
-    , _acccPayload         :: !Creative
-    , _acccAccountId       :: !Text
-    , _acccDuplicateIdMode :: !(Maybe Text)
-    , _acccCallback        :: !(Maybe Text)
+    { _acccXgafv :: !(Maybe Xgafv)
+    , _acccUploadProtocol :: !(Maybe Text)
+    , _acccAccessToken :: !(Maybe Text)
+    , _acccUploadType :: !(Maybe Text)
+    , _acccPayload :: !Creative
+    , _acccAccountId :: !Text
+    , _acccDuplicateIdMode :: !(Maybe AccountsCreativesCreateDuplicateIdMode)
+    , _acccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -152,7 +154,7 @@ acccAccountId
 
 -- | Indicates if multiple creatives can share an ID or not. Default is
 -- NO_DUPLICATES (one ID per creative).
-acccDuplicateIdMode :: Lens' AccountsCreativesCreate (Maybe Text)
+acccDuplicateIdMode :: Lens' AccountsCreativesCreate (Maybe AccountsCreativesCreateDuplicateIdMode)
 acccDuplicateIdMode
   = lens _acccDuplicateIdMode
       (\ s a -> s{_acccDuplicateIdMode = a})

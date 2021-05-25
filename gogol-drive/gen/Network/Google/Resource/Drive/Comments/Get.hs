@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Comments.Get
     , cgIncludeDeleted
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.get@ method which the
 -- 'CommentsGet' request conforms to.
@@ -58,8 +58,8 @@ type CommentsGetResource =
 -- /See:/ 'commentsGet' smart constructor.
 data CommentsGet =
   CommentsGet'
-    { _cgFileId         :: !Text
-    , _cgCommentId      :: !Text
+    { _cgFileId :: !Text
+    , _cgCommentId :: !Text
     , _cgIncludeDeleted :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)

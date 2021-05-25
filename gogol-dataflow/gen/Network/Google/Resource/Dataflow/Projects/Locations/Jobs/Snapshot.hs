@@ -44,8 +44,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
     , pljsCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.jobs.snapshot@ method which the
 -- 'ProjectsLocationsJobsSnapshot' request conforms to.
@@ -71,15 +71,15 @@ type ProjectsLocationsJobsSnapshotResource =
 -- /See:/ 'projectsLocationsJobsSnapshot' smart constructor.
 data ProjectsLocationsJobsSnapshot =
   ProjectsLocationsJobsSnapshot'
-    { _pljsXgafv          :: !(Maybe Xgafv)
-    , _pljsJobId          :: !Text
+    { _pljsXgafv :: !(Maybe Xgafv)
+    , _pljsJobId :: !Text
     , _pljsUploadProtocol :: !(Maybe Text)
-    , _pljsLocation       :: !Text
-    , _pljsAccessToken    :: !(Maybe Text)
-    , _pljsUploadType     :: !(Maybe Text)
-    , _pljsPayload        :: !SnapshotJobRequest
-    , _pljsProjectId      :: !Text
-    , _pljsCallback       :: !(Maybe Text)
+    , _pljsLocation :: !Text
+    , _pljsAccessToken :: !(Maybe Text)
+    , _pljsUploadType :: !(Maybe Text)
+    , _pljsPayload :: !SnapshotJobRequest
+    , _pljsProjectId :: !Text
+    , _pljsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

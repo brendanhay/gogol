@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetPools.Delete
     , tpdRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.delete@ method which the
 -- 'TargetPoolsDelete' request conforms to.
@@ -61,10 +61,10 @@ type TargetPoolsDeleteResource =
 -- /See:/ 'targetPoolsDelete' smart constructor.
 data TargetPoolsDelete =
   TargetPoolsDelete'
-    { _tpdRequestId  :: !(Maybe Text)
-    , _tpdProject    :: !Text
+    { _tpdRequestId :: !(Maybe Text)
+    , _tpdProject :: !Text
     , _tpdTargetPool :: !Text
-    , _tpdRegion     :: !Text
+    , _tpdRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

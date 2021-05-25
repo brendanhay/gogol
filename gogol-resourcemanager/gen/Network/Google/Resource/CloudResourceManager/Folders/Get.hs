@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a Folder identified by the supplied resource name. Valid
--- Folder resource names have the format \`folders\/{folder_id}\` (for
+-- Retrieves a folder identified by the supplied resource name. Valid
+-- folder resource names have the format \`folders\/{folder_id}\` (for
 -- example, \`folders\/1234\`). The caller must have
 -- \`resourcemanager.folders.get\` permission on the identified folder.
 --
@@ -44,13 +44,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.Get
     , fgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.get@ method which the
 -- 'FoldersGet' request conforms to.
 type FoldersGetResource =
-     "v2" :>
+     "v3" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,20 +59,20 @@ type FoldersGetResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Folder
 
--- | Retrieves a Folder identified by the supplied resource name. Valid
--- Folder resource names have the format \`folders\/{folder_id}\` (for
+-- | Retrieves a folder identified by the supplied resource name. Valid
+-- folder resource names have the format \`folders\/{folder_id}\` (for
 -- example, \`folders\/1234\`). The caller must have
 -- \`resourcemanager.folders.get\` permission on the identified folder.
 --
 -- /See:/ 'foldersGet' smart constructor.
 data FoldersGet =
   FoldersGet'
-    { _fgXgafv          :: !(Maybe Xgafv)
+    { _fgXgafv :: !(Maybe Xgafv)
     , _fgUploadProtocol :: !(Maybe Text)
-    , _fgAccessToken    :: !(Maybe Text)
-    , _fgUploadType     :: !(Maybe Text)
-    , _fgName           :: !Text
-    , _fgCallback       :: !(Maybe Text)
+    , _fgAccessToken :: !(Maybe Text)
+    , _fgUploadType :: !(Maybe Text)
+    , _fgName :: !Text
+    , _fgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,8 +127,8 @@ fgUploadType :: Lens' FoldersGet (Maybe Text)
 fgUploadType
   = lens _fgUploadType (\ s a -> s{_fgUploadType = a})
 
--- | The resource name of the Folder to retrieve. Must be of the form
--- \`folders\/{folder_id}\`.
+-- | Required. The resource name of the folder to retrieve. Must be of the
+-- form \`folders\/{folder_id}\`.
 fgName :: Lens' FoldersGet Text
 fgName = lens _fgName (\ s a -> s{_fgName = a})
 

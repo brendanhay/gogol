@@ -22,7 +22,7 @@
 --
 -- Updates an existing site. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.sites.patch@.
 module Network.Google.Resource.DFAReporting.Sites.Patch
     (
     -- * REST Resource
@@ -33,34 +33,49 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
     , SitesPatch
 
     -- * Request Lenses
+    , spXgafv
+    , spUploadProtocol
+    , spAccessToken
+    , spUploadType
     , spProFileId
     , spPayload
     , spId
+    , spCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sites.patch@ method which the
 -- 'SitesPatch' request conforms to.
 type SitesPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
                QueryParam "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Site :> Patch '[JSON] Site
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Site :> Patch '[JSON] Site
 
 -- | Updates an existing site. This method supports patch semantics.
 --
 -- /See:/ 'sitesPatch' smart constructor.
 data SitesPatch =
   SitesPatch'
-    { _spProFileId :: !(Textual Int64)
-    , _spPayload   :: !Site
-    , _spId        :: !(Textual Int64)
+    { _spXgafv :: !(Maybe Xgafv)
+    , _spUploadProtocol :: !(Maybe Text)
+    , _spAccessToken :: !(Maybe Text)
+    , _spUploadType :: !(Maybe Text)
+    , _spProFileId :: !(Textual Int64)
+    , _spPayload :: !Site
+    , _spId :: !(Textual Int64)
+    , _spCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,11 +84,21 @@ data SitesPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'spXgafv'
+--
+-- * 'spUploadProtocol'
+--
+-- * 'spAccessToken'
+--
+-- * 'spUploadType'
+--
 -- * 'spProFileId'
 --
 -- * 'spPayload'
 --
 -- * 'spId'
+--
+-- * 'spCallback'
 sitesPatch
     :: Int64 -- ^ 'spProFileId'
     -> Site -- ^ 'spPayload'
@@ -81,11 +106,37 @@ sitesPatch
     -> SitesPatch
 sitesPatch pSpProFileId_ pSpPayload_ pSpId_ =
   SitesPatch'
-    { _spProFileId = _Coerce # pSpProFileId_
+    { _spXgafv = Nothing
+    , _spUploadProtocol = Nothing
+    , _spAccessToken = Nothing
+    , _spUploadType = Nothing
+    , _spProFileId = _Coerce # pSpProFileId_
     , _spPayload = pSpPayload_
     , _spId = _Coerce # pSpId_
+    , _spCallback = Nothing
     }
 
+
+-- | V1 error format.
+spXgafv :: Lens' SitesPatch (Maybe Xgafv)
+spXgafv = lens _spXgafv (\ s a -> s{_spXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+spUploadProtocol :: Lens' SitesPatch (Maybe Text)
+spUploadProtocol
+  = lens _spUploadProtocol
+      (\ s a -> s{_spUploadProtocol = a})
+
+-- | OAuth access token.
+spAccessToken :: Lens' SitesPatch (Maybe Text)
+spAccessToken
+  = lens _spAccessToken
+      (\ s a -> s{_spAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+spUploadType :: Lens' SitesPatch (Maybe Text)
+spUploadType
+  = lens _spUploadType (\ s a -> s{_spUploadType = a})
 
 -- | User profile ID associated with this request.
 spProFileId :: Lens' SitesPatch Int64
@@ -102,12 +153,22 @@ spPayload
 spId :: Lens' SitesPatch Int64
 spId = lens _spId (\ s a -> s{_spId = a}) . _Coerce
 
+-- | JSONP
+spCallback :: Lens' SitesPatch (Maybe Text)
+spCallback
+  = lens _spCallback (\ s a -> s{_spCallback = a})
+
 instance GoogleRequest SitesPatch where
         type Rs SitesPatch = Site
         type Scopes SitesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesPatch'{..}
-          = go _spProFileId (Just _spId) (Just AltJSON)
+          = go _spProFileId (Just _spId) _spXgafv
+              _spUploadProtocol
+              _spAccessToken
+              _spUploadType
+              _spCallback
+              (Just AltJSON)
               _spPayload
               dFAReportingService
           where go

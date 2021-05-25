@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NetworkEndpointGroups.Get
     , neggNetworkEndpointGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networkEndpointGroups.get@ method which the
 -- 'NetworkEndpointGroupsGet' request conforms to.
@@ -62,8 +62,8 @@ type NetworkEndpointGroupsGetResource =
 -- /See:/ 'networkEndpointGroupsGet' smart constructor.
 data NetworkEndpointGroupsGet =
   NetworkEndpointGroupsGet'
-    { _neggProject              :: !Text
-    , _neggZone                 :: !Text
+    { _neggProject :: !Text
+    , _neggZone :: !Text
     , _neggNetworkEndpointGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

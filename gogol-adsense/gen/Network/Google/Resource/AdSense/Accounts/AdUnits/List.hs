@@ -40,8 +40,8 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.List
     , aaulMaxResults
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.adunits.list@ method which the
 -- 'AccountsAdUnitsList' request conforms to.
@@ -64,10 +64,10 @@ type AccountsAdUnitsListResource =
 data AccountsAdUnitsList =
   AccountsAdUnitsList'
     { _aaulIncludeInactive :: !(Maybe Bool)
-    , _aaulAdClientId      :: !Text
-    , _aaulAccountId       :: !Text
-    , _aaulPageToken       :: !(Maybe Text)
-    , _aaulMaxResults      :: !(Maybe (Textual Int32))
+    , _aaulAdClientId :: !Text
+    , _aaulAccountId :: !Text
+    , _aaulPageToken :: !(Maybe Text)
+    , _aaulMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Routes.Get
     , rrRoute
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.get@ method which the
 -- 'RoutesGet' request conforms to.
@@ -60,7 +60,7 @@ type RoutesGetResource =
 data RoutesGet =
   RoutesGet'
     { _rrProject :: !Text
-    , _rrRoute   :: !Text
+    , _rrRoute :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

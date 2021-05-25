@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
     , iswekInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.startWithEncryptionKey@ method which the
 -- 'InstancesStartWithEncryptionKey' request conforms to.
@@ -69,10 +69,10 @@ type InstancesStartWithEncryptionKeyResource =
 data InstancesStartWithEncryptionKey =
   InstancesStartWithEncryptionKey'
     { _iswekRequestId :: !(Maybe Text)
-    , _iswekProject   :: !Text
-    , _iswekZone      :: !Text
-    , _iswekPayload   :: !InstancesStartWithEncryptionKeyRequest
-    , _iswekInstance  :: !Text
+    , _iswekProject :: !Text
+    , _iswekZone :: !Text
+    , _iswekPayload :: !InstancesStartWithEncryptionKeyRequest
+    , _iswekInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

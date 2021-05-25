@@ -38,12 +38,13 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Get
     , ptgTriggerId
     , ptgAccessToken
     , ptgUploadType
+    , ptgName
     , ptgProjectId
     , ptgCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.triggers.get@ method which the
 -- 'ProjectsTriggersGet' request conforms to.
@@ -57,21 +58,23 @@ type ProjectsTriggersGetResource =
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] BuildTrigger
+                       QueryParam "name" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] BuildTrigger
 
 -- | Returns information about a \`BuildTrigger\`. This API is experimental.
 --
 -- /See:/ 'projectsTriggersGet' smart constructor.
 data ProjectsTriggersGet =
   ProjectsTriggersGet'
-    { _ptgXgafv          :: !(Maybe Xgafv)
+    { _ptgXgafv :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
-    , _ptgTriggerId      :: !Text
-    , _ptgAccessToken    :: !(Maybe Text)
-    , _ptgUploadType     :: !(Maybe Text)
-    , _ptgProjectId      :: !Text
-    , _ptgCallback       :: !(Maybe Text)
+    , _ptgTriggerId :: !Text
+    , _ptgAccessToken :: !(Maybe Text)
+    , _ptgUploadType :: !(Maybe Text)
+    , _ptgName :: !(Maybe Text)
+    , _ptgProjectId :: !Text
+    , _ptgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,6 +93,8 @@ data ProjectsTriggersGet =
 --
 -- * 'ptgUploadType'
 --
+-- * 'ptgName'
+--
 -- * 'ptgProjectId'
 --
 -- * 'ptgCallback'
@@ -104,6 +109,7 @@ projectsTriggersGet pPtgTriggerId_ pPtgProjectId_ =
     , _ptgTriggerId = pPtgTriggerId_
     , _ptgAccessToken = Nothing
     , _ptgUploadType = Nothing
+    , _ptgName = Nothing
     , _ptgProjectId = pPtgProjectId_
     , _ptgCallback = Nothing
     }
@@ -119,7 +125,8 @@ ptgUploadProtocol
   = lens _ptgUploadProtocol
       (\ s a -> s{_ptgUploadProtocol = a})
 
--- | ID of the \`BuildTrigger\` to get.
+-- | Required. Identifier (\`id\` or \`name\`) of the \`BuildTrigger\` to
+-- get.
 ptgTriggerId :: Lens' ProjectsTriggersGet Text
 ptgTriggerId
   = lens _ptgTriggerId (\ s a -> s{_ptgTriggerId = a})
@@ -136,7 +143,12 @@ ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
 
--- | ID of the project that owns the trigger.
+-- | The name of the \`Trigger\` to retrieve. Format:
+-- \`projects\/{project}\/locations\/{location}\/triggers\/{trigger}\`
+ptgName :: Lens' ProjectsTriggersGet (Maybe Text)
+ptgName = lens _ptgName (\ s a -> s{_ptgName = a})
+
+-- | Required. ID of the project that owns the trigger.
 ptgProjectId :: Lens' ProjectsTriggersGet Text
 ptgProjectId
   = lens _ptgProjectId (\ s a -> s{_ptgProjectId = a})
@@ -155,6 +167,7 @@ instance GoogleRequest ProjectsTriggersGet where
               _ptgUploadProtocol
               _ptgAccessToken
               _ptgUploadType
+              _ptgName
               _ptgCallback
               (Just AltJSON)
               containerBuilderService

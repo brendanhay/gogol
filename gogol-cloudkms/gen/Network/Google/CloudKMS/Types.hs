@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -26,13 +26,20 @@ module Network.Google.CloudKMS.Types
     -- * AsymmetricDecryptResponse
     , AsymmetricDecryptResponse
     , asymmetricDecryptResponse
+    , adrPlaintextCrc32c
     , adrPlaintext
+    , adrProtectionLevel
+    , adrVerifiedCiphertextCrc32c
 
     -- * EncryptResponse
     , EncryptResponse
     , encryptResponse
+    , erVerifiedAdditionalAuthenticatedDataCrc32c
+    , erVerifiedPlaintextCrc32c
     , erName
+    , erProtectionLevel
     , erCiphertext
+    , erCiphertextCrc32c
 
     -- * LocationSchema
     , LocationSchema
@@ -66,19 +73,34 @@ module Network.Google.CloudKMS.Types
     , lkrrTotalSize
     , lkrrKeyRings
 
+    -- * ImportJobProtectionLevel
+    , ImportJobProtectionLevel (..)
+
     -- * AsymmetricSignResponse
     , AsymmetricSignResponse
     , asymmetricSignResponse
     , asrSignature
+    , asrSignatureCrc32c
+    , asrName
+    , asrProtectionLevel
+    , asrVerifiedDigestCrc32c
 
     -- * CryptoKeyPurpose
     , CryptoKeyPurpose (..)
+
+    -- * WrAppingPublicKey
+    , WrAppingPublicKey
+    , wrAppingPublicKey
+    , wapkPem
 
     -- * KeyRing
     , KeyRing
     , keyRing
     , krName
     , krCreateTime
+
+    -- * ImportCryptoKeyVersionRequestAlgorithm
+    , ImportCryptoKeyVersionRequestAlgorithm (..)
 
     -- * DestroyCryptoKeyVersionRequest
     , DestroyCryptoKeyVersionRequest
@@ -97,20 +119,47 @@ module Network.Google.CloudKMS.Types
     , AsymmetricSignRequest
     , asymmetricSignRequest
     , asrDigest
+    , asrDigestCrc32c
+
+    -- * ListImportJobsResponse
+    , ListImportJobsResponse
+    , listImportJobsResponse
+    , lijrNextPageToken
+    , lijrImportJobs
+    , lijrTotalSize
+
+    -- * PublicKeyProtectionLevel
+    , PublicKeyProtectionLevel (..)
+
+    -- * DecryptResponseProtectionLevel
+    , DecryptResponseProtectionLevel (..)
 
     -- * CryptoKeyVersionTemplateProtectionLevel
     , CryptoKeyVersionTemplateProtectionLevel (..)
+
+    -- * CertificateChains
+    , CertificateChains
+    , certificateChains
+    , ccGooglePartitionCerts
+    , ccGoogleCardCerts
+    , ccCaviumCerts
 
     -- * PublicKey
     , PublicKey
     , publicKey
     , pkPem
+    , pkPemCrc32c
+    , pkName
     , pkAlgorithm
+    , pkProtectionLevel
 
     -- * DecryptResponse
     , DecryptResponse
     , decryptResponse
+    , drUsedPrimary
+    , drPlaintextCrc32c
     , drPlaintext
+    , drProtectionLevel
 
     -- * CryptoKeyVersionTemplate
     , CryptoKeyVersionTemplate
@@ -154,13 +203,19 @@ module Network.Google.CloudKMS.Types
     , DecryptRequest
     , decryptRequest
     , drAdditionalAuthenticatedData
+    , drAdditionalAuthenticatedDataCrc32c
     , drCiphertext
+    , drCiphertextCrc32c
 
     -- * KeyOperationAttestation
     , KeyOperationAttestation
     , keyOperationAttestation
     , koaFormat
     , koaContent
+    , koaCertChains
+
+    -- * ProjectsLocationsKeyRingsCryptoKeysListVersionView
+    , ProjectsLocationsKeyRingsCryptoKeysListVersionView (..)
 
     -- * ListCryptoKeyVersionsResponse
     , ListCryptoKeyVersionsResponse
@@ -168,6 +223,9 @@ module Network.Google.CloudKMS.Types
     , lckvrNextPageToken
     , lckvrTotalSize
     , lckvrCryptoKeyVersions
+
+    -- * AsymmetricSignResponseProtectionLevel
+    , AsymmetricSignResponseProtectionLevel (..)
 
     -- * KeyOperationAttestationFormat
     , KeyOperationAttestationFormat (..)
@@ -187,10 +245,39 @@ module Network.Google.CloudKMS.Types
     -- * Xgafv
     , Xgafv (..)
 
+    -- * ImportJob
+    , ImportJob
+    , importJob
+    , ijState
+    , ijImportMethod
+    , ijAttestation
+    , ijPublicKey
+    , ijGenerateTime
+    , ijName
+    , ijExpireEventTime
+    , ijProtectionLevel
+    , ijExpireTime
+    , ijCreateTime
+
+    -- * ImportCryptoKeyVersionRequest
+    , ImportCryptoKeyVersionRequest
+    , importCryptoKeyVersionRequest
+    , ickvrRsaAESWrAppedKey
+    , ickvrAlgorithm
+    , ickvrImportJob
+
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
+
+    -- * ImportJobState
+    , ImportJobState (..)
+
+    -- * ExternalProtectionLevelOptions
+    , ExternalProtectionLevelOptions
+    , externalProtectionLevelOptions
+    , eploExternalKeyURI
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -203,6 +290,9 @@ module Network.Google.CloudKMS.Types
     , dSha512
     , dSha384
     , dSha256
+
+    -- * ImportJobImportMethod
+    , ImportJobImportMethod (..)
 
     -- * Policy
     , Policy
@@ -221,6 +311,7 @@ module Network.Google.CloudKMS.Types
     , LocationMetadata
     , locationMetadata
     , lmHSMAvailable
+    , lmEkmAvailable
 
     -- * AuditLogConfig
     , AuditLogConfig
@@ -230,6 +321,9 @@ module Network.Google.CloudKMS.Types
 
     -- * CryptoKeyVersionProtectionLevel
     , CryptoKeyVersionProtectionLevel (..)
+
+    -- * ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
+    , ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..)
 
     -- * ListCryptoKeysResponse
     , ListCryptoKeysResponse
@@ -242,6 +336,7 @@ module Network.Google.CloudKMS.Types
     , AsymmetricDecryptRequest
     , asymmetricDecryptRequest
     , adrCiphertext
+    , adrCiphertextCrc32c
 
     -- * CryptoKeyVersion
     , CryptoKeyVersion
@@ -249,10 +344,14 @@ module Network.Google.CloudKMS.Types
     , ckvState
     , ckvAttestation
     , ckvGenerateTime
+    , ckvImportFailureReason
     , ckvName
     , ckvAlgorithm
     , ckvDestroyTime
+    , ckvImportJob
     , ckvProtectionLevel
+    , ckvImportTime
+    , ckvExternalProtectionLevelOptions
     , ckvDestroyEventTime
     , ckvCreateTime
 
@@ -260,10 +359,18 @@ module Network.Google.CloudKMS.Types
     , EncryptRequest
     , encryptRequest
     , erAdditionalAuthenticatedData
+    , erAdditionalAuthenticatedDataCrc32c
+    , erPlaintextCrc32c
     , erPlaintext
+
+    -- * AsymmetricDecryptResponseProtectionLevel
+    , AsymmetricDecryptResponseProtectionLevel (..)
 
     -- * CryptoKeyVersionAlgorithm
     , CryptoKeyVersionAlgorithm (..)
+
+    -- * EncryptResponseProtectionLevel
+    , EncryptResponseProtectionLevel (..)
 
     -- * Binding
     , Binding
@@ -273,9 +380,9 @@ module Network.Google.CloudKMS.Types
     , bCondition
     ) where
 
-import           Network.Google.CloudKMS.Types.Product
-import           Network.Google.CloudKMS.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types.Product
+import Network.Google.CloudKMS.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Key Management Service (KMS) API. This contains the host and root path used as a starting point for constructing service requests.
 cloudKMSService :: ServiceConfig
@@ -283,7 +390,7 @@ cloudKMSService
   = defaultService (ServiceId "cloudkms:v1")
       "cloudkms.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

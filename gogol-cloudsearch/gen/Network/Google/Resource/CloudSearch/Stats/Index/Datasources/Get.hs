@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets indexed item statistics for a single data source.
+-- Gets indexed item statistics for a single data source. **Note:** This
+-- API requires a standard end user account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.stats.index.datasources.get@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.stats.index.datasources.get@.
 module Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
     (
     -- * REST Resource
@@ -47,8 +48,8 @@ module Network.Google.Resource.CloudSearch.Stats.Index.Datasources.Get
     , sidgCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.stats.index.datasources.get@ method which the
 -- 'StatsIndexDatasourcesGet' request conforms to.
@@ -71,23 +72,24 @@ type StatsIndexDatasourcesGetResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] GetDataSourceIndexStatsResponse
 
--- | Gets indexed item statistics for a single data source.
+-- | Gets indexed item statistics for a single data source. **Note:** This
+-- API requires a standard end user account to execute.
 --
 -- /See:/ 'statsIndexDatasourcesGet' smart constructor.
 data StatsIndexDatasourcesGet =
   StatsIndexDatasourcesGet'
-    { _sidgFromDateMonth  :: !(Maybe (Textual Int32))
-    , _sidgXgafv          :: !(Maybe Xgafv)
+    { _sidgFromDateMonth :: !(Maybe (Textual Int32))
+    , _sidgXgafv :: !(Maybe Xgafv)
     , _sidgUploadProtocol :: !(Maybe Text)
-    , _sidgFromDateDay    :: !(Maybe (Textual Int32))
-    , _sidgAccessToken    :: !(Maybe Text)
-    , _sidgUploadType     :: !(Maybe Text)
-    , _sidgFromDateYear   :: !(Maybe (Textual Int32))
-    , _sidgName           :: !Text
-    , _sidgToDateDay      :: !(Maybe (Textual Int32))
-    , _sidgToDateYear     :: !(Maybe (Textual Int32))
-    , _sidgToDateMonth    :: !(Maybe (Textual Int32))
-    , _sidgCallback       :: !(Maybe Text)
+    , _sidgFromDateDay :: !(Maybe (Textual Int32))
+    , _sidgAccessToken :: !(Maybe Text)
+    , _sidgUploadType :: !(Maybe Text)
+    , _sidgFromDateYear :: !(Maybe (Textual Int32))
+    , _sidgName :: !Text
+    , _sidgToDateDay :: !(Maybe (Textual Int32))
+    , _sidgToDateYear :: !(Maybe (Textual Int32))
+    , _sidgToDateMonth :: !(Maybe (Textual Int32))
+    , _sidgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

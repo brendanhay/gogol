@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.List
     , plflCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.list@ method which the
 -- 'ProjectsLocationsFunctionsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsFunctionsListResource =
 -- /See:/ 'projectsLocationsFunctionsList' smart constructor.
 data ProjectsLocationsFunctionsList =
   ProjectsLocationsFunctionsList'
-    { _plflParent         :: !Text
-    , _plflXgafv          :: !(Maybe Xgafv)
+    { _plflParent :: !Text
+    , _plflXgafv :: !(Maybe Xgafv)
     , _plflUploadProtocol :: !(Maybe Text)
-    , _plflAccessToken    :: !(Maybe Text)
-    , _plflUploadType     :: !(Maybe Text)
-    , _plflPageToken      :: !(Maybe Text)
-    , _plflPageSize       :: !(Maybe (Textual Int32))
-    , _plflCallback       :: !(Maybe Text)
+    , _plflAccessToken :: !(Maybe Text)
+    , _plflUploadType :: !(Maybe Text)
+    , _plflPageToken :: !(Maybe Text)
+    , _plflPageSize :: !(Maybe (Textual Int32))
+    , _plflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,7 +116,10 @@ projectsLocationsFunctionsList pPlflParent_ =
 
 -- | The project and location from which the function should be listed,
 -- specified in the format \`projects\/*\/locations\/*\` If you want to
--- list functions in all locations, use \"-\" in place of a location.
+-- list functions in all locations, use \"-\" in place of a location. When
+-- listing functions in all locations, if one or more location(s) are
+-- unreachable, the response will contain functions from all reachable
+-- locations along with the names of any unreachable locations.
 plflParent :: Lens' ProjectsLocationsFunctionsList Text
 plflParent
   = lens _plflParent (\ s a -> s{_plflParent = a})

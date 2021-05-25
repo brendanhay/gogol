@@ -37,8 +37,8 @@ module Network.Google.Resource.BigQuery.Projects.GetServiceAccount
     , pgsaProjectId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.projects.getServiceAccount@ method which the
 -- 'ProjectsGetServiceAccount' request conforms to.

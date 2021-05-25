@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.List
     , InstanceTemplatesList
 
     -- * Request Lenses
+    , itlReturnPartialSuccess
     , itlOrderBy
     , itlProject
     , itlFilter
@@ -41,8 +42,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.List
     , itlMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.list@ method which the
 -- 'InstanceTemplatesList' request conforms to.
@@ -53,12 +54,13 @@ type InstanceTemplatesListResource =
            Capture "project" Text :>
              "global" :>
                "instanceTemplates" :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] InstanceTemplateList
+                 QueryParam "returnPartialSuccess" Bool :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
 -- specified project.
@@ -66,10 +68,11 @@ type InstanceTemplatesListResource =
 -- /See:/ 'instanceTemplatesList' smart constructor.
 data InstanceTemplatesList =
   InstanceTemplatesList'
-    { _itlOrderBy    :: !(Maybe Text)
-    , _itlProject    :: !Text
-    , _itlFilter     :: !(Maybe Text)
-    , _itlPageToken  :: !(Maybe Text)
+    { _itlReturnPartialSuccess :: !(Maybe Bool)
+    , _itlOrderBy :: !(Maybe Text)
+    , _itlProject :: !Text
+    , _itlFilter :: !(Maybe Text)
+    , _itlPageToken :: !(Maybe Text)
     , _itlMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -78,6 +81,8 @@ data InstanceTemplatesList =
 -- | Creates a value of 'InstanceTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itlReturnPartialSuccess'
 --
 -- * 'itlOrderBy'
 --
@@ -93,7 +98,8 @@ instanceTemplatesList
     -> InstanceTemplatesList
 instanceTemplatesList pItlProject_ =
   InstanceTemplatesList'
-    { _itlOrderBy = Nothing
+    { _itlReturnPartialSuccess = Nothing
+    , _itlOrderBy = Nothing
     , _itlProject = pItlProject_
     , _itlFilter = Nothing
     , _itlPageToken = Nothing
@@ -101,14 +107,21 @@ instanceTemplatesList pItlProject_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+itlReturnPartialSuccess :: Lens' InstanceTemplatesList (Maybe Bool)
+itlReturnPartialSuccess
+  = lens _itlReturnPartialSuccess
+      (\ s a -> s{_itlReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 itlOrderBy :: Lens' InstanceTemplatesList (Maybe Text)
 itlOrderBy
   = lens _itlOrderBy (\ s a -> s{_itlOrderBy = a})
@@ -121,34 +134,36 @@ itlProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 itlFilter :: Lens' InstanceTemplatesList (Maybe Text)
 itlFilter
   = lens _itlFilter (\ s a -> s{_itlFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 itlPageToken :: Lens' InstanceTemplatesList (Maybe Text)
 itlPageToken
   = lens _itlPageToken (\ s a -> s{_itlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 itlMaxResults :: Lens' InstanceTemplatesList Word32
 itlMaxResults
   = lens _itlMaxResults
@@ -162,7 +177,9 @@ instance GoogleRequest InstanceTemplatesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceTemplatesList'{..}
-          = go _itlProject _itlOrderBy _itlFilter _itlPageToken
+          = go _itlProject _itlReturnPartialSuccess _itlOrderBy
+              _itlFilter
+              _itlPageToken
               (Just _itlMaxResults)
               (Just AltJSON)
               computeService

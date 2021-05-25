@@ -71,6 +71,9 @@ module Network.Google.Dataflow
     -- ** dataflow.projects.jobs.workItems.reportStatus
     , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 
+    -- ** dataflow.projects.locations.flexTemplates.launch
+    , module Network.Google.Resource.Dataflow.Projects.Locations.FlexTemplates.Launch
+
     -- ** dataflow.projects.locations.jobs.create
     , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
 
@@ -83,6 +86,9 @@ module Network.Google.Dataflow
     -- ** dataflow.projects.locations.jobs.get
     , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
 
+    -- ** dataflow.projects.locations.jobs.getExecutionDetails
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
+
     -- ** dataflow.projects.locations.jobs.getMetrics
     , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
 
@@ -94,6 +100,12 @@ module Network.Google.Dataflow
 
     -- ** dataflow.projects.locations.jobs.snapshot
     , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
+
+    -- ** dataflow.projects.locations.jobs.snapshots.list
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshots.List
+
+    -- ** dataflow.projects.locations.jobs.stages.getExecutionDetails
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
 
     -- ** dataflow.projects.locations.jobs.update
     , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
@@ -177,6 +189,8 @@ module Network.Google.Dataflow
     , ParameterMetadata
     , parameterMetadata
     , pmHelpText
+    , pmParamType
+    , pmCustomMetadata
     , pmIsOptional
     , pmName
     , pmRegexes
@@ -237,9 +251,25 @@ module Network.Google.Dataflow
     , WorkerHealthReport
     , workerHealthReport
     , whrVMIsHealthy
+    , whrVMBrokenCode
     , whrReportInterval
+    , whrMsg
     , whrPods
     , whrVMStartupTime
+    , whrVMIsBroken
+
+    -- ** StageExecutionDetails
+    , StageExecutionDetails
+    , stageExecutionDetails
+    , sedNextPageToken
+    , sedWorkers
+
+    -- ** SdkHarnessContainerImage
+    , SdkHarnessContainerImage
+    , sdkHarnessContainerImage
+    , shciContainerImage
+    , shciUseSingleCorePerContainer
+    , shciEnvironmentId
 
     -- ** Snapshot
     , Snapshot
@@ -247,8 +277,13 @@ module Network.Google.Dataflow
     , sCreationTime
     , sTtl
     , sSourceJobId
+    , sState
+    , sPubsubMetadata
     , sId
+    , sRegion
     , sProjectId
+    , sDescription
+    , sDiskSizeBytes
 
     -- ** SourceSplitOptions
     , SourceSplitOptions
@@ -282,18 +317,26 @@ module Network.Google.Dataflow
     , ioOriginalName
     , ioOnlyCountKeyBytes
 
+    -- ** ProjectsJobsAggregatedFilter
+    , ProjectsJobsAggregatedFilter (..)
+
     -- ** IntegerGauge
     , IntegerGauge
     , integerGauge
     , igValue
     , igTimestamp
 
+    -- ** StageSummaryState
+    , StageSummaryState (..)
+
     -- ** LaunchTemplateParameters
     , LaunchTemplateParameters
     , launchTemplateParameters
     , ltpEnvironment
     , ltpJobName
+    , ltpTransformNameMApping
     , ltpParameters
+    , ltpUpdate
 
     -- ** ReportWorkItemStatusRequest
     , ReportWorkItemStatusRequest
@@ -334,6 +377,9 @@ module Network.Google.Dataflow
     , workerHealthReportResponse
     , whrrReportInterval
 
+    -- ** FlexTemplateRuntimeEnvironmentIPConfiguration
+    , FlexTemplateRuntimeEnvironmentIPConfiguration (..)
+
     -- ** DisplayData
     , DisplayData
     , displayData
@@ -354,12 +400,34 @@ module Network.Google.Dataflow
     , SendDebugCaptureResponse
     , sendDebugCaptureResponse
 
+    -- ** ContainerSpec
+    , ContainerSpec
+    , containerSpec
+    , csImage
+    , csSdkInfo
+    , csDefaultEnvironment
+    , csMetadata
+
+    -- ** ResourceUtilizationReportContainers
+    , ResourceUtilizationReportContainers
+    , resourceUtilizationReportContainers
+    , rurcAddtional
+
     -- ** StructuredMessage
     , StructuredMessage
     , structuredMessage
     , smMessageText
     , smMessageKey
     , smParameters
+
+    -- ** SDKInfo
+    , SDKInfo
+    , sDKInfo
+    , sdkiVersion
+    , sdkiLanguage
+
+    -- ** ProjectsJobsAggregatedView
+    , ProjectsJobsAggregatedView (..)
 
     -- ** JobLabels
     , JobLabels
@@ -417,13 +485,16 @@ module Network.Google.Dataflow
     -- ** ValidateResponse
     , ValidateResponse
     , validateResponse
+    , vrQueryInfo
     , vrErrorMessage
 
     -- ** GetTemplateResponse
     , GetTemplateResponse
     , getTemplateResponse
     , gtrStatus
+    , gtrTemplateType
     , gtrMetadata
+    , gtrRuntimeMetadata
 
     -- ** WriteInstruction
     , WriteInstruction
@@ -435,6 +506,15 @@ module Network.Google.Dataflow
     , EnvironmentUserAgent
     , environmentUserAgent
     , euaAddtional
+
+    -- ** FlexTemplateRuntimeEnvironmentFlexrsGoal
+    , FlexTemplateRuntimeEnvironmentFlexrsGoal (..)
+
+    -- ** ProjectsJobsListView
+    , ProjectsJobsListView (..)
+
+    -- ** GetTemplateResponseTemplateType
+    , GetTemplateResponseTemplateType (..)
 
     -- ** Disk
     , Disk
@@ -476,16 +556,21 @@ module Network.Google.Dataflow
     -- ** Environment
     , Environment
     , environment
+    , eShuffleMode
     , eDataSet
     , eExperiments
+    , eServiceOptions
     , eFlexResourceSchedulingGoal
+    , eWorkerRegion
     , eWorkerPools
+    , eDebugOptions
     , eClusterManagerAPIService
     , eVersion
     , eInternalExperiments
     , eTempStoragePrefix
     , eServiceAccountEmail
     , eUserAgent
+    , eWorkerZone
     , eServiceKmsKeyName
     , eSdkPipelineOptions
 
@@ -537,6 +622,16 @@ module Network.Google.Dataflow
     , derivedSource
     , dsDerivationMode
     , dsSource
+
+    -- ** StageSummary
+    , StageSummary
+    , stageSummary
+    , ssMetrics
+    , ssState
+    , ssProgress
+    , ssStartTime
+    , ssEndTime
+    , ssStageId
 
     -- ** JobMetrics
     , JobMetrics
@@ -621,6 +716,9 @@ module Network.Google.Dataflow
     , environmentInternalExperiments
     , eieAddtional
 
+    -- ** ProjectsJobsListFilter
+    , ProjectsJobsListFilter (..)
+
     -- ** TaskRunnerSettings
     , TaskRunnerSettings
     , taskRunnerSettings
@@ -644,6 +742,13 @@ module Network.Google.Dataflow
     , trsParallelWorkerSettings
     , trsLanguageHint
 
+    -- ** HotKeyDetection
+    , HotKeyDetection
+    , hotKeyDetection
+    , hkdUserStepName
+    , hkdHotKeyAge
+    , hkdSystemName
+
     -- ** StreamingComputationConfig
     , StreamingComputationConfig
     , streamingComputationConfig
@@ -652,6 +757,14 @@ module Network.Google.Dataflow
     , sccComputationId
     , sccTransformUserNameToStateFamily
     , sccStageName
+
+    -- ** MemInfo
+    , MemInfo
+    , memInfo
+    , miCurrentRssBytes
+    , miCurrentLimitBytes
+    , miTimestamp
+    , miTotalGbMs
 
     -- ** EnvironmentSdkPipelineOptions
     , EnvironmentSdkPipelineOptions
@@ -670,6 +783,9 @@ module Network.Google.Dataflow
     , ctTotalMs
     , ctRate
     , ctTimestamp
+
+    -- ** ParameterMetadataParamType
+    , ParameterMetadataParamType (..)
 
     -- ** LeaseWorkItemRequest
     , LeaseWorkItemRequest
@@ -695,6 +811,12 @@ module Network.Google.Dataflow
     , TopologyConfigUserStageToComputationNameMap
     , topologyConfigUserStageToComputationNameMap
     , tcustcnmAddtional
+
+    -- ** ProgressTimeseries
+    , ProgressTimeseries
+    , progressTimeseries
+    , ptCurrentProgress
+    , ptDataPoints
 
     -- ** ShellTask
     , ShellTask
@@ -736,6 +858,12 @@ module Network.Google.Dataflow
     , tcUserStageToComputationNameMap
     , tcComputations
 
+    -- ** ProjectsLocationsJobsListView
+    , ProjectsLocationsJobsListView (..)
+
+    -- ** SnapshotState
+    , SnapshotState (..)
+
     -- ** ApproximateSplitRequest
     , ApproximateSplitRequest
     , approximateSplitRequest
@@ -771,6 +899,17 @@ module Network.Google.Dataflow
     , svVersionDisplayName
     , svVersion
 
+    -- ** WorkItemDetails
+    , WorkItemDetails
+    , workItemDetails
+    , widMetrics
+    , widState
+    , widProgress
+    , widStartTime
+    , widAttemptId
+    , widTaskId
+    , widEndTime
+
     -- ** WorkItemServiceStateHarnessData
     , WorkItemServiceStateHarnessData
     , workItemServiceStateHarnessData
@@ -786,10 +925,15 @@ module Network.Google.Dataflow
     , ddaVMInstance
     , ddaDataDisks
 
+    -- ** ProjectsTemplatesGetView
+    , ProjectsTemplatesGetView (..)
+
     -- ** ResourceUtilizationReport
     , ResourceUtilizationReport
     , resourceUtilizationReport
+    , rurMemoryInfo
     , rurCPUTime
+    , rurContainers
 
     -- ** FailedLocation
     , FailedLocation
@@ -826,9 +970,11 @@ module Network.Google.Dataflow
     -- ** WorkItemServiceState
     , WorkItemServiceState
     , workItemServiceState
+    , wissCompleteWorkStatus
     , wissNextReportIndex
     , wissReportStatusInterval
     , wissHarnessData
+    , wissHotKeyDetection
     , wissSuggestedStopPoint
     , wissSuggestedStopPosition
     , wissLeaseExpireTime
@@ -878,6 +1024,11 @@ module Network.Google.Dataflow
     -- ** WorkerPoolDefaultPackageSet
     , WorkerPoolDefaultPackageSet (..)
 
+    -- ** DebugOptions
+    , DebugOptions
+    , debugOptions
+    , doEnableHotKeyLogging
+
     -- ** IntegerMean
     , IntegerMean
     , integerMean
@@ -915,22 +1066,37 @@ module Network.Google.Dataflow
     , workerLifecycleEventMetadata
     , wlemAddtional
 
+    -- ** LaunchFlexTemplateParameterParameters
+    , LaunchFlexTemplateParameterParameters
+    , launchFlexTemplateParameterParameters
+    , lftppAddtional
+
     -- ** WorkerPoolPoolArgs
     , WorkerPoolPoolArgs
     , workerPoolPoolArgs
     , wppaAddtional
 
+    -- ** LaunchFlexTemplateResponse
+    , LaunchFlexTemplateResponse
+    , launchFlexTemplateResponse
+    , lftrJob
+
     -- ** RuntimeEnvironment
     , RuntimeEnvironment
     , runtimeEnvironment
     , reNumWorkers
+    , reEnableStreamingEngine
     , reNetwork
+    , reWorkerRegion
     , reZone
+    , reIPConfiguration
     , reBypassTempDirValidation
     , reSubnetwork
     , reMachineType
     , reAdditionalUserLabels
+    , reKmsKeyName
     , reServiceAccountEmail
+    , reWorkerZone
     , reAdditionalExperiments
     , reMaxWorkers
     , reTempLocation
@@ -957,6 +1123,11 @@ module Network.Google.Dataflow
     , ssilTag
     , ssilStateFamily
 
+    -- ** QueryInfo
+    , QueryInfo
+    , queryInfo
+    , qiQueryProperty
+
     -- ** GetDebugConfigRequest
     , GetDebugConfigRequest
     , getDebugConfigRequest
@@ -964,11 +1135,29 @@ module Network.Google.Dataflow
     , gdcrComponentId
     , gdcrWorkerId
 
+    -- ** WorkerDetails
+    , WorkerDetails
+    , workerDetails
+    , wdWorkItems
+    , wdWorkerName
+
     -- ** CounterStructuredNameAndMetadata
     , CounterStructuredNameAndMetadata
     , counterStructuredNameAndMetadata
     , csnamName
     , csnamMetadata
+
+    -- ** Point
+    , Point
+    , point
+    , pTime
+    , pValue
+
+    -- ** ProjectsLocationsJobsMessagesListMinimumImportance
+    , ProjectsLocationsJobsMessagesListMinimumImportance (..)
+
+    -- ** QueryInfoQueryPropertyItem
+    , QueryInfoQueryPropertyItem (..)
 
     -- ** WorkerShutdownNotice
     , WorkerShutdownNotice
@@ -1017,6 +1206,9 @@ module Network.Google.Dataflow
     -- ** CounterMetadataStandardUnits
     , CounterMetadataStandardUnits (..)
 
+    -- ** ProjectsLocationsJobsGetView
+    , ProjectsLocationsJobsGetView (..)
+
     -- ** SeqMapTaskOutputInfo
     , SeqMapTaskOutputInfo
     , seqMapTaskOutputInfo
@@ -1043,6 +1235,11 @@ module Network.Google.Dataflow
     , seqMapTaskUserFn
     , smtufAddtional
 
+    -- ** LaunchFlexTemplateParameterTransformNameMAppings
+    , LaunchFlexTemplateParameterTransformNameMAppings
+    , launchFlexTemplateParameterTransformNameMAppings
+    , lftptnmaAddtional
+
     -- ** PartialGroupByKeyInstructionValueCombiningFn
     , PartialGroupByKeyInstructionValueCombiningFn
     , partialGroupByKeyInstructionValueCombiningFn
@@ -1052,6 +1249,7 @@ module Network.Google.Dataflow
     , Job
     , job
     , jStepsLocation
+    , jSatisfiesPzs
     , jCreatedFromSnapshotId
     , jRequestedState
     , jJobMetadata
@@ -1075,6 +1273,12 @@ module Network.Google.Dataflow
     , jCurrentStateTime
     , jReplaceJobId
     , jCreateTime
+
+    -- ** JobExecutionDetails
+    , JobExecutionDetails
+    , jobExecutionDetails
+    , jedNextPageToken
+    , jedStages
 
     -- ** AutoscalingEventEventType
     , AutoscalingEventEventType (..)
@@ -1100,6 +1304,13 @@ module Network.Google.Dataflow
     , sinkSpec
     , sAddtional
 
+    -- ** PubsubSnapshotMetadata
+    , PubsubSnapshotMetadata
+    , pubsubSnapshotMetadata
+    , psmTopicName
+    , psmSnapshotName
+    , psmExpireTime
+
     -- ** WorkerPool
     , WorkerPool
     , workerPool
@@ -1115,6 +1326,7 @@ module Network.Google.Dataflow
     , wpPackages
     , wpOnHostMaintenance
     , wpDiskSourceImage
+    , wpSdkHarnessContainerImages
     , wpSubnetwork
     , wpMachineType
     , wpMetadata
@@ -1139,6 +1351,11 @@ module Network.Google.Dataflow
     , csName
     , csOriginalTransformOrCollection
 
+    -- ** ParameterMetadataCustomMetadata
+    , ParameterMetadataCustomMetadata
+    , parameterMetadataCustomMetadata
+    , pmcmAddtional
+
     -- ** ExecutionStageSummaryKind
     , ExecutionStageSummaryKind (..)
 
@@ -1155,6 +1372,7 @@ module Network.Google.Dataflow
     , ExecutionStageSummary
     , executionStageSummary
     , essOutputSource
+    , essPrerequisiteStage
     , essKind
     , essInputSource
     , essName
@@ -1178,6 +1396,11 @@ module Network.Google.Dataflow
     , snapshotJobRequest
     , sjrTtl
     , sjrLocation
+    , sjrSnapshotSources
+    , sjrDescription
+
+    -- ** ProjectsJobsMessagesListMinimumImportance
+    , ProjectsJobsMessagesListMinimumImportance (..)
 
     -- ** ReportWorkItemStatusResponse
     , ReportWorkItemStatusResponse
@@ -1251,14 +1474,23 @@ module Network.Google.Dataflow
     , krlDeliveryEndpoint
     , krlEnd
 
+    -- ** ProjectsLocationsJobsCreateView
+    , ProjectsLocationsJobsCreateView (..)
+
     -- ** Histogram
     , Histogram
     , histogram
     , hBucketCounts
     , hFirstBucketOffSet
 
+    -- ** SDKInfoLanguage
+    , SDKInfoLanguage (..)
+
     -- ** JobRequestedState
     , JobRequestedState (..)
+
+    -- ** RuntimeEnvironmentIPConfiguration
+    , RuntimeEnvironmentIPConfiguration (..)
 
     -- ** MultiOutputInfo
     , MultiOutputInfo
@@ -1275,10 +1507,18 @@ module Network.Google.Dataflow
     , pgbkiInputElementCodec
     , pgbkiOriginalCombineValuesInputStoreName
 
+    -- ** LaunchTemplateParametersTransformNameMApping
+    , LaunchTemplateParametersTransformNameMApping
+    , launchTemplateParametersTransformNameMApping
+    , ltptnmaAddtional
+
     -- ** LeaseWorkItemResponseUnifiedWorkerResponse
     , LeaseWorkItemResponseUnifiedWorkerResponse
     , leaseWorkItemResponseUnifiedWorkerResponse
     , lAddtional
+
+    -- ** ProjectsLocationsTemplatesGetView
+    , ProjectsLocationsTemplatesGetView (..)
 
     -- ** WorkerLifecycleEventEvent
     , WorkerLifecycleEventEvent (..)
@@ -1310,6 +1550,12 @@ module Network.Google.Dataflow
     , duSumOfSquares
     , duSum
 
+    -- ** LaunchFlexTemplateRequest
+    , LaunchFlexTemplateRequest
+    , launchFlexTemplateRequest
+    , lftrLaunchParameter
+    , lftrValidateOnly
+
     -- ** SourceBaseSpecsItem
     , SourceBaseSpecsItem
     , sourceBaseSpecsItem
@@ -1333,10 +1579,27 @@ module Network.Google.Dataflow
     , sideInputInfoKind
     , siikAddtional
 
+    -- ** LaunchFlexTemplateParameter
+    , LaunchFlexTemplateParameter
+    , launchFlexTemplateParameter
+    , lftpContainerSpec
+    , lftpLaunchOptions
+    , lftpEnvironment
+    , lftpJobName
+    , lftpTransformNameMAppings
+    , lftpParameters
+    , lftpContainerSpecGcsPath
+    , lftpUpdate
+
+    -- ** ProjectsJobsCreateView
+    , ProjectsJobsCreateView (..)
+
     -- ** StreamingConfigTask
     , StreamingConfigTask
     , streamingConfigTask
     , sctUserStepToStateFamilyNameMap
+    , sctCommitStreamChunkSizeBytes
+    , sctGetDataStreamChunkSizeBytes
     , sctStreamingComputationConfigs
     , sctWindmillServiceEndpoint
     , sctWindmillServicePort
@@ -1359,6 +1622,11 @@ module Network.Google.Dataflow
     , sourceSplitShard
     , sssDerivationMode
     , sssSource
+
+    -- ** FlexTemplateRuntimeEnvironmentAdditionalUserLabels
+    , FlexTemplateRuntimeEnvironmentAdditionalUserLabels
+    , flexTemplateRuntimeEnvironmentAdditionalUserLabels
+    , ftreaulAddtional
 
     -- ** SideInputInfo
     , SideInputInfo
@@ -1405,6 +1673,11 @@ module Network.Google.Dataflow
     , krddaStart
     , krddaEnd
 
+    -- ** LaunchFlexTemplateParameterLaunchOptions
+    , LaunchFlexTemplateParameterLaunchOptions
+    , launchFlexTemplateParameterLaunchOptions
+    , lftploAddtional
+
     -- ** AutoscalingEvent
     , AutoscalingEvent
     , autoscalingEvent
@@ -1420,6 +1693,30 @@ module Network.Google.Dataflow
     , sourceSplitRequest
     , ssrSource
     , ssrOptions
+
+    -- ** FlexTemplateRuntimeEnvironment
+    , FlexTemplateRuntimeEnvironment
+    , flexTemplateRuntimeEnvironment
+    , ftreSdkContainerImage
+    , ftreMaxNumWorkers
+    , ftreDiskSizeGb
+    , ftreNumWorkers
+    , ftreEnableStreamingEngine
+    , ftreFlexrsGoal
+    , ftreNetwork
+    , ftreWorkerRegion
+    , ftreZone
+    , ftreIPConfiguration
+    , ftreStagingLocation
+    , ftreSubnetwork
+    , ftreMachineType
+    , ftreAdditionalUserLabels
+    , ftreKmsKeyName
+    , ftreServiceAccountEmail
+    , ftreWorkerZone
+    , ftreAdditionalExperiments
+    , ftreMaxWorkers
+    , ftreTempLocation
 
     -- ** ListJobMessagesResponse
     , ListJobMessagesResponse
@@ -1447,6 +1744,9 @@ module Network.Google.Dataflow
     -- ** CounterStructuredNameOrigin
     , CounterStructuredNameOrigin (..)
 
+    -- ** ProjectsLocationsJobsListFilter
+    , ProjectsLocationsJobsListFilter (..)
+
     -- ** InstructionInput
     , InstructionInput
     , instructionInput
@@ -1471,6 +1771,12 @@ module Network.Google.Dataflow
     , streamingConfigTaskUserStepToStateFamilyNameMap
     , sctustsfnmAddtional
 
+    -- ** WorkItemDetailsState
+    , WorkItemDetailsState (..)
+
+    -- ** EnvironmentShuffleMode
+    , EnvironmentShuffleMode (..)
+
     -- ** ExecutionStageState
     , ExecutionStageState
     , executionStageState
@@ -1485,6 +1791,9 @@ module Network.Google.Dataflow
     , ssUserName
     , ssName
     , ssOriginalTransformOrCollection
+
+    -- ** ProjectsJobsGetView
+    , ProjectsJobsGetView (..)
 
     -- ** SourceOperationRequest
     , SourceOperationRequest
@@ -1527,48 +1836,58 @@ module Network.Google.Dataflow
     , parameter
     , parValue
     , parKey
+
+    -- ** RuntimeMetadata
+    , RuntimeMetadata
+    , runtimeMetadata
+    , rmSdkInfo
+    , rmParameters
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Dataflow.Projects.DeleteSnapshots
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Create
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Get
-import           Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
-import           Network.Google.Resource.Dataflow.Projects.Jobs.List
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Snapshot
-import           Network.Google.Resource.Dataflow.Projects.Jobs.Update
-import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
-import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
-import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
-import           Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Delete
-import           Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Get
-import           Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
-import           Network.Google.Resource.Dataflow.Projects.Locations.SQL.Validate
-import           Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
-import           Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
-import           Network.Google.Resource.Dataflow.Projects.Locations.Templates.Launch
-import           Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
-import           Network.Google.Resource.Dataflow.Projects.Snapshots.Get
-import           Network.Google.Resource.Dataflow.Projects.Snapshots.List
-import           Network.Google.Resource.Dataflow.Projects.Templates.Create
-import           Network.Google.Resource.Dataflow.Projects.Templates.Get
-import           Network.Google.Resource.Dataflow.Projects.Templates.Launch
-import           Network.Google.Resource.Dataflow.Projects.WorkerMessages
+import Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Resource.Dataflow.Projects.DeleteSnapshots
+import Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
+import Network.Google.Resource.Dataflow.Projects.Jobs.Create
+import Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
+import Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
+import Network.Google.Resource.Dataflow.Projects.Jobs.Get
+import Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
+import Network.Google.Resource.Dataflow.Projects.Jobs.List
+import Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
+import Network.Google.Resource.Dataflow.Projects.Jobs.Snapshot
+import Network.Google.Resource.Dataflow.Projects.Jobs.Update
+import Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
+import Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+import Network.Google.Resource.Dataflow.Projects.Locations.FlexTemplates.Launch
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshots.List
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
+import Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+import Network.Google.Resource.Dataflow.Projects.Locations.SQL.Validate
+import Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Delete
+import Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Get
+import Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
+import Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
+import Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
+import Network.Google.Resource.Dataflow.Projects.Locations.Templates.Launch
+import Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
+import Network.Google.Resource.Dataflow.Projects.Snapshots.Get
+import Network.Google.Resource.Dataflow.Projects.Snapshots.List
+import Network.Google.Resource.Dataflow.Projects.Templates.Create
+import Network.Google.Resource.Dataflow.Projects.Templates.Get
+import Network.Google.Resource.Dataflow.Projects.Templates.Launch
+import Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
 {- $resources
 TODO
@@ -1593,18 +1912,23 @@ type DataflowAPI =
        :<|> ProjectsJobsGetMetricsResource
        :<|> ProjectsSnapshotsListResource
        :<|> ProjectsSnapshotsGetResource
+       :<|> ProjectsLocationsFlexTemplatesLaunchResource
        :<|> ProjectsLocationsTemplatesLaunchResource
        :<|> ProjectsLocationsTemplatesGetResource
        :<|> ProjectsLocationsTemplatesCreateResource
        :<|> ProjectsLocationsJobsDebugGetConfigResource
        :<|> ProjectsLocationsJobsDebugSendCaptureResource
+       :<|> ProjectsLocationsJobsSnapshotsListResource
        :<|> ProjectsLocationsJobsWorkItemsLeaseResource
        :<|>
        ProjectsLocationsJobsWorkItemsReportStatusResource
+       :<|>
+       ProjectsLocationsJobsStagesGetExecutionDetailsResource
        :<|> ProjectsLocationsJobsMessagesListResource
        :<|> ProjectsLocationsJobsSnapshotResource
        :<|> ProjectsLocationsJobsListResource
        :<|> ProjectsLocationsJobsGetResource
+       :<|> ProjectsLocationsJobsGetExecutionDetailsResource
        :<|> ProjectsLocationsJobsCreateResource
        :<|> ProjectsLocationsJobsUpdateResource
        :<|> ProjectsLocationsJobsGetMetricsResource

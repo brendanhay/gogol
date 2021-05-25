@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Dpcs.List
     , cdlCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.dpcs.list@ method which the
 -- 'CustomersDpcsList' request conforms to.
@@ -65,12 +65,12 @@ type CustomersDpcsListResource =
 -- /See:/ 'customersDpcsList' smart constructor.
 data CustomersDpcsList =
   CustomersDpcsList'
-    { _cdlParent         :: !Text
-    , _cdlXgafv          :: !(Maybe Xgafv)
+    { _cdlParent :: !Text
+    , _cdlXgafv :: !(Maybe Xgafv)
     , _cdlUploadProtocol :: !(Maybe Text)
-    , _cdlAccessToken    :: !(Maybe Text)
-    , _cdlUploadType     :: !(Maybe Text)
-    , _cdlCallback       :: !(Maybe Text)
+    , _cdlAccessToken :: !(Maybe Text)
+    , _cdlUploadType :: !(Maybe Text)
+    , _cdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

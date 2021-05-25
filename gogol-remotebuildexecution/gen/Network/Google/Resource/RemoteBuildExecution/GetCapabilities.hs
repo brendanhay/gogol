@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- GetCapabilities returns the server capabilities configuration.
+-- GetCapabilities returns the server capabilities configuration of the
+-- remote endpoint. Only the capabilities of the services supported by the
+-- endpoint will be returned: * Execution + CAS + Action Cache endpoints
+-- should return both CacheCapabilities and ExecutionCapabilities. *
+-- Execution only endpoints should return ExecutionCapabilities. * CAS +
+-- Action Cache only endpoints should return CacheCapabilities.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.getCapabilities@.
 module Network.Google.Resource.RemoteBuildExecution.GetCapabilities
@@ -41,8 +46,8 @@ module Network.Google.Resource.RemoteBuildExecution.GetCapabilities
     , gcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.getCapabilities@ method which the
 -- 'GetCapabilities' request conforms to.
@@ -59,17 +64,22 @@ type GetCapabilitiesResource =
                        Get '[JSON]
                          BuildBazelRemoteExecutionV2ServerCapabilities
 
--- | GetCapabilities returns the server capabilities configuration.
+-- | GetCapabilities returns the server capabilities configuration of the
+-- remote endpoint. Only the capabilities of the services supported by the
+-- endpoint will be returned: * Execution + CAS + Action Cache endpoints
+-- should return both CacheCapabilities and ExecutionCapabilities. *
+-- Execution only endpoints should return ExecutionCapabilities. * CAS +
+-- Action Cache only endpoints should return CacheCapabilities.
 --
 -- /See:/ 'getCapabilities' smart constructor.
 data GetCapabilities =
   GetCapabilities'
-    { _gcXgafv          :: !(Maybe Xgafv)
+    { _gcXgafv :: !(Maybe Xgafv)
     , _gcUploadProtocol :: !(Maybe Text)
-    , _gcAccessToken    :: !(Maybe Text)
-    , _gcUploadType     :: !(Maybe Text)
-    , _gcInstanceName   :: !Text
-    , _gcCallback       :: !(Maybe Text)
+    , _gcAccessToken :: !(Maybe Text)
+    , _gcUploadType :: !(Maybe Text)
+    , _gcInstanceName :: !Text
+    , _gcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

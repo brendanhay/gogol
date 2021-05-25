@@ -47,8 +47,8 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Delete
     , cadCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.aliases.delete@ method which the
 -- 'CoursesAliasesDelete' request conforms to.
@@ -75,13 +75,13 @@ type CoursesAliasesDeleteResource =
 -- /See:/ 'coursesAliasesDelete' smart constructor.
 data CoursesAliasesDelete =
   CoursesAliasesDelete'
-    { _cadXgafv          :: !(Maybe Xgafv)
+    { _cadXgafv :: !(Maybe Xgafv)
     , _cadUploadProtocol :: !(Maybe Text)
-    , _cadCourseId       :: !Text
-    , _cadAccessToken    :: !(Maybe Text)
-    , _cadUploadType     :: !(Maybe Text)
-    , _cadAlias          :: !Text
-    , _cadCallback       :: !(Maybe Text)
+    , _cadCourseId :: !Text
+    , _cadAccessToken :: !(Maybe Text)
+    , _cadUploadType :: !(Maybe Text)
+    , _cadAlias :: !Text
+    , _cadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

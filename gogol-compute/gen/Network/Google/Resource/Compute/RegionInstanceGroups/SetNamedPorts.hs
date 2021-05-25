@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
     , rigsnpInstanceGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroups.setNamedPorts@ method which the
 -- 'RegionInstanceGroupsSetNamedPorts' request conforms to.
@@ -66,10 +66,10 @@ type RegionInstanceGroupsSetNamedPortsResource =
 -- /See:/ 'regionInstanceGroupsSetNamedPorts' smart constructor.
 data RegionInstanceGroupsSetNamedPorts =
   RegionInstanceGroupsSetNamedPorts'
-    { _rigsnpRequestId     :: !(Maybe Text)
-    , _rigsnpProject       :: !Text
-    , _rigsnpPayload       :: !RegionInstanceGroupsSetNamedPortsRequest
-    , _rigsnpRegion        :: !Text
+    { _rigsnpRequestId :: !(Maybe Text)
+    , _rigsnpProject :: !Text
+    , _rigsnpPayload :: !RegionInstanceGroupsSetNamedPortsRequest
+    , _rigsnpRegion :: !Text
     , _rigsnpInstanceGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

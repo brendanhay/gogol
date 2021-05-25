@@ -45,8 +45,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.CreateDocu
     , pddcdCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.createDocument@ method which the
 -- 'ProjectsDatabasesDocumentsCreateDocument' request conforms to.
@@ -70,16 +70,16 @@ type ProjectsDatabasesDocumentsCreateDocumentResource
 -- /See:/ 'projectsDatabasesDocumentsCreateDocument' smart constructor.
 data ProjectsDatabasesDocumentsCreateDocument =
   ProjectsDatabasesDocumentsCreateDocument'
-    { _pddcdParent         :: !Text
-    , _pddcdXgafv          :: !(Maybe Xgafv)
-    , _pddcdDocumentId     :: !(Maybe Text)
+    { _pddcdParent :: !Text
+    , _pddcdXgafv :: !(Maybe Xgafv)
+    , _pddcdDocumentId :: !(Maybe Text)
     , _pddcdUploadProtocol :: !(Maybe Text)
-    , _pddcdAccessToken    :: !(Maybe Text)
-    , _pddcdCollectionId   :: !Text
-    , _pddcdUploadType     :: !(Maybe Text)
-    , _pddcdPayload        :: !Document
+    , _pddcdAccessToken :: !(Maybe Text)
+    , _pddcdCollectionId :: !Text
+    , _pddcdUploadType :: !(Maybe Text)
+    , _pddcdPayload :: !Document
     , _pddcdMaskFieldPaths :: !(Maybe [Text])
-    , _pddcdCallback       :: !(Maybe Text)
+    , _pddcdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,7 +127,7 @@ projectsDatabasesDocumentsCreateDocument pPddcdParent_ pPddcdCollectionId_ pPddc
     }
 
 
--- | The parent resource. For example:
+-- | Required. The parent resource. For example:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/chatrooms\/{chatroom_id}\`
 pddcdParent :: Lens' ProjectsDatabasesDocumentsCreateDocument Text
@@ -158,8 +158,8 @@ pddcdAccessToken
   = lens _pddcdAccessToken
       (\ s a -> s{_pddcdAccessToken = a})
 
--- | The collection ID, relative to \`parent\`, to list. For example:
--- \`chatrooms\`.
+-- | Required. The collection ID, relative to \`parent\`, to list. For
+-- example: \`chatrooms\`.
 pddcdCollectionId :: Lens' ProjectsDatabasesDocumentsCreateDocument Text
 pddcdCollectionId
   = lens _pddcdCollectionId

@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
     , plwmCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.workerMessages@ method which the
 -- 'ProjectsLocationsWorkerMessages' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsLocationsWorkerMessagesResource =
 -- /See:/ 'projectsLocationsWorkerMessages' smart constructor.
 data ProjectsLocationsWorkerMessages =
   ProjectsLocationsWorkerMessages'
-    { _plwmXgafv          :: !(Maybe Xgafv)
+    { _plwmXgafv :: !(Maybe Xgafv)
     , _plwmUploadProtocol :: !(Maybe Text)
-    , _plwmLocation       :: !Text
-    , _plwmAccessToken    :: !(Maybe Text)
-    , _plwmUploadType     :: !(Maybe Text)
-    , _plwmPayload        :: !SendWorkerMessagesRequest
-    , _plwmProjectId      :: !Text
-    , _plwmCallback       :: !(Maybe Text)
+    , _plwmLocation :: !Text
+    , _plwmAccessToken :: !(Maybe Text)
+    , _plwmUploadType :: !(Maybe Text)
+    , _plwmPayload :: !SendWorkerMessagesRequest
+    , _plwmProjectId :: !Text
+    , _plwmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

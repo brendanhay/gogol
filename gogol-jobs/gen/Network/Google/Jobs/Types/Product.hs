@@ -17,19 +17,18 @@
 --
 module Network.Google.Jobs.Types.Product where
 
-import           Network.Google.Jobs.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Jobs.Types.Sum
+import Network.Google.Prelude
 
--- | An object representing a latitude\/longitude pair. This is expressed as
--- a pair of doubles representing degrees latitude and degrees longitude.
--- Unless specified otherwise, this must conform to the
--- <http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf WGS84 standard>.
--- Values must be within normalized ranges.
+-- | An object that represents a latitude\/longitude pair. This is expressed
+-- as a pair of doubles to represent degrees latitude and degrees
+-- longitude. Unless specified otherwise, this object must conform to the
+-- WGS84 standard. Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng =
   LatLng'
-    { _llLatitude  :: !(Maybe (Textual Double))
+    { _llLatitude :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -73,13 +72,62 @@ instance ToJSON LatLng where
                  [("latitude" .=) <$> _llLatitude,
                   ("longitude" .=) <$> _llLongitude])
 
+-- | When a request spans multiple servers, a MendelDebugInput may travel
+-- with the request and take effect in all the servers. This field is a map
+-- of namespaces to NamespacedMendelDebugInput protos. In a single server,
+-- up to two NamespacedMendelDebugInput protos are applied: 1.
+-- NamespacedMendelDebugInput with the global namespace (key == \"\"). 2.
+-- NamespacedMendelDebugInput with the server\'s namespace. When both
+-- NamespacedMendelDebugInput protos are present, they are merged. See
+-- go\/mendel-debug-forcing for more details.
+--
+-- /See:/ 'mendelDebugInputNamespacedDebugInput' smart constructor.
+newtype MendelDebugInputNamespacedDebugInput =
+  MendelDebugInputNamespacedDebugInput'
+    { _mdindiAddtional :: HashMap Text NamespacedDebugInput
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MendelDebugInputNamespacedDebugInput' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdindiAddtional'
+mendelDebugInputNamespacedDebugInput
+    :: HashMap Text NamespacedDebugInput -- ^ 'mdindiAddtional'
+    -> MendelDebugInputNamespacedDebugInput
+mendelDebugInputNamespacedDebugInput pMdindiAddtional_ =
+  MendelDebugInputNamespacedDebugInput'
+    {_mdindiAddtional = _Coerce # pMdindiAddtional_}
+
+
+mdindiAddtional :: Lens' MendelDebugInputNamespacedDebugInput (HashMap Text NamespacedDebugInput)
+mdindiAddtional
+  = lens _mdindiAddtional
+      (\ s a -> s{_mdindiAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           MendelDebugInputNamespacedDebugInput
+         where
+        parseJSON
+          = withObject "MendelDebugInputNamespacedDebugInput"
+              (\ o ->
+                 MendelDebugInputNamespacedDebugInput' <$>
+                   (parseJSONObject o))
+
+instance ToJSON MendelDebugInputNamespacedDebugInput
+         where
+        toJSON = toJSON . _mdindiAddtional
+
 -- | Application related details of a job posting.
 --
 -- /See:/ 'applicationInfo' smart constructor.
 data ApplicationInfo =
   ApplicationInfo'
-    { _aiURIs        :: !(Maybe [Text])
-    , _aiEmails      :: !(Maybe [Text])
+    { _aiURIs :: !(Maybe [Text])
+    , _aiEmails :: !(Maybe [Text])
     , _aiInstruction :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -101,31 +149,28 @@ applicationInfo =
     {_aiURIs = Nothing, _aiEmails = Nothing, _aiInstruction = Nothing}
 
 
--- | Optional but at least one of uris, emails or instruction must be
--- specified. Use this URI field to direct an applicant to a website, for
--- example to link to an online application form. The maximum number of
--- allowed characters for each entry is 2,000.
+-- | Use this URI field to direct an applicant to a website, for example to
+-- link to an online application form. The maximum number of allowed
+-- characters for each entry is 2,000.
 aiURIs :: Lens' ApplicationInfo [Text]
 aiURIs
   = lens _aiURIs (\ s a -> s{_aiURIs = a}) . _Default .
       _Coerce
 
--- | Optional but at least one of uris, emails or instruction must be
--- specified. Use this field to specify email address(es) to which resumes
--- or applications can be sent. The maximum number of allowed characters
--- for each entry is 255.
+-- | Use this field to specify email address(es) to which resumes or
+-- applications can be sent. The maximum number of allowed characters for
+-- each entry is 255.
 aiEmails :: Lens' ApplicationInfo [Text]
 aiEmails
   = lens _aiEmails (\ s a -> s{_aiEmails = a}) .
       _Default
       . _Coerce
 
--- | Optional but at least one of uris, emails or instruction must be
--- specified. Use this field to provide instructions, such as \"Mail your
--- application to ...\", that a candidate can follow to apply for the job.
--- This field accepts and sanitizes HTML input, and also accepts bold,
--- italic, ordered list, and unordered list markup tags. The maximum number
--- of allowed characters is 3,000.
+-- | Use this field to provide instructions, such as \"Mail your application
+-- to ...\", that a candidate can follow to apply for the job. This field
+-- accepts and sanitizes HTML input, and also accepts bold, italic, ordered
+-- list, and unordered list markup tags. The maximum number of allowed
+-- characters is 3,000.
 aiInstruction :: Lens' ApplicationInfo (Maybe Text)
 aiInstruction
   = lens _aiInstruction
@@ -148,16 +193,63 @@ instance ToJSON ApplicationInfo where
                   ("emails" .=) <$> _aiEmails,
                   ("instruction" .=) <$> _aiInstruction])
 
--- | Output only. Job entry with metadata inside SearchJobsResponse.
+-- | Message representing input to a Mendel server for debug forcing. See
+-- go\/mendel-debug-forcing for more details. Next ID: 2
+--
+-- /See:/ 'mendelDebugInput' smart constructor.
+newtype MendelDebugInput =
+  MendelDebugInput'
+    { _mdiNamespacedDebugInput :: Maybe MendelDebugInputNamespacedDebugInput
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MendelDebugInput' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdiNamespacedDebugInput'
+mendelDebugInput
+    :: MendelDebugInput
+mendelDebugInput = MendelDebugInput' {_mdiNamespacedDebugInput = Nothing}
+
+
+-- | When a request spans multiple servers, a MendelDebugInput may travel
+-- with the request and take effect in all the servers. This field is a map
+-- of namespaces to NamespacedMendelDebugInput protos. In a single server,
+-- up to two NamespacedMendelDebugInput protos are applied: 1.
+-- NamespacedMendelDebugInput with the global namespace (key == \"\"). 2.
+-- NamespacedMendelDebugInput with the server\'s namespace. When both
+-- NamespacedMendelDebugInput protos are present, they are merged. See
+-- go\/mendel-debug-forcing for more details.
+mdiNamespacedDebugInput :: Lens' MendelDebugInput (Maybe MendelDebugInputNamespacedDebugInput)
+mdiNamespacedDebugInput
+  = lens _mdiNamespacedDebugInput
+      (\ s a -> s{_mdiNamespacedDebugInput = a})
+
+instance FromJSON MendelDebugInput where
+        parseJSON
+          = withObject "MendelDebugInput"
+              (\ o ->
+                 MendelDebugInput' <$> (o .:? "namespacedDebugInput"))
+
+instance ToJSON MendelDebugInput where
+        toJSON MendelDebugInput'{..}
+          = object
+              (catMaybes
+                 [("namespacedDebugInput" .=) <$>
+                    _mdiNamespacedDebugInput])
+
+-- | Job entry with metadata inside SearchJobsResponse.
 --
 -- /See:/ 'matchingJob' smart constructor.
 data MatchingJob =
   MatchingJob'
-    { _mjJobTitleSnippet   :: !(Maybe Text)
-    , _mjJobSummary        :: !(Maybe Text)
-    , _mjCommuteInfo       :: !(Maybe CommuteInfo)
+    { _mjJobTitleSnippet :: !(Maybe Text)
+    , _mjJobSummary :: !(Maybe Text)
+    , _mjCommuteInfo :: !(Maybe CommuteInfo)
     , _mjSearchTextSnippet :: !(Maybe Text)
-    , _mjJob               :: !(Maybe Job)
+    , _mjJob :: !(Maybe Job)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -187,9 +279,9 @@ matchingJob =
     }
 
 
--- | Contains snippets of text from the Job.job_title field most closely
--- matching a search query\'s keywords, if available. The matching query
--- keywords are enclosed in HTML bold tags.
+-- | Contains snippets of text from the Job.title field most closely matching
+-- a search query\'s keywords, if available. The matching query keywords
+-- are enclosed in HTML bold tags.
 mjJobTitleSnippet :: Lens' MatchingJob (Maybe Text)
 mjJobTitleSnippet
   = lens _mjJobTitleSnippet
@@ -242,45 +334,17 @@ instance ToJSON MatchingJob where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -336,16 +400,17 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | Input only. Meta information related to the job searcher or entity
--- conducting the job search. This information is used to improve the
--- performance of the service.
+-- | Meta information related to the job searcher or entity conducting the
+-- job search. This information is used to improve the performance of the
+-- service.
 --
 -- /See:/ 'requestMetadata' smart constructor.
 data RequestMetadata =
   RequestMetadata'
-    { _rmDomain     :: !(Maybe Text)
-    , _rmUserId     :: !(Maybe Text)
-    , _rmSessionId  :: !(Maybe Text)
+    { _rmDomain :: !(Maybe Text)
+    , _rmAllowMissingIds :: !(Maybe Bool)
+    , _rmUserId :: !(Maybe Text)
+    , _rmSessionId :: !(Maybe Text)
     , _rmDeviceInfo :: !(Maybe DeviceInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -357,6 +422,8 @@ data RequestMetadata =
 --
 -- * 'rmDomain'
 --
+-- * 'rmAllowMissingIds'
+--
 -- * 'rmUserId'
 --
 -- * 'rmSessionId'
@@ -367,48 +434,56 @@ requestMetadata
 requestMetadata =
   RequestMetadata'
     { _rmDomain = Nothing
+    , _rmAllowMissingIds = Nothing
     , _rmUserId = Nothing
     , _rmSessionId = Nothing
     , _rmDeviceInfo = Nothing
     }
 
 
--- | Required. The client-defined scope or source of the service call, which
--- typically is the domain on which the service has been implemented and is
--- currently being run. For example, if the service is being run by client
--- /Foo, Inc./, on job board www.foo.com and career site www.bar.com, then
--- this field is set to \"foo.com\" for use on the job board, and
--- \"bar.com\" for use on the career site. If this field isn\'t available
--- for some reason, send \"UNKNOWN\". Any improvements to the model for a
--- particular tenant site rely on this field being set correctly to a
--- domain. The maximum number of allowed characters is 255.
+-- | Required if allow_missing_ids is unset or \`false\`. The client-defined
+-- scope or source of the service call, which typically is the domain on
+-- which the service has been implemented and is currently being run. For
+-- example, if the service is being run by client *Foo, Inc.*, on job board
+-- www.foo.com and career site www.bar.com, then this field is set to
+-- \"foo.com\" for use on the job board, and \"bar.com\" for use on the
+-- career site. Note that any improvements to the model for a particular
+-- tenant site rely on this field being set correctly to a unique domain.
+-- The maximum number of allowed characters is 255.
 rmDomain :: Lens' RequestMetadata (Maybe Text)
 rmDomain = lens _rmDomain (\ s a -> s{_rmDomain = a})
 
--- | Required. A unique user identification string, as determined by the
--- client. To have the strongest positive impact on search quality make
--- sure the client-level is unique. Obfuscate this field for privacy
--- concerns before providing it to the service. If this field is not
--- available for some reason, send \"UNKNOWN\". Note that any improvements
--- to the model for a particular tenant site, rely on this field being set
--- correctly to a unique user_id. The maximum number of allowed characters
--- is 255.
+-- | Only set when any of domain, session_id and user_id isn\'t available for
+-- some reason. It is highly recommended not to set this field and provide
+-- accurate domain, session_id and user_id for the best service experience.
+rmAllowMissingIds :: Lens' RequestMetadata (Maybe Bool)
+rmAllowMissingIds
+  = lens _rmAllowMissingIds
+      (\ s a -> s{_rmAllowMissingIds = a})
+
+-- | Required if allow_missing_ids is unset or \`false\`. A unique user
+-- identification string, as determined by the client. To have the
+-- strongest positive impact on search quality make sure the client-level
+-- is unique. Obfuscate this field for privacy concerns before providing it
+-- to the service. Note that any improvements to the model for a particular
+-- tenant site rely on this field being set correctly to a unique user ID.
+-- The maximum number of allowed characters is 255.
 rmUserId :: Lens' RequestMetadata (Maybe Text)
 rmUserId = lens _rmUserId (\ s a -> s{_rmUserId = a})
 
--- | Required. A unique session identification string. A session is defined
--- as the duration of an end user\'s interaction with the service over a
--- certain period. Obfuscate this field for privacy concerns before
--- providing it to the service. If this field is not available for some
--- reason, send \"UNKNOWN\". Note that any improvements to the model for a
--- particular tenant site, rely on this field being set correctly to some
--- unique session_id. The maximum number of allowed characters is 255.
+-- | Required if allow_missing_ids is unset or \`false\`. A unique session
+-- identification string. A session is defined as the duration of an end
+-- user\'s interaction with the service over a certain period. Obfuscate
+-- this field for privacy concerns before providing it to the service. Note
+-- that any improvements to the model for a particular tenant site rely on
+-- this field being set correctly to a unique session ID. The maximum
+-- number of allowed characters is 255.
 rmSessionId :: Lens' RequestMetadata (Maybe Text)
 rmSessionId
   = lens _rmSessionId (\ s a -> s{_rmSessionId = a})
 
--- | Optional. The type of device used by the job seeker at the time of the
--- call to the service.
+-- | The type of device used by the job seeker at the time of the call to the
+-- service.
 rmDeviceInfo :: Lens' RequestMetadata (Maybe DeviceInfo)
 rmDeviceInfo
   = lens _rmDeviceInfo (\ s a -> s{_rmDeviceInfo = a})
@@ -418,8 +493,9 @@ instance FromJSON RequestMetadata where
           = withObject "RequestMetadata"
               (\ o ->
                  RequestMetadata' <$>
-                   (o .:? "domain") <*> (o .:? "userId") <*>
-                     (o .:? "sessionId")
+                   (o .:? "domain") <*> (o .:? "allowMissingIds") <*>
+                     (o .:? "userId")
+                     <*> (o .:? "sessionId")
                      <*> (o .:? "deviceInfo"))
 
 instance ToJSON RequestMetadata where
@@ -427,163 +503,52 @@ instance ToJSON RequestMetadata where
           = object
               (catMaybes
                  [("domain" .=) <$> _rmDomain,
+                  ("allowMissingIds" .=) <$> _rmAllowMissingIds,
                   ("userId" .=) <$> _rmUserId,
                   ("sessionId" .=) <$> _rmSessionId,
                   ("deviceInfo" .=) <$> _rmDeviceInfo])
 
--- | Input only. Request for updating a specified company.
+-- | The result of JobService.BatchCreateJobs. It\'s used to replace
+-- google.longrunning.Operation.response in case of success.
 --
--- /See:/ 'updateCompanyRequest' smart constructor.
-data UpdateCompanyRequest =
-  UpdateCompanyRequest'
-    { _ucrUpdateMask :: !(Maybe GFieldMask)
-    , _ucrCompany    :: !(Maybe Company)
+-- /See:/ 'batchCreateJobsResponse' smart constructor.
+newtype BatchCreateJobsResponse =
+  BatchCreateJobsResponse'
+    { _bcjrJobResults :: Maybe [JobResult]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'UpdateCompanyRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'BatchCreateJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucrUpdateMask'
---
--- * 'ucrCompany'
-updateCompanyRequest
-    :: UpdateCompanyRequest
-updateCompanyRequest =
-  UpdateCompanyRequest' {_ucrUpdateMask = Nothing, _ucrCompany = Nothing}
+-- * 'bcjrJobResults'
+batchCreateJobsResponse
+    :: BatchCreateJobsResponse
+batchCreateJobsResponse = BatchCreateJobsResponse' {_bcjrJobResults = Nothing}
 
 
--- | Optional but strongly recommended for the best service experience. If
--- update_mask is provided, only the specified fields in company are
--- updated. Otherwise all the fields are updated. A field mask to specify
--- the company fields to be updated. Only top level fields of Company are
--- supported.
-ucrUpdateMask :: Lens' UpdateCompanyRequest (Maybe GFieldMask)
-ucrUpdateMask
-  = lens _ucrUpdateMask
-      (\ s a -> s{_ucrUpdateMask = a})
+-- | List of job mutation results from a batch create operation. It can
+-- change until operation status is FINISHED, FAILED or CANCELLED.
+bcjrJobResults :: Lens' BatchCreateJobsResponse [JobResult]
+bcjrJobResults
+  = lens _bcjrJobResults
+      (\ s a -> s{_bcjrJobResults = a})
+      . _Default
+      . _Coerce
 
--- | Required. The company resource to replace the current resource in the
--- system.
-ucrCompany :: Lens' UpdateCompanyRequest (Maybe Company)
-ucrCompany
-  = lens _ucrCompany (\ s a -> s{_ucrCompany = a})
-
-instance FromJSON UpdateCompanyRequest where
+instance FromJSON BatchCreateJobsResponse where
         parseJSON
-          = withObject "UpdateCompanyRequest"
+          = withObject "BatchCreateJobsResponse"
               (\ o ->
-                 UpdateCompanyRequest' <$>
-                   (o .:? "updateMask") <*> (o .:? "company"))
+                 BatchCreateJobsResponse' <$>
+                   (o .:? "jobResults" .!= mempty))
 
-instance ToJSON UpdateCompanyRequest where
-        toJSON UpdateCompanyRequest'{..}
+instance ToJSON BatchCreateJobsResponse where
+        toJSON BatchCreateJobsResponse'{..}
           = object
-              (catMaybes
-                 [("updateMask" .=) <$> _ucrUpdateMask,
-                  ("company" .=) <$> _ucrCompany])
-
--- | Input only. Update job request.
---
--- /See:/ 'updateJobRequest' smart constructor.
-data UpdateJobRequest =
-  UpdateJobRequest'
-    { _ujrUpdateMask :: !(Maybe GFieldMask)
-    , _ujrJob        :: !(Maybe Job)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'UpdateJobRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ujrUpdateMask'
---
--- * 'ujrJob'
-updateJobRequest
-    :: UpdateJobRequest
-updateJobRequest =
-  UpdateJobRequest' {_ujrUpdateMask = Nothing, _ujrJob = Nothing}
-
-
--- | Optional but strongly recommended to be provided for the best service
--- experience. If update_mask is provided, only the specified fields in job
--- are updated. Otherwise all the fields are updated. A field mask to
--- restrict the fields that are updated. Only top level fields of Job are
--- supported.
-ujrUpdateMask :: Lens' UpdateJobRequest (Maybe GFieldMask)
-ujrUpdateMask
-  = lens _ujrUpdateMask
-      (\ s a -> s{_ujrUpdateMask = a})
-
--- | Required. The Job to be updated.
-ujrJob :: Lens' UpdateJobRequest (Maybe Job)
-ujrJob = lens _ujrJob (\ s a -> s{_ujrJob = a})
-
-instance FromJSON UpdateJobRequest where
-        parseJSON
-          = withObject "UpdateJobRequest"
-              (\ o ->
-                 UpdateJobRequest' <$>
-                   (o .:? "updateMask") <*> (o .:? "job"))
-
-instance ToJSON UpdateJobRequest where
-        toJSON UpdateJobRequest'{..}
-          = object
-              (catMaybes
-                 [("updateMask" .=) <$> _ujrUpdateMask,
-                  ("job" .=) <$> _ujrJob])
-
--- | Represents count of jobs within one bucket.
---
--- /See:/ 'bucketizedCount' smart constructor.
-data BucketizedCount =
-  BucketizedCount'
-    { _bcCount :: !(Maybe (Textual Int32))
-    , _bcRange :: !(Maybe BucketRange)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'BucketizedCount' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bcCount'
---
--- * 'bcRange'
-bucketizedCount
-    :: BucketizedCount
-bucketizedCount = BucketizedCount' {_bcCount = Nothing, _bcRange = Nothing}
-
-
--- | Number of jobs whose numeric field value fall into \`range\`.
-bcCount :: Lens' BucketizedCount (Maybe Int32)
-bcCount
-  = lens _bcCount (\ s a -> s{_bcCount = a}) .
-      mapping _Coerce
-
--- | Bucket range on which histogram was performed for the numeric field,
--- that is, the count represents number of jobs in this range.
-bcRange :: Lens' BucketizedCount (Maybe BucketRange)
-bcRange = lens _bcRange (\ s a -> s{_bcRange = a})
-
-instance FromJSON BucketizedCount where
-        parseJSON
-          = withObject "BucketizedCount"
-              (\ o ->
-                 BucketizedCount' <$>
-                   (o .:? "count") <*> (o .:? "range"))
-
-instance ToJSON BucketizedCount where
-        toJSON BucketizedCount'{..}
-          = object
-              (catMaybes
-                 [("count" .=) <$> _bcCount,
-                  ("range" .=) <$> _bcRange])
+              (catMaybes [("jobResults" .=) <$> _bcjrJobResults])
 
 -- | Job compensation details.
 --
@@ -591,8 +556,8 @@ instance ToJSON BucketizedCount where
 data CompensationInfo =
   CompensationInfo'
     { _ciAnnualizedTotalCompensationRange :: !(Maybe CompensationRange)
-    , _ciEntries                          :: !(Maybe [CompensationEntry])
-    , _ciAnnualizedBaseCompensationRange  :: !(Maybe CompensationRange)
+    , _ciEntries :: !(Maybe [CompensationEntry])
+    , _ciAnnualizedBaseCompensationRange :: !(Maybe CompensationRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -617,7 +582,7 @@ compensationInfo =
 
 
 -- | Output only. Annualized total compensation range. Computed as all
--- compensation entries\' CompensationEntry.compensation times
+-- compensation entries\' CompensationEntry.amount times
 -- CompensationEntry.expected_units_per_year. See CompensationEntry for
 -- explanation on compensation annualization.
 ciAnnualizedTotalCompensationRange :: Lens' CompensationInfo (Maybe CompensationRange)
@@ -625,9 +590,9 @@ ciAnnualizedTotalCompensationRange
   = lens _ciAnnualizedTotalCompensationRange
       (\ s a -> s{_ciAnnualizedTotalCompensationRange = a})
 
--- | Optional. Job compensation information. At most one entry can be of type
--- CompensationInfo.CompensationType.BASE, which is referred as ** base
--- compensation entry ** for the job.
+-- | Job compensation information. At most one entry can be of type
+-- CompensationInfo.CompensationType.BASE, which is referred as **base
+-- compensation entry** for the job.
 ciEntries :: Lens' CompensationInfo [CompensationEntry]
 ciEntries
   = lens _ciEntries (\ s a -> s{_ciEntries = a}) .
@@ -635,7 +600,7 @@ ciEntries
       . _Coerce
 
 -- | Output only. Annualized base compensation range. Computed as base
--- compensation entry\'s CompensationEntry.compensation times
+-- compensation entry\'s CompensationEntry.amount times
 -- CompensationEntry.expected_units_per_year. See CompensationEntry for
 -- explanation on compensation annualization.
 ciAnnualizedBaseCompensationRange :: Lens' CompensationInfo (Maybe CompensationRange)
@@ -662,41 +627,91 @@ instance ToJSON CompensationInfo where
                   ("annualizedBaseCompensationRange" .=) <$>
                     _ciAnnualizedBaseCompensationRange])
 
--- | Input only. The Request of the CreateCompany method.
+-- | The result of JobService.BatchUpdateJobs. It\'s used to replace
+-- google.longrunning.Operation.response in case of success.
 --
--- /See:/ 'createCompanyRequest' smart constructor.
-newtype CreateCompanyRequest =
-  CreateCompanyRequest'
-    { _ccrCompany :: Maybe Company
+-- /See:/ 'batchUpdateJobsResponse' smart constructor.
+newtype BatchUpdateJobsResponse =
+  BatchUpdateJobsResponse'
+    { _bujrJobResults :: Maybe [JobResult]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'CreateCompanyRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'BatchUpdateJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccrCompany'
-createCompanyRequest
-    :: CreateCompanyRequest
-createCompanyRequest = CreateCompanyRequest' {_ccrCompany = Nothing}
+-- * 'bujrJobResults'
+batchUpdateJobsResponse
+    :: BatchUpdateJobsResponse
+batchUpdateJobsResponse = BatchUpdateJobsResponse' {_bujrJobResults = Nothing}
 
 
--- | Required. The company to be created.
-ccrCompany :: Lens' CreateCompanyRequest (Maybe Company)
-ccrCompany
-  = lens _ccrCompany (\ s a -> s{_ccrCompany = a})
+-- | List of job mutation results from a batch update operation. It can
+-- change until operation status is FINISHED, FAILED or CANCELLED.
+bujrJobResults :: Lens' BatchUpdateJobsResponse [JobResult]
+bujrJobResults
+  = lens _bujrJobResults
+      (\ s a -> s{_bujrJobResults = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON CreateCompanyRequest where
+instance FromJSON BatchUpdateJobsResponse where
         parseJSON
-          = withObject "CreateCompanyRequest"
-              (\ o -> CreateCompanyRequest' <$> (o .:? "company"))
+          = withObject "BatchUpdateJobsResponse"
+              (\ o ->
+                 BatchUpdateJobsResponse' <$>
+                   (o .:? "jobResults" .!= mempty))
 
-instance ToJSON CreateCompanyRequest where
-        toJSON CreateCompanyRequest'{..}
-          = object (catMaybes [("company" .=) <$> _ccrCompany])
+instance ToJSON BatchUpdateJobsResponse where
+        toJSON BatchUpdateJobsResponse'{..}
+          = object
+              (catMaybes [("jobResults" .=) <$> _bujrJobResults])
 
--- | Input Only. The histogram request.
+-- | The result of JobService.BatchDeleteJobs. It\'s used to replace
+-- google.longrunning.Operation.response in case of success.
+--
+-- /See:/ 'batchDeleteJobsResponse' smart constructor.
+newtype BatchDeleteJobsResponse =
+  BatchDeleteJobsResponse'
+    { _bdjrJobResults :: Maybe [JobResult]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchDeleteJobsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bdjrJobResults'
+batchDeleteJobsResponse
+    :: BatchDeleteJobsResponse
+batchDeleteJobsResponse = BatchDeleteJobsResponse' {_bdjrJobResults = Nothing}
+
+
+-- | List of job mutation results from a batch delete operation. It can
+-- change until operation status is FINISHED, FAILED or CANCELLED.
+bdjrJobResults :: Lens' BatchDeleteJobsResponse [JobResult]
+bdjrJobResults
+  = lens _bdjrJobResults
+      (\ s a -> s{_bdjrJobResults = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BatchDeleteJobsResponse where
+        parseJSON
+          = withObject "BatchDeleteJobsResponse"
+              (\ o ->
+                 BatchDeleteJobsResponse' <$>
+                   (o .:? "jobResults" .!= mempty))
+
+instance ToJSON BatchDeleteJobsResponse where
+        toJSON BatchDeleteJobsResponse'{..}
+          = object
+              (catMaybes [("jobResults" .=) <$> _bdjrJobResults])
+
+-- | The histogram request.
 --
 -- /See:/ 'histogramQuery' smart constructor.
 newtype HistogramQuery =
@@ -716,67 +731,9 @@ histogramQuery
 histogramQuery = HistogramQuery' {_hqHistogramQuery = Nothing}
 
 
--- | An expression specifies a histogram request against matching resources
--- (for example, jobs) for searches. Expression syntax is a aggregation
--- function call with histogram facets and other options. Available
--- aggregation function calls are: * \`count(string_histogram_facet)\`:
--- Count the number of matching entity, for each distinct attribute value.
--- * \`count(numeric_histogram_facet, list of buckets)\`: Count the number
--- of matching entity within each bucket. Data types: * Histogram facet:
--- facet names with format a-zA-Z+. * String: string like \"any string with
--- backslash escape for quote(\\\").\" * Number: whole number and floating
--- point number like 10, -1 and -0.01. * List: list of elements with
--- comma(,) separator surrounded by square brackets. For example, [1, 2, 3]
--- and [\"one\", \"two\", \"three\"]. Built-in constants: * MIN (minimum
--- number similar to java Double.MIN_VALUE) * MAX (maximum number similar
--- to java Double.MAX_VALUE) Built-in functions: * bucket(start, end[,
--- label]): bucket built-in function creates a bucket with range of start,
--- end). Note that the end is exclusive. For example, bucket(1, MAX,
--- \"positive number\") or bucket(1, 10). Job histogram facets: *
--- company_id: histogram by [Job.distributor_company_id. *
--- company_display_name: histogram by Job.company_display_name. *
--- employment_type: histogram by Job.employment_types. For example,
--- \"FULL_TIME\", \"PART_TIME\". * company_size: histogram by CompanySize,
--- for example, \"SMALL\", \"MEDIUM\", \"BIG\". * publish_time_in_month:
--- histogram by the Job.publish_time in months. Must specify list of
--- numeric buckets in spec. * publish_time_in_year: histogram by the
--- Job.publish_time in years. Must specify list of numeric buckets in spec.
--- * degree_type: histogram by the Job.degree_type. For example,
--- \"Bachelors\", \"Masters\". * job_level: histogram by the Job.job_level.
--- For example, \"Entry Level\". * country: histogram by the country code
--- of jobs. For example, \"US\", \"FR\". * admin1: histogram by the admin1
--- code of jobs, which is a global placeholder referring to the state,
--- province, or the particular term a country uses to define the geographic
--- structure below the country level. For example, \"CA\", \"IL\". * city:
--- histogram by a combination of the \"city name, admin1 code\". For
--- example, \"Mountain View, CA\", \"New York, NY\". * admin1_country:
--- histogram by a combination of the \"admin1 code, country\". For example,
--- \"CA, US\", \"IL, US\". * city_coordinate: histogram by the city
--- center\'s GPS coordinates (latitude and longitude). For example,
--- 37.4038522,-122.0987765. Since the coordinates of a city center can
--- change, customers may need to refresh them periodically. * locale:
--- histogram by the Job.language_code. For example, \"en-US\", \"fr-FR\". *
--- language: histogram by the language subtag of the Job.language_code. For
--- example, \"en\", \"fr\". * category: histogram by the JobCategory. For
--- example, \"COMPUTER_AND_IT\", \"HEALTHCARE\". * base_compensation_unit:
--- histogram by the CompensationUnit of base salary. For example,
--- \"WEEKLY\", \"MONTHLY\". * base_compensation: histogram by the base
--- salary. Must specify list of numeric buckets to group results by. *
--- annualized_base_compensation: histogram by the base annualized salary.
--- Must specify list of numeric buckets to group results by. *
--- annualized_total_compensation: histogram by the total annualized salary.
--- Must specify list of numeric buckets to group results by. *
--- string_custom_attribute: histogram by string Job.custom_attributes.
--- Values can be accessed via square bracket notations like
--- string_custom_attribute[\"key1\"]. * numeric_custom_attribute: histogram
--- by numeric Job.custom_attributes. Values can be accessed via square
--- bracket notations like numeric_custom_attribute[\"key1\"]. Must specify
--- list of numeric buckets to group results by. Example expressions: *
--- count(admin1) * count(base_compensation, [bucket(1000, 10000),
--- bucket(10000, 100000), bucket(100000, MAX)]) *
--- count(string_custom_attribute[\"some-string-custom-attribute\"]) *
--- count(numeric_custom_attribute[\"some-numeric-custom-attribute\"],
--- [bucket(MIN, 0, \"negative\"), bucket(0, MAX, \"non-negative\"])
+-- | An expression specifies a histogram request against matching jobs for
+-- searches. See SearchJobsRequest.histogram_queries for details about
+-- syntax.
 hqHistogramQuery :: Lens' HistogramQuery (Maybe Text)
 hqHistogramQuery
   = lens _hqHistogramQuery
@@ -793,47 +750,14 @@ instance ToJSON HistogramQuery where
               (catMaybes
                  [("histogramQuery" .=) <$> _hqHistogramQuery])
 
--- | Input only. Create job request.
---
--- /See:/ 'createJobRequest' smart constructor.
-newtype CreateJobRequest =
-  CreateJobRequest'
-    { _cjrJob :: Maybe Job
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CreateJobRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cjrJob'
-createJobRequest
-    :: CreateJobRequest
-createJobRequest = CreateJobRequest' {_cjrJob = Nothing}
-
-
--- | Required. The Job to be created.
-cjrJob :: Lens' CreateJobRequest (Maybe Job)
-cjrJob = lens _cjrJob (\ s a -> s{_cjrJob = a})
-
-instance FromJSON CreateJobRequest where
-        parseJSON
-          = withObject "CreateJobRequest"
-              (\ o -> CreateJobRequest' <$> (o .:? "job"))
-
-instance ToJSON CreateJobRequest where
-        toJSON CreateJobRequest'{..}
-          = object (catMaybes [("job" .=) <$> _cjrJob])
-
--- | Output only. Resource that represents completion results.
+-- | Resource that represents completion results.
 --
 -- /See:/ 'completionResult' smart constructor.
 data CompletionResult =
   CompletionResult'
     { _crSuggestion :: !(Maybe Text)
-    , _crImageURI   :: !(Maybe Text)
-    , _crType       :: !(Maybe CompletionResultType)
+    , _crImageURI :: !(Maybe Text)
+    , _crType :: !(Maybe CompletionResultType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -859,7 +783,7 @@ crSuggestion :: Lens' CompletionResult (Maybe Text)
 crSuggestion
   = lens _crSuggestion (\ s a -> s{_crSuggestion = a})
 
--- | The URI of the company image for CompletionType.COMPANY_NAME.
+-- | The URI of the company image for COMPANY_NAME.
 crImageURI :: Lens' CompletionResult (Maybe Text)
 crImageURI
   = lens _crImageURI (\ s a -> s{_crImageURI = a})
@@ -884,16 +808,15 @@ instance ToJSON CompletionResult where
                   ("imageUri" .=) <$> _crImageURI,
                   ("type" .=) <$> _crType])
 
--- | Output only. A resource that represents a location with full geographic
--- information.
+-- | A resource that represents a location with full geographic information.
 --
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lLatLng        :: !(Maybe LatLng)
-    , _lLocationType  :: !(Maybe LocationLocationType)
+    { _lLatLng :: !(Maybe LatLng)
+    , _lRadiusMiles :: !(Maybe (Textual Double))
+    , _lLocationType :: !(Maybe LocationLocationType)
     , _lPostalAddress :: !(Maybe PostalAddress)
-    , _lRadiusInMiles :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -904,19 +827,19 @@ data Location =
 --
 -- * 'lLatLng'
 --
+-- * 'lRadiusMiles'
+--
 -- * 'lLocationType'
 --
 -- * 'lPostalAddress'
---
--- * 'lRadiusInMiles'
 location
     :: Location
 location =
   Location'
     { _lLatLng = Nothing
+    , _lRadiusMiles = Nothing
     , _lLocationType = Nothing
     , _lPostalAddress = Nothing
-    , _lRadiusInMiles = Nothing
     }
 
 
@@ -924,10 +847,20 @@ location =
 lLatLng :: Lens' Location (Maybe LatLng)
 lLatLng = lens _lLatLng (\ s a -> s{_lLatLng = a})
 
+-- | Radius in miles of the job location. This value is derived from the
+-- location bounding box in which a circle with the specified radius
+-- centered from google.type.LatLng covers the area associated with the job
+-- location. For example, currently, \"Mountain View, CA, USA\" has a
+-- radius of 6.17 miles.
+lRadiusMiles :: Lens' Location (Maybe Double)
+lRadiusMiles
+  = lens _lRadiusMiles (\ s a -> s{_lRadiusMiles = a})
+      . mapping _Coerce
+
 -- | The type of a location, which corresponds to the address lines field of
--- PostalAddress. For example, \"Downtown, Atlanta, GA, USA\" has a type of
--- LocationType#NEIGHBORHOOD, and \"Kansas City, KS, USA\" has a type of
--- LocationType#LOCALITY.
+-- google.type.PostalAddress. For example, \"Downtown, Atlanta, GA, USA\"
+-- has a type of LocationType.NEIGHBORHOOD, and \"Kansas City, KS, USA\"
+-- has a type of LocationType.LOCALITY.
 lLocationType :: Lens' Location (Maybe LocationLocationType)
 lLocationType
   = lens _lLocationType
@@ -942,34 +875,23 @@ lPostalAddress
   = lens _lPostalAddress
       (\ s a -> s{_lPostalAddress = a})
 
--- | Radius in miles of the job location. This value is derived from the
--- location bounding box in which a circle with the specified radius
--- centered from LatLng covers the area associated with the job location.
--- For example, currently, \"Mountain View, CA, USA\" has a radius of 6.17
--- miles.
-lRadiusInMiles :: Lens' Location (Maybe Double)
-lRadiusInMiles
-  = lens _lRadiusInMiles
-      (\ s a -> s{_lRadiusInMiles = a})
-      . mapping _Coerce
-
 instance FromJSON Location where
         parseJSON
           = withObject "Location"
               (\ o ->
                  Location' <$>
-                   (o .:? "latLng") <*> (o .:? "locationType") <*>
-                     (o .:? "postalAddress")
-                     <*> (o .:? "radiusInMiles"))
+                   (o .:? "latLng") <*> (o .:? "radiusMiles") <*>
+                     (o .:? "locationType")
+                     <*> (o .:? "postalAddress"))
 
 instance ToJSON Location where
         toJSON Location'{..}
           = object
               (catMaybes
                  [("latLng" .=) <$> _lLatLng,
+                  ("radiusMiles" .=) <$> _lRadiusMiles,
                   ("locationType" .=) <$> _lLocationType,
-                  ("postalAddress" .=) <$> _lPostalAddress,
-                  ("radiusInMiles" .=) <$> _lRadiusInMiles])
+                  ("postalAddress" .=) <$> _lPostalAddress])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -977,10 +899,10 @@ instance ToJSON Location where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1035,7 +957,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1093,20 +1016,18 @@ instance ToJSON Empty where
 
 -- | An event issued when an end user interacts with the application that
 -- implements Cloud Talent Solution. Providing this information improves
--- the quality of search and recommendation for the API clients, enabling
--- the service to perform optimally. The number of events sent must be
--- consistent with other calls, such as job searches, issued to the service
--- by the client.
+-- the quality of results for the API clients, enabling the service to
+-- perform optimally. The number of events sent must be consistent with
+-- other calls, such as job searches, issued to the service by the client.
 --
 -- /See:/ 'clientEvent' smart constructor.
 data ClientEvent =
   ClientEvent'
-    { _ceRequestId     :: !(Maybe Text)
-    , _ceExtraInfo     :: !(Maybe ClientEventExtraInfo)
-    , _ceJobEvent      :: !(Maybe JobEvent)
-    , _ceParentEventId :: !(Maybe Text)
-    , _ceCreateTime    :: !(Maybe DateTime')
-    , _ceEventId       :: !(Maybe Text)
+    { _ceRequestId :: !(Maybe Text)
+    , _ceJobEvent :: !(Maybe JobEvent)
+    , _ceEventNotes :: !(Maybe Text)
+    , _ceCreateTime :: !(Maybe DateTime')
+    , _ceEventId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1117,11 +1038,9 @@ data ClientEvent =
 --
 -- * 'ceRequestId'
 --
--- * 'ceExtraInfo'
---
 -- * 'ceJobEvent'
 --
--- * 'ceParentEventId'
+-- * 'ceEventNotes'
 --
 -- * 'ceCreateTime'
 --
@@ -1131,43 +1050,31 @@ clientEvent
 clientEvent =
   ClientEvent'
     { _ceRequestId = Nothing
-    , _ceExtraInfo = Nothing
     , _ceJobEvent = Nothing
-    , _ceParentEventId = Nothing
+    , _ceEventNotes = Nothing
     , _ceCreateTime = Nothing
     , _ceEventId = Nothing
     }
 
 
--- | Required. A unique ID generated in the API responses. It can be found in
+-- | Strongly recommended for the best service experience. A unique ID
+-- generated in the API responses. It can be found in
 -- ResponseMetadata.request_id.
 ceRequestId :: Lens' ClientEvent (Maybe Text)
 ceRequestId
   = lens _ceRequestId (\ s a -> s{_ceRequestId = a})
 
--- | Optional. Extra information about this event. Used for storing
--- information with no matching field in event payload, for example, user
--- application specific context or details. At most 20 keys are supported.
--- The maximum total size of all keys and values is 2 KB.
-ceExtraInfo :: Lens' ClientEvent (Maybe ClientEventExtraInfo)
-ceExtraInfo
-  = lens _ceExtraInfo (\ s a -> s{_ceExtraInfo = a})
-
--- | A event issued when a job seeker interacts with the application that
+-- | An event issued when a job seeker interacts with the application that
 -- implements Cloud Talent Solution.
 ceJobEvent :: Lens' ClientEvent (Maybe JobEvent)
 ceJobEvent
   = lens _ceJobEvent (\ s a -> s{_ceJobEvent = a})
 
--- | Optional. The event_id of an event that resulted in the current event.
--- For example, a Job view event usually follows a parent impression event:
--- A job seeker first does a search where a list of jobs appears
--- (impression). The job seeker then selects a result and views the
--- description of a particular job (Job view).
-ceParentEventId :: Lens' ClientEvent (Maybe Text)
-ceParentEventId
-  = lens _ceParentEventId
-      (\ s a -> s{_ceParentEventId = a})
+-- | Notes about the event provided by recruiters or other users, for
+-- example, feedback on why a job was bookmarked.
+ceEventNotes :: Lens' ClientEvent (Maybe Text)
+ceEventNotes
+  = lens _ceEventNotes (\ s a -> s{_ceEventNotes = a})
 
 -- | Required. The timestamp of the event.
 ceCreateTime :: Lens' ClientEvent (Maybe UTCTime)
@@ -1175,9 +1082,7 @@ ceCreateTime
   = lens _ceCreateTime (\ s a -> s{_ceCreateTime = a})
       . mapping _DateTime
 
--- | Required. A unique identifier, generated by the client application. This
--- \`event_id\` is used to establish the relationship between different
--- events (see parent_event_id).
+-- | Required. A unique identifier, generated by the client application.
 ceEventId :: Lens' ClientEvent (Maybe Text)
 ceEventId
   = lens _ceEventId (\ s a -> s{_ceEventId = a})
@@ -1187,9 +1092,8 @@ instance FromJSON ClientEvent where
           = withObject "ClientEvent"
               (\ o ->
                  ClientEvent' <$>
-                   (o .:? "requestId") <*> (o .:? "extraInfo") <*>
-                     (o .:? "jobEvent")
-                     <*> (o .:? "parentEventId")
+                   (o .:? "requestId") <*> (o .:? "jobEvent") <*>
+                     (o .:? "eventNotes")
                      <*> (o .:? "createTime")
                      <*> (o .:? "eventId"))
 
@@ -1198,63 +1102,69 @@ instance ToJSON ClientEvent where
           = object
               (catMaybes
                  [("requestId" .=) <$> _ceRequestId,
-                  ("extraInfo" .=) <$> _ceExtraInfo,
                   ("jobEvent" .=) <$> _ceJobEvent,
-                  ("parentEventId" .=) <$> _ceParentEventId,
+                  ("eventNotes" .=) <$> _ceEventNotes,
                   ("createTime" .=) <$> _ceCreateTime,
                   ("eventId" .=) <$> _ceEventId])
 
--- | Input only. Compensation based histogram request.
+-- | Request to update a batch of jobs.
 --
--- /See:/ 'compensationHistogramRequest' smart constructor.
-data CompensationHistogramRequest =
-  CompensationHistogramRequest'
-    { _chrBucketingOption :: !(Maybe NumericBucketingOption)
-    , _chrType            :: !(Maybe CompensationHistogramRequestType)
+-- /See:/ 'batchUpdateJobsRequest' smart constructor.
+data BatchUpdateJobsRequest =
+  BatchUpdateJobsRequest'
+    { _bujrUpdateMask :: !(Maybe GFieldMask)
+    , _bujrJobs :: !(Maybe [Job])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'CompensationHistogramRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'BatchUpdateJobsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chrBucketingOption'
+-- * 'bujrUpdateMask'
 --
--- * 'chrType'
-compensationHistogramRequest
-    :: CompensationHistogramRequest
-compensationHistogramRequest =
-  CompensationHistogramRequest'
-    {_chrBucketingOption = Nothing, _chrType = Nothing}
+-- * 'bujrJobs'
+batchUpdateJobsRequest
+    :: BatchUpdateJobsRequest
+batchUpdateJobsRequest =
+  BatchUpdateJobsRequest' {_bujrUpdateMask = Nothing, _bujrJobs = Nothing}
 
 
--- | Required. Numeric histogram options, like buckets, whether include min
--- or max value.
-chrBucketingOption :: Lens' CompensationHistogramRequest (Maybe NumericBucketingOption)
-chrBucketingOption
-  = lens _chrBucketingOption
-      (\ s a -> s{_chrBucketingOption = a})
+-- | Strongly recommended for the best service experience. Be aware that it
+-- will also increase latency when checking the status of a batch
+-- operation. If update_mask is provided, only the specified fields in Job
+-- are updated. Otherwise all the fields are updated. A field mask to
+-- restrict the fields that are updated. Only top level fields of Job are
+-- supported. If update_mask is provided, The Job inside JobResult will
+-- only contains fields that is updated, plus the Id of the Job. Otherwise,
+-- Job will include all fields, which can yield a very large response.
+bujrUpdateMask :: Lens' BatchUpdateJobsRequest (Maybe GFieldMask)
+bujrUpdateMask
+  = lens _bujrUpdateMask
+      (\ s a -> s{_bujrUpdateMask = a})
 
--- | Required. Type of the request, representing which field the
--- histogramming should be performed over. A single request can only
--- specify one histogram of each \`CompensationHistogramRequestType\`.
-chrType :: Lens' CompensationHistogramRequest (Maybe CompensationHistogramRequestType)
-chrType = lens _chrType (\ s a -> s{_chrType = a})
+-- | Required. The jobs to be updated. A maximum of 200 jobs can be updated
+-- in a batch.
+bujrJobs :: Lens' BatchUpdateJobsRequest [Job]
+bujrJobs
+  = lens _bujrJobs (\ s a -> s{_bujrJobs = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON CompensationHistogramRequest where
+instance FromJSON BatchUpdateJobsRequest where
         parseJSON
-          = withObject "CompensationHistogramRequest"
+          = withObject "BatchUpdateJobsRequest"
               (\ o ->
-                 CompensationHistogramRequest' <$>
-                   (o .:? "bucketingOption") <*> (o .:? "type"))
+                 BatchUpdateJobsRequest' <$>
+                   (o .:? "updateMask") <*> (o .:? "jobs" .!= mempty))
 
-instance ToJSON CompensationHistogramRequest where
-        toJSON CompensationHistogramRequest'{..}
+instance ToJSON BatchUpdateJobsRequest where
+        toJSON BatchUpdateJobsRequest'{..}
           = object
               (catMaybes
-                 [("bucketingOption" .=) <$> _chrBucketingOption,
-                  ("type" .=) <$> _chrType])
+                 [("updateMask" .=) <$> _bujrUpdateMask,
+                  ("jobs" .=) <$> _bujrJobs])
 
 -- | Represents an amount of money with its currency type.
 --
@@ -1262,8 +1172,8 @@ instance ToJSON CompensationHistogramRequest where
 data Money =
   Money'
     { _mCurrencyCode :: !(Maybe Text)
-    , _mNanos        :: !(Maybe (Textual Int32))
-    , _mUnits        :: !(Maybe (Textual Int64))
+    , _mNanos :: !(Maybe (Textual Int32))
+    , _mUnits :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1282,7 +1192,7 @@ money
 money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
 
 
--- | The 3-letter currency code defined in ISO 4217.
+-- | The three-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
 mCurrencyCode
   = lens _mCurrencyCode
@@ -1321,14 +1231,14 @@ instance ToJSON Money where
                  [("currencyCode" .=) <$> _mCurrencyCode,
                   ("nanos" .=) <$> _mNanos, ("units" .=) <$> _mUnits])
 
--- | Output only. The List companies response object.
+-- | The List companies response object.
 --
 -- /See:/ 'listCompaniesResponse' smart constructor.
 data ListCompaniesResponse =
   ListCompaniesResponse'
     { _lcrNextPageToken :: !(Maybe Text)
-    , _lcrCompanies     :: !(Maybe [Company])
-    , _lcrMetadata      :: !(Maybe ResponseMetadata)
+    , _lcrCompanies :: !(Maybe [Company])
+    , _lcrMetadata :: !(Maybe ResponseMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1388,17 +1298,281 @@ instance ToJSON ListCompaniesResponse where
                   ("companies" .=) <$> _lcrCompanies,
                   ("metadata" .=) <$> _lcrMetadata])
 
--- | Input only. Parameters needed for commute search.
+-- | Next ID: 15
+--
+-- /See:/ 'namespacedDebugInput' smart constructor.
+data NamespacedDebugInput =
+  NamespacedDebugInput'
+    { _ndiDisableAutomaticEnrollmentSelection :: !(Maybe Bool)
+    , _ndiDisableExpTags :: !(Maybe [Text])
+    , _ndiDisableOrganicSelection :: !(Maybe Bool)
+    , _ndiForcedFlags :: !(Maybe NamespacedDebugInputForcedFlags)
+    , _ndiConditionallyForcedExps :: !(Maybe [Textual Int32])
+    , _ndiAbsolutelyForcedExpTags :: !(Maybe [Text])
+    , _ndiAbsolutelyForcedExpNames :: !(Maybe [Text])
+    , _ndiDisableManualEnrollmentSelection :: !(Maybe Bool)
+    , _ndiDisableExps :: !(Maybe [Textual Int32])
+    , _ndiAbsolutelyForcedExps :: !(Maybe [Textual Int32])
+    , _ndiDisableExpNames :: !(Maybe [Text])
+    , _ndiConditionallyForcedExpNames :: !(Maybe [Text])
+    , _ndiConditionallyForcedExpTags :: !(Maybe [Text])
+    , _ndiForcedRollouts :: !(Maybe NamespacedDebugInputForcedRollouts)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NamespacedDebugInput' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ndiDisableAutomaticEnrollmentSelection'
+--
+-- * 'ndiDisableExpTags'
+--
+-- * 'ndiDisableOrganicSelection'
+--
+-- * 'ndiForcedFlags'
+--
+-- * 'ndiConditionallyForcedExps'
+--
+-- * 'ndiAbsolutelyForcedExpTags'
+--
+-- * 'ndiAbsolutelyForcedExpNames'
+--
+-- * 'ndiDisableManualEnrollmentSelection'
+--
+-- * 'ndiDisableExps'
+--
+-- * 'ndiAbsolutelyForcedExps'
+--
+-- * 'ndiDisableExpNames'
+--
+-- * 'ndiConditionallyForcedExpNames'
+--
+-- * 'ndiConditionallyForcedExpTags'
+--
+-- * 'ndiForcedRollouts'
+namespacedDebugInput
+    :: NamespacedDebugInput
+namespacedDebugInput =
+  NamespacedDebugInput'
+    { _ndiDisableAutomaticEnrollmentSelection = Nothing
+    , _ndiDisableExpTags = Nothing
+    , _ndiDisableOrganicSelection = Nothing
+    , _ndiForcedFlags = Nothing
+    , _ndiConditionallyForcedExps = Nothing
+    , _ndiAbsolutelyForcedExpTags = Nothing
+    , _ndiAbsolutelyForcedExpNames = Nothing
+    , _ndiDisableManualEnrollmentSelection = Nothing
+    , _ndiDisableExps = Nothing
+    , _ndiAbsolutelyForcedExps = Nothing
+    , _ndiDisableExpNames = Nothing
+    , _ndiConditionallyForcedExpNames = Nothing
+    , _ndiConditionallyForcedExpTags = Nothing
+    , _ndiForcedRollouts = Nothing
+    }
+
+
+-- | If true, disable automatic enrollment selection (at all diversion
+-- points). Automatic enrollment selection means experiment selection
+-- process based on the experiment\'s automatic enrollment condition. This
+-- does not disable selection of forced experiments.
+ndiDisableAutomaticEnrollmentSelection :: Lens' NamespacedDebugInput (Maybe Bool)
+ndiDisableAutomaticEnrollmentSelection
+  = lens _ndiDisableAutomaticEnrollmentSelection
+      (\ s a ->
+         s{_ndiDisableAutomaticEnrollmentSelection = a})
+
+-- | Set of experiment tags to be disabled. All experiments that are tagged
+-- with one or more of these tags are disabled. If an experiment is
+-- disabled, it is never selected nor forced. If an aggregate experiment is
+-- disabled, its partitions are disabled together. If an experiment with an
+-- enrollment is disabled, the enrollment is disabled together.
+ndiDisableExpTags :: Lens' NamespacedDebugInput [Text]
+ndiDisableExpTags
+  = lens _ndiDisableExpTags
+      (\ s a -> s{_ndiDisableExpTags = a})
+      . _Default
+      . _Coerce
+
+-- | If true, disable organic experiment selection (at all diversion points).
+-- Organic selection means experiment selection process based on traffic
+-- allocation and diversion condition evaluation. This does not disable
+-- selection of forced experiments. This is useful in cases when it is not
+-- known whether experiment selection behavior is responsible for a error
+-- or breakage. Disabling organic selection may help to isolate the cause
+-- of a given problem.
+ndiDisableOrganicSelection :: Lens' NamespacedDebugInput (Maybe Bool)
+ndiDisableOrganicSelection
+  = lens _ndiDisableOrganicSelection
+      (\ s a -> s{_ndiDisableOrganicSelection = a})
+
+-- | Flags to force in a particular experiment state. Map from flag name to
+-- flag value.
+ndiForcedFlags :: Lens' NamespacedDebugInput (Maybe NamespacedDebugInputForcedFlags)
+ndiForcedFlags
+  = lens _ndiForcedFlags
+      (\ s a -> s{_ndiForcedFlags = a})
+
+-- | Set of experiment ids to be conditionally forced. These ids will be
+-- forced only if their conditions and their parent domain\'s conditions
+-- are true.
+ndiConditionallyForcedExps :: Lens' NamespacedDebugInput [Int32]
+ndiConditionallyForcedExps
+  = lens _ndiConditionallyForcedExps
+      (\ s a -> s{_ndiConditionallyForcedExps = a})
+      . _Default
+      . _Coerce
+
+-- | Set of experiment tags to be absolutely forced. The experiments with
+-- these tags will be forced without evaluating the conditions.
+ndiAbsolutelyForcedExpTags :: Lens' NamespacedDebugInput [Text]
+ndiAbsolutelyForcedExpTags
+  = lens _ndiAbsolutelyForcedExpTags
+      (\ s a -> s{_ndiAbsolutelyForcedExpTags = a})
+      . _Default
+      . _Coerce
+
+-- | Set of experiment names to be absolutely forced. These experiments will
+-- be forced without evaluating the conditions.
+ndiAbsolutelyForcedExpNames :: Lens' NamespacedDebugInput [Text]
+ndiAbsolutelyForcedExpNames
+  = lens _ndiAbsolutelyForcedExpNames
+      (\ s a -> s{_ndiAbsolutelyForcedExpNames = a})
+      . _Default
+      . _Coerce
+
+-- | If true, disable manual enrollment selection (at all diversion points).
+-- Manual enrollment selection means experiment selection process based on
+-- the request\'s manual enrollment states (a.k.a. opt-in experiments).
+-- This does not disable selection of forced experiments.
+ndiDisableManualEnrollmentSelection :: Lens' NamespacedDebugInput (Maybe Bool)
+ndiDisableManualEnrollmentSelection
+  = lens _ndiDisableManualEnrollmentSelection
+      (\ s a ->
+         s{_ndiDisableManualEnrollmentSelection = a})
+
+-- | Set of experiment ids to be disabled. If an experiment is disabled, it
+-- is never selected nor forced. If an aggregate experiment is disabled,
+-- its partitions are disabled together. If an experiment with an
+-- enrollment is disabled, the enrollment is disabled together. If an ID
+-- corresponds to a domain, the domain itself and all descendant
+-- experiments and domains are disabled together.
+ndiDisableExps :: Lens' NamespacedDebugInput [Int32]
+ndiDisableExps
+  = lens _ndiDisableExps
+      (\ s a -> s{_ndiDisableExps = a})
+      . _Default
+      . _Coerce
+
+-- | Set of experiment ids to be absolutely forced. These ids will be forced
+-- without evaluating the conditions.
+ndiAbsolutelyForcedExps :: Lens' NamespacedDebugInput [Int32]
+ndiAbsolutelyForcedExps
+  = lens _ndiAbsolutelyForcedExps
+      (\ s a -> s{_ndiAbsolutelyForcedExps = a})
+      . _Default
+      . _Coerce
+
+-- | Set of experiment names to be disabled. If an experiment is disabled, it
+-- is never selected nor forced. If an aggregate experiment is disabled,
+-- its partitions are disabled together. If an experiment with an
+-- enrollment is disabled, the enrollment is disabled together. If a name
+-- corresponds to a domain, the domain itself and all descendant
+-- experiments and domains are disabled together.
+ndiDisableExpNames :: Lens' NamespacedDebugInput [Text]
+ndiDisableExpNames
+  = lens _ndiDisableExpNames
+      (\ s a -> s{_ndiDisableExpNames = a})
+      . _Default
+      . _Coerce
+
+-- | Set of experiment names to be conditionally forced. These experiments
+-- will be forced only if their conditions and their parent domain\'s
+-- conditions are true.
+ndiConditionallyForcedExpNames :: Lens' NamespacedDebugInput [Text]
+ndiConditionallyForcedExpNames
+  = lens _ndiConditionallyForcedExpNames
+      (\ s a -> s{_ndiConditionallyForcedExpNames = a})
+      . _Default
+      . _Coerce
+
+-- | Set of experiment tags to be conditionally forced. The experiments with
+-- these tags will be forced only if their conditions and their parent
+-- domain\'s conditions are true.
+ndiConditionallyForcedExpTags :: Lens' NamespacedDebugInput [Text]
+ndiConditionallyForcedExpTags
+  = lens _ndiConditionallyForcedExpTags
+      (\ s a -> s{_ndiConditionallyForcedExpTags = a})
+      . _Default
+      . _Coerce
+
+-- | Rollouts to force in a particular experiment state. Map from rollout
+-- name to rollout value.
+ndiForcedRollouts :: Lens' NamespacedDebugInput (Maybe NamespacedDebugInputForcedRollouts)
+ndiForcedRollouts
+  = lens _ndiForcedRollouts
+      (\ s a -> s{_ndiForcedRollouts = a})
+
+instance FromJSON NamespacedDebugInput where
+        parseJSON
+          = withObject "NamespacedDebugInput"
+              (\ o ->
+                 NamespacedDebugInput' <$>
+                   (o .:? "disableAutomaticEnrollmentSelection") <*>
+                     (o .:? "disableExpTags" .!= mempty)
+                     <*> (o .:? "disableOrganicSelection")
+                     <*> (o .:? "forcedFlags")
+                     <*> (o .:? "conditionallyForcedExps" .!= mempty)
+                     <*> (o .:? "absolutelyForcedExpTags" .!= mempty)
+                     <*> (o .:? "absolutelyForcedExpNames" .!= mempty)
+                     <*> (o .:? "disableManualEnrollmentSelection")
+                     <*> (o .:? "disableExps" .!= mempty)
+                     <*> (o .:? "absolutelyForcedExps" .!= mempty)
+                     <*> (o .:? "disableExpNames" .!= mempty)
+                     <*> (o .:? "conditionallyForcedExpNames" .!= mempty)
+                     <*> (o .:? "conditionallyForcedExpTags" .!= mempty)
+                     <*> (o .:? "forcedRollouts"))
+
+instance ToJSON NamespacedDebugInput where
+        toJSON NamespacedDebugInput'{..}
+          = object
+              (catMaybes
+                 [("disableAutomaticEnrollmentSelection" .=) <$>
+                    _ndiDisableAutomaticEnrollmentSelection,
+                  ("disableExpTags" .=) <$> _ndiDisableExpTags,
+                  ("disableOrganicSelection" .=) <$>
+                    _ndiDisableOrganicSelection,
+                  ("forcedFlags" .=) <$> _ndiForcedFlags,
+                  ("conditionallyForcedExps" .=) <$>
+                    _ndiConditionallyForcedExps,
+                  ("absolutelyForcedExpTags" .=) <$>
+                    _ndiAbsolutelyForcedExpTags,
+                  ("absolutelyForcedExpNames" .=) <$>
+                    _ndiAbsolutelyForcedExpNames,
+                  ("disableManualEnrollmentSelection" .=) <$>
+                    _ndiDisableManualEnrollmentSelection,
+                  ("disableExps" .=) <$> _ndiDisableExps,
+                  ("absolutelyForcedExps" .=) <$>
+                    _ndiAbsolutelyForcedExps,
+                  ("disableExpNames" .=) <$> _ndiDisableExpNames,
+                  ("conditionallyForcedExpNames" .=) <$>
+                    _ndiConditionallyForcedExpNames,
+                  ("conditionallyForcedExpTags" .=) <$>
+                    _ndiConditionallyForcedExpTags,
+                  ("forcedRollouts" .=) <$> _ndiForcedRollouts])
+
+-- | Parameters needed for commute search.
 --
 -- /See:/ 'commuteFilter' smart constructor.
 data CommuteFilter =
   CommuteFilter'
-    { _cfCommuteMethod           :: !(Maybe CommuteFilterCommuteMethod)
+    { _cfCommuteMethod :: !(Maybe CommuteFilterCommuteMethod)
     , _cfAllowImpreciseAddresses :: !(Maybe Bool)
-    , _cfTravelDuration          :: !(Maybe GDuration)
-    , _cfStartCoordinates        :: !(Maybe LatLng)
-    , _cfRoadTraffic             :: !(Maybe CommuteFilterRoadTraffic)
-    , _cfDePartureTime           :: !(Maybe TimeOfDay')
+    , _cfTravelDuration :: !(Maybe GDuration)
+    , _cfStartCoordinates :: !(Maybe LatLng)
+    , _cfRoadTraffic :: !(Maybe CommuteFilterRoadTraffic)
+    , _cfDePartureTime :: !(Maybe TimeOfDay')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1431,22 +1605,18 @@ commuteFilter =
     }
 
 
--- | Required. The method of transportation for which to calculate the
--- commute time.
+-- | Required. The method of transportation to calculate the commute time
+-- for.
 cfCommuteMethod :: Lens' CommuteFilter (Maybe CommuteFilterCommuteMethod)
 cfCommuteMethod
   = lens _cfCommuteMethod
       (\ s a -> s{_cfCommuteMethod = a})
 
--- | Optional. If true, jobs without \"precise\" addresses (street level
--- addresses or GPS coordinates) might also be returned. For city and
--- coarser level addresses, text matching is used. If this field is set to
--- false or is not specified, only jobs that include precise addresses are
--- returned by Commute Search. Note: If \`allow_imprecise_addresses\` is
--- set to true, Commute Search is not able to calculate accurate commute
--- times to jobs with city level and coarser address information. Jobs with
--- imprecise addresses will return a \`travel_duration\` time of 0
--- regardless of distance from the job seeker.
+-- | If \`true\`, jobs without street level addresses may also be returned.
+-- For city level addresses, the city center is used. For state and coarser
+-- level addresses, text matching is used. If this field is set to
+-- \`false\` or isn\'t specified, only jobs that include street level
+-- addresses will be returned by commute search.
 cfAllowImpreciseAddresses :: Lens' CommuteFilter (Maybe Bool)
 cfAllowImpreciseAddresses
   = lens _cfAllowImpreciseAddresses
@@ -1460,23 +1630,22 @@ cfTravelDuration
       (\ s a -> s{_cfTravelDuration = a})
       . mapping _GDuration
 
--- | Required. The latitude and longitude of the location from which to
--- calculate the commute time.
+-- | Required. The latitude and longitude of the location to calculate the
+-- commute time from.
 cfStartCoordinates :: Lens' CommuteFilter (Maybe LatLng)
 cfStartCoordinates
   = lens _cfStartCoordinates
       (\ s a -> s{_cfStartCoordinates = a})
 
--- | Optional. Specifies the traffic density to use when calculating commute
--- time.
+-- | Specifies the traffic density to use when calculating commute time.
 cfRoadTraffic :: Lens' CommuteFilter (Maybe CommuteFilterRoadTraffic)
 cfRoadTraffic
   = lens _cfRoadTraffic
       (\ s a -> s{_cfRoadTraffic = a})
 
--- | Optional. The departure time used to calculate traffic impact,
--- represented as google.type.TimeOfDay in local time zone. Currently
--- traffic model is restricted to hour level resolution.
+-- | The departure time used to calculate traffic impact, represented as
+-- google.type.TimeOfDay in local time zone. Currently traffic model is
+-- restricted to hour level resolution.
 cfDePartureTime :: Lens' CommuteFilter (Maybe TimeOfDay')
 cfDePartureTime
   = lens _cfDePartureTime
@@ -1506,12 +1675,12 @@ instance ToJSON CommuteFilter where
                   ("roadTraffic" .=) <$> _cfRoadTraffic,
                   ("departureTime" .=) <$> _cfDePartureTime])
 
--- | Input only. Batch delete jobs request.
+-- | Request to delete a batch of jobs.
 --
 -- /See:/ 'batchDeleteJobsRequest' smart constructor.
 newtype BatchDeleteJobsRequest =
   BatchDeleteJobsRequest'
-    { _bdjrFilter :: Maybe Text
+    { _bdjrNames :: Maybe [Text]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1520,35 +1689,38 @@ newtype BatchDeleteJobsRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bdjrFilter'
+-- * 'bdjrNames'
 batchDeleteJobsRequest
     :: BatchDeleteJobsRequest
-batchDeleteJobsRequest = BatchDeleteJobsRequest' {_bdjrFilter = Nothing}
+batchDeleteJobsRequest = BatchDeleteJobsRequest' {_bdjrNames = Nothing}
 
 
--- | Required. The filter string specifies the jobs to be deleted. Supported
--- operator: =, AND The fields eligible for filtering are: *
--- \`companyName\` (Required) * \`requisitionId\` (Required) Sample Query:
--- companyName = \"projects\/api-test-project\/companies\/123\" AND
--- requisitionId = \"req-1\"
-bdjrFilter :: Lens' BatchDeleteJobsRequest (Maybe Text)
-bdjrFilter
-  = lens _bdjrFilter (\ s a -> s{_bdjrFilter = a})
+-- | The names of the jobs to delete. The format is
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\/jobs\/{job_id}\". For
+-- example, \"projects\/foo\/tenants\/bar\/jobs\/baz\". A maximum of 200
+-- jobs can be deleted in a batch.
+bdjrNames :: Lens' BatchDeleteJobsRequest [Text]
+bdjrNames
+  = lens _bdjrNames (\ s a -> s{_bdjrNames = a}) .
+      _Default
+      . _Coerce
 
 instance FromJSON BatchDeleteJobsRequest where
         parseJSON
           = withObject "BatchDeleteJobsRequest"
-              (\ o -> BatchDeleteJobsRequest' <$> (o .:? "filter"))
+              (\ o ->
+                 BatchDeleteJobsRequest' <$>
+                   (o .:? "names" .!= mempty))
 
 instance ToJSON BatchDeleteJobsRequest where
         toJSON BatchDeleteJobsRequest'{..}
-          = object (catMaybes [("filter" .=) <$> _bdjrFilter])
+          = object (catMaybes [("names" .=) <$> _bdjrNames])
 
--- | Optional. A map of fields to hold both filterable and non-filterable
--- custom job attributes that are not covered by the provided structured
--- fields. The keys of the map are strings up to 64 bytes and must match
--- the pattern: a-zA-Z*. For example, key0LikeThis or KEY_1_LIKE_THIS. At
--- most 100 filterable and at most 100 unfilterable keys are supported. For
+-- | A map of fields to hold both filterable and non-filterable custom job
+-- attributes that are not covered by the provided structured fields. The
+-- keys of the map are strings up to 64 bytes and must match the pattern:
+-- a-zA-Z*. For example, key0LikeThis or KEY_1_LIKE_THIS. At most 100
+-- filterable and at most 100 unfilterable keys are supported. For
 -- filterable \`string_values\`, across all keys at most 200 values are
 -- allowed, with each string no more than 255 characters. For unfilterable
 -- \`string_values\`, the maximum total size of \`string_values\` across
@@ -1614,7 +1786,9 @@ jobEvent = JobEvent' {_jeJobs = Nothing, _jeType = Nothing}
 -- | Required. The job name(s) associated with this event. For example, if
 -- this is an impression event, this field contains the identifiers of all
 -- jobs shown to the job seeker. If this was a view event, this field
--- contains the identifier of the viewed job.
+-- contains the identifier of the viewed job. The format is
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\/jobs\/{job_id}\", for
+-- example, \"projects\/foo\/tenants\/bar\/jobs\/baz\".
 jeJobs :: Lens' JobEvent [Text]
 jeJobs
   = lens _jeJobs (\ s a -> s{_jeJobs = a}) . _Default .
@@ -1637,26 +1811,24 @@ instance ToJSON JobEvent where
               (catMaybes
                  [("jobs" .=) <$> _jeJobs, ("type" .=) <$> _jeType])
 
--- | Input only. The Request body of the \`SearchJobs\` call.
+-- | The Request body of the \`SearchJobs\` call.
 --
 -- /See:/ 'searchJobsRequest' smart constructor.
 data SearchJobsRequest =
   SearchJobsRequest'
-    { _sjrRequestMetadata          :: !(Maybe RequestMetadata)
-    , _sjrJobView                  :: !(Maybe SearchJobsRequestJobView)
-    , _sjrOrderBy                  :: !(Maybe Text)
-    , _sjrOffSet                   :: !(Maybe (Textual Int32))
-    , _sjrSearchMode               :: !(Maybe SearchJobsRequestSearchMode)
-    , _sjrDiversificationLevel     :: !(Maybe SearchJobsRequestDiversificationLevel)
-    , _sjrHistogramQueries         :: !(Maybe [HistogramQuery])
-    , _sjrRequirePreciseResultSize :: !(Maybe Bool)
-    , _sjrJobQuery                 :: !(Maybe JobQuery)
-    , _sjrEnableBroadening         :: !(Maybe Bool)
-    , _sjrPageToken                :: !(Maybe Text)
-    , _sjrCustomRankingInfo        :: !(Maybe CustomRankingInfo)
-    , _sjrDisableKeywordMatch      :: !(Maybe Bool)
-    , _sjrPageSize                 :: !(Maybe (Textual Int32))
-    , _sjrHistogramFacets          :: !(Maybe HistogramFacets)
+    { _sjrRequestMetadata :: !(Maybe RequestMetadata)
+    , _sjrJobView :: !(Maybe SearchJobsRequestJobView)
+    , _sjrMaxPageSize :: !(Maybe (Textual Int32))
+    , _sjrOrderBy :: !(Maybe Text)
+    , _sjrOffSet :: !(Maybe (Textual Int32))
+    , _sjrSearchMode :: !(Maybe SearchJobsRequestSearchMode)
+    , _sjrDiversificationLevel :: !(Maybe SearchJobsRequestDiversificationLevel)
+    , _sjrHistogramQueries :: !(Maybe [HistogramQuery])
+    , _sjrJobQuery :: !(Maybe JobQuery)
+    , _sjrEnableBroadening :: !(Maybe Bool)
+    , _sjrPageToken :: !(Maybe Text)
+    , _sjrCustomRankingInfo :: !(Maybe CustomRankingInfo)
+    , _sjrDisableKeywordMatch :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1669,6 +1841,8 @@ data SearchJobsRequest =
 --
 -- * 'sjrJobView'
 --
+-- * 'sjrMaxPageSize'
+--
 -- * 'sjrOrderBy'
 --
 -- * 'sjrOffSet'
@@ -1679,8 +1853,6 @@ data SearchJobsRequest =
 --
 -- * 'sjrHistogramQueries'
 --
--- * 'sjrRequirePreciseResultSize'
---
 -- * 'sjrJobQuery'
 --
 -- * 'sjrEnableBroadening'
@@ -1690,108 +1862,114 @@ data SearchJobsRequest =
 -- * 'sjrCustomRankingInfo'
 --
 -- * 'sjrDisableKeywordMatch'
---
--- * 'sjrPageSize'
---
--- * 'sjrHistogramFacets'
 searchJobsRequest
     :: SearchJobsRequest
 searchJobsRequest =
   SearchJobsRequest'
     { _sjrRequestMetadata = Nothing
     , _sjrJobView = Nothing
+    , _sjrMaxPageSize = Nothing
     , _sjrOrderBy = Nothing
     , _sjrOffSet = Nothing
     , _sjrSearchMode = Nothing
     , _sjrDiversificationLevel = Nothing
     , _sjrHistogramQueries = Nothing
-    , _sjrRequirePreciseResultSize = Nothing
     , _sjrJobQuery = Nothing
     , _sjrEnableBroadening = Nothing
     , _sjrPageToken = Nothing
     , _sjrCustomRankingInfo = Nothing
     , _sjrDisableKeywordMatch = Nothing
-    , _sjrPageSize = Nothing
-    , _sjrHistogramFacets = Nothing
     }
 
 
 -- | Required. The meta information collected about the job searcher, used to
--- improve the search quality of the service.. The identifiers, (such as
+-- improve the search quality of the service. The identifiers (such as
 -- \`user_id\`) are provided by users, and must be unique and consistent.
 sjrRequestMetadata :: Lens' SearchJobsRequest (Maybe RequestMetadata)
 sjrRequestMetadata
   = lens _sjrRequestMetadata
       (\ s a -> s{_sjrRequestMetadata = a})
 
--- | Optional. The desired job attributes returned for jobs in the search
--- response. Defaults to JobView.SMALL if no value is specified.
+-- | The desired job attributes returned for jobs in the search response.
+-- Defaults to JobView.JOB_VIEW_SMALL if no value is specified.
 sjrJobView :: Lens' SearchJobsRequest (Maybe SearchJobsRequestJobView)
 sjrJobView
   = lens _sjrJobView (\ s a -> s{_sjrJobView = a})
 
--- | Optional. The criteria determining how search results are sorted.
--- Default is \"relevance desc\". Supported options are: * \"relevance
--- desc\": By relevance descending, as determined by the API algorithms.
--- Relevance thresholding of query results is only available with this
--- ordering. * \"posting\`_\`publish\`_\`time desc\": By
--- Job.posting_publish_time descending. * \"posting\`_\`update\`_\`time
--- desc\": By Job.posting_update_time descending. * \"title\": By Job.title
--- ascending. * \"title desc\": By Job.title descending. *
--- \"annualized\`_\`base\`_\`compensation\": By job\'s
+-- | A limit on the number of jobs returned in the search results. Increasing
+-- this value above the default value of 10 can increase search response
+-- time. The value can be between 1 and 100.
+sjrMaxPageSize :: Lens' SearchJobsRequest (Maybe Int32)
+sjrMaxPageSize
+  = lens _sjrMaxPageSize
+      (\ s a -> s{_sjrMaxPageSize = a})
+      . mapping _Coerce
+
+-- | The criteria determining how search results are sorted. Default is
+-- \`\"relevance desc\"\`. Supported options are: * \`\"relevance desc\"\`:
+-- By relevance descending, as determined by the API algorithms. Relevance
+-- thresholding of query results is only available with this ordering. *
+-- \`\"posting_publish_time desc\"\`: By Job.posting_publish_time
+-- descending. * \`\"posting_update_time desc\"\`: By
+-- Job.posting_update_time descending. * \`\"title\"\`: By Job.title
+-- ascending. * \`\"title desc\"\`: By Job.title descending. *
+-- \`\"annualized_base_compensation\"\`: By job\'s
 -- CompensationInfo.annualized_base_compensation_range ascending. Jobs
 -- whose annualized base compensation is unspecified are put at the end of
--- search results. * \"annualized\`_\`base\`_\`compensation desc\": By
--- job\'s CompensationInfo.annualized_base_compensation_range descending.
--- Jobs whose annualized base compensation is unspecified are put at the
--- end of search results. * \"annualized\`_\`total\`_\`compensation\": By
--- job\'s CompensationInfo.annualized_total_compensation_range ascending.
--- Jobs whose annualized base compensation is unspecified are put at the
--- end of search results. * \"annualized\`_\`total\`_\`compensation desc\":
--- By job\'s CompensationInfo.annualized_total_compensation_range
--- descending. Jobs whose annualized base compensation is unspecified are
--- put at the end of search results. * \"custom\`_\`ranking desc\": By the
--- relevance score adjusted to the
--- SearchJobsRequest.custom_ranking_info.ranking_expression with weight
--- factor assigned by
--- SearchJobsRequest.custom_ranking_info.importance_level in descending
--- order. * \"location\`_\`distance\": By the distance between the location
--- on jobs and locations specified in the
--- SearchJobsRequest.job_query.location_filters. When this order is
--- selected, the SearchJobsRequest.job_query.location_filters must not be
--- empty. When a job has multiple locations, the location closest to one of
--- the locations specified in the location filter will be used to calculate
--- location distance. Distance is calculated by the distance between two
--- lat\/long coordinates, with a precision of 10e-4 degrees (11.3 meters).
--- Jobs that don\'t have locations specified will be ranked below jobs
--- having locations. Diversification strategy is still applied unless
--- explicitly disabled in SearchJobsRequest.diversification_level.
+-- search results. * \`\"annualized_base_compensation desc\"\`: By job\'s
+-- CompensationInfo.annualized_base_compensation_range descending. Jobs
+-- whose annualized base compensation is unspecified are put at the end of
+-- search results. * \`\"annualized_total_compensation\"\`: By job\'s
+-- CompensationInfo.annualized_total_compensation_range ascending. Jobs
+-- whose annualized base compensation is unspecified are put at the end of
+-- search results. * \`\"annualized_total_compensation desc\"\`: By job\'s
+-- CompensationInfo.annualized_total_compensation_range descending. Jobs
+-- whose annualized base compensation is unspecified are put at the end of
+-- search results. * \`\"custom_ranking desc\"\`: By the relevance score
+-- adjusted to the SearchJobsRequest.CustomRankingInfo.ranking_expression
+-- with weight factor assigned by
+-- SearchJobsRequest.CustomRankingInfo.importance_level in descending
+-- order. * Location sorting: Use the special syntax to order jobs by
+-- distance: \`\"distance_from(\'Hawaii\')\"\`: Order by distance from
+-- Hawaii. \`\"distance_from(19.89, 155.5)\"\`: Order by distance from a
+-- coordinate. \`\"distance_from(\'Hawaii\'), distance_from(\'Puerto
+-- Rico\')\"\`: Order by multiple locations. See details below.
+-- \`\"distance_from(\'Hawaii\'), distance_from(19.89, 155.5)\"\`: Order by
+-- multiple locations. See details below. The string can have a maximum of
+-- 256 characters. When multiple distance centers are provided, a job that
+-- is close to any of the distance centers would have a high rank. When a
+-- job has multiple locations, the job location closest to one of the
+-- distance centers will be used. Jobs that don\'t have locations will be
+-- ranked at the bottom. Distance is calculated with a precision of 11.3
+-- meters (37.4 feet). Diversification strategy is still applied unless
+-- explicitly disabled in diversification_level.
 sjrOrderBy :: Lens' SearchJobsRequest (Maybe Text)
 sjrOrderBy
   = lens _sjrOrderBy (\ s a -> s{_sjrOrderBy = a})
 
--- | Optional. An integer that specifies the current offset (that is,
--- starting result location, amongst the jobs deemed by the API as
--- relevant) in search results. This field is only considered if page_token
--- is unset. For example, 0 means to return results starting from the first
--- matching job, and 10 means to return from the 11th job. This can be used
--- for pagination, (for example, pageSize = 10 and offset = 10 means to
--- return from the second page).
+-- | An integer that specifies the current offset (that is, starting result
+-- location, amongst the jobs deemed by the API as relevant) in search
+-- results. This field is only considered if page_token is unset. The
+-- maximum allowed value is 5000. Otherwise an error is thrown. For
+-- example, 0 means to return results starting from the first matching job,
+-- and 10 means to return from the 11th job. This can be used for
+-- pagination, (for example, pageSize = 10 and offset = 10 means to return
+-- from the second page).
 sjrOffSet :: Lens' SearchJobsRequest (Maybe Int32)
 sjrOffSet
   = lens _sjrOffSet (\ s a -> s{_sjrOffSet = a}) .
       mapping _Coerce
 
--- | Optional. Mode of a search. Defaults to SearchMode.JOB_SEARCH.
+-- | Mode of a search. Defaults to SearchMode.JOB_SEARCH.
 sjrSearchMode :: Lens' SearchJobsRequest (Maybe SearchJobsRequestSearchMode)
 sjrSearchMode
   = lens _sjrSearchMode
       (\ s a -> s{_sjrSearchMode = a})
 
--- | Optional. Controls whether highly similar jobs are returned next to each
--- other in the search results. Jobs are identified as highly similar based
--- on their titles, job categories, and locations. Highly similar results
--- are clustered so that only one representative job of the cluster is
+-- | Controls whether highly similar jobs are returned next to each other in
+-- the search results. Jobs are identified as highly similar based on their
+-- titles, job categories, and locations. Highly similar results are
+-- clustered so that only one representative job of the cluster is
 -- displayed to the job seeker higher up in the results, with the other
 -- jobs being displayed lower down in the results. Defaults to
 -- DiversificationLevel.SIMPLE if no value is specified.
@@ -1800,8 +1978,68 @@ sjrDiversificationLevel
   = lens _sjrDiversificationLevel
       (\ s a -> s{_sjrDiversificationLevel = a})
 
--- | Optional. Expression based histogram requests for jobs matching
--- JobQuery.
+-- | An expression specifies a histogram request against matching jobs.
+-- Expression syntax is an aggregation function call with histogram facets
+-- and other options. Available aggregation function calls are: *
+-- \`count(string_histogram_facet)\`: Count the number of matching
+-- entities, for each distinct attribute value. *
+-- \`count(numeric_histogram_facet, list of buckets)\`: Count the number of
+-- matching entities within each bucket. Data types: * Histogram facet:
+-- facet names with format a-zA-Z+. * String: string like \"any string with
+-- backslash escape for quote(\\\").\" * Number: whole number and floating
+-- point number like 10, -1 and -0.01. * List: list of elements with
+-- comma(,) separator surrounded by square brackets, for example, [1, 2, 3]
+-- and [\"one\", \"two\", \"three\"]. Built-in constants: * MIN (minimum
+-- number similar to java Double.MIN_VALUE) * MAX (maximum number similar
+-- to java Double.MAX_VALUE) Built-in functions: * bucket(start, end[,
+-- label]): bucket built-in function creates a bucket with range of start,
+-- end). Note that the end is exclusive, for example, bucket(1, MAX,
+-- \"positive number\") or bucket(1, 10). Job histogram facets: *
+-- company_display_name: histogram by [Job.company_display_name. *
+-- employment_type: histogram by Job.employment_types, for example,
+-- \"FULL_TIME\", \"PART_TIME\". * company_size: histogram by CompanySize,
+-- for example, \"SMALL\", \"MEDIUM\", \"BIG\". * publish_time_in_day:
+-- histogram by the Job.posting_publish_time in days. Must specify list of
+-- numeric buckets in spec. * publish_time_in_month: histogram by the
+-- Job.posting_publish_time in months. Must specify list of numeric buckets
+-- in spec. * publish_time_in_year: histogram by the
+-- Job.posting_publish_time in years. Must specify list of numeric buckets
+-- in spec. * degree_types: histogram by the Job.degree_types, for example,
+-- \"Bachelors\", \"Masters\". * job_level: histogram by the Job.job_level,
+-- for example, \"Entry Level\". * country: histogram by the country code
+-- of jobs, for example, \"US\", \"FR\". * admin1: histogram by the admin1
+-- code of jobs, which is a global placeholder referring to the state,
+-- province, or the particular term a country uses to define the geographic
+-- structure below the country level, for example, \"CA\", \"IL\". * city:
+-- histogram by a combination of the \"city name, admin1 code\". For
+-- example, \"Mountain View, CA\", \"New York, NY\". * admin1_country:
+-- histogram by a combination of the \"admin1 code, country\", for example,
+-- \"CA, US\", \"IL, US\". * city_coordinate: histogram by the city
+-- center\'s GPS coordinates (latitude and longitude), for example,
+-- 37.4038522,-122.0987765. Since the coordinates of a city center can
+-- change, customers may need to refresh them periodically. * locale:
+-- histogram by the Job.language_code, for example, \"en-US\", \"fr-FR\". *
+-- language: histogram by the language subtag of the Job.language_code, for
+-- example, \"en\", \"fr\". * category: histogram by the JobCategory, for
+-- example, \"COMPUTER_AND_IT\", \"HEALTHCARE\". * base_compensation_unit:
+-- histogram by the CompensationInfo.CompensationUnit of base salary, for
+-- example, \"WEEKLY\", \"MONTHLY\". * base_compensation: histogram by the
+-- base salary. Must specify list of numeric buckets to group results by. *
+-- annualized_base_compensation: histogram by the base annualized salary.
+-- Must specify list of numeric buckets to group results by. *
+-- annualized_total_compensation: histogram by the total annualized salary.
+-- Must specify list of numeric buckets to group results by. *
+-- string_custom_attribute: histogram by string Job.custom_attributes.
+-- Values can be accessed via square bracket notations like
+-- string_custom_attribute[\"key1\"]. * numeric_custom_attribute: histogram
+-- by numeric Job.custom_attributes. Values can be accessed via square
+-- bracket notations like numeric_custom_attribute[\"key1\"]. Must specify
+-- list of numeric buckets to group results by. Example expressions: *
+-- \`count(admin1)\` * \`count(base_compensation, [bucket(1000, 10000),
+-- bucket(10000, 100000), bucket(100000, MAX)])\` *
+-- \`count(string_custom_attribute[\"some-string-custom-attribute\"])\` *
+-- \`count(numeric_custom_attribute[\"some-numeric-custom-attribute\"],
+-- [bucket(MIN, 0, \"negative\"), bucket(0, MAX, \"non-negative\")])\`
 sjrHistogramQueries :: Lens' SearchJobsRequest [HistogramQuery]
 sjrHistogramQueries
   = lens _sjrHistogramQueries
@@ -1809,78 +2047,52 @@ sjrHistogramQueries
       . _Default
       . _Coerce
 
--- | Optional. Controls if the search job request requires the return of a
--- precise count of the first 300 results. Setting this to \`true\` ensures
--- consistency in the number of results per page. Best practice is to set
--- this value to true if a client allows users to jump directly to a
--- non-sequential search results page. Enabling this flag may adversely
--- impact performance. Defaults to false.
-sjrRequirePreciseResultSize :: Lens' SearchJobsRequest (Maybe Bool)
-sjrRequirePreciseResultSize
-  = lens _sjrRequirePreciseResultSize
-      (\ s a -> s{_sjrRequirePreciseResultSize = a})
-
--- | Optional. Query used to search against jobs, such as keyword, location
--- filters, etc.
+-- | Query used to search against jobs, such as keyword, location filters,
+-- etc.
 sjrJobQuery :: Lens' SearchJobsRequest (Maybe JobQuery)
 sjrJobQuery
   = lens _sjrJobQuery (\ s a -> s{_sjrJobQuery = a})
 
--- | Optional. Controls whether to broaden the search when it produces sparse
--- results. Broadened queries append results to the end of the matching
--- results list. Defaults to false.
+-- | Controls whether to broaden the search when it produces sparse results.
+-- Broadened queries append results to the end of the matching results
+-- list. Defaults to false.
 sjrEnableBroadening :: Lens' SearchJobsRequest (Maybe Bool)
 sjrEnableBroadening
   = lens _sjrEnableBroadening
       (\ s a -> s{_sjrEnableBroadening = a})
 
--- | Optional. The token specifying the current offset within search results.
--- See SearchJobsResponse.next_page_token for an explanation of how to
--- obtain the next set of query results.
+-- | The token specifying the current offset within search results. See
+-- SearchJobsResponse.next_page_token for an explanation of how to obtain
+-- the next set of query results.
 sjrPageToken :: Lens' SearchJobsRequest (Maybe Text)
 sjrPageToken
   = lens _sjrPageToken (\ s a -> s{_sjrPageToken = a})
 
--- | Optional. Controls over how job documents get ranked on top of existing
--- relevance score (determined by API algorithm).
+-- | Controls over how job documents get ranked on top of existing relevance
+-- score (determined by API algorithm).
 sjrCustomRankingInfo :: Lens' SearchJobsRequest (Maybe CustomRankingInfo)
 sjrCustomRankingInfo
   = lens _sjrCustomRankingInfo
       (\ s a -> s{_sjrCustomRankingInfo = a})
 
--- | Optional. Controls whether to disable exact keyword match on
--- Job.job_title, Job.description, Job.company_display_name, Job.locations,
+-- | Controls whether to disable exact keyword match on Job.title,
+-- Job.description, Job.company_display_name, Job.addresses,
 -- Job.qualifications. When disable keyword match is turned off, a keyword
 -- match returns jobs that do not match given category filters when there
--- are matching keywords. For example, the query \"program manager,\" a
+-- are matching keywords. For example, for the query \"program manager,\" a
 -- result is returned even if the job posting has the title \"software
--- developer,\" which does not fall into \"program manager\" ontology, but
+-- developer,\" which doesn\'t fall into \"program manager\" ontology, but
 -- does have \"program manager\" appearing in its description. For queries
--- like \"cloud\" that does not contain title or location specific
--- ontology, jobs with \"cloud\" keyword matches are returned regardless of
--- this flag\'s value. Please use Company.keyword_searchable_custom_fields
--- or Company.keyword_searchable_custom_attributes if company specific
--- globally matched custom field\/attribute string values is needed.
--- Enabling keyword match improves recall of subsequent search requests.
--- Defaults to false.
+-- like \"cloud\" that don\'t contain title or location specific ontology,
+-- jobs with \"cloud\" keyword matches are returned regardless of this
+-- flag\'s value. Use Company.keyword_searchable_job_custom_attributes if
+-- company-specific globally matched custom field\/attribute string values
+-- are needed. Enabling keyword match improves recall of subsequent search
+-- requests. Defaults to false.
 sjrDisableKeywordMatch :: Lens' SearchJobsRequest (Maybe Bool)
 sjrDisableKeywordMatch
   = lens _sjrDisableKeywordMatch
       (\ s a -> s{_sjrDisableKeywordMatch = a})
-
--- | Optional. A limit on the number of jobs returned in the search results.
--- Increasing this value above the default value of 10 can increase search
--- response time. The value can be between 1 and 100.
-sjrPageSize :: Lens' SearchJobsRequest (Maybe Int32)
-sjrPageSize
-  = lens _sjrPageSize (\ s a -> s{_sjrPageSize = a}) .
-      mapping _Coerce
-
--- | Optional. Histogram requests for jobs matching JobQuery.
-sjrHistogramFacets :: Lens' SearchJobsRequest (Maybe HistogramFacets)
-sjrHistogramFacets
-  = lens _sjrHistogramFacets
-      (\ s a -> s{_sjrHistogramFacets = a})
 
 instance FromJSON SearchJobsRequest where
         parseJSON
@@ -1888,19 +2100,17 @@ instance FromJSON SearchJobsRequest where
               (\ o ->
                  SearchJobsRequest' <$>
                    (o .:? "requestMetadata") <*> (o .:? "jobView") <*>
-                     (o .:? "orderBy")
+                     (o .:? "maxPageSize")
+                     <*> (o .:? "orderBy")
                      <*> (o .:? "offset")
                      <*> (o .:? "searchMode")
                      <*> (o .:? "diversificationLevel")
                      <*> (o .:? "histogramQueries" .!= mempty)
-                     <*> (o .:? "requirePreciseResultSize")
                      <*> (o .:? "jobQuery")
                      <*> (o .:? "enableBroadening")
                      <*> (o .:? "pageToken")
                      <*> (o .:? "customRankingInfo")
-                     <*> (o .:? "disableKeywordMatch")
-                     <*> (o .:? "pageSize")
-                     <*> (o .:? "histogramFacets"))
+                     <*> (o .:? "disableKeywordMatch"))
 
 instance ToJSON SearchJobsRequest where
         toJSON SearchJobsRequest'{..}
@@ -1908,22 +2118,19 @@ instance ToJSON SearchJobsRequest where
               (catMaybes
                  [("requestMetadata" .=) <$> _sjrRequestMetadata,
                   ("jobView" .=) <$> _sjrJobView,
+                  ("maxPageSize" .=) <$> _sjrMaxPageSize,
                   ("orderBy" .=) <$> _sjrOrderBy,
                   ("offset" .=) <$> _sjrOffSet,
                   ("searchMode" .=) <$> _sjrSearchMode,
                   ("diversificationLevel" .=) <$>
                     _sjrDiversificationLevel,
                   ("histogramQueries" .=) <$> _sjrHistogramQueries,
-                  ("requirePreciseResultSize" .=) <$>
-                    _sjrRequirePreciseResultSize,
                   ("jobQuery" .=) <$> _sjrJobQuery,
                   ("enableBroadening" .=) <$> _sjrEnableBroadening,
                   ("pageToken" .=) <$> _sjrPageToken,
                   ("customRankingInfo" .=) <$> _sjrCustomRankingInfo,
                   ("disableKeywordMatch" .=) <$>
-                    _sjrDisableKeywordMatch,
-                  ("pageSize" .=) <$> _sjrPageSize,
-                  ("histogramFacets" .=) <$> _sjrHistogramFacets])
+                    _sjrDisableKeywordMatch])
 
 -- | A map from the values of the facet associated with distinct values to
 -- the number of matching entries with corresponding value. The key format
@@ -2004,14 +2211,13 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | Output only. Histogram result that matches HistogramSpec specified in
--- searches.
+-- | Histogram result that matches HistogramQuery specified in searches.
 --
 -- /See:/ 'histogramQueryResult' smart constructor.
 data HistogramQueryResult =
   HistogramQueryResult'
     { _hqrHistogramQuery :: !(Maybe Text)
-    , _hqrHistogram      :: !(Maybe HistogramQueryResultHistogram)
+    , _hqrHistogram :: !(Maybe HistogramQueryResultHistogram)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2060,83 +2266,95 @@ instance ToJSON HistogramQueryResult where
                  [("histogramQuery" .=) <$> _hqrHistogramQuery,
                   ("histogram" .=) <$> _hqrHistogram])
 
--- | Custom attributes histogram request. An error is thrown if neither
--- string_value_histogram or long_value_histogram_bucketing_option has been
--- defined.
+-- | Mutation result of a job from a batch operation.
 --
--- /See:/ 'customAttributeHistogramRequest' smart constructor.
-data CustomAttributeHistogramRequest =
-  CustomAttributeHistogramRequest'
-    { _cahrLongValueHistogramBucketingOption :: !(Maybe NumericBucketingOption)
-    , _cahrKey                               :: !(Maybe Text)
-    , _cahrStringValueHistogram              :: !(Maybe Bool)
+-- /See:/ 'jobResult' smart constructor.
+data JobResult =
+  JobResult'
+    { _jrStatus :: !(Maybe Status)
+    , _jrJob :: !(Maybe Job)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'CustomAttributeHistogramRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'JobResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cahrLongValueHistogramBucketingOption'
+-- * 'jrStatus'
 --
--- * 'cahrKey'
---
--- * 'cahrStringValueHistogram'
-customAttributeHistogramRequest
-    :: CustomAttributeHistogramRequest
-customAttributeHistogramRequest =
-  CustomAttributeHistogramRequest'
-    { _cahrLongValueHistogramBucketingOption = Nothing
-    , _cahrKey = Nothing
-    , _cahrStringValueHistogram = Nothing
-    }
+-- * 'jrJob'
+jobResult
+    :: JobResult
+jobResult = JobResult' {_jrStatus = Nothing, _jrJob = Nothing}
 
 
--- | Optional. Specifies buckets used to perform a range histogram on Job\'s
--- filterable long custom field values, or min\/max value requirements.
-cahrLongValueHistogramBucketingOption :: Lens' CustomAttributeHistogramRequest (Maybe NumericBucketingOption)
-cahrLongValueHistogramBucketingOption
-  = lens _cahrLongValueHistogramBucketingOption
-      (\ s a ->
-         s{_cahrLongValueHistogramBucketingOption = a})
+-- | The status of the job processed. This field is populated if the
+-- processing of the job fails.
+jrStatus :: Lens' JobResult (Maybe Status)
+jrStatus = lens _jrStatus (\ s a -> s{_jrStatus = a})
 
--- | Required. Specifies the custom field key to perform a histogram on. If
--- specified without \`long_value_histogram_bucketing_option\`, histogram
--- on string values of the given \`key\` is triggered, otherwise histogram
--- is performed on long values.
-cahrKey :: Lens' CustomAttributeHistogramRequest (Maybe Text)
-cahrKey = lens _cahrKey (\ s a -> s{_cahrKey = a})
+-- | Here Job only contains basic information including name, company,
+-- language_code and requisition_id, use getJob method to retrieve detailed
+-- information of the created\/updated job.
+jrJob :: Lens' JobResult (Maybe Job)
+jrJob = lens _jrJob (\ s a -> s{_jrJob = a})
 
--- | Optional. If set to true, the response includes the histogram value for
--- each key as a string.
-cahrStringValueHistogram :: Lens' CustomAttributeHistogramRequest (Maybe Bool)
-cahrStringValueHistogram
-  = lens _cahrStringValueHistogram
-      (\ s a -> s{_cahrStringValueHistogram = a})
-
-instance FromJSON CustomAttributeHistogramRequest
-         where
+instance FromJSON JobResult where
         parseJSON
-          = withObject "CustomAttributeHistogramRequest"
+          = withObject "JobResult"
               (\ o ->
-                 CustomAttributeHistogramRequest' <$>
-                   (o .:? "longValueHistogramBucketingOption") <*>
-                     (o .:? "key")
-                     <*> (o .:? "stringValueHistogram"))
+                 JobResult' <$> (o .:? "status") <*> (o .:? "job"))
 
-instance ToJSON CustomAttributeHistogramRequest where
-        toJSON CustomAttributeHistogramRequest'{..}
+instance ToJSON JobResult where
+        toJSON JobResult'{..}
           = object
               (catMaybes
-                 [("longValueHistogramBucketingOption" .=) <$>
-                    _cahrLongValueHistogramBucketingOption,
-                  ("key" .=) <$> _cahrKey,
-                  ("stringValueHistogram" .=) <$>
-                    _cahrStringValueHistogram])
+                 [("status" .=) <$> _jrStatus, ("job" .=) <$> _jrJob])
 
--- | Output only. Additional information returned to client, such as
--- debugging information.
+-- | Flags to force in a particular experiment state. Map from flag name to
+-- flag value.
+--
+-- /See:/ 'namespacedDebugInputForcedFlags' smart constructor.
+newtype NamespacedDebugInputForcedFlags =
+  NamespacedDebugInputForcedFlags'
+    { _ndiffAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NamespacedDebugInputForcedFlags' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ndiffAddtional'
+namespacedDebugInputForcedFlags
+    :: HashMap Text Text -- ^ 'ndiffAddtional'
+    -> NamespacedDebugInputForcedFlags
+namespacedDebugInputForcedFlags pNdiffAddtional_ =
+  NamespacedDebugInputForcedFlags'
+    {_ndiffAddtional = _Coerce # pNdiffAddtional_}
+
+
+ndiffAddtional :: Lens' NamespacedDebugInputForcedFlags (HashMap Text Text)
+ndiffAddtional
+  = lens _ndiffAddtional
+      (\ s a -> s{_ndiffAddtional = a})
+      . _Coerce
+
+instance FromJSON NamespacedDebugInputForcedFlags
+         where
+        parseJSON
+          = withObject "NamespacedDebugInputForcedFlags"
+              (\ o ->
+                 NamespacedDebugInputForcedFlags' <$>
+                   (parseJSONObject o))
+
+instance ToJSON NamespacedDebugInputForcedFlags where
+        toJSON = toJSON . _ndiffAddtional
+
+-- | Additional information returned to client, such as debugging
+-- information.
 --
 -- /See:/ 'responseMetadata' smart constructor.
 newtype ResponseMetadata =
@@ -2172,13 +2390,13 @@ instance ToJSON ResponseMetadata where
           = object
               (catMaybes [("requestId" .=) <$> _rmRequestId])
 
--- | Output only. Commute details related to this job.
+-- | Commute details related to this job.
 --
 -- /See:/ 'commuteInfo' smart constructor.
 data CommuteInfo =
   CommuteInfo'
     { _ciTravelDuration :: !(Maybe GDuration)
-    , _ciJobLocation    :: !(Maybe Location)
+    , _ciJobLocation :: !(Maybe Location)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2197,7 +2415,7 @@ commuteInfo =
 
 
 -- | The number of seconds required to travel to the job location from the
--- query location. A duration of 0 seconds indicates that the job is not
+-- query location. A duration of 0 seconds indicates that the job isn\'t
 -- reachable within the requested duration, but was returned as part of an
 -- expanded query.
 ciTravelDuration :: Lens' CommuteInfo (Maybe Scientific)
@@ -2226,195 +2444,13 @@ instance ToJSON CommuteInfo where
                  [("travelDuration" .=) <$> _ciTravelDuration,
                   ("jobLocation" .=) <$> _ciJobLocation])
 
--- | Output only. Custom attribute histogram result.
---
--- /See:/ 'customAttributeHistogramResult' smart constructor.
-data CustomAttributeHistogramResult =
-  CustomAttributeHistogramResult'
-    { _cStringValueHistogramResult :: !(Maybe CustomAttributeHistogramResultStringValueHistogramResult)
-    , _cLongValueHistogramResult   :: !(Maybe NumericBucketingResult)
-    , _cKey                        :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CustomAttributeHistogramResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cStringValueHistogramResult'
---
--- * 'cLongValueHistogramResult'
---
--- * 'cKey'
-customAttributeHistogramResult
-    :: CustomAttributeHistogramResult
-customAttributeHistogramResult =
-  CustomAttributeHistogramResult'
-    { _cStringValueHistogramResult = Nothing
-    , _cLongValueHistogramResult = Nothing
-    , _cKey = Nothing
-    }
-
-
--- | Stores a map from the values of string custom field associated with
--- \`key\` to the number of jobs with that value in this histogram result.
-cStringValueHistogramResult :: Lens' CustomAttributeHistogramResult (Maybe CustomAttributeHistogramResultStringValueHistogramResult)
-cStringValueHistogramResult
-  = lens _cStringValueHistogramResult
-      (\ s a -> s{_cStringValueHistogramResult = a})
-
--- | Stores bucketed histogram counting result or min\/max values for custom
--- attribute long values associated with \`key\`.
-cLongValueHistogramResult :: Lens' CustomAttributeHistogramResult (Maybe NumericBucketingResult)
-cLongValueHistogramResult
-  = lens _cLongValueHistogramResult
-      (\ s a -> s{_cLongValueHistogramResult = a})
-
--- | Stores the key of custom attribute the histogram is performed on.
-cKey :: Lens' CustomAttributeHistogramResult (Maybe Text)
-cKey = lens _cKey (\ s a -> s{_cKey = a})
-
-instance FromJSON CustomAttributeHistogramResult
-         where
-        parseJSON
-          = withObject "CustomAttributeHistogramResult"
-              (\ o ->
-                 CustomAttributeHistogramResult' <$>
-                   (o .:? "stringValueHistogramResult") <*>
-                     (o .:? "longValueHistogramResult")
-                     <*> (o .:? "key"))
-
-instance ToJSON CustomAttributeHistogramResult where
-        toJSON CustomAttributeHistogramResult'{..}
-          = object
-              (catMaybes
-                 [("stringValueHistogramResult" .=) <$>
-                    _cStringValueHistogramResult,
-                  ("longValueHistogramResult" .=) <$>
-                    _cLongValueHistogramResult,
-                  ("key" .=) <$> _cKey])
-
--- | Represents starting and ending value of a range in double.
---
--- /See:/ 'bucketRange' smart constructor.
-data BucketRange =
-  BucketRange'
-    { _brTo   :: !(Maybe (Textual Double))
-    , _brFrom :: !(Maybe (Textual Double))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'BucketRange' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brTo'
---
--- * 'brFrom'
-bucketRange
-    :: BucketRange
-bucketRange = BucketRange' {_brTo = Nothing, _brFrom = Nothing}
-
-
--- | Ending value of the bucket range.
-brTo :: Lens' BucketRange (Maybe Double)
-brTo
-  = lens _brTo (\ s a -> s{_brTo = a}) .
-      mapping _Coerce
-
--- | Starting value of the bucket range.
-brFrom :: Lens' BucketRange (Maybe Double)
-brFrom
-  = lens _brFrom (\ s a -> s{_brFrom = a}) .
-      mapping _Coerce
-
-instance FromJSON BucketRange where
-        parseJSON
-          = withObject "BucketRange"
-              (\ o ->
-                 BucketRange' <$> (o .:? "to") <*> (o .:? "from"))
-
-instance ToJSON BucketRange where
-        toJSON BucketRange'{..}
-          = object
-              (catMaybes
-                 [("to" .=) <$> _brTo, ("from" .=) <$> _brFrom])
-
--- | Output only. Custom numeric bucketing result.
---
--- /See:/ 'numericBucketingResult' smart constructor.
-data NumericBucketingResult =
-  NumericBucketingResult'
-    { _nbrMaxValue :: !(Maybe (Textual Double))
-    , _nbrCounts   :: !(Maybe [BucketizedCount])
-    , _nbrMinValue :: !(Maybe (Textual Double))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'NumericBucketingResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'nbrMaxValue'
---
--- * 'nbrCounts'
---
--- * 'nbrMinValue'
-numericBucketingResult
-    :: NumericBucketingResult
-numericBucketingResult =
-  NumericBucketingResult'
-    {_nbrMaxValue = Nothing, _nbrCounts = Nothing, _nbrMinValue = Nothing}
-
-
--- | Stores the maximum value of the numeric field. Is populated only if
--- [NumericBucketingOption.requires_min_max] is set to true.
-nbrMaxValue :: Lens' NumericBucketingResult (Maybe Double)
-nbrMaxValue
-  = lens _nbrMaxValue (\ s a -> s{_nbrMaxValue = a}) .
-      mapping _Coerce
-
--- | Count within each bucket. Its size is the length of
--- NumericBucketingOption.bucket_bounds plus 1.
-nbrCounts :: Lens' NumericBucketingResult [BucketizedCount]
-nbrCounts
-  = lens _nbrCounts (\ s a -> s{_nbrCounts = a}) .
-      _Default
-      . _Coerce
-
--- | Stores the minimum value of the numeric field. Will be populated only if
--- [NumericBucketingOption.requires_min_max] is set to true.
-nbrMinValue :: Lens' NumericBucketingResult (Maybe Double)
-nbrMinValue
-  = lens _nbrMinValue (\ s a -> s{_nbrMinValue = a}) .
-      mapping _Coerce
-
-instance FromJSON NumericBucketingResult where
-        parseJSON
-          = withObject "NumericBucketingResult"
-              (\ o ->
-                 NumericBucketingResult' <$>
-                   (o .:? "maxValue") <*> (o .:? "counts" .!= mempty)
-                     <*> (o .:? "minValue"))
-
-instance ToJSON NumericBucketingResult where
-        toJSON NumericBucketingResult'{..}
-          = object
-              (catMaybes
-                 [("maxValue" .=) <$> _nbrMaxValue,
-                  ("counts" .=) <$> _nbrCounts,
-                  ("minValue" .=) <$> _nbrMinValue])
-
--- | Output only. Derived details about the job posting.
+-- | Derived details about the job posting.
 --
 -- /See:/ 'jobDerivedInfo' smart constructor.
 data JobDerivedInfo =
   JobDerivedInfo'
-    { _jdiJobCategories :: !(Maybe [Text])
-    , _jdiLocations     :: !(Maybe [Location])
+    { _jdiJobCategories :: !(Maybe [JobDerivedInfoJobCategoriesItem])
+    , _jdiLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2433,7 +2469,7 @@ jobDerivedInfo =
 
 
 -- | Job categories derived from Job.title and Job.description.
-jdiJobCategories :: Lens' JobDerivedInfo [Text]
+jdiJobCategories :: Lens' JobDerivedInfo [JobDerivedInfoJobCategoriesItem]
 jdiJobCategories
   = lens _jdiJobCategories
       (\ s a -> s{_jdiJobCategories = a})
@@ -2463,6 +2499,138 @@ instance ToJSON JobDerivedInfo where
                  [("jobCategories" .=) <$> _jdiJobCategories,
                   ("locations" .=) <$> _jdiLocations])
 
+-- | Metadata used for long running operations returned by CTS batch APIs.
+-- It\'s used to replace google.longrunning.Operation.metadata.
+--
+-- /See:/ 'batchOperationMetadata' smart constructor.
+data BatchOperationMetadata =
+  BatchOperationMetadata'
+    { _bomState :: !(Maybe BatchOperationMetadataState)
+    , _bomUpdateTime :: !(Maybe DateTime')
+    , _bomEndTime :: !(Maybe DateTime')
+    , _bomSuccessCount :: !(Maybe (Textual Int32))
+    , _bomFailureCount :: !(Maybe (Textual Int32))
+    , _bomCreateTime :: !(Maybe DateTime')
+    , _bomStateDescription :: !(Maybe Text)
+    , _bomTotalCount :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchOperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bomState'
+--
+-- * 'bomUpdateTime'
+--
+-- * 'bomEndTime'
+--
+-- * 'bomSuccessCount'
+--
+-- * 'bomFailureCount'
+--
+-- * 'bomCreateTime'
+--
+-- * 'bomStateDescription'
+--
+-- * 'bomTotalCount'
+batchOperationMetadata
+    :: BatchOperationMetadata
+batchOperationMetadata =
+  BatchOperationMetadata'
+    { _bomState = Nothing
+    , _bomUpdateTime = Nothing
+    , _bomEndTime = Nothing
+    , _bomSuccessCount = Nothing
+    , _bomFailureCount = Nothing
+    , _bomCreateTime = Nothing
+    , _bomStateDescription = Nothing
+    , _bomTotalCount = Nothing
+    }
+
+
+-- | The state of a long running operation.
+bomState :: Lens' BatchOperationMetadata (Maybe BatchOperationMetadataState)
+bomState = lens _bomState (\ s a -> s{_bomState = a})
+
+-- | The time when the batch operation status is updated. The metadata and
+-- the update_time is refreshed every minute otherwise cached data is
+-- returned.
+bomUpdateTime :: Lens' BatchOperationMetadata (Maybe UTCTime)
+bomUpdateTime
+  = lens _bomUpdateTime
+      (\ s a -> s{_bomUpdateTime = a})
+      . mapping _DateTime
+
+-- | The time when the batch operation is finished and
+-- google.longrunning.Operation.done is set to \`true\`.
+bomEndTime :: Lens' BatchOperationMetadata (Maybe UTCTime)
+bomEndTime
+  = lens _bomEndTime (\ s a -> s{_bomEndTime = a}) .
+      mapping _DateTime
+
+-- | Count of successful item(s) inside an operation.
+bomSuccessCount :: Lens' BatchOperationMetadata (Maybe Int32)
+bomSuccessCount
+  = lens _bomSuccessCount
+      (\ s a -> s{_bomSuccessCount = a})
+      . mapping _Coerce
+
+-- | Count of failed item(s) inside an operation.
+bomFailureCount :: Lens' BatchOperationMetadata (Maybe Int32)
+bomFailureCount
+  = lens _bomFailureCount
+      (\ s a -> s{_bomFailureCount = a})
+      . mapping _Coerce
+
+-- | The time when the batch operation is created.
+bomCreateTime :: Lens' BatchOperationMetadata (Maybe UTCTime)
+bomCreateTime
+  = lens _bomCreateTime
+      (\ s a -> s{_bomCreateTime = a})
+      . mapping _DateTime
+
+-- | More detailed information about operation state.
+bomStateDescription :: Lens' BatchOperationMetadata (Maybe Text)
+bomStateDescription
+  = lens _bomStateDescription
+      (\ s a -> s{_bomStateDescription = a})
+
+-- | Count of total item(s) inside an operation.
+bomTotalCount :: Lens' BatchOperationMetadata (Maybe Int32)
+bomTotalCount
+  = lens _bomTotalCount
+      (\ s a -> s{_bomTotalCount = a})
+      . mapping _Coerce
+
+instance FromJSON BatchOperationMetadata where
+        parseJSON
+          = withObject "BatchOperationMetadata"
+              (\ o ->
+                 BatchOperationMetadata' <$>
+                   (o .:? "state") <*> (o .:? "updateTime") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "successCount")
+                     <*> (o .:? "failureCount")
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "stateDescription")
+                     <*> (o .:? "totalCount"))
+
+instance ToJSON BatchOperationMetadata where
+        toJSON BatchOperationMetadata'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _bomState,
+                  ("updateTime" .=) <$> _bomUpdateTime,
+                  ("endTime" .=) <$> _bomEndTime,
+                  ("successCount" .=) <$> _bomSuccessCount,
+                  ("failureCount" .=) <$> _bomFailureCount,
+                  ("createTime" .=) <$> _bomCreateTime,
+                  ("stateDescription" .=) <$> _bomStateDescription,
+                  ("totalCount" .=) <$> _bomTotalCount])
+
 -- | Derived details about the company.
 --
 -- /See:/ 'companyDerivedInfo' smart constructor.
@@ -2484,7 +2652,7 @@ companyDerivedInfo = CompanyDerivedInfo' {_cdiHeadquartersLocation = Nothing}
 
 
 -- | A structured headquarters location of the company, resolved from
--- Company.hq_location if provided.
+-- Company.headquarters_address if provided.
 cdiHeadquartersLocation :: Lens' CompanyDerivedInfo (Maybe Location)
 cdiHeadquartersLocation
   = lens _cdiHeadquartersLocation
@@ -2504,15 +2672,15 @@ instance ToJSON CompanyDerivedInfo where
                  [("headquartersLocation" .=) <$>
                     _cdiHeadquartersLocation])
 
--- | Input only. Filter on job compensation type and amount.
+-- | Filter on job compensation type and amount.
 --
 -- /See:/ 'compensationFilter' smart constructor.
 data CompensationFilter =
   CompensationFilter'
     { _cfIncludeJobsWithUnspecifiedCompensationRange :: !(Maybe Bool)
-    , _cfRange                                       :: !(Maybe CompensationRange)
-    , _cfUnits                                       :: !(Maybe [Text])
-    , _cfType                                        :: !(Maybe CompensationFilterType)
+    , _cfRange :: !(Maybe CompensationRange)
+    , _cfUnits :: !(Maybe [CompensationFilterUnitsItem])
+    , _cfType :: !(Maybe CompensationFilterType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2539,8 +2707,8 @@ compensationFilter =
     }
 
 
--- | Optional. Whether to include jobs whose compensation range is
--- unspecified.
+-- | If set to true, jobs with unspecified compensation range fields are
+-- included.
 cfIncludeJobsWithUnspecifiedCompensationRange :: Lens' CompensationFilter (Maybe Bool)
 cfIncludeJobsWithUnspecifiedCompensationRange
   = lens _cfIncludeJobsWithUnspecifiedCompensationRange
@@ -2548,13 +2716,13 @@ cfIncludeJobsWithUnspecifiedCompensationRange
          s{_cfIncludeJobsWithUnspecifiedCompensationRange =
              a})
 
--- | Optional. Compensation range.
+-- | Compensation range.
 cfRange :: Lens' CompensationFilter (Maybe CompensationRange)
 cfRange = lens _cfRange (\ s a -> s{_cfRange = a})
 
 -- | Required. Specify desired \`base compensation entry\'s\`
 -- CompensationInfo.CompensationUnit.
-cfUnits :: Lens' CompensationFilter [Text]
+cfUnits :: Lens' CompensationFilter [CompensationFilterUnitsItem]
 cfUnits
   = lens _cfUnits (\ s a -> s{_cfUnits = a}) . _Default
       . _Coerce
@@ -2582,6 +2750,58 @@ instance ToJSON CompensationFilter where
                   ("range" .=) <$> _cfRange, ("units" .=) <$> _cfUnits,
                   ("type" .=) <$> _cfType])
 
+-- | A Tenant resource represents a tenant in the service. A tenant is a
+-- group or entity that shares common access with specific privileges for
+-- resources like jobs. Customer may create multiple tenants to provide
+-- data isolation for different groups.
+--
+-- /See:/ 'tenant' smart constructor.
+data Tenant =
+  Tenant'
+    { _tName :: !(Maybe Text)
+    , _tExternalId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Tenant' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tName'
+--
+-- * 'tExternalId'
+tenant
+    :: Tenant
+tenant = Tenant' {_tName = Nothing, _tExternalId = Nothing}
+
+
+-- | Required during tenant update. The resource name for a tenant. This is
+-- generated by the service when a tenant is created. The format is
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\", for example,
+-- \"projects\/foo\/tenants\/bar\".
+tName :: Lens' Tenant (Maybe Text)
+tName = lens _tName (\ s a -> s{_tName = a})
+
+-- | Required. Client side tenant identifier, used to uniquely identify the
+-- tenant. The maximum number of allowed characters is 255.
+tExternalId :: Lens' Tenant (Maybe Text)
+tExternalId
+  = lens _tExternalId (\ s a -> s{_tExternalId = a})
+
+instance FromJSON Tenant where
+        parseJSON
+          = withObject "Tenant"
+              (\ o ->
+                 Tenant' <$> (o .:? "name") <*> (o .:? "externalId"))
+
+instance ToJSON Tenant where
+        toJSON Tenant'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _tName,
+                  ("externalId" .=) <$> _tExternalId])
+
 -- | A Company resource represents a company in the service. A company is the
 -- entity that owns job postings, that is, the hiring entity responsible
 -- for employing applicants for the job position.
@@ -2589,19 +2809,19 @@ instance ToJSON CompensationFilter where
 -- /See:/ 'company' smart constructor.
 data Company =
   Company'
-    { _cHiringAgency                         :: !(Maybe Bool)
-    , _cCareerSiteURI                        :: !(Maybe Text)
-    , _cEeoText                              :: !(Maybe Text)
-    , _cSize                                 :: !(Maybe CompanySize)
-    , _cWebsiteURI                           :: !(Maybe Text)
-    , _cSuspended                            :: !(Maybe Bool)
+    { _cHiringAgency :: !(Maybe Bool)
+    , _cCareerSiteURI :: !(Maybe Text)
+    , _cEeoText :: !(Maybe Text)
+    , _cSize :: !(Maybe CompanySize)
+    , _cWebsiteURI :: !(Maybe Text)
+    , _cSuspended :: !(Maybe Bool)
     , _cKeywordSearchableJobCustomAttributes :: !(Maybe [Text])
-    , _cImageURI                             :: !(Maybe Text)
-    , _cHeadquartersAddress                  :: !(Maybe Text)
-    , _cName                                 :: !(Maybe Text)
-    , _cDisplayName                          :: !(Maybe Text)
-    , _cExternalId                           :: !(Maybe Text)
-    , _cDerivedInfo                          :: !(Maybe CompanyDerivedInfo)
+    , _cImageURI :: !(Maybe Text)
+    , _cHeadquartersAddress :: !(Maybe Text)
+    , _cName :: !(Maybe Text)
+    , _cDisplayName :: !(Maybe Text)
+    , _cExternalId :: !(Maybe Text)
+    , _cDerivedInfo :: !(Maybe CompanyDerivedInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2655,33 +2875,33 @@ company =
     }
 
 
--- | Optional. Set to true if it is the hiring agency that post jobs for
--- other employers. Defaults to false if not provided.
+-- | Set to true if it is the hiring agency that post jobs for other
+-- employers. Defaults to false if not provided.
 cHiringAgency :: Lens' Company (Maybe Bool)
 cHiringAgency
   = lens _cHiringAgency
       (\ s a -> s{_cHiringAgency = a})
 
--- | Optional. The URI to employer\'s career site or careers page on the
--- employer\'s web site, for example, \"https:\/\/careers.google.com\".
+-- | The URI to employer\'s career site or careers page on the employer\'s
+-- web site, for example, \"https:\/\/careers.google.com\".
 cCareerSiteURI :: Lens' Company (Maybe Text)
 cCareerSiteURI
   = lens _cCareerSiteURI
       (\ s a -> s{_cCareerSiteURI = a})
 
--- | Optional. Equal Employment Opportunity legal disclaimer text to be
--- associated with all jobs, and typically to be displayed in all roles.
--- The maximum number of allowed characters is 500.
+-- | Equal Employment Opportunity legal disclaimer text to be associated with
+-- all jobs, and typically to be displayed in all roles. The maximum number
+-- of allowed characters is 500.
 cEeoText :: Lens' Company (Maybe Text)
 cEeoText = lens _cEeoText (\ s a -> s{_cEeoText = a})
 
--- | Optional. The employer\'s company size.
+-- | The employer\'s company size.
 cSize :: Lens' Company (Maybe CompanySize)
 cSize = lens _cSize (\ s a -> s{_cSize = a})
 
--- | Optional. The URI representing the company\'s primary web site or home
--- page, for example, \"https:\/\/www.google.com\". The maximum number of
--- allowed characters is 255.
+-- | The URI representing the company\'s primary web site or home page, for
+-- example, \"https:\/\/www.google.com\". The maximum number of allowed
+-- characters is 255.
 cWebsiteURI :: Lens' Company (Maybe Text)
 cWebsiteURI
   = lens _cWebsiteURI (\ s a -> s{_cWebsiteURI = a})
@@ -2693,12 +2913,12 @@ cSuspended :: Lens' Company (Maybe Bool)
 cSuspended
   = lens _cSuspended (\ s a -> s{_cSuspended = a})
 
--- | Optional. A list of keys of filterable Job.custom_attributes, whose
--- corresponding \`string_values\` are used in keyword search. Jobs with
+-- | A list of keys of filterable Job.custom_attributes, whose corresponding
+-- \`string_values\` are used in keyword searches. Jobs with
 -- \`string_values\` under these specified field keys are returned if any
--- of the values matches the search keyword. Custom field values with
--- parenthesis, brackets and special symbols won\'t be properly searchable,
--- and those keyword queries need to be surrounded by quotes.
+-- of the values match the search keyword. Custom field values with
+-- parenthesis, brackets and special symbols are not searchable as-is, and
+-- those keyword queries must be surrounded by quotes.
 cKeywordSearchableJobCustomAttributes :: Lens' Company [Text]
 cKeywordSearchableJobCustomAttributes
   = lens _cKeywordSearchableJobCustomAttributes
@@ -2707,15 +2927,15 @@ cKeywordSearchableJobCustomAttributes
       . _Default
       . _Coerce
 
--- | Optional. A URI that hosts the employer\'s company logo.
+-- | A URI that hosts the employer\'s company logo.
 cImageURI :: Lens' Company (Maybe Text)
 cImageURI
   = lens _cImageURI (\ s a -> s{_cImageURI = a})
 
--- | Optional. The street address of the company\'s main headquarters, which
--- may be different from the job location. The service attempts to
--- geolocate the provided address, and populates a more specific location
--- wherever possible in DerivedInfo.headquarters_location.
+-- | The street address of the company\'s main headquarters, which may be
+-- different from the job location. The service attempts to geolocate the
+-- provided address, and populates a more specific location wherever
+-- possible in DerivedInfo.headquarters_location.
 cHeadquartersAddress :: Lens' Company (Maybe Text)
 cHeadquartersAddress
   = lens _cHeadquartersAddress
@@ -2723,12 +2943,12 @@ cHeadquartersAddress
 
 -- | Required during company update. The resource name for a company. This is
 -- generated by the service when a company is created. The format is
--- \"projects\/{project_id}\/companies\/{company_id}\", for example,
--- \"projects\/api-test-project\/companies\/foo\".
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\/companies\/{company_id}\",
+-- for example, \"projects\/foo\/tenants\/bar\/companies\/baz\".
 cName :: Lens' Company (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
 
--- | Required. The display name of the company, for example, \"Google, LLC\".
+-- | Required. The display name of the company, for example, \"Google LLC\".
 cDisplayName :: Lens' Company (Maybe Text)
 cDisplayName
   = lens _cDisplayName (\ s a -> s{_cDisplayName = a})
@@ -2787,8 +3007,9 @@ instance ToJSON Company where
 -- /See:/ 'customAttribute' smart constructor.
 data CustomAttribute =
   CustomAttribute'
-    { _caLongValues   :: !(Maybe [Textual Int64])
-    , _caFilterable   :: !(Maybe Bool)
+    { _caLongValues :: !(Maybe [Textual Int64])
+    , _caFilterable :: !(Maybe Bool)
+    , _caKeywordSearchable :: !(Maybe Bool)
     , _caStringValues :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2802,6 +3023,8 @@ data CustomAttribute =
 --
 -- * 'caFilterable'
 --
+-- * 'caKeywordSearchable'
+--
 -- * 'caStringValues'
 customAttribute
     :: CustomAttribute
@@ -2809,33 +3032,44 @@ customAttribute =
   CustomAttribute'
     { _caLongValues = Nothing
     , _caFilterable = Nothing
+    , _caKeywordSearchable = Nothing
     , _caStringValues = Nothing
     }
 
 
--- | Optional but exactly one of string_values or long_values must be
--- specified. This field is used to perform number range search. (\`EQ\`,
--- \`GT\`, \`GE\`, \`LE\`, \`LT\`) over filterable \`long_value\`.
--- Currently at most 1 long_values is supported.
+-- | Exactly one of string_values or long_values must be specified. This
+-- field is used to perform number range search. (\`EQ\`, \`GT\`, \`GE\`,
+-- \`LE\`, \`LT\`) over filterable \`long_value\`. Currently at most 1
+-- long_values is supported.
 caLongValues :: Lens' CustomAttribute [Int64]
 caLongValues
   = lens _caLongValues (\ s a -> s{_caLongValues = a})
       . _Default
       . _Coerce
 
--- | Optional. If the \`filterable\` flag is true, custom field values are
--- searchable. If false, values are not searchable. Default is false.
+-- | If the \`filterable\` flag is true, the custom field values may be used
+-- for custom attribute filters JobQuery.custom_attribute_filter. If false,
+-- these values may not be used for custom attribute filters. Default is
+-- false.
 caFilterable :: Lens' CustomAttribute (Maybe Bool)
 caFilterable
   = lens _caFilterable (\ s a -> s{_caFilterable = a})
 
--- | Optional but exactly one of string_values or long_values must be
--- specified. This field is used to perform a string match
--- (\`CASE_SENSITIVE_MATCH\` or \`CASE_INSENSITIVE_MATCH\`) search. For
--- filterable \`string_value\`s, a maximum total number of 200 values is
--- allowed, with each \`string_value\` has a byte size of no more than
--- 255B. For unfilterable \`string_values\`, the maximum total byte size of
--- unfilterable \`string_values\` is 50KB. Empty string is not allowed.
+-- | If the \`keyword_searchable\` flag is true, the keywords in custom
+-- fields are searchable by keyword match. If false, the values are not
+-- searchable by keyword match. Default is false.
+caKeywordSearchable :: Lens' CustomAttribute (Maybe Bool)
+caKeywordSearchable
+  = lens _caKeywordSearchable
+      (\ s a -> s{_caKeywordSearchable = a})
+
+-- | Exactly one of string_values or long_values must be specified. This
+-- field is used to perform a string match (\`CASE_SENSITIVE_MATCH\` or
+-- \`CASE_INSENSITIVE_MATCH\`) search. For filterable \`string_value\`s, a
+-- maximum total number of 200 values is allowed, with each
+-- \`string_value\` has a byte size of no more than 500B. For unfilterable
+-- \`string_values\`, the maximum total byte size of unfilterable
+-- \`string_values\` is 50KB. Empty string isn\'t allowed.
 caStringValues :: Lens' CustomAttribute [Text]
 caStringValues
   = lens _caStringValues
@@ -2850,6 +3084,7 @@ instance FromJSON CustomAttribute where
                  CustomAttribute' <$>
                    (o .:? "longValues" .!= mempty) <*>
                      (o .:? "filterable")
+                     <*> (o .:? "keywordSearchable")
                      <*> (o .:? "stringValues" .!= mempty))
 
 instance ToJSON CustomAttribute where
@@ -2858,6 +3093,7 @@ instance ToJSON CustomAttribute where
               (catMaybes
                  [("longValues" .=) <$> _caLongValues,
                   ("filterable" .=) <$> _caFilterable,
+                  ("keywordSearchable" .=) <$> _caKeywordSearchable,
                   ("stringValues" .=) <$> _caStringValues])
 
 -- | A Job resource represents a job posting (also referred to as a \"job
@@ -2867,36 +3103,36 @@ instance ToJSON CustomAttribute where
 -- /See:/ 'job' smart constructor.
 data Job =
   Job'
-    { _jDePartment         :: !(Maybe Text)
-    , _jApplicationInfo    :: !(Maybe ApplicationInfo)
-    , _jLanguageCode       :: !(Maybe Text)
-    , _jCompensationInfo   :: !(Maybe CompensationInfo)
-    , _jResponsibilities   :: !(Maybe Text)
-    , _jJobStartTime       :: !(Maybe DateTime')
-    , _jPromotionValue     :: !(Maybe (Textual Int32))
-    , _jCompanyName        :: !(Maybe Text)
-    , _jAddresses          :: !(Maybe [Text])
-    , _jJobBenefits        :: !(Maybe [Text])
-    , _jVisibility         :: !(Maybe JobVisibility)
-    , _jJobLevel           :: !(Maybe JobJobLevel)
-    , _jPostingUpdateTime  :: !(Maybe DateTime')
-    , _jCustomAttributes   :: !(Maybe JobCustomAttributes)
+    { _jDePartment :: !(Maybe Text)
+    , _jApplicationInfo :: !(Maybe ApplicationInfo)
+    , _jLanguageCode :: !(Maybe Text)
+    , _jCompensationInfo :: !(Maybe CompensationInfo)
+    , _jResponsibilities :: !(Maybe Text)
+    , _jJobStartTime :: !(Maybe DateTime')
+    , _jPromotionValue :: !(Maybe (Textual Int32))
+    , _jAddresses :: !(Maybe [Text])
+    , _jJobBenefits :: !(Maybe [JobJobBenefitsItem])
+    , _jVisibility :: !(Maybe JobVisibility)
+    , _jJobLevel :: !(Maybe JobJobLevel)
+    , _jPostingUpdateTime :: !(Maybe DateTime')
+    , _jCustomAttributes :: !(Maybe JobCustomAttributes)
     , _jPostingPublishTime :: !(Maybe DateTime')
-    , _jName               :: !(Maybe Text)
-    , _jDegreeTypes        :: !(Maybe [Text])
-    , _jQualifications     :: !(Maybe Text)
+    , _jName :: !(Maybe Text)
+    , _jDegreeTypes :: !(Maybe [JobDegreeTypesItem])
+    , _jCompany :: !(Maybe Text)
+    , _jQualifications :: !(Maybe Text)
     , _jCompanyDisplayName :: !(Maybe Text)
-    , _jIncentives         :: !(Maybe Text)
-    , _jJobEndTime         :: !(Maybe DateTime')
-    , _jPostingRegion      :: !(Maybe JobPostingRegion)
-    , _jTitle              :: !(Maybe Text)
-    , _jEmploymentTypes    :: !(Maybe [Text])
-    , _jDerivedInfo        :: !(Maybe JobDerivedInfo)
-    , _jProcessingOptions  :: !(Maybe ProcessingOptions)
-    , _jPostingExpireTime  :: !(Maybe DateTime')
-    , _jDescription        :: !(Maybe Text)
-    , _jRequisitionId      :: !(Maybe Text)
-    , _jPostingCreateTime  :: !(Maybe DateTime')
+    , _jIncentives :: !(Maybe Text)
+    , _jJobEndTime :: !(Maybe DateTime')
+    , _jPostingRegion :: !(Maybe JobPostingRegion)
+    , _jTitle :: !(Maybe Text)
+    , _jEmploymentTypes :: !(Maybe [JobEmploymentTypesItem])
+    , _jDerivedInfo :: !(Maybe JobDerivedInfo)
+    , _jProcessingOptions :: !(Maybe ProcessingOptions)
+    , _jPostingExpireTime :: !(Maybe DateTime')
+    , _jDescription :: !(Maybe Text)
+    , _jRequisitionId :: !(Maybe Text)
+    , _jPostingCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2919,8 +3155,6 @@ data Job =
 --
 -- * 'jPromotionValue'
 --
--- * 'jCompanyName'
---
 -- * 'jAddresses'
 --
 -- * 'jJobBenefits'
@@ -2938,6 +3172,8 @@ data Job =
 -- * 'jName'
 --
 -- * 'jDegreeTypes'
+--
+-- * 'jCompany'
 --
 -- * 'jQualifications'
 --
@@ -2975,7 +3211,6 @@ job =
     , _jResponsibilities = Nothing
     , _jJobStartTime = Nothing
     , _jPromotionValue = Nothing
-    , _jCompanyName = Nothing
     , _jAddresses = Nothing
     , _jJobBenefits = Nothing
     , _jVisibility = Nothing
@@ -2985,6 +3220,7 @@ job =
     , _jPostingPublishTime = Nothing
     , _jName = Nothing
     , _jDegreeTypes = Nothing
+    , _jCompany = Nothing
     , _jQualifications = Nothing
     , _jCompanyDisplayName = Nothing
     , _jIncentives = Nothing
@@ -3001,20 +3237,19 @@ job =
     }
 
 
--- | Optional. The department or functional area within the company with the
--- open position. The maximum number of allowed characters is 255.
+-- | The department or functional area within the company with the open
+-- position. The maximum number of allowed characters is 255.
 jDePartment :: Lens' Job (Maybe Text)
 jDePartment
   = lens _jDePartment (\ s a -> s{_jDePartment = a})
 
--- | Required. At least one field within ApplicationInfo must be specified.
--- Job application information.
+-- | Job application information.
 jApplicationInfo :: Lens' Job (Maybe ApplicationInfo)
 jApplicationInfo
   = lens _jApplicationInfo
       (\ s a -> s{_jApplicationInfo = a})
 
--- | Optional. The language of the posting. This field is distinct from any
+-- | The language of the posting. This field is distinct from any
 -- requirements for fluency that are associated with the job. Language
 -- codes must be in BCP-47 format, such as \"en-US\" or \"sr-Latn\". For
 -- more information, see [Tags for Identifying
@@ -3027,14 +3262,15 @@ jLanguageCode
   = lens _jLanguageCode
       (\ s a -> s{_jLanguageCode = a})
 
--- | Optional. Job compensation information.
+-- | Job compensation information (a.k.a. \"pay rate\") i.e., the
+-- compensation that will paid to the employee.
 jCompensationInfo :: Lens' Job (Maybe CompensationInfo)
 jCompensationInfo
   = lens _jCompensationInfo
       (\ s a -> s{_jCompensationInfo = a})
 
--- | Optional. A description of job responsibilities. The use of this field
--- is recommended as an alternative to using the more general description
+-- | A description of job responsibilities. The use of this field is
+-- recommended as an alternative to using the more general description
 -- field. This field accepts and sanitizes HTML input, and also accepts
 -- bold, italic, ordered list, and unordered list markup tags. The maximum
 -- number of allowed characters is 10,000.
@@ -3043,18 +3279,17 @@ jResponsibilities
   = lens _jResponsibilities
       (\ s a -> s{_jResponsibilities = a})
 
--- | Optional. The start timestamp of the job in UTC time zone. Typically
--- this field is used for contracting engagements. Invalid timestamps are
--- ignored.
+-- | The start timestamp of the job in UTC time zone. Typically this field is
+-- used for contracting engagements. Invalid timestamps are ignored.
 jJobStartTime :: Lens' Job (Maybe UTCTime)
 jJobStartTime
   = lens _jJobStartTime
       (\ s a -> s{_jJobStartTime = a})
       . mapping _DateTime
 
--- | Optional. A promotion value of the job, as determined by the client. The
--- value determines the sort order of the jobs returned when searching for
--- jobs using the featured jobs search call, with higher promotional values
+-- | A promotion value of the job, as determined by the client. The value
+-- determines the sort order of the jobs returned when searching for jobs
+-- using the featured jobs search call, with higher promotional values
 -- being returned first and ties being resolved by relevance sort. Only the
 -- jobs with a promotionValue >0 are returned in a FEATURED_JOB_SEARCH.
 -- Default value is 0, and negative values are treated as 0.
@@ -3064,46 +3299,46 @@ jPromotionValue
       (\ s a -> s{_jPromotionValue = a})
       . mapping _Coerce
 
--- | Required. The resource name of the company listing the job, such as
--- \"projects\/api-test-project\/companies\/foo\".
-jCompanyName :: Lens' Job (Maybe Text)
-jCompanyName
-  = lens _jCompanyName (\ s a -> s{_jCompanyName = a})
-
--- | Optional but strongly recommended for the best service experience.
--- Location(s) where the employer is looking to hire for this job posting.
--- Specifying the full street address(es) of the hiring location enables
--- better API results, especially job searches by commute time. At most 50
--- locations are allowed for best search performance. If a job has more
--- locations, it is suggested to split it into multiple jobs with unique
--- requisition_ids (e.g. \'ReqA\' becomes \'ReqA-1\', \'ReqA-2\', etc.) as
--- multiple jobs with the same company_name, language_code and
--- requisition_id are not allowed. If the original requisition_id must be
--- preserved, a custom field should be used for storage. It is also
--- suggested to group the locations that close to each other in the same
--- job for better search experience. The maximum number of allowed
--- characters is 500.
+-- | Strongly recommended for the best service experience. Location(s) where
+-- the employer is looking to hire for this job posting. Specifying the
+-- full street address(es) of the hiring location enables better API
+-- results, especially job searches by commute time. At most 50 locations
+-- are allowed for best search performance. If a job has more locations, it
+-- is suggested to split it into multiple jobs with unique requisition_ids
+-- (e.g. \'ReqA\' becomes \'ReqA-1\', \'ReqA-2\', and so on.) as multiple
+-- jobs with the same company, language_code and requisition_id are not
+-- allowed. If the original requisition_id must be preserved, a custom
+-- field should be used for storage. It is also suggested to group the
+-- locations that close to each other in the same job for better search
+-- experience. Jobs with multiple addresses must have their addresses with
+-- the same LocationType to allow location filtering to work properly. (For
+-- example, a Job with addresses \"1600 Amphitheatre Parkway, Mountain
+-- View, CA, USA\" and \"London, UK\" may not have location filters applied
+-- correctly at search time since the first is a
+-- LocationType.STREET_ADDRESS and the second is a LocationType.LOCALITY.)
+-- If a job needs to have multiple addresses, it is suggested to split it
+-- into multiple jobs with same LocationTypes. The maximum number of
+-- allowed characters is 500.
 jAddresses :: Lens' Job [Text]
 jAddresses
   = lens _jAddresses (\ s a -> s{_jAddresses = a}) .
       _Default
       . _Coerce
 
--- | Optional. The benefits included with the job.
-jJobBenefits :: Lens' Job [Text]
+-- | The benefits included with the job.
+jJobBenefits :: Lens' Job [JobJobBenefitsItem]
 jJobBenefits
   = lens _jJobBenefits (\ s a -> s{_jJobBenefits = a})
       . _Default
       . _Coerce
 
--- | Optional. The visibility of the job. Defaults to Visibility.ACCOUNT_ONLY
--- if not specified.
+-- | Deprecated. The job is only visible to the owner. The visibility of the
+-- job. Defaults to Visibility.ACCOUNT_ONLY if not specified.
 jVisibility :: Lens' Job (Maybe JobVisibility)
 jVisibility
   = lens _jVisibility (\ s a -> s{_jVisibility = a})
 
--- | Optional. The experience level associated with the job, such as \"Entry
--- Level\".
+-- | The experience level associated with the job, such as \"Entry Level\".
 jJobLevel :: Lens' Job (Maybe JobJobLevel)
 jJobLevel
   = lens _jJobLevel (\ s a -> s{_jJobLevel = a})
@@ -3115,11 +3350,11 @@ jPostingUpdateTime
       (\ s a -> s{_jPostingUpdateTime = a})
       . mapping _DateTime
 
--- | Optional. A map of fields to hold both filterable and non-filterable
--- custom job attributes that are not covered by the provided structured
--- fields. The keys of the map are strings up to 64 bytes and must match
--- the pattern: a-zA-Z*. For example, key0LikeThis or KEY_1_LIKE_THIS. At
--- most 100 filterable and at most 100 unfilterable keys are supported. For
+-- | A map of fields to hold both filterable and non-filterable custom job
+-- attributes that are not covered by the provided structured fields. The
+-- keys of the map are strings up to 64 bytes and must match the pattern:
+-- a-zA-Z*. For example, key0LikeThis or KEY_1_LIKE_THIS. At most 100
+-- filterable and at most 100 unfilterable keys are supported. For
 -- filterable \`string_values\`, across all keys at most 200 values are
 -- allowed, with each string no more than 255 characters. For unfilterable
 -- \`string_values\`, the maximum total size of \`string_values\` across
@@ -3129,9 +3364,9 @@ jCustomAttributes
   = lens _jCustomAttributes
       (\ s a -> s{_jCustomAttributes = a})
 
--- | Optional. The timestamp this job posting was most recently published.
--- The default value is the time the request arrives at the server. Invalid
--- timestamps are ignored.
+-- | The timestamp this job posting was most recently published. The default
+-- value is the time the request arrives at the server. Invalid timestamps
+-- are ignored.
 jPostingPublishTime :: Lens' Job (Maybe UTCTime)
 jPostingPublishTime
   = lens _jPostingPublishTime
@@ -3140,26 +3375,32 @@ jPostingPublishTime
 
 -- | Required during job update. The resource name for the job. This is
 -- generated by the service when a job is created. The format is
--- \"projects\/{project_id}\/jobs\/{job_id}\", for example,
--- \"projects\/api-test-project\/jobs\/1234\". Use of this field in job
--- queries and API calls is preferred over the use of requisition_id since
--- this value is unique.
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\/jobs\/{job_id}\". For
+-- example, \"projects\/foo\/tenants\/bar\/jobs\/baz\". Use of this field
+-- in job queries and API calls is preferred over the use of requisition_id
+-- since this value is unique.
 jName :: Lens' Job (Maybe Text)
 jName = lens _jName (\ s a -> s{_jName = a})
 
--- | Optional. The desired education degrees for the job, such as Bachelors,
--- Masters.
-jDegreeTypes :: Lens' Job [Text]
+-- | The desired education degrees for the job, such as Bachelors, Masters.
+jDegreeTypes :: Lens' Job [JobDegreeTypesItem]
 jDegreeTypes
   = lens _jDegreeTypes (\ s a -> s{_jDegreeTypes = a})
       . _Default
       . _Coerce
 
--- | Optional. A description of the qualifications required to perform the
--- job. The use of this field is recommended as an alternative to using the
--- more general description field. This field accepts and sanitizes HTML
--- input, and also accepts bold, italic, ordered list, and unordered list
--- markup tags. The maximum number of allowed characters is 10,000.
+-- | Required. The resource name of the company listing the job. The format
+-- is
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\/companies\/{company_id}\".
+-- For example, \"projects\/foo\/tenants\/bar\/companies\/baz\".
+jCompany :: Lens' Job (Maybe Text)
+jCompany = lens _jCompany (\ s a -> s{_jCompany = a})
+
+-- | A description of the qualifications required to perform the job. The use
+-- of this field is recommended as an alternative to using the more general
+-- description field. This field accepts and sanitizes HTML input, and also
+-- accepts bold, italic, ordered list, and unordered list markup tags. The
+-- maximum number of allowed characters is 10,000.
 jQualifications :: Lens' Job (Maybe Text)
 jQualifications
   = lens _jQualifications
@@ -3171,27 +3412,26 @@ jCompanyDisplayName
   = lens _jCompanyDisplayName
       (\ s a -> s{_jCompanyDisplayName = a})
 
--- | Optional. A description of bonus, commission, and other compensation
--- incentives associated with the job not including salary or pay. The
--- maximum number of allowed characters is 10,000.
+-- | A description of bonus, commission, and other compensation incentives
+-- associated with the job not including salary or pay. The maximum number
+-- of allowed characters is 10,000.
 jIncentives :: Lens' Job (Maybe Text)
 jIncentives
   = lens _jIncentives (\ s a -> s{_jIncentives = a})
 
--- | Optional. The end timestamp of the job. Typically this field is used for
+-- | The end timestamp of the job. Typically this field is used for
 -- contracting engagements. Invalid timestamps are ignored.
 jJobEndTime :: Lens' Job (Maybe UTCTime)
 jJobEndTime
   = lens _jJobEndTime (\ s a -> s{_jJobEndTime = a}) .
       mapping _DateTime
 
--- | Optional. The job PostingRegion (for example, state, country) throughout
--- which the job is available. If this field is set, a LocationFilter in a
--- search query within the job region finds this job posting if an exact
--- location match isn\'t specified. If this field is set to
--- PostingRegion.NATION or PostingRegion.ADMINISTRATIVE_AREA, setting job
--- Job.addresses to the same location level as this field is strongly
--- recommended.
+-- | The job PostingRegion (for example, state, country) throughout which the
+-- job is available. If this field is set, a LocationFilter in a search
+-- query within the job region finds this job posting if an exact location
+-- match isn\'t specified. If this field is set to PostingRegion.NATION or
+-- PostingRegion.ADMINISTRATIVE_AREA, setting job Job.addresses to the same
+-- location level as this field is strongly recommended.
 jPostingRegion :: Lens' Job (Maybe JobPostingRegion)
 jPostingRegion
   = lens _jPostingRegion
@@ -3202,9 +3442,8 @@ jPostingRegion
 jTitle :: Lens' Job (Maybe Text)
 jTitle = lens _jTitle (\ s a -> s{_jTitle = a})
 
--- | Optional. The employment type(s) of a job, for example, full time or
--- part time.
-jEmploymentTypes :: Lens' Job [Text]
+-- | The employment type(s) of a job, for example, full time or part time.
+jEmploymentTypes :: Lens' Job [JobEmploymentTypesItem]
 jEmploymentTypes
   = lens _jEmploymentTypes
       (\ s a -> s{_jEmploymentTypes = a})
@@ -3216,36 +3455,42 @@ jDerivedInfo :: Lens' Job (Maybe JobDerivedInfo)
 jDerivedInfo
   = lens _jDerivedInfo (\ s a -> s{_jDerivedInfo = a})
 
--- | Optional. Options for job processing.
+-- | Options for job processing.
 jProcessingOptions :: Lens' Job (Maybe ProcessingOptions)
 jProcessingOptions
   = lens _jProcessingOptions
       (\ s a -> s{_jProcessingOptions = a})
 
--- | Optional but strongly recommended for the best service experience. The
--- expiration timestamp of the job. After this timestamp, the job is marked
--- as expired, and it no longer appears in search results. The expired job
--- can\'t be deleted or listed by the DeleteJob and ListJobs APIs, but it
--- can be retrieved with the GetJob API or updated with the UpdateJob API.
--- An expired job can be updated and opened again by using a future
--- expiration timestamp. Updating an expired job fails if there is another
--- existing open job with same company_name, language_code and
+-- | Strongly recommended for the best service experience. The expiration
+-- timestamp of the job. After this timestamp, the job is marked as
+-- expired, and it no longer appears in search results. The expired job
+-- can\'t be listed by the ListJobs API, but it can be retrieved with the
+-- GetJob API or updated with the UpdateJob API or deleted with the
+-- DeleteJob API. An expired job can be updated and opened again by using a
+-- future expiration timestamp. Updating an expired job fails if there is
+-- another existing open job with same company, language_code and
 -- requisition_id. The expired jobs are retained in our system for 90 days.
 -- However, the overall expired job count cannot exceed 3 times the maximum
--- of open jobs count over the past week, otherwise jobs with earlier
--- expire time are cleaned first. Expired jobs are no longer accessible
--- after they are cleaned out. Invalid timestamps are ignored, and treated
--- as expire time not provided. Timestamp before the instant request is
--- made is considered valid, the job will be treated as expired
--- immediately. If this value is not provided at the time of job creation
--- or is invalid, the job posting expires after 30 days from the job\'s
--- creation time. For example, if the job was created on 2017\/01\/01
--- 13:00AM UTC with an unspecified expiration date, the job expires after
--- 2017\/01\/31 13:00AM UTC. If this value is not provided on job update,
--- it depends on the field masks set by UpdateJobRequest.update_mask. If
--- the field masks include expiry_time, or the masks are empty meaning that
--- every field is updated, the job posting expires after 30 days from the
--- job\'s last update time. Otherwise the expiration date isn\'t updated.
+-- number of open jobs over previous 7 days. If this threshold is exceeded,
+-- expired jobs are cleaned out in order of earliest expire time. Expired
+-- jobs are no longer accessible after they are cleaned out. Invalid
+-- timestamps are ignored, and treated as expire time not provided. If the
+-- timestamp is before the instant request is made, the job is treated as
+-- expired immediately on creation. This kind of job can not be updated.
+-- And when creating a job with past timestamp, the posting_publish_time
+-- must be set before posting_expire_time. The purpose of this feature is
+-- to allow other objects, such as Application, to refer a job that didn\'t
+-- exist in the system prior to becoming expired. If you want to modify a
+-- job that was expired on creation, delete it and create a new one. If
+-- this value isn\'t provided at the time of job creation or is invalid,
+-- the job posting expires after 30 days from the job\'s creation time. For
+-- example, if the job was created on 2017\/01\/01 13:00AM UTC with an
+-- unspecified expiration date, the job expires after 2017\/01\/31 13:00AM
+-- UTC. If this value isn\'t provided on job update, it depends on the
+-- field masks set by UpdateJobRequest.update_mask. If the field masks
+-- include job_end_time, or the masks are empty meaning that every field is
+-- updated, the job posting expires after 30 days from the job\'s last
+-- update time. Otherwise the expiration date isn\'t updated.
 jPostingExpireTime :: Lens' Job (Maybe UTCTime)
 jPostingExpireTime
   = lens _jPostingExpireTime
@@ -3263,12 +3508,12 @@ jDescription :: Lens' Job (Maybe Text)
 jDescription
   = lens _jDescription (\ s a -> s{_jDescription = a})
 
--- | Required. The requisition ID, also referred to as the posting ID,
+-- | Required. The requisition ID, also referred to as the posting ID, is
 -- assigned by the client to identify a job. This field is intended to be
 -- used by clients for client identification and tracking of postings. A
--- job is not allowed to be created if there is another job with the same
--- [company_name], language_code and requisition_id. The maximum number of
--- allowed characters is 255.
+-- job isn\'t allowed to be created if there is another job with the same
+-- company, language_code and requisition_id. The maximum number of allowed
+-- characters is 255.
 jRequisitionId :: Lens' Job (Maybe Text)
 jRequisitionId
   = lens _jRequisitionId
@@ -3292,7 +3537,6 @@ instance FromJSON Job where
                      <*> (o .:? "responsibilities")
                      <*> (o .:? "jobStartTime")
                      <*> (o .:? "promotionValue")
-                     <*> (o .:? "companyName")
                      <*> (o .:? "addresses" .!= mempty)
                      <*> (o .:? "jobBenefits" .!= mempty)
                      <*> (o .:? "visibility")
@@ -3302,6 +3546,7 @@ instance FromJSON Job where
                      <*> (o .:? "postingPublishTime")
                      <*> (o .:? "name")
                      <*> (o .:? "degreeTypes" .!= mempty)
+                     <*> (o .:? "company")
                      <*> (o .:? "qualifications")
                      <*> (o .:? "companyDisplayName")
                      <*> (o .:? "incentives")
@@ -3327,7 +3572,6 @@ instance ToJSON Job where
                   ("responsibilities" .=) <$> _jResponsibilities,
                   ("jobStartTime" .=) <$> _jJobStartTime,
                   ("promotionValue" .=) <$> _jPromotionValue,
-                  ("companyName" .=) <$> _jCompanyName,
                   ("addresses" .=) <$> _jAddresses,
                   ("jobBenefits" .=) <$> _jJobBenefits,
                   ("visibility" .=) <$> _jVisibility,
@@ -3337,6 +3581,7 @@ instance ToJSON Job where
                   ("postingPublishTime" .=) <$> _jPostingPublishTime,
                   ("name" .=) <$> _jName,
                   ("degreeTypes" .=) <$> _jDegreeTypes,
+                  ("company" .=) <$> _jCompany,
                   ("qualifications" .=) <$> _jQualifications,
                   ("companyDisplayName" .=) <$> _jCompanyDisplayName,
                   ("incentives" .=) <$> _jIncentives,
@@ -3351,96 +3596,16 @@ instance ToJSON Job where
                   ("requisitionId" .=) <$> _jRequisitionId,
                   ("postingCreateTime" .=) <$> _jPostingCreateTime])
 
--- | Output only. Histogram results that match HistogramFacets specified in
--- SearchJobsRequest.
---
--- /See:/ 'histogramResults' smart constructor.
-data HistogramResults =
-  HistogramResults'
-    { _hrSimpleHistogramResults          :: !(Maybe [HistogramResult])
-    , _hrCustomAttributeHistogramResults :: !(Maybe [CustomAttributeHistogramResult])
-    , _hrCompensationHistogramResults    :: !(Maybe [CompensationHistogramResult])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'HistogramResults' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hrSimpleHistogramResults'
---
--- * 'hrCustomAttributeHistogramResults'
---
--- * 'hrCompensationHistogramResults'
-histogramResults
-    :: HistogramResults
-histogramResults =
-  HistogramResults'
-    { _hrSimpleHistogramResults = Nothing
-    , _hrCustomAttributeHistogramResults = Nothing
-    , _hrCompensationHistogramResults = Nothing
-    }
-
-
--- | Specifies histogram results that matches
--- HistogramFacets.simple_histogram_facets.
-hrSimpleHistogramResults :: Lens' HistogramResults [HistogramResult]
-hrSimpleHistogramResults
-  = lens _hrSimpleHistogramResults
-      (\ s a -> s{_hrSimpleHistogramResults = a})
-      . _Default
-      . _Coerce
-
--- | Specifies histogram results for custom attributes that match
--- HistogramFacets.custom_attribute_histogram_facets.
-hrCustomAttributeHistogramResults :: Lens' HistogramResults [CustomAttributeHistogramResult]
-hrCustomAttributeHistogramResults
-  = lens _hrCustomAttributeHistogramResults
-      (\ s a -> s{_hrCustomAttributeHistogramResults = a})
-      . _Default
-      . _Coerce
-
--- | Specifies compensation field-based histogram results that match
--- HistogramFacets.compensation_histogram_requests.
-hrCompensationHistogramResults :: Lens' HistogramResults [CompensationHistogramResult]
-hrCompensationHistogramResults
-  = lens _hrCompensationHistogramResults
-      (\ s a -> s{_hrCompensationHistogramResults = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON HistogramResults where
-        parseJSON
-          = withObject "HistogramResults"
-              (\ o ->
-                 HistogramResults' <$>
-                   (o .:? "simpleHistogramResults" .!= mempty) <*>
-                     (o .:? "customAttributeHistogramResults" .!= mempty)
-                     <*>
-                     (o .:? "compensationHistogramResults" .!= mempty))
-
-instance ToJSON HistogramResults where
-        toJSON HistogramResults'{..}
-          = object
-              (catMaybes
-                 [("simpleHistogramResults" .=) <$>
-                    _hrSimpleHistogramResults,
-                  ("customAttributeHistogramResults" .=) <$>
-                    _hrCustomAttributeHistogramResults,
-                  ("compensationHistogramResults" .=) <$>
-                    _hrCompensationHistogramResults])
-
--- | Input only. Geographic region of the search.
+-- | Geographic region of the search.
 --
 -- /See:/ 'locationFilter' smart constructor.
 data LocationFilter =
   LocationFilter'
-    { _lfLatLng                :: !(Maybe LatLng)
-    , _lfDistanceInMiles       :: !(Maybe (Textual Double))
-    , _lfRegionCode            :: !(Maybe Text)
+    { _lfLatLng :: !(Maybe LatLng)
+    , _lfDistanceInMiles :: !(Maybe (Textual Double))
+    , _lfRegionCode :: !(Maybe Text)
     , _lfTelecommutePreference :: !(Maybe LocationFilterTelecommutePreference)
-    , _lfAddress               :: !(Maybe Text)
+    , _lfAddress :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3470,36 +3635,40 @@ locationFilter =
     }
 
 
--- | Optional. The latitude and longitude of the geographic center from which
--- to search. This field\'s ignored if \`address\` is provided.
+-- | The latitude and longitude of the geographic center to search from. This
+-- field is ignored if \`address\` is provided.
 lfLatLng :: Lens' LocationFilter (Maybe LatLng)
 lfLatLng = lens _lfLatLng (\ s a -> s{_lfLatLng = a})
 
--- | Optional. The distance_in_miles is applied when the location being
--- searched for is identified as a city or smaller. When the location being
--- searched for is a state or larger, this field is ignored.
+-- | The distance_in_miles is applied when the location being searched for is
+-- identified as a city or smaller. This field is ignored if the location
+-- being searched for is a state or larger.
 lfDistanceInMiles :: Lens' LocationFilter (Maybe Double)
 lfDistanceInMiles
   = lens _lfDistanceInMiles
       (\ s a -> s{_lfDistanceInMiles = a})
       . mapping _Coerce
 
--- | Optional. CLDR region code of the country\/region of the address. This
--- is used to address ambiguity of the user-input location, for example,
--- \"Liverpool\" against \"Liverpool, NY, US\" or \"Liverpool, UK\". Set
--- this field if all the jobs to search against are from a same region, or
--- jobs are world-wide, but the job seeker is from a specific region. See
--- http:\/\/cldr.unicode.org\/ and
--- http:\/\/www.unicode.org\/cldr\/charts\/30\/supplemental\/territory_information.html
+-- | CLDR region code of the country\/region. This field may be used in two
+-- ways: 1) If telecommute preference is not set, this field is used
+-- address ambiguity of the user-input address. For example, \"Liverpool\"
+-- may refer to \"Liverpool, NY, US\" or \"Liverpool, UK\". This region
+-- code biases the address resolution toward a specific country or
+-- territory. If this field is not set, address resolution is biased toward
+-- the United States by default. 2) If telecommute preference is set to
+-- TELECOMMUTE_ALLOWED, the telecommute location filter will be limited to
+-- the region specified in this field. If this field is not set, the
+-- telecommute job locations will not be See
+-- https:\/\/unicode-org.github.io\/cldr-staging\/charts\/latest\/supplemental\/territory_information.html
 -- for details. Example: \"CH\" for Switzerland.
 lfRegionCode :: Lens' LocationFilter (Maybe Text)
 lfRegionCode
   = lens _lfRegionCode (\ s a -> s{_lfRegionCode = a})
 
--- | Optional. Allows the client to return jobs without a set location,
--- specifically, telecommuting jobs (telecomuting is considered by the
--- service as a special location. Job.posting_region indicates if a job
--- permits telecommuting. If this field is set to
+-- | Allows the client to return jobs without a set location, specifically,
+-- telecommuting jobs (telecommuting is considered by the service as a
+-- special location. Job.posting_region indicates if a job permits
+-- telecommuting. If this field is set to
 -- TelecommutePreference.TELECOMMUTE_ALLOWED, telecommuting jobs are
 -- searched, and address and lat_lng are ignored. If not set or set to
 -- TelecommutePreference.TELECOMMUTE_EXCLUDED, telecommute job are not
@@ -3508,13 +3677,14 @@ lfRegionCode
 -- to search for a combination of job locations, such as \"Mountain View\"
 -- or \"telecommuting\" jobs. However, when used in combination with other
 -- location filters, telecommuting jobs can be treated as less relevant
--- than other jobs in the search response.
+-- than other jobs in the search response. This field is only used for job
+-- search requests.
 lfTelecommutePreference :: Lens' LocationFilter (Maybe LocationFilterTelecommutePreference)
 lfTelecommutePreference
   = lens _lfTelecommutePreference
       (\ s a -> s{_lfTelecommutePreference = a})
 
--- | Optional. The address name, such as \"Mountain View\" or \"Bay Area\".
+-- | The address name, such as \"Mountain View\" or \"Bay Area\".
 lfAddress :: Lens' LocationFilter (Maybe Text)
 lfAddress
   = lens _lfAddress (\ s a -> s{_lfAddress = a})
@@ -3540,14 +3710,14 @@ instance ToJSON LocationFilter where
                     _lfTelecommutePreference,
                   ("address" .=) <$> _lfAddress])
 
--- | Output only. List jobs response.
+-- | List jobs response.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
 data ListJobsResponse =
   ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
-    , _ljrJobs          :: !(Maybe [Job])
-    , _ljrMetadata      :: !(Maybe ResponseMetadata)
+    , _ljrJobs :: !(Maybe [Job])
+    , _ljrMetadata :: !(Maybe ResponseMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3603,69 +3773,25 @@ instance ToJSON ListJobsResponse where
                   ("jobs" .=) <$> _ljrJobs,
                   ("metadata" .=) <$> _ljrMetadata])
 
--- | Output only. Compensation based histogram result.
---
--- /See:/ 'compensationHistogramResult' smart constructor.
-data CompensationHistogramResult =
-  CompensationHistogramResult'
-    { _cResult :: !(Maybe NumericBucketingResult)
-    , _cType   :: !(Maybe CompensationHistogramResultType)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CompensationHistogramResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cResult'
---
--- * 'cType'
-compensationHistogramResult
-    :: CompensationHistogramResult
-compensationHistogramResult =
-  CompensationHistogramResult' {_cResult = Nothing, _cType = Nothing}
-
-
--- | Histogram result.
-cResult :: Lens' CompensationHistogramResult (Maybe NumericBucketingResult)
-cResult = lens _cResult (\ s a -> s{_cResult = a})
-
--- | Type of the request, corresponding to CompensationHistogramRequest.type.
-cType :: Lens' CompensationHistogramResult (Maybe CompensationHistogramResultType)
-cType = lens _cType (\ s a -> s{_cType = a})
-
-instance FromJSON CompensationHistogramResult where
-        parseJSON
-          = withObject "CompensationHistogramResult"
-              (\ o ->
-                 CompensationHistogramResult' <$>
-                   (o .:? "result") <*> (o .:? "type"))
-
-instance ToJSON CompensationHistogramResult where
-        toJSON CompensationHistogramResult'{..}
-          = object
-              (catMaybes
-                 [("result" .=) <$> _cResult, ("type" .=) <$> _cType])
-
--- | Input only. The query required to perform a search query.
+-- | The query required to perform a search query.
 --
 -- /See:/ 'jobQuery' smart constructor.
 data JobQuery =
   JobQuery'
-    { _jqLanguageCodes         :: !(Maybe [Text])
-    , _jqDisableSpellCheck     :: !(Maybe Bool)
+    { _jqLanguageCodes :: !(Maybe [Text])
+    , _jqDisableSpellCheck :: !(Maybe Bool)
     , _jqCustomAttributeFilter :: !(Maybe Text)
-    , _jqCommuteFilter         :: !(Maybe CommuteFilter)
-    , _jqPublishTimeRange      :: !(Maybe TimestampRange)
-    , _jqLocationFilters       :: !(Maybe [LocationFilter])
-    , _jqCompanyDisplayNames   :: !(Maybe [Text])
-    , _jqJobCategories         :: !(Maybe [Text])
-    , _jqCompensationFilter    :: !(Maybe CompensationFilter)
-    , _jqQuery                 :: !(Maybe Text)
-    , _jqCompanyNames          :: !(Maybe [Text])
-    , _jqEmploymentTypes       :: !(Maybe [Text])
-    , _jqExcludedJobs          :: !(Maybe [Text])
+    , _jqCommuteFilter :: !(Maybe CommuteFilter)
+    , _jqPublishTimeRange :: !(Maybe TimestampRange)
+    , _jqLocationFilters :: !(Maybe [LocationFilter])
+    , _jqCompanyDisplayNames :: !(Maybe [Text])
+    , _jqJobCategories :: !(Maybe [JobQueryJobCategoriesItem])
+    , _jqCompanies :: !(Maybe [Text])
+    , _jqCompensationFilter :: !(Maybe CompensationFilter)
+    , _jqQuery :: !(Maybe Text)
+    , _jqQueryLanguageCode :: !(Maybe Text)
+    , _jqEmploymentTypes :: !(Maybe [JobQueryEmploymentTypesItem])
+    , _jqExcludedJobs :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3690,11 +3816,13 @@ data JobQuery =
 --
 -- * 'jqJobCategories'
 --
+-- * 'jqCompanies'
+--
 -- * 'jqCompensationFilter'
 --
 -- * 'jqQuery'
 --
--- * 'jqCompanyNames'
+-- * 'jqQueryLanguageCode'
 --
 -- * 'jqEmploymentTypes'
 --
@@ -3711,20 +3839,21 @@ jobQuery =
     , _jqLocationFilters = Nothing
     , _jqCompanyDisplayNames = Nothing
     , _jqJobCategories = Nothing
+    , _jqCompanies = Nothing
     , _jqCompensationFilter = Nothing
     , _jqQuery = Nothing
-    , _jqCompanyNames = Nothing
+    , _jqQueryLanguageCode = Nothing
     , _jqEmploymentTypes = Nothing
     , _jqExcludedJobs = Nothing
     }
 
 
--- | Optional. This filter specifies the locale of jobs to search against,
--- for example, \"en-US\". If a value isn\'t specified, the search results
--- can contain jobs in any locale. Language codes should be in BCP-47
--- format, such as \"en-US\" or \"sr-Latn\". For more information, see
--- [Tags for Identifying Languages](https:\/\/tools.ietf.org\/html\/bcp47).
--- At most 10 language code filters are allowed.
+-- | This filter specifies the locale of jobs to search against, for example,
+-- \"en-US\". If a value isn\'t specified, the search results can contain
+-- jobs in any locale. Language codes should be in BCP-47 format, such as
+-- \"en-US\" or \"sr-Latn\". For more information, see [Tags for
+-- Identifying Languages](https:\/\/tools.ietf.org\/html\/bcp47). At most
+-- 10 language code filters are allowed.
 jqLanguageCodes :: Lens' JobQuery [Text]
 jqLanguageCodes
   = lens _jqLanguageCodes
@@ -3732,16 +3861,16 @@ jqLanguageCodes
       . _Default
       . _Coerce
 
--- | Optional. This flag controls the spell-check feature. If false, the
--- service attempts to correct a misspelled query, for example, \"enginee\"
--- is corrected to \"engineer\". Defaults to false: a spell check is
+-- | This flag controls the spell-check feature. If false, the service
+-- attempts to correct a misspelled query, for example, \"enginee\" is
+-- corrected to \"engineer\". Defaults to false: a spell check is
 -- performed.
 jqDisableSpellCheck :: Lens' JobQuery (Maybe Bool)
 jqDisableSpellCheck
   = lens _jqDisableSpellCheck
       (\ s a -> s{_jqDisableSpellCheck = a})
 
--- | Optional. This filter specifies a structured syntax to match against the
+-- | This filter specifies a structured syntax to match against the
 -- Job.custom_attributes marked as \`filterable\`. The syntax for this
 -- expression is a subset of SQL syntax. Supported operators are: \`=\`,
 -- \`!=\`, \`\<\`, \`\<=\`, \`>\`, and \`>=\` where the left of the
@@ -3752,7 +3881,7 @@ jqDisableSpellCheck
 -- existence of a key. Boolean expressions (AND\/OR\/NOT) are supported up
 -- to 3 levels of nesting (for example, \"((A AND B AND C) OR NOT D) AND
 -- E\"), a maximum of 100 comparisons or functions are allowed in the
--- expression. The expression must be \< 3000 bytes in length. Sample
+-- expression. The expression must be \< 10000 bytes in length. Sample
 -- Query: \`(LOWER(driving_license)=\"class \\\"a\\\"\" OR
 -- EMPTY(driving_license)) AND driving_years > 10\`
 jqCustomAttributeFilter :: Lens' JobQuery (Maybe Text)
@@ -3760,31 +3889,30 @@ jqCustomAttributeFilter
   = lens _jqCustomAttributeFilter
       (\ s a -> s{_jqCustomAttributeFilter = a})
 
--- | Optional. Allows filtering jobs by commute time with different travel
--- methods (for example, driving or public transit). Note: This only works
--- with COMMUTE MODE. When specified, [JobQuery.location_filters] is
--- ignored. Currently we don\'t support sorting by commute time.
+-- | Allows filtering jobs by commute time with different travel methods (for
+-- example, driving or public transit). Note: This only works when you
+-- specify a CommuteMethod. In this case, location_filters is ignored.
+-- Currently we don\'t support sorting by commute time.
 jqCommuteFilter :: Lens' JobQuery (Maybe CommuteFilter)
 jqCommuteFilter
   = lens _jqCommuteFilter
       (\ s a -> s{_jqCommuteFilter = a})
 
--- | Optional. Jobs published within a range specified by this filter are
--- searched against.
+-- | Jobs published within a range specified by this filter are searched
+-- against.
 jqPublishTimeRange :: Lens' JobQuery (Maybe TimestampRange)
 jqPublishTimeRange
   = lens _jqPublishTimeRange
       (\ s a -> s{_jqPublishTimeRange = a})
 
--- | Optional. The location filter specifies geo-regions containing the jobs
--- to search against. See LocationFilter for more information. If a
--- location value isn\'t specified, jobs fitting the other search criteria
--- are retrieved regardless of where they\'re located. If multiple values
--- are specified, jobs are retrieved from any of the specified locations.
--- If different values are specified for the
--- LocationFilter.distance_in_miles parameter, the maximum provided
--- distance is used for all locations. At most 5 location filters are
--- allowed.
+-- | The location filter specifies geo-regions containing the jobs to search
+-- against. See LocationFilter for more information. If a location value
+-- isn\'t specified, jobs fitting the other search criteria are retrieved
+-- regardless of where they\'re located. If multiple values are specified,
+-- jobs are retrieved from any of the specified locations. If different
+-- values are specified for the LocationFilter.distance_in_miles parameter,
+-- the maximum provided distance is used for all locations. At most 5
+-- location filters are allowed.
 jqLocationFilters :: Lens' JobQuery [LocationFilter]
 jqLocationFilters
   = lens _jqLocationFilters
@@ -3792,9 +3920,9 @@ jqLocationFilters
       . _Default
       . _Coerce
 
--- | Optional. This filter specifies the exact company display name of the
--- jobs to search against. If a value isn\'t specified, jobs within the
--- search results are associated with any company. If multiple values are
+-- | This filter specifies the exact company Company.display_name of the jobs
+-- to search against. If a value isn\'t specified, jobs within the search
+-- results are associated with any company. If multiple values are
 -- specified, jobs within the search results may be associated with any of
 -- the specified companies. At most 20 company display name filters are
 -- allowed.
@@ -3805,20 +3933,33 @@ jqCompanyDisplayNames
       . _Default
       . _Coerce
 
--- | Optional. The category filter specifies the categories of jobs to search
--- against. See Category for more information. If a value is not specified,
--- jobs from any category are searched against. If multiple values are
+-- | The category filter specifies the categories of jobs to search against.
+-- See JobCategory for more information. If a value isn\'t specified, jobs
+-- from any category are searched against. If multiple values are
 -- specified, jobs from any of the specified categories are searched
 -- against.
-jqJobCategories :: Lens' JobQuery [Text]
+jqJobCategories :: Lens' JobQuery [JobQueryJobCategoriesItem]
 jqJobCategories
   = lens _jqJobCategories
       (\ s a -> s{_jqJobCategories = a})
       . _Default
       . _Coerce
 
--- | Optional. This search filter is applied only to Job.compensation_info.
--- For example, if the filter is specified as \"Hourly job with per-hour
+-- | This filter specifies the company entities to search against. If a value
+-- isn\'t specified, jobs are searched for against all companies. If
+-- multiple values are specified, jobs are searched against the companies
+-- specified. The format is
+-- \"projects\/{project_id}\/tenants\/{tenant_id}\/companies\/{company_id}\".
+-- For example, \"projects\/foo\/tenants\/bar\/companies\/baz\". At most 20
+-- company filters are allowed.
+jqCompanies :: Lens' JobQuery [Text]
+jqCompanies
+  = lens _jqCompanies (\ s a -> s{_jqCompanies = a}) .
+      _Default
+      . _Coerce
+
+-- | This search filter is applied only to Job.compensation_info. For
+-- example, if the filter is specified as \"Hourly job with per-hour
 -- compensation > $15\", only jobs meeting these criteria are searched. If
 -- a filter isn\'t defined, all open jobs are searched.
 jqCompensationFilter :: Lens' JobQuery (Maybe CompensationFilter)
@@ -3826,40 +3967,36 @@ jqCompensationFilter
   = lens _jqCompensationFilter
       (\ s a -> s{_jqCompensationFilter = a})
 
--- | Optional. The query string that matches against the job title,
--- description, and location fields. The maximum number of allowed
--- characters is 255.
+-- | The query string that matches against the job title, description, and
+-- location fields. The maximum number of allowed characters is 255.
 jqQuery :: Lens' JobQuery (Maybe Text)
 jqQuery = lens _jqQuery (\ s a -> s{_jqQuery = a})
 
--- | Optional. This filter specifies the company entities to search against.
--- If a value isn\'t specified, jobs are searched for against all
--- companies. If multiple values are specified, jobs are searched against
--- the companies specified. The format is
--- \"projects\/{project_id}\/companies\/{company_id}\", for example,
--- \"projects\/api-test-project\/companies\/foo\". At most 20 company
--- filters are allowed.
-jqCompanyNames :: Lens' JobQuery [Text]
-jqCompanyNames
-  = lens _jqCompanyNames
-      (\ s a -> s{_jqCompanyNames = a})
-      . _Default
-      . _Coerce
+-- | The language code of query. For example, \"en-US\". This field helps to
+-- better interpret the query. If a value isn\'t specified, the query
+-- language code is automatically detected, which may not be accurate.
+-- Language code should be in BCP-47 format, such as \"en-US\" or
+-- \"sr-Latn\". For more information, see [Tags for Identifying
+-- Languages](https:\/\/tools.ietf.org\/html\/bcp47).
+jqQueryLanguageCode :: Lens' JobQuery (Maybe Text)
+jqQueryLanguageCode
+  = lens _jqQueryLanguageCode
+      (\ s a -> s{_jqQueryLanguageCode = a})
 
--- | Optional. The employment type filter specifies the employment type of
--- jobs to search against, such as EmploymentType.FULL_TIME. If a value is
--- not specified, jobs in the search results includes any employment type.
--- If multiple values are specified, jobs in the search results include any
--- of the specified employment types.
-jqEmploymentTypes :: Lens' JobQuery [Text]
+-- | The employment type filter specifies the employment type of jobs to
+-- search against, such as EmploymentType.FULL_TIME. If a value isn\'t
+-- specified, jobs in the search results includes any employment type. If
+-- multiple values are specified, jobs in the search results include any of
+-- the specified employment types.
+jqEmploymentTypes :: Lens' JobQuery [JobQueryEmploymentTypesItem]
 jqEmploymentTypes
   = lens _jqEmploymentTypes
       (\ s a -> s{_jqEmploymentTypes = a})
       . _Default
       . _Coerce
 
--- | Optional. This filter specifies a list of job names to be excluded
--- during search. At most 200 excluded job names are allowed.
+-- | This filter specifies a list of job names to be excluded during search.
+-- At most 400 excluded job names are allowed.
 jqExcludedJobs :: Lens' JobQuery [Text]
 jqExcludedJobs
   = lens _jqExcludedJobs
@@ -3880,9 +4017,10 @@ instance FromJSON JobQuery where
                      <*> (o .:? "locationFilters" .!= mempty)
                      <*> (o .:? "companyDisplayNames" .!= mempty)
                      <*> (o .:? "jobCategories" .!= mempty)
+                     <*> (o .:? "companies" .!= mempty)
                      <*> (o .:? "compensationFilter")
                      <*> (o .:? "query")
-                     <*> (o .:? "companyNames" .!= mempty)
+                     <*> (o .:? "queryLanguageCode")
                      <*> (o .:? "employmentTypes" .!= mempty)
                      <*> (o .:? "excludedJobs" .!= mempty))
 
@@ -3900,58 +4038,60 @@ instance ToJSON JobQuery where
                   ("companyDisplayNames" .=) <$>
                     _jqCompanyDisplayNames,
                   ("jobCategories" .=) <$> _jqJobCategories,
+                  ("companies" .=) <$> _jqCompanies,
                   ("compensationFilter" .=) <$> _jqCompensationFilter,
                   ("query" .=) <$> _jqQuery,
-                  ("companyNames" .=) <$> _jqCompanyNames,
+                  ("queryLanguageCode" .=) <$> _jqQueryLanguageCode,
                   ("employmentTypes" .=) <$> _jqEmploymentTypes,
                   ("excludedJobs" .=) <$> _jqExcludedJobs])
 
--- | The report event request.
+-- | Request to create a batch of jobs.
 --
--- /See:/ 'createClientEventRequest' smart constructor.
-newtype CreateClientEventRequest =
-  CreateClientEventRequest'
-    { _ccerClientEvent :: Maybe ClientEvent
+-- /See:/ 'batchCreateJobsRequest' smart constructor.
+newtype BatchCreateJobsRequest =
+  BatchCreateJobsRequest'
+    { _bcjrJobs :: Maybe [Job]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'CreateClientEventRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'BatchCreateJobsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccerClientEvent'
-createClientEventRequest
-    :: CreateClientEventRequest
-createClientEventRequest =
-  CreateClientEventRequest' {_ccerClientEvent = Nothing}
+-- * 'bcjrJobs'
+batchCreateJobsRequest
+    :: BatchCreateJobsRequest
+batchCreateJobsRequest = BatchCreateJobsRequest' {_bcjrJobs = Nothing}
 
 
--- | Required. Events issued when end user interacts with customer\'s
--- application that uses Cloud Talent Solution.
-ccerClientEvent :: Lens' CreateClientEventRequest (Maybe ClientEvent)
-ccerClientEvent
-  = lens _ccerClientEvent
-      (\ s a -> s{_ccerClientEvent = a})
+-- | Required. The jobs to be created. A maximum of 200 jobs can be created
+-- in a batch.
+bcjrJobs :: Lens' BatchCreateJobsRequest [Job]
+bcjrJobs
+  = lens _bcjrJobs (\ s a -> s{_bcjrJobs = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON CreateClientEventRequest where
+instance FromJSON BatchCreateJobsRequest where
         parseJSON
-          = withObject "CreateClientEventRequest"
+          = withObject "BatchCreateJobsRequest"
               (\ o ->
-                 CreateClientEventRequest' <$> (o .:? "clientEvent"))
+                 BatchCreateJobsRequest' <$>
+                   (o .:? "jobs" .!= mempty))
 
-instance ToJSON CreateClientEventRequest where
-        toJSON CreateClientEventRequest'{..}
-          = object
-              (catMaybes [("clientEvent" .=) <$> _ccerClientEvent])
+instance ToJSON BatchCreateJobsRequest where
+        toJSON BatchCreateJobsRequest'{..}
+          = object (catMaybes [("jobs" .=) <$> _bcjrJobs])
 
--- | Output only. Spell check result.
+-- | Spell check result.
 --
 -- /See:/ 'spellingCorrection' smart constructor.
 data SpellingCorrection =
   SpellingCorrection'
-    { _scCorrected     :: !(Maybe Bool)
+    { _scCorrected :: !(Maybe Bool)
     , _scCorrectedText :: !(Maybe Text)
+    , _scCorrectedHTML :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3963,10 +4103,16 @@ data SpellingCorrection =
 -- * 'scCorrected'
 --
 -- * 'scCorrectedText'
+--
+-- * 'scCorrectedHTML'
 spellingCorrection
     :: SpellingCorrection
 spellingCorrection =
-  SpellingCorrection' {_scCorrected = Nothing, _scCorrectedText = Nothing}
+  SpellingCorrection'
+    { _scCorrected = Nothing
+    , _scCorrectedText = Nothing
+    , _scCorrectedHTML = Nothing
+    }
 
 
 -- | Indicates if the query was corrected by the spell checker.
@@ -3980,26 +4126,38 @@ scCorrectedText
   = lens _scCorrectedText
       (\ s a -> s{_scCorrectedText = a})
 
+-- | Corrected output with html tags to highlight the corrected words.
+-- Corrected words are called out with the \"*...*\" html tags. For
+-- example, the user input query is \"software enginear\", where the second
+-- word, \"enginear,\" is incorrect. It should be \"engineer\". When
+-- spelling correction is enabled, this value is \"software *engineer*\".
+scCorrectedHTML :: Lens' SpellingCorrection (Maybe Text)
+scCorrectedHTML
+  = lens _scCorrectedHTML
+      (\ s a -> s{_scCorrectedHTML = a})
+
 instance FromJSON SpellingCorrection where
         parseJSON
           = withObject "SpellingCorrection"
               (\ o ->
                  SpellingCorrection' <$>
-                   (o .:? "corrected") <*> (o .:? "correctedText"))
+                   (o .:? "corrected") <*> (o .:? "correctedText") <*>
+                     (o .:? "correctedHtml"))
 
 instance ToJSON SpellingCorrection where
         toJSON SpellingCorrection'{..}
           = object
               (catMaybes
                  [("corrected" .=) <$> _scCorrected,
-                  ("correctedText" .=) <$> _scCorrectedText])
+                  ("correctedText" .=) <$> _scCorrectedText,
+                  ("correctedHtml" .=) <$> _scCorrectedHTML])
 
--- | Output only. Response of auto-complete query.
+-- | Response of auto-complete query.
 --
 -- /See:/ 'completeQueryResponse' smart constructor.
 data CompleteQueryResponse =
   CompleteQueryResponse'
-    { _cqrMetadata          :: !(Maybe ResponseMetadata)
+    { _cqrMetadata :: !(Maybe ResponseMetadata)
     , _cqrCompletionResults :: !(Maybe [CompletionResult])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4056,8 +4214,8 @@ instance ToJSON CompleteQueryResponse where
 -- /See:/ 'timeOfDay' smart constructor.
 data TimeOfDay' =
   TimeOfDay''
-    { _todNanos   :: !(Maybe (Textual Int32))
-    , _todHours   :: !(Maybe (Textual Int32))
+    { _todNanos :: !(Maybe (Textual Int32))
+    , _todHours :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
     , _todSeconds :: !(Maybe (Textual Int32))
     }
@@ -4141,12 +4299,12 @@ instance ToJSON TimeOfDay' where
 -- /See:/ 'compensationEntry' smart constructor.
 data CompensationEntry =
   CompensationEntry'
-    { _ceAmount               :: !(Maybe Money)
+    { _ceAmount :: !(Maybe Money)
     , _ceExpectedUnitsPerYear :: !(Maybe (Textual Double))
-    , _ceRange                :: !(Maybe CompensationRange)
-    , _ceType                 :: !(Maybe CompensationEntryType)
-    , _ceDescription          :: !(Maybe Text)
-    , _ceUnit                 :: !(Maybe CompensationEntryUnit)
+    , _ceRange :: !(Maybe CompensationRange)
+    , _ceType :: !(Maybe CompensationEntryType)
+    , _ceDescription :: !(Maybe Text)
+    , _ceUnit :: !(Maybe CompensationEntryUnit)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4179,13 +4337,13 @@ compensationEntry =
     }
 
 
--- | Optional. Compensation amount.
+-- | Compensation amount.
 ceAmount :: Lens' CompensationEntry (Maybe Money)
 ceAmount = lens _ceAmount (\ s a -> s{_ceAmount = a})
 
--- | Optional. Expected number of units paid each year. If not specified,
--- when Job.employment_types is FULLTIME, a default value is inferred based
--- on unit. Default values: - HOURLY: 2080 - DAILY: 260 - WEEKLY: 52 -
+-- | Expected number of units paid each year. If not specified, when
+-- Job.employment_types is FULLTIME, a default value is inferred based on
+-- unit. Default values: - HOURLY: 2080 - DAILY: 260 - WEEKLY: 52 -
 -- MONTHLY: 12 - ANNUAL: 1
 ceExpectedUnitsPerYear :: Lens' CompensationEntry (Maybe Double)
 ceExpectedUnitsPerYear
@@ -4193,24 +4351,24 @@ ceExpectedUnitsPerYear
       (\ s a -> s{_ceExpectedUnitsPerYear = a})
       . mapping _Coerce
 
--- | Optional. Compensation range.
+-- | Compensation range.
 ceRange :: Lens' CompensationEntry (Maybe CompensationRange)
 ceRange = lens _ceRange (\ s a -> s{_ceRange = a})
 
--- | Optional. Compensation type. Default is
--- CompensationUnit.OTHER_COMPENSATION_TYPE.
+-- | Compensation type. Default is
+-- CompensationType.COMPENSATION_TYPE_UNSPECIFIED.
 ceType :: Lens' CompensationEntry (Maybe CompensationEntryType)
 ceType = lens _ceType (\ s a -> s{_ceType = a})
 
--- | Optional. Compensation description. For example, could indicate equity
--- terms or provide additional context to an estimated bonus.
+-- | Compensation description. For example, could indicate equity terms or
+-- provide additional context to an estimated bonus.
 ceDescription :: Lens' CompensationEntry (Maybe Text)
 ceDescription
   = lens _ceDescription
       (\ s a -> s{_ceDescription = a})
 
--- | Optional. Frequency of the specified amount. Default is
--- CompensationUnit.OTHER_COMPENSATION_UNIT.
+-- | Frequency of the specified amount. Default is
+-- CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED.
 ceUnit :: Lens' CompensationEntry (Maybe CompensationEntryUnit)
 ceUnit = lens _ceUnit (\ s a -> s{_ceUnit = a})
 
@@ -4300,17 +4458,17 @@ compensationRange =
     {_crMaxCompensation = Nothing, _crMinCompensation = Nothing}
 
 
--- | Optional. The maximum amount of compensation. If left empty, the value
--- is set to a maximal compensation value and the currency code is set to
--- match the currency code of min_compensation.
+-- | The maximum amount of compensation. If left empty, the value is set to a
+-- maximal compensation value and the currency code is set to match the
+-- currency code of min_compensation.
 crMaxCompensation :: Lens' CompensationRange (Maybe Money)
 crMaxCompensation
   = lens _crMaxCompensation
       (\ s a -> s{_crMaxCompensation = a})
 
--- | Optional. The minimum amount of compensation. If left empty, the value
--- is set to zero and the currency code is set to match the currency code
--- of max_compensation.
+-- | The minimum amount of compensation. If left empty, the value is set to
+-- zero and the currency code is set to match the currency code of
+-- max_compensation.
 crMinCompensation :: Lens' CompensationRange (Maybe Money)
 crMinCompensation
   = lens _crMinCompensation
@@ -4331,12 +4489,12 @@ instance ToJSON CompensationRange where
                  [("maxCompensation" .=) <$> _crMaxCompensation,
                   ("minCompensation" .=) <$> _crMinCompensation])
 
--- | Input only. Custom ranking information for SearchJobsRequest.
+-- | Custom ranking information for SearchJobsRequest.
 --
 -- /See:/ 'customRankingInfo' smart constructor.
 data CustomRankingInfo =
   CustomRankingInfo'
-    { _criImportanceLevel   :: !(Maybe CustomRankingInfoImportanceLevel)
+    { _criImportanceLevel :: !(Maybe CustomRankingInfoImportanceLevel)
     , _criRankingExpression :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4365,15 +4523,19 @@ criImportanceLevel
       (\ s a -> s{_criImportanceLevel = a})
 
 -- | Required. Controls over how job documents get ranked on top of existing
--- relevance score (determined by API algorithm). The product of ranking
--- expression and relevance score is used to determine job\'s final ranking
--- position. The syntax for this expression is a subset of Google SQL
--- syntax. Supported operators are: +, -, *, \/, where the left and right
--- side of the operator is either a numeric Job.custom_attributes key,
--- integer\/double value or an expression that can be evaluated to a
+-- relevance score (determined by API algorithm). A combination of the
+-- ranking expression and relevance score is used to determine job\'s final
+-- ranking position. The syntax for this expression is a subset of Google
+-- SQL syntax. Supported operators are: +, -, *, \/, where the left and
+-- right side of the operator is either a numeric Job.custom_attributes
+-- key, integer\/double value or an expression that can be evaluated to a
 -- number. Parenthesis are supported to adjust calculation precedence. The
--- expression must be \< 100 characters in length. Sample ranking
--- expression (year + 25) * 0.25 - (freshness \/ 0.5)
+-- expression must be \< 100 characters in length. The expression is
+-- considered invalid for a job if the expression references custom
+-- attributes that are not populated on the job or if the expression
+-- results in a divide by zero. If an expression is invalid for a job, that
+-- job is demoted to the end of the results. Sample ranking expression
+-- (year + 25) * 0.25 - (freshness \/ 0.5)
 criRankingExpression :: Lens' CustomRankingInfo (Maybe Text)
 criRankingExpression
   = lens _criRankingExpression
@@ -4394,12 +4556,12 @@ instance ToJSON CustomRankingInfo where
                  [("importanceLevel" .=) <$> _criImportanceLevel,
                   ("rankingExpression" .=) <$> _criRankingExpression])
 
--- | Input only. Options for job processing.
+-- | Options for job processing.
 --
 -- /See:/ 'processingOptions' smart constructor.
 data ProcessingOptions =
   ProcessingOptions'
-    { _poHTMLSanitization               :: !(Maybe ProcessingOptionsHTMLSanitization)
+    { _poHTMLSanitization :: !(Maybe ProcessingOptionsHTMLSanitization)
     , _poDisableStreetAddressResolution :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4419,18 +4581,18 @@ processingOptions =
     {_poHTMLSanitization = Nothing, _poDisableStreetAddressResolution = Nothing}
 
 
--- | Optional. Option for job HTML content sanitization. Applied fields are:
--- * description * applicationInfo.instruction * incentives *
--- qualifications * responsibilities HTML tags in these fields may be
--- stripped if sanitiazation is not disabled. Defaults to
+-- | Option for job HTML content sanitization. Applied fields are: *
+-- description * applicationInfo.instruction * incentives * qualifications
+-- * responsibilities HTML tags in these fields may be stripped if
+-- sanitiazation isn\'t disabled. Defaults to
 -- HtmlSanitization.SIMPLE_FORMATTING_ONLY.
 poHTMLSanitization :: Lens' ProcessingOptions (Maybe ProcessingOptionsHTMLSanitization)
 poHTMLSanitization
   = lens _poHTMLSanitization
       (\ s a -> s{_poHTMLSanitization = a})
 
--- | Optional. If set to \`true\`, the service does not attempt to resolve a
--- more precise address for the job.
+-- | If set to \`true\`, the service does not attempt to resolve a more
+-- precise address for the job.
 poDisableStreetAddressResolution :: Lens' ProcessingOptions (Maybe Bool)
 poDisableStreetAddressResolution
   = lens _poDisableStreetAddressResolution
@@ -4459,7 +4621,7 @@ instance ToJSON ProcessingOptions where
 -- be created via user input or from importing existing data, depending on
 -- the type of process. Advice on address input \/ editing: - Use an
 -- i18n-ready address widget such as
--- https:\/\/github.com\/googlei18n\/libaddressinput) - Users should not be
+-- https:\/\/github.com\/google\/libaddressinput) - Users should not be
 -- presented with UI elements for input or editing of fields outside
 -- countries where that field is used. For more guidance on how to use this
 -- schema, please see:
@@ -4468,17 +4630,17 @@ instance ToJSON ProcessingOptions where
 -- /See:/ 'postalAddress' smart constructor.
 data PostalAddress =
   PostalAddress'
-    { _paLanguageCode       :: !(Maybe Text)
-    , _paSortingCode        :: !(Maybe Text)
-    , _paRegionCode         :: !(Maybe Text)
-    , _paSublocality        :: !(Maybe Text)
-    , _paPostalCode         :: !(Maybe Text)
-    , _paLocality           :: !(Maybe Text)
-    , _paRecipients         :: !(Maybe [Text])
+    { _paLanguageCode :: !(Maybe Text)
+    , _paSortingCode :: !(Maybe Text)
+    , _paRegionCode :: !(Maybe Text)
+    , _paSublocality :: !(Maybe Text)
+    , _paPostalCode :: !(Maybe Text)
+    , _paLocality :: !(Maybe Text)
+    , _paRecipients :: !(Maybe [Text])
     , _paAdministrativeArea :: !(Maybe Text)
-    , _paAddressLines       :: !(Maybe [Text])
-    , _paRevision           :: !(Maybe (Textual Int32))
-    , _paOrganization       :: !(Maybe Text)
+    , _paAddressLines :: !(Maybe [Text])
+    , _paRevision :: !(Maybe (Textual Int32))
+    , _paOrganization :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4681,7 +4843,7 @@ instance ToJSON PostalAddress where
 -- /See:/ 'deviceInfo' smart constructor.
 data DeviceInfo =
   DeviceInfo'
-    { _diId         :: !(Maybe Text)
+    { _diId :: !(Maybe Text)
     , _diDeviceType :: !(Maybe DeviceInfoDeviceType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4699,12 +4861,12 @@ deviceInfo
 deviceInfo = DeviceInfo' {_diId = Nothing, _diDeviceType = Nothing}
 
 
--- | Optional. A device-specific ID. The ID must be a unique identifier that
+-- | A device-specific ID. The ID must be a unique identifier that
 -- distinguishes the device from other devices.
 diId :: Lens' DeviceInfo (Maybe Text)
 diId = lens _diId (\ s a -> s{_diId = a})
 
--- | Optional. Type of the device.
+-- | Type of the device.
 diDeviceType :: Lens' DeviceInfo (Maybe DeviceInfoDeviceType)
 diDeviceType
   = lens _diDeviceType (\ s a -> s{_diDeviceType = a})
@@ -4723,64 +4885,69 @@ instance ToJSON DeviceInfo where
                  [("id" .=) <$> _diId,
                   ("deviceType" .=) <$> _diDeviceType])
 
--- | Input only. Use this field to specify bucketing option for the histogram
--- search response.
+-- | The List tenants response object.
 --
--- /See:/ 'numericBucketingOption' smart constructor.
-data NumericBucketingOption =
-  NumericBucketingOption'
-    { _nboBucketBounds   :: !(Maybe [Textual Double])
-    , _nboRequiresMinMax :: !(Maybe Bool)
+-- /See:/ 'listTenantsResponse' smart constructor.
+data ListTenantsResponse =
+  ListTenantsResponse'
+    { _ltrTenants :: !(Maybe [Tenant])
+    , _ltrNextPageToken :: !(Maybe Text)
+    , _ltrMetadata :: !(Maybe ResponseMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'NumericBucketingOption' with the minimum fields required to make a request.
+-- | Creates a value of 'ListTenantsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'nboBucketBounds'
+-- * 'ltrTenants'
 --
--- * 'nboRequiresMinMax'
-numericBucketingOption
-    :: NumericBucketingOption
-numericBucketingOption =
-  NumericBucketingOption'
-    {_nboBucketBounds = Nothing, _nboRequiresMinMax = Nothing}
+-- * 'ltrNextPageToken'
+--
+-- * 'ltrMetadata'
+listTenantsResponse
+    :: ListTenantsResponse
+listTenantsResponse =
+  ListTenantsResponse'
+    {_ltrTenants = Nothing, _ltrNextPageToken = Nothing, _ltrMetadata = Nothing}
 
 
--- | Required. Two adjacent values form a histogram bucket. Values should be
--- in ascending order. For example, if [5, 10, 15] are provided, four
--- buckets are created: (-inf, 5), 5, 10), [10, 15), [15, inf). At most 20
--- [buckets_bound is supported.
-nboBucketBounds :: Lens' NumericBucketingOption [Double]
-nboBucketBounds
-  = lens _nboBucketBounds
-      (\ s a -> s{_nboBucketBounds = a})
-      . _Default
+-- | Tenants for the current client.
+ltrTenants :: Lens' ListTenantsResponse [Tenant]
+ltrTenants
+  = lens _ltrTenants (\ s a -> s{_ltrTenants = a}) .
+      _Default
       . _Coerce
 
--- | Optional. If set to true, the histogram result includes minimum\/maximum
--- value of the numeric field.
-nboRequiresMinMax :: Lens' NumericBucketingOption (Maybe Bool)
-nboRequiresMinMax
-  = lens _nboRequiresMinMax
-      (\ s a -> s{_nboRequiresMinMax = a})
+-- | A token to retrieve the next page of results.
+ltrNextPageToken :: Lens' ListTenantsResponse (Maybe Text)
+ltrNextPageToken
+  = lens _ltrNextPageToken
+      (\ s a -> s{_ltrNextPageToken = a})
 
-instance FromJSON NumericBucketingOption where
+-- | Additional information for the API invocation, such as the request
+-- tracking id.
+ltrMetadata :: Lens' ListTenantsResponse (Maybe ResponseMetadata)
+ltrMetadata
+  = lens _ltrMetadata (\ s a -> s{_ltrMetadata = a})
+
+instance FromJSON ListTenantsResponse where
         parseJSON
-          = withObject "NumericBucketingOption"
+          = withObject "ListTenantsResponse"
               (\ o ->
-                 NumericBucketingOption' <$>
-                   (o .:? "bucketBounds" .!= mempty) <*>
-                     (o .:? "requiresMinMax"))
+                 ListTenantsResponse' <$>
+                   (o .:? "tenants" .!= mempty) <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "metadata"))
 
-instance ToJSON NumericBucketingOption where
-        toJSON NumericBucketingOption'{..}
+instance ToJSON ListTenantsResponse where
+        toJSON ListTenantsResponse'{..}
           = object
               (catMaybes
-                 [("bucketBounds" .=) <$> _nboBucketBounds,
-                  ("requiresMinMax" .=) <$> _nboRequiresMinMax])
+                 [("tenants" .=) <$> _ltrTenants,
+                  ("nextPageToken" .=) <$> _ltrNextPageToken,
+                  ("metadata" .=) <$> _ltrMetadata])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -4825,237 +4992,19 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | Input only. Histogram facets to be specified in SearchJobsRequest.
---
--- /See:/ 'histogramFacets' smart constructor.
-data HistogramFacets =
-  HistogramFacets'
-    { _hfCompensationHistogramFacets    :: !(Maybe [CompensationHistogramRequest])
-    , _hfCustomAttributeHistogramFacets :: !(Maybe [CustomAttributeHistogramRequest])
-    , _hfSimpleHistogramFacets          :: !(Maybe [Text])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'HistogramFacets' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hfCompensationHistogramFacets'
---
--- * 'hfCustomAttributeHistogramFacets'
---
--- * 'hfSimpleHistogramFacets'
-histogramFacets
-    :: HistogramFacets
-histogramFacets =
-  HistogramFacets'
-    { _hfCompensationHistogramFacets = Nothing
-    , _hfCustomAttributeHistogramFacets = Nothing
-    , _hfSimpleHistogramFacets = Nothing
-    }
-
-
--- | Optional. Specifies compensation field-based histogram requests.
--- Duplicate values of CompensationHistogramRequest.type are not allowed.
-hfCompensationHistogramFacets :: Lens' HistogramFacets [CompensationHistogramRequest]
-hfCompensationHistogramFacets
-  = lens _hfCompensationHistogramFacets
-      (\ s a -> s{_hfCompensationHistogramFacets = a})
-      . _Default
-      . _Coerce
-
--- | Optional. Specifies the custom attributes histogram requests. Duplicate
--- values of CustomAttributeHistogramRequest.key are not allowed.
-hfCustomAttributeHistogramFacets :: Lens' HistogramFacets [CustomAttributeHistogramRequest]
-hfCustomAttributeHistogramFacets
-  = lens _hfCustomAttributeHistogramFacets
-      (\ s a -> s{_hfCustomAttributeHistogramFacets = a})
-      . _Default
-      . _Coerce
-
--- | Optional. Specifies the simple type of histogram facets, for example,
--- \`COMPANY_SIZE\`, \`EMPLOYMENT_TYPE\` etc.
-hfSimpleHistogramFacets :: Lens' HistogramFacets [Text]
-hfSimpleHistogramFacets
-  = lens _hfSimpleHistogramFacets
-      (\ s a -> s{_hfSimpleHistogramFacets = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON HistogramFacets where
-        parseJSON
-          = withObject "HistogramFacets"
-              (\ o ->
-                 HistogramFacets' <$>
-                   (o .:? "compensationHistogramFacets" .!= mempty) <*>
-                     (o .:? "customAttributeHistogramFacets" .!= mempty)
-                     <*> (o .:? "simpleHistogramFacets" .!= mempty))
-
-instance ToJSON HistogramFacets where
-        toJSON HistogramFacets'{..}
-          = object
-              (catMaybes
-                 [("compensationHistogramFacets" .=) <$>
-                    _hfCompensationHistogramFacets,
-                  ("customAttributeHistogramFacets" .=) <$>
-                    _hfCustomAttributeHistogramFacets,
-                  ("simpleHistogramFacets" .=) <$>
-                    _hfSimpleHistogramFacets])
-
--- | Output only. Result of a histogram call. The response contains the
--- histogram map for the search type specified by HistogramResult.field.
--- The response is a map of each filter value to the corresponding count of
--- jobs for that filter.
---
--- /See:/ 'histogramResult' smart constructor.
-data HistogramResult =
-  HistogramResult'
-    { _hrValues     :: !(Maybe HistogramResultValues)
-    , _hrSearchType :: !(Maybe HistogramResultSearchType)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'HistogramResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hrValues'
---
--- * 'hrSearchType'
-histogramResult
-    :: HistogramResult
-histogramResult =
-  HistogramResult' {_hrValues = Nothing, _hrSearchType = Nothing}
-
-
--- | A map from the values of field to the number of jobs with that value in
--- this search result. Key: search type (filter names, such as the
--- companyName). Values: the count of jobs that match the filter for this
--- search.
-hrValues :: Lens' HistogramResult (Maybe HistogramResultValues)
-hrValues = lens _hrValues (\ s a -> s{_hrValues = a})
-
--- | The Histogram search filters.
-hrSearchType :: Lens' HistogramResult (Maybe HistogramResultSearchType)
-hrSearchType
-  = lens _hrSearchType (\ s a -> s{_hrSearchType = a})
-
-instance FromJSON HistogramResult where
-        parseJSON
-          = withObject "HistogramResult"
-              (\ o ->
-                 HistogramResult' <$>
-                   (o .:? "values") <*> (o .:? "searchType"))
-
-instance ToJSON HistogramResult where
-        toJSON HistogramResult'{..}
-          = object
-              (catMaybes
-                 [("values" .=) <$> _hrValues,
-                  ("searchType" .=) <$> _hrSearchType])
-
--- | Stores a map from the values of string custom field associated with
--- \`key\` to the number of jobs with that value in this histogram result.
---
--- /See:/ 'customAttributeHistogramResultStringValueHistogramResult' smart constructor.
-newtype CustomAttributeHistogramResultStringValueHistogramResult =
-  CustomAttributeHistogramResultStringValueHistogramResult'
-    { _cahrsvhrAddtional :: HashMap Text (Textual Int32)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CustomAttributeHistogramResultStringValueHistogramResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cahrsvhrAddtional'
-customAttributeHistogramResultStringValueHistogramResult
-    :: HashMap Text Int32 -- ^ 'cahrsvhrAddtional'
-    -> CustomAttributeHistogramResultStringValueHistogramResult
-customAttributeHistogramResultStringValueHistogramResult pCahrsvhrAddtional_ =
-  CustomAttributeHistogramResultStringValueHistogramResult'
-    {_cahrsvhrAddtional = _Coerce # pCahrsvhrAddtional_}
-
-
-cahrsvhrAddtional :: Lens' CustomAttributeHistogramResultStringValueHistogramResult (HashMap Text Int32)
-cahrsvhrAddtional
-  = lens _cahrsvhrAddtional
-      (\ s a -> s{_cahrsvhrAddtional = a})
-      . _Coerce
-
-instance FromJSON
-           CustomAttributeHistogramResultStringValueHistogramResult
-         where
-        parseJSON
-          = withObject
-              "CustomAttributeHistogramResultStringValueHistogramResult"
-              (\ o ->
-                 CustomAttributeHistogramResultStringValueHistogramResult'
-                   <$> (parseJSONObject o))
-
-instance ToJSON
-           CustomAttributeHistogramResultStringValueHistogramResult
-         where
-        toJSON = toJSON . _cahrsvhrAddtional
-
--- | Optional. Extra information about this event. Used for storing
--- information with no matching field in event payload, for example, user
--- application specific context or details. At most 20 keys are supported.
--- The maximum total size of all keys and values is 2 KB.
---
--- /See:/ 'clientEventExtraInfo' smart constructor.
-newtype ClientEventExtraInfo =
-  ClientEventExtraInfo'
-    { _ceeiAddtional :: HashMap Text Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'ClientEventExtraInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ceeiAddtional'
-clientEventExtraInfo
-    :: HashMap Text Text -- ^ 'ceeiAddtional'
-    -> ClientEventExtraInfo
-clientEventExtraInfo pCeeiAddtional_ =
-  ClientEventExtraInfo' {_ceeiAddtional = _Coerce # pCeeiAddtional_}
-
-
-ceeiAddtional :: Lens' ClientEventExtraInfo (HashMap Text Text)
-ceeiAddtional
-  = lens _ceeiAddtional
-      (\ s a -> s{_ceeiAddtional = a})
-      . _Coerce
-
-instance FromJSON ClientEventExtraInfo where
-        parseJSON
-          = withObject "ClientEventExtraInfo"
-              (\ o ->
-                 ClientEventExtraInfo' <$> (parseJSONObject o))
-
-instance ToJSON ClientEventExtraInfo where
-        toJSON = toJSON . _ceeiAddtional
-
--- | Output only. Response for SearchJob method.
+-- | Response for SearchJob method.
 --
 -- /See:/ 'searchJobsResponse' smart constructor.
 data SearchJobsResponse =
   SearchJobsResponse'
-    { _sjrNextPageToken           :: !(Maybe Text)
-    , _sjrEstimatedTotalSize      :: !(Maybe (Textual Int32))
-    , _sjrHistogramQueryResults   :: !(Maybe [HistogramQueryResult])
-    , _sjrLocationFilters         :: !(Maybe [Location])
-    , _sjrMatchingJobs            :: !(Maybe [MatchingJob])
-    , _sjrTotalSize               :: !(Maybe (Textual Int32))
-    , _sjrHistogramResults        :: !(Maybe HistogramResults)
-    , _sjrMetadata                :: !(Maybe ResponseMetadata)
+    { _sjrNextPageToken :: !(Maybe Text)
+    , _sjrHistogramQueryResults :: !(Maybe [HistogramQueryResult])
+    , _sjrLocationFilters :: !(Maybe [Location])
+    , _sjrMatchingJobs :: !(Maybe [MatchingJob])
+    , _sjrTotalSize :: !(Maybe (Textual Int32))
+    , _sjrMetadata :: !(Maybe ResponseMetadata)
     , _sjrBroadenedQueryJobsCount :: !(Maybe (Textual Int32))
-    , _sjrSpellCorrection         :: !(Maybe SpellingCorrection)
+    , _sjrSpellCorrection :: !(Maybe SpellingCorrection)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5066,8 +5015,6 @@ data SearchJobsResponse =
 --
 -- * 'sjrNextPageToken'
 --
--- * 'sjrEstimatedTotalSize'
---
 -- * 'sjrHistogramQueryResults'
 --
 -- * 'sjrLocationFilters'
@@ -5075,8 +5022,6 @@ data SearchJobsResponse =
 -- * 'sjrMatchingJobs'
 --
 -- * 'sjrTotalSize'
---
--- * 'sjrHistogramResults'
 --
 -- * 'sjrMetadata'
 --
@@ -5088,12 +5033,10 @@ searchJobsResponse
 searchJobsResponse =
   SearchJobsResponse'
     { _sjrNextPageToken = Nothing
-    , _sjrEstimatedTotalSize = Nothing
     , _sjrHistogramQueryResults = Nothing
     , _sjrLocationFilters = Nothing
     , _sjrMatchingJobs = Nothing
     , _sjrTotalSize = Nothing
-    , _sjrHistogramResults = Nothing
     , _sjrMetadata = Nothing
     , _sjrBroadenedQueryJobsCount = Nothing
     , _sjrSpellCorrection = Nothing
@@ -5107,15 +5050,6 @@ sjrNextPageToken
   = lens _sjrNextPageToken
       (\ s a -> s{_sjrNextPageToken = a})
 
--- | An estimation of the number of jobs that match the specified query. This
--- number is not guaranteed to be accurate. For accurate results, see
--- enable_precise_result_size.
-sjrEstimatedTotalSize :: Lens' SearchJobsResponse (Maybe Int32)
-sjrEstimatedTotalSize
-  = lens _sjrEstimatedTotalSize
-      (\ s a -> s{_sjrEstimatedTotalSize = a})
-      . mapping _Coerce
-
 -- | The histogram results that match with specified
 -- SearchJobsRequest.histogram_queries.
 sjrHistogramQueryResults :: Lens' SearchJobsResponse [HistogramQueryResult]
@@ -5126,8 +5060,8 @@ sjrHistogramQueryResults
       . _Coerce
 
 -- | The location filters that the service applied to the specified query. If
--- any filters are lat-lng based, the JobLocation.location_type is
--- JobLocation.LocationType#LOCATION_TYPE_UNSPECIFIED.
+-- any filters are lat-lng based, the Location.location_type is
+-- Location.LocationType.LOCATION_TYPE_UNSPECIFIED.
 sjrLocationFilters :: Lens' SearchJobsResponse [Location]
 sjrLocationFilters
   = lens _sjrLocationFilters
@@ -5143,20 +5077,12 @@ sjrMatchingJobs
       . _Default
       . _Coerce
 
--- | The precise result count, which is available only if the client set
--- enable_precise_result_size to \`true\`, or if the response is the last
--- page of results. Otherwise, the value is \`-1\`.
+-- | Number of jobs that match the specified query. Note: This size is
+-- precise only if the total is less than 100,000.
 sjrTotalSize :: Lens' SearchJobsResponse (Maybe Int32)
 sjrTotalSize
   = lens _sjrTotalSize (\ s a -> s{_sjrTotalSize = a})
       . mapping _Coerce
-
--- | The histogram results that match specified
--- SearchJobsRequest.histogram_facets.
-sjrHistogramResults :: Lens' SearchJobsResponse (Maybe HistogramResults)
-sjrHistogramResults
-  = lens _sjrHistogramResults
-      (\ s a -> s{_sjrHistogramResults = a})
 
 -- | Additional information for the API invocation, such as the request
 -- tracking id.
@@ -5190,12 +5116,10 @@ instance FromJSON SearchJobsResponse where
               (\ o ->
                  SearchJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "estimatedTotalSize")
-                     <*> (o .:? "histogramQueryResults" .!= mempty)
+                     (o .:? "histogramQueryResults" .!= mempty)
                      <*> (o .:? "locationFilters" .!= mempty)
                      <*> (o .:? "matchingJobs" .!= mempty)
                      <*> (o .:? "totalSize")
-                     <*> (o .:? "histogramResults")
                      <*> (o .:? "metadata")
                      <*> (o .:? "broadenedQueryJobsCount")
                      <*> (o .:? "spellCorrection"))
@@ -5205,56 +5129,57 @@ instance ToJSON SearchJobsResponse where
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _sjrNextPageToken,
-                  ("estimatedTotalSize" .=) <$> _sjrEstimatedTotalSize,
                   ("histogramQueryResults" .=) <$>
                     _sjrHistogramQueryResults,
                   ("locationFilters" .=) <$> _sjrLocationFilters,
                   ("matchingJobs" .=) <$> _sjrMatchingJobs,
                   ("totalSize" .=) <$> _sjrTotalSize,
-                  ("histogramResults" .=) <$> _sjrHistogramResults,
                   ("metadata" .=) <$> _sjrMetadata,
                   ("broadenedQueryJobsCount" .=) <$>
                     _sjrBroadenedQueryJobsCount,
                   ("spellCorrection" .=) <$> _sjrSpellCorrection])
 
--- | A map from the values of field to the number of jobs with that value in
--- this search result. Key: search type (filter names, such as the
--- companyName). Values: the count of jobs that match the filter for this
--- search.
+-- | Rollouts to force in a particular experiment state. Map from rollout
+-- name to rollout value.
 --
--- /See:/ 'histogramResultValues' smart constructor.
-newtype HistogramResultValues =
-  HistogramResultValues'
-    { _hrvAddtional :: HashMap Text (Textual Int32)
+-- /See:/ 'namespacedDebugInputForcedRollouts' smart constructor.
+newtype NamespacedDebugInputForcedRollouts =
+  NamespacedDebugInputForcedRollouts'
+    { _ndifrAddtional :: HashMap Text Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'HistogramResultValues' with the minimum fields required to make a request.
+-- | Creates a value of 'NamespacedDebugInputForcedRollouts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'hrvAddtional'
-histogramResultValues
-    :: HashMap Text Int32 -- ^ 'hrvAddtional'
-    -> HistogramResultValues
-histogramResultValues pHrvAddtional_ =
-  HistogramResultValues' {_hrvAddtional = _Coerce # pHrvAddtional_}
+-- * 'ndifrAddtional'
+namespacedDebugInputForcedRollouts
+    :: HashMap Text Bool -- ^ 'ndifrAddtional'
+    -> NamespacedDebugInputForcedRollouts
+namespacedDebugInputForcedRollouts pNdifrAddtional_ =
+  NamespacedDebugInputForcedRollouts'
+    {_ndifrAddtional = _Coerce # pNdifrAddtional_}
 
 
-hrvAddtional :: Lens' HistogramResultValues (HashMap Text Int32)
-hrvAddtional
-  = lens _hrvAddtional (\ s a -> s{_hrvAddtional = a})
+ndifrAddtional :: Lens' NamespacedDebugInputForcedRollouts (HashMap Text Bool)
+ndifrAddtional
+  = lens _ndifrAddtional
+      (\ s a -> s{_ndifrAddtional = a})
       . _Coerce
 
-instance FromJSON HistogramResultValues where
+instance FromJSON NamespacedDebugInputForcedRollouts
+         where
         parseJSON
-          = withObject "HistogramResultValues"
+          = withObject "NamespacedDebugInputForcedRollouts"
               (\ o ->
-                 HistogramResultValues' <$> (parseJSONObject o))
+                 NamespacedDebugInputForcedRollouts' <$>
+                   (parseJSONObject o))
 
-instance ToJSON HistogramResultValues where
-        toJSON = toJSON . _hrvAddtional
+instance ToJSON NamespacedDebugInputForcedRollouts
+         where
+        toJSON = toJSON . _ndifrAddtional
 
 -- | Message representing a period of time between two timestamps.
 --
@@ -5262,7 +5187,7 @@ instance ToJSON HistogramResultValues where
 data TimestampRange =
   TimestampRange'
     { _trStartTime :: !(Maybe DateTime')
-    , _trEndTime   :: !(Maybe DateTime')
+    , _trEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5279,13 +5204,13 @@ timestampRange
 timestampRange = TimestampRange' {_trStartTime = Nothing, _trEndTime = Nothing}
 
 
--- | Begin of the period.
+-- | Begin of the period (inclusive).
 trStartTime :: Lens' TimestampRange (Maybe UTCTime)
 trStartTime
   = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
       mapping _DateTime
 
--- | End of the period.
+-- | End of the period (exclusive).
 trEndTime :: Lens' TimestampRange (Maybe UTCTime)
 trEndTime
   = lens _trEndTime (\ s a -> s{_trEndTime = a}) .

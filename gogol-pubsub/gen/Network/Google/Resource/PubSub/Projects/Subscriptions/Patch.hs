@@ -43,8 +43,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Patch
     , pspCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.patch@ method which the
 -- 'ProjectsSubscriptionsPatch' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsSubscriptionsPatchResource =
 -- /See:/ 'projectsSubscriptionsPatch' smart constructor.
 data ProjectsSubscriptionsPatch =
   ProjectsSubscriptionsPatch'
-    { _pspXgafv          :: !(Maybe Xgafv)
+    { _pspXgafv :: !(Maybe Xgafv)
     , _pspUploadProtocol :: !(Maybe Text)
-    , _pspAccessToken    :: !(Maybe Text)
-    , _pspUploadType     :: !(Maybe Text)
-    , _pspPayload        :: !UpdateSubscriptionRequest
-    , _pspName           :: !Text
-    , _pspCallback       :: !(Maybe Text)
+    , _pspAccessToken :: !(Maybe Text)
+    , _pspUploadType :: !(Maybe Text)
+    , _pspPayload :: !UpdateSubscriptionRequest
+    , _pspName :: !Text
+    , _pspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ pspPayload :: Lens' ProjectsSubscriptionsPatch UpdateSubscriptionRequest
 pspPayload
   = lens _pspPayload (\ s a -> s{_pspPayload = a})
 
--- | The name of the subscription. It must have the format
+-- | Required. The name of the subscription. It must have the format
 -- \`\"projects\/{project}\/subscriptions\/{subscription}\"\`.
 -- \`{subscription}\` must start with a letter, and contain only letters
 -- (\`[A-Za-z]\`), numbers (\`[0-9]\`), dashes (\`-\`), underscores

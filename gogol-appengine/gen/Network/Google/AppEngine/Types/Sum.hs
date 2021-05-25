@@ -16,7 +16,7 @@
 --
 module Network.Google.AppEngine.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Serving status of this application.
 data ApplicationServingStatus
@@ -55,6 +55,101 @@ instance FromJSON ApplicationServingStatus where
     parseJSON = parseJSONText "ApplicationServingStatus"
 
 instance ToJSON ApplicationServingStatus where
+    toJSON = toJSONText
+
+-- | Controls the set of fields returned in the LIST response.
+data AppsAuthorizedCertificatesListView
+    = BasicCertificate
+      -- ^ @BASIC_CERTIFICATE@
+      -- Basic certificate information, including applicable domains and
+      -- expiration date.
+    | FullCertificate
+      -- ^ @FULL_CERTIFICATE@
+      -- The information from BASIC_CERTIFICATE, plus detailed information on the
+      -- domain mappings that have this certificate mapped.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AppsAuthorizedCertificatesListView
+
+instance FromHttpApiData AppsAuthorizedCertificatesListView where
+    parseQueryParam = \case
+        "BASIC_CERTIFICATE" -> Right BasicCertificate
+        "FULL_CERTIFICATE" -> Right FullCertificate
+        x -> Left ("Unable to parse AppsAuthorizedCertificatesListView from: " <> x)
+
+instance ToHttpApiData AppsAuthorizedCertificatesListView where
+    toQueryParam = \case
+        BasicCertificate -> "BASIC_CERTIFICATE"
+        FullCertificate -> "FULL_CERTIFICATE"
+
+instance FromJSON AppsAuthorizedCertificatesListView where
+    parseJSON = parseJSONText "AppsAuthorizedCertificatesListView"
+
+instance ToJSON AppsAuthorizedCertificatesListView where
+    toJSON = toJSONText
+
+data VersionInboundServicesItem
+    = InboundServiceUnspecified
+      -- ^ @INBOUND_SERVICE_UNSPECIFIED@
+      -- Not specified.
+    | InboundServiceMail
+      -- ^ @INBOUND_SERVICE_MAIL@
+      -- Allows an application to receive mail.
+    | InboundServiceMailBounce
+      -- ^ @INBOUND_SERVICE_MAIL_BOUNCE@
+      -- Allows an application to receive email-bound notifications.
+    | InboundServiceXmppError
+      -- ^ @INBOUND_SERVICE_XMPP_ERROR@
+      -- Allows an application to receive error stanzas.
+    | InboundServiceXmppMessage
+      -- ^ @INBOUND_SERVICE_XMPP_MESSAGE@
+      -- Allows an application to receive instant messages.
+    | InboundServiceXmppSubscribe
+      -- ^ @INBOUND_SERVICE_XMPP_SUBSCRIBE@
+      -- Allows an application to receive user subscription POSTs.
+    | InboundServiceXmppPresence
+      -- ^ @INBOUND_SERVICE_XMPP_PRESENCE@
+      -- Allows an application to receive a user\'s chat presence.
+    | InboundServiceChannelPresence
+      -- ^ @INBOUND_SERVICE_CHANNEL_PRESENCE@
+      -- Registers an application for notifications when a client connects or
+      -- disconnects from a channel.
+    | InboundServiceWarmup
+      -- ^ @INBOUND_SERVICE_WARMUP@
+      -- Enables warmup requests.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VersionInboundServicesItem
+
+instance FromHttpApiData VersionInboundServicesItem where
+    parseQueryParam = \case
+        "INBOUND_SERVICE_UNSPECIFIED" -> Right InboundServiceUnspecified
+        "INBOUND_SERVICE_MAIL" -> Right InboundServiceMail
+        "INBOUND_SERVICE_MAIL_BOUNCE" -> Right InboundServiceMailBounce
+        "INBOUND_SERVICE_XMPP_ERROR" -> Right InboundServiceXmppError
+        "INBOUND_SERVICE_XMPP_MESSAGE" -> Right InboundServiceXmppMessage
+        "INBOUND_SERVICE_XMPP_SUBSCRIBE" -> Right InboundServiceXmppSubscribe
+        "INBOUND_SERVICE_XMPP_PRESENCE" -> Right InboundServiceXmppPresence
+        "INBOUND_SERVICE_CHANNEL_PRESENCE" -> Right InboundServiceChannelPresence
+        "INBOUND_SERVICE_WARMUP" -> Right InboundServiceWarmup
+        x -> Left ("Unable to parse VersionInboundServicesItem from: " <> x)
+
+instance ToHttpApiData VersionInboundServicesItem where
+    toQueryParam = \case
+        InboundServiceUnspecified -> "INBOUND_SERVICE_UNSPECIFIED"
+        InboundServiceMail -> "INBOUND_SERVICE_MAIL"
+        InboundServiceMailBounce -> "INBOUND_SERVICE_MAIL_BOUNCE"
+        InboundServiceXmppError -> "INBOUND_SERVICE_XMPP_ERROR"
+        InboundServiceXmppMessage -> "INBOUND_SERVICE_XMPP_MESSAGE"
+        InboundServiceXmppSubscribe -> "INBOUND_SERVICE_XMPP_SUBSCRIBE"
+        InboundServiceXmppPresence -> "INBOUND_SERVICE_XMPP_PRESENCE"
+        InboundServiceChannelPresence -> "INBOUND_SERVICE_CHANNEL_PRESENCE"
+        InboundServiceWarmup -> "INBOUND_SERVICE_WARMUP"
+
+instance FromJSON VersionInboundServicesItem where
+    parseJSON = parseJSONText "VersionInboundServicesItem"
+
+instance ToJSON VersionInboundServicesItem where
     toJSON = toJSONText
 
 -- | Level of login required to access this resource. Not supported for
@@ -126,9 +221,9 @@ data ManagedCertificateStatus
     | FailedRetryingCaaForBidden
       -- ^ @FAILED_RETRYING_CAA_FORBIDDEN@
       -- Most recent renewal failed due to an explicit CAA record that does not
-      -- include the in-use CA, Let\'s Encrypt. Renewals will continue to fail
-      -- until the CAA is reconfigured. The last successfully provisioned
-      -- certificate may still be serving.
+      -- include one of the in-use CAs (Google CA and Let\'s Encrypt). Renewals
+      -- will continue to fail until the CAA is reconfigured. The last
+      -- successfully provisioned certificate may still be serving.
     | FailedRetryingCaaChecking
       -- ^ @FAILED_RETRYING_CAA_CHECKING@
       -- Most recent renewal failed due to a CAA retrieval failure. This means
@@ -166,6 +261,64 @@ instance FromJSON ManagedCertificateStatus where
     parseJSON = parseJSONText "ManagedCertificateStatus"
 
 instance ToJSON ManagedCertificateStatus where
+    toJSON = toJSONText
+
+-- | Output only. The liveness health check of this instance. Only applicable
+-- for instances in App Engine flexible environment.
+data InstanceVMLiveness
+    = LivenessStateUnspecified
+      -- ^ @LIVENESS_STATE_UNSPECIFIED@
+      -- There is no liveness health check for the instance. Only applicable for
+      -- instances in App Engine standard environment.
+    | Unknown
+      -- ^ @UNKNOWN@
+      -- The health checking system is aware of the instance but its health is
+      -- not known at the moment.
+    | Healthy
+      -- ^ @HEALTHY@
+      -- The instance is reachable i.e. a connection to the application health
+      -- checking endpoint can be established, and conforms to the requirements
+      -- defined by the health check.
+    | Unhealthy
+      -- ^ @UNHEALTHY@
+      -- The instance is reachable, but does not conform to the requirements
+      -- defined by the health check.
+    | Draining
+      -- ^ @DRAINING@
+      -- The instance is being drained. The existing connections to the instance
+      -- have time to complete, but the new ones are being refused.
+    | Timeout
+      -- ^ @TIMEOUT@
+      -- The instance is unreachable i.e. a connection to the application health
+      -- checking endpoint cannot be established, or the server does not respond
+      -- within the specified timeout.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceVMLiveness
+
+instance FromHttpApiData InstanceVMLiveness where
+    parseQueryParam = \case
+        "LIVENESS_STATE_UNSPECIFIED" -> Right LivenessStateUnspecified
+        "UNKNOWN" -> Right Unknown
+        "HEALTHY" -> Right Healthy
+        "UNHEALTHY" -> Right Unhealthy
+        "DRAINING" -> Right Draining
+        "TIMEOUT" -> Right Timeout
+        x -> Left ("Unable to parse InstanceVMLiveness from: " <> x)
+
+instance ToHttpApiData InstanceVMLiveness where
+    toQueryParam = \case
+        LivenessStateUnspecified -> "LIVENESS_STATE_UNSPECIFIED"
+        Unknown -> "UNKNOWN"
+        Healthy -> "HEALTHY"
+        Unhealthy -> "UNHEALTHY"
+        Draining -> "DRAINING"
+        Timeout -> "TIMEOUT"
+
+instance FromJSON InstanceVMLiveness where
+    parseJSON = parseJSONText "InstanceVMLiveness"
+
+instance ToJSON InstanceVMLiveness where
     toJSON = toJSONText
 
 -- | Security (HTTPS) enforcement for this URL.
@@ -300,6 +453,69 @@ instance FromJSON EndpointsAPIServiceRolloutStrategy where
 instance ToJSON EndpointsAPIServiceRolloutStrategy where
     toJSON = toJSONText
 
+-- | Controls the set of fields returned in the GET response.
+data AppsAuthorizedCertificatesGetView
+    = AACGVBasicCertificate
+      -- ^ @BASIC_CERTIFICATE@
+      -- Basic certificate information, including applicable domains and
+      -- expiration date.
+    | AACGVFullCertificate
+      -- ^ @FULL_CERTIFICATE@
+      -- The information from BASIC_CERTIFICATE, plus detailed information on the
+      -- domain mappings that have this certificate mapped.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AppsAuthorizedCertificatesGetView
+
+instance FromHttpApiData AppsAuthorizedCertificatesGetView where
+    parseQueryParam = \case
+        "BASIC_CERTIFICATE" -> Right AACGVBasicCertificate
+        "FULL_CERTIFICATE" -> Right AACGVFullCertificate
+        x -> Left ("Unable to parse AppsAuthorizedCertificatesGetView from: " <> x)
+
+instance ToHttpApiData AppsAuthorizedCertificatesGetView where
+    toQueryParam = \case
+        AACGVBasicCertificate -> "BASIC_CERTIFICATE"
+        AACGVFullCertificate -> "FULL_CERTIFICATE"
+
+instance FromJSON AppsAuthorizedCertificatesGetView where
+    parseJSON = parseJSONText "AppsAuthorizedCertificatesGetView"
+
+instance ToJSON AppsAuthorizedCertificatesGetView where
+    toJSON = toJSONText
+
+-- | Controls the set of fields returned in the Get response.
+data AppsServicesVersionsGetView
+    = Basic
+      -- ^ @BASIC@
+      -- Basic version information including scaling and inbound services, but
+      -- not detailed deployment information.
+    | Full
+      -- ^ @FULL@
+      -- The information from BASIC, plus detailed information about the
+      -- deployment. This format is required when creating resources, but is not
+      -- returned in Get or List by default.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AppsServicesVersionsGetView
+
+instance FromHttpApiData AppsServicesVersionsGetView where
+    parseQueryParam = \case
+        "BASIC" -> Right Basic
+        "FULL" -> Right Full
+        x -> Left ("Unable to parse AppsServicesVersionsGetView from: " <> x)
+
+instance ToHttpApiData AppsServicesVersionsGetView where
+    toQueryParam = \case
+        Basic -> "BASIC"
+        Full -> "FULL"
+
+instance FromJSON AppsServicesVersionsGetView where
+    parseJSON = parseJSONText "AppsServicesVersionsGetView"
+
+instance ToJSON AppsServicesVersionsGetView where
+    toJSON = toJSONText
+
 -- | Action to take when users access resources that require authentication.
 -- Defaults to redirect.
 data APIConfigHandlerAuthFailAction
@@ -334,6 +550,45 @@ instance FromJSON APIConfigHandlerAuthFailAction where
     parseJSON = parseJSONText "APIConfigHandlerAuthFailAction"
 
 instance ToJSON APIConfigHandlerAuthFailAction where
+    toJSON = toJSONText
+
+-- | The ingress settings for version or service.
+data NetworkSettingsIngressTrafficAllowed
+    = IngressTrafficAllowedUnspecified
+      -- ^ @INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED@
+      -- Unspecified
+    | IngressTrafficAllowedAll
+      -- ^ @INGRESS_TRAFFIC_ALLOWED_ALL@
+      -- Allow HTTP traffic from public and private sources.
+    | IngressTrafficAllowedInternalOnly
+      -- ^ @INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY@
+      -- Allow HTTP traffic from only private VPC sources.
+    | IngressTrafficAllowedInternalAndLb
+      -- ^ @INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB@
+      -- Allow HTTP traffic from private VPC sources and through load balancers.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkSettingsIngressTrafficAllowed
+
+instance FromHttpApiData NetworkSettingsIngressTrafficAllowed where
+    parseQueryParam = \case
+        "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED" -> Right IngressTrafficAllowedUnspecified
+        "INGRESS_TRAFFIC_ALLOWED_ALL" -> Right IngressTrafficAllowedAll
+        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY" -> Right IngressTrafficAllowedInternalOnly
+        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB" -> Right IngressTrafficAllowedInternalAndLb
+        x -> Left ("Unable to parse NetworkSettingsIngressTrafficAllowed from: " <> x)
+
+instance ToHttpApiData NetworkSettingsIngressTrafficAllowed where
+    toQueryParam = \case
+        IngressTrafficAllowedUnspecified -> "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED"
+        IngressTrafficAllowedAll -> "INGRESS_TRAFFIC_ALLOWED_ALL"
+        IngressTrafficAllowedInternalOnly -> "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY"
+        IngressTrafficAllowedInternalAndLb -> "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB"
+
+instance FromJSON NetworkSettingsIngressTrafficAllowed where
+    parseJSON = parseJSONText "NetworkSettingsIngressTrafficAllowed"
+
+instance ToJSON NetworkSettingsIngressTrafficAllowed where
     toJSON = toJSONText
 
 -- | Current serving status of this version. Only the versions with a SERVING
@@ -372,6 +627,46 @@ instance FromJSON VersionServingStatus where
     parseJSON = parseJSONText "VersionServingStatus"
 
 instance ToJSON VersionServingStatus where
+    toJSON = toJSONText
+
+-- | The type of the Cloud Firestore or Cloud Datastore database associated
+-- with this application.
+data ApplicationDatabaseType
+    = DatabaseTypeUnspecified
+      -- ^ @DATABASE_TYPE_UNSPECIFIED@
+      -- Database type is unspecified.
+    | CloudDatastore
+      -- ^ @CLOUD_DATASTORE@
+      -- Cloud Datastore
+    | CloudFirestore
+      -- ^ @CLOUD_FIRESTORE@
+      -- Cloud Firestore Native
+    | CloudDatastoreCompatibility
+      -- ^ @CLOUD_DATASTORE_COMPATIBILITY@
+      -- Cloud Firestore in Datastore Mode
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ApplicationDatabaseType
+
+instance FromHttpApiData ApplicationDatabaseType where
+    parseQueryParam = \case
+        "DATABASE_TYPE_UNSPECIFIED" -> Right DatabaseTypeUnspecified
+        "CLOUD_DATASTORE" -> Right CloudDatastore
+        "CLOUD_FIRESTORE" -> Right CloudFirestore
+        "CLOUD_DATASTORE_COMPATIBILITY" -> Right CloudDatastoreCompatibility
+        x -> Left ("Unable to parse ApplicationDatabaseType from: " <> x)
+
+instance ToHttpApiData ApplicationDatabaseType where
+    toQueryParam = \case
+        DatabaseTypeUnspecified -> "DATABASE_TYPE_UNSPECIFIED"
+        CloudDatastore -> "CLOUD_DATASTORE"
+        CloudFirestore -> "CLOUD_FIRESTORE"
+        CloudDatastoreCompatibility -> "CLOUD_DATASTORE_COMPATIBILITY"
+
+instance FromJSON ApplicationDatabaseType where
+    parseJSON = parseJSONText "ApplicationDatabaseType"
+
+instance ToJSON ApplicationDatabaseType where
     toJSON = toJSONText
 
 -- | Security (HTTPS) enforcement for this URL.
@@ -464,6 +759,38 @@ instance FromJSON ResourceRecordType where
 instance ToJSON ResourceRecordType where
     toJSON = toJSONText
 
+-- | Controls the set of fields returned in the List response.
+data AppsServicesVersionsListView
+    = ASVLVBasic
+      -- ^ @BASIC@
+      -- Basic version information including scaling and inbound services, but
+      -- not detailed deployment information.
+    | ASVLVFull
+      -- ^ @FULL@
+      -- The information from BASIC, plus detailed information about the
+      -- deployment. This format is required when creating resources, but is not
+      -- returned in Get or List by default.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AppsServicesVersionsListView
+
+instance FromHttpApiData AppsServicesVersionsListView where
+    parseQueryParam = \case
+        "BASIC" -> Right ASVLVBasic
+        "FULL" -> Right ASVLVFull
+        x -> Left ("Unable to parse AppsServicesVersionsListView from: " <> x)
+
+instance ToHttpApiData AppsServicesVersionsListView where
+    toQueryParam = \case
+        ASVLVBasic -> "BASIC"
+        ASVLVFull -> "FULL"
+
+instance FromJSON AppsServicesVersionsListView where
+    parseJSON = parseJSONText "AppsServicesVersionsListView"
+
+instance ToJSON AppsServicesVersionsListView where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1
@@ -538,7 +865,7 @@ instance FromJSON TrafficSplitShardBy where
 instance ToJSON TrafficSplitShardBy where
     toJSON = toJSONText
 
--- | Availability of the instance.\'OutputOnly
+-- | Output only. Availability of the instance.
 data InstanceAvailability
     = IAUnspecified
       -- ^ @UNSPECIFIED@
@@ -648,6 +975,45 @@ instance FromJSON URLMapRedirectHTTPResponseCode where
     parseJSON = parseJSONText "URLMapRedirectHTTPResponseCode"
 
 instance ToJSON URLMapRedirectHTTPResponseCode where
+    toJSON = toJSONText
+
+-- | Whether the domain creation should override any existing mappings for
+-- this domain. By default, overrides are rejected.
+data AppsDomainMAppingsCreateOverrideStrategy
+    = UnspecifiedDomainOverrideStrategy
+      -- ^ @UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY@
+      -- Strategy unspecified. Defaults to STRICT.
+    | Strict
+      -- ^ @STRICT@
+      -- Overrides not allowed. If a mapping already exists for the specified
+      -- domain, the request will return an ALREADY_EXISTS (409).
+    | Override
+      -- ^ @OVERRIDE@
+      -- Overrides allowed. If a mapping already exists for the specified domain,
+      -- the request will overwrite it. Note that this might stop another Google
+      -- product from serving. For example, if the domain is mapped to another
+      -- App Engine application, that app will no longer serve from that domain.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AppsDomainMAppingsCreateOverrideStrategy
+
+instance FromHttpApiData AppsDomainMAppingsCreateOverrideStrategy where
+    parseQueryParam = \case
+        "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY" -> Right UnspecifiedDomainOverrideStrategy
+        "STRICT" -> Right Strict
+        "OVERRIDE" -> Right Override
+        x -> Left ("Unable to parse AppsDomainMAppingsCreateOverrideStrategy from: " <> x)
+
+instance ToHttpApiData AppsDomainMAppingsCreateOverrideStrategy where
+    toQueryParam = \case
+        UnspecifiedDomainOverrideStrategy -> "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY"
+        Strict -> "STRICT"
+        Override -> "OVERRIDE"
+
+instance FromJSON AppsDomainMAppingsCreateOverrideStrategy where
+    parseJSON = parseJSONText "AppsDomainMAppingsCreateOverrideStrategy"
+
+instance ToJSON AppsDomainMAppingsCreateOverrideStrategy where
     toJSON = toJSONText
 
 -- | The action to take on matched requests.
@@ -763,4 +1129,38 @@ instance FromJSON APIConfigHandlerLogin where
     parseJSON = parseJSONText "APIConfigHandlerLogin"
 
 instance ToJSON APIConfigHandlerLogin where
+    toJSON = toJSONText
+
+-- | The egress setting for the connector, controlling what traffic is
+-- diverted through it.
+data VPCAccessConnectorEgressSetting
+    = EgressSettingUnspecified
+      -- ^ @EGRESS_SETTING_UNSPECIFIED@
+    | AllTraffic
+      -- ^ @ALL_TRAFFIC@
+      -- Force the use of VPC Access for all egress traffic from the function.
+    | PrivateIPRanges
+      -- ^ @PRIVATE_IP_RANGES@
+      -- Use the VPC Access Connector for private IP space from RFC1918.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VPCAccessConnectorEgressSetting
+
+instance FromHttpApiData VPCAccessConnectorEgressSetting where
+    parseQueryParam = \case
+        "EGRESS_SETTING_UNSPECIFIED" -> Right EgressSettingUnspecified
+        "ALL_TRAFFIC" -> Right AllTraffic
+        "PRIVATE_IP_RANGES" -> Right PrivateIPRanges
+        x -> Left ("Unable to parse VPCAccessConnectorEgressSetting from: " <> x)
+
+instance ToHttpApiData VPCAccessConnectorEgressSetting where
+    toQueryParam = \case
+        EgressSettingUnspecified -> "EGRESS_SETTING_UNSPECIFIED"
+        AllTraffic -> "ALL_TRAFFIC"
+        PrivateIPRanges -> "PRIVATE_IP_RANGES"
+
+instance FromJSON VPCAccessConnectorEgressSetting where
+    parseJSON = parseJSONText "VPCAccessConnectorEgressSetting"
+
+instance ToJSON VPCAccessConnectorEgressSetting where
     toJSON = toJSONText

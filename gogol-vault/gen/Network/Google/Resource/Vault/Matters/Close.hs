@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Closes the specified matter. Returns matter with updated state.
+-- Closes the specified matter. Returns the matter with updated state.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.close@.
 module Network.Google.Resource.Vault.Matters.Close
@@ -33,17 +33,17 @@ module Network.Google.Resource.Vault.Matters.Close
     , MattersClose
 
     -- * Request Lenses
-    , mcXgafv
-    , mcUploadProtocol
-    , mcAccessToken
-    , mcUploadType
-    , mcPayload
-    , mcMatterId
-    , mcCallback
+    , matXgafv
+    , matUploadProtocol
+    , matAccessToken
+    , matUploadType
+    , matPayload
+    , matMatterId
+    , matCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.close@ method which the
 -- 'MattersClose' request conforms to.
@@ -60,18 +60,18 @@ type MattersCloseResource =
                        ReqBody '[JSON] CloseMatterRequest :>
                          Post '[JSON] CloseMatterResponse
 
--- | Closes the specified matter. Returns matter with updated state.
+-- | Closes the specified matter. Returns the matter with updated state.
 --
 -- /See:/ 'mattersClose' smart constructor.
 data MattersClose =
   MattersClose'
-    { _mcXgafv          :: !(Maybe Xgafv)
-    , _mcUploadProtocol :: !(Maybe Text)
-    , _mcAccessToken    :: !(Maybe Text)
-    , _mcUploadType     :: !(Maybe Text)
-    , _mcPayload        :: !CloseMatterRequest
-    , _mcMatterId       :: !Text
-    , _mcCallback       :: !(Maybe Text)
+    { _matXgafv :: !(Maybe Xgafv)
+    , _matUploadProtocol :: !(Maybe Text)
+    , _matAccessToken :: !(Maybe Text)
+    , _matUploadType :: !(Maybe Text)
+    , _matPayload :: !CloseMatterRequest
+    , _matMatterId :: !Text
+    , _matCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,82 +80,83 @@ data MattersClose =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mcXgafv'
+-- * 'matXgafv'
 --
--- * 'mcUploadProtocol'
+-- * 'matUploadProtocol'
 --
--- * 'mcAccessToken'
+-- * 'matAccessToken'
 --
--- * 'mcUploadType'
+-- * 'matUploadType'
 --
--- * 'mcPayload'
+-- * 'matPayload'
 --
--- * 'mcMatterId'
+-- * 'matMatterId'
 --
--- * 'mcCallback'
+-- * 'matCallback'
 mattersClose
-    :: CloseMatterRequest -- ^ 'mcPayload'
-    -> Text -- ^ 'mcMatterId'
+    :: CloseMatterRequest -- ^ 'matPayload'
+    -> Text -- ^ 'matMatterId'
     -> MattersClose
-mattersClose pMcPayload_ pMcMatterId_ =
+mattersClose pMatPayload_ pMatMatterId_ =
   MattersClose'
-    { _mcXgafv = Nothing
-    , _mcUploadProtocol = Nothing
-    , _mcAccessToken = Nothing
-    , _mcUploadType = Nothing
-    , _mcPayload = pMcPayload_
-    , _mcMatterId = pMcMatterId_
-    , _mcCallback = Nothing
+    { _matXgafv = Nothing
+    , _matUploadProtocol = Nothing
+    , _matAccessToken = Nothing
+    , _matUploadType = Nothing
+    , _matPayload = pMatPayload_
+    , _matMatterId = pMatMatterId_
+    , _matCallback = Nothing
     }
 
 
 -- | V1 error format.
-mcXgafv :: Lens' MattersClose (Maybe Xgafv)
-mcXgafv = lens _mcXgafv (\ s a -> s{_mcXgafv = a})
+matXgafv :: Lens' MattersClose (Maybe Xgafv)
+matXgafv = lens _matXgafv (\ s a -> s{_matXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-mcUploadProtocol :: Lens' MattersClose (Maybe Text)
-mcUploadProtocol
-  = lens _mcUploadProtocol
-      (\ s a -> s{_mcUploadProtocol = a})
+matUploadProtocol :: Lens' MattersClose (Maybe Text)
+matUploadProtocol
+  = lens _matUploadProtocol
+      (\ s a -> s{_matUploadProtocol = a})
 
 -- | OAuth access token.
-mcAccessToken :: Lens' MattersClose (Maybe Text)
-mcAccessToken
-  = lens _mcAccessToken
-      (\ s a -> s{_mcAccessToken = a})
+matAccessToken :: Lens' MattersClose (Maybe Text)
+matAccessToken
+  = lens _matAccessToken
+      (\ s a -> s{_matAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-mcUploadType :: Lens' MattersClose (Maybe Text)
-mcUploadType
-  = lens _mcUploadType (\ s a -> s{_mcUploadType = a})
+matUploadType :: Lens' MattersClose (Maybe Text)
+matUploadType
+  = lens _matUploadType
+      (\ s a -> s{_matUploadType = a})
 
 -- | Multipart request metadata.
-mcPayload :: Lens' MattersClose CloseMatterRequest
-mcPayload
-  = lens _mcPayload (\ s a -> s{_mcPayload = a})
+matPayload :: Lens' MattersClose CloseMatterRequest
+matPayload
+  = lens _matPayload (\ s a -> s{_matPayload = a})
 
 -- | The matter ID.
-mcMatterId :: Lens' MattersClose Text
-mcMatterId
-  = lens _mcMatterId (\ s a -> s{_mcMatterId = a})
+matMatterId :: Lens' MattersClose Text
+matMatterId
+  = lens _matMatterId (\ s a -> s{_matMatterId = a})
 
 -- | JSONP
-mcCallback :: Lens' MattersClose (Maybe Text)
-mcCallback
-  = lens _mcCallback (\ s a -> s{_mcCallback = a})
+matCallback :: Lens' MattersClose (Maybe Text)
+matCallback
+  = lens _matCallback (\ s a -> s{_matCallback = a})
 
 instance GoogleRequest MattersClose where
         type Rs MattersClose = CloseMatterResponse
         type Scopes MattersClose =
              '["https://www.googleapis.com/auth/ediscovery"]
         requestClient MattersClose'{..}
-          = go _mcMatterId _mcXgafv _mcUploadProtocol
-              _mcAccessToken
-              _mcUploadType
-              _mcCallback
+          = go _matMatterId _matXgafv _matUploadProtocol
+              _matAccessToken
+              _matUploadType
+              _matCallback
               (Just AltJSON)
-              _mcPayload
+              _matPayload
               vaultService
           where go
                   = buildClient (Proxy :: Proxy MattersCloseResource)

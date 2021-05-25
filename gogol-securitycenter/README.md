@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Security Command Center.
+A client library for the Google Security Command Center.
 
 
 ## Contribute

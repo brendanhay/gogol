@@ -26,7 +26,7 @@
 -- provided via other methods. Submitted key-value pairs can be retrieved
 -- as part of the orders resource.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.setlineitemmetadata@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.setlineitemmetadata@.
 module Network.Google.Resource.Content.Orders.Setlineitemmetadata
     (
     -- * REST Resource
@@ -37,13 +37,18 @@ module Network.Google.Resource.Content.Orders.Setlineitemmetadata
     , OrdersSetlineitemmetadata
 
     -- * Request Lenses
+    , ossXgafv
     , ossMerchantId
+    , ossUploadProtocol
+    , ossAccessToken
+    , ossUploadType
     , ossPayload
     , ossOrderId
+    , ossCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.setlineitemmetadata@ method which the
 -- 'OrdersSetlineitemmetadata' request conforms to.
@@ -54,9 +59,14 @@ type OrdersSetlineitemmetadataResource =
            "orders" :>
              Capture "orderId" Text :>
                "setLineItemMetadata" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersSetLineItemMetadataRequest :>
-                     Post '[JSON] OrdersSetLineItemMetadataResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersSetLineItemMetadataRequest :>
+                               Post '[JSON] OrdersSetLineItemMetadataResponse
 
 -- | Sets (or overrides if it already exists) merchant provided annotations
 -- in the form of key-value pairs. A common use case would be to supply us
@@ -67,9 +77,14 @@ type OrdersSetlineitemmetadataResource =
 -- /See:/ 'ordersSetlineitemmetadata' smart constructor.
 data OrdersSetlineitemmetadata =
   OrdersSetlineitemmetadata'
-    { _ossMerchantId :: !(Textual Word64)
-    , _ossPayload    :: !OrdersSetLineItemMetadataRequest
-    , _ossOrderId    :: !Text
+    { _ossXgafv :: !(Maybe Xgafv)
+    , _ossMerchantId :: !(Textual Word64)
+    , _ossUploadProtocol :: !(Maybe Text)
+    , _ossAccessToken :: !(Maybe Text)
+    , _ossUploadType :: !(Maybe Text)
+    , _ossPayload :: !OrdersSetLineItemMetadataRequest
+    , _ossOrderId :: !Text
+    , _ossCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,11 +93,21 @@ data OrdersSetlineitemmetadata =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ossXgafv'
+--
 -- * 'ossMerchantId'
+--
+-- * 'ossUploadProtocol'
+--
+-- * 'ossAccessToken'
+--
+-- * 'ossUploadType'
 --
 -- * 'ossPayload'
 --
 -- * 'ossOrderId'
+--
+-- * 'ossCallback'
 ordersSetlineitemmetadata
     :: Word64 -- ^ 'ossMerchantId'
     -> OrdersSetLineItemMetadataRequest -- ^ 'ossPayload'
@@ -90,11 +115,20 @@ ordersSetlineitemmetadata
     -> OrdersSetlineitemmetadata
 ordersSetlineitemmetadata pOssMerchantId_ pOssPayload_ pOssOrderId_ =
   OrdersSetlineitemmetadata'
-    { _ossMerchantId = _Coerce # pOssMerchantId_
+    { _ossXgafv = Nothing
+    , _ossMerchantId = _Coerce # pOssMerchantId_
+    , _ossUploadProtocol = Nothing
+    , _ossAccessToken = Nothing
+    , _ossUploadType = Nothing
     , _ossPayload = pOssPayload_
     , _ossOrderId = pOssOrderId_
+    , _ossCallback = Nothing
     }
 
+
+-- | V1 error format.
+ossXgafv :: Lens' OrdersSetlineitemmetadata (Maybe Xgafv)
+ossXgafv = lens _ossXgafv (\ s a -> s{_ossXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -103,6 +137,24 @@ ossMerchantId
   = lens _ossMerchantId
       (\ s a -> s{_ossMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ossUploadProtocol :: Lens' OrdersSetlineitemmetadata (Maybe Text)
+ossUploadProtocol
+  = lens _ossUploadProtocol
+      (\ s a -> s{_ossUploadProtocol = a})
+
+-- | OAuth access token.
+ossAccessToken :: Lens' OrdersSetlineitemmetadata (Maybe Text)
+ossAccessToken
+  = lens _ossAccessToken
+      (\ s a -> s{_ossAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ossUploadType :: Lens' OrdersSetlineitemmetadata (Maybe Text)
+ossUploadType
+  = lens _ossUploadType
+      (\ s a -> s{_ossUploadType = a})
 
 -- | Multipart request metadata.
 ossPayload :: Lens' OrdersSetlineitemmetadata OrdersSetLineItemMetadataRequest
@@ -114,6 +166,11 @@ ossOrderId :: Lens' OrdersSetlineitemmetadata Text
 ossOrderId
   = lens _ossOrderId (\ s a -> s{_ossOrderId = a})
 
+-- | JSONP
+ossCallback :: Lens' OrdersSetlineitemmetadata (Maybe Text)
+ossCallback
+  = lens _ossCallback (\ s a -> s{_ossCallback = a})
+
 instance GoogleRequest OrdersSetlineitemmetadata
          where
         type Rs OrdersSetlineitemmetadata =
@@ -121,7 +178,12 @@ instance GoogleRequest OrdersSetlineitemmetadata
         type Scopes OrdersSetlineitemmetadata =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersSetlineitemmetadata'{..}
-          = go _ossMerchantId _ossOrderId (Just AltJSON)
+          = go _ossMerchantId _ossOrderId _ossXgafv
+              _ossUploadProtocol
+              _ossAccessToken
+              _ossUploadType
+              _ossCallback
+              (Just AltJSON)
               _ossPayload
               shoppingContentService
           where go

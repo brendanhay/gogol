@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Style.Patch
     , spTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.patch@ method which the
 -- 'StylePatch' request conforms to.

@@ -41,8 +41,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.Get
     , apgCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.get@ method which the
 -- 'AccessPoliciesGet' request conforms to.
@@ -61,12 +61,12 @@ type AccessPoliciesGetResource =
 -- /See:/ 'accessPoliciesGet' smart constructor.
 data AccessPoliciesGet =
   AccessPoliciesGet'
-    { _apgXgafv          :: !(Maybe Xgafv)
+    { _apgXgafv :: !(Maybe Xgafv)
     , _apgUploadProtocol :: !(Maybe Text)
-    , _apgAccessToken    :: !(Maybe Text)
-    , _apgUploadType     :: !(Maybe Text)
-    , _apgName           :: !Text
-    , _apgCallback       :: !(Maybe Text)
+    , _apgAccessToken :: !(Maybe Text)
+    , _apgUploadType :: !(Maybe Text)
+    , _apgName :: !Text
+    , _apgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

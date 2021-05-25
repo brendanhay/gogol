@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.TargetInstances.List
     , TargetInstancesList
 
     -- * Request Lenses
+    , tilReturnPartialSuccess
     , tilOrderBy
     , tilProject
     , tilZone
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.TargetInstances.List
     , tilMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetInstances.list@ method which the
 -- 'TargetInstancesList' request conforms to.
@@ -55,12 +56,13 @@ type TargetInstancesListResource =
              "zones" :>
                Capture "zone" Text :>
                  "targetInstances" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] TargetInstanceList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] TargetInstanceList
 
 -- | Retrieves a list of TargetInstance resources available to the specified
 -- project and zone.
@@ -68,11 +70,12 @@ type TargetInstancesListResource =
 -- /See:/ 'targetInstancesList' smart constructor.
 data TargetInstancesList =
   TargetInstancesList'
-    { _tilOrderBy    :: !(Maybe Text)
-    , _tilProject    :: !Text
-    , _tilZone       :: !Text
-    , _tilFilter     :: !(Maybe Text)
-    , _tilPageToken  :: !(Maybe Text)
+    { _tilReturnPartialSuccess :: !(Maybe Bool)
+    , _tilOrderBy :: !(Maybe Text)
+    , _tilProject :: !Text
+    , _tilZone :: !Text
+    , _tilFilter :: !(Maybe Text)
+    , _tilPageToken :: !(Maybe Text)
     , _tilMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,6 +84,8 @@ data TargetInstancesList =
 -- | Creates a value of 'TargetInstancesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tilReturnPartialSuccess'
 --
 -- * 'tilOrderBy'
 --
@@ -99,7 +104,8 @@ targetInstancesList
     -> TargetInstancesList
 targetInstancesList pTilProject_ pTilZone_ =
   TargetInstancesList'
-    { _tilOrderBy = Nothing
+    { _tilReturnPartialSuccess = Nothing
+    , _tilOrderBy = Nothing
     , _tilProject = pTilProject_
     , _tilZone = pTilZone_
     , _tilFilter = Nothing
@@ -108,14 +114,21 @@ targetInstancesList pTilProject_ pTilZone_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+tilReturnPartialSuccess :: Lens' TargetInstancesList (Maybe Bool)
+tilReturnPartialSuccess
+  = lens _tilReturnPartialSuccess
+      (\ s a -> s{_tilReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 tilOrderBy :: Lens' TargetInstancesList (Maybe Text)
 tilOrderBy
   = lens _tilOrderBy (\ s a -> s{_tilOrderBy = a})
@@ -132,34 +145,36 @@ tilZone = lens _tilZone (\ s a -> s{_tilZone = a})
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 tilFilter :: Lens' TargetInstancesList (Maybe Text)
 tilFilter
   = lens _tilFilter (\ s a -> s{_tilFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 tilPageToken :: Lens' TargetInstancesList (Maybe Text)
 tilPageToken
   = lens _tilPageToken (\ s a -> s{_tilPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 tilMaxResults :: Lens' TargetInstancesList Word32
 tilMaxResults
   = lens _tilMaxResults
@@ -173,7 +188,9 @@ instance GoogleRequest TargetInstancesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetInstancesList'{..}
-          = go _tilProject _tilZone _tilOrderBy _tilFilter
+          = go _tilProject _tilZone _tilReturnPartialSuccess
+              _tilOrderBy
+              _tilFilter
               _tilPageToken
               (Just _tilMaxResults)
               (Just AltJSON)

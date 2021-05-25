@@ -43,8 +43,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.GetDdl
     , pidgdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.getDdl@ method which the
 -- 'ProjectsInstancesDatabasesGetDdl' request conforms to.
@@ -67,12 +67,12 @@ type ProjectsInstancesDatabasesGetDdlResource =
 -- /See:/ 'projectsInstancesDatabasesGetDdl' smart constructor.
 data ProjectsInstancesDatabasesGetDdl =
   ProjectsInstancesDatabasesGetDdl'
-    { _pidgdXgafv          :: !(Maybe Xgafv)
+    { _pidgdXgafv :: !(Maybe Xgafv)
     , _pidgdUploadProtocol :: !(Maybe Text)
-    , _pidgdDatabase       :: !Text
-    , _pidgdAccessToken    :: !(Maybe Text)
-    , _pidgdUploadType     :: !(Maybe Text)
-    , _pidgdCallback       :: !(Maybe Text)
+    , _pidgdDatabase :: !Text
+    , _pidgdAccessToken :: !(Maybe Text)
+    , _pidgdUploadType :: !(Maybe Text)
+    , _pidgdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -117,7 +117,8 @@ pidgdUploadProtocol
   = lens _pidgdUploadProtocol
       (\ s a -> s{_pidgdUploadProtocol = a})
 
--- | Required. The database whose schema we wish to get.
+-- | Required. The database whose schema we wish to get. Values are of the
+-- form \`projects\/\/instances\/\/databases\/\`
 pidgdDatabase :: Lens' ProjectsInstancesDatabasesGetDdl Text
 pidgdDatabase
   = lens _pidgdDatabase

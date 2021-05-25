@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a channel\'s watermark image.
+-- Allows removal of channel watermark.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.watermarks.unset@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.watermarks.unset@.
 module Network.Google.Resource.YouTube.Watermarks.UnSet
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.YouTube.Watermarks.UnSet
     , WatermarksUnSet
 
     -- * Request Lenses
+    , wusXgafv
+    , wusUploadProtocol
+    , wusAccessToken
+    , wusUploadType
     , wusChannelId
     , wusOnBehalfOfContentOwner
+    , wusCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.watermarks.unset@ method which the
 -- 'WatermarksUnSet' request conforms to.
@@ -48,16 +53,26 @@ type WatermarksUnSetResource =
          "watermarks" :>
            "unset" :>
              QueryParam "channelId" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] ()
 
--- | Deletes a channel\'s watermark image.
+-- | Allows removal of channel watermark.
 --
 -- /See:/ 'watermarksUnSet' smart constructor.
 data WatermarksUnSet =
   WatermarksUnSet'
-    { _wusChannelId              :: !Text
+    { _wusXgafv :: !(Maybe Xgafv)
+    , _wusUploadProtocol :: !(Maybe Text)
+    , _wusAccessToken :: !(Maybe Text)
+    , _wusUploadType :: !(Maybe Text)
+    , _wusChannelId :: !Text
     , _wusOnBehalfOfContentOwner :: !(Maybe Text)
+    , _wusCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,25 +81,62 @@ data WatermarksUnSet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'wusXgafv'
+--
+-- * 'wusUploadProtocol'
+--
+-- * 'wusAccessToken'
+--
+-- * 'wusUploadType'
+--
 -- * 'wusChannelId'
 --
 -- * 'wusOnBehalfOfContentOwner'
+--
+-- * 'wusCallback'
 watermarksUnSet
     :: Text -- ^ 'wusChannelId'
     -> WatermarksUnSet
 watermarksUnSet pWusChannelId_ =
   WatermarksUnSet'
-    {_wusChannelId = pWusChannelId_, _wusOnBehalfOfContentOwner = Nothing}
+    { _wusXgafv = Nothing
+    , _wusUploadProtocol = Nothing
+    , _wusAccessToken = Nothing
+    , _wusUploadType = Nothing
+    , _wusChannelId = pWusChannelId_
+    , _wusOnBehalfOfContentOwner = Nothing
+    , _wusCallback = Nothing
+    }
 
 
--- | The channelId parameter specifies the YouTube channel ID for which the
--- watermark is being unset.
+-- | V1 error format.
+wusXgafv :: Lens' WatermarksUnSet (Maybe Xgafv)
+wusXgafv = lens _wusXgafv (\ s a -> s{_wusXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+wusUploadProtocol :: Lens' WatermarksUnSet (Maybe Text)
+wusUploadProtocol
+  = lens _wusUploadProtocol
+      (\ s a -> s{_wusUploadProtocol = a})
+
+-- | OAuth access token.
+wusAccessToken :: Lens' WatermarksUnSet (Maybe Text)
+wusAccessToken
+  = lens _wusAccessToken
+      (\ s a -> s{_wusAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+wusUploadType :: Lens' WatermarksUnSet (Maybe Text)
+wusUploadType
+  = lens _wusUploadType
+      (\ s a -> s{_wusUploadType = a})
+
 wusChannelId :: Lens' WatermarksUnSet Text
 wusChannelId
   = lens _wusChannelId (\ s a -> s{_wusChannelId = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -98,6 +150,11 @@ wusOnBehalfOfContentOwner
   = lens _wusOnBehalfOfContentOwner
       (\ s a -> s{_wusOnBehalfOfContentOwner = a})
 
+-- | JSONP
+wusCallback :: Lens' WatermarksUnSet (Maybe Text)
+wusCallback
+  = lens _wusCallback (\ s a -> s{_wusCallback = a})
+
 instance GoogleRequest WatermarksUnSet where
         type Rs WatermarksUnSet = ()
         type Scopes WatermarksUnSet =
@@ -105,7 +162,12 @@ instance GoogleRequest WatermarksUnSet where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient WatermarksUnSet'{..}
-          = go (Just _wusChannelId) _wusOnBehalfOfContentOwner
+          = go (Just _wusChannelId) _wusXgafv
+              _wusUploadProtocol
+              _wusAccessToken
+              _wusUploadType
+              _wusOnBehalfOfContentOwner
+              _wusCallback
               (Just AltJSON)
               youTubeService
           where go

@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Addresses.Delete
     , adddRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.delete@ method which the
 -- 'AddressesDelete' request conforms to.
@@ -62,9 +62,9 @@ type AddressesDeleteResource =
 data AddressesDelete =
   AddressesDelete'
     { _adddRequestId :: !(Maybe Text)
-    , _adddProject   :: !Text
-    , _adddAddress   :: !Text
-    , _adddRegion    :: !Text
+    , _adddProject :: !Text
+    , _adddAddress :: !Text
+    , _adddRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

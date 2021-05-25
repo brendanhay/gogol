@@ -16,7 +16,7 @@
 --
 module Network.Google.CloudScheduler.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Output only. State of the job.
 data JobState

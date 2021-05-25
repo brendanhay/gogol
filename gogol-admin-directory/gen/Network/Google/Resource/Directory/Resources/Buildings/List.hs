@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of buildings for an account.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.resources.buildings.list@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.resources.buildings.list@.
 module Network.Google.Resource.Directory.Resources.Buildings.List
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Directory.Resources.Buildings.List
     , ResourcesBuildingsList
 
     -- * Request Lenses
+    , rblXgafv
+    , rblUploadProtocol
+    , rblAccessToken
+    , rblUploadType
     , rblCustomer
     , rblPageToken
     , rblMaxResults
+    , rblCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.resources.buildings.list@ method which the
 -- 'ResourcesBuildingsList' request conforms to.
@@ -51,18 +56,29 @@ type ResourcesBuildingsListResource =
              Capture "customer" Text :>
                "resources" :>
                  "buildings" :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Buildings
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Int32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Buildings
 
 -- | Retrieves a list of buildings for an account.
 --
 -- /See:/ 'resourcesBuildingsList' smart constructor.
 data ResourcesBuildingsList =
   ResourcesBuildingsList'
-    { _rblCustomer   :: !Text
-    , _rblPageToken  :: !(Maybe Text)
+    { _rblXgafv :: !(Maybe Xgafv)
+    , _rblUploadProtocol :: !(Maybe Text)
+    , _rblAccessToken :: !(Maybe Text)
+    , _rblUploadType :: !(Maybe Text)
+    , _rblCustomer :: !Text
+    , _rblPageToken :: !(Maybe Text)
     , _rblMaxResults :: !(Maybe (Textual Int32))
+    , _rblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,25 +87,62 @@ data ResourcesBuildingsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rblXgafv'
+--
+-- * 'rblUploadProtocol'
+--
+-- * 'rblAccessToken'
+--
+-- * 'rblUploadType'
+--
 -- * 'rblCustomer'
 --
 -- * 'rblPageToken'
 --
 -- * 'rblMaxResults'
+--
+-- * 'rblCallback'
 resourcesBuildingsList
     :: Text -- ^ 'rblCustomer'
     -> ResourcesBuildingsList
 resourcesBuildingsList pRblCustomer_ =
   ResourcesBuildingsList'
-    { _rblCustomer = pRblCustomer_
+    { _rblXgafv = Nothing
+    , _rblUploadProtocol = Nothing
+    , _rblAccessToken = Nothing
+    , _rblUploadType = Nothing
+    , _rblCustomer = pRblCustomer_
     , _rblPageToken = Nothing
     , _rblMaxResults = Nothing
+    , _rblCallback = Nothing
     }
 
 
--- | The unique ID for the customer\'s G Suite account. As an account
--- administrator, you can also use the my_customer alias to represent your
--- account\'s customer ID.
+-- | V1 error format.
+rblXgafv :: Lens' ResourcesBuildingsList (Maybe Xgafv)
+rblXgafv = lens _rblXgafv (\ s a -> s{_rblXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rblUploadProtocol :: Lens' ResourcesBuildingsList (Maybe Text)
+rblUploadProtocol
+  = lens _rblUploadProtocol
+      (\ s a -> s{_rblUploadProtocol = a})
+
+-- | OAuth access token.
+rblAccessToken :: Lens' ResourcesBuildingsList (Maybe Text)
+rblAccessToken
+  = lens _rblAccessToken
+      (\ s a -> s{_rblAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rblUploadType :: Lens' ResourcesBuildingsList (Maybe Text)
+rblUploadType
+  = lens _rblUploadType
+      (\ s a -> s{_rblUploadType = a})
+
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s customer ID.
 rblCustomer :: Lens' ResourcesBuildingsList Text
 rblCustomer
   = lens _rblCustomer (\ s a -> s{_rblCustomer = a})
@@ -106,13 +159,23 @@ rblMaxResults
       (\ s a -> s{_rblMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+rblCallback :: Lens' ResourcesBuildingsList (Maybe Text)
+rblCallback
+  = lens _rblCallback (\ s a -> s{_rblCallback = a})
+
 instance GoogleRequest ResourcesBuildingsList where
         type Rs ResourcesBuildingsList = Buildings
         type Scopes ResourcesBuildingsList =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
                "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
         requestClient ResourcesBuildingsList'{..}
-          = go _rblCustomer _rblPageToken _rblMaxResults
+          = go _rblCustomer _rblXgafv _rblUploadProtocol
+              _rblAccessToken
+              _rblUploadType
+              _rblPageToken
+              _rblMaxResults
+              _rblCallback
               (Just AltJSON)
               directoryService
           where go

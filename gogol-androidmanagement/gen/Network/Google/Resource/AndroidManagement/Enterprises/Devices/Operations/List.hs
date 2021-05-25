@@ -52,8 +52,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.
     , edolCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.operations.list@ method which the
 -- 'EnterprisesDevicesOperationsList' request conforms to.
@@ -84,15 +84,15 @@ type EnterprisesDevicesOperationsListResource =
 -- /See:/ 'enterprisesDevicesOperationsList' smart constructor.
 data EnterprisesDevicesOperationsList =
   EnterprisesDevicesOperationsList'
-    { _edolXgafv          :: !(Maybe Xgafv)
+    { _edolXgafv :: !(Maybe Xgafv)
     , _edolUploadProtocol :: !(Maybe Text)
-    , _edolAccessToken    :: !(Maybe Text)
-    , _edolUploadType     :: !(Maybe Text)
-    , _edolName           :: !Text
-    , _edolFilter         :: !(Maybe Text)
-    , _edolPageToken      :: !(Maybe Text)
-    , _edolPageSize       :: !(Maybe (Textual Int32))
-    , _edolCallback       :: !(Maybe Text)
+    , _edolAccessToken :: !(Maybe Text)
+    , _edolUploadType :: !(Maybe Text)
+    , _edolName :: !Text
+    , _edolFilter :: !(Maybe Text)
+    , _edolPageToken :: !(Maybe Text)
+    , _edolPageSize :: !(Maybe (Textual Int32))
+    , _edolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

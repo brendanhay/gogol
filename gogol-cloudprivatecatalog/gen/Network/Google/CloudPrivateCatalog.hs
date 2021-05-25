@@ -16,7 +16,7 @@
 -- Enable cloud users to discover enterprise catalogs and products in their
 -- organizations.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference>
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference>
 module Network.Google.CloudPrivateCatalog
     (
     -- * Service Configuration
@@ -119,17 +119,17 @@ module Network.Google.CloudPrivateCatalog
     , gcpvpCreateTime
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudPrivateCatalog.Folders.Catalogs.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Folders.Products.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Folders.Versions.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Organizations.Catalogs.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Organizations.Products.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Organizations.Versions.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Projects.Catalogs.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Projects.Products.Search
-import           Network.Google.Resource.CloudPrivateCatalog.Projects.Versions.Search
+import Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Resource.CloudPrivateCatalog.Folders.Catalogs.Search
+import Network.Google.Resource.CloudPrivateCatalog.Folders.Products.Search
+import Network.Google.Resource.CloudPrivateCatalog.Folders.Versions.Search
+import Network.Google.Resource.CloudPrivateCatalog.Organizations.Catalogs.Search
+import Network.Google.Resource.CloudPrivateCatalog.Organizations.Products.Search
+import Network.Google.Resource.CloudPrivateCatalog.Organizations.Versions.Search
+import Network.Google.Resource.CloudPrivateCatalog.Projects.Catalogs.Search
+import Network.Google.Resource.CloudPrivateCatalog.Projects.Products.Search
+import Network.Google.Resource.CloudPrivateCatalog.Projects.Versions.Search
 
 {- $resources
 TODO

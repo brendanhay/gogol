@@ -32,10 +32,12 @@ module Network.Google.Resource.Drive.Files.EmptyTrash
     , filesEmptyTrash
     , FilesEmptyTrash
 
+    -- * Request Lenses
+    , fetEnforceSingleParent
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.emptyTrash@ method which the
 -- 'FilesEmptyTrash' request conforms to.
@@ -44,29 +46,44 @@ type FilesEmptyTrashResource =
        "v3" :>
          "files" :>
            "trash" :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "enforceSingleParent" Bool :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes all of the user\'s trashed files.
 --
 -- /See:/ 'filesEmptyTrash' smart constructor.
-data FilesEmptyTrash =
+newtype FilesEmptyTrash =
   FilesEmptyTrash'
+    { _fetEnforceSingleParent :: Bool
+    }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'FilesEmptyTrash' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fetEnforceSingleParent'
 filesEmptyTrash
     :: FilesEmptyTrash
-filesEmptyTrash = FilesEmptyTrash'
+filesEmptyTrash = FilesEmptyTrash' {_fetEnforceSingleParent = False}
 
+
+-- | Deprecated. If an item is not in a shared drive and its last parent is
+-- deleted but the item itself is not, the item will be placed under its
+-- owner\'s root.
+fetEnforceSingleParent :: Lens' FilesEmptyTrash Bool
+fetEnforceSingleParent
+  = lens _fetEnforceSingleParent
+      (\ s a -> s{_fetEnforceSingleParent = a})
 
 instance GoogleRequest FilesEmptyTrash where
         type Rs FilesEmptyTrash = ()
         type Scopes FilesEmptyTrash =
              '["https://www.googleapis.com/auth/drive"]
-        requestClient FilesEmptyTrash'{}
-          = go (Just AltJSON) driveService
+        requestClient FilesEmptyTrash'{..}
+          = go (Just _fetEnforceSingleParent) (Just AltJSON)
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy FilesEmptyTrashResource)

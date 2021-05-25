@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a building. This method supports patch semantics.
+-- Patches a building.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.resources.buildings.patch@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.resources.buildings.patch@.
 module Network.Google.Resource.Directory.Resources.Buildings.Patch
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.Directory.Resources.Buildings.Patch
     , ResourcesBuildingsPatch
 
     -- * Request Lenses
+    , rbpXgafv
+    , rbpUploadProtocol
+    , rbpAccessToken
     , rbpBuildingId
+    , rbpUploadType
     , rbpPayload
     , rbpCustomer
     , rbpCoordinatesSource
+    , rbpCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.resources.buildings.patch@ method which the
 -- 'ResourcesBuildingsPatch' request conforms to.
@@ -53,21 +58,32 @@ type ResourcesBuildingsPatchResource =
                "resources" :>
                  "buildings" :>
                    Capture "buildingId" Text :>
-                     QueryParam "coordinatesSource"
-                       ResourcesBuildingsPatchCoordinatesSource
-                       :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Building :> Patch '[JSON] Building
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "coordinatesSource"
+                               ResourcesBuildingsPatchCoordinatesSource
+                               :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Building :>
+                                     Patch '[JSON] Building
 
--- | Updates a building. This method supports patch semantics.
+-- | Patches a building.
 --
 -- /See:/ 'resourcesBuildingsPatch' smart constructor.
 data ResourcesBuildingsPatch =
   ResourcesBuildingsPatch'
-    { _rbpBuildingId        :: !Text
-    , _rbpPayload           :: !Building
-    , _rbpCustomer          :: !Text
+    { _rbpXgafv :: !(Maybe Xgafv)
+    , _rbpUploadProtocol :: !(Maybe Text)
+    , _rbpAccessToken :: !(Maybe Text)
+    , _rbpBuildingId :: !Text
+    , _rbpUploadType :: !(Maybe Text)
+    , _rbpPayload :: !Building
+    , _rbpCustomer :: !Text
     , _rbpCoordinatesSource :: !ResourcesBuildingsPatchCoordinatesSource
+    , _rbpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,13 +92,23 @@ data ResourcesBuildingsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rbpXgafv'
+--
+-- * 'rbpUploadProtocol'
+--
+-- * 'rbpAccessToken'
+--
 -- * 'rbpBuildingId'
+--
+-- * 'rbpUploadType'
 --
 -- * 'rbpPayload'
 --
 -- * 'rbpCustomer'
 --
 -- * 'rbpCoordinatesSource'
+--
+-- * 'rbpCallback'
 resourcesBuildingsPatch
     :: Text -- ^ 'rbpBuildingId'
     -> Building -- ^ 'rbpPayload'
@@ -90,27 +116,54 @@ resourcesBuildingsPatch
     -> ResourcesBuildingsPatch
 resourcesBuildingsPatch pRbpBuildingId_ pRbpPayload_ pRbpCustomer_ =
   ResourcesBuildingsPatch'
-    { _rbpBuildingId = pRbpBuildingId_
+    { _rbpXgafv = Nothing
+    , _rbpUploadProtocol = Nothing
+    , _rbpAccessToken = Nothing
+    , _rbpBuildingId = pRbpBuildingId_
+    , _rbpUploadType = Nothing
     , _rbpPayload = pRbpPayload_
     , _rbpCustomer = pRbpCustomer_
     , _rbpCoordinatesSource = SourceUnspecified
+    , _rbpCallback = Nothing
     }
 
 
--- | The ID of the building to update.
+-- | V1 error format.
+rbpXgafv :: Lens' ResourcesBuildingsPatch (Maybe Xgafv)
+rbpXgafv = lens _rbpXgafv (\ s a -> s{_rbpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rbpUploadProtocol :: Lens' ResourcesBuildingsPatch (Maybe Text)
+rbpUploadProtocol
+  = lens _rbpUploadProtocol
+      (\ s a -> s{_rbpUploadProtocol = a})
+
+-- | OAuth access token.
+rbpAccessToken :: Lens' ResourcesBuildingsPatch (Maybe Text)
+rbpAccessToken
+  = lens _rbpAccessToken
+      (\ s a -> s{_rbpAccessToken = a})
+
+-- | The id of the building to update.
 rbpBuildingId :: Lens' ResourcesBuildingsPatch Text
 rbpBuildingId
   = lens _rbpBuildingId
       (\ s a -> s{_rbpBuildingId = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rbpUploadType :: Lens' ResourcesBuildingsPatch (Maybe Text)
+rbpUploadType
+  = lens _rbpUploadType
+      (\ s a -> s{_rbpUploadType = a})
 
 -- | Multipart request metadata.
 rbpPayload :: Lens' ResourcesBuildingsPatch Building
 rbpPayload
   = lens _rbpPayload (\ s a -> s{_rbpPayload = a})
 
--- | The unique ID for the customer\'s G Suite account. As an account
--- administrator, you can also use the my_customer alias to represent your
--- account\'s customer ID.
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s customer ID.
 rbpCustomer :: Lens' ResourcesBuildingsPatch Text
 rbpCustomer
   = lens _rbpCustomer (\ s a -> s{_rbpCustomer = a})
@@ -121,13 +174,22 @@ rbpCoordinatesSource
   = lens _rbpCoordinatesSource
       (\ s a -> s{_rbpCoordinatesSource = a})
 
+-- | JSONP
+rbpCallback :: Lens' ResourcesBuildingsPatch (Maybe Text)
+rbpCallback
+  = lens _rbpCallback (\ s a -> s{_rbpCallback = a})
+
 instance GoogleRequest ResourcesBuildingsPatch where
         type Rs ResourcesBuildingsPatch = Building
         type Scopes ResourcesBuildingsPatch =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesBuildingsPatch'{..}
-          = go _rbpCustomer _rbpBuildingId
+          = go _rbpCustomer _rbpBuildingId _rbpXgafv
+              _rbpUploadProtocol
+              _rbpAccessToken
+              _rbpUploadType
               (Just _rbpCoordinatesSource)
+              _rbpCallback
               (Just AltJSON)
               _rbpPayload
               directoryService

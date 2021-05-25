@@ -20,8 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the policy for this project. Returns a default policy if the
--- project does not have one.
+-- A policy specifies the attestors that must attest to a container image,
+-- before the project is allowed to deploy that image. There is at most one
+-- policy per project. All image admission requests are permitted if a
+-- project has no policy. Gets the policy for this project. Returns a
+-- default policy if the project does not have one.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.getPolicy@.
 module Network.Google.Resource.BinaryAuthorization.Projects.GetPolicy
@@ -42,13 +45,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.GetPolicy
     , pgpCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.getPolicy@ method which the
 -- 'ProjectsGetPolicy' request conforms to.
 type ProjectsGetPolicyResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -57,18 +60,21 @@ type ProjectsGetPolicyResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the policy for this project. Returns a default policy if the
--- project does not have one.
+-- | A policy specifies the attestors that must attest to a container image,
+-- before the project is allowed to deploy that image. There is at most one
+-- policy per project. All image admission requests are permitted if a
+-- project has no policy. Gets the policy for this project. Returns a
+-- default policy if the project does not have one.
 --
 -- /See:/ 'projectsGetPolicy' smart constructor.
 data ProjectsGetPolicy =
   ProjectsGetPolicy'
-    { _pgpXgafv          :: !(Maybe Xgafv)
+    { _pgpXgafv :: !(Maybe Xgafv)
     , _pgpUploadProtocol :: !(Maybe Text)
-    , _pgpAccessToken    :: !(Maybe Text)
-    , _pgpUploadType     :: !(Maybe Text)
-    , _pgpName           :: !Text
-    , _pgpCallback       :: !(Maybe Text)
+    , _pgpAccessToken :: !(Maybe Text)
+    , _pgpUploadType :: !(Maybe Text)
+    , _pgpName :: !Text
+    , _pgpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

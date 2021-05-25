@@ -22,7 +22,11 @@
 --
 -- DeleteInstance deletes an instance associated with the given study,
 -- series, and SOP Instance UID. Delete requests are equivalent to the GET
--- requests specified in the WADO-RS standard.
+-- requests specified in the Retrieve transaction. Study and series search
+-- results can take a few seconds to be updated after an instance is
+-- deleted using DeleteInstance. For samples that show how to call
+-- DeleteInstance, see [Deleting a study, series, or
+-- instance](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#deleting_a_study_series_or_instance).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.Delete
@@ -44,14 +48,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsssidDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDeleteResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -64,18 +68,22 @@ type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDeleteResource
 
 -- | DeleteInstance deletes an instance associated with the given study,
 -- series, and SOP Instance UID. Delete requests are equivalent to the GET
--- requests specified in the WADO-RS standard.
+-- requests specified in the Retrieve transaction. Study and series search
+-- results can take a few seconds to be updated after an instance is
+-- deleted using DeleteInstance. For samples that show how to call
+-- DeleteInstance, see [Deleting a study, series, or
+-- instance](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#deleting_a_study_series_or_instance).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete =
   ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete'
-    { _pldsdsssidParent         :: !Text
-    , _pldsdsssidXgafv          :: !(Maybe Xgafv)
+    { _pldsdsssidParent :: !Text
+    , _pldsdsssidXgafv :: !(Maybe Xgafv)
     , _pldsdsssidUploadProtocol :: !(Maybe Text)
-    , _pldsdsssidAccessToken    :: !(Maybe Text)
-    , _pldsdsssidUploadType     :: !(Maybe Text)
-    , _pldsdsssidCallback       :: !(Maybe Text)
-    , _pldsdsssidDicomWebPath   :: !Text
+    , _pldsdsssidAccessToken :: !(Maybe Text)
+    , _pldsdsssidUploadType :: !(Maybe Text)
+    , _pldsdsssidCallback :: !(Maybe Text)
+    , _pldsdsssidDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,8 +121,8 @@ projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete pPldsdsssidPare
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsssidParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete Text
 pldsdsssidParent
   = lens _pldsdsssidParent
@@ -150,9 +158,8 @@ pldsdsssidCallback
   = lens _pldsdsssidCallback
       (\ s a -> s{_pldsdsssidCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g.,
--- \`studies\/{study_id}\/series\/{series_id}\/instances\/{instance_id}\`).
+-- | The path of the DeleteInstance request. For example,
+-- \`studies\/{study_uid}\/series\/{series_uid}\/instances\/{instance_uid}\`.
 pldsdsssidDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesDelete Text
 pldsdsssidDicomWebPath
   = lens _pldsdsssidDicomWebPath

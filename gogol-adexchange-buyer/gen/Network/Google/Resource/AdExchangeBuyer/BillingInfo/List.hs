@@ -35,8 +35,8 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
 
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.billingInfo.list@ method which the
 -- 'BillingInfoList'' request conforms to.

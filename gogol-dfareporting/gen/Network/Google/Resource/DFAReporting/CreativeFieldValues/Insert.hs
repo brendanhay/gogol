@@ -22,7 +22,7 @@
 --
 -- Inserts a new creative field value.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFieldValues.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeFieldValues.insert@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
     (
     -- * REST Resource
@@ -34,26 +34,36 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
 
     -- * Request Lenses
     , cfviCreativeFieldId
+    , cfviXgafv
+    , cfviUploadProtocol
+    , cfviAccessToken
+    , cfviUploadType
     , cfviProFileId
     , cfviPayload
+    , cfviCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFieldValues.insert@ method which the
 -- 'CreativeFieldValuesInsert' request conforms to.
 type CreativeFieldValuesInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
                Capture "creativeFieldId" (Textual Int64) :>
                  "creativeFieldValues" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] CreativeFieldValue :>
-                       Post '[JSON] CreativeFieldValue
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CreativeFieldValue :>
+                                 Post '[JSON] CreativeFieldValue
 
 -- | Inserts a new creative field value.
 --
@@ -61,8 +71,13 @@ type CreativeFieldValuesInsertResource =
 data CreativeFieldValuesInsert =
   CreativeFieldValuesInsert'
     { _cfviCreativeFieldId :: !(Textual Int64)
-    , _cfviProFileId       :: !(Textual Int64)
-    , _cfviPayload         :: !CreativeFieldValue
+    , _cfviXgafv :: !(Maybe Xgafv)
+    , _cfviUploadProtocol :: !(Maybe Text)
+    , _cfviAccessToken :: !(Maybe Text)
+    , _cfviUploadType :: !(Maybe Text)
+    , _cfviProFileId :: !(Textual Int64)
+    , _cfviPayload :: !CreativeFieldValue
+    , _cfviCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,9 +88,19 @@ data CreativeFieldValuesInsert =
 --
 -- * 'cfviCreativeFieldId'
 --
+-- * 'cfviXgafv'
+--
+-- * 'cfviUploadProtocol'
+--
+-- * 'cfviAccessToken'
+--
+-- * 'cfviUploadType'
+--
 -- * 'cfviProFileId'
 --
 -- * 'cfviPayload'
+--
+-- * 'cfviCallback'
 creativeFieldValuesInsert
     :: Int64 -- ^ 'cfviCreativeFieldId'
     -> Int64 -- ^ 'cfviProFileId'
@@ -84,8 +109,13 @@ creativeFieldValuesInsert
 creativeFieldValuesInsert pCfviCreativeFieldId_ pCfviProFileId_ pCfviPayload_ =
   CreativeFieldValuesInsert'
     { _cfviCreativeFieldId = _Coerce # pCfviCreativeFieldId_
+    , _cfviXgafv = Nothing
+    , _cfviUploadProtocol = Nothing
+    , _cfviAccessToken = Nothing
+    , _cfviUploadType = Nothing
     , _cfviProFileId = _Coerce # pCfviProFileId_
     , _cfviPayload = pCfviPayload_
+    , _cfviCallback = Nothing
     }
 
 
@@ -95,6 +125,29 @@ cfviCreativeFieldId
   = lens _cfviCreativeFieldId
       (\ s a -> s{_cfviCreativeFieldId = a})
       . _Coerce
+
+-- | V1 error format.
+cfviXgafv :: Lens' CreativeFieldValuesInsert (Maybe Xgafv)
+cfviXgafv
+  = lens _cfviXgafv (\ s a -> s{_cfviXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cfviUploadProtocol :: Lens' CreativeFieldValuesInsert (Maybe Text)
+cfviUploadProtocol
+  = lens _cfviUploadProtocol
+      (\ s a -> s{_cfviUploadProtocol = a})
+
+-- | OAuth access token.
+cfviAccessToken :: Lens' CreativeFieldValuesInsert (Maybe Text)
+cfviAccessToken
+  = lens _cfviAccessToken
+      (\ s a -> s{_cfviAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cfviUploadType :: Lens' CreativeFieldValuesInsert (Maybe Text)
+cfviUploadType
+  = lens _cfviUploadType
+      (\ s a -> s{_cfviUploadType = a})
 
 -- | User profile ID associated with this request.
 cfviProFileId :: Lens' CreativeFieldValuesInsert Int64
@@ -108,6 +161,11 @@ cfviPayload :: Lens' CreativeFieldValuesInsert CreativeFieldValue
 cfviPayload
   = lens _cfviPayload (\ s a -> s{_cfviPayload = a})
 
+-- | JSONP
+cfviCallback :: Lens' CreativeFieldValuesInsert (Maybe Text)
+cfviCallback
+  = lens _cfviCallback (\ s a -> s{_cfviCallback = a})
+
 instance GoogleRequest CreativeFieldValuesInsert
          where
         type Rs CreativeFieldValuesInsert =
@@ -115,7 +173,11 @@ instance GoogleRequest CreativeFieldValuesInsert
         type Scopes CreativeFieldValuesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesInsert'{..}
-          = go _cfviProFileId _cfviCreativeFieldId
+          = go _cfviProFileId _cfviCreativeFieldId _cfviXgafv
+              _cfviUploadProtocol
+              _cfviAccessToken
+              _cfviUploadType
+              _cfviCallback
               (Just AltJSON)
               _cfviPayload
               dFAReportingService

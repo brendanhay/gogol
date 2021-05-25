@@ -23,7 +23,7 @@
 -- Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.operations.list@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.operations.list@.
 module Network.Google.Resource.SQL.Operations.List
     (
     -- * REST Resource
@@ -34,28 +34,37 @@ module Network.Google.Resource.SQL.Operations.List
     , OperationsList
 
     -- * Request Lenses
+    , olXgafv
+    , olUploadProtocol
     , olProject
+    , olAccessToken
+    , olUploadType
     , olPageToken
     , olMaxResults
+    , olCallback
     , olInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.operations.list@ method which the
 -- 'OperationsList' request conforms to.
 type OperationsListResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "operations" :>
-               QueryParam "instance" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] OperationsListResponse
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "operations" :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "instance" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] OperationsListResponse
 
 -- | Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
@@ -63,10 +72,15 @@ type OperationsListResource =
 -- /See:/ 'operationsList' smart constructor.
 data OperationsList =
   OperationsList'
-    { _olProject    :: !Text
-    , _olPageToken  :: !(Maybe Text)
+    { _olXgafv :: !(Maybe Xgafv)
+    , _olUploadProtocol :: !(Maybe Text)
+    , _olProject :: !Text
+    , _olAccessToken :: !(Maybe Text)
+    , _olUploadType :: !(Maybe Text)
+    , _olPageToken :: !(Maybe Text)
     , _olMaxResults :: !(Maybe (Textual Word32))
-    , _olInstance   :: !Text
+    , _olCallback :: !(Maybe Text)
+    , _olInstance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,30 +89,65 @@ data OperationsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'olXgafv'
+--
+-- * 'olUploadProtocol'
+--
 -- * 'olProject'
+--
+-- * 'olAccessToken'
+--
+-- * 'olUploadType'
 --
 -- * 'olPageToken'
 --
 -- * 'olMaxResults'
 --
+-- * 'olCallback'
+--
 -- * 'olInstance'
 operationsList
     :: Text -- ^ 'olProject'
-    -> Text -- ^ 'olInstance'
     -> OperationsList
-operationsList pOlProject_ pOlInstance_ =
+operationsList pOlProject_ =
   OperationsList'
-    { _olProject = pOlProject_
+    { _olXgafv = Nothing
+    , _olUploadProtocol = Nothing
+    , _olProject = pOlProject_
+    , _olAccessToken = Nothing
+    , _olUploadType = Nothing
     , _olPageToken = Nothing
     , _olMaxResults = Nothing
-    , _olInstance = pOlInstance_
+    , _olCallback = Nothing
+    , _olInstance = Nothing
     }
 
+
+-- | V1 error format.
+olXgafv :: Lens' OperationsList (Maybe Xgafv)
+olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+olUploadProtocol :: Lens' OperationsList (Maybe Text)
+olUploadProtocol
+  = lens _olUploadProtocol
+      (\ s a -> s{_olUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 olProject :: Lens' OperationsList Text
 olProject
   = lens _olProject (\ s a -> s{_olProject = a})
+
+-- | OAuth access token.
+olAccessToken :: Lens' OperationsList (Maybe Text)
+olAccessToken
+  = lens _olAccessToken
+      (\ s a -> s{_olAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+olUploadType :: Lens' OperationsList (Maybe Text)
+olUploadType
+  = lens _olUploadType (\ s a -> s{_olUploadType = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
@@ -112,8 +161,13 @@ olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+olCallback :: Lens' OperationsList (Maybe Text)
+olCallback
+  = lens _olCallback (\ s a -> s{_olCallback = a})
+
 -- | Cloud SQL instance ID. This does not include the project ID.
-olInstance :: Lens' OperationsList Text
+olInstance :: Lens' OperationsList (Maybe Text)
 olInstance
   = lens _olInstance (\ s a -> s{_olInstance = a})
 
@@ -123,8 +177,13 @@ instance GoogleRequest OperationsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient OperationsList'{..}
-          = go _olProject (Just _olInstance) _olPageToken
+          = go _olProject _olXgafv _olUploadProtocol
+              _olAccessToken
+              _olUploadType
+              _olPageToken
               _olMaxResults
+              _olCallback
+              _olInstance
               (Just AltJSON)
               sQLAdminService
           where go

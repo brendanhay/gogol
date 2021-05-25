@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy.Can return NOT_FOUND, INVALID_ARGUMENT, and
+-- PERMISSION_DENIED errors.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.setIamPolicy@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
     , prjsipCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.jobs.setIamPolicy@ method which the
 -- 'ProjectsRegionsJobsSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ProjectsRegionsJobsSetIAMPolicyResource =
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy.Can return NOT_FOUND, INVALID_ARGUMENT, and
+-- PERMISSION_DENIED errors.
 --
 -- /See:/ 'projectsRegionsJobsSetIAMPolicy' smart constructor.
 data ProjectsRegionsJobsSetIAMPolicy =
   ProjectsRegionsJobsSetIAMPolicy'
-    { _prjsipXgafv          :: !(Maybe Xgafv)
+    { _prjsipXgafv :: !(Maybe Xgafv)
     , _prjsipUploadProtocol :: !(Maybe Text)
-    , _prjsipAccessToken    :: !(Maybe Text)
-    , _prjsipUploadType     :: !(Maybe Text)
-    , _prjsipPayload        :: !SetIAMPolicyRequest
-    , _prjsipResource       :: !Text
-    , _prjsipCallback       :: !(Maybe Text)
+    , _prjsipAccessToken :: !(Maybe Text)
+    , _prjsipUploadType :: !(Maybe Text)
+    , _prjsipPayload :: !SetIAMPolicyRequest
+    , _prjsipResource :: !Text
+    , _prjsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

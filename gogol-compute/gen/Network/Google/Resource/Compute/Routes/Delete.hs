@@ -33,13 +33,13 @@ module Network.Google.Resource.Compute.Routes.Delete
     , RoutesDelete
 
     -- * Request Lenses
-    , rdRequestId
-    , rdProject
-    , rdRoute
+    , rouoRequestId
+    , rouoProject
+    , rouoRoute
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.delete@ method which the
 -- 'RoutesDelete' request conforms to.
@@ -59,9 +59,9 @@ type RoutesDeleteResource =
 -- /See:/ 'routesDelete' smart constructor.
 data RoutesDelete =
   RoutesDelete'
-    { _rdRequestId :: !(Maybe Text)
-    , _rdProject   :: !Text
-    , _rdRoute     :: !Text
+    { _rouoRequestId :: !(Maybe Text)
+    , _rouoProject :: !Text
+    , _rouoRoute :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,18 +70,21 @@ data RoutesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdRequestId'
+-- * 'rouoRequestId'
 --
--- * 'rdProject'
+-- * 'rouoProject'
 --
--- * 'rdRoute'
+-- * 'rouoRoute'
 routesDelete
-    :: Text -- ^ 'rdProject'
-    -> Text -- ^ 'rdRoute'
+    :: Text -- ^ 'rouoProject'
+    -> Text -- ^ 'rouoRoute'
     -> RoutesDelete
-routesDelete pRdProject_ pRdRoute_ =
+routesDelete pRouoProject_ pRouoRoute_ =
   RoutesDelete'
-    {_rdRequestId = Nothing, _rdProject = pRdProject_, _rdRoute = pRdRoute_}
+    { _rouoRequestId = Nothing
+    , _rouoProject = pRouoProject_
+    , _rouoRoute = pRouoRoute_
+    }
 
 
 -- | An optional request ID to identify requests. Specify a unique request ID
@@ -94,18 +97,20 @@ routesDelete pRdProject_ pRdRoute_ =
 -- accidentally creating duplicate commitments. The request ID must be a
 -- valid UUID with the exception that zero UUID is not supported
 -- (00000000-0000-0000-0000-000000000000).
-rdRequestId :: Lens' RoutesDelete (Maybe Text)
-rdRequestId
-  = lens _rdRequestId (\ s a -> s{_rdRequestId = a})
+rouoRequestId :: Lens' RoutesDelete (Maybe Text)
+rouoRequestId
+  = lens _rouoRequestId
+      (\ s a -> s{_rouoRequestId = a})
 
 -- | Project ID for this request.
-rdProject :: Lens' RoutesDelete Text
-rdProject
-  = lens _rdProject (\ s a -> s{_rdProject = a})
+rouoProject :: Lens' RoutesDelete Text
+rouoProject
+  = lens _rouoProject (\ s a -> s{_rouoProject = a})
 
 -- | Name of the Route resource to delete.
-rdRoute :: Lens' RoutesDelete Text
-rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
+rouoRoute :: Lens' RoutesDelete Text
+rouoRoute
+  = lens _rouoRoute (\ s a -> s{_rouoRoute = a})
 
 instance GoogleRequest RoutesDelete where
         type Rs RoutesDelete = Operation
@@ -113,7 +118,8 @@ instance GoogleRequest RoutesDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutesDelete'{..}
-          = go _rdProject _rdRoute _rdRequestId (Just AltJSON)
+          = go _rouoProject _rouoRoute _rouoRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutesDeleteResource)

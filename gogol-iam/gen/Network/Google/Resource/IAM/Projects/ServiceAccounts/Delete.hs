@@ -20,7 +20,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a ServiceAccount.
+-- Deletes a ServiceAccount. **Warning:** After you delete a service
+-- account, you might not be able to undelete it. If you know that you need
+-- to re-enable the service account in the future, use
+-- DisableServiceAccount instead. If you delete a service account, IAM
+-- permanently removes the service account 30 days later. Google Cloud
+-- cannot recover the service account after it is permanently removed, even
+-- if you file a support request. To help avoid unplanned outages, we
+-- recommend that you disable the service account before you delete it. Use
+-- DisableServiceAccount to disable the service account, then wait at least
+-- 24 hours and watch for unintended consequences. If there are no
+-- unintended consequences, you can delete the service account.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.delete@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
@@ -41,8 +51,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
     , pCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.delete@ method which the
 -- 'ProjectsServiceAccountsDelete' request conforms to.
@@ -56,17 +66,27 @@ type ProjectsServiceAccountsDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a ServiceAccount.
+-- | Deletes a ServiceAccount. **Warning:** After you delete a service
+-- account, you might not be able to undelete it. If you know that you need
+-- to re-enable the service account in the future, use
+-- DisableServiceAccount instead. If you delete a service account, IAM
+-- permanently removes the service account 30 days later. Google Cloud
+-- cannot recover the service account after it is permanently removed, even
+-- if you file a support request. To help avoid unplanned outages, we
+-- recommend that you disable the service account before you delete it. Use
+-- DisableServiceAccount to disable the service account, then wait at least
+-- 24 hours and watch for unintended consequences. If there are no
+-- unintended consequences, you can delete the service account.
 --
 -- /See:/ 'projectsServiceAccountsDelete' smart constructor.
 data ProjectsServiceAccountsDelete =
   ProjectsServiceAccountsDelete'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,11 +140,11 @@ pUploadType :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
 pUploadType
   = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
--- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
--- wildcard for the \`PROJECT_ID\` will infer the project from the account.
--- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
--- of the service account.
+-- | Required. The resource name of the service account in the following
+-- format: \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using
+-- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
+-- the account. The \`ACCOUNT\` value can be the \`email\` address or the
+-- \`unique_id\` of the service account.
 pName :: Lens' ProjectsServiceAccountsDelete Text
 pName = lens _pName (\ s a -> s{_pName = a})
 

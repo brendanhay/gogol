@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a search application.
+-- Deletes a search application. **Note:** This API requires an admin
+-- account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.delete@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.delete@.
 module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Delete
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Delete
     , ssadCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.searchapplications.delete@ method which the
 -- 'SettingsSearchApplicationsDelete' request conforms to.
@@ -59,18 +60,19 @@ type SettingsSearchApplicationsDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a search application.
+-- | Deletes a search application. **Note:** This API requires an admin
+-- account to execute.
 --
 -- /See:/ 'settingsSearchApplicationsDelete' smart constructor.
 data SettingsSearchApplicationsDelete =
   SettingsSearchApplicationsDelete'
-    { _ssadXgafv                       :: !(Maybe Xgafv)
-    , _ssadUploadProtocol              :: !(Maybe Text)
-    , _ssadAccessToken                 :: !(Maybe Text)
-    , _ssadUploadType                  :: !(Maybe Text)
-    , _ssadName                        :: !Text
+    { _ssadXgafv :: !(Maybe Xgafv)
+    , _ssadUploadProtocol :: !(Maybe Text)
+    , _ssadAccessToken :: !(Maybe Text)
+    , _ssadUploadType :: !(Maybe Text)
+    , _ssadName :: !Text
     , _ssadDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _ssadCallback                    :: !(Maybe Text)
+    , _ssadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,8 +132,8 @@ ssadUploadType
   = lens _ssadUploadType
       (\ s a -> s{_ssadUploadType = a})
 
--- | The name of the search application to be deleted.
--- Format: applications\/{application_id}.
+-- | The name of the search application to be deleted. Format:
+-- applications\/{application_id}.
 ssadName :: Lens' SettingsSearchApplicationsDelete Text
 ssadName = lens _ssadName (\ s a -> s{_ssadName = a})
 

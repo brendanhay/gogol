@@ -1,6 +1,6 @@
 name:                  gogol-admin-directory
 version:               0.5.0
-synopsis:              Google Admin Directory SDK.
+synopsis:              Google Admin SDK SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Manages enterprise resources such as users and groups, administrative
-    notifications, security features, and more.
+    Admin SDK lets administrators of enterprise domains to view and manage
+    resources like user, groups etc. It also provides audit and usage
+    reports of domain.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -37,6 +38,16 @@ library
           Network.Google.Directory
         , Network.Google.Directory.Types
         , Network.Google.Resource.Admin.Channels.Stop
+        , Network.Google.Resource.Admin.Customer.Devices.Chromeos.Commands.Get
+        , Network.Google.Resource.Admin.Customer.Devices.Chromeos.IssueCommand
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchCreatePrinters
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.BatchDeletePrinters
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Create
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Delete
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Get
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.List
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.ListPrinterModels
+        , Network.Google.Resource.Admin.Customers.Chrome.Printers.Patch
         , Network.Google.Resource.Directory.Asps.Delete
         , Network.Google.Resource.Directory.Asps.Get
         , Network.Google.Resource.Directory.Asps.List
@@ -77,11 +88,6 @@ library
         , Network.Google.Resource.Directory.MobileDevices.Delete
         , Network.Google.Resource.Directory.MobileDevices.Get
         , Network.Google.Resource.Directory.MobileDevices.List
-        , Network.Google.Resource.Directory.Notifications.Delete
-        , Network.Google.Resource.Directory.Notifications.Get
-        , Network.Google.Resource.Directory.Notifications.List
-        , Network.Google.Resource.Directory.Notifications.Patch
-        , Network.Google.Resource.Directory.Notifications.Update
         , Network.Google.Resource.Directory.OrgUnits.Delete
         , Network.Google.Resource.Directory.OrgUnits.Get
         , Network.Google.Resource.Directory.OrgUnits.Insert
@@ -89,8 +95,6 @@ library
         , Network.Google.Resource.Directory.OrgUnits.Patch
         , Network.Google.Resource.Directory.OrgUnits.Update
         , Network.Google.Resource.Directory.Privileges.List
-        , Network.Google.Resource.Directory.ResolvedAppAccessSettings.GetSettings
-        , Network.Google.Resource.Directory.ResolvedAppAccessSettings.ListTrustedApps
         , Network.Google.Resource.Directory.Resources.Buildings.Delete
         , Network.Google.Resource.Directory.Resources.Buildings.Get
         , Network.Google.Resource.Directory.Resources.Buildings.Insert
@@ -129,6 +133,7 @@ library
         , Network.Google.Resource.Directory.Tokens.Delete
         , Network.Google.Resource.Directory.Tokens.Get
         , Network.Google.Resource.Directory.Tokens.List
+        , Network.Google.Resource.Directory.TwoStepVerification.TurnOff
         , Network.Google.Resource.Directory.Users.Aliases.Delete
         , Network.Google.Resource.Directory.Users.Aliases.Insert
         , Network.Google.Resource.Directory.Users.Aliases.List
@@ -143,6 +148,7 @@ library
         , Network.Google.Resource.Directory.Users.Photos.Get
         , Network.Google.Resource.Directory.Users.Photos.Patch
         , Network.Google.Resource.Directory.Users.Photos.Update
+        , Network.Google.Resource.Directory.Users.SignOut
         , Network.Google.Resource.Directory.Users.Undelete
         , Network.Google.Resource.Directory.Users.Update
         , Network.Google.Resource.Directory.Users.Watch

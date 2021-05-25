@@ -21,9 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates new feedback for an alert. Attempting to create a feedback for a
--- non-existent alert returns \`NOT_FOUND\` error.
+-- non-existent alert returns \`NOT_FOUND\` error. Attempting to create a
+-- feedback for an alert that is marked for deletion returns
+-- \`FAILED_PRECONDITION\' error.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.feedback.create@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.feedback.create@.
 module Network.Google.Resource.AlertCenter.Alerts.Feedback.Create
     (
     -- * REST Resource
@@ -44,8 +46,8 @@ module Network.Google.Resource.AlertCenter.Alerts.Feedback.Create
     , afcCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.alerts.feedback.create@ method which the
 -- 'AlertsFeedbackCreate' request conforms to.
@@ -65,19 +67,21 @@ type AlertsFeedbackCreateResource =
                              Post '[JSON] AlertFeedback
 
 -- | Creates new feedback for an alert. Attempting to create a feedback for a
--- non-existent alert returns \`NOT_FOUND\` error.
+-- non-existent alert returns \`NOT_FOUND\` error. Attempting to create a
+-- feedback for an alert that is marked for deletion returns
+-- \`FAILED_PRECONDITION\' error.
 --
 -- /See:/ 'alertsFeedbackCreate' smart constructor.
 data AlertsFeedbackCreate =
   AlertsFeedbackCreate'
-    { _afcXgafv          :: !(Maybe Xgafv)
+    { _afcXgafv :: !(Maybe Xgafv)
     , _afcUploadProtocol :: !(Maybe Text)
-    , _afcAccessToken    :: !(Maybe Text)
-    , _afcAlertId        :: !Text
-    , _afcUploadType     :: !(Maybe Text)
-    , _afcPayload        :: !AlertFeedback
-    , _afcCustomerId     :: !(Maybe Text)
-    , _afcCallback       :: !(Maybe Text)
+    , _afcAccessToken :: !(Maybe Text)
+    , _afcAlertId :: !Text
+    , _afcUploadType :: !(Maybe Text)
+    , _afcPayload :: !AlertFeedback
+    , _afcCustomerId :: !(Maybe Text)
+    , _afcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,9 +154,9 @@ afcPayload :: Lens' AlertsFeedbackCreate AlertFeedback
 afcPayload
   = lens _afcPayload (\ s a -> s{_afcPayload = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alert is associated with. Inferred from the caller
--- identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alert is associated with. Inferred from the
+-- caller identity if not provided.
 afcCustomerId :: Lens' AlertsFeedbackCreate (Maybe Text)
 afcCustomerId
   = lens _afcCustomerId

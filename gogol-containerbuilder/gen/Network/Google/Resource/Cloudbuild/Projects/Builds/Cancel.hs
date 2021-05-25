@@ -43,8 +43,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel
     , pbcCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.builds.cancel@ method which the
 -- 'ProjectsBuildsCancel' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsBuildsCancelResource =
 -- /See:/ 'projectsBuildsCancel' smart constructor.
 data ProjectsBuildsCancel =
   ProjectsBuildsCancel'
-    { _pbcXgafv          :: !(Maybe Xgafv)
+    { _pbcXgafv :: !(Maybe Xgafv)
     , _pbcUploadProtocol :: !(Maybe Text)
-    , _pbcAccessToken    :: !(Maybe Text)
-    , _pbcUploadType     :: !(Maybe Text)
-    , _pbcPayload        :: !CancelBuildRequest
-    , _pbcId             :: !Text
-    , _pbcProjectId      :: !Text
-    , _pbcCallback       :: !(Maybe Text)
+    , _pbcAccessToken :: !(Maybe Text)
+    , _pbcUploadType :: !(Maybe Text)
+    , _pbcPayload :: !CancelBuildRequest
+    , _pbcId :: !Text
+    , _pbcProjectId :: !Text
+    , _pbcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,11 +144,11 @@ pbcPayload :: Lens' ProjectsBuildsCancel CancelBuildRequest
 pbcPayload
   = lens _pbcPayload (\ s a -> s{_pbcPayload = a})
 
--- | ID of the build.
+-- | Required. ID of the build.
 pbcId :: Lens' ProjectsBuildsCancel Text
 pbcId = lens _pbcId (\ s a -> s{_pbcId = a})
 
--- | ID of the project.
+-- | Required. ID of the project.
 pbcProjectId :: Lens' ProjectsBuildsCancel Text
 pbcProjectId
   = lens _pbcProjectId (\ s a -> s{_pbcProjectId = a})

@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Crea
     , bafscCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.accounts.filterSets.create@ method which the
 -- 'BiddersAccountsFilterSetsCreate' request conforms to.
@@ -68,14 +68,14 @@ type BiddersAccountsFilterSetsCreateResource =
 -- /See:/ 'biddersAccountsFilterSetsCreate' smart constructor.
 data BiddersAccountsFilterSetsCreate =
   BiddersAccountsFilterSetsCreate'
-    { _bafscXgafv          :: !(Maybe Xgafv)
+    { _bafscXgafv :: !(Maybe Xgafv)
     , _bafscUploadProtocol :: !(Maybe Text)
-    , _bafscAccessToken    :: !(Maybe Text)
-    , _bafscUploadType     :: !(Maybe Text)
-    , _bafscOwnerName      :: !Text
-    , _bafscPayload        :: !FilterSet
-    , _bafscIsTransient    :: !(Maybe Bool)
-    , _bafscCallback       :: !(Maybe Text)
+    , _bafscAccessToken :: !(Maybe Text)
+    , _bafscUploadType :: !(Maybe Text)
+    , _bafscOwnerName :: !Text
+    , _bafscPayload :: !FilterSet
+    , _bafscIsTransient :: !(Maybe Bool)
+    , _bafscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

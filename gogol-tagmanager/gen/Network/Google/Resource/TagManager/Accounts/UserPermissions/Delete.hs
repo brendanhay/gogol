@@ -23,7 +23,7 @@
 -- Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.user_permissions.delete@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.user_permissions.delete@.
 module Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
     , AccountsUserPermissionsDelete
 
     -- * Request Lenses
+    , aupdXgafv
+    , aupdUploadProtocol
     , aupdPath
+    , aupdAccessToken
+    , aupdUploadType
+    , aupdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.user_permissions.delete@ method which the
 -- 'AccountsUserPermissionsDelete' request conforms to.
@@ -46,15 +51,25 @@ type AccountsUserPermissionsDeleteResource =
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
 -- /See:/ 'accountsUserPermissionsDelete' smart constructor.
-newtype AccountsUserPermissionsDelete =
+data AccountsUserPermissionsDelete =
   AccountsUserPermissionsDelete'
-    { _aupdPath :: Text
+    { _aupdXgafv :: !(Maybe Xgafv)
+    , _aupdUploadProtocol :: !(Maybe Text)
+    , _aupdPath :: !Text
+    , _aupdAccessToken :: !(Maybe Text)
+    , _aupdUploadType :: !(Maybe Text)
+    , _aupdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,18 +78,63 @@ newtype AccountsUserPermissionsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aupdXgafv'
+--
+-- * 'aupdUploadProtocol'
+--
 -- * 'aupdPath'
+--
+-- * 'aupdAccessToken'
+--
+-- * 'aupdUploadType'
+--
+-- * 'aupdCallback'
 accountsUserPermissionsDelete
     :: Text -- ^ 'aupdPath'
     -> AccountsUserPermissionsDelete
 accountsUserPermissionsDelete pAupdPath_ =
-  AccountsUserPermissionsDelete' {_aupdPath = pAupdPath_}
+  AccountsUserPermissionsDelete'
+    { _aupdXgafv = Nothing
+    , _aupdUploadProtocol = Nothing
+    , _aupdPath = pAupdPath_
+    , _aupdAccessToken = Nothing
+    , _aupdUploadType = Nothing
+    , _aupdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+aupdXgafv :: Lens' AccountsUserPermissionsDelete (Maybe Xgafv)
+aupdXgafv
+  = lens _aupdXgafv (\ s a -> s{_aupdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aupdUploadProtocol :: Lens' AccountsUserPermissionsDelete (Maybe Text)
+aupdUploadProtocol
+  = lens _aupdUploadProtocol
+      (\ s a -> s{_aupdUploadProtocol = a})
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}
 aupdPath :: Lens' AccountsUserPermissionsDelete Text
 aupdPath = lens _aupdPath (\ s a -> s{_aupdPath = a})
+
+-- | OAuth access token.
+aupdAccessToken :: Lens' AccountsUserPermissionsDelete (Maybe Text)
+aupdAccessToken
+  = lens _aupdAccessToken
+      (\ s a -> s{_aupdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aupdUploadType :: Lens' AccountsUserPermissionsDelete (Maybe Text)
+aupdUploadType
+  = lens _aupdUploadType
+      (\ s a -> s{_aupdUploadType = a})
+
+-- | JSONP
+aupdCallback :: Lens' AccountsUserPermissionsDelete (Maybe Text)
+aupdCallback
+  = lens _aupdCallback (\ s a -> s{_aupdCallback = a})
 
 instance GoogleRequest AccountsUserPermissionsDelete
          where
@@ -82,7 +142,12 @@ instance GoogleRequest AccountsUserPermissionsDelete
         type Scopes AccountsUserPermissionsDelete =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsUserPermissionsDelete'{..}
-          = go _aupdPath (Just AltJSON) tagManagerService
+          = go _aupdPath _aupdXgafv _aupdUploadProtocol
+              _aupdAccessToken
+              _aupdUploadType
+              _aupdCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

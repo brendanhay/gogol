@@ -47,8 +47,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.C
     , plkrckckvdCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.destroy@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy' request conforms to.
@@ -75,13 +75,13 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroyResource
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy =
   ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy'
-    { _plkrckckvdXgafv          :: !(Maybe Xgafv)
+    { _plkrckckvdXgafv :: !(Maybe Xgafv)
     , _plkrckckvdUploadProtocol :: !(Maybe Text)
-    , _plkrckckvdAccessToken    :: !(Maybe Text)
-    , _plkrckckvdUploadType     :: !(Maybe Text)
-    , _plkrckckvdPayload        :: !DestroyCryptoKeyVersionRequest
-    , _plkrckckvdName           :: !Text
-    , _plkrckckvdCallback       :: !(Maybe Text)
+    , _plkrckckvdAccessToken :: !(Maybe Text)
+    , _plkrckckvdUploadType :: !(Maybe Text)
+    , _plkrckckvdPayload :: !DestroyCryptoKeyVersionRequest
+    , _plkrckckvdName :: !Text
+    , _plkrckckvdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,7 +149,7 @@ plkrckckvdPayload
   = lens _plkrckckvdPayload
       (\ s a -> s{_plkrckckvdPayload = a})
 
--- | The resource name of the CryptoKeyVersion to destroy.
+-- | Required. The resource name of the CryptoKeyVersion to destroy.
 plkrckckvdName :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy Text
 plkrckckvdName
   = lens _plkrckckvdName

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of annotations, possibly filtered.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.annotations.list@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.List
     (
     -- * REST Resource
@@ -33,7 +33,11 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.List
     , MyLibraryAnnotationsList
 
     -- * Request Lenses
+    , mlalXgafv
+    , mlalUploadProtocol
+    , mlalAccessToken
     , mlalContentVersion
+    , mlalUploadType
     , mlalShowDeleted
     , mlalUpdatedMax
     , mlalUpdatedMin
@@ -43,10 +47,11 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.List
     , mlalPageToken
     , mlalLayerId
     , mlalMaxResults
+    , mlalCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.list@ method which the
 -- 'MyLibraryAnnotationsList' request conforms to.
@@ -55,34 +60,45 @@ type MyLibraryAnnotationsListResource =
        "v1" :>
          "mylibrary" :>
            "annotations" :>
-             QueryParam "contentVersion" Text :>
-               QueryParam "showDeleted" Bool :>
-                 QueryParam "updatedMax" Text :>
-                   QueryParam "updatedMin" Text :>
-                     QueryParams "layerIds" Text :>
-                       QueryParam "volumeId" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "layerId" Text :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] Annotations
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "contentVersion" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "showDeleted" Bool :>
+                         QueryParam "updatedMax" Text :>
+                           QueryParam "updatedMin" Text :>
+                             QueryParams "layerIds" Text :>
+                               QueryParam "volumeId" Text :>
+                                 QueryParam "source" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "layerId" Text :>
+                                       QueryParam "maxResults" (Textual Word32)
+                                         :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] Annotations
 
 -- | Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ 'myLibraryAnnotationsList' smart constructor.
 data MyLibraryAnnotationsList =
   MyLibraryAnnotationsList'
-    { _mlalContentVersion :: !(Maybe Text)
-    , _mlalShowDeleted    :: !(Maybe Bool)
-    , _mlalUpdatedMax     :: !(Maybe Text)
-    , _mlalUpdatedMin     :: !(Maybe Text)
-    , _mlalLayerIds       :: !(Maybe [Text])
-    , _mlalVolumeId       :: !(Maybe Text)
-    , _mlalSource         :: !(Maybe Text)
-    , _mlalPageToken      :: !(Maybe Text)
-    , _mlalLayerId        :: !(Maybe Text)
-    , _mlalMaxResults     :: !(Maybe (Textual Word32))
+    { _mlalXgafv :: !(Maybe Xgafv)
+    , _mlalUploadProtocol :: !(Maybe Text)
+    , _mlalAccessToken :: !(Maybe Text)
+    , _mlalContentVersion :: !(Maybe Text)
+    , _mlalUploadType :: !(Maybe Text)
+    , _mlalShowDeleted :: !(Maybe Bool)
+    , _mlalUpdatedMax :: !(Maybe Text)
+    , _mlalUpdatedMin :: !(Maybe Text)
+    , _mlalLayerIds :: !(Maybe [Text])
+    , _mlalVolumeId :: !(Maybe Text)
+    , _mlalSource :: !(Maybe Text)
+    , _mlalPageToken :: !(Maybe Text)
+    , _mlalLayerId :: !(Maybe Text)
+    , _mlalMaxResults :: !(Maybe (Textual Word32))
+    , _mlalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,7 +107,15 @@ data MyLibraryAnnotationsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlalXgafv'
+--
+-- * 'mlalUploadProtocol'
+--
+-- * 'mlalAccessToken'
+--
 -- * 'mlalContentVersion'
+--
+-- * 'mlalUploadType'
 --
 -- * 'mlalShowDeleted'
 --
@@ -110,11 +134,17 @@ data MyLibraryAnnotationsList =
 -- * 'mlalLayerId'
 --
 -- * 'mlalMaxResults'
+--
+-- * 'mlalCallback'
 myLibraryAnnotationsList
     :: MyLibraryAnnotationsList
 myLibraryAnnotationsList =
   MyLibraryAnnotationsList'
-    { _mlalContentVersion = Nothing
+    { _mlalXgafv = Nothing
+    , _mlalUploadProtocol = Nothing
+    , _mlalAccessToken = Nothing
+    , _mlalContentVersion = Nothing
+    , _mlalUploadType = Nothing
     , _mlalShowDeleted = Nothing
     , _mlalUpdatedMax = Nothing
     , _mlalUpdatedMin = Nothing
@@ -124,14 +154,38 @@ myLibraryAnnotationsList =
     , _mlalPageToken = Nothing
     , _mlalLayerId = Nothing
     , _mlalMaxResults = Nothing
+    , _mlalCallback = Nothing
     }
 
+
+-- | V1 error format.
+mlalXgafv :: Lens' MyLibraryAnnotationsList (Maybe Xgafv)
+mlalXgafv
+  = lens _mlalXgafv (\ s a -> s{_mlalXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlalUploadProtocol :: Lens' MyLibraryAnnotationsList (Maybe Text)
+mlalUploadProtocol
+  = lens _mlalUploadProtocol
+      (\ s a -> s{_mlalUploadProtocol = a})
+
+-- | OAuth access token.
+mlalAccessToken :: Lens' MyLibraryAnnotationsList (Maybe Text)
+mlalAccessToken
+  = lens _mlalAccessToken
+      (\ s a -> s{_mlalAccessToken = a})
 
 -- | The content version for the requested volume.
 mlalContentVersion :: Lens' MyLibraryAnnotationsList (Maybe Text)
 mlalContentVersion
   = lens _mlalContentVersion
       (\ s a -> s{_mlalContentVersion = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlalUploadType :: Lens' MyLibraryAnnotationsList (Maybe Text)
+mlalUploadType
+  = lens _mlalUploadType
+      (\ s a -> s{_mlalUploadType = a})
 
 -- | Set to true to return deleted annotations. updatedMin must be in the
 -- request to use this. Defaults to false.
@@ -189,12 +243,20 @@ mlalMaxResults
       (\ s a -> s{_mlalMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+mlalCallback :: Lens' MyLibraryAnnotationsList (Maybe Text)
+mlalCallback
+  = lens _mlalCallback (\ s a -> s{_mlalCallback = a})
+
 instance GoogleRequest MyLibraryAnnotationsList where
         type Rs MyLibraryAnnotationsList = Annotations
         type Scopes MyLibraryAnnotationsList =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsList'{..}
-          = go _mlalContentVersion _mlalShowDeleted
+          = go _mlalXgafv _mlalUploadProtocol _mlalAccessToken
+              _mlalContentVersion
+              _mlalUploadType
+              _mlalShowDeleted
               _mlalUpdatedMax
               _mlalUpdatedMin
               (_mlalLayerIds ^. _Default)
@@ -203,6 +265,7 @@ instance GoogleRequest MyLibraryAnnotationsList where
               _mlalPageToken
               _mlalLayerId
               _mlalMaxResults
+              _mlalCallback
               (Just AltJSON)
               booksService
           where go

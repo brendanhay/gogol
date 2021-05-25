@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
     , mwpawluWebPropertyAdWordsLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.update@ method which the
 -- 'ManagementWebPropertyAdWordsLinksUpdate' request conforms to.
@@ -64,9 +64,9 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
 -- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
 data ManagementWebPropertyAdWordsLinksUpdate =
   ManagementWebPropertyAdWordsLinksUpdate'
-    { _mwpawluWebPropertyId            :: !Text
-    , _mwpawluPayload                  :: !EntityAdWordsLink
-    , _mwpawluAccountId                :: !Text
+    { _mwpawluWebPropertyId :: !Text
+    , _mwpawluPayload :: !EntityAdWordsLink
+    , _mwpawluAccountId :: !Text
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

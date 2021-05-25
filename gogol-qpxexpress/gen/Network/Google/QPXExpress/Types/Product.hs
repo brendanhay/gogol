@@ -17,17 +17,17 @@
 --
 module Network.Google.QPXExpress.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.QPXExpress.Types.Sum
+import Network.Google.Prelude
+import Network.Google.QPXExpress.Types.Sum
 
 -- | A QPX Express search response.
 --
 -- /See:/ 'tripOptionsResponse' smart constructor.
 data TripOptionsResponse =
   TripOptionsResponse'
-    { _torRequestId  :: !(Maybe Text)
-    , _torKind       :: !Text
-    , _torData       :: !(Maybe Data')
+    { _torRequestId :: !(Maybe Text)
+    , _torKind :: !Text
+    , _torData :: !(Maybe Data')
     , _torTripOption :: !(Maybe [TripOption])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -159,12 +159,12 @@ instance ToJSON CarrierData where
 -- /See:/ 'freeBaggageAllowance' smart constructor.
 data FreeBaggageAllowance =
   FreeBaggageAllowance'
-    { _fbaKind          :: !Text
-    , _fbaPounds        :: !(Maybe (Textual Int32))
+    { _fbaKind :: !Text
+    , _fbaPounds :: !(Maybe (Textual Int32))
     , _fbaBagDescriptor :: !(Maybe [BagDescriptor])
     , _fbaKilosPerPiece :: !(Maybe (Textual Int32))
-    , _fbaKilos         :: !(Maybe (Textual Int32))
-    , _fbaPieces        :: !(Maybe (Textual Int32))
+    , _fbaKilos :: !(Maybe (Textual Int32))
+    , _fbaPieces :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -264,8 +264,8 @@ instance ToJSON FreeBaggageAllowance where
 -- /See:/ 'timeOfDayRange' smart constructor.
 data TimeOfDayRange =
   TimeOfDayRange'
-    { _todrKind         :: !Text
-    , _todrLatestTime   :: !(Maybe Text)
+    { _todrKind :: !Text
+    , _todrLatestTime :: !(Maybe Text)
     , _todrEarliestTime :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -332,12 +332,12 @@ instance ToJSON TimeOfDayRange where
 -- /See:/ 'data'' smart constructor.
 data Data' =
   Data''
-    { _dCarrier  :: !(Maybe [CarrierData])
-    , _dKind     :: !Text
+    { _dCarrier :: !(Maybe [CarrierData])
+    , _dKind :: !Text
     , _dAircraft :: !(Maybe [AircraftData])
-    , _dAirport  :: !(Maybe [AirportData])
-    , _dCity     :: !(Maybe [CityData])
-    , _dTax      :: !(Maybe [TaxData])
+    , _dAirport :: !(Maybe [AirportData])
+    , _dCity :: !(Maybe [CityData])
+    , _dTax :: !(Maybe [TaxData])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -496,23 +496,23 @@ instance ToJSON AircraftData where
 -- /See:/ 'legInfo' smart constructor.
 data LegInfo =
   LegInfo'
-    { _liDestination         :: !(Maybe Text)
-    , _liOrigin              :: !(Maybe Text)
-    , _liSecure              :: !(Maybe Bool)
-    , _liKind                :: !Text
-    , _liAircraft            :: !(Maybe Text)
-    , _liArrivalTime         :: !(Maybe Text)
-    , _liOnTimePerformance   :: !(Maybe (Textual Int32))
+    { _liDestination :: !(Maybe Text)
+    , _liOrigin :: !(Maybe Text)
+    , _liSecure :: !(Maybe Bool)
+    , _liKind :: !Text
+    , _liAircraft :: !(Maybe Text)
+    , _liArrivalTime :: !(Maybe Text)
+    , _liOnTimePerformance :: !(Maybe (Textual Int32))
     , _liOperatingDisclosure :: !(Maybe Text)
-    , _liMeal                :: !(Maybe Text)
-    , _liId                  :: !(Maybe Text)
-    , _liOriginTerminal      :: !(Maybe Text)
-    , _liChangePlane         :: !(Maybe Bool)
+    , _liMeal :: !(Maybe Text)
+    , _liId :: !(Maybe Text)
+    , _liOriginTerminal :: !(Maybe Text)
+    , _liChangePlane :: !(Maybe Bool)
     , _liDestinationTerminal :: !(Maybe Text)
-    , _liConnectionDuration  :: !(Maybe (Textual Int32))
-    , _liDuration            :: !(Maybe (Textual Int32))
-    , _liMileage             :: !(Maybe (Textual Int32))
-    , _liDePartureTime       :: !(Maybe Text)
+    , _liConnectionDuration :: !(Maybe (Textual Int32))
+    , _liDuration :: !(Maybe (Textual Int32))
+    , _liMileage :: !(Maybe (Textual Int32))
+    , _liDePartureTime :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -806,9 +806,9 @@ instance ToJSON AirportData where
 data SegmentPricing =
   SegmentPricing'
     { _spFreeBaggageOption :: !(Maybe [FreeBaggageAllowance])
-    , _spKind              :: !Text
-    , _spFareId            :: !(Maybe Text)
-    , _spSegmentId         :: !(Maybe Text)
+    , _spKind :: !Text
+    , _spFareId :: !(Maybe Text)
+    , _spSegmentId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -888,8 +888,8 @@ instance ToJSON SegmentPricing where
 -- /See:/ 'sliceInfo' smart constructor.
 data SliceInfo =
   SliceInfo'
-    { _siKind     :: !Text
-    , _siSegment  :: !(Maybe [SegmentInfo])
+    { _siKind :: !Text
+    , _siSegment :: !(Maybe [SegmentInfo])
     , _siDuration :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -958,7 +958,7 @@ instance ToJSON SliceInfo where
 data TripsSearchResponse =
   TripsSearchResponse'
     { _tsrTrips :: !(Maybe TripOptionsResponse)
-    , _tsrKind  :: !Text
+    , _tsrKind :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1006,10 +1006,10 @@ instance ToJSON TripsSearchResponse where
 -- /See:/ 'tripOption' smart constructor.
 data TripOption =
   TripOption'
-    { _toPricing   :: !(Maybe [PricingInfo])
-    , _toKind      :: !Text
-    , _toId        :: !(Maybe Text)
-    , _toSlice     :: !(Maybe [SliceInfo])
+    { _toPricing :: !(Maybe [PricingInfo])
+    , _toKind :: !Text
+    , _toId :: !(Maybe Text)
+    , _toSlice :: !(Maybe [SliceInfo])
     , _toSaleTotal :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1093,11 +1093,11 @@ instance ToJSON TripOption where
 -- /See:/ 'bagDescriptor' smart constructor.
 data BagDescriptor =
   BagDescriptor'
-    { _bdKind           :: !Text
+    { _bdKind :: !Text
     , _bdCommercialName :: !(Maybe Text)
-    , _bdCount          :: !(Maybe (Textual Int32))
-    , _bdDescription    :: !(Maybe [Text])
-    , _bdSubcode        :: !(Maybe Text)
+    , _bdCount :: !(Maybe (Textual Int32))
+    , _bdDescription :: !(Maybe [Text])
+    , _bdSubcode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1185,9 +1185,9 @@ instance ToJSON BagDescriptor where
 data CityData =
   CityData'
     { _cCountry :: !(Maybe Text)
-    , _cKind    :: !Text
-    , _cName    :: !(Maybe Text)
-    , _cCode    :: !(Maybe Text)
+    , _cKind :: !Text
+    , _cName :: !(Maybe Text)
+    , _cCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1257,12 +1257,12 @@ instance ToJSON CityData where
 -- /See:/ 'passengerCounts' smart constructor.
 data PassengerCounts =
   PassengerCounts'
-    { _pcSeniorCount       :: !(Maybe (Textual Int32))
-    , _pcKind              :: !Text
-    , _pcInfantInLapCount  :: !(Maybe (Textual Int32))
-    , _pcChildCount        :: !(Maybe (Textual Int32))
+    { _pcSeniorCount :: !(Maybe (Textual Int32))
+    , _pcKind :: !Text
+    , _pcInfantInLapCount :: !(Maybe (Textual Int32))
+    , _pcChildCount :: !(Maybe (Textual Int32))
     , _pcInfantInSeatCount :: !(Maybe (Textual Int32))
-    , _pcAdultCount        :: !(Maybe (Textual Int32))
+    , _pcAdultCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1365,17 +1365,17 @@ instance ToJSON PassengerCounts where
 -- /See:/ 'segmentInfo' smart constructor.
 data SegmentInfo =
   SegmentInfo'
-    { _sBookingCode                 :: !(Maybe Text)
-    , _sCabin                       :: !(Maybe Text)
-    , _sBookingCodeCount            :: !(Maybe (Textual Int32))
+    { _sBookingCode :: !(Maybe Text)
+    , _sCabin :: !(Maybe Text)
+    , _sBookingCodeCount :: !(Maybe (Textual Int32))
     , _sSubjectToGovernmentApproval :: !(Maybe Bool)
-    , _sKind                        :: !Text
-    , _sFlight                      :: !(Maybe FlightInfo)
-    , _sId                          :: !(Maybe Text)
-    , _sMarriedSegmentGroup         :: !(Maybe Text)
-    , _sConnectionDuration          :: !(Maybe (Textual Int32))
-    , _sDuration                    :: !(Maybe (Textual Int32))
-    , _sLeg                         :: !(Maybe [LegInfo])
+    , _sKind :: !Text
+    , _sFlight :: !(Maybe FlightInfo)
+    , _sId :: !(Maybe Text)
+    , _sMarriedSegmentGroup :: !(Maybe Text)
+    , _sConnectionDuration :: !(Maybe (Textual Int32))
+    , _sDuration :: !(Maybe (Textual Int32))
+    , _sLeg :: !(Maybe [LegInfo])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1535,7 +1535,7 @@ data TaxData =
   TaxData'
     { _tdKind :: !Text
     , _tdName :: !(Maybe Text)
-    , _tdId   :: !(Maybe Text)
+    , _tdId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1625,11 +1625,11 @@ instance ToJSON TripsSearchRequest where
 data TaxInfo =
   TaxInfo'
     { _tiChargeType :: !(Maybe Text)
-    , _tiCountry    :: !(Maybe Text)
-    , _tiKind       :: !Text
-    , _tiSalePrice  :: !(Maybe Text)
-    , _tiCode       :: !(Maybe Text)
-    , _tiId         :: !(Maybe Text)
+    , _tiCountry :: !(Maybe Text)
+    , _tiKind :: !Text
+    , _tiSalePrice :: !(Maybe Text)
+    , _tiCode :: !(Maybe Text)
+    , _tiId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1720,19 +1720,19 @@ instance ToJSON TaxInfo where
 -- /See:/ 'pricingInfo' smart constructor.
 data PricingInfo =
   PricingInfo'
-    { _piSaleTaxTotal        :: !(Maybe Text)
-    , _piRefundable          :: !(Maybe Bool)
-    , _piPtc                 :: !(Maybe Text)
-    , _piBaseFareTotal       :: !(Maybe Text)
-    , _piFare                :: !(Maybe [FareInfo])
-    , _piKind                :: !Text
-    , _piSegmentPricing      :: !(Maybe [SegmentPricing])
-    , _piPassengers          :: !(Maybe PassengerCounts)
-    , _piFareCalculation     :: !(Maybe Text)
+    { _piSaleTaxTotal :: !(Maybe Text)
+    , _piRefundable :: !(Maybe Bool)
+    , _piPtc :: !(Maybe Text)
+    , _piBaseFareTotal :: !(Maybe Text)
+    , _piFare :: !(Maybe [FareInfo])
+    , _piKind :: !Text
+    , _piSegmentPricing :: !(Maybe [SegmentPricing])
+    , _piPassengers :: !(Maybe PassengerCounts)
+    , _piFareCalculation :: !(Maybe Text)
     , _piLatestTicketingTime :: !(Maybe Text)
-    , _piTax                 :: !(Maybe [TaxInfo])
-    , _piSaleTotal           :: !(Maybe Text)
-    , _piSaleFareTotal       :: !(Maybe Text)
+    , _piTax :: !(Maybe [TaxInfo])
+    , _piSaleTotal :: !(Maybe Text)
+    , _piSaleFareTotal :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1917,7 +1917,7 @@ instance ToJSON PricingInfo where
 data FlightInfo =
   FlightInfo'
     { _fiCarrier :: !(Maybe Text)
-    , _fiNumber  :: !(Maybe Text)
+    , _fiNumber :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1965,13 +1965,13 @@ instance ToJSON FlightInfo where
 -- /See:/ 'fareInfo' smart constructor.
 data FareInfo =
   FareInfo'
-    { _fCarrier     :: !(Maybe Text)
+    { _fCarrier :: !(Maybe Text)
     , _fDestination :: !(Maybe Text)
-    , _fOrigin      :: !(Maybe Text)
-    , _fPrivate     :: !(Maybe Bool)
-    , _fKind        :: !Text
-    , _fBasisCode   :: !(Maybe Text)
-    , _fId          :: !(Maybe Text)
+    , _fOrigin :: !(Maybe Text)
+    , _fPrivate :: !(Maybe Bool)
+    , _fKind :: !Text
+    , _fBasisCode :: !(Maybe Text)
+    , _fId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2068,13 +2068,13 @@ instance ToJSON FareInfo where
 -- /See:/ 'tripOptionsRequest' smart constructor.
 data TripOptionsRequest =
   TripOptionsRequest'
-    { _torRefundable       :: !(Maybe Bool)
-    , _torSaleCountry      :: !(Maybe Text)
-    , _torPassengers       :: !(Maybe PassengerCounts)
+    { _torRefundable :: !(Maybe Bool)
+    , _torSaleCountry :: !(Maybe Text)
+    , _torPassengers :: !(Maybe PassengerCounts)
     , _torTicketingCountry :: !(Maybe Text)
-    , _torSolutions        :: !(Maybe (Textual Int32))
-    , _torSlice            :: !(Maybe [SliceInput])
-    , _torMaxPrice         :: !(Maybe Text)
+    , _torSolutions :: !(Maybe (Textual Int32))
+    , _torSlice :: !(Maybe [SliceInput])
+    , _torMaxPrice :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2190,17 +2190,17 @@ instance ToJSON TripOptionsRequest where
 -- /See:/ 'sliceInput' smart constructor.
 data SliceInput =
   SliceInput'
-    { _sliDestination            :: !(Maybe Text)
-    , _sliOrigin                 :: !(Maybe Text)
-    , _sliMaxStops               :: !(Maybe (Textual Int32))
-    , _sliKind                   :: !Text
-    , _sliProhibitedCarrier      :: !(Maybe [Text])
-    , _sliDate                   :: !(Maybe Text)
-    , _sliMaxConnectionDuration  :: !(Maybe (Textual Int32))
-    , _sliPreferredCabin         :: !(Maybe Text)
+    { _sliDestination :: !(Maybe Text)
+    , _sliOrigin :: !(Maybe Text)
+    , _sliMaxStops :: !(Maybe (Textual Int32))
+    , _sliKind :: !Text
+    , _sliProhibitedCarrier :: !(Maybe [Text])
+    , _sliDate :: !(Maybe Text)
+    , _sliMaxConnectionDuration :: !(Maybe (Textual Int32))
+    , _sliPreferredCabin :: !(Maybe Text)
     , _sliPermittedDePartureTime :: !(Maybe TimeOfDayRange)
-    , _sliPermittedCarrier       :: !(Maybe [Text])
-    , _sliAlliance               :: !(Maybe Text)
+    , _sliPermittedCarrier :: !(Maybe [Text])
+    , _sliAlliance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

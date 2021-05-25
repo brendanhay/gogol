@@ -23,7 +23,7 @@
 -- Updates an existing placement group. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementGroups.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.placementGroups.patch@.
 module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
     (
     -- * REST Resource
@@ -34,26 +34,36 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
     , PlacementGroupsPatch
 
     -- * Request Lenses
+    , pgpXgafv
+    , pgpUploadProtocol
+    , pgpAccessToken
+    , pgpUploadType
     , pgpProFileId
     , pgpPayload
     , pgpId
+    , pgpCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.patch@ method which the
 -- 'PlacementGroupsPatch' request conforms to.
 type PlacementGroupsPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
                QueryParam "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] PlacementGroup :>
-                     Patch '[JSON] PlacementGroup
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] PlacementGroup :>
+                               Patch '[JSON] PlacementGroup
 
 -- | Updates an existing placement group. This method supports patch
 -- semantics.
@@ -61,9 +71,14 @@ type PlacementGroupsPatchResource =
 -- /See:/ 'placementGroupsPatch' smart constructor.
 data PlacementGroupsPatch =
   PlacementGroupsPatch'
-    { _pgpProFileId :: !(Textual Int64)
-    , _pgpPayload   :: !PlacementGroup
-    , _pgpId        :: !(Textual Int64)
+    { _pgpXgafv :: !(Maybe Xgafv)
+    , _pgpUploadProtocol :: !(Maybe Text)
+    , _pgpAccessToken :: !(Maybe Text)
+    , _pgpUploadType :: !(Maybe Text)
+    , _pgpProFileId :: !(Textual Int64)
+    , _pgpPayload :: !PlacementGroup
+    , _pgpId :: !(Textual Int64)
+    , _pgpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,11 +87,21 @@ data PlacementGroupsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pgpXgafv'
+--
+-- * 'pgpUploadProtocol'
+--
+-- * 'pgpAccessToken'
+--
+-- * 'pgpUploadType'
+--
 -- * 'pgpProFileId'
 --
 -- * 'pgpPayload'
 --
 -- * 'pgpId'
+--
+-- * 'pgpCallback'
 placementGroupsPatch
     :: Int64 -- ^ 'pgpProFileId'
     -> PlacementGroup -- ^ 'pgpPayload'
@@ -84,11 +109,38 @@ placementGroupsPatch
     -> PlacementGroupsPatch
 placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
   PlacementGroupsPatch'
-    { _pgpProFileId = _Coerce # pPgpProFileId_
+    { _pgpXgafv = Nothing
+    , _pgpUploadProtocol = Nothing
+    , _pgpAccessToken = Nothing
+    , _pgpUploadType = Nothing
+    , _pgpProFileId = _Coerce # pPgpProFileId_
     , _pgpPayload = pPgpPayload_
     , _pgpId = _Coerce # pPgpId_
+    , _pgpCallback = Nothing
     }
 
+
+-- | V1 error format.
+pgpXgafv :: Lens' PlacementGroupsPatch (Maybe Xgafv)
+pgpXgafv = lens _pgpXgafv (\ s a -> s{_pgpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pgpUploadProtocol :: Lens' PlacementGroupsPatch (Maybe Text)
+pgpUploadProtocol
+  = lens _pgpUploadProtocol
+      (\ s a -> s{_pgpUploadProtocol = a})
+
+-- | OAuth access token.
+pgpAccessToken :: Lens' PlacementGroupsPatch (Maybe Text)
+pgpAccessToken
+  = lens _pgpAccessToken
+      (\ s a -> s{_pgpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pgpUploadType :: Lens' PlacementGroupsPatch (Maybe Text)
+pgpUploadType
+  = lens _pgpUploadType
+      (\ s a -> s{_pgpUploadType = a})
 
 -- | User profile ID associated with this request.
 pgpProFileId :: Lens' PlacementGroupsPatch Int64
@@ -101,17 +153,27 @@ pgpPayload :: Lens' PlacementGroupsPatch PlacementGroup
 pgpPayload
   = lens _pgpPayload (\ s a -> s{_pgpPayload = a})
 
--- | Placement group ID.
+-- | PlacementGroup ID.
 pgpId :: Lens' PlacementGroupsPatch Int64
 pgpId
   = lens _pgpId (\ s a -> s{_pgpId = a}) . _Coerce
+
+-- | JSONP
+pgpCallback :: Lens' PlacementGroupsPatch (Maybe Text)
+pgpCallback
+  = lens _pgpCallback (\ s a -> s{_pgpCallback = a})
 
 instance GoogleRequest PlacementGroupsPatch where
         type Rs PlacementGroupsPatch = PlacementGroup
         type Scopes PlacementGroupsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementGroupsPatch'{..}
-          = go _pgpProFileId (Just _pgpId) (Just AltJSON)
+          = go _pgpProFileId (Just _pgpId) _pgpXgafv
+              _pgpUploadProtocol
+              _pgpAccessToken
+              _pgpUploadType
+              _pgpCallback
+              (Just AltJSON)
               _pgpPayload
               dFAReportingService
           where go

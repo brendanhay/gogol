@@ -22,7 +22,7 @@
 --
 -- Updates an existing remarketing list share.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingListShares.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.remarketingListShares.update@.
 module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     , RemarketingListSharesUpdate
 
     -- * Request Lenses
+    , rlsuXgafv
+    , rlsuUploadProtocol
+    , rlsuAccessToken
+    , rlsuUploadType
     , rlsuProFileId
     , rlsuPayload
+    , rlsuCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingListShares.update@ method which the
 -- 'RemarketingListSharesUpdate' request conforms to.
 type RemarketingListSharesUpdateResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] RemarketingListShare :>
-                   Put '[JSON] RemarketingListShare
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] RemarketingListShare :>
+                             Put '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share.
 --
 -- /See:/ 'remarketingListSharesUpdate' smart constructor.
 data RemarketingListSharesUpdate =
   RemarketingListSharesUpdate'
-    { _rlsuProFileId :: !(Textual Int64)
-    , _rlsuPayload   :: !RemarketingListShare
+    { _rlsuXgafv :: !(Maybe Xgafv)
+    , _rlsuUploadProtocol :: !(Maybe Text)
+    , _rlsuAccessToken :: !(Maybe Text)
+    , _rlsuUploadType :: !(Maybe Text)
+    , _rlsuProFileId :: !(Textual Int64)
+    , _rlsuPayload :: !RemarketingListShare
+    , _rlsuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,57 @@ data RemarketingListSharesUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rlsuXgafv'
+--
+-- * 'rlsuUploadProtocol'
+--
+-- * 'rlsuAccessToken'
+--
+-- * 'rlsuUploadType'
+--
 -- * 'rlsuProFileId'
 --
 -- * 'rlsuPayload'
+--
+-- * 'rlsuCallback'
 remarketingListSharesUpdate
     :: Int64 -- ^ 'rlsuProFileId'
     -> RemarketingListShare -- ^ 'rlsuPayload'
     -> RemarketingListSharesUpdate
 remarketingListSharesUpdate pRlsuProFileId_ pRlsuPayload_ =
   RemarketingListSharesUpdate'
-    {_rlsuProFileId = _Coerce # pRlsuProFileId_, _rlsuPayload = pRlsuPayload_}
+    { _rlsuXgafv = Nothing
+    , _rlsuUploadProtocol = Nothing
+    , _rlsuAccessToken = Nothing
+    , _rlsuUploadType = Nothing
+    , _rlsuProFileId = _Coerce # pRlsuProFileId_
+    , _rlsuPayload = pRlsuPayload_
+    , _rlsuCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rlsuXgafv :: Lens' RemarketingListSharesUpdate (Maybe Xgafv)
+rlsuXgafv
+  = lens _rlsuXgafv (\ s a -> s{_rlsuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rlsuUploadProtocol :: Lens' RemarketingListSharesUpdate (Maybe Text)
+rlsuUploadProtocol
+  = lens _rlsuUploadProtocol
+      (\ s a -> s{_rlsuUploadProtocol = a})
+
+-- | OAuth access token.
+rlsuAccessToken :: Lens' RemarketingListSharesUpdate (Maybe Text)
+rlsuAccessToken
+  = lens _rlsuAccessToken
+      (\ s a -> s{_rlsuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rlsuUploadType :: Lens' RemarketingListSharesUpdate (Maybe Text)
+rlsuUploadType
+  = lens _rlsuUploadType
+      (\ s a -> s{_rlsuUploadType = a})
 
 -- | User profile ID associated with this request.
 rlsuProFileId :: Lens' RemarketingListSharesUpdate Int64
@@ -91,6 +146,11 @@ rlsuPayload :: Lens' RemarketingListSharesUpdate RemarketingListShare
 rlsuPayload
   = lens _rlsuPayload (\ s a -> s{_rlsuPayload = a})
 
+-- | JSONP
+rlsuCallback :: Lens' RemarketingListSharesUpdate (Maybe Text)
+rlsuCallback
+  = lens _rlsuCallback (\ s a -> s{_rlsuCallback = a})
+
 instance GoogleRequest RemarketingListSharesUpdate
          where
         type Rs RemarketingListSharesUpdate =
@@ -98,7 +158,12 @@ instance GoogleRequest RemarketingListSharesUpdate
         type Scopes RemarketingListSharesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListSharesUpdate'{..}
-          = go _rlsuProFileId (Just AltJSON) _rlsuPayload
+          = go _rlsuProFileId _rlsuXgafv _rlsuUploadProtocol
+              _rlsuAccessToken
+              _rlsuUploadType
+              _rlsuCallback
+              (Just AltJSON)
+              _rlsuPayload
               dFAReportingService
           where go
                   = buildClient

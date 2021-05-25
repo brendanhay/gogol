@@ -16,7 +16,7 @@
 --
 module Network.Google.Manufacturers.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The status of the destination.
 data DestinationStatusStatus
@@ -92,6 +92,46 @@ instance FromJSON IssueResolution where
     parseJSON = parseJSONText "IssueResolution"
 
 instance ToJSON IssueResolution where
+    toJSON = toJSONText
+
+-- | The information to be included in the response. Only sections listed
+-- here will be returned.
+data AccountsProductsGetInclude
+    = APGIUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown, never used.
+    | APGIAttributes
+      -- ^ @ATTRIBUTES@
+      -- Include the attributes of the product.
+    | APGIIssues
+      -- ^ @ISSUES@
+      -- Include the issues of the product.
+    | APGIDestinationStatuses
+      -- ^ @DESTINATION_STATUSES@
+      -- Include the destination statuses of the product.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccountsProductsGetInclude
+
+instance FromHttpApiData AccountsProductsGetInclude where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right APGIUnknown
+        "ATTRIBUTES" -> Right APGIAttributes
+        "ISSUES" -> Right APGIIssues
+        "DESTINATION_STATUSES" -> Right APGIDestinationStatuses
+        x -> Left ("Unable to parse AccountsProductsGetInclude from: " <> x)
+
+instance ToHttpApiData AccountsProductsGetInclude where
+    toQueryParam = \case
+        APGIUnknown -> "UNKNOWN"
+        APGIAttributes -> "ATTRIBUTES"
+        APGIIssues -> "ISSUES"
+        APGIDestinationStatuses -> "DESTINATION_STATUSES"
+
+instance FromJSON AccountsProductsGetInclude where
+    parseJSON = parseJSONText "AccountsProductsGetInclude"
+
+instance ToJSON AccountsProductsGetInclude where
     toJSON = toJSONText
 
 -- | The status of the image. \'OutputOnly
@@ -176,6 +216,46 @@ instance FromJSON ImageStatus where
     parseJSON = parseJSONText "ImageStatus"
 
 instance ToJSON ImageStatus where
+    toJSON = toJSONText
+
+-- | The information to be included in the response. Only sections listed
+-- here will be returned.
+data AccountsProductsListInclude
+    = APLIUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown, never used.
+    | APLIAttributes
+      -- ^ @ATTRIBUTES@
+      -- Include the attributes of the product.
+    | APLIIssues
+      -- ^ @ISSUES@
+      -- Include the issues of the product.
+    | APLIDestinationStatuses
+      -- ^ @DESTINATION_STATUSES@
+      -- Include the destination statuses of the product.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccountsProductsListInclude
+
+instance FromHttpApiData AccountsProductsListInclude where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right APLIUnknown
+        "ATTRIBUTES" -> Right APLIAttributes
+        "ISSUES" -> Right APLIIssues
+        "DESTINATION_STATUSES" -> Right APLIDestinationStatuses
+        x -> Left ("Unable to parse AccountsProductsListInclude from: " <> x)
+
+instance ToHttpApiData AccountsProductsListInclude where
+    toQueryParam = \case
+        APLIUnknown -> "UNKNOWN"
+        APLIAttributes -> "ATTRIBUTES"
+        APLIIssues -> "ISSUES"
+        APLIDestinationStatuses -> "DESTINATION_STATUSES"
+
+instance FromJSON AccountsProductsListInclude where
+    parseJSON = parseJSONText "AccountsProductsListInclude"
+
+instance ToJSON AccountsProductsListInclude where
     toJSON = toJSONText
 
 -- | The type of the image, i.e., crawled or uploaded. \'OutputOnly

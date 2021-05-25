@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
     , rpsaiPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.setAccountInfo@ method which the
 -- 'RelyingPartySetAccountInfo' request conforms to.

@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Drives.Update
     , dDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.drives.update@ method which the
 -- 'DrivesUpdate' request conforms to.
@@ -57,9 +57,9 @@ type DrivesUpdateResource =
 -- /See:/ 'drivesUpdate' smart constructor.
 data DrivesUpdate =
   DrivesUpdate'
-    { _dPayload              :: !Drive
+    { _dPayload :: !Drive
     , _dUseDomainAdminAccess :: !Bool
-    , _dDriveId              :: !Text
+    , _dDriveId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

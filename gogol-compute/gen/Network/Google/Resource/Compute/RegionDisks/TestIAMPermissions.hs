@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.RegionDisks.TestIAMPermissions
     , rdtipRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.testIamPermissions@ method which the
 -- 'RegionDisksTestIAMPermissions' request conforms to.
@@ -63,10 +63,10 @@ type RegionDisksTestIAMPermissionsResource =
 -- /See:/ 'regionDisksTestIAMPermissions' smart constructor.
 data RegionDisksTestIAMPermissions =
   RegionDisksTestIAMPermissions'
-    { _rdtipProject  :: !Text
-    , _rdtipPayload  :: !TestPermissionsRequest
+    { _rdtipProject :: !Text
+    , _rdtipPayload :: !TestPermissionsRequest
     , _rdtipResource :: !Text
-    , _rdtipRegion   :: !Text
+    , _rdtipRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

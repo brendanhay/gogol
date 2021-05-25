@@ -44,8 +44,8 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.Update
     , nuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.namespaces.update@ method which the
 -- 'NamespacesUpdate' request conforms to.
@@ -67,14 +67,14 @@ type NamespacesUpdateResource =
 -- /See:/ 'namespacesUpdate' smart constructor.
 data NamespacesUpdate =
   NamespacesUpdate'
-    { _nuXgafv          :: !(Maybe Xgafv)
+    { _nuXgafv :: !(Maybe Xgafv)
     , _nuUploadProtocol :: !(Maybe Text)
-    , _nuAccessToken    :: !(Maybe Text)
-    , _nuUploadType     :: !(Maybe Text)
-    , _nuPayload        :: !Namespace
-    , _nuNamespaceName  :: !Text
-    , _nuProjectId      :: !(Maybe Text)
-    , _nuCallback       :: !(Maybe Text)
+    , _nuAccessToken :: !(Maybe Text)
+    , _nuUploadType :: !(Maybe Text)
+    , _nuPayload :: !Namespace
+    , _nuNamespaceName :: !Text
+    , _nuProjectId :: !(Maybe Text)
+    , _nuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,7 +23,7 @@
 -- Causes a verification code to be delivered to the channel. The code can
 -- then be supplied in VerifyNotificationChannel to verify the channel.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.notificationChannels.sendVerificationCode@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.sendVerificationCode@.
 module Network.Google.Resource.Monitoring.Projects.NotificationChannels.SendVerificationCode
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Monitoring.Projects.NotificationChannels.SendVeri
     , pncsvcCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.notificationChannels.sendVerificationCode@ method which the
 -- 'ProjectsNotificationChannelsSendVerificationCode' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsNotificationChannelsSendVerificationCodeResource
 -- /See:/ 'projectsNotificationChannelsSendVerificationCode' smart constructor.
 data ProjectsNotificationChannelsSendVerificationCode =
   ProjectsNotificationChannelsSendVerificationCode'
-    { _pncsvcXgafv          :: !(Maybe Xgafv)
+    { _pncsvcXgafv :: !(Maybe Xgafv)
     , _pncsvcUploadProtocol :: !(Maybe Text)
-    , _pncsvcAccessToken    :: !(Maybe Text)
-    , _pncsvcUploadType     :: !(Maybe Text)
-    , _pncsvcPayload        :: !SendNotificationChannelVerificationCodeRequest
-    , _pncsvcName           :: !Text
-    , _pncsvcCallback       :: !(Maybe Text)
+    , _pncsvcAccessToken :: !(Maybe Text)
+    , _pncsvcUploadType :: !(Maybe Text)
+    , _pncsvcPayload :: !SendNotificationChannelVerificationCodeRequest
+    , _pncsvcName :: !Text
+    , _pncsvcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,7 +141,7 @@ pncsvcPayload
   = lens _pncsvcPayload
       (\ s a -> s{_pncsvcPayload = a})
 
--- | The notification channel to which to send a verification code.
+-- | Required. The notification channel to which to send a verification code.
 pncsvcName :: Lens' ProjectsNotificationChannelsSendVerificationCode Text
 pncsvcName
   = lens _pncsvcName (\ s a -> s{_pncsvcName = a})

@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Directly inserts a message into only this user\'s mailbox similar to
--- IMAP APPEND, bypassing most scanning and classification. Does not send a
--- message.
+-- \`IMAP APPEND\`, bypassing most scanning and classification. Does not
+-- send a message.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.insert@.
 module Network.Google.Resource.Gmail.Users.Messages.Insert
@@ -35,14 +35,19 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
     , UsersMessagesInsert
 
     -- * Request Lenses
+    , uXgafv
+    , uUploadProtocol
+    , uAccessToken
+    , uUploadType
     , uPayload
     , uUserId
     , uDeleted
     , uInternalDateSource
+    , uCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.insert@ method which the
 -- 'UsersMessagesInsert' request conforms to.
@@ -52,12 +57,17 @@ type UsersMessagesInsertResource =
          "users" :>
            Capture "userId" Text :>
              "messages" :>
-               QueryParam "deleted" Bool :>
-                 QueryParam "internalDateSource"
-                   UsersMessagesInsertInternalDateSource
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Message :> Post '[JSON] Message
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "deleted" Bool :>
+                         QueryParam "internalDateSource"
+                           UsersMessagesInsertInternalDateSource
+                           :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Message :> Post '[JSON] Message
        :<|>
        "upload" :>
          "gmail" :>
@@ -65,26 +75,36 @@ type UsersMessagesInsertResource =
              "users" :>
                Capture "userId" Text :>
                  "messages" :>
-                   QueryParam "deleted" Bool :>
-                     QueryParam "internalDateSource"
-                       UsersMessagesInsertInternalDateSource
-                       :>
-                       QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" Multipart :>
-                           MultipartRelated '[JSON] Message :>
-                             Post '[JSON] Message
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "deleted" Bool :>
+                             QueryParam "internalDateSource"
+                               UsersMessagesInsertInternalDateSource
+                               :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   QueryParam "uploadType" Multipart :>
+                                     MultipartRelated '[JSON] Message :>
+                                       Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
--- IMAP APPEND, bypassing most scanning and classification. Does not send a
--- message.
+-- \`IMAP APPEND\`, bypassing most scanning and classification. Does not
+-- send a message.
 --
 -- /See:/ 'usersMessagesInsert' smart constructor.
 data UsersMessagesInsert =
   UsersMessagesInsert'
-    { _uPayload            :: !Message
-    , _uUserId             :: !Text
-    , _uDeleted            :: !Bool
+    { _uXgafv :: !(Maybe Xgafv)
+    , _uUploadProtocol :: !(Maybe Text)
+    , _uAccessToken :: !(Maybe Text)
+    , _uUploadType :: !(Maybe Text)
+    , _uPayload :: !Message
+    , _uUserId :: !Text
+    , _uDeleted :: !Bool
     , _uInternalDateSource :: !UsersMessagesInsertInternalDateSource
+    , _uCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,6 +113,14 @@ data UsersMessagesInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'uXgafv'
+--
+-- * 'uUploadProtocol'
+--
+-- * 'uAccessToken'
+--
+-- * 'uUploadType'
+--
 -- * 'uPayload'
 --
 -- * 'uUserId'
@@ -100,24 +128,51 @@ data UsersMessagesInsert =
 -- * 'uDeleted'
 --
 -- * 'uInternalDateSource'
+--
+-- * 'uCallback'
 usersMessagesInsert
     :: Message -- ^ 'uPayload'
     -> UsersMessagesInsert
 usersMessagesInsert pUPayload_ =
   UsersMessagesInsert'
-    { _uPayload = pUPayload_
+    { _uXgafv = Nothing
+    , _uUploadProtocol = Nothing
+    , _uAccessToken = Nothing
+    , _uUploadType = Nothing
+    , _uPayload = pUPayload_
     , _uUserId = "me"
     , _uDeleted = False
     , _uInternalDateSource = UMIIDSReceivedTime
+    , _uCallback = Nothing
     }
 
+
+-- | V1 error format.
+uXgafv :: Lens' UsersMessagesInsert (Maybe Xgafv)
+uXgafv = lens _uXgafv (\ s a -> s{_uXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+uUploadProtocol :: Lens' UsersMessagesInsert (Maybe Text)
+uUploadProtocol
+  = lens _uUploadProtocol
+      (\ s a -> s{_uUploadProtocol = a})
+
+-- | OAuth access token.
+uAccessToken :: Lens' UsersMessagesInsert (Maybe Text)
+uAccessToken
+  = lens _uAccessToken (\ s a -> s{_uAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+uUploadType :: Lens' UsersMessagesInsert (Maybe Text)
+uUploadType
+  = lens _uUploadType (\ s a -> s{_uUploadType = a})
 
 -- | Multipart request metadata.
 uPayload :: Lens' UsersMessagesInsert Message
 uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 uUserId :: Lens' UsersMessagesInsert Text
 uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
 
@@ -132,6 +187,11 @@ uInternalDateSource
   = lens _uInternalDateSource
       (\ s a -> s{_uInternalDateSource = a})
 
+-- | JSONP
+uCallback :: Lens' UsersMessagesInsert (Maybe Text)
+uCallback
+  = lens _uCallback (\ s a -> s{_uCallback = a})
+
 instance GoogleRequest UsersMessagesInsert where
         type Rs UsersMessagesInsert = Message
         type Scopes UsersMessagesInsert =
@@ -139,8 +199,11 @@ instance GoogleRequest UsersMessagesInsert where
                "https://www.googleapis.com/auth/gmail.insert",
                "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesInsert'{..}
-          = go _uUserId (Just _uDeleted)
+          = go _uUserId _uXgafv _uUploadProtocol _uAccessToken
+              _uUploadType
+              (Just _uDeleted)
               (Just _uInternalDateSource)
+              _uCallback
               (Just AltJSON)
               _uPayload
               gmailService
@@ -157,8 +220,11 @@ instance GoogleRequest
              Scopes UsersMessagesInsert
         requestClient
           (MediaUpload UsersMessagesInsert'{..} body)
-          = go _uUserId (Just _uDeleted)
+          = go _uUserId _uXgafv _uUploadProtocol _uAccessToken
+              _uUploadType
+              (Just _uDeleted)
               (Just _uInternalDateSource)
+              _uCallback
               (Just AltJSON)
               (Just Multipart)
               _uPayload

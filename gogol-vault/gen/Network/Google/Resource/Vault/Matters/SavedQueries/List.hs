@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists saved queries within a matter. An empty page token in
--- ListSavedQueriesResponse denotes no more saved queries to list.
+-- Lists the saved queries in a matter.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.savedQueries.list@.
 module Network.Google.Resource.Vault.Matters.SavedQueries.List
@@ -44,8 +43,8 @@ module Network.Google.Resource.Vault.Matters.SavedQueries.List
     , msqlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.savedQueries.list@ method which the
 -- 'MattersSavedQueriesList' request conforms to.
@@ -64,20 +63,19 @@ type MattersSavedQueriesListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListSavedQueriesResponse
 
--- | Lists saved queries within a matter. An empty page token in
--- ListSavedQueriesResponse denotes no more saved queries to list.
+-- | Lists the saved queries in a matter.
 --
 -- /See:/ 'mattersSavedQueriesList' smart constructor.
 data MattersSavedQueriesList =
   MattersSavedQueriesList'
-    { _msqlXgafv          :: !(Maybe Xgafv)
+    { _msqlXgafv :: !(Maybe Xgafv)
     , _msqlUploadProtocol :: !(Maybe Text)
-    , _msqlAccessToken    :: !(Maybe Text)
-    , _msqlUploadType     :: !(Maybe Text)
-    , _msqlMatterId       :: !Text
-    , _msqlPageToken      :: !(Maybe Text)
-    , _msqlPageSize       :: !(Maybe (Textual Int32))
-    , _msqlCallback       :: !(Maybe Text)
+    , _msqlAccessToken :: !(Maybe Text)
+    , _msqlUploadType :: !(Maybe Text)
+    , _msqlMatterId :: !Text
+    , _msqlPageToken :: !(Maybe Text)
+    , _msqlPageSize :: !(Maybe (Textual Int32))
+    , _msqlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,8 +138,7 @@ msqlUploadType
   = lens _msqlUploadType
       (\ s a -> s{_msqlUploadType = a})
 
--- | The matter id of the parent matter for which the saved queries are to be
--- retrieved.
+-- | The ID of the matter to get the saved queries for.
 msqlMatterId :: Lens' MattersSavedQueriesList Text
 msqlMatterId
   = lens _msqlMatterId (\ s a -> s{_msqlMatterId = a})
