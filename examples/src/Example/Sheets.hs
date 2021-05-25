@@ -48,7 +48,7 @@ exampleAppendValue sheetID range val =  do
   lgr <- newLogger Debug stdout
   env <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ spreadsheetsScope)
   runResourceT . runGoogle env $
-    send  (svaValueInputOption .~ Just "USER_ENTERED" $ spreadsheetsValuesAppend 
+    send  (svaValueInputOption .~ Just SVAVIOUserEntered $ spreadsheetsValuesAppend
           sheetID 
           ( vrMajorDimension .~ Just VRMDRows $ vrValues .~ val $ vrRange .~ Just range $ valueRange) 
           range )
