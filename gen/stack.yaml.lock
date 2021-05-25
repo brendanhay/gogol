@@ -5,12 +5,12 @@
 
 packages:
 - completed:
-    hackage: text-regex-replace-0.1.1.3@sha256:e7f612df671c93ced54a3d26528db37852069884e5cb67d5afbb49d3defb5eb9,1627
+    hackage: text-regex-replace-0.1.1.4@sha256:58d96b4e5caec8bf9dd2ca6eaa206fe5bce0fd162759c5e102a92c05f6bd5ebc,1547
     pantry-tree:
       size: 360
-      sha256: 0edba698df19381c1fadb494dfd5278b35b6670bf29cab1a228f2fde9bb9ba89
+      sha256: d7005331a160dffc75bc790a52abb1b68bbdb9dde99c8d4f95ce2edaf70b6385
   original:
-    hackage: text-regex-replace-0.1.1.3
+    hackage: text-regex-replace-0.1.1.4
 - completed:
     hackage: ede-0.3.2.0@sha256:26796d2dfa0979b6ec532dcb113196a1d63edde5553bd019f8d05b52cc966b1a,3790
     pantry-tree:
@@ -34,7 +34,7 @@ packages:
     hackage: hindent-5.3.2
 snapshots:
 - completed:
-    size: 534126
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/16/31.yaml
-    sha256: 637fb77049b25560622a224845b7acfe81a09fdb6a96a3c75997a10b651667f6
-  original: lts-16.31
+    size: 567669
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/17/12.yaml
+    sha256: facf6cac73b22a83ca955b580a98a7a09ed71f8f974c7a55d28e608c23e689a9
+  original: lts-17.12

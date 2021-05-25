@@ -22,7 +22,7 @@ import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
 import qualified Data.ByteString.Char8        as C8
-import qualified Data.ByteString.Lazy.Builder as LBB
+import qualified Data.ByteString.Builder      as BB
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
@@ -174,7 +174,7 @@ pp i x
     | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
     | otherwise   = pure (LText.pack (C8.unpack p))
   where
-    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . LBB.toLazyByteString)
+    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . BB.toLazyByteString)
 
     e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
 
