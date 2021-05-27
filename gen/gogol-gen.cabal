@@ -51,12 +51,13 @@ executable gogol-gen
         , bytestring
         , case-insensitive
         , directory-tree
+        , doclayout
         , ede
         , errors           >= 2.1.2
         , formatting
         , hashable
-        , haskell-src-exts == 1.20.3
-        , hindent          == 5.2.7
+        , haskell-src-exts == 1.23.1
+        , hindent          == 5.3.2
         , lens
         , mtl
         , optparse-applicative

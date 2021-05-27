@@ -30,7 +30,6 @@ import qualified Data.HashMap.Strict  as Map
 import qualified Data.HashSet         as Set
 import           Data.List            (intersect)
 import           Data.Maybe
-import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate

@@ -22,7 +22,7 @@ import           Data.Text          (Text)
 import qualified System.IO.Unsafe   as Unsafe
 
 import           Text.Pandoc        as Pandoc
-import           Text.Pandoc.Pretty
+import           Text.DocLayout
 
 import qualified Data.Text          as Text
 

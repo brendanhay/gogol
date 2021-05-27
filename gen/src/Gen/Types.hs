@@ -51,7 +51,6 @@ import qualified Data.HashSet               as Set
 import           Data.List                  (sort)
 import           Data.Maybe
 import           Data.Ord
-import           Data.Semigroup             ((<>))
 import           Data.String
 import           Data.Text                  (Text)
 import qualified Data.Text                  as Text

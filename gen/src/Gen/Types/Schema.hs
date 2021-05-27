@@ -34,7 +34,6 @@ import           Data.Aeson.Types     (Parser)
 import           Data.Function        (on)
 import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
-import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate
