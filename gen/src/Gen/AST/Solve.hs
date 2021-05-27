@@ -152,10 +152,10 @@ getPrefix g = loc "getPrefix" g $ memo prefixed g go
         pure (Prefix p)
       where
         ls = Map.keys rs
-        ks = Set.fromList (map (CI.mk . local) (ls ++ ["additional" | aps]))
+        ks = Set.fromList (map (CI.mk . renameField . local) (ls ++ ["additional" | aps]))
 
     branch vs = do
-        p <- uniq branches ps (Set.fromList (map CI.mk vs))
+        p <- uniq branches ps (Set.fromList (map (CI.mk . renameField) vs))
         pure (Prefix p)
       where
         ps | any (isDigit . Text.head) vs = acronymPrefixes g
