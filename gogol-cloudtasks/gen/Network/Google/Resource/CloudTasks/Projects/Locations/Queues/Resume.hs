@@ -48,8 +48,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Resume
     , plqrCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.resume@ method which the
 -- 'ProjectsLocationsQueuesResume' request conforms to.
@@ -76,13 +76,13 @@ type ProjectsLocationsQueuesResumeResource =
 -- /See:/ 'projectsLocationsQueuesResume' smart constructor.
 data ProjectsLocationsQueuesResume =
   ProjectsLocationsQueuesResume'
-    { _plqrXgafv          :: !(Maybe Xgafv)
+    { _plqrXgafv :: !(Maybe Xgafv)
     , _plqrUploadProtocol :: !(Maybe Text)
-    , _plqrAccessToken    :: !(Maybe Text)
-    , _plqrUploadType     :: !(Maybe Text)
-    , _plqrPayload        :: !ResumeQueueRequest
-    , _plqrName           :: !Text
-    , _plqrCallback       :: !(Maybe Text)
+    , _plqrAccessToken :: !(Maybe Text)
+    , _plqrUploadType :: !(Maybe Text)
+    , _plqrPayload :: !ResumeQueueRequest
+    , _plqrName :: !Text
+    , _plqrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

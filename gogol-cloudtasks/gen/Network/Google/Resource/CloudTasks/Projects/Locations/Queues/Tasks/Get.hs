@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Get
     , plqtgCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.get@ method which the
 -- 'ProjectsLocationsQueuesTasksGet' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsLocationsQueuesTasksGetResource =
 -- /See:/ 'projectsLocationsQueuesTasksGet' smart constructor.
 data ProjectsLocationsQueuesTasksGet =
   ProjectsLocationsQueuesTasksGet'
-    { _plqtgXgafv          :: !(Maybe Xgafv)
+    { _plqtgXgafv :: !(Maybe Xgafv)
     , _plqtgUploadProtocol :: !(Maybe Text)
-    , _plqtgAccessToken    :: !(Maybe Text)
-    , _plqtgUploadType     :: !(Maybe Text)
-    , _plqtgResponseView   :: !(Maybe Text)
-    , _plqtgName           :: !Text
-    , _plqtgCallback       :: !(Maybe Text)
+    , _plqtgAccessToken :: !(Maybe Text)
+    , _plqtgUploadType :: !(Maybe Text)
+    , _plqtgResponseView :: !(Maybe Text)
+    , _plqtgName :: !Text
+    , _plqtgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

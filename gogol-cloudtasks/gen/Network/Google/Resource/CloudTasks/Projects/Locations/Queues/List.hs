@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.List
     , plqlCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.list@ method which the
 -- 'ProjectsLocationsQueuesList' request conforms to.
@@ -69,15 +69,15 @@ type ProjectsLocationsQueuesListResource =
 -- /See:/ 'projectsLocationsQueuesList' smart constructor.
 data ProjectsLocationsQueuesList =
   ProjectsLocationsQueuesList'
-    { _plqlParent         :: !Text
-    , _plqlXgafv          :: !(Maybe Xgafv)
+    { _plqlParent :: !Text
+    , _plqlXgafv :: !(Maybe Xgafv)
     , _plqlUploadProtocol :: !(Maybe Text)
-    , _plqlAccessToken    :: !(Maybe Text)
-    , _plqlUploadType     :: !(Maybe Text)
-    , _plqlFilter         :: !(Maybe Text)
-    , _plqlPageToken      :: !(Maybe Text)
-    , _plqlPageSize       :: !(Maybe (Textual Int32))
-    , _plqlCallback       :: !(Maybe Text)
+    , _plqlAccessToken :: !(Maybe Text)
+    , _plqlUploadType :: !(Maybe Text)
+    , _plqlFilter :: !(Maybe Text)
+    , _plqlPageToken :: !(Maybe Text)
+    , _plqlPageSize :: !(Maybe (Textual Int32))
+    , _plqlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
