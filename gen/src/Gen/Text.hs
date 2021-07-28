@@ -152,6 +152,7 @@ renameReserved x
         , "Secure"
         , "DateTime"
         , "DateTime'"
+        , "Nothing"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text
