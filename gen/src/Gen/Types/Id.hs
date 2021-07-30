@@ -109,7 +109,8 @@ cname :: Global -> Name ()
 cname = name
       . Text.unpack
       . renameReserved
-      . lowerHead
+      . mappend "mk"
+      . upperHead
       . Text.dropWhile separator
       . lowerFirstAcronym
       . global
@@ -120,8 +121,11 @@ bname (Prefix p) = name
     . mappend (Text.toUpper p)
     . renameBranch
 
+localName :: Local -> Name ()
+localName = name . Text.unpack . Text.replace "type" "type_" . renameField . local
+
 fname, lname, pname :: Prefix -> Local -> Name ()
-fname = pre (Text.cons '_' . renameField)
+fname _ = localName
 lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
