@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -28,12 +29,6 @@ module {{ action.ns }}
     , {{ action.type.ctor.name }}
     , {{ action.type.name }}
 
-  {% for lens in action.type.lenses %}
-    {% if lens.first %}
-    -- * Request Lenses
-    {% endif %}
-    , {{ lens.value.name }}
-  {% endfor %}
     ) where
 
 {% for import in moduleImports %}

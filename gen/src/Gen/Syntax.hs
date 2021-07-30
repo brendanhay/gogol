@@ -384,8 +384,7 @@ jsonDecls g p (Map.toList -> rs) = [from', to']
     to' = case rs of
         [(k, v)] | _additional v ->
             InstDecl () Nothing (instrule "ToJSON" (tycon g)) (Just
-                [ funD "toJSON" $
-                    infixApp (var "toJSON") "." (var (fname p k))
+                [ wildcardD "toJSON" g head emptyObj [app (var "toJSON") (var (fname p k))]
                 ])
 
         _                   ->

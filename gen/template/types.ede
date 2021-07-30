@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
@@ -14,7 +15,6 @@ module {{ moduleName }}
       {{ api.url.name }}
   {% for scope in api.scopes %}
     {% if scope.first %}
-
     -- * OAuth Scopes
     {% endif %}
     , {{ scope.value.name }}
@@ -26,9 +26,6 @@ module {{ moduleName }}
     -- * {{ schema.value.name }}
     , {{ schema.value.name }}
     , {{ schema.value.ctor.name }}
-      {% for lens in schema.value.lenses %}
-    , {{ lens.value.name }}
-      {% endfor %}
     {% when "sum" %}
 
     -- * {{ schema.value.name }}
