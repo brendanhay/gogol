@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE TypeOperators     #-}
 
@@ -51,9 +52,6 @@ module {{ moduleName }}
     -- ** {{ schema.value.name }}
     , {{ schema.value.name }}
     , {{ schema.value.ctor.name }}
-      {% for lens in schema.value.lenses %}
-    , {{ lens.value.name }}
-      {% endfor %}
     {% when "sum" %}
 
     -- ** {{ schema.value.name }}
