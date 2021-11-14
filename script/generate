@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-./script/generate-travis-config
-./script/generate-stack-config

@@ -1,0 +1,56 @@
+name:                  gogol-safebrowsing
+version:               0.5.0
+synopsis:              Google Safe Browsing SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2021 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Enables client applications to check web resources (most commonly URLs)
+    against Google-generated lists of unsafe web resources. The Safe
+    Browsing APIs are for non-commercial use only. If you need to use APIs
+    to detect malicious URLs for commercial purposes – meaning “for sale or
+    revenue-generating purposes” – please refer to the Web Risk API.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v4@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
+        , Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
+        , Network.Google.Resource.SafeBrowsing.FullHashes.Find
+        , Network.Google.Resource.SafeBrowsing.ThreatHits.Create
+        , Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
+        , Network.Google.Resource.SafeBrowsing.ThreatLists.List
+        , Network.Google.Resource.SafeBrowsing.ThreatMatches.Find
+        , Network.Google.SafeBrowsing
+        , Network.Google.SafeBrowsing.Types
+
+    other-modules:
+          Network.Google.SafeBrowsing.Types.Product
+        , Network.Google.SafeBrowsing.Types.Sum
+
+    build-depends:
+          gogol-core == 0.5.0.*
+        , base       >= 4.7 && < 5

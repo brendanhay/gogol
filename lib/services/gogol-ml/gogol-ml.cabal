@@ -1,0 +1,91 @@
+name:                  gogol-ml
+version:               0.5.0
+synopsis:              Google AI Platform Training & Prediction SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2021 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    An API to enable creating and using machine learning models.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.MachineLearning
+        , Network.Google.MachineLearning.Types
+        , Network.Google.Resource.Ml.Projects.Explain
+        , Network.Google.Resource.Ml.Projects.GetConfig
+        , Network.Google.Resource.Ml.Projects.Jobs.Cancel
+        , Network.Google.Resource.Ml.Projects.Jobs.Create
+        , Network.Google.Resource.Ml.Projects.Jobs.Get
+        , Network.Google.Resource.Ml.Projects.Jobs.GetIAMPolicy
+        , Network.Google.Resource.Ml.Projects.Jobs.List
+        , Network.Google.Resource.Ml.Projects.Jobs.Patch
+        , Network.Google.Resource.Ml.Projects.Jobs.SetIAMPolicy
+        , Network.Google.Resource.Ml.Projects.Jobs.TestIAMPermissions
+        , Network.Google.Resource.Ml.Projects.Locations.Get
+        , Network.Google.Resource.Ml.Projects.Locations.List
+        , Network.Google.Resource.Ml.Projects.Locations.Operations.Cancel
+        , Network.Google.Resource.Ml.Projects.Locations.Operations.Get
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Create
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Delete
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Get
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.List
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.AddMeasurement
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.CheckEarlyStoppingState
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.Complete
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.Create
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.Delete
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.Get
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.List
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.ListOptimalTrials
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.Stop
+        , Network.Google.Resource.Ml.Projects.Locations.Studies.Trials.Suggest
+        , Network.Google.Resource.Ml.Projects.Models.Create
+        , Network.Google.Resource.Ml.Projects.Models.Delete
+        , Network.Google.Resource.Ml.Projects.Models.Get
+        , Network.Google.Resource.Ml.Projects.Models.GetIAMPolicy
+        , Network.Google.Resource.Ml.Projects.Models.List
+        , Network.Google.Resource.Ml.Projects.Models.Patch
+        , Network.Google.Resource.Ml.Projects.Models.SetIAMPolicy
+        , Network.Google.Resource.Ml.Projects.Models.TestIAMPermissions
+        , Network.Google.Resource.Ml.Projects.Models.Versions.Create
+        , Network.Google.Resource.Ml.Projects.Models.Versions.Delete
+        , Network.Google.Resource.Ml.Projects.Models.Versions.Get
+        , Network.Google.Resource.Ml.Projects.Models.Versions.List
+        , Network.Google.Resource.Ml.Projects.Models.Versions.Patch
+        , Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
+        , Network.Google.Resource.Ml.Projects.Operations.Cancel
+        , Network.Google.Resource.Ml.Projects.Operations.Get
+        , Network.Google.Resource.Ml.Projects.Operations.List
+        , Network.Google.Resource.Ml.Projects.Predict
+
+    other-modules:
+          Network.Google.MachineLearning.Types.Product
+        , Network.Google.MachineLearning.Types.Sum
+
+    build-depends:
+          gogol-core == 0.5.0.*
+        , base       >= 4.7 && < 5

@@ -1,38 +1,52 @@
-# Haskell
-.conf
-*.o
-*.hi
-*.chi
-*.chs.h
-*.imports
-cabal.sandbox.config
-cabal.config
-
-# Dirs
-.cabal-sandbox
-dist
-vendor
-.vagrant.d
-.stack-work
-bin
-/doc
-
-# CTAGS
-TAGS
-tags
+# OSX
+.DS_Store
 
 # Emacs/Vim
 *~
 *#
 .#*
-\#*#
 .*.sw[a-z]
 *.un~
 *.org
 .projectile
 
-# OSX
-.DS_Store
+# Nix
+result*
 
 # Certificates
 *.pem
+*.key
+*.secret
+*.sec
+*.asc
+
+# Archives
+*.zip
+*.gz
+*.tar
+*.bzip2
+*.xz
+
+# Profiling
+*.prof
+*.aux
+*.hp
+*.ps
+*.pdf
+
+# Cabal
+cabal.project.local*
+/dist-newstyle
+dist*
+.ghc*
+
+# Curl
+.cookies
+*.log
+
+# Bazel
+.bazelrc.local
+/bazel-*
+
+# Direnv
+.envrc.local

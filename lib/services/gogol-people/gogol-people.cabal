@@ -1,0 +1,69 @@
+name:                  gogol-people
+version:               0.5.0
+synopsis:              Google People SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2021 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Provides access to information about profiles and contacts.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.People
+        , Network.Google.People.Types
+        , Network.Google.Resource.People.ContactGroups.BatchGet
+        , Network.Google.Resource.People.ContactGroups.Create
+        , Network.Google.Resource.People.ContactGroups.Delete
+        , Network.Google.Resource.People.ContactGroups.Get
+        , Network.Google.Resource.People.ContactGroups.List
+        , Network.Google.Resource.People.ContactGroups.Members.Modify
+        , Network.Google.Resource.People.ContactGroups.Update
+        , Network.Google.Resource.People.OtherContacts.CopyOtherContactToMyContactsGroup
+        , Network.Google.Resource.People.OtherContacts.List
+        , Network.Google.Resource.People.OtherContacts.Search
+        , Network.Google.Resource.People.People.BatchCreateContacts
+        , Network.Google.Resource.People.People.BatchDeleteContacts
+        , Network.Google.Resource.People.People.BatchUpdateContacts
+        , Network.Google.Resource.People.People.Connections.List
+        , Network.Google.Resource.People.People.CreateContact
+        , Network.Google.Resource.People.People.DeleteContact
+        , Network.Google.Resource.People.People.DeleteContactPhoto
+        , Network.Google.Resource.People.People.Get
+        , Network.Google.Resource.People.People.GetBatchGet
+        , Network.Google.Resource.People.People.ListDirectoryPeople
+        , Network.Google.Resource.People.People.SearchContacts
+        , Network.Google.Resource.People.People.SearchDirectoryPeople
+        , Network.Google.Resource.People.People.UpdateContact
+        , Network.Google.Resource.People.People.UpdateContactPhoto
+
+    other-modules:
+          Network.Google.People.Types.Product
+        , Network.Google.People.Types.Sum
+
+    build-depends:
+          gogol-core == 0.5.0.*
+        , base       >= 4.7 && < 5

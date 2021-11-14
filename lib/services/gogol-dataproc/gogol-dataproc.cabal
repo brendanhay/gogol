@@ -1,0 +1,111 @@
+name:                  gogol-dataproc
+version:               0.5.0
+synopsis:              Google Cloud Dataproc SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2021 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Dataproc
+        , Network.Google.Dataproc.Types
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Create
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Get
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.List
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Locations.AutoscalingPolicies.Update
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Create
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Delete
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Get
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.List
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Update
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Create
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.AutoscalingPolicies.Update
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.InjectCredentials
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Repair
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Start
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Stop
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Patch
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SubmitAsOperation
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Create
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Update
+
+    other-modules:
+          Network.Google.Dataproc.Types.Product
+        , Network.Google.Dataproc.Types.Sum
+
+    build-depends:
+          gogol-core == 0.5.0.*
+        , base       >= 4.7 && < 5
