@@ -12,48 +12,49 @@ module Gen.Tree
   )
 where
 
-import Control.Lens ((^.))
 import qualified Control.Monad.Except as Except
 import qualified Data.Aeson as Aeson
+import qualified Data.List as List
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
 import qualified Gen.JSON as JSON
 import Gen.Prelude
 import Gen.Types
-import qualified System.Directory.Tree as Tree
+import System.Directory.Tree (AnchoredDirTree ((:/)), DirTree (..))
+import Text.EDE (Template)
 import qualified Text.EDE as EDE
 
-root :: AnchoredDirTree a -> Path
-root (p :/ d) = decodeString p </> decodeString (name d)
+root :: AnchoredDirTree a -> FilePath
+root (p :/ d) = p </> name d
 
 fold ::
-  MonadError Error m =>
+  Monad m =>
   -- | Directories
-  (Path -> m ()) ->
+  (FilePath -> m ()) ->
   -- | Files
-  (Path -> a -> m b) ->
+  (FilePath -> a -> m ()) ->
   AnchoredDirTree a ->
-  m (AnchoredDirTree b)
-fold g f (p :/ t) = (p :/) <$> go (decodeString p) t
+  m (Either String FilePath)
+fold handleDir handleFile (p :/ tree) =
+  Except.runExceptT (go p tree >> pure p)
   where
-    go x = \case
-      Failed n e -> failure shown e >> return (Failed n e)
-      File n a -> File n <$> f (x </> decodeString n) a
-      Dir n cs -> g d >> Dir n <$> mapM (go d) cs
+    go current = \case
+      Failed _n e -> Except.throwError (show e)
+      File n a -> lift (handleFile (current </> n) a)
+      Dir n cs -> lift (handleDir next) >> traverse_ (go next) cs
         where
-          d = x </> decodeString n
+          next = current </> n
 
 -- If Nothing, then touch the file, otherwise write the Just contents.
 type Touch = Maybe Rendered
 
 populate ::
-  Path ->
+  FilePath ->
   Templates ->
   Library ->
-  Either Error (AnchoredDirTree Touch)
-populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
+  Either String (AnchoredDirTree Touch)
+populate d Templates {..} l = (d :/) . dir lib <$> layout
   where
-    layout :: Either Error [DirTree Touch]
+    layout :: Either String [DirTree Touch]
     layout =
       traverse
         sequenceA
@@ -82,32 +83,34 @@ populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
           mod' (_actNamespace a) actionImports actionTemplate (action a)
 
         action a =
-          let Object o = object ["action" .= a]
-              Object e = env
-           in pure $ Object (o <> e)
+          let Aeson.Object o = Aeson.object ["action" .= a]
+              Aeson.Object e = env
+           in pure $ Aeson.Object (o <> e)
 
     Imports {..} = serviceImports l
 
-    lib = fromText (l ^. sLibrary)
+    lib = Text.unpack (l ^. sLibrary)
 
-    mod' ns is t = write . module' ns is t
+    mod' namespace imports template env' =
+      write $ module' namespace imports template env'
 
-    file p t = write $ file' p t (pure env)
+    file path template =
+      write $ file' path template (pure env)
 
-    env :: Value
-    env = toJSON l
+    env :: Aeson.Value
+    env = Aeson.toJSON l
 
 module' ::
   ToJSON a =>
   NS ->
-  [NS] ->
+  Set NS ->
   Template ->
-  Either Error a ->
-  DirTree (Either Error Rendered)
+  Either String a ->
+  DirTree (Either String Rendered)
 module' ns is t f = namespaced ns t $ do
-  x <- f >>= JS.objectErr (show ns)
-  return $! x
-    <> fromPairs
+  x <- f >>= JSON.objectErr (show ns)
+  pure $! x
+    <> EDE.fromPairs
       [ "moduleName" .= ns,
         "moduleImports" .= is
       ]
@@ -116,31 +119,31 @@ namespaced ::
   ToJSON a =>
   NS ->
   Template ->
-  Either Error a ->
-  DirTree (Either Error Rendered)
+  Either String a ->
+  DirTree (Either String Rendered)
 namespaced (unNS -> ns) t x =
-  case map fromText ns of
+  case map Text.unpack ns of
     [] -> error "Empty namespace."
     [p] -> f p
-    ps -> foldr' nest (f (last ps)) (init ps)
+    ps -> foldr nest (f (List.last ps)) (List.init ps)
   where
     f p = file' (p <.> "hs") t x
 
-    nest d c = Dir (encodeString d) [c]
+    nest d c = Dir d [c]
 
 file' ::
   ToJSON a =>
-  Path ->
+  FilePath ->
   Template ->
-  Either Error a ->
-  DirTree (Either Error Rendered)
-file' (encodeString -> p) t f =
+  Either String a ->
+  DirTree (Either String Rendered)
+file' p t f =
   File p $
-    f >>= JS.objectErr p
-      >>= fmapL LText.pack . eitherRender t
+    f >>= JSON.objectErr p
+      >>= EDE.eitherRender t
 
-dir :: Path -> [DirTree a] -> DirTree a
-dir p = Dir (encodeString p)
+dir :: FilePath -> [DirTree a] -> DirTree a
+dir = Dir
 
 write :: DirTree (Either e a) -> DirTree (Either e (Maybe a))
 write = fmap (second Just)

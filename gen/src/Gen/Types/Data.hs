@@ -7,32 +7,31 @@
 -- Portability : non-portable (GHC extensions)
 module Gen.Types.Data where
 
+import Data.Aeson ((.=))
 import qualified Data.Aeson as Aeson
 import qualified Data.List as List
 import qualified Data.Text as Text
 import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Manipulate as Text.Manipulate
 import Gen.Prelude
+import Gen.Text (lowerHead)
 import Gen.Types.Help
 import Gen.Types.Id
 import Gen.Types.NS
 import Language.Haskell.Exts (Name)
 import Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
 
-default (Text)
-
 type Rendered = LText.Text
 
 newtype Syn a = Syn {syntax :: a}
 
 instance Pretty a => ToJSON (Syn a) where
-  toJSON = toJSON . prettyPrint . syntax
+  toJSON = Aeson.toJSON . prettyPrint . syntax
 
 data Fun = Fun' (Name ()) (Maybe Help) Rendered Rendered
 
 instance ToJSON Fun where
   toJSON (Fun' n h s d) =
-    object
+    Aeson.object
       [ "name" .= Syn n,
         "help" .= h,
         "sig" .= s,
@@ -43,7 +42,7 @@ data Branch = Branch (Name ()) Text Help
 
 instance ToJSON Branch where
   toJSON (Branch n v h) =
-    object
+    Aeson.object
       [ "name" .= Syn n,
         "value" .= v,
         "help" .= Below 6 h
@@ -56,16 +55,16 @@ data Data
 instance ToJSON Data where
   toJSON = \case
     Sum n h bs ->
-      object
+      Aeson.object
         [ "name" .= Syn n,
-          "type" .= "sum",
+          "type" .= Text.pack "sum",
           "help" .= h,
           "branches" .= bs
         ]
     Prod n h d c ls is ->
-      object
+      Aeson.object
         [ "name" .= Syn n,
-          "type" .= "prod",
+          "type" .= Text.pack "prod",
           "decl" .= d,
           "help" .= h,
           "ctor" .= c,
@@ -90,7 +89,7 @@ data Action = Action
 
 instance ToJSON Action where
   toJSON Action {..} =
-    object
+    Aeson.object
       [ "id" .= _actId,
         "ns" .= _actNamespace,
         "help" .= _actHelp,
@@ -110,12 +109,12 @@ data API = API
 
 instance ToJSON API where
   toJSON API {..} =
-    object
+    Aeson.object
       [ "aliasName" .= Syn _apiAliasName,
         "aliasProxy" .= lowerHead (Text.pack (prettyPrint _apiAliasName)),
         "alias" .= _apiAlias,
-        "resources" .= sortOn _actId _apiResources,
-        "methods" .= sortOn _actId _apiMethods,
+        "resources" .= List.sortOn _actId _apiResources,
+        "methods" .= List.sortOn _actId _apiMethods,
         "url" .= _apiURL,
         "scopes" .= _apuScopes
       ]

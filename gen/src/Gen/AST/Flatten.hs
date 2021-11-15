@@ -20,19 +20,19 @@ import Gen.Types
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
   ps <- kvTraverseMaybe globalParam (s ^. dParameters)
-  rs <- Map.traverseWithKey (resource ps "Resource") (s ^. dResources)
+  rs <- HashMap.traverseWithKey (resource ps "Resource") (s ^. dResources)
   ms <- traverse (method ps "Method") (s ^. dMethods)
-  _ <- Map.traverseWithKey globalSchema (s ^. dSchemas)
+  _ <- HashMap.traverseWithKey globalSchema (s ^. dSchemas)
 
   -- The horror.
-  ss <- use schemas
+  ss <- Lens.use schemas
 
   reserveBranches
   reserveFields
 
   let d =
         (s ^. sDescription)
-          { _dSchemas = Map.fromList $ map (join (,)) (Map.keys ss),
+          { _dSchemas = HashMap.fromList $ map (join (,)) (HashMap.keys ss),
             _dParameters = ps,
             _dResources = rs,
             _dMethods = ms
@@ -48,7 +48,7 @@ localSchema g l = schema g (Just l)
 
 -- -- unsafe due to depth first adding of a single schema's properties.
 -- let r = globalise l
--- p <- uses schemas (Map.member r)
+-- p <- Lens.uses schemas (HashMap.member r)
 -- if p
 --     then schema g (Just l) s
 --     else schema r Nothing  s
@@ -74,31 +74,35 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     object p (Obj aps ps) =
       Obj
         <$> traverse (localSchema p "additional") aps
-        <*> Map.traverseWithKey (localSchema p) ps
+        <*> HashMap.traverseWithKey (localSchema p) ps
 
     name i p xs
       | Just x <- i ^. iId = pure x
       | otherwise = do
-        r <- uses reserve (Set.member p)
-        e <- uses schemas (Map.lookup p)
+        r <- Lens.uses reserve (HashSet.member p)
+        e <- Lens.uses schemas (HashMap.lookup p)
+
         case (r, e, xs) of
           (False, Nothing, _) -> pure p
           (_, _, z : zs) -> name i (reference g z) zs
           (_, Just x, []) ->
-            throwError $
-              format
-                ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
-                g
-                ml
-                p
-                x
+            Except.throwError $
+              "Unable to generate name for: "
+                ++ show g
+                ++ ", "
+                ++ show ml
+                ++ ", "
+                ++ show p
+                ++ "\n"
+                ++ show x
           (True, _, []) ->
-            throwError $
-              format
-                ("Unable to generate name for reserved schema: " % gid % ", " % shown % ", " % gid)
-                g
-                ml
-                p
+            Except.throwError $
+              "Unable to generate name for reserved schema: "
+                ++ show g
+                ++ ", "
+                ++ show ml
+                ++ ", "
+                ++ show p
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Maybe (Param Global))
 globalParam l p = case l of
@@ -123,13 +127,13 @@ localParam g l p = do
   pure $! p {_pParam = x}
 
 resource ::
-  Map Local (Param Global) ->
+  HashMap Local (Param Global) ->
   Suffix ->
   Global ->
   Resource (Fix Schema) ->
   AST (Resource Global)
 resource qs suf g r@Resource {..} = do
-  rs <- Map.traverseWithKey (resource qs suf . reference g) _rResources
+  rs <- HashMap.traverseWithKey (resource qs suf . reference g) _rResources
   ms <- traverse (method qs suf) _rMethods
   pure
     $! r
@@ -138,13 +142,13 @@ resource qs suf g r@Resource {..} = do
       }
 
 method ::
-  Map Local (Param Global) ->
+  HashMap Local (Param Global) ->
   Suffix ->
   Method (Fix Schema) ->
   AST (Method Global)
 method qs suf m@Method {..} = do
-  ps <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
-  cn <- use sCanonicalName
+  ps <- HashMap.traverseWithKey (localParam (abbreviate _mId)) _mParameters
+  cn <- Lens.use sCanonicalName
 
   let (_, typ', _) = mname cn suf _mId
 
@@ -152,7 +156,7 @@ method qs suf m@Method {..} = do
   b <- body typ
 
   let params = ps <> qs
-      fields' = Map.delete "alt" $ b (Map.map _pParam params)
+      fields' = HashMap.delete "alt" $ b (HashMap.map _pParam params)
 
   void $ insert typ (SObj schemaInfo (Obj Nothing fields'))
   pure $! m {_mParameters = params}
@@ -165,28 +169,28 @@ method qs suf m@Method {..} = do
       Just x -> do
         let f = "payload" -- localise (ref x)
         g <- localSchema p f (Fix (SRef bodyInfo x))
-        pure (Map.insert f g)
+        pure (HashMap.insert f g)
 
 insert :: Global -> Schema Global -> AST Global
 insert g s = do
-  ms <- uses schemas (Map.lookup g)
-  n <- use sCanonicalName
+  ms <- Lens.uses schemas (HashMap.lookup g)
+  n <- Lens.use sCanonicalName
+
   case ms of
-    Just s' | s /= s' -> throwError (exists n s')
+    Just s' | s /= s' -> Except.throwError (exists n s')
     _ -> pure ()
-  schemas %= Map.insert g s
+
+  schemas %= HashMap.insert g s
+
   pure g
   where
     exists n s' =
-      format
-        ( "Schema exists: " % stext % " - " % gid
-            % "\n\n[Current]\n"
-            % shown
-            % "\n\n[Tried]\n"
-            % shown
-            % "\n\n"
-        )
-        n
-        g
-        s'
-        s
+      "Schema exists: "
+        ++ show n
+        ++ " - "
+        ++ show n
+        ++ "\n\n[Current]\n"
+        ++ show s'
+        ++ "\n\n[Tried]\n"
+        ++ show s
+        ++ "\n\n"

@@ -19,8 +19,6 @@ module Gen.Types.Id
     abbreviate,
     globalise,
     localise,
-    gid,
-    lid,
     reference,
     -- FIXME: move these
     extractPath,
@@ -41,8 +39,9 @@ module Gen.Types.Id
   )
 where
 
+import Control.Applicative (optional)
 import qualified Data.Aeson as Aeson
-import qualified Data.Attoparsec.Text as A
+import qualified Data.Attoparsec.Text as Atto
 import qualified Data.CaseInsensitive as CI
 import qualified Data.Function as Function
 import Data.Hashable ()
@@ -56,11 +55,16 @@ import qualified Language.Haskell.Exts.Build as Build
 import Language.Haskell.Exts.Syntax (Exp, Name (..))
 
 aname :: Text -> Name ()
-aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
+aname =
+  Build.name
+    . Text.unpack
+    . (<> "API")
+    . upperHead
+    . Text.replace "." ""
 
 mname :: Text -> Suffix -> Global -> (Name (), Global, Text)
 mname abrv (Suffix suf) (Global g) =
-  ( name . Text.unpack $ mconcat n <> suf, -- Action service type alias.
+  ( Build.name $ Text.unpack $ mconcat n <> suf, -- Action service type alias.
     Global n, -- Action data type.
     Text.intercalate "." ns -- Action namespace.
   )
@@ -72,7 +76,7 @@ mname abrv (Suffix suf) (Global g) =
       | otherwise = x : xs
       where
         e = Text.replace "." "" abrv
-        x : xs = map (upperAcronym . toPascal) g
+        x : xs = map toPascalCase g
 
 dname' :: Global -> Name ()
 dname' g =
@@ -82,7 +86,7 @@ dname' g =
 
 dname :: Global -> Name ()
 dname =
-  name
+  Build.name
     . Text.unpack
     . renameReserved
     . upperHead
@@ -91,34 +95,34 @@ dname =
 
 cname :: Global -> Name ()
 cname =
-  name
+  Build.name
     . Text.unpack
     . renameReserved
     . lowerHead
     . Text.dropWhile separator
-    . lowerFirstAcronym
     . global
 
 bname :: Prefix -> Text -> Name ()
 bname (Prefix p) =
-  name
+  Build.name
     . Text.unpack
     . mappend (Text.toUpper p)
+    . snd
     . renameBranch
 
 fname, lname, pname :: Prefix -> Local -> Name ()
-fname = pre (Text.cons '_' . renameField)
-lname = pre renameField
-pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
+fname = pre (Text.cons '_')
+lname = pre id
+pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead)
 
 dstr :: Global -> Exp ()
-dstr = strE . Text.unpack . toPascal . global
+dstr = Build.strE . Text.unpack . toPascalCase . global
 
 fstr :: Local -> Exp ()
-fstr = strE . Text.unpack . local
+fstr = Build.strE . Text.unpack . local
 
 pre :: (Text -> Text) -> Prefix -> Local -> Name ()
-pre f (Prefix p) = name . Text.unpack . f . mappend p . upperHead . local
+pre f (Prefix p) = Build.name . Text.unpack . f . mappend p . upperHead . local
 
 newtype Suffix = Suffix Text
   deriving (Show, IsString)
@@ -133,7 +137,7 @@ newtype Global = Global {unsafeGlobal :: [Text]}
   deriving (Ord, Show, Generic)
 
 instance Eq Global where
-  Global xs == Global ys = on (==) f xs ys
+  Global xs == Global ys = Function.on (==) f xs ys
     where
       f = CI.mk . mconcat
 
@@ -144,16 +148,13 @@ instance IsString Global where
   fromString = mkGlobal . fromString
 
 instance FromJSON Global where
-  parseJSON = withText "global" (pure . mkGlobal)
+  parseJSON = Aeson.withText "global" (pure . mkGlobal)
 
 instance FromJSONKey Global where
-  fromJSONKey = FromJSONKeyText mkGlobal
+  fromJSONKey = Aeson.FromJSONKeyText mkGlobal
 
 instance ToJSON Global where
-  toJSON = toJSON . global
-
-gid :: Format a (Global -> a)
-gid = later (Build.fromText . global)
+  toJSON = Aeson.toJSON . global
 
 newtype Local = Local {local :: Text}
   deriving
@@ -169,17 +170,14 @@ newtype Local = Local {local :: Text}
       IsString
     )
 
-lid :: Format a (Local -> a)
-lid = later (Build.fromText . local)
-
 mkGlobal :: Text -> Global
 mkGlobal = Global . Text.split (== '.')
 
 global :: Global -> Text
-global (Global g) = foldMap (upperAcronym . upperHead) g
+global (Global g) = foldMap upperHead g
 
 commasep :: Global -> Text
-commasep = mconcat . intersperse "." . unsafeGlobal
+commasep = mconcat . List.intersperse "." . unsafeGlobal
 
 reference :: Global -> Local -> Global
 reference (Global g) (Local l) =
@@ -200,31 +198,31 @@ globalise :: Local -> Global
 globalise = Global . (: []) . local
 
 extractPath :: Text -> [Either Text (Local, Maybe Text)]
-extractPath x = either (error . err) id $ A.parseOnly path x
+extractPath x = either (error . err) id $ Atto.parseOnly path x
   where
     err e = "Error parsing \"" <> Text.unpack x <> "\", " <> e
 
-    path = A.many1 (seg <|> rep <|> var') <* A.endOfInput
+    path = Atto.many1 (seg <|> rep <|> var') <* Atto.endOfInput
 
     seg =
       fmap Left $
-        optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}")
+        optional (Atto.char '/') *> Atto.takeWhile1 (Atto.notInClass "/{+*}")
 
     rep = fmap Right $ do
-      void $ A.string "{/"
-      (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
-        <* A.string "*}"
+      void $ Atto.string "{/"
+      (,Nothing) <$> fmap Local (Atto.takeWhile1 (/= '*'))
+        <* Atto.string "*}"
 
     var' = fmap Right $ do
-      void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
-      (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
-        <* A.char '}'
-        <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
+      void $ optional (Atto.char '/') *> Atto.char '{' *> optional (Atto.char '+')
+      (,) <$> fmap Local (Atto.takeWhile1 (Atto.notInClass "/{+*}:"))
+        <* Atto.char '}'
+        <*> optional (Atto.char ':' *> Atto.takeWhile1 (Atto.notInClass "/{+*}:"))
 
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
 orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)
   where
-    zs = orderBy f (sortOn f xs) (nub (ys ++ map f xs))
+    zs = orderBy f (List.sortOn f xs) (List.nub (ys ++ map f xs))
 
     del _ [] = []
     del [] rs = reverse rs
@@ -241,4 +239,4 @@ orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)
       ]
 
 orderBy :: Eq b => (a -> b) -> [a] -> [b] -> [a]
-orderBy g xs ys = sortOn (flip elemIndex ys . g) xs
+orderBy g xs ys = List.sortOn (flip List.elemIndex ys . g) xs

@@ -29,7 +29,7 @@ render s = do
   a <- renderAPI s
 
   let actions = map _actType (_apiResources a <> _apiMethods a)
-      valid = Map.keys . Map.filter (\v -> _unique v `notElem` actions)
+      valid = HashMap.keys . HashMap.filter (\v -> _unique v `notElem` actions)
 
   ss <- traverse getSolved $ valid (s ^. dSchemas)
   ds <- traverse renderSchema ss <&> catMaybes
@@ -56,14 +56,14 @@ renderSchema s = go (_schema s)
       a <- traverse getSolved aps
       b <- traverse getSolved ps
       let ab = setAdditional <$> a
-          ts = maybe b (flip (Map.insert "addtional") b) ab
+          ts = maybe b (flip (HashMap.insert "addtional") b) ab
       prod ts
       where
         prod ts =
           Prod (dname k) (i ^. iDescription)
             <$> pp Indent (objDecl k p ds ts)
             <*> ctor ts
-            <*> traverse lens (Map.toList ts)
+            <*> traverse lens (HashMap.toList ts)
             <*> traverse (pp Print) (jsonDecls k p ts)
 
         ctor ts =
@@ -78,18 +78,16 @@ renderSchema s = go (_schema s)
 
         help =
           rawHelpText $
-            sformat
-              ( "Creates a value of '" % gid
-                  % "' with the minimum fields required to make a request.\n"
-              )
-              k
+            "Creates a value of '"
+              <> global k
+              <> "' with the minimum fields required to make a request.\n"
 
 renderAPI :: Service Solved -> AST API
 renderAPI s = do
   rs <-
     traverse
       (renderResource s resourceNS "Resource")
-      (Map.elems (s ^. dResources))
+      (HashMap.elems (s ^. dResources))
       <&> concat
 
   ms <-
@@ -101,11 +99,11 @@ renderAPI s = do
 
   API alias d rs ms
     <$> svc
-    <*> traverse scope (maybe mempty (Map.toList . scopes) (s ^. dAuth))
+    <*> traverse scope (maybe mempty (HashMap.toList . scopes) (s ^. dAuth))
   where
     alias = aname (_sCanonicalName s)
 
-    url = name (serviceName s)
+    url = Build.name (serviceName s)
 
     svc =
       Fun' url (Just (rawHelpText h))
@@ -113,21 +111,18 @@ renderAPI s = do
         <*> pp Print (serviceDecl s url)
       where
         h =
-          sformat
-            ( "Default request referring to version @" % stext
-                % "@ of the "
-                % stext
-                % ". This contains the host and root path used as a starting point for constructing service requests."
-            )
-            (s ^. dVersion)
-            (s ^. dTitle)
+          "Default request referring to version @"
+            <> (s ^. dVersion)
+            <> "@ of the "
+            <> (s ^. dTitle)
+            <> ". This contains the host and root path used as a starting point for constructing service requests."
 
     scope (k, h) =
       Fun' n (Just h)
         <$> pp None (scopeSig n k)
         <*> pp None (scopeDecl n)
       where
-        n = name (scopeName s k)
+        n = Build.name (scopeName s k)
 
 renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
 renderMethod s root suf m@Method {..} = do
@@ -154,21 +149,21 @@ renderMethod s root suf m@Method {..} = do
   where
     (alias, typ', ns) = mname (_sCanonicalName s) suf _mId
 
-    url = name (serviceName s)
+    url = Build.name (serviceName s)
 
     insts is = \case
       Prod n h r c ls _ -> Prod n h r c ls is
       d -> d
 
     props = \case
-      SObj _ (Obj _ ps) -> Map.keys ps
+      SObj _ (Obj _ ps) -> HashMap.keys ps
       _ -> mempty
 
 renderResource :: Service a -> NS -> Suffix -> Resource Solved -> AST [Action]
 renderResource s root suf Resource {..} =
   liftA2
     (<>)
-    (traverse (renderResource s root suf) (Map.elems _rResources) <&> concat)
+    (traverse (renderResource s root suf) (HashMap.elems _rResources) <&> concat)
     (traverse (renderMethod s root suf) _rMethods)
 
 data PP
@@ -177,47 +172,41 @@ data PP
   | None
   deriving (Eq)
 
-pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
-pp i x
-  | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
-  | otherwise = pure (LText.pack (C8.unpack p))
+pp :: (Pretty.Pretty a, Show a, Applicative f) => PP -> a -> f Rendered
+pp i x = pure $ Text.Lazy.pack $ ByteString.Char8.unpack p
   where
-    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . BB.toLazyByteString)
-
-    e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
-
     p =
-      C8.dropWhile isSpace
-        . C8.pack
-        $ prettyPrintStyleMode s m x
+      ByteString.Char8.dropWhile Char.isSpace
+        . ByteString.Char8.pack
+        $ Pretty.prettyPrintStyleMode s m x
 
     s =
-      style
-        { mode = PageMode,
-          lineLength = 80,
-          ribbonsPerLine = 1.5
+      Pretty.style
+        { Pretty.mode = Pretty.PageMode,
+          Pretty.lineLength = 80,
+          Pretty.ribbonsPerLine = 1.5
         }
 
     m
-      | i == Print = defaultMode
-      | i == Indent = defaultMode
+      | i == Print = Pretty.defaultMode
+      | i == Indent = Pretty.defaultMode
       | otherwise =
-        defaultMode
-          { layout = PPNoLayout,
-            spacing = False
+        Pretty.defaultMode
+          { Pretty.layout = Pretty.PPNoLayout,
+            Pretty.spacing = False
           }
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
-comments :: Prefix -> Map Local Solved -> Rendered -> Rendered
-comments p (Map.toList -> rs) =
-  LText.replace " :: " "\n    :: "
-    . LText.intercalate "\n    -> "
+comments :: Prefix -> HashMap Local Solved -> Rendered -> Rendered
+comments p (HashMap.toList -> rs) =
+  Text.Lazy.replace " :: " "\n    :: "
+    . Text.Lazy.intercalate "\n    -> "
     . zipWith rel ps
-    . map LText.strip
-    . LText.splitOn "->"
+    . map Text.Lazy.strip
+    . Text.Lazy.splitOn "->"
   where
     ks = filter (parameter . _schema . snd) rs
     ps = map (Just . fst) ks ++ repeat Nothing
     rel Nothing t = t
     rel (Just l) t =
-      t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"
+      t <> " -- ^ '" <> fromString (Pretty.prettyPrint (lname p l)) <> "'"

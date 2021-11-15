@@ -1,6 +1,7 @@
 load("@rules_haskell//haskell:defs.bzl", "haskell_binary", "haskell_library")
 
 GHC_EXTENSIONS = [
+    "-XNoImplicitPrelude",
     "-XBinaryLiterals",
     "-XConstraintKinds",
     "-XDataKinds",
@@ -65,7 +66,9 @@ haskell_library(
         "@stackage//:base",
         "@stackage//:bytestring",
         "@stackage//:case-insensitive",
+        "@stackage//:containers",
         "@stackage//:directory-tree",
+        "@stackage//:text-manipulate",
         "@stackage//:doclayout",
         "@stackage//:ede",
         "@stackage//:filepath",
@@ -73,13 +76,11 @@ haskell_library(
         "@stackage//:haskell-src-exts",
         "@stackage//:lens",
         "@stackage//:mtl",
-        "@stackage//:optparse-applicative",
         "@stackage//:pandoc",
-        "@stackage//:parsec",
         "@stackage//:semigroups",
         "@stackage//:text",
-        "@stackage//:text-manipulate",
         "@stackage//:transformers",
+        "@stackage//:unliftio",
         "@stackage//:unordered-containers",
     ],
 )
@@ -97,5 +98,10 @@ haskell_binary(
     deps = [
         ":lib",
         "@stackage//:base",
+        "@stackage//:optparse-applicative",
+        "@stackage//:unliftio",
+        "@stackage//:text",
+        "@stackage//:mtl",
+        "@stackage//:lens",
     ],
 )

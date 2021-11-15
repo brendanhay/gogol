@@ -1,128 +1,127 @@
+{-# LANGUAGE TemplateHaskell #-}
+{-# OPTIONS_GHC -fno-warn-unused-top-binds #-}
+
 module Main (main) where
 
-import Control.Error
-import Control.Lens hiding ((<.>))
-import Control.Monad.State
-import Data.List (nub, sort)
-import Data.String
+import qualified UnliftIO.Directory as UnliftIO
+import qualified UnliftIO
+import qualified Control.Lens as Lens
+import Control.Monad.State.Strict as State
+import qualified Data.List as List
 import qualified Data.Text as Text
-import qualified Filesystem as FS
-import Filesystem.Path.CurrentOS
 import Gen.AST
-import Gen.Formatting
+import Gen.Prelude
 import Gen.IO
-import qualified Gen.JSON as JS
+import qualified Gen.JSON as JSON
 import qualified Gen.Tree as Tree
-import Gen.Types hiding (info)
-import Options.Applicative
+import Gen.Types hiding (service)
+import qualified Options.Applicative as Options
 
-data Opt = Opt
-  { _optOutput :: Path,
-    _optModels :: [Path],
-    _optAnnexes :: Path,
-    _optTemplates :: Path,
-    _optStatic :: Path,
-    _optVersions :: Versions
+data Options = Options
+  { _optionOutput :: FilePath,
+    _optionAnnexes :: FilePath,
+    _optionTemplates :: FilePath,
+    _optionAssets :: FilePath,
+    _optionVersions :: Versions,
+    _optionModels :: [FilePath]
   }
   deriving (Show)
 
-makeLenses ''Opt
+$(Lens.makeLenses ''Options)
 
-parser :: Parser Opt
+parser :: Options.Parser Options
 parser =
-  Opt
-    <$> option
-      isPath
-      ( long "out"
-          <> metavar "DIR"
-          <> help "Directory to place the generated library."
+  Options
+    <$> Options.strOption
+      ( Options.long "out"
+          <> Options.metavar "OUT-PATH"
+          <> Options.help "Directory to place the generated library."
       )
-    <*> some
-      ( option
-          isPath
-          ( long "model"
-              <> metavar "DIR"
-              <> help "Directory for a service's botocore models."
-          )
+    <*> Options.strOption
+      ( Options.long "annexes"
+          <> Options.metavar "PATH"
+          <> Options.help "Directory containing model annexes."
+          <> Options.value "config/annexes"
       )
-    <*> option
-      isPath
-      ( long "annexes"
-          <> metavar "DIR"
-          <> help "Directory containing botocore model annexes."
+    <*> Options.strOption
+      ( Options.long "templates"
+          <> Options.metavar "PATH"
+          <> Options.help "Directory containing ED-E templates."
+          <> Options.value "config/templates"
       )
-    <*> option
-      isPath
-      ( long "templates"
-          <> metavar "DIR"
-          <> help "Directory containing ED-E templates."
-      )
-    <*> option
-      isPath
-      ( long "static"
-          <> metavar "DIR"
-          <> help "Directory containing static files for generated libraries."
+    <*> Options.strOption
+      ( Options.long "assets"
+          <> Options.metavar "PATH"
+          <> Options.help "Directory containing static files for generated libraries."
+          <> Options.value "config/assets"
       )
     <*> ( Versions
-            <$> option
-              version
-              ( long "library-version"
-                  <> metavar "VER"
-                  <> help "Version of the library to generate."
+            <$> Options.option
+              versionReader
+              ( Options.long "library-version"
+                  <> Options.metavar "VER"
+                  <> Options.help "Version of the library to generate."
               )
-            <*> option
-              version
-              ( long "client-version"
-                  <> metavar "VER"
-                  <> help "Client library version dependecy for examples."
+            <*> Options.option
+              versionReader
+              ( Options.long "client-version"
+                  <> Options.metavar "VER"
+                  <> Options.help "Client library version dependecy for examples."
               )
-            <*> option
-              version
-              ( long "core-version"
-                  <> metavar "VER"
-                  <> help "Core library version dependency."
+            <*> Options.option
+              versionReader
+              ( Options.long "core-version"
+                  <> Options.metavar "VER"
+                  <> Options.help "Core library version dependency."
               )
         )
+    <*> Options.some
+      ( Options.strArgument
+          ( Options.metavar "MODEL-PATH"
+              <> Options.help "Directory for a service's model definitions."
+          )
+      )
 
-isPath :: ReadM Path
-isPath = eitherReader (Right . fromText . Text.dropWhileEnd (== '/') . fromString)
+versionReader :: Options.ReadM (Version v)
+versionReader = Options.eitherReader (Right . Version . Text.pack)
 
-version :: ReadM (Version v)
-version = eitherReader (Right . Version . Text.pack)
+options :: Options.ParserInfo Options
+options = Options.info (Options.helper <*> parser) Options.fullDesc
 
-options :: ParserInfo Opt
-options = info (helper <*> parser) fullDesc
-
-validate :: MonadIO m => Opt -> m Opt
-validate o = flip execStateT o $ do
+validate :: MonadIO m => Options -> m Options
+validate o = flip State.execStateT o $ do
   sequence_
-    [ check optOutput,
-      check optAnnexes,
-      check optTemplates,
-      check optStatic
+    [ check optionOutput,
+      check optionAnnexes,
+      check optionTemplates,
+      check optionAssets
     ]
-  mapM canon (o ^. optModels) >>= assign optModels
+  mapM canon (o ^. optionModels) >>= Lens.assign optionModels
   where
-    check :: (MonadIO m, MonadState s m) => Lens' s Path -> m ()
-    check l = gets (view l) >>= canon >>= assign l
+    check :: (MonadIO m, MonadState s m) => Lens' s FilePath -> m ()
+    check l = State.gets (Lens.view l) >>= canon >>= Lens.assign l
 
-    canon :: MonadIO m => Path -> m Path
-    canon = liftIO . FS.canonicalizePath
+    canon :: MonadIO m => FilePath -> m FilePath
+    canon = UnliftIO.canonicalizePath
+
 
 main :: IO ()
 main = do
-  Opt {..} <- customExecParser (prefs showHelpOnError) options >>= validate
+  Options {..} <-
+    Options.customExecParser (Options.prefs Options.showHelpOnError) options
+      >>= validate
 
-  let ms = nub . sort $ map modelFromPath _optModels
-      i = length ms
+  title "Initialising..." <* done
 
-  run $ do
-    title "Initialising..." <* done
-    title ("Loading templates from " % path) _optTemplates
+  let total = show (length _optionModels)
+      load = readTemplate _optionTemplates
+      hoistEither = either UnliftIO.throwString pure
 
-    let load = readTemplate _optTemplates
+  templates <- do
+      title $
+         "Loading templates from "
+           ++ _optionTemplates
 
-    tmpl <-
       Templates
         <$> load "cabal.ede"
         <*> load "toc.ede"
@@ -133,52 +132,56 @@ main = do
         <*> load "action.ede"
         <* done
 
-    title "Selecting new service models..."
-    say ("Found " % int % " model specifications.") (length _optModels)
-    say ("Selected " % int % " newest models.") i
-    done
+  let models =  List.nub $ List.sort $ map modelFromPath _optionModels
 
-    forM_ (zip [1 ..] ms) $ \(n, Model {..}) -> do
-      title
-        ("[" % int % "/" % int % "] model:" % stext)
-        (n :: Int)
-        i
-        modelName
+  forM_ (zip [1 ..] models) $ \(index, Model {..}) -> do
+      title $
+        "["
+          ++ show (index :: Int)
+          ++ "/"
+          ++ total
+          ++ "] model:"
+          ++ Text.unpack modelName
 
-      let anx = _optAnnexes </> fromText modelName <.> "json"
-      p <- isFile anx
-      if not p
-        then
-          say
-            ("Skipping '" % stext % "' due to missing annex configuration.")
-            modelName
-        else do
-          s <-
+      let annexPath = _optionAnnexes </> Text.unpack modelName <.> "json"
+
+      service <-
             sequence
-              [ JS.load anx,
-                JS.load modelPath
+              [ JSON.required annexPath,
+                JSON.required modelPath
               ]
-              >>= hoistEither . JS.parse . JS.merge
+              >>= hoistEither . JSON.parse . JSON.merge
 
-          say
-            ("Successfully parsed '" % stext % "' API definition.")
-            modelName
+      say $
+              "Parsed '"
+                ++ Text.unpack modelName
+                ++ "' API definition"
 
-          l <- hoistEither (runAST _optVersions s)
+      library <- hoistEither (runAST _optionVersions service)
 
-          say ("Creating " % stext % " package.") (l ^. dTitle)
+      say $
+            "Synthesised '"
+                ++ Text.unpack (library ^. dName)
+                ++ "' Haskell package"
 
-          d <-
-            hoistEither (Tree.populate _optOutput tmpl l)
+      root <-
+            hoistEither (Tree.populate _optionOutput templates library)
               >>= Tree.fold createDir writeOrTouch
+              >>= hoistEither
 
-          say
-            ("Successfully rendered " % stext % "-" % fver % " package")
-            (l ^. dName)
-            (l ^. libraryVersion)
+      say $
+            "Rendered "
+              ++ Text.unpack (library ^. sLibrary)
+              ++ "-"
+              ++ Text.unpack (fromVersion (library ^. libraryVersion))
+              ++ " package in "
+              ++ root
 
-          copyDir _optStatic (Tree.root d)
+      copyDir _optionAssets root
 
       done
 
-    title ("Successfully processed " % int % " models.") i
+  title $
+     "Processed "
+       ++ total
+       ++ " models."

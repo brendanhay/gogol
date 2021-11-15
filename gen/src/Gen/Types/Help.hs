@@ -19,6 +19,7 @@ import qualified Data.Text as Text
 import Gen.Prelude
 import qualified System.IO.Unsafe as Unsafe
 import qualified Text.DocLayout as DocLayout
+import Text.Pandoc (Pandoc)
 import qualified Text.Pandoc as Pandoc
 
 data Help
@@ -51,14 +52,15 @@ rawHelpText :: Text -> Help
 rawHelpText = Raw
 
 instance FromJSON Help where
-  parseJSON = withText "help" $ \t ->
-    case (Unsafe.unsafePerformIO . Pandoc.runIO) (Pandoc.readHtml def t) of
-      Left e -> fail (show e)
-      Right x -> pure $! Pan x t
+  parseJSON =
+    Aeson.withText "Help" $ \t ->
+      case Unsafe.unsafePerformIO $ Pandoc.runIO $ Pandoc.readHtml Pandoc.def t of
+        Left e -> fail (show e)
+        Right x -> pure $! Pan x t
 
 instance ToJSON Help where
   toJSON =
-    toJSON
+    Aeson.toJSON
       . mappend "-- |"
       . Text.map f
       . Text.drop 2
@@ -71,22 +73,32 @@ instance ToJSON Help where
 data Desc = Desc !Int Help
 
 instance ToJSON Desc where
-  toJSON (Desc n h) = toJSON . wrap (replicate n ' ') $ flatten h
+  toJSON (Desc n h) =
+    Aeson.toJSON
+      . wrap (replicate n ' ')
+      $ flatten h
 
 data Below = Below !Int Help
 
 instance ToJSON Below where
-  toJSON (Below n h) = toJSON . wrap (replicate n ' ' <> "-- ") $ flatten h
+  toJSON (Below n h) =
+    Aeson.toJSON
+      . wrap (replicate n ' ' <> "-- ")
+      $ flatten h
 
 flatten :: Help -> String
 flatten = \case
   Help xs -> foldMap flatten xs
   Raw t -> Text.unpack t
-  Pan d _t -> Text.unpack ((Unsafe.unsafePerformIO . Pandoc.runIOorExplode) (Pandoc.writeHaddock def d))
+  Pan d _t ->
+    Text.unpack
+      . Unsafe.unsafePerformIO
+      . Pandoc.runIOorExplode
+      $ Pandoc.writeHaddock Pandoc.def d
 
 wrap :: String -> String -> Text
 wrap sep =
-  Text.dropWhileEnd isSpace
-    . render (Just 76)
-    . prefixed sep
+  Text.dropWhileEnd Char.isSpace
+    . DocLayout.render (Just 76)
+    . DocLayout.prefixed sep
     . fromString

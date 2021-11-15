@@ -1,3 +1,5 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 -- |
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015-2021 Brendan Hay
@@ -16,17 +18,19 @@ module Gen.Types
   )
 where
 
-import Control.Lens ()
+import Control.Applicative (optional)
+import qualified Control.Lens as Lens
 import qualified Data.Aeson as Aeson
-import qualified Data.Attoparsec.Text as A
+import qualified Data.Attoparsec.Text as Atto
 import qualified Data.CaseInsensitive as CI
-import Data.Function (on)
-import qualified Data.HashMap.Strict as Map
-import qualified Data.HashSet as Set
+import qualified Data.Function as Function
+import qualified Data.HashMap.Strict as HashMap
+import qualified Data.HashSet as HashSet
 import qualified Data.List as List
+import Data.Ord (Down (..))
 import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Builder as Build
+import qualified Data.Text.Lazy as Text.Lazy
+import qualified Data.Text.Lazy.Builder as TextBuilder
 import qualified Data.Text.Manipulate as Text.Manipulate
 import Gen.Orphans ()
 import Gen.Prelude
@@ -37,18 +41,16 @@ import Gen.Types.Id
 import Gen.Types.Map
 import Gen.Types.NS
 import Gen.Types.Schema
+import qualified System.FilePath as FilePath
 import Text.EDE (Template)
 
-type Error = LText.Text
+type Error = String
 
-newtype Version (v :: Symbol) = Version Text
+newtype Version (v :: Symbol) = Version { fromVersion :: Text }
   deriving (Eq, Show)
 
 instance ToJSON (Version v) where
-  toJSON (Version v) = toJSON v
-
-fver :: Format a (Version v -> a)
-fver = later (\(Version v) -> Build.fromText v)
+  toJSON (Version v) = Aeson.toJSON v
 
 type LibraryVer = Version "library"
 
@@ -63,7 +65,7 @@ data Versions = Versions
   }
   deriving (Show)
 
-makeClassy ''Versions
+$(Lens.makeClassy ''Versions)
 
 data Release
   = Sandbox
@@ -83,10 +85,10 @@ instance Ord ModelVersion where
         (_, Nothing) -> LT
         (Just x, Just y) -> compare x y
 
-parseVersion :: Text -> Either String ModelVersion
-parseVersion x =
-  first (mappend (Text.unpack x) . mappend " -> ") $
-    A.parseOnly (preface *> (empty' <|> version) <* A.endOfInput) x
+parseVersion :: String -> Either String ModelVersion
+parseVersion s@(Text.pack -> x) =
+  first (mappend s . mappend " -> ") $
+    Atto.parseOnly (preface *> (empty' <|> version) <* Atto.endOfInput) x
   where
     empty' = ModelVersion 0 <$> (alpha <|> beta <|> exp')
     version =
@@ -94,49 +96,49 @@ parseVersion x =
         <$> number
         <*> (alpha <|> beta <|> sandbox <|> dev <|> pure Nothing)
 
-    preface = A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
+    preface = Atto.takeWhile (/= '_') *> void (Atto.char '_') <|> pure ()
 
     protoVersionParser = do
-      n <- A.many1 A.digit
-      _ <- A.char 'p'
-      p <- A.many1 A.digit
+      n <- Atto.many1 Atto.digit
+      _ <- Atto.char 'p'
+      p <- Atto.many1 Atto.digit
       return (read (n ++ "." ++ p) :: Double)
-    number = A.takeWhile (/= 'v') *> A.char 'v' *> (protoVersionParser <|> A.double)
+    number = Atto.takeWhile (/= 'v') *> Atto.char 'v' *> (protoVersionParser <|> Atto.double)
 
     dev =
-      A.string "dev"
-        *> (Dev <$> optional A.decimal <*> optional A.letter)
+      Atto.string "dev"
+        *> (Dev <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
     alpha =
-      A.string "alpha"
-        *> (Alpha <$> optional A.decimal <*> optional A.letter)
+      Atto.string "alpha"
+        *> (Alpha <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
     beta =
-      A.string "beta"
-        *> (Beta <$> optional A.decimal <*> optional A.letter)
+      Atto.string "beta"
+        *> (Beta <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
-    sandbox = Just Sandbox <$ A.string "sandbox"
-    exp' = Just Sandbox <$ A.string "exp" <* A.decimal
+    sandbox = Just Sandbox <$ Atto.string "sandbox"
+    exp' = Just Sandbox <$ Atto.string "exp" <* Atto.decimal
 
 data Model = Model
   { modelName :: Text,
     modelPrefix :: Text,
     modelVersion :: ModelVersion,
-    modelPath :: Path
+    modelPath :: FilePath
   }
 
 instance Eq Model where
-  (==) = on (==) modelPrefix
+  (==) = Function.on (==) modelPrefix
 
 instance Ord Model where
   compare a b =
-    on compare modelPrefix a b
-      <> on compare (Down . modelVersion) a b
+    Function.on compare modelPrefix a b
+      <> Function.on compare (Down . modelVersion) a b
 
-modelFromPath :: Path -> Model
+modelFromPath :: FilePath -> Model
 modelFromPath x = Model n p v x
   where
     n =
@@ -146,8 +148,8 @@ modelFromPath x = Model n p v x
         . dropWhile (/= "model")
         $ Text.split (== '/') p
 
-    p = toTextIgnore (Path.parent (Path.parent x))
-    v = either error id $ parseVersion (toTextIgnore (Path.dirname x))
+    p = Text.pack $ FilePath.takeDirectory $ FilePath.takeDirectory x
+    v = either error id (parseVersion x)
 
 data Templates = Templates
   { cabalTemplate :: Template,
@@ -160,25 +162,25 @@ data Templates = Templates
   }
 
 data Imports = Imports
-  { tocImports :: [NS],
-    typeImports :: [NS],
-    prodImports :: [NS],
-    sumImports :: [NS],
-    actionImports :: [NS]
+  { tocImports :: Set NS,
+    typeImports :: Set NS,
+    prodImports :: Set NS,
+    sumImports :: Set NS,
+    actionImports :: Set NS
   }
 
 serviceImports :: HasService a b => a -> Imports
 serviceImports s =
   Imports
-    { tocImports = [preludeNS],
-      typeImports = sort [preludeNS, prodNS s, sumNS s],
-      prodImports = sort [preludeNS, sumNS s],
-      sumImports = [preludeSumNS],
-      actionImports = sort [preludeNS, typesNS s]
+    { tocImports = fromList [preludeNS],
+      typeImports = fromList [preludeNS, prodNS s, sumNS s],
+      prodImports = fromList [preludeNS, sumNS s],
+      sumImports = fromList [preludeSumNS],
+      actionImports = fromList [preludeNS, typesNS s]
     }
 
 tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
-tocNS = mappend "Network.Google" . mkNS . view sCanonicalName
+tocNS = mappend "Network.Google" . mkNS . Lens.view sCanonicalName
 typesNS = (<> "Types") . tocNS
 prodNS = (<> "Product") . typesNS
 sumNS = (<> "Sum") . typesNS
@@ -196,17 +198,14 @@ methodNS = "Network.Google.Method"
 
 exposedModules :: Library -> [NS]
 exposedModules l =
-  sort $
+  List.sort $
     tocNS l :
     typesNS l :
     map _actNamespace (_apiResources (_lAPI l))
       ++ map _actNamespace (_apiMethods (_lAPI l))
 
 otherModules :: Library -> [NS]
-otherModules s = sort [prodNS s, sumNS s]
-
-toTextIgnore :: Path -> Text
-toTextIgnore = either id id . Path.toText
+otherModules s = List.sort [prodNS s, sumNS s]
 
 data Library = Library
   { _lVersions :: Versions,
@@ -215,7 +214,7 @@ data Library = Library
     _lSchemas :: [Data]
   }
 
-makeLenses ''Library
+$(Lens.makeLenses ''Library)
 
 instance HasVersions Library where
   versions = lVersions
@@ -228,7 +227,7 @@ instance HasService Library Global where
 
 instance ToJSON Library where
   toJSON l =
-    object
+    Aeson.object
       -- Library
       [ "libraryName" .= (l ^. sLibrary),
         "libraryTitle" .= renameTitle (l ^. dTitle),
@@ -291,7 +290,7 @@ data Solved = Solved
 instance HasInfo Solved where
   info = f . info
     where
-      f = lens _schema (\s a -> s {_schema = a})
+      f = Lens.lens _schema (\s a -> s {_schema = a})
 
 monoid :: Solved -> Bool
 monoid = elem DMonoid . _deriving
@@ -304,15 +303,15 @@ setAdditional s =
         _type = TMap (TLit Text) (_type s)
       }
 
-type Seen = Map (CI Text {- Prefix -}) (Set (CI Text {- Inhabitants -}))
+type Seen = HashMap (CI Text {- Prefix -}) (HashSet (CI Text {- Inhabitants -}))
 
 data Memo = Memo
   { _context :: Service (Fix Schema),
-    _typed :: Map Global TType,
-    _derived :: Map Global [Derive],
-    _reserve :: Set Global,
-    _schemas :: Map Global (Schema Global),
-    _prefixed :: Map Global Prefix,
+    _typed :: HashMap Global TType,
+    _derived :: HashMap Global [Derive],
+    _reserve :: HashSet Global,
+    _schemas :: HashMap Global (Schema Global),
+    _prefixed :: HashMap Global Prefix,
     _branches :: Seen,
     _fields :: Seen
   }
@@ -322,18 +321,18 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
   where
     -- Top-level schema definitions with ids.
     res =
-      Set.fromList
-        . mapMaybe (view iId)
-        $ Map.elems (s ^. dSchemas)
+      HashSet.fromList
+        . mapMaybe (Lens.view iId)
+        $ HashMap.elems (s ^. dSchemas)
     -- Types available in Network.Google.Prelude.
     core =
-      Map.fromList
+      HashMap.fromList
         [ ("GBody", SLit requiredInfo RqBody),
           ("Stream", SLit requiredInfo RsBody),
           ("JSONValue", SLit requiredInfo JSONValue)
         ]
 
-makeLenses ''Memo
+$(Lens.makeLenses ''Memo)
 
 instance HasService Memo (Fix Schema) where
   service = context
@@ -342,7 +341,8 @@ type AST = ExceptT Error (State Memo)
 
 reserveType :: Global -> AST Global
 reserveType g = do
-  p <- uses reserve (Set.member g)
+  p <- Lens.uses reserve (HashSet.member g)
+
   pure
     $! if p
       then reference g "'"
@@ -350,14 +350,18 @@ reserveType g = do
 
 reserveBranches :: AST ()
 reserveBranches = do
-  ss <- use schemas
-  let bs = Set.fromList $ map (CI.mk . global) (Map.keys ss)
-  branches %= Map.insertWith (<>) mempty bs
+  ss <- Lens.use schemas
+
+  let bs = HashSet.fromList $ map (CI.mk . global) (HashMap.keys ss)
+
+  branches %= HashMap.insertWith (<>) mempty bs
 
 reserveFields :: AST ()
 reserveFields = do
-  ss <- use schemas
-  forM_ (Map.keys ss) $ \(global -> k) -> do
-    let p : ps = splitWords k
+  ss <- Lens.use schemas
+
+  forM_ (HashMap.keys ss) $ \(global -> k) -> do
+    let p : ps = Text.Manipulate.splitWords k
         s = mconcat ps
-    fields %= Map.insertWith (<>) (CI.mk p) (Set.singleton (CI.mk s))
+
+    fields %= HashMap.insertWith (<>) (CI.mk p) (HashSet.singleton (CI.mk s))

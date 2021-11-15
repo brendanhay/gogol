@@ -3,18 +3,18 @@ workspace(name = "gogol")
 load("//tools:repo.bzl", "versioned_http_archive")
 
 #
-# Botocore service definitions
+# Service definitions
 #
 
-# This can be auto-updated via ./bin/update-botocore.
+# This can be auto-updated via ./bin/update-definitions.
 versioned_http_archive(
     name = "google-api-go-client",
     build_file_content = """
 exports_files(glob(["**/*.json"]))
 """,
-    strip_prefix = "botocore-{version}/botocore/data",
-    url = "https://github.com/google/google-api-go-client",
-    version = "f759d4eb138a5b969c23f586c6238d9e7c20cba0",
+    strip_prefix = "google-api-go-client-{version}",
+    url = "https://github.com/googleapis/google-api-go-client/archive/{version}.tar.gz",
+    version = "74534c76ee110c2a9b4669cc143b555431057270",
 )
 
 #
@@ -255,31 +255,29 @@ stack_snapshot(
         "zlib": ["@zlib.dev//:zlib"],
         "digest": ["@zlib.dev//:zlib"],
     },
-    # The keep comments per package line prevents `bazel run //:gazelle-update-repos`
-    # from pruning packages that are used by hand-written `haskell_library` rules,
-    # such as ./gen and ./docs.
     packages = [
         "aeson",
         "attoparsec",
         "base",
         "bytestring",
         "case-insensitive",
+        "containers",
         "directory-tree",
         "doclayout",
-        "ede-0.3.2.0",  # keep
+        "ede-0.3.2.0",
         "filepath",
         "hashable",
-        "haskell-src-exts",  # keep
+        "haskell-src-exts",
         "lens",
         "mtl",
         "optparse-applicative",
         "pandoc",
-        "parsec",
         "semigroups",
         "text",
-        "text-manipulate",
         "transformers",
+        "unliftio",
         "unordered-containers",
+        "text-manipulate",
         "xml-conduit",
     ],
     setup_deps = {

@@ -11,12 +11,11 @@ import qualified Control.Lens as Lens
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.List as List
 import qualified Data.Text as Text
-import qualified Data.Text.Manipulate as Text.Manipulate
 import Gen.Prelude
 import Gen.Text
 import Gen.Types
-import qualified Language.Haskell.Exts.Build as Build
-import Language.Haskell.Exts.Syntax ()
+import Language.Haskell.Exts.Build hiding (alt)
+import Language.Haskell.Exts.Syntax hiding (Alt)
 
 serviceSig :: Name () -> Decl ()
 serviceSig n = TypeSig () [n] (TyCon () "ServiceConfig")
@@ -83,7 +82,7 @@ downloadAlias m
   where
     download = servantSub (downloadVerb m) (params ++ [downloadParam])
 
-    params = requestQuery m . Map.delete "alt" $ requestQueryParams m
+    params = requestQuery m . HashMap.delete "alt" $ requestQueryParams m
 
 uploadAlias :: [Type ()] -> Method Solved -> Maybe (Type ())
 uploadAlias sub m
@@ -115,7 +114,7 @@ requestPath :: Method Solved -> Text -> [Type ()]
 requestPath m = map go . extractPath
   where
     go (Left t) = sing t
-    go (Right (l, c)) = case Map.lookup l (_mParameters m) of
+    go (Right (l, c)) = case HashMap.lookup l (_mParameters m) of
       Nothing -> error $ "Unable to find path parameter " ++ show l
       Just x -> case c of
         Nothing
@@ -151,10 +150,10 @@ requestPath m = map go . extractPath
             )
             (terminalType (_type (_pParam x)))
 
-requestQuery :: Method Solved -> Map Local (Param Solved) -> [Type ()]
+requestQuery :: Method Solved -> HashMap Local (Param Solved) -> [Type ()]
 requestQuery m xs =
   mapMaybe go $
-    orderParams fst (Map.toList xs) (_mParameterOrder m)
+    orderParams fst (HashMap.toList xs) (_mParameterOrder m)
   where
     go (k, x) = case _pLocation x of
       Query
@@ -166,12 +165,12 @@ requestQuery m xs =
         t = terminalType (_type (_pParam x))
         n = sing (local k)
 
-requestQueryParams :: Method a -> Map Local (Param a)
-requestQueryParams = Map.filter ((/= Path) . _pLocation) . _mParameters
+requestQueryParams :: Method a -> HashMap Local (Param a)
+requestQueryParams = HashMap.filter ((/= Path) . _pLocation) . _mParameters
 
 servantOr, servantSub :: Type () -> [Type ()] -> Type ()
 servantOr = foldl' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym ":<|>")) r)
-servantSub = foldr' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym ":>")) r)
+servantSub = foldr (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym ":>")) r)
 
 jsonVerb :: Method a -> Type ()
 jsonVerb m =
@@ -300,7 +299,7 @@ uploadDecl n pre api url fs m =
 
         alt =
           app (var "Just") . var . name . Text.unpack . alternate
-            <$> (Map.lookup "alt" (_mParameters m) >>= view iDefault)
+            <$> (HashMap.lookup "alt" (_mParameters m) >>= Lens.view iDefault)
 
         payload
           | isJust (_mRequest m) = [var (fname pre "payload")]
@@ -345,7 +344,7 @@ requestDecl n pre api url fs m =
       where
         alt =
           app (var "Just") . var . name . Text.unpack . alternate
-            <$> (Map.lookup "alt" (_mParameters m) >>= view iDefault)
+            <$> (HashMap.lookup "alt" (_mParameters m) >>= Lens.view iDefault)
 
         payload
           | isJust (_mRequest m) = Just $ var (fname pre "payload")
@@ -387,7 +386,7 @@ googleRequestDecl n assoc extras pre api url m pat prec =
 
     rhs = UnGuardedRhs () . appFun (var "go") $ map go fs ++ extras ++ [var url]
       where
-        go l = case Map.lookup l ps of
+        go l = case HashMap.lookup l ps of
           Just p
             | _pLocation p == Query,
               defaulted p,
@@ -409,13 +408,13 @@ googleRequestDecl n assoc extras pre api url m pat prec =
         v = var . fname pre
 
     fs =
-      delete "alt"
-        . orderParams id (Map.keys (_mParameters m))
-        . nub
+      List.delete "alt"
+        . orderParams id (HashMap.keys (_mParameters m))
+        . List.nub
         $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
 
-jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl ()]
-jsonDecls g p (Map.toList -> rs) = [from', to']
+jsonDecls :: Global -> Prefix -> HashMap Local Solved -> [Decl ()]
+jsonDecls g p (HashMap.toList -> rs) = [from', to']
   where
     from' =
       InstDecl
@@ -513,12 +512,12 @@ seqE :: Exp () -> [Exp ()] -> Exp ()
 seqE l [] = app (var "pure") l
 seqE l (r : rs) = infixApp l "<$>" (infixE r "<*>" rs)
 
-objDecl :: Global -> Prefix -> [Derive] -> Map Local Solved -> Decl ()
+objDecl :: Global -> Prefix -> [Derive] -> HashMap Local Solved -> Decl ()
 objDecl n p ds rs =
   DataDecl () arity Nothing (DHead () (dname n)) [conDecl (dname' n) p rs] [der ds]
   where
     arity
-      | Map.size rs == 1 = NewType ()
+      | HashMap.size rs == 1 = NewType ()
       | otherwise = DataType ()
 
     der = Deriving () Nothing . map (unqualrule . drop 1 . show)
@@ -541,35 +540,36 @@ objDecl n p ds rs =
 --         ]
 --     ]
 
-conDecl :: Name () -> Prefix -> Map Local Solved -> QualConDecl ()
+conDecl :: Name () -> Prefix -> HashMap Local Solved -> QualConDecl ()
 conDecl n p rs = QualConDecl () Nothing Nothing body
   where
-    body = case Map.toList rs of
-      [] -> ConDecl () n []
-      [x] -> RecDecl () n [field internalType x]
-      xs -> RecDecl () n (map (field (strict . internalType)) xs)
+    body =
+      case HashMap.toList rs of
+        [] -> ConDecl () n []
+        [x] -> RecDecl () n [field internalType x]
+        xs -> RecDecl () n (map (field (strict . internalType)) xs)
 
     field f (l, v) = FieldDecl () [fname p l] (f (_type v))
 
-ctorSig :: Global -> Map Local Solved -> Decl ()
+ctorSig :: Global -> HashMap Local Solved -> Decl ()
 ctorSig n rs = TypeSig () [cname n] ts
   where
-    ts = foldr' (TyFun ()) (TyCon () (UnQual () (dname n))) ps
-    ps = parameters (Map.elems rs)
+    ts = foldr (TyFun ()) (TyCon () (UnQual () (dname n))) ps
+    ps = parameters (HashMap.elems rs)
 
-ctorDecl :: Global -> Prefix -> Map Local Solved -> Decl ()
+ctorDecl :: Global -> Prefix -> HashMap Local Solved -> Decl ()
 ctorDecl n p rs = sfun c ps (UnGuardedRhs () rhs) noBinds
   where
     c = cname n
     d = dname' n
 
     rhs
-      | Map.null rs = var d
+      | HashMap.null rs = var d
       | otherwise =
         RecConstr () (UnQual () d) $
-          map (uncurry (fieldUpdate p)) (Map.toList rs)
+          map (uncurry (fieldUpdate p)) (HashMap.toList rs)
 
-    ps = map (pname p) . Map.keys $ Map.filter parameter rs
+    ps = map (pname p) $ HashMap.keys $ HashMap.filter parameter rs
 
 fieldUpdate :: Prefix -> Local -> Solved -> FieldUpdate ()
 fieldUpdate p l s = FieldUpdate () (UnQual () (fname p l)) rhs

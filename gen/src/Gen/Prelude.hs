@@ -29,9 +29,9 @@ module Gen.Prelude
   )
 where
 
-import Control.Applicative as Export (Alternative ((<|>)))
+import Control.Applicative as Export (Alternative ((<|>)), liftA2)
 import Control.Exception as Export (Exception, SomeException)
-import Control.Lens as Export (Lens, Lens', Prism, Prism')
+import Control.Lens as Export (Getter, Lens, Lens', Prism, Prism', (%=), (%~), (.~), (<>~), (?~), (^.), (^..), (^?))
 import Control.Monad as Export
 import Control.Monad.Except as Export
   ( Except,
@@ -48,12 +48,7 @@ import Control.Monad.State.Strict as Export (MonadState, State, StateT (StateT))
 import Control.Monad.Trans as Export (MonadTrans (lift))
 import Control.Monad.Trans.Identity as Export (IdentityT (IdentityT))
 import Control.Monad.Trans.Maybe as Export (MaybeT (MaybeT))
-import Data.Aeson as Export
-  ( FromJSON,
-    FromJSONKey,
-    ToJSON,
-    ToJSONKey,
-  )
+import Data.Aeson as Export (FromJSON, FromJSONKey, ToJSON, ToJSONKey, (.!=), (.:), (.:?), (.=))
 import Data.Bifoldable as Export (Bifoldable (bifoldMap), bifor_, bitraverse_)
 import Data.Bifunctor as Export (Bifunctor (bimap, first, second))
 import Data.Bitraversable as Export (Bitraversable (bitraverse), bifor)
@@ -62,8 +57,8 @@ import qualified Data.ByteString.Builder
 import qualified Data.ByteString.Lazy
 import Data.CaseInsensitive as Export (CI)
 import Data.Coerce as Export (Coercible)
-import Data.Either as Export (partitionEithers)
-import Data.Foldable as Export (for_, traverse_)
+import Data.Either as Export
+import Data.Foldable as Export (foldl', for_, traverse_)
 import Data.Function as Export ((&))
 import Data.Functor as Export (($>), (<&>))
 import Data.Functor.Const as Export (Const (Const), getConst)
@@ -74,18 +69,10 @@ import Data.HashSet as Export (HashSet)
 import Data.Hashable as Export (Hashable (hashWithSalt))
 import Data.IORef as Export (IORef)
 import Data.Int as Export (Int16, Int32, Int64, Int8)
-import Data.Kind as Export (Type)
-import Data.List.NonEmpty as Export (NonEmpty ((:|)))
+import Data.List.NonEmpty as Export (NonEmpty (..))
 import Data.Maybe as Export
-  ( catMaybes,
-    fromMaybe,
-    isJust,
-    isNothing,
-    listToMaybe,
-    mapMaybe,
-    maybeToList,
-  )
 import Data.Proxy as Export (Proxy (Proxy))
+import Data.Set as Export (Set)
 import Data.String as Export (IsString (fromString))
 import qualified Data.Text
 import qualified Data.Text.Lazy
@@ -98,7 +85,6 @@ import GHC.Exts as Export (Constraint, IsList (fromList, toList))
 import GHC.Generics as Export (Generic)
 import GHC.Stack as Export (HasCallStack)
 import GHC.TypeLits as Export (KnownNat, KnownSymbol, Nat, Symbol)
-import qualified GHC.TypeLits as TypeLits
 import Numeric.Natural as Export (Natural)
 import System.FilePath as Export ((<.>), (</>))
 import Prelude as Export hiding
@@ -108,6 +94,7 @@ import Prelude as Export hiding
     last,
     lines,
     log,
+    lookup,
     product,
     sum,
     tail,
