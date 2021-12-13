@@ -65,7 +65,7 @@ bazel build //gen @google-api-go-client//... @com_github_bazelbuild_buildtools//
 
 definitions="$(bazel info output_base)/external/google-api-go-client"
 version="$(sed -n '0,/^version: */s///p' lib/gogol/gogol.cabal)"
-services="configs/services"
+services="configs/annexes"
 models=()
 
 if [ $# -eq 0 ]; then
@@ -96,7 +96,9 @@ generator=(
 )
 
 for model in "${models[@]}"; do
-  generator+=("${definitions}/${model}")
+  for definition in "${definitions}/${model}"/**/*.json; do
+    generator+=("${definition}")
+  done
 done
 
 # Generate new sources in tmp.

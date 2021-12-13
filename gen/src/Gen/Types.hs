@@ -86,11 +86,12 @@ instance Ord ModelVersion where
         (Just x, Just y) -> compare x y
 
 parseVersion :: String -> Either String ModelVersion
-parseVersion s@(Text.pack -> x) =
-  first (mappend s . mappend " -> ") $
-    Atto.parseOnly (preface *> (empty' <|> version) <* Atto.endOfInput) x
+parseVersion str@(Text.pack -> input) =
+  first (mappend str . mappend " -> ") $
+    Atto.parseOnly (preface *> (empty' <|> version) <* Atto.endOfInput) input
   where
     empty' = ModelVersion 0 <$> (alpha <|> beta <|> exp')
+
     version =
       ModelVersion
         <$> number
@@ -103,6 +104,7 @@ parseVersion s@(Text.pack -> x) =
       _ <- Atto.char 'p'
       p <- Atto.many1 Atto.digit
       return (read (n ++ "." ++ p) :: Double)
+
     number = Atto.takeWhile (/= 'v') *> Atto.char 'v' *> (protoVersionParser <|> Atto.double)
 
     dev =
@@ -116,40 +118,44 @@ parseVersion s@(Text.pack -> x) =
         <&> Just
 
     beta =
-      Atto.string "beta"
+      (Atto.string "beta" <|> Atto.string "b")
         *> (Beta <$> optional Atto.decimal <*> optional Atto.letter)
         <&> Just
 
-    sandbox = Just Sandbox <$ Atto.string "sandbox"
+    sandbox =
+      Just Sandbox
+        <$ ( Atto.string "sandbox"
+             <|> Atto.string "configuration"
+             <|> Atto.string "management"
+           )
+
     exp' = Just Sandbox <$ Atto.string "exp" <* Atto.decimal
 
 data Model = Model
   { modelName :: Text,
-    modelPrefix :: Text,
     modelVersion :: ModelVersion,
     modelPath :: FilePath
-  }
+  } deriving stock (Show)
 
 instance Eq Model where
-  (==) = Function.on (==) modelPrefix
+  (==) = Function.on (==) modelPath
 
 instance Ord Model where
   compare a b =
-    Function.on compare modelPrefix a b
+    Function.on compare modelName a b
       <> Function.on compare (Down . modelVersion) a b
 
-modelFromPath :: FilePath -> Model
-modelFromPath x = Model n p v x
-  where
-    n =
-      Text.init
-        . Text.intercalate "/"
-        . drop 1
-        . dropWhile (/= "model")
-        $ Text.split (== '/') p
+parseModel :: FilePath -> Either String Model
+parseModel path = do
+  let dir = FilePath.takeDirectory path
 
-    p = Text.pack $ FilePath.takeDirectory $ FilePath.takeDirectory x
-    v = either error id (parseVersion x)
+  version <- either (Left . mappend (path ++ ": ")) pure $ parseVersion (FilePath.takeBaseName dir)
+
+  pure Model
+    { modelName = Text.pack (FilePath.takeBaseName (FilePath.takeDirectory dir)),
+      modelVersion = version,
+      modelPath = path
+    }
 
 data Templates = Templates
   { cabalTemplate :: Template,

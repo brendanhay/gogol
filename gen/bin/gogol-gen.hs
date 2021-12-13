@@ -132,7 +132,9 @@ main = do
         <*> load "action.ede"
         <* done
 
-  let models =  List.nub $ List.sort $ map modelFromPath _optionModels
+  models <-
+    List.nub . List.sort
+    <$> either UnliftIO.throwString pure (traverse parseModel _optionModels)
 
   forM_ (zip [1 ..] models) $ \(index, Model {..}) -> do
       title $
