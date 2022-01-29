@@ -38,7 +38,7 @@ import qualified Data.ByteString              as BS
 import           Data.ByteString.Builder      (Builder)
 import qualified Data.ByteString.Char8        as BS8
 import qualified Data.ByteString.Lazy         as LBS
-import qualified Data.ByteString.Lazy.Builder as Build
+import qualified Data.ByteString.Builder as Build
 import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
 import           Data.Int                     (Int16, Int8)
