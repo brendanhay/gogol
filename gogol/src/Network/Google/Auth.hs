@@ -28,6 +28,9 @@ module Network.Google.Auth
     -- ** Service account user impersonation
     , serviceAccountUser
 
+    -- *** Kubernetes
+    , serviceAccountTokenFile
+
     -- ** Installed Application Credentials
     , installedApplication
     , formURL
@@ -81,6 +84,7 @@ import           Network.Google.Auth.ApplicationDefault
 import           Network.Google.Auth.InstalledApplication
 import           Network.Google.Auth.Scope
 import           Network.Google.Auth.ServiceAccount
+import           Network.Google.Auth.TokenFile
 import           Network.Google.Compute.Metadata          (checkGCEVar)
 import           Network.Google.Internal.Auth
 import           Network.Google.Internal.Logger           (Logger)
@@ -170,10 +174,11 @@ exchange :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
 exchange c l = fmap (Auth c) . action l
   where
     action = case c of
-        FromMetadata s   -> metadataToken       s
-        FromAccount  a   -> serviceAccountToken a (Proxy :: Proxy s)
-        FromClient   x n -> exchangeCode        x n
-        FromUser     u   -> authorizedUserToken u Nothing
+        FromMetadata  s   -> metadataToken       s
+        FromAccount   a   -> serviceAccountToken a (Proxy :: Proxy s)
+        FromClient    x n -> exchangeCode        x n
+        FromUser      u   -> authorizedUserToken u Nothing
+        FromTokenFile f   -> \_l _m -> readTokenFile f
 
 -- | Refresh an existing 'OAuthToken'.
 refresh :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
@@ -184,10 +189,11 @@ refresh :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
 refresh (Auth c t) l = fmap (Auth c) . action l
   where
     action = case c of
-        FromMetadata s   -> metadataToken       s
-        FromAccount  a   -> serviceAccountToken a (Proxy :: Proxy s)
-        FromClient   x _ -> refreshToken        x t
-        FromUser     u   -> authorizedUserToken u (_tokenRefresh t)
+        FromMetadata  s   -> metadataToken       s
+        FromAccount   a   -> serviceAccountToken a (Proxy :: Proxy s)
+        FromClient    x _ -> refreshToken        x t
+        FromUser      u   -> authorizedUserToken u (_tokenRefresh t)
+        FromTokenFile f   -> \_l _m -> readTokenFile f
 
 -- | Apply the (by way of possible token refresh) a bearer token to the
 -- authentication header of a request.

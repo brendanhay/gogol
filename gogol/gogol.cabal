@@ -45,6 +45,7 @@ library
         , Network.Google.Auth.ApplicationDefault
         , Network.Google.Auth.InstalledApplication
         , Network.Google.Auth.ServiceAccount
+        , Network.Google.Auth.TokenFile
         , Network.Google.Compute.Metadata
         , Network.Google.Env
 

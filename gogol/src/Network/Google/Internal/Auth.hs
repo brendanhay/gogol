@@ -72,6 +72,8 @@ data Credentials (s :: [Symbol])
       -- An 'AuthorizedUser' is typically created by the @gcloud init@ command
       -- of the Google CloudSDK Tools.
 
+    | FromTokenFile !FilePath
+
 {-| Service Account credentials which are typically generated/download
 from the Google Developer console of the following form:
 
