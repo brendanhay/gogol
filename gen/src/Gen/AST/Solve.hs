@@ -19,23 +19,14 @@ module Gen.AST.Solve
     ) where
 
 import           Control.Applicative
-import           Control.Error
 import           Control.Lens         hiding (enum)
 import           Control.Monad.Except
-import           Data.CaseInsensitive (CI)
-import qualified Data.CaseInsensitive as CI
-import           Data.Char            (isDigit)
-import           Data.Hashable
 import qualified Data.HashMap.Strict  as Map
-import qualified Data.HashSet         as Set
 import           Data.List            (intersect)
 import           Data.Maybe
-import           Data.Text            (Text)
-import qualified Data.Text            as Text
-import           Data.Text.Manipulate
-import           Gen.Formatting
 import           Gen.Text
 import           Gen.Types
+import           Gen.Formatting       hiding (list)
 import           Prelude              hiding (sum)
 
 solve :: Service Global -> AST (Service Solved)
@@ -81,7 +72,7 @@ getSchema g = do
                    g (map global (Map.keys ss))
 
 getType :: Global -> AST TType
-getType g = loc "getType" g $ memo typed g go
+getType g = loc "getType" g $ memo Gen.Types.typed g go
   where
     go s = case s of
         SAny {}        -> res (TType "JSONValue")
@@ -111,7 +102,7 @@ getType g = loc "getType" g $ memo typed g go
             | otherwise      = id
 
 getDerive :: Global -> AST [Derive]
-getDerive g = loc "getDerive" g $ memo derived g go
+getDerive g = loc "getDerive" g $ memo Gen.Types.derived g go
   where
     go = \case
         SAny {}           -> pure base
@@ -137,101 +128,15 @@ getDerive g = loc "getDerive" g $ memo derived g go
 
     list = [DMonoid]
     enum = [DOrd, DEnum] <> base
-    base = [DEq, DShow, DData, DTypeable, DGeneric]
+    base = [DEq, DShow, DGeneric]
 
 getPrefix :: Global -> AST Prefix
-getPrefix g = loc "getPrefix" g $ memo prefixed g go
+getPrefix g = loc "getPrefix" g $ memo Gen.Types.prefixed g go
   where
-    go = \case
-        SObj _ (Obj aps ps) -> field (isJust aps) ps
-        SEnm _ (Enm vs)     -> branch (map fst vs)
-        _                   -> pure mempty
-
-    field aps rs = do
-        p <- uniq fields (acronymPrefixes g) ks
-        pure (Prefix p)
-      where
-        ls = Map.keys rs
-        ks = Set.fromList (map (CI.mk . renameField . local) (ls ++ ["additional" | aps]))
-
-    branch vs = do
-        p <- uniq branches ps (Set.fromList (map (CI.mk . renameField) vs))
-        pure (Prefix p)
-      where
-        ps | any (isDigit . Text.head) vs = acronymPrefixes g
-           | otherwise                    = "" : acronymPrefixes g
-
-    uniq :: Lens' Memo Seen
-         -> [CI Text]
-         -> Set (CI Text)
-         -> AST Text
-    uniq seen [] ks = do
-        s <- use seen
-        let hs  = acronymPrefixes g
-            f x = sformat ("\n" % stext % " => " % shown)
-                          (CI.foldedCase x) (Map.lookup x s)
-        throwError $
-            format ("Error prefixing: " % gid   %
-                    "\n  Fields: "      % shown %
-                    "\n  Matches: "     % stext)
-                   g (Set.toList ks) (foldMap f hs)
-
-    uniq seen (x:xs) ks = do
-        m <- uses seen (Map.lookup x)
-        case m of
-            Just ys | overlap ys ks
-                -> uniq seen xs ks
-            _   -> do
-                seen %= Map.insertWith (<>) x ks
-                return (CI.foldedCase x)
-
-overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
-overlap xs ys = not . Set.null $ Set.intersection xs ys
-
-acronymPrefixes :: Global -> [CI Text]
-acronymPrefixes (global -> (renameSpecial -> g)) =
-    filter (/= full) $ map CI.mk (xs ++ map suffix ys ++ zs)
-  where
-    -- Take the next char
-    suffix x = Text.snoc x c
-      where
-        c | Text.length x >= 2 = Text.head (Text.drop 1 x)
-          | otherwise          = Text.head x
-
-    full = CI.mk g
-
-    zs = liftA2 (\n x -> Text.snoc x (head (show n))) ([1..] :: [Int]) xs
-
-    xs = catMaybes [r1, r2, r3, r4, r5, r6]
-    ys = catMaybes [r1, r2, r3, r4, r6]
-
-    a  = camelAcronym g
-    a' = upperAcronym g
-
-    limit = 3
-
-    -- Full name if leq limit
-    r1 | Text.length g <= limit = Just g
-       | otherwise              = Nothing
-
-    -- VpcPeeringInfo -> VPI
-    r2 = toAcronym a
-
-    -- VpcPeeringInfo -> VPCPI
-    r3 | x /= r2   = x
-       | otherwise = Nothing
-      where
-        x = toAcronym a'
-
-    -- SomeTestTType -> S
-    r4 = Text.toUpper <$> safeHead g
-
-    -- SomeTypes -> STS (retain pural)
-    r5 | Text.isSuffixOf "s" g = flip Text.snoc 's' <$> (r2 <|> r3)
-       | otherwise             = Nothing
-
-    -- SomeTestTType -> Som
-    r6 = Text.take limit <$> listToMaybe (splitWords a)
+    go = pure . \case
+        SObj {} -> Prefix (renameSpecial (global g))
+        SEnm {} -> Prefix (renameSpecial (global g))
+        _       -> mempty
 
 memo :: Lens' Memo (Map Global a)
      -> Global

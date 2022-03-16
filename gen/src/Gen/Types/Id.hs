@@ -98,31 +98,35 @@ dname' g =
       Symbol () s -> Symbol () (s <> "'")
 
 dname :: Global -> Name ()
-dname = name
-      . Text.unpack
-      . renameReserved
-      . upperHead
-      . Text.dropWhile separator
-      . global
+dname =
+  name
+    . Text.unpack
+    . renameReserved
+    . upperHead
+    . Text.dropWhile separator
+    . global
 
 cname :: Global -> Name ()
-cname = name
-      . Text.unpack
-      . renameReserved
-      . mappend "mk"
-      . upperHead
-      . Text.dropWhile separator
-      . lowerFirstAcronym
-      . global
+cname =
+  name
+    . Text.unpack
+    . renameReserved
+    . mappend "new"
+    . upperHead
+    . Text.dropWhile separator
+    . lowerFirstAcronym
+    . global
 
 bname :: Prefix -> Text -> Name ()
-bname (Prefix p) = name
+bname (Prefix p) =
+  name
     . Text.unpack
-    . mappend (Text.toUpper p)
+    . mappend p
+    . Text.cons '_'
     . renameBranch
 
 localName :: Local -> Name ()
-localName = name . Text.unpack . Text.replace "type" "type_" . renameField . local
+localName = name . Text.unpack . renameField . local
 
 fname, lname, pname :: Prefix -> Local -> Name ()
 fname _ = localName

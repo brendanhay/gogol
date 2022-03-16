@@ -27,7 +27,7 @@ import           Data.Text.Manipulate
 import           Gen.Types.Help
 import           Gen.Types.Id
 import           Gen.Types.NS
-import           Language.Haskell.Exts        (Name)
+import           Language.Haskell.Exts        (Name, Type)
 import           Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
 import           Prelude                      hiding (Enum)
 
@@ -56,36 +56,46 @@ instance ToJSON Branch where
     toJSON (Branch n v h) = object
         [ "name"  .= Syn n
         , "value" .= v
-        , "help"  .= Below 6 h
+        , "help"  .= h
+        ]
+
+data Field = Field (Name ()) (Type ()) Help
+
+instance ToJSON Field where
+    toJSON (Field name type' help) = object
+        [ "name" .= Syn name
+        , "type" .= Syn type'
+        , "help" .= Nest 6 help
         ]
 
 data Data
     = Sum  (Name ()) (Maybe Help) [Branch]
-    | Prod (Name ()) (Maybe Help) Rendered Fun [Fun] [Rendered]
+    | Prod (Name ()) (Maybe Help) Rendered [Field] Rendered [Rendered] Fun
 
 instance ToJSON Data where
     toJSON = \case
-        Sum n h bs -> object
-            [ "name"     .= Syn n
+        Sum name help branches -> object
+            [ "name"     .= Syn name
             , "type"     .= "sum"
-            , "help"     .= h
-            , "branches" .= bs
+            , "help"     .= help
+            , "branches" .= branches
             ]
 
-        Prod n h d c ls is -> object
-            [ "name"      .= Syn n
+        Prod name help decl fields derive inst ctor -> object
+            [ "name"      .= Syn name
             , "type"      .= "prod"
-            , "decl"      .= d
-            , "help"      .= h
-            , "ctor"      .= c
-            , "lenses"    .= ls
-            , "instances" .= is
+            , "help"      .= help
+            , "decl"      .= decl
+            , "fields"    .= fields
+            , "deriving"  .= derive
+            , "instances" .= inst
+            , "ctor"      .= ctor
             ]
 
 dataName :: Data -> Name ()
 dataName = \case
-    Sum  n _ _       -> n
-    Prod n _ _ _ _ _ -> n
+    Sum  n _ _         -> n
+    Prod n _ _ _ _ _ _ -> n
 
 data Action = Action
     { _actId        :: Text

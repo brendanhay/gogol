@@ -57,7 +57,7 @@ renameAbbrev = mconcat
     . stripSuffix "API"
 
 renameField :: Text -> Text
-renameField = lowerHead . lowerFirstAcronym . upperAcronym . toCamel
+renameField = renameReserved . renameSpecial . lowerHead . toCamel
 
 renameBranch :: Text -> Text
 renameBranch t
@@ -113,25 +113,17 @@ dot x = x == '.'
 
 renameReserved :: Text -> Text
 renameReserved x
-    | x `Set.member` xs = renameReserved(x <> "'")
+    | x `Set.member` xs = renameReserved (x <> "'")
     | otherwise         = x
   where
     xs = Set.fromList $
-        [ "head"
-        , "tail"
-        , "delete"
-        , "filter"
-        , "map"
-        , "object"
-        , "get"
-        , "group"
+        [ "group"
+        , "role"
+        , "pattern"
         , "True"
         , "False"
-        , "error"
         , "Error"
-        , "read"
         , "Read"
-        , "role"
         , "request"
         , "Get"
         , "Post"
@@ -139,20 +131,18 @@ renameReserved x
         , "Head"
         , "Patch"
         , "Put"
-        , "log"
         , "Data"
-        , "TimeOfDay"
+        , "DateTime"
+        , "Enum"
         , "LocalTime"
         , "MediaDownload"
         , "MediaUpload"
+        , "Nothing"
+        , "Request"
         , "Left"
         , "Right"
-        , "Request"
-        , "Enum"
         , "Secure"
-        , "DateTime"
-        , "DateTime'"
-        , "Nothing"
+        , "TimeOfDay"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text

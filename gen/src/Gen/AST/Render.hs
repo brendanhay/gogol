@@ -73,19 +73,18 @@ renderSchema s = go (_schema s)
             ts = maybe b (flip (Map.insert "addtional") b) ab
         prod ts
       where
-        prod ts = Prod (dname k) (i ^. iDescription)
-            <$> pp Indent (objDecl k p ds ts)
-            <*> ctor ts
-            <*> traverse lens (Map.toList ts)
+        prod ts =
+          Prod (dname k) (i ^. iDescription)
+            <$> pp None (objDecl k ts)
+            <*> pure (objFields p ts)
+            <*> pp None (objDerive ds)
             <*> traverse (pp Print) (jsonDecls k p ts)
+            <*> ctor ts
 
-        ctor ts = Fun' (cname k) (Just help)
+        ctor ts =
+          Fun' (cname k) (Just help)
             <$> (pp None   (ctorSig  k   ts) <&> comments p ts)
             <*>  pp Indent (ctorDecl k p ts)
-
-        lens (l, v) = Fun' (lname p l) (v ^. iDescription)
-            <$> pp None  (lensSig k p l v)
-            <*> pp Print (lensDecl  p l v)
 
         help = rawHelpText $
             sformat ("Creates a value of '" % gid %
@@ -150,8 +149,8 @@ renderMethod s root suf m@Method {..} = do
     url = name (serviceName s)
 
     insts is = \case
-        Prod n h r c ls _ -> Prod n h r c ls is
-        d                 -> d
+        Prod n h d fs ds _ c -> Prod n h d fs ds is c
+        d                    -> d
 
     props = \case
         SObj _ (Obj _ ps) -> Map.keys ps

@@ -444,42 +444,26 @@ seqE :: Exp () -> [Exp ()] -> Exp ()
 seqE l []     = app (var "pure") l
 seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
 
-objDecl :: Global -> Prefix -> [Derive] -> Map Local Solved -> Decl ()
-objDecl n p ds rs =
-    DataDecl () arity Nothing (DHead () (dname n)) [conDecl (dname' n) p rs] [der ds]
+objDecl :: Global -> Map Local Solved -> Decl ()
+objDecl n rs =
+    DataDecl () arity Nothing (DHead () (dname n)) [con] []
   where
     arity | Map.size rs == 1 = NewType ()
           | otherwise        = DataType ()
 
-    der = Deriving () Nothing . map (unqualrule . drop 1 . show)
+    con = QualConDecl () Nothing Nothing (ConDecl () (dname' n) [])
 
--- decl =
---   DataDecl
---     ()
---     (DataType ())
---     Nothing
---     (DHead () (Ident () "AboutGet"))
---     [QualConDecl () Nothing Nothing (ConDecl () (Ident () "AboutGet'") [])]
---     [ Deriving
---         ()
---         Nothing
---         [ IRule () Nothing Nothing (IHCon () (UnQual () (Ident () "Eq")))
---         , IRule () Nothing Nothing (IHCon () (UnQual () (Ident () "Show")))
---         , IRule () Nothing Nothing (IHCon () (UnQual () (Ident () "Data")))
---         , IRule () Nothing Nothing (IHCon () (UnQual () (Ident () "Typeable")))
---         , IRule () Nothing Nothing (IHCon () (UnQual () (Ident () "Generic")))
---         ]
---     ]
+objDerive :: [Derive] -> Deriving ()
+objDerive = Deriving () Nothing . map (unqualrule . drop 1 . show)
 
-conDecl :: Name () -> Prefix -> Map Local Solved -> QualConDecl ()
-conDecl n p rs = QualConDecl () Nothing Nothing body
-  where
-    body = case Map.toList rs of
-        []  -> ConDecl () n []
-        [x] -> RecDecl () n [field internalType x]
-        xs  -> RecDecl () n (map (field (strict . internalType)) xs)
-
-    field f (l, v) = FieldDecl () [fname p l] (f (_type v))
+objFields :: Prefix -> Map Local Solved -> [Field]
+objFields p = map (uncurry field) . Map.toList
+ where
+   field l v =
+     Field
+       (fname p l)
+       (strict (internalType (_type v)))
+       (fromMaybe mempty (v ^. iDescription))
 
 ctorSig :: Global -> Map Local Solved -> Decl ()
 ctorSig n rs = TypeSig () [cname n] ts
@@ -647,9 +631,9 @@ require (TMaybe t) = t
 require t          = t
 
 strict :: Type () -> Type ()
-strict = TyBang () (BangedTy ()) (NoUnpackPragma ()) . \case
-    t@TyApp{} -> TyParen () t
-    t         -> t
+strict = \case
+  t@TyApp{} -> TyParen () t
+  t         -> t
 
 sing :: Text -> Type ()
 sing = TyCon () . unqual . Text.unpack . flip mappend "\"" . mappend "\""

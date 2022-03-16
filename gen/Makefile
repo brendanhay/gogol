@@ -16,7 +16,7 @@ MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 
 .PHONY: gen format $(BIN)/gogol-gen
 
-release: gen format
+release: gen # format
 
 gen: $(BIN)/gogol-gen $(MODEL_DIR)
 	$(BIN)/gogol-gen \
@@ -35,7 +35,7 @@ format:
  -type f \
  -name '*.hs' \
  -printf ' -> %p\n' \
- -exec stylish-haskell -i {} \;
+ -exec ormolu -i {} \;
 
 $(BIN)/gogol-gen: $(BIN)
 	stack build gogol-gen --nix --copy-bins --local-bin-path $(BIN)

@@ -1,35 +1,26 @@
 {% if type.help %}
 {{ type.help }}
 {% endif %}
-data {{ type.name }}
-  {% for branch in type.branches %}
-    {% if branch.first %}={% else %}|{% endif %} {{ branch.value.name }}
-    {% if branch.value.help == "" %}
-      -- ^ @{{ branch.value.value }}@
-    {% else %}
-      -- ^ @{{ branch.value.value }}@
+newtype {{ type.name }} = {{ type.name }}' { from{{ type.name }} :: Text }
+    deriving stock (Show, Read, Eq, Ord, Generic)
+    deriving newtype
+      ( Hashable
+      , ToHttpApiData
+      , FromHttpApiData
+      , ToJSON
+      , ToJSONKey
+      , FromJSON
+      , FromJSONKey
+      )
+{% for branch in type.branches %}
+
 {{ branch.value.help }}
-    {% endif %}
-  {% endfor %}
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+pattern {{ branch.value.name }} :: {{ type.name }}
+pattern {{ branch.value.name }} = {{ type.name }}' "{{ branch.value.value }}"
+{% endfor %}
 
-instance Hashable {{ type.name }}
-
-instance FromHttpApiData {{ type.name }} where
-    parseQueryParam = \case
-  {% for branch in type.branches %}
-        "{{ branch.value.value }}" -> Right {{ branch.value.name }}
-  {% endfor %}
-        x -> Left ("Unable to parse {{ type.name }} from: " <> x)
-
-instance ToHttpApiData {{ type.name }} where
-    toQueryParam = \case
-  {% for branch in type.branches %}
-        {{ branch.value.name }} -> "{{ branch.value.value }}"
-  {% endfor %}
-
-instance FromJSON {{ type.name }} where
-    parseJSON = parseJSONText "{{ type.name }}"
-
-instance ToJSON {{ type.name }} where
-    toJSON = toJSONText
+{-# COMPLETE
+{% for branch in type.branches %}
+  {{ branch.value.name }},
+{% endfor %}
+  {{ type.name }}' #-}
