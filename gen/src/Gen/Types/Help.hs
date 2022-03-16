@@ -11,12 +11,12 @@
 module Gen.Types.Help
     ( Help
     , Desc (..)
-    , Below (..)
+    , Nest (..)
     , rawHelpText
+    , flattenHelp
     ) where
 
 import           Data.Aeson
-import           Data.Char          (isSpace)
 import           Data.String
 import           Data.Text          (Text)
 import qualified System.IO.Unsafe   as Unsafe
@@ -24,6 +24,8 @@ import qualified System.IO.Unsafe   as Unsafe
 import           Text.Pandoc        as Pandoc
 import           Text.DocLayout
 
+import qualified Data.Char          as Char
+import qualified Data.List          as List
 import qualified Data.Text          as Text
 
 data Help
@@ -62,12 +64,18 @@ instance FromJSON Help where
             Right x -> pure $! Pan x t
 
 instance ToJSON Help where
-    toJSON = toJSON
+    toJSON = toJSON . Nest 0
+
+data Nest = Nest !Int Help
+
+instance ToJSON Nest where
+    toJSON (Nest n h) =
+      toJSON
         . mappend "-- |"
         . Text.map f
-        . Text.drop 2
-        . wrap "-- "
-        . flatten
+        . Text.drop (n + 2)
+        . wrap (replicate n ' ' ++ "-- ")
+        $ flattenHelp h
       where
         f '@' = '\''
         f  x  = x
@@ -75,22 +83,22 @@ instance ToJSON Help where
 data Desc = Desc !Int Help
 
 instance ToJSON Desc where
-    toJSON (Desc n h) = toJSON . wrap (replicate n ' ') $ flatten h
+    toJSON (Desc n h) =
+      toJSON
+        . Text.strip
+        . wrap (replicate n ' ')
+        $ flattenHelp h
 
-data Below = Below !Int Help
-
-instance ToJSON Below where
-    toJSON (Below n h) = toJSON . wrap (replicate n ' ' <> "-- ") $ flatten h
-
-flatten :: Help -> String
-flatten = \case
-    Help xs  -> foldMap flatten xs
+flattenHelp :: Help -> String
+flattenHelp =
+  List.dropWhileEnd Char.isSpace . \case
+    Help xs  -> foldMap flattenHelp xs
     Raw  t   -> Text.unpack t
     Pan  d _t -> Text.unpack ((Unsafe.unsafePerformIO . Pandoc.runIOorExplode) (Pandoc.writeHaddock def d))
 
 wrap :: String -> String -> Text
 wrap sep =
-      Text.dropWhileEnd isSpace
+  Text.dropWhileEnd Char.isSpace
     . render (Just 76)
     . prefixed sep
     . fromString

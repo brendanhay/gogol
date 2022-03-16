@@ -4,15 +4,24 @@
 --
 -- /See:/ '{{ type.ctor.name }}' smart constructor.
 {{ type.decl }}
+{% for field in type.fields %}
+{% if field.first %}
+    {
+      {{ field.value.help }}
+      {{ field.value.name }} :: {{ field.value.type }}
+{% else %}
+      {{ field.value.help }}
+    , {{ field.value.name }} :: {{ field.value.type }}
+{% endif %}
+{% endfor %}
+    } {{ type.deriving }}
 
 {% if type.ctor.help %}
 {{ type.ctor.help }}
 {% endif %}
---
 {{ type.ctor.sig }}
 {{ type.ctor.decl }}
-
 {% for class in type.instances %}
-
 {{ class.value }}
+
 {% endfor %}

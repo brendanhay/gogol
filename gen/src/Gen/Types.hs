@@ -212,9 +212,8 @@ sumNS   = (<> "Sum")     . typesNS
 preludeNS :: NS
 preludeNS = "Network.Google.Prelude"
 
--- | hide some conflicting (unneeded) data types from Sum modules
 preludeSumNS :: NS
-preludeSumNS = "Network.Google.Prelude hiding (Bytes)"
+preludeSumNS = "Network.Google.Prelude"
 
 resourceNS, methodNS :: NS
 resourceNS = "Network.Google.Resource"
@@ -300,8 +299,6 @@ data Derive
     | DReal
     | DMonoid
     | DIsString
-    | DData
-    | DTypeable
     | DGeneric
       deriving (Eq, Show)
 

@@ -1,17 +1,13 @@
-resolver: lts-17.12
+resolver: lts-18.27
 
 nix:
   enable: false
   packages: [zlib, icu67]
   add-gc-roots: true
 
-flags: {}
-
 extra-deps:
-  - text-regex-replace-0.1.1.4
-  - ede-0.3.2.0
-  - prettyprinter-1.7.0 # for ede-0.3.2.0
-  - hindent-5.3.2
+  - ede-0.3.2.0@sha256:6ac62b2a9fccaf66a121f79e569d39286ad969fb9758eede46766f98c9919eda,3935
+  - hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
 
 packages:
-  - "."
+  - '.'

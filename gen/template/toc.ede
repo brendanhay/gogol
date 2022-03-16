@@ -1,7 +1,7 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
+{-# LANGUAGE TypeOperators #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
@@ -50,7 +50,7 @@ module {{ moduleName }}
     {% when "prod" %}
 
     -- ** {{ schema.value.name }}
-    , {{ schema.value.name }}
+    , {{ schema.value.name }} (..)
     , {{ schema.value.ctor.name }}
     {% when "sum" %}
 

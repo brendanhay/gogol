@@ -5,36 +5,22 @@
 
 packages:
 - completed:
-    hackage: text-regex-replace-0.1.1.4@sha256:58d96b4e5caec8bf9dd2ca6eaa206fe5bce0fd162759c5e102a92c05f6bd5ebc,1547
-    pantry-tree:
-      size: 360
-      sha256: d7005331a160dffc75bc790a52abb1b68bbdb9dde99c8d4f95ce2edaf70b6385
-  original:
-    hackage: text-regex-replace-0.1.1.4
-- completed:
-    hackage: ede-0.3.2.0@sha256:26796d2dfa0979b6ec532dcb113196a1d63edde5553bd019f8d05b52cc966b1a,3790
+    hackage: ede-0.3.2.0@sha256:6ac62b2a9fccaf66a121f79e569d39286ad969fb9758eede46766f98c9919eda,3935
     pantry-tree:
       size: 5398
-      sha256: bd0dbdf4a68c9253417b8201b23c8b62c3d62dd253583e8cd6551f7d4e641961
+      sha256: 324c9550acea752ef7bd304031ba8a5db3d30771deb9f87b4102cf13c6e6d666
   original:
-    hackage: ede-0.3.2.0
-- completed:
-    hackage: prettyprinter-1.7.0@sha256:6a9569e21fa61163a7f066d23d701e23e917893e8f39733d6e617ec72787ae5f,6007
-    pantry-tree:
-      size: 3194
-      sha256: d22f820a1f63497f7fd7e1f04b7d356d92de35582258f6ad55428c88b09e63ff
-  original:
-    hackage: prettyprinter-1.7.0
+    hackage: ede-0.3.2.0@sha256:6ac62b2a9fccaf66a121f79e569d39286ad969fb9758eede46766f98c9919eda,3935
 - completed:
     hackage: hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
     pantry-tree:
       size: 1027
       sha256: 36f9c65bbe71c49741c20839606494dacd70c04e0e70649f1da0978aeaf5f77a
   original:
-    hackage: hindent-5.3.2
+    hackage: hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
 snapshots:
 - completed:
-    size: 567669
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/17/12.yaml
-    sha256: facf6cac73b22a83ca955b580a98a7a09ed71f8f974c7a55d28e608c23e689a9
-  original: lts-17.12
+    size: 590102
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/27.yaml
+    sha256: 79a786674930a89301b0e908fad2822a48882f3d01486117693c377b8edffdbe
+  original: lts-18.27
