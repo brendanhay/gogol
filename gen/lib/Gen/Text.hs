@@ -47,7 +47,12 @@ renameAbbrev :: Text -> Text
 renameAbbrev = Text.strip . stripPrefix "Google" . stripSuffix "API"
 
 renameField :: Text -> Text
-renameField = renameReserved . renameSpecial . lowerHead . toCamel
+renameField text
+   -- Prevent ambiguity with smart constructors.
+  | Text.isPrefixOf "new" field = field <> "'"
+  | otherwise = field
+ where
+  field = renameReserved . renameSpecial . lowerHead . toCamel $ text
 
 renameBranch :: Text -> Text
 renameBranch t
@@ -91,7 +96,6 @@ separator x =
     || x == ')'
     || x == ':'
     || x == '-'
-    || x == '_'
     || x == '*'
     || x == '$'
 

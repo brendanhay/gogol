@@ -45,6 +45,7 @@ module Gen.Types.Id
   )
 where
 
+import GHC.Stack (HasCallStack)
 import Control.Applicative
 import Control.Monad
 import Data.Aeson hiding (Bool, String)
@@ -101,14 +102,21 @@ bname (Prefix p) =
     . Text.cons '_'
     . renameBranch
 
-localName :: Local -> Name ()
-localName = name . Text.unpack . renameField . local
-
 fname :: Local -> Name ()
-fname = localName
+fname =
+  name
+    . Text.unpack
+    . renameField
+    . local
 
 dstr :: Global -> Exp ()
-dstr = strE . Text.unpack . toPascal . global
+dstr =
+  strE
+    . Text.unpack
+    . renameReserved
+    . upperHead
+    . Text.dropWhile separator
+    . global
 
 fstr :: Local -> Exp ()
 fstr = strE . Text.unpack . local
@@ -131,7 +139,7 @@ instance Semigroup Global where
 instance IsString Global where
   fromString = mkGlobal . fromString
 
-instance FromJSON Global where
+instance  FromJSON Global where
   parseJSON = withText "global" (pure . mkGlobal)
 
 instance FromJSONKey Global where

@@ -19,6 +19,7 @@ module Gen.AST.Flatten
   )
 where
 
+import GHC.Stack (HasCallStack)
 import Control.Applicative
 import Control.Error
 import Control.Lens hiding (lens)
@@ -67,7 +68,7 @@ localSchema g l = schema g (Just l)
 --     then schema g (Just l) s
 --     else schema r Nothing  s
 
-schema :: Global -> Maybe Local -> Fix Schema -> AST Global
+schema :: HasCallStack => Global -> Maybe Local -> Fix Schema -> AST Global
 schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
   where
     go p = \case
@@ -137,6 +138,7 @@ localParam g l p = do
   pure $! p {_pParam = x}
 
 resource ::
+  HasCallStack =>
   Map Local (Param Global) ->
   Suffix ->
   Global ->
@@ -152,6 +154,7 @@ resource qs suf g r@Resource {..} = do
       }
 
 method ::
+  HasCallStack =>
   Map Local (Param Global) ->
   Suffix ->
   Method (Fix Schema) ->

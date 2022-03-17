@@ -22,6 +22,7 @@ import Data.String
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Manipulate
+import qualified Data.CaseInsensitive as CI
 
 newtype NS = UnsafeNS {unNS :: [Text]}
   deriving (Eq, Ord, Show)
@@ -46,7 +47,7 @@ collapseNS :: NS -> NS
 collapseNS (UnsafeNS xs) = UnsafeNS (squeeze xs)
   where
     squeeze = \case
-      x : y : ys | x == y -> squeeze (y : ys)
+      x : y : ys | CI.mk x == CI.mk y -> squeeze (x : ys)
       x : xs -> x : squeeze xs
       [] -> []
 
