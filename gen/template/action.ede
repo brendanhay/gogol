@@ -7,13 +7,12 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference> for @{{ action.id }}@.
 module {{ action.ns }}
     (
-    -- * REST Resource
+    -- * Resource
       {{ action.aliasName }}
 
-    -- * Creating a Request
+    -- ** Constructing a Request
     , {{ action.type.ctor.name }}
     , {{ action.type.name }}
-
     ) where
 
 import qualified Network.Google.Prelude as Core

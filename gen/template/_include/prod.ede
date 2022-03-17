@@ -7,10 +7,10 @@
 {% for field in type.fields %}
 {% if field.first %}
     {
-      {{ field.value.help }}
+{{ field.value.help }}
       {{ field.value.name }} :: {{ field.value.type }}
 {% else %}
-      {{ field.value.help }}
+{{ field.value.help }}
     , {{ field.value.name }} :: {{ field.value.type }}
 {% endif %}
 {% endfor %}

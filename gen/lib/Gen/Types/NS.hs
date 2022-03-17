@@ -1,5 +1,5 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- Module      : Gen.Types.NS
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -9,7 +9,7 @@
 -- Portability : non-portable (GHC extensions)
 
 module Gen.Types.NS
-  ( NS,
+  ( NS (UnsafeNS),
     mkNS,
     unNS,
     collapseNS,
@@ -23,29 +23,29 @@ import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Manipulate
 
-newtype NS = NS {unNS :: [Text]}
+newtype NS = UnsafeNS {unNS :: [Text]}
   deriving (Eq, Ord, Show)
 
 mkNS :: Text -> NS
-mkNS = NS . map upperHead . Text.split (== '.')
+mkNS = UnsafeNS . map upperHead . Text.split (== '.')
 
 instance IsString NS where
   fromString "" = mempty
   fromString s = mkNS (fromString s)
 
 instance Semigroup NS where
-  NS xs <> NS ys
-    | null xs = NS ys
-    | null ys = NS xs
-    | otherwise = NS (mappend xs ys)
+  UnsafeNS xs <> UnsafeNS ys
+    | null xs = UnsafeNS ys
+    | null ys = UnsafeNS xs
+    | otherwise = UnsafeNS (mappend xs ys)
 
 instance Monoid NS where
-  mempty = NS []
+  mempty = UnsafeNS []
 
 collapseNS :: NS -> NS
-collapseNS (NS xs) = NS (squeeze xs)
- where
-   squeeze = \case
+collapseNS (UnsafeNS xs) = UnsafeNS (squeeze xs)
+  where
+    squeeze = \case
       x : y : ys | x == y -> squeeze (y : ys)
       x : xs -> x : squeeze xs
       [] -> []
@@ -57,4 +57,4 @@ instance ToJSON NS where
   toJSON = toJSON . renderNS
 
 renderNS :: NS -> Text
-renderNS (NS xs) = Text.intercalate "." xs
+renderNS (UnsafeNS xs) = Text.intercalate "." xs

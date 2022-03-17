@@ -13,7 +13,8 @@ module Gen.Types.Help
     Desc (..),
     Nest (..),
     rawHelpText,
-    renderHelp,
+    wrapHelp
+    flattenHelp,
   )
 where
 
@@ -67,24 +68,27 @@ instance FromJSON Help where
 instance ToJSON Help where
   toJSON = toJSON . Nest 0
 
+data Nest = Nest !Int64 Help
+
+instance ToJSON Nest where
+  toJSON (Nest n h) =
+    toJSON
+      . mappend "|"
+      . mappend indent
+      . Text.Lazy.map f
+      . Text.Lazy.drop (n + 2)
+      . wrapHelp indent 
+      $ h
+    where
+      f '@' = '\''
+      f x = x
+
+      indent = Text.Lazy.replicate n " " <> "-- "
+
 data Desc = Desc !Int64 Help
 
 instance ToJSON Desc where
   toJSON (Desc n h) = toJSON (wrapHelp (Text.Lazy.replicate n " ") h)
-
-data Nest = Nest !Int64 Help
-
-instance ToJSON Nest where
-  toJSON = toJSON . renderHelp
-
-renderHelp :: Nest -> TextLazy
-renderHelp (Nest n h) =
-  mappend (sep <> "| ")
-    . Text.Lazy.drop (Text.Lazy.length sep)
-    . wrapHelp sep
-    $ h
-  where
-    sep = Text.Lazy.replicate n " " <> "-- "
 
 wrapHelp :: TextLazy -> Help -> TextLazy
 wrapHelp sep =
