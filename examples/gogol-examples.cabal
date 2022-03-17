@@ -3,7 +3,7 @@ name:                  gogol-examples
 version:               0.5.0
 synopsis:              Basic examples for various gogol libraries.
 homepage:              https://github.com/brendanhay/gogol
-license:               OtherLicense
+license:               MPL-2.0
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
