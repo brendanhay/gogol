@@ -1,74 +1,74 @@
-cabal-version:         2.2
-name:                  gogol-gen
-version:               0.5.0
-synopsis:              Gogol Code Generator
-homepage:              https://github.com/brendanhay/gogol
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2013-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md
-
-description:
-    Compiler and generator for Gogol related Google SDKs
+cabal-version:      2.2
+name:               gogol-gen
+version:            0.5.0
+synopsis:           Gogol Code Generator
+homepage:           https://github.com/brendanhay/gogol
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay@gmail.com>
+copyright:          Copyright (c) 2013-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files: README.md
+description:        Compiler and generator for Gogol related Google SDKs
 
 executable gogol-gen
-    default-language:  Haskell2010
-    hs-source-dirs:    src
-    main-is:           Main.hs
+  default-language: Haskell2010
+  hs-source-dirs:   src
+  main-is:          Main.hs
+  other-modules:
+    Gen.AST
+    Gen.AST.Flatten
+    Gen.AST.Render
+    Gen.AST.Solve
+    Gen.Formatting
+    Gen.IO
+    Gen.JSON
+    Gen.Orphans
+    Gen.Syntax
+    Gen.Text
+    Gen.TH
+    Gen.Tree
+    Gen.Types
+    Gen.Types.Data
+    Gen.Types.Help
+    Gen.Types.Id
+    Gen.Types.Map
+    Gen.Types.NS
+    Gen.Types.Schema
 
-    other-modules:
-          Gen.AST
-        , Gen.AST.Solve
-        , Gen.AST.Flatten
-        , Gen.AST.Render
-        , Gen.Formatting
-        , Gen.IO
-        , Gen.JSON
-        , Gen.Orphans
-        , Gen.Syntax
-        , Gen.TH
-        , Gen.Text
-        , Gen.Tree
-        , Gen.Types
-        , Gen.Types.Data
-        , Gen.Types.Help
-        , Gen.Types.Id
-        , Gen.Types.Map
-        , Gen.Types.NS
-        , Gen.Types.Schema
+  ghc-options:
+    -rtsopts -threaded "-with-rtsopts=-qg -A128M -I0" -Wall
+    -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates
+    -funbox-strict-fields
 
-    ghc-options:       -Wall -threaded
-
-    build-depends:
-          aeson            >= 1
-        , attoparsec
-        , base             >= 4.12
-        , bifunctors
-        , bytestring
-        , case-insensitive
-        , directory-tree
-        , doclayout
-        , ede
-        , errors           >= 2.1.2
-        , formatting
-        , hashable
-        , haskell-src-exts == 1.23.1
-        , hindent          == 5.3.2
-        , lens
-        , mtl
-        , optparse-applicative
-        , pandoc
-        , parsec
-        , semigroups
-        , system-fileio
-        , system-filepath
-        , text
-        , text-icu
-        , text-manipulate
-        , text-regex-replace
-        , unexceptionalio
-        , unordered-containers
+  build-depends:
+    , aeson                 >=1
+    , attoparsec
+    , base                  >=4.12
+    , bifunctors
+    , bytestring
+    , case-insensitive
+    , directory-tree
+    , doclayout
+    , ede
+    , errors                >=2.1.2
+    , formatting
+    , hashable
+    , haskell-src-exts      ==1.23.1
+    , hindent               ==5.3.2
+    , lens
+    , mtl
+    , optparse-applicative
+    , pandoc
+    , parsec
+    , semigroups
+    , system-fileio
+    , system-filepath
+    , text
+    , text-icu
+    , text-manipulate
+    , text-regex-replace
+    , unexceptionalio
+    , unordered-containers
