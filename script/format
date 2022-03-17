@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+say() {
+  echo >&2 "$@"
+}
+
+say "Formatting shell"
+
+find scripts -type f -print0 \
+  | xargs -0 shfmt -s -i 2 -ln bash -w
+
+say "Formatting nix"
+
+find . -type f -name '*.nix' -print0 \
+  | xargs -0 nixpkgs-fmt
+
+say "Formatting haskell"
+
+find gen core gogol examples -type f -name '*.hs' -print0 \
+  | xargs -0 ormolu --mode=inplace
