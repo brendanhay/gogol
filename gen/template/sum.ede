@@ -1,6 +1,22 @@
 {% include "_include/license.ede" %}
 --
-module {{ moduleName }} where
+module {{ moduleName }}
+  (
+  {% for schema in schemas %}
+    {% case schema.value.type %}
+    {% when "sum" %}
+
+    -- * {{ schema.value.name }}
+    {{ schema.value.name }}
+      (
+      {% for branch in schema.value.branches %}
+        {{ branch.value.name }},
+      {% endfor %}
+        ..
+      ),
+    {% endcase %}
+  {% endfor %}
+  ) where
 
 import qualified Network.Google.Prelude as Core
 {% for import in moduleImports %}

@@ -608,7 +608,7 @@ def s
   where
     go x p = \case
       SEnm {} -> var (bname p x)
-      SLit _ Bool -> lit (upperHead x)
+      SLit _ Bool -> lit ("Core." <> upperHead x)
       SLit _ Text -> str x
       SLit {} -> lit x
       e -> error $ "Unsupported default value: " ++ show e
