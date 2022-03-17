@@ -79,12 +79,7 @@ renameBranch t
           ]
 
 renameSpecial :: Text -> Text
-renameSpecial t =
-  case Text.uncons t of
-    Nothing -> t
-    Just (x, xs)
-      | separator x -> renameSpecial xs
-      | otherwise -> t
+renameSpecial = Text.filter (not . separator)
 
 separator :: Char -> Bool
 separator x =

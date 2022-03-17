@@ -157,7 +157,7 @@ lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)
 
 mkGlobal :: Text -> Global
-mkGlobal = Global . Text.split (== '.')
+mkGlobal = Global . Text.split (== '.') . renameSpecial
 
 global :: Global -> Text
 global (Global g) = foldMap upperHead g
