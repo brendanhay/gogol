@@ -41,19 +41,10 @@ renameLibrary =
     . Text.toLower
 
 renameTitle :: Text -> Text
-renameTitle =
-  mappend "Google "
-    . Text.strip
-    . stripPrefix "Google"
-    . stripSuffix "API"
+renameTitle = mappend "Google " . Text.strip . stripPrefix "Google" . stripSuffix "API"
 
 renameAbbrev :: Text -> Text
-renameAbbrev =
-  mconcat
-    . Text.split dot
-    . Text.strip
-    . stripPrefix "Google"
-    . stripSuffix "API"
+renameAbbrev = Text.strip . stripPrefix "Google" . stripSuffix "API"
 
 renameField :: Text -> Text
 renameField = renameReserved . renameSpecial . lowerHead . toCamel

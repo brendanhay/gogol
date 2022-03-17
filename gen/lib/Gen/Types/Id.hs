@@ -37,7 +37,6 @@ module Gen.Types.Id
     aname,
     mname,
     dname,
-    dname',
     dstr,
     cname,
     bname,
@@ -80,14 +79,7 @@ mname abrv (Suffix suf) (Global g) =
       | otherwise = x : xs
       where
         e = Text.replace "." "" abrv
-        x : xs = map toPascal g
-
-dname' :: Global -> Name ()
-dname' = dname
--- dname' g =
---   case dname g of
---     Ident () s -> Ident () (s <> "'")
---     Symbol () s -> Symbol () (s <> "'")
+        x : xs = map upperHead g
 
 dname :: Global -> Name ()
 dname =

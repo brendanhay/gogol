@@ -227,10 +227,6 @@ typesNS = (<> "Types") . tocNS
 prodNS = (<> "Internal.Product") . tocNS
 sumNS = (<> "Internal.Sum") . tocNS
 
-resourceNS, methodNS :: NS
-resourceNS = "Network.Google"
-methodNS = "Network.Google.Method"
-
 exposedModules :: Library -> [NS]
 exposedModules l =
   sort $

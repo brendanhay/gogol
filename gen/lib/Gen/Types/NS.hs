@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE LambdaCase #-}
 
 -- Module      : Gen.Types.NS
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -11,6 +12,7 @@ module Gen.Types.NS
   ( NS,
     mkNS,
     unNS,
+    collapseNS,
     renderNS,
   )
 where
@@ -31,15 +33,22 @@ instance IsString NS where
   fromString "" = mempty
   fromString s = mkNS (fromString s)
 
-instance Monoid NS where
-  mempty = NS []
-  mappend (NS xs) (NS ys)
+instance Semigroup NS where
+  NS xs <> NS ys
     | null xs = NS ys
     | null ys = NS xs
     | otherwise = NS (mappend xs ys)
 
-instance Semigroup NS where
-  (<>) = mappend
+instance Monoid NS where
+  mempty = NS []
+
+collapseNS :: NS -> NS
+collapseNS (NS xs) = NS (squeeze xs)
+ where
+   squeeze = \case
+      x : y : ys | x == y -> squeeze (y : ys)
+      x : xs -> x : squeeze xs
+      [] -> []
 
 instance FromJSON NS where
   parseJSON = withText "namespace" (pure . mkNS)
