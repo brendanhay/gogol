@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable #-}
+
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -66,7 +66,7 @@ data LogLevel
     Debug
   | -- | Includes potentially credentials metadata, and non-streaming response bodies.
     Trace
-  deriving (Eq, Ord, Enum, Show, Data, Typeable)
+  deriving (Eq, Ord, Enum, Show)
 
 -- | This is a primitive logger which can be used to log builds to a 'Handle'.
 --

@@ -1,5 +1,5 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveDataTypeable #-}
+
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -38,8 +38,7 @@ import qualified Data.Conduit.Combinators as Conduit
 import Data.DList (DList)
 import qualified Data.DList as DList
 import Data.Data
-import Data.Foldable (foldMap, foldl')
-import Data.Semigroup
+import Data.Foldable (foldl')
 import Data.String
 import Data.Text (Text)
 import qualified Data.Text.Encoding as Text
@@ -74,7 +73,6 @@ newtype OAuthScope = OAuthScope Text
       Read,
       IsString,
       Generic,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,
@@ -90,7 +88,6 @@ newtype AccessToken = AccessToken Text
       Read,
       IsString,
       Generic,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,
@@ -106,7 +103,6 @@ newtype RefreshToken = RefreshToken Text
       Read,
       IsString,
       Generic,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,
@@ -122,7 +118,6 @@ newtype ClientId = ClientId Text
       Read,
       IsString,
       Generic,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,
@@ -138,7 +133,6 @@ newtype ServiceId = ServiceId Text
       Read,
       IsString,
       Generic,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,
@@ -426,6 +420,7 @@ instance FromJSON a => FromStream JSON a where
       Left e -> pure $! Left (e, bs)
       Right x -> pure $! Right x
 
+
 class GoogleRequest a where
   type Rs a :: *
   type Scopes a :: [Symbol]
@@ -658,8 +653,6 @@ newtype Seconds = Seconds Int
       Bounded,
       Integral,
       Real,
-      Data,
-      Typeable,
       Generic
     )
 
@@ -679,8 +672,6 @@ newtype GFieldMask = GFieldMask Text
       Read,
       IsString,
       Generic,
-      Data,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,

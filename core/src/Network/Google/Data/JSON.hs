@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable #-}
+
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
@@ -11,7 +11,7 @@
 -- Portability : non-portable (GHC extensions)
 module Network.Google.Data.JSON
   ( JSONValue,
-    Textual (..),
+    AsText (..),
     parseJSONObject,
     parseJSONText,
     toJSONText,
@@ -33,7 +33,6 @@ where
 
 import Data.Aeson
 import Data.Aeson.Types
-import Data.Data
 import Data.HashMap.Strict (HashMap)
 import Data.Text (Text)
 import qualified Data.Text as Text
@@ -41,27 +40,15 @@ import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
 
 type JSONValue = Value
 
-newtype Textual a = Textual a
-  deriving
-    ( Eq,
-      Ord,
-      Read,
-      Show,
-      Num,
-      Fractional,
-      Data,
-      Typeable,
-      ToHttpApiData,
-      FromHttpApiData
-    )
+newtype AsText a = AsText a
+  deriving (Eq, Ord, Read, Show, Num, Fractional, ToHttpApiData, FromHttpApiData)
 
-instance (FromJSON a, FromHttpApiData a) => FromJSON (Textual a) where
-  parseJSON (String s) =
-    either (fail . Text.unpack) (pure . Textual) (parseQueryParam s)
-  parseJSON o = Textual <$> parseJSON o
+instance (FromJSON a, FromHttpApiData a) => FromJSON (AsText a) where
+  parseJSON (String s) = either (fail . Text.unpack) (pure . AsText) (parseQueryParam s)
+  parseJSON o = AsText <$> parseJSON o
 
-instance ToHttpApiData a => ToJSON (Textual a) where
-  toJSON (Textual x) = String (toQueryParam x)
+instance ToHttpApiData a => ToJSON (AsText a) where
+  toJSON (AsText x) = String (toQueryParam x)
 
 parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
 parseJSONObject = parseJSON . Object

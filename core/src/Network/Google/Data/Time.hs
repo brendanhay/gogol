@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable #-}
+
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -29,8 +29,6 @@ import Data.Attoparsec.Text
 import Data.Bifunctor (first, second)
 import Data.Bits ((.&.))
 import Data.Char (ord)
-import Data.Data (Data, Typeable)
-import Data.Monoid ((<>))
 import Data.Scientific (Scientific)
 import qualified Data.Scientific as Sci
 import Data.Text (Text)
@@ -49,7 +47,7 @@ import Web.HttpApiData
 -- recommended that you use the "date-time" format instead of "time"
 -- unless you need to transfer only the time part.
 newtype Time' = Time' {unTime :: TimeOfDay}
-  deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+  deriving (Eq, Ord, Show, Read, Generic)
 
 _Time :: Iso' Time' TimeOfDay
 _Time = iso unTime Time'
@@ -64,7 +62,7 @@ instance FromHttpApiData Time' where
 -- recommended that you use the "date-time" format instead of "date"
 -- unless you need to transfer only the date part.
 newtype Date' = Date' {unDate :: Day}
-  deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToHttpApiData, FromHttpApiData)
+  deriving (Eq, Ord, Show, Read, Generic, ToHttpApiData, FromHttpApiData)
 
 _Date :: Iso' Date' Day
 _Date = iso unDate Date'
@@ -72,7 +70,7 @@ _Date = iso unDate Date'
 -- | This SHOULD be a date in ISO 8601 format of YYYY-MM-
 -- DDThh:mm:ssZ in UTC time. This is the recommended form of date/timestamp.
 newtype DateTime' = DateTime' {unDateTime :: UTCTime}
-  deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToHttpApiData, FromHttpApiData)
+  deriving (Eq, Ord, Show, Read, Generic, ToHttpApiData, FromHttpApiData)
 
 _DateTime :: Iso' DateTime' UTCTime
 _DateTime = iso unDateTime DateTime'
@@ -81,7 +79,7 @@ _DateTime = iso unDateTime DateTime'
 --
 -- /Example/: @"3.5s"@.
 newtype GDuration = GDuration {unGDuration :: Scientific}
-  deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+  deriving (Eq, Ord, Show, Read, Generic)
 
 _GDuration :: Iso' GDuration Scientific
 _GDuration = iso unGDuration GDuration
