@@ -7,14 +7,15 @@
 
 module Gen.TH where
 
-import           Data.Aeson.Types
-import           Data.Char
+import Data.Aeson.Types
+import Data.Char
 
 options :: Options
-options = defaultOptions
-    { constructorTagModifier = map toLower
-    , fieldLabelModifier = \s ->
-        let x:xs = dropWhile (not . isUpper) s in toLower x : xs
+options =
+  defaultOptions
+    { constructorTagModifier = map toLower,
+      fieldLabelModifier = \s ->
+        let x : xs = dropWhile (not . isUpper) s in toLower x : xs
     }
 
 -- -- Wut?

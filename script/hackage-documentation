@@ -5,7 +5,7 @@ set -euo pipefail
 : ${PACKAGE?}
 : ${PASSWORD?}
 
-STACKVER=$(cat $PACKAGE.cabal|grep '^version:'|head -1|awk '{print $2}')
+STACKVER=$(cat $PACKAGE.cabal | grep '^version:' | head -1 | awk '{print $2}')
 STACKDOCDIR=$PACKAGE-$STACKVER-docs
 OUTPUT=dist/doc
 
@@ -20,10 +20,10 @@ sed -i 's/href="\.\.\/\([^/]*\)\//href="..\/..\/\1\/docs\//g' $OUTPUT/$STACKDOCD
 
 (cd $OUTPUT && tar cvz --format=ustar -f $STACKDOCDIR.tar.gz $STACKDOCDIR)
 
-curl -X PUT                                       \
-     -H 'Content-Type: application/x-tar'         \
-     -H 'Content-Encoding: gzip'                  \
-     -u BrendanHay:$PASSWORD                      \
-     --digest                                     \
-     --data-binary @"$OUTPUT/$STACKDOCDIR.tar.gz" \
-     https://hackage.haskell.org/package/$PACKAGE-$STACKVER/docs
+curl -X PUT \
+  -H 'Content-Type: application/x-tar' \
+  -H 'Content-Encoding: gzip' \
+  -u BrendanHay:$PASSWORD \
+  --digest \
+  --data-binary @"$OUTPUT/$STACKDOCDIR.tar.gz" \
+  https://hackage.haskell.org/package/$PACKAGE-$STACKVER/docs

@@ -1,6 +1,6 @@
-{-# LANGUAGE DeriveDataTypeable         #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
 -- Module      : Network.Google.Data.JSON
@@ -9,61 +9,59 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Data.JSON
-    ( JSONValue
-    , Textual  (..)
-    , parseJSONObject
-    , parseJSONText
-    , toJSONText
+  ( JSONValue,
+    Textual (..),
+    parseJSONObject,
+    parseJSONText,
+    toJSONText,
 
     -- * Re-exports
-    , FromJSON (..)
-    , FromJSONKey (..)
-    , ToJSON   (..)
-    , ToJSONKey (..)
+    FromJSON (..),
+    FromJSONKey (..),
+    ToJSON (..),
+    ToJSONKey (..),
+    withObject,
+    emptyObject,
+    object,
+    (.=),
+    (.:),
+    (.:?),
+    (.!=),
+  )
+where
 
-    , withObject
-    , emptyObject
-    , object
-
-    , (.=)
-    , (.:)
-    , (.:?)
-    , (.!=)
-    ) where
-
-import           Data.Aeson
-import           Data.Aeson.Types
-import           Data.Data
-import           Data.HashMap.Strict (HashMap)
-import           Data.Text           (Text)
-import qualified Data.Text           as Text
-import           Web.HttpApiData     (FromHttpApiData (..), ToHttpApiData (..))
+import Data.Aeson
+import Data.Aeson.Types
+import Data.Data
+import Data.HashMap.Strict (HashMap)
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
 
 type JSONValue = Value
 
 newtype Textual a = Textual a
-    deriving
-        ( Eq
-        , Ord
-        , Read
-        , Show
-        , Num
-        , Fractional
-        , Data
-        , Typeable
-        , ToHttpApiData
-        , FromHttpApiData
-        )
+  deriving
+    ( Eq,
+      Ord,
+      Read,
+      Show,
+      Num,
+      Fractional,
+      Data,
+      Typeable,
+      ToHttpApiData,
+      FromHttpApiData
+    )
 
 instance (FromJSON a, FromHttpApiData a) => FromJSON (Textual a) where
-    parseJSON (String s) =
-        either (fail . Text.unpack) (pure . Textual) (parseQueryParam s)
-    parseJSON o          = Textual <$> parseJSON o
+  parseJSON (String s) =
+    either (fail . Text.unpack) (pure . Textual) (parseQueryParam s)
+  parseJSON o = Textual <$> parseJSON o
 
 instance ToHttpApiData a => ToJSON (Textual a) where
-    toJSON (Textual x) = String (toQueryParam x)
+  toJSON (Textual x) = String (toQueryParam x)
 
 parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
 parseJSONObject = parseJSON . Object

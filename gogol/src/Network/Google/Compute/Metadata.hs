@@ -15,47 +15,50 @@
 -- instance\'s local metadata endpoint using 'MonadIO', prior to initialisation
 -- of the environment used by the "Network.Google" monad.
 module Network.Google.Compute.Metadata
-    (
-    -- * Google Compute Instance Check
-      checkGCEVar
-    , isGCE
+  ( -- * Google Compute Instance Check
+    checkGCEVar,
+    isGCE,
 
     -- * Retrieving Metadata
-    , getProjectAttribute
-    , getSSHKeys
-    , getNumericProjectId
-    , getProjectId
-    , getInstanceAttribute
-    , getDescription
-    , getHostname
-    , getInstanceId
-    , getMachineType
-    , getTags
-    , getZone
+    getProjectAttribute,
+    getSSHKeys,
+    getNumericProjectId,
+    getProjectId,
+    getInstanceAttribute,
+    getDescription,
+    getHostname,
+    getInstanceId,
+    getMachineType,
+    getTags,
+    getZone,
 
     -- * Raw Metadata Requests
-    , metadataFlavorHeader
-    , metadataFlavorDesired
-    , metadataRequest
-    , getMetadata
-    ) where
+    metadataFlavorHeader,
+    metadataFlavorDesired,
+    metadataRequest,
+    getMetadata,
+  )
+where
 
-import           Control.Exception       (throwIO)
-import           Control.Monad.Catch
-import           Control.Monad.IO.Class  (MonadIO (..))
-import           Data.Aeson              (eitherDecode')
-import           Data.ByteString         (ByteString)
-import qualified Data.ByteString.Lazy    as LBS
-import           Data.Char               (toLower)
-import qualified Data.Text.Encoding      as Text
-import qualified Data.Text.Lazy          as LText
+import Control.Exception (throwIO)
+import Control.Monad.Catch
+import Control.Monad.IO.Class (MonadIO (..))
+import Data.Aeson (eitherDecode')
+import Data.ByteString (ByteString)
+import qualified Data.ByteString.Lazy as LBS
+import Data.Char (toLower)
+import qualified Data.Text.Encoding as Text
+import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Encoding as LText
-import           Network.Google.Prelude  (Text, (<>))
-import           Network.HTTP.Client     (HttpException (..),
-                                          HttpExceptionContent (..), Manager)
-import qualified Network.HTTP.Client     as Client
-import           Network.HTTP.Types      (HeaderName)
-import           System.Environment      (lookupEnv)
+import Network.Google.Prelude (Text, (<>))
+import Network.HTTP.Client
+  ( HttpException (..),
+    HttpExceptionContent (..),
+    Manager,
+  )
+import qualified Network.HTTP.Client as Client
+import Network.HTTP.Types (HeaderName)
+import System.Environment (lookupEnv)
 
 -- | The @NO_GCE_CHECK@ environment variable.
 checkGCEVar :: String
@@ -75,43 +78,46 @@ metadataFlavorDesired = "Google"
 -- to skip this check and always return @False@.
 isGCE :: MonadIO m => Manager -> m Bool
 isGCE m = liftIO $ do
-    p <- check <$> lookupEnv checkGCEVar
-    if p
-        then (success <$> Client.httpLbs rq m) `catch` failure
-        else pure False
+  p <- check <$> lookupEnv checkGCEVar
+  if p
+    then (success <$> Client.httpLbs rq m) `catch` failure
+    else pure False
   where
-    check Nothing  = True
+    check Nothing = True
     check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
 
     success rs =
-           fromEnum (Client.responseStatus rs) == 200
-        && (lookup metadataFlavorHeader (Client.responseHeaders rs)
-               == Just metadataFlavorDesired)
+      fromEnum (Client.responseStatus rs) == 200
+        && ( lookup metadataFlavorHeader (Client.responseHeaders rs)
+               == Just metadataFlavorDesired
+           )
 
     failure :: HttpException -> IO Bool
     failure = const (pure False)
 
-    rq = metadataRequest
-       { Client.responseTimeout = Client.responseTimeoutMicro 1000000
-       }
+    rq =
+      metadataRequest
+        { Client.responseTimeout = Client.responseTimeoutMicro 1000000
+        }
 
 -- | A directory of custom metadata values that have been set for this project.
 getProjectAttribute :: MonadIO m => Text -> Manager -> m (Maybe LBS.ByteString)
 getProjectAttribute k =
-    getMetadataMaybe ("project/attributes/" <> Text.encodeUtf8 k)
+  getMetadataMaybe ("project/attributes/" <> Text.encodeUtf8 k)
 
 -- | SSH keys that can connect to instances in the project. SSH keys for Compute
 -- Engine use a specialized format where the keys are prepended with a username,
 -- like so: @user1:ssh-rsa my-public-ssh-key user1@host.com@
 getSSHKeys :: MonadIO m => Manager -> m [Text]
 getSSHKeys m = do
-    mx <- getMetadataMaybe "project/attributes/sshKeys" m
-    case mx of
-        Nothing -> pure []
-        Just x  -> pure
-           . map LText.toStrict
-           . LText.split (== '\n')
-           $ LText.decodeUtf8 x
+  mx <- getMetadataMaybe "project/attributes/sshKeys" m
+  case mx of
+    Nothing -> pure []
+    Just x ->
+      pure
+        . map LText.toStrict
+        . LText.split (== '\n')
+        $ LText.decodeUtf8 x
 
 -- | The numeric project ID of the instance, which is not the same as the project
 -- name visible in the Google Developers Console. This value is different from
@@ -128,7 +134,7 @@ getProjectId = getMetadataText "project/project-id"
 -- or shutdown.
 getInstanceAttribute :: MonadIO m => Text -> Manager -> m (Maybe LBS.ByteString)
 getInstanceAttribute k =
-    getMetadataMaybe ("instance/attributes/" <> Text.encodeUtf8 k)
+  getMetadataMaybe ("instance/attributes/" <> Text.encodeUtf8 k)
 
 -- | The free-text description of an instance, assigned using the
 -- @--description@ flag, or set in the API.
@@ -152,10 +158,10 @@ getMachineType = getMetadataText "instance/machine-type"
 -- | Any tags associated with the instance.
 getTags :: MonadIO m => Manager -> m [Text]
 getTags m = do
-    rs <- getMetadata "instance/tags" [] m
-    case eitherDecode' (Client.responseBody rs) of
-        Left  _  -> pure []
-        Right xs -> pure xs
+  rs <- getMetadata "instance/tags" [] m
+  case eitherDecode' (Client.responseBody rs) of
+    Left _ -> pure []
+    Right xs -> pure xs
 
 -- | The instance's zone.
 getZone :: MonadIO m => Manager -> m Text
@@ -202,49 +208,56 @@ getZone = getMetadataText "instance/zone"
 -- Metadata wait for change
 -- curl "http://metadata.google.internal/computeMetadata/v1/instance/tags?wait_for_change=true"
 
-getMetadataMaybe :: MonadIO m
-              => ByteString
-              -> Manager
-              -> m (Maybe LBS.ByteString)
+getMetadataMaybe ::
+  MonadIO m =>
+  ByteString ->
+  Manager ->
+  m (Maybe LBS.ByteString)
 getMetadataMaybe path m = do
-    rs <- getMetadata path [404] m
-    if fromEnum (Client.responseStatus rs) == 404
-        then pure Nothing
-        else pure $ Just (Client.responseBody rs)
+  rs <- getMetadata path [404] m
+  if fromEnum (Client.responseStatus rs) == 404
+    then pure Nothing
+    else pure $ Just (Client.responseBody rs)
 
-getMetadataText :: MonadIO m
-             => ByteString
-             -> Manager
-             -> m Text
-getMetadataText path m = LText.toStrict . LText.decodeUtf8 . Client.responseBody
+getMetadataText ::
+  MonadIO m =>
+  ByteString ->
+  Manager ->
+  m Text
+getMetadataText path m =
+  LText.toStrict . LText.decodeUtf8 . Client.responseBody
     <$> getMetadata path [] m
 
-getMetadata :: MonadIO m
-            => ByteString -- ^ The request path.
-            -> [Int]      -- ^ Acceptable status code responses.
-            -> Manager
-            -> m (Client.Response LBS.ByteString)
+getMetadata ::
+  MonadIO m =>
+  -- | The request path.
+  ByteString ->
+  -- | Acceptable status code responses.
+  [Int] ->
+  Manager ->
+  m (Client.Response LBS.ByteString)
 getMetadata path statuses m =
-    liftIO . flip Client.httpLbs m $
-        metadataRequest
-            { Client.path          = "/computeMetadata/v1/" <> path
-            , Client.checkResponse = \rq rs ->
-                let c = fromEnum (Client.responseStatus rs)
-                 in if 200 <= c && c < 300 && notElem c statuses
-                     then return ()
-                     else do
-                         bs <- Client.brReadSome (Client.responseBody rs) 4096
-                         throwIO . HttpExceptionRequest rq $
-                             StatusCodeException (() <$ rs) (LBS.toStrict bs)
-            }
+  liftIO . flip Client.httpLbs m $
+    metadataRequest
+      { Client.path = "/computeMetadata/v1/" <> path,
+        Client.checkResponse = \rq rs ->
+          let c = fromEnum (Client.responseStatus rs)
+           in if 200 <= c && c < 300 && notElem c statuses
+                then return ()
+                else do
+                  bs <- Client.brReadSome (Client.responseBody rs) 4096
+                  throwIO . HttpExceptionRequest rq $
+                    StatusCodeException (() <$ rs) (LBS.toStrict bs)
+      }
 
 -- | A default @http-client@ 'Client.Request' with the host, port, and headers
 -- set appropriately for @metadata.google.internal@ use.
 metadataRequest :: Client.Request
-metadataRequest = Client.defaultRequest
-    { Client.host           = "metadata.google.internal"
-    , Client.port           = 80
-    , Client.secure         = False
-    , Client.method         = "GET"
-    , Client.requestHeaders = [(metadataFlavorHeader, metadataFlavorDesired)]
+metadataRequest =
+  Client.defaultRequest
+    { Client.host = "metadata.google.internal",
+      Client.port = 80,
+      Client.secure = False,
+      Client.method = "GET",
+      Client.requestHeaders = [(metadataFlavorHeader, metadataFlavorDesired)]
     }
