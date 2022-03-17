@@ -1,5 +1,7 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DeriveFoldable #-}
+{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DeriveTraversable #-}
@@ -173,6 +175,7 @@ instance HasInfo (Fix Schema) where
 checkType :: Text -> A.Object -> Parser ()
 checkType x o = do
   y <- o .: "type"
+
   unless (x == y) . fail . Text.unpack $
     "Schema type mismatch, expected " <> x <> ", but got " <> y
       <> "\n"
@@ -188,20 +191,20 @@ newtype Ref = Ref {ref :: Global}
   deriving (Eq, Show)
 
 instance FromJSON Ref where
-  parseJSON = withObject "ref" (fmap Ref . (.: "$ref"))
+  parseJSON = withObject "ref" (\o -> fmap Ref (o .: "$ref"))
 
 data Lit
   = -- Literal types.
-    Text
-  | Bool
-  | Float
-  | Double
+    Bool
+  | Text
   | Byte
-  | UInt32
-  | UInt64
-  | Int32
-  | Int64
-  | Nat
+  | Float Bool
+  | Double Bool
+  | UInt32 Bool
+  | UInt64 Bool
+  | Int32 Bool
+  | Int64 Bool
+  | Natural Bool
   | Time
   | Date
   | DateTime
@@ -216,28 +219,43 @@ data Lit
 
 instance FromJSON Lit where
   parseJSON = withObject "literal" $ \o -> do
-    t <- o .: "format" <|> o .: "type"
-    case t of
-      -- Types
-      "string" -> pure Text
+    format :: Maybe Text <- o .:? "format"
+
+    (.:) @Text o "type" >>= \case
+      "integer" -> integer format
+      "number" -> number format
+      "string" -> string format
       "boolean" -> pure Bool
-      -- Formats
-      "float" -> pure Float
-      "double" -> pure Double
-      "byte" -> pure Byte
-      "uint32" -> pure UInt32
-      "uint64" -> pure UInt64
-      "int32" -> pure Int32
-      "int64" -> pure Int64
-      "time" -> pure Time
-      "date" -> pure Date
-      "date-time" -> pure DateTime
-      "google-datetime" -> pure DateTime
-      "google-fieldmask" -> pure GFieldMask
-      "google-duration" -> pure GDuration
-      _ ->
-        fail $
-          "Unable to parse Literal from: " ++ Text.unpack t
+      type' -> fail $ "failure parsing Lit: " ++ show (type', format)
+   where
+       integer = \case
+         Just "uint32" -> pure (UInt32 False)
+         Just "uint64" -> pure (UInt64 False)
+         Just "int32" -> pure (Int32 False)
+         Just "int64" -> pure (Int64 False)
+         format -> fail $ "failure parsing Lit: (" ++ show ("number" :: Text, format)
+
+       number = \case
+         Just "float" -> pure (Float False)
+         Just "double" -> pure (Double False)
+         format -> fail $ "failure parsing Lit: " ++ show ("number" :: Text, format)
+
+       string = \case
+        Just "time" -> pure Time
+        Just "date" -> pure Date
+        Just "date-time" -> pure DateTime
+        Just "google-datetime" -> pure DateTime
+        Just "google-fieldmask" -> pure GFieldMask
+        Just "google-duration" -> pure GDuration
+        Just "float" -> pure (Float True)
+        Just "double" -> pure (Double True)
+        Just "byte" -> pure Byte
+        Just "uint32" -> pure (UInt32 True)
+        Just "uint64" -> pure (UInt64 True)
+        Just "int32" -> pure (Int32 True)
+        Just "int64" -> pure (Int64 True)
+        Nothing -> pure Text
+        format -> fail $ "failure parsing Lit: " ++ show ("string" :: Text, format)
 
 newtype Enm = Enm {_eValues :: [(Text, Help)]}
   deriving (Eq, Show)
@@ -463,7 +481,7 @@ serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
-scopeName s k = Text.unpack . lowerHead . lowerFirstAcronym $
+scopeName s k = Text.unpack . lowerHead $
   case breakParts k of
     [] -> _sCanonicalName s <> "AllScope"
     xs -> foldMap named xs <> "Scope"
@@ -485,7 +503,7 @@ scopeName s k = Text.unpack . lowerHead . lowerFirstAcronym $
 
     named x
       | x == lower = pascal
-      | otherwise = upperHead (upperAcronym (replaceAll x special))
+      | otherwise = upperHead (replaceAll x special)
 
     pascal = toPascal (_sCanonicalName s)
     lower = Text.toLower (_sCanonicalName s)

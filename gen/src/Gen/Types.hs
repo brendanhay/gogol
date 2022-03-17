@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE DeriveFoldable #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveGeneric #-}
@@ -16,7 +17,6 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ViewPatterns #-}
-{-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -36,6 +36,7 @@ module Gen.Types
   )
 where
 
+import qualified Data.Char as Char
 import Control.Applicative
 import Control.Lens hiding ((.=))
 import Control.Monad.Except
@@ -70,8 +71,6 @@ import Gen.Types.NS
 import Gen.Types.Schema
 import Text.EDE (Template)
 import Prelude hiding (Enum)
-
-default (Integer)
 
 type Set = Set.HashSet
 
@@ -127,19 +126,23 @@ parseVersion x =
     A.parseOnly (preface *> (empty' <|> version) <* A.endOfInput) x
   where
     empty' = ModelVersion 0 <$> (alpha <|> beta <|> exp')
+
     version =
       ModelVersion
         <$> number
-        <*> (alpha <|> beta <|> sandbox <|> dev <|> pure Nothing)
+        <*> (alpha <|> beta <|> sandbox <|> dev <|> suffix <|> pure Nothing)
 
-    preface = A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
+    preface =
+      A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
 
     protoVersionParser = do
       n <- A.many1 A.digit
       _ <- A.char 'p'
       p <- A.many1 A.digit
       return (read (n ++ "." ++ p) :: Double)
-    number = A.takeWhile (/= 'v') *> A.char 'v' *> (protoVersionParser <|> A.double)
+
+    number =
+      A.takeWhile (/= 'v') *> A.char 'v' *> (protoVersionParser <|> A.double)
 
     dev =
       A.string "dev"
@@ -152,12 +155,15 @@ parseVersion x =
         <&> Just
 
     beta =
-      A.string "beta"
+      (A.string "beta" <|> A.string "b")
         *> (Beta <$> optional A.decimal <*> optional A.letter)
         <&> Just
 
     sandbox = Just Sandbox <$ A.string "sandbox"
-    exp' = Just Sandbox <$ A.string "exp" <* A.decimal
+
+    exp' = Just Sandbox <$ A.string "exp" <* A.decimal @Integer
+
+    suffix = A.takeWhile Char.isAlpha *> pure Nothing <* A.endOfInput
 
 data Model = Model
   { modelName :: Text,
@@ -218,8 +224,8 @@ serviceImports s =
 tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
 tocNS = mappend "Network.Google" . mkNS . view sCanonicalName
 typesNS = (<> "Types") . tocNS
-prodNS = (<> "Product") . typesNS
-sumNS = (<> "Sum") . typesNS
+prodNS = (<> "Internal.Product") . typesNS
+sumNS = (<> "Internal.Sum") . typesNS
 
 preludeNS :: NS
 preludeNS = "Network.Google.Prelude"
@@ -228,7 +234,7 @@ preludeSumNS :: NS
 preludeSumNS = "Network.Google.Prelude"
 
 resourceNS, methodNS :: NS
-resourceNS = "Network.Google.Resource"
+resourceNS = "Network.Google"
 methodNS = "Network.Google.Method"
 
 exposedModules :: Library -> [NS]
@@ -365,6 +371,7 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
       Map.fromList
         [ ("GBody", SLit requiredInfo RqBody),
           ("Stream", SLit requiredInfo RsBody),
+          ("JsonValue", SLit requiredInfo JSONValue),
           ("JSONValue", SLit requiredInfo JSONValue)
         ]
 

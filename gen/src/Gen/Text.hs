@@ -13,12 +13,10 @@
 module Gen.Text where
 
 import Control.Error
-import Data.Bifunctor
 import Data.Char
 import qualified Data.Foldable as Fold
 import qualified Data.HashMap.Strict as Map
 import qualified Data.HashSet as Set
-import Data.String
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.ICU (Regex)
@@ -67,7 +65,7 @@ renameBranch t
   where
     go x
       | Text.length x <= 2 = Text.toUpper x
-      | otherwise = upperAcronym . cat $ split x
+      | otherwise = cat $ split x
 
     cat = Fold.foldMap (Text.intercalate "_" . map component . Text.split dot)
     split = Text.split separator
@@ -150,212 +148,5 @@ renameReserved x
         ]
           ++ map Text.pack (reservedNames haskellDef)
 
-camelAcronym :: Text -> Text
-camelAcronym x = replaceAll x xs
-  where
-    xs = map (bimap fromString fromString) acronyms
-
-lowerFirstAcronym :: Text -> Text
-lowerFirstAcronym x = replaceAll x xs
-  where
-    xs = map (bimap (fromString . ('^' :)) (fromString . f)) acronyms
-
-    f (c : cs) = toLower c : cs
-    f [] = []
-
 replaceAll :: Text -> [(Regex, Replace)] -> Text
 replaceAll = Fold.foldl' (flip (uncurry RE.replaceAll))
-
-upperAcronym :: Text -> Text
-upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
-  where
-    xs :: [(Regex, Replace)]
-    xs =
-      [ ("Acl", "ACL"),
-        ("Adm([^i]|$)", "ADM$1"),
-        ("Aes", "AES"),
-        ("Api", "API"),
-        ("Apk", "APK"),
-        ("Apns", "APNS"),
-        ("Asn", "ASN"),
-        ("Bgp", "BGP"),
-        ("Cidr", "CIDR"),
-        ("Cnc", "CNC"),
-        ("Cors", "CORS"),
-        ("Cpu", "CPU"),
-        ("Cse$", "CSE"),
-        ("Csv", "CSV"),
-        ("Db", "DB"),
-        ("Dhcp", "DHCP"),
-        ("Dns", "DNS"),
-        ("Dto", "DTO"),
-        ("Eq([^u]|$)", "EQ$1"),
-        ("Gan$", "GAN"),
-        ("Gcm", "GCM"),
-        ("Gt$", "GT"),
-        ("Hsm", "HSM"),
-        ("Html", "HTML"),
-        ("Http([^s]|$)", "HTTP$1"),
-        ("Https", "HTTPS"),
-        ("Hvm", "HVM"),
-        ("ID", "Id"),
-        ("Iam", "IAM"),
-        ("Icmp", "ICMP"),
-        ("Ip", "IP"),
-        ("Json", "JSON"),
-        ("Jvm", "JVM"),
-        ("Jwk", "JWK"),
-        ("Lt$", "LT"),
-        ("Mac([^hr]|$)", "MAC$1"),
-        ("Md5", "MD5"),
-        ("Nat", "NAT"),
-        ("Oauth", "OAuth"),
-        ("Ocr", "OCR"),
-        ("Oob", "OOB"),
-        ("Os", "OS"),
-        ("Raid", "RAID"),
-        ("Ramdisk", "RAMDisk"),
-        ("Sgd", "SGD"),
-        ("Sku", "SKU"),
-        ("Sni([^p]|$)", "SNI$1"),
-        ("Sql", "SQL"),
-        ("Ssh", "SSH"),
-        ("Ssl", "SSL"),
-        ("Svn", "SVN"),
-        ("Tar([^g]|$)", "TAR$1"),
-        ("Tcp", "TCP"),
-        ("Tgz", "TGZ"),
-        ("Tls", "TLS"),
-        ("Uri", "URI"),
-        ("Url", "URL"),
-        ("Vip", "VIP"),
-        ("Vlan", "VLAN"),
-        ("Vm([^d]|$)", "VM$1"),
-        ("Vpc", "VPC"),
-        ("Vpn", "VPN"),
-        ("Xml", "XML"),
-        ("Youtube", "YouTube"),
-        ("youtube", "YouTube"),
-        ("kgs", "KGS"),
-        ("([^a])data", "$1Data"),
-        ("([^ypn])load", "$1Load"),
-        ("access", "Access"),
-        ("account", "Account"),
-        ("app", "App"),
-        ("bid", "Bid"),
-        ("billing", "Billing"),
-        ("busy", "Busy"),
-        ("channel", "Channel"),
-        ("click", "Click"),
-        ("client", "Client"),
-        ("config", "Config"),
-        ("crawl", "Crawl"),
-        ("dapi", "dAPI"),
-        ("deal", "Deal"),
-        ("debug", "Debug"),
-        ("device", "Device"),
-        ("download", "Download"),
-        ("engine", "Engine"),
-        ("enterprise", "Enterprise"),
-        ("error", "Error"),
-        ("exchange", "Exchange"),
-        ("file", "File"),
-        ("info", "Info"),
-        ("library", "Library"),
-        ("list", "List"),
-        ("manager", "Manager"),
-        ("model", "Model"),
-        ("monitor", "Monitor"),
-        ("note", "Note"),
-        ("observe", "Observe"),
-        ("offer", "Offer"),
-        ("online", "Online"),
-        ("order", "Order"),
-        ("pagespeed", "Pagespeed"),
-        ("part", "Part"),
-        ("position", "Position"),
-        ("product", "Product"),
-        ("proper", "Proper"),
-        ("publish", "Publish"),
-        ("query", "Query"),
-        ("queue", "Queue"),
-        ("resource", "Resource"),
-        ("round", "Round"),
-        ("sample", "Sample"),
-        ("service", "Service"),
-        ("session", "Session"),
-        ("state", "State"),
-        ("transfer", "Transfer"),
-        ("unit", "Unit"),
-        ("upload", "Upload"),
-        ("user", "User"),
-        ("bucket", "Bucket"),
-        ("([^se])set", "$1Set"),
-        ("group", "Group")
-      ]
-
-acronyms :: [(String, String)]
-acronyms =
-  [ ("ACL", "Acl"),
-    ("AES", "Aes"),
-    ("API", "Api"),
-    ("APNS", "Apns"),
-    ("ASN", "Asn"),
-    ("BGP", "Bgp"),
-    ("CIDR", "Cidr"),
-    ("CORS", "Cors"),
-    ("CSV", "Csv"),
-    ("CPU", "Cpu"),
-    ("DB", "Db"),
-    ("DHCP", "Dhcp"),
-    ("DNS", "Dns"),
-    ("EBS", "Ebs"),
-    ("EC2", "Ec2"),
-    ("EIP", "Eip"),
-    ("GCM", "Gcm"),
-    ("HTML", "Html"),
-    ("HTTPS", "Https"),
-    ("HSM", "Hsm"),
-    ("HVM", "Hvm"),
-    ("IAM", "Iam"),
-    ("ICMP", "Icmp"),
-    ("IDN", "Idn"),
-    ("IOPS", "Iops"),
-    ("IP", "Ip"),
-    ("JAR", "Jar"),
-    ("JSON", "Json"),
-    ("JVM", "Jvm"),
-    ("KMS", "Kms"),
-    ("MD5", "Md5"),
-    ("MFA", "Mfa"),
-    ("OK", "Ok"),
-    ("OS", "Os"),
-    ("PHP", "Php"),
-    ("RAID", "Raid"),
-    ("RAMDisk", "Ramdisk"),
-    ("RDS", "Rds"),
-    ("SGD", "Sgd"),
-    ("SNI", "Sni"),
-    ("SNS", "Sns"),
-    ("SRIOV", "Sriov"),
-    ("SSH", "Ssh"),
-    ("SSL", "Ssl"),
-    ("SSO", "Sso"),
-    ("SVN", "Svn"),
-    ("TDE", "Tde"),
-    ("TCP", "Tcp"),
-    ("TGZ", "Tgz"),
-    ("TLS", "Tls"),
-    ("URI", "Uri"),
-    ("URL", "Url"),
-    ("VGW", "Vgw"),
-    ("VHD", "Vhd"),
-    ("VIP", "Vip"),
-    ("VLAN", "Vlan"),
-    ("VMDK", "Vmdk"),
-    ("VPC", "Vpc"),
-    ("VPN", "Vpn"),
-    ("XML", "Xml"),
-    ("ID", "Id"),
-    ("JWK", "Jwk")
-  ]
