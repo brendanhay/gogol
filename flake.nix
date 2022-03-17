@@ -14,6 +14,7 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
+            haskellPackages.cabal-fmt
             nixpkgs-fmt
             ormolu
             shellcheck
