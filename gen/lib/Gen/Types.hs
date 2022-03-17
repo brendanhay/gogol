@@ -224,8 +224,8 @@ serviceImports s =
 tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
 tocNS = mappend "Network.Google" . mkNS . view sCanonicalName
 typesNS = (<> "Types") . tocNS
-prodNS = (<> "Internal.Product") . typesNS
-sumNS = (<> "Internal.Sum") . typesNS
+prodNS = (<> "Internal.Product") . tocNS
+sumNS = (<> "Internal.Sum") . tocNS
 
 resourceNS, methodNS :: NS
 resourceNS = "Network.Google"

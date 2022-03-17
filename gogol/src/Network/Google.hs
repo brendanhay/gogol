@@ -216,7 +216,7 @@ instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LRW.RWST r w s' m) where
 -- | Send a request, returning the associated response if successful.
 --
 -- Throws 'Error'.
-send :: (MonadGoogle s m, GoogleScope a s, GoogleRequest a) => a -> m (Rs a)
+send :: (MonadGoogle s m, HasScope s a, GoogleRequest a) => a -> m (Rs a)
 send x = liftGoogle $ do
   e <- ask
   r <- perform e x
@@ -237,7 +237,7 @@ send x = liftGoogle $ do
 -- Throws 'Error'.
 download ::
   ( MonadGoogle s m,
-    GoogleScope (MediaDownload a) s,
+    HasScope s (MediaDownload a),
     GoogleRequest (MediaDownload a)
   ) =>
   a ->

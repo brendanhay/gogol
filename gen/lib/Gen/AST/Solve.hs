@@ -82,7 +82,7 @@ getType :: Global -> AST TType
 getType g = loc "getType" g $ memo Gen.Types.typed g go
   where
     go s = case s of
-      SAny {} -> res (TType "JSONValue")
+      SAny {} -> res (TLit JSONValue)
       --- FIXME: add natural/numeric manipulations
       SLit _ l -> res (TLit l)
       SEnm {} -> res (TType g)

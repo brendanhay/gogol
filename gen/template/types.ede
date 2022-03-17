@@ -6,11 +6,12 @@ module {{ moduleName }}
       {{ api.url.name }}
   {% for scope in api.scopes %}
     {% if scope.first %}
+
     -- * OAuth Scopes
     {% endif %}
     , {{ scope.value.name }}
   {% endfor %}
-  {% for schema in schemas %}
+ {% for schema in schemas %}
     {% case schema.value.type %}
     {% when "prod" %}
 
