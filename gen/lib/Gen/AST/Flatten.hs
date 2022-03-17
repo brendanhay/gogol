@@ -158,9 +158,8 @@ method ::
   AST (Method Global)
 method qs suf m@Method {..} = do
   ps <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
-  cn <- use sCanonicalName
 
-  let (_, typ', _) = mname cn suf _mId
+  let (_, typ', _) = mname suf _mId
 
   typ <- reserveType typ'
   b <- body typ
@@ -169,6 +168,7 @@ method qs suf m@Method {..} = do
       fields' = Map.delete "alt" $ b (Map.map _pParam params)
 
   void $ insert typ (SObj schemaInfo (Obj Nothing fields'))
+
   pure $! m {_mParameters = params}
   where
     schemaInfo = emptyInfo {_iDescription = _mDescription}

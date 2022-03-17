@@ -5,7 +5,7 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
-    -- * Service Configuration
+    -- * Configuration
       {{ api.url.name }}
   {% for scope in api.scopes %}
     {% if scope.first %}
@@ -15,7 +15,7 @@ module {{ moduleName }}
     , {{ scope.value.name }}
   {% endfor %}
 
-    -- * REST Resources
+    -- * Resources
   {% for action in api.methods %}
 
     -- ** {{ action.value.id }}

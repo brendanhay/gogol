@@ -65,21 +65,14 @@ import Language.Haskell.Exts.Syntax (Exp, Name (..))
 aname :: Text -> Name ()
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
-mname :: Text -> Suffix -> Global -> (Name (), Global, Text)
-mname abrv (Suffix suf) (Global g) =
+mname :: Suffix -> Global -> (Name (), Global, [Text])
+mname (Suffix suf) (Global g) =
   ( name . Text.unpack $ mconcat n <> suf, -- Action service type alias.
     Global n, -- Action data type.
-    Text.intercalate "." ns -- Action namespace.
+    n
   )
   where
-    n = drop 1 ns
-
-    ns
-      | CI.mk e == CI.mk x = e : xs
-      | otherwise = x : xs
-      where
-        e = Text.replace "." "" abrv
-        x : xs = map upperHead g
+    n = map upperHead g
 
 dname :: Global -> Name ()
 dname =

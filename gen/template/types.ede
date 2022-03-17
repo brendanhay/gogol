@@ -2,7 +2,7 @@
 --
 module {{ moduleName }}
     (
-    -- * Service Configuration
+    -- * Configuration
       {{ api.url.name }}
   {% for scope in api.scopes %}
     {% if scope.first %}
@@ -11,16 +11,18 @@ module {{ moduleName }}
     {% endif %}
     , {{ scope.value.name }}
   {% endfor %}
+
+    -- * Types
  {% for schema in schemas %}
     {% case schema.value.type %}
     {% when "prod" %}
 
-    -- * {{ schema.value.name }}
+    -- ** {{ schema.value.name }}
     , {{ schema.value.name }} (..)
     , {{ schema.value.ctor.name }}
     {% when "sum" %}
 
-    -- * {{ schema.value.name }}
+    -- ** {{ schema.value.name }}
     , {{ schema.value.name }} (..)
     {% endcase %}
   {% endfor %}

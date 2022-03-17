@@ -142,8 +142,8 @@ renderMethod s suf m@Method {..} = do
 
   d <-
     renderSchema x >>= \case
-        Nothing -> error "failed to render the schema"
-        Just ok -> pure ok
+      Nothing -> error "failed to render the schema"
+      Just ok -> pure ok
 
   i <- pp Print $ requestDecl _unique _prefix alias url (props _schema) m
   dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
@@ -155,9 +155,9 @@ renderMethod s suf m@Method {..} = do
     <$> pp Print (verbAlias s alias m)
     <*> pure (insts inst d)
   where
-    root = collapseNS (tocNS s <> mkNS ns)
+    root = collapseNS (tocNS s <> UnsafeNS parts)
 
-    (alias, typ', ns) = mname (_sCanonicalName s) suf _mId
+    (alias, typ', parts) = mname suf _mId
 
     url = name (serviceName s)
 
@@ -171,7 +171,7 @@ renderMethod s suf m@Method {..} = do
 
 renderResource :: Service a -> Suffix -> Resource Solved -> AST [Action]
 renderResource s suf Resource {..} =
- (<>)
+  (<>)
     <$> (traverse (renderResource s suf) (Map.elems _rResources) <&> concat)
     <*> traverse (renderMethod s suf) _rMethods
 
@@ -214,15 +214,17 @@ pp i x
 -- FIXME: dirty hack to render smart ctor parameter comments.
 comments :: Map Local Solved -> Rendered -> Rendered
 comments (Map.toList -> rs) =
-  LText.replace " :: " "\n    :: "
+  LText.replace "::" "\n    :: "
     . LText.intercalate "\n    -> "
     . zipWith rel ps
     . map LText.strip
     . LText.splitOn "->"
   where
     ks = filter (parameter . _schema . snd) rs
-    ps = map (Just . fst) ks ++ repeat Nothing
+    ps = map Just ks ++ repeat Nothing
 
     rel Nothing t = t
-    rel (Just l) t =
-      t <> " -- ^ '" <> fromString (PP.prettyPrint (fname l)) <> "'"
+    rel (Just (l, s)) t =
+      t <> "\n       -- ^ "
+        <> maybe mempty (LText.drop 11 . renderHelp . Nest 7) (s ^. iDescription)
+        <> " See '" <> fromString (PP.prettyPrint (fname l)) <> "'."
