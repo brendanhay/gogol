@@ -289,7 +289,7 @@ downloadDecl n pre api url fs m =
       PApp
         ()
         (UnQual () "Core.MediaDownload")
-        [ PRec () (UnQual () (dname' n)) [PFieldWildcard () | not (null fs)]
+        [ PRec () (UnQual () (dname n)) [PFieldWildcard () | not (null fs)]
         ]
 
 uploadDecl ::
@@ -335,7 +335,7 @@ uploadDecl n pre api url fs m =
       PApp
         ()
         (UnQual () "Core.MediaUpload")
-        [ PRec () (UnQual () (dname' n)) [PFieldWildcard () | not (null fs)],
+        [ PRec () (UnQual () (dname n)) [PFieldWildcard () | not (null fs)],
           PVar () media
         ]
 
@@ -376,7 +376,7 @@ requestDecl n pre api url fs m =
 
     pat = metadataPat m
 
-    prec = PRec () (UnQual () (dname' n)) [PFieldWildcard () | not (null fs)]
+    prec = PRec () (UnQual () (dname n)) [PFieldWildcard () | not (null fs)]
 
 googleRequestDecl ::
   Type () ->
@@ -519,7 +519,7 @@ wildcardD f n enc x = \case
     match p es =
       Match () (name f) [p] (UnGuardedRhs () (enc es)) noBinds
 
-    prec = PRec () (UnQual () (dname' n)) [PFieldWildcard ()]
+    prec = PRec () (UnQual () (dname n)) [PFieldWildcard ()]
 
 defJS :: Local -> Exp () -> Exp ()
 defJS n = infixApp (infixApp (var "o") "Core..:?" (fstr n)) "Core..!="
@@ -539,7 +539,7 @@ constD f x =
     sfun (name f) [] (UnGuardedRhs () (app (var "Core.const") x)) noBinds
 
 ctorE :: Global -> [Exp ()] -> Exp ()
-ctorE n = seqE (var (dname' n)) . map paren
+ctorE n = seqE (var (dname n)) . map paren
 
 seqE :: Exp () -> [Exp ()] -> Exp ()
 seqE l [] = app (var "Core.pure") l
@@ -553,7 +553,7 @@ objDecl n rs =
       | Map.size rs == 1 = NewType ()
       | otherwise = DataType ()
 
-    con = QualConDecl () Nothing Nothing (ConDecl () (dname' n) [])
+    con = QualConDecl () Nothing Nothing (ConDecl () (dname n) [])
 
 objDerive :: [Derive] -> Deriving ()
 objDerive = Deriving () Nothing . map (unqualRule . mappend "Core." . drop 1 . show)
@@ -577,7 +577,7 @@ ctorDecl :: Global -> Prefix -> Map Local Solved -> Decl ()
 ctorDecl n p rs = sfun c ps (UnGuardedRhs () rhs) noBinds
   where
     c = cname n
-    d = dname' n
+    d = dname n
 
     rhs
       | Map.null rs = var d

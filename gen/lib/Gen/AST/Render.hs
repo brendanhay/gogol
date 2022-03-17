@@ -99,16 +99,8 @@ renderSchema s = go (_schema s)
 
 renderAPI :: Service Solved -> AST API
 renderAPI s = do
-  rs <-
-    traverse
-      (renderResource s resourceNS "Resource")
-      (Map.elems (s ^. dResources))
-      <&> concat
-
-  ms <-
-    traverse
-      (renderMethod s methodNS "Method")
-      (s ^. dMethods)
+  rs <- traverse (renderResource s "Resource") (Map.elems (s ^. dResources)) <&> concat
+  ms <- traverse (renderMethod s "Method") (s ^. dMethods)
 
   d <- pp Print $ apiAlias alias (map _actAliasName (rs <> ms))
 
@@ -142,29 +134,29 @@ renderAPI s = do
       where
         n = name (scopeName s k)
 
-renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
-renderMethod s root suf m@Method {..} = do
+renderMethod :: Service a -> Suffix -> Method Solved -> AST Action
+renderMethod s suf m@Method {..} = do
   typ <- reserveType typ'
 
   x@Solved {..} <- getSolved typ
-  d' <- renderSchema x
-  d <- case d' of
-    Nothing -> error "failed to render the schema"
-    Just d'' -> pure d''
+
+  d <-
+    renderSchema x >>= \case
+        Nothing -> error "failed to render the schema"
+        Just ok -> pure ok
 
   i <- pp Print $ requestDecl _unique _prefix alias url (props _schema) m
   dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
   ul <- pp Print $ uploadDecl _unique _prefix alias url (props _schema) m
 
-  let is =
-        i :
-        [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload]
-          ++ [ul | _mSupportsMediaUpload]
+  let inst = i : [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload] ++ [ul | _mSupportsMediaUpload]
 
-  Action (commasep _mId) _unique (root <> mkNS ns) _mDescription alias
+  Action (commasep _mId) _unique root _mDescription alias
     <$> pp Print (verbAlias s alias m)
-    <*> pure (insts is d)
+    <*> pure (insts inst d)
   where
+    root = collapseNS (tocNS s <> mkNS ns)
+
     (alias, typ', ns) = mname (_sCanonicalName s) suf _mId
 
     url = name (serviceName s)
@@ -177,12 +169,11 @@ renderMethod s root suf m@Method {..} = do
       SObj _ (Obj _ ps) -> Map.keys ps
       _ -> mempty
 
-renderResource :: Service a -> NS -> Suffix -> Resource Solved -> AST [Action]
-renderResource s root suf Resource {..} =
-  liftA2
-    (<>)
-    (traverse (renderResource s root suf) (Map.elems _rResources) <&> concat)
-    (traverse (renderMethod s root suf) _rMethods)
+renderResource :: Service a -> Suffix -> Resource Solved -> AST [Action]
+renderResource s suf Resource {..} =
+ (<>)
+    <$> (traverse (renderResource s suf) (Map.elems _rResources) <&> concat)
+    <*> traverse (renderMethod s suf) _rMethods
 
 data PP
   = Indent
