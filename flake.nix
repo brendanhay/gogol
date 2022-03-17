@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -10,7 +10,8 @@
 
         pkgs = nixpkgs.legacyPackages.${system};
 
-      in {
+      in
+      {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             nixpkgs-fmt
@@ -22,4 +23,3 @@
         };
       });
 }
-
