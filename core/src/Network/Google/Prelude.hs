@@ -23,7 +23,7 @@ import Data.Text as Export (Text)
 import Data.Time as Export (Day, TimeOfDay, UTCTime)
 import Data.Word as Export (Word32, Word64, Word8)
 import GHC.Generics as Export (Generic)
-import Network.Google.Data.Bytes as Export
+import Network.Google.Data.Base64 as Export
 import Network.Google.Data.JSON as Export
 import Network.Google.Data.Time as Export
 import Network.Google.Types as Export

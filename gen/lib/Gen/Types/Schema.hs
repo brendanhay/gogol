@@ -197,7 +197,7 @@ data Lit
   = -- Literal types.
     Bool
   | Text
-  | Byte
+  | Base64
   | Float Bool
   | Double Bool
   | UInt32 Bool
@@ -249,7 +249,7 @@ instance FromJSON Lit where
         Just "google-duration" -> pure GDuration
         Just "float" -> pure (Float True)
         Just "double" -> pure (Double True)
-        Just "byte" -> pure Byte
+        Just "byte" -> pure Base64
         Just "uint32" -> pure (UInt32 True)
         Just "uint64" -> pure (UInt64 True)
         Just "int32" -> pure (Int32 True)
