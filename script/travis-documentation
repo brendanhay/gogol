@@ -3,13 +3,13 @@
 set -euo pipefail
 
 if [ "$TRAVIS_BRANCH" != "develop" ]; then
-    echo "Ignoring documentation build for branch '$TRAVIS_BRANCH'."
-    exit 0
+  echo "Ignoring documentation build for branch '$TRAVIS_BRANCH'."
+  exit 0
 fi
 
 if [ -z "$DOC_TOKEN" ]; then
-    echo "Ignoring documentation build due to missing token."
-    exit 0
+  echo "Ignoring documentation build due to missing token."
+  exit 0
 fi
 
 DOC_REF=github.com/brendanhay/gogol-doc.git
@@ -17,36 +17,36 @@ GHCVER=${GHCVER?"GHCVER needs to be set."}
 BUILD_ID=${TRAVIS_BUILD_ID:-1}
 BUILD_NUMBER=${TRAVIS_BUILD_NUMBER:-1}
 
-path=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 $path/travis-timeout \
-    stack --no-terminal --skip-ghc-check --stack-yaml stack-$GHCVER.yaml \
-    build --fast -j2 --haddock --no-haddock-deps \
-    gogol gogol-core
+  stack --no-terminal --skip-ghc-check --stack-yaml stack-$GHCVER.yaml \
+  build --fast -j2 --haddock --no-haddock-deps \
+  gogol gogol-core
 
 output=doc
 
 cp -R $(stack path --local-doc-root) $output
 
 {
-    cat <<-HTML
+  cat <<-HTML
     <!DOCTYPE html>
     <h2>Gogol Library Documentation</h2>
     <h4>Build <a href="https://travis-ci.org/brendanhay/gogol/builds/${BUILD_ID}">#${BUILD_NUMBER}</a>, GHC ${GHCVER}</h4>
     <ul>
 HTML
 
-    for dir in $(ls -d $output/*/); do
-        file=$(basename $dir)
-        cat <<-HTML
+  for dir in $(ls -d $output/*/); do
+    file=$(basename $dir)
+    cat <<-HTML
         <li><a href="${file}/index.html">${file}</a></li>
 HTML
-    done
+  done
 
-    cat <<-HTML
+  cat <<-HTML
     </ul>
 HTML
-} > $output/index.html
+} >$output/index.html
 
 cd $output
 
@@ -58,4 +58,4 @@ git config user.email "brendan.g.hay@gmail.com"
 git add .
 git commit -m "Travis CI documentation deploy $BUILD_NUMBER"
 
-git push --force --quiet "https://${DOC_TOKEN}@${DOC_REF}" master:gh-pages > /dev/null 2>&1
+git push --force --quiet "https://${DOC_TOKEN}@${DOC_REF}" master:gh-pages >/dev/null 2>&1

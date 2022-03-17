@@ -1,9 +1,9 @@
-{-# LANGUAGE DataKinds              #-}
-{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE KindSignatures         #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE KindSignatures #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
 -- Module      : Network.Google.Env
@@ -16,59 +16,59 @@
 -- Environment and Google specific configuration for the "Network.Google" monad.
 module Network.Google.Env where
 
-import Control.Lens                   (Lens', lens, (<>~), (?~))
-import Control.Monad.Catch            (MonadCatch)
-import Control.Monad.IO.Class         (MonadIO (..))
-import Control.Monad.Reader           (MonadReader (local))
-import Data.Function                  (on)
-import Data.Monoid                    (Dual (..), Endo (..))
-import Data.Proxy                     (Proxy (..))
-import GHC.TypeLits                   (Symbol)
+import Control.Lens (Lens', lens, (<>~), (?~))
+import Control.Monad.Catch (MonadCatch)
+import Control.Monad.IO.Class (MonadIO (..))
+import Control.Monad.Reader (MonadReader (local))
+import Data.Function (on)
+import Data.Monoid (Dual (..), Endo (..))
+import Data.Proxy (Proxy (..))
+import GHC.TypeLits (Symbol)
 import Network.Google.Auth
 import Network.Google.Internal.Logger (Logger)
 import Network.Google.Types
-import Network.HTTP.Conduit           (Manager, newManager, tlsManagerSettings)
+import Network.HTTP.Conduit (Manager, newManager, tlsManagerSettings)
 
 -- | The environment containing the parameters required to make Google requests.
 data Env (s :: [Symbol]) = Env
-    { _envOverride :: !(Dual (Endo ServiceConfig))
-    , _envLogger   :: !Logger
-    , _envManager  :: !Manager
-    , _envStore    :: !(Store s)
-    }
+  { _envOverride :: !(Dual (Endo ServiceConfig)),
+    _envLogger :: !Logger,
+    _envManager :: !Manager,
+    _envStore :: !(Store s)
+  }
 
 -- Note: The strictness annotations aobe are applied to ensure
 -- total field initialisation.
 
 class HasEnv s a | a -> s where
-    environment :: Lens' a (Env s)
-    {-# MINIMAL environment #-}
+  environment :: Lens' a (Env s)
+  {-# MINIMAL environment #-}
 
-    -- | The currently applied overrides to all 'Service' configuration.
-    envOverride :: Lens' a (Dual (Endo ServiceConfig))
+  -- | The currently applied overrides to all 'Service' configuration.
+  envOverride :: Lens' a (Dual (Endo ServiceConfig))
 
-    -- | The function used to output log messages.
-    envLogger   :: Lens' a Logger
+  -- | The function used to output log messages.
+  envLogger :: Lens' a Logger
 
-    -- | The 'Manager' used to create and manage open HTTP connections.
-    envManager  :: Lens' a Manager
+  -- | The 'Manager' used to create and manage open HTTP connections.
+  envManager :: Lens' a Manager
 
-    -- | The credential store used to sign requests for authentication with Google.
-    envStore    :: Lens' a (Store s)
+  -- | The credential store used to sign requests for authentication with Google.
+  envStore :: Lens' a (Store s)
 
-    -- | The authorised OAuth2 scopes.
-    --
-    -- /See:/ 'allow', '!', and the related scopes available for each service.
-    envScopes   :: Lens' a (Proxy s)
+  -- | The authorised OAuth2 scopes.
+  --
+  -- /See:/ 'allow', '!', and the related scopes available for each service.
+  envScopes :: Lens' a (Proxy s)
 
-    envOverride = environment . lens _envOverride (\s a -> s { _envOverride = a })
-    envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger   = a })
-    envManager  = environment . lens _envManager  (\s a -> s { _envManager  = a })
-    envStore    = environment . lens _envStore    (\s a -> s { _envStore    = a })
-    envScopes   = environment . lens (\_ -> Proxy :: Proxy s) (flip allow)
+  envOverride = environment . lens _envOverride (\s a -> s {_envOverride = a})
+  envLogger = environment . lens _envLogger (\s a -> s {_envLogger = a})
+  envManager = environment . lens _envManager (\s a -> s {_envManager = a})
+  envStore = environment . lens _envStore (\s a -> s {_envStore = a})
+  envScopes = environment . lens (\_ -> Proxy :: Proxy s) (flip allow)
 
 instance HasEnv s (Env s) where
-    environment = id
+  environment = id
 
 -- | Provide a function which will be added to the stack
 -- of overrides, which are applied to all service configurations.
@@ -97,8 +97,9 @@ configure f = envOverride <>~ Dual (Endo f)
 override :: HasEnv s a => ServiceConfig -> a -> a
 override s = configure f
   where
-    f x | on (==) _svcId s x = s
-        | otherwise          = x
+    f x
+      | on (==) _svcId s x = s
+      | otherwise = x
 
 -- | Scope an action such that any HTTP response will use this timeout value.
 --
@@ -128,16 +129,17 @@ timeout s = local (configure (serviceTimeout ?~ s))
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.
 newEnv :: (MonadIO m, MonadCatch m, AllowScopes s) => m (Env s)
 newEnv = do
-    m <- liftIO (newManager tlsManagerSettings)
-    c <- getApplicationDefault m
-    newEnvWith c (\_ _ -> pure ()) m
+  m <- liftIO (newManager tlsManagerSettings)
+  c <- getApplicationDefault m
+  newEnvWith c (\_ _ -> pure ()) m
 
 -- | Create a new environment.
 --
 -- /See:/ 'newEnv'.
-newEnvWith :: (MonadIO m, MonadCatch m, AllowScopes s)
-           => Credentials s
-           -> Logger
-           -> Manager
-           -> m (Env s)
+newEnvWith ::
+  (MonadIO m, MonadCatch m, AllowScopes s) =>
+  Credentials s ->
+  Logger ->
+  Manager ->
+  m (Env s)
 newEnvWith c l m = Env mempty l m <$> initStore c l m

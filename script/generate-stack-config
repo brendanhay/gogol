@@ -2,17 +2,17 @@
 
 set -euo pipefail
 
-library=( $(ls -d gogol-*) )
-library=( $(echo ${library[@]} | tr ' ' '\n' | sort | uniq -u) )
+library=($(ls -d gogol-*))
+library=($(echo ${library[@]} | tr ' ' '\n' | sort | uniq -u))
 
 for config in stack-*.yaml; do
-    echo "Updating ${config}"
+  echo "Updating ${config}"
 
-    sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
+  sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
 
-    echo "# GENERATED" >> "${config}"
-    echo "$(printf '  - %s\n' "${library[@]}")" >> "${config}"
-    echo "# END GENERATED" >> "${config}"
+  echo "# GENERATED" >>"${config}"
+  echo "$(printf '  - %s\n' "${library[@]}")" >>"${config}"
+  echo "# END GENERATED" >>"${config}"
 done
 
 echo "Done."

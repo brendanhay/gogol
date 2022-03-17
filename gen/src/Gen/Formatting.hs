@@ -6,19 +6,20 @@
 -- Portability : non-portable (GHC extensions)
 
 module Gen.Formatting
-    ( module Gen.Formatting
-    , module Formatting
-    , module Formatting.Internal
-    , module Formatting.Time
-    ) where
+  ( module Gen.Formatting,
+    module Formatting,
+    module Formatting.Internal,
+    module Formatting.Time,
+  )
+where
 
-import           Control.Monad.Except
-import qualified Data.Text.Lazy         as LText
+import Control.Monad.Except
+import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Builder as Build
-import           Formatting             hiding (base, left, right)
-import           Formatting.Internal    (runFormat)
-import           Formatting.Time        hiding (fmt)
-import           Gen.Types
+import Formatting hiding (base, left, right)
+import Formatting.Internal (runFormat)
+import Formatting.Time hiding (fmt)
+import Gen.Types
 
 path :: Format a (Path -> a)
 path = later (Build.fromText . toTextIgnore)

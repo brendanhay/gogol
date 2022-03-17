@@ -7,19 +7,18 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Internal.Multipart where
 
-import           Control.Monad.IO.Class                (MonadIO (..))
-import           Data.ByteString                       (ByteString)
-import qualified Data.ByteString                       as BS
-import           Data.ByteString.Builder.Extra         (byteStringCopy)
-import           Data.Monoid                           ((<>))
-import           Network.Google.Types                  (GBody (..))
-import           Network.HTTP.Client
-import           Network.HTTP.Client.MultipartFormData (webkitBoundary)
-import           Network.HTTP.Media                    (RenderHeader (..))
-import           Network.HTTP.Types                    (Header, hContentType)
+import Control.Monad.IO.Class (MonadIO (..))
+import Data.ByteString (ByteString)
+import qualified Data.ByteString as BS
+import Data.ByteString.Builder.Extra (byteStringCopy)
+import Data.Monoid ((<>))
+import Network.Google.Types (GBody (..))
+import Network.HTTP.Client
+import Network.HTTP.Client.MultipartFormData (webkitBoundary)
+import Network.HTTP.Media (RenderHeader (..))
+import Network.HTTP.Types (Header, hContentType)
 
 -- POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1
 -- Host: www.googleapis.com
@@ -44,9 +43,9 @@ genBoundary = Boundary <$> liftIO webkitBoundary
 
 multipartHeader :: Boundary -> Header
 multipartHeader (Boundary bs) =
-    ( hContentType
-    , "multipart/related; boundary=" <> bs
-    )
+  ( hContentType,
+    "multipart/related; boundary=" <> bs
+  )
 
 start :: Boundary -> RequestBody
 start (Boundary bs) = copy "--" <> copy bs <> copy "\r\n"
@@ -61,9 +60,9 @@ renderParts :: Boundary -> [GBody] -> RequestBody
 renderParts b = (<> part b) . foldMap go
   where
     go (GBody ct x) =
-           start b
+      start b
         <> copy "Content-Type: "
-           <> copy (renderHeader ct)
+        <> copy (renderHeader ct)
         <> copy "\r\n\r\n"
         <> x
         <> copy "\r\n"

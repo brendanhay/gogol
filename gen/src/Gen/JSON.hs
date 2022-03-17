@@ -10,24 +10,24 @@
 
 module Gen.JSON where
 
-import           Control.Error
-import           Control.Monad.Except
-import           Data.Aeson           hiding (decode)
-import           Data.Aeson.Types
-import           Data.Bifunctor
-import           Data.ByteString      (ByteString)
+import Control.Error
+import Control.Monad.Except
+import Data.Aeson hiding (decode)
+import Data.Aeson.Types
+import Data.Bifunctor
+import Data.ByteString (ByteString)
 import qualified Data.ByteString.Lazy as LBS
-import qualified Data.HashMap.Strict  as Map
-import           Data.List
-import qualified Data.Text.Lazy       as LText
-import           Gen.Formatting
-import           Gen.IO
-import           Gen.Types
-import qualified Text.EDE             as EDE
+import qualified Data.HashMap.Strict as Map
+import Data.List
+import qualified Data.Text.Lazy as LText
+import Gen.Formatting
+import Gen.IO
+import Gen.Types
+import qualified Text.EDE as EDE
 
 objectErr :: ToJSON a => String -> a -> Either Error Object
 objectErr n =
-      note (format ("Failed to extract JSON object from value " % string) n)
+  note (format ("Failed to extract JSON object from value " % string) n)
     . EDE.fromValue
     . toJSON
 
@@ -48,6 +48,6 @@ merge = foldl' go mempty
 
     value :: Value -> Value -> Value
     value l r =
-        case (l, r) of
-            (Object x, Object y) -> Object (x `go` y)
-            (_,        _)        -> l
+      case (l, r) of
+        (Object x, Object y) -> Object (x `go` y)
+        (_, _) -> l

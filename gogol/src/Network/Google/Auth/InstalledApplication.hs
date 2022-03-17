@@ -1,6 +1,6 @@
-{-# LANGUAGE KindSignatures    #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE KindSignatures #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DataKinds         #-}
 
 -- |
 -- Module      : Network.Google.Auth.InstalledApplication
@@ -19,33 +19,36 @@
 --
 -- /See:/ <https://developers.google.com/identity/protocols/OAuth2InstalledApp Installed Application Documentation>.
 module Network.Google.Auth.InstalledApplication
-    ( installedApplication
+  ( installedApplication,
 
     -- * Forming the URL
-    , AccessType (..)
-    , redirectURI
-    , formURL
-    , formAccessTypeURL
-    , formURLWith
-    , formAccessTypeURLWith
+    AccessType (..),
+    redirectURI,
+    formURL,
+    formAccessTypeURL,
+    formURLWith,
+    formAccessTypeURLWith,
 
     -- * Internal Exchange and Refresh
-    , exchangeCode
-    , refreshToken
-    ) where
+    exchangeCode,
+    refreshToken,
+  )
+where
 
-import           Control.Monad.Catch            (MonadCatch)
-import           Control.Monad.IO.Class         (MonadIO)
-import qualified Data.Text                      as Text
-import qualified Data.Text.Encoding             as Text
-import           GHC.TypeLits                   (Symbol)
-import           Network.Google.Auth.Scope      (AllowScopes (..),
-                                                 queryEncodeScopes)
-import           Network.Google.Internal.Auth
-import           Network.Google.Internal.Logger (Logger)
-import           Network.Google.Prelude
-import           Network.HTTP.Conduit           (Manager)
-import qualified Network.HTTP.Conduit           as Client
+import Control.Monad.Catch (MonadCatch)
+import Control.Monad.IO.Class (MonadIO)
+import qualified Data.Text as Text
+import qualified Data.Text.Encoding as Text
+import GHC.TypeLits (Symbol)
+import Network.Google.Auth.Scope
+  ( AllowScopes (..),
+    queryEncodeScopes,
+  )
+import Network.Google.Internal.Auth
+import Network.Google.Internal.Logger (Logger)
+import Network.Google.Prelude
+import Network.HTTP.Conduit (Manager)
+import qualified Network.HTTP.Conduit as Client
 
 -- | Create new Installed Application credentials.
 --
@@ -105,53 +108,71 @@ formAccessTypeURL c a = formAccessTypeURLWith c a . allowScopes
 --
 -- /See:/ 'formURL'.
 formURLWith :: OAuthClient -> [OAuthScope] -> Text
-formURLWith c ss = accountsURL
+formURLWith c ss =
+  accountsURL
     <> "?response_type=code"
-    <> "&client_id="    <> toQueryParam (_clientId c)
-    <> "&redirect_uri=" <> redirectURI
-    <> "&scope="        <> Text.decodeUtf8 (queryEncodeScopes ss)
+    <> "&client_id="
+    <> toQueryParam (_clientId c)
+    <> "&redirect_uri="
+    <> redirectURI
+    <> "&scope="
+    <> Text.decodeUtf8 (queryEncodeScopes ss)
 
 -- | 'formURLWith' for 'AccessType'
 --
 -- /See:/ 'formURLWith'.
 formAccessTypeURLWith :: OAuthClient -> AccessType -> [OAuthScope] -> Text
-formAccessTypeURLWith c a ss = formURLWith c ss
-    <> "&access_type="  <> (Text.toLower . Text.pack $ show a)
+formAccessTypeURLWith c a ss =
+  formURLWith c ss
+    <> "&access_type="
+    <> (Text.toLower . Text.pack $ show a)
 
 -- | Exchange 'OAuthClient' details and the received 'OAuthCode' for a new
 -- 'OAuthToken'.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#handlingtheresponse Exchanging the code>.
-exchangeCode :: (MonadIO m, MonadCatch m)
-             => OAuthClient
-             -> (OAuthCode s)
-             -> Logger
-             -> Manager
-             -> m (OAuthToken s)
-exchangeCode c n = refreshRequest $
+exchangeCode ::
+  (MonadIO m, MonadCatch m) =>
+  OAuthClient ->
+  (OAuthCode s) ->
+  Logger ->
+  Manager ->
+  m (OAuthToken s)
+exchangeCode c n =
+  refreshRequest $
     tokenRequest
-        { Client.requestBody = textBody $
-               "grant_type=authorization_code"
-            <> "&client_id="     <> toQueryParam (_clientId     c)
-            <> "&client_secret=" <> toQueryParam (_clientSecret c)
-            <> "&code="          <> toQueryParam n
-            <> "&redirect_uri="  <> redirectURI
-        }
+      { Client.requestBody =
+          textBody $
+            "grant_type=authorization_code"
+              <> "&client_id="
+              <> toQueryParam (_clientId c)
+              <> "&client_secret="
+              <> toQueryParam (_clientSecret c)
+              <> "&code="
+              <> toQueryParam n
+              <> "&redirect_uri="
+              <> redirectURI
+      }
 
 -- | Perform a refresh to obtain a valid 'OAuthToken' with a new expiry time.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#offline Refreshing tokens>.
-refreshToken :: (MonadIO m, MonadCatch m)
-             => OAuthClient
-             -> (OAuthToken s)
-             -> Logger
-             -> Manager
-             -> m (OAuthToken s)
-refreshToken c t = refreshRequest $
+refreshToken ::
+  (MonadIO m, MonadCatch m) =>
+  OAuthClient ->
+  (OAuthToken s) ->
+  Logger ->
+  Manager ->
+  m (OAuthToken s)
+refreshToken c t =
+  refreshRequest $
     tokenRequest
-        { Client.requestBody = textBody $
-               "grant_type=refresh_token"
-            <> "&client_id="     <> toQueryParam (_clientId     c)
-            <> "&client_secret=" <> toQueryParam (_clientSecret c)
-            <> maybe mempty ("&refresh_token=" <>) (toQueryParam <$> _tokenRefresh t)
-        }
+      { Client.requestBody =
+          textBody $
+            "grant_type=refresh_token"
+              <> "&client_id="
+              <> toQueryParam (_clientId c)
+              <> "&client_secret="
+              <> toQueryParam (_clientSecret c)
+              <> maybe mempty ("&refresh_token=" <>) (toQueryParam <$> _tokenRefresh t)
+      }
