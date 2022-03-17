@@ -1,5 +1,4 @@
 {-# LANGUAGE DataKinds #-}
-
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -52,11 +51,11 @@ import Network.HTTP.Types hiding (Header)
 import qualified Network.HTTP.Types as HTTP
 import Servant.API hiding (Stream)
 
-data AltJSON = AltJSON deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltJSON = AltJSON deriving (Eq, Ord, Show, Read, Generic)
 
-data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic)
 
-data Multipart = Multipart deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data Multipart = Multipart deriving (Eq, Ord, Show, Read, Generic)
 
 instance ToHttpApiData AltJSON where toQueryParam = const "json"
 
@@ -147,7 +146,6 @@ newtype GSecret = GSecret Text
       Read,
       IsString,
       Generic,
-      Typeable,
       FromHttpApiData,
       ToHttpApiData,
       FromJSON,
@@ -178,7 +176,7 @@ data Error
   = TransportError HttpException
   | SerializeError SerializeError
   | ServiceError ServiceError
-  deriving (Show, Typeable)
+  deriving (Show)
 
 instance Exception Error
 
@@ -189,7 +187,7 @@ data SerializeError = SerializeError'
     _serializeMessage :: !String,
     _serializeBody :: !(Maybe LBS.ByteString)
   }
-  deriving (Eq, Show, Typeable)
+  deriving (Eq, Show)
 
 data ServiceError = ServiceError'
   { _serviceId :: !ServiceId,
@@ -197,7 +195,7 @@ data ServiceError = ServiceError'
     _serviceHeaders :: ![HTTP.Header],
     _serviceBody :: !(Maybe LBS.ByteString)
   }
-  deriving (Eq, Show, Typeable)
+  deriving (Eq, Show)
 
 class AsError a where
   -- | A general Amazonka error.
@@ -420,7 +418,6 @@ instance FromJSON a => FromStream JSON a where
       Left e -> pure $! Left (e, bs)
       Right x -> pure $! Right x
 
-
 class GoogleRequest a where
   type Rs a :: *
   type Scopes a :: [Symbol]
@@ -434,14 +431,11 @@ class GoogleClient fn where
 
 -- | Multiple path captures, with @[xs]@ forming @/<x1>/<x2>/<x2>/...@.
 data Captures (s :: Symbol) a
-  deriving (Typeable)
 
 -- | Form a Google style sub-resource, such as @/<capture>:<mode>@.
 data CaptureMode (s :: Symbol) (m :: Symbol) a
-  deriving (Typeable)
 
 data MultipartRelated (cs :: [*]) m
-  deriving (Typeable)
 
 instance
   ( ToBody c m,

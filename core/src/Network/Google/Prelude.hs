@@ -29,7 +29,7 @@ import Network.Google.Data.Time as Export
 import Network.Google.Types as Export
 import Network.HTTP.Client as Export (RequestBody)
 import Numeric.Natural as Export (Natural)
-import Servant.API as Export hiding (Header, Headers, Link, ResponseHeader, Stream, Union, getResponse, ToHttpApiData, FromHttpApiData)
+import Servant.API as Export hiding (FromHttpApiData, Header, Headers, Link, ResponseHeader, Stream, ToHttpApiData, Union, getResponse)
 import Servant.Links as Export hiding (Link)
 import Web.HttpApiData as Export (FromHttpApiData (..), ToHttpApiData (..))
-import Prelude as Export hiding (Word, any, product, span)
+import Prelude as Export
