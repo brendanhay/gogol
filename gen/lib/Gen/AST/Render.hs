@@ -25,7 +25,8 @@ import Control.Lens hiding (enum, lens)
 import qualified Data.ByteString.Builder as BB
 import qualified Data.ByteString.Char8 as C8
 import Data.Char (isSpace)
-import qualified Data.HashMap.Strict as Map
+import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Data.String
 import qualified Data.Text.Lazy as LText
@@ -78,14 +79,14 @@ renderSchema s = go (_schema s)
         prod ts =
           Prod (dname k) (i ^. iDescription)
             <$> pp None (objDecl k ts)
-            <*> pure (objFields p ts)
+            <*> pure (objFields ts)
             <*> pp None (objDerive ds)
             <*> traverse (pp Print) (jsonDecls k p ts)
             <*> ctor ts
 
         ctor ts =
           Fun' (cname k) (Just help)
-            <$> (pp None (ctorSig k ts) <&> comments p ts)
+            <$> (pp None (ctorSig k ts) <&> comments ts)
             <*> pp Indent (ctorDecl k p ts)
 
         help =
@@ -220,8 +221,8 @@ pp i x
           }
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
-comments :: Prefix -> Map Local Solved -> Rendered -> Rendered
-comments p (Map.toList -> rs) =
+comments :: Map Local Solved -> Rendered -> Rendered
+comments (Map.toList -> rs) =
   LText.replace " :: " "\n    :: "
     . LText.intercalate "\n    -> "
     . zipWith rel ps
@@ -230,6 +231,7 @@ comments p (Map.toList -> rs) =
   where
     ks = filter (parameter . _schema . snd) rs
     ps = map (Just . fst) ks ++ repeat Nothing
+
     rel Nothing t = t
     rel (Just l) t =
-      t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"
+      t <> " -- ^ '" <> fromString (PP.prettyPrint (fname l)) <> "'"

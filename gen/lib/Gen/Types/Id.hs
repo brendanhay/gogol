@@ -43,8 +43,6 @@ module Gen.Types.Id
     bname,
     fname,
     fstr,
-    lname,
-    pname,
   )
 where
 
@@ -53,9 +51,6 @@ import Control.Monad
 import Data.Aeson hiding (Bool, String)
 import qualified Data.Attoparsec.Text as A
 import qualified Data.CaseInsensitive as CI
-import Data.Foldable (foldl')
-import Data.Function (on)
-import Data.Hashable
 import Data.List (elemIndex, intersperse, nub, sortOn)
 import Data.String
 import Data.Text (Text)
@@ -88,10 +83,11 @@ mname abrv (Suffix suf) (Global g) =
         x : xs = map toPascal g
 
 dname' :: Global -> Name ()
-dname' g =
-  case dname g of
-    Ident () s -> Ident () (s <> "'")
-    Symbol () s -> Symbol () (s <> "'")
+dname' = dname
+-- dname' g =
+--   case dname g of
+--     Ident () s -> Ident () (s <> "'")
+--     Symbol () s -> Symbol () (s <> "'")
 
 dname :: Global -> Name ()
 dname =
@@ -123,19 +119,14 @@ bname (Prefix p) =
 localName :: Local -> Name ()
 localName = name . Text.unpack . renameField . local
 
-fname, lname, pname :: Prefix -> Local -> Name ()
-fname _ = localName
-lname = pre renameField
-pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
+fname :: Local -> Name ()
+fname = localName
 
 dstr :: Global -> Exp ()
 dstr = strE . Text.unpack . toPascal . global
 
 fstr :: Local -> Exp ()
 fstr = strE . Text.unpack . local
-
-pre :: (Text -> Text) -> Prefix -> Local -> Name ()
-pre f (Prefix p) = name . Text.unpack . f . mappend p . upperHead . local
 
 newtype Suffix = Suffix Text
   deriving (Show, IsString)
@@ -151,9 +142,6 @@ newtype Global = Global {unsafeGlobal :: [Text]}
 
 instance Semigroup Global where
   Global xs <> Global ys = Global (xs <> ys)
-
-instance Hashable Global where
-  hashWithSalt salt (Global g) = foldl' hashWithSalt salt g
 
 instance IsString Global where
   fromString = mkGlobal . fromString
@@ -171,18 +159,7 @@ gid :: Format a (Global -> a)
 gid = later (Build.fromText . global)
 
 newtype Local = Local {local :: Text}
-  deriving
-    ( Eq,
-      Ord,
-      Show,
-      Generic,
-      Hashable,
-      FromJSON,
-      ToJSON,
-      FromJSONKey,
-      ToJSONKey,
-      IsString
-    )
+  deriving (Eq, Ord, Show, Generic, FromJSON, ToJSON, FromJSONKey, ToJSONKey, IsString)
 
 lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)

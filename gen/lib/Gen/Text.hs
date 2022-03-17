@@ -15,8 +15,8 @@ module Gen.Text where
 import Control.Error
 import Data.Char
 import qualified Data.Foldable as Fold
-import qualified Data.HashMap.Strict as Map
-import qualified Data.HashSet as Set
+import qualified Data.Map.Strict as Map
+import qualified Data.Set as Set
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.ICU (Regex)
