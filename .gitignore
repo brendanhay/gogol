@@ -5,17 +5,13 @@
 *.chi
 *.chs.h
 *.imports
-cabal.sandbox.config
-cabal.config
 
 # Dirs
-.cabal-sandbox
+bin
 dist
 vendor
-.vagrant.d
 .stack-work
-bin
-/doc
+.direnv
 
 # CTAGS
 TAGS
@@ -36,3 +32,6 @@ tags
 
 # Certificates
 *.pem
+
+# Go
+*.go
