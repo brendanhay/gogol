@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable #-}
+
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
@@ -18,7 +18,6 @@ where
 import Control.Lens (Iso', iso)
 import Data.Aeson (FromJSON (..), ToJSON (..))
 import Data.ByteString (ByteString)
-import Data.Data (Data, Typeable)
 import Data.Hashable
 import qualified Data.Text.Encoding as Text
 import GHC.Generics (Generic)
@@ -33,7 +32,7 @@ import Web.HttpApiData
 -- This data is passed to/from the serialisation routines as-is, and any
 -- particular encoding or decoding (say, base64) is left up to the caller.
 newtype Bytes = Bytes {unBytes :: ByteString}
-  deriving (Eq, Show, Read, Ord, Data, Typeable, Generic)
+  deriving (Eq, Show, Read, Ord, Generic)
 
 instance Hashable Bytes
 

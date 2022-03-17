@@ -186,9 +186,6 @@ instance MonadUnliftIO (Google s) where
 instance MonadGoogle s m => MonadGoogle s (IdentityT m) where
   liftGoogle = lift . liftGoogle
 
-instance MonadGoogle s m => MonadGoogle s (ListT m) where
-  liftGoogle = lift . liftGoogle
-
 instance MonadGoogle s m => MonadGoogle s (MaybeT m) where
   liftGoogle = lift . liftGoogle
 
@@ -219,7 +216,7 @@ instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LRW.RWST r w s' m) where
 -- | Send a request, returning the associated response if successful.
 --
 -- Throws 'Error'.
-send :: (MonadGoogle s m, HasScope s a, GoogleRequest a) => a -> m (Rs a)
+send :: (MonadGoogle s m, GoogleScope a s, GoogleRequest a) => a -> m (Rs a)
 send x = liftGoogle $ do
   e <- ask
   r <- perform e x
@@ -240,7 +237,7 @@ send x = liftGoogle $ do
 -- Throws 'Error'.
 download ::
   ( MonadGoogle s m,
-    HasScope s (MediaDownload a),
+    GoogleScope (MediaDownload a) s,
     GoogleRequest (MediaDownload a)
   ) =>
   a ->

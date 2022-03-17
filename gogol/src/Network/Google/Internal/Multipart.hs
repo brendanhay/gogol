@@ -13,7 +13,6 @@ import Control.Monad.IO.Class (MonadIO (..))
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import Data.ByteString.Builder.Extra (byteStringCopy)
-import Data.Monoid ((<>))
 import Network.Google.Types (GBody (..))
 import Network.HTTP.Client
 import Network.HTTP.Client.MultipartFormData (webkitBoundary)

@@ -34,7 +34,6 @@ library
   exposed-modules:
     Network.Google.Data.Bytes
     Network.Google.Data.JSON
-    Network.Google.Data.Numeric
     Network.Google.Data.Time
     Network.Google.Prelude
     Network.Google.Types

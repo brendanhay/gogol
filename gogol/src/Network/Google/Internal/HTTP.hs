@@ -18,7 +18,7 @@ import Control.Lens ((%~), (&))
 import Control.Monad.Catch
 import Control.Monad.IO.Class (MonadIO)
 import Control.Monad.Trans.Resource (MonadResource (..))
-import Data.Monoid (Dual (..), Endo (..), (<>))
+import Data.Monoid (Dual (..), Endo (..))
 import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Builder as Build
