@@ -3,7 +3,7 @@
     "oauth2": {
       "scopes": {
         "https://www.googleapis.com/auth/cloud-platform": {
-          "description": "See, edit, configure, and delete your Google Cloud Platform data"
+          "description": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
         },
         "https://www.googleapis.com/auth/monitoring": {
           "description": "View and write monitoring data for all of your Google and third-party Cloud and API projects"
@@ -21,7 +21,7 @@
   "baseUrl": "https://monitoring.googleapis.com/",
   "batchPath": "batch",
   "canonicalName": "Monitoring",
-  "description": "Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Cloud Monitoring documentation (https://cloud.google.com/monitoring/docs).",
+  "description": "Manages your Cloud Monitoring data and configurations.",
   "discoveryVersion": "v1",
   "documentationLink": "https://cloud.google.com/monitoring/api/",
   "fullyEncodeReservedExpansion": true,
@@ -121,7 +121,7 @@
             "metricsScopes": {
               "methods": {
                 "get": {
-                  "description": "Returns a specific Metrics Scope.",
+                  "description": "Returns a specific Metrics Scope, including the list of projects monitored by the specified Metrics Scope.",
                   "flatPath": "v1/locations/global/metricsScopes/{metricsScopesId}",
                   "httpMethod": "GET",
                   "id": "monitoring.locations.global.metricsScopes.get",
@@ -147,11 +147,11 @@
                     "https://www.googleapis.com/auth/monitoring.read"
                   ]
                 },
-                "listMetricScopesByMonitoredProject": {
+                "listMetricsScopesByMonitoredProject": {
                   "description": "Returns a list of every Metrics Scope that a specific MonitoredProject has been added to. The metrics scope representing the specified monitored project will always be the first entry in the response.",
-                  "flatPath": "v1/locations/global/metricsScopes:listMetricScopesByMonitoredProject",
+                  "flatPath": "v1/locations/global/metricsScopes:listMetricsScopesByMonitoredProject",
                   "httpMethod": "GET",
-                  "id": "monitoring.locations.global.metricsScopes.listMetricScopesByMonitoredProject",
+                  "id": "monitoring.locations.global.metricsScopes.listMetricsScopesByMonitoredProject",
                   "parameterOrder": [],
                   "parameters": {
                     "monitoredResourceContainer": {
@@ -160,7 +160,7 @@
                       "type": "string"
                     }
                   },
-                  "path": "v1/locations/global/metricsScopes:listMetricScopesByMonitoredProject",
+                  "path": "v1/locations/global/metricsScopes:listMetricsScopesByMonitoredProject",
                   "response": {
                     "$ref": "ListMetricsScopesByMonitoredProjectResponse"
                   },
@@ -437,11 +437,249 @@
               ]
             }
           }
+        },
+        "location": {
+          "resources": {
+            "prometheus": {
+              "resources": {
+                "api": {
+                  "resources": {
+                    "v1": {
+                      "methods": {
+                        "query": {
+                          "description": "Evaluate a PromQL query at a single point in time.",
+                          "flatPath": "v1/projects/{projectsId}/location/{location}/prometheus/api/v1/query",
+                          "httpMethod": "POST",
+                          "id": "monitoring.projects.location.prometheus.api.v1.query",
+                          "parameterOrder": [
+                            "name",
+                            "location"
+                          ],
+                          "parameters": {
+                            "location": {
+                              "description": "Location of the resource information. Has to be \"global\" now.",
+                              "location": "path",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The project on which to execute the request. Data associcated with the project's workspace stored under the The format is: projects/PROJECT_ID_OR_NUMBER. Open source API but used as a request path prefix to distinguish different virtual Prometheus instances of Google Prometheus Engine.",
+                              "location": "path",
+                              "pattern": "^projects/[^/]+$",
+                              "required": true,
+                              "type": "string"
+                            }
+                          },
+                          "path": "v1/{+name}/location/{location}/prometheus/api/v1/query",
+                          "request": {
+                            "$ref": "QueryInstantRequest"
+                          },
+                          "response": {
+                            "$ref": "HttpBody"
+                          },
+                          "scopes": [
+                            "https://www.googleapis.com/auth/cloud-platform",
+                            "https://www.googleapis.com/auth/monitoring",
+                            "https://www.googleapis.com/auth/monitoring.read"
+                          ]
+                        },
+                        "query_range": {
+                          "description": "Evaluate a PromQL query with start, end time range.",
+                          "flatPath": "v1/projects/{projectsId}/location/{location}/prometheus/api/v1/query_range",
+                          "httpMethod": "POST",
+                          "id": "monitoring.projects.location.prometheus.api.v1.query_range",
+                          "parameterOrder": [
+                            "name",
+                            "location"
+                          ],
+                          "parameters": {
+                            "location": {
+                              "description": "Location of the resource information. Has to be \"global\" now.",
+                              "location": "path",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The project on which to execute the request. Data associcated with the project's workspace stored under the The format is: projects/PROJECT_ID_OR_NUMBER. Open source API but used as a request path prefix to distinguish different virtual Prometheus instances of Google Prometheus Engine.",
+                              "location": "path",
+                              "pattern": "^projects/[^/]+$",
+                              "required": true,
+                              "type": "string"
+                            }
+                          },
+                          "path": "v1/{+name}/location/{location}/prometheus/api/v1/query_range",
+                          "request": {
+                            "$ref": "QueryRangeRequest"
+                          },
+                          "response": {
+                            "$ref": "HttpBody"
+                          },
+                          "scopes": [
+                            "https://www.googleapis.com/auth/cloud-platform",
+                            "https://www.googleapis.com/auth/monitoring",
+                            "https://www.googleapis.com/auth/monitoring.read"
+                          ]
+                        },
+                        "series": {
+                          "description": "Lists metadata for metrics.",
+                          "flatPath": "v1/projects/{projectsId}/location/{location}/prometheus/api/v1/series",
+                          "httpMethod": "POST",
+                          "id": "monitoring.projects.location.prometheus.api.v1.series",
+                          "parameterOrder": [
+                            "name",
+                            "location"
+                          ],
+                          "parameters": {
+                            "location": {
+                              "description": "Location of the resource information. Has to be \"global\" for now.",
+                              "location": "path",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Required. The workspace on which to execute the request. It is not part of the open source API but used as a request path prefix to distinguish different virtual Prometheus instances of Google Prometheus Engine. The format is: projects/PROJECT_ID_OR_NUMBER.",
+                              "location": "path",
+                              "pattern": "^projects/[^/]+$",
+                              "required": true,
+                              "type": "string"
+                            }
+                          },
+                          "path": "v1/{+name}/location/{location}/prometheus/api/v1/series",
+                          "request": {
+                            "$ref": "QuerySeriesRequest"
+                          },
+                          "response": {
+                            "$ref": "HttpBody"
+                          },
+                          "scopes": [
+                            "https://www.googleapis.com/auth/cloud-platform",
+                            "https://www.googleapis.com/auth/monitoring",
+                            "https://www.googleapis.com/auth/monitoring.read"
+                          ]
+                        }
+                      },
+                      "resources": {
+                        "label": {
+                          "methods": {
+                            "values": {
+                              "description": "Lists possible values for a given label name.",
+                              "flatPath": "v1/projects/{projectsId}/location/{location}/prometheus/api/v1/label/{label}/values",
+                              "httpMethod": "GET",
+                              "id": "monitoring.projects.location.prometheus.api.v1.label.values",
+                              "parameterOrder": [
+                                "name",
+                                "location",
+                                "label"
+                              ],
+                              "parameters": {
+                                "end": {
+                                  "description": "The end time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+                                  "location": "query",
+                                  "type": "string"
+                                },
+                                "label": {
+                                  "description": "The label name for which values are queried.",
+                                  "location": "path",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "location": {
+                                  "description": "Location of the resource information. Has to be \"global\" now.",
+                                  "location": "path",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "match": {
+                                  "description": "A list of matchers encoded in the Prometheus label matcher format to constrain the values to series that satisfy them.",
+                                  "location": "query",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The workspace on which to execute the request. It is not part of the open source API but used as a request path prefix to distinguish different virtual Prometheus instances of Google Prometheus Engine. The format is: projects/PROJECT_ID_OR_NUMBER.",
+                                  "location": "path",
+                                  "pattern": "^projects/[^/]+$",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "start": {
+                                  "description": "The start time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+                                  "location": "query",
+                                  "type": "string"
+                                }
+                              },
+                              "path": "v1/{+name}/location/{location}/prometheus/api/v1/label/{label}/values",
+                              "response": {
+                                "$ref": "HttpBody"
+                              },
+                              "scopes": [
+                                "https://www.googleapis.com/auth/cloud-platform",
+                                "https://www.googleapis.com/auth/monitoring",
+                                "https://www.googleapis.com/auth/monitoring.read"
+                              ]
+                            }
+                          }
+                        },
+                        "metadata": {
+                          "methods": {
+                            "list": {
+                              "description": "Lists metadata for metrics.",
+                              "flatPath": "v1/projects/{projectsId}/location/{location}/prometheus/api/v1/metadata",
+                              "httpMethod": "GET",
+                              "id": "monitoring.projects.location.prometheus.api.v1.metadata.list",
+                              "parameterOrder": [
+                                "name",
+                                "location"
+                              ],
+                              "parameters": {
+                                "limit": {
+                                  "description": "Maximum number of metrics to return.",
+                                  "format": "int64",
+                                  "location": "query",
+                                  "type": "string"
+                                },
+                                "location": {
+                                  "description": "Location of the resource information. Has to be \"global\" for now.",
+                                  "location": "path",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "metric": {
+                                  "description": "The metric name for which to query metadata. If unset, all metric metadata is returned.",
+                                  "location": "query",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "Required. The workspace on which to execute the request. It is not part of the open source API but used as a request path prefix to distinguish different virtual Prometheus instances of Google Prometheus Engine. The format is: projects/PROJECT_ID_OR_NUMBER.",
+                                  "location": "path",
+                                  "pattern": "^projects/[^/]+$",
+                                  "required": true,
+                                  "type": "string"
+                                }
+                              },
+                              "path": "v1/{+name}/location/{location}/prometheus/api/v1/metadata",
+                              "response": {
+                                "$ref": "HttpBody"
+                              },
+                              "scopes": [
+                                "https://www.googleapis.com/auth/cloud-platform",
+                                "https://www.googleapis.com/auth/monitoring",
+                                "https://www.googleapis.com/auth/monitoring.read"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
   },
-  "revision": "20210720",
+  "revision": "20220214",
   "rootUrl": "https://monitoring.googleapis.com/",
   "schemas": {
     "Aggregation": {
@@ -604,6 +842,17 @@
       },
       "type": "object"
     },
+    "CollapsibleGroup": {
+      "description": "A widget that groups the other widgets. All widgets that are within the area spanned by the grouping widget are considered member widgets.",
+      "id": "CollapsibleGroup",
+      "properties": {
+        "collapsed": {
+          "description": "The collapsed state of the widget on first page load.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "Column": {
       "description": "Defines the layout properties and content for a column.",
       "id": "Column",
@@ -657,6 +906,13 @@
           "$ref": "GridLayout",
           "description": "Content is arranged with a basic layout that re-flows a simple list of informational elements like widgets or tiles."
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Labels applied to the dashboard",
+          "type": "object"
+        },
         "mosaicLayout": {
           "$ref": "MosaicLayout",
           "description": "The content is arranged as a grid of tiles, with each content widget occupying one or more grid blocks."
@@ -700,6 +956,20 @@
             "The data is plotted as a set of filled areas (one area per series), with the areas stacked vertically (the base of each area is the top of its predecessor, and the base of the first area is the X axis). Since the areas do not overlap, each is filled with a different opaque color.",
             "The data is plotted as a set of rectangular boxes (one box per series), with the boxes stacked vertically (the base of each box is the top of its predecessor, and the base of the first box is the X axis). Since the boxes do not overlap, each is filled with a different opaque color.",
             "The data is plotted as a heatmap. The series being plotted must have a DISTRIBUTION value type. The value of each bucket in the distribution is displayed as a color. This type is not currently available in the Stackdriver Monitoring application."
+          ],
+          "type": "string"
+        },
+        "targetAxis": {
+          "description": "Optional. The target axis to use for plotting the metric.",
+          "enum": [
+            "TARGET_AXIS_UNSPECIFIED",
+            "Y1",
+            "Y2"
+          ],
+          "enumDescriptions": [
+            "The target axis was not specified. Defaults to Y1.",
+            "The y_axis (the right axis of chart).",
+            "The y2_axis (the left axis of chart)."
           ],
           "type": "string"
         },
@@ -872,6 +1142,33 @@
       },
       "type": "object"
     },
+    "HttpBody": {
+      "description": "Message that represents an arbitrary HTTP body. It should only be used for payload formats that can't be represented as JSON, such as raw binary or an HTML page.This message can be used both in streaming and non-streaming API methods in the request as well as the response.It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body.Example: message GetResourceRequest { // A unique request id. string request_id = 1; // The raw HTTP body is bound to this field. google.api.HttpBody http_body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged.",
+      "id": "HttpBody",
+      "properties": {
+        "contentType": {
+          "description": "The HTTP Content-Type header value specifying the content type of the body.",
+          "type": "string"
+        },
+        "data": {
+          "description": "The HTTP request/response body as raw binary.",
+          "format": "byte",
+          "type": "string"
+        },
+        "extensions": {
+          "description": "Application specific response metadata. Must be set in the first response for streaming APIs.",
+          "items": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL.",
+              "type": "any"
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ListDashboardsResponse": {
       "description": "The ListDashboards request.",
       "id": "ListDashboardsResponse",
@@ -898,6 +1195,24 @@
           "description": "A set of all metrics scopes that the specified monitored project has been added to.",
           "items": {
             "$ref": "MetricsScope"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "LogsPanel": {
+      "description": "A widget that displays a stream of log.",
+      "id": "LogsPanel",
+      "properties": {
+        "filter": {
+          "description": "A filter that chooses which log entries to return. See Advanced Logs Queries (https://cloud.google.com/logging/docs/view/advanced-queries). Only log entries that match the filter are returned. An empty filter matches all log entries.",
+          "type": "string"
+        },
+        "resourceNames": {
+          "description": "The names of logging resources to collect logs for. Currently only projects are supported. If empty, the widget will default to the host project.",
+          "items": {
+            "type": "string"
           },
           "type": "array"
         }
@@ -1106,6 +1421,67 @@
       },
       "type": "object"
     },
+    "QueryInstantRequest": {
+      "description": "QueryInstantRequest holds all parameters of the Prometheus upstream instant query API plus GCM specific parameters.",
+      "id": "QueryInstantRequest",
+      "properties": {
+        "query": {
+          "description": "A PromQL query string. Query lanauge documentation: https://prometheus.io/docs/prometheus/latest/querying/basics/.",
+          "type": "string"
+        },
+        "time": {
+          "description": "The single point in time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "An upper bound timeout for the query. Either a Prometheus duration string (https://prometheus.io/docs/prometheus/latest/querying/basics/#time-durations) or floating point seconds. This non-standard encoding must be used for compatibility with the open source API. Clients may still implement timeouts at the connection level while ignoring this field.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "QueryRangeRequest": {
+      "description": "QueryRangeRequest holds all parameters of the Prometheus upstream range query API plus GCM specific parameters.",
+      "id": "QueryRangeRequest",
+      "properties": {
+        "end": {
+          "description": "The end time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+          "type": "string"
+        },
+        "query": {
+          "description": "A PromQL query string. Query lanauge documentation: https://prometheus.io/docs/prometheus/latest/querying/basics/.",
+          "type": "string"
+        },
+        "start": {
+          "description": "The start time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+          "type": "string"
+        },
+        "step": {
+          "description": "The resolution of query result. Either a Prometheus duration string (https://prometheus.io/docs/prometheus/latest/querying/basics/#time-durations) or floating point seconds. This non-standard encoding must be used for compatibility with the open source API. Clients may still implement timeouts at the connection level while ignoring this field.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "An upper bound timeout for the query. Either a Prometheus duration string (https://prometheus.io/docs/prometheus/latest/querying/basics/#time-durations) or floating point seconds. This non-standard encoding must be used for compatibility with the open source API. Clients may still implement timeouts at the connection level while ignoring this field.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "QuerySeriesRequest": {
+      "description": "QuerySeries holds all parameters of the Prometheus upstream API for querying series.",
+      "id": "QuerySeriesRequest",
+      "properties": {
+        "end": {
+          "description": "The end time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+          "type": "string"
+        },
+        "start": {
+          "description": "The start time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "RatioPart": {
       "description": "Describes a query to build the numerator or denominator of a TimeSeriesFilterRatio.",
       "id": "RatioPart",
@@ -1279,6 +1655,44 @@
       },
       "type": "object"
     },
+    "TableDataSet": {
+      "description": "Groups a time series query definition with table options.",
+      "id": "TableDataSet",
+      "properties": {
+        "minAlignmentPeriod": {
+          "description": "Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.",
+          "format": "google-duration",
+          "type": "string"
+        },
+        "tableDisplayOptions": {
+          "$ref": "TableDisplayOptions",
+          "description": "Optional. Table display options for configuring how the table is rendered."
+        },
+        "tableTemplate": {
+          "description": "Optional. A template string for naming TimeSeries in the resulting data set. This should be a string with interpolations of the form ${label_name}, which will resolve to the label's value i.e. \"${resource.labels.project_id}.\"",
+          "type": "string"
+        },
+        "timeSeriesQuery": {
+          "$ref": "TimeSeriesQuery",
+          "description": "Required. Fields for querying time series data from the Stackdriver metrics API."
+        }
+      },
+      "type": "object"
+    },
+    "TableDisplayOptions": {
+      "description": "Table display options that can be reused.",
+      "id": "TableDisplayOptions",
+      "properties": {
+        "shownColumns": {
+          "description": "Optional. Columns to display in the table. Leave empty to display all available columns. Note: This field is for future features and is not currently used.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "Text": {
       "description": "A widget that displays textual content.",
       "id": "Text",
@@ -1338,6 +1752,20 @@
         },
         "label": {
           "description": "A label for the threshold.",
+          "type": "string"
+        },
+        "targetAxis": {
+          "description": "The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.",
+          "enum": [
+            "TARGET_AXIS_UNSPECIFIED",
+            "Y1",
+            "Y2"
+          ],
+          "enumDescriptions": [
+            "The target axis was not specified. Defaults to Y1.",
+            "The y_axis (the right axis of chart).",
+            "The y2_axis (the left axis of chart)."
+          ],
           "type": "string"
         },
         "value": {
@@ -1456,6 +1884,20 @@
       },
       "type": "object"
     },
+    "TimeSeriesTable": {
+      "description": "A table that displays time series data.",
+      "id": "TimeSeriesTable",
+      "properties": {
+        "dataSets": {
+          "description": "Required. The data displayed in this table.",
+          "items": {
+            "$ref": "TableDataSet"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "Type": {
       "description": "A protocol buffer message type.",
       "id": "Type",
@@ -1516,6 +1958,14 @@
           "$ref": "Empty",
           "description": "A blank space."
         },
+        "collapsibleGroup": {
+          "$ref": "CollapsibleGroup",
+          "description": "A widget that groups the other widgets. All widgets that are within the area spanned by the grouping widget are considered member widgets."
+        },
+        "logsPanel": {
+          "$ref": "LogsPanel",
+          "description": "A widget that shows a stream of logs."
+        },
         "scorecard": {
           "$ref": "Scorecard",
           "description": "A scorecard summarizing time series data."
@@ -1523,6 +1973,10 @@
         "text": {
           "$ref": "Text",
           "description": "A raw string or markdown displaying textual content."
+        },
+        "timeSeriesTable": {
+          "$ref": "TimeSeriesTable",
+          "description": "A widget that displays time series data in a tabular format."
         },
         "title": {
           "description": "Optional. The title of the widget.",
@@ -1565,6 +2019,10 @@
         "xAxis": {
           "$ref": "Axis",
           "description": "The properties applied to the X axis."
+        },
+        "y2Axis": {
+          "$ref": "Axis",
+          "description": "The properties applied to the Y2 axis."
         },
         "yAxis": {
           "$ref": "Axis",

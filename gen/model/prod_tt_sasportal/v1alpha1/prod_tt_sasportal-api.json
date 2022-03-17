@@ -2484,7 +2484,7 @@
       }
     }
   },
-  "revision": "20210624",
+  "revision": "20220314",
   "rootUrl": "https://prod-tt-sasportal.googleapis.com/",
   "schemas": {
     "SasPortalAssignment": {
@@ -2563,37 +2563,6 @@
       "description": "The Deployment.",
       "id": "SasPortalDeployment",
       "properties": {
-        "allowedBillingModes": {
-          "description": "The allowed billing modes under this deployment.",
-          "items": {
-            "enum": [
-              "BILLING_MODE_UNSPECIFIED",
-              "MOBILE",
-              "FIXED_WIRELESS"
-            ],
-            "enumDescriptions": [
-              "Billing mode has not been specified.",
-              "Price is based on category of CBSD: Category A, Category B registered with SAS.",
-              "Price is based on type of CBSD: Base station or CPE."
-            ],
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "defaultBillingMode": {
-          "description": "Default billing mode for the deployment and devices under it.",
-          "enum": [
-            "BILLING_MODE_UNSPECIFIED",
-            "MOBILE",
-            "FIXED_WIRELESS"
-          ],
-          "enumDescriptions": [
-            "Billing mode has not been specified.",
-            "Price is based on category of CBSD: Category A, Category B registered with SAS.",
-            "Price is based on type of CBSD: Base station or CPE."
-          ],
-          "type": "string"
-        },
         "displayName": {
           "description": "The deployment's display name.",
           "type": "string"
@@ -2891,6 +2860,24 @@
         "antennaModel": {
           "description": "If populated, the Antenna Model Pattern to use. Format is: RecordCreatorId:PatternId",
           "type": "string"
+        },
+        "commonChannelGroup": {
+          "description": "CCG. A group of CBSDs in the same ICG requesting a common primary channel assignment. See CBRSA-TS-2001 V3.0.0 for more details.",
+          "type": "string"
+        },
+        "interferenceCoordinationGroup": {
+          "description": "ICG. A group of CBSDs that manage their own interference with the group. See CBRSA-TS-2001 V3.0.0 for more details.",
+          "type": "string"
+        },
+        "nrqzValidated": {
+          "description": "Output only. Whether a CPI has validated to have coordinated with the National Quiet Zone office.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "nrqzValidation": {
+          "$ref": "SasPortalNrqzValidation",
+          "description": "Output only. National Radio Quiet Zone validation info.",
+          "readOnly": true
         }
       },
       "type": "object"
@@ -3194,6 +3181,45 @@
             "type": "string"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SasPortalNrqzValidation": {
+      "description": "Information about National Radio Quiet Zone validation.",
+      "id": "SasPortalNrqzValidation",
+      "properties": {
+        "caseId": {
+          "description": "Validation case id.",
+          "type": "string"
+        },
+        "cpiId": {
+          "description": "CPI who signed the validation.",
+          "type": "string"
+        },
+        "latitude": {
+          "description": "Device latitude associated with the validation.",
+          "format": "double",
+          "type": "number"
+        },
+        "longitude": {
+          "description": "Device longitude associated with the validation.",
+          "format": "double",
+          "type": "number"
+        },
+        "state": {
+          "description": "State of the NRQZ validation info.",
+          "enum": [
+            "STATE_UNSPECIFIED",
+            "DRAFT",
+            "FINAL"
+          ],
+          "enumDescriptions": [
+            "Unspecified state.",
+            "Draft state.",
+            "Final state."
+          ],
+          "type": "string"
         }
       },
       "type": "object"

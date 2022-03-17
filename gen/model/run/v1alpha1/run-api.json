@@ -3,7 +3,7 @@
     "oauth2": {
       "scopes": {
         "https://www.googleapis.com/auth/cloud-platform": {
-          "description": "See, edit, configure, and delete your Google Cloud Platform data"
+          "description": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
         }
       }
     }
@@ -12,7 +12,7 @@
   "baseUrl": "https://run.googleapis.com/",
   "batchPath": "batch",
   "canonicalName": "Cloud Run",
-  "description": "Deploy and manage user provided container images that scale automatically based on incoming requests. The Cloud Run Admin API follows the Knative Serving API specification.",
+  "description": "Deploy and manage user provided container images that scale automatically based on incoming requests. The Cloud Run Admin API v1 follows the Knative Serving API specification, while v2 is aligned with Google Cloud AIP-based API standards, as described in https://google.aip.dev/.",
   "discoveryVersion": "v1",
   "documentationLink": "https://cloud.google.com/run/",
   "fullyEncodeReservedExpansion": true,
@@ -268,7 +268,7 @@
       }
     }
   },
-  "revision": "20210628",
+  "revision": "20220218",
   "rootUrl": "https://run.googleapis.com/",
   "schemas": {
     "ConfigMapEnvSource": {
@@ -318,7 +318,7 @@
       "id": "ConfigMapVolumeSource",
       "properties": {
         "defaultMode": {
-          "description": "(Optional) Mode bits to use on created files by default. Must be a value between 0 and 0777. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.",
+          "description": "(Optional) Integer representation of mode bits to use on created files by default. Must be a value between 01 and 0777 (octal). If 0 or not set, it will default to 0644. Directories within the path are not affected by this setting. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.",
           "format": "int32",
           "type": "integer"
         },
@@ -525,6 +525,33 @@
       },
       "type": "object"
     },
+    "GoogleRpcStatus": {
+      "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+      "id": "GoogleRpcStatus",
+      "properties": {
+        "code": {
+          "description": "The status code, which should be an enum value of google.rpc.Code.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "details": {
+          "description": "A list of messages that carry the error details. There is a common set of message types for APIs to use.",
+          "items": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL.",
+              "type": "any"
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "HTTPGetAction": {
       "description": "Not supported by Cloud Run HTTPGetAction describes an action based on HTTP Get requests.",
       "id": "HTTPGetAction",
@@ -562,6 +589,22 @@
         "value": {
           "description": "The header field value",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceAttemptResult": {
+      "description": "Result of an instance attempt.",
+      "id": "InstanceAttemptResult",
+      "properties": {
+        "exitCode": {
+          "description": "Optional. The exit code of this attempt. This may be unset if the container was unable to exit cleanly with a code due to some other failure. See status field for possible failure details.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "GoogleRpcStatus",
+          "description": "Optional. The status of this attempt. If the status code is OK, then the attempt succeeded."
         }
       },
       "type": "object"
@@ -623,6 +666,10 @@
           "description": "Required. Index of the instance, unique per Job, and beginning at 0.",
           "format": "int32",
           "type": "integer"
+        },
+        "lastAttemptResult": {
+          "$ref": "InstanceAttemptResult",
+          "description": "Optional. Result of the last attempt of this instance. +optional"
         },
         "lastExitCode": {
           "description": "Optional. Last exit code seen for this instance. +optional",
@@ -711,7 +758,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Required. Type is used to communicate the status of the reconciliation process. See also: https://github.com/knative/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting Types include: * \"Completed\": True when the Job has successfully completed. * \"Started\": True when the Job has successfully started running. * \"ResourcesAvailable\": True when underlying resources have been provisioned.",
+          "description": "Required. Type is used to communicate the status of the reconciliation process. See also: https://github.com/knative/serving/blob/main/docs/spec/errors.md#error-conditions-and-reporting Types include: * \"Completed\": True when the Job has successfully completed. * \"Started\": True when the Job has successfully started running. * \"ResourcesAvailable\": True when underlying resources have been provisioned.",
           "type": "string"
         }
       },
@@ -817,7 +864,7 @@
           "type": "string"
         },
         "mode": {
-          "description": "(Optional) Mode bits to use on this file, must be a value between 0000 and 0777. If not specified, the volume defaultMode will be used. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.",
+          "description": "(Optional) Mode bits to use on this file, must be a value between 01 and 0777 (octal). If 0 or not set, the Volume's default mode will be used. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.",
           "format": "int32",
           "type": "integer"
         },
@@ -903,7 +950,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "(Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "description": "(Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https://kubernetes.io/docs/user-guide/annotations",
           "type": "object"
         },
         "clusterName": {
@@ -945,11 +992,11 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "(Optional) Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and routes. More info: http://kubernetes.io/docs/user-guide/labels",
+          "description": "(Optional) Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and routes. More info: https://kubernetes.io/docs/user-guide/labels",
           "type": "object"
         },
         "name": {
-          "description": "Name must be unique within a namespace, within a Cloud Run region. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names +optional",
+          "description": "Name must be unique within a namespace, within a Cloud Run region. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: https://kubernetes.io/docs/user-guide/identifiers#names +optional",
           "type": "string"
         },
         "namespace": {
@@ -972,7 +1019,7 @@
           "type": "string"
         },
         "uid": {
-          "description": "(Optional) UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations. Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "description": "(Optional) UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations. Populated by the system. Read-only. More info: https://kubernetes.io/docs/user-guide/identifiers#uids",
           "type": "string"
         }
       },
@@ -999,11 +1046,11 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/user-guide/identifiers#names",
           "type": "string"
         },
         "uid": {
-          "description": "UID of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/user-guide/identifiers#uids",
           "type": "string"
         }
       },
@@ -1032,12 +1079,12 @@
           "type": "integer"
         },
         "periodSeconds": {
-          "description": "(Optional) How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.",
+          "description": "(Optional) How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value is 3600. Must be greater or equal than timeout_seconds.",
           "format": "int32",
           "type": "integer"
         },
         "successThreshold": {
-          "description": "(Optional) Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness. Minimum value is 1.",
+          "description": "(Optional) Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup Probes.",
           "format": "int32",
           "type": "integer"
         },
@@ -1046,7 +1093,7 @@
           "description": "(Optional) TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported A field inlined from the Handler message."
         },
         "timeoutSeconds": {
-          "description": "(Optional) Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
+          "description": "(Optional) Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 3600. Must be smaller than period_seconds. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
           "format": "int32",
           "type": "integer"
         }
@@ -1061,14 +1108,14 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "(Optional) Only memory and CPU are supported. Note: The only supported values for CPU are '1', '2', and '4'. Setting 4 CPU requires at least 2Gi of memory. Limits describes the maximum amount of compute resources allowed. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go",
+          "description": "(Optional) Only memory and CPU are supported. Limits describes the maximum amount of compute resources allowed. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go",
           "type": "object"
         },
         "requests": {
           "additionalProperties": {
             "type": "string"
           },
-          "description": "(Optional) Only memory and CPU are supported. Note: The only supported values for CPU are '1' and '2'. Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go",
+          "description": "(Optional) Only memory and CPU are supported. Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go",
           "type": "object"
         }
       },
@@ -1121,7 +1168,7 @@
       "id": "SecretVolumeSource",
       "properties": {
         "defaultMode": {
-          "description": "(Optional) Mode bits to use on created files by default. Must be a value between 0000 and 0777. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. NOTE: This is an integer representation of the mode bits. So, the integer value should look exactly as the chmod numeric notation, i.e. Unix chmod \"777\" (a=rwx) should have the integer value 777.",
+          "description": "Integer representation of mode bits to use on created files by default. Must be a value between 01 and 0777 (octal). If 0 or not set, it will default to 0644. Directories within the path are not affected by this setting. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set.",
           "format": "int32",
           "type": "integer"
         },
@@ -1172,14 +1219,14 @@
       "type": "object"
     },
     "Volume": {
-      "description": "Not supported by Cloud Run Volume represents a named volume in a container.",
+      "description": "Volume represents a named volume in a container.",
       "id": "Volume",
       "properties": {
         "configMap": {
           "$ref": "ConfigMapVolumeSource"
         },
         "name": {
-          "description": "Volume's name.",
+          "description": "Volume's name. In Cloud Run Fully Managed, the name 'cloudsql' is reserved.",
           "type": "string"
         },
         "secret": {
@@ -1189,7 +1236,7 @@
       "type": "object"
     },
     "VolumeMount": {
-      "description": "Not supported by Cloud Run VolumeMount describes a mounting of a Volume within a container.",
+      "description": "VolumeMount describes a mounting of a Volume within a container.",
       "id": "VolumeMount",
       "properties": {
         "mountPath": {
@@ -1197,7 +1244,7 @@
           "type": "string"
         },
         "name": {
-          "description": "This must match the Name of a Volume.",
+          "description": "The name of the volume. There must be a corresponding Volume with the same name.",
           "type": "string"
         },
         "readOnly": {

@@ -21,7 +21,7 @@
   "baseUrl": "https://displayvideo.googleapis.com/",
   "batchPath": "batch",
   "canonicalName": "Display Video",
-  "description": "Display \u0026 Video 360 API allows users to manage and create campaigns and reports.",
+  "description": "Display \u0026 Video 360 API allows users to automate complex Display \u0026 Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/display-video/",
   "fullyEncodeReservedExpansion": true,
@@ -377,7 +377,7 @@
         "assets": {
           "methods": {
             "upload": {
-              "description": "Uploads an asset. Returns the ID of the newly uploaded asset if successful. The asset file size should be no more than 10 MB for images, 200 MB for ZIP files, and 1 GB for videos.",
+              "description": "Uploads an asset. Returns the ID of the newly uploaded asset if successful. The asset file size should be no more than 10 MB for images, 200 MB for ZIP files, and 1 GB for videos. Must be used within the [multipart media upload process](/display-video/api/guides/how-tos/upload#multipart). Examples using provided client libraries can be found in our [Creating Creatives guide](/display-video/api/guides/creating-creatives/overview#upload_an_asset).",
               "flatPath": "v1/advertisers/{advertisersId}/assets",
               "httpMethod": "POST",
               "id": "displayvideo.advertisers.assets.upload",
@@ -757,7 +757,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -801,7 +802,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -909,7 +911,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -953,7 +956,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -1917,7 +1921,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -1961,7 +1966,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -2069,7 +2075,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -2113,7 +2120,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -2232,7 +2240,7 @@
         "lineItems": {
           "methods": {
             "bulkEditLineItemAssignedTargetingOptions": {
-              "description": "Bulk edits targeting options under a single line item. The operation will delete the assigned targeting options provided in BulkEditLineItemAssignedTargetingOptionsRequest.delete_requests and then create the assigned targeting options provided in BulkEditLineItemAssignedTargetingOptionsRequest.create_requests .",
+              "description": "Bulk edits targeting options under a single line item. The operation will delete the assigned targeting options provided in BulkEditLineItemAssignedTargetingOptionsRequest.delete_requests and then create the assigned targeting options provided in BulkEditLineItemAssignedTargetingOptionsRequest.create_requests. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption",
               "flatPath": "v1/advertisers/{advertisersId}/lineItems/{lineItemsId}:bulkEditLineItemAssignedTargetingOptions",
               "httpMethod": "POST",
               "id": "displayvideo.advertisers.lineItems.bulkEditLineItemAssignedTargetingOptions",
@@ -2501,7 +2509,7 @@
               ]
             },
             "patch": {
-              "description": "Updates an existing line item. Returns the updated line item if successful.",
+              "description": "Updates an existing line item. Returns the updated line item if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption",
               "flatPath": "v1/advertisers/{advertisersId}/lineItems/{lineItemsId}",
               "httpMethod": "PATCH",
               "id": "displayvideo.advertisers.lineItems.patch",
@@ -2551,7 +2559,7 @@
                 "assignedTargetingOptions": {
                   "methods": {
                     "create": {
-                      "description": "Assigns a targeting option to a line item. Returns the assigned targeting option if successful.",
+                      "description": "Assigns a targeting option to a line item. Returns the assigned targeting option if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption",
                       "flatPath": "v1/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions",
                       "httpMethod": "POST",
                       "id": "displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.create",
@@ -2621,7 +2629,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -2665,7 +2674,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -2685,7 +2695,7 @@
                       ]
                     },
                     "delete": {
-                      "description": "Deletes an assigned targeting option from a line item.",
+                      "description": "Deletes an assigned targeting option from a line item. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption",
                       "flatPath": "v1/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}",
                       "httpMethod": "DELETE",
                       "id": "displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.delete",
@@ -2763,7 +2773,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -2807,7 +2818,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -2902,7 +2914,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -2946,7 +2959,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -3054,7 +3068,8 @@
                             "TARGETING_TYPE_POI",
                             "TARGETING_TYPE_BUSINESS_CHAIN",
                             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                            "TARGETING_TYPE_OMID"
+                            "TARGETING_TYPE_OMID",
+                            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                           ],
                           "enumDescriptions": [
                             "Default value when type is not specified or is unknown in this version.",
@@ -3098,7 +3113,8 @@
                             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                             "Target ads around locations of a business chain within a specific geo region.",
                             "Target ads to a specific native content position.",
-                            "Target ads in an Open Measurement enabled inventory."
+                            "Target ads in an Open Measurement enabled inventory.",
+                            "Target ads to a specific audio content type."
                           ],
                           "location": "path",
                           "pattern": "^[^/]+$",
@@ -4152,7 +4168,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -4196,7 +4213,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -4285,7 +4303,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -4329,7 +4348,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -4415,7 +4435,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -4459,7 +4480,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -4558,7 +4580,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -4602,7 +4625,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -4717,6 +4741,24 @@
     },
     "customBiddingAlgorithms": {
       "methods": {
+        "create": {
+          "description": "Creates a new custom bidding algorithm. Returns the newly created custom bidding algorithm if successful.",
+          "flatPath": "v1/customBiddingAlgorithms",
+          "httpMethod": "POST",
+          "id": "displayvideo.customBiddingAlgorithms.create",
+          "parameterOrder": [],
+          "parameters": {},
+          "path": "v1/customBiddingAlgorithms",
+          "request": {
+            "$ref": "CustomBiddingAlgorithm"
+          },
+          "response": {
+            "$ref": "CustomBiddingAlgorithm"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video"
+          ]
+        },
         "get": {
           "description": "Gets a custom bidding algorithm.",
           "flatPath": "v1/customBiddingAlgorithms/{customBiddingAlgorithmsId}",
@@ -4769,7 +4811,7 @@
               "type": "string"
             },
             "filter": {
-              "description": "Allows filtering by custom bidding algorithm fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND`. A sequence of restrictions * implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `CONTAINS (:)` or `EQUALS (=)`. * The operator must be `CONTAINS (:)` for the following field: - `displayName` * The operator must be `EQUALS (=)` for the following field: - `customBiddingAlgorithmType` * For `displayName`, the value is a string. We return all custom bidding algorithms whose display_name contains such string. * For `customBiddingAlgorithmType`, the value is a string. We return all algorithms whose custom_bidding_algorithm_type is equal to the given type. Examples: * All custom bidding algorithms for which the display name contains \"politics\": `displayName:politics`. * All custom bidding algorithms for which the type is \"SCRIPT_BASED\": `customBiddingAlgorithmType=SCRIPT_BASED` The length of this field should be no more than 500 characters.",
+              "description": "Allows filtering by custom bidding algorithm fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND`. A sequence of restrictions * implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `CONTAINS (:)` or `EQUALS (=)`. * The operator must be `CONTAINS (:)` for the following field: - `displayName` * The operator must be `EQUALS (=)` for the following field: - `customBiddingAlgorithmType` - `customBiddingAlgorithmState` * For `displayName`, the value is a string. We return all custom bidding algorithms whose display_name contains such string. * For `customBiddingAlgorithmType`, the value is a string. We return all algorithms whose custom_bidding_algorithm_type is equal to the given type. * For `customBiddingAlgorithmState`, the value is a string. We return all algorithms whose custom_bidding_algorithm_state is equal to the given type. Examples: * All custom bidding algorithms for which the display name contains \"politics\": `displayName:politics`. * All custom bidding algorithms for which the type is \"SCRIPT_BASED\": `customBiddingAlgorithmType=SCRIPT_BASED` * All custom bidding algorithms for which the state is \"ENABLED\": `customBiddingAlgorithmState=ENABLED` The length of this field should be no more than 500 characters.",
               "location": "query",
               "type": "string"
             },
@@ -4803,6 +4845,227 @@
           "scopes": [
             "https://www.googleapis.com/auth/display-video"
           ]
+        },
+        "patch": {
+          "description": "Updates an existing custom bidding algorithm. Returns the updated custom bidding algorithm if successful.",
+          "flatPath": "v1/customBiddingAlgorithms/{customBiddingAlgorithmsId}",
+          "httpMethod": "PATCH",
+          "id": "displayvideo.customBiddingAlgorithms.patch",
+          "parameterOrder": [
+            "customBiddingAlgorithmId"
+          ],
+          "parameters": {
+            "customBiddingAlgorithmId": {
+              "description": "Output only. The unique ID of the custom bidding algorithm. Assigned by the system.",
+              "format": "int64",
+              "location": "path",
+              "pattern": "^[^/]+$",
+              "required": true,
+              "type": "string"
+            },
+            "updateMask": {
+              "description": "Required. The mask to control which fields to update.",
+              "format": "google-fieldmask",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "v1/customBiddingAlgorithms/{+customBiddingAlgorithmId}",
+          "request": {
+            "$ref": "CustomBiddingAlgorithm"
+          },
+          "response": {
+            "$ref": "CustomBiddingAlgorithm"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video"
+          ]
+        },
+        "uploadScript": {
+          "description": "Creates a custom bidding script reference object for a script file. The resulting reference object provides a resource path to which the script file should be uploaded. This reference object should be included in when creating a new custom bidding script object.",
+          "flatPath": "v1/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadScript",
+          "httpMethod": "GET",
+          "id": "displayvideo.customBiddingAlgorithms.uploadScript",
+          "parameterOrder": [
+            "customBiddingAlgorithmId"
+          ],
+          "parameters": {
+            "advertiserId": {
+              "description": "The ID of the advertiser that owns the parent custom bidding algorithm.",
+              "format": "int64",
+              "location": "query",
+              "type": "string"
+            },
+            "customBiddingAlgorithmId": {
+              "description": "Required. The ID of the custom bidding algorithm owns the script.",
+              "format": "int64",
+              "location": "path",
+              "pattern": "^[^/]+$",
+              "required": true,
+              "type": "string"
+            },
+            "partnerId": {
+              "description": "The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.",
+              "format": "int64",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "v1/customBiddingAlgorithms/{+customBiddingAlgorithmId}:uploadScript",
+          "response": {
+            "$ref": "CustomBiddingScriptRef"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video"
+          ]
+        }
+      },
+      "resources": {
+        "scripts": {
+          "methods": {
+            "create": {
+              "description": "Creates a new custom bidding script. Returns the newly created script if successful.",
+              "flatPath": "v1/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts",
+              "httpMethod": "POST",
+              "id": "displayvideo.customBiddingAlgorithms.scripts.create",
+              "parameterOrder": [
+                "customBiddingAlgorithmId"
+              ],
+              "parameters": {
+                "advertiserId": {
+                  "description": "The ID of the advertiser that owns the parent custom bidding algorithm.",
+                  "format": "int64",
+                  "location": "query",
+                  "type": "string"
+                },
+                "customBiddingAlgorithmId": {
+                  "description": "Required. The ID of the custom bidding algorithm that owns the script.",
+                  "format": "int64",
+                  "location": "path",
+                  "pattern": "^[^/]+$",
+                  "required": true,
+                  "type": "string"
+                },
+                "partnerId": {
+                  "description": "The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.",
+                  "format": "int64",
+                  "location": "query",
+                  "type": "string"
+                }
+              },
+              "path": "v1/customBiddingAlgorithms/{+customBiddingAlgorithmId}/scripts",
+              "request": {
+                "$ref": "CustomBiddingScript"
+              },
+              "response": {
+                "$ref": "CustomBiddingScript"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/display-video"
+              ]
+            },
+            "get": {
+              "description": "Gets a custom bidding script.",
+              "flatPath": "v1/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts/{scriptsId}",
+              "httpMethod": "GET",
+              "id": "displayvideo.customBiddingAlgorithms.scripts.get",
+              "parameterOrder": [
+                "customBiddingAlgorithmId",
+                "customBiddingScriptId"
+              ],
+              "parameters": {
+                "advertiserId": {
+                  "description": "The ID of the advertiser that owns the parent custom bidding algorithm.",
+                  "format": "int64",
+                  "location": "query",
+                  "type": "string"
+                },
+                "customBiddingAlgorithmId": {
+                  "description": "Required. The ID of the custom bidding algorithm owns the script.",
+                  "format": "int64",
+                  "location": "path",
+                  "pattern": "^[^/]+$",
+                  "required": true,
+                  "type": "string"
+                },
+                "customBiddingScriptId": {
+                  "description": "Required. The ID of the custom bidding script to fetch.",
+                  "format": "int64",
+                  "location": "path",
+                  "pattern": "^[^/]+$",
+                  "required": true,
+                  "type": "string"
+                },
+                "partnerId": {
+                  "description": "The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.",
+                  "format": "int64",
+                  "location": "query",
+                  "type": "string"
+                }
+              },
+              "path": "v1/customBiddingAlgorithms/{+customBiddingAlgorithmId}/scripts/{+customBiddingScriptId}",
+              "response": {
+                "$ref": "CustomBiddingScript"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/display-video"
+              ]
+            },
+            "list": {
+              "description": "Lists custom bidding scripts that belong to the given algorithm. The order is defined by the order_by parameter.",
+              "flatPath": "v1/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts",
+              "httpMethod": "GET",
+              "id": "displayvideo.customBiddingAlgorithms.scripts.list",
+              "parameterOrder": [
+                "customBiddingAlgorithmId"
+              ],
+              "parameters": {
+                "advertiserId": {
+                  "description": "The ID of the advertiser that owns the parent custom bidding algorithm.",
+                  "format": "int64",
+                  "location": "query",
+                  "type": "string"
+                },
+                "customBiddingAlgorithmId": {
+                  "description": "Required. The ID of the custom bidding algorithm owns the script.",
+                  "format": "int64",
+                  "location": "path",
+                  "pattern": "^[^/]+$",
+                  "required": true,
+                  "type": "string"
+                },
+                "orderBy": {
+                  "description": "Field by which to sort the list. Acceptable values are: * `createTime desc` (default) The default sorting order is descending. To specify ascending order for a field, the suffix \"desc\" should be removed. Example: `createTime`.",
+                  "location": "query",
+                  "type": "string"
+                },
+                "pageSize": {
+                  "description": "Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.",
+                  "format": "int32",
+                  "location": "query",
+                  "type": "integer"
+                },
+                "pageToken": {
+                  "description": "A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListCustomBiddingScripts` method. If not specified, the first page of results will be returned.",
+                  "location": "query",
+                  "type": "string"
+                },
+                "partnerId": {
+                  "description": "The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.",
+                  "format": "int64",
+                  "location": "query",
+                  "type": "string"
+                }
+              },
+              "path": "v1/customBiddingAlgorithms/{+customBiddingAlgorithmId}/scripts",
+              "response": {
+                "$ref": "ListCustomBiddingScriptsResponse"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/display-video"
+              ]
+            }
+          }
         }
       }
     },
@@ -4887,6 +5150,60 @@
     },
     "firstAndThirdPartyAudiences": {
       "methods": {
+        "create": {
+          "description": "Creates a FirstAndThirdPartyAudience. Only supported for the following audience_type: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`",
+          "flatPath": "v1/firstAndThirdPartyAudiences",
+          "httpMethod": "POST",
+          "id": "displayvideo.firstAndThirdPartyAudiences.create",
+          "parameterOrder": [],
+          "parameters": {
+            "advertiserId": {
+              "description": "Required. The ID of the advertiser under whom the FirstAndThirdPartyAudience will be created.",
+              "format": "int64",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "v1/firstAndThirdPartyAudiences",
+          "request": {
+            "$ref": "FirstAndThirdPartyAudience"
+          },
+          "response": {
+            "$ref": "FirstAndThirdPartyAudience"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video"
+          ]
+        },
+        "editCustomerMatchMembers": {
+          "description": "Updates the member list of a Customer Match audience. Only supported for the following audience_type: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`",
+          "flatPath": "v1/firstAndThirdPartyAudiences/{firstAndThirdPartyAudiencesId}:editCustomerMatchMembers",
+          "httpMethod": "POST",
+          "id": "displayvideo.firstAndThirdPartyAudiences.editCustomerMatchMembers",
+          "parameterOrder": [
+            "firstAndThirdPartyAudienceId"
+          ],
+          "parameters": {
+            "firstAndThirdPartyAudienceId": {
+              "description": "Required. The ID of the Customer Match FirstAndThirdPartyAudience whose members will be edited.",
+              "format": "int64",
+              "location": "path",
+              "pattern": "^[^/]+$",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "v1/firstAndThirdPartyAudiences/{+firstAndThirdPartyAudienceId}:editCustomerMatchMembers",
+          "request": {
+            "$ref": "EditCustomerMatchMembersRequest"
+          },
+          "response": {
+            "$ref": "EditCustomerMatchMembersResponse"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video"
+          ]
+        },
         "get": {
           "description": "Gets a first and third party audience.",
           "flatPath": "v1/firstAndThirdPartyAudiences/{firstAndThirdPartyAudiencesId}",
@@ -4969,6 +5286,47 @@
           "path": "v1/firstAndThirdPartyAudiences",
           "response": {
             "$ref": "ListFirstAndThirdPartyAudiencesResponse"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video"
+          ]
+        },
+        "patch": {
+          "description": "Updates an existing FirstAndThirdPartyAudience. Only supported for the following audience_type: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`",
+          "flatPath": "v1/firstAndThirdPartyAudiences/{firstAndThirdPartyAudiencesId}",
+          "httpMethod": "PATCH",
+          "id": "displayvideo.firstAndThirdPartyAudiences.patch",
+          "parameterOrder": [
+            "firstAndThirdPartyAudienceId"
+          ],
+          "parameters": {
+            "advertiserId": {
+              "description": "Required. The ID of the owner advertiser of the updated FirstAndThirdPartyAudience.",
+              "format": "int64",
+              "location": "query",
+              "type": "string"
+            },
+            "firstAndThirdPartyAudienceId": {
+              "description": "Output only. The unique ID of the first and third party audience. Assigned by the system.",
+              "format": "int64",
+              "location": "path",
+              "pattern": "^[^/]+$",
+              "required": true,
+              "type": "string"
+            },
+            "updateMask": {
+              "description": "Required. The mask to control which fields to update. Updates are only supported for the following fields: * `displayName` * `description` * `membershipDurationDays`",
+              "format": "google-fieldmask",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "v1/firstAndThirdPartyAudiences/{+firstAndThirdPartyAudienceId}",
+          "request": {
+            "$ref": "FirstAndThirdPartyAudience"
+          },
+          "response": {
+            "$ref": "FirstAndThirdPartyAudience"
           },
           "scopes": [
             "https://www.googleapis.com/auth/display-video"
@@ -5644,6 +6002,47 @@
             "https://www.googleapis.com/auth/doubleclickbidmanager"
           ],
           "supportsMediaDownload": true
+        },
+        "upload": {
+          "description": "Uploads media. Upload is supported on the URI `/upload/media/{resource_name=**}?upload_type=media.` **Note**: Upload requests will not be successful without including `upload_type=media` query string.",
+          "flatPath": "media/{mediaId}",
+          "httpMethod": "POST",
+          "id": "displayvideo.media.upload",
+          "mediaUpload": {
+            "accept": [
+              "*/*"
+            ],
+            "protocols": {
+              "simple": {
+                "multipart": true,
+                "path": "/upload/media/{+resourceName}"
+              }
+            }
+          },
+          "parameterOrder": [
+            "resourceName"
+          ],
+          "parameters": {
+            "resourceName": {
+              "description": "Name of the media that is being downloaded. See ReadRequest.resource_name.",
+              "location": "path",
+              "pattern": "^.*$",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "media/{+resourceName}",
+          "request": {
+            "$ref": "GoogleBytestreamMedia"
+          },
+          "response": {
+            "$ref": "GoogleBytestreamMedia"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/display-video",
+            "https://www.googleapis.com/auth/doubleclickbidmanager"
+          ],
+          "supportsMediaUpload": true
         }
       }
     },
@@ -6224,7 +6623,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -6268,7 +6668,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -6357,7 +6758,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -6401,7 +6803,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -6487,7 +6890,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -6531,7 +6935,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -6630,7 +7035,8 @@
                         "TARGETING_TYPE_POI",
                         "TARGETING_TYPE_BUSINESS_CHAIN",
                         "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                        "TARGETING_TYPE_OMID"
+                        "TARGETING_TYPE_OMID",
+                        "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                       ],
                       "enumDescriptions": [
                         "Default value when type is not specified or is unknown in this version.",
@@ -6674,7 +7080,8 @@
                         "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                         "Target ads around locations of a business chain within a specific geo region.",
                         "Target ads to a specific native content position.",
-                        "Target ads in an Open Measurement enabled inventory."
+                        "Target ads in an Open Measurement enabled inventory.",
+                        "Target ads to a specific audio content type."
                       ],
                       "location": "path",
                       "pattern": "^[^/]+$",
@@ -6778,7 +7185,7 @@
                   "type": "string"
                 },
                 "targetingType": {
-                  "description": "Required. The type of targeting option to retrieve.",
+                  "description": "Required. The type of targeting option to retrieve. Accepted values are: * `TARGETING_TYPE_APP_CATEGORY` * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_VIDEO_PLAYER_SIZE` * `TARGETING_TYPE_USER_REWARDED_CONTENT` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_CONTENT_INSTREAM_POSITION` * `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION` * `TARGETING_TYPE_DEVICE_TYPE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_HOUSEHOLD_INCOME` * `TARGETING_TYPE_ON_SCREEN_POSITION` * `TARGETING_TYPE_CARRIER_AND_ISP` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_VIEWABILITY` * `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_GEO_REGION` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_EXCHANGE` * `TARGETING_TYPE_SUB_EXCHANGE` * `TARGETING_TYPE_NATIVE_CONTENT_POSITION` * `TARGETING_TYPE_OMID`",
                   "enum": [
                     "TARGETING_TYPE_UNSPECIFIED",
                     "TARGETING_TYPE_CHANNEL",
@@ -6821,7 +7228,8 @@
                     "TARGETING_TYPE_POI",
                     "TARGETING_TYPE_BUSINESS_CHAIN",
                     "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                    "TARGETING_TYPE_OMID"
+                    "TARGETING_TYPE_OMID",
+                    "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                   ],
                   "enumDescriptions": [
                     "Default value when type is not specified or is unknown in this version.",
@@ -6865,7 +7273,8 @@
                     "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                     "Target ads around locations of a business chain within a specific geo region.",
                     "Target ads to a specific native content position.",
-                    "Target ads in an Open Measurement enabled inventory."
+                    "Target ads in an Open Measurement enabled inventory.",
+                    "Target ads to a specific audio content type."
                   ],
                   "location": "path",
                   "pattern": "^[^/]+$",
@@ -6918,7 +7327,7 @@
                   "type": "string"
                 },
                 "targetingType": {
-                  "description": "Required. The type of targeting option to be listed.",
+                  "description": "Required. The type of targeting option to be listed. Accepted values are: * `TARGETING_TYPE_APP_CATEGORY` * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_VIDEO_PLAYER_SIZE` * `TARGETING_TYPE_USER_REWARDED_CONTENT` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_CONTENT_INSTREAM_POSITION` * `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION` * `TARGETING_TYPE_DEVICE_TYPE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_HOUSEHOLD_INCOME` * `TARGETING_TYPE_ON_SCREEN_POSITION` * `TARGETING_TYPE_CARRIER_AND_ISP` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_VIEWABILITY` * `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_GEO_REGION` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_EXCHANGE` * `TARGETING_TYPE_SUB_EXCHANGE` * `TARGETING_TYPE_NATIVE_CONTENT_POSITION` * `TARGETING_TYPE_OMID`",
                   "enum": [
                     "TARGETING_TYPE_UNSPECIFIED",
                     "TARGETING_TYPE_CHANNEL",
@@ -6961,7 +7370,8 @@
                     "TARGETING_TYPE_POI",
                     "TARGETING_TYPE_BUSINESS_CHAIN",
                     "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                    "TARGETING_TYPE_OMID"
+                    "TARGETING_TYPE_OMID",
+                    "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                   ],
                   "enumDescriptions": [
                     "Default value when type is not specified or is unknown in this version.",
@@ -7005,7 +7415,8 @@
                     "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                     "Target ads around locations of a business chain within a specific geo region.",
                     "Target ads to a specific native content position.",
-                    "Target ads in an Open Measurement enabled inventory."
+                    "Target ads in an Open Measurement enabled inventory.",
+                    "Target ads to a specific audio content type."
                   ],
                   "location": "path",
                   "pattern": "^[^/]+$",
@@ -7074,7 +7485,8 @@
                     "TARGETING_TYPE_POI",
                     "TARGETING_TYPE_BUSINESS_CHAIN",
                     "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-                    "TARGETING_TYPE_OMID"
+                    "TARGETING_TYPE_OMID",
+                    "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
                   ],
                   "enumDescriptions": [
                     "Default value when type is not specified or is unknown in this version.",
@@ -7118,7 +7530,8 @@
                     "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
                     "Target ads around locations of a business chain within a specific geo region.",
                     "Target ads to a specific native content position.",
-                    "Target ads in an Open Measurement enabled inventory."
+                    "Target ads in an Open Measurement enabled inventory.",
+                    "Target ads to a specific audio content type."
                   ],
                   "location": "path",
                   "pattern": "^[^/]+$",
@@ -7317,7 +7730,7 @@
       }
     }
   },
-  "revision": "20210722",
+  "revision": "20220303",
   "rootUrl": "https://displayvideo.googleapis.com/",
   "schemas": {
     "ActivateManualTriggerRequest": {
@@ -7659,7 +8072,7 @@
       "id": "AgeRangeAssignedTargetingOptionDetails",
       "properties": {
         "ageRange": {
-          "description": "Output only. The age range of an audience. We only support targeting a continuous age range of an audience. Thus, the age range represented in this field can be 1) targeted solely, or, 2) part of a larger continuous age range. The reach of a continuous age range targeting can be expanded by also targeting an audience of an unknown age.",
+          "description": "The age range of an audience. We only support targeting a continuous age range of an audience. Thus, the age range represented in this field can be 1) targeted solely, or, 2) part of a larger continuous age range. The reach of a continuous age range targeting can be expanded by also targeting an audience of an unknown age. Output only in v1. Required in v2.",
           "enum": [
             "AGE_RANGE_UNSPECIFIED",
             "AGE_RANGE_18_24",
@@ -7680,7 +8093,6 @@
             "The age range of the audience is 65 and up.",
             "The age range of the audience is unknown."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -7942,6 +8354,10 @@
           "$ref": "AudienceGroupAssignedTargetingOptionDetails",
           "description": "Audience targeting details. This field will be populated when the targeting_type is `TARGETING_TYPE_AUDIENCE_GROUP`. You can only target one audience group option per resource."
         },
+        "audioContentTypeDetails": {
+          "$ref": "AudioContentTypeAssignedTargetingOptionDetails",
+          "description": "Audio content type details. This field will be populated when the targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`."
+        },
         "authorizedSellerStatusDetails": {
           "$ref": "AuthorizedSellerStatusAssignedTargetingOptionDetails",
           "description": "Authorized seller status details. This field will be populated when the targeting_type is `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS`. You can only target one authorized seller status option per resource. If a resource doesn't have an authorized seller status option, all authorized sellers indicated as DIRECT or RESELLER in the ads.txt file are targeted by default."
@@ -8136,7 +8552,8 @@
             "TARGETING_TYPE_POI",
             "TARGETING_TYPE_BUSINESS_CHAIN",
             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-            "TARGETING_TYPE_OMID"
+            "TARGETING_TYPE_OMID",
+            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
           ],
           "enumDescriptions": [
             "Default value when type is not specified or is unknown in this version.",
@@ -8180,7 +8597,8 @@
             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
             "Target ads around locations of a business chain within a specific geo region.",
             "Target ads to a specific native content position.",
-            "Target ads in an Open Measurement enabled inventory."
+            "Target ads in an Open Measurement enabled inventory.",
+            "Target ads to a specific audio content type."
           ],
           "readOnly": true,
           "type": "string"
@@ -8263,16 +8681,16 @@
       "type": "object"
     },
     "AudienceGroupAssignedTargetingOptionDetails": {
-      "description": "Assigned audience group targeting option details. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_AUDIENCE_GROUP`. The relation between each group is UNION, except for excluded_first_and_third_party_audience_group and excluded_google_audience_group, of which COMPLEMENT is UNION'ed with other groups.",
+      "description": "Assigned audience group targeting option details. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_AUDIENCE_GROUP`. The relation between each group is UNION, except for excluded_first_and_third_party_audience_group and excluded_google_audience_group, of which COMPLEMENT is used as an INTERSECTION with other groups.",
       "id": "AudienceGroupAssignedTargetingOptionDetails",
       "properties": {
         "excludedFirstAndThirdPartyAudienceGroup": {
           "$ref": "FirstAndThirdPartyAudienceGroup",
-          "description": "The first and third party audience ids and recencies of the excluded first and third party audience group. Used for negative targeting. Its COMPLEMENT is used to UNION other audience groups."
+          "description": "The first and third party audience ids and recencies of the excluded first and third party audience group. Used for negative targeting. The COMPLEMENT of the UNION of this group and other excluded audience groups is used as an INTERSECTION to any positive audience targeting. All items are logically ‘OR’ of each other."
         },
         "excludedGoogleAudienceGroup": {
           "$ref": "GoogleAudienceGroup",
-          "description": "The Google audience ids of the excluded Google audience group. Used for negative targeting. It's COMPLEMENT is used to UNION other audience groups. Only contains Affinity, In-market and Installed-apps type Google audiences. All items are logically ‘OR’ of each other."
+          "description": "The Google audience ids of the excluded Google audience group. Used for negative targeting. The COMPLEMENT of the UNION of this group and other excluded audience groups is used as an INTERSECTION to any positive audience targeting. Only contains Affinity, In-market and Installed-apps type Google audiences. All items are logically ‘OR’ of each other."
         },
         "includedCombinedAudienceGroup": {
           "$ref": "CombinedAudienceGroup",
@@ -8292,6 +8710,61 @@
         "includedGoogleAudienceGroup": {
           "$ref": "GoogleAudienceGroup",
           "description": "The Google audience ids of the included Google audience group. Contains Google audience ids only."
+        }
+      },
+      "type": "object"
+    },
+    "AudioContentTypeAssignedTargetingOptionDetails": {
+      "description": "Details for audio content type assigned targeting option. This will be populated in the audio_content_type_details field when targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`. Explicitly targeting all options is not supported. Remove all audio content type targeting options to achieve this effect.",
+      "id": "AudioContentTypeAssignedTargetingOptionDetails",
+      "properties": {
+        "audioContentType": {
+          "description": "The audio content type. Output only in v1. Required in v2.",
+          "enum": [
+            "AUDIO_CONTENT_TYPE_UNSPECIFIED",
+            "AUDIO_CONTENT_TYPE_UNKNOWN",
+            "AUDIO_CONTENT_TYPE_MUSIC",
+            "AUDIO_CONTENT_TYPE_BROADCAST",
+            "AUDIO_CONTENT_TYPE_PODCAST"
+          ],
+          "enumDescriptions": [
+            "Audio content type is not specified in this version. This enum is a place holder for a default value and does not represent a real content stream type.",
+            "The audio content type is unknown.",
+            "The audio content type is music.",
+            "The audio content type is broadcast.",
+            "The audio content type is podcast."
+          ],
+          "type": "string"
+        },
+        "targetingOptionId": {
+          "description": "Required. The targeting_option_id field when targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AudioContentTypeTargetingOptionDetails": {
+      "description": "Represents a targetable audio content type. This will be populated in the audio_content_type_details field when targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`.",
+      "id": "AudioContentTypeTargetingOptionDetails",
+      "properties": {
+        "audioContentType": {
+          "description": "Output only. The audio content type.",
+          "enum": [
+            "AUDIO_CONTENT_TYPE_UNSPECIFIED",
+            "AUDIO_CONTENT_TYPE_UNKNOWN",
+            "AUDIO_CONTENT_TYPE_MUSIC",
+            "AUDIO_CONTENT_TYPE_BROADCAST",
+            "AUDIO_CONTENT_TYPE_PODCAST"
+          ],
+          "enumDescriptions": [
+            "Audio content type is not specified in this version. This enum is a place holder for a default value and does not represent a real content stream type.",
+            "The audio content type is unknown.",
+            "The audio content type is music.",
+            "The audio content type is broadcast.",
+            "The audio content type is podcast."
+          ],
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -8886,7 +9359,7 @@
           "type": "string"
         },
         "targetingOptionId": {
-          "description": "Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_BUSINESS_CHAIN`.",
+          "description": "Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_BUSINESS_CHAIN`. Accepted business chain targeting option IDs can be retrieved using SearchTargetingOptions.",
           "type": "string"
         }
       },
@@ -8896,11 +9369,11 @@
       "description": "Search terms for Business Chain targeting options. At least one of the field should be populated.",
       "id": "BusinessChainSearchTerms",
       "properties": {
-        "businessChain": {
-          "description": "The search query for the desired business chain. The query can be a prefix, e.g. \"KFC\", \"mercede\".",
+        "businessChainQuery": {
+          "description": "The search query for the desired business chain. The query must be the full name of the business, e.g. \"KFC\", \"mercedes-benz\".",
           "type": "string"
         },
-        "region": {
+        "regionQuery": {
           "description": "The search query for the desired geo region, e.g. \"Seattle\", \"United State\".",
           "type": "string"
         }
@@ -9421,6 +9894,60 @@
       },
       "type": "object"
     },
+    "ContactInfo": {
+      "description": "Contact information defining a Customer Match audience member.",
+      "id": "ContactInfo",
+      "properties": {
+        "countryCode": {
+          "description": "Country code of the member. Must also be set with the following fields: * hashed_first_name * hashed_last_name * zip_codes",
+          "type": "string"
+        },
+        "hashedEmails": {
+          "description": "A list of SHA256 hashed email of the member. Before hashing, remove all whitespace and make sure the string is all lowercase.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hashedFirstName": {
+          "description": "SHA256 hashed first name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_last_name * zip_codes",
+          "type": "string"
+        },
+        "hashedLastName": {
+          "description": "SHA256 hashed last name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_first_name * zip_codes",
+          "type": "string"
+        },
+        "hashedPhoneNumbers": {
+          "description": "A list of SHA256 hashed phone numbers of the member. Before hashing, all phone numbers must be formatted using the [E.164 format](//en.wikipedia.org/wiki/E.164) and include the country calling code.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "zipCodes": {
+          "description": "A list of zip codes of the member. Must also be set with the following fields: * country_code * hashed_first_name * hashed_last_name",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ContactInfoList": {
+      "description": "Wrapper message for a list of contact information defining Customer Match audience members.",
+      "id": "ContactInfoList",
+      "properties": {
+        "contactInfos": {
+          "description": "A list of ContactInfo objects defining Customer Match audience members.",
+          "items": {
+            "$ref": "ContactInfo"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ContentInstreamPositionAssignedTargetingOptionDetails": {
       "description": "Assigned content instream position targeting option details. This will be populated in the content_instream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.",
       "id": "ContentInstreamPositionAssignedTargetingOptionDetails",
@@ -9443,7 +9970,7 @@
           "type": "string"
         },
         "contentInstreamPosition": {
-          "description": "Output only. The content instream position for video or audio ads.",
+          "description": "The content instream position for video or audio ads. Output only in v1. Required in v2.",
           "enum": [
             "CONTENT_INSTREAM_POSITION_UNSPECIFIED",
             "CONTENT_INSTREAM_POSITION_PRE_ROLL",
@@ -9458,7 +9985,6 @@
             "Ads that play at the end of streaming content.",
             "Ads instream position is unknown."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -9516,7 +10042,7 @@
           "type": "string"
         },
         "contentOutstreamPosition": {
-          "description": "Output only. The content outstream position.",
+          "description": "The content outstream position. Output only in v1. Required in v2.",
           "enum": [
             "CONTENT_OUTSTREAM_POSITION_UNSPECIFIED",
             "CONTENT_OUTSTREAM_POSITION_UNKNOWN",
@@ -9533,7 +10059,6 @@
             "Ads that appear in a scrollable stream of content. A feed is typically editorial (e.g. a list of articles or news) or listings (e.g. a list of products or services).",
             "Ads shown before or between content loads."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -9682,7 +10207,8 @@
             "TARGETING_TYPE_POI",
             "TARGETING_TYPE_BUSINESS_CHAIN",
             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-            "TARGETING_TYPE_OMID"
+            "TARGETING_TYPE_OMID",
+            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
           ],
           "enumDescriptions": [
             "Default value when type is not specified or is unknown in this version.",
@@ -9726,7 +10252,8 @@
             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
             "Target ads around locations of a business chain within a specific geo region.",
             "Target ads to a specific native content position.",
-            "Target ads in an Open Measurement enabled inventory."
+            "Target ads in an Open Measurement enabled inventory.",
+            "Target ads to a specific audio content type."
           ],
           "type": "string"
         }
@@ -9770,7 +10297,8 @@
             "SDF_VERSION_5",
             "SDF_VERSION_5_1",
             "SDF_VERSION_5_2",
-            "SDF_VERSION_5_3"
+            "SDF_VERSION_5_3",
+            "SDF_VERSION_5_4"
           ],
           "enumDescriptions": [
             "SDF version value is not specified or is unknown in this version.",
@@ -9781,7 +10309,8 @@
             "SDF version 5.",
             "SDF version 5.1",
             "SDF version 5.2",
-            "SDF version 5.3"
+            "SDF version 5.3",
+            "SDF version 5.4"
           ],
           "type": "string"
         }
@@ -10151,7 +10680,7 @@
       "id": "CreativeConfig",
       "properties": {
         "creativeType": {
-          "description": "The type of creative that can be assigned to the inventory source.",
+          "description": "The type of creative that can be assigned to the inventory source. Only the following types are supported: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_VIDEO`",
           "enum": [
             "CREATIVE_TYPE_UNSPECIFIED",
             "CREATIVE_TYPE_STANDARD",
@@ -10214,17 +10743,36 @@
           "readOnly": true,
           "type": "string"
         },
+        "customBiddingAlgorithmState": {
+          "description": "Output only. The status of custom bidding algorithm.",
+          "enum": [
+            "STATE_UNSPECIFIED",
+            "ENABLED",
+            "DORMANT",
+            "SUSPENDED"
+          ],
+          "enumDescriptions": [
+            "State is not specified or is unknown in this version.",
+            "Algorithm is enabled, either recently used, currently used or scheduled to be used. The algorithm is actively scoring impressions.",
+            "Algorithm has not been used recently. Although the algorithm still acts as `ENABLED`, it will eventually be suspended if not used.",
+            "Algorithm is susepended from scoring impressions and doesn't have a serving model trained. If the algorithm is assigned to a line item or otherwise updated, it will switch back to the `ENABLED` state and require time to prepare the serving model again."
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
         "customBiddingAlgorithmType": {
           "description": "Required. Immutable. The type of custom bidding algorithm.",
           "enum": [
             "CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED",
             "SCRIPT_BASED",
-            "ADS_DATA_HUB_BASED"
+            "ADS_DATA_HUB_BASED",
+            "GOAL_BUILDER_BASED"
           ],
           "enumDescriptions": [
             "Algorithm type is not specified or is unknown in this version.",
             "Algorithm generated through customer-uploaded custom bidding script files.",
-            "Algorithm created through Ads Data Hub product."
+            "Algorithm created through Ads Data Hub product.",
+            "Algorithm created through goal builder in DV3 UI."
           ],
           "type": "string"
         },
@@ -10260,6 +10808,89 @@
         "partnerId": {
           "description": "Immutable. The unique ID of the partner that owns the custom bidding algorithm.",
           "format": "int64",
+          "type": "string"
+        },
+        "sharedAdvertiserIds": {
+          "description": "The IDs of the advertisers who have access to this algorithm. If advertiser_id is set, this field will only consist of that value. This field will not be set if the algorithm [`owner`](/display-video/api/reference/rest/v1/customBiddingAlgorithms#CustomBiddingAlgorithm.FIELDS.oneof_owner) is a partner and is being retrieved using an advertiser [`accessor`](/display-video/api/reference/rest/v1/customBiddingAlgorithms/list#body.QUERY_PARAMETERS.oneof_accessor).",
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CustomBiddingScript": {
+      "description": "A single custom bidding script.",
+      "id": "CustomBiddingScript",
+      "properties": {
+        "active": {
+          "description": "Output only. Whether the script is currently being used for scoring by the parent algorithm.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "createTime": {
+          "description": "Output only. The time when the script was created.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "customBiddingAlgorithmId": {
+          "description": "Output only. The unique ID of the custom bidding algorithm the script belongs to.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "string"
+        },
+        "customBiddingScriptId": {
+          "description": "Output only. The unique ID of the custom bidding script.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errors": {
+          "description": "Output only. Error details of a rejected custom bidding script. This field will only be populated when Script.state is REJECTED.",
+          "items": {
+            "$ref": "ScriptError"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "name": {
+          "description": "Output only. The resource name of the custom bidding script.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "script": {
+          "$ref": "CustomBiddingScriptRef",
+          "description": "The reference to the uploaded script file."
+        },
+        "state": {
+          "description": "Output only. The state of the custom bidding script.",
+          "enum": [
+            "STATE_UNSPECIFIED",
+            "ACCEPTED",
+            "REJECTED",
+            "PENDING"
+          ],
+          "enumDescriptions": [
+            "The script state is not specified or is unknown in this version.",
+            "The script has been accepted for scoring impressions.",
+            "The script has been rejected by backend pipelines. It may have errors.",
+            "The script is being processed for backend pipelines."
+          ],
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomBiddingScriptRef": {
+      "description": "The reference to the uploaded custom bidding script file.",
+      "id": "CustomBiddingScriptRef",
+      "properties": {
+        "resourceName": {
+          "description": "A resource name to be used in media.download to Download the script files. Or media.upload to Upload the script files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/scriptRef/{ref_id}`.",
           "type": "string"
         }
       },
@@ -10315,7 +10946,7 @@
       "type": "object"
     },
     "Date": {
-      "description": "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`.",
+      "description": "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp",
       "id": "Date",
       "properties": {
         "day": {
@@ -10467,7 +11098,8 @@
             "TARGETING_TYPE_POI",
             "TARGETING_TYPE_BUSINESS_CHAIN",
             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-            "TARGETING_TYPE_OMID"
+            "TARGETING_TYPE_OMID",
+            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
           ],
           "enumDescriptions": [
             "Default value when type is not specified or is unknown in this version.",
@@ -10511,7 +11143,8 @@
             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
             "Target ads around locations of a business chain within a specific geo region.",
             "Target ads to a specific native content position.",
-            "Target ads in an Open Measurement enabled inventory."
+            "Target ads in an Open Measurement enabled inventory.",
+            "Target ads to a specific audio content type."
           ],
           "type": "string"
         }
@@ -10555,7 +11188,7 @@
       "id": "DeviceTypeAssignedTargetingOptionDetails",
       "properties": {
         "deviceType": {
-          "description": "Output only. The display name of the device type.",
+          "description": "The display name of the device type. Output only in v1. Required in v2.",
           "enum": [
             "DEVICE_TYPE_UNSPECIFIED",
             "DEVICE_TYPE_COMPUTER",
@@ -10570,7 +11203,6 @@
             "The device type is smart phone..",
             "The device type is tablet."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -11029,6 +11661,38 @@
       },
       "type": "object"
     },
+    "EditCustomerMatchMembersRequest": {
+      "description": "Request message for FirstAndThirdPartyAudienceService.EditCustomerMatchMembers.",
+      "id": "EditCustomerMatchMembersRequest",
+      "properties": {
+        "addedContactInfoList": {
+          "$ref": "ContactInfoList",
+          "description": "Input only. A list of contact information to define the members to be added."
+        },
+        "addedMobileDeviceIdList": {
+          "$ref": "MobileDeviceIdList",
+          "description": "Input only. A list of mobile device IDs to define the members to be added."
+        },
+        "advertiserId": {
+          "description": "Required. The ID of the owner advertiser of the updated Customer Match FirstAndThirdPartyAudience.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EditCustomerMatchMembersResponse": {
+      "description": "The response of FirstAndThirdPartyAudienceService.EditCustomerMatchMembers.",
+      "id": "EditCustomerMatchMembersResponse",
+      "properties": {
+        "firstAndThirdPartyAudienceId": {
+          "description": "Required. The ID of the updated Customer Match FirstAndThirdPartyAudience.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Empty": {
       "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.",
       "id": "Empty",
@@ -11040,7 +11704,7 @@
       "id": "EnvironmentAssignedTargetingOptionDetails",
       "properties": {
         "environment": {
-          "description": "Output only. The serving environment.",
+          "description": "The serving environment. Output only in v1. Required in v2.",
           "enum": [
             "ENVIRONMENT_UNSPECIFIED",
             "ENVIRONMENT_WEB_OPTIMIZED",
@@ -11053,7 +11717,6 @@
             "Target inventory displayed in browsers. This includes inventory that was not designed for the device but viewed on it, such as websites optimized for desktop but viewed on a mobile device. ENVIRONMENT_WEB_OPTIMIZED should be targeted prior to the addition of this targeting option.",
             "Target inventory displayed in apps."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -11182,7 +11845,9 @@
             "EXCHANGE_WAZE",
             "EXCHANGE_SOUNDCAST",
             "EXCHANGE_SHARETHROUGH",
-            "EXCHANGE_MEDIANET"
+            "EXCHANGE_RED_FOR_PUBLISHERS",
+            "EXCHANGE_MEDIANET",
+            "EXCHANGE_TAPJOY"
           ],
           "enumDescriptions": [
             "Exchange is not specified or is unknown in this version.",
@@ -11248,7 +11913,9 @@
             "Waze.",
             "SoundCast.",
             "Sharethrough.",
-            "Media.net."
+            "Red For Publishers.",
+            "Media.net.",
+            "Tapjoy."
           ],
           "type": "string"
         },
@@ -11340,7 +12007,9 @@
             "EXCHANGE_WAZE",
             "EXCHANGE_SOUNDCAST",
             "EXCHANGE_SHARETHROUGH",
-            "EXCHANGE_MEDIANET"
+            "EXCHANGE_RED_FOR_PUBLISHERS",
+            "EXCHANGE_MEDIANET",
+            "EXCHANGE_TAPJOY"
           ],
           "enumDescriptions": [
             "Exchange is not specified or is unknown in this version.",
@@ -11406,7 +12075,9 @@
             "Waze.",
             "SoundCast.",
             "Sharethrough.",
-            "Media.net."
+            "Red For Publishers.",
+            "Media.net.",
+            "Tapjoy."
           ],
           "type": "string"
         },
@@ -11499,7 +12170,9 @@
             "EXCHANGE_WAZE",
             "EXCHANGE_SOUNDCAST",
             "EXCHANGE_SHARETHROUGH",
-            "EXCHANGE_MEDIANET"
+            "EXCHANGE_RED_FOR_PUBLISHERS",
+            "EXCHANGE_MEDIANET",
+            "EXCHANGE_TAPJOY"
           ],
           "enumDescriptions": [
             "Exchange is not specified or is unknown in this version.",
@@ -11565,7 +12238,9 @@
             "Waze.",
             "SoundCast.",
             "Sharethrough.",
-            "Media.net."
+            "Red For Publishers.",
+            "Media.net.",
+            "Tapjoy."
           ],
           "readOnly": true,
           "type": "string"
@@ -11616,6 +12291,10 @@
           "readOnly": true,
           "type": "string"
         },
+        "appId": {
+          "description": "The app_id matches with the type of the mobile_device_ids being uploaded. Only applicable to audience_type `CUSTOMER_MATCH_DEVICE_ID`",
+          "type": "string"
+        },
         "audienceSource": {
           "description": "Output only. The source of the audience.",
           "enum": [
@@ -11640,7 +12319,7 @@
           "type": "string"
         },
         "audienceType": {
-          "description": "Output only. The type of the audience.",
+          "description": "The type of the audience.",
           "enum": [
             "AUDIENCE_TYPE_UNSPECIFIED",
             "CUSTOMER_MATCH_CONTACT_INFO",
@@ -11663,8 +12342,11 @@
             "Audience was created based on past interactions with videos, YouTube ads, or YouTube channel.",
             "Subtype of third party audience type."
           ],
-          "readOnly": true,
           "type": "string"
+        },
+        "contactInfoList": {
+          "$ref": "ContactInfoList",
+          "description": "Input only. A list of contact information to define the initial audience members. Only applicable to audience_type `CUSTOMER_MATCH_CONTACT_INFO`"
         },
         "description": {
           "description": "The user-provided description of the audience. Only applicable to first party audiences.",
@@ -11705,7 +12387,7 @@
           "type": "string"
         },
         "firstAndThirdPartyAudienceType": {
-          "description": "Output only. Whether the audience is a first or third party audience.",
+          "description": "Whether the audience is a first or third party audience.",
           "enum": [
             "FIRST_AND_THIRD_PARTY_AUDIENCE_TYPE_UNSPECIFIED",
             "FIRST_AND_THIRD_PARTY_AUDIENCE_TYPE_FIRST_PARTY",
@@ -11716,7 +12398,6 @@
             "Audience that is created via usage of client data.",
             "Audience that is provided by Third Party data providers."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "gmailAudienceSize": {
@@ -11726,9 +12407,13 @@
           "type": "string"
         },
         "membershipDurationDays": {
-          "description": "The duration in days that an entry remains in the audience after the qualifying event. Only applicable to first party audiences.",
+          "description": "The duration in days that an entry remains in the audience after the qualifying event. If the audience has no expiration, set the value of this field to 10000. Otherwise, the set value must be greater than 0 and less than or equal to 540. Only applicable to first party audiences. This field is required if one of the following audience_type is used: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`",
           "format": "int64",
           "type": "string"
+        },
+        "mobileDeviceIdList": {
+          "$ref": "MobileDeviceIdList",
+          "description": "Input only. A list of mobile device IDs to define the initial audience members. Only applicable to audience_type `CUSTOMER_MATCH_DEVICE_ID`"
         },
         "name": {
           "description": "Output only. The resource name of the first and third party audience.",
@@ -11909,7 +12594,7 @@
       "id": "FrequencyCap",
       "properties": {
         "maxImpressions": {
-          "description": "The maximum number of times a user may be shown with the same ad during this period. Must be greater than 0. Required when unlimited is `false`.",
+          "description": "The maximum number of times a user may be shown the same ad during this period. Must be greater than 0. Required when unlimited is `false` and max_views is not set.",
           "format": "int32",
           "type": "integer"
         },
@@ -11952,7 +12637,7 @@
       "id": "GenderAssignedTargetingOptionDetails",
       "properties": {
         "gender": {
-          "description": "Output only. The gender of the audience.",
+          "description": "The gender of the audience. Output only in v1. Required in v2.",
           "enum": [
             "GENDER_UNSPECIFIED",
             "GENDER_MALE",
@@ -11965,7 +12650,6 @@
             "The audience gender is female.",
             "The audience gender is unknown."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -12523,6 +13207,23 @@
           "$ref": "PerformanceGoal",
           "description": "Required. Performance goal of the insertion order."
         },
+        "reservationType": {
+          "description": "Output only. The reservation type of the insertion order.",
+          "enum": [
+            "RESERVATION_TYPE_UNSPECIFIED",
+            "RESERVATION_TYPE_NOT_GUARANTEED",
+            "RESERVATION_TYPE_PROGRAMMATIC_GUARANTEED",
+            "RESERVATION_TYPE_TAG_GUARANTEED"
+          ],
+          "enumDescriptions": [
+            "Reservation type value is not specified or is unknown in this version.",
+            "Not created through a guaranteed inventory source.",
+            "Created through a programmatic guaranteed inventory source.",
+            "Created through a tag guaranteed inventory source."
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
         "updateTime": {
           "description": "Output only. The timestamp when the insertion order was last updated. Assigned by the system.",
           "format": "google-datetime",
@@ -12934,7 +13635,9 @@
             "EXCHANGE_WAZE",
             "EXCHANGE_SOUNDCAST",
             "EXCHANGE_SHARETHROUGH",
-            "EXCHANGE_MEDIANET"
+            "EXCHANGE_RED_FOR_PUBLISHERS",
+            "EXCHANGE_MEDIANET",
+            "EXCHANGE_TAPJOY"
           ],
           "enumDescriptions": [
             "Exchange is not specified or is unknown in this version.",
@@ -13000,7 +13703,9 @@
             "Waze.",
             "SoundCast.",
             "Sharethrough.",
-            "Media.net."
+            "Red For Publishers.",
+            "Media.net.",
+            "Tapjoy."
           ],
           "type": "string"
         },
@@ -13424,13 +14129,17 @@
           ],
           "type": "string"
         },
+        "excludeNewExchanges": {
+          "description": "Whether to exclude new exchanges from automatically being targeted by the line item. This field is false by default.",
+          "type": "boolean"
+        },
         "flight": {
           "$ref": "LineItemFlight",
           "description": "Required. The start and end time of the line item's flight."
         },
         "frequencyCap": {
           "$ref": "FrequencyCap",
-          "description": "Required. The frequency capping setting of the line item."
+          "description": "Required. The impression frequency cap settings of the line item. The max_impressions field in this settings object must be used if assigning a limited cap."
         },
         "insertionOrderId": {
           "description": "Required. Immutable. The unique ID of the insertion order that the line item belongs to.",
@@ -13504,6 +14213,23 @@
         "partnerRevenueModel": {
           "$ref": "PartnerRevenueModel",
           "description": "Required. The partner revenue model setting of the line item."
+        },
+        "reservationType": {
+          "description": "Output only. The reservation type of the line item.",
+          "enum": [
+            "RESERVATION_TYPE_UNSPECIFIED",
+            "RESERVATION_TYPE_NOT_GUARANTEED",
+            "RESERVATION_TYPE_PROGRAMMATIC_GUARANTEED",
+            "RESERVATION_TYPE_TAG_GUARANTEED"
+          ],
+          "enumDescriptions": [
+            "Reservation type value is not specified or is unknown in this version.",
+            "Not created through a guaranteed inventory source.",
+            "Created through a programmatic guaranteed inventory source.",
+            "Created through a tag guaranteed inventory source."
+          ],
+          "readOnly": true,
+          "type": "string"
         },
         "targetingExpansion": {
           "$ref": "TargetingExpansionConfig",
@@ -13810,6 +14536,23 @@
         },
         "nextPageToken": {
           "description": "A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ListCustomBiddingScriptsResponse": {
+      "id": "ListCustomBiddingScriptsResponse",
+      "properties": {
+        "customBiddingScripts": {
+          "description": "The list of custom bidding scripts. This list will be absent if empty.",
+          "items": {
+            "$ref": "CustomBiddingScript"
+          },
+          "type": "array"
+        },
+        "nextPageToken": {
+          "description": "A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingScriptsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.",
           "type": "string"
         }
       },
@@ -14303,6 +15046,10 @@
             "Viewable impressions."
           ],
           "type": "string"
+        },
+        "raiseBidForDeals": {
+          "description": "Controls whether the strategy takes deal floor prices into account.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -14358,6 +15105,20 @@
       },
       "type": "object"
     },
+    "MobileDeviceIdList": {
+      "description": "Wrapper message for a list of mobile device IDs defining Customer Match audience members.",
+      "id": "MobileDeviceIdList",
+      "properties": {
+        "mobileDeviceIds": {
+          "description": "A list of mobile device IDs defining Customer Match audience members.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "Money": {
       "description": "Represents an amount of money with its currency type.",
       "id": "Money",
@@ -14384,7 +15145,7 @@
       "id": "NativeContentPositionAssignedTargetingOptionDetails",
       "properties": {
         "contentPosition": {
-          "description": "Output only. The content position.",
+          "description": "The content position. Output only in v1. Required in v2.",
           "enum": [
             "NATIVE_CONTENT_POSITION_UNSPECIFIED",
             "NATIVE_CONTENT_POSITION_UNKNOWN",
@@ -14401,7 +15162,6 @@
             "Native content position is peripheral, i.e., ads appear outside of core content on pages, such as the right- or left-hand side of the page.",
             "Native content position is recommendation, i.e., ads appear in sections for recommended content."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -14559,7 +15319,7 @@
       "id": "OmidAssignedTargetingOptionDetails",
       "properties": {
         "omid": {
-          "description": "Output only. The type of Open Measurement enabled inventory.",
+          "description": "The type of Open Measurement enabled inventory. Output only in v1. Required in v2.",
           "enum": [
             "OMID_UNSPECIFIED",
             "OMID_FOR_MOBILE_DISPLAY_ADS"
@@ -14568,7 +15328,6 @@
             "Default value when omid targeting is not specified in this version.",
             "Open Measurement enabled mobile display inventory."
           ],
-          "readOnly": true,
           "type": "string"
         },
         "targetingOptionId": {
@@ -15248,7 +16007,7 @@
       "id": "PoiAssignedTargetingOptionDetails",
       "properties": {
         "displayName": {
-          "description": "Output only. The display name of a POI, e.g. \"Times Square\", \"Space Needle\".",
+          "description": "Output only. The display name of a POI, e.g. \"Times Square\", \"Space Needle\", followed by its full address if available.",
           "readOnly": true,
           "type": "string"
         },
@@ -15284,7 +16043,7 @@
           "type": "string"
         },
         "targetingOptionId": {
-          "description": "Input only. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_POI`.",
+          "description": "Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_POI`. Accepted POI targeting option IDs can be retrieved using SearchTargetingOptions. If targeting a specific latitude/longitude coordinate removed from an address or POI name, you can generate the necessary targeting option ID by rounding the desired coordinate values to the 6th decimal place, removing the decimals, and concatenating the string values separated by a semicolon. For example, you can target the latitude/longitude pair of 40.7414691, -74.003387 using the targeting option ID \"40741469;-74003387\".",
           "type": "string"
         }
       },
@@ -15306,7 +16065,7 @@
       "id": "PoiTargetingOptionDetails",
       "properties": {
         "displayName": {
-          "description": "Output only. The display name of a POI, e.g. \"Times Square\", \"Space Needle\".",
+          "description": "Output only. The display name of a POI(e.g. \"Times Square\", \"Space Needle\"), followed by its full address if available.",
           "readOnly": true,
           "type": "string"
         },
@@ -15628,6 +16387,43 @@
       },
       "type": "object"
     },
+    "ScriptError": {
+      "description": "An error message for a custom bidding script.",
+      "id": "ScriptError",
+      "properties": {
+        "column": {
+          "description": "The column number in the script where the error was thrown.",
+          "format": "int64",
+          "type": "string"
+        },
+        "errorCode": {
+          "description": "The type of error.",
+          "enum": [
+            "ERROR_CODE_UNSPECIFIED",
+            "SYNTAX_ERROR",
+            "DEPRECATED_SYNTAX",
+            "INTERNAL_ERROR"
+          ],
+          "enumDescriptions": [
+            "The script error is not specified or is unknown in this version.",
+            "The script has a syntax error.",
+            "The script uses deprecated syntax.",
+            "Internal errors were thrown while processing the script."
+          ],
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "The detailed error message.",
+          "type": "string"
+        },
+        "line": {
+          "description": "The line number in the script where the error was thrown.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "SdfConfig": {
       "description": "Structured Data File (SDF) related settings.",
       "id": "SdfConfig",
@@ -15647,7 +16443,8 @@
             "SDF_VERSION_5",
             "SDF_VERSION_5_1",
             "SDF_VERSION_5_2",
-            "SDF_VERSION_5_3"
+            "SDF_VERSION_5_3",
+            "SDF_VERSION_5_4"
           ],
           "enumDescriptions": [
             "SDF version value is not specified or is unknown in this version.",
@@ -15658,7 +16455,8 @@
             "SDF version 5.",
             "SDF version 5.1",
             "SDF version 5.2",
-            "SDF version 5.3"
+            "SDF version 5.3",
+            "SDF version 5.4"
           ],
           "type": "string"
         }
@@ -15701,7 +16499,8 @@
             "SDF_VERSION_5",
             "SDF_VERSION_5_1",
             "SDF_VERSION_5_2",
-            "SDF_VERSION_5_3"
+            "SDF_VERSION_5_3",
+            "SDF_VERSION_5_4"
           ],
           "enumDescriptions": [
             "SDF version value is not specified or is unknown in this version.",
@@ -15712,7 +16511,8 @@
             "SDF version 5.",
             "SDF version 5.1",
             "SDF version 5.2",
-            "SDF version 5.3"
+            "SDF version 5.3",
+            "SDF version 5.4"
           ],
           "type": "string"
         }
@@ -15753,7 +16553,7 @@
       "type": "object"
     },
     "SearchTargetingOptionsResponse": {
-      "description": "Response message for SearchTargetingOptionsResponse.",
+      "description": "Response message for SearchTargetingOptions.",
       "id": "SearchTargetingOptionsResponse",
       "properties": {
         "nextPageToken": {
@@ -15779,7 +16579,7 @@
           "type": "string"
         },
         "sensitiveCategory": {
-          "description": "Output only. An enum for the DV360 Sensitive category content classifier.",
+          "description": "An enum for the DV360 Sensitive category content classifier. Output only in v1. Required in v2.",
           "enum": [
             "SENSITIVE_CATEGORY_UNSPECIFIED",
             "SENSITIVE_CATEGORY_ADULT",
@@ -15820,7 +16620,6 @@
             "Issues that evoke strong, opposing views and spark debate. These include issues that are controversial in most countries and markets (such as abortion), as well as those that are controversial in specific countries and markets (such as immigration reform in the United States).",
             "Content which may be considered shocking or disturbing, such as violent news stories, stunts, or toilet humor."
           ],
-          "readOnly": true,
           "type": "string"
         }
       },
@@ -15989,6 +16788,10 @@
           "$ref": "AppCategoryTargetingOptionDetails",
           "description": "App category details."
         },
+        "audioContentTypeDetails": {
+          "$ref": "AudioContentTypeTargetingOptionDetails",
+          "description": "Audio content type details."
+        },
         "authorizedSellerStatusDetails": {
           "$ref": "AuthorizedSellerStatusTargetingOptionDetails",
           "description": "Authorized seller status resource details."
@@ -16139,7 +16942,8 @@
             "TARGETING_TYPE_POI",
             "TARGETING_TYPE_BUSINESS_CHAIN",
             "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
-            "TARGETING_TYPE_OMID"
+            "TARGETING_TYPE_OMID",
+            "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
           ],
           "enumDescriptions": [
             "Default value when type is not specified or is unknown in this version.",
@@ -16183,7 +16987,8 @@
             "Target ads around a specific point of interest, such as a notable building, a street address, or latitude/longitude coordinates.",
             "Target ads around locations of a business chain within a specific geo region.",
             "Target ads to a specific native content position.",
-            "Target ads in an Open Measurement enabled inventory."
+            "Target ads in an Open Measurement enabled inventory.",
+            "Target ads to a specific audio content type."
           ],
           "readOnly": true,
           "type": "string"
@@ -16522,7 +17327,7 @@
           "type": "string"
         },
         "videoPlayerSize": {
-          "description": "Output only. The video player size.",
+          "description": "The video player size. Output only in v1. Required in v2.",
           "enum": [
             "VIDEO_PLAYER_SIZE_UNSPECIFIED",
             "VIDEO_PLAYER_SIZE_SMALL",
@@ -16537,7 +17342,6 @@
             "The dimensions of the video player are 1280×720 or greater (desktop), or over 90% of the screen covered (mobile).",
             "The dimensions of the video player are unknown."
           ],
-          "readOnly": true,
           "type": "string"
         }
       },
@@ -16578,7 +17382,7 @@
           "type": "string"
         },
         "viewability": {
-          "description": "Output only. The predicted viewability percentage.",
+          "description": "The predicted viewability percentage. Output only in v1. Required in v2.",
           "enum": [
             "VIEWABILITY_UNSPECIFIED",
             "VIEWABILITY_10_PERCENT_OR_MORE",
@@ -16603,7 +17407,6 @@
             "Bid only on impressions that are at least 80% likely to be viewable.",
             "Bid only on impressions that are at least 90% likely to be viewable."
           ],
-          "readOnly": true,
           "type": "string"
         }
       },

@@ -3,7 +3,7 @@
     "oauth2": {
       "scopes": {
         "https://www.googleapis.com/auth/cloud-platform": {
-          "description": "See, edit, configure, and delete your Google Cloud Platform data"
+          "description": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
         }
       }
     }
@@ -317,9 +317,60 @@
       }
     }
   },
-  "revision": "20210715",
+  "revision": "20220218",
   "rootUrl": "https://cloudbuild.googleapis.com/",
   "schemas": {
+    "ApprovalConfig": {
+      "description": "ApprovalConfig describes configuration for manual approval of a build.",
+      "id": "ApprovalConfig",
+      "properties": {
+        "approvalRequired": {
+          "description": "Whether or not approval is needed. If this is set on a build, it will become pending when created, and will need to be explicitly approved to start.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ApprovalResult": {
+      "description": "ApprovalResult describes the decision and associated metadata of a manual approval of a build.",
+      "id": "ApprovalResult",
+      "properties": {
+        "approvalTime": {
+          "description": "Output only. The time when the approval decision was made.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "approverAccount": {
+          "description": "Output only. Email of the user that called the ApproveBuild API to approve or reject a build at the time that the API was called.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "comment": {
+          "description": "Optional. An optional comment for this manual approval result.",
+          "type": "string"
+        },
+        "decision": {
+          "description": "Required. The decision of this manual approval.",
+          "enum": [
+            "DECISION_UNSPECIFIED",
+            "APPROVED",
+            "REJECTED"
+          ],
+          "enumDescriptions": [
+            "Default enum type. This should not be used.",
+            "Build is approved.",
+            "Build is rejected."
+          ],
+          "type": "string"
+        },
+        "url": {
+          "description": "Optional. An optional URL tied to this manual approval result. This field is essentially the same as comment, except that it will be rendered by the UI differently. An example use case is a link to an external job that approved this Build.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ArtifactObjects": {
       "description": "Files in the workspace to upload to Cloud Storage upon successful completion of all build steps.",
       "id": "ArtifactObjects",
@@ -379,10 +430,91 @@
       },
       "type": "object"
     },
+    "BatchCreateBitbucketServerConnectedRepositoriesResponse": {
+      "description": "Response of BatchCreateBitbucketServerConnectedRepositories RPC method including all successfully connected Bitbucket Server repositories.",
+      "id": "BatchCreateBitbucketServerConnectedRepositoriesResponse",
+      "properties": {
+        "bitbucketServerConnectedRepositories": {
+          "description": "The connected Bitbucket Server repositories.",
+          "items": {
+            "$ref": "BitbucketServerConnectedRepository"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata": {
+      "description": "Metadata for `BatchCreateBitbucketServerConnectedRepositories` operation.",
+      "id": "BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "config": {
+          "description": "The name of the `BitbucketServerConfig` that added connected repositories. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BitbucketServerConnectedRepository": {
+      "description": "/ BitbucketServerConnectedRepository represents a connected Bitbucket Server / repository.",
+      "id": "BitbucketServerConnectedRepository",
+      "properties": {
+        "parent": {
+          "description": "The name of the `BitbucketServerConfig` that added connected repository. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`",
+          "type": "string"
+        },
+        "repo": {
+          "$ref": "BitbucketServerRepositoryId",
+          "description": "The Bitbucket Server repositories to connect."
+        },
+        "status": {
+          "$ref": "Status",
+          "description": "Output only. The status of the repo connection request.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "BitbucketServerRepositoryId": {
+      "description": "BitbucketServerRepositoryId identifies a specific repository hosted on a Bitbucket Server.",
+      "id": "BitbucketServerRepositoryId",
+      "properties": {
+        "projectKey": {
+          "description": "Required. Identifier for the project storing the repository.",
+          "type": "string"
+        },
+        "repoSlug": {
+          "description": "Required. Identifier for the repository.",
+          "type": "string"
+        },
+        "webhookId": {
+          "description": "Output only. The ID of the webhook that was created for receiving events from this repo. We only create and manage a single webhook for each repo.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "Build": {
-      "description": "A build resource in the Cloud Build API. At a high level, a `Build` describes where to find source code, how to build it (for example, the builder image to run on the source), and where to store the built artifacts. Fields can include the following variables, which will be expanded when the build is created: - $PROJECT_ID: the project ID of the build. - $PROJECT_NUMBER: the project number of the build. - $BUILD_ID: the autogenerated ID of the build. - $REPO_NAME: the source repository name specified by RepoSource. - $BRANCH_NAME: the branch name specified by RepoSource. - $TAG_NAME: the tag name specified by RepoSource. - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or resolved from the specified branch or tag. - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.",
+      "description": "A build resource in the Cloud Build API. At a high level, a `Build` describes where to find source code, how to build it (for example, the builder image to run on the source), and where to store the built artifacts. Fields can include the following variables, which will be expanded when the build is created: - $PROJECT_ID: the project ID of the build. - $PROJECT_NUMBER: the project number of the build. - $LOCATION: the location/region of the build. - $BUILD_ID: the autogenerated ID of the build. - $REPO_NAME: the source repository name specified by RepoSource. - $BRANCH_NAME: the branch name specified by RepoSource. - $TAG_NAME: the tag name specified by RepoSource. - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or resolved from the specified branch or tag. - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.",
       "id": "Build",
       "properties": {
+        "approval": {
+          "$ref": "BuildApproval",
+          "description": "Output only. Describes this build's approval configuration, status, and result.",
+          "readOnly": true
+        },
         "artifacts": {
           "$ref": "Artifacts",
           "description": "Artifacts produced by the build that should be uploaded upon successful completion of all build steps."
@@ -488,6 +620,7 @@
           "description": "Output only. Status of the build.",
           "enum": [
             "STATUS_UNKNOWN",
+            "PENDING",
             "QUEUED",
             "WORKING",
             "SUCCESS",
@@ -499,6 +632,7 @@
           ],
           "enumDescriptions": [
             "Status of the build is unknown.",
+            "Build has been created and is pending execution and queuing. It has not been queued.",
             "Build or step is queued; work has not yet begun.",
             "Build or step is being executed.",
             "Build or step finished successfully.",
@@ -546,7 +680,7 @@
           "additionalProperties": {
             "$ref": "TimeSpan"
           },
-          "description": "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. If the build does not specify source or images, these keys will not be included.",
+          "description": "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.",
           "readOnly": true,
           "type": "object"
         },
@@ -557,6 +691,42 @@
           },
           "readOnly": true,
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "BuildApproval": {
+      "description": "BuildApproval describes a build's approval configuration, state, and result.",
+      "id": "BuildApproval",
+      "properties": {
+        "config": {
+          "$ref": "ApprovalConfig",
+          "description": "Output only. Configuration for manual approval of this build.",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "ApprovalResult",
+          "description": "Output only. Result of manual approval for this Build.",
+          "readOnly": true
+        },
+        "state": {
+          "description": "Output only. The state of this build's approval.",
+          "enum": [
+            "STATE_UNSPECIFIED",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "CANCELLED"
+          ],
+          "enumDescriptions": [
+            "Default enum type. This should not be used.",
+            "Build approval is pending.",
+            "Build approval has been approved.",
+            "Build approval has been rejected.",
+            "Build was cancelled while it was still pending approval."
+          ],
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -618,10 +788,10 @@
           ],
           "enumDescriptions": [
             "The service determines the logging mode. The default is `LEGACY`. Do not rely on the default logging behavior as it may change in the future.",
-            "Cloud Logging and Cloud Storage logging are enabled.",
-            "Only Cloud Storage logging is enabled.",
+            "Build logs are stored in Cloud Logging and Cloud Storage.",
+            "Build logs are stored in Cloud Storage.",
             "This option is the same as CLOUD_LOGGING_ONLY.",
-            "Only Cloud Logging is enabled. Note that logs for both the Cloud Console UI and Cloud SDK are based on Cloud Storage logs, so neither will provide logs if this option is chosen.",
+            "Build logs are stored in Cloud Logging. Selecting this option will not allow [logs streaming](https://cloud.google.com/sdk/gcloud/reference/builds/log).",
             "Turn off all logging. No build logs will be captured."
           ],
           "type": "string"
@@ -749,6 +919,10 @@
           "description": "Output only. Stores timing information for pulling this build step's builder image only.",
           "readOnly": true
         },
+        "script": {
+          "description": "A shell script to be executed in the step. When script is provided, the user cannot specify the entrypoint or args.",
+          "type": "string"
+        },
         "secretEnv": {
           "description": "A list of environment variables which are encrypted using a Cloud Key Management Service crypto key. These values must be specified in the build's `Secret`.",
           "items": {
@@ -760,6 +934,7 @@
           "description": "Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.",
           "enum": [
             "STATUS_UNKNOWN",
+            "PENDING",
             "QUEUED",
             "WORKING",
             "SUCCESS",
@@ -771,6 +946,7 @@
           ],
           "enumDescriptions": [
             "Status of the build is unknown.",
+            "Build has been created and is pending execution and queuing. It has not been queued.",
             "Build or step is queued; work has not yet begun.",
             "Build or step is being executed.",
             "Build or step finished successfully.",
@@ -836,6 +1012,69 @@
       "properties": {},
       "type": "object"
     },
+    "CreateBitbucketServerConfigOperationMetadata": {
+      "description": "Metadata for `CreateBitbucketServerConfig` operation.",
+      "id": "CreateBitbucketServerConfigOperationMetadata",
+      "properties": {
+        "bitbucketServerConfig": {
+          "description": "The resource name of the BitbucketServerConfig to be created. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`.",
+          "type": "string"
+        },
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CreateGitHubEnterpriseConfigOperationMetadata": {
+      "description": "Metadata for `CreateGithubEnterpriseConfig` operation.",
+      "id": "CreateGitHubEnterpriseConfigOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "githubEnterpriseConfig": {
+          "description": "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CreateGitLabConfigOperationMetadata": {
+      "description": "Metadata for `CreateGitLabConfig` operation.",
+      "id": "CreateGitLabConfigOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "gitlabConfig": {
+          "description": "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "CreateWorkerPoolOperationMetadata": {
       "description": "Metadata for the `CreateWorkerPool` operation.",
       "id": "CreateWorkerPoolOperationMetadata",
@@ -852,6 +1091,69 @@
         },
         "workerPool": {
           "description": "The resource name of the `WorkerPool` to create. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeleteBitbucketServerConfigOperationMetadata": {
+      "description": "Metadata for `DeleteBitbucketServerConfig` operation.",
+      "id": "DeleteBitbucketServerConfigOperationMetadata",
+      "properties": {
+        "bitbucketServerConfig": {
+          "description": "The resource name of the BitbucketServerConfig to be deleted. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`.",
+          "type": "string"
+        },
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeleteGitHubEnterpriseConfigOperationMetadata": {
+      "description": "Metadata for `DeleteGitHubEnterpriseConfig` operation.",
+      "id": "DeleteGitHubEnterpriseConfigOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "githubEnterpriseConfig": {
+          "description": "The resource name of the GitHubEnterprise to be deleted. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeleteGitLabConfigOperationMetadata": {
+      "description": "Metadata for `DeleteGitLabConfig` operation.",
+      "id": "DeleteGitLabConfigOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "gitlabConfig": {
+          "description": "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`.",
           "type": "string"
         }
       },
@@ -1214,7 +1516,7 @@
           "type": "string"
         },
         "cancelRequested": {
-          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
           "readOnly": true,
           "type": "boolean"
         },
@@ -1254,6 +1556,27 @@
       "properties": {
         "name": {
           "description": "The `WorkerPool` resource to execute the build on. You must have `cloudbuild.workerpools.use` on the project hosting the WorkerPool. Format projects/{project}/locations/{location}/workerPools/{workerPoolId}",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProcessAppManifestCallbackOperationMetadata": {
+      "description": "Metadata for `ProcessAppManifestCallback` operation.",
+      "id": "ProcessAppManifestCallbackOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "githubEnterpriseConfig": {
+          "description": "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.",
           "type": "string"
         }
       },
@@ -1338,6 +1661,50 @@
         "numArtifacts": {
           "description": "Number of artifacts uploaded. Only populated when artifacts are uploaded.",
           "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RunWorkflowCustomOperationMetadata": {
+      "description": "Represents the custom metadata of the RunWorkflow long-running operation.",
+      "id": "RunWorkflowCustomOperationMetadata",
+      "properties": {
+        "apiVersion": {
+          "description": "Output only. API version used to start the operation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Output only. The time the operation was created.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endTime": {
+          "description": "Output only. The time the operation finished running.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "pipelineRunId": {
+          "description": "Output only. ID of the pipeline run created by RunWorkflow.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "requestedCancellation": {
+          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "target": {
+          "description": "Output only. Server-defined resource path for the target of the operation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "verb": {
+          "description": "Output only. Name of the verb executed by the operation.",
+          "readOnly": true,
           "type": "string"
         }
       },
@@ -1568,6 +1935,69 @@
         "startTime": {
           "description": "Start of time span.",
           "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UpdateBitbucketServerConfigOperationMetadata": {
+      "description": "Metadata for `UpdateBitbucketServerConfig` operation.",
+      "id": "UpdateBitbucketServerConfigOperationMetadata",
+      "properties": {
+        "bitbucketServerConfig": {
+          "description": "The resource name of the BitbucketServerConfig to be updated. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`.",
+          "type": "string"
+        },
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UpdateGitHubEnterpriseConfigOperationMetadata": {
+      "description": "Metadata for `UpdateGitHubEnterpriseConfig` operation.",
+      "id": "UpdateGitHubEnterpriseConfigOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "githubEnterpriseConfig": {
+          "description": "The resource name of the GitHubEnterprise to be updated. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UpdateGitLabConfigOperationMetadata": {
+      "description": "Metadata for `UpdateGitLabConfig` operation.",
+      "id": "UpdateGitLabConfigOperationMetadata",
+      "properties": {
+        "completeTime": {
+          "description": "Time the operation was completed.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Time the operation was created.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "gitlabConfig": {
+          "description": "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`.",
           "type": "string"
         }
       },

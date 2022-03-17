@@ -6,10 +6,10 @@
           "description": "View and manage your applications deployed on Google App Engine"
         },
         "https://www.googleapis.com/auth/cloud-platform": {
-          "description": "See, edit, configure, and delete your Google Cloud Platform data"
+          "description": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
         },
         "https://www.googleapis.com/auth/cloud-platform.read-only": {
-          "description": "View your data across Google Cloud Platform services"
+          "description": "View your data across Google Cloud services and see the email address of your Google Account"
         }
       }
     }
@@ -1595,7 +1595,7 @@
       }
     }
   },
-  "revision": "20210618",
+  "revision": "20211016",
   "rootUrl": "https://appengine.googleapis.com/",
   "schemas": {
     "ApiConfigHandler": {
@@ -1741,6 +1741,10 @@
         },
         "name": {
           "description": "Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly",
+          "type": "string"
+        },
+        "serviceAccount": {
+          "description": "The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.",
           "type": "string"
         },
         "servingStatus": {
@@ -2258,7 +2262,7 @@
           "type": "string"
         },
         "description": {
-          "description": "An optional string description of this rule. This field has a maximum length of 100 characters.",
+          "description": "An optional string description of this rule. This field has a maximum length of 400 characters.",
           "type": "string"
         },
         "priority": {
@@ -3186,6 +3190,13 @@
         "id": {
           "description": "Relative name of the service within the application. Example: default.@OutputOnly",
           "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A set of labels to apply to this service. Labels are key/value pairs that describe the service and all resources that belong to it (e.g., versions). The labels can be used to search and group resources, and are propagated to the usage and billing reports, enabling fine-grain analysis of costs. An example of using labels is to tag resources belonging to different environments (e.g., \"env=prod\", \"env=qa\"). Label keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, dashes, and international characters. Label keys must start with a lowercase letter or an international character. Each service can have at most 32 labels.",
+          "type": "object"
         },
         "name": {
           "description": "Full path to the Service resource in the API. Example: apps/myapp/services/default.@OutputOnly",
