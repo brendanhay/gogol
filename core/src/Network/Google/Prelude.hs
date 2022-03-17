@@ -1,6 +1,6 @@
 -- |
 -- Module      : Network.Google.Prelude
--- Copyright   : (c) 2015-2016 Brendan Hay <brendan.g.hay@gmail.com>
+-- Copyright   : (c) 2015-2022 Brendan Hay <brendan.g.hay@gmail.com>
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional

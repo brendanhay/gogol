@@ -51,12 +51,10 @@ library
   {% for module in exposedModules %}
     {% if module.first %} {% else %},{% endif %} {{ module.value }}
   {% endfor %}
-
-  other-modules:
   {% for module in otherModules %}
     {% if module.first %} {% else %},{% endif %} {{ module.value }}
   {% endfor %}
 
   build-depends:
       gogol-core == {{ coreVersion }}.*
-    , base       >= 4.7 && < 5
+    , base       >= 4.12 && < 5

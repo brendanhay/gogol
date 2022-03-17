@@ -1,3 +1,4 @@
+cabal-version:         2.2
 name:                  gogol-gen
 version:               0.5.0
 synopsis:              Gogol Code Generator
@@ -7,10 +8,9 @@ license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
 copyright:             Copyright (c) 2013-2022 Brendan Hay
-category:              Network, Google, Cloud, Distributed Computing
+category:              Google
 build-type:            Simple
 extra-source-files:    README.md
-cabal-version:         >= 1.10
 
 description:
     Compiler and generator for Gogol related Google SDKs
@@ -46,7 +46,7 @@ executable gogol-gen
     build-depends:
           aeson            >= 1
         , attoparsec
-        , base             >= 4.8
+        , base             >= 4.12
         , bifunctors
         , bytestring
         , case-insensitive
