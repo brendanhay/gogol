@@ -1,5 +1,4 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE DeriveFoldable #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveGeneric #-}
@@ -16,6 +15,7 @@
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE ViewPatterns #-}
 
 -- Module      : Gen.Types
@@ -36,7 +36,6 @@ module Gen.Types
   )
 where
 
-import qualified Data.Char as Char
 import Control.Applicative
 import Control.Lens hiding ((.=))
 import Control.Monad.Except
@@ -46,12 +45,15 @@ import qualified Data.Attoparsec.Text as A
 import Data.Bifunctor
 import Data.CaseInsensitive (CI)
 import qualified Data.CaseInsensitive as CI
+import qualified Data.Char as Char
 import Data.Function (on)
-import qualified Data.HashMap.Strict as Map
-import qualified Data.HashSet as Set
 import Data.List (sort)
+import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Data.Ord
+import Data.Set (Set)
+import qualified Data.Set as Set
 import Data.String
 import Data.Text (Text)
 import qualified Data.Text as Text
@@ -71,8 +73,6 @@ import Gen.Types.NS
 import Gen.Types.Schema
 import Text.EDE (Template)
 import Prelude hiding (Enum)
-
-type Set = Set.HashSet
 
 type Error = LText.Text
 
@@ -204,21 +204,21 @@ data Templates = Templates
   }
 
 data Imports = Imports
-  { tocImports :: [NS],
-    typeImports :: [NS],
-    prodImports :: [NS],
-    sumImports :: [NS],
-    actionImports :: [NS]
+  { tocImports :: Set NS,
+    typeImports :: Set NS,
+    prodImports :: Set NS,
+    sumImports :: Set NS,
+    actionImports :: Set NS
   }
 
 serviceImports :: HasService a b => a -> Imports
 serviceImports s =
   Imports
-    { tocImports = [preludeNS],
-      typeImports = sort [preludeNS, prodNS s, sumNS s],
-      prodImports = sort [preludeNS, sumNS s],
-      sumImports = [preludeSumNS],
-      actionImports = sort [preludeNS, typesNS s]
+    { tocImports = Set.empty,
+      typeImports = Set.fromList [prodNS s, sumNS s],
+      prodImports = Set.fromList [sumNS s],
+      sumImports = Set.empty,
+      actionImports = Set.fromList [typesNS s]
     }
 
 tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
@@ -226,12 +226,6 @@ tocNS = mappend "Network.Google" . mkNS . view sCanonicalName
 typesNS = (<> "Types") . tocNS
 prodNS = (<> "Internal.Product") . typesNS
 sumNS = (<> "Internal.Sum") . typesNS
-
-preludeNS :: NS
-preludeNS = "Network.Google.Prelude"
-
-preludeSumNS :: NS
-preludeSumNS = "Network.Google.Prelude"
 
 resourceNS, methodNS :: NS
 resourceNS = "Network.Google"
@@ -385,6 +379,7 @@ type AST = ExceptT Error (State Memo)
 reserveType :: Global -> AST Global
 reserveType g = do
   p <- uses reserve (Set.member g)
+
   pure
     $! if p
       then reference g "'"
@@ -393,13 +388,17 @@ reserveType g = do
 reserveBranches :: AST ()
 reserveBranches = do
   ss <- use schemas
+
   let bs = Set.fromList $ map (CI.mk . global) (Map.keys ss)
+
   branches %= Map.insertWith (<>) mempty bs
 
 reserveFields :: AST ()
 reserveFields = do
   ss <- use schemas
+
   forM_ (Map.keys ss) $ \(global -> k) -> do
     let p : ps = splitWords k
         s = mconcat ps
+
     fields %= Map.insertWith (<>) (CI.mk p) (Set.singleton (CI.mk s))

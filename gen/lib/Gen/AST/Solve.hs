@@ -22,8 +22,9 @@ where
 import Control.Applicative
 import Control.Lens hiding (enum)
 import Control.Monad.Except
-import qualified Data.HashMap.Strict as Map
 import Data.List (intersect)
+import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Gen.Formatting hiding (list)
 import Gen.Text

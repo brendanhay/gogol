@@ -1,11 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
-{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
-
 {% include "_include/license.ede" %}
 --
 -- {{ description | stripPrefix("-- | ") }}
@@ -23,25 +15,20 @@ module {{ moduleName }}
     , {{ scope.value.name }}
   {% endfor %}
 
-    -- * API Declaration
-    , {{ api.aliasName }}
+    -- * REST Resources
   {% for action in api.methods %}
-    {% if action.first %}
-
-    -- * Methods
-    {% endif %}
 
     -- ** {{ action.value.id }}
-    , module {{ action.value.ns }}
+    , {{ action.value.aliasName }}
+    , {{ action.value.type.ctor.name }}
+    , {{ action.value.type.name }}
   {% endfor %}
   {% for action in api.resources %}
-    {% if action.first %}
-
-    -- * Resources
-    {% endif %}
 
     -- ** {{ action.value.id }}
-    , module {{ action.value.ns }}
+    , {{ action.value.aliasName }}
+    , {{ action.value.type.ctor.name }}
+    , {{ action.value.type.name }}
   {% endfor %}
 
     -- * Types
@@ -68,10 +55,3 @@ import {{ import.value }}
 import {{ module.value }}
   {% endif %}
 {% endfor %}
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the {{ title }} service.
-{{ api.alias }}

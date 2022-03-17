@@ -1,12 +1,3 @@
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-
 {% include "_include/license.ede" %}
 --
 module {{ moduleName }}
@@ -34,6 +25,7 @@ module {{ moduleName }}
   {% endfor %}
     ) where
 
+import qualified Network.Google.Prelude as Core
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}

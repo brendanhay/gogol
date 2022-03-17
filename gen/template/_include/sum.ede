@@ -1,26 +1,26 @@
 {% if type.help %}
 {{ type.help }}
 {% endif %}
-newtype {{ type.name }} = {{ type.name }}' { from{{ type.name }} :: Text }
-    deriving stock (Show, Read, Eq, Ord, Generic)
+newtype {{ type.name }} = {{ type.name }} { from{{ type.name }} :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
     deriving newtype
-      ( Hashable
-      , ToHttpApiData
-      , FromHttpApiData
-      , ToJSON
-      , ToJSONKey
-      , FromJSON
-      , FromJSONKey
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
       )
 {% for branch in type.branches %}
 
 {{ branch.value.help }}
 pattern {{ branch.value.name }} :: {{ type.name }}
-pattern {{ branch.value.name }} = {{ type.name }}' "{{ branch.value.value }}"
+pattern {{ branch.value.name }} = {{ type.name }} "{{ branch.value.value }}"
 {% endfor %}
 
 {-# COMPLETE
 {% for branch in type.branches %}
   {{ branch.value.name }},
 {% endfor %}
-  {{ type.name }}' #-}
+  {{ type.name }} #-}

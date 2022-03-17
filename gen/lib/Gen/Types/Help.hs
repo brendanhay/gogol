@@ -17,9 +17,9 @@ module Gen.Types.Help
   )
 where
 
-import Data.Int (Int64)
 import Data.Aeson
 import qualified Data.Char as Char
+import Data.Int (Int64)
 import Data.String
 import Data.Text (Text)
 import qualified Data.Text.Lazy as Text.Lazy
@@ -106,7 +106,7 @@ readMarkdown :: Text -> Either PandocError Pandoc
 readMarkdown =
   Unsafe.unsafePerformIO
     . Pandoc.runIO
-    . Pandoc.readMarkdown (Pandoc.def { Pandoc.readerColumns = 2048 })
+    . Pandoc.readMarkdown (Pandoc.def {Pandoc.readerColumns = 2048})
 
 -- readHTML :: Text -> Either PandocError Pandoc
 -- readHTML =
@@ -119,9 +119,9 @@ writeHaddock =
   Unsafe.unsafePerformIO
     . Pandoc.runIO
     . Pandoc.writeHaddock options
- where
-  options =
-    Pandoc.def
-      { Pandoc.writerWrapText = Pandoc.WrapAuto
-      , Pandoc.writerColumns = 2048
-      }
+  where
+    options =
+      Pandoc.def
+        { Pandoc.writerWrapText = Pandoc.WrapAuto,
+          Pandoc.writerColumns = 2048
+        }

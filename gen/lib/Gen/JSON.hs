@@ -17,7 +17,7 @@ import Data.Aeson.Types
 import Data.Bifunctor
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Lazy as LBS
-import qualified Data.HashMap.Strict as Map
+import qualified Data.HashMap.Strict as HashMap
 import Data.List
 import qualified Data.Text.Lazy as LText
 import Gen.Formatting
@@ -44,7 +44,7 @@ merge :: [Object] -> Object
 merge = foldl' go mempty
   where
     go :: Object -> Object -> Object
-    go = Map.unionWith value
+    go = HashMap.unionWith value
 
     value :: Value -> Value -> Value
     value l r =

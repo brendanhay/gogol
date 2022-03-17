@@ -11,6 +11,7 @@ module Gen.Types.NS
   ( NS,
     mkNS,
     unNS,
+    renderNS,
   )
 where
 
@@ -44,4 +45,7 @@ instance FromJSON NS where
   parseJSON = withText "namespace" (pure . mkNS)
 
 instance ToJSON NS where
-  toJSON (NS xs) = toJSON (Text.intercalate "." xs)
+  toJSON = toJSON . renderNS
+
+renderNS :: NS -> Text
+renderNS (NS xs) = Text.intercalate "." xs

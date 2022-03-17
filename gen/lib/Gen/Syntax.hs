@@ -14,8 +14,9 @@ module Gen.Syntax where
 import Control.Lens hiding (iso, mapping, op, pre, strict)
 import Data.Either
 import Data.Foldable (foldl', foldr')
-import qualified Data.HashMap.Strict as Map
 import Data.List (delete, nub)
+import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Data.Text (Text)
 import qualified Data.Text as Text
@@ -41,22 +42,22 @@ import Language.Haskell.Exts.Build
 import Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
 serviceSig :: Name () -> Decl ()
-serviceSig n = TypeSig () [n] (TyCon () "ServiceConfig")
+serviceSig n = TypeSig () [n] (TyCon () "Core.ServiceConfig")
 
 serviceDecl :: Service a -> Name () -> Decl ()
 serviceDecl s n = sfun n [] (UnGuardedRhs () rhs) noBinds
   where
     rhs =
       appFun
-        (var "defaultService")
-        [ app (var "ServiceId") (str (s ^. dId)),
+        (var "Core.defaultService")
+        [ app (var "Core.ServiceId") (str (s ^. dId)),
           str . stripSuffix "/" $ stripPrefix "https://" (s ^. dRootUrl)
         ]
 
 scopeSig :: Name () -> Text -> Decl ()
 scopeSig n v =
   TypeSig () [n] $
-    TyApp () (TyCon () "Proxy") $
+    TyApp () (TyCon () "Core.Proxy") $
       TyPromoted () $
         PromotedList
           ()
@@ -65,7 +66,7 @@ scopeSig n v =
           ]
 
 scopeDecl :: Name () -> Decl ()
-scopeDecl n = sfun n [] (UnGuardedRhs () (var "Proxy")) noBinds
+scopeDecl n = sfun n [] (UnGuardedRhs () (var "Core.Proxy")) noBinds
 
 apiAlias :: Name () -> [Name ()] -> Decl ()
 apiAlias n ls = TypeDecl () (DHead () n) alias
@@ -77,7 +78,7 @@ apiAlias n ls = TypeDecl () (DHead () n) alias
 verbAlias :: HasDescription a s => a -> Name () -> Method Solved -> Decl ()
 verbAlias d n m = TypeDecl () (DHead () n) $ servantOr meta (catMaybes [down, up])
   where
-    meta = path $ metadataAlias m
+    meta = path (metadataAlias m)
     down = path <$> downloadAlias m
     up = uploadAlias root m
 
@@ -94,7 +95,7 @@ metadataAlias m = servantSub (jsonVerb m) (params ++ media)
       Just b ->
         [ TyApp
             ()
-            (TyApp () (TyCon () "ReqBody") jsonMedia)
+            (TyApp () (TyCon () "Core.ReqBody") jsonMedia)
             (tycon (ref b))
         ]
 
@@ -125,12 +126,12 @@ uploadAlias sub m
         [ multipartParam,
           TyApp
             ()
-            (TyApp () (TyCon () "MultipartRelated") jsonMedia)
+            (TyApp () (TyCon () "Core.MultipartRelated") jsonMedia)
             (tycon (ref b))
         ]
       Nothing ->
         [ mediaParam,
-          TyCon () "AltMedia"
+          TyCon () "Core.AltMedia"
         ]
 
 requestPath :: Method Solved -> Text -> [Type ()]
@@ -146,7 +147,7 @@ requestPath m = map go . extractPath
               ()
               ( TyApp
                   ()
-                  (TyCon () "Captures")
+                  (TyCon () "Core.Captures")
                   (sing (local l))
               )
               (terminalType (_type (_pParam x)))
@@ -155,7 +156,7 @@ requestPath m = map go . extractPath
             ()
             ( TyApp
                 ()
-                (TyCon () "Capture")
+                (TyCon () "Core.Capture")
                 (sing (local l))
             )
             (terminalType (_type (_pParam x)))
@@ -166,7 +167,7 @@ requestPath m = map go . extractPath
                 ()
                 ( TyApp
                     ()
-                    (TyCon () "CaptureMode")
+                    (TyCon () "Core.CaptureMode")
                     (sing (local l))
                 )
                 (sing y)
@@ -181,8 +182,8 @@ requestQuery m xs =
     go (k, x) = case _pLocation x of
       Query
         | x ^. iRepeated ->
-          Just $ TyApp () (TyApp () (TyCon () "QueryParams") n) t
-      Query -> Just $ TyApp () (TyApp () (TyCon () "QueryParam") n) t
+          Just $ TyApp () (TyApp () (TyCon () "Core.QueryParams") n) t
+      Query -> Just $ TyApp () (TyApp () (TyCon () "Core.QueryParam") n) t
       Path -> Nothing
       where
         t = terminalType (_type (_pParam x))
@@ -192,8 +193,8 @@ requestQueryParams :: Method a -> Map Local (Param a)
 requestQueryParams = Map.filter ((/= Path) . _pLocation) . _mParameters
 
 servantOr, servantSub :: Type () -> [Type ()] -> Type ()
-servantOr = foldl' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym ":<|>")) r)
-servantSub = foldr' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym ":>")) r)
+servantOr = foldl' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym "Core.:<|>")) r)
+servantSub = foldr' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym "Core.:>")) r)
 
 jsonVerb :: Method a -> Type ()
 jsonVerb m =
@@ -205,38 +206,38 @@ downloadVerb m =
   TyApp
     ()
     (TyApp () (httpMethod m) streamMedia)
-    (TyCon () "Stream")
+    (TyCon () "Core.Stream")
 
 httpMethod :: Method a -> Type ()
-httpMethod = TyCon () . unqual . Text.unpack . Text.toTitle . _mHttpMethod
+httpMethod = TyCon () . unqual . Text.unpack . mappend "Core." . Text.toTitle . _mHttpMethod
 
 subPaths :: Text -> [Type ()]
 subPaths = map sing . filter (not . Text.null) . Text.split (== '/')
 
 jsonMedia, streamMedia :: Type ()
-jsonMedia = tylist ["JSON"]
-streamMedia = tylist ["OctetStream"]
+jsonMedia = tylist ["Core.JSON"]
+streamMedia = tylist ["Core.OctetStream"]
 
 downloadParam :: Type ()
 downloadParam =
   TyApp
     ()
-    (TyApp () (TyCon () "QueryParam") (sing "alt"))
-    (TyCon () "AltMedia")
+    (TyApp () (TyCon () "Core.QueryParam") (sing "alt"))
+    (TyCon () "Core.AltMedia")
 
 mediaParam :: Type ()
 mediaParam =
   TyApp
     ()
-    (TyApp () (TyCon () "QueryParam") (sing "uploadType"))
-    (TyCon () "AltMedia")
+    (TyApp () (TyCon () "Core.QueryParam") (sing "uploadType"))
+    (TyCon () "Core.AltMedia")
 
 multipartParam :: Type ()
 multipartParam =
   TyApp
     ()
-    (TyApp () (TyCon () "QueryParam") (sing "uploadType"))
-    (TyCon () "Multipart")
+    (TyApp () (TyCon () "Core.QueryParam") (sing "uploadType"))
+    (TyCon () "Core.Multipart")
 
 pattern' :: Integer -> Method a -> Pat ()
 pattern' n m = case (n, down, up) of
@@ -255,7 +256,7 @@ pattern' n m = case (n, down, up) of
     go = pvar "go"
     wild = PWildCard ()
 
-    infixOr l = PInfixApp () l (UnQual () (sym ":<|>"))
+    infixOr l = PInfixApp () l (UnQual () (sym "Core.:<|>"))
 
 metadataPat, downloadPat, uploadPat :: Method a -> Pat ()
 metadataPat = pattern' 1
@@ -273,21 +274,21 @@ downloadDecl ::
 downloadDecl n pre api url fs m =
   googleRequestDecl (TyParen () ty) [rs, ss] [alt] pre api url m pat prec
   where
-    ty = TyApp () (TyCon () "MediaDownload") (tycon n)
+    ty = TyApp () (TyCon () "Core.MediaDownload") (tycon n)
 
-    rs = InsType () (TyApp () (TyCon () "Rs") ty) (TyCon () "Stream")
+    rs = InsType () (TyApp () (TyCon () "Rs") ty) (TyCon () "Core.Stream")
 
     ss =
       InsType () (TyApp () (TyCon () "Scopes") ty) $
-        TyApp () (TyCon () "Scopes") (tycon n)
+        TyApp () (TyCon () "Core.Scopes") (tycon n)
 
-    alt = app (var "Just") (var "AltMedia")
+    alt = app (var "Core.Just") (var "Core.AltMedia")
     pat = downloadPat m
 
     prec =
       PApp
         ()
-        (UnQual () "MediaDownload")
+        (UnQual () "Core.MediaDownload")
         [ PRec () (UnQual () (dname' n)) [PFieldWildcard () | not (null fs)]
         ]
 
@@ -302,7 +303,7 @@ uploadDecl ::
 uploadDecl n pre api url fs m =
   googleRequestDecl (TyParen () ty) [rs, ss] extras pre api url m pat prec
   where
-    ty = TyApp () (TyCon () "MediaUpload") (tycon n)
+    ty = TyApp () (TyCon () "Core.MediaUpload") (tycon n)
 
     rs =
       InsType () (TyApp () (TyCon () "Rs") ty) $
@@ -310,22 +311,22 @@ uploadDecl n pre api url fs m =
 
     ss =
       InsType () (TyApp () (TyCon () "Scopes") ty) $
-        TyApp () (TyCon () "Scopes") (tycon n)
+        TyApp () (TyCon () "Core.Scopes") (tycon n)
 
     extras = maybeToList alt ++ [upl] ++ payload ++ [var media]
       where
         upl =
-          app (var "Just") $
+          app (var "Core.Just") $
             if isJust (_mRequest m)
-              then var "Multipart"
-              else var "AltMedia"
+              then var "Core.Multipart"
+              else var "Core.AltMedia"
 
         alt =
-          app (var "Just") . var . name . Text.unpack . alternate
+          app (var "Core.Just") . var . name . Text.unpack . alternate
             <$> (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
         payload
-          | isJust (_mRequest m) = [var (fname pre "payload")]
+          | isJust (_mRequest m) = [var (fname "payload")]
           | otherwise = []
 
     pat = uploadPat m
@@ -333,7 +334,7 @@ uploadDecl n pre api url fs m =
     prec =
       PApp
         ()
-        (UnQual () "MediaUpload")
+        (UnQual () "Core.MediaUpload")
         [ PRec () (UnQual () (dname' n)) [PFieldWildcard () | not (null fs)],
           PVar () media
         ]
@@ -366,11 +367,11 @@ requestDecl n pre api url fs m =
     extras = catMaybes [alt, payload]
       where
         alt =
-          app (var "Just") . var . name . Text.unpack . alternate
+          app (var "Core.Just") . var . name . Text.unpack . alternate
             <$> (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
         payload
-          | isJust (_mRequest m) = Just $ var (fname pre "payload")
+          | isJust (_mRequest m) = Just $ var (fname "payload")
           | otherwise = Nothing
 
     pat = metadataPat m
@@ -389,7 +390,7 @@ googleRequestDecl ::
   Pat () ->
   Decl ()
 googleRequestDecl n assoc extras pre api url m pat prec =
-  InstDecl () Nothing (instrule "GoogleRequest" n) (Just (assoc ++ [request]))
+  InstDecl () Nothing (instrule "Core.GoogleRequest" n) (Just (assoc ++ [request]))
   where
     request = InsDecl () (FunBind () [match])
 
@@ -400,10 +401,10 @@ googleRequestDecl n assoc extras pre api url m pat prec =
         ()
         [ patBind pat $
             appFun
-              (var "buildClient")
-              [ ExpTypeSig () (var "Proxy") $
-                  TyApp () (TyCon () "Proxy") (TyCon () (UnQual () api)),
-                var "mempty"
+              (var "Core.buildClient")
+              [ ExpTypeSig () (var "Core.Proxy") $
+                  TyApp () (TyCon () "Core.Proxy") (TyCon () (UnQual () api)),
+                var "Core.mempty"
               ]
         ]
 
@@ -419,16 +420,16 @@ googleRequestDecl n assoc extras pre api url m pat prec =
             | _pLocation p == Query,
               not (required p),
               p ^. iRepeated ->
-              infixApp (v l) "^." (var "_Default")
+              infixApp (v l) "Core.^." (var "Core._Default")
           Just p
             | _pLocation p == Query,
               not (p ^. iRepeated),
               parameter p || defaulted p ->
-              app (var "Just") (v l)
+              app (var "Core.Just") (v l)
           _ -> v l
 
         ps = _mParameters m
-        v = var . fname pre
+        v = var . fname
 
     fs =
       delete "alt"
@@ -443,20 +444,20 @@ jsonDecls g p (Map.toList -> rs) = [from', to']
       InstDecl
         ()
         Nothing
-        (instrule "FromJSON" (tycon g))
+        (instrule "Core.FromJSON" (tycon g))
         ( Just
             [ funD "parseJSON" $
-                app (app (var "withObject") (dstr g)) $
+                app (app (var "Core.withObject") (dstr g)) $
                   lamE [pvar "o"] $
                     ctorE g (map decode rs)
             ]
         )
 
     decode (l, s)
-      | _additional s = app (var "parseJSONObject") (var "o")
+      | _additional s = app (var "Core.parseJSONObject") (var "o")
       | Just x <- def s = defJS l x
       | required s = reqJS l
-      | monoid s = defJS l (var "mempty")
+      | monoid s = defJS l (var "Core.mempty")
       | otherwise = optJS l
 
     to' = case rs of
@@ -465,44 +466,44 @@ jsonDecls g p (Map.toList -> rs) = [from', to']
           InstDecl
             ()
             Nothing
-            (instrule "ToJSON" (tycon g))
+            (instrule "Core.ToJSON" (tycon g))
             ( Just
-                [ wildcardD "toJSON" g head emptyObj [app (var "toJSON") (var (fname p k))]
+                [ wildcardD "toJSON" g head emptyObj [app (var "Core.toJSON") (var (fname k))]
                 ]
             )
       _ ->
         InstDecl
           ()
           Nothing
-          (instrule "ToJSON" (tycon g))
+          (instrule "Core.ToJSON" (tycon g))
           ( Just
               [ wildcardD "toJSON" g omit emptyObj (map encode rs)
               ]
           )
 
     omit =
-      app (var "object")
-        . app (var "catMaybes")
+      app (var "Core.object")
+        . app (var "Core.catMaybes")
         . listE
 
-    emptyObj = var "emptyObject"
+    emptyObj = var "Core.emptyObject"
 
     encode (l, s)
-      | text && optional = infixApp (infixApp (paren (app n o)) "." (var "AsText")) "<$>" a
-      | optional = infixApp (paren (app n o)) "<$>" a
-      | text = var "Just" `app` infixApp n ".=" (var "AsText" `app` a)
-      | otherwise = var "Just" `app` infixApp n ".=" a
+      | text && optional = infixApp (infixApp (paren (app n o)) "Core.." (var "Core.AsText")) "Core.<$>" a
+      | optional = infixApp (paren (app n o)) "Core.<$>" a
+      | text = var "Core.Just" `app` infixApp n ".=" (var "Core.AsText" `app` a)
+      | otherwise = var "Core.Just" `app` infixApp n "Core..=" a
       where
         n = fstr l
-        o = var ".="
-        a = var (fname p l)
+        o = var "Core..="
+        a = var (fname l)
 
         text = textual (_type s)
 
         optional =
-           case _type s of
-             TMaybe {} -> True
-             _other  -> False
+          case _type s of
+            TMaybe {} -> True
+            _other -> False
 
 wildcardD ::
   String ->
@@ -521,13 +522,13 @@ wildcardD f n enc x = \case
     prec = PRec () (UnQual () (dname' n)) [PFieldWildcard ()]
 
 defJS :: Local -> Exp () -> Exp ()
-defJS n = infixApp (infixApp (var "o") ".:?" (fstr n)) ".!="
+defJS n = infixApp (infixApp (var "o") "Core..:?" (fstr n)) "Core..!="
 
 reqJS :: Local -> Exp ()
-reqJS = infixApp (var "o") ".:" . fstr
+reqJS = infixApp (var "o") "Core..:" . fstr
 
 optJS :: Local -> Exp ()
-optJS = infixApp (var "o") ".:?" . fstr
+optJS = infixApp (var "o") "Core..:?" . fstr
 
 funD :: String -> Exp () -> InstDecl ()
 funD f = InsDecl () . patBind (pvar (name f))
@@ -535,14 +536,14 @@ funD f = InsDecl () . patBind (pvar (name f))
 constD :: String -> Exp () -> InstDecl ()
 constD f x =
   InsDecl () $
-    sfun (name f) [] (UnGuardedRhs () (app (var "const") x)) noBinds
+    sfun (name f) [] (UnGuardedRhs () (app (var "Core.const") x)) noBinds
 
 ctorE :: Global -> [Exp ()] -> Exp ()
 ctorE n = seqE (var (dname' n)) . map paren
 
 seqE :: Exp () -> [Exp ()] -> Exp ()
-seqE l [] = app (var "pure") l
-seqE l (r : rs) = infixApp l "<$>" (infixE r "<*>" rs)
+seqE l [] = app (var "Core.pure") l
+seqE l (r : rs) = infixApp l "Core.<$>" (infixE r "Core.<*>" rs)
 
 objDecl :: Global -> Map Local Solved -> Decl ()
 objDecl n rs =
@@ -555,14 +556,14 @@ objDecl n rs =
     con = QualConDecl () Nothing Nothing (ConDecl () (dname' n) [])
 
 objDerive :: [Derive] -> Deriving ()
-objDerive = Deriving () Nothing . map (unqualrule . drop 1 . show)
+objDerive = Deriving () Nothing . map (unqualRule . mappend "Core." . drop 1 . show)
 
-objFields :: Prefix -> Map Local Solved -> [Field]
-objFields p = map (uncurry field) . Map.toList
+objFields :: Map Local Solved -> [Field]
+objFields = map (uncurry field) . Map.toList
   where
     field l v =
       Field
-        (fname p l)
+        (fname l)
         (strict (internalType (_type v)))
         (fromMaybe mempty (v ^. iDescription))
 
@@ -582,20 +583,20 @@ ctorDecl n p rs = sfun c ps (UnGuardedRhs () rhs) noBinds
       | Map.null rs = var d
       | otherwise =
         RecConstr () (UnQual () d) $
-          map (uncurry (fieldUpdate p)) (Map.toList rs)
+          map (uncurry fieldUpdate) (Map.toList rs)
 
-    ps = map (pname p) . Map.keys $ Map.filter parameter rs
+    ps = map fname . Map.keys $ Map.filter parameter rs
 
-fieldUpdate :: Prefix -> Local -> Solved -> FieldUpdate ()
-fieldUpdate p l s = FieldUpdate () (UnQual () (fname p l)) rhs
+fieldUpdate :: Local -> Solved -> FieldUpdate ()
+fieldUpdate l s = FieldUpdate () (UnQual () (fname l)) rhs
   where
     rhs
       | Just x <- def s, s ^. iRepeated = listE [x]
       | Just x <- def s = x
       | parameter s = v
-      | otherwise = var (name "Nothing")
+      | otherwise = var (name "Core.Nothing")
 
-    v = var (pname p l)
+    v = var (fname l)
 
 parameters :: [Solved] -> [Type ()]
 parameters = map (externalType . _type) . filter parameter
@@ -625,64 +626,64 @@ externalType :: TType -> Type ()
 externalType = \case
   TType r -> tycon r
   TMaybe t@TList {} -> externalType t
-  TMaybe t -> TyApp () (TyCon () "Maybe") (externalType t)
+  TMaybe t -> TyApp () (TyCon () "Core.Maybe") (externalType t)
   TList t -> TyList () (externalType t)
   TLit l -> externalLit l
   TMap k v ->
-    TyApp () (TyApp () (TyCon () "HashMap") (externalType k)) (externalType (require v))
+    TyApp () (TyApp () (TyCon () "Core.HashMap") (externalType k)) (externalType (require v))
 
 internalType :: TType -> Type ()
 internalType = \case
   TType r -> tycon r
-  TMaybe t -> TyApp () (TyCon () "Maybe") (internalType t)
+  TMaybe t -> TyApp () (TyCon () "Core.Maybe") (internalType t)
   TList t -> TyList () (internalType t)
   TLit l -> internalLit l
   TMap k v ->
-    TyApp () (TyApp () (TyCon () "HashMap") (internalType k)) (internalType (require v))
+    TyApp () (TyApp () (TyCon () "Core.HashMap") (internalType k)) (internalType (require v))
 
 externalLit :: Lit -> Type ()
 externalLit = \case
-  Text -> TyCon () "Text"
-  Bool -> TyCon () "Bool"
-  Time -> TyCon () "TimeOfDay"
-  Date -> TyCon () "Day"
-  DateTime -> TyCon () "UTCTime"
-  Byte -> TyCon () "ByteString"
-  Natural {} -> TyCon () "Natural"
-  Float {} -> TyCon () "Double"
-  Double {} -> TyCon () "Double"
-  UInt32 {} -> TyCon () "Word32"
-  UInt64 {} -> TyCon () "Word64"
-  Int32 {} -> TyCon () "Int32"
-  Int64 {} -> TyCon () "Int64"
+  Text -> TyCon () "Core.Text"
+  Bool -> TyCon () "Core.Bool"
+  Time -> TyCon () "Core.TimeOfDay"
+  Date -> TyCon () "Core.Day"
+  DateTime -> TyCon () "Core.UTCTime"
+  Byte -> TyCon () "Core.ByteString"
+  Natural {} -> TyCon () "Core.Natural"
+  Float {} -> TyCon () "Core.Double"
+  Double {} -> TyCon () "Core.Double"
+  UInt32 {} -> TyCon () "Core.Word32"
+  UInt64 {} -> TyCon () "Core.Word64"
+  Int32 {} -> TyCon () "Core.Int32"
+  Int64 {} -> TyCon () "Core.Int64"
   Alt t -> TyCon () (unqual (Text.unpack t))
-  RqBody -> TyCon () "RequestBody"
-  RsBody -> TyCon () "Stream"
-  JSONValue -> TyCon () "JSONValue"
-  GFieldMask -> TyCon () "GFieldMask"
-  GDuration -> TyCon () "Scientific"
+  RqBody -> TyCon () "Core.RequestBody"
+  RsBody -> TyCon () "Core.Stream"
+  JSONValue -> TyCon () "Core.JSONValue"
+  GFieldMask -> TyCon () "Core.GFieldMask"
+  GDuration -> TyCon () "Core.Scientific"
 
 internalLit :: Lit -> Type ()
 internalLit = \case
-  Text -> TyCon () "Text"
-  Bool -> TyCon () "Bool"
-  Time -> TyCon () "Time'"
-  Date -> TyCon () "Date'"
-  DateTime -> TyCon () "DateTime'"
-  Byte -> TyCon () "Bytes"
-  Natural {} -> TyCon () "Natural"
-  Float {} -> TyCon () "Double"
-  Double {} -> TyCon () "Double"
-  UInt32 {} -> TyCon () "Word32"
-  UInt64 {} -> TyCon () "Word64"
-  Int32 {} -> TyCon () "Int32"
-  Int64 {} -> TyCon () "Int64"
+  Text -> TyCon () "Core.Text"
+  Bool -> TyCon () "Core.Bool"
+  Time -> TyCon () "Core.Time'"
+  Date -> TyCon () "Core.Date'"
+  DateTime -> TyCon () "Core.DateTime'"
+  Byte -> TyCon () "Core.Bytes"
+  Natural {} -> TyCon () "Core.Natural"
+  Float {} -> TyCon () "Core.Double"
+  Double {} -> TyCon () "Core.Double"
+  UInt32 {} -> TyCon () "Core.Word32"
+  UInt64 {} -> TyCon () "Core.Word64"
+  Int32 {} -> TyCon () "Core.Int32"
+  Int64 {} -> TyCon () "Core.Int64"
   Alt t -> TyCon () (unqual (Text.unpack t))
-  RqBody -> TyCon () "RequestBody"
-  RsBody -> TyCon () "Stream"
-  JSONValue -> TyCon () "JSONValue"
-  GFieldMask -> TyCon () "GFieldMask"
-  GDuration -> TyCon () "GDuration"
+  RqBody -> TyCon () "Core.RequestBody"
+  RsBody -> TyCon () "Core.Stream"
+  JSONValue -> TyCon () "Core.JSONValue"
+  GFieldMask -> TyCon () "Core.GFieldMask"
+  GDuration -> TyCon () "Core.GDuration"
 
 textual :: TType -> Bool
 textual = \case
@@ -697,7 +698,6 @@ textual = \case
   TLit (UInt64 p) -> p
   TLit (Int32 p) -> p
   TLit (Int64 p) -> p
-  TLit (Int32 p) -> p
   TLit _other -> False
 
 require :: TType -> TType
@@ -723,8 +723,8 @@ tycon = TyCon () . UnQual () . dname
 unqual :: String -> QName ()
 unqual = UnQual () . name
 
-unqualrule :: String -> InstRule ()
-unqualrule = IRule () Nothing Nothing . IHCon () . unqual
+unqualRule :: String -> InstRule ()
+unqualRule = IRule () Nothing Nothing . IHCon () . unqual
 
 instrule :: String -> Type () -> InstRule ()
 instrule n t = IRule () Nothing Nothing (IHApp () (IHCon () (unqual n)) t)

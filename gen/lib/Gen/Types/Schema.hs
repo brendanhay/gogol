@@ -1,7 +1,5 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DeriveFoldable #-}
-{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DeriveTraversable #-}
@@ -15,7 +13,9 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeApplications #-}
 
 -- Module      : Gen.Types.Schema
 -- Copyright   : (c) 2015-2022 Brendan Hay
@@ -34,7 +34,8 @@ import qualified Data.Aeson as A
 import Data.Aeson.TH
 import Data.Aeson.Types (Parser)
 import Data.Function (on)
-import qualified Data.HashMap.Strict as Map
+import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 import Data.Maybe
 import Data.Text (Text)
 import qualified Data.Text as Text
@@ -43,7 +44,6 @@ import Gen.TH
 import Gen.Text
 import Gen.Types.Help
 import Gen.Types.Id
-import Gen.Types.Map
 import Prelude hiding (Enum)
 
 keyless :: Map Text a -> [a]
@@ -107,7 +107,7 @@ required = view iRequired
 parameter s = required s && not (defaulted s)
 
 alternate :: Text -> Text
-alternate = mappend "Alt" . Text.toUpper
+alternate = mappend "Core.Alt" . Text.toUpper
 
 emptyInfo :: Info
 emptyInfo =
@@ -227,20 +227,20 @@ instance FromJSON Lit where
       "string" -> string format
       "boolean" -> pure Bool
       type' -> fail $ "failure parsing Lit: " ++ show (type', format)
-   where
-       integer = \case
-         Just "uint32" -> pure (UInt32 False)
-         Just "uint64" -> pure (UInt64 False)
-         Just "int32" -> pure (Int32 False)
-         Just "int64" -> pure (Int64 False)
-         format -> fail $ "failure parsing Lit: (" ++ show ("number" :: Text, format)
+    where
+      integer = \case
+        Just "uint32" -> pure (UInt32 False)
+        Just "uint64" -> pure (UInt64 False)
+        Just "int32" -> pure (Int32 False)
+        Just "int64" -> pure (Int64 False)
+        format -> fail $ "failure parsing Lit: (" ++ show ("number" :: Text, format)
 
-       number = \case
-         Just "float" -> pure (Float False)
-         Just "double" -> pure (Double False)
-         format -> fail $ "failure parsing Lit: " ++ show ("number" :: Text, format)
+      number = \case
+        Just "float" -> pure (Float False)
+        Just "double" -> pure (Double False)
+        format -> fail $ "failure parsing Lit: " ++ show ("number" :: Text, format)
 
-       string = \case
+      string = \case
         Just "time" -> pure Time
         Just "date" -> pure Date
         Just "date-time" -> pure DateTime

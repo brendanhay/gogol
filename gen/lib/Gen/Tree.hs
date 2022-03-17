@@ -29,6 +29,7 @@ import Data.Aeson hiding (json)
 import Data.Bifunctor
 import Data.Foldable (foldr')
 import Data.Monoid
+import Data.Set (Set)
 import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.Lazy as LText
@@ -117,7 +118,7 @@ populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
 module' ::
   ToJSON a =>
   NS ->
-  [NS] ->
+  Set NS ->
   Template ->
   Either Error a ->
   DirTree (Either Error Rendered)

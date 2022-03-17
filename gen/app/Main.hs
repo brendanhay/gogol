@@ -5,19 +5,19 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
 
+-- |
 -- Module      : Main
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-
 module Main (main) where
 
-import qualified Data.IORef as IORef
 import Control.Error
 import Control.Lens hiding ((<.>))
 import Control.Monad.State
+import qualified Data.IORef as IORef
 import Data.List (nub, sort)
 import Data.String
 import qualified Data.Text as Text
@@ -168,17 +168,17 @@ main = do
         else do
           title ("[" % int % "/" % int % "] model:" % stext) n i modelName
 
-          service <-
+          definition <-
             sequence [JS.load annexPath, JS.load modelPath]
               >>= hoistEither . JS.parse . JS.merge
 
           say ("Successfully parsed '" % stext % "' API definition.") modelName
 
-          library <- hoistEither (runAST _optVersions service)
+          library <- hoistEither (runAST _optVersions definition)
 
           say ("Creating " % stext % " package.") (library ^. dTitle)
 
-          directory <-
+          tree <-
             hoistEither (Tree.populate _optOutput tmpl library)
               >>= Tree.fold createDir writeOrTouch
 
@@ -187,17 +187,17 @@ main = do
             (library ^. dName)
             (library ^. libraryVersion)
 
-          copyDir _optStatic (Tree.root directory)
+          copyDir _optStatic (Tree.root tree)
 
       done
 
     names <- lift (IORef.readIORef skipped)
 
-    title
-      ("Skipped " % int % " models due to missing annex configuration(s):\n " % list stext)
-      (length names)
-      names
+    unless (Prelude.null names) $ do
+      let count = length names
 
-    done
+      title ("Skipped " % int % " models due to missing annex configuration(s):\n " % list stext) count names
+
+      done
 
     title ("Successfully processed " % int % " configured models.") i

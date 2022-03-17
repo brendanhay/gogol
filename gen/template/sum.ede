@@ -1,19 +1,8 @@
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-
 {% include "_include/license.ede" %}
 --
 module {{ moduleName }} where
 
+import qualified Network.Google.Prelude as Core
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
