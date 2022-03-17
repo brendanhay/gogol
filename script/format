@@ -22,3 +22,6 @@ say "Formatting haskell"
 
 find gen core gogol examples -type f -name '*.hs' -print0 |
   xargs -0 ormolu --mode=inplace
+
+find gen core gogol examples -type f -name '*.cabal' -print0 |
+  xargs -0 cabal-fmt --Werror --inplace
