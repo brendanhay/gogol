@@ -17,15 +17,17 @@ module Gen.Types.Help
   )
 where
 
+import Data.Int (Int64)
 import Data.Aeson
 import qualified Data.Char as Char
-import qualified Data.List as List
 import Data.String
 import Data.Text (Text)
-import qualified Data.Text as Text
+import qualified Data.Text.Lazy as Text.Lazy
 import qualified System.IO.Unsafe as Unsafe
-import Text.DocLayout
-import Text.Pandoc as Pandoc
+import Text.Pandoc (Pandoc, PandocError)
+import qualified Text.Pandoc as Pandoc
+
+type TextLazy = Text.Lazy.Text
 
 data Help
   = Help ![Help]
@@ -58,45 +60,68 @@ rawHelpText = Raw
 
 instance FromJSON Help where
   parseJSON = withText "help" $ \t ->
-    case (Unsafe.unsafePerformIO . Pandoc.runIO) (Pandoc.readHtml def t) of
+    case readMarkdown t of
       Left e -> fail (show e)
       Right x -> pure $! Pan x t
 
 instance ToJSON Help where
   toJSON = toJSON . Nest 0
 
-data Nest = Nest !Int Help
+data Nest = Nest !Int64 Help
 
 instance ToJSON Nest where
   toJSON (Nest n h) =
     toJSON
       . mappend "-- |"
-      . Text.map f
-      . Text.drop (n + 2)
-      . wrap (replicate n ' ' ++ "-- ")
+      . Text.Lazy.map f
+      . Text.Lazy.drop (n + 2)
+      . wrap (Text.Lazy.replicate n " " <> "-- ")
       $ flattenHelp h
     where
       f '@' = '\''
       f x = x
 
-data Desc = Desc !Int Help
+data Desc = Desc !Int64 Help
 
 instance ToJSON Desc where
   toJSON (Desc n h) =
     toJSON
-      . wrap (replicate n ' ')
+      . wrap (Text.Lazy.replicate n " ")
       $ flattenHelp h
 
-flattenHelp :: Help -> String
-flattenHelp =
-  List.dropWhileEnd Char.isSpace . \case
-    Help xs -> foldMap flattenHelp xs
-    Raw t -> Text.unpack t
-    Pan d _t -> Text.unpack ((Unsafe.unsafePerformIO . Pandoc.runIOorExplode) (Pandoc.writeHaddock def d))
+flattenHelp :: Help -> TextLazy
+flattenHelp = \case
+  Help xs -> foldMap flattenHelp xs
+  Raw t -> Text.Lazy.fromStrict t
+  Pan d _t -> either (error . show) Text.Lazy.fromStrict (writeHaddock d)
 
-wrap :: String -> String -> Text
+wrap :: TextLazy -> TextLazy -> TextLazy
 wrap sep =
-  Text.dropWhileEnd Char.isSpace
-    . render (Just 76)
-    . prefixed sep
-    . fromString
+  Text.Lazy.dropWhileEnd Char.isSpace
+    . Text.Lazy.unlines
+    . map (mappend sep)
+    . Text.Lazy.lines
+
+readMarkdown :: Text -> Either PandocError Pandoc
+readMarkdown =
+  Unsafe.unsafePerformIO
+    . Pandoc.runIO
+    . Pandoc.readMarkdown (Pandoc.def { Pandoc.readerColumns = 2048 })
+
+-- readHTML :: Text -> Either PandocError Pandoc
+-- readHTML =
+--   Unsafe.unsafePerformIO
+--     . Pandoc.runIO
+--     . Pandoc.readHtml (Pandoc.def { Pandoc.readerColumns = 2048 })
+
+writeHaddock :: Pandoc -> Either PandocError Text
+writeHaddock =
+  Unsafe.unsafePerformIO
+    . Pandoc.runIO
+    . Pandoc.writeHaddock options
+ where
+  options =
+    Pandoc.def
+      { Pandoc.writerWrapText = Pandoc.WrapAuto
+      , Pandoc.writerColumns = 2048
+      }

@@ -87,7 +87,7 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     object p (Obj aps ps) =
       Obj
         <$> traverse (localSchema p "additional") aps
-        <*> Map.traverseWithKey (localSchema p) ps
+        <*> Map.traverseWithKey (localSchema (p <> "_")) ps
 
     name i p xs
       | Just x <- i ^. iId = pure x
@@ -182,12 +182,18 @@ method qs suf m@Method {..} = do
 
 insert :: Global -> Schema Global -> AST Global
 insert g s = do
+  -- FIXME: With the changes to auto-case-insensitive global names which were
+  -- actually generating invalid type references, this will no longer detect
+  -- generated property names (lowercase) would clash with top-level types.
   ms <- uses schemas (Map.lookup g)
   n <- use sCanonicalName
+
   case ms of
     Just s' | s /= s' -> throwError (exists n s')
     _ -> pure ()
+
   schemas %= Map.insert g s
+
   pure g
   where
     exists n s' =

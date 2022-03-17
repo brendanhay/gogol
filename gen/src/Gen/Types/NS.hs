@@ -19,13 +19,12 @@ import Data.String
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Manipulate
-import Gen.Text
 
 newtype NS = NS {unNS :: [Text]}
   deriving (Eq, Ord, Show)
 
 mkNS :: Text -> NS
-mkNS = NS . map (upperAcronym . upperHead) . Text.split (== '.')
+mkNS = NS . map upperHead . Text.split (== '.')
 
 instance IsString NS where
   fromString "" = mempty

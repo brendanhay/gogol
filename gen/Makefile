@@ -31,8 +31,9 @@ gen: $(BIN)/gogol-gen $(MODEL_DIR)
 
 format:
 	@echo -e '\nFormatting...'
-	@find $(wildcard $(OUT_DIR)/gogol-*/gen) -type f -name '*.hs' -print0 | xargs -0 ormolu -i
-	@find $(wildcard $(OUT_DIR)/gogol-*) -type f -name '*.cabal' -print0 | xargs -0 cabal-fmt -i
+	@find $(wildcard $(OUT_DIR)/gogol-*) -type f -name '*.cabal' -printf ' -> %p\n' -exec cabal-fmt -i {} \;
+	@find $(wildcard $(OUT_DIR)/gogol-*/gen) -type f -name '*.hs' -printf ' -> %p\n' -exec ormolu -i {} \;
+	@echo "Formatting completed."
 
 $(BIN)/gogol-gen: $(BIN)
 	stack build gogol-gen --nix --copy-bins --local-bin-path $(BIN)

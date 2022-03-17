@@ -43,6 +43,9 @@ executable gogol-gen
     -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates
     -funbox-strict-fields
 
+  default-extensions:
+    StrictData
+
   build-depends:
     , aeson                 >=1
     , attoparsec

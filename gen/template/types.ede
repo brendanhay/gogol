@@ -24,7 +24,7 @@ module {{ moduleName }}
     {% when "prod" %}
 
     -- * {{ schema.value.name }}
-    , {{ schema.value.name }}
+    , {{ schema.value.name }} (..)
     , {{ schema.value.ctor.name }}
     {% when "sum" %}
 

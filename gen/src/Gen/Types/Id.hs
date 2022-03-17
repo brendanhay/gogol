@@ -85,7 +85,7 @@ mname abrv (Suffix suf) (Global g) =
       | otherwise = x : xs
       where
         e = Text.replace "." "" abrv
-        x : xs = map (upperAcronym . toPascal) g
+        x : xs = map toPascal g
 
 dname' :: Global -> Name ()
 dname' g =
@@ -110,7 +110,6 @@ cname =
     . mappend "new"
     . upperHead
     . Text.dropWhile separator
-    . lowerFirstAcronym
     . global
 
 bname :: Prefix -> Text -> Name ()
@@ -148,15 +147,13 @@ instance Semigroup Prefix where
   Prefix a <> Prefix b = Prefix (a <> b)
 
 newtype Global = Global {unsafeGlobal :: [Text]}
-  deriving (Ord, Show, Generic)
+  deriving (Eq, Ord, Show, Generic)
 
-instance Eq Global where
-  Global xs == Global ys = on (==) f xs ys
-    where
-      f = CI.mk . mconcat
+instance Semigroup Global where
+  Global xs <> Global ys = Global (xs <> ys)
 
 instance Hashable Global where
-  hashWithSalt salt (Global g) = foldl' hashWithSalt salt (map CI.mk g)
+  hashWithSalt salt (Global g) = foldl' hashWithSalt salt g
 
 instance IsString Global where
   fromString = mkGlobal . fromString
@@ -194,7 +191,7 @@ mkGlobal :: Text -> Global
 mkGlobal = Global . Text.split (== '.')
 
 global :: Global -> Text
-global (Global g) = foldMap (upperAcronym . upperHead) g
+global (Global g) = foldMap upperHead g
 
 commasep :: Global -> Text
 commasep = mconcat . intersperse "." . unsafeGlobal

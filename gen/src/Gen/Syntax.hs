@@ -451,6 +451,7 @@ jsonDecls g p (Map.toList -> rs) = [from', to']
                     ctorE g (map decode rs)
             ]
         )
+
     decode (l, s)
       | _additional s = app (var "parseJSONObject") (var "o")
       | Just x <- def s = defJS l x
@@ -487,12 +488,21 @@ jsonDecls g p (Map.toList -> rs) = [from', to']
     emptyObj = var "emptyObject"
 
     encode (l, s)
-      | TMaybe {} <- _type s = infixApp (paren (app n o)) "<$>" a
-      | otherwise = app (var "Just") (infixApp n ".=" a)
+      | text && optional = infixApp (infixApp (paren (app n o)) "." (var "AsText")) "<$>" a
+      | optional = infixApp (paren (app n o)) "<$>" a
+      | text = var "Just" `app` infixApp n ".=" (var "AsText" `app` a)
+      | otherwise = var "Just" `app` infixApp n ".=" a
       where
         n = fstr l
-        a = var (fname p l)
         o = var ".="
+        a = var (fname p l)
+
+        text = textual (_type s)
+
+        optional =
+           case _type s of
+             TMaybe {} -> True
+             _other  -> False
 
 wildcardD ::
   String ->
@@ -582,36 +592,10 @@ fieldUpdate p l s = FieldUpdate () (UnQual () (fname p l)) rhs
     rhs
       | Just x <- def s, s ^. iRepeated = listE [x]
       | Just x <- def s = x
-      | Just x <- iso (_type s) = infixApp x "#" v
       | parameter s = v
       | otherwise = var (name "Nothing")
 
     v = var (pname p l)
-
-lensSig :: Global -> Prefix -> Local -> Solved -> Decl ()
-lensSig n p l s =
-  TypeSig () [lname p l] $
-    TyApp
-      ()
-      (TyApp () (TyCon () "Lens'") (tycon n))
-      (externalType (_type s))
-
-lensDecl :: Prefix -> Local -> Solved -> Decl ()
-lensDecl p l s = sfun (lname p l) [] (UnGuardedRhs () rhs) noBinds
-  where
-    f = fname p l
-    t = _type s
-
-    rhs =
-      mapping t $
-        app
-          (app (var "lens") (var f))
-          ( paren
-              ( lamE
-                  [pvar "s", pvar "a"]
-                  (RecUpdate () (var "s") [FieldUpdate () (UnQual () f) (var "a")])
-              )
-          )
 
 parameters :: [Solved] -> [Type ()]
 parameters = map (externalType . _type) . filter parameter
@@ -663,14 +647,14 @@ externalLit = \case
   Time -> TyCon () "TimeOfDay"
   Date -> TyCon () "Day"
   DateTime -> TyCon () "UTCTime"
-  Nat -> TyCon () "Natural"
-  Float -> TyCon () "Double"
-  Double -> TyCon () "Double"
   Byte -> TyCon () "ByteString"
-  UInt32 -> TyCon () "Word32"
-  UInt64 -> TyCon () "Word64"
-  Int32 -> TyCon () "Int32"
-  Int64 -> TyCon () "Int64"
+  Natural {} -> TyCon () "Natural"
+  Float {} -> TyCon () "Double"
+  Double {} -> TyCon () "Double"
+  UInt32 {} -> TyCon () "Word32"
+  UInt64 {} -> TyCon () "Word64"
+  Int32 {} -> TyCon () "Int32"
+  Int64 {} -> TyCon () "Int64"
   Alt t -> TyCon () (unqual (Text.unpack t))
   RqBody -> TyCon () "RequestBody"
   RsBody -> TyCon () "Stream"
@@ -685,14 +669,14 @@ internalLit = \case
   Time -> TyCon () "Time'"
   Date -> TyCon () "Date'"
   DateTime -> TyCon () "DateTime'"
-  Nat -> TyApp () (TyCon () "Textual") (TyCon () "Nat")
-  Float -> TyApp () (TyCon () "Textual") (TyCon () "Double")
-  Double -> TyApp () (TyCon () "Textual") (TyCon () "Double")
   Byte -> TyCon () "Bytes"
-  UInt32 -> TyApp () (TyCon () "Textual") (TyCon () "Word32")
-  UInt64 -> TyApp () (TyCon () "Textual") (TyCon () "Word64")
-  Int32 -> TyApp () (TyCon () "Textual") (TyCon () "Int32")
-  Int64 -> TyApp () (TyCon () "Textual") (TyCon () "Int64")
+  Natural {} -> TyCon () "Natural"
+  Float {} -> TyCon () "Double"
+  Double {} -> TyCon () "Double"
+  UInt32 {} -> TyCon () "Word32"
+  UInt64 {} -> TyCon () "Word64"
+  Int32 {} -> TyCon () "Int32"
+  Int64 {} -> TyCon () "Int64"
   Alt t -> TyCon () (unqual (Text.unpack t))
   RqBody -> TyCon () "RequestBody"
   RsBody -> TyCon () "Stream"
@@ -700,34 +684,21 @@ internalLit = \case
   GFieldMask -> TyCon () "GFieldMask"
   GDuration -> TyCon () "GDuration"
 
-mapping :: TType -> Exp () -> Exp ()
-mapping t e = infixE e "." (go t)
-  where
-    go = \case
-      TMaybe x@TList {} -> var "_Default" : go x
-      TMaybe x -> nest (go x)
-      x -> maybeToList (iso x)
-
-    nest [] = []
-    nest (x : xs) = [app (var "mapping") (infixE x "." xs)]
-
-iso :: TType -> Maybe (Exp ())
-iso = \case
-  TList {} -> Just (var "_Coerce")
-  TMap {} -> Just (var "_Coerce")
-  TLit Nat -> Just (var "_Coerce")
-  TLit Time -> Just (var "_Time")
-  TLit Date -> Just (var "_Date")
-  TLit DateTime -> Just (var "_DateTime")
-  TLit GDuration -> Just (var "_GDuration")
-  TLit Float -> Just (var "_Coerce")
-  TLit Double -> Just (var "_Coerce")
-  TLit Byte -> Just (var "_Bytes")
-  TLit UInt32 -> Just (var "_Coerce")
-  TLit UInt64 -> Just (var "_Coerce")
-  TLit Int32 -> Just (var "_Coerce")
-  TLit Int64 -> Just (var "_Coerce")
-  _ -> Nothing
+textual :: TType -> Bool
+textual = \case
+  TType {} -> False
+  TList {} -> False
+  TMap {} -> False
+  TMaybe x -> textual x
+  TLit (Natural p) -> p
+  TLit (Float p) -> p
+  TLit (Double p) -> p
+  TLit (UInt32 p) -> p
+  TLit (UInt64 p) -> p
+  TLit (Int32 p) -> p
+  TLit (Int64 p) -> p
+  TLit (Int32 p) -> p
+  TLit _other -> False
 
 require :: TType -> TType
 require (TMaybe t) = t

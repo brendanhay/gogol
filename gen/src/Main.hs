@@ -14,6 +14,7 @@
 
 module Main (main) where
 
+import qualified Data.IORef as IORef
 import Control.Error
 import Control.Lens hiding ((<.>))
 import Control.Monad.State
@@ -130,11 +131,14 @@ main = do
   let ms = nub . sort $ map modelFromPath _optModels
       i = length ms
 
+  skipped <- IORef.newIORef []
+
   run $ do
     title "Initialising..." <* done
     title ("Loading templates from " % path) _optTemplates
 
     let load = readTemplate _optTemplates
+        skip = IORef.modifyIORef skipped . (:)
 
     tmpl <-
       Templates
@@ -148,51 +152,52 @@ main = do
         <* done
 
     title "Selecting new service models..."
+
     say ("Found " % int % " model specifications.") (length _optModels)
     say ("Selected " % int % " newest models.") i
+
     done
 
-    forM_ (zip [1 ..] ms) $ \(n, Model {..}) -> do
-      title
-        ("[" % int % "/" % int % "] model:" % stext)
-        (n :: Int)
-        i
-        modelName
+    forM_ (zip [1 :: Int ..] ms) $ \(n, Model {..}) -> do
+      let annexPath = _optAnnexes </> fromText modelName <.> "json"
 
-      let anx = _optAnnexes </> fromText modelName <.> "json"
-      p <- isFile anx
-      if not p
-        then
-          say
-            ("Skipping '" % stext % "' due to missing annex configuration.")
-            modelName
+      configured <- isFile annexPath
+
+      if not configured
+        then lift (skip modelName)
         else do
-          s <-
-            sequence
-              [ JS.load anx,
-                JS.load modelPath
-              ]
+          title ("[" % int % "/" % int % "] model:" % stext) n i modelName
+
+          service <-
+            sequence [JS.load annexPath, JS.load modelPath]
               >>= hoistEither . JS.parse . JS.merge
 
-          say
-            ("Successfully parsed '" % stext % "' API definition.")
-            modelName
+          say ("Successfully parsed '" % stext % "' API definition.") modelName
 
-          l <- hoistEither (runAST _optVersions s)
+          library <- hoistEither (runAST _optVersions service)
 
-          say ("Creating " % stext % " package.") (l ^. dTitle)
+          say ("Creating " % stext % " package.") (library ^. dTitle)
 
-          d <-
-            hoistEither (Tree.populate _optOutput tmpl l)
+          directory <-
+            hoistEither (Tree.populate _optOutput tmpl library)
               >>= Tree.fold createDir writeOrTouch
 
           say
             ("Successfully rendered " % stext % "-" % fver % " package")
-            (l ^. dName)
-            (l ^. libraryVersion)
+            (library ^. dName)
+            (library ^. libraryVersion)
 
-          copyDir _optStatic (Tree.root d)
+          copyDir _optStatic (Tree.root directory)
 
       done
 
-    title ("Successfully processed " % int % " models.") i
+    names <- lift (IORef.readIORef skipped)
+
+    title
+      ("Skipped " % int % " models due to missing annex configuration(s):\n " % list stext)
+      (length names)
+      names
+
+    done
+
+    title ("Successfully processed " % int % " configured models.") i

@@ -14,7 +14,11 @@
     , {{ field.value.name }} :: {{ field.value.type }}
 {% endif %}
 {% endfor %}
-    } {{ type.deriving }}
+{% if type.fields | empty %}
+{% else %}
+    }
+{% endif %}
+    {{ type.deriving }}
 
 {% if type.ctor.help %}
 {{ type.ctor.help }}

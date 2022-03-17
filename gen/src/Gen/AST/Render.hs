@@ -69,8 +69,8 @@ renderSchema s = go (_schema s)
         map (\(v, h) -> Branch (bname p v) v h) vs
 
     object i (Obj aps ps) = do
-      a <- traverse getSolved aps
-      b <- traverse getSolved ps
+      a <- traverse getSolved (aps :: Maybe Global)
+      b <- traverse getSolved (ps :: Map Local Global)
       let ab = setAdditional <$> a
           ts = maybe b (flip (Map.insert "addtional") b) ab
       prod ts
