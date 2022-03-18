@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,69 +36,64 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.deleteAccount@.
 module Gogol.IdentityToolkit.Relyingparty.DeleteAccount
-  ( -- * Resource
-    IdentityToolkitRelyingpartyDeleteAccountResource,
+    (
+    -- * Resource
+      IdentityToolkitRelyingpartyDeleteAccountResource
 
     -- ** Constructing a Request
-    newIdentityToolkitRelyingpartyDeleteAccount,
-    IdentityToolkitRelyingpartyDeleteAccount,
-  )
-where
+    , newIdentityToolkitRelyingpartyDeleteAccount
+    , IdentityToolkitRelyingpartyDeleteAccount
+    ) where
 
-import Gogol.IdentityToolkit.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IdentityToolkit.Types
 
 -- | A resource alias for @identitytoolkit.relyingparty.deleteAccount@ method which the
 -- 'IdentityToolkitRelyingpartyDeleteAccount' request conforms to.
-type IdentityToolkitRelyingpartyDeleteAccountResource =
-  "identitytoolkit"
-    Core.:> "v3"
-    Core.:> "relyingparty"
-    Core.:> "deleteAccount"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              IdentitytoolkitRelyingpartyDeleteAccountRequest
-    Core.:> Core.Post '[Core.JSON] DeleteAccountResponse
+type IdentityToolkitRelyingpartyDeleteAccountResource
+     =
+     "identitytoolkit" Core.:>
+       "v3" Core.:>
+         "relyingparty" Core.:>
+           "deleteAccount" Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON]
+                 IdentitytoolkitRelyingpartyDeleteAccountRequest
+                 Core.:> Core.Post '[Core.JSON] DeleteAccountResponse
 
 -- | Delete user account.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartyDeleteAccount' smart constructor.
 newtype IdentityToolkitRelyingpartyDeleteAccount = IdentityToolkitRelyingpartyDeleteAccount
-  { -- | Multipart request metadata.
-    payload :: IdentitytoolkitRelyingpartyDeleteAccountRequest
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: IdentitytoolkitRelyingpartyDeleteAccountRequest
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartyDeleteAccount' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartyDeleteAccount ::
-  -- |  Multipart request metadata. See 'payload'.
-  IdentitytoolkitRelyingpartyDeleteAccountRequest ->
-  IdentityToolkitRelyingpartyDeleteAccount
+newIdentityToolkitRelyingpartyDeleteAccount 
+    ::  IdentitytoolkitRelyingpartyDeleteAccountRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> IdentityToolkitRelyingpartyDeleteAccount
 newIdentityToolkitRelyingpartyDeleteAccount payload =
   IdentityToolkitRelyingpartyDeleteAccount {payload = payload}
 
-instance
-  Core.GoogleRequest
-    IdentityToolkitRelyingpartyDeleteAccount
-  where
-  type
-    Rs IdentityToolkitRelyingpartyDeleteAccount =
-      DeleteAccountResponse
-  type
-    Scopes IdentityToolkitRelyingpartyDeleteAccount =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    IdentityToolkitRelyingpartyDeleteAccount {..} =
-      go
-        (Core.Just Core.AltJSON)
-        payload
-        identityToolkitService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IdentityToolkitRelyingpartyDeleteAccountResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           IdentityToolkitRelyingpartyDeleteAccount
+         where
+        type Rs IdentityToolkitRelyingpartyDeleteAccount =
+             DeleteAccountResponse
+        type Scopes IdentityToolkitRelyingpartyDeleteAccount
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          IdentityToolkitRelyingpartyDeleteAccount{..}
+          = go (Core.Just Core.AltJSON) payload
+              identityToolkitService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           IdentityToolkitRelyingpartyDeleteAccountResource)
+                      Core.mempty
+

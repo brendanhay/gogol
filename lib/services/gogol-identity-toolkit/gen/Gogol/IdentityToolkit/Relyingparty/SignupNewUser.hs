@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,69 +36,64 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.signupNewUser@.
 module Gogol.IdentityToolkit.Relyingparty.SignupNewUser
-  ( -- * Resource
-    IdentityToolkitRelyingpartySignupNewUserResource,
+    (
+    -- * Resource
+      IdentityToolkitRelyingpartySignupNewUserResource
 
     -- ** Constructing a Request
-    newIdentityToolkitRelyingpartySignupNewUser,
-    IdentityToolkitRelyingpartySignupNewUser,
-  )
-where
+    , newIdentityToolkitRelyingpartySignupNewUser
+    , IdentityToolkitRelyingpartySignupNewUser
+    ) where
 
-import Gogol.IdentityToolkit.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IdentityToolkit.Types
 
 -- | A resource alias for @identitytoolkit.relyingparty.signupNewUser@ method which the
 -- 'IdentityToolkitRelyingpartySignupNewUser' request conforms to.
-type IdentityToolkitRelyingpartySignupNewUserResource =
-  "identitytoolkit"
-    Core.:> "v3"
-    Core.:> "relyingparty"
-    Core.:> "signupNewUser"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              IdentitytoolkitRelyingpartySignupNewUserRequest
-    Core.:> Core.Post '[Core.JSON] SignupNewUserResponse
+type IdentityToolkitRelyingpartySignupNewUserResource
+     =
+     "identitytoolkit" Core.:>
+       "v3" Core.:>
+         "relyingparty" Core.:>
+           "signupNewUser" Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON]
+                 IdentitytoolkitRelyingpartySignupNewUserRequest
+                 Core.:> Core.Post '[Core.JSON] SignupNewUserResponse
 
 -- | Signup new user.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartySignupNewUser' smart constructor.
 newtype IdentityToolkitRelyingpartySignupNewUser = IdentityToolkitRelyingpartySignupNewUser
-  { -- | Multipart request metadata.
-    payload :: IdentitytoolkitRelyingpartySignupNewUserRequest
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: IdentitytoolkitRelyingpartySignupNewUserRequest
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartySignupNewUser' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartySignupNewUser ::
-  -- |  Multipart request metadata. See 'payload'.
-  IdentitytoolkitRelyingpartySignupNewUserRequest ->
-  IdentityToolkitRelyingpartySignupNewUser
+newIdentityToolkitRelyingpartySignupNewUser 
+    ::  IdentitytoolkitRelyingpartySignupNewUserRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> IdentityToolkitRelyingpartySignupNewUser
 newIdentityToolkitRelyingpartySignupNewUser payload =
   IdentityToolkitRelyingpartySignupNewUser {payload = payload}
 
-instance
-  Core.GoogleRequest
-    IdentityToolkitRelyingpartySignupNewUser
-  where
-  type
-    Rs IdentityToolkitRelyingpartySignupNewUser =
-      SignupNewUserResponse
-  type
-    Scopes IdentityToolkitRelyingpartySignupNewUser =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    IdentityToolkitRelyingpartySignupNewUser {..} =
-      go
-        (Core.Just Core.AltJSON)
-        payload
-        identityToolkitService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IdentityToolkitRelyingpartySignupNewUserResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           IdentityToolkitRelyingpartySignupNewUser
+         where
+        type Rs IdentityToolkitRelyingpartySignupNewUser =
+             SignupNewUserResponse
+        type Scopes IdentityToolkitRelyingpartySignupNewUser
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          IdentityToolkitRelyingpartySignupNewUser{..}
+          = go (Core.Just Core.AltJSON) payload
+              identityToolkitService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           IdentityToolkitRelyingpartySignupNewUserResource)
+                      Core.mempty
+

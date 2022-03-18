@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,72 +36,68 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.downloadAccount@.
 module Gogol.IdentityToolkit.Relyingparty.DownloadAccount
-  ( -- * Resource
-    IdentityToolkitRelyingpartyDownloadAccountResource,
+    (
+    -- * Resource
+      IdentityToolkitRelyingpartyDownloadAccountResource
 
     -- ** Constructing a Request
-    newIdentityToolkitRelyingpartyDownloadAccount,
-    IdentityToolkitRelyingpartyDownloadAccount,
-  )
-where
+    , newIdentityToolkitRelyingpartyDownloadAccount
+    , IdentityToolkitRelyingpartyDownloadAccount
+    ) where
 
-import Gogol.IdentityToolkit.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IdentityToolkit.Types
 
 -- | A resource alias for @identitytoolkit.relyingparty.downloadAccount@ method which the
 -- 'IdentityToolkitRelyingpartyDownloadAccount' request conforms to.
-type IdentityToolkitRelyingpartyDownloadAccountResource =
-  "identitytoolkit"
-    Core.:> "v3"
-    Core.:> "relyingparty"
-    Core.:> "downloadAccount"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              IdentitytoolkitRelyingpartyDownloadAccountRequest
-    Core.:> Core.Post '[Core.JSON] DownloadAccountResponse
+type IdentityToolkitRelyingpartyDownloadAccountResource
+     =
+     "identitytoolkit" Core.:>
+       "v3" Core.:>
+         "relyingparty" Core.:>
+           "downloadAccount" Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON]
+                 IdentitytoolkitRelyingpartyDownloadAccountRequest
+                 Core.:>
+                 Core.Post '[Core.JSON] DownloadAccountResponse
 
 -- | Batch download user accounts.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartyDownloadAccount' smart constructor.
 newtype IdentityToolkitRelyingpartyDownloadAccount = IdentityToolkitRelyingpartyDownloadAccount
-  { -- | Multipart request metadata.
-    payload :: IdentitytoolkitRelyingpartyDownloadAccountRequest
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: IdentitytoolkitRelyingpartyDownloadAccountRequest
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartyDownloadAccount' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartyDownloadAccount ::
-  -- |  Multipart request metadata. See 'payload'.
-  IdentitytoolkitRelyingpartyDownloadAccountRequest ->
-  IdentityToolkitRelyingpartyDownloadAccount
+newIdentityToolkitRelyingpartyDownloadAccount 
+    ::  IdentitytoolkitRelyingpartyDownloadAccountRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> IdentityToolkitRelyingpartyDownloadAccount
 newIdentityToolkitRelyingpartyDownloadAccount payload =
   IdentityToolkitRelyingpartyDownloadAccount {payload = payload}
 
-instance
-  Core.GoogleRequest
-    IdentityToolkitRelyingpartyDownloadAccount
-  where
-  type
-    Rs IdentityToolkitRelyingpartyDownloadAccount =
-      DownloadAccountResponse
-  type
-    Scopes
-      IdentityToolkitRelyingpartyDownloadAccount =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
-  requestClient
-    IdentityToolkitRelyingpartyDownloadAccount {..} =
-      go
-        (Core.Just Core.AltJSON)
-        payload
-        identityToolkitService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IdentityToolkitRelyingpartyDownloadAccountResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           IdentityToolkitRelyingpartyDownloadAccount
+         where
+        type Rs IdentityToolkitRelyingpartyDownloadAccount =
+             DownloadAccountResponse
+        type Scopes
+               IdentityToolkitRelyingpartyDownloadAccount
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
+        requestClient
+          IdentityToolkitRelyingpartyDownloadAccount{..}
+          = go (Core.Just Core.AltJSON) payload
+              identityToolkitService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           IdentityToolkitRelyingpartyDownloadAccountResource)
+                      Core.mempty
+
