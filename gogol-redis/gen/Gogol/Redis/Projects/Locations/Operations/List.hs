@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Operations.List
+-- Module      : Gogol.Redis.Projects.Locations.Operations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists operations that match the specified filter in the request. If the server doesn\'t support this method, it returns @UNIMPLEMENTED@. NOTE: the @name@ binding allows API services to override the binding to use different resource name schemes, such as @users\/*\/operations@. To override the binding, API services can add a binding such as @\"\/v1\/{name=users\/*}\/operations\"@ to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.operations.list@.
-module Network.Google.Redis.Projects.Locations.Operations.List
+module Gogol.Redis.Projects.Locations.Operations.List
   ( -- * Resource
     RedisProjectsLocationsOperationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.Operations.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.operations.list@ method which the
 -- 'RedisProjectsLocationsOperationsList' request conforms to.

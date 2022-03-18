@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Instances.Import
+-- Module      : Gogol.Redis.Projects.Locations.Instances.Upgrade
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Import a Redis RDB snapshot file from Cloud Storage into a Redis instance. Redis may stop serving during this operation. Instance state will be IMPORTING for entire operation. When complete, the instance will contain only data from the imported file. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
+-- Upgrades Redis instance to the newer Redis version specified in the request.
 --
--- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.import@.
-module Network.Google.Redis.Projects.Locations.Instances.Import
+-- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.upgrade@.
+module Gogol.Redis.Projects.Locations.Instances.Upgrade
   ( -- * Resource
-    RedisProjectsLocationsInstancesImportResource,
+    RedisProjectsLocationsInstancesUpgradeResource,
 
     -- ** Constructing a Request
-    newRedisProjectsLocationsInstancesImport,
-    RedisProjectsLocationsInstancesImport,
+    newRedisProjectsLocationsInstancesUpgrade,
+    RedisProjectsLocationsInstancesUpgrade,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
--- | A resource alias for @redis.projects.locations.instances.import@ method which the
--- 'RedisProjectsLocationsInstancesImport' request conforms to.
-type RedisProjectsLocationsInstancesImportResource =
+-- | A resource alias for @redis.projects.locations.instances.upgrade@ method which the
+-- 'RedisProjectsLocationsInstancesUpgrade' request conforms to.
+type RedisProjectsLocationsInstancesUpgradeResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "import" Core.Text
+    Core.:> Core.CaptureMode "name" "upgrade" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ImportInstanceRequest
+    Core.:> Core.ReqBody '[Core.JSON] UpgradeInstanceRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Import a Redis RDB snapshot file from Cloud Storage into a Redis instance. Redis may stop serving during this operation. Instance state will be IMPORTING for entire operation. When complete, the instance will contain only data from the imported file. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
+-- | Upgrades Redis instance to the newer Redis version specified in the request.
 --
--- /See:/ 'newRedisProjectsLocationsInstancesImport' smart constructor.
-data RedisProjectsLocationsInstancesImport = RedisProjectsLocationsInstancesImport
+-- /See:/ 'newRedisProjectsLocationsInstancesUpgrade' smart constructor.
+data RedisProjectsLocationsInstancesUpgrade = RedisProjectsLocationsInstancesUpgrade
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -69,7 +69,7 @@ data RedisProjectsLocationsInstancesImport = RedisProjectsLocationsInstancesImpo
     -- | Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: ImportInstanceRequest,
+    payload :: UpgradeInstanceRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,15 +77,15 @@ data RedisProjectsLocationsInstancesImport = RedisProjectsLocationsInstancesImpo
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RedisProjectsLocationsInstancesImport' with the minimum fields required to make a request.
-newRedisProjectsLocationsInstancesImport ::
+-- | Creates a value of 'RedisProjectsLocationsInstancesUpgrade' with the minimum fields required to make a request.
+newRedisProjectsLocationsInstancesUpgrade ::
   -- |  Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  ImportInstanceRequest ->
-  RedisProjectsLocationsInstancesImport
-newRedisProjectsLocationsInstancesImport name payload =
-  RedisProjectsLocationsInstancesImport
+  UpgradeInstanceRequest ->
+  RedisProjectsLocationsInstancesUpgrade
+newRedisProjectsLocationsInstancesUpgrade name payload =
+  RedisProjectsLocationsInstancesUpgrade
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -97,16 +97,16 @@ newRedisProjectsLocationsInstancesImport name payload =
 
 instance
   Core.GoogleRequest
-    RedisProjectsLocationsInstancesImport
+    RedisProjectsLocationsInstancesUpgrade
   where
   type
-    Rs RedisProjectsLocationsInstancesImport =
+    Rs RedisProjectsLocationsInstancesUpgrade =
       Operation
   type
-    Scopes RedisProjectsLocationsInstancesImport =
+    Scopes RedisProjectsLocationsInstancesUpgrade =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    RedisProjectsLocationsInstancesImport {..} =
+    RedisProjectsLocationsInstancesUpgrade {..} =
       go
         name
         xgafv
@@ -122,6 +122,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  RedisProjectsLocationsInstancesImportResource
+                  RedisProjectsLocationsInstancesUpgradeResource
             )
             Core.mempty

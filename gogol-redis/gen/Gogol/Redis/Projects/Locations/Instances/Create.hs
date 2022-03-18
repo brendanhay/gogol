@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Instances.Create
+-- Module      : Gogol.Redis.Projects.Locations.Instances.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a Redis instance based on the specified tier and memory size. By default, the instance is accessible from the project\'s <https://cloud.google.com/vpc/docs/vpc default network>. The creation is executed asynchronously and callers may check the returned operation to track its progress. Once the operation is completed the Redis instance will be fully functional. Completed longrunning.Operation will contain the new instance object in the response field. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.create@.
-module Network.Google.Redis.Projects.Locations.Instances.Create
+module Gogol.Redis.Projects.Locations.Instances.Create
   ( -- * Resource
     RedisProjectsLocationsInstancesCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.Instances.Create
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.create@ method which the
 -- 'RedisProjectsLocationsInstancesCreate' request conforms to.

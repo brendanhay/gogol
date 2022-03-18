@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Instances.Patch
+-- Module      : Gogol.Redis.Projects.Locations.Instances.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates the metadata and configuration of a specific Redis instance. Completed longrunning.Operation will contain the new instance object in the response field. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
 --
 -- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.patch@.
-module Network.Google.Redis.Projects.Locations.Instances.Patch
+module Gogol.Redis.Projects.Locations.Instances.Patch
   ( -- * Resource
     RedisProjectsLocationsInstancesPatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Redis.Projects.Locations.Instances.Patch
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.patch@ method which the
 -- 'RedisProjectsLocationsInstancesPatch' request conforms to.

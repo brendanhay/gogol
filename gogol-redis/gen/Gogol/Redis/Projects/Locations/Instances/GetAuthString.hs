@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Instances.Upgrade
+-- Module      : Gogol.Redis.Projects.Locations.Instances.GetAuthString
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Upgrades Redis instance to the newer Redis version specified in the request.
+-- Gets the AUTH string for a Redis instance. If AUTH is not enabled for the instance the response will be empty. This information is not included in the details returned to GetInstance.
 --
--- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.upgrade@.
-module Network.Google.Redis.Projects.Locations.Instances.Upgrade
+-- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.getAuthString@.
+module Gogol.Redis.Projects.Locations.Instances.GetAuthString
   ( -- * Resource
-    RedisProjectsLocationsInstancesUpgradeResource,
+    RedisProjectsLocationsInstancesGetAuthStringResource,
 
     -- ** Constructing a Request
-    newRedisProjectsLocationsInstancesUpgrade,
-    RedisProjectsLocationsInstancesUpgrade,
+    newRedisProjectsLocationsInstancesGetAuthString,
+    RedisProjectsLocationsInstancesGetAuthString,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
--- | A resource alias for @redis.projects.locations.instances.upgrade@ method which the
--- 'RedisProjectsLocationsInstancesUpgrade' request conforms to.
-type RedisProjectsLocationsInstancesUpgradeResource =
+-- | A resource alias for @redis.projects.locations.instances.getAuthString@ method which the
+-- 'RedisProjectsLocationsInstancesGetAuthString' request conforms to.
+type RedisProjectsLocationsInstancesGetAuthStringResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "upgrade" Core.Text
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> "authString"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] UpgradeInstanceRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+    Core.:> Core.Get '[Core.JSON] InstanceAuthString
 
--- | Upgrades Redis instance to the newer Redis version specified in the request.
+-- | Gets the AUTH string for a Redis instance. If AUTH is not enabled for the instance the response will be empty. This information is not included in the details returned to GetInstance.
 --
--- /See:/ 'newRedisProjectsLocationsInstancesUpgrade' smart constructor.
-data RedisProjectsLocationsInstancesUpgrade = RedisProjectsLocationsInstancesUpgrade
+-- /See:/ 'newRedisProjectsLocationsInstancesGetAuthString' smart constructor.
+data RedisProjectsLocationsInstancesGetAuthString = RedisProjectsLocationsInstancesGetAuthString
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,8 +68,6 @@ data RedisProjectsLocationsInstancesUpgrade = RedisProjectsLocationsInstancesUpg
     callback :: (Core.Maybe Core.Text),
     -- | Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region.
     name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: UpgradeInstanceRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,36 +75,34 @@ data RedisProjectsLocationsInstancesUpgrade = RedisProjectsLocationsInstancesUpg
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RedisProjectsLocationsInstancesUpgrade' with the minimum fields required to make a request.
-newRedisProjectsLocationsInstancesUpgrade ::
+-- | Creates a value of 'RedisProjectsLocationsInstancesGetAuthString' with the minimum fields required to make a request.
+newRedisProjectsLocationsInstancesGetAuthString ::
   -- |  Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region. See 'name'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  UpgradeInstanceRequest ->
-  RedisProjectsLocationsInstancesUpgrade
-newRedisProjectsLocationsInstancesUpgrade name payload =
-  RedisProjectsLocationsInstancesUpgrade
+  RedisProjectsLocationsInstancesGetAuthString
+newRedisProjectsLocationsInstancesGetAuthString name =
+  RedisProjectsLocationsInstancesGetAuthString
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    RedisProjectsLocationsInstancesUpgrade
+    RedisProjectsLocationsInstancesGetAuthString
   where
   type
-    Rs RedisProjectsLocationsInstancesUpgrade =
-      Operation
+    Rs RedisProjectsLocationsInstancesGetAuthString =
+      InstanceAuthString
   type
-    Scopes RedisProjectsLocationsInstancesUpgrade =
+    Scopes
+      RedisProjectsLocationsInstancesGetAuthString =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    RedisProjectsLocationsInstancesUpgrade {..} =
+    RedisProjectsLocationsInstancesGetAuthString {..} =
       go
         name
         xgafv
@@ -115,13 +111,12 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         redisService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  RedisProjectsLocationsInstancesUpgradeResource
+                  RedisProjectsLocationsInstancesGetAuthStringResource
             )
             Core.mempty

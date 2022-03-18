@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Redis.Projects.Locations.Instances.GetAuthString
+-- Module      : Gogol.Redis.Projects.Locations.Instances.Export
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the AUTH string for a Redis instance. If AUTH is not enabled for the instance the response will be empty. This information is not included in the details returned to GetInstance.
+-- Export Redis instance data into a Redis RDB format file in Cloud Storage. Redis will continue serving during this operation. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
 --
--- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.getAuthString@.
-module Network.Google.Redis.Projects.Locations.Instances.GetAuthString
+-- /See:/ <https://cloud.google.com/memorystore/docs/redis/ Google Cloud Memorystore for Redis API Reference> for @redis.projects.locations.instances.export@.
+module Gogol.Redis.Projects.Locations.Instances.Export
   ( -- * Resource
-    RedisProjectsLocationsInstancesGetAuthStringResource,
+    RedisProjectsLocationsInstancesExportResource,
 
     -- ** Constructing a Request
-    newRedisProjectsLocationsInstancesGetAuthString,
-    RedisProjectsLocationsInstancesGetAuthString,
+    newRedisProjectsLocationsInstancesExport,
+    RedisProjectsLocationsInstancesExport,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Redis.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Redis.Types
 
--- | A resource alias for @redis.projects.locations.instances.getAuthString@ method which the
--- 'RedisProjectsLocationsInstancesGetAuthString' request conforms to.
-type RedisProjectsLocationsInstancesGetAuthStringResource =
+-- | A resource alias for @redis.projects.locations.instances.export@ method which the
+-- 'RedisProjectsLocationsInstancesExport' request conforms to.
+type RedisProjectsLocationsInstancesExportResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> "authString"
+    Core.:> Core.CaptureMode "name" "export" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] InstanceAuthString
+    Core.:> Core.ReqBody '[Core.JSON] ExportInstanceRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Gets the AUTH string for a Redis instance. If AUTH is not enabled for the instance the response will be empty. This information is not included in the details returned to GetInstance.
+-- | Export Redis instance data into a Redis RDB format file in Cloud Storage. Redis will continue serving during this operation. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
 --
--- /See:/ 'newRedisProjectsLocationsInstancesGetAuthString' smart constructor.
-data RedisProjectsLocationsInstancesGetAuthString = RedisProjectsLocationsInstancesGetAuthString
+-- /See:/ 'newRedisProjectsLocationsInstancesExport' smart constructor.
+data RedisProjectsLocationsInstancesExport = RedisProjectsLocationsInstancesExport
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,6 +68,8 @@ data RedisProjectsLocationsInstancesGetAuthString = RedisProjectsLocationsInstan
     callback :: (Core.Maybe Core.Text),
     -- | Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region.
     name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: ExportInstanceRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,34 +77,36 @@ data RedisProjectsLocationsInstancesGetAuthString = RedisProjectsLocationsInstan
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RedisProjectsLocationsInstancesGetAuthString' with the minimum fields required to make a request.
-newRedisProjectsLocationsInstancesGetAuthString ::
+-- | Creates a value of 'RedisProjectsLocationsInstancesExport' with the minimum fields required to make a request.
+newRedisProjectsLocationsInstancesExport ::
   -- |  Required. Redis instance resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ where @location_id@ refers to a GCP region. See 'name'.
   Core.Text ->
-  RedisProjectsLocationsInstancesGetAuthString
-newRedisProjectsLocationsInstancesGetAuthString name =
-  RedisProjectsLocationsInstancesGetAuthString
+  -- |  Multipart request metadata. See 'payload'.
+  ExportInstanceRequest ->
+  RedisProjectsLocationsInstancesExport
+newRedisProjectsLocationsInstancesExport name payload =
+  RedisProjectsLocationsInstancesExport
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    RedisProjectsLocationsInstancesGetAuthString
+    RedisProjectsLocationsInstancesExport
   where
   type
-    Rs RedisProjectsLocationsInstancesGetAuthString =
-      InstanceAuthString
+    Rs RedisProjectsLocationsInstancesExport =
+      Operation
   type
-    Scopes
-      RedisProjectsLocationsInstancesGetAuthString =
+    Scopes RedisProjectsLocationsInstancesExport =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    RedisProjectsLocationsInstancesGetAuthString {..} =
+    RedisProjectsLocationsInstancesExport {..} =
       go
         name
         xgafv
@@ -111,12 +115,13 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         redisService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  RedisProjectsLocationsInstancesGetAuthStringResource
+                  RedisProjectsLocationsInstancesExportResource
             )
             Core.mempty
