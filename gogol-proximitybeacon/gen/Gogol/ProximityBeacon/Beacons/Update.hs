@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Beacons.Update
+-- Module      : Gogol.ProximityBeacon.Beacons.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -31,7 +31,7 @@
 -- Changes to the beacon status via this method will be silently ignored. To update beacon status, use the separate methods on this API for activation, deactivation, and decommissioning. Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.update@.
-module Network.Google.ProximityBeacon.Beacons.Update
+module Gogol.ProximityBeacon.Beacons.Update
   ( -- * Resource
     ProximityBeaconBeaconsUpdateResource,
 
@@ -41,8 +41,8 @@ module Network.Google.ProximityBeacon.Beacons.Update
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.update@ method which the
 -- 'ProximityBeaconBeaconsUpdate' request conforms to.

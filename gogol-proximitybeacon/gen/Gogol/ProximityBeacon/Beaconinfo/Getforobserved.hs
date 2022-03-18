@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Beaconinfo.Getforobserved
+-- Module      : Gogol.ProximityBeacon.Beaconinfo.Getforobserved
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Given one or more beacon observations, returns any beacon information and attachments accessible to your application. Authorize by using the <https://developers.google.com/beacons/proximity/get-started#request_a_browser_api_key API key> for the application.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beaconinfo.getforobserved@.
-module Network.Google.ProximityBeacon.Beaconinfo.Getforobserved
+module Gogol.ProximityBeacon.Beaconinfo.Getforobserved
   ( -- * Resource
     ProximityBeaconBeaconinfoGetforobservedResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ProximityBeacon.Beaconinfo.Getforobserved
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beaconinfo.getforobserved@ method which the
 -- 'ProximityBeaconBeaconinfoGetforobserved' request conforms to.

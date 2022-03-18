@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon
+-- Module      : Gogol.ProximityBeacon
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Registers, manages, indexes, and searches beacons.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference>
-module Network.Google.ProximityBeacon
+module Gogol.ProximityBeacon
   ( -- * Configuration
     proximityBeaconService,
 
@@ -230,21 +230,21 @@ module Network.Google.ProximityBeacon
   )
 where
 
-import Network.Google.ProximityBeacon.Beaconinfo.Getforobserved
-import Network.Google.ProximityBeacon.Beacons.Activate
-import Network.Google.ProximityBeacon.Beacons.Attachments.BatchDelete
-import Network.Google.ProximityBeacon.Beacons.Attachments.Create
-import Network.Google.ProximityBeacon.Beacons.Attachments.Delete
-import Network.Google.ProximityBeacon.Beacons.Attachments.List
-import Network.Google.ProximityBeacon.Beacons.Deactivate
-import Network.Google.ProximityBeacon.Beacons.Decommission
-import Network.Google.ProximityBeacon.Beacons.Delete
-import Network.Google.ProximityBeacon.Beacons.Diagnostics.List
-import Network.Google.ProximityBeacon.Beacons.Get
-import Network.Google.ProximityBeacon.Beacons.List
-import Network.Google.ProximityBeacon.Beacons.Register
-import Network.Google.ProximityBeacon.Beacons.Update
-import Network.Google.ProximityBeacon.GetEidparams
-import Network.Google.ProximityBeacon.Namespaces.List
-import Network.Google.ProximityBeacon.Namespaces.Update
-import Network.Google.ProximityBeacon.Types
+import Gogol.ProximityBeacon.Beaconinfo.Getforobserved
+import Gogol.ProximityBeacon.Beacons.Activate
+import Gogol.ProximityBeacon.Beacons.Attachments.BatchDelete
+import Gogol.ProximityBeacon.Beacons.Attachments.Create
+import Gogol.ProximityBeacon.Beacons.Attachments.Delete
+import Gogol.ProximityBeacon.Beacons.Attachments.List
+import Gogol.ProximityBeacon.Beacons.Deactivate
+import Gogol.ProximityBeacon.Beacons.Decommission
+import Gogol.ProximityBeacon.Beacons.Delete
+import Gogol.ProximityBeacon.Beacons.Diagnostics.List
+import Gogol.ProximityBeacon.Beacons.Get
+import Gogol.ProximityBeacon.Beacons.List
+import Gogol.ProximityBeacon.Beacons.Register
+import Gogol.ProximityBeacon.Beacons.Update
+import Gogol.ProximityBeacon.GetEidparams
+import Gogol.ProximityBeacon.Namespaces.List
+import Gogol.ProximityBeacon.Namespaces.Update
+import Gogol.ProximityBeacon.Types

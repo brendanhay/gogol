@@ -19,34 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Namespaces.Update
+-- Module      : Gogol.ProximityBeacon.Namespaces.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the information about the specified namespace. Only the namespace visibility can be updated.
+-- Lists all attachment namespaces owned by your Google Developers Console project. Attachment data associated with a beacon must include a namespaced type, and the namespace must be owned by your project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.namespaces.update@.
-module Network.Google.ProximityBeacon.Namespaces.Update
+-- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __viewer__, __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
+--
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.namespaces.list@.
+module Gogol.ProximityBeacon.Namespaces.List
   ( -- * Resource
-    ProximityBeaconNamespacesUpdateResource,
+    ProximityBeaconNamespacesListResource,
 
     -- ** Constructing a Request
-    newProximityBeaconNamespacesUpdate,
-    ProximityBeaconNamespacesUpdate,
+    newProximityBeaconNamespacesList,
+    ProximityBeaconNamespacesList,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
--- | A resource alias for @proximitybeacon.namespaces.update@ method which the
--- 'ProximityBeaconNamespacesUpdate' request conforms to.
-type ProximityBeaconNamespacesUpdateResource =
+-- | A resource alias for @proximitybeacon.namespaces.list@ method which the
+-- 'ProximityBeaconNamespacesList' request conforms to.
+type ProximityBeaconNamespacesListResource =
   "v1beta1"
-    Core.:> Core.Capture "namespaceName" Core.Text
+    Core.:> "namespaces"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -54,24 +56,21 @@ type ProximityBeaconNamespacesUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Namespace
-    Core.:> Core.Put '[Core.JSON] Namespace
+    Core.:> Core.Get '[Core.JSON] ListNamespacesResponse
 
--- | Updates the information about the specified namespace. Only the namespace visibility can be updated.
+-- | Lists all attachment namespaces owned by your Google Developers Console project. Attachment data associated with a beacon must include a namespaced type, and the namespace must be owned by your project.
 --
--- /See:/ 'newProximityBeaconNamespacesUpdate' smart constructor.
-data ProximityBeaconNamespacesUpdate = ProximityBeaconNamespacesUpdate
+-- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __viewer__, __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
+--
+-- /See:/ 'newProximityBeaconNamespacesList' smart constructor.
+data ProximityBeaconNamespacesList = ProximityBeaconNamespacesList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of this namespace. Namespaces names have the format: \<code>namespaces\/\<var>namespace\<\/var>\<\/code>.
-    namespaceName :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Namespace,
-    -- | The project id of the namespace to update. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+    -- | The project id to list namespaces under. Optional.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,20 +79,14 @@ data ProximityBeaconNamespacesUpdate = ProximityBeaconNamespacesUpdate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ProximityBeaconNamespacesUpdate' with the minimum fields required to make a request.
-newProximityBeaconNamespacesUpdate ::
-  -- |  Resource name of this namespace. Namespaces names have the format: \<code>namespaces\/\<var>namespace\<\/var>\<\/code>. See 'namespaceName'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Namespace ->
-  ProximityBeaconNamespacesUpdate
-newProximityBeaconNamespacesUpdate namespaceName payload =
-  ProximityBeaconNamespacesUpdate
+-- | Creates a value of 'ProximityBeaconNamespacesList' with the minimum fields required to make a request.
+newProximityBeaconNamespacesList ::
+  ProximityBeaconNamespacesList
+newProximityBeaconNamespacesList =
+  ProximityBeaconNamespacesList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      namespaceName = namespaceName,
-      payload = payload,
       projectId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -101,15 +94,16 @@ newProximityBeaconNamespacesUpdate namespaceName payload =
 
 instance
   Core.GoogleRequest
-    ProximityBeaconNamespacesUpdate
+    ProximityBeaconNamespacesList
   where
-  type Rs ProximityBeaconNamespacesUpdate = Namespace
   type
-    Scopes ProximityBeaconNamespacesUpdate =
+    Rs ProximityBeaconNamespacesList =
+      ListNamespacesResponse
+  type
+    Scopes ProximityBeaconNamespacesList =
       '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
-  requestClient ProximityBeaconNamespacesUpdate {..} =
+  requestClient ProximityBeaconNamespacesList {..} =
     go
-      namespaceName
       xgafv
       accessToken
       callback
@@ -117,12 +111,11 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       proximityBeaconService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ProximityBeaconNamespacesUpdateResource
+              Core.Proxy ProximityBeaconNamespacesListResource
           )
           Core.mempty

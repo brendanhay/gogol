@@ -19,36 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ProximityBeacon.Namespaces.List
+-- Module      : Gogol.ProximityBeacon.Beacons.Register
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all attachment namespaces owned by your Google Developers Console project. Attachment data associated with a beacon must include a namespaced type, and the namespace must be owned by your project.
+-- Registers a previously unregistered beacon given its @advertisedId@. These IDs are unique within the system. An ID can be registered only once.
 --
--- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __viewer__, __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
+-- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.namespaces.list@.
-module Network.Google.ProximityBeacon.Namespaces.List
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.register@.
+module Gogol.ProximityBeacon.Beacons.Register
   ( -- * Resource
-    ProximityBeaconNamespacesListResource,
+    ProximityBeaconBeaconsRegisterResource,
 
     -- ** Constructing a Request
-    newProximityBeaconNamespacesList,
-    ProximityBeaconNamespacesList,
+    newProximityBeaconBeaconsRegister,
+    ProximityBeaconBeaconsRegister,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ProximityBeacon.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ProximityBeacon.Types
 
--- | A resource alias for @proximitybeacon.namespaces.list@ method which the
--- 'ProximityBeaconNamespacesList' request conforms to.
-type ProximityBeaconNamespacesListResource =
+-- | A resource alias for @proximitybeacon.beacons.register@ method which the
+-- 'ProximityBeaconBeaconsRegister' request conforms to.
+type ProximityBeaconBeaconsRegisterResource =
   "v1beta1"
-    Core.:> "namespaces"
+    Core.:> "beacons:register"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -56,21 +56,24 @@ type ProximityBeaconNamespacesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListNamespacesResponse
+    Core.:> Core.ReqBody '[Core.JSON] Beacon
+    Core.:> Core.Post '[Core.JSON] Beacon
 
--- | Lists all attachment namespaces owned by your Google Developers Console project. Attachment data associated with a beacon must include a namespaced type, and the namespace must be owned by your project.
+-- | Registers a previously unregistered beacon given its @advertisedId@. These IDs are unique within the system. An ID can be registered only once.
 --
--- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __viewer__, __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
+-- Authenticate using an <https://developers.google.com/identity/protocols/OAuth2 OAuth access token> from a signed-in user with __Is owner__ or __Can edit__ permissions in the Google Developers Console project.
 --
--- /See:/ 'newProximityBeaconNamespacesList' smart constructor.
-data ProximityBeaconNamespacesList = ProximityBeaconNamespacesList
+-- /See:/ 'newProximityBeaconBeaconsRegister' smart constructor.
+data ProximityBeaconBeaconsRegister = ProximityBeaconBeaconsRegister
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The project id to list namespaces under. Optional.
+    -- | Multipart request metadata.
+    payload :: Beacon,
+    -- | The project id of the project the beacon will be registered to. If the project id is not specified then the project making the request is used. Optional.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -79,14 +82,17 @@ data ProximityBeaconNamespacesList = ProximityBeaconNamespacesList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ProximityBeaconNamespacesList' with the minimum fields required to make a request.
-newProximityBeaconNamespacesList ::
-  ProximityBeaconNamespacesList
-newProximityBeaconNamespacesList =
-  ProximityBeaconNamespacesList
+-- | Creates a value of 'ProximityBeaconBeaconsRegister' with the minimum fields required to make a request.
+newProximityBeaconBeaconsRegister ::
+  -- |  Multipart request metadata. See 'payload'.
+  Beacon ->
+  ProximityBeaconBeaconsRegister
+newProximityBeaconBeaconsRegister payload =
+  ProximityBeaconBeaconsRegister
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      payload = payload,
       projectId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -94,15 +100,13 @@ newProximityBeaconNamespacesList =
 
 instance
   Core.GoogleRequest
-    ProximityBeaconNamespacesList
+    ProximityBeaconBeaconsRegister
   where
+  type Rs ProximityBeaconBeaconsRegister = Beacon
   type
-    Rs ProximityBeaconNamespacesList =
-      ListNamespacesResponse
-  type
-    Scopes ProximityBeaconNamespacesList =
+    Scopes ProximityBeaconBeaconsRegister =
       '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
-  requestClient ProximityBeaconNamespacesList {..} =
+  requestClient ProximityBeaconBeaconsRegister {..} =
     go
       xgafv
       accessToken
@@ -111,11 +115,12 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       proximityBeaconService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ProximityBeaconNamespacesListResource
+              Core.Proxy ProximityBeaconBeaconsRegisterResource
           )
           Core.mempty
