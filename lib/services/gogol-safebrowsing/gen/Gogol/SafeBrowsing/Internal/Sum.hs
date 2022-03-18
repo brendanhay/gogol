@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.SafeBrowsing.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_PLATFORMTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_PLATFORMTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_Windows,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_Linux,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_Android,
@@ -49,7 +60,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_Url,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_Executable,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_IPRANGE,
@@ -61,7 +73,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_THREATTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_THREATTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_Malware,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_SOCIALENGINEERING,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_UNWANTEDSOFTWARE,
@@ -84,7 +97,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_COMPRESSIONTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_COMPRESSIONTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_Raw,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_Rice,
         ..
@@ -92,7 +106,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_PLATFORMTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_PLATFORMTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_Windows,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_Linux,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_Android,
@@ -106,7 +121,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_RESPONSETYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_RESPONSETYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_PARTIALUPDATE,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_FULLUPDATE,
         ..
@@ -114,7 +130,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_Url,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_Executable,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_IPRANGE,
@@ -126,7 +143,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
-      ( GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_THREATTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_THREATTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_Malware,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_SOCIALENGINEERING,
         GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_UNWANTEDSOFTWARE,
@@ -149,7 +167,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType
     GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType
-      ( GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_COMPRESSIONTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_COMPRESSIONTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_Raw,
         GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_Rice,
         ..
@@ -157,7 +176,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatHit_PlatformType
     GoogleSecuritySafebrowsingV4ThreatHit_PlatformType
-      ( GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_PLATFORMTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_PLATFORMTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_Windows,
         GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_Linux,
         GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_Android,
@@ -171,7 +191,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
     GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
-      ( GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_THREATTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_THREATTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_Malware,
         GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_SOCIALENGINEERING,
         GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_UNWANTEDSOFTWARE,
@@ -194,7 +215,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type
     GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type
-      ( GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_THREATSOURCETYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_THREATSOURCETYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_MATCHINGURL,
         GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_TABURL,
         GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_TABREDIRECT,
@@ -204,7 +226,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem
     GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem
-      ( GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_PLATFORMTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_PLATFORMTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_Windows,
         GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_Linux,
         GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_Android,
@@ -218,7 +241,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem
     GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem
-      ( GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_THREATENTRYTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_THREATENTRYTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_Url,
         GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_Executable,
         GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_IPRANGE,
@@ -230,7 +254,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
     GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
-      ( GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_THREATTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_THREATTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_Malware,
         GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_SOCIALENGINEERING,
         GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_UNWANTEDSOFTWARE,
@@ -253,7 +278,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType
     GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType
-      ( GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_PLATFORMTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_PLATFORMTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_Windows,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_Linux,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_Android,
@@ -267,7 +293,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType
     GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType
-      ( GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_Url,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_Executable,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_IPRANGE,
@@ -279,7 +306,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
     GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
-      ( GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_THREATTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_THREATTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_Malware,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_SOCIALENGINEERING,
         GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_UNWANTEDSOFTWARE,
@@ -302,7 +330,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType
     GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType
-      ( GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_PLATFORMTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_PLATFORMTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_Windows,
         GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_Linux,
         GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_Android,
@@ -316,7 +345,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType
     GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType
-      ( GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_Url,
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_Executable,
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_IPRANGE,
@@ -328,7 +358,8 @@ module Gogol.SafeBrowsing.Internal.Sum
 
     -- * GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
     GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
-      ( GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_THREATTYPEUNSPECIFIED,
+      (
+        GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_THREATTYPEUNSPECIFIED,
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_Malware,
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_SOCIALENGINEERING,
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_UNWANTEDSOFTWARE,
@@ -348,23 +379,22 @@ module Gogol.SafeBrowsing.Internal.Sum
         GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_ACCURACYTIPS,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -377,21 +407,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The type of platform at risk by entries present in the list.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown platform.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_PLATFORMTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType
@@ -439,21 +468,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_ANYPLATFORM,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_ALLPLATFORMS,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType_Chrome,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_PlatformType #-}
 
 -- | The types of entries present in the list.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType
@@ -491,21 +519,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_CHROMEEXTENSION,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_Filename,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType_Cert,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatEntryType #-}
 
 -- | The type of threat posed by entries present in the list.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_THREATTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
@@ -598,20 +625,19 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_TRICKTOBILL,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_HIGHCONFIDENCEALLOWLIST,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_ACCURACYTIPS,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType #-}
 
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_COMPRESSIONTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem
@@ -629,21 +655,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_COMPRESSIONTYPEUNSPECIFIED,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_Raw,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem_Rice,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints_SupportedCompressionsItem #-}
 
 -- | The platform type for which data is returned.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown platform.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_PLATFORMTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType
@@ -691,21 +716,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_ANYPLATFORM,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_ALLPLATFORMS,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType_Chrome,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_PlatformType #-}
 
 -- | The type of response. This may indicate that an action is required by the client when the response is received.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_RESPONSETYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType
@@ -723,21 +747,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_RESPONSETYPEUNSPECIFIED,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_PARTIALUPDATE,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType_FULLUPDATE,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ResponseType #-}
 
 -- | The format of the threats.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType
@@ -775,21 +798,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_CHROMEEXTENSION,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_Filename,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType_Cert,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatEntryType #-}
 
 -- | The threat type for which data is returned.
-newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType {fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType { fromGoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_THREATTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
@@ -882,21 +904,20 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_TRICKTOBILL,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_HIGHCONFIDENCEALLOWLIST,
   GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_ACCURACYTIPS,
-  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
-  #-}
+  GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType #-}
 
 -- | The compression type for the entries in this set.
-newtype GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType = GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType {fromGoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType = GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType { fromGoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_COMPRESSIONTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType
@@ -914,21 +935,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_Rice = Google
   GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_COMPRESSIONTYPEUNSPECIFIED,
   GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_Raw,
   GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType_Rice,
-  GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatEntrySet_CompressionType #-}
 
 -- | The platform type reported.
-newtype GoogleSecuritySafebrowsingV4ThreatHit_PlatformType = GoogleSecuritySafebrowsingV4ThreatHit_PlatformType {fromGoogleSecuritySafebrowsingV4ThreatHit_PlatformType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatHit_PlatformType = GoogleSecuritySafebrowsingV4ThreatHit_PlatformType { fromGoogleSecuritySafebrowsingV4ThreatHit_PlatformType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown platform.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_PLATFORMTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatHit_PlatformType
@@ -976,21 +996,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_Chrome = GoogleSecuri
   GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_ANYPLATFORM,
   GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_ALLPLATFORMS,
   GoogleSecuritySafebrowsingV4ThreatHit_PlatformType_Chrome,
-  GoogleSecuritySafebrowsingV4ThreatHit_PlatformType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatHit_PlatformType #-}
 
 -- | The threat type reported.
-newtype GoogleSecuritySafebrowsingV4ThreatHit_ThreatType = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType {fromGoogleSecuritySafebrowsingV4ThreatHit_ThreatType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatHit_ThreatType = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType { fromGoogleSecuritySafebrowsingV4ThreatHit_ThreatType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_THREATTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
@@ -1083,21 +1102,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_ACCURACYTIPS = GoogleSe
   GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_TRICKTOBILL,
   GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_HIGHCONFIDENCEALLOWLIST,
   GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_ACCURACYTIPS,
-  GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatHit_ThreatType #-}
 
 -- | The type of source reported.
-newtype GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type = GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type {fromGoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type = GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type { fromGoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_THREATSOURCETYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type
@@ -1125,20 +1143,19 @@ pattern GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_TABRESOURCE = Goo
   GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_TABURL,
   GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_TABREDIRECT,
   GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type_TABRESOURCE,
-  GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatHitThreatSource_Type #-}
 
-newtype GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem = GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem {fromGoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem = GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem { fromGoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown platform.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_PLATFORMTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem
@@ -1186,20 +1203,19 @@ pattern GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_Chrome = Google
   GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_ANYPLATFORM,
   GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_ALLPLATFORMS,
   GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem_Chrome,
-  GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatInfo_PlatformTypesItem #-}
 
-newtype GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem {fromGoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem { fromGoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_THREATENTRYTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem
@@ -1237,20 +1253,19 @@ pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_Cert = Googl
   GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_CHROMEEXTENSION,
   GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_Filename,
   GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem_Cert,
-  GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatInfo_ThreatEntryTypesItem #-}
 
-newtype GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem {fromGoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem { fromGoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_THREATTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
@@ -1343,21 +1358,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_ACCURACYTIPS = Go
   GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_TRICKTOBILL,
   GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_HIGHCONFIDENCEALLOWLIST,
   GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_ACCURACYTIPS,
-  GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem #-}
 
 -- | The platform type targeted by the list\'s entries.
-newtype GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType = GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType {fromGoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType = GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType { fromGoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown platform.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_PLATFORMTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType
@@ -1405,21 +1419,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_Chrome = G
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_ANYPLATFORM,
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_ALLPLATFORMS,
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType_Chrome,
-  GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatListDescriptor_PlatformType #-}
 
 -- | The entry types contained in the list.
-newtype GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType {fromGoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType { fromGoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType
@@ -1457,21 +1470,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_Cert = 
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_CHROMEEXTENSION,
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_Filename,
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType_Cert,
-  GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatEntryType #-}
 
 -- | The threat type posed by the list\'s entries.
-newtype GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType {fromGoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType { fromGoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_THREATTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
@@ -1564,21 +1576,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_ACCURACYTIPS
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_TRICKTOBILL,
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_HIGHCONFIDENCEALLOWLIST,
   GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_ACCURACYTIPS,
-  GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType #-}
 
 -- | The platform type matching this threat.
-newtype GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType = GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType {fromGoogleSecuritySafebrowsingV4ThreatMatch_PlatformType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType = GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType { fromGoogleSecuritySafebrowsingV4ThreatMatch_PlatformType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown platform.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_PLATFORMTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType
@@ -1626,21 +1637,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_Chrome = GoogleSecu
   GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_ANYPLATFORM,
   GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_ALLPLATFORMS,
   GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType_Chrome,
-  GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType #-}
 
 -- | The threat entry type matching this threat.
-newtype GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType {fromGoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType { fromGoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_THREATENTRYTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType
@@ -1678,21 +1688,20 @@ pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_Cert = GoogleSec
   GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_CHROMEEXTENSION,
   GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_Filename,
   GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType_Cert,
-  GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatMatch_ThreatEntryType #-}
 
 -- | The threat type matching this threat.
-newtype GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType {fromGoogleSecuritySafebrowsingV4ThreatMatch_ThreatType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType { fromGoogleSecuritySafebrowsingV4ThreatMatch_ThreatType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_THREATTYPEUNSPECIFIED :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
@@ -1785,5 +1794,4 @@ pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_ACCURACYTIPS = Google
   GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_TRICKTOBILL,
   GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_HIGHCONFIDENCEALLOWLIST,
   GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_ACCURACYTIPS,
-  GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
-  #-}
+  GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType #-}
