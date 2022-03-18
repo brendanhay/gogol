@@ -1,69 +1,78 @@
-name:                  gogol-servicemanagement
-version:               0.5.0
-synopsis:              Google Service Management SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-servicemanagement
+version:            0.5.0
+synopsis:           Google Service Management SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Google Service Management allows service producers to publish their
-    services on Google Cloud Platform so that they can be discovered and
-    used by service consumers.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-servicemanagement
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Resource.ServiceManagement.Operations.Get
-        , Network.Google.Resource.ServiceManagement.Operations.List
-        , Network.Google.Resource.ServiceManagement.Services.Configs.Create
-        , Network.Google.Resource.ServiceManagement.Services.Configs.Get
-        , Network.Google.Resource.ServiceManagement.Services.Configs.List
-        , Network.Google.Resource.ServiceManagement.Services.Configs.Submit
-        , Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
-        , Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
-        , Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
-        , Network.Google.Resource.ServiceManagement.Services.Create
-        , Network.Google.Resource.ServiceManagement.Services.Delete
-        , Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
-        , Network.Google.Resource.ServiceManagement.Services.Get
-        , Network.Google.Resource.ServiceManagement.Services.GetConfig
-        , Network.Google.Resource.ServiceManagement.Services.GetIAMPolicy
-        , Network.Google.Resource.ServiceManagement.Services.List
-        , Network.Google.Resource.ServiceManagement.Services.Rollouts.Create
-        , Network.Google.Resource.ServiceManagement.Services.Rollouts.Get
-        , Network.Google.Resource.ServiceManagement.Services.Rollouts.List
-        , Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
-        , Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
-        , Network.Google.Resource.ServiceManagement.Services.Undelete
-        , Network.Google.ServiceManagement
-        , Network.Google.ServiceManagement.Types
+  exposed-modules:
+    Network.Google.ServiceManagement
+    Network.Google.ServiceManagement.Operations.Get
+    Network.Google.ServiceManagement.Operations.List
+    Network.Google.ServiceManagement.Services.Configs.Create
+    Network.Google.ServiceManagement.Services.Configs.Get
+    Network.Google.ServiceManagement.Services.Configs.List
+    Network.Google.ServiceManagement.Services.Configs.Submit
+    Network.Google.ServiceManagement.Services.Consumers.GetIamPolicy
+    Network.Google.ServiceManagement.Services.Consumers.SetIamPolicy
+    Network.Google.ServiceManagement.Services.Consumers.TestIamPermissions
+    Network.Google.ServiceManagement.Services.Create
+    Network.Google.ServiceManagement.Services.Delete
+    Network.Google.ServiceManagement.Services.GenerateConfigReport
+    Network.Google.ServiceManagement.Services.Get
+    Network.Google.ServiceManagement.Services.GetConfig
+    Network.Google.ServiceManagement.Services.GetIamPolicy
+    Network.Google.ServiceManagement.Services.List
+    Network.Google.ServiceManagement.Services.Rollouts.Create
+    Network.Google.ServiceManagement.Services.Rollouts.Get
+    Network.Google.ServiceManagement.Services.Rollouts.List
+    Network.Google.ServiceManagement.Services.SetIamPolicy
+    Network.Google.ServiceManagement.Services.TestIamPermissions
+    Network.Google.ServiceManagement.Services.Undelete
+    Network.Google.ServiceManagement.Types
 
-    other-modules:
-          Network.Google.ServiceManagement.Types.Product
-        , Network.Google.ServiceManagement.Types.Sum
+  other-modules:
+    Network.Google.ServiceManagement.Internal.Product
+    Network.Google.ServiceManagement.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
