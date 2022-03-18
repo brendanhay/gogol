@@ -19,18 +19,44 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Manufacturers.Types
+-- Module      : Gogol.Manufacturers
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Manufacturers.Types
+--
+-- Public API for managing Manufacturer Center related data.
+--
+-- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference>
+module Gogol.Manufacturers
   ( -- * Configuration
     manufacturersService,
 
     -- * OAuth Scopes
     manufacturercenterScope,
+
+    -- * Resources
+
+    -- ** manufacturers.accounts.products.delete
+    ManufacturersAccountsProductsDeleteResource,
+    newManufacturersAccountsProductsDelete,
+    ManufacturersAccountsProductsDelete,
+
+    -- ** manufacturers.accounts.products.get
+    ManufacturersAccountsProductsGetResource,
+    newManufacturersAccountsProductsGet,
+    ManufacturersAccountsProductsGet,
+
+    -- ** manufacturers.accounts.products.list
+    ManufacturersAccountsProductsListResource,
+    newManufacturersAccountsProductsList,
+    ManufacturersAccountsProductsList,
+
+    -- ** manufacturers.accounts.products.update
+    ManufacturersAccountsProductsUpdateResource,
+    newManufacturersAccountsProductsUpdate,
+    ManufacturersAccountsProductsUpdate,
 
     -- * Types
 
@@ -108,17 +134,8 @@ module Network.Google.Manufacturers.Types
   )
 where
 
-import Network.Google.Manufacturers.Internal.Product
-import Network.Google.Manufacturers.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Manufacturer Center API. This contains the host and root path used as a starting point for constructing service requests.
-manufacturersService :: Core.ServiceConfig
-manufacturersService =
-  Core.defaultService
-    (Core.ServiceId "manufacturers:v1")
-    "manufacturers.googleapis.com"
-
--- | Manage your product listings for Google Manufacturer Center
-manufacturercenterScope :: Core.Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
-manufacturercenterScope = Core.Proxy
+import Gogol.Manufacturers.Accounts.Products.Delete
+import Gogol.Manufacturers.Accounts.Products.Get
+import Gogol.Manufacturers.Accounts.Products.List
+import Gogol.Manufacturers.Accounts.Products.Update
+import Gogol.Manufacturers.Types

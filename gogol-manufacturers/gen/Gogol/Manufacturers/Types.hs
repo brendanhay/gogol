@@ -19,44 +19,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Manufacturers
+-- Module      : Gogol.Manufacturers.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Public API for managing Manufacturer Center related data.
---
--- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference>
-module Network.Google.Manufacturers
+module Gogol.Manufacturers.Types
   ( -- * Configuration
     manufacturersService,
 
     -- * OAuth Scopes
     manufacturercenterScope,
-
-    -- * Resources
-
-    -- ** manufacturers.accounts.products.delete
-    ManufacturersAccountsProductsDeleteResource,
-    newManufacturersAccountsProductsDelete,
-    ManufacturersAccountsProductsDelete,
-
-    -- ** manufacturers.accounts.products.get
-    ManufacturersAccountsProductsGetResource,
-    newManufacturersAccountsProductsGet,
-    ManufacturersAccountsProductsGet,
-
-    -- ** manufacturers.accounts.products.list
-    ManufacturersAccountsProductsListResource,
-    newManufacturersAccountsProductsList,
-    ManufacturersAccountsProductsList,
-
-    -- ** manufacturers.accounts.products.update
-    ManufacturersAccountsProductsUpdateResource,
-    newManufacturersAccountsProductsUpdate,
-    ManufacturersAccountsProductsUpdate,
 
     -- * Types
 
@@ -134,8 +108,17 @@ module Network.Google.Manufacturers
   )
 where
 
-import Network.Google.Manufacturers.Accounts.Products.Delete
-import Network.Google.Manufacturers.Accounts.Products.Get
-import Network.Google.Manufacturers.Accounts.Products.List
-import Network.Google.Manufacturers.Accounts.Products.Update
-import Network.Google.Manufacturers.Types
+import Gogol.Manufacturers.Internal.Product
+import Gogol.Manufacturers.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Manufacturer Center API. This contains the host and root path used as a starting point for constructing service requests.
+manufacturersService :: Core.ServiceConfig
+manufacturersService =
+  Core.defaultService
+    (Core.ServiceId "manufacturers:v1")
+    "manufacturers.googleapis.com"
+
+-- | Manage your product listings for Google Manufacturer Center
+manufacturercenterScope :: Core.Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
+manufacturercenterScope = Core.Proxy

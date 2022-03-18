@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Manufacturers.Accounts.Products.List
+-- Module      : Gogol.Manufacturers.Accounts.Products.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists all the products in a Manufacturer Center account.
 --
 -- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference> for @manufacturers.accounts.products.list@.
-module Network.Google.Manufacturers.Accounts.Products.List
+module Gogol.Manufacturers.Accounts.Products.List
   ( -- * Resource
     ManufacturersAccountsProductsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Manufacturers.Accounts.Products.List
   )
 where
 
-import Network.Google.Manufacturers.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Manufacturers.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @manufacturers.accounts.products.list@ method which the
 -- 'ManufacturersAccountsProductsList' request conforms to.

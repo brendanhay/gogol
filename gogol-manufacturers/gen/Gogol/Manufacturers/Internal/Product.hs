@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Manufacturers.Internal.Product
+-- Module      : Gogol.Manufacturers.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Manufacturers.Internal.Product
+module Gogol.Manufacturers.Internal.Product
   ( -- * Attributes
     Attributes (..),
     newAttributes,
@@ -76,8 +76,8 @@ module Network.Google.Manufacturers.Internal.Product
   )
 where
 
-import Network.Google.Manufacturers.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Manufacturers.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Attributes of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116.
 --
