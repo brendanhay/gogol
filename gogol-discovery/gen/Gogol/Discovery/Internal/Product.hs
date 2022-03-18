@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Discovery.Internal.Product
+-- Module      : Gogol.Discovery.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Discovery.Internal.Product
+module Gogol.Discovery.Internal.Product
   ( -- * DirectoryList
     DirectoryList (..),
     newDirectoryList,
@@ -144,8 +144,8 @@ module Network.Google.Discovery.Internal.Product
   )
 where
 
-import Network.Google.Discovery.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Discovery.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 --
 -- /See:/ 'newDirectoryList' smart constructor.

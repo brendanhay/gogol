@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Discovery.Apis.GetRest
+-- Module      : Gogol.Discovery.Apis.GetRest
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieve the description of a particular version of an api.
 --
 -- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference> for @discovery.apis.getRest@.
-module Network.Google.Discovery.Apis.GetRest
+module Gogol.Discovery.Apis.GetRest
   ( -- * Resource
     DiscoveryApisGetRestResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Discovery.Apis.GetRest
   )
 where
 
-import Network.Google.Discovery.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Discovery.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @discovery.apis.getRest@ method which the
 -- 'DiscoveryApisGetRest' request conforms to.

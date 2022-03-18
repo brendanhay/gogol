@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Discovery.Apis.List
+-- Module      : Gogol.Discovery.Apis.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieve the list of APIs supported at this endpoint.
 --
 -- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference> for @discovery.apis.list@.
-module Network.Google.Discovery.Apis.List
+module Gogol.Discovery.Apis.List
   ( -- * Resource
     DiscoveryApisListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Discovery.Apis.List
   )
 where
 
-import Network.Google.Discovery.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Discovery.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @discovery.apis.list@ method which the
 -- 'DiscoveryApisList' request conforms to.
