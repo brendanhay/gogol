@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,80 +36,78 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.accounts.insert@.
 module Gogol.Mirror.Accounts.Insert
-  ( -- * Resource
-    MirrorAccountsInsertResource,
+    (
+    -- * Resource
+      MirrorAccountsInsertResource
 
     -- ** Constructing a Request
-    newMirrorAccountsInsert,
-    MirrorAccountsInsert,
-  )
-where
+    , newMirrorAccountsInsert
+    , MirrorAccountsInsert
+    ) where
 
-import Gogol.Mirror.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Mirror.Types
 
 -- | A resource alias for @mirror.accounts.insert@ method which the
 -- 'MirrorAccountsInsert' request conforms to.
 type MirrorAccountsInsertResource =
-  "mirror"
-    Core.:> "v1"
-    Core.:> "accounts"
-    Core.:> Core.Capture "userToken" Core.Text
-    Core.:> Core.Capture "accountType" Core.Text
-    Core.:> Core.Capture "accountName" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Account
-    Core.:> Core.Post '[Core.JSON] Account
+     "mirror" Core.:>
+       "v1" Core.:>
+         "accounts" Core.:>
+           Core.Capture "userToken" Core.Text Core.:>
+             Core.Capture "accountType" Core.Text Core.:>
+               Core.Capture "accountName" Core.Text Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.ReqBody '[Core.JSON] Account Core.:>
+                     Core.Post '[Core.JSON] Account
 
 -- | Inserts a new account for a user
 --
 -- /See:/ 'newMirrorAccountsInsert' smart constructor.
 data MirrorAccountsInsert = MirrorAccountsInsert
-  { -- | The name of the account to be passed to the Android Account Manager.
-    accountName :: Core.Text,
-    -- | Account type to be passed to Android Account Manager.
-    accountType :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Account,
-    -- | The ID for the user.
-    userToken :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The name of the account to be passed to the Android Account Manager.
+      accountName :: Core.Text
+      -- | Account type to be passed to Android Account Manager.
+    , accountType :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Account
+      -- | The ID for the user.
+    , userToken :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorAccountsInsert' with the minimum fields required to make a request.
-newMirrorAccountsInsert ::
-  -- |  The name of the account to be passed to the Android Account Manager. See 'accountName'.
-  Core.Text ->
-  -- |  Account type to be passed to Android Account Manager. See 'accountType'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Account ->
-  -- |  The ID for the user. See 'userToken'.
-  Core.Text ->
-  MirrorAccountsInsert
+newMirrorAccountsInsert 
+    ::  Core.Text
+       -- ^  The name of the account to be passed to the Android Account Manager. See 'accountName'.
+    -> Core.Text
+       -- ^  Account type to be passed to Android Account Manager. See 'accountType'.
+    -> Account
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  The ID for the user. See 'userToken'.
+    -> MirrorAccountsInsert
 newMirrorAccountsInsert accountName accountType payload userToken =
   MirrorAccountsInsert
-    { accountName = accountName,
-      accountType = accountType,
-      payload = payload,
-      userToken = userToken
+    { accountName = accountName
+    , accountType = accountType
+    , payload = payload
+    , userToken = userToken
     }
 
-instance Core.GoogleRequest MirrorAccountsInsert where
-  type Rs MirrorAccountsInsert = Account
-  type Scopes MirrorAccountsInsert = '[]
-  requestClient MirrorAccountsInsert {..} =
-    go
-      userToken
-      accountType
-      accountName
-      (Core.Just Core.AltJSON)
-      payload
-      mirrorService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorAccountsInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest MirrorAccountsInsert
+         where
+        type Rs MirrorAccountsInsert = Account
+        type Scopes MirrorAccountsInsert = '[]
+        requestClient MirrorAccountsInsert{..}
+          = go userToken accountType accountName
+              (Core.Just Core.AltJSON)
+              payload
+              mirrorService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy MirrorAccountsInsertResource)
+                      Core.mempty
+

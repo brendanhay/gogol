@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,67 +36,62 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.patch@.
 module Gogol.Mirror.Timeline.Patch
-  ( -- * Resource
-    MirrorTimelinePatchResource,
+    (
+    -- * Resource
+      MirrorTimelinePatchResource
 
     -- ** Constructing a Request
-    newMirrorTimelinePatch,
-    MirrorTimelinePatch,
-  )
-where
+    , newMirrorTimelinePatch
+    , MirrorTimelinePatch
+    ) where
 
-import Gogol.Mirror.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Mirror.Types
 
 -- | A resource alias for @mirror.timeline.patch@ method which the
 -- 'MirrorTimelinePatch' request conforms to.
 type MirrorTimelinePatchResource =
-  "mirror"
-    Core.:> "v1"
-    Core.:> "timeline"
-    Core.:> Core.Capture "id" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] TimelineItem
-    Core.:> Core.Patch '[Core.JSON] TimelineItem
+     "mirror" Core.:>
+       "v1" Core.:>
+         "timeline" Core.:>
+           Core.Capture "id" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON] TimelineItem Core.:>
+                 Core.Patch '[Core.JSON] TimelineItem
 
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
 -- /See:/ 'newMirrorTimelinePatch' smart constructor.
 data MirrorTimelinePatch = MirrorTimelinePatch
-  { -- | The ID of the timeline item.
-    id :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: TimelineItem
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The ID of the timeline item.
+      id :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: TimelineItem
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorTimelinePatch' with the minimum fields required to make a request.
-newMirrorTimelinePatch ::
-  -- |  The ID of the timeline item. See 'id'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  TimelineItem ->
-  MirrorTimelinePatch
+newMirrorTimelinePatch 
+    ::  Core.Text
+       -- ^  The ID of the timeline item. See 'id'.
+    -> TimelineItem
+       -- ^  Multipart request metadata. See 'payload'.
+    -> MirrorTimelinePatch
 newMirrorTimelinePatch id payload =
   MirrorTimelinePatch {id = id, payload = payload}
 
 instance Core.GoogleRequest MirrorTimelinePatch where
-  type Rs MirrorTimelinePatch = TimelineItem
-  type
-    Scopes MirrorTimelinePatch =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
-  requestClient MirrorTimelinePatch {..} =
-    go
-      id
-      (Core.Just Core.AltJSON)
-      payload
-      mirrorService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorTimelinePatchResource
-          )
-          Core.mempty
+        type Rs MirrorTimelinePatch = TimelineItem
+        type Scopes MirrorTimelinePatch =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient MirrorTimelinePatch{..}
+          = go id (Core.Just Core.AltJSON) payload
+              mirrorService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy MirrorTimelinePatchResource)
+                      Core.mempty
+
