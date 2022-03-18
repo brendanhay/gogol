@@ -19,61 +19,64 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.Update
+-- Module      : Gogol.AppsTasks.Tasks.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified task.
+-- Creates a new task on the specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.update@.
-module Network.Google.AppsTasks.Tasks.Update
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.insert@.
+module Gogol.AppsTasks.Tasks.Insert
   ( -- * Resource
-    TasksTasksUpdateResource,
+    TasksTasksInsertResource,
 
     -- ** Constructing a Request
-    newTasksTasksUpdate,
-    TasksTasksUpdate,
+    newTasksTasksInsert,
+    TasksTasksInsert,
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @tasks.tasks.update@ method which the
--- 'TasksTasksUpdate' request conforms to.
-type TasksTasksUpdateResource =
+-- | A resource alias for @tasks.tasks.insert@ method which the
+-- 'TasksTasksInsert' request conforms to.
+type TasksTasksInsertResource =
   "tasks"
     Core.:> "v1"
     Core.:> "lists"
     Core.:> Core.Capture "tasklist" Core.Text
     Core.:> "tasks"
-    Core.:> Core.Capture "task" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "parent" Core.Text
+    Core.:> Core.QueryParam "previous" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Task
-    Core.:> Core.Put '[Core.JSON] Task
+    Core.:> Core.Post '[Core.JSON] Task
 
--- | Updates the specified task.
+-- | Creates a new task on the specified task list.
 --
--- /See:/ 'newTasksTasksUpdate' smart constructor.
-data TasksTasksUpdate = TasksTasksUpdate
+-- /See:/ 'newTasksTasksInsert' smart constructor.
+data TasksTasksInsert = TasksTasksInsert
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Parent task identifier. If the task is created at the top level, this parameter is omitted. Optional.
+    parent :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Task,
-    -- | Task identifier.
-    task :: Core.Text,
+    -- | Previous sibling task identifier. If the task is created at the first position among its siblings, this parameter is omitted. Optional.
+    previous :: (Core.Maybe Core.Text),
     -- | Task list identifier.
     tasklist :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -83,39 +86,39 @@ data TasksTasksUpdate = TasksTasksUpdate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TasksTasksUpdate' with the minimum fields required to make a request.
-newTasksTasksUpdate ::
+-- | Creates a value of 'TasksTasksInsert' with the minimum fields required to make a request.
+newTasksTasksInsert ::
   -- |  Multipart request metadata. See 'payload'.
   Task ->
-  -- |  Task identifier. See 'task'.
-  Core.Text ->
   -- |  Task list identifier. See 'tasklist'.
   Core.Text ->
-  TasksTasksUpdate
-newTasksTasksUpdate payload task tasklist =
-  TasksTasksUpdate
+  TasksTasksInsert
+newTasksTasksInsert payload tasklist =
+  TasksTasksInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      parent = Core.Nothing,
       payload = payload,
-      task = task,
+      previous = Core.Nothing,
       tasklist = tasklist,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest TasksTasksUpdate where
-  type Rs TasksTasksUpdate = Task
+instance Core.GoogleRequest TasksTasksInsert where
+  type Rs TasksTasksInsert = Task
   type
-    Scopes TasksTasksUpdate =
+    Scopes TasksTasksInsert =
       '["https://www.googleapis.com/auth/tasks"]
-  requestClient TasksTasksUpdate {..} =
+  requestClient TasksTasksInsert {..} =
     go
       tasklist
-      task
       xgafv
       accessToken
       callback
+      parent
+      previous
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -124,5 +127,5 @@ instance Core.GoogleRequest TasksTasksUpdate where
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy TasksTasksUpdateResource)
+          (Core.Proxy :: Core.Proxy TasksTasksInsertResource)
           Core.mempty

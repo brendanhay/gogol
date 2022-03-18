@@ -19,58 +19,56 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsTasks.Tasks.Delete
+-- Module      : Gogol.AppsTasks.Tasks.Tasklists.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified task from the task list.
+-- Returns the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.delete@.
-module Network.Google.AppsTasks.Tasks.Delete
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.get@.
+module Gogol.AppsTasks.Tasks.Tasklists.Get
   ( -- * Resource
-    TasksTasksDeleteResource,
+    TasksTasklistsGetResource,
 
     -- ** Constructing a Request
-    newTasksTasksDelete,
-    TasksTasksDelete,
+    newTasksTasklistsGet,
+    TasksTasklistsGet,
   )
 where
 
-import Network.Google.AppsTasks.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsTasks.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @tasks.tasks.delete@ method which the
--- 'TasksTasksDelete' request conforms to.
-type TasksTasksDeleteResource =
+-- | A resource alias for @tasks.tasklists.get@ method which the
+-- 'TasksTasklistsGet' request conforms to.
+type TasksTasklistsGetResource =
   "tasks"
     Core.:> "v1"
+    Core.:> "users"
+    Core.:> "@me"
     Core.:> "lists"
     Core.:> Core.Capture "tasklist" Core.Text
-    Core.:> "tasks"
-    Core.:> Core.Capture "task" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+    Core.:> Core.Get '[Core.JSON] TaskList
 
--- | Deletes the specified task from the task list.
+-- | Returns the authenticated user\'s specified task list.
 --
--- /See:/ 'newTasksTasksDelete' smart constructor.
-data TasksTasksDelete = TasksTasksDelete
+-- /See:/ 'newTasksTasklistsGet' smart constructor.
+data TasksTasklistsGet = TasksTasklistsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Task identifier.
-    task :: Core.Text,
     -- | Task list identifier.
     tasklist :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -80,33 +78,31 @@ data TasksTasksDelete = TasksTasksDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TasksTasksDelete' with the minimum fields required to make a request.
-newTasksTasksDelete ::
-  -- |  Task identifier. See 'task'.
-  Core.Text ->
+-- | Creates a value of 'TasksTasklistsGet' with the minimum fields required to make a request.
+newTasksTasklistsGet ::
   -- |  Task list identifier. See 'tasklist'.
   Core.Text ->
-  TasksTasksDelete
-newTasksTasksDelete task tasklist =
-  TasksTasksDelete
+  TasksTasklistsGet
+newTasksTasklistsGet tasklist =
+  TasksTasklistsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      task = task,
       tasklist = tasklist,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest TasksTasksDelete where
-  type Rs TasksTasksDelete = ()
+instance Core.GoogleRequest TasksTasklistsGet where
+  type Rs TasksTasklistsGet = TaskList
   type
-    Scopes TasksTasksDelete =
-      '["https://www.googleapis.com/auth/tasks"]
-  requestClient TasksTasksDelete {..} =
+    Scopes TasksTasklistsGet =
+      '[ "https://www.googleapis.com/auth/tasks",
+         "https://www.googleapis.com/auth/tasks.readonly"
+       ]
+  requestClient TasksTasklistsGet {..} =
     go
       tasklist
-      task
       xgafv
       accessToken
       callback
@@ -117,5 +113,5 @@ instance Core.GoogleRequest TasksTasksDelete where
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy TasksTasksDeleteResource)
+          (Core.Proxy :: Core.Proxy TasksTasklistsGetResource)
           Core.mempty

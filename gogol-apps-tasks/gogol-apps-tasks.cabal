@@ -39,31 +39,32 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppsTasks
-    Network.Google.AppsTasks.Tasks.Clear
-    Network.Google.AppsTasks.Tasks.Delete
-    Network.Google.AppsTasks.Tasks.Get
-    Network.Google.AppsTasks.Tasks.Insert
-    Network.Google.AppsTasks.Tasks.List
-    Network.Google.AppsTasks.Tasks.Move
-    Network.Google.AppsTasks.Tasks.Patch
-    Network.Google.AppsTasks.Tasks.Tasklists.Delete
-    Network.Google.AppsTasks.Tasks.Tasklists.Get
-    Network.Google.AppsTasks.Tasks.Tasklists.Insert
-    Network.Google.AppsTasks.Tasks.Tasklists.List
-    Network.Google.AppsTasks.Tasks.Tasklists.Patch
-    Network.Google.AppsTasks.Tasks.Tasklists.Update
-    Network.Google.AppsTasks.Tasks.Update
-    Network.Google.AppsTasks.Types
+    Gogol.AppsTasks
+    Gogol.AppsTasks.Tasks.Clear
+    Gogol.AppsTasks.Tasks.Delete
+    Gogol.AppsTasks.Tasks.Get
+    Gogol.AppsTasks.Tasks.Insert
+    Gogol.AppsTasks.Tasks.List
+    Gogol.AppsTasks.Tasks.Move
+    Gogol.AppsTasks.Tasks.Patch
+    Gogol.AppsTasks.Tasks.Tasklists.Delete
+    Gogol.AppsTasks.Tasks.Tasklists.Get
+    Gogol.AppsTasks.Tasks.Tasklists.Insert
+    Gogol.AppsTasks.Tasks.Tasklists.List
+    Gogol.AppsTasks.Tasks.Tasklists.Patch
+    Gogol.AppsTasks.Tasks.Tasklists.Update
+    Gogol.AppsTasks.Tasks.Update
+    Gogol.AppsTasks.Types
 
   other-modules:
-    Network.Google.AppsTasks.Internal.Product
-    Network.Google.AppsTasks.Internal.Sum
+    Gogol.AppsTasks.Internal.Product
+    Gogol.AppsTasks.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
