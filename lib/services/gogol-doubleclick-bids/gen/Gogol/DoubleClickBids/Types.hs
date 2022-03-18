@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,156 +31,157 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.DoubleClickBids.Types
-  ( -- * Configuration
-    doubleClickBidsService,
+    (
+    -- * Configuration
+      doubleClickBidsService
 
     -- * OAuth Scopes
-    doubleclickbidManagerScope,
+    , doubleclickbidManagerScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
+    , ChannelGrouping (..)
+    , newChannelGrouping
 
     -- ** DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
+    , DisjunctiveMatchStatement (..)
+    , newDisjunctiveMatchStatement
 
     -- ** EventFilter
-    EventFilter (..),
-    newEventFilter,
+    , EventFilter (..)
+    , newEventFilter
 
     -- ** FilterPair
-    FilterPair (..),
-    newFilterPair,
+    , FilterPair (..)
+    , newFilterPair
 
     -- ** FilterPair_Type
-    FilterPair_Type (..),
+    , FilterPair_Type (..)
 
     -- ** ListQueriesResponse
-    ListQueriesResponse (..),
-    newListQueriesResponse,
+    , ListQueriesResponse (..)
+    , newListQueriesResponse
 
     -- ** ListReportsResponse
-    ListReportsResponse (..),
-    newListReportsResponse,
+    , ListReportsResponse (..)
+    , newListReportsResponse
 
     -- ** Options
-    Options (..),
-    newOptions,
+    , Options (..)
+    , newOptions
 
     -- ** Parameters
-    Parameters (..),
-    newParameters,
+    , Parameters (..)
+    , newParameters
 
     -- ** Parameters_GroupBysItem
-    Parameters_GroupBysItem (..),
+    , Parameters_GroupBysItem (..)
 
     -- ** Parameters_MetricsItem
-    Parameters_MetricsItem (..),
+    , Parameters_MetricsItem (..)
 
     -- ** Parameters_Type
-    Parameters_Type (..),
+    , Parameters_Type (..)
 
     -- ** PathFilter
-    PathFilter (..),
-    newPathFilter,
+    , PathFilter (..)
+    , newPathFilter
 
     -- ** PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition (..),
+    , PathFilter_PathMatchPosition (..)
 
     -- ** PathQueryOptions
-    PathQueryOptions (..),
-    newPathQueryOptions,
+    , PathQueryOptions (..)
+    , newPathQueryOptions
 
     -- ** PathQueryOptionsFilter
-    PathQueryOptionsFilter (..),
-    newPathQueryOptionsFilter,
+    , PathQueryOptionsFilter (..)
+    , newPathQueryOptionsFilter
 
     -- ** PathQueryOptionsFilter_Filter
-    PathQueryOptionsFilter_Filter (..),
+    , PathQueryOptionsFilter_Filter (..)
 
     -- ** PathQueryOptionsFilter_Match
-    PathQueryOptionsFilter_Match (..),
+    , PathQueryOptionsFilter_Match (..)
 
     -- ** Query
-    Query (..),
-    newQuery,
+    , Query (..)
+    , newQuery
 
     -- ** QueryMetadata
-    QueryMetadata (..),
-    newQueryMetadata,
+    , QueryMetadata (..)
+    , newQueryMetadata
 
     -- ** QueryMetadata_DataRange
-    QueryMetadata_DataRange (..),
+    , QueryMetadata_DataRange (..)
 
     -- ** QueryMetadata_Format
-    QueryMetadata_Format (..),
+    , QueryMetadata_Format (..)
 
     -- ** QuerySchedule
-    QuerySchedule (..),
-    newQuerySchedule,
+    , QuerySchedule (..)
+    , newQuerySchedule
 
     -- ** QuerySchedule_Frequency
-    QuerySchedule_Frequency (..),
+    , QuerySchedule_Frequency (..)
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** ReportFailure
-    ReportFailure (..),
-    newReportFailure,
+    , ReportFailure (..)
+    , newReportFailure
 
     -- ** ReportFailure_ErrorCode
-    ReportFailure_ErrorCode (..),
+    , ReportFailure_ErrorCode (..)
 
     -- ** ReportKey
-    ReportKey (..),
-    newReportKey,
+    , ReportKey (..)
+    , newReportKey
 
     -- ** ReportMetadata
-    ReportMetadata (..),
-    newReportMetadata,
+    , ReportMetadata (..)
+    , newReportMetadata
 
     -- ** ReportStatus
-    ReportStatus (..),
-    newReportStatus,
+    , ReportStatus (..)
+    , newReportStatus
 
     -- ** ReportStatus_Format
-    ReportStatus_Format (..),
+    , ReportStatus_Format (..)
 
     -- ** ReportStatus_State
-    ReportStatus_State (..),
+    , ReportStatus_State (..)
 
     -- ** Rule
-    Rule (..),
-    newRule,
+    , Rule (..)
+    , newRule
 
     -- ** RunQueryRequest
-    RunQueryRequest (..),
-    newRunQueryRequest,
+    , RunQueryRequest (..)
+    , newRunQueryRequest
 
     -- ** RunQueryRequest_DataRange
-    RunQueryRequest_DataRange (..),
-  )
-where
+    , RunQueryRequest_DataRange (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.DoubleClickBids.Internal.Product
 import Gogol.DoubleClickBids.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1.1@ of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsService :: Core.ServiceConfig
-doubleClickBidsService =
-  Core.defaultService
-    (Core.ServiceId "doubleclickbidmanager:v1.1")
-    "doubleclickbidmanager.googleapis.com"
+doubleClickBidsService
+  = Core.defaultService
+      (Core.ServiceId "doubleclickbidmanager:v1.1")
+      "doubleclickbidmanager.googleapis.com"
 
 -- | View and manage your reports in DoubleClick Bid Manager
 doubleclickbidManagerScope :: Core.Proxy '["https://www.googleapis.com/auth/doubleclickbidmanager"]
