@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudProfiler.Projects.Profiles.Patch
+-- Module      : Gogol.CloudProfiler.Projects.Profiles.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation.
 --
 -- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference> for @cloudprofiler.projects.profiles.patch@.
-module Network.Google.CloudProfiler.Projects.Profiles.Patch
+module Gogol.CloudProfiler.Projects.Profiles.Patch
   ( -- * Resource
     CloudProfilerProjectsProfilesPatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudProfiler.Projects.Profiles.Patch
   )
 where
 
-import Network.Google.CloudProfiler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudProfiler.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudprofiler.projects.profiles.patch@ method which the
 -- 'CloudProfilerProjectsProfilesPatch' request conforms to.

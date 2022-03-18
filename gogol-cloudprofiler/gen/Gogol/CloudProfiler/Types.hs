@@ -19,17 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudProfiler
+-- Module      : Gogol.CloudProfiler.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Manages continuous profiling information.
---
--- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference>
-module Network.Google.CloudProfiler
+module Gogol.CloudProfiler.Types
   ( -- * Configuration
     cloudProfilerService,
 
@@ -37,23 +33,6 @@ module Network.Google.CloudProfiler
     cloudPlatformScope,
     monitoringScope,
     monitoringWriteScope,
-
-    -- * Resources
-
-    -- ** cloudprofiler.projects.profiles.create
-    CloudProfilerProjectsProfilesCreateResource,
-    newCloudProfilerProjectsProfilesCreate,
-    CloudProfilerProjectsProfilesCreate,
-
-    -- ** cloudprofiler.projects.profiles.createOffline
-    CloudProfilerProjectsProfilesCreateOfflineResource,
-    newCloudProfilerProjectsProfilesCreateOffline,
-    CloudProfilerProjectsProfilesCreateOffline,
-
-    -- ** cloudprofiler.projects.profiles.patch
-    CloudProfilerProjectsProfilesPatchResource,
-    newCloudProfilerProjectsProfilesPatch,
-    CloudProfilerProjectsProfilesPatch,
 
     -- * Types
 
@@ -88,7 +67,25 @@ module Network.Google.CloudProfiler
   )
 where
 
-import Network.Google.CloudProfiler.Projects.Profiles.Create
-import Network.Google.CloudProfiler.Projects.Profiles.CreateOffline
-import Network.Google.CloudProfiler.Projects.Profiles.Patch
-import Network.Google.CloudProfiler.Types
+import Gogol.CloudProfiler.Internal.Product
+import Gogol.CloudProfiler.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Stackdriver Profiler API. This contains the host and root path used as a starting point for constructing service requests.
+cloudProfilerService :: Core.ServiceConfig
+cloudProfilerService =
+  Core.defaultService
+    (Core.ServiceId "cloudprofiler:v2")
+    "cloudprofiler.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View and write monitoring data for all of your Google and third-party Cloud and API projects
+monitoringScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring"]
+monitoringScope = Core.Proxy
+
+-- | Publish metric data to your Google Cloud projects
+monitoringWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/monitoring.write"]
+monitoringWriteScope = Core.Proxy

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudProfiler.Projects.Profiles.CreateOffline
+-- Module      : Gogol.CloudProfiler.Projects.Profiles.CreateOffline
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it.
 --
 -- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference> for @cloudprofiler.projects.profiles.createOffline@.
-module Network.Google.CloudProfiler.Projects.Profiles.CreateOffline
+module Gogol.CloudProfiler.Projects.Profiles.CreateOffline
   ( -- * Resource
     CloudProfilerProjectsProfilesCreateOfflineResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudProfiler.Projects.Profiles.CreateOffline
   )
 where
 
-import Network.Google.CloudProfiler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudProfiler.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudprofiler.projects.profiles.createOffline@ method which the
 -- 'CloudProfilerProjectsProfilesCreateOffline' request conforms to.
