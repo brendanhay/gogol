@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-dfareporting
-version:            0.5.0
-synopsis:           Google Campaign Manager 360 SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-dfareporting
+version:               0.5.0
+synopsis:              Google Campaign Manager 360 SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Build applications to efficiently manage large or complex trafficking, reporting, and attribution workflows for Campaign Manager 360.
+    Build applications to efficiently manage large or complex trafficking, reporting, and attribution workflows for Campaign Manager 360.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,231 +28,234 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.DFAReporting
-    Gogol.DFAReporting.AccountActiveAdSummaries.Get
-    Gogol.DFAReporting.AccountPermissionGroups.Get
-    Gogol.DFAReporting.AccountPermissionGroups.List
-    Gogol.DFAReporting.AccountPermissions.Get
-    Gogol.DFAReporting.AccountPermissions.List
-    Gogol.DFAReporting.Accounts.Get
-    Gogol.DFAReporting.Accounts.List
-    Gogol.DFAReporting.Accounts.Patch
-    Gogol.DFAReporting.Accounts.Update
-    Gogol.DFAReporting.AccountUserProfiles.Get
-    Gogol.DFAReporting.AccountUserProfiles.Insert
-    Gogol.DFAReporting.AccountUserProfiles.List
-    Gogol.DFAReporting.AccountUserProfiles.Patch
-    Gogol.DFAReporting.AccountUserProfiles.Update
-    Gogol.DFAReporting.Ads.Get
-    Gogol.DFAReporting.Ads.Insert
-    Gogol.DFAReporting.Ads.List
-    Gogol.DFAReporting.Ads.Patch
-    Gogol.DFAReporting.Ads.Update
-    Gogol.DFAReporting.AdvertiserGroups.Delete
-    Gogol.DFAReporting.AdvertiserGroups.Get
-    Gogol.DFAReporting.AdvertiserGroups.Insert
-    Gogol.DFAReporting.AdvertiserGroups.List
-    Gogol.DFAReporting.AdvertiserGroups.Patch
-    Gogol.DFAReporting.AdvertiserGroups.Update
-    Gogol.DFAReporting.AdvertiserLandingPages.Get
-    Gogol.DFAReporting.AdvertiserLandingPages.Insert
-    Gogol.DFAReporting.AdvertiserLandingPages.List
-    Gogol.DFAReporting.AdvertiserLandingPages.Patch
-    Gogol.DFAReporting.AdvertiserLandingPages.Update
-    Gogol.DFAReporting.Advertisers.Get
-    Gogol.DFAReporting.Advertisers.Insert
-    Gogol.DFAReporting.Advertisers.List
-    Gogol.DFAReporting.Advertisers.Patch
-    Gogol.DFAReporting.Advertisers.Update
-    Gogol.DFAReporting.Browsers.List
-    Gogol.DFAReporting.CampaignCreativeAssociations.Insert
-    Gogol.DFAReporting.CampaignCreativeAssociations.List
-    Gogol.DFAReporting.Campaigns.Get
-    Gogol.DFAReporting.Campaigns.Insert
-    Gogol.DFAReporting.Campaigns.List
-    Gogol.DFAReporting.Campaigns.Patch
-    Gogol.DFAReporting.Campaigns.Update
-    Gogol.DFAReporting.ChangeLogs.Get
-    Gogol.DFAReporting.ChangeLogs.List
-    Gogol.DFAReporting.Cities.List
-    Gogol.DFAReporting.ConnectionTypes.Get
-    Gogol.DFAReporting.ConnectionTypes.List
-    Gogol.DFAReporting.ContentCategories.Delete
-    Gogol.DFAReporting.ContentCategories.Get
-    Gogol.DFAReporting.ContentCategories.Insert
-    Gogol.DFAReporting.ContentCategories.List
-    Gogol.DFAReporting.ContentCategories.Patch
-    Gogol.DFAReporting.ContentCategories.Update
-    Gogol.DFAReporting.Conversions.Batchinsert
-    Gogol.DFAReporting.Conversions.Batchupdate
-    Gogol.DFAReporting.Countries.Get
-    Gogol.DFAReporting.Countries.List
-    Gogol.DFAReporting.CreativeAssets.Insert
-    Gogol.DFAReporting.CreativeFields.Delete
-    Gogol.DFAReporting.CreativeFields.Get
-    Gogol.DFAReporting.CreativeFields.Insert
-    Gogol.DFAReporting.CreativeFields.List
-    Gogol.DFAReporting.CreativeFields.Patch
-    Gogol.DFAReporting.CreativeFields.Update
-    Gogol.DFAReporting.CreativeFieldValues.Delete
-    Gogol.DFAReporting.CreativeFieldValues.Get
-    Gogol.DFAReporting.CreativeFieldValues.Insert
-    Gogol.DFAReporting.CreativeFieldValues.List
-    Gogol.DFAReporting.CreativeFieldValues.Patch
-    Gogol.DFAReporting.CreativeFieldValues.Update
-    Gogol.DFAReporting.CreativeGroups.Get
-    Gogol.DFAReporting.CreativeGroups.Insert
-    Gogol.DFAReporting.CreativeGroups.List
-    Gogol.DFAReporting.CreativeGroups.Patch
-    Gogol.DFAReporting.CreativeGroups.Update
-    Gogol.DFAReporting.Creatives.Get
-    Gogol.DFAReporting.Creatives.Insert
-    Gogol.DFAReporting.Creatives.List
-    Gogol.DFAReporting.Creatives.Patch
-    Gogol.DFAReporting.Creatives.Update
-    Gogol.DFAReporting.DimensionValues.Query
-    Gogol.DFAReporting.DirectorySites.Get
-    Gogol.DFAReporting.DirectorySites.Insert
-    Gogol.DFAReporting.DirectorySites.List
-    Gogol.DFAReporting.DynamicTargetingKeys.Delete
-    Gogol.DFAReporting.DynamicTargetingKeys.Insert
-    Gogol.DFAReporting.DynamicTargetingKeys.List
-    Gogol.DFAReporting.EventTags.Delete
-    Gogol.DFAReporting.EventTags.Get
-    Gogol.DFAReporting.EventTags.Insert
-    Gogol.DFAReporting.EventTags.List
-    Gogol.DFAReporting.EventTags.Patch
-    Gogol.DFAReporting.EventTags.Update
-    Gogol.DFAReporting.Files.Get
-    Gogol.DFAReporting.Files.List
-    Gogol.DFAReporting.FloodlightActivities.Delete
-    Gogol.DFAReporting.FloodlightActivities.Generatetag
-    Gogol.DFAReporting.FloodlightActivities.Get
-    Gogol.DFAReporting.FloodlightActivities.Insert
-    Gogol.DFAReporting.FloodlightActivities.List
-    Gogol.DFAReporting.FloodlightActivities.Patch
-    Gogol.DFAReporting.FloodlightActivities.Update
-    Gogol.DFAReporting.FloodlightActivityGroups.Get
-    Gogol.DFAReporting.FloodlightActivityGroups.Insert
-    Gogol.DFAReporting.FloodlightActivityGroups.List
-    Gogol.DFAReporting.FloodlightActivityGroups.Patch
-    Gogol.DFAReporting.FloodlightActivityGroups.Update
-    Gogol.DFAReporting.FloodlightConfigurations.Get
-    Gogol.DFAReporting.FloodlightConfigurations.List
-    Gogol.DFAReporting.FloodlightConfigurations.Patch
-    Gogol.DFAReporting.FloodlightConfigurations.Update
-    Gogol.DFAReporting.InventoryItems.Get
-    Gogol.DFAReporting.InventoryItems.List
-    Gogol.DFAReporting.Languages.List
-    Gogol.DFAReporting.Metros.List
-    Gogol.DFAReporting.MobileApps.Get
-    Gogol.DFAReporting.MobileApps.List
-    Gogol.DFAReporting.MobileCarriers.Get
-    Gogol.DFAReporting.MobileCarriers.List
-    Gogol.DFAReporting.OperatingSystems.Get
-    Gogol.DFAReporting.OperatingSystems.List
-    Gogol.DFAReporting.OperatingSystemVersions.Get
-    Gogol.DFAReporting.OperatingSystemVersions.List
-    Gogol.DFAReporting.OrderDocuments.Get
-    Gogol.DFAReporting.OrderDocuments.List
-    Gogol.DFAReporting.Orders.Get
-    Gogol.DFAReporting.Orders.List
-    Gogol.DFAReporting.PlacementGroups.Get
-    Gogol.DFAReporting.PlacementGroups.Insert
-    Gogol.DFAReporting.PlacementGroups.List
-    Gogol.DFAReporting.PlacementGroups.Patch
-    Gogol.DFAReporting.PlacementGroups.Update
-    Gogol.DFAReporting.Placements.Generatetags
-    Gogol.DFAReporting.Placements.Get
-    Gogol.DFAReporting.Placements.Insert
-    Gogol.DFAReporting.Placements.List
-    Gogol.DFAReporting.Placements.Patch
-    Gogol.DFAReporting.Placements.Update
-    Gogol.DFAReporting.PlacementStrategies.Delete
-    Gogol.DFAReporting.PlacementStrategies.Get
-    Gogol.DFAReporting.PlacementStrategies.Insert
-    Gogol.DFAReporting.PlacementStrategies.List
-    Gogol.DFAReporting.PlacementStrategies.Patch
-    Gogol.DFAReporting.PlacementStrategies.Update
-    Gogol.DFAReporting.PlatformTypes.Get
-    Gogol.DFAReporting.PlatformTypes.List
-    Gogol.DFAReporting.PostalCodes.Get
-    Gogol.DFAReporting.PostalCodes.List
-    Gogol.DFAReporting.Projects.Get
-    Gogol.DFAReporting.Projects.List
-    Gogol.DFAReporting.Regions.List
-    Gogol.DFAReporting.RemarketingLists.Get
-    Gogol.DFAReporting.RemarketingLists.Insert
-    Gogol.DFAReporting.RemarketingLists.List
-    Gogol.DFAReporting.RemarketingLists.Patch
-    Gogol.DFAReporting.RemarketingLists.Update
-    Gogol.DFAReporting.RemarketingListShares.Get
-    Gogol.DFAReporting.RemarketingListShares.Patch
-    Gogol.DFAReporting.RemarketingListShares.Update
-    Gogol.DFAReporting.Reports.CompatibleFields.Query
-    Gogol.DFAReporting.Reports.Delete
-    Gogol.DFAReporting.Reports.Files.Get
-    Gogol.DFAReporting.Reports.Files.List
-    Gogol.DFAReporting.Reports.Get
-    Gogol.DFAReporting.Reports.Insert
-    Gogol.DFAReporting.Reports.List
-    Gogol.DFAReporting.Reports.Patch
-    Gogol.DFAReporting.Reports.Run
-    Gogol.DFAReporting.Reports.Update
-    Gogol.DFAReporting.Sites.Get
-    Gogol.DFAReporting.Sites.Insert
-    Gogol.DFAReporting.Sites.List
-    Gogol.DFAReporting.Sites.Patch
-    Gogol.DFAReporting.Sites.Update
-    Gogol.DFAReporting.Sizes.Get
-    Gogol.DFAReporting.Sizes.Insert
-    Gogol.DFAReporting.Sizes.List
-    Gogol.DFAReporting.Subaccounts.Get
-    Gogol.DFAReporting.Subaccounts.Insert
-    Gogol.DFAReporting.Subaccounts.List
-    Gogol.DFAReporting.Subaccounts.Patch
-    Gogol.DFAReporting.Subaccounts.Update
-    Gogol.DFAReporting.TargetableRemarketingLists.Get
-    Gogol.DFAReporting.TargetableRemarketingLists.List
-    Gogol.DFAReporting.TargetingTemplates.Get
-    Gogol.DFAReporting.TargetingTemplates.Insert
-    Gogol.DFAReporting.TargetingTemplates.List
-    Gogol.DFAReporting.TargetingTemplates.Patch
-    Gogol.DFAReporting.TargetingTemplates.Update
-    Gogol.DFAReporting.Types
-    Gogol.DFAReporting.UserProfiles.Get
-    Gogol.DFAReporting.UserProfiles.List
-    Gogol.DFAReporting.UserRolePermissionGroups.Get
-    Gogol.DFAReporting.UserRolePermissionGroups.List
-    Gogol.DFAReporting.UserRolePermissions.Get
-    Gogol.DFAReporting.UserRolePermissions.List
-    Gogol.DFAReporting.UserRoles.Delete
-    Gogol.DFAReporting.UserRoles.Get
-    Gogol.DFAReporting.UserRoles.Insert
-    Gogol.DFAReporting.UserRoles.List
-    Gogol.DFAReporting.UserRoles.Patch
-    Gogol.DFAReporting.UserRoles.Update
-    Gogol.DFAReporting.VideoFormats.Get
-    Gogol.DFAReporting.VideoFormats.List
+      Gogol.DFAReporting
+    , Gogol.DFAReporting.AccountActiveAdSummaries.Get
+    , Gogol.DFAReporting.AccountPermissionGroups.Get
+    , Gogol.DFAReporting.AccountPermissionGroups.List
+    , Gogol.DFAReporting.AccountPermissions.Get
+    , Gogol.DFAReporting.AccountPermissions.List
+    , Gogol.DFAReporting.AccountUserProfiles.Get
+    , Gogol.DFAReporting.AccountUserProfiles.Insert
+    , Gogol.DFAReporting.AccountUserProfiles.List
+    , Gogol.DFAReporting.AccountUserProfiles.Patch
+    , Gogol.DFAReporting.AccountUserProfiles.Update
+    , Gogol.DFAReporting.Accounts.Get
+    , Gogol.DFAReporting.Accounts.List
+    , Gogol.DFAReporting.Accounts.Patch
+    , Gogol.DFAReporting.Accounts.Update
+    , Gogol.DFAReporting.Ads.Get
+    , Gogol.DFAReporting.Ads.Insert
+    , Gogol.DFAReporting.Ads.List
+    , Gogol.DFAReporting.Ads.Patch
+    , Gogol.DFAReporting.Ads.Update
+    , Gogol.DFAReporting.AdvertiserGroups.Delete
+    , Gogol.DFAReporting.AdvertiserGroups.Get
+    , Gogol.DFAReporting.AdvertiserGroups.Insert
+    , Gogol.DFAReporting.AdvertiserGroups.List
+    , Gogol.DFAReporting.AdvertiserGroups.Patch
+    , Gogol.DFAReporting.AdvertiserGroups.Update
+    , Gogol.DFAReporting.AdvertiserLandingPages.Get
+    , Gogol.DFAReporting.AdvertiserLandingPages.Insert
+    , Gogol.DFAReporting.AdvertiserLandingPages.List
+    , Gogol.DFAReporting.AdvertiserLandingPages.Patch
+    , Gogol.DFAReporting.AdvertiserLandingPages.Update
+    , Gogol.DFAReporting.Advertisers.Get
+    , Gogol.DFAReporting.Advertisers.Insert
+    , Gogol.DFAReporting.Advertisers.List
+    , Gogol.DFAReporting.Advertisers.Patch
+    , Gogol.DFAReporting.Advertisers.Update
+    , Gogol.DFAReporting.Browsers.List
+    , Gogol.DFAReporting.CampaignCreativeAssociations.Insert
+    , Gogol.DFAReporting.CampaignCreativeAssociations.List
+    , Gogol.DFAReporting.Campaigns.Get
+    , Gogol.DFAReporting.Campaigns.Insert
+    , Gogol.DFAReporting.Campaigns.List
+    , Gogol.DFAReporting.Campaigns.Patch
+    , Gogol.DFAReporting.Campaigns.Update
+    , Gogol.DFAReporting.ChangeLogs.Get
+    , Gogol.DFAReporting.ChangeLogs.List
+    , Gogol.DFAReporting.Cities.List
+    , Gogol.DFAReporting.ConnectionTypes.Get
+    , Gogol.DFAReporting.ConnectionTypes.List
+    , Gogol.DFAReporting.ContentCategories.Delete
+    , Gogol.DFAReporting.ContentCategories.Get
+    , Gogol.DFAReporting.ContentCategories.Insert
+    , Gogol.DFAReporting.ContentCategories.List
+    , Gogol.DFAReporting.ContentCategories.Patch
+    , Gogol.DFAReporting.ContentCategories.Update
+    , Gogol.DFAReporting.Conversions.Batchinsert
+    , Gogol.DFAReporting.Conversions.Batchupdate
+    , Gogol.DFAReporting.Countries.Get
+    , Gogol.DFAReporting.Countries.List
+    , Gogol.DFAReporting.CreativeAssets.Insert
+    , Gogol.DFAReporting.CreativeFieldValues.Delete
+    , Gogol.DFAReporting.CreativeFieldValues.Get
+    , Gogol.DFAReporting.CreativeFieldValues.Insert
+    , Gogol.DFAReporting.CreativeFieldValues.List
+    , Gogol.DFAReporting.CreativeFieldValues.Patch
+    , Gogol.DFAReporting.CreativeFieldValues.Update
+    , Gogol.DFAReporting.CreativeFields.Delete
+    , Gogol.DFAReporting.CreativeFields.Get
+    , Gogol.DFAReporting.CreativeFields.Insert
+    , Gogol.DFAReporting.CreativeFields.List
+    , Gogol.DFAReporting.CreativeFields.Patch
+    , Gogol.DFAReporting.CreativeFields.Update
+    , Gogol.DFAReporting.CreativeGroups.Get
+    , Gogol.DFAReporting.CreativeGroups.Insert
+    , Gogol.DFAReporting.CreativeGroups.List
+    , Gogol.DFAReporting.CreativeGroups.Patch
+    , Gogol.DFAReporting.CreativeGroups.Update
+    , Gogol.DFAReporting.Creatives.Get
+    , Gogol.DFAReporting.Creatives.Insert
+    , Gogol.DFAReporting.Creatives.List
+    , Gogol.DFAReporting.Creatives.Patch
+    , Gogol.DFAReporting.Creatives.Update
+    , Gogol.DFAReporting.DimensionValues.Query
+    , Gogol.DFAReporting.DirectorySites.Get
+    , Gogol.DFAReporting.DirectorySites.Insert
+    , Gogol.DFAReporting.DirectorySites.List
+    , Gogol.DFAReporting.DynamicTargetingKeys.Delete
+    , Gogol.DFAReporting.DynamicTargetingKeys.Insert
+    , Gogol.DFAReporting.DynamicTargetingKeys.List
+    , Gogol.DFAReporting.EventTags.Delete
+    , Gogol.DFAReporting.EventTags.Get
+    , Gogol.DFAReporting.EventTags.Insert
+    , Gogol.DFAReporting.EventTags.List
+    , Gogol.DFAReporting.EventTags.Patch
+    , Gogol.DFAReporting.EventTags.Update
+    , Gogol.DFAReporting.Files.Get
+    , Gogol.DFAReporting.Files.List
+    , Gogol.DFAReporting.FloodlightActivities.Delete
+    , Gogol.DFAReporting.FloodlightActivities.Generatetag
+    , Gogol.DFAReporting.FloodlightActivities.Get
+    , Gogol.DFAReporting.FloodlightActivities.Insert
+    , Gogol.DFAReporting.FloodlightActivities.List
+    , Gogol.DFAReporting.FloodlightActivities.Patch
+    , Gogol.DFAReporting.FloodlightActivities.Update
+    , Gogol.DFAReporting.FloodlightActivityGroups.Get
+    , Gogol.DFAReporting.FloodlightActivityGroups.Insert
+    , Gogol.DFAReporting.FloodlightActivityGroups.List
+    , Gogol.DFAReporting.FloodlightActivityGroups.Patch
+    , Gogol.DFAReporting.FloodlightActivityGroups.Update
+    , Gogol.DFAReporting.FloodlightConfigurations.Get
+    , Gogol.DFAReporting.FloodlightConfigurations.List
+    , Gogol.DFAReporting.FloodlightConfigurations.Patch
+    , Gogol.DFAReporting.FloodlightConfigurations.Update
+    , Gogol.DFAReporting.InventoryItems.Get
+    , Gogol.DFAReporting.InventoryItems.List
+    , Gogol.DFAReporting.Languages.List
+    , Gogol.DFAReporting.Metros.List
+    , Gogol.DFAReporting.MobileApps.Get
+    , Gogol.DFAReporting.MobileApps.List
+    , Gogol.DFAReporting.MobileCarriers.Get
+    , Gogol.DFAReporting.MobileCarriers.List
+    , Gogol.DFAReporting.OperatingSystemVersions.Get
+    , Gogol.DFAReporting.OperatingSystemVersions.List
+    , Gogol.DFAReporting.OperatingSystems.Get
+    , Gogol.DFAReporting.OperatingSystems.List
+    , Gogol.DFAReporting.OrderDocuments.Get
+    , Gogol.DFAReporting.OrderDocuments.List
+    , Gogol.DFAReporting.Orders.Get
+    , Gogol.DFAReporting.Orders.List
+    , Gogol.DFAReporting.PlacementGroups.Get
+    , Gogol.DFAReporting.PlacementGroups.Insert
+    , Gogol.DFAReporting.PlacementGroups.List
+    , Gogol.DFAReporting.PlacementGroups.Patch
+    , Gogol.DFAReporting.PlacementGroups.Update
+    , Gogol.DFAReporting.PlacementStrategies.Delete
+    , Gogol.DFAReporting.PlacementStrategies.Get
+    , Gogol.DFAReporting.PlacementStrategies.Insert
+    , Gogol.DFAReporting.PlacementStrategies.List
+    , Gogol.DFAReporting.PlacementStrategies.Patch
+    , Gogol.DFAReporting.PlacementStrategies.Update
+    , Gogol.DFAReporting.Placements.Generatetags
+    , Gogol.DFAReporting.Placements.Get
+    , Gogol.DFAReporting.Placements.Insert
+    , Gogol.DFAReporting.Placements.List
+    , Gogol.DFAReporting.Placements.Patch
+    , Gogol.DFAReporting.Placements.Update
+    , Gogol.DFAReporting.PlatformTypes.Get
+    , Gogol.DFAReporting.PlatformTypes.List
+    , Gogol.DFAReporting.PostalCodes.Get
+    , Gogol.DFAReporting.PostalCodes.List
+    , Gogol.DFAReporting.Projects.Get
+    , Gogol.DFAReporting.Projects.List
+    , Gogol.DFAReporting.Regions.List
+    , Gogol.DFAReporting.RemarketingListShares.Get
+    , Gogol.DFAReporting.RemarketingListShares.Patch
+    , Gogol.DFAReporting.RemarketingListShares.Update
+    , Gogol.DFAReporting.RemarketingLists.Get
+    , Gogol.DFAReporting.RemarketingLists.Insert
+    , Gogol.DFAReporting.RemarketingLists.List
+    , Gogol.DFAReporting.RemarketingLists.Patch
+    , Gogol.DFAReporting.RemarketingLists.Update
+    , Gogol.DFAReporting.Reports.CompatibleFields.Query
+    , Gogol.DFAReporting.Reports.Delete
+    , Gogol.DFAReporting.Reports.Files.Get
+    , Gogol.DFAReporting.Reports.Files.List
+    , Gogol.DFAReporting.Reports.Get
+    , Gogol.DFAReporting.Reports.Insert
+    , Gogol.DFAReporting.Reports.List
+    , Gogol.DFAReporting.Reports.Patch
+    , Gogol.DFAReporting.Reports.Run
+    , Gogol.DFAReporting.Reports.Update
+    , Gogol.DFAReporting.Sites.Get
+    , Gogol.DFAReporting.Sites.Insert
+    , Gogol.DFAReporting.Sites.List
+    , Gogol.DFAReporting.Sites.Patch
+    , Gogol.DFAReporting.Sites.Update
+    , Gogol.DFAReporting.Sizes.Get
+    , Gogol.DFAReporting.Sizes.Insert
+    , Gogol.DFAReporting.Sizes.List
+    , Gogol.DFAReporting.Subaccounts.Get
+    , Gogol.DFAReporting.Subaccounts.Insert
+    , Gogol.DFAReporting.Subaccounts.List
+    , Gogol.DFAReporting.Subaccounts.Patch
+    , Gogol.DFAReporting.Subaccounts.Update
+    , Gogol.DFAReporting.TargetableRemarketingLists.Get
+    , Gogol.DFAReporting.TargetableRemarketingLists.List
+    , Gogol.DFAReporting.TargetingTemplates.Get
+    , Gogol.DFAReporting.TargetingTemplates.Insert
+    , Gogol.DFAReporting.TargetingTemplates.List
+    , Gogol.DFAReporting.TargetingTemplates.Patch
+    , Gogol.DFAReporting.TargetingTemplates.Update
+    , Gogol.DFAReporting.Types
+    , Gogol.DFAReporting.UserProfiles.Get
+    , Gogol.DFAReporting.UserProfiles.List
+    , Gogol.DFAReporting.UserRolePermissionGroups.Get
+    , Gogol.DFAReporting.UserRolePermissionGroups.List
+    , Gogol.DFAReporting.UserRolePermissions.Get
+    , Gogol.DFAReporting.UserRolePermissions.List
+    , Gogol.DFAReporting.UserRoles.Delete
+    , Gogol.DFAReporting.UserRoles.Get
+    , Gogol.DFAReporting.UserRoles.Insert
+    , Gogol.DFAReporting.UserRoles.List
+    , Gogol.DFAReporting.UserRoles.Patch
+    , Gogol.DFAReporting.UserRoles.Update
+    , Gogol.DFAReporting.VideoFormats.Get
+    , Gogol.DFAReporting.VideoFormats.List
 
   other-modules:
-    Gogol.DFAReporting.Internal.Product
-    Gogol.DFAReporting.Internal.Sum
+      Gogol.DFAReporting.Internal.Product
+    , Gogol.DFAReporting.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
