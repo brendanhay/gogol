@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Dataflow.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AutoscalingEvent_EventType
     AutoscalingEvent_EventType
-      ( AutoscalingEvent_EventType_TYPEUNKNOWN,
+      (
+        AutoscalingEvent_EventType_TYPEUNKNOWN,
         AutoscalingEvent_EventType_TARGETNUMWORKERSCHANGED,
         AutoscalingEvent_EventType_CURRENTNUMWORKERSCHANGED,
         AutoscalingEvent_EventType_ACTUATIONFAILURE,
@@ -45,7 +56,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * AutoscalingSettings_Algorithm
     AutoscalingSettings_Algorithm
-      ( AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMUNKNOWN,
+      (
+        AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMUNKNOWN,
         AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMNONE,
         AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMBASIC,
         ..
@@ -53,7 +65,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * CounterMetadata_Kind
     CounterMetadata_Kind
-      ( CounterMetadata_Kind_Invalid,
+      (
+        CounterMetadata_Kind_Invalid,
         CounterMetadata_Kind_Sum,
         CounterMetadata_Kind_Max,
         CounterMetadata_Kind_Min,
@@ -68,7 +81,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * CounterMetadata_StandardUnits
     CounterMetadata_StandardUnits
-      ( CounterMetadata_StandardUnits_Bytes,
+      (
+        CounterMetadata_StandardUnits_Bytes,
         CounterMetadata_StandardUnits_BYTESPERSEC,
         CounterMetadata_StandardUnits_Milliseconds,
         CounterMetadata_StandardUnits_Microseconds,
@@ -81,14 +95,16 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * CounterStructuredName_Origin
     CounterStructuredName_Origin
-      ( CounterStructuredName_Origin_System,
+      (
+        CounterStructuredName_Origin_System,
         CounterStructuredName_Origin_User,
         ..
       ),
 
     -- * CounterStructuredName_Portion
     CounterStructuredName_Portion
-      ( CounterStructuredName_Portion_All,
+      (
+        CounterStructuredName_Portion_All,
         CounterStructuredName_Portion_Key,
         CounterStructuredName_Portion_Value,
         ..
@@ -96,7 +112,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * DerivedSource_DerivationMode
     DerivedSource_DerivationMode
-      ( DerivedSource_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN,
+      (
+        DerivedSource_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN,
         DerivedSource_DerivationMode_SOURCEDERIVATIONMODEINDEPENDENT,
         DerivedSource_DerivationMode_SOURCEDERIVATIONMODECHILDOFCURRENT,
         DerivedSource_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT,
@@ -105,7 +122,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * Environment_FlexResourceSchedulingGoal
     Environment_FlexResourceSchedulingGoal
-      ( Environment_FlexResourceSchedulingGoal_FLEXRSUNSPECIFIED,
+      (
+        Environment_FlexResourceSchedulingGoal_FLEXRSUNSPECIFIED,
         Environment_FlexResourceSchedulingGoal_FLEXRSSPEEDOPTIMIZED,
         Environment_FlexResourceSchedulingGoal_FLEXRSCOSTOPTIMIZED,
         ..
@@ -113,7 +131,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * Environment_ShuffleMode
     Environment_ShuffleMode
-      ( Environment_ShuffleMode_SHUFFLEMODEUNSPECIFIED,
+      (
+        Environment_ShuffleMode_SHUFFLEMODEUNSPECIFIED,
         Environment_ShuffleMode_VMBASED,
         Environment_ShuffleMode_SERVICEBASED,
         ..
@@ -121,7 +140,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ExecutionStageState_ExecutionStageState
     ExecutionStageState_ExecutionStageState
-      ( ExecutionStageState_ExecutionStageState_JOBSTATEUNKNOWN,
+      (
+        ExecutionStageState_ExecutionStageState_JOBSTATEUNKNOWN,
         ExecutionStageState_ExecutionStageState_JOBSTATESTOPPED,
         ExecutionStageState_ExecutionStageState_JOBSTATERUNNING,
         ExecutionStageState_ExecutionStageState_JOBSTATEDONE,
@@ -139,7 +159,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ExecutionStageSummary_Kind
     ExecutionStageSummary_Kind
-      ( ExecutionStageSummary_Kind_UNKNOWNKIND,
+      (
+        ExecutionStageSummary_Kind_UNKNOWNKIND,
         ExecutionStageSummary_Kind_PARDOKIND,
         ExecutionStageSummary_Kind_GROUPBYKEYKIND,
         ExecutionStageSummary_Kind_FLATTENKIND,
@@ -153,7 +174,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm
     FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm
-      ( FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMUNKNOWN,
+      (
+        FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMUNKNOWN,
         FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMNONE,
         FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMBASIC,
         ..
@@ -161,7 +183,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * FlexTemplateRuntimeEnvironment_FlexrsGoal
     FlexTemplateRuntimeEnvironment_FlexrsGoal
-      ( FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSUNSPECIFIED,
+      (
+        FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSUNSPECIFIED,
         FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSSPEEDOPTIMIZED,
         FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSCOSTOPTIMIZED,
         ..
@@ -169,7 +192,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * FlexTemplateRuntimeEnvironment_IpConfiguration
     FlexTemplateRuntimeEnvironment_IpConfiguration
-      ( FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
+      (
+        FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
         FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPUBLIC,
         FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE,
         ..
@@ -177,7 +201,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * GetTemplateResponse_TemplateType
     GetTemplateResponse_TemplateType
-      ( GetTemplateResponse_TemplateType_Unknown,
+      (
+        GetTemplateResponse_TemplateType_Unknown,
         GetTemplateResponse_TemplateType_Legacy,
         GetTemplateResponse_TemplateType_Flex,
         ..
@@ -185,7 +210,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * Job_CurrentState
     Job_CurrentState
-      ( Job_CurrentState_JOBSTATEUNKNOWN,
+      (
+        Job_CurrentState_JOBSTATEUNKNOWN,
         Job_CurrentState_JOBSTATESTOPPED,
         Job_CurrentState_JOBSTATERUNNING,
         Job_CurrentState_JOBSTATEDONE,
@@ -203,7 +229,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * Job_RequestedState
     Job_RequestedState
-      ( Job_RequestedState_JOBSTATEUNKNOWN,
+      (
+        Job_RequestedState_JOBSTATEUNKNOWN,
         Job_RequestedState_JOBSTATESTOPPED,
         Job_RequestedState_JOBSTATERUNNING,
         Job_RequestedState_JOBSTATEDONE,
@@ -221,7 +248,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * Job_Type
     Job_Type
-      ( Job_Type_JOBTYPEUNKNOWN,
+      (
+        Job_Type_JOBTYPEUNKNOWN,
         Job_Type_JOBTYPEBATCH,
         Job_Type_JOBTYPESTREAMING,
         ..
@@ -229,7 +257,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * JobMessage_MessageImportance
     JobMessage_MessageImportance
-      ( JobMessage_MessageImportance_JOBMESSAGEIMPORTANCEUNKNOWN,
+      (
+        JobMessage_MessageImportance_JOBMESSAGEIMPORTANCEUNKNOWN,
         JobMessage_MessageImportance_JOBMESSAGEDEBUG,
         JobMessage_MessageImportance_JOBMESSAGEDETAILED,
         JobMessage_MessageImportance_JOBMESSAGEBASIC,
@@ -240,7 +269,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * NameAndKind_Kind
     NameAndKind_Kind
-      ( NameAndKind_Kind_Invalid,
+      (
+        NameAndKind_Kind_Invalid,
         NameAndKind_Kind_Sum,
         NameAndKind_Kind_Max,
         NameAndKind_Kind_Min,
@@ -255,7 +285,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ParameterMetadata_ParamType
     ParameterMetadata_ParamType
-      ( ParameterMetadata_ParamType_Default,
+      (
+        ParameterMetadata_ParamType_Default,
         ParameterMetadata_ParamType_Text,
         ParameterMetadata_ParamType_GCSREADBUCKET,
         ParameterMetadata_ParamType_GCSWRITEBUCKET,
@@ -270,14 +301,16 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * QueryInfo_QueryPropertyItem
     QueryInfo_QueryPropertyItem
-      ( QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED,
+      (
+        QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED,
         QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE,
         ..
       ),
 
     -- * RuntimeEnvironment_IpConfiguration
     RuntimeEnvironment_IpConfiguration
-      ( RuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
+      (
+        RuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
         RuntimeEnvironment_IpConfiguration_WORKERIPPUBLIC,
         RuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE,
         ..
@@ -285,7 +318,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * SDKInfo_Language
     SDKInfo_Language
-      ( SDKInfo_Language_Unknown,
+      (
+        SDKInfo_Language_Unknown,
         SDKInfo_Language_Java,
         SDKInfo_Language_Python,
         ..
@@ -293,7 +327,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * SdkVersion_SdkSupportStatus
     SdkVersion_SdkSupportStatus
-      ( SdkVersion_SdkSupportStatus_Unknown,
+      (
+        SdkVersion_SdkSupportStatus_Unknown,
         SdkVersion_SdkSupportStatus_Supported,
         SdkVersion_SdkSupportStatus_Stale,
         SdkVersion_SdkSupportStatus_Deprecated,
@@ -303,7 +338,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * SendDebugCaptureRequest_DataFormat
     SendDebugCaptureRequest_DataFormat
-      ( SendDebugCaptureRequest_DataFormat_DATAFORMATUNSPECIFIED,
+      (
+        SendDebugCaptureRequest_DataFormat_DATAFORMATUNSPECIFIED,
         SendDebugCaptureRequest_DataFormat_Raw,
         SendDebugCaptureRequest_DataFormat_Json,
         SendDebugCaptureRequest_DataFormat_Zlib,
@@ -313,7 +349,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * Snapshot_State
     Snapshot_State
-      ( Snapshot_State_UNKNOWNSNAPSHOTSTATE,
+      (
+        Snapshot_State_UNKNOWNSNAPSHOTSTATE,
         Snapshot_State_Pending,
         Snapshot_State_Running,
         Snapshot_State_Ready,
@@ -324,7 +361,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * SourceSplitResponse_Outcome
     SourceSplitResponse_Outcome
-      ( SourceSplitResponse_Outcome_SOURCESPLITOUTCOMEUNKNOWN,
+      (
+        SourceSplitResponse_Outcome_SOURCESPLITOUTCOMEUNKNOWN,
         SourceSplitResponse_Outcome_SOURCESPLITOUTCOMEUSECURRENT,
         SourceSplitResponse_Outcome_SOURCESPLITOUTCOMESPLITTINGHAPPENED,
         ..
@@ -332,7 +370,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * SourceSplitShard_DerivationMode
     SourceSplitShard_DerivationMode
-      ( SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN,
+      (
+        SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN,
         SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODEINDEPENDENT,
         SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODECHILDOFCURRENT,
         SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT,
@@ -341,7 +380,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * StageSummary_State
     StageSummary_State
-      ( StageSummary_State_EXECUTIONSTATEUNKNOWN,
+      (
+        StageSummary_State_EXECUTIONSTATEUNKNOWN,
         StageSummary_State_EXECUTIONSTATENOTSTARTED,
         StageSummary_State_EXECUTIONSTATERUNNING,
         StageSummary_State_EXECUTIONSTATESUCCEEDED,
@@ -352,7 +392,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * StreamingComputationTask_TaskType
     StreamingComputationTask_TaskType
-      ( StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKUNKNOWN,
+      (
+        StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKUNKNOWN,
         StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKSTOP,
         StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKSTART,
         ..
@@ -360,7 +401,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * TransformSummary_Kind
     TransformSummary_Kind
-      ( TransformSummary_Kind_UNKNOWNKIND,
+      (
+        TransformSummary_Kind_UNKNOWNKIND,
         TransformSummary_Kind_PARDOKIND,
         TransformSummary_Kind_GROUPBYKEYKIND,
         TransformSummary_Kind_FLATTENKIND,
@@ -374,7 +416,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * WorkItemDetails_State
     WorkItemDetails_State
-      ( WorkItemDetails_State_EXECUTIONSTATEUNKNOWN,
+      (
+        WorkItemDetails_State_EXECUTIONSTATEUNKNOWN,
         WorkItemDetails_State_EXECUTIONSTATENOTSTARTED,
         WorkItemDetails_State_EXECUTIONSTATERUNNING,
         WorkItemDetails_State_EXECUTIONSTATESUCCEEDED,
@@ -385,7 +428,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * WorkerLifecycleEvent_Event
     WorkerLifecycleEvent_Event
-      ( WorkerLifecycleEvent_Event_UNKNOWNEVENT,
+      (
+        WorkerLifecycleEvent_Event_UNKNOWNEVENT,
         WorkerLifecycleEvent_Event_OSSTART,
         WorkerLifecycleEvent_Event_CONTAINERSTART,
         WorkerLifecycleEvent_Event_NETWORKUP,
@@ -398,7 +442,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * WorkerPool_DefaultPackageSet
     WorkerPool_DefaultPackageSet
-      ( WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETUNKNOWN,
+      (
+        WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETUNKNOWN,
         WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETNONE,
         WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETJAVA,
         WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETPYTHON,
@@ -407,7 +452,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * WorkerPool_IpConfiguration
     WorkerPool_IpConfiguration
-      ( WorkerPool_IpConfiguration_WORKERIPUNSPECIFIED,
+      (
+        WorkerPool_IpConfiguration_WORKERIPUNSPECIFIED,
         WorkerPool_IpConfiguration_WORKERIPPUBLIC,
         WorkerPool_IpConfiguration_WORKERIPPRIVATE,
         ..
@@ -415,7 +461,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * WorkerPool_TeardownPolicy
     WorkerPool_TeardownPolicy
-      ( WorkerPool_TeardownPolicy_TEARDOWNPOLICYUNKNOWN,
+      (
+        WorkerPool_TeardownPolicy_TEARDOWNPOLICYUNKNOWN,
         WorkerPool_TeardownPolicy_TEARDOWNALWAYS,
         WorkerPool_TeardownPolicy_TEARDOWNONSUCCESS,
         WorkerPool_TeardownPolicy_TEARDOWNNEVER,
@@ -424,7 +471,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsAggregatedFilter
     ProjectsJobsAggregatedFilter
-      ( ProjectsJobsAggregatedFilter_Unknown,
+      (
+        ProjectsJobsAggregatedFilter_Unknown,
         ProjectsJobsAggregatedFilter_All,
         ProjectsJobsAggregatedFilter_Terminated,
         ProjectsJobsAggregatedFilter_Active,
@@ -433,7 +481,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsAggregatedView
     ProjectsJobsAggregatedView
-      ( ProjectsJobsAggregatedView_JOBVIEWUNKNOWN,
+      (
+        ProjectsJobsAggregatedView_JOBVIEWUNKNOWN,
         ProjectsJobsAggregatedView_JOBVIEWSUMMARY,
         ProjectsJobsAggregatedView_JOBVIEWALL,
         ProjectsJobsAggregatedView_JOBVIEWDESCRIPTION,
@@ -442,7 +491,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsCreateView
     ProjectsJobsCreateView
-      ( ProjectsJobsCreateView_JOBVIEWUNKNOWN,
+      (
+        ProjectsJobsCreateView_JOBVIEWUNKNOWN,
         ProjectsJobsCreateView_JOBVIEWSUMMARY,
         ProjectsJobsCreateView_JOBVIEWALL,
         ProjectsJobsCreateView_JOBVIEWDESCRIPTION,
@@ -451,7 +501,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsGetView
     ProjectsJobsGetView
-      ( ProjectsJobsGetView_JOBVIEWUNKNOWN,
+      (
+        ProjectsJobsGetView_JOBVIEWUNKNOWN,
         ProjectsJobsGetView_JOBVIEWSUMMARY,
         ProjectsJobsGetView_JOBVIEWALL,
         ProjectsJobsGetView_JOBVIEWDESCRIPTION,
@@ -460,7 +511,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsListFilter
     ProjectsJobsListFilter
-      ( ProjectsJobsListFilter_Unknown,
+      (
+        ProjectsJobsListFilter_Unknown,
         ProjectsJobsListFilter_All,
         ProjectsJobsListFilter_Terminated,
         ProjectsJobsListFilter_Active,
@@ -469,7 +521,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsListView
     ProjectsJobsListView
-      ( ProjectsJobsListView_JOBVIEWUNKNOWN,
+      (
+        ProjectsJobsListView_JOBVIEWUNKNOWN,
         ProjectsJobsListView_JOBVIEWSUMMARY,
         ProjectsJobsListView_JOBVIEWALL,
         ProjectsJobsListView_JOBVIEWDESCRIPTION,
@@ -478,7 +531,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsJobsMessagesListMinimumImportance
     ProjectsJobsMessagesListMinimumImportance
-      ( ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEIMPORTANCEUNKNOWN,
+      (
+        ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEIMPORTANCEUNKNOWN,
         ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEDEBUG,
         ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEDETAILED,
         ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEBASIC,
@@ -489,7 +543,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsLocationsJobsCreateView
     ProjectsLocationsJobsCreateView
-      ( ProjectsLocationsJobsCreateView_JOBVIEWUNKNOWN,
+      (
+        ProjectsLocationsJobsCreateView_JOBVIEWUNKNOWN,
         ProjectsLocationsJobsCreateView_JOBVIEWSUMMARY,
         ProjectsLocationsJobsCreateView_JOBVIEWALL,
         ProjectsLocationsJobsCreateView_JOBVIEWDESCRIPTION,
@@ -498,7 +553,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsLocationsJobsGetView
     ProjectsLocationsJobsGetView
-      ( ProjectsLocationsJobsGetView_JOBVIEWUNKNOWN,
+      (
+        ProjectsLocationsJobsGetView_JOBVIEWUNKNOWN,
         ProjectsLocationsJobsGetView_JOBVIEWSUMMARY,
         ProjectsLocationsJobsGetView_JOBVIEWALL,
         ProjectsLocationsJobsGetView_JOBVIEWDESCRIPTION,
@@ -507,7 +563,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsLocationsJobsListFilter
     ProjectsLocationsJobsListFilter
-      ( ProjectsLocationsJobsListFilter_Unknown,
+      (
+        ProjectsLocationsJobsListFilter_Unknown,
         ProjectsLocationsJobsListFilter_All,
         ProjectsLocationsJobsListFilter_Terminated,
         ProjectsLocationsJobsListFilter_Active,
@@ -516,7 +573,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsLocationsJobsListView
     ProjectsLocationsJobsListView
-      ( ProjectsLocationsJobsListView_JOBVIEWUNKNOWN,
+      (
+        ProjectsLocationsJobsListView_JOBVIEWUNKNOWN,
         ProjectsLocationsJobsListView_JOBVIEWSUMMARY,
         ProjectsLocationsJobsListView_JOBVIEWALL,
         ProjectsLocationsJobsListView_JOBVIEWDESCRIPTION,
@@ -525,7 +583,8 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsLocationsJobsMessagesListMinimumImportance
     ProjectsLocationsJobsMessagesListMinimumImportance
-      ( ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEIMPORTANCEUNKNOWN,
+      (
+        ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEIMPORTANCEUNKNOWN,
         ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEDEBUG,
         ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEDETAILED,
         ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEBASIC,
@@ -536,32 +595,33 @@ module Gogol.Dataflow.Internal.Sum
 
     -- * ProjectsLocationsTemplatesGetView
     ProjectsLocationsTemplatesGetView
-      ( ProjectsLocationsTemplatesGetView_METADATAONLY,
+      (
+        ProjectsLocationsTemplatesGetView_METADATAONLY,
         ..
       ),
 
     -- * ProjectsTemplatesGetView
     ProjectsTemplatesGetView
-      ( ProjectsTemplatesGetView_METADATAONLY,
+      (
+        ProjectsTemplatesGetView_METADATAONLY,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -574,21 +634,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The type of autoscaling event to report.
-newtype AutoscalingEvent_EventType = AutoscalingEvent_EventType {fromAutoscalingEvent_EventType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AutoscalingEvent_EventType = AutoscalingEvent_EventType { fromAutoscalingEvent_EventType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default type for the enum. Value should never be returned.
 pattern AutoscalingEvent_EventType_TYPEUNKNOWN :: AutoscalingEvent_EventType
@@ -616,21 +675,20 @@ pattern AutoscalingEvent_EventType_NOCHANGE = AutoscalingEvent_EventType "NO_CHA
   AutoscalingEvent_EventType_CURRENTNUMWORKERSCHANGED,
   AutoscalingEvent_EventType_ACTUATIONFAILURE,
   AutoscalingEvent_EventType_NOCHANGE,
-  AutoscalingEvent_EventType
-  #-}
+  AutoscalingEvent_EventType #-}
 
 -- | The algorithm to use for autoscaling.
-newtype AutoscalingSettings_Algorithm = AutoscalingSettings_Algorithm {fromAutoscalingSettings_Algorithm :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AutoscalingSettings_Algorithm = AutoscalingSettings_Algorithm { fromAutoscalingSettings_Algorithm :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The algorithm is unknown, or unspecified.
 pattern AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMUNKNOWN :: AutoscalingSettings_Algorithm
@@ -648,21 +706,20 @@ pattern AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMBASIC = AutoscalingSet
   AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMUNKNOWN,
   AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMNONE,
   AutoscalingSettings_Algorithm_AUTOSCALINGALGORITHMBASIC,
-  AutoscalingSettings_Algorithm
-  #-}
+  AutoscalingSettings_Algorithm #-}
 
 -- | Counter aggregation kind.
-newtype CounterMetadata_Kind = CounterMetadata_Kind {fromCounterMetadata_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CounterMetadata_Kind = CounterMetadata_Kind { fromCounterMetadata_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Counter aggregation kind was not set.
 pattern CounterMetadata_Kind_Invalid :: CounterMetadata_Kind
@@ -715,21 +772,20 @@ pattern CounterMetadata_Kind_LATESTVALUE = CounterMetadata_Kind "LATEST_VALUE"
   CounterMetadata_Kind_Set,
   CounterMetadata_Kind_Distribution,
   CounterMetadata_Kind_LATESTVALUE,
-  CounterMetadata_Kind
-  #-}
+  CounterMetadata_Kind #-}
 
 -- | System defined Units, see above enum.
-newtype CounterMetadata_StandardUnits = CounterMetadata_StandardUnits {fromCounterMetadata_StandardUnits :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CounterMetadata_StandardUnits = CounterMetadata_StandardUnits { fromCounterMetadata_StandardUnits :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Counter returns a value in bytes.
 pattern CounterMetadata_StandardUnits_Bytes :: CounterMetadata_StandardUnits
@@ -772,21 +828,20 @@ pattern CounterMetadata_StandardUnits_TIMESTAMPNSEC = CounterMetadata_StandardUn
   CounterMetadata_StandardUnits_TIMESTAMPMSEC,
   CounterMetadata_StandardUnits_TIMESTAMPUSEC,
   CounterMetadata_StandardUnits_TIMESTAMPNSEC,
-  CounterMetadata_StandardUnits
-  #-}
+  CounterMetadata_StandardUnits #-}
 
 -- | One of the standard Origins defined above.
-newtype CounterStructuredName_Origin = CounterStructuredName_Origin {fromCounterStructuredName_Origin :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CounterStructuredName_Origin = CounterStructuredName_Origin { fromCounterStructuredName_Origin :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Counter was created by the Dataflow system.
 pattern CounterStructuredName_Origin_System :: CounterStructuredName_Origin
@@ -799,21 +854,20 @@ pattern CounterStructuredName_Origin_User = CounterStructuredName_Origin "USER"
 {-# COMPLETE
   CounterStructuredName_Origin_System,
   CounterStructuredName_Origin_User,
-  CounterStructuredName_Origin
-  #-}
+  CounterStructuredName_Origin #-}
 
 -- | Portion of this counter, either key or value.
-newtype CounterStructuredName_Portion = CounterStructuredName_Portion {fromCounterStructuredName_Portion :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CounterStructuredName_Portion = CounterStructuredName_Portion { fromCounterStructuredName_Portion :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Counter portion has not been set.
 pattern CounterStructuredName_Portion_All :: CounterStructuredName_Portion
@@ -831,21 +885,20 @@ pattern CounterStructuredName_Portion_Value = CounterStructuredName_Portion "VAL
   CounterStructuredName_Portion_All,
   CounterStructuredName_Portion_Key,
   CounterStructuredName_Portion_Value,
-  CounterStructuredName_Portion
-  #-}
+  CounterStructuredName_Portion #-}
 
 -- | What source to base the produced source on (if any).
-newtype DerivedSource_DerivationMode = DerivedSource_DerivationMode {fromDerivedSource_DerivationMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DerivedSource_DerivationMode = DerivedSource_DerivationMode { fromDerivedSource_DerivationMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The source derivation is unknown, or unspecified.
 pattern DerivedSource_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN :: DerivedSource_DerivationMode
@@ -868,21 +921,20 @@ pattern DerivedSource_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT = Deri
   DerivedSource_DerivationMode_SOURCEDERIVATIONMODEINDEPENDENT,
   DerivedSource_DerivationMode_SOURCEDERIVATIONMODECHILDOFCURRENT,
   DerivedSource_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT,
-  DerivedSource_DerivationMode
-  #-}
+  DerivedSource_DerivationMode #-}
 
 -- | Which Flexible Resource Scheduling mode to run in.
-newtype Environment_FlexResourceSchedulingGoal = Environment_FlexResourceSchedulingGoal {fromEnvironment_FlexResourceSchedulingGoal :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Environment_FlexResourceSchedulingGoal = Environment_FlexResourceSchedulingGoal { fromEnvironment_FlexResourceSchedulingGoal :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Run in the default mode.
 pattern Environment_FlexResourceSchedulingGoal_FLEXRSUNSPECIFIED :: Environment_FlexResourceSchedulingGoal
@@ -900,21 +952,20 @@ pattern Environment_FlexResourceSchedulingGoal_FLEXRSCOSTOPTIMIZED = Environment
   Environment_FlexResourceSchedulingGoal_FLEXRSUNSPECIFIED,
   Environment_FlexResourceSchedulingGoal_FLEXRSSPEEDOPTIMIZED,
   Environment_FlexResourceSchedulingGoal_FLEXRSCOSTOPTIMIZED,
-  Environment_FlexResourceSchedulingGoal
-  #-}
+  Environment_FlexResourceSchedulingGoal #-}
 
 -- | Output only. The shuffle mode used for the job.
-newtype Environment_ShuffleMode = Environment_ShuffleMode {fromEnvironment_ShuffleMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Environment_ShuffleMode = Environment_ShuffleMode { fromEnvironment_ShuffleMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Shuffle mode information is not available.
 pattern Environment_ShuffleMode_SHUFFLEMODEUNSPECIFIED :: Environment_ShuffleMode
@@ -932,21 +983,20 @@ pattern Environment_ShuffleMode_SERVICEBASED = Environment_ShuffleMode "SERVICE_
   Environment_ShuffleMode_SHUFFLEMODEUNSPECIFIED,
   Environment_ShuffleMode_VMBASED,
   Environment_ShuffleMode_SERVICEBASED,
-  Environment_ShuffleMode
-  #-}
+  Environment_ShuffleMode #-}
 
 -- | Executions stage states allow the same set of values as JobState.
-newtype ExecutionStageState_ExecutionStageState = ExecutionStageState_ExecutionStageState {fromExecutionStageState_ExecutionStageState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ExecutionStageState_ExecutionStageState = ExecutionStageState_ExecutionStageState { fromExecutionStageState_ExecutionStageState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job\'s run state isn\'t specified.
 pattern ExecutionStageState_ExecutionStageState_JOBSTATEUNKNOWN :: ExecutionStageState_ExecutionStageState
@@ -1014,21 +1064,20 @@ pattern ExecutionStageState_ExecutionStageState_JOBSTATERESOURCECLEANINGUP = Exe
   ExecutionStageState_ExecutionStageState_JOBSTATECANCELLING,
   ExecutionStageState_ExecutionStageState_JOBSTATEQUEUED,
   ExecutionStageState_ExecutionStageState_JOBSTATERESOURCECLEANINGUP,
-  ExecutionStageState_ExecutionStageState
-  #-}
+  ExecutionStageState_ExecutionStageState #-}
 
 -- | Type of transform this stage is executing.
-newtype ExecutionStageSummary_Kind = ExecutionStageSummary_Kind {fromExecutionStageSummary_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ExecutionStageSummary_Kind = ExecutionStageSummary_Kind { fromExecutionStageSummary_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unrecognized transform type.
 pattern ExecutionStageSummary_Kind_UNKNOWNKIND :: ExecutionStageSummary_Kind
@@ -1076,21 +1125,20 @@ pattern ExecutionStageSummary_Kind_SHUFFLEKIND = ExecutionStageSummary_Kind "SHU
   ExecutionStageSummary_Kind_CONSTANTKIND,
   ExecutionStageSummary_Kind_SINGLETONKIND,
   ExecutionStageSummary_Kind_SHUFFLEKIND,
-  ExecutionStageSummary_Kind
-  #-}
+  ExecutionStageSummary_Kind #-}
 
 -- | The algorithm to use for autoscaling
-newtype FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm = FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm {fromFlexTemplateRuntimeEnvironment_AutoscalingAlgorithm :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm = FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm { fromFlexTemplateRuntimeEnvironment_AutoscalingAlgorithm :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The algorithm is unknown, or unspecified.
 pattern FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMUNKNOWN :: FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm
@@ -1108,21 +1156,20 @@ pattern FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHM
   FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMUNKNOWN,
   FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMNONE,
   FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm_AUTOSCALINGALGORITHMBASIC,
-  FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm
-  #-}
+  FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm #-}
 
 -- | Set FlexRS goal for the job. https:\/\/cloud.google.com\/dataflow\/docs\/guides\/flexrs
-newtype FlexTemplateRuntimeEnvironment_FlexrsGoal = FlexTemplateRuntimeEnvironment_FlexrsGoal {fromFlexTemplateRuntimeEnvironment_FlexrsGoal :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FlexTemplateRuntimeEnvironment_FlexrsGoal = FlexTemplateRuntimeEnvironment_FlexrsGoal { fromFlexTemplateRuntimeEnvironment_FlexrsGoal :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Run in the default mode.
 pattern FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSUNSPECIFIED :: FlexTemplateRuntimeEnvironment_FlexrsGoal
@@ -1140,21 +1187,20 @@ pattern FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSCOSTOPTIMIZED = FlexTemp
   FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSUNSPECIFIED,
   FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSSPEEDOPTIMIZED,
   FlexTemplateRuntimeEnvironment_FlexrsGoal_FLEXRSCOSTOPTIMIZED,
-  FlexTemplateRuntimeEnvironment_FlexrsGoal
-  #-}
+  FlexTemplateRuntimeEnvironment_FlexrsGoal #-}
 
 -- | Configuration for VM IPs.
-newtype FlexTemplateRuntimeEnvironment_IpConfiguration = FlexTemplateRuntimeEnvironment_IpConfiguration {fromFlexTemplateRuntimeEnvironment_IpConfiguration :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FlexTemplateRuntimeEnvironment_IpConfiguration = FlexTemplateRuntimeEnvironment_IpConfiguration { fromFlexTemplateRuntimeEnvironment_IpConfiguration :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The configuration is unknown, or unspecified.
 pattern FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED :: FlexTemplateRuntimeEnvironment_IpConfiguration
@@ -1172,21 +1218,20 @@ pattern FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE = FlexTem
   FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
   FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPUBLIC,
   FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE,
-  FlexTemplateRuntimeEnvironment_IpConfiguration
-  #-}
+  FlexTemplateRuntimeEnvironment_IpConfiguration #-}
 
 -- | Template Type.
-newtype GetTemplateResponse_TemplateType = GetTemplateResponse_TemplateType {fromGetTemplateResponse_TemplateType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GetTemplateResponse_TemplateType = GetTemplateResponse_TemplateType { fromGetTemplateResponse_TemplateType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown Template Type.
 pattern GetTemplateResponse_TemplateType_Unknown :: GetTemplateResponse_TemplateType
@@ -1204,21 +1249,20 @@ pattern GetTemplateResponse_TemplateType_Flex = GetTemplateResponse_TemplateType
   GetTemplateResponse_TemplateType_Unknown,
   GetTemplateResponse_TemplateType_Legacy,
   GetTemplateResponse_TemplateType_Flex,
-  GetTemplateResponse_TemplateType
-  #-}
+  GetTemplateResponse_TemplateType #-}
 
 -- | The current state of the job. Jobs are created in the @JOB_STATE_STOPPED@ state unless otherwise specified. A job in the @JOB_STATE_RUNNING@ state may asynchronously enter a terminal state. After a job has reached a terminal state, no further state updates may be made. This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
-newtype Job_CurrentState = Job_CurrentState {fromJob_CurrentState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Job_CurrentState = Job_CurrentState { fromJob_CurrentState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job\'s run state isn\'t specified.
 pattern Job_CurrentState_JOBSTATEUNKNOWN :: Job_CurrentState
@@ -1286,21 +1330,20 @@ pattern Job_CurrentState_JOBSTATERESOURCECLEANINGUP = Job_CurrentState "JOB_STAT
   Job_CurrentState_JOBSTATECANCELLING,
   Job_CurrentState_JOBSTATEQUEUED,
   Job_CurrentState_JOBSTATERESOURCECLEANINGUP,
-  Job_CurrentState
-  #-}
+  Job_CurrentState #-}
 
 -- | The job\'s requested state. @UpdateJob@ may be used to switch between the @JOB_STATE_STOPPED@ and @JOB_STATE_RUNNING@ states, by setting requested_state. @UpdateJob@ may also be used to directly set a job\'s requested state to @JOB_STATE_CANCELLED@ or @JOB_STATE_DONE@, irrevocably terminating the job if it has not already reached a terminal state.
-newtype Job_RequestedState = Job_RequestedState {fromJob_RequestedState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Job_RequestedState = Job_RequestedState { fromJob_RequestedState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job\'s run state isn\'t specified.
 pattern Job_RequestedState_JOBSTATEUNKNOWN :: Job_RequestedState
@@ -1368,21 +1411,20 @@ pattern Job_RequestedState_JOBSTATERESOURCECLEANINGUP = Job_RequestedState "JOB_
   Job_RequestedState_JOBSTATECANCELLING,
   Job_RequestedState_JOBSTATEQUEUED,
   Job_RequestedState_JOBSTATERESOURCECLEANINGUP,
-  Job_RequestedState
-  #-}
+  Job_RequestedState #-}
 
 -- | The type of Cloud Dataflow job.
-newtype Job_Type = Job_Type {fromJob_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Job_Type = Job_Type { fromJob_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The type of the job is unspecified, or unknown.
 pattern Job_Type_JOBTYPEUNKNOWN :: Job_Type
@@ -1400,21 +1442,20 @@ pattern Job_Type_JOBTYPESTREAMING = Job_Type "JOB_TYPE_STREAMING"
   Job_Type_JOBTYPEUNKNOWN,
   Job_Type_JOBTYPEBATCH,
   Job_Type_JOBTYPESTREAMING,
-  Job_Type
-  #-}
+  Job_Type #-}
 
 -- | Importance level of the message.
-newtype JobMessage_MessageImportance = JobMessage_MessageImportance {fromJobMessage_MessageImportance :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype JobMessage_MessageImportance = JobMessage_MessageImportance { fromJobMessage_MessageImportance :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The message importance isn\'t specified, or is unknown.
 pattern JobMessage_MessageImportance_JOBMESSAGEIMPORTANCEUNKNOWN :: JobMessage_MessageImportance
@@ -1447,21 +1488,20 @@ pattern JobMessage_MessageImportance_JOBMESSAGEERROR = JobMessage_MessageImporta
   JobMessage_MessageImportance_JOBMESSAGEBASIC,
   JobMessage_MessageImportance_JOBMESSAGEWARNING,
   JobMessage_MessageImportance_JOBMESSAGEERROR,
-  JobMessage_MessageImportance
-  #-}
+  JobMessage_MessageImportance #-}
 
 -- | Counter aggregation kind.
-newtype NameAndKind_Kind = NameAndKind_Kind {fromNameAndKind_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NameAndKind_Kind = NameAndKind_Kind { fromNameAndKind_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Counter aggregation kind was not set.
 pattern NameAndKind_Kind_Invalid :: NameAndKind_Kind
@@ -1514,21 +1554,20 @@ pattern NameAndKind_Kind_LATESTVALUE = NameAndKind_Kind "LATEST_VALUE"
   NameAndKind_Kind_Set,
   NameAndKind_Kind_Distribution,
   NameAndKind_Kind_LATESTVALUE,
-  NameAndKind_Kind
-  #-}
+  NameAndKind_Kind #-}
 
 -- | Optional. The type of the parameter. Used for selecting input picker.
-newtype ParameterMetadata_ParamType = ParameterMetadata_ParamType {fromParameterMetadata_ParamType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ParameterMetadata_ParamType = ParameterMetadata_ParamType { fromParameterMetadata_ParamType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default input type.
 pattern ParameterMetadata_ParamType_Default :: ParameterMetadata_ParamType
@@ -1581,20 +1620,19 @@ pattern ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION = ParameterMetadata_Param
   ParameterMetadata_ParamType_GCSWRITEFOLDER,
   ParameterMetadata_ParamType_PUBSUBTOPIC,
   ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION,
-  ParameterMetadata_ParamType
-  #-}
+  ParameterMetadata_ParamType #-}
 
-newtype QueryInfo_QueryPropertyItem = QueryInfo_QueryPropertyItem {fromQueryInfo_QueryPropertyItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype QueryInfo_QueryPropertyItem = QueryInfo_QueryPropertyItem { fromQueryInfo_QueryPropertyItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The query property is unknown or unspecified.
 pattern QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED :: QueryInfo_QueryPropertyItem
@@ -1607,21 +1645,20 @@ pattern QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE = QueryInfo_QueryProperty
 {-# COMPLETE
   QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED,
   QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE,
-  QueryInfo_QueryPropertyItem
-  #-}
+  QueryInfo_QueryPropertyItem #-}
 
 -- | Configuration for VM IPs.
-newtype RuntimeEnvironment_IpConfiguration = RuntimeEnvironment_IpConfiguration {fromRuntimeEnvironment_IpConfiguration :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RuntimeEnvironment_IpConfiguration = RuntimeEnvironment_IpConfiguration { fromRuntimeEnvironment_IpConfiguration :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The configuration is unknown, or unspecified.
 pattern RuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED :: RuntimeEnvironment_IpConfiguration
@@ -1639,21 +1676,20 @@ pattern RuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE = RuntimeEnvironment_
   RuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
   RuntimeEnvironment_IpConfiguration_WORKERIPPUBLIC,
   RuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE,
-  RuntimeEnvironment_IpConfiguration
-  #-}
+  RuntimeEnvironment_IpConfiguration #-}
 
 -- | Required. The SDK Language.
-newtype SDKInfo_Language = SDKInfo_Language {fromSDKInfo_Language :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SDKInfo_Language = SDKInfo_Language { fromSDKInfo_Language :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | UNKNOWN Language.
 pattern SDKInfo_Language_Unknown :: SDKInfo_Language
@@ -1671,21 +1707,20 @@ pattern SDKInfo_Language_Python = SDKInfo_Language "PYTHON"
   SDKInfo_Language_Unknown,
   SDKInfo_Language_Java,
   SDKInfo_Language_Python,
-  SDKInfo_Language
-  #-}
+  SDKInfo_Language #-}
 
 -- | The support status for this SDK version.
-newtype SdkVersion_SdkSupportStatus = SdkVersion_SdkSupportStatus {fromSdkVersion_SdkSupportStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SdkVersion_SdkSupportStatus = SdkVersion_SdkSupportStatus { fromSdkVersion_SdkSupportStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Cloud Dataflow is unaware of this version.
 pattern SdkVersion_SdkSupportStatus_Unknown :: SdkVersion_SdkSupportStatus
@@ -1713,21 +1748,20 @@ pattern SdkVersion_SdkSupportStatus_Unsupported = SdkVersion_SdkSupportStatus "U
   SdkVersion_SdkSupportStatus_Stale,
   SdkVersion_SdkSupportStatus_Deprecated,
   SdkVersion_SdkSupportStatus_Unsupported,
-  SdkVersion_SdkSupportStatus
-  #-}
+  SdkVersion_SdkSupportStatus #-}
 
 -- | Format for the data field above (id=5).
-newtype SendDebugCaptureRequest_DataFormat = SendDebugCaptureRequest_DataFormat {fromSendDebugCaptureRequest_DataFormat :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SendDebugCaptureRequest_DataFormat = SendDebugCaptureRequest_DataFormat { fromSendDebugCaptureRequest_DataFormat :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Format unspecified, parsing is determined based upon page type and legacy encoding. (go\/protodosdonts#do-include-an-unspecified-value-in-an-enum)
 pattern SendDebugCaptureRequest_DataFormat_DATAFORMATUNSPECIFIED :: SendDebugCaptureRequest_DataFormat
@@ -1755,21 +1789,20 @@ pattern SendDebugCaptureRequest_DataFormat_Brotli = SendDebugCaptureRequest_Data
   SendDebugCaptureRequest_DataFormat_Json,
   SendDebugCaptureRequest_DataFormat_Zlib,
   SendDebugCaptureRequest_DataFormat_Brotli,
-  SendDebugCaptureRequest_DataFormat
-  #-}
+  SendDebugCaptureRequest_DataFormat #-}
 
 -- | State of the snapshot.
-newtype Snapshot_State = Snapshot_State {fromSnapshot_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Snapshot_State = Snapshot_State { fromSnapshot_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown state.
 pattern Snapshot_State_UNKNOWNSNAPSHOTSTATE :: Snapshot_State
@@ -1802,21 +1835,20 @@ pattern Snapshot_State_Deleted = Snapshot_State "DELETED"
   Snapshot_State_Ready,
   Snapshot_State_Failed,
   Snapshot_State_Deleted,
-  Snapshot_State
-  #-}
+  Snapshot_State #-}
 
 -- | Indicates whether splitting happened and produced a list of bundles. If this is USE/CURRENT/SOURCE/AS/IS, the current source should be processed \"as is\" without splitting. \"bundles\" is ignored in this case. If this is SPLITTING_HAPPENED, then \"bundles\" contains a list of bundles into which the source was split.
-newtype SourceSplitResponse_Outcome = SourceSplitResponse_Outcome {fromSourceSplitResponse_Outcome :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SourceSplitResponse_Outcome = SourceSplitResponse_Outcome { fromSourceSplitResponse_Outcome :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The source split outcome is unknown, or unspecified.
 pattern SourceSplitResponse_Outcome_SOURCESPLITOUTCOMEUNKNOWN :: SourceSplitResponse_Outcome
@@ -1834,21 +1866,20 @@ pattern SourceSplitResponse_Outcome_SOURCESPLITOUTCOMESPLITTINGHAPPENED = Source
   SourceSplitResponse_Outcome_SOURCESPLITOUTCOMEUNKNOWN,
   SourceSplitResponse_Outcome_SOURCESPLITOUTCOMEUSECURRENT,
   SourceSplitResponse_Outcome_SOURCESPLITOUTCOMESPLITTINGHAPPENED,
-  SourceSplitResponse_Outcome
-  #-}
+  SourceSplitResponse_Outcome #-}
 
 -- | DEPRECATED
-newtype SourceSplitShard_DerivationMode = SourceSplitShard_DerivationMode {fromSourceSplitShard_DerivationMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SourceSplitShard_DerivationMode = SourceSplitShard_DerivationMode { fromSourceSplitShard_DerivationMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The source derivation is unknown, or unspecified.
 pattern SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN :: SourceSplitShard_DerivationMode
@@ -1871,21 +1902,20 @@ pattern SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT = S
   SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODEINDEPENDENT,
   SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODECHILDOFCURRENT,
   SourceSplitShard_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT,
-  SourceSplitShard_DerivationMode
-  #-}
+  SourceSplitShard_DerivationMode #-}
 
 -- | State of this stage.
-newtype StageSummary_State = StageSummary_State {fromStageSummary_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype StageSummary_State = StageSummary_State { fromStageSummary_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The component state is unknown or unspecified.
 pattern StageSummary_State_EXECUTIONSTATEUNKNOWN :: StageSummary_State
@@ -1918,21 +1948,20 @@ pattern StageSummary_State_EXECUTIONSTATECANCELLED = StageSummary_State "EXECUTI
   StageSummary_State_EXECUTIONSTATESUCCEEDED,
   StageSummary_State_EXECUTIONSTATEFAILED,
   StageSummary_State_EXECUTIONSTATECANCELLED,
-  StageSummary_State
-  #-}
+  StageSummary_State #-}
 
 -- | A type of streaming computation task.
-newtype StreamingComputationTask_TaskType = StreamingComputationTask_TaskType {fromStreamingComputationTask_TaskType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype StreamingComputationTask_TaskType = StreamingComputationTask_TaskType { fromStreamingComputationTask_TaskType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The streaming computation task is unknown, or unspecified.
 pattern StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKUNKNOWN :: StreamingComputationTask_TaskType
@@ -1950,21 +1979,20 @@ pattern StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKSTART = Stream
   StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKUNKNOWN,
   StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKSTOP,
   StreamingComputationTask_TaskType_STREAMINGCOMPUTATIONTASKSTART,
-  StreamingComputationTask_TaskType
-  #-}
+  StreamingComputationTask_TaskType #-}
 
 -- | Type of transform.
-newtype TransformSummary_Kind = TransformSummary_Kind {fromTransformSummary_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TransformSummary_Kind = TransformSummary_Kind { fromTransformSummary_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unrecognized transform type.
 pattern TransformSummary_Kind_UNKNOWNKIND :: TransformSummary_Kind
@@ -2012,21 +2040,20 @@ pattern TransformSummary_Kind_SHUFFLEKIND = TransformSummary_Kind "SHUFFLE_KIND"
   TransformSummary_Kind_CONSTANTKIND,
   TransformSummary_Kind_SINGLETONKIND,
   TransformSummary_Kind_SHUFFLEKIND,
-  TransformSummary_Kind
-  #-}
+  TransformSummary_Kind #-}
 
 -- | State of this work item.
-newtype WorkItemDetails_State = WorkItemDetails_State {fromWorkItemDetails_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkItemDetails_State = WorkItemDetails_State { fromWorkItemDetails_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The component state is unknown or unspecified.
 pattern WorkItemDetails_State_EXECUTIONSTATEUNKNOWN :: WorkItemDetails_State
@@ -2059,21 +2086,20 @@ pattern WorkItemDetails_State_EXECUTIONSTATECANCELLED = WorkItemDetails_State "E
   WorkItemDetails_State_EXECUTIONSTATESUCCEEDED,
   WorkItemDetails_State_EXECUTIONSTATEFAILED,
   WorkItemDetails_State_EXECUTIONSTATECANCELLED,
-  WorkItemDetails_State
-  #-}
+  WorkItemDetails_State #-}
 
 -- | The event being reported.
-newtype WorkerLifecycleEvent_Event = WorkerLifecycleEvent_Event {fromWorkerLifecycleEvent_Event :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkerLifecycleEvent_Event = WorkerLifecycleEvent_Event { fromWorkerLifecycleEvent_Event :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid event.
 pattern WorkerLifecycleEvent_Event_UNKNOWNEVENT :: WorkerLifecycleEvent_Event
@@ -2116,21 +2142,20 @@ pattern WorkerLifecycleEvent_Event_SDKINSTALLFINISH = WorkerLifecycleEvent_Event
   WorkerLifecycleEvent_Event_STAGINGFILESDOWNLOADFINISH,
   WorkerLifecycleEvent_Event_SDKINSTALLSTART,
   WorkerLifecycleEvent_Event_SDKINSTALLFINISH,
-  WorkerLifecycleEvent_Event
-  #-}
+  WorkerLifecycleEvent_Event #-}
 
 -- | The default package set to install. This allows the service to select a default set of packages which are useful to worker harnesses written in a particular language.
-newtype WorkerPool_DefaultPackageSet = WorkerPool_DefaultPackageSet {fromWorkerPool_DefaultPackageSet :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkerPool_DefaultPackageSet = WorkerPool_DefaultPackageSet { fromWorkerPool_DefaultPackageSet :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default set of packages to stage is unknown, or unspecified.
 pattern WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETUNKNOWN :: WorkerPool_DefaultPackageSet
@@ -2153,21 +2178,20 @@ pattern WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETPYTHON = WorkerPool_Defaul
   WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETNONE,
   WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETJAVA,
   WorkerPool_DefaultPackageSet_DEFAULTPACKAGESETPYTHON,
-  WorkerPool_DefaultPackageSet
-  #-}
+  WorkerPool_DefaultPackageSet #-}
 
 -- | Configuration for VM IPs.
-newtype WorkerPool_IpConfiguration = WorkerPool_IpConfiguration {fromWorkerPool_IpConfiguration :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkerPool_IpConfiguration = WorkerPool_IpConfiguration { fromWorkerPool_IpConfiguration :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The configuration is unknown, or unspecified.
 pattern WorkerPool_IpConfiguration_WORKERIPUNSPECIFIED :: WorkerPool_IpConfiguration
@@ -2185,21 +2209,20 @@ pattern WorkerPool_IpConfiguration_WORKERIPPRIVATE = WorkerPool_IpConfiguration 
   WorkerPool_IpConfiguration_WORKERIPUNSPECIFIED,
   WorkerPool_IpConfiguration_WORKERIPPUBLIC,
   WorkerPool_IpConfiguration_WORKERIPPRIVATE,
-  WorkerPool_IpConfiguration
-  #-}
+  WorkerPool_IpConfiguration #-}
 
 -- | Sets the policy for determining when to turndown worker pool. Allowed values are: @TEARDOWN_ALWAYS@, @TEARDOWN_ON_SUCCESS@, and @TEARDOWN_NEVER@. @TEARDOWN_ALWAYS@ means workers are always torn down regardless of whether the job succeeds. @TEARDOWN_ON_SUCCESS@ means workers are torn down if the job succeeds. @TEARDOWN_NEVER@ means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user\'s project until they are explicitly terminated by the user. Because of this, Google recommends using the @TEARDOWN_ALWAYS@ policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default.
-newtype WorkerPool_TeardownPolicy = WorkerPool_TeardownPolicy {fromWorkerPool_TeardownPolicy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkerPool_TeardownPolicy = WorkerPool_TeardownPolicy { fromWorkerPool_TeardownPolicy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The teardown policy isn\'t specified, or is unknown.
 pattern WorkerPool_TeardownPolicy_TEARDOWNPOLICYUNKNOWN :: WorkerPool_TeardownPolicy
@@ -2222,21 +2245,20 @@ pattern WorkerPool_TeardownPolicy_TEARDOWNNEVER = WorkerPool_TeardownPolicy "TEA
   WorkerPool_TeardownPolicy_TEARDOWNALWAYS,
   WorkerPool_TeardownPolicy_TEARDOWNONSUCCESS,
   WorkerPool_TeardownPolicy_TEARDOWNNEVER,
-  WorkerPool_TeardownPolicy
-  #-}
+  WorkerPool_TeardownPolicy #-}
 
 -- | The kind of filter to use.
-newtype ProjectsJobsAggregatedFilter = ProjectsJobsAggregatedFilter {fromProjectsJobsAggregatedFilter :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsAggregatedFilter = ProjectsJobsAggregatedFilter { fromProjectsJobsAggregatedFilter :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The filter isn\'t specified, or is unknown. This returns all jobs ordered on descending @JobUuid@.
 pattern ProjectsJobsAggregatedFilter_Unknown :: ProjectsJobsAggregatedFilter
@@ -2259,21 +2281,20 @@ pattern ProjectsJobsAggregatedFilter_Active = ProjectsJobsAggregatedFilter "ACTI
   ProjectsJobsAggregatedFilter_All,
   ProjectsJobsAggregatedFilter_Terminated,
   ProjectsJobsAggregatedFilter_Active,
-  ProjectsJobsAggregatedFilter
-  #-}
+  ProjectsJobsAggregatedFilter #-}
 
 -- | Deprecated. ListJobs always returns summaries now. Use GetJob for other JobViews.
-newtype ProjectsJobsAggregatedView = ProjectsJobsAggregatedView {fromProjectsJobsAggregatedView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsAggregatedView = ProjectsJobsAggregatedView { fromProjectsJobsAggregatedView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsJobsAggregatedView_JOBVIEWUNKNOWN :: ProjectsJobsAggregatedView
@@ -2296,21 +2317,20 @@ pattern ProjectsJobsAggregatedView_JOBVIEWDESCRIPTION = ProjectsJobsAggregatedVi
   ProjectsJobsAggregatedView_JOBVIEWSUMMARY,
   ProjectsJobsAggregatedView_JOBVIEWALL,
   ProjectsJobsAggregatedView_JOBVIEWDESCRIPTION,
-  ProjectsJobsAggregatedView
-  #-}
+  ProjectsJobsAggregatedView #-}
 
 -- | The level of information requested in response.
-newtype ProjectsJobsCreateView = ProjectsJobsCreateView {fromProjectsJobsCreateView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsCreateView = ProjectsJobsCreateView { fromProjectsJobsCreateView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsJobsCreateView_JOBVIEWUNKNOWN :: ProjectsJobsCreateView
@@ -2333,21 +2353,20 @@ pattern ProjectsJobsCreateView_JOBVIEWDESCRIPTION = ProjectsJobsCreateView "JOB_
   ProjectsJobsCreateView_JOBVIEWSUMMARY,
   ProjectsJobsCreateView_JOBVIEWALL,
   ProjectsJobsCreateView_JOBVIEWDESCRIPTION,
-  ProjectsJobsCreateView
-  #-}
+  ProjectsJobsCreateView #-}
 
 -- | The level of information requested in response.
-newtype ProjectsJobsGetView = ProjectsJobsGetView {fromProjectsJobsGetView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsGetView = ProjectsJobsGetView { fromProjectsJobsGetView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsJobsGetView_JOBVIEWUNKNOWN :: ProjectsJobsGetView
@@ -2370,21 +2389,20 @@ pattern ProjectsJobsGetView_JOBVIEWDESCRIPTION = ProjectsJobsGetView "JOB_VIEW_D
   ProjectsJobsGetView_JOBVIEWSUMMARY,
   ProjectsJobsGetView_JOBVIEWALL,
   ProjectsJobsGetView_JOBVIEWDESCRIPTION,
-  ProjectsJobsGetView
-  #-}
+  ProjectsJobsGetView #-}
 
 -- | The kind of filter to use.
-newtype ProjectsJobsListFilter = ProjectsJobsListFilter {fromProjectsJobsListFilter :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsListFilter = ProjectsJobsListFilter { fromProjectsJobsListFilter :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The filter isn\'t specified, or is unknown. This returns all jobs ordered on descending @JobUuid@.
 pattern ProjectsJobsListFilter_Unknown :: ProjectsJobsListFilter
@@ -2407,21 +2425,20 @@ pattern ProjectsJobsListFilter_Active = ProjectsJobsListFilter "ACTIVE"
   ProjectsJobsListFilter_All,
   ProjectsJobsListFilter_Terminated,
   ProjectsJobsListFilter_Active,
-  ProjectsJobsListFilter
-  #-}
+  ProjectsJobsListFilter #-}
 
 -- | Deprecated. ListJobs always returns summaries now. Use GetJob for other JobViews.
-newtype ProjectsJobsListView = ProjectsJobsListView {fromProjectsJobsListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsListView = ProjectsJobsListView { fromProjectsJobsListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsJobsListView_JOBVIEWUNKNOWN :: ProjectsJobsListView
@@ -2444,21 +2461,20 @@ pattern ProjectsJobsListView_JOBVIEWDESCRIPTION = ProjectsJobsListView "JOB_VIEW
   ProjectsJobsListView_JOBVIEWSUMMARY,
   ProjectsJobsListView_JOBVIEWALL,
   ProjectsJobsListView_JOBVIEWDESCRIPTION,
-  ProjectsJobsListView
-  #-}
+  ProjectsJobsListView #-}
 
 -- | Filter to only get messages with importance >= level
-newtype ProjectsJobsMessagesListMinimumImportance = ProjectsJobsMessagesListMinimumImportance {fromProjectsJobsMessagesListMinimumImportance :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsJobsMessagesListMinimumImportance = ProjectsJobsMessagesListMinimumImportance { fromProjectsJobsMessagesListMinimumImportance :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The message importance isn\'t specified, or is unknown.
 pattern ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEIMPORTANCEUNKNOWN :: ProjectsJobsMessagesListMinimumImportance
@@ -2491,21 +2507,20 @@ pattern ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEERROR = ProjectsJobs
   ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEBASIC,
   ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEWARNING,
   ProjectsJobsMessagesListMinimumImportance_JOBMESSAGEERROR,
-  ProjectsJobsMessagesListMinimumImportance
-  #-}
+  ProjectsJobsMessagesListMinimumImportance #-}
 
 -- | The level of information requested in response.
-newtype ProjectsLocationsJobsCreateView = ProjectsLocationsJobsCreateView {fromProjectsLocationsJobsCreateView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsJobsCreateView = ProjectsLocationsJobsCreateView { fromProjectsLocationsJobsCreateView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsLocationsJobsCreateView_JOBVIEWUNKNOWN :: ProjectsLocationsJobsCreateView
@@ -2528,21 +2543,20 @@ pattern ProjectsLocationsJobsCreateView_JOBVIEWDESCRIPTION = ProjectsLocationsJo
   ProjectsLocationsJobsCreateView_JOBVIEWSUMMARY,
   ProjectsLocationsJobsCreateView_JOBVIEWALL,
   ProjectsLocationsJobsCreateView_JOBVIEWDESCRIPTION,
-  ProjectsLocationsJobsCreateView
-  #-}
+  ProjectsLocationsJobsCreateView #-}
 
 -- | The level of information requested in response.
-newtype ProjectsLocationsJobsGetView = ProjectsLocationsJobsGetView {fromProjectsLocationsJobsGetView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsJobsGetView = ProjectsLocationsJobsGetView { fromProjectsLocationsJobsGetView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsLocationsJobsGetView_JOBVIEWUNKNOWN :: ProjectsLocationsJobsGetView
@@ -2565,21 +2579,20 @@ pattern ProjectsLocationsJobsGetView_JOBVIEWDESCRIPTION = ProjectsLocationsJobsG
   ProjectsLocationsJobsGetView_JOBVIEWSUMMARY,
   ProjectsLocationsJobsGetView_JOBVIEWALL,
   ProjectsLocationsJobsGetView_JOBVIEWDESCRIPTION,
-  ProjectsLocationsJobsGetView
-  #-}
+  ProjectsLocationsJobsGetView #-}
 
 -- | The kind of filter to use.
-newtype ProjectsLocationsJobsListFilter = ProjectsLocationsJobsListFilter {fromProjectsLocationsJobsListFilter :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsJobsListFilter = ProjectsLocationsJobsListFilter { fromProjectsLocationsJobsListFilter :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The filter isn\'t specified, or is unknown. This returns all jobs ordered on descending @JobUuid@.
 pattern ProjectsLocationsJobsListFilter_Unknown :: ProjectsLocationsJobsListFilter
@@ -2602,21 +2615,20 @@ pattern ProjectsLocationsJobsListFilter_Active = ProjectsLocationsJobsListFilter
   ProjectsLocationsJobsListFilter_All,
   ProjectsLocationsJobsListFilter_Terminated,
   ProjectsLocationsJobsListFilter_Active,
-  ProjectsLocationsJobsListFilter
-  #-}
+  ProjectsLocationsJobsListFilter #-}
 
 -- | Deprecated. ListJobs always returns summaries now. Use GetJob for other JobViews.
-newtype ProjectsLocationsJobsListView = ProjectsLocationsJobsListView {fromProjectsLocationsJobsListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsJobsListView = ProjectsLocationsJobsListView { fromProjectsLocationsJobsListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The job view to return isn\'t specified, or is unknown. Responses will contain at least the @JOB_VIEW_SUMMARY@ information, and may contain additional information.
 pattern ProjectsLocationsJobsListView_JOBVIEWUNKNOWN :: ProjectsLocationsJobsListView
@@ -2639,21 +2651,20 @@ pattern ProjectsLocationsJobsListView_JOBVIEWDESCRIPTION = ProjectsLocationsJobs
   ProjectsLocationsJobsListView_JOBVIEWSUMMARY,
   ProjectsLocationsJobsListView_JOBVIEWALL,
   ProjectsLocationsJobsListView_JOBVIEWDESCRIPTION,
-  ProjectsLocationsJobsListView
-  #-}
+  ProjectsLocationsJobsListView #-}
 
 -- | Filter to only get messages with importance >= level
-newtype ProjectsLocationsJobsMessagesListMinimumImportance = ProjectsLocationsJobsMessagesListMinimumImportance {fromProjectsLocationsJobsMessagesListMinimumImportance :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsJobsMessagesListMinimumImportance = ProjectsLocationsJobsMessagesListMinimumImportance { fromProjectsLocationsJobsMessagesListMinimumImportance :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The message importance isn\'t specified, or is unknown.
 pattern ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEIMPORTANCEUNKNOWN :: ProjectsLocationsJobsMessagesListMinimumImportance
@@ -2686,21 +2697,20 @@ pattern ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEERROR = Pro
   ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEBASIC,
   ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEWARNING,
   ProjectsLocationsJobsMessagesListMinimumImportance_JOBMESSAGEERROR,
-  ProjectsLocationsJobsMessagesListMinimumImportance
-  #-}
+  ProjectsLocationsJobsMessagesListMinimumImportance #-}
 
 -- | The view to retrieve. Defaults to METADATA_ONLY.
-newtype ProjectsLocationsTemplatesGetView = ProjectsLocationsTemplatesGetView {fromProjectsLocationsTemplatesGetView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsTemplatesGetView = ProjectsLocationsTemplatesGetView { fromProjectsLocationsTemplatesGetView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Template view that retrieves only the metadata associated with the template.
 pattern ProjectsLocationsTemplatesGetView_METADATAONLY :: ProjectsLocationsTemplatesGetView
@@ -2708,21 +2718,20 @@ pattern ProjectsLocationsTemplatesGetView_METADATAONLY = ProjectsLocationsTempla
 
 {-# COMPLETE
   ProjectsLocationsTemplatesGetView_METADATAONLY,
-  ProjectsLocationsTemplatesGetView
-  #-}
+  ProjectsLocationsTemplatesGetView #-}
 
 -- | The view to retrieve. Defaults to METADATA_ONLY.
-newtype ProjectsTemplatesGetView = ProjectsTemplatesGetView {fromProjectsTemplatesGetView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTemplatesGetView = ProjectsTemplatesGetView { fromProjectsTemplatesGetView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Template view that retrieves only the metadata associated with the template.
 pattern ProjectsTemplatesGetView_METADATAONLY :: ProjectsTemplatesGetView
@@ -2730,5 +2739,4 @@ pattern ProjectsTemplatesGetView_METADATAONLY = ProjectsTemplatesGetView "METADA
 
 {-# COMPLETE
   ProjectsTemplatesGetView_METADATAONLY,
-  ProjectsTemplatesGetView
-  #-}
+  ProjectsTemplatesGetView #-}
