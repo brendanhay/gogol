@@ -1,218 +1,176 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SourceRepo.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.SourceRepo.Types
-    (
-    -- * Service Configuration
-      sourceRepoService
+  ( -- * Configuration
+    sourceRepoService,
 
     -- * OAuth Scopes
-    , sourceReadOnlyScope
-    , sourceFullControlScope
-    , cloudPlatformScope
-    , sourceReadWriteScope
+    cloudPlatformScope,
+    sourceFull_controlScope,
+    sourceRead_OnlyScope,
+    sourceRead_writeScope,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * Types
 
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ProjectConfig
-    , ProjectConfig
-    , projectConfig
-    , pcPubsubConfigs
-    , pcEnablePrivateKeyCheck
-    , pcName
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * ListReposResponse
-    , ListReposResponse
-    , listReposResponse
-    , lrrNextPageToken
-    , lrrRepos
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * UpdateRepoRequest
-    , UpdateRepoRequest
-    , updateRepoRequest
-    , urrUpdateMask
-    , urrRepo
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ListReposResponse
+    ListReposResponse (..),
+    newListReposResponse,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
+    -- ** MirrorConfig
+    MirrorConfig (..),
+    newMirrorConfig,
 
-    -- * PubsubConfig
-    , PubsubConfig
-    , pubsubConfig
-    , pcTopic
-    , pcServiceAccountEmail
-    , pcMessageFormat
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * PubsubConfigMessageFormat
-    , PubsubConfigMessageFormat (..)
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * UpdateProjectConfigRequest
-    , UpdateProjectConfigRequest
-    , updateProjectConfigRequest
-    , upcrProjectConfig
-    , upcrUpdateMask
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ProjectConfig
+    ProjectConfig (..),
+    newProjectConfig,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** ProjectConfig_PubsubConfigs
+    ProjectConfig_PubsubConfigs (..),
+    newProjectConfig_PubsubConfigs,
 
-    -- * SyncRepoMetadata
-    , SyncRepoMetadata
-    , syncRepoMetadata
-    , srmStartTime
-    , srmUpdateTime
-    , srmName
-    , srmStatusMessage
+    -- ** PubsubConfig
+    PubsubConfig (..),
+    newPubsubConfig,
 
-    -- * RepoPubsubConfigs
-    , RepoPubsubConfigs
-    , repoPubsubConfigs
-    , rpcAddtional
+    -- ** PubsubConfig_MessageFormat
+    PubsubConfig_MessageFormat (..),
 
-    -- * ProjectConfigPubsubConfigs
-    , ProjectConfigPubsubConfigs
-    , projectConfigPubsubConfigs
-    , pcpcAddtional
+    -- ** Repo
+    Repo (..),
+    newRepo,
 
-    -- * Repo
-    , Repo
-    , repo
-    , rPubsubConfigs
-    , rSize
-    , rURL
-    , rName
-    , rMirrorConfig
+    -- ** Repo_PubsubConfigs
+    Repo_PubsubConfigs (..),
+    newRepo_PubsubConfigs,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    -- ** SyncRepoMetadata
+    SyncRepoMetadata (..),
+    newSyncRepoMetadata,
 
-    -- * MirrorConfig
-    , MirrorConfig
-    , mirrorConfig
-    , mcURL
-    , mcDeployKeyId
-    , mcWebhookId
+    -- ** SyncRepoRequest
+    SyncRepoRequest (..),
+    newSyncRepoRequest,
 
-    -- * SyncRepoRequest
-    , SyncRepoRequest
-    , syncRepoRequest
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    -- ** UpdateProjectConfigRequest
+    UpdateProjectConfigRequest (..),
+    newUpdateProjectConfigRequest,
 
-import Network.Google.Prelude
-import Network.Google.SourceRepo.Types.Product
-import Network.Google.SourceRepo.Types.Sum
+    -- ** UpdateRepoRequest
+    UpdateRepoRequest (..),
+    newUpdateRepoRequest,
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud Source Repositories API. This contains the host and root path used as a starting point for constructing service requests.
-sourceRepoService :: ServiceConfig
-sourceRepoService
-  = defaultService (ServiceId "sourcerepo:v1")
-      "sourcerepo.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.SourceRepo.Internal.Product
+import Network.Google.SourceRepo.Internal.Sum
 
--- | View the contents of your source code repositories
-sourceReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/source.read_only"]
-sourceReadOnlyScope = Proxy
+-- | Default request referring to version @v1@ of the Cloud Source Repositories API. This contains the host and root path used as a starting point for constructing service requests.
+sourceRepoService :: Core.ServiceConfig
+sourceRepoService =
+  Core.defaultService
+    (Core.ServiceId "sourcerepo:v1")
+    "sourcerepo.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Manage your source code repositories
-sourceFullControlScope :: Proxy '["https://www.googleapis.com/auth/source.full_control"]
-sourceFullControlScope = Proxy
+sourceFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/source.full_control"]
+sourceFull_controlScope = Core.Proxy
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | View the contents of your source code repositories
+sourceRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_only"]
+sourceRead_OnlyScope = Core.Proxy
 
 -- | Manage the contents of your source code repositories
-sourceReadWriteScope :: Proxy '["https://www.googleapis.com/auth/source.read_write"]
-sourceReadWriteScope = Proxy
+sourceRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/source.read_write"]
+sourceRead_writeScope = Core.Proxy
