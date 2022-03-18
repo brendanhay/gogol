@@ -1,289 +1,229 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Redis.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Redis.Types
-    (
-    -- * Service Configuration
-      redisService
+  ( -- * Configuration
+    redisService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * FailoverInstanceRequest
-    , FailoverInstanceRequest
-    , failoverInstanceRequest
-    , firDataProtectionMode
+    -- * Types
 
-    -- * InstanceLabels
-    , InstanceLabels
-    , instanceLabels
-    , ilAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * FailoverInstanceRequestDataProtectionMode
-    , FailoverInstanceRequestDataProtectionMode (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** ExportInstanceRequest
+    ExportInstanceRequest (..),
+    newExportInstanceRequest,
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** FailoverInstanceRequest
+    FailoverInstanceRequest (..),
+    newFailoverInstanceRequest,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** FailoverInstanceRequest_DataProtectionMode
+    FailoverInstanceRequest_DataProtectionMode (..),
 
-    -- * GcsSource
-    , GcsSource
-    , gcsSource
-    , gsURI
+    -- ** GcsDestination
+    GcsDestination (..),
+    newGcsDestination,
 
-    -- * InstanceTransitEncryptionMode
-    , InstanceTransitEncryptionMode (..)
+    -- ** GcsSource
+    GcsSource (..),
+    newGcsSource,
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** GoogleCloudRedisV1LocationMetadata
+    GoogleCloudRedisV1LocationMetadata (..),
+    newGoogleCloudRedisV1LocationMetadata,
 
-    -- * GoogleCloudRedisV1ZoneMetadata
-    , GoogleCloudRedisV1ZoneMetadata
-    , googleCloudRedisV1ZoneMetadata
+    -- ** GoogleCloudRedisV1LocationMetadata_AvailableZones
+    GoogleCloudRedisV1LocationMetadata_AvailableZones (..),
+    newGoogleCloudRedisV1LocationMetadata_AvailableZones,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** GoogleCloudRedisV1OperationMetadata
+    GoogleCloudRedisV1OperationMetadata (..),
+    newGoogleCloudRedisV1OperationMetadata,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** GoogleCloudRedisV1ZoneMetadata
+    GoogleCloudRedisV1ZoneMetadata (..),
+    newGoogleCloudRedisV1ZoneMetadata,
 
-    -- * MaintenanceSchedule
-    , MaintenanceSchedule
-    , maintenanceSchedule
-    , msStartTime
-    , msCanReschedule
-    , msEndTime
-    , msScheduleDeadlineTime
+    -- ** ImportInstanceRequest
+    ImportInstanceRequest (..),
+    newImportInstanceRequest,
 
-    -- * WeeklyMaintenanceWindow
-    , WeeklyMaintenanceWindow
-    , weeklyMaintenanceWindow
-    , wmwStartTime
-    , wmwDay
-    , wmwDuration
+    -- ** InputConfig
+    InputConfig (..),
+    newInputConfig,
 
-    -- * InstanceTier
-    , InstanceTier (..)
+    -- ** Instance
+    Instance (..),
+    newInstance,
 
-    -- * GcsDestination
-    , GcsDestination
-    , gcsDestination
-    , gdURI
+    -- ** Instance_ConnectMode
+    Instance_ConnectMode (..),
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** Instance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
 
-    -- * GoogleCloudRedisV1LocationMetadata
-    , GoogleCloudRedisV1LocationMetadata
-    , googleCloudRedisV1LocationMetadata
-    , gcrvlmAvailableZones
+    -- ** Instance_ReadReplicasMode
+    Instance_ReadReplicasMode (..),
 
-    -- * GoogleCloudRedisV1OperationMetadata
-    , GoogleCloudRedisV1OperationMetadata
-    , googleCloudRedisV1OperationMetadata
-    , gcrvomAPIVersion
-    , gcrvomEndTime
-    , gcrvomStatusDetail
-    , gcrvomVerb
-    , gcrvomCancelRequested
-    , gcrvomTarget
-    , gcrvomCreateTime
+    -- ** Instance_RedisConfigs
+    Instance_RedisConfigs (..),
+    newInstance_RedisConfigs,
 
-    -- * InstanceRedisConfigs
-    , InstanceRedisConfigs
-    , instanceRedisConfigs
-    , ircAddtional
+    -- ** Instance_State
+    Instance_State (..),
 
-    -- * InputConfig
-    , InputConfig
-    , inputConfig
-    , icGcsSource
+    -- ** Instance_Tier
+    Instance_Tier (..),
 
-    -- * InstanceConnectMode
-    , InstanceConnectMode (..)
+    -- ** Instance_TransitEncryptionMode
+    Instance_TransitEncryptionMode (..),
 
-    -- * ExportInstanceRequest
-    , ExportInstanceRequest
-    , exportInstanceRequest
-    , eirOutputConfig
+    -- ** InstanceAuthString
+    InstanceAuthString (..),
+    newInstanceAuthString,
 
-    -- * InstanceAuthString
-    , InstanceAuthString
-    , instanceAuthString
-    , iasAuthString
+    -- ** ListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
 
-    -- * RescheduleMaintenanceRequestRescheduleType
-    , RescheduleMaintenanceRequestRescheduleType (..)
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * WeeklyMaintenanceWindowDay
-    , WeeklyMaintenanceWindowDay (..)
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * GoogleCloudRedisV1LocationMetadataAvailableZones
-    , GoogleCloudRedisV1LocationMetadataAvailableZones
-    , googleCloudRedisV1LocationMetadataAvailableZones
-    , gcrvlmazAddtional
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * MaintenancePolicy
-    , MaintenancePolicy
-    , maintenancePolicy
-    , mpWeeklyMaintenanceWindow
-    , mpUpdateTime
-    , mpDescription
-    , mpCreateTime
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * OutputConfig
-    , OutputConfig
-    , outputConfig
-    , ocGcsDestination
+    -- ** MaintenancePolicy
+    MaintenancePolicy (..),
+    newMaintenancePolicy,
 
-    -- * ImportInstanceRequest
-    , ImportInstanceRequest
-    , importInstanceRequest
-    , iirInputConfig
+    -- ** MaintenanceSchedule
+    MaintenanceSchedule (..),
+    newMaintenanceSchedule,
 
-    -- * UpgradeInstanceRequest
-    , UpgradeInstanceRequest
-    , upgradeInstanceRequest
-    , uirRedisVersion
+    -- ** NodeInfo
+    NodeInfo (..),
+    newNodeInfo,
 
-    -- * TimeOfDay'
-    , TimeOfDay'
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** OutputConfig
+    OutputConfig (..),
+    newOutputConfig,
 
-    -- * ListInstancesResponse
-    , ListInstancesResponse
-    , listInstancesResponse
-    , lirNextPageToken
-    , lirUnreachable
-    , lirInstances
+    -- ** PersistenceConfig
+    PersistenceConfig (..),
+    newPersistenceConfig,
 
-    -- * InstanceState
-    , InstanceState (..)
+    -- ** PersistenceConfig_PersistenceMode
+    PersistenceConfig_PersistenceMode (..),
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** PersistenceConfig_RdbSnapshotPeriod
+    PersistenceConfig_RdbSnapshotPeriod (..),
 
-    -- * TLSCertificate
-    , TLSCertificate
-    , tlsCertificate
-    , tcCert
-    , tcSerialNumber
-    , tcSha1Fingerprint
-    , tcExpireTime
-    , tcCreateTime
+    -- ** RescheduleMaintenanceRequest
+    RescheduleMaintenanceRequest (..),
+    newRescheduleMaintenanceRequest,
 
-    -- * RescheduleMaintenanceRequest
-    , RescheduleMaintenanceRequest
-    , rescheduleMaintenanceRequest
-    , rmrScheduleTime
-    , rmrRescheduleType
+    -- ** RescheduleMaintenanceRequest_RescheduleType
+    RescheduleMaintenanceRequest_RescheduleType (..),
 
-    -- * Instance
-    , Instance
-    , instance'
-    , iServerCaCerts
-    , iPersistenceIAMIdentity
-    , iState
-    , iAuthEnabled
-    , iMaintenanceSchedule
-    , iTransitEncryptionMode
-    , iAuthorizedNetwork
-    , iMemorySizeGb
-    , iName
-    , iStatusMessage
-    , iAlternativeLocationId
-    , iReservedIPRange
-    , iTier
-    , iDisplayName
-    , iLabels
-    , iMaintenancePolicy
-    , iConnectMode
-    , iLocationId
-    , iHost
-    , iRedisConfigs
-    , iRedisVersion
-    , iCreateTime
-    , iPort
-    , iCurrentLocationId
-    ) where
+    -- ** Status
+    Status (..),
+    newStatus,
 
-import Network.Google.Prelude
-import Network.Google.Redis.Types.Product
-import Network.Google.Redis.Types.Sum
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
--- | Default request referring to version 'v1' of the Google Cloud Memorystore for Redis API. This contains the host and root path used as a starting point for constructing service requests.
-redisService :: ServiceConfig
-redisService
-  = defaultService (ServiceId "redis:v1")
-      "redis.googleapis.com"
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** TlsCertificate
+    TlsCertificate (..),
+    newTlsCertificate,
+
+    -- ** UpgradeInstanceRequest
+    UpgradeInstanceRequest (..),
+    newUpgradeInstanceRequest,
+
+    -- ** WeeklyMaintenanceWindow
+    WeeklyMaintenanceWindow (..),
+    newWeeklyMaintenanceWindow,
+
+    -- ** WeeklyMaintenanceWindow_Day
+    WeeklyMaintenanceWindow_Day (..),
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.Redis.Internal.Product
+import Network.Google.Redis.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Google Cloud Memorystore for Redis API. This contains the host and root path used as a starting point for constructing service requests.
+redisService :: Core.ServiceConfig
+redisService =
+  Core.defaultService
+    (Core.ServiceId "redis:v1")
+    "redis.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
