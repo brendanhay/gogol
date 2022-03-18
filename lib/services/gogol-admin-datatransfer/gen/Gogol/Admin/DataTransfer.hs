@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,70 +36,70 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
 module Gogol.Admin.DataTransfer
-  ( -- * Configuration
-    adminDataTransferService,
+    (
+    -- * Configuration
+      adminDataTransferService
 
     -- * OAuth Scopes
-    adminDatatransferScope,
-    adminDatatransferReadOnlyScope,
+    , adminDatatransferScope
+    , adminDatatransferReadOnlyScope
 
     -- * Resources
 
     -- ** datatransfer.applications.get
-    DatatransferApplicationsGetResource,
-    newDatatransferApplicationsGet,
-    DatatransferApplicationsGet,
+    , DatatransferApplicationsGetResource
+    , newDatatransferApplicationsGet
+    , DatatransferApplicationsGet
 
     -- ** datatransfer.applications.list
-    DatatransferApplicationsListResource,
-    newDatatransferApplicationsList,
-    DatatransferApplicationsList,
+    , DatatransferApplicationsListResource
+    , newDatatransferApplicationsList
+    , DatatransferApplicationsList
 
     -- ** datatransfer.transfers.get
-    DatatransferTransfersGetResource,
-    newDatatransferTransfersGet,
-    DatatransferTransfersGet,
+    , DatatransferTransfersGetResource
+    , newDatatransferTransfersGet
+    , DatatransferTransfersGet
 
     -- ** datatransfer.transfers.insert
-    DatatransferTransfersInsertResource,
-    newDatatransferTransfersInsert,
-    DatatransferTransfersInsert,
+    , DatatransferTransfersInsertResource
+    , newDatatransferTransfersInsert
+    , DatatransferTransfersInsert
 
     -- ** datatransfer.transfers.list
-    DatatransferTransfersListResource,
-    newDatatransferTransfersList,
-    DatatransferTransfersList,
+    , DatatransferTransfersListResource
+    , newDatatransferTransfersList
+    , DatatransferTransfersList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Application
-    Application (..),
-    newApplication,
+    , Application (..)
+    , newApplication
 
     -- ** ApplicationDataTransfer
-    ApplicationDataTransfer (..),
-    newApplicationDataTransfer,
+    , ApplicationDataTransfer (..)
+    , newApplicationDataTransfer
 
     -- ** ApplicationTransferParam
-    ApplicationTransferParam (..),
-    newApplicationTransferParam,
+    , ApplicationTransferParam (..)
+    , newApplicationTransferParam
 
     -- ** ApplicationsListResponse
-    ApplicationsListResponse (..),
-    newApplicationsListResponse,
+    , ApplicationsListResponse (..)
+    , newApplicationsListResponse
 
     -- ** DataTransfer
-    DataTransfer (..),
-    newDataTransfer,
+    , DataTransfer (..)
+    , newDataTransfer
 
     -- ** DataTransfersListResponse
-    DataTransfersListResponse (..),
-    newDataTransfersListResponse,
-  )
-where
+    , DataTransfersListResponse (..)
+    , newDataTransfersListResponse
+    ) where
 
 import Gogol.Admin.DataTransfer.Applications.Get
 import Gogol.Admin.DataTransfer.Applications.List

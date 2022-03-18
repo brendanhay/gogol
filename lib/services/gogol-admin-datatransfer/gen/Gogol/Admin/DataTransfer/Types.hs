@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,55 +31,56 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Admin.DataTransfer.Types
-  ( -- * Configuration
-    adminDataTransferService,
+    (
+    -- * Configuration
+      adminDataTransferService
 
     -- * OAuth Scopes
-    adminDatatransferScope,
-    adminDatatransferReadOnlyScope,
+    , adminDatatransferScope
+    , adminDatatransferReadOnlyScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Application
-    Application (..),
-    newApplication,
+    , Application (..)
+    , newApplication
 
     -- ** ApplicationDataTransfer
-    ApplicationDataTransfer (..),
-    newApplicationDataTransfer,
+    , ApplicationDataTransfer (..)
+    , newApplicationDataTransfer
 
     -- ** ApplicationTransferParam
-    ApplicationTransferParam (..),
-    newApplicationTransferParam,
+    , ApplicationTransferParam (..)
+    , newApplicationTransferParam
 
     -- ** ApplicationsListResponse
-    ApplicationsListResponse (..),
-    newApplicationsListResponse,
+    , ApplicationsListResponse (..)
+    , newApplicationsListResponse
 
     -- ** DataTransfer
-    DataTransfer (..),
-    newDataTransfer,
+    , DataTransfer (..)
+    , newDataTransfer
 
     -- ** DataTransfersListResponse
-    DataTransfersListResponse (..),
-    newDataTransfersListResponse,
-  )
-where
+    , DataTransfersListResponse (..)
+    , newDataTransfersListResponse
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Admin.DataTransfer.Internal.Product
 import Gogol.Admin.DataTransfer.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @datatransfer_v1@ of the Admin SDK API. This contains the host and root path used as a starting point for constructing service requests.
 adminDataTransferService :: Core.ServiceConfig
-adminDataTransferService =
-  Core.defaultService
-    (Core.ServiceId "admin:datatransfer_v1")
-    "admin.googleapis.com"
+adminDataTransferService
+  = Core.defaultService
+      (Core.ServiceId "admin:datatransfer_v1")
+      "admin.googleapis.com"
 
 -- | View and manage data transfers between users in your organization
 adminDatatransferScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
