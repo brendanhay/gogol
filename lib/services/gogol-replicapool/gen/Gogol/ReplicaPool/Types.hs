@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,114 +25,113 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ReplicaPool.Types
-    (
-    -- * Configuration
-      replicaPoolService
+  ( -- * Configuration
+    replicaPoolService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , ndevCloudmanScope
-    , ndevCloudmanReadOnlyScope
-    , replicaPoolScope
-    , replicaPoolReadOnlyScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    ndevCloudmanScope,
+    ndevCloudmanReadOnlyScope,
+    replicaPoolScope,
+    replicaPoolReadOnlyScope,
 
     -- * Types
 
     -- ** AccessConfig
-    , AccessConfig (..)
-    , newAccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
     -- ** Action
-    , Action (..)
-    , newAction
+    Action (..),
+    newAction,
 
     -- ** DiskAttachment
-    , DiskAttachment (..)
-    , newDiskAttachment
+    DiskAttachment (..),
+    newDiskAttachment,
 
     -- ** EnvVariable
-    , EnvVariable (..)
-    , newEnvVariable
+    EnvVariable (..),
+    newEnvVariable,
 
     -- ** ExistingDisk
-    , ExistingDisk (..)
-    , newExistingDisk
+    ExistingDisk (..),
+    newExistingDisk,
 
     -- ** HealthCheck
-    , HealthCheck (..)
-    , newHealthCheck
+    HealthCheck (..),
+    newHealthCheck,
 
     -- ** Label
-    , Label (..)
-    , newLabel
+    Label (..),
+    newLabel,
 
     -- ** Metadata
-    , Metadata (..)
-    , newMetadata
+    Metadata (..),
+    newMetadata,
 
     -- ** MetadataItem
-    , MetadataItem (..)
-    , newMetadataItem
+    MetadataItem (..),
+    newMetadataItem,
 
     -- ** NetworkInterface
-    , NetworkInterface (..)
-    , newNetworkInterface
+    NetworkInterface (..),
+    newNetworkInterface,
 
     -- ** NewDisk
-    , NewDisk (..)
-    , newNewDisk
+    NewDisk (..),
+    newNewDisk,
 
     -- ** NewDiskInitializeParams
-    , NewDiskInitializeParams (..)
-    , newNewDiskInitializeParams
+    NewDiskInitializeParams (..),
+    newNewDiskInitializeParams,
 
     -- ** Pool
-    , Pool (..)
-    , newPool
+    Pool (..),
+    newPool,
 
     -- ** PoolsDeleteRequest
-    , PoolsDeleteRequest (..)
-    , newPoolsDeleteRequest
+    PoolsDeleteRequest (..),
+    newPoolsDeleteRequest,
 
     -- ** PoolsListResponse
-    , PoolsListResponse (..)
-    , newPoolsListResponse
+    PoolsListResponse (..),
+    newPoolsListResponse,
 
     -- ** Replica
-    , Replica (..)
-    , newReplica
+    Replica (..),
+    newReplica,
 
     -- ** ReplicaStatus
-    , ReplicaStatus (..)
-    , newReplicaStatus
+    ReplicaStatus (..),
+    newReplicaStatus,
 
     -- ** ReplicasDeleteRequest
-    , ReplicasDeleteRequest (..)
-    , newReplicasDeleteRequest
+    ReplicasDeleteRequest (..),
+    newReplicasDeleteRequest,
 
     -- ** ReplicasListResponse
-    , ReplicasListResponse (..)
-    , newReplicasListResponse
+    ReplicasListResponse (..),
+    newReplicasListResponse,
 
     -- ** ServiceAccount
-    , ServiceAccount (..)
-    , newServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
     -- ** Tag
-    , Tag (..)
-    , newTag
+    Tag (..),
+    newTag,
 
     -- ** Template
-    , Template (..)
-    , newTemplate
+    Template (..),
+    newTemplate,
 
     -- ** VmParams
-    , VmParams (..)
-    , newVmParams
-    ) where
+    VmParams (..),
+    newVmParams,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ReplicaPool.Internal.Product
@@ -146,10 +139,10 @@ import Gogol.ReplicaPool.Internal.Sum
 
 -- | Default request referring to version @v1beta1@ of the Replica Pool API. This contains the host and root path used as a starting point for constructing service requests.
 replicaPoolService :: Core.ServiceConfig
-replicaPoolService
-  = Core.defaultService
-      (Core.ServiceId "replicapool:v1beta1")
-      "www.googleapis.com"
+replicaPoolService =
+  Core.defaultService
+    (Core.ServiceId "replicapool:v1beta1")
+    "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
