@@ -1,1186 +1,535 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Analytics.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Analytics.Types
-    (
-    -- * Service Configuration
-      analyticsService
+  ( -- * Configuration
+    analyticsService,
 
     -- * OAuth Scopes
-    , analyticsManageUsersScope
-    , analyticsProvisionScope
-    , analyticsManageUsersReadOnlyScope
-    , analyticsScope
-    , analyticsReadOnlyScope
-    , analyticsUserDeletionScope
-    , analyticsEditScope
-
-    -- * UserDeletionRequest
-    , UserDeletionRequest
-    , userDeletionRequest
-    , udrWebPropertyId
-    , udrKind
-    , udrPropertyId
-    , udrId
-    , udrFirebaseProjectId
-    , udrDeletionRequestTime
-
-    -- * UnSampledReports
-    , UnSampledReports
-    , unSampledReports
-    , usrNextLink
-    , usrItemsPerPage
-    , usrKind
-    , usrUsername
-    , usrItems
-    , usrTotalResults
-    , usrStartIndex
-    , usrPreviousLink
-
-    -- * GoalURLDestinationDetailsStepsItem
-    , GoalURLDestinationDetailsStepsItem
-    , goalURLDestinationDetailsStepsItem
-    , guddsiURL
-    , guddsiName
-    , guddsiNumber
-
-    -- * GaDataQuery
-    , GaDataQuery
-    , gaDataQuery
-    , gdqMetrics
-    , gdqSamplingLevel
-    , gdqFilters
-    , gdqIds
-    , gdqEndDate
-    , gdqSort
-    , gdqDimensions
-    , gdqStartIndex
-    , gdqMaxResults
-    , gdqSegment
-    , gdqStartDate
-
-    -- * RemarketingAudiences
-    , RemarketingAudiences
-    , remarketingAudiences
-    , raNextLink
-    , raItemsPerPage
-    , raKind
-    , raUsername
-    , raItems
-    , raTotalResults
-    , raStartIndex
-    , raPreviousLink
-
-    -- * GaDataDataTableRowsItem
-    , GaDataDataTableRowsItem
-    , gaDataDataTableRowsItem
-    , gddtriC
-
-    -- * UnSampledReport
-    , UnSampledReport
-    , unSampledReport
-    , uDownloadType
-    , uStatus
-    , uMetrics
-    , uDriveDownloadDetails
-    , uWebPropertyId
-    , uKind
-    , uCreated
-    , uFilters
-    , uProFileId
-    , uEndDate
-    , uSelfLink
-    , uAccountId
-    , uId
-    , uUpdated
-    , uTitle
-    , uDimensions
-    , uSegment
-    , uCloudStorageDownloadDetails
-    , uStartDate
-
-    -- * McfDataColumnHeadersItem
-    , McfDataColumnHeadersItem
-    , mcfDataColumnHeadersItem
-    , mdchiColumnType
-    , mdchiName
-    , mdchiDataType
-
-    -- * GaDataTotalsForAllResults
-    , GaDataTotalsForAllResults
-    , gaDataTotalsForAllResults
-    , gdtfarAddtional
-
-    -- * ProFileParentLink
-    , ProFileParentLink
-    , proFileParentLink
-    , pfplHref
-    , pfplType
-
-    -- * RemarketingAudience
-    , RemarketingAudience
-    , remarketingAudience
-    , rWebPropertyId
-    , rKind
-    , rCreated
-    , rLinkedAdAccounts
-    , rAudienceDefinition
-    , rAudienceType
-    , rAccountId
-    , rName
-    , rStateBasedAudienceDefinition
-    , rLinkedViews
-    , rInternalWebPropertyId
-    , rId
-    , rUpdated
-    , rDescription
-
-    -- * GaDataDataTableRowsItemCItem
-    , GaDataDataTableRowsItemCItem
-    , gaDataDataTableRowsItemCItem
-    , gddtriciV
-
-    -- * EntityUserLinkPermissions
-    , EntityUserLinkPermissions
-    , entityUserLinkPermissions
-    , eulpLocal
-    , eulpEffective
-
-    -- * RealtimeDataProFileInfo
-    , RealtimeDataProFileInfo
-    , realtimeDataProFileInfo
-    , rdpfiWebPropertyId
-    , rdpfiProFileId
-    , rdpfiProFileName
-    , rdpfiAccountId
-    , rdpfiInternalWebPropertyId
-    , rdpfiTableId
-
-    -- * McfDataRowsItemItemConversionPathValueItem
-    , McfDataRowsItemItemConversionPathValueItem
-    , mcfDataRowsItemItemConversionPathValueItem
-    , mdriicpviInteractionType
-    , mdriicpviNodeValue
-
-    -- * FilterExpression
-    , FilterExpression
-    , filterExpression
-    , feFieldIndex
-    , feField
-    , feKind
-    , feMatchType
-    , feCaseSensitive
-    , feExpressionValue
-
-    -- * ProFileRef
-    , ProFileRef
-    , proFileRef
-    , pfrWebPropertyId
-    , pfrKind
-    , pfrHref
-    , pfrAccountId
-    , pfrName
-    , pfrInternalWebPropertyId
-    , pfrId
-
-    -- * Accounts
-    , Accounts
-    , accounts
-    , aNextLink
-    , aItemsPerPage
-    , aKind
-    , aUsername
-    , aItems
-    , aTotalResults
-    , aStartIndex
-    , aPreviousLink
-
-    -- * Experiments
-    , Experiments
-    , experiments
-    , eNextLink
-    , eItemsPerPage
-    , eKind
-    , eUsername
-    , eItems
-    , eTotalResults
-    , eStartIndex
-    , ePreviousLink
-
-    -- * ExperimentParentLink
-    , ExperimentParentLink
-    , experimentParentLink
-    , eplHref
-    , eplType
-
-    -- * UnSampledReportDriveDownloadDetails
-    , UnSampledReportDriveDownloadDetails
-    , unSampledReportDriveDownloadDetails
-    , usrdddDocumentId
-
-    -- * McfDataProFileInfo
-    , McfDataProFileInfo
-    , mcfDataProFileInfo
-    , mdpfiWebPropertyId
-    , mdpfiProFileId
-    , mdpfiProFileName
-    , mdpfiAccountId
-    , mdpfiInternalWebPropertyId
-    , mdpfiTableId
-
-    -- * CustomDataSources
-    , CustomDataSources
-    , customDataSources
-    , cdsNextLink
-    , cdsItemsPerPage
-    , cdsKind
-    , cdsUsername
-    , cdsItems
-    , cdsTotalResults
-    , cdsStartIndex
-    , cdsPreviousLink
-
-    -- * WebPropertyChildLink
-    , WebPropertyChildLink
-    , webPropertyChildLink
-    , wpclHref
-    , wpclType
-
-    -- * DataGaGetSamplingLevel
-    , DataGaGetSamplingLevel (..)
-
-    -- * HashClientIdResponse
-    , HashClientIdResponse
-    , hashClientIdResponse
-    , hcirClientId
-    , hcirWebPropertyId
-    , hcirKind
-    , hcirHashedClientId
-
-    -- * McfData
-    , McfData
-    , mcfData
-    , mdNextLink
-    , mdSampleSpace
-    , mdItemsPerPage
-    , mdProFileInfo
-    , mdKind
-    , mdSampleSize
-    , mdRows
-    , mdSelfLink
-    , mdQuery
-    , mdColumnHeaders
-    , mdId
-    , mdTotalResults
-    , mdContainsSampledData
-    , mdTotalsForAllResults
-    , mdPreviousLink
-
-    -- * UserRef
-    , UserRef
-    , userRef
-    , urEmail
-    , urKind
-    , urId
-
-    -- * GoalVisitNumPagesDetails
-    , GoalVisitNumPagesDetails
-    , goalVisitNumPagesDetails
-    , gvnpdComparisonValue
-    , gvnpdComparisonType
-
-    -- * RealtimeDataColumnHeadersItem
-    , RealtimeDataColumnHeadersItem
-    , realtimeDataColumnHeadersItem
-    , rdchiColumnType
-    , rdchiName
-    , rdchiDataType
-
-    -- * AccountRef
-    , AccountRef
-    , accountRef
-    , arKind
-    , arHref
-    , arName
-    , arId
-
-    -- * EntityAdWordsLinks
-    , EntityAdWordsLinks
-    , entityAdWordsLinks
-    , eawlNextLink
-    , eawlItemsPerPage
-    , eawlKind
-    , eawlItems
-    , eawlTotalResults
-    , eawlStartIndex
-    , eawlPreviousLink
-
-    -- * ProFiles
-    , ProFiles
-    , proFiles
-    , pfNextLink
-    , pfItemsPerPage
-    , pfKind
-    , pfUsername
-    , pfItems
-    , pfTotalResults
-    , pfStartIndex
-    , pfPreviousLink
-
-    -- * AnalyticsDataimportDeleteUploadDataRequest
-    , AnalyticsDataimportDeleteUploadDataRequest
-    , analyticsDataimportDeleteUploadDataRequest
-    , addudrCustomDataImportUids
-
-    -- * EntityAdWordsLink
-    , EntityAdWordsLink
-    , entityAdWordsLink
-    , entAdWordsAccounts
-    , entProFileIds
-    , entKind
-    , entSelfLink
-    , entName
-    , entId
-    , entEntity
-
-    -- * FilterSearchAndReplaceDetails
-    , FilterSearchAndReplaceDetails
-    , filterSearchAndReplaceDetails
-    , fsardFieldIndex
-    , fsardField
-    , fsardSearchString
-    , fsardReplaceString
-    , fsardCaseSensitive
-
-    -- * ProFilePermissions
-    , ProFilePermissions
-    , proFilePermissions
-    , pfpEffective
-
-    -- * ProFile
-    , ProFile
-    , proFile
-    , pParentLink
-    , pECommerceTracking
-    , pSiteSearchCategoryParameters
-    , pWebPropertyId
-    , pChildLink
-    , pSiteSearchQueryParameters
-    , pKind
-    , pDefaultPage
-    , pCreated
-    , pSelfLink
-    , pAccountId
-    , pBotFilteringEnabled
-    , pName
-    , pCurrency
-    , pStarred
-    , pInternalWebPropertyId
-    , pId
-    , pUpdated
-    , pPermissions
-    , pWebsiteURL
-    , pType
-    , pStripSiteSearchCategoryParameters
-    , pTimezone
-    , pExcludeQueryParameters
-    , pEnhancedECommerceTracking
-    , pStripSiteSearchQueryParameters
-
-    -- * AccountSummaries
-    , AccountSummaries
-    , accountSummaries
-    , asNextLink
-    , asItemsPerPage
-    , asKind
-    , asUsername
-    , asItems
-    , asTotalResults
-    , asStartIndex
-    , asPreviousLink
-
-    -- * GoalEventDetails
-    , GoalEventDetails
-    , goalEventDetails
-    , gedUseEventValue
-    , gedEventConditions
-
-    -- * WebPropertySummary
-    , WebPropertySummary
-    , webPropertySummary
-    , wpsKind
-    , wpsProFiles
-    , wpsName
-    , wpsStarred
-    , wpsInternalWebPropertyId
-    , wpsId
-    , wpsWebsiteURL
-    , wpsLevel
-
-    -- * Filters
-    , Filters
-    , filters
-    , fNextLink
-    , fItemsPerPage
-    , fKind
-    , fUsername
-    , fItems
-    , fTotalResults
-    , fStartIndex
-    , fPreviousLink
-
-    -- * GaData
-    , GaData
-    , gaData
-    , gdNextLink
-    , gdSampleSpace
-    , gdItemsPerPage
-    , gdProFileInfo
-    , gdKind
-    , gdSampleSize
-    , gdRows
-    , gdSelfLink
-    , gdQuery
-    , gdColumnHeaders
-    , gdId
-    , gdTotalResults
-    , gdDataLastRefreshed
-    , gdDataTable
-    , gdContainsSampledData
-    , gdTotalsForAllResults
-    , gdPreviousLink
-
-    -- * RealtimeDataTotalsForAllResults
-    , RealtimeDataTotalsForAllResults
-    , realtimeDataTotalsForAllResults
-    , rdtfarAddtional
-
-    -- * CustomDataSource
-    , CustomDataSource
-    , customDataSource
-    , cParentLink
-    , cWebPropertyId
-    , cChildLink
-    , cKind
-    , cCreated
-    , cUploadType
-    , cSchema
-    , cImportBehavior
-    , cSelfLink
-    , cAccountId
-    , cName
-    , cId
-    , cUpdated
-    , cType
-    , cDescription
-    , cProFilesLinked
-
-    -- * AccountTreeRequest
-    , AccountTreeRequest
-    , accountTreeRequest
-    , atrWebPropertyName
-    , atrKind
-    , atrAccountName
-    , atrProFileName
-    , atrWebsiteURL
-    , atrTimezone
-
-    -- * WebPropertyRef
-    , WebPropertyRef
-    , webPropertyRef
-    , wprKind
-    , wprHref
-    , wprAccountId
-    , wprName
-    , wprInternalWebPropertyId
-    , wprId
-
-    -- * LinkedForeignAccount
-    , LinkedForeignAccount
-    , linkedForeignAccount
-    , lfaStatus
-    , lfaWebPropertyId
-    , lfaKind
-    , lfaEligibleForSearch
-    , lfaAccountId
-    , lfaRemarketingAudienceId
-    , lfaLinkedAccountId
-    , lfaInternalWebPropertyId
-    , lfaId
-    , lfaType
-
-    -- * Goals
-    , Goals
-    , goals
-    , gNextLink
-    , gItemsPerPage
-    , gKind
-    , gUsername
-    , gItems
-    , gTotalResults
-    , gStartIndex
-    , gPreviousLink
-
-    -- * McfDataRowsItemItem
-    , McfDataRowsItemItem
-    , mcfDataRowsItemItem
-    , mdriiPrimitiveValue
-    , mdriiConversionPathValue
-
-    -- * AccountPermissions
-    , AccountPermissions
-    , accountPermissions
-    , apEffective
-
-    -- * EntityUserLinkEntity
-    , EntityUserLinkEntity
-    , entityUserLinkEntity
-    , euleProFileRef
-    , euleAccountRef
-    , euleWebPropertyRef
-
-    -- * Account
-    , Account
-    , account
-    , accChildLink
-    , accKind
-    , accCreated
-    , accSelfLink
-    , accName
-    , accStarred
-    , accId
-    , accUpdated
-    , accPermissions
-
-    -- * Experiment
-    , Experiment
-    , experiment
-    , expParentLink
-    , expEqualWeighting
-    , expStatus
-    , expWebPropertyId
-    , expStartTime
-    , expSnippet
-    , expKind
-    , expCreated
-    , expReasonExperimentEnded
-    , expTrafficCoverage
-    , expEditableInGaUi
-    , expMinimumExperimentLengthInDays
-    , expProFileId
-    , expOptimizationType
-    , expSelfLink
-    , expAccountId
-    , expName
-    , expWinnerFound
-    , expEndTime
-    , expVariations
-    , expInternalWebPropertyId
-    , expId
-    , expUpdated
-    , expRewriteVariationURLsAsOriginal
-    , expObjectiveMetric
-    , expWinnerConfidenceLevel
-    , expServingFramework
-    , expDescription
-
-    -- * EntityUserLinks
-    , EntityUserLinks
-    , entityUserLinks
-    , eulNextLink
-    , eulItemsPerPage
-    , eulKind
-    , eulItems
-    , eulTotalResults
-    , eulStartIndex
-    , eulPreviousLink
-
-    -- * AdWordsAccount
-    , AdWordsAccount
-    , adWordsAccount
-    , awaAutoTaggingEnabled
-    , awaKind
-    , awaCustomerId
-
-    -- * FilterRef
-    , FilterRef
-    , filterRef
-    , frKind
-    , frHref
-    , frAccountId
-    , frName
-    , frId
-
-    -- * GoalVisitTimeOnSiteDetails
-    , GoalVisitTimeOnSiteDetails
-    , goalVisitTimeOnSiteDetails
-    , gvtosdComparisonValue
-    , gvtosdComparisonType
-
-    -- * WebProperties
-    , WebProperties
-    , webProperties
-    , wpNextLink
-    , wpItemsPerPage
-    , wpKind
-    , wpUsername
-    , wpItems
-    , wpTotalResults
-    , wpStartIndex
-    , wpPreviousLink
-
-    -- * CustomMetrics
-    , CustomMetrics
-    , customMetrics
-    , cmNextLink
-    , cmItemsPerPage
-    , cmKind
-    , cmUsername
-    , cmItems
-    , cmTotalResults
-    , cmStartIndex
-    , cmPreviousLink
-
-    -- * FilterAdvancedDetails
-    , FilterAdvancedDetails
-    , filterAdvancedDetails
-    , fadExtractA
-    , fadFieldARequired
-    , fadFieldA
-    , fadFieldBIndex
-    , fadOutputToField
-    , fadOutputConstructor
-    , fadExtractB
-    , fadFieldAIndex
-    , fadCaseSensitive
-    , fadOutputToFieldIndex
-    , fadFieldB
-    , fadFieldBRequired
-    , fadOverrideOutputField
-
-    -- * AccountTreeResponse
-    , AccountTreeResponse
-    , accountTreeResponse
-    , atrtKind
-    , atrtProFile
-    , atrtAccount
-    , atrtWebProperty
-
-    -- * FilterUppercaseDetails
-    , FilterUppercaseDetails
-    , filterUppercaseDetails
-    , fudFieldIndex
-    , fudField
-
-    -- * CustomDataSourceChildLink
-    , CustomDataSourceChildLink
-    , customDataSourceChildLink
-    , cdsclHref
-    , cdsclType
-
-    -- * IncludeConditions
-    , IncludeConditions
-    , includeConditions
-    , icKind
-    , icDaysToLookBack
-    , icMembershipDurationDays
-    , icSegment
-    , icIsSmartList
-
-    -- * FilterParentLink
-    , FilterParentLink
-    , filterParentLink
-    , fplHref
-    , fplType
-
-    -- * DataGaGetOutput
-    , DataGaGetOutput (..)
-
-    -- * HashClientIdRequest
-    , HashClientIdRequest
-    , hashClientIdRequest
-    , hClientId
-    , hWebPropertyId
-    , hKind
-
-    -- * RealtimeData
-    , RealtimeData
-    , realtimeData
-    , rdProFileInfo
-    , rdKind
-    , rdRows
-    , rdSelfLink
-    , rdQuery
-    , rdColumnHeaders
-    , rdId
-    , rdTotalResults
-    , rdTotalsForAllResults
-
-    -- * CustomMetric
-    , CustomMetric
-    , customMetric
-    , cusParentLink
-    , cusWebPropertyId
-    , cusKind
-    , cusMaxValue
-    , cusCreated
-    , cusMinValue
-    , cusActive
-    , cusSelfLink
-    , cusAccountId
-    , cusName
-    , cusScope
-    , cusId
-    , cusUpdated
-    , cusType
-    , cusIndex
-
-    -- * ProFileSummary
-    , ProFileSummary
-    , proFileSummary
-    , pfsKind
-    , pfsName
-    , pfsStarred
-    , pfsId
-    , pfsType
-
-    -- * CustomDimensionParentLink
-    , CustomDimensionParentLink
-    , customDimensionParentLink
-    , cdplHref
-    , cdplType
-
-    -- * WebProperty
-    , WebProperty
-    , webProperty
-    , wParentLink
-    , wChildLink
-    , wDefaultProFileId
-    , wKind
-    , wCreated
-    , wDataRetentionTtl
-    , wDataRetentionResetOnNewActivity
-    , wSelfLink
-    , wAccountId
-    , wName
-    , wStarred
-    , wInternalWebPropertyId
-    , wId
-    , wUpdated
-    , wProFileCount
-    , wPermissions
-    , wWebsiteURL
-    , wIndustryVertical
-    , wLevel
-
-    -- * WebPropertyPermissions
-    , WebPropertyPermissions
-    , webPropertyPermissions
-    , wppEffective
-
-    -- * EntityUserLink
-    , EntityUserLink
-    , entityUserLink
-    , euluKind
-    , euluUserRef
-    , euluSelfLink
-    , euluId
-    , euluPermissions
-    , euluEntity
-
-    -- * CustomDataSourceParentLink
-    , CustomDataSourceParentLink
-    , customDataSourceParentLink
-    , cdsplHref
-    , cdsplType
-
-    -- * GoalEventDetailsEventConditionsItem
-    , GoalEventDetailsEventConditionsItem
-    , goalEventDetailsEventConditionsItem
-    , gedeciMatchType
-    , gedeciExpression
-    , gedeciComparisonValue
-    , gedeciType
-    , gedeciComparisonType
-
-    -- * McfDataQuery
-    , McfDataQuery
-    , mcfDataQuery
-    , mdqMetrics
-    , mdqSamplingLevel
-    , mdqFilters
-    , mdqIds
-    , mdqEndDate
-    , mdqSort
-    , mdqDimensions
-    , mdqStartIndex
-    , mdqMaxResults
-    , mdqSegment
-    , mdqStartDate
-
-    -- * Goal
-    , Goal
-    , goal
-    , goaParentLink
-    , goaWebPropertyId
-    , goaKind
-    , goaCreated
-    , goaValue
-    , goaProFileId
-    , goaEventDetails
-    , goaActive
-    , goaSelfLink
-    , goaVisitTimeOnSiteDetails
-    , goaAccountId
-    , goaName
-    , goaInternalWebPropertyId
-    , goaId
-    , goaURLDestinationDetails
-    , goaVisitNumPagesDetails
-    , goaUpdated
-    , goaType
-
-    -- * AccountTicket
-    , AccountTicket
-    , accountTicket
-    , atRedirectURI
-    , atKind
-    , atProFile
-    , atAccount
-    , atWebProperty
-    , atId
-
-    -- * AccountSummary
-    , AccountSummary
-    , accountSummary
-    , assKind
-    , assWebProperties
-    , assName
-    , assStarred
-    , assId
-
-    -- * RealtimeDataQuery
-    , RealtimeDataQuery
-    , realtimeDataQuery
-    , rdqMetrics
-    , rdqFilters
-    , rdqIds
-    , rdqSort
-    , rdqDimensions
-    , rdqMaxResults
-
-    -- * Columns
-    , Columns
-    , columns
-    , colEtag
-    , colKind
-    , colItems
-    , colTotalResults
-    , colAttributeNames
-
-    -- * FilterLowercaseDetails
-    , FilterLowercaseDetails
-    , filterLowercaseDetails
-    , fldFieldIndex
-    , fldField
-
-    -- * Filter
-    , Filter
-    , filter'
-    , filParentLink
-    , filAdvancedDetails
-    , filUppercaseDetails
-    , filLowercaseDetails
-    , filKind
-    , filCreated
-    , filIncludeDetails
-    , filExcludeDetails
-    , filSelfLink
-    , filAccountId
-    , filName
-    , filId
-    , filUpdated
-    , filType
-    , filSearchAndReplaceDetails
-
-    -- * Uploads
-    , Uploads
-    , uploads
-    , uplNextLink
-    , uplItemsPerPage
-    , uplKind
-    , uplItems
-    , uplTotalResults
-    , uplStartIndex
-    , uplPreviousLink
-
-    -- * CustomDimensions
-    , CustomDimensions
-    , customDimensions
-    , cdNextLink
-    , cdItemsPerPage
-    , cdKind
-    , cdUsername
-    , cdItems
-    , cdTotalResults
-    , cdStartIndex
-    , cdPreviousLink
-
-    -- * Segments
-    , Segments
-    , segments
-    , sNextLink
-    , sItemsPerPage
-    , sKind
-    , sUsername
-    , sItems
-    , sTotalResults
-    , sStartIndex
-    , sPreviousLink
-
-    -- * GaDataDataTable
-    , GaDataDataTable
-    , gaDataDataTable
-    , gddtCols
-    , gddtRows
-
-    -- * EntityAdWordsLinkEntity
-    , EntityAdWordsLinkEntity
-    , entityAdWordsLinkEntity
-    , eawleWebPropertyRef
-
-    -- * RemarketingAudienceStateBasedAudienceDefinition
-    , RemarketingAudienceStateBasedAudienceDefinition
-    , remarketingAudienceStateBasedAudienceDefinition
-    , rasbadExcludeConditions
-    , rasbadIncludeConditions
-
-    -- * GoalURLDestinationDetails
-    , GoalURLDestinationDetails
-    , goalURLDestinationDetails
-    , guddURL
-    , guddMatchType
-    , guddSteps
-    , guddCaseSensitive
-    , guddFirstStepRequired
-
-    -- * ProFileFilterLinks
-    , ProFileFilterLinks
-    , proFileFilterLinks
-    , pfflNextLink
-    , pfflItemsPerPage
-    , pfflKind
-    , pfflUsername
-    , pfflItems
-    , pfflTotalResults
-    , pfflStartIndex
-    , pfflPreviousLink
-
-    -- * WebPropertyParentLink
-    , WebPropertyParentLink
-    , webPropertyParentLink
-    , wpplHref
-    , wpplType
-
-    -- * GaDataProFileInfo
-    , GaDataProFileInfo
-    , gaDataProFileInfo
-    , gdpfiWebPropertyId
-    , gdpfiProFileId
-    , gdpfiProFileName
-    , gdpfiAccountId
-    , gdpfiInternalWebPropertyId
-    , gdpfiTableId
-
-    -- * Upload
-    , Upload
-    , upload
-    , uuStatus
-    , uuKind
-    , uuCustomDataSourceId
-    , uuUploadTime
-    , uuAccountId
-    , uuId
-    , uuErrors
-
-    -- * DataMcfGetSamplingLevel
-    , DataMcfGetSamplingLevel (..)
-
-    -- * CustomDimension
-    , CustomDimension
-    , customDimension
-    , cddParentLink
-    , cddWebPropertyId
-    , cddKind
-    , cddCreated
-    , cddActive
-    , cddSelfLink
-    , cddAccountId
-    , cddName
-    , cddScope
-    , cddId
-    , cddUpdated
-    , cddIndex
-
-    -- * Segment
-    , Segment
-    , segment
-    , segDefinition
-    , segKind
-    , segCreated
-    , segSelfLink
-    , segName
-    , segId
-    , segUpdated
-    , segType
-    , segSegmentId
-
-    -- * AccountChildLink
-    , AccountChildLink
-    , accountChildLink
-    , aclHref
-    , aclType
-
-    -- * ProFileFilterLink
-    , ProFileFilterLink
-    , proFileFilterLink
-    , proProFileRef
-    , proKind
-    , proFilterRef
-    , proSelfLink
-    , proId
-    , proRank
-
-    -- * CustomMetricParentLink
-    , CustomMetricParentLink
-    , customMetricParentLink
-    , cmplHref
-    , cmplType
-
-    -- * Column
-    , Column
-    , column
-    , ccKind
-    , ccAttributes
-    , ccId
-
-    -- * RemarketingAudienceAudienceDefinition
-    , RemarketingAudienceAudienceDefinition
-    , remarketingAudienceAudienceDefinition
-    , raadIncludeConditions
-
-    -- * GaDataDataTableColsItem
-    , GaDataDataTableColsItem
-    , gaDataDataTableColsItem
-    , gddtciId
-    , gddtciType
-    , gddtciLabel
-
-    -- * ExperimentVariationsItem
-    , ExperimentVariationsItem
-    , experimentVariationsItem
-    , eviStatus
-    , eviWeight
-    , eviURL
-    , eviWon
-    , eviName
-
-    -- * RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
-    , RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
-    , remarketingAudienceStateBasedAudienceDefinitionExcludeConditions
-    , rasbadecExclusionDuration
-    , rasbadecSegment
-
-    -- * McfDataTotalsForAllResults
-    , McfDataTotalsForAllResults
-    , mcfDataTotalsForAllResults
-    , mdtfarAddtional
-
-    -- * UserDeletionRequestId
-    , UserDeletionRequestId
-    , userDeletionRequestId
-    , udriUserId
-    , udriType
-
-    -- * UnSampledReportCloudStorageDownloadDetails
-    , UnSampledReportCloudStorageDownloadDetails
-    , unSampledReportCloudStorageDownloadDetails
-    , usrcsddObjectId
-    , usrcsddBucketId
-
-    -- * ProFileChildLink
-    , ProFileChildLink
-    , proFileChildLink
-    , pfclHref
-    , pfclType
-
-    -- * GaDataColumnHeadersItem
-    , GaDataColumnHeadersItem
-    , gaDataColumnHeadersItem
-    , gdchiColumnType
-    , gdchiName
-    , gdchiDataType
-
-    -- * GoalParentLink
-    , GoalParentLink
-    , goalParentLink
-    , gplHref
-    , gplType
-
-    -- * ColumnAttributes
-    , ColumnAttributes
-    , columnAttributes
-    , caAddtional
-    ) where
-
-import Network.Google.Analytics.Types.Product
-import Network.Google.Analytics.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analyticsService :: ServiceConfig
-analyticsService
-  = defaultService (ServiceId "analytics:v3")
-      "analytics.googleapis.com"
-
--- | Manage Google Analytics Account users by email address
-analyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
-analyticsManageUsersScope = Proxy
-
--- | Create a new Google Analytics account along with its default property
--- and view
-analyticsProvisionScope :: Proxy '["https://www.googleapis.com/auth/analytics.provision"]
-analyticsProvisionScope = Proxy
-
--- | View Google Analytics user permissions
-analyticsManageUsersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
-analyticsManageUsersReadOnlyScope = Proxy
+    analyticsScope,
+    analyticsEditScope,
+    analyticsManageUsersScope,
+    analyticsManageUsersReadOnlyScope,
+    analyticsProvisionScope,
+    analyticsReadOnlyScope,
+    analyticsUserDeletionScope,
+
+    -- * Types
+
+    -- ** Account
+    Account (..),
+    newAccount,
+
+    -- ** Account_ChildLink
+    Account_ChildLink (..),
+    newAccount_ChildLink,
+
+    -- ** Account_Permissions
+    Account_Permissions (..),
+    newAccount_Permissions,
+
+    -- ** AccountRef
+    AccountRef (..),
+    newAccountRef,
+
+    -- ** AccountSummaries
+    AccountSummaries (..),
+    newAccountSummaries,
+
+    -- ** AccountSummary
+    AccountSummary (..),
+    newAccountSummary,
+
+    -- ** AccountTicket
+    AccountTicket (..),
+    newAccountTicket,
+
+    -- ** AccountTreeRequest
+    AccountTreeRequest (..),
+    newAccountTreeRequest,
+
+    -- ** AccountTreeResponse
+    AccountTreeResponse (..),
+    newAccountTreeResponse,
+
+    -- ** Accounts
+    Accounts (..),
+    newAccounts,
+
+    -- ** AdWordsAccount
+    AdWordsAccount (..),
+    newAdWordsAccount,
+
+    -- ** AnalyticsDataimportDeleteUploadDataRequest
+    AnalyticsDataimportDeleteUploadDataRequest (..),
+    newAnalyticsDataimportDeleteUploadDataRequest,
+
+    -- ** Column
+    Column (..),
+    newColumn,
+
+    -- ** Column_Attributes
+    Column_Attributes (..),
+    newColumn_Attributes,
+
+    -- ** Columns
+    Columns (..),
+    newColumns,
+
+    -- ** CustomDataSource
+    CustomDataSource (..),
+    newCustomDataSource,
+
+    -- ** CustomDataSource_ChildLink
+    CustomDataSource_ChildLink (..),
+    newCustomDataSource_ChildLink,
+
+    -- ** CustomDataSource_ParentLink
+    CustomDataSource_ParentLink (..),
+    newCustomDataSource_ParentLink,
+
+    -- ** CustomDataSources
+    CustomDataSources (..),
+    newCustomDataSources,
+
+    -- ** CustomDimension
+    CustomDimension (..),
+    newCustomDimension,
+
+    -- ** CustomDimension_ParentLink
+    CustomDimension_ParentLink (..),
+    newCustomDimension_ParentLink,
+
+    -- ** CustomDimensions
+    CustomDimensions (..),
+    newCustomDimensions,
+
+    -- ** CustomMetric
+    CustomMetric (..),
+    newCustomMetric,
+
+    -- ** CustomMetric_ParentLink
+    CustomMetric_ParentLink (..),
+    newCustomMetric_ParentLink,
+
+    -- ** CustomMetrics
+    CustomMetrics (..),
+    newCustomMetrics,
+
+    -- ** EntityAdWordsLink
+    EntityAdWordsLink (..),
+    newEntityAdWordsLink,
+
+    -- ** EntityAdWordsLink_Entity
+    EntityAdWordsLink_Entity (..),
+    newEntityAdWordsLink_Entity,
+
+    -- ** EntityAdWordsLinks
+    EntityAdWordsLinks (..),
+    newEntityAdWordsLinks,
+
+    -- ** EntityUserLink
+    EntityUserLink (..),
+    newEntityUserLink,
+
+    -- ** EntityUserLink_Entity
+    EntityUserLink_Entity (..),
+    newEntityUserLink_Entity,
+
+    -- ** EntityUserLink_Permissions
+    EntityUserLink_Permissions (..),
+    newEntityUserLink_Permissions,
+
+    -- ** EntityUserLinks
+    EntityUserLinks (..),
+    newEntityUserLinks,
+
+    -- ** Experiment
+    Experiment (..),
+    newExperiment,
+
+    -- ** Experiment_ParentLink
+    Experiment_ParentLink (..),
+    newExperiment_ParentLink,
+
+    -- ** Experiment_VariationsItem
+    Experiment_VariationsItem (..),
+    newExperiment_VariationsItem,
+
+    -- ** Experiments
+    Experiments (..),
+    newExperiments,
+
+    -- ** Filter
+    Filter (..),
+    newFilter,
+
+    -- ** Filter_AdvancedDetails
+    Filter_AdvancedDetails (..),
+    newFilter_AdvancedDetails,
+
+    -- ** Filter_LowercaseDetails
+    Filter_LowercaseDetails (..),
+    newFilter_LowercaseDetails,
+
+    -- ** Filter_ParentLink
+    Filter_ParentLink (..),
+    newFilter_ParentLink,
+
+    -- ** Filter_SearchAndReplaceDetails
+    Filter_SearchAndReplaceDetails (..),
+    newFilter_SearchAndReplaceDetails,
+
+    -- ** Filter_UppercaseDetails
+    Filter_UppercaseDetails (..),
+    newFilter_UppercaseDetails,
+
+    -- ** FilterExpression
+    FilterExpression (..),
+    newFilterExpression,
+
+    -- ** FilterRef
+    FilterRef (..),
+    newFilterRef,
+
+    -- ** Filters
+    Filters (..),
+    newFilters,
+
+    -- ** GaData
+    GaData (..),
+    newGaData,
+
+    -- ** GaData_ColumnHeadersItem
+    GaData_ColumnHeadersItem (..),
+    newGaData_ColumnHeadersItem,
+
+    -- ** GaData_DataTable
+    GaData_DataTable (..),
+    newGaData_DataTable,
+
+    -- ** GaData_DataTable_ColsItem
+    GaData_DataTable_ColsItem (..),
+    newGaData_DataTable_ColsItem,
+
+    -- ** GaData_DataTable_RowsItem
+    GaData_DataTable_RowsItem (..),
+    newGaData_DataTable_RowsItem,
+
+    -- ** GaData_DataTable_RowsItem_CItem
+    GaData_DataTable_RowsItem_CItem (..),
+    newGaData_DataTable_RowsItem_CItem,
+
+    -- ** GaData_ProfileInfo
+    GaData_ProfileInfo (..),
+    newGaData_ProfileInfo,
+
+    -- ** GaData_Query
+    GaData_Query (..),
+    newGaData_Query,
+
+    -- ** GaData_TotalsForAllResults
+    GaData_TotalsForAllResults (..),
+    newGaData_TotalsForAllResults,
+
+    -- ** Goal
+    Goal (..),
+    newGoal,
+
+    -- ** Goal_EventDetails
+    Goal_EventDetails (..),
+    newGoal_EventDetails,
+
+    -- ** Goal_EventDetails_EventConditionsItem
+    Goal_EventDetails_EventConditionsItem (..),
+    newGoal_EventDetails_EventConditionsItem,
+
+    -- ** Goal_ParentLink
+    Goal_ParentLink (..),
+    newGoal_ParentLink,
+
+    -- ** Goal_UrlDestinationDetails
+    Goal_UrlDestinationDetails (..),
+    newGoal_UrlDestinationDetails,
+
+    -- ** Goal_UrlDestinationDetails_StepsItem
+    Goal_UrlDestinationDetails_StepsItem (..),
+    newGoal_UrlDestinationDetails_StepsItem,
+
+    -- ** Goal_VisitNumPagesDetails
+    Goal_VisitNumPagesDetails (..),
+    newGoal_VisitNumPagesDetails,
+
+    -- ** Goal_VisitTimeOnSiteDetails
+    Goal_VisitTimeOnSiteDetails (..),
+    newGoal_VisitTimeOnSiteDetails,
+
+    -- ** Goals
+    Goals (..),
+    newGoals,
+
+    -- ** HashClientIdRequest
+    HashClientIdRequest (..),
+    newHashClientIdRequest,
+
+    -- ** HashClientIdResponse
+    HashClientIdResponse (..),
+    newHashClientIdResponse,
+
+    -- ** IncludeConditions
+    IncludeConditions (..),
+    newIncludeConditions,
+
+    -- ** LinkedForeignAccount
+    LinkedForeignAccount (..),
+    newLinkedForeignAccount,
+
+    -- ** McfData
+    McfData (..),
+    newMcfData,
+
+    -- ** McfData_ColumnHeadersItem
+    McfData_ColumnHeadersItem (..),
+    newMcfData_ColumnHeadersItem,
+
+    -- ** McfData_ProfileInfo
+    McfData_ProfileInfo (..),
+    newMcfData_ProfileInfo,
+
+    -- ** McfData_Query
+    McfData_Query (..),
+    newMcfData_Query,
+
+    -- ** McfData_RowsItemItem
+    McfData_RowsItemItem (..),
+    newMcfData_RowsItemItem,
+
+    -- ** McfData_RowsItemItem_ConversionPathValueItem
+    McfData_RowsItemItem_ConversionPathValueItem (..),
+    newMcfData_RowsItemItem_ConversionPathValueItem,
+
+    -- ** McfData_TotalsForAllResults
+    McfData_TotalsForAllResults (..),
+    newMcfData_TotalsForAllResults,
+
+    -- ** Profile
+    Profile (..),
+    newProfile,
+
+    -- ** Profile_ChildLink
+    Profile_ChildLink (..),
+    newProfile_ChildLink,
+
+    -- ** Profile_ParentLink
+    Profile_ParentLink (..),
+    newProfile_ParentLink,
+
+    -- ** Profile_Permissions
+    Profile_Permissions (..),
+    newProfile_Permissions,
+
+    -- ** ProfileFilterLink
+    ProfileFilterLink (..),
+    newProfileFilterLink,
+
+    -- ** ProfileFilterLinks
+    ProfileFilterLinks (..),
+    newProfileFilterLinks,
+
+    -- ** ProfileRef
+    ProfileRef (..),
+    newProfileRef,
+
+    -- ** ProfileSummary
+    ProfileSummary (..),
+    newProfileSummary,
+
+    -- ** Profiles
+    Profiles (..),
+    newProfiles,
+
+    -- ** RealtimeData
+    RealtimeData (..),
+    newRealtimeData,
+
+    -- ** RealtimeData_ColumnHeadersItem
+    RealtimeData_ColumnHeadersItem (..),
+    newRealtimeData_ColumnHeadersItem,
+
+    -- ** RealtimeData_ProfileInfo
+    RealtimeData_ProfileInfo (..),
+    newRealtimeData_ProfileInfo,
+
+    -- ** RealtimeData_Query
+    RealtimeData_Query (..),
+    newRealtimeData_Query,
+
+    -- ** RealtimeData_TotalsForAllResults
+    RealtimeData_TotalsForAllResults (..),
+    newRealtimeData_TotalsForAllResults,
+
+    -- ** RemarketingAudience
+    RemarketingAudience (..),
+    newRemarketingAudience,
+
+    -- ** RemarketingAudience_AudienceDefinition
+    RemarketingAudience_AudienceDefinition (..),
+    newRemarketingAudience_AudienceDefinition,
+
+    -- ** RemarketingAudience_StateBasedAudienceDefinition
+    RemarketingAudience_StateBasedAudienceDefinition (..),
+    newRemarketingAudience_StateBasedAudienceDefinition,
+
+    -- ** RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
+    RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions (..),
+    newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions,
+
+    -- ** RemarketingAudiences
+    RemarketingAudiences (..),
+    newRemarketingAudiences,
+
+    -- ** Segment
+    Segment (..),
+    newSegment,
+
+    -- ** Segments
+    Segments (..),
+    newSegments,
+
+    -- ** UnsampledReport
+    UnsampledReport (..),
+    newUnsampledReport,
+
+    -- ** UnsampledReport_CloudStorageDownloadDetails
+    UnsampledReport_CloudStorageDownloadDetails (..),
+    newUnsampledReport_CloudStorageDownloadDetails,
+
+    -- ** UnsampledReport_DriveDownloadDetails
+    UnsampledReport_DriveDownloadDetails (..),
+    newUnsampledReport_DriveDownloadDetails,
+
+    -- ** UnsampledReports
+    UnsampledReports (..),
+    newUnsampledReports,
+
+    -- ** Upload
+    Upload (..),
+    newUpload,
+
+    -- ** Uploads
+    Uploads (..),
+    newUploads,
+
+    -- ** UserDeletionRequest
+    UserDeletionRequest (..),
+    newUserDeletionRequest,
+
+    -- ** UserDeletionRequest_Id
+    UserDeletionRequest_Id (..),
+    newUserDeletionRequest_Id,
+
+    -- ** UserRef
+    UserRef (..),
+    newUserRef,
+
+    -- ** WebPropertyRef
+    WebPropertyRef (..),
+    newWebPropertyRef,
+
+    -- ** WebPropertySummary
+    WebPropertySummary (..),
+    newWebPropertySummary,
+
+    -- ** Webproperties
+    Webproperties (..),
+    newWebproperties,
+
+    -- ** Webproperty
+    Webproperty (..),
+    newWebproperty,
+
+    -- ** Webproperty_ChildLink
+    Webproperty_ChildLink (..),
+    newWebproperty_ChildLink,
+
+    -- ** Webproperty_ParentLink
+    Webproperty_ParentLink (..),
+    newWebproperty_ParentLink,
+
+    -- ** Webproperty_Permissions
+    Webproperty_Permissions (..),
+    newWebproperty_Permissions,
+
+    -- ** DataGaGetOutput
+    DataGaGetOutput (..),
+
+    -- ** DataGaGetSamplingLevel
+    DataGaGetSamplingLevel (..),
+
+    -- ** DataMcfGetSamplingLevel
+    DataMcfGetSamplingLevel (..),
+  )
+where
+
+import Network.Google.Analytics.Internal.Product
+import Network.Google.Analytics.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v3@ of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
+analyticsService :: Core.ServiceConfig
+analyticsService =
+  Core.defaultService
+    (Core.ServiceId "analytics:v3")
+    "analytics.googleapis.com"
 
 -- | View and manage your Google Analytics data
-analyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
-analyticsScope = Proxy
-
--- | View your Google Analytics data
-analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
-analyticsReadOnlyScope = Proxy
-
--- | Manage Google Analytics user deletion requests
-analyticsUserDeletionScope :: Proxy '["https://www.googleapis.com/auth/analytics.user.deletion"]
-analyticsUserDeletionScope = Proxy
+analyticsScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics"]
+analyticsScope = Core.Proxy
 
 -- | Edit Google Analytics management entities
-analyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]
-analyticsEditScope = Proxy
+analyticsEditScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.edit"]
+analyticsEditScope = Core.Proxy
+
+-- | Manage Google Analytics Account users by email address
+analyticsManageUsersScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
+analyticsManageUsersScope = Core.Proxy
+
+-- | View Google Analytics user permissions
+analyticsManageUsersReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
+analyticsManageUsersReadOnlyScope = Core.Proxy
+
+-- | Create a new Google Analytics account along with its default property and view
+analyticsProvisionScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.provision"]
+analyticsProvisionScope = Core.Proxy
+
+-- | View your Google Analytics data
+analyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
+analyticsReadOnlyScope = Core.Proxy
+
+-- | Manage Google Analytics user deletion requests
+analyticsUserDeletionScope :: Core.Proxy '["https://www.googleapis.com/auth/analytics.user.deletion"]
+analyticsUserDeletionScope = Core.Proxy
