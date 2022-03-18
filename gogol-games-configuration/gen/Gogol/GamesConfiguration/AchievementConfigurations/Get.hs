@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.AchievementConfigurations.Update
+-- Module      : Gogol.GamesConfiguration.AchievementConfigurations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the metadata of the achievement configuration with the given ID.
+-- Retrieves the metadata of the achievement configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.update@.
-module Network.Google.GamesConfiguration.AchievementConfigurations.Update
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.get@.
+module Gogol.GamesConfiguration.AchievementConfigurations.Get
   ( -- * Resource
-    GamesConfigurationAchievementConfigurationsUpdateResource,
+    GamesConfigurationAchievementConfigurationsGetResource,
 
     -- ** Constructing a Request
-    newGamesConfigurationAchievementConfigurationsUpdate,
-    GamesConfigurationAchievementConfigurationsUpdate,
+    newGamesConfigurationAchievementConfigurationsGet,
+    GamesConfigurationAchievementConfigurationsGet,
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesConfiguration.achievementConfigurations.update@ method which the
--- 'GamesConfigurationAchievementConfigurationsUpdate' request conforms to.
-type GamesConfigurationAchievementConfigurationsUpdateResource =
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.get@ method which the
+-- 'GamesConfigurationAchievementConfigurationsGet' request conforms to.
+type GamesConfigurationAchievementConfigurationsGetResource =
   "games"
     Core.:> "v1configuration"
     Core.:> "achievements"
@@ -55,13 +55,12 @@ type GamesConfigurationAchievementConfigurationsUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AchievementConfiguration
-    Core.:> Core.Put '[Core.JSON] AchievementConfiguration
+    Core.:> Core.Get '[Core.JSON] AchievementConfiguration
 
--- | Update the metadata of the achievement configuration with the given ID.
+-- | Retrieves the metadata of the achievement configuration with the given ID.
 --
--- /See:/ 'newGamesConfigurationAchievementConfigurationsUpdate' smart constructor.
-data GamesConfigurationAchievementConfigurationsUpdate = GamesConfigurationAchievementConfigurationsUpdate
+-- /See:/ 'newGamesConfigurationAchievementConfigurationsGet' smart constructor.
+data GamesConfigurationAchievementConfigurationsGet = GamesConfigurationAchievementConfigurationsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -70,8 +69,6 @@ data GamesConfigurationAchievementConfigurationsUpdate = GamesConfigurationAchie
     achievementId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: AchievementConfiguration,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,38 +76,35 @@ data GamesConfigurationAchievementConfigurationsUpdate = GamesConfigurationAchie
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesConfigurationAchievementConfigurationsUpdate' with the minimum fields required to make a request.
-newGamesConfigurationAchievementConfigurationsUpdate ::
+-- | Creates a value of 'GamesConfigurationAchievementConfigurationsGet' with the minimum fields required to make a request.
+newGamesConfigurationAchievementConfigurationsGet ::
   -- |  The ID of the achievement used by this method. See 'achievementId'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  AchievementConfiguration ->
-  GamesConfigurationAchievementConfigurationsUpdate
-newGamesConfigurationAchievementConfigurationsUpdate achievementId payload =
-  GamesConfigurationAchievementConfigurationsUpdate
+  GamesConfigurationAchievementConfigurationsGet
+newGamesConfigurationAchievementConfigurationsGet achievementId =
+  GamesConfigurationAchievementConfigurationsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       achievementId = achievementId,
       callback = Core.Nothing,
-      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesConfigurationAchievementConfigurationsUpdate
+    GamesConfigurationAchievementConfigurationsGet
   where
   type
     Rs
-      GamesConfigurationAchievementConfigurationsUpdate =
+      GamesConfigurationAchievementConfigurationsGet =
       AchievementConfiguration
   type
     Scopes
-      GamesConfigurationAchievementConfigurationsUpdate =
+      GamesConfigurationAchievementConfigurationsGet =
       '["https://www.googleapis.com/auth/androidpublisher"]
   requestClient
-    GamesConfigurationAchievementConfigurationsUpdate {..} =
+    GamesConfigurationAchievementConfigurationsGet {..} =
       go
         achievementId
         xgafv
@@ -119,13 +113,12 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
-        payload
         gamesConfigurationService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesConfigurationAchievementConfigurationsUpdateResource
+                  GamesConfigurationAchievementConfigurationsGetResource
             )
             Core.mempty

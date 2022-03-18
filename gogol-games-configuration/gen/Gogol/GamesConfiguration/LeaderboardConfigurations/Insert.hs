@@ -19,56 +19,60 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.LeaderboardConfigurations.Delete
+-- Module      : Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete the leaderboard configuration with the given ID.
+-- Insert a new leaderboard configuration in this application.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.delete@.
-module Network.Google.GamesConfiguration.LeaderboardConfigurations.Delete
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.insert@.
+module Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
   ( -- * Resource
-    GamesConfigurationLeaderboardConfigurationsDeleteResource,
+    GamesConfigurationLeaderboardConfigurationsInsertResource,
 
     -- ** Constructing a Request
-    newGamesConfigurationLeaderboardConfigurationsDelete,
-    GamesConfigurationLeaderboardConfigurationsDelete,
+    newGamesConfigurationLeaderboardConfigurationsInsert,
+    GamesConfigurationLeaderboardConfigurationsInsert,
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesConfiguration.leaderboardConfigurations.delete@ method which the
--- 'GamesConfigurationLeaderboardConfigurationsDelete' request conforms to.
-type GamesConfigurationLeaderboardConfigurationsDeleteResource =
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
+-- 'GamesConfigurationLeaderboardConfigurationsInsert' request conforms to.
+type GamesConfigurationLeaderboardConfigurationsInsertResource =
   "games"
     Core.:> "v1configuration"
+    Core.:> "applications"
+    Core.:> Core.Capture "applicationId" Core.Text
     Core.:> "leaderboards"
-    Core.:> Core.Capture "leaderboardId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+    Core.:> Core.ReqBody '[Core.JSON] LeaderboardConfiguration
+    Core.:> Core.Post '[Core.JSON] LeaderboardConfiguration
 
--- | Delete the leaderboard configuration with the given ID.
+-- | Insert a new leaderboard configuration in this application.
 --
--- /See:/ 'newGamesConfigurationLeaderboardConfigurationsDelete' smart constructor.
-data GamesConfigurationLeaderboardConfigurationsDelete = GamesConfigurationLeaderboardConfigurationsDelete
+-- /See:/ 'newGamesConfigurationLeaderboardConfigurationsInsert' smart constructor.
+data GamesConfigurationLeaderboardConfigurationsInsert = GamesConfigurationLeaderboardConfigurationsInsert
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | The application ID from the Google Play developer console.
+    applicationId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the leaderboard.
-    leaderboardId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: LeaderboardConfiguration,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -76,49 +80,53 @@ data GamesConfigurationLeaderboardConfigurationsDelete = GamesConfigurationLeade
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesConfigurationLeaderboardConfigurationsDelete' with the minimum fields required to make a request.
-newGamesConfigurationLeaderboardConfigurationsDelete ::
-  -- |  The ID of the leaderboard. See 'leaderboardId'.
+-- | Creates a value of 'GamesConfigurationLeaderboardConfigurationsInsert' with the minimum fields required to make a request.
+newGamesConfigurationLeaderboardConfigurationsInsert ::
+  -- |  The application ID from the Google Play developer console. See 'applicationId'.
   Core.Text ->
-  GamesConfigurationLeaderboardConfigurationsDelete
-newGamesConfigurationLeaderboardConfigurationsDelete leaderboardId =
-  GamesConfigurationLeaderboardConfigurationsDelete
+  -- |  Multipart request metadata. See 'payload'.
+  LeaderboardConfiguration ->
+  GamesConfigurationLeaderboardConfigurationsInsert
+newGamesConfigurationLeaderboardConfigurationsInsert applicationId payload =
+  GamesConfigurationLeaderboardConfigurationsInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
+      applicationId = applicationId,
       callback = Core.Nothing,
-      leaderboardId = leaderboardId,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    GamesConfigurationLeaderboardConfigurationsDelete
+    GamesConfigurationLeaderboardConfigurationsInsert
   where
   type
     Rs
-      GamesConfigurationLeaderboardConfigurationsDelete =
-      ()
+      GamesConfigurationLeaderboardConfigurationsInsert =
+      LeaderboardConfiguration
   type
     Scopes
-      GamesConfigurationLeaderboardConfigurationsDelete =
+      GamesConfigurationLeaderboardConfigurationsInsert =
       '["https://www.googleapis.com/auth/androidpublisher"]
   requestClient
-    GamesConfigurationLeaderboardConfigurationsDelete {..} =
+    GamesConfigurationLeaderboardConfigurationsInsert {..} =
       go
-        leaderboardId
+        applicationId
         xgafv
         accessToken
         callback
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         gamesConfigurationService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesConfigurationLeaderboardConfigurationsDeleteResource
+                  GamesConfigurationLeaderboardConfigurationsInsertResource
             )
             Core.mempty

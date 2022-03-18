@@ -19,50 +19,50 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.LeaderboardConfigurations.Insert
+-- Module      : Gogol.GamesConfiguration.AchievementConfigurations.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Insert a new leaderboard configuration in this application.
+-- Insert a new achievement configuration in this application.
 --
--- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.insert@.
-module Network.Google.GamesConfiguration.LeaderboardConfigurations.Insert
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.insert@.
+module Gogol.GamesConfiguration.AchievementConfigurations.Insert
   ( -- * Resource
-    GamesConfigurationLeaderboardConfigurationsInsertResource,
+    GamesConfigurationAchievementConfigurationsInsertResource,
 
     -- ** Constructing a Request
-    newGamesConfigurationLeaderboardConfigurationsInsert,
-    GamesConfigurationLeaderboardConfigurationsInsert,
+    newGamesConfigurationAchievementConfigurationsInsert,
+    GamesConfigurationAchievementConfigurationsInsert,
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
--- 'GamesConfigurationLeaderboardConfigurationsInsert' request conforms to.
-type GamesConfigurationLeaderboardConfigurationsInsertResource =
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.insert@ method which the
+-- 'GamesConfigurationAchievementConfigurationsInsert' request conforms to.
+type GamesConfigurationAchievementConfigurationsInsertResource =
   "games"
     Core.:> "v1configuration"
     Core.:> "applications"
     Core.:> Core.Capture "applicationId" Core.Text
-    Core.:> "leaderboards"
+    Core.:> "achievements"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] LeaderboardConfiguration
-    Core.:> Core.Post '[Core.JSON] LeaderboardConfiguration
+    Core.:> Core.ReqBody '[Core.JSON] AchievementConfiguration
+    Core.:> Core.Post '[Core.JSON] AchievementConfiguration
 
--- | Insert a new leaderboard configuration in this application.
+-- | Insert a new achievement configuration in this application.
 --
--- /See:/ 'newGamesConfigurationLeaderboardConfigurationsInsert' smart constructor.
-data GamesConfigurationLeaderboardConfigurationsInsert = GamesConfigurationLeaderboardConfigurationsInsert
+-- /See:/ 'newGamesConfigurationAchievementConfigurationsInsert' smart constructor.
+data GamesConfigurationAchievementConfigurationsInsert = GamesConfigurationAchievementConfigurationsInsert
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -72,7 +72,7 @@ data GamesConfigurationLeaderboardConfigurationsInsert = GamesConfigurationLeade
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: LeaderboardConfiguration,
+    payload :: AchievementConfiguration,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,15 +80,15 @@ data GamesConfigurationLeaderboardConfigurationsInsert = GamesConfigurationLeade
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GamesConfigurationLeaderboardConfigurationsInsert' with the minimum fields required to make a request.
-newGamesConfigurationLeaderboardConfigurationsInsert ::
+-- | Creates a value of 'GamesConfigurationAchievementConfigurationsInsert' with the minimum fields required to make a request.
+newGamesConfigurationAchievementConfigurationsInsert ::
   -- |  The application ID from the Google Play developer console. See 'applicationId'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  LeaderboardConfiguration ->
-  GamesConfigurationLeaderboardConfigurationsInsert
-newGamesConfigurationLeaderboardConfigurationsInsert applicationId payload =
-  GamesConfigurationLeaderboardConfigurationsInsert
+  AchievementConfiguration ->
+  GamesConfigurationAchievementConfigurationsInsert
+newGamesConfigurationAchievementConfigurationsInsert applicationId payload =
+  GamesConfigurationAchievementConfigurationsInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       applicationId = applicationId,
@@ -100,18 +100,18 @@ newGamesConfigurationLeaderboardConfigurationsInsert applicationId payload =
 
 instance
   Core.GoogleRequest
-    GamesConfigurationLeaderboardConfigurationsInsert
+    GamesConfigurationAchievementConfigurationsInsert
   where
   type
     Rs
-      GamesConfigurationLeaderboardConfigurationsInsert =
-      LeaderboardConfiguration
+      GamesConfigurationAchievementConfigurationsInsert =
+      AchievementConfiguration
   type
     Scopes
-      GamesConfigurationLeaderboardConfigurationsInsert =
+      GamesConfigurationAchievementConfigurationsInsert =
       '["https://www.googleapis.com/auth/androidpublisher"]
   requestClient
-    GamesConfigurationLeaderboardConfigurationsInsert {..} =
+    GamesConfigurationAchievementConfigurationsInsert {..} =
       go
         applicationId
         xgafv
@@ -127,6 +127,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  GamesConfigurationLeaderboardConfigurationsInsertResource
+                  GamesConfigurationAchievementConfigurationsInsertResource
             )
             Core.mempty

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration
+-- Module      : Gogol.GamesConfiguration
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Play Game Services Publishing API allows developers to configure their games in Game Services.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference>
-module Network.Google.GamesConfiguration
+module Gogol.GamesConfiguration
   ( -- * Configuration
     gamesConfigurationService,
 
@@ -162,15 +162,15 @@ module Network.Google.GamesConfiguration
   )
 where
 
-import Network.Google.GamesConfiguration.AchievementConfigurations.Delete
-import Network.Google.GamesConfiguration.AchievementConfigurations.Get
-import Network.Google.GamesConfiguration.AchievementConfigurations.Insert
-import Network.Google.GamesConfiguration.AchievementConfigurations.List
-import Network.Google.GamesConfiguration.AchievementConfigurations.Update
-import Network.Google.GamesConfiguration.ImageConfigurations.Upload
-import Network.Google.GamesConfiguration.LeaderboardConfigurations.Delete
-import Network.Google.GamesConfiguration.LeaderboardConfigurations.Get
-import Network.Google.GamesConfiguration.LeaderboardConfigurations.Insert
-import Network.Google.GamesConfiguration.LeaderboardConfigurations.List
-import Network.Google.GamesConfiguration.LeaderboardConfigurations.Update
-import Network.Google.GamesConfiguration.Types
+import Gogol.GamesConfiguration.AchievementConfigurations.Delete
+import Gogol.GamesConfiguration.AchievementConfigurations.Get
+import Gogol.GamesConfiguration.AchievementConfigurations.Insert
+import Gogol.GamesConfiguration.AchievementConfigurations.List
+import Gogol.GamesConfiguration.AchievementConfigurations.Update
+import Gogol.GamesConfiguration.ImageConfigurations.Upload
+import Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
+import Gogol.GamesConfiguration.LeaderboardConfigurations.Get
+import Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
+import Gogol.GamesConfiguration.LeaderboardConfigurations.List
+import Gogol.GamesConfiguration.LeaderboardConfigurations.Update
+import Gogol.GamesConfiguration.Types

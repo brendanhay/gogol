@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GamesConfiguration.ImageConfigurations.Upload
+-- Module      : Gogol.GamesConfiguration.ImageConfigurations.Upload
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.imageConfigurations.upload@.
-module Network.Google.GamesConfiguration.ImageConfigurations.Upload
+module Gogol.GamesConfiguration.ImageConfigurations.Upload
   ( -- * Resource
     GamesConfigurationImageConfigurationsUploadResource,
 
@@ -39,8 +39,8 @@ module Network.Google.GamesConfiguration.ImageConfigurations.Upload
   )
 where
 
-import Network.Google.GamesConfiguration.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.GamesConfiguration.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @gamesConfiguration.imageConfigurations.upload@ method which the
 -- 'GamesConfigurationImageConfigurationsUpload' request conforms to.
