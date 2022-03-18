@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -73,7 +74,14 @@ mname canonical (Suffix suf) (Global method) =
   where
     resourceType = name (Text.unpack (mconcat namespace <> suf))
     dataType = Global namespace
-    namespace = map upperHead method
+    namespace = squeeze (unNS (mkNS canonical), map upperHead method)
+
+    -- Replace possibly wonky casing of method.id components that are supplied
+    -- by a canonicalName, which typically correctly cased due to coming from
+    -- the ./annex/*.json configurations.
+    squeeze = \case
+      (x:xs, y:ys) | CI.mk x == CI.mk y -> x : squeeze (xs, ys)
+      (_xs, ys) -> ys
 
 dname :: Global -> Name ()
 dname =
