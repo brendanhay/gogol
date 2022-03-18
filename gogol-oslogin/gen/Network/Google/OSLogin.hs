@@ -1,126 +1,120 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.OSLogin
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- You can use OS Login to manage access to your VM instances using IAM
--- roles.
+-- You can use OS Login to manage access to your VM instances using IAM roles.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference>
 module Network.Google.OSLogin
-    (
-    -- * Service Configuration
-      oSLoginService
+  ( -- * Configuration
+    oSLoginService,
 
     -- * OAuth Scopes
-    , computeScope
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , OSLoginAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    computeScope,
+    computeReadOnlyScope,
 
     -- * Resources
 
     -- ** oslogin.users.getLoginProfile
-    , module Network.Google.Resource.OSLogin.Users.GetLoginProFile
+    OSLoginUsersGetLoginProfileResource,
+    newOSLoginUsersGetLoginProfile,
+    OSLoginUsersGetLoginProfile,
 
     -- ** oslogin.users.importSshPublicKey
-    , module Network.Google.Resource.OSLogin.Users.ImportSSHPublicKey
+    OSLoginUsersImportSshPublicKeyResource,
+    newOSLoginUsersImportSshPublicKey,
+    OSLoginUsersImportSshPublicKey,
 
     -- ** oslogin.users.projects.delete
-    , module Network.Google.Resource.OSLogin.Users.Projects.Delete
+    OSLoginUsersProjectsDeleteResource,
+    newOSLoginUsersProjectsDelete,
+    OSLoginUsersProjectsDelete,
+
+    -- ** oslogin.users.sshPublicKeys.create
+    OSLoginUsersSshPublicKeysCreateResource,
+    newOSLoginUsersSshPublicKeysCreate,
+    OSLoginUsersSshPublicKeysCreate,
 
     -- ** oslogin.users.sshPublicKeys.delete
-    , module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Delete
+    OSLoginUsersSshPublicKeysDeleteResource,
+    newOSLoginUsersSshPublicKeysDelete,
+    OSLoginUsersSshPublicKeysDelete,
 
     -- ** oslogin.users.sshPublicKeys.get
-    , module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Get
+    OSLoginUsersSshPublicKeysGetResource,
+    newOSLoginUsersSshPublicKeysGet,
+    OSLoginUsersSshPublicKeysGet,
 
     -- ** oslogin.users.sshPublicKeys.patch
-    , module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Patch
+    OSLoginUsersSshPublicKeysPatchResource,
+    newOSLoginUsersSshPublicKeysPatch,
+    OSLoginUsersSshPublicKeysPatch,
 
     -- * Types
 
-    -- ** PosixAccountOperatingSystemType
-    , PosixAccountOperatingSystemType (..)
-
-    -- ** LoginProFileSSHPublicKeys
-    , LoginProFileSSHPublicKeys
-    , loginProFileSSHPublicKeys
-    , lpfspkAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Empty
-    , Empty
-    , empty
+    Empty (..),
+    newEmpty,
 
-    -- ** LoginProFile
-    , LoginProFile
-    , loginProFile
-    , lpfPosixAccounts
-    , lpfSSHPublicKeys
-    , lpfName
+    -- ** ImportSshPublicKeyResponse
+    ImportSshPublicKeyResponse (..),
+    newImportSshPublicKeyResponse,
 
-    -- ** ImportSSHPublicKeyResponse
-    , ImportSSHPublicKeyResponse
-    , importSSHPublicKeyResponse
-    , ispkrLoginProFile
-    , ispkrDetails
+    -- ** LoginProfile
+    LoginProfile (..),
+    newLoginProfile,
 
-    -- ** SSHPublicKey
-    , SSHPublicKey
-    , sshPublicKey
-    , spkFingerprint
-    , spkKey
-    , spkName
-    , spkExpirationTimeUsec
+    -- ** LoginProfile_SshPublicKeys
+    LoginProfile_SshPublicKeys (..),
+    newLoginProfile_SshPublicKeys,
 
     -- ** PosixAccount
-    , PosixAccount
-    , posixAccount
-    , paGecos
-    , paUid
-    , paUsername
-    , paShell
-    , paPrimary
-    , paAccountId
-    , paName
-    , paGid
-    , paOperatingSystemType
-    , paSystemId
-    , paHomeDirectory
+    PosixAccount (..),
+    newPosixAccount,
 
-    -- ** Xgafv
-    , Xgafv (..)
-    ) where
+    -- ** PosixAccount_OperatingSystemType
+    PosixAccount_OperatingSystemType (..),
 
-import Network.Google.Prelude
+    -- ** SshPublicKey
+    SshPublicKey (..),
+    newSshPublicKey,
+  )
+where
+
 import Network.Google.OSLogin.Types
-import Network.Google.Resource.OSLogin.Users.GetLoginProFile
-import Network.Google.Resource.OSLogin.Users.ImportSSHPublicKey
-import Network.Google.Resource.OSLogin.Users.Projects.Delete
-import Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Delete
-import Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Get
-import Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Patch
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud OS Login API service.
-type OSLoginAPI =
-     UsersSSHPublicKeysPatchResource :<|>
-       UsersSSHPublicKeysGetResource
-       :<|> UsersSSHPublicKeysDeleteResource
-       :<|> UsersProjectsDeleteResource
-       :<|> UsersImportSSHPublicKeyResource
-       :<|> UsersGetLoginProFileResource
+import Network.Google.OSLogin.Users.GetLoginProfile
+import Network.Google.OSLogin.Users.ImportSshPublicKey
+import Network.Google.OSLogin.Users.Projects.Delete
+import Network.Google.OSLogin.Users.SshPublicKeys.Create
+import Network.Google.OSLogin.Users.SshPublicKeys.Delete
+import Network.Google.OSLogin.Users.SshPublicKeys.Get
+import Network.Google.OSLogin.Users.SshPublicKeys.Patch
