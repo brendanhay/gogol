@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.GamesConfiguration.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AchievementConfiguration_AchievementType
     AchievementConfiguration_AchievementType
-      (
-        AchievementConfiguration_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED,
+      ( AchievementConfiguration_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED,
         AchievementConfiguration_AchievementType_Standard,
         AchievementConfiguration_AchievementType_Incremental,
         ..
@@ -54,8 +43,7 @@ module Gogol.GamesConfiguration.Internal.Sum
 
     -- * AchievementConfiguration_InitialState
     AchievementConfiguration_InitialState
-      (
-        AchievementConfiguration_InitialState_INITIALSTATEUNSPECIFIED,
+      ( AchievementConfiguration_InitialState_INITIALSTATEUNSPECIFIED,
         AchievementConfiguration_InitialState_Hidden,
         AchievementConfiguration_InitialState_Revealed,
         ..
@@ -63,8 +51,7 @@ module Gogol.GamesConfiguration.Internal.Sum
 
     -- * GamesNumberFormatConfiguration_NumberFormatType
     GamesNumberFormatConfiguration_NumberFormatType
-      (
-        GamesNumberFormatConfiguration_NumberFormatType_NUMBERFORMATTYPEUNSPECIFIED,
+      ( GamesNumberFormatConfiguration_NumberFormatType_NUMBERFORMATTYPEUNSPECIFIED,
         GamesNumberFormatConfiguration_NumberFormatType_Numeric,
         GamesNumberFormatConfiguration_NumberFormatType_TIMEDURATION,
         GamesNumberFormatConfiguration_NumberFormatType_Currency,
@@ -73,8 +60,7 @@ module Gogol.GamesConfiguration.Internal.Sum
 
     -- * ImageConfiguration_ImageType
     ImageConfiguration_ImageType
-      (
-        ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED,
+      ( ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED,
         ImageConfiguration_ImageType_ACHIEVEMENTICON,
         ImageConfiguration_ImageType_LEADERBOARDICON,
         ..
@@ -82,8 +68,7 @@ module Gogol.GamesConfiguration.Internal.Sum
 
     -- * LeaderboardConfiguration_ScoreOrder
     LeaderboardConfiguration_ScoreOrder
-      (
-        LeaderboardConfiguration_ScoreOrder_SCOREORDERUNSPECIFIED,
+      ( LeaderboardConfiguration_ScoreOrder_SCOREORDERUNSPECIFIED,
         LeaderboardConfiguration_ScoreOrder_LARGERISBETTER,
         LeaderboardConfiguration_ScoreOrder_SMALLERISBETTER,
         ..
@@ -91,28 +76,28 @@ module Gogol.GamesConfiguration.Internal.Sum
 
     -- * ImageConfigurationsUploadImageType
     ImageConfigurationsUploadImageType
-      (
-        ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED,
+      ( ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED,
         ImageConfigurationsUploadImageType_ACHIEVEMENTICON,
         ImageConfigurationsUploadImageType_LEADERBOARDICON,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -125,20 +110,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The type of the achievement.
-newtype AchievementConfiguration_AchievementType = AchievementConfiguration_AchievementType { fromAchievementConfiguration_AchievementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AchievementConfiguration_AchievementType = AchievementConfiguration_AchievementType {fromAchievementConfiguration_AchievementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern AchievementConfiguration_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED :: AchievementConfiguration_AchievementType
@@ -156,20 +142,21 @@ pattern AchievementConfiguration_AchievementType_Incremental = AchievementConfig
   AchievementConfiguration_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED,
   AchievementConfiguration_AchievementType_Standard,
   AchievementConfiguration_AchievementType_Incremental,
-  AchievementConfiguration_AchievementType #-}
+  AchievementConfiguration_AchievementType
+  #-}
 
 -- | The initial state of the achievement.
-newtype AchievementConfiguration_InitialState = AchievementConfiguration_InitialState { fromAchievementConfiguration_InitialState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AchievementConfiguration_InitialState = AchievementConfiguration_InitialState {fromAchievementConfiguration_InitialState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern AchievementConfiguration_InitialState_INITIALSTATEUNSPECIFIED :: AchievementConfiguration_InitialState
@@ -187,20 +174,21 @@ pattern AchievementConfiguration_InitialState_Revealed = AchievementConfiguratio
   AchievementConfiguration_InitialState_INITIALSTATEUNSPECIFIED,
   AchievementConfiguration_InitialState_Hidden,
   AchievementConfiguration_InitialState_Revealed,
-  AchievementConfiguration_InitialState #-}
+  AchievementConfiguration_InitialState
+  #-}
 
 -- | The formatting for the number.
-newtype GamesNumberFormatConfiguration_NumberFormatType = GamesNumberFormatConfiguration_NumberFormatType { fromGamesNumberFormatConfiguration_NumberFormatType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GamesNumberFormatConfiguration_NumberFormatType = GamesNumberFormatConfiguration_NumberFormatType {fromGamesNumberFormatConfiguration_NumberFormatType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern GamesNumberFormatConfiguration_NumberFormatType_NUMBERFORMATTYPEUNSPECIFIED :: GamesNumberFormatConfiguration_NumberFormatType
@@ -223,20 +211,21 @@ pattern GamesNumberFormatConfiguration_NumberFormatType_Currency = GamesNumberFo
   GamesNumberFormatConfiguration_NumberFormatType_Numeric,
   GamesNumberFormatConfiguration_NumberFormatType_TIMEDURATION,
   GamesNumberFormatConfiguration_NumberFormatType_Currency,
-  GamesNumberFormatConfiguration_NumberFormatType #-}
+  GamesNumberFormatConfiguration_NumberFormatType
+  #-}
 
 -- | The image type for the image.
-newtype ImageConfiguration_ImageType = ImageConfiguration_ImageType { fromImageConfiguration_ImageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ImageConfiguration_ImageType = ImageConfiguration_ImageType {fromImageConfiguration_ImageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED :: ImageConfiguration_ImageType
@@ -254,19 +243,20 @@ pattern ImageConfiguration_ImageType_LEADERBOARDICON = ImageConfiguration_ImageT
   ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED,
   ImageConfiguration_ImageType_ACHIEVEMENTICON,
   ImageConfiguration_ImageType_LEADERBOARDICON,
-  ImageConfiguration_ImageType #-}
+  ImageConfiguration_ImageType
+  #-}
 
-newtype LeaderboardConfiguration_ScoreOrder = LeaderboardConfiguration_ScoreOrder { fromLeaderboardConfiguration_ScoreOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LeaderboardConfiguration_ScoreOrder = LeaderboardConfiguration_ScoreOrder {fromLeaderboardConfiguration_ScoreOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern LeaderboardConfiguration_ScoreOrder_SCOREORDERUNSPECIFIED :: LeaderboardConfiguration_ScoreOrder
@@ -284,20 +274,21 @@ pattern LeaderboardConfiguration_ScoreOrder_SMALLERISBETTER = LeaderboardConfigu
   LeaderboardConfiguration_ScoreOrder_SCOREORDERUNSPECIFIED,
   LeaderboardConfiguration_ScoreOrder_LARGERISBETTER,
   LeaderboardConfiguration_ScoreOrder_SMALLERISBETTER,
-  LeaderboardConfiguration_ScoreOrder #-}
+  LeaderboardConfiguration_ScoreOrder
+  #-}
 
 -- | Selects which image in a resource for this method.
-newtype ImageConfigurationsUploadImageType = ImageConfigurationsUploadImageType { fromImageConfigurationsUploadImageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ImageConfigurationsUploadImageType = ImageConfigurationsUploadImageType {fromImageConfigurationsUploadImageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED :: ImageConfigurationsUploadImageType
@@ -315,4 +306,5 @@ pattern ImageConfigurationsUploadImageType_LEADERBOARDICON = ImageConfigurations
   ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED,
   ImageConfigurationsUploadImageType_ACHIEVEMENTICON,
   ImageConfigurationsUploadImageType_LEADERBOARDICON,
-  ImageConfigurationsUploadImageType #-}
+  ImageConfigurationsUploadImageType
+  #-}

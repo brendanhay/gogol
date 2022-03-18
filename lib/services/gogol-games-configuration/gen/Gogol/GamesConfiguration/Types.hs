@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,93 +25,92 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.GamesConfiguration.Types
-    (
-    -- * Configuration
-      gamesConfigurationService
+  ( -- * Configuration
+    gamesConfigurationService,
 
     -- * OAuth Scopes
-    , androidpublisherScope
+    androidpublisherScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AchievementConfiguration
-    , AchievementConfiguration (..)
-    , newAchievementConfiguration
+    AchievementConfiguration (..),
+    newAchievementConfiguration,
 
     -- ** AchievementConfiguration_AchievementType
-    , AchievementConfiguration_AchievementType (..)
+    AchievementConfiguration_AchievementType (..),
 
     -- ** AchievementConfiguration_InitialState
-    , AchievementConfiguration_InitialState (..)
+    AchievementConfiguration_InitialState (..),
 
     -- ** AchievementConfigurationDetail
-    , AchievementConfigurationDetail (..)
-    , newAchievementConfigurationDetail
+    AchievementConfigurationDetail (..),
+    newAchievementConfigurationDetail,
 
     -- ** AchievementConfigurationListResponse
-    , AchievementConfigurationListResponse (..)
-    , newAchievementConfigurationListResponse
+    AchievementConfigurationListResponse (..),
+    newAchievementConfigurationListResponse,
 
     -- ** GamesNumberAffixConfiguration
-    , GamesNumberAffixConfiguration (..)
-    , newGamesNumberAffixConfiguration
+    GamesNumberAffixConfiguration (..),
+    newGamesNumberAffixConfiguration,
 
     -- ** GamesNumberFormatConfiguration
-    , GamesNumberFormatConfiguration (..)
-    , newGamesNumberFormatConfiguration
+    GamesNumberFormatConfiguration (..),
+    newGamesNumberFormatConfiguration,
 
     -- ** GamesNumberFormatConfiguration_NumberFormatType
-    , GamesNumberFormatConfiguration_NumberFormatType (..)
+    GamesNumberFormatConfiguration_NumberFormatType (..),
 
     -- ** ImageConfiguration
-    , ImageConfiguration (..)
-    , newImageConfiguration
+    ImageConfiguration (..),
+    newImageConfiguration,
 
     -- ** ImageConfiguration_ImageType
-    , ImageConfiguration_ImageType (..)
+    ImageConfiguration_ImageType (..),
 
     -- ** LeaderboardConfiguration
-    , LeaderboardConfiguration (..)
-    , newLeaderboardConfiguration
+    LeaderboardConfiguration (..),
+    newLeaderboardConfiguration,
 
     -- ** LeaderboardConfiguration_ScoreOrder
-    , LeaderboardConfiguration_ScoreOrder (..)
+    LeaderboardConfiguration_ScoreOrder (..),
 
     -- ** LeaderboardConfigurationDetail
-    , LeaderboardConfigurationDetail (..)
-    , newLeaderboardConfigurationDetail
+    LeaderboardConfigurationDetail (..),
+    newLeaderboardConfigurationDetail,
 
     -- ** LeaderboardConfigurationListResponse
-    , LeaderboardConfigurationListResponse (..)
-    , newLeaderboardConfigurationListResponse
+    LeaderboardConfigurationListResponse (..),
+    newLeaderboardConfigurationListResponse,
 
     -- ** LocalizedString
-    , LocalizedString (..)
-    , newLocalizedString
+    LocalizedString (..),
+    newLocalizedString,
 
     -- ** LocalizedStringBundle
-    , LocalizedStringBundle (..)
-    , newLocalizedStringBundle
+    LocalizedStringBundle (..),
+    newLocalizedStringBundle,
 
     -- ** ImageConfigurationsUploadImageType
-    , ImageConfigurationsUploadImageType (..)
-    ) where
+    ImageConfigurationsUploadImageType (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.GamesConfiguration.Internal.Product
 import Gogol.GamesConfiguration.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1configuration@ of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
 gamesConfigurationService :: Core.ServiceConfig
-gamesConfigurationService
-  = Core.defaultService
-      (Core.ServiceId "gamesConfiguration:v1configuration")
-      "gamesconfiguration.googleapis.com"
+gamesConfigurationService =
+  Core.defaultService
+    (Core.ServiceId "gamesConfiguration:v1configuration")
+    "gamesconfiguration.googleapis.com"
 
 -- | View and manage your Google Play Developer account
 androidpublisherScope :: Core.Proxy '["https://www.googleapis.com/auth/androidpublisher"]
