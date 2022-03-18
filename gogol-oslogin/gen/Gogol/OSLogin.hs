@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OSLogin
+-- Module      : Gogol.OSLogin
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- You can use OS Login to manage access to your VM instances using IAM roles.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference>
-module Network.Google.OSLogin
+module Gogol.OSLogin
   ( -- * Configuration
     oSLoginService,
 
@@ -110,11 +110,11 @@ module Network.Google.OSLogin
   )
 where
 
-import Network.Google.OSLogin.Types
-import Network.Google.OSLogin.Users.GetLoginProfile
-import Network.Google.OSLogin.Users.ImportSshPublicKey
-import Network.Google.OSLogin.Users.Projects.Delete
-import Network.Google.OSLogin.Users.SshPublicKeys.Create
-import Network.Google.OSLogin.Users.SshPublicKeys.Delete
-import Network.Google.OSLogin.Users.SshPublicKeys.Get
-import Network.Google.OSLogin.Users.SshPublicKeys.Patch
+import Gogol.OSLogin.Types
+import Gogol.OSLogin.Users.GetLoginProfile
+import Gogol.OSLogin.Users.ImportSshPublicKey
+import Gogol.OSLogin.Users.Projects.Delete
+import Gogol.OSLogin.Users.SshPublicKeys.Create
+import Gogol.OSLogin.Users.SshPublicKeys.Delete
+import Gogol.OSLogin.Users.SshPublicKeys.Get
+import Gogol.OSLogin.Users.SshPublicKeys.Patch

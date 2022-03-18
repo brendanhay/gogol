@@ -19,54 +19,61 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OSLogin.Users.Projects.Delete
+-- Module      : Gogol.OSLogin.Users.GetLoginProfile
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a POSIX account.
+-- Retrieves the profile information used for logging in to a virtual machine on Google Compute Engine.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.projects.delete@.
-module Network.Google.OSLogin.Users.Projects.Delete
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.getLoginProfile@.
+module Gogol.OSLogin.Users.GetLoginProfile
   ( -- * Resource
-    OSLoginUsersProjectsDeleteResource,
+    OSLoginUsersGetLoginProfileResource,
 
     -- ** Constructing a Request
-    newOSLoginUsersProjectsDelete,
-    OSLoginUsersProjectsDelete,
+    newOSLoginUsersGetLoginProfile,
+    OSLoginUsersGetLoginProfile,
   )
 where
 
-import Network.Google.OSLogin.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.OSLogin.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @oslogin.users.projects.delete@ method which the
--- 'OSLoginUsersProjectsDelete' request conforms to.
-type OSLoginUsersProjectsDeleteResource =
+-- | A resource alias for @oslogin.users.getLoginProfile@ method which the
+-- 'OSLoginUsersGetLoginProfile' request conforms to.
+type OSLoginUsersGetLoginProfileResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
+    Core.:> "loginProfile"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "projectId" Core.Text
+    Core.:> Core.QueryParam "systemId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] LoginProfile
 
--- | Deletes a POSIX account.
+-- | Retrieves the profile information used for logging in to a virtual machine on Google Compute Engine.
 --
--- /See:/ 'newOSLoginUsersProjectsDelete' smart constructor.
-data OSLoginUsersProjectsDelete = OSLoginUsersProjectsDelete
+-- /See:/ 'newOSLoginUsersGetLoginProfile' smart constructor.
+data OSLoginUsersGetLoginProfile = OSLoginUsersGetLoginProfile
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. A reference to the POSIX account to update. POSIX accounts are identified by the project ID they are associated with. A reference to the POSIX account is in format @users\/{user}\/projects\/{project}@.
+    -- | Required. The unique ID for the user in format @users\/{user}@.
     name :: Core.Text,
+    -- | The project ID of the Google Cloud Platform project.
+    projectId :: (Core.Maybe Core.Text),
+    -- | A system ID for filtering the results of the request.
+    systemId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,37 +81,43 @@ data OSLoginUsersProjectsDelete = OSLoginUsersProjectsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'OSLoginUsersProjectsDelete' with the minimum fields required to make a request.
-newOSLoginUsersProjectsDelete ::
-  -- |  Required. A reference to the POSIX account to update. POSIX accounts are identified by the project ID they are associated with. A reference to the POSIX account is in format @users\/{user}\/projects\/{project}@. See 'name'.
+-- | Creates a value of 'OSLoginUsersGetLoginProfile' with the minimum fields required to make a request.
+newOSLoginUsersGetLoginProfile ::
+  -- |  Required. The unique ID for the user in format @users\/{user}@. See 'name'.
   Core.Text ->
-  OSLoginUsersProjectsDelete
-newOSLoginUsersProjectsDelete name =
-  OSLoginUsersProjectsDelete
+  OSLoginUsersGetLoginProfile
+newOSLoginUsersGetLoginProfile name =
+  OSLoginUsersGetLoginProfile
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      projectId = Core.Nothing,
+      systemId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    OSLoginUsersProjectsDelete
+    OSLoginUsersGetLoginProfile
   where
-  type Rs OSLoginUsersProjectsDelete = Empty
+  type Rs OSLoginUsersGetLoginProfile = LoginProfile
   type
-    Scopes OSLoginUsersProjectsDelete =
+    Scopes OSLoginUsersGetLoginProfile =
       '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
+         "https://www.googleapis.com/auth/cloud-platform.read-only",
+         "https://www.googleapis.com/auth/compute",
+         "https://www.googleapis.com/auth/compute.readonly"
        ]
-  requestClient OSLoginUsersProjectsDelete {..} =
+  requestClient OSLoginUsersGetLoginProfile {..} =
     go
       name
       xgafv
       accessToken
       callback
+      projectId
+      systemId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -113,6 +126,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy OSLoginUsersProjectsDeleteResource
+              Core.Proxy OSLoginUsersGetLoginProfileResource
           )
           Core.mempty

@@ -39,24 +39,25 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.OSLogin
-    Network.Google.OSLogin.Types
-    Network.Google.OSLogin.Users.GetLoginProfile
-    Network.Google.OSLogin.Users.ImportSshPublicKey
-    Network.Google.OSLogin.Users.Projects.Delete
-    Network.Google.OSLogin.Users.SshPublicKeys.Create
-    Network.Google.OSLogin.Users.SshPublicKeys.Delete
-    Network.Google.OSLogin.Users.SshPublicKeys.Get
-    Network.Google.OSLogin.Users.SshPublicKeys.Patch
+    Gogol.OSLogin
+    Gogol.OSLogin.Types
+    Gogol.OSLogin.Users.GetLoginProfile
+    Gogol.OSLogin.Users.ImportSshPublicKey
+    Gogol.OSLogin.Users.Projects.Delete
+    Gogol.OSLogin.Users.SshPublicKeys.Create
+    Gogol.OSLogin.Users.SshPublicKeys.Delete
+    Gogol.OSLogin.Users.SshPublicKeys.Get
+    Gogol.OSLogin.Users.SshPublicKeys.Patch
 
   other-modules:
-    Network.Google.OSLogin.Internal.Product
-    Network.Google.OSLogin.Internal.Sum
+    Gogol.OSLogin.Internal.Product
+    Gogol.OSLogin.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
