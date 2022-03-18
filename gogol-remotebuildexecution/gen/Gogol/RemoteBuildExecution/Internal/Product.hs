@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.Internal.Product
+-- Module      : Gogol.RemoteBuildExecution.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.RemoteBuildExecution.Internal.Product
+module Gogol.RemoteBuildExecution.Internal.Product
   ( -- * BuildBazelRemoteExecutionV2Action
     BuildBazelRemoteExecutionV2Action (..),
     newBuildBazelRemoteExecutionV2Action,
@@ -396,8 +396,8 @@ module Network.Google.RemoteBuildExecution.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Internal.Sum
 
 -- | An @Action@ captures all the information about an execution which is required to reproduce it. @Action@s are the core component of the [Execution] service. A single @Action@ represents a repeatable action that can be performed by the execution service. @Action@s can be succinctly identified by the digest of their wire format encoding and, once an @Action@ has been executed, will be cached in the action cache. Future requests can then use the cached result rather than needing to run afresh. When a server completes execution of an Action, it MAY choose to cache the result in the ActionCache unless @do_not_cache@ is @true@. Clients SHOULD expect the server to do so. By default, future calls to Execute the same @Action@ will also serve their results from the cache. Clients must take care to understand the caching behaviour. Ideally, all @Action@s will be reproducible so that serving a result from cache is always desirable and correct.
 --

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.Blobs.GetTree
+-- Module      : Gogol.RemoteBuildExecution.Blobs.GetTree
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Fetch the entire directory tree rooted at a node. This request must be targeted at a Directory stored in the ContentAddressableStorage (CAS). The server will enumerate the @Directory@ tree recursively and return every node descended from the root. The GetTreeRequest.page/token parameter can be used to skip ahead in the stream (e.g. when retrying a partially completed and aborted request), by setting it to a value taken from GetTreeResponse.next/page_token of the last successfully processed GetTreeResponse). The exact traversal order is unspecified and, unless retrieving subsequent pages from an earlier request, is not guaranteed to be stable across multiple invocations of @GetTree@. If part of the tree is missing from the CAS, the server will return the portion present and omit the rest. Errors: * @NOT_FOUND@: The requested tree root is not present in the CAS.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.blobs.getTree@.
-module Network.Google.RemoteBuildExecution.Blobs.GetTree
+module Gogol.RemoteBuildExecution.Blobs.GetTree
   ( -- * Resource
     RemoteBuildExecutionBlobsGetTreeResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.Blobs.GetTree
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.getTree@ method which the
 -- 'RemoteBuildExecutionBlobsGetTree' request conforms to.

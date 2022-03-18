@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.Actions.Execute
+-- Module      : Gogol.RemoteBuildExecution.Actions.Execute
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -32,7 +32,7 @@
 -- potentially in parallel. These redundant executions MAY continue to run, even if the operation is completed.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actions.execute@.
-module Network.Google.RemoteBuildExecution.Actions.Execute
+module Gogol.RemoteBuildExecution.Actions.Execute
   ( -- * Resource
     RemoteBuildExecutionActionsExecuteResource,
 
@@ -42,8 +42,8 @@ module Network.Google.RemoteBuildExecution.Actions.Execute
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actions.execute@ method which the
 -- 'RemoteBuildExecutionActionsExecute' request conforms to.

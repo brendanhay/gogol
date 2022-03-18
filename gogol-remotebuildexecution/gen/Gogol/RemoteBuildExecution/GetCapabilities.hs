@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.GetCapabilities
+-- Module      : Gogol.RemoteBuildExecution.GetCapabilities
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- GetCapabilities returns the server capabilities configuration of the remote endpoint. Only the capabilities of the services supported by the endpoint will be returned: * Execution + CAS + Action Cache endpoints should return both CacheCapabilities and ExecutionCapabilities. * Execution only endpoints should return ExecutionCapabilities. * CAS + Action Cache only endpoints should return CacheCapabilities.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.getCapabilities@.
-module Network.Google.RemoteBuildExecution.GetCapabilities
+module Gogol.RemoteBuildExecution.GetCapabilities
   ( -- * Resource
     RemoteBuildExecutionGetCapabilitiesResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.GetCapabilities
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.getCapabilities@ method which the
 -- 'RemoteBuildExecutionGetCapabilities' request conforms to.

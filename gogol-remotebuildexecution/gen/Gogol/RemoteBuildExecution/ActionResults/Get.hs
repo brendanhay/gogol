@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.ActionResults.Get
+-- Module      : Gogol.RemoteBuildExecution.ActionResults.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieve a cached execution result. Implementations SHOULD ensure that any blobs referenced from the ContentAddressableStorage are available at the time of returning the ActionResult and will be for some period of time afterwards. The lifetimes of the referenced blobs SHOULD be increased if necessary and applicable. Errors: * @NOT_FOUND@: The requested @ActionResult@ is not in the cache.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actionResults.get@.
-module Network.Google.RemoteBuildExecution.ActionResults.Get
+module Gogol.RemoteBuildExecution.ActionResults.Get
   ( -- * Resource
     RemoteBuildExecutionActionResultsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.ActionResults.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actionResults.get@ method which the
 -- 'RemoteBuildExecutionActionResultsGet' request conforms to.
