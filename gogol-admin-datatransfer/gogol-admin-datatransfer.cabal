@@ -39,22 +39,23 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Admin.DataTransfer
-    Network.Google.Admin.DataTransfer.Applications.Get
-    Network.Google.Admin.DataTransfer.Applications.List
-    Network.Google.Admin.DataTransfer.Transfers.Get
-    Network.Google.Admin.DataTransfer.Transfers.Insert
-    Network.Google.Admin.DataTransfer.Transfers.List
-    Network.Google.Admin.DataTransfer.Types
+    Gogol.Admin.DataTransfer
+    Gogol.Admin.DataTransfer.Applications.Get
+    Gogol.Admin.DataTransfer.Applications.List
+    Gogol.Admin.DataTransfer.Transfers.Get
+    Gogol.Admin.DataTransfer.Transfers.Insert
+    Gogol.Admin.DataTransfer.Transfers.List
+    Gogol.Admin.DataTransfer.Types
 
   other-modules:
-    Network.Google.Admin.DataTransfer.Internal.Product
-    Network.Google.Admin.DataTransfer.Internal.Sum
+    Gogol.Admin.DataTransfer.Internal.Product
+    Gogol.Admin.DataTransfer.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

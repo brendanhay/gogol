@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.DataTransfer.Internal.Product
+-- Module      : Gogol.Admin.DataTransfer.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Admin.DataTransfer.Internal.Product
+module Gogol.Admin.DataTransfer.Internal.Product
   ( -- * Application
     Application (..),
     newApplication,
@@ -52,8 +52,8 @@ module Network.Google.Admin.DataTransfer.Internal.Product
   )
 where
 
-import Network.Google.Admin.DataTransfer.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.DataTransfer.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Applications resources represent applications installed on the domain that support transferring ownership of user data.
 --

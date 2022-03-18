@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Admin.DataTransfer.Transfers.List
+-- Module      : Gogol.Admin.DataTransfer.Transfers.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists the transfers for a customer by source user, destination user, or status.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @datatransfer.transfers.list@.
-module Network.Google.Admin.DataTransfer.Transfers.List
+module Gogol.Admin.DataTransfer.Transfers.List
   ( -- * Resource
     DatatransferTransfersListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Admin.DataTransfer.Transfers.List
   )
 where
 
-import Network.Google.Admin.DataTransfer.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Admin.DataTransfer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datatransfer.transfers.list@ method which the
 -- 'DatatransferTransfersList' request conforms to.
