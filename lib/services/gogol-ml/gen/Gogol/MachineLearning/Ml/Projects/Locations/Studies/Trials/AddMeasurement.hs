@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,102 +36,95 @@
 --
 -- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.locations.studies.trials.addMeasurement@.
 module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.AddMeasurement
-  ( -- * Resource
-    MlProjectsLocationsStudiesTrialsAddMeasurementResource,
+    (
+    -- * Resource
+      MlProjectsLocationsStudiesTrialsAddMeasurementResource
 
     -- ** Constructing a Request
-    newMlProjectsLocationsStudiesTrialsAddMeasurement,
-    MlProjectsLocationsStudiesTrialsAddMeasurement,
-  )
-where
+    , newMlProjectsLocationsStudiesTrialsAddMeasurement
+    , MlProjectsLocationsStudiesTrialsAddMeasurement
+    ) where
 
-import Gogol.MachineLearning.Types
 import qualified Gogol.Prelude as Core
+import Gogol.MachineLearning.Types
 
 -- | A resource alias for @ml.projects.locations.studies.trials.addMeasurement@ method which the
 -- 'MlProjectsLocationsStudiesTrialsAddMeasurement' request conforms to.
-type MlProjectsLocationsStudiesTrialsAddMeasurementResource =
-  "v1"
-    Core.:> Core.CaptureMode "name" "addMeasurement" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudMlV1__AddTrialMeasurementRequest
-    Core.:> Core.Post '[Core.JSON] GoogleCloudMlV1__Trial
+type MlProjectsLocationsStudiesTrialsAddMeasurementResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "name" "addMeasurement" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       GoogleCloudMlV1__AddTrialMeasurementRequest
+                       Core.:> Core.Post '[Core.JSON] GoogleCloudMlV1__Trial
 
 -- | Adds a measurement of the objective metrics to a trial. This measurement is assumed to have been taken before the trial is complete.
 --
 -- /See:/ 'newMlProjectsLocationsStudiesTrialsAddMeasurement' smart constructor.
 data MlProjectsLocationsStudiesTrialsAddMeasurement = MlProjectsLocationsStudiesTrialsAddMeasurement
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The trial name.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GoogleCloudMlV1__AddTrialMeasurementRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The trial name.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GoogleCloudMlV1__AddTrialMeasurementRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MlProjectsLocationsStudiesTrialsAddMeasurement' with the minimum fields required to make a request.
-newMlProjectsLocationsStudiesTrialsAddMeasurement ::
-  -- |  Required. The trial name. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudMlV1__AddTrialMeasurementRequest ->
-  MlProjectsLocationsStudiesTrialsAddMeasurement
+newMlProjectsLocationsStudiesTrialsAddMeasurement 
+    ::  Core.Text
+       -- ^  Required. The trial name. See 'name'.
+    -> GoogleCloudMlV1__AddTrialMeasurementRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> MlProjectsLocationsStudiesTrialsAddMeasurement
 newMlProjectsLocationsStudiesTrialsAddMeasurement name payload =
   MlProjectsLocationsStudiesTrialsAddMeasurement
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsLocationsStudiesTrialsAddMeasurement
-  where
-  type
-    Rs
-      MlProjectsLocationsStudiesTrialsAddMeasurement =
-      GoogleCloudMlV1__Trial
-  type
-    Scopes
-      MlProjectsLocationsStudiesTrialsAddMeasurement =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    MlProjectsLocationsStudiesTrialsAddMeasurement {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        machineLearningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MlProjectsLocationsStudiesTrialsAddMeasurementResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           MlProjectsLocationsStudiesTrialsAddMeasurement
+         where
+        type Rs
+               MlProjectsLocationsStudiesTrialsAddMeasurement
+             = GoogleCloudMlV1__Trial
+        type Scopes
+               MlProjectsLocationsStudiesTrialsAddMeasurement
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          MlProjectsLocationsStudiesTrialsAddMeasurement{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              machineLearningService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           MlProjectsLocationsStudiesTrialsAddMeasurementResource)
+                      Core.mempty
+
