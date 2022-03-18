@@ -1,236 +1,184 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudPrivateCatalogProducer.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudPrivateCatalogProducer.Types
-    (
-    -- * Service Configuration
-      cloudPrivateCatalogProducerService
+  ( -- * Configuration
+    cloudPrivateCatalogProducerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * GoogleRpcStatus
-    , GoogleRpcStatus
-    , googleRpcStatus
-    , grsDetails
-    , grsCode
-    , grsMessage
+    -- * Types
 
-    -- * GoogleIAMV1AuditLogConfigLogType
-    , GoogleIAMV1AuditLogConfigLogType (..)
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * GoogleLongrunningOperationMetadata
-    , GoogleLongrunningOperationMetadata
-    , googleLongrunningOperationMetadata
-    , glomAddtional
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Association
+    GoogleCloudPrivatecatalogproducerV1beta1Association (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Association,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , gcpvlvrNextPageToken
-    , gcpvlvrVersions
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Catalog
+    GoogleCloudPrivatecatalogproducerV1beta1Catalog (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Catalog,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    , googleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
+    GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest,
 
-    -- * GoogleIAMV1Binding
-    , GoogleIAMV1Binding
-    , googleIAMV1Binding
-    , givbMembers
-    , givbRole
-    , givbCondition
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
+    GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest,
 
-    -- * GoogleIAMV1SetIAMPolicyRequest
-    , GoogleIAMV1SetIAMPolicyRequest
-    , googleIAMV1SetIAMPolicyRequest
-    , givsiprUpdateMask
-    , givsiprPolicy
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , gcpvlcrNextPageToken
-    , gcpvlcrCatalogs
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse,
 
-    -- * GoogleProtobufEmpty
-    , GoogleProtobufEmpty
-    , googleProtobufEmpty
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse,
 
-    -- * GoogleRpcStatusDetailsItem
-    , GoogleRpcStatusDetailsItem
-    , googleRpcStatusDetailsItem
-    , grsdiAddtional
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , googleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , gcpvuirIcon
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Product
+    GoogleCloudPrivatecatalogproducerV1beta1Product (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Product,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1ProductDisplayMetadata
-    , GoogleCloudPrivatecatalogproducerV1beta1ProductDisplayMetadata
-    , googleCloudPrivatecatalogproducerV1beta1ProductDisplayMetadata
-    , gcpvpdmAddtional
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
+    GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata,
 
-    -- * GoogleLongrunningCancelOperationRequest
-    , GoogleLongrunningCancelOperationRequest
-    , googleLongrunningCancelOperationRequest
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+    GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    , GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    , googleCloudPrivatecatalogproducerV1beta1Catalog
-    , gcpvcParent
-    , gcpvcUpdateTime
-    , gcpvcName
-    , gcpvcDisplayName
-    , gcpvcDescription
-    , gcpvcCreateTime
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
+    GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest,
 
-    -- * GoogleIAMV1TestIAMPermissionsRequest
-    , GoogleIAMV1TestIAMPermissionsRequest
-    , googleIAMV1TestIAMPermissionsRequest
-    , givtiprPermissions
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version
+    GoogleCloudPrivatecatalogproducerV1beta1Version (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version,
 
-    -- * GoogleIAMV1AuditConfig
-    , GoogleIAMV1AuditConfig
-    , googleIAMV1AuditConfig
-    , givacService
-    , givacAuditLogConfigs
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version_Asset
+    GoogleCloudPrivatecatalogproducerV1beta1Version_Asset (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version_Asset,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
+    GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset,
 
-    -- * GoogleLongrunningOperationResponse
-    , GoogleLongrunningOperationResponse
-    , googleLongrunningOperationResponse
-    , glorAddtional
+    -- ** GoogleIamV1AuditConfig
+    GoogleIamV1AuditConfig (..),
+    newGoogleIamV1AuditConfig,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , googleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , gcpvcprDestinationProductName
+    -- ** GoogleIamV1AuditLogConfig
+    GoogleIamV1AuditLogConfig (..),
+    newGoogleIamV1AuditLogConfig,
 
-    -- * GoogleIAMV1AuditLogConfig
-    , GoogleIAMV1AuditLogConfig
-    , googleIAMV1AuditLogConfig
-    , givalcLogType
-    , givalcExemptedMembers
+    -- ** GoogleIamV1AuditLogConfig_LogType
+    GoogleIamV1AuditLogConfig_LogType (..),
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1Version
-    , GoogleCloudPrivatecatalogproducerV1beta1Version
-    , googleCloudPrivatecatalogproducerV1beta1Version
-    , gcpvvAsset
-    , gcpvvOriginalAsset
-    , gcpvvUpdateTime
-    , gcpvvName
-    , gcpvvDescription
-    , gcpvvCreateTime
+    -- ** GoogleIamV1Binding
+    GoogleIamV1Binding (..),
+    newGoogleIamV1Binding,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1VersionAsset
-    , GoogleCloudPrivatecatalogproducerV1beta1VersionAsset
-    , googleCloudPrivatecatalogproducerV1beta1VersionAsset
-    , gcpvvaAddtional
+    -- ** GoogleIamV1Policy
+    GoogleIamV1Policy (..),
+    newGoogleIamV1Policy,
 
-    -- * GoogleLongrunningListOperationsResponse
-    , GoogleLongrunningListOperationsResponse
-    , googleLongrunningListOperationsResponse
-    , gllorNextPageToken
-    , gllorOperations
+    -- ** GoogleIamV1SetIamPolicyRequest
+    GoogleIamV1SetIamPolicyRequest (..),
+    newGoogleIamV1SetIamPolicyRequest,
 
-    -- * GoogleIAMV1Policy
-    , GoogleIAMV1Policy
-    , googleIAMV1Policy
-    , givpAuditConfigs
-    , givpEtag
-    , givpVersion
-    , givpBindings
+    -- ** GoogleIamV1TestIamPermissionsRequest
+    GoogleIamV1TestIamPermissionsRequest (..),
+    newGoogleIamV1TestIamPermissionsRequest,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1Association
-    , GoogleCloudPrivatecatalogproducerV1beta1Association
-    , googleCloudPrivatecatalogproducerV1beta1Association
-    , gcpvaName
-    , gcpvaResource
-    , gcpvaCreateTime
+    -- ** GoogleIamV1TestIamPermissionsResponse
+    GoogleIamV1TestIamPermissionsResponse (..),
+    newGoogleIamV1TestIamPermissionsResponse,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , gcpvlprNextPageToken
-    , gcpvlprProducts
+    -- ** GoogleLongrunningCancelOperationRequest
+    GoogleLongrunningCancelOperationRequest (..),
+    newGoogleLongrunningCancelOperationRequest,
 
-    -- * GoogleIAMV1TestIAMPermissionsResponse
-    , GoogleIAMV1TestIAMPermissionsResponse
-    , googleIAMV1TestIAMPermissionsResponse
-    , giamvtiamprPermissions
+    -- ** GoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , googleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , gcpvcarAssociation
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
 
-    -- * GoogleTypeExpr
-    , GoogleTypeExpr
-    , googleTypeExpr
-    , gteLocation
-    , gteExpression
-    , gteTitle
-    , gteDescription
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
 
-    -- * GoogleLongrunningOperation
-    , GoogleLongrunningOperation
-    , googleLongrunningOperation
-    , gloDone
-    , gloError
-    , gloResponse
-    , gloName
-    , gloMetadata
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1Product
-    , GoogleCloudPrivatecatalogproducerV1beta1Product
-    , googleCloudPrivatecatalogproducerV1beta1Product
-    , gcpvpIconURI
-    , gcpvpUpdateTime
-    , gcpvpDisplayMetadata
-    , gcpvpName
-    , gcpvpAssetType
-    , gcpvpCreateTime
+    -- ** GoogleProtobufEmpty
+    GoogleProtobufEmpty (..),
+    newGoogleProtobufEmpty,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1VersionOriginalAsset
-    , GoogleCloudPrivatecatalogproducerV1beta1VersionOriginalAsset
-    , googleCloudPrivatecatalogproducerV1beta1VersionOriginalAsset
-    , gcpvvoaAddtional
+    -- ** GoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
 
-    -- * GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , googleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , gcpvlarNextPageToken
-    , gcpvlarAssociations
-    ) where
+    -- ** GoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
 
-import Network.Google.CloudPrivateCatalogProducer.Types.Product
-import Network.Google.CloudPrivateCatalogProducer.Types.Sum
-import Network.Google.Prelude
+    -- ** GoogleTypeExpr
+    GoogleTypeExpr (..),
+    newGoogleTypeExpr,
+  )
+where
 
--- | Default request referring to version 'v1beta1' of the Cloud Private Catalog Producer API. This contains the host and root path used as a starting point for constructing service requests.
-cloudPrivateCatalogProducerService :: ServiceConfig
-cloudPrivateCatalogProducerService
-  = defaultService
-      (ServiceId "cloudprivatecatalogproducer:v1beta1")
-      "cloudprivatecatalogproducer.googleapis.com"
+import Network.Google.CloudPrivateCatalogProducer.Internal.Product
+import Network.Google.CloudPrivateCatalogProducer.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1beta1@ of the Cloud Private Catalog Producer API. This contains the host and root path used as a starting point for constructing service requests.
+cloudPrivateCatalogProducerService :: Core.ServiceConfig
+cloudPrivateCatalogProducerService =
+  Core.defaultService
+    ( Core.ServiceId
+        "cloudprivatecatalogproducer:v1beta1"
+    )
+    "cloudprivatecatalogproducer.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
