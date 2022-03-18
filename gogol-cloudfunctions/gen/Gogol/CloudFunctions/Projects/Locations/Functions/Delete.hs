@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.Get
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a function with the given name from the requested project.
+-- Deletes a function with the given name from the specified project. If the given function is used by some trigger, the trigger will be updated to remove this function.
 --
--- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.get@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.Get
+-- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.delete@.
+module Gogol.CloudFunctions.Projects.Locations.Functions.Delete
   ( -- * Resource
-    CloudFunctionsProjectsLocationsFunctionsGetResource,
+    CloudFunctionsProjectsLocationsFunctionsDeleteResource,
 
     -- ** Constructing a Request
-    newCloudFunctionsProjectsLocationsFunctionsGet,
-    CloudFunctionsProjectsLocationsFunctionsGet,
+    newCloudFunctionsProjectsLocationsFunctionsDelete,
+    CloudFunctionsProjectsLocationsFunctionsDelete,
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudfunctions.projects.locations.functions.get@ method which the
--- 'CloudFunctionsProjectsLocationsFunctionsGet' request conforms to.
-type CloudFunctionsProjectsLocationsFunctionsGetResource =
+-- | A resource alias for @cloudfunctions.projects.locations.functions.delete@ method which the
+-- 'CloudFunctionsProjectsLocationsFunctionsDelete' request conforms to.
+type CloudFunctionsProjectsLocationsFunctionsDeleteResource =
   "v2beta"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudFunctionsProjectsLocationsFunctionsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Function
+    Core.:> Core.Delete '[Core.JSON] Operation
 
--- | Returns a function with the given name from the requested project.
+-- | Deletes a function with the given name from the specified project. If the given function is used by some trigger, the trigger will be updated to remove this function.
 --
--- /See:/ 'newCloudFunctionsProjectsLocationsFunctionsGet' smart constructor.
-data CloudFunctionsProjectsLocationsFunctionsGet = CloudFunctionsProjectsLocationsFunctionsGet
+-- /See:/ 'newCloudFunctionsProjectsLocationsFunctionsDelete' smart constructor.
+data CloudFunctionsProjectsLocationsFunctionsDelete = CloudFunctionsProjectsLocationsFunctionsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the function which details should be obtained.
+    -- | Required. The name of the function which should be deleted.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudFunctionsProjectsLocationsFunctionsGet = CloudFunctionsProjectsLocatio
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudFunctionsProjectsLocationsFunctionsGet' with the minimum fields required to make a request.
-newCloudFunctionsProjectsLocationsFunctionsGet ::
-  -- |  Required. The name of the function which details should be obtained. See 'name'.
+-- | Creates a value of 'CloudFunctionsProjectsLocationsFunctionsDelete' with the minimum fields required to make a request.
+newCloudFunctionsProjectsLocationsFunctionsDelete ::
+  -- |  Required. The name of the function which should be deleted. See 'name'.
   Core.Text ->
-  CloudFunctionsProjectsLocationsFunctionsGet
-newCloudFunctionsProjectsLocationsFunctionsGet name =
-  CloudFunctionsProjectsLocationsFunctionsGet
+  CloudFunctionsProjectsLocationsFunctionsDelete
+newCloudFunctionsProjectsLocationsFunctionsDelete name =
+  CloudFunctionsProjectsLocationsFunctionsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,17 +91,18 @@ newCloudFunctionsProjectsLocationsFunctionsGet name =
 
 instance
   Core.GoogleRequest
-    CloudFunctionsProjectsLocationsFunctionsGet
+    CloudFunctionsProjectsLocationsFunctionsDelete
   where
   type
-    Rs CloudFunctionsProjectsLocationsFunctionsGet =
-      Function
+    Rs
+      CloudFunctionsProjectsLocationsFunctionsDelete =
+      Operation
   type
     Scopes
-      CloudFunctionsProjectsLocationsFunctionsGet =
+      CloudFunctionsProjectsLocationsFunctionsDelete =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudFunctionsProjectsLocationsFunctionsGet {..} =
+    CloudFunctionsProjectsLocationsFunctionsDelete {..} =
       go
         name
         xgafv
@@ -116,6 +117,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudFunctionsProjectsLocationsFunctionsGetResource
+                  CloudFunctionsProjectsLocationsFunctionsDeleteResource
             )
             Core.mempty

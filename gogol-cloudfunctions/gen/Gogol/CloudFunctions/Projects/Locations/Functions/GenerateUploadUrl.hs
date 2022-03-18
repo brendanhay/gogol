@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a signed URL for uploading a function source code. For more information about the signed URL usage see: https:\/\/cloud.google.com\/storage\/docs\/access-control\/signed-urls. Once the function source code upload is complete, the used signed URL should be provided in CreateFunction or UpdateFunction request as a reference to the function source code. When uploading source code to the generated signed URL, please follow these restrictions: * Source file type should be a zip file. * No credentials should be attached - the signed URLs provide access to the target bucket using internal service identity; if credentials were attached, the identity from the credentials would be used, but that identity does not have permissions to upload files to the URL. When making a HTTP PUT request, these two headers need to be specified: * @content-type: application\/zip@ And this header SHOULD NOT be specified: * @Authorization: Bearer YOUR_TOKEN@
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.generateUploadUrl@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
+module Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrlResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateUpload
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.generateUploadUrl@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl' request conforms to.

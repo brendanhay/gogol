@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.getIamPolicy@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
+module Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsGetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.getIamPolicy@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsGetIamPolicy' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a @NOT_FOUND@ error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.testIamPermissions@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
+module Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsTestIamPermissionsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.TestIamPermiss
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.testIamPermissions@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsTestIamPermissions' request conforms to.

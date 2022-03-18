@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.Create
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a new function. If a function with the given name already exists in the specified project, the long running operation will return @ALREADY_EXISTS@ error.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.create@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.Create
+module Gogol.CloudFunctions.Projects.Locations.Functions.Create
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.Create
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.create@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsCreate' request conforms to.

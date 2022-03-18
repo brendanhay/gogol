@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a signed URL for downloading deployed function source code. The URL is only valid for a limited period and should be used within 30 minutes of generation. For more information about the signed URL usage see: https:\/\/cloud.google.com\/storage\/docs\/access-control\/signed-urls
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.generateDownloadUrl@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
+module Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrlResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.GenerateDownlo
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.generateDownloadUrl@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl' request conforms to.

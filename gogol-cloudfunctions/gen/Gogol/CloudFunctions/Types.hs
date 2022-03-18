@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Types
+-- Module      : Gogol.CloudFunctions.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudFunctions.Types
+module Gogol.CloudFunctions.Types
   ( -- * Configuration
     cloudFunctionsService,
 
@@ -272,9 +272,9 @@ module Network.Google.CloudFunctions.Types
   )
 where
 
-import Network.Google.CloudFunctions.Internal.Product
-import Network.Google.CloudFunctions.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Internal.Product
+import Gogol.CloudFunctions.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2beta@ of the Cloud Functions API. This contains the host and root path used as a starting point for constructing service requests.
 cloudFunctionsService :: Core.ServiceConfig

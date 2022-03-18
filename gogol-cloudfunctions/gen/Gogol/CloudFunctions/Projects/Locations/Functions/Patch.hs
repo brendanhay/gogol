@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.Patch
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.Patch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates existing function.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.patch@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.Patch
+module Gogol.CloudFunctions.Projects.Locations.Functions.Patch
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsPatchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.Patch
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.patch@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsPatch' request conforms to.

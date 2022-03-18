@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Operations.Get
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- Returns a function with the given name from the requested project.
 --
--- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.operations.get@.
-module Network.Google.CloudFunctions.Projects.Locations.Operations.Get
+-- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.get@.
+module Gogol.CloudFunctions.Projects.Locations.Functions.Get
   ( -- * Resource
-    CloudFunctionsProjectsLocationsOperationsGetResource,
+    CloudFunctionsProjectsLocationsFunctionsGetResource,
 
     -- ** Constructing a Request
-    newCloudFunctionsProjectsLocationsOperationsGet,
-    CloudFunctionsProjectsLocationsOperationsGet,
+    newCloudFunctionsProjectsLocationsFunctionsGet,
+    CloudFunctionsProjectsLocationsFunctionsGet,
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudfunctions.projects.locations.operations.get@ method which the
--- 'CloudFunctionsProjectsLocationsOperationsGet' request conforms to.
-type CloudFunctionsProjectsLocationsOperationsGetResource =
+-- | A resource alias for @cloudfunctions.projects.locations.functions.get@ method which the
+-- 'CloudFunctionsProjectsLocationsFunctionsGet' request conforms to.
+type CloudFunctionsProjectsLocationsFunctionsGetResource =
   "v2beta"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudFunctionsProjectsLocationsOperationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Operation
+    Core.:> Core.Get '[Core.JSON] Function
 
--- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- | Returns a function with the given name from the requested project.
 --
--- /See:/ 'newCloudFunctionsProjectsLocationsOperationsGet' smart constructor.
-data CloudFunctionsProjectsLocationsOperationsGet = CloudFunctionsProjectsLocationsOperationsGet
+-- /See:/ 'newCloudFunctionsProjectsLocationsFunctionsGet' smart constructor.
+data CloudFunctionsProjectsLocationsFunctionsGet = CloudFunctionsProjectsLocationsFunctionsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
+    -- | Required. The name of the function which details should be obtained.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudFunctionsProjectsLocationsOperationsGet = CloudFunctionsProjectsLocati
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudFunctionsProjectsLocationsOperationsGet' with the minimum fields required to make a request.
-newCloudFunctionsProjectsLocationsOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
+-- | Creates a value of 'CloudFunctionsProjectsLocationsFunctionsGet' with the minimum fields required to make a request.
+newCloudFunctionsProjectsLocationsFunctionsGet ::
+  -- |  Required. The name of the function which details should be obtained. See 'name'.
   Core.Text ->
-  CloudFunctionsProjectsLocationsOperationsGet
-newCloudFunctionsProjectsLocationsOperationsGet name =
-  CloudFunctionsProjectsLocationsOperationsGet
+  CloudFunctionsProjectsLocationsFunctionsGet
+newCloudFunctionsProjectsLocationsFunctionsGet name =
+  CloudFunctionsProjectsLocationsFunctionsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,17 +91,17 @@ newCloudFunctionsProjectsLocationsOperationsGet name =
 
 instance
   Core.GoogleRequest
-    CloudFunctionsProjectsLocationsOperationsGet
+    CloudFunctionsProjectsLocationsFunctionsGet
   where
   type
-    Rs CloudFunctionsProjectsLocationsOperationsGet =
-      Operation
+    Rs CloudFunctionsProjectsLocationsFunctionsGet =
+      Function
   type
     Scopes
-      CloudFunctionsProjectsLocationsOperationsGet =
+      CloudFunctionsProjectsLocationsFunctionsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudFunctionsProjectsLocationsOperationsGet {..} =
+    CloudFunctionsProjectsLocationsFunctionsGet {..} =
       go
         name
         xgafv
@@ -116,6 +116,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudFunctionsProjectsLocationsOperationsGetResource
+                  CloudFunctionsProjectsLocationsFunctionsGetResource
             )
             Core.mempty

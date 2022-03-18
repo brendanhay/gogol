@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
+-- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.setIamPolicy@.
-module Network.Google.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
+module Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
   ( -- * Resource
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
   )
 where
 
-import Network.Google.CloudFunctions.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudFunctions.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.setIamPolicy@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsSetIamPolicy' request conforms to.
