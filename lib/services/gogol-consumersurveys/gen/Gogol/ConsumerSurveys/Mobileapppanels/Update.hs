@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,67 +30,74 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.mobileapppanels.update@.
 module Gogol.ConsumerSurveys.Mobileapppanels.Update
-    (
-    -- * Resource
-      ConsumerSurveysMobileapppanelsUpdateResource
+  ( -- * Resource
+    ConsumerSurveysMobileapppanelsUpdateResource,
 
     -- ** Constructing a Request
-    , newConsumerSurveysMobileapppanelsUpdate
-    , ConsumerSurveysMobileapppanelsUpdate
-    ) where
+    newConsumerSurveysMobileapppanelsUpdate,
+    ConsumerSurveysMobileapppanelsUpdate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.ConsumerSurveys.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @consumersurveys.mobileapppanels.update@ method which the
 -- 'ConsumerSurveysMobileapppanelsUpdate' request conforms to.
 type ConsumerSurveysMobileapppanelsUpdateResource =
-     "consumersurveys" Core.:>
-       "v2" Core.:>
-         "mobileAppPanels" Core.:>
-           Core.Capture "panelId" Core.Text Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON] MobileAppPanel Core.:>
-                 Core.Put '[Core.JSON] MobileAppPanel
+  "consumersurveys"
+    Core.:> "v2"
+    Core.:> "mobileAppPanels"
+    Core.:> Core.Capture "panelId" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] MobileAppPanel
+    Core.:> Core.Put '[Core.JSON] MobileAppPanel
 
 -- | Updates a MobileAppPanel. Currently the only property that can be updated is the owners property.
 --
 -- /See:/ 'newConsumerSurveysMobileapppanelsUpdate' smart constructor.
 data ConsumerSurveysMobileapppanelsUpdate = ConsumerSurveysMobileapppanelsUpdate
-    {
-      -- | External URL ID for the panel.
-      panelId :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: MobileAppPanel
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | External URL ID for the panel.
+    panelId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: MobileAppPanel
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ConsumerSurveysMobileapppanelsUpdate' with the minimum fields required to make a request.
-newConsumerSurveysMobileapppanelsUpdate 
-    ::  Core.Text
-       -- ^  External URL ID for the panel. See 'panelId'.
-    -> MobileAppPanel
-       -- ^  Multipart request metadata. See 'payload'.
-    -> ConsumerSurveysMobileapppanelsUpdate
+newConsumerSurveysMobileapppanelsUpdate ::
+  -- |  External URL ID for the panel. See 'panelId'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  MobileAppPanel ->
+  ConsumerSurveysMobileapppanelsUpdate
 newConsumerSurveysMobileapppanelsUpdate panelId payload =
   ConsumerSurveysMobileapppanelsUpdate {panelId = panelId, payload = payload}
 
-instance Core.GoogleRequest
-           ConsumerSurveysMobileapppanelsUpdate
-         where
-        type Rs ConsumerSurveysMobileapppanelsUpdate =
-             MobileAppPanel
-        type Scopes ConsumerSurveysMobileapppanelsUpdate =
-             '["https://www.googleapis.com/auth/consumersurveys",
-               "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient
-          ConsumerSurveysMobileapppanelsUpdate{..}
-          = go panelId (Core.Just Core.AltJSON) payload
-              consumerSurveysService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           ConsumerSurveysMobileapppanelsUpdateResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    ConsumerSurveysMobileapppanelsUpdate
+  where
+  type
+    Rs ConsumerSurveysMobileapppanelsUpdate =
+      MobileAppPanel
+  type
+    Scopes ConsumerSurveysMobileapppanelsUpdate =
+      '[ "https://www.googleapis.com/auth/consumersurveys",
+         "https://www.googleapis.com/auth/userinfo.email"
+       ]
+  requestClient
+    ConsumerSurveysMobileapppanelsUpdate {..} =
+      go
+        panelId
+        (Core.Just Core.AltJSON)
+        payload
+        consumerSurveysService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  ConsumerSurveysMobileapppanelsUpdateResource
+            )
+            Core.mempty

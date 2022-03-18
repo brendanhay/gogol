@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,150 +30,150 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference>
 module Gogol.ConsumerSurveys
-    (
-    -- * Configuration
-      consumerSurveysService
+  ( -- * Configuration
+    consumerSurveysService,
 
     -- * OAuth Scopes
-    , consumerSurveysScope
-    , consumerSurveysReadOnlyScope
-    , userinfoEmailScope
+    consumerSurveysScope,
+    consumerSurveysReadOnlyScope,
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** consumersurveys.mobileapppanels.get
-    , ConsumerSurveysMobileapppanelsGetResource
-    , newConsumerSurveysMobileapppanelsGet
-    , ConsumerSurveysMobileapppanelsGet
+    ConsumerSurveysMobileapppanelsGetResource,
+    newConsumerSurveysMobileapppanelsGet,
+    ConsumerSurveysMobileapppanelsGet,
 
     -- ** consumersurveys.mobileapppanels.list
-    , ConsumerSurveysMobileapppanelsListResource
-    , newConsumerSurveysMobileapppanelsList
-    , ConsumerSurveysMobileapppanelsList
+    ConsumerSurveysMobileapppanelsListResource,
+    newConsumerSurveysMobileapppanelsList,
+    ConsumerSurveysMobileapppanelsList,
 
     -- ** consumersurveys.mobileapppanels.update
-    , ConsumerSurveysMobileapppanelsUpdateResource
-    , newConsumerSurveysMobileapppanelsUpdate
-    , ConsumerSurveysMobileapppanelsUpdate
+    ConsumerSurveysMobileapppanelsUpdateResource,
+    newConsumerSurveysMobileapppanelsUpdate,
+    ConsumerSurveysMobileapppanelsUpdate,
 
     -- ** consumersurveys.results.get
-    , ConsumerSurveysResultsGetResource
-    , newConsumerSurveysResultsGet
-    , ConsumerSurveysResultsGet
+    ConsumerSurveysResultsGetResource,
+    newConsumerSurveysResultsGet,
+    ConsumerSurveysResultsGet,
 
     -- ** consumersurveys.surveys.delete
-    , ConsumerSurveysSurveysDeleteResource
-    , newConsumerSurveysSurveysDelete
-    , ConsumerSurveysSurveysDelete
+    ConsumerSurveysSurveysDeleteResource,
+    newConsumerSurveysSurveysDelete,
+    ConsumerSurveysSurveysDelete,
 
     -- ** consumersurveys.surveys.get
-    , ConsumerSurveysSurveysGetResource
-    , newConsumerSurveysSurveysGet
-    , ConsumerSurveysSurveysGet
+    ConsumerSurveysSurveysGetResource,
+    newConsumerSurveysSurveysGet,
+    ConsumerSurveysSurveysGet,
 
     -- ** consumersurveys.surveys.insert
-    , ConsumerSurveysSurveysInsertResource
-    , newConsumerSurveysSurveysInsert
-    , ConsumerSurveysSurveysInsert
+    ConsumerSurveysSurveysInsertResource,
+    newConsumerSurveysSurveysInsert,
+    ConsumerSurveysSurveysInsert,
 
     -- ** consumersurveys.surveys.list
-    , ConsumerSurveysSurveysListResource
-    , newConsumerSurveysSurveysList
-    , ConsumerSurveysSurveysList
+    ConsumerSurveysSurveysListResource,
+    newConsumerSurveysSurveysList,
+    ConsumerSurveysSurveysList,
 
     -- ** consumersurveys.surveys.start
-    , ConsumerSurveysSurveysStartResource
-    , newConsumerSurveysSurveysStart
-    , ConsumerSurveysSurveysStart
+    ConsumerSurveysSurveysStartResource,
+    newConsumerSurveysSurveysStart,
+    ConsumerSurveysSurveysStart,
 
     -- ** consumersurveys.surveys.stop
-    , ConsumerSurveysSurveysStopResource
-    , newConsumerSurveysSurveysStop
-    , ConsumerSurveysSurveysStop
+    ConsumerSurveysSurveysStopResource,
+    newConsumerSurveysSurveysStop,
+    ConsumerSurveysSurveysStop,
 
     -- ** consumersurveys.surveys.update
-    , ConsumerSurveysSurveysUpdateResource
-    , newConsumerSurveysSurveysUpdate
-    , ConsumerSurveysSurveysUpdate
+    ConsumerSurveysSurveysUpdateResource,
+    newConsumerSurveysSurveysUpdate,
+    ConsumerSurveysSurveysUpdate,
 
     -- * Types
 
     -- ** FieldMask
-    , FieldMask (..)
-    , newFieldMask
+    FieldMask (..),
+    newFieldMask,
 
     -- ** MobileAppPanel
-    , MobileAppPanel (..)
-    , newMobileAppPanel
+    MobileAppPanel (..),
+    newMobileAppPanel,
 
     -- ** MobileAppPanelsListResponse
-    , MobileAppPanelsListResponse (..)
-    , newMobileAppPanelsListResponse
+    MobileAppPanelsListResponse (..),
+    newMobileAppPanelsListResponse,
 
     -- ** PageInfo
-    , PageInfo (..)
-    , newPageInfo
+    PageInfo (..),
+    newPageInfo,
 
     -- ** ResultsGetRequest
-    , ResultsGetRequest (..)
-    , newResultsGetRequest
+    ResultsGetRequest (..),
+    newResultsGetRequest,
 
     -- ** ResultsMask
-    , ResultsMask (..)
-    , newResultsMask
+    ResultsMask (..),
+    newResultsMask,
 
     -- ** Survey
-    , Survey (..)
-    , newSurvey
+    Survey (..),
+    newSurvey,
 
     -- ** SurveyAudience
-    , SurveyAudience (..)
-    , newSurveyAudience
+    SurveyAudience (..),
+    newSurveyAudience,
 
     -- ** SurveyCost
-    , SurveyCost (..)
-    , newSurveyCost
+    SurveyCost (..),
+    newSurveyCost,
 
     -- ** SurveyQuestion
-    , SurveyQuestion (..)
-    , newSurveyQuestion
+    SurveyQuestion (..),
+    newSurveyQuestion,
 
     -- ** SurveyQuestionImage
-    , SurveyQuestionImage (..)
-    , newSurveyQuestionImage
+    SurveyQuestionImage (..),
+    newSurveyQuestionImage,
 
     -- ** SurveyRejection
-    , SurveyRejection (..)
-    , newSurveyRejection
+    SurveyRejection (..),
+    newSurveyRejection,
 
     -- ** SurveyResults
-    , SurveyResults (..)
-    , newSurveyResults
+    SurveyResults (..),
+    newSurveyResults,
 
     -- ** SurveysDeleteResponse
-    , SurveysDeleteResponse (..)
-    , newSurveysDeleteResponse
+    SurveysDeleteResponse (..),
+    newSurveysDeleteResponse,
 
     -- ** SurveysListResponse
-    , SurveysListResponse (..)
-    , newSurveysListResponse
+    SurveysListResponse (..),
+    newSurveysListResponse,
 
     -- ** SurveysStartRequest
-    , SurveysStartRequest (..)
-    , newSurveysStartRequest
+    SurveysStartRequest (..),
+    newSurveysStartRequest,
 
     -- ** SurveysStartResponse
-    , SurveysStartResponse (..)
-    , newSurveysStartResponse
+    SurveysStartResponse (..),
+    newSurveysStartResponse,
 
     -- ** SurveysStopResponse
-    , SurveysStopResponse (..)
-    , newSurveysStopResponse
+    SurveysStopResponse (..),
+    newSurveysStopResponse,
 
     -- ** TokenPagination
-    , TokenPagination (..)
-    , newTokenPagination
-    ) where
+    TokenPagination (..),
+    newTokenPagination,
+  )
+where
 
 import Gogol.ConsumerSurveys.Mobileapppanels.Get
 import Gogol.ConsumerSurveys.Mobileapppanels.List
