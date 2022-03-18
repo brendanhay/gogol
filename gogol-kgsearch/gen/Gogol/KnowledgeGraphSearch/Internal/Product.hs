@@ -19,21 +19,21 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.KnowledgeGraphSearch.Internal.Product
+-- Module      : Gogol.KnowledgeGraphSearch.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.KnowledgeGraphSearch.Internal.Product
+module Gogol.KnowledgeGraphSearch.Internal.Product
   ( -- * SearchResponse
     SearchResponse (..),
     newSearchResponse,
   )
 where
 
-import Network.Google.KnowledgeGraphSearch.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.KnowledgeGraphSearch.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Response message includes the context and a list of matching results which contain the detail of associated entities.
 --

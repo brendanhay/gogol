@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.KnowledgeGraphSearch
+-- Module      : Gogol.KnowledgeGraphSearch
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Searches the Google Knowledge Graph for entities.
 --
 -- /See:/ <https://developers.google.com/knowledge-graph/ Knowledge Graph Search API Reference>
-module Network.Google.KnowledgeGraphSearch
+module Gogol.KnowledgeGraphSearch
   ( -- * Configuration
     knowledgeGraphSearchService,
 
@@ -51,5 +51,5 @@ module Network.Google.KnowledgeGraphSearch
   )
 where
 
-import Network.Google.KnowledgeGraphSearch.Kgsearch.Entities.Search
-import Network.Google.KnowledgeGraphSearch.Types
+import Gogol.KnowledgeGraphSearch.Kgsearch.Entities.Search
+import Gogol.KnowledgeGraphSearch.Types

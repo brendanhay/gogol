@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.KnowledgeGraphSearch.Kgsearch.Entities.Search
+-- Module      : Gogol.KnowledgeGraphSearch.Kgsearch.Entities.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Searches Knowledge Graph for entities that match the constraints. A list of matched entities will be returned in response, which will be in JSON-LD format and compatible with http:\/\/schema.org
 --
 -- /See:/ <https://developers.google.com/knowledge-graph/ Knowledge Graph Search API Reference> for @kgsearch.entities.search@.
-module Network.Google.KnowledgeGraphSearch.Kgsearch.Entities.Search
+module Gogol.KnowledgeGraphSearch.Kgsearch.Entities.Search
   ( -- * Resource
     KgsearchEntitiesSearchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.KnowledgeGraphSearch.Kgsearch.Entities.Search
   )
 where
 
-import Network.Google.KnowledgeGraphSearch.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.KnowledgeGraphSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @kgsearch.entities.search@ method which the
 -- 'KgsearchEntitiesSearch' request conforms to.
