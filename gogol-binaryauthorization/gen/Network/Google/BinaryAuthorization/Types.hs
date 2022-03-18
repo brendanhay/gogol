@@ -1,209 +1,166 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.BinaryAuthorization.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.BinaryAuthorization.Types
-    (
-    -- * Service Configuration
-      binaryAuthorizationService
+  ( -- * Configuration
+    binaryAuthorizationService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * Signature
-    , Signature
-    , signature
-    , sSignature
-    , sPublicKeyId
+    -- * Types
 
-    -- * PkixPublicKey
-    , PkixPublicKey
-    , pkixPublicKey
-    , ppkPublicKeyPem
-    , ppkSignatureAlgorithm
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AdmissionRule
+    AdmissionRule (..),
+    newAdmissionRule,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** AdmissionRule_EnforcementMode
+    AdmissionRule_EnforcementMode (..),
 
-    -- * PolicyKubernetesNamespaceAdmissionRules
-    , PolicyKubernetesNamespaceAdmissionRules
-    , policyKubernetesNamespaceAdmissionRules
-    , pknarAddtional
+    -- ** AdmissionRule_EvaluationMode
+    AdmissionRule_EvaluationMode (..),
 
-    -- * AdmissionRuleEnforcementMode
-    , AdmissionRuleEnforcementMode (..)
+    -- ** AdmissionWhitelistPattern
+    AdmissionWhitelistPattern (..),
+    newAdmissionWhitelistPattern,
 
-    -- * PolicyGlobalPolicyEvaluationMode
-    , PolicyGlobalPolicyEvaluationMode (..)
+    -- ** AttestationOccurrence
+    AttestationOccurrence (..),
+    newAttestationOccurrence,
 
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
+    -- ** Attestor
+    Attestor (..),
+    newAttestor,
 
-    -- * ValidateAttestationOccurrenceRequest
-    , ValidateAttestationOccurrenceRequest
-    , validateAttestationOccurrenceRequest
-    , vaorOccurrenceNote
-    , vaorAttestation
-    , vaorOccurrenceResourceURI
+    -- ** AttestorPublicKey
+    AttestorPublicKey (..),
+    newAttestorPublicKey,
 
-    -- * Jwt
-    , Jwt
-    , jwt
-    , jCompactJwt
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * ListAttestorsResponse
-    , ListAttestorsResponse
-    , listAttestorsResponse
-    , larNextPageToken
-    , larAttestors
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * ValidateAttestationOccurrenceResponse
-    , ValidateAttestationOccurrenceResponse
-    , validateAttestationOccurrenceResponse
-    , vaorDenialReason
-    , vaorResult
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * AdmissionWhiteListPattern
-    , AdmissionWhiteListPattern
-    , admissionWhiteListPattern
-    , awlpNamePattern
+    -- ** IamPolicy
+    IamPolicy (..),
+    newIamPolicy,
 
-    -- * PolicyIstioServiceIdentityAdmissionRules
-    , PolicyIstioServiceIdentityAdmissionRules
-    , policyIstioServiceIdentityAdmissionRules
-    , pisiarAddtional
+    -- ** Jwt
+    Jwt (..),
+    newJwt,
 
-    -- * PkixPublicKeySignatureAlgorithm
-    , PkixPublicKeySignatureAlgorithm (..)
+    -- ** ListAttestorsResponse
+    ListAttestorsResponse (..),
+    newListAttestorsResponse,
 
-    -- * AdmissionRule
-    , AdmissionRule
-    , admissionRule
-    , arEnforcementMode
-    , arEvaluationMode
-    , arRequireAttestationsBy
+    -- ** PkixPublicKey
+    PkixPublicKey (..),
+    newPkixPublicKey,
 
-    -- * AdmissionRuleEvaluationMode
-    , AdmissionRuleEvaluationMode (..)
+    -- ** PkixPublicKey_SignatureAlgorithm
+    PkixPublicKey_SignatureAlgorithm (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
+    -- ** Policy_ClusterAdmissionRules
+    Policy_ClusterAdmissionRules (..),
+    newPolicy_ClusterAdmissionRules,
 
-    -- * PolicyKubernetesServiceAccountAdmissionRules
-    , PolicyKubernetesServiceAccountAdmissionRules
-    , policyKubernetesServiceAccountAdmissionRules
-    , pksaarAddtional
+    -- ** Policy_GlobalPolicyEvaluationMode
+    Policy_GlobalPolicyEvaluationMode (..),
 
-    -- * IAMPolicy
-    , IAMPolicy
-    , iamPolicy
-    , ipEtag
-    , ipVersion
-    , ipBindings
+    -- ** Policy_IstioServiceIdentityAdmissionRules
+    Policy_IstioServiceIdentityAdmissionRules (..),
+    newPolicy_IstioServiceIdentityAdmissionRules,
 
-    -- * ValidateAttestationOccurrenceResponseResult
-    , ValidateAttestationOccurrenceResponseResult (..)
+    -- ** Policy_KubernetesNamespaceAdmissionRules
+    Policy_KubernetesNamespaceAdmissionRules (..),
+    newPolicy_KubernetesNamespaceAdmissionRules,
 
-    -- * AttestorPublicKey
-    , AttestorPublicKey
-    , attestorPublicKey
-    , apkPkixPublicKey
-    , apkAsciiArmoredPgpPublicKey
-    , apkId
-    , apkComment
+    -- ** Policy_KubernetesServiceAccountAdmissionRules
+    Policy_KubernetesServiceAccountAdmissionRules (..),
+    newPolicy_KubernetesServiceAccountAdmissionRules,
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
-    -- * Policy
-    , Policy
-    , policy
-    , pDefaultAdmissionRule
-    , pIstioServiceIdentityAdmissionRules
-    , pAdmissionWhiteListPatterns
-    , pKubernetesServiceAccountAdmissionRules
-    , pClusterAdmissionRules
-    , pUpdateTime
-    , pName
-    , pKubernetesNamespaceAdmissionRules
-    , pGlobalPolicyEvaluationMode
-    , pDescription
+    -- ** Signature
+    Signature (..),
+    newSignature,
 
-    -- * UserOwnedGrafeasNote
-    , UserOwnedGrafeasNote
-    , userOwnedGrafeasNote
-    , uognDelegationServiceAccountEmail
-    , uognPublicKeys
-    , uognNoteReference
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-    -- * PolicyClusterAdmissionRules
-    , PolicyClusterAdmissionRules
-    , policyClusterAdmissionRules
-    , pcarAddtional
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
-    -- * Attestor
-    , Attestor
-    , attestor
-    , aUpdateTime
-    , aName
-    , aUserOwnedGrafeasNote
-    , aDescription
+    -- ** UserOwnedGrafeasNote
+    UserOwnedGrafeasNote (..),
+    newUserOwnedGrafeasNote,
 
-    -- * AttestationOccurrence
-    , AttestationOccurrence
-    , attestationOccurrence
-    , aoSerializedPayload
-    , aoJwts
-    , aoSignatures
+    -- ** ValidateAttestationOccurrenceRequest
+    ValidateAttestationOccurrenceRequest (..),
+    newValidateAttestationOccurrenceRequest,
 
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    -- ** ValidateAttestationOccurrenceResponse
+    ValidateAttestationOccurrenceResponse (..),
+    newValidateAttestationOccurrenceResponse,
 
-import Network.Google.BinaryAuthorization.Types.Product
-import Network.Google.BinaryAuthorization.Types.Sum
-import Network.Google.Prelude
+    -- ** ValidateAttestationOccurrenceResponse_Result
+    ValidateAttestationOccurrenceResponse_Result (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
-binaryAuthorizationService :: ServiceConfig
-binaryAuthorizationService
-  = defaultService (ServiceId "binaryauthorization:v1")
-      "binaryauthorization.googleapis.com"
+import Network.Google.BinaryAuthorization.Internal.Product
+import Network.Google.BinaryAuthorization.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+-- | Default request referring to version @v1@ of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
+binaryAuthorizationService :: Core.ServiceConfig
+binaryAuthorizationService =
+  Core.defaultService
+    (Core.ServiceId "binaryauthorization:v1")
+    "binaryauthorization.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
