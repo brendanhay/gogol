@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudPrivateCatalog
-    Network.Google.CloudPrivateCatalog.Folders.Catalogs.Search
-    Network.Google.CloudPrivateCatalog.Folders.Products.Search
-    Network.Google.CloudPrivateCatalog.Folders.Versions.Search
-    Network.Google.CloudPrivateCatalog.Organizations.Catalogs.Search
-    Network.Google.CloudPrivateCatalog.Organizations.Products.Search
-    Network.Google.CloudPrivateCatalog.Organizations.Versions.Search
-    Network.Google.CloudPrivateCatalog.Projects.Catalogs.Search
-    Network.Google.CloudPrivateCatalog.Projects.Products.Search
-    Network.Google.CloudPrivateCatalog.Projects.Versions.Search
-    Network.Google.CloudPrivateCatalog.Types
+    Gogol.CloudPrivateCatalog
+    Gogol.CloudPrivateCatalog.Folders.Catalogs.Search
+    Gogol.CloudPrivateCatalog.Folders.Products.Search
+    Gogol.CloudPrivateCatalog.Folders.Versions.Search
+    Gogol.CloudPrivateCatalog.Organizations.Catalogs.Search
+    Gogol.CloudPrivateCatalog.Organizations.Products.Search
+    Gogol.CloudPrivateCatalog.Organizations.Versions.Search
+    Gogol.CloudPrivateCatalog.Projects.Catalogs.Search
+    Gogol.CloudPrivateCatalog.Projects.Products.Search
+    Gogol.CloudPrivateCatalog.Projects.Versions.Search
+    Gogol.CloudPrivateCatalog.Types
 
   other-modules:
-    Network.Google.CloudPrivateCatalog.Internal.Product
-    Network.Google.CloudPrivateCatalog.Internal.Sum
+    Gogol.CloudPrivateCatalog.Internal.Product
+    Gogol.CloudPrivateCatalog.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
