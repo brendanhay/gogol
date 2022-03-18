@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CivicInfo.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Contest_LevelItem
     Contest_LevelItem
-      (
-        Contest_LevelItem_International,
+      ( Contest_LevelItem_International,
         Contest_LevelItem_Country,
         Contest_LevelItem_ADMINISTRATIVEAREA1,
         Contest_LevelItem_Regional,
@@ -60,8 +49,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * Contest_RolesItem
     Contest_RolesItem
-      (
-        Contest_RolesItem_HeadOfState,
+      ( Contest_RolesItem_HeadOfState,
         Contest_RolesItem_HeadOfGovernment,
         Contest_RolesItem_DeputyHeadOfGovernment,
         Contest_RolesItem_GovernmentOfficer,
@@ -78,8 +66,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * ElectoralDistrict_Scope
     ElectoralDistrict_Scope
-      (
-        ElectoralDistrict_Scope_Statewide,
+      ( ElectoralDistrict_Scope_Statewide,
         ElectoralDistrict_Scope_Congressional,
         ElectoralDistrict_Scope_StateUpper,
         ElectoralDistrict_Scope_StateLower,
@@ -98,8 +85,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * GeocodingSummary_FeatureType
     GeocodingSummary_FeatureType
-      (
-        GeocodingSummary_FeatureType_TypeAny,
+      ( GeocodingSummary_FeatureType_TypeAny,
         GeocodingSummary_FeatureType_TypeTransportation,
         GeocodingSummary_FeatureType_TypeRoute,
         GeocodingSummary_FeatureType_TypeDeprecatedHighwayDoNotUse,
@@ -471,8 +457,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * Office_LevelsItem
     Office_LevelsItem
-      (
-        Office_LevelsItem_International,
+      ( Office_LevelsItem_International,
         Office_LevelsItem_Country,
         Office_LevelsItem_ADMINISTRATIVEAREA1,
         Office_LevelsItem_Regional,
@@ -486,8 +471,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * Office_RolesItem
     Office_RolesItem
-      (
-        Office_RolesItem_HeadOfState,
+      ( Office_RolesItem_HeadOfState,
         Office_RolesItem_HeadOfGovernment,
         Office_RolesItem_DeputyHeadOfGovernment,
         Office_RolesItem_GovernmentOfficer,
@@ -504,8 +488,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * RepresentativesRepresentativeInfoByAddressLevels
     RepresentativesRepresentativeInfoByAddressLevels
-      (
-        RepresentativesRepresentativeInfoByAddressLevels_International,
+      ( RepresentativesRepresentativeInfoByAddressLevels_International,
         RepresentativesRepresentativeInfoByAddressLevels_Country,
         RepresentativesRepresentativeInfoByAddressLevels_ADMINISTRATIVEAREA1,
         RepresentativesRepresentativeInfoByAddressLevels_Regional,
@@ -519,8 +502,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * RepresentativesRepresentativeInfoByAddressRoles
     RepresentativesRepresentativeInfoByAddressRoles
-      (
-        RepresentativesRepresentativeInfoByAddressRoles_HeadOfState,
+      ( RepresentativesRepresentativeInfoByAddressRoles_HeadOfState,
         RepresentativesRepresentativeInfoByAddressRoles_HeadOfGovernment,
         RepresentativesRepresentativeInfoByAddressRoles_DeputyHeadOfGovernment,
         RepresentativesRepresentativeInfoByAddressRoles_GovernmentOfficer,
@@ -537,8 +519,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * RepresentativesRepresentativeInfoByDivisionLevels
     RepresentativesRepresentativeInfoByDivisionLevels
-      (
-        RepresentativesRepresentativeInfoByDivisionLevels_International,
+      ( RepresentativesRepresentativeInfoByDivisionLevels_International,
         RepresentativesRepresentativeInfoByDivisionLevels_Country,
         RepresentativesRepresentativeInfoByDivisionLevels_ADMINISTRATIVEAREA1,
         RepresentativesRepresentativeInfoByDivisionLevels_Regional,
@@ -552,8 +533,7 @@ module Gogol.CivicInfo.Internal.Sum
 
     -- * RepresentativesRepresentativeInfoByDivisionRoles
     RepresentativesRepresentativeInfoByDivisionRoles
-      (
-        RepresentativesRepresentativeInfoByDivisionRoles_HeadOfState,
+      ( RepresentativesRepresentativeInfoByDivisionRoles_HeadOfState,
         RepresentativesRepresentativeInfoByDivisionRoles_HeadOfGovernment,
         RepresentativesRepresentativeInfoByDivisionRoles_DeputyHeadOfGovernment,
         RepresentativesRepresentativeInfoByDivisionRoles_GovernmentOfficer,
@@ -567,22 +547,23 @@ module Gogol.CivicInfo.Internal.Sum
         RepresentativesRepresentativeInfoByDivisionRoles_OtherRole,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -595,53 +576,54 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
-newtype Contest_LevelItem = Contest_LevelItem { fromContest_LevelItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Contest_LevelItem = Contest_LevelItem {fromContest_LevelItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Contest_LevelItem_International :: Contest_LevelItem
 pattern Contest_LevelItem_International = Contest_LevelItem "international"
 
--- | 
+-- |
 pattern Contest_LevelItem_Country :: Contest_LevelItem
 pattern Contest_LevelItem_Country = Contest_LevelItem "country"
 
--- | 
+-- |
 pattern Contest_LevelItem_ADMINISTRATIVEAREA1 :: Contest_LevelItem
 pattern Contest_LevelItem_ADMINISTRATIVEAREA1 = Contest_LevelItem "administrativeArea1"
 
--- | 
+-- |
 pattern Contest_LevelItem_Regional :: Contest_LevelItem
 pattern Contest_LevelItem_Regional = Contest_LevelItem "regional"
 
--- | 
+-- |
 pattern Contest_LevelItem_ADMINISTRATIVEAREA2 :: Contest_LevelItem
 pattern Contest_LevelItem_ADMINISTRATIVEAREA2 = Contest_LevelItem "administrativeArea2"
 
--- | 
+-- |
 pattern Contest_LevelItem_Locality :: Contest_LevelItem
 pattern Contest_LevelItem_Locality = Contest_LevelItem "locality"
 
--- | 
+-- |
 pattern Contest_LevelItem_SUBLOCALITY1 :: Contest_LevelItem
 pattern Contest_LevelItem_SUBLOCALITY1 = Contest_LevelItem "subLocality1"
 
--- | 
+-- |
 pattern Contest_LevelItem_SUBLOCALITY2 :: Contest_LevelItem
 pattern Contest_LevelItem_SUBLOCALITY2 = Contest_LevelItem "subLocality2"
 
--- | 
+-- |
 pattern Contest_LevelItem_Special :: Contest_LevelItem
 pattern Contest_LevelItem_Special = Contest_LevelItem "special"
 
@@ -655,65 +637,66 @@ pattern Contest_LevelItem_Special = Contest_LevelItem "special"
   Contest_LevelItem_SUBLOCALITY1,
   Contest_LevelItem_SUBLOCALITY2,
   Contest_LevelItem_Special,
-  Contest_LevelItem #-}
+  Contest_LevelItem
+  #-}
 
-newtype Contest_RolesItem = Contest_RolesItem { fromContest_RolesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Contest_RolesItem = Contest_RolesItem {fromContest_RolesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Contest_RolesItem_HeadOfState :: Contest_RolesItem
 pattern Contest_RolesItem_HeadOfState = Contest_RolesItem "headOfState"
 
--- | 
+-- |
 pattern Contest_RolesItem_HeadOfGovernment :: Contest_RolesItem
 pattern Contest_RolesItem_HeadOfGovernment = Contest_RolesItem "headOfGovernment"
 
--- | 
+-- |
 pattern Contest_RolesItem_DeputyHeadOfGovernment :: Contest_RolesItem
 pattern Contest_RolesItem_DeputyHeadOfGovernment = Contest_RolesItem "deputyHeadOfGovernment"
 
--- | 
+-- |
 pattern Contest_RolesItem_GovernmentOfficer :: Contest_RolesItem
 pattern Contest_RolesItem_GovernmentOfficer = Contest_RolesItem "governmentOfficer"
 
--- | 
+-- |
 pattern Contest_RolesItem_ExecutiveCouncil :: Contest_RolesItem
 pattern Contest_RolesItem_ExecutiveCouncil = Contest_RolesItem "executiveCouncil"
 
--- | 
+-- |
 pattern Contest_RolesItem_LegislatorUpperBody :: Contest_RolesItem
 pattern Contest_RolesItem_LegislatorUpperBody = Contest_RolesItem "legislatorUpperBody"
 
--- | 
+-- |
 pattern Contest_RolesItem_LegislatorLowerBody :: Contest_RolesItem
 pattern Contest_RolesItem_LegislatorLowerBody = Contest_RolesItem "legislatorLowerBody"
 
--- | 
+-- |
 pattern Contest_RolesItem_HighestCourtJudge :: Contest_RolesItem
 pattern Contest_RolesItem_HighestCourtJudge = Contest_RolesItem "highestCourtJudge"
 
--- | 
+-- |
 pattern Contest_RolesItem_Judge :: Contest_RolesItem
 pattern Contest_RolesItem_Judge = Contest_RolesItem "judge"
 
--- | 
+-- |
 pattern Contest_RolesItem_SchoolBoard :: Contest_RolesItem
 pattern Contest_RolesItem_SchoolBoard = Contest_RolesItem "schoolBoard"
 
--- | 
+-- |
 pattern Contest_RolesItem_SpecialPurposeOfficer :: Contest_RolesItem
 pattern Contest_RolesItem_SpecialPurposeOfficer = Contest_RolesItem "specialPurposeOfficer"
 
--- | 
+-- |
 pattern Contest_RolesItem_OtherRole :: Contest_RolesItem
 pattern Contest_RolesItem_OtherRole = Contest_RolesItem "otherRole"
 
@@ -730,74 +713,75 @@ pattern Contest_RolesItem_OtherRole = Contest_RolesItem "otherRole"
   Contest_RolesItem_SchoolBoard,
   Contest_RolesItem_SpecialPurposeOfficer,
   Contest_RolesItem_OtherRole,
-  Contest_RolesItem #-}
+  Contest_RolesItem
+  #-}
 
 -- | The geographic scope of this district. If unspecified the district\'s geography is not known. One of: national, statewide, congressional, stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide, township, countyCouncil, cityCouncil, ward, special
-newtype ElectoralDistrict_Scope = ElectoralDistrict_Scope { fromElectoralDistrict_Scope :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ElectoralDistrict_Scope = ElectoralDistrict_Scope {fromElectoralDistrict_Scope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Statewide :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Statewide = ElectoralDistrict_Scope "statewide"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Congressional :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Congressional = ElectoralDistrict_Scope "congressional"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_StateUpper :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_StateUpper = ElectoralDistrict_Scope "stateUpper"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_StateLower :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_StateLower = ElectoralDistrict_Scope "stateLower"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Countywide :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Countywide = ElectoralDistrict_Scope "countywide"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Judicial :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Judicial = ElectoralDistrict_Scope "judicial"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_SchoolBoard :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_SchoolBoard = ElectoralDistrict_Scope "schoolBoard"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Citywide :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Citywide = ElectoralDistrict_Scope "citywide"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Special :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Special = ElectoralDistrict_Scope "special"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_CountyCouncil :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_CountyCouncil = ElectoralDistrict_Scope "countyCouncil"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Township :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Township = ElectoralDistrict_Scope "township"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_Ward :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_Ward = ElectoralDistrict_Scope "ward"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_CityCouncil :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_CityCouncil = ElectoralDistrict_Scope "cityCouncil"
 
--- | 
+-- |
 pattern ElectoralDistrict_Scope_National :: ElectoralDistrict_Scope
 pattern ElectoralDistrict_Scope_National = ElectoralDistrict_Scope "national"
 
@@ -816,20 +800,21 @@ pattern ElectoralDistrict_Scope_National = ElectoralDistrict_Scope "national"
   ElectoralDistrict_Scope_Ward,
   ElectoralDistrict_Scope_CityCouncil,
   ElectoralDistrict_Scope_National,
-  ElectoralDistrict_Scope #-}
+  ElectoralDistrict_Scope
+  #-}
 
 -- | The feature type for the FeatureProto returned by the geocoder
-newtype GeocodingSummary_FeatureType = GeocodingSummary_FeatureType { fromGeocodingSummary_FeatureType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GeocodingSummary_FeatureType = GeocodingSummary_FeatureType {fromGeocodingSummary_FeatureType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | ABSTRACT
 pattern GeocodingSummary_FeatureType_TypeAny :: GeocodingSummary_FeatureType
@@ -851,39 +836,39 @@ pattern GeocodingSummary_FeatureType_TypeDeprecatedHighwayDoNotUse = GeocodingSu
 pattern GeocodingSummary_FeatureType_TypeHighway :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeHighway = GeocodingSummary_FeatureType "typeHighway"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY1 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY1 = GeocodingSummary_FeatureType "typeHighway1"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY2 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY2 = GeocodingSummary_FeatureType "typeHighway2"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY3 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY3 = GeocodingSummary_FeatureType "typeHighway3"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY4 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY4 = GeocodingSummary_FeatureType "typeHighway4"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY5 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY5 = GeocodingSummary_FeatureType "typeHighway5"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY6 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY6 = GeocodingSummary_FeatureType "typeHighway6"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY7 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY7 = GeocodingSummary_FeatureType "typeHighway7"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY8 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY8 = GeocodingSummary_FeatureType "typeHighway8"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY9 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEHIGHWAY9 = GeocodingSummary_FeatureType "typeHighway9"
 
@@ -899,7 +884,7 @@ pattern GeocodingSummary_FeatureType_TypeTrail = GeocodingSummary_FeatureType "t
 pattern GeocodingSummary_FeatureType_TypeSegment :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSegment = GeocodingSummary_FeatureType "typeSegment"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeRoad :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRoad = GeocodingSummary_FeatureType "typeRoad"
 
@@ -907,35 +892,35 @@ pattern GeocodingSummary_FeatureType_TypeRoad = GeocodingSummary_FeatureType "ty
 pattern GeocodingSummary_FeatureType_TypeRailway :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRailway = GeocodingSummary_FeatureType "typeRailway"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeStandardTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeStandardTrack = GeocodingSummary_FeatureType "typeStandardTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeJrTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeJrTrack = GeocodingSummary_FeatureType "typeJrTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeNarrowTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeNarrowTrack = GeocodingSummary_FeatureType "typeNarrowTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeMonorailTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeMonorailTrack = GeocodingSummary_FeatureType "typeMonorailTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubwayTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubwayTrack = GeocodingSummary_FeatureType "typeSubwayTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLightRailTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLightRailTrack = GeocodingSummary_FeatureType "typeLightRailTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeBroadTrack :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeBroadTrack = GeocodingSummary_FeatureType "typeBroadTrack"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeHighSpeedRail :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeHighSpeedRail = GeocodingSummary_FeatureType "typeHighSpeedRail"
 
@@ -1104,7 +1089,7 @@ pattern GeocodingSummary_FeatureType_TypeTollCluster = GeocodingSummary_FeatureT
 pattern GeocodingSummary_FeatureType_TypePolitical :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypePolitical = GeocodingSummary_FeatureType "typePolitical"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeCountry :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeCountry = GeocodingSummary_FeatureType "typeCountry"
 
@@ -1112,7 +1097,7 @@ pattern GeocodingSummary_FeatureType_TypeCountry = GeocodingSummary_FeatureType 
 pattern GeocodingSummary_FeatureType_TypeAdministrativeArea :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeAdministrativeArea = GeocodingSummary_FeatureType "typeAdministrativeArea"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA1 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA1 = GeocodingSummary_FeatureType "typeAdministrativeArea1"
 
@@ -1128,7 +1113,7 @@ pattern GeocodingSummary_FeatureType_TypeGbCountry = GeocodingSummary_FeatureTyp
 pattern GeocodingSummary_FeatureType_TypeJpTodoufuken :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeJpTodoufuken = GeocodingSummary_FeatureType "typeJpTodoufuken"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA2 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA2 = GeocodingSummary_FeatureType "typeAdministrativeArea2"
 
@@ -1140,31 +1125,31 @@ pattern GeocodingSummary_FeatureType_TypeGbFormerPostalCounty = GeocodingSummary
 pattern GeocodingSummary_FeatureType_TypeGbTraditionalCounty :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGbTraditionalCounty = GeocodingSummary_FeatureType "typeGbTraditionalCounty"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA3 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA3 = GeocodingSummary_FeatureType "typeAdministrativeArea3"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA4 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA4 = GeocodingSummary_FeatureType "typeAdministrativeArea4"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA5 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA5 = GeocodingSummary_FeatureType "typeAdministrativeArea5"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA6 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA6 = GeocodingSummary_FeatureType "typeAdministrativeArea6"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA7 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA7 = GeocodingSummary_FeatureType "typeAdministrativeArea7"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA8 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA8 = GeocodingSummary_FeatureType "typeAdministrativeArea8"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA9 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPEADMINISTRATIVEAREA9 = GeocodingSummary_FeatureType "typeAdministrativeArea9"
 
@@ -1176,7 +1161,7 @@ pattern GeocodingSummary_FeatureType_TypeColloquialArea = GeocodingSummary_Featu
 pattern GeocodingSummary_FeatureType_TypeReservation :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeReservation = GeocodingSummary_FeatureType "typeReservation"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLocality :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLocality = GeocodingSummary_FeatureType "typeLocality"
 
@@ -1236,31 +1221,31 @@ pattern GeocodingSummary_FeatureType_TypeJpChiban = GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeJpEdaban :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeJpEdaban = GeocodingSummary_FeatureType "typeJpEdaban"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY1 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY1 = GeocodingSummary_FeatureType "typeSublocality1"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY2 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY2 = GeocodingSummary_FeatureType "typeSublocality2"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY3 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY3 = GeocodingSummary_FeatureType "typeSublocality3"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY4 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY4 = GeocodingSummary_FeatureType "typeSublocality4"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY5 :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TYPESUBLOCALITY5 = GeocodingSummary_FeatureType "typeSublocality5"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeNeighborhood :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeNeighborhood = GeocodingSummary_FeatureType "typeNeighborhood"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeConstituency :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeConstituency = GeocodingSummary_FeatureType "typeConstituency"
 
@@ -1268,11 +1253,11 @@ pattern GeocodingSummary_FeatureType_TypeConstituency = GeocodingSummary_Feature
 pattern GeocodingSummary_FeatureType_TypeDesignatedMarketArea :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDesignatedMarketArea = GeocodingSummary_FeatureType "typeDesignatedMarketArea"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSchoolDistrict :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSchoolDistrict = GeocodingSummary_FeatureType "typeSchoolDistrict"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLandParcel :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLandParcel = GeocodingSummary_FeatureType "typeLandParcel"
 
@@ -1608,27 +1593,27 @@ pattern GeocodingSummary_FeatureType_TypeNaturalFeature = GeocodingSummary_Featu
 pattern GeocodingSummary_FeatureType_TypeTerrain :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeTerrain = GeocodingSummary_FeatureType "typeTerrain"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSand :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSand = GeocodingSummary_FeatureType "typeSand"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeBeach :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeBeach = GeocodingSummary_FeatureType "typeBeach"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeDune :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDune = GeocodingSummary_FeatureType "typeDune"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeRocky :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRocky = GeocodingSummary_FeatureType "typeRocky"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeIce :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeIce = GeocodingSummary_FeatureType "typeIce"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGlacier :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGlacier = GeocodingSummary_FeatureType "typeGlacier"
 
@@ -1640,27 +1625,27 @@ pattern GeocodingSummary_FeatureType_TypeBuiltUpArea = GeocodingSummary_FeatureT
 pattern GeocodingSummary_FeatureType_TypeVegetation :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeVegetation = GeocodingSummary_FeatureType "typeVegetation"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeShrubbery :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeShrubbery = GeocodingSummary_FeatureType "typeShrubbery"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeWoods :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWoods = GeocodingSummary_FeatureType "typeWoods"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeAgricultural :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeAgricultural = GeocodingSummary_FeatureType "typeAgricultural"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGrassland :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGrassland = GeocodingSummary_FeatureType "typeGrassland"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeTundra :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeTundra = GeocodingSummary_FeatureType "typeTundra"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeDesert :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDesert = GeocodingSummary_FeatureType "typeDesert"
 
@@ -1684,7 +1669,7 @@ pattern GeocodingSummary_FeatureType_TypeBay = GeocodingSummary_FeatureType "typ
 pattern GeocodingSummary_FeatureType_TypeBight :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeBight = GeocodingSummary_FeatureType "typeBight"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLagoon :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLagoon = GeocodingSummary_FeatureType "typeLagoon"
 
@@ -1696,11 +1681,11 @@ pattern GeocodingSummary_FeatureType_TypeSea = GeocodingSummary_FeatureType "typ
 pattern GeocodingSummary_FeatureType_TypeStrait :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeStrait = GeocodingSummary_FeatureType "typeStrait"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeInlet :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeInlet = GeocodingSummary_FeatureType "typeInlet"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeFjord :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeFjord = GeocodingSummary_FeatureType "typeFjord"
 
@@ -1716,7 +1701,7 @@ pattern GeocodingSummary_FeatureType_TypeSeasonalLake = GeocodingSummary_Feature
 pattern GeocodingSummary_FeatureType_TypeReservoir :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeReservoir = GeocodingSummary_FeatureType "typeReservoir"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypePond :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypePond = GeocodingSummary_FeatureType "typePond"
 
@@ -1724,7 +1709,7 @@ pattern GeocodingSummary_FeatureType_TypePond = GeocodingSummary_FeatureType "ty
 pattern GeocodingSummary_FeatureType_TypeRiver :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRiver = GeocodingSummary_FeatureType "typeRiver"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeRapids :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRapids = GeocodingSummary_FeatureType "typeRapids"
 
@@ -1736,7 +1721,7 @@ pattern GeocodingSummary_FeatureType_TypeDistributary = GeocodingSummary_Feature
 pattern GeocodingSummary_FeatureType_TypeConfluence :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeConfluence = GeocodingSummary_FeatureType "typeConfluence"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeWaterfall :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWaterfall = GeocodingSummary_FeatureType "typeWaterfall"
 
@@ -1744,11 +1729,11 @@ pattern GeocodingSummary_FeatureType_TypeWaterfall = GeocodingSummary_FeatureTyp
 pattern GeocodingSummary_FeatureType_TypeSpring :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSpring = GeocodingSummary_FeatureType "typeSpring"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGeyser :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGeyser = GeocodingSummary_FeatureType "typeGeyser"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeHotSpring :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeHotSpring = GeocodingSummary_FeatureType "typeHotSpring"
 
@@ -1768,7 +1753,7 @@ pattern GeocodingSummary_FeatureType_TypeEstuary = GeocodingSummary_FeatureType 
 pattern GeocodingSummary_FeatureType_TypeWetland :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWetland = GeocodingSummary_FeatureType "typeWetland"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeWaterNavigation :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWaterNavigation = GeocodingSummary_FeatureType "typeWaterNavigation"
 
@@ -1816,7 +1801,7 @@ pattern GeocodingSummary_FeatureType_TypeIrrigation = GeocodingSummary_FeatureTy
 pattern GeocodingSummary_FeatureType_TypeDam :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDam = GeocodingSummary_FeatureType "typeDam"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeDrinkingWater :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDrinkingWater = GeocodingSummary_FeatureType "typeDrinkingWater"
 
@@ -1836,35 +1821,35 @@ pattern GeocodingSummary_FeatureType_TypeTectonic = GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWateringHoleDeprecated :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWateringHoleDeprecated = GeocodingSummary_FeatureType "typeWateringHoleDeprecated"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeVolcano :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeVolcano = GeocodingSummary_FeatureType "typeVolcano"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLavaField :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLavaField = GeocodingSummary_FeatureType "typeLavaField"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeFissure :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeFissure = GeocodingSummary_FeatureType "typeFissure"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeFault :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeFault = GeocodingSummary_FeatureType "typeFault"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLandMass :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLandMass = GeocodingSummary_FeatureType "typeLandMass"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeContinent :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeContinent = GeocodingSummary_FeatureType "typeContinent"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeIsland :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeIsland = GeocodingSummary_FeatureType "typeIsland"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeAtoll :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeAtoll = GeocodingSummary_FeatureType "typeAtoll"
 
@@ -1940,7 +1925,7 @@ pattern GeocodingSummary_FeatureType_TypeDigitalElevationModel = GeocodingSummar
 pattern GeocodingSummary_FeatureType_TypeUpland :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeUpland = GeocodingSummary_FeatureType "typeUpland"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeTerrace :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeTerrace = GeocodingSummary_FeatureType "typeTerrace"
 
@@ -1956,7 +1941,7 @@ pattern GeocodingSummary_FeatureType_TypeContourLine = GeocodingSummary_FeatureT
 pattern GeocodingSummary_FeatureType_TypePan :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypePan = GeocodingSummary_FeatureType "typePan"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeUnstableHillside :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeUnstableHillside = GeocodingSummary_FeatureType "typeUnstableHillside"
 
@@ -1972,7 +1957,7 @@ pattern GeocodingSummary_FeatureType_TypeUndersea = GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineSeamount :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineSeamount = GeocodingSummary_FeatureType "typeSubmarineSeamount"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarineRidge :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineRidge = GeocodingSummary_FeatureType "typeSubmarineRidge"
 
@@ -1980,11 +1965,11 @@ pattern GeocodingSummary_FeatureType_TypeSubmarineRidge = GeocodingSummary_Featu
 pattern GeocodingSummary_FeatureType_TypeSubmarineGap :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineGap = GeocodingSummary_FeatureType "typeSubmarineGap"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarinePlateau :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarinePlateau = GeocodingSummary_FeatureType "typeSubmarinePlateau"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarineDeep :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineDeep = GeocodingSummary_FeatureType "typeSubmarineDeep"
 
@@ -1992,23 +1977,23 @@ pattern GeocodingSummary_FeatureType_TypeSubmarineDeep = GeocodingSummary_Featur
 pattern GeocodingSummary_FeatureType_TypeSubmarineValley :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineValley = GeocodingSummary_FeatureType "typeSubmarineValley"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarineBasin :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineBasin = GeocodingSummary_FeatureType "typeSubmarineBasin"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarineSlope :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineSlope = GeocodingSummary_FeatureType "typeSubmarineSlope"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarineCliff :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineCliff = GeocodingSummary_FeatureType "typeSubmarineCliff"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarinePlain :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarinePlain = GeocodingSummary_FeatureType "typeSubmarinePlain"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeSubmarineFractureZone :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSubmarineFractureZone = GeocodingSummary_FeatureType "typeSubmarineFractureZone"
 
@@ -2016,7 +2001,7 @@ pattern GeocodingSummary_FeatureType_TypeSubmarineFractureZone = GeocodingSummar
 pattern GeocodingSummary_FeatureType_TypeCave :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeCave = GeocodingSummary_FeatureType "typeCave"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeRock :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRock = GeocodingSummary_FeatureType "typeRock"
 
@@ -2136,7 +2121,7 @@ pattern GeocodingSummary_FeatureType_TypeSkiLift = GeocodingSummary_FeatureType 
 pattern GeocodingSummary_FeatureType_TypeSkiBoundary :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeSkiBoundary = GeocodingSummary_FeatureType "typeSkiBoundary"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeWatershedBoundary :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWatershedBoundary = GeocodingSummary_FeatureType "typeWatershedBoundary"
 
@@ -2156,7 +2141,7 @@ pattern GeocodingSummary_FeatureType_TypePicnicArea = GeocodingSummary_FeatureTy
 pattern GeocodingSummary_FeatureType_TypePlayGround :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypePlayGround = GeocodingSummary_FeatureType "typePlayGround"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeTrailHead :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeTrailHead = GeocodingSummary_FeatureType "typeTrailHead"
 
@@ -2164,19 +2149,19 @@ pattern GeocodingSummary_FeatureType_TypeTrailHead = GeocodingSummary_FeatureTyp
 pattern GeocodingSummary_FeatureType_TypeGolfTeeingGround :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGolfTeeingGround = GeocodingSummary_FeatureType "typeGolfTeeingGround"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGolfPuttingGreen :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGolfPuttingGreen = GeocodingSummary_FeatureType "typeGolfPuttingGreen"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGolfRough :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGolfRough = GeocodingSummary_FeatureType "typeGolfRough"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGolfSandBunker :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGolfSandBunker = GeocodingSummary_FeatureType "typeGolfSandBunker"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeGolfFairway :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeGolfFairway = GeocodingSummary_FeatureType "typeGolfFairway"
 
@@ -2192,27 +2177,27 @@ pattern GeocodingSummary_FeatureType_TypeDeprecatedGolfShop = GeocodingSummary_F
 pattern GeocodingSummary_FeatureType_TypeCampingSite :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeCampingSite = GeocodingSummary_FeatureType "typeCampingSite"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeDesignatedBarbecuePit :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDesignatedBarbecuePit = GeocodingSummary_FeatureType "typeDesignatedBarbecuePit"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeDesignatedCookingArea :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeDesignatedCookingArea = GeocodingSummary_FeatureType "typeDesignatedCookingArea"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeCampfirePit :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeCampfirePit = GeocodingSummary_FeatureType "typeCampfirePit"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeWaterFountain :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeWaterFountain = GeocodingSummary_FeatureType "typeWaterFountain"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLitterReceptacle :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLitterReceptacle = GeocodingSummary_FeatureType "typeLitterReceptacle"
 
--- | 
+-- |
 pattern GeocodingSummary_FeatureType_TypeLockerArea :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeLockerArea = GeocodingSummary_FeatureType "typeLockerArea"
 
@@ -2668,53 +2653,54 @@ pattern GeocodingSummary_FeatureType_TypeUnknown = GeocodingSummary_FeatureType 
   GeocodingSummary_FeatureType_TypeRegulatedArea,
   GeocodingSummary_FeatureType_TypeDoNotUseReservedToCatchGeneratedFiles,
   GeocodingSummary_FeatureType_TypeUnknown,
-  GeocodingSummary_FeatureType #-}
+  GeocodingSummary_FeatureType
+  #-}
 
-newtype Office_LevelsItem = Office_LevelsItem { fromOffice_LevelsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Office_LevelsItem = Office_LevelsItem {fromOffice_LevelsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Office_LevelsItem_International :: Office_LevelsItem
 pattern Office_LevelsItem_International = Office_LevelsItem "international"
 
--- | 
+-- |
 pattern Office_LevelsItem_Country :: Office_LevelsItem
 pattern Office_LevelsItem_Country = Office_LevelsItem "country"
 
--- | 
+-- |
 pattern Office_LevelsItem_ADMINISTRATIVEAREA1 :: Office_LevelsItem
 pattern Office_LevelsItem_ADMINISTRATIVEAREA1 = Office_LevelsItem "administrativeArea1"
 
--- | 
+-- |
 pattern Office_LevelsItem_Regional :: Office_LevelsItem
 pattern Office_LevelsItem_Regional = Office_LevelsItem "regional"
 
--- | 
+-- |
 pattern Office_LevelsItem_ADMINISTRATIVEAREA2 :: Office_LevelsItem
 pattern Office_LevelsItem_ADMINISTRATIVEAREA2 = Office_LevelsItem "administrativeArea2"
 
--- | 
+-- |
 pattern Office_LevelsItem_Locality :: Office_LevelsItem
 pattern Office_LevelsItem_Locality = Office_LevelsItem "locality"
 
--- | 
+-- |
 pattern Office_LevelsItem_SUBLOCALITY1 :: Office_LevelsItem
 pattern Office_LevelsItem_SUBLOCALITY1 = Office_LevelsItem "subLocality1"
 
--- | 
+-- |
 pattern Office_LevelsItem_SUBLOCALITY2 :: Office_LevelsItem
 pattern Office_LevelsItem_SUBLOCALITY2 = Office_LevelsItem "subLocality2"
 
--- | 
+-- |
 pattern Office_LevelsItem_Special :: Office_LevelsItem
 pattern Office_LevelsItem_Special = Office_LevelsItem "special"
 
@@ -2728,65 +2714,66 @@ pattern Office_LevelsItem_Special = Office_LevelsItem "special"
   Office_LevelsItem_SUBLOCALITY1,
   Office_LevelsItem_SUBLOCALITY2,
   Office_LevelsItem_Special,
-  Office_LevelsItem #-}
+  Office_LevelsItem
+  #-}
 
-newtype Office_RolesItem = Office_RolesItem { fromOffice_RolesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Office_RolesItem = Office_RolesItem {fromOffice_RolesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Office_RolesItem_HeadOfState :: Office_RolesItem
 pattern Office_RolesItem_HeadOfState = Office_RolesItem "headOfState"
 
--- | 
+-- |
 pattern Office_RolesItem_HeadOfGovernment :: Office_RolesItem
 pattern Office_RolesItem_HeadOfGovernment = Office_RolesItem "headOfGovernment"
 
--- | 
+-- |
 pattern Office_RolesItem_DeputyHeadOfGovernment :: Office_RolesItem
 pattern Office_RolesItem_DeputyHeadOfGovernment = Office_RolesItem "deputyHeadOfGovernment"
 
--- | 
+-- |
 pattern Office_RolesItem_GovernmentOfficer :: Office_RolesItem
 pattern Office_RolesItem_GovernmentOfficer = Office_RolesItem "governmentOfficer"
 
--- | 
+-- |
 pattern Office_RolesItem_ExecutiveCouncil :: Office_RolesItem
 pattern Office_RolesItem_ExecutiveCouncil = Office_RolesItem "executiveCouncil"
 
--- | 
+-- |
 pattern Office_RolesItem_LegislatorUpperBody :: Office_RolesItem
 pattern Office_RolesItem_LegislatorUpperBody = Office_RolesItem "legislatorUpperBody"
 
--- | 
+-- |
 pattern Office_RolesItem_LegislatorLowerBody :: Office_RolesItem
 pattern Office_RolesItem_LegislatorLowerBody = Office_RolesItem "legislatorLowerBody"
 
--- | 
+-- |
 pattern Office_RolesItem_HighestCourtJudge :: Office_RolesItem
 pattern Office_RolesItem_HighestCourtJudge = Office_RolesItem "highestCourtJudge"
 
--- | 
+-- |
 pattern Office_RolesItem_Judge :: Office_RolesItem
 pattern Office_RolesItem_Judge = Office_RolesItem "judge"
 
--- | 
+-- |
 pattern Office_RolesItem_SchoolBoard :: Office_RolesItem
 pattern Office_RolesItem_SchoolBoard = Office_RolesItem "schoolBoard"
 
--- | 
+-- |
 pattern Office_RolesItem_SpecialPurposeOfficer :: Office_RolesItem
 pattern Office_RolesItem_SpecialPurposeOfficer = Office_RolesItem "specialPurposeOfficer"
 
--- | 
+-- |
 pattern Office_RolesItem_OtherRole :: Office_RolesItem
 pattern Office_RolesItem_OtherRole = Office_RolesItem "otherRole"
 
@@ -2803,54 +2790,55 @@ pattern Office_RolesItem_OtherRole = Office_RolesItem "otherRole"
   Office_RolesItem_SchoolBoard,
   Office_RolesItem_SpecialPurposeOfficer,
   Office_RolesItem_OtherRole,
-  Office_RolesItem #-}
+  Office_RolesItem
+  #-}
 
 -- | A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don\'t contain a matching office will not be returned.
-newtype RepresentativesRepresentativeInfoByAddressLevels = RepresentativesRepresentativeInfoByAddressLevels { fromRepresentativesRepresentativeInfoByAddressLevels :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RepresentativesRepresentativeInfoByAddressLevels = RepresentativesRepresentativeInfoByAddressLevels {fromRepresentativesRepresentativeInfoByAddressLevels :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_International :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_International = RepresentativesRepresentativeInfoByAddressLevels "international"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_Country :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_Country = RepresentativesRepresentativeInfoByAddressLevels "country"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_ADMINISTRATIVEAREA1 :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_ADMINISTRATIVEAREA1 = RepresentativesRepresentativeInfoByAddressLevels "administrativeArea1"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_Regional :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_Regional = RepresentativesRepresentativeInfoByAddressLevels "regional"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_ADMINISTRATIVEAREA2 :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_ADMINISTRATIVEAREA2 = RepresentativesRepresentativeInfoByAddressLevels "administrativeArea2"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_Locality :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_Locality = RepresentativesRepresentativeInfoByAddressLevels "locality"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_SUBLOCALITY1 :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_SUBLOCALITY1 = RepresentativesRepresentativeInfoByAddressLevels "subLocality1"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_SUBLOCALITY2 :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_SUBLOCALITY2 = RepresentativesRepresentativeInfoByAddressLevels "subLocality2"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressLevels_Special :: RepresentativesRepresentativeInfoByAddressLevels
 pattern RepresentativesRepresentativeInfoByAddressLevels_Special = RepresentativesRepresentativeInfoByAddressLevels "special"
 
@@ -2864,66 +2852,67 @@ pattern RepresentativesRepresentativeInfoByAddressLevels_Special = Representativ
   RepresentativesRepresentativeInfoByAddressLevels_SUBLOCALITY1,
   RepresentativesRepresentativeInfoByAddressLevels_SUBLOCALITY2,
   RepresentativesRepresentativeInfoByAddressLevels_Special,
-  RepresentativesRepresentativeInfoByAddressLevels #-}
+  RepresentativesRepresentativeInfoByAddressLevels
+  #-}
 
 -- | A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don\'t contain a matching office will not be returned.
-newtype RepresentativesRepresentativeInfoByAddressRoles = RepresentativesRepresentativeInfoByAddressRoles { fromRepresentativesRepresentativeInfoByAddressRoles :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RepresentativesRepresentativeInfoByAddressRoles = RepresentativesRepresentativeInfoByAddressRoles {fromRepresentativesRepresentativeInfoByAddressRoles :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_HeadOfState :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_HeadOfState = RepresentativesRepresentativeInfoByAddressRoles "headOfState"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_HeadOfGovernment :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_HeadOfGovernment = RepresentativesRepresentativeInfoByAddressRoles "headOfGovernment"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_DeputyHeadOfGovernment :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_DeputyHeadOfGovernment = RepresentativesRepresentativeInfoByAddressRoles "deputyHeadOfGovernment"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_GovernmentOfficer :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_GovernmentOfficer = RepresentativesRepresentativeInfoByAddressRoles "governmentOfficer"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_ExecutiveCouncil :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_ExecutiveCouncil = RepresentativesRepresentativeInfoByAddressRoles "executiveCouncil"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_LegislatorUpperBody :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_LegislatorUpperBody = RepresentativesRepresentativeInfoByAddressRoles "legislatorUpperBody"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_LegislatorLowerBody :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_LegislatorLowerBody = RepresentativesRepresentativeInfoByAddressRoles "legislatorLowerBody"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_HighestCourtJudge :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_HighestCourtJudge = RepresentativesRepresentativeInfoByAddressRoles "highestCourtJudge"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_Judge :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_Judge = RepresentativesRepresentativeInfoByAddressRoles "judge"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_SchoolBoard :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_SchoolBoard = RepresentativesRepresentativeInfoByAddressRoles "schoolBoard"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_SpecialPurposeOfficer :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_SpecialPurposeOfficer = RepresentativesRepresentativeInfoByAddressRoles "specialPurposeOfficer"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByAddressRoles_OtherRole :: RepresentativesRepresentativeInfoByAddressRoles
 pattern RepresentativesRepresentativeInfoByAddressRoles_OtherRole = RepresentativesRepresentativeInfoByAddressRoles "otherRole"
 
@@ -2940,54 +2929,55 @@ pattern RepresentativesRepresentativeInfoByAddressRoles_OtherRole = Representati
   RepresentativesRepresentativeInfoByAddressRoles_SchoolBoard,
   RepresentativesRepresentativeInfoByAddressRoles_SpecialPurposeOfficer,
   RepresentativesRepresentativeInfoByAddressRoles_OtherRole,
-  RepresentativesRepresentativeInfoByAddressRoles #-}
+  RepresentativesRepresentativeInfoByAddressRoles
+  #-}
 
 -- | A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don\'t contain a matching office will not be returned.
-newtype RepresentativesRepresentativeInfoByDivisionLevels = RepresentativesRepresentativeInfoByDivisionLevels { fromRepresentativesRepresentativeInfoByDivisionLevels :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RepresentativesRepresentativeInfoByDivisionLevels = RepresentativesRepresentativeInfoByDivisionLevels {fromRepresentativesRepresentativeInfoByDivisionLevels :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_International :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_International = RepresentativesRepresentativeInfoByDivisionLevels "international"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Country :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Country = RepresentativesRepresentativeInfoByDivisionLevels "country"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_ADMINISTRATIVEAREA1 :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_ADMINISTRATIVEAREA1 = RepresentativesRepresentativeInfoByDivisionLevels "administrativeArea1"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Regional :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Regional = RepresentativesRepresentativeInfoByDivisionLevels "regional"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_ADMINISTRATIVEAREA2 :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_ADMINISTRATIVEAREA2 = RepresentativesRepresentativeInfoByDivisionLevels "administrativeArea2"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Locality :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Locality = RepresentativesRepresentativeInfoByDivisionLevels "locality"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_SUBLOCALITY1 :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_SUBLOCALITY1 = RepresentativesRepresentativeInfoByDivisionLevels "subLocality1"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_SUBLOCALITY2 :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_SUBLOCALITY2 = RepresentativesRepresentativeInfoByDivisionLevels "subLocality2"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Special :: RepresentativesRepresentativeInfoByDivisionLevels
 pattern RepresentativesRepresentativeInfoByDivisionLevels_Special = RepresentativesRepresentativeInfoByDivisionLevels "special"
 
@@ -3001,66 +2991,67 @@ pattern RepresentativesRepresentativeInfoByDivisionLevels_Special = Representati
   RepresentativesRepresentativeInfoByDivisionLevels_SUBLOCALITY1,
   RepresentativesRepresentativeInfoByDivisionLevels_SUBLOCALITY2,
   RepresentativesRepresentativeInfoByDivisionLevels_Special,
-  RepresentativesRepresentativeInfoByDivisionLevels #-}
+  RepresentativesRepresentativeInfoByDivisionLevels
+  #-}
 
 -- | A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don\'t contain a matching office will not be returned.
-newtype RepresentativesRepresentativeInfoByDivisionRoles = RepresentativesRepresentativeInfoByDivisionRoles { fromRepresentativesRepresentativeInfoByDivisionRoles :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RepresentativesRepresentativeInfoByDivisionRoles = RepresentativesRepresentativeInfoByDivisionRoles {fromRepresentativesRepresentativeInfoByDivisionRoles :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_HeadOfState :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_HeadOfState = RepresentativesRepresentativeInfoByDivisionRoles "headOfState"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_HeadOfGovernment :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_HeadOfGovernment = RepresentativesRepresentativeInfoByDivisionRoles "headOfGovernment"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_DeputyHeadOfGovernment :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_DeputyHeadOfGovernment = RepresentativesRepresentativeInfoByDivisionRoles "deputyHeadOfGovernment"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_GovernmentOfficer :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_GovernmentOfficer = RepresentativesRepresentativeInfoByDivisionRoles "governmentOfficer"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_ExecutiveCouncil :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_ExecutiveCouncil = RepresentativesRepresentativeInfoByDivisionRoles "executiveCouncil"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_LegislatorUpperBody :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_LegislatorUpperBody = RepresentativesRepresentativeInfoByDivisionRoles "legislatorUpperBody"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_LegislatorLowerBody :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_LegislatorLowerBody = RepresentativesRepresentativeInfoByDivisionRoles "legislatorLowerBody"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_HighestCourtJudge :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_HighestCourtJudge = RepresentativesRepresentativeInfoByDivisionRoles "highestCourtJudge"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_Judge :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_Judge = RepresentativesRepresentativeInfoByDivisionRoles "judge"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_SchoolBoard :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_SchoolBoard = RepresentativesRepresentativeInfoByDivisionRoles "schoolBoard"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_SpecialPurposeOfficer :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_SpecialPurposeOfficer = RepresentativesRepresentativeInfoByDivisionRoles "specialPurposeOfficer"
 
--- | 
+-- |
 pattern RepresentativesRepresentativeInfoByDivisionRoles_OtherRole :: RepresentativesRepresentativeInfoByDivisionRoles
 pattern RepresentativesRepresentativeInfoByDivisionRoles_OtherRole = RepresentativesRepresentativeInfoByDivisionRoles "otherRole"
 
@@ -3077,4 +3068,5 @@ pattern RepresentativesRepresentativeInfoByDivisionRoles_OtherRole = Representat
   RepresentativesRepresentativeInfoByDivisionRoles_SchoolBoard,
   RepresentativesRepresentativeInfoByDivisionRoles_SpecialPurposeOfficer,
   RepresentativesRepresentativeInfoByDivisionRoles_OtherRole,
-  RepresentativesRepresentativeInfoByDivisionRoles #-}
+  RepresentativesRepresentativeInfoByDivisionRoles
+  #-}

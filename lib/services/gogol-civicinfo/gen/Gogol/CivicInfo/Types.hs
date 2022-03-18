@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,154 +25,154 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CivicInfo.Types
-    (
-    -- * Configuration
-      civicInfoService
+  ( -- * Configuration
+    civicInfoService,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdministrationRegion
-    , AdministrationRegion (..)
-    , newAdministrationRegion
+    AdministrationRegion (..),
+    newAdministrationRegion,
 
     -- ** AdministrativeBody
-    , AdministrativeBody (..)
-    , newAdministrativeBody
+    AdministrativeBody (..),
+    newAdministrativeBody,
 
     -- ** Candidate
-    , Candidate (..)
-    , newCandidate
+    Candidate (..),
+    newCandidate,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Contest
-    , Contest (..)
-    , newContest
+    Contest (..),
+    newContest,
 
     -- ** Contest_LevelItem
-    , Contest_LevelItem (..)
+    Contest_LevelItem (..),
 
     -- ** Contest_RolesItem
-    , Contest_RolesItem (..)
+    Contest_RolesItem (..),
 
     -- ** DivisionSearchResponse
-    , DivisionSearchResponse (..)
-    , newDivisionSearchResponse
+    DivisionSearchResponse (..),
+    newDivisionSearchResponse,
 
     -- ** DivisionSearchResult
-    , DivisionSearchResult (..)
-    , newDivisionSearchResult
+    DivisionSearchResult (..),
+    newDivisionSearchResult,
 
     -- ** Election
-    , Election (..)
-    , newElection
+    Election (..),
+    newElection,
 
     -- ** ElectionOfficial
-    , ElectionOfficial (..)
-    , newElectionOfficial
+    ElectionOfficial (..),
+    newElectionOfficial,
 
     -- ** ElectionsQueryResponse
-    , ElectionsQueryResponse (..)
-    , newElectionsQueryResponse
+    ElectionsQueryResponse (..),
+    newElectionsQueryResponse,
 
     -- ** ElectoralDistrict
-    , ElectoralDistrict (..)
-    , newElectoralDistrict
+    ElectoralDistrict (..),
+    newElectoralDistrict,
 
     -- ** ElectoralDistrict_Scope
-    , ElectoralDistrict_Scope (..)
+    ElectoralDistrict_Scope (..),
 
     -- ** FeatureIdProto
-    , FeatureIdProto (..)
-    , newFeatureIdProto
+    FeatureIdProto (..),
+    newFeatureIdProto,
 
     -- ** GeocodingSummary
-    , GeocodingSummary (..)
-    , newGeocodingSummary
+    GeocodingSummary (..),
+    newGeocodingSummary,
 
     -- ** GeocodingSummary_FeatureType
-    , GeocodingSummary_FeatureType (..)
+    GeocodingSummary_FeatureType (..),
 
     -- ** GeographicDivision
-    , GeographicDivision (..)
-    , newGeographicDivision
+    GeographicDivision (..),
+    newGeographicDivision,
 
     -- ** MessageSet
-    , MessageSet (..)
-    , newMessageSet
+    MessageSet (..),
+    newMessageSet,
 
     -- ** Office
-    , Office (..)
-    , newOffice
+    Office (..),
+    newOffice,
 
     -- ** Office_LevelsItem
-    , Office_LevelsItem (..)
+    Office_LevelsItem (..),
 
     -- ** Office_RolesItem
-    , Office_RolesItem (..)
+    Office_RolesItem (..),
 
     -- ** Official
-    , Official (..)
-    , newOfficial
+    Official (..),
+    newOfficial,
 
     -- ** PollingLocation
-    , PollingLocation (..)
-    , newPollingLocation
+    PollingLocation (..),
+    newPollingLocation,
 
     -- ** RepresentativeInfoData
-    , RepresentativeInfoData (..)
-    , newRepresentativeInfoData
+    RepresentativeInfoData (..),
+    newRepresentativeInfoData,
 
     -- ** RepresentativeInfoData_Divisions
-    , RepresentativeInfoData_Divisions (..)
-    , newRepresentativeInfoData_Divisions
+    RepresentativeInfoData_Divisions (..),
+    newRepresentativeInfoData_Divisions,
 
     -- ** RepresentativeInfoResponse
-    , RepresentativeInfoResponse (..)
-    , newRepresentativeInfoResponse
+    RepresentativeInfoResponse (..),
+    newRepresentativeInfoResponse,
 
     -- ** RepresentativeInfoResponse_Divisions
-    , RepresentativeInfoResponse_Divisions (..)
-    , newRepresentativeInfoResponse_Divisions
+    RepresentativeInfoResponse_Divisions (..),
+    newRepresentativeInfoResponse_Divisions,
 
     -- ** SimpleAddressType
-    , SimpleAddressType (..)
-    , newSimpleAddressType
+    SimpleAddressType (..),
+    newSimpleAddressType,
 
     -- ** Source
-    , Source (..)
-    , newSource
+    Source (..),
+    newSource,
 
     -- ** VoterInfoResponse
-    , VoterInfoResponse (..)
-    , newVoterInfoResponse
+    VoterInfoResponse (..),
+    newVoterInfoResponse,
 
     -- ** RepresentativesRepresentativeInfoByAddressLevels
-    , RepresentativesRepresentativeInfoByAddressLevels (..)
+    RepresentativesRepresentativeInfoByAddressLevels (..),
 
     -- ** RepresentativesRepresentativeInfoByAddressRoles
-    , RepresentativesRepresentativeInfoByAddressRoles (..)
+    RepresentativesRepresentativeInfoByAddressRoles (..),
 
     -- ** RepresentativesRepresentativeInfoByDivisionLevels
-    , RepresentativesRepresentativeInfoByDivisionLevels (..)
+    RepresentativesRepresentativeInfoByDivisionLevels (..),
 
     -- ** RepresentativesRepresentativeInfoByDivisionRoles
-    , RepresentativesRepresentativeInfoByDivisionRoles (..)
-    ) where
+    RepresentativesRepresentativeInfoByDivisionRoles (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CivicInfo.Internal.Product
 import Gogol.CivicInfo.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Google Civic Information API. This contains the host and root path used as a starting point for constructing service requests.
 civicInfoService :: Core.ServiceConfig
-civicInfoService
-  = Core.defaultService (Core.ServiceId "civicinfo:v2")
-      "civicinfo.googleapis.com"
+civicInfoService =
+  Core.defaultService
+    (Core.ServiceId "civicinfo:v2")
+    "civicinfo.googleapis.com"
