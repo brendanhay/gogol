@@ -19,44 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PlayCustomApp
+-- Module      : Network.Google.PlayCustomApp.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- API to create and publish custom Android apps
---
--- /See:/ <https://developers.google.com/android/work/play/custom-app-api/ Google Play Custom App Publishing API Reference>
-module Network.Google.PlayCustomApp
-  ( -- * Configuration
-    playCustomAppService,
-
-    -- * OAuth Scopes
-    androidpublisherScope,
-
-    -- * Resources
-
-    -- ** playcustomapp.accounts.customApps.create
-    PlayCustomAppAccountsCustomAppsCreateResource,
-    newPlayCustomAppAccountsCustomAppsCreate,
-    PlayCustomAppAccountsCustomAppsCreate,
-
-    -- * Types
-
-    -- ** Xgafv
-    Xgafv (..),
-
-    -- ** CustomApp
-    CustomApp (..),
-    newCustomApp,
-
-    -- ** Organization
-    Organization (..),
-    newOrganization,
+module Network.Google.PlayCustomApp.Internal.Sum
+  ( -- * Xgafv
+    Xgafv
+      ( Xgafv_1,
+        Xgafv_2,
+        ..
+      ),
   )
 where
 
-import Network.Google.PlayCustomApp.Accounts.CustomApps.Create
-import Network.Google.PlayCustomApp.Types
+import qualified Network.Google.Prelude as Core
+
+-- | V1 error format.
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | v1 error format
+pattern Xgafv_1 :: Xgafv
+pattern Xgafv_1 = Xgafv "1"
+
+-- | v2 error format
+pattern Xgafv_2 :: Xgafv
+pattern Xgafv_2 = Xgafv "2"
+
+{-# COMPLETE
+  Xgafv_1,
+  Xgafv_2,
+  Xgafv
+  #-}
