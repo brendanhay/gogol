@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,51 +31,51 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AppsTasks.Types
-  ( -- * Configuration
-    appsTasksService,
+    (
+    -- * Configuration
+      appsTasksService
 
     -- * OAuth Scopes
-    tasksScope,
-    tasksReadOnlyScope,
+    , tasksScope
+    , tasksReadOnlyScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Task
-    Task (..),
-    newTask,
+    , Task (..)
+    , newTask
 
     -- ** Task_LinksItem
-    Task_LinksItem (..),
-    newTask_LinksItem,
+    , Task_LinksItem (..)
+    , newTask_LinksItem
 
     -- ** TaskList
-    TaskList (..),
-    newTaskList,
+    , TaskList (..)
+    , newTaskList
 
     -- ** TaskLists
-    TaskLists (..),
-    newTaskLists,
+    , TaskLists (..)
+    , newTaskLists
 
     -- ** Tasks
-    Tasks (..),
-    newTasks,
-  )
-where
+    , Tasks (..)
+    , newTasks
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AppsTasks.Internal.Product
 import Gogol.AppsTasks.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 appsTasksService :: Core.ServiceConfig
-appsTasksService =
-  Core.defaultService
-    (Core.ServiceId "tasks:v1")
-    "tasks.googleapis.com"
+appsTasksService
+  = Core.defaultService (Core.ServiceId "tasks:v1")
+      "tasks.googleapis.com"
 
 -- | Create, edit, organize, and delete all your tasks
 tasksScope :: Core.Proxy '["https://www.googleapis.com/auth/tasks"]
