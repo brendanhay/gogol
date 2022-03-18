@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DriveActivity
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,412 +30,281 @@
 --
 -- /See:/ <https://developers.google.com/drive/activity/ Drive Activity API Reference>
 module Network.Google.DriveActivity
-    (
-    -- * Service Configuration
-      driveActivityService
+  ( -- * Configuration
+    driveActivityService,
 
     -- * OAuth Scopes
-    , driveActivityReadOnlyScope
-    , driveActivityScope
-
-    -- * API Declaration
-    , DriveActivityAPI
+    driveActivityScope,
+    driveActivityReadOnlyScope,
 
     -- * Resources
 
     -- ** driveactivity.activity.query
-    , module Network.Google.Resource.DriveActivity.Activity.Query
+    DriveActivityActivityQueryResource,
+    newDriveActivityActivityQuery,
+    DriveActivityActivityQuery,
 
     -- * Types
 
-    -- ** Suggestion
-    , Suggestion
-    , suggestion
-    , sSubtype
-
-    -- ** Drive
-    , Drive
-    , drive
-    , dRoot
-    , dName
-    , dTitle
-
-    -- ** Impersonation
-    , Impersonation
-    , impersonation
-    , iImpersonatedUser
-
-    -- ** Edit
-    , Edit
-    , edit
-
-    -- ** ActionDetail
-    , ActionDetail
-    , actionDetail
-    , adEdit
-    , adPermissionChange
-    , adRestore
-    , adReference
-    , adCreate
-    , adRename
-    , adComment
-    , adSettingsChange
-    , adDlpChange
-    , adDelete
-    , adMove
-
-    -- ** DriveReference
-    , DriveReference
-    , driveReference
-    , drName
-    , drTitle
-
-    -- ** PermissionRole
-    , PermissionRole (..)
-
-    -- ** Group
-    , Group
-    , group'
-    , gEmail
-    , gTitle
-
-    -- ** DriveFile
-    , DriveFile
-    , driveFile
-
-    -- ** TimeRange
-    , TimeRange
-    , timeRange
-    , trStartTime
-    , trEndTime
-
-    -- ** RestrictionChangeNewRestriction
-    , RestrictionChangeNewRestriction (..)
-
-    -- ** DriveFolderType
-    , DriveFolderType (..)
-
-    -- ** QueryDriveActivityRequest
-    , QueryDriveActivityRequest
-    , queryDriveActivityRequest
-    , qdarAncestorName
-    , qdarItemName
-    , qdarConsolidationStrategy
-    , qdarFilter
-    , qdarPageToken
-    , qdarPageSize
-
-    -- ** DriveItemReference
-    , DriveItemReference
-    , driveItemReference
-    , dirDriveFile
-    , dirFolder
-    , dirName
-    , dirDriveFolder
-    , dirTitle
-    , dirFile
-
-    -- ** KnownUser
-    , KnownUser
-    , knownUser
-    , kuPersonName
-    , kuIsCurrentUser
-
-    -- ** TargetReference
-    , TargetReference
-    , targetReference
-    , trDrive
-    , trTeamDrive
-    , trDriveItem
-
-    -- ** Copy
-    , Copy
-    , copy
-    , cOriginalObject
-
-    -- ** PermissionChange
-    , PermissionChange
-    , permissionChange
-    , pcAddedPermissions
-    , pcRemovedPermissions
-
-    -- ** QueryDriveActivityResponse
-    , QueryDriveActivityResponse
-    , queryDriveActivityResponse
-    , qdarNextPageToken
-    , qdarActivities
-
-    -- ** Post'
-    , Post'
-    , post
-    , pSubtype
-
-    -- ** Restore
-    , Restore
-    , restore
-    , rType
-
-    -- ** Domain
-    , Domain
-    , domain
-    , domLegacyId
-    , domName
-
-    -- ** Administrator
-    , Administrator
-    , administrator
-
-    -- ** DataLeakPreventionChange
-    , DataLeakPreventionChange
-    , dataLeakPreventionChange
-    , dlpcType
-
-    -- ** Actor
-    , Actor
-    , actor
-    , aImpersonation
-    , aSystem
-    , aAdministrator
-    , aUser
-    , aAnonymous
-
-    -- ** Folder
-    , Folder
-    , folder
-    , fType
-
-    -- ** RestrictionChangeFeature
-    , RestrictionChangeFeature (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Action
-    , Action
-    , action
-    , aTimeRange
-    , aActor
-    , aTimestamp
-    , aTarget
-    , aDetail
+    Action (..),
+    newAction,
 
-    -- ** TeamDrive
-    , TeamDrive
-    , teamDrive
-    , tdRoot
-    , tdName
-    , tdTitle
+    -- ** ActionDetail
+    ActionDetail (..),
+    newActionDetail,
 
-    -- ** UnknownUser
-    , UnknownUser
-    , unknownUser
+    -- ** Actor
+    Actor (..),
+    newActor,
 
-    -- ** Owner
-    , Owner
-    , owner
-    , oDrive
-    , oDomain
-    , oTeamDrive
-    , oUser
-
-    -- ** SystemEventType
-    , SystemEventType (..)
-
-    -- ** ApplicationReference
-    , ApplicationReference
-    , applicationReference
-    , arType
-
-    -- ** DeleteType
-    , DeleteType (..)
-
-    -- ** ConsolidationStrategy
-    , ConsolidationStrategy
-    , consolidationStrategy
-    , csNone
-    , csLegacy
-
-    -- ** User
-    , User
-    , user
-    , uKnownUser
-    , uUnknownUser
-    , uDeletedUser
-
-    -- ** DeletedUser
-    , DeletedUser
-    , deletedUser
-
-    -- ** Create
-    , Create
-    , create
-    , cCopy
-    , cNew
-    , cUpload
-
-    -- ** PostSubtype
-    , PostSubtype (..)
-
-    -- ** New
-    , New
-    , new
-
-    -- ** AssignmentSubtype
-    , AssignmentSubtype (..)
-
-    -- ** TeamDriveReference
-    , TeamDriveReference
-    , teamDriveReference
-    , tdrName
-    , tdrTitle
-
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Administrator
+    Administrator (..),
+    newAdministrator,
 
     -- ** AnonymousUser
-    , AnonymousUser
-    , anonymousUser
-
-    -- ** DriveFolder
-    , DriveFolder
-    , driveFolder
-    , dfType
+    AnonymousUser (..),
+    newAnonymousUser,
 
     -- ** Anyone
-    , Anyone
-    , anyone
+    Anyone (..),
+    newAnyone,
 
-    -- ** RestrictionChange
-    , RestrictionChange
-    , restrictionChange
-    , rcFeature
-    , rcNewRestriction
+    -- ** ApplicationReference
+    ApplicationReference (..),
+    newApplicationReference,
 
-    -- ** Legacy
-    , Legacy
-    , legacy
-
-    -- ** FileComment
-    , FileComment
-    , fileComment
-    , fcParent
-    , fcLegacyDiscussionId
-    , fcLegacyCommentId
-    , fcLinkToDiscussion
-
-    -- ** RestoreType
-    , RestoreType (..)
-
-    -- ** Rename
-    , Rename
-    , rename
-    , rNewTitle
-    , rOldTitle
-
-    -- ** SuggestionSubtype
-    , SuggestionSubtype (..)
-
-    -- ** Upload
-    , Upload
-    , upload
-
-    -- ** NoConsolidation
-    , NoConsolidation
-    , noConsolidation
+    -- ** ApplicationReference_Type
+    ApplicationReference_Type (..),
 
     -- ** Assignment
-    , Assignment
-    , assignment
-    , aAssignedUser
-    , aSubtype
+    Assignment (..),
+    newAssignment,
 
-    -- ** SettingsChange
-    , SettingsChange
-    , settingsChange
-    , scRestrictionChanges
+    -- ** Assignment_Subtype
+    Assignment_Subtype (..),
 
     -- ** Comment
-    , Comment
-    , comment
-    , cSuggestion
-    , cPost
-    , cMentionedUsers
-    , cAssignment
+    Comment (..),
+    newComment,
 
-    -- ** Permission
-    , Permission
-    , permission
-    , pGroup
-    , pDomain
-    , pUser
-    , pRole
-    , pAnyone
-    , pAllowDiscovery
+    -- ** ConsolidationStrategy
+    ConsolidationStrategy (..),
+    newConsolidationStrategy,
 
-    -- ** DataLeakPreventionChangeType
-    , DataLeakPreventionChangeType (..)
+    -- ** Copy
+    Copy (..),
+    newCopy,
 
-    -- ** File
-    , File
-    , file
+    -- ** Create
+    Create (..),
+    newCreate,
 
-    -- ** FolderType
-    , FolderType (..)
+    -- ** DataLeakPreventionChange
+    DataLeakPreventionChange (..),
+    newDataLeakPreventionChange,
+
+    -- ** DataLeakPreventionChange_Type
+    DataLeakPreventionChange_Type (..),
 
     -- ** Delete'
-    , Delete'
-    , delete'
-    , dType
+    Delete' (..),
+    newDelete,
 
-    -- ** Target
-    , Target
-    , target
-    , tDrive
-    , tTeamDrive
-    , tFileComment
-    , tDriveItem
+    -- ** Delete_Type
+    Delete_Type (..),
 
-    -- ** Move
-    , Move
-    , move
-    , mAddedParents
-    , mRemovedParents
+    -- ** DeletedUser
+    DeletedUser (..),
+    newDeletedUser,
 
-    -- ** ApplicationReferenceType
-    , ApplicationReferenceType (..)
+    -- ** Domain
+    Domain (..),
+    newDomain,
+
+    -- ** Drive
+    Drive (..),
+    newDrive,
 
     -- ** DriveActivity
-    , DriveActivity
-    , driveActivity
-    , daTimeRange
-    , daActions
-    , daActors
-    , daTargets
-    , daPrimaryActionDetail
-    , daTimestamp
+    DriveActivity (..),
+    newDriveActivity,
+
+    -- ** DriveFile
+    DriveFile (..),
+    newDriveFile,
+
+    -- ** DriveFolder
+    DriveFolder (..),
+    newDriveFolder,
+
+    -- ** DriveFolder_Type
+    DriveFolder_Type (..),
 
     -- ** DriveItem
-    , DriveItem
-    , driveItem
-    , diDriveFile
-    , diFolder
-    , diOwner
-    , diMimeType
-    , diName
-    , diDriveFolder
-    , diTitle
-    , diFile
+    DriveItem (..),
+    newDriveItem,
+
+    -- ** DriveItemReference
+    DriveItemReference (..),
+    newDriveItemReference,
+
+    -- ** DriveReference
+    DriveReference (..),
+    newDriveReference,
+
+    -- ** Edit
+    Edit (..),
+    newEdit,
+
+    -- ** File
+    File (..),
+    newFile,
+
+    -- ** FileComment
+    FileComment (..),
+    newFileComment,
+
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** Folder_Type
+    Folder_Type (..),
+
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** Impersonation
+    Impersonation (..),
+    newImpersonation,
+
+    -- ** KnownUser
+    KnownUser (..),
+    newKnownUser,
+
+    -- ** Legacy
+    Legacy (..),
+    newLegacy,
+
+    -- ** Move
+    Move (..),
+    newMove,
+
+    -- ** New
+    New (..),
+    newNew,
+
+    -- ** NoConsolidation
+    NoConsolidation (..),
+    newNoConsolidation,
+
+    -- ** Owner
+    Owner (..),
+    newOwner,
+
+    -- ** Permission
+    Permission (..),
+    newPermission,
+
+    -- ** Permission_Role
+    Permission_Role (..),
+
+    -- ** PermissionChange
+    PermissionChange (..),
+    newPermissionChange,
+
+    -- ** Post'
+    Post' (..),
+    newPost,
+
+    -- ** Post_Subtype
+    Post_Subtype (..),
+
+    -- ** QueryDriveActivityRequest
+    QueryDriveActivityRequest (..),
+    newQueryDriveActivityRequest,
+
+    -- ** QueryDriveActivityResponse
+    QueryDriveActivityResponse (..),
+    newQueryDriveActivityResponse,
+
+    -- ** Rename
+    Rename (..),
+    newRename,
+
+    -- ** Restore
+    Restore (..),
+    newRestore,
+
+    -- ** Restore_Type
+    Restore_Type (..),
+
+    -- ** RestrictionChange
+    RestrictionChange (..),
+    newRestrictionChange,
+
+    -- ** RestrictionChange_Feature
+    RestrictionChange_Feature (..),
+
+    -- ** RestrictionChange_NewRestriction
+    RestrictionChange_NewRestriction (..),
+
+    -- ** SettingsChange
+    SettingsChange (..),
+    newSettingsChange,
+
+    -- ** Suggestion
+    Suggestion (..),
+    newSuggestion,
+
+    -- ** Suggestion_Subtype
+    Suggestion_Subtype (..),
 
     -- ** SystemEvent
-    , SystemEvent
-    , systemEvent
-    , seType
-    ) where
+    SystemEvent (..),
+    newSystemEvent,
 
-import Network.Google.Prelude
+    -- ** SystemEvent_Type
+    SystemEvent_Type (..),
+
+    -- ** Target
+    Target (..),
+    newTarget,
+
+    -- ** TargetReference
+    TargetReference (..),
+    newTargetReference,
+
+    -- ** TeamDrive
+    TeamDrive (..),
+    newTeamDrive,
+
+    -- ** TeamDriveReference
+    TeamDriveReference (..),
+    newTeamDriveReference,
+
+    -- ** TimeRange
+    TimeRange (..),
+    newTimeRange,
+
+    -- ** UnknownUser
+    UnknownUser (..),
+    newUnknownUser,
+
+    -- ** Upload
+    Upload (..),
+    newUpload,
+
+    -- ** User
+    User (..),
+    newUser,
+  )
+where
+
+import Network.Google.DriveActivity.Activity.Query
 import Network.Google.DriveActivity.Types
-import Network.Google.Resource.DriveActivity.Activity.Query
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Drive Activity API service.
-type DriveActivityAPI = ActivityQueryResource
