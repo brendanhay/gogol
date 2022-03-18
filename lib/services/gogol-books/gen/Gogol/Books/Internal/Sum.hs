@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Books.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * MyconfigRequestAccessLicenseTypes
     MyconfigRequestAccessLicenseTypes
-      ( MyconfigRequestAccessLicenseTypes_LICENSETYPESUNDEFINED,
+      (
+        MyconfigRequestAccessLicenseTypes_LICENSETYPESUNDEFINED,
         MyconfigRequestAccessLicenseTypes_Both,
         MyconfigRequestAccessLicenseTypes_Concurrent,
         MyconfigRequestAccessLicenseTypes_Download,
@@ -44,14 +55,16 @@ module Gogol.Books.Internal.Sum
 
     -- * MyconfigSyncVolumeLicensesFeatures
     MyconfigSyncVolumeLicensesFeatures
-      ( MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED,
+      (
+        MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED,
         MyconfigSyncVolumeLicensesFeatures_Rentals,
         ..
       ),
 
     -- * MylibraryBookshelvesAddVolumeReason
     MylibraryBookshelvesAddVolumeReason
-      ( MylibraryBookshelvesAddVolumeReason_REASONUNDEFINED,
+      (
+        MylibraryBookshelvesAddVolumeReason_REASONUNDEFINED,
         MylibraryBookshelvesAddVolumeReason_IOSPREX,
         MylibraryBookshelvesAddVolumeReason_IOSSEARCH,
         MylibraryBookshelvesAddVolumeReason_Onboarding,
@@ -60,14 +73,16 @@ module Gogol.Books.Internal.Sum
 
     -- * MylibraryBookshelvesRemoveVolumeReason
     MylibraryBookshelvesRemoveVolumeReason
-      ( MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED,
+      (
+        MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED,
         MylibraryBookshelvesRemoveVolumeReason_Onboarding,
         ..
       ),
 
     -- * MylibraryBookshelvesVolumesListProjection
     MylibraryBookshelvesVolumesListProjection
-      ( MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED,
+      (
+        MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED,
         MylibraryBookshelvesVolumesListProjection_Full,
         MylibraryBookshelvesVolumesListProjection_Lite,
         ..
@@ -75,7 +90,8 @@ module Gogol.Books.Internal.Sum
 
     -- * MylibraryReadingpositionsSetPositionAction
     MylibraryReadingpositionsSetPositionAction
-      ( MylibraryReadingpositionsSetPositionAction_ACTIONUNDEFINED,
+      (
+        MylibraryReadingpositionsSetPositionAction_ACTIONUNDEFINED,
         MylibraryReadingpositionsSetPositionAction_Bookmark,
         MylibraryReadingpositionsSetPositionAction_Chapter,
         MylibraryReadingpositionsSetPositionAction_NextPage,
@@ -87,7 +103,8 @@ module Gogol.Books.Internal.Sum
 
     -- * OnboardingListCategoryVolumesMaxAllowedMaturityRating
     OnboardingListCategoryVolumesMaxAllowedMaturityRating
-      ( OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
+      (
+        OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
         OnboardingListCategoryVolumesMaxAllowedMaturityRating_Mature,
         OnboardingListCategoryVolumesMaxAllowedMaturityRating_NotMature,
         ..
@@ -95,7 +112,8 @@ module Gogol.Books.Internal.Sum
 
     -- * PersonalizedstreamGetMaxAllowedMaturityRating
     PersonalizedstreamGetMaxAllowedMaturityRating
-      ( PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
+      (
+        PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
         PersonalizedstreamGetMaxAllowedMaturityRating_Mature,
         PersonalizedstreamGetMaxAllowedMaturityRating_NotMature,
         ..
@@ -103,7 +121,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesAssociatedListAssociation
     VolumesAssociatedListAssociation
-      ( VolumesAssociatedListAssociation_ASSOCIATIONUNDEFINED,
+      (
+        VolumesAssociatedListAssociation_ASSOCIATIONUNDEFINED,
         VolumesAssociatedListAssociation_EndOfSample,
         VolumesAssociatedListAssociation_EndOfVolume,
         VolumesAssociatedListAssociation_RelatedForPlay,
@@ -112,7 +131,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesAssociatedListMaxAllowedMaturityRating
     VolumesAssociatedListMaxAllowedMaturityRating
-      ( VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
+      (
+        VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
         VolumesAssociatedListMaxAllowedMaturityRating_Mature,
         VolumesAssociatedListMaxAllowedMaturityRating_NotMature,
         ..
@@ -120,7 +140,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesGetProjection
     VolumesGetProjection
-      ( VolumesGetProjection_PROJECTIONUNDEFINED,
+      (
+        VolumesGetProjection_PROJECTIONUNDEFINED,
         VolumesGetProjection_Full,
         VolumesGetProjection_Lite,
         ..
@@ -128,14 +149,16 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesListDownload
     VolumesListDownload
-      ( VolumesListDownload_DOWNLOADUNDEFINED,
+      (
+        VolumesListDownload_DOWNLOADUNDEFINED,
         VolumesListDownload_Epub,
         ..
       ),
 
     -- * VolumesListFilter
     VolumesListFilter
-      ( VolumesListFilter_FILTERUNDEFINED,
+      (
+        VolumesListFilter_FILTERUNDEFINED,
         VolumesListFilter_Ebooks,
         VolumesListFilter_FreeEbooks,
         VolumesListFilter_Full,
@@ -146,7 +169,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesListLibraryRestrict
     VolumesListLibraryRestrict
-      ( VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED,
+      (
+        VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED,
         VolumesListLibraryRestrict_MyLibrary,
         VolumesListLibraryRestrict_NoRestrict,
         ..
@@ -154,7 +178,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesListMaxAllowedMaturityRating
     VolumesListMaxAllowedMaturityRating
-      ( VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
+      (
+        VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
         VolumesListMaxAllowedMaturityRating_Mature,
         VolumesListMaxAllowedMaturityRating_NotMature,
         ..
@@ -162,7 +187,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesListOrderBy
     VolumesListOrderBy
-      ( VolumesListOrderBy_ORDERBYUNDEFINED,
+      (
+        VolumesListOrderBy_ORDERBYUNDEFINED,
         VolumesListOrderBy_Newest,
         VolumesListOrderBy_Relevance,
         ..
@@ -170,7 +196,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesListPrintType
     VolumesListPrintType
-      ( VolumesListPrintType_PRINTTYPEUNDEFINED,
+      (
+        VolumesListPrintType_PRINTTYPEUNDEFINED,
         VolumesListPrintType_All,
         VolumesListPrintType_Books,
         VolumesListPrintType_Magazines,
@@ -179,7 +206,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesListProjection
     VolumesListProjection
-      ( VolumesListProjection_PROJECTIONUNDEFINED,
+      (
+        VolumesListProjection_PROJECTIONUNDEFINED,
         VolumesListProjection_Full,
         VolumesListProjection_Lite,
         ..
@@ -187,7 +215,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesMybooksListAcquireMethod
     VolumesMybooksListAcquireMethod
-      ( VolumesMybooksListAcquireMethod_ACQUIREMETHODUNDEFINED,
+      (
+        VolumesMybooksListAcquireMethod_ACQUIREMETHODUNDEFINED,
         VolumesMybooksListAcquireMethod_FAMILYSHARED,
         VolumesMybooksListAcquireMethod_Preordered,
         VolumesMybooksListAcquireMethod_PREVIOUSLYRENTED,
@@ -201,7 +230,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesMybooksListProcessingState
     VolumesMybooksListProcessingState
-      ( VolumesMybooksListProcessingState_PROCESSINGSTATEUNDEFINED,
+      (
+        VolumesMybooksListProcessingState_PROCESSINGSTATEUNDEFINED,
         VolumesMybooksListProcessingState_COMPLETEDFAILED,
         VolumesMybooksListProcessingState_COMPLETEDSUCCESS,
         VolumesMybooksListProcessingState_Running,
@@ -210,7 +240,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesRecommendedListMaxAllowedMaturityRating
     VolumesRecommendedListMaxAllowedMaturityRating
-      ( VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
+      (
+        VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
         VolumesRecommendedListMaxAllowedMaturityRating_Mature,
         VolumesRecommendedListMaxAllowedMaturityRating_NotMature,
         ..
@@ -218,7 +249,8 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesRecommendedRateRating
     VolumesRecommendedRateRating
-      ( VolumesRecommendedRateRating_RATINGUNDEFINED,
+      (
+        VolumesRecommendedRateRating_RATINGUNDEFINED,
         VolumesRecommendedRateRating_HAVEIT,
         VolumesRecommendedRateRating_NOTINTERESTED,
         ..
@@ -226,29 +258,29 @@ module Gogol.Books.Internal.Sum
 
     -- * VolumesUseruploadedListProcessingState
     VolumesUseruploadedListProcessingState
-      ( VolumesUseruploadedListProcessingState_PROCESSINGSTATEUNDEFINED,
+      (
+        VolumesUseruploadedListProcessingState_PROCESSINGSTATEUNDEFINED,
         VolumesUseruploadedListProcessingState_COMPLETEDFAILED,
         VolumesUseruploadedListProcessingState_COMPLETEDSUCCESS,
         VolumesUseruploadedListProcessingState_Running,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -261,23 +293,22 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The type of access license to request. If not specified, the default is BOTH.
-newtype MyconfigRequestAccessLicenseTypes = MyconfigRequestAccessLicenseTypes {fromMyconfigRequestAccessLicenseTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MyconfigRequestAccessLicenseTypes = MyconfigRequestAccessLicenseTypes { fromMyconfigRequestAccessLicenseTypes :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern MyconfigRequestAccessLicenseTypes_LICENSETYPESUNDEFINED :: MyconfigRequestAccessLicenseTypes
 pattern MyconfigRequestAccessLicenseTypes_LICENSETYPESUNDEFINED = MyconfigRequestAccessLicenseTypes "LICENSE_TYPES_UNDEFINED"
 
@@ -298,23 +329,22 @@ pattern MyconfigRequestAccessLicenseTypes_Download = MyconfigRequestAccessLicens
   MyconfigRequestAccessLicenseTypes_Both,
   MyconfigRequestAccessLicenseTypes_Concurrent,
   MyconfigRequestAccessLicenseTypes_Download,
-  MyconfigRequestAccessLicenseTypes
-  #-}
+  MyconfigRequestAccessLicenseTypes #-}
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-newtype MyconfigSyncVolumeLicensesFeatures = MyconfigSyncVolumeLicensesFeatures {fromMyconfigSyncVolumeLicensesFeatures :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MyconfigSyncVolumeLicensesFeatures = MyconfigSyncVolumeLicensesFeatures { fromMyconfigSyncVolumeLicensesFeatures :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED :: MyconfigSyncVolumeLicensesFeatures
 pattern MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED = MyconfigSyncVolumeLicensesFeatures "FEATURES_UNDEFINED"
 
@@ -325,23 +355,22 @@ pattern MyconfigSyncVolumeLicensesFeatures_Rentals = MyconfigSyncVolumeLicensesF
 {-# COMPLETE
   MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED,
   MyconfigSyncVolumeLicensesFeatures_Rentals,
-  MyconfigSyncVolumeLicensesFeatures
-  #-}
+  MyconfigSyncVolumeLicensesFeatures #-}
 
 -- | The reason for which the book is added to the library.
-newtype MylibraryBookshelvesAddVolumeReason = MylibraryBookshelvesAddVolumeReason {fromMylibraryBookshelvesAddVolumeReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MylibraryBookshelvesAddVolumeReason = MylibraryBookshelvesAddVolumeReason { fromMylibraryBookshelvesAddVolumeReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern MylibraryBookshelvesAddVolumeReason_REASONUNDEFINED :: MylibraryBookshelvesAddVolumeReason
 pattern MylibraryBookshelvesAddVolumeReason_REASONUNDEFINED = MylibraryBookshelvesAddVolumeReason "REASON_UNDEFINED"
 
@@ -362,23 +391,22 @@ pattern MylibraryBookshelvesAddVolumeReason_Onboarding = MylibraryBookshelvesAdd
   MylibraryBookshelvesAddVolumeReason_IOSPREX,
   MylibraryBookshelvesAddVolumeReason_IOSSEARCH,
   MylibraryBookshelvesAddVolumeReason_Onboarding,
-  MylibraryBookshelvesAddVolumeReason
-  #-}
+  MylibraryBookshelvesAddVolumeReason #-}
 
 -- | The reason for which the book is removed from the library.
-newtype MylibraryBookshelvesRemoveVolumeReason = MylibraryBookshelvesRemoveVolumeReason {fromMylibraryBookshelvesRemoveVolumeReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MylibraryBookshelvesRemoveVolumeReason = MylibraryBookshelvesRemoveVolumeReason { fromMylibraryBookshelvesRemoveVolumeReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED :: MylibraryBookshelvesRemoveVolumeReason
 pattern MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED = MylibraryBookshelvesRemoveVolumeReason "REASON_UNDEFINED"
 
@@ -389,23 +417,22 @@ pattern MylibraryBookshelvesRemoveVolumeReason_Onboarding = MylibraryBookshelves
 {-# COMPLETE
   MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED,
   MylibraryBookshelvesRemoveVolumeReason_Onboarding,
-  MylibraryBookshelvesRemoveVolumeReason
-  #-}
+  MylibraryBookshelvesRemoveVolumeReason #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype MylibraryBookshelvesVolumesListProjection = MylibraryBookshelvesVolumesListProjection {fromMylibraryBookshelvesVolumesListProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MylibraryBookshelvesVolumesListProjection = MylibraryBookshelvesVolumesListProjection { fromMylibraryBookshelvesVolumesListProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED :: MylibraryBookshelvesVolumesListProjection
 pattern MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED = MylibraryBookshelvesVolumesListProjection "PROJECTION_UNDEFINED"
 
@@ -421,23 +448,22 @@ pattern MylibraryBookshelvesVolumesListProjection_Lite = MylibraryBookshelvesVol
   MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED,
   MylibraryBookshelvesVolumesListProjection_Full,
   MylibraryBookshelvesVolumesListProjection_Lite,
-  MylibraryBookshelvesVolumesListProjection
-  #-}
+  MylibraryBookshelvesVolumesListProjection #-}
 
 -- | Action that caused this reading position to be set.
-newtype MylibraryReadingpositionsSetPositionAction = MylibraryReadingpositionsSetPositionAction {fromMylibraryReadingpositionsSetPositionAction :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MylibraryReadingpositionsSetPositionAction = MylibraryReadingpositionsSetPositionAction { fromMylibraryReadingpositionsSetPositionAction :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern MylibraryReadingpositionsSetPositionAction_ACTIONUNDEFINED :: MylibraryReadingpositionsSetPositionAction
 pattern MylibraryReadingpositionsSetPositionAction_ACTIONUNDEFINED = MylibraryReadingpositionsSetPositionAction "ACTION_UNDEFINED"
 
@@ -473,23 +499,22 @@ pattern MylibraryReadingpositionsSetPositionAction_Search = MylibraryReadingposi
   MylibraryReadingpositionsSetPositionAction_PrevPage,
   MylibraryReadingpositionsSetPositionAction_Scroll,
   MylibraryReadingpositionsSetPositionAction_Search,
-  MylibraryReadingpositionsSetPositionAction
-  #-}
+  MylibraryReadingpositionsSetPositionAction #-}
 
 -- | The maximum allowed maturity rating of returned volumes. Books with a higher maturity rating are filtered out.
-newtype OnboardingListCategoryVolumesMaxAllowedMaturityRating = OnboardingListCategoryVolumesMaxAllowedMaturityRating {fromOnboardingListCategoryVolumesMaxAllowedMaturityRating :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OnboardingListCategoryVolumesMaxAllowedMaturityRating = OnboardingListCategoryVolumesMaxAllowedMaturityRating { fromOnboardingListCategoryVolumesMaxAllowedMaturityRating :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: OnboardingListCategoryVolumesMaxAllowedMaturityRating
 pattern OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = OnboardingListCategoryVolumesMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -505,23 +530,22 @@ pattern OnboardingListCategoryVolumesMaxAllowedMaturityRating_NotMature = Onboar
   OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
   OnboardingListCategoryVolumesMaxAllowedMaturityRating_Mature,
   OnboardingListCategoryVolumesMaxAllowedMaturityRating_NotMature,
-  OnboardingListCategoryVolumesMaxAllowedMaturityRating
-  #-}
+  OnboardingListCategoryVolumesMaxAllowedMaturityRating #-}
 
 -- | The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
-newtype PersonalizedstreamGetMaxAllowedMaturityRating = PersonalizedstreamGetMaxAllowedMaturityRating {fromPersonalizedstreamGetMaxAllowedMaturityRating :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PersonalizedstreamGetMaxAllowedMaturityRating = PersonalizedstreamGetMaxAllowedMaturityRating { fromPersonalizedstreamGetMaxAllowedMaturityRating :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: PersonalizedstreamGetMaxAllowedMaturityRating
 pattern PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = PersonalizedstreamGetMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -537,23 +561,22 @@ pattern PersonalizedstreamGetMaxAllowedMaturityRating_NotMature = Personalizedst
   PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
   PersonalizedstreamGetMaxAllowedMaturityRating_Mature,
   PersonalizedstreamGetMaxAllowedMaturityRating_NotMature,
-  PersonalizedstreamGetMaxAllowedMaturityRating
-  #-}
+  PersonalizedstreamGetMaxAllowedMaturityRating #-}
 
 -- | Association type.
-newtype VolumesAssociatedListAssociation = VolumesAssociatedListAssociation {fromVolumesAssociatedListAssociation :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesAssociatedListAssociation = VolumesAssociatedListAssociation { fromVolumesAssociatedListAssociation :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesAssociatedListAssociation_ASSOCIATIONUNDEFINED :: VolumesAssociatedListAssociation
 pattern VolumesAssociatedListAssociation_ASSOCIATIONUNDEFINED = VolumesAssociatedListAssociation "ASSOCIATION_UNDEFINED"
 
@@ -574,23 +597,22 @@ pattern VolumesAssociatedListAssociation_RelatedForPlay = VolumesAssociatedListA
   VolumesAssociatedListAssociation_EndOfSample,
   VolumesAssociatedListAssociation_EndOfVolume,
   VolumesAssociatedListAssociation_RelatedForPlay,
-  VolumesAssociatedListAssociation
-  #-}
+  VolumesAssociatedListAssociation #-}
 
 -- | The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
-newtype VolumesAssociatedListMaxAllowedMaturityRating = VolumesAssociatedListMaxAllowedMaturityRating {fromVolumesAssociatedListMaxAllowedMaturityRating :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesAssociatedListMaxAllowedMaturityRating = VolumesAssociatedListMaxAllowedMaturityRating { fromVolumesAssociatedListMaxAllowedMaturityRating :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: VolumesAssociatedListMaxAllowedMaturityRating
 pattern VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = VolumesAssociatedListMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -606,23 +628,22 @@ pattern VolumesAssociatedListMaxAllowedMaturityRating_NotMature = VolumesAssocia
   VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
   VolumesAssociatedListMaxAllowedMaturityRating_Mature,
   VolumesAssociatedListMaxAllowedMaturityRating_NotMature,
-  VolumesAssociatedListMaxAllowedMaturityRating
-  #-}
+  VolumesAssociatedListMaxAllowedMaturityRating #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype VolumesGetProjection = VolumesGetProjection {fromVolumesGetProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesGetProjection = VolumesGetProjection { fromVolumesGetProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesGetProjection_PROJECTIONUNDEFINED :: VolumesGetProjection
 pattern VolumesGetProjection_PROJECTIONUNDEFINED = VolumesGetProjection "PROJECTION_UNDEFINED"
 
@@ -638,23 +659,22 @@ pattern VolumesGetProjection_Lite = VolumesGetProjection "LITE"
   VolumesGetProjection_PROJECTIONUNDEFINED,
   VolumesGetProjection_Full,
   VolumesGetProjection_Lite,
-  VolumesGetProjection
-  #-}
+  VolumesGetProjection #-}
 
 -- | Restrict to volumes by download availability.
-newtype VolumesListDownload = VolumesListDownload {fromVolumesListDownload :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListDownload = VolumesListDownload { fromVolumesListDownload :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListDownload_DOWNLOADUNDEFINED :: VolumesListDownload
 pattern VolumesListDownload_DOWNLOADUNDEFINED = VolumesListDownload "DOWNLOAD_UNDEFINED"
 
@@ -665,23 +685,22 @@ pattern VolumesListDownload_Epub = VolumesListDownload "EPUB"
 {-# COMPLETE
   VolumesListDownload_DOWNLOADUNDEFINED,
   VolumesListDownload_Epub,
-  VolumesListDownload
-  #-}
+  VolumesListDownload #-}
 
 -- | Filter search results.
-newtype VolumesListFilter = VolumesListFilter {fromVolumesListFilter :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListFilter = VolumesListFilter { fromVolumesListFilter :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListFilter_FILTERUNDEFINED :: VolumesListFilter
 pattern VolumesListFilter_FILTERUNDEFINED = VolumesListFilter "FILTER_UNDEFINED"
 
@@ -712,23 +731,22 @@ pattern VolumesListFilter_Partial = VolumesListFilter "partial"
   VolumesListFilter_Full,
   VolumesListFilter_PaidEbooks,
   VolumesListFilter_Partial,
-  VolumesListFilter
-  #-}
+  VolumesListFilter #-}
 
 -- | Restrict search to this user\'s library.
-newtype VolumesListLibraryRestrict = VolumesListLibraryRestrict {fromVolumesListLibraryRestrict :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListLibraryRestrict = VolumesListLibraryRestrict { fromVolumesListLibraryRestrict :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED :: VolumesListLibraryRestrict
 pattern VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED = VolumesListLibraryRestrict "LIBRARY_RESTRICT_UNDEFINED"
 
@@ -744,23 +762,22 @@ pattern VolumesListLibraryRestrict_NoRestrict = VolumesListLibraryRestrict "no-r
   VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED,
   VolumesListLibraryRestrict_MyLibrary,
   VolumesListLibraryRestrict_NoRestrict,
-  VolumesListLibraryRestrict
-  #-}
+  VolumesListLibraryRestrict #-}
 
 -- | The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
-newtype VolumesListMaxAllowedMaturityRating = VolumesListMaxAllowedMaturityRating {fromVolumesListMaxAllowedMaturityRating :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListMaxAllowedMaturityRating = VolumesListMaxAllowedMaturityRating { fromVolumesListMaxAllowedMaturityRating :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: VolumesListMaxAllowedMaturityRating
 pattern VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = VolumesListMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -776,23 +793,22 @@ pattern VolumesListMaxAllowedMaturityRating_NotMature = VolumesListMaxAllowedMat
   VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
   VolumesListMaxAllowedMaturityRating_Mature,
   VolumesListMaxAllowedMaturityRating_NotMature,
-  VolumesListMaxAllowedMaturityRating
-  #-}
+  VolumesListMaxAllowedMaturityRating #-}
 
 -- | Sort search results.
-newtype VolumesListOrderBy = VolumesListOrderBy {fromVolumesListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListOrderBy = VolumesListOrderBy { fromVolumesListOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListOrderBy_ORDERBYUNDEFINED :: VolumesListOrderBy
 pattern VolumesListOrderBy_ORDERBYUNDEFINED = VolumesListOrderBy "ORDER_BY_UNDEFINED"
 
@@ -808,23 +824,22 @@ pattern VolumesListOrderBy_Relevance = VolumesListOrderBy "relevance"
   VolumesListOrderBy_ORDERBYUNDEFINED,
   VolumesListOrderBy_Newest,
   VolumesListOrderBy_Relevance,
-  VolumesListOrderBy
-  #-}
+  VolumesListOrderBy #-}
 
 -- | Restrict to books or magazines.
-newtype VolumesListPrintType = VolumesListPrintType {fromVolumesListPrintType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListPrintType = VolumesListPrintType { fromVolumesListPrintType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListPrintType_PRINTTYPEUNDEFINED :: VolumesListPrintType
 pattern VolumesListPrintType_PRINTTYPEUNDEFINED = VolumesListPrintType "PRINT_TYPE_UNDEFINED"
 
@@ -845,23 +860,22 @@ pattern VolumesListPrintType_Magazines = VolumesListPrintType "MAGAZINES"
   VolumesListPrintType_All,
   VolumesListPrintType_Books,
   VolumesListPrintType_Magazines,
-  VolumesListPrintType
-  #-}
+  VolumesListPrintType #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype VolumesListProjection = VolumesListProjection {fromVolumesListProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesListProjection = VolumesListProjection { fromVolumesListProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesListProjection_PROJECTIONUNDEFINED :: VolumesListProjection
 pattern VolumesListProjection_PROJECTIONUNDEFINED = VolumesListProjection "PROJECTION_UNDEFINED"
 
@@ -877,23 +891,22 @@ pattern VolumesListProjection_Lite = VolumesListProjection "LITE"
   VolumesListProjection_PROJECTIONUNDEFINED,
   VolumesListProjection_Full,
   VolumesListProjection_Lite,
-  VolumesListProjection
-  #-}
+  VolumesListProjection #-}
 
 -- | How the book was acquired
-newtype VolumesMybooksListAcquireMethod = VolumesMybooksListAcquireMethod {fromVolumesMybooksListAcquireMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesMybooksListAcquireMethod = VolumesMybooksListAcquireMethod { fromVolumesMybooksListAcquireMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesMybooksListAcquireMethod_ACQUIREMETHODUNDEFINED :: VolumesMybooksListAcquireMethod
 pattern VolumesMybooksListAcquireMethod_ACQUIREMETHODUNDEFINED = VolumesMybooksListAcquireMethod "ACQUIRE_METHOD_UNDEFINED"
 
@@ -939,23 +952,22 @@ pattern VolumesMybooksListAcquireMethod_Uploaded = VolumesMybooksListAcquireMeth
   VolumesMybooksListAcquireMethod_Rented,
   VolumesMybooksListAcquireMethod_Sample,
   VolumesMybooksListAcquireMethod_Uploaded,
-  VolumesMybooksListAcquireMethod
-  #-}
+  VolumesMybooksListAcquireMethod #-}
 
 -- | The processing state of the user uploaded volumes to be returned. Applicable only if the UPLOADED is specified in the acquireMethod.
-newtype VolumesMybooksListProcessingState = VolumesMybooksListProcessingState {fromVolumesMybooksListProcessingState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesMybooksListProcessingState = VolumesMybooksListProcessingState { fromVolumesMybooksListProcessingState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesMybooksListProcessingState_PROCESSINGSTATEUNDEFINED :: VolumesMybooksListProcessingState
 pattern VolumesMybooksListProcessingState_PROCESSINGSTATEUNDEFINED = VolumesMybooksListProcessingState "PROCESSING_STATE_UNDEFINED"
 
@@ -976,23 +988,22 @@ pattern VolumesMybooksListProcessingState_Running = VolumesMybooksListProcessing
   VolumesMybooksListProcessingState_COMPLETEDFAILED,
   VolumesMybooksListProcessingState_COMPLETEDSUCCESS,
   VolumesMybooksListProcessingState_Running,
-  VolumesMybooksListProcessingState
-  #-}
+  VolumesMybooksListProcessingState #-}
 
 -- | The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
-newtype VolumesRecommendedListMaxAllowedMaturityRating = VolumesRecommendedListMaxAllowedMaturityRating {fromVolumesRecommendedListMaxAllowedMaturityRating :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesRecommendedListMaxAllowedMaturityRating = VolumesRecommendedListMaxAllowedMaturityRating { fromVolumesRecommendedListMaxAllowedMaturityRating :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: VolumesRecommendedListMaxAllowedMaturityRating
 pattern VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = VolumesRecommendedListMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -1008,23 +1019,22 @@ pattern VolumesRecommendedListMaxAllowedMaturityRating_NotMature = VolumesRecomm
   VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED,
   VolumesRecommendedListMaxAllowedMaturityRating_Mature,
   VolumesRecommendedListMaxAllowedMaturityRating_NotMature,
-  VolumesRecommendedListMaxAllowedMaturityRating
-  #-}
+  VolumesRecommendedListMaxAllowedMaturityRating #-}
 
 -- | Rating to be given to the volume.
-newtype VolumesRecommendedRateRating = VolumesRecommendedRateRating {fromVolumesRecommendedRateRating :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesRecommendedRateRating = VolumesRecommendedRateRating { fromVolumesRecommendedRateRating :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesRecommendedRateRating_RATINGUNDEFINED :: VolumesRecommendedRateRating
 pattern VolumesRecommendedRateRating_RATINGUNDEFINED = VolumesRecommendedRateRating "RATING_UNDEFINED"
 
@@ -1040,23 +1050,22 @@ pattern VolumesRecommendedRateRating_NOTINTERESTED = VolumesRecommendedRateRatin
   VolumesRecommendedRateRating_RATINGUNDEFINED,
   VolumesRecommendedRateRating_HAVEIT,
   VolumesRecommendedRateRating_NOTINTERESTED,
-  VolumesRecommendedRateRating
-  #-}
+  VolumesRecommendedRateRating #-}
 
 -- | The processing state of the user uploaded volumes to be returned.
-newtype VolumesUseruploadedListProcessingState = VolumesUseruploadedListProcessingState {fromVolumesUseruploadedListProcessingState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VolumesUseruploadedListProcessingState = VolumesUseruploadedListProcessingState { fromVolumesUseruploadedListProcessingState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern VolumesUseruploadedListProcessingState_PROCESSINGSTATEUNDEFINED :: VolumesUseruploadedListProcessingState
 pattern VolumesUseruploadedListProcessingState_PROCESSINGSTATEUNDEFINED = VolumesUseruploadedListProcessingState "PROCESSING_STATE_UNDEFINED"
 
@@ -1077,5 +1086,4 @@ pattern VolumesUseruploadedListProcessingState_Running = VolumesUseruploadedList
   VolumesUseruploadedListProcessingState_COMPLETEDFAILED,
   VolumesUseruploadedListProcessingState_COMPLETEDSUCCESS,
   VolumesUseruploadedListProcessingState_Running,
-  VolumesUseruploadedListProcessingState
-  #-}
+  VolumesUseruploadedListProcessingState #-}

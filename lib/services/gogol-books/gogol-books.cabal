@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-books
-version:            0.5.0
-synopsis:           Google Books SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-books
+version:               0.5.0
+synopsis:              Google Books SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  The Google Books API allows clients to access the Google Books repository.
+    The Google Books API allows clients to access the Google Books repository.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,78 +28,81 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Books
-    Gogol.Books.Bookshelves.Get
-    Gogol.Books.Bookshelves.List
-    Gogol.Books.Bookshelves.Volumes.List
-    Gogol.Books.Cloudloading.AddBook
-    Gogol.Books.Cloudloading.DeleteBook
-    Gogol.Books.Cloudloading.UpdateBook
-    Gogol.Books.Dictionary.ListOfflineMetadata
-    Gogol.Books.Familysharing.GetFamilyInfo
-    Gogol.Books.Familysharing.Share
-    Gogol.Books.Familysharing.Unshare
-    Gogol.Books.Layers.AnnotationData.Get
-    Gogol.Books.Layers.AnnotationData.List
-    Gogol.Books.Layers.Get
-    Gogol.Books.Layers.List
-    Gogol.Books.Layers.VolumeAnnotations.Get
-    Gogol.Books.Layers.VolumeAnnotations.List
-    Gogol.Books.Myconfig.GetUserSettings
-    Gogol.Books.Myconfig.ReleaseDownloadAccess
-    Gogol.Books.Myconfig.RequestAccess
-    Gogol.Books.Myconfig.SyncVolumeLicenses
-    Gogol.Books.Myconfig.UpdateUserSettings
-    Gogol.Books.Mylibrary.Annotations.Delete
-    Gogol.Books.Mylibrary.Annotations.Insert
-    Gogol.Books.Mylibrary.Annotations.List
-    Gogol.Books.Mylibrary.Annotations.Summary
-    Gogol.Books.Mylibrary.Annotations.Update
-    Gogol.Books.Mylibrary.Bookshelves.AddVolume
-    Gogol.Books.Mylibrary.Bookshelves.ClearVolumes
-    Gogol.Books.Mylibrary.Bookshelves.Get
-    Gogol.Books.Mylibrary.Bookshelves.List
-    Gogol.Books.Mylibrary.Bookshelves.MoveVolume
-    Gogol.Books.Mylibrary.Bookshelves.RemoveVolume
-    Gogol.Books.Mylibrary.Bookshelves.Volumes.List
-    Gogol.Books.Mylibrary.Readingpositions.Get
-    Gogol.Books.Mylibrary.Readingpositions.SetPosition
-    Gogol.Books.Notification.Get
-    Gogol.Books.Onboarding.ListCategories
-    Gogol.Books.Onboarding.ListCategoryVolumes
-    Gogol.Books.Personalizedstream.Get
-    Gogol.Books.Promooffer.Accept
-    Gogol.Books.Promooffer.Dismiss
-    Gogol.Books.Promooffer.Get
-    Gogol.Books.Series.Get
-    Gogol.Books.Series.Membership.Get
-    Gogol.Books.Types
-    Gogol.Books.Volumes.Associated.List
-    Gogol.Books.Volumes.Get
-    Gogol.Books.Volumes.List
-    Gogol.Books.Volumes.Mybooks.List
-    Gogol.Books.Volumes.Recommended.List
-    Gogol.Books.Volumes.Recommended.Rate
-    Gogol.Books.Volumes.Useruploaded.List
+      Gogol.Books
+    , Gogol.Books.Bookshelves.Get
+    , Gogol.Books.Bookshelves.List
+    , Gogol.Books.Bookshelves.Volumes.List
+    , Gogol.Books.Cloudloading.AddBook
+    , Gogol.Books.Cloudloading.DeleteBook
+    , Gogol.Books.Cloudloading.UpdateBook
+    , Gogol.Books.Dictionary.ListOfflineMetadata
+    , Gogol.Books.Familysharing.GetFamilyInfo
+    , Gogol.Books.Familysharing.Share
+    , Gogol.Books.Familysharing.Unshare
+    , Gogol.Books.Layers.AnnotationData.Get
+    , Gogol.Books.Layers.AnnotationData.List
+    , Gogol.Books.Layers.Get
+    , Gogol.Books.Layers.List
+    , Gogol.Books.Layers.VolumeAnnotations.Get
+    , Gogol.Books.Layers.VolumeAnnotations.List
+    , Gogol.Books.Myconfig.GetUserSettings
+    , Gogol.Books.Myconfig.ReleaseDownloadAccess
+    , Gogol.Books.Myconfig.RequestAccess
+    , Gogol.Books.Myconfig.SyncVolumeLicenses
+    , Gogol.Books.Myconfig.UpdateUserSettings
+    , Gogol.Books.Mylibrary.Annotations.Delete
+    , Gogol.Books.Mylibrary.Annotations.Insert
+    , Gogol.Books.Mylibrary.Annotations.List
+    , Gogol.Books.Mylibrary.Annotations.Summary
+    , Gogol.Books.Mylibrary.Annotations.Update
+    , Gogol.Books.Mylibrary.Bookshelves.AddVolume
+    , Gogol.Books.Mylibrary.Bookshelves.ClearVolumes
+    , Gogol.Books.Mylibrary.Bookshelves.Get
+    , Gogol.Books.Mylibrary.Bookshelves.List
+    , Gogol.Books.Mylibrary.Bookshelves.MoveVolume
+    , Gogol.Books.Mylibrary.Bookshelves.RemoveVolume
+    , Gogol.Books.Mylibrary.Bookshelves.Volumes.List
+    , Gogol.Books.Mylibrary.Readingpositions.Get
+    , Gogol.Books.Mylibrary.Readingpositions.SetPosition
+    , Gogol.Books.Notification.Get
+    , Gogol.Books.Onboarding.ListCategories
+    , Gogol.Books.Onboarding.ListCategoryVolumes
+    , Gogol.Books.Personalizedstream.Get
+    , Gogol.Books.Promooffer.Accept
+    , Gogol.Books.Promooffer.Dismiss
+    , Gogol.Books.Promooffer.Get
+    , Gogol.Books.Series.Get
+    , Gogol.Books.Series.Membership.Get
+    , Gogol.Books.Types
+    , Gogol.Books.Volumes.Associated.List
+    , Gogol.Books.Volumes.Get
+    , Gogol.Books.Volumes.List
+    , Gogol.Books.Volumes.Mybooks.List
+    , Gogol.Books.Volumes.Recommended.List
+    , Gogol.Books.Volumes.Recommended.Rate
+    , Gogol.Books.Volumes.Useruploaded.List
 
   other-modules:
-    Gogol.Books.Internal.Product
-    Gogol.Books.Internal.Sum
+      Gogol.Books.Internal.Product
+    , Gogol.Books.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
