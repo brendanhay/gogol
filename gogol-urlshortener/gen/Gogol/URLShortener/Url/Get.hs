@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.URLShortener.Url.Get
+-- Module      : Gogol.URLShortener.Url.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.get@.
-module Network.Google.URLShortener.Url.Get
+module Gogol.URLShortener.Url.Get
   ( -- * Resource
     URLShortenerUrlGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.URLShortener.Url.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.URLShortener.Types
+import qualified Gogol.Prelude as Core
+import Gogol.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.get@ method which the
 -- 'URLShortenerUrlGet' request conforms to.
