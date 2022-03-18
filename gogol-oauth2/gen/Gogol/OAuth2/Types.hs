@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.OAuth2.Types
+-- Module      : Gogol.OAuth2.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.OAuth2.Types
+module Gogol.OAuth2.Types
   ( -- * Configuration
     oAuth2Service,
 
@@ -46,9 +46,9 @@ module Network.Google.OAuth2.Types
   )
 where
 
-import Network.Google.OAuth2.Internal.Product
-import Network.Google.OAuth2.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.OAuth2.Internal.Product
+import Gogol.OAuth2.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
 oAuth2Service :: Core.ServiceConfig
