@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudIdentity
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,649 +30,627 @@
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference>
 module Network.Google.CloudIdentity
-    (
-    -- * Service Configuration
-      cloudIdentityService
+  ( -- * Configuration
+    cloudIdentityService,
 
     -- * OAuth Scopes
-    , cloudIdentityDevicesLookupScope
-    , cloudPlatformScope
-    , cloudIdentityGroupsReadOnlyScope
-    , cloudIdentityGroupsScope
-
-    -- * API Declaration
-    , CloudIdentityAPI
+    cloudIdentityDevicesScope,
+    cloudIdentityDevicesLookupScope,
+    cloudIdentityDevicesReadOnlyScope,
+    cloudIdentityGroupsScope,
+    cloudIdentityGroupsReadOnlyScope,
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** cloudidentity.devices.cancelWipe
-    , module Network.Google.Resource.CloudIdentity.Devices.CancelWipe
+    CloudIdentityDevicesCancelWipeResource,
+    newCloudIdentityDevicesCancelWipe,
+    CloudIdentityDevicesCancelWipe,
 
     -- ** cloudidentity.devices.create
-    , module Network.Google.Resource.CloudIdentity.Devices.Create
+    CloudIdentityDevicesCreateResource,
+    newCloudIdentityDevicesCreate,
+    CloudIdentityDevicesCreate,
 
     -- ** cloudidentity.devices.delete
-    , module Network.Google.Resource.CloudIdentity.Devices.Delete
+    CloudIdentityDevicesDeleteResource,
+    newCloudIdentityDevicesDelete,
+    CloudIdentityDevicesDelete,
 
     -- ** cloudidentity.devices.deviceUsers.approve
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Approve
+    CloudIdentityDevicesDeviceUsersApproveResource,
+    newCloudIdentityDevicesDeviceUsersApprove,
+    CloudIdentityDevicesDeviceUsersApprove,
 
     -- ** cloudidentity.devices.deviceUsers.block
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Block
+    CloudIdentityDevicesDeviceUsersBlockResource,
+    newCloudIdentityDevicesDeviceUsersBlock,
+    CloudIdentityDevicesDeviceUsersBlock,
 
     -- ** cloudidentity.devices.deviceUsers.cancelWipe
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.CancelWipe
+    CloudIdentityDevicesDeviceUsersCancelWipeResource,
+    newCloudIdentityDevicesDeviceUsersCancelWipe,
+    CloudIdentityDevicesDeviceUsersCancelWipe,
 
     -- ** cloudidentity.devices.deviceUsers.clientStates.get
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
+    CloudIdentityDevicesDeviceUsersClientStatesGetResource,
+    newCloudIdentityDevicesDeviceUsersClientStatesGet,
+    CloudIdentityDevicesDeviceUsersClientStatesGet,
 
     -- ** cloudidentity.devices.deviceUsers.clientStates.list
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.List
+    CloudIdentityDevicesDeviceUsersClientStatesListResource,
+    newCloudIdentityDevicesDeviceUsersClientStatesList,
+    CloudIdentityDevicesDeviceUsersClientStatesList,
 
     -- ** cloudidentity.devices.deviceUsers.clientStates.patch
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
+    CloudIdentityDevicesDeviceUsersClientStatesPatchResource,
+    newCloudIdentityDevicesDeviceUsersClientStatesPatch,
+    CloudIdentityDevicesDeviceUsersClientStatesPatch,
 
     -- ** cloudidentity.devices.deviceUsers.delete
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Delete
+    CloudIdentityDevicesDeviceUsersDeleteResource,
+    newCloudIdentityDevicesDeviceUsersDelete,
+    CloudIdentityDevicesDeviceUsersDelete,
 
     -- ** cloudidentity.devices.deviceUsers.get
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Get
+    CloudIdentityDevicesDeviceUsersGetResource,
+    newCloudIdentityDevicesDeviceUsersGet,
+    CloudIdentityDevicesDeviceUsersGet,
 
     -- ** cloudidentity.devices.deviceUsers.list
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.List
+    CloudIdentityDevicesDeviceUsersListResource,
+    newCloudIdentityDevicesDeviceUsersList,
+    CloudIdentityDevicesDeviceUsersList,
 
     -- ** cloudidentity.devices.deviceUsers.lookup
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Lookup
+    CloudIdentityDevicesDeviceUsersLookupResource,
+    newCloudIdentityDevicesDeviceUsersLookup,
+    CloudIdentityDevicesDeviceUsersLookup,
 
     -- ** cloudidentity.devices.deviceUsers.wipe
-    , module Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Wipe
+    CloudIdentityDevicesDeviceUsersWipeResource,
+    newCloudIdentityDevicesDeviceUsersWipe,
+    CloudIdentityDevicesDeviceUsersWipe,
 
     -- ** cloudidentity.devices.get
-    , module Network.Google.Resource.CloudIdentity.Devices.Get
+    CloudIdentityDevicesGetResource,
+    newCloudIdentityDevicesGet,
+    CloudIdentityDevicesGet,
 
     -- ** cloudidentity.devices.list
-    , module Network.Google.Resource.CloudIdentity.Devices.List
+    CloudIdentityDevicesListResource,
+    newCloudIdentityDevicesList,
+    CloudIdentityDevicesList,
 
     -- ** cloudidentity.devices.wipe
-    , module Network.Google.Resource.CloudIdentity.Devices.Wipe
+    CloudIdentityDevicesWipeResource,
+    newCloudIdentityDevicesWipe,
+    CloudIdentityDevicesWipe,
 
     -- ** cloudidentity.groups.create
-    , module Network.Google.Resource.CloudIdentity.Groups.Create
+    CloudIdentityGroupsCreateResource,
+    newCloudIdentityGroupsCreate,
+    CloudIdentityGroupsCreate,
 
     -- ** cloudidentity.groups.delete
-    , module Network.Google.Resource.CloudIdentity.Groups.Delete
+    CloudIdentityGroupsDeleteResource,
+    newCloudIdentityGroupsDelete,
+    CloudIdentityGroupsDelete,
 
     -- ** cloudidentity.groups.get
-    , module Network.Google.Resource.CloudIdentity.Groups.Get
+    CloudIdentityGroupsGetResource,
+    newCloudIdentityGroupsGet,
+    CloudIdentityGroupsGet,
+
+    -- ** cloudidentity.groups.getSecuritySettings
+    CloudIdentityGroupsGetSecuritySettingsResource,
+    newCloudIdentityGroupsGetSecuritySettings,
+    CloudIdentityGroupsGetSecuritySettings,
 
     -- ** cloudidentity.groups.list
-    , module Network.Google.Resource.CloudIdentity.Groups.List
+    CloudIdentityGroupsListResource,
+    newCloudIdentityGroupsList,
+    CloudIdentityGroupsList,
 
     -- ** cloudidentity.groups.lookup
-    , module Network.Google.Resource.CloudIdentity.Groups.Lookup
+    CloudIdentityGroupsLookupResource,
+    newCloudIdentityGroupsLookup,
+    CloudIdentityGroupsLookup,
 
     -- ** cloudidentity.groups.memberships.checkTransitiveMembership
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
+    CloudIdentityGroupsMembershipsCheckTransitiveMembershipResource,
+    newCloudIdentityGroupsMembershipsCheckTransitiveMembership,
+    CloudIdentityGroupsMembershipsCheckTransitiveMembership,
 
     -- ** cloudidentity.groups.memberships.create
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.Create
+    CloudIdentityGroupsMembershipsCreateResource,
+    newCloudIdentityGroupsMembershipsCreate,
+    CloudIdentityGroupsMembershipsCreate,
 
     -- ** cloudidentity.groups.memberships.delete
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.Delete
+    CloudIdentityGroupsMembershipsDeleteResource,
+    newCloudIdentityGroupsMembershipsDelete,
+    CloudIdentityGroupsMembershipsDelete,
 
     -- ** cloudidentity.groups.memberships.get
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.Get
+    CloudIdentityGroupsMembershipsGetResource,
+    newCloudIdentityGroupsMembershipsGet,
+    CloudIdentityGroupsMembershipsGet,
 
     -- ** cloudidentity.groups.memberships.getMembershipGraph
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.GetMembershipGraph
+    CloudIdentityGroupsMembershipsGetMembershipGraphResource,
+    newCloudIdentityGroupsMembershipsGetMembershipGraph,
+    CloudIdentityGroupsMembershipsGetMembershipGraph,
 
     -- ** cloudidentity.groups.memberships.list
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.List
+    CloudIdentityGroupsMembershipsListResource,
+    newCloudIdentityGroupsMembershipsList,
+    CloudIdentityGroupsMembershipsList,
 
     -- ** cloudidentity.groups.memberships.lookup
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.Lookup
+    CloudIdentityGroupsMembershipsLookupResource,
+    newCloudIdentityGroupsMembershipsLookup,
+    CloudIdentityGroupsMembershipsLookup,
 
     -- ** cloudidentity.groups.memberships.modifyMembershipRoles
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+    CloudIdentityGroupsMembershipsModifyMembershipRolesResource,
+    newCloudIdentityGroupsMembershipsModifyMembershipRoles,
+    CloudIdentityGroupsMembershipsModifyMembershipRoles,
 
     -- ** cloudidentity.groups.memberships.searchTransitiveGroups
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
+    CloudIdentityGroupsMembershipsSearchTransitiveGroupsResource,
+    newCloudIdentityGroupsMembershipsSearchTransitiveGroups,
+    CloudIdentityGroupsMembershipsSearchTransitiveGroups,
 
     -- ** cloudidentity.groups.memberships.searchTransitiveMemberships
-    , module Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
+    CloudIdentityGroupsMembershipsSearchTransitiveMembershipsResource,
+    newCloudIdentityGroupsMembershipsSearchTransitiveMemberships,
+    CloudIdentityGroupsMembershipsSearchTransitiveMemberships,
 
     -- ** cloudidentity.groups.patch
-    , module Network.Google.Resource.CloudIdentity.Groups.Patch
+    CloudIdentityGroupsPatchResource,
+    newCloudIdentityGroupsPatch,
+    CloudIdentityGroupsPatch,
 
     -- ** cloudidentity.groups.search
-    , module Network.Google.Resource.CloudIdentity.Groups.Search
+    CloudIdentityGroupsSearchResource,
+    newCloudIdentityGroupsSearch,
+    CloudIdentityGroupsSearch,
+
+    -- ** cloudidentity.groups.updateSecuritySettings
+    CloudIdentityGroupsUpdateSecuritySettingsResource,
+    newCloudIdentityGroupsUpdateSecuritySettings,
+    CloudIdentityGroupsUpdateSecuritySettings,
 
     -- * Types
 
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedState
-    , GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedState (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1CustomAttributeValue
-    , GoogleAppsCloudidentityDevicesV1CustomAttributeValue
-    , googleAppsCloudidentityDevicesV1CustomAttributeValue
-    , gacdvcavBoolValue
-    , gacdvcavNumberValue
-    , gacdvcavStringValue
-
-    -- ** LookupMembershipNameResponse
-    , LookupMembershipNameResponse
-    , lookupMembershipNameResponse
-    , lmnrName
-
-    -- ** DevicesListView
-    , DevicesListView (..)
-
-    -- ** SearchTransitiveGroupsResponse
-    , SearchTransitiveGroupsResponse
-    , searchTransitiveGroupsResponse
-    , stgrNextPageToken
-    , stgrMemberships
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** GoogleAppsCloudidentityDevicesV1AndroidAttributes
-    , GoogleAppsCloudidentityDevicesV1AndroidAttributes
-    , googleAppsCloudidentityDevicesV1AndroidAttributes
-    , gacdvaaOwnershipPrivilege
-    , gacdvaaOwnerProFileAccount
-    , gacdvaaEnabledUnknownSources
-    , gacdvaaSupportsWorkProFile
-
-    -- ** GroupRelationLabels
-    , GroupRelationLabels
-    , groupRelationLabels
-    , grlAddtional
-
-    -- ** GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-    , GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-    , googleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-    , gacdvlsdurNextPageToken
-    , gacdvlsdurNames
-    , gacdvlsdurCustomer
-
-    -- ** DynamicGroupMetadata
-    , DynamicGroupMetadata
-    , dynamicGroupMetadata
-    , dgmStatus
-    , dgmQueries
-
-    -- ** UserInvitationState
-    , UserInvitationState (..)
-
-    -- ** Group
-    , Group
-    , group'
-    , gParent
-    , gDynamicGroupMetadata
-    , gGroupKey
-    , gUpdateTime
-    , gName
-    , gDisplayName
-    , gLabels
-    , gDescription
-    , gCreateTime
-
-    -- ** GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
-    , GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
-    , googleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
-    , gacdvadurCustomer
-
-    -- ** GroupsMembershipsListView
-    , GroupsMembershipsListView (..)
-
-    -- ** Membership
-    , Membership
-    , membership
-    , mRoles
-    , mUpdateTime
-    , mName
-    , mPreferredMemberKey
-    , mType
-    , mCreateTime
-
-    -- ** DynamicGroupQueryResourceType
-    , DynamicGroupQueryResourceType (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
-    , GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
-    , googleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
-    , gacdvcwdurCustomer
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** ListGroupsResponse
-    , ListGroupsResponse
-    , listGroupsResponse
-    , lgrGroups
-    , lgrNextPageToken
-
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceUserManagementState
-    , GoogleAppsCloudidentityDevicesV1DeviceUserManagementState (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceCompromisedState
-    , GoogleAppsCloudidentityDevicesV1DeviceCompromisedState (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1Device
-    , GoogleAppsCloudidentityDevicesV1Device
-    , googleAppsCloudidentityDevicesV1Device
-    , gacdvdAndroidSpecificAttributes
-    , gacdvdManufacturer
-    , gacdvdAssetTag
-    , gacdvdBuildNumber
-    , gacdvdCompromisedState
-    , gacdvdEncryptionState
-    , gacdvdLastSyncTime
-    , gacdvdReleaseVersion
-    , gacdvdBrand
-    , gacdvdNetworkOperator
-    , gacdvdKernelVersion
-    , gacdvdManagementState
-    , gacdvdName
-    , gacdvdModel
-    , gacdvdEnabledUsbDebugging
-    , gacdvdMeid
-    , gacdvdBootLoaderVersion
-    , gacdvdSecurityPatchTime
-    , gacdvdImei
-    , gacdvdDeviceType
-    , gacdvdSerialNumber
-    , gacdvdEnabledDeveloperOptions
-    , gacdvdBasebandVersion
-    , gacdvdOtherAccounts
-    , gacdvdOSVersion
-    , gacdvdWifiMACAddresses
-    , gacdvdCreateTime
-    , gacdvdOwnerType
-
-    -- ** DynamicGroupQuery
-    , DynamicGroupQuery
-    , dynamicGroupQuery
-    , dgqResourceType
-    , dgqQuery
-
-    -- ** UserInvitation
-    , UserInvitation
-    , userInvitation
-    , uiState
-    , uiMailsSentCount
-    , uiUpdateTime
-    , uiName
-
-    -- ** GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilege
-    , GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilege (..)
-
-    -- ** MemberRelationRelationType
-    , MemberRelationRelationType (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceEncryptionState
-    , GoogleAppsCloudidentityDevicesV1DeviceEncryptionState (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1ClientStateManaged
-    , GoogleAppsCloudidentityDevicesV1ClientStateManaged (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest
-    , GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest
-    , googleAppsCloudidentityDevicesV1WipeDeviceUserRequest
-    , gacdvwdurCustomer
-
-    -- ** GoogleAppsCloudidentityDevicesV1ClientStateKeyValuePairs
-    , GoogleAppsCloudidentityDevicesV1ClientStateKeyValuePairs
-    , googleAppsCloudidentityDevicesV1ClientStateKeyValuePairs
-    , gacdvcskvpAddtional
-
-    -- ** GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse
-    , GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse
-    , googleAppsCloudidentityDevicesV1BlockDeviceUserResponse
-    , gacdvbdurDeviceUser
-
-    -- ** GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
-    , GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
-    , googleAppsCloudidentityDevicesV1ListDeviceUsersResponse
-    , gacdvldurNextPageToken
-    , gacdvldurDeviceUsers
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** DynamicGroupStatus
-    , DynamicGroupStatus
-    , dynamicGroupStatus
-    , dgsStatus
-    , dgsStatusTime
-
-    -- ** MembershipRole
-    , MembershipRole
-    , membershipRole
-    , mrExpiryDetail
-    , mrName
-
-    -- ** ModifyMembershipRolesResponse
-    , ModifyMembershipRolesResponse
-    , modifyMembershipRolesResponse
-    , mmrrMembership
-
-    -- ** ExpiryDetail
-    , ExpiryDetail
-    , expiryDetail
-    , edExpireTime
-
-    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
-    , GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
-    , googleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
-    , gacdvcwdrDevice
-
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceUser
-    , GoogleAppsCloudidentityDevicesV1DeviceUser
-    , googleAppsCloudidentityDevicesV1DeviceUser
-    , gacdvduLanguageCode
-    , gacdvduCompromisedState
-    , gacdvduPasswordState
-    , gacdvduLastSyncTime
-    , gacdvduManagementState
-    , gacdvduName
-    , gacdvduUserEmail
-    , gacdvduUserAgent
-    , gacdvduFirstSyncTime
-    , gacdvduCreateTime
-
-    -- ** SearchTransitiveMembershipsResponse
-    , SearchTransitiveMembershipsResponse
-    , searchTransitiveMembershipsResponse
-    , stmrNextPageToken
-    , stmrMemberships
-
-    -- ** LookupGroupNameResponse
-    , LookupGroupNameResponse
-    , lookupGroupNameResponse
-    , lgnrName
-
-    -- ** SearchGroupsResponse
-    , SearchGroupsResponse
-    , searchGroupsResponse
-    , sgrGroups
-    , sgrNextPageToken
-
-    -- ** MembershipAdjacencyList
-    , MembershipAdjacencyList
-    , membershipAdjacencyList
-    , malGroup
-    , malEdges
-
-    -- ** EntityKey
-    , EntityKey
-    , entityKey
-    , ekNamespace
-    , ekId
-
-    -- ** ModifyMembershipRolesRequest
-    , ModifyMembershipRolesRequest
-    , modifyMembershipRolesRequest
-    , mmrrAddRoles
-    , mmrrUpdateRolesParams
-    , mmrrRemoveRoles
-
-    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
-    , GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
-    , googleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
-    , gacdvcwdrCustomer
-
-    -- ** GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
-    , GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
-    , googleAppsCloudidentityDevicesV1ListClientStatesResponse
-    , gacdvlcsrNextPageToken
-    , gacdvlcsrClientStates
-
-    -- ** GoogleAppsCloudidentityDevicesV1ClientStateComplianceState
-    , GoogleAppsCloudidentityDevicesV1ClientStateComplianceState (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceManagementState
-    , GoogleAppsCloudidentityDevicesV1DeviceManagementState (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1ClientStateOwnerType
-    , GoogleAppsCloudidentityDevicesV1ClientStateOwnerType (..)
-
-    -- ** GroupRelationRelationType
-    , GroupRelationRelationType (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
-    , GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
-    , googleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
-    , gacdvcwdurDeviceUser
-
-    -- ** GroupsSearchView
-    , GroupsSearchView (..)
-
-    -- ** DynamicGroupStatusStatus
-    , DynamicGroupStatusStatus (..)
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** GoogleAppsCloudidentityDevicesV1ClientStateHealthScore
-    , GoogleAppsCloudidentityDevicesV1ClientStateHealthScore (..)
+    Xgafv (..),
 
     -- ** CheckTransitiveMembershipResponse
-    , CheckTransitiveMembershipResponse
-    , checkTransitiveMembershipResponse
-    , ctmrHasMembership
+    CheckTransitiveMembershipResponse (..),
+    newCheckTransitiveMembershipResponse,
 
-    -- ** GoogleAppsCloudidentityDevicesV1ListDevicesResponse
-    , GoogleAppsCloudidentityDevicesV1ListDevicesResponse
-    , googleAppsCloudidentityDevicesV1ListDevicesResponse
-    , gacdvldrNextPageToken
-    , gacdvldrDevices
+    -- ** CreateGroupMetadata
+    CreateGroupMetadata (..),
+    newCreateGroupMetadata,
 
-    -- ** MembershipType
-    , MembershipType (..)
+    -- ** CreateMembershipMetadata
+    CreateMembershipMetadata (..),
+    newCreateMembershipMetadata,
 
-    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
-    , GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
-    , googleAppsCloudidentityDevicesV1WipeDeviceRequest
-    , gacdvwdrCustomer
+    -- ** DeleteGroupMetadata
+    DeleteGroupMetadata (..),
+    newDeleteGroupMetadata,
 
-    -- ** GroupLabels
-    , GroupLabels
-    , groupLabels
-    , glAddtional
+    -- ** DeleteMembershipMetadata
+    DeleteMembershipMetadata (..),
+    newDeleteMembershipMetadata,
 
-    -- ** GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse
-    , GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse
-    , googleAppsCloudidentityDevicesV1ApproveDeviceUserResponse
-    , gacdvadurDeviceUser
+    -- ** DynamicGroupMetadata
+    DynamicGroupMetadata (..),
+    newDynamicGroupMetadata,
 
-    -- ** UpdateMembershipRolesParams
-    , UpdateMembershipRolesParams
-    , updateMembershipRolesParams
-    , umrpFieldMask
-    , umrpMembershipRole
+    -- ** DynamicGroupQuery
+    DynamicGroupQuery (..),
+    newDynamicGroupQuery,
 
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceDeviceType
-    , GoogleAppsCloudidentityDevicesV1DeviceDeviceType (..)
+    -- ** DynamicGroupQuery_ResourceType
+    DynamicGroupQuery_ResourceType (..),
 
-    -- ** ListMembershipsResponse
-    , ListMembershipsResponse
-    , listMembershipsResponse
-    , lmrNextPageToken
-    , lmrMemberships
+    -- ** DynamicGroupStatus
+    DynamicGroupStatus (..),
+    newDynamicGroupStatus,
 
-    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceResponse
-    , GoogleAppsCloudidentityDevicesV1WipeDeviceResponse
-    , googleAppsCloudidentityDevicesV1WipeDeviceResponse
-    , gacdvwdrDevice
+    -- ** DynamicGroupStatus_Status
+    DynamicGroupStatus_Status (..),
 
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** EntityKey
+    EntityKey (..),
+    newEntityKey,
 
-    -- ** TransitiveMembershipRole
-    , TransitiveMembershipRole
-    , transitiveMembershipRole
-    , tmrRole
+    -- ** ExpiryDetail
+    ExpiryDetail (..),
+    newExpiryDetail,
 
-    -- ** GroupsCreateInitialGroupConfig
-    , GroupsCreateInitialGroupConfig (..)
-
-    -- ** GroupsListView
-    , GroupsListView (..)
+    -- ** GetMembershipGraphMetadata
+    GetMembershipGraphMetadata (..),
+    newGetMembershipGraphMetadata,
 
     -- ** GetMembershipGraphResponse
-    , GetMembershipGraphResponse
-    , getMembershipGraphResponse
-    , gmgrGroups
-    , gmgrAdjacencyList
+    GetMembershipGraphResponse (..),
+    newGetMembershipGraphResponse,
 
-    -- ** GoogleAppsCloudidentityDevicesV1ClientState
-    , GoogleAppsCloudidentityDevicesV1ClientState
-    , googleAppsCloudidentityDevicesV1ClientState
-    , gacdvcsEtag
-    , gacdvcsKeyValuePairs
-    , gacdvcsManaged
-    , gacdvcsCustomId
-    , gacdvcsHealthScore
-    , gacdvcsScoreReason
-    , gacdvcsName
-    , gacdvcsComplianceState
-    , gacdvcsLastUpdateTime
-    , gacdvcsAssetTags
-    , gacdvcsCreateTime
-    , gacdvcsOwnerType
+    -- ** GoogleAppsCloudidentityDevicesV1AndroidAttributes
+    GoogleAppsCloudidentityDevicesV1AndroidAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1AndroidAttributes,
 
-    -- ** MemberRelation
-    , MemberRelation
-    , memberRelation
-    , mrRoles
-    , mrPreferredMemberKey
-    , mrMember
-    , mrRelationType
+    -- ** GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
+    GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege (..),
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** GoogleAppsCloudidentityDevicesV1ApproveDeviceUserMetadata
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest (..),
+    newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse (..),
+    newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata,
 
     -- ** GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest
-    , GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest
-    , googleAppsCloudidentityDevicesV1BlockDeviceUserRequest
-    , gacdvbdurCustomer
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest (..),
+    newGoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest,
+
+    -- ** GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse (..),
+    newGoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest (..),
+    newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse (..),
+    newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserMetadata
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest (..),
+    newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse (..),
+    newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ClientState
+    GoogleAppsCloudidentityDevicesV1ClientState (..),
+    newGoogleAppsCloudidentityDevicesV1ClientState,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState
+    GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1ClientState_HealthScore
+    GoogleAppsCloudidentityDevicesV1ClientState_HealthScore (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
+    GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs (..),
+    newGoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ClientState_Managed
+    GoogleAppsCloudidentityDevicesV1ClientState_Managed (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1ClientState_OwnerType
+    GoogleAppsCloudidentityDevicesV1ClientState_OwnerType (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata
+    GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1CreateDeviceMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CustomAttributeValue
+    GoogleAppsCloudidentityDevicesV1CustomAttributeValue (..),
+    newGoogleAppsCloudidentityDevicesV1CustomAttributeValue,
+
+    -- ** GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata
+    GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata
+    GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1Device
+    GoogleAppsCloudidentityDevicesV1Device (..),
+    newGoogleAppsCloudidentityDevicesV1Device,
+
+    -- ** GoogleAppsCloudidentityDevicesV1Device_CompromisedState
+    GoogleAppsCloudidentityDevicesV1Device_CompromisedState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1Device_DeviceType
+    GoogleAppsCloudidentityDevicesV1Device_DeviceType (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1Device_EncryptionState
+    GoogleAppsCloudidentityDevicesV1Device_EncryptionState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1Device_ManagementState
+    GoogleAppsCloudidentityDevicesV1Device_ManagementState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1Device_OwnerType
+    GoogleAppsCloudidentityDevicesV1Device_OwnerType (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1DeviceUser
+    GoogleAppsCloudidentityDevicesV1DeviceUser (..),
+    newGoogleAppsCloudidentityDevicesV1DeviceUser,
+
+    -- ** GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState
+    GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState
+    GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
+    GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
+    GoogleAppsCloudidentityDevicesV1ListClientStatesResponse (..),
+    newGoogleAppsCloudidentityDevicesV1ListClientStatesResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
+    GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse (..),
+    newGoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ListDevicesResponse
+    GoogleAppsCloudidentityDevicesV1ListDevicesResponse (..),
+    newGoogleAppsCloudidentityDevicesV1ListDevicesResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata
+    GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
+    GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse (..),
+    newGoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1SignoutDeviceUserMetadata
+    GoogleAppsCloudidentityDevicesV1SignoutDeviceUserMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1SignoutDeviceUserMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1UpdateClientStateMetadata
+    GoogleAppsCloudidentityDevicesV1UpdateClientStateMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1UpdateClientStateMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata
+    GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata
+    GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1WipeDeviceMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
+    GoogleAppsCloudidentityDevicesV1WipeDeviceRequest (..),
+    newGoogleAppsCloudidentityDevicesV1WipeDeviceRequest,
+
+    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceResponse
+    GoogleAppsCloudidentityDevicesV1WipeDeviceResponse (..),
+    newGoogleAppsCloudidentityDevicesV1WipeDeviceResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata (..),
+    newGoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata,
+
+    -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest (..),
+    newGoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest,
 
     -- ** GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse
-    , GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse
-    , googleAppsCloudidentityDevicesV1WipeDeviceUserResponse
-    , gacdvwdurDeviceUser
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse (..),
+    newGoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse,
 
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceUserPasswordState
-    , GoogleAppsCloudidentityDevicesV1DeviceUserPasswordState (..)
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** Group_Labels
+    Group_Labels (..),
+    newGroup_Labels,
 
     -- ** GroupRelation
-    , GroupRelation
-    , groupRelation
-    , grRoles
-    , grGroup
-    , grGroupKey
-    , grDisplayName
-    , grLabels
-    , grRelationType
+    GroupRelation (..),
+    newGroupRelation,
 
-    -- ** GoogleAppsCloudidentityDevicesV1DeviceOwnerType
-    , GoogleAppsCloudidentityDevicesV1DeviceOwnerType (..)
-    ) where
+    -- ** GroupRelation_Labels
+    GroupRelation_Labels (..),
+    newGroupRelation_Labels,
 
-import Network.Google.Prelude
+    -- ** GroupRelation_RelationType
+    GroupRelation_RelationType (..),
+
+    -- ** ListGroupsResponse
+    ListGroupsResponse (..),
+    newListGroupsResponse,
+
+    -- ** ListMembershipsResponse
+    ListMembershipsResponse (..),
+    newListMembershipsResponse,
+
+    -- ** LookupGroupNameResponse
+    LookupGroupNameResponse (..),
+    newLookupGroupNameResponse,
+
+    -- ** LookupMembershipNameResponse
+    LookupMembershipNameResponse (..),
+    newLookupMembershipNameResponse,
+
+    -- ** MemberRelation
+    MemberRelation (..),
+    newMemberRelation,
+
+    -- ** MemberRelation_RelationType
+    MemberRelation_RelationType (..),
+
+    -- ** MemberRestriction
+    MemberRestriction (..),
+    newMemberRestriction,
+
+    -- ** Membership
+    Membership (..),
+    newMembership,
+
+    -- ** Membership_Type
+    Membership_Type (..),
+
+    -- ** MembershipAdjacencyList
+    MembershipAdjacencyList (..),
+    newMembershipAdjacencyList,
+
+    -- ** MembershipRole
+    MembershipRole (..),
+    newMembershipRole,
+
+    -- ** MembershipRoleRestrictionEvaluation
+    MembershipRoleRestrictionEvaluation (..),
+    newMembershipRoleRestrictionEvaluation,
+
+    -- ** MembershipRoleRestrictionEvaluation_State
+    MembershipRoleRestrictionEvaluation_State (..),
+
+    -- ** ModifyMembershipRolesRequest
+    ModifyMembershipRolesRequest (..),
+    newModifyMembershipRolesRequest,
+
+    -- ** ModifyMembershipRolesResponse
+    ModifyMembershipRolesResponse (..),
+    newModifyMembershipRolesResponse,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** RestrictionEvaluation
+    RestrictionEvaluation (..),
+    newRestrictionEvaluation,
+
+    -- ** RestrictionEvaluation_State
+    RestrictionEvaluation_State (..),
+
+    -- ** RestrictionEvaluations
+    RestrictionEvaluations (..),
+    newRestrictionEvaluations,
+
+    -- ** SearchGroupsResponse
+    SearchGroupsResponse (..),
+    newSearchGroupsResponse,
+
+    -- ** SearchTransitiveGroupsResponse
+    SearchTransitiveGroupsResponse (..),
+    newSearchTransitiveGroupsResponse,
+
+    -- ** SearchTransitiveMembershipsResponse
+    SearchTransitiveMembershipsResponse (..),
+    newSearchTransitiveMembershipsResponse,
+
+    -- ** SecuritySettings
+    SecuritySettings (..),
+    newSecuritySettings,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TransitiveMembershipRole
+    TransitiveMembershipRole (..),
+    newTransitiveMembershipRole,
+
+    -- ** UpdateGroupMetadata
+    UpdateGroupMetadata (..),
+    newUpdateGroupMetadata,
+
+    -- ** UpdateMembershipMetadata
+    UpdateMembershipMetadata (..),
+    newUpdateMembershipMetadata,
+
+    -- ** UpdateMembershipRolesParams
+    UpdateMembershipRolesParams (..),
+    newUpdateMembershipRolesParams,
+
+    -- ** DevicesListView
+    DevicesListView (..),
+
+    -- ** GroupsCreateInitialGroupConfig
+    GroupsCreateInitialGroupConfig (..),
+
+    -- ** GroupsListView
+    GroupsListView (..),
+
+    -- ** GroupsMembershipsListView
+    GroupsMembershipsListView (..),
+
+    -- ** GroupsSearchView
+    GroupsSearchView (..),
+  )
+where
+
+import Network.Google.CloudIdentity.Devices.CancelWipe
+import Network.Google.CloudIdentity.Devices.Create
+import Network.Google.CloudIdentity.Devices.Delete
+import Network.Google.CloudIdentity.Devices.DeviceUsers.Approve
+import Network.Google.CloudIdentity.Devices.DeviceUsers.Block
+import Network.Google.CloudIdentity.Devices.DeviceUsers.CancelWipe
+import Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
+import Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.List
+import Network.Google.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
+import Network.Google.CloudIdentity.Devices.DeviceUsers.Delete
+import Network.Google.CloudIdentity.Devices.DeviceUsers.Get
+import Network.Google.CloudIdentity.Devices.DeviceUsers.List
+import Network.Google.CloudIdentity.Devices.DeviceUsers.Lookup
+import Network.Google.CloudIdentity.Devices.DeviceUsers.Wipe
+import Network.Google.CloudIdentity.Devices.Get
+import Network.Google.CloudIdentity.Devices.List
+import Network.Google.CloudIdentity.Devices.Wipe
+import Network.Google.CloudIdentity.Groups.Create
+import Network.Google.CloudIdentity.Groups.Delete
+import Network.Google.CloudIdentity.Groups.Get
+import Network.Google.CloudIdentity.Groups.GetSecuritySettings
+import Network.Google.CloudIdentity.Groups.List
+import Network.Google.CloudIdentity.Groups.Lookup
+import Network.Google.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
+import Network.Google.CloudIdentity.Groups.Memberships.Create
+import Network.Google.CloudIdentity.Groups.Memberships.Delete
+import Network.Google.CloudIdentity.Groups.Memberships.Get
+import Network.Google.CloudIdentity.Groups.Memberships.GetMembershipGraph
+import Network.Google.CloudIdentity.Groups.Memberships.List
+import Network.Google.CloudIdentity.Groups.Memberships.Lookup
+import Network.Google.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+import Network.Google.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
+import Network.Google.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
+import Network.Google.CloudIdentity.Groups.Patch
+import Network.Google.CloudIdentity.Groups.Search
+import Network.Google.CloudIdentity.Groups.UpdateSecuritySettings
 import Network.Google.CloudIdentity.Types
-import Network.Google.Resource.CloudIdentity.Devices.CancelWipe
-import Network.Google.Resource.CloudIdentity.Devices.Create
-import Network.Google.Resource.CloudIdentity.Devices.Delete
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Approve
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Block
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.CancelWipe
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.List
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Delete
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Get
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.List
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Lookup
-import Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Wipe
-import Network.Google.Resource.CloudIdentity.Devices.Get
-import Network.Google.Resource.CloudIdentity.Devices.List
-import Network.Google.Resource.CloudIdentity.Devices.Wipe
-import Network.Google.Resource.CloudIdentity.Groups.Create
-import Network.Google.Resource.CloudIdentity.Groups.Delete
-import Network.Google.Resource.CloudIdentity.Groups.Get
-import Network.Google.Resource.CloudIdentity.Groups.List
-import Network.Google.Resource.CloudIdentity.Groups.Lookup
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.Create
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.Delete
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.Get
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.GetMembershipGraph
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.List
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.Lookup
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
-import Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
-import Network.Google.Resource.CloudIdentity.Groups.Patch
-import Network.Google.Resource.CloudIdentity.Groups.Search
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Identity API service.
-type CloudIdentityAPI =
-     GroupsMembershipsSearchTransitiveGroupsResource :<|>
-       GroupsMembershipsListResource
-       :<|>
-       GroupsMembershipsSearchTransitiveMembershipsResource
-       :<|> GroupsMembershipsGetResource
-       :<|> GroupsMembershipsCreateResource
-       :<|> GroupsMembershipsLookupResource
-       :<|> GroupsMembershipsModifyMembershipRolesResource
-       :<|> GroupsMembershipsGetMembershipGraphResource
-       :<|> GroupsMembershipsDeleteResource
-       :<|>
-       GroupsMembershipsCheckTransitiveMembershipResource
-       :<|> GroupsListResource
-       :<|> GroupsPatchResource
-       :<|> GroupsGetResource
-       :<|> GroupsCreateResource
-       :<|> GroupsLookupResource
-       :<|> GroupsSearchResource
-       :<|> GroupsDeleteResource
-       :<|> DevicesDeviceUsersClientStatesListResource
-       :<|> DevicesDeviceUsersClientStatesPatchResource
-       :<|> DevicesDeviceUsersClientStatesGetResource
-       :<|> DevicesDeviceUsersListResource
-       :<|> DevicesDeviceUsersGetResource
-       :<|> DevicesDeviceUsersBlockResource
-       :<|> DevicesDeviceUsersApproveResource
-       :<|> DevicesDeviceUsersLookupResource
-       :<|> DevicesDeviceUsersCancelWipeResource
-       :<|> DevicesDeviceUsersWipeResource
-       :<|> DevicesDeviceUsersDeleteResource
-       :<|> DevicesListResource
-       :<|> DevicesGetResource
-       :<|> DevicesCreateResource
-       :<|> DevicesCancelWipeResource
-       :<|> DevicesWipeResource
-       :<|> DevicesDeleteResource
