@@ -1,206 +1,135 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AdSenseHost.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AdSenseHost.Types
-    (
-    -- * Service Configuration
-      adSenseHostService
+  ( -- * Configuration
+    adSenseHostService,
 
     -- * OAuth Scopes
-    , adSenseHostScope
+    adSenseHostScope,
 
-    -- * AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
+    -- * Types
 
-    -- * AssociationSession
-    , AssociationSession
-    , associationSession
-    , asStatus
-    , asKind
-    , asWebsiteLocale
-    , asUserLocale
-    , asAccountId
-    , asProductCodes
-    , asId
-    , asWebsiteURL
-    , asRedirectURL
+    -- ** Account
+    Account (..),
+    newAccount,
 
-    -- * AssociationSessionsStartProductCode
-    , AssociationSessionsStartProductCode (..)
+    -- ** Accounts
+    Accounts (..),
+    newAccounts,
 
-    -- * Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aKind
-    , aItems
+    -- ** AdClient
+    AdClient (..),
+    newAdClient,
 
-    -- * AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- ** AdClients
+    AdClients (..),
+    newAdClients,
 
-    -- * URLChannels
-    , URLChannels
-    , urlChannels
-    , ucEtag
-    , ucNextPageToken
-    , ucKind
-    , ucItems
+    -- ** AdCode
+    AdCode (..),
+    newAdCode,
 
-    -- * CustomChannels
-    , CustomChannels
-    , customChannels
-    , ccEtag
-    , ccNextPageToken
-    , ccKind
-    , ccItems
+    -- ** AdStyle
+    AdStyle (..),
+    newAdStyle,
 
-    -- * AdUnit
-    , AdUnit
-    , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuCustomStyle
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
+    -- ** AdStyle_Colors
+    AdStyle_Colors (..),
+    newAdStyle_Colors,
 
-    -- * Report
-    , Report
-    , report
-    , rKind
-    , rAverages
-    , rWarnings
-    , rRows
-    , rTotals
-    , rHeaders
-    , rTotalMatchedRows
+    -- ** AdStyle_Font
+    AdStyle_Font (..),
+    newAdStyle_Font,
 
-    -- * AdStyleFont
-    , AdStyleFont
-    , adStyleFont
-    , asfSize
-    , asfFamily
+    -- ** AdUnit
+    AdUnit (..),
+    newAdUnit,
 
-    -- * Account
-    , Account
-    , account
-    , accStatus
-    , accKind
-    , accName
-    , accId
+    -- ** AdUnit_ContentAdsSettings
+    AdUnit_ContentAdsSettings (..),
+    newAdUnit_ContentAdsSettings,
 
-    -- * AdUnitMobileContentAdsSettings
-    , AdUnitMobileContentAdsSettings
-    , adUnitMobileContentAdsSettings
-    , aumcasSize
-    , aumcasScriptingLanguage
-    , aumcasMarkupLanguage
-    , aumcasType
+    -- ** AdUnit_ContentAdsSettings_BackupOption
+    AdUnit_ContentAdsSettings_BackupOption (..),
+    newAdUnit_ContentAdsSettings_BackupOption,
 
-    -- * AdStyleColors
-    , AdStyleColors
-    , adStyleColors
-    , ascText
-    , ascURL
-    , ascBOrder
-    , ascTitle
-    , ascBackgRound
+    -- ** AdUnit_MobileContentAdsSettings
+    AdUnit_MobileContentAdsSettings (..),
+    newAdUnit_MobileContentAdsSettings,
 
-    -- * AdUnitContentAdsSettingsBackupOption
-    , AdUnitContentAdsSettingsBackupOption
-    , adUnitContentAdsSettingsBackupOption
-    , aucasboColor
-    , aucasboURL
-    , aucasboType
+    -- ** AdUnits
+    AdUnits (..),
+    newAdUnits,
 
-    -- * AdClient
-    , AdClient
-    , adClient
-    , adKind
-    , adArcOptIn
-    , adSupportsReporting
-    , adId
-    , adProductCode
+    -- ** AssociationSession
+    AssociationSession (..),
+    newAssociationSession,
 
-    -- * ReportHeadersItem
-    , ReportHeadersItem
-    , reportHeadersItem
-    , rhiName
-    , rhiCurrency
-    , rhiType
+    -- ** CustomChannel
+    CustomChannel (..),
+    newCustomChannel,
 
-    -- * AdStyle
-    , AdStyle
-    , adStyle
-    , assCorners
-    , assKind
-    , assFont
-    , assColors
+    -- ** CustomChannels
+    CustomChannels (..),
+    newCustomChannels,
 
-    -- * CustomChannel
-    , CustomChannel
-    , customChannel
-    , cKind
-    , cName
-    , cCode
-    , cId
+    -- ** Report
+    Report (..),
+    newReport,
 
-    -- * URLChannel
-    , URLChannel
-    , urlChannel
-    , urlcKind
-    , urlcId
-    , urlcURLPattern
+    -- ** Report_HeadersItem
+    Report_HeadersItem (..),
+    newReport_HeadersItem,
 
-    -- * AdCode
-    , AdCode
-    , adCode
-    , aaKind
-    , aaAdCode
+    -- ** UrlChannel
+    UrlChannel (..),
+    newUrlChannel,
 
-    -- * AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
-    ) where
+    -- ** UrlChannels
+    UrlChannels (..),
+    newUrlChannels,
 
-import Network.Google.AdSenseHost.Types.Product
-import Network.Google.AdSenseHost.Types.Sum
-import Network.Google.Prelude
+    -- ** AssociationsessionsStartProductCode
+    AssociationsessionsStartProductCode (..),
+  )
+where
 
--- | Default request referring to version 'v4.1' of the AdSense Host API. This contains the host and root path used as a starting point for constructing service requests.
-adSenseHostService :: ServiceConfig
-adSenseHostService
-  = defaultService (ServiceId "adsensehost:v4.1")
-      "www.googleapis.com"
+import Network.Google.AdSenseHost.Internal.Product
+import Network.Google.AdSenseHost.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v4.1@ of the AdSense Host API. This contains the host and root path used as a starting point for constructing service requests.
+adSenseHostService :: Core.ServiceConfig
+adSenseHostService =
+  Core.defaultService
+    (Core.ServiceId "adsensehost:v4.1")
+    "www.googleapis.com"
 
 -- | View and manage your AdSense host data and associated accounts
-adSenseHostScope :: Proxy '["https://www.googleapis.com/auth/adsensehost"]
-adSenseHostScope = Proxy
+adSenseHostScope :: Core.Proxy '["https://www.googleapis.com/auth/adsensehost"]
+adSenseHostScope = Core.Proxy
