@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,600 +36,600 @@
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference>
 module Gogol.FireStore
-  ( -- * Configuration
-    fireStoreService,
+    (
+    -- * Configuration
+      fireStoreService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    datastoreScope,
+    , cloudPlatformScope
+    , datastoreScope
 
     -- * Resources
 
     -- ** firestore.projects.databases.collectionGroups.fields.get
-    FireStoreProjectsDatabasesCollectionGroupsFieldsGetResource,
-    newFireStoreProjectsDatabasesCollectionGroupsFieldsGet,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsGet,
+    , FireStoreProjectsDatabasesCollectionGroupsFieldsGetResource
+    , newFireStoreProjectsDatabasesCollectionGroupsFieldsGet
+    , FireStoreProjectsDatabasesCollectionGroupsFieldsGet
 
     -- ** firestore.projects.databases.collectionGroups.fields.list
-    FireStoreProjectsDatabasesCollectionGroupsFieldsListResource,
-    newFireStoreProjectsDatabasesCollectionGroupsFieldsList,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsList,
+    , FireStoreProjectsDatabasesCollectionGroupsFieldsListResource
+    , newFireStoreProjectsDatabasesCollectionGroupsFieldsList
+    , FireStoreProjectsDatabasesCollectionGroupsFieldsList
 
     -- ** firestore.projects.databases.collectionGroups.fields.patch
-    FireStoreProjectsDatabasesCollectionGroupsFieldsPatchResource,
-    newFireStoreProjectsDatabasesCollectionGroupsFieldsPatch,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsPatch,
+    , FireStoreProjectsDatabasesCollectionGroupsFieldsPatchResource
+    , newFireStoreProjectsDatabasesCollectionGroupsFieldsPatch
+    , FireStoreProjectsDatabasesCollectionGroupsFieldsPatch
 
     -- ** firestore.projects.databases.collectionGroups.indexes.create
-    FireStoreProjectsDatabasesCollectionGroupsIndexesCreateResource,
-    newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesCreate,
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesCreateResource
+    , newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesCreate
 
     -- ** firestore.projects.databases.collectionGroups.indexes.delete
-    FireStoreProjectsDatabasesCollectionGroupsIndexesDeleteResource,
-    newFireStoreProjectsDatabasesCollectionGroupsIndexesDelete,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesDelete,
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesDeleteResource
+    , newFireStoreProjectsDatabasesCollectionGroupsIndexesDelete
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesDelete
 
     -- ** firestore.projects.databases.collectionGroups.indexes.get
-    FireStoreProjectsDatabasesCollectionGroupsIndexesGetResource,
-    newFireStoreProjectsDatabasesCollectionGroupsIndexesGet,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesGet,
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesGetResource
+    , newFireStoreProjectsDatabasesCollectionGroupsIndexesGet
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesGet
 
     -- ** firestore.projects.databases.collectionGroups.indexes.list
-    FireStoreProjectsDatabasesCollectionGroupsIndexesListResource,
-    newFireStoreProjectsDatabasesCollectionGroupsIndexesList,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesList,
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesListResource
+    , newFireStoreProjectsDatabasesCollectionGroupsIndexesList
+    , FireStoreProjectsDatabasesCollectionGroupsIndexesList
 
     -- ** firestore.projects.databases.documents.batchGet
-    FireStoreProjectsDatabasesDocumentsBatchGetResource,
-    newFireStoreProjectsDatabasesDocumentsBatchGet,
-    FireStoreProjectsDatabasesDocumentsBatchGet,
+    , FireStoreProjectsDatabasesDocumentsBatchGetResource
+    , newFireStoreProjectsDatabasesDocumentsBatchGet
+    , FireStoreProjectsDatabasesDocumentsBatchGet
 
     -- ** firestore.projects.databases.documents.batchWrite
-    FireStoreProjectsDatabasesDocumentsBatchWriteResource,
-    newFireStoreProjectsDatabasesDocumentsBatchWrite,
-    FireStoreProjectsDatabasesDocumentsBatchWrite,
+    , FireStoreProjectsDatabasesDocumentsBatchWriteResource
+    , newFireStoreProjectsDatabasesDocumentsBatchWrite
+    , FireStoreProjectsDatabasesDocumentsBatchWrite
 
     -- ** firestore.projects.databases.documents.beginTransaction
-    FireStoreProjectsDatabasesDocumentsBeginTransactionResource,
-    newFireStoreProjectsDatabasesDocumentsBeginTransaction,
-    FireStoreProjectsDatabasesDocumentsBeginTransaction,
+    , FireStoreProjectsDatabasesDocumentsBeginTransactionResource
+    , newFireStoreProjectsDatabasesDocumentsBeginTransaction
+    , FireStoreProjectsDatabasesDocumentsBeginTransaction
 
     -- ** firestore.projects.databases.documents.commit
-    FireStoreProjectsDatabasesDocumentsCommitResource,
-    newFireStoreProjectsDatabasesDocumentsCommit,
-    FireStoreProjectsDatabasesDocumentsCommit,
+    , FireStoreProjectsDatabasesDocumentsCommitResource
+    , newFireStoreProjectsDatabasesDocumentsCommit
+    , FireStoreProjectsDatabasesDocumentsCommit
 
     -- ** firestore.projects.databases.documents.createDocument
-    FireStoreProjectsDatabasesDocumentsCreateDocumentResource,
-    newFireStoreProjectsDatabasesDocumentsCreateDocument,
-    FireStoreProjectsDatabasesDocumentsCreateDocument,
+    , FireStoreProjectsDatabasesDocumentsCreateDocumentResource
+    , newFireStoreProjectsDatabasesDocumentsCreateDocument
+    , FireStoreProjectsDatabasesDocumentsCreateDocument
 
     -- ** firestore.projects.databases.documents.delete
-    FireStoreProjectsDatabasesDocumentsDeleteResource,
-    newFireStoreProjectsDatabasesDocumentsDelete,
-    FireStoreProjectsDatabasesDocumentsDelete,
+    , FireStoreProjectsDatabasesDocumentsDeleteResource
+    , newFireStoreProjectsDatabasesDocumentsDelete
+    , FireStoreProjectsDatabasesDocumentsDelete
 
     -- ** firestore.projects.databases.documents.get
-    FireStoreProjectsDatabasesDocumentsGetResource,
-    newFireStoreProjectsDatabasesDocumentsGet,
-    FireStoreProjectsDatabasesDocumentsGet,
+    , FireStoreProjectsDatabasesDocumentsGetResource
+    , newFireStoreProjectsDatabasesDocumentsGet
+    , FireStoreProjectsDatabasesDocumentsGet
 
     -- ** firestore.projects.databases.documents.list
-    FireStoreProjectsDatabasesDocumentsListResource,
-    newFireStoreProjectsDatabasesDocumentsList,
-    FireStoreProjectsDatabasesDocumentsList,
+    , FireStoreProjectsDatabasesDocumentsListResource
+    , newFireStoreProjectsDatabasesDocumentsList
+    , FireStoreProjectsDatabasesDocumentsList
 
     -- ** firestore.projects.databases.documents.listCollectionIds
-    FireStoreProjectsDatabasesDocumentsListCollectionIdsResource,
-    newFireStoreProjectsDatabasesDocumentsListCollectionIds,
-    FireStoreProjectsDatabasesDocumentsListCollectionIds,
+    , FireStoreProjectsDatabasesDocumentsListCollectionIdsResource
+    , newFireStoreProjectsDatabasesDocumentsListCollectionIds
+    , FireStoreProjectsDatabasesDocumentsListCollectionIds
 
     -- ** firestore.projects.databases.documents.listDocuments
-    FireStoreProjectsDatabasesDocumentsListDocumentsResource,
-    newFireStoreProjectsDatabasesDocumentsListDocuments,
-    FireStoreProjectsDatabasesDocumentsListDocuments,
+    , FireStoreProjectsDatabasesDocumentsListDocumentsResource
+    , newFireStoreProjectsDatabasesDocumentsListDocuments
+    , FireStoreProjectsDatabasesDocumentsListDocuments
 
     -- ** firestore.projects.databases.documents.listen
-    FireStoreProjectsDatabasesDocumentsListenResource,
-    newFireStoreProjectsDatabasesDocumentsListen,
-    FireStoreProjectsDatabasesDocumentsListen,
+    , FireStoreProjectsDatabasesDocumentsListenResource
+    , newFireStoreProjectsDatabasesDocumentsListen
+    , FireStoreProjectsDatabasesDocumentsListen
 
     -- ** firestore.projects.databases.documents.partitionQuery
-    FireStoreProjectsDatabasesDocumentsPartitionQueryResource,
-    newFireStoreProjectsDatabasesDocumentsPartitionQuery,
-    FireStoreProjectsDatabasesDocumentsPartitionQuery,
+    , FireStoreProjectsDatabasesDocumentsPartitionQueryResource
+    , newFireStoreProjectsDatabasesDocumentsPartitionQuery
+    , FireStoreProjectsDatabasesDocumentsPartitionQuery
 
     -- ** firestore.projects.databases.documents.patch
-    FireStoreProjectsDatabasesDocumentsPatchResource,
-    newFireStoreProjectsDatabasesDocumentsPatch,
-    FireStoreProjectsDatabasesDocumentsPatch,
+    , FireStoreProjectsDatabasesDocumentsPatchResource
+    , newFireStoreProjectsDatabasesDocumentsPatch
+    , FireStoreProjectsDatabasesDocumentsPatch
 
     -- ** firestore.projects.databases.documents.rollback
-    FireStoreProjectsDatabasesDocumentsRollbackResource,
-    newFireStoreProjectsDatabasesDocumentsRollback,
-    FireStoreProjectsDatabasesDocumentsRollback,
+    , FireStoreProjectsDatabasesDocumentsRollbackResource
+    , newFireStoreProjectsDatabasesDocumentsRollback
+    , FireStoreProjectsDatabasesDocumentsRollback
 
     -- ** firestore.projects.databases.documents.runQuery
-    FireStoreProjectsDatabasesDocumentsRunQueryResource,
-    newFireStoreProjectsDatabasesDocumentsRunQuery,
-    FireStoreProjectsDatabasesDocumentsRunQuery,
+    , FireStoreProjectsDatabasesDocumentsRunQueryResource
+    , newFireStoreProjectsDatabasesDocumentsRunQuery
+    , FireStoreProjectsDatabasesDocumentsRunQuery
 
     -- ** firestore.projects.databases.documents.write
-    FireStoreProjectsDatabasesDocumentsWriteResource,
-    newFireStoreProjectsDatabasesDocumentsWrite,
-    FireStoreProjectsDatabasesDocumentsWrite,
+    , FireStoreProjectsDatabasesDocumentsWriteResource
+    , newFireStoreProjectsDatabasesDocumentsWrite
+    , FireStoreProjectsDatabasesDocumentsWrite
 
     -- ** firestore.projects.databases.exportDocuments
-    FireStoreProjectsDatabasesExportDocumentsResource,
-    newFireStoreProjectsDatabasesExportDocuments,
-    FireStoreProjectsDatabasesExportDocuments,
+    , FireStoreProjectsDatabasesExportDocumentsResource
+    , newFireStoreProjectsDatabasesExportDocuments
+    , FireStoreProjectsDatabasesExportDocuments
 
     -- ** firestore.projects.databases.get
-    FireStoreProjectsDatabasesGetResource,
-    newFireStoreProjectsDatabasesGet,
-    FireStoreProjectsDatabasesGet,
+    , FireStoreProjectsDatabasesGetResource
+    , newFireStoreProjectsDatabasesGet
+    , FireStoreProjectsDatabasesGet
 
     -- ** firestore.projects.databases.importDocuments
-    FireStoreProjectsDatabasesImportDocumentsResource,
-    newFireStoreProjectsDatabasesImportDocuments,
-    FireStoreProjectsDatabasesImportDocuments,
+    , FireStoreProjectsDatabasesImportDocumentsResource
+    , newFireStoreProjectsDatabasesImportDocuments
+    , FireStoreProjectsDatabasesImportDocuments
 
     -- ** firestore.projects.databases.list
-    FireStoreProjectsDatabasesListResource,
-    newFireStoreProjectsDatabasesList,
-    FireStoreProjectsDatabasesList,
+    , FireStoreProjectsDatabasesListResource
+    , newFireStoreProjectsDatabasesList
+    , FireStoreProjectsDatabasesList
 
     -- ** firestore.projects.databases.operations.cancel
-    FireStoreProjectsDatabasesOperationsCancelResource,
-    newFireStoreProjectsDatabasesOperationsCancel,
-    FireStoreProjectsDatabasesOperationsCancel,
+    , FireStoreProjectsDatabasesOperationsCancelResource
+    , newFireStoreProjectsDatabasesOperationsCancel
+    , FireStoreProjectsDatabasesOperationsCancel
 
     -- ** firestore.projects.databases.operations.delete
-    FireStoreProjectsDatabasesOperationsDeleteResource,
-    newFireStoreProjectsDatabasesOperationsDelete,
-    FireStoreProjectsDatabasesOperationsDelete,
+    , FireStoreProjectsDatabasesOperationsDeleteResource
+    , newFireStoreProjectsDatabasesOperationsDelete
+    , FireStoreProjectsDatabasesOperationsDelete
 
     -- ** firestore.projects.databases.operations.get
-    FireStoreProjectsDatabasesOperationsGetResource,
-    newFireStoreProjectsDatabasesOperationsGet,
-    FireStoreProjectsDatabasesOperationsGet,
+    , FireStoreProjectsDatabasesOperationsGetResource
+    , newFireStoreProjectsDatabasesOperationsGet
+    , FireStoreProjectsDatabasesOperationsGet
 
     -- ** firestore.projects.databases.operations.list
-    FireStoreProjectsDatabasesOperationsListResource,
-    newFireStoreProjectsDatabasesOperationsList,
-    FireStoreProjectsDatabasesOperationsList,
+    , FireStoreProjectsDatabasesOperationsListResource
+    , newFireStoreProjectsDatabasesOperationsList
+    , FireStoreProjectsDatabasesOperationsList
 
     -- ** firestore.projects.databases.patch
-    FireStoreProjectsDatabasesPatchResource,
-    newFireStoreProjectsDatabasesPatch,
-    FireStoreProjectsDatabasesPatch,
+    , FireStoreProjectsDatabasesPatchResource
+    , newFireStoreProjectsDatabasesPatch
+    , FireStoreProjectsDatabasesPatch
 
     -- ** firestore.projects.locations.get
-    FireStoreProjectsLocationsGetResource,
-    newFireStoreProjectsLocationsGet,
-    FireStoreProjectsLocationsGet,
+    , FireStoreProjectsLocationsGetResource
+    , newFireStoreProjectsLocationsGet
+    , FireStoreProjectsLocationsGet
 
     -- ** firestore.projects.locations.list
-    FireStoreProjectsLocationsListResource,
-    newFireStoreProjectsLocationsList,
-    FireStoreProjectsLocationsList,
+    , FireStoreProjectsLocationsListResource
+    , newFireStoreProjectsLocationsList
+    , FireStoreProjectsLocationsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** ArrayValue
-    ArrayValue (..),
-    newArrayValue,
+    , ArrayValue (..)
+    , newArrayValue
 
     -- ** BatchGetDocumentsRequest
-    BatchGetDocumentsRequest (..),
-    newBatchGetDocumentsRequest,
+    , BatchGetDocumentsRequest (..)
+    , newBatchGetDocumentsRequest
 
     -- ** BatchGetDocumentsResponse
-    BatchGetDocumentsResponse (..),
-    newBatchGetDocumentsResponse,
+    , BatchGetDocumentsResponse (..)
+    , newBatchGetDocumentsResponse
 
     -- ** BatchWriteRequest
-    BatchWriteRequest (..),
-    newBatchWriteRequest,
+    , BatchWriteRequest (..)
+    , newBatchWriteRequest
 
     -- ** BatchWriteRequest_Labels
-    BatchWriteRequest_Labels (..),
-    newBatchWriteRequest_Labels,
+    , BatchWriteRequest_Labels (..)
+    , newBatchWriteRequest_Labels
 
     -- ** BatchWriteResponse
-    BatchWriteResponse (..),
-    newBatchWriteResponse,
+    , BatchWriteResponse (..)
+    , newBatchWriteResponse
 
     -- ** BeginTransactionRequest
-    BeginTransactionRequest (..),
-    newBeginTransactionRequest,
+    , BeginTransactionRequest (..)
+    , newBeginTransactionRequest
 
     -- ** BeginTransactionResponse
-    BeginTransactionResponse (..),
-    newBeginTransactionResponse,
+    , BeginTransactionResponse (..)
+    , newBeginTransactionResponse
 
     -- ** CollectionSelector
-    CollectionSelector (..),
-    newCollectionSelector,
+    , CollectionSelector (..)
+    , newCollectionSelector
 
     -- ** CommitRequest
-    CommitRequest (..),
-    newCommitRequest,
+    , CommitRequest (..)
+    , newCommitRequest
 
     -- ** CommitResponse
-    CommitResponse (..),
-    newCommitResponse,
+    , CommitResponse (..)
+    , newCommitResponse
 
     -- ** CompositeFilter
-    CompositeFilter (..),
-    newCompositeFilter,
+    , CompositeFilter (..)
+    , newCompositeFilter
 
     -- ** CompositeFilter_Op
-    CompositeFilter_Op (..),
+    , CompositeFilter_Op (..)
 
     -- ** Cursor
-    Cursor (..),
-    newCursor,
+    , Cursor (..)
+    , newCursor
 
     -- ** Document
-    Document (..),
-    newDocument,
+    , Document (..)
+    , newDocument
 
     -- ** Document_Fields
-    Document_Fields (..),
-    newDocument_Fields,
+    , Document_Fields (..)
+    , newDocument_Fields
 
     -- ** DocumentChange
-    DocumentChange (..),
-    newDocumentChange,
+    , DocumentChange (..)
+    , newDocumentChange
 
     -- ** DocumentDelete
-    DocumentDelete (..),
-    newDocumentDelete,
+    , DocumentDelete (..)
+    , newDocumentDelete
 
     -- ** DocumentMask
-    DocumentMask (..),
-    newDocumentMask,
+    , DocumentMask (..)
+    , newDocumentMask
 
     -- ** DocumentRemove
-    DocumentRemove (..),
-    newDocumentRemove,
+    , DocumentRemove (..)
+    , newDocumentRemove
 
     -- ** DocumentTransform
-    DocumentTransform (..),
-    newDocumentTransform,
+    , DocumentTransform (..)
+    , newDocumentTransform
 
     -- ** DocumentsTarget
-    DocumentsTarget (..),
-    newDocumentsTarget,
+    , DocumentsTarget (..)
+    , newDocumentsTarget
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** ExistenceFilter
-    ExistenceFilter (..),
-    newExistenceFilter,
+    , ExistenceFilter (..)
+    , newExistenceFilter
 
     -- ** FieldFilter
-    FieldFilter (..),
-    newFieldFilter,
+    , FieldFilter (..)
+    , newFieldFilter
 
     -- ** FieldFilter_Op
-    FieldFilter_Op (..),
+    , FieldFilter_Op (..)
 
     -- ** FieldReference
-    FieldReference (..),
-    newFieldReference,
+    , FieldReference (..)
+    , newFieldReference
 
     -- ** FieldTransform
-    FieldTransform (..),
-    newFieldTransform,
+    , FieldTransform (..)
+    , newFieldTransform
 
     -- ** FieldTransform_SetToServerValue
-    FieldTransform_SetToServerValue (..),
+    , FieldTransform_SetToServerValue (..)
 
     -- ** Filter
-    Filter (..),
-    newFilter,
+    , Filter (..)
+    , newFilter
 
     -- ** GoogleFirestoreAdminV1Database
-    GoogleFirestoreAdminV1Database (..),
-    newGoogleFirestoreAdminV1Database,
+    , GoogleFirestoreAdminV1Database (..)
+    , newGoogleFirestoreAdminV1Database
 
     -- ** GoogleFirestoreAdminV1Database_AppEngineIntegrationMode
-    GoogleFirestoreAdminV1Database_AppEngineIntegrationMode (..),
+    , GoogleFirestoreAdminV1Database_AppEngineIntegrationMode (..)
 
     -- ** GoogleFirestoreAdminV1Database_ConcurrencyMode
-    GoogleFirestoreAdminV1Database_ConcurrencyMode (..),
+    , GoogleFirestoreAdminV1Database_ConcurrencyMode (..)
 
     -- ** GoogleFirestoreAdminV1Database_Type
-    GoogleFirestoreAdminV1Database_Type (..),
+    , GoogleFirestoreAdminV1Database_Type (..)
 
     -- ** GoogleFirestoreAdminV1ExportDocumentsMetadata
-    GoogleFirestoreAdminV1ExportDocumentsMetadata (..),
-    newGoogleFirestoreAdminV1ExportDocumentsMetadata,
+    , GoogleFirestoreAdminV1ExportDocumentsMetadata (..)
+    , newGoogleFirestoreAdminV1ExportDocumentsMetadata
 
     -- ** GoogleFirestoreAdminV1ExportDocumentsMetadata_OperationState
-    GoogleFirestoreAdminV1ExportDocumentsMetadata_OperationState (..),
+    , GoogleFirestoreAdminV1ExportDocumentsMetadata_OperationState (..)
 
     -- ** GoogleFirestoreAdminV1ExportDocumentsRequest
-    GoogleFirestoreAdminV1ExportDocumentsRequest (..),
-    newGoogleFirestoreAdminV1ExportDocumentsRequest,
+    , GoogleFirestoreAdminV1ExportDocumentsRequest (..)
+    , newGoogleFirestoreAdminV1ExportDocumentsRequest
 
     -- ** GoogleFirestoreAdminV1ExportDocumentsResponse
-    GoogleFirestoreAdminV1ExportDocumentsResponse (..),
-    newGoogleFirestoreAdminV1ExportDocumentsResponse,
+    , GoogleFirestoreAdminV1ExportDocumentsResponse (..)
+    , newGoogleFirestoreAdminV1ExportDocumentsResponse
 
     -- ** GoogleFirestoreAdminV1Field
-    GoogleFirestoreAdminV1Field (..),
-    newGoogleFirestoreAdminV1Field,
+    , GoogleFirestoreAdminV1Field (..)
+    , newGoogleFirestoreAdminV1Field
 
     -- ** GoogleFirestoreAdminV1FieldOperationMetadata
-    GoogleFirestoreAdminV1FieldOperationMetadata (..),
-    newGoogleFirestoreAdminV1FieldOperationMetadata,
+    , GoogleFirestoreAdminV1FieldOperationMetadata (..)
+    , newGoogleFirestoreAdminV1FieldOperationMetadata
 
     -- ** GoogleFirestoreAdminV1FieldOperationMetadata_State
-    GoogleFirestoreAdminV1FieldOperationMetadata_State (..),
+    , GoogleFirestoreAdminV1FieldOperationMetadata_State (..)
 
     -- ** GoogleFirestoreAdminV1ImportDocumentsMetadata
-    GoogleFirestoreAdminV1ImportDocumentsMetadata (..),
-    newGoogleFirestoreAdminV1ImportDocumentsMetadata,
+    , GoogleFirestoreAdminV1ImportDocumentsMetadata (..)
+    , newGoogleFirestoreAdminV1ImportDocumentsMetadata
 
     -- ** GoogleFirestoreAdminV1ImportDocumentsMetadata_OperationState
-    GoogleFirestoreAdminV1ImportDocumentsMetadata_OperationState (..),
+    , GoogleFirestoreAdminV1ImportDocumentsMetadata_OperationState (..)
 
     -- ** GoogleFirestoreAdminV1ImportDocumentsRequest
-    GoogleFirestoreAdminV1ImportDocumentsRequest (..),
-    newGoogleFirestoreAdminV1ImportDocumentsRequest,
+    , GoogleFirestoreAdminV1ImportDocumentsRequest (..)
+    , newGoogleFirestoreAdminV1ImportDocumentsRequest
 
     -- ** GoogleFirestoreAdminV1Index
-    GoogleFirestoreAdminV1Index (..),
-    newGoogleFirestoreAdminV1Index,
+    , GoogleFirestoreAdminV1Index (..)
+    , newGoogleFirestoreAdminV1Index
 
     -- ** GoogleFirestoreAdminV1Index_QueryScope
-    GoogleFirestoreAdminV1Index_QueryScope (..),
+    , GoogleFirestoreAdminV1Index_QueryScope (..)
 
     -- ** GoogleFirestoreAdminV1Index_State
-    GoogleFirestoreAdminV1Index_State (..),
+    , GoogleFirestoreAdminV1Index_State (..)
 
     -- ** GoogleFirestoreAdminV1IndexConfig
-    GoogleFirestoreAdminV1IndexConfig (..),
-    newGoogleFirestoreAdminV1IndexConfig,
+    , GoogleFirestoreAdminV1IndexConfig (..)
+    , newGoogleFirestoreAdminV1IndexConfig
 
     -- ** GoogleFirestoreAdminV1IndexConfigDelta
-    GoogleFirestoreAdminV1IndexConfigDelta (..),
-    newGoogleFirestoreAdminV1IndexConfigDelta,
+    , GoogleFirestoreAdminV1IndexConfigDelta (..)
+    , newGoogleFirestoreAdminV1IndexConfigDelta
 
     -- ** GoogleFirestoreAdminV1IndexConfigDelta_ChangeType
-    GoogleFirestoreAdminV1IndexConfigDelta_ChangeType (..),
+    , GoogleFirestoreAdminV1IndexConfigDelta_ChangeType (..)
 
     -- ** GoogleFirestoreAdminV1IndexField
-    GoogleFirestoreAdminV1IndexField (..),
-    newGoogleFirestoreAdminV1IndexField,
+    , GoogleFirestoreAdminV1IndexField (..)
+    , newGoogleFirestoreAdminV1IndexField
 
     -- ** GoogleFirestoreAdminV1IndexField_ArrayConfig
-    GoogleFirestoreAdminV1IndexField_ArrayConfig (..),
+    , GoogleFirestoreAdminV1IndexField_ArrayConfig (..)
 
     -- ** GoogleFirestoreAdminV1IndexField_Order
-    GoogleFirestoreAdminV1IndexField_Order (..),
+    , GoogleFirestoreAdminV1IndexField_Order (..)
 
     -- ** GoogleFirestoreAdminV1IndexOperationMetadata
-    GoogleFirestoreAdminV1IndexOperationMetadata (..),
-    newGoogleFirestoreAdminV1IndexOperationMetadata,
+    , GoogleFirestoreAdminV1IndexOperationMetadata (..)
+    , newGoogleFirestoreAdminV1IndexOperationMetadata
 
     -- ** GoogleFirestoreAdminV1IndexOperationMetadata_State
-    GoogleFirestoreAdminV1IndexOperationMetadata_State (..),
+    , GoogleFirestoreAdminV1IndexOperationMetadata_State (..)
 
     -- ** GoogleFirestoreAdminV1ListDatabasesResponse
-    GoogleFirestoreAdminV1ListDatabasesResponse (..),
-    newGoogleFirestoreAdminV1ListDatabasesResponse,
+    , GoogleFirestoreAdminV1ListDatabasesResponse (..)
+    , newGoogleFirestoreAdminV1ListDatabasesResponse
 
     -- ** GoogleFirestoreAdminV1ListFieldsResponse
-    GoogleFirestoreAdminV1ListFieldsResponse (..),
-    newGoogleFirestoreAdminV1ListFieldsResponse,
+    , GoogleFirestoreAdminV1ListFieldsResponse (..)
+    , newGoogleFirestoreAdminV1ListFieldsResponse
 
     -- ** GoogleFirestoreAdminV1ListIndexesResponse
-    GoogleFirestoreAdminV1ListIndexesResponse (..),
-    newGoogleFirestoreAdminV1ListIndexesResponse,
+    , GoogleFirestoreAdminV1ListIndexesResponse (..)
+    , newGoogleFirestoreAdminV1ListIndexesResponse
 
     -- ** GoogleFirestoreAdminV1LocationMetadata
-    GoogleFirestoreAdminV1LocationMetadata (..),
-    newGoogleFirestoreAdminV1LocationMetadata,
+    , GoogleFirestoreAdminV1LocationMetadata (..)
+    , newGoogleFirestoreAdminV1LocationMetadata
 
     -- ** GoogleFirestoreAdminV1Progress
-    GoogleFirestoreAdminV1Progress (..),
-    newGoogleFirestoreAdminV1Progress,
+    , GoogleFirestoreAdminV1Progress (..)
+    , newGoogleFirestoreAdminV1Progress
 
     -- ** GoogleFirestoreAdminV1UpdateDatabaseMetadata
-    GoogleFirestoreAdminV1UpdateDatabaseMetadata (..),
-    newGoogleFirestoreAdminV1UpdateDatabaseMetadata,
+    , GoogleFirestoreAdminV1UpdateDatabaseMetadata (..)
+    , newGoogleFirestoreAdminV1UpdateDatabaseMetadata
 
     -- ** GoogleLongrunningCancelOperationRequest
-    GoogleLongrunningCancelOperationRequest (..),
-    newGoogleLongrunningCancelOperationRequest,
+    , GoogleLongrunningCancelOperationRequest (..)
+    , newGoogleLongrunningCancelOperationRequest
 
     -- ** GoogleLongrunningListOperationsResponse
-    GoogleLongrunningListOperationsResponse (..),
-    newGoogleLongrunningListOperationsResponse,
+    , GoogleLongrunningListOperationsResponse (..)
+    , newGoogleLongrunningListOperationsResponse
 
     -- ** GoogleLongrunningOperation
-    GoogleLongrunningOperation (..),
-    newGoogleLongrunningOperation,
+    , GoogleLongrunningOperation (..)
+    , newGoogleLongrunningOperation
 
     -- ** GoogleLongrunningOperation_Metadata
-    GoogleLongrunningOperation_Metadata (..),
-    newGoogleLongrunningOperation_Metadata,
+    , GoogleLongrunningOperation_Metadata (..)
+    , newGoogleLongrunningOperation_Metadata
 
     -- ** GoogleLongrunningOperation_Response
-    GoogleLongrunningOperation_Response (..),
-    newGoogleLongrunningOperation_Response,
+    , GoogleLongrunningOperation_Response (..)
+    , newGoogleLongrunningOperation_Response
 
     -- ** LatLng
-    LatLng (..),
-    newLatLng,
+    , LatLng (..)
+    , newLatLng
 
     -- ** ListCollectionIdsRequest
-    ListCollectionIdsRequest (..),
-    newListCollectionIdsRequest,
+    , ListCollectionIdsRequest (..)
+    , newListCollectionIdsRequest
 
     -- ** ListCollectionIdsResponse
-    ListCollectionIdsResponse (..),
-    newListCollectionIdsResponse,
+    , ListCollectionIdsResponse (..)
+    , newListCollectionIdsResponse
 
     -- ** ListDocumentsResponse
-    ListDocumentsResponse (..),
-    newListDocumentsResponse,
+    , ListDocumentsResponse (..)
+    , newListDocumentsResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** ListenRequest
-    ListenRequest (..),
-    newListenRequest,
+    , ListenRequest (..)
+    , newListenRequest
 
     -- ** ListenRequest_Labels
-    ListenRequest_Labels (..),
-    newListenRequest_Labels,
+    , ListenRequest_Labels (..)
+    , newListenRequest_Labels
 
     -- ** ListenResponse
-    ListenResponse (..),
-    newListenResponse,
+    , ListenResponse (..)
+    , newListenResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** MapValue
-    MapValue (..),
-    newMapValue,
+    , MapValue (..)
+    , newMapValue
 
     -- ** MapValue_Fields
-    MapValue_Fields (..),
-    newMapValue_Fields,
+    , MapValue_Fields (..)
+    , newMapValue_Fields
 
     -- ** Order
-    Order (..),
-    newOrder,
+    , Order (..)
+    , newOrder
 
     -- ** Order_Direction
-    Order_Direction (..),
+    , Order_Direction (..)
 
     -- ** PartitionQueryRequest
-    PartitionQueryRequest (..),
-    newPartitionQueryRequest,
+    , PartitionQueryRequest (..)
+    , newPartitionQueryRequest
 
     -- ** PartitionQueryResponse
-    PartitionQueryResponse (..),
-    newPartitionQueryResponse,
+    , PartitionQueryResponse (..)
+    , newPartitionQueryResponse
 
     -- ** Precondition
-    Precondition (..),
-    newPrecondition,
+    , Precondition (..)
+    , newPrecondition
 
     -- ** Projection
-    Projection (..),
-    newProjection,
+    , Projection (..)
+    , newProjection
 
     -- ** QueryTarget
-    QueryTarget (..),
-    newQueryTarget,
+    , QueryTarget (..)
+    , newQueryTarget
 
     -- ** ReadOnly
-    ReadOnly (..),
-    newReadOnly,
+    , ReadOnly (..)
+    , newReadOnly
 
     -- ** ReadWrite
-    ReadWrite (..),
-    newReadWrite,
+    , ReadWrite (..)
+    , newReadWrite
 
     -- ** RollbackRequest
-    RollbackRequest (..),
-    newRollbackRequest,
+    , RollbackRequest (..)
+    , newRollbackRequest
 
     -- ** RunQueryRequest
-    RunQueryRequest (..),
-    newRunQueryRequest,
+    , RunQueryRequest (..)
+    , newRunQueryRequest
 
     -- ** RunQueryResponse
-    RunQueryResponse (..),
-    newRunQueryResponse,
+    , RunQueryResponse (..)
+    , newRunQueryResponse
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** StructuredQuery
-    StructuredQuery (..),
-    newStructuredQuery,
+    , StructuredQuery (..)
+    , newStructuredQuery
 
     -- ** Target
-    Target (..),
-    newTarget,
+    , Target (..)
+    , newTarget
 
     -- ** TargetChange
-    TargetChange (..),
-    newTargetChange,
+    , TargetChange (..)
+    , newTargetChange
 
     -- ** TargetChange_TargetChangeType
-    TargetChange_TargetChangeType (..),
+    , TargetChange_TargetChangeType (..)
 
     -- ** TransactionOptions
-    TransactionOptions (..),
-    newTransactionOptions,
+    , TransactionOptions (..)
+    , newTransactionOptions
 
     -- ** UnaryFilter
-    UnaryFilter (..),
-    newUnaryFilter,
+    , UnaryFilter (..)
+    , newUnaryFilter
 
     -- ** UnaryFilter_Op
-    UnaryFilter_Op (..),
+    , UnaryFilter_Op (..)
 
     -- ** Value
-    Value (..),
-    newValue,
+    , Value (..)
+    , newValue
 
     -- ** Value_NullValue
-    Value_NullValue (..),
+    , Value_NullValue (..)
 
     -- ** Write
-    Write (..),
-    newWrite,
+    , Write (..)
+    , newWrite
 
     -- ** WriteRequest
-    WriteRequest (..),
-    newWriteRequest,
+    , WriteRequest (..)
+    , newWriteRequest
 
     -- ** WriteRequest_Labels
-    WriteRequest_Labels (..),
-    newWriteRequest_Labels,
+    , WriteRequest_Labels (..)
+    , newWriteRequest_Labels
 
     -- ** WriteResponse
-    WriteResponse (..),
-    newWriteResponse,
+    , WriteResponse (..)
+    , newWriteResponse
 
     -- ** WriteResult
-    WriteResult (..),
-    newWriteResult,
-  )
-where
+    , WriteResult (..)
+    , newWriteResult
+    ) where
 
 import Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.Get
 import Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.List
