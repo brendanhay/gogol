@@ -1,419 +1,287 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Blogger.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Blogger.Types
-    (
-    -- * Service Configuration
-      bloggerService
+  ( -- * Configuration
+    bloggerService,
 
     -- * OAuth Scopes
-    , bloggerScope
-    , bloggerReadOnlyScope
-
-    -- * PostStatus
-    , PostStatus (..)
-
-    -- * PostsListOrderBy
-    , PostsListOrderBy (..)
-
-    -- * PostsListView
-    , PostsListView (..)
-
-    -- * PageViewsGetRange
-    , PageViewsGetRange (..)
-
-    -- * PostUserInfo
-    , PostUserInfo
-    , postUserInfo
-    , puiPostUserInfo
-    , puiPost
-    , puiKind
-
-    -- * PageStatus
-    , PageStatus (..)
-
-    -- * CommentsListView
-    , CommentsListView (..)
-
-    -- * PostAuthorImage
-    , PostAuthorImage
-    , postAuthorImage
-    , paiURL
-
-    -- * PostUserInfosListStatus
-    , PostUserInfosListStatus (..)
-
-    -- * PostList
-    , PostList
-    , postList
-    , plEtag
-    , plNextPageToken
-    , plKind
-    , plItems
-    , plPrevPageToken
-
-    -- * CommentInReplyTo
-    , CommentInReplyTo
-    , commentInReplyTo
-    , cirtId
-
-    -- * CommentBlog
-    , CommentBlog
-    , commentBlog
-    , cbId
-
-    -- * PostReaderComments
-    , PostReaderComments (..)
-
-    -- * Pageviews
-    , Pageviews
-    , pageviews
-    , pKind
-    , pCounts
-    , pBlogId
-
-    -- * PostLocation
-    , PostLocation
-    , postLocation
-    , plSpan
-    , plLat
-    , plName
-    , plLng
-
-    -- * BlogPosts
-    , BlogPosts
-    , blogPosts
-    , bpTotalItems
-    , bpItems
-    , bpSelfLink
-
-    -- * PostsGetView
-    , PostsGetView (..)
-
-    -- * Post'
-    , Post'
-    , post
-    , posImages
-    , posStatus
-    , posEtag
-    , posReaderComments
-    , posLocation
-    , posKind
-    , posPublished
-    , posURL
-    , posBlog
-    , posCustomMetaData
-    , posContent
-    , posReplies
-    , posSelfLink
-    , posAuthor
-    , posId
-    , posLabels
-    , posUpdated
-    , posTitleLink
-    , posTitle
-
-    -- * PostsSearchOrderBy
-    , PostsSearchOrderBy (..)
-
-    -- * CommentsListByBlogStatus
-    , CommentsListByBlogStatus (..)
-
-    -- * PagesGetView
-    , PagesGetView (..)
-
-    -- * PostUserInfosListOrderBy
-    , PostUserInfosListOrderBy (..)
-
-    -- * Page
-    , Page
-    , page
-    , pagStatus
-    , pagEtag
-    , pagKind
-    , pagPublished
-    , pagURL
-    , pagBlog
-    , pagContent
-    , pagSelfLink
-    , pagAuthor
-    , pagId
-    , pagUpdated
-    , pagTitle
-
-    -- * BlogLocale
-    , BlogLocale
-    , blogLocale
-    , blVariant
-    , blCountry
-    , blLanguage
-
-    -- * PageAuthor
-    , PageAuthor
-    , pageAuthor
-    , paImage
-    , paURL
-    , paDisplayName
-    , paId
-
-    -- * BlogsGetView
-    , BlogsGetView (..)
-
-    -- * Blog
-    , Blog
-    , blog
-    , bStatus
-    , bKind
-    , bPages
-    , bLocale
-    , bPublished
-    , bURL
-    , bCustomMetaData
-    , bSelfLink
-    , bName
-    , bId
-    , bUpdated
-    , bPosts
-    , bDescription
-
-    -- * BlogsGetByURLView
-    , BlogsGetByURLView (..)
-
-    -- * CommentsListStatus
-    , CommentsListStatus (..)
-
-    -- * BlogPages
-    , BlogPages
-    , blogPages
-    , bpsTotalItems
-    , bpsSelfLink
-
-    -- * PostBlog
-    , PostBlog
-    , postBlog
-    , pbId
-
-    -- * BlogsListByUserStatus
-    , BlogsListByUserStatus (..)
-
-    -- * PageList
-    , PageList
-    , pageList
-    , pllEtag
-    , pllNextPageToken
-    , pllKind
-    , pllItems
-
-    -- * UserLocale
-    , UserLocale
-    , userLocale
-    , ulVariant
-    , ulCountry
-    , ulLanguage
-
-    -- * CommentAuthorImage
-    , CommentAuthorImage
-    , commentAuthorImage
-    , caiURL
-
-    -- * User
-    , User
-    , user
-    , uBlogs
-    , uKind
-    , uCreated
-    , uLocale
-    , uURL
-    , uSelfLink
-    , uAbout
-    , uDisplayName
-    , uId
-
-    -- * UserBlogs
-    , UserBlogs
-    , userBlogs
-    , ubSelfLink
-
-    -- * PostReplies
-    , PostReplies
-    , postReplies
-    , prTotalItems
-    , prItems
-    , prSelfLink
-
-    -- * BlogList
-    , BlogList
-    , blogList
-    , blKind
-    , blItems
-    , blBlogUserInfos
-
-    -- * CommentStatus
-    , CommentStatus (..)
-
-    -- * PagesListView
-    , PagesListView (..)
-
-    -- * PageviewsCountsItemTimeRange
-    , PageviewsCountsItemTimeRange (..)
-
-    -- * BlogStatus
-    , BlogStatus (..)
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * BlogPerUserInfoRole
-    , BlogPerUserInfoRole (..)
-
-    -- * PageBlog
-    , PageBlog
-    , pageBlog
-    , pId
-
-    -- * PostsListStatus
-    , PostsListStatus (..)
-
-    -- * PostAuthor
-    , PostAuthor
-    , postAuthor
-    , paaImage
-    , paaURL
-    , paaDisplayName
-    , paaId
-
-    -- * PostPerUserInfo
-    , PostPerUserInfo
-    , postPerUserInfo
-    , ppuiKind
-    , ppuiBlogId
-    , ppuiUserId
-    , ppuiHasEditAccess
-    , ppuiPostId
-
-    -- * BlogsListByUserView
-    , BlogsListByUserView (..)
-
-    -- * PageviewsCountsItem
-    , PageviewsCountsItem
-    , pageviewsCountsItem
-    , pciTimeRange
-    , pciCount
-
-    -- * PostUserInfosListView
-    , PostUserInfosListView (..)
-
-    -- * Comment
-    , Comment
-    , comment
-    , cStatus
-    , cPost
-    , cKind
-    , cPublished
-    , cBlog
-    , cContent
-    , cSelfLink
-    , cAuthor
-    , cId
-    , cUpdated
-    , cInReplyTo
-
-    -- * CommentsGetView
-    , CommentsGetView (..)
-
-    -- * CommentPost
-    , CommentPost
-    , commentPost
-    , cpId
-
-    -- * PostsGetByPathView
-    , PostsGetByPathView (..)
-
-    -- * BlogPerUserInfo
-    , BlogPerUserInfo
-    , blogPerUserInfo
-    , bpuiPhotosAlbumKey
-    , bpuiKind
-    , bpuiBlogId
-    , bpuiUserId
-    , bpuiRole
-    , bpuiHasAdminAccess
-
-    -- * PostUserInfosList
-    , PostUserInfosList
-    , postUserInfosList
-    , puilNextPageToken
-    , puilKind
-    , puilItems
-
-    -- * PagesListStatus
-    , PagesListStatus (..)
-
-    -- * CommentAuthor
-    , CommentAuthor
-    , commentAuthor
-    , caImage
-    , caURL
-    , caDisplayName
-    , caId
-
-    -- * BlogsListByUserRole
-    , BlogsListByUserRole (..)
-
-    -- * BlogUserInfo
-    , BlogUserInfo
-    , blogUserInfo
-    , buiKind
-    , buiBlog
-    , buiBlogUserInfo
-
-    -- * PageAuthorImage
-    , PageAuthorImage
-    , pageAuthorImage
-    , pURL
-
-    -- * CommentList
-    , CommentList
-    , commentList
-    , clEtag
-    , clNextPageToken
-    , clKind
-    , clItems
-    , clPrevPageToken
-
-    -- * PostImagesItem
-    , PostImagesItem
-    , postImagesItem
-    , piiURL
-    ) where
-
-import Network.Google.Blogger.Types.Product
-import Network.Google.Blogger.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v3' of the Blogger API v3. This contains the host and root path used as a starting point for constructing service requests.
-bloggerService :: ServiceConfig
-bloggerService
-  = defaultService (ServiceId "blogger:v3")
-      "blogger.googleapis.com"
+    bloggerScope,
+    bloggerReadOnlyScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** Blog
+    Blog (..),
+    newBlog,
+
+    -- ** Blog_Locale
+    Blog_Locale (..),
+    newBlog_Locale,
+
+    -- ** Blog_Pages
+    Blog_Pages (..),
+    newBlog_Pages,
+
+    -- ** Blog_Posts
+    Blog_Posts (..),
+    newBlog_Posts,
+
+    -- ** Blog_Status
+    Blog_Status (..),
+
+    -- ** BlogList
+    BlogList (..),
+    newBlogList,
+
+    -- ** BlogPerUserInfo
+    BlogPerUserInfo (..),
+    newBlogPerUserInfo,
+
+    -- ** BlogPerUserInfo_Role
+    BlogPerUserInfo_Role (..),
+
+    -- ** BlogUserInfo
+    BlogUserInfo (..),
+    newBlogUserInfo,
+
+    -- ** Comment
+    Comment (..),
+    newComment,
+
+    -- ** Comment_Author
+    Comment_Author (..),
+    newComment_Author,
+
+    -- ** Comment_Author_Image
+    Comment_Author_Image (..),
+    newComment_Author_Image,
+
+    -- ** Comment_Blog
+    Comment_Blog (..),
+    newComment_Blog,
+
+    -- ** Comment_InReplyTo
+    Comment_InReplyTo (..),
+    newComment_InReplyTo,
+
+    -- ** Comment_Post
+    Comment_Post (..),
+    newComment_Post,
+
+    -- ** Comment_Status
+    Comment_Status (..),
+
+    -- ** CommentList
+    CommentList (..),
+    newCommentList,
+
+    -- ** Page
+    Page (..),
+    newPage,
+
+    -- ** Page_Author
+    Page_Author (..),
+    newPage_Author,
+
+    -- ** Page_Author_Image
+    Page_Author_Image (..),
+    newPage_Author_Image,
+
+    -- ** Page_Blog
+    Page_Blog (..),
+    newPage_Blog,
+
+    -- ** Page_Status
+    Page_Status (..),
+
+    -- ** PageList
+    PageList (..),
+    newPageList,
+
+    -- ** Pageviews
+    Pageviews (..),
+    newPageviews,
+
+    -- ** Pageviews_CountsItem
+    Pageviews_CountsItem (..),
+    newPageviews_CountsItem,
+
+    -- ** Pageviews_CountsItem_TimeRange
+    Pageviews_CountsItem_TimeRange (..),
+
+    -- ** Post'
+    Post' (..),
+    newPost,
+
+    -- ** Post_Author
+    Post_Author (..),
+    newPost_Author,
+
+    -- ** Post_Author_Image
+    Post_Author_Image (..),
+    newPost_Author_Image,
+
+    -- ** Post_Blog
+    Post_Blog (..),
+    newPost_Blog,
+
+    -- ** Post_ImagesItem
+    Post_ImagesItem (..),
+    newPost_ImagesItem,
+
+    -- ** Post_Location
+    Post_Location (..),
+    newPost_Location,
+
+    -- ** Post_ReaderComments
+    Post_ReaderComments (..),
+
+    -- ** Post_Replies
+    Post_Replies (..),
+    newPost_Replies,
+
+    -- ** Post_Status
+    Post_Status (..),
+
+    -- ** PostList
+    PostList (..),
+    newPostList,
+
+    -- ** PostPerUserInfo
+    PostPerUserInfo (..),
+    newPostPerUserInfo,
+
+    -- ** PostUserInfo
+    PostUserInfo (..),
+    newPostUserInfo,
+
+    -- ** PostUserInfosList
+    PostUserInfosList (..),
+    newPostUserInfosList,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_Blogs
+    User_Blogs (..),
+    newUser_Blogs,
+
+    -- ** User_Locale
+    User_Locale (..),
+    newUser_Locale,
+
+    -- ** BlogsGetView
+    BlogsGetView (..),
+
+    -- ** BlogsGetByUrlView
+    BlogsGetByUrlView (..),
+
+    -- ** BlogsListByUserRole
+    BlogsListByUserRole (..),
+
+    -- ** BlogsListByUserStatus
+    BlogsListByUserStatus (..),
+
+    -- ** BlogsListByUserView
+    BlogsListByUserView (..),
+
+    -- ** CommentsGetView
+    CommentsGetView (..),
+
+    -- ** CommentsListStatus
+    CommentsListStatus (..),
+
+    -- ** CommentsListView
+    CommentsListView (..),
+
+    -- ** CommentsListByBlogStatus
+    CommentsListByBlogStatus (..),
+
+    -- ** PageViewsGetRange
+    PageViewsGetRange (..),
+
+    -- ** PagesGetView
+    PagesGetView (..),
+
+    -- ** PagesListStatus
+    PagesListStatus (..),
+
+    -- ** PagesListView
+    PagesListView (..),
+
+    -- ** PostUserInfosListOrderBy
+    PostUserInfosListOrderBy (..),
+
+    -- ** PostUserInfosListStatus
+    PostUserInfosListStatus (..),
+
+    -- ** PostUserInfosListView
+    PostUserInfosListView (..),
+
+    -- ** PostsGetView
+    PostsGetView (..),
+
+    -- ** PostsGetByPathView
+    PostsGetByPathView (..),
+
+    -- ** PostsListOrderBy
+    PostsListOrderBy (..),
+
+    -- ** PostsListStatus
+    PostsListStatus (..),
+
+    -- ** PostsListView
+    PostsListView (..),
+
+    -- ** PostsSearchOrderBy
+    PostsSearchOrderBy (..),
+  )
+where
+
+import Network.Google.Blogger.Internal.Product
+import Network.Google.Blogger.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v3@ of the Blogger API v3. This contains the host and root path used as a starting point for constructing service requests.
+bloggerService :: Core.ServiceConfig
+bloggerService =
+  Core.defaultService
+    (Core.ServiceId "blogger:v3")
+    "blogger.googleapis.com"
 
 -- | Manage your Blogger account
-bloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]
-bloggerScope = Proxy
+bloggerScope :: Core.Proxy '["https://www.googleapis.com/auth/blogger"]
+bloggerScope = Core.Proxy
 
 -- | View your Blogger account
-bloggerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
-bloggerReadOnlyScope = Proxy
+bloggerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
+bloggerReadOnlyScope = Core.Proxy
