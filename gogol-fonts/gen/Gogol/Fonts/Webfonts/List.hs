@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fonts.Webfonts.List
+-- Module      : Gogol.Fonts.Webfonts.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves the list of fonts currently served by the Google Fonts Developer API.
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Web Fonts Developer API Reference> for @webfonts.webfonts.list@.
-module Network.Google.Fonts.Webfonts.List
+module Gogol.Fonts.Webfonts.List
   ( -- * Resource
     WebfontsWebfontsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Fonts.Webfonts.List
   )
 where
 
-import Network.Google.Fonts.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Fonts.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @webfonts.webfonts.list@ method which the
 -- 'WebfontsWebfontsList' request conforms to.

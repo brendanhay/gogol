@@ -19,26 +19,15 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Fonts
+-- Module      : Gogol.Fonts.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- The Google Web Fonts Developer API lets you retrieve information about web fonts served by Google.
---
--- /See:/ <https://developers.google.com/fonts/docs/developer_api Web Fonts Developer API Reference>
-module Network.Google.Fonts
+module Gogol.Fonts.Types
   ( -- * Configuration
     fontsService,
-
-    -- * Resources
-
-    -- ** webfonts.webfonts.list
-    WebfontsWebfontsListResource,
-    newWebfontsWebfontsList,
-    WebfontsWebfontsList,
 
     -- * Types
 
@@ -62,5 +51,13 @@ module Network.Google.Fonts
   )
 where
 
-import Network.Google.Fonts.Types
-import Network.Google.Fonts.Webfonts.List
+import Gogol.Fonts.Internal.Product
+import Gogol.Fonts.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Web Fonts Developer API. This contains the host and root path used as a starting point for constructing service requests.
+fontsService :: Core.ServiceConfig
+fontsService =
+  Core.defaultService
+    (Core.ServiceId "webfonts:v1")
+    "webfonts.googleapis.com"

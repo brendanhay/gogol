@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Fonts
-    Network.Google.Fonts.Types
-    Network.Google.Fonts.Webfonts.List
+    Gogol.Fonts
+    Gogol.Fonts.Types
+    Gogol.Fonts.Webfonts.List
 
   other-modules:
-    Network.Google.Fonts.Internal.Product
-    Network.Google.Fonts.Internal.Sum
+    Gogol.Fonts.Internal.Product
+    Gogol.Fonts.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
