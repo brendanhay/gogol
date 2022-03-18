@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,137 +30,137 @@
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference>
 module Gogol.DoubleClickSearch
-    (
-    -- * Configuration
-      doubleClickSearchService
+  ( -- * Configuration
+    doubleClickSearchService,
 
     -- * OAuth Scopes
-    , doubleClickSearchScope
+    doubleClickSearchScope,
 
     -- * Resources
 
     -- ** doubleclicksearch.conversion.get
-    , DoubleClickSearchConversionGetResource
-    , newDoubleClickSearchConversionGet
-    , DoubleClickSearchConversionGet
+    DoubleClickSearchConversionGetResource,
+    newDoubleClickSearchConversionGet,
+    DoubleClickSearchConversionGet,
 
     -- ** doubleclicksearch.conversion.insert
-    , DoubleClickSearchConversionInsertResource
-    , newDoubleClickSearchConversionInsert
-    , DoubleClickSearchConversionInsert
+    DoubleClickSearchConversionInsertResource,
+    newDoubleClickSearchConversionInsert,
+    DoubleClickSearchConversionInsert,
 
     -- ** doubleclicksearch.conversion.update
-    , DoubleClickSearchConversionUpdateResource
-    , newDoubleClickSearchConversionUpdate
-    , DoubleClickSearchConversionUpdate
+    DoubleClickSearchConversionUpdateResource,
+    newDoubleClickSearchConversionUpdate,
+    DoubleClickSearchConversionUpdate,
 
     -- ** doubleclicksearch.conversion.updateAvailability
-    , DoubleClickSearchConversionUpdateAvailabilityResource
-    , newDoubleClickSearchConversionUpdateAvailability
-    , DoubleClickSearchConversionUpdateAvailability
+    DoubleClickSearchConversionUpdateAvailabilityResource,
+    newDoubleClickSearchConversionUpdateAvailability,
+    DoubleClickSearchConversionUpdateAvailability,
 
     -- ** doubleclicksearch.reports.generate
-    , DoubleClickSearchReportsGenerateResource
-    , newDoubleClickSearchReportsGenerate
-    , DoubleClickSearchReportsGenerate
+    DoubleClickSearchReportsGenerateResource,
+    newDoubleClickSearchReportsGenerate,
+    DoubleClickSearchReportsGenerate,
 
     -- ** doubleclicksearch.reports.get
-    , DoubleClickSearchReportsGetResource
-    , newDoubleClickSearchReportsGet
-    , DoubleClickSearchReportsGet
+    DoubleClickSearchReportsGetResource,
+    newDoubleClickSearchReportsGet,
+    DoubleClickSearchReportsGet,
 
     -- ** doubleclicksearch.reports.getFile
-    , DoubleClickSearchReportsGetFileResource
-    , newDoubleClickSearchReportsGetFile
-    , DoubleClickSearchReportsGetFile
+    DoubleClickSearchReportsGetFileResource,
+    newDoubleClickSearchReportsGetFile,
+    DoubleClickSearchReportsGetFile,
 
     -- ** doubleclicksearch.reports.request
-    , DoubleClickSearchReportsRequestResource
-    , newDoubleClickSearchReportsRequest
-    , DoubleClickSearchReportsRequest
+    DoubleClickSearchReportsRequestResource,
+    newDoubleClickSearchReportsRequest,
+    DoubleClickSearchReportsRequest,
 
     -- ** doubleclicksearch.savedColumns.list
-    , DoubleClickSearchSavedColumnsListResource
-    , newDoubleClickSearchSavedColumnsList
-    , DoubleClickSearchSavedColumnsList
+    DoubleClickSearchSavedColumnsListResource,
+    newDoubleClickSearchSavedColumnsList,
+    DoubleClickSearchSavedColumnsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Availability
-    , Availability (..)
-    , newAvailability
+    Availability (..),
+    newAvailability,
 
     -- ** Conversion
-    , Conversion (..)
-    , newConversion
+    Conversion (..),
+    newConversion,
 
     -- ** ConversionList
-    , ConversionList (..)
-    , newConversionList
+    ConversionList (..),
+    newConversionList,
 
     -- ** CustomDimension
-    , CustomDimension (..)
-    , newCustomDimension
+    CustomDimension (..),
+    newCustomDimension,
 
     -- ** CustomMetric
-    , CustomMetric (..)
-    , newCustomMetric
+    CustomMetric (..),
+    newCustomMetric,
 
     -- ** Report
-    , Report (..)
-    , newReport
+    Report (..),
+    newReport,
 
     -- ** Report_FilesItem
-    , Report_FilesItem (..)
-    , newReport_FilesItem
+    Report_FilesItem (..),
+    newReport_FilesItem,
 
     -- ** ReportApiColumnSpec
-    , ReportApiColumnSpec (..)
-    , newReportApiColumnSpec
+    ReportApiColumnSpec (..),
+    newReportApiColumnSpec,
 
     -- ** ReportRequest
-    , ReportRequest (..)
-    , newReportRequest
+    ReportRequest (..),
+    newReportRequest,
 
     -- ** ReportRequest_FiltersItem
-    , ReportRequest_FiltersItem (..)
-    , newReportRequest_FiltersItem
+    ReportRequest_FiltersItem (..),
+    newReportRequest_FiltersItem,
 
     -- ** ReportRequest_OrderByItem
-    , ReportRequest_OrderByItem (..)
-    , newReportRequest_OrderByItem
+    ReportRequest_OrderByItem (..),
+    newReportRequest_OrderByItem,
 
     -- ** ReportRequest_ReportScope
-    , ReportRequest_ReportScope (..)
-    , newReportRequest_ReportScope
+    ReportRequest_ReportScope (..),
+    newReportRequest_ReportScope,
 
     -- ** ReportRequest_TimeRange
-    , ReportRequest_TimeRange (..)
-    , newReportRequest_TimeRange
+    ReportRequest_TimeRange (..),
+    newReportRequest_TimeRange,
 
     -- ** ReportRow
-    , ReportRow (..)
-    , newReportRow
+    ReportRow (..),
+    newReportRow,
 
     -- ** SavedColumn
-    , SavedColumn (..)
-    , newSavedColumn
+    SavedColumn (..),
+    newSavedColumn,
 
     -- ** SavedColumnList
-    , SavedColumnList (..)
-    , newSavedColumnList
+    SavedColumnList (..),
+    newSavedColumnList,
 
     -- ** UpdateAvailabilityRequest
-    , UpdateAvailabilityRequest (..)
-    , newUpdateAvailabilityRequest
+    UpdateAvailabilityRequest (..),
+    newUpdateAvailabilityRequest,
 
     -- ** UpdateAvailabilityResponse
-    , UpdateAvailabilityResponse (..)
-    , newUpdateAvailabilityResponse
-    ) where
+    UpdateAvailabilityResponse (..),
+    newUpdateAvailabilityResponse,
+  )
+where
 
 import Gogol.DoubleClickSearch.Conversion.Get
 import Gogol.DoubleClickSearch.Conversion.Insert

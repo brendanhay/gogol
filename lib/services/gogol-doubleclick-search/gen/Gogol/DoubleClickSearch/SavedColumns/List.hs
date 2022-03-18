@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,92 +30,100 @@
 --
 -- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.savedColumns.list@.
 module Gogol.DoubleClickSearch.SavedColumns.List
-    (
-    -- * Resource
-      DoubleClickSearchSavedColumnsListResource
+  ( -- * Resource
+    DoubleClickSearchSavedColumnsListResource,
 
     -- ** Constructing a Request
-    , newDoubleClickSearchSavedColumnsList
-    , DoubleClickSearchSavedColumnsList
-    ) where
+    newDoubleClickSearchSavedColumnsList,
+    DoubleClickSearchSavedColumnsList,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DoubleClickSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @doubleclicksearch.savedColumns.list@ method which the
 -- 'DoubleClickSearchSavedColumnsList' request conforms to.
 type DoubleClickSearchSavedColumnsListResource =
-     "doubleclicksearch" Core.:>
-       "v2" Core.:>
-         "agency" Core.:>
-           Core.Capture "agencyId" Core.Int64 Core.:>
-             "advertiser" Core.:>
-               Core.Capture "advertiserId" Core.Int64 Core.:>
-                 "savedcolumns" Core.:>
-                   Core.QueryParam "$.xgafv" Xgafv Core.:>
-                     Core.QueryParam "access_token" Core.Text Core.:>
-                       Core.QueryParam "callback" Core.Text Core.:>
-                         Core.QueryParam "uploadType" Core.Text Core.:>
-                           Core.QueryParam "upload_protocol" Core.Text Core.:>
-                             Core.QueryParam "alt" Core.AltJSON Core.:>
-                               Core.Get '[Core.JSON] SavedColumnList
+  "doubleclicksearch"
+    Core.:> "v2"
+    Core.:> "agency"
+    Core.:> Core.Capture "agencyId" Core.Int64
+    Core.:> "advertiser"
+    Core.:> Core.Capture "advertiserId" Core.Int64
+    Core.:> "savedcolumns"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] SavedColumnList
 
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
 -- /See:/ 'newDoubleClickSearchSavedColumnsList' smart constructor.
 data DoubleClickSearchSavedColumnsList = DoubleClickSearchSavedColumnsList
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | DS ID of the advertiser.
-    , advertiserId :: Core.Int64
-      -- | DS ID of the agency.
-    , agencyId :: Core.Int64
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | DS ID of the advertiser.
+    advertiserId :: Core.Int64,
+    -- | DS ID of the agency.
+    agencyId :: Core.Int64,
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DoubleClickSearchSavedColumnsList' with the minimum fields required to make a request.
-newDoubleClickSearchSavedColumnsList 
-    ::  Core.Int64
-       -- ^  DS ID of the advertiser. See 'advertiserId'.
-    -> Core.Int64
-       -- ^  DS ID of the agency. See 'agencyId'.
-    -> DoubleClickSearchSavedColumnsList
+newDoubleClickSearchSavedColumnsList ::
+  -- |  DS ID of the advertiser. See 'advertiserId'.
+  Core.Int64 ->
+  -- |  DS ID of the agency. See 'agencyId'.
+  Core.Int64 ->
+  DoubleClickSearchSavedColumnsList
 newDoubleClickSearchSavedColumnsList advertiserId agencyId =
   DoubleClickSearchSavedColumnsList
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , advertiserId = advertiserId
-    , agencyId = agencyId
-    , callback = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      advertiserId = advertiserId,
+      agencyId = agencyId,
+      callback = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           DoubleClickSearchSavedColumnsList
-         where
-        type Rs DoubleClickSearchSavedColumnsList =
-             SavedColumnList
-        type Scopes DoubleClickSearchSavedColumnsList =
-             '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient DoubleClickSearchSavedColumnsList{..}
-          = go agencyId advertiserId xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              doubleClickSearchService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy DoubleClickSearchSavedColumnsListResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    DoubleClickSearchSavedColumnsList
+  where
+  type
+    Rs DoubleClickSearchSavedColumnsList =
+      SavedColumnList
+  type
+    Scopes DoubleClickSearchSavedColumnsList =
+      '["https://www.googleapis.com/auth/doubleclicksearch"]
+  requestClient DoubleClickSearchSavedColumnsList {..} =
+    go
+      agencyId
+      advertiserId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      doubleClickSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DoubleClickSearchSavedColumnsListResource
+          )
+          Core.mempty
