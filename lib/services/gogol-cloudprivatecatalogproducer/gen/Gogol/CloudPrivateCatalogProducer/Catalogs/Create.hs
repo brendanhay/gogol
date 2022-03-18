@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,94 +36,88 @@
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.create@.
 module Gogol.CloudPrivateCatalogProducer.Catalogs.Create
-  ( -- * Resource
-    CloudPrivateCatalogProducerCatalogsCreateResource,
+    (
+    -- * Resource
+      CloudPrivateCatalogProducerCatalogsCreateResource
 
     -- ** Constructing a Request
-    newCloudPrivateCatalogProducerCatalogsCreate,
-    CloudPrivateCatalogProducerCatalogsCreate,
-  )
-where
+    , newCloudPrivateCatalogProducerCatalogsCreate
+    , CloudPrivateCatalogProducerCatalogsCreate
+    ) where
 
-import Gogol.CloudPrivateCatalogProducer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudPrivateCatalogProducer.Types
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.create@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsCreate' request conforms to.
-type CloudPrivateCatalogProducerCatalogsCreateResource =
-  "v1beta1"
-    Core.:> "catalogs"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
+type CloudPrivateCatalogProducerCatalogsCreateResource
+     =
+     "v1beta1" Core.:>
+       "catalogs" Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       GoogleCloudPrivatecatalogproducerV1beta1Catalog
+                       Core.:>
+                       Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Creates a new Catalog resource.
 --
 -- /See:/ 'newCloudPrivateCatalogProducerCatalogsCreate' smart constructor.
 data CloudPrivateCatalogProducerCatalogsCreate = CloudPrivateCatalogProducerCatalogsCreate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: GoogleCloudPrivatecatalogproducerV1beta1Catalog,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: GoogleCloudPrivatecatalogproducerV1beta1Catalog
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudPrivateCatalogProducerCatalogsCreate' with the minimum fields required to make a request.
-newCloudPrivateCatalogProducerCatalogsCreate ::
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudPrivatecatalogproducerV1beta1Catalog ->
-  CloudPrivateCatalogProducerCatalogsCreate
+newCloudPrivateCatalogProducerCatalogsCreate 
+    ::  GoogleCloudPrivatecatalogproducerV1beta1Catalog
+       -- ^  Multipart request metadata. See 'payload'.
+    -> CloudPrivateCatalogProducerCatalogsCreate
 newCloudPrivateCatalogProducerCatalogsCreate payload =
   CloudPrivateCatalogProducerCatalogsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudPrivateCatalogProducerCatalogsCreate
-  where
-  type
-    Rs CloudPrivateCatalogProducerCatalogsCreate =
-      GoogleLongrunningOperation
-  type
-    Scopes CloudPrivateCatalogProducerCatalogsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    CloudPrivateCatalogProducerCatalogsCreate {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudPrivateCatalogProducerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudPrivateCatalogProducerCatalogsCreateResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudPrivateCatalogProducerCatalogsCreate
+         where
+        type Rs CloudPrivateCatalogProducerCatalogsCreate =
+             GoogleLongrunningOperation
+        type Scopes CloudPrivateCatalogProducerCatalogsCreate
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          CloudPrivateCatalogProducerCatalogsCreate{..}
+          = go xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              cloudPrivateCatalogProducerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudPrivateCatalogProducerCatalogsCreateResource)
+                      Core.mempty
+
