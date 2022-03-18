@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SourceRepo
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,250 +30,194 @@
 --
 -- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference>
 module Network.Google.SourceRepo
-    (
-    -- * Service Configuration
-      sourceRepoService
+  ( -- * Configuration
+    sourceRepoService,
 
     -- * OAuth Scopes
-    , sourceReadOnlyScope
-    , sourceFullControlScope
-    , cloudPlatformScope
-    , sourceReadWriteScope
-
-    -- * API Declaration
-    , SourceRepoAPI
+    cloudPlatformScope,
+    sourceFull_controlScope,
+    sourceRead_OnlyScope,
+    sourceRead_writeScope,
 
     -- * Resources
 
     -- ** sourcerepo.projects.getConfig
-    , module Network.Google.Resource.SourceRepo.Projects.GetConfig
+    SourceRepoProjectsGetConfigResource,
+    newSourceRepoProjectsGetConfig,
+    SourceRepoProjectsGetConfig,
 
     -- ** sourcerepo.projects.repos.create
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.Create
+    SourceRepoProjectsReposCreateResource,
+    newSourceRepoProjectsReposCreate,
+    SourceRepoProjectsReposCreate,
 
     -- ** sourcerepo.projects.repos.delete
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.Delete
+    SourceRepoProjectsReposDeleteResource,
+    newSourceRepoProjectsReposDelete,
+    SourceRepoProjectsReposDelete,
 
     -- ** sourcerepo.projects.repos.get
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.Get
+    SourceRepoProjectsReposGetResource,
+    newSourceRepoProjectsReposGet,
+    SourceRepoProjectsReposGet,
 
     -- ** sourcerepo.projects.repos.getIamPolicy
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.GetIAMPolicy
+    SourceRepoProjectsReposGetIamPolicyResource,
+    newSourceRepoProjectsReposGetIamPolicy,
+    SourceRepoProjectsReposGetIamPolicy,
 
     -- ** sourcerepo.projects.repos.list
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.List
+    SourceRepoProjectsReposListResource,
+    newSourceRepoProjectsReposList,
+    SourceRepoProjectsReposList,
 
     -- ** sourcerepo.projects.repos.patch
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.Patch
+    SourceRepoProjectsReposPatchResource,
+    newSourceRepoProjectsReposPatch,
+    SourceRepoProjectsReposPatch,
 
     -- ** sourcerepo.projects.repos.setIamPolicy
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.SetIAMPolicy
+    SourceRepoProjectsReposSetIamPolicyResource,
+    newSourceRepoProjectsReposSetIamPolicy,
+    SourceRepoProjectsReposSetIamPolicy,
 
     -- ** sourcerepo.projects.repos.sync
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.Sync
+    SourceRepoProjectsReposSyncResource,
+    newSourceRepoProjectsReposSync,
+    SourceRepoProjectsReposSync,
 
     -- ** sourcerepo.projects.repos.testIamPermissions
-    , module Network.Google.Resource.SourceRepo.Projects.Repos.TestIAMPermissions
+    SourceRepoProjectsReposTestIamPermissionsResource,
+    newSourceRepoProjectsReposTestIamPermissions,
+    SourceRepoProjectsReposTestIamPermissions,
 
     -- ** sourcerepo.projects.updateConfig
-    , module Network.Google.Resource.SourceRepo.Projects.UpdateConfig
+    SourceRepoProjectsUpdateConfigResource,
+    newSourceRepoProjectsUpdateConfig,
+    SourceRepoProjectsUpdateConfig,
 
     -- * Types
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** ProjectConfig
-    , ProjectConfig
-    , projectConfig
-    , pcPubsubConfigs
-    , pcEnablePrivateKeyCheck
-    , pcName
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListReposResponse
-    , ListReposResponse
-    , listReposResponse
-    , lrrNextPageToken
-    , lrrRepos
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** UpdateRepoRequest
-    , UpdateRepoRequest
-    , updateRepoRequest
-    , urrUpdateMask
-    , urrRepo
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** PubsubConfig
-    , PubsubConfig
-    , pubsubConfig
-    , pcTopic
-    , pcServiceAccountEmail
-    , pcMessageFormat
-
-    -- ** PubsubConfigMessageFormat
-    , PubsubConfigMessageFormat (..)
-
-    -- ** UpdateProjectConfigRequest
-    , UpdateProjectConfigRequest
-    , updateProjectConfigRequest
-    , upcrProjectConfig
-    , upcrUpdateMask
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** SyncRepoMetadata
-    , SyncRepoMetadata
-    , syncRepoMetadata
-    , srmStartTime
-    , srmUpdateTime
-    , srmName
-    , srmStatusMessage
-
-    -- ** RepoPubsubConfigs
-    , RepoPubsubConfigs
-    , repoPubsubConfigs
-    , rpcAddtional
-
-    -- ** ProjectConfigPubsubConfigs
-    , ProjectConfigPubsubConfigs
-    , projectConfigPubsubConfigs
-    , pcpcAddtional
-
-    -- ** Repo
-    , Repo
-    , repo
-    , rPubsubConfigs
-    , rSize
-    , rURL
-    , rName
-    , rMirrorConfig
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- ** MirrorConfig
-    , MirrorConfig
-    , mirrorConfig
-    , mcURL
-    , mcDeployKeyId
-    , mcWebhookId
-
-    -- ** SyncRepoRequest
-    , SyncRepoRequest
-    , syncRepoRequest
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    Binding (..),
+    newBinding,
 
-import Network.Google.Prelude
-import Network.Google.Resource.SourceRepo.Projects.GetConfig
-import Network.Google.Resource.SourceRepo.Projects.Repos.Create
-import Network.Google.Resource.SourceRepo.Projects.Repos.Delete
-import Network.Google.Resource.SourceRepo.Projects.Repos.Get
-import Network.Google.Resource.SourceRepo.Projects.Repos.GetIAMPolicy
-import Network.Google.Resource.SourceRepo.Projects.Repos.List
-import Network.Google.Resource.SourceRepo.Projects.Repos.Patch
-import Network.Google.Resource.SourceRepo.Projects.Repos.SetIAMPolicy
-import Network.Google.Resource.SourceRepo.Projects.Repos.Sync
-import Network.Google.Resource.SourceRepo.Projects.Repos.TestIAMPermissions
-import Network.Google.Resource.SourceRepo.Projects.UpdateConfig
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** ListReposResponse
+    ListReposResponse (..),
+    newListReposResponse,
+
+    -- ** MirrorConfig
+    MirrorConfig (..),
+    newMirrorConfig,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** ProjectConfig
+    ProjectConfig (..),
+    newProjectConfig,
+
+    -- ** ProjectConfig_PubsubConfigs
+    ProjectConfig_PubsubConfigs (..),
+    newProjectConfig_PubsubConfigs,
+
+    -- ** PubsubConfig
+    PubsubConfig (..),
+    newPubsubConfig,
+
+    -- ** PubsubConfig_MessageFormat
+    PubsubConfig_MessageFormat (..),
+
+    -- ** Repo
+    Repo (..),
+    newRepo,
+
+    -- ** Repo_PubsubConfigs
+    Repo_PubsubConfigs (..),
+    newRepo_PubsubConfigs,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** SyncRepoMetadata
+    SyncRepoMetadata (..),
+    newSyncRepoMetadata,
+
+    -- ** SyncRepoRequest
+    SyncRepoRequest (..),
+    newSyncRepoRequest,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** UpdateProjectConfigRequest
+    UpdateProjectConfigRequest (..),
+    newUpdateProjectConfigRequest,
+
+    -- ** UpdateRepoRequest
+    UpdateRepoRequest (..),
+    newUpdateRepoRequest,
+  )
+where
+
+import Network.Google.SourceRepo.Projects.GetConfig
+import Network.Google.SourceRepo.Projects.Repos.Create
+import Network.Google.SourceRepo.Projects.Repos.Delete
+import Network.Google.SourceRepo.Projects.Repos.Get
+import Network.Google.SourceRepo.Projects.Repos.GetIamPolicy
+import Network.Google.SourceRepo.Projects.Repos.List
+import Network.Google.SourceRepo.Projects.Repos.Patch
+import Network.Google.SourceRepo.Projects.Repos.SetIamPolicy
+import Network.Google.SourceRepo.Projects.Repos.Sync
+import Network.Google.SourceRepo.Projects.Repos.TestIamPermissions
+import Network.Google.SourceRepo.Projects.UpdateConfig
 import Network.Google.SourceRepo.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Source Repositories API service.
-type SourceRepoAPI =
-     ProjectsReposListResource :<|>
-       ProjectsReposGetIAMPolicyResource
-       :<|> ProjectsReposPatchResource
-       :<|> ProjectsReposGetResource
-       :<|> ProjectsReposCreateResource
-       :<|> ProjectsReposSetIAMPolicyResource
-       :<|> ProjectsReposSyncResource
-       :<|> ProjectsReposTestIAMPermissionsResource
-       :<|> ProjectsReposDeleteResource
-       :<|> ProjectsGetConfigResource
-       :<|> ProjectsUpdateConfigResource
