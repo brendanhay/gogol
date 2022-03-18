@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-commentanalyzer
-version:            0.5.0
-synopsis:           Google Perspective Comment Analyzer SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-commentanalyzer
+version:               0.5.0
+synopsis:              Google Perspective Comment Analyzer SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  The Perspective Comment Analyzer API provides information about the potential impact of a comment on a conversation (e.g. it can provide a score for the \"toxicity\" of a comment). Users can leverage the \"SuggestCommentScore\" method to submit corrections to improve Perspective over time. Users can set the \"doNotStore\" flag to ensure that all submitted comments are automatically deleted after scores are returned.
+    The Perspective Comment Analyzer API provides information about the potential impact of a comment on a conversation (e.g. it can provide a score for the \"toxicity\" of a comment). Users can leverage the \"SuggestCommentScore\" method to submit corrections to improve Perspective over time. Users can set the \"doNotStore\" flag to ensure that all submitted comments are automatically deleted after scores are returned.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -31,29 +28,32 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default:     True
+  default: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (flag(no-field-selectors) && impl(ghc >=9.1))
+  if flag(no-field-selectors) && impl(ghc >= 9.1)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.CommentAnalyzer
-    Gogol.CommentAnalyzer.Comments.Analyze
-    Gogol.CommentAnalyzer.Comments.Suggestscore
-    Gogol.CommentAnalyzer.Types
+      Gogol.CommentAnalyzer
+    , Gogol.CommentAnalyzer.Comments.Analyze
+    , Gogol.CommentAnalyzer.Comments.Suggestscore
+    , Gogol.CommentAnalyzer.Types
 
   other-modules:
-    Gogol.CommentAnalyzer.Internal.Product
-    Gogol.CommentAnalyzer.Internal.Sum
+      Gogol.CommentAnalyzer.Internal.Product
+    , Gogol.CommentAnalyzer.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  >=0.5.0 && <0.5.1
+      gogol-core == 0.5.0.*
+    , base       >= 4.12 && < 5
