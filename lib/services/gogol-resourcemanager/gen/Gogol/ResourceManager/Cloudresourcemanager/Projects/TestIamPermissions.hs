@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +36,98 @@
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.testIamPermissions@.
 module Gogol.ResourceManager.Cloudresourcemanager.Projects.TestIamPermissions
-  ( -- * Resource
-    CloudresourcemanagerProjectsTestIamPermissionsResource,
+    (
+    -- * Resource
+      CloudresourcemanagerProjectsTestIamPermissionsResource
 
     -- ** Constructing a Request
-    newCloudresourcemanagerProjectsTestIamPermissions,
-    CloudresourcemanagerProjectsTestIamPermissions,
-  )
-where
+    , newCloudresourcemanagerProjectsTestIamPermissions
+    , CloudresourcemanagerProjectsTestIamPermissions
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.testIamPermissions@ method which the
 -- 'CloudresourcemanagerProjectsTestIamPermissions' request conforms to.
-type CloudresourcemanagerProjectsTestIamPermissionsResource =
-  "v3"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
-    Core.:> Core.Post '[Core.JSON] TestIamPermissionsResponse
+type CloudresourcemanagerProjectsTestIamPermissionsResource
+     =
+     "v3" Core.:>
+       Core.CaptureMode "resource" "testIamPermissions"
+         Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
+                       Core.:>
+                       Core.Post '[Core.JSON] TestIamPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified project, in the format @projects\/{ProjectIdOrNumber}@ e.g. projects\/123..
 --
 -- /See:/ 'newCloudresourcemanagerProjectsTestIamPermissions' smart constructor.
 data CloudresourcemanagerProjectsTestIamPermissions = CloudresourcemanagerProjectsTestIamPermissions
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: TestIamPermissionsRequest,
-    -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: TestIamPermissionsRequest
+      -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudresourcemanagerProjectsTestIamPermissions' with the minimum fields required to make a request.
-newCloudresourcemanagerProjectsTestIamPermissions ::
-  -- |  Multipart request metadata. See 'payload'.
-  TestIamPermissionsRequest ->
-  -- |  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  CloudresourcemanagerProjectsTestIamPermissions
+newCloudresourcemanagerProjectsTestIamPermissions 
+    ::  TestIamPermissionsRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> CloudresourcemanagerProjectsTestIamPermissions
 newCloudresourcemanagerProjectsTestIamPermissions payload resource =
   CloudresourcemanagerProjectsTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerProjectsTestIamPermissions
-  where
-  type
-    Rs
-      CloudresourcemanagerProjectsTestIamPermissions =
-      TestIamPermissionsResponse
-  type
-    Scopes
-      CloudresourcemanagerProjectsTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
-  requestClient
-    CloudresourcemanagerProjectsTestIamPermissions {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        resourceManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudresourcemanagerProjectsTestIamPermissionsResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudresourcemanagerProjectsTestIamPermissions
+         where
+        type Rs
+               CloudresourcemanagerProjectsTestIamPermissions
+             = TestIamPermissionsResponse
+        type Scopes
+               CloudresourcemanagerProjectsTestIamPermissions
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient
+          CloudresourcemanagerProjectsTestIamPermissions{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              resourceManagerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudresourcemanagerProjectsTestIamPermissionsResource)
+                      Core.mempty
+
