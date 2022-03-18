@@ -1,104 +1,112 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DigitalAssetLinks
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Discovers relationships between online assets such as websites or mobile
--- apps.
+-- Discovers relationships between online assets such as websites or mobile apps.
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference>
 module Network.Google.DigitalAssetLinks
-    (
-    -- * Service Configuration
-      digitalAssetLinksService
-
-    -- * API Declaration
-    , DigitalAssetLinksAPI
+  ( -- * Configuration
+    digitalAssetLinksService,
 
     -- * Resources
 
+    -- ** digitalassetlinks.assetlinks.bulkCheck
+    DigitalAssetLinksAssetlinksBulkCheckResource,
+    newDigitalAssetLinksAssetlinksBulkCheck,
+    DigitalAssetLinksAssetlinksBulkCheck,
+
     -- ** digitalassetlinks.assetlinks.check
-    , module Network.Google.Resource.DigitalAssetLinks.Assetlinks.Check
+    DigitalAssetLinksAssetlinksCheckResource,
+    newDigitalAssetLinksAssetlinksCheck,
+    DigitalAssetLinksAssetlinksCheck,
 
     -- ** digitalassetlinks.statements.list
-    , module Network.Google.Resource.DigitalAssetLinks.Statements.List
+    DigitalAssetLinksStatementsListResource,
+    newDigitalAssetLinksStatementsList,
+    DigitalAssetLinksStatementsList,
 
     -- * Types
 
+    -- ** Xgafv
+    Xgafv (..),
+
     -- ** AndroidAppAsset
-    , AndroidAppAsset
-    , androidAppAsset
-    , aaaPackageName
-    , aaaCertificate
-
-    -- ** Statement
-    , Statement
-    , statement
-    , sRelation
-    , sSource
-    , sTarget
-
-    -- ** CheckResponseErrorCodeItem
-    , CheckResponseErrorCodeItem (..)
+    AndroidAppAsset (..),
+    newAndroidAppAsset,
 
     -- ** Asset
-    , Asset
-    , asset
-    , aAndroidApp
-    , aWeb
+    Asset (..),
+    newAsset,
 
-    -- ** ListResponse
-    , ListResponse
-    , listResponse
-    , lrDebugString
-    , lrMaxAge
-    , lrErrorCode
-    , lrStatements
+    -- ** BulkCheckRequest
+    BulkCheckRequest (..),
+    newBulkCheckRequest,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** BulkCheckResponse
+    BulkCheckResponse (..),
+    newBulkCheckResponse,
 
-    -- ** CheckResponse
-    , CheckResponse
-    , checkResponse
-    , crDebugString
-    , crMaxAge
-    , crErrorCode
-    , crLinked
-
-    -- ** WebAsset
-    , WebAsset
-    , webAsset
-    , waSite
+    -- ** BulkCheckResponse_BulkErrorCode
+    BulkCheckResponse_BulkErrorCode (..),
 
     -- ** CertificateInfo
-    , CertificateInfo
-    , certificateInfo
-    , ciSha256Fingerprint
+    CertificateInfo (..),
+    newCertificateInfo,
 
-    -- ** ListResponseErrorCodeItem
-    , ListResponseErrorCodeItem (..)
-    ) where
+    -- ** CheckResponse
+    CheckResponse (..),
+    newCheckResponse,
 
-import Network.Google.Prelude
+    -- ** CheckResponse_ErrorCodeItem
+    CheckResponse_ErrorCodeItem (..),
+
+    -- ** ListResponse
+    ListResponse (..),
+    newListResponse,
+
+    -- ** ListResponse_ErrorCodeItem
+    ListResponse_ErrorCodeItem (..),
+
+    -- ** Statement
+    Statement (..),
+    newStatement,
+
+    -- ** StatementTemplate
+    StatementTemplate (..),
+    newStatementTemplate,
+
+    -- ** WebAsset
+    WebAsset (..),
+    newWebAsset,
+  )
+where
+
+import Network.Google.DigitalAssetLinks.Assetlinks.BulkCheck
+import Network.Google.DigitalAssetLinks.Assetlinks.Check
+import Network.Google.DigitalAssetLinks.Statements.List
 import Network.Google.DigitalAssetLinks.Types
-import Network.Google.Resource.DigitalAssetLinks.Assetlinks.Check
-import Network.Google.Resource.DigitalAssetLinks.Statements.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Digital Asset Links API service.
-type DigitalAssetLinksAPI =
-     AssetlinksCheckResource :<|> StatementsListResource
