@@ -39,40 +39,41 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudIOT
-    Network.Google.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
-    Network.Google.CloudIOT.Projects.Locations.Registries.Create
-    Network.Google.CloudIOT.Projects.Locations.Registries.Delete
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Create
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Delete
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Get
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.List
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.Patch
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
-    Network.Google.CloudIOT.Projects.Locations.Registries.Devices.States.List
-    Network.Google.CloudIOT.Projects.Locations.Registries.Get
-    Network.Google.CloudIOT.Projects.Locations.Registries.GetIamPolicy
-    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
-    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
-    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.SetIamPolicy
-    Network.Google.CloudIOT.Projects.Locations.Registries.Groups.TestIamPermissions
-    Network.Google.CloudIOT.Projects.Locations.Registries.List
-    Network.Google.CloudIOT.Projects.Locations.Registries.Patch
-    Network.Google.CloudIOT.Projects.Locations.Registries.SetIamPolicy
-    Network.Google.CloudIOT.Projects.Locations.Registries.TestIamPermissions
-    Network.Google.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
-    Network.Google.CloudIOT.Types
+    Gogol.CloudIOT
+    Gogol.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
+    Gogol.CloudIOT.Projects.Locations.Registries.Create
+    Gogol.CloudIOT.Projects.Locations.Registries.Delete
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Create
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Delete
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Get
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceConfig
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.Patch
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
+    Gogol.CloudIOT.Projects.Locations.Registries.Devices.States.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Get
+    Gogol.CloudIOT.Projects.Locations.Registries.GetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.SetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.Groups.TestIamPermissions
+    Gogol.CloudIOT.Projects.Locations.Registries.List
+    Gogol.CloudIOT.Projects.Locations.Registries.Patch
+    Gogol.CloudIOT.Projects.Locations.Registries.SetIamPolicy
+    Gogol.CloudIOT.Projects.Locations.Registries.TestIamPermissions
+    Gogol.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
+    Gogol.CloudIOT.Types
 
   other-modules:
-    Network.Google.CloudIOT.Internal.Product
-    Network.Google.CloudIOT.Internal.Sum
+    Gogol.CloudIOT.Internal.Product
+    Gogol.CloudIOT.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
