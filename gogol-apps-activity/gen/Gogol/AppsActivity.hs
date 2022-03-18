@@ -19,18 +19,29 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsActivity.Types
+-- Module      : Gogol.AppsActivity
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsActivity.Types
+--
+-- Provides a historical view of activity.
+--
+-- /See:/ <https://developers.google.com/google-apps/activity/ Drive Activity API Reference>
+module Gogol.AppsActivity
   ( -- * Configuration
     appsActivityService,
 
     -- * OAuth Scopes
     activityScope,
+
+    -- * Resources
+
+    -- ** appsactivity.activities.list
+    AppsActivityActivitiesListResource,
+    newAppsActivityActivitiesList,
+    AppsActivityActivitiesList,
 
     -- * Types
 
@@ -95,17 +106,5 @@ module Network.Google.AppsActivity.Types
   )
 where
 
-import Network.Google.AppsActivity.Internal.Product
-import Network.Google.AppsActivity.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
-appsActivityService :: Core.ServiceConfig
-appsActivityService =
-  Core.defaultService
-    (Core.ServiceId "appsactivity:v1")
-    "www.googleapis.com"
-
--- | View the activity history of your Google apps
-activityScope :: Core.Proxy '["https://www.googleapis.com/auth/activity"]
-activityScope = Core.Proxy
+import Gogol.AppsActivity.Activities.List
+import Gogol.AppsActivity.Types

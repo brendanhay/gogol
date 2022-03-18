@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsActivity.Internal.Sum
+-- Module      : Gogol.AppsActivity.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsActivity.Internal.Sum
+module Gogol.AppsActivity.Internal.Sum
   ( -- * Event_AdditionalEventTypesItem
     Event_AdditionalEventTypesItem
       ( Event_AdditionalEventTypesItem_Comment,
@@ -87,7 +87,7 @@ module Network.Google.AppsActivity.Internal.Sum
   )
 where
 
-import qualified Network.Google.Prelude as Core
+import qualified Gogol.Prelude as Core
 
 newtype Event_AdditionalEventTypesItem = Event_AdditionalEventTypesItem {fromEvent_AdditionalEventTypesItem :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)

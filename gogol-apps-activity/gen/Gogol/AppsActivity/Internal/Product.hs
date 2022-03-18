@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsActivity.Internal.Product
+-- Module      : Gogol.AppsActivity.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppsActivity.Internal.Product
+module Gogol.AppsActivity.Internal.Product
   ( -- * Activity
     Activity (..),
     newActivity,
@@ -72,8 +72,8 @@ module Network.Google.AppsActivity.Internal.Product
   )
 where
 
-import Network.Google.AppsActivity.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsActivity.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | An Activity resource is a combined view of multiple events. An activity has a list of individual events and a combined view of the common fields among all events.
 --

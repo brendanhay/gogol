@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AppsActivity
-    Network.Google.AppsActivity.Activities.List
-    Network.Google.AppsActivity.Types
+    Gogol.AppsActivity
+    Gogol.AppsActivity.Activities.List
+    Gogol.AppsActivity.Types
 
   other-modules:
-    Network.Google.AppsActivity.Internal.Product
-    Network.Google.AppsActivity.Internal.Sum
+    Gogol.AppsActivity.Internal.Product
+    Gogol.AppsActivity.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
