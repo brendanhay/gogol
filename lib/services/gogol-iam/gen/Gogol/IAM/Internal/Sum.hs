@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.IAM.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -55,8 +44,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * BindingDelta_Action
     BindingDelta_Action
-      (
-        BindingDelta_Action_ACTIONUNSPECIFIED,
+      ( BindingDelta_Action_ACTIONUNSPECIFIED,
         BindingDelta_Action_Add,
         BindingDelta_Action_Remove,
         ..
@@ -64,8 +52,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * CreateServiceAccountKeyRequest_KeyAlgorithm
     CreateServiceAccountKeyRequest_KeyAlgorithm
-      (
-        CreateServiceAccountKeyRequest_KeyAlgorithm_KEYALGUNSPECIFIED,
+      ( CreateServiceAccountKeyRequest_KeyAlgorithm_KEYALGUNSPECIFIED,
         CreateServiceAccountKeyRequest_KeyAlgorithm_KEY_ALG_RSA_1024,
         CreateServiceAccountKeyRequest_KeyAlgorithm_KEY_ALG_RSA_2048,
         ..
@@ -73,8 +60,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * CreateServiceAccountKeyRequest_PrivateKeyType
     CreateServiceAccountKeyRequest_PrivateKeyType
-      (
-        CreateServiceAccountKeyRequest_PrivateKeyType_TYPEUNSPECIFIED,
+      ( CreateServiceAccountKeyRequest_PrivateKeyType_TYPEUNSPECIFIED,
         CreateServiceAccountKeyRequest_PrivateKeyType_TYPEPKCS12FILE,
         CreateServiceAccountKeyRequest_PrivateKeyType_TYPEGOOGLECREDENTIALSFILE,
         ..
@@ -82,16 +68,14 @@ module Gogol.IAM.Internal.Sum
 
     -- * LintResult_Level
     LintResult_Level
-      (
-        LintResult_Level_LEVELUNSPECIFIED,
+      ( LintResult_Level_LEVELUNSPECIFIED,
         LintResult_Level_Condition,
         ..
       ),
 
     -- * LintResult_Severity
     LintResult_Severity
-      (
-        LintResult_Severity_SEVERITYUNSPECIFIED,
+      ( LintResult_Severity_SEVERITYUNSPECIFIED,
         LintResult_Severity_Error',
         LintResult_Severity_Warning,
         LintResult_Severity_Notice,
@@ -102,8 +86,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * Permission_CustomRolesSupportLevel
     Permission_CustomRolesSupportLevel
-      (
-        Permission_CustomRolesSupportLevel_Supported,
+      ( Permission_CustomRolesSupportLevel_Supported,
         Permission_CustomRolesSupportLevel_Testing,
         Permission_CustomRolesSupportLevel_NOTSUPPORTED,
         ..
@@ -111,8 +94,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * Permission_Stage
     Permission_Stage
-      (
-        Permission_Stage_Alpha,
+      ( Permission_Stage_Alpha,
         Permission_Stage_Beta,
         Permission_Stage_GA,
         Permission_Stage_Deprecated,
@@ -121,16 +103,14 @@ module Gogol.IAM.Internal.Sum
 
     -- * QueryGrantableRolesRequest_View
     QueryGrantableRolesRequest_View
-      (
-        QueryGrantableRolesRequest_View_Basic,
+      ( QueryGrantableRolesRequest_View_Basic,
         QueryGrantableRolesRequest_View_Full,
         ..
       ),
 
     -- * Role_Stage
     Role_Stage
-      (
-        Role_Stage_Alpha,
+      ( Role_Stage_Alpha,
         Role_Stage_Beta,
         Role_Stage_GA,
         Role_Stage_Deprecated,
@@ -141,8 +121,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * ServiceAccountKey_KeyAlgorithm
     ServiceAccountKey_KeyAlgorithm
-      (
-        ServiceAccountKey_KeyAlgorithm_KEYALGUNSPECIFIED,
+      ( ServiceAccountKey_KeyAlgorithm_KEYALGUNSPECIFIED,
         ServiceAccountKey_KeyAlgorithm_KEY_ALG_RSA_1024,
         ServiceAccountKey_KeyAlgorithm_KEY_ALG_RSA_2048,
         ..
@@ -150,8 +129,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * ServiceAccountKey_KeyOrigin
     ServiceAccountKey_KeyOrigin
-      (
-        ServiceAccountKey_KeyOrigin_ORIGINUNSPECIFIED,
+      ( ServiceAccountKey_KeyOrigin_ORIGINUNSPECIFIED,
         ServiceAccountKey_KeyOrigin_USERPROVIDED,
         ServiceAccountKey_KeyOrigin_GOOGLEPROVIDED,
         ..
@@ -159,8 +137,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * ServiceAccountKey_KeyType
     ServiceAccountKey_KeyType
-      (
-        ServiceAccountKey_KeyType_KEYTYPEUNSPECIFIED,
+      ( ServiceAccountKey_KeyType_KEYTYPEUNSPECIFIED,
         ServiceAccountKey_KeyType_USERMANAGED,
         ServiceAccountKey_KeyType_SYSTEMMANAGED,
         ..
@@ -168,8 +145,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * ServiceAccountKey_PrivateKeyType
     ServiceAccountKey_PrivateKeyType
-      (
-        ServiceAccountKey_PrivateKeyType_TYPEUNSPECIFIED,
+      ( ServiceAccountKey_PrivateKeyType_TYPEUNSPECIFIED,
         ServiceAccountKey_PrivateKeyType_TYPEPKCS12FILE,
         ServiceAccountKey_PrivateKeyType_TYPEGOOGLECREDENTIALSFILE,
         ..
@@ -177,8 +153,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * WorkloadIdentityPool_State
     WorkloadIdentityPool_State
-      (
-        WorkloadIdentityPool_State_STATEUNSPECIFIED,
+      ( WorkloadIdentityPool_State_STATEUNSPECIFIED,
         WorkloadIdentityPool_State_Active,
         WorkloadIdentityPool_State_Deleted,
         ..
@@ -186,8 +161,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * WorkloadIdentityPoolProvider_State
     WorkloadIdentityPoolProvider_State
-      (
-        WorkloadIdentityPoolProvider_State_STATEUNSPECIFIED,
+      ( WorkloadIdentityPoolProvider_State_STATEUNSPECIFIED,
         WorkloadIdentityPoolProvider_State_Active,
         WorkloadIdentityPoolProvider_State_Deleted,
         ..
@@ -195,24 +169,21 @@ module Gogol.IAM.Internal.Sum
 
     -- * OrganizationsRolesListView
     OrganizationsRolesListView
-      (
-        OrganizationsRolesListView_Basic,
+      ( OrganizationsRolesListView_Basic,
         OrganizationsRolesListView_Full,
         ..
       ),
 
     -- * ProjectsRolesListView
     ProjectsRolesListView
-      (
-        ProjectsRolesListView_Basic,
+      ( ProjectsRolesListView_Basic,
         ProjectsRolesListView_Full,
         ..
       ),
 
     -- * ProjectsServiceAccountsKeysGetPublicKeyType
     ProjectsServiceAccountsKeysGetPublicKeyType
-      (
-        ProjectsServiceAccountsKeysGetPublicKeyType_TYPENONE,
+      ( ProjectsServiceAccountsKeysGetPublicKeyType_TYPENONE,
         ProjectsServiceAccountsKeysGetPublicKeyType_TYPEX509PEMFILE,
         ProjectsServiceAccountsKeysGetPublicKeyType_TYPERAWPUBLICKEY,
         ..
@@ -220,8 +191,7 @@ module Gogol.IAM.Internal.Sum
 
     -- * ProjectsServiceAccountsKeysListKeyTypes
     ProjectsServiceAccountsKeysListKeyTypes
-      (
-        ProjectsServiceAccountsKeysListKeyTypes_KEYTYPEUNSPECIFIED,
+      ( ProjectsServiceAccountsKeysListKeyTypes_KEYTYPEUNSPECIFIED,
         ProjectsServiceAccountsKeysListKeyTypes_USERMANAGED,
         ProjectsServiceAccountsKeysListKeyTypes_SYSTEMMANAGED,
         ..
@@ -229,27 +199,27 @@ module Gogol.IAM.Internal.Sum
 
     -- * RolesListView
     RolesListView
-      (
-        RolesListView_Basic,
+      ( RolesListView_Basic,
         RolesListView_Full,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -262,20 +232,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -298,20 +269,21 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | The action that was performed on a Binding. Required
-newtype BindingDelta_Action = BindingDelta_Action { fromBindingDelta_Action :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BindingDelta_Action = BindingDelta_Action {fromBindingDelta_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern BindingDelta_Action_ACTIONUNSPECIFIED :: BindingDelta_Action
@@ -329,20 +301,21 @@ pattern BindingDelta_Action_Remove = BindingDelta_Action "REMOVE"
   BindingDelta_Action_ACTIONUNSPECIFIED,
   BindingDelta_Action_Add,
   BindingDelta_Action_Remove,
-  BindingDelta_Action #-}
+  BindingDelta_Action
+  #-}
 
 -- | Which type of key and algorithm to use for the key. The default is currently a 2K RSA key. However this may change in the future.
-newtype CreateServiceAccountKeyRequest_KeyAlgorithm = CreateServiceAccountKeyRequest_KeyAlgorithm { fromCreateServiceAccountKeyRequest_KeyAlgorithm :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateServiceAccountKeyRequest_KeyAlgorithm = CreateServiceAccountKeyRequest_KeyAlgorithm {fromCreateServiceAccountKeyRequest_KeyAlgorithm :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified key algorithm.
 pattern CreateServiceAccountKeyRequest_KeyAlgorithm_KEYALGUNSPECIFIED :: CreateServiceAccountKeyRequest_KeyAlgorithm
@@ -360,20 +333,21 @@ pattern CreateServiceAccountKeyRequest_KeyAlgorithm_KEY_ALG_RSA_2048 = CreateSer
   CreateServiceAccountKeyRequest_KeyAlgorithm_KEYALGUNSPECIFIED,
   CreateServiceAccountKeyRequest_KeyAlgorithm_KEY_ALG_RSA_1024,
   CreateServiceAccountKeyRequest_KeyAlgorithm_KEY_ALG_RSA_2048,
-  CreateServiceAccountKeyRequest_KeyAlgorithm #-}
+  CreateServiceAccountKeyRequest_KeyAlgorithm
+  #-}
 
 -- | The output format of the private key. The default value is @TYPE_GOOGLE_CREDENTIALS_FILE@, which is the Google Credentials File format.
-newtype CreateServiceAccountKeyRequest_PrivateKeyType = CreateServiceAccountKeyRequest_PrivateKeyType { fromCreateServiceAccountKeyRequest_PrivateKeyType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateServiceAccountKeyRequest_PrivateKeyType = CreateServiceAccountKeyRequest_PrivateKeyType {fromCreateServiceAccountKeyRequest_PrivateKeyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Equivalent to @TYPE_GOOGLE_CREDENTIALS_FILE@.
 pattern CreateServiceAccountKeyRequest_PrivateKeyType_TYPEUNSPECIFIED :: CreateServiceAccountKeyRequest_PrivateKeyType
@@ -391,20 +365,21 @@ pattern CreateServiceAccountKeyRequest_PrivateKeyType_TYPEGOOGLECREDENTIALSFILE 
   CreateServiceAccountKeyRequest_PrivateKeyType_TYPEUNSPECIFIED,
   CreateServiceAccountKeyRequest_PrivateKeyType_TYPEPKCS12FILE,
   CreateServiceAccountKeyRequest_PrivateKeyType_TYPEGOOGLECREDENTIALSFILE,
-  CreateServiceAccountKeyRequest_PrivateKeyType #-}
+  CreateServiceAccountKeyRequest_PrivateKeyType
+  #-}
 
 -- | The validation unit level.
-newtype LintResult_Level = LintResult_Level { fromLintResult_Level :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LintResult_Level = LintResult_Level {fromLintResult_Level :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Level is unspecified.
 pattern LintResult_Level_LEVELUNSPECIFIED :: LintResult_Level
@@ -417,20 +392,21 @@ pattern LintResult_Level_Condition = LintResult_Level "CONDITION"
 {-# COMPLETE
   LintResult_Level_LEVELUNSPECIFIED,
   LintResult_Level_Condition,
-  LintResult_Level #-}
+  LintResult_Level
+  #-}
 
 -- | The validation unit severity.
-newtype LintResult_Severity = LintResult_Severity { fromLintResult_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LintResult_Severity = LintResult_Severity {fromLintResult_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Severity is unspecified.
 pattern LintResult_Severity_SEVERITYUNSPECIFIED :: LintResult_Severity
@@ -463,20 +439,21 @@ pattern LintResult_Severity_Deprecated = LintResult_Severity "DEPRECATED"
   LintResult_Severity_Notice,
   LintResult_Severity_Info,
   LintResult_Severity_Deprecated,
-  LintResult_Severity #-}
+  LintResult_Severity
+  #-}
 
 -- | The current custom role support level.
-newtype Permission_CustomRolesSupportLevel = Permission_CustomRolesSupportLevel { fromPermission_CustomRolesSupportLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Permission_CustomRolesSupportLevel = Permission_CustomRolesSupportLevel {fromPermission_CustomRolesSupportLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default state. Permission is fully supported for custom role use.
 pattern Permission_CustomRolesSupportLevel_Supported :: Permission_CustomRolesSupportLevel
@@ -494,20 +471,21 @@ pattern Permission_CustomRolesSupportLevel_NOTSUPPORTED = Permission_CustomRoles
   Permission_CustomRolesSupportLevel_Supported,
   Permission_CustomRolesSupportLevel_Testing,
   Permission_CustomRolesSupportLevel_NOTSUPPORTED,
-  Permission_CustomRolesSupportLevel #-}
+  Permission_CustomRolesSupportLevel
+  #-}
 
 -- | The current launch stage of the permission.
-newtype Permission_Stage = Permission_Stage { fromPermission_Stage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Permission_Stage = Permission_Stage {fromPermission_Stage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The permission is currently in an alpha phase.
 pattern Permission_Stage_Alpha :: Permission_Stage
@@ -530,19 +508,20 @@ pattern Permission_Stage_Deprecated = Permission_Stage "DEPRECATED"
   Permission_Stage_Beta,
   Permission_Stage_GA,
   Permission_Stage_Deprecated,
-  Permission_Stage #-}
+  Permission_Stage
+  #-}
 
-newtype QueryGrantableRolesRequest_View = QueryGrantableRolesRequest_View { fromQueryGrantableRolesRequest_View :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype QueryGrantableRolesRequest_View = QueryGrantableRolesRequest_View {fromQueryGrantableRolesRequest_View :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Omits the @included_permissions@ field. This is the default value.
 pattern QueryGrantableRolesRequest_View_Basic :: QueryGrantableRolesRequest_View
@@ -555,20 +534,21 @@ pattern QueryGrantableRolesRequest_View_Full = QueryGrantableRolesRequest_View "
 {-# COMPLETE
   QueryGrantableRolesRequest_View_Basic,
   QueryGrantableRolesRequest_View_Full,
-  QueryGrantableRolesRequest_View #-}
+  QueryGrantableRolesRequest_View
+  #-}
 
 -- | The current launch stage of the role. If the @ALPHA@ launch stage has been selected for a role, the @stage@ field will not be included in the returned definition for the role.
-newtype Role_Stage = Role_Stage { fromRole_Stage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Role_Stage = Role_Stage {fromRole_Stage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The user has indicated this role is currently in an Alpha phase. If this launch stage is selected, the @stage@ field will not be included when requesting the definition for a given role.
 pattern Role_Stage_Alpha :: Role_Stage
@@ -601,20 +581,21 @@ pattern Role_Stage_Eap = Role_Stage "EAP"
   Role_Stage_Deprecated,
   Role_Stage_Disabled,
   Role_Stage_Eap,
-  Role_Stage #-}
+  Role_Stage
+  #-}
 
 -- | Specifies the algorithm (and possibly key size) for the key.
-newtype ServiceAccountKey_KeyAlgorithm = ServiceAccountKey_KeyAlgorithm { fromServiceAccountKey_KeyAlgorithm :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAccountKey_KeyAlgorithm = ServiceAccountKey_KeyAlgorithm {fromServiceAccountKey_KeyAlgorithm :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified key algorithm.
 pattern ServiceAccountKey_KeyAlgorithm_KEYALGUNSPECIFIED :: ServiceAccountKey_KeyAlgorithm
@@ -632,20 +613,21 @@ pattern ServiceAccountKey_KeyAlgorithm_KEY_ALG_RSA_2048 = ServiceAccountKey_KeyA
   ServiceAccountKey_KeyAlgorithm_KEYALGUNSPECIFIED,
   ServiceAccountKey_KeyAlgorithm_KEY_ALG_RSA_1024,
   ServiceAccountKey_KeyAlgorithm_KEY_ALG_RSA_2048,
-  ServiceAccountKey_KeyAlgorithm #-}
+  ServiceAccountKey_KeyAlgorithm
+  #-}
 
 -- | The key origin.
-newtype ServiceAccountKey_KeyOrigin = ServiceAccountKey_KeyOrigin { fromServiceAccountKey_KeyOrigin :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAccountKey_KeyOrigin = ServiceAccountKey_KeyOrigin {fromServiceAccountKey_KeyOrigin :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified key origin.
 pattern ServiceAccountKey_KeyOrigin_ORIGINUNSPECIFIED :: ServiceAccountKey_KeyOrigin
@@ -663,20 +645,21 @@ pattern ServiceAccountKey_KeyOrigin_GOOGLEPROVIDED = ServiceAccountKey_KeyOrigin
   ServiceAccountKey_KeyOrigin_ORIGINUNSPECIFIED,
   ServiceAccountKey_KeyOrigin_USERPROVIDED,
   ServiceAccountKey_KeyOrigin_GOOGLEPROVIDED,
-  ServiceAccountKey_KeyOrigin #-}
+  ServiceAccountKey_KeyOrigin
+  #-}
 
 -- | The key type.
-newtype ServiceAccountKey_KeyType = ServiceAccountKey_KeyType { fromServiceAccountKey_KeyType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAccountKey_KeyType = ServiceAccountKey_KeyType {fromServiceAccountKey_KeyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified key type. The presence of this in the message will immediately result in an error.
 pattern ServiceAccountKey_KeyType_KEYTYPEUNSPECIFIED :: ServiceAccountKey_KeyType
@@ -694,20 +677,21 @@ pattern ServiceAccountKey_KeyType_SYSTEMMANAGED = ServiceAccountKey_KeyType "SYS
   ServiceAccountKey_KeyType_KEYTYPEUNSPECIFIED,
   ServiceAccountKey_KeyType_USERMANAGED,
   ServiceAccountKey_KeyType_SYSTEMMANAGED,
-  ServiceAccountKey_KeyType #-}
+  ServiceAccountKey_KeyType
+  #-}
 
 -- | The output format for the private key. Only provided in @CreateServiceAccountKey@ responses, not in @GetServiceAccountKey@ or @ListServiceAccountKey@ responses. Google never exposes system-managed private keys, and never retains user-managed private keys.
-newtype ServiceAccountKey_PrivateKeyType = ServiceAccountKey_PrivateKeyType { fromServiceAccountKey_PrivateKeyType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServiceAccountKey_PrivateKeyType = ServiceAccountKey_PrivateKeyType {fromServiceAccountKey_PrivateKeyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Equivalent to @TYPE_GOOGLE_CREDENTIALS_FILE@.
 pattern ServiceAccountKey_PrivateKeyType_TYPEUNSPECIFIED :: ServiceAccountKey_PrivateKeyType
@@ -725,20 +709,21 @@ pattern ServiceAccountKey_PrivateKeyType_TYPEGOOGLECREDENTIALSFILE = ServiceAcco
   ServiceAccountKey_PrivateKeyType_TYPEUNSPECIFIED,
   ServiceAccountKey_PrivateKeyType_TYPEPKCS12FILE,
   ServiceAccountKey_PrivateKeyType_TYPEGOOGLECREDENTIALSFILE,
-  ServiceAccountKey_PrivateKeyType #-}
+  ServiceAccountKey_PrivateKeyType
+  #-}
 
 -- | Output only. The state of the pool.
-newtype WorkloadIdentityPool_State = WorkloadIdentityPool_State { fromWorkloadIdentityPool_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WorkloadIdentityPool_State = WorkloadIdentityPool_State {fromWorkloadIdentityPool_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | State unspecified.
 pattern WorkloadIdentityPool_State_STATEUNSPECIFIED :: WorkloadIdentityPool_State
@@ -756,20 +741,21 @@ pattern WorkloadIdentityPool_State_Deleted = WorkloadIdentityPool_State "DELETED
   WorkloadIdentityPool_State_STATEUNSPECIFIED,
   WorkloadIdentityPool_State_Active,
   WorkloadIdentityPool_State_Deleted,
-  WorkloadIdentityPool_State #-}
+  WorkloadIdentityPool_State
+  #-}
 
 -- | Output only. The state of the provider.
-newtype WorkloadIdentityPoolProvider_State = WorkloadIdentityPoolProvider_State { fromWorkloadIdentityPoolProvider_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WorkloadIdentityPoolProvider_State = WorkloadIdentityPoolProvider_State {fromWorkloadIdentityPoolProvider_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | State unspecified.
 pattern WorkloadIdentityPoolProvider_State_STATEUNSPECIFIED :: WorkloadIdentityPoolProvider_State
@@ -787,20 +773,21 @@ pattern WorkloadIdentityPoolProvider_State_Deleted = WorkloadIdentityPoolProvide
   WorkloadIdentityPoolProvider_State_STATEUNSPECIFIED,
   WorkloadIdentityPoolProvider_State_Active,
   WorkloadIdentityPoolProvider_State_Deleted,
-  WorkloadIdentityPoolProvider_State #-}
+  WorkloadIdentityPoolProvider_State
+  #-}
 
 -- | Optional view for the returned Role objects. When @FULL@ is specified, the @includedPermissions@ field is returned, which includes a list of all permissions in the role. The default value is @BASIC@, which does not return the @includedPermissions@ field.
-newtype OrganizationsRolesListView = OrganizationsRolesListView { fromOrganizationsRolesListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OrganizationsRolesListView = OrganizationsRolesListView {fromOrganizationsRolesListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Omits the @included_permissions@ field. This is the default value.
 pattern OrganizationsRolesListView_Basic :: OrganizationsRolesListView
@@ -813,20 +800,21 @@ pattern OrganizationsRolesListView_Full = OrganizationsRolesListView "FULL"
 {-# COMPLETE
   OrganizationsRolesListView_Basic,
   OrganizationsRolesListView_Full,
-  OrganizationsRolesListView #-}
+  OrganizationsRolesListView
+  #-}
 
 -- | Optional view for the returned Role objects. When @FULL@ is specified, the @includedPermissions@ field is returned, which includes a list of all permissions in the role. The default value is @BASIC@, which does not return the @includedPermissions@ field.
-newtype ProjectsRolesListView = ProjectsRolesListView { fromProjectsRolesListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsRolesListView = ProjectsRolesListView {fromProjectsRolesListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Omits the @included_permissions@ field. This is the default value.
 pattern ProjectsRolesListView_Basic :: ProjectsRolesListView
@@ -839,20 +827,21 @@ pattern ProjectsRolesListView_Full = ProjectsRolesListView "FULL"
 {-# COMPLETE
   ProjectsRolesListView_Basic,
   ProjectsRolesListView_Full,
-  ProjectsRolesListView #-}
+  ProjectsRolesListView
+  #-}
 
 -- | Optional. The output format of the public key. The default is @TYPE_NONE@, which means that the public key is not returned.
-newtype ProjectsServiceAccountsKeysGetPublicKeyType = ProjectsServiceAccountsKeysGetPublicKeyType { fromProjectsServiceAccountsKeysGetPublicKeyType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsServiceAccountsKeysGetPublicKeyType = ProjectsServiceAccountsKeysGetPublicKeyType {fromProjectsServiceAccountsKeysGetPublicKeyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not return the public key.
 pattern ProjectsServiceAccountsKeysGetPublicKeyType_TYPENONE :: ProjectsServiceAccountsKeysGetPublicKeyType
@@ -870,20 +859,21 @@ pattern ProjectsServiceAccountsKeysGetPublicKeyType_TYPERAWPUBLICKEY = ProjectsS
   ProjectsServiceAccountsKeysGetPublicKeyType_TYPENONE,
   ProjectsServiceAccountsKeysGetPublicKeyType_TYPEX509PEMFILE,
   ProjectsServiceAccountsKeysGetPublicKeyType_TYPERAWPUBLICKEY,
-  ProjectsServiceAccountsKeysGetPublicKeyType #-}
+  ProjectsServiceAccountsKeysGetPublicKeyType
+  #-}
 
 -- | Filters the types of keys the user wants to include in the list response. Duplicate key types are not allowed. If no key type is provided, all keys are returned.
-newtype ProjectsServiceAccountsKeysListKeyTypes = ProjectsServiceAccountsKeysListKeyTypes { fromProjectsServiceAccountsKeysListKeyTypes :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsServiceAccountsKeysListKeyTypes = ProjectsServiceAccountsKeysListKeyTypes {fromProjectsServiceAccountsKeysListKeyTypes :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified key type. The presence of this in the message will immediately result in an error.
 pattern ProjectsServiceAccountsKeysListKeyTypes_KEYTYPEUNSPECIFIED :: ProjectsServiceAccountsKeysListKeyTypes
@@ -901,20 +891,21 @@ pattern ProjectsServiceAccountsKeysListKeyTypes_SYSTEMMANAGED = ProjectsServiceA
   ProjectsServiceAccountsKeysListKeyTypes_KEYTYPEUNSPECIFIED,
   ProjectsServiceAccountsKeysListKeyTypes_USERMANAGED,
   ProjectsServiceAccountsKeysListKeyTypes_SYSTEMMANAGED,
-  ProjectsServiceAccountsKeysListKeyTypes #-}
+  ProjectsServiceAccountsKeysListKeyTypes
+  #-}
 
 -- | Optional view for the returned Role objects. When @FULL@ is specified, the @includedPermissions@ field is returned, which includes a list of all permissions in the role. The default value is @BASIC@, which does not return the @includedPermissions@ field.
-newtype RolesListView = RolesListView { fromRolesListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RolesListView = RolesListView {fromRolesListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Omits the @included_permissions@ field. This is the default value.
 pattern RolesListView_Basic :: RolesListView
@@ -927,4 +918,5 @@ pattern RolesListView_Full = RolesListView "FULL"
 {-# COMPLETE
   RolesListView_Basic,
   RolesListView_Full,
-  RolesListView #-}
+  RolesListView
+  #-}

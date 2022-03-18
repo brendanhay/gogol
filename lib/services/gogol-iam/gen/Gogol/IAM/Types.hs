@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,337 +25,337 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.IAM.Types
-    (
-    -- * Configuration
-      iAMService
+  ( -- * Configuration
+    iAMService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdminAuditData
-    , AdminAuditData (..)
-    , newAdminAuditData
+    AdminAuditData (..),
+    newAdminAuditData,
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditData
-    , AuditData (..)
-    , newAuditData
+    AuditData (..),
+    newAuditData,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** AuditableService
-    , AuditableService (..)
-    , newAuditableService
+    AuditableService (..),
+    newAuditableService,
 
     -- ** Aws
-    , Aws (..)
-    , newAws
+    Aws (..),
+    newAws,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** BindingDelta
-    , BindingDelta (..)
-    , newBindingDelta
+    BindingDelta (..),
+    newBindingDelta,
 
     -- ** BindingDelta_Action
-    , BindingDelta_Action (..)
+    BindingDelta_Action (..),
 
     -- ** CreateRoleRequest
-    , CreateRoleRequest (..)
-    , newCreateRoleRequest
+    CreateRoleRequest (..),
+    newCreateRoleRequest,
 
     -- ** CreateServiceAccountKeyRequest
-    , CreateServiceAccountKeyRequest (..)
-    , newCreateServiceAccountKeyRequest
+    CreateServiceAccountKeyRequest (..),
+    newCreateServiceAccountKeyRequest,
 
     -- ** CreateServiceAccountKeyRequest_KeyAlgorithm
-    , CreateServiceAccountKeyRequest_KeyAlgorithm (..)
+    CreateServiceAccountKeyRequest_KeyAlgorithm (..),
 
     -- ** CreateServiceAccountKeyRequest_PrivateKeyType
-    , CreateServiceAccountKeyRequest_PrivateKeyType (..)
+    CreateServiceAccountKeyRequest_PrivateKeyType (..),
 
     -- ** CreateServiceAccountRequest
-    , CreateServiceAccountRequest (..)
-    , newCreateServiceAccountRequest
+    CreateServiceAccountRequest (..),
+    newCreateServiceAccountRequest,
 
     -- ** DisableServiceAccountKeyRequest
-    , DisableServiceAccountKeyRequest (..)
-    , newDisableServiceAccountKeyRequest
+    DisableServiceAccountKeyRequest (..),
+    newDisableServiceAccountKeyRequest,
 
     -- ** DisableServiceAccountRequest
-    , DisableServiceAccountRequest (..)
-    , newDisableServiceAccountRequest
+    DisableServiceAccountRequest (..),
+    newDisableServiceAccountRequest,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnableServiceAccountKeyRequest
-    , EnableServiceAccountKeyRequest (..)
-    , newEnableServiceAccountKeyRequest
+    EnableServiceAccountKeyRequest (..),
+    newEnableServiceAccountKeyRequest,
 
     -- ** EnableServiceAccountRequest
-    , EnableServiceAccountRequest (..)
-    , newEnableServiceAccountRequest
+    EnableServiceAccountRequest (..),
+    newEnableServiceAccountRequest,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** LintPolicyRequest
-    , LintPolicyRequest (..)
-    , newLintPolicyRequest
+    LintPolicyRequest (..),
+    newLintPolicyRequest,
 
     -- ** LintPolicyResponse
-    , LintPolicyResponse (..)
-    , newLintPolicyResponse
+    LintPolicyResponse (..),
+    newLintPolicyResponse,
 
     -- ** LintResult
-    , LintResult (..)
-    , newLintResult
+    LintResult (..),
+    newLintResult,
 
     -- ** LintResult_Level
-    , LintResult_Level (..)
+    LintResult_Level (..),
 
     -- ** LintResult_Severity
-    , LintResult_Severity (..)
+    LintResult_Severity (..),
 
     -- ** ListRolesResponse
-    , ListRolesResponse (..)
-    , newListRolesResponse
+    ListRolesResponse (..),
+    newListRolesResponse,
 
     -- ** ListServiceAccountKeysResponse
-    , ListServiceAccountKeysResponse (..)
-    , newListServiceAccountKeysResponse
+    ListServiceAccountKeysResponse (..),
+    newListServiceAccountKeysResponse,
 
     -- ** ListServiceAccountsResponse
-    , ListServiceAccountsResponse (..)
-    , newListServiceAccountsResponse
+    ListServiceAccountsResponse (..),
+    newListServiceAccountsResponse,
 
     -- ** ListWorkloadIdentityPoolProvidersResponse
-    , ListWorkloadIdentityPoolProvidersResponse (..)
-    , newListWorkloadIdentityPoolProvidersResponse
+    ListWorkloadIdentityPoolProvidersResponse (..),
+    newListWorkloadIdentityPoolProvidersResponse,
 
     -- ** ListWorkloadIdentityPoolsResponse
-    , ListWorkloadIdentityPoolsResponse (..)
-    , newListWorkloadIdentityPoolsResponse
+    ListWorkloadIdentityPoolsResponse (..),
+    newListWorkloadIdentityPoolsResponse,
 
     -- ** Oidc
-    , Oidc (..)
-    , newOidc
+    Oidc (..),
+    newOidc,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** PatchServiceAccountRequest
-    , PatchServiceAccountRequest (..)
-    , newPatchServiceAccountRequest
+    PatchServiceAccountRequest (..),
+    newPatchServiceAccountRequest,
 
     -- ** Permission
-    , Permission (..)
-    , newPermission
+    Permission (..),
+    newPermission,
 
     -- ** Permission_CustomRolesSupportLevel
-    , Permission_CustomRolesSupportLevel (..)
+    Permission_CustomRolesSupportLevel (..),
 
     -- ** Permission_Stage
-    , Permission_Stage (..)
+    Permission_Stage (..),
 
     -- ** PermissionDelta
-    , PermissionDelta (..)
-    , newPermissionDelta
+    PermissionDelta (..),
+    newPermissionDelta,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PolicyDelta
-    , PolicyDelta (..)
-    , newPolicyDelta
+    PolicyDelta (..),
+    newPolicyDelta,
 
     -- ** QueryAuditableServicesRequest
-    , QueryAuditableServicesRequest (..)
-    , newQueryAuditableServicesRequest
+    QueryAuditableServicesRequest (..),
+    newQueryAuditableServicesRequest,
 
     -- ** QueryAuditableServicesResponse
-    , QueryAuditableServicesResponse (..)
-    , newQueryAuditableServicesResponse
+    QueryAuditableServicesResponse (..),
+    newQueryAuditableServicesResponse,
 
     -- ** QueryGrantableRolesRequest
-    , QueryGrantableRolesRequest (..)
-    , newQueryGrantableRolesRequest
+    QueryGrantableRolesRequest (..),
+    newQueryGrantableRolesRequest,
 
     -- ** QueryGrantableRolesRequest_View
-    , QueryGrantableRolesRequest_View (..)
+    QueryGrantableRolesRequest_View (..),
 
     -- ** QueryGrantableRolesResponse
-    , QueryGrantableRolesResponse (..)
-    , newQueryGrantableRolesResponse
+    QueryGrantableRolesResponse (..),
+    newQueryGrantableRolesResponse,
 
     -- ** QueryTestablePermissionsRequest
-    , QueryTestablePermissionsRequest (..)
-    , newQueryTestablePermissionsRequest
+    QueryTestablePermissionsRequest (..),
+    newQueryTestablePermissionsRequest,
 
     -- ** QueryTestablePermissionsResponse
-    , QueryTestablePermissionsResponse (..)
-    , newQueryTestablePermissionsResponse
+    QueryTestablePermissionsResponse (..),
+    newQueryTestablePermissionsResponse,
 
     -- ** Role
-    , Role (..)
-    , newRole
+    Role (..),
+    newRole,
 
     -- ** Role_Stage
-    , Role_Stage (..)
+    Role_Stage (..),
 
     -- ** ServiceAccount
-    , ServiceAccount (..)
-    , newServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
     -- ** ServiceAccountKey
-    , ServiceAccountKey (..)
-    , newServiceAccountKey
+    ServiceAccountKey (..),
+    newServiceAccountKey,
 
     -- ** ServiceAccountKey_KeyAlgorithm
-    , ServiceAccountKey_KeyAlgorithm (..)
+    ServiceAccountKey_KeyAlgorithm (..),
 
     -- ** ServiceAccountKey_KeyOrigin
-    , ServiceAccountKey_KeyOrigin (..)
+    ServiceAccountKey_KeyOrigin (..),
 
     -- ** ServiceAccountKey_KeyType
-    , ServiceAccountKey_KeyType (..)
+    ServiceAccountKey_KeyType (..),
 
     -- ** ServiceAccountKey_PrivateKeyType
-    , ServiceAccountKey_PrivateKeyType (..)
+    ServiceAccountKey_PrivateKeyType (..),
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** SignBlobRequest
-    , SignBlobRequest (..)
-    , newSignBlobRequest
+    SignBlobRequest (..),
+    newSignBlobRequest,
 
     -- ** SignBlobResponse
-    , SignBlobResponse (..)
-    , newSignBlobResponse
+    SignBlobResponse (..),
+    newSignBlobResponse,
 
     -- ** SignJwtRequest
-    , SignJwtRequest (..)
-    , newSignJwtRequest
+    SignJwtRequest (..),
+    newSignJwtRequest,
 
     -- ** SignJwtResponse
-    , SignJwtResponse (..)
-    , newSignJwtResponse
+    SignJwtResponse (..),
+    newSignJwtResponse,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** UndeleteRoleRequest
-    , UndeleteRoleRequest (..)
-    , newUndeleteRoleRequest
+    UndeleteRoleRequest (..),
+    newUndeleteRoleRequest,
 
     -- ** UndeleteServiceAccountRequest
-    , UndeleteServiceAccountRequest (..)
-    , newUndeleteServiceAccountRequest
+    UndeleteServiceAccountRequest (..),
+    newUndeleteServiceAccountRequest,
 
     -- ** UndeleteServiceAccountResponse
-    , UndeleteServiceAccountResponse (..)
-    , newUndeleteServiceAccountResponse
+    UndeleteServiceAccountResponse (..),
+    newUndeleteServiceAccountResponse,
 
     -- ** UndeleteWorkloadIdentityPoolProviderRequest
-    , UndeleteWorkloadIdentityPoolProviderRequest (..)
-    , newUndeleteWorkloadIdentityPoolProviderRequest
+    UndeleteWorkloadIdentityPoolProviderRequest (..),
+    newUndeleteWorkloadIdentityPoolProviderRequest,
 
     -- ** UndeleteWorkloadIdentityPoolRequest
-    , UndeleteWorkloadIdentityPoolRequest (..)
-    , newUndeleteWorkloadIdentityPoolRequest
+    UndeleteWorkloadIdentityPoolRequest (..),
+    newUndeleteWorkloadIdentityPoolRequest,
 
     -- ** UploadServiceAccountKeyRequest
-    , UploadServiceAccountKeyRequest (..)
-    , newUploadServiceAccountKeyRequest
+    UploadServiceAccountKeyRequest (..),
+    newUploadServiceAccountKeyRequest,
 
     -- ** WorkloadIdentityPool
-    , WorkloadIdentityPool (..)
-    , newWorkloadIdentityPool
+    WorkloadIdentityPool (..),
+    newWorkloadIdentityPool,
 
     -- ** WorkloadIdentityPool_State
-    , WorkloadIdentityPool_State (..)
+    WorkloadIdentityPool_State (..),
 
     -- ** WorkloadIdentityPoolProvider
-    , WorkloadIdentityPoolProvider (..)
-    , newWorkloadIdentityPoolProvider
+    WorkloadIdentityPoolProvider (..),
+    newWorkloadIdentityPoolProvider,
 
     -- ** WorkloadIdentityPoolProvider_AttributeMapping
-    , WorkloadIdentityPoolProvider_AttributeMapping (..)
-    , newWorkloadIdentityPoolProvider_AttributeMapping
+    WorkloadIdentityPoolProvider_AttributeMapping (..),
+    newWorkloadIdentityPoolProvider_AttributeMapping,
 
     -- ** WorkloadIdentityPoolProvider_State
-    , WorkloadIdentityPoolProvider_State (..)
+    WorkloadIdentityPoolProvider_State (..),
 
     -- ** OrganizationsRolesListView
-    , OrganizationsRolesListView (..)
+    OrganizationsRolesListView (..),
 
     -- ** ProjectsRolesListView
-    , ProjectsRolesListView (..)
+    ProjectsRolesListView (..),
 
     -- ** ProjectsServiceAccountsKeysGetPublicKeyType
-    , ProjectsServiceAccountsKeysGetPublicKeyType (..)
+    ProjectsServiceAccountsKeysGetPublicKeyType (..),
 
     -- ** ProjectsServiceAccountsKeysListKeyTypes
-    , ProjectsServiceAccountsKeysListKeyTypes (..)
+    ProjectsServiceAccountsKeysListKeyTypes (..),
 
     -- ** RolesListView
-    , RolesListView (..)
-    ) where
+    RolesListView (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IAM.Internal.Product
 import Gogol.IAM.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
 iAMService :: Core.ServiceConfig
-iAMService
-  = Core.defaultService (Core.ServiceId "iam:v1")
-      "iam.googleapis.com"
+iAMService =
+  Core.defaultService
+    (Core.ServiceId "iam:v1")
+    "iam.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]

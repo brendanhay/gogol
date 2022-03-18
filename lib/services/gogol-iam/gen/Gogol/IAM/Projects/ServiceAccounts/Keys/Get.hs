@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,88 +30,96 @@
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.get@.
 module Gogol.IAM.Projects.ServiceAccounts.Keys.Get
-    (
-    -- * Resource
-      IAMProjectsServiceAccountsKeysGetResource
+  ( -- * Resource
+    IAMProjectsServiceAccountsKeysGetResource,
 
     -- ** Constructing a Request
-    , newIAMProjectsServiceAccountsKeysGet
-    , IAMProjectsServiceAccountsKeysGet
-    ) where
+    newIAMProjectsServiceAccountsKeysGet,
+    IAMProjectsServiceAccountsKeysGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IAM.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iam.projects.serviceAccounts.keys.get@ method which the
 -- 'IAMProjectsServiceAccountsKeysGet' request conforms to.
 type IAMProjectsServiceAccountsKeysGetResource =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "publicKeyType"
-                 ProjectsServiceAccountsKeysGetPublicKeyType
-                 Core.:>
-                 Core.QueryParam "uploadType" Core.Text Core.:>
-                   Core.QueryParam "upload_protocol" Core.Text Core.:>
-                     Core.QueryParam "alt" Core.AltJSON Core.:>
-                       Core.Get '[Core.JSON] ServiceAccountKey
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "publicKeyType"
+              ProjectsServiceAccountsKeysGetPublicKeyType
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ServiceAccountKey
 
 -- | Gets a ServiceAccountKey.
 --
 -- /See:/ 'newIAMProjectsServiceAccountsKeysGet' smart constructor.
 data IAMProjectsServiceAccountsKeysGet = IAMProjectsServiceAccountsKeysGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account.
-    , name :: Core.Text
-      -- | Optional. The output format of the public key. The default is @TYPE_NONE@, which means that the public key is not returned.
-    , publicKeyType :: (Core.Maybe ProjectsServiceAccountsKeysGetPublicKeyType)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account.
+    name :: Core.Text,
+    -- | Optional. The output format of the public key. The default is @TYPE_NONE@, which means that the public key is not returned.
+    publicKeyType :: (Core.Maybe ProjectsServiceAccountsKeysGetPublicKeyType),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IAMProjectsServiceAccountsKeysGet' with the minimum fields required to make a request.
-newIAMProjectsServiceAccountsKeysGet 
-    ::  Core.Text
-       -- ^  Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account. See 'name'.
-    -> IAMProjectsServiceAccountsKeysGet
+newIAMProjectsServiceAccountsKeysGet ::
+  -- |  Required. The resource name of the service account key in the following format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}@. Using @-@ as a wildcard for the @PROJECT_ID@ will infer the project from the account. The @ACCOUNT@ value can be the @email@ address or the @unique_id@ of the service account. See 'name'.
+  Core.Text ->
+  IAMProjectsServiceAccountsKeysGet
 newIAMProjectsServiceAccountsKeysGet name =
   IAMProjectsServiceAccountsKeysGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , publicKeyType = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      publicKeyType = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           IAMProjectsServiceAccountsKeysGet
-         where
-        type Rs IAMProjectsServiceAccountsKeysGet =
-             ServiceAccountKey
-        type Scopes IAMProjectsServiceAccountsKeysGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient IAMProjectsServiceAccountsKeysGet{..}
-          = go name xgafv accessToken callback publicKeyType
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              iAMService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy IAMProjectsServiceAccountsKeysGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    IAMProjectsServiceAccountsKeysGet
+  where
+  type
+    Rs IAMProjectsServiceAccountsKeysGet =
+      ServiceAccountKey
+  type
+    Scopes IAMProjectsServiceAccountsKeysGet =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient IAMProjectsServiceAccountsKeysGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      publicKeyType
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      iAMService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAMProjectsServiceAccountsKeysGetResource
+          )
+          Core.mempty

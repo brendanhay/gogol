@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,95 +30,102 @@
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.testIamPermissions@.
 module Gogol.IAM.Projects.ServiceAccounts.TestIamPermissions
-    (
-    -- * Resource
-      IAMProjectsServiceAccountsTestIamPermissionsResource
+  ( -- * Resource
+    IAMProjectsServiceAccountsTestIamPermissionsResource,
 
     -- ** Constructing a Request
-    , newIAMProjectsServiceAccountsTestIamPermissions
-    , IAMProjectsServiceAccountsTestIamPermissions
-    ) where
+    newIAMProjectsServiceAccountsTestIamPermissions,
+    IAMProjectsServiceAccountsTestIamPermissions,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IAM.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iam.projects.serviceAccounts.testIamPermissions@ method which the
 -- 'IAMProjectsServiceAccountsTestIamPermissions' request conforms to.
-type IAMProjectsServiceAccountsTestIamPermissionsResource
-     =
-     "v1" Core.:>
-       Core.CaptureMode "resource" "testIamPermissions"
-         Core.Text
-         Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
-                       Core.:>
-                       Core.Post '[Core.JSON] TestIamPermissionsResponse
+type IAMProjectsServiceAccountsTestIamPermissionsResource =
+  "v1"
+    Core.:> Core.CaptureMode
+              "resource"
+              "testIamPermissions"
+              Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] TestIamPermissionsResponse
 
 -- | Tests whether the caller has the specified permissions on a ServiceAccount.
 --
 -- /See:/ 'newIAMProjectsServiceAccountsTestIamPermissions' smart constructor.
 data IAMProjectsServiceAccountsTestIamPermissions = IAMProjectsServiceAccountsTestIamPermissions
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: TestIamPermissionsRequest
-      -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-    , resource :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: TestIamPermissionsRequest,
+    -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
+    resource :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IAMProjectsServiceAccountsTestIamPermissions' with the minimum fields required to make a request.
-newIAMProjectsServiceAccountsTestIamPermissions 
-    ::  TestIamPermissionsRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-    -> IAMProjectsServiceAccountsTestIamPermissions
+newIAMProjectsServiceAccountsTestIamPermissions ::
+  -- |  Multipart request metadata. See 'payload'.
+  TestIamPermissionsRequest ->
+  -- |  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+  Core.Text ->
+  IAMProjectsServiceAccountsTestIamPermissions
 newIAMProjectsServiceAccountsTestIamPermissions payload resource =
   IAMProjectsServiceAccountsTestIamPermissions
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , resource = resource
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      resource = resource,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           IAMProjectsServiceAccountsTestIamPermissions
-         where
-        type Rs IAMProjectsServiceAccountsTestIamPermissions
-             = TestIamPermissionsResponse
-        type Scopes
-               IAMProjectsServiceAccountsTestIamPermissions
-             = '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          IAMProjectsServiceAccountsTestIamPermissions{..}
-          = go resource xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              iAMService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           IAMProjectsServiceAccountsTestIamPermissionsResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    IAMProjectsServiceAccountsTestIamPermissions
+  where
+  type
+    Rs IAMProjectsServiceAccountsTestIamPermissions =
+      TestIamPermissionsResponse
+  type
+    Scopes
+      IAMProjectsServiceAccountsTestIamPermissions =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    IAMProjectsServiceAccountsTestIamPermissions {..} =
+      go
+        resource
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        iAMService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  IAMProjectsServiceAccountsTestIamPermissionsResource
+            )
+            Core.mempty

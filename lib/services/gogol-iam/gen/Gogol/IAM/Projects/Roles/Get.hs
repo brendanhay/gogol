@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,80 +30,86 @@
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.roles.get@.
 module Gogol.IAM.Projects.Roles.Get
-    (
-    -- * Resource
-      IAMProjectsRolesGetResource
+  ( -- * Resource
+    IAMProjectsRolesGetResource,
 
     -- ** Constructing a Request
-    , newIAMProjectsRolesGet
-    , IAMProjectsRolesGet
-    ) where
+    newIAMProjectsRolesGet,
+    IAMProjectsRolesGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IAM.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @iam.projects.roles.get@ method which the
 -- 'IAMProjectsRolesGet' request conforms to.
 type IAMProjectsRolesGetResource =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] Role
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Role
 
 -- | Gets the definition of a Role.
 --
 -- /See:/ 'newIAMProjectsRolesGet' smart constructor.
 data IAMProjectsRolesGet = IAMProjectsRolesGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The @name@ parameter\'s value depends on the target resource for the request, namely <https://cloud.google.com/iam/reference/rest/v1/roles roles>, <https://cloud.google.com/iam/reference/rest/v1/projects.roles projects>, or <https://cloud.google.com/iam/reference/rest/v1/organizations.roles organizations>. Each resource type\'s @name@ value format is described below: * <https://cloud.google.com/iam/reference/rest/v1/roles/get roles.get()>: @roles\/{ROLE_NAME}@. This method returns results from all <https://cloud.google.com/iam/docs/understanding-roles#predefined_roles predefined roles> in Cloud IAM. Example request URL: @https:\/\/iam.googleapis.com\/v1\/roles\/{ROLE_NAME}@ * <https://cloud.google.com/iam/reference/rest/v1/projects.roles/get projects.roles.get()>: @projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the project level. Example request URL:
-      -- @https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@ * <https://cloud.google.com/iam/reference/rest/v1/organizations.roles/get organizations.roles.get()>: @organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the organization level. Example request URL: @https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@ Note: Wildcard (*) values are invalid; you must specify a complete project ID or organization ID.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The @name@ parameter\'s value depends on the target resource for the request, namely <https://cloud.google.com/iam/reference/rest/v1/roles roles>, <https://cloud.google.com/iam/reference/rest/v1/projects.roles projects>, or <https://cloud.google.com/iam/reference/rest/v1/organizations.roles organizations>. Each resource type\'s @name@ value format is described below: * <https://cloud.google.com/iam/reference/rest/v1/roles/get roles.get()>: @roles\/{ROLE_NAME}@. This method returns results from all <https://cloud.google.com/iam/docs/understanding-roles#predefined_roles predefined roles> in Cloud IAM. Example request URL: @https:\/\/iam.googleapis.com\/v1\/roles\/{ROLE_NAME}@ * <https://cloud.google.com/iam/reference/rest/v1/projects.roles/get projects.roles.get()>: @projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the project level. Example request URL:
+    -- @https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@ * <https://cloud.google.com/iam/reference/rest/v1/organizations.roles/get organizations.roles.get()>: @organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the organization level. Example request URL: @https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@ Note: Wildcard (*) values are invalid; you must specify a complete project ID or organization ID.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IAMProjectsRolesGet' with the minimum fields required to make a request.
-newIAMProjectsRolesGet 
-    ::  Core.Text
-       -- ^  The @name@ parameter\'s value depends on the target resource for the request, namely <https://cloud.google.com/iam/reference/rest/v1/roles roles>, <https://cloud.google.com/iam/reference/rest/v1/projects.roles projects>, or <https://cloud.google.com/iam/reference/rest/v1/organizations.roles organizations>. Each resource type\'s @name@ value format is described below: * <https://cloud.google.com/iam/reference/rest/v1/roles/get roles.get()>: @roles\/{ROLE_NAME}@. This method returns results from all <https://cloud.google.com/iam/docs/understanding-roles#predefined_roles predefined roles> in Cloud IAM. Example request URL: @https:\/\/iam.googleapis.com\/v1\/roles\/{ROLE_NAME}@ * <https://cloud.google.com/iam/reference/rest/v1/projects.roles/get projects.roles.get()>: @projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the project level. Example request URL:
-       -- @https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@ * <https://cloud.google.com/iam/reference/rest/v1/organizations.roles/get organizations.roles.get()>: @organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the organization level. Example request URL: @https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@ Note: Wildcard (*) values are invalid; you must specify a complete project ID or organization ID. See 'name'.
-    -> IAMProjectsRolesGet
+newIAMProjectsRolesGet ::
+  -- |  The @name@ parameter\'s value depends on the target resource for the request, namely <https://cloud.google.com/iam/reference/rest/v1/roles roles>, <https://cloud.google.com/iam/reference/rest/v1/projects.roles projects>, or <https://cloud.google.com/iam/reference/rest/v1/organizations.roles organizations>. Each resource type\'s @name@ value format is described below: * <https://cloud.google.com/iam/reference/rest/v1/roles/get roles.get()>: @roles\/{ROLE_NAME}@. This method returns results from all <https://cloud.google.com/iam/docs/understanding-roles#predefined_roles predefined roles> in Cloud IAM. Example request URL: @https:\/\/iam.googleapis.com\/v1\/roles\/{ROLE_NAME}@ * <https://cloud.google.com/iam/reference/rest/v1/projects.roles/get projects.roles.get()>: @projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the project level. Example request URL:
+  -- @https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}@ * <https://cloud.google.com/iam/reference/rest/v1/organizations.roles/get organizations.roles.get()>: @organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@. This method returns only <https://cloud.google.com/iam/docs/understanding-custom-roles custom roles> that have been created at the organization level. Example request URL: @https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}@ Note: Wildcard (*) values are invalid; you must specify a complete project ID or organization ID. See 'name'.
+  Core.Text ->
+  IAMProjectsRolesGet
 newIAMProjectsRolesGet name =
   IAMProjectsRolesGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest IAMProjectsRolesGet where
-        type Rs IAMProjectsRolesGet = Role
-        type Scopes IAMProjectsRolesGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient IAMProjectsRolesGet{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              iAMService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy IAMProjectsRolesGetResource)
-                      Core.mempty
-
+  type Rs IAMProjectsRolesGet = Role
+  type
+    Scopes IAMProjectsRolesGet =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient IAMProjectsRolesGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      iAMService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAMProjectsRolesGetResource
+          )
+          Core.mempty
