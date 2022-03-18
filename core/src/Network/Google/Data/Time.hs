@@ -45,14 +45,14 @@ import Web.HttpApiData
 -- | This SHOULD be a time in the format of hh:mm:ss.  It is
 -- recommended that you use the "date-time" format instead of "time"
 -- unless you need to transfer only the time part.
-newtype Time' = Time' {unTime :: TimeOfDay}
+newtype Time' = Time' {fromTime :: TimeOfDay}
   deriving (Eq, Ord, Show, Read, Generic)
 
 _Time :: Iso' Time' TimeOfDay
-_Time = iso unTime Time'
+_Time = iso fromTime Time'
 
 instance ToHttpApiData Time' where
-  toQueryParam = Text.pack . show . unTime
+  toQueryParam = Text.pack . show . fromTime
 
 instance FromHttpApiData Time' where
   parseQueryParam = second Time' . parseText timeParser
