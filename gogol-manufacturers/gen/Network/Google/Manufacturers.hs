@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Manufacturers
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,191 +30,112 @@
 --
 -- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference>
 module Network.Google.Manufacturers
-    (
-    -- * Service Configuration
-      manufacturersService
+  ( -- * Configuration
+    manufacturersService,
 
     -- * OAuth Scopes
-    , manufacturercenterScope
-
-    -- * API Declaration
-    , ManufacturersAPI
+    manufacturercenterScope,
 
     -- * Resources
 
     -- ** manufacturers.accounts.products.delete
-    , module Network.Google.Resource.Manufacturers.Accounts.Products.Delete
+    ManufacturersAccountsProductsDeleteResource,
+    newManufacturersAccountsProductsDelete,
+    ManufacturersAccountsProductsDelete,
 
     -- ** manufacturers.accounts.products.get
-    , module Network.Google.Resource.Manufacturers.Accounts.Products.Get
+    ManufacturersAccountsProductsGetResource,
+    newManufacturersAccountsProductsGet,
+    ManufacturersAccountsProductsGet,
 
     -- ** manufacturers.accounts.products.list
-    , module Network.Google.Resource.Manufacturers.Accounts.Products.List
+    ManufacturersAccountsProductsListResource,
+    newManufacturersAccountsProductsList,
+    ManufacturersAccountsProductsList,
 
     -- ** manufacturers.accounts.products.update
-    , module Network.Google.Resource.Manufacturers.Accounts.Products.Update
+    ManufacturersAccountsProductsUpdateResource,
+    newManufacturersAccountsProductsUpdate,
+    ManufacturersAccountsProductsUpdate,
 
     -- * Types
 
-    -- ** DestinationStatusStatus
-    , DestinationStatusStatus (..)
-
-    -- ** IssueResolution
-    , IssueResolution (..)
-
-    -- ** Image
-    , Image
-    , image
-    , iStatus
-    , iImageURL
-    , iType
-
-    -- ** FeatureDescription
-    , FeatureDescription
-    , featureDescription
-    , fdImage
-    , fdText
-    , fdHeadline
-
-    -- ** ProductDetail
-    , ProductDetail
-    , productDetail
-    , pdAttributeValue
-    , pdAttributeName
-    , pdSectionName
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** DestinationStatus
-    , DestinationStatus
-    , destinationStatus
-    , dsDestination
-    , dsStatus
-
-    -- ** AccountsProductsGetInclude
-    , AccountsProductsGetInclude (..)
-
-    -- ** ImageStatus
-    , ImageStatus (..)
-
-    -- ** Count
-    , Count
-    , count
-    , cValue
-    , cUnit
-
-    -- ** AccountsProductsListInclude
-    , AccountsProductsListInclude (..)
-
-    -- ** Capacity
-    , Capacity
-    , capacity
-    , capValue
-    , capUnit
-
-    -- ** ImageType
-    , ImageType (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Attributes
-    , Attributes
-    , attributes
-    , aProductName
-    , aScent
-    , aImageLink
-    , aFeatureDescription
-    , aProductDetail
-    , aProductLine
-    , aColor
-    , aSize
-    , aFlavor
-    , aPattern
-    , aSizeSystem
-    , aProductHighlight
-    , aMaterial
-    , aFormat
-    , aProductType
-    , aCount
-    , aDisclosureDate
-    , aBrand
-    , aAdditionalImageLink
-    , aExcludedDestination
-    , aVideoLink
-    , aCapacity
-    , aGtin
-    , aAgeGroup
-    , aIncludedDestination
-    , aGender
-    , aSuggestedRetailPrice
-    , aItemGroupId
-    , aRichProductContent
-    , aTargetClientId
-    , aSizeType
-    , aReleaseDate
-    , aTitle
-    , aMpn
-    , aProductPageURL
-    , aDescription
-    , aTheme
+    Attributes (..),
+    newAttributes,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Capacity
+    Capacity (..),
+    newCapacity,
 
-    -- ** IssueSeverity
-    , IssueSeverity (..)
+    -- ** Count
+    Count (..),
+    newCount,
 
-    -- ** Price
-    , Price
-    , price
-    , pAmount
-    , pCurrency
+    -- ** DestinationStatus
+    DestinationStatus (..),
+    newDestinationStatus,
 
-    -- ** Product
-    , Product
-    , product
-    , pParent
-    , pDestinationStatuses
-    , pTargetCountry
-    , pName
-    , pAttributes
-    , pIssues
-    , pContentLanguage
-    , pProductId
+    -- ** DestinationStatus_Status
+    DestinationStatus_Status (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** FeatureDescription
+    FeatureDescription (..),
+    newFeatureDescription,
+
+    -- ** Image
+    Image (..),
+    newImage,
+
+    -- ** Image_Status
+    Image_Status (..),
+
+    -- ** Image_Type
+    Image_Type (..),
 
     -- ** Issue
-    , Issue
-    , issue
-    , issAttribute
-    , issDestination
-    , issSeverity
-    , issResolution
-    , issTitle
-    , issType
-    , issTimestamp
-    , issDescription
+    Issue (..),
+    newIssue,
+
+    -- ** Issue_Resolution
+    Issue_Resolution (..),
+
+    -- ** Issue_Severity
+    Issue_Severity (..),
 
     -- ** ListProductsResponse
-    , ListProductsResponse
-    , listProductsResponse
-    , lprNextPageToken
-    , lprProducts
-    ) where
+    ListProductsResponse (..),
+    newListProductsResponse,
 
-import Network.Google.Prelude
+    -- ** Price
+    Price (..),
+    newPrice,
+
+    -- ** Product
+    Product (..),
+    newProduct,
+
+    -- ** ProductDetail
+    ProductDetail (..),
+    newProductDetail,
+
+    -- ** AccountsProductsGetInclude
+    AccountsProductsGetInclude (..),
+
+    -- ** AccountsProductsListInclude
+    AccountsProductsListInclude (..),
+  )
+where
+
+import Network.Google.Manufacturers.Accounts.Products.Delete
+import Network.Google.Manufacturers.Accounts.Products.Get
+import Network.Google.Manufacturers.Accounts.Products.List
+import Network.Google.Manufacturers.Accounts.Products.Update
 import Network.Google.Manufacturers.Types
-import Network.Google.Resource.Manufacturers.Accounts.Products.Delete
-import Network.Google.Resource.Manufacturers.Accounts.Products.Get
-import Network.Google.Resource.Manufacturers.Accounts.Products.List
-import Network.Google.Resource.Manufacturers.Accounts.Products.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Manufacturer Center API service.
-type ManufacturersAPI =
-     AccountsProductsListResource :<|>
-       AccountsProductsGetResource
-       :<|> AccountsProductsDeleteResource
-       :<|> AccountsProductsUpdateResource
