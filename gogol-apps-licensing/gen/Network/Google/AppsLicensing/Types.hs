@@ -1,70 +1,71 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsLicensing.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AppsLicensing.Types
-    (
-    -- * Service Configuration
-      appsLicensingService
+  ( -- * Configuration
+    appsLicensingService,
 
     -- * OAuth Scopes
-    , appsLicensingScope
+    appsLicensingScope,
 
-    -- * LicenseAssignmentInsert
-    , LicenseAssignmentInsert
-    , licenseAssignmentInsert
-    , laiUserId
+    -- * Types
 
-    -- * LicenseAssignmentList
-    , LicenseAssignmentList
-    , licenseAssignmentList
-    , lalEtag
-    , lalNextPageToken
-    , lalKind
-    , lalItems
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * LicenseAssignment
-    , LicenseAssignment
-    , licenseAssignment
-    , laProductName
-    , laEtags
-    , laSKUName
-    , laKind
-    , laSKUId
-    , laUserId
-    , laSelfLink
-    , laProductId
+    -- ** LicenseAssignment
+    LicenseAssignment (..),
+    newLicenseAssignment,
 
-    -- * Xgafv
-    , Xgafv (..)
-    ) where
+    -- ** LicenseAssignmentInsert
+    LicenseAssignmentInsert (..),
+    newLicenseAssignmentInsert,
 
-import Network.Google.AppsLicensing.Types.Product
-import Network.Google.AppsLicensing.Types.Sum
-import Network.Google.Prelude
+    -- ** LicenseAssignmentList
+    LicenseAssignmentList (..),
+    newLicenseAssignmentList,
+  )
+where
 
--- | Default request referring to version 'v1' of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
-appsLicensingService :: ServiceConfig
-appsLicensingService
-  = defaultService (ServiceId "licensing:v1")
-      "licensing.googleapis.com"
+import Network.Google.AppsLicensing.Internal.Product
+import Network.Google.AppsLicensing.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
+appsLicensingService :: Core.ServiceConfig
+appsLicensingService =
+  Core.defaultService
+    (Core.ServiceId "licensing:v1")
+    "licensing.googleapis.com"
 
 -- | View and manage G Suite licenses for your domain
-appsLicensingScope :: Proxy '["https://www.googleapis.com/auth/apps.licensing"]
-appsLicensingScope = Proxy
+appsLicensingScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.licensing"]
+appsLicensingScope = Core.Proxy
