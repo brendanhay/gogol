@@ -1,134 +1,111 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsActivity.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AppsActivity.Types
-    (
-    -- * Service Configuration
-      appsActivityService
+  ( -- * Configuration
+    appsActivityService,
 
     -- * OAuth Scopes
-    , activityScope
+    activityScope,
 
-    -- * Parent
-    , Parent
-    , parent
-    , pIsRoot
-    , pId
-    , pTitle
+    -- * Types
 
-    -- * Photo
-    , Photo
-    , photo
-    , pURL
+    -- ** Activity
+    Activity (..),
+    newActivity,
 
-    -- * EventPrimaryEventType
-    , EventPrimaryEventType (..)
+    -- ** Event
+    Event (..),
+    newEvent,
 
-    -- * Event
-    , Event
-    , event
-    , ePrimaryEventType
-    , eUser
-    , eEventTimeMillis
-    , eRename
-    , eFromUserDeletion
-    , eAdditionalEventTypes
-    , ePermissionChanges
-    , eTarget
-    , eMove
+    -- ** Event_AdditionalEventTypesItem
+    Event_AdditionalEventTypesItem (..),
 
-    -- * PermissionRole
-    , PermissionRole (..)
+    -- ** Event_PrimaryEventType
+    Event_PrimaryEventType (..),
 
-    -- * ListActivitiesResponse
-    , ListActivitiesResponse
-    , listActivitiesResponse
-    , larNextPageToken
-    , larActivities
+    -- ** ListActivitiesResponse
+    ListActivitiesResponse (..),
+    newListActivitiesResponse,
 
-    -- * PermissionChange
-    , PermissionChange
-    , permissionChange
-    , pcAddedPermissions
-    , pcRemovedPermissions
+    -- ** Move
+    Move (..),
+    newMove,
 
-    -- * PermissionType
-    , PermissionType (..)
+    -- ** Parent
+    Parent (..),
+    newParent,
 
-    -- * User
-    , User
-    , user
-    , uPhoto
-    , uIsDeleted
-    , uName
-    , uIsMe
-    , uPermissionId
+    -- ** Permission
+    Permission (..),
+    newPermission,
 
-    -- * EventAdditionalEventTypesItem
-    , EventAdditionalEventTypesItem (..)
+    -- ** Permission_Role
+    Permission_Role (..),
 
-    -- * Activity
-    , Activity
-    , activity
-    , aSingleEvents
-    , aCombinedEvent
+    -- ** Permission_Type
+    Permission_Type (..),
 
-    -- * ActivitiesListGroupingStrategy
-    , ActivitiesListGroupingStrategy (..)
+    -- ** PermissionChange
+    PermissionChange (..),
+    newPermissionChange,
 
-    -- * Rename
-    , Rename
-    , rename
-    , rNewTitle
-    , rOldTitle
+    -- ** Photo
+    Photo (..),
+    newPhoto,
 
-    -- * Permission
-    , Permission
-    , permission
-    , pWithLink
-    , pUser
-    , pRole
-    , pName
-    , pType
-    , pPermissionId
+    -- ** Rename
+    Rename (..),
+    newRename,
 
-    -- * Target
-    , Target
-    , target
-    , tMimeType
-    , tName
-    , tId
+    -- ** Target
+    Target (..),
+    newTarget,
 
-    -- * Move
-    , Move
-    , move
-    , mAddedParents
-    , mRemovedParents
-    ) where
+    -- ** User
+    User (..),
+    newUser,
 
-import Network.Google.AppsActivity.Types.Product
-import Network.Google.AppsActivity.Types.Sum
-import Network.Google.Prelude
+    -- ** ActivitiesListGroupingStrategy
+    ActivitiesListGroupingStrategy (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
-appsActivityService :: ServiceConfig
-appsActivityService
-  = defaultService (ServiceId "appsactivity:v1")
-      "www.googleapis.com"
+import Network.Google.AppsActivity.Internal.Product
+import Network.Google.AppsActivity.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
+appsActivityService :: Core.ServiceConfig
+appsActivityService =
+  Core.defaultService
+    (Core.ServiceId "appsactivity:v1")
+    "www.googleapis.com"
 
 -- | View the activity history of your Google apps
-activityScope :: Proxy '["https://www.googleapis.com/auth/activity"]
-activityScope = Proxy
+activityScope :: Core.Proxy '["https://www.googleapis.com/auth/activity"]
+activityScope = Core.Proxy
