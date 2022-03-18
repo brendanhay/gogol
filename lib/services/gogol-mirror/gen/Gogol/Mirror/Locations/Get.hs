@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,55 +36,54 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.locations.get@.
 module Gogol.Mirror.Locations.Get
-  ( -- * Resource
-    MirrorLocationsGetResource,
+    (
+    -- * Resource
+      MirrorLocationsGetResource
 
     -- ** Constructing a Request
-    newMirrorLocationsGet,
-    MirrorLocationsGet,
-  )
-where
+    , newMirrorLocationsGet
+    , MirrorLocationsGet
+    ) where
 
-import Gogol.Mirror.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Mirror.Types
 
 -- | A resource alias for @mirror.locations.get@ method which the
 -- 'MirrorLocationsGet' request conforms to.
 type MirrorLocationsGetResource =
-  "mirror"
-    Core.:> "v1"
-    Core.:> "locations"
-    Core.:> Core.Capture "id" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Location
+     "mirror" Core.:>
+       "v1" Core.:>
+         "locations" Core.:>
+           Core.Capture "id" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.Get '[Core.JSON] Location
 
 -- | Gets a single location by ID.
 --
 -- /See:/ 'newMirrorLocationsGet' smart constructor.
 newtype MirrorLocationsGet = MirrorLocationsGet
-  { -- | The ID of the location or latest for the last known location.
-    id :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The ID of the location or latest for the last known location.
+      id :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorLocationsGet' with the minimum fields required to make a request.
-newMirrorLocationsGet ::
-  -- |  The ID of the location or latest for the last known location. See 'id'.
-  Core.Text ->
-  MirrorLocationsGet
+newMirrorLocationsGet 
+    ::  Core.Text
+       -- ^  The ID of the location or latest for the last known location. See 'id'.
+    -> MirrorLocationsGet
 newMirrorLocationsGet id = MirrorLocationsGet {id = id}
 
 instance Core.GoogleRequest MirrorLocationsGet where
-  type Rs MirrorLocationsGet = Location
-  type
-    Scopes MirrorLocationsGet =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
-  requestClient MirrorLocationsGet {..} =
-    go id (Core.Just Core.AltJSON) mirrorService
-    where
-      go =
-        Core.buildClient
-          (Core.Proxy :: Core.Proxy MirrorLocationsGetResource)
-          Core.mempty
+        type Rs MirrorLocationsGet = Location
+        type Scopes MirrorLocationsGet =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient MirrorLocationsGet{..}
+          = go id (Core.Just Core.AltJSON) mirrorService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy :: Core.Proxy MirrorLocationsGetResource)
+                      Core.mempty
+

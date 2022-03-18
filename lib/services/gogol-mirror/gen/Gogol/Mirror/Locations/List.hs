@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,51 +36,48 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.locations.list@.
 module Gogol.Mirror.Locations.List
-  ( -- * Resource
-    MirrorLocationsListResource,
+    (
+    -- * Resource
+      MirrorLocationsListResource
 
     -- ** Constructing a Request
-    newMirrorLocationsList,
-    MirrorLocationsList,
-  )
-where
+    , newMirrorLocationsList
+    , MirrorLocationsList
+    ) where
 
-import Gogol.Mirror.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Mirror.Types
 
 -- | A resource alias for @mirror.locations.list@ method which the
 -- 'MirrorLocationsList' request conforms to.
 type MirrorLocationsListResource =
-  "mirror"
-    Core.:> "v1"
-    Core.:> "locations"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] LocationsListResponse
+     "mirror" Core.:>
+       "v1" Core.:>
+         "locations" Core.:>
+           Core.QueryParam "alt" Core.AltJSON Core.:>
+             Core.Get '[Core.JSON] LocationsListResponse
 
 -- | Retrieves a list of locations for the user.
 --
 -- /See:/ 'newMirrorLocationsList' smart constructor.
 data MirrorLocationsList = MirrorLocationsList
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorLocationsList' with the minimum fields required to make a request.
-newMirrorLocationsList ::
-  MirrorLocationsList
+newMirrorLocationsList 
+    ::  MirrorLocationsList
 newMirrorLocationsList = MirrorLocationsList
 
 instance Core.GoogleRequest MirrorLocationsList where
-  type Rs MirrorLocationsList = LocationsListResponse
-  type
-    Scopes MirrorLocationsList =
-      '[ "https://www.googleapis.com/auth/glass.location",
-         "https://www.googleapis.com/auth/glass.timeline"
-       ]
-  requestClient MirrorLocationsList {} =
-    go (Core.Just Core.AltJSON) mirrorService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorLocationsListResource
-          )
-          Core.mempty
+        type Rs MirrorLocationsList = LocationsListResponse
+        type Scopes MirrorLocationsList =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient MirrorLocationsList{}
+          = go (Core.Just Core.AltJSON) mirrorService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy MirrorLocationsListResource)
+                      Core.mempty
+

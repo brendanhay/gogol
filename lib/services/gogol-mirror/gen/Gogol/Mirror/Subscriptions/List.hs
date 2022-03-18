@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,51 +36,49 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.subscriptions.list@.
 module Gogol.Mirror.Subscriptions.List
-  ( -- * Resource
-    MirrorSubscriptionsListResource,
+    (
+    -- * Resource
+      MirrorSubscriptionsListResource
 
     -- ** Constructing a Request
-    newMirrorSubscriptionsList,
-    MirrorSubscriptionsList,
-  )
-where
+    , newMirrorSubscriptionsList
+    , MirrorSubscriptionsList
+    ) where
 
-import Gogol.Mirror.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Mirror.Types
 
 -- | A resource alias for @mirror.subscriptions.list@ method which the
 -- 'MirrorSubscriptionsList' request conforms to.
 type MirrorSubscriptionsListResource =
-  "mirror"
-    Core.:> "v1"
-    Core.:> "subscriptions"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] SubscriptionsListResponse
+     "mirror" Core.:>
+       "v1" Core.:>
+         "subscriptions" Core.:>
+           Core.QueryParam "alt" Core.AltJSON Core.:>
+             Core.Get '[Core.JSON] SubscriptionsListResponse
 
 -- | Retrieves a list of subscriptions for the authenticated user and service.
 --
 -- /See:/ 'newMirrorSubscriptionsList' smart constructor.
 data MirrorSubscriptionsList = MirrorSubscriptionsList
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorSubscriptionsList' with the minimum fields required to make a request.
-newMirrorSubscriptionsList ::
-  MirrorSubscriptionsList
+newMirrorSubscriptionsList 
+    ::  MirrorSubscriptionsList
 newMirrorSubscriptionsList = MirrorSubscriptionsList
 
-instance Core.GoogleRequest MirrorSubscriptionsList where
-  type
-    Rs MirrorSubscriptionsList =
-      SubscriptionsListResponse
-  type
-    Scopes MirrorSubscriptionsList =
-      '["https://www.googleapis.com/auth/glass.timeline"]
-  requestClient MirrorSubscriptionsList {} =
-    go (Core.Just Core.AltJSON) mirrorService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorSubscriptionsListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest MirrorSubscriptionsList
+         where
+        type Rs MirrorSubscriptionsList =
+             SubscriptionsListResponse
+        type Scopes MirrorSubscriptionsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient MirrorSubscriptionsList{}
+          = go (Core.Just Core.AltJSON) mirrorService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy MirrorSubscriptionsListResource)
+                      Core.mempty
+
