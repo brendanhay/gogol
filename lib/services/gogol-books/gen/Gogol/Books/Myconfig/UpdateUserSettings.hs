@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,92 +36,85 @@
 --
 -- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.myconfig.updateUserSettings@.
 module Gogol.Books.Myconfig.UpdateUserSettings
-  ( -- * Resource
-    BooksMyconfigUpdateUserSettingsResource,
+    (
+    -- * Resource
+      BooksMyconfigUpdateUserSettingsResource
 
     -- ** Constructing a Request
-    newBooksMyconfigUpdateUserSettings,
-    BooksMyconfigUpdateUserSettings,
-  )
-where
+    , newBooksMyconfigUpdateUserSettings
+    , BooksMyconfigUpdateUserSettings
+    ) where
 
-import Gogol.Books.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Books.Types
 
 -- | A resource alias for @books.myconfig.updateUserSettings@ method which the
 -- 'BooksMyconfigUpdateUserSettings' request conforms to.
 type BooksMyconfigUpdateUserSettingsResource =
-  "books"
-    Core.:> "v1"
-    Core.:> "myconfig"
-    Core.:> "updateUserSettings"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Usersettings
-    Core.:> Core.Post '[Core.JSON] Usersettings
+     "books" Core.:>
+       "v1" Core.:>
+         "myconfig" Core.:>
+           "updateUserSettings" Core.:>
+             Core.QueryParam "$.xgafv" Xgafv Core.:>
+               Core.QueryParam "access_token" Core.Text Core.:>
+                 Core.QueryParam "callback" Core.Text Core.:>
+                   Core.QueryParam "uploadType" Core.Text Core.:>
+                     Core.QueryParam "upload_protocol" Core.Text Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.ReqBody '[Core.JSON] Usersettings Core.:>
+                           Core.Post '[Core.JSON] Usersettings
 
 -- | Sets the settings for the user. If a sub-object is specified, it will overwrite the existing sub-object stored in the server. Unspecified sub-objects will retain the existing value.
 --
 -- /See:/ 'newBooksMyconfigUpdateUserSettings' smart constructor.
 data BooksMyconfigUpdateUserSettings = BooksMyconfigUpdateUserSettings
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Usersettings,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: Usersettings
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BooksMyconfigUpdateUserSettings' with the minimum fields required to make a request.
-newBooksMyconfigUpdateUserSettings ::
-  -- |  Multipart request metadata. See 'payload'.
-  Usersettings ->
-  BooksMyconfigUpdateUserSettings
+newBooksMyconfigUpdateUserSettings 
+    ::  Usersettings
+       -- ^  Multipart request metadata. See 'payload'.
+    -> BooksMyconfigUpdateUserSettings
 newBooksMyconfigUpdateUserSettings payload =
   BooksMyconfigUpdateUserSettings
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksMyconfigUpdateUserSettings
-  where
-  type
-    Rs BooksMyconfigUpdateUserSettings =
-      Usersettings
-  type
-    Scopes BooksMyconfigUpdateUserSettings =
-      '["https://www.googleapis.com/auth/books"]
-  requestClient BooksMyconfigUpdateUserSettings {..} =
-    go
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      booksService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksMyconfigUpdateUserSettingsResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           BooksMyconfigUpdateUserSettings
+         where
+        type Rs BooksMyconfigUpdateUserSettings =
+             Usersettings
+        type Scopes BooksMyconfigUpdateUserSettings =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient BooksMyconfigUpdateUserSettings{..}
+          = go xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              booksService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy BooksMyconfigUpdateUserSettingsResource)
+                      Core.mempty
+
