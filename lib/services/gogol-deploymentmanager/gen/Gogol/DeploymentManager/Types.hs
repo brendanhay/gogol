@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,225 +25,224 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DeploymentManager.Types
-    (
-    -- * Configuration
-      deploymentManagerService
+  ( -- * Configuration
+    deploymentManagerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
-    , ndevCloudmanScope
-    , ndevCloudmanReadOnlyScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    ndevCloudmanScope,
+    ndevCloudmanReadOnlyScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** ConfigFile
-    , ConfigFile (..)
-    , newConfigFile
+    ConfigFile (..),
+    newConfigFile,
 
     -- ** Deployment
-    , Deployment (..)
-    , newDeployment
+    Deployment (..),
+    newDeployment,
 
     -- ** DeploymentLabelEntry
-    , DeploymentLabelEntry (..)
-    , newDeploymentLabelEntry
+    DeploymentLabelEntry (..),
+    newDeploymentLabelEntry,
 
     -- ** DeploymentUpdate
-    , DeploymentUpdate (..)
-    , newDeploymentUpdate
+    DeploymentUpdate (..),
+    newDeploymentUpdate,
 
     -- ** DeploymentUpdateLabelEntry
-    , DeploymentUpdateLabelEntry (..)
-    , newDeploymentUpdateLabelEntry
+    DeploymentUpdateLabelEntry (..),
+    newDeploymentUpdateLabelEntry,
 
     -- ** DeploymentsCancelPreviewRequest
-    , DeploymentsCancelPreviewRequest (..)
-    , newDeploymentsCancelPreviewRequest
+    DeploymentsCancelPreviewRequest (..),
+    newDeploymentsCancelPreviewRequest,
 
     -- ** DeploymentsListResponse
-    , DeploymentsListResponse (..)
-    , newDeploymentsListResponse
+    DeploymentsListResponse (..),
+    newDeploymentsListResponse,
 
     -- ** DeploymentsStopRequest
-    , DeploymentsStopRequest (..)
-    , newDeploymentsStopRequest
+    DeploymentsStopRequest (..),
+    newDeploymentsStopRequest,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** GlobalSetPolicyRequest
-    , GlobalSetPolicyRequest (..)
-    , newGlobalSetPolicyRequest
+    GlobalSetPolicyRequest (..),
+    newGlobalSetPolicyRequest,
 
     -- ** ImportFile
-    , ImportFile (..)
-    , newImportFile
+    ImportFile (..),
+    newImportFile,
 
     -- ** Manifest
-    , Manifest (..)
-    , newManifest
+    Manifest (..),
+    newManifest,
 
     -- ** ManifestsListResponse
-    , ManifestsListResponse (..)
-    , newManifestsListResponse
+    ManifestsListResponse (..),
+    newManifestsListResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Error
-    , Operation_Error (..)
-    , newOperation_Error
+    Operation_Error (..),
+    newOperation_Error,
 
     -- ** Operation_Error_ErrorsItem
-    , Operation_Error_ErrorsItem (..)
-    , newOperation_Error_ErrorsItem
+    Operation_Error_ErrorsItem (..),
+    newOperation_Error_ErrorsItem,
 
     -- ** Operation_Status
-    , Operation_Status (..)
+    Operation_Status (..),
 
     -- ** Operation_WarningsItem
-    , Operation_WarningsItem (..)
-    , newOperation_WarningsItem
+    Operation_WarningsItem (..),
+    newOperation_WarningsItem,
 
     -- ** Operation_WarningsItem_Code
-    , Operation_WarningsItem_Code (..)
+    Operation_WarningsItem_Code (..),
 
     -- ** Operation_WarningsItem_DataItem
-    , Operation_WarningsItem_DataItem (..)
-    , newOperation_WarningsItem_DataItem
+    Operation_WarningsItem_DataItem (..),
+    newOperation_WarningsItem_DataItem,
 
     -- ** OperationsListResponse
-    , OperationsListResponse (..)
-    , newOperationsListResponse
+    OperationsListResponse (..),
+    newOperationsListResponse,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** Resource
-    , Resource (..)
-    , newResource
+    Resource (..),
+    newResource,
 
     -- ** Resource_WarningsItem
-    , Resource_WarningsItem (..)
-    , newResource_WarningsItem
+    Resource_WarningsItem (..),
+    newResource_WarningsItem,
 
     -- ** Resource_WarningsItem_Code
-    , Resource_WarningsItem_Code (..)
+    Resource_WarningsItem_Code (..),
 
     -- ** Resource_WarningsItem_DataItem
-    , Resource_WarningsItem_DataItem (..)
-    , newResource_WarningsItem_DataItem
+    Resource_WarningsItem_DataItem (..),
+    newResource_WarningsItem_DataItem,
 
     -- ** ResourceAccessControl
-    , ResourceAccessControl (..)
-    , newResourceAccessControl
+    ResourceAccessControl (..),
+    newResourceAccessControl,
 
     -- ** ResourceUpdate
-    , ResourceUpdate (..)
-    , newResourceUpdate
+    ResourceUpdate (..),
+    newResourceUpdate,
 
     -- ** ResourceUpdate_Error
-    , ResourceUpdate_Error (..)
-    , newResourceUpdate_Error
+    ResourceUpdate_Error (..),
+    newResourceUpdate_Error,
 
     -- ** ResourceUpdate_Error_ErrorsItem
-    , ResourceUpdate_Error_ErrorsItem (..)
-    , newResourceUpdate_Error_ErrorsItem
+    ResourceUpdate_Error_ErrorsItem (..),
+    newResourceUpdate_Error_ErrorsItem,
 
     -- ** ResourceUpdate_Intent
-    , ResourceUpdate_Intent (..)
+    ResourceUpdate_Intent (..),
 
     -- ** ResourceUpdate_State
-    , ResourceUpdate_State (..)
+    ResourceUpdate_State (..),
 
     -- ** ResourceUpdate_WarningsItem
-    , ResourceUpdate_WarningsItem (..)
-    , newResourceUpdate_WarningsItem
+    ResourceUpdate_WarningsItem (..),
+    newResourceUpdate_WarningsItem,
 
     -- ** ResourceUpdate_WarningsItem_Code
-    , ResourceUpdate_WarningsItem_Code (..)
+    ResourceUpdate_WarningsItem_Code (..),
 
     -- ** ResourceUpdate_WarningsItem_DataItem
-    , ResourceUpdate_WarningsItem_DataItem (..)
-    , newResourceUpdate_WarningsItem_DataItem
+    ResourceUpdate_WarningsItem_DataItem (..),
+    newResourceUpdate_WarningsItem_DataItem,
 
     -- ** ResourcesListResponse
-    , ResourcesListResponse (..)
-    , newResourcesListResponse
+    ResourcesListResponse (..),
+    newResourcesListResponse,
 
     -- ** TargetConfiguration
-    , TargetConfiguration (..)
-    , newTargetConfiguration
+    TargetConfiguration (..),
+    newTargetConfiguration,
 
     -- ** TestPermissionsRequest
-    , TestPermissionsRequest (..)
-    , newTestPermissionsRequest
+    TestPermissionsRequest (..),
+    newTestPermissionsRequest,
 
     -- ** TestPermissionsResponse
-    , TestPermissionsResponse (..)
-    , newTestPermissionsResponse
+    TestPermissionsResponse (..),
+    newTestPermissionsResponse,
 
     -- ** Type
-    , Type (..)
-    , newType
+    Type (..),
+    newType,
 
     -- ** TypesListResponse
-    , TypesListResponse (..)
-    , newTypesListResponse
+    TypesListResponse (..),
+    newTypesListResponse,
 
     -- ** DeploymentsDeleteDeletePolicy
-    , DeploymentsDeleteDeletePolicy (..)
+    DeploymentsDeleteDeletePolicy (..),
 
     -- ** DeploymentsInsertCreatePolicy
-    , DeploymentsInsertCreatePolicy (..)
+    DeploymentsInsertCreatePolicy (..),
 
     -- ** DeploymentsPatchCreatePolicy
-    , DeploymentsPatchCreatePolicy (..)
+    DeploymentsPatchCreatePolicy (..),
 
     -- ** DeploymentsPatchDeletePolicy
-    , DeploymentsPatchDeletePolicy (..)
+    DeploymentsPatchDeletePolicy (..),
 
     -- ** DeploymentsUpdateCreatePolicy
-    , DeploymentsUpdateCreatePolicy (..)
+    DeploymentsUpdateCreatePolicy (..),
 
     -- ** DeploymentsUpdateDeletePolicy
-    , DeploymentsUpdateDeletePolicy (..)
-    ) where
+    DeploymentsUpdateDeletePolicy (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DeploymentManager.Internal.Product
 import Gogol.DeploymentManager.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Cloud Deployment Manager V2 API. This contains the host and root path used as a starting point for constructing service requests.
 deploymentManagerService :: Core.ServiceConfig
-deploymentManagerService
-  = Core.defaultService
-      (Core.ServiceId "deploymentmanager:v2")
-      "deploymentmanager.googleapis.com"
+deploymentManagerService =
+  Core.defaultService
+    (Core.ServiceId "deploymentmanager:v2")
+    "deploymentmanager.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]

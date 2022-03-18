@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DeploymentManager.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -55,8 +44,7 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * Operation_Status
     Operation_Status
-      (
-        Operation_Status_Pending,
+      ( Operation_Status_Pending,
         Operation_Status_Running,
         Operation_Status_Done,
         ..
@@ -64,8 +52,7 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * Operation_WarningsItem_Code
     Operation_WarningsItem_Code
-      (
-        Operation_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
+      ( Operation_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
         Operation_WarningsItem_Code_NORESULTSONPAGE,
         Operation_WarningsItem_Code_Unreachable,
         Operation_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
@@ -95,8 +82,7 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * Resource_WarningsItem_Code
     Resource_WarningsItem_Code
-      (
-        Resource_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
+      ( Resource_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
         Resource_WarningsItem_Code_NORESULTSONPAGE,
         Resource_WarningsItem_Code_Unreachable,
         Resource_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
@@ -126,8 +112,7 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * ResourceUpdate_Intent
     ResourceUpdate_Intent
-      (
-        ResourceUpdate_Intent_CREATEORACQUIRE,
+      ( ResourceUpdate_Intent_CREATEORACQUIRE,
         ResourceUpdate_Intent_Delete',
         ResourceUpdate_Intent_Acquire,
         ResourceUpdate_Intent_Update,
@@ -138,8 +123,7 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * ResourceUpdate_State
     ResourceUpdate_State
-      (
-        ResourceUpdate_State_Pending,
+      ( ResourceUpdate_State_Pending,
         ResourceUpdate_State_INPROGRESS,
         ResourceUpdate_State_INPREVIEW,
         ResourceUpdate_State_Failed,
@@ -149,8 +133,7 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * ResourceUpdate_WarningsItem_Code
     ResourceUpdate_WarningsItem_Code
-      (
-        ResourceUpdate_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
+      ( ResourceUpdate_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
         ResourceUpdate_WarningsItem_Code_NORESULTSONPAGE,
         ResourceUpdate_WarningsItem_Code_Unreachable,
         ResourceUpdate_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
@@ -180,67 +163,62 @@ module Gogol.DeploymentManager.Internal.Sum
 
     -- * DeploymentsDeleteDeletePolicy
     DeploymentsDeleteDeletePolicy
-      (
-        DeploymentsDeleteDeletePolicy_Delete',
+      ( DeploymentsDeleteDeletePolicy_Delete',
         DeploymentsDeleteDeletePolicy_Abandon,
         ..
       ),
 
     -- * DeploymentsInsertCreatePolicy
     DeploymentsInsertCreatePolicy
-      (
-        DeploymentsInsertCreatePolicy_CREATEORACQUIRE,
+      ( DeploymentsInsertCreatePolicy_CREATEORACQUIRE,
         DeploymentsInsertCreatePolicy_Acquire,
         ..
       ),
 
     -- * DeploymentsPatchCreatePolicy
     DeploymentsPatchCreatePolicy
-      (
-        DeploymentsPatchCreatePolicy_CREATEORACQUIRE,
+      ( DeploymentsPatchCreatePolicy_CREATEORACQUIRE,
         DeploymentsPatchCreatePolicy_Acquire,
         ..
       ),
 
     -- * DeploymentsPatchDeletePolicy
     DeploymentsPatchDeletePolicy
-      (
-        DeploymentsPatchDeletePolicy_Delete',
+      ( DeploymentsPatchDeletePolicy_Delete',
         DeploymentsPatchDeletePolicy_Abandon,
         ..
       ),
 
     -- * DeploymentsUpdateCreatePolicy
     DeploymentsUpdateCreatePolicy
-      (
-        DeploymentsUpdateCreatePolicy_CREATEORACQUIRE,
+      ( DeploymentsUpdateCreatePolicy_CREATEORACQUIRE,
         DeploymentsUpdateCreatePolicy_Acquire,
         ..
       ),
 
     -- * DeploymentsUpdateDeletePolicy
     DeploymentsUpdateDeletePolicy
-      (
-        DeploymentsUpdateDeletePolicy_Delete',
+      ( DeploymentsUpdateDeletePolicy_Delete',
         DeploymentsUpdateDeletePolicy_Abandon,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -253,20 +231,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -289,30 +268,31 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | [Output Only] The status of the operation, which can be one of the following: @PENDING@, @RUNNING@, or @DONE@.
-newtype Operation_Status = Operation_Status { fromOperation_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Operation_Status = Operation_Status {fromOperation_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern Operation_Status_Pending :: Operation_Status
 pattern Operation_Status_Pending = Operation_Status "PENDING"
 
--- | 
+-- |
 pattern Operation_Status_Running :: Operation_Status
 pattern Operation_Status_Running = Operation_Status "RUNNING"
 
--- | 
+-- |
 pattern Operation_Status_Done :: Operation_Status
 pattern Operation_Status_Done = Operation_Status "DONE"
 
@@ -320,20 +300,21 @@ pattern Operation_Status_Done = Operation_Status "DONE"
   Operation_Status_Pending,
   Operation_Status_Running,
   Operation_Status_Done,
-  Operation_Status #-}
+  Operation_Status
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype Operation_WarningsItem_Code = Operation_WarningsItem_Code { fromOperation_WarningsItem_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Operation_WarningsItem_Code = Operation_WarningsItem_Code {fromOperation_WarningsItem_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A link to a deprecated resource was created.
 pattern Operation_WarningsItem_Code_DEPRECATEDRESOURCEUSED :: Operation_WarningsItem_Code
@@ -461,20 +442,21 @@ pattern Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Operation_WarningsI
   Operation_WarningsItem_Code_DEPRECATEDTYPEUSED,
   Operation_WarningsItem_Code_PARTIALSUCCESS,
   Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
-  Operation_WarningsItem_Code #-}
+  Operation_WarningsItem_Code
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype Resource_WarningsItem_Code = Resource_WarningsItem_Code { fromResource_WarningsItem_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Resource_WarningsItem_Code = Resource_WarningsItem_Code {fromResource_WarningsItem_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A link to a deprecated resource was created.
 pattern Resource_WarningsItem_Code_DEPRECATEDRESOURCEUSED :: Resource_WarningsItem_Code
@@ -602,20 +584,21 @@ pattern Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Resource_WarningsIte
   Resource_WarningsItem_Code_DEPRECATEDTYPEUSED,
   Resource_WarningsItem_Code_PARTIALSUCCESS,
   Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
-  Resource_WarningsItem_Code #-}
+  Resource_WarningsItem_Code
+  #-}
 
 -- | Output only. The intent of the resource: @PREVIEW@, @UPDATE@, or @CANCEL@.
-newtype ResourceUpdate_Intent = ResourceUpdate_Intent { fromResourceUpdate_Intent :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourceUpdate_Intent = ResourceUpdate_Intent {fromResourceUpdate_Intent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The resource is scheduled to be created, or if it already exists, acquired.
 pattern ResourceUpdate_Intent_CREATEORACQUIRE :: ResourceUpdate_Intent
@@ -648,20 +631,21 @@ pattern ResourceUpdate_Intent_Create = ResourceUpdate_Intent "CREATE"
   ResourceUpdate_Intent_Update,
   ResourceUpdate_Intent_Abandon,
   ResourceUpdate_Intent_Create,
-  ResourceUpdate_Intent #-}
+  ResourceUpdate_Intent
+  #-}
 
 -- | Output only. The state of the resource.
-newtype ResourceUpdate_State = ResourceUpdate_State { fromResourceUpdate_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourceUpdate_State = ResourceUpdate_State {fromResourceUpdate_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | There are changes pending for this resource.
 pattern ResourceUpdate_State_Pending :: ResourceUpdate_State
@@ -689,20 +673,21 @@ pattern ResourceUpdate_State_Aborted = ResourceUpdate_State "ABORTED"
   ResourceUpdate_State_INPREVIEW,
   ResourceUpdate_State_Failed,
   ResourceUpdate_State_Aborted,
-  ResourceUpdate_State #-}
+  ResourceUpdate_State
+  #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
-newtype ResourceUpdate_WarningsItem_Code = ResourceUpdate_WarningsItem_Code { fromResourceUpdate_WarningsItem_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourceUpdate_WarningsItem_Code = ResourceUpdate_WarningsItem_Code {fromResourceUpdate_WarningsItem_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A link to a deprecated resource was created.
 pattern ResourceUpdate_WarningsItem_Code_DEPRECATEDRESOURCEUSED :: ResourceUpdate_WarningsItem_Code
@@ -830,160 +815,167 @@ pattern ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING = ResourceUpdate
   ResourceUpdate_WarningsItem_Code_DEPRECATEDTYPEUSED,
   ResourceUpdate_WarningsItem_Code_PARTIALSUCCESS,
   ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
-  ResourceUpdate_WarningsItem_Code #-}
+  ResourceUpdate_WarningsItem_Code
+  #-}
 
 -- | Sets the policy to use for deleting resources.
-newtype DeploymentsDeleteDeletePolicy = DeploymentsDeleteDeletePolicy { fromDeploymentsDeleteDeletePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeploymentsDeleteDeletePolicy = DeploymentsDeleteDeletePolicy {fromDeploymentsDeleteDeletePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeploymentsDeleteDeletePolicy_Delete' :: DeploymentsDeleteDeletePolicy
 pattern DeploymentsDeleteDeletePolicy_Delete' = DeploymentsDeleteDeletePolicy "DELETE"
 
--- | 
+-- |
 pattern DeploymentsDeleteDeletePolicy_Abandon :: DeploymentsDeleteDeletePolicy
 pattern DeploymentsDeleteDeletePolicy_Abandon = DeploymentsDeleteDeletePolicy "ABANDON"
 
 {-# COMPLETE
   DeploymentsDeleteDeletePolicy_Delete',
   DeploymentsDeleteDeletePolicy_Abandon,
-  DeploymentsDeleteDeletePolicy #-}
+  DeploymentsDeleteDeletePolicy
+  #-}
 
 -- | Sets the policy to use for creating new resources.
-newtype DeploymentsInsertCreatePolicy = DeploymentsInsertCreatePolicy { fromDeploymentsInsertCreatePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeploymentsInsertCreatePolicy = DeploymentsInsertCreatePolicy {fromDeploymentsInsertCreatePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeploymentsInsertCreatePolicy_CREATEORACQUIRE :: DeploymentsInsertCreatePolicy
 pattern DeploymentsInsertCreatePolicy_CREATEORACQUIRE = DeploymentsInsertCreatePolicy "CREATE_OR_ACQUIRE"
 
--- | 
+-- |
 pattern DeploymentsInsertCreatePolicy_Acquire :: DeploymentsInsertCreatePolicy
 pattern DeploymentsInsertCreatePolicy_Acquire = DeploymentsInsertCreatePolicy "ACQUIRE"
 
 {-# COMPLETE
   DeploymentsInsertCreatePolicy_CREATEORACQUIRE,
   DeploymentsInsertCreatePolicy_Acquire,
-  DeploymentsInsertCreatePolicy #-}
+  DeploymentsInsertCreatePolicy
+  #-}
 
 -- | Sets the policy to use for creating new resources.
-newtype DeploymentsPatchCreatePolicy = DeploymentsPatchCreatePolicy { fromDeploymentsPatchCreatePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeploymentsPatchCreatePolicy = DeploymentsPatchCreatePolicy {fromDeploymentsPatchCreatePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeploymentsPatchCreatePolicy_CREATEORACQUIRE :: DeploymentsPatchCreatePolicy
 pattern DeploymentsPatchCreatePolicy_CREATEORACQUIRE = DeploymentsPatchCreatePolicy "CREATE_OR_ACQUIRE"
 
--- | 
+-- |
 pattern DeploymentsPatchCreatePolicy_Acquire :: DeploymentsPatchCreatePolicy
 pattern DeploymentsPatchCreatePolicy_Acquire = DeploymentsPatchCreatePolicy "ACQUIRE"
 
 {-# COMPLETE
   DeploymentsPatchCreatePolicy_CREATEORACQUIRE,
   DeploymentsPatchCreatePolicy_Acquire,
-  DeploymentsPatchCreatePolicy #-}
+  DeploymentsPatchCreatePolicy
+  #-}
 
 -- | Sets the policy to use for deleting resources.
-newtype DeploymentsPatchDeletePolicy = DeploymentsPatchDeletePolicy { fromDeploymentsPatchDeletePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeploymentsPatchDeletePolicy = DeploymentsPatchDeletePolicy {fromDeploymentsPatchDeletePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeploymentsPatchDeletePolicy_Delete' :: DeploymentsPatchDeletePolicy
 pattern DeploymentsPatchDeletePolicy_Delete' = DeploymentsPatchDeletePolicy "DELETE"
 
--- | 
+-- |
 pattern DeploymentsPatchDeletePolicy_Abandon :: DeploymentsPatchDeletePolicy
 pattern DeploymentsPatchDeletePolicy_Abandon = DeploymentsPatchDeletePolicy "ABANDON"
 
 {-# COMPLETE
   DeploymentsPatchDeletePolicy_Delete',
   DeploymentsPatchDeletePolicy_Abandon,
-  DeploymentsPatchDeletePolicy #-}
+  DeploymentsPatchDeletePolicy
+  #-}
 
 -- | Sets the policy to use for creating new resources.
-newtype DeploymentsUpdateCreatePolicy = DeploymentsUpdateCreatePolicy { fromDeploymentsUpdateCreatePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeploymentsUpdateCreatePolicy = DeploymentsUpdateCreatePolicy {fromDeploymentsUpdateCreatePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeploymentsUpdateCreatePolicy_CREATEORACQUIRE :: DeploymentsUpdateCreatePolicy
 pattern DeploymentsUpdateCreatePolicy_CREATEORACQUIRE = DeploymentsUpdateCreatePolicy "CREATE_OR_ACQUIRE"
 
--- | 
+-- |
 pattern DeploymentsUpdateCreatePolicy_Acquire :: DeploymentsUpdateCreatePolicy
 pattern DeploymentsUpdateCreatePolicy_Acquire = DeploymentsUpdateCreatePolicy "ACQUIRE"
 
 {-# COMPLETE
   DeploymentsUpdateCreatePolicy_CREATEORACQUIRE,
   DeploymentsUpdateCreatePolicy_Acquire,
-  DeploymentsUpdateCreatePolicy #-}
+  DeploymentsUpdateCreatePolicy
+  #-}
 
 -- | Sets the policy to use for deleting resources.
-newtype DeploymentsUpdateDeletePolicy = DeploymentsUpdateDeletePolicy { fromDeploymentsUpdateDeletePolicy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeploymentsUpdateDeletePolicy = DeploymentsUpdateDeletePolicy {fromDeploymentsUpdateDeletePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern DeploymentsUpdateDeletePolicy_Delete' :: DeploymentsUpdateDeletePolicy
 pattern DeploymentsUpdateDeletePolicy_Delete' = DeploymentsUpdateDeletePolicy "DELETE"
 
--- | 
+-- |
 pattern DeploymentsUpdateDeletePolicy_Abandon :: DeploymentsUpdateDeletePolicy
 pattern DeploymentsUpdateDeletePolicy_Abandon = DeploymentsUpdateDeletePolicy "ABANDON"
 
 {-# COMPLETE
   DeploymentsUpdateDeletePolicy_Delete',
   DeploymentsUpdateDeletePolicy_Abandon,
-  DeploymentsUpdateDeletePolicy #-}
+  DeploymentsUpdateDeletePolicy
+  #-}
