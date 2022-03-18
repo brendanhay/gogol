@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.URLShortener
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,91 +30,60 @@
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
 module Network.Google.URLShortener
-    (
-    -- * Service Configuration
-      uRLShortenerService
+  ( -- * Configuration
+    uRLShortenerService,
 
     -- * OAuth Scopes
-    , urlShortenerScope
-
-    -- * API Declaration
-    , URLShortenerAPI
+    uRLShortenerScope,
 
     -- * Resources
 
     -- ** urlshortener.url.get
-    , module Network.Google.Resource.URLShortener.URL.Get
+    URLShortenerUrlGetResource,
+    newURLShortenerUrlGet,
+    URLShortenerUrlGet,
 
     -- ** urlshortener.url.insert
-    , module Network.Google.Resource.URLShortener.URL.Insert
+    URLShortenerUrlInsertResource,
+    newURLShortenerUrlInsert,
+    URLShortenerUrlInsert,
 
     -- ** urlshortener.url.list
-    , module Network.Google.Resource.URLShortener.URL.List
+    URLShortenerUrlListResource,
+    newURLShortenerUrlList,
+    URLShortenerUrlList,
 
     -- * Types
 
-    -- ** URL
-    , URL
-    , url
-    , uStatus
-    , uKind
-    , uCreated
-    , uAnalytics
-    , uLongURL
-    , uId
-
-    -- ** StringCount
-    , StringCount
-    , stringCount
-    , scCount
-    , scId
-
-    -- ** URLListProjection
-    , URLListProjection (..)
-
     -- ** AnalyticsSnapshot
-    , AnalyticsSnapshot
-    , analyticsSnapshot
-    , asPlatforms
-    , asShortURLClicks
-    , asReferrers
-    , asCountries
-    , asLongURLClicks
-    , asBrowsers
+    AnalyticsSnapshot (..),
+    newAnalyticsSnapshot,
 
     -- ** AnalyticsSummary
-    , AnalyticsSummary
-    , analyticsSummary
-    , asWeek
-    , asAllTime
-    , asDay
-    , asTwoHours
-    , asMonth
+    AnalyticsSummary (..),
+    newAnalyticsSummary,
 
-    -- ** URLGetProjection
-    , URLGetProjection (..)
+    -- ** StringCount
+    StringCount (..),
+    newStringCount,
 
-    -- ** URLHistory
-    , URLHistory
-    , urlHistory
-    , uhTotalItems
-    , uhNextPageToken
-    , uhItemsPerPage
-    , uhKind
-    , uhItems
-    ) where
+    -- ** Url
+    Url (..),
+    newUrl,
 
-import Network.Google.Prelude
-import Network.Google.Resource.URLShortener.URL.Get
-import Network.Google.Resource.URLShortener.URL.Insert
-import Network.Google.Resource.URLShortener.URL.List
+    -- ** UrlHistory
+    UrlHistory (..),
+    newUrlHistory,
+
+    -- ** UrlGetProjection
+    UrlGetProjection (..),
+
+    -- ** UrlListProjection
+    UrlListProjection (..),
+  )
+where
+
 import Network.Google.URLShortener.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the URL Shortener API service.
-type URLShortenerAPI =
-     URLInsertResource :<|> URLListResource :<|>
-       URLGetResource
+import Network.Google.URLShortener.Url.Get
+import Network.Google.URLShortener.Url.Insert
+import Network.Google.URLShortener.Url.List
