@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeReporting.Media.Download
+-- Module      : Gogol.YouTubeReporting.Media.Download
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Method for media download. Download is supported on the URI @\/v1\/media\/{+name}?alt=media@.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.media.download@.
-module Network.Google.YouTubeReporting.Media.Download
+module Gogol.YouTubeReporting.Media.Download
   ( -- * Resource
     YouTubeReportingMediaDownloadResource,
 
@@ -39,8 +39,8 @@ module Network.Google.YouTubeReporting.Media.Download
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeReporting.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.media.download@ method which the
 -- 'YouTubeReportingMediaDownload' request conforms to.

@@ -19,64 +19,58 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeReporting.ReportTypes.List
+-- Module      : Gogol.YouTubeReporting.Jobs.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists report types.
+-- Deletes a job.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.reportTypes.list@.
-module Network.Google.YouTubeReporting.ReportTypes.List
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.delete@.
+module Gogol.YouTubeReporting.Jobs.Delete
   ( -- * Resource
-    YouTubeReportingReportTypesListResource,
+    YouTubeReportingJobsDeleteResource,
 
     -- ** Constructing a Request
-    newYouTubeReportingReportTypesList,
-    YouTubeReportingReportTypesList,
+    newYouTubeReportingJobsDelete,
+    YouTubeReportingJobsDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeReporting.Types
+import qualified Gogol.Prelude as Core
+import Gogol.YouTubeReporting.Types
 
--- | A resource alias for @youtubereporting.reportTypes.list@ method which the
--- 'YouTubeReportingReportTypesList' request conforms to.
-type YouTubeReportingReportTypesListResource =
+-- | A resource alias for @youtubereporting.jobs.delete@ method which the
+-- 'YouTubeReportingJobsDelete' request conforms to.
+type YouTubeReportingJobsDeleteResource =
   "v1"
-    Core.:> "reportTypes"
+    Core.:> "jobs"
+    Core.:> Core.Capture "jobId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "includeSystemManaged" Core.Bool
     Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-    Core.:> Core.QueryParam "pageSize" Core.Int32
-    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListReportTypesResponse
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Lists report types.
+-- | Deletes a job.
 --
--- /See:/ 'newYouTubeReportingReportTypesList' smart constructor.
-data YouTubeReportingReportTypesList = YouTubeReportingReportTypesList
+-- /See:/ 'newYouTubeReportingJobsDelete' smart constructor.
+data YouTubeReportingJobsDelete = YouTubeReportingJobsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | If set to true, also system-managed report types will be returned; otherwise only the report types that can be used to create new reporting jobs will be returned.
-    includeSystemManaged :: (Core.Maybe Core.Bool),
+    -- | The ID of the job to delete.
+    jobId :: Core.Text,
     -- | The content owner\'s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
     onBehalfOfContentOwner :: (Core.Maybe Core.Text),
-    -- | Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.
-    pageSize :: (Core.Maybe Core.Int32),
-    -- | A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next/page/token returned in response to the previous call to the @ListReportTypes@ method.
-    pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -84,43 +78,39 @@ data YouTubeReportingReportTypesList = YouTubeReportingReportTypesList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'YouTubeReportingReportTypesList' with the minimum fields required to make a request.
-newYouTubeReportingReportTypesList ::
-  YouTubeReportingReportTypesList
-newYouTubeReportingReportTypesList =
-  YouTubeReportingReportTypesList
+-- | Creates a value of 'YouTubeReportingJobsDelete' with the minimum fields required to make a request.
+newYouTubeReportingJobsDelete ::
+  -- |  The ID of the job to delete. See 'jobId'.
+  Core.Text ->
+  YouTubeReportingJobsDelete
+newYouTubeReportingJobsDelete jobId =
+  YouTubeReportingJobsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      includeSystemManaged = Core.Nothing,
+      jobId = jobId,
       onBehalfOfContentOwner = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    YouTubeReportingReportTypesList
+    YouTubeReportingJobsDelete
   where
+  type Rs YouTubeReportingJobsDelete = Empty
   type
-    Rs YouTubeReportingReportTypesList =
-      ListReportTypesResponse
-  type
-    Scopes YouTubeReportingReportTypesList =
+    Scopes YouTubeReportingJobsDelete =
       '[ "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
          "https://www.googleapis.com/auth/yt-analytics.readonly"
        ]
-  requestClient YouTubeReportingReportTypesList {..} =
+  requestClient YouTubeReportingJobsDelete {..} =
     go
+      jobId
       xgafv
       accessToken
       callback
-      includeSystemManaged
       onBehalfOfContentOwner
-      pageSize
-      pageToken
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -129,6 +119,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy YouTubeReportingReportTypesListResource
+              Core.Proxy YouTubeReportingJobsDeleteResource
           )
           Core.mempty

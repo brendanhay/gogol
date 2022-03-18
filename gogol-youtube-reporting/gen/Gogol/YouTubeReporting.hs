@@ -19,19 +19,65 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.YouTubeReporting.Types
+-- Module      : Gogol.YouTubeReporting
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.YouTubeReporting.Types
+--
+-- Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
+--
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>
+module Gogol.YouTubeReporting
   ( -- * Configuration
     youTubeReportingService,
 
     -- * OAuth Scopes
     youtubeAnalyticsMonetaryReadOnlyScope,
     youtubeAnalyticsReadOnlyScope,
+
+    -- * Resources
+
+    -- ** youtubereporting.jobs.create
+    YouTubeReportingJobsCreateResource,
+    newYouTubeReportingJobsCreate,
+    YouTubeReportingJobsCreate,
+
+    -- ** youtubereporting.jobs.delete
+    YouTubeReportingJobsDeleteResource,
+    newYouTubeReportingJobsDelete,
+    YouTubeReportingJobsDelete,
+
+    -- ** youtubereporting.jobs.get
+    YouTubeReportingJobsGetResource,
+    newYouTubeReportingJobsGet,
+    YouTubeReportingJobsGet,
+
+    -- ** youtubereporting.jobs.list
+    YouTubeReportingJobsListResource,
+    newYouTubeReportingJobsList,
+    YouTubeReportingJobsList,
+
+    -- ** youtubereporting.jobs.reports.get
+    YouTubeReportingJobsReportsGetResource,
+    newYouTubeReportingJobsReportsGet,
+    YouTubeReportingJobsReportsGet,
+
+    -- ** youtubereporting.jobs.reports.list
+    YouTubeReportingJobsReportsListResource,
+    newYouTubeReportingJobsReportsList,
+    YouTubeReportingJobsReportsList,
+
+    -- ** youtubereporting.media.download
+    YouTubeReportingMediaDownloadResource,
+    newYouTubeReportingMediaDownload,
+    YouTubeReportingMediaDownload,
+
+    -- ** youtubereporting.reportTypes.list
+    YouTubeReportingReportTypesListResource,
+    newYouTubeReportingReportTypesList,
+    YouTubeReportingReportTypesList,
 
     -- * Types
 
@@ -118,21 +164,12 @@ module Network.Google.YouTubeReporting.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.YouTubeReporting.Internal.Product
-import Network.Google.YouTubeReporting.Internal.Sum
-
--- | Default request referring to version @v1@ of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeReportingService :: Core.ServiceConfig
-youTubeReportingService =
-  Core.defaultService
-    (Core.ServiceId "youtubereporting:v1")
-    "youtubereporting.googleapis.com"
-
--- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
-youtubeAnalyticsMonetaryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youtubeAnalyticsMonetaryReadOnlyScope = Core.Proxy
-
--- | View YouTube Analytics reports for your YouTube content
-youtubeAnalyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youtubeAnalyticsReadOnlyScope = Core.Proxy
+import Gogol.YouTubeReporting.Jobs.Create
+import Gogol.YouTubeReporting.Jobs.Delete
+import Gogol.YouTubeReporting.Jobs.Get
+import Gogol.YouTubeReporting.Jobs.List
+import Gogol.YouTubeReporting.Jobs.Reports.Get
+import Gogol.YouTubeReporting.Jobs.Reports.List
+import Gogol.YouTubeReporting.Media.Download
+import Gogol.YouTubeReporting.ReportTypes.List
+import Gogol.YouTubeReporting.Types
