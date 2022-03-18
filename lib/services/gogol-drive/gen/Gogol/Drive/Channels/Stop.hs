@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,60 +30,61 @@
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.channels.stop@.
 module Gogol.Drive.Channels.Stop
-    (
-    -- * Resource
-      DriveChannelsStopResource
+  ( -- * Resource
+    DriveChannelsStopResource,
 
     -- ** Constructing a Request
-    , newDriveChannelsStop
-    , DriveChannelsStop
-    ) where
+    newDriveChannelsStop,
+    DriveChannelsStop,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Drive.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @drive.channels.stop@ method which the
 -- 'DriveChannelsStop' request conforms to.
 type DriveChannelsStopResource =
-     "drive" Core.:>
-       "v3" Core.:>
-         "channels" Core.:>
-           "stop" Core.:>
-             Core.QueryParam "alt" Core.AltJSON Core.:>
-               Core.ReqBody '[Core.JSON] Channel Core.:>
-                 Core.Post '[Core.JSON] ()
+  "drive"
+    Core.:> "v3"
+    Core.:> "channels"
+    Core.:> "stop"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Channel
+    Core.:> Core.Post '[Core.JSON] ()
 
 -- | Stop watching resources through this channel
 --
 -- /See:/ 'newDriveChannelsStop' smart constructor.
 newtype DriveChannelsStop = DriveChannelsStop
-    {
-      -- | Multipart request metadata.
-      payload :: Channel
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: Channel
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DriveChannelsStop' with the minimum fields required to make a request.
-newDriveChannelsStop 
-    ::  Channel
-       -- ^  Multipart request metadata. See 'payload'.
-    -> DriveChannelsStop
+newDriveChannelsStop ::
+  -- |  Multipart request metadata. See 'payload'.
+  Channel ->
+  DriveChannelsStop
 newDriveChannelsStop payload = DriveChannelsStop {payload = payload}
 
 instance Core.GoogleRequest DriveChannelsStop where
-        type Rs DriveChannelsStop = ()
-        type Scopes DriveChannelsStop =
-             '["https://www.googleapis.com/auth/drive",
-               "https://www.googleapis.com/auth/drive.appdata",
-               "https://www.googleapis.com/auth/drive.file",
-               "https://www.googleapis.com/auth/drive.metadata",
-               "https://www.googleapis.com/auth/drive.metadata.readonly",
-               "https://www.googleapis.com/auth/drive.photos.readonly",
-               "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient DriveChannelsStop{..}
-          = go (Core.Just Core.AltJSON) payload driveService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy DriveChannelsStopResource)
-                      Core.mempty
-
+  type Rs DriveChannelsStop = ()
+  type
+    Scopes DriveChannelsStop =
+      '[ "https://www.googleapis.com/auth/drive",
+         "https://www.googleapis.com/auth/drive.appdata",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive.metadata",
+         "https://www.googleapis.com/auth/drive.metadata.readonly",
+         "https://www.googleapis.com/auth/drive.photos.readonly",
+         "https://www.googleapis.com/auth/drive.readonly"
+       ]
+  requestClient DriveChannelsStop {..} =
+    go (Core.Just Core.AltJSON) payload driveService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy DriveChannelsStopResource)
+          Core.mempty

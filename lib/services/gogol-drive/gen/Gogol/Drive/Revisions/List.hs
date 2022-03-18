@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,69 +30,73 @@
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.list@.
 module Gogol.Drive.Revisions.List
-    (
-    -- * Resource
-      DriveRevisionsListResource
+  ( -- * Resource
+    DriveRevisionsListResource,
 
     -- ** Constructing a Request
-    , newDriveRevisionsList
-    , DriveRevisionsList
-    ) where
+    newDriveRevisionsList,
+    DriveRevisionsList,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Drive.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @drive.revisions.list@ method which the
 -- 'DriveRevisionsList' request conforms to.
 type DriveRevisionsListResource =
-     "drive" Core.:>
-       "v3" Core.:>
-         "files" Core.:>
-           Core.Capture "fileId" Core.Text Core.:>
-             "revisions" Core.:>
-               Core.QueryParam "pageSize" Core.Int32 Core.:>
-                 Core.QueryParam "pageToken" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] RevisionList
+  "drive"
+    Core.:> "v3"
+    Core.:> "files"
+    Core.:> Core.Capture "fileId" Core.Text
+    Core.:> "revisions"
+    Core.:> Core.QueryParam "pageSize" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] RevisionList
 
 -- | Lists a file\'s revisions.
 --
 -- /See:/ 'newDriveRevisionsList' smart constructor.
 data DriveRevisionsList = DriveRevisionsList
-    {
-      -- | The ID of the file.
-      fileId :: Core.Text
-      -- | The maximum number of revisions to return per page.
-    , pageSize :: Core.Int32
-      -- | The token for continuing a previous list request on the next page. This should be set to the value of \'nextPageToken\' from the previous response.
-    , pageToken :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | The ID of the file.
+    fileId :: Core.Text,
+    -- | The maximum number of revisions to return per page.
+    pageSize :: Core.Int32,
+    -- | The token for continuing a previous list request on the next page. This should be set to the value of \'nextPageToken\' from the previous response.
+    pageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DriveRevisionsList' with the minimum fields required to make a request.
-newDriveRevisionsList 
-    ::  Core.Text
-       -- ^  The ID of the file. See 'fileId'.
-    -> DriveRevisionsList
+newDriveRevisionsList ::
+  -- |  The ID of the file. See 'fileId'.
+  Core.Text ->
+  DriveRevisionsList
 newDriveRevisionsList fileId =
   DriveRevisionsList {fileId = fileId, pageSize = 200, pageToken = Core.Nothing}
 
 instance Core.GoogleRequest DriveRevisionsList where
-        type Rs DriveRevisionsList = RevisionList
-        type Scopes DriveRevisionsList =
-             '["https://www.googleapis.com/auth/drive",
-               "https://www.googleapis.com/auth/drive.appdata",
-               "https://www.googleapis.com/auth/drive.file",
-               "https://www.googleapis.com/auth/drive.metadata",
-               "https://www.googleapis.com/auth/drive.metadata.readonly",
-               "https://www.googleapis.com/auth/drive.photos.readonly",
-               "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient DriveRevisionsList{..}
-          = go fileId (Core.Just pageSize) pageToken
-              (Core.Just Core.AltJSON)
-              driveService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy DriveRevisionsListResource)
-                      Core.mempty
-
+  type Rs DriveRevisionsList = RevisionList
+  type
+    Scopes DriveRevisionsList =
+      '[ "https://www.googleapis.com/auth/drive",
+         "https://www.googleapis.com/auth/drive.appdata",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive.metadata",
+         "https://www.googleapis.com/auth/drive.metadata.readonly",
+         "https://www.googleapis.com/auth/drive.photos.readonly",
+         "https://www.googleapis.com/auth/drive.readonly"
+       ]
+  requestClient DriveRevisionsList {..} =
+    go
+      fileId
+      (Core.Just pageSize)
+      pageToken
+      (Core.Just Core.AltJSON)
+      driveService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy DriveRevisionsListResource)
+          Core.mempty

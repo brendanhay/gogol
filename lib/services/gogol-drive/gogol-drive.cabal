@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-drive
-version:               0.5.0
-synopsis:              Google Drive SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-drive
+version:            0.5.0
+synopsis:           Google Drive SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.
+  Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,76 +31,73 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Drive
-    , Gogol.Drive.About.Get
-    , Gogol.Drive.Changes.GetStartPageToken
-    , Gogol.Drive.Changes.List
-    , Gogol.Drive.Changes.Watch
-    , Gogol.Drive.Channels.Stop
-    , Gogol.Drive.Comments.Create
-    , Gogol.Drive.Comments.Delete
-    , Gogol.Drive.Comments.Get
-    , Gogol.Drive.Comments.List
-    , Gogol.Drive.Comments.Update
-    , Gogol.Drive.Drives.Create
-    , Gogol.Drive.Drives.Delete
-    , Gogol.Drive.Drives.Get
-    , Gogol.Drive.Drives.Hide
-    , Gogol.Drive.Drives.List
-    , Gogol.Drive.Drives.Unhide
-    , Gogol.Drive.Drives.Update
-    , Gogol.Drive.Files.Copy
-    , Gogol.Drive.Files.Create
-    , Gogol.Drive.Files.Delete
-    , Gogol.Drive.Files.EmptyTrash
-    , Gogol.Drive.Files.Export
-    , Gogol.Drive.Files.GenerateIds
-    , Gogol.Drive.Files.Get
-    , Gogol.Drive.Files.List
-    , Gogol.Drive.Files.Update
-    , Gogol.Drive.Files.Watch
-    , Gogol.Drive.Permissions.Create
-    , Gogol.Drive.Permissions.Delete
-    , Gogol.Drive.Permissions.Get
-    , Gogol.Drive.Permissions.List
-    , Gogol.Drive.Permissions.Update
-    , Gogol.Drive.Replies.Create
-    , Gogol.Drive.Replies.Delete
-    , Gogol.Drive.Replies.Get
-    , Gogol.Drive.Replies.List
-    , Gogol.Drive.Replies.Update
-    , Gogol.Drive.Revisions.Delete
-    , Gogol.Drive.Revisions.Get
-    , Gogol.Drive.Revisions.List
-    , Gogol.Drive.Revisions.Update
-    , Gogol.Drive.Teamdrives.Create
-    , Gogol.Drive.Teamdrives.Delete
-    , Gogol.Drive.Teamdrives.Get
-    , Gogol.Drive.Teamdrives.List
-    , Gogol.Drive.Teamdrives.Update
-    , Gogol.Drive.Types
+    Gogol.Drive
+    Gogol.Drive.About.Get
+    Gogol.Drive.Changes.GetStartPageToken
+    Gogol.Drive.Changes.List
+    Gogol.Drive.Changes.Watch
+    Gogol.Drive.Channels.Stop
+    Gogol.Drive.Comments.Create
+    Gogol.Drive.Comments.Delete
+    Gogol.Drive.Comments.Get
+    Gogol.Drive.Comments.List
+    Gogol.Drive.Comments.Update
+    Gogol.Drive.Drives.Create
+    Gogol.Drive.Drives.Delete
+    Gogol.Drive.Drives.Get
+    Gogol.Drive.Drives.Hide
+    Gogol.Drive.Drives.List
+    Gogol.Drive.Drives.Unhide
+    Gogol.Drive.Drives.Update
+    Gogol.Drive.Files.Copy
+    Gogol.Drive.Files.Create
+    Gogol.Drive.Files.Delete
+    Gogol.Drive.Files.EmptyTrash
+    Gogol.Drive.Files.Export
+    Gogol.Drive.Files.GenerateIds
+    Gogol.Drive.Files.Get
+    Gogol.Drive.Files.List
+    Gogol.Drive.Files.Update
+    Gogol.Drive.Files.Watch
+    Gogol.Drive.Permissions.Create
+    Gogol.Drive.Permissions.Delete
+    Gogol.Drive.Permissions.Get
+    Gogol.Drive.Permissions.List
+    Gogol.Drive.Permissions.Update
+    Gogol.Drive.Replies.Create
+    Gogol.Drive.Replies.Delete
+    Gogol.Drive.Replies.Get
+    Gogol.Drive.Replies.List
+    Gogol.Drive.Replies.Update
+    Gogol.Drive.Revisions.Delete
+    Gogol.Drive.Revisions.Get
+    Gogol.Drive.Revisions.List
+    Gogol.Drive.Revisions.Update
+    Gogol.Drive.Teamdrives.Create
+    Gogol.Drive.Teamdrives.Delete
+    Gogol.Drive.Teamdrives.Get
+    Gogol.Drive.Teamdrives.List
+    Gogol.Drive.Teamdrives.Update
+    Gogol.Drive.Types
 
   other-modules:
-      Gogol.Drive.Internal.Product
-    , Gogol.Drive.Internal.Sum
+    Gogol.Drive.Internal.Product
+    Gogol.Drive.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

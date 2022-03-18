@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,54 +30,54 @@
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.drives.hide@.
 module Gogol.Drive.Drives.Hide
-    (
-    -- * Resource
-      DriveDrivesHideResource
+  ( -- * Resource
+    DriveDrivesHideResource,
 
     -- ** Constructing a Request
-    , newDriveDrivesHide
-    , DriveDrivesHide
-    ) where
+    newDriveDrivesHide,
+    DriveDrivesHide,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Drive.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @drive.drives.hide@ method which the
 -- 'DriveDrivesHide' request conforms to.
 type DriveDrivesHideResource =
-     "drive" Core.:>
-       "v3" Core.:>
-         "drives" Core.:>
-           Core.Capture "driveId" Core.Text Core.:>
-             "hide" Core.:>
-               Core.QueryParam "alt" Core.AltJSON Core.:>
-                 Core.Post '[Core.JSON] Drive
+  "drive"
+    Core.:> "v3"
+    Core.:> "drives"
+    Core.:> Core.Capture "driveId" Core.Text
+    Core.:> "hide"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Post '[Core.JSON] Drive
 
 -- | Hides a shared drive from the default view.
 --
 -- /See:/ 'newDriveDrivesHide' smart constructor.
 newtype DriveDrivesHide = DriveDrivesHide
-    {
-      -- | The ID of the shared drive.
-      driveId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | The ID of the shared drive.
+    driveId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DriveDrivesHide' with the minimum fields required to make a request.
-newDriveDrivesHide 
-    ::  Core.Text
-       -- ^  The ID of the shared drive. See 'driveId'.
-    -> DriveDrivesHide
+newDriveDrivesHide ::
+  -- |  The ID of the shared drive. See 'driveId'.
+  Core.Text ->
+  DriveDrivesHide
 newDriveDrivesHide driveId = DriveDrivesHide {driveId = driveId}
 
 instance Core.GoogleRequest DriveDrivesHide where
-        type Rs DriveDrivesHide = Drive
-        type Scopes DriveDrivesHide =
-             '["https://www.googleapis.com/auth/drive"]
-        requestClient DriveDrivesHide{..}
-          = go driveId (Core.Just Core.AltJSON) driveService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy DriveDrivesHideResource)
-                      Core.mempty
-
+  type Rs DriveDrivesHide = Drive
+  type
+    Scopes DriveDrivesHide =
+      '["https://www.googleapis.com/auth/drive"]
+  requestClient DriveDrivesHide {..} =
+    go driveId (Core.Just Core.AltJSON) driveService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy DriveDrivesHideResource)
+          Core.mempty

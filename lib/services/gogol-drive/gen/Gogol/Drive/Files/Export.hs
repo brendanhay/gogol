@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,90 +30,98 @@
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.export@.
 module Gogol.Drive.Files.Export
-    (
-    -- * Resource
-      DriveFilesExportResource
+  ( -- * Resource
+    DriveFilesExportResource,
 
     -- ** Constructing a Request
-    , newDriveFilesExport
-    , DriveFilesExport
-    ) where
+    newDriveFilesExport,
+    DriveFilesExport,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Drive.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @drive.files.export@ method which the
 -- 'DriveFilesExport' request conforms to.
 type DriveFilesExportResource =
-     "drive" Core.:>
-       "v3" Core.:>
-         "files" Core.:>
-           Core.Capture "fileId" Core.Text Core.:>
-             "export" Core.:>
-               Core.QueryParam "mimeType" Core.Text Core.:>
-                 Core.QueryParam "alt" Core.AltJSON Core.:>
-                   Core.Get '[Core.JSON] ()
-       Core.:<|>
-       "drive" Core.:>
-         "v3" Core.:>
-           "files" Core.:>
-             Core.Capture "fileId" Core.Text Core.:>
-               "export" Core.:>
-                 Core.QueryParam "mimeType" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltMedia Core.:>
-                     Core.Get '[Core.OctetStream] Core.Stream
+  "drive"
+    Core.:> "v3"
+    Core.:> "files"
+    Core.:> Core.Capture "fileId" Core.Text
+    Core.:> "export"
+    Core.:> Core.QueryParam "mimeType" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ()
+    Core.:<|> "drive"
+      Core.:> "v3"
+      Core.:> "files"
+      Core.:> Core.Capture "fileId" Core.Text
+      Core.:> "export"
+      Core.:> Core.QueryParam "mimeType" Core.Text
+      Core.:> Core.QueryParam "alt" Core.AltMedia
+      Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Exports a Google Workspace document to the requested MIME type and returns exported byte content. Note that the exported content is limited to 10MB.
 --
 -- /See:/ 'newDriveFilesExport' smart constructor.
 data DriveFilesExport = DriveFilesExport
-    {
-      -- | The ID of the file.
-      fileId :: Core.Text
-      -- | The MIME type of the format requested for this export.
-    , mimeType :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | The ID of the file.
+    fileId :: Core.Text,
+    -- | The MIME type of the format requested for this export.
+    mimeType :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DriveFilesExport' with the minimum fields required to make a request.
-newDriveFilesExport 
-    ::  Core.Text
-       -- ^  The ID of the file. See 'fileId'.
-    -> Core.Text
-       -- ^  The MIME type of the format requested for this export. See 'mimeType'.
-    -> DriveFilesExport
+newDriveFilesExport ::
+  -- |  The ID of the file. See 'fileId'.
+  Core.Text ->
+  -- |  The MIME type of the format requested for this export. See 'mimeType'.
+  Core.Text ->
+  DriveFilesExport
 newDriveFilesExport fileId mimeType =
   DriveFilesExport {fileId = fileId, mimeType = mimeType}
 
 instance Core.GoogleRequest DriveFilesExport where
-        type Rs DriveFilesExport = ()
-        type Scopes DriveFilesExport =
-             '["https://www.googleapis.com/auth/drive",
-               "https://www.googleapis.com/auth/drive.file",
-               "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient DriveFilesExport{..}
-          = go fileId (Core.Just mimeType)
-              (Core.Just Core.AltJSON)
-              driveService
-          where go Core.:<|> _
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy DriveFilesExportResource)
-                      Core.mempty
+  type Rs DriveFilesExport = ()
+  type
+    Scopes DriveFilesExport =
+      '[ "https://www.googleapis.com/auth/drive",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive.readonly"
+       ]
+  requestClient DriveFilesExport {..} =
+    go
+      fileId
+      (Core.Just mimeType)
+      (Core.Just Core.AltJSON)
+      driveService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy DriveFilesExportResource)
+          Core.mempty
 
-instance Core.GoogleRequest
-           (Core.MediaDownload DriveFilesExport)
-         where
-        type Rs (Core.MediaDownload DriveFilesExport) =
-             Core.Stream
-        type Scopes (Core.MediaDownload DriveFilesExport) =
-             Core.Scopes DriveFilesExport
-        requestClient
-          (Core.MediaDownload DriveFilesExport{..})
-          = go fileId (Core.Just mimeType)
-              (Core.Just Core.AltMedia)
-              driveService
-          where _ Core.:<|> go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy DriveFilesExportResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    (Core.MediaDownload DriveFilesExport)
+  where
+  type
+    Rs (Core.MediaDownload DriveFilesExport) =
+      Core.Stream
+  type
+    Scopes (Core.MediaDownload DriveFilesExport) =
+      Core.Scopes DriveFilesExport
+  requestClient
+    (Core.MediaDownload DriveFilesExport {..}) =
+      go
+        fileId
+        (Core.Just mimeType)
+        (Core.Just Core.AltMedia)
+        driveService
+      where
+        _ Core.:<|> go =
+          Core.buildClient
+            (Core.Proxy :: Core.Proxy DriveFilesExportResource)
+            Core.mempty
