@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.PlayMoviesPartner
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,198 +30,103 @@
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
 module Network.Google.PlayMoviesPartner
-    (
-    -- * Service Configuration
-      playMoviesPartnerService
+  ( -- * Configuration
+    playMoviesPartnerService,
 
     -- * OAuth Scopes
-    , playmoviesPartnerReadOnlyScope
-
-    -- * API Declaration
-    , PlayMoviesPartnerAPI
+    playmovies_partnerReadOnlyScope,
 
     -- * Resources
 
     -- ** playmoviespartner.accounts.avails.get
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
+    PlayMoviesPartnerAccountsAvailsGetResource,
+    newPlayMoviesPartnerAccountsAvailsGet,
+    PlayMoviesPartnerAccountsAvailsGet,
 
     -- ** playmoviespartner.accounts.avails.list
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
+    PlayMoviesPartnerAccountsAvailsListResource,
+    newPlayMoviesPartnerAccountsAvailsList,
+    PlayMoviesPartnerAccountsAvailsList,
 
     -- ** playmoviespartner.accounts.orders.get
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
+    PlayMoviesPartnerAccountsOrdersGetResource,
+    newPlayMoviesPartnerAccountsOrdersGet,
+    PlayMoviesPartnerAccountsOrdersGet,
 
     -- ** playmoviespartner.accounts.orders.list
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
+    PlayMoviesPartnerAccountsOrdersListResource,
+    newPlayMoviesPartnerAccountsOrdersList,
+    PlayMoviesPartnerAccountsOrdersList,
 
     -- ** playmoviespartner.accounts.storeInfos.country.get
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+    PlayMoviesPartnerAccountsStoreInfosCountryGetResource,
+    newPlayMoviesPartnerAccountsStoreInfosCountryGet,
+    PlayMoviesPartnerAccountsStoreInfosCountryGet,
 
     -- ** playmoviespartner.accounts.storeInfos.list
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
+    PlayMoviesPartnerAccountsStoreInfosListResource,
+    newPlayMoviesPartnerAccountsStoreInfosList,
+    PlayMoviesPartnerAccountsStoreInfosList,
 
     -- * Types
 
-    -- ** AvailWorkType
-    , AvailWorkType (..)
-
-    -- ** OrderStatus
-    , OrderStatus (..)
-
-    -- ** AvailFormatProFile
-    , AvailFormatProFile (..)
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Avail
-    , Avail
-    , avail
-    , aAltId
-    , aPphNames
-    , aCaptionExemption
-    , aRatingSystem
-    , aSuppressionLiftDate
-    , aEpisodeNumber
-    , aPriceType
-    , aStoreLanguage
-    , aEpisodeAltId
-    , aStart
-    , aTerritory
-    , aEpisodeTitleInternalAlias
-    , aLicenseType
-    , aAvailId
-    , aSeasonNumber
-    , aWorkType
-    , aRatingValue
-    , aSeasonTitleInternalAlias
-    , aContentId
-    , aVideoId
-    , aSeriesAltId
-    , aEnd
-    , aSeriesTitleInternalAlias
-    , aDisplayName
-    , aReleaseDate
-    , aFormatProFile
-    , aRatingReason
-    , aEncodeId
-    , aPriceValue
-    , aCaptionIncluded
-    , aProductId
-    , aSeasonAltId
-    , aTitleInternalAlias
+    Avail (..),
+    newAvail,
 
-    -- ** OrderType
-    , OrderType (..)
+    -- ** Avail_FormatProfile
+    Avail_FormatProfile (..),
+
+    -- ** Avail_LicenseType
+    Avail_LicenseType (..),
+
+    -- ** Avail_WorkType
+    Avail_WorkType (..),
 
     -- ** ListAvailsResponse
-    , ListAvailsResponse
-    , listAvailsResponse
-    , larNextPageToken
-    , larAvails
-    , larTotalSize
-
-    -- ** StoreInfoType
-    , StoreInfoType (..)
+    ListAvailsResponse (..),
+    newListAvailsResponse,
 
     -- ** ListOrdersResponse
-    , ListOrdersResponse
-    , listOrdersResponse
-    , lorNextPageToken
-    , lorTotalSize
-    , lorOrders
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** OrderNormalizedPriority
-    , OrderNormalizedPriority (..)
-
-    -- ** AvailLicenseType
-    , AvailLicenseType (..)
-
-    -- ** OrderStatusDetail
-    , OrderStatusDetail (..)
+    ListOrdersResponse (..),
+    newListOrdersResponse,
 
     -- ** ListStoreInfosResponse
-    , ListStoreInfosResponse
-    , listStoreInfosResponse
-    , lsirNextPageToken
-    , lsirTotalSize
-    , lsirStoreInfos
+    ListStoreInfosResponse (..),
+    newListStoreInfosResponse,
 
     -- ** Order
-    , Order
-    , order
-    , oStatus
-    , oShowName
-    , oPphName
-    , oEarliestAvailStartTime
-    , oStudioName
-    , oReceivedTime
-    , oPriority
-    , oChannelId
-    , oCustomId
-    , oApprovedTime
-    , oCountries
-    , oChannelName
-    , oVideoId
-    , oLegacyPriority
-    , oName
-    , oRejectionNote
-    , oOrderedTime
-    , oSeasonName
-    , oStatusDetail
-    , oType
-    , oNormalizedPriority
-    , oOrderId
-    , oEpisodeName
+    Order (..),
+    newOrder,
+
+    -- ** Order_NormalizedPriority
+    Order_NormalizedPriority (..),
+
+    -- ** Order_Status
+    Order_Status (..),
+
+    -- ** Order_StatusDetail
+    Order_StatusDetail (..),
+
+    -- ** Order_Type
+    Order_Type (..),
 
     -- ** StoreInfo
-    , StoreInfo
-    , storeInfo
-    , siTitleLevelEidr
-    , siPphNames
-    , siShowName
-    , siSubtitles
-    , siStudioName
-    , siAudioTracks
-    , siEpisodeNumber
-    , siCountry
-    , siTrailerId
-    , siHasInfoCards
-    , siLiveTime
-    , siSeasonNumber
-    , siHasHdOffer
-    , siVideoId
-    , siName
-    , siHasVodOffer
-    , siSeasonName
-    , siHasSdOffer
-    , siMid
-    , siEditLevelEidr
-    , siType
-    , siHasEstOffer
-    , siHasAudio51
-    , siSeasonId
-    , siShowId
-    ) where
+    StoreInfo (..),
+    newStoreInfo,
 
-import Network.Google.Prelude
+    -- ** StoreInfo_Type
+    StoreInfo_Type (..),
+  )
+where
+
+import Network.Google.PlayMoviesPartner.Accounts.Avails.Get
+import Network.Google.PlayMoviesPartner.Accounts.Avails.List
+import Network.Google.PlayMoviesPartner.Accounts.Orders.Get
+import Network.Google.PlayMoviesPartner.Accounts.Orders.List
+import Network.Google.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+import Network.Google.PlayMoviesPartner.Accounts.StoreInfos.List
 import Network.Google.PlayMoviesPartner.Types
-import Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
-import Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
-import Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
-import Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
-import Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
-import Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Play Movies Partner API service.
-type PlayMoviesPartnerAPI =
-     AccountsAvailsListResource :<|>
-       AccountsAvailsGetResource
-       :<|> AccountsStoreInfosCountryGetResource
-       :<|> AccountsStoreInfosListResource
-       :<|> AccountsOrdersListResource
-       :<|> AccountsOrdersGetResource
