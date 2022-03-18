@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,1210 +30,1210 @@
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference>
 module Gogol.Dataflow
-    (
-    -- * Configuration
-      dataflowService
+  ( -- * Configuration
+    dataflowService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , computeScope
-    , computeReadOnlyScope
-    , userinfoEmailScope
+    cloudPlatformScope,
+    computeScope,
+    computeReadOnlyScope,
+    userinfoEmailScope,
 
     -- * Resources
 
     -- ** dataflow.projects.deleteSnapshots
-    , DataflowProjectsDeleteSnapshotsResource
-    , newDataflowProjectsDeleteSnapshots
-    , DataflowProjectsDeleteSnapshots
+    DataflowProjectsDeleteSnapshotsResource,
+    newDataflowProjectsDeleteSnapshots,
+    DataflowProjectsDeleteSnapshots,
 
     -- ** dataflow.projects.jobs.aggregated
-    , DataflowProjectsJobsAggregatedResource
-    , newDataflowProjectsJobsAggregated
-    , DataflowProjectsJobsAggregated
+    DataflowProjectsJobsAggregatedResource,
+    newDataflowProjectsJobsAggregated,
+    DataflowProjectsJobsAggregated,
 
     -- ** dataflow.projects.jobs.create
-    , DataflowProjectsJobsCreateResource
-    , newDataflowProjectsJobsCreate
-    , DataflowProjectsJobsCreate
+    DataflowProjectsJobsCreateResource,
+    newDataflowProjectsJobsCreate,
+    DataflowProjectsJobsCreate,
 
     -- ** dataflow.projects.jobs.debug.getConfig
-    , DataflowProjectsJobsDebugGetConfigResource
-    , newDataflowProjectsJobsDebugGetConfig
-    , DataflowProjectsJobsDebugGetConfig
+    DataflowProjectsJobsDebugGetConfigResource,
+    newDataflowProjectsJobsDebugGetConfig,
+    DataflowProjectsJobsDebugGetConfig,
 
     -- ** dataflow.projects.jobs.debug.sendCapture
-    , DataflowProjectsJobsDebugSendCaptureResource
-    , newDataflowProjectsJobsDebugSendCapture
-    , DataflowProjectsJobsDebugSendCapture
+    DataflowProjectsJobsDebugSendCaptureResource,
+    newDataflowProjectsJobsDebugSendCapture,
+    DataflowProjectsJobsDebugSendCapture,
 
     -- ** dataflow.projects.jobs.get
-    , DataflowProjectsJobsGetResource
-    , newDataflowProjectsJobsGet
-    , DataflowProjectsJobsGet
+    DataflowProjectsJobsGetResource,
+    newDataflowProjectsJobsGet,
+    DataflowProjectsJobsGet,
 
     -- ** dataflow.projects.jobs.getMetrics
-    , DataflowProjectsJobsGetMetricsResource
-    , newDataflowProjectsJobsGetMetrics
-    , DataflowProjectsJobsGetMetrics
+    DataflowProjectsJobsGetMetricsResource,
+    newDataflowProjectsJobsGetMetrics,
+    DataflowProjectsJobsGetMetrics,
 
     -- ** dataflow.projects.jobs.list
-    , DataflowProjectsJobsListResource
-    , newDataflowProjectsJobsList
-    , DataflowProjectsJobsList
+    DataflowProjectsJobsListResource,
+    newDataflowProjectsJobsList,
+    DataflowProjectsJobsList,
 
     -- ** dataflow.projects.jobs.messages.list
-    , DataflowProjectsJobsMessagesListResource
-    , newDataflowProjectsJobsMessagesList
-    , DataflowProjectsJobsMessagesList
+    DataflowProjectsJobsMessagesListResource,
+    newDataflowProjectsJobsMessagesList,
+    DataflowProjectsJobsMessagesList,
 
     -- ** dataflow.projects.jobs.snapshot
-    , DataflowProjectsJobsSnapshotResource
-    , newDataflowProjectsJobsSnapshot
-    , DataflowProjectsJobsSnapshot
+    DataflowProjectsJobsSnapshotResource,
+    newDataflowProjectsJobsSnapshot,
+    DataflowProjectsJobsSnapshot,
 
     -- ** dataflow.projects.jobs.update
-    , DataflowProjectsJobsUpdateResource
-    , newDataflowProjectsJobsUpdate
-    , DataflowProjectsJobsUpdate
+    DataflowProjectsJobsUpdateResource,
+    newDataflowProjectsJobsUpdate,
+    DataflowProjectsJobsUpdate,
 
     -- ** dataflow.projects.jobs.workItems.lease
-    , DataflowProjectsJobsWorkItemsLeaseResource
-    , newDataflowProjectsJobsWorkItemsLease
-    , DataflowProjectsJobsWorkItemsLease
+    DataflowProjectsJobsWorkItemsLeaseResource,
+    newDataflowProjectsJobsWorkItemsLease,
+    DataflowProjectsJobsWorkItemsLease,
 
     -- ** dataflow.projects.jobs.workItems.reportStatus
-    , DataflowProjectsJobsWorkItemsReportStatusResource
-    , newDataflowProjectsJobsWorkItemsReportStatus
-    , DataflowProjectsJobsWorkItemsReportStatus
+    DataflowProjectsJobsWorkItemsReportStatusResource,
+    newDataflowProjectsJobsWorkItemsReportStatus,
+    DataflowProjectsJobsWorkItemsReportStatus,
 
     -- ** dataflow.projects.locations.flexTemplates.launch
-    , DataflowProjectsLocationsFlexTemplatesLaunchResource
-    , newDataflowProjectsLocationsFlexTemplatesLaunch
-    , DataflowProjectsLocationsFlexTemplatesLaunch
+    DataflowProjectsLocationsFlexTemplatesLaunchResource,
+    newDataflowProjectsLocationsFlexTemplatesLaunch,
+    DataflowProjectsLocationsFlexTemplatesLaunch,
 
     -- ** dataflow.projects.locations.jobs.create
-    , DataflowProjectsLocationsJobsCreateResource
-    , newDataflowProjectsLocationsJobsCreate
-    , DataflowProjectsLocationsJobsCreate
+    DataflowProjectsLocationsJobsCreateResource,
+    newDataflowProjectsLocationsJobsCreate,
+    DataflowProjectsLocationsJobsCreate,
 
     -- ** dataflow.projects.locations.jobs.debug.getConfig
-    , DataflowProjectsLocationsJobsDebugGetConfigResource
-    , newDataflowProjectsLocationsJobsDebugGetConfig
-    , DataflowProjectsLocationsJobsDebugGetConfig
+    DataflowProjectsLocationsJobsDebugGetConfigResource,
+    newDataflowProjectsLocationsJobsDebugGetConfig,
+    DataflowProjectsLocationsJobsDebugGetConfig,
 
     -- ** dataflow.projects.locations.jobs.debug.sendCapture
-    , DataflowProjectsLocationsJobsDebugSendCaptureResource
-    , newDataflowProjectsLocationsJobsDebugSendCapture
-    , DataflowProjectsLocationsJobsDebugSendCapture
+    DataflowProjectsLocationsJobsDebugSendCaptureResource,
+    newDataflowProjectsLocationsJobsDebugSendCapture,
+    DataflowProjectsLocationsJobsDebugSendCapture,
 
     -- ** dataflow.projects.locations.jobs.get
-    , DataflowProjectsLocationsJobsGetResource
-    , newDataflowProjectsLocationsJobsGet
-    , DataflowProjectsLocationsJobsGet
+    DataflowProjectsLocationsJobsGetResource,
+    newDataflowProjectsLocationsJobsGet,
+    DataflowProjectsLocationsJobsGet,
 
     -- ** dataflow.projects.locations.jobs.getExecutionDetails
-    , DataflowProjectsLocationsJobsGetExecutionDetailsResource
-    , newDataflowProjectsLocationsJobsGetExecutionDetails
-    , DataflowProjectsLocationsJobsGetExecutionDetails
+    DataflowProjectsLocationsJobsGetExecutionDetailsResource,
+    newDataflowProjectsLocationsJobsGetExecutionDetails,
+    DataflowProjectsLocationsJobsGetExecutionDetails,
 
     -- ** dataflow.projects.locations.jobs.getMetrics
-    , DataflowProjectsLocationsJobsGetMetricsResource
-    , newDataflowProjectsLocationsJobsGetMetrics
-    , DataflowProjectsLocationsJobsGetMetrics
+    DataflowProjectsLocationsJobsGetMetricsResource,
+    newDataflowProjectsLocationsJobsGetMetrics,
+    DataflowProjectsLocationsJobsGetMetrics,
 
     -- ** dataflow.projects.locations.jobs.list
-    , DataflowProjectsLocationsJobsListResource
-    , newDataflowProjectsLocationsJobsList
-    , DataflowProjectsLocationsJobsList
+    DataflowProjectsLocationsJobsListResource,
+    newDataflowProjectsLocationsJobsList,
+    DataflowProjectsLocationsJobsList,
 
     -- ** dataflow.projects.locations.jobs.messages.list
-    , DataflowProjectsLocationsJobsMessagesListResource
-    , newDataflowProjectsLocationsJobsMessagesList
-    , DataflowProjectsLocationsJobsMessagesList
+    DataflowProjectsLocationsJobsMessagesListResource,
+    newDataflowProjectsLocationsJobsMessagesList,
+    DataflowProjectsLocationsJobsMessagesList,
 
     -- ** dataflow.projects.locations.jobs.snapshot
-    , DataflowProjectsLocationsJobsSnapshotResource
-    , newDataflowProjectsLocationsJobsSnapshot
-    , DataflowProjectsLocationsJobsSnapshot
+    DataflowProjectsLocationsJobsSnapshotResource,
+    newDataflowProjectsLocationsJobsSnapshot,
+    DataflowProjectsLocationsJobsSnapshot,
 
     -- ** dataflow.projects.locations.jobs.snapshots.list
-    , DataflowProjectsLocationsJobsSnapshotsListResource
-    , newDataflowProjectsLocationsJobsSnapshotsList
-    , DataflowProjectsLocationsJobsSnapshotsList
+    DataflowProjectsLocationsJobsSnapshotsListResource,
+    newDataflowProjectsLocationsJobsSnapshotsList,
+    DataflowProjectsLocationsJobsSnapshotsList,
 
     -- ** dataflow.projects.locations.jobs.stages.getExecutionDetails
-    , DataflowProjectsLocationsJobsStagesGetExecutionDetailsResource
-    , newDataflowProjectsLocationsJobsStagesGetExecutionDetails
-    , DataflowProjectsLocationsJobsStagesGetExecutionDetails
+    DataflowProjectsLocationsJobsStagesGetExecutionDetailsResource,
+    newDataflowProjectsLocationsJobsStagesGetExecutionDetails,
+    DataflowProjectsLocationsJobsStagesGetExecutionDetails,
 
     -- ** dataflow.projects.locations.jobs.update
-    , DataflowProjectsLocationsJobsUpdateResource
-    , newDataflowProjectsLocationsJobsUpdate
-    , DataflowProjectsLocationsJobsUpdate
+    DataflowProjectsLocationsJobsUpdateResource,
+    newDataflowProjectsLocationsJobsUpdate,
+    DataflowProjectsLocationsJobsUpdate,
 
     -- ** dataflow.projects.locations.jobs.workItems.lease
-    , DataflowProjectsLocationsJobsWorkItemsLeaseResource
-    , newDataflowProjectsLocationsJobsWorkItemsLease
-    , DataflowProjectsLocationsJobsWorkItemsLease
+    DataflowProjectsLocationsJobsWorkItemsLeaseResource,
+    newDataflowProjectsLocationsJobsWorkItemsLease,
+    DataflowProjectsLocationsJobsWorkItemsLease,
 
     -- ** dataflow.projects.locations.jobs.workItems.reportStatus
-    , DataflowProjectsLocationsJobsWorkItemsReportStatusResource
-    , newDataflowProjectsLocationsJobsWorkItemsReportStatus
-    , DataflowProjectsLocationsJobsWorkItemsReportStatus
+    DataflowProjectsLocationsJobsWorkItemsReportStatusResource,
+    newDataflowProjectsLocationsJobsWorkItemsReportStatus,
+    DataflowProjectsLocationsJobsWorkItemsReportStatus,
 
     -- ** dataflow.projects.locations.snapshots.delete
-    , DataflowProjectsLocationsSnapshotsDeleteResource
-    , newDataflowProjectsLocationsSnapshotsDelete
-    , DataflowProjectsLocationsSnapshotsDelete
+    DataflowProjectsLocationsSnapshotsDeleteResource,
+    newDataflowProjectsLocationsSnapshotsDelete,
+    DataflowProjectsLocationsSnapshotsDelete,
 
     -- ** dataflow.projects.locations.snapshots.get
-    , DataflowProjectsLocationsSnapshotsGetResource
-    , newDataflowProjectsLocationsSnapshotsGet
-    , DataflowProjectsLocationsSnapshotsGet
+    DataflowProjectsLocationsSnapshotsGetResource,
+    newDataflowProjectsLocationsSnapshotsGet,
+    DataflowProjectsLocationsSnapshotsGet,
 
     -- ** dataflow.projects.locations.snapshots.list
-    , DataflowProjectsLocationsSnapshotsListResource
-    , newDataflowProjectsLocationsSnapshotsList
-    , DataflowProjectsLocationsSnapshotsList
+    DataflowProjectsLocationsSnapshotsListResource,
+    newDataflowProjectsLocationsSnapshotsList,
+    DataflowProjectsLocationsSnapshotsList,
 
     -- ** dataflow.projects.locations.sql.validate
-    , DataflowProjectsLocationsSqlValidateResource
-    , newDataflowProjectsLocationsSqlValidate
-    , DataflowProjectsLocationsSqlValidate
+    DataflowProjectsLocationsSqlValidateResource,
+    newDataflowProjectsLocationsSqlValidate,
+    DataflowProjectsLocationsSqlValidate,
 
     -- ** dataflow.projects.locations.templates.create
-    , DataflowProjectsLocationsTemplatesCreateResource
-    , newDataflowProjectsLocationsTemplatesCreate
-    , DataflowProjectsLocationsTemplatesCreate
+    DataflowProjectsLocationsTemplatesCreateResource,
+    newDataflowProjectsLocationsTemplatesCreate,
+    DataflowProjectsLocationsTemplatesCreate,
 
     -- ** dataflow.projects.locations.templates.get
-    , DataflowProjectsLocationsTemplatesGetResource
-    , newDataflowProjectsLocationsTemplatesGet
-    , DataflowProjectsLocationsTemplatesGet
+    DataflowProjectsLocationsTemplatesGetResource,
+    newDataflowProjectsLocationsTemplatesGet,
+    DataflowProjectsLocationsTemplatesGet,
 
     -- ** dataflow.projects.locations.templates.launch
-    , DataflowProjectsLocationsTemplatesLaunchResource
-    , newDataflowProjectsLocationsTemplatesLaunch
-    , DataflowProjectsLocationsTemplatesLaunch
+    DataflowProjectsLocationsTemplatesLaunchResource,
+    newDataflowProjectsLocationsTemplatesLaunch,
+    DataflowProjectsLocationsTemplatesLaunch,
 
     -- ** dataflow.projects.locations.workerMessages
-    , DataflowProjectsLocationsWorkerMessagesResource
-    , newDataflowProjectsLocationsWorkerMessages
-    , DataflowProjectsLocationsWorkerMessages
+    DataflowProjectsLocationsWorkerMessagesResource,
+    newDataflowProjectsLocationsWorkerMessages,
+    DataflowProjectsLocationsWorkerMessages,
 
     -- ** dataflow.projects.snapshots.get
-    , DataflowProjectsSnapshotsGetResource
-    , newDataflowProjectsSnapshotsGet
-    , DataflowProjectsSnapshotsGet
+    DataflowProjectsSnapshotsGetResource,
+    newDataflowProjectsSnapshotsGet,
+    DataflowProjectsSnapshotsGet,
 
     -- ** dataflow.projects.snapshots.list
-    , DataflowProjectsSnapshotsListResource
-    , newDataflowProjectsSnapshotsList
-    , DataflowProjectsSnapshotsList
+    DataflowProjectsSnapshotsListResource,
+    newDataflowProjectsSnapshotsList,
+    DataflowProjectsSnapshotsList,
 
     -- ** dataflow.projects.templates.create
-    , DataflowProjectsTemplatesCreateResource
-    , newDataflowProjectsTemplatesCreate
-    , DataflowProjectsTemplatesCreate
+    DataflowProjectsTemplatesCreateResource,
+    newDataflowProjectsTemplatesCreate,
+    DataflowProjectsTemplatesCreate,
 
     -- ** dataflow.projects.templates.get
-    , DataflowProjectsTemplatesGetResource
-    , newDataflowProjectsTemplatesGet
-    , DataflowProjectsTemplatesGet
+    DataflowProjectsTemplatesGetResource,
+    newDataflowProjectsTemplatesGet,
+    DataflowProjectsTemplatesGet,
 
     -- ** dataflow.projects.templates.launch
-    , DataflowProjectsTemplatesLaunchResource
-    , newDataflowProjectsTemplatesLaunch
-    , DataflowProjectsTemplatesLaunch
+    DataflowProjectsTemplatesLaunchResource,
+    newDataflowProjectsTemplatesLaunch,
+    DataflowProjectsTemplatesLaunch,
 
     -- ** dataflow.projects.workerMessages
-    , DataflowProjectsWorkerMessagesResource
-    , newDataflowProjectsWorkerMessages
-    , DataflowProjectsWorkerMessages
+    DataflowProjectsWorkerMessagesResource,
+    newDataflowProjectsWorkerMessages,
+    DataflowProjectsWorkerMessages,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** ApproximateProgress
-    , ApproximateProgress (..)
-    , newApproximateProgress
+    ApproximateProgress (..),
+    newApproximateProgress,
 
     -- ** ApproximateReportedProgress
-    , ApproximateReportedProgress (..)
-    , newApproximateReportedProgress
+    ApproximateReportedProgress (..),
+    newApproximateReportedProgress,
 
     -- ** ApproximateSplitRequest
-    , ApproximateSplitRequest (..)
-    , newApproximateSplitRequest
+    ApproximateSplitRequest (..),
+    newApproximateSplitRequest,
 
     -- ** AutoscalingEvent
-    , AutoscalingEvent (..)
-    , newAutoscalingEvent
+    AutoscalingEvent (..),
+    newAutoscalingEvent,
 
     -- ** AutoscalingEvent_EventType
-    , AutoscalingEvent_EventType (..)
+    AutoscalingEvent_EventType (..),
 
     -- ** AutoscalingSettings
-    , AutoscalingSettings (..)
-    , newAutoscalingSettings
+    AutoscalingSettings (..),
+    newAutoscalingSettings,
 
     -- ** AutoscalingSettings_Algorithm
-    , AutoscalingSettings_Algorithm (..)
+    AutoscalingSettings_Algorithm (..),
 
     -- ** BigQueryIODetails
-    , BigQueryIODetails (..)
-    , newBigQueryIODetails
+    BigQueryIODetails (..),
+    newBigQueryIODetails,
 
     -- ** BigTableIODetails
-    , BigTableIODetails (..)
-    , newBigTableIODetails
+    BigTableIODetails (..),
+    newBigTableIODetails,
 
     -- ** CPUTime
-    , CPUTime (..)
-    , newCPUTime
+    CPUTime (..),
+    newCPUTime,
 
     -- ** ComponentSource
-    , ComponentSource (..)
-    , newComponentSource
+    ComponentSource (..),
+    newComponentSource,
 
     -- ** ComponentTransform
-    , ComponentTransform (..)
-    , newComponentTransform
+    ComponentTransform (..),
+    newComponentTransform,
 
     -- ** ComputationTopology
-    , ComputationTopology (..)
-    , newComputationTopology
+    ComputationTopology (..),
+    newComputationTopology,
 
     -- ** ConcatPosition
-    , ConcatPosition (..)
-    , newConcatPosition
+    ConcatPosition (..),
+    newConcatPosition,
 
     -- ** ContainerSpec
-    , ContainerSpec (..)
-    , newContainerSpec
+    ContainerSpec (..),
+    newContainerSpec,
 
     -- ** CounterMetadata
-    , CounterMetadata (..)
-    , newCounterMetadata
+    CounterMetadata (..),
+    newCounterMetadata,
 
     -- ** CounterMetadata_Kind
-    , CounterMetadata_Kind (..)
+    CounterMetadata_Kind (..),
 
     -- ** CounterMetadata_StandardUnits
-    , CounterMetadata_StandardUnits (..)
+    CounterMetadata_StandardUnits (..),
 
     -- ** CounterStructuredName
-    , CounterStructuredName (..)
-    , newCounterStructuredName
+    CounterStructuredName (..),
+    newCounterStructuredName,
 
     -- ** CounterStructuredName_Origin
-    , CounterStructuredName_Origin (..)
+    CounterStructuredName_Origin (..),
 
     -- ** CounterStructuredName_Portion
-    , CounterStructuredName_Portion (..)
+    CounterStructuredName_Portion (..),
 
     -- ** CounterStructuredNameAndMetadata
-    , CounterStructuredNameAndMetadata (..)
-    , newCounterStructuredNameAndMetadata
+    CounterStructuredNameAndMetadata (..),
+    newCounterStructuredNameAndMetadata,
 
     -- ** CounterUpdate
-    , CounterUpdate (..)
-    , newCounterUpdate
+    CounterUpdate (..),
+    newCounterUpdate,
 
     -- ** CreateJobFromTemplateRequest
-    , CreateJobFromTemplateRequest (..)
-    , newCreateJobFromTemplateRequest
+    CreateJobFromTemplateRequest (..),
+    newCreateJobFromTemplateRequest,
 
     -- ** CreateJobFromTemplateRequest_Parameters
-    , CreateJobFromTemplateRequest_Parameters (..)
-    , newCreateJobFromTemplateRequest_Parameters
+    CreateJobFromTemplateRequest_Parameters (..),
+    newCreateJobFromTemplateRequest_Parameters,
 
     -- ** CustomSourceLocation
-    , CustomSourceLocation (..)
-    , newCustomSourceLocation
+    CustomSourceLocation (..),
+    newCustomSourceLocation,
 
     -- ** DataDiskAssignment
-    , DataDiskAssignment (..)
-    , newDataDiskAssignment
+    DataDiskAssignment (..),
+    newDataDiskAssignment,
 
     -- ** DatastoreIODetails
-    , DatastoreIODetails (..)
-    , newDatastoreIODetails
+    DatastoreIODetails (..),
+    newDatastoreIODetails,
 
     -- ** DebugOptions
-    , DebugOptions (..)
-    , newDebugOptions
+    DebugOptions (..),
+    newDebugOptions,
 
     -- ** DeleteSnapshotResponse
-    , DeleteSnapshotResponse (..)
-    , newDeleteSnapshotResponse
+    DeleteSnapshotResponse (..),
+    newDeleteSnapshotResponse,
 
     -- ** DerivedSource
-    , DerivedSource (..)
-    , newDerivedSource
+    DerivedSource (..),
+    newDerivedSource,
 
     -- ** DerivedSource_DerivationMode
-    , DerivedSource_DerivationMode (..)
+    DerivedSource_DerivationMode (..),
 
     -- ** Disk
-    , Disk (..)
-    , newDisk
+    Disk (..),
+    newDisk,
 
     -- ** DisplayData
-    , DisplayData (..)
-    , newDisplayData
+    DisplayData (..),
+    newDisplayData,
 
     -- ** DistributionUpdate
-    , DistributionUpdate (..)
-    , newDistributionUpdate
+    DistributionUpdate (..),
+    newDistributionUpdate,
 
     -- ** DynamicSourceSplit
-    , DynamicSourceSplit (..)
-    , newDynamicSourceSplit
+    DynamicSourceSplit (..),
+    newDynamicSourceSplit,
 
     -- ** Environment
-    , Environment (..)
-    , newEnvironment
+    Environment (..),
+    newEnvironment,
 
     -- ** Environment_FlexResourceSchedulingGoal
-    , Environment_FlexResourceSchedulingGoal (..)
+    Environment_FlexResourceSchedulingGoal (..),
 
     -- ** Environment_InternalExperiments
-    , Environment_InternalExperiments (..)
-    , newEnvironment_InternalExperiments
+    Environment_InternalExperiments (..),
+    newEnvironment_InternalExperiments,
 
     -- ** Environment_SdkPipelineOptions
-    , Environment_SdkPipelineOptions (..)
-    , newEnvironment_SdkPipelineOptions
+    Environment_SdkPipelineOptions (..),
+    newEnvironment_SdkPipelineOptions,
 
     -- ** Environment_ShuffleMode
-    , Environment_ShuffleMode (..)
+    Environment_ShuffleMode (..),
 
     -- ** Environment_UserAgent
-    , Environment_UserAgent (..)
-    , newEnvironment_UserAgent
+    Environment_UserAgent (..),
+    newEnvironment_UserAgent,
 
     -- ** Environment_Version
-    , Environment_Version (..)
-    , newEnvironment_Version
+    Environment_Version (..),
+    newEnvironment_Version,
 
     -- ** ExecutionStageState
-    , ExecutionStageState (..)
-    , newExecutionStageState
+    ExecutionStageState (..),
+    newExecutionStageState,
 
     -- ** ExecutionStageState_ExecutionStageState
-    , ExecutionStageState_ExecutionStageState (..)
+    ExecutionStageState_ExecutionStageState (..),
 
     -- ** ExecutionStageSummary
-    , ExecutionStageSummary (..)
-    , newExecutionStageSummary
+    ExecutionStageSummary (..),
+    newExecutionStageSummary,
 
     -- ** ExecutionStageSummary_Kind
-    , ExecutionStageSummary_Kind (..)
+    ExecutionStageSummary_Kind (..),
 
     -- ** FailedLocation
-    , FailedLocation (..)
-    , newFailedLocation
+    FailedLocation (..),
+    newFailedLocation,
 
     -- ** FileIODetails
-    , FileIODetails (..)
-    , newFileIODetails
+    FileIODetails (..),
+    newFileIODetails,
 
     -- ** FlattenInstruction
-    , FlattenInstruction (..)
-    , newFlattenInstruction
+    FlattenInstruction (..),
+    newFlattenInstruction,
 
     -- ** FlexTemplateRuntimeEnvironment
-    , FlexTemplateRuntimeEnvironment (..)
-    , newFlexTemplateRuntimeEnvironment
+    FlexTemplateRuntimeEnvironment (..),
+    newFlexTemplateRuntimeEnvironment,
 
     -- ** FlexTemplateRuntimeEnvironment_AdditionalUserLabels
-    , FlexTemplateRuntimeEnvironment_AdditionalUserLabels (..)
-    , newFlexTemplateRuntimeEnvironment_AdditionalUserLabels
+    FlexTemplateRuntimeEnvironment_AdditionalUserLabels (..),
+    newFlexTemplateRuntimeEnvironment_AdditionalUserLabels,
 
     -- ** FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm
-    , FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm (..)
+    FlexTemplateRuntimeEnvironment_AutoscalingAlgorithm (..),
 
     -- ** FlexTemplateRuntimeEnvironment_FlexrsGoal
-    , FlexTemplateRuntimeEnvironment_FlexrsGoal (..)
+    FlexTemplateRuntimeEnvironment_FlexrsGoal (..),
 
     -- ** FlexTemplateRuntimeEnvironment_IpConfiguration
-    , FlexTemplateRuntimeEnvironment_IpConfiguration (..)
+    FlexTemplateRuntimeEnvironment_IpConfiguration (..),
 
     -- ** FloatingPointList
-    , FloatingPointList (..)
-    , newFloatingPointList
+    FloatingPointList (..),
+    newFloatingPointList,
 
     -- ** FloatingPointMean
-    , FloatingPointMean (..)
-    , newFloatingPointMean
+    FloatingPointMean (..),
+    newFloatingPointMean,
 
     -- ** GetDebugConfigRequest
-    , GetDebugConfigRequest (..)
-    , newGetDebugConfigRequest
+    GetDebugConfigRequest (..),
+    newGetDebugConfigRequest,
 
     -- ** GetDebugConfigResponse
-    , GetDebugConfigResponse (..)
-    , newGetDebugConfigResponse
+    GetDebugConfigResponse (..),
+    newGetDebugConfigResponse,
 
     -- ** GetTemplateResponse
-    , GetTemplateResponse (..)
-    , newGetTemplateResponse
+    GetTemplateResponse (..),
+    newGetTemplateResponse,
 
     -- ** GetTemplateResponse_TemplateType
-    , GetTemplateResponse_TemplateType (..)
+    GetTemplateResponse_TemplateType (..),
 
     -- ** Histogram
-    , Histogram (..)
-    , newHistogram
+    Histogram (..),
+    newHistogram,
 
     -- ** HotKeyDetection
-    , HotKeyDetection (..)
-    , newHotKeyDetection
+    HotKeyDetection (..),
+    newHotKeyDetection,
 
     -- ** InstructionInput
-    , InstructionInput (..)
-    , newInstructionInput
+    InstructionInput (..),
+    newInstructionInput,
 
     -- ** InstructionOutput
-    , InstructionOutput (..)
-    , newInstructionOutput
+    InstructionOutput (..),
+    newInstructionOutput,
 
     -- ** InstructionOutput_Codec
-    , InstructionOutput_Codec (..)
-    , newInstructionOutput_Codec
+    InstructionOutput_Codec (..),
+    newInstructionOutput_Codec,
 
     -- ** IntegerGauge
-    , IntegerGauge (..)
-    , newIntegerGauge
+    IntegerGauge (..),
+    newIntegerGauge,
 
     -- ** IntegerList
-    , IntegerList (..)
-    , newIntegerList
+    IntegerList (..),
+    newIntegerList,
 
     -- ** IntegerMean
-    , IntegerMean (..)
-    , newIntegerMean
+    IntegerMean (..),
+    newIntegerMean,
 
     -- ** Job
-    , Job (..)
-    , newJob
+    Job (..),
+    newJob,
 
     -- ** Job_CurrentState
-    , Job_CurrentState (..)
+    Job_CurrentState (..),
 
     -- ** Job_Labels
-    , Job_Labels (..)
-    , newJob_Labels
+    Job_Labels (..),
+    newJob_Labels,
 
     -- ** Job_RequestedState
-    , Job_RequestedState (..)
+    Job_RequestedState (..),
 
     -- ** Job_TransformNameMapping
-    , Job_TransformNameMapping (..)
-    , newJob_TransformNameMapping
+    Job_TransformNameMapping (..),
+    newJob_TransformNameMapping,
 
     -- ** Job_Type
-    , Job_Type (..)
+    Job_Type (..),
 
     -- ** JobExecutionDetails
-    , JobExecutionDetails (..)
-    , newJobExecutionDetails
+    JobExecutionDetails (..),
+    newJobExecutionDetails,
 
     -- ** JobExecutionInfo
-    , JobExecutionInfo (..)
-    , newJobExecutionInfo
+    JobExecutionInfo (..),
+    newJobExecutionInfo,
 
     -- ** JobExecutionInfo_Stages
-    , JobExecutionInfo_Stages (..)
-    , newJobExecutionInfo_Stages
+    JobExecutionInfo_Stages (..),
+    newJobExecutionInfo_Stages,
 
     -- ** JobExecutionStageInfo
-    , JobExecutionStageInfo (..)
-    , newJobExecutionStageInfo
+    JobExecutionStageInfo (..),
+    newJobExecutionStageInfo,
 
     -- ** JobMessage
-    , JobMessage (..)
-    , newJobMessage
+    JobMessage (..),
+    newJobMessage,
 
     -- ** JobMessage_MessageImportance
-    , JobMessage_MessageImportance (..)
+    JobMessage_MessageImportance (..),
 
     -- ** JobMetadata
-    , JobMetadata (..)
-    , newJobMetadata
+    JobMetadata (..),
+    newJobMetadata,
 
     -- ** JobMetrics
-    , JobMetrics (..)
-    , newJobMetrics
+    JobMetrics (..),
+    newJobMetrics,
 
     -- ** KeyRangeDataDiskAssignment
-    , KeyRangeDataDiskAssignment (..)
-    , newKeyRangeDataDiskAssignment
+    KeyRangeDataDiskAssignment (..),
+    newKeyRangeDataDiskAssignment,
 
     -- ** KeyRangeLocation
-    , KeyRangeLocation (..)
-    , newKeyRangeLocation
+    KeyRangeLocation (..),
+    newKeyRangeLocation,
 
     -- ** LaunchFlexTemplateParameter
-    , LaunchFlexTemplateParameter (..)
-    , newLaunchFlexTemplateParameter
+    LaunchFlexTemplateParameter (..),
+    newLaunchFlexTemplateParameter,
 
     -- ** LaunchFlexTemplateParameter_LaunchOptions
-    , LaunchFlexTemplateParameter_LaunchOptions (..)
-    , newLaunchFlexTemplateParameter_LaunchOptions
+    LaunchFlexTemplateParameter_LaunchOptions (..),
+    newLaunchFlexTemplateParameter_LaunchOptions,
 
     -- ** LaunchFlexTemplateParameter_Parameters
-    , LaunchFlexTemplateParameter_Parameters (..)
-    , newLaunchFlexTemplateParameter_Parameters
+    LaunchFlexTemplateParameter_Parameters (..),
+    newLaunchFlexTemplateParameter_Parameters,
 
     -- ** LaunchFlexTemplateParameter_TransformNameMappings
-    , LaunchFlexTemplateParameter_TransformNameMappings (..)
-    , newLaunchFlexTemplateParameter_TransformNameMappings
+    LaunchFlexTemplateParameter_TransformNameMappings (..),
+    newLaunchFlexTemplateParameter_TransformNameMappings,
 
     -- ** LaunchFlexTemplateRequest
-    , LaunchFlexTemplateRequest (..)
-    , newLaunchFlexTemplateRequest
+    LaunchFlexTemplateRequest (..),
+    newLaunchFlexTemplateRequest,
 
     -- ** LaunchFlexTemplateResponse
-    , LaunchFlexTemplateResponse (..)
-    , newLaunchFlexTemplateResponse
+    LaunchFlexTemplateResponse (..),
+    newLaunchFlexTemplateResponse,
 
     -- ** LaunchTemplateParameters
-    , LaunchTemplateParameters (..)
-    , newLaunchTemplateParameters
+    LaunchTemplateParameters (..),
+    newLaunchTemplateParameters,
 
     -- ** LaunchTemplateParameters_Parameters
-    , LaunchTemplateParameters_Parameters (..)
-    , newLaunchTemplateParameters_Parameters
+    LaunchTemplateParameters_Parameters (..),
+    newLaunchTemplateParameters_Parameters,
 
     -- ** LaunchTemplateParameters_TransformNameMapping
-    , LaunchTemplateParameters_TransformNameMapping (..)
-    , newLaunchTemplateParameters_TransformNameMapping
+    LaunchTemplateParameters_TransformNameMapping (..),
+    newLaunchTemplateParameters_TransformNameMapping,
 
     -- ** LaunchTemplateResponse
-    , LaunchTemplateResponse (..)
-    , newLaunchTemplateResponse
+    LaunchTemplateResponse (..),
+    newLaunchTemplateResponse,
 
     -- ** LeaseWorkItemRequest
-    , LeaseWorkItemRequest (..)
-    , newLeaseWorkItemRequest
+    LeaseWorkItemRequest (..),
+    newLeaseWorkItemRequest,
 
     -- ** LeaseWorkItemRequest_UnifiedWorkerRequest
-    , LeaseWorkItemRequest_UnifiedWorkerRequest (..)
-    , newLeaseWorkItemRequest_UnifiedWorkerRequest
+    LeaseWorkItemRequest_UnifiedWorkerRequest (..),
+    newLeaseWorkItemRequest_UnifiedWorkerRequest,
 
     -- ** LeaseWorkItemResponse
-    , LeaseWorkItemResponse (..)
-    , newLeaseWorkItemResponse
+    LeaseWorkItemResponse (..),
+    newLeaseWorkItemResponse,
 
     -- ** LeaseWorkItemResponse_UnifiedWorkerResponse
-    , LeaseWorkItemResponse_UnifiedWorkerResponse (..)
-    , newLeaseWorkItemResponse_UnifiedWorkerResponse
+    LeaseWorkItemResponse_UnifiedWorkerResponse (..),
+    newLeaseWorkItemResponse_UnifiedWorkerResponse,
 
     -- ** ListJobMessagesResponse
-    , ListJobMessagesResponse (..)
-    , newListJobMessagesResponse
+    ListJobMessagesResponse (..),
+    newListJobMessagesResponse,
 
     -- ** ListJobsResponse
-    , ListJobsResponse (..)
-    , newListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
 
     -- ** ListSnapshotsResponse
-    , ListSnapshotsResponse (..)
-    , newListSnapshotsResponse
+    ListSnapshotsResponse (..),
+    newListSnapshotsResponse,
 
     -- ** MapTask
-    , MapTask (..)
-    , newMapTask
+    MapTask (..),
+    newMapTask,
 
     -- ** MemInfo
-    , MemInfo (..)
-    , newMemInfo
+    MemInfo (..),
+    newMemInfo,
 
     -- ** MetricShortId
-    , MetricShortId (..)
-    , newMetricShortId
+    MetricShortId (..),
+    newMetricShortId,
 
     -- ** MetricStructuredName
-    , MetricStructuredName (..)
-    , newMetricStructuredName
+    MetricStructuredName (..),
+    newMetricStructuredName,
 
     -- ** MetricStructuredName_Context
-    , MetricStructuredName_Context (..)
-    , newMetricStructuredName_Context
+    MetricStructuredName_Context (..),
+    newMetricStructuredName_Context,
 
     -- ** MetricUpdate
-    , MetricUpdate (..)
-    , newMetricUpdate
+    MetricUpdate (..),
+    newMetricUpdate,
 
     -- ** MountedDataDisk
-    , MountedDataDisk (..)
-    , newMountedDataDisk
+    MountedDataDisk (..),
+    newMountedDataDisk,
 
     -- ** MultiOutputInfo
-    , MultiOutputInfo (..)
-    , newMultiOutputInfo
+    MultiOutputInfo (..),
+    newMultiOutputInfo,
 
     -- ** NameAndKind
-    , NameAndKind (..)
-    , newNameAndKind
+    NameAndKind (..),
+    newNameAndKind,
 
     -- ** NameAndKind_Kind
-    , NameAndKind_Kind (..)
+    NameAndKind_Kind (..),
 
     -- ** Package
-    , Package (..)
-    , newPackage
+    Package (..),
+    newPackage,
 
     -- ** ParDoInstruction
-    , ParDoInstruction (..)
-    , newParDoInstruction
+    ParDoInstruction (..),
+    newParDoInstruction,
 
     -- ** ParDoInstruction_UserFn
-    , ParDoInstruction_UserFn (..)
-    , newParDoInstruction_UserFn
+    ParDoInstruction_UserFn (..),
+    newParDoInstruction_UserFn,
 
     -- ** ParallelInstruction
-    , ParallelInstruction (..)
-    , newParallelInstruction
+    ParallelInstruction (..),
+    newParallelInstruction,
 
     -- ** Parameter
-    , Parameter (..)
-    , newParameter
+    Parameter (..),
+    newParameter,
 
     -- ** ParameterMetadata
-    , ParameterMetadata (..)
-    , newParameterMetadata
+    ParameterMetadata (..),
+    newParameterMetadata,
 
     -- ** ParameterMetadata_CustomMetadata
-    , ParameterMetadata_CustomMetadata (..)
-    , newParameterMetadata_CustomMetadata
+    ParameterMetadata_CustomMetadata (..),
+    newParameterMetadata_CustomMetadata,
 
     -- ** ParameterMetadata_ParamType
-    , ParameterMetadata_ParamType (..)
+    ParameterMetadata_ParamType (..),
 
     -- ** PartialGroupByKeyInstruction
-    , PartialGroupByKeyInstruction (..)
-    , newPartialGroupByKeyInstruction
+    PartialGroupByKeyInstruction (..),
+    newPartialGroupByKeyInstruction,
 
     -- ** PartialGroupByKeyInstruction_InputElementCodec
-    , PartialGroupByKeyInstruction_InputElementCodec (..)
-    , newPartialGroupByKeyInstruction_InputElementCodec
+    PartialGroupByKeyInstruction_InputElementCodec (..),
+    newPartialGroupByKeyInstruction_InputElementCodec,
 
     -- ** PartialGroupByKeyInstruction_ValueCombiningFn
-    , PartialGroupByKeyInstruction_ValueCombiningFn (..)
-    , newPartialGroupByKeyInstruction_ValueCombiningFn
+    PartialGroupByKeyInstruction_ValueCombiningFn (..),
+    newPartialGroupByKeyInstruction_ValueCombiningFn,
 
     -- ** PipelineDescription
-    , PipelineDescription (..)
-    , newPipelineDescription
+    PipelineDescription (..),
+    newPipelineDescription,
 
     -- ** Point
-    , Point (..)
-    , newPoint
+    Point (..),
+    newPoint,
 
     -- ** Position
-    , Position (..)
-    , newPosition
+    Position (..),
+    newPosition,
 
     -- ** ProgressTimeseries
-    , ProgressTimeseries (..)
-    , newProgressTimeseries
+    ProgressTimeseries (..),
+    newProgressTimeseries,
 
     -- ** PubSubIODetails
-    , PubSubIODetails (..)
-    , newPubSubIODetails
+    PubSubIODetails (..),
+    newPubSubIODetails,
 
     -- ** PubsubLocation
-    , PubsubLocation (..)
-    , newPubsubLocation
+    PubsubLocation (..),
+    newPubsubLocation,
 
     -- ** PubsubSnapshotMetadata
-    , PubsubSnapshotMetadata (..)
-    , newPubsubSnapshotMetadata
+    PubsubSnapshotMetadata (..),
+    newPubsubSnapshotMetadata,
 
     -- ** QueryInfo
-    , QueryInfo (..)
-    , newQueryInfo
+    QueryInfo (..),
+    newQueryInfo,
 
     -- ** QueryInfo_QueryPropertyItem
-    , QueryInfo_QueryPropertyItem (..)
+    QueryInfo_QueryPropertyItem (..),
 
     -- ** ReadInstruction
-    , ReadInstruction (..)
-    , newReadInstruction
+    ReadInstruction (..),
+    newReadInstruction,
 
     -- ** ReportWorkItemStatusRequest
-    , ReportWorkItemStatusRequest (..)
-    , newReportWorkItemStatusRequest
+    ReportWorkItemStatusRequest (..),
+    newReportWorkItemStatusRequest,
 
     -- ** ReportWorkItemStatusRequest_UnifiedWorkerRequest
-    , ReportWorkItemStatusRequest_UnifiedWorkerRequest (..)
-    , newReportWorkItemStatusRequest_UnifiedWorkerRequest
+    ReportWorkItemStatusRequest_UnifiedWorkerRequest (..),
+    newReportWorkItemStatusRequest_UnifiedWorkerRequest,
 
     -- ** ReportWorkItemStatusResponse
-    , ReportWorkItemStatusResponse (..)
-    , newReportWorkItemStatusResponse
+    ReportWorkItemStatusResponse (..),
+    newReportWorkItemStatusResponse,
 
     -- ** ReportWorkItemStatusResponse_UnifiedWorkerResponse
-    , ReportWorkItemStatusResponse_UnifiedWorkerResponse (..)
-    , newReportWorkItemStatusResponse_UnifiedWorkerResponse
+    ReportWorkItemStatusResponse_UnifiedWorkerResponse (..),
+    newReportWorkItemStatusResponse_UnifiedWorkerResponse,
 
     -- ** ReportedParallelism
-    , ReportedParallelism (..)
-    , newReportedParallelism
+    ReportedParallelism (..),
+    newReportedParallelism,
 
     -- ** ResourceUtilizationReport
-    , ResourceUtilizationReport (..)
-    , newResourceUtilizationReport
+    ResourceUtilizationReport (..),
+    newResourceUtilizationReport,
 
     -- ** ResourceUtilizationReport_Containers
-    , ResourceUtilizationReport_Containers (..)
-    , newResourceUtilizationReport_Containers
+    ResourceUtilizationReport_Containers (..),
+    newResourceUtilizationReport_Containers,
 
     -- ** ResourceUtilizationReportResponse
-    , ResourceUtilizationReportResponse (..)
-    , newResourceUtilizationReportResponse
+    ResourceUtilizationReportResponse (..),
+    newResourceUtilizationReportResponse,
 
     -- ** RuntimeEnvironment
-    , RuntimeEnvironment (..)
-    , newRuntimeEnvironment
+    RuntimeEnvironment (..),
+    newRuntimeEnvironment,
 
     -- ** RuntimeEnvironment_AdditionalUserLabels
-    , RuntimeEnvironment_AdditionalUserLabels (..)
-    , newRuntimeEnvironment_AdditionalUserLabels
+    RuntimeEnvironment_AdditionalUserLabels (..),
+    newRuntimeEnvironment_AdditionalUserLabels,
 
     -- ** RuntimeEnvironment_IpConfiguration
-    , RuntimeEnvironment_IpConfiguration (..)
+    RuntimeEnvironment_IpConfiguration (..),
 
     -- ** RuntimeMetadata
-    , RuntimeMetadata (..)
-    , newRuntimeMetadata
+    RuntimeMetadata (..),
+    newRuntimeMetadata,
 
     -- ** SDKInfo
-    , SDKInfo (..)
-    , newSDKInfo
+    SDKInfo (..),
+    newSDKInfo,
 
     -- ** SDKInfo_Language
-    , SDKInfo_Language (..)
+    SDKInfo_Language (..),
 
     -- ** SdkHarnessContainerImage
-    , SdkHarnessContainerImage (..)
-    , newSdkHarnessContainerImage
+    SdkHarnessContainerImage (..),
+    newSdkHarnessContainerImage,
 
     -- ** SdkVersion
-    , SdkVersion (..)
-    , newSdkVersion
+    SdkVersion (..),
+    newSdkVersion,
 
     -- ** SdkVersion_SdkSupportStatus
-    , SdkVersion_SdkSupportStatus (..)
+    SdkVersion_SdkSupportStatus (..),
 
     -- ** SendDebugCaptureRequest
-    , SendDebugCaptureRequest (..)
-    , newSendDebugCaptureRequest
+    SendDebugCaptureRequest (..),
+    newSendDebugCaptureRequest,
 
     -- ** SendDebugCaptureRequest_DataFormat
-    , SendDebugCaptureRequest_DataFormat (..)
+    SendDebugCaptureRequest_DataFormat (..),
 
     -- ** SendDebugCaptureResponse
-    , SendDebugCaptureResponse (..)
-    , newSendDebugCaptureResponse
+    SendDebugCaptureResponse (..),
+    newSendDebugCaptureResponse,
 
     -- ** SendWorkerMessagesRequest
-    , SendWorkerMessagesRequest (..)
-    , newSendWorkerMessagesRequest
+    SendWorkerMessagesRequest (..),
+    newSendWorkerMessagesRequest,
 
     -- ** SendWorkerMessagesResponse
-    , SendWorkerMessagesResponse (..)
-    , newSendWorkerMessagesResponse
+    SendWorkerMessagesResponse (..),
+    newSendWorkerMessagesResponse,
 
     -- ** SeqMapTask
-    , SeqMapTask (..)
-    , newSeqMapTask
+    SeqMapTask (..),
+    newSeqMapTask,
 
     -- ** SeqMapTask_UserFn
-    , SeqMapTask_UserFn (..)
-    , newSeqMapTask_UserFn
+    SeqMapTask_UserFn (..),
+    newSeqMapTask_UserFn,
 
     -- ** SeqMapTaskOutputInfo
-    , SeqMapTaskOutputInfo (..)
-    , newSeqMapTaskOutputInfo
+    SeqMapTaskOutputInfo (..),
+    newSeqMapTaskOutputInfo,
 
     -- ** ShellTask
-    , ShellTask (..)
-    , newShellTask
+    ShellTask (..),
+    newShellTask,
 
     -- ** SideInputInfo
-    , SideInputInfo (..)
-    , newSideInputInfo
+    SideInputInfo (..),
+    newSideInputInfo,
 
     -- ** SideInputInfo_Kind
-    , SideInputInfo_Kind (..)
-    , newSideInputInfo_Kind
+    SideInputInfo_Kind (..),
+    newSideInputInfo_Kind,
 
     -- ** Sink
-    , Sink (..)
-    , newSink
+    Sink (..),
+    newSink,
 
     -- ** Sink_Codec
-    , Sink_Codec (..)
-    , newSink_Codec
+    Sink_Codec (..),
+    newSink_Codec,
 
     -- ** Sink_Spec
-    , Sink_Spec (..)
-    , newSink_Spec
+    Sink_Spec (..),
+    newSink_Spec,
 
     -- ** Snapshot
-    , Snapshot (..)
-    , newSnapshot
+    Snapshot (..),
+    newSnapshot,
 
     -- ** Snapshot_State
-    , Snapshot_State (..)
+    Snapshot_State (..),
 
     -- ** SnapshotJobRequest
-    , SnapshotJobRequest (..)
-    , newSnapshotJobRequest
+    SnapshotJobRequest (..),
+    newSnapshotJobRequest,
 
     -- ** Source
-    , Source (..)
-    , newSource
+    Source (..),
+    newSource,
 
     -- ** Source_BaseSpecsItem
-    , Source_BaseSpecsItem (..)
-    , newSource_BaseSpecsItem
+    Source_BaseSpecsItem (..),
+    newSource_BaseSpecsItem,
 
     -- ** Source_Codec
-    , Source_Codec (..)
-    , newSource_Codec
+    Source_Codec (..),
+    newSource_Codec,
 
     -- ** Source_Spec
-    , Source_Spec (..)
-    , newSource_Spec
+    Source_Spec (..),
+    newSource_Spec,
 
     -- ** SourceFork
-    , SourceFork (..)
-    , newSourceFork
+    SourceFork (..),
+    newSourceFork,
 
     -- ** SourceGetMetadataRequest
-    , SourceGetMetadataRequest (..)
-    , newSourceGetMetadataRequest
+    SourceGetMetadataRequest (..),
+    newSourceGetMetadataRequest,
 
     -- ** SourceGetMetadataResponse
-    , SourceGetMetadataResponse (..)
-    , newSourceGetMetadataResponse
+    SourceGetMetadataResponse (..),
+    newSourceGetMetadataResponse,
 
     -- ** SourceMetadata
-    , SourceMetadata (..)
-    , newSourceMetadata
+    SourceMetadata (..),
+    newSourceMetadata,
 
     -- ** SourceOperationRequest
-    , SourceOperationRequest (..)
-    , newSourceOperationRequest
+    SourceOperationRequest (..),
+    newSourceOperationRequest,
 
     -- ** SourceOperationResponse
-    , SourceOperationResponse (..)
-    , newSourceOperationResponse
+    SourceOperationResponse (..),
+    newSourceOperationResponse,
 
     -- ** SourceSplitOptions
-    , SourceSplitOptions (..)
-    , newSourceSplitOptions
+    SourceSplitOptions (..),
+    newSourceSplitOptions,
 
     -- ** SourceSplitRequest
-    , SourceSplitRequest (..)
-    , newSourceSplitRequest
+    SourceSplitRequest (..),
+    newSourceSplitRequest,
 
     -- ** SourceSplitResponse
-    , SourceSplitResponse (..)
-    , newSourceSplitResponse
+    SourceSplitResponse (..),
+    newSourceSplitResponse,
 
     -- ** SourceSplitResponse_Outcome
-    , SourceSplitResponse_Outcome (..)
+    SourceSplitResponse_Outcome (..),
 
     -- ** SourceSplitShard
-    , SourceSplitShard (..)
-    , newSourceSplitShard
+    SourceSplitShard (..),
+    newSourceSplitShard,
 
     -- ** SourceSplitShard_DerivationMode
-    , SourceSplitShard_DerivationMode (..)
+    SourceSplitShard_DerivationMode (..),
 
     -- ** SpannerIODetails
-    , SpannerIODetails (..)
-    , newSpannerIODetails
+    SpannerIODetails (..),
+    newSpannerIODetails,
 
     -- ** SplitInt64
-    , SplitInt64 (..)
-    , newSplitInt64
+    SplitInt64 (..),
+    newSplitInt64,
 
     -- ** StageExecutionDetails
-    , StageExecutionDetails (..)
-    , newStageExecutionDetails
+    StageExecutionDetails (..),
+    newStageExecutionDetails,
 
     -- ** StageSource
-    , StageSource (..)
-    , newStageSource
+    StageSource (..),
+    newStageSource,
 
     -- ** StageSummary
-    , StageSummary (..)
-    , newStageSummary
+    StageSummary (..),
+    newStageSummary,
 
     -- ** StageSummary_State
-    , StageSummary_State (..)
+    StageSummary_State (..),
 
     -- ** StateFamilyConfig
-    , StateFamilyConfig (..)
-    , newStateFamilyConfig
+    StateFamilyConfig (..),
+    newStateFamilyConfig,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Step
-    , Step (..)
-    , newStep
+    Step (..),
+    newStep,
 
     -- ** Step_Properties
-    , Step_Properties (..)
-    , newStep_Properties
+    Step_Properties (..),
+    newStep_Properties,
 
     -- ** StreamLocation
-    , StreamLocation (..)
-    , newStreamLocation
+    StreamLocation (..),
+    newStreamLocation,
 
     -- ** StreamingApplianceSnapshotConfig
-    , StreamingApplianceSnapshotConfig (..)
-    , newStreamingApplianceSnapshotConfig
+    StreamingApplianceSnapshotConfig (..),
+    newStreamingApplianceSnapshotConfig,
 
     -- ** StreamingComputationConfig
-    , StreamingComputationConfig (..)
-    , newStreamingComputationConfig
+    StreamingComputationConfig (..),
+    newStreamingComputationConfig,
 
     -- ** StreamingComputationConfig_TransformUserNameToStateFamily
-    , StreamingComputationConfig_TransformUserNameToStateFamily (..)
-    , newStreamingComputationConfig_TransformUserNameToStateFamily
+    StreamingComputationConfig_TransformUserNameToStateFamily (..),
+    newStreamingComputationConfig_TransformUserNameToStateFamily,
 
     -- ** StreamingComputationRanges
-    , StreamingComputationRanges (..)
-    , newStreamingComputationRanges
+    StreamingComputationRanges (..),
+    newStreamingComputationRanges,
 
     -- ** StreamingComputationTask
-    , StreamingComputationTask (..)
-    , newStreamingComputationTask
+    StreamingComputationTask (..),
+    newStreamingComputationTask,
 
     -- ** StreamingComputationTask_TaskType
-    , StreamingComputationTask_TaskType (..)
+    StreamingComputationTask_TaskType (..),
 
     -- ** StreamingConfigTask
-    , StreamingConfigTask (..)
-    , newStreamingConfigTask
+    StreamingConfigTask (..),
+    newStreamingConfigTask,
 
     -- ** StreamingConfigTask_UserStepToStateFamilyNameMap
-    , StreamingConfigTask_UserStepToStateFamilyNameMap (..)
-    , newStreamingConfigTask_UserStepToStateFamilyNameMap
+    StreamingConfigTask_UserStepToStateFamilyNameMap (..),
+    newStreamingConfigTask_UserStepToStateFamilyNameMap,
 
     -- ** StreamingSetupTask
-    , StreamingSetupTask (..)
-    , newStreamingSetupTask
+    StreamingSetupTask (..),
+    newStreamingSetupTask,
 
     -- ** StreamingSideInputLocation
-    , StreamingSideInputLocation (..)
-    , newStreamingSideInputLocation
+    StreamingSideInputLocation (..),
+    newStreamingSideInputLocation,
 
     -- ** StreamingStageLocation
-    , StreamingStageLocation (..)
-    , newStreamingStageLocation
+    StreamingStageLocation (..),
+    newStreamingStageLocation,
 
     -- ** StringList
-    , StringList (..)
-    , newStringList
+    StringList (..),
+    newStringList,
 
     -- ** StructuredMessage
-    , StructuredMessage (..)
-    , newStructuredMessage
+    StructuredMessage (..),
+    newStructuredMessage,
 
     -- ** TaskRunnerSettings
-    , TaskRunnerSettings (..)
-    , newTaskRunnerSettings
+    TaskRunnerSettings (..),
+    newTaskRunnerSettings,
 
     -- ** TemplateMetadata
-    , TemplateMetadata (..)
-    , newTemplateMetadata
+    TemplateMetadata (..),
+    newTemplateMetadata,
 
     -- ** TopologyConfig
-    , TopologyConfig (..)
-    , newTopologyConfig
+    TopologyConfig (..),
+    newTopologyConfig,
 
     -- ** TopologyConfig_UserStageToComputationNameMap
-    , TopologyConfig_UserStageToComputationNameMap (..)
-    , newTopologyConfig_UserStageToComputationNameMap
+    TopologyConfig_UserStageToComputationNameMap (..),
+    newTopologyConfig_UserStageToComputationNameMap,
 
     -- ** TransformSummary
-    , TransformSummary (..)
-    , newTransformSummary
+    TransformSummary (..),
+    newTransformSummary,
 
     -- ** TransformSummary_Kind
-    , TransformSummary_Kind (..)
+    TransformSummary_Kind (..),
 
     -- ** ValidateResponse
-    , ValidateResponse (..)
-    , newValidateResponse
+    ValidateResponse (..),
+    newValidateResponse,
 
     -- ** WorkItem
-    , WorkItem (..)
-    , newWorkItem
+    WorkItem (..),
+    newWorkItem,
 
     -- ** WorkItemDetails
-    , WorkItemDetails (..)
-    , newWorkItemDetails
+    WorkItemDetails (..),
+    newWorkItemDetails,
 
     -- ** WorkItemDetails_State
-    , WorkItemDetails_State (..)
+    WorkItemDetails_State (..),
 
     -- ** WorkItemServiceState
-    , WorkItemServiceState (..)
-    , newWorkItemServiceState
+    WorkItemServiceState (..),
+    newWorkItemServiceState,
 
     -- ** WorkItemServiceState_HarnessData
-    , WorkItemServiceState_HarnessData (..)
-    , newWorkItemServiceState_HarnessData
+    WorkItemServiceState_HarnessData (..),
+    newWorkItemServiceState_HarnessData,
 
     -- ** WorkItemStatus
-    , WorkItemStatus (..)
-    , newWorkItemStatus
+    WorkItemStatus (..),
+    newWorkItemStatus,
 
     -- ** WorkerDetails
-    , WorkerDetails (..)
-    , newWorkerDetails
+    WorkerDetails (..),
+    newWorkerDetails,
 
     -- ** WorkerHealthReport
-    , WorkerHealthReport (..)
-    , newWorkerHealthReport
+    WorkerHealthReport (..),
+    newWorkerHealthReport,
 
     -- ** WorkerHealthReport_PodsItem
-    , WorkerHealthReport_PodsItem (..)
-    , newWorkerHealthReport_PodsItem
+    WorkerHealthReport_PodsItem (..),
+    newWorkerHealthReport_PodsItem,
 
     -- ** WorkerHealthReportResponse
-    , WorkerHealthReportResponse (..)
-    , newWorkerHealthReportResponse
+    WorkerHealthReportResponse (..),
+    newWorkerHealthReportResponse,
 
     -- ** WorkerLifecycleEvent
-    , WorkerLifecycleEvent (..)
-    , newWorkerLifecycleEvent
+    WorkerLifecycleEvent (..),
+    newWorkerLifecycleEvent,
 
     -- ** WorkerLifecycleEvent_Event
-    , WorkerLifecycleEvent_Event (..)
+    WorkerLifecycleEvent_Event (..),
 
     -- ** WorkerLifecycleEvent_Metadata
-    , WorkerLifecycleEvent_Metadata (..)
-    , newWorkerLifecycleEvent_Metadata
+    WorkerLifecycleEvent_Metadata (..),
+    newWorkerLifecycleEvent_Metadata,
 
     -- ** WorkerMessage
-    , WorkerMessage (..)
-    , newWorkerMessage
+    WorkerMessage (..),
+    newWorkerMessage,
 
     -- ** WorkerMessage_Labels
-    , WorkerMessage_Labels (..)
-    , newWorkerMessage_Labels
+    WorkerMessage_Labels (..),
+    newWorkerMessage_Labels,
 
     -- ** WorkerMessageCode
-    , WorkerMessageCode (..)
-    , newWorkerMessageCode
+    WorkerMessageCode (..),
+    newWorkerMessageCode,
 
     -- ** WorkerMessageCode_Parameters
-    , WorkerMessageCode_Parameters (..)
-    , newWorkerMessageCode_Parameters
+    WorkerMessageCode_Parameters (..),
+    newWorkerMessageCode_Parameters,
 
     -- ** WorkerMessageResponse
-    , WorkerMessageResponse (..)
-    , newWorkerMessageResponse
+    WorkerMessageResponse (..),
+    newWorkerMessageResponse,
 
     -- ** WorkerPool
-    , WorkerPool (..)
-    , newWorkerPool
+    WorkerPool (..),
+    newWorkerPool,
 
     -- ** WorkerPool_DefaultPackageSet
-    , WorkerPool_DefaultPackageSet (..)
+    WorkerPool_DefaultPackageSet (..),
 
     -- ** WorkerPool_IpConfiguration
-    , WorkerPool_IpConfiguration (..)
+    WorkerPool_IpConfiguration (..),
 
     -- ** WorkerPool_Metadata
-    , WorkerPool_Metadata (..)
-    , newWorkerPool_Metadata
+    WorkerPool_Metadata (..),
+    newWorkerPool_Metadata,
 
     -- ** WorkerPool_PoolArgs
-    , WorkerPool_PoolArgs (..)
-    , newWorkerPool_PoolArgs
+    WorkerPool_PoolArgs (..),
+    newWorkerPool_PoolArgs,
 
     -- ** WorkerPool_TeardownPolicy
-    , WorkerPool_TeardownPolicy (..)
+    WorkerPool_TeardownPolicy (..),
 
     -- ** WorkerSettings
-    , WorkerSettings (..)
-    , newWorkerSettings
+    WorkerSettings (..),
+    newWorkerSettings,
 
     -- ** WorkerShutdownNotice
-    , WorkerShutdownNotice (..)
-    , newWorkerShutdownNotice
+    WorkerShutdownNotice (..),
+    newWorkerShutdownNotice,
 
     -- ** WorkerShutdownNoticeResponse
-    , WorkerShutdownNoticeResponse (..)
-    , newWorkerShutdownNoticeResponse
+    WorkerShutdownNoticeResponse (..),
+    newWorkerShutdownNoticeResponse,
 
     -- ** WriteInstruction
-    , WriteInstruction (..)
-    , newWriteInstruction
+    WriteInstruction (..),
+    newWriteInstruction,
 
     -- ** ProjectsJobsAggregatedFilter
-    , ProjectsJobsAggregatedFilter (..)
+    ProjectsJobsAggregatedFilter (..),
 
     -- ** ProjectsJobsAggregatedView
-    , ProjectsJobsAggregatedView (..)
+    ProjectsJobsAggregatedView (..),
 
     -- ** ProjectsJobsCreateView
-    , ProjectsJobsCreateView (..)
+    ProjectsJobsCreateView (..),
 
     -- ** ProjectsJobsGetView
-    , ProjectsJobsGetView (..)
+    ProjectsJobsGetView (..),
 
     -- ** ProjectsJobsListFilter
-    , ProjectsJobsListFilter (..)
+    ProjectsJobsListFilter (..),
 
     -- ** ProjectsJobsListView
-    , ProjectsJobsListView (..)
+    ProjectsJobsListView (..),
 
     -- ** ProjectsJobsMessagesListMinimumImportance
-    , ProjectsJobsMessagesListMinimumImportance (..)
+    ProjectsJobsMessagesListMinimumImportance (..),
 
     -- ** ProjectsLocationsJobsCreateView
-    , ProjectsLocationsJobsCreateView (..)
+    ProjectsLocationsJobsCreateView (..),
 
     -- ** ProjectsLocationsJobsGetView
-    , ProjectsLocationsJobsGetView (..)
+    ProjectsLocationsJobsGetView (..),
 
     -- ** ProjectsLocationsJobsListFilter
-    , ProjectsLocationsJobsListFilter (..)
+    ProjectsLocationsJobsListFilter (..),
 
     -- ** ProjectsLocationsJobsListView
-    , ProjectsLocationsJobsListView (..)
+    ProjectsLocationsJobsListView (..),
 
     -- ** ProjectsLocationsJobsMessagesListMinimumImportance
-    , ProjectsLocationsJobsMessagesListMinimumImportance (..)
+    ProjectsLocationsJobsMessagesListMinimumImportance (..),
 
     -- ** ProjectsLocationsTemplatesGetView
-    , ProjectsLocationsTemplatesGetView (..)
+    ProjectsLocationsTemplatesGetView (..),
 
     -- ** ProjectsTemplatesGetView
-    , ProjectsTemplatesGetView (..)
-    ) where
+    ProjectsTemplatesGetView (..),
+  )
+where
 
 import Gogol.Dataflow.Projects.DeleteSnapshots
 import Gogol.Dataflow.Projects.Jobs.Aggregated
