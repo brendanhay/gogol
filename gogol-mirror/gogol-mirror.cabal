@@ -1,73 +1,84 @@
-name:                  gogol-mirror
-version:               0.5.0
-synopsis:              Google Mirror SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-mirror
+version:            0.5.0
+synopsis:           Google Mirror SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Interacts with Glass users via the timeline.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
-    .
-    Labels:
-    .
-    * Limited Availability
+  Interacts with Glass users via the timeline.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
+  .
+  Labels:
+  .
+  * Limited Availability
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-mirror
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Mirror
-        , Network.Google.Mirror.Types
-        , Network.Google.Resource.Mirror.Accounts.Insert
-        , Network.Google.Resource.Mirror.Contacts.Delete
-        , Network.Google.Resource.Mirror.Contacts.Get
-        , Network.Google.Resource.Mirror.Contacts.Insert
-        , Network.Google.Resource.Mirror.Contacts.List
-        , Network.Google.Resource.Mirror.Contacts.Patch
-        , Network.Google.Resource.Mirror.Contacts.Update
-        , Network.Google.Resource.Mirror.Locations.Get
-        , Network.Google.Resource.Mirror.Locations.List
-        , Network.Google.Resource.Mirror.Settings.Get
-        , Network.Google.Resource.Mirror.Subscriptions.Delete
-        , Network.Google.Resource.Mirror.Subscriptions.Insert
-        , Network.Google.Resource.Mirror.Subscriptions.List
-        , Network.Google.Resource.Mirror.Subscriptions.Update
-        , Network.Google.Resource.Mirror.Timeline.Attachments.Delete
-        , Network.Google.Resource.Mirror.Timeline.Attachments.Get
-        , Network.Google.Resource.Mirror.Timeline.Attachments.Insert
-        , Network.Google.Resource.Mirror.Timeline.Attachments.List
-        , Network.Google.Resource.Mirror.Timeline.Delete
-        , Network.Google.Resource.Mirror.Timeline.Get
-        , Network.Google.Resource.Mirror.Timeline.Insert
-        , Network.Google.Resource.Mirror.Timeline.List
-        , Network.Google.Resource.Mirror.Timeline.Patch
-        , Network.Google.Resource.Mirror.Timeline.Update
+  exposed-modules:
+    Network.Google.Mirror
+    Network.Google.Mirror.Accounts.Insert
+    Network.Google.Mirror.Contacts.Delete
+    Network.Google.Mirror.Contacts.Get
+    Network.Google.Mirror.Contacts.Insert
+    Network.Google.Mirror.Contacts.List
+    Network.Google.Mirror.Contacts.Patch
+    Network.Google.Mirror.Contacts.Update
+    Network.Google.Mirror.Locations.Get
+    Network.Google.Mirror.Locations.List
+    Network.Google.Mirror.Settings.Get
+    Network.Google.Mirror.Subscriptions.Delete
+    Network.Google.Mirror.Subscriptions.Insert
+    Network.Google.Mirror.Subscriptions.List
+    Network.Google.Mirror.Subscriptions.Update
+    Network.Google.Mirror.Timeline.Attachments.Delete
+    Network.Google.Mirror.Timeline.Attachments.Get
+    Network.Google.Mirror.Timeline.Attachments.Insert
+    Network.Google.Mirror.Timeline.Attachments.List
+    Network.Google.Mirror.Timeline.Delete
+    Network.Google.Mirror.Timeline.Get
+    Network.Google.Mirror.Timeline.Insert
+    Network.Google.Mirror.Timeline.List
+    Network.Google.Mirror.Timeline.Patch
+    Network.Google.Mirror.Timeline.Update
+    Network.Google.Mirror.Types
 
-    other-modules:
-          Network.Google.Mirror.Types.Product
-        , Network.Google.Mirror.Types.Sum
+  other-modules:
+    Network.Google.Mirror.Internal.Product
+    Network.Google.Mirror.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
