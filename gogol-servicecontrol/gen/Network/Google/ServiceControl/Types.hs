@@ -1,324 +1,251 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ServiceControl.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.ServiceControl.Types
-    (
-    -- * Service Configuration
-      serviceControlService
+  ( -- * Configuration
+    serviceControlService,
 
     -- * OAuth Scopes
-    , serviceControlScope
-    , cloudPlatformScope
+    cloudPlatformScope,
+    serviceControlScope,
 
-    -- * AuditLogServiceData
-    , AuditLogServiceData
-    , auditLogServiceData
-    , alsdAddtional
+    -- * Types
 
-    -- * AuditLogMetadata
-    , AuditLogMetadata
-    , auditLogMetadata
-    , almAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Api
+    Api (..),
+    newApi,
 
-    -- * RequestMetadata
-    , RequestMetadata
-    , requestMetadata
-    , rmCallerSuppliedUserAgent
-    , rmCallerIP
-    , rmDestinationAttributes
-    , rmCallerNetwork
-    , rmRequestAttributes
+    -- ** AttributeContext
+    AttributeContext (..),
+    newAttributeContext,
 
-    -- * ThirdPartyPrincipal
-    , ThirdPartyPrincipal
-    , thirdPartyPrincipal
-    , tppThirdPartyClaims
+    -- ** AttributeContext_ExtensionsItem
+    AttributeContext_ExtensionsItem (..),
+    newAttributeContext_ExtensionsItem,
 
-    -- * ResourceLabels
-    , ResourceLabels
-    , resourceLabels
-    , rlAddtional
+    -- ** AuditLog
+    AuditLog (..),
+    newAuditLog,
 
-    -- * ReportRequest
-    , ReportRequest
-    , reportRequest
-    , rrServiceConfigId
-    , rrOperations
+    -- ** AuditLog_Metadata
+    AuditLog_Metadata (..),
+    newAuditLog_Metadata,
 
-    -- * ResponseHeaders
-    , ResponseHeaders
-    , responseHeaders
-    , rhAddtional
+    -- ** AuditLog_Request
+    AuditLog_Request (..),
+    newAuditLog_Request,
 
-    -- * CheckRequest
-    , CheckRequest
-    , checkRequest
-    , crFlags
-    , crResources
-    , crAttributes
-    , crServiceConfigId
+    -- ** AuditLog_ResourceOriginalState
+    AuditLog_ResourceOriginalState (..),
+    newAuditLog_ResourceOriginalState,
 
-    -- * Peer
-    , Peer
-    , peer
-    , pRegionCode
-    , pIP
-    , pPrincipal
-    , pLabels
-    , pPort
+    -- ** AuditLog_Response
+    AuditLog_Response (..),
+    newAuditLog_Response,
 
-    -- * AuthorizationInfo
-    , AuthorizationInfo
-    , authorizationInfo
-    , aiGranted
-    , aiResourceAttributes
-    , aiResource
-    , aiPermission
+    -- ** AuditLog_ServiceData
+    AuditLog_ServiceData (..),
+    newAuditLog_ServiceData,
 
-    -- * ServiceAccountDelegationInfo
-    , ServiceAccountDelegationInfo
-    , serviceAccountDelegationInfo
-    , sadiThirdPartyPrincipal
-    , sadiFirstPartyPrincipal
-    , sadiPrincipalSubject
+    -- ** Auth
+    Auth (..),
+    newAuth,
 
-    -- * Auth
-    , Auth
-    , auth
-    , aPresenter
-    , aClaims
-    , aAudiences
-    , aPrincipal
-    , aAccessLevels
+    -- ** Auth_Claims
+    Auth_Claims (..),
+    newAuth_Claims,
 
-    -- * Response
-    , Response
-    , response
-    , rTime
-    , rSize
-    , rBackendLatency
-    , rHeaders
-    , rCode
+    -- ** AuthenticationInfo
+    AuthenticationInfo (..),
+    newAuthenticationInfo,
 
-    -- * ThirdPartyPrincipalThirdPartyClaims
-    , ThirdPartyPrincipalThirdPartyClaims
-    , thirdPartyPrincipalThirdPartyClaims
-    , tpptpcAddtional
+    -- ** AuthenticationInfo_ThirdPartyPrincipal
+    AuthenticationInfo_ThirdPartyPrincipal (..),
+    newAuthenticationInfo_ThirdPartyPrincipal,
 
-    -- * AttributeContext
-    , AttributeContext
-    , attributeContext
-    , acDestination
-    , acOrigin
-    , acExtensions
-    , acResponse
-    , acResource
-    , acSource
-    , acAPI
-    , acRequest
+    -- ** AuthorizationInfo
+    AuthorizationInfo (..),
+    newAuthorizationInfo,
 
-    -- * SpanContext
-    , SpanContext
-    , spanContext
-    , scSpanName
+    -- ** CheckRequest
+    CheckRequest (..),
+    newCheckRequest,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** CheckResponse
+    CheckResponse (..),
+    newCheckResponse,
 
-    -- * FirstPartyPrincipal
-    , FirstPartyPrincipal
-    , firstPartyPrincipal
-    , fppPrincipalEmail
-    , fppServiceMetadata
+    -- ** CheckResponse_Headers
+    CheckResponse_Headers (..),
+    newCheckResponse_Headers,
 
-    -- * ResourceAnnotations
-    , ResourceAnnotations
-    , resourceAnnotations
-    , raAddtional
+    -- ** FirstPartyPrincipal
+    FirstPartyPrincipal (..),
+    newFirstPartyPrincipal,
 
-    -- * AuthClaims
-    , AuthClaims
-    , authClaims
-    , acAddtional
+    -- ** FirstPartyPrincipal_ServiceMetadata
+    FirstPartyPrincipal_ServiceMetadata (..),
+    newFirstPartyPrincipal_ServiceMetadata,
 
-    -- * AuthenticationInfoThirdPartyPrincipal
-    , AuthenticationInfoThirdPartyPrincipal
-    , authenticationInfoThirdPartyPrincipal
-    , aitppAddtional
+    -- ** Peer
+    Peer (..),
+    newPeer,
 
-    -- * AttributeContextExtensionsItem
-    , AttributeContextExtensionsItem
-    , attributeContextExtensionsItem
-    , aceiAddtional
+    -- ** Peer_Labels
+    Peer_Labels (..),
+    newPeer_Labels,
 
-    -- * ResourceInfo
-    , ResourceInfo
-    , resourceInfo
-    , riLocation
-    , riName
-    , riContainer
-    , riType
-    , riPermission
+    -- ** ReportRequest
+    ReportRequest (..),
+    newReportRequest,
 
-    -- * ResourceLocation
-    , ResourceLocation
-    , resourceLocation
-    , rlOriginalLocations
-    , rlCurrentLocations
+    -- ** ReportResponse
+    ReportResponse (..),
+    newReportResponse,
 
-    -- * PeerLabels
-    , PeerLabels
-    , peerLabels
-    , plAddtional
+    -- ** Request'
+    Request' (..),
+    newRequest,
 
-    -- * Resource
-    , Resource
-    , resource
-    , rAnnotations
-    , rEtag
-    , rService
-    , rLocation
-    , rUid
-    , rUpdateTime
-    , rDeleteTime
-    , rName
-    , rDisplayName
-    , rLabels
-    , rType
-    , rCreateTime
+    -- ** Request_Headers
+    Request_Headers (..),
+    newRequest_Headers,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** RequestMetadata
+    RequestMetadata (..),
+    newRequestMetadata,
 
-    -- * AuditLogResponse
-    , AuditLogResponse
-    , auditLogResponse
-    , alrAddtional
+    -- ** Resource
+    Resource (..),
+    newResource,
 
-    -- * RequestHeaders
-    , RequestHeaders
-    , requestHeaders
-    , rAddtional
+    -- ** Resource_Annotations
+    Resource_Annotations (..),
+    newResource_Annotations,
 
-    -- * CheckResponse
-    , CheckResponse
-    , checkResponse
-    , crStatus
-    , crHeaders
+    -- ** Resource_Labels
+    Resource_Labels (..),
+    newResource_Labels,
 
-    -- * AuditLogResourceOriginalState
-    , AuditLogResourceOriginalState
-    , auditLogResourceOriginalState
-    , alrosAddtional
+    -- ** ResourceInfo
+    ResourceInfo (..),
+    newResourceInfo,
 
-    -- * ReportResponse
-    , ReportResponse
-    , reportResponse
+    -- ** ResourceLocation
+    ResourceLocation (..),
+    newResourceLocation,
 
-    -- * AuditLogRequest
-    , AuditLogRequest
-    , auditLogRequest
-    , aAddtional
+    -- ** Response
+    Response (..),
+    newResponse,
 
-    -- * API
-    , API
-    , api
-    , aService
-    , aOperation
-    , aProtocol
-    , aVersion
+    -- ** Response_Headers
+    Response_Headers (..),
+    newResponse_Headers,
 
-    -- * FirstPartyPrincipalServiceMetadata
-    , FirstPartyPrincipalServiceMetadata
-    , firstPartyPrincipalServiceMetadata
-    , fppsmAddtional
+    -- ** ServiceAccountDelegationInfo
+    ServiceAccountDelegationInfo (..),
+    newServiceAccountDelegationInfo,
 
-    -- * AuthenticationInfo
-    , AuthenticationInfo
-    , authenticationInfo
-    , aiThirdPartyPrincipal
-    , aiServiceAccountDelegationInfo
-    , aiPrincipalEmail
-    , aiPrincipalSubject
-    , aiAuthoritySelector
-    , aiServiceAccountKeyName
+    -- ** SpanContext
+    SpanContext (..),
+    newSpanContext,
 
-    -- * AuditLog
-    , AuditLog
-    , auditLog
-    , alRequestMetadata
-    , alStatus
-    , alResourceName
-    , alAuthorizationInfo
-    , alServiceData
-    , alMethodName
-    , alResponse
-    , alResourceOriginalState
-    , alResourceLocation
-    , alServiceName
-    , alMetadata
-    , alNumResponseItems
-    , alAuthenticationInfo
-    , alRequest
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * CheckResponseHeaders
-    , CheckResponseHeaders
-    , checkResponseHeaders
-    , crhAddtional
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * Request'
-    , Request'
-    , request'
-    , reqPath
-    , reqTime
-    , reqSize
-    , reqAuth
-    , reqProtocol
-    , reqReason
-    , reqHeaders
-    , reqMethod
-    , reqQuery
-    , reqScheme
-    , reqId
-    , reqHost
-    ) where
+    -- ** ThirdPartyPrincipal
+    ThirdPartyPrincipal (..),
+    newThirdPartyPrincipal,
 
-import Network.Google.Prelude
-import Network.Google.ServiceControl.Types.Product
-import Network.Google.ServiceControl.Types.Sum
+    -- ** ThirdPartyPrincipal_ThirdPartyClaims
+    ThirdPartyPrincipal_ThirdPartyClaims (..),
+    newThirdPartyPrincipal_ThirdPartyClaims,
 
--- | Default request referring to version 'v2' of the Service Control API. This contains the host and root path used as a starting point for constructing service requests.
-serviceControlService :: ServiceConfig
-serviceControlService
-  = defaultService (ServiceId "servicecontrol:v2")
-      "servicecontrol.googleapis.com"
+    -- ** V2HttpRequest
+    V2HttpRequest (..),
+    newV2HttpRequest,
+
+    -- ** V2LogEntry
+    V2LogEntry (..),
+    newV2LogEntry,
+
+    -- ** V2LogEntry_Labels
+    V2LogEntry_Labels (..),
+    newV2LogEntry_Labels,
+
+    -- ** V2LogEntry_MonitoredResourceLabels
+    V2LogEntry_MonitoredResourceLabels (..),
+    newV2LogEntry_MonitoredResourceLabels,
+
+    -- ** V2LogEntry_ProtoPayload
+    V2LogEntry_ProtoPayload (..),
+    newV2LogEntry_ProtoPayload,
+
+    -- ** V2LogEntry_Severity
+    V2LogEntry_Severity (..),
+
+    -- ** V2LogEntry_StructPayload
+    V2LogEntry_StructPayload (..),
+    newV2LogEntry_StructPayload,
+
+    -- ** V2LogEntryOperation
+    V2LogEntryOperation (..),
+    newV2LogEntryOperation,
+
+    -- ** V2LogEntrySourceLocation
+    V2LogEntrySourceLocation (..),
+    newV2LogEntrySourceLocation,
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.ServiceControl.Internal.Product
+import Network.Google.ServiceControl.Internal.Sum
+
+-- | Default request referring to version @v2@ of the Service Control API. This contains the host and root path used as a starting point for constructing service requests.
+serviceControlService :: Core.ServiceConfig
+serviceControlService =
+  Core.defaultService
+    (Core.ServiceId "servicecontrol:v2")
+    "servicecontrol.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Manage your Google Service Control data
-serviceControlScope :: Proxy '["https://www.googleapis.com/auth/servicecontrol"]
-serviceControlScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+serviceControlScope :: Core.Proxy '["https://www.googleapis.com/auth/servicecontrol"]
+serviceControlScope = Core.Proxy
