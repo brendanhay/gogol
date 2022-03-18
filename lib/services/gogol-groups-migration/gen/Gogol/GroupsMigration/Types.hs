@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,35 +25,34 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.GroupsMigration.Types
-    (
-    -- * Configuration
-      groupsMigrationService
+  ( -- * Configuration
+    groupsMigrationService,
 
     -- * OAuth Scopes
-    , appsGroupsMigrationScope
+    appsGroupsMigrationScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Groups
-    , Groups (..)
-    , newGroups
-    ) where
+    Groups (..),
+    newGroups,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.GroupsMigration.Internal.Product
 import Gogol.GroupsMigration.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
 groupsMigrationService :: Core.ServiceConfig
-groupsMigrationService
-  = Core.defaultService
-      (Core.ServiceId "groupsmigration:v1")
-      "groupsmigration.googleapis.com"
+groupsMigrationService =
+  Core.defaultService
+    (Core.ServiceId "groupsmigration:v1")
+    "groupsmigration.googleapis.com"
 
 -- | Upload messages to any Google group in your domain
 appsGroupsMigrationScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]

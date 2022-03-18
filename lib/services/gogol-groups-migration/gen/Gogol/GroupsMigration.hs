@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,29 +30,29 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Gogol.GroupsMigration
-    (
-    -- * Configuration
-      groupsMigrationService
+  ( -- * Configuration
+    groupsMigrationService,
 
     -- * OAuth Scopes
-    , appsGroupsMigrationScope
+    appsGroupsMigrationScope,
 
     -- * Resources
 
     -- ** groupsmigration.archive.insert
-    , GroupsMigrationArchiveInsertResource
-    , newGroupsMigrationArchiveInsert
-    , GroupsMigrationArchiveInsert
+    GroupsMigrationArchiveInsertResource,
+    newGroupsMigrationArchiveInsert,
+    GroupsMigrationArchiveInsert,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Groups
-    , Groups (..)
-    , newGroups
-    ) where
+    Groups (..),
+    newGroups,
+  )
+where
 
 import Gogol.GroupsMigration.Archive.Insert
 import Gogol.GroupsMigration.Types
