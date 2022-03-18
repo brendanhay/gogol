@@ -39,59 +39,60 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.PubSub
-    Network.Google.PubSub.Projects.Schemas.Create
-    Network.Google.PubSub.Projects.Schemas.Delete
-    Network.Google.PubSub.Projects.Schemas.Get
-    Network.Google.PubSub.Projects.Schemas.GetIamPolicy
-    Network.Google.PubSub.Projects.Schemas.List
-    Network.Google.PubSub.Projects.Schemas.SetIamPolicy
-    Network.Google.PubSub.Projects.Schemas.TestIamPermissions
-    Network.Google.PubSub.Projects.Schemas.Validate
-    Network.Google.PubSub.Projects.Schemas.ValidateMessage
-    Network.Google.PubSub.Projects.Snapshots.Create
-    Network.Google.PubSub.Projects.Snapshots.Delete
-    Network.Google.PubSub.Projects.Snapshots.Get
-    Network.Google.PubSub.Projects.Snapshots.GetIamPolicy
-    Network.Google.PubSub.Projects.Snapshots.List
-    Network.Google.PubSub.Projects.Snapshots.Patch
-    Network.Google.PubSub.Projects.Snapshots.SetIamPolicy
-    Network.Google.PubSub.Projects.Snapshots.TestIamPermissions
-    Network.Google.PubSub.Projects.Subscriptions.Acknowledge
-    Network.Google.PubSub.Projects.Subscriptions.Create
-    Network.Google.PubSub.Projects.Subscriptions.Delete
-    Network.Google.PubSub.Projects.Subscriptions.Detach
-    Network.Google.PubSub.Projects.Subscriptions.Get
-    Network.Google.PubSub.Projects.Subscriptions.GetIamPolicy
-    Network.Google.PubSub.Projects.Subscriptions.List
-    Network.Google.PubSub.Projects.Subscriptions.ModifyAckDeadline
-    Network.Google.PubSub.Projects.Subscriptions.ModifyPushConfig
-    Network.Google.PubSub.Projects.Subscriptions.Patch
-    Network.Google.PubSub.Projects.Subscriptions.Pull
-    Network.Google.PubSub.Projects.Subscriptions.Seek
-    Network.Google.PubSub.Projects.Subscriptions.SetIamPolicy
-    Network.Google.PubSub.Projects.Subscriptions.TestIamPermissions
-    Network.Google.PubSub.Projects.Topics.Create
-    Network.Google.PubSub.Projects.Topics.Delete
-    Network.Google.PubSub.Projects.Topics.Get
-    Network.Google.PubSub.Projects.Topics.GetIamPolicy
-    Network.Google.PubSub.Projects.Topics.List
-    Network.Google.PubSub.Projects.Topics.Patch
-    Network.Google.PubSub.Projects.Topics.Publish
-    Network.Google.PubSub.Projects.Topics.SetIamPolicy
-    Network.Google.PubSub.Projects.Topics.Snapshots.List
-    Network.Google.PubSub.Projects.Topics.Subscriptions.List
-    Network.Google.PubSub.Projects.Topics.TestIamPermissions
-    Network.Google.PubSub.Types
+    Gogol.PubSub
+    Gogol.PubSub.Projects.Schemas.Create
+    Gogol.PubSub.Projects.Schemas.Delete
+    Gogol.PubSub.Projects.Schemas.Get
+    Gogol.PubSub.Projects.Schemas.GetIamPolicy
+    Gogol.PubSub.Projects.Schemas.List
+    Gogol.PubSub.Projects.Schemas.SetIamPolicy
+    Gogol.PubSub.Projects.Schemas.TestIamPermissions
+    Gogol.PubSub.Projects.Schemas.Validate
+    Gogol.PubSub.Projects.Schemas.ValidateMessage
+    Gogol.PubSub.Projects.Snapshots.Create
+    Gogol.PubSub.Projects.Snapshots.Delete
+    Gogol.PubSub.Projects.Snapshots.Get
+    Gogol.PubSub.Projects.Snapshots.GetIamPolicy
+    Gogol.PubSub.Projects.Snapshots.List
+    Gogol.PubSub.Projects.Snapshots.Patch
+    Gogol.PubSub.Projects.Snapshots.SetIamPolicy
+    Gogol.PubSub.Projects.Snapshots.TestIamPermissions
+    Gogol.PubSub.Projects.Subscriptions.Acknowledge
+    Gogol.PubSub.Projects.Subscriptions.Create
+    Gogol.PubSub.Projects.Subscriptions.Delete
+    Gogol.PubSub.Projects.Subscriptions.Detach
+    Gogol.PubSub.Projects.Subscriptions.Get
+    Gogol.PubSub.Projects.Subscriptions.GetIamPolicy
+    Gogol.PubSub.Projects.Subscriptions.List
+    Gogol.PubSub.Projects.Subscriptions.ModifyAckDeadline
+    Gogol.PubSub.Projects.Subscriptions.ModifyPushConfig
+    Gogol.PubSub.Projects.Subscriptions.Patch
+    Gogol.PubSub.Projects.Subscriptions.Pull
+    Gogol.PubSub.Projects.Subscriptions.Seek
+    Gogol.PubSub.Projects.Subscriptions.SetIamPolicy
+    Gogol.PubSub.Projects.Subscriptions.TestIamPermissions
+    Gogol.PubSub.Projects.Topics.Create
+    Gogol.PubSub.Projects.Topics.Delete
+    Gogol.PubSub.Projects.Topics.Get
+    Gogol.PubSub.Projects.Topics.GetIamPolicy
+    Gogol.PubSub.Projects.Topics.List
+    Gogol.PubSub.Projects.Topics.Patch
+    Gogol.PubSub.Projects.Topics.Publish
+    Gogol.PubSub.Projects.Topics.SetIamPolicy
+    Gogol.PubSub.Projects.Topics.Snapshots.List
+    Gogol.PubSub.Projects.Topics.Subscriptions.List
+    Gogol.PubSub.Projects.Topics.TestIamPermissions
+    Gogol.PubSub.Types
 
   other-modules:
-    Network.Google.PubSub.Internal.Product
-    Network.Google.PubSub.Internal.Sum
+    Gogol.PubSub.Internal.Product
+    Gogol.PubSub.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
