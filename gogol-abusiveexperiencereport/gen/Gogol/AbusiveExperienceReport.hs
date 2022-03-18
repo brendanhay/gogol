@@ -19,15 +19,31 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AbusiveExperienceReport.Types
+-- Module      : Gogol.AbusiveExperienceReport
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AbusiveExperienceReport.Types
+--
+-- Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.
+--
+-- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference>
+module Gogol.AbusiveExperienceReport
   ( -- * Configuration
     abusiveExperienceReportService,
+
+    -- * Resources
+
+    -- ** abusiveexperiencereport.sites.get
+    AbusiveExperienceReportSitesGetResource,
+    newAbusiveExperienceReportSitesGet,
+    AbusiveExperienceReportSitesGet,
+
+    -- ** abusiveexperiencereport.violatingSites.list
+    AbusiveExperienceReportViolatingSitesListResource,
+    newAbusiveExperienceReportViolatingSitesList,
+    AbusiveExperienceReportViolatingSitesList,
 
     -- * Types
 
@@ -50,13 +66,6 @@ module Network.Google.AbusiveExperienceReport.Types
   )
 where
 
-import Network.Google.AbusiveExperienceReport.Internal.Product
-import Network.Google.AbusiveExperienceReport.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Abusive Experience Report API. This contains the host and root path used as a starting point for constructing service requests.
-abusiveExperienceReportService :: Core.ServiceConfig
-abusiveExperienceReportService =
-  Core.defaultService
-    (Core.ServiceId "abusiveexperiencereport:v1")
-    "abusiveexperiencereport.googleapis.com"
+import Gogol.AbusiveExperienceReport.Sites.Get
+import Gogol.AbusiveExperienceReport.Types
+import Gogol.AbusiveExperienceReport.ViolatingSites.List
