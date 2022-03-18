@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.TextToSpeech.Internal.Product
+-- Module      : Gogol.TextToSpeech.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.TextToSpeech.Internal.Product
+module Gogol.TextToSpeech.Internal.Product
   ( -- * AudioConfig
     AudioConfig (..),
     newAudioConfig,
@@ -56,8 +56,8 @@ module Network.Google.TextToSpeech.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.TextToSpeech.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.TextToSpeech.Internal.Sum
 
 -- | Description of audio data to be synthesized.
 --

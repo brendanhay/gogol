@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.TextToSpeech.Voices.List
+-- Module      : Gogol.TextToSpeech.Voices.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a list of Voice supported for synthesis.
 --
 -- /See:/ <https://cloud.google.com/text-to-speech/ Cloud Text-to-Speech API Reference> for @texttospeech.voices.list@.
-module Network.Google.TextToSpeech.Voices.List
+module Gogol.TextToSpeech.Voices.List
   ( -- * Resource
     TextToSpeechVoicesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.TextToSpeech.Voices.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.TextToSpeech.Types
+import qualified Gogol.Prelude as Core
+import Gogol.TextToSpeech.Types
 
 -- | A resource alias for @texttospeech.voices.list@ method which the
 -- 'TextToSpeechVoicesList' request conforms to.

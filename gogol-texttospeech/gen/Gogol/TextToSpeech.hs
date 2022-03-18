@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.TextToSpeech
+-- Module      : Gogol.TextToSpeech
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Synthesizes natural-sounding speech by applying powerful neural network models.
 --
 -- /See:/ <https://cloud.google.com/text-to-speech/ Cloud Text-to-Speech API Reference>
-module Network.Google.TextToSpeech
+module Gogol.TextToSpeech
   ( -- * Configuration
     textToSpeechService,
 
@@ -92,6 +92,6 @@ module Network.Google.TextToSpeech
   )
 where
 
-import Network.Google.TextToSpeech.Text.Synthesize
-import Network.Google.TextToSpeech.Types
-import Network.Google.TextToSpeech.Voices.List
+import Gogol.TextToSpeech.Text.Synthesize
+import Gogol.TextToSpeech.Types
+import Gogol.TextToSpeech.Voices.List

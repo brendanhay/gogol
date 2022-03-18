@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.TextToSpeech.Types
+-- Module      : Gogol.TextToSpeech.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.TextToSpeech.Types
+module Gogol.TextToSpeech.Types
   ( -- * Configuration
     textToSpeechService,
 
@@ -76,9 +76,9 @@ module Network.Google.TextToSpeech.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.TextToSpeech.Internal.Product
-import Network.Google.TextToSpeech.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.TextToSpeech.Internal.Product
+import Gogol.TextToSpeech.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Text-to-Speech API. This contains the host and root path used as a starting point for constructing service requests.
 textToSpeechService :: Core.ServiceConfig
