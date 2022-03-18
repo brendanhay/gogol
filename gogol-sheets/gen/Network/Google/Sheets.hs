@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Sheets
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,2282 +30,1390 @@
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference>
 module Network.Google.Sheets
-    (
-    -- * Service Configuration
-      sheetsService
+  ( -- * Configuration
+    sheetsService,
 
     -- * OAuth Scopes
-    , spreadsheetsReadOnlyScope
-    , driveReadOnlyScope
-    , driveScope
-    , driveFileScope
-    , spreadsheetsScope
-
-    -- * API Declaration
-    , SheetsAPI
+    driveScope,
+    driveFileScope,
+    driveReadOnlyScope,
+    spreadsheetsScope,
+    spreadsheetsReadOnlyScope,
 
     -- * Resources
 
     -- ** sheets.spreadsheets.batchUpdate
-    , module Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
+    SheetsSpreadsheetsBatchUpdateResource,
+    newSheetsSpreadsheetsBatchUpdate,
+    SheetsSpreadsheetsBatchUpdate,
 
     -- ** sheets.spreadsheets.create
-    , module Network.Google.Resource.Sheets.Spreadsheets.Create
+    SheetsSpreadsheetsCreateResource,
+    newSheetsSpreadsheetsCreate,
+    SheetsSpreadsheetsCreate,
 
     -- ** sheets.spreadsheets.developerMetadata.get
-    , module Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Get
+    SheetsSpreadsheetsDeveloperMetadataGetResource,
+    newSheetsSpreadsheetsDeveloperMetadataGet,
+    SheetsSpreadsheetsDeveloperMetadataGet,
 
     -- ** sheets.spreadsheets.developerMetadata.search
-    , module Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Search
+    SheetsSpreadsheetsDeveloperMetadataSearchResource,
+    newSheetsSpreadsheetsDeveloperMetadataSearch,
+    SheetsSpreadsheetsDeveloperMetadataSearch,
 
     -- ** sheets.spreadsheets.get
-    , module Network.Google.Resource.Sheets.Spreadsheets.Get
+    SheetsSpreadsheetsGetResource,
+    newSheetsSpreadsheetsGet,
+    SheetsSpreadsheetsGet,
 
     -- ** sheets.spreadsheets.getByDataFilter
-    , module Network.Google.Resource.Sheets.Spreadsheets.GetByDataFilter
+    SheetsSpreadsheetsGetByDataFilterResource,
+    newSheetsSpreadsheetsGetByDataFilter,
+    SheetsSpreadsheetsGetByDataFilter,
 
     -- ** sheets.spreadsheets.sheets.copyTo
-    , module Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
+    SheetsSpreadsheetsSheetsCopyToResource,
+    newSheetsSpreadsheetsSheetsCopyTo,
+    SheetsSpreadsheetsSheetsCopyTo,
 
     -- ** sheets.spreadsheets.values.append
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.Append
+    SheetsSpreadsheetsValuesAppendResource,
+    newSheetsSpreadsheetsValuesAppend,
+    SheetsSpreadsheetsValuesAppend,
 
     -- ** sheets.spreadsheets.values.batchClear
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
+    SheetsSpreadsheetsValuesBatchClearResource,
+    newSheetsSpreadsheetsValuesBatchClear,
+    SheetsSpreadsheetsValuesBatchClear,
 
     -- ** sheets.spreadsheets.values.batchClearByDataFilter
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+    SheetsSpreadsheetsValuesBatchClearByDataFilterResource,
+    newSheetsSpreadsheetsValuesBatchClearByDataFilter,
+    SheetsSpreadsheetsValuesBatchClearByDataFilter,
 
     -- ** sheets.spreadsheets.values.batchGet
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
+    SheetsSpreadsheetsValuesBatchGetResource,
+    newSheetsSpreadsheetsValuesBatchGet,
+    SheetsSpreadsheetsValuesBatchGet,
 
     -- ** sheets.spreadsheets.values.batchGetByDataFilter
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+    SheetsSpreadsheetsValuesBatchGetByDataFilterResource,
+    newSheetsSpreadsheetsValuesBatchGetByDataFilter,
+    SheetsSpreadsheetsValuesBatchGetByDataFilter,
 
     -- ** sheets.spreadsheets.values.batchUpdate
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
+    SheetsSpreadsheetsValuesBatchUpdateResource,
+    newSheetsSpreadsheetsValuesBatchUpdate,
+    SheetsSpreadsheetsValuesBatchUpdate,
 
     -- ** sheets.spreadsheets.values.batchUpdateByDataFilter
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
+    newSheetsSpreadsheetsValuesBatchUpdateByDataFilter,
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter,
 
     -- ** sheets.spreadsheets.values.clear
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
+    SheetsSpreadsheetsValuesClearResource,
+    newSheetsSpreadsheetsValuesClear,
+    SheetsSpreadsheetsValuesClear,
 
     -- ** sheets.spreadsheets.values.get
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.Get
+    SheetsSpreadsheetsValuesGetResource,
+    newSheetsSpreadsheetsValuesGet,
+    SheetsSpreadsheetsValuesGet,
 
     -- ** sheets.spreadsheets.values.update
-    , module Network.Google.Resource.Sheets.Spreadsheets.Values.Update
+    SheetsSpreadsheetsValuesUpdateResource,
+    newSheetsSpreadsheetsValuesUpdate,
+    SheetsSpreadsheetsValuesUpdate,
 
     -- * Types
 
-    -- ** SpreadsheetsValuesBatchGetMajorDimension
-    , SpreadsheetsValuesBatchGetMajorDimension (..)
-
-    -- ** DataSourceRefreshDailySchedule
-    , DataSourceRefreshDailySchedule
-    , dataSourceRefreshDailySchedule
-    , dsrdsStartTime
-
-    -- ** BasicChartSpecStackedType
-    , BasicChartSpecStackedType (..)
-
-    -- ** PivotGroupSortValueBucket
-    , PivotGroupSortValueBucket
-    , pivotGroupSortValueBucket
-    , pgsvbBuckets
-    , pgsvbValuesIndex
-
-    -- ** ValueRange
-    , ValueRange
-    , valueRange
-    , vrValues
-    , vrRange
-    , vrMajorDimension
-
-    -- ** SortRangeRequest
-    , SortRangeRequest
-    , sortRangeRequest
-    , srrSortSpecs
-    , srrRange
-
-    -- ** CopyPasteRequestPasteType
-    , CopyPasteRequestPasteType (..)
-
-    -- ** DeveloperMetadataLookupLocationMatchingStrategy
-    , DeveloperMetadataLookupLocationMatchingStrategy (..)
-
-    -- ** BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption
-    , BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption (..)
-
-    -- ** DeleteNamedRangeRequest
-    , DeleteNamedRangeRequest
-    , deleteNamedRangeRequest
-    , dnrrNamedRangeId
-
-    -- ** UpdateNamedRangeRequest
-    , UpdateNamedRangeRequest
-    , updateNamedRangeRequest
-    , unrrNamedRange
-    , unrrFields
-
-    -- ** BasicChartAxisPosition
-    , BasicChartAxisPosition (..)
-
-    -- ** ChartData
-    , ChartData
-    , chartData
-    , cdColumnReference
-    , cdSourceRange
-    , cdAggregateType
-    , cdGroupRule
-
-    -- ** ChartAxisViewWindowOptionsViewWindowMode
-    , ChartAxisViewWindowOptionsViewWindowMode (..)
-
-    -- ** BatchClearValuesRequest
-    , BatchClearValuesRequest
-    , batchClearValuesRequest
-    , bcvrRanges
-
-    -- ** CreateDeveloperMetadataResponse
-    , CreateDeveloperMetadataResponse
-    , createDeveloperMetadataResponse
-    , cdmrDeveloperMetadata
-
-    -- ** DateTimeRule
-    , DateTimeRule
-    , dateTimeRule
-    , dtrType
-
-    -- ** DeleteRangeRequestShiftDimension
-    , DeleteRangeRequestShiftDimension (..)
-
-    -- ** SpreadsheetsValuesBatchGetDateTimeRenderOption
-    , SpreadsheetsValuesBatchGetDateTimeRenderOption (..)
-
-    -- ** BasicChartSeriesTargetAxis
-    , BasicChartSeriesTargetAxis (..)
-
-    -- ** DataFilterValueRangeMajorDimension
-    , DataFilterValueRangeMajorDimension (..)
-
-    -- ** SpreadsheetProperties
-    , SpreadsheetProperties
-    , spreadsheetProperties
-    , spSpreadsheetTheme
-    , spDefaultFormat
-    , spLocale
-    , spIterativeCalculationSettings
-    , spAutoRecalc
-    , spTitle
-    , spTimeZone
-
-    -- ** BOrders
-    , BOrders
-    , bOrders
-    , boBottom
-    , boLeft
-    , boRight
-    , boTop
-
-    -- ** BatchClearValuesByDataFilterRequest
-    , BatchClearValuesByDataFilterRequest
-    , batchClearValuesByDataFilterRequest
-    , bcvbdfrDataFilters
-
-    -- ** TextFormatRun
-    , TextFormatRun
-    , textFormatRun
-    , tfrFormat
-    , tfrStartIndex
-
-    -- ** DeleteDimensionGroupRequest
-    , DeleteDimensionGroupRequest
-    , deleteDimensionGroupRequest
-    , ddgrRange
-
-    -- ** UpdateDimensionGroupRequest
-    , UpdateDimensionGroupRequest
-    , updateDimensionGroupRequest
-    , udgrDimensionGroup
-    , udgrFields
-
-    -- ** BubbleChartSpecLegendPosition
-    , BubbleChartSpecLegendPosition (..)
-
-    -- ** AddSheetRequest
-    , AddSheetRequest
-    , addSheetRequest
-    , asrProperties
-
-    -- ** SortSpec
-    , SortSpec
-    , sortSpec
-    , ssDataSourceColumnReference
-    , ssBackgRoundColor
-    , ssForegRoundColor
-    , ssSortOrder
-    , ssBackgRoundColorStyle
-    , ssDimensionIndex
-    , ssForegRoundColorStyle
-
-    -- ** DimensionGroup
-    , DimensionGroup
-    , dimensionGroup
-    , dgCollapsed
-    , dgRange
-    , dgDepth
-
-    -- ** KeyValueFormat
-    , KeyValueFormat
-    , keyValueFormat
-    , kvfTextFormat
-    , kvfPosition
-
-    -- ** BatchUpdateValuesRequestResponseDateTimeRenderOption
-    , BatchUpdateValuesRequestResponseDateTimeRenderOption (..)
-
-    -- ** CopyPasteRequest
-    , CopyPasteRequest
-    , copyPasteRequest
-    , cprDestination
-    , cprSource
-    , cprPasteOrientation
-    , cprPasteType
-
-    -- ** GridRange
-    , GridRange
-    , gridRange
-    , grEndColumnIndex
-    , grStartColumnIndex
-    , grEndRowIndex
-    , grStartRowIndex
-    , grSheetId
-
-    -- ** AppendDimensionRequestDimension
-    , AppendDimensionRequestDimension (..)
-
-    -- ** SpreadsheetsValuesUpdateResponseDateTimeRenderOption
-    , SpreadsheetsValuesUpdateResponseDateTimeRenderOption (..)
-
-    -- ** AddFilterViewResponse
-    , AddFilterViewResponse
-    , addFilterViewResponse
-    , afvrFilter
-
-    -- ** DimensionRangeDimension
-    , DimensionRangeDimension (..)
-
-    -- ** UpdateDataSourceResponse
-    , UpdateDataSourceResponse
-    , updateDataSourceResponse
-    , udsrDataExecutionStatus
-    , udsrDataSource
-
-    -- ** BooleanCondition
-    , BooleanCondition
-    , booleanCondition
-    , bcValues
-    , bcType
-
-    -- ** AutoResizeDimensionsRequest
-    , AutoResizeDimensionsRequest
-    , autoResizeDimensionsRequest
-    , ardrDimensions
-    , ardrDataSourceSheetDimensions
-
-    -- ** BubbleChartSpec
-    , BubbleChartSpec
-    , bubbleChartSpec
-    , bcsBubbleTextStyle
-    , bcsBubbleBOrderColor
-    , bcsLegendPosition
-    , bcsDomain
-    , bcsSeries
-    , bcsBubbleLabels
-    , bcsGroupIds
-    , bcsBubbleMinRadiusSize
-    , bcsBubbleMaxRadiusSize
-    , bcsBubbleOpacity
-    , bcsBubbleSizes
-    , bcsBubbleBOrderColorStyle
-
-    -- ** DeleteRangeRequest
-    , DeleteRangeRequest
-    , deleteRangeRequest
-    , drrShiftDimension
-    , drrRange
-
-    -- ** SpreadsheetTheme
-    , SpreadsheetTheme
-    , spreadsheetTheme
-    , stThemeColors
-    , stPrimaryFontFamily
-
-    -- ** Sheet
-    , Sheet
-    , sheet
-    , sColumnGroups
-    , sData
-    , sMerges
-    , sRowGroups
-    , sProtectedRanges
-    , sBandedRanges
-    , sCharts
-    , sBasicFilter
-    , sDeveloperMetadata
-    , sConditionalFormats
-    , sFilterViews
-    , sSlicers
-    , sProperties
-
-    -- ** GridCoordinate
-    , GridCoordinate
-    , gridCoordinate
-    , gcColumnIndex
-    , gcRowIndex
-    , gcSheetId
-
-    -- ** ClearValuesResponse
-    , ClearValuesResponse
-    , clearValuesResponse
-    , cvrClearedRange
-    , cvrSpreadsheetId
-
-    -- ** ClearBasicFilterRequest
-    , ClearBasicFilterRequest
-    , clearBasicFilterRequest
-    , cbfrSheetId
-
-    -- ** AddSlicerRequest
-    , AddSlicerRequest
-    , addSlicerRequest
-    , asrSlicer
-
-    -- ** ChartHistogramRule
-    , ChartHistogramRule
-    , chartHistogramRule
-    , chrMaxValue
-    , chrIntervalSize
-    , chrMinValue
-
-    -- ** BatchGetValuesByDataFilterRequestValueRenderOption
-    , BatchGetValuesByDataFilterRequestValueRenderOption (..)
-
-    -- ** UpdateEmbeddedObjectPositionRequest
-    , UpdateEmbeddedObjectPositionRequest
-    , updateEmbeddedObjectPositionRequest
-    , ueoprNewPosition
-    , ueoprObjectId
-    , ueoprFields
-
-    -- ** SourceAndDestinationDimension
-    , SourceAndDestinationDimension (..)
-
-    -- ** BooleanRule
-    , BooleanRule
-    , booleanRule
-    , brFormat
-    , brCondition
-
-    -- ** SpreadsheetsValuesUpdateValueInputOption
-    , SpreadsheetsValuesUpdateValueInputOption (..)
-
-    -- ** CellFormatWrapStrategy
-    , CellFormatWrapStrategy (..)
-
-    -- ** DataSourceRefreshScheduleRefreshScope
-    , DataSourceRefreshScheduleRefreshScope (..)
-
-    -- ** SpreadsheetsValuesAppendResponseValueRenderOption
-    , SpreadsheetsValuesAppendResponseValueRenderOption (..)
-
-    -- ** Slicer
-    , Slicer
-    , slicer
-    , sSlicerId
-    , sSpec
-    , sPosition
-
-    -- ** BatchGetValuesByDataFilterResponse
-    , BatchGetValuesByDataFilterResponse
-    , batchGetValuesByDataFilterResponse
-    , bgvbdfrSpreadsheetId
-    , bgvbdfrValueRanges
-
-    -- ** SourceAndDestination
-    , SourceAndDestination
-    , sourceAndDestination
-    , sadDimension
-    , sadSource
-    , sadFillLength
-
-    -- ** PasteDataRequest
-    , PasteDataRequest
-    , pasteDataRequest
-    , pdrData
-    , pdrCoordinate
-    , pdrHTML
-    , pdrType
-    , pdrDelimiter
-
-    -- ** BatchUpdateValuesRequestValueInputOption
-    , BatchUpdateValuesRequestValueInputOption (..)
-
-    -- ** AppendCellsRequest
-    , AppendCellsRequest
-    , appendCellsRequest
-    , acrRows
-    , acrSheetId
-    , acrFields
-
-    -- ** FindReplaceResponse
-    , FindReplaceResponse
-    , findReplaceResponse
-    , frrValuesChanged
-    , frrFormulasChanged
-    , frrRowsChanged
-    , frrSheetsChanged
-    , frrOccurrencesChanged
-
-    -- ** AddDimensionGroupResponse
-    , AddDimensionGroupResponse
-    , addDimensionGroupResponse
-    , adgrDimensionGroups
-
-    -- ** PieChartSpec
-    , PieChartSpec
-    , pieChartSpec
-    , pcsPieHole
-    , pcsLegendPosition
-    , pcsDomain
-    , pcsSeries
-    , pcsThreeDimensional
-
-    -- ** SpreadsheetsValuesUpdateResponseValueRenderOption
-    , SpreadsheetsValuesUpdateResponseValueRenderOption (..)
-
-    -- ** BatchUpdateValuesByDataFilterResponse
-    , BatchUpdateValuesByDataFilterResponse
-    , batchUpdateValuesByDataFilterResponse
-    , buvbdfrTotalUpdatedColumns
-    , buvbdfrResponses
-    , buvbdfrSpreadsheetId
-    , buvbdfrTotalUpdatedSheets
-    , buvbdfrTotalUpdatedCells
-    , buvbdfrTotalUpdatedRows
-
-    -- ** TextPositionHorizontalAlignment
-    , TextPositionHorizontalAlignment (..)
-
-    -- ** AppendValuesResponse
-    , AppendValuesResponse
-    , appendValuesResponse
-    , avrSpreadsheetId
-    , avrUpdates
-    , avrTableRange
-
-    -- ** DeveloperMetadataVisibility
-    , DeveloperMetadataVisibility (..)
-
-    -- ** BatchUpdateValuesRequestResponseValueRenderOption
-    , BatchUpdateValuesRequestResponseValueRenderOption (..)
-
-    -- ** DataValidationRule
-    , DataValidationRule
-    , dataValidationRule
-    , dvrShowCustomUi
-    , dvrInputMessage
-    , dvrStrict
-    , dvrCondition
-
-    -- ** FilterView
-    , FilterView
-    , filterView
-    , fvSortSpecs
-    , fvNamedRangeId
-    , fvRange
-    , fvFilterViewId
-    , fvTitle
-    , fvCriteria
-    , fvFilterSpecs
-
-    -- ** DataSourceRefreshSchedule
-    , DataSourceRefreshSchedule
-    , dataSourceRefreshSchedule
-    , dsrsDailySchedule
-    , dsrsRefreshScope
-    , dsrsEnabled
-    , dsrsMonthlySchedule
-    , dsrsNextRun
-    , dsrsWeeklySchedule
-
-    -- ** Color
-    , Color
-    , color
-    , cRed
-    , cAlpha
-    , cGreen
-    , cBlue
-
-    -- ** AddDataSourceRequest
-    , AddDataSourceRequest
-    , addDataSourceRequest
-    , adsrDataSource
-
-    -- ** SpreadsheetsValuesBatchGetValueRenderOption
-    , SpreadsheetsValuesBatchGetValueRenderOption (..)
-
-    -- ** DeleteFilterViewRequest
-    , DeleteFilterViewRequest
-    , deleteFilterViewRequest
-    , dfvrFilterId
-
-    -- ** UpdateFilterViewRequest
-    , UpdateFilterViewRequest
-    , updateFilterViewRequest
-    , ufvrFilter
-    , ufvrFields
-
-    -- ** BasicChartSeries
-    , BasicChartSeries
-    , basicChartSeries
-    , bTargetAxis
-    , bColor
-    , bSeries
-    , bColorStyle
-    , bStyleOverrides
-    , bType
-    , bPointStyle
-    , bDataLabel
-    , bLineStyle
-
-    -- ** FilterSpec
-    , FilterSpec
-    , filterSpec
-    , fsDataSourceColumnReference
-    , fsColumnIndex
-    , fsFilterCriteria
-
-    -- ** PivotGroupRule
-    , PivotGroupRule
-    , pivotGroupRule
-    , pgrDateTimeRule
-    , pgrManualRule
-    , pgrHistogramRule
-
-    -- ** AddProtectedRangeRequest
-    , AddProtectedRangeRequest
-    , addProtectedRangeRequest
-    , aprrProtectedRange
-
-    -- ** PieChartSpecLegendPosition
-    , PieChartSpecLegendPosition (..)
-
-    -- ** RepeatCellRequest
-    , RepeatCellRequest
-    , repeatCellRequest
-    , rcrCell
-    , rcrRange
-    , rcrFields
-
-    -- ** ConditionValue
-    , ConditionValue
-    , conditionValue
-    , cvRelativeDate
-    , cvUserEnteredValue
-
-    -- ** DeleteDimensionRequest
-    , DeleteDimensionRequest
-    , deleteDimensionRequest
-    , ddrRange
-
-    -- ** ClearValuesRequest
-    , ClearValuesRequest
-    , clearValuesRequest
-
-    -- ** FindReplaceRequest
-    , FindReplaceRequest
-    , findReplaceRequest
-    , frrMatchCase
-    , frrAllSheets
-    , frrIncludeFormulas
-    , frrMatchEntireCell
-    , frrRange
-    , frrSheetId
-    , frrFind
-    , frrSearchByRegex
-    , frrReplacement
-
-    -- ** DataSourceRefreshMonthlySchedule
-    , DataSourceRefreshMonthlySchedule
-    , dataSourceRefreshMonthlySchedule
-    , dsrmsStartTime
-    , dsrmsDaysOfMonth
-
-    -- ** MoveDimensionRequest
-    , MoveDimensionRequest
-    , moveDimensionRequest
-    , mdrDestinationIndex
-    , mdrSource
-
-    -- ** BatchGetValuesByDataFilterRequest
-    , BatchGetValuesByDataFilterRequest
-    , batchGetValuesByDataFilterRequest
-    , bgvbdfrValueRenderOption
-    , bgvbdfrDataFilters
-    , bgvbdfrDateTimeRenderOption
-    , bgvbdfrMajorDimension
-
-    -- ** CellFormatVerticalAlignment
-    , CellFormatVerticalAlignment (..)
-
-    -- ** NumberFormatType
-    , NumberFormatType (..)
-
-    -- ** DataSourceSpec
-    , DataSourceSpec
-    , dataSourceSpec
-    , dssParameters
-    , dssBigQuery
-
-    -- ** Link
-    , Link
-    , link
-    , lURI
-
-    -- ** DataSourceColumnReference
-    , DataSourceColumnReference
-    , dataSourceColumnReference
-    , dscrName
-
-    -- ** GradientRule
-    , GradientRule
-    , gradientRule
-    , grMidpoint
-    , grMaxpoint
-    , grMinpoint
-
-    -- ** DataSourceObjectReferences
-    , DataSourceObjectReferences
-    , dataSourceObjectReferences
-    , dsorReferences
-
-    -- ** CutPasteRequest
-    , CutPasteRequest
-    , cutPasteRequest
-    , cDestination
-    , cSource
-    , cPasteType
-
-    -- ** UpdateEmbeddedObjectPositionResponse
-    , UpdateEmbeddedObjectPositionResponse
-    , updateEmbeddedObjectPositionResponse
-    , ueoprPosition
-
-    -- ** ConditionValueRelativeDate
-    , ConditionValueRelativeDate (..)
-
-    -- ** AddSlicerResponse
-    , AddSlicerResponse
-    , addSlicerResponse
-    , aSlicer
-
-    -- ** ThemeColorPairColorType
-    , ThemeColorPairColorType (..)
-
-    -- ** WaterfallChartCustomSubtotal
-    , WaterfallChartCustomSubtotal
-    , waterfallChartCustomSubtotal
-    , wccsDataIsSubtotal
-    , wccsSubtotalIndex
-    , wccsLabel
-
-    -- ** DeveloperMetadataLocationLocationType
-    , DeveloperMetadataLocationLocationType (..)
-
-    -- ** Response
-    , Response
-    , response
-    , rAddFilterView
-    , rUpdateDataSource
-    , rCreateDeveloperMetadata
-    , rDuplicateFilterView
-    , rAddSlicer
-    , rUpdateEmbeddedObjectPosition
-    , rDeleteDimensionGroup
-    , rAddSheet
-    , rFindReplace
-    , rAddProtectedRange
-    , rAddDataSource
-    , rDeleteConditionalFormatRule
-    , rUpdateConditionalFormatRule
-    , rDeleteDeveloperMetadata
-    , rUpdateDeveloperMetadata
-    , rAddNamedRange
-    , rAddChart
-    , rDeleteDuplicates
-    , rAddBanding
-    , rDuplicateSheet
-    , rRefreshDataSource
-    , rAddDimensionGroup
-    , rTrimWhitespace
-
-    -- ** ChartDateTimeRule
-    , ChartDateTimeRule
-    , chartDateTimeRule
-    , cdtrType
-
-    -- ** FilterCriteria
-    , FilterCriteria
-    , filterCriteria
-    , fcVisibleForegRoundColorStyle
-    , fcVisibleBackgRoundColorStyle
-    , fcVisibleForegRoundColor
-    , fcHiddenValues
-    , fcVisibleBackgRoundColor
-    , fcCondition
-
-    -- ** DataSourceObjectReference
-    , DataSourceObjectReference
-    , dataSourceObjectReference
-    , dsorDataSourceFormulaCell
-    , dsorDataSourceTableAnchorCell
-    , dsorSheetId
-    , dsorDataSourcePivotTableAnchorCell
-    , dsorChartId
-
-    -- ** BaselineValueFormat
-    , BaselineValueFormat
-    , baselineValueFormat
-    , bvfNegativeColor
-    , bvfPositiveColorStyle
-    , bvfPositiveColor
-    , bvfTextFormat
-    , bvfDescription
-    , bvfComparisonType
-    , bvfPosition
-    , bvfNegativeColorStyle
-
-    -- ** DataExecutionStatusErrorCode
-    , DataExecutionStatusErrorCode (..)
-
-    -- ** DataSourceRefreshWeeklyScheduleDaysOfWeekItem
-    , DataSourceRefreshWeeklyScheduleDaysOfWeekItem (..)
-
-    -- ** ErrorValue
-    , ErrorValue
-    , errorValue
-    , evType
-    , evMessage
-
-    -- ** RefreshDataSourceObjectExecutionStatus
-    , RefreshDataSourceObjectExecutionStatus
-    , refreshDataSourceObjectExecutionStatus
-    , rdsoesReference
-    , rdsoesDataExecutionStatus
-
-    -- ** UpdateConditionalFormatRuleRequest
-    , UpdateConditionalFormatRuleRequest
-    , updateConditionalFormatRuleRequest
-    , ucfrrRule
-    , ucfrrNewIndex
-    , ucfrrSheetId
-    , ucfrrIndex
-
-    -- ** DeleteConditionalFormatRuleRequest
-    , DeleteConditionalFormatRuleRequest
-    , deleteConditionalFormatRuleRequest
-    , dcfrrSheetId
-    , dcfrrIndex
-
-    -- ** DataSourceTable
-    , DataSourceTable
-    , dataSourceTable
-    , dstSortSpecs
-    , dstRowLimit
-    , dstDataSourceId
-    , dstDataExecutionStatus
-    , dstColumns
-    , dstFilterSpecs
-    , dstColumnSelectionType
-
-    -- ** UpdateDeveloperMetadataRequest
-    , UpdateDeveloperMetadataRequest
-    , updateDeveloperMetadataRequest
-    , udmrDataFilters
-    , udmrDeveloperMetadata
-    , udmrFields
-
-    -- ** SortSpecSortOrder
-    , SortSpecSortOrder (..)
-
-    -- ** DeleteDeveloperMetadataRequest
-    , DeleteDeveloperMetadataRequest
-    , deleteDeveloperMetadataRequest
-    , ddmrDataFilter
-
-    -- ** WaterfallChartSpec
-    , WaterfallChartSpec
-    , waterfallChartSpec
-    , wcsStackedType
-    , wcsConnectorLineStyle
-    , wcsDomain
-    , wcsSeries
-    , wcsHideConnectorLines
-    , wcsTotalDataLabel
-    , wcsFirstValueIsTotal
-
-    -- ** OverlayPosition
-    , OverlayPosition
-    , overlayPosition
-    , opHeightPixels
-    , opOffSetYPixels
-    , opAnchorCell
-    , opWidthPixels
-    , opOffSetXPixels
-
-    -- ** DeleteEmbeddedObjectRequest
-    , DeleteEmbeddedObjectRequest
-    , deleteEmbeddedObjectRequest
-    , deorObjectId
-
-    -- ** DeveloperMetadataLocation
-    , DeveloperMetadataLocation
-    , developerMetadataLocation
-    , dmlSpreadsheet
-    , dmlDimensionRange
-    , dmlSheetId
-    , dmlLocationType
-
-    -- ** SheetProperties
-    , SheetProperties
-    , sheetProperties
-    , sTabColor
-    , sTabColorStyle
-    , sGridProperties
-    , sSheetType
-    , sHidden
-    , sSheetId
-    , sTitle
-    , sRightToLeft
-    , sDataSourceSheetProperties
-    , sIndex
-
-    -- ** FilterViewCriteria
-    , FilterViewCriteria
-    , filterViewCriteria
-    , fvcAddtional
-
-    -- ** SlicerSpecHorizontalAlignment
-    , SlicerSpecHorizontalAlignment (..)
-
-    -- ** BatchUpdateValuesResponse
-    , BatchUpdateValuesResponse
-    , batchUpdateValuesResponse
-    , buvrTotalUpdatedColumns
-    , buvrResponses
-    , buvrSpreadsheetId
-    , buvrTotalUpdatedSheets
-    , buvrTotalUpdatedCells
-    , buvrTotalUpdatedRows
-
-    -- ** UpdateSheetPropertiesRequest
-    , UpdateSheetPropertiesRequest
-    , updateSheetPropertiesRequest
-    , usprFields
-    , usprProperties
-
-    -- ** Spreadsheet
-    , Spreadsheet
-    , spreadsheet
-    , sprSheets
-    , sprNamedRanges
-    , sprSpreadsheetId
-    , sprDataSourceSchedules
-    , sprDataSources
-    , sprSpreadsheetURL
-    , sprDeveloperMetadata
-    , sprProperties
-
-    -- ** CandlestickChartSpec
-    , CandlestickChartSpec
-    , candlestickChartSpec
-    , ccsData
-    , ccsDomain
-
-    -- ** ThemeColorPair
-    , ThemeColorPair
-    , themeColorPair
-    , tcpColor
-    , tcpColorType
-
-    -- ** ColorStyleThemeColor
-    , ColorStyleThemeColor (..)
-
-    -- ** InsertDimensionRequest
-    , InsertDimensionRequest
-    , insertDimensionRequest
-    , idrRange
-    , idrInheritFromBefore
-
-    -- ** SearchDeveloperMetadataResponse
-    , SearchDeveloperMetadataResponse
-    , searchDeveloperMetadataResponse
-    , sdmrMatchedDeveloperMetadata
-
-    -- ** PivotValueSummarizeFunction
-    , PivotValueSummarizeFunction (..)
-
-    -- ** InterpolationPoint
-    , InterpolationPoint
-    , interpolationPoint
-    , ipColor
-    , ipValue
-    , ipColorStyle
-    , ipType
-
-    -- ** DeleteDuplicatesResponse
-    , DeleteDuplicatesResponse
-    , deleteDuplicatesResponse
-    , ddrDuplicatesRemovedCount
-
-    -- ** OrgChartSpecNodeSize
-    , OrgChartSpecNodeSize (..)
-
-    -- ** CellData
-    , CellData
-    , cellData
-    , cdTextFormatRuns
-    , cdNote
-    , cdUserEnteredValue
-    , cdUserEnteredFormat
-    , cdDataSourceTable
-    , cdEffectiveFormat
-    , cdPivotTable
-    , cdFormattedValue
-    , cdDataValidation
-    , cdDataSourceFormula
-    , cdHyperlink
-    , cdEffectiveValue
-
-    -- ** BatchUpdateValuesByDataFilterRequestResponseValueRenderOption
-    , BatchUpdateValuesByDataFilterRequestResponseValueRenderOption (..)
-
-    -- ** ChartSourceRange
-    , ChartSourceRange
-    , chartSourceRange
-    , csrSources
-
-    -- ** AddNamedRangeResponse
-    , AddNamedRangeResponse
-    , addNamedRangeResponse
-    , anrrNamedRange
-
-    -- ** WaterfallChartDomain
-    , WaterfallChartDomain
-    , waterfallChartDomain
-    , wcdReversed
-    , wcdData
-
-    -- ** ChartAxisViewWindowOptions
-    , ChartAxisViewWindowOptions
-    , chartAxisViewWindowOptions
-    , cavwoViewWindowMax
-    , cavwoViewWindowMode
-    , cavwoViewWindowMin
-
-    -- ** DataExecutionStatus
-    , DataExecutionStatus
-    , dataExecutionStatus
-    , desState
-    , desLastRefreshTime
-    , desErrorCode
-    , desErrorMessage
-
-    -- ** PivotGroupLimit
-    , PivotGroupLimit
-    , pivotGroupLimit
-    , pglApplyOrder
-    , pglCountLimit
-
-    -- ** DataLabelType
-    , DataLabelType (..)
-
-    -- ** AddChartResponse
-    , AddChartResponse
-    , addChartResponse
-    , acrChart
-
-    -- ** BigQueryQuerySpec
-    , BigQueryQuerySpec
-    , bigQueryQuerySpec
-    , bqqsRawQuery
-
-    -- ** UpdateChartSpecRequest
-    , UpdateChartSpecRequest
-    , updateChartSpecRequest
-    , ucsrSpec
-    , ucsrChartId
-
-    -- ** SetBasicFilterRequest
-    , SetBasicFilterRequest
-    , setBasicFilterRequest
-    , sbfrFilter
-
-    -- ** IterativeCalculationSettings
-    , IterativeCalculationSettings
-    , iterativeCalculationSettings
-    , icsMaxIterations
-    , icsConvergenceThreshold
-
-    -- ** RefreshDataSourceRequest
-    , RefreshDataSourceRequest
-    , refreshDataSourceRequest
-    , rdsrForce
-    , rdsrReferences
-    , rdsrDataSourceId
-    , rdsrIsAll
-
-    -- ** UpdateValuesByDataFilterResponse
-    , UpdateValuesByDataFilterResponse
-    , updateValuesByDataFilterResponse
-    , uvbdfrUpdatedCells
-    , uvbdfrUpdatedRows
-    , uvbdfrUpdatedRange
-    , uvbdfrUpdatedData
-    , uvbdfrUpdatedColumns
-    , uvbdfrDataFilter
-
-    -- ** GridProperties
-    , GridProperties
-    , gridProperties
-    , gpFrozenColumnCount
-    , gpColumnCount
-    , gpColumnGroupControlAfter
-    , gpHideGridlines
-    , gpFrozenRowCount
-    , gpRowGroupControlAfter
-    , gpRowCount
-
-    -- ** LineStyleType
-    , LineStyleType (..)
-
-    -- ** HistogramChartSpec
-    , HistogramChartSpec
-    , histogramChartSpec
-    , hcsLegendPosition
-    , hcsSeries
-    , hcsShowItemDividers
-    , hcsOutlierPercentile
-    , hcsBucketSize
-
-    -- ** CellFormatHyperlinkDisplayType
-    , CellFormatHyperlinkDisplayType (..)
-
-    -- ** BatchUpdateValuesByDataFilterRequestValueInputOption
-    , BatchUpdateValuesByDataFilterRequestValueInputOption (..)
-
-    -- ** BasicFilterCriteria
-    , BasicFilterCriteria
-    , basicFilterCriteria
-    , bfcAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AddBandingRequest
-    , AddBandingRequest
-    , addBandingRequest
-    , abrBandedRange
-
-    -- ** UpdateDimensionPropertiesRequest
-    , UpdateDimensionPropertiesRequest
-    , updateDimensionPropertiesRequest
-    , udprRange
-    , udprDataSourceSheetRange
-    , udprFields
-    , udprProperties
-
-    -- ** PivotTableCriteria
-    , PivotTableCriteria
-    , pivotTableCriteria
-    , ptcAddtional
-
-    -- ** AutoFillRequest
-    , AutoFillRequest
-    , autoFillRequest
-    , afrSourceAndDestination
-    , afrUseAlternateSeries
-    , afrRange
-
-    -- ** DeveloperMetadataLookup
-    , DeveloperMetadataLookup
-    , developerMetadataLookup
-    , dLocationMatchingStrategy
-    , dMetadataId
-    , dVisibility
-    , dMetadataKey
-    , dLocationType
-    , dMetadataLocation
-    , dMetadataValue
-
-    -- ** HistogramChartSpecLegendPosition
-    , HistogramChartSpecLegendPosition (..)
-
-    -- ** DuplicateSheetRequest
-    , DuplicateSheetRequest
-    , duplicateSheetRequest
-    , dsrNewSheetName
-    , dsrInsertSheetIndex
-    , dsrSourceSheetId
-    , dsrNewSheetId
-
-    -- ** TextRotation
-    , TextRotation
-    , textRotation
-    , trAngle
-    , trVertical
-
-    -- ** DuplicateFilterViewResponse
-    , DuplicateFilterViewResponse
-    , duplicateFilterViewResponse
-    , dfvrFilter
-
-    -- ** SheetPropertiesSheetType
-    , SheetPropertiesSheetType (..)
-
-    -- ** BatchUpdateValuesRequest
-    , BatchUpdateValuesRequest
-    , batchUpdateValuesRequest
-    , buvrData
-    , buvrValueInputOption
-    , buvrIncludeValuesInResponse
-    , buvrResponseDateTimeRenderOption
-    , buvrResponseValueRenderOption
-
-    -- ** DataFilterValueRange
-    , DataFilterValueRange
-    , dataFilterValueRange
-    , dfvrValues
-    , dfvrDataFilter
-    , dfvrMajorDimension
-
-    -- ** DeleteDuplicatesRequest
-    , DeleteDuplicatesRequest
-    , deleteDuplicatesRequest
-    , dComparisonColumns
-    , dRange
-
-    -- ** DataSourceRefreshWeeklySchedule
-    , DataSourceRefreshWeeklySchedule
-    , dataSourceRefreshWeeklySchedule
-    , dsrwsDaysOfWeek
-    , dsrwsStartTime
-
-    -- ** AddChartRequest
-    , AddChartRequest
-    , addChartRequest
-    , aChart
-
-    -- ** NamedRange
-    , NamedRange
-    , namedRange
-    , nrNamedRangeId
-    , nrName
-    , nrRange
-
-    -- ** DeveloperMetadataLookupLocationType
-    , DeveloperMetadataLookupLocationType (..)
-
-    -- ** PointStyleShape
-    , PointStyleShape (..)
-
-    -- ** MergeCellsRequest
-    , MergeCellsRequest
-    , mergeCellsRequest
-    , mcrMergeType
-    , mcrRange
-
-    -- ** ScorecardChartSpecAggregateType
-    , ScorecardChartSpecAggregateType (..)
-
-    -- ** ManualRule
-    , ManualRule
-    , manualRule
-    , mrGroups
-
-    -- ** MergeCellsRequestMergeType
-    , MergeCellsRequestMergeType (..)
-
-    -- ** TextPosition
-    , TextPosition
-    , textPosition
-    , tpHorizontalAlignment
-
-    -- ** CellFormatHorizontalAlignment
-    , CellFormatHorizontalAlignment (..)
-
-    -- ** BOrder
-    , BOrder
-    , bOrder
-    , boStyle
-    , boColor
-    , boWidth
-    , boColorStyle
-
-    -- ** SearchDeveloperMetadataRequest
-    , SearchDeveloperMetadataRequest
-    , searchDeveloperMetadataRequest
-    , sdmrDataFilters
-
-    -- ** DataSourceParameter
-    , DataSourceParameter
-    , dataSourceParameter
-    , dspNamedRangeId
-    , dspName
-    , dspRange
-
-    -- ** CandlestickSeries
-    , CandlestickSeries
-    , candlestickSeries
-    , csData
-
-    -- ** ExtendedValue
-    , ExtendedValue
-    , extendedValue
-    , evBoolValue
-    , evNumberValue
-    , evErrorValue
-    , evStringValue
-    , evFormulaValue
-
-    -- ** AddNamedRangeRequest
-    , AddNamedRangeRequest
-    , addNamedRangeRequest
-    , aNamedRange
-
-    -- ** WaterfallChartSpecStackedType
-    , WaterfallChartSpecStackedType (..)
-
-    -- ** PivotFilterCriteria
-    , PivotFilterCriteria
-    , pivotFilterCriteria
-    , pfcVisibleValues
-    , pfcCondition
-    , pfcVisibleByDefault
-
-    -- ** DimensionRange
-    , DimensionRange
-    , dimensionRange
-    , drDimension
-    , drEndIndex
-    , drSheetId
-    , drStartIndex
-
-    -- ** UpdateSpreadsheetPropertiesRequest
-    , UpdateSpreadsheetPropertiesRequest
-    , updateSpreadsheetPropertiesRequest
-    , uFields
-    , uProperties
-
-    -- ** EmbeddedObjectBOrder
-    , EmbeddedObjectBOrder
-    , embeddedObjectBOrder
-    , eoboColor
-    , eoboColorStyle
-
-    -- ** DateTimeRuleType
-    , DateTimeRuleType (..)
-
-    -- ** DeveloperMetadataLookupVisibility
-    , DeveloperMetadataLookupVisibility (..)
-
-    -- ** DataLabelPlacement
-    , DataLabelPlacement (..)
-
-    -- ** CandlestickDomain
-    , CandlestickDomain
-    , candlestickDomain
-    , cdReversed
-    , cdData
-
-    -- ** AddProtectedRangeResponse
-    , AddProtectedRangeResponse
-    , addProtectedRangeResponse
-    , aProtectedRange
-
-    -- ** Interval
-    , Interval
-    , interval
-    , iStartTime
-    , iEndTime
-
-    -- ** AppendDimensionRequest
-    , AppendDimensionRequest
-    , appendDimensionRequest
-    , adrLength
-    , adrDimension
-    , adrSheetId
-
-    -- ** PivotValue
-    , PivotValue
-    , pivotValue
-    , pvDataSourceColumnReference
-    , pvSourceColumnOffSet
-    , pvFormula
-    , pvName
-    , pvCalculatedDisplayType
-    , pvSummarizeFunction
-
-    -- ** BasicChartSpecCompareMode
-    , BasicChartSpecCompareMode (..)
-
-    -- ** AddDataSourceResponse
-    , AddDataSourceResponse
-    , addDataSourceResponse
-    , aDataExecutionStatus
-    , aDataSource
-
-    -- ** UnmergeCellsRequest
-    , UnmergeCellsRequest
-    , unmergeCellsRequest
-    , ucrRange
-
-    -- ** DeleteSheetRequest
-    , DeleteSheetRequest
-    , deleteSheetRequest
-    , dsrSheetId
-
-    -- ** BooleanConditionType
-    , BooleanConditionType (..)
-
-    -- ** AddDimensionGroupRequest
-    , AddDimensionGroupRequest
-    , addDimensionGroupRequest
-    , adgrRange
-
-    -- ** UpdateEmbeddedObjectBOrderRequest
-    , UpdateEmbeddedObjectBOrderRequest
-    , updateEmbeddedObjectBOrderRequest
-    , ueoborObjectId
-    , ueoborBOrder
-    , ueoborFields
-
-    -- ** WaterfallChartColumnStyle
-    , WaterfallChartColumnStyle
-    , waterfallChartColumnStyle
-    , wColor
-    , wColorStyle
-    , wLabel
-
-    -- ** UpdateSlicerSpecRequest
-    , UpdateSlicerSpecRequest
-    , updateSlicerSpecRequest
-    , ussrSlicerId
-    , ussrSpec
-    , ussrFields
-
-    -- ** SlicerSpec
-    , SlicerSpec
-    , slicerSpec
-    , sliColumnIndex
-    , sliBackgRoundColor
-    , sliFilterCriteria
-    , sliBackgRoundColorStyle
-    , sliDataRange
-    , sliTitle
-    , sliApplyToPivotTables
-    , sliTextFormat
-    , sliHorizontalAlignment
-
-    -- ** CandlestickData
-    , CandlestickData
-    , candlestickData
-    , cdLowSeries
-    , cdHighSeries
-    , cdOpenSeries
-    , cdCloseSeries
-
-    -- ** BandedRange
-    , BandedRange
-    , bandedRange
-    , brBandedRangeId
-    , brRowProperties
-    , brRange
-    , brColumnProperties
-
-    -- ** UpdateBOrdersRequest
-    , UpdateBOrdersRequest
-    , updateBOrdersRequest
-    , uborBottom
-    , uborInnerHorizontal
-    , uborLeft
-    , uborInnerVertical
-    , uborRange
-    , uborRight
-    , uborTop
-
-    -- ** ValueRangeMajorDimension
-    , ValueRangeMajorDimension (..)
-
-    -- ** BatchUpdateValuesByDataFilterRequest
-    , BatchUpdateValuesByDataFilterRequest
-    , batchUpdateValuesByDataFilterRequest
-    , buvbdfrData
-    , buvbdfrValueInputOption
-    , buvbdfrIncludeValuesInResponse
-    , buvbdfrResponseDateTimeRenderOption
-    , buvbdfrResponseValueRenderOption
-
-    -- ** PivotGroupSortOrder
-    , PivotGroupSortOrder (..)
-
-    -- ** SpreadsheetsValuesAppendInsertDataOption
-    , SpreadsheetsValuesAppendInsertDataOption (..)
-
-    -- ** BasicChartSpecChartType
-    , BasicChartSpecChartType (..)
-
-    -- ** ChartCustomNumberFormatOptions
-    , ChartCustomNumberFormatOptions
-    , chartCustomNumberFormatOptions
-    , ccnfoSuffix
-    , ccnfoPrefix
-
-    -- ** EmbeddedChart
-    , EmbeddedChart
-    , embeddedChart
-    , ecBOrder
-    , ecSpec
-    , ecPosition
-    , ecChartId
-
-    -- ** RowData
-    , RowData
-    , rowData
-    , rdValues
-
-    -- ** BaselineValueFormatComparisonType
-    , BaselineValueFormatComparisonType (..)
-
-    -- ** Editors
-    , Editors
-    , editors
-    , eGroups
-    , eUsers
-    , eDomainUsersCanEdit
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** PivotTable
-    , PivotTable
-    , pivotTable
-    , ptValues
-    , ptDataSourceId
-    , ptDataExecutionStatus
-    , ptValueLayout
-    , ptRows
-    , ptSource
-    , ptColumns
-    , ptCriteria
-    , ptFilterSpecs
-
-    -- ** EmbeddedObjectPosition
-    , EmbeddedObjectPosition
-    , embeddedObjectPosition
-    , eopOverlayPosition
-    , eopSheetId
-    , eopNewSheet
-
-    -- ** BasicFilter
-    , BasicFilter
-    , basicFilter
-    , bfSortSpecs
-    , bfRange
-    , bfCriteria
-    , bfFilterSpecs
-
-    -- ** TextToColumnsRequest
-    , TextToColumnsRequest
-    , textToColumnsRequest
-    , ttcrDelimiterType
-    , ttcrSource
-    , ttcrDelimiter
-
-    -- ** SpreadsheetPropertiesAutoRecalc
-    , SpreadsheetPropertiesAutoRecalc (..)
-
-    -- ** TrimWhitespaceResponse
-    , TrimWhitespaceResponse
-    , trimWhitespaceResponse
-    , twrCellsChangedCount
-
-    -- ** CopyPasteRequestPasteOrientation
-    , CopyPasteRequestPasteOrientation (..)
-
-    -- ** GetSpreadsheetByDataFilterRequest
-    , GetSpreadsheetByDataFilterRequest
-    , getSpreadsheetByDataFilterRequest
-    , gsbdfrDataFilters
-    , gsbdfrIncludeGridData
-
-    -- ** ColorStyle
-    , ColorStyle
-    , colorStyle
-    , csThemeColor
-    , csRgbColor
-
-    -- ** BatchUpdateSpreadsheetRequest
-    , BatchUpdateSpreadsheetRequest
-    , batchUpdateSpreadsheetRequest
-    , busrResponseIncludeGridData
-    , busrResponseRanges
-    , busrRequests
-    , busrIncludeSpreadsheetInResponse
-
-    -- ** PasteDataRequestType
-    , PasteDataRequestType (..)
-
-    -- ** UpdateValuesResponse
-    , UpdateValuesResponse
-    , updateValuesResponse
-    , uvrUpdatedCells
-    , uvrSpreadsheetId
-    , uvrUpdatedRows
-    , uvrUpdatedRange
-    , uvrUpdatedData
-    , uvrUpdatedColumns
-
-    -- ** ScorecardChartSpec
-    , ScorecardChartSpec
-    , scorecardChartSpec
-    , scsKeyValueData
-    , scsKeyValueFormat
-    , scsNumberFormatSource
-    , scsScaleFactor
-    , scsBaselineValueData
-    , scsBaselineValueFormat
-    , scsCustomFormatOptions
-    , scsAggregateType
-
-    -- ** DeleteDimensionGroupResponse
-    , DeleteDimensionGroupResponse
-    , deleteDimensionGroupResponse
-    , ddgrDimensionGroups
-
-    -- ** CopySheetToAnotherSpreadsheetRequest
-    , CopySheetToAnotherSpreadsheetRequest
-    , copySheetToAnotherSpreadsheetRequest
-    , cstasrDestinationSpreadsheetId
-
-    -- ** DeleteDataSourceRequest
-    , DeleteDataSourceRequest
-    , deleteDataSourceRequest
-    , ddsrDataSourceId
-
-    -- ** AddFilterViewRequest
-    , AddFilterViewRequest
-    , addFilterViewRequest
-    , aFilter
-
-    -- ** UpdateDataSourceRequest
-    , UpdateDataSourceRequest
-    , updateDataSourceRequest
-    , updDataSource
-    , updFields
-
-    -- ** PivotGroupValueMetadata
-    , PivotGroupValueMetadata
-    , pivotGroupValueMetadata
-    , pgvmValue
-    , pgvmCollapsed
-
-    -- ** SpreadsheetsValuesAppendValueInputOption
-    , SpreadsheetsValuesAppendValueInputOption (..)
-
-    -- ** DataSource
-    , DataSource
-    , dataSource
-    , dsDataSourceId
-    , dsSheetId
-    , dsSpec
-    , dsCalculatedColumns
-
-    -- ** CellFormatTextDirection
-    , CellFormatTextDirection (..)
-
-    -- ** BatchClearValuesByDataFilterResponse
-    , BatchClearValuesByDataFilterResponse
-    , batchClearValuesByDataFilterResponse
-    , bcvbdfrClearedRanges
-    , bcvbdfrSpreadsheetId
-
-    -- ** DataSourceSheetDimensionRange
-    , DataSourceSheetDimensionRange
-    , dataSourceSheetDimensionRange
-    , dssdrSheetId
-    , dssdrColumnReferences
-
-    -- ** WaterfallChartSeries
-    , WaterfallChartSeries
-    , waterfallChartSeries
-    , wcsData
-    , wcsCustomSubtotals
-    , wcsNegativeColumnsStyle
-    , wcsHideTrailingSubtotal
-    , wcsSubtotalColumnsStyle
-    , wcsDataLabel
-    , wcsPositiveColumnsStyle
-
-    -- ** DataSourceTableColumnSelectionType
-    , DataSourceTableColumnSelectionType (..)
-
-    -- ** BigQueryTableSpec
-    , BigQueryTableSpec
-    , bigQueryTableSpec
-    , bqtsTableProjectId
-    , bqtsDataSetId
-    , bqtsTableId
-
-    -- ** BasicChartSeriesType
-    , BasicChartSeriesType (..)
-
-    -- ** UpdateCellsRequest
-    , UpdateCellsRequest
-    , updateCellsRequest
-    , ucrcStart
-    , ucrcRows
-    , ucrcRange
-    , ucrcFields
-
-    -- ** CellFormat
-    , CellFormat
-    , cellFormat
-    , cfBOrders
-    , cfVerticalAlignment
-    , cfBackgRoundColor
-    , cfTextRotation
-    , cfBackgRoundColorStyle
-    , cfHyperlinkDisplayType
-    , cfWrapStrategy
-    , cfNumberFormat
-    , cfTextDirection
-    , cfTextFormat
-    , cfHorizontalAlignment
-    , cfPadding
-
-    -- ** DeleteProtectedRangeRequest
-    , DeleteProtectedRangeRequest
-    , deleteProtectedRangeRequest
-    , dprrProtectedRangeId
-
-    -- ** UpdateProtectedRangeRequest
-    , UpdateProtectedRangeRequest
-    , updateProtectedRangeRequest
-    , uprrProtectedRange
-    , uprrFields
-
-    -- ** AddSheetResponse
-    , AddSheetResponse
-    , addSheetResponse
-    , aProperties
-
-    -- ** ProtectedRange
-    , ProtectedRange
-    , protectedRange
-    , prProtectedRangeId
-    , prWarningOnly
-    , prNamedRangeId
-    , prRange
-    , prEditors
-    , prUnprotectedRanges
-    , prRequestingUserCanEdit
-    , prDescription
-
-    -- ** PivotValueCalculatedDisplayType
-    , PivotValueCalculatedDisplayType (..)
-
-    -- ** ChartDataAggregateType
-    , ChartDataAggregateType (..)
-
-    -- ** ChartGroupRule
-    , ChartGroupRule
-    , chartGroupRule
-    , cgrDateTimeRule
-    , cgrHistogramRule
-
-    -- ** BasicChartAxis
-    , BasicChartAxis
-    , basicChartAxis
-    , bcaTitleTextPosition
-    , bcaFormat
-    , bcaTitle
-    , bcaViewWindowOptions
-    , bcaPosition
-
-    -- ** SpreadsheetsValuesGetMajorDimension
-    , SpreadsheetsValuesGetMajorDimension (..)
-
-    -- ** ScorecardChartSpecNumberFormatSource
-    , ScorecardChartSpecNumberFormatSource (..)
-
-    -- ** GridData
-    , GridData
-    , gridData
-    , gdRowMetadata
-    , gdStartRow
-    , gdRowData
-    , gdColumnMetadata
-    , gdStartColumn
-
-    -- ** SpreadsheetsValuesAppendResponseDateTimeRenderOption
-    , SpreadsheetsValuesAppendResponseDateTimeRenderOption (..)
-
-    -- ** DataSourceChartProperties
-    , DataSourceChartProperties
-    , dataSourceChartProperties
-    , dscpDataSourceId
-    , dscpDataExecutionStatus
-
-    -- ** NumberFormat
-    , NumberFormat
-    , numberFormat
-    , nfPattern
-    , nfType
-
-    -- ** TimeOfDay'
-    , TimeOfDay'
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
-
-    -- ** TrimWhitespaceRequest
-    , TrimWhitespaceRequest
-    , trimWhitespaceRequest
-    , twrRange
-
-    -- ** BatchGetValuesByDataFilterRequestDateTimeRenderOption
-    , BatchGetValuesByDataFilterRequestDateTimeRenderOption (..)
-
-    -- ** BatchUpdateSpreadsheetResponse
-    , BatchUpdateSpreadsheetResponse
-    , batchUpdateSpreadsheetResponse
-    , busrSpreadsheetId
-    , busrReplies
-    , busrUpdatedSpreadsheet
-
-    -- ** DataFilter
-    , DataFilter
-    , dataFilter
-    , dfGridRange
-    , dfA1Range
-    , dfDeveloperMetadataLookup
-
-    -- ** SetDataValidationRequest
-    , SetDataValidationRequest
-    , setDataValidationRequest
-    , sdvrRule
-    , sdvrRange
-
-    -- ** BandingProperties
-    , BandingProperties
-    , bandingProperties
-    , bpSecondBandColor
-    , bpFooterColorStyle
-    , bpHeaderColor
-    , bpHeaderColorStyle
-    , bpFooterColor
-    , bpSecondBandColorStyle
-    , bpFirstBandColorStyle
-    , bpFirstBandColor
-
-    -- ** ChartSpecHiddenDimensionStrategy
-    , ChartSpecHiddenDimensionStrategy (..)
-
-    -- ** DuplicateFilterViewRequest
-    , DuplicateFilterViewRequest
-    , duplicateFilterViewRequest
-    , dFilterId
-
-    -- ** BOrderStyle
-    , BOrderStyle (..)
-
-    -- ** DataSourceSheetProperties
-    , DataSourceSheetProperties
-    , dataSourceSheetProperties
-    , dsspDataSourceId
-    , dsspDataExecutionStatus
-    , dsspColumns
-
-    -- ** PivotGroup
-    , PivotGroup
-    , pivotGroup
-    , pgRepeatHeadings
-    , pgGroupLimit
-    , pgDataSourceColumnReference
-    , pgValueMetadata
-    , pgSourceColumnOffSet
-    , pgSortOrder
-    , pgShowTotals
-    , pgValueBucket
-    , pgLabel
-    , pgGroupRule
+    AddBandingRequest (..),
+    newAddBandingRequest,
 
     -- ** AddBandingResponse
-    , AddBandingResponse
-    , addBandingResponse
-    , aBandedRange
+    AddBandingResponse (..),
+    newAddBandingResponse,
 
-    -- ** OrgChartSpec
-    , OrgChartSpec
-    , orgChartSpec
-    , ocsNodeColor
-    , ocsNodeSize
-    , ocsTooltips
-    , ocsSelectedNodeColor
-    , ocsNodeColorStyle
-    , ocsLabels
-    , ocsSelectedNodeColorStyle
-    , ocsParentLabels
+    -- ** AddChartRequest
+    AddChartRequest (..),
+    newAddChartRequest,
 
-    -- ** CutPasteRequestPasteType
-    , CutPasteRequestPasteType (..)
-
-    -- ** BasicChartSpecLegendPosition
-    , BasicChartSpecLegendPosition (..)
-
-    -- ** ErrorValueType
-    , ErrorValueType (..)
-
-    -- ** RandomizeRangeRequest
-    , RandomizeRangeRequest
-    , randomizeRangeRequest
-    , rrrRange
-
-    -- ** PointStyle
-    , PointStyle
-    , pointStyle
-    , psSize
-    , psShape
-
-    -- ** HistogramSeries
-    , HistogramSeries
-    , histogramSeries
-    , hsBarColor
-    , hsData
-    , hsBarColorStyle
-
-    -- ** TreemapChartSpec
-    , TreemapChartSpec
-    , treemapChartSpec
-    , tcsHintedLevels
-    , tcsMaxValue
-    , tcsHeaderColor
-    , tcsSizeData
-    , tcsColorData
-    , tcsHeaderColorStyle
-    , tcsHideTooltips
-    , tcsLevels
-    , tcsLabels
-    , tcsColorScale
-    , tcsTextFormat
-    , tcsMinValue
-    , tcsParentLabels
-
-    -- ** RefreshDataSourceResponse
-    , RefreshDataSourceResponse
-    , refreshDataSourceResponse
-    , rdsrStatuses
-
-    -- ** ConditionalFormatRule
-    , ConditionalFormatRule
-    , conditionalFormatRule
-    , cfrBooleanRule
-    , cfrGradientRule
-    , cfrRanges
-
-    -- ** BasicChartSpec
-    , BasicChartSpec
-    , basicChartSpec
-    , basHeaderCount
-    , basLineSmoothing
-    , basInterpolateNulls
-    , basStackedType
-    , basLegendPosition
-    , basSeries
-    , basTotalDataLabel
-    , basCompareMode
-    , basChartType
-    , basThreeDimensional
-    , basDomains
-    , basAxis
-
-    -- ** ManualRuleGroup
-    , ManualRuleGroup
-    , manualRuleGroup
-    , mrgItems
-    , mrgGroupName
-
-    -- ** BatchGetValuesByDataFilterRequestMajorDimension
-    , BatchGetValuesByDataFilterRequestMajorDimension (..)
-
-    -- ** DataSourceFormula
-    , DataSourceFormula
-    , dataSourceFormula
-    , dsfDataSourceId
-    , dsfDataExecutionStatus
+    -- ** AddChartResponse
+    AddChartResponse (..),
+    newAddChartResponse,
 
     -- ** AddConditionalFormatRuleRequest
-    , AddConditionalFormatRuleRequest
-    , addConditionalFormatRuleRequest
-    , acfrrRule
-    , acfrrIndex
+    AddConditionalFormatRuleRequest (..),
+    newAddConditionalFormatRuleRequest,
 
-    -- ** DeveloperMetadata
-    , DeveloperMetadata
-    , developerMetadata
-    , dmLocation
-    , dmMetadataId
-    , dmVisibility
-    , dmMetadataKey
-    , dmMetadataValue
+    -- ** AddDataSourceRequest
+    AddDataSourceRequest (..),
+    newAddDataSourceRequest,
 
-    -- ** ChartDateTimeRuleType
-    , ChartDateTimeRuleType (..)
+    -- ** AddDataSourceResponse
+    AddDataSourceResponse (..),
+    newAddDataSourceResponse,
 
-    -- ** TreemapChartColorScale
-    , TreemapChartColorScale
-    , treemapChartColorScale
-    , tccsMinValueColor
-    , tccsMinValueColorStyle
-    , tccsMidValueColorStyle
-    , tccsNoDataColor
-    , tccsMaxValueColor
-    , tccsMaxValueColorStyle
-    , tccsNoDataColorStyle
-    , tccsMidValueColor
+    -- ** AddDimensionGroupRequest
+    AddDimensionGroupRequest (..),
+    newAddDimensionGroupRequest,
 
-    -- ** PivotTableValueLayout
-    , PivotTableValueLayout (..)
+    -- ** AddDimensionGroupResponse
+    AddDimensionGroupResponse (..),
+    newAddDimensionGroupResponse,
 
-    -- ** SpreadsheetsValuesGetDateTimeRenderOption
-    , SpreadsheetsValuesGetDateTimeRenderOption (..)
+    -- ** AddFilterViewRequest
+    AddFilterViewRequest (..),
+    newAddFilterViewRequest,
 
-    -- ** DataSourceColumn
-    , DataSourceColumn
-    , dataSourceColumn
-    , dscReference
-    , dscFormula
+    -- ** AddFilterViewResponse
+    AddFilterViewResponse (..),
+    newAddFilterViewResponse,
 
-    -- ** DuplicateSheetResponse
-    , DuplicateSheetResponse
-    , duplicateSheetResponse
-    , dsrProperties
+    -- ** AddNamedRangeRequest
+    AddNamedRangeRequest (..),
+    newAddNamedRangeRequest,
 
-    -- ** TextFormat
-    , TextFormat
-    , textFormat
-    , tfFontFamily
-    , tfLink
-    , tfForegRoundColor
-    , tfFontSize
-    , tfUnderline
-    , tfItalic
-    , tfBold
-    , tfForegRoundColorStyle
-    , tfStrikethrough
+    -- ** AddNamedRangeResponse
+    AddNamedRangeResponse (..),
+    newAddNamedRangeResponse,
 
-    -- ** DataLabel
-    , DataLabel
-    , dataLabel
-    , dlCustomLabelData
-    , dlType
-    , dlTextFormat
-    , dlPlacement
+    -- ** AddProtectedRangeRequest
+    AddProtectedRangeRequest (..),
+    newAddProtectedRangeRequest,
 
-    -- ** CreateDeveloperMetadataRequest
-    , CreateDeveloperMetadataRequest
-    , createDeveloperMetadataRequest
-    , cDeveloperMetadata
+    -- ** AddProtectedRangeResponse
+    AddProtectedRangeResponse (..),
+    newAddProtectedRangeResponse,
 
-    -- ** BasicSeriesDataPointStyleOverride
-    , BasicSeriesDataPointStyleOverride
-    , basicSeriesDataPointStyleOverride
-    , bsdpsoColor
-    , bsdpsoColorStyle
-    , bsdpsoPointStyle
-    , bsdpsoIndex
+    -- ** AddSheetRequest
+    AddSheetRequest (..),
+    newAddSheetRequest,
 
-    -- ** BatchClearValuesResponse
-    , BatchClearValuesResponse
-    , batchClearValuesResponse
-    , bcvrClearedRanges
-    , bcvrSpreadsheetId
+    -- ** AddSheetResponse
+    AddSheetResponse (..),
+    newAddSheetResponse,
 
-    -- ** MatchedValueRange
-    , MatchedValueRange
-    , matchedValueRange
-    , mvrValueRange
-    , mvrDataFilters
+    -- ** AddSlicerRequest
+    AddSlicerRequest (..),
+    newAddSlicerRequest,
+
+    -- ** AddSlicerResponse
+    AddSlicerResponse (..),
+    newAddSlicerResponse,
+
+    -- ** AppendCellsRequest
+    AppendCellsRequest (..),
+    newAppendCellsRequest,
+
+    -- ** AppendDimensionRequest
+    AppendDimensionRequest (..),
+    newAppendDimensionRequest,
+
+    -- ** AppendDimensionRequest_Dimension
+    AppendDimensionRequest_Dimension (..),
+
+    -- ** AppendValuesResponse
+    AppendValuesResponse (..),
+    newAppendValuesResponse,
+
+    -- ** AutoFillRequest
+    AutoFillRequest (..),
+    newAutoFillRequest,
+
+    -- ** AutoResizeDimensionsRequest
+    AutoResizeDimensionsRequest (..),
+    newAutoResizeDimensionsRequest,
+
+    -- ** BandedRange
+    BandedRange (..),
+    newBandedRange,
+
+    -- ** BandingProperties
+    BandingProperties (..),
+    newBandingProperties,
+
+    -- ** BaselineValueFormat
+    BaselineValueFormat (..),
+    newBaselineValueFormat,
+
+    -- ** BaselineValueFormat_ComparisonType
+    BaselineValueFormat_ComparisonType (..),
+
+    -- ** BasicChartAxis
+    BasicChartAxis (..),
+    newBasicChartAxis,
+
+    -- ** BasicChartAxis_Position
+    BasicChartAxis_Position (..),
 
     -- ** BasicChartDomain
-    , BasicChartDomain
-    , basicChartDomain
-    , bcdReversed
-    , bcdDomain
+    BasicChartDomain (..),
+    newBasicChartDomain,
 
-    -- ** InterpolationPointType
-    , InterpolationPointType (..)
+    -- ** BasicChartSeries
+    BasicChartSeries (..),
+    newBasicChartSeries,
 
-    -- ** BigQueryDataSourceSpec
-    , BigQueryDataSourceSpec
-    , bigQueryDataSourceSpec
-    , bqdssQuerySpec
-    , bqdssProjectId
-    , bqdssTableSpec
+    -- ** BasicChartSeries_TargetAxis
+    BasicChartSeries_TargetAxis (..),
 
-    -- ** HistogramRule
-    , HistogramRule
-    , histogramRule
-    , hrStart
-    , hrInterval
-    , hrEnd
+    -- ** BasicChartSeries_Type
+    BasicChartSeries_Type (..),
 
-    -- ** MatchedDeveloperMetadata
-    , MatchedDeveloperMetadata
-    , matchedDeveloperMetadata
-    , mdmDataFilters
-    , mdmDeveloperMetadata
+    -- ** BasicChartSpec
+    BasicChartSpec (..),
+    newBasicChartSpec,
 
-    -- ** PivotFilterSpec
-    , PivotFilterSpec
-    , pivotFilterSpec
-    , pfsDataSourceColumnReference
-    , pfsFilterCriteria
-    , pfsColumnOffSetIndex
+    -- ** BasicChartSpec_ChartType
+    BasicChartSpec_ChartType (..),
 
-    -- ** TextToColumnsRequestDelimiterType
-    , TextToColumnsRequestDelimiterType (..)
+    -- ** BasicChartSpec_CompareMode
+    BasicChartSpec_CompareMode (..),
 
-    -- ** InsertRangeRequest
-    , InsertRangeRequest
-    , insertRangeRequest
-    , irrShiftDimension
-    , irrRange
+    -- ** BasicChartSpec_LegendPosition
+    BasicChartSpec_LegendPosition (..),
 
-    -- ** InsertRangeRequestShiftDimension
-    , InsertRangeRequestShiftDimension (..)
+    -- ** BasicChartSpec_StackedType
+    BasicChartSpec_StackedType (..),
 
-    -- ** Padding
-    , Padding
-    , padding
-    , pBottom
-    , pLeft
-    , pRight
-    , pTop
+    -- ** BasicFilter
+    BasicFilter (..),
+    newBasicFilter,
 
-    -- ** ChartSpec
-    , ChartSpec
-    , chartSpec
-    , csSortSpecs
-    , csTitleTextPosition
-    , csFontName
-    , csScorecardChart
-    , csSubtitleTextPosition
-    , csBackgRoundColor
-    , csCandlestickChart
-    , csWaterfallChart
-    , csTitleTextFormat
-    , csSubtitle
-    , csAltText
-    , csBackgRoundColorStyle
-    , csHistogramChart
-    , csBubbleChart
-    , csMaximized
-    , csSubtitleTextFormat
-    , csDataSourceChartProperties
-    , csTitle
-    , csPieChart
-    , csFilterSpecs
-    , csOrgChart
-    , csTreemapChart
-    , csBasicChart
-    , csHiddenDimensionStrategy
+    -- ** BasicFilter_Criteria
+    BasicFilter_Criteria (..),
+    newBasicFilter_Criteria,
 
-    -- ** DimensionProperties
-    , DimensionProperties
-    , dimensionProperties
-    , dpDataSourceColumnReference
-    , dpHiddenByFilter
-    , dpPixelSize
-    , dpHiddenByUser
-    , dpDeveloperMetadata
+    -- ** BasicSeriesDataPointStyleOverride
+    BasicSeriesDataPointStyleOverride (..),
+    newBasicSeriesDataPointStyleOverride,
 
-    -- ** DataExecutionStatusState
-    , DataExecutionStatusState (..)
+    -- ** BatchClearValuesByDataFilterRequest
+    BatchClearValuesByDataFilterRequest (..),
+    newBatchClearValuesByDataFilterRequest,
 
-    -- ** UpdateBandingRequest
-    , UpdateBandingRequest
-    , updateBandingRequest
-    , ubrBandedRange
-    , ubrFields
+    -- ** BatchClearValuesByDataFilterResponse
+    BatchClearValuesByDataFilterResponse (..),
+    newBatchClearValuesByDataFilterResponse,
+
+    -- ** BatchClearValuesRequest
+    BatchClearValuesRequest (..),
+    newBatchClearValuesRequest,
+
+    -- ** BatchClearValuesResponse
+    BatchClearValuesResponse (..),
+    newBatchClearValuesResponse,
+
+    -- ** BatchGetValuesByDataFilterRequest
+    BatchGetValuesByDataFilterRequest (..),
+    newBatchGetValuesByDataFilterRequest,
+
+    -- ** BatchGetValuesByDataFilterRequest_DateTimeRenderOption
+    BatchGetValuesByDataFilterRequest_DateTimeRenderOption (..),
+
+    -- ** BatchGetValuesByDataFilterRequest_MajorDimension
+    BatchGetValuesByDataFilterRequest_MajorDimension (..),
+
+    -- ** BatchGetValuesByDataFilterRequest_ValueRenderOption
+    BatchGetValuesByDataFilterRequest_ValueRenderOption (..),
+
+    -- ** BatchGetValuesByDataFilterResponse
+    BatchGetValuesByDataFilterResponse (..),
+    newBatchGetValuesByDataFilterResponse,
 
     -- ** BatchGetValuesResponse
-    , BatchGetValuesResponse
-    , batchGetValuesResponse
-    , bgvrSpreadsheetId
-    , bgvrValueRanges
+    BatchGetValuesResponse (..),
+    newBatchGetValuesResponse,
+
+    -- ** BatchUpdateSpreadsheetRequest
+    BatchUpdateSpreadsheetRequest (..),
+    newBatchUpdateSpreadsheetRequest,
+
+    -- ** BatchUpdateSpreadsheetResponse
+    BatchUpdateSpreadsheetResponse (..),
+    newBatchUpdateSpreadsheetResponse,
+
+    -- ** BatchUpdateValuesByDataFilterRequest
+    BatchUpdateValuesByDataFilterRequest (..),
+    newBatchUpdateValuesByDataFilterRequest,
+
+    -- ** BatchUpdateValuesByDataFilterRequest_ResponseDateTimeRenderOption
+    BatchUpdateValuesByDataFilterRequest_ResponseDateTimeRenderOption (..),
+
+    -- ** BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption
+    BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption (..),
+
+    -- ** BatchUpdateValuesByDataFilterRequest_ValueInputOption
+    BatchUpdateValuesByDataFilterRequest_ValueInputOption (..),
+
+    -- ** BatchUpdateValuesByDataFilterResponse
+    BatchUpdateValuesByDataFilterResponse (..),
+    newBatchUpdateValuesByDataFilterResponse,
+
+    -- ** BatchUpdateValuesRequest
+    BatchUpdateValuesRequest (..),
+    newBatchUpdateValuesRequest,
+
+    -- ** BatchUpdateValuesRequest_ResponseDateTimeRenderOption
+    BatchUpdateValuesRequest_ResponseDateTimeRenderOption (..),
+
+    -- ** BatchUpdateValuesRequest_ResponseValueRenderOption
+    BatchUpdateValuesRequest_ResponseValueRenderOption (..),
+
+    -- ** BatchUpdateValuesRequest_ValueInputOption
+    BatchUpdateValuesRequest_ValueInputOption (..),
+
+    -- ** BatchUpdateValuesResponse
+    BatchUpdateValuesResponse (..),
+    newBatchUpdateValuesResponse,
+
+    -- ** BigQueryDataSourceSpec
+    BigQueryDataSourceSpec (..),
+    newBigQueryDataSourceSpec,
+
+    -- ** BigQueryQuerySpec
+    BigQueryQuerySpec (..),
+    newBigQueryQuerySpec,
+
+    -- ** BigQueryTableSpec
+    BigQueryTableSpec (..),
+    newBigQueryTableSpec,
+
+    -- ** BooleanCondition
+    BooleanCondition (..),
+    newBooleanCondition,
+
+    -- ** BooleanCondition_Type
+    BooleanCondition_Type (..),
+
+    -- ** BooleanRule
+    BooleanRule (..),
+    newBooleanRule,
+
+    -- ** Border
+    Border (..),
+    newBorder,
+
+    -- ** Border_Style
+    Border_Style (..),
+
+    -- ** Borders
+    Borders (..),
+    newBorders,
+
+    -- ** BubbleChartSpec
+    BubbleChartSpec (..),
+    newBubbleChartSpec,
+
+    -- ** BubbleChartSpec_LegendPosition
+    BubbleChartSpec_LegendPosition (..),
+
+    -- ** CandlestickChartSpec
+    CandlestickChartSpec (..),
+    newCandlestickChartSpec,
+
+    -- ** CandlestickData
+    CandlestickData (..),
+    newCandlestickData,
+
+    -- ** CandlestickDomain
+    CandlestickDomain (..),
+    newCandlestickDomain,
+
+    -- ** CandlestickSeries
+    CandlestickSeries (..),
+    newCandlestickSeries,
+
+    -- ** CellData
+    CellData (..),
+    newCellData,
+
+    -- ** CellFormat
+    CellFormat (..),
+    newCellFormat,
+
+    -- ** CellFormat_HorizontalAlignment
+    CellFormat_HorizontalAlignment (..),
+
+    -- ** CellFormat_HyperlinkDisplayType
+    CellFormat_HyperlinkDisplayType (..),
+
+    -- ** CellFormat_TextDirection
+    CellFormat_TextDirection (..),
+
+    -- ** CellFormat_VerticalAlignment
+    CellFormat_VerticalAlignment (..),
+
+    -- ** CellFormat_WrapStrategy
+    CellFormat_WrapStrategy (..),
+
+    -- ** ChartAxisViewWindowOptions
+    ChartAxisViewWindowOptions (..),
+    newChartAxisViewWindowOptions,
+
+    -- ** ChartAxisViewWindowOptions_ViewWindowMode
+    ChartAxisViewWindowOptions_ViewWindowMode (..),
+
+    -- ** ChartCustomNumberFormatOptions
+    ChartCustomNumberFormatOptions (..),
+    newChartCustomNumberFormatOptions,
+
+    -- ** ChartData
+    ChartData (..),
+    newChartData,
+
+    -- ** ChartData_AggregateType
+    ChartData_AggregateType (..),
+
+    -- ** ChartDateTimeRule
+    ChartDateTimeRule (..),
+    newChartDateTimeRule,
+
+    -- ** ChartDateTimeRule_Type
+    ChartDateTimeRule_Type (..),
+
+    -- ** ChartGroupRule
+    ChartGroupRule (..),
+    newChartGroupRule,
+
+    -- ** ChartHistogramRule
+    ChartHistogramRule (..),
+    newChartHistogramRule,
+
+    -- ** ChartSourceRange
+    ChartSourceRange (..),
+    newChartSourceRange,
+
+    -- ** ChartSpec
+    ChartSpec (..),
+    newChartSpec,
+
+    -- ** ChartSpec_HiddenDimensionStrategy
+    ChartSpec_HiddenDimensionStrategy (..),
+
+    -- ** ClearBasicFilterRequest
+    ClearBasicFilterRequest (..),
+    newClearBasicFilterRequest,
+
+    -- ** ClearValuesRequest
+    ClearValuesRequest (..),
+    newClearValuesRequest,
+
+    -- ** ClearValuesResponse
+    ClearValuesResponse (..),
+    newClearValuesResponse,
+
+    -- ** Color
+    Color (..),
+    newColor,
+
+    -- ** ColorStyle
+    ColorStyle (..),
+    newColorStyle,
+
+    -- ** ColorStyle_ThemeColor
+    ColorStyle_ThemeColor (..),
+
+    -- ** ConditionValue
+    ConditionValue (..),
+    newConditionValue,
+
+    -- ** ConditionValue_RelativeDate
+    ConditionValue_RelativeDate (..),
+
+    -- ** ConditionalFormatRule
+    ConditionalFormatRule (..),
+    newConditionalFormatRule,
+
+    -- ** CopyPasteRequest
+    CopyPasteRequest (..),
+    newCopyPasteRequest,
+
+    -- ** CopyPasteRequest_PasteOrientation
+    CopyPasteRequest_PasteOrientation (..),
+
+    -- ** CopyPasteRequest_PasteType
+    CopyPasteRequest_PasteType (..),
+
+    -- ** CopySheetToAnotherSpreadsheetRequest
+    CopySheetToAnotherSpreadsheetRequest (..),
+    newCopySheetToAnotherSpreadsheetRequest,
+
+    -- ** CreateDeveloperMetadataRequest
+    CreateDeveloperMetadataRequest (..),
+    newCreateDeveloperMetadataRequest,
+
+    -- ** CreateDeveloperMetadataResponse
+    CreateDeveloperMetadataResponse (..),
+    newCreateDeveloperMetadataResponse,
+
+    -- ** CutPasteRequest
+    CutPasteRequest (..),
+    newCutPasteRequest,
+
+    -- ** CutPasteRequest_PasteType
+    CutPasteRequest_PasteType (..),
+
+    -- ** DataExecutionStatus
+    DataExecutionStatus (..),
+    newDataExecutionStatus,
+
+    -- ** DataExecutionStatus_ErrorCode
+    DataExecutionStatus_ErrorCode (..),
+
+    -- ** DataExecutionStatus_State
+    DataExecutionStatus_State (..),
+
+    -- ** DataFilter
+    DataFilter (..),
+    newDataFilter,
+
+    -- ** DataFilterValueRange
+    DataFilterValueRange (..),
+    newDataFilterValueRange,
+
+    -- ** DataFilterValueRange_MajorDimension
+    DataFilterValueRange_MajorDimension (..),
+
+    -- ** DataLabel
+    DataLabel (..),
+    newDataLabel,
+
+    -- ** DataLabel_Placement
+    DataLabel_Placement (..),
+
+    -- ** DataLabel_Type
+    DataLabel_Type (..),
+
+    -- ** DataSource
+    DataSource (..),
+    newDataSource,
+
+    -- ** DataSourceChartProperties
+    DataSourceChartProperties (..),
+    newDataSourceChartProperties,
+
+    -- ** DataSourceColumn
+    DataSourceColumn (..),
+    newDataSourceColumn,
+
+    -- ** DataSourceColumnReference
+    DataSourceColumnReference (..),
+    newDataSourceColumnReference,
+
+    -- ** DataSourceFormula
+    DataSourceFormula (..),
+    newDataSourceFormula,
+
+    -- ** DataSourceObjectReference
+    DataSourceObjectReference (..),
+    newDataSourceObjectReference,
+
+    -- ** DataSourceObjectReferences
+    DataSourceObjectReferences (..),
+    newDataSourceObjectReferences,
+
+    -- ** DataSourceParameter
+    DataSourceParameter (..),
+    newDataSourceParameter,
+
+    -- ** DataSourceRefreshDailySchedule
+    DataSourceRefreshDailySchedule (..),
+    newDataSourceRefreshDailySchedule,
+
+    -- ** DataSourceRefreshMonthlySchedule
+    DataSourceRefreshMonthlySchedule (..),
+    newDataSourceRefreshMonthlySchedule,
+
+    -- ** DataSourceRefreshSchedule
+    DataSourceRefreshSchedule (..),
+    newDataSourceRefreshSchedule,
+
+    -- ** DataSourceRefreshSchedule_RefreshScope
+    DataSourceRefreshSchedule_RefreshScope (..),
+
+    -- ** DataSourceRefreshWeeklySchedule
+    DataSourceRefreshWeeklySchedule (..),
+    newDataSourceRefreshWeeklySchedule,
+
+    -- ** DataSourceRefreshWeeklySchedule_DaysOfWeekItem
+    DataSourceRefreshWeeklySchedule_DaysOfWeekItem (..),
+
+    -- ** DataSourceSheetDimensionRange
+    DataSourceSheetDimensionRange (..),
+    newDataSourceSheetDimensionRange,
+
+    -- ** DataSourceSheetProperties
+    DataSourceSheetProperties (..),
+    newDataSourceSheetProperties,
+
+    -- ** DataSourceSpec
+    DataSourceSpec (..),
+    newDataSourceSpec,
+
+    -- ** DataSourceTable
+    DataSourceTable (..),
+    newDataSourceTable,
+
+    -- ** DataSourceTable_ColumnSelectionType
+    DataSourceTable_ColumnSelectionType (..),
+
+    -- ** DataValidationRule
+    DataValidationRule (..),
+    newDataValidationRule,
+
+    -- ** DateTimeRule
+    DateTimeRule (..),
+    newDateTimeRule,
+
+    -- ** DateTimeRule_Type
+    DateTimeRule_Type (..),
 
     -- ** DeleteBandingRequest
-    , DeleteBandingRequest
-    , deleteBandingRequest
-    , dbrBandedRangeId
+    DeleteBandingRequest (..),
+    newDeleteBandingRequest,
 
-    -- ** DeleteDeveloperMetadataResponse
-    , DeleteDeveloperMetadataResponse
-    , deleteDeveloperMetadataResponse
-    , ddmrDeletedDeveloperMetadata
-
-    -- ** UpdateDeveloperMetadataResponse
-    , UpdateDeveloperMetadataResponse
-    , updateDeveloperMetadataResponse
-    , uDeveloperMetadata
-
-    -- ** SpreadsheetsValuesGetValueRenderOption
-    , SpreadsheetsValuesGetValueRenderOption (..)
-
-    -- ** Request'
-    , Request'
-    , request'
-    , reqAddFilterView
-    , reqDeleteProtectedRange
-    , reqUpdateProtectedRange
-    , reqUpdateCells
-    , reqDeleteDataSource
-    , reqUpdateDataSource
-    , reqCreateDeveloperMetadata
-    , reqDuplicateFilterView
-    , reqAddConditionalFormatRule
-    , reqRandomizeRange
-    , reqSortRange
-    , reqUpdateNamedRange
-    , reqDeleteNamedRange
-    , reqInsertRange
-    , reqDeleteBanding
-    , reqUpdateBanding
-    , reqClearBasicFilter
-    , reqAppendCells
-    , reqPasteData
-    , reqAddSlicer
-    , reqUpdateEmbeddedObjectPosition
-    , reqDeleteRange
-    , reqCopyPaste
-    , reqUpdateDimensionGroup
-    , reqDeleteDimensionGroup
-    , reqAutoResizeDimensions
-    , reqAddSheet
-    , reqFindReplace
-    , reqDeleteDimension
-    , reqCutPaste
-    , reqMoveDimension
-    , reqRepeatCell
-    , reqAddProtectedRange
-    , reqUpdateFilterView
-    , reqDeleteFilterView
-    , reqAddDataSource
-    , reqInsertDimension
-    , reqUpdateSheetProperties
-    , reqDeleteConditionalFormatRule
-    , reqUpdateConditionalFormatRule
-    , reqDeleteEmbeddedObject
-    , reqDeleteDeveloperMetadata
-    , reqUpdateDeveloperMetadata
-    , reqMergeCells
-    , reqAddNamedRange
-    , reqAddChart
-    , reqDeleteDuplicates
-    , reqAddBanding
-    , reqDuplicateSheet
-    , reqRefreshDataSource
-    , reqAutoFill
-    , reqUpdateDimensionProperties
-    , reqUpdateChartSpec
-    , reqSetBasicFilter
-    , reqTextToColumns
-    , reqAddDimensionGroup
-    , reqUpdateSpreadsheetProperties
-    , reqUpdateEmbeddedObjectBOrder
-    , reqDeleteSheet
-    , reqUpdateSlicerSpec
-    , reqUnmergeCells
-    , reqUpdateBOrders
-    , reqAppendDimension
-    , reqSetDataValidation
-    , reqTrimWhitespace
-
-    -- ** LineStyle
-    , LineStyle
-    , lineStyle
-    , lsWidth
-    , lsType
+    -- ** DeleteConditionalFormatRuleRequest
+    DeleteConditionalFormatRuleRequest (..),
+    newDeleteConditionalFormatRuleRequest,
 
     -- ** DeleteConditionalFormatRuleResponse
-    , DeleteConditionalFormatRuleResponse
-    , deleteConditionalFormatRuleResponse
-    , dcfrrRule
+    DeleteConditionalFormatRuleResponse (..),
+    newDeleteConditionalFormatRuleResponse,
+
+    -- ** DeleteDataSourceRequest
+    DeleteDataSourceRequest (..),
+    newDeleteDataSourceRequest,
+
+    -- ** DeleteDeveloperMetadataRequest
+    DeleteDeveloperMetadataRequest (..),
+    newDeleteDeveloperMetadataRequest,
+
+    -- ** DeleteDeveloperMetadataResponse
+    DeleteDeveloperMetadataResponse (..),
+    newDeleteDeveloperMetadataResponse,
+
+    -- ** DeleteDimensionGroupRequest
+    DeleteDimensionGroupRequest (..),
+    newDeleteDimensionGroupRequest,
+
+    -- ** DeleteDimensionGroupResponse
+    DeleteDimensionGroupResponse (..),
+    newDeleteDimensionGroupResponse,
+
+    -- ** DeleteDimensionRequest
+    DeleteDimensionRequest (..),
+    newDeleteDimensionRequest,
+
+    -- ** DeleteDuplicatesRequest
+    DeleteDuplicatesRequest (..),
+    newDeleteDuplicatesRequest,
+
+    -- ** DeleteDuplicatesResponse
+    DeleteDuplicatesResponse (..),
+    newDeleteDuplicatesResponse,
+
+    -- ** DeleteEmbeddedObjectRequest
+    DeleteEmbeddedObjectRequest (..),
+    newDeleteEmbeddedObjectRequest,
+
+    -- ** DeleteFilterViewRequest
+    DeleteFilterViewRequest (..),
+    newDeleteFilterViewRequest,
+
+    -- ** DeleteNamedRangeRequest
+    DeleteNamedRangeRequest (..),
+    newDeleteNamedRangeRequest,
+
+    -- ** DeleteProtectedRangeRequest
+    DeleteProtectedRangeRequest (..),
+    newDeleteProtectedRangeRequest,
+
+    -- ** DeleteRangeRequest
+    DeleteRangeRequest (..),
+    newDeleteRangeRequest,
+
+    -- ** DeleteRangeRequest_ShiftDimension
+    DeleteRangeRequest_ShiftDimension (..),
+
+    -- ** DeleteSheetRequest
+    DeleteSheetRequest (..),
+    newDeleteSheetRequest,
+
+    -- ** DeveloperMetadata
+    DeveloperMetadata (..),
+    newDeveloperMetadata,
+
+    -- ** DeveloperMetadata_Visibility
+    DeveloperMetadata_Visibility (..),
+
+    -- ** DeveloperMetadataLocation
+    DeveloperMetadataLocation (..),
+    newDeveloperMetadataLocation,
+
+    -- ** DeveloperMetadataLocation_LocationType
+    DeveloperMetadataLocation_LocationType (..),
+
+    -- ** DeveloperMetadataLookup
+    DeveloperMetadataLookup (..),
+    newDeveloperMetadataLookup,
+
+    -- ** DeveloperMetadataLookup_LocationMatchingStrategy
+    DeveloperMetadataLookup_LocationMatchingStrategy (..),
+
+    -- ** DeveloperMetadataLookup_LocationType
+    DeveloperMetadataLookup_LocationType (..),
+
+    -- ** DeveloperMetadataLookup_Visibility
+    DeveloperMetadataLookup_Visibility (..),
+
+    -- ** DimensionGroup
+    DimensionGroup (..),
+    newDimensionGroup,
+
+    -- ** DimensionProperties
+    DimensionProperties (..),
+    newDimensionProperties,
+
+    -- ** DimensionRange
+    DimensionRange (..),
+    newDimensionRange,
+
+    -- ** DimensionRange_Dimension
+    DimensionRange_Dimension (..),
+
+    -- ** DuplicateFilterViewRequest
+    DuplicateFilterViewRequest (..),
+    newDuplicateFilterViewRequest,
+
+    -- ** DuplicateFilterViewResponse
+    DuplicateFilterViewResponse (..),
+    newDuplicateFilterViewResponse,
+
+    -- ** DuplicateSheetRequest
+    DuplicateSheetRequest (..),
+    newDuplicateSheetRequest,
+
+    -- ** DuplicateSheetResponse
+    DuplicateSheetResponse (..),
+    newDuplicateSheetResponse,
+
+    -- ** Editors
+    Editors (..),
+    newEditors,
+
+    -- ** EmbeddedChart
+    EmbeddedChart (..),
+    newEmbeddedChart,
+
+    -- ** EmbeddedObjectBorder
+    EmbeddedObjectBorder (..),
+    newEmbeddedObjectBorder,
+
+    -- ** EmbeddedObjectPosition
+    EmbeddedObjectPosition (..),
+    newEmbeddedObjectPosition,
+
+    -- ** ErrorValue
+    ErrorValue (..),
+    newErrorValue,
+
+    -- ** ErrorValue_Type
+    ErrorValue_Type (..),
+
+    -- ** ExtendedValue
+    ExtendedValue (..),
+    newExtendedValue,
+
+    -- ** FilterCriteria
+    FilterCriteria (..),
+    newFilterCriteria,
+
+    -- ** FilterSpec
+    FilterSpec (..),
+    newFilterSpec,
+
+    -- ** FilterView
+    FilterView (..),
+    newFilterView,
+
+    -- ** FilterView_Criteria
+    FilterView_Criteria (..),
+    newFilterView_Criteria,
+
+    -- ** FindReplaceRequest
+    FindReplaceRequest (..),
+    newFindReplaceRequest,
+
+    -- ** FindReplaceResponse
+    FindReplaceResponse (..),
+    newFindReplaceResponse,
+
+    -- ** GetSpreadsheetByDataFilterRequest
+    GetSpreadsheetByDataFilterRequest (..),
+    newGetSpreadsheetByDataFilterRequest,
+
+    -- ** GradientRule
+    GradientRule (..),
+    newGradientRule,
+
+    -- ** GridCoordinate
+    GridCoordinate (..),
+    newGridCoordinate,
+
+    -- ** GridData
+    GridData (..),
+    newGridData,
+
+    -- ** GridProperties
+    GridProperties (..),
+    newGridProperties,
+
+    -- ** GridRange
+    GridRange (..),
+    newGridRange,
+
+    -- ** HistogramChartSpec
+    HistogramChartSpec (..),
+    newHistogramChartSpec,
+
+    -- ** HistogramChartSpec_LegendPosition
+    HistogramChartSpec_LegendPosition (..),
+
+    -- ** HistogramRule
+    HistogramRule (..),
+    newHistogramRule,
+
+    -- ** HistogramSeries
+    HistogramSeries (..),
+    newHistogramSeries,
+
+    -- ** InsertDimensionRequest
+    InsertDimensionRequest (..),
+    newInsertDimensionRequest,
+
+    -- ** InsertRangeRequest
+    InsertRangeRequest (..),
+    newInsertRangeRequest,
+
+    -- ** InsertRangeRequest_ShiftDimension
+    InsertRangeRequest_ShiftDimension (..),
+
+    -- ** InterpolationPoint
+    InterpolationPoint (..),
+    newInterpolationPoint,
+
+    -- ** InterpolationPoint_Type
+    InterpolationPoint_Type (..),
+
+    -- ** Interval
+    Interval (..),
+    newInterval,
+
+    -- ** IterativeCalculationSettings
+    IterativeCalculationSettings (..),
+    newIterativeCalculationSettings,
+
+    -- ** KeyValueFormat
+    KeyValueFormat (..),
+    newKeyValueFormat,
+
+    -- ** LineStyle
+    LineStyle (..),
+    newLineStyle,
+
+    -- ** LineStyle_Type
+    LineStyle_Type (..),
+
+    -- ** Link
+    Link (..),
+    newLink,
+
+    -- ** ManualRule
+    ManualRule (..),
+    newManualRule,
+
+    -- ** ManualRuleGroup
+    ManualRuleGroup (..),
+    newManualRuleGroup,
+
+    -- ** MatchedDeveloperMetadata
+    MatchedDeveloperMetadata (..),
+    newMatchedDeveloperMetadata,
+
+    -- ** MatchedValueRange
+    MatchedValueRange (..),
+    newMatchedValueRange,
+
+    -- ** MergeCellsRequest
+    MergeCellsRequest (..),
+    newMergeCellsRequest,
+
+    -- ** MergeCellsRequest_MergeType
+    MergeCellsRequest_MergeType (..),
+
+    -- ** MoveDimensionRequest
+    MoveDimensionRequest (..),
+    newMoveDimensionRequest,
+
+    -- ** NamedRange
+    NamedRange (..),
+    newNamedRange,
+
+    -- ** NumberFormat
+    NumberFormat (..),
+    newNumberFormat,
+
+    -- ** NumberFormat_Type
+    NumberFormat_Type (..),
+
+    -- ** OrgChartSpec
+    OrgChartSpec (..),
+    newOrgChartSpec,
+
+    -- ** OrgChartSpec_NodeSize
+    OrgChartSpec_NodeSize (..),
+
+    -- ** OverlayPosition
+    OverlayPosition (..),
+    newOverlayPosition,
+
+    -- ** Padding
+    Padding (..),
+    newPadding,
+
+    -- ** PasteDataRequest
+    PasteDataRequest (..),
+    newPasteDataRequest,
+
+    -- ** PasteDataRequest_Type
+    PasteDataRequest_Type (..),
+
+    -- ** PieChartSpec
+    PieChartSpec (..),
+    newPieChartSpec,
+
+    -- ** PieChartSpec_LegendPosition
+    PieChartSpec_LegendPosition (..),
+
+    -- ** PivotFilterCriteria
+    PivotFilterCriteria (..),
+    newPivotFilterCriteria,
+
+    -- ** PivotFilterSpec
+    PivotFilterSpec (..),
+    newPivotFilterSpec,
+
+    -- ** PivotGroup
+    PivotGroup (..),
+    newPivotGroup,
+
+    -- ** PivotGroup_SortOrder
+    PivotGroup_SortOrder (..),
+
+    -- ** PivotGroupLimit
+    PivotGroupLimit (..),
+    newPivotGroupLimit,
+
+    -- ** PivotGroupRule
+    PivotGroupRule (..),
+    newPivotGroupRule,
+
+    -- ** PivotGroupSortValueBucket
+    PivotGroupSortValueBucket (..),
+    newPivotGroupSortValueBucket,
+
+    -- ** PivotGroupValueMetadata
+    PivotGroupValueMetadata (..),
+    newPivotGroupValueMetadata,
+
+    -- ** PivotTable
+    PivotTable (..),
+    newPivotTable,
+
+    -- ** PivotTable_Criteria
+    PivotTable_Criteria (..),
+    newPivotTable_Criteria,
+
+    -- ** PivotTable_ValueLayout
+    PivotTable_ValueLayout (..),
+
+    -- ** PivotValue
+    PivotValue (..),
+    newPivotValue,
+
+    -- ** PivotValue_CalculatedDisplayType
+    PivotValue_CalculatedDisplayType (..),
+
+    -- ** PivotValue_SummarizeFunction
+    PivotValue_SummarizeFunction (..),
+
+    -- ** PointStyle
+    PointStyle (..),
+    newPointStyle,
+
+    -- ** PointStyle_Shape
+    PointStyle_Shape (..),
+
+    -- ** ProtectedRange
+    ProtectedRange (..),
+    newProtectedRange,
+
+    -- ** RandomizeRangeRequest
+    RandomizeRangeRequest (..),
+    newRandomizeRangeRequest,
+
+    -- ** RefreshDataSourceObjectExecutionStatus
+    RefreshDataSourceObjectExecutionStatus (..),
+    newRefreshDataSourceObjectExecutionStatus,
+
+    -- ** RefreshDataSourceRequest
+    RefreshDataSourceRequest (..),
+    newRefreshDataSourceRequest,
+
+    -- ** RefreshDataSourceResponse
+    RefreshDataSourceResponse (..),
+    newRefreshDataSourceResponse,
+
+    -- ** RepeatCellRequest
+    RepeatCellRequest (..),
+    newRepeatCellRequest,
+
+    -- ** Request'
+    Request' (..),
+    newRequest,
+
+    -- ** Response
+    Response (..),
+    newResponse,
+
+    -- ** RowData
+    RowData (..),
+    newRowData,
+
+    -- ** ScorecardChartSpec
+    ScorecardChartSpec (..),
+    newScorecardChartSpec,
+
+    -- ** ScorecardChartSpec_AggregateType
+    ScorecardChartSpec_AggregateType (..),
+
+    -- ** ScorecardChartSpec_NumberFormatSource
+    ScorecardChartSpec_NumberFormatSource (..),
+
+    -- ** SearchDeveloperMetadataRequest
+    SearchDeveloperMetadataRequest (..),
+    newSearchDeveloperMetadataRequest,
+
+    -- ** SearchDeveloperMetadataResponse
+    SearchDeveloperMetadataResponse (..),
+    newSearchDeveloperMetadataResponse,
+
+    -- ** SetBasicFilterRequest
+    SetBasicFilterRequest (..),
+    newSetBasicFilterRequest,
+
+    -- ** SetDataValidationRequest
+    SetDataValidationRequest (..),
+    newSetDataValidationRequest,
+
+    -- ** Sheet
+    Sheet (..),
+    newSheet,
+
+    -- ** SheetProperties
+    SheetProperties (..),
+    newSheetProperties,
+
+    -- ** SheetProperties_SheetType
+    SheetProperties_SheetType (..),
+
+    -- ** Slicer
+    Slicer (..),
+    newSlicer,
+
+    -- ** SlicerSpec
+    SlicerSpec (..),
+    newSlicerSpec,
+
+    -- ** SlicerSpec_HorizontalAlignment
+    SlicerSpec_HorizontalAlignment (..),
+
+    -- ** SortRangeRequest
+    SortRangeRequest (..),
+    newSortRangeRequest,
+
+    -- ** SortSpec
+    SortSpec (..),
+    newSortSpec,
+
+    -- ** SortSpec_SortOrder
+    SortSpec_SortOrder (..),
+
+    -- ** SourceAndDestination
+    SourceAndDestination (..),
+    newSourceAndDestination,
+
+    -- ** SourceAndDestination_Dimension
+    SourceAndDestination_Dimension (..),
+
+    -- ** Spreadsheet
+    Spreadsheet (..),
+    newSpreadsheet,
+
+    -- ** SpreadsheetProperties
+    SpreadsheetProperties (..),
+    newSpreadsheetProperties,
+
+    -- ** SpreadsheetProperties_AutoRecalc
+    SpreadsheetProperties_AutoRecalc (..),
+
+    -- ** SpreadsheetTheme
+    SpreadsheetTheme (..),
+    newSpreadsheetTheme,
+
+    -- ** TextFormat
+    TextFormat (..),
+    newTextFormat,
+
+    -- ** TextFormatRun
+    TextFormatRun (..),
+    newTextFormatRun,
+
+    -- ** TextPosition
+    TextPosition (..),
+    newTextPosition,
+
+    -- ** TextPosition_HorizontalAlignment
+    TextPosition_HorizontalAlignment (..),
+
+    -- ** TextRotation
+    TextRotation (..),
+    newTextRotation,
+
+    -- ** TextToColumnsRequest
+    TextToColumnsRequest (..),
+    newTextToColumnsRequest,
+
+    -- ** TextToColumnsRequest_DelimiterType
+    TextToColumnsRequest_DelimiterType (..),
+
+    -- ** ThemeColorPair
+    ThemeColorPair (..),
+    newThemeColorPair,
+
+    -- ** ThemeColorPair_ColorType
+    ThemeColorPair_ColorType (..),
+
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
+
+    -- ** TreemapChartColorScale
+    TreemapChartColorScale (..),
+    newTreemapChartColorScale,
+
+    -- ** TreemapChartSpec
+    TreemapChartSpec (..),
+    newTreemapChartSpec,
+
+    -- ** TrimWhitespaceRequest
+    TrimWhitespaceRequest (..),
+    newTrimWhitespaceRequest,
+
+    -- ** TrimWhitespaceResponse
+    TrimWhitespaceResponse (..),
+    newTrimWhitespaceResponse,
+
+    -- ** UnmergeCellsRequest
+    UnmergeCellsRequest (..),
+    newUnmergeCellsRequest,
+
+    -- ** UpdateBandingRequest
+    UpdateBandingRequest (..),
+    newUpdateBandingRequest,
+
+    -- ** UpdateBordersRequest
+    UpdateBordersRequest (..),
+    newUpdateBordersRequest,
+
+    -- ** UpdateCellsRequest
+    UpdateCellsRequest (..),
+    newUpdateCellsRequest,
+
+    -- ** UpdateChartSpecRequest
+    UpdateChartSpecRequest (..),
+    newUpdateChartSpecRequest,
+
+    -- ** UpdateConditionalFormatRuleRequest
+    UpdateConditionalFormatRuleRequest (..),
+    newUpdateConditionalFormatRuleRequest,
 
     -- ** UpdateConditionalFormatRuleResponse
-    , UpdateConditionalFormatRuleResponse
-    , updateConditionalFormatRuleResponse
-    , uNewRule
-    , uNewIndex
-    , uOldIndex
-    , uOldRule
-    ) where
+    UpdateConditionalFormatRuleResponse (..),
+    newUpdateConditionalFormatRuleResponse,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
-import Network.Google.Resource.Sheets.Spreadsheets.Create
-import Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Get
-import Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Search
-import Network.Google.Resource.Sheets.Spreadsheets.Get
-import Network.Google.Resource.Sheets.Spreadsheets.GetByDataFilter
-import Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
-import Network.Google.Resource.Sheets.Spreadsheets.Values.Append
-import Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
-import Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClearByDataFilter
-import Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
-import Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGetByDataFilter
-import Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
-import Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
-import Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
-import Network.Google.Resource.Sheets.Spreadsheets.Values.Get
-import Network.Google.Resource.Sheets.Spreadsheets.Values.Update
+    -- ** UpdateDataSourceRequest
+    UpdateDataSourceRequest (..),
+    newUpdateDataSourceRequest,
+
+    -- ** UpdateDataSourceResponse
+    UpdateDataSourceResponse (..),
+    newUpdateDataSourceResponse,
+
+    -- ** UpdateDeveloperMetadataRequest
+    UpdateDeveloperMetadataRequest (..),
+    newUpdateDeveloperMetadataRequest,
+
+    -- ** UpdateDeveloperMetadataResponse
+    UpdateDeveloperMetadataResponse (..),
+    newUpdateDeveloperMetadataResponse,
+
+    -- ** UpdateDimensionGroupRequest
+    UpdateDimensionGroupRequest (..),
+    newUpdateDimensionGroupRequest,
+
+    -- ** UpdateDimensionPropertiesRequest
+    UpdateDimensionPropertiesRequest (..),
+    newUpdateDimensionPropertiesRequest,
+
+    -- ** UpdateEmbeddedObjectBorderRequest
+    UpdateEmbeddedObjectBorderRequest (..),
+    newUpdateEmbeddedObjectBorderRequest,
+
+    -- ** UpdateEmbeddedObjectPositionRequest
+    UpdateEmbeddedObjectPositionRequest (..),
+    newUpdateEmbeddedObjectPositionRequest,
+
+    -- ** UpdateEmbeddedObjectPositionResponse
+    UpdateEmbeddedObjectPositionResponse (..),
+    newUpdateEmbeddedObjectPositionResponse,
+
+    -- ** UpdateFilterViewRequest
+    UpdateFilterViewRequest (..),
+    newUpdateFilterViewRequest,
+
+    -- ** UpdateNamedRangeRequest
+    UpdateNamedRangeRequest (..),
+    newUpdateNamedRangeRequest,
+
+    -- ** UpdateProtectedRangeRequest
+    UpdateProtectedRangeRequest (..),
+    newUpdateProtectedRangeRequest,
+
+    -- ** UpdateSheetPropertiesRequest
+    UpdateSheetPropertiesRequest (..),
+    newUpdateSheetPropertiesRequest,
+
+    -- ** UpdateSlicerSpecRequest
+    UpdateSlicerSpecRequest (..),
+    newUpdateSlicerSpecRequest,
+
+    -- ** UpdateSpreadsheetPropertiesRequest
+    UpdateSpreadsheetPropertiesRequest (..),
+    newUpdateSpreadsheetPropertiesRequest,
+
+    -- ** UpdateValuesByDataFilterResponse
+    UpdateValuesByDataFilterResponse (..),
+    newUpdateValuesByDataFilterResponse,
+
+    -- ** UpdateValuesResponse
+    UpdateValuesResponse (..),
+    newUpdateValuesResponse,
+
+    -- ** ValueRange
+    ValueRange (..),
+    newValueRange,
+
+    -- ** ValueRange_MajorDimension
+    ValueRange_MajorDimension (..),
+
+    -- ** WaterfallChartColumnStyle
+    WaterfallChartColumnStyle (..),
+    newWaterfallChartColumnStyle,
+
+    -- ** WaterfallChartCustomSubtotal
+    WaterfallChartCustomSubtotal (..),
+    newWaterfallChartCustomSubtotal,
+
+    -- ** WaterfallChartDomain
+    WaterfallChartDomain (..),
+    newWaterfallChartDomain,
+
+    -- ** WaterfallChartSeries
+    WaterfallChartSeries (..),
+    newWaterfallChartSeries,
+
+    -- ** WaterfallChartSpec
+    WaterfallChartSpec (..),
+    newWaterfallChartSpec,
+
+    -- ** WaterfallChartSpec_StackedType
+    WaterfallChartSpec_StackedType (..),
+
+    -- ** SpreadsheetsValuesAppendInsertDataOption
+    SpreadsheetsValuesAppendInsertDataOption (..),
+
+    -- ** SpreadsheetsValuesAppendResponseDateTimeRenderOption
+    SpreadsheetsValuesAppendResponseDateTimeRenderOption (..),
+
+    -- ** SpreadsheetsValuesAppendResponseValueRenderOption
+    SpreadsheetsValuesAppendResponseValueRenderOption (..),
+
+    -- ** SpreadsheetsValuesAppendValueInputOption
+    SpreadsheetsValuesAppendValueInputOption (..),
+
+    -- ** SpreadsheetsValuesBatchGetDateTimeRenderOption
+    SpreadsheetsValuesBatchGetDateTimeRenderOption (..),
+
+    -- ** SpreadsheetsValuesBatchGetMajorDimension
+    SpreadsheetsValuesBatchGetMajorDimension (..),
+
+    -- ** SpreadsheetsValuesBatchGetValueRenderOption
+    SpreadsheetsValuesBatchGetValueRenderOption (..),
+
+    -- ** SpreadsheetsValuesGetDateTimeRenderOption
+    SpreadsheetsValuesGetDateTimeRenderOption (..),
+
+    -- ** SpreadsheetsValuesGetMajorDimension
+    SpreadsheetsValuesGetMajorDimension (..),
+
+    -- ** SpreadsheetsValuesGetValueRenderOption
+    SpreadsheetsValuesGetValueRenderOption (..),
+
+    -- ** SpreadsheetsValuesUpdateResponseDateTimeRenderOption
+    SpreadsheetsValuesUpdateResponseDateTimeRenderOption (..),
+
+    -- ** SpreadsheetsValuesUpdateResponseValueRenderOption
+    SpreadsheetsValuesUpdateResponseValueRenderOption (..),
+
+    -- ** SpreadsheetsValuesUpdateValueInputOption
+    SpreadsheetsValuesUpdateValueInputOption (..),
+  )
+where
+
+import Network.Google.Sheets.Spreadsheets.BatchUpdate
+import Network.Google.Sheets.Spreadsheets.Create
+import Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Get
+import Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Search
+import Network.Google.Sheets.Spreadsheets.Get
+import Network.Google.Sheets.Spreadsheets.GetByDataFilter
+import Network.Google.Sheets.Spreadsheets.Sheets.CopyTo
+import Network.Google.Sheets.Spreadsheets.Values.Append
+import Network.Google.Sheets.Spreadsheets.Values.BatchClear
+import Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+import Network.Google.Sheets.Spreadsheets.Values.BatchGet
+import Network.Google.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+import Network.Google.Sheets.Spreadsheets.Values.BatchUpdate
+import Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+import Network.Google.Sheets.Spreadsheets.Values.Clear
+import Network.Google.Sheets.Spreadsheets.Values.Get
+import Network.Google.Sheets.Spreadsheets.Values.Update
 import Network.Google.Sheets.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Sheets API service.
-type SheetsAPI =
-     SpreadsheetsSheetsCopyToResource :<|>
-       SpreadsheetsValuesBatchClearResource
-       :<|> SpreadsheetsValuesBatchClearByDataFilterResource
-       :<|> SpreadsheetsValuesGetResource
-       :<|> SpreadsheetsValuesBatchGetByDataFilterResource
-       :<|> SpreadsheetsValuesClearResource
-       :<|> SpreadsheetsValuesBatchGetResource
-       :<|> SpreadsheetsValuesBatchUpdateResource
-       :<|> SpreadsheetsValuesAppendResource
-       :<|>
-       SpreadsheetsValuesBatchUpdateByDataFilterResource
-       :<|> SpreadsheetsValuesUpdateResource
-       :<|> SpreadsheetsDeveloperMetadataGetResource
-       :<|> SpreadsheetsDeveloperMetadataSearchResource
-       :<|> SpreadsheetsGetByDataFilterResource
-       :<|> SpreadsheetsGetResource
-       :<|> SpreadsheetsCreateResource
-       :<|> SpreadsheetsBatchUpdateResource

@@ -1,62 +1,73 @@
-name:                  gogol-sheets
-version:               0.5.0
-synopsis:              Google Sheets SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-sheets
+version:            0.5.0
+synopsis:           Google Sheets SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Reads and writes Google Sheets.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v4@
-    of the API.
+  Reads and writes Google Sheets.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v4@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-sheets
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
-        , Network.Google.Resource.Sheets.Spreadsheets.Create
-        , Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Get
-        , Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Search
-        , Network.Google.Resource.Sheets.Spreadsheets.Get
-        , Network.Google.Resource.Sheets.Spreadsheets.GetByDataFilter
-        , Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.Append
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClearByDataFilter
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGetByDataFilter
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.Get
-        , Network.Google.Resource.Sheets.Spreadsheets.Values.Update
-        , Network.Google.Sheets
-        , Network.Google.Sheets.Types
+  exposed-modules:
+    Network.Google.Sheets
+    Network.Google.Sheets.Spreadsheets.BatchUpdate
+    Network.Google.Sheets.Spreadsheets.Create
+    Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Get
+    Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Search
+    Network.Google.Sheets.Spreadsheets.Get
+    Network.Google.Sheets.Spreadsheets.GetByDataFilter
+    Network.Google.Sheets.Spreadsheets.Sheets.CopyTo
+    Network.Google.Sheets.Spreadsheets.Values.Append
+    Network.Google.Sheets.Spreadsheets.Values.BatchClear
+    Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+    Network.Google.Sheets.Spreadsheets.Values.BatchGet
+    Network.Google.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+    Network.Google.Sheets.Spreadsheets.Values.BatchUpdate
+    Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+    Network.Google.Sheets.Spreadsheets.Values.Clear
+    Network.Google.Sheets.Spreadsheets.Values.Get
+    Network.Google.Sheets.Spreadsheets.Values.Update
+    Network.Google.Sheets.Types
 
-    other-modules:
-          Network.Google.Sheets.Types.Product
-        , Network.Google.Sheets.Types.Sum
+  other-modules:
+    Network.Google.Sheets.Internal.Product
+    Network.Google.Sheets.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
