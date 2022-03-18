@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,67 +36,61 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Consumer Surveys API Reference> for @consumersurveys.surveys.stop@.
 module Gogol.ConsumerSurveys.Surveys.Stop
-  ( -- * Resource
-    ConsumerSurveysSurveysStopResource,
+    (
+    -- * Resource
+      ConsumerSurveysSurveysStopResource
 
     -- ** Constructing a Request
-    newConsumerSurveysSurveysStop,
-    ConsumerSurveysSurveysStop,
-  )
-where
+    , newConsumerSurveysSurveysStop
+    , ConsumerSurveysSurveysStop
+    ) where
 
-import Gogol.ConsumerSurveys.Types
 import qualified Gogol.Prelude as Core
+import Gogol.ConsumerSurveys.Types
 
 -- | A resource alias for @consumersurveys.surveys.stop@ method which the
 -- 'ConsumerSurveysSurveysStop' request conforms to.
 type ConsumerSurveysSurveysStopResource =
-  "consumersurveys"
-    Core.:> "v2"
-    Core.:> "surveys"
-    Core.:> Core.Capture "resourceId" Core.Text
-    Core.:> "stop"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post '[Core.JSON] SurveysStopResponse
+     "consumersurveys" Core.:>
+       "v2" Core.:>
+         "surveys" Core.:>
+           Core.Capture "resourceId" Core.Text Core.:>
+             "stop" Core.:>
+               Core.QueryParam "alt" Core.AltJSON Core.:>
+                 Core.Post '[Core.JSON] SurveysStopResponse
 
 -- | Stops a running survey.
 --
 -- /See:/ 'newConsumerSurveysSurveysStop' smart constructor.
 newtype ConsumerSurveysSurveysStop = ConsumerSurveysSurveysStop
-  { -- |
-    resourceId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | 
+      resourceId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ConsumerSurveysSurveysStop' with the minimum fields required to make a request.
-newConsumerSurveysSurveysStop ::
-  -- |  See 'resourceId'.
-  Core.Text ->
-  ConsumerSurveysSurveysStop
+newConsumerSurveysSurveysStop 
+    ::  Core.Text
+       -- ^  See 'resourceId'.
+    -> ConsumerSurveysSurveysStop
 newConsumerSurveysSurveysStop resourceId =
   ConsumerSurveysSurveysStop {resourceId = resourceId}
 
-instance
-  Core.GoogleRequest
-    ConsumerSurveysSurveysStop
-  where
-  type
-    Rs ConsumerSurveysSurveysStop =
-      SurveysStopResponse
-  type
-    Scopes ConsumerSurveysSurveysStop =
-      '[ "https://www.googleapis.com/auth/consumersurveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
-  requestClient ConsumerSurveysSurveysStop {..} =
-    go
-      resourceId
-      (Core.Just Core.AltJSON)
-      consumerSurveysService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysStopResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           ConsumerSurveysSurveysStop
+         where
+        type Rs ConsumerSurveysSurveysStop =
+             SurveysStopResponse
+        type Scopes ConsumerSurveysSurveysStop =
+             '["https://www.googleapis.com/auth/consumersurveys",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ConsumerSurveysSurveysStop{..}
+          = go resourceId (Core.Just Core.AltJSON)
+              consumerSurveysService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ConsumerSurveysSurveysStopResource)
+                      Core.mempty
+
