@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SiteVerification
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,99 +30,83 @@
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
 module Network.Google.SiteVerification
-    (
-    -- * Service Configuration
-      siteVerificationService
+  ( -- * Configuration
+    siteVerificationService,
 
     -- * OAuth Scopes
-    , siteVerificationVerifyOnlyScope
-    , siteVerificationScope
-
-    -- * API Declaration
-    , SiteVerificationAPI
+    siteVerificationScope,
+    siteVerificationVerify_OnlyScope,
 
     -- * Resources
 
     -- ** siteVerification.webResource.delete
-    , module Network.Google.Resource.SiteVerification.WebResource.Delete
+    SiteVerificationWebResourceDeleteResource,
+    newSiteVerificationWebResourceDelete,
+    SiteVerificationWebResourceDelete,
 
     -- ** siteVerification.webResource.get
-    , module Network.Google.Resource.SiteVerification.WebResource.Get
+    SiteVerificationWebResourceGetResource,
+    newSiteVerificationWebResourceGet,
+    SiteVerificationWebResourceGet,
 
     -- ** siteVerification.webResource.getToken
-    , module Network.Google.Resource.SiteVerification.WebResource.GetToken
+    SiteVerificationWebResourceGetTokenResource,
+    newSiteVerificationWebResourceGetToken,
+    SiteVerificationWebResourceGetToken,
 
     -- ** siteVerification.webResource.insert
-    , module Network.Google.Resource.SiteVerification.WebResource.Insert
+    SiteVerificationWebResourceInsertResource,
+    newSiteVerificationWebResourceInsert,
+    SiteVerificationWebResourceInsert,
 
     -- ** siteVerification.webResource.list
-    , module Network.Google.Resource.SiteVerification.WebResource.List
+    SiteVerificationWebResourceListResource,
+    newSiteVerificationWebResourceList,
+    SiteVerificationWebResourceList,
 
     -- ** siteVerification.webResource.patch
-    , module Network.Google.Resource.SiteVerification.WebResource.Patch
+    SiteVerificationWebResourcePatchResource,
+    newSiteVerificationWebResourcePatch,
+    SiteVerificationWebResourcePatch,
 
     -- ** siteVerification.webResource.update
-    , module Network.Google.Resource.SiteVerification.WebResource.Update
+    SiteVerificationWebResourceUpdateResource,
+    newSiteVerificationWebResourceUpdate,
+    SiteVerificationWebResourceUpdate,
 
     -- * Types
 
-    -- ** SiteVerificationWebResourceGettokenRequestSite
-    , SiteVerificationWebResourceGettokenRequestSite
-    , siteVerificationWebResourceGettokenRequestSite
-    , svwrgrsIdentifier
-    , svwrgrsType
+    -- ** SiteVerificationWebResourceGettokenRequest
+    SiteVerificationWebResourceGettokenRequest (..),
+    newSiteVerificationWebResourceGettokenRequest,
+
+    -- ** SiteVerificationWebResourceGettokenRequest_Site
+    SiteVerificationWebResourceGettokenRequest_Site (..),
+    newSiteVerificationWebResourceGettokenRequest_Site,
 
     -- ** SiteVerificationWebResourceGettokenResponse
-    , SiteVerificationWebResourceGettokenResponse
-    , siteVerificationWebResourceGettokenResponse
-    , svwrgrToken
-    , svwrgrMethod
+    SiteVerificationWebResourceGettokenResponse (..),
+    newSiteVerificationWebResourceGettokenResponse,
 
     -- ** SiteVerificationWebResourceListResponse
-    , SiteVerificationWebResourceListResponse
-    , siteVerificationWebResourceListResponse
-    , svwrlrItems
-
-    -- ** SiteVerificationWebResourceResourceSite
-    , SiteVerificationWebResourceResourceSite
-    , siteVerificationWebResourceResourceSite
-    , svwrrsIdentifier
-    , svwrrsType
-
-    -- ** SiteVerificationWebResourceGettokenRequest
-    , SiteVerificationWebResourceGettokenRequest
-    , siteVerificationWebResourceGettokenRequest
-    , svwrgrSite
-    , svwrgrVerificationMethod
+    SiteVerificationWebResourceListResponse (..),
+    newSiteVerificationWebResourceListResponse,
 
     -- ** SiteVerificationWebResourceResource
-    , SiteVerificationWebResourceResource
-    , siteVerificationWebResourceResource
-    , svwrrOwners
-    , svwrrId
-    , svwrrSite
-    ) where
+    SiteVerificationWebResourceResource (..),
+    newSiteVerificationWebResourceResource,
 
-import Network.Google.Prelude
-import Network.Google.Resource.SiteVerification.WebResource.Delete
-import Network.Google.Resource.SiteVerification.WebResource.Get
-import Network.Google.Resource.SiteVerification.WebResource.GetToken
-import Network.Google.Resource.SiteVerification.WebResource.Insert
-import Network.Google.Resource.SiteVerification.WebResource.List
-import Network.Google.Resource.SiteVerification.WebResource.Patch
-import Network.Google.Resource.SiteVerification.WebResource.Update
+    -- ** SiteVerificationWebResourceResource_Site
+    SiteVerificationWebResourceResource_Site (..),
+    newSiteVerificationWebResourceResource_Site,
+  )
+where
+
 import Network.Google.SiteVerification.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Site Verification API service.
-type SiteVerificationAPI =
-     WebResourceInsertResource :<|>
-       WebResourceListResource
-       :<|> WebResourcePatchResource
-       :<|> WebResourceGetResource
-       :<|> WebResourceGetTokenResource
-       :<|> WebResourceDeleteResource
-       :<|> WebResourceUpdateResource
+import Network.Google.SiteVerification.WebResource.Delete
+import Network.Google.SiteVerification.WebResource.Get
+import Network.Google.SiteVerification.WebResource.GetToken
+import Network.Google.SiteVerification.WebResource.Insert
+import Network.Google.SiteVerification.WebResource.List
+import Network.Google.SiteVerification.WebResource.Patch
+import Network.Google.SiteVerification.WebResource.Update

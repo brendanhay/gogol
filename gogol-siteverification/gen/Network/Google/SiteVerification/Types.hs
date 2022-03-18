@@ -1,79 +1,81 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.SiteVerification.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.SiteVerification.Types
-    (
-    -- * Service Configuration
-      siteVerificationService
+  ( -- * Configuration
+    siteVerificationService,
 
     -- * OAuth Scopes
-    , siteVerificationVerifyOnlyScope
-    , siteVerificationScope
+    siteVerificationScope,
+    siteVerificationVerify_OnlyScope,
 
-    -- * SiteVerificationWebResourceGettokenRequestSite
-    , SiteVerificationWebResourceGettokenRequestSite
-    , siteVerificationWebResourceGettokenRequestSite
-    , svwrgrsIdentifier
-    , svwrgrsType
+    -- * Types
 
-    -- * SiteVerificationWebResourceGettokenResponse
-    , SiteVerificationWebResourceGettokenResponse
-    , siteVerificationWebResourceGettokenResponse
-    , svwrgrToken
-    , svwrgrMethod
+    -- ** SiteVerificationWebResourceGettokenRequest
+    SiteVerificationWebResourceGettokenRequest (..),
+    newSiteVerificationWebResourceGettokenRequest,
 
-    -- * SiteVerificationWebResourceListResponse
-    , SiteVerificationWebResourceListResponse
-    , siteVerificationWebResourceListResponse
-    , svwrlrItems
+    -- ** SiteVerificationWebResourceGettokenRequest_Site
+    SiteVerificationWebResourceGettokenRequest_Site (..),
+    newSiteVerificationWebResourceGettokenRequest_Site,
 
-    -- * SiteVerificationWebResourceResourceSite
-    , SiteVerificationWebResourceResourceSite
-    , siteVerificationWebResourceResourceSite
-    , svwrrsIdentifier
-    , svwrrsType
+    -- ** SiteVerificationWebResourceGettokenResponse
+    SiteVerificationWebResourceGettokenResponse (..),
+    newSiteVerificationWebResourceGettokenResponse,
 
-    -- * SiteVerificationWebResourceGettokenRequest
-    , SiteVerificationWebResourceGettokenRequest
-    , siteVerificationWebResourceGettokenRequest
-    , svwrgrSite
-    , svwrgrVerificationMethod
+    -- ** SiteVerificationWebResourceListResponse
+    SiteVerificationWebResourceListResponse (..),
+    newSiteVerificationWebResourceListResponse,
 
-    -- * SiteVerificationWebResourceResource
-    , SiteVerificationWebResourceResource
-    , siteVerificationWebResourceResource
-    , svwrrOwners
-    , svwrrId
-    , svwrrSite
-    ) where
+    -- ** SiteVerificationWebResourceResource
+    SiteVerificationWebResourceResource (..),
+    newSiteVerificationWebResourceResource,
 
-import Network.Google.Prelude
-import Network.Google.SiteVerification.Types.Product
-import Network.Google.SiteVerification.Types.Sum
+    -- ** SiteVerificationWebResourceResource_Site
+    SiteVerificationWebResourceResource_Site (..),
+    newSiteVerificationWebResourceResource_Site,
+  )
+where
 
--- | Default request referring to version 'v1' of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
-siteVerificationService :: ServiceConfig
-siteVerificationService
-  = defaultService (ServiceId "siteVerification:v1")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.SiteVerification.Internal.Product
+import Network.Google.SiteVerification.Internal.Sum
 
--- | Manage your new site verifications with Google
-siteVerificationVerifyOnlyScope :: Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
-siteVerificationVerifyOnlyScope = Proxy
+-- | Default request referring to version @v1@ of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
+siteVerificationService :: Core.ServiceConfig
+siteVerificationService =
+  Core.defaultService
+    (Core.ServiceId "siteVerification:v1")
+    "www.googleapis.com"
 
 -- | Manage the list of sites and domains you control
-siteVerificationScope :: Proxy '["https://www.googleapis.com/auth/siteverification"]
-siteVerificationScope = Proxy
+siteVerificationScope :: Core.Proxy '["https://www.googleapis.com/auth/siteverification"]
+siteVerificationScope = Core.Proxy
+
+-- | Manage your new site verifications with Google
+siteVerificationVerify_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
+siteVerificationVerify_OnlyScope = Core.Proxy
