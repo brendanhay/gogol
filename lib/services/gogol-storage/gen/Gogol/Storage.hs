@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,548 +36,548 @@
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference>
 module Gogol.Storage
-  ( -- * Configuration
-    storageService,
+    (
+    -- * Configuration
+      storageService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    , cloudPlatformScope
+    , cloudPlatformReadOnlyScope
+    , storageFull_controlScope
+    , storageRead_OnlyScope
+    , storageRead_writeScope
 
     -- * Resources
 
     -- ** storage.bucketAccessControls.delete
-    StorageBucketAccessControlsDeleteResource,
-    newStorageBucketAccessControlsDelete,
-    StorageBucketAccessControlsDelete,
+    , StorageBucketAccessControlsDeleteResource
+    , newStorageBucketAccessControlsDelete
+    , StorageBucketAccessControlsDelete
 
     -- ** storage.bucketAccessControls.get
-    StorageBucketAccessControlsGetResource,
-    newStorageBucketAccessControlsGet,
-    StorageBucketAccessControlsGet,
+    , StorageBucketAccessControlsGetResource
+    , newStorageBucketAccessControlsGet
+    , StorageBucketAccessControlsGet
 
     -- ** storage.bucketAccessControls.insert
-    StorageBucketAccessControlsInsertResource,
-    newStorageBucketAccessControlsInsert,
-    StorageBucketAccessControlsInsert,
+    , StorageBucketAccessControlsInsertResource
+    , newStorageBucketAccessControlsInsert
+    , StorageBucketAccessControlsInsert
 
     -- ** storage.bucketAccessControls.list
-    StorageBucketAccessControlsListResource,
-    newStorageBucketAccessControlsList,
-    StorageBucketAccessControlsList,
+    , StorageBucketAccessControlsListResource
+    , newStorageBucketAccessControlsList
+    , StorageBucketAccessControlsList
 
     -- ** storage.bucketAccessControls.patch
-    StorageBucketAccessControlsPatchResource,
-    newStorageBucketAccessControlsPatch,
-    StorageBucketAccessControlsPatch,
+    , StorageBucketAccessControlsPatchResource
+    , newStorageBucketAccessControlsPatch
+    , StorageBucketAccessControlsPatch
 
     -- ** storage.bucketAccessControls.update
-    StorageBucketAccessControlsUpdateResource,
-    newStorageBucketAccessControlsUpdate,
-    StorageBucketAccessControlsUpdate,
+    , StorageBucketAccessControlsUpdateResource
+    , newStorageBucketAccessControlsUpdate
+    , StorageBucketAccessControlsUpdate
 
     -- ** storage.buckets.delete
-    StorageBucketsDeleteResource,
-    newStorageBucketsDelete,
-    StorageBucketsDelete,
+    , StorageBucketsDeleteResource
+    , newStorageBucketsDelete
+    , StorageBucketsDelete
 
     -- ** storage.buckets.get
-    StorageBucketsGetResource,
-    newStorageBucketsGet,
-    StorageBucketsGet,
+    , StorageBucketsGetResource
+    , newStorageBucketsGet
+    , StorageBucketsGet
 
     -- ** storage.buckets.getIamPolicy
-    StorageBucketsGetIamPolicyResource,
-    newStorageBucketsGetIamPolicy,
-    StorageBucketsGetIamPolicy,
+    , StorageBucketsGetIamPolicyResource
+    , newStorageBucketsGetIamPolicy
+    , StorageBucketsGetIamPolicy
 
     -- ** storage.buckets.insert
-    StorageBucketsInsertResource,
-    newStorageBucketsInsert,
-    StorageBucketsInsert,
+    , StorageBucketsInsertResource
+    , newStorageBucketsInsert
+    , StorageBucketsInsert
 
     -- ** storage.buckets.list
-    StorageBucketsListResource,
-    newStorageBucketsList,
-    StorageBucketsList,
+    , StorageBucketsListResource
+    , newStorageBucketsList
+    , StorageBucketsList
 
     -- ** storage.buckets.lockRetentionPolicy
-    StorageBucketsLockRetentionPolicyResource,
-    newStorageBucketsLockRetentionPolicy,
-    StorageBucketsLockRetentionPolicy,
+    , StorageBucketsLockRetentionPolicyResource
+    , newStorageBucketsLockRetentionPolicy
+    , StorageBucketsLockRetentionPolicy
 
     -- ** storage.buckets.patch
-    StorageBucketsPatchResource,
-    newStorageBucketsPatch,
-    StorageBucketsPatch,
+    , StorageBucketsPatchResource
+    , newStorageBucketsPatch
+    , StorageBucketsPatch
 
     -- ** storage.buckets.setIamPolicy
-    StorageBucketsSetIamPolicyResource,
-    newStorageBucketsSetIamPolicy,
-    StorageBucketsSetIamPolicy,
+    , StorageBucketsSetIamPolicyResource
+    , newStorageBucketsSetIamPolicy
+    , StorageBucketsSetIamPolicy
 
     -- ** storage.buckets.testIamPermissions
-    StorageBucketsTestIamPermissionsResource,
-    newStorageBucketsTestIamPermissions,
-    StorageBucketsTestIamPermissions,
+    , StorageBucketsTestIamPermissionsResource
+    , newStorageBucketsTestIamPermissions
+    , StorageBucketsTestIamPermissions
 
     -- ** storage.buckets.update
-    StorageBucketsUpdateResource,
-    newStorageBucketsUpdate,
-    StorageBucketsUpdate,
+    , StorageBucketsUpdateResource
+    , newStorageBucketsUpdate
+    , StorageBucketsUpdate
 
     -- ** storage.channels.stop
-    StorageChannelsStopResource,
-    newStorageChannelsStop,
-    StorageChannelsStop,
+    , StorageChannelsStopResource
+    , newStorageChannelsStop
+    , StorageChannelsStop
 
     -- ** storage.defaultObjectAccessControls.delete
-    StorageDefaultObjectAccessControlsDeleteResource,
-    newStorageDefaultObjectAccessControlsDelete,
-    StorageDefaultObjectAccessControlsDelete,
+    , StorageDefaultObjectAccessControlsDeleteResource
+    , newStorageDefaultObjectAccessControlsDelete
+    , StorageDefaultObjectAccessControlsDelete
 
     -- ** storage.defaultObjectAccessControls.get
-    StorageDefaultObjectAccessControlsGetResource,
-    newStorageDefaultObjectAccessControlsGet,
-    StorageDefaultObjectAccessControlsGet,
+    , StorageDefaultObjectAccessControlsGetResource
+    , newStorageDefaultObjectAccessControlsGet
+    , StorageDefaultObjectAccessControlsGet
 
     -- ** storage.defaultObjectAccessControls.insert
-    StorageDefaultObjectAccessControlsInsertResource,
-    newStorageDefaultObjectAccessControlsInsert,
-    StorageDefaultObjectAccessControlsInsert,
+    , StorageDefaultObjectAccessControlsInsertResource
+    , newStorageDefaultObjectAccessControlsInsert
+    , StorageDefaultObjectAccessControlsInsert
 
     -- ** storage.defaultObjectAccessControls.list
-    StorageDefaultObjectAccessControlsListResource,
-    newStorageDefaultObjectAccessControlsList,
-    StorageDefaultObjectAccessControlsList,
+    , StorageDefaultObjectAccessControlsListResource
+    , newStorageDefaultObjectAccessControlsList
+    , StorageDefaultObjectAccessControlsList
 
     -- ** storage.defaultObjectAccessControls.patch
-    StorageDefaultObjectAccessControlsPatchResource,
-    newStorageDefaultObjectAccessControlsPatch,
-    StorageDefaultObjectAccessControlsPatch,
+    , StorageDefaultObjectAccessControlsPatchResource
+    , newStorageDefaultObjectAccessControlsPatch
+    , StorageDefaultObjectAccessControlsPatch
 
     -- ** storage.defaultObjectAccessControls.update
-    StorageDefaultObjectAccessControlsUpdateResource,
-    newStorageDefaultObjectAccessControlsUpdate,
-    StorageDefaultObjectAccessControlsUpdate,
+    , StorageDefaultObjectAccessControlsUpdateResource
+    , newStorageDefaultObjectAccessControlsUpdate
+    , StorageDefaultObjectAccessControlsUpdate
 
     -- ** storage.notifications.delete
-    StorageNotificationsDeleteResource,
-    newStorageNotificationsDelete,
-    StorageNotificationsDelete,
+    , StorageNotificationsDeleteResource
+    , newStorageNotificationsDelete
+    , StorageNotificationsDelete
 
     -- ** storage.notifications.get
-    StorageNotificationsGetResource,
-    newStorageNotificationsGet,
-    StorageNotificationsGet,
+    , StorageNotificationsGetResource
+    , newStorageNotificationsGet
+    , StorageNotificationsGet
 
     -- ** storage.notifications.insert
-    StorageNotificationsInsertResource,
-    newStorageNotificationsInsert,
-    StorageNotificationsInsert,
+    , StorageNotificationsInsertResource
+    , newStorageNotificationsInsert
+    , StorageNotificationsInsert
 
     -- ** storage.notifications.list
-    StorageNotificationsListResource,
-    newStorageNotificationsList,
-    StorageNotificationsList,
+    , StorageNotificationsListResource
+    , newStorageNotificationsList
+    , StorageNotificationsList
 
     -- ** storage.objectAccessControls.delete
-    StorageObjectAccessControlsDeleteResource,
-    newStorageObjectAccessControlsDelete,
-    StorageObjectAccessControlsDelete,
+    , StorageObjectAccessControlsDeleteResource
+    , newStorageObjectAccessControlsDelete
+    , StorageObjectAccessControlsDelete
 
     -- ** storage.objectAccessControls.get
-    StorageObjectAccessControlsGetResource,
-    newStorageObjectAccessControlsGet,
-    StorageObjectAccessControlsGet,
+    , StorageObjectAccessControlsGetResource
+    , newStorageObjectAccessControlsGet
+    , StorageObjectAccessControlsGet
 
     -- ** storage.objectAccessControls.insert
-    StorageObjectAccessControlsInsertResource,
-    newStorageObjectAccessControlsInsert,
-    StorageObjectAccessControlsInsert,
+    , StorageObjectAccessControlsInsertResource
+    , newStorageObjectAccessControlsInsert
+    , StorageObjectAccessControlsInsert
 
     -- ** storage.objectAccessControls.list
-    StorageObjectAccessControlsListResource,
-    newStorageObjectAccessControlsList,
-    StorageObjectAccessControlsList,
+    , StorageObjectAccessControlsListResource
+    , newStorageObjectAccessControlsList
+    , StorageObjectAccessControlsList
 
     -- ** storage.objectAccessControls.patch
-    StorageObjectAccessControlsPatchResource,
-    newStorageObjectAccessControlsPatch,
-    StorageObjectAccessControlsPatch,
+    , StorageObjectAccessControlsPatchResource
+    , newStorageObjectAccessControlsPatch
+    , StorageObjectAccessControlsPatch
 
     -- ** storage.objectAccessControls.update
-    StorageObjectAccessControlsUpdateResource,
-    newStorageObjectAccessControlsUpdate,
-    StorageObjectAccessControlsUpdate,
+    , StorageObjectAccessControlsUpdateResource
+    , newStorageObjectAccessControlsUpdate
+    , StorageObjectAccessControlsUpdate
 
     -- ** storage.objects.compose
-    StorageObjectsComposeResource,
-    newStorageObjectsCompose,
-    StorageObjectsCompose,
+    , StorageObjectsComposeResource
+    , newStorageObjectsCompose
+    , StorageObjectsCompose
 
     -- ** storage.objects.copy
-    StorageObjectsCopyResource,
-    newStorageObjectsCopy,
-    StorageObjectsCopy,
+    , StorageObjectsCopyResource
+    , newStorageObjectsCopy
+    , StorageObjectsCopy
 
     -- ** storage.objects.delete
-    StorageObjectsDeleteResource,
-    newStorageObjectsDelete,
-    StorageObjectsDelete,
+    , StorageObjectsDeleteResource
+    , newStorageObjectsDelete
+    , StorageObjectsDelete
 
     -- ** storage.objects.get
-    StorageObjectsGetResource,
-    newStorageObjectsGet,
-    StorageObjectsGet,
+    , StorageObjectsGetResource
+    , newStorageObjectsGet
+    , StorageObjectsGet
 
     -- ** storage.objects.getIamPolicy
-    StorageObjectsGetIamPolicyResource,
-    newStorageObjectsGetIamPolicy,
-    StorageObjectsGetIamPolicy,
+    , StorageObjectsGetIamPolicyResource
+    , newStorageObjectsGetIamPolicy
+    , StorageObjectsGetIamPolicy
 
     -- ** storage.objects.insert
-    StorageObjectsInsertResource,
-    newStorageObjectsInsert,
-    StorageObjectsInsert,
+    , StorageObjectsInsertResource
+    , newStorageObjectsInsert
+    , StorageObjectsInsert
 
     -- ** storage.objects.list
-    StorageObjectsListResource,
-    newStorageObjectsList,
-    StorageObjectsList,
+    , StorageObjectsListResource
+    , newStorageObjectsList
+    , StorageObjectsList
 
     -- ** storage.objects.patch
-    StorageObjectsPatchResource,
-    newStorageObjectsPatch,
-    StorageObjectsPatch,
+    , StorageObjectsPatchResource
+    , newStorageObjectsPatch
+    , StorageObjectsPatch
 
     -- ** storage.objects.rewrite
-    StorageObjectsRewriteResource,
-    newStorageObjectsRewrite,
-    StorageObjectsRewrite,
+    , StorageObjectsRewriteResource
+    , newStorageObjectsRewrite
+    , StorageObjectsRewrite
 
     -- ** storage.objects.setIamPolicy
-    StorageObjectsSetIamPolicyResource,
-    newStorageObjectsSetIamPolicy,
-    StorageObjectsSetIamPolicy,
+    , StorageObjectsSetIamPolicyResource
+    , newStorageObjectsSetIamPolicy
+    , StorageObjectsSetIamPolicy
 
     -- ** storage.objects.testIamPermissions
-    StorageObjectsTestIamPermissionsResource,
-    newStorageObjectsTestIamPermissions,
-    StorageObjectsTestIamPermissions,
+    , StorageObjectsTestIamPermissionsResource
+    , newStorageObjectsTestIamPermissions
+    , StorageObjectsTestIamPermissions
 
     -- ** storage.objects.update
-    StorageObjectsUpdateResource,
-    newStorageObjectsUpdate,
-    StorageObjectsUpdate,
+    , StorageObjectsUpdateResource
+    , newStorageObjectsUpdate
+    , StorageObjectsUpdate
 
     -- ** storage.objects.watchAll
-    StorageObjectsWatchAllResource,
-    newStorageObjectsWatchAll,
-    StorageObjectsWatchAll,
+    , StorageObjectsWatchAllResource
+    , newStorageObjectsWatchAll
+    , StorageObjectsWatchAll
 
     -- ** storage.projects.hmacKeys.create
-    StorageProjectsHmacKeysCreateResource,
-    newStorageProjectsHmacKeysCreate,
-    StorageProjectsHmacKeysCreate,
+    , StorageProjectsHmacKeysCreateResource
+    , newStorageProjectsHmacKeysCreate
+    , StorageProjectsHmacKeysCreate
 
     -- ** storage.projects.hmacKeys.delete
-    StorageProjectsHmacKeysDeleteResource,
-    newStorageProjectsHmacKeysDelete,
-    StorageProjectsHmacKeysDelete,
+    , StorageProjectsHmacKeysDeleteResource
+    , newStorageProjectsHmacKeysDelete
+    , StorageProjectsHmacKeysDelete
 
     -- ** storage.projects.hmacKeys.get
-    StorageProjectsHmacKeysGetResource,
-    newStorageProjectsHmacKeysGet,
-    StorageProjectsHmacKeysGet,
+    , StorageProjectsHmacKeysGetResource
+    , newStorageProjectsHmacKeysGet
+    , StorageProjectsHmacKeysGet
 
     -- ** storage.projects.hmacKeys.list
-    StorageProjectsHmacKeysListResource,
-    newStorageProjectsHmacKeysList,
-    StorageProjectsHmacKeysList,
+    , StorageProjectsHmacKeysListResource
+    , newStorageProjectsHmacKeysList
+    , StorageProjectsHmacKeysList
 
     -- ** storage.projects.hmacKeys.update
-    StorageProjectsHmacKeysUpdateResource,
-    newStorageProjectsHmacKeysUpdate,
-    StorageProjectsHmacKeysUpdate,
+    , StorageProjectsHmacKeysUpdateResource
+    , newStorageProjectsHmacKeysUpdate
+    , StorageProjectsHmacKeysUpdate
 
     -- ** storage.projects.serviceAccount.get
-    StorageProjectsServiceAccountGetResource,
-    newStorageProjectsServiceAccountGet,
-    StorageProjectsServiceAccountGet,
+    , StorageProjectsServiceAccountGetResource
+    , newStorageProjectsServiceAccountGet
+    , StorageProjectsServiceAccountGet
 
     -- * Types
 
     -- ** Bucket
-    Bucket (..),
-    newBucket,
+    , Bucket (..)
+    , newBucket
 
     -- ** Bucket_Autoclass
-    Bucket_Autoclass (..),
-    newBucket_Autoclass,
+    , Bucket_Autoclass (..)
+    , newBucket_Autoclass
 
     -- ** Bucket_Billing
-    Bucket_Billing (..),
-    newBucket_Billing,
+    , Bucket_Billing (..)
+    , newBucket_Billing
 
     -- ** Bucket_CorsItem
-    Bucket_CorsItem (..),
-    newBucket_CorsItem,
+    , Bucket_CorsItem (..)
+    , newBucket_CorsItem
 
     -- ** Bucket_CustomPlacementConfig
-    Bucket_CustomPlacementConfig (..),
-    newBucket_CustomPlacementConfig,
+    , Bucket_CustomPlacementConfig (..)
+    , newBucket_CustomPlacementConfig
 
     -- ** Bucket_Encryption
-    Bucket_Encryption (..),
-    newBucket_Encryption,
+    , Bucket_Encryption (..)
+    , newBucket_Encryption
 
     -- ** Bucket_IamConfiguration
-    Bucket_IamConfiguration (..),
-    newBucket_IamConfiguration,
+    , Bucket_IamConfiguration (..)
+    , newBucket_IamConfiguration
 
     -- ** Bucket_IamConfiguration_BucketPolicyOnly
-    Bucket_IamConfiguration_BucketPolicyOnly (..),
-    newBucket_IamConfiguration_BucketPolicyOnly,
+    , Bucket_IamConfiguration_BucketPolicyOnly (..)
+    , newBucket_IamConfiguration_BucketPolicyOnly
 
     -- ** Bucket_IamConfiguration_UniformBucketLevelAccess
-    Bucket_IamConfiguration_UniformBucketLevelAccess (..),
-    newBucket_IamConfiguration_UniformBucketLevelAccess,
+    , Bucket_IamConfiguration_UniformBucketLevelAccess (..)
+    , newBucket_IamConfiguration_UniformBucketLevelAccess
 
     -- ** Bucket_Labels
-    Bucket_Labels (..),
-    newBucket_Labels,
+    , Bucket_Labels (..)
+    , newBucket_Labels
 
     -- ** Bucket_Lifecycle
-    Bucket_Lifecycle (..),
-    newBucket_Lifecycle,
+    , Bucket_Lifecycle (..)
+    , newBucket_Lifecycle
 
     -- ** Bucket_Lifecycle_RuleItem
-    Bucket_Lifecycle_RuleItem (..),
-    newBucket_Lifecycle_RuleItem,
+    , Bucket_Lifecycle_RuleItem (..)
+    , newBucket_Lifecycle_RuleItem
 
     -- ** Bucket_Lifecycle_RuleItem_Action
-    Bucket_Lifecycle_RuleItem_Action (..),
-    newBucket_Lifecycle_RuleItem_Action,
+    , Bucket_Lifecycle_RuleItem_Action (..)
+    , newBucket_Lifecycle_RuleItem_Action
 
     -- ** Bucket_Lifecycle_RuleItem_Condition
-    Bucket_Lifecycle_RuleItem_Condition (..),
-    newBucket_Lifecycle_RuleItem_Condition,
+    , Bucket_Lifecycle_RuleItem_Condition (..)
+    , newBucket_Lifecycle_RuleItem_Condition
 
     -- ** Bucket_Logging
-    Bucket_Logging (..),
-    newBucket_Logging,
+    , Bucket_Logging (..)
+    , newBucket_Logging
 
     -- ** Bucket_Owner
-    Bucket_Owner (..),
-    newBucket_Owner,
+    , Bucket_Owner (..)
+    , newBucket_Owner
 
     -- ** Bucket_RetentionPolicy
-    Bucket_RetentionPolicy (..),
-    newBucket_RetentionPolicy,
+    , Bucket_RetentionPolicy (..)
+    , newBucket_RetentionPolicy
 
     -- ** Bucket_Versioning
-    Bucket_Versioning (..),
-    newBucket_Versioning,
+    , Bucket_Versioning (..)
+    , newBucket_Versioning
 
     -- ** Bucket_Website
-    Bucket_Website (..),
-    newBucket_Website,
+    , Bucket_Website (..)
+    , newBucket_Website
 
     -- ** BucketAccessControl
-    BucketAccessControl (..),
-    newBucketAccessControl,
+    , BucketAccessControl (..)
+    , newBucketAccessControl
 
     -- ** BucketAccessControl_ProjectTeam
-    BucketAccessControl_ProjectTeam (..),
-    newBucketAccessControl_ProjectTeam,
+    , BucketAccessControl_ProjectTeam (..)
+    , newBucketAccessControl_ProjectTeam
 
     -- ** BucketAccessControls
-    BucketAccessControls (..),
-    newBucketAccessControls,
+    , BucketAccessControls (..)
+    , newBucketAccessControls
 
     -- ** Buckets
-    Buckets (..),
-    newBuckets,
+    , Buckets (..)
+    , newBuckets
 
     -- ** Channel
-    Channel (..),
-    newChannel,
+    , Channel (..)
+    , newChannel
 
     -- ** Channel_Params
-    Channel_Params (..),
-    newChannel_Params,
+    , Channel_Params (..)
+    , newChannel_Params
 
     -- ** ComposeRequest
-    ComposeRequest (..),
-    newComposeRequest,
+    , ComposeRequest (..)
+    , newComposeRequest
 
     -- ** ComposeRequest_SourceObjectsItem
-    ComposeRequest_SourceObjectsItem (..),
-    newComposeRequest_SourceObjectsItem,
+    , ComposeRequest_SourceObjectsItem (..)
+    , newComposeRequest_SourceObjectsItem
 
     -- ** ComposeRequest_SourceObjectsItem_ObjectPreconditions
-    ComposeRequest_SourceObjectsItem_ObjectPreconditions (..),
-    newComposeRequest_SourceObjectsItem_ObjectPreconditions,
+    , ComposeRequest_SourceObjectsItem_ObjectPreconditions (..)
+    , newComposeRequest_SourceObjectsItem_ObjectPreconditions
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** HmacKey
-    HmacKey (..),
-    newHmacKey,
+    , HmacKey (..)
+    , newHmacKey
 
     -- ** HmacKeyMetadata
-    HmacKeyMetadata (..),
-    newHmacKeyMetadata,
+    , HmacKeyMetadata (..)
+    , newHmacKeyMetadata
 
     -- ** HmacKeysMetadata
-    HmacKeysMetadata (..),
-    newHmacKeysMetadata,
+    , HmacKeysMetadata (..)
+    , newHmacKeysMetadata
 
     -- ** Notification
-    Notification (..),
-    newNotification,
+    , Notification (..)
+    , newNotification
 
     -- ** Notification_Custom_attributes
-    Notification_Custom_attributes (..),
-    newNotification_Custom_attributes,
+    , Notification_Custom_attributes (..)
+    , newNotification_Custom_attributes
 
     -- ** Notifications
-    Notifications (..),
-    newNotifications,
+    , Notifications (..)
+    , newNotifications
 
     -- ** Object
-    Object (..),
-    newObject,
+    , Object (..)
+    , newObject
 
     -- ** Object_CustomerEncryption
-    Object_CustomerEncryption (..),
-    newObject_CustomerEncryption,
+    , Object_CustomerEncryption (..)
+    , newObject_CustomerEncryption
 
     -- ** Object_Metadata
-    Object_Metadata (..),
-    newObject_Metadata,
+    , Object_Metadata (..)
+    , newObject_Metadata
 
     -- ** Object_Owner
-    Object_Owner (..),
-    newObject_Owner,
+    , Object_Owner (..)
+    , newObject_Owner
 
     -- ** ObjectAccessControl
-    ObjectAccessControl (..),
-    newObjectAccessControl,
+    , ObjectAccessControl (..)
+    , newObjectAccessControl
 
     -- ** ObjectAccessControl_ProjectTeam
-    ObjectAccessControl_ProjectTeam (..),
-    newObjectAccessControl_ProjectTeam,
+    , ObjectAccessControl_ProjectTeam (..)
+    , newObjectAccessControl_ProjectTeam
 
     -- ** ObjectAccessControls
-    ObjectAccessControls (..),
-    newObjectAccessControls,
+    , ObjectAccessControls (..)
+    , newObjectAccessControls
 
     -- ** Objects
-    Objects (..),
-    newObjects,
+    , Objects (..)
+    , newObjects
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Policy_BindingsItem
-    Policy_BindingsItem (..),
-    newPolicy_BindingsItem,
+    , Policy_BindingsItem (..)
+    , newPolicy_BindingsItem
 
     -- ** RewriteResponse
-    RewriteResponse (..),
-    newRewriteResponse,
+    , RewriteResponse (..)
+    , newRewriteResponse
 
     -- ** ServiceAccount
-    ServiceAccount (..),
-    newServiceAccount,
+    , ServiceAccount (..)
+    , newServiceAccount
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** BucketsGetProjection
-    BucketsGetProjection (..),
+    , BucketsGetProjection (..)
 
     -- ** BucketsInsertPredefinedAcl
-    BucketsInsertPredefinedAcl (..),
+    , BucketsInsertPredefinedAcl (..)
 
     -- ** BucketsInsertPredefinedDefaultObjectAcl
-    BucketsInsertPredefinedDefaultObjectAcl (..),
+    , BucketsInsertPredefinedDefaultObjectAcl (..)
 
     -- ** BucketsInsertProjection
-    BucketsInsertProjection (..),
+    , BucketsInsertProjection (..)
 
     -- ** BucketsListProjection
-    BucketsListProjection (..),
+    , BucketsListProjection (..)
 
     -- ** BucketsPatchPredefinedAcl
-    BucketsPatchPredefinedAcl (..),
+    , BucketsPatchPredefinedAcl (..)
 
     -- ** BucketsPatchPredefinedDefaultObjectAcl
-    BucketsPatchPredefinedDefaultObjectAcl (..),
+    , BucketsPatchPredefinedDefaultObjectAcl (..)
 
     -- ** BucketsPatchProjection
-    BucketsPatchProjection (..),
+    , BucketsPatchProjection (..)
 
     -- ** BucketsUpdatePredefinedAcl
-    BucketsUpdatePredefinedAcl (..),
+    , BucketsUpdatePredefinedAcl (..)
 
     -- ** BucketsUpdatePredefinedDefaultObjectAcl
-    BucketsUpdatePredefinedDefaultObjectAcl (..),
+    , BucketsUpdatePredefinedDefaultObjectAcl (..)
 
     -- ** BucketsUpdateProjection
-    BucketsUpdateProjection (..),
+    , BucketsUpdateProjection (..)
 
     -- ** ObjectsComposeDestinationPredefinedAcl
-    ObjectsComposeDestinationPredefinedAcl (..),
+    , ObjectsComposeDestinationPredefinedAcl (..)
 
     -- ** ObjectsCopyDestinationPredefinedAcl
-    ObjectsCopyDestinationPredefinedAcl (..),
+    , ObjectsCopyDestinationPredefinedAcl (..)
 
     -- ** ObjectsCopyProjection
-    ObjectsCopyProjection (..),
+    , ObjectsCopyProjection (..)
 
     -- ** ObjectsGetProjection
-    ObjectsGetProjection (..),
+    , ObjectsGetProjection (..)
 
     -- ** ObjectsInsertPredefinedAcl
-    ObjectsInsertPredefinedAcl (..),
+    , ObjectsInsertPredefinedAcl (..)
 
     -- ** ObjectsInsertProjection
-    ObjectsInsertProjection (..),
+    , ObjectsInsertProjection (..)
 
     -- ** ObjectsListProjection
-    ObjectsListProjection (..),
+    , ObjectsListProjection (..)
 
     -- ** ObjectsPatchPredefinedAcl
-    ObjectsPatchPredefinedAcl (..),
+    , ObjectsPatchPredefinedAcl (..)
 
     -- ** ObjectsPatchProjection
-    ObjectsPatchProjection (..),
+    , ObjectsPatchProjection (..)
 
     -- ** ObjectsRewriteDestinationPredefinedAcl
-    ObjectsRewriteDestinationPredefinedAcl (..),
+    , ObjectsRewriteDestinationPredefinedAcl (..)
 
     -- ** ObjectsRewriteProjection
-    ObjectsRewriteProjection (..),
+    , ObjectsRewriteProjection (..)
 
     -- ** ObjectsUpdatePredefinedAcl
-    ObjectsUpdatePredefinedAcl (..),
+    , ObjectsUpdatePredefinedAcl (..)
 
     -- ** ObjectsUpdateProjection
-    ObjectsUpdateProjection (..),
+    , ObjectsUpdateProjection (..)
 
     -- ** ObjectsWatchAllProjection
-    ObjectsWatchAllProjection (..),
-  )
-where
+    , ObjectsWatchAllProjection (..)
+    ) where
 
 import Gogol.Storage.BucketAccessControls.Delete
 import Gogol.Storage.BucketAccessControls.Get
