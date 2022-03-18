@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.PageSpeed
-    Network.Google.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
-    Network.Google.PageSpeed.Types
+    Gogol.PageSpeed
+    Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
+    Gogol.PageSpeed.Types
 
   other-modules:
-    Network.Google.PageSpeed.Internal.Product
-    Network.Google.PageSpeed.Internal.Sum
+    Gogol.PageSpeed.Internal.Product
+    Gogol.PageSpeed.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

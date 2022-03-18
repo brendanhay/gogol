@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
+-- Module      : Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.
 --
 -- /See:/ <https://developers.google.com/speed/docs/insights/v5/about PageSpeed Insights API Reference> for @pagespeedonline.pagespeedapi.runpagespeed@.
-module Network.Google.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
+module Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
   ( -- * Resource
     PagespeedonlinePagespeedapiRunpagespeedResource,
 
@@ -39,8 +39,8 @@ module Network.Google.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
   )
 where
 
-import Network.Google.PageSpeed.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.PageSpeed.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @pagespeedonline.pagespeedapi.runpagespeed@ method which the
 -- 'PagespeedonlinePagespeedapiRunpagespeed' request conforms to.
