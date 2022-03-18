@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,115 +31,116 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Tracing.Types
-  ( -- * Configuration
-    tracingService,
+    (
+    -- * Configuration
+      tracingService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    traceAppendScope,
-    traceReadOnlyScope,
+    , cloudPlatformScope
+    , traceAppendScope
+    , traceReadOnlyScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Annotation
-    Annotation (..),
-    newAnnotation,
+    , Annotation (..)
+    , newAnnotation
 
     -- ** AttributeValue
-    AttributeValue (..),
-    newAttributeValue,
+    , AttributeValue (..)
+    , newAttributeValue
 
     -- ** Attributes
-    Attributes (..),
-    newAttributes,
+    , Attributes (..)
+    , newAttributes
 
     -- ** Attributes_AttributeMap
-    Attributes_AttributeMap (..),
-    newAttributes_AttributeMap,
+    , Attributes_AttributeMap (..)
+    , newAttributes_AttributeMap
 
     -- ** BatchWriteSpansRequest
-    BatchWriteSpansRequest (..),
-    newBatchWriteSpansRequest,
+    , BatchWriteSpansRequest (..)
+    , newBatchWriteSpansRequest
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Link
-    Link (..),
-    newLink,
+    , Link (..)
+    , newLink
 
     -- ** Link_Type
-    Link_Type (..),
+    , Link_Type (..)
 
     -- ** Links
-    Links (..),
-    newLinks,
+    , Links (..)
+    , newLinks
 
     -- ** ListSpansResponse
-    ListSpansResponse (..),
-    newListSpansResponse,
+    , ListSpansResponse (..)
+    , newListSpansResponse
 
     -- ** ListTracesResponse
-    ListTracesResponse (..),
-    newListTracesResponse,
+    , ListTracesResponse (..)
+    , newListTracesResponse
 
     -- ** Module
-    Module (..),
-    newModule,
+    , Module (..)
+    , newModule
 
     -- ** NetworkEvent
-    NetworkEvent (..),
-    newNetworkEvent,
+    , NetworkEvent (..)
+    , newNetworkEvent
 
     -- ** NetworkEvent_Type
-    NetworkEvent_Type (..),
+    , NetworkEvent_Type (..)
 
     -- ** Span
-    Span (..),
-    newSpan,
+    , Span (..)
+    , newSpan
 
     -- ** StackFrame
-    StackFrame (..),
-    newStackFrame,
+    , StackFrame (..)
+    , newStackFrame
 
     -- ** StackFrames
-    StackFrames (..),
-    newStackFrames,
+    , StackFrames (..)
+    , newStackFrames
 
     -- ** StackTrace
-    StackTrace (..),
-    newStackTrace,
+    , StackTrace (..)
+    , newStackTrace
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimeEvent
-    TimeEvent (..),
-    newTimeEvent,
+    , TimeEvent (..)
+    , newTimeEvent
 
     -- ** TimeEvents
-    TimeEvents (..),
-    newTimeEvents,
+    , TimeEvents (..)
+    , newTimeEvents
 
     -- ** Trace
-    Trace (..),
-    newTrace,
+    , Trace (..)
+    , newTrace
 
     -- ** TruncatableString
-    TruncatableString (..),
-    newTruncatableString,
-  )
-where
+    , TruncatableString (..)
+    , newTruncatableString
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Tracing.Internal.Product
@@ -141,10 +148,9 @@ import Gogol.Tracing.Internal.Sum
 
 -- | Default request referring to version @v2@ of the Google Tracing API. This contains the host and root path used as a starting point for constructing service requests.
 tracingService :: Core.ServiceConfig
-tracingService =
-  Core.defaultService
-    (Core.ServiceId "tracing:v2")
-    "tracing.googleapis.com"
+tracingService
+  = Core.defaultService (Core.ServiceId "tracing:v2")
+      "tracing.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
