@@ -39,41 +39,42 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ServiceNetworking
-    Network.Google.ServiceNetworking.Operations.Cancel
-    Network.Google.ServiceNetworking.Operations.Delete
-    Network.Google.ServiceNetworking.Operations.Get
-    Network.Google.ServiceNetworking.Operations.List
-    Network.Google.ServiceNetworking.Services.AddSubnetwork
-    Network.Google.ServiceNetworking.Services.Connections.Create
-    Network.Google.ServiceNetworking.Services.Connections.DeleteConnection
-    Network.Google.ServiceNetworking.Services.Connections.List
-    Network.Google.ServiceNetworking.Services.Connections.Patch
-    Network.Google.ServiceNetworking.Services.DisableVpcServiceControls
-    Network.Google.ServiceNetworking.Services.DnsRecordSets.Add
-    Network.Google.ServiceNetworking.Services.DnsRecordSets.Remove
-    Network.Google.ServiceNetworking.Services.DnsRecordSets.Update
-    Network.Google.ServiceNetworking.Services.DnsZones.Add
-    Network.Google.ServiceNetworking.Services.DnsZones.Remove
-    Network.Google.ServiceNetworking.Services.EnableVpcServiceControls
-    Network.Google.ServiceNetworking.Services.Projects.Global.Networks.Get
-    Network.Google.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.Create
-    Network.Google.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.Delete
-    Network.Google.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.List
-    Network.Google.ServiceNetworking.Services.Projects.Global.Networks.UpdateConsumerConfig
-    Network.Google.ServiceNetworking.Services.Roles.Add
-    Network.Google.ServiceNetworking.Services.SearchRange
-    Network.Google.ServiceNetworking.Services.Validate
-    Network.Google.ServiceNetworking.Types
+    Gogol.ServiceNetworking
+    Gogol.ServiceNetworking.Operations.Cancel
+    Gogol.ServiceNetworking.Operations.Delete
+    Gogol.ServiceNetworking.Operations.Get
+    Gogol.ServiceNetworking.Operations.List
+    Gogol.ServiceNetworking.Services.AddSubnetwork
+    Gogol.ServiceNetworking.Services.Connections.Create
+    Gogol.ServiceNetworking.Services.Connections.DeleteConnection
+    Gogol.ServiceNetworking.Services.Connections.List
+    Gogol.ServiceNetworking.Services.Connections.Patch
+    Gogol.ServiceNetworking.Services.DisableVpcServiceControls
+    Gogol.ServiceNetworking.Services.DnsRecordSets.Add
+    Gogol.ServiceNetworking.Services.DnsRecordSets.Remove
+    Gogol.ServiceNetworking.Services.DnsRecordSets.Update
+    Gogol.ServiceNetworking.Services.DnsZones.Add
+    Gogol.ServiceNetworking.Services.DnsZones.Remove
+    Gogol.ServiceNetworking.Services.EnableVpcServiceControls
+    Gogol.ServiceNetworking.Services.Projects.Global.Networks.Get
+    Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.Create
+    Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.Delete
+    Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.List
+    Gogol.ServiceNetworking.Services.Projects.Global.Networks.UpdateConsumerConfig
+    Gogol.ServiceNetworking.Services.Roles.Add
+    Gogol.ServiceNetworking.Services.SearchRange
+    Gogol.ServiceNetworking.Services.Validate
+    Gogol.ServiceNetworking.Types
 
   other-modules:
-    Network.Google.ServiceNetworking.Internal.Product
-    Network.Google.ServiceNetworking.Internal.Sum
+    Gogol.ServiceNetworking.Internal.Product
+    Gogol.ServiceNetworking.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
