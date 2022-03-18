@@ -1,85 +1,78 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AdExperienceReport
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Views Ad Experience Report data, and gets a list of sites that have a
--- significant number of annoying ads.
+-- Views Ad Experience Report data, and gets a list of sites that have a significant number of annoying ads.
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference>
 module Network.Google.AdExperienceReport
-    (
-    -- * Service Configuration
-      adExperienceReportService
-
-    -- * API Declaration
-    , AdExperienceReportAPI
+  ( -- * Configuration
+    adExperienceReportService,
 
     -- * Resources
 
     -- ** adexperiencereport.sites.get
-    , module Network.Google.Resource.AdExperienceReport.Sites.Get
+    AdExperienceReportSitesGetResource,
+    newAdExperienceReportSitesGet,
+    AdExperienceReportSitesGet,
 
     -- ** adexperiencereport.violatingSites.list
-    , module Network.Google.Resource.AdExperienceReport.ViolatingSites.List
+    AdExperienceReportViolatingSitesListResource,
+    newAdExperienceReportViolatingSitesList,
+    AdExperienceReportViolatingSitesList,
 
     -- * Types
 
-    -- ** SiteSummaryResponse
-    , SiteSummaryResponse
-    , siteSummaryResponse
-    , ssrMobileSummary
-    , ssrReviewedSite
-    , ssrDesktopSummary
-
-    -- ** PlatformSummaryFilterStatus
-    , PlatformSummaryFilterStatus (..)
-
-    -- ** ViolatingSitesResponse
-    , ViolatingSitesResponse
-    , violatingSitesResponse
-    , vsrViolatingSites
-
-    -- ** PlatformSummaryRegionItem
-    , PlatformSummaryRegionItem (..)
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** PlatformSummary
-    , PlatformSummary
-    , platformSummary
-    , psEnforcementTime
-    , psLastChangeTime
-    , psFilterStatus
-    , psUnderReview
-    , psBetterAdsStatus
-    , psReportURL
-    , psRegion
+    PlatformSummary (..),
+    newPlatformSummary,
 
-    -- ** PlatformSummaryBetterAdsStatus
-    , PlatformSummaryBetterAdsStatus (..)
-    ) where
+    -- ** PlatformSummary_BetterAdsStatus
+    PlatformSummary_BetterAdsStatus (..),
 
-import Network.Google.Prelude
+    -- ** PlatformSummary_FilterStatus
+    PlatformSummary_FilterStatus (..),
+
+    -- ** PlatformSummary_RegionItem
+    PlatformSummary_RegionItem (..),
+
+    -- ** SiteSummaryResponse
+    SiteSummaryResponse (..),
+    newSiteSummaryResponse,
+
+    -- ** ViolatingSitesResponse
+    ViolatingSitesResponse (..),
+    newViolatingSitesResponse,
+  )
+where
+
+import Network.Google.AdExperienceReport.Sites.Get
 import Network.Google.AdExperienceReport.Types
-import Network.Google.Resource.AdExperienceReport.Sites.Get
-import Network.Google.Resource.AdExperienceReport.ViolatingSites.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Ad Experience Report API service.
-type AdExperienceReportAPI =
-     ViolatingSitesListResource :<|> SitesGetResource
+import Network.Google.AdExperienceReport.ViolatingSites.List
