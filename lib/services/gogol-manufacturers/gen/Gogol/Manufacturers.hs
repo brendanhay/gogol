@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,109 +36,109 @@
 --
 -- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference>
 module Gogol.Manufacturers
-  ( -- * Configuration
-    manufacturersService,
+    (
+    -- * Configuration
+      manufacturersService
 
     -- * OAuth Scopes
-    manufacturercenterScope,
+    , manufacturercenterScope
 
     -- * Resources
 
     -- ** manufacturers.accounts.products.delete
-    ManufacturersAccountsProductsDeleteResource,
-    newManufacturersAccountsProductsDelete,
-    ManufacturersAccountsProductsDelete,
+    , ManufacturersAccountsProductsDeleteResource
+    , newManufacturersAccountsProductsDelete
+    , ManufacturersAccountsProductsDelete
 
     -- ** manufacturers.accounts.products.get
-    ManufacturersAccountsProductsGetResource,
-    newManufacturersAccountsProductsGet,
-    ManufacturersAccountsProductsGet,
+    , ManufacturersAccountsProductsGetResource
+    , newManufacturersAccountsProductsGet
+    , ManufacturersAccountsProductsGet
 
     -- ** manufacturers.accounts.products.list
-    ManufacturersAccountsProductsListResource,
-    newManufacturersAccountsProductsList,
-    ManufacturersAccountsProductsList,
+    , ManufacturersAccountsProductsListResource
+    , newManufacturersAccountsProductsList
+    , ManufacturersAccountsProductsList
 
     -- ** manufacturers.accounts.products.update
-    ManufacturersAccountsProductsUpdateResource,
-    newManufacturersAccountsProductsUpdate,
-    ManufacturersAccountsProductsUpdate,
+    , ManufacturersAccountsProductsUpdateResource
+    , newManufacturersAccountsProductsUpdate
+    , ManufacturersAccountsProductsUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Attributes
-    Attributes (..),
-    newAttributes,
+    , Attributes (..)
+    , newAttributes
 
     -- ** Capacity
-    Capacity (..),
-    newCapacity,
+    , Capacity (..)
+    , newCapacity
 
     -- ** Count
-    Count (..),
-    newCount,
+    , Count (..)
+    , newCount
 
     -- ** DestinationStatus
-    DestinationStatus (..),
-    newDestinationStatus,
+    , DestinationStatus (..)
+    , newDestinationStatus
 
     -- ** DestinationStatus_Status
-    DestinationStatus_Status (..),
+    , DestinationStatus_Status (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** FeatureDescription
-    FeatureDescription (..),
-    newFeatureDescription,
+    , FeatureDescription (..)
+    , newFeatureDescription
 
     -- ** Image
-    Image (..),
-    newImage,
+    , Image (..)
+    , newImage
 
     -- ** Image_Status
-    Image_Status (..),
+    , Image_Status (..)
 
     -- ** Image_Type
-    Image_Type (..),
+    , Image_Type (..)
 
     -- ** Issue
-    Issue (..),
-    newIssue,
+    , Issue (..)
+    , newIssue
 
     -- ** Issue_Resolution
-    Issue_Resolution (..),
+    , Issue_Resolution (..)
 
     -- ** Issue_Severity
-    Issue_Severity (..),
+    , Issue_Severity (..)
 
     -- ** ListProductsResponse
-    ListProductsResponse (..),
-    newListProductsResponse,
+    , ListProductsResponse (..)
+    , newListProductsResponse
 
     -- ** Price
-    Price (..),
-    newPrice,
+    , Price (..)
+    , newPrice
 
     -- ** Product
-    Product (..),
-    newProduct,
+    , Product (..)
+    , newProduct
 
     -- ** ProductDetail
-    ProductDetail (..),
-    newProductDetail,
+    , ProductDetail (..)
+    , newProductDetail
 
     -- ** AccountsProductsGetInclude
-    AccountsProductsGetInclude (..),
+    , AccountsProductsGetInclude (..)
 
     -- ** AccountsProductsListInclude
-    AccountsProductsListInclude (..),
-  )
-where
+    , AccountsProductsListInclude (..)
+    ) where
 
 import Gogol.Manufacturers.Accounts.Products.Delete
 import Gogol.Manufacturers.Accounts.Products.Get

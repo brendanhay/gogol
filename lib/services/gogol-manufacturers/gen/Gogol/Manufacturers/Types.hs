@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,99 +31,100 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Manufacturers.Types
-  ( -- * Configuration
-    manufacturersService,
+    (
+    -- * Configuration
+      manufacturersService
 
     -- * OAuth Scopes
-    manufacturercenterScope,
+    , manufacturercenterScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Attributes
-    Attributes (..),
-    newAttributes,
+    , Attributes (..)
+    , newAttributes
 
     -- ** Capacity
-    Capacity (..),
-    newCapacity,
+    , Capacity (..)
+    , newCapacity
 
     -- ** Count
-    Count (..),
-    newCount,
+    , Count (..)
+    , newCount
 
     -- ** DestinationStatus
-    DestinationStatus (..),
-    newDestinationStatus,
+    , DestinationStatus (..)
+    , newDestinationStatus
 
     -- ** DestinationStatus_Status
-    DestinationStatus_Status (..),
+    , DestinationStatus_Status (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** FeatureDescription
-    FeatureDescription (..),
-    newFeatureDescription,
+    , FeatureDescription (..)
+    , newFeatureDescription
 
     -- ** Image
-    Image (..),
-    newImage,
+    , Image (..)
+    , newImage
 
     -- ** Image_Status
-    Image_Status (..),
+    , Image_Status (..)
 
     -- ** Image_Type
-    Image_Type (..),
+    , Image_Type (..)
 
     -- ** Issue
-    Issue (..),
-    newIssue,
+    , Issue (..)
+    , newIssue
 
     -- ** Issue_Resolution
-    Issue_Resolution (..),
+    , Issue_Resolution (..)
 
     -- ** Issue_Severity
-    Issue_Severity (..),
+    , Issue_Severity (..)
 
     -- ** ListProductsResponse
-    ListProductsResponse (..),
-    newListProductsResponse,
+    , ListProductsResponse (..)
+    , newListProductsResponse
 
     -- ** Price
-    Price (..),
-    newPrice,
+    , Price (..)
+    , newPrice
 
     -- ** Product
-    Product (..),
-    newProduct,
+    , Product (..)
+    , newProduct
 
     -- ** ProductDetail
-    ProductDetail (..),
-    newProductDetail,
+    , ProductDetail (..)
+    , newProductDetail
 
     -- ** AccountsProductsGetInclude
-    AccountsProductsGetInclude (..),
+    , AccountsProductsGetInclude (..)
 
     -- ** AccountsProductsListInclude
-    AccountsProductsListInclude (..),
-  )
-where
+    , AccountsProductsListInclude (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Manufacturers.Internal.Product
 import Gogol.Manufacturers.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Manufacturer Center API. This contains the host and root path used as a starting point for constructing service requests.
 manufacturersService :: Core.ServiceConfig
-manufacturersService =
-  Core.defaultService
-    (Core.ServiceId "manufacturers:v1")
-    "manufacturers.googleapis.com"
+manufacturersService
+  = Core.defaultService
+      (Core.ServiceId "manufacturers:v1")
+      "manufacturers.googleapis.com"
 
 -- | Manage your product listings for Google Manufacturer Center
 manufacturercenterScope :: Core.Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
