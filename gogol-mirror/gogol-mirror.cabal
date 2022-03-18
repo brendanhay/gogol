@@ -43,41 +43,42 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Mirror
-    Network.Google.Mirror.Accounts.Insert
-    Network.Google.Mirror.Contacts.Delete
-    Network.Google.Mirror.Contacts.Get
-    Network.Google.Mirror.Contacts.Insert
-    Network.Google.Mirror.Contacts.List
-    Network.Google.Mirror.Contacts.Patch
-    Network.Google.Mirror.Contacts.Update
-    Network.Google.Mirror.Locations.Get
-    Network.Google.Mirror.Locations.List
-    Network.Google.Mirror.Settings.Get
-    Network.Google.Mirror.Subscriptions.Delete
-    Network.Google.Mirror.Subscriptions.Insert
-    Network.Google.Mirror.Subscriptions.List
-    Network.Google.Mirror.Subscriptions.Update
-    Network.Google.Mirror.Timeline.Attachments.Delete
-    Network.Google.Mirror.Timeline.Attachments.Get
-    Network.Google.Mirror.Timeline.Attachments.Insert
-    Network.Google.Mirror.Timeline.Attachments.List
-    Network.Google.Mirror.Timeline.Delete
-    Network.Google.Mirror.Timeline.Get
-    Network.Google.Mirror.Timeline.Insert
-    Network.Google.Mirror.Timeline.List
-    Network.Google.Mirror.Timeline.Patch
-    Network.Google.Mirror.Timeline.Update
-    Network.Google.Mirror.Types
+    Gogol.Mirror
+    Gogol.Mirror.Accounts.Insert
+    Gogol.Mirror.Contacts.Delete
+    Gogol.Mirror.Contacts.Get
+    Gogol.Mirror.Contacts.Insert
+    Gogol.Mirror.Contacts.List
+    Gogol.Mirror.Contacts.Patch
+    Gogol.Mirror.Contacts.Update
+    Gogol.Mirror.Locations.Get
+    Gogol.Mirror.Locations.List
+    Gogol.Mirror.Settings.Get
+    Gogol.Mirror.Subscriptions.Delete
+    Gogol.Mirror.Subscriptions.Insert
+    Gogol.Mirror.Subscriptions.List
+    Gogol.Mirror.Subscriptions.Update
+    Gogol.Mirror.Timeline.Attachments.Delete
+    Gogol.Mirror.Timeline.Attachments.Get
+    Gogol.Mirror.Timeline.Attachments.Insert
+    Gogol.Mirror.Timeline.Attachments.List
+    Gogol.Mirror.Timeline.Delete
+    Gogol.Mirror.Timeline.Get
+    Gogol.Mirror.Timeline.Insert
+    Gogol.Mirror.Timeline.List
+    Gogol.Mirror.Timeline.Patch
+    Gogol.Mirror.Timeline.Update
+    Gogol.Mirror.Types
 
   other-modules:
-    Network.Google.Mirror.Internal.Product
-    Network.Google.Mirror.Internal.Sum
+    Gogol.Mirror.Internal.Product
+    Gogol.Mirror.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
