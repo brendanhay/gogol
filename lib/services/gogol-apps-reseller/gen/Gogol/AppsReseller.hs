@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,168 +36,168 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference>
 module Gogol.AppsReseller
-  ( -- * Configuration
-    appsResellerService,
+    (
+    -- * Configuration
+      appsResellerService
 
     -- * OAuth Scopes
-    appsOrderScope,
-    appsOrderReadOnlyScope,
+    , appsOrderScope
+    , appsOrderReadOnlyScope
 
     -- * Resources
 
     -- ** reseller.customers.get
-    ResellerCustomersGetResource,
-    newResellerCustomersGet,
-    ResellerCustomersGet,
+    , ResellerCustomersGetResource
+    , newResellerCustomersGet
+    , ResellerCustomersGet
 
     -- ** reseller.customers.insert
-    ResellerCustomersInsertResource,
-    newResellerCustomersInsert,
-    ResellerCustomersInsert,
+    , ResellerCustomersInsertResource
+    , newResellerCustomersInsert
+    , ResellerCustomersInsert
 
     -- ** reseller.customers.patch
-    ResellerCustomersPatchResource,
-    newResellerCustomersPatch,
-    ResellerCustomersPatch,
+    , ResellerCustomersPatchResource
+    , newResellerCustomersPatch
+    , ResellerCustomersPatch
 
     -- ** reseller.customers.update
-    ResellerCustomersUpdateResource,
-    newResellerCustomersUpdate,
-    ResellerCustomersUpdate,
+    , ResellerCustomersUpdateResource
+    , newResellerCustomersUpdate
+    , ResellerCustomersUpdate
 
     -- ** reseller.resellernotify.getwatchdetails
-    ResellerResellernotifyGetwatchdetailsResource,
-    newResellerResellernotifyGetwatchdetails,
-    ResellerResellernotifyGetwatchdetails,
+    , ResellerResellernotifyGetwatchdetailsResource
+    , newResellerResellernotifyGetwatchdetails
+    , ResellerResellernotifyGetwatchdetails
 
     -- ** reseller.resellernotify.register
-    ResellerResellernotifyRegisterResource,
-    newResellerResellernotifyRegister,
-    ResellerResellernotifyRegister,
+    , ResellerResellernotifyRegisterResource
+    , newResellerResellernotifyRegister
+    , ResellerResellernotifyRegister
 
     -- ** reseller.resellernotify.unregister
-    ResellerResellernotifyUnregisterResource,
-    newResellerResellernotifyUnregister,
-    ResellerResellernotifyUnregister,
+    , ResellerResellernotifyUnregisterResource
+    , newResellerResellernotifyUnregister
+    , ResellerResellernotifyUnregister
 
     -- ** reseller.subscriptions.activate
-    ResellerSubscriptionsActivateResource,
-    newResellerSubscriptionsActivate,
-    ResellerSubscriptionsActivate,
+    , ResellerSubscriptionsActivateResource
+    , newResellerSubscriptionsActivate
+    , ResellerSubscriptionsActivate
 
     -- ** reseller.subscriptions.changePlan
-    ResellerSubscriptionsChangePlanResource,
-    newResellerSubscriptionsChangePlan,
-    ResellerSubscriptionsChangePlan,
+    , ResellerSubscriptionsChangePlanResource
+    , newResellerSubscriptionsChangePlan
+    , ResellerSubscriptionsChangePlan
 
     -- ** reseller.subscriptions.changeRenewalSettings
-    ResellerSubscriptionsChangeRenewalSettingsResource,
-    newResellerSubscriptionsChangeRenewalSettings,
-    ResellerSubscriptionsChangeRenewalSettings,
+    , ResellerSubscriptionsChangeRenewalSettingsResource
+    , newResellerSubscriptionsChangeRenewalSettings
+    , ResellerSubscriptionsChangeRenewalSettings
 
     -- ** reseller.subscriptions.changeSeats
-    ResellerSubscriptionsChangeSeatsResource,
-    newResellerSubscriptionsChangeSeats,
-    ResellerSubscriptionsChangeSeats,
+    , ResellerSubscriptionsChangeSeatsResource
+    , newResellerSubscriptionsChangeSeats
+    , ResellerSubscriptionsChangeSeats
 
     -- ** reseller.subscriptions.delete
-    ResellerSubscriptionsDeleteResource,
-    newResellerSubscriptionsDelete,
-    ResellerSubscriptionsDelete,
+    , ResellerSubscriptionsDeleteResource
+    , newResellerSubscriptionsDelete
+    , ResellerSubscriptionsDelete
 
     -- ** reseller.subscriptions.get
-    ResellerSubscriptionsGetResource,
-    newResellerSubscriptionsGet,
-    ResellerSubscriptionsGet,
+    , ResellerSubscriptionsGetResource
+    , newResellerSubscriptionsGet
+    , ResellerSubscriptionsGet
 
     -- ** reseller.subscriptions.insert
-    ResellerSubscriptionsInsertResource,
-    newResellerSubscriptionsInsert,
-    ResellerSubscriptionsInsert,
+    , ResellerSubscriptionsInsertResource
+    , newResellerSubscriptionsInsert
+    , ResellerSubscriptionsInsert
 
     -- ** reseller.subscriptions.list
-    ResellerSubscriptionsListResource,
-    newResellerSubscriptionsList,
-    ResellerSubscriptionsList,
+    , ResellerSubscriptionsListResource
+    , newResellerSubscriptionsList
+    , ResellerSubscriptionsList
 
     -- ** reseller.subscriptions.startPaidService
-    ResellerSubscriptionsStartPaidServiceResource,
-    newResellerSubscriptionsStartPaidService,
-    ResellerSubscriptionsStartPaidService,
+    , ResellerSubscriptionsStartPaidServiceResource
+    , newResellerSubscriptionsStartPaidService
+    , ResellerSubscriptionsStartPaidService
 
     -- ** reseller.subscriptions.suspend
-    ResellerSubscriptionsSuspendResource,
-    newResellerSubscriptionsSuspend,
-    ResellerSubscriptionsSuspend,
+    , ResellerSubscriptionsSuspendResource
+    , newResellerSubscriptionsSuspend
+    , ResellerSubscriptionsSuspend
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Address
-    Address (..),
-    newAddress,
+    , Address (..)
+    , newAddress
 
     -- ** ChangePlanRequest
-    ChangePlanRequest (..),
-    newChangePlanRequest,
+    , ChangePlanRequest (..)
+    , newChangePlanRequest
 
     -- ** Customer
-    Customer (..),
-    newCustomer,
+    , Customer (..)
+    , newCustomer
 
     -- ** Customer_CustomerType
-    Customer_CustomerType (..),
+    , Customer_CustomerType (..)
 
     -- ** PrimaryAdmin
-    PrimaryAdmin (..),
-    newPrimaryAdmin,
+    , PrimaryAdmin (..)
+    , newPrimaryAdmin
 
     -- ** RenewalSettings
-    RenewalSettings (..),
-    newRenewalSettings,
+    , RenewalSettings (..)
+    , newRenewalSettings
 
     -- ** ResellernotifyGetwatchdetailsResponse
-    ResellernotifyGetwatchdetailsResponse (..),
-    newResellernotifyGetwatchdetailsResponse,
+    , ResellernotifyGetwatchdetailsResponse (..)
+    , newResellernotifyGetwatchdetailsResponse
 
     -- ** ResellernotifyResource
-    ResellernotifyResource (..),
-    newResellernotifyResource,
+    , ResellernotifyResource (..)
+    , newResellernotifyResource
 
     -- ** Seats
-    Seats (..),
-    newSeats,
+    , Seats (..)
+    , newSeats
 
     -- ** Subscription
-    Subscription (..),
-    newSubscription,
+    , Subscription (..)
+    , newSubscription
 
     -- ** Subscription_Plan
-    Subscription_Plan (..),
-    newSubscription_Plan,
+    , Subscription_Plan (..)
+    , newSubscription_Plan
 
     -- ** Subscription_Plan_CommitmentInterval
-    Subscription_Plan_CommitmentInterval (..),
-    newSubscription_Plan_CommitmentInterval,
+    , Subscription_Plan_CommitmentInterval (..)
+    , newSubscription_Plan_CommitmentInterval
 
     -- ** Subscription_TransferInfo
-    Subscription_TransferInfo (..),
-    newSubscription_TransferInfo,
+    , Subscription_TransferInfo (..)
+    , newSubscription_TransferInfo
 
     -- ** Subscription_TrialSettings
-    Subscription_TrialSettings (..),
-    newSubscription_TrialSettings,
+    , Subscription_TrialSettings (..)
+    , newSubscription_TrialSettings
 
     -- ** Subscriptions
-    Subscriptions (..),
-    newSubscriptions,
+    , Subscriptions (..)
+    , newSubscriptions
 
     -- ** SubscriptionsDeleteDeletionType
-    SubscriptionsDeleteDeletionType (..),
-  )
-where
+    , SubscriptionsDeleteDeletionType (..)
+    ) where
 
 import Gogol.AppsReseller.Reseller.Customers.Get
 import Gogol.AppsReseller.Reseller.Customers.Insert

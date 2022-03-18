@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,93 +31,93 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AppsReseller.Types
-  ( -- * Configuration
-    appsResellerService,
+    (
+    -- * Configuration
+      appsResellerService
 
     -- * OAuth Scopes
-    appsOrderScope,
-    appsOrderReadOnlyScope,
+    , appsOrderScope
+    , appsOrderReadOnlyScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Address
-    Address (..),
-    newAddress,
+    , Address (..)
+    , newAddress
 
     -- ** ChangePlanRequest
-    ChangePlanRequest (..),
-    newChangePlanRequest,
+    , ChangePlanRequest (..)
+    , newChangePlanRequest
 
     -- ** Customer
-    Customer (..),
-    newCustomer,
+    , Customer (..)
+    , newCustomer
 
     -- ** Customer_CustomerType
-    Customer_CustomerType (..),
+    , Customer_CustomerType (..)
 
     -- ** PrimaryAdmin
-    PrimaryAdmin (..),
-    newPrimaryAdmin,
+    , PrimaryAdmin (..)
+    , newPrimaryAdmin
 
     -- ** RenewalSettings
-    RenewalSettings (..),
-    newRenewalSettings,
+    , RenewalSettings (..)
+    , newRenewalSettings
 
     -- ** ResellernotifyGetwatchdetailsResponse
-    ResellernotifyGetwatchdetailsResponse (..),
-    newResellernotifyGetwatchdetailsResponse,
+    , ResellernotifyGetwatchdetailsResponse (..)
+    , newResellernotifyGetwatchdetailsResponse
 
     -- ** ResellernotifyResource
-    ResellernotifyResource (..),
-    newResellernotifyResource,
+    , ResellernotifyResource (..)
+    , newResellernotifyResource
 
     -- ** Seats
-    Seats (..),
-    newSeats,
+    , Seats (..)
+    , newSeats
 
     -- ** Subscription
-    Subscription (..),
-    newSubscription,
+    , Subscription (..)
+    , newSubscription
 
     -- ** Subscription_Plan
-    Subscription_Plan (..),
-    newSubscription_Plan,
+    , Subscription_Plan (..)
+    , newSubscription_Plan
 
     -- ** Subscription_Plan_CommitmentInterval
-    Subscription_Plan_CommitmentInterval (..),
-    newSubscription_Plan_CommitmentInterval,
+    , Subscription_Plan_CommitmentInterval (..)
+    , newSubscription_Plan_CommitmentInterval
 
     -- ** Subscription_TransferInfo
-    Subscription_TransferInfo (..),
-    newSubscription_TransferInfo,
+    , Subscription_TransferInfo (..)
+    , newSubscription_TransferInfo
 
     -- ** Subscription_TrialSettings
-    Subscription_TrialSettings (..),
-    newSubscription_TrialSettings,
+    , Subscription_TrialSettings (..)
+    , newSubscription_TrialSettings
 
     -- ** Subscriptions
-    Subscriptions (..),
-    newSubscriptions,
+    , Subscriptions (..)
+    , newSubscriptions
 
     -- ** SubscriptionsDeleteDeletionType
-    SubscriptionsDeleteDeletionType (..),
-  )
-where
+    , SubscriptionsDeleteDeletionType (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AppsReseller.Internal.Product
 import Gogol.AppsReseller.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Google Workspace Reseller API. This contains the host and root path used as a starting point for constructing service requests.
 appsResellerService :: Core.ServiceConfig
-appsResellerService =
-  Core.defaultService
-    (Core.ServiceId "reseller:v1")
-    "reseller.googleapis.com"
+appsResellerService
+  = Core.defaultService (Core.ServiceId "reseller:v1")
+      "reseller.googleapis.com"
 
 -- | Manage users on your domain
 appsOrderScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.order"]
