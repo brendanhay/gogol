@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Plus
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,511 +30,295 @@
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference>
 module Network.Google.Plus
-    (
-    -- * Service Configuration
-      plusService
+  ( -- * Configuration
+    plusService,
 
     -- * OAuth Scopes
-    , userInfoProFileScope
-    , plusLoginScope
-    , userInfoEmailScope
-    , plusMeScope
-
-    -- * API Declaration
-    , PlusAPI
+    plusLoginScope,
+    plusMeScope,
+    userinfoEmailScope,
+    userinfoProfileScope,
 
     -- * Resources
 
     -- ** plus.activities.get
-    , module Network.Google.Resource.Plus.Activities.Get
+    PlusActivitiesGetResource,
+    newPlusActivitiesGet,
+    PlusActivitiesGet,
 
     -- ** plus.activities.list
-    , module Network.Google.Resource.Plus.Activities.List
+    PlusActivitiesListResource,
+    newPlusActivitiesList,
+    PlusActivitiesList,
 
     -- ** plus.activities.search
-    , module Network.Google.Resource.Plus.Activities.Search
+    PlusActivitiesSearchResource,
+    newPlusActivitiesSearch,
+    PlusActivitiesSearch,
 
     -- ** plus.comments.get
-    , module Network.Google.Resource.Plus.Comments.Get
+    PlusCommentsGetResource,
+    newPlusCommentsGet,
+    PlusCommentsGet,
 
     -- ** plus.comments.list
-    , module Network.Google.Resource.Plus.Comments.List
+    PlusCommentsListResource,
+    newPlusCommentsList,
+    PlusCommentsList,
 
     -- ** plus.people.get
-    , module Network.Google.Resource.Plus.People.Get
+    PlusPeopleGetResource,
+    newPlusPeopleGet,
+    PlusPeopleGet,
 
     -- ** plus.people.list
-    , module Network.Google.Resource.Plus.People.List
+    PlusPeopleListResource,
+    newPlusPeopleList,
+    PlusPeopleList,
 
     -- ** plus.people.listByActivity
-    , module Network.Google.Resource.Plus.People.ListByActivity
+    PlusPeopleListByActivityResource,
+    newPlusPeopleListByActivity,
+    PlusPeopleListByActivity,
 
     -- ** plus.people.search
-    , module Network.Google.Resource.Plus.People.Search
+    PlusPeopleSearchResource,
+    newPlusPeopleSearch,
+    PlusPeopleSearch,
 
     -- * Types
 
-    -- ** ActivityProvider
-    , ActivityProvider
-    , activityProvider
-    , apTitle
-
-    -- ** ActivityObjectAttachmentsItemEmbed
-    , ActivityObjectAttachmentsItemEmbed
-    , activityObjectAttachmentsItemEmbed
-    , aoaieURL
-    , aoaieType
-
-    -- ** CommentPlusoners
-    , CommentPlusoners
-    , commentPlusoners
-    , cpTotalItems
-
-    -- ** CommentActorClientSpecificActorInfo
-    , CommentActorClientSpecificActorInfo
-    , commentActorClientSpecificActorInfo
-    , cacsaiYouTubeActorInfo
-
-    -- ** ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
-    , ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
-    , activityObjectActorClientSpecificActorInfoYouTubeActorInfo
-    , aoacsaiytaiChannelId
-
-    -- ** ActivityObjectPlusoners
-    , ActivityObjectPlusoners
-    , activityObjectPlusoners
-    , aopTotalItems
-    , aopSelfLink
-
-    -- ** PersonEmailsItem
-    , PersonEmailsItem
-    , personEmailsItem
-    , peiValue
-    , peiType
-
-    -- ** CommentActorImage
-    , CommentActorImage
-    , commentActorImage
-    , caiURL
-
-    -- ** ActivityObjectAttachmentsItemThumbnailsItemImage
-    , ActivityObjectAttachmentsItemThumbnailsItemImage
-    , activityObjectAttachmentsItemThumbnailsItemImage
-    , aoaitiiHeight
-    , aoaitiiURL
-    , aoaitiiWidth
-    , aoaitiiType
-
-    -- ** PlacePosition
-    , PlacePosition
-    , placePosition
-    , ppLatitude
-    , ppLongitude
-
-    -- ** PersonPlacesLivedItem
-    , PersonPlacesLivedItem
-    , personPlacesLivedItem
-    , ppliValue
-    , ppliPrimary
-
-    -- ** ActivityActorClientSpecificActorInfo
-    , ActivityActorClientSpecificActorInfo
-    , activityActorClientSpecificActorInfo
-    , aacsaiYouTubeActorInfo
-
-    -- ** Person
-    , Person
-    , person
-    , pCurrentLocation
-    , pAgeRange
-    , pEtag
-    , pImage
-    , pBraggingRights
-    , pPlacesLived
-    , pPlusOneCount
-    , pObjectType
-    , pCover
-    , pKind
-    , pRelationshipStatus
-    , pURLs
-    , pDomain
-    , pURL
-    , pVerified
-    , pBirthday
-    , pIsPlusUser
-    , pTagline
-    , pGender
-    , pName
-    , pEmails
-    , pOccupation
-    , pSkills
-    , pLanguage
-    , pAboutMe
-    , pDisplayName
-    , pId
-    , pNickname
-    , pOrganizations
-    , pCircledByCount
-
-    -- ** ActivityObjectAttachmentsItemImage
-    , ActivityObjectAttachmentsItemImage
-    , activityObjectAttachmentsItemImage
-    , aoaiiHeight
-    , aoaiiURL
-    , aoaiiWidth
-    , aoaiiType
-
-    -- ** CommentActor
-    , CommentActor
-    , commentActor
-    , caClientSpecificActorInfo
-    , caImage
-    , caURL
-    , caDisplayName
-    , caId
-    , caVerification
-
-    -- ** ActivityObject
-    , ActivityObject
-    , activityObject
-    , aoPlusoners
-    , aoAttachments
-    , aoObjectType
-    , aoOriginalContent
-    , aoURL
-    , aoActor
-    , aoContent
-    , aoReplies
-    , aoId
-    , aoResharers
-
-    -- ** ActivityObjectActor
-    , ActivityObjectActor
-    , activityObjectActor
-    , aoaClientSpecificActorInfo
-    , aoaImage
-    , aoaURL
-    , aoaDisplayName
-    , aoaId
-    , aoaVerification
-
-    -- ** ActivityObjectAttachmentsItemFullImage
-    , ActivityObjectAttachmentsItemFullImage
-    , activityObjectAttachmentsItemFullImage
-    , aoaifiHeight
-    , aoaifiURL
-    , aoaifiWidth
-    , aoaifiType
-
-    -- ** PeopleListByActivityCollection
-    , PeopleListByActivityCollection (..)
-
-    -- ** ActivityActorImage
-    , ActivityActorImage
-    , activityActorImage
-    , aaiURL
-
-    -- ** PeopleFeed
-    , PeopleFeed
-    , peopleFeed
-    , pfTotalItems
-    , pfEtag
-    , pfNextPageToken
-    , pfKind
-    , pfItems
-    , pfSelfLink
-    , pfTitle
-
-    -- ** PersonCoverCoverPhoto
-    , PersonCoverCoverPhoto
-    , personCoverCoverPhoto
-    , pccpHeight
-    , pccpURL
-    , pccpWidth
-
-    -- ** PersonAgeRange
-    , PersonAgeRange
-    , personAgeRange
-    , parMax
-    , parMin
-
-    -- ** ActivityObjectActorImage
-    , ActivityObjectActorImage
-    , activityObjectActorImage
-    , aoaiURL
-
-    -- ** CommentActorClientSpecificActorInfoYouTubeActorInfo
-    , CommentActorClientSpecificActorInfoYouTubeActorInfo
-    , commentActorClientSpecificActorInfoYouTubeActorInfo
-    , cacsaiytaiChannelId
-
-    -- ** PeopleListOrderBy
-    , PeopleListOrderBy (..)
-
-    -- ** ActivityObjectReplies
-    , ActivityObjectReplies
-    , activityObjectReplies
-    , aorTotalItems
-    , aorSelfLink
-
-    -- ** ActivitiesListCollection
-    , ActivitiesListCollection (..)
-
-    -- ** ActivityActorVerification
-    , ActivityActorVerification
-    , activityActorVerification
-    , aavAdHocVerified
-
-    -- ** ActivityObjectActorClientSpecificActorInfo
-    , ActivityObjectActorClientSpecificActorInfo
-    , activityObjectActorClientSpecificActorInfo
-    , aoacsaiYouTubeActorInfo
-
-    -- ** PeopleListCollection
-    , PeopleListCollection (..)
-
-    -- ** ActivityObjectAttachmentsItem
-    , ActivityObjectAttachmentsItem
-    , activityObjectAttachmentsItem
-    , aFullImage
-    , aImage
-    , aObjectType
-    , aURL
-    , aEmbed
-    , aContent
-    , aThumbnails
-    , aDisplayName
-    , aId
-
-    -- ** ActivityFeed
-    , ActivityFeed
-    , activityFeed
-    , afEtag
-    , afNextPageToken
-    , afNextLink
-    , afKind
-    , afItems
-    , afSelfLink
-    , afId
-    , afUpdated
-    , afTitle
-
-    -- ** ActivityObjectActorVerification
-    , ActivityObjectActorVerification
-    , activityObjectActorVerification
-    , aoavAdHocVerified
-
-    -- ** PersonName
-    , PersonName
-    , personName
-    , pnGivenName
-    , pnMiddleName
-    , pnFormatted
-    , pnHonorificPrefix
-    , pnFamilyName
-    , pnHonorificSuffix
-
-    -- ** PersonImage
-    , PersonImage
-    , personImage
-    , piURL
-    , piIsDefault
-
-    -- ** ActivityActorClientSpecificActorInfoYouTubeActorInfo
-    , ActivityActorClientSpecificActorInfoYouTubeActorInfo
-    , activityActorClientSpecificActorInfoYouTubeActorInfo
-    , aacsaiytaiChannelId
-
-    -- ** PlusACLentryResource
-    , PlusACLentryResource
-    , plusACLentryResource
-    , parDisplayName
-    , parId
-    , parType
+    -- ** Acl
+    Acl (..),
+    newAcl,
 
     -- ** Activity
-    , Activity
-    , activity
-    , actAccess
-    , actPlaceName
-    , actEtag
-    , actAnnotation
-    , actLocation
-    , actGeocode
-    , actKind
-    , actRadius
-    , actPublished
-    , actURL
-    , actActor
-    , actAddress
-    , actObject
-    , actId
-    , actUpdated
-    , actTitle
-    , actVerb
-    , actCrosspostSource
-    , actPlaceId
-    , actProvider
+    Activity (..),
+    newActivity,
 
-    -- ** PlaceAddress
-    , PlaceAddress
-    , placeAddress
-    , paFormatted
+    -- ** Activity_Actor
+    Activity_Actor (..),
+    newActivity_Actor,
 
-    -- ** ActivityObjectAttachmentsItemThumbnailsItem
-    , ActivityObjectAttachmentsItemThumbnailsItem
-    , activityObjectAttachmentsItemThumbnailsItem
-    , aoaitiImage
-    , aoaitiURL
-    , aoaitiDescription
+    -- ** Activity_Actor_ClientSpecificActorInfo
+    Activity_Actor_ClientSpecificActorInfo (..),
+    newActivity_Actor_ClientSpecificActorInfo,
 
-    -- ** PersonCover
-    , PersonCover
-    , personCover
-    , pcLayout
-    , pcCoverInfo
-    , pcCoverPhoto
+    -- ** Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo
+    Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo (..),
+    newActivity_Actor_ClientSpecificActorInfo_YoutubeActorInfo,
 
-    -- ** CommentInReplyToItem
-    , CommentInReplyToItem
-    , commentInReplyToItem
-    , cirtiURL
-    , cirtiId
+    -- ** Activity_Actor_Image
+    Activity_Actor_Image (..),
+    newActivity_Actor_Image,
 
-    -- ** PersonOrganizationsItem
-    , PersonOrganizationsItem
-    , personOrganizationsItem
-    , poiDePartment
-    , poiLocation
-    , poiEndDate
-    , poiPrimary
-    , poiStartDate
-    , poiName
-    , poiTitle
-    , poiType
-    , poiDescription
+    -- ** Activity_Actor_Name
+    Activity_Actor_Name (..),
+    newActivity_Actor_Name,
 
-    -- ** PersonURLsItem
-    , PersonURLsItem
-    , personURLsItem
-    , puiValue
-    , puiType
-    , puiLabel
+    -- ** Activity_Actor_Verification
+    Activity_Actor_Verification (..),
+    newActivity_Actor_Verification,
 
-    -- ** ActivitiesSearchOrderBy
-    , ActivitiesSearchOrderBy (..)
+    -- ** Activity_Object
+    Activity_Object (..),
+    newActivity_Object,
 
-    -- ** PersonCoverCoverInfo
-    , PersonCoverCoverInfo
-    , personCoverCoverInfo
-    , pcciTopImageOffSet
-    , pcciLeftImageOffSet
+    -- ** Activity_Object_Actor
+    Activity_Object_Actor (..),
+    newActivity_Object_Actor,
 
-    -- ** ActivityObjectResharers
-    , ActivityObjectResharers
-    , activityObjectResharers
-    , aTotalItems
-    , aSelfLink
+    -- ** Activity_Object_Actor_ClientSpecificActorInfo
+    Activity_Object_Actor_ClientSpecificActorInfo (..),
+    newActivity_Object_Actor_ClientSpecificActorInfo,
+
+    -- ** Activity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo
+    Activity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo (..),
+    newActivity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo,
+
+    -- ** Activity_Object_Actor_Image
+    Activity_Object_Actor_Image (..),
+    newActivity_Object_Actor_Image,
+
+    -- ** Activity_Object_Actor_Verification
+    Activity_Object_Actor_Verification (..),
+    newActivity_Object_Actor_Verification,
+
+    -- ** Activity_Object_AttachmentsItem
+    Activity_Object_AttachmentsItem (..),
+    newActivity_Object_AttachmentsItem,
+
+    -- ** Activity_Object_AttachmentsItem_Embed
+    Activity_Object_AttachmentsItem_Embed (..),
+    newActivity_Object_AttachmentsItem_Embed,
+
+    -- ** Activity_Object_AttachmentsItem_FullImage
+    Activity_Object_AttachmentsItem_FullImage (..),
+    newActivity_Object_AttachmentsItem_FullImage,
+
+    -- ** Activity_Object_AttachmentsItem_Image
+    Activity_Object_AttachmentsItem_Image (..),
+    newActivity_Object_AttachmentsItem_Image,
+
+    -- ** Activity_Object_AttachmentsItem_ThumbnailsItem
+    Activity_Object_AttachmentsItem_ThumbnailsItem (..),
+    newActivity_Object_AttachmentsItem_ThumbnailsItem,
+
+    -- ** Activity_Object_AttachmentsItem_ThumbnailsItem_Image
+    Activity_Object_AttachmentsItem_ThumbnailsItem_Image (..),
+    newActivity_Object_AttachmentsItem_ThumbnailsItem_Image,
+
+    -- ** Activity_Object_Plusoners
+    Activity_Object_Plusoners (..),
+    newActivity_Object_Plusoners,
+
+    -- ** Activity_Object_Replies
+    Activity_Object_Replies (..),
+    newActivity_Object_Replies,
+
+    -- ** Activity_Object_Resharers
+    Activity_Object_Resharers (..),
+    newActivity_Object_Resharers,
+
+    -- ** Activity_Provider
+    Activity_Provider (..),
+    newActivity_Provider,
+
+    -- ** ActivityFeed
+    ActivityFeed (..),
+    newActivityFeed,
 
     -- ** Comment
-    , Comment
-    , comment
-    , cEtag
-    , cPlusoners
-    , cKind
-    , cPublished
-    , cActor
-    , cSelfLink
-    , cObject
-    , cId
-    , cUpdated
-    , cVerb
-    , cInReplyTo
+    Comment (..),
+    newComment,
 
-    -- ** Place
-    , Place
-    , place
-    , plaKind
-    , plaAddress
-    , plaDisplayName
-    , plaId
-    , plaPosition
+    -- ** Comment_Actor
+    Comment_Actor (..),
+    newComment_Actor,
 
-    -- ** ACL
-    , ACL
-    , acl
-    , aKind
-    , aItems
-    , aDescription
+    -- ** Comment_Actor_ClientSpecificActorInfo
+    Comment_Actor_ClientSpecificActorInfo (..),
+    newComment_Actor_ClientSpecificActorInfo,
 
-    -- ** ActivityActor
-    , ActivityActor
-    , activityActor
-    , aaClientSpecificActorInfo
-    , aaImage
-    , aaURL
-    , aaName
-    , aaDisplayName
-    , aaId
-    , aaVerification
+    -- ** Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo
+    Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo (..),
+    newComment_Actor_ClientSpecificActorInfo_YoutubeActorInfo,
 
-    -- ** CommentsListSortOrder
-    , CommentsListSortOrder (..)
+    -- ** Comment_Actor_Image
+    Comment_Actor_Image (..),
+    newComment_Actor_Image,
 
-    -- ** CommentObject
-    , CommentObject
-    , commentObject
-    , coObjectType
-    , coOriginalContent
-    , coContent
+    -- ** Comment_Actor_Verification
+    Comment_Actor_Verification (..),
+    newComment_Actor_Verification,
+
+    -- ** Comment_InReplyToItem
+    Comment_InReplyToItem (..),
+    newComment_InReplyToItem,
+
+    -- ** Comment_Object
+    Comment_Object (..),
+    newComment_Object,
+
+    -- ** Comment_Plusoners
+    Comment_Plusoners (..),
+    newComment_Plusoners,
 
     -- ** CommentFeed
-    , CommentFeed
-    , commentFeed
-    , cfEtag
-    , cfNextPageToken
-    , cfNextLink
-    , cfKind
-    , cfItems
-    , cfId
-    , cfUpdated
-    , cfTitle
+    CommentFeed (..),
+    newCommentFeed,
 
-    -- ** CommentActorVerification
-    , CommentActorVerification
-    , commentActorVerification
-    , cavAdHocVerified
+    -- ** PeopleFeed
+    PeopleFeed (..),
+    newPeopleFeed,
 
-    -- ** ActivityActorName
-    , ActivityActorName
-    , activityActorName
-    , aanGivenName
-    , aanFamilyName
-    ) where
+    -- ** Person
+    Person (..),
+    newPerson,
 
-import Network.Google.Prelude
+    -- ** Person_AgeRange
+    Person_AgeRange (..),
+    newPerson_AgeRange,
+
+    -- ** Person_Cover
+    Person_Cover (..),
+    newPerson_Cover,
+
+    -- ** Person_Cover_CoverInfo
+    Person_Cover_CoverInfo (..),
+    newPerson_Cover_CoverInfo,
+
+    -- ** Person_Cover_CoverPhoto
+    Person_Cover_CoverPhoto (..),
+    newPerson_Cover_CoverPhoto,
+
+    -- ** Person_EmailsItem
+    Person_EmailsItem (..),
+    newPerson_EmailsItem,
+
+    -- ** Person_Image
+    Person_Image (..),
+    newPerson_Image,
+
+    -- ** Person_Name
+    Person_Name (..),
+    newPerson_Name,
+
+    -- ** Person_OrganizationsItem
+    Person_OrganizationsItem (..),
+    newPerson_OrganizationsItem,
+
+    -- ** Person_PlacesLivedItem
+    Person_PlacesLivedItem (..),
+    newPerson_PlacesLivedItem,
+
+    -- ** Person_UrlsItem
+    Person_UrlsItem (..),
+    newPerson_UrlsItem,
+
+    -- ** Place
+    Place (..),
+    newPlace,
+
+    -- ** Place_Address
+    Place_Address (..),
+    newPlace_Address,
+
+    -- ** Place_Position
+    Place_Position (..),
+    newPlace_Position,
+
+    -- ** PlusAclentryResource
+    PlusAclentryResource (..),
+    newPlusAclentryResource,
+
+    -- ** ActivitiesListCollection
+    ActivitiesListCollection (..),
+
+    -- ** ActivitiesSearchOrderBy
+    ActivitiesSearchOrderBy (..),
+
+    -- ** CommentsListSortOrder
+    CommentsListSortOrder (..),
+
+    -- ** PeopleListCollection
+    PeopleListCollection (..),
+
+    -- ** PeopleListOrderBy
+    PeopleListOrderBy (..),
+
+    -- ** PeopleListByActivityCollection
+    PeopleListByActivityCollection (..),
+  )
+where
+
+import Network.Google.Plus.Activities.Get
+import Network.Google.Plus.Activities.List
+import Network.Google.Plus.Activities.Search
+import Network.Google.Plus.Comments.Get
+import Network.Google.Plus.Comments.List
+import Network.Google.Plus.People.Get
+import Network.Google.Plus.People.List
+import Network.Google.Plus.People.ListByActivity
+import Network.Google.Plus.People.Search
 import Network.Google.Plus.Types
-import Network.Google.Resource.Plus.Activities.Get
-import Network.Google.Resource.Plus.Activities.List
-import Network.Google.Resource.Plus.Activities.Search
-import Network.Google.Resource.Plus.Comments.Get
-import Network.Google.Resource.Plus.Comments.List
-import Network.Google.Resource.Plus.People.Get
-import Network.Google.Resource.Plus.People.List
-import Network.Google.Resource.Plus.People.ListByActivity
-import Network.Google.Resource.Plus.People.Search
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google+ API service.
-type PlusAPI =
-     ActivitiesListResource :<|> ActivitiesGetResource
-       :<|> ActivitiesSearchResource
-       :<|> PeopleListResource
-       :<|> PeopleGetResource
-       :<|> PeopleListByActivityResource
-       :<|> PeopleSearchResource
-       :<|> CommentsListResource
-       :<|> CommentsGetResource
