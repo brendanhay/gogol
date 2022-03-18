@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +36,98 @@
 --
 -- /See:/ <https://cloud.google.com/iot Cloud IoT API Reference> for @cloudiot.projects.locations.registries.groups.testIamPermissions@.
 module Gogol.CloudIOT.Projects.Locations.Registries.Groups.TestIamPermissions
-  ( -- * Resource
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource,
+    (
+    -- * Resource
+      CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource
 
     -- ** Constructing a Request
-    newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions,
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions,
-  )
-where
+    , newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
+    , CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
+    ) where
 
-import Gogol.CloudIOT.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudIOT.Types
 
 -- | A resource alias for @cloudiot.projects.locations.registries.groups.testIamPermissions@ method which the
 -- 'CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions' request conforms to.
-type CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource =
-  "v1"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
-    Core.:> Core.Post '[Core.JSON] TestIamPermissionsResponse
+type CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "resource" "testIamPermissions"
+         Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
+                       Core.:>
+                       Core.Post '[Core.JSON] TestIamPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.
 --
 -- /See:/ 'newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions' smart constructor.
 data CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions = CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: TestIamPermissionsRequest,
-    -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: TestIamPermissionsRequest
+      -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions' with the minimum fields required to make a request.
-newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions ::
-  -- |  Multipart request metadata. See 'payload'.
-  TestIamPermissionsRequest ->
-  -- |  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
+newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions 
+    ::  TestIamPermissionsRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
 newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions payload resource =
   CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
-  where
-  type
-    Rs
-      CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions =
-      TestIamPermissionsResponse
-  type
-    Scopes
-      CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudiot"
-       ]
-  requestClient
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudIOTService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
+         where
+        type Rs
+               CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
+             = TestIamPermissionsResponse
+        type Scopes
+               CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudiot"]
+        requestClient
+          CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              cloudIOTService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource)
+                      Core.mempty
+
