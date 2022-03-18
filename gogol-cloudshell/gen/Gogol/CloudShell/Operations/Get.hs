@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell.Users.Environments.Get
+-- Module      : Gogol.CloudShell.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an environment. Returns NOT_FOUND if the environment does not exist.
+-- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.users.environments.get@.
-module Network.Google.CloudShell.Users.Environments.Get
+-- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.operations.get@.
+module Gogol.CloudShell.Operations.Get
   ( -- * Resource
-    CloudShellUsersEnvironmentsGetResource,
+    CloudShellOperationsGetResource,
 
     -- ** Constructing a Request
-    newCloudShellUsersEnvironmentsGet,
-    CloudShellUsersEnvironmentsGet,
+    newCloudShellOperationsGet,
+    CloudShellOperationsGet,
   )
 where
 
-import Network.Google.CloudShell.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudShell.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudshell.users.environments.get@ method which the
--- 'CloudShellUsersEnvironmentsGet' request conforms to.
-type CloudShellUsersEnvironmentsGetResource =
+-- | A resource alias for @cloudshell.operations.get@ method which the
+-- 'CloudShellOperationsGet' request conforms to.
+type CloudShellOperationsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudShellUsersEnvironmentsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Environment
+    Core.:> Core.Get '[Core.JSON] Operation
 
--- | Gets an environment. Returns NOT_FOUND if the environment does not exist.
+-- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ 'newCloudShellUsersEnvironmentsGet' smart constructor.
-data CloudShellUsersEnvironmentsGet = CloudShellUsersEnvironmentsGet
+-- /See:/ 'newCloudShellOperationsGet' smart constructor.
+data CloudShellOperationsGet = CloudShellOperationsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Name of the requested resource, for example @users\/me\/environments\/default@ or @users\/someone\@example.com\/environments\/default@.
+    -- | The name of the operation resource.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudShellUsersEnvironmentsGet = CloudShellUsersEnvironmentsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudShellUsersEnvironmentsGet' with the minimum fields required to make a request.
-newCloudShellUsersEnvironmentsGet ::
-  -- |  Required. Name of the requested resource, for example @users\/me\/environments\/default@ or @users\/someone\@example.com\/environments\/default@. See 'name'.
+-- | Creates a value of 'CloudShellOperationsGet' with the minimum fields required to make a request.
+newCloudShellOperationsGet ::
+  -- |  The name of the operation resource. See 'name'.
   Core.Text ->
-  CloudShellUsersEnvironmentsGet
-newCloudShellUsersEnvironmentsGet name =
-  CloudShellUsersEnvironmentsGet
+  CloudShellOperationsGet
+newCloudShellOperationsGet name =
+  CloudShellOperationsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -89,15 +89,12 @@ newCloudShellUsersEnvironmentsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudShellUsersEnvironmentsGet
-  where
-  type Rs CloudShellUsersEnvironmentsGet = Environment
+instance Core.GoogleRequest CloudShellOperationsGet where
+  type Rs CloudShellOperationsGet = Operation
   type
-    Scopes CloudShellUsersEnvironmentsGet =
+    Scopes CloudShellOperationsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient CloudShellUsersEnvironmentsGet {..} =
+  requestClient CloudShellOperationsGet {..} =
     go
       name
       xgafv
@@ -111,6 +108,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy CloudShellUsersEnvironmentsGetResource
+              Core.Proxy CloudShellOperationsGetResource
           )
           Core.mempty

@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell.Internal.Product
+-- Module      : Gogol.CloudShell.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.CloudShell.Internal.Product
+module Gogol.CloudShell.Internal.Product
   ( -- * AddPublicKeyMetadata
     AddPublicKeyMetadata (..),
     newAddPublicKeyMetadata,
@@ -120,8 +120,8 @@ module Network.Google.CloudShell.Internal.Product
   )
 where
 
-import Network.Google.CloudShell.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudShell.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Message included in the metadata field of operations returned from AddPublicKey.
 --

@@ -19,36 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudShell.Users.Environments.AddPublicKey
+-- Module      : Gogol.CloudShell.Users.Environments.RemovePublicKey
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a public SSH key to an environment, allowing clients with the corresponding private key to connect to that environment via SSH. If a key with the same content already exists, this will error with ALREADY_EXISTS.
+-- Removes a public SSH key from an environment. Clients will no longer be able to connect to the environment using the corresponding private key. If a key with the same content is not present, this will error with NOT_FOUND.
 --
--- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.users.environments.addPublicKey@.
-module Network.Google.CloudShell.Users.Environments.AddPublicKey
+-- /See:/ <https://cloud.google.com/shell/docs/ Cloud Shell API Reference> for @cloudshell.users.environments.removePublicKey@.
+module Gogol.CloudShell.Users.Environments.RemovePublicKey
   ( -- * Resource
-    CloudShellUsersEnvironmentsAddPublicKeyResource,
+    CloudShellUsersEnvironmentsRemovePublicKeyResource,
 
     -- ** Constructing a Request
-    newCloudShellUsersEnvironmentsAddPublicKey,
-    CloudShellUsersEnvironmentsAddPublicKey,
+    newCloudShellUsersEnvironmentsRemovePublicKey,
+    CloudShellUsersEnvironmentsRemovePublicKey,
   )
 where
 
-import Network.Google.CloudShell.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudShell.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudshell.users.environments.addPublicKey@ method which the
--- 'CloudShellUsersEnvironmentsAddPublicKey' request conforms to.
-type CloudShellUsersEnvironmentsAddPublicKeyResource =
+-- | A resource alias for @cloudshell.users.environments.removePublicKey@ method which the
+-- 'CloudShellUsersEnvironmentsRemovePublicKey' request conforms to.
+type CloudShellUsersEnvironmentsRemovePublicKeyResource =
   "v1"
     Core.:> Core.CaptureMode
               "environment"
-              "addPublicKey"
+              "removePublicKey"
               Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -56,23 +56,23 @@ type CloudShellUsersEnvironmentsAddPublicKeyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AddPublicKeyRequest
+    Core.:> Core.ReqBody '[Core.JSON] RemovePublicKeyRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Adds a public SSH key to an environment, allowing clients with the corresponding private key to connect to that environment via SSH. If a key with the same content already exists, this will error with ALREADY_EXISTS.
+-- | Removes a public SSH key from an environment. Clients will no longer be able to connect to the environment using the corresponding private key. If a key with the same content is not present, this will error with NOT_FOUND.
 --
--- /See:/ 'newCloudShellUsersEnvironmentsAddPublicKey' smart constructor.
-data CloudShellUsersEnvironmentsAddPublicKey = CloudShellUsersEnvironmentsAddPublicKey
+-- /See:/ 'newCloudShellUsersEnvironmentsRemovePublicKey' smart constructor.
+data CloudShellUsersEnvironmentsRemovePublicKey = CloudShellUsersEnvironmentsRemovePublicKey
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Environment this key should be added to, e.g. @users\/me\/environments\/default@.
+    -- | Environment this key should be removed from, e.g. @users\/me\/environments\/default@.
     environment :: Core.Text,
     -- | Multipart request metadata.
-    payload :: AddPublicKeyRequest,
+    payload :: RemovePublicKeyRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,15 +80,15 @@ data CloudShellUsersEnvironmentsAddPublicKey = CloudShellUsersEnvironmentsAddPub
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudShellUsersEnvironmentsAddPublicKey' with the minimum fields required to make a request.
-newCloudShellUsersEnvironmentsAddPublicKey ::
-  -- |  Environment this key should be added to, e.g. @users\/me\/environments\/default@. See 'environment'.
+-- | Creates a value of 'CloudShellUsersEnvironmentsRemovePublicKey' with the minimum fields required to make a request.
+newCloudShellUsersEnvironmentsRemovePublicKey ::
+  -- |  Environment this key should be removed from, e.g. @users\/me\/environments\/default@. See 'environment'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  AddPublicKeyRequest ->
-  CloudShellUsersEnvironmentsAddPublicKey
-newCloudShellUsersEnvironmentsAddPublicKey environment payload =
-  CloudShellUsersEnvironmentsAddPublicKey
+  RemovePublicKeyRequest ->
+  CloudShellUsersEnvironmentsRemovePublicKey
+newCloudShellUsersEnvironmentsRemovePublicKey environment payload =
+  CloudShellUsersEnvironmentsRemovePublicKey
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -100,16 +100,17 @@ newCloudShellUsersEnvironmentsAddPublicKey environment payload =
 
 instance
   Core.GoogleRequest
-    CloudShellUsersEnvironmentsAddPublicKey
+    CloudShellUsersEnvironmentsRemovePublicKey
   where
   type
-    Rs CloudShellUsersEnvironmentsAddPublicKey =
+    Rs CloudShellUsersEnvironmentsRemovePublicKey =
       Operation
   type
-    Scopes CloudShellUsersEnvironmentsAddPublicKey =
+    Scopes
+      CloudShellUsersEnvironmentsRemovePublicKey =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudShellUsersEnvironmentsAddPublicKey {..} =
+    CloudShellUsersEnvironmentsRemovePublicKey {..} =
       go
         environment
         xgafv
@@ -125,6 +126,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudShellUsersEnvironmentsAddPublicKeyResource
+                  CloudShellUsersEnvironmentsRemovePublicKeyResource
             )
             Core.mempty
