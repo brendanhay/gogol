@@ -1,274 +1,210 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DoubleClickBids
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- DoubleClick Bid Manager API allows users to manage and create campaigns
--- and reports.
+-- DoubleClick Bid Manager API allows users to manage and create campaigns and reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Network.Google.DoubleClickBids
-    (
-    -- * Service Configuration
-      doubleClickBidsService
+  ( -- * Configuration
+    doubleClickBidsService,
 
     -- * OAuth Scopes
-    , doubleClickBidManagerScope
-
-    -- * API Declaration
-    , DoubleClickBidsAPI
+    doubleclickbidManagerScope,
 
     -- * Resources
 
     -- ** doubleclickbidmanager.queries.createquery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
+    DoubleclickbidmanagerQueriesCreatequeryResource,
+    newDoubleclickbidmanagerQueriesCreatequery,
+    DoubleclickbidmanagerQueriesCreatequery,
 
     -- ** doubleclickbidmanager.queries.deletequery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
+    DoubleclickbidmanagerQueriesDeletequeryResource,
+    newDoubleclickbidmanagerQueriesDeletequery,
+    DoubleclickbidmanagerQueriesDeletequery,
 
     -- ** doubleclickbidmanager.queries.getquery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
+    DoubleclickbidmanagerQueriesGetqueryResource,
+    newDoubleclickbidmanagerQueriesGetquery,
+    DoubleclickbidmanagerQueriesGetquery,
 
     -- ** doubleclickbidmanager.queries.listqueries
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
+    DoubleclickbidmanagerQueriesListqueriesResource,
+    newDoubleclickbidmanagerQueriesListqueries,
+    DoubleclickbidmanagerQueriesListqueries,
 
     -- ** doubleclickbidmanager.queries.runquery
-    , module Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
+    DoubleclickbidmanagerQueriesRunqueryResource,
+    newDoubleclickbidmanagerQueriesRunquery,
+    DoubleclickbidmanagerQueriesRunquery,
 
     -- ** doubleclickbidmanager.reports.listreports
-    , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
+    DoubleclickbidmanagerReportsListreportsResource,
+    newDoubleclickbidmanagerReportsListreports,
+    DoubleclickbidmanagerReportsListreports,
 
     -- * Types
 
-    -- ** ListReportsResponse
-    , ListReportsResponse
-    , listReportsResponse
-    , lrrNextPageToken
-    , lrrReports
-    , lrrKind
-
-    -- ** DisjunctiveMatchStatement
-    , DisjunctiveMatchStatement
-    , disjunctiveMatchStatement
-    , dmsEventFilters
-
-    -- ** QueryMetadataFormat
-    , QueryMetadataFormat (..)
-
-    -- ** PathQueryOptionsFilterFilter
-    , PathQueryOptionsFilterFilter (..)
-
-    -- ** QueryMetadata
-    , QueryMetadata
-    , queryMetadata
-    , qmGoogleCloudStoragePathForLatestReport
-    , qmLocale
-    , qmFormat
-    , qmGoogleDrivePathForLatestReport
-    , qmShareEmailAddress
-    , qmRunning
-    , qmDataRange
-    , qmLatestReportRunTimeMs
-    , qmReportCount
-    , qmTitle
-    , qmSendNotification
-
-    -- ** PathQueryOptions
-    , PathQueryOptions
-    , pathQueryOptions
-    , pqoPathFilters
-    , pqoChannelGrouping
-
-    -- ** RunQueryRequest
-    , RunQueryRequest
-    , runQueryRequest
-    , rqrReportDataEndTimeMs
-    , rqrDataRange
-    , rqrReportDataStartTimeMs
-    , rqrTimezoneCode
-
-    -- ** FilterPair
-    , FilterPair
-    , filterPair
-    , fpValue
-    , fpType
-
-    -- ** ParametersType
-    , ParametersType (..)
-
-    -- ** ListQueriesResponse
-    , ListQueriesResponse
-    , listQueriesResponse
-    , lqrQueries
-    , lqrNextPageToken
-    , lqrKind
-
-    -- ** QueryMetadataDataRange
-    , QueryMetadataDataRange (..)
-
-    -- ** ParametersMetricsItem
-    , ParametersMetricsItem (..)
-
-    -- ** QueryScheduleFrequency
-    , QueryScheduleFrequency (..)
-
-    -- ** ReportMetadata
-    , ReportMetadata
-    , reportMetadata
-    , rmStatus
-    , rmReportDataEndTimeMs
-    , rmGoogleCloudStoragePath
-    , rmReportDataStartTimeMs
-
-    -- ** Report
-    , Report
-    , report
-    , rParams
-    , rKey
-    , rMetadata
-
-    -- ** Rule
-    , Rule
-    , rule
-    , rName
-    , rDisjunctiveMatchStatements
-
-    -- ** ReportKey
-    , ReportKey
-    , reportKey
-    , rkQueryId
-    , rkReportId
-
-    -- ** EventFilter
-    , EventFilter
-    , eventFilter
-    , efDimensionFilter
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** ChannelGrouping
-    , ChannelGrouping
-    , channelGrouping
-    , cgRules
-    , cgFallbackName
-    , cgName
+    ChannelGrouping (..),
+    newChannelGrouping,
 
-    -- ** PathQueryOptionsFilterMatch
-    , PathQueryOptionsFilterMatch (..)
+    -- ** DisjunctiveMatchStatement
+    DisjunctiveMatchStatement (..),
+    newDisjunctiveMatchStatement,
 
-    -- ** PathQueryOptionsFilter
-    , PathQueryOptionsFilter
-    , pathQueryOptionsFilter
-    , pqofValues
-    , pqofFilter
-    , pqofMatch
+    -- ** EventFilter
+    EventFilter (..),
+    newEventFilter,
 
-    -- ** QuerySchedule
-    , QuerySchedule
-    , querySchedule
-    , qsFrequency
-    , qsStartTimeMs
-    , qsEndTimeMs
-    , qsNextRunMinuteOfDay
-    , qsNextRunTimezoneCode
+    -- ** FilterPair
+    FilterPair (..),
+    newFilterPair,
 
-    -- ** ReportStatus
-    , ReportStatus
-    , reportStatus
-    , rsState
-    , rsFinishTimeMs
-    , rsFormat
-    , rsFailure
+    -- ** FilterPair_Type
+    FilterPair_Type (..),
 
-    -- ** Query
-    , Query
-    , query
-    , qQueryId
-    , qReportDataEndTimeMs
-    , qSchedule
-    , qKind
-    , qParams
-    , qMetadata
-    , qReportDataStartTimeMs
-    , qTimezoneCode
+    -- ** ListQueriesResponse
+    ListQueriesResponse (..),
+    newListQueriesResponse,
 
-    -- ** Parameters
-    , Parameters
-    , parameters
-    , pMetrics
-    , pIncludeInviteData
-    , pFilters
-    , pGroupBys
-    , pOptions
-    , pType
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** PathFilterPathMatchPosition
-    , PathFilterPathMatchPosition (..)
-
-    -- ** FilterPairType
-    , FilterPairType (..)
-
-    -- ** RunQueryRequestDataRange
-    , RunQueryRequestDataRange (..)
-
-    -- ** ReportStatusState
-    , ReportStatusState (..)
-
-    -- ** PathFilter
-    , PathFilter
-    , pathFilter
-    , pfEventFilters
-    , pfPathMatchPosition
+    -- ** ListReportsResponse
+    ListReportsResponse (..),
+    newListReportsResponse,
 
     -- ** Options
-    , Options
-    , options
-    , oPathQueryOptions
-    , oIncludeOnlyTargetedUserLists
+    Options (..),
+    newOptions,
 
-    -- ** ParametersGroupBysItem
-    , ParametersGroupBysItem (..)
+    -- ** Parameters
+    Parameters (..),
+    newParameters,
 
-    -- ** ReportFailureErrorCode
-    , ReportFailureErrorCode (..)
+    -- ** Parameters_GroupBysItem
+    Parameters_GroupBysItem (..),
+
+    -- ** Parameters_MetricsItem
+    Parameters_MetricsItem (..),
+
+    -- ** Parameters_Type
+    Parameters_Type (..),
+
+    -- ** PathFilter
+    PathFilter (..),
+    newPathFilter,
+
+    -- ** PathFilter_PathMatchPosition
+    PathFilter_PathMatchPosition (..),
+
+    -- ** PathQueryOptions
+    PathQueryOptions (..),
+    newPathQueryOptions,
+
+    -- ** PathQueryOptionsFilter
+    PathQueryOptionsFilter (..),
+    newPathQueryOptionsFilter,
+
+    -- ** PathQueryOptionsFilter_Filter
+    PathQueryOptionsFilter_Filter (..),
+
+    -- ** PathQueryOptionsFilter_Match
+    PathQueryOptionsFilter_Match (..),
+
+    -- ** Query
+    Query (..),
+    newQuery,
+
+    -- ** QueryMetadata
+    QueryMetadata (..),
+    newQueryMetadata,
+
+    -- ** QueryMetadata_DataRange
+    QueryMetadata_DataRange (..),
+
+    -- ** QueryMetadata_Format
+    QueryMetadata_Format (..),
+
+    -- ** QuerySchedule
+    QuerySchedule (..),
+    newQuerySchedule,
+
+    -- ** QuerySchedule_Frequency
+    QuerySchedule_Frequency (..),
+
+    -- ** Report
+    Report (..),
+    newReport,
 
     -- ** ReportFailure
-    , ReportFailure
-    , reportFailure
-    , rfErrorCode
+    ReportFailure (..),
+    newReportFailure,
 
-    -- ** ReportStatusFormat
-    , ReportStatusFormat (..)
-    ) where
+    -- ** ReportFailure_ErrorCode
+    ReportFailure_ErrorCode (..),
 
-import Network.Google.Prelude
+    -- ** ReportKey
+    ReportKey (..),
+    newReportKey,
+
+    -- ** ReportMetadata
+    ReportMetadata (..),
+    newReportMetadata,
+
+    -- ** ReportStatus
+    ReportStatus (..),
+    newReportStatus,
+
+    -- ** ReportStatus_Format
+    ReportStatus_Format (..),
+
+    -- ** ReportStatus_State
+    ReportStatus_State (..),
+
+    -- ** Rule
+    Rule (..),
+    newRule,
+
+    -- ** RunQueryRequest
+    RunQueryRequest (..),
+    newRunQueryRequest,
+
+    -- ** RunQueryRequest_DataRange
+    RunQueryRequest_DataRange (..),
+  )
+where
+
+import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
+import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
+import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
+import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
+import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
+import Network.Google.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
 import Network.Google.DoubleClickBids.Types
-import Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
-import Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
-import Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
-import Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
-import Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
-import Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the DoubleClick Bid Manager API service.
-type DoubleClickBidsAPI =
-     QueriesGetQueryResource :<|> QueriesRunQueryResource
-       :<|> QueriesDeleteQueryResource
-       :<|> QueriesCreateQueryResource
-       :<|> QueriesListqueriesResource
-       :<|> ReportsListreportsResource
