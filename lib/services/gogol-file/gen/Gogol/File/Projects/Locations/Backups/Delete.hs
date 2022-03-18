@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,82 +30,90 @@
 --
 -- /See:/ <https://cloud.google.com/filestore/ Cloud Filestore API Reference> for @file.projects.locations.backups.delete@.
 module Gogol.File.Projects.Locations.Backups.Delete
-    (
-    -- * Resource
-      FileProjectsLocationsBackupsDeleteResource
+  ( -- * Resource
+    FileProjectsLocationsBackupsDeleteResource,
 
     -- ** Constructing a Request
-    , newFileProjectsLocationsBackupsDelete
-    , FileProjectsLocationsBackupsDelete
-    ) where
+    newFileProjectsLocationsBackupsDelete,
+    FileProjectsLocationsBackupsDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.File.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @file.projects.locations.backups.delete@ method which the
 -- 'FileProjectsLocationsBackupsDelete' request conforms to.
 type FileProjectsLocationsBackupsDeleteResource =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Delete '[Core.JSON] Operation
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] Operation
 
 -- | Deletes a backup.
 --
 -- /See:/ 'newFileProjectsLocationsBackupsDelete' smart constructor.
 data FileProjectsLocationsBackupsDelete = FileProjectsLocationsBackupsDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The backup resource name, in the format @projects\/{project_number}\/locations\/{location}\/backups\/{backup_id}@
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The backup resource name, in the format @projects\/{project_number}\/locations\/{location}\/backups\/{backup_id}@
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FileProjectsLocationsBackupsDelete' with the minimum fields required to make a request.
-newFileProjectsLocationsBackupsDelete 
-    ::  Core.Text
-       -- ^  Required. The backup resource name, in the format @projects\/{project_number}\/locations\/{location}\/backups\/{backup_id}@ See 'name'.
-    -> FileProjectsLocationsBackupsDelete
+newFileProjectsLocationsBackupsDelete ::
+  -- |  Required. The backup resource name, in the format @projects\/{project_number}\/locations\/{location}\/backups\/{backup_id}@ See 'name'.
+  Core.Text ->
+  FileProjectsLocationsBackupsDelete
 newFileProjectsLocationsBackupsDelete name =
   FileProjectsLocationsBackupsDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           FileProjectsLocationsBackupsDelete
-         where
-        type Rs FileProjectsLocationsBackupsDelete =
-             Operation
-        type Scopes FileProjectsLocationsBackupsDelete =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient FileProjectsLocationsBackupsDelete{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              fileService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           FileProjectsLocationsBackupsDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    FileProjectsLocationsBackupsDelete
+  where
+  type
+    Rs FileProjectsLocationsBackupsDelete =
+      Operation
+  type
+    Scopes FileProjectsLocationsBackupsDelete =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient FileProjectsLocationsBackupsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      fileService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                FileProjectsLocationsBackupsDeleteResource
+          )
+          Core.mempty

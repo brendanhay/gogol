@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.File.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Backup_SourceInstanceTier
     Backup_SourceInstanceTier
-      (
-        Backup_SourceInstanceTier_TIERUNSPECIFIED,
+      ( Backup_SourceInstanceTier_TIERUNSPECIFIED,
         Backup_SourceInstanceTier_Standard,
         Backup_SourceInstanceTier_Premium,
         Backup_SourceInstanceTier_BASICHDD,
@@ -58,8 +47,7 @@ module Gogol.File.Internal.Sum
 
     -- * Backup_State
     Backup_State
-      (
-        Backup_State_STATEUNSPECIFIED,
+      ( Backup_State_STATEUNSPECIFIED,
         Backup_State_Creating,
         Backup_State_Finalizing,
         Backup_State_Ready,
@@ -69,8 +57,7 @@ module Gogol.File.Internal.Sum
 
     -- * GoogleCloudSaasacceleratorManagementProvidersV1Instance_State
     GoogleCloudSaasacceleratorManagementProvidersV1Instance_State
-      (
-        GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_STATEUNSPECIFIED,
+      ( GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_STATEUNSPECIFIED,
         GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Creating,
         GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Ready,
         GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Updating,
@@ -82,8 +69,7 @@ module Gogol.File.Internal.Sum
 
     -- * Instance_State
     Instance_State
-      (
-        Instance_State_STATEUNSPECIFIED,
+      ( Instance_State_STATEUNSPECIFIED,
         Instance_State_Creating,
         Instance_State_Ready,
         Instance_State_Repairing,
@@ -96,16 +82,14 @@ module Gogol.File.Internal.Sum
 
     -- * Instance_SuspensionReasonsItem
     Instance_SuspensionReasonsItem
-      (
-        Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED,
+      ( Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED,
         Instance_SuspensionReasonsItem_KMSKEYISSUE,
         ..
       ),
 
     -- * Instance_Tier
     Instance_Tier
-      (
-        Instance_Tier_TIERUNSPECIFIED,
+      ( Instance_Tier_TIERUNSPECIFIED,
         Instance_Tier_Standard,
         Instance_Tier_Premium,
         Instance_Tier_BASICHDD,
@@ -117,8 +101,7 @@ module Gogol.File.Internal.Sum
 
     -- * MaintenancePolicy_State
     MaintenancePolicy_State
-      (
-        MaintenancePolicy_State_STATEUNSPECIFIED,
+      ( MaintenancePolicy_State_STATEUNSPECIFIED,
         MaintenancePolicy_State_Ready,
         MaintenancePolicy_State_Deleting,
         ..
@@ -126,8 +109,7 @@ module Gogol.File.Internal.Sum
 
     -- * NetworkConfig_ConnectMode
     NetworkConfig_ConnectMode
-      (
-        NetworkConfig_ConnectMode_CONNECTMODEUNSPECIFIED,
+      ( NetworkConfig_ConnectMode_CONNECTMODEUNSPECIFIED,
         NetworkConfig_ConnectMode_DIRECTPEERING,
         NetworkConfig_ConnectMode_PRIVATESERVICEACCESS,
         ..
@@ -135,16 +117,14 @@ module Gogol.File.Internal.Sum
 
     -- * NetworkConfig_ModesItem
     NetworkConfig_ModesItem
-      (
-        NetworkConfig_ModesItem_ADDRESSMODEUNSPECIFIED,
+      ( NetworkConfig_ModesItem_ADDRESSMODEUNSPECIFIED,
         NetworkConfig_ModesItem_MODE_IPV4,
         ..
       ),
 
     -- * NfsExportOptions_AccessMode
     NfsExportOptions_AccessMode
-      (
-        NfsExportOptions_AccessMode_ACCESSMODEUNSPECIFIED,
+      ( NfsExportOptions_AccessMode_ACCESSMODEUNSPECIFIED,
         NfsExportOptions_AccessMode_READONLY,
         NfsExportOptions_AccessMode_READWRITE,
         ..
@@ -152,8 +132,7 @@ module Gogol.File.Internal.Sum
 
     -- * NfsExportOptions_SquashMode
     NfsExportOptions_SquashMode
-      (
-        NfsExportOptions_SquashMode_SQUASHMODEUNSPECIFIED,
+      ( NfsExportOptions_SquashMode_SQUASHMODEUNSPECIFIED,
         NfsExportOptions_SquashMode_NOROOTSQUASH,
         NfsExportOptions_SquashMode_ROOTSQUASH,
         ..
@@ -161,8 +140,7 @@ module Gogol.File.Internal.Sum
 
     -- * Schedule_Day
     Schedule_Day
-      (
-        Schedule_Day_DAYOFWEEKUNSPECIFIED,
+      ( Schedule_Day_DAYOFWEEKUNSPECIFIED,
         Schedule_Day_Monday,
         Schedule_Day_Tuesday,
         Schedule_Day_Wednesday,
@@ -175,8 +153,7 @@ module Gogol.File.Internal.Sum
 
     -- * Snapshot_State
     Snapshot_State
-      (
-        Snapshot_State_STATEUNSPECIFIED,
+      ( Snapshot_State_STATEUNSPECIFIED,
         Snapshot_State_Creating,
         Snapshot_State_Ready,
         Snapshot_State_Deleting,
@@ -185,28 +162,28 @@ module Gogol.File.Internal.Sum
 
     -- * UpdatePolicy_Channel
     UpdatePolicy_Channel
-      (
-        UpdatePolicy_Channel_UPDATECHANNELUNSPECIFIED,
+      ( UpdatePolicy_Channel_UPDATECHANNELUNSPECIFIED,
         UpdatePolicy_Channel_Earlier,
         UpdatePolicy_Channel_Later,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -219,20 +196,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Output only. The service tier of the source Cloud Filestore instance that this backup is created from.
-newtype Backup_SourceInstanceTier = Backup_SourceInstanceTier { fromBackup_SourceInstanceTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Backup_SourceInstanceTier = Backup_SourceInstanceTier {fromBackup_SourceInstanceTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not set.
 pattern Backup_SourceInstanceTier_TIERUNSPECIFIED :: Backup_SourceInstanceTier
@@ -270,20 +248,21 @@ pattern Backup_SourceInstanceTier_Enterprise = Backup_SourceInstanceTier "ENTERP
   Backup_SourceInstanceTier_BASICSSD,
   Backup_SourceInstanceTier_HIGHSCALESSD,
   Backup_SourceInstanceTier_Enterprise,
-  Backup_SourceInstanceTier #-}
+  Backup_SourceInstanceTier
+  #-}
 
 -- | Output only. The backup state.
-newtype Backup_State = Backup_State { fromBackup_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Backup_State = Backup_State {fromBackup_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | State not set.
 pattern Backup_State_STATEUNSPECIFIED :: Backup_State
@@ -311,20 +290,21 @@ pattern Backup_State_Deleting = Backup_State "DELETING"
   Backup_State_Finalizing,
   Backup_State_Ready,
   Backup_State_Deleting,
-  Backup_State #-}
+  Backup_State
+  #-}
 
 -- | Output only. Current lifecycle state of the resource (e.g. if it\'s being created or ready to use).
-newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_State = GoogleCloudSaasacceleratorManagementProvidersV1Instance_State { fromGoogleCloudSaasacceleratorManagementProvidersV1Instance_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_State = GoogleCloudSaasacceleratorManagementProvidersV1Instance_State {fromGoogleCloudSaasacceleratorManagementProvidersV1Instance_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state.
 pattern GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_STATEUNSPECIFIED :: GoogleCloudSaasacceleratorManagementProvidersV1Instance_State
@@ -362,20 +342,21 @@ pattern GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Error' = G
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Repairing,
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Deleting,
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Error',
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_State #-}
+  GoogleCloudSaasacceleratorManagementProvidersV1Instance_State
+  #-}
 
 -- | Output only. The instance state.
-newtype Instance_State = Instance_State { fromInstance_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | State not set.
 pattern Instance_State_STATEUNSPECIFIED :: Instance_State
@@ -418,19 +399,20 @@ pattern Instance_State_Suspended = Instance_State "SUSPENDED"
   Instance_State_Error',
   Instance_State_Restoring,
   Instance_State_Suspended,
-  Instance_State #-}
+  Instance_State
+  #-}
 
-newtype Instance_SuspensionReasonsItem = Instance_SuspensionReasonsItem { fromInstance_SuspensionReasonsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_SuspensionReasonsItem = Instance_SuspensionReasonsItem {fromInstance_SuspensionReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not set.
 pattern Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED :: Instance_SuspensionReasonsItem
@@ -443,20 +425,21 @@ pattern Instance_SuspensionReasonsItem_KMSKEYISSUE = Instance_SuspensionReasonsI
 {-# COMPLETE
   Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED,
   Instance_SuspensionReasonsItem_KMSKEYISSUE,
-  Instance_SuspensionReasonsItem #-}
+  Instance_SuspensionReasonsItem
+  #-}
 
 -- | The service tier of the instance.
-newtype Instance_Tier = Instance_Tier { fromInstance_Tier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_Tier = Instance_Tier {fromInstance_Tier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not set.
 pattern Instance_Tier_TIERUNSPECIFIED :: Instance_Tier
@@ -494,20 +477,21 @@ pattern Instance_Tier_Enterprise = Instance_Tier "ENTERPRISE"
   Instance_Tier_BASICSSD,
   Instance_Tier_HIGHSCALESSD,
   Instance_Tier_Enterprise,
-  Instance_Tier #-}
+  Instance_Tier
+  #-}
 
 -- | Optional. The state of the policy.
-newtype MaintenancePolicy_State = MaintenancePolicy_State { fromMaintenancePolicy_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MaintenancePolicy_State = MaintenancePolicy_State {fromMaintenancePolicy_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state.
 pattern MaintenancePolicy_State_STATEUNSPECIFIED :: MaintenancePolicy_State
@@ -525,20 +509,21 @@ pattern MaintenancePolicy_State_Deleting = MaintenancePolicy_State "DELETING"
   MaintenancePolicy_State_STATEUNSPECIFIED,
   MaintenancePolicy_State_Ready,
   MaintenancePolicy_State_Deleting,
-  MaintenancePolicy_State #-}
+  MaintenancePolicy_State
+  #-}
 
 -- | The network connect mode of the Filestore instance. If not provided, the connect mode defaults to DIRECT_PEERING.
-newtype NetworkConfig_ConnectMode = NetworkConfig_ConnectMode { fromNetworkConfig_ConnectMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkConfig_ConnectMode = NetworkConfig_ConnectMode {fromNetworkConfig_ConnectMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not set.
 pattern NetworkConfig_ConnectMode_CONNECTMODEUNSPECIFIED :: NetworkConfig_ConnectMode
@@ -556,19 +541,20 @@ pattern NetworkConfig_ConnectMode_PRIVATESERVICEACCESS = NetworkConfig_ConnectMo
   NetworkConfig_ConnectMode_CONNECTMODEUNSPECIFIED,
   NetworkConfig_ConnectMode_DIRECTPEERING,
   NetworkConfig_ConnectMode_PRIVATESERVICEACCESS,
-  NetworkConfig_ConnectMode #-}
+  NetworkConfig_ConnectMode
+  #-}
 
-newtype NetworkConfig_ModesItem = NetworkConfig_ModesItem { fromNetworkConfig_ModesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkConfig_ModesItem = NetworkConfig_ModesItem {fromNetworkConfig_ModesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Internet protocol not set.
 pattern NetworkConfig_ModesItem_ADDRESSMODEUNSPECIFIED :: NetworkConfig_ModesItem
@@ -581,20 +567,21 @@ pattern NetworkConfig_ModesItem_MODE_IPV4 = NetworkConfig_ModesItem "MODE_IPV4"
 {-# COMPLETE
   NetworkConfig_ModesItem_ADDRESSMODEUNSPECIFIED,
   NetworkConfig_ModesItem_MODE_IPV4,
-  NetworkConfig_ModesItem #-}
+  NetworkConfig_ModesItem
+  #-}
 
 -- | Either READ/ONLY, for allowing only read requests on the exported directory, or READ/WRITE, for allowing both read and write requests. The default is READ_WRITE.
-newtype NfsExportOptions_AccessMode = NfsExportOptions_AccessMode { fromNfsExportOptions_AccessMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NfsExportOptions_AccessMode = NfsExportOptions_AccessMode {fromNfsExportOptions_AccessMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | AccessMode not set.
 pattern NfsExportOptions_AccessMode_ACCESSMODEUNSPECIFIED :: NfsExportOptions_AccessMode
@@ -612,20 +599,21 @@ pattern NfsExportOptions_AccessMode_READWRITE = NfsExportOptions_AccessMode "REA
   NfsExportOptions_AccessMode_ACCESSMODEUNSPECIFIED,
   NfsExportOptions_AccessMode_READONLY,
   NfsExportOptions_AccessMode_READWRITE,
-  NfsExportOptions_AccessMode #-}
+  NfsExportOptions_AccessMode
+  #-}
 
 -- | Either NO/ROOT/SQUASH, for allowing root access on the exported directory, or ROOT/SQUASH, for not allowing root access. The default is NO/ROOT_SQUASH.
-newtype NfsExportOptions_SquashMode = NfsExportOptions_SquashMode { fromNfsExportOptions_SquashMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NfsExportOptions_SquashMode = NfsExportOptions_SquashMode {fromNfsExportOptions_SquashMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | SquashMode not set.
 pattern NfsExportOptions_SquashMode_SQUASHMODEUNSPECIFIED :: NfsExportOptions_SquashMode
@@ -643,20 +631,21 @@ pattern NfsExportOptions_SquashMode_ROOTSQUASH = NfsExportOptions_SquashMode "RO
   NfsExportOptions_SquashMode_SQUASHMODEUNSPECIFIED,
   NfsExportOptions_SquashMode_NOROOTSQUASH,
   NfsExportOptions_SquashMode_ROOTSQUASH,
-  NfsExportOptions_SquashMode #-}
+  NfsExportOptions_SquashMode
+  #-}
 
 -- | Allows to define schedule that runs specified day of the week.
-newtype Schedule_Day = Schedule_Day { fromSchedule_Day :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Schedule_Day = Schedule_Day {fromSchedule_Day :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The day of the week is unspecified.
 pattern Schedule_Day_DAYOFWEEKUNSPECIFIED :: Schedule_Day
@@ -699,20 +688,21 @@ pattern Schedule_Day_Sunday = Schedule_Day "SUNDAY"
   Schedule_Day_Friday,
   Schedule_Day_Saturday,
   Schedule_Day_Sunday,
-  Schedule_Day #-}
+  Schedule_Day
+  #-}
 
 -- | Output only. The snapshot state.
-newtype Snapshot_State = Snapshot_State { fromSnapshot_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Snapshot_State = Snapshot_State {fromSnapshot_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | State not set.
 pattern Snapshot_State_STATEUNSPECIFIED :: Snapshot_State
@@ -735,20 +725,21 @@ pattern Snapshot_State_Deleting = Snapshot_State "DELETING"
   Snapshot_State_Creating,
   Snapshot_State_Ready,
   Snapshot_State_Deleting,
-  Snapshot_State #-}
+  Snapshot_State
+  #-}
 
 -- | Optional. Relative scheduling channel applied to resource.
-newtype UpdatePolicy_Channel = UpdatePolicy_Channel { fromUpdatePolicy_Channel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UpdatePolicy_Channel = UpdatePolicy_Channel {fromUpdatePolicy_Channel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified channel.
 pattern UpdatePolicy_Channel_UPDATECHANNELUNSPECIFIED :: UpdatePolicy_Channel
@@ -766,4 +757,5 @@ pattern UpdatePolicy_Channel_Later = UpdatePolicy_Channel "LATER"
   UpdatePolicy_Channel_UPDATECHANNELUNSPECIFIED,
   UpdatePolicy_Channel_Earlier,
   UpdatePolicy_Channel_Later,
-  UpdatePolicy_Channel #-}
+  UpdatePolicy_Channel
+  #-}
