@@ -1,63 +1,78 @@
-name:                  gogol-file
-version:               0.5.0
-synopsis:              Google Cloud Filestore SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-file
+version:            0.5.0
+synopsis:           Google Cloud Filestore SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    The Cloud Filestore API is used for creating and managing cloud file
-    servers.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  The Cloud Filestore API is used for creating and managing cloud file servers.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-file
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.File
-        , Network.Google.File.Types
-        , Network.Google.Resource.File.Projects.Locations.Backups.Create
-        , Network.Google.Resource.File.Projects.Locations.Backups.Delete
-        , Network.Google.Resource.File.Projects.Locations.Backups.Get
-        , Network.Google.Resource.File.Projects.Locations.Backups.List
-        , Network.Google.Resource.File.Projects.Locations.Backups.Patch
-        , Network.Google.Resource.File.Projects.Locations.Get
-        , Network.Google.Resource.File.Projects.Locations.Instances.Create
-        , Network.Google.Resource.File.Projects.Locations.Instances.Delete
-        , Network.Google.Resource.File.Projects.Locations.Instances.Get
-        , Network.Google.Resource.File.Projects.Locations.Instances.List
-        , Network.Google.Resource.File.Projects.Locations.Instances.Patch
-        , Network.Google.Resource.File.Projects.Locations.Instances.Restore
-        , Network.Google.Resource.File.Projects.Locations.List
-        , Network.Google.Resource.File.Projects.Locations.Operations.Cancel
-        , Network.Google.Resource.File.Projects.Locations.Operations.Delete
-        , Network.Google.Resource.File.Projects.Locations.Operations.Get
-        , Network.Google.Resource.File.Projects.Locations.Operations.List
+  exposed-modules:
+    Network.Google.File
+    Network.Google.File.Projects.Locations.Backups.Create
+    Network.Google.File.Projects.Locations.Backups.Delete
+    Network.Google.File.Projects.Locations.Backups.Get
+    Network.Google.File.Projects.Locations.Backups.List
+    Network.Google.File.Projects.Locations.Backups.Patch
+    Network.Google.File.Projects.Locations.Get
+    Network.Google.File.Projects.Locations.Instances.Create
+    Network.Google.File.Projects.Locations.Instances.Delete
+    Network.Google.File.Projects.Locations.Instances.Get
+    Network.Google.File.Projects.Locations.Instances.List
+    Network.Google.File.Projects.Locations.Instances.Patch
+    Network.Google.File.Projects.Locations.Instances.Restore
+    Network.Google.File.Projects.Locations.Instances.Snapshots.Create
+    Network.Google.File.Projects.Locations.Instances.Snapshots.Delete
+    Network.Google.File.Projects.Locations.Instances.Snapshots.Get
+    Network.Google.File.Projects.Locations.Instances.Snapshots.List
+    Network.Google.File.Projects.Locations.Instances.Snapshots.Patch
+    Network.Google.File.Projects.Locations.List
+    Network.Google.File.Projects.Locations.Operations.Cancel
+    Network.Google.File.Projects.Locations.Operations.Delete
+    Network.Google.File.Projects.Locations.Operations.Get
+    Network.Google.File.Projects.Locations.Operations.List
+    Network.Google.File.Types
 
-    other-modules:
-          Network.Google.File.Types.Product
-        , Network.Google.File.Types.Sum
+  other-modules:
+    Network.Google.File.Internal.Product
+    Network.Google.File.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
