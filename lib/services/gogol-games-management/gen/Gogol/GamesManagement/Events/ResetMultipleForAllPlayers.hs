@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +36,91 @@
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.events.resetMultipleForAllPlayers@.
 module Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
-  ( -- * Resource
-    GamesManagementEventsResetMultipleForAllPlayersResource,
+    (
+    -- * Resource
+      GamesManagementEventsResetMultipleForAllPlayersResource
 
     -- ** Constructing a Request
-    newGamesManagementEventsResetMultipleForAllPlayers,
-    GamesManagementEventsResetMultipleForAllPlayers,
-  )
-where
+    , newGamesManagementEventsResetMultipleForAllPlayers
+    , GamesManagementEventsResetMultipleForAllPlayers
+    ) where
 
-import Gogol.GamesManagement.Types
 import qualified Gogol.Prelude as Core
+import Gogol.GamesManagement.Types
 
 -- | A resource alias for @gamesManagement.events.resetMultipleForAllPlayers@ method which the
 -- 'GamesManagementEventsResetMultipleForAllPlayers' request conforms to.
-type GamesManagementEventsResetMultipleForAllPlayersResource =
-  "games"
-    Core.:> "v1management"
-    Core.:> "events"
-    Core.:> "resetMultipleForAllPlayers"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              EventsResetMultipleForAllRequest
-    Core.:> Core.Post '[Core.JSON] ()
+type GamesManagementEventsResetMultipleForAllPlayersResource
+     =
+     "games" Core.:>
+       "v1management" Core.:>
+         "events" Core.:>
+           "resetMultipleForAllPlayers" Core.:>
+             Core.QueryParam "$.xgafv" Xgafv Core.:>
+               Core.QueryParam "access_token" Core.Text Core.:>
+                 Core.QueryParam "callback" Core.Text Core.:>
+                   Core.QueryParam "uploadType" Core.Text Core.:>
+                     Core.QueryParam "upload_protocol" Core.Text Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.ReqBody '[Core.JSON]
+                           EventsResetMultipleForAllRequest
+                           Core.:> Core.Post '[Core.JSON] ()
 
 -- | Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset.
 --
 -- /See:/ 'newGamesManagementEventsResetMultipleForAllPlayers' smart constructor.
 data GamesManagementEventsResetMultipleForAllPlayers = GamesManagementEventsResetMultipleForAllPlayers
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: EventsResetMultipleForAllRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: EventsResetMultipleForAllRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GamesManagementEventsResetMultipleForAllPlayers' with the minimum fields required to make a request.
-newGamesManagementEventsResetMultipleForAllPlayers ::
-  -- |  Multipart request metadata. See 'payload'.
-  EventsResetMultipleForAllRequest ->
-  GamesManagementEventsResetMultipleForAllPlayers
+newGamesManagementEventsResetMultipleForAllPlayers 
+    ::  EventsResetMultipleForAllRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> GamesManagementEventsResetMultipleForAllPlayers
 newGamesManagementEventsResetMultipleForAllPlayers payload =
   GamesManagementEventsResetMultipleForAllPlayers
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesManagementEventsResetMultipleForAllPlayers
-  where
-  type
-    Rs
-      GamesManagementEventsResetMultipleForAllPlayers =
-      ()
-  type
-    Scopes
-      GamesManagementEventsResetMultipleForAllPlayers =
-      '["https://www.googleapis.com/auth/games"]
-  requestClient
-    GamesManagementEventsResetMultipleForAllPlayers {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        gamesManagementService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GamesManagementEventsResetMultipleForAllPlayersResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           GamesManagementEventsResetMultipleForAllPlayers
+         where
+        type Rs
+               GamesManagementEventsResetMultipleForAllPlayers
+             = ()
+        type Scopes
+               GamesManagementEventsResetMultipleForAllPlayers
+             = '["https://www.googleapis.com/auth/games"]
+        requestClient
+          GamesManagementEventsResetMultipleForAllPlayers{..}
+          = go xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              gamesManagementService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           GamesManagementEventsResetMultipleForAllPlayersResource)
+                      Core.mempty
+

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,93 +36,86 @@
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.scores.reset@.
 module Gogol.GamesManagement.Scores.Reset
-  ( -- * Resource
-    GamesManagementScoresResetResource,
+    (
+    -- * Resource
+      GamesManagementScoresResetResource
 
     -- ** Constructing a Request
-    newGamesManagementScoresReset,
-    GamesManagementScoresReset,
-  )
-where
+    , newGamesManagementScoresReset
+    , GamesManagementScoresReset
+    ) where
 
-import Gogol.GamesManagement.Types
 import qualified Gogol.Prelude as Core
+import Gogol.GamesManagement.Types
 
 -- | A resource alias for @gamesManagement.scores.reset@ method which the
 -- 'GamesManagementScoresReset' request conforms to.
 type GamesManagementScoresResetResource =
-  "games"
-    Core.:> "v1management"
-    Core.:> "leaderboards"
-    Core.:> Core.Capture "leaderboardId" Core.Text
-    Core.:> "scores"
-    Core.:> "reset"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post '[Core.JSON] PlayerScoreResetResponse
+     "games" Core.:>
+       "v1management" Core.:>
+         "leaderboards" Core.:>
+           Core.Capture "leaderboardId" Core.Text Core.:>
+             "scores" Core.:>
+               "reset" Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Post '[Core.JSON] PlayerScoreResetResponse
 
 -- | Resets scores for the leaderboard with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
 --
 -- /See:/ 'newGamesManagementScoresReset' smart constructor.
 data GamesManagementScoresReset = GamesManagementScoresReset
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The ID of the leaderboard.
-    leaderboardId :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The ID of the leaderboard.
+    , leaderboardId :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GamesManagementScoresReset' with the minimum fields required to make a request.
-newGamesManagementScoresReset ::
-  -- |  The ID of the leaderboard. See 'leaderboardId'.
-  Core.Text ->
-  GamesManagementScoresReset
+newGamesManagementScoresReset 
+    ::  Core.Text
+       -- ^  The ID of the leaderboard. See 'leaderboardId'.
+    -> GamesManagementScoresReset
 newGamesManagementScoresReset leaderboardId =
   GamesManagementScoresReset
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      leaderboardId = leaderboardId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , leaderboardId = leaderboardId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesManagementScoresReset
-  where
-  type
-    Rs GamesManagementScoresReset =
-      PlayerScoreResetResponse
-  type
-    Scopes GamesManagementScoresReset =
-      '["https://www.googleapis.com/auth/games"]
-  requestClient GamesManagementScoresReset {..} =
-    go
-      leaderboardId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      gamesManagementService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesManagementScoresResetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           GamesManagementScoresReset
+         where
+        type Rs GamesManagementScoresReset =
+             PlayerScoreResetResponse
+        type Scopes GamesManagementScoresReset =
+             '["https://www.googleapis.com/auth/games"]
+        requestClient GamesManagementScoresReset{..}
+          = go leaderboardId xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              gamesManagementService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy GamesManagementScoresResetResource)
+                      Core.mempty
+

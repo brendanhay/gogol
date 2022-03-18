@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,166 +36,166 @@
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference>
 module Gogol.GamesManagement
-  ( -- * Configuration
-    gamesManagementService,
+    (
+    -- * Configuration
+      gamesManagementService
 
     -- * OAuth Scopes
-    gamesScope,
+    , gamesScope
 
     -- * Resources
 
     -- ** gamesManagement.achievements.reset
-    GamesManagementAchievementsResetResource,
-    newGamesManagementAchievementsReset,
-    GamesManagementAchievementsReset,
+    , GamesManagementAchievementsResetResource
+    , newGamesManagementAchievementsReset
+    , GamesManagementAchievementsReset
 
     -- ** gamesManagement.achievements.resetAll
-    GamesManagementAchievementsResetAllResource,
-    newGamesManagementAchievementsResetAll,
-    GamesManagementAchievementsResetAll,
+    , GamesManagementAchievementsResetAllResource
+    , newGamesManagementAchievementsResetAll
+    , GamesManagementAchievementsResetAll
 
     -- ** gamesManagement.achievements.resetAllForAllPlayers
-    GamesManagementAchievementsResetAllForAllPlayersResource,
-    newGamesManagementAchievementsResetAllForAllPlayers,
-    GamesManagementAchievementsResetAllForAllPlayers,
+    , GamesManagementAchievementsResetAllForAllPlayersResource
+    , newGamesManagementAchievementsResetAllForAllPlayers
+    , GamesManagementAchievementsResetAllForAllPlayers
 
     -- ** gamesManagement.achievements.resetForAllPlayers
-    GamesManagementAchievementsResetForAllPlayersResource,
-    newGamesManagementAchievementsResetForAllPlayers,
-    GamesManagementAchievementsResetForAllPlayers,
+    , GamesManagementAchievementsResetForAllPlayersResource
+    , newGamesManagementAchievementsResetForAllPlayers
+    , GamesManagementAchievementsResetForAllPlayers
 
     -- ** gamesManagement.achievements.resetMultipleForAllPlayers
-    GamesManagementAchievementsResetMultipleForAllPlayersResource,
-    newGamesManagementAchievementsResetMultipleForAllPlayers,
-    GamesManagementAchievementsResetMultipleForAllPlayers,
+    , GamesManagementAchievementsResetMultipleForAllPlayersResource
+    , newGamesManagementAchievementsResetMultipleForAllPlayers
+    , GamesManagementAchievementsResetMultipleForAllPlayers
 
     -- ** gamesManagement.applications.listHidden
-    GamesManagementApplicationsListHiddenResource,
-    newGamesManagementApplicationsListHidden,
-    GamesManagementApplicationsListHidden,
+    , GamesManagementApplicationsListHiddenResource
+    , newGamesManagementApplicationsListHidden
+    , GamesManagementApplicationsListHidden
 
     -- ** gamesManagement.events.reset
-    GamesManagementEventsResetResource,
-    newGamesManagementEventsReset,
-    GamesManagementEventsReset,
+    , GamesManagementEventsResetResource
+    , newGamesManagementEventsReset
+    , GamesManagementEventsReset
 
     -- ** gamesManagement.events.resetAll
-    GamesManagementEventsResetAllResource,
-    newGamesManagementEventsResetAll,
-    GamesManagementEventsResetAll,
+    , GamesManagementEventsResetAllResource
+    , newGamesManagementEventsResetAll
+    , GamesManagementEventsResetAll
 
     -- ** gamesManagement.events.resetAllForAllPlayers
-    GamesManagementEventsResetAllForAllPlayersResource,
-    newGamesManagementEventsResetAllForAllPlayers,
-    GamesManagementEventsResetAllForAllPlayers,
+    , GamesManagementEventsResetAllForAllPlayersResource
+    , newGamesManagementEventsResetAllForAllPlayers
+    , GamesManagementEventsResetAllForAllPlayers
 
     -- ** gamesManagement.events.resetForAllPlayers
-    GamesManagementEventsResetForAllPlayersResource,
-    newGamesManagementEventsResetForAllPlayers,
-    GamesManagementEventsResetForAllPlayers,
+    , GamesManagementEventsResetForAllPlayersResource
+    , newGamesManagementEventsResetForAllPlayers
+    , GamesManagementEventsResetForAllPlayers
 
     -- ** gamesManagement.events.resetMultipleForAllPlayers
-    GamesManagementEventsResetMultipleForAllPlayersResource,
-    newGamesManagementEventsResetMultipleForAllPlayers,
-    GamesManagementEventsResetMultipleForAllPlayers,
+    , GamesManagementEventsResetMultipleForAllPlayersResource
+    , newGamesManagementEventsResetMultipleForAllPlayers
+    , GamesManagementEventsResetMultipleForAllPlayers
 
     -- ** gamesManagement.players.hide
-    GamesManagementPlayersHideResource,
-    newGamesManagementPlayersHide,
-    GamesManagementPlayersHide,
+    , GamesManagementPlayersHideResource
+    , newGamesManagementPlayersHide
+    , GamesManagementPlayersHide
 
     -- ** gamesManagement.players.unhide
-    GamesManagementPlayersUnhideResource,
-    newGamesManagementPlayersUnhide,
-    GamesManagementPlayersUnhide,
+    , GamesManagementPlayersUnhideResource
+    , newGamesManagementPlayersUnhide
+    , GamesManagementPlayersUnhide
 
     -- ** gamesManagement.scores.reset
-    GamesManagementScoresResetResource,
-    newGamesManagementScoresReset,
-    GamesManagementScoresReset,
+    , GamesManagementScoresResetResource
+    , newGamesManagementScoresReset
+    , GamesManagementScoresReset
 
     -- ** gamesManagement.scores.resetAll
-    GamesManagementScoresResetAllResource,
-    newGamesManagementScoresResetAll,
-    GamesManagementScoresResetAll,
+    , GamesManagementScoresResetAllResource
+    , newGamesManagementScoresResetAll
+    , GamesManagementScoresResetAll
 
     -- ** gamesManagement.scores.resetAllForAllPlayers
-    GamesManagementScoresResetAllForAllPlayersResource,
-    newGamesManagementScoresResetAllForAllPlayers,
-    GamesManagementScoresResetAllForAllPlayers,
+    , GamesManagementScoresResetAllForAllPlayersResource
+    , newGamesManagementScoresResetAllForAllPlayers
+    , GamesManagementScoresResetAllForAllPlayers
 
     -- ** gamesManagement.scores.resetForAllPlayers
-    GamesManagementScoresResetForAllPlayersResource,
-    newGamesManagementScoresResetForAllPlayers,
-    GamesManagementScoresResetForAllPlayers,
+    , GamesManagementScoresResetForAllPlayersResource
+    , newGamesManagementScoresResetForAllPlayers
+    , GamesManagementScoresResetForAllPlayers
 
     -- ** gamesManagement.scores.resetMultipleForAllPlayers
-    GamesManagementScoresResetMultipleForAllPlayersResource,
-    newGamesManagementScoresResetMultipleForAllPlayers,
-    GamesManagementScoresResetMultipleForAllPlayers,
+    , GamesManagementScoresResetMultipleForAllPlayersResource
+    , newGamesManagementScoresResetMultipleForAllPlayers
+    , GamesManagementScoresResetMultipleForAllPlayers
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AchievementResetAllResponse
-    AchievementResetAllResponse (..),
-    newAchievementResetAllResponse,
+    , AchievementResetAllResponse (..)
+    , newAchievementResetAllResponse
 
     -- ** AchievementResetMultipleForAllRequest
-    AchievementResetMultipleForAllRequest (..),
-    newAchievementResetMultipleForAllRequest,
+    , AchievementResetMultipleForAllRequest (..)
+    , newAchievementResetMultipleForAllRequest
 
     -- ** AchievementResetResponse
-    AchievementResetResponse (..),
-    newAchievementResetResponse,
+    , AchievementResetResponse (..)
+    , newAchievementResetResponse
 
     -- ** EventsResetMultipleForAllRequest
-    EventsResetMultipleForAllRequest (..),
-    newEventsResetMultipleForAllRequest,
+    , EventsResetMultipleForAllRequest (..)
+    , newEventsResetMultipleForAllRequest
 
     -- ** GamesPlayerExperienceInfoResource
-    GamesPlayerExperienceInfoResource (..),
-    newGamesPlayerExperienceInfoResource,
+    , GamesPlayerExperienceInfoResource (..)
+    , newGamesPlayerExperienceInfoResource
 
     -- ** GamesPlayerLevelResource
-    GamesPlayerLevelResource (..),
-    newGamesPlayerLevelResource,
+    , GamesPlayerLevelResource (..)
+    , newGamesPlayerLevelResource
 
     -- ** HiddenPlayer
-    HiddenPlayer (..),
-    newHiddenPlayer,
+    , HiddenPlayer (..)
+    , newHiddenPlayer
 
     -- ** HiddenPlayerList
-    HiddenPlayerList (..),
-    newHiddenPlayerList,
+    , HiddenPlayerList (..)
+    , newHiddenPlayerList
 
     -- ** Player
-    Player (..),
-    newPlayer,
+    , Player (..)
+    , newPlayer
 
     -- ** Player_Name
-    Player_Name (..),
-    newPlayer_Name,
+    , Player_Name (..)
+    , newPlayer_Name
 
     -- ** PlayerScoreResetAllResponse
-    PlayerScoreResetAllResponse (..),
-    newPlayerScoreResetAllResponse,
+    , PlayerScoreResetAllResponse (..)
+    , newPlayerScoreResetAllResponse
 
     -- ** PlayerScoreResetResponse
-    PlayerScoreResetResponse (..),
-    newPlayerScoreResetResponse,
+    , PlayerScoreResetResponse (..)
+    , newPlayerScoreResetResponse
 
     -- ** ProfileSettings
-    ProfileSettings (..),
-    newProfileSettings,
+    , ProfileSettings (..)
+    , newProfileSettings
 
     -- ** ScoresResetMultipleForAllRequest
-    ScoresResetMultipleForAllRequest (..),
-    newScoresResetMultipleForAllRequest,
-  )
-where
+    , ScoresResetMultipleForAllRequest (..)
+    , newScoresResetMultipleForAllRequest
+    ) where
 
 import Gogol.GamesManagement.Achievements.Reset
 import Gogol.GamesManagement.Achievements.ResetAll

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,92 +36,85 @@
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.achievements.reset@.
 module Gogol.GamesManagement.Achievements.Reset
-  ( -- * Resource
-    GamesManagementAchievementsResetResource,
+    (
+    -- * Resource
+      GamesManagementAchievementsResetResource
 
     -- ** Constructing a Request
-    newGamesManagementAchievementsReset,
-    GamesManagementAchievementsReset,
-  )
-where
+    , newGamesManagementAchievementsReset
+    , GamesManagementAchievementsReset
+    ) where
 
-import Gogol.GamesManagement.Types
 import qualified Gogol.Prelude as Core
+import Gogol.GamesManagement.Types
 
 -- | A resource alias for @gamesManagement.achievements.reset@ method which the
 -- 'GamesManagementAchievementsReset' request conforms to.
 type GamesManagementAchievementsResetResource =
-  "games"
-    Core.:> "v1management"
-    Core.:> "achievements"
-    Core.:> Core.Capture "achievementId" Core.Text
-    Core.:> "reset"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post '[Core.JSON] AchievementResetResponse
+     "games" Core.:>
+       "v1management" Core.:>
+         "achievements" Core.:>
+           Core.Capture "achievementId" Core.Text Core.:>
+             "reset" Core.:>
+               Core.QueryParam "$.xgafv" Xgafv Core.:>
+                 Core.QueryParam "access_token" Core.Text Core.:>
+                   Core.QueryParam "callback" Core.Text Core.:>
+                     Core.QueryParam "uploadType" Core.Text Core.:>
+                       Core.QueryParam "upload_protocol" Core.Text Core.:>
+                         Core.QueryParam "alt" Core.AltJSON Core.:>
+                           Core.Post '[Core.JSON] AchievementResetResponse
 
 -- | Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
 --
 -- /See:/ 'newGamesManagementAchievementsReset' smart constructor.
 data GamesManagementAchievementsReset = GamesManagementAchievementsReset
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | The ID of the achievement used by this method.
-    achievementId :: Core.Text,
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | The ID of the achievement used by this method.
+    , achievementId :: Core.Text
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GamesManagementAchievementsReset' with the minimum fields required to make a request.
-newGamesManagementAchievementsReset ::
-  -- |  The ID of the achievement used by this method. See 'achievementId'.
-  Core.Text ->
-  GamesManagementAchievementsReset
+newGamesManagementAchievementsReset 
+    ::  Core.Text
+       -- ^  The ID of the achievement used by this method. See 'achievementId'.
+    -> GamesManagementAchievementsReset
 newGamesManagementAchievementsReset achievementId =
   GamesManagementAchievementsReset
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      achievementId = achievementId,
-      callback = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , achievementId = achievementId
+    , callback = Core.Nothing
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesManagementAchievementsReset
-  where
-  type
-    Rs GamesManagementAchievementsReset =
-      AchievementResetResponse
-  type
-    Scopes GamesManagementAchievementsReset =
-      '["https://www.googleapis.com/auth/games"]
-  requestClient GamesManagementAchievementsReset {..} =
-    go
-      achievementId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      gamesManagementService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesManagementAchievementsResetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           GamesManagementAchievementsReset
+         where
+        type Rs GamesManagementAchievementsReset =
+             AchievementResetResponse
+        type Scopes GamesManagementAchievementsReset =
+             '["https://www.googleapis.com/auth/games"]
+        requestClient GamesManagementAchievementsReset{..}
+          = go achievementId xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              gamesManagementService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy GamesManagementAchievementsResetResource)
+                      Core.mempty
+
