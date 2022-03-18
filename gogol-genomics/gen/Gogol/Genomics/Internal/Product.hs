@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics.Internal.Product
+-- Module      : Gogol.Genomics.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Genomics.Internal.Product
+module Gogol.Genomics.Internal.Product
   ( -- * Accelerator
     Accelerator (..),
     newAccelerator,
@@ -248,8 +248,8 @@ module Network.Google.Genomics.Internal.Product
   )
 where
 
-import Network.Google.Genomics.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Genomics.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Carries information about an accelerator that can be attached to a VM.
 --

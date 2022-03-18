@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Genomics.Projects.Operations.Cancel
+-- Module      : Gogol.Genomics.Projects.Operations.Cancel
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation. Authorization requires the following <https://cloud.google.com/iam Google IAM> permission: * @genomics.operations.cancel@
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.projects.operations.cancel@.
-module Network.Google.Genomics.Projects.Operations.Cancel
+module Gogol.Genomics.Projects.Operations.Cancel
   ( -- * Resource
     GenomicsProjectsOperationsCancelResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Genomics.Projects.Operations.Cancel
   )
 where
 
-import Network.Google.Genomics.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Genomics.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @genomics.projects.operations.cancel@ method which the
 -- 'GenomicsProjectsOperationsCancel' request conforms to.
