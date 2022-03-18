@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.Blobs.BatchRead
+-- Module      : Gogol.RemoteBuildExecution.Blobs.BatchRead
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Download many blobs at once. The server may enforce a limit of the combined total size of blobs to be downloaded using this API. This limit may be obtained using the Capabilities API. Requests exceeding the limit should either be split into smaller chunks or downloaded using the ByteStream API, as appropriate. This request is equivalent to calling a Bytestream @Read@ request on each individual blob, in parallel. The requests may succeed or fail independently. Errors: * @INVALID_ARGUMENT@: The client attempted to read more than the server supported limit. Every error on individual read will be returned in the corresponding digest status.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.blobs.batchRead@.
-module Network.Google.RemoteBuildExecution.Blobs.BatchRead
+module Gogol.RemoteBuildExecution.Blobs.BatchRead
   ( -- * Resource
     RemoteBuildExecutionBlobsBatchReadResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.Blobs.BatchRead
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.batchRead@ method which the
 -- 'RemoteBuildExecutionBlobsBatchRead' request conforms to.

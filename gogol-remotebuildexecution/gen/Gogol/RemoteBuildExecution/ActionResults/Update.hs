@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.ActionResults.Update
+-- Module      : Gogol.RemoteBuildExecution.ActionResults.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Upload a new execution result. In order to allow the server to perform access control based on the type of action, and to assist with client debugging, the client MUST first upload the Action that produced the result, along with its Command, into the @ContentAddressableStorage@. Server implementations MAY modify the @UpdateActionResultRequest.action_result@ and return an equivalent value. Errors: * @INVALID_ARGUMENT@: One or more arguments are invalid. * @FAILED_PRECONDITION@: One or more errors occurred in updating the action result, such as a missing command or action. * @RESOURCE_EXHAUSTED@: There is insufficient storage space to add the entry to the cache.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actionResults.update@.
-module Network.Google.RemoteBuildExecution.ActionResults.Update
+module Gogol.RemoteBuildExecution.ActionResults.Update
   ( -- * Resource
     RemoteBuildExecutionActionResultsUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.ActionResults.Update
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actionResults.update@ method which the
 -- 'RemoteBuildExecutionActionResultsUpdate' request conforms to.

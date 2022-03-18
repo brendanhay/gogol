@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution
+-- Module      : Gogol.RemoteBuildExecution
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Supplies a Remote Execution API service for tools such as bazel.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference>
-module Network.Google.RemoteBuildExecution
+module Gogol.RemoteBuildExecution
   ( -- * Configuration
     remoteBuildExecutionService,
 
@@ -497,13 +497,13 @@ module Network.Google.RemoteBuildExecution
   )
 where
 
-import Network.Google.RemoteBuildExecution.ActionResults.Get
-import Network.Google.RemoteBuildExecution.ActionResults.Update
-import Network.Google.RemoteBuildExecution.Actions.Execute
-import Network.Google.RemoteBuildExecution.Blobs.BatchRead
-import Network.Google.RemoteBuildExecution.Blobs.BatchUpdate
-import Network.Google.RemoteBuildExecution.Blobs.FindMissing
-import Network.Google.RemoteBuildExecution.Blobs.GetTree
-import Network.Google.RemoteBuildExecution.GetCapabilities
-import Network.Google.RemoteBuildExecution.Operations.WaitExecution
-import Network.Google.RemoteBuildExecution.Types
+import Gogol.RemoteBuildExecution.ActionResults.Get
+import Gogol.RemoteBuildExecution.ActionResults.Update
+import Gogol.RemoteBuildExecution.Actions.Execute
+import Gogol.RemoteBuildExecution.Blobs.BatchRead
+import Gogol.RemoteBuildExecution.Blobs.BatchUpdate
+import Gogol.RemoteBuildExecution.Blobs.FindMissing
+import Gogol.RemoteBuildExecution.Blobs.GetTree
+import Gogol.RemoteBuildExecution.GetCapabilities
+import Gogol.RemoteBuildExecution.Operations.WaitExecution
+import Gogol.RemoteBuildExecution.Types

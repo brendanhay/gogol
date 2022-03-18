@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.Blobs.BatchUpdate
+-- Module      : Gogol.RemoteBuildExecution.Blobs.BatchUpdate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Upload many blobs at once. The server may enforce a limit of the combined total size of blobs to be uploaded using this API. This limit may be obtained using the Capabilities API. Requests exceeding the limit should either be split into smaller chunks or uploaded using the ByteStream API, as appropriate. This request is equivalent to calling a Bytestream @Write@ request on each individual blob, in parallel. The requests may succeed or fail independently. Errors: * @INVALID_ARGUMENT@: The client attempted to upload more than the server supported limit. Individual requests may return the following errors, additionally: * @RESOURCE_EXHAUSTED@: There is insufficient disk quota to store the blob. * @INVALID_ARGUMENT@: The Digest does not match the provided data.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.blobs.batchUpdate@.
-module Network.Google.RemoteBuildExecution.Blobs.BatchUpdate
+module Gogol.RemoteBuildExecution.Blobs.BatchUpdate
   ( -- * Resource
     RemoteBuildExecutionBlobsBatchUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.Blobs.BatchUpdate
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.batchUpdate@ method which the
 -- 'RemoteBuildExecutionBlobsBatchUpdate' request conforms to.

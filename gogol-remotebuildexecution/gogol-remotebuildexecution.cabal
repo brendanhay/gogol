@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.RemoteBuildExecution
-    Network.Google.RemoteBuildExecution.ActionResults.Get
-    Network.Google.RemoteBuildExecution.ActionResults.Update
-    Network.Google.RemoteBuildExecution.Actions.Execute
-    Network.Google.RemoteBuildExecution.Blobs.BatchRead
-    Network.Google.RemoteBuildExecution.Blobs.BatchUpdate
-    Network.Google.RemoteBuildExecution.Blobs.FindMissing
-    Network.Google.RemoteBuildExecution.Blobs.GetTree
-    Network.Google.RemoteBuildExecution.GetCapabilities
-    Network.Google.RemoteBuildExecution.Operations.WaitExecution
-    Network.Google.RemoteBuildExecution.Types
+    Gogol.RemoteBuildExecution
+    Gogol.RemoteBuildExecution.ActionResults.Get
+    Gogol.RemoteBuildExecution.ActionResults.Update
+    Gogol.RemoteBuildExecution.Actions.Execute
+    Gogol.RemoteBuildExecution.Blobs.BatchRead
+    Gogol.RemoteBuildExecution.Blobs.BatchUpdate
+    Gogol.RemoteBuildExecution.Blobs.FindMissing
+    Gogol.RemoteBuildExecution.Blobs.GetTree
+    Gogol.RemoteBuildExecution.GetCapabilities
+    Gogol.RemoteBuildExecution.Operations.WaitExecution
+    Gogol.RemoteBuildExecution.Types
 
   other-modules:
-    Network.Google.RemoteBuildExecution.Internal.Product
-    Network.Google.RemoteBuildExecution.Internal.Sum
+    Gogol.RemoteBuildExecution.Internal.Product
+    Gogol.RemoteBuildExecution.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

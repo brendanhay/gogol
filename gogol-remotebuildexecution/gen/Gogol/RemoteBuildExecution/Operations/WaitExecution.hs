@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.RemoteBuildExecution.Operations.WaitExecution
+-- Module      : Gogol.RemoteBuildExecution.Operations.WaitExecution
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Wait for an execution operation to complete. When the client initially makes the request, the server immediately responds with the current status of the execution. The server will leave the request stream open until the operation completes, and then respond with the completed operation. The server MAY choose to stream additional updates as execution progresses, such as to provide an update as to the state of the execution.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.operations.waitExecution@.
-module Network.Google.RemoteBuildExecution.Operations.WaitExecution
+module Gogol.RemoteBuildExecution.Operations.WaitExecution
   ( -- * Resource
     RemoteBuildExecutionOperationsWaitExecutionResource,
 
@@ -39,8 +39,8 @@ module Network.Google.RemoteBuildExecution.Operations.WaitExecution
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.RemoteBuildExecution.Types
+import qualified Gogol.Prelude as Core
+import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.operations.waitExecution@ method which the
 -- 'RemoteBuildExecutionOperationsWaitExecution' request conforms to.
