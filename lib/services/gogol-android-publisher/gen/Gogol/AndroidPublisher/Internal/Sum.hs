@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AndroidPublisher.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * DeobfuscationFile_SymbolType
     DeobfuscationFile_SymbolType
-      (
-        DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified,
+      ( DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified,
         DeobfuscationFile_SymbolType_Proguard,
         DeobfuscationFile_SymbolType_NativeCode,
         ..
@@ -54,8 +43,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * Grant_AppLevelPermissionsItem
     Grant_AppLevelPermissionsItem
-      (
-        Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED,
+      ( Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED,
         Grant_AppLevelPermissionsItem_CANACCESSAPP,
         Grant_AppLevelPermissionsItem_CANVIEWFINANCIALDATA,
         Grant_AppLevelPermissionsItem_CANMANAGEPERMISSIONS,
@@ -71,8 +59,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * InAppProduct_PurchaseType
     InAppProduct_PurchaseType
-      (
-        InAppProduct_PurchaseType_PurchaseTypeUnspecified,
+      ( InAppProduct_PurchaseType_PurchaseTypeUnspecified,
         InAppProduct_PurchaseType_ManagedUser,
         InAppProduct_PurchaseType_Subscription,
         ..
@@ -80,8 +67,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * InAppProduct_Status
     InAppProduct_Status
-      (
-        InAppProduct_Status_StatusUnspecified,
+      ( InAppProduct_Status_StatusUnspecified,
         InAppProduct_Status_Active,
         InAppProduct_Status_Inactive,
         ..
@@ -89,8 +75,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
     ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-      (
-        ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
+      ( ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
         ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
         ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
         ..
@@ -98,8 +83,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * RegionalTaxRateInfo_TaxTier
     RegionalTaxRateInfo_TaxTier
-      (
-        RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED,
+      ( RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED,
         RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1,
         RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1,
         RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2,
@@ -110,8 +94,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
     SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-      (
-        SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
+      ( SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
         SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
         SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
         ..
@@ -119,8 +102,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * TrackRelease_Status
     TrackRelease_Status
-      (
-        TrackRelease_Status_StatusUnspecified,
+      ( TrackRelease_Status_StatusUnspecified,
         TrackRelease_Status_Draft,
         TrackRelease_Status_InProgress,
         TrackRelease_Status_Halted,
@@ -130,8 +112,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * User_AccessState
     User_AccessState
-      (
-        User_AccessState_ACCESSSTATEUNSPECIFIED,
+      ( User_AccessState_ACCESSSTATEUNSPECIFIED,
         User_AccessState_Invited,
         User_AccessState_INVITATIONEXPIRED,
         User_AccessState_ACCESSGRANTED,
@@ -141,8 +122,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * User_DeveloperAccountPermissionsItem
     User_DeveloperAccountPermissionsItem
-      (
-        User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED,
+      ( User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED,
         User_DeveloperAccountPermissionsItem_CANSEEALLAPPS,
         User_DeveloperAccountPermissionsItem_CANVIEWFINANCIALDATAGLOBAL,
         User_DeveloperAccountPermissionsItem_CANMANAGEPERMISSIONSGLOBAL,
@@ -162,8 +142,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsDeobfuscationfilesUploadDeobfuscationFileType
     EditsDeobfuscationfilesUploadDeobfuscationFileType
-      (
-        EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified,
+      ( EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified,
         EditsDeobfuscationfilesUploadDeobfuscationFileType_Proguard,
         EditsDeobfuscationfilesUploadDeobfuscationFileType_NativeCode,
         ..
@@ -171,8 +150,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesGetExpansionFileType
     EditsExpansionfilesGetExpansionFileType
-      (
-        EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified,
+      ( EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesGetExpansionFileType_Main,
         EditsExpansionfilesGetExpansionFileType_Patch',
         ..
@@ -180,8 +158,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesPatchExpansionFileType
     EditsExpansionfilesPatchExpansionFileType
-      (
-        EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified,
+      ( EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesPatchExpansionFileType_Main,
         EditsExpansionfilesPatchExpansionFileType_Patch',
         ..
@@ -189,8 +166,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesUpdateExpansionFileType
     EditsExpansionfilesUpdateExpansionFileType
-      (
-        EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified,
+      ( EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesUpdateExpansionFileType_Main,
         EditsExpansionfilesUpdateExpansionFileType_Patch',
         ..
@@ -198,8 +174,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsExpansionfilesUploadExpansionFileType
     EditsExpansionfilesUploadExpansionFileType
-      (
-        EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified,
+      ( EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified,
         EditsExpansionfilesUploadExpansionFileType_Main,
         EditsExpansionfilesUploadExpansionFileType_Patch',
         ..
@@ -207,8 +182,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesDeleteImageType
     EditsImagesDeleteImageType
-      (
-        EditsImagesDeleteImageType_AppImageTypeUnspecified,
+      ( EditsImagesDeleteImageType_AppImageTypeUnspecified,
         EditsImagesDeleteImageType_PhoneScreenshots,
         EditsImagesDeleteImageType_SevenInchScreenshots,
         EditsImagesDeleteImageType_TenInchScreenshots,
@@ -222,8 +196,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesDeleteallImageType
     EditsImagesDeleteallImageType
-      (
-        EditsImagesDeleteallImageType_AppImageTypeUnspecified,
+      ( EditsImagesDeleteallImageType_AppImageTypeUnspecified,
         EditsImagesDeleteallImageType_PhoneScreenshots,
         EditsImagesDeleteallImageType_SevenInchScreenshots,
         EditsImagesDeleteallImageType_TenInchScreenshots,
@@ -237,8 +210,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesListImageType
     EditsImagesListImageType
-      (
-        EditsImagesListImageType_AppImageTypeUnspecified,
+      ( EditsImagesListImageType_AppImageTypeUnspecified,
         EditsImagesListImageType_PhoneScreenshots,
         EditsImagesListImageType_SevenInchScreenshots,
         EditsImagesListImageType_TenInchScreenshots,
@@ -252,8 +224,7 @@ module Gogol.AndroidPublisher.Internal.Sum
 
     -- * EditsImagesUploadImageType
     EditsImagesUploadImageType
-      (
-        EditsImagesUploadImageType_AppImageTypeUnspecified,
+      ( EditsImagesUploadImageType_AppImageTypeUnspecified,
         EditsImagesUploadImageType_PhoneScreenshots,
         EditsImagesUploadImageType_SevenInchScreenshots,
         EditsImagesUploadImageType_TenInchScreenshots,
@@ -264,22 +235,23 @@ module Gogol.AndroidPublisher.Internal.Sum
         EditsImagesUploadImageType_TvBanner,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -292,20 +264,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The type of the deobfuscation file.
-newtype DeobfuscationFile_SymbolType = DeobfuscationFile_SymbolType { fromDeobfuscationFile_SymbolType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DeobfuscationFile_SymbolType = DeobfuscationFile_SymbolType {fromDeobfuscationFile_SymbolType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified deobfuscation file type.
 pattern DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified :: DeobfuscationFile_SymbolType
@@ -323,19 +296,20 @@ pattern DeobfuscationFile_SymbolType_NativeCode = DeobfuscationFile_SymbolType "
   DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified,
   DeobfuscationFile_SymbolType_Proguard,
   DeobfuscationFile_SymbolType_NativeCode,
-  DeobfuscationFile_SymbolType #-}
+  DeobfuscationFile_SymbolType
+  #-}
 
-newtype Grant_AppLevelPermissionsItem = Grant_AppLevelPermissionsItem { fromGrant_AppLevelPermissionsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Grant_AppLevelPermissionsItem = Grant_AppLevelPermissionsItem {fromGrant_AppLevelPermissionsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown or unspecified permission.
 pattern Grant_AppLevelPermissionsItem_APPLEVELPERMISSIONUNSPECIFIED :: Grant_AppLevelPermissionsItem
@@ -393,20 +367,21 @@ pattern Grant_AppLevelPermissionsItem_CANMANAGEORDERS = Grant_AppLevelPermission
   Grant_AppLevelPermissionsItem_CANMANAGEPUBLICLISTING,
   Grant_AppLevelPermissionsItem_CANMANAGEDRAFTAPPS,
   Grant_AppLevelPermissionsItem_CANMANAGEORDERS,
-  Grant_AppLevelPermissionsItem #-}
+  Grant_AppLevelPermissionsItem
+  #-}
 
 -- | The type of the product, e.g. a recurring subscription.
-newtype InAppProduct_PurchaseType = InAppProduct_PurchaseType { fromInAppProduct_PurchaseType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InAppProduct_PurchaseType = InAppProduct_PurchaseType {fromInAppProduct_PurchaseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified purchase type.
 pattern InAppProduct_PurchaseType_PurchaseTypeUnspecified :: InAppProduct_PurchaseType
@@ -424,20 +399,21 @@ pattern InAppProduct_PurchaseType_Subscription = InAppProduct_PurchaseType "subs
   InAppProduct_PurchaseType_PurchaseTypeUnspecified,
   InAppProduct_PurchaseType_ManagedUser,
   InAppProduct_PurchaseType_Subscription,
-  InAppProduct_PurchaseType #-}
+  InAppProduct_PurchaseType
+  #-}
 
 -- | The status of the product, e.g. whether it\'s active.
-newtype InAppProduct_Status = InAppProduct_Status { fromInAppProduct_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InAppProduct_Status = InAppProduct_Status {fromInAppProduct_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified status.
 pattern InAppProduct_Status_StatusUnspecified :: InAppProduct_Status
@@ -455,30 +431,31 @@ pattern InAppProduct_Status_Inactive = InAppProduct_Status "inactive"
   InAppProduct_Status_StatusUnspecified,
   InAppProduct_Status_Active,
   InAppProduct_Status_Inactive,
-  InAppProduct_Status #-}
+  InAppProduct_Status
+  #-}
 
 -- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.
-newtype ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType { fromManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType {fromManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED :: ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
 pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
 
--- | 
+-- |
 pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT :: ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
 pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_DIGITAL_CONTENT"
 
--- | 
+-- |
 pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE :: ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
 pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE = ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_SERVICE"
 
@@ -486,42 +463,43 @@ pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWAL
   ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
   ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
   ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
-  ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType #-}
+  ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
+  #-}
 
 -- | Tax tier to specify reduced tax rate. Developers who sell digital news, magazines, newspapers, books, or audiobooks in various regions may be eligible for reduced tax rates. <https://support.google.com/googleplay/android-developer/answer/10463498 Learn more>.
-newtype RegionalTaxRateInfo_TaxTier = RegionalTaxRateInfo_TaxTier { fromRegionalTaxRateInfo_TaxTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RegionalTaxRateInfo_TaxTier = RegionalTaxRateInfo_TaxTier {fromRegionalTaxRateInfo_TaxTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED :: RegionalTaxRateInfo_TaxTier
 pattern RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED = RegionalTaxRateInfo_TaxTier "TAX_TIER_UNSPECIFIED"
 
--- | 
+-- |
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1 :: RegionalTaxRateInfo_TaxTier
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_BOOKS_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_BOOKS_1"
 
--- | 
+-- |
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1 :: RegionalTaxRateInfo_TaxTier
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_NEWS_1"
 
--- | 
+-- |
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2 :: RegionalTaxRateInfo_TaxTier
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2 = RegionalTaxRateInfo_TaxTier "TAX_TIER_NEWS_2"
 
--- | 
+-- |
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1 :: RegionalTaxRateInfo_TaxTier
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_MUSIC_OR_AUDIO_1"
 
--- | 
+-- |
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 :: RegionalTaxRateInfo_TaxTier
 pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 = RegionalTaxRateInfo_TaxTier "TAX_TIER_LIVE_OR_BROADCAST_1"
 
@@ -532,30 +510,31 @@ pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 = RegionalTaxRa
   RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2,
   RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
   RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
-  RegionalTaxRateInfo_TaxTier #-}
+  RegionalTaxRateInfo_TaxTier
+  #-}
 
 -- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.
-newtype SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType { fromSubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType {fromSubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
+-- |
 pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED :: SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
 pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
 
--- | 
+-- |
 pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT :: SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
 pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_DIGITAL_CONTENT"
 
--- | 
+-- |
 pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE :: SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
 pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE = SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType "WITHDRAWAL_RIGHT_SERVICE"
 
@@ -563,20 +542,21 @@ pattern SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRI
   SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTTYPEUNSPECIFIED,
   SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTDIGITALCONTENT,
   SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWALRIGHTSERVICE,
-  SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType #-}
+  SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
+  #-}
 
 -- | The status of the release.
-newtype TrackRelease_Status = TrackRelease_Status { fromTrackRelease_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrackRelease_Status = TrackRelease_Status {fromTrackRelease_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified status.
 pattern TrackRelease_Status_StatusUnspecified :: TrackRelease_Status
@@ -604,20 +584,21 @@ pattern TrackRelease_Status_Completed = TrackRelease_Status "completed"
   TrackRelease_Status_InProgress,
   TrackRelease_Status_Halted,
   TrackRelease_Status_Completed,
-  TrackRelease_Status #-}
+  TrackRelease_Status
+  #-}
 
 -- | Output only. The state of the user\'s access to the Play Console.
-newtype User_AccessState = User_AccessState { fromUser_AccessState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype User_AccessState = User_AccessState {fromUser_AccessState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown or unspecified access state.
 pattern User_AccessState_ACCESSSTATEUNSPECIFIED :: User_AccessState
@@ -645,19 +626,20 @@ pattern User_AccessState_ACCESSEXPIRED = User_AccessState "ACCESS_EXPIRED"
   User_AccessState_INVITATIONEXPIRED,
   User_AccessState_ACCESSGRANTED,
   User_AccessState_ACCESSEXPIRED,
-  User_AccessState #-}
+  User_AccessState
+  #-}
 
-newtype User_DeveloperAccountPermissionsItem = User_DeveloperAccountPermissionsItem { fromUser_DeveloperAccountPermissionsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype User_DeveloperAccountPermissionsItem = User_DeveloperAccountPermissionsItem {fromUser_DeveloperAccountPermissionsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown or unspecified permission.
 pattern User_DeveloperAccountPermissionsItem_DEVELOPERLEVELPERMISSIONUNSPECIFIED :: User_DeveloperAccountPermissionsItem
@@ -735,20 +717,21 @@ pattern User_DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL = User_Develo
   User_DeveloperAccountPermissionsItem_CANCREATEMANAGEDPLAYAPPSGLOBAL,
   User_DeveloperAccountPermissionsItem_CANCHANGEMANAGEDPLAYSETTINGGLOBAL,
   User_DeveloperAccountPermissionsItem_CANMANAGEORDERSGLOBAL,
-  User_DeveloperAccountPermissionsItem #-}
+  User_DeveloperAccountPermissionsItem
+  #-}
 
 -- | The type of the deobfuscation file.
-newtype EditsDeobfuscationfilesUploadDeobfuscationFileType = EditsDeobfuscationfilesUploadDeobfuscationFileType { fromEditsDeobfuscationfilesUploadDeobfuscationFileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsDeobfuscationfilesUploadDeobfuscationFileType = EditsDeobfuscationfilesUploadDeobfuscationFileType {fromEditsDeobfuscationfilesUploadDeobfuscationFileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified deobfuscation file type.
 pattern EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified :: EditsDeobfuscationfilesUploadDeobfuscationFileType
@@ -766,20 +749,21 @@ pattern EditsDeobfuscationfilesUploadDeobfuscationFileType_NativeCode = EditsDeo
   EditsDeobfuscationfilesUploadDeobfuscationFileType_DeobfuscationFileTypeUnspecified,
   EditsDeobfuscationfilesUploadDeobfuscationFileType_Proguard,
   EditsDeobfuscationfilesUploadDeobfuscationFileType_NativeCode,
-  EditsDeobfuscationfilesUploadDeobfuscationFileType #-}
+  EditsDeobfuscationfilesUploadDeobfuscationFileType
+  #-}
 
 -- | The file type of the file configuration which is being read or modified.
-newtype EditsExpansionfilesGetExpansionFileType = EditsExpansionfilesGetExpansionFileType { fromEditsExpansionfilesGetExpansionFileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsExpansionfilesGetExpansionFileType = EditsExpansionfilesGetExpansionFileType {fromEditsExpansionfilesGetExpansionFileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesGetExpansionFileType
@@ -797,20 +781,21 @@ pattern EditsExpansionfilesGetExpansionFileType_Patch' = EditsExpansionfilesGetE
   EditsExpansionfilesGetExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesGetExpansionFileType_Main,
   EditsExpansionfilesGetExpansionFileType_Patch',
-  EditsExpansionfilesGetExpansionFileType #-}
+  EditsExpansionfilesGetExpansionFileType
+  #-}
 
 -- | The file type of the expansion file configuration which is being updated.
-newtype EditsExpansionfilesPatchExpansionFileType = EditsExpansionfilesPatchExpansionFileType { fromEditsExpansionfilesPatchExpansionFileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsExpansionfilesPatchExpansionFileType = EditsExpansionfilesPatchExpansionFileType {fromEditsExpansionfilesPatchExpansionFileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesPatchExpansionFileType
@@ -828,20 +813,21 @@ pattern EditsExpansionfilesPatchExpansionFileType_Patch' = EditsExpansionfilesPa
   EditsExpansionfilesPatchExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesPatchExpansionFileType_Main,
   EditsExpansionfilesPatchExpansionFileType_Patch',
-  EditsExpansionfilesPatchExpansionFileType #-}
+  EditsExpansionfilesPatchExpansionFileType
+  #-}
 
 -- | The file type of the file configuration which is being read or modified.
-newtype EditsExpansionfilesUpdateExpansionFileType = EditsExpansionfilesUpdateExpansionFileType { fromEditsExpansionfilesUpdateExpansionFileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsExpansionfilesUpdateExpansionFileType = EditsExpansionfilesUpdateExpansionFileType {fromEditsExpansionfilesUpdateExpansionFileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesUpdateExpansionFileType
@@ -859,20 +845,21 @@ pattern EditsExpansionfilesUpdateExpansionFileType_Patch' = EditsExpansionfilesU
   EditsExpansionfilesUpdateExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesUpdateExpansionFileType_Main,
   EditsExpansionfilesUpdateExpansionFileType_Patch',
-  EditsExpansionfilesUpdateExpansionFileType #-}
+  EditsExpansionfilesUpdateExpansionFileType
+  #-}
 
 -- | The file type of the expansion file configuration which is being updated.
-newtype EditsExpansionfilesUploadExpansionFileType = EditsExpansionfilesUploadExpansionFileType { fromEditsExpansionfilesUploadExpansionFileType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsExpansionfilesUploadExpansionFileType = EditsExpansionfilesUploadExpansionFileType {fromEditsExpansionfilesUploadExpansionFileType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified expansion file type.
 pattern EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified :: EditsExpansionfilesUploadExpansionFileType
@@ -890,20 +877,21 @@ pattern EditsExpansionfilesUploadExpansionFileType_Patch' = EditsExpansionfilesU
   EditsExpansionfilesUploadExpansionFileType_ExpansionFileTypeUnspecified,
   EditsExpansionfilesUploadExpansionFileType_Main,
   EditsExpansionfilesUploadExpansionFileType_Patch',
-  EditsExpansionfilesUploadExpansionFileType #-}
+  EditsExpansionfilesUploadExpansionFileType
+  #-}
 
 -- | Type of the Image.
-newtype EditsImagesDeleteImageType = EditsImagesDeleteImageType { fromEditsImagesDeleteImageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsImagesDeleteImageType = EditsImagesDeleteImageType {fromEditsImagesDeleteImageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesDeleteImageType_AppImageTypeUnspecified :: EditsImagesDeleteImageType
@@ -951,20 +939,21 @@ pattern EditsImagesDeleteImageType_TvBanner = EditsImagesDeleteImageType "tvBann
   EditsImagesDeleteImageType_Icon,
   EditsImagesDeleteImageType_FeatureGraphic,
   EditsImagesDeleteImageType_TvBanner,
-  EditsImagesDeleteImageType #-}
+  EditsImagesDeleteImageType
+  #-}
 
 -- | Type of the Image. Providing an image type that refers to no images is a no-op.
-newtype EditsImagesDeleteallImageType = EditsImagesDeleteallImageType { fromEditsImagesDeleteallImageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsImagesDeleteallImageType = EditsImagesDeleteallImageType {fromEditsImagesDeleteallImageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesDeleteallImageType_AppImageTypeUnspecified :: EditsImagesDeleteallImageType
@@ -1012,20 +1001,21 @@ pattern EditsImagesDeleteallImageType_TvBanner = EditsImagesDeleteallImageType "
   EditsImagesDeleteallImageType_Icon,
   EditsImagesDeleteallImageType_FeatureGraphic,
   EditsImagesDeleteallImageType_TvBanner,
-  EditsImagesDeleteallImageType #-}
+  EditsImagesDeleteallImageType
+  #-}
 
 -- | Type of the Image. Providing an image type that refers to no images will return an empty response.
-newtype EditsImagesListImageType = EditsImagesListImageType { fromEditsImagesListImageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsImagesListImageType = EditsImagesListImageType {fromEditsImagesListImageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesListImageType_AppImageTypeUnspecified :: EditsImagesListImageType
@@ -1073,20 +1063,21 @@ pattern EditsImagesListImageType_TvBanner = EditsImagesListImageType "tvBanner"
   EditsImagesListImageType_Icon,
   EditsImagesListImageType_FeatureGraphic,
   EditsImagesListImageType_TvBanner,
-  EditsImagesListImageType #-}
+  EditsImagesListImageType
+  #-}
 
 -- | Type of the Image.
-newtype EditsImagesUploadImageType = EditsImagesUploadImageType { fromEditsImagesUploadImageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EditsImagesUploadImageType = EditsImagesUploadImageType {fromEditsImagesUploadImageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified type. Do not use.
 pattern EditsImagesUploadImageType_AppImageTypeUnspecified :: EditsImagesUploadImageType
@@ -1134,4 +1125,5 @@ pattern EditsImagesUploadImageType_TvBanner = EditsImagesUploadImageType "tvBann
   EditsImagesUploadImageType_Icon,
   EditsImagesUploadImageType_FeatureGraphic,
   EditsImagesUploadImageType_TvBanner,
-  EditsImagesUploadImageType #-}
+  EditsImagesUploadImageType
+  #-}
