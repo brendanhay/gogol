@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DriveActivity
+-- Module      : Gogol.DriveActivity
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Provides a historical view of activity in Google Drive.
 --
 -- /See:/ <https://developers.google.com/drive/activity/ Drive Activity API Reference>
-module Network.Google.DriveActivity
+module Gogol.DriveActivity
   ( -- * Configuration
     driveActivityService,
 
@@ -306,5 +306,5 @@ module Network.Google.DriveActivity
   )
 where
 
-import Network.Google.DriveActivity.Activity.Query
-import Network.Google.DriveActivity.Types
+import Gogol.DriveActivity.Activity.Query
+import Gogol.DriveActivity.Types

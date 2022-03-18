@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DriveActivity.Types
+-- Module      : Gogol.DriveActivity.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DriveActivity.Types
+module Gogol.DriveActivity.Types
   ( -- * Configuration
     driveActivityService,
 
@@ -295,9 +295,9 @@ module Network.Google.DriveActivity.Types
   )
 where
 
-import Network.Google.DriveActivity.Internal.Product
-import Network.Google.DriveActivity.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DriveActivity.Internal.Product
+import Gogol.DriveActivity.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
 driveActivityService :: Core.ServiceConfig
