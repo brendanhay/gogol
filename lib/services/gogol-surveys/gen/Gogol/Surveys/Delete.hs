@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +36,14 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.delete@.
 module Gogol.Surveys.Delete
-  ( -- * Resource
-    SurveysSurveysDeleteResource,
+    (
+    -- * Resource
+      SurveysSurveysDeleteResource
 
     -- ** Constructing a Request
-    newSurveysSurveysDelete,
-    SurveysSurveysDelete,
-  )
-where
+    , newSurveysSurveysDelete
+    , SurveysSurveysDelete
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Surveys.Types
@@ -45,46 +51,43 @@ import Gogol.Surveys.Types
 -- | A resource alias for @surveys.surveys.delete@ method which the
 -- 'SurveysSurveysDelete' request conforms to.
 type SurveysSurveysDeleteResource =
-  "surveys"
-    Core.:> "v2"
-    Core.:> "surveys"
-    Core.:> Core.Capture "surveyUrlId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] SurveysDeleteResponse
+     "surveys" Core.:>
+       "v2" Core.:>
+         "surveys" Core.:>
+           Core.Capture "surveyUrlId" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.Delete '[Core.JSON] SurveysDeleteResponse
 
 -- | Removes a survey from view in all user GET requests.
 --
 -- /See:/ 'newSurveysSurveysDelete' smart constructor.
 newtype SurveysSurveysDelete = SurveysSurveysDelete
-  { -- | External URL ID for the survey.
-    surveyUrlId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | External URL ID for the survey.
+      surveyUrlId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SurveysSurveysDelete' with the minimum fields required to make a request.
-newSurveysSurveysDelete ::
-  -- |  External URL ID for the survey. See 'surveyUrlId'.
-  Core.Text ->
-  SurveysSurveysDelete
+newSurveysSurveysDelete 
+    ::  Core.Text
+       -- ^  External URL ID for the survey. See 'surveyUrlId'.
+    -> SurveysSurveysDelete
 newSurveysSurveysDelete surveyUrlId =
   SurveysSurveysDelete {surveyUrlId = surveyUrlId}
 
-instance Core.GoogleRequest SurveysSurveysDelete where
-  type Rs SurveysSurveysDelete = SurveysDeleteResponse
-  type
-    Scopes SurveysSurveysDelete =
-      '[ "https://www.googleapis.com/auth/surveys",
-         "https://www.googleapis.com/auth/userinfo.email"
-       ]
-  requestClient SurveysSurveysDelete {..} =
-    go
-      surveyUrlId
-      (Core.Just Core.AltJSON)
-      surveysService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SurveysSurveysDeleteResource
-          )
-          Core.mempty
+instance Core.GoogleRequest SurveysSurveysDelete
+         where
+        type Rs SurveysSurveysDelete = SurveysDeleteResponse
+        type Scopes SurveysSurveysDelete =
+             '["https://www.googleapis.com/auth/surveys",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient SurveysSurveysDelete{..}
+          = go surveyUrlId (Core.Just Core.AltJSON)
+              surveysService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy SurveysSurveysDeleteResource)
+                      Core.mempty
+
