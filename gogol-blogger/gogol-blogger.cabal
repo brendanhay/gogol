@@ -39,50 +39,51 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Blogger
-    Network.Google.Blogger.Blogs.Get
-    Network.Google.Blogger.Blogs.GetByUrl
-    Network.Google.Blogger.Blogs.ListByUser
-    Network.Google.Blogger.BlogUserInfos.Get
-    Network.Google.Blogger.Comments.Approve
-    Network.Google.Blogger.Comments.Delete
-    Network.Google.Blogger.Comments.Get
-    Network.Google.Blogger.Comments.List
-    Network.Google.Blogger.Comments.ListByBlog
-    Network.Google.Blogger.Comments.MarkAsSpam
-    Network.Google.Blogger.Comments.RemoveContent
-    Network.Google.Blogger.Pages.Delete
-    Network.Google.Blogger.Pages.Get
-    Network.Google.Blogger.Pages.Insert
-    Network.Google.Blogger.Pages.List
-    Network.Google.Blogger.Pages.Patch
-    Network.Google.Blogger.Pages.Publish
-    Network.Google.Blogger.Pages.Revert
-    Network.Google.Blogger.Pages.Update
-    Network.Google.Blogger.PageViews.Get
-    Network.Google.Blogger.Posts.Delete
-    Network.Google.Blogger.Posts.Get
-    Network.Google.Blogger.Posts.GetByPath
-    Network.Google.Blogger.Posts.Insert
-    Network.Google.Blogger.Posts.List
-    Network.Google.Blogger.Posts.Patch
-    Network.Google.Blogger.Posts.Publish
-    Network.Google.Blogger.Posts.Revert
-    Network.Google.Blogger.Posts.Search
-    Network.Google.Blogger.Posts.Update
-    Network.Google.Blogger.PostUserInfos.Get
-    Network.Google.Blogger.PostUserInfos.List
-    Network.Google.Blogger.Types
-    Network.Google.Blogger.Users.Get
+    Gogol.Blogger
+    Gogol.Blogger.Blogs.Get
+    Gogol.Blogger.Blogs.GetByUrl
+    Gogol.Blogger.Blogs.ListByUser
+    Gogol.Blogger.BlogUserInfos.Get
+    Gogol.Blogger.Comments.Approve
+    Gogol.Blogger.Comments.Delete
+    Gogol.Blogger.Comments.Get
+    Gogol.Blogger.Comments.List
+    Gogol.Blogger.Comments.ListByBlog
+    Gogol.Blogger.Comments.MarkAsSpam
+    Gogol.Blogger.Comments.RemoveContent
+    Gogol.Blogger.Pages.Delete
+    Gogol.Blogger.Pages.Get
+    Gogol.Blogger.Pages.Insert
+    Gogol.Blogger.Pages.List
+    Gogol.Blogger.Pages.Patch
+    Gogol.Blogger.Pages.Publish
+    Gogol.Blogger.Pages.Revert
+    Gogol.Blogger.Pages.Update
+    Gogol.Blogger.PageViews.Get
+    Gogol.Blogger.Posts.Delete
+    Gogol.Blogger.Posts.Get
+    Gogol.Blogger.Posts.GetByPath
+    Gogol.Blogger.Posts.Insert
+    Gogol.Blogger.Posts.List
+    Gogol.Blogger.Posts.Patch
+    Gogol.Blogger.Posts.Publish
+    Gogol.Blogger.Posts.Revert
+    Gogol.Blogger.Posts.Search
+    Gogol.Blogger.Posts.Update
+    Gogol.Blogger.PostUserInfos.Get
+    Gogol.Blogger.PostUserInfos.List
+    Gogol.Blogger.Types
+    Gogol.Blogger.Users.Get
 
   other-modules:
-    Network.Google.Blogger.Internal.Product
-    Network.Google.Blogger.Internal.Sum
+    Gogol.Blogger.Internal.Product
+    Gogol.Blogger.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
