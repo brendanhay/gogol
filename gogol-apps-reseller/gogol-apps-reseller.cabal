@@ -1,63 +1,73 @@
-name:                  gogol-apps-reseller
-version:               0.5.0
-synopsis:              Google Workspace Reseller SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-apps-reseller
+version:            0.5.0
+synopsis:           Google Workspace Reseller SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Perform common functions that are available on the Channel Services
-    console at scale, like placing orders and viewing customer information
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Perform common functions that are available on the Channel Services console at scale, like placing orders and viewing customer information
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-apps-reseller
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.AppsReseller
-        , Network.Google.AppsReseller.Types
-        , Network.Google.Resource.Reseller.Customers.Get
-        , Network.Google.Resource.Reseller.Customers.Insert
-        , Network.Google.Resource.Reseller.Customers.Patch
-        , Network.Google.Resource.Reseller.Customers.Update
-        , Network.Google.Resource.Reseller.Resellernotify.Getwatchdetails
-        , Network.Google.Resource.Reseller.Resellernotify.Register
-        , Network.Google.Resource.Reseller.Resellernotify.Unregister
-        , Network.Google.Resource.Reseller.Subscriptions.Activate
-        , Network.Google.Resource.Reseller.Subscriptions.ChangePlan
-        , Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
-        , Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
-        , Network.Google.Resource.Reseller.Subscriptions.Delete
-        , Network.Google.Resource.Reseller.Subscriptions.Get
-        , Network.Google.Resource.Reseller.Subscriptions.Insert
-        , Network.Google.Resource.Reseller.Subscriptions.List
-        , Network.Google.Resource.Reseller.Subscriptions.StartPaidService
-        , Network.Google.Resource.Reseller.Subscriptions.Suspend
+  exposed-modules:
+    Network.Google.AppsReseller
+    Network.Google.AppsReseller.Reseller.Customers.Get
+    Network.Google.AppsReseller.Reseller.Customers.Insert
+    Network.Google.AppsReseller.Reseller.Customers.Patch
+    Network.Google.AppsReseller.Reseller.Customers.Update
+    Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
+    Network.Google.AppsReseller.Reseller.Resellernotify.Register
+    Network.Google.AppsReseller.Reseller.Resellernotify.Unregister
+    Network.Google.AppsReseller.Reseller.Subscriptions.Activate
+    Network.Google.AppsReseller.Reseller.Subscriptions.ChangePlan
+    Network.Google.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
+    Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
+    Network.Google.AppsReseller.Reseller.Subscriptions.Delete
+    Network.Google.AppsReseller.Reseller.Subscriptions.Get
+    Network.Google.AppsReseller.Reseller.Subscriptions.Insert
+    Network.Google.AppsReseller.Reseller.Subscriptions.List
+    Network.Google.AppsReseller.Reseller.Subscriptions.StartPaidService
+    Network.Google.AppsReseller.Reseller.Subscriptions.Suspend
+    Network.Google.AppsReseller.Types
 
-    other-modules:
-          Network.Google.AppsReseller.Types.Product
-        , Network.Google.AppsReseller.Types.Sum
+  other-modules:
+    Network.Google.AppsReseller.Internal.Product
+    Network.Google.AppsReseller.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1

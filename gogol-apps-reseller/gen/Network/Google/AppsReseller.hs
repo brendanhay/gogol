@@ -1,260 +1,213 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsReseller
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Perform common functions that are available on the Channel Services
--- console at scale, like placing orders and viewing customer information
+-- Perform common functions that are available on the Channel Services console at scale, like placing orders and viewing customer information
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference>
 module Network.Google.AppsReseller
-    (
-    -- * Service Configuration
-      appsResellerService
+  ( -- * Configuration
+    appsResellerService,
 
     -- * OAuth Scopes
-    , appsOrderReadOnlyScope
-    , appsOrderScope
-
-    -- * API Declaration
-    , AppsResellerAPI
+    appsOrderScope,
+    appsOrderReadOnlyScope,
 
     -- * Resources
 
     -- ** reseller.customers.get
-    , module Network.Google.Resource.Reseller.Customers.Get
+    ResellerCustomersGetResource,
+    newResellerCustomersGet,
+    ResellerCustomersGet,
 
     -- ** reseller.customers.insert
-    , module Network.Google.Resource.Reseller.Customers.Insert
+    ResellerCustomersInsertResource,
+    newResellerCustomersInsert,
+    ResellerCustomersInsert,
 
     -- ** reseller.customers.patch
-    , module Network.Google.Resource.Reseller.Customers.Patch
+    ResellerCustomersPatchResource,
+    newResellerCustomersPatch,
+    ResellerCustomersPatch,
 
     -- ** reseller.customers.update
-    , module Network.Google.Resource.Reseller.Customers.Update
+    ResellerCustomersUpdateResource,
+    newResellerCustomersUpdate,
+    ResellerCustomersUpdate,
 
     -- ** reseller.resellernotify.getwatchdetails
-    , module Network.Google.Resource.Reseller.Resellernotify.Getwatchdetails
+    ResellerResellernotifyGetwatchdetailsResource,
+    newResellerResellernotifyGetwatchdetails,
+    ResellerResellernotifyGetwatchdetails,
 
     -- ** reseller.resellernotify.register
-    , module Network.Google.Resource.Reseller.Resellernotify.Register
+    ResellerResellernotifyRegisterResource,
+    newResellerResellernotifyRegister,
+    ResellerResellernotifyRegister,
 
     -- ** reseller.resellernotify.unregister
-    , module Network.Google.Resource.Reseller.Resellernotify.Unregister
+    ResellerResellernotifyUnregisterResource,
+    newResellerResellernotifyUnregister,
+    ResellerResellernotifyUnregister,
 
     -- ** reseller.subscriptions.activate
-    , module Network.Google.Resource.Reseller.Subscriptions.Activate
+    ResellerSubscriptionsActivateResource,
+    newResellerSubscriptionsActivate,
+    ResellerSubscriptionsActivate,
 
     -- ** reseller.subscriptions.changePlan
-    , module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
+    ResellerSubscriptionsChangePlanResource,
+    newResellerSubscriptionsChangePlan,
+    ResellerSubscriptionsChangePlan,
 
     -- ** reseller.subscriptions.changeRenewalSettings
-    , module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
+    ResellerSubscriptionsChangeRenewalSettingsResource,
+    newResellerSubscriptionsChangeRenewalSettings,
+    ResellerSubscriptionsChangeRenewalSettings,
 
     -- ** reseller.subscriptions.changeSeats
-    , module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
+    ResellerSubscriptionsChangeSeatsResource,
+    newResellerSubscriptionsChangeSeats,
+    ResellerSubscriptionsChangeSeats,
 
     -- ** reseller.subscriptions.delete
-    , module Network.Google.Resource.Reseller.Subscriptions.Delete
+    ResellerSubscriptionsDeleteResource,
+    newResellerSubscriptionsDelete,
+    ResellerSubscriptionsDelete,
 
     -- ** reseller.subscriptions.get
-    , module Network.Google.Resource.Reseller.Subscriptions.Get
+    ResellerSubscriptionsGetResource,
+    newResellerSubscriptionsGet,
+    ResellerSubscriptionsGet,
 
     -- ** reseller.subscriptions.insert
-    , module Network.Google.Resource.Reseller.Subscriptions.Insert
+    ResellerSubscriptionsInsertResource,
+    newResellerSubscriptionsInsert,
+    ResellerSubscriptionsInsert,
 
     -- ** reseller.subscriptions.list
-    , module Network.Google.Resource.Reseller.Subscriptions.List
+    ResellerSubscriptionsListResource,
+    newResellerSubscriptionsList,
+    ResellerSubscriptionsList,
 
     -- ** reseller.subscriptions.startPaidService
-    , module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
+    ResellerSubscriptionsStartPaidServiceResource,
+    newResellerSubscriptionsStartPaidService,
+    ResellerSubscriptionsStartPaidService,
 
     -- ** reseller.subscriptions.suspend
-    , module Network.Google.Resource.Reseller.Subscriptions.Suspend
+    ResellerSubscriptionsSuspendResource,
+    newResellerSubscriptionsSuspend,
+    ResellerSubscriptionsSuspend,
 
     -- * Types
 
-    -- ** SubscriptionTrialSettings
-    , SubscriptionTrialSettings
-    , subscriptionTrialSettings
-    , stsIsInTrial
-    , stsTrialEndTime
-
-    -- ** ResellernotifyResource
-    , ResellernotifyResource
-    , resellernotifyResource
-    , rrTopicName
-
-    -- ** ResellernotifyGetwatchdetailsResponse
-    , ResellernotifyGetwatchdetailsResponse
-    , resellernotifyGetwatchdetailsResponse
-    , rgrTopicName
-    , rgrServiceAccountEmailAddresses
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Address
-    , Address
-    , address
-    , aOrganizationName
-    , aKind
-    , aPostalCode
-    , aAddressLine1
-    , aLocality
-    , aContactName
-    , aAddressLine2
-    , aCountryCode
-    , aRegion
-    , aAddressLine3
-
-    -- ** Customer
-    , Customer
-    , customer
-    , cCustomerType
-    , cCustomerDomainVerified
-    , cResourceUiURL
-    , cKind
-    , cCustomerId
-    , cAlternateEmail
-    , cCustomerDomain
-    , cPhoneNumber
-    , cPostalAddress
-    , cPrimaryAdmin
+    Address (..),
+    newAddress,
 
     -- ** ChangePlanRequest
-    , ChangePlanRequest
-    , changePlanRequest
-    , cprKind
-    , cprDealCode
-    , cprPlanName
-    , cprPurchaseOrderId
-    , cprSeats
+    ChangePlanRequest (..),
+    newChangePlanRequest,
 
-    -- ** SubscriptionPlanCommitmentInterval
-    , SubscriptionPlanCommitmentInterval
-    , subscriptionPlanCommitmentInterval
-    , spciStartTime
-    , spciEndTime
+    -- ** Customer
+    Customer (..),
+    newCustomer,
 
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** SubscriptionsDeleteDeletionType
-    , SubscriptionsDeleteDeletionType (..)
-
-    -- ** SubscriptionPlan
-    , SubscriptionPlan
-    , subscriptionPlan
-    , spCommitmentInterval
-    , spIsCommitmentPlan
-    , spPlanName
-
-    -- ** CustomerCustomerType
-    , CustomerCustomerType (..)
-
-    -- ** Subscriptions
-    , Subscriptions
-    , subscriptions
-    , sNextPageToken
-    , sKind
-    , sSubscriptions
-
-    -- ** Seats
-    , Seats
-    , seats
-    , seaNumberOfSeats
-    , seaMaximumNumberOfSeats
-    , seaLicensedNumberOfSeats
-    , seaKind
+    -- ** Customer_CustomerType
+    Customer_CustomerType (..),
 
     -- ** PrimaryAdmin
-    , PrimaryAdmin
-    , primaryAdmin
-    , paPrimaryEmail
+    PrimaryAdmin (..),
+    newPrimaryAdmin,
 
     -- ** RenewalSettings
-    , RenewalSettings
-    , renewalSettings
-    , rsKind
-    , rsRenewalType
+    RenewalSettings (..),
+    newRenewalSettings,
+
+    -- ** ResellernotifyGetwatchdetailsResponse
+    ResellernotifyGetwatchdetailsResponse (..),
+    newResellernotifyGetwatchdetailsResponse,
+
+    -- ** ResellernotifyResource
+    ResellernotifyResource (..),
+    newResellernotifyResource,
+
+    -- ** Seats
+    Seats (..),
+    newSeats,
 
     -- ** Subscription
-    , Subscription
-    , subscription
-    , subCreationTime
-    , subBillingMethod
-    , subStatus
-    , subTrialSettings
-    , subSKUName
-    , subResourceUiURL
-    , subKind
-    , subSKUId
-    , subPlan
-    , subDealCode
-    , subCustomerId
-    , subCustomerDomain
-    , subSuspensionReasons
-    , subTransferInfo
-    , subPurchaseOrderId
-    , subSeats
-    , subRenewalSettings
-    , subSubscriptionId
+    Subscription (..),
+    newSubscription,
 
-    -- ** SubscriptionTransferInfo
-    , SubscriptionTransferInfo
-    , subscriptionTransferInfo
-    , stiCurrentLegacySKUId
-    , stiTransferabilityExpirationTime
-    , stiMinimumTransferableSeats
-    ) where
+    -- ** Subscription_Plan
+    Subscription_Plan (..),
+    newSubscription_Plan,
 
-import Network.Google.Prelude
+    -- ** Subscription_Plan_CommitmentInterval
+    Subscription_Plan_CommitmentInterval (..),
+    newSubscription_Plan_CommitmentInterval,
+
+    -- ** Subscription_TransferInfo
+    Subscription_TransferInfo (..),
+    newSubscription_TransferInfo,
+
+    -- ** Subscription_TrialSettings
+    Subscription_TrialSettings (..),
+    newSubscription_TrialSettings,
+
+    -- ** Subscriptions
+    Subscriptions (..),
+    newSubscriptions,
+
+    -- ** SubscriptionsDeleteDeletionType
+    SubscriptionsDeleteDeletionType (..),
+  )
+where
+
+import Network.Google.AppsReseller.Reseller.Customers.Get
+import Network.Google.AppsReseller.Reseller.Customers.Insert
+import Network.Google.AppsReseller.Reseller.Customers.Patch
+import Network.Google.AppsReseller.Reseller.Customers.Update
+import Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
+import Network.Google.AppsReseller.Reseller.Resellernotify.Register
+import Network.Google.AppsReseller.Reseller.Resellernotify.Unregister
+import Network.Google.AppsReseller.Reseller.Subscriptions.Activate
+import Network.Google.AppsReseller.Reseller.Subscriptions.ChangePlan
+import Network.Google.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
+import Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
+import Network.Google.AppsReseller.Reseller.Subscriptions.Delete
+import Network.Google.AppsReseller.Reseller.Subscriptions.Get
+import Network.Google.AppsReseller.Reseller.Subscriptions.Insert
+import Network.Google.AppsReseller.Reseller.Subscriptions.List
+import Network.Google.AppsReseller.Reseller.Subscriptions.StartPaidService
+import Network.Google.AppsReseller.Reseller.Subscriptions.Suspend
 import Network.Google.AppsReseller.Types
-import Network.Google.Resource.Reseller.Customers.Get
-import Network.Google.Resource.Reseller.Customers.Insert
-import Network.Google.Resource.Reseller.Customers.Patch
-import Network.Google.Resource.Reseller.Customers.Update
-import Network.Google.Resource.Reseller.Resellernotify.Getwatchdetails
-import Network.Google.Resource.Reseller.Resellernotify.Register
-import Network.Google.Resource.Reseller.Resellernotify.Unregister
-import Network.Google.Resource.Reseller.Subscriptions.Activate
-import Network.Google.Resource.Reseller.Subscriptions.ChangePlan
-import Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
-import Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
-import Network.Google.Resource.Reseller.Subscriptions.Delete
-import Network.Google.Resource.Reseller.Subscriptions.Get
-import Network.Google.Resource.Reseller.Subscriptions.Insert
-import Network.Google.Resource.Reseller.Subscriptions.List
-import Network.Google.Resource.Reseller.Subscriptions.StartPaidService
-import Network.Google.Resource.Reseller.Subscriptions.Suspend
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Workspace Reseller API service.
-type AppsResellerAPI =
-     CustomersInsertResource :<|> CustomersPatchResource
-       :<|> CustomersGetResource
-       :<|> CustomersUpdateResource
-       :<|> ResellernotifyGetwatchdetailsResource
-       :<|> ResellernotifyRegisterResource
-       :<|> ResellernotifyUnregisterResource
-       :<|> SubscriptionsInsertResource
-       :<|> SubscriptionsListResource
-       :<|> SubscriptionsChangeRenewalSettingsResource
-       :<|> SubscriptionsGetResource
-       :<|> SubscriptionsActivateResource
-       :<|> SubscriptionsSuspendResource
-       :<|> SubscriptionsChangePlanResource
-       :<|> SubscriptionsChangeSeatsResource
-       :<|> SubscriptionsDeleteResource
-       :<|> SubscriptionsStartPaidServiceResource
