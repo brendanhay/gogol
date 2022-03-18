@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Customers.Insert
+-- Module      : Gogol.AppsReseller.Reseller.Customers.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -30,7 +30,7 @@
 -- </admin-sdk/reseller/v1/how-tos/manage_customers#tos order a new customer account>.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.customers.insert@.
-module Network.Google.AppsReseller.Reseller.Customers.Insert
+module Gogol.AppsReseller.Reseller.Customers.Insert
   ( -- * Resource
     ResellerCustomersInsertResource,
 
@@ -40,8 +40,8 @@ module Network.Google.AppsReseller.Reseller.Customers.Insert
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.customers.insert@ method which the
 -- 'ResellerCustomersInsert' request conforms to.

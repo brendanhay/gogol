@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Customers.Get
+-- Module      : Gogol.AppsReseller.Reseller.Customers.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets a customer account. Use this operation to see a customer account already in your reseller management, or to see the minimal account information for an existing customer that you do not manage. For more information about the API response for existing customers, see </admin-sdk/reseller/v1/how-tos/manage_customers#get_customer retrieving a customer account>.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.customers.get@.
-module Network.Google.AppsReseller.Reseller.Customers.Get
+module Gogol.AppsReseller.Reseller.Customers.Get
   ( -- * Resource
     ResellerCustomersGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsReseller.Reseller.Customers.Get
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.customers.get@ method which the
 -- 'ResellerCustomersGet' request conforms to.

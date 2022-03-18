@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
+-- Module      : Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns all the details of the watch corresponding to the reseller.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.resellernotify.getwatchdetails@.
-module Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
+module Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
   ( -- * Resource
     ResellerResellernotifyGetwatchdetailsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.resellernotify.getwatchdetails@ method which the
 -- 'ResellerResellernotifyGetwatchdetails' request conforms to.

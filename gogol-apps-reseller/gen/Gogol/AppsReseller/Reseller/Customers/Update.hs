@@ -19,53 +19,50 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Subscriptions.ChangePlan
+-- Module      : Gogol.AppsReseller.Reseller.Customers.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a subscription plan. Use this method to update a plan for a 30-day trial or a flexible plan subscription to an annual commitment plan with monthly or yearly payments. How a plan is updated differs depending on the plan and the products. For more information, see the description in </admin-sdk/reseller/v1/how-tos/manage_subscriptions#update_subscription_plan manage subscriptions>.
+-- Updates a customer account\'s settings. You cannot update @customerType@ via the Reseller API, but a @\"team\"@ customer can verify their domain and become @customerType = \"domain\"@. For more information, see </admin-sdk/reseller/v1/how-tos/manage_customers#update_customer update a customer\'s settings>.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.changePlan@.
-module Network.Google.AppsReseller.Reseller.Subscriptions.ChangePlan
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.customers.update@.
+module Gogol.AppsReseller.Reseller.Customers.Update
   ( -- * Resource
-    ResellerSubscriptionsChangePlanResource,
+    ResellerCustomersUpdateResource,
 
     -- ** Constructing a Request
-    newResellerSubscriptionsChangePlan,
-    ResellerSubscriptionsChangePlan,
+    newResellerCustomersUpdate,
+    ResellerCustomersUpdate,
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @reseller.subscriptions.changePlan@ method which the
--- 'ResellerSubscriptionsChangePlan' request conforms to.
-type ResellerSubscriptionsChangePlanResource =
+-- | A resource alias for @reseller.customers.update@ method which the
+-- 'ResellerCustomersUpdate' request conforms to.
+type ResellerCustomersUpdateResource =
   "apps"
     Core.:> "reseller"
     Core.:> "v1"
     Core.:> "customers"
     Core.:> Core.Capture "customerId" Core.Text
-    Core.:> "subscriptions"
-    Core.:> Core.Capture "subscriptionId" Core.Text
-    Core.:> "changePlan"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ChangePlanRequest
-    Core.:> Core.Post '[Core.JSON] Subscription
+    Core.:> Core.ReqBody '[Core.JSON] Customer
+    Core.:> Core.Put '[Core.JSON] Customer
 
--- | Updates a subscription plan. Use this method to update a plan for a 30-day trial or a flexible plan subscription to an annual commitment plan with monthly or yearly payments. How a plan is updated differs depending on the plan and the products. For more information, see the description in </admin-sdk/reseller/v1/how-tos/manage_subscriptions#update_subscription_plan manage subscriptions>.
+-- | Updates a customer account\'s settings. You cannot update @customerType@ via the Reseller API, but a @\"team\"@ customer can verify their domain and become @customerType = \"domain\"@. For more information, see </admin-sdk/reseller/v1/how-tos/manage_customers#update_customer update a customer\'s settings>.
 --
--- /See:/ 'newResellerSubscriptionsChangePlan' smart constructor.
-data ResellerSubscriptionsChangePlan = ResellerSubscriptionsChangePlan
+-- /See:/ 'newResellerCustomersUpdate' smart constructor.
+data ResellerCustomersUpdate = ResellerCustomersUpdate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -75,9 +72,7 @@ data ResellerSubscriptionsChangePlan = ResellerSubscriptionsChangePlan
     -- | This can be either the customer\'s primary domain name or the customer\'s unique identifier. If the domain name for a customer changes, the old domain name cannot be used to access the customer, but the customer\'s unique identifier (as returned by the API) can always be used. We recommend storing the unique identifier in your systems where applicable.
     customerId :: Core.Text,
     -- | Multipart request metadata.
-    payload :: ChangePlanRequest,
-    -- | This is a required property. The @subscriptionId@ is the subscription identifier and is unique for each customer. Since a @subscriptionId@ changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the @subscriptionId@ can be found using the retrieve all reseller subscriptions method.
-    subscriptionId :: Core.Text,
+    payload :: Customer,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -85,41 +80,32 @@ data ResellerSubscriptionsChangePlan = ResellerSubscriptionsChangePlan
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ResellerSubscriptionsChangePlan' with the minimum fields required to make a request.
-newResellerSubscriptionsChangePlan ::
+-- | Creates a value of 'ResellerCustomersUpdate' with the minimum fields required to make a request.
+newResellerCustomersUpdate ::
   -- |  This can be either the customer\'s primary domain name or the customer\'s unique identifier. If the domain name for a customer changes, the old domain name cannot be used to access the customer, but the customer\'s unique identifier (as returned by the API) can always be used. We recommend storing the unique identifier in your systems where applicable. See 'customerId'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  ChangePlanRequest ->
-  -- |  This is a required property. The @subscriptionId@ is the subscription identifier and is unique for each customer. Since a @subscriptionId@ changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the @subscriptionId@ can be found using the retrieve all reseller subscriptions method. See 'subscriptionId'.
-  Core.Text ->
-  ResellerSubscriptionsChangePlan
-newResellerSubscriptionsChangePlan customerId payload subscriptionId =
-  ResellerSubscriptionsChangePlan
+  Customer ->
+  ResellerCustomersUpdate
+newResellerCustomersUpdate customerId payload =
+  ResellerCustomersUpdate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       customerId = customerId,
       payload = payload,
-      subscriptionId = subscriptionId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ResellerSubscriptionsChangePlan
-  where
+instance Core.GoogleRequest ResellerCustomersUpdate where
+  type Rs ResellerCustomersUpdate = Customer
   type
-    Rs ResellerSubscriptionsChangePlan =
-      Subscription
-  type
-    Scopes ResellerSubscriptionsChangePlan =
+    Scopes ResellerCustomersUpdate =
       '["https://www.googleapis.com/auth/apps.order"]
-  requestClient ResellerSubscriptionsChangePlan {..} =
+  requestClient ResellerCustomersUpdate {..} =
     go
       customerId
-      subscriptionId
       xgafv
       accessToken
       callback
@@ -132,6 +118,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ResellerSubscriptionsChangePlanResource
+              Core.Proxy ResellerCustomersUpdateResource
           )
           Core.mempty

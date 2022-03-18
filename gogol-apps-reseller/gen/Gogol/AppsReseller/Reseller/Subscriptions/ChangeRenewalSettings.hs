@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Subscriptions.Suspend
+-- Module      : Gogol.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Suspends an active subscription. You can use this method to suspend a paid subscription that is currently in the @ACTIVE@ state. * For @FLEXIBLE@ subscriptions, billing is paused. * For @ANNUAL_MONTHLY_PAY@ or @ANNUAL_YEARLY_PAY@ subscriptions: * Suspending the subscription does not change the renewal date that was originally committed to. * A suspended subscription does not renew. If you activate the subscription after the original renewal date, a new annual subscription will be created, starting on the day of activation. We strongly encourage you to suspend subscriptions only for short periods of time as suspensions over 60 days may result in the subscription being cancelled.
+-- Updates a user license\'s renewal settings. This is applicable for accounts with annual commitment plans only. For more information, see the description in </admin-sdk/reseller/v1/how-tos/manage_subscriptions#update_renewal manage subscriptions>.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.suspend@.
-module Network.Google.AppsReseller.Reseller.Subscriptions.Suspend
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.changeRenewalSettings@.
+module Gogol.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
   ( -- * Resource
-    ResellerSubscriptionsSuspendResource,
+    ResellerSubscriptionsChangeRenewalSettingsResource,
 
     -- ** Constructing a Request
-    newResellerSubscriptionsSuspend,
-    ResellerSubscriptionsSuspend,
+    newResellerSubscriptionsChangeRenewalSettings,
+    ResellerSubscriptionsChangeRenewalSettings,
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @reseller.subscriptions.suspend@ method which the
--- 'ResellerSubscriptionsSuspend' request conforms to.
-type ResellerSubscriptionsSuspendResource =
+-- | A resource alias for @reseller.subscriptions.changeRenewalSettings@ method which the
+-- 'ResellerSubscriptionsChangeRenewalSettings' request conforms to.
+type ResellerSubscriptionsChangeRenewalSettingsResource =
   "apps"
     Core.:> "reseller"
     Core.:> "v1"
@@ -52,19 +52,20 @@ type ResellerSubscriptionsSuspendResource =
     Core.:> Core.Capture "customerId" Core.Text
     Core.:> "subscriptions"
     Core.:> Core.Capture "subscriptionId" Core.Text
-    Core.:> "suspend"
+    Core.:> "changeRenewalSettings"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] RenewalSettings
     Core.:> Core.Post '[Core.JSON] Subscription
 
--- | Suspends an active subscription. You can use this method to suspend a paid subscription that is currently in the @ACTIVE@ state. * For @FLEXIBLE@ subscriptions, billing is paused. * For @ANNUAL_MONTHLY_PAY@ or @ANNUAL_YEARLY_PAY@ subscriptions: * Suspending the subscription does not change the renewal date that was originally committed to. * A suspended subscription does not renew. If you activate the subscription after the original renewal date, a new annual subscription will be created, starting on the day of activation. We strongly encourage you to suspend subscriptions only for short periods of time as suspensions over 60 days may result in the subscription being cancelled.
+-- | Updates a user license\'s renewal settings. This is applicable for accounts with annual commitment plans only. For more information, see the description in </admin-sdk/reseller/v1/how-tos/manage_subscriptions#update_renewal manage subscriptions>.
 --
--- /See:/ 'newResellerSubscriptionsSuspend' smart constructor.
-data ResellerSubscriptionsSuspend = ResellerSubscriptionsSuspend
+-- /See:/ 'newResellerSubscriptionsChangeRenewalSettings' smart constructor.
+data ResellerSubscriptionsChangeRenewalSettings = ResellerSubscriptionsChangeRenewalSettings
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -73,6 +74,8 @@ data ResellerSubscriptionsSuspend = ResellerSubscriptionsSuspend
     callback :: (Core.Maybe Core.Text),
     -- | This can be either the customer\'s primary domain name or the customer\'s unique identifier. If the domain name for a customer changes, the old domain name cannot be used to access the customer, but the customer\'s unique identifier (as returned by the API) can always be used. We recommend storing the unique identifier in your systems where applicable.
     customerId :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: RenewalSettings,
     -- | This is a required property. The @subscriptionId@ is the subscription identifier and is unique for each customer. Since a @subscriptionId@ changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the @subscriptionId@ can be found using the retrieve all reseller subscriptions method.
     subscriptionId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -82,19 +85,22 @@ data ResellerSubscriptionsSuspend = ResellerSubscriptionsSuspend
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ResellerSubscriptionsSuspend' with the minimum fields required to make a request.
-newResellerSubscriptionsSuspend ::
+-- | Creates a value of 'ResellerSubscriptionsChangeRenewalSettings' with the minimum fields required to make a request.
+newResellerSubscriptionsChangeRenewalSettings ::
   -- |  This can be either the customer\'s primary domain name or the customer\'s unique identifier. If the domain name for a customer changes, the old domain name cannot be used to access the customer, but the customer\'s unique identifier (as returned by the API) can always be used. We recommend storing the unique identifier in your systems where applicable. See 'customerId'.
   Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  RenewalSettings ->
   -- |  This is a required property. The @subscriptionId@ is the subscription identifier and is unique for each customer. Since a @subscriptionId@ changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the @subscriptionId@ can be found using the retrieve all reseller subscriptions method. See 'subscriptionId'.
   Core.Text ->
-  ResellerSubscriptionsSuspend
-newResellerSubscriptionsSuspend customerId subscriptionId =
-  ResellerSubscriptionsSuspend
+  ResellerSubscriptionsChangeRenewalSettings
+newResellerSubscriptionsChangeRenewalSettings customerId payload subscriptionId =
+  ResellerSubscriptionsChangeRenewalSettings
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       customerId = customerId,
+      payload = payload,
       subscriptionId = subscriptionId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -102,27 +108,33 @@ newResellerSubscriptionsSuspend customerId subscriptionId =
 
 instance
   Core.GoogleRequest
-    ResellerSubscriptionsSuspend
+    ResellerSubscriptionsChangeRenewalSettings
   where
-  type Rs ResellerSubscriptionsSuspend = Subscription
   type
-    Scopes ResellerSubscriptionsSuspend =
+    Rs ResellerSubscriptionsChangeRenewalSettings =
+      Subscription
+  type
+    Scopes
+      ResellerSubscriptionsChangeRenewalSettings =
       '["https://www.googleapis.com/auth/apps.order"]
-  requestClient ResellerSubscriptionsSuspend {..} =
-    go
-      customerId
-      subscriptionId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      appsResellerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ResellerSubscriptionsSuspendResource
-          )
-          Core.mempty
+  requestClient
+    ResellerSubscriptionsChangeRenewalSettings {..} =
+      go
+        customerId
+        subscriptionId
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        appsResellerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  ResellerSubscriptionsChangeRenewalSettingsResource
+            )
+            Core.mempty

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
+-- Module      : Gogol.AppsReseller.Reseller.Subscriptions.ChangeSeats
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Updates a subscription\'s user license settings. For more information about updating an annual commitment plan or a flexible plan subscription’s licenses, see </admin-sdk/reseller/v1/how-tos/manage_subscriptions#update_subscription_seat Manage Subscriptions>.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.changeSeats@.
-module Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
+module Gogol.AppsReseller.Reseller.Subscriptions.ChangeSeats
   ( -- * Resource
     ResellerSubscriptionsChangeSeatsResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.subscriptions.changeSeats@ method which the
 -- 'ResellerSubscriptionsChangeSeats' request conforms to.

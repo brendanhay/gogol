@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller
+-- Module      : Gogol.AppsReseller
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Perform common functions that are available on the Channel Services console at scale, like placing orders and viewing customer information
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference>
-module Network.Google.AppsReseller
+module Gogol.AppsReseller
   ( -- * Configuration
     appsResellerService,
 
@@ -193,21 +193,21 @@ module Network.Google.AppsReseller
   )
 where
 
-import Network.Google.AppsReseller.Reseller.Customers.Get
-import Network.Google.AppsReseller.Reseller.Customers.Insert
-import Network.Google.AppsReseller.Reseller.Customers.Patch
-import Network.Google.AppsReseller.Reseller.Customers.Update
-import Network.Google.AppsReseller.Reseller.Resellernotify.Getwatchdetails
-import Network.Google.AppsReseller.Reseller.Resellernotify.Register
-import Network.Google.AppsReseller.Reseller.Resellernotify.Unregister
-import Network.Google.AppsReseller.Reseller.Subscriptions.Activate
-import Network.Google.AppsReseller.Reseller.Subscriptions.ChangePlan
-import Network.Google.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
-import Network.Google.AppsReseller.Reseller.Subscriptions.ChangeSeats
-import Network.Google.AppsReseller.Reseller.Subscriptions.Delete
-import Network.Google.AppsReseller.Reseller.Subscriptions.Get
-import Network.Google.AppsReseller.Reseller.Subscriptions.Insert
-import Network.Google.AppsReseller.Reseller.Subscriptions.List
-import Network.Google.AppsReseller.Reseller.Subscriptions.StartPaidService
-import Network.Google.AppsReseller.Reseller.Subscriptions.Suspend
-import Network.Google.AppsReseller.Types
+import Gogol.AppsReseller.Reseller.Customers.Get
+import Gogol.AppsReseller.Reseller.Customers.Insert
+import Gogol.AppsReseller.Reseller.Customers.Patch
+import Gogol.AppsReseller.Reseller.Customers.Update
+import Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
+import Gogol.AppsReseller.Reseller.Resellernotify.Register
+import Gogol.AppsReseller.Reseller.Resellernotify.Unregister
+import Gogol.AppsReseller.Reseller.Subscriptions.Activate
+import Gogol.AppsReseller.Reseller.Subscriptions.ChangePlan
+import Gogol.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
+import Gogol.AppsReseller.Reseller.Subscriptions.ChangeSeats
+import Gogol.AppsReseller.Reseller.Subscriptions.Delete
+import Gogol.AppsReseller.Reseller.Subscriptions.Get
+import Gogol.AppsReseller.Reseller.Subscriptions.Insert
+import Gogol.AppsReseller.Reseller.Subscriptions.List
+import Gogol.AppsReseller.Reseller.Subscriptions.StartPaidService
+import Gogol.AppsReseller.Reseller.Subscriptions.Suspend
+import Gogol.AppsReseller.Types

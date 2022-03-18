@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Subscriptions.Insert
+-- Module      : Gogol.AppsReseller.Reseller.Subscriptions.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates or transfer a subscription. Create a subscription for a customer\'s account that you ordered using the </admin-sdk/reseller/v1/reference/customers/insert.html Order a new customer account> method. For more information about creating a subscription for different payment plans, see </admin-sdk/reseller/v1/how-tos/manage_subscriptions#create_subscription manage subscriptions>.\\ If you did not order the customer\'s account using the customer insert method, use the customer\'s @customerAuthToken@ when creating a subscription for that customer. If transferring a G Suite subscription with an associated Google Drive or Google Vault subscription, use the </admin-sdk/reseller/v1/how-tos/batch.html batch operation> to transfer all of these subscriptions. For more information, see how to </admin-sdk/reseller/v1/how-tos/manage_subscriptions#transfer_a_subscription transfer subscriptions>.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.insert@.
-module Network.Google.AppsReseller.Reseller.Subscriptions.Insert
+module Gogol.AppsReseller.Reseller.Subscriptions.Insert
   ( -- * Resource
     ResellerSubscriptionsInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsReseller.Reseller.Subscriptions.Insert
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.subscriptions.insert@ method which the
 -- 'ResellerSubscriptionsInsert' request conforms to.

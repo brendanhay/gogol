@@ -19,37 +19,37 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Resellernotify.Register
+-- Module      : Gogol.AppsReseller.Reseller.Resellernotify.Unregister
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers a Reseller for receiving notifications.
+-- Unregisters a Reseller for receiving notifications.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.resellernotify.register@.
-module Network.Google.AppsReseller.Reseller.Resellernotify.Register
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.resellernotify.unregister@.
+module Gogol.AppsReseller.Reseller.Resellernotify.Unregister
   ( -- * Resource
-    ResellerResellernotifyRegisterResource,
+    ResellerResellernotifyUnregisterResource,
 
     -- ** Constructing a Request
-    newResellerResellernotifyRegister,
-    ResellerResellernotifyRegister,
+    newResellerResellernotifyUnregister,
+    ResellerResellernotifyUnregister,
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @reseller.resellernotify.register@ method which the
--- 'ResellerResellernotifyRegister' request conforms to.
-type ResellerResellernotifyRegisterResource =
+-- | A resource alias for @reseller.resellernotify.unregister@ method which the
+-- 'ResellerResellernotifyUnregister' request conforms to.
+type ResellerResellernotifyUnregisterResource =
   "apps"
     Core.:> "reseller"
     Core.:> "v1"
     Core.:> "resellernotify"
-    Core.:> "register"
+    Core.:> "unregister"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -61,17 +61,17 @@ type ResellerResellernotifyRegisterResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ResellernotifyResource
 
--- | Registers a Reseller for receiving notifications.
+-- | Unregisters a Reseller for receiving notifications.
 --
--- /See:/ 'newResellerResellernotifyRegister' smart constructor.
-data ResellerResellernotifyRegister = ResellerResellernotifyRegister
+-- /See:/ 'newResellerResellernotifyUnregister' smart constructor.
+data ResellerResellernotifyUnregister = ResellerResellernotifyUnregister
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The service account which will own the created Cloud-PubSub topic.
+    -- | The service account which owns the Cloud-PubSub topic.
     serviceAccountEmailAddress :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,11 +80,11 @@ data ResellerResellernotifyRegister = ResellerResellernotifyRegister
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ResellerResellernotifyRegister' with the minimum fields required to make a request.
-newResellerResellernotifyRegister ::
-  ResellerResellernotifyRegister
-newResellerResellernotifyRegister =
-  ResellerResellernotifyRegister
+-- | Creates a value of 'ResellerResellernotifyUnregister' with the minimum fields required to make a request.
+newResellerResellernotifyUnregister ::
+  ResellerResellernotifyUnregister
+newResellerResellernotifyUnregister =
+  ResellerResellernotifyUnregister
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -95,15 +95,15 @@ newResellerResellernotifyRegister =
 
 instance
   Core.GoogleRequest
-    ResellerResellernotifyRegister
+    ResellerResellernotifyUnregister
   where
   type
-    Rs ResellerResellernotifyRegister =
+    Rs ResellerResellernotifyUnregister =
       ResellernotifyResource
   type
-    Scopes ResellerResellernotifyRegister =
+    Scopes ResellerResellernotifyUnregister =
       '["https://www.googleapis.com/auth/apps.order"]
-  requestClient ResellerResellernotifyRegister {..} =
+  requestClient ResellerResellernotifyUnregister {..} =
     go
       xgafv
       accessToken
@@ -117,6 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ResellerResellernotifyRegisterResource
+              Core.Proxy ResellerResellernotifyUnregisterResource
           )
           Core.mempty

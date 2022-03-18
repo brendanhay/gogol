@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsReseller.Reseller.Subscriptions.List
+-- Module      : Gogol.AppsReseller.Reseller.Subscriptions.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists of subscriptions managed by the reseller. The list can be all subscriptions, all of a customer\'s subscriptions, or all of a customer\'s transferable subscriptions. Optionally, this method can filter the response by a @customerNamePrefix@. For more information, see </admin-sdk/reseller/v1/how-tos/manage_subscriptions manage subscriptions>.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.list@.
-module Network.Google.AppsReseller.Reseller.Subscriptions.List
+module Gogol.AppsReseller.Reseller.Subscriptions.List
   ( -- * Resource
     ResellerSubscriptionsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppsReseller.Reseller.Subscriptions.List
   )
 where
 
-import Network.Google.AppsReseller.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsReseller.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @reseller.subscriptions.list@ method which the
 -- 'ResellerSubscriptionsList' request conforms to.
