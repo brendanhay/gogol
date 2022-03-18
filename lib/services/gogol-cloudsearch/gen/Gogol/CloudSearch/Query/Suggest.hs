@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,83 +30,88 @@
 --
 -- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.query.suggest@.
 module Gogol.CloudSearch.Query.Suggest
-    (
-    -- * Resource
-      CloudSearchQuerySuggestResource
+  ( -- * Resource
+    CloudSearchQuerySuggestResource,
 
     -- ** Constructing a Request
-    , newCloudSearchQuerySuggest
-    , CloudSearchQuerySuggest
-    ) where
+    newCloudSearchQuerySuggest,
+    CloudSearchQuerySuggest,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudSearch.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudsearch.query.suggest@ method which the
 -- 'CloudSearchQuerySuggest' request conforms to.
 type CloudSearchQuerySuggestResource =
-     "v1" Core.:>
-       "query" Core.:>
-         "suggest" Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "uploadType" Core.Text Core.:>
-                   Core.QueryParam "upload_protocol" Core.Text Core.:>
-                     Core.QueryParam "alt" Core.AltJSON Core.:>
-                       Core.ReqBody '[Core.JSON] SuggestRequest Core.:>
-                         Core.Post '[Core.JSON] SuggestResponse
+  "v1"
+    Core.:> "query"
+    Core.:> "suggest"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] SuggestRequest
+    Core.:> Core.Post '[Core.JSON] SuggestResponse
 
 -- | Provides suggestions for autocompleting the query. __Note:__ This API requires a standard end user account to execute. A service account can\'t perform Query API requests directly; to use a service account to perform queries, set up <https://developers.google.com/cloud-search/docs/guides/delegation/ Google Workspace domain-wide delegation of authority>.
 --
 -- /See:/ 'newCloudSearchQuerySuggest' smart constructor.
 data CloudSearchQuerySuggest = CloudSearchQuerySuggest
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: SuggestRequest
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: SuggestRequest,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudSearchQuerySuggest' with the minimum fields required to make a request.
-newCloudSearchQuerySuggest 
-    ::  SuggestRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> CloudSearchQuerySuggest
+newCloudSearchQuerySuggest ::
+  -- |  Multipart request metadata. See 'payload'.
+  SuggestRequest ->
+  CloudSearchQuerySuggest
 newCloudSearchQuerySuggest payload =
   CloudSearchQuerySuggest
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest CloudSearchQuerySuggest
-         where
-        type Rs CloudSearchQuerySuggest = SuggestResponse
-        type Scopes CloudSearchQuerySuggest =
-             '["https://www.googleapis.com/auth/cloud_search",
-               "https://www.googleapis.com/auth/cloud_search.query"]
-        requestClient CloudSearchQuerySuggest{..}
-          = go xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              cloudSearchService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy CloudSearchQuerySuggestResource)
-                      Core.mempty
-
+instance Core.GoogleRequest CloudSearchQuerySuggest where
+  type Rs CloudSearchQuerySuggest = SuggestResponse
+  type
+    Scopes CloudSearchQuerySuggest =
+      '[ "https://www.googleapis.com/auth/cloud_search",
+         "https://www.googleapis.com/auth/cloud_search.query"
+       ]
+  requestClient CloudSearchQuerySuggest {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchQuerySuggestResource
+          )
+          Core.mempty
