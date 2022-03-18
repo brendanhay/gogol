@@ -1,592 +1,586 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudKMS
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages keys and performs cryptographic operations in a central cloud
--- service, for direct use by other cloud resources and applications.
+-- Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.
 --
 -- /See:/ <https://cloud.google.com/kms/ Cloud Key Management Service (KMS) API Reference>
 module Network.Google.CloudKMS
-    (
-    -- * Service Configuration
-      cloudKMSService
+  ( -- * Configuration
+    cloudKMSService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudKMSScope
-
-    -- * API Declaration
-    , CloudKMSAPI
+    cloudPlatformScope,
+    cloudKMSScope,
 
     -- * Resources
 
+    -- ** cloudkms.projects.locations.ekmConnections.create
+    CloudKMSProjectsLocationsEkmConnectionsCreateResource,
+    newCloudKMSProjectsLocationsEkmConnectionsCreate,
+    CloudKMSProjectsLocationsEkmConnectionsCreate,
+
+    -- ** cloudkms.projects.locations.ekmConnections.get
+    CloudKMSProjectsLocationsEkmConnectionsGetResource,
+    newCloudKMSProjectsLocationsEkmConnectionsGet,
+    CloudKMSProjectsLocationsEkmConnectionsGet,
+
+    -- ** cloudkms.projects.locations.ekmConnections.getIamPolicy
+    CloudKMSProjectsLocationsEkmConnectionsGetIamPolicyResource,
+    newCloudKMSProjectsLocationsEkmConnectionsGetIamPolicy,
+    CloudKMSProjectsLocationsEkmConnectionsGetIamPolicy,
+
+    -- ** cloudkms.projects.locations.ekmConnections.list
+    CloudKMSProjectsLocationsEkmConnectionsListResource,
+    newCloudKMSProjectsLocationsEkmConnectionsList,
+    CloudKMSProjectsLocationsEkmConnectionsList,
+
+    -- ** cloudkms.projects.locations.ekmConnections.patch
+    CloudKMSProjectsLocationsEkmConnectionsPatchResource,
+    newCloudKMSProjectsLocationsEkmConnectionsPatch,
+    CloudKMSProjectsLocationsEkmConnectionsPatch,
+
+    -- ** cloudkms.projects.locations.ekmConnections.setIamPolicy
+    CloudKMSProjectsLocationsEkmConnectionsSetIamPolicyResource,
+    newCloudKMSProjectsLocationsEkmConnectionsSetIamPolicy,
+    CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy,
+
+    -- ** cloudkms.projects.locations.ekmConnections.testIamPermissions
+    CloudKMSProjectsLocationsEkmConnectionsTestIamPermissionsResource,
+    newCloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
+    CloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
+
+    -- ** cloudkms.projects.locations.generateRandomBytes
+    CloudKMSProjectsLocationsGenerateRandomBytesResource,
+    newCloudKMSProjectsLocationsGenerateRandomBytes,
+    CloudKMSProjectsLocationsGenerateRandomBytes,
+
     -- ** cloudkms.projects.locations.get
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.Get
+    CloudKMSProjectsLocationsGetResource,
+    newCloudKMSProjectsLocationsGet,
+    CloudKMSProjectsLocationsGet,
 
     -- ** cloudkms.projects.locations.keyRings.create
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.Create
+    CloudKMSProjectsLocationsKeyRingsCreateResource,
+    newCloudKMSProjectsLocationsKeyRingsCreate,
+    CloudKMSProjectsLocationsKeyRingsCreate,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.create
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCreateResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCreate,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricDecrypt
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecryptResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricSign
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSignResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.create
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.destroy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroyResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.get
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.getPublicKey
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImportResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList,
+
+    -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.macSign
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSignResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign,
+
+    -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.macVerify
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerifyResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerify,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerify,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.patch
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.restore
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestoreResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysDecryptResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysDecrypt,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysDecrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysEncryptResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysEncrypt,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysEncrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.get
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysGet,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIAMPolicy
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicyResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicy,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.list
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysListResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysList,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysList,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.patch
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysPatchResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysPatch,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysPatch,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIAMPolicy
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicyResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIAMPermissions
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissionsResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissions,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissions,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource,
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion,
 
     -- ** cloudkms.projects.locations.keyRings.get
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.Get
+    CloudKMSProjectsLocationsKeyRingsGetResource,
+    newCloudKMSProjectsLocationsKeyRingsGet,
+    CloudKMSProjectsLocationsKeyRingsGet,
 
     -- ** cloudkms.projects.locations.keyRings.getIamPolicy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.GetIAMPolicy
+    CloudKMSProjectsLocationsKeyRingsGetIamPolicyResource,
+    newCloudKMSProjectsLocationsKeyRingsGetIamPolicy,
+    CloudKMSProjectsLocationsKeyRingsGetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.create
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
+    CloudKMSProjectsLocationsKeyRingsImportJobsCreateResource,
+    newCloudKMSProjectsLocationsKeyRingsImportJobsCreate,
+    CloudKMSProjectsLocationsKeyRingsImportJobsCreate,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.get
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
+    CloudKMSProjectsLocationsKeyRingsImportJobsGetResource,
+    newCloudKMSProjectsLocationsKeyRingsImportJobsGet,
+    CloudKMSProjectsLocationsKeyRingsImportJobsGet,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIAMPolicy
+    CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicyResource,
+    newCloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy,
+    CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.list
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
+    CloudKMSProjectsLocationsKeyRingsImportJobsListResource,
+    newCloudKMSProjectsLocationsKeyRingsImportJobsList,
+    CloudKMSProjectsLocationsKeyRingsImportJobsList,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIAMPolicy
+    CloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicyResource,
+    newCloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicy,
+    CloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIAMPermissions
+    CloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissionsResource,
+    newCloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissions,
+    CloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissions,
 
     -- ** cloudkms.projects.locations.keyRings.list
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.List
+    CloudKMSProjectsLocationsKeyRingsListResource,
+    newCloudKMSProjectsLocationsKeyRingsList,
+    CloudKMSProjectsLocationsKeyRingsList,
 
     -- ** cloudkms.projects.locations.keyRings.setIamPolicy
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.SetIAMPolicy
+    CloudKMSProjectsLocationsKeyRingsSetIamPolicyResource,
+    newCloudKMSProjectsLocationsKeyRingsSetIamPolicy,
+    CloudKMSProjectsLocationsKeyRingsSetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.testIamPermissions
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.TestIAMPermissions
+    CloudKMSProjectsLocationsKeyRingsTestIamPermissionsResource,
+    newCloudKMSProjectsLocationsKeyRingsTestIamPermissions,
+    CloudKMSProjectsLocationsKeyRingsTestIamPermissions,
 
     -- ** cloudkms.projects.locations.list
-    , module Network.Google.Resource.CloudKMS.Projects.Locations.List
+    CloudKMSProjectsLocationsListResource,
+    newCloudKMSProjectsLocationsList,
+    CloudKMSProjectsLocationsList,
 
     -- * Types
 
-    -- ** AsymmetricDecryptResponse
-    , AsymmetricDecryptResponse
-    , asymmetricDecryptResponse
-    , adrPlaintextCrc32c
-    , adrPlaintext
-    , adrProtectionLevel
-    , adrVerifiedCiphertextCrc32c
-
-    -- ** EncryptResponse
-    , EncryptResponse
-    , encryptResponse
-    , erVerifiedAdditionalAuthenticatedDataCrc32c
-    , erVerifiedPlaintextCrc32c
-    , erName
-    , erProtectionLevel
-    , erCiphertext
-    , erCiphertextCrc32c
-
-    -- ** LocationSchema
-    , LocationSchema
-    , locationSchema
-    , lsAddtional
-
-    -- ** AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- ** Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- ** ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- ** ListKeyRingsResponse
-    , ListKeyRingsResponse
-    , listKeyRingsResponse
-    , lkrrNextPageToken
-    , lkrrTotalSize
-    , lkrrKeyRings
-
-    -- ** ImportJobProtectionLevel
-    , ImportJobProtectionLevel (..)
-
-    -- ** AsymmetricSignResponse
-    , AsymmetricSignResponse
-    , asymmetricSignResponse
-    , asrSignature
-    , asrSignatureCrc32c
-    , asrName
-    , asrProtectionLevel
-    , asrVerifiedDigestCrc32c
-
-    -- ** CryptoKeyPurpose
-    , CryptoKeyPurpose (..)
-
-    -- ** WrAppingPublicKey
-    , WrAppingPublicKey
-    , wrAppingPublicKey
-    , wapkPem
-
-    -- ** KeyRing
-    , KeyRing
-    , keyRing
-    , krName
-    , krCreateTime
-
-    -- ** ImportCryptoKeyVersionRequestAlgorithm
-    , ImportCryptoKeyVersionRequestAlgorithm (..)
-
-    -- ** DestroyCryptoKeyVersionRequest
-    , DestroyCryptoKeyVersionRequest
-    , destroyCryptoKeyVersionRequest
-
-    -- ** Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- ** AsymmetricSignRequest
-    , AsymmetricSignRequest
-    , asymmetricSignRequest
-    , asrDigest
-    , asrDigestCrc32c
-
-    -- ** ListImportJobsResponse
-    , ListImportJobsResponse
-    , listImportJobsResponse
-    , lijrNextPageToken
-    , lijrImportJobs
-    , lijrTotalSize
-
-    -- ** PublicKeyProtectionLevel
-    , PublicKeyProtectionLevel (..)
-
-    -- ** DecryptResponseProtectionLevel
-    , DecryptResponseProtectionLevel (..)
-
-    -- ** CryptoKeyVersionTemplateProtectionLevel
-    , CryptoKeyVersionTemplateProtectionLevel (..)
-
-    -- ** CertificateChains
-    , CertificateChains
-    , certificateChains
-    , ccGooglePartitionCerts
-    , ccGoogleCardCerts
-    , ccCaviumCerts
-
-    -- ** PublicKey
-    , PublicKey
-    , publicKey
-    , pkPem
-    , pkPemCrc32c
-    , pkName
-    , pkAlgorithm
-    , pkProtectionLevel
-
-    -- ** DecryptResponse
-    , DecryptResponse
-    , decryptResponse
-    , drUsedPrimary
-    , drPlaintextCrc32c
-    , drPlaintext
-    , drProtectionLevel
-
-    -- ** CryptoKeyVersionTemplate
-    , CryptoKeyVersionTemplate
-    , cryptoKeyVersionTemplate
-    , ckvtAlgorithm
-    , ckvtProtectionLevel
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- ** CryptoKeyLabels
-    , CryptoKeyLabels
-    , cryptoKeyLabels
-    , cklAddtional
-
-    -- ** CryptoKeyVersionTemplateAlgorithm
-    , CryptoKeyVersionTemplateAlgorithm (..)
-
-    -- ** PublicKeyAlgorithm
-    , PublicKeyAlgorithm (..)
-
-    -- ** CryptoKeyVersionState
-    , CryptoKeyVersionState (..)
-
-    -- ** CryptoKey
-    , CryptoKey
-    , cryptoKey
-    , ckVersionTemplate
-    , ckPurpose
-    , ckRotationPeriod
-    , ckPrimary
-    , ckName
-    , ckLabels
-    , ckNextRotationTime
-    , ckCreateTime
-
-    -- ** DecryptRequest
-    , DecryptRequest
-    , decryptRequest
-    , drAdditionalAuthenticatedData
-    , drAdditionalAuthenticatedDataCrc32c
-    , drCiphertext
-    , drCiphertextCrc32c
-
-    -- ** KeyOperationAttestation
-    , KeyOperationAttestation
-    , keyOperationAttestation
-    , koaFormat
-    , koaContent
-    , koaCertChains
-
-    -- ** ProjectsLocationsKeyRingsCryptoKeysListVersionView
-    , ProjectsLocationsKeyRingsCryptoKeysListVersionView (..)
-
-    -- ** ListCryptoKeyVersionsResponse
-    , ListCryptoKeyVersionsResponse
-    , listCryptoKeyVersionsResponse
-    , lckvrNextPageToken
-    , lckvrTotalSize
-    , lckvrCryptoKeyVersions
-
-    -- ** AsymmetricSignResponseProtectionLevel
-    , AsymmetricSignResponseProtectionLevel (..)
-
-    -- ** KeyOperationAttestationFormat
-    , KeyOperationAttestationFormat (..)
-
-    -- ** RestoreCryptoKeyVersionRequest
-    , RestoreCryptoKeyVersionRequest
-    , restoreCryptoKeyVersionRequest
-
-    -- ** AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- ** UpdateCryptoKeyPrimaryVersionRequest
-    , UpdateCryptoKeyPrimaryVersionRequest
-    , updateCryptoKeyPrimaryVersionRequest
-    , uckpvrCryptoKeyVersionId
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ImportJob
-    , ImportJob
-    , importJob
-    , ijState
-    , ijImportMethod
-    , ijAttestation
-    , ijPublicKey
-    , ijGenerateTime
-    , ijName
-    , ijExpireEventTime
-    , ijProtectionLevel
-    , ijExpireTime
-    , ijCreateTime
-
-    -- ** ImportCryptoKeyVersionRequest
-    , ImportCryptoKeyVersionRequest
-    , importCryptoKeyVersionRequest
-    , ickvrRsaAESWrAppedKey
-    , ickvrAlgorithm
-    , ickvrImportJob
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** ImportJobState
-    , ImportJobState (..)
-
-    -- ** ExternalProtectionLevelOptions
-    , ExternalProtectionLevelOptions
-    , externalProtectionLevelOptions
-    , eploExternalKeyURI
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** Digest
-    , Digest
-    , digest
-    , dSha512
-    , dSha384
-    , dSha256
-
-    -- ** ImportJobImportMethod
-    , ImportJobImportMethod (..)
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- ** LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmHSMAvailable
-    , lmEkmAvailable
-
-    -- ** AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
-
-    -- ** CryptoKeyVersionProtectionLevel
-    , CryptoKeyVersionProtectionLevel (..)
-
-    -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
-    , ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..)
-
-    -- ** ListCryptoKeysResponse
-    , ListCryptoKeysResponse
-    , listCryptoKeysResponse
-    , lckrCryptoKeys
-    , lckrNextPageToken
-    , lckrTotalSize
+    Xgafv (..),
 
     -- ** AsymmetricDecryptRequest
-    , AsymmetricDecryptRequest
-    , asymmetricDecryptRequest
-    , adrCiphertext
-    , adrCiphertextCrc32c
+    AsymmetricDecryptRequest (..),
+    newAsymmetricDecryptRequest,
 
-    -- ** CryptoKeyVersion
-    , CryptoKeyVersion
-    , cryptoKeyVersion
-    , ckvState
-    , ckvAttestation
-    , ckvGenerateTime
-    , ckvImportFailureReason
-    , ckvName
-    , ckvAlgorithm
-    , ckvDestroyTime
-    , ckvImportJob
-    , ckvProtectionLevel
-    , ckvImportTime
-    , ckvExternalProtectionLevelOptions
-    , ckvDestroyEventTime
-    , ckvCreateTime
+    -- ** AsymmetricDecryptResponse
+    AsymmetricDecryptResponse (..),
+    newAsymmetricDecryptResponse,
 
-    -- ** EncryptRequest
-    , EncryptRequest
-    , encryptRequest
-    , erAdditionalAuthenticatedData
-    , erAdditionalAuthenticatedDataCrc32c
-    , erPlaintextCrc32c
-    , erPlaintext
+    -- ** AsymmetricDecryptResponse_ProtectionLevel
+    AsymmetricDecryptResponse_ProtectionLevel (..),
 
-    -- ** AsymmetricDecryptResponseProtectionLevel
-    , AsymmetricDecryptResponseProtectionLevel (..)
+    -- ** AsymmetricSignRequest
+    AsymmetricSignRequest (..),
+    newAsymmetricSignRequest,
 
-    -- ** CryptoKeyVersionAlgorithm
-    , CryptoKeyVersionAlgorithm (..)
+    -- ** AsymmetricSignResponse
+    AsymmetricSignResponse (..),
+    newAsymmetricSignResponse,
 
-    -- ** EncryptResponseProtectionLevel
-    , EncryptResponseProtectionLevel (..)
+    -- ** AsymmetricSignResponse_ProtectionLevel
+    AsymmetricSignResponse_ProtectionLevel (..),
+
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
+
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
+
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
     -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
+    Binding (..),
+    newBinding,
 
-import Network.Google.Prelude
+    -- ** Certificate
+    Certificate (..),
+    newCertificate,
+
+    -- ** CertificateChains
+    CertificateChains (..),
+    newCertificateChains,
+
+    -- ** CryptoKey
+    CryptoKey (..),
+    newCryptoKey,
+
+    -- ** CryptoKey_Labels
+    CryptoKey_Labels (..),
+    newCryptoKey_Labels,
+
+    -- ** CryptoKey_Purpose
+    CryptoKey_Purpose (..),
+
+    -- ** CryptoKeyVersion
+    CryptoKeyVersion (..),
+    newCryptoKeyVersion,
+
+    -- ** CryptoKeyVersion_Algorithm
+    CryptoKeyVersion_Algorithm (..),
+
+    -- ** CryptoKeyVersion_ProtectionLevel
+    CryptoKeyVersion_ProtectionLevel (..),
+
+    -- ** CryptoKeyVersion_State
+    CryptoKeyVersion_State (..),
+
+    -- ** CryptoKeyVersionTemplate
+    CryptoKeyVersionTemplate (..),
+    newCryptoKeyVersionTemplate,
+
+    -- ** CryptoKeyVersionTemplate_Algorithm
+    CryptoKeyVersionTemplate_Algorithm (..),
+
+    -- ** CryptoKeyVersionTemplate_ProtectionLevel
+    CryptoKeyVersionTemplate_ProtectionLevel (..),
+
+    -- ** DecryptRequest
+    DecryptRequest (..),
+    newDecryptRequest,
+
+    -- ** DecryptResponse
+    DecryptResponse (..),
+    newDecryptResponse,
+
+    -- ** DecryptResponse_ProtectionLevel
+    DecryptResponse_ProtectionLevel (..),
+
+    -- ** DestroyCryptoKeyVersionRequest
+    DestroyCryptoKeyVersionRequest (..),
+    newDestroyCryptoKeyVersionRequest,
+
+    -- ** Digest
+    Digest (..),
+    newDigest,
+
+    -- ** EkmConnection
+    EkmConnection (..),
+    newEkmConnection,
+
+    -- ** EncryptRequest
+    EncryptRequest (..),
+    newEncryptRequest,
+
+    -- ** EncryptResponse
+    EncryptResponse (..),
+    newEncryptResponse,
+
+    -- ** EncryptResponse_ProtectionLevel
+    EncryptResponse_ProtectionLevel (..),
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** ExternalProtectionLevelOptions
+    ExternalProtectionLevelOptions (..),
+    newExternalProtectionLevelOptions,
+
+    -- ** GenerateRandomBytesRequest
+    GenerateRandomBytesRequest (..),
+    newGenerateRandomBytesRequest,
+
+    -- ** GenerateRandomBytesRequest_ProtectionLevel
+    GenerateRandomBytesRequest_ProtectionLevel (..),
+
+    -- ** GenerateRandomBytesResponse
+    GenerateRandomBytesResponse (..),
+    newGenerateRandomBytesResponse,
+
+    -- ** ImportCryptoKeyVersionRequest
+    ImportCryptoKeyVersionRequest (..),
+    newImportCryptoKeyVersionRequest,
+
+    -- ** ImportCryptoKeyVersionRequest_Algorithm
+    ImportCryptoKeyVersionRequest_Algorithm (..),
+
+    -- ** ImportJob
+    ImportJob (..),
+    newImportJob,
+
+    -- ** ImportJob_ImportMethod
+    ImportJob_ImportMethod (..),
+
+    -- ** ImportJob_ProtectionLevel
+    ImportJob_ProtectionLevel (..),
+
+    -- ** ImportJob_State
+    ImportJob_State (..),
+
+    -- ** KeyOperationAttestation
+    KeyOperationAttestation (..),
+    newKeyOperationAttestation,
+
+    -- ** KeyOperationAttestation_Format
+    KeyOperationAttestation_Format (..),
+
+    -- ** KeyRing
+    KeyRing (..),
+    newKeyRing,
+
+    -- ** ListCryptoKeyVersionsResponse
+    ListCryptoKeyVersionsResponse (..),
+    newListCryptoKeyVersionsResponse,
+
+    -- ** ListCryptoKeysResponse
+    ListCryptoKeysResponse (..),
+    newListCryptoKeysResponse,
+
+    -- ** ListEkmConnectionsResponse
+    ListEkmConnectionsResponse (..),
+    newListEkmConnectionsResponse,
+
+    -- ** ListImportJobsResponse
+    ListImportJobsResponse (..),
+    newListImportJobsResponse,
+
+    -- ** ListKeyRingsResponse
+    ListKeyRingsResponse (..),
+    newListKeyRingsResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
+
+    -- ** MacSignRequest
+    MacSignRequest (..),
+    newMacSignRequest,
+
+    -- ** MacSignResponse
+    MacSignResponse (..),
+    newMacSignResponse,
+
+    -- ** MacSignResponse_ProtectionLevel
+    MacSignResponse_ProtectionLevel (..),
+
+    -- ** MacVerifyRequest
+    MacVerifyRequest (..),
+    newMacVerifyRequest,
+
+    -- ** MacVerifyResponse
+    MacVerifyResponse (..),
+    newMacVerifyResponse,
+
+    -- ** MacVerifyResponse_ProtectionLevel
+    MacVerifyResponse_ProtectionLevel (..),
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PublicKey
+    PublicKey (..),
+    newPublicKey,
+
+    -- ** PublicKey_Algorithm
+    PublicKey_Algorithm (..),
+
+    -- ** PublicKey_ProtectionLevel
+    PublicKey_ProtectionLevel (..),
+
+    -- ** RestoreCryptoKeyVersionRequest
+    RestoreCryptoKeyVersionRequest (..),
+    newRestoreCryptoKeyVersionRequest,
+
+    -- ** ServiceResolver
+    ServiceResolver (..),
+    newServiceResolver,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** UpdateCryptoKeyPrimaryVersionRequest
+    UpdateCryptoKeyPrimaryVersionRequest (..),
+    newUpdateCryptoKeyPrimaryVersionRequest,
+
+    -- ** WrappingPublicKey
+    WrappingPublicKey (..),
+    newWrappingPublicKey,
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..),
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysListVersionView
+    ProjectsLocationsKeyRingsCryptoKeysListVersionView (..),
+  )
+where
+
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.Create
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.Get
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.List
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.Patch
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
+import Network.Google.CloudKMS.Projects.Locations.GenerateRandomBytes
+import Network.Google.CloudKMS.Projects.Locations.Get
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.Create
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacSign
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacVerify
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIamPermissions
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.Get
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIamPermissions
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.List
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
+import Network.Google.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
+import Network.Google.CloudKMS.Projects.Locations.List
 import Network.Google.CloudKMS.Types
-import Network.Google.Resource.CloudKMS.Projects.Locations.Get
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.Create
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIAMPolicy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIAMPolicy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIAMPermissions
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.Get
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.GetIAMPolicy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIAMPolicy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIAMPolicy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIAMPermissions
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.List
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.SetIAMPolicy
-import Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.TestIAMPermissions
-import Network.Google.Resource.CloudKMS.Projects.Locations.List
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Key Management Service (KMS) API service.
-type CloudKMSAPI =
-     ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecryptResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestoreResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSignResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroyResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImportResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysEncryptResource
-       :<|> ProjectsLocationsKeyRingsCryptoKeysListResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicyResource
-       :<|> ProjectsLocationsKeyRingsCryptoKeysPatchResource
-       :<|> ProjectsLocationsKeyRingsCryptoKeysGetResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysCreateResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysSetIAMPolicyResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysDecryptResource
-       :<|>
-       ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissionsResource
-       :<|> ProjectsLocationsKeyRingsImportJobsListResource
-       :<|>
-       ProjectsLocationsKeyRingsImportJobsGetIAMPolicyResource
-       :<|> ProjectsLocationsKeyRingsImportJobsGetResource
-       :<|>
-       ProjectsLocationsKeyRingsImportJobsCreateResource
-       :<|>
-       ProjectsLocationsKeyRingsImportJobsSetIAMPolicyResource
-       :<|>
-       ProjectsLocationsKeyRingsImportJobsTestIAMPermissionsResource
-       :<|> ProjectsLocationsKeyRingsListResource
-       :<|> ProjectsLocationsKeyRingsGetIAMPolicyResource
-       :<|> ProjectsLocationsKeyRingsGetResource
-       :<|> ProjectsLocationsKeyRingsCreateResource
-       :<|> ProjectsLocationsKeyRingsSetIAMPolicyResource
-       :<|>
-       ProjectsLocationsKeyRingsTestIAMPermissionsResource
-       :<|> ProjectsLocationsListResource
-       :<|> ProjectsLocationsGetResource

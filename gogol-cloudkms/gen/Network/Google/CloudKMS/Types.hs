@@ -1,400 +1,333 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudKMS.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudKMS.Types
-    (
-    -- * Service Configuration
-      cloudKMSService
+  ( -- * Configuration
+    cloudKMSService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , cloudKMSScope
-
-    -- * AsymmetricDecryptResponse
-    , AsymmetricDecryptResponse
-    , asymmetricDecryptResponse
-    , adrPlaintextCrc32c
-    , adrPlaintext
-    , adrProtectionLevel
-    , adrVerifiedCiphertextCrc32c
-
-    -- * EncryptResponse
-    , EncryptResponse
-    , encryptResponse
-    , erVerifiedAdditionalAuthenticatedDataCrc32c
-    , erVerifiedPlaintextCrc32c
-    , erName
-    , erProtectionLevel
-    , erCiphertext
-    , erCiphertextCrc32c
-
-    -- * LocationSchema
-    , LocationSchema
-    , locationSchema
-    , lsAddtional
-
-    -- * AuditConfig
-    , AuditConfig
-    , auditConfig
-    , acService
-    , acAuditLogConfigs
-
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
-
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
-
-    -- * ListKeyRingsResponse
-    , ListKeyRingsResponse
-    , listKeyRingsResponse
-    , lkrrNextPageToken
-    , lkrrTotalSize
-    , lkrrKeyRings
-
-    -- * ImportJobProtectionLevel
-    , ImportJobProtectionLevel (..)
-
-    -- * AsymmetricSignResponse
-    , AsymmetricSignResponse
-    , asymmetricSignResponse
-    , asrSignature
-    , asrSignatureCrc32c
-    , asrName
-    , asrProtectionLevel
-    , asrVerifiedDigestCrc32c
-
-    -- * CryptoKeyPurpose
-    , CryptoKeyPurpose (..)
-
-    -- * WrAppingPublicKey
-    , WrAppingPublicKey
-    , wrAppingPublicKey
-    , wapkPem
-
-    -- * KeyRing
-    , KeyRing
-    , keyRing
-    , krName
-    , krCreateTime
-
-    -- * ImportCryptoKeyVersionRequestAlgorithm
-    , ImportCryptoKeyVersionRequestAlgorithm (..)
-
-    -- * DestroyCryptoKeyVersionRequest
-    , DestroyCryptoKeyVersionRequest
-    , destroyCryptoKeyVersionRequest
-
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
-
-    -- * AsymmetricSignRequest
-    , AsymmetricSignRequest
-    , asymmetricSignRequest
-    , asrDigest
-    , asrDigestCrc32c
-
-    -- * ListImportJobsResponse
-    , ListImportJobsResponse
-    , listImportJobsResponse
-    , lijrNextPageToken
-    , lijrImportJobs
-    , lijrTotalSize
-
-    -- * PublicKeyProtectionLevel
-    , PublicKeyProtectionLevel (..)
-
-    -- * DecryptResponseProtectionLevel
-    , DecryptResponseProtectionLevel (..)
-
-    -- * CryptoKeyVersionTemplateProtectionLevel
-    , CryptoKeyVersionTemplateProtectionLevel (..)
-
-    -- * CertificateChains
-    , CertificateChains
-    , certificateChains
-    , ccGooglePartitionCerts
-    , ccGoogleCardCerts
-    , ccCaviumCerts
-
-    -- * PublicKey
-    , PublicKey
-    , publicKey
-    , pkPem
-    , pkPemCrc32c
-    , pkName
-    , pkAlgorithm
-    , pkProtectionLevel
-
-    -- * DecryptResponse
-    , DecryptResponse
-    , decryptResponse
-    , drUsedPrimary
-    , drPlaintextCrc32c
-    , drPlaintext
-    , drProtectionLevel
-
-    -- * CryptoKeyVersionTemplate
-    , CryptoKeyVersionTemplate
-    , cryptoKeyVersionTemplate
-    , ckvtAlgorithm
-    , ckvtProtectionLevel
-
-    -- * SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprUpdateMask
-    , siprPolicy
-
-    -- * CryptoKeyLabels
-    , CryptoKeyLabels
-    , cryptoKeyLabels
-    , cklAddtional
-
-    -- * CryptoKeyVersionTemplateAlgorithm
-    , CryptoKeyVersionTemplateAlgorithm (..)
-
-    -- * PublicKeyAlgorithm
-    , PublicKeyAlgorithm (..)
-
-    -- * CryptoKeyVersionState
-    , CryptoKeyVersionState (..)
-
-    -- * CryptoKey
-    , CryptoKey
-    , cryptoKey
-    , ckVersionTemplate
-    , ckPurpose
-    , ckRotationPeriod
-    , ckPrimary
-    , ckName
-    , ckLabels
-    , ckNextRotationTime
-    , ckCreateTime
-
-    -- * DecryptRequest
-    , DecryptRequest
-    , decryptRequest
-    , drAdditionalAuthenticatedData
-    , drAdditionalAuthenticatedDataCrc32c
-    , drCiphertext
-    , drCiphertextCrc32c
-
-    -- * KeyOperationAttestation
-    , KeyOperationAttestation
-    , keyOperationAttestation
-    , koaFormat
-    , koaContent
-    , koaCertChains
-
-    -- * ProjectsLocationsKeyRingsCryptoKeysListVersionView
-    , ProjectsLocationsKeyRingsCryptoKeysListVersionView (..)
-
-    -- * ListCryptoKeyVersionsResponse
-    , ListCryptoKeyVersionsResponse
-    , listCryptoKeyVersionsResponse
-    , lckvrNextPageToken
-    , lckvrTotalSize
-    , lckvrCryptoKeyVersions
-
-    -- * AsymmetricSignResponseProtectionLevel
-    , AsymmetricSignResponseProtectionLevel (..)
-
-    -- * KeyOperationAttestationFormat
-    , KeyOperationAttestationFormat (..)
-
-    -- * RestoreCryptoKeyVersionRequest
-    , RestoreCryptoKeyVersionRequest
-    , restoreCryptoKeyVersionRequest
-
-    -- * AuditLogConfigLogType
-    , AuditLogConfigLogType (..)
-
-    -- * UpdateCryptoKeyPrimaryVersionRequest
-    , UpdateCryptoKeyPrimaryVersionRequest
-    , updateCryptoKeyPrimaryVersionRequest
-    , uckpvrCryptoKeyVersionId
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * ImportJob
-    , ImportJob
-    , importJob
-    , ijState
-    , ijImportMethod
-    , ijAttestation
-    , ijPublicKey
-    , ijGenerateTime
-    , ijName
-    , ijExpireEventTime
-    , ijProtectionLevel
-    , ijExpireTime
-    , ijCreateTime
-
-    -- * ImportCryptoKeyVersionRequest
-    , ImportCryptoKeyVersionRequest
-    , importCryptoKeyVersionRequest
-    , ickvrRsaAESWrAppedKey
-    , ickvrAlgorithm
-    , ickvrImportJob
-
-    -- * TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- * ImportJobState
-    , ImportJobState (..)
-
-    -- * ExternalProtectionLevelOptions
-    , ExternalProtectionLevelOptions
-    , externalProtectionLevelOptions
-    , eploExternalKeyURI
-
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- * Digest
-    , Digest
-    , digest
-    , dSha512
-    , dSha384
-    , dSha256
-
-    -- * ImportJobImportMethod
-    , ImportJobImportMethod (..)
-
-    -- * Policy
-    , Policy
-    , policy
-    , pAuditConfigs
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
-
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmHSMAvailable
-    , lmEkmAvailable
-
-    -- * AuditLogConfig
-    , AuditLogConfig
-    , auditLogConfig
-    , alcLogType
-    , alcExemptedMembers
-
-    -- * CryptoKeyVersionProtectionLevel
-    , CryptoKeyVersionProtectionLevel (..)
-
-    -- * ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
-    , ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..)
-
-    -- * ListCryptoKeysResponse
-    , ListCryptoKeysResponse
-    , listCryptoKeysResponse
-    , lckrCryptoKeys
-    , lckrNextPageToken
-    , lckrTotalSize
-
-    -- * AsymmetricDecryptRequest
-    , AsymmetricDecryptRequest
-    , asymmetricDecryptRequest
-    , adrCiphertext
-    , adrCiphertextCrc32c
-
-    -- * CryptoKeyVersion
-    , CryptoKeyVersion
-    , cryptoKeyVersion
-    , ckvState
-    , ckvAttestation
-    , ckvGenerateTime
-    , ckvImportFailureReason
-    , ckvName
-    , ckvAlgorithm
-    , ckvDestroyTime
-    , ckvImportJob
-    , ckvProtectionLevel
-    , ckvImportTime
-    , ckvExternalProtectionLevelOptions
-    , ckvDestroyEventTime
-    , ckvCreateTime
-
-    -- * EncryptRequest
-    , EncryptRequest
-    , encryptRequest
-    , erAdditionalAuthenticatedData
-    , erAdditionalAuthenticatedDataCrc32c
-    , erPlaintextCrc32c
-    , erPlaintext
-
-    -- * AsymmetricDecryptResponseProtectionLevel
-    , AsymmetricDecryptResponseProtectionLevel (..)
-
-    -- * CryptoKeyVersionAlgorithm
-    , CryptoKeyVersionAlgorithm (..)
-
-    -- * EncryptResponseProtectionLevel
-    , EncryptResponseProtectionLevel (..)
-
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-    , bCondition
-    ) where
-
-import Network.Google.CloudKMS.Types.Product
-import Network.Google.CloudKMS.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v1' of the Cloud Key Management Service (KMS) API. This contains the host and root path used as a starting point for constructing service requests.
-cloudKMSService :: ServiceConfig
-cloudKMSService
-  = defaultService (ServiceId "cloudkms:v1")
-      "cloudkms.googleapis.com"
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
-
--- | View and manage your keys and secrets stored in Cloud Key Management
--- Service
-cloudKMSScope :: Proxy '["https://www.googleapis.com/auth/cloudkms"]
-cloudKMSScope = Proxy
+    cloudPlatformScope,
+    cloudKMSScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** AsymmetricDecryptRequest
+    AsymmetricDecryptRequest (..),
+    newAsymmetricDecryptRequest,
+
+    -- ** AsymmetricDecryptResponse
+    AsymmetricDecryptResponse (..),
+    newAsymmetricDecryptResponse,
+
+    -- ** AsymmetricDecryptResponse_ProtectionLevel
+    AsymmetricDecryptResponse_ProtectionLevel (..),
+
+    -- ** AsymmetricSignRequest
+    AsymmetricSignRequest (..),
+    newAsymmetricSignRequest,
+
+    -- ** AsymmetricSignResponse
+    AsymmetricSignResponse (..),
+    newAsymmetricSignResponse,
+
+    -- ** AsymmetricSignResponse_ProtectionLevel
+    AsymmetricSignResponse_ProtectionLevel (..),
+
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
+
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
+
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
+
+    -- ** Binding
+    Binding (..),
+    newBinding,
+
+    -- ** Certificate
+    Certificate (..),
+    newCertificate,
+
+    -- ** CertificateChains
+    CertificateChains (..),
+    newCertificateChains,
+
+    -- ** CryptoKey
+    CryptoKey (..),
+    newCryptoKey,
+
+    -- ** CryptoKey_Labels
+    CryptoKey_Labels (..),
+    newCryptoKey_Labels,
+
+    -- ** CryptoKey_Purpose
+    CryptoKey_Purpose (..),
+
+    -- ** CryptoKeyVersion
+    CryptoKeyVersion (..),
+    newCryptoKeyVersion,
+
+    -- ** CryptoKeyVersion_Algorithm
+    CryptoKeyVersion_Algorithm (..),
+
+    -- ** CryptoKeyVersion_ProtectionLevel
+    CryptoKeyVersion_ProtectionLevel (..),
+
+    -- ** CryptoKeyVersion_State
+    CryptoKeyVersion_State (..),
+
+    -- ** CryptoKeyVersionTemplate
+    CryptoKeyVersionTemplate (..),
+    newCryptoKeyVersionTemplate,
+
+    -- ** CryptoKeyVersionTemplate_Algorithm
+    CryptoKeyVersionTemplate_Algorithm (..),
+
+    -- ** CryptoKeyVersionTemplate_ProtectionLevel
+    CryptoKeyVersionTemplate_ProtectionLevel (..),
+
+    -- ** DecryptRequest
+    DecryptRequest (..),
+    newDecryptRequest,
+
+    -- ** DecryptResponse
+    DecryptResponse (..),
+    newDecryptResponse,
+
+    -- ** DecryptResponse_ProtectionLevel
+    DecryptResponse_ProtectionLevel (..),
+
+    -- ** DestroyCryptoKeyVersionRequest
+    DestroyCryptoKeyVersionRequest (..),
+    newDestroyCryptoKeyVersionRequest,
+
+    -- ** Digest
+    Digest (..),
+    newDigest,
+
+    -- ** EkmConnection
+    EkmConnection (..),
+    newEkmConnection,
+
+    -- ** EncryptRequest
+    EncryptRequest (..),
+    newEncryptRequest,
+
+    -- ** EncryptResponse
+    EncryptResponse (..),
+    newEncryptResponse,
+
+    -- ** EncryptResponse_ProtectionLevel
+    EncryptResponse_ProtectionLevel (..),
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** ExternalProtectionLevelOptions
+    ExternalProtectionLevelOptions (..),
+    newExternalProtectionLevelOptions,
+
+    -- ** GenerateRandomBytesRequest
+    GenerateRandomBytesRequest (..),
+    newGenerateRandomBytesRequest,
+
+    -- ** GenerateRandomBytesRequest_ProtectionLevel
+    GenerateRandomBytesRequest_ProtectionLevel (..),
+
+    -- ** GenerateRandomBytesResponse
+    GenerateRandomBytesResponse (..),
+    newGenerateRandomBytesResponse,
+
+    -- ** ImportCryptoKeyVersionRequest
+    ImportCryptoKeyVersionRequest (..),
+    newImportCryptoKeyVersionRequest,
+
+    -- ** ImportCryptoKeyVersionRequest_Algorithm
+    ImportCryptoKeyVersionRequest_Algorithm (..),
+
+    -- ** ImportJob
+    ImportJob (..),
+    newImportJob,
+
+    -- ** ImportJob_ImportMethod
+    ImportJob_ImportMethod (..),
+
+    -- ** ImportJob_ProtectionLevel
+    ImportJob_ProtectionLevel (..),
+
+    -- ** ImportJob_State
+    ImportJob_State (..),
+
+    -- ** KeyOperationAttestation
+    KeyOperationAttestation (..),
+    newKeyOperationAttestation,
+
+    -- ** KeyOperationAttestation_Format
+    KeyOperationAttestation_Format (..),
+
+    -- ** KeyRing
+    KeyRing (..),
+    newKeyRing,
+
+    -- ** ListCryptoKeyVersionsResponse
+    ListCryptoKeyVersionsResponse (..),
+    newListCryptoKeyVersionsResponse,
+
+    -- ** ListCryptoKeysResponse
+    ListCryptoKeysResponse (..),
+    newListCryptoKeysResponse,
+
+    -- ** ListEkmConnectionsResponse
+    ListEkmConnectionsResponse (..),
+    newListEkmConnectionsResponse,
+
+    -- ** ListImportJobsResponse
+    ListImportJobsResponse (..),
+    newListImportJobsResponse,
+
+    -- ** ListKeyRingsResponse
+    ListKeyRingsResponse (..),
+    newListKeyRingsResponse,
+
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
+
+    -- ** Location
+    Location (..),
+    newLocation,
+
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
+
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
+
+    -- ** LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
+
+    -- ** MacSignRequest
+    MacSignRequest (..),
+    newMacSignRequest,
+
+    -- ** MacSignResponse
+    MacSignResponse (..),
+    newMacSignResponse,
+
+    -- ** MacSignResponse_ProtectionLevel
+    MacSignResponse_ProtectionLevel (..),
+
+    -- ** MacVerifyRequest
+    MacVerifyRequest (..),
+    newMacVerifyRequest,
+
+    -- ** MacVerifyResponse
+    MacVerifyResponse (..),
+    newMacVerifyResponse,
+
+    -- ** MacVerifyResponse_ProtectionLevel
+    MacVerifyResponse_ProtectionLevel (..),
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** PublicKey
+    PublicKey (..),
+    newPublicKey,
+
+    -- ** PublicKey_Algorithm
+    PublicKey_Algorithm (..),
+
+    -- ** PublicKey_ProtectionLevel
+    PublicKey_ProtectionLevel (..),
+
+    -- ** RestoreCryptoKeyVersionRequest
+    RestoreCryptoKeyVersionRequest (..),
+    newRestoreCryptoKeyVersionRequest,
+
+    -- ** ServiceResolver
+    ServiceResolver (..),
+    newServiceResolver,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** UpdateCryptoKeyPrimaryVersionRequest
+    UpdateCryptoKeyPrimaryVersionRequest (..),
+    newUpdateCryptoKeyPrimaryVersionRequest,
+
+    -- ** WrappingPublicKey
+    WrappingPublicKey (..),
+    newWrappingPublicKey,
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..),
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysListVersionView
+    ProjectsLocationsKeyRingsCryptoKeysListVersionView (..),
+  )
+where
+
+import Network.Google.CloudKMS.Internal.Product
+import Network.Google.CloudKMS.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Key Management Service (KMS) API. This contains the host and root path used as a starting point for constructing service requests.
+cloudKMSService :: Core.ServiceConfig
+cloudKMSService =
+  Core.defaultService
+    (Core.ServiceId "cloudkms:v1")
+    "cloudkms.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View and manage your keys and secrets stored in Cloud Key Management Service
+cloudKMSScope :: Core.Proxy '["https://www.googleapis.com/auth/cloudkms"]
+cloudKMSScope = Core.Proxy
