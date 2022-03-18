@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,410 +30,410 @@
 --
 -- /See:/ <https://cloud.google.com/access-context-manager/docs/reference/rest/ Access Context Manager API Reference>
 module Gogol.AccessContextManager
-    (
-    -- * Configuration
-      accessContextManagerService
+  ( -- * Configuration
+    accessContextManagerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.create
-    , AccessContextManagerAccessPoliciesAccessLevelsCreateResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsCreate
-    , AccessContextManagerAccessPoliciesAccessLevelsCreate
+    AccessContextManagerAccessPoliciesAccessLevelsCreateResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsCreate,
+    AccessContextManagerAccessPoliciesAccessLevelsCreate,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.delete
-    , AccessContextManagerAccessPoliciesAccessLevelsDeleteResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsDelete
-    , AccessContextManagerAccessPoliciesAccessLevelsDelete
+    AccessContextManagerAccessPoliciesAccessLevelsDeleteResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsDelete,
+    AccessContextManagerAccessPoliciesAccessLevelsDelete,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.get
-    , AccessContextManagerAccessPoliciesAccessLevelsGetResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsGet
-    , AccessContextManagerAccessPoliciesAccessLevelsGet
+    AccessContextManagerAccessPoliciesAccessLevelsGetResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsGet,
+    AccessContextManagerAccessPoliciesAccessLevelsGet,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.list
-    , AccessContextManagerAccessPoliciesAccessLevelsListResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsList
-    , AccessContextManagerAccessPoliciesAccessLevelsList
+    AccessContextManagerAccessPoliciesAccessLevelsListResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsList,
+    AccessContextManagerAccessPoliciesAccessLevelsList,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.patch
-    , AccessContextManagerAccessPoliciesAccessLevelsPatchResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsPatch
-    , AccessContextManagerAccessPoliciesAccessLevelsPatch
+    AccessContextManagerAccessPoliciesAccessLevelsPatchResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsPatch,
+    AccessContextManagerAccessPoliciesAccessLevelsPatch,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.replaceAll
-    , AccessContextManagerAccessPoliciesAccessLevelsReplaceAllResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsReplaceAll
-    , AccessContextManagerAccessPoliciesAccessLevelsReplaceAll
+    AccessContextManagerAccessPoliciesAccessLevelsReplaceAllResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsReplaceAll,
+    AccessContextManagerAccessPoliciesAccessLevelsReplaceAll,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.testIamPermissions
-    , AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissionsResource
-    , newAccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions
-    , AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions
+    AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissionsResource,
+    newAccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions,
+    AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions,
 
     -- ** accesscontextmanager.accessPolicies.create
-    , AccessContextManagerAccessPoliciesCreateResource
-    , newAccessContextManagerAccessPoliciesCreate
-    , AccessContextManagerAccessPoliciesCreate
+    AccessContextManagerAccessPoliciesCreateResource,
+    newAccessContextManagerAccessPoliciesCreate,
+    AccessContextManagerAccessPoliciesCreate,
 
     -- ** accesscontextmanager.accessPolicies.delete
-    , AccessContextManagerAccessPoliciesDeleteResource
-    , newAccessContextManagerAccessPoliciesDelete
-    , AccessContextManagerAccessPoliciesDelete
+    AccessContextManagerAccessPoliciesDeleteResource,
+    newAccessContextManagerAccessPoliciesDelete,
+    AccessContextManagerAccessPoliciesDelete,
 
     -- ** accesscontextmanager.accessPolicies.get
-    , AccessContextManagerAccessPoliciesGetResource
-    , newAccessContextManagerAccessPoliciesGet
-    , AccessContextManagerAccessPoliciesGet
+    AccessContextManagerAccessPoliciesGetResource,
+    newAccessContextManagerAccessPoliciesGet,
+    AccessContextManagerAccessPoliciesGet,
 
     -- ** accesscontextmanager.accessPolicies.getIamPolicy
-    , AccessContextManagerAccessPoliciesGetIamPolicyResource
-    , newAccessContextManagerAccessPoliciesGetIamPolicy
-    , AccessContextManagerAccessPoliciesGetIamPolicy
+    AccessContextManagerAccessPoliciesGetIamPolicyResource,
+    newAccessContextManagerAccessPoliciesGetIamPolicy,
+    AccessContextManagerAccessPoliciesGetIamPolicy,
 
     -- ** accesscontextmanager.accessPolicies.list
-    , AccessContextManagerAccessPoliciesListResource
-    , newAccessContextManagerAccessPoliciesList
-    , AccessContextManagerAccessPoliciesList
+    AccessContextManagerAccessPoliciesListResource,
+    newAccessContextManagerAccessPoliciesList,
+    AccessContextManagerAccessPoliciesList,
 
     -- ** accesscontextmanager.accessPolicies.patch
-    , AccessContextManagerAccessPoliciesPatchResource
-    , newAccessContextManagerAccessPoliciesPatch
-    , AccessContextManagerAccessPoliciesPatch
+    AccessContextManagerAccessPoliciesPatchResource,
+    newAccessContextManagerAccessPoliciesPatch,
+    AccessContextManagerAccessPoliciesPatch,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.commit
-    , AccessContextManagerAccessPoliciesServicePerimetersCommitResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersCommit
-    , AccessContextManagerAccessPoliciesServicePerimetersCommit
+    AccessContextManagerAccessPoliciesServicePerimetersCommitResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersCommit,
+    AccessContextManagerAccessPoliciesServicePerimetersCommit,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.create
-    , AccessContextManagerAccessPoliciesServicePerimetersCreateResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersCreate
-    , AccessContextManagerAccessPoliciesServicePerimetersCreate
+    AccessContextManagerAccessPoliciesServicePerimetersCreateResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersCreate,
+    AccessContextManagerAccessPoliciesServicePerimetersCreate,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.delete
-    , AccessContextManagerAccessPoliciesServicePerimetersDeleteResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersDelete
-    , AccessContextManagerAccessPoliciesServicePerimetersDelete
+    AccessContextManagerAccessPoliciesServicePerimetersDeleteResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersDelete,
+    AccessContextManagerAccessPoliciesServicePerimetersDelete,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.get
-    , AccessContextManagerAccessPoliciesServicePerimetersGetResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersGet
-    , AccessContextManagerAccessPoliciesServicePerimetersGet
+    AccessContextManagerAccessPoliciesServicePerimetersGetResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersGet,
+    AccessContextManagerAccessPoliciesServicePerimetersGet,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.list
-    , AccessContextManagerAccessPoliciesServicePerimetersListResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersList
-    , AccessContextManagerAccessPoliciesServicePerimetersList
+    AccessContextManagerAccessPoliciesServicePerimetersListResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersList,
+    AccessContextManagerAccessPoliciesServicePerimetersList,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.patch
-    , AccessContextManagerAccessPoliciesServicePerimetersPatchResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersPatch
-    , AccessContextManagerAccessPoliciesServicePerimetersPatch
+    AccessContextManagerAccessPoliciesServicePerimetersPatchResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersPatch,
+    AccessContextManagerAccessPoliciesServicePerimetersPatch,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.replaceAll
-    , AccessContextManagerAccessPoliciesServicePerimetersReplaceAllResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersReplaceAll
-    , AccessContextManagerAccessPoliciesServicePerimetersReplaceAll
+    AccessContextManagerAccessPoliciesServicePerimetersReplaceAllResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersReplaceAll,
+    AccessContextManagerAccessPoliciesServicePerimetersReplaceAll,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.testIamPermissions
-    , AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissionsResource
-    , newAccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions
-    , AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions
+    AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissionsResource,
+    newAccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions,
+    AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions,
 
     -- ** accesscontextmanager.accessPolicies.setIamPolicy
-    , AccessContextManagerAccessPoliciesSetIamPolicyResource
-    , newAccessContextManagerAccessPoliciesSetIamPolicy
-    , AccessContextManagerAccessPoliciesSetIamPolicy
+    AccessContextManagerAccessPoliciesSetIamPolicyResource,
+    newAccessContextManagerAccessPoliciesSetIamPolicy,
+    AccessContextManagerAccessPoliciesSetIamPolicy,
 
     -- ** accesscontextmanager.accessPolicies.testIamPermissions
-    , AccessContextManagerAccessPoliciesTestIamPermissionsResource
-    , newAccessContextManagerAccessPoliciesTestIamPermissions
-    , AccessContextManagerAccessPoliciesTestIamPermissions
+    AccessContextManagerAccessPoliciesTestIamPermissionsResource,
+    newAccessContextManagerAccessPoliciesTestIamPermissions,
+    AccessContextManagerAccessPoliciesTestIamPermissions,
 
     -- ** accesscontextmanager.operations.cancel
-    , AccessContextManagerOperationsCancelResource
-    , newAccessContextManagerOperationsCancel
-    , AccessContextManagerOperationsCancel
+    AccessContextManagerOperationsCancelResource,
+    newAccessContextManagerOperationsCancel,
+    AccessContextManagerOperationsCancel,
 
     -- ** accesscontextmanager.operations.delete
-    , AccessContextManagerOperationsDeleteResource
-    , newAccessContextManagerOperationsDelete
-    , AccessContextManagerOperationsDelete
+    AccessContextManagerOperationsDeleteResource,
+    newAccessContextManagerOperationsDelete,
+    AccessContextManagerOperationsDelete,
 
     -- ** accesscontextmanager.operations.get
-    , AccessContextManagerOperationsGetResource
-    , newAccessContextManagerOperationsGet
-    , AccessContextManagerOperationsGet
+    AccessContextManagerOperationsGetResource,
+    newAccessContextManagerOperationsGet,
+    AccessContextManagerOperationsGet,
 
     -- ** accesscontextmanager.operations.list
-    , AccessContextManagerOperationsListResource
-    , newAccessContextManagerOperationsList
-    , AccessContextManagerOperationsList
+    AccessContextManagerOperationsListResource,
+    newAccessContextManagerOperationsList,
+    AccessContextManagerOperationsList,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.create
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsCreateResource
-    , newAccessContextManagerOrganizationsGcpUserAccessBindingsCreate
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsCreate
+    AccessContextManagerOrganizationsGcpUserAccessBindingsCreateResource,
+    newAccessContextManagerOrganizationsGcpUserAccessBindingsCreate,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsCreate,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.delete
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsDeleteResource
-    , newAccessContextManagerOrganizationsGcpUserAccessBindingsDelete
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsDelete
+    AccessContextManagerOrganizationsGcpUserAccessBindingsDeleteResource,
+    newAccessContextManagerOrganizationsGcpUserAccessBindingsDelete,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsDelete,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.get
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsGetResource
-    , newAccessContextManagerOrganizationsGcpUserAccessBindingsGet
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsGet
+    AccessContextManagerOrganizationsGcpUserAccessBindingsGetResource,
+    newAccessContextManagerOrganizationsGcpUserAccessBindingsGet,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsGet,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.list
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsListResource
-    , newAccessContextManagerOrganizationsGcpUserAccessBindingsList
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsList
+    AccessContextManagerOrganizationsGcpUserAccessBindingsListResource,
+    newAccessContextManagerOrganizationsGcpUserAccessBindingsList,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsList,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.patch
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource
-    , newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch
-    , AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+    AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource,
+    newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccessContextManagerOperationMetadata
-    , AccessContextManagerOperationMetadata (..)
-    , newAccessContextManagerOperationMetadata
+    AccessContextManagerOperationMetadata (..),
+    newAccessContextManagerOperationMetadata,
 
     -- ** AccessLevel
-    , AccessLevel (..)
-    , newAccessLevel
+    AccessLevel (..),
+    newAccessLevel,
 
     -- ** AccessPolicy
-    , AccessPolicy (..)
-    , newAccessPolicy
+    AccessPolicy (..),
+    newAccessPolicy,
 
     -- ** ApiOperation
-    , ApiOperation (..)
-    , newApiOperation
+    ApiOperation (..),
+    newApiOperation,
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** BasicLevel
-    , BasicLevel (..)
-    , newBasicLevel
+    BasicLevel (..),
+    newBasicLevel,
 
     -- ** BasicLevel_CombiningFunction
-    , BasicLevel_CombiningFunction (..)
+    BasicLevel_CombiningFunction (..),
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** CommitServicePerimetersRequest
-    , CommitServicePerimetersRequest (..)
-    , newCommitServicePerimetersRequest
+    CommitServicePerimetersRequest (..),
+    newCommitServicePerimetersRequest,
 
     -- ** CommitServicePerimetersResponse
-    , CommitServicePerimetersResponse (..)
-    , newCommitServicePerimetersResponse
+    CommitServicePerimetersResponse (..),
+    newCommitServicePerimetersResponse,
 
     -- ** Condition
-    , Condition (..)
-    , newCondition
+    Condition (..),
+    newCondition,
 
     -- ** CustomLevel
-    , CustomLevel (..)
-    , newCustomLevel
+    CustomLevel (..),
+    newCustomLevel,
 
     -- ** DevicePolicy
-    , DevicePolicy (..)
-    , newDevicePolicy
+    DevicePolicy (..),
+    newDevicePolicy,
 
     -- ** DevicePolicy_AllowedDeviceManagementLevelsItem
-    , DevicePolicy_AllowedDeviceManagementLevelsItem (..)
+    DevicePolicy_AllowedDeviceManagementLevelsItem (..),
 
     -- ** DevicePolicy_AllowedEncryptionStatusesItem
-    , DevicePolicy_AllowedEncryptionStatusesItem (..)
+    DevicePolicy_AllowedEncryptionStatusesItem (..),
 
     -- ** EgressFrom
-    , EgressFrom (..)
-    , newEgressFrom
+    EgressFrom (..),
+    newEgressFrom,
 
     -- ** EgressFrom_IdentityType
-    , EgressFrom_IdentityType (..)
+    EgressFrom_IdentityType (..),
 
     -- ** EgressPolicy
-    , EgressPolicy (..)
-    , newEgressPolicy
+    EgressPolicy (..),
+    newEgressPolicy,
 
     -- ** EgressTo
-    , EgressTo (..)
-    , newEgressTo
+    EgressTo (..),
+    newEgressTo,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** GcpUserAccessBinding
-    , GcpUserAccessBinding (..)
-    , newGcpUserAccessBinding
+    GcpUserAccessBinding (..),
+    newGcpUserAccessBinding,
 
     -- ** GcpUserAccessBindingOperationMetadata
-    , GcpUserAccessBindingOperationMetadata (..)
-    , newGcpUserAccessBindingOperationMetadata
+    GcpUserAccessBindingOperationMetadata (..),
+    newGcpUserAccessBindingOperationMetadata,
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** IngressFrom
-    , IngressFrom (..)
-    , newIngressFrom
+    IngressFrom (..),
+    newIngressFrom,
 
     -- ** IngressFrom_IdentityType
-    , IngressFrom_IdentityType (..)
+    IngressFrom_IdentityType (..),
 
     -- ** IngressPolicy
-    , IngressPolicy (..)
-    , newIngressPolicy
+    IngressPolicy (..),
+    newIngressPolicy,
 
     -- ** IngressSource
-    , IngressSource (..)
-    , newIngressSource
+    IngressSource (..),
+    newIngressSource,
 
     -- ** IngressTo
-    , IngressTo (..)
-    , newIngressTo
+    IngressTo (..),
+    newIngressTo,
 
     -- ** ListAccessLevelsResponse
-    , ListAccessLevelsResponse (..)
-    , newListAccessLevelsResponse
+    ListAccessLevelsResponse (..),
+    newListAccessLevelsResponse,
 
     -- ** ListAccessPoliciesResponse
-    , ListAccessPoliciesResponse (..)
-    , newListAccessPoliciesResponse
+    ListAccessPoliciesResponse (..),
+    newListAccessPoliciesResponse,
 
     -- ** ListGcpUserAccessBindingsResponse
-    , ListGcpUserAccessBindingsResponse (..)
-    , newListGcpUserAccessBindingsResponse
+    ListGcpUserAccessBindingsResponse (..),
+    newListGcpUserAccessBindingsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListServicePerimetersResponse
-    , ListServicePerimetersResponse (..)
-    , newListServicePerimetersResponse
+    ListServicePerimetersResponse (..),
+    newListServicePerimetersResponse,
 
     -- ** MethodSelector
-    , MethodSelector (..)
-    , newMethodSelector
+    MethodSelector (..),
+    newMethodSelector,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OsConstraint
-    , OsConstraint (..)
-    , newOsConstraint
+    OsConstraint (..),
+    newOsConstraint,
 
     -- ** OsConstraint_OsType
-    , OsConstraint_OsType (..)
+    OsConstraint_OsType (..),
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** ReplaceAccessLevelsRequest
-    , ReplaceAccessLevelsRequest (..)
-    , newReplaceAccessLevelsRequest
+    ReplaceAccessLevelsRequest (..),
+    newReplaceAccessLevelsRequest,
 
     -- ** ReplaceAccessLevelsResponse
-    , ReplaceAccessLevelsResponse (..)
-    , newReplaceAccessLevelsResponse
+    ReplaceAccessLevelsResponse (..),
+    newReplaceAccessLevelsResponse,
 
     -- ** ReplaceServicePerimetersRequest
-    , ReplaceServicePerimetersRequest (..)
-    , newReplaceServicePerimetersRequest
+    ReplaceServicePerimetersRequest (..),
+    newReplaceServicePerimetersRequest,
 
     -- ** ReplaceServicePerimetersResponse
-    , ReplaceServicePerimetersResponse (..)
-    , newReplaceServicePerimetersResponse
+    ReplaceServicePerimetersResponse (..),
+    newReplaceServicePerimetersResponse,
 
     -- ** ServicePerimeter
-    , ServicePerimeter (..)
-    , newServicePerimeter
+    ServicePerimeter (..),
+    newServicePerimeter,
 
     -- ** ServicePerimeter_PerimeterType
-    , ServicePerimeter_PerimeterType (..)
+    ServicePerimeter_PerimeterType (..),
 
     -- ** ServicePerimeterConfig
-    , ServicePerimeterConfig (..)
-    , newServicePerimeterConfig
+    ServicePerimeterConfig (..),
+    newServicePerimeterConfig,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** VpcAccessibleServices
-    , VpcAccessibleServices (..)
-    , newVpcAccessibleServices
+    VpcAccessibleServices (..),
+    newVpcAccessibleServices,
 
     -- ** AccessPoliciesAccessLevelsGetAccessLevelFormat
-    , AccessPoliciesAccessLevelsGetAccessLevelFormat (..)
+    AccessPoliciesAccessLevelsGetAccessLevelFormat (..),
 
     -- ** AccessPoliciesAccessLevelsListAccessLevelFormat
-    , AccessPoliciesAccessLevelsListAccessLevelFormat (..)
-    ) where
+    AccessPoliciesAccessLevelsListAccessLevelFormat (..),
+  )
+where
 
 import Gogol.AccessContextManager.AccessPolicies.AccessLevels.Create
 import Gogol.AccessContextManager.AccessPolicies.AccessLevels.Delete
