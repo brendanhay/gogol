@@ -1,201 +1,171 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ToolResults.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.ToolResults.Types
-    (
-    -- * Service Configuration
-      toolResultsService
+  ( -- * Configuration
+    toolResultsService,
 
-    -- * LauncherActivityNotFound
-    , LauncherActivityNotFound
-    , launcherActivityNotFound
+    -- * Types
 
-    -- * NATiveCrash
-    , NATiveCrash
-    , nATiveCrash
-    , natcStackTrace
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * OverlAppingUIElements
-    , OverlAppingUIElements
-    , overlAppingUIElements
-    , oauieResourceName
-    , oauieScreenId
+    -- ** ANR
+    ANR (..),
+    newANR,
 
-    -- * RoboScriptExecution
-    , RoboScriptExecution
-    , roboScriptExecution
-    , rseTotalActions
-    , rseSuccessfulActions
+    -- ** AvailableDeepLinks
+    AvailableDeepLinks (..),
+    newAvailableDeepLinks,
 
-    -- * ANR
-    , ANR
-    , aNR
-    , aStackTrace
+    -- ** BlankScreen
+    BlankScreen (..),
+    newBlankScreen,
 
-    -- * InAppPurchasesFound
-    , InAppPurchasesFound
-    , inAppPurchasesFound
-    , iapfInAppPurchasesFlowsExplored
-    , iapfInAppPurchasesFlowsStarted
+    -- ** CrashDialogError
+    CrashDialogError (..),
+    newCrashDialogError,
 
-    -- * EncounteredNonAndroidUiWidgetScreen
-    , EncounteredNonAndroidUiWidgetScreen
-    , encounteredNonAndroidUiWidgetScreen
-    , enauwsDistinctScreens
-    , enauwsScreenIds
+    -- ** EncounteredLoginScreen
+    EncounteredLoginScreen (..),
+    newEncounteredLoginScreen,
 
-    -- * StartActivityNotFound
-    , StartActivityNotFound
-    , startActivityNotFound
-    , sanfURI
-    , sanfAction
+    -- ** EncounteredNonAndroidUiWidgetScreen
+    EncounteredNonAndroidUiWidgetScreen (..),
+    newEncounteredNonAndroidUiWidgetScreen,
 
-    -- * AvailableDeepLinks
-    , AvailableDeepLinks
-    , availableDeepLinks
+    -- ** FailedToInstall
+    FailedToInstall (..),
+    newFailedToInstall,
 
-    -- * IosAppCrashed
-    , IosAppCrashed
-    , iosAppCrashed
-    , iacStackTrace
+    -- ** FatalException
+    FatalException (..),
+    newFatalException,
 
-    -- * UpgradeInsight
-    , UpgradeInsight
-    , upgradeInsight
-    , uiPackageName
-    , uiUpgradeToVersion
+    -- ** InAppPurchasesFound
+    InAppPurchasesFound (..),
+    newInAppPurchasesFound,
 
-    -- * PerformedMonkeyActions
-    , PerformedMonkeyActions
-    , performedMonkeyActions
-    , pmaTotalActions
+    -- ** InsufficientCoverage
+    InsufficientCoverage (..),
+    newInsufficientCoverage,
 
-    -- * NonSdkAPIUsageViolationReport
-    , NonSdkAPIUsageViolationReport
-    , nonSdkAPIUsageViolationReport
-    , nsauvrMinSdkVersion
-    , nsauvrTargetSdkVersion
-    , nsauvrUniqueAPIs
-    , nsauvrExampleAPIs
+    -- ** IosAppCrashed
+    IosAppCrashed (..),
+    newIosAppCrashed,
 
-    -- * PendingGoogleUpdateInsight
-    , PendingGoogleUpdateInsight
-    , pendingGoogleUpdateInsight
-    , pguiNameOfGoogleLibrary
+    -- ** LauncherActivityNotFound
+    LauncherActivityNotFound (..),
+    newLauncherActivityNotFound,
 
-    -- * StackTrace
-    , StackTrace
-    , stackTrace
-    , stException
+    -- ** NativeCrash
+    NativeCrash (..),
+    newNativeCrash,
 
-    -- * NonSdkAPIUsageViolation
-    , NonSdkAPIUsageViolation
-    , nonSdkAPIUsageViolation
-    , nsauvAPISignatures
-    , nsauvUniqueAPIs
+    -- ** NonSdkApi
+    NonSdkApi (..),
+    newNonSdkApi,
 
-    -- * UIElementTooDeep
-    , UIElementTooDeep
-    , uIElementTooDeep
-    , uietdScreenStateId
-    , uietdDepth
-    , uietdScreenId
+    -- ** NonSdkApi_List
+    NonSdkApi_List (..),
 
-    -- * PerformedGoogleLogin
-    , PerformedGoogleLogin
-    , performedGoogleLogin
+    -- ** NonSdkApiInsight
+    NonSdkApiInsight (..),
+    newNonSdkApiInsight,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** NonSdkApiUsageViolation
+    NonSdkApiUsageViolation (..),
+    newNonSdkApiUsageViolation,
 
-    -- * NonSdkAPIInsight
-    , NonSdkAPIInsight
-    , nonSdkAPIInsight
-    , nsaiUpgradeInsight
-    , nsaiPendingGoogleUpdateInsight
-    , nsaiExampleTraceMessages
-    , nsaiMatcherId
+    -- ** NonSdkApiUsageViolationReport
+    NonSdkApiUsageViolationReport (..),
+    newNonSdkApiUsageViolationReport,
 
-    -- * UsedRoboIgnoreDirective
-    , UsedRoboIgnoreDirective
-    , usedRoboIgnoreDirective
-    , uridResourceName
+    -- ** OverlappingUIElements
+    OverlappingUIElements (..),
+    newOverlappingUIElements,
 
-    -- * UsedRoboDirective
-    , UsedRoboDirective
-    , usedRoboDirective
-    , urdResourceName
+    -- ** PendingGoogleUpdateInsight
+    PendingGoogleUpdateInsight (..),
+    newPendingGoogleUpdateInsight,
 
-    -- * UnspecifiedWarning
-    , UnspecifiedWarning
-    , unspecifiedWarning
+    -- ** PerformedGoogleLogin
+    PerformedGoogleLogin (..),
+    newPerformedGoogleLogin,
 
-    -- * UnusedRoboDirective
-    , UnusedRoboDirective
-    , unusedRoboDirective
-    , uResourceName
+    -- ** PerformedMonkeyActions
+    PerformedMonkeyActions (..),
+    newPerformedMonkeyActions,
 
-    -- * CrashDialogError
-    , CrashDialogError
-    , crashDialogError
-    , cdeCrashPackage
+    -- ** RoboScriptExecution
+    RoboScriptExecution (..),
+    newRoboScriptExecution,
 
-    -- * NonSdkAPI
-    , NonSdkAPI
-    , nonSdkAPI
-    , nsaList
-    , nsaInsights
-    , nsaAPISignature
-    , nsaExampleStackTraces
-    , nsaInvocationCount
+    -- ** StackTrace
+    StackTrace (..),
+    newStackTrace,
 
-    -- * InsufficientCoverage
-    , InsufficientCoverage
-    , insufficientCoverage
+    -- ** StartActivityNotFound
+    StartActivityNotFound (..),
+    newStartActivityNotFound,
 
-    -- * BlankScreen
-    , BlankScreen
-    , blankScreen
-    , bsScreenId
+    -- ** UIElementTooDeep
+    UIElementTooDeep (..),
+    newUIElementTooDeep,
 
-    -- * FailedToInstall
-    , FailedToInstall
-    , failedToInstall
+    -- ** UnspecifiedWarning
+    UnspecifiedWarning (..),
+    newUnspecifiedWarning,
 
-    -- * FatalException
-    , FatalException
-    , fatalException
-    , feStackTrace
+    -- ** UnusedRoboDirective
+    UnusedRoboDirective (..),
+    newUnusedRoboDirective,
 
-    -- * NonSdkAPIList
-    , NonSdkAPIList (..)
+    -- ** UpgradeInsight
+    UpgradeInsight (..),
+    newUpgradeInsight,
 
-    -- * EncounteredLoginScreen
-    , EncounteredLoginScreen
-    , encounteredLoginScreen
-    , elsDistinctScreens
-    , elsScreenIds
-    ) where
+    -- ** UsedRoboDirective
+    UsedRoboDirective (..),
+    newUsedRoboDirective,
 
-import Network.Google.Prelude
-import Network.Google.ToolResults.Types.Product
-import Network.Google.ToolResults.Types.Sum
+    -- ** UsedRoboIgnoreDirective
+    UsedRoboIgnoreDirective (..),
+    newUsedRoboIgnoreDirective,
+  )
+where
 
--- | Default request referring to version 'v1' of the Cloud Tool Results API. This contains the host and root path used as a starting point for constructing service requests.
-toolResultsService :: ServiceConfig
-toolResultsService
-  = defaultService (ServiceId "toolresults:v1")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.ToolResults.Internal.Product
+import Network.Google.ToolResults.Internal.Sum
+
+-- | Default request referring to version @v1@ of the Cloud Tool Results API. This contains the host and root path used as a starting point for constructing service requests.
+toolResultsService :: Core.ServiceConfig
+toolResultsService =
+  Core.defaultService
+    (Core.ServiceId "toolresults:v1")
+    "www.googleapis.com"
