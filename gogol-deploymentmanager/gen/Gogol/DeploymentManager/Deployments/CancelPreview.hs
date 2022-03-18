@@ -19,67 +19,67 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.GetIamPolicy
+-- Module      : Gogol.DeploymentManager.Deployments.CancelPreview
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+-- Cancels and removes the preview currently associated with the deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.getIamPolicy@.
-module Network.Google.DeploymentManager.Deployments.GetIamPolicy
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.cancelPreview@.
+module Gogol.DeploymentManager.Deployments.CancelPreview
   ( -- * Resource
-    DeploymentManagerDeploymentsGetIamPolicyResource,
+    DeploymentManagerDeploymentsCancelPreviewResource,
 
     -- ** Constructing a Request
-    newDeploymentManagerDeploymentsGetIamPolicy,
-    DeploymentManagerDeploymentsGetIamPolicy,
+    newDeploymentManagerDeploymentsCancelPreview,
+    DeploymentManagerDeploymentsCancelPreview,
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @deploymentmanager.deployments.getIamPolicy@ method which the
--- 'DeploymentManagerDeploymentsGetIamPolicy' request conforms to.
-type DeploymentManagerDeploymentsGetIamPolicyResource =
+-- | A resource alias for @deploymentmanager.deployments.cancelPreview@ method which the
+-- 'DeploymentManagerDeploymentsCancelPreview' request conforms to.
+type DeploymentManagerDeploymentsCancelPreviewResource =
   "deploymentmanager"
     Core.:> "v2"
     Core.:> "projects"
     Core.:> Core.Capture "project" Core.Text
     Core.:> "global"
     Core.:> "deployments"
-    Core.:> Core.Capture "resource" Core.Text
-    Core.:> "getIamPolicy"
+    Core.:> Core.Capture "deployment" Core.Text
+    Core.:> "cancelPreview"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "optionsRequestedPolicyVersion"
-              Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Policy
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              DeploymentsCancelPreviewRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+-- | Cancels and removes the preview currently associated with the deployment.
 --
--- /See:/ 'newDeploymentManagerDeploymentsGetIamPolicy' smart constructor.
-data DeploymentManagerDeploymentsGetIamPolicy = DeploymentManagerDeploymentsGetIamPolicy
+-- /See:/ 'newDeploymentManagerDeploymentsCancelPreview' smart constructor.
+data DeploymentManagerDeploymentsCancelPreview = DeploymentManagerDeploymentsCancelPreview
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Requested IAM Policy version.
-    optionsRequestedPolicyVersion :: (Core.Maybe Core.Int32),
-    -- | Project ID for this request.
+    -- | The name of the deployment for this request.
+    deployment :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: DeploymentsCancelPreviewRequest,
+    -- | The project ID for this request.
     project :: Core.Text,
-    -- | Name or id of the resource for this request.
-    resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -87,55 +87,57 @@ data DeploymentManagerDeploymentsGetIamPolicy = DeploymentManagerDeploymentsGetI
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DeploymentManagerDeploymentsGetIamPolicy' with the minimum fields required to make a request.
-newDeploymentManagerDeploymentsGetIamPolicy ::
-  -- |  Project ID for this request. See 'project'.
+-- | Creates a value of 'DeploymentManagerDeploymentsCancelPreview' with the minimum fields required to make a request.
+newDeploymentManagerDeploymentsCancelPreview ::
+  -- |  The name of the deployment for this request. See 'deployment'.
   Core.Text ->
-  -- |  Name or id of the resource for this request. See 'resource'.
+  -- |  Multipart request metadata. See 'payload'.
+  DeploymentsCancelPreviewRequest ->
+  -- |  The project ID for this request. See 'project'.
   Core.Text ->
-  DeploymentManagerDeploymentsGetIamPolicy
-newDeploymentManagerDeploymentsGetIamPolicy project resource =
-  DeploymentManagerDeploymentsGetIamPolicy
+  DeploymentManagerDeploymentsCancelPreview
+newDeploymentManagerDeploymentsCancelPreview deployment payload project =
+  DeploymentManagerDeploymentsCancelPreview
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      optionsRequestedPolicyVersion = Core.Nothing,
+      deployment = deployment,
+      payload = payload,
       project = project,
-      resource = resource,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DeploymentManagerDeploymentsGetIamPolicy
+    DeploymentManagerDeploymentsCancelPreview
   where
   type
-    Rs DeploymentManagerDeploymentsGetIamPolicy =
-      Policy
+    Rs DeploymentManagerDeploymentsCancelPreview =
+      Operation
   type
-    Scopes DeploymentManagerDeploymentsGetIamPolicy =
+    Scopes DeploymentManagerDeploymentsCancelPreview =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/ndev.cloudman"
        ]
   requestClient
-    DeploymentManagerDeploymentsGetIamPolicy {..} =
+    DeploymentManagerDeploymentsCancelPreview {..} =
       go
         project
-        resource
+        deployment
         xgafv
         accessToken
         callback
-        optionsRequestedPolicyVersion
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         deploymentManagerService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DeploymentManagerDeploymentsGetIamPolicyResource
+                  DeploymentManagerDeploymentsCancelPreviewResource
             )
             Core.mempty

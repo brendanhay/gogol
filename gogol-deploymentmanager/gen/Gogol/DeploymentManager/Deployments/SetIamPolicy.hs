@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DeploymentManager.Deployments.SetIamPolicy
+-- Module      : Gogol.DeploymentManager.Deployments.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sets the access control policy on the specified resource. Replaces any existing policy.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.setIamPolicy@.
-module Network.Google.DeploymentManager.Deployments.SetIamPolicy
+module Gogol.DeploymentManager.Deployments.SetIamPolicy
   ( -- * Resource
     DeploymentManagerDeploymentsSetIamPolicyResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DeploymentManager.Deployments.SetIamPolicy
   )
 where
 
-import Network.Google.DeploymentManager.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DeploymentManager.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @deploymentmanager.deployments.setIamPolicy@ method which the
 -- 'DeploymentManagerDeploymentsSetIamPolicy' request conforms to.
