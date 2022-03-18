@@ -1,113 +1,97 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.TextToSpeech
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Synthesizes natural-sounding speech by applying powerful neural network
--- models.
+-- Synthesizes natural-sounding speech by applying powerful neural network models.
 --
 -- /See:/ <https://cloud.google.com/text-to-speech/ Cloud Text-to-Speech API Reference>
 module Network.Google.TextToSpeech
-    (
-    -- * Service Configuration
-      textToSpeechService
+  ( -- * Configuration
+    textToSpeechService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , TextToSpeechAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** texttospeech.text.synthesize
-    , module Network.Google.Resource.TextToSpeech.Text.Synthesize
+    TextToSpeechTextSynthesizeResource,
+    newTextToSpeechTextSynthesize,
+    TextToSpeechTextSynthesize,
 
     -- ** texttospeech.voices.list
-    , module Network.Google.Resource.TextToSpeech.Voices.List
+    TextToSpeechVoicesListResource,
+    newTextToSpeechVoicesList,
+    TextToSpeechVoicesList,
 
     -- * Types
 
+    -- ** Xgafv
+    Xgafv (..),
+
     -- ** AudioConfig
-    , AudioConfig
-    , audioConfig
-    , acVolumeGainDB
-    , acSampleRateHertz
-    , acEffectsProFileId
-    , acAudioEncoding
-    , acSpeakingRate
-    , acPitch
+    AudioConfig (..),
+    newAudioConfig,
 
-    -- ** VoiceSelectionParams
-    , VoiceSelectionParams
-    , voiceSelectionParams
-    , vspLanguageCode
-    , vspSsmlGender
-    , vspName
-
-    -- ** SynthesizeSpeechRequest
-    , SynthesizeSpeechRequest
-    , synthesizeSpeechRequest
-    , ssrAudioConfig
-    , ssrInput
-    , ssrVoice
+    -- ** AudioConfig_AudioEncoding
+    AudioConfig_AudioEncoding (..),
 
     -- ** ListVoicesResponse
-    , ListVoicesResponse
-    , listVoicesResponse
-    , lvrVoices
-
-    -- ** VoiceSelectionParamsSsmlGender
-    , VoiceSelectionParamsSsmlGender (..)
+    ListVoicesResponse (..),
+    newListVoicesResponse,
 
     -- ** SynthesisInput
-    , SynthesisInput
-    , synthesisInput
-    , siText
-    , siSsml
+    SynthesisInput (..),
+    newSynthesisInput,
 
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** VoiceSsmlGender
-    , VoiceSsmlGender (..)
+    -- ** SynthesizeSpeechRequest
+    SynthesizeSpeechRequest (..),
+    newSynthesizeSpeechRequest,
 
     -- ** SynthesizeSpeechResponse
-    , SynthesizeSpeechResponse
-    , synthesizeSpeechResponse
-    , ssrAudioContent
+    SynthesizeSpeechResponse (..),
+    newSynthesizeSpeechResponse,
 
     -- ** Voice
-    , Voice
-    , voice
-    , vLanguageCodes
-    , vNATuralSampleRateHertz
-    , vSsmlGender
-    , vName
+    Voice (..),
+    newVoice,
 
-    -- ** AudioConfigAudioEncoding
-    , AudioConfigAudioEncoding (..)
-    ) where
+    -- ** Voice_SsmlGender
+    Voice_SsmlGender (..),
 
-import Network.Google.Prelude
-import Network.Google.Resource.TextToSpeech.Text.Synthesize
-import Network.Google.Resource.TextToSpeech.Voices.List
+    -- ** VoiceSelectionParams
+    VoiceSelectionParams (..),
+    newVoiceSelectionParams,
+
+    -- ** VoiceSelectionParams_SsmlGender
+    VoiceSelectionParams_SsmlGender (..),
+  )
+where
+
+import Network.Google.TextToSpeech.Text.Synthesize
 import Network.Google.TextToSpeech.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Cloud Text-to-Speech API service.
-type TextToSpeechAPI =
-     TextSynthesizeResource :<|> VoicesListResource
+import Network.Google.TextToSpeech.Voices.List
