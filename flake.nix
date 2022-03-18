@@ -17,6 +17,7 @@
             haskellPackages.cabal-fmt
             nixpkgs-fmt
             ormolu
+            parallel
             shellcheck
             shfmt
             stack

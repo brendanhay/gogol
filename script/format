@@ -8,6 +8,22 @@ say() {
   echo >&2 "$@"
 }
 
+format_haskell() {
+  local -r dir="$1"
+
+  say "Formatting $dir"
+
+  find "$dir" -type f -name '*.cabal' -print0 |
+    xargs -0 cabal-fmt --inplace --indent=2
+
+  find "$dir" -type f -name '*.hs' -print0 |
+    xargs -0 ormolu --mode=inplace
+}
+
+# Export the functions for use in GNU parallel.
+export -f say
+export -f format_haskell
+
 say "Formatting shell"
 
 find script -type f -print0 |
@@ -20,8 +36,5 @@ find . -type f -name '*.nix' -print0 |
 
 say "Formatting haskell"
 
-find gen core gogol examples -type f -name '*.hs' -print0 |
-  xargs -0 ormolu --mode=inplace
-
-find gen core gogol examples -type f -name '*.cabal' -print0 |
-  xargs -0 cabal-fmt --Werror --inplace
+# Run the format and copy/replace steps in parallel.
+parallel --halt-on-error 2 format_haskell ::: core gen examples gogol gogol-*
