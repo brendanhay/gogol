@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsLicensing.Licensing.LicenseAssignments.Update
+-- Module      : Gogol.AppsLicensing.Licensing.LicenseAssignments.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reassign a user\'s product SKU with a different SKU in the same product.
+-- Get a specific user\'s license by product SKU.
 --
--- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.update@.
-module Network.Google.AppsLicensing.Licensing.LicenseAssignments.Update
+-- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.get@.
+module Gogol.AppsLicensing.Licensing.LicenseAssignments.Get
   ( -- * Resource
-    LicensingLicenseAssignmentsUpdateResource,
+    LicensingLicenseAssignmentsGetResource,
 
     -- ** Constructing a Request
-    newLicensingLicenseAssignmentsUpdate,
-    LicensingLicenseAssignmentsUpdate,
+    newLicensingLicenseAssignmentsGet,
+    LicensingLicenseAssignmentsGet,
   )
 where
 
-import Network.Google.AppsLicensing.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppsLicensing.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @licensing.licenseAssignments.update@ method which the
--- 'LicensingLicenseAssignmentsUpdate' request conforms to.
-type LicensingLicenseAssignmentsUpdateResource =
+-- | A resource alias for @licensing.licenseAssignments.get@ method which the
+-- 'LicensingLicenseAssignmentsGet' request conforms to.
+type LicensingLicenseAssignmentsGetResource =
   "apps"
     Core.:> "licensing"
     Core.:> "v1"
@@ -60,21 +60,18 @@ type LicensingLicenseAssignmentsUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] LicenseAssignment
-    Core.:> Core.Put '[Core.JSON] LicenseAssignment
+    Core.:> Core.Get '[Core.JSON] LicenseAssignment
 
--- | Reassign a user\'s product SKU with a different SKU in the same product.
+-- | Get a specific user\'s license by product SKU.
 --
--- /See:/ 'newLicensingLicenseAssignmentsUpdate' smart constructor.
-data LicensingLicenseAssignmentsUpdate = LicensingLicenseAssignmentsUpdate
+-- /See:/ 'newLicensingLicenseAssignmentsGet' smart constructor.
+data LicensingLicenseAssignmentsGet = LicensingLicenseAssignmentsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: LicenseAssignment,
     -- | A product\'s unique identifier. For more information about products in this version of the API, see Products and SKUs.
     productId :: Core.Text,
     -- | A product SKU\'s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
@@ -88,23 +85,20 @@ data LicensingLicenseAssignmentsUpdate = LicensingLicenseAssignmentsUpdate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'LicensingLicenseAssignmentsUpdate' with the minimum fields required to make a request.
-newLicensingLicenseAssignmentsUpdate ::
-  -- |  Multipart request metadata. See 'payload'.
-  LicenseAssignment ->
+-- | Creates a value of 'LicensingLicenseAssignmentsGet' with the minimum fields required to make a request.
+newLicensingLicenseAssignmentsGet ::
   -- |  A product\'s unique identifier. For more information about products in this version of the API, see Products and SKUs. See 'productId'.
   Core.Text ->
   -- |  A product SKU\'s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs. See 'skuId'.
   Core.Text ->
   -- |  The user\'s current primary email address. If the user\'s email address changes, use the new email address in your API requests. Since a @userId@ is subject to change, do not use a @userId@ value as a key for persistent data. This key could break if the current user\'s email address changes. If the @userId@ is suspended, the license status changes. See 'userId'.
   Core.Text ->
-  LicensingLicenseAssignmentsUpdate
-newLicensingLicenseAssignmentsUpdate payload productId skuId userId =
-  LicensingLicenseAssignmentsUpdate
+  LicensingLicenseAssignmentsGet
+newLicensingLicenseAssignmentsGet productId skuId userId =
+  LicensingLicenseAssignmentsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
       productId = productId,
       skuId = skuId,
       uploadType = Core.Nothing,
@@ -114,15 +108,15 @@ newLicensingLicenseAssignmentsUpdate payload productId skuId userId =
 
 instance
   Core.GoogleRequest
-    LicensingLicenseAssignmentsUpdate
+    LicensingLicenseAssignmentsGet
   where
   type
-    Rs LicensingLicenseAssignmentsUpdate =
+    Rs LicensingLicenseAssignmentsGet =
       LicenseAssignment
   type
-    Scopes LicensingLicenseAssignmentsUpdate =
+    Scopes LicensingLicenseAssignmentsGet =
       '["https://www.googleapis.com/auth/apps.licensing"]
-  requestClient LicensingLicenseAssignmentsUpdate {..} =
+  requestClient LicensingLicenseAssignmentsGet {..} =
     go
       productId
       skuId
@@ -133,12 +127,11 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       appsLicensingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy LicensingLicenseAssignmentsUpdateResource
+              Core.Proxy LicensingLicenseAssignmentsGetResource
           )
           Core.mempty

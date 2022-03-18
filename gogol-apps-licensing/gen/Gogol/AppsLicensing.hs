@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppsLicensing
+-- Module      : Gogol.AppsLicensing
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google Enterprise License Manager API\'s allows you to license apps for all the users of a domain managed by you.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference>
-module Network.Google.AppsLicensing
+module Gogol.AppsLicensing
   ( -- * Configuration
     appsLicensingService,
 
@@ -96,11 +96,11 @@ module Network.Google.AppsLicensing
   )
 where
 
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Delete
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Get
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Insert
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Patch
-import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Update
-import Network.Google.AppsLicensing.Types
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.Delete
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.Get
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.Insert
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.Patch
+import Gogol.AppsLicensing.Licensing.LicenseAssignments.Update
+import Gogol.AppsLicensing.Types
