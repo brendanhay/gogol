@@ -39,38 +39,39 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ContainerAnalysis
-    Network.Google.ContainerAnalysis.Projects.Notes.BatchCreate
-    Network.Google.ContainerAnalysis.Projects.Notes.Create
-    Network.Google.ContainerAnalysis.Projects.Notes.Delete
-    Network.Google.ContainerAnalysis.Projects.Notes.Get
-    Network.Google.ContainerAnalysis.Projects.Notes.GetIamPolicy
-    Network.Google.ContainerAnalysis.Projects.Notes.List
-    Network.Google.ContainerAnalysis.Projects.Notes.Occurrences.List
-    Network.Google.ContainerAnalysis.Projects.Notes.Patch
-    Network.Google.ContainerAnalysis.Projects.Notes.SetIamPolicy
-    Network.Google.ContainerAnalysis.Projects.Notes.TestIamPermissions
-    Network.Google.ContainerAnalysis.Projects.Occurrences.BatchCreate
-    Network.Google.ContainerAnalysis.Projects.Occurrences.Create
-    Network.Google.ContainerAnalysis.Projects.Occurrences.Delete
-    Network.Google.ContainerAnalysis.Projects.Occurrences.Get
-    Network.Google.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
-    Network.Google.ContainerAnalysis.Projects.Occurrences.GetNotes
-    Network.Google.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
-    Network.Google.ContainerAnalysis.Projects.Occurrences.List
-    Network.Google.ContainerAnalysis.Projects.Occurrences.Patch
-    Network.Google.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
-    Network.Google.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
-    Network.Google.ContainerAnalysis.Types
+    Gogol.ContainerAnalysis
+    Gogol.ContainerAnalysis.Projects.Notes.BatchCreate
+    Gogol.ContainerAnalysis.Projects.Notes.Create
+    Gogol.ContainerAnalysis.Projects.Notes.Delete
+    Gogol.ContainerAnalysis.Projects.Notes.Get
+    Gogol.ContainerAnalysis.Projects.Notes.GetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Notes.List
+    Gogol.ContainerAnalysis.Projects.Notes.Occurrences.List
+    Gogol.ContainerAnalysis.Projects.Notes.Patch
+    Gogol.ContainerAnalysis.Projects.Notes.SetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Notes.TestIamPermissions
+    Gogol.ContainerAnalysis.Projects.Occurrences.BatchCreate
+    Gogol.ContainerAnalysis.Projects.Occurrences.Create
+    Gogol.ContainerAnalysis.Projects.Occurrences.Delete
+    Gogol.ContainerAnalysis.Projects.Occurrences.Get
+    Gogol.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Occurrences.GetNotes
+    Gogol.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
+    Gogol.ContainerAnalysis.Projects.Occurrences.List
+    Gogol.ContainerAnalysis.Projects.Occurrences.Patch
+    Gogol.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
+    Gogol.ContainerAnalysis.Types
 
   other-modules:
-    Network.Google.ContainerAnalysis.Internal.Product
-    Network.Google.ContainerAnalysis.Internal.Sum
+    Gogol.ContainerAnalysis.Internal.Product
+    Gogol.ContainerAnalysis.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
