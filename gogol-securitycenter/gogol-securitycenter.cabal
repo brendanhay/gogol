@@ -39,45 +39,46 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.SecurityCenter
-    Network.Google.SecurityCenter.Organizations.Assets.Group
-    Network.Google.SecurityCenter.Organizations.Assets.List
-    Network.Google.SecurityCenter.Organizations.Assets.RunDiscovery
-    Network.Google.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
-    Network.Google.SecurityCenter.Organizations.GetOrganizationSettings
-    Network.Google.SecurityCenter.Organizations.NotificationConfigs.Create
-    Network.Google.SecurityCenter.Organizations.NotificationConfigs.Delete
-    Network.Google.SecurityCenter.Organizations.NotificationConfigs.Get
-    Network.Google.SecurityCenter.Organizations.NotificationConfigs.List
-    Network.Google.SecurityCenter.Organizations.NotificationConfigs.Patch
-    Network.Google.SecurityCenter.Organizations.Operations.Cancel
-    Network.Google.SecurityCenter.Organizations.Operations.Delete
-    Network.Google.SecurityCenter.Organizations.Operations.Get
-    Network.Google.SecurityCenter.Organizations.Operations.List
-    Network.Google.SecurityCenter.Organizations.Sources.Create
-    Network.Google.SecurityCenter.Organizations.Sources.Findings.Create
-    Network.Google.SecurityCenter.Organizations.Sources.Findings.Group
-    Network.Google.SecurityCenter.Organizations.Sources.Findings.List
-    Network.Google.SecurityCenter.Organizations.Sources.Findings.Patch
-    Network.Google.SecurityCenter.Organizations.Sources.Findings.SetState
-    Network.Google.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
-    Network.Google.SecurityCenter.Organizations.Sources.Get
-    Network.Google.SecurityCenter.Organizations.Sources.GetIamPolicy
-    Network.Google.SecurityCenter.Organizations.Sources.List
-    Network.Google.SecurityCenter.Organizations.Sources.Patch
-    Network.Google.SecurityCenter.Organizations.Sources.SetIamPolicy
-    Network.Google.SecurityCenter.Organizations.Sources.TestIamPermissions
-    Network.Google.SecurityCenter.Organizations.UpdateOrganizationSettings
-    Network.Google.SecurityCenter.Types
+    Gogol.SecurityCenter
+    Gogol.SecurityCenter.Organizations.Assets.Group
+    Gogol.SecurityCenter.Organizations.Assets.List
+    Gogol.SecurityCenter.Organizations.Assets.RunDiscovery
+    Gogol.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
+    Gogol.SecurityCenter.Organizations.GetOrganizationSettings
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Create
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Delete
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Get
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.List
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Patch
+    Gogol.SecurityCenter.Organizations.Operations.Cancel
+    Gogol.SecurityCenter.Organizations.Operations.Delete
+    Gogol.SecurityCenter.Organizations.Operations.Get
+    Gogol.SecurityCenter.Organizations.Operations.List
+    Gogol.SecurityCenter.Organizations.Sources.Create
+    Gogol.SecurityCenter.Organizations.Sources.Findings.Create
+    Gogol.SecurityCenter.Organizations.Sources.Findings.Group
+    Gogol.SecurityCenter.Organizations.Sources.Findings.List
+    Gogol.SecurityCenter.Organizations.Sources.Findings.Patch
+    Gogol.SecurityCenter.Organizations.Sources.Findings.SetState
+    Gogol.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
+    Gogol.SecurityCenter.Organizations.Sources.Get
+    Gogol.SecurityCenter.Organizations.Sources.GetIamPolicy
+    Gogol.SecurityCenter.Organizations.Sources.List
+    Gogol.SecurityCenter.Organizations.Sources.Patch
+    Gogol.SecurityCenter.Organizations.Sources.SetIamPolicy
+    Gogol.SecurityCenter.Organizations.Sources.TestIamPermissions
+    Gogol.SecurityCenter.Organizations.UpdateOrganizationSettings
+    Gogol.SecurityCenter.Types
 
   other-modules:
-    Network.Google.SecurityCenter.Internal.Product
-    Network.Google.SecurityCenter.Internal.Sum
+    Gogol.SecurityCenter.Internal.Product
+    Gogol.SecurityCenter.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
