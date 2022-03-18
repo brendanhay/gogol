@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,54 +36,50 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.billingInfo.list@.
 module Gogol.AdExchangeBuyer.BillingInfo.List
-  ( -- * Resource
-    AdExchangeBuyerBillingInfoListResource,
+    (
+    -- * Resource
+      AdExchangeBuyerBillingInfoListResource
 
     -- ** Constructing a Request
-    newAdExchangeBuyerBillingInfoList,
-    AdExchangeBuyerBillingInfoList,
-  )
-where
+    , newAdExchangeBuyerBillingInfoList
+    , AdExchangeBuyerBillingInfoList
+    ) where
 
-import Gogol.AdExchangeBuyer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdExchangeBuyer.Types
 
 -- | A resource alias for @adexchangebuyer.billingInfo.list@ method which the
 -- 'AdExchangeBuyerBillingInfoList' request conforms to.
 type AdExchangeBuyerBillingInfoListResource =
-  "adexchangebuyer"
-    Core.:> "v1.4"
-    Core.:> "billinginfo"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] BillingInfoList
+     "adexchangebuyer" Core.:>
+       "v1.4" Core.:>
+         "billinginfo" Core.:>
+           Core.QueryParam "alt" Core.AltJSON Core.:>
+             Core.Get '[Core.JSON] BillingInfoList
 
 -- | Retrieves a list of billing information for all accounts of the authenticated user.
 --
 -- /See:/ 'newAdExchangeBuyerBillingInfoList' smart constructor.
 data AdExchangeBuyerBillingInfoList = AdExchangeBuyerBillingInfoList
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyerBillingInfoList' with the minimum fields required to make a request.
-newAdExchangeBuyerBillingInfoList ::
-  AdExchangeBuyerBillingInfoList
+newAdExchangeBuyerBillingInfoList 
+    ::  AdExchangeBuyerBillingInfoList
 newAdExchangeBuyerBillingInfoList = AdExchangeBuyerBillingInfoList
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerBillingInfoList
-  where
-  type
-    Rs AdExchangeBuyerBillingInfoList =
-      BillingInfoList
-  type
-    Scopes AdExchangeBuyerBillingInfoList =
-      '["https://www.googleapis.com/auth/adexchange.buyer"]
-  requestClient AdExchangeBuyerBillingInfoList {} =
-    go (Core.Just Core.AltJSON) adExchangeBuyerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerBillingInfoListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AdExchangeBuyerBillingInfoList
+         where
+        type Rs AdExchangeBuyerBillingInfoList =
+             BillingInfoList
+        type Scopes AdExchangeBuyerBillingInfoList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient AdExchangeBuyerBillingInfoList{}
+          = go (Core.Just Core.AltJSON) adExchangeBuyerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AdExchangeBuyerBillingInfoListResource)
+                      Core.mempty
+
