@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,1634 +30,1634 @@
 --
 -- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference>
 module Gogol.YouTube
-    (
-    -- * Configuration
-      youTubeService
+  ( -- * Configuration
+    youTubeService,
 
     -- * OAuth Scopes
-    , youTubeScope
-    , youTubeChannelMembershipsCreatorScope
-    , youTubeForceSslScope
-    , youTubeReadOnlyScope
-    , youTubeUploadScope
-    , youtubepartnerScope
-    , youtubepartnerChannelAuditScope
+    youTubeScope,
+    youTubeChannelMembershipsCreatorScope,
+    youTubeForceSslScope,
+    youTubeReadOnlyScope,
+    youTubeUploadScope,
+    youtubepartnerScope,
+    youtubepartnerChannelAuditScope,
 
     -- * Resources
 
     -- ** youtube.abuseReports.insert
-    , YouTubeAbuseReportsInsertResource
-    , newYouTubeAbuseReportsInsert
-    , YouTubeAbuseReportsInsert
+    YouTubeAbuseReportsInsertResource,
+    newYouTubeAbuseReportsInsert,
+    YouTubeAbuseReportsInsert,
 
     -- ** youtube.activities.list
-    , YouTubeActivitiesListResource
-    , newYouTubeActivitiesList
-    , YouTubeActivitiesList
+    YouTubeActivitiesListResource,
+    newYouTubeActivitiesList,
+    YouTubeActivitiesList,
 
     -- ** youtube.captions.delete
-    , YouTubeCaptionsDeleteResource
-    , newYouTubeCaptionsDelete
-    , YouTubeCaptionsDelete
+    YouTubeCaptionsDeleteResource,
+    newYouTubeCaptionsDelete,
+    YouTubeCaptionsDelete,
 
     -- ** youtube.captions.download
-    , YouTubeCaptionsDownloadResource
-    , newYouTubeCaptionsDownload
-    , YouTubeCaptionsDownload
+    YouTubeCaptionsDownloadResource,
+    newYouTubeCaptionsDownload,
+    YouTubeCaptionsDownload,
 
     -- ** youtube.captions.insert
-    , YouTubeCaptionsInsertResource
-    , newYouTubeCaptionsInsert
-    , YouTubeCaptionsInsert
+    YouTubeCaptionsInsertResource,
+    newYouTubeCaptionsInsert,
+    YouTubeCaptionsInsert,
 
     -- ** youtube.captions.list
-    , YouTubeCaptionsListResource
-    , newYouTubeCaptionsList
-    , YouTubeCaptionsList
+    YouTubeCaptionsListResource,
+    newYouTubeCaptionsList,
+    YouTubeCaptionsList,
 
     -- ** youtube.captions.update
-    , YouTubeCaptionsUpdateResource
-    , newYouTubeCaptionsUpdate
-    , YouTubeCaptionsUpdate
+    YouTubeCaptionsUpdateResource,
+    newYouTubeCaptionsUpdate,
+    YouTubeCaptionsUpdate,
 
     -- ** youtube.channelBanners.insert
-    , YouTubeChannelBannersInsertResource
-    , newYouTubeChannelBannersInsert
-    , YouTubeChannelBannersInsert
+    YouTubeChannelBannersInsertResource,
+    newYouTubeChannelBannersInsert,
+    YouTubeChannelBannersInsert,
 
     -- ** youtube.channelSections.delete
-    , YouTubeChannelSectionsDeleteResource
-    , newYouTubeChannelSectionsDelete
-    , YouTubeChannelSectionsDelete
+    YouTubeChannelSectionsDeleteResource,
+    newYouTubeChannelSectionsDelete,
+    YouTubeChannelSectionsDelete,
 
     -- ** youtube.channelSections.insert
-    , YouTubeChannelSectionsInsertResource
-    , newYouTubeChannelSectionsInsert
-    , YouTubeChannelSectionsInsert
+    YouTubeChannelSectionsInsertResource,
+    newYouTubeChannelSectionsInsert,
+    YouTubeChannelSectionsInsert,
 
     -- ** youtube.channelSections.list
-    , YouTubeChannelSectionsListResource
-    , newYouTubeChannelSectionsList
-    , YouTubeChannelSectionsList
+    YouTubeChannelSectionsListResource,
+    newYouTubeChannelSectionsList,
+    YouTubeChannelSectionsList,
 
     -- ** youtube.channelSections.update
-    , YouTubeChannelSectionsUpdateResource
-    , newYouTubeChannelSectionsUpdate
-    , YouTubeChannelSectionsUpdate
+    YouTubeChannelSectionsUpdateResource,
+    newYouTubeChannelSectionsUpdate,
+    YouTubeChannelSectionsUpdate,
 
     -- ** youtube.channels.list
-    , YouTubeChannelsListResource
-    , newYouTubeChannelsList
-    , YouTubeChannelsList
+    YouTubeChannelsListResource,
+    newYouTubeChannelsList,
+    YouTubeChannelsList,
 
     -- ** youtube.channels.update
-    , YouTubeChannelsUpdateResource
-    , newYouTubeChannelsUpdate
-    , YouTubeChannelsUpdate
+    YouTubeChannelsUpdateResource,
+    newYouTubeChannelsUpdate,
+    YouTubeChannelsUpdate,
 
     -- ** youtube.commentThreads.insert
-    , YouTubeCommentThreadsInsertResource
-    , newYouTubeCommentThreadsInsert
-    , YouTubeCommentThreadsInsert
+    YouTubeCommentThreadsInsertResource,
+    newYouTubeCommentThreadsInsert,
+    YouTubeCommentThreadsInsert,
 
     -- ** youtube.commentThreads.list
-    , YouTubeCommentThreadsListResource
-    , newYouTubeCommentThreadsList
-    , YouTubeCommentThreadsList
+    YouTubeCommentThreadsListResource,
+    newYouTubeCommentThreadsList,
+    YouTubeCommentThreadsList,
 
     -- ** youtube.comments.delete
-    , YouTubeCommentsDeleteResource
-    , newYouTubeCommentsDelete
-    , YouTubeCommentsDelete
+    YouTubeCommentsDeleteResource,
+    newYouTubeCommentsDelete,
+    YouTubeCommentsDelete,
 
     -- ** youtube.comments.insert
-    , YouTubeCommentsInsertResource
-    , newYouTubeCommentsInsert
-    , YouTubeCommentsInsert
+    YouTubeCommentsInsertResource,
+    newYouTubeCommentsInsert,
+    YouTubeCommentsInsert,
 
     -- ** youtube.comments.list
-    , YouTubeCommentsListResource
-    , newYouTubeCommentsList
-    , YouTubeCommentsList
+    YouTubeCommentsListResource,
+    newYouTubeCommentsList,
+    YouTubeCommentsList,
 
     -- ** youtube.comments.markAsSpam
-    , YouTubeCommentsMarkAsSpamResource
-    , newYouTubeCommentsMarkAsSpam
-    , YouTubeCommentsMarkAsSpam
+    YouTubeCommentsMarkAsSpamResource,
+    newYouTubeCommentsMarkAsSpam,
+    YouTubeCommentsMarkAsSpam,
 
     -- ** youtube.comments.setModerationStatus
-    , YouTubeCommentsSetModerationStatusResource
-    , newYouTubeCommentsSetModerationStatus
-    , YouTubeCommentsSetModerationStatus
+    YouTubeCommentsSetModerationStatusResource,
+    newYouTubeCommentsSetModerationStatus,
+    YouTubeCommentsSetModerationStatus,
 
     -- ** youtube.comments.update
-    , YouTubeCommentsUpdateResource
-    , newYouTubeCommentsUpdate
-    , YouTubeCommentsUpdate
+    YouTubeCommentsUpdateResource,
+    newYouTubeCommentsUpdate,
+    YouTubeCommentsUpdate,
 
     -- ** youtube.i18nLanguages.list
-    , YouTubeI18nLanguagesListResource
-    , newYouTubeI18nLanguagesList
-    , YouTubeI18nLanguagesList
+    YouTubeI18nLanguagesListResource,
+    newYouTubeI18nLanguagesList,
+    YouTubeI18nLanguagesList,
 
     -- ** youtube.i18nRegions.list
-    , YouTubeI18nRegionsListResource
-    , newYouTubeI18nRegionsList
-    , YouTubeI18nRegionsList
+    YouTubeI18nRegionsListResource,
+    newYouTubeI18nRegionsList,
+    YouTubeI18nRegionsList,
 
     -- ** youtube.liveBroadcasts.bind
-    , YouTubeLiveBroadcastsBindResource
-    , newYouTubeLiveBroadcastsBind
-    , YouTubeLiveBroadcastsBind
+    YouTubeLiveBroadcastsBindResource,
+    newYouTubeLiveBroadcastsBind,
+    YouTubeLiveBroadcastsBind,
 
     -- ** youtube.liveBroadcasts.delete
-    , YouTubeLiveBroadcastsDeleteResource
-    , newYouTubeLiveBroadcastsDelete
-    , YouTubeLiveBroadcastsDelete
+    YouTubeLiveBroadcastsDeleteResource,
+    newYouTubeLiveBroadcastsDelete,
+    YouTubeLiveBroadcastsDelete,
 
     -- ** youtube.liveBroadcasts.insert
-    , YouTubeLiveBroadcastsInsertResource
-    , newYouTubeLiveBroadcastsInsert
-    , YouTubeLiveBroadcastsInsert
+    YouTubeLiveBroadcastsInsertResource,
+    newYouTubeLiveBroadcastsInsert,
+    YouTubeLiveBroadcastsInsert,
 
     -- ** youtube.liveBroadcasts.list
-    , YouTubeLiveBroadcastsListResource
-    , newYouTubeLiveBroadcastsList
-    , YouTubeLiveBroadcastsList
+    YouTubeLiveBroadcastsListResource,
+    newYouTubeLiveBroadcastsList,
+    YouTubeLiveBroadcastsList,
 
     -- ** youtube.liveBroadcasts.transition
-    , YouTubeLiveBroadcastsTransitionResource
-    , newYouTubeLiveBroadcastsTransition
-    , YouTubeLiveBroadcastsTransition
+    YouTubeLiveBroadcastsTransitionResource,
+    newYouTubeLiveBroadcastsTransition,
+    YouTubeLiveBroadcastsTransition,
 
     -- ** youtube.liveBroadcasts.update
-    , YouTubeLiveBroadcastsUpdateResource
-    , newYouTubeLiveBroadcastsUpdate
-    , YouTubeLiveBroadcastsUpdate
+    YouTubeLiveBroadcastsUpdateResource,
+    newYouTubeLiveBroadcastsUpdate,
+    YouTubeLiveBroadcastsUpdate,
 
     -- ** youtube.liveChatBans.delete
-    , YouTubeLiveChatBansDeleteResource
-    , newYouTubeLiveChatBansDelete
-    , YouTubeLiveChatBansDelete
+    YouTubeLiveChatBansDeleteResource,
+    newYouTubeLiveChatBansDelete,
+    YouTubeLiveChatBansDelete,
 
     -- ** youtube.liveChatBans.insert
-    , YouTubeLiveChatBansInsertResource
-    , newYouTubeLiveChatBansInsert
-    , YouTubeLiveChatBansInsert
+    YouTubeLiveChatBansInsertResource,
+    newYouTubeLiveChatBansInsert,
+    YouTubeLiveChatBansInsert,
 
     -- ** youtube.liveChatMessages.delete
-    , YouTubeLiveChatMessagesDeleteResource
-    , newYouTubeLiveChatMessagesDelete
-    , YouTubeLiveChatMessagesDelete
+    YouTubeLiveChatMessagesDeleteResource,
+    newYouTubeLiveChatMessagesDelete,
+    YouTubeLiveChatMessagesDelete,
 
     -- ** youtube.liveChatMessages.insert
-    , YouTubeLiveChatMessagesInsertResource
-    , newYouTubeLiveChatMessagesInsert
-    , YouTubeLiveChatMessagesInsert
+    YouTubeLiveChatMessagesInsertResource,
+    newYouTubeLiveChatMessagesInsert,
+    YouTubeLiveChatMessagesInsert,
 
     -- ** youtube.liveChatMessages.list
-    , YouTubeLiveChatMessagesListResource
-    , newYouTubeLiveChatMessagesList
-    , YouTubeLiveChatMessagesList
+    YouTubeLiveChatMessagesListResource,
+    newYouTubeLiveChatMessagesList,
+    YouTubeLiveChatMessagesList,
 
     -- ** youtube.liveChatModerators.delete
-    , YouTubeLiveChatModeratorsDeleteResource
-    , newYouTubeLiveChatModeratorsDelete
-    , YouTubeLiveChatModeratorsDelete
+    YouTubeLiveChatModeratorsDeleteResource,
+    newYouTubeLiveChatModeratorsDelete,
+    YouTubeLiveChatModeratorsDelete,
 
     -- ** youtube.liveChatModerators.insert
-    , YouTubeLiveChatModeratorsInsertResource
-    , newYouTubeLiveChatModeratorsInsert
-    , YouTubeLiveChatModeratorsInsert
+    YouTubeLiveChatModeratorsInsertResource,
+    newYouTubeLiveChatModeratorsInsert,
+    YouTubeLiveChatModeratorsInsert,
 
     -- ** youtube.liveChatModerators.list
-    , YouTubeLiveChatModeratorsListResource
-    , newYouTubeLiveChatModeratorsList
-    , YouTubeLiveChatModeratorsList
+    YouTubeLiveChatModeratorsListResource,
+    newYouTubeLiveChatModeratorsList,
+    YouTubeLiveChatModeratorsList,
 
     -- ** youtube.liveStreams.delete
-    , YouTubeLiveStreamsDeleteResource
-    , newYouTubeLiveStreamsDelete
-    , YouTubeLiveStreamsDelete
+    YouTubeLiveStreamsDeleteResource,
+    newYouTubeLiveStreamsDelete,
+    YouTubeLiveStreamsDelete,
 
     -- ** youtube.liveStreams.insert
-    , YouTubeLiveStreamsInsertResource
-    , newYouTubeLiveStreamsInsert
-    , YouTubeLiveStreamsInsert
+    YouTubeLiveStreamsInsertResource,
+    newYouTubeLiveStreamsInsert,
+    YouTubeLiveStreamsInsert,
 
     -- ** youtube.liveStreams.list
-    , YouTubeLiveStreamsListResource
-    , newYouTubeLiveStreamsList
-    , YouTubeLiveStreamsList
+    YouTubeLiveStreamsListResource,
+    newYouTubeLiveStreamsList,
+    YouTubeLiveStreamsList,
 
     -- ** youtube.liveStreams.update
-    , YouTubeLiveStreamsUpdateResource
-    , newYouTubeLiveStreamsUpdate
-    , YouTubeLiveStreamsUpdate
+    YouTubeLiveStreamsUpdateResource,
+    newYouTubeLiveStreamsUpdate,
+    YouTubeLiveStreamsUpdate,
 
     -- ** youtube.members.list
-    , YouTubeMembersListResource
-    , newYouTubeMembersList
-    , YouTubeMembersList
+    YouTubeMembersListResource,
+    newYouTubeMembersList,
+    YouTubeMembersList,
 
     -- ** youtube.membershipsLevels.list
-    , YouTubeMembershipsLevelsListResource
-    , newYouTubeMembershipsLevelsList
-    , YouTubeMembershipsLevelsList
+    YouTubeMembershipsLevelsListResource,
+    newYouTubeMembershipsLevelsList,
+    YouTubeMembershipsLevelsList,
 
     -- ** youtube.playlistItems.delete
-    , YouTubePlaylistItemsDeleteResource
-    , newYouTubePlaylistItemsDelete
-    , YouTubePlaylistItemsDelete
+    YouTubePlaylistItemsDeleteResource,
+    newYouTubePlaylistItemsDelete,
+    YouTubePlaylistItemsDelete,
 
     -- ** youtube.playlistItems.insert
-    , YouTubePlaylistItemsInsertResource
-    , newYouTubePlaylistItemsInsert
-    , YouTubePlaylistItemsInsert
+    YouTubePlaylistItemsInsertResource,
+    newYouTubePlaylistItemsInsert,
+    YouTubePlaylistItemsInsert,
 
     -- ** youtube.playlistItems.list
-    , YouTubePlaylistItemsListResource
-    , newYouTubePlaylistItemsList
-    , YouTubePlaylistItemsList
+    YouTubePlaylistItemsListResource,
+    newYouTubePlaylistItemsList,
+    YouTubePlaylistItemsList,
 
     -- ** youtube.playlistItems.update
-    , YouTubePlaylistItemsUpdateResource
-    , newYouTubePlaylistItemsUpdate
-    , YouTubePlaylistItemsUpdate
+    YouTubePlaylistItemsUpdateResource,
+    newYouTubePlaylistItemsUpdate,
+    YouTubePlaylistItemsUpdate,
 
     -- ** youtube.playlists.delete
-    , YouTubePlaylistsDeleteResource
-    , newYouTubePlaylistsDelete
-    , YouTubePlaylistsDelete
+    YouTubePlaylistsDeleteResource,
+    newYouTubePlaylistsDelete,
+    YouTubePlaylistsDelete,
 
     -- ** youtube.playlists.insert
-    , YouTubePlaylistsInsertResource
-    , newYouTubePlaylistsInsert
-    , YouTubePlaylistsInsert
+    YouTubePlaylistsInsertResource,
+    newYouTubePlaylistsInsert,
+    YouTubePlaylistsInsert,
 
     -- ** youtube.playlists.list
-    , YouTubePlaylistsListResource
-    , newYouTubePlaylistsList
-    , YouTubePlaylistsList
+    YouTubePlaylistsListResource,
+    newYouTubePlaylistsList,
+    YouTubePlaylistsList,
 
     -- ** youtube.playlists.update
-    , YouTubePlaylistsUpdateResource
-    , newYouTubePlaylistsUpdate
-    , YouTubePlaylistsUpdate
+    YouTubePlaylistsUpdateResource,
+    newYouTubePlaylistsUpdate,
+    YouTubePlaylistsUpdate,
 
     -- ** youtube.search.list
-    , YouTubeSearchListResource
-    , newYouTubeSearchList
-    , YouTubeSearchList
+    YouTubeSearchListResource,
+    newYouTubeSearchList,
+    YouTubeSearchList,
 
     -- ** youtube.subscriptions.delete
-    , YouTubeSubscriptionsDeleteResource
-    , newYouTubeSubscriptionsDelete
-    , YouTubeSubscriptionsDelete
+    YouTubeSubscriptionsDeleteResource,
+    newYouTubeSubscriptionsDelete,
+    YouTubeSubscriptionsDelete,
 
     -- ** youtube.subscriptions.insert
-    , YouTubeSubscriptionsInsertResource
-    , newYouTubeSubscriptionsInsert
-    , YouTubeSubscriptionsInsert
+    YouTubeSubscriptionsInsertResource,
+    newYouTubeSubscriptionsInsert,
+    YouTubeSubscriptionsInsert,
 
     -- ** youtube.subscriptions.list
-    , YouTubeSubscriptionsListResource
-    , newYouTubeSubscriptionsList
-    , YouTubeSubscriptionsList
+    YouTubeSubscriptionsListResource,
+    newYouTubeSubscriptionsList,
+    YouTubeSubscriptionsList,
 
     -- ** youtube.superChatEvents.list
-    , YouTubeSuperChatEventsListResource
-    , newYouTubeSuperChatEventsList
-    , YouTubeSuperChatEventsList
+    YouTubeSuperChatEventsListResource,
+    newYouTubeSuperChatEventsList,
+    YouTubeSuperChatEventsList,
 
     -- ** youtube.tests.insert
-    , YouTubeTestsInsertResource
-    , newYouTubeTestsInsert
-    , YouTubeTestsInsert
+    YouTubeTestsInsertResource,
+    newYouTubeTestsInsert,
+    YouTubeTestsInsert,
 
     -- ** youtube.thirdPartyLinks.delete
-    , YouTubeThirdPartyLinksDeleteResource
-    , newYouTubeThirdPartyLinksDelete
-    , YouTubeThirdPartyLinksDelete
+    YouTubeThirdPartyLinksDeleteResource,
+    newYouTubeThirdPartyLinksDelete,
+    YouTubeThirdPartyLinksDelete,
 
     -- ** youtube.thirdPartyLinks.insert
-    , YouTubeThirdPartyLinksInsertResource
-    , newYouTubeThirdPartyLinksInsert
-    , YouTubeThirdPartyLinksInsert
+    YouTubeThirdPartyLinksInsertResource,
+    newYouTubeThirdPartyLinksInsert,
+    YouTubeThirdPartyLinksInsert,
 
     -- ** youtube.thirdPartyLinks.list
-    , YouTubeThirdPartyLinksListResource
-    , newYouTubeThirdPartyLinksList
-    , YouTubeThirdPartyLinksList
+    YouTubeThirdPartyLinksListResource,
+    newYouTubeThirdPartyLinksList,
+    YouTubeThirdPartyLinksList,
 
     -- ** youtube.thirdPartyLinks.update
-    , YouTubeThirdPartyLinksUpdateResource
-    , newYouTubeThirdPartyLinksUpdate
-    , YouTubeThirdPartyLinksUpdate
+    YouTubeThirdPartyLinksUpdateResource,
+    newYouTubeThirdPartyLinksUpdate,
+    YouTubeThirdPartyLinksUpdate,
 
     -- ** youtube.thumbnails.set
-    , YouTubeThumbnailsSetResource
-    , newYouTubeThumbnailsSet
-    , YouTubeThumbnailsSet
+    YouTubeThumbnailsSetResource,
+    newYouTubeThumbnailsSet,
+    YouTubeThumbnailsSet,
 
     -- ** youtube.videoAbuseReportReasons.list
-    , YouTubeVideoAbuseReportReasonsListResource
-    , newYouTubeVideoAbuseReportReasonsList
-    , YouTubeVideoAbuseReportReasonsList
+    YouTubeVideoAbuseReportReasonsListResource,
+    newYouTubeVideoAbuseReportReasonsList,
+    YouTubeVideoAbuseReportReasonsList,
 
     -- ** youtube.videoCategories.list
-    , YouTubeVideoCategoriesListResource
-    , newYouTubeVideoCategoriesList
-    , YouTubeVideoCategoriesList
+    YouTubeVideoCategoriesListResource,
+    newYouTubeVideoCategoriesList,
+    YouTubeVideoCategoriesList,
 
     -- ** youtube.videos.delete
-    , YouTubeVideosDeleteResource
-    , newYouTubeVideosDelete
-    , YouTubeVideosDelete
+    YouTubeVideosDeleteResource,
+    newYouTubeVideosDelete,
+    YouTubeVideosDelete,
 
     -- ** youtube.videos.getRating
-    , YouTubeVideosGetRatingResource
-    , newYouTubeVideosGetRating
-    , YouTubeVideosGetRating
+    YouTubeVideosGetRatingResource,
+    newYouTubeVideosGetRating,
+    YouTubeVideosGetRating,
 
     -- ** youtube.videos.insert
-    , YouTubeVideosInsertResource
-    , newYouTubeVideosInsert
-    , YouTubeVideosInsert
+    YouTubeVideosInsertResource,
+    newYouTubeVideosInsert,
+    YouTubeVideosInsert,
 
     -- ** youtube.videos.list
-    , YouTubeVideosListResource
-    , newYouTubeVideosList
-    , YouTubeVideosList
+    YouTubeVideosListResource,
+    newYouTubeVideosList,
+    YouTubeVideosList,
 
     -- ** youtube.videos.rate
-    , YouTubeVideosRateResource
-    , newYouTubeVideosRate
-    , YouTubeVideosRate
+    YouTubeVideosRateResource,
+    newYouTubeVideosRate,
+    YouTubeVideosRate,
 
     -- ** youtube.videos.reportAbuse
-    , YouTubeVideosReportAbuseResource
-    , newYouTubeVideosReportAbuse
-    , YouTubeVideosReportAbuse
+    YouTubeVideosReportAbuseResource,
+    newYouTubeVideosReportAbuse,
+    YouTubeVideosReportAbuse,
 
     -- ** youtube.videos.update
-    , YouTubeVideosUpdateResource
-    , newYouTubeVideosUpdate
-    , YouTubeVideosUpdate
+    YouTubeVideosUpdateResource,
+    newYouTubeVideosUpdate,
+    YouTubeVideosUpdate,
 
     -- ** youtube.watermarks.set
-    , YouTubeWatermarksSetResource
-    , newYouTubeWatermarksSet
-    , YouTubeWatermarksSet
+    YouTubeWatermarksSetResource,
+    newYouTubeWatermarksSet,
+    YouTubeWatermarksSet,
 
     -- ** youtube.watermarks.unset
-    , YouTubeWatermarksUnsetResource
-    , newYouTubeWatermarksUnset
-    , YouTubeWatermarksUnset
+    YouTubeWatermarksUnsetResource,
+    newYouTubeWatermarksUnset,
+    YouTubeWatermarksUnset,
 
     -- ** youtube.youtube.v3.updateCommentThreads
-    , YouTubeYoutubeV3UpdateCommentThreadsResource
-    , newYouTubeYoutubeV3UpdateCommentThreads
-    , YouTubeYoutubeV3UpdateCommentThreads
+    YouTubeYoutubeV3UpdateCommentThreadsResource,
+    newYouTubeYoutubeV3UpdateCommentThreads,
+    YouTubeYoutubeV3UpdateCommentThreads,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AbuseReport
-    , AbuseReport (..)
-    , newAbuseReport
+    AbuseReport (..),
+    newAbuseReport,
 
     -- ** AbuseType
-    , AbuseType (..)
-    , newAbuseType
+    AbuseType (..),
+    newAbuseType,
 
     -- ** AccessPolicy
-    , AccessPolicy (..)
-    , newAccessPolicy
+    AccessPolicy (..),
+    newAccessPolicy,
 
     -- ** Activity
-    , Activity (..)
-    , newActivity
+    Activity (..),
+    newActivity,
 
     -- ** ActivityContentDetails
-    , ActivityContentDetails (..)
-    , newActivityContentDetails
+    ActivityContentDetails (..),
+    newActivityContentDetails,
 
     -- ** ActivityContentDetailsBulletin
-    , ActivityContentDetailsBulletin (..)
-    , newActivityContentDetailsBulletin
+    ActivityContentDetailsBulletin (..),
+    newActivityContentDetailsBulletin,
 
     -- ** ActivityContentDetailsChannelItem
-    , ActivityContentDetailsChannelItem (..)
-    , newActivityContentDetailsChannelItem
+    ActivityContentDetailsChannelItem (..),
+    newActivityContentDetailsChannelItem,
 
     -- ** ActivityContentDetailsComment
-    , ActivityContentDetailsComment (..)
-    , newActivityContentDetailsComment
+    ActivityContentDetailsComment (..),
+    newActivityContentDetailsComment,
 
     -- ** ActivityContentDetailsFavorite
-    , ActivityContentDetailsFavorite (..)
-    , newActivityContentDetailsFavorite
+    ActivityContentDetailsFavorite (..),
+    newActivityContentDetailsFavorite,
 
     -- ** ActivityContentDetailsLike
-    , ActivityContentDetailsLike (..)
-    , newActivityContentDetailsLike
+    ActivityContentDetailsLike (..),
+    newActivityContentDetailsLike,
 
     -- ** ActivityContentDetailsPlaylistItem
-    , ActivityContentDetailsPlaylistItem (..)
-    , newActivityContentDetailsPlaylistItem
+    ActivityContentDetailsPlaylistItem (..),
+    newActivityContentDetailsPlaylistItem,
 
     -- ** ActivityContentDetailsPromotedItem
-    , ActivityContentDetailsPromotedItem (..)
-    , newActivityContentDetailsPromotedItem
+    ActivityContentDetailsPromotedItem (..),
+    newActivityContentDetailsPromotedItem,
 
     -- ** ActivityContentDetailsPromotedItem_CtaType
-    , ActivityContentDetailsPromotedItem_CtaType (..)
+    ActivityContentDetailsPromotedItem_CtaType (..),
 
     -- ** ActivityContentDetailsRecommendation
-    , ActivityContentDetailsRecommendation (..)
-    , newActivityContentDetailsRecommendation
+    ActivityContentDetailsRecommendation (..),
+    newActivityContentDetailsRecommendation,
 
     -- ** ActivityContentDetailsRecommendation_Reason
-    , ActivityContentDetailsRecommendation_Reason (..)
+    ActivityContentDetailsRecommendation_Reason (..),
 
     -- ** ActivityContentDetailsSocial
-    , ActivityContentDetailsSocial (..)
-    , newActivityContentDetailsSocial
+    ActivityContentDetailsSocial (..),
+    newActivityContentDetailsSocial,
 
     -- ** ActivityContentDetailsSocial_Type
-    , ActivityContentDetailsSocial_Type (..)
+    ActivityContentDetailsSocial_Type (..),
 
     -- ** ActivityContentDetailsSubscription
-    , ActivityContentDetailsSubscription (..)
-    , newActivityContentDetailsSubscription
+    ActivityContentDetailsSubscription (..),
+    newActivityContentDetailsSubscription,
 
     -- ** ActivityContentDetailsUpload
-    , ActivityContentDetailsUpload (..)
-    , newActivityContentDetailsUpload
+    ActivityContentDetailsUpload (..),
+    newActivityContentDetailsUpload,
 
     -- ** ActivityListResponse
-    , ActivityListResponse (..)
-    , newActivityListResponse
+    ActivityListResponse (..),
+    newActivityListResponse,
 
     -- ** ActivitySnippet
-    , ActivitySnippet (..)
-    , newActivitySnippet
+    ActivitySnippet (..),
+    newActivitySnippet,
 
     -- ** ActivitySnippet_Type
-    , ActivitySnippet_Type (..)
+    ActivitySnippet_Type (..),
 
     -- ** Caption
-    , Caption (..)
-    , newCaption
+    Caption (..),
+    newCaption,
 
     -- ** CaptionListResponse
-    , CaptionListResponse (..)
-    , newCaptionListResponse
+    CaptionListResponse (..),
+    newCaptionListResponse,
 
     -- ** CaptionSnippet
-    , CaptionSnippet (..)
-    , newCaptionSnippet
+    CaptionSnippet (..),
+    newCaptionSnippet,
 
     -- ** CaptionSnippet_AudioTrackType
-    , CaptionSnippet_AudioTrackType (..)
+    CaptionSnippet_AudioTrackType (..),
 
     -- ** CaptionSnippet_FailureReason
-    , CaptionSnippet_FailureReason (..)
+    CaptionSnippet_FailureReason (..),
 
     -- ** CaptionSnippet_Status
-    , CaptionSnippet_Status (..)
+    CaptionSnippet_Status (..),
 
     -- ** CaptionSnippet_TrackKind
-    , CaptionSnippet_TrackKind (..)
+    CaptionSnippet_TrackKind (..),
 
     -- ** CdnSettings
-    , CdnSettings (..)
-    , newCdnSettings
+    CdnSettings (..),
+    newCdnSettings,
 
     -- ** CdnSettings_FrameRate
-    , CdnSettings_FrameRate (..)
+    CdnSettings_FrameRate (..),
 
     -- ** CdnSettings_IngestionType
-    , CdnSettings_IngestionType (..)
+    CdnSettings_IngestionType (..),
 
     -- ** CdnSettings_Resolution
-    , CdnSettings_Resolution (..)
+    CdnSettings_Resolution (..),
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Channel_Localizations
-    , Channel_Localizations (..)
-    , newChannel_Localizations
+    Channel_Localizations (..),
+    newChannel_Localizations,
 
     -- ** ChannelAuditDetails
-    , ChannelAuditDetails (..)
-    , newChannelAuditDetails
+    ChannelAuditDetails (..),
+    newChannelAuditDetails,
 
     -- ** ChannelBannerResource
-    , ChannelBannerResource (..)
-    , newChannelBannerResource
+    ChannelBannerResource (..),
+    newChannelBannerResource,
 
     -- ** ChannelBrandingSettings
-    , ChannelBrandingSettings (..)
-    , newChannelBrandingSettings
+    ChannelBrandingSettings (..),
+    newChannelBrandingSettings,
 
     -- ** ChannelContentDetails
-    , ChannelContentDetails (..)
-    , newChannelContentDetails
+    ChannelContentDetails (..),
+    newChannelContentDetails,
 
     -- ** ChannelContentDetails_RelatedPlaylists
-    , ChannelContentDetails_RelatedPlaylists (..)
-    , newChannelContentDetails_RelatedPlaylists
+    ChannelContentDetails_RelatedPlaylists (..),
+    newChannelContentDetails_RelatedPlaylists,
 
     -- ** ChannelContentOwnerDetails
-    , ChannelContentOwnerDetails (..)
-    , newChannelContentOwnerDetails
+    ChannelContentOwnerDetails (..),
+    newChannelContentOwnerDetails,
 
     -- ** ChannelConversionPing
-    , ChannelConversionPing (..)
-    , newChannelConversionPing
+    ChannelConversionPing (..),
+    newChannelConversionPing,
 
     -- ** ChannelConversionPing_Context
-    , ChannelConversionPing_Context (..)
+    ChannelConversionPing_Context (..),
 
     -- ** ChannelConversionPings
-    , ChannelConversionPings (..)
-    , newChannelConversionPings
+    ChannelConversionPings (..),
+    newChannelConversionPings,
 
     -- ** ChannelListResponse
-    , ChannelListResponse (..)
-    , newChannelListResponse
+    ChannelListResponse (..),
+    newChannelListResponse,
 
     -- ** ChannelLocalization
-    , ChannelLocalization (..)
-    , newChannelLocalization
+    ChannelLocalization (..),
+    newChannelLocalization,
 
     -- ** ChannelProfileDetails
-    , ChannelProfileDetails (..)
-    , newChannelProfileDetails
+    ChannelProfileDetails (..),
+    newChannelProfileDetails,
 
     -- ** ChannelSection
-    , ChannelSection (..)
-    , newChannelSection
+    ChannelSection (..),
+    newChannelSection,
 
     -- ** ChannelSection_Localizations
-    , ChannelSection_Localizations (..)
-    , newChannelSection_Localizations
+    ChannelSection_Localizations (..),
+    newChannelSection_Localizations,
 
     -- ** ChannelSectionContentDetails
-    , ChannelSectionContentDetails (..)
-    , newChannelSectionContentDetails
+    ChannelSectionContentDetails (..),
+    newChannelSectionContentDetails,
 
     -- ** ChannelSectionListResponse
-    , ChannelSectionListResponse (..)
-    , newChannelSectionListResponse
+    ChannelSectionListResponse (..),
+    newChannelSectionListResponse,
 
     -- ** ChannelSectionLocalization
-    , ChannelSectionLocalization (..)
-    , newChannelSectionLocalization
+    ChannelSectionLocalization (..),
+    newChannelSectionLocalization,
 
     -- ** ChannelSectionSnippet
-    , ChannelSectionSnippet (..)
-    , newChannelSectionSnippet
+    ChannelSectionSnippet (..),
+    newChannelSectionSnippet,
 
     -- ** ChannelSectionSnippet_Style
-    , ChannelSectionSnippet_Style (..)
+    ChannelSectionSnippet_Style (..),
 
     -- ** ChannelSectionSnippet_Type
-    , ChannelSectionSnippet_Type (..)
+    ChannelSectionSnippet_Type (..),
 
     -- ** ChannelSectionTargeting
-    , ChannelSectionTargeting (..)
-    , newChannelSectionTargeting
+    ChannelSectionTargeting (..),
+    newChannelSectionTargeting,
 
     -- ** ChannelSettings
-    , ChannelSettings (..)
-    , newChannelSettings
+    ChannelSettings (..),
+    newChannelSettings,
 
     -- ** ChannelSnippet
-    , ChannelSnippet (..)
-    , newChannelSnippet
+    ChannelSnippet (..),
+    newChannelSnippet,
 
     -- ** ChannelStatistics
-    , ChannelStatistics (..)
-    , newChannelStatistics
+    ChannelStatistics (..),
+    newChannelStatistics,
 
     -- ** ChannelStatus
-    , ChannelStatus (..)
-    , newChannelStatus
+    ChannelStatus (..),
+    newChannelStatus,
 
     -- ** ChannelStatus_LongUploadsStatus
-    , ChannelStatus_LongUploadsStatus (..)
+    ChannelStatus_LongUploadsStatus (..),
 
     -- ** ChannelStatus_PrivacyStatus
-    , ChannelStatus_PrivacyStatus (..)
+    ChannelStatus_PrivacyStatus (..),
 
     -- ** ChannelToStoreLinkDetails
-    , ChannelToStoreLinkDetails (..)
-    , newChannelToStoreLinkDetails
+    ChannelToStoreLinkDetails (..),
+    newChannelToStoreLinkDetails,
 
     -- ** ChannelTopicDetails
-    , ChannelTopicDetails (..)
-    , newChannelTopicDetails
+    ChannelTopicDetails (..),
+    newChannelTopicDetails,
 
     -- ** Comment
-    , Comment (..)
-    , newComment
+    Comment (..),
+    newComment,
 
     -- ** CommentListResponse
-    , CommentListResponse (..)
-    , newCommentListResponse
+    CommentListResponse (..),
+    newCommentListResponse,
 
     -- ** CommentSnippet
-    , CommentSnippet (..)
-    , newCommentSnippet
+    CommentSnippet (..),
+    newCommentSnippet,
 
     -- ** CommentSnippet_ModerationStatus
-    , CommentSnippet_ModerationStatus (..)
+    CommentSnippet_ModerationStatus (..),
 
     -- ** CommentSnippet_ViewerRating
-    , CommentSnippet_ViewerRating (..)
+    CommentSnippet_ViewerRating (..),
 
     -- ** CommentSnippetAuthorChannelId
-    , CommentSnippetAuthorChannelId (..)
-    , newCommentSnippetAuthorChannelId
+    CommentSnippetAuthorChannelId (..),
+    newCommentSnippetAuthorChannelId,
 
     -- ** CommentThread
-    , CommentThread (..)
-    , newCommentThread
+    CommentThread (..),
+    newCommentThread,
 
     -- ** CommentThreadListResponse
-    , CommentThreadListResponse (..)
-    , newCommentThreadListResponse
+    CommentThreadListResponse (..),
+    newCommentThreadListResponse,
 
     -- ** CommentThreadReplies
-    , CommentThreadReplies (..)
-    , newCommentThreadReplies
+    CommentThreadReplies (..),
+    newCommentThreadReplies,
 
     -- ** CommentThreadSnippet
-    , CommentThreadSnippet (..)
-    , newCommentThreadSnippet
+    CommentThreadSnippet (..),
+    newCommentThreadSnippet,
 
     -- ** ContentRating
-    , ContentRating (..)
-    , newContentRating
+    ContentRating (..),
+    newContentRating,
 
     -- ** ContentRating_AcbRating
-    , ContentRating_AcbRating (..)
+    ContentRating_AcbRating (..),
 
     -- ** ContentRating_AgcomRating
-    , ContentRating_AgcomRating (..)
+    ContentRating_AgcomRating (..),
 
     -- ** ContentRating_AnatelRating
-    , ContentRating_AnatelRating (..)
+    ContentRating_AnatelRating (..),
 
     -- ** ContentRating_BbfcRating
-    , ContentRating_BbfcRating (..)
+    ContentRating_BbfcRating (..),
 
     -- ** ContentRating_BfvcRating
-    , ContentRating_BfvcRating (..)
+    ContentRating_BfvcRating (..),
 
     -- ** ContentRating_BmukkRating
-    , ContentRating_BmukkRating (..)
+    ContentRating_BmukkRating (..),
 
     -- ** ContentRating_CatvRating
-    , ContentRating_CatvRating (..)
+    ContentRating_CatvRating (..),
 
     -- ** ContentRating_CatvfrRating
-    , ContentRating_CatvfrRating (..)
+    ContentRating_CatvfrRating (..),
 
     -- ** ContentRating_CbfcRating
-    , ContentRating_CbfcRating (..)
+    ContentRating_CbfcRating (..),
 
     -- ** ContentRating_CccRating
-    , ContentRating_CccRating (..)
+    ContentRating_CccRating (..),
 
     -- ** ContentRating_CceRating
-    , ContentRating_CceRating (..)
+    ContentRating_CceRating (..),
 
     -- ** ContentRating_ChfilmRating
-    , ContentRating_ChfilmRating (..)
+    ContentRating_ChfilmRating (..),
 
     -- ** ContentRating_ChvrsRating
-    , ContentRating_ChvrsRating (..)
+    ContentRating_ChvrsRating (..),
 
     -- ** ContentRating_CicfRating
-    , ContentRating_CicfRating (..)
+    ContentRating_CicfRating (..),
 
     -- ** ContentRating_CnaRating
-    , ContentRating_CnaRating (..)
+    ContentRating_CnaRating (..),
 
     -- ** ContentRating_CncRating
-    , ContentRating_CncRating (..)
+    ContentRating_CncRating (..),
 
     -- ** ContentRating_CsaRating
-    , ContentRating_CsaRating (..)
+    ContentRating_CsaRating (..),
 
     -- ** ContentRating_CscfRating
-    , ContentRating_CscfRating (..)
+    ContentRating_CscfRating (..),
 
     -- ** ContentRating_CzfilmRating
-    , ContentRating_CzfilmRating (..)
+    ContentRating_CzfilmRating (..),
 
     -- ** ContentRating_DjctqRating
-    , ContentRating_DjctqRating (..)
+    ContentRating_DjctqRating (..),
 
     -- ** ContentRating_DjctqRatingReasonsItem
-    , ContentRating_DjctqRatingReasonsItem (..)
+    ContentRating_DjctqRatingReasonsItem (..),
 
     -- ** ContentRating_EcbmctRating
-    , ContentRating_EcbmctRating (..)
+    ContentRating_EcbmctRating (..),
 
     -- ** ContentRating_EefilmRating
-    , ContentRating_EefilmRating (..)
+    ContentRating_EefilmRating (..),
 
     -- ** ContentRating_EgfilmRating
-    , ContentRating_EgfilmRating (..)
+    ContentRating_EgfilmRating (..),
 
     -- ** ContentRating_EirinRating
-    , ContentRating_EirinRating (..)
+    ContentRating_EirinRating (..),
 
     -- ** ContentRating_FcbmRating
-    , ContentRating_FcbmRating (..)
+    ContentRating_FcbmRating (..),
 
     -- ** ContentRating_FcoRating
-    , ContentRating_FcoRating (..)
+    ContentRating_FcoRating (..),
 
     -- ** ContentRating_FmocRating
-    , ContentRating_FmocRating (..)
+    ContentRating_FmocRating (..),
 
     -- ** ContentRating_FpbRating
-    , ContentRating_FpbRating (..)
+    ContentRating_FpbRating (..),
 
     -- ** ContentRating_FpbRatingReasonsItem
-    , ContentRating_FpbRatingReasonsItem (..)
+    ContentRating_FpbRatingReasonsItem (..),
 
     -- ** ContentRating_FskRating
-    , ContentRating_FskRating (..)
+    ContentRating_FskRating (..),
 
     -- ** ContentRating_GrfilmRating
-    , ContentRating_GrfilmRating (..)
+    ContentRating_GrfilmRating (..),
 
     -- ** ContentRating_IcaaRating
-    , ContentRating_IcaaRating (..)
+    ContentRating_IcaaRating (..),
 
     -- ** ContentRating_IfcoRating
-    , ContentRating_IfcoRating (..)
+    ContentRating_IfcoRating (..),
 
     -- ** ContentRating_IlfilmRating
-    , ContentRating_IlfilmRating (..)
+    ContentRating_IlfilmRating (..),
 
     -- ** ContentRating_IncaaRating
-    , ContentRating_IncaaRating (..)
+    ContentRating_IncaaRating (..),
 
     -- ** ContentRating_KfcbRating
-    , ContentRating_KfcbRating (..)
+    ContentRating_KfcbRating (..),
 
     -- ** ContentRating_KijkwijzerRating
-    , ContentRating_KijkwijzerRating (..)
+    ContentRating_KijkwijzerRating (..),
 
     -- ** ContentRating_KmrbRating
-    , ContentRating_KmrbRating (..)
+    ContentRating_KmrbRating (..),
 
     -- ** ContentRating_LsfRating
-    , ContentRating_LsfRating (..)
+    ContentRating_LsfRating (..),
 
     -- ** ContentRating_MccaaRating
-    , ContentRating_MccaaRating (..)
+    ContentRating_MccaaRating (..),
 
     -- ** ContentRating_MccypRating
-    , ContentRating_MccypRating (..)
+    ContentRating_MccypRating (..),
 
     -- ** ContentRating_McstRating
-    , ContentRating_McstRating (..)
+    ContentRating_McstRating (..),
 
     -- ** ContentRating_MdaRating
-    , ContentRating_MdaRating (..)
+    ContentRating_MdaRating (..),
 
     -- ** ContentRating_MedietilsynetRating
-    , ContentRating_MedietilsynetRating (..)
+    ContentRating_MedietilsynetRating (..),
 
     -- ** ContentRating_MekuRating
-    , ContentRating_MekuRating (..)
+    ContentRating_MekuRating (..),
 
     -- ** ContentRating_MenaMpaaRating
-    , ContentRating_MenaMpaaRating (..)
+    ContentRating_MenaMpaaRating (..),
 
     -- ** ContentRating_MibacRating
-    , ContentRating_MibacRating (..)
+    ContentRating_MibacRating (..),
 
     -- ** ContentRating_MocRating
-    , ContentRating_MocRating (..)
+    ContentRating_MocRating (..),
 
     -- ** ContentRating_MoctwRating
-    , ContentRating_MoctwRating (..)
+    ContentRating_MoctwRating (..),
 
     -- ** ContentRating_MpaaRating
-    , ContentRating_MpaaRating (..)
+    ContentRating_MpaaRating (..),
 
     -- ** ContentRating_MpaatRating
-    , ContentRating_MpaatRating (..)
+    ContentRating_MpaatRating (..),
 
     -- ** ContentRating_MtrcbRating
-    , ContentRating_MtrcbRating (..)
+    ContentRating_MtrcbRating (..),
 
     -- ** ContentRating_NbcRating
-    , ContentRating_NbcRating (..)
+    ContentRating_NbcRating (..),
 
     -- ** ContentRating_NbcplRating
-    , ContentRating_NbcplRating (..)
+    ContentRating_NbcplRating (..),
 
     -- ** ContentRating_NfrcRating
-    , ContentRating_NfrcRating (..)
+    ContentRating_NfrcRating (..),
 
     -- ** ContentRating_NfvcbRating
-    , ContentRating_NfvcbRating (..)
+    ContentRating_NfvcbRating (..),
 
     -- ** ContentRating_NkclvRating
-    , ContentRating_NkclvRating (..)
+    ContentRating_NkclvRating (..),
 
     -- ** ContentRating_NmcRating
-    , ContentRating_NmcRating (..)
+    ContentRating_NmcRating (..),
 
     -- ** ContentRating_OflcRating
-    , ContentRating_OflcRating (..)
+    ContentRating_OflcRating (..),
 
     -- ** ContentRating_PefilmRating
-    , ContentRating_PefilmRating (..)
+    ContentRating_PefilmRating (..),
 
     -- ** ContentRating_RcnofRating
-    , ContentRating_RcnofRating (..)
+    ContentRating_RcnofRating (..),
 
     -- ** ContentRating_ResorteviolenciaRating
-    , ContentRating_ResorteviolenciaRating (..)
+    ContentRating_ResorteviolenciaRating (..),
 
     -- ** ContentRating_RtcRating
-    , ContentRating_RtcRating (..)
+    ContentRating_RtcRating (..),
 
     -- ** ContentRating_RteRating
-    , ContentRating_RteRating (..)
+    ContentRating_RteRating (..),
 
     -- ** ContentRating_RussiaRating
-    , ContentRating_RussiaRating (..)
+    ContentRating_RussiaRating (..),
 
     -- ** ContentRating_SkfilmRating
-    , ContentRating_SkfilmRating (..)
+    ContentRating_SkfilmRating (..),
 
     -- ** ContentRating_SmaisRating
-    , ContentRating_SmaisRating (..)
+    ContentRating_SmaisRating (..),
 
     -- ** ContentRating_SmsaRating
-    , ContentRating_SmsaRating (..)
+    ContentRating_SmsaRating (..),
 
     -- ** ContentRating_TvpgRating
-    , ContentRating_TvpgRating (..)
+    ContentRating_TvpgRating (..),
 
     -- ** ContentRating_YtRating
-    , ContentRating_YtRating (..)
+    ContentRating_YtRating (..),
 
     -- ** Entity
-    , Entity (..)
-    , newEntity
+    Entity (..),
+    newEntity,
 
     -- ** GeoPoint
-    , GeoPoint (..)
-    , newGeoPoint
+    GeoPoint (..),
+    newGeoPoint,
 
     -- ** I18nLanguage
-    , I18nLanguage (..)
-    , newI18nLanguage
+    I18nLanguage (..),
+    newI18nLanguage,
 
     -- ** I18nLanguageListResponse
-    , I18nLanguageListResponse (..)
-    , newI18nLanguageListResponse
+    I18nLanguageListResponse (..),
+    newI18nLanguageListResponse,
 
     -- ** I18nLanguageSnippet
-    , I18nLanguageSnippet (..)
-    , newI18nLanguageSnippet
+    I18nLanguageSnippet (..),
+    newI18nLanguageSnippet,
 
     -- ** I18nRegion
-    , I18nRegion (..)
-    , newI18nRegion
+    I18nRegion (..),
+    newI18nRegion,
 
     -- ** I18nRegionListResponse
-    , I18nRegionListResponse (..)
-    , newI18nRegionListResponse
+    I18nRegionListResponse (..),
+    newI18nRegionListResponse,
 
     -- ** I18nRegionSnippet
-    , I18nRegionSnippet (..)
-    , newI18nRegionSnippet
+    I18nRegionSnippet (..),
+    newI18nRegionSnippet,
 
     -- ** ImageSettings
-    , ImageSettings (..)
-    , newImageSettings
+    ImageSettings (..),
+    newImageSettings,
 
     -- ** IngestionInfo
-    , IngestionInfo (..)
-    , newIngestionInfo
+    IngestionInfo (..),
+    newIngestionInfo,
 
     -- ** InvideoBranding
-    , InvideoBranding (..)
-    , newInvideoBranding
+    InvideoBranding (..),
+    newInvideoBranding,
 
     -- ** InvideoPosition
-    , InvideoPosition (..)
-    , newInvideoPosition
+    InvideoPosition (..),
+    newInvideoPosition,
 
     -- ** InvideoPosition_CornerPosition
-    , InvideoPosition_CornerPosition (..)
+    InvideoPosition_CornerPosition (..),
 
     -- ** InvideoPosition_Type
-    , InvideoPosition_Type (..)
+    InvideoPosition_Type (..),
 
     -- ** InvideoTiming
-    , InvideoTiming (..)
-    , newInvideoTiming
+    InvideoTiming (..),
+    newInvideoTiming,
 
     -- ** InvideoTiming_Type
-    , InvideoTiming_Type (..)
+    InvideoTiming_Type (..),
 
     -- ** LanguageTag
-    , LanguageTag (..)
-    , newLanguageTag
+    LanguageTag (..),
+    newLanguageTag,
 
     -- ** LevelDetails
-    , LevelDetails (..)
-    , newLevelDetails
+    LevelDetails (..),
+    newLevelDetails,
 
     -- ** LiveBroadcast
-    , LiveBroadcast (..)
-    , newLiveBroadcast
+    LiveBroadcast (..),
+    newLiveBroadcast,
 
     -- ** LiveBroadcastContentDetails
-    , LiveBroadcastContentDetails (..)
-    , newLiveBroadcastContentDetails
+    LiveBroadcastContentDetails (..),
+    newLiveBroadcastContentDetails,
 
     -- ** LiveBroadcastContentDetails_ClosedCaptionsType
-    , LiveBroadcastContentDetails_ClosedCaptionsType (..)
+    LiveBroadcastContentDetails_ClosedCaptionsType (..),
 
     -- ** LiveBroadcastContentDetails_LatencyPreference
-    , LiveBroadcastContentDetails_LatencyPreference (..)
+    LiveBroadcastContentDetails_LatencyPreference (..),
 
     -- ** LiveBroadcastContentDetails_Projection
-    , LiveBroadcastContentDetails_Projection (..)
+    LiveBroadcastContentDetails_Projection (..),
 
     -- ** LiveBroadcastContentDetails_StereoLayout
-    , LiveBroadcastContentDetails_StereoLayout (..)
+    LiveBroadcastContentDetails_StereoLayout (..),
 
     -- ** LiveBroadcastListResponse
-    , LiveBroadcastListResponse (..)
-    , newLiveBroadcastListResponse
+    LiveBroadcastListResponse (..),
+    newLiveBroadcastListResponse,
 
     -- ** LiveBroadcastSnippet
-    , LiveBroadcastSnippet (..)
-    , newLiveBroadcastSnippet
+    LiveBroadcastSnippet (..),
+    newLiveBroadcastSnippet,
 
     -- ** LiveBroadcastStatistics
-    , LiveBroadcastStatistics (..)
-    , newLiveBroadcastStatistics
+    LiveBroadcastStatistics (..),
+    newLiveBroadcastStatistics,
 
     -- ** LiveBroadcastStatus
-    , LiveBroadcastStatus (..)
-    , newLiveBroadcastStatus
+    LiveBroadcastStatus (..),
+    newLiveBroadcastStatus,
 
     -- ** LiveBroadcastStatus_LifeCycleStatus
-    , LiveBroadcastStatus_LifeCycleStatus (..)
+    LiveBroadcastStatus_LifeCycleStatus (..),
 
     -- ** LiveBroadcastStatus_LiveBroadcastPriority
-    , LiveBroadcastStatus_LiveBroadcastPriority (..)
+    LiveBroadcastStatus_LiveBroadcastPriority (..),
 
     -- ** LiveBroadcastStatus_PrivacyStatus
-    , LiveBroadcastStatus_PrivacyStatus (..)
+    LiveBroadcastStatus_PrivacyStatus (..),
 
     -- ** LiveBroadcastStatus_RecordingStatus
-    , LiveBroadcastStatus_RecordingStatus (..)
+    LiveBroadcastStatus_RecordingStatus (..),
 
     -- ** LiveChatBan
-    , LiveChatBan (..)
-    , newLiveChatBan
+    LiveChatBan (..),
+    newLiveChatBan,
 
     -- ** LiveChatBanSnippet
-    , LiveChatBanSnippet (..)
-    , newLiveChatBanSnippet
+    LiveChatBanSnippet (..),
+    newLiveChatBanSnippet,
 
     -- ** LiveChatBanSnippet_Type
-    , LiveChatBanSnippet_Type (..)
+    LiveChatBanSnippet_Type (..),
 
     -- ** LiveChatFanFundingEventDetails
-    , LiveChatFanFundingEventDetails (..)
-    , newLiveChatFanFundingEventDetails
+    LiveChatFanFundingEventDetails (..),
+    newLiveChatFanFundingEventDetails,
 
     -- ** LiveChatGiftMembershipReceivedDetails
-    , LiveChatGiftMembershipReceivedDetails (..)
-    , newLiveChatGiftMembershipReceivedDetails
+    LiveChatGiftMembershipReceivedDetails (..),
+    newLiveChatGiftMembershipReceivedDetails,
 
     -- ** LiveChatMemberMilestoneChatDetails
-    , LiveChatMemberMilestoneChatDetails (..)
-    , newLiveChatMemberMilestoneChatDetails
+    LiveChatMemberMilestoneChatDetails (..),
+    newLiveChatMemberMilestoneChatDetails,
 
     -- ** LiveChatMembershipGiftingDetails
-    , LiveChatMembershipGiftingDetails (..)
-    , newLiveChatMembershipGiftingDetails
+    LiveChatMembershipGiftingDetails (..),
+    newLiveChatMembershipGiftingDetails,
 
     -- ** LiveChatMessage
-    , LiveChatMessage (..)
-    , newLiveChatMessage
+    LiveChatMessage (..),
+    newLiveChatMessage,
 
     -- ** LiveChatMessageAuthorDetails
-    , LiveChatMessageAuthorDetails (..)
-    , newLiveChatMessageAuthorDetails
+    LiveChatMessageAuthorDetails (..),
+    newLiveChatMessageAuthorDetails,
 
     -- ** LiveChatMessageDeletedDetails
-    , LiveChatMessageDeletedDetails (..)
-    , newLiveChatMessageDeletedDetails
+    LiveChatMessageDeletedDetails (..),
+    newLiveChatMessageDeletedDetails,
 
     -- ** LiveChatMessageListResponse
-    , LiveChatMessageListResponse (..)
-    , newLiveChatMessageListResponse
+    LiveChatMessageListResponse (..),
+    newLiveChatMessageListResponse,
 
     -- ** LiveChatMessageRetractedDetails
-    , LiveChatMessageRetractedDetails (..)
-    , newLiveChatMessageRetractedDetails
+    LiveChatMessageRetractedDetails (..),
+    newLiveChatMessageRetractedDetails,
 
     -- ** LiveChatMessageSnippet
-    , LiveChatMessageSnippet (..)
-    , newLiveChatMessageSnippet
+    LiveChatMessageSnippet (..),
+    newLiveChatMessageSnippet,
 
     -- ** LiveChatMessageSnippet_Type
-    , LiveChatMessageSnippet_Type (..)
+    LiveChatMessageSnippet_Type (..),
 
     -- ** LiveChatModerator
-    , LiveChatModerator (..)
-    , newLiveChatModerator
+    LiveChatModerator (..),
+    newLiveChatModerator,
 
     -- ** LiveChatModeratorListResponse
-    , LiveChatModeratorListResponse (..)
-    , newLiveChatModeratorListResponse
+    LiveChatModeratorListResponse (..),
+    newLiveChatModeratorListResponse,
 
     -- ** LiveChatModeratorSnippet
-    , LiveChatModeratorSnippet (..)
-    , newLiveChatModeratorSnippet
+    LiveChatModeratorSnippet (..),
+    newLiveChatModeratorSnippet,
 
     -- ** LiveChatNewSponsorDetails
-    , LiveChatNewSponsorDetails (..)
-    , newLiveChatNewSponsorDetails
+    LiveChatNewSponsorDetails (..),
+    newLiveChatNewSponsorDetails,
 
     -- ** LiveChatSuperChatDetails
-    , LiveChatSuperChatDetails (..)
-    , newLiveChatSuperChatDetails
+    LiveChatSuperChatDetails (..),
+    newLiveChatSuperChatDetails,
 
     -- ** LiveChatSuperStickerDetails
-    , LiveChatSuperStickerDetails (..)
-    , newLiveChatSuperStickerDetails
+    LiveChatSuperStickerDetails (..),
+    newLiveChatSuperStickerDetails,
 
     -- ** LiveChatTextMessageDetails
-    , LiveChatTextMessageDetails (..)
-    , newLiveChatTextMessageDetails
+    LiveChatTextMessageDetails (..),
+    newLiveChatTextMessageDetails,
 
     -- ** LiveChatUserBannedMessageDetails
-    , LiveChatUserBannedMessageDetails (..)
-    , newLiveChatUserBannedMessageDetails
+    LiveChatUserBannedMessageDetails (..),
+    newLiveChatUserBannedMessageDetails,
 
     -- ** LiveChatUserBannedMessageDetails_BanType
-    , LiveChatUserBannedMessageDetails_BanType (..)
+    LiveChatUserBannedMessageDetails_BanType (..),
 
     -- ** LiveStream
-    , LiveStream (..)
-    , newLiveStream
+    LiveStream (..),
+    newLiveStream,
 
     -- ** LiveStreamConfigurationIssue
-    , LiveStreamConfigurationIssue (..)
-    , newLiveStreamConfigurationIssue
+    LiveStreamConfigurationIssue (..),
+    newLiveStreamConfigurationIssue,
 
     -- ** LiveStreamConfigurationIssue_Severity
-    , LiveStreamConfigurationIssue_Severity (..)
+    LiveStreamConfigurationIssue_Severity (..),
 
     -- ** LiveStreamConfigurationIssue_Type
-    , LiveStreamConfigurationIssue_Type (..)
+    LiveStreamConfigurationIssue_Type (..),
 
     -- ** LiveStreamContentDetails
-    , LiveStreamContentDetails (..)
-    , newLiveStreamContentDetails
+    LiveStreamContentDetails (..),
+    newLiveStreamContentDetails,
 
     -- ** LiveStreamHealthStatus
-    , LiveStreamHealthStatus (..)
-    , newLiveStreamHealthStatus
+    LiveStreamHealthStatus (..),
+    newLiveStreamHealthStatus,
 
     -- ** LiveStreamHealthStatus_Status
-    , LiveStreamHealthStatus_Status (..)
+    LiveStreamHealthStatus_Status (..),
 
     -- ** LiveStreamListResponse
-    , LiveStreamListResponse (..)
-    , newLiveStreamListResponse
+    LiveStreamListResponse (..),
+    newLiveStreamListResponse,
 
     -- ** LiveStreamSnippet
-    , LiveStreamSnippet (..)
-    , newLiveStreamSnippet
+    LiveStreamSnippet (..),
+    newLiveStreamSnippet,
 
     -- ** LiveStreamStatus
-    , LiveStreamStatus (..)
-    , newLiveStreamStatus
+    LiveStreamStatus (..),
+    newLiveStreamStatus,
 
     -- ** LiveStreamStatus_StreamStatus
-    , LiveStreamStatus_StreamStatus (..)
+    LiveStreamStatus_StreamStatus (..),
 
     -- ** LocalizedProperty
-    , LocalizedProperty (..)
-    , newLocalizedProperty
+    LocalizedProperty (..),
+    newLocalizedProperty,
 
     -- ** LocalizedString
-    , LocalizedString (..)
-    , newLocalizedString
+    LocalizedString (..),
+    newLocalizedString,
 
     -- ** Member
-    , Member (..)
-    , newMember
+    Member (..),
+    newMember,
 
     -- ** MemberListResponse
-    , MemberListResponse (..)
-    , newMemberListResponse
+    MemberListResponse (..),
+    newMemberListResponse,
 
     -- ** MemberSnippet
-    , MemberSnippet (..)
-    , newMemberSnippet
+    MemberSnippet (..),
+    newMemberSnippet,
 
     -- ** MembershipsDetails
-    , MembershipsDetails (..)
-    , newMembershipsDetails
+    MembershipsDetails (..),
+    newMembershipsDetails,
 
     -- ** MembershipsDuration
-    , MembershipsDuration (..)
-    , newMembershipsDuration
+    MembershipsDuration (..),
+    newMembershipsDuration,
 
     -- ** MembershipsDurationAtLevel
-    , MembershipsDurationAtLevel (..)
-    , newMembershipsDurationAtLevel
+    MembershipsDurationAtLevel (..),
+    newMembershipsDurationAtLevel,
 
     -- ** MembershipsLevel
-    , MembershipsLevel (..)
-    , newMembershipsLevel
+    MembershipsLevel (..),
+    newMembershipsLevel,
 
     -- ** MembershipsLevelListResponse
-    , MembershipsLevelListResponse (..)
-    , newMembershipsLevelListResponse
+    MembershipsLevelListResponse (..),
+    newMembershipsLevelListResponse,
 
     -- ** MembershipsLevelSnippet
-    , MembershipsLevelSnippet (..)
-    , newMembershipsLevelSnippet
+    MembershipsLevelSnippet (..),
+    newMembershipsLevelSnippet,
 
     -- ** MonitorStreamInfo
-    , MonitorStreamInfo (..)
-    , newMonitorStreamInfo
+    MonitorStreamInfo (..),
+    newMonitorStreamInfo,
 
     -- ** PageInfo
-    , PageInfo (..)
-    , newPageInfo
+    PageInfo (..),
+    newPageInfo,
 
     -- ** Playlist
-    , Playlist (..)
-    , newPlaylist
+    Playlist (..),
+    newPlaylist,
 
     -- ** Playlist_Localizations
-    , Playlist_Localizations (..)
-    , newPlaylist_Localizations
+    Playlist_Localizations (..),
+    newPlaylist_Localizations,
 
     -- ** PlaylistContentDetails
-    , PlaylistContentDetails (..)
-    , newPlaylistContentDetails
+    PlaylistContentDetails (..),
+    newPlaylistContentDetails,
 
     -- ** PlaylistItem
-    , PlaylistItem (..)
-    , newPlaylistItem
+    PlaylistItem (..),
+    newPlaylistItem,
 
     -- ** PlaylistItemContentDetails
-    , PlaylistItemContentDetails (..)
-    , newPlaylistItemContentDetails
+    PlaylistItemContentDetails (..),
+    newPlaylistItemContentDetails,
 
     -- ** PlaylistItemListResponse
-    , PlaylistItemListResponse (..)
-    , newPlaylistItemListResponse
+    PlaylistItemListResponse (..),
+    newPlaylistItemListResponse,
 
     -- ** PlaylistItemSnippet
-    , PlaylistItemSnippet (..)
-    , newPlaylistItemSnippet
+    PlaylistItemSnippet (..),
+    newPlaylistItemSnippet,
 
     -- ** PlaylistItemStatus
-    , PlaylistItemStatus (..)
-    , newPlaylistItemStatus
+    PlaylistItemStatus (..),
+    newPlaylistItemStatus,
 
     -- ** PlaylistItemStatus_PrivacyStatus
-    , PlaylistItemStatus_PrivacyStatus (..)
+    PlaylistItemStatus_PrivacyStatus (..),
 
     -- ** PlaylistListResponse
-    , PlaylistListResponse (..)
-    , newPlaylistListResponse
+    PlaylistListResponse (..),
+    newPlaylistListResponse,
 
     -- ** PlaylistLocalization
-    , PlaylistLocalization (..)
-    , newPlaylistLocalization
+    PlaylistLocalization (..),
+    newPlaylistLocalization,
 
     -- ** PlaylistPlayer
-    , PlaylistPlayer (..)
-    , newPlaylistPlayer
+    PlaylistPlayer (..),
+    newPlaylistPlayer,
 
     -- ** PlaylistSnippet
-    , PlaylistSnippet (..)
-    , newPlaylistSnippet
+    PlaylistSnippet (..),
+    newPlaylistSnippet,
 
     -- ** PlaylistStatus
-    , PlaylistStatus (..)
-    , newPlaylistStatus
+    PlaylistStatus (..),
+    newPlaylistStatus,
 
     -- ** PlaylistStatus_PrivacyStatus
-    , PlaylistStatus_PrivacyStatus (..)
+    PlaylistStatus_PrivacyStatus (..),
 
     -- ** PropertyValue
-    , PropertyValue (..)
-    , newPropertyValue
+    PropertyValue (..),
+    newPropertyValue,
 
     -- ** RelatedEntity
-    , RelatedEntity (..)
-    , newRelatedEntity
+    RelatedEntity (..),
+    newRelatedEntity,
 
     -- ** ResourceId
-    , ResourceId (..)
-    , newResourceId
+    ResourceId (..),
+    newResourceId,
 
     -- ** SearchListResponse
-    , SearchListResponse (..)
-    , newSearchListResponse
+    SearchListResponse (..),
+    newSearchListResponse,
 
     -- ** SearchResult
-    , SearchResult (..)
-    , newSearchResult
+    SearchResult (..),
+    newSearchResult,
 
     -- ** SearchResultSnippet
-    , SearchResultSnippet (..)
-    , newSearchResultSnippet
+    SearchResultSnippet (..),
+    newSearchResultSnippet,
 
     -- ** SearchResultSnippet_LiveBroadcastContent
-    , SearchResultSnippet_LiveBroadcastContent (..)
+    SearchResultSnippet_LiveBroadcastContent (..),
 
     -- ** Subscription
-    , Subscription (..)
-    , newSubscription
+    Subscription (..),
+    newSubscription,
 
     -- ** SubscriptionContentDetails
-    , SubscriptionContentDetails (..)
-    , newSubscriptionContentDetails
+    SubscriptionContentDetails (..),
+    newSubscriptionContentDetails,
 
     -- ** SubscriptionContentDetails_ActivityType
-    , SubscriptionContentDetails_ActivityType (..)
+    SubscriptionContentDetails_ActivityType (..),
 
     -- ** SubscriptionListResponse
-    , SubscriptionListResponse (..)
-    , newSubscriptionListResponse
+    SubscriptionListResponse (..),
+    newSubscriptionListResponse,
 
     -- ** SubscriptionSnippet
-    , SubscriptionSnippet (..)
-    , newSubscriptionSnippet
+    SubscriptionSnippet (..),
+    newSubscriptionSnippet,
 
     -- ** SubscriptionSubscriberSnippet
-    , SubscriptionSubscriberSnippet (..)
-    , newSubscriptionSubscriberSnippet
+    SubscriptionSubscriberSnippet (..),
+    newSubscriptionSubscriberSnippet,
 
     -- ** SuperChatEvent
-    , SuperChatEvent (..)
-    , newSuperChatEvent
+    SuperChatEvent (..),
+    newSuperChatEvent,
 
     -- ** SuperChatEventListResponse
-    , SuperChatEventListResponse (..)
-    , newSuperChatEventListResponse
+    SuperChatEventListResponse (..),
+    newSuperChatEventListResponse,
 
     -- ** SuperChatEventSnippet
-    , SuperChatEventSnippet (..)
-    , newSuperChatEventSnippet
+    SuperChatEventSnippet (..),
+    newSuperChatEventSnippet,
 
     -- ** SuperStickerMetadata
-    , SuperStickerMetadata (..)
-    , newSuperStickerMetadata
+    SuperStickerMetadata (..),
+    newSuperStickerMetadata,
 
     -- ** TestItem
-    , TestItem (..)
-    , newTestItem
+    TestItem (..),
+    newTestItem,
 
     -- ** TestItemTestItemSnippet
-    , TestItemTestItemSnippet (..)
-    , newTestItemTestItemSnippet
+    TestItemTestItemSnippet (..),
+    newTestItemTestItemSnippet,
 
     -- ** ThirdPartyLink
-    , ThirdPartyLink (..)
-    , newThirdPartyLink
+    ThirdPartyLink (..),
+    newThirdPartyLink,
 
     -- ** ThirdPartyLinkSnippet
-    , ThirdPartyLinkSnippet (..)
-    , newThirdPartyLinkSnippet
+    ThirdPartyLinkSnippet (..),
+    newThirdPartyLinkSnippet,
 
     -- ** ThirdPartyLinkSnippet_Type
-    , ThirdPartyLinkSnippet_Type (..)
+    ThirdPartyLinkSnippet_Type (..),
 
     -- ** ThirdPartyLinkStatus
-    , ThirdPartyLinkStatus (..)
-    , newThirdPartyLinkStatus
+    ThirdPartyLinkStatus (..),
+    newThirdPartyLinkStatus,
 
     -- ** ThirdPartyLinkStatus_LinkStatus
-    , ThirdPartyLinkStatus_LinkStatus (..)
+    ThirdPartyLinkStatus_LinkStatus (..),
 
     -- ** Thumbnail
-    , Thumbnail (..)
-    , newThumbnail
+    Thumbnail (..),
+    newThumbnail,
 
     -- ** ThumbnailDetails
-    , ThumbnailDetails (..)
-    , newThumbnailDetails
+    ThumbnailDetails (..),
+    newThumbnailDetails,
 
     -- ** ThumbnailSetResponse
-    , ThumbnailSetResponse (..)
-    , newThumbnailSetResponse
+    ThumbnailSetResponse (..),
+    newThumbnailSetResponse,
 
     -- ** TokenPagination
-    , TokenPagination (..)
-    , newTokenPagination
+    TokenPagination (..),
+    newTokenPagination,
 
     -- ** Video
-    , Video (..)
-    , newVideo
+    Video (..),
+    newVideo,
 
     -- ** Video_Localizations
-    , Video_Localizations (..)
-    , newVideo_Localizations
+    Video_Localizations (..),
+    newVideo_Localizations,
 
     -- ** VideoAbuseReport
-    , VideoAbuseReport (..)
-    , newVideoAbuseReport
+    VideoAbuseReport (..),
+    newVideoAbuseReport,
 
     -- ** VideoAbuseReportReason
-    , VideoAbuseReportReason (..)
-    , newVideoAbuseReportReason
+    VideoAbuseReportReason (..),
+    newVideoAbuseReportReason,
 
     -- ** VideoAbuseReportReasonListResponse
-    , VideoAbuseReportReasonListResponse (..)
-    , newVideoAbuseReportReasonListResponse
+    VideoAbuseReportReasonListResponse (..),
+    newVideoAbuseReportReasonListResponse,
 
     -- ** VideoAbuseReportReasonSnippet
-    , VideoAbuseReportReasonSnippet (..)
-    , newVideoAbuseReportReasonSnippet
+    VideoAbuseReportReasonSnippet (..),
+    newVideoAbuseReportReasonSnippet,
 
     -- ** VideoAbuseReportSecondaryReason
-    , VideoAbuseReportSecondaryReason (..)
-    , newVideoAbuseReportSecondaryReason
+    VideoAbuseReportSecondaryReason (..),
+    newVideoAbuseReportSecondaryReason,
 
     -- ** VideoAgeGating
-    , VideoAgeGating (..)
-    , newVideoAgeGating
+    VideoAgeGating (..),
+    newVideoAgeGating,
 
     -- ** VideoAgeGating_VideoGameRating
-    , VideoAgeGating_VideoGameRating (..)
+    VideoAgeGating_VideoGameRating (..),
 
     -- ** VideoCategory
-    , VideoCategory (..)
-    , newVideoCategory
+    VideoCategory (..),
+    newVideoCategory,
 
     -- ** VideoCategoryListResponse
-    , VideoCategoryListResponse (..)
-    , newVideoCategoryListResponse
+    VideoCategoryListResponse (..),
+    newVideoCategoryListResponse,
 
     -- ** VideoCategorySnippet
-    , VideoCategorySnippet (..)
-    , newVideoCategorySnippet
+    VideoCategorySnippet (..),
+    newVideoCategorySnippet,
 
     -- ** VideoContentDetails
-    , VideoContentDetails (..)
-    , newVideoContentDetails
+    VideoContentDetails (..),
+    newVideoContentDetails,
 
     -- ** VideoContentDetails_Caption
-    , VideoContentDetails_Caption (..)
+    VideoContentDetails_Caption (..),
 
     -- ** VideoContentDetails_Definition
-    , VideoContentDetails_Definition (..)
+    VideoContentDetails_Definition (..),
 
     -- ** VideoContentDetails_Projection
-    , VideoContentDetails_Projection (..)
+    VideoContentDetails_Projection (..),
 
     -- ** VideoContentDetailsRegionRestriction
-    , VideoContentDetailsRegionRestriction (..)
-    , newVideoContentDetailsRegionRestriction
+    VideoContentDetailsRegionRestriction (..),
+    newVideoContentDetailsRegionRestriction,
 
     -- ** VideoFileDetails
-    , VideoFileDetails (..)
-    , newVideoFileDetails
+    VideoFileDetails (..),
+    newVideoFileDetails,
 
     -- ** VideoFileDetails_FileType
-    , VideoFileDetails_FileType (..)
+    VideoFileDetails_FileType (..),
 
     -- ** VideoFileDetailsAudioStream
-    , VideoFileDetailsAudioStream (..)
-    , newVideoFileDetailsAudioStream
+    VideoFileDetailsAudioStream (..),
+    newVideoFileDetailsAudioStream,
 
     -- ** VideoFileDetailsVideoStream
-    , VideoFileDetailsVideoStream (..)
-    , newVideoFileDetailsVideoStream
+    VideoFileDetailsVideoStream (..),
+    newVideoFileDetailsVideoStream,
 
     -- ** VideoFileDetailsVideoStream_Rotation
-    , VideoFileDetailsVideoStream_Rotation (..)
+    VideoFileDetailsVideoStream_Rotation (..),
 
     -- ** VideoGetRatingResponse
-    , VideoGetRatingResponse (..)
-    , newVideoGetRatingResponse
+    VideoGetRatingResponse (..),
+    newVideoGetRatingResponse,
 
     -- ** VideoListResponse
-    , VideoListResponse (..)
-    , newVideoListResponse
+    VideoListResponse (..),
+    newVideoListResponse,
 
     -- ** VideoLiveStreamingDetails
-    , VideoLiveStreamingDetails (..)
-    , newVideoLiveStreamingDetails
+    VideoLiveStreamingDetails (..),
+    newVideoLiveStreamingDetails,
 
     -- ** VideoLocalization
-    , VideoLocalization (..)
-    , newVideoLocalization
+    VideoLocalization (..),
+    newVideoLocalization,
 
     -- ** VideoMonetizationDetails
-    , VideoMonetizationDetails (..)
-    , newVideoMonetizationDetails
+    VideoMonetizationDetails (..),
+    newVideoMonetizationDetails,
 
     -- ** VideoPlayer
-    , VideoPlayer (..)
-    , newVideoPlayer
+    VideoPlayer (..),
+    newVideoPlayer,
 
     -- ** VideoProcessingDetails
-    , VideoProcessingDetails (..)
-    , newVideoProcessingDetails
+    VideoProcessingDetails (..),
+    newVideoProcessingDetails,
 
     -- ** VideoProcessingDetails_ProcessingFailureReason
-    , VideoProcessingDetails_ProcessingFailureReason (..)
+    VideoProcessingDetails_ProcessingFailureReason (..),
 
     -- ** VideoProcessingDetails_ProcessingStatus
-    , VideoProcessingDetails_ProcessingStatus (..)
+    VideoProcessingDetails_ProcessingStatus (..),
 
     -- ** VideoProcessingDetailsProcessingProgress
-    , VideoProcessingDetailsProcessingProgress (..)
-    , newVideoProcessingDetailsProcessingProgress
+    VideoProcessingDetailsProcessingProgress (..),
+    newVideoProcessingDetailsProcessingProgress,
 
     -- ** VideoProjectDetails
-    , VideoProjectDetails (..)
-    , newVideoProjectDetails
+    VideoProjectDetails (..),
+    newVideoProjectDetails,
 
     -- ** VideoRating
-    , VideoRating (..)
-    , newVideoRating
+    VideoRating (..),
+    newVideoRating,
 
     -- ** VideoRating_Rating
-    , VideoRating_Rating (..)
+    VideoRating_Rating (..),
 
     -- ** VideoRecordingDetails
-    , VideoRecordingDetails (..)
-    , newVideoRecordingDetails
+    VideoRecordingDetails (..),
+    newVideoRecordingDetails,
 
     -- ** VideoSnippet
-    , VideoSnippet (..)
-    , newVideoSnippet
+    VideoSnippet (..),
+    newVideoSnippet,
 
     -- ** VideoSnippet_LiveBroadcastContent
-    , VideoSnippet_LiveBroadcastContent (..)
+    VideoSnippet_LiveBroadcastContent (..),
 
     -- ** VideoStatistics
-    , VideoStatistics (..)
-    , newVideoStatistics
+    VideoStatistics (..),
+    newVideoStatistics,
 
     -- ** VideoStatus
-    , VideoStatus (..)
-    , newVideoStatus
+    VideoStatus (..),
+    newVideoStatus,
 
     -- ** VideoStatus_FailureReason
-    , VideoStatus_FailureReason (..)
+    VideoStatus_FailureReason (..),
 
     -- ** VideoStatus_License
-    , VideoStatus_License (..)
+    VideoStatus_License (..),
 
     -- ** VideoStatus_PrivacyStatus
-    , VideoStatus_PrivacyStatus (..)
+    VideoStatus_PrivacyStatus (..),
 
     -- ** VideoStatus_RejectionReason
-    , VideoStatus_RejectionReason (..)
+    VideoStatus_RejectionReason (..),
 
     -- ** VideoStatus_UploadStatus
-    , VideoStatus_UploadStatus (..)
+    VideoStatus_UploadStatus (..),
 
     -- ** VideoSuggestions
-    , VideoSuggestions (..)
-    , newVideoSuggestions
+    VideoSuggestions (..),
+    newVideoSuggestions,
 
     -- ** VideoSuggestions_EditorSuggestionsItem
-    , VideoSuggestions_EditorSuggestionsItem (..)
+    VideoSuggestions_EditorSuggestionsItem (..),
 
     -- ** VideoSuggestions_ProcessingErrorsItem
-    , VideoSuggestions_ProcessingErrorsItem (..)
+    VideoSuggestions_ProcessingErrorsItem (..),
 
     -- ** VideoSuggestions_ProcessingHintsItem
-    , VideoSuggestions_ProcessingHintsItem (..)
+    VideoSuggestions_ProcessingHintsItem (..),
 
     -- ** VideoSuggestions_ProcessingWarningsItem
-    , VideoSuggestions_ProcessingWarningsItem (..)
+    VideoSuggestions_ProcessingWarningsItem (..),
 
     -- ** VideoSuggestionsTagSuggestion
-    , VideoSuggestionsTagSuggestion (..)
-    , newVideoSuggestionsTagSuggestion
+    VideoSuggestionsTagSuggestion (..),
+    newVideoSuggestionsTagSuggestion,
 
     -- ** VideoTopicDetails
-    , VideoTopicDetails (..)
-    , newVideoTopicDetails
+    VideoTopicDetails (..),
+    newVideoTopicDetails,
 
     -- ** WatchSettings
-    , WatchSettings (..)
-    , newWatchSettings
+    WatchSettings (..),
+    newWatchSettings,
 
     -- ** CommentThreadsListModerationStatus
-    , CommentThreadsListModerationStatus (..)
+    CommentThreadsListModerationStatus (..),
 
     -- ** CommentThreadsListOrder
-    , CommentThreadsListOrder (..)
+    CommentThreadsListOrder (..),
 
     -- ** CommentThreadsListTextFormat
-    , CommentThreadsListTextFormat (..)
+    CommentThreadsListTextFormat (..),
 
     -- ** CommentsListTextFormat
-    , CommentsListTextFormat (..)
+    CommentsListTextFormat (..),
 
     -- ** CommentsSetModerationStatusModerationStatus
-    , CommentsSetModerationStatusModerationStatus (..)
+    CommentsSetModerationStatusModerationStatus (..),
 
     -- ** LiveBroadcastsListBroadcastStatus
-    , LiveBroadcastsListBroadcastStatus (..)
+    LiveBroadcastsListBroadcastStatus (..),
 
     -- ** LiveBroadcastsListBroadcastType
-    , LiveBroadcastsListBroadcastType (..)
+    LiveBroadcastsListBroadcastType (..),
 
     -- ** LiveBroadcastsTransitionBroadcastStatus
-    , LiveBroadcastsTransitionBroadcastStatus (..)
+    LiveBroadcastsTransitionBroadcastStatus (..),
 
     -- ** MembersListMode
-    , MembersListMode (..)
+    MembersListMode (..),
 
     -- ** SearchListChannelType
-    , SearchListChannelType (..)
+    SearchListChannelType (..),
 
     -- ** SearchListEventType
-    , SearchListEventType (..)
+    SearchListEventType (..),
 
     -- ** SearchListOrder
-    , SearchListOrder (..)
+    SearchListOrder (..),
 
     -- ** SearchListSafeSearch
-    , SearchListSafeSearch (..)
+    SearchListSafeSearch (..),
 
     -- ** SearchListVideoCaption
-    , SearchListVideoCaption (..)
+    SearchListVideoCaption (..),
 
     -- ** SearchListVideoDefinition
-    , SearchListVideoDefinition (..)
+    SearchListVideoDefinition (..),
 
     -- ** SearchListVideoDimension
-    , SearchListVideoDimension (..)
+    SearchListVideoDimension (..),
 
     -- ** SearchListVideoDuration
-    , SearchListVideoDuration (..)
+    SearchListVideoDuration (..),
 
     -- ** SearchListVideoEmbeddable
-    , SearchListVideoEmbeddable (..)
+    SearchListVideoEmbeddable (..),
 
     -- ** SearchListVideoLicense
-    , SearchListVideoLicense (..)
+    SearchListVideoLicense (..),
 
     -- ** SearchListVideoSyndicated
-    , SearchListVideoSyndicated (..)
+    SearchListVideoSyndicated (..),
 
     -- ** SearchListVideoType
-    , SearchListVideoType (..)
+    SearchListVideoType (..),
 
     -- ** SubscriptionsListOrder
-    , SubscriptionsListOrder (..)
+    SubscriptionsListOrder (..),
 
     -- ** ThirdPartyLinksDeleteType
-    , ThirdPartyLinksDeleteType (..)
+    ThirdPartyLinksDeleteType (..),
 
     -- ** ThirdPartyLinksListType
-    , ThirdPartyLinksListType (..)
+    ThirdPartyLinksListType (..),
 
     -- ** VideosListChart
-    , VideosListChart (..)
+    VideosListChart (..),
 
     -- ** VideosListMyRating
-    , VideosListMyRating (..)
+    VideosListMyRating (..),
 
     -- ** VideosRateRating
-    , VideosRateRating (..)
-    ) where
+    VideosRateRating (..),
+  )
+where
 
 import Gogol.YouTube.AbuseReports.Insert
 import Gogol.YouTube.Activities.List

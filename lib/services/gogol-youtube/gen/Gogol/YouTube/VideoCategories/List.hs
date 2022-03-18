@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,14 +30,14 @@
 --
 -- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videoCategories.list@.
 module Gogol.YouTube.VideoCategories.List
-    (
-    -- * Resource
-      YouTubeVideoCategoriesListResource
+  ( -- * Resource
+    YouTubeVideoCategoriesListResource,
 
     -- ** Constructing a Request
-    , newYouTubeVideoCategoriesList
-    , YouTubeVideoCategoriesList
-    ) where
+    newYouTubeVideoCategoriesList,
+    YouTubeVideoCategoriesList,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.YouTube.Types
@@ -51,86 +45,95 @@ import Gogol.YouTube.Types
 -- | A resource alias for @youtube.videoCategories.list@ method which the
 -- 'YouTubeVideoCategoriesList' request conforms to.
 type YouTubeVideoCategoriesListResource =
-     "youtube" Core.:>
-       "v3" Core.:>
-         "videoCategories" Core.:>
-           Core.QueryParams "part" Core.Text Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "hl" Core.Text Core.:>
-                     Core.QueryParams "id" Core.Text Core.:>
-                       Core.QueryParam "regionCode" Core.Text Core.:>
-                         Core.QueryParam "uploadType" Core.Text Core.:>
-                           Core.QueryParam "upload_protocol" Core.Text Core.:>
-                             Core.QueryParam "alt" Core.AltJSON Core.:>
-                               Core.Get '[Core.JSON] VideoCategoryListResponse
+  "youtube"
+    Core.:> "v3"
+    Core.:> "videoCategories"
+    Core.:> Core.QueryParams "part" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "hl" Core.Text
+    Core.:> Core.QueryParams "id" Core.Text
+    Core.:> Core.QueryParam "regionCode" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] VideoCategoryListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'newYouTubeVideoCategoriesList' smart constructor.
 data YouTubeVideoCategoriesList = YouTubeVideoCategoriesList
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | 
-    , hl :: Core.Text
-      -- | Returns the video categories with the given IDs for Stubby or Apiary.
-    , id :: (Core.Maybe [Core.Text])
-      -- | The /part/ parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet.
-    , part :: [Core.Text]
-      -- | 
-    , regionCode :: (Core.Maybe Core.Text)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- |
+    hl :: Core.Text,
+    -- | Returns the video categories with the given IDs for Stubby or Apiary.
+    id :: (Core.Maybe [Core.Text]),
+    -- | The /part/ parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet.
+    part :: [Core.Text],
+    -- |
+    regionCode :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'YouTubeVideoCategoriesList' with the minimum fields required to make a request.
-newYouTubeVideoCategoriesList 
-    ::  [Core.Text]
-       -- ^  The /part/ parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet. See 'part'.
-    -> YouTubeVideoCategoriesList
+newYouTubeVideoCategoriesList ::
+  -- |  The /part/ parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet. See 'part'.
+  [Core.Text] ->
+  YouTubeVideoCategoriesList
 newYouTubeVideoCategoriesList part =
   YouTubeVideoCategoriesList
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , hl = "en-US"
-    , id = Core.Nothing
-    , part = part
-    , regionCode = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      hl = "en-US",
+      id = Core.Nothing,
+      part = part,
+      regionCode = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           YouTubeVideoCategoriesList
-         where
-        type Rs YouTubeVideoCategoriesList =
-             VideoCategoryListResponse
-        type Scopes YouTubeVideoCategoriesList =
-             '["https://www.googleapis.com/auth/youtube",
-               "https://www.googleapis.com/auth/youtube.force-ssl",
-               "https://www.googleapis.com/auth/youtube.readonly",
-               "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient YouTubeVideoCategoriesList{..}
-          = go part xgafv accessToken callback (Core.Just hl)
-              (id Core.^. Core._Default)
-              regionCode
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              youTubeService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy YouTubeVideoCategoriesListResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    YouTubeVideoCategoriesList
+  where
+  type
+    Rs YouTubeVideoCategoriesList =
+      VideoCategoryListResponse
+  type
+    Scopes YouTubeVideoCategoriesList =
+      '[ "https://www.googleapis.com/auth/youtube",
+         "https://www.googleapis.com/auth/youtube.force-ssl",
+         "https://www.googleapis.com/auth/youtube.readonly",
+         "https://www.googleapis.com/auth/youtubepartner"
+       ]
+  requestClient YouTubeVideoCategoriesList {..} =
+    go
+      part
+      xgafv
+      accessToken
+      callback
+      (Core.Just hl)
+      (id Core.^. Core._Default)
+      regionCode
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      youTubeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy YouTubeVideoCategoriesListResource
+          )
+          Core.mempty
