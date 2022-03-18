@@ -39,22 +39,23 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CivicInfo
-    Network.Google.CivicInfo.Divisions.Search
-    Network.Google.CivicInfo.Elections.ElectionQuery
-    Network.Google.CivicInfo.Elections.VoterInfoQuery
-    Network.Google.CivicInfo.Representatives.RepresentativeInfoByAddress
-    Network.Google.CivicInfo.Representatives.RepresentativeInfoByDivision
-    Network.Google.CivicInfo.Types
+    Gogol.CivicInfo
+    Gogol.CivicInfo.Divisions.Search
+    Gogol.CivicInfo.Elections.ElectionQuery
+    Gogol.CivicInfo.Elections.VoterInfoQuery
+    Gogol.CivicInfo.Representatives.RepresentativeInfoByAddress
+    Gogol.CivicInfo.Representatives.RepresentativeInfoByDivision
+    Gogol.CivicInfo.Types
 
   other-modules:
-    Network.Google.CivicInfo.Internal.Product
-    Network.Google.CivicInfo.Internal.Sum
+    Gogol.CivicInfo.Internal.Product
+    Gogol.CivicInfo.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
