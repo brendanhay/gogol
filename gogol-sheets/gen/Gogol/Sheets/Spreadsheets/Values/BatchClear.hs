@@ -19,50 +19,49 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Values.Clear
+-- Module      : Gogol.Sheets.Spreadsheets.Values.BatchClear
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Clears values from a spreadsheet. The caller must specify the spreadsheet ID and range. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.
+-- Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges. Only values are cleared -- all other properties of the cell (such as formatting and data validation) are kept.
 --
--- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.clear@.
-module Network.Google.Sheets.Spreadsheets.Values.Clear
+-- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchClear@.
+module Gogol.Sheets.Spreadsheets.Values.BatchClear
   ( -- * Resource
-    SheetsSpreadsheetsValuesClearResource,
+    SheetsSpreadsheetsValuesBatchClearResource,
 
     -- ** Constructing a Request
-    newSheetsSpreadsheetsValuesClear,
-    SheetsSpreadsheetsValuesClear,
+    newSheetsSpreadsheetsValuesBatchClear,
+    SheetsSpreadsheetsValuesBatchClear,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
--- | A resource alias for @sheets.spreadsheets.values.clear@ method which the
--- 'SheetsSpreadsheetsValuesClear' request conforms to.
-type SheetsSpreadsheetsValuesClearResource =
+-- | A resource alias for @sheets.spreadsheets.values.batchClear@ method which the
+-- 'SheetsSpreadsheetsValuesBatchClear' request conforms to.
+type SheetsSpreadsheetsValuesBatchClearResource =
   "v4"
     Core.:> "spreadsheets"
     Core.:> Core.Capture "spreadsheetId" Core.Text
-    Core.:> "values"
-    Core.:> Core.CaptureMode "range" "clear" Core.Text
+    Core.:> "values:batchClear"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ClearValuesRequest
-    Core.:> Core.Post '[Core.JSON] ClearValuesResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchClearValuesRequest
+    Core.:> Core.Post '[Core.JSON] BatchClearValuesResponse
 
--- | Clears values from a spreadsheet. The caller must specify the spreadsheet ID and range. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.
+-- | Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges. Only values are cleared -- all other properties of the cell (such as formatting and data validation) are kept.
 --
--- /See:/ 'newSheetsSpreadsheetsValuesClear' smart constructor.
-data SheetsSpreadsheetsValuesClear = SheetsSpreadsheetsValuesClear
+-- /See:/ 'newSheetsSpreadsheetsValuesBatchClear' smart constructor.
+data SheetsSpreadsheetsValuesBatchClear = SheetsSpreadsheetsValuesBatchClear
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -70,9 +69,7 @@ data SheetsSpreadsheetsValuesClear = SheetsSpreadsheetsValuesClear
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: ClearValuesRequest,
-    -- | The </sheets/api/guides/concepts#cell A1 notation or R1C1 notation> of the values to clear.
-    range :: Core.Text,
+    payload :: BatchClearValuesRequest,
     -- | The ID of the spreadsheet to update.
     spreadsheetId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -82,22 +79,19 @@ data SheetsSpreadsheetsValuesClear = SheetsSpreadsheetsValuesClear
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SheetsSpreadsheetsValuesClear' with the minimum fields required to make a request.
-newSheetsSpreadsheetsValuesClear ::
+-- | Creates a value of 'SheetsSpreadsheetsValuesBatchClear' with the minimum fields required to make a request.
+newSheetsSpreadsheetsValuesBatchClear ::
   -- |  Multipart request metadata. See 'payload'.
-  ClearValuesRequest ->
-  -- |  The </sheets/api/guides/concepts#cell A1 notation or R1C1 notation> of the values to clear. See 'range'.
-  Core.Text ->
+  BatchClearValuesRequest ->
   -- |  The ID of the spreadsheet to update. See 'spreadsheetId'.
   Core.Text ->
-  SheetsSpreadsheetsValuesClear
-newSheetsSpreadsheetsValuesClear payload range spreadsheetId =
-  SheetsSpreadsheetsValuesClear
+  SheetsSpreadsheetsValuesBatchClear
+newSheetsSpreadsheetsValuesBatchClear payload spreadsheetId =
+  SheetsSpreadsheetsValuesBatchClear
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
-      range = range,
       spreadsheetId = spreadsheetId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -105,21 +99,20 @@ newSheetsSpreadsheetsValuesClear payload range spreadsheetId =
 
 instance
   Core.GoogleRequest
-    SheetsSpreadsheetsValuesClear
+    SheetsSpreadsheetsValuesBatchClear
   where
   type
-    Rs SheetsSpreadsheetsValuesClear =
-      ClearValuesResponse
+    Rs SheetsSpreadsheetsValuesBatchClear =
+      BatchClearValuesResponse
   type
-    Scopes SheetsSpreadsheetsValuesClear =
+    Scopes SheetsSpreadsheetsValuesBatchClear =
       '[ "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/spreadsheets"
        ]
-  requestClient SheetsSpreadsheetsValuesClear {..} =
+  requestClient SheetsSpreadsheetsValuesBatchClear {..} =
     go
       spreadsheetId
-      range
       xgafv
       accessToken
       callback
@@ -132,6 +125,7 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SheetsSpreadsheetsValuesClearResource
+              Core.Proxy
+                SheetsSpreadsheetsValuesBatchClearResource
           )
           Core.mempty

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+-- Module      : Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more DataFilterValueRanges.
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchUpdateByDataFilter@.
-module Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+module Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
   ( -- * Resource
     SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchUpdateByDataFilter@ method which the
 -- 'SheetsSpreadsheetsValuesBatchUpdateByDataFilter' request conforms to.

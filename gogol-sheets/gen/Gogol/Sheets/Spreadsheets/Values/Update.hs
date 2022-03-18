@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Values.Update
+-- Module      : Gogol.Sheets.Spreadsheets.Values.Update
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sets values in a range of a spreadsheet. The caller must specify the spreadsheet ID, range, and a valueInputOption.
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.update@.
-module Network.Google.Sheets.Spreadsheets.Values.Update
+module Gogol.Sheets.Spreadsheets.Values.Update
   ( -- * Resource
     SheetsSpreadsheetsValuesUpdateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Sheets.Spreadsheets.Values.Update
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.update@ method which the
 -- 'SheetsSpreadsheetsValuesUpdate' request conforms to.

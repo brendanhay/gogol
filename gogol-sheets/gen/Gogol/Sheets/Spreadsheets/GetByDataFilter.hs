@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.GetByDataFilter
+-- Module      : Gogol.Sheets.Spreadsheets.GetByDataFilter
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters will return the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids will not be returned. You can include grid data one of two ways: * Specify a field mask listing your desired fields using the @fields@ URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the @includeGridData@ parameter is ignored For large spreadsheets, it is recommended to retrieve only the specific fields of the spreadsheet that you want.
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.getByDataFilter@.
-module Network.Google.Sheets.Spreadsheets.GetByDataFilter
+module Gogol.Sheets.Spreadsheets.GetByDataFilter
   ( -- * Resource
     SheetsSpreadsheetsGetByDataFilterResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Sheets.Spreadsheets.GetByDataFilter
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.getByDataFilter@ method which the
 -- 'SheetsSpreadsheetsGetByDataFilter' request conforms to.

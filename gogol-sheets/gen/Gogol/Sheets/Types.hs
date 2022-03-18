@@ -19,17 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets
+-- Module      : Gogol.Sheets.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Reads and writes Google Sheets.
---
--- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference>
-module Network.Google.Sheets
+module Gogol.Sheets.Types
   ( -- * Configuration
     sheetsService,
 
@@ -39,93 +35,6 @@ module Network.Google.Sheets
     driveReadOnlyScope,
     spreadsheetsScope,
     spreadsheetsReadOnlyScope,
-
-    -- * Resources
-
-    -- ** sheets.spreadsheets.batchUpdate
-    SheetsSpreadsheetsBatchUpdateResource,
-    newSheetsSpreadsheetsBatchUpdate,
-    SheetsSpreadsheetsBatchUpdate,
-
-    -- ** sheets.spreadsheets.create
-    SheetsSpreadsheetsCreateResource,
-    newSheetsSpreadsheetsCreate,
-    SheetsSpreadsheetsCreate,
-
-    -- ** sheets.spreadsheets.developerMetadata.get
-    SheetsSpreadsheetsDeveloperMetadataGetResource,
-    newSheetsSpreadsheetsDeveloperMetadataGet,
-    SheetsSpreadsheetsDeveloperMetadataGet,
-
-    -- ** sheets.spreadsheets.developerMetadata.search
-    SheetsSpreadsheetsDeveloperMetadataSearchResource,
-    newSheetsSpreadsheetsDeveloperMetadataSearch,
-    SheetsSpreadsheetsDeveloperMetadataSearch,
-
-    -- ** sheets.spreadsheets.get
-    SheetsSpreadsheetsGetResource,
-    newSheetsSpreadsheetsGet,
-    SheetsSpreadsheetsGet,
-
-    -- ** sheets.spreadsheets.getByDataFilter
-    SheetsSpreadsheetsGetByDataFilterResource,
-    newSheetsSpreadsheetsGetByDataFilter,
-    SheetsSpreadsheetsGetByDataFilter,
-
-    -- ** sheets.spreadsheets.sheets.copyTo
-    SheetsSpreadsheetsSheetsCopyToResource,
-    newSheetsSpreadsheetsSheetsCopyTo,
-    SheetsSpreadsheetsSheetsCopyTo,
-
-    -- ** sheets.spreadsheets.values.append
-    SheetsSpreadsheetsValuesAppendResource,
-    newSheetsSpreadsheetsValuesAppend,
-    SheetsSpreadsheetsValuesAppend,
-
-    -- ** sheets.spreadsheets.values.batchClear
-    SheetsSpreadsheetsValuesBatchClearResource,
-    newSheetsSpreadsheetsValuesBatchClear,
-    SheetsSpreadsheetsValuesBatchClear,
-
-    -- ** sheets.spreadsheets.values.batchClearByDataFilter
-    SheetsSpreadsheetsValuesBatchClearByDataFilterResource,
-    newSheetsSpreadsheetsValuesBatchClearByDataFilter,
-    SheetsSpreadsheetsValuesBatchClearByDataFilter,
-
-    -- ** sheets.spreadsheets.values.batchGet
-    SheetsSpreadsheetsValuesBatchGetResource,
-    newSheetsSpreadsheetsValuesBatchGet,
-    SheetsSpreadsheetsValuesBatchGet,
-
-    -- ** sheets.spreadsheets.values.batchGetByDataFilter
-    SheetsSpreadsheetsValuesBatchGetByDataFilterResource,
-    newSheetsSpreadsheetsValuesBatchGetByDataFilter,
-    SheetsSpreadsheetsValuesBatchGetByDataFilter,
-
-    -- ** sheets.spreadsheets.values.batchUpdate
-    SheetsSpreadsheetsValuesBatchUpdateResource,
-    newSheetsSpreadsheetsValuesBatchUpdate,
-    SheetsSpreadsheetsValuesBatchUpdate,
-
-    -- ** sheets.spreadsheets.values.batchUpdateByDataFilter
-    SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
-    newSheetsSpreadsheetsValuesBatchUpdateByDataFilter,
-    SheetsSpreadsheetsValuesBatchUpdateByDataFilter,
-
-    -- ** sheets.spreadsheets.values.clear
-    SheetsSpreadsheetsValuesClearResource,
-    newSheetsSpreadsheetsValuesClear,
-    SheetsSpreadsheetsValuesClear,
-
-    -- ** sheets.spreadsheets.values.get
-    SheetsSpreadsheetsValuesGetResource,
-    newSheetsSpreadsheetsValuesGet,
-    SheetsSpreadsheetsValuesGet,
-
-    -- ** sheets.spreadsheets.values.update
-    SheetsSpreadsheetsValuesUpdateResource,
-    newSheetsSpreadsheetsValuesUpdate,
-    SheetsSpreadsheetsValuesUpdate,
 
     -- * Types
 
@@ -1399,21 +1308,33 @@ module Network.Google.Sheets
   )
 where
 
-import Network.Google.Sheets.Spreadsheets.BatchUpdate
-import Network.Google.Sheets.Spreadsheets.Create
-import Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Get
-import Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Search
-import Network.Google.Sheets.Spreadsheets.Get
-import Network.Google.Sheets.Spreadsheets.GetByDataFilter
-import Network.Google.Sheets.Spreadsheets.Sheets.CopyTo
-import Network.Google.Sheets.Spreadsheets.Values.Append
-import Network.Google.Sheets.Spreadsheets.Values.BatchClear
-import Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
-import Network.Google.Sheets.Spreadsheets.Values.BatchGet
-import Network.Google.Sheets.Spreadsheets.Values.BatchGetByDataFilter
-import Network.Google.Sheets.Spreadsheets.Values.BatchUpdate
-import Network.Google.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
-import Network.Google.Sheets.Spreadsheets.Values.Clear
-import Network.Google.Sheets.Spreadsheets.Values.Get
-import Network.Google.Sheets.Spreadsheets.Values.Update
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Internal.Product
+import Gogol.Sheets.Internal.Sum
+
+-- | Default request referring to version @v4@ of the Google Sheets API. This contains the host and root path used as a starting point for constructing service requests.
+sheetsService :: Core.ServiceConfig
+sheetsService =
+  Core.defaultService
+    (Core.ServiceId "sheets:v4")
+    "sheets.googleapis.com"
+
+-- | See, edit, create, and delete all of your Google Drive files
+driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
+driveScope = Core.Proxy
+
+-- | See, edit, create, and delete only the specific Google Drive files you use with this app
+driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
+driveFileScope = Core.Proxy
+
+-- | See and download all your Google Drive files
+driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
+driveReadOnlyScope = Core.Proxy
+
+-- | See, edit, create, and delete all your Google Sheets spreadsheets
+spreadsheetsScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets"]
+spreadsheetsScope = Core.Proxy
+
+-- | See all your Google Sheets spreadsheets
+spreadsheetsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets.readonly"]
+spreadsheetsReadOnlyScope = Core.Proxy

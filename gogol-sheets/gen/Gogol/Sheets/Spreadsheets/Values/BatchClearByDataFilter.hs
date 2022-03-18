@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+-- Module      : Gogol.Sheets.Spreadsheets.Values.BatchClearByDataFilter
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges matching any of the specified data filters will be cleared. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.
 --
 -- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchClearByDataFilter@.
-module Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+module Gogol.Sheets.Spreadsheets.Values.BatchClearByDataFilter
   ( -- * Resource
     SheetsSpreadsheetsValuesBatchClearByDataFilterResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Sheets.Spreadsheets.Values.BatchClearByDataFilter
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchClearByDataFilter@ method which the
 -- 'SheetsSpreadsheetsValuesBatchClearByDataFilter' request conforms to.

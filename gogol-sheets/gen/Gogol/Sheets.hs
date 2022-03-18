@@ -19,13 +19,17 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Types
+-- Module      : Gogol.Sheets
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Sheets.Types
+--
+-- Reads and writes Google Sheets.
+--
+-- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference>
+module Gogol.Sheets
   ( -- * Configuration
     sheetsService,
 
@@ -35,6 +39,93 @@ module Network.Google.Sheets.Types
     driveReadOnlyScope,
     spreadsheetsScope,
     spreadsheetsReadOnlyScope,
+
+    -- * Resources
+
+    -- ** sheets.spreadsheets.batchUpdate
+    SheetsSpreadsheetsBatchUpdateResource,
+    newSheetsSpreadsheetsBatchUpdate,
+    SheetsSpreadsheetsBatchUpdate,
+
+    -- ** sheets.spreadsheets.create
+    SheetsSpreadsheetsCreateResource,
+    newSheetsSpreadsheetsCreate,
+    SheetsSpreadsheetsCreate,
+
+    -- ** sheets.spreadsheets.developerMetadata.get
+    SheetsSpreadsheetsDeveloperMetadataGetResource,
+    newSheetsSpreadsheetsDeveloperMetadataGet,
+    SheetsSpreadsheetsDeveloperMetadataGet,
+
+    -- ** sheets.spreadsheets.developerMetadata.search
+    SheetsSpreadsheetsDeveloperMetadataSearchResource,
+    newSheetsSpreadsheetsDeveloperMetadataSearch,
+    SheetsSpreadsheetsDeveloperMetadataSearch,
+
+    -- ** sheets.spreadsheets.get
+    SheetsSpreadsheetsGetResource,
+    newSheetsSpreadsheetsGet,
+    SheetsSpreadsheetsGet,
+
+    -- ** sheets.spreadsheets.getByDataFilter
+    SheetsSpreadsheetsGetByDataFilterResource,
+    newSheetsSpreadsheetsGetByDataFilter,
+    SheetsSpreadsheetsGetByDataFilter,
+
+    -- ** sheets.spreadsheets.sheets.copyTo
+    SheetsSpreadsheetsSheetsCopyToResource,
+    newSheetsSpreadsheetsSheetsCopyTo,
+    SheetsSpreadsheetsSheetsCopyTo,
+
+    -- ** sheets.spreadsheets.values.append
+    SheetsSpreadsheetsValuesAppendResource,
+    newSheetsSpreadsheetsValuesAppend,
+    SheetsSpreadsheetsValuesAppend,
+
+    -- ** sheets.spreadsheets.values.batchClear
+    SheetsSpreadsheetsValuesBatchClearResource,
+    newSheetsSpreadsheetsValuesBatchClear,
+    SheetsSpreadsheetsValuesBatchClear,
+
+    -- ** sheets.spreadsheets.values.batchClearByDataFilter
+    SheetsSpreadsheetsValuesBatchClearByDataFilterResource,
+    newSheetsSpreadsheetsValuesBatchClearByDataFilter,
+    SheetsSpreadsheetsValuesBatchClearByDataFilter,
+
+    -- ** sheets.spreadsheets.values.batchGet
+    SheetsSpreadsheetsValuesBatchGetResource,
+    newSheetsSpreadsheetsValuesBatchGet,
+    SheetsSpreadsheetsValuesBatchGet,
+
+    -- ** sheets.spreadsheets.values.batchGetByDataFilter
+    SheetsSpreadsheetsValuesBatchGetByDataFilterResource,
+    newSheetsSpreadsheetsValuesBatchGetByDataFilter,
+    SheetsSpreadsheetsValuesBatchGetByDataFilter,
+
+    -- ** sheets.spreadsheets.values.batchUpdate
+    SheetsSpreadsheetsValuesBatchUpdateResource,
+    newSheetsSpreadsheetsValuesBatchUpdate,
+    SheetsSpreadsheetsValuesBatchUpdate,
+
+    -- ** sheets.spreadsheets.values.batchUpdateByDataFilter
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
+    newSheetsSpreadsheetsValuesBatchUpdateByDataFilter,
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter,
+
+    -- ** sheets.spreadsheets.values.clear
+    SheetsSpreadsheetsValuesClearResource,
+    newSheetsSpreadsheetsValuesClear,
+    SheetsSpreadsheetsValuesClear,
+
+    -- ** sheets.spreadsheets.values.get
+    SheetsSpreadsheetsValuesGetResource,
+    newSheetsSpreadsheetsValuesGet,
+    SheetsSpreadsheetsValuesGet,
+
+    -- ** sheets.spreadsheets.values.update
+    SheetsSpreadsheetsValuesUpdateResource,
+    newSheetsSpreadsheetsValuesUpdate,
+    SheetsSpreadsheetsValuesUpdate,
 
     -- * Types
 
@@ -1308,33 +1399,21 @@ module Network.Google.Sheets.Types
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Internal.Product
-import Network.Google.Sheets.Internal.Sum
-
--- | Default request referring to version @v4@ of the Google Sheets API. This contains the host and root path used as a starting point for constructing service requests.
-sheetsService :: Core.ServiceConfig
-sheetsService =
-  Core.defaultService
-    (Core.ServiceId "sheets:v4")
-    "sheets.googleapis.com"
-
--- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
-
--- | See, edit, create, and delete only the specific Google Drive files you use with this app
-driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Core.Proxy
-
--- | See and download all your Google Drive files
-driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Core.Proxy
-
--- | See, edit, create, and delete all your Google Sheets spreadsheets
-spreadsheetsScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets"]
-spreadsheetsScope = Core.Proxy
-
--- | See all your Google Sheets spreadsheets
-spreadsheetsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets.readonly"]
-spreadsheetsReadOnlyScope = Core.Proxy
+import Gogol.Sheets.Spreadsheets.BatchUpdate
+import Gogol.Sheets.Spreadsheets.Create
+import Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
+import Gogol.Sheets.Spreadsheets.DeveloperMetadata.Search
+import Gogol.Sheets.Spreadsheets.Get
+import Gogol.Sheets.Spreadsheets.GetByDataFilter
+import Gogol.Sheets.Spreadsheets.Sheets.CopyTo
+import Gogol.Sheets.Spreadsheets.Values.Append
+import Gogol.Sheets.Spreadsheets.Values.BatchClear
+import Gogol.Sheets.Spreadsheets.Values.BatchClearByDataFilter
+import Gogol.Sheets.Spreadsheets.Values.BatchGet
+import Gogol.Sheets.Spreadsheets.Values.BatchGetByDataFilter
+import Gogol.Sheets.Spreadsheets.Values.BatchUpdate
+import Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
+import Gogol.Sheets.Spreadsheets.Values.Clear
+import Gogol.Sheets.Spreadsheets.Values.Get
+import Gogol.Sheets.Spreadsheets.Values.Update
+import Gogol.Sheets.Types

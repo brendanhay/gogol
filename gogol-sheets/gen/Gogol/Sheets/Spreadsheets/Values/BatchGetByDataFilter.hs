@@ -19,36 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Search
+-- Module      : Gogol.Sheets.Spreadsheets.Values.BatchGetByDataFilter
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.
+-- Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.
 --
--- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.developerMetadata.search@.
-module Network.Google.Sheets.Spreadsheets.DeveloperMetadata.Search
+-- /See:/ <https://developers.google.com/sheets/ Google Sheets API Reference> for @sheets.spreadsheets.values.batchGetByDataFilter@.
+module Gogol.Sheets.Spreadsheets.Values.BatchGetByDataFilter
   ( -- * Resource
-    SheetsSpreadsheetsDeveloperMetadataSearchResource,
+    SheetsSpreadsheetsValuesBatchGetByDataFilterResource,
 
     -- ** Constructing a Request
-    newSheetsSpreadsheetsDeveloperMetadataSearch,
-    SheetsSpreadsheetsDeveloperMetadataSearch,
+    newSheetsSpreadsheetsValuesBatchGetByDataFilter,
+    SheetsSpreadsheetsValuesBatchGetByDataFilter,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Sheets.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Sheets.Types
 
--- | A resource alias for @sheets.spreadsheets.developerMetadata.search@ method which the
--- 'SheetsSpreadsheetsDeveloperMetadataSearch' request conforms to.
-type SheetsSpreadsheetsDeveloperMetadataSearchResource =
+-- | A resource alias for @sheets.spreadsheets.values.batchGetByDataFilter@ method which the
+-- 'SheetsSpreadsheetsValuesBatchGetByDataFilter' request conforms to.
+type SheetsSpreadsheetsValuesBatchGetByDataFilterResource =
   "v4"
     Core.:> "spreadsheets"
     Core.:> Core.Capture "spreadsheetId" Core.Text
-    Core.:> "developerMetadata:search"
+    Core.:> "values:batchGetByDataFilter"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -57,15 +57,15 @@ type SheetsSpreadsheetsDeveloperMetadataSearchResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              SearchDeveloperMetadataRequest
+              BatchGetValuesByDataFilterRequest
     Core.:> Core.Post
               '[Core.JSON]
-              SearchDeveloperMetadataResponse
+              BatchGetValuesByDataFilterResponse
 
--- | Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.
+-- | Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.
 --
--- /See:/ 'newSheetsSpreadsheetsDeveloperMetadataSearch' smart constructor.
-data SheetsSpreadsheetsDeveloperMetadataSearch = SheetsSpreadsheetsDeveloperMetadataSearch
+-- /See:/ 'newSheetsSpreadsheetsValuesBatchGetByDataFilter' smart constructor.
+data SheetsSpreadsheetsValuesBatchGetByDataFilter = SheetsSpreadsheetsValuesBatchGetByDataFilter
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -73,8 +73,8 @@ data SheetsSpreadsheetsDeveloperMetadataSearch = SheetsSpreadsheetsDeveloperMeta
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: SearchDeveloperMetadataRequest,
-    -- | The ID of the spreadsheet to retrieve metadata from.
+    payload :: BatchGetValuesByDataFilterRequest,
+    -- | The ID of the spreadsheet to retrieve data from.
     spreadsheetId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,15 +83,15 @@ data SheetsSpreadsheetsDeveloperMetadataSearch = SheetsSpreadsheetsDeveloperMeta
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SheetsSpreadsheetsDeveloperMetadataSearch' with the minimum fields required to make a request.
-newSheetsSpreadsheetsDeveloperMetadataSearch ::
+-- | Creates a value of 'SheetsSpreadsheetsValuesBatchGetByDataFilter' with the minimum fields required to make a request.
+newSheetsSpreadsheetsValuesBatchGetByDataFilter ::
   -- |  Multipart request metadata. See 'payload'.
-  SearchDeveloperMetadataRequest ->
-  -- |  The ID of the spreadsheet to retrieve metadata from. See 'spreadsheetId'.
+  BatchGetValuesByDataFilterRequest ->
+  -- |  The ID of the spreadsheet to retrieve data from. See 'spreadsheetId'.
   Core.Text ->
-  SheetsSpreadsheetsDeveloperMetadataSearch
-newSheetsSpreadsheetsDeveloperMetadataSearch payload spreadsheetId =
-  SheetsSpreadsheetsDeveloperMetadataSearch
+  SheetsSpreadsheetsValuesBatchGetByDataFilter
+newSheetsSpreadsheetsValuesBatchGetByDataFilter payload spreadsheetId =
+  SheetsSpreadsheetsValuesBatchGetByDataFilter
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -103,19 +103,20 @@ newSheetsSpreadsheetsDeveloperMetadataSearch payload spreadsheetId =
 
 instance
   Core.GoogleRequest
-    SheetsSpreadsheetsDeveloperMetadataSearch
+    SheetsSpreadsheetsValuesBatchGetByDataFilter
   where
   type
-    Rs SheetsSpreadsheetsDeveloperMetadataSearch =
-      SearchDeveloperMetadataResponse
+    Rs SheetsSpreadsheetsValuesBatchGetByDataFilter =
+      BatchGetValuesByDataFilterResponse
   type
-    Scopes SheetsSpreadsheetsDeveloperMetadataSearch =
+    Scopes
+      SheetsSpreadsheetsValuesBatchGetByDataFilter =
       '[ "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/spreadsheets"
        ]
   requestClient
-    SheetsSpreadsheetsDeveloperMetadataSearch {..} =
+    SheetsSpreadsheetsValuesBatchGetByDataFilter {..} =
       go
         spreadsheetId
         xgafv
@@ -131,6 +132,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  SheetsSpreadsheetsDeveloperMetadataSearchResource
+                  SheetsSpreadsheetsValuesBatchGetByDataFilterResource
             )
             Core.mempty
