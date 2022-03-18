@@ -1,122 +1,117 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AccessApproval.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AccessApproval.Types
-    (
-    -- * Service Configuration
-      accessApprovalService
+  ( -- * Configuration
+    accessApprovalService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * ListApprovalRequestsResponse
-    , ListApprovalRequestsResponse
-    , listApprovalRequestsResponse
-    , larrNextPageToken
-    , larrApprovalRequests
+    -- * Types
 
-    -- * ApproveDecision
-    , ApproveDecision
-    , approveDecision
-    , adApproveTime
-    , adExpireTime
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * AccessLocations
-    , AccessLocations
-    , accessLocations
-    , alPrincipalOfficeCountry
-    , alPrincipalPhysicalLocationCountry
+    -- ** AccessApprovalServiceAccount
+    AccessApprovalServiceAccount (..),
+    newAccessApprovalServiceAccount,
 
-    -- * DismissDecision
-    , DismissDecision
-    , dismissDecision
-    , ddImplicit
-    , ddDismissTime
+    -- ** AccessApprovalSettings
+    AccessApprovalSettings (..),
+    newAccessApprovalSettings,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** AccessLocations
+    AccessLocations (..),
+    newAccessLocations,
 
-    -- * EnrolledServiceEnrollmentLevel
-    , EnrolledServiceEnrollmentLevel (..)
+    -- ** AccessReason
+    AccessReason (..),
+    newAccessReason,
 
-    -- * AccessReasonType
-    , AccessReasonType (..)
+    -- ** AccessReason_Type
+    AccessReason_Type (..),
 
-    -- * ResourceProperties
-    , ResourceProperties
-    , resourceProperties
-    , rpExcludesDescendants
+    -- ** ApprovalRequest
+    ApprovalRequest (..),
+    newApprovalRequest,
 
-    -- * AccessApprovalSettings
-    , AccessApprovalSettings
-    , accessApprovalSettings
-    , aasEnrolledServices
-    , aasEnrolledAncestor
-    , aasName
-    , aasNotificationEmails
+    -- ** ApproveApprovalRequestMessage
+    ApproveApprovalRequestMessage (..),
+    newApproveApprovalRequestMessage,
 
-    -- * ApprovalRequest
-    , ApprovalRequest
-    , approvalRequest
-    , arRequestedResourceName
-    , arRequestedResourceProperties
-    , arRequestedExpiration
-    , arRequestTime
-    , arRequestedReason
-    , arName
-    , arApprove
-    , arDismiss
-    , arRequestedLocations
+    -- ** ApproveDecision
+    ApproveDecision (..),
+    newApproveDecision,
 
-    -- * DismissApprovalRequestMessage
-    , DismissApprovalRequestMessage
-    , dismissApprovalRequestMessage
+    -- ** DismissApprovalRequestMessage
+    DismissApprovalRequestMessage (..),
+    newDismissApprovalRequestMessage,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** DismissDecision
+    DismissDecision (..),
+    newDismissDecision,
 
-    -- * ApproveApprovalRequestMessage
-    , ApproveApprovalRequestMessage
-    , approveApprovalRequestMessage
-    , aarmExpireTime
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * EnrolledService
-    , EnrolledService
-    , enrolledService
-    , esCloudProduct
-    , esEnrollmentLevel
+    -- ** EnrolledService
+    EnrolledService (..),
+    newEnrolledService,
 
-    -- * AccessReason
-    , AccessReason
-    , accessReason
-    , arType
-    , arDetail
-    ) where
+    -- ** EnrolledService_EnrollmentLevel
+    EnrolledService_EnrollmentLevel (..),
 
-import Network.Google.AccessApproval.Types.Product
-import Network.Google.AccessApproval.Types.Sum
-import Network.Google.Prelude
+    -- ** ListApprovalRequestsResponse
+    ListApprovalRequestsResponse (..),
+    newListApprovalRequestsResponse,
 
--- | Default request referring to version 'v1' of the Access Approval API. This contains the host and root path used as a starting point for constructing service requests.
-accessApprovalService :: ServiceConfig
-accessApprovalService
-  = defaultService (ServiceId "accessapproval:v1")
-      "accessapproval.googleapis.com"
+    -- ** ResourceProperties
+    ResourceProperties (..),
+    newResourceProperties,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** SignatureInfo
+    SignatureInfo (..),
+    newSignatureInfo,
+  )
+where
+
+import Network.Google.AccessApproval.Internal.Product
+import Network.Google.AccessApproval.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Access Approval API. This contains the host and root path used as a starting point for constructing service requests.
+accessApprovalService :: Core.ServiceConfig
+accessApprovalService =
+  Core.defaultService
+    (Core.ServiceId "accessapproval:v1")
+    "accessapproval.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy

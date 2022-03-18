@@ -1,234 +1,254 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AccessApproval
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- An API for controlling access to data by Google personnel.
 --
--- /See:/ <https://cloud.google.com/access-approval/docs Access Approval API Reference>
+-- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference>
 module Network.Google.AccessApproval
-    (
-    -- * Service Configuration
-      accessApprovalService
+  ( -- * Configuration
+    accessApprovalService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-
-    -- * API Declaration
-    , AccessApprovalAPI
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** accessapproval.folders.approvalRequests.approve
-    , module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Approve
+    AccessApprovalFoldersApprovalRequestsApproveResource,
+    newAccessApprovalFoldersApprovalRequestsApprove,
+    AccessApprovalFoldersApprovalRequestsApprove,
 
     -- ** accessapproval.folders.approvalRequests.dismiss
-    , module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Dismiss
+    AccessApprovalFoldersApprovalRequestsDismissResource,
+    newAccessApprovalFoldersApprovalRequestsDismiss,
+    AccessApprovalFoldersApprovalRequestsDismiss,
 
     -- ** accessapproval.folders.approvalRequests.get
-    , module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Get
+    AccessApprovalFoldersApprovalRequestsGetResource,
+    newAccessApprovalFoldersApprovalRequestsGet,
+    AccessApprovalFoldersApprovalRequestsGet,
 
     -- ** accessapproval.folders.approvalRequests.list
-    , module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.List
+    AccessApprovalFoldersApprovalRequestsListResource,
+    newAccessApprovalFoldersApprovalRequestsList,
+    AccessApprovalFoldersApprovalRequestsList,
 
     -- ** accessapproval.folders.deleteAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Folders.DeleteAccessApprovalSettings
+    AccessApprovalFoldersDeleteAccessApprovalSettingsResource,
+    newAccessApprovalFoldersDeleteAccessApprovalSettings,
+    AccessApprovalFoldersDeleteAccessApprovalSettings,
 
     -- ** accessapproval.folders.getAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Folders.GetAccessApprovalSettings
+    AccessApprovalFoldersGetAccessApprovalSettingsResource,
+    newAccessApprovalFoldersGetAccessApprovalSettings,
+    AccessApprovalFoldersGetAccessApprovalSettings,
+
+    -- ** accessapproval.folders.getServiceAccount
+    AccessApprovalFoldersGetServiceAccountResource,
+    newAccessApprovalFoldersGetServiceAccount,
+    AccessApprovalFoldersGetServiceAccount,
 
     -- ** accessapproval.folders.updateAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettings
+    AccessApprovalFoldersUpdateAccessApprovalSettingsResource,
+    newAccessApprovalFoldersUpdateAccessApprovalSettings,
+    AccessApprovalFoldersUpdateAccessApprovalSettings,
 
     -- ** accessapproval.organizations.approvalRequests.approve
-    , module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Approve
+    AccessApprovalOrganizationsApprovalRequestsApproveResource,
+    newAccessApprovalOrganizationsApprovalRequestsApprove,
+    AccessApprovalOrganizationsApprovalRequestsApprove,
 
     -- ** accessapproval.organizations.approvalRequests.dismiss
-    , module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Dismiss
+    AccessApprovalOrganizationsApprovalRequestsDismissResource,
+    newAccessApprovalOrganizationsApprovalRequestsDismiss,
+    AccessApprovalOrganizationsApprovalRequestsDismiss,
 
     -- ** accessapproval.organizations.approvalRequests.get
-    , module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Get
+    AccessApprovalOrganizationsApprovalRequestsGetResource,
+    newAccessApprovalOrganizationsApprovalRequestsGet,
+    AccessApprovalOrganizationsApprovalRequestsGet,
 
     -- ** accessapproval.organizations.approvalRequests.list
-    , module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.List
+    AccessApprovalOrganizationsApprovalRequestsListResource,
+    newAccessApprovalOrganizationsApprovalRequestsList,
+    AccessApprovalOrganizationsApprovalRequestsList,
 
     -- ** accessapproval.organizations.deleteAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Organizations.DeleteAccessApprovalSettings
+    AccessApprovalOrganizationsDeleteAccessApprovalSettingsResource,
+    newAccessApprovalOrganizationsDeleteAccessApprovalSettings,
+    AccessApprovalOrganizationsDeleteAccessApprovalSettings,
 
     -- ** accessapproval.organizations.getAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Organizations.GetAccessApprovalSettings
+    AccessApprovalOrganizationsGetAccessApprovalSettingsResource,
+    newAccessApprovalOrganizationsGetAccessApprovalSettings,
+    AccessApprovalOrganizationsGetAccessApprovalSettings,
+
+    -- ** accessapproval.organizations.getServiceAccount
+    AccessApprovalOrganizationsGetServiceAccountResource,
+    newAccessApprovalOrganizationsGetServiceAccount,
+    AccessApprovalOrganizationsGetServiceAccount,
 
     -- ** accessapproval.organizations.updateAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApprovalSettings
+    AccessApprovalOrganizationsUpdateAccessApprovalSettingsResource,
+    newAccessApprovalOrganizationsUpdateAccessApprovalSettings,
+    AccessApprovalOrganizationsUpdateAccessApprovalSettings,
 
     -- ** accessapproval.projects.approvalRequests.approve
-    , module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Approve
+    AccessApprovalProjectsApprovalRequestsApproveResource,
+    newAccessApprovalProjectsApprovalRequestsApprove,
+    AccessApprovalProjectsApprovalRequestsApprove,
 
     -- ** accessapproval.projects.approvalRequests.dismiss
-    , module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Dismiss
+    AccessApprovalProjectsApprovalRequestsDismissResource,
+    newAccessApprovalProjectsApprovalRequestsDismiss,
+    AccessApprovalProjectsApprovalRequestsDismiss,
 
     -- ** accessapproval.projects.approvalRequests.get
-    , module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Get
+    AccessApprovalProjectsApprovalRequestsGetResource,
+    newAccessApprovalProjectsApprovalRequestsGet,
+    AccessApprovalProjectsApprovalRequestsGet,
 
     -- ** accessapproval.projects.approvalRequests.list
-    , module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.List
+    AccessApprovalProjectsApprovalRequestsListResource,
+    newAccessApprovalProjectsApprovalRequestsList,
+    AccessApprovalProjectsApprovalRequestsList,
 
     -- ** accessapproval.projects.deleteAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Projects.DeleteAccessApprovalSettings
+    AccessApprovalProjectsDeleteAccessApprovalSettingsResource,
+    newAccessApprovalProjectsDeleteAccessApprovalSettings,
+    AccessApprovalProjectsDeleteAccessApprovalSettings,
 
     -- ** accessapproval.projects.getAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Projects.GetAccessApprovalSettings
+    AccessApprovalProjectsGetAccessApprovalSettingsResource,
+    newAccessApprovalProjectsGetAccessApprovalSettings,
+    AccessApprovalProjectsGetAccessApprovalSettings,
+
+    -- ** accessapproval.projects.getServiceAccount
+    AccessApprovalProjectsGetServiceAccountResource,
+    newAccessApprovalProjectsGetServiceAccount,
+    AccessApprovalProjectsGetServiceAccount,
 
     -- ** accessapproval.projects.updateAccessApprovalSettings
-    , module Network.Google.Resource.AccessApproval.Projects.UpdateAccessApprovalSettings
+    AccessApprovalProjectsUpdateAccessApprovalSettingsResource,
+    newAccessApprovalProjectsUpdateAccessApprovalSettings,
+    AccessApprovalProjectsUpdateAccessApprovalSettings,
 
     -- * Types
 
-    -- ** ListApprovalRequestsResponse
-    , ListApprovalRequestsResponse
-    , listApprovalRequestsResponse
-    , larrNextPageToken
-    , larrApprovalRequests
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- ** ApproveDecision
-    , ApproveDecision
-    , approveDecision
-    , adApproveTime
-    , adExpireTime
-
-    -- ** AccessLocations
-    , AccessLocations
-    , accessLocations
-    , alPrincipalOfficeCountry
-    , alPrincipalPhysicalLocationCountry
-
-    -- ** DismissDecision
-    , DismissDecision
-    , dismissDecision
-    , ddImplicit
-    , ddDismissTime
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** EnrolledServiceEnrollmentLevel
-    , EnrolledServiceEnrollmentLevel (..)
-
-    -- ** AccessReasonType
-    , AccessReasonType (..)
-
-    -- ** ResourceProperties
-    , ResourceProperties
-    , resourceProperties
-    , rpExcludesDescendants
+    -- ** AccessApprovalServiceAccount
+    AccessApprovalServiceAccount (..),
+    newAccessApprovalServiceAccount,
 
     -- ** AccessApprovalSettings
-    , AccessApprovalSettings
-    , accessApprovalSettings
-    , aasEnrolledServices
-    , aasEnrolledAncestor
-    , aasName
-    , aasNotificationEmails
+    AccessApprovalSettings (..),
+    newAccessApprovalSettings,
 
-    -- ** ApprovalRequest
-    , ApprovalRequest
-    , approvalRequest
-    , arRequestedResourceName
-    , arRequestedResourceProperties
-    , arRequestedExpiration
-    , arRequestTime
-    , arRequestedReason
-    , arName
-    , arApprove
-    , arDismiss
-    , arRequestedLocations
-
-    -- ** DismissApprovalRequestMessage
-    , DismissApprovalRequestMessage
-    , dismissApprovalRequestMessage
-
-    -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** ApproveApprovalRequestMessage
-    , ApproveApprovalRequestMessage
-    , approveApprovalRequestMessage
-    , aarmExpireTime
-
-    -- ** EnrolledService
-    , EnrolledService
-    , enrolledService
-    , esCloudProduct
-    , esEnrollmentLevel
+    -- ** AccessLocations
+    AccessLocations (..),
+    newAccessLocations,
 
     -- ** AccessReason
-    , AccessReason
-    , accessReason
-    , arType
-    , arDetail
-    ) where
+    AccessReason (..),
+    newAccessReason,
 
-import Network.Google.Prelude
+    -- ** AccessReason_Type
+    AccessReason_Type (..),
+
+    -- ** ApprovalRequest
+    ApprovalRequest (..),
+    newApprovalRequest,
+
+    -- ** ApproveApprovalRequestMessage
+    ApproveApprovalRequestMessage (..),
+    newApproveApprovalRequestMessage,
+
+    -- ** ApproveDecision
+    ApproveDecision (..),
+    newApproveDecision,
+
+    -- ** DismissApprovalRequestMessage
+    DismissApprovalRequestMessage (..),
+    newDismissApprovalRequestMessage,
+
+    -- ** DismissDecision
+    DismissDecision (..),
+    newDismissDecision,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** EnrolledService
+    EnrolledService (..),
+    newEnrolledService,
+
+    -- ** EnrolledService_EnrollmentLevel
+    EnrolledService_EnrollmentLevel (..),
+
+    -- ** ListApprovalRequestsResponse
+    ListApprovalRequestsResponse (..),
+    newListApprovalRequestsResponse,
+
+    -- ** ResourceProperties
+    ResourceProperties (..),
+    newResourceProperties,
+
+    -- ** SignatureInfo
+    SignatureInfo (..),
+    newSignatureInfo,
+  )
+where
+
+import Network.Google.AccessApproval.Folders.ApprovalRequests.Approve
+import Network.Google.AccessApproval.Folders.ApprovalRequests.Dismiss
+import Network.Google.AccessApproval.Folders.ApprovalRequests.Get
+import Network.Google.AccessApproval.Folders.ApprovalRequests.List
+import Network.Google.AccessApproval.Folders.DeleteAccessApprovalSettings
+import Network.Google.AccessApproval.Folders.GetAccessApprovalSettings
+import Network.Google.AccessApproval.Folders.GetServiceAccount
+import Network.Google.AccessApproval.Folders.UpdateAccessApprovalSettings
+import Network.Google.AccessApproval.Organizations.ApprovalRequests.Approve
+import Network.Google.AccessApproval.Organizations.ApprovalRequests.Dismiss
+import Network.Google.AccessApproval.Organizations.ApprovalRequests.Get
+import Network.Google.AccessApproval.Organizations.ApprovalRequests.List
+import Network.Google.AccessApproval.Organizations.DeleteAccessApprovalSettings
+import Network.Google.AccessApproval.Organizations.GetAccessApprovalSettings
+import Network.Google.AccessApproval.Organizations.GetServiceAccount
+import Network.Google.AccessApproval.Organizations.UpdateAccessApprovalSettings
+import Network.Google.AccessApproval.Projects.ApprovalRequests.Approve
+import Network.Google.AccessApproval.Projects.ApprovalRequests.Dismiss
+import Network.Google.AccessApproval.Projects.ApprovalRequests.Get
+import Network.Google.AccessApproval.Projects.ApprovalRequests.List
+import Network.Google.AccessApproval.Projects.DeleteAccessApprovalSettings
+import Network.Google.AccessApproval.Projects.GetAccessApprovalSettings
+import Network.Google.AccessApproval.Projects.GetServiceAccount
+import Network.Google.AccessApproval.Projects.UpdateAccessApprovalSettings
 import Network.Google.AccessApproval.Types
-import Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Approve
-import Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Dismiss
-import Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Get
-import Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.List
-import Network.Google.Resource.AccessApproval.Folders.DeleteAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Folders.GetAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Approve
-import Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Dismiss
-import Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Get
-import Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.List
-import Network.Google.Resource.AccessApproval.Organizations.DeleteAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Organizations.GetAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Approve
-import Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Dismiss
-import Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Get
-import Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.List
-import Network.Google.Resource.AccessApproval.Projects.DeleteAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Projects.GetAccessApprovalSettings
-import Network.Google.Resource.AccessApproval.Projects.UpdateAccessApprovalSettings
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Access Approval API service.
-type AccessApprovalAPI =
-     FoldersApprovalRequestsListResource :<|>
-       FoldersApprovalRequestsGetResource
-       :<|> FoldersApprovalRequestsApproveResource
-       :<|> FoldersApprovalRequestsDismissResource
-       :<|> FoldersDeleteAccessApprovalSettingsResource
-       :<|> FoldersUpdateAccessApprovalSettingsResource
-       :<|> FoldersGetAccessApprovalSettingsResource
-       :<|> OrganizationsApprovalRequestsListResource
-       :<|> OrganizationsApprovalRequestsGetResource
-       :<|> OrganizationsApprovalRequestsApproveResource
-       :<|> OrganizationsApprovalRequestsDismissResource
-       :<|>
-       OrganizationsDeleteAccessApprovalSettingsResource
-       :<|>
-       OrganizationsUpdateAccessApprovalSettingsResource
-       :<|> OrganizationsGetAccessApprovalSettingsResource
-       :<|> ProjectsApprovalRequestsListResource
-       :<|> ProjectsApprovalRequestsGetResource
-       :<|> ProjectsApprovalRequestsApproveResource
-       :<|> ProjectsApprovalRequestsDismissResource
-       :<|> ProjectsDeleteAccessApprovalSettingsResource
-       :<|> ProjectsUpdateAccessApprovalSettingsResource
-       :<|> ProjectsGetAccessApprovalSettingsResource
