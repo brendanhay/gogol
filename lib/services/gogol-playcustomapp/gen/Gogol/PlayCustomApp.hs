@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,33 +30,33 @@
 --
 -- /See:/ <https://developers.google.com/android/work/play/custom-app-api/ Google Play Custom App Publishing API Reference>
 module Gogol.PlayCustomApp
-    (
-    -- * Configuration
-      playCustomAppService
+  ( -- * Configuration
+    playCustomAppService,
 
     -- * OAuth Scopes
-    , androidpublisherScope
+    androidpublisherScope,
 
     -- * Resources
 
     -- ** playcustomapp.accounts.customApps.create
-    , PlayCustomAppAccountsCustomAppsCreateResource
-    , newPlayCustomAppAccountsCustomAppsCreate
-    , PlayCustomAppAccountsCustomAppsCreate
+    PlayCustomAppAccountsCustomAppsCreateResource,
+    newPlayCustomAppAccountsCustomAppsCreate,
+    PlayCustomAppAccountsCustomAppsCreate,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CustomApp
-    , CustomApp (..)
-    , newCustomApp
+    CustomApp (..),
+    newCustomApp,
 
     -- ** Organization
-    , Organization (..)
-    , newOrganization
-    ) where
+    Organization (..),
+    newOrganization,
+  )
+where
 
 import Gogol.PlayCustomApp.Accounts.CustomApps.Create
 import Gogol.PlayCustomApp.Types
