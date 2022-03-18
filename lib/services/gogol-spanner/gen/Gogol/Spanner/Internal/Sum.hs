@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Spanner.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Backup_DatabaseDialect
     Backup_DatabaseDialect
-      ( Backup_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
+      (
+        Backup_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
         Backup_DatabaseDialect_GOOGLESTANDARDSQL,
         Backup_DatabaseDialect_Postgresql,
         ..
@@ -43,7 +54,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * Backup_State
     Backup_State
-      ( Backup_State_STATEUNSPECIFIED,
+      (
+        Backup_State_STATEUNSPECIFIED,
         Backup_State_Creating,
         Backup_State_Ready,
         ..
@@ -51,7 +63,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * ContextValue_Severity
     ContextValue_Severity
-      ( ContextValue_Severity_SEVERITYUNSPECIFIED,
+      (
+        ContextValue_Severity_SEVERITYUNSPECIFIED,
         ContextValue_Severity_Info,
         ContextValue_Severity_Warning,
         ContextValue_Severity_Error',
@@ -61,7 +74,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * CreateDatabaseRequest_DatabaseDialect
     CreateDatabaseRequest_DatabaseDialect
-      ( CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
+      (
+        CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
         CreateDatabaseRequest_DatabaseDialect_GOOGLESTANDARDSQL,
         CreateDatabaseRequest_DatabaseDialect_Postgresql,
         ..
@@ -69,7 +83,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * Database_DatabaseDialect
     Database_DatabaseDialect
-      ( Database_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
+      (
+        Database_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
         Database_DatabaseDialect_GOOGLESTANDARDSQL,
         Database_DatabaseDialect_Postgresql,
         ..
@@ -77,7 +92,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * Database_State
     Database_State
-      ( Database_State_STATEUNSPECIFIED,
+      (
+        Database_State_STATEUNSPECIFIED,
         Database_State_Creating,
         Database_State_Ready,
         Database_State_READYOPTIMIZING,
@@ -86,7 +102,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * DiagnosticMessage_Severity
     DiagnosticMessage_Severity
-      ( DiagnosticMessage_Severity_SEVERITYUNSPECIFIED,
+      (
+        DiagnosticMessage_Severity_SEVERITYUNSPECIFIED,
         DiagnosticMessage_Severity_Info,
         DiagnosticMessage_Severity_Warning,
         DiagnosticMessage_Severity_Error',
@@ -96,7 +113,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * EncryptionInfo_EncryptionType
     EncryptionInfo_EncryptionType
-      ( EncryptionInfo_EncryptionType_TYPEUNSPECIFIED,
+      (
+        EncryptionInfo_EncryptionType_TYPEUNSPECIFIED,
         EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION,
         EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
         ..
@@ -104,7 +122,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * ExecuteSqlRequest_QueryMode
     ExecuteSqlRequest_QueryMode
-      ( ExecuteSqlRequest_QueryMode_Normal,
+      (
+        ExecuteSqlRequest_QueryMode_Normal,
         ExecuteSqlRequest_QueryMode_Plan,
         ExecuteSqlRequest_QueryMode_Profile,
         ..
@@ -112,7 +131,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * Instance_State
     Instance_State
-      ( Instance_State_STATEUNSPECIFIED,
+      (
+        Instance_State_STATEUNSPECIFIED,
         Instance_State_Creating,
         Instance_State_Ready,
         ..
@@ -120,7 +140,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * Metric_Aggregation
     Metric_Aggregation
-      ( Metric_Aggregation_AGGREGATIONUNSPECIFIED,
+      (
+        Metric_Aggregation_AGGREGATIONUNSPECIFIED,
         Metric_Aggregation_Max,
         Metric_Aggregation_Sum,
         ..
@@ -128,7 +149,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * PlanNode_Kind
     PlanNode_Kind
-      ( PlanNode_Kind_KINDUNSPECIFIED,
+      (
+        PlanNode_Kind_KINDUNSPECIFIED,
         PlanNode_Kind_Relational,
         PlanNode_Kind_Scalar,
         ..
@@ -136,7 +158,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * ReplicaInfo_Type
     ReplicaInfo_Type
-      ( ReplicaInfo_Type_TYPEUNSPECIFIED,
+      (
+        ReplicaInfo_Type_TYPEUNSPECIFIED,
         ReplicaInfo_Type_READWRITE,
         ReplicaInfo_Type_READONLY,
         ReplicaInfo_Type_Witness,
@@ -145,7 +168,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * RequestOptions_Priority
     RequestOptions_Priority
-      ( RequestOptions_Priority_PRIORITYUNSPECIFIED,
+      (
+        RequestOptions_Priority_PRIORITYUNSPECIFIED,
         RequestOptions_Priority_PRIORITYLOW,
         RequestOptions_Priority_PRIORITYMEDIUM,
         RequestOptions_Priority_PRIORITYHIGH,
@@ -154,7 +178,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * RestoreDatabaseEncryptionConfig_EncryptionType
     RestoreDatabaseEncryptionConfig_EncryptionType
-      ( RestoreDatabaseEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+      (
+        RestoreDatabaseEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
         RestoreDatabaseEncryptionConfig_EncryptionType_USECONFIGDEFAULTORBACKUPENCRYPTION,
         RestoreDatabaseEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION,
         RestoreDatabaseEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
@@ -163,21 +188,24 @@ module Gogol.Spanner.Internal.Sum
 
     -- * RestoreDatabaseMetadata_SourceType
     RestoreDatabaseMetadata_SourceType
-      ( RestoreDatabaseMetadata_SourceType_TYPEUNSPECIFIED,
+      (
+        RestoreDatabaseMetadata_SourceType_TYPEUNSPECIFIED,
         RestoreDatabaseMetadata_SourceType_Backup,
         ..
       ),
 
     -- * RestoreInfo_SourceType
     RestoreInfo_SourceType
-      ( RestoreInfo_SourceType_TYPEUNSPECIFIED,
+      (
+        RestoreInfo_SourceType_TYPEUNSPECIFIED,
         RestoreInfo_SourceType_Backup,
         ..
       ),
 
     -- * Type_Code
     Type_Code
-      ( Type_Code_TYPECODEUNSPECIFIED,
+      (
+        Type_Code_TYPECODEUNSPECIFIED,
         Type_Code_Bool,
         Type_Code_INT64,
         Type_Code_FLOAT64,
@@ -194,14 +222,16 @@ module Gogol.Spanner.Internal.Sum
 
     -- * Type_TypeAnnotation
     Type_TypeAnnotation
-      ( Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
+      (
+        Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
         Type_TypeAnnotation_PGNUMERIC,
         ..
       ),
 
     -- * VisualizationData_KeyUnit
     VisualizationData_KeyUnit
-      ( VisualizationData_KeyUnit_KEYUNITUNSPECIFIED,
+      (
+        VisualizationData_KeyUnit_KEYUNITUNSPECIFIED,
         VisualizationData_KeyUnit_Key,
         VisualizationData_KeyUnit_Chunk,
         ..
@@ -209,7 +239,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
     ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
-      ( ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+      (
+        ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
         ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_USEDATABASEENCRYPTION,
         ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_GOOGLEDEFAULTENCRYPTION,
         ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_CUSTOMERMANAGEDENCRYPTION,
@@ -218,7 +249,8 @@ module Gogol.Spanner.Internal.Sum
 
     -- * ProjectsInstancesDatabasesGetScansView
     ProjectsInstancesDatabasesGetScansView
-      ( ProjectsInstancesDatabasesGetScansView_VIEWUNSPECIFIED,
+      (
+        ProjectsInstancesDatabasesGetScansView_VIEWUNSPECIFIED,
         ProjectsInstancesDatabasesGetScansView_Summary,
         ProjectsInstancesDatabasesGetScansView_Full,
         ..
@@ -226,28 +258,28 @@ module Gogol.Spanner.Internal.Sum
 
     -- * ScansListView
     ScansListView
-      ( ScansListView_VIEWUNSPECIFIED,
+      (
+        ScansListView_VIEWUNSPECIFIED,
         ScansListView_Summary,
         ScansListView_Full,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -260,21 +292,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Output only. The database dialect information for the backup.
-newtype Backup_DatabaseDialect = Backup_DatabaseDialect {fromBackup_DatabaseDialect :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Backup_DatabaseDialect = Backup_DatabaseDialect { fromBackup_DatabaseDialect :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value will create a database with the GOOGLE/STANDARD/SQL dialect.
 pattern Backup_DatabaseDialect_DATABASEDIALECTUNSPECIFIED :: Backup_DatabaseDialect
@@ -292,21 +323,20 @@ pattern Backup_DatabaseDialect_Postgresql = Backup_DatabaseDialect "POSTGRESQL"
   Backup_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
   Backup_DatabaseDialect_GOOGLESTANDARDSQL,
   Backup_DatabaseDialect_Postgresql,
-  Backup_DatabaseDialect
-  #-}
+  Backup_DatabaseDialect #-}
 
 -- | Output only. The current state of the backup.
-newtype Backup_State = Backup_State {fromBackup_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Backup_State = Backup_State { fromBackup_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern Backup_State_STATEUNSPECIFIED :: Backup_State
@@ -324,21 +354,20 @@ pattern Backup_State_Ready = Backup_State "READY"
   Backup_State_STATEUNSPECIFIED,
   Backup_State_Creating,
   Backup_State_Ready,
-  Backup_State
-  #-}
+  Backup_State #-}
 
 -- | The severity of this context.
-newtype ContextValue_Severity = ContextValue_Severity {fromContextValue_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContextValue_Severity = ContextValue_Severity { fromContextValue_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Required default value.
 pattern ContextValue_Severity_SEVERITYUNSPECIFIED :: ContextValue_Severity
@@ -366,21 +395,20 @@ pattern ContextValue_Severity_Fatal = ContextValue_Severity "FATAL"
   ContextValue_Severity_Warning,
   ContextValue_Severity_Error',
   ContextValue_Severity_Fatal,
-  ContextValue_Severity
-  #-}
+  ContextValue_Severity #-}
 
 -- | Optional. The dialect of the Cloud Spanner Database.
-newtype CreateDatabaseRequest_DatabaseDialect = CreateDatabaseRequest_DatabaseDialect {fromCreateDatabaseRequest_DatabaseDialect :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CreateDatabaseRequest_DatabaseDialect = CreateDatabaseRequest_DatabaseDialect { fromCreateDatabaseRequest_DatabaseDialect :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value will create a database with the GOOGLE/STANDARD/SQL dialect.
 pattern CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED :: CreateDatabaseRequest_DatabaseDialect
@@ -398,21 +426,20 @@ pattern CreateDatabaseRequest_DatabaseDialect_Postgresql = CreateDatabaseRequest
   CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
   CreateDatabaseRequest_DatabaseDialect_GOOGLESTANDARDSQL,
   CreateDatabaseRequest_DatabaseDialect_Postgresql,
-  CreateDatabaseRequest_DatabaseDialect
-  #-}
+  CreateDatabaseRequest_DatabaseDialect #-}
 
 -- | Output only. The dialect of the Cloud Spanner Database.
-newtype Database_DatabaseDialect = Database_DatabaseDialect {fromDatabase_DatabaseDialect :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Database_DatabaseDialect = Database_DatabaseDialect { fromDatabase_DatabaseDialect :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This value will create a database with the GOOGLE/STANDARD/SQL dialect.
 pattern Database_DatabaseDialect_DATABASEDIALECTUNSPECIFIED :: Database_DatabaseDialect
@@ -430,21 +457,20 @@ pattern Database_DatabaseDialect_Postgresql = Database_DatabaseDialect "POSTGRES
   Database_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
   Database_DatabaseDialect_GOOGLESTANDARDSQL,
   Database_DatabaseDialect_Postgresql,
-  Database_DatabaseDialect
-  #-}
+  Database_DatabaseDialect #-}
 
 -- | Output only. The current database state.
-newtype Database_State = Database_State {fromDatabase_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Database_State = Database_State { fromDatabase_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern Database_State_STATEUNSPECIFIED :: Database_State
@@ -467,21 +493,20 @@ pattern Database_State_READYOPTIMIZING = Database_State "READY_OPTIMIZING"
   Database_State_Creating,
   Database_State_Ready,
   Database_State_READYOPTIMIZING,
-  Database_State
-  #-}
+  Database_State #-}
 
 -- | The severity of the diagnostic message.
-newtype DiagnosticMessage_Severity = DiagnosticMessage_Severity {fromDiagnosticMessage_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DiagnosticMessage_Severity = DiagnosticMessage_Severity { fromDiagnosticMessage_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Required default value.
 pattern DiagnosticMessage_Severity_SEVERITYUNSPECIFIED :: DiagnosticMessage_Severity
@@ -509,21 +534,20 @@ pattern DiagnosticMessage_Severity_Fatal = DiagnosticMessage_Severity "FATAL"
   DiagnosticMessage_Severity_Warning,
   DiagnosticMessage_Severity_Error',
   DiagnosticMessage_Severity_Fatal,
-  DiagnosticMessage_Severity
-  #-}
+  DiagnosticMessage_Severity #-}
 
 -- | Output only. The type of encryption.
-newtype EncryptionInfo_EncryptionType = EncryptionInfo_EncryptionType {fromEncryptionInfo_EncryptionType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EncryptionInfo_EncryptionType = EncryptionInfo_EncryptionType { fromEncryptionInfo_EncryptionType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Encryption type was not specified, though data at rest remains encrypted.
 pattern EncryptionInfo_EncryptionType_TYPEUNSPECIFIED :: EncryptionInfo_EncryptionType
@@ -541,21 +565,20 @@ pattern EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION = EncryptionInfo
   EncryptionInfo_EncryptionType_TYPEUNSPECIFIED,
   EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION,
   EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
-  EncryptionInfo_EncryptionType
-  #-}
+  EncryptionInfo_EncryptionType #-}
 
 -- | Used to control the amount of debugging information returned in ResultSetStats. If partition/token is set, query/mode can only be set to QueryMode.NORMAL.
-newtype ExecuteSqlRequest_QueryMode = ExecuteSqlRequest_QueryMode {fromExecuteSqlRequest_QueryMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ExecuteSqlRequest_QueryMode = ExecuteSqlRequest_QueryMode { fromExecuteSqlRequest_QueryMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default mode. Only the statement results are returned.
 pattern ExecuteSqlRequest_QueryMode_Normal :: ExecuteSqlRequest_QueryMode
@@ -573,21 +596,20 @@ pattern ExecuteSqlRequest_QueryMode_Profile = ExecuteSqlRequest_QueryMode "PROFI
   ExecuteSqlRequest_QueryMode_Normal,
   ExecuteSqlRequest_QueryMode_Plan,
   ExecuteSqlRequest_QueryMode_Profile,
-  ExecuteSqlRequest_QueryMode
-  #-}
+  ExecuteSqlRequest_QueryMode #-}
 
 -- | Output only. The current instance state. For CreateInstance, the state must be either omitted or set to @CREATING@. For UpdateInstance, the state must be either omitted or set to @READY@.
-newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Instance_State = Instance_State { fromInstance_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern Instance_State_STATEUNSPECIFIED :: Instance_State
@@ -605,21 +627,20 @@ pattern Instance_State_Ready = Instance_State "READY"
   Instance_State_STATEUNSPECIFIED,
   Instance_State_Creating,
   Instance_State_Ready,
-  Instance_State
-  #-}
+  Instance_State #-}
 
 -- | The aggregation function used to aggregate each key bucket
-newtype Metric_Aggregation = Metric_Aggregation {fromMetric_Aggregation :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Metric_Aggregation = Metric_Aggregation { fromMetric_Aggregation :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Required default value.
 pattern Metric_Aggregation_AGGREGATIONUNSPECIFIED :: Metric_Aggregation
@@ -637,21 +658,20 @@ pattern Metric_Aggregation_Sum = Metric_Aggregation "SUM"
   Metric_Aggregation_AGGREGATIONUNSPECIFIED,
   Metric_Aggregation_Max,
   Metric_Aggregation_Sum,
-  Metric_Aggregation
-  #-}
+  Metric_Aggregation #-}
 
 -- | Used to determine the type of node. May be needed for visualizing different kinds of nodes differently. For example, If the node is a SCALAR node, it will have a condensed representation which can be used to directly embed a description of the node in its parent.
-newtype PlanNode_Kind = PlanNode_Kind {fromPlanNode_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PlanNode_Kind = PlanNode_Kind { fromPlanNode_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern PlanNode_Kind_KINDUNSPECIFIED :: PlanNode_Kind
@@ -669,21 +689,20 @@ pattern PlanNode_Kind_Scalar = PlanNode_Kind "SCALAR"
   PlanNode_Kind_KINDUNSPECIFIED,
   PlanNode_Kind_Relational,
   PlanNode_Kind_Scalar,
-  PlanNode_Kind
-  #-}
+  PlanNode_Kind #-}
 
 -- | The type of replica.
-newtype ReplicaInfo_Type = ReplicaInfo_Type {fromReplicaInfo_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReplicaInfo_Type = ReplicaInfo_Type { fromReplicaInfo_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern ReplicaInfo_Type_TYPEUNSPECIFIED :: ReplicaInfo_Type
@@ -706,21 +725,20 @@ pattern ReplicaInfo_Type_Witness = ReplicaInfo_Type "WITNESS"
   ReplicaInfo_Type_READWRITE,
   ReplicaInfo_Type_READONLY,
   ReplicaInfo_Type_Witness,
-  ReplicaInfo_Type
-  #-}
+  ReplicaInfo_Type #-}
 
 -- | Priority for the request.
-newtype RequestOptions_Priority = RequestOptions_Priority {fromRequestOptions_Priority :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RequestOptions_Priority = RequestOptions_Priority { fromRequestOptions_Priority :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | @PRIORITY_UNSPECIFIED@ is equivalent to @PRIORITY_HIGH@.
 pattern RequestOptions_Priority_PRIORITYUNSPECIFIED :: RequestOptions_Priority
@@ -743,21 +761,20 @@ pattern RequestOptions_Priority_PRIORITYHIGH = RequestOptions_Priority "PRIORITY
   RequestOptions_Priority_PRIORITYLOW,
   RequestOptions_Priority_PRIORITYMEDIUM,
   RequestOptions_Priority_PRIORITYHIGH,
-  RequestOptions_Priority
-  #-}
+  RequestOptions_Priority #-}
 
 -- | Required. The encryption type of the restored database.
-newtype RestoreDatabaseEncryptionConfig_EncryptionType = RestoreDatabaseEncryptionConfig_EncryptionType {fromRestoreDatabaseEncryptionConfig_EncryptionType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RestoreDatabaseEncryptionConfig_EncryptionType = RestoreDatabaseEncryptionConfig_EncryptionType { fromRestoreDatabaseEncryptionConfig_EncryptionType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified. Do not use.
 pattern RestoreDatabaseEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED :: RestoreDatabaseEncryptionConfig_EncryptionType
@@ -780,21 +797,20 @@ pattern RestoreDatabaseEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION
   RestoreDatabaseEncryptionConfig_EncryptionType_USECONFIGDEFAULTORBACKUPENCRYPTION,
   RestoreDatabaseEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION,
   RestoreDatabaseEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
-  RestoreDatabaseEncryptionConfig_EncryptionType
-  #-}
+  RestoreDatabaseEncryptionConfig_EncryptionType #-}
 
 -- | The type of the restore source.
-newtype RestoreDatabaseMetadata_SourceType = RestoreDatabaseMetadata_SourceType {fromRestoreDatabaseMetadata_SourceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RestoreDatabaseMetadata_SourceType = RestoreDatabaseMetadata_SourceType { fromRestoreDatabaseMetadata_SourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No restore associated.
 pattern RestoreDatabaseMetadata_SourceType_TYPEUNSPECIFIED :: RestoreDatabaseMetadata_SourceType
@@ -807,21 +823,20 @@ pattern RestoreDatabaseMetadata_SourceType_Backup = RestoreDatabaseMetadata_Sour
 {-# COMPLETE
   RestoreDatabaseMetadata_SourceType_TYPEUNSPECIFIED,
   RestoreDatabaseMetadata_SourceType_Backup,
-  RestoreDatabaseMetadata_SourceType
-  #-}
+  RestoreDatabaseMetadata_SourceType #-}
 
 -- | The type of the restore source.
-newtype RestoreInfo_SourceType = RestoreInfo_SourceType {fromRestoreInfo_SourceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RestoreInfo_SourceType = RestoreInfo_SourceType { fromRestoreInfo_SourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No restore associated.
 pattern RestoreInfo_SourceType_TYPEUNSPECIFIED :: RestoreInfo_SourceType
@@ -834,21 +849,20 @@ pattern RestoreInfo_SourceType_Backup = RestoreInfo_SourceType "BACKUP"
 {-# COMPLETE
   RestoreInfo_SourceType_TYPEUNSPECIFIED,
   RestoreInfo_SourceType_Backup,
-  RestoreInfo_SourceType
-  #-}
+  RestoreInfo_SourceType #-}
 
 -- | Required. The TypeCode for this type.
-newtype Type_Code = Type_Code {fromType_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Type_Code = Type_Code { fromType_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern Type_Code_TYPECODEUNSPECIFIED :: Type_Code
@@ -911,21 +925,20 @@ pattern Type_Code_Json = Type_Code "JSON"
   Type_Code_Struct,
   Type_Code_Numeric,
   Type_Code_Json,
-  Type_Code
-  #-}
+  Type_Code #-}
 
 -- | The TypeAnnotationCode that disambiguates SQL type that Spanner will use to represent values of this type during query processing. This is necessary for some type codes because a single TypeCode can be mapped to different SQL types depending on the SQL dialect. type_annotation typically is not needed to process the content of a value (it doesn\'t affect serialization) and clients can ignore it on the read path.
-newtype Type_TypeAnnotation = Type_TypeAnnotation {fromType_TypeAnnotation :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Type_TypeAnnotation = Type_TypeAnnotation { fromType_TypeAnnotation :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified.
 pattern Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED :: Type_TypeAnnotation
@@ -938,21 +951,20 @@ pattern Type_TypeAnnotation_PGNUMERIC = Type_TypeAnnotation "PG_NUMERIC"
 {-# COMPLETE
   Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
   Type_TypeAnnotation_PGNUMERIC,
-  Type_TypeAnnotation
-  #-}
+  Type_TypeAnnotation #-}
 
 -- | The unit for the key: e.g. \'key\' or \'chunk\'.
-newtype VisualizationData_KeyUnit = VisualizationData_KeyUnit {fromVisualizationData_KeyUnit :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype VisualizationData_KeyUnit = VisualizationData_KeyUnit { fromVisualizationData_KeyUnit :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Required default value
 pattern VisualizationData_KeyUnit_KEYUNITUNSPECIFIED :: VisualizationData_KeyUnit
@@ -970,21 +982,20 @@ pattern VisualizationData_KeyUnit_Chunk = VisualizationData_KeyUnit "CHUNK"
   VisualizationData_KeyUnit_KEYUNITUNSPECIFIED,
   VisualizationData_KeyUnit_Key,
   VisualizationData_KeyUnit_Chunk,
-  VisualizationData_KeyUnit
-  #-}
+  VisualizationData_KeyUnit #-}
 
 -- | Required. The encryption type of the backup.
-newtype ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType = ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType {fromProjectsInstancesBackupsCreateEncryptionConfigEncryptionType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType = ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType { fromProjectsInstancesBackupsCreateEncryptionConfigEncryptionType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified. Do not use.
 pattern ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_ENCRYPTIONTYPEUNSPECIFIED :: ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
@@ -1007,21 +1018,20 @@ pattern ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_CUSTOMERMAN
   ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_USEDATABASEENCRYPTION,
   ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_GOOGLEDEFAULTENCRYPTION,
   ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType_CUSTOMERMANAGEDENCRYPTION,
-  ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
-  #-}
+  ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType #-}
 
 -- | Specifies which parts of the Scan should be returned in the response. Note, if left unspecified, the FULL view is assumed.
-newtype ProjectsInstancesDatabasesGetScansView = ProjectsInstancesDatabasesGetScansView {fromProjectsInstancesDatabasesGetScansView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsInstancesDatabasesGetScansView = ProjectsInstancesDatabasesGetScansView { fromProjectsInstancesDatabasesGetScansView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified, equivalent to SUMMARY.
 pattern ProjectsInstancesDatabasesGetScansView_VIEWUNSPECIFIED :: ProjectsInstancesDatabasesGetScansView
@@ -1039,21 +1049,20 @@ pattern ProjectsInstancesDatabasesGetScansView_Full = ProjectsInstancesDatabases
   ProjectsInstancesDatabasesGetScansView_VIEWUNSPECIFIED,
   ProjectsInstancesDatabasesGetScansView_Summary,
   ProjectsInstancesDatabasesGetScansView_Full,
-  ProjectsInstancesDatabasesGetScansView
-  #-}
+  ProjectsInstancesDatabasesGetScansView #-}
 
 -- | Specifies which parts of the Scan should be returned in the response. Note, only the SUMMARY view (the default) is currently supported for ListScans.
-newtype ScansListView = ScansListView {fromScansListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ScansListView = ScansListView { fromScansListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not specified, equivalent to SUMMARY.
 pattern ScansListView_VIEWUNSPECIFIED :: ScansListView
@@ -1071,5 +1080,4 @@ pattern ScansListView_Full = ScansListView "FULL"
   ScansListView_VIEWUNSPECIFIED,
   ScansListView_Summary,
   ScansListView_Full,
-  ScansListView
-  #-}
+  ScansListView #-}
