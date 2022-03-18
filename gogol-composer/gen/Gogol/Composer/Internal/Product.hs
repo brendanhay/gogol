@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Composer.Internal.Product
+-- Module      : Gogol.Composer.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Composer.Internal.Product
+module Gogol.Composer.Internal.Product
   ( -- * AllowedIpRange
     AllowedIpRange (..),
     newAllowedIpRange,
@@ -168,8 +168,8 @@ module Network.Google.Composer.Internal.Product
   )
 where
 
-import Network.Google.Composer.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Composer.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Allowed IP range with user-provided description.
 --

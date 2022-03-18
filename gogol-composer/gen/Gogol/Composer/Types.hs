@@ -19,69 +19,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Composer
+-- Module      : Gogol.Composer.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Manages Apache Airflow environments on Google Cloud Platform.
---
--- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference>
-module Network.Google.Composer
+module Gogol.Composer.Types
   ( -- * Configuration
     composerService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
-
-    -- * Resources
-
-    -- ** composer.projects.locations.environments.create
-    ComposerProjectsLocationsEnvironmentsCreateResource,
-    newComposerProjectsLocationsEnvironmentsCreate,
-    ComposerProjectsLocationsEnvironmentsCreate,
-
-    -- ** composer.projects.locations.environments.delete
-    ComposerProjectsLocationsEnvironmentsDeleteResource,
-    newComposerProjectsLocationsEnvironmentsDelete,
-    ComposerProjectsLocationsEnvironmentsDelete,
-
-    -- ** composer.projects.locations.environments.get
-    ComposerProjectsLocationsEnvironmentsGetResource,
-    newComposerProjectsLocationsEnvironmentsGet,
-    ComposerProjectsLocationsEnvironmentsGet,
-
-    -- ** composer.projects.locations.environments.list
-    ComposerProjectsLocationsEnvironmentsListResource,
-    newComposerProjectsLocationsEnvironmentsList,
-    ComposerProjectsLocationsEnvironmentsList,
-
-    -- ** composer.projects.locations.environments.patch
-    ComposerProjectsLocationsEnvironmentsPatchResource,
-    newComposerProjectsLocationsEnvironmentsPatch,
-    ComposerProjectsLocationsEnvironmentsPatch,
-
-    -- ** composer.projects.locations.imageVersions.list
-    ComposerProjectsLocationsImageVersionsListResource,
-    newComposerProjectsLocationsImageVersionsList,
-    ComposerProjectsLocationsImageVersionsList,
-
-    -- ** composer.projects.locations.operations.delete
-    ComposerProjectsLocationsOperationsDeleteResource,
-    newComposerProjectsLocationsOperationsDelete,
-    ComposerProjectsLocationsOperationsDelete,
-
-    -- ** composer.projects.locations.operations.get
-    ComposerProjectsLocationsOperationsGetResource,
-    newComposerProjectsLocationsOperationsGet,
-    ComposerProjectsLocationsOperationsGet,
-
-    -- ** composer.projects.locations.operations.list
-    ComposerProjectsLocationsOperationsListResource,
-    newComposerProjectsLocationsOperationsList,
-    ComposerProjectsLocationsOperationsList,
 
     -- * Types
 
@@ -245,13 +194,17 @@ module Network.Google.Composer
   )
 where
 
-import Network.Google.Composer.Projects.Locations.Environments.Create
-import Network.Google.Composer.Projects.Locations.Environments.Delete
-import Network.Google.Composer.Projects.Locations.Environments.Get
-import Network.Google.Composer.Projects.Locations.Environments.List
-import Network.Google.Composer.Projects.Locations.Environments.Patch
-import Network.Google.Composer.Projects.Locations.ImageVersions.List
-import Network.Google.Composer.Projects.Locations.Operations.Delete
-import Network.Google.Composer.Projects.Locations.Operations.Get
-import Network.Google.Composer.Projects.Locations.Operations.List
-import Network.Google.Composer.Types
+import Gogol.Composer.Internal.Product
+import Gogol.Composer.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
+composerService :: Core.ServiceConfig
+composerService =
+  Core.defaultService
+    (Core.ServiceId "composer:v1")
+    "composer.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
