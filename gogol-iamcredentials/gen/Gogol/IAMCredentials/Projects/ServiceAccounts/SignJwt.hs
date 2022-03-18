@@ -19,50 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
+-- Module      : Gogol.IAMCredentials.Projects.ServiceAccounts.SignJwt
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates an OAuth 2.0 access token for a service account.
+-- Signs a JWT using a service account\'s system-managed private key.
 --
--- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference> for @iamcredentials.projects.serviceAccounts.generateAccessToken@.
-module Network.Google.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
+-- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference> for @iamcredentials.projects.serviceAccounts.signJwt@.
+module Gogol.IAMCredentials.Projects.ServiceAccounts.SignJwt
   ( -- * Resource
-    IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource,
+    IAMCredentialsProjectsServiceAccountsSignJwtResource,
 
     -- ** Constructing a Request
-    newIAMCredentialsProjectsServiceAccountsGenerateAccessToken,
-    IAMCredentialsProjectsServiceAccountsGenerateAccessToken,
+    newIAMCredentialsProjectsServiceAccountsSignJwt,
+    IAMCredentialsProjectsServiceAccountsSignJwt,
   )
 where
 
-import Network.Google.IAMCredentials.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IAMCredentials.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @iamcredentials.projects.serviceAccounts.generateAccessToken@ method which the
--- 'IAMCredentialsProjectsServiceAccountsGenerateAccessToken' request conforms to.
-type IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource =
+-- | A resource alias for @iamcredentials.projects.serviceAccounts.signJwt@ method which the
+-- 'IAMCredentialsProjectsServiceAccountsSignJwt' request conforms to.
+type IAMCredentialsProjectsServiceAccountsSignJwtResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "name"
-              "generateAccessToken"
-              Core.Text
+    Core.:> Core.CaptureMode "name" "signJwt" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] GenerateAccessTokenRequest
-    Core.:> Core.Post '[Core.JSON] GenerateAccessTokenResponse
+    Core.:> Core.ReqBody '[Core.JSON] SignJwtRequest
+    Core.:> Core.Post '[Core.JSON] SignJwtResponse
 
--- | Generates an OAuth 2.0 access token for a service account.
+-- | Signs a JWT using a service account\'s system-managed private key.
 --
--- /See:/ 'newIAMCredentialsProjectsServiceAccountsGenerateAccessToken' smart constructor.
-data IAMCredentialsProjectsServiceAccountsGenerateAccessToken = IAMCredentialsProjectsServiceAccountsGenerateAccessToken
+-- /See:/ 'newIAMCredentialsProjectsServiceAccountsSignJwt' smart constructor.
+data IAMCredentialsProjectsServiceAccountsSignJwt = IAMCredentialsProjectsServiceAccountsSignJwt
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -72,7 +69,7 @@ data IAMCredentialsProjectsServiceAccountsGenerateAccessToken = IAMCredentialsPr
     -- | Required. The resource name of the service account for which the credentials are requested, in the following format: @projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}@. The @-@ wildcard character is required; replacing it with a project ID is invalid.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: GenerateAccessTokenRequest,
+    payload :: SignJwtRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,15 +77,15 @@ data IAMCredentialsProjectsServiceAccountsGenerateAccessToken = IAMCredentialsPr
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'IAMCredentialsProjectsServiceAccountsGenerateAccessToken' with the minimum fields required to make a request.
-newIAMCredentialsProjectsServiceAccountsGenerateAccessToken ::
+-- | Creates a value of 'IAMCredentialsProjectsServiceAccountsSignJwt' with the minimum fields required to make a request.
+newIAMCredentialsProjectsServiceAccountsSignJwt ::
   -- |  Required. The resource name of the service account for which the credentials are requested, in the following format: @projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}@. The @-@ wildcard character is required; replacing it with a project ID is invalid. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  GenerateAccessTokenRequest ->
-  IAMCredentialsProjectsServiceAccountsGenerateAccessToken
-newIAMCredentialsProjectsServiceAccountsGenerateAccessToken name payload =
-  IAMCredentialsProjectsServiceAccountsGenerateAccessToken
+  SignJwtRequest ->
+  IAMCredentialsProjectsServiceAccountsSignJwt
+newIAMCredentialsProjectsServiceAccountsSignJwt name payload =
+  IAMCredentialsProjectsServiceAccountsSignJwt
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -100,18 +97,17 @@ newIAMCredentialsProjectsServiceAccountsGenerateAccessToken name payload =
 
 instance
   Core.GoogleRequest
-    IAMCredentialsProjectsServiceAccountsGenerateAccessToken
+    IAMCredentialsProjectsServiceAccountsSignJwt
   where
   type
-    Rs
-      IAMCredentialsProjectsServiceAccountsGenerateAccessToken =
-      GenerateAccessTokenResponse
+    Rs IAMCredentialsProjectsServiceAccountsSignJwt =
+      SignJwtResponse
   type
     Scopes
-      IAMCredentialsProjectsServiceAccountsGenerateAccessToken =
+      IAMCredentialsProjectsServiceAccountsSignJwt =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    IAMCredentialsProjectsServiceAccountsGenerateAccessToken {..} =
+    IAMCredentialsProjectsServiceAccountsSignJwt {..} =
       go
         name
         xgafv
@@ -127,6 +123,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource
+                  IAMCredentialsProjectsServiceAccountsSignJwtResource
             )
             Core.mempty
