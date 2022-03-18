@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Import
+-- Module      : Gogol.Datastore.Projects.Import
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Imports entities into Google Cloud Datastore. Existing entities with the same key are overwritten. The import occurs in the background and its progress can be monitored and managed via the Operation resource that is created. If an ImportEntities operation is cancelled, it is possible that a subset of the data has already been imported to Cloud Datastore.
 --
 -- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.import@.
-module Network.Google.Datastore.Projects.Import
+module Gogol.Datastore.Projects.Import
   ( -- * Resource
     DatastoreProjectsImportResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Datastore.Projects.Import
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datastore.projects.import@ method which the
 -- 'DatastoreProjectsImport' request conforms to.

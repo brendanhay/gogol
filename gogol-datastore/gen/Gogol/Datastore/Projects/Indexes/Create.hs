@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Indexes.Create
+-- Module      : Gogol.Datastore.Projects.Indexes.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates the specified index. A newly created index\'s initial state is @CREATING@. On completion of the returned google.longrunning.Operation, the state will be @READY@. If the index already exists, the call will return an @ALREADY_EXISTS@ status. During index creation, the process could result in an error, in which case the index will move to the @ERROR@ state. The process can be recovered by fixing the data that caused the error, removing the index with delete, then re-creating the index with create. Indexes with a single property cannot be created.
 --
 -- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.indexes.create@.
-module Network.Google.Datastore.Projects.Indexes.Create
+module Gogol.Datastore.Projects.Indexes.Create
   ( -- * Resource
     DatastoreProjectsIndexesCreateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Datastore.Projects.Indexes.Create
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @datastore.projects.indexes.create@ method which the
 -- 'DatastoreProjectsIndexesCreate' request conforms to.

@@ -19,48 +19,48 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Commit
+-- Module      : Gogol.Datastore.Projects.RunQuery
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Commits a transaction, optionally creating, deleting or modifying some entities.
+-- Queries for entities.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.commit@.
-module Network.Google.Datastore.Projects.Commit
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.runQuery@.
+module Gogol.Datastore.Projects.RunQuery
   ( -- * Resource
-    DatastoreProjectsCommitResource,
+    DatastoreProjectsRunQueryResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsCommit,
-    DatastoreProjectsCommit,
+    newDatastoreProjectsRunQuery,
+    DatastoreProjectsRunQuery,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.commit@ method which the
--- 'DatastoreProjectsCommit' request conforms to.
-type DatastoreProjectsCommitResource =
+-- | A resource alias for @datastore.projects.runQuery@ method which the
+-- 'DatastoreProjectsRunQuery' request conforms to.
+type DatastoreProjectsRunQueryResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.CaptureMode "projectId" "commit" Core.Text
+    Core.:> Core.CaptureMode "projectId" "runQuery" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CommitRequest
-    Core.:> Core.Post '[Core.JSON] CommitResponse
+    Core.:> Core.ReqBody '[Core.JSON] RunQueryRequest
+    Core.:> Core.Post '[Core.JSON] RunQueryResponse
 
--- | Commits a transaction, optionally creating, deleting or modifying some entities.
+-- | Queries for entities.
 --
--- /See:/ 'newDatastoreProjectsCommit' smart constructor.
-data DatastoreProjectsCommit = DatastoreProjectsCommit
+-- /See:/ 'newDatastoreProjectsRunQuery' smart constructor.
+data DatastoreProjectsRunQuery = DatastoreProjectsRunQuery
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +68,7 @@ data DatastoreProjectsCommit = DatastoreProjectsCommit
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: CommitRequest,
+    payload :: RunQueryRequest,
     -- | Required. The ID of the project against which to make the request.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -78,15 +78,15 @@ data DatastoreProjectsCommit = DatastoreProjectsCommit
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsCommit' with the minimum fields required to make a request.
-newDatastoreProjectsCommit ::
+-- | Creates a value of 'DatastoreProjectsRunQuery' with the minimum fields required to make a request.
+newDatastoreProjectsRunQuery ::
   -- |  Multipart request metadata. See 'payload'.
-  CommitRequest ->
+  RunQueryRequest ->
   -- |  Required. The ID of the project against which to make the request. See 'projectId'.
   Core.Text ->
-  DatastoreProjectsCommit
-newDatastoreProjectsCommit payload projectId =
-  DatastoreProjectsCommit
+  DatastoreProjectsRunQuery
+newDatastoreProjectsRunQuery payload projectId =
+  DatastoreProjectsRunQuery
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,14 +96,14 @@ newDatastoreProjectsCommit payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest DatastoreProjectsCommit where
-  type Rs DatastoreProjectsCommit = CommitResponse
+instance Core.GoogleRequest DatastoreProjectsRunQuery where
+  type Rs DatastoreProjectsRunQuery = RunQueryResponse
   type
-    Scopes DatastoreProjectsCommit =
+    Scopes DatastoreProjectsRunQuery =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsCommit {..} =
+  requestClient DatastoreProjectsRunQuery {..} =
     go
       projectId
       xgafv
@@ -118,6 +118,6 @@ instance Core.GoogleRequest DatastoreProjectsCommit where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsCommitResource
+              Core.Proxy DatastoreProjectsRunQueryResource
           )
           Core.mempty

@@ -19,48 +19,48 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.AllocateIds
+-- Module      : Gogol.Datastore.Projects.Commit
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allocates IDs for the given keys, which is useful for referencing an entity before it is inserted.
+-- Commits a transaction, optionally creating, deleting or modifying some entities.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.allocateIds@.
-module Network.Google.Datastore.Projects.AllocateIds
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.commit@.
+module Gogol.Datastore.Projects.Commit
   ( -- * Resource
-    DatastoreProjectsAllocateIdsResource,
+    DatastoreProjectsCommitResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsAllocateIds,
-    DatastoreProjectsAllocateIds,
+    newDatastoreProjectsCommit,
+    DatastoreProjectsCommit,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.allocateIds@ method which the
--- 'DatastoreProjectsAllocateIds' request conforms to.
-type DatastoreProjectsAllocateIdsResource =
+-- | A resource alias for @datastore.projects.commit@ method which the
+-- 'DatastoreProjectsCommit' request conforms to.
+type DatastoreProjectsCommitResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.CaptureMode "projectId" "allocateIds" Core.Text
+    Core.:> Core.CaptureMode "projectId" "commit" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AllocateIdsRequest
-    Core.:> Core.Post '[Core.JSON] AllocateIdsResponse
+    Core.:> Core.ReqBody '[Core.JSON] CommitRequest
+    Core.:> Core.Post '[Core.JSON] CommitResponse
 
--- | Allocates IDs for the given keys, which is useful for referencing an entity before it is inserted.
+-- | Commits a transaction, optionally creating, deleting or modifying some entities.
 --
--- /See:/ 'newDatastoreProjectsAllocateIds' smart constructor.
-data DatastoreProjectsAllocateIds = DatastoreProjectsAllocateIds
+-- /See:/ 'newDatastoreProjectsCommit' smart constructor.
+data DatastoreProjectsCommit = DatastoreProjectsCommit
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -68,7 +68,7 @@ data DatastoreProjectsAllocateIds = DatastoreProjectsAllocateIds
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: AllocateIdsRequest,
+    payload :: CommitRequest,
     -- | Required. The ID of the project against which to make the request.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -78,15 +78,15 @@ data DatastoreProjectsAllocateIds = DatastoreProjectsAllocateIds
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsAllocateIds' with the minimum fields required to make a request.
-newDatastoreProjectsAllocateIds ::
+-- | Creates a value of 'DatastoreProjectsCommit' with the minimum fields required to make a request.
+newDatastoreProjectsCommit ::
   -- |  Multipart request metadata. See 'payload'.
-  AllocateIdsRequest ->
+  CommitRequest ->
   -- |  Required. The ID of the project against which to make the request. See 'projectId'.
   Core.Text ->
-  DatastoreProjectsAllocateIds
-newDatastoreProjectsAllocateIds payload projectId =
-  DatastoreProjectsAllocateIds
+  DatastoreProjectsCommit
+newDatastoreProjectsCommit payload projectId =
+  DatastoreProjectsCommit
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -96,19 +96,14 @@ newDatastoreProjectsAllocateIds payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DatastoreProjectsAllocateIds
-  where
+instance Core.GoogleRequest DatastoreProjectsCommit where
+  type Rs DatastoreProjectsCommit = CommitResponse
   type
-    Rs DatastoreProjectsAllocateIds =
-      AllocateIdsResponse
-  type
-    Scopes DatastoreProjectsAllocateIds =
+    Scopes DatastoreProjectsCommit =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsAllocateIds {..} =
+  requestClient DatastoreProjectsCommit {..} =
     go
       projectId
       xgafv
@@ -123,6 +118,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsAllocateIdsResource
+              Core.Proxy DatastoreProjectsCommitResource
           )
           Core.mempty

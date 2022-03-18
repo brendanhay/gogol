@@ -19,110 +19,19 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore
+-- Module      : Gogol.Datastore.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
---
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference>
-module Network.Google.Datastore
+module Gogol.Datastore.Types
   ( -- * Configuration
     datastoreService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
     datastoreScope,
-
-    -- * Resources
-
-    -- ** datastore.projects.allocateIds
-    DatastoreProjectsAllocateIdsResource,
-    newDatastoreProjectsAllocateIds,
-    DatastoreProjectsAllocateIds,
-
-    -- ** datastore.projects.beginTransaction
-    DatastoreProjectsBeginTransactionResource,
-    newDatastoreProjectsBeginTransaction,
-    DatastoreProjectsBeginTransaction,
-
-    -- ** datastore.projects.commit
-    DatastoreProjectsCommitResource,
-    newDatastoreProjectsCommit,
-    DatastoreProjectsCommit,
-
-    -- ** datastore.projects.export
-    DatastoreProjectsExportResource,
-    newDatastoreProjectsExport,
-    DatastoreProjectsExport,
-
-    -- ** datastore.projects.import
-    DatastoreProjectsImportResource,
-    newDatastoreProjectsImport,
-    DatastoreProjectsImport,
-
-    -- ** datastore.projects.indexes.create
-    DatastoreProjectsIndexesCreateResource,
-    newDatastoreProjectsIndexesCreate,
-    DatastoreProjectsIndexesCreate,
-
-    -- ** datastore.projects.indexes.delete
-    DatastoreProjectsIndexesDeleteResource,
-    newDatastoreProjectsIndexesDelete,
-    DatastoreProjectsIndexesDelete,
-
-    -- ** datastore.projects.indexes.get
-    DatastoreProjectsIndexesGetResource,
-    newDatastoreProjectsIndexesGet,
-    DatastoreProjectsIndexesGet,
-
-    -- ** datastore.projects.indexes.list
-    DatastoreProjectsIndexesListResource,
-    newDatastoreProjectsIndexesList,
-    DatastoreProjectsIndexesList,
-
-    -- ** datastore.projects.lookup
-    DatastoreProjectsLookupResource,
-    newDatastoreProjectsLookup,
-    DatastoreProjectsLookup,
-
-    -- ** datastore.projects.operations.cancel
-    DatastoreProjectsOperationsCancelResource,
-    newDatastoreProjectsOperationsCancel,
-    DatastoreProjectsOperationsCancel,
-
-    -- ** datastore.projects.operations.delete
-    DatastoreProjectsOperationsDeleteResource,
-    newDatastoreProjectsOperationsDelete,
-    DatastoreProjectsOperationsDelete,
-
-    -- ** datastore.projects.operations.get
-    DatastoreProjectsOperationsGetResource,
-    newDatastoreProjectsOperationsGet,
-    DatastoreProjectsOperationsGet,
-
-    -- ** datastore.projects.operations.list
-    DatastoreProjectsOperationsListResource,
-    newDatastoreProjectsOperationsList,
-    DatastoreProjectsOperationsList,
-
-    -- ** datastore.projects.reserveIds
-    DatastoreProjectsReserveIdsResource,
-    newDatastoreProjectsReserveIds,
-    DatastoreProjectsReserveIds,
-
-    -- ** datastore.projects.rollback
-    DatastoreProjectsRollbackResource,
-    newDatastoreProjectsRollback,
-    DatastoreProjectsRollback,
-
-    -- ** datastore.projects.runQuery
-    DatastoreProjectsRunQueryResource,
-    newDatastoreProjectsRunQuery,
-    DatastoreProjectsRunQuery,
 
     -- * Types
 
@@ -494,21 +403,21 @@ module Network.Google.Datastore
   )
 where
 
-import Network.Google.Datastore.Projects.AllocateIds
-import Network.Google.Datastore.Projects.BeginTransaction
-import Network.Google.Datastore.Projects.Commit
-import Network.Google.Datastore.Projects.Export
-import Network.Google.Datastore.Projects.Import
-import Network.Google.Datastore.Projects.Indexes.Create
-import Network.Google.Datastore.Projects.Indexes.Delete
-import Network.Google.Datastore.Projects.Indexes.Get
-import Network.Google.Datastore.Projects.Indexes.List
-import Network.Google.Datastore.Projects.Lookup
-import Network.Google.Datastore.Projects.Operations.Cancel
-import Network.Google.Datastore.Projects.Operations.Delete
-import Network.Google.Datastore.Projects.Operations.Get
-import Network.Google.Datastore.Projects.Operations.List
-import Network.Google.Datastore.Projects.ReserveIds
-import Network.Google.Datastore.Projects.Rollback
-import Network.Google.Datastore.Projects.RunQuery
-import Network.Google.Datastore.Types
+import Gogol.Datastore.Internal.Product
+import Gogol.Datastore.Internal.Sum
+import qualified Gogol.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
+datastoreService :: Core.ServiceConfig
+datastoreService =
+  Core.defaultService
+    (Core.ServiceId "datastore:v1")
+    "datastore.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | View and manage your Google Cloud Datastore data
+datastoreScope :: Core.Proxy '["https://www.googleapis.com/auth/datastore"]
+datastoreScope = Core.Proxy

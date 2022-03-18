@@ -19,58 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Indexes.Get
+-- Module      : Gogol.Datastore.Projects.Lookup
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an index.
+-- Looks up entities by key.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.indexes.get@.
-module Network.Google.Datastore.Projects.Indexes.Get
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.lookup@.
+module Gogol.Datastore.Projects.Lookup
   ( -- * Resource
-    DatastoreProjectsIndexesGetResource,
+    DatastoreProjectsLookupResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsIndexesGet,
-    DatastoreProjectsIndexesGet,
+    newDatastoreProjectsLookup,
+    DatastoreProjectsLookup,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.indexes.get@ method which the
--- 'DatastoreProjectsIndexesGet' request conforms to.
-type DatastoreProjectsIndexesGetResource =
+-- | A resource alias for @datastore.projects.lookup@ method which the
+-- 'DatastoreProjectsLookup' request conforms to.
+type DatastoreProjectsLookupResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.Capture "projectId" Core.Text
-    Core.:> "indexes"
-    Core.:> Core.Capture "indexId" Core.Text
+    Core.:> Core.CaptureMode "projectId" "lookup" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] GoogleDatastoreAdminV1Index
+    Core.:> Core.ReqBody '[Core.JSON] LookupRequest
+    Core.:> Core.Post '[Core.JSON] LookupResponse
 
--- | Gets an index.
+-- | Looks up entities by key.
 --
--- /See:/ 'newDatastoreProjectsIndexesGet' smart constructor.
-data DatastoreProjectsIndexesGet = DatastoreProjectsIndexesGet
+-- /See:/ 'newDatastoreProjectsLookup' smart constructor.
+data DatastoreProjectsLookup = DatastoreProjectsLookup
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource ID of the index to get.
-    indexId :: Core.Text,
-    -- | Project ID against which to make the request.
+    -- | Multipart request metadata.
+    payload :: LookupRequest,
+    -- | Required. The ID of the project against which to make the request.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -79,51 +78,46 @@ data DatastoreProjectsIndexesGet = DatastoreProjectsIndexesGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsIndexesGet' with the minimum fields required to make a request.
-newDatastoreProjectsIndexesGet ::
-  -- |  The resource ID of the index to get. See 'indexId'.
+-- | Creates a value of 'DatastoreProjectsLookup' with the minimum fields required to make a request.
+newDatastoreProjectsLookup ::
+  -- |  Multipart request metadata. See 'payload'.
+  LookupRequest ->
+  -- |  Required. The ID of the project against which to make the request. See 'projectId'.
   Core.Text ->
-  -- |  Project ID against which to make the request. See 'projectId'.
-  Core.Text ->
-  DatastoreProjectsIndexesGet
-newDatastoreProjectsIndexesGet indexId projectId =
-  DatastoreProjectsIndexesGet
+  DatastoreProjectsLookup
+newDatastoreProjectsLookup payload projectId =
+  DatastoreProjectsLookup
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      indexId = indexId,
+      payload = payload,
       projectId = projectId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DatastoreProjectsIndexesGet
-  where
+instance Core.GoogleRequest DatastoreProjectsLookup where
+  type Rs DatastoreProjectsLookup = LookupResponse
   type
-    Rs DatastoreProjectsIndexesGet =
-      GoogleDatastoreAdminV1Index
-  type
-    Scopes DatastoreProjectsIndexesGet =
+    Scopes DatastoreProjectsLookup =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsIndexesGet {..} =
+  requestClient DatastoreProjectsLookup {..} =
     go
       projectId
-      indexId
       xgafv
       accessToken
       callback
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       datastoreService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsIndexesGetResource
+              Core.Proxy DatastoreProjectsLookupResource
           )
           Core.mempty

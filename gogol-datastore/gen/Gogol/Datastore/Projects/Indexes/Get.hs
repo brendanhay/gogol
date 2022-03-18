@@ -19,54 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Datastore.Projects.Operations.Get
+-- Module      : Gogol.Datastore.Projects.Indexes.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- Gets an index.
 --
--- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.operations.get@.
-module Network.Google.Datastore.Projects.Operations.Get
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.indexes.get@.
+module Gogol.Datastore.Projects.Indexes.Get
   ( -- * Resource
-    DatastoreProjectsOperationsGetResource,
+    DatastoreProjectsIndexesGetResource,
 
     -- ** Constructing a Request
-    newDatastoreProjectsOperationsGet,
-    DatastoreProjectsOperationsGet,
+    newDatastoreProjectsIndexesGet,
+    DatastoreProjectsIndexesGet,
   )
 where
 
-import Network.Google.Datastore.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Datastore.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @datastore.projects.operations.get@ method which the
--- 'DatastoreProjectsOperationsGet' request conforms to.
-type DatastoreProjectsOperationsGetResource =
+-- | A resource alias for @datastore.projects.indexes.get@ method which the
+-- 'DatastoreProjectsIndexesGet' request conforms to.
+type DatastoreProjectsIndexesGetResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> "projects"
+    Core.:> Core.Capture "projectId" Core.Text
+    Core.:> "indexes"
+    Core.:> Core.Capture "indexId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] GoogleLongrunningOperation
+    Core.:> Core.Get '[Core.JSON] GoogleDatastoreAdminV1Index
 
--- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- | Gets an index.
 --
--- /See:/ 'newDatastoreProjectsOperationsGet' smart constructor.
-data DatastoreProjectsOperationsGet = DatastoreProjectsOperationsGet
+-- /See:/ 'newDatastoreProjectsIndexesGet' smart constructor.
+data DatastoreProjectsIndexesGet = DatastoreProjectsIndexesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
-    name :: Core.Text,
+    -- | The resource ID of the index to get.
+    indexId :: Core.Text,
+    -- | Project ID against which to make the request.
+    projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,36 +79,40 @@ data DatastoreProjectsOperationsGet = DatastoreProjectsOperationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DatastoreProjectsOperationsGet' with the minimum fields required to make a request.
-newDatastoreProjectsOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
+-- | Creates a value of 'DatastoreProjectsIndexesGet' with the minimum fields required to make a request.
+newDatastoreProjectsIndexesGet ::
+  -- |  The resource ID of the index to get. See 'indexId'.
   Core.Text ->
-  DatastoreProjectsOperationsGet
-newDatastoreProjectsOperationsGet name =
-  DatastoreProjectsOperationsGet
+  -- |  Project ID against which to make the request. See 'projectId'.
+  Core.Text ->
+  DatastoreProjectsIndexesGet
+newDatastoreProjectsIndexesGet indexId projectId =
+  DatastoreProjectsIndexesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      name = name,
+      indexId = indexId,
+      projectId = projectId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DatastoreProjectsOperationsGet
+    DatastoreProjectsIndexesGet
   where
   type
-    Rs DatastoreProjectsOperationsGet =
-      GoogleLongrunningOperation
+    Rs DatastoreProjectsIndexesGet =
+      GoogleDatastoreAdminV1Index
   type
-    Scopes DatastoreProjectsOperationsGet =
+    Scopes DatastoreProjectsIndexesGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/datastore"
        ]
-  requestClient DatastoreProjectsOperationsGet {..} =
+  requestClient DatastoreProjectsIndexesGet {..} =
     go
-      name
+      projectId
+      indexId
       xgafv
       accessToken
       callback
@@ -115,6 +124,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsOperationsGetResource
+              Core.Proxy DatastoreProjectsIndexesGetResource
           )
           Core.mempty
