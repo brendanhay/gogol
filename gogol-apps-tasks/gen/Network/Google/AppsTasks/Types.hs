@@ -1,98 +1,80 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsTasks.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AppsTasks.Types
-    (
-    -- * Service Configuration
-      appsTasksService
+  ( -- * Configuration
+    appsTasksService,
 
     -- * OAuth Scopes
-    , tasksReadOnlyScope
-    , tasksScope
+    tasksScope,
+    tasksReadOnlyScope,
 
-    -- * TaskLinksItem
-    , TaskLinksItem
-    , taskLinksItem
-    , tliLink
-    , tliType
-    , tliDescription
+    -- * Types
 
-    -- * Tasks
-    , Tasks
-    , tasks
-    , tEtag
-    , tNextPageToken
-    , tKind
-    , tItems
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * TaskLists
-    , TaskLists
-    , taskLists
-    , tlEtag
-    , tlNextPageToken
-    , tlKind
-    , tlItems
+    -- ** Task
+    Task (..),
+    newTask,
 
-    -- * TaskList
-    , TaskList
-    , taskList
-    , tasEtag
-    , tasKind
-    , tasSelfLink
-    , tasId
-    , tasUpdated
-    , tasTitle
+    -- ** Task_LinksItem
+    Task_LinksItem (..),
+    newTask_LinksItem,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** TaskList
+    TaskList (..),
+    newTaskList,
 
-    -- * Task
-    , Task
-    , task
-    , ttParent
-    , ttStatus
-    , ttDue
-    , ttEtag
-    , ttKind
-    , ttSelfLink
-    , ttHidden
-    , ttCompleted
-    , ttId
-    , ttDeleted
-    , ttUpdated
-    , ttTitle
-    , ttLinks
-    , ttNotes
-    , ttPosition
-    ) where
+    -- ** TaskLists
+    TaskLists (..),
+    newTaskLists,
 
-import Network.Google.AppsTasks.Types.Product
-import Network.Google.AppsTasks.Types.Sum
-import Network.Google.Prelude
+    -- ** Tasks
+    Tasks (..),
+    newTasks,
+  )
+where
 
--- | Default request referring to version 'v1' of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
-appsTasksService :: ServiceConfig
-appsTasksService
-  = defaultService (ServiceId "tasks:v1")
-      "tasks.googleapis.com"
+import Network.Google.AppsTasks.Internal.Product
+import Network.Google.AppsTasks.Internal.Sum
+import qualified Network.Google.Prelude as Core
 
--- | View your tasks
-tasksReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
-tasksReadOnlyScope = Proxy
+-- | Default request referring to version @v1@ of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
+appsTasksService :: Core.ServiceConfig
+appsTasksService =
+  Core.defaultService
+    (Core.ServiceId "tasks:v1")
+    "tasks.googleapis.com"
 
 -- | Create, edit, organize, and delete all your tasks
-tasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
-tasksScope = Proxy
+tasksScope :: Core.Proxy '["https://www.googleapis.com/auth/tasks"]
+tasksScope = Core.Proxy
+
+-- | View your tasks
+tasksReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
+tasksReadOnlyScope = Core.Proxy

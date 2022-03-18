@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsTasks
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,152 +30,124 @@
 --
 -- /See:/ <https://developers.google.com/tasks/ Tasks API Reference>
 module Network.Google.AppsTasks
-    (
-    -- * Service Configuration
-      appsTasksService
+  ( -- * Configuration
+    appsTasksService,
 
     -- * OAuth Scopes
-    , tasksReadOnlyScope
-    , tasksScope
-
-    -- * API Declaration
-    , AppsTasksAPI
+    tasksScope,
+    tasksReadOnlyScope,
 
     -- * Resources
 
     -- ** tasks.tasklists.delete
-    , module Network.Google.Resource.Tasks.TaskLists.Delete
+    TasksTasklistsDeleteResource,
+    newTasksTasklistsDelete,
+    TasksTasklistsDelete,
 
     -- ** tasks.tasklists.get
-    , module Network.Google.Resource.Tasks.TaskLists.Get
+    TasksTasklistsGetResource,
+    newTasksTasklistsGet,
+    TasksTasklistsGet,
 
     -- ** tasks.tasklists.insert
-    , module Network.Google.Resource.Tasks.TaskLists.Insert
+    TasksTasklistsInsertResource,
+    newTasksTasklistsInsert,
+    TasksTasklistsInsert,
 
     -- ** tasks.tasklists.list
-    , module Network.Google.Resource.Tasks.TaskLists.List
+    TasksTasklistsListResource,
+    newTasksTasklistsList,
+    TasksTasklistsList,
 
     -- ** tasks.tasklists.patch
-    , module Network.Google.Resource.Tasks.TaskLists.Patch
+    TasksTasklistsPatchResource,
+    newTasksTasklistsPatch,
+    TasksTasklistsPatch,
 
     -- ** tasks.tasklists.update
-    , module Network.Google.Resource.Tasks.TaskLists.Update
+    TasksTasklistsUpdateResource,
+    newTasksTasklistsUpdate,
+    TasksTasklistsUpdate,
 
     -- ** tasks.tasks.clear
-    , module Network.Google.Resource.Tasks.Tasks.Clear
+    TasksTasksClearResource,
+    newTasksTasksClear,
+    TasksTasksClear,
 
     -- ** tasks.tasks.delete
-    , module Network.Google.Resource.Tasks.Tasks.Delete
+    TasksTasksDeleteResource,
+    newTasksTasksDelete,
+    TasksTasksDelete,
 
     -- ** tasks.tasks.get
-    , module Network.Google.Resource.Tasks.Tasks.Get
+    TasksTasksGetResource,
+    newTasksTasksGet,
+    TasksTasksGet,
 
     -- ** tasks.tasks.insert
-    , module Network.Google.Resource.Tasks.Tasks.Insert
+    TasksTasksInsertResource,
+    newTasksTasksInsert,
+    TasksTasksInsert,
 
     -- ** tasks.tasks.list
-    , module Network.Google.Resource.Tasks.Tasks.List
+    TasksTasksListResource,
+    newTasksTasksList,
+    TasksTasksList,
 
     -- ** tasks.tasks.move
-    , module Network.Google.Resource.Tasks.Tasks.Move
+    TasksTasksMoveResource,
+    newTasksTasksMove,
+    TasksTasksMove,
 
     -- ** tasks.tasks.patch
-    , module Network.Google.Resource.Tasks.Tasks.Patch
+    TasksTasksPatchResource,
+    newTasksTasksPatch,
+    TasksTasksPatch,
 
     -- ** tasks.tasks.update
-    , module Network.Google.Resource.Tasks.Tasks.Update
+    TasksTasksUpdateResource,
+    newTasksTasksUpdate,
+    TasksTasksUpdate,
 
     -- * Types
 
-    -- ** TaskLinksItem
-    , TaskLinksItem
-    , taskLinksItem
-    , tliLink
-    , tliType
-    , tliDescription
-
-    -- ** Tasks
-    , Tasks
-    , tasks
-    , tEtag
-    , tNextPageToken
-    , tKind
-    , tItems
-
-    -- ** TaskLists
-    , TaskLists
-    , taskLists
-    , tlEtag
-    , tlNextPageToken
-    , tlKind
-    , tlItems
-
-    -- ** TaskList
-    , TaskList
-    , taskList
-    , tasEtag
-    , tasKind
-    , tasSelfLink
-    , tasId
-    , tasUpdated
-    , tasTitle
-
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Task
-    , Task
-    , task
-    , ttParent
-    , ttStatus
-    , ttDue
-    , ttEtag
-    , ttKind
-    , ttSelfLink
-    , ttHidden
-    , ttCompleted
-    , ttId
-    , ttDeleted
-    , ttUpdated
-    , ttTitle
-    , ttLinks
-    , ttNotes
-    , ttPosition
-    ) where
+    Task (..),
+    newTask,
 
-import Network.Google.Prelude
+    -- ** Task_LinksItem
+    Task_LinksItem (..),
+    newTask_LinksItem,
+
+    -- ** TaskList
+    TaskList (..),
+    newTaskList,
+
+    -- ** TaskLists
+    TaskLists (..),
+    newTaskLists,
+
+    -- ** Tasks
+    Tasks (..),
+    newTasks,
+  )
+where
+
+import Network.Google.AppsTasks.Tasks.Clear
+import Network.Google.AppsTasks.Tasks.Delete
+import Network.Google.AppsTasks.Tasks.Get
+import Network.Google.AppsTasks.Tasks.Insert
+import Network.Google.AppsTasks.Tasks.List
+import Network.Google.AppsTasks.Tasks.Move
+import Network.Google.AppsTasks.Tasks.Patch
+import Network.Google.AppsTasks.Tasks.Tasklists.Delete
+import Network.Google.AppsTasks.Tasks.Tasklists.Get
+import Network.Google.AppsTasks.Tasks.Tasklists.Insert
+import Network.Google.AppsTasks.Tasks.Tasklists.List
+import Network.Google.AppsTasks.Tasks.Tasklists.Patch
+import Network.Google.AppsTasks.Tasks.Tasklists.Update
+import Network.Google.AppsTasks.Tasks.Update
 import Network.Google.AppsTasks.Types
-import Network.Google.Resource.Tasks.TaskLists.Delete
-import Network.Google.Resource.Tasks.TaskLists.Get
-import Network.Google.Resource.Tasks.TaskLists.Insert
-import Network.Google.Resource.Tasks.TaskLists.List
-import Network.Google.Resource.Tasks.TaskLists.Patch
-import Network.Google.Resource.Tasks.TaskLists.Update
-import Network.Google.Resource.Tasks.Tasks.Clear
-import Network.Google.Resource.Tasks.Tasks.Delete
-import Network.Google.Resource.Tasks.Tasks.Get
-import Network.Google.Resource.Tasks.Tasks.Insert
-import Network.Google.Resource.Tasks.Tasks.List
-import Network.Google.Resource.Tasks.Tasks.Move
-import Network.Google.Resource.Tasks.Tasks.Patch
-import Network.Google.Resource.Tasks.Tasks.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Tasks API service.
-type AppsTasksAPI =
-     TasksInsertResource :<|> TasksListResource :<|>
-       TasksPatchResource
-       :<|> TasksGetResource
-       :<|> TasksClearResource
-       :<|> TasksDeleteResource
-       :<|> TasksUpdateResource
-       :<|> TasksMoveResource
-       :<|> TaskListsInsertResource
-       :<|> TaskListsListResource
-       :<|> TaskListsPatchResource
-       :<|> TaskListsGetResource
-       :<|> TaskListsDeleteResource
-       :<|> TaskListsUpdateResource
