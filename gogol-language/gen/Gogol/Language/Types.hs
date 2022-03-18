@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Language.Types
+-- Module      : Gogol.Language.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Language.Types
+module Gogol.Language.Types
   ( -- * Configuration
     languageService,
 
@@ -207,9 +207,9 @@ module Network.Google.Language.Types
   )
 where
 
-import Network.Google.Language.Internal.Product
-import Network.Google.Language.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.Language.Internal.Product
+import Gogol.Language.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Natural Language API. This contains the host and root path used as a starting point for constructing service requests.
 languageService :: Core.ServiceConfig

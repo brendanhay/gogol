@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Language.Documents.AnalyzeSentiment
+-- Module      : Gogol.Language.Documents.AnalyzeSyntax
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Analyzes the sentiment of the provided text.
+-- Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part of speech tags, dependency trees, and other properties.
 --
--- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeSentiment@.
-module Network.Google.Language.Documents.AnalyzeSentiment
+-- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeSyntax@.
+module Gogol.Language.Documents.AnalyzeSyntax
   ( -- * Resource
-    LanguageDocumentsAnalyzeSentimentResource,
+    LanguageDocumentsAnalyzeSyntaxResource,
 
     -- ** Constructing a Request
-    newLanguageDocumentsAnalyzeSentiment,
-    LanguageDocumentsAnalyzeSentiment,
+    newLanguageDocumentsAnalyzeSyntax,
+    LanguageDocumentsAnalyzeSyntax,
   )
 where
 
-import Network.Google.Language.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Language.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @language.documents.analyzeSentiment@ method which the
--- 'LanguageDocumentsAnalyzeSentiment' request conforms to.
-type LanguageDocumentsAnalyzeSentimentResource =
+-- | A resource alias for @language.documents.analyzeSyntax@ method which the
+-- 'LanguageDocumentsAnalyzeSyntax' request conforms to.
+type LanguageDocumentsAnalyzeSyntaxResource =
   "v1"
-    Core.:> "documents:analyzeSentiment"
+    Core.:> "documents:analyzeSyntax"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AnalyzeSentimentRequest
-    Core.:> Core.Post '[Core.JSON] AnalyzeSentimentResponse
+    Core.:> Core.ReqBody '[Core.JSON] AnalyzeSyntaxRequest
+    Core.:> Core.Post '[Core.JSON] AnalyzeSyntaxResponse
 
--- | Analyzes the sentiment of the provided text.
+-- | Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part of speech tags, dependency trees, and other properties.
 --
--- /See:/ 'newLanguageDocumentsAnalyzeSentiment' smart constructor.
-data LanguageDocumentsAnalyzeSentiment = LanguageDocumentsAnalyzeSentiment
+-- /See:/ 'newLanguageDocumentsAnalyzeSyntax' smart constructor.
+data LanguageDocumentsAnalyzeSyntax = LanguageDocumentsAnalyzeSyntax
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -67,7 +67,7 @@ data LanguageDocumentsAnalyzeSentiment = LanguageDocumentsAnalyzeSentiment
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: AnalyzeSentimentRequest,
+    payload :: AnalyzeSyntaxRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,13 +75,13 @@ data LanguageDocumentsAnalyzeSentiment = LanguageDocumentsAnalyzeSentiment
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'LanguageDocumentsAnalyzeSentiment' with the minimum fields required to make a request.
-newLanguageDocumentsAnalyzeSentiment ::
+-- | Creates a value of 'LanguageDocumentsAnalyzeSyntax' with the minimum fields required to make a request.
+newLanguageDocumentsAnalyzeSyntax ::
   -- |  Multipart request metadata. See 'payload'.
-  AnalyzeSentimentRequest ->
-  LanguageDocumentsAnalyzeSentiment
-newLanguageDocumentsAnalyzeSentiment payload =
-  LanguageDocumentsAnalyzeSentiment
+  AnalyzeSyntaxRequest ->
+  LanguageDocumentsAnalyzeSyntax
+newLanguageDocumentsAnalyzeSyntax payload =
+  LanguageDocumentsAnalyzeSyntax
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -92,17 +92,17 @@ newLanguageDocumentsAnalyzeSentiment payload =
 
 instance
   Core.GoogleRequest
-    LanguageDocumentsAnalyzeSentiment
+    LanguageDocumentsAnalyzeSyntax
   where
   type
-    Rs LanguageDocumentsAnalyzeSentiment =
-      AnalyzeSentimentResponse
+    Rs LanguageDocumentsAnalyzeSyntax =
+      AnalyzeSyntaxResponse
   type
-    Scopes LanguageDocumentsAnalyzeSentiment =
+    Scopes LanguageDocumentsAnalyzeSyntax =
       '[ "https://www.googleapis.com/auth/cloud-language",
          "https://www.googleapis.com/auth/cloud-platform"
        ]
-  requestClient LanguageDocumentsAnalyzeSentiment {..} =
+  requestClient LanguageDocumentsAnalyzeSyntax {..} =
     go
       xgafv
       accessToken
@@ -116,6 +116,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy LanguageDocumentsAnalyzeSentimentResource
+              Core.Proxy LanguageDocumentsAnalyzeSyntaxResource
           )
           Core.mempty

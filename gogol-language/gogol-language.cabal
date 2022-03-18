@@ -39,23 +39,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Language
-    Network.Google.Language.Documents.AnalyzeEntities
-    Network.Google.Language.Documents.AnalyzeEntitySentiment
-    Network.Google.Language.Documents.AnalyzeSentiment
-    Network.Google.Language.Documents.AnalyzeSyntax
-    Network.Google.Language.Documents.AnnotateText
-    Network.Google.Language.Documents.ClassifyText
-    Network.Google.Language.Types
+    Gogol.Language
+    Gogol.Language.Documents.AnalyzeEntities
+    Gogol.Language.Documents.AnalyzeEntitySentiment
+    Gogol.Language.Documents.AnalyzeSentiment
+    Gogol.Language.Documents.AnalyzeSyntax
+    Gogol.Language.Documents.AnnotateText
+    Gogol.Language.Documents.ClassifyText
+    Gogol.Language.Types
 
   other-modules:
-    Network.Google.Language.Internal.Product
-    Network.Google.Language.Internal.Sum
+    Gogol.Language.Internal.Product
+    Gogol.Language.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

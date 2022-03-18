@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Language.Documents.AnalyzeEntitySentiment
+-- Module      : Gogol.Language.Documents.AnalyzeEntitySentiment
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Finds entities, similar to AnalyzeEntities in the text and analyzes sentiment associated with each entity and its mentions.
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeEntitySentiment@.
-module Network.Google.Language.Documents.AnalyzeEntitySentiment
+module Gogol.Language.Documents.AnalyzeEntitySentiment
   ( -- * Resource
     LanguageDocumentsAnalyzeEntitySentimentResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Language.Documents.AnalyzeEntitySentiment
   )
 where
 
-import Network.Google.Language.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Language.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @language.documents.analyzeEntitySentiment@ method which the
 -- 'LanguageDocumentsAnalyzeEntitySentiment' request conforms to.
