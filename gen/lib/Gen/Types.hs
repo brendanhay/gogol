@@ -11,6 +11,7 @@ module Gen.Types
   )
 where
 
+import GHC.Stack (HassCallStack)
 import Control.Applicative
 import Control.Lens hiding ((.=))
 import Control.Monad.Except
@@ -155,14 +156,14 @@ instance Ord Model where
     on compare modelPrefix a b
       <> on compare (Down . modelVersion) a b
 
-modelFromPath :: Path -> Model
+modelFromPath :: HassCallStack => Path -> Model
 modelFromPath x = Model n p v x
   where
     n =
       Text.init
         . Text.intercalate "/"
         . drop 1
-        . dropWhile (/= "model")
+        . dropWhile (/= "models")
         $ Text.split (== '/') p
 
     p = toTextIgnore (Path.parent (Path.parent x))

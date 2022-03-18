@@ -24,7 +24,7 @@ data Opt = Opt
     _optModels :: [Path],
     _optServices :: Path,
     _optTemplates :: Path,
-    _optStatic :: Path,
+    _optAssets :: Path,
     _optVersions :: Versions
   }
   deriving (Show)
@@ -45,7 +45,7 @@ parser =
           isPath
           ( long "model"
               <> metavar "DIR"
-              <> help "Directory for a service's models."
+              <> help "Directory for service models."
           )
       )
     <*> option
@@ -62,9 +62,9 @@ parser =
       )
     <*> option
       isPath
-      ( long "static"
+      ( long "assets"
           <> metavar "DIR"
-          <> help "Directory containing static files for generated libraries."
+          <> help "Directory containing static files to copy to generated libraries."
       )
     <*> ( Versions
             <$> option
@@ -102,7 +102,7 @@ validate o = flip execStateT o $ do
     [ check optOutput,
       check optServices,
       check optTemplates,
-      check optStatic
+      check optAssets
     ]
   mapM canon (o ^. optModels) >>= assign optModels
   where
@@ -175,7 +175,7 @@ main = do
             (library ^. dName)
             (library ^. libraryVersion)
 
-          copyDir _optStatic (Tree.root tree)
+          copyDir _optAssets (Tree.root tree)
 
       done
 

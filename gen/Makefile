@@ -1,7 +1,7 @@
 SHELL     := /usr/bin/env bash
 TOP       := ..
 BIN       := bin
-MODEL_DIR := model
+MODEL_DIR := configs/models
 OUT_DIR   := ..
 
 define version =
@@ -22,9 +22,9 @@ gen: $(BIN)/gogol-gen $(MODEL_DIR)
  --library-version=$(VERSION) \
  --client-version=$(CLIENT_VERSION) \
  --core-version=$(CORE_VERSION) \
- --services=service \
- --templates=template \
- --static=static \
+ --services=configs/services \
+ --templates=configs/templates \
+ --assets=configs/assets \
  $(addprefix --model=,$(MODELS))
 
 $(BIN)/gogol-gen: $(BIN)
@@ -38,10 +38,10 @@ clean:
 	rm -rf $(MODEL_DIR)
 
 full-clean: clean
-	rm -rf vendor model
+	rm -rf vendor configs/models
 
 $(MODEL_DIR): vendor/google-api-go-client
-	@./script/copy-models $< $@
+	@./scripts/copy-models $< $@
 
 vendor/google-api-go-client:
 	git clone https://github.com/google/google-api-go-client $@
