@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.URLShortener.Url.Insert
+-- Module      : Gogol.URLShortener.Url.Insert
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Creates a new short URL.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.insert@.
-module Network.Google.URLShortener.Url.Insert
+module Gogol.URLShortener.Url.Insert
   ( -- * Resource
     URLShortenerUrlInsertResource,
 
@@ -39,8 +39,8 @@ module Network.Google.URLShortener.Url.Insert
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.URLShortener.Types
+import qualified Gogol.Prelude as Core
+import Gogol.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.insert@ method which the
 -- 'URLShortenerUrlInsert' request conforms to.

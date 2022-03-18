@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.URLShortener
-    Network.Google.URLShortener.Types
-    Network.Google.URLShortener.Url.Get
-    Network.Google.URLShortener.Url.Insert
-    Network.Google.URLShortener.Url.List
+    Gogol.URLShortener
+    Gogol.URLShortener.Types
+    Gogol.URLShortener.Url.Get
+    Gogol.URLShortener.Url.Insert
+    Gogol.URLShortener.Url.List
 
   other-modules:
-    Network.Google.URLShortener.Internal.Product
-    Network.Google.URLShortener.Internal.Sum
+    Gogol.URLShortener.Internal.Product
+    Gogol.URLShortener.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

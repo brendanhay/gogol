@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.URLShortener.Url.List
+-- Module      : Gogol.URLShortener.Url.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves a list of URLs shortened by a user.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.list@.
-module Network.Google.URLShortener.Url.List
+module Gogol.URLShortener.Url.List
   ( -- * Resource
     URLShortenerUrlListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.URLShortener.Url.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.URLShortener.Types
+import qualified Gogol.Prelude as Core
+import Gogol.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.list@ method which the
 -- 'URLShortenerUrlList' request conforms to.

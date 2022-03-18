@@ -19,39 +19,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.URLShortener
+-- Module      : Gogol.URLShortener.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Lets you create, inspect, and manage goo.gl short URLs
---
--- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
-module Network.Google.URLShortener
+module Gogol.URLShortener.Types
   ( -- * Configuration
     uRLShortenerService,
 
     -- * OAuth Scopes
     uRLShortenerScope,
-
-    -- * Resources
-
-    -- ** urlshortener.url.get
-    URLShortenerUrlGetResource,
-    newURLShortenerUrlGet,
-    URLShortenerUrlGet,
-
-    -- ** urlshortener.url.insert
-    URLShortenerUrlInsertResource,
-    newURLShortenerUrlInsert,
-    URLShortenerUrlInsert,
-
-    -- ** urlshortener.url.list
-    URLShortenerUrlListResource,
-    newURLShortenerUrlList,
-    URLShortenerUrlList,
 
     -- * Types
 
@@ -83,7 +62,17 @@ module Network.Google.URLShortener
   )
 where
 
-import Network.Google.URLShortener.Types
-import Network.Google.URLShortener.Url.Get
-import Network.Google.URLShortener.Url.Insert
-import Network.Google.URLShortener.Url.List
+import qualified Gogol.Prelude as Core
+import Gogol.URLShortener.Internal.Product
+import Gogol.URLShortener.Internal.Sum
+
+-- | Default request referring to version @v1@ of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
+uRLShortenerService :: Core.ServiceConfig
+uRLShortenerService =
+  Core.defaultService
+    (Core.ServiceId "urlshortener:v1")
+    "www.googleapis.com"
+
+-- | Manage your goo.gl short URLs
+uRLShortenerScope :: Core.Proxy '["https://www.googleapis.com/auth/urlshortener"]
+uRLShortenerScope = Core.Proxy

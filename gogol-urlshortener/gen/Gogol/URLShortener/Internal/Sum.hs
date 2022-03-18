@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.URLShortener.Internal.Sum
+-- Module      : Gogol.URLShortener.Internal.Sum
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.URLShortener.Internal.Sum
+module Gogol.URLShortener.Internal.Sum
   ( -- * UrlGetProjection
     UrlGetProjection
       ( UrlGetProjection_ANALYTICSCLICKS,
@@ -43,7 +43,7 @@ module Network.Google.URLShortener.Internal.Sum
   )
 where
 
-import qualified Network.Google.Prelude as Core
+import qualified Gogol.Prelude as Core
 
 -- | Additional information to return.
 newtype UrlGetProjection = UrlGetProjection {fromUrlGetProjection :: Core.Text}
