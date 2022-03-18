@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,48 +30,48 @@
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference>
 module Gogol.AdExperienceReport
-    (
-    -- * Configuration
-      adExperienceReportService
+  ( -- * Configuration
+    adExperienceReportService,
 
     -- * Resources
 
     -- ** adexperiencereport.sites.get
-    , AdExperienceReportSitesGetResource
-    , newAdExperienceReportSitesGet
-    , AdExperienceReportSitesGet
+    AdExperienceReportSitesGetResource,
+    newAdExperienceReportSitesGet,
+    AdExperienceReportSitesGet,
 
     -- ** adexperiencereport.violatingSites.list
-    , AdExperienceReportViolatingSitesListResource
-    , newAdExperienceReportViolatingSitesList
-    , AdExperienceReportViolatingSitesList
+    AdExperienceReportViolatingSitesListResource,
+    newAdExperienceReportViolatingSitesList,
+    AdExperienceReportViolatingSitesList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** PlatformSummary
-    , PlatformSummary (..)
-    , newPlatformSummary
+    PlatformSummary (..),
+    newPlatformSummary,
 
     -- ** PlatformSummary_BetterAdsStatus
-    , PlatformSummary_BetterAdsStatus (..)
+    PlatformSummary_BetterAdsStatus (..),
 
     -- ** PlatformSummary_FilterStatus
-    , PlatformSummary_FilterStatus (..)
+    PlatformSummary_FilterStatus (..),
 
     -- ** PlatformSummary_RegionItem
-    , PlatformSummary_RegionItem (..)
+    PlatformSummary_RegionItem (..),
 
     -- ** SiteSummaryResponse
-    , SiteSummaryResponse (..)
-    , newSiteSummaryResponse
+    SiteSummaryResponse (..),
+    newSiteSummaryResponse,
 
     -- ** ViolatingSitesResponse
-    , ViolatingSitesResponse (..)
-    , newViolatingSitesResponse
-    ) where
+    ViolatingSitesResponse (..),
+    newViolatingSitesResponse,
+  )
+where
 
 import Gogol.AdExperienceReport.Sites.Get
 import Gogol.AdExperienceReport.Types
