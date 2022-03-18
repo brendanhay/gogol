@@ -39,51 +39,52 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.FusionTables
-    Network.Google.FusionTables.Column.Delete
-    Network.Google.FusionTables.Column.Get
-    Network.Google.FusionTables.Column.Insert
-    Network.Google.FusionTables.Column.List
-    Network.Google.FusionTables.Column.Patch
-    Network.Google.FusionTables.Column.Update
-    Network.Google.FusionTables.Query.Sql
-    Network.Google.FusionTables.Query.SqlGet
-    Network.Google.FusionTables.Style.Delete
-    Network.Google.FusionTables.Style.Get
-    Network.Google.FusionTables.Style.Insert
-    Network.Google.FusionTables.Style.List
-    Network.Google.FusionTables.Style.Patch
-    Network.Google.FusionTables.Style.Update
-    Network.Google.FusionTables.Table.Copy
-    Network.Google.FusionTables.Table.Delete
-    Network.Google.FusionTables.Table.Get
-    Network.Google.FusionTables.Table.ImportRows
-    Network.Google.FusionTables.Table.ImportTable
-    Network.Google.FusionTables.Table.Insert
-    Network.Google.FusionTables.Table.List
-    Network.Google.FusionTables.Table.Patch
-    Network.Google.FusionTables.Table.RefetchSheet
-    Network.Google.FusionTables.Table.ReplaceRows
-    Network.Google.FusionTables.Table.Update
-    Network.Google.FusionTables.Task.Delete
-    Network.Google.FusionTables.Task.Get
-    Network.Google.FusionTables.Task.List
-    Network.Google.FusionTables.Template.Delete
-    Network.Google.FusionTables.Template.Get
-    Network.Google.FusionTables.Template.Insert
-    Network.Google.FusionTables.Template.List
-    Network.Google.FusionTables.Template.Patch
-    Network.Google.FusionTables.Template.Update
-    Network.Google.FusionTables.Types
+    Gogol.FusionTables
+    Gogol.FusionTables.Column.Delete
+    Gogol.FusionTables.Column.Get
+    Gogol.FusionTables.Column.Insert
+    Gogol.FusionTables.Column.List
+    Gogol.FusionTables.Column.Patch
+    Gogol.FusionTables.Column.Update
+    Gogol.FusionTables.Query.Sql
+    Gogol.FusionTables.Query.SqlGet
+    Gogol.FusionTables.Style.Delete
+    Gogol.FusionTables.Style.Get
+    Gogol.FusionTables.Style.Insert
+    Gogol.FusionTables.Style.List
+    Gogol.FusionTables.Style.Patch
+    Gogol.FusionTables.Style.Update
+    Gogol.FusionTables.Table.Copy
+    Gogol.FusionTables.Table.Delete
+    Gogol.FusionTables.Table.Get
+    Gogol.FusionTables.Table.ImportRows
+    Gogol.FusionTables.Table.ImportTable
+    Gogol.FusionTables.Table.Insert
+    Gogol.FusionTables.Table.List
+    Gogol.FusionTables.Table.Patch
+    Gogol.FusionTables.Table.RefetchSheet
+    Gogol.FusionTables.Table.ReplaceRows
+    Gogol.FusionTables.Table.Update
+    Gogol.FusionTables.Task.Delete
+    Gogol.FusionTables.Task.Get
+    Gogol.FusionTables.Task.List
+    Gogol.FusionTables.Template.Delete
+    Gogol.FusionTables.Template.Get
+    Gogol.FusionTables.Template.Insert
+    Gogol.FusionTables.Template.List
+    Gogol.FusionTables.Template.Patch
+    Gogol.FusionTables.Template.Update
+    Gogol.FusionTables.Types
 
   other-modules:
-    Network.Google.FusionTables.Internal.Product
-    Network.Google.FusionTables.Internal.Sum
+    Gogol.FusionTables.Internal.Product
+    Gogol.FusionTables.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
