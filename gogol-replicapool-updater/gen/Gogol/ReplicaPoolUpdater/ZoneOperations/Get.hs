@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater.ZoneOperations.Get
+-- Module      : Gogol.ReplicaPoolUpdater.ZoneOperations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves the specified zone-specific operation resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.zoneOperations.get@.
-module Network.Google.ReplicaPoolUpdater.ZoneOperations.Get
+module Gogol.ReplicaPoolUpdater.ZoneOperations.Get
   ( -- * Resource
     ReplicaPoolUpdaterZoneOperationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ReplicaPoolUpdater.ZoneOperations.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPoolUpdater.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.zoneOperations.get@ method which the
 -- 'ReplicaPoolUpdaterZoneOperationsGet' request conforms to.

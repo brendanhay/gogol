@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ReplicaPoolUpdater.RollingUpdates.Resume
+-- Module      : Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Continues an update in PAUSED state. Has no effect if invoked when the state of the update is ROLLED_OUT.
+-- Pauses the update in state from ROLLING/FORWARD or ROLLING/BACK. Has no effect if invoked when the state of the update is PAUSED.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.resume@.
-module Network.Google.ReplicaPoolUpdater.RollingUpdates.Resume
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.pause@.
+module Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
   ( -- * Resource
-    ReplicaPoolUpdaterRollingUpdatesResumeResource,
+    ReplicaPoolUpdaterRollingUpdatesPauseResource,
 
     -- ** Constructing a Request
-    newReplicaPoolUpdaterRollingUpdatesResume,
-    ReplicaPoolUpdaterRollingUpdatesResume,
+    newReplicaPoolUpdaterRollingUpdatesPause,
+    ReplicaPoolUpdaterRollingUpdatesPause,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ReplicaPoolUpdater.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ReplicaPoolUpdater.Types
 
--- | A resource alias for @replicapoolupdater.rollingUpdates.resume@ method which the
--- 'ReplicaPoolUpdaterRollingUpdatesResume' request conforms to.
-type ReplicaPoolUpdaterRollingUpdatesResumeResource =
+-- | A resource alias for @replicapoolupdater.rollingUpdates.pause@ method which the
+-- 'ReplicaPoolUpdaterRollingUpdatesPause' request conforms to.
+type ReplicaPoolUpdaterRollingUpdatesPauseResource =
   "replicapoolupdater"
     Core.:> "v1beta1"
     Core.:> "projects"
@@ -53,14 +53,14 @@ type ReplicaPoolUpdaterRollingUpdatesResumeResource =
     Core.:> Core.Capture "zone" Core.Text
     Core.:> "rollingUpdates"
     Core.:> Core.Capture "rollingUpdate" Core.Text
-    Core.:> "resume"
+    Core.:> "pause"
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Continues an update in PAUSED state. Has no effect if invoked when the state of the update is ROLLED_OUT.
+-- | Pauses the update in state from ROLLING/FORWARD or ROLLING/BACK. Has no effect if invoked when the state of the update is PAUSED.
 --
--- /See:/ 'newReplicaPoolUpdaterRollingUpdatesResume' smart constructor.
-data ReplicaPoolUpdaterRollingUpdatesResume = ReplicaPoolUpdaterRollingUpdatesResume
+-- /See:/ 'newReplicaPoolUpdaterRollingUpdatesPause' smart constructor.
+data ReplicaPoolUpdaterRollingUpdatesPause = ReplicaPoolUpdaterRollingUpdatesPause
   { -- | The Google Developers Console project name.
     project :: Core.Text,
     -- | The name of the update.
@@ -70,17 +70,17 @@ data ReplicaPoolUpdaterRollingUpdatesResume = ReplicaPoolUpdaterRollingUpdatesRe
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ReplicaPoolUpdaterRollingUpdatesResume' with the minimum fields required to make a request.
-newReplicaPoolUpdaterRollingUpdatesResume ::
+-- | Creates a value of 'ReplicaPoolUpdaterRollingUpdatesPause' with the minimum fields required to make a request.
+newReplicaPoolUpdaterRollingUpdatesPause ::
   -- |  The Google Developers Console project name. See 'project'.
   Core.Text ->
   -- |  The name of the update. See 'rollingUpdate'.
   Core.Text ->
   -- |  The name of the zone in which the update\'s target resides. See 'zone'.
   Core.Text ->
-  ReplicaPoolUpdaterRollingUpdatesResume
-newReplicaPoolUpdaterRollingUpdatesResume project rollingUpdate zone =
-  ReplicaPoolUpdaterRollingUpdatesResume
+  ReplicaPoolUpdaterRollingUpdatesPause
+newReplicaPoolUpdaterRollingUpdatesPause project rollingUpdate zone =
+  ReplicaPoolUpdaterRollingUpdatesPause
     { project = project,
       rollingUpdate = rollingUpdate,
       zone = zone
@@ -88,18 +88,18 @@ newReplicaPoolUpdaterRollingUpdatesResume project rollingUpdate zone =
 
 instance
   Core.GoogleRequest
-    ReplicaPoolUpdaterRollingUpdatesResume
+    ReplicaPoolUpdaterRollingUpdatesPause
   where
   type
-    Rs ReplicaPoolUpdaterRollingUpdatesResume =
+    Rs ReplicaPoolUpdaterRollingUpdatesPause =
       Operation
   type
-    Scopes ReplicaPoolUpdaterRollingUpdatesResume =
+    Scopes ReplicaPoolUpdaterRollingUpdatesPause =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/replicapool"
        ]
   requestClient
-    ReplicaPoolUpdaterRollingUpdatesResume {..} =
+    ReplicaPoolUpdaterRollingUpdatesPause {..} =
       go
         project
         zone
@@ -111,6 +111,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  ReplicaPoolUpdaterRollingUpdatesResumeResource
+                  ReplicaPoolUpdaterRollingUpdatesPauseResource
             )
             Core.mempty

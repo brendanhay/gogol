@@ -43,27 +43,28 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ReplicaPoolUpdater
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.Cancel
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.Get
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.Insert
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.List
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.Pause
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.Resume
-    Network.Google.ReplicaPoolUpdater.RollingUpdates.Rollback
-    Network.Google.ReplicaPoolUpdater.Types
-    Network.Google.ReplicaPoolUpdater.ZoneOperations.Get
-    Network.Google.ReplicaPoolUpdater.ZoneOperations.List
+    Gogol.ReplicaPoolUpdater
+    Gogol.ReplicaPoolUpdater.RollingUpdates.Cancel
+    Gogol.ReplicaPoolUpdater.RollingUpdates.Get
+    Gogol.ReplicaPoolUpdater.RollingUpdates.Insert
+    Gogol.ReplicaPoolUpdater.RollingUpdates.List
+    Gogol.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
+    Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
+    Gogol.ReplicaPoolUpdater.RollingUpdates.Resume
+    Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
+    Gogol.ReplicaPoolUpdater.Types
+    Gogol.ReplicaPoolUpdater.ZoneOperations.Get
+    Gogol.ReplicaPoolUpdater.ZoneOperations.List
 
   other-modules:
-    Network.Google.ReplicaPoolUpdater.Internal.Product
-    Network.Google.ReplicaPoolUpdater.Internal.Sum
+    Gogol.ReplicaPoolUpdater.Internal.Product
+    Gogol.ReplicaPoolUpdater.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
