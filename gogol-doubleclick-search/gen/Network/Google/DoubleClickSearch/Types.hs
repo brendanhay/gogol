@@ -1,217 +1,127 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.DoubleClickSearch.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.DoubleClickSearch.Types
-    (
-    -- * Service Configuration
-      doubleClickSearchService
+  ( -- * Configuration
+    doubleClickSearchService,
 
     -- * OAuth Scopes
-    , doubleClickSearchScope
+    doubleClickSearchScope,
 
-    -- * ReportRow
-    , ReportRow
-    , reportRow
-    , rrAddtional
+    -- * Types
 
-    -- * ReportRequest
-    , ReportRequest
-    , reportRequest
-    , rrMaxRowsPerFile
-    , rrReportScope
-    , rrStatisticsCurrency
-    , rrTimeRange
-    , rrOrderBy
-    , rrFilters
-    , rrIncludeRemovedEntities
-    , rrIncludeDeletedEntities
-    , rrDownloadFormat
-    , rrStartRow
-    , rrColumns
-    , rrReportType
-    , rrVerifySingleTimeZone
-    , rrRowCount
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ReportRequestOrderByItem
-    , ReportRequestOrderByItem
-    , reportRequestOrderByItem
-    , rrobiSortOrder
-    , rrobiColumn
+    -- ** Availability
+    Availability (..),
+    newAvailability,
 
-    -- * Report
-    , Report
-    , report
-    , rKind
-    , rRows
-    , rStatisticsCurrencyCode
-    , rIsReportReady
-    , rFiles
-    , rId
-    , rStatisticsTimeZone
-    , rRowCount
-    , rRequest
+    -- ** Conversion
+    Conversion (..),
+    newConversion,
 
-    -- * ReportFilesItem
-    , ReportFilesItem
-    , reportFilesItem
-    , rfiURL
-    , rfiByteCount
+    -- ** ConversionList
+    ConversionList (..),
+    newConversionList,
 
-    -- * ReportRequestFiltersItem
-    , ReportRequestFiltersItem
-    , reportRequestFiltersItem
-    , rrfiOperator
-    , rrfiValues
-    , rrfiColumn
+    -- ** CustomDimension
+    CustomDimension (..),
+    newCustomDimension,
 
-    -- * Availability
-    , Availability
-    , availability
-    , aAgencyId
-    , aAdvertiserId
-    , aSegmentationId
-    , aSegmentationName
-    , aAvailabilityTimestamp
-    , aSegmentationType
+    -- ** CustomMetric
+    CustomMetric (..),
+    newCustomMetric,
 
-    -- * UpdateAvailabilityRequest
-    , UpdateAvailabilityRequest
-    , updateAvailabilityRequest
-    , uarAvailabilities
+    -- ** Report
+    Report (..),
+    newReport,
 
-    -- * CustomMetric
-    , CustomMetric
-    , customMetric
-    , cmValue
-    , cmName
+    -- ** Report_FilesItem
+    Report_FilesItem (..),
+    newReport_FilesItem,
 
-    -- * ConversionList
-    , ConversionList
-    , conversionList
-    , clKind
-    , clConversion
+    -- ** ReportApiColumnSpec
+    ReportApiColumnSpec (..),
+    newReportApiColumnSpec,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ReportRequest
+    ReportRequest (..),
+    newReportRequest,
 
-    -- * ReportAPIColumnSpec
-    , ReportAPIColumnSpec
-    , reportAPIColumnSpec
-    , racsCustomDimensionName
-    , racsSavedColumnName
-    , racsGroupByColumn
-    , racsCustomMetricName
-    , racsEndDate
-    , racsProductReportPerspective
-    , racsStartDate
-    , racsHeaderText
-    , racsPlatformSource
-    , racsColumnName
+    -- ** ReportRequest_FiltersItem
+    ReportRequest_FiltersItem (..),
+    newReportRequest_FiltersItem,
 
-    -- * ReportRequestTimeRange
-    , ReportRequestTimeRange
-    , reportRequestTimeRange
-    , rrtrEndDate
-    , rrtrChangedAttributesSinceTimestamp
-    , rrtrStartDate
-    , rrtrChangedMetricsSinceTimestamp
+    -- ** ReportRequest_OrderByItem
+    ReportRequest_OrderByItem (..),
+    newReportRequest_OrderByItem,
 
-    -- * Conversion
-    , Conversion
-    , conversion
-    , cAdGroupId
-    , cConversionModifiedTimestamp
-    , cState
-    , cEngineAccountId
-    , cAgencyId
-    , cCurrencyCode
-    , cStoreId
-    , cDsConversionId
-    , cConversionId
-    , cAdvertiserId
-    , cSegmentationId
-    , cChannel
-    , cProductCountry
-    , cCampaignId
-    , cCriterionId
-    , cConversionTimestamp
-    , cAttributionModel
-    , cSegmentationName
-    , cProductLanguage
-    , cCustomMetric
-    , cCountMillis
-    , cQuantityMillis
-    , cAdId
-    , cDeviceType
-    , cType
-    , cCustomDimension
-    , cFloodlightOrderId
-    , cRevenueMicros
-    , cClickId
-    , cInventoryAccountId
-    , cSegmentationType
-    , cProductId
-    , cProductGroupId
+    -- ** ReportRequest_ReportScope
+    ReportRequest_ReportScope (..),
+    newReportRequest_ReportScope,
 
-    -- * SavedColumn
-    , SavedColumn
-    , savedColumn
-    , scSavedColumnName
-    , scKind
-    , scType
+    -- ** ReportRequest_TimeRange
+    ReportRequest_TimeRange (..),
+    newReportRequest_TimeRange,
 
-    -- * CustomDimension
-    , CustomDimension
-    , customDimension
-    , cdValue
-    , cdName
+    -- ** ReportRow
+    ReportRow (..),
+    newReportRow,
 
-    -- * UpdateAvailabilityResponse
-    , UpdateAvailabilityResponse
-    , updateAvailabilityResponse
-    , uAvailabilities
+    -- ** SavedColumn
+    SavedColumn (..),
+    newSavedColumn,
 
-    -- * ReportRequestReportScope
-    , ReportRequestReportScope
-    , reportRequestReportScope
-    , rrrsKeywordId
-    , rrrsAdGroupId
-    , rrrsEngineAccountId
-    , rrrsAgencyId
-    , rrrsAdvertiserId
-    , rrrsCampaignId
-    , rrrsAdId
+    -- ** SavedColumnList
+    SavedColumnList (..),
+    newSavedColumnList,
 
-    -- * SavedColumnList
-    , SavedColumnList
-    , savedColumnList
-    , sclKind
-    , sclItems
-    ) where
+    -- ** UpdateAvailabilityRequest
+    UpdateAvailabilityRequest (..),
+    newUpdateAvailabilityRequest,
 
-import Network.Google.DoubleClickSearch.Types.Product
-import Network.Google.DoubleClickSearch.Types.Sum
-import Network.Google.Prelude
+    -- ** UpdateAvailabilityResponse
+    UpdateAvailabilityResponse (..),
+    newUpdateAvailabilityResponse,
+  )
+where
 
--- | Default request referring to version 'v2' of the Search Ads 360 API. This contains the host and root path used as a starting point for constructing service requests.
-doubleClickSearchService :: ServiceConfig
-doubleClickSearchService
-  = defaultService (ServiceId "doubleclicksearch:v2")
-      "doubleclicksearch.googleapis.com"
+import Network.Google.DoubleClickSearch.Internal.Product
+import Network.Google.DoubleClickSearch.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Search Ads 360 API. This contains the host and root path used as a starting point for constructing service requests.
+doubleClickSearchService :: Core.ServiceConfig
+doubleClickSearchService =
+  Core.defaultService
+    (Core.ServiceId "doubleclicksearch:v2")
+    "doubleclicksearch.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
-doubleClickSearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
-doubleClickSearchScope = Proxy
+doubleClickSearchScope :: Core.Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
+doubleClickSearchScope = Core.Proxy

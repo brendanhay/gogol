@@ -1,55 +1,65 @@
-name:                  gogol-doubleclick-search
-version:               0.5.0
-synopsis:              Google Search Ads 360 SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-doubleclick-search
+version:            0.5.0
+synopsis:           Google Search Ads 360 SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    The Search Ads 360 API allows developers to automate uploading
-    conversions and downloading reports from Search Ads 360.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v2@
-    of the API.
+  The Search Ads 360 API allows developers to automate uploading conversions and downloading reports from Search Ads 360.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v2@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-doubleclick-search
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.DoubleClickSearch
-        , Network.Google.DoubleClickSearch.Types
-        , Network.Google.Resource.DoubleClickSearch.Conversion.Get
-        , Network.Google.Resource.DoubleClickSearch.Conversion.Insert
-        , Network.Google.Resource.DoubleClickSearch.Conversion.Update
-        , Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
-        , Network.Google.Resource.DoubleClickSearch.Reports.Generate
-        , Network.Google.Resource.DoubleClickSearch.Reports.Get
-        , Network.Google.Resource.DoubleClickSearch.Reports.GetFile
-        , Network.Google.Resource.DoubleClickSearch.Reports.Request
-        , Network.Google.Resource.DoubleClickSearch.SavedColumns.List
+  exposed-modules:
+    Network.Google.DoubleClickSearch
+    Network.Google.DoubleClickSearch.Conversion.Get
+    Network.Google.DoubleClickSearch.Conversion.Insert
+    Network.Google.DoubleClickSearch.Conversion.Update
+    Network.Google.DoubleClickSearch.Conversion.UpdateAvailability
+    Network.Google.DoubleClickSearch.Reports.Generate
+    Network.Google.DoubleClickSearch.Reports.Get
+    Network.Google.DoubleClickSearch.Reports.GetFile
+    Network.Google.DoubleClickSearch.Reports.Request
+    Network.Google.DoubleClickSearch.SavedColumns.List
+    Network.Google.DoubleClickSearch.Types
 
-    other-modules:
-          Network.Google.DoubleClickSearch.Types.Product
-        , Network.Google.DoubleClickSearch.Types.Sum
+  other-modules:
+    Network.Google.DoubleClickSearch.Internal.Product
+    Network.Google.DoubleClickSearch.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
