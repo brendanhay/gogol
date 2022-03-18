@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,42 +30,42 @@
 --
 -- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference>
 module Gogol.OAuth2
-    (
-    -- * Configuration
-      oAuth2Service
+  ( -- * Configuration
+    oAuth2Service,
 
     -- * OAuth Scopes
-    , userinfoEmailScope
-    , userinfoProfileScope
-    , openidScope
+    userinfoEmailScope,
+    userinfoProfileScope,
+    openidScope,
 
     -- * Resources
 
     -- ** oauth2.tokeninfo
-    , OAuth2TokeninfoMethod
-    , newOAuth2Tokeninfo
-    , OAuth2Tokeninfo
+    OAuth2TokeninfoMethod,
+    newOAuth2Tokeninfo,
+    OAuth2Tokeninfo,
 
     -- ** oauth2.userinfo.get
-    , OAuth2UserinfoGetResource
-    , newOAuth2UserinfoGet
-    , OAuth2UserinfoGet
+    OAuth2UserinfoGetResource,
+    newOAuth2UserinfoGet,
+    OAuth2UserinfoGet,
 
     -- ** oauth2.userinfo.v2.me.get
-    , OAuth2UserinfoV2MeGetResource
-    , newOAuth2UserinfoV2MeGet
-    , OAuth2UserinfoV2MeGet
+    OAuth2UserinfoV2MeGetResource,
+    newOAuth2UserinfoV2MeGet,
+    OAuth2UserinfoV2MeGet,
 
     -- * Types
 
     -- ** Tokeninfo
-    , Tokeninfo (..)
-    , newTokeninfo
+    Tokeninfo (..),
+    newTokeninfo,
 
     -- ** Userinfo
-    , Userinfo (..)
-    , newUserinfo
-    ) where
+    Userinfo (..),
+    newUserinfo,
+  )
+where
 
 import Gogol.OAuth2.Tokeninfo
 import Gogol.OAuth2.Types

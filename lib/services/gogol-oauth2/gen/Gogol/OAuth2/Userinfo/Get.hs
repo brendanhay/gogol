@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -34,47 +28,49 @@
 --
 -- /See:/ <https://developers.google.com/identity/protocols/oauth2/ Google OAuth2 API Reference> for @oauth2.userinfo.get@.
 module Gogol.OAuth2.Userinfo.Get
-    (
-    -- * Resource
-      OAuth2UserinfoGetResource
+  ( -- * Resource
+    OAuth2UserinfoGetResource,
 
     -- ** Constructing a Request
-    , newOAuth2UserinfoGet
-    , OAuth2UserinfoGet
-    ) where
+    newOAuth2UserinfoGet,
+    OAuth2UserinfoGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.OAuth2.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @oauth2.userinfo.get@ method which the
 -- 'OAuth2UserinfoGet' request conforms to.
 type OAuth2UserinfoGetResource =
-     "oauth2" Core.:>
-       "v2" Core.:>
-         "userinfo" Core.:>
-           Core.QueryParam "alt" Core.AltJSON Core.:>
-             Core.Get '[Core.JSON] Userinfo
+  "oauth2"
+    Core.:> "v2"
+    Core.:> "userinfo"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Userinfo
 
 --
 -- /See:/ 'newOAuth2UserinfoGet' smart constructor.
 data OAuth2UserinfoGet = OAuth2UserinfoGet
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'OAuth2UserinfoGet' with the minimum fields required to make a request.
-newOAuth2UserinfoGet 
-    ::  OAuth2UserinfoGet
+newOAuth2UserinfoGet ::
+  OAuth2UserinfoGet
 newOAuth2UserinfoGet = OAuth2UserinfoGet
 
 instance Core.GoogleRequest OAuth2UserinfoGet where
-        type Rs OAuth2UserinfoGet = Userinfo
-        type Scopes OAuth2UserinfoGet =
-             '["openid",
-               "https://www.googleapis.com/auth/userinfo.email",
-               "https://www.googleapis.com/auth/userinfo.profile"]
-        requestClient OAuth2UserinfoGet{}
-          = go (Core.Just Core.AltJSON) oAuth2Service
-          where go
-                  = Core.buildClient
-                      (Core.Proxy :: Core.Proxy OAuth2UserinfoGetResource)
-                      Core.mempty
-
+  type Rs OAuth2UserinfoGet = Userinfo
+  type
+    Scopes OAuth2UserinfoGet =
+      '[ "openid",
+         "https://www.googleapis.com/auth/userinfo.email",
+         "https://www.googleapis.com/auth/userinfo.profile"
+       ]
+  requestClient OAuth2UserinfoGet {} =
+    go (Core.Just Core.AltJSON) oAuth2Service
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy OAuth2UserinfoGetResource)
+          Core.mempty
