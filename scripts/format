@@ -17,7 +17,7 @@ format_haskell() {
     xargs -0 cabal-fmt --inplace --indent=2
 
   find "$dir" -type f -name '*.hs' -print0 |
-    xargs -0 ormolu --mode=inplace
+    xargs -0 ormolu --mode=inplace -o '-XPatternSynonyms' -o '-XTypeApplications'
 }
 
 # Export the functions for use in GNU parallel.
@@ -26,7 +26,7 @@ export -f format_haskell
 
 say "Formatting shell"
 
-find script -type f -print0 |
+find scripts gen/scripts -type f -print0 |
   xargs -0 shfmt -s -i 2 -ln bash -w
 
 say "Formatting nix"
