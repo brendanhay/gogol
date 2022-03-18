@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools.Webmasters.Sitemaps.Submit
+-- Module      : Gogol.WebmasterTools.Webmasters.Sitemaps.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Submits a sitemap for a site.
+-- Deletes a sitemap from this site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.submit@.
-module Network.Google.WebmasterTools.Webmasters.Sitemaps.Submit
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.delete@.
+module Gogol.WebmasterTools.Webmasters.Sitemaps.Delete
   ( -- * Resource
-    WebmastersSitemapsSubmitResource,
+    WebmastersSitemapsDeleteResource,
 
     -- ** Constructing a Request
-    newWebmastersSitemapsSubmit,
-    WebmastersSitemapsSubmit,
+    newWebmastersSitemapsDelete,
+    WebmastersSitemapsDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebmasterTools.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebmasterTools.Types
 
--- | A resource alias for @webmasters.sitemaps.submit@ method which the
--- 'WebmastersSitemapsSubmit' request conforms to.
-type WebmastersSitemapsSubmitResource =
+-- | A resource alias for @webmasters.sitemaps.delete@ method which the
+-- 'WebmastersSitemapsDelete' request conforms to.
+type WebmastersSitemapsDeleteResource =
   "webmasters"
     Core.:> "v3"
     Core.:> "sites"
@@ -52,35 +52,35 @@ type WebmastersSitemapsSubmitResource =
     Core.:> "sitemaps"
     Core.:> Core.Capture "feedpath" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Put '[Core.JSON] ()
+    Core.:> Core.Delete '[Core.JSON] ()
 
--- | Submits a sitemap for a site.
+-- | Deletes a sitemap from this site.
 --
--- /See:/ 'newWebmastersSitemapsSubmit' smart constructor.
-data WebmastersSitemapsSubmit = WebmastersSitemapsSubmit
-  { -- | The URL of the sitemap to add. For example: http:\/\/www.example.com\/sitemap.xml
+-- /See:/ 'newWebmastersSitemapsDelete' smart constructor.
+data WebmastersSitemapsDelete = WebmastersSitemapsDelete
+  { -- | The URL of the actual sitemap. For example: http:\/\/www.example.com\/sitemap.xml
     feedpath :: Core.Text,
     -- | The site\'s URL, including protocol. For example: http:\/\/www.example.com\/
     siteUrl :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'WebmastersSitemapsSubmit' with the minimum fields required to make a request.
-newWebmastersSitemapsSubmit ::
-  -- |  The URL of the sitemap to add. For example: http:\/\/www.example.com\/sitemap.xml See 'feedpath'.
+-- | Creates a value of 'WebmastersSitemapsDelete' with the minimum fields required to make a request.
+newWebmastersSitemapsDelete ::
+  -- |  The URL of the actual sitemap. For example: http:\/\/www.example.com\/sitemap.xml See 'feedpath'.
   Core.Text ->
   -- |  The site\'s URL, including protocol. For example: http:\/\/www.example.com\/ See 'siteUrl'.
   Core.Text ->
-  WebmastersSitemapsSubmit
-newWebmastersSitemapsSubmit feedpath siteUrl =
-  WebmastersSitemapsSubmit {feedpath = feedpath, siteUrl = siteUrl}
+  WebmastersSitemapsDelete
+newWebmastersSitemapsDelete feedpath siteUrl =
+  WebmastersSitemapsDelete {feedpath = feedpath, siteUrl = siteUrl}
 
-instance Core.GoogleRequest WebmastersSitemapsSubmit where
-  type Rs WebmastersSitemapsSubmit = ()
+instance Core.GoogleRequest WebmastersSitemapsDelete where
+  type Rs WebmastersSitemapsDelete = ()
   type
-    Scopes WebmastersSitemapsSubmit =
+    Scopes WebmastersSitemapsDelete =
       '["https://www.googleapis.com/auth/webmasters"]
-  requestClient WebmastersSitemapsSubmit {..} =
+  requestClient WebmastersSitemapsDelete {..} =
     go
       siteUrl
       feedpath
@@ -90,6 +90,6 @@ instance Core.GoogleRequest WebmastersSitemapsSubmit where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy WebmastersSitemapsSubmitResource
+              Core.Proxy WebmastersSitemapsDeleteResource
           )
           Core.mempty

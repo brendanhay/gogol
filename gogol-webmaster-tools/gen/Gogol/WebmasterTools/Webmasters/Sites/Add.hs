@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.WebmasterTools.Webmasters.Sites.Add
+-- Module      : Gogol.WebmasterTools.Webmasters.Sites.Add
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Adds a site to the set of the user\'s sites in Search Console.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.add@.
-module Network.Google.WebmasterTools.Webmasters.Sites.Add
+module Gogol.WebmasterTools.Webmasters.Sites.Add
   ( -- * Resource
     WebmastersSitesAddResource,
 
@@ -39,8 +39,8 @@ module Network.Google.WebmasterTools.Webmasters.Sites.Add
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.WebmasterTools.Types
+import qualified Gogol.Prelude as Core
+import Gogol.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.add@ method which the
 -- 'WebmastersSitesAdd' request conforms to.

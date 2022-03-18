@@ -39,26 +39,27 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.WebmasterTools
-    Network.Google.WebmasterTools.Types
-    Network.Google.WebmasterTools.Webmasters.Searchanalytics.Query
-    Network.Google.WebmasterTools.Webmasters.Sitemaps.Delete
-    Network.Google.WebmasterTools.Webmasters.Sitemaps.Get
-    Network.Google.WebmasterTools.Webmasters.Sitemaps.List
-    Network.Google.WebmasterTools.Webmasters.Sitemaps.Submit
-    Network.Google.WebmasterTools.Webmasters.Sites.Add
-    Network.Google.WebmasterTools.Webmasters.Sites.Delete
-    Network.Google.WebmasterTools.Webmasters.Sites.Get
-    Network.Google.WebmasterTools.Webmasters.Sites.List
+    Gogol.WebmasterTools
+    Gogol.WebmasterTools.Types
+    Gogol.WebmasterTools.Webmasters.Searchanalytics.Query
+    Gogol.WebmasterTools.Webmasters.Sitemaps.Delete
+    Gogol.WebmasterTools.Webmasters.Sitemaps.Get
+    Gogol.WebmasterTools.Webmasters.Sitemaps.List
+    Gogol.WebmasterTools.Webmasters.Sitemaps.Submit
+    Gogol.WebmasterTools.Webmasters.Sites.Add
+    Gogol.WebmasterTools.Webmasters.Sites.Delete
+    Gogol.WebmasterTools.Webmasters.Sites.Get
+    Gogol.WebmasterTools.Webmasters.Sites.List
 
   other-modules:
-    Network.Google.WebmasterTools.Internal.Product
-    Network.Google.WebmasterTools.Internal.Sum
+    Gogol.WebmasterTools.Internal.Product
+    Gogol.WebmasterTools.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
