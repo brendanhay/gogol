@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FirebaseRemoteConfig.Types
+-- Module      : Gogol.FirebaseRemoteConfig.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.FirebaseRemoteConfig.Types
+module Gogol.FirebaseRemoteConfig.Types
   ( -- * Configuration
     firebaseRemoteConfigService,
 
@@ -63,9 +63,9 @@ module Network.Google.FirebaseRemoteConfig.Types
   )
 where
 
-import Network.Google.FirebaseRemoteConfig.Internal.Product
-import Network.Google.FirebaseRemoteConfig.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.FirebaseRemoteConfig.Internal.Product
+import Gogol.FirebaseRemoteConfig.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Firebase Remote Config API. This contains the host and root path used as a starting point for constructing service requests.
 firebaseRemoteConfigService :: Core.ServiceConfig
