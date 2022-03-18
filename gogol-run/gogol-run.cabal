@@ -1,86 +1,70 @@
-name:                  gogol-run
-version:               0.5.0
-synopsis:              Google Cloud Run Admin SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-run
+version:            0.5.0
+synopsis:           Google Cloud Run Admin SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Deploy and manage user provided container images that scale
-    automatically based on incoming requests. The Cloud Run Admin API
-    follows the Knative Serving API specification.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @v1@
-    of the API.
+  Deploy and manage user provided container images that scale automatically based on incoming requests. The Cloud Run Admin API v1 follows the Knative Serving API specification, while v2 is aligned with Google Cloud AIP-based API standards, as described in https:\/\/google.aip.dev\/.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @v2@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-run
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.Resource.Run.Namespaces.Authorizeddomains.List
-        , Network.Google.Resource.Run.Namespaces.Configurations.Get
-        , Network.Google.Resource.Run.Namespaces.Configurations.List
-        , Network.Google.Resource.Run.Namespaces.DomainmAppings.Create
-        , Network.Google.Resource.Run.Namespaces.DomainmAppings.Delete
-        , Network.Google.Resource.Run.Namespaces.DomainmAppings.Get
-        , Network.Google.Resource.Run.Namespaces.DomainmAppings.List
-        , Network.Google.Resource.Run.Namespaces.Revisions.Delete
-        , Network.Google.Resource.Run.Namespaces.Revisions.Get
-        , Network.Google.Resource.Run.Namespaces.Revisions.List
-        , Network.Google.Resource.Run.Namespaces.Routes.Get
-        , Network.Google.Resource.Run.Namespaces.Routes.List
-        , Network.Google.Resource.Run.Namespaces.Services.Create
-        , Network.Google.Resource.Run.Namespaces.Services.Delete
-        , Network.Google.Resource.Run.Namespaces.Services.Get
-        , Network.Google.Resource.Run.Namespaces.Services.List
-        , Network.Google.Resource.Run.Namespaces.Services.ReplaceService
-        , Network.Google.Resource.Run.Projects.Authorizeddomains.List
-        , Network.Google.Resource.Run.Projects.Locations.Authorizeddomains.List
-        , Network.Google.Resource.Run.Projects.Locations.Configurations.Get
-        , Network.Google.Resource.Run.Projects.Locations.Configurations.List
-        , Network.Google.Resource.Run.Projects.Locations.DomainmAppings.Create
-        , Network.Google.Resource.Run.Projects.Locations.DomainmAppings.Delete
-        , Network.Google.Resource.Run.Projects.Locations.DomainmAppings.Get
-        , Network.Google.Resource.Run.Projects.Locations.DomainmAppings.List
-        , Network.Google.Resource.Run.Projects.Locations.List
-        , Network.Google.Resource.Run.Projects.Locations.Revisions.Delete
-        , Network.Google.Resource.Run.Projects.Locations.Revisions.Get
-        , Network.Google.Resource.Run.Projects.Locations.Revisions.List
-        , Network.Google.Resource.Run.Projects.Locations.Routes.Get
-        , Network.Google.Resource.Run.Projects.Locations.Routes.List
-        , Network.Google.Resource.Run.Projects.Locations.Services.Create
-        , Network.Google.Resource.Run.Projects.Locations.Services.Delete
-        , Network.Google.Resource.Run.Projects.Locations.Services.Get
-        , Network.Google.Resource.Run.Projects.Locations.Services.GetIAMPolicy
-        , Network.Google.Resource.Run.Projects.Locations.Services.List
-        , Network.Google.Resource.Run.Projects.Locations.Services.ReplaceService
-        , Network.Google.Resource.Run.Projects.Locations.Services.SetIAMPolicy
-        , Network.Google.Resource.Run.Projects.Locations.Services.TestIAMPermissions
-        , Network.Google.Run
-        , Network.Google.Run.Types
+  exposed-modules:
+    Network.Google.Run
+    Network.Google.Run.Projects.Locations.Operations.Delete
+    Network.Google.Run.Projects.Locations.Operations.Get
+    Network.Google.Run.Projects.Locations.Operations.List
+    Network.Google.Run.Projects.Locations.Services.Create
+    Network.Google.Run.Projects.Locations.Services.Delete
+    Network.Google.Run.Projects.Locations.Services.Get
+    Network.Google.Run.Projects.Locations.Services.GetIamPolicy
+    Network.Google.Run.Projects.Locations.Services.List
+    Network.Google.Run.Projects.Locations.Services.Patch
+    Network.Google.Run.Projects.Locations.Services.Revisions.Delete
+    Network.Google.Run.Projects.Locations.Services.Revisions.Get
+    Network.Google.Run.Projects.Locations.Services.Revisions.List
+    Network.Google.Run.Projects.Locations.Services.SetIamPolicy
+    Network.Google.Run.Projects.Locations.Services.TestIamPermissions
+    Network.Google.Run.Types
 
-    other-modules:
-          Network.Google.Run.Types.Product
-        , Network.Google.Run.Types.Sum
+  other-modules:
+    Network.Google.Run.Internal.Product
+    Network.Google.Run.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
