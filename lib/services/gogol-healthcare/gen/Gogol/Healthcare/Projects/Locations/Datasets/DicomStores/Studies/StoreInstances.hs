@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,108 +36,101 @@
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.storeInstances@.
 module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreInstances
-  ( -- * Resource
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource,
+    (
+    -- * Resource
+      HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource
 
     -- ** Constructing a Request
-    newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances,
-  )
-where
+    , newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+    , HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+    ) where
 
-import Gogol.Healthcare.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Healthcare.Types
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.storeInstances@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances' request conforms to.
-type HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource =
-  "v1"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "dicomWeb"
-    Core.:> Core.Capture "dicomWebPath" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] HttpBody
-    Core.:> Core.Post '[Core.JSON] HttpBody
+type HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource
+     =
+     "v1" Core.:>
+       Core.Capture "parent" Core.Text Core.:>
+         "dicomWeb" Core.:>
+           Core.Capture "dicomWebPath" Core.Text Core.:>
+             Core.QueryParam "$.xgafv" Xgafv Core.:>
+               Core.QueryParam "access_token" Core.Text Core.:>
+                 Core.QueryParam "callback" Core.Text Core.:>
+                   Core.QueryParam "uploadType" Core.Text Core.:>
+                     Core.QueryParam "upload_protocol" Core.Text Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.ReqBody '[Core.JSON] HttpBody Core.:>
+                           Core.Post '[Core.JSON] HttpBody
 
 -- | StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See [Store Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5). For details on the implementation of StoreInstances, see <https://cloud.google.com/healthcare/docs/dicom#store_transaction Store transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call StoreInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#storing_dicom_data Storing DICOM data>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances' smart constructor.
 data HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances = HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional.
-    dicomWebPath :: Core.Text,
-    -- | The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: HttpBody,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional.
+    , dicomWebPath :: Core.Text
+      -- | The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    , parent :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: HttpBody
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances' with the minimum fields required to make a request.
-newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances ::
-  -- |  The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional. See 'dicomWebPath'.
-  Core.Text ->
-  -- |  The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  HttpBody ->
-  HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances 
+    ::  Core.Text
+       -- ^  The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional. See 'dicomWebPath'.
+    -> Core.Text
+       -- ^  The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
+    -> HttpBody
+       -- ^  Multipart request metadata. See 'payload'.
+    -> HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
 newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances dicomWebPath parent payload =
   HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dicomWebPath = dicomWebPath,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , dicomWebPath = dicomWebPath
+    , parent = parent
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
-  where
-  type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances =
-      HttpBody
-  type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances {..} =
-      go
-        parent
-        dicomWebPath
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+         where
+        type Rs
+               HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+             = HttpBody
+        type Scopes
+               HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances{..}
+          = go parent dicomWebPath xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              healthcareService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource)
+                      Core.mempty
+
