@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdExperienceReport.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * PlatformSummary_BetterAdsStatus
     PlatformSummary_BetterAdsStatus
-      ( PlatformSummary_BetterAdsStatus_Unknown,
+      (
+        PlatformSummary_BetterAdsStatus_Unknown,
         PlatformSummary_BetterAdsStatus_Passing,
         PlatformSummary_BetterAdsStatus_Warning,
         PlatformSummary_BetterAdsStatus_Failing,
@@ -44,7 +55,8 @@ module Gogol.AdExperienceReport.Internal.Sum
 
     -- * PlatformSummary_FilterStatus
     PlatformSummary_FilterStatus
-      ( PlatformSummary_FilterStatus_Unknown,
+      (
+        PlatformSummary_FilterStatus_Unknown,
         PlatformSummary_FilterStatus_ON,
         PlatformSummary_FilterStatus_Off,
         PlatformSummary_FilterStatus_Paused,
@@ -54,29 +66,29 @@ module Gogol.AdExperienceReport.Internal.Sum
 
     -- * PlatformSummary_RegionItem
     PlatformSummary_RegionItem
-      ( PlatformSummary_RegionItem_REGIONUNKNOWN,
+      (
+        PlatformSummary_RegionItem_REGIONUNKNOWN,
         PlatformSummary_RegionItem_REGIONA,
         PlatformSummary_RegionItem_REGIONB,
         PlatformSummary_RegionItem_REGIONC,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -89,21 +101,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The site\'s Ad Experience Report status on this platform.
-newtype PlatformSummary_BetterAdsStatus = PlatformSummary_BetterAdsStatus {fromPlatformSummary_BetterAdsStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PlatformSummary_BetterAdsStatus = PlatformSummary_BetterAdsStatus { fromPlatformSummary_BetterAdsStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not reviewed.
 pattern PlatformSummary_BetterAdsStatus_Unknown :: PlatformSummary_BetterAdsStatus
@@ -126,21 +137,20 @@ pattern PlatformSummary_BetterAdsStatus_Failing = PlatformSummary_BetterAdsStatu
   PlatformSummary_BetterAdsStatus_Passing,
   PlatformSummary_BetterAdsStatus_Warning,
   PlatformSummary_BetterAdsStatus_Failing,
-  PlatformSummary_BetterAdsStatus
-  #-}
+  PlatformSummary_BetterAdsStatus #-}
 
 -- | The site\'s <https://support.google.com/webtools/answer/7308033 enforcement status> on this platform.
-newtype PlatformSummary_FilterStatus = PlatformSummary_FilterStatus {fromPlatformSummary_FilterStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PlatformSummary_FilterStatus = PlatformSummary_FilterStatus { fromPlatformSummary_FilterStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | N\/A.
 pattern PlatformSummary_FilterStatus_Unknown :: PlatformSummary_FilterStatus
@@ -168,20 +178,19 @@ pattern PlatformSummary_FilterStatus_Pending = PlatformSummary_FilterStatus "PEN
   PlatformSummary_FilterStatus_Off,
   PlatformSummary_FilterStatus_Paused,
   PlatformSummary_FilterStatus_Pending,
-  PlatformSummary_FilterStatus
-  #-}
+  PlatformSummary_FilterStatus #-}
 
-newtype PlatformSummary_RegionItem = PlatformSummary_RegionItem {fromPlatformSummary_RegionItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PlatformSummary_RegionItem = PlatformSummary_RegionItem { fromPlatformSummary_RegionItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Ad standard not yet defined for your region.
 pattern PlatformSummary_RegionItem_REGIONUNKNOWN :: PlatformSummary_RegionItem
@@ -204,5 +213,4 @@ pattern PlatformSummary_RegionItem_REGIONC = PlatformSummary_RegionItem "REGION_
   PlatformSummary_RegionItem_REGIONA,
   PlatformSummary_RegionItem_REGIONB,
   PlatformSummary_RegionItem_REGIONC,
-  PlatformSummary_RegionItem
-  #-}
+  PlatformSummary_RegionItem #-}
