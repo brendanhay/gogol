@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.States.Delete
+-- Module      : Gogol.AppState.States.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a key and the data associated with it. The key is removed and no longer counts against the key quota. Note that since this method is not safe in the face of concurrent modifications, it should only be used for development and testing purposes. Invoking this method in shipping code can result in data loss and data corruption.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.delete@.
-module Network.Google.AppState.States.Delete
+module Gogol.AppState.States.Delete
   ( -- * Resource
     AppStateStatesDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppState.States.Delete
   )
 where
 
-import Network.Google.AppState.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appstate.states.delete@ method which the
 -- 'AppStateStatesDelete' request conforms to.

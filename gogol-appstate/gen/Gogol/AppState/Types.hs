@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.Types
+-- Module      : Gogol.AppState.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AppState.Types
+module Gogol.AppState.Types
   ( -- * Configuration
     appStateService,
 
@@ -52,9 +52,9 @@ module Network.Google.AppState.Types
   )
 where
 
-import Network.Google.AppState.Internal.Product
-import Network.Google.AppState.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Internal.Product
+import Gogol.AppState.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Google App State API. This contains the host and root path used as a starting point for constructing service requests.
 appStateService :: Core.ServiceConfig

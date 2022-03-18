@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState.States.Clear
+-- Module      : Gogol.AppState.States.Clear
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Clears (sets to empty) the data for the passed key if and only if the passed version matches the currently stored version. This method results in a conflict error on version mismatch.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.clear@.
-module Network.Google.AppState.States.Clear
+module Gogol.AppState.States.Clear
   ( -- * Resource
     AppStateStatesClearResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AppState.States.Clear
   )
 where
 
-import Network.Google.AppState.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AppState.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @appstate.states.clear@ method which the
 -- 'AppStateStatesClear' request conforms to.

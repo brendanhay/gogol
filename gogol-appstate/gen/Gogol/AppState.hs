@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AppState
+-- Module      : Gogol.AppState
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- The Google App State API.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
-module Network.Google.AppState
+module Gogol.AppState
   ( -- * Configuration
     appStateService,
 
@@ -83,9 +83,9 @@ module Network.Google.AppState
   )
 where
 
-import Network.Google.AppState.States.Clear
-import Network.Google.AppState.States.Delete
-import Network.Google.AppState.States.Get
-import Network.Google.AppState.States.List
-import Network.Google.AppState.States.Update
-import Network.Google.AppState.Types
+import Gogol.AppState.States.Clear
+import Gogol.AppState.States.Delete
+import Gogol.AppState.States.Get
+import Gogol.AppState.States.List
+import Gogol.AppState.States.Update
+import Gogol.AppState.Types
