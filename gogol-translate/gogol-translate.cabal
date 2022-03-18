@@ -39,37 +39,38 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Translate
-    Network.Google.Translate.Projects.DetectLanguage
-    Network.Google.Translate.Projects.GetSupportedLanguages
-    Network.Google.Translate.Projects.Locations.BatchTranslateDocument
-    Network.Google.Translate.Projects.Locations.BatchTranslateText
-    Network.Google.Translate.Projects.Locations.DetectLanguage
-    Network.Google.Translate.Projects.Locations.Get
-    Network.Google.Translate.Projects.Locations.GetSupportedLanguages
-    Network.Google.Translate.Projects.Locations.Glossaries.Create
-    Network.Google.Translate.Projects.Locations.Glossaries.Delete
-    Network.Google.Translate.Projects.Locations.Glossaries.Get
-    Network.Google.Translate.Projects.Locations.Glossaries.List
-    Network.Google.Translate.Projects.Locations.List
-    Network.Google.Translate.Projects.Locations.Operations.Cancel
-    Network.Google.Translate.Projects.Locations.Operations.Delete
-    Network.Google.Translate.Projects.Locations.Operations.Get
-    Network.Google.Translate.Projects.Locations.Operations.List
-    Network.Google.Translate.Projects.Locations.Operations.Wait
-    Network.Google.Translate.Projects.Locations.TranslateDocument
-    Network.Google.Translate.Projects.Locations.TranslateText
-    Network.Google.Translate.Projects.TranslateText
-    Network.Google.Translate.Types
+    Gogol.Translate
+    Gogol.Translate.Projects.DetectLanguage
+    Gogol.Translate.Projects.GetSupportedLanguages
+    Gogol.Translate.Projects.Locations.BatchTranslateDocument
+    Gogol.Translate.Projects.Locations.BatchTranslateText
+    Gogol.Translate.Projects.Locations.DetectLanguage
+    Gogol.Translate.Projects.Locations.Get
+    Gogol.Translate.Projects.Locations.GetSupportedLanguages
+    Gogol.Translate.Projects.Locations.Glossaries.Create
+    Gogol.Translate.Projects.Locations.Glossaries.Delete
+    Gogol.Translate.Projects.Locations.Glossaries.Get
+    Gogol.Translate.Projects.Locations.Glossaries.List
+    Gogol.Translate.Projects.Locations.List
+    Gogol.Translate.Projects.Locations.Operations.Cancel
+    Gogol.Translate.Projects.Locations.Operations.Delete
+    Gogol.Translate.Projects.Locations.Operations.Get
+    Gogol.Translate.Projects.Locations.Operations.List
+    Gogol.Translate.Projects.Locations.Operations.Wait
+    Gogol.Translate.Projects.Locations.TranslateDocument
+    Gogol.Translate.Projects.Locations.TranslateText
+    Gogol.Translate.Projects.TranslateText
+    Gogol.Translate.Types
 
   other-modules:
-    Network.Google.Translate.Internal.Product
-    Network.Google.Translate.Internal.Sum
+    Gogol.Translate.Internal.Product
+    Gogol.Translate.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.DetectLanguage
+-- Module      : Gogol.Translate.Projects.DetectLanguage
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Detects the language of text within a request.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.detectLanguage@.
-module Network.Google.Translate.Projects.DetectLanguage
+module Gogol.Translate.Projects.DetectLanguage
   ( -- * Resource
     TranslateProjectsDetectLanguageResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.DetectLanguage
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.detectLanguage@ method which the
 -- 'TranslateProjectsDetectLanguage' request conforms to.

@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.Operations.Get
+-- Module      : Gogol.Translate.Projects.Locations.Operations.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.operations.get@.
-module Network.Google.Translate.Projects.Locations.Operations.Get
+-- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.operations.delete@.
+module Gogol.Translate.Projects.Locations.Operations.Delete
   ( -- * Resource
-    TranslateProjectsLocationsOperationsGetResource,
+    TranslateProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
-    newTranslateProjectsLocationsOperationsGet,
-    TranslateProjectsLocationsOperationsGet,
+    newTranslateProjectsLocationsOperationsDelete,
+    TranslateProjectsLocationsOperationsDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
--- | A resource alias for @translate.projects.locations.operations.get@ method which the
--- 'TranslateProjectsLocationsOperationsGet' request conforms to.
-type TranslateProjectsLocationsOperationsGetResource =
+-- | A resource alias for @translate.projects.locations.operations.delete@ method which the
+-- 'TranslateProjectsLocationsOperationsDelete' request conforms to.
+type TranslateProjectsLocationsOperationsDeleteResource =
   "v3"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type TranslateProjectsLocationsOperationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Operation
+    Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+-- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
--- /See:/ 'newTranslateProjectsLocationsOperationsGet' smart constructor.
-data TranslateProjectsLocationsOperationsGet = TranslateProjectsLocationsOperationsGet
+-- /See:/ 'newTranslateProjectsLocationsOperationsDelete' smart constructor.
+data TranslateProjectsLocationsOperationsDelete = TranslateProjectsLocationsOperationsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
+    -- | The name of the operation resource to be deleted.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data TranslateProjectsLocationsOperationsGet = TranslateProjectsLocationsOperati
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TranslateProjectsLocationsOperationsGet' with the minimum fields required to make a request.
-newTranslateProjectsLocationsOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
+-- | Creates a value of 'TranslateProjectsLocationsOperationsDelete' with the minimum fields required to make a request.
+newTranslateProjectsLocationsOperationsDelete ::
+  -- |  The name of the operation resource to be deleted. See 'name'.
   Core.Text ->
-  TranslateProjectsLocationsOperationsGet
-newTranslateProjectsLocationsOperationsGet name =
-  TranslateProjectsLocationsOperationsGet
+  TranslateProjectsLocationsOperationsDelete
+newTranslateProjectsLocationsOperationsDelete name =
+  TranslateProjectsLocationsOperationsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,18 +91,19 @@ newTranslateProjectsLocationsOperationsGet name =
 
 instance
   Core.GoogleRequest
-    TranslateProjectsLocationsOperationsGet
+    TranslateProjectsLocationsOperationsDelete
   where
   type
-    Rs TranslateProjectsLocationsOperationsGet =
-      Operation
+    Rs TranslateProjectsLocationsOperationsDelete =
+      Empty
   type
-    Scopes TranslateProjectsLocationsOperationsGet =
+    Scopes
+      TranslateProjectsLocationsOperationsDelete =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-translation"
        ]
   requestClient
-    TranslateProjectsLocationsOperationsGet {..} =
+    TranslateProjectsLocationsOperationsDelete {..} =
       go
         name
         xgafv
@@ -117,6 +118,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  TranslateProjectsLocationsOperationsGetResource
+                  TranslateProjectsLocationsOperationsDeleteResource
             )
             Core.mempty

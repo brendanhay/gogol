@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.Operations.Delete
+-- Module      : Gogol.Translate.Projects.Locations.Glossaries.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- Gets a glossary. Returns NOT_FOUND, if the glossary doesn\'t exist.
 --
--- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.operations.delete@.
-module Network.Google.Translate.Projects.Locations.Operations.Delete
+-- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.glossaries.get@.
+module Gogol.Translate.Projects.Locations.Glossaries.Get
   ( -- * Resource
-    TranslateProjectsLocationsOperationsDeleteResource,
+    TranslateProjectsLocationsGlossariesGetResource,
 
     -- ** Constructing a Request
-    newTranslateProjectsLocationsOperationsDelete,
-    TranslateProjectsLocationsOperationsDelete,
+    newTranslateProjectsLocationsGlossariesGet,
+    TranslateProjectsLocationsGlossariesGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
--- | A resource alias for @translate.projects.locations.operations.delete@ method which the
--- 'TranslateProjectsLocationsOperationsDelete' request conforms to.
-type TranslateProjectsLocationsOperationsDeleteResource =
+-- | A resource alias for @translate.projects.locations.glossaries.get@ method which the
+-- 'TranslateProjectsLocationsGlossariesGet' request conforms to.
+type TranslateProjectsLocationsGlossariesGetResource =
   "v3"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type TranslateProjectsLocationsOperationsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] Glossary
 
--- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- | Gets a glossary. Returns NOT_FOUND, if the glossary doesn\'t exist.
 --
--- /See:/ 'newTranslateProjectsLocationsOperationsDelete' smart constructor.
-data TranslateProjectsLocationsOperationsDelete = TranslateProjectsLocationsOperationsDelete
+-- /See:/ 'newTranslateProjectsLocationsGlossariesGet' smart constructor.
+data TranslateProjectsLocationsGlossariesGet = TranslateProjectsLocationsGlossariesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource to be deleted.
+    -- | Required. The name of the glossary to retrieve.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data TranslateProjectsLocationsOperationsDelete = TranslateProjectsLocationsOper
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TranslateProjectsLocationsOperationsDelete' with the minimum fields required to make a request.
-newTranslateProjectsLocationsOperationsDelete ::
-  -- |  The name of the operation resource to be deleted. See 'name'.
+-- | Creates a value of 'TranslateProjectsLocationsGlossariesGet' with the minimum fields required to make a request.
+newTranslateProjectsLocationsGlossariesGet ::
+  -- |  Required. The name of the glossary to retrieve. See 'name'.
   Core.Text ->
-  TranslateProjectsLocationsOperationsDelete
-newTranslateProjectsLocationsOperationsDelete name =
-  TranslateProjectsLocationsOperationsDelete
+  TranslateProjectsLocationsGlossariesGet
+newTranslateProjectsLocationsGlossariesGet name =
+  TranslateProjectsLocationsGlossariesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,19 +91,18 @@ newTranslateProjectsLocationsOperationsDelete name =
 
 instance
   Core.GoogleRequest
-    TranslateProjectsLocationsOperationsDelete
+    TranslateProjectsLocationsGlossariesGet
   where
   type
-    Rs TranslateProjectsLocationsOperationsDelete =
-      Empty
+    Rs TranslateProjectsLocationsGlossariesGet =
+      Glossary
   type
-    Scopes
-      TranslateProjectsLocationsOperationsDelete =
+    Scopes TranslateProjectsLocationsGlossariesGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-translation"
        ]
   requestClient
-    TranslateProjectsLocationsOperationsDelete {..} =
+    TranslateProjectsLocationsGlossariesGet {..} =
       go
         name
         xgafv
@@ -118,6 +117,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  TranslateProjectsLocationsOperationsDeleteResource
+                  TranslateProjectsLocationsGlossariesGetResource
             )
             Core.mempty
