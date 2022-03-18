@@ -28,7 +28,7 @@ This repository is organised into the following directory structure:
 * [`lib/gogol-core`](lib/gogol-core): The `gogol-core` library upon which each of the services depends.
 * `lib/services/gogol-*`: Data types for each of the individual Google Compute Engine Service libraries.
 * [`examples`](examples): A currently sparse collection of examples for the various services.
-* [`configs`], Configuration, templates, and assets for the code generator.
+* [`configs`](configs), Configuration, templates, and assets for the code generator.
 * [`gen`](gen): The code generation binary.
 * [`scripts`](scripts): Scripts to manage the release lifecycle of the service libraries.
 
