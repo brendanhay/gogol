@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AnalyticsReporting.UserActivity.Search
+-- Module      : Gogol.AnalyticsReporting.Reports.BatchGet
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns User Activity data.
+-- Returns the Analytics data.
 --
--- /See:/ <https://developers.google.com/analytics/devguides/reporting/core/v4/ Analytics Reporting API Reference> for @analyticsreporting.userActivity.search@.
-module Network.Google.AnalyticsReporting.UserActivity.Search
+-- /See:/ <https://developers.google.com/analytics/devguides/reporting/core/v4/ Analytics Reporting API Reference> for @analyticsreporting.reports.batchGet@.
+module Gogol.AnalyticsReporting.Reports.BatchGet
   ( -- * Resource
-    AnalyticsReportingUserActivitySearchResource,
+    AnalyticsReportingReportsBatchGetResource,
 
     -- ** Constructing a Request
-    newAnalyticsReportingUserActivitySearch,
-    AnalyticsReportingUserActivitySearch,
+    newAnalyticsReportingReportsBatchGet,
+    AnalyticsReportingReportsBatchGet,
   )
 where
 
-import Network.Google.AnalyticsReporting.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AnalyticsReporting.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @analyticsreporting.userActivity.search@ method which the
--- 'AnalyticsReportingUserActivitySearch' request conforms to.
-type AnalyticsReportingUserActivitySearchResource =
+-- | A resource alias for @analyticsreporting.reports.batchGet@ method which the
+-- 'AnalyticsReportingReportsBatchGet' request conforms to.
+type AnalyticsReportingReportsBatchGetResource =
   "v4"
-    Core.:> "userActivity:search"
+    Core.:> "reports:batchGet"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] SearchUserActivityRequest
-    Core.:> Core.Post '[Core.JSON] SearchUserActivityResponse
+    Core.:> Core.ReqBody '[Core.JSON] GetReportsRequest
+    Core.:> Core.Post '[Core.JSON] GetReportsResponse
 
--- | Returns User Activity data.
+-- | Returns the Analytics data.
 --
--- /See:/ 'newAnalyticsReportingUserActivitySearch' smart constructor.
-data AnalyticsReportingUserActivitySearch = AnalyticsReportingUserActivitySearch
+-- /See:/ 'newAnalyticsReportingReportsBatchGet' smart constructor.
+data AnalyticsReportingReportsBatchGet = AnalyticsReportingReportsBatchGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -67,7 +67,7 @@ data AnalyticsReportingUserActivitySearch = AnalyticsReportingUserActivitySearch
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: SearchUserActivityRequest,
+    payload :: GetReportsRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -75,13 +75,13 @@ data AnalyticsReportingUserActivitySearch = AnalyticsReportingUserActivitySearch
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'AnalyticsReportingUserActivitySearch' with the minimum fields required to make a request.
-newAnalyticsReportingUserActivitySearch ::
+-- | Creates a value of 'AnalyticsReportingReportsBatchGet' with the minimum fields required to make a request.
+newAnalyticsReportingReportsBatchGet ::
   -- |  Multipart request metadata. See 'payload'.
-  SearchUserActivityRequest ->
-  AnalyticsReportingUserActivitySearch
-newAnalyticsReportingUserActivitySearch payload =
-  AnalyticsReportingUserActivitySearch
+  GetReportsRequest ->
+  AnalyticsReportingReportsBatchGet
+newAnalyticsReportingReportsBatchGet payload =
+  AnalyticsReportingReportsBatchGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -92,32 +92,30 @@ newAnalyticsReportingUserActivitySearch payload =
 
 instance
   Core.GoogleRequest
-    AnalyticsReportingUserActivitySearch
+    AnalyticsReportingReportsBatchGet
   where
   type
-    Rs AnalyticsReportingUserActivitySearch =
-      SearchUserActivityResponse
+    Rs AnalyticsReportingReportsBatchGet =
+      GetReportsResponse
   type
-    Scopes AnalyticsReportingUserActivitySearch =
+    Scopes AnalyticsReportingReportsBatchGet =
       '[ "https://www.googleapis.com/auth/analytics",
          "https://www.googleapis.com/auth/analytics.readonly"
        ]
-  requestClient
-    AnalyticsReportingUserActivitySearch {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsReportingUserActivitySearchResource
-            )
-            Core.mempty
+  requestClient AnalyticsReportingReportsBatchGet {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsReportingReportsBatchGetResource
+          )
+          Core.mempty

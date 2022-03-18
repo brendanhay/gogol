@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AnalyticsReporting.Internal.Product
+-- Module      : Gogol.AnalyticsReporting.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AnalyticsReporting.Internal.Product
+module Gogol.AnalyticsReporting.Internal.Product
   ( -- * Activity
     Activity (..),
     newActivity,
@@ -228,8 +228,8 @@ module Network.Google.AnalyticsReporting.Internal.Product
   )
 where
 
-import Network.Google.AnalyticsReporting.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AnalyticsReporting.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | An Activity represents data for an activity of a user. Note that an Activity is different from a hit. A hit might result in multiple Activity\'s. For example, if a hit includes a transaction and a goal completion, there will be two Activity protos for this hit, one for ECOMMERCE and one for GOAL. Conversely, multiple hits can also construct one Activity. In classic e-commerce, data for one transaction might be sent through multiple hits. These hits will be merged into one ECOMMERCE Activity.
 --

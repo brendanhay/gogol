@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AnalyticsReporting
-    Network.Google.AnalyticsReporting.Reports.BatchGet
-    Network.Google.AnalyticsReporting.Types
-    Network.Google.AnalyticsReporting.UserActivity.Search
+    Gogol.AnalyticsReporting
+    Gogol.AnalyticsReporting.Reports.BatchGet
+    Gogol.AnalyticsReporting.Types
+    Gogol.AnalyticsReporting.UserActivity.Search
 
   other-modules:
-    Network.Google.AnalyticsReporting.Internal.Product
-    Network.Google.AnalyticsReporting.Internal.Sum
+    Gogol.AnalyticsReporting.Internal.Product
+    Gogol.AnalyticsReporting.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
