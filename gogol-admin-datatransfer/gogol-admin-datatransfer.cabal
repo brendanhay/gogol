@@ -1,52 +1,61 @@
-name:                  gogol-admin-datatransfer
-version:               0.5.0
-synopsis:              Google Admin SDK SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               OtherLicense
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015-2016 Brendan Hay
-category:              Network, Google, Cloud
-build-type:            Simple
-cabal-version:         >= 1.10
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-admin-datatransfer
+version:            0.5.0
+synopsis:           Google Admin SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
 
 description:
-    Admin SDK lets administrators of enterprise domains to view and manage
-    resources like user, groups etc. It also provides audit and usage
-    reports of domain.
-    .
-    /Warning:/ This is an experimental prototype/preview release which is still
-    under exploratory development and not intended for public use, caveat emptor!
-    .
-    This library is compatible with version @datatransfer_v1@
-    of the API.
+  Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
+  .
+  /Warning:/ This is an experimental prototype/preview release which is still
+  under exploratory development and not intended for public use, caveat emptor!
+  .
+  This library is compatible with version @datatransfer_v1@
+  of the API.
 
 source-repository head
-    type:     git
-    location: git://github.com/brendanhay/gogol.git
+  type:     git
+  location: git://github.com/brendanhay/gogol.git
+  subdir:   gogol-admin-datatransfer
+
+flag no-field-selectors
+  description: If field selectors should be omitted, requires GHC >=9.2
+  default:     True
 
 library
-    default-language:  Haskell2010
-    hs-source-dirs:    src gen
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
+  ghc-options:
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
 
-    ghc-options:       -Wall
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
+    default-extensions: NoFieldSelectors
 
-    exposed-modules:
-          Network.Google.DataTransfer
-        , Network.Google.DataTransfer.Types
-        , Network.Google.Resource.DataTransfer.Applications.Get
-        , Network.Google.Resource.DataTransfer.Applications.List
-        , Network.Google.Resource.DataTransfer.Transfers.Get
-        , Network.Google.Resource.DataTransfer.Transfers.Insert
-        , Network.Google.Resource.DataTransfer.Transfers.List
+  exposed-modules:
+    Network.Google.Admin.DataTransfer
+    Network.Google.Admin.DataTransfer.Applications.Get
+    Network.Google.Admin.DataTransfer.Applications.List
+    Network.Google.Admin.DataTransfer.Transfers.Get
+    Network.Google.Admin.DataTransfer.Transfers.Insert
+    Network.Google.Admin.DataTransfer.Transfers.List
+    Network.Google.Admin.DataTransfer.Types
 
-    other-modules:
-          Network.Google.DataTransfer.Types.Product
-        , Network.Google.DataTransfer.Types.Sum
+  other-modules:
+    Network.Google.Admin.DataTransfer.Internal.Product
+    Network.Google.Admin.DataTransfer.Internal.Sum
 
-    build-depends:
-          gogol-core == 0.5.0.*
-        , base       >= 4.7 && < 5
+  build-depends:
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
