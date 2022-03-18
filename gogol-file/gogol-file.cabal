@@ -39,39 +39,40 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.File
-    Network.Google.File.Projects.Locations.Backups.Create
-    Network.Google.File.Projects.Locations.Backups.Delete
-    Network.Google.File.Projects.Locations.Backups.Get
-    Network.Google.File.Projects.Locations.Backups.List
-    Network.Google.File.Projects.Locations.Backups.Patch
-    Network.Google.File.Projects.Locations.Get
-    Network.Google.File.Projects.Locations.Instances.Create
-    Network.Google.File.Projects.Locations.Instances.Delete
-    Network.Google.File.Projects.Locations.Instances.Get
-    Network.Google.File.Projects.Locations.Instances.List
-    Network.Google.File.Projects.Locations.Instances.Patch
-    Network.Google.File.Projects.Locations.Instances.Restore
-    Network.Google.File.Projects.Locations.Instances.Snapshots.Create
-    Network.Google.File.Projects.Locations.Instances.Snapshots.Delete
-    Network.Google.File.Projects.Locations.Instances.Snapshots.Get
-    Network.Google.File.Projects.Locations.Instances.Snapshots.List
-    Network.Google.File.Projects.Locations.Instances.Snapshots.Patch
-    Network.Google.File.Projects.Locations.List
-    Network.Google.File.Projects.Locations.Operations.Cancel
-    Network.Google.File.Projects.Locations.Operations.Delete
-    Network.Google.File.Projects.Locations.Operations.Get
-    Network.Google.File.Projects.Locations.Operations.List
-    Network.Google.File.Types
+    Gogol.File
+    Gogol.File.Projects.Locations.Backups.Create
+    Gogol.File.Projects.Locations.Backups.Delete
+    Gogol.File.Projects.Locations.Backups.Get
+    Gogol.File.Projects.Locations.Backups.List
+    Gogol.File.Projects.Locations.Backups.Patch
+    Gogol.File.Projects.Locations.Get
+    Gogol.File.Projects.Locations.Instances.Create
+    Gogol.File.Projects.Locations.Instances.Delete
+    Gogol.File.Projects.Locations.Instances.Get
+    Gogol.File.Projects.Locations.Instances.List
+    Gogol.File.Projects.Locations.Instances.Patch
+    Gogol.File.Projects.Locations.Instances.Restore
+    Gogol.File.Projects.Locations.Instances.Snapshots.Create
+    Gogol.File.Projects.Locations.Instances.Snapshots.Delete
+    Gogol.File.Projects.Locations.Instances.Snapshots.Get
+    Gogol.File.Projects.Locations.Instances.Snapshots.List
+    Gogol.File.Projects.Locations.Instances.Snapshots.Patch
+    Gogol.File.Projects.Locations.List
+    Gogol.File.Projects.Locations.Operations.Cancel
+    Gogol.File.Projects.Locations.Operations.Delete
+    Gogol.File.Projects.Locations.Operations.Get
+    Gogol.File.Projects.Locations.Operations.List
+    Gogol.File.Types
 
   other-modules:
-    Network.Google.File.Internal.Product
-    Network.Google.File.Internal.Sum
+    Gogol.File.Internal.Product
+    Gogol.File.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
