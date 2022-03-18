@@ -1,161 +1,129 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.YouTubeAnalytics.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.YouTubeAnalytics.Types
-    (
-    -- * Service Configuration
-      youTubeAnalyticsService
+  ( -- * Configuration
+    youTubeAnalyticsService,
 
     -- * OAuth Scopes
-    , youTubeScope
-    , youTubeAnalyticsReadOnlyScope
-    , youTubePartnerScope
-    , youTubeAnalyticsMonetaryReadOnlyScope
-    , youTubeReadOnlyScope
+    youtubeScope,
+    youtubeReadOnlyScope,
+    youtubepartnerScope,
+    youtubeAnalyticsMonetaryReadOnlyScope,
+    youtubeAnalyticsReadOnlyScope,
 
-    -- * GroupContentDetails
-    , GroupContentDetails
-    , groupContentDetails
-    , gcdItemType
-    , gcdItemCount
+    -- * Types
 
-    -- * Group
-    , Group
-    , group'
-    , gEtag
-    , gSnippet
-    , gKind
-    , gContentDetails
-    , gId
-    , gErrors
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ListGroupsResponse
-    , ListGroupsResponse
-    , listGroupsResponse
-    , lgrEtag
-    , lgrNextPageToken
-    , lgrKind
-    , lgrItems
-    , lgrErrors
+    -- ** EmptyResponse
+    EmptyResponse (..),
+    newEmptyResponse,
 
-    -- * ListGroupItemsResponse
-    , ListGroupItemsResponse
-    , listGroupItemsResponse
-    , lgirEtag
-    , lgirKind
-    , lgirItems
-    , lgirErrors
+    -- ** ErrorProto
+    ErrorProto (..),
+    newErrorProto,
 
-    -- * GroupItemResource
-    , GroupItemResource
-    , groupItemResource
-    , girKind
-    , girId
+    -- ** ErrorProto_LocationType
+    ErrorProto_LocationType (..),
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Errors
+    Errors (..),
+    newErrors,
 
-    -- * GroupSnippet
-    , GroupSnippet
-    , groupSnippet
-    , gsPublishedAt
-    , gsTitle
+    -- ** Errors_Code
+    Errors_Code (..),
 
-    -- * GroupItem
-    , GroupItem
-    , groupItem
-    , giEtag
-    , giKind
-    , giResource
-    , giGroupId
-    , giId
-    , giErrors
+    -- ** Group
+    Group (..),
+    newGroup,
 
-    -- * Errors
-    , Errors
-    , errors
-    , eRequestId
-    , eError
-    , eCode
+    -- ** GroupContentDetails
+    GroupContentDetails (..),
+    newGroupContentDetails,
 
-    -- * ErrorProtoLocationType
-    , ErrorProtoLocationType (..)
+    -- ** GroupItem
+    GroupItem (..),
+    newGroupItem,
 
-    -- * ErrorsCode
-    , ErrorsCode (..)
+    -- ** GroupItemResource
+    GroupItemResource (..),
+    newGroupItemResource,
 
-    -- * ResultTableColumnHeader
-    , ResultTableColumnHeader
-    , resultTableColumnHeader
-    , rtchColumnType
-    , rtchName
-    , rtchDataType
+    -- ** GroupSnippet
+    GroupSnippet (..),
+    newGroupSnippet,
 
-    -- * ErrorProto
-    , ErrorProto
-    , errorProto
-    , epDebugInfo
-    , epLocation
-    , epDomain
-    , epArgument
-    , epExternalErrorMessage
-    , epCode
-    , epLocationType
+    -- ** ListGroupItemsResponse
+    ListGroupItemsResponse (..),
+    newListGroupItemsResponse,
 
-    -- * EmptyResponse
-    , EmptyResponse
-    , emptyResponse
-    , erErrors
+    -- ** ListGroupsResponse
+    ListGroupsResponse (..),
+    newListGroupsResponse,
 
-    -- * QueryResponse
-    , QueryResponse
-    , queryResponse
-    , qrKind
-    , qrRows
-    , qrColumnHeaders
-    , qrErrors
-    ) where
+    -- ** QueryResponse
+    QueryResponse (..),
+    newQueryResponse,
 
-import Network.Google.Prelude
-import Network.Google.YouTubeAnalytics.Types.Product
-import Network.Google.YouTubeAnalytics.Types.Sum
+    -- ** ResultTableColumnHeader
+    ResultTableColumnHeader (..),
+    newResultTableColumnHeader,
+  )
+where
 
--- | Default request referring to version 'v2' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeAnalyticsService :: ServiceConfig
-youTubeAnalyticsService
-  = defaultService (ServiceId "youtubeAnalytics:v2")
-      "youtubeanalytics.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.YouTubeAnalytics.Internal.Product
+import Network.Google.YouTubeAnalytics.Internal.Sum
+
+-- | Default request referring to version @v2@ of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
+youTubeAnalyticsService :: Core.ServiceConfig
+youTubeAnalyticsService =
+  Core.defaultService
+    (Core.ServiceId "youtubeAnalytics:v2")
+    "youtubeanalytics.googleapis.com"
 
 -- | Manage your YouTube account
-youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
-youTubeScope = Proxy
-
--- | View YouTube Analytics reports for your YouTube content
-youTubeAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youTubeAnalyticsReadOnlyScope = Proxy
-
--- | View and manage your assets and associated content on YouTube
-youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youTubePartnerScope = Proxy
-
--- | View monetary and non-monetary YouTube Analytics reports for your
--- YouTube content
-youTubeAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youTubeAnalyticsMonetaryReadOnlyScope = Proxy
+youtubeScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube"]
+youtubeScope = Core.Proxy
 
 -- | View your YouTube account
-youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-youTubeReadOnlyScope = Proxy
+youtubeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+youtubeReadOnlyScope = Core.Proxy
+
+-- | View and manage your assets and associated content on YouTube
+youtubepartnerScope :: Core.Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youtubepartnerScope = Core.Proxy
+
+-- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
+youtubeAnalyticsMonetaryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+youtubeAnalyticsMonetaryReadOnlyScope = Core.Proxy
+
+-- | View YouTube Analytics reports for your YouTube content
+youtubeAnalyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+youtubeAnalyticsReadOnlyScope = Core.Proxy
