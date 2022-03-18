@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,91 +36,85 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDataSources.list@.
 module Gogol.Analytics.Management.CustomDataSources.List
-  ( -- * Resource
-    AnalyticsManagementCustomDataSourcesListResource,
+    (
+    -- * Resource
+      AnalyticsManagementCustomDataSourcesListResource
 
     -- ** Constructing a Request
-    newAnalyticsManagementCustomDataSourcesList,
-    AnalyticsManagementCustomDataSourcesList,
-  )
-where
+    , newAnalyticsManagementCustomDataSourcesList
+    , AnalyticsManagementCustomDataSourcesList
+    ) where
 
-import Gogol.Analytics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Analytics.Types
 
 -- | A resource alias for @analytics.management.customDataSources.list@ method which the
 -- 'AnalyticsManagementCustomDataSourcesList' request conforms to.
-type AnalyticsManagementCustomDataSourcesListResource =
-  "analytics"
-    Core.:> "v3"
-    Core.:> "management"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "webproperties"
-    Core.:> Core.Capture "webPropertyId" Core.Text
-    Core.:> "customDataSources"
-    Core.:> Core.QueryParam "max-results" Core.Int32
-    Core.:> Core.QueryParam "start-index" Core.Int32
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] CustomDataSources
+type AnalyticsManagementCustomDataSourcesListResource
+     =
+     "analytics" Core.:>
+       "v3" Core.:>
+         "management" Core.:>
+           "accounts" Core.:>
+             Core.Capture "accountId" Core.Text Core.:>
+               "webproperties" Core.:>
+                 Core.Capture "webPropertyId" Core.Text Core.:>
+                   "customDataSources" Core.:>
+                     Core.QueryParam "max-results" Core.Int32 Core.:>
+                       Core.QueryParam "start-index" Core.Int32 Core.:>
+                         Core.QueryParam "alt" Core.AltJSON Core.:>
+                           Core.Get '[Core.JSON] CustomDataSources
 
 -- | List custom data sources to which the user has access.
 --
 -- /See:/ 'newAnalyticsManagementCustomDataSourcesList' smart constructor.
 data AnalyticsManagementCustomDataSourcesList = AnalyticsManagementCustomDataSourcesList
-  { -- | Account Id for the custom data sources to retrieve.
-    accountId :: Core.Text,
-    -- | The maximum number of custom data sources to include in this response.
-    maxResults :: (Core.Maybe Core.Int32),
-    -- | A 1-based index of the first custom data source to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
-    startIndex :: (Core.Maybe Core.Int32),
-    -- | Web property Id for the custom data sources to retrieve.
-    webPropertyId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account Id for the custom data sources to retrieve.
+      accountId :: Core.Text
+      -- | The maximum number of custom data sources to include in this response.
+    , maxResults :: (Core.Maybe Core.Int32)
+      -- | A 1-based index of the first custom data source to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+    , startIndex :: (Core.Maybe Core.Int32)
+      -- | Web property Id for the custom data sources to retrieve.
+    , webPropertyId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementCustomDataSourcesList' with the minimum fields required to make a request.
-newAnalyticsManagementCustomDataSourcesList ::
-  -- |  Account Id for the custom data sources to retrieve. See 'accountId'.
-  Core.Text ->
-  -- |  Web property Id for the custom data sources to retrieve. See 'webPropertyId'.
-  Core.Text ->
-  AnalyticsManagementCustomDataSourcesList
+newAnalyticsManagementCustomDataSourcesList 
+    ::  Core.Text
+       -- ^  Account Id for the custom data sources to retrieve. See 'accountId'.
+    -> Core.Text
+       -- ^  Web property Id for the custom data sources to retrieve. See 'webPropertyId'.
+    -> AnalyticsManagementCustomDataSourcesList
 newAnalyticsManagementCustomDataSourcesList accountId webPropertyId =
   AnalyticsManagementCustomDataSourcesList
-    { accountId = accountId,
-      maxResults = Core.Nothing,
-      startIndex = Core.Nothing,
-      webPropertyId = webPropertyId
+    { accountId = accountId
+    , maxResults = Core.Nothing
+    , startIndex = Core.Nothing
+    , webPropertyId = webPropertyId
     }
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementCustomDataSourcesList
-  where
-  type
-    Rs AnalyticsManagementCustomDataSourcesList =
-      CustomDataSources
-  type
-    Scopes AnalyticsManagementCustomDataSourcesList =
-      '[ "https://www.googleapis.com/auth/analytics",
-         "https://www.googleapis.com/auth/analytics.edit",
-         "https://www.googleapis.com/auth/analytics.readonly"
-       ]
-  requestClient
-    AnalyticsManagementCustomDataSourcesList {..} =
-      go
-        accountId
-        webPropertyId
-        maxResults
-        startIndex
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementCustomDataSourcesListResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AnalyticsManagementCustomDataSourcesList
+         where
+        type Rs AnalyticsManagementCustomDataSourcesList =
+             CustomDataSources
+        type Scopes AnalyticsManagementCustomDataSourcesList
+             =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient
+          AnalyticsManagementCustomDataSourcesList{..}
+          = go accountId webPropertyId maxResults startIndex
+              (Core.Just Core.AltJSON)
+              analyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AnalyticsManagementCustomDataSourcesListResource)
+                      Core.mempty
+
