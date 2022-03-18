@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,128 +36,122 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instanceGroupManagers.updatePerInstanceConfigs@.
 module Gogol.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
-  ( -- * Resource
-    ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource,
+    (
+    -- * Resource
+      ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource
 
     -- ** Constructing a Request
-    newComputeInstanceGroupManagersUpdatePerInstanceConfigs,
-    ComputeInstanceGroupManagersUpdatePerInstanceConfigs,
-  )
-where
+    , newComputeInstanceGroupManagersUpdatePerInstanceConfigs
+    , ComputeInstanceGroupManagersUpdatePerInstanceConfigs
+    ) where
 
-import Gogol.Compute.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Compute.Types
 
 -- | A resource alias for @compute.instanceGroupManagers.updatePerInstanceConfigs@ method which the
 -- 'ComputeInstanceGroupManagersUpdatePerInstanceConfigs' request conforms to.
-type ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource =
-  "compute"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "project" Core.Text
-    Core.:> "zones"
-    Core.:> Core.Capture "zone" Core.Text
-    Core.:> "instanceGroupManagers"
-    Core.:> Core.Capture "instanceGroupManager" Core.Text
-    Core.:> "updatePerInstanceConfigs"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "requestId" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstanceGroupManagersUpdatePerInstanceConfigsReq
-    Core.:> Core.Post '[Core.JSON] Operation
+type ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource
+     =
+     "compute" Core.:>
+       "v1" Core.:>
+         "projects" Core.:>
+           Core.Capture "project" Core.Text Core.:>
+             "zones" Core.:>
+               Core.Capture "zone" Core.Text Core.:>
+                 "instanceGroupManagers" Core.:>
+                   Core.Capture "instanceGroupManager" Core.Text Core.:>
+                     "updatePerInstanceConfigs" Core.:>
+                       Core.QueryParam "$.xgafv" Xgafv Core.:>
+                         Core.QueryParam "access_token" Core.Text Core.:>
+                           Core.QueryParam "callback" Core.Text Core.:>
+                             Core.QueryParam "requestId" Core.Text Core.:>
+                               Core.QueryParam "uploadType" Core.Text Core.:>
+                                 Core.QueryParam "upload_protocol" Core.Text
+                                   Core.:>
+                                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                                     Core.ReqBody '[Core.JSON]
+                                       InstanceGroupManagersUpdatePerInstanceConfigsReq
+                                       Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
 --
 -- /See:/ 'newComputeInstanceGroupManagersUpdatePerInstanceConfigs' smart constructor.
 data ComputeInstanceGroupManagersUpdatePerInstanceConfigs = ComputeInstanceGroupManagersUpdatePerInstanceConfigs
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the managed instance group. It should conform to RFC1035.
-    instanceGroupManager :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: InstanceGroupManagersUpdatePerInstanceConfigsReq,
-    -- | Project ID for this request.
-    project :: Core.Text,
-    -- | An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-    requestId :: (Core.Maybe Core.Text),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text),
-    -- | The name of the zone where the managed instance group is located. It should conform to RFC1035.
-    zone :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The name of the managed instance group. It should conform to RFC1035.
+    , instanceGroupManager :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: InstanceGroupManagersUpdatePerInstanceConfigsReq
+      -- | Project ID for this request.
+    , project :: Core.Text
+      -- | An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    , requestId :: (Core.Maybe Core.Text)
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+      -- | The name of the zone where the managed instance group is located. It should conform to RFC1035.
+    , zone :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeInstanceGroupManagersUpdatePerInstanceConfigs' with the minimum fields required to make a request.
-newComputeInstanceGroupManagersUpdatePerInstanceConfigs ::
-  -- |  The name of the managed instance group. It should conform to RFC1035. See 'instanceGroupManager'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  InstanceGroupManagersUpdatePerInstanceConfigsReq ->
-  -- |  Project ID for this request. See 'project'.
-  Core.Text ->
-  -- |  The name of the zone where the managed instance group is located. It should conform to RFC1035. See 'zone'.
-  Core.Text ->
-  ComputeInstanceGroupManagersUpdatePerInstanceConfigs
+newComputeInstanceGroupManagersUpdatePerInstanceConfigs 
+    ::  Core.Text
+       -- ^  The name of the managed instance group. It should conform to RFC1035. See 'instanceGroupManager'.
+    -> InstanceGroupManagersUpdatePerInstanceConfigsReq
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  Project ID for this request. See 'project'.
+    -> Core.Text
+       -- ^  The name of the zone where the managed instance group is located. It should conform to RFC1035. See 'zone'.
+    -> ComputeInstanceGroupManagersUpdatePerInstanceConfigs
 newComputeInstanceGroupManagersUpdatePerInstanceConfigs instanceGroupManager payload project zone =
   ComputeInstanceGroupManagersUpdatePerInstanceConfigs
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , instanceGroupManager = instanceGroupManager
+    , payload = payload
+    , project = project
+    , requestId = Core.Nothing
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
+    , zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeInstanceGroupManagersUpdatePerInstanceConfigs
-  where
-  type
-    Rs
-      ComputeInstanceGroupManagersUpdatePerInstanceConfigs =
-      Operation
-  type
-    Scopes
-      ComputeInstanceGroupManagersUpdatePerInstanceConfigs =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
-  requestClient
-    ComputeInstanceGroupManagersUpdatePerInstanceConfigs {..} =
-      go
-        project
-        zone
-        instanceGroupManager
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           ComputeInstanceGroupManagersUpdatePerInstanceConfigs
+         where
+        type Rs
+               ComputeInstanceGroupManagersUpdatePerInstanceConfigs
+             = Operation
+        type Scopes
+               ComputeInstanceGroupManagersUpdatePerInstanceConfigs
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient
+          ComputeInstanceGroupManagersUpdatePerInstanceConfigs{..}
+          = go project zone instanceGroupManager xgafv
+              accessToken
+              callback
+              requestId
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              computeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource)
+                      Core.mempty
+

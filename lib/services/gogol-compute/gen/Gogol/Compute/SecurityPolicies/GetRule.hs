@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,109 +36,102 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.securityPolicies.getRule@.
 module Gogol.Compute.SecurityPolicies.GetRule
-  ( -- * Resource
-    ComputeSecurityPoliciesGetRuleResource,
+    (
+    -- * Resource
+      ComputeSecurityPoliciesGetRuleResource
 
     -- ** Constructing a Request
-    newComputeSecurityPoliciesGetRule,
-    ComputeSecurityPoliciesGetRule,
-  )
-where
+    , newComputeSecurityPoliciesGetRule
+    , ComputeSecurityPoliciesGetRule
+    ) where
 
-import Gogol.Compute.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Compute.Types
 
 -- | A resource alias for @compute.securityPolicies.getRule@ method which the
 -- 'ComputeSecurityPoliciesGetRule' request conforms to.
 type ComputeSecurityPoliciesGetRuleResource =
-  "compute"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "project" Core.Text
-    Core.:> "global"
-    Core.:> "securityPolicies"
-    Core.:> Core.Capture "securityPolicy" Core.Text
-    Core.:> "getRule"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "priority" Core.Int32
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] SecurityPolicyRule
+     "compute" Core.:>
+       "v1" Core.:>
+         "projects" Core.:>
+           Core.Capture "project" Core.Text Core.:>
+             "global" Core.:>
+               "securityPolicies" Core.:>
+                 Core.Capture "securityPolicy" Core.Text Core.:>
+                   "getRule" Core.:>
+                     Core.QueryParam "$.xgafv" Xgafv Core.:>
+                       Core.QueryParam "access_token" Core.Text Core.:>
+                         Core.QueryParam "callback" Core.Text Core.:>
+                           Core.QueryParam "priority" Core.Int32 Core.:>
+                             Core.QueryParam "uploadType" Core.Text Core.:>
+                               Core.QueryParam "upload_protocol" Core.Text
+                                 Core.:>
+                                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                                   Core.Get '[Core.JSON] SecurityPolicyRule
 
 -- | Gets a rule at the specified priority.
 --
 -- /See:/ 'newComputeSecurityPoliciesGetRule' smart constructor.
 data ComputeSecurityPoliciesGetRule = ComputeSecurityPoliciesGetRule
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The priority of the rule to get from the security policy.
-    priority :: (Core.Maybe Core.Int32),
-    -- | Project ID for this request.
-    project :: Core.Text,
-    -- | Name of the security policy to which the queried rule belongs.
-    securityPolicy :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The priority of the rule to get from the security policy.
+    , priority :: (Core.Maybe Core.Int32)
+      -- | Project ID for this request.
+    , project :: Core.Text
+      -- | Name of the security policy to which the queried rule belongs.
+    , securityPolicy :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeSecurityPoliciesGetRule' with the minimum fields required to make a request.
-newComputeSecurityPoliciesGetRule ::
-  -- |  Project ID for this request. See 'project'.
-  Core.Text ->
-  -- |  Name of the security policy to which the queried rule belongs. See 'securityPolicy'.
-  Core.Text ->
-  ComputeSecurityPoliciesGetRule
+newComputeSecurityPoliciesGetRule 
+    ::  Core.Text
+       -- ^  Project ID for this request. See 'project'.
+    -> Core.Text
+       -- ^  Name of the security policy to which the queried rule belongs. See 'securityPolicy'.
+    -> ComputeSecurityPoliciesGetRule
 newComputeSecurityPoliciesGetRule project securityPolicy =
   ComputeSecurityPoliciesGetRule
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      priority = Core.Nothing,
-      project = project,
-      securityPolicy = securityPolicy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , priority = Core.Nothing
+    , project = project
+    , securityPolicy = securityPolicy
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeSecurityPoliciesGetRule
-  where
-  type
-    Rs ComputeSecurityPoliciesGetRule =
-      SecurityPolicyRule
-  type
-    Scopes ComputeSecurityPoliciesGetRule =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
-       ]
-  requestClient ComputeSecurityPoliciesGetRule {..} =
-    go
-      project
-      securityPolicy
-      xgafv
-      accessToken
-      callback
-      priority
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      computeService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeSecurityPoliciesGetRuleResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           ComputeSecurityPoliciesGetRule
+         where
+        type Rs ComputeSecurityPoliciesGetRule =
+             SecurityPolicyRule
+        type Scopes ComputeSecurityPoliciesGetRule =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ComputeSecurityPoliciesGetRule{..}
+          = go project securityPolicy xgafv accessToken
+              callback
+              priority
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              computeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ComputeSecurityPoliciesGetRuleResource)
+                      Core.mempty
+

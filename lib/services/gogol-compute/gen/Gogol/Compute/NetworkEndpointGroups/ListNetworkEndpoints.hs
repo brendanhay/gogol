@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,156 +36,151 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.networkEndpointGroups.listNetworkEndpoints@.
 module Gogol.Compute.NetworkEndpointGroups.ListNetworkEndpoints
-  ( -- * Resource
-    ComputeNetworkEndpointGroupsListNetworkEndpointsResource,
+    (
+    -- * Resource
+      ComputeNetworkEndpointGroupsListNetworkEndpointsResource
 
     -- ** Constructing a Request
-    newComputeNetworkEndpointGroupsListNetworkEndpoints,
-    ComputeNetworkEndpointGroupsListNetworkEndpoints,
-  )
-where
+    , newComputeNetworkEndpointGroupsListNetworkEndpoints
+    , ComputeNetworkEndpointGroupsListNetworkEndpoints
+    ) where
 
-import Gogol.Compute.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Compute.Types
 
 -- | A resource alias for @compute.networkEndpointGroups.listNetworkEndpoints@ method which the
 -- 'ComputeNetworkEndpointGroupsListNetworkEndpoints' request conforms to.
-type ComputeNetworkEndpointGroupsListNetworkEndpointsResource =
-  "compute"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "project" Core.Text
-    Core.:> "zones"
-    Core.:> Core.Capture "zone" Core.Text
-    Core.:> "networkEndpointGroups"
-    Core.:> Core.Capture "networkEndpointGroup" Core.Text
-    Core.:> "listNetworkEndpoints"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "filter" Core.Text
-    Core.:> Core.QueryParam "maxResults" Core.Word32
-    Core.:> Core.QueryParam "orderBy" Core.Text
-    Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "returnPartialSuccess"
-              Core.Bool
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              NetworkEndpointGroupsListEndpointsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              NetworkEndpointGroupsListNetworkEndpoints
+type ComputeNetworkEndpointGroupsListNetworkEndpointsResource
+     =
+     "compute" Core.:>
+       "v1" Core.:>
+         "projects" Core.:>
+           Core.Capture "project" Core.Text Core.:>
+             "zones" Core.:>
+               Core.Capture "zone" Core.Text Core.:>
+                 "networkEndpointGroups" Core.:>
+                   Core.Capture "networkEndpointGroup" Core.Text Core.:>
+                     "listNetworkEndpoints" Core.:>
+                       Core.QueryParam "$.xgafv" Xgafv Core.:>
+                         Core.QueryParam "access_token" Core.Text Core.:>
+                           Core.QueryParam "callback" Core.Text Core.:>
+                             Core.QueryParam "filter" Core.Text Core.:>
+                               Core.QueryParam "maxResults" Core.Word32 Core.:>
+                                 Core.QueryParam "orderBy" Core.Text Core.:>
+                                   Core.QueryParam "pageToken" Core.Text Core.:>
+                                     Core.QueryParam "returnPartialSuccess"
+                                       Core.Bool
+                                       Core.:>
+                                       Core.QueryParam "uploadType" Core.Text
+                                         Core.:>
+                                         Core.QueryParam "upload_protocol"
+                                           Core.Text
+                                           Core.:>
+                                           Core.QueryParam "alt" Core.AltJSON
+                                             Core.:>
+                                             Core.ReqBody '[Core.JSON]
+                                               NetworkEndpointGroupsListEndpointsRequest
+                                               Core.:>
+                                               Core.Post '[Core.JSON]
+                                                 NetworkEndpointGroupsListNetworkEndpoints
 
 -- | Lists the network endpoints in the specified network endpoint group.
 --
 -- /See:/ 'newComputeNetworkEndpointGroupsListNetworkEndpoints' smart constructor.
 data ComputeNetworkEndpointGroupsListNetworkEndpoints = ComputeNetworkEndpointGroupsListNetworkEndpoints
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either @=@, @!=@, @>@, @\<@, @\<=@, @>=@ or @:@. For example, if you are filtering Compute Engine instances, you can exclude instances named @example-instance@ by specifying @name != example-instance@. The @:@ operator can be used with string fields to match substrings. For non-string fields it is equivalent to the @=@ operator. The @:*@ comparison can be used to test whether a key has been defined. For example, to find all objects with @owner@ label use: @labels.owner:*@ You can also filter nested fields. For example, you could specify @scheduling.automaticRestart = false@ to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide
-    -- each separate expression within parentheses. For example: @(scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")@ By default, each expression is an @AND@ expression. However, you can include @AND@ and @OR@ expressions explicitly. For example: @(cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true)@
-    filter :: (Core.Maybe Core.Text),
-    -- | The maximum number of results per page that should be returned. If the number of available results is larger than @maxResults@, Compute Engine returns a @nextPageToken@ that can be used to get the next page of results in subsequent list requests. Acceptable values are @0@ to @500@, inclusive. (Default: @500@)
-    maxResults :: Core.Word32,
-    -- | The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035.
-    networkEndpointGroup :: Core.Text,
-    -- | Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using @orderBy=\"creationTimestamp desc\"@. This sorts results based on the @creationTimestamp@ field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by @name@ or @creationTimestamp desc@ is supported.
-    orderBy :: (Core.Maybe Core.Text),
-    -- | Specifies a page token to use. Set @pageToken@ to the @nextPageToken@ returned by a previous list request to get the next page of results.
-    pageToken :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: NetworkEndpointGroupsListEndpointsRequest,
-    -- | Project ID for this request.
-    project :: Core.Text,
-    -- | Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-    returnPartialSuccess :: (Core.Maybe Core.Bool),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text),
-    -- | The name of the zone where the network endpoint group is located. It should comply with RFC1035.
-    zone :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either @=@, @!=@, @>@, @\<@, @\<=@, @>=@ or @:@. For example, if you are filtering Compute Engine instances, you can exclude instances named @example-instance@ by specifying @name != example-instance@. The @:@ operator can be used with string fields to match substrings. For non-string fields it is equivalent to the @=@ operator. The @:*@ comparison can be used to test whether a key has been defined. For example, to find all objects with @owner@ label use: @labels.owner:*@ You can also filter nested fields. For example, you could specify @scheduling.automaticRestart = false@ to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide
+      -- each separate expression within parentheses. For example: @(scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")@ By default, each expression is an @AND@ expression. However, you can include @AND@ and @OR@ expressions explicitly. For example: @(cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true)@
+    , filter :: (Core.Maybe Core.Text)
+      -- | The maximum number of results per page that should be returned. If the number of available results is larger than @maxResults@, Compute Engine returns a @nextPageToken@ that can be used to get the next page of results in subsequent list requests. Acceptable values are @0@ to @500@, inclusive. (Default: @500@)
+    , maxResults :: Core.Word32
+      -- | The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035.
+    , networkEndpointGroup :: Core.Text
+      -- | Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using @orderBy=\"creationTimestamp desc\"@. This sorts results based on the @creationTimestamp@ field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by @name@ or @creationTimestamp desc@ is supported.
+    , orderBy :: (Core.Maybe Core.Text)
+      -- | Specifies a page token to use. Set @pageToken@ to the @nextPageToken@ returned by a previous list request to get the next page of results.
+    , pageToken :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: NetworkEndpointGroupsListEndpointsRequest
+      -- | Project ID for this request.
+    , project :: Core.Text
+      -- | Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+    , returnPartialSuccess :: (Core.Maybe Core.Bool)
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+      -- | The name of the zone where the network endpoint group is located. It should comply with RFC1035.
+    , zone :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeNetworkEndpointGroupsListNetworkEndpoints' with the minimum fields required to make a request.
-newComputeNetworkEndpointGroupsListNetworkEndpoints ::
-  -- |  The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035. See 'networkEndpointGroup'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  NetworkEndpointGroupsListEndpointsRequest ->
-  -- |  Project ID for this request. See 'project'.
-  Core.Text ->
-  -- |  The name of the zone where the network endpoint group is located. It should comply with RFC1035. See 'zone'.
-  Core.Text ->
-  ComputeNetworkEndpointGroupsListNetworkEndpoints
+newComputeNetworkEndpointGroupsListNetworkEndpoints 
+    ::  Core.Text
+       -- ^  The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035. See 'networkEndpointGroup'.
+    -> NetworkEndpointGroupsListEndpointsRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  Project ID for this request. See 'project'.
+    -> Core.Text
+       -- ^  The name of the zone where the network endpoint group is located. It should comply with RFC1035. See 'zone'.
+    -> ComputeNetworkEndpointGroupsListNetworkEndpoints
 newComputeNetworkEndpointGroupsListNetworkEndpoints networkEndpointGroup payload project zone =
   ComputeNetworkEndpointGroupsListNetworkEndpoints
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      filter = Core.Nothing,
-      maxResults = 500,
-      networkEndpointGroup = networkEndpointGroup,
-      orderBy = Core.Nothing,
-      pageToken = Core.Nothing,
-      payload = payload,
-      project = project,
-      returnPartialSuccess = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , filter = Core.Nothing
+    , maxResults = 500
+    , networkEndpointGroup = networkEndpointGroup
+    , orderBy = Core.Nothing
+    , pageToken = Core.Nothing
+    , payload = payload
+    , project = project
+    , returnPartialSuccess = Core.Nothing
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
+    , zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeNetworkEndpointGroupsListNetworkEndpoints
-  where
-  type
-    Rs
-      ComputeNetworkEndpointGroupsListNetworkEndpoints =
-      NetworkEndpointGroupsListNetworkEndpoints
-  type
-    Scopes
-      ComputeNetworkEndpointGroupsListNetworkEndpoints =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
-       ]
-  requestClient
-    ComputeNetworkEndpointGroupsListNetworkEndpoints {..} =
-      go
-        project
-        zone
-        networkEndpointGroup
-        xgafv
-        accessToken
-        callback
-        filter
-        (Core.Just maxResults)
-        orderBy
-        pageToken
-        returnPartialSuccess
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeNetworkEndpointGroupsListNetworkEndpointsResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           ComputeNetworkEndpointGroupsListNetworkEndpoints
+         where
+        type Rs
+               ComputeNetworkEndpointGroupsListNetworkEndpoints
+             = NetworkEndpointGroupsListNetworkEndpoints
+        type Scopes
+               ComputeNetworkEndpointGroupsListNetworkEndpoints
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient
+          ComputeNetworkEndpointGroupsListNetworkEndpoints{..}
+          = go project zone networkEndpointGroup xgafv
+              accessToken
+              callback
+              filter
+              (Core.Just maxResults)
+              orderBy
+              pageToken
+              returnPartialSuccess
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              computeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ComputeNetworkEndpointGroupsListNetworkEndpointsResource)
+                      Core.mempty
+
