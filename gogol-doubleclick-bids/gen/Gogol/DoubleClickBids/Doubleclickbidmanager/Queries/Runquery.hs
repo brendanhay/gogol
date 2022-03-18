@@ -19,35 +19,36 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
+-- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a query.
+-- Runs a stored query to generate a report.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.createquery@.
-module Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.runquery@.
+module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
   ( -- * Resource
-    DoubleclickbidmanagerQueriesCreatequeryResource,
+    DoubleclickbidmanagerQueriesRunqueryResource,
 
     -- ** Constructing a Request
-    newDoubleclickbidmanagerQueriesCreatequery,
-    DoubleclickbidmanagerQueriesCreatequery,
+    newDoubleclickbidmanagerQueriesRunquery,
+    DoubleclickbidmanagerQueriesRunquery,
   )
 where
 
-import Network.Google.DoubleClickBids.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickBids.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclickbidmanager.queries.createquery@ method which the
--- 'DoubleclickbidmanagerQueriesCreatequery' request conforms to.
-type DoubleclickbidmanagerQueriesCreatequeryResource =
+-- | A resource alias for @doubleclickbidmanager.queries.runquery@ method which the
+-- 'DoubleclickbidmanagerQueriesRunquery' request conforms to.
+type DoubleclickbidmanagerQueriesRunqueryResource =
   "doubleclickbidmanager"
     Core.:> "v1.1"
     Core.:> "query"
+    Core.:> Core.Capture "queryId" Core.Int64
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "asynchronous" Core.Bool
@@ -55,23 +56,25 @@ type DoubleclickbidmanagerQueriesCreatequeryResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Query
-    Core.:> Core.Post '[Core.JSON] Query
+    Core.:> Core.ReqBody '[Core.JSON] RunQueryRequest
+    Core.:> Core.Post '[Core.JSON] ()
 
--- | Creates a query.
+-- | Runs a stored query to generate a report.
 --
--- /See:/ 'newDoubleclickbidmanagerQueriesCreatequery' smart constructor.
-data DoubleclickbidmanagerQueriesCreatequery = DoubleclickbidmanagerQueriesCreatequery
+-- /See:/ 'newDoubleclickbidmanagerQueriesRunquery' smart constructor.
+data DoubleclickbidmanagerQueriesRunquery = DoubleclickbidmanagerQueriesRunquery
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | If true, tries to run the query asynchronously. Only applicable when the frequency is ONE_TIME.
+    -- | If true, tries to run the query asynchronously.
     asynchronous :: Core.Bool,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: Query,
+    payload :: RunQueryRequest,
+    -- | Query ID to run.
+    queryId :: Core.Int64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -79,35 +82,37 @@ data DoubleclickbidmanagerQueriesCreatequery = DoubleclickbidmanagerQueriesCreat
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleclickbidmanagerQueriesCreatequery' with the minimum fields required to make a request.
-newDoubleclickbidmanagerQueriesCreatequery ::
+-- | Creates a value of 'DoubleclickbidmanagerQueriesRunquery' with the minimum fields required to make a request.
+newDoubleclickbidmanagerQueriesRunquery ::
   -- |  Multipart request metadata. See 'payload'.
-  Query ->
-  DoubleclickbidmanagerQueriesCreatequery
-newDoubleclickbidmanagerQueriesCreatequery payload =
-  DoubleclickbidmanagerQueriesCreatequery
+  RunQueryRequest ->
+  -- |  Query ID to run. See 'queryId'.
+  Core.Int64 ->
+  DoubleclickbidmanagerQueriesRunquery
+newDoubleclickbidmanagerQueriesRunquery payload queryId =
+  DoubleclickbidmanagerQueriesRunquery
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       asynchronous = Core.False,
       callback = Core.Nothing,
       payload = payload,
+      queryId = queryId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DoubleclickbidmanagerQueriesCreatequery
+    DoubleclickbidmanagerQueriesRunquery
   where
+  type Rs DoubleclickbidmanagerQueriesRunquery = ()
   type
-    Rs DoubleclickbidmanagerQueriesCreatequery =
-      Query
-  type
-    Scopes DoubleclickbidmanagerQueriesCreatequery =
+    Scopes DoubleclickbidmanagerQueriesRunquery =
       '["https://www.googleapis.com/auth/doubleclickbidmanager"]
   requestClient
-    DoubleclickbidmanagerQueriesCreatequery {..} =
+    DoubleclickbidmanagerQueriesRunquery {..} =
       go
+        queryId
         xgafv
         accessToken
         (Core.Just asynchronous)
@@ -122,6 +127,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DoubleclickbidmanagerQueriesCreatequeryResource
+                  DoubleclickbidmanagerQueriesRunqueryResource
             )
             Core.mempty

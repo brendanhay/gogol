@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids
+-- Module      : Gogol.DoubleClickBids
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- DoubleClick Bid Manager API allows users to manage and create campaigns and reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
-module Network.Google.DoubleClickBids
+module Gogol.DoubleClickBids
   ( -- * Configuration
     doubleClickBidsService,
 
@@ -201,10 +201,10 @@ module Network.Google.DoubleClickBids
   )
 where
 
-import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
-import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
-import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
-import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
-import Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
-import Network.Google.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
-import Network.Google.DoubleClickBids.Types
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
+import Gogol.DoubleClickBids.Types

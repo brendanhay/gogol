@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids.Internal.Product
+-- Module      : Gogol.DoubleClickBids.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.DoubleClickBids.Internal.Product
+module Gogol.DoubleClickBids.Internal.Product
   ( -- * ChannelGrouping
     ChannelGrouping (..),
     newChannelGrouping,
@@ -112,8 +112,8 @@ module Network.Google.DoubleClickBids.Internal.Product
   )
 where
 
-import Network.Google.DoubleClickBids.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickBids.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | A channel grouping defines a set of rules that can be used to categorize events in a path report.
 --

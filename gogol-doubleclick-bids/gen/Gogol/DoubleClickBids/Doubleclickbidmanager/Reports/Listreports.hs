@@ -19,55 +19,62 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
+-- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a stored query as well as the associated stored reports.
+-- Retrieves stored reports.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.deletequery@.
-module Network.Google.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.reports.listreports@.
+module Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
   ( -- * Resource
-    DoubleclickbidmanagerQueriesDeletequeryResource,
+    DoubleclickbidmanagerReportsListreportsResource,
 
     -- ** Constructing a Request
-    newDoubleclickbidmanagerQueriesDeletequery,
-    DoubleclickbidmanagerQueriesDeletequery,
+    newDoubleclickbidmanagerReportsListreports,
+    DoubleclickbidmanagerReportsListreports,
   )
 where
 
-import Network.Google.DoubleClickBids.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickBids.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclickbidmanager.queries.deletequery@ method which the
--- 'DoubleclickbidmanagerQueriesDeletequery' request conforms to.
-type DoubleclickbidmanagerQueriesDeletequeryResource =
+-- | A resource alias for @doubleclickbidmanager.reports.listreports@ method which the
+-- 'DoubleclickbidmanagerReportsListreports' request conforms to.
+type DoubleclickbidmanagerReportsListreportsResource =
   "doubleclickbidmanager"
     Core.:> "v1.1"
-    Core.:> "query"
+    Core.:> "queries"
     Core.:> Core.Capture "queryId" Core.Int64
+    Core.:> "reports"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "pageSize" Core.Int32
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+    Core.:> Core.Get '[Core.JSON] ListReportsResponse
 
--- | Deletes a stored query as well as the associated stored reports.
+-- | Retrieves stored reports.
 --
--- /See:/ 'newDoubleclickbidmanagerQueriesDeletequery' smart constructor.
-data DoubleclickbidmanagerQueriesDeletequery = DoubleclickbidmanagerQueriesDeletequery
+-- /See:/ 'newDoubleclickbidmanagerReportsListreports' smart constructor.
+data DoubleclickbidmanagerReportsListreports = DoubleclickbidmanagerReportsListreports
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Query ID to delete.
+    -- | Maximum number of results per page. Must be between 1 and 100. Defaults to 100 if unspecified.
+    pageSize :: (Core.Maybe Core.Int32),
+    -- | Optional pagination token.
+    pageToken :: (Core.Maybe Core.Text),
+    -- | Query ID with which the reports are associated.
     queryId :: Core.Int64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,16 +83,18 @@ data DoubleclickbidmanagerQueriesDeletequery = DoubleclickbidmanagerQueriesDelet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleclickbidmanagerQueriesDeletequery' with the minimum fields required to make a request.
-newDoubleclickbidmanagerQueriesDeletequery ::
-  -- |  Query ID to delete. See 'queryId'.
+-- | Creates a value of 'DoubleclickbidmanagerReportsListreports' with the minimum fields required to make a request.
+newDoubleclickbidmanagerReportsListreports ::
+  -- |  Query ID with which the reports are associated. See 'queryId'.
   Core.Int64 ->
-  DoubleclickbidmanagerQueriesDeletequery
-newDoubleclickbidmanagerQueriesDeletequery queryId =
-  DoubleclickbidmanagerQueriesDeletequery
+  DoubleclickbidmanagerReportsListreports
+newDoubleclickbidmanagerReportsListreports queryId =
+  DoubleclickbidmanagerReportsListreports
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      pageSize = Core.Nothing,
+      pageToken = Core.Nothing,
       queryId = queryId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -93,19 +102,23 @@ newDoubleclickbidmanagerQueriesDeletequery queryId =
 
 instance
   Core.GoogleRequest
-    DoubleclickbidmanagerQueriesDeletequery
+    DoubleclickbidmanagerReportsListreports
   where
-  type Rs DoubleclickbidmanagerQueriesDeletequery = ()
   type
-    Scopes DoubleclickbidmanagerQueriesDeletequery =
+    Rs DoubleclickbidmanagerReportsListreports =
+      ListReportsResponse
+  type
+    Scopes DoubleclickbidmanagerReportsListreports =
       '["https://www.googleapis.com/auth/doubleclickbidmanager"]
   requestClient
-    DoubleclickbidmanagerQueriesDeletequery {..} =
+    DoubleclickbidmanagerReportsListreports {..} =
       go
         queryId
         xgafv
         accessToken
         callback
+        pageSize
+        pageToken
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
@@ -115,6 +128,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DoubleclickbidmanagerQueriesDeletequeryResource
+                  DoubleclickbidmanagerReportsListreportsResource
             )
             Core.mempty

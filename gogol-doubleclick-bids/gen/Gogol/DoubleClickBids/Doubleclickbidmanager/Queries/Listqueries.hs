@@ -19,37 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
+-- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves stored reports.
+-- Retrieves stored queries.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.reports.listreports@.
-module Network.Google.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.listqueries@.
+module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
   ( -- * Resource
-    DoubleclickbidmanagerReportsListreportsResource,
+    DoubleclickbidmanagerQueriesListqueriesResource,
 
     -- ** Constructing a Request
-    newDoubleclickbidmanagerReportsListreports,
-    DoubleclickbidmanagerReportsListreports,
+    newDoubleclickbidmanagerQueriesListqueries,
+    DoubleclickbidmanagerQueriesListqueries,
   )
 where
 
-import Network.Google.DoubleClickBids.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DoubleClickBids.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @doubleclickbidmanager.reports.listreports@ method which the
--- 'DoubleclickbidmanagerReportsListreports' request conforms to.
-type DoubleclickbidmanagerReportsListreportsResource =
+-- | A resource alias for @doubleclickbidmanager.queries.listqueries@ method which the
+-- 'DoubleclickbidmanagerQueriesListqueries' request conforms to.
+type DoubleclickbidmanagerQueriesListqueriesResource =
   "doubleclickbidmanager"
     Core.:> "v1.1"
     Core.:> "queries"
-    Core.:> Core.Capture "queryId" Core.Int64
-    Core.:> "reports"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -58,12 +56,12 @@ type DoubleclickbidmanagerReportsListreportsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListReportsResponse
+    Core.:> Core.Get '[Core.JSON] ListQueriesResponse
 
--- | Retrieves stored reports.
+-- | Retrieves stored queries.
 --
--- /See:/ 'newDoubleclickbidmanagerReportsListreports' smart constructor.
-data DoubleclickbidmanagerReportsListreports = DoubleclickbidmanagerReportsListreports
+-- /See:/ 'newDoubleclickbidmanagerQueriesListqueries' smart constructor.
+data DoubleclickbidmanagerQueriesListqueries = DoubleclickbidmanagerQueriesListqueries
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -74,8 +72,6 @@ data DoubleclickbidmanagerReportsListreports = DoubleclickbidmanagerReportsListr
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional pagination token.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Query ID with which the reports are associated.
-    queryId :: Core.Int64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -83,37 +79,33 @@ data DoubleclickbidmanagerReportsListreports = DoubleclickbidmanagerReportsListr
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DoubleclickbidmanagerReportsListreports' with the minimum fields required to make a request.
-newDoubleclickbidmanagerReportsListreports ::
-  -- |  Query ID with which the reports are associated. See 'queryId'.
-  Core.Int64 ->
-  DoubleclickbidmanagerReportsListreports
-newDoubleclickbidmanagerReportsListreports queryId =
-  DoubleclickbidmanagerReportsListreports
+-- | Creates a value of 'DoubleclickbidmanagerQueriesListqueries' with the minimum fields required to make a request.
+newDoubleclickbidmanagerQueriesListqueries ::
+  DoubleclickbidmanagerQueriesListqueries
+newDoubleclickbidmanagerQueriesListqueries =
+  DoubleclickbidmanagerQueriesListqueries
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
-      queryId = queryId,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    DoubleclickbidmanagerReportsListreports
+    DoubleclickbidmanagerQueriesListqueries
   where
   type
-    Rs DoubleclickbidmanagerReportsListreports =
-      ListReportsResponse
+    Rs DoubleclickbidmanagerQueriesListqueries =
+      ListQueriesResponse
   type
-    Scopes DoubleclickbidmanagerReportsListreports =
+    Scopes DoubleclickbidmanagerQueriesListqueries =
       '["https://www.googleapis.com/auth/doubleclickbidmanager"]
   requestClient
-    DoubleclickbidmanagerReportsListreports {..} =
+    DoubleclickbidmanagerQueriesListqueries {..} =
       go
-        queryId
         xgafv
         accessToken
         callback
@@ -128,6 +120,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  DoubleclickbidmanagerReportsListreportsResource
+                  DoubleclickbidmanagerQueriesListqueriesResource
             )
             Core.mempty
