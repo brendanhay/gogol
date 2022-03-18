@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,153 +25,152 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.FirebaseDynamicLinks.Types
-    (
-    -- * Configuration
-      firebaseDynamicLinksService
+  ( -- * Configuration
+    firebaseDynamicLinksService,
 
     -- * OAuth Scopes
-    , firebaseScope
+    firebaseScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AnalyticsInfo
-    , AnalyticsInfo (..)
-    , newAnalyticsInfo
+    AnalyticsInfo (..),
+    newAnalyticsInfo,
 
     -- ** AndroidInfo
-    , AndroidInfo (..)
-    , newAndroidInfo
+    AndroidInfo (..),
+    newAndroidInfo,
 
     -- ** CreateManagedShortLinkRequest
-    , CreateManagedShortLinkRequest (..)
-    , newCreateManagedShortLinkRequest
+    CreateManagedShortLinkRequest (..),
+    newCreateManagedShortLinkRequest,
 
     -- ** CreateManagedShortLinkResponse
-    , CreateManagedShortLinkResponse (..)
-    , newCreateManagedShortLinkResponse
+    CreateManagedShortLinkResponse (..),
+    newCreateManagedShortLinkResponse,
 
     -- ** CreateShortDynamicLinkRequest
-    , CreateShortDynamicLinkRequest (..)
-    , newCreateShortDynamicLinkRequest
+    CreateShortDynamicLinkRequest (..),
+    newCreateShortDynamicLinkRequest,
 
     -- ** CreateShortDynamicLinkResponse
-    , CreateShortDynamicLinkResponse (..)
-    , newCreateShortDynamicLinkResponse
+    CreateShortDynamicLinkResponse (..),
+    newCreateShortDynamicLinkResponse,
 
     -- ** DesktopInfo
-    , DesktopInfo (..)
-    , newDesktopInfo
+    DesktopInfo (..),
+    newDesktopInfo,
 
     -- ** DeviceInfo
-    , DeviceInfo (..)
-    , newDeviceInfo
+    DeviceInfo (..),
+    newDeviceInfo,
 
     -- ** DynamicLinkEventStat
-    , DynamicLinkEventStat (..)
-    , newDynamicLinkEventStat
+    DynamicLinkEventStat (..),
+    newDynamicLinkEventStat,
 
     -- ** DynamicLinkEventStat_Event
-    , DynamicLinkEventStat_Event (..)
+    DynamicLinkEventStat_Event (..),
 
     -- ** DynamicLinkEventStat_Platform
-    , DynamicLinkEventStat_Platform (..)
+    DynamicLinkEventStat_Platform (..),
 
     -- ** DynamicLinkInfo
-    , DynamicLinkInfo (..)
-    , newDynamicLinkInfo
+    DynamicLinkInfo (..),
+    newDynamicLinkInfo,
 
     -- ** DynamicLinkStats
-    , DynamicLinkStats (..)
-    , newDynamicLinkStats
+    DynamicLinkStats (..),
+    newDynamicLinkStats,
 
     -- ** DynamicLinkWarning
-    , DynamicLinkWarning (..)
-    , newDynamicLinkWarning
+    DynamicLinkWarning (..),
+    newDynamicLinkWarning,
 
     -- ** DynamicLinkWarning_WarningCode
-    , DynamicLinkWarning_WarningCode (..)
+    DynamicLinkWarning_WarningCode (..),
 
     -- ** GetIosPostInstallAttributionRequest
-    , GetIosPostInstallAttributionRequest (..)
-    , newGetIosPostInstallAttributionRequest
+    GetIosPostInstallAttributionRequest (..),
+    newGetIosPostInstallAttributionRequest,
 
     -- ** GetIosPostInstallAttributionRequest_RetrievalMethod
-    , GetIosPostInstallAttributionRequest_RetrievalMethod (..)
+    GetIosPostInstallAttributionRequest_RetrievalMethod (..),
 
     -- ** GetIosPostInstallAttributionRequest_VisualStyle
-    , GetIosPostInstallAttributionRequest_VisualStyle (..)
+    GetIosPostInstallAttributionRequest_VisualStyle (..),
 
     -- ** GetIosPostInstallAttributionResponse
-    , GetIosPostInstallAttributionResponse (..)
-    , newGetIosPostInstallAttributionResponse
+    GetIosPostInstallAttributionResponse (..),
+    newGetIosPostInstallAttributionResponse,
 
     -- ** GetIosPostInstallAttributionResponse_AttributionConfidence
-    , GetIosPostInstallAttributionResponse_AttributionConfidence (..)
+    GetIosPostInstallAttributionResponse_AttributionConfidence (..),
 
     -- ** GetIosPostInstallAttributionResponse_RequestIpVersion
-    , GetIosPostInstallAttributionResponse_RequestIpVersion (..)
+    GetIosPostInstallAttributionResponse_RequestIpVersion (..),
 
     -- ** GetIosReopenAttributionRequest
-    , GetIosReopenAttributionRequest (..)
-    , newGetIosReopenAttributionRequest
+    GetIosReopenAttributionRequest (..),
+    newGetIosReopenAttributionRequest,
 
     -- ** GetIosReopenAttributionResponse
-    , GetIosReopenAttributionResponse (..)
-    , newGetIosReopenAttributionResponse
+    GetIosReopenAttributionResponse (..),
+    newGetIosReopenAttributionResponse,
 
     -- ** GooglePlayAnalytics
-    , GooglePlayAnalytics (..)
-    , newGooglePlayAnalytics
+    GooglePlayAnalytics (..),
+    newGooglePlayAnalytics,
 
     -- ** ITunesConnectAnalytics
-    , ITunesConnectAnalytics (..)
-    , newITunesConnectAnalytics
+    ITunesConnectAnalytics (..),
+    newITunesConnectAnalytics,
 
     -- ** IosInfo
-    , IosInfo (..)
-    , newIosInfo
+    IosInfo (..),
+    newIosInfo,
 
     -- ** ManagedShortLink
-    , ManagedShortLink (..)
-    , newManagedShortLink
+    ManagedShortLink (..),
+    newManagedShortLink,
 
     -- ** ManagedShortLink_FlaggedAttributeItem
-    , ManagedShortLink_FlaggedAttributeItem (..)
+    ManagedShortLink_FlaggedAttributeItem (..),
 
     -- ** ManagedShortLink_Visibility
-    , ManagedShortLink_Visibility (..)
+    ManagedShortLink_Visibility (..),
 
     -- ** NavigationInfo
-    , NavigationInfo (..)
-    , newNavigationInfo
+    NavigationInfo (..),
+    newNavigationInfo,
 
     -- ** SocialMetaTagInfo
-    , SocialMetaTagInfo (..)
-    , newSocialMetaTagInfo
+    SocialMetaTagInfo (..),
+    newSocialMetaTagInfo,
 
     -- ** Suffix
-    , Suffix (..)
-    , newSuffix
+    Suffix (..),
+    newSuffix,
 
     -- ** Suffix_Option
-    , Suffix_Option (..)
-    ) where
+    Suffix_Option (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.FirebaseDynamicLinks.Internal.Product
 import Gogol.FirebaseDynamicLinks.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Firebase Dynamic Links API. This contains the host and root path used as a starting point for constructing service requests.
 firebaseDynamicLinksService :: Core.ServiceConfig
-firebaseDynamicLinksService
-  = Core.defaultService
-      (Core.ServiceId "firebasedynamiclinks:v1")
-      "firebasedynamiclinks.googleapis.com"
+firebaseDynamicLinksService =
+  Core.defaultService
+    (Core.ServiceId "firebasedynamiclinks:v1")
+    "firebasedynamiclinks.googleapis.com"
 
 -- | View and administer all your Firebase data and settings
 firebaseScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase"]
