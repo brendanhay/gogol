@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,84 +30,91 @@
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.operations.delete@.
 module Gogol.Composer.Projects.Locations.Operations.Delete
-    (
-    -- * Resource
-      ComposerProjectsLocationsOperationsDeleteResource
+  ( -- * Resource
+    ComposerProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
-    , newComposerProjectsLocationsOperationsDelete
-    , ComposerProjectsLocationsOperationsDelete
-    ) where
+    newComposerProjectsLocationsOperationsDelete,
+    ComposerProjectsLocationsOperationsDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Composer.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @composer.projects.locations.operations.delete@ method which the
 -- 'ComposerProjectsLocationsOperationsDelete' request conforms to.
-type ComposerProjectsLocationsOperationsDeleteResource
-     =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Delete '[Core.JSON] Empty
+type ComposerProjectsLocationsOperationsDeleteResource =
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] Empty
 
 -- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
 --
 -- /See:/ 'newComposerProjectsLocationsOperationsDelete' smart constructor.
 data ComposerProjectsLocationsOperationsDelete = ComposerProjectsLocationsOperationsDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The name of the operation resource to be deleted.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The name of the operation resource to be deleted.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComposerProjectsLocationsOperationsDelete' with the minimum fields required to make a request.
-newComposerProjectsLocationsOperationsDelete 
-    ::  Core.Text
-       -- ^  The name of the operation resource to be deleted. See 'name'.
-    -> ComposerProjectsLocationsOperationsDelete
+newComposerProjectsLocationsOperationsDelete ::
+  -- |  The name of the operation resource to be deleted. See 'name'.
+  Core.Text ->
+  ComposerProjectsLocationsOperationsDelete
 newComposerProjectsLocationsOperationsDelete name =
   ComposerProjectsLocationsOperationsDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           ComposerProjectsLocationsOperationsDelete
-         where
-        type Rs ComposerProjectsLocationsOperationsDelete =
-             Empty
-        type Scopes ComposerProjectsLocationsOperationsDelete
-             = '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient
-          ComposerProjectsLocationsOperationsDelete{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              composerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           ComposerProjectsLocationsOperationsDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    ComposerProjectsLocationsOperationsDelete
+  where
+  type
+    Rs ComposerProjectsLocationsOperationsDelete =
+      Empty
+  type
+    Scopes ComposerProjectsLocationsOperationsDelete =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient
+    ComposerProjectsLocationsOperationsDelete {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        composerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  ComposerProjectsLocationsOperationsDeleteResource
+            )
+            Core.mempty

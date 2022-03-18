@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,185 +25,185 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Composer.Types
-    (
-    -- * Configuration
-      composerService
+  ( -- * Configuration
+    composerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AllowedIpRange
-    , AllowedIpRange (..)
-    , newAllowedIpRange
+    AllowedIpRange (..),
+    newAllowedIpRange,
 
     -- ** CheckUpgradeResponse
-    , CheckUpgradeResponse (..)
-    , newCheckUpgradeResponse
+    CheckUpgradeResponse (..),
+    newCheckUpgradeResponse,
 
     -- ** CheckUpgradeResponse_ContainsPypiModulesConflict
-    , CheckUpgradeResponse_ContainsPypiModulesConflict (..)
+    CheckUpgradeResponse_ContainsPypiModulesConflict (..),
 
     -- ** CheckUpgradeResponse_PypiDependencies
-    , CheckUpgradeResponse_PypiDependencies (..)
-    , newCheckUpgradeResponse_PypiDependencies
+    CheckUpgradeResponse_PypiDependencies (..),
+    newCheckUpgradeResponse_PypiDependencies,
 
     -- ** DatabaseConfig
-    , DatabaseConfig (..)
-    , newDatabaseConfig
+    DatabaseConfig (..),
+    newDatabaseConfig,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EncryptionConfig
-    , EncryptionConfig (..)
-    , newEncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
 
     -- ** Environment
-    , Environment (..)
-    , newEnvironment
+    Environment (..),
+    newEnvironment,
 
     -- ** Environment_Labels
-    , Environment_Labels (..)
-    , newEnvironment_Labels
+    Environment_Labels (..),
+    newEnvironment_Labels,
 
     -- ** Environment_State
-    , Environment_State (..)
+    Environment_State (..),
 
     -- ** EnvironmentConfig
-    , EnvironmentConfig (..)
-    , newEnvironmentConfig
+    EnvironmentConfig (..),
+    newEnvironmentConfig,
 
     -- ** EnvironmentConfig_EnvironmentSize
-    , EnvironmentConfig_EnvironmentSize (..)
+    EnvironmentConfig_EnvironmentSize (..),
 
     -- ** IPAllocationPolicy
-    , IPAllocationPolicy (..)
-    , newIPAllocationPolicy
+    IPAllocationPolicy (..),
+    newIPAllocationPolicy,
 
     -- ** ImageVersion
-    , ImageVersion (..)
-    , newImageVersion
+    ImageVersion (..),
+    newImageVersion,
 
     -- ** ListEnvironmentsResponse
-    , ListEnvironmentsResponse (..)
-    , newListEnvironmentsResponse
+    ListEnvironmentsResponse (..),
+    newListEnvironmentsResponse,
 
     -- ** ListImageVersionsResponse
-    , ListImageVersionsResponse (..)
-    , newListImageVersionsResponse
+    ListImageVersionsResponse (..),
+    newListImageVersionsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** MaintenanceWindow
-    , MaintenanceWindow (..)
-    , newMaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
 
     -- ** NodeConfig
-    , NodeConfig (..)
-    , newNodeConfig
+    NodeConfig (..),
+    newNodeConfig,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** OperationMetadata_OperationType
-    , OperationMetadata_OperationType (..)
+    OperationMetadata_OperationType (..),
 
     -- ** OperationMetadata_State
-    , OperationMetadata_State (..)
+    OperationMetadata_State (..),
 
     -- ** PrivateClusterConfig
-    , PrivateClusterConfig (..)
-    , newPrivateClusterConfig
+    PrivateClusterConfig (..),
+    newPrivateClusterConfig,
 
     -- ** PrivateEnvironmentConfig
-    , PrivateEnvironmentConfig (..)
-    , newPrivateEnvironmentConfig
+    PrivateEnvironmentConfig (..),
+    newPrivateEnvironmentConfig,
 
     -- ** SchedulerResource
-    , SchedulerResource (..)
-    , newSchedulerResource
+    SchedulerResource (..),
+    newSchedulerResource,
 
     -- ** SoftwareConfig
-    , SoftwareConfig (..)
-    , newSoftwareConfig
+    SoftwareConfig (..),
+    newSoftwareConfig,
 
     -- ** SoftwareConfig_AirflowConfigOverrides
-    , SoftwareConfig_AirflowConfigOverrides (..)
-    , newSoftwareConfig_AirflowConfigOverrides
+    SoftwareConfig_AirflowConfigOverrides (..),
+    newSoftwareConfig_AirflowConfigOverrides,
 
     -- ** SoftwareConfig_EnvVariables
-    , SoftwareConfig_EnvVariables (..)
-    , newSoftwareConfig_EnvVariables
+    SoftwareConfig_EnvVariables (..),
+    newSoftwareConfig_EnvVariables,
 
     -- ** SoftwareConfig_PypiPackages
-    , SoftwareConfig_PypiPackages (..)
-    , newSoftwareConfig_PypiPackages
+    SoftwareConfig_PypiPackages (..),
+    newSoftwareConfig_PypiPackages,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** WebServerConfig
-    , WebServerConfig (..)
-    , newWebServerConfig
+    WebServerConfig (..),
+    newWebServerConfig,
 
     -- ** WebServerNetworkAccessControl
-    , WebServerNetworkAccessControl (..)
-    , newWebServerNetworkAccessControl
+    WebServerNetworkAccessControl (..),
+    newWebServerNetworkAccessControl,
 
     -- ** WebServerResource
-    , WebServerResource (..)
-    , newWebServerResource
+    WebServerResource (..),
+    newWebServerResource,
 
     -- ** WorkerResource
-    , WorkerResource (..)
-    , newWorkerResource
+    WorkerResource (..),
+    newWorkerResource,
 
     -- ** WorkloadsConfig
-    , WorkloadsConfig (..)
-    , newWorkloadsConfig
-    ) where
+    WorkloadsConfig (..),
+    newWorkloadsConfig,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Composer.Internal.Product
 import Gogol.Composer.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
 composerService :: Core.ServiceConfig
-composerService
-  = Core.defaultService (Core.ServiceId "composer:v1")
-      "composer.googleapis.com"
+composerService =
+  Core.defaultService
+    (Core.ServiceId "composer:v1")
+    "composer.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]

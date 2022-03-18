@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Composer.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * CheckUpgradeResponse_ContainsPypiModulesConflict
     CheckUpgradeResponse_ContainsPypiModulesConflict
-      (
-        CheckUpgradeResponse_ContainsPypiModulesConflict_CONFLICTRESULTUNSPECIFIED,
+      ( CheckUpgradeResponse_ContainsPypiModulesConflict_CONFLICTRESULTUNSPECIFIED,
         CheckUpgradeResponse_ContainsPypiModulesConflict_Conflict,
         CheckUpgradeResponse_ContainsPypiModulesConflict_NOCONFLICT,
         ..
@@ -54,8 +43,7 @@ module Gogol.Composer.Internal.Sum
 
     -- * Environment_State
     Environment_State
-      (
-        Environment_State_STATEUNSPECIFIED,
+      ( Environment_State_STATEUNSPECIFIED,
         Environment_State_Creating,
         Environment_State_Running,
         Environment_State_Updating,
@@ -66,8 +54,7 @@ module Gogol.Composer.Internal.Sum
 
     -- * EnvironmentConfig_EnvironmentSize
     EnvironmentConfig_EnvironmentSize
-      (
-        EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZEUNSPECIFIED,
+      ( EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZEUNSPECIFIED,
         EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZESMALL,
         EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZEMEDIUM,
         EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZELARGE,
@@ -76,8 +63,7 @@ module Gogol.Composer.Internal.Sum
 
     -- * OperationMetadata_OperationType
     OperationMetadata_OperationType
-      (
-        OperationMetadata_OperationType_TYPEUNSPECIFIED,
+      ( OperationMetadata_OperationType_TYPEUNSPECIFIED,
         OperationMetadata_OperationType_Create,
         OperationMetadata_OperationType_Delete',
         OperationMetadata_OperationType_Update,
@@ -89,8 +75,7 @@ module Gogol.Composer.Internal.Sum
 
     -- * OperationMetadata_State
     OperationMetadata_State
-      (
-        OperationMetadata_State_STATEUNSPECIFIED,
+      ( OperationMetadata_State_STATEUNSPECIFIED,
         OperationMetadata_State_Pending,
         OperationMetadata_State_Running,
         OperationMetadata_State_Succeeded,
@@ -98,22 +83,23 @@ module Gogol.Composer.Internal.Sum
         OperationMetadata_State_Failed,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -126,20 +112,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Output only. Whether build has succeeded or failed on modules conflicts.
-newtype CheckUpgradeResponse_ContainsPypiModulesConflict = CheckUpgradeResponse_ContainsPypiModulesConflict { fromCheckUpgradeResponse_ContainsPypiModulesConflict :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CheckUpgradeResponse_ContainsPypiModulesConflict = CheckUpgradeResponse_ContainsPypiModulesConflict {fromCheckUpgradeResponse_ContainsPypiModulesConflict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | It is unknown whether build had conflicts or not.
 pattern CheckUpgradeResponse_ContainsPypiModulesConflict_CONFLICTRESULTUNSPECIFIED :: CheckUpgradeResponse_ContainsPypiModulesConflict
@@ -157,20 +144,21 @@ pattern CheckUpgradeResponse_ContainsPypiModulesConflict_NOCONFLICT = CheckUpgra
   CheckUpgradeResponse_ContainsPypiModulesConflict_CONFLICTRESULTUNSPECIFIED,
   CheckUpgradeResponse_ContainsPypiModulesConflict_Conflict,
   CheckUpgradeResponse_ContainsPypiModulesConflict_NOCONFLICT,
-  CheckUpgradeResponse_ContainsPypiModulesConflict #-}
+  CheckUpgradeResponse_ContainsPypiModulesConflict
+  #-}
 
 -- | The current state of the environment.
-newtype Environment_State = Environment_State { fromEnvironment_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Environment_State = Environment_State {fromEnvironment_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state of the environment is unknown.
 pattern Environment_State_STATEUNSPECIFIED :: Environment_State
@@ -203,20 +191,21 @@ pattern Environment_State_Error' = Environment_State "ERROR"
   Environment_State_Updating,
   Environment_State_Deleting,
   Environment_State_Error',
-  Environment_State #-}
+  Environment_State
+  #-}
 
 -- | Optional. The size of the Cloud Composer environment. This field is supported for Cloud Composer environments in versions composer-2././-airflow-/./.* and newer.
-newtype EnvironmentConfig_EnvironmentSize = EnvironmentConfig_EnvironmentSize { fromEnvironmentConfig_EnvironmentSize :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EnvironmentConfig_EnvironmentSize = EnvironmentConfig_EnvironmentSize {fromEnvironmentConfig_EnvironmentSize :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The size of the environment is unspecified.
 pattern EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZEUNSPECIFIED :: EnvironmentConfig_EnvironmentSize
@@ -239,20 +228,21 @@ pattern EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZELARGE = EnvironmentConf
   EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZESMALL,
   EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZEMEDIUM,
   EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZELARGE,
-  EnvironmentConfig_EnvironmentSize #-}
+  EnvironmentConfig_EnvironmentSize
+  #-}
 
 -- | Output only. The type of operation being performed.
-newtype OperationMetadata_OperationType = OperationMetadata_OperationType { fromOperationMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OperationMetadata_OperationType = OperationMetadata_OperationType {fromOperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unused.
 pattern OperationMetadata_OperationType_TYPEUNSPECIFIED :: OperationMetadata_OperationType
@@ -290,20 +280,21 @@ pattern OperationMetadata_OperationType_LOADSNAPSHOT = OperationMetadata_Operati
   OperationMetadata_OperationType_Check,
   OperationMetadata_OperationType_SAVESNAPSHOT,
   OperationMetadata_OperationType_LOADSNAPSHOT,
-  OperationMetadata_OperationType #-}
+  OperationMetadata_OperationType
+  #-}
 
 -- | Output only. The current operation state.
-newtype OperationMetadata_State = OperationMetadata_State { fromOperationMetadata_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OperationMetadata_State = OperationMetadata_State {fromOperationMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unused.
 pattern OperationMetadata_State_STATEUNSPECIFIED :: OperationMetadata_State
@@ -321,7 +312,7 @@ pattern OperationMetadata_State_Running = OperationMetadata_State "RUNNING"
 pattern OperationMetadata_State_Succeeded :: OperationMetadata_State
 pattern OperationMetadata_State_Succeeded = OperationMetadata_State "SUCCEEDED"
 
--- | 
+-- |
 pattern OperationMetadata_State_Successful :: OperationMetadata_State
 pattern OperationMetadata_State_Successful = OperationMetadata_State "SUCCESSFUL"
 
@@ -336,4 +327,5 @@ pattern OperationMetadata_State_Failed = OperationMetadata_State "FAILED"
   OperationMetadata_State_Succeeded,
   OperationMetadata_State_Successful,
   OperationMetadata_State_Failed,
-  OperationMetadata_State #-}
+  OperationMetadata_State
+  #-}
