@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,1002 +36,1002 @@
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference>
 module Gogol.Dataproc
-  ( -- * Configuration
-    dataprocService,
+    (
+    -- * Configuration
+      dataprocService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** dataproc.projects.locations.autoscalingPolicies.create
-    DataprocProjectsLocationsAutoscalingPoliciesCreateResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesCreate,
-    DataprocProjectsLocationsAutoscalingPoliciesCreate,
+    , DataprocProjectsLocationsAutoscalingPoliciesCreateResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesCreate
+    , DataprocProjectsLocationsAutoscalingPoliciesCreate
 
     -- ** dataproc.projects.locations.autoscalingPolicies.delete
-    DataprocProjectsLocationsAutoscalingPoliciesDeleteResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesDelete,
-    DataprocProjectsLocationsAutoscalingPoliciesDelete,
+    , DataprocProjectsLocationsAutoscalingPoliciesDeleteResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesDelete
+    , DataprocProjectsLocationsAutoscalingPoliciesDelete
 
     -- ** dataproc.projects.locations.autoscalingPolicies.get
-    DataprocProjectsLocationsAutoscalingPoliciesGetResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesGet,
-    DataprocProjectsLocationsAutoscalingPoliciesGet,
+    , DataprocProjectsLocationsAutoscalingPoliciesGetResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesGet
+    , DataprocProjectsLocationsAutoscalingPoliciesGet
 
     -- ** dataproc.projects.locations.autoscalingPolicies.getIamPolicy
-    DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicyResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy,
-    DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy,
+    , DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicyResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy
+    , DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy
 
     -- ** dataproc.projects.locations.autoscalingPolicies.list
-    DataprocProjectsLocationsAutoscalingPoliciesListResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesList,
-    DataprocProjectsLocationsAutoscalingPoliciesList,
+    , DataprocProjectsLocationsAutoscalingPoliciesListResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesList
+    , DataprocProjectsLocationsAutoscalingPoliciesList
 
     -- ** dataproc.projects.locations.autoscalingPolicies.setIamPolicy
-    DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicyResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy,
-    DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy,
+    , DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicyResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy
+    , DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy
 
     -- ** dataproc.projects.locations.autoscalingPolicies.testIamPermissions
-    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissionsResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
-    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
+    , DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissionsResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions
+    , DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions
 
     -- ** dataproc.projects.locations.autoscalingPolicies.update
-    DataprocProjectsLocationsAutoscalingPoliciesUpdateResource,
-    newDataprocProjectsLocationsAutoscalingPoliciesUpdate,
-    DataprocProjectsLocationsAutoscalingPoliciesUpdate,
+    , DataprocProjectsLocationsAutoscalingPoliciesUpdateResource
+    , newDataprocProjectsLocationsAutoscalingPoliciesUpdate
+    , DataprocProjectsLocationsAutoscalingPoliciesUpdate
 
     -- ** dataproc.projects.locations.batches.create
-    DataprocProjectsLocationsBatchesCreateResource,
-    newDataprocProjectsLocationsBatchesCreate,
-    DataprocProjectsLocationsBatchesCreate,
+    , DataprocProjectsLocationsBatchesCreateResource
+    , newDataprocProjectsLocationsBatchesCreate
+    , DataprocProjectsLocationsBatchesCreate
 
     -- ** dataproc.projects.locations.batches.delete
-    DataprocProjectsLocationsBatchesDeleteResource,
-    newDataprocProjectsLocationsBatchesDelete,
-    DataprocProjectsLocationsBatchesDelete,
+    , DataprocProjectsLocationsBatchesDeleteResource
+    , newDataprocProjectsLocationsBatchesDelete
+    , DataprocProjectsLocationsBatchesDelete
 
     -- ** dataproc.projects.locations.batches.get
-    DataprocProjectsLocationsBatchesGetResource,
-    newDataprocProjectsLocationsBatchesGet,
-    DataprocProjectsLocationsBatchesGet,
+    , DataprocProjectsLocationsBatchesGetResource
+    , newDataprocProjectsLocationsBatchesGet
+    , DataprocProjectsLocationsBatchesGet
 
     -- ** dataproc.projects.locations.batches.list
-    DataprocProjectsLocationsBatchesListResource,
-    newDataprocProjectsLocationsBatchesList,
-    DataprocProjectsLocationsBatchesList,
+    , DataprocProjectsLocationsBatchesListResource
+    , newDataprocProjectsLocationsBatchesList
+    , DataprocProjectsLocationsBatchesList
 
     -- ** dataproc.projects.locations.workflowTemplates.create
-    DataprocProjectsLocationsWorkflowTemplatesCreateResource,
-    newDataprocProjectsLocationsWorkflowTemplatesCreate,
-    DataprocProjectsLocationsWorkflowTemplatesCreate,
+    , DataprocProjectsLocationsWorkflowTemplatesCreateResource
+    , newDataprocProjectsLocationsWorkflowTemplatesCreate
+    , DataprocProjectsLocationsWorkflowTemplatesCreate
 
     -- ** dataproc.projects.locations.workflowTemplates.delete
-    DataprocProjectsLocationsWorkflowTemplatesDeleteResource,
-    newDataprocProjectsLocationsWorkflowTemplatesDelete,
-    DataprocProjectsLocationsWorkflowTemplatesDelete,
+    , DataprocProjectsLocationsWorkflowTemplatesDeleteResource
+    , newDataprocProjectsLocationsWorkflowTemplatesDelete
+    , DataprocProjectsLocationsWorkflowTemplatesDelete
 
     -- ** dataproc.projects.locations.workflowTemplates.get
-    DataprocProjectsLocationsWorkflowTemplatesGetResource,
-    newDataprocProjectsLocationsWorkflowTemplatesGet,
-    DataprocProjectsLocationsWorkflowTemplatesGet,
+    , DataprocProjectsLocationsWorkflowTemplatesGetResource
+    , newDataprocProjectsLocationsWorkflowTemplatesGet
+    , DataprocProjectsLocationsWorkflowTemplatesGet
 
     -- ** dataproc.projects.locations.workflowTemplates.getIamPolicy
-    DataprocProjectsLocationsWorkflowTemplatesGetIamPolicyResource,
-    newDataprocProjectsLocationsWorkflowTemplatesGetIamPolicy,
-    DataprocProjectsLocationsWorkflowTemplatesGetIamPolicy,
+    , DataprocProjectsLocationsWorkflowTemplatesGetIamPolicyResource
+    , newDataprocProjectsLocationsWorkflowTemplatesGetIamPolicy
+    , DataprocProjectsLocationsWorkflowTemplatesGetIamPolicy
 
     -- ** dataproc.projects.locations.workflowTemplates.instantiate
-    DataprocProjectsLocationsWorkflowTemplatesInstantiateResource,
-    newDataprocProjectsLocationsWorkflowTemplatesInstantiate,
-    DataprocProjectsLocationsWorkflowTemplatesInstantiate,
+    , DataprocProjectsLocationsWorkflowTemplatesInstantiateResource
+    , newDataprocProjectsLocationsWorkflowTemplatesInstantiate
+    , DataprocProjectsLocationsWorkflowTemplatesInstantiate
 
     -- ** dataproc.projects.locations.workflowTemplates.instantiateInline
-    DataprocProjectsLocationsWorkflowTemplatesInstantiateInlineResource,
-    newDataprocProjectsLocationsWorkflowTemplatesInstantiateInline,
-    DataprocProjectsLocationsWorkflowTemplatesInstantiateInline,
+    , DataprocProjectsLocationsWorkflowTemplatesInstantiateInlineResource
+    , newDataprocProjectsLocationsWorkflowTemplatesInstantiateInline
+    , DataprocProjectsLocationsWorkflowTemplatesInstantiateInline
 
     -- ** dataproc.projects.locations.workflowTemplates.list
-    DataprocProjectsLocationsWorkflowTemplatesListResource,
-    newDataprocProjectsLocationsWorkflowTemplatesList,
-    DataprocProjectsLocationsWorkflowTemplatesList,
+    , DataprocProjectsLocationsWorkflowTemplatesListResource
+    , newDataprocProjectsLocationsWorkflowTemplatesList
+    , DataprocProjectsLocationsWorkflowTemplatesList
 
     -- ** dataproc.projects.locations.workflowTemplates.setIamPolicy
-    DataprocProjectsLocationsWorkflowTemplatesSetIamPolicyResource,
-    newDataprocProjectsLocationsWorkflowTemplatesSetIamPolicy,
-    DataprocProjectsLocationsWorkflowTemplatesSetIamPolicy,
+    , DataprocProjectsLocationsWorkflowTemplatesSetIamPolicyResource
+    , newDataprocProjectsLocationsWorkflowTemplatesSetIamPolicy
+    , DataprocProjectsLocationsWorkflowTemplatesSetIamPolicy
 
     -- ** dataproc.projects.locations.workflowTemplates.testIamPermissions
-    DataprocProjectsLocationsWorkflowTemplatesTestIamPermissionsResource,
-    newDataprocProjectsLocationsWorkflowTemplatesTestIamPermissions,
-    DataprocProjectsLocationsWorkflowTemplatesTestIamPermissions,
+    , DataprocProjectsLocationsWorkflowTemplatesTestIamPermissionsResource
+    , newDataprocProjectsLocationsWorkflowTemplatesTestIamPermissions
+    , DataprocProjectsLocationsWorkflowTemplatesTestIamPermissions
 
     -- ** dataproc.projects.locations.workflowTemplates.update
-    DataprocProjectsLocationsWorkflowTemplatesUpdateResource,
-    newDataprocProjectsLocationsWorkflowTemplatesUpdate,
-    DataprocProjectsLocationsWorkflowTemplatesUpdate,
+    , DataprocProjectsLocationsWorkflowTemplatesUpdateResource
+    , newDataprocProjectsLocationsWorkflowTemplatesUpdate
+    , DataprocProjectsLocationsWorkflowTemplatesUpdate
 
     -- ** dataproc.projects.regions.autoscalingPolicies.create
-    DataprocProjectsRegionsAutoscalingPoliciesCreateResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesCreate,
-    DataprocProjectsRegionsAutoscalingPoliciesCreate,
+    , DataprocProjectsRegionsAutoscalingPoliciesCreateResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesCreate
+    , DataprocProjectsRegionsAutoscalingPoliciesCreate
 
     -- ** dataproc.projects.regions.autoscalingPolicies.delete
-    DataprocProjectsRegionsAutoscalingPoliciesDeleteResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesDelete,
-    DataprocProjectsRegionsAutoscalingPoliciesDelete,
+    , DataprocProjectsRegionsAutoscalingPoliciesDeleteResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesDelete
+    , DataprocProjectsRegionsAutoscalingPoliciesDelete
 
     -- ** dataproc.projects.regions.autoscalingPolicies.get
-    DataprocProjectsRegionsAutoscalingPoliciesGetResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesGet,
-    DataprocProjectsRegionsAutoscalingPoliciesGet,
+    , DataprocProjectsRegionsAutoscalingPoliciesGetResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesGet
+    , DataprocProjectsRegionsAutoscalingPoliciesGet
 
     -- ** dataproc.projects.regions.autoscalingPolicies.getIamPolicy
-    DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicyResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy,
-    DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy,
+    , DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicyResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy
+    , DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy
 
     -- ** dataproc.projects.regions.autoscalingPolicies.list
-    DataprocProjectsRegionsAutoscalingPoliciesListResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesList,
-    DataprocProjectsRegionsAutoscalingPoliciesList,
+    , DataprocProjectsRegionsAutoscalingPoliciesListResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesList
+    , DataprocProjectsRegionsAutoscalingPoliciesList
 
     -- ** dataproc.projects.regions.autoscalingPolicies.setIamPolicy
-    DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicyResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy,
-    DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy,
+    , DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicyResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy
+    , DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy
 
     -- ** dataproc.projects.regions.autoscalingPolicies.testIamPermissions
-    DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissionsResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions,
-    DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions,
+    , DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissionsResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions
+    , DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions
 
     -- ** dataproc.projects.regions.autoscalingPolicies.update
-    DataprocProjectsRegionsAutoscalingPoliciesUpdateResource,
-    newDataprocProjectsRegionsAutoscalingPoliciesUpdate,
-    DataprocProjectsRegionsAutoscalingPoliciesUpdate,
+    , DataprocProjectsRegionsAutoscalingPoliciesUpdateResource
+    , newDataprocProjectsRegionsAutoscalingPoliciesUpdate
+    , DataprocProjectsRegionsAutoscalingPoliciesUpdate
 
     -- ** dataproc.projects.regions.clusters.create
-    DataprocProjectsRegionsClustersCreateResource,
-    newDataprocProjectsRegionsClustersCreate,
-    DataprocProjectsRegionsClustersCreate,
+    , DataprocProjectsRegionsClustersCreateResource
+    , newDataprocProjectsRegionsClustersCreate
+    , DataprocProjectsRegionsClustersCreate
 
     -- ** dataproc.projects.regions.clusters.delete
-    DataprocProjectsRegionsClustersDeleteResource,
-    newDataprocProjectsRegionsClustersDelete,
-    DataprocProjectsRegionsClustersDelete,
+    , DataprocProjectsRegionsClustersDeleteResource
+    , newDataprocProjectsRegionsClustersDelete
+    , DataprocProjectsRegionsClustersDelete
 
     -- ** dataproc.projects.regions.clusters.diagnose
-    DataprocProjectsRegionsClustersDiagnoseResource,
-    newDataprocProjectsRegionsClustersDiagnose,
-    DataprocProjectsRegionsClustersDiagnose,
+    , DataprocProjectsRegionsClustersDiagnoseResource
+    , newDataprocProjectsRegionsClustersDiagnose
+    , DataprocProjectsRegionsClustersDiagnose
 
     -- ** dataproc.projects.regions.clusters.get
-    DataprocProjectsRegionsClustersGetResource,
-    newDataprocProjectsRegionsClustersGet,
-    DataprocProjectsRegionsClustersGet,
+    , DataprocProjectsRegionsClustersGetResource
+    , newDataprocProjectsRegionsClustersGet
+    , DataprocProjectsRegionsClustersGet
 
     -- ** dataproc.projects.regions.clusters.getIamPolicy
-    DataprocProjectsRegionsClustersGetIamPolicyResource,
-    newDataprocProjectsRegionsClustersGetIamPolicy,
-    DataprocProjectsRegionsClustersGetIamPolicy,
+    , DataprocProjectsRegionsClustersGetIamPolicyResource
+    , newDataprocProjectsRegionsClustersGetIamPolicy
+    , DataprocProjectsRegionsClustersGetIamPolicy
 
     -- ** dataproc.projects.regions.clusters.injectCredentials
-    DataprocProjectsRegionsClustersInjectCredentialsResource,
-    newDataprocProjectsRegionsClustersInjectCredentials,
-    DataprocProjectsRegionsClustersInjectCredentials,
+    , DataprocProjectsRegionsClustersInjectCredentialsResource
+    , newDataprocProjectsRegionsClustersInjectCredentials
+    , DataprocProjectsRegionsClustersInjectCredentials
 
     -- ** dataproc.projects.regions.clusters.list
-    DataprocProjectsRegionsClustersListResource,
-    newDataprocProjectsRegionsClustersList,
-    DataprocProjectsRegionsClustersList,
+    , DataprocProjectsRegionsClustersListResource
+    , newDataprocProjectsRegionsClustersList
+    , DataprocProjectsRegionsClustersList
 
     -- ** dataproc.projects.regions.clusters.patch
-    DataprocProjectsRegionsClustersPatchResource,
-    newDataprocProjectsRegionsClustersPatch,
-    DataprocProjectsRegionsClustersPatch,
+    , DataprocProjectsRegionsClustersPatchResource
+    , newDataprocProjectsRegionsClustersPatch
+    , DataprocProjectsRegionsClustersPatch
 
     -- ** dataproc.projects.regions.clusters.repair
-    DataprocProjectsRegionsClustersRepairResource,
-    newDataprocProjectsRegionsClustersRepair,
-    DataprocProjectsRegionsClustersRepair,
+    , DataprocProjectsRegionsClustersRepairResource
+    , newDataprocProjectsRegionsClustersRepair
+    , DataprocProjectsRegionsClustersRepair
 
     -- ** dataproc.projects.regions.clusters.setIamPolicy
-    DataprocProjectsRegionsClustersSetIamPolicyResource,
-    newDataprocProjectsRegionsClustersSetIamPolicy,
-    DataprocProjectsRegionsClustersSetIamPolicy,
+    , DataprocProjectsRegionsClustersSetIamPolicyResource
+    , newDataprocProjectsRegionsClustersSetIamPolicy
+    , DataprocProjectsRegionsClustersSetIamPolicy
 
     -- ** dataproc.projects.regions.clusters.start
-    DataprocProjectsRegionsClustersStartResource,
-    newDataprocProjectsRegionsClustersStart,
-    DataprocProjectsRegionsClustersStart,
+    , DataprocProjectsRegionsClustersStartResource
+    , newDataprocProjectsRegionsClustersStart
+    , DataprocProjectsRegionsClustersStart
 
     -- ** dataproc.projects.regions.clusters.stop
-    DataprocProjectsRegionsClustersStopResource,
-    newDataprocProjectsRegionsClustersStop,
-    DataprocProjectsRegionsClustersStop,
+    , DataprocProjectsRegionsClustersStopResource
+    , newDataprocProjectsRegionsClustersStop
+    , DataprocProjectsRegionsClustersStop
 
     -- ** dataproc.projects.regions.clusters.testIamPermissions
-    DataprocProjectsRegionsClustersTestIamPermissionsResource,
-    newDataprocProjectsRegionsClustersTestIamPermissions,
-    DataprocProjectsRegionsClustersTestIamPermissions,
+    , DataprocProjectsRegionsClustersTestIamPermissionsResource
+    , newDataprocProjectsRegionsClustersTestIamPermissions
+    , DataprocProjectsRegionsClustersTestIamPermissions
 
     -- ** dataproc.projects.regions.jobs.cancel
-    DataprocProjectsRegionsJobsCancelResource,
-    newDataprocProjectsRegionsJobsCancel,
-    DataprocProjectsRegionsJobsCancel,
+    , DataprocProjectsRegionsJobsCancelResource
+    , newDataprocProjectsRegionsJobsCancel
+    , DataprocProjectsRegionsJobsCancel
 
     -- ** dataproc.projects.regions.jobs.delete
-    DataprocProjectsRegionsJobsDeleteResource,
-    newDataprocProjectsRegionsJobsDelete,
-    DataprocProjectsRegionsJobsDelete,
+    , DataprocProjectsRegionsJobsDeleteResource
+    , newDataprocProjectsRegionsJobsDelete
+    , DataprocProjectsRegionsJobsDelete
 
     -- ** dataproc.projects.regions.jobs.get
-    DataprocProjectsRegionsJobsGetResource,
-    newDataprocProjectsRegionsJobsGet,
-    DataprocProjectsRegionsJobsGet,
+    , DataprocProjectsRegionsJobsGetResource
+    , newDataprocProjectsRegionsJobsGet
+    , DataprocProjectsRegionsJobsGet
 
     -- ** dataproc.projects.regions.jobs.getIamPolicy
-    DataprocProjectsRegionsJobsGetIamPolicyResource,
-    newDataprocProjectsRegionsJobsGetIamPolicy,
-    DataprocProjectsRegionsJobsGetIamPolicy,
+    , DataprocProjectsRegionsJobsGetIamPolicyResource
+    , newDataprocProjectsRegionsJobsGetIamPolicy
+    , DataprocProjectsRegionsJobsGetIamPolicy
 
     -- ** dataproc.projects.regions.jobs.list
-    DataprocProjectsRegionsJobsListResource,
-    newDataprocProjectsRegionsJobsList,
-    DataprocProjectsRegionsJobsList,
+    , DataprocProjectsRegionsJobsListResource
+    , newDataprocProjectsRegionsJobsList
+    , DataprocProjectsRegionsJobsList
 
     -- ** dataproc.projects.regions.jobs.patch
-    DataprocProjectsRegionsJobsPatchResource,
-    newDataprocProjectsRegionsJobsPatch,
-    DataprocProjectsRegionsJobsPatch,
+    , DataprocProjectsRegionsJobsPatchResource
+    , newDataprocProjectsRegionsJobsPatch
+    , DataprocProjectsRegionsJobsPatch
 
     -- ** dataproc.projects.regions.jobs.setIamPolicy
-    DataprocProjectsRegionsJobsSetIamPolicyResource,
-    newDataprocProjectsRegionsJobsSetIamPolicy,
-    DataprocProjectsRegionsJobsSetIamPolicy,
+    , DataprocProjectsRegionsJobsSetIamPolicyResource
+    , newDataprocProjectsRegionsJobsSetIamPolicy
+    , DataprocProjectsRegionsJobsSetIamPolicy
 
     -- ** dataproc.projects.regions.jobs.submit
-    DataprocProjectsRegionsJobsSubmitResource,
-    newDataprocProjectsRegionsJobsSubmit,
-    DataprocProjectsRegionsJobsSubmit,
+    , DataprocProjectsRegionsJobsSubmitResource
+    , newDataprocProjectsRegionsJobsSubmit
+    , DataprocProjectsRegionsJobsSubmit
 
     -- ** dataproc.projects.regions.jobs.submitAsOperation
-    DataprocProjectsRegionsJobsSubmitAsOperationResource,
-    newDataprocProjectsRegionsJobsSubmitAsOperation,
-    DataprocProjectsRegionsJobsSubmitAsOperation,
+    , DataprocProjectsRegionsJobsSubmitAsOperationResource
+    , newDataprocProjectsRegionsJobsSubmitAsOperation
+    , DataprocProjectsRegionsJobsSubmitAsOperation
 
     -- ** dataproc.projects.regions.jobs.testIamPermissions
-    DataprocProjectsRegionsJobsTestIamPermissionsResource,
-    newDataprocProjectsRegionsJobsTestIamPermissions,
-    DataprocProjectsRegionsJobsTestIamPermissions,
+    , DataprocProjectsRegionsJobsTestIamPermissionsResource
+    , newDataprocProjectsRegionsJobsTestIamPermissions
+    , DataprocProjectsRegionsJobsTestIamPermissions
 
     -- ** dataproc.projects.regions.operations.cancel
-    DataprocProjectsRegionsOperationsCancelResource,
-    newDataprocProjectsRegionsOperationsCancel,
-    DataprocProjectsRegionsOperationsCancel,
+    , DataprocProjectsRegionsOperationsCancelResource
+    , newDataprocProjectsRegionsOperationsCancel
+    , DataprocProjectsRegionsOperationsCancel
 
     -- ** dataproc.projects.regions.operations.delete
-    DataprocProjectsRegionsOperationsDeleteResource,
-    newDataprocProjectsRegionsOperationsDelete,
-    DataprocProjectsRegionsOperationsDelete,
+    , DataprocProjectsRegionsOperationsDeleteResource
+    , newDataprocProjectsRegionsOperationsDelete
+    , DataprocProjectsRegionsOperationsDelete
 
     -- ** dataproc.projects.regions.operations.get
-    DataprocProjectsRegionsOperationsGetResource,
-    newDataprocProjectsRegionsOperationsGet,
-    DataprocProjectsRegionsOperationsGet,
+    , DataprocProjectsRegionsOperationsGetResource
+    , newDataprocProjectsRegionsOperationsGet
+    , DataprocProjectsRegionsOperationsGet
 
     -- ** dataproc.projects.regions.operations.getIamPolicy
-    DataprocProjectsRegionsOperationsGetIamPolicyResource,
-    newDataprocProjectsRegionsOperationsGetIamPolicy,
-    DataprocProjectsRegionsOperationsGetIamPolicy,
+    , DataprocProjectsRegionsOperationsGetIamPolicyResource
+    , newDataprocProjectsRegionsOperationsGetIamPolicy
+    , DataprocProjectsRegionsOperationsGetIamPolicy
 
     -- ** dataproc.projects.regions.operations.list
-    DataprocProjectsRegionsOperationsListResource,
-    newDataprocProjectsRegionsOperationsList,
-    DataprocProjectsRegionsOperationsList,
+    , DataprocProjectsRegionsOperationsListResource
+    , newDataprocProjectsRegionsOperationsList
+    , DataprocProjectsRegionsOperationsList
 
     -- ** dataproc.projects.regions.operations.setIamPolicy
-    DataprocProjectsRegionsOperationsSetIamPolicyResource,
-    newDataprocProjectsRegionsOperationsSetIamPolicy,
-    DataprocProjectsRegionsOperationsSetIamPolicy,
+    , DataprocProjectsRegionsOperationsSetIamPolicyResource
+    , newDataprocProjectsRegionsOperationsSetIamPolicy
+    , DataprocProjectsRegionsOperationsSetIamPolicy
 
     -- ** dataproc.projects.regions.operations.testIamPermissions
-    DataprocProjectsRegionsOperationsTestIamPermissionsResource,
-    newDataprocProjectsRegionsOperationsTestIamPermissions,
-    DataprocProjectsRegionsOperationsTestIamPermissions,
+    , DataprocProjectsRegionsOperationsTestIamPermissionsResource
+    , newDataprocProjectsRegionsOperationsTestIamPermissions
+    , DataprocProjectsRegionsOperationsTestIamPermissions
 
     -- ** dataproc.projects.regions.workflowTemplates.create
-    DataprocProjectsRegionsWorkflowTemplatesCreateResource,
-    newDataprocProjectsRegionsWorkflowTemplatesCreate,
-    DataprocProjectsRegionsWorkflowTemplatesCreate,
+    , DataprocProjectsRegionsWorkflowTemplatesCreateResource
+    , newDataprocProjectsRegionsWorkflowTemplatesCreate
+    , DataprocProjectsRegionsWorkflowTemplatesCreate
 
     -- ** dataproc.projects.regions.workflowTemplates.delete
-    DataprocProjectsRegionsWorkflowTemplatesDeleteResource,
-    newDataprocProjectsRegionsWorkflowTemplatesDelete,
-    DataprocProjectsRegionsWorkflowTemplatesDelete,
+    , DataprocProjectsRegionsWorkflowTemplatesDeleteResource
+    , newDataprocProjectsRegionsWorkflowTemplatesDelete
+    , DataprocProjectsRegionsWorkflowTemplatesDelete
 
     -- ** dataproc.projects.regions.workflowTemplates.get
-    DataprocProjectsRegionsWorkflowTemplatesGetResource,
-    newDataprocProjectsRegionsWorkflowTemplatesGet,
-    DataprocProjectsRegionsWorkflowTemplatesGet,
+    , DataprocProjectsRegionsWorkflowTemplatesGetResource
+    , newDataprocProjectsRegionsWorkflowTemplatesGet
+    , DataprocProjectsRegionsWorkflowTemplatesGet
 
     -- ** dataproc.projects.regions.workflowTemplates.getIamPolicy
-    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicyResource,
-    newDataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
-    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
+    , DataprocProjectsRegionsWorkflowTemplatesGetIamPolicyResource
+    , newDataprocProjectsRegionsWorkflowTemplatesGetIamPolicy
+    , DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy
 
     -- ** dataproc.projects.regions.workflowTemplates.instantiate
-    DataprocProjectsRegionsWorkflowTemplatesInstantiateResource,
-    newDataprocProjectsRegionsWorkflowTemplatesInstantiate,
-    DataprocProjectsRegionsWorkflowTemplatesInstantiate,
+    , DataprocProjectsRegionsWorkflowTemplatesInstantiateResource
+    , newDataprocProjectsRegionsWorkflowTemplatesInstantiate
+    , DataprocProjectsRegionsWorkflowTemplatesInstantiate
 
     -- ** dataproc.projects.regions.workflowTemplates.instantiateInline
-    DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineResource,
-    newDataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
-    DataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
+    , DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineResource
+    , newDataprocProjectsRegionsWorkflowTemplatesInstantiateInline
+    , DataprocProjectsRegionsWorkflowTemplatesInstantiateInline
 
     -- ** dataproc.projects.regions.workflowTemplates.list
-    DataprocProjectsRegionsWorkflowTemplatesListResource,
-    newDataprocProjectsRegionsWorkflowTemplatesList,
-    DataprocProjectsRegionsWorkflowTemplatesList,
+    , DataprocProjectsRegionsWorkflowTemplatesListResource
+    , newDataprocProjectsRegionsWorkflowTemplatesList
+    , DataprocProjectsRegionsWorkflowTemplatesList
 
     -- ** dataproc.projects.regions.workflowTemplates.setIamPolicy
-    DataprocProjectsRegionsWorkflowTemplatesSetIamPolicyResource,
-    newDataprocProjectsRegionsWorkflowTemplatesSetIamPolicy,
-    DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy,
+    , DataprocProjectsRegionsWorkflowTemplatesSetIamPolicyResource
+    , newDataprocProjectsRegionsWorkflowTemplatesSetIamPolicy
+    , DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy
 
     -- ** dataproc.projects.regions.workflowTemplates.testIamPermissions
-    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissionsResource,
-    newDataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
-    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
+    , DataprocProjectsRegionsWorkflowTemplatesTestIamPermissionsResource
+    , newDataprocProjectsRegionsWorkflowTemplatesTestIamPermissions
+    , DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions
 
     -- ** dataproc.projects.regions.workflowTemplates.update
-    DataprocProjectsRegionsWorkflowTemplatesUpdateResource,
-    newDataprocProjectsRegionsWorkflowTemplatesUpdate,
-    DataprocProjectsRegionsWorkflowTemplatesUpdate,
+    , DataprocProjectsRegionsWorkflowTemplatesUpdateResource
+    , newDataprocProjectsRegionsWorkflowTemplatesUpdate
+    , DataprocProjectsRegionsWorkflowTemplatesUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AcceleratorConfig
-    AcceleratorConfig (..),
-    newAcceleratorConfig,
+    , AcceleratorConfig (..)
+    , newAcceleratorConfig
 
     -- ** AutoscalingConfig
-    AutoscalingConfig (..),
-    newAutoscalingConfig,
+    , AutoscalingConfig (..)
+    , newAutoscalingConfig
 
     -- ** AutoscalingPolicy
-    AutoscalingPolicy (..),
-    newAutoscalingPolicy,
+    , AutoscalingPolicy (..)
+    , newAutoscalingPolicy
 
     -- ** AutoscalingPolicy_Labels
-    AutoscalingPolicy_Labels (..),
-    newAutoscalingPolicy_Labels,
+    , AutoscalingPolicy_Labels (..)
+    , newAutoscalingPolicy_Labels
 
     -- ** BasicAutoscalingAlgorithm
-    BasicAutoscalingAlgorithm (..),
-    newBasicAutoscalingAlgorithm,
+    , BasicAutoscalingAlgorithm (..)
+    , newBasicAutoscalingAlgorithm
 
     -- ** BasicYarnAutoscalingConfig
-    BasicYarnAutoscalingConfig (..),
-    newBasicYarnAutoscalingConfig,
+    , BasicYarnAutoscalingConfig (..)
+    , newBasicYarnAutoscalingConfig
 
     -- ** Batch
-    Batch (..),
-    newBatch,
+    , Batch (..)
+    , newBatch
 
     -- ** Batch_Labels
-    Batch_Labels (..),
-    newBatch_Labels,
+    , Batch_Labels (..)
+    , newBatch_Labels
 
     -- ** Batch_State
-    Batch_State (..),
+    , Batch_State (..)
 
     -- ** BatchOperationMetadata
-    BatchOperationMetadata (..),
-    newBatchOperationMetadata,
+    , BatchOperationMetadata (..)
+    , newBatchOperationMetadata
 
     -- ** BatchOperationMetadata_Labels
-    BatchOperationMetadata_Labels (..),
-    newBatchOperationMetadata_Labels,
+    , BatchOperationMetadata_Labels (..)
+    , newBatchOperationMetadata_Labels
 
     -- ** BatchOperationMetadata_OperationType
-    BatchOperationMetadata_OperationType (..),
+    , BatchOperationMetadata_OperationType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** CancelJobRequest
-    CancelJobRequest (..),
-    newCancelJobRequest,
+    , CancelJobRequest (..)
+    , newCancelJobRequest
 
     -- ** Cluster
-    Cluster (..),
-    newCluster,
+    , Cluster (..)
+    , newCluster
 
     -- ** Cluster_Labels
-    Cluster_Labels (..),
-    newCluster_Labels,
+    , Cluster_Labels (..)
+    , newCluster_Labels
 
     -- ** ClusterConfig
-    ClusterConfig (..),
-    newClusterConfig,
+    , ClusterConfig (..)
+    , newClusterConfig
 
     -- ** ClusterMetrics
-    ClusterMetrics (..),
-    newClusterMetrics,
+    , ClusterMetrics (..)
+    , newClusterMetrics
 
     -- ** ClusterMetrics_HdfsMetrics
-    ClusterMetrics_HdfsMetrics (..),
-    newClusterMetrics_HdfsMetrics,
+    , ClusterMetrics_HdfsMetrics (..)
+    , newClusterMetrics_HdfsMetrics
 
     -- ** ClusterMetrics_YarnMetrics
-    ClusterMetrics_YarnMetrics (..),
-    newClusterMetrics_YarnMetrics,
+    , ClusterMetrics_YarnMetrics (..)
+    , newClusterMetrics_YarnMetrics
 
     -- ** ClusterOperation
-    ClusterOperation (..),
-    newClusterOperation,
+    , ClusterOperation (..)
+    , newClusterOperation
 
     -- ** ClusterOperationMetadata
-    ClusterOperationMetadata (..),
-    newClusterOperationMetadata,
+    , ClusterOperationMetadata (..)
+    , newClusterOperationMetadata
 
     -- ** ClusterOperationMetadata_Labels
-    ClusterOperationMetadata_Labels (..),
-    newClusterOperationMetadata_Labels,
+    , ClusterOperationMetadata_Labels (..)
+    , newClusterOperationMetadata_Labels
 
     -- ** ClusterOperationStatus
-    ClusterOperationStatus (..),
-    newClusterOperationStatus,
+    , ClusterOperationStatus (..)
+    , newClusterOperationStatus
 
     -- ** ClusterOperationStatus_State
-    ClusterOperationStatus_State (..),
+    , ClusterOperationStatus_State (..)
 
     -- ** ClusterSelector
-    ClusterSelector (..),
-    newClusterSelector,
+    , ClusterSelector (..)
+    , newClusterSelector
 
     -- ** ClusterSelector_ClusterLabels
-    ClusterSelector_ClusterLabels (..),
-    newClusterSelector_ClusterLabels,
+    , ClusterSelector_ClusterLabels (..)
+    , newClusterSelector_ClusterLabels
 
     -- ** ClusterStatus
-    ClusterStatus (..),
-    newClusterStatus,
+    , ClusterStatus (..)
+    , newClusterStatus
 
     -- ** ClusterStatus_State
-    ClusterStatus_State (..),
+    , ClusterStatus_State (..)
 
     -- ** ClusterStatus_Substate
-    ClusterStatus_Substate (..),
+    , ClusterStatus_Substate (..)
 
     -- ** ConfidentialInstanceConfig
-    ConfidentialInstanceConfig (..),
-    newConfidentialInstanceConfig,
+    , ConfidentialInstanceConfig (..)
+    , newConfidentialInstanceConfig
 
     -- ** DataprocMetricConfig
-    DataprocMetricConfig (..),
-    newDataprocMetricConfig,
+    , DataprocMetricConfig (..)
+    , newDataprocMetricConfig
 
     -- ** DiagnoseClusterRequest
-    DiagnoseClusterRequest (..),
-    newDiagnoseClusterRequest,
+    , DiagnoseClusterRequest (..)
+    , newDiagnoseClusterRequest
 
     -- ** DiagnoseClusterResults
-    DiagnoseClusterResults (..),
-    newDiagnoseClusterResults,
+    , DiagnoseClusterResults (..)
+    , newDiagnoseClusterResults
 
     -- ** DiskConfig
-    DiskConfig (..),
-    newDiskConfig,
+    , DiskConfig (..)
+    , newDiskConfig
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EncryptionConfig
-    EncryptionConfig (..),
-    newEncryptionConfig,
+    , EncryptionConfig (..)
+    , newEncryptionConfig
 
     -- ** EndpointConfig
-    EndpointConfig (..),
-    newEndpointConfig,
+    , EndpointConfig (..)
+    , newEndpointConfig
 
     -- ** EndpointConfig_HttpPorts
-    EndpointConfig_HttpPorts (..),
-    newEndpointConfig_HttpPorts,
+    , EndpointConfig_HttpPorts (..)
+    , newEndpointConfig_HttpPorts
 
     -- ** EnvironmentConfig
-    EnvironmentConfig (..),
-    newEnvironmentConfig,
+    , EnvironmentConfig (..)
+    , newEnvironmentConfig
 
     -- ** ExecutionConfig
-    ExecutionConfig (..),
-    newExecutionConfig,
+    , ExecutionConfig (..)
+    , newExecutionConfig
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GceClusterConfig
-    GceClusterConfig (..),
-    newGceClusterConfig,
+    , GceClusterConfig (..)
+    , newGceClusterConfig
 
     -- ** GceClusterConfig_Metadata
-    GceClusterConfig_Metadata (..),
-    newGceClusterConfig_Metadata,
+    , GceClusterConfig_Metadata (..)
+    , newGceClusterConfig_Metadata
 
     -- ** GceClusterConfig_PrivateIpv6GoogleAccess
-    GceClusterConfig_PrivateIpv6GoogleAccess (..),
+    , GceClusterConfig_PrivateIpv6GoogleAccess (..)
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** GkeClusterConfig
-    GkeClusterConfig (..),
-    newGkeClusterConfig,
+    , GkeClusterConfig (..)
+    , newGkeClusterConfig
 
     -- ** HadoopJob
-    HadoopJob (..),
-    newHadoopJob,
+    , HadoopJob (..)
+    , newHadoopJob
 
     -- ** HadoopJob_Properties
-    HadoopJob_Properties (..),
-    newHadoopJob_Properties,
+    , HadoopJob_Properties (..)
+    , newHadoopJob_Properties
 
     -- ** HiveJob
-    HiveJob (..),
-    newHiveJob,
+    , HiveJob (..)
+    , newHiveJob
 
     -- ** HiveJob_Properties
-    HiveJob_Properties (..),
-    newHiveJob_Properties,
+    , HiveJob_Properties (..)
+    , newHiveJob_Properties
 
     -- ** HiveJob_ScriptVariables
-    HiveJob_ScriptVariables (..),
-    newHiveJob_ScriptVariables,
+    , HiveJob_ScriptVariables (..)
+    , newHiveJob_ScriptVariables
 
     -- ** IdentityConfig
-    IdentityConfig (..),
-    newIdentityConfig,
+    , IdentityConfig (..)
+    , newIdentityConfig
 
     -- ** IdentityConfig_UserServiceAccountMapping
-    IdentityConfig_UserServiceAccountMapping (..),
-    newIdentityConfig_UserServiceAccountMapping,
+    , IdentityConfig_UserServiceAccountMapping (..)
+    , newIdentityConfig_UserServiceAccountMapping
 
     -- ** InjectCredentialsRequest
-    InjectCredentialsRequest (..),
-    newInjectCredentialsRequest,
+    , InjectCredentialsRequest (..)
+    , newInjectCredentialsRequest
 
     -- ** InstanceGroupAutoscalingPolicyConfig
-    InstanceGroupAutoscalingPolicyConfig (..),
-    newInstanceGroupAutoscalingPolicyConfig,
+    , InstanceGroupAutoscalingPolicyConfig (..)
+    , newInstanceGroupAutoscalingPolicyConfig
 
     -- ** InstanceGroupConfig
-    InstanceGroupConfig (..),
-    newInstanceGroupConfig,
+    , InstanceGroupConfig (..)
+    , newInstanceGroupConfig
 
     -- ** InstanceGroupConfig_Preemptibility
-    InstanceGroupConfig_Preemptibility (..),
+    , InstanceGroupConfig_Preemptibility (..)
 
     -- ** InstanceReference
-    InstanceReference (..),
-    newInstanceReference,
+    , InstanceReference (..)
+    , newInstanceReference
 
     -- ** InstantiateWorkflowTemplateRequest
-    InstantiateWorkflowTemplateRequest (..),
-    newInstantiateWorkflowTemplateRequest,
+    , InstantiateWorkflowTemplateRequest (..)
+    , newInstantiateWorkflowTemplateRequest
 
     -- ** InstantiateWorkflowTemplateRequest_Parameters
-    InstantiateWorkflowTemplateRequest_Parameters (..),
-    newInstantiateWorkflowTemplateRequest_Parameters,
+    , InstantiateWorkflowTemplateRequest_Parameters (..)
+    , newInstantiateWorkflowTemplateRequest_Parameters
 
     -- ** Job
-    Job (..),
-    newJob,
+    , Job (..)
+    , newJob
 
     -- ** Job_Labels
-    Job_Labels (..),
-    newJob_Labels,
+    , Job_Labels (..)
+    , newJob_Labels
 
     -- ** JobMetadata
-    JobMetadata (..),
-    newJobMetadata,
+    , JobMetadata (..)
+    , newJobMetadata
 
     -- ** JobPlacement
-    JobPlacement (..),
-    newJobPlacement,
+    , JobPlacement (..)
+    , newJobPlacement
 
     -- ** JobPlacement_ClusterLabels
-    JobPlacement_ClusterLabels (..),
-    newJobPlacement_ClusterLabels,
+    , JobPlacement_ClusterLabels (..)
+    , newJobPlacement_ClusterLabels
 
     -- ** JobReference
-    JobReference (..),
-    newJobReference,
+    , JobReference (..)
+    , newJobReference
 
     -- ** JobScheduling
-    JobScheduling (..),
-    newJobScheduling,
+    , JobScheduling (..)
+    , newJobScheduling
 
     -- ** JobStatus
-    JobStatus (..),
-    newJobStatus,
+    , JobStatus (..)
+    , newJobStatus
 
     -- ** JobStatus_State
-    JobStatus_State (..),
+    , JobStatus_State (..)
 
     -- ** JobStatus_Substate
-    JobStatus_Substate (..),
+    , JobStatus_Substate (..)
 
     -- ** KerberosConfig
-    KerberosConfig (..),
-    newKerberosConfig,
+    , KerberosConfig (..)
+    , newKerberosConfig
 
     -- ** LifecycleConfig
-    LifecycleConfig (..),
-    newLifecycleConfig,
+    , LifecycleConfig (..)
+    , newLifecycleConfig
 
     -- ** ListAutoscalingPoliciesResponse
-    ListAutoscalingPoliciesResponse (..),
-    newListAutoscalingPoliciesResponse,
+    , ListAutoscalingPoliciesResponse (..)
+    , newListAutoscalingPoliciesResponse
 
     -- ** ListBatchesResponse
-    ListBatchesResponse (..),
-    newListBatchesResponse,
+    , ListBatchesResponse (..)
+    , newListBatchesResponse
 
     -- ** ListClustersResponse
-    ListClustersResponse (..),
-    newListClustersResponse,
+    , ListClustersResponse (..)
+    , newListClustersResponse
 
     -- ** ListJobsResponse
-    ListJobsResponse (..),
-    newListJobsResponse,
+    , ListJobsResponse (..)
+    , newListJobsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListWorkflowTemplatesResponse
-    ListWorkflowTemplatesResponse (..),
-    newListWorkflowTemplatesResponse,
+    , ListWorkflowTemplatesResponse (..)
+    , newListWorkflowTemplatesResponse
 
     -- ** LoggingConfig
-    LoggingConfig (..),
-    newLoggingConfig,
+    , LoggingConfig (..)
+    , newLoggingConfig
 
     -- ** LoggingConfig_DriverLogLevels
-    LoggingConfig_DriverLogLevels (..),
-    newLoggingConfig_DriverLogLevels,
+    , LoggingConfig_DriverLogLevels (..)
+    , newLoggingConfig_DriverLogLevels
 
     -- ** LoggingConfig_DriverLogLevelsAdditional
-    LoggingConfig_DriverLogLevelsAdditional (..),
+    , LoggingConfig_DriverLogLevelsAdditional (..)
 
     -- ** ManagedCluster
-    ManagedCluster (..),
-    newManagedCluster,
+    , ManagedCluster (..)
+    , newManagedCluster
 
     -- ** ManagedCluster_Labels
-    ManagedCluster_Labels (..),
-    newManagedCluster_Labels,
+    , ManagedCluster_Labels (..)
+    , newManagedCluster_Labels
 
     -- ** ManagedGroupConfig
-    ManagedGroupConfig (..),
-    newManagedGroupConfig,
+    , ManagedGroupConfig (..)
+    , newManagedGroupConfig
 
     -- ** MetastoreConfig
-    MetastoreConfig (..),
-    newMetastoreConfig,
+    , MetastoreConfig (..)
+    , newMetastoreConfig
 
     -- ** Metric
-    Metric (..),
-    newMetric,
+    , Metric (..)
+    , newMetric
 
     -- ** Metric_MetricSource
-    Metric_MetricSource (..),
+    , Metric_MetricSource (..)
 
     -- ** NamespacedGkeDeploymentTarget
-    NamespacedGkeDeploymentTarget (..),
-    newNamespacedGkeDeploymentTarget,
+    , NamespacedGkeDeploymentTarget (..)
+    , newNamespacedGkeDeploymentTarget
 
     -- ** NodeGroupAffinity
-    NodeGroupAffinity (..),
-    newNodeGroupAffinity,
+    , NodeGroupAffinity (..)
+    , newNodeGroupAffinity
 
     -- ** NodeInitializationAction
-    NodeInitializationAction (..),
-    newNodeInitializationAction,
+    , NodeInitializationAction (..)
+    , newNodeInitializationAction
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OrderedJob
-    OrderedJob (..),
-    newOrderedJob,
+    , OrderedJob (..)
+    , newOrderedJob
 
     -- ** OrderedJob_Labels
-    OrderedJob_Labels (..),
-    newOrderedJob_Labels,
+    , OrderedJob_Labels (..)
+    , newOrderedJob_Labels
 
     -- ** ParameterValidation
-    ParameterValidation (..),
-    newParameterValidation,
+    , ParameterValidation (..)
+    , newParameterValidation
 
     -- ** PeripheralsConfig
-    PeripheralsConfig (..),
-    newPeripheralsConfig,
+    , PeripheralsConfig (..)
+    , newPeripheralsConfig
 
     -- ** PigJob
-    PigJob (..),
-    newPigJob,
+    , PigJob (..)
+    , newPigJob
 
     -- ** PigJob_Properties
-    PigJob_Properties (..),
-    newPigJob_Properties,
+    , PigJob_Properties (..)
+    , newPigJob_Properties
 
     -- ** PigJob_ScriptVariables
-    PigJob_ScriptVariables (..),
-    newPigJob_ScriptVariables,
+    , PigJob_ScriptVariables (..)
+    , newPigJob_ScriptVariables
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PrestoJob
-    PrestoJob (..),
-    newPrestoJob,
+    , PrestoJob (..)
+    , newPrestoJob
 
     -- ** PrestoJob_Properties
-    PrestoJob_Properties (..),
-    newPrestoJob_Properties,
+    , PrestoJob_Properties (..)
+    , newPrestoJob_Properties
 
     -- ** PySparkBatch
-    PySparkBatch (..),
-    newPySparkBatch,
+    , PySparkBatch (..)
+    , newPySparkBatch
 
     -- ** PySparkJob
-    PySparkJob (..),
-    newPySparkJob,
+    , PySparkJob (..)
+    , newPySparkJob
 
     -- ** PySparkJob_Properties
-    PySparkJob_Properties (..),
-    newPySparkJob_Properties,
+    , PySparkJob_Properties (..)
+    , newPySparkJob_Properties
 
     -- ** QueryList
-    QueryList (..),
-    newQueryList,
+    , QueryList (..)
+    , newQueryList
 
     -- ** RegexValidation
-    RegexValidation (..),
-    newRegexValidation,
+    , RegexValidation (..)
+    , newRegexValidation
 
     -- ** RepairClusterRequest
-    RepairClusterRequest (..),
-    newRepairClusterRequest,
+    , RepairClusterRequest (..)
+    , newRepairClusterRequest
 
     -- ** ReservationAffinity
-    ReservationAffinity (..),
-    newReservationAffinity,
+    , ReservationAffinity (..)
+    , newReservationAffinity
 
     -- ** ReservationAffinity_ConsumeReservationType
-    ReservationAffinity_ConsumeReservationType (..),
+    , ReservationAffinity_ConsumeReservationType (..)
 
     -- ** RuntimeConfig
-    RuntimeConfig (..),
-    newRuntimeConfig,
+    , RuntimeConfig (..)
+    , newRuntimeConfig
 
     -- ** RuntimeConfig_Properties
-    RuntimeConfig_Properties (..),
-    newRuntimeConfig_Properties,
+    , RuntimeConfig_Properties (..)
+    , newRuntimeConfig_Properties
 
     -- ** RuntimeInfo
-    RuntimeInfo (..),
-    newRuntimeInfo,
+    , RuntimeInfo (..)
+    , newRuntimeInfo
 
     -- ** RuntimeInfo_Endpoints
-    RuntimeInfo_Endpoints (..),
-    newRuntimeInfo_Endpoints,
+    , RuntimeInfo_Endpoints (..)
+    , newRuntimeInfo_Endpoints
 
     -- ** SecurityConfig
-    SecurityConfig (..),
-    newSecurityConfig,
+    , SecurityConfig (..)
+    , newSecurityConfig
 
     -- ** SessionOperationMetadata
-    SessionOperationMetadata (..),
-    newSessionOperationMetadata,
+    , SessionOperationMetadata (..)
+    , newSessionOperationMetadata
 
     -- ** SessionOperationMetadata_Labels
-    SessionOperationMetadata_Labels (..),
-    newSessionOperationMetadata_Labels,
+    , SessionOperationMetadata_Labels (..)
+    , newSessionOperationMetadata_Labels
 
     -- ** SessionOperationMetadata_OperationType
-    SessionOperationMetadata_OperationType (..),
+    , SessionOperationMetadata_OperationType (..)
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** ShieldedInstanceConfig
-    ShieldedInstanceConfig (..),
-    newShieldedInstanceConfig,
+    , ShieldedInstanceConfig (..)
+    , newShieldedInstanceConfig
 
     -- ** SoftwareConfig
-    SoftwareConfig (..),
-    newSoftwareConfig,
+    , SoftwareConfig (..)
+    , newSoftwareConfig
 
     -- ** SoftwareConfig_OptionalComponentsItem
-    SoftwareConfig_OptionalComponentsItem (..),
+    , SoftwareConfig_OptionalComponentsItem (..)
 
     -- ** SoftwareConfig_Properties
-    SoftwareConfig_Properties (..),
-    newSoftwareConfig_Properties,
+    , SoftwareConfig_Properties (..)
+    , newSoftwareConfig_Properties
 
     -- ** SparkBatch
-    SparkBatch (..),
-    newSparkBatch,
+    , SparkBatch (..)
+    , newSparkBatch
 
     -- ** SparkHistoryServerConfig
-    SparkHistoryServerConfig (..),
-    newSparkHistoryServerConfig,
+    , SparkHistoryServerConfig (..)
+    , newSparkHistoryServerConfig
 
     -- ** SparkJob
-    SparkJob (..),
-    newSparkJob,
+    , SparkJob (..)
+    , newSparkJob
 
     -- ** SparkJob_Properties
-    SparkJob_Properties (..),
-    newSparkJob_Properties,
+    , SparkJob_Properties (..)
+    , newSparkJob_Properties
 
     -- ** SparkRBatch
-    SparkRBatch (..),
-    newSparkRBatch,
+    , SparkRBatch (..)
+    , newSparkRBatch
 
     -- ** SparkRJob
-    SparkRJob (..),
-    newSparkRJob,
+    , SparkRJob (..)
+    , newSparkRJob
 
     -- ** SparkRJob_Properties
-    SparkRJob_Properties (..),
-    newSparkRJob_Properties,
+    , SparkRJob_Properties (..)
+    , newSparkRJob_Properties
 
     -- ** SparkSqlBatch
-    SparkSqlBatch (..),
-    newSparkSqlBatch,
+    , SparkSqlBatch (..)
+    , newSparkSqlBatch
 
     -- ** SparkSqlBatch_QueryVariables
-    SparkSqlBatch_QueryVariables (..),
-    newSparkSqlBatch_QueryVariables,
+    , SparkSqlBatch_QueryVariables (..)
+    , newSparkSqlBatch_QueryVariables
 
     -- ** SparkSqlJob
-    SparkSqlJob (..),
-    newSparkSqlJob,
+    , SparkSqlJob (..)
+    , newSparkSqlJob
 
     -- ** SparkSqlJob_Properties
-    SparkSqlJob_Properties (..),
-    newSparkSqlJob_Properties,
+    , SparkSqlJob_Properties (..)
+    , newSparkSqlJob_Properties
 
     -- ** SparkSqlJob_ScriptVariables
-    SparkSqlJob_ScriptVariables (..),
-    newSparkSqlJob_ScriptVariables,
+    , SparkSqlJob_ScriptVariables (..)
+    , newSparkSqlJob_ScriptVariables
 
     -- ** SparkStandaloneAutoscalingConfig
-    SparkStandaloneAutoscalingConfig (..),
-    newSparkStandaloneAutoscalingConfig,
+    , SparkStandaloneAutoscalingConfig (..)
+    , newSparkStandaloneAutoscalingConfig
 
     -- ** StartClusterRequest
-    StartClusterRequest (..),
-    newStartClusterRequest,
+    , StartClusterRequest (..)
+    , newStartClusterRequest
 
     -- ** StateHistory
-    StateHistory (..),
-    newStateHistory,
+    , StateHistory (..)
+    , newStateHistory
 
     -- ** StateHistory_State
-    StateHistory_State (..),
+    , StateHistory_State (..)
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** StopClusterRequest
-    StopClusterRequest (..),
-    newStopClusterRequest,
+    , StopClusterRequest (..)
+    , newStopClusterRequest
 
     -- ** SubmitJobRequest
-    SubmitJobRequest (..),
-    newSubmitJobRequest,
+    , SubmitJobRequest (..)
+    , newSubmitJobRequest
 
     -- ** TemplateParameter
-    TemplateParameter (..),
-    newTemplateParameter,
+    , TemplateParameter (..)
+    , newTemplateParameter
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** ValueValidation
-    ValueValidation (..),
-    newValueValidation,
+    , ValueValidation (..)
+    , newValueValidation
 
     -- ** WorkflowGraph
-    WorkflowGraph (..),
-    newWorkflowGraph,
+    , WorkflowGraph (..)
+    , newWorkflowGraph
 
     -- ** WorkflowMetadata
-    WorkflowMetadata (..),
-    newWorkflowMetadata,
+    , WorkflowMetadata (..)
+    , newWorkflowMetadata
 
     -- ** WorkflowMetadata_Parameters
-    WorkflowMetadata_Parameters (..),
-    newWorkflowMetadata_Parameters,
+    , WorkflowMetadata_Parameters (..)
+    , newWorkflowMetadata_Parameters
 
     -- ** WorkflowMetadata_State
-    WorkflowMetadata_State (..),
+    , WorkflowMetadata_State (..)
 
     -- ** WorkflowNode
-    WorkflowNode (..),
-    newWorkflowNode,
+    , WorkflowNode (..)
+    , newWorkflowNode
 
     -- ** WorkflowNode_State
-    WorkflowNode_State (..),
+    , WorkflowNode_State (..)
 
     -- ** WorkflowTemplate
-    WorkflowTemplate (..),
-    newWorkflowTemplate,
+    , WorkflowTemplate (..)
+    , newWorkflowTemplate
 
     -- ** WorkflowTemplate_Labels
-    WorkflowTemplate_Labels (..),
-    newWorkflowTemplate_Labels,
+    , WorkflowTemplate_Labels (..)
+    , newWorkflowTemplate_Labels
 
     -- ** WorkflowTemplatePlacement
-    WorkflowTemplatePlacement (..),
-    newWorkflowTemplatePlacement,
+    , WorkflowTemplatePlacement (..)
+    , newWorkflowTemplatePlacement
 
     -- ** YarnApplication
-    YarnApplication (..),
-    newYarnApplication,
+    , YarnApplication (..)
+    , newYarnApplication
 
     -- ** YarnApplication_State
-    YarnApplication_State (..),
+    , YarnApplication_State (..)
 
     -- ** ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
-    ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers (..),
+    , ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers (..)
 
     -- ** ProjectsRegionsJobsListJobStateMatcher
-    ProjectsRegionsJobsListJobStateMatcher (..),
-  )
-where
+    , ProjectsRegionsJobsListJobStateMatcher (..)
+    ) where
 
 import Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Create
 import Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Delete
