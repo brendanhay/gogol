@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Slides
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,1221 +30,753 @@
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference>
 module Network.Google.Slides
-    (
-    -- * Service Configuration
-      slidesService
+  ( -- * Configuration
+    slidesService,
 
     -- * OAuth Scopes
-    , spreadsheetsReadOnlyScope
-    , presentationsScope
-    , driveReadOnlyScope
-    , driveScope
-    , driveFileScope
-    , spreadsheetsScope
-    , presentationsReadOnlyScope
-
-    -- * API Declaration
-    , SlidesAPI
+    driveScope,
+    driveFileScope,
+    driveReadOnlyScope,
+    presentationsScope,
+    presentationsReadOnlyScope,
+    spreadsheetsScope,
+    spreadsheetsReadOnlyScope,
 
     -- * Resources
 
     -- ** slides.presentations.batchUpdate
-    , module Network.Google.Resource.Slides.Presentations.BatchUpdate
+    SlidesPresentationsBatchUpdateResource,
+    newSlidesPresentationsBatchUpdate,
+    SlidesPresentationsBatchUpdate,
 
     -- ** slides.presentations.create
-    , module Network.Google.Resource.Slides.Presentations.Create
+    SlidesPresentationsCreateResource,
+    newSlidesPresentationsCreate,
+    SlidesPresentationsCreate,
 
     -- ** slides.presentations.get
-    , module Network.Google.Resource.Slides.Presentations.Get
+    SlidesPresentationsGetResource,
+    newSlidesPresentationsGet,
+    SlidesPresentationsGet,
 
     -- ** slides.presentations.pages.get
-    , module Network.Google.Resource.Slides.Presentations.Pages.Get
+    SlidesPresentationsPagesGetResource,
+    newSlidesPresentationsPagesGet,
+    SlidesPresentationsPagesGet,
 
     -- ** slides.presentations.pages.getThumbnail
-    , module Network.Google.Resource.Slides.Presentations.Pages.GetThumbnail
+    SlidesPresentationsPagesGetThumbnailResource,
+    newSlidesPresentationsPagesGetThumbnail,
+    SlidesPresentationsPagesGetThumbnail,
 
     -- * Types
 
-    -- ** Autofit
-    , Autofit
-    , autofit
-    , aFontScale
-    , aLineSpacingReduction
-    , aAutofitType
-
-    -- ** ParagraphMarker
-    , ParagraphMarker
-    , paragraphMarker
-    , pmStyle
-    , pmBullet
-
-    -- ** DeleteTableRowRequest
-    , DeleteTableRowRequest
-    , deleteTableRowRequest
-    , dtrrCellLocation
-    , dtrrTableObjectId
-
-    -- ** Thumbnail
-    , Thumbnail
-    , thumbnail
-    , tHeight
-    , tWidth
-    , tContentURL
-
-    -- ** TableBOrderCell
-    , TableBOrderCell
-    , tableBOrderCell
-    , tbocLocation
-    , tbocTableBOrderProperties
-
-    -- ** ParagraphStyleDirection
-    , ParagraphStyleDirection (..)
-
-    -- ** PageElementProperties
-    , PageElementProperties
-    , pageElementProperties
-    , pepTransform
-    , pepSize
-    , pepPageObjectId
-
-    -- ** TextStyleBaselineOffSet
-    , TextStyleBaselineOffSet (..)
-
-    -- ** ReplaceAllShapesWithImageResponse
-    , ReplaceAllShapesWithImageResponse
-    , replaceAllShapesWithImageResponse
-    , raswirOccurrencesChanged
-
-    -- ** TableCellPropertiesContentAlignment
-    , TableCellPropertiesContentAlignment (..)
-
-    -- ** RangeType
-    , RangeType (..)
-
-    -- ** OutlineFill
-    , OutlineFill
-    , outlineFill
-    , ofSolidFill
-
-    -- ** Image
-    , Image
-    , image
-    , iImageProperties
-    , iContentURL
-    , iSourceURL
-
-    -- ** UpdateLinePropertiesRequest
-    , UpdateLinePropertiesRequest
-    , updateLinePropertiesRequest
-    , ulprLineProperties
-    , ulprObjectId
-    , ulprFields
-
-    -- ** CropProperties
-    , CropProperties
-    , cropProperties
-    , cpBottomOffSet
-    , cpTopOffSet
-    , cpAngle
-    , cpRightOffSet
-    , cpLeftOffSet
-
-    -- ** LineProperties
-    , LineProperties
-    , lineProperties
-    , lpWeight
-    , lpLink
-    , lpStartConnection
-    , lpDashStyle
-    , lpStartArrow
-    , lpLineFill
-    , lpEndConnection
-    , lpEndArrow
-
-    -- ** Group
-    , Group
-    , group'
-    , gChildren
-
-    -- ** UpdatePageElementsZOrderRequestOperation
-    , UpdatePageElementsZOrderRequestOperation (..)
-
-    -- ** ReplaceImageRequest
-    , ReplaceImageRequest
-    , replaceImageRequest
-    , rirImageReplaceMethod
-    , rirImageObjectId
-    , rirURL
-
-    -- ** BatchUpdatePresentationRequest
-    , BatchUpdatePresentationRequest
-    , batchUpdatePresentationRequest
-    , buprRequests
-    , buprWriteControl
-
-    -- ** UpdatePageElementsZOrderRequest
-    , UpdatePageElementsZOrderRequest
-    , updatePageElementsZOrderRequest
-    , upezorOperation
-    , upezorPageElementObjectIds
-
-    -- ** CreateShapeRequest
-    , CreateShapeRequest
-    , createShapeRequest
-    , csrShapeType
-    , csrObjectId
-    , csrElementProperties
-
-    -- ** PageBackgRoundFillPropertyState
-    , PageBackgRoundFillPropertyState (..)
-
-    -- ** AutoText
-    , AutoText
-    , autoText
-    , atStyle
-    , atContent
-    , atType
-
-    -- ** ReplaceAllShapesWithSheetsChartRequest
-    , ReplaceAllShapesWithSheetsChartRequest
-    , replaceAllShapesWithSheetsChartRequest
-    , raswscrPageObjectIds
-    , raswscrSpreadsheetId
-    , raswscrLinkingMode
-    , raswscrContainsText
-    , raswscrChartId
-
-    -- ** List
-    , List
-    , list
-    , lListId
-    , lNestingLevel
-
-    -- ** NotesProperties
-    , NotesProperties
-    , notesProperties
-    , npSpeakerNotesObjectId
-
-    -- ** GroupObjectsResponse
-    , GroupObjectsResponse
-    , groupObjectsResponse
-    , gorObjectId
-
-    -- ** RgbColor
-    , RgbColor
-    , rgbColor
-    , rcRed
-    , rcGreen
-    , rcBlue
-
-    -- ** UpdatePagePropertiesRequest
-    , UpdatePagePropertiesRequest
-    , updatePagePropertiesRequest
-    , upprObjectId
-    , upprPageProperties
-    , upprFields
-
-    -- ** CreateSheetsChartRequest
-    , CreateSheetsChartRequest
-    , createSheetsChartRequest
-    , cscrObjectId
-    , cscrSpreadsheetId
-    , cscrLinkingMode
-    , cscrElementProperties
-    , cscrChartId
-
-    -- ** TableRowProperties
-    , TableRowProperties
-    , tableRowProperties
-    , trpMinRowHeight
-
-    -- ** UpdateTableRowPropertiesRequest
-    , UpdateTableRowPropertiesRequest
-    , updateTableRowPropertiesRequest
-    , utrprTableRowProperties
-    , utrprRowIndices
-    , utrprObjectId
-    , utrprFields
-
-    -- ** RecolorName
-    , RecolorName (..)
-
-    -- ** CreateParagraphBulletsRequestBulletPreset
-    , CreateParagraphBulletsRequestBulletPreset (..)
-
-    -- ** CreateShapeRequestShapeType
-    , CreateShapeRequestShapeType (..)
-
-    -- ** LayoutReferencePredefinedLayout
-    , LayoutReferencePredefinedLayout (..)
-
-    -- ** MasterProperties
-    , MasterProperties
-    , masterProperties
-    , mpDisplayName
-
-    -- ** DeleteTextRequest
-    , DeleteTextRequest
-    , deleteTextRequest
-    , dtrTextRange
-    , dtrObjectId
-    , dtrCellLocation
-
-    -- ** InsertTableColumnsRequest
-    , InsertTableColumnsRequest
-    , insertTableColumnsRequest
-    , itcrInsertRight
-    , itcrNumber
-    , itcrCellLocation
-    , itcrTableObjectId
-
-    -- ** TextContentLists
-    , TextContentLists
-    , textContentLists
-    , tclAddtional
-
-    -- ** Size
-    , Size
-    , size
-    , sHeight
-    , sWidth
-
-    -- ** StretchedPictureFill
-    , StretchedPictureFill
-    , stretchedPictureFill
-    , spfSize
-    , spfContentURL
-
-    -- ** CreateLineRequestLineCategory
-    , CreateLineRequestLineCategory (..)
-
-    -- ** TableBOrderFill
-    , TableBOrderFill
-    , tableBOrderFill
-    , tbofSolidFill
-
-    -- ** SheetsChart
-    , SheetsChart
-    , sheetsChart
-    , scSpreadsheetId
-    , scContentURL
-    , scSheetsChartProperties
-    , scChartId
-
-    -- ** CreateShapeResponse
-    , CreateShapeResponse
-    , createShapeResponse
-    , cObjectId
-
-    -- ** DeleteTableColumnRequest
-    , DeleteTableColumnRequest
-    , deleteTableColumnRequest
-    , dtcrCellLocation
-    , dtcrTableObjectId
-
-    -- ** TableBOrderRow
-    , TableBOrderRow
-    , tableBOrderRow
-    , tborTableBOrderCells
-
-    -- ** ShapeShapeType
-    , ShapeShapeType (..)
-
-    -- ** ShapePropertiesContentAlignment
-    , ShapePropertiesContentAlignment (..)
-
-    -- ** OutlinePropertyState
-    , OutlinePropertyState (..)
-
-    -- ** LineConnection
-    , LineConnection
-    , lineConnection
-    , lcConnectedObjectId
-    , lcConnectionSiteIndex
-
-    -- ** Link
-    , Link
-    , link
-    , lURL
-    , lPageObjectId
-    , lRelativeLink
-    , lSlideIndex
-
-    -- ** GroupObjectsRequest
-    , GroupObjectsRequest
-    , groupObjectsRequest
-    , gorGroupObjectId
-    , gorChildrenObjectIds
-
-    -- ** LineLineCategory
-    , LineLineCategory (..)
-
-    -- ** Dimension
-    , Dimension
-    , dimension
-    , dMagnitude
-    , dUnit
-
-    -- ** BatchUpdatePresentationResponse
-    , BatchUpdatePresentationResponse
-    , batchUpdatePresentationResponse
-    , bPresentationId
-    , bReplies
-    , bWriteControl
-
-    -- ** DuplicateObjectRequestObjectIds
-    , DuplicateObjectRequestObjectIds
-    , duplicateObjectRequestObjectIds
-    , doroiAddtional
-
-    -- ** ReplaceAllShapesWithSheetsChartResponse
-    , ReplaceAllShapesWithSheetsChartResponse
-    , replaceAllShapesWithSheetsChartResponse
-    , raswscrOccurrencesChanged
-
-    -- ** CreateTableRequest
-    , CreateTableRequest
-    , createTableRequest
-    , ctrObjectId
-    , ctrRows
-    , ctrElementProperties
-    , ctrColumns
-
-    -- ** TableBOrderProperties
-    , TableBOrderProperties
-    , tableBOrderProperties
-    , tbopTableBOrderFill
-    , tbopWeight
-    , tbopDashStyle
-
-    -- ** Response
-    , Response
-    , response
-    , rReplaceAllShapesWithImage
-    , rCreateLine
-    , rReplaceAllText
-    , rReplaceAllShapesWithSheetsChart
-    , rCreateShape
-    , rGroupObjects
-    , rCreateSheetsChart
-    , rDuplicateObject
-    , rCreateTable
-    , rCreateVideo
-    , rCreateImage
-    , rCreateSlide
-
-    -- ** OptionalColor
-    , OptionalColor
-    , optionalColor
-    , ocOpaqueColor
-
-    -- ** DuplicateObjectRequest
-    , DuplicateObjectRequest
-    , duplicateObjectRequest
-    , dorObjectId
-    , dorObjectIds
-
-    -- ** PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
-    , PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize (..)
-
-    -- ** PlaceholderType
-    , PlaceholderType (..)
-
-    -- ** UnGroupObjectsRequest
-    , UnGroupObjectsRequest
-    , unGroupObjectsRequest
-    , ugorObjectIds
-
-    -- ** Page
-    , Page
-    , page
-    , pNotesProperties
-    , pMasterProperties
-    , pObjectId
-    , pPageElements
-    , pSlideProperties
-    , pPageProperties
-    , pLayoutProperties
-    , pPageType
-    , pRevisionId
-
-    -- ** ReplaceAllTextResponse
-    , ReplaceAllTextResponse
-    , replaceAllTextResponse
-    , ratrOccurrencesChanged
-
-    -- ** ReplaceAllShapesWithImageRequestReplaceMethod
-    , ReplaceAllShapesWithImageRequestReplaceMethod (..)
-
-    -- ** Bullet
-    , Bullet
-    , bullet
-    , bGlyph
-    , bListId
-    , bNestingLevel
-    , bBulletStyle
-
-    -- ** CreateSheetsChartRequestLinkingMode
-    , CreateSheetsChartRequestLinkingMode (..)
-
-    -- ** UpdateImagePropertiesRequest
-    , UpdateImagePropertiesRequest
-    , updateImagePropertiesRequest
-    , uiprObjectId
-    , uiprImageProperties
-    , uiprFields
-
-    -- ** SlideProperties
-    , SlideProperties
-    , slideProperties
-    , spLayoutObjectId
-    , spMasterObjectId
-    , spIsSkipped
-    , spNotesPage
-
-    -- ** Presentation
-    , Presentation
-    , presentation
-    , preSlides
-    , preNotesMaster
-    , preMasters
-    , preLocale
-    , prePresentationId
-    , preTitle
-    , preRevisionId
-    , prePageSize
-    , preLayouts
-
-    -- ** ThemeColorPair
-    , ThemeColorPair
-    , themeColorPair
-    , tcpColor
-    , tcpType
-
-    -- ** ShapeBackgRoundFillPropertyState
-    , ShapeBackgRoundFillPropertyState (..)
-
-    -- ** OpaqueColorThemeColor
-    , OpaqueColorThemeColor (..)
-
-    -- ** Shadow
-    , Shadow
-    , shadow
-    , sTransform
-    , sColor
-    , sBlurRadius
-    , sRotateWithShape
-    , sAlpha
-    , sAlignment
-    , sPropertyState
-    , sType
-
-    -- ** LinePropertiesDashStyle
-    , LinePropertiesDashStyle (..)
-
-    -- ** UpdateSlidePropertiesRequest
-    , UpdateSlidePropertiesRequest
-    , updateSlidePropertiesRequest
-    , usprObjectId
-    , usprSlideProperties
-    , usprFields
-
-    -- ** PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
-    , PresentationsPagesGetThumbnailThumbnailPropertiesMimeType (..)
-
-    -- ** ImageProperties
-    , ImageProperties
-    , imageProperties
-    , ipCropProperties
-    , ipLink
-    , ipTransparency
-    , ipShadow
-    , ipContrast
-    , ipRecolor
-    , ipOutline
-    , ipBrightness
-
-    -- ** ParagraphStyleAlignment
-    , ParagraphStyleAlignment (..)
-
-    -- ** Line
-    , Line
-    , line
-    , lLineProperties
-    , lLineCategory
-    , lLineType
-
-    -- ** CreateVideoResponse
-    , CreateVideoResponse
-    , createVideoResponse
-    , cvrObjectId
-
-    -- ** UpdateTableBOrderPropertiesRequestBOrderPosition
-    , UpdateTableBOrderPropertiesRequestBOrderPosition (..)
-
-    -- ** LayoutReference
-    , LayoutReference
-    , layoutReference
-    , lrPredefinedLayout
-    , lrLayoutId
-
-    -- ** LineFill
-    , LineFill
-    , lineFill
-    , lfSolidFill
-
-    -- ** UpdatePageElementTransformRequest
-    , UpdatePageElementTransformRequest
-    , updatePageElementTransformRequest
-    , upetrTransform
-    , upetrObjectId
-    , upetrApplyMode
-
-    -- ** ShadowAlignment
-    , ShadowAlignment (..)
-
-    -- ** InsertTableRowsRequest
-    , InsertTableRowsRequest
-    , insertTableRowsRequest
-    , itrrInsertBelow
-    , itrrNumber
-    , itrrCellLocation
-    , itrrTableObjectId
-
-    -- ** ReplaceAllShapesWithSheetsChartRequestLinkingMode
-    , ReplaceAllShapesWithSheetsChartRequestLinkingMode (..)
-
-    -- ** UnmergeTableCellsRequest
-    , UnmergeTableCellsRequest
-    , unmergeTableCellsRequest
-    , utcrObjectId
-    , utcrTableRange
-
-    -- ** LinePropertiesEndArrow
-    , LinePropertiesEndArrow (..)
-
-    -- ** Video
-    , Video
-    , video
-    , vURL
-    , vSource
-    , vId
-    , vVideoProperties
-
-    -- ** TableCellBackgRoundFillPropertyState
-    , TableCellBackgRoundFillPropertyState (..)
-
-    -- ** CreateVideoRequestSource
-    , CreateVideoRequestSource (..)
-
-    -- ** UpdateTableColumnPropertiesRequest
-    , UpdateTableColumnPropertiesRequest
-    , updateTableColumnPropertiesRequest
-    , utcprObjectId
-    , utcprTableColumnProperties
-    , utcprFields
-    , utcprColumnIndices
-
-    -- ** TableCellProperties
-    , TableCellProperties
-    , tableCellProperties
-    , tcpTableCellBackgRoundFill
-    , tcpContentAlignment
-
-    -- ** CreateLineResponse
-    , CreateLineResponse
-    , createLineResponse
-    , clrObjectId
-
-    -- ** WordArt
-    , WordArt
-    , wordArt
-    , waRenderedText
-
-    -- ** TableCellBackgRoundFill
-    , TableCellBackgRoundFill
-    , tableCellBackgRoundFill
-    , tcbrfSolidFill
-    , tcbrfPropertyState
-
-    -- ** LinkRelativeLink
-    , LinkRelativeLink (..)
-
-    -- ** VideoSource
-    , VideoSource (..)
-
-    -- ** TextRun
-    , TextRun
-    , textRun
-    , trStyle
-    , trContent
-
-    -- ** RefreshSheetsChartRequest
-    , RefreshSheetsChartRequest
-    , refreshSheetsChartRequest
-    , rscrObjectId
-
-    -- ** TableRow
-    , TableRow
-    , tableRow
-    , trTableRowProperties
-    , trTableCells
-    , trRowHeight
-
-    -- ** WeightedFontFamily
-    , WeightedFontFamily
-    , weightedFontFamily
-    , wffFontFamily
-    , wffWeight
-
-    -- ** CreateVideoRequest
-    , CreateVideoRequest
-    , createVideoRequest
-    , creObjectId
-    , creElementProperties
-    , creSource
-    , creId
-
-    -- ** TextContent
-    , TextContent
-    , textContent
-    , tcTextElements
-    , tcLists
-
-    -- ** Shape
-    , Shape
-    , shape
-    , sShapeType
-    , sText
-    , sPlaceholder
-    , sShapeProperties
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AffineTransform
-    , AffineTransform
-    , affineTransform
-    , atTranslateX
-    , atShearY
-    , atTranslateY
-    , atShearX
-    , atScaleX
-    , atUnit
-    , atScaleY
+    AffineTransform (..),
+    newAffineTransform,
 
-    -- ** CreateSheetsChartResponse
-    , CreateSheetsChartResponse
-    , createSheetsChartResponse
-    , cscrsObjectId
+    -- ** AffineTransform_Unit
+    AffineTransform_Unit (..),
 
-    -- ** Range
-    , Range
-    , range
-    , rEndIndex
-    , rType
-    , rStartIndex
+    -- ** AutoText
+    AutoText (..),
+    newAutoText,
 
-    -- ** CreateImageRequest
-    , CreateImageRequest
-    , createImageRequest
-    , cirObjectId
-    , cirURL
-    , cirElementProperties
+    -- ** AutoText_Type
+    AutoText_Type (..),
 
-    -- ** MergeTableCellsRequest
-    , MergeTableCellsRequest
-    , mergeTableCellsRequest
-    , mtcrObjectId
-    , mtcrTableRange
+    -- ** Autofit
+    Autofit (..),
+    newAutofit,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** Autofit_AutofitType
+    Autofit_AutofitType (..),
 
-    -- ** AutoTextType
-    , AutoTextType (..)
+    -- ** BatchUpdatePresentationRequest
+    BatchUpdatePresentationRequest (..),
+    newBatchUpdatePresentationRequest,
 
-    -- ** WriteControl
-    , WriteControl
-    , writeControl
-    , wcRequiredRevisionId
+    -- ** BatchUpdatePresentationResponse
+    BatchUpdatePresentationResponse (..),
+    newBatchUpdatePresentationResponse,
 
-    -- ** TextStyle
-    , TextStyle
-    , textStyle
-    , tsFontFamily
-    , tsLink
-    , tsBackgRoundColor
-    , tsBaselineOffSet
-    , tsForegRoundColor
-    , tsFontSize
-    , tsSmallCaps
-    , tsUnderline
-    , tsWeightedFontFamily
-    , tsItalic
-    , tsBold
-    , tsStrikethrough
-
-    -- ** SolidFill
-    , SolidFill
-    , solidFill
-    , sfColor
-    , sfAlpha
-
-    -- ** UpdateTextStyleRequest
-    , UpdateTextStyleRequest
-    , updateTextStyleRequest
-    , utsrStyle
-    , utsrTextRange
-    , utsrObjectId
-    , utsrCellLocation
-    , utsrFields
-
-    -- ** Recolor
-    , Recolor
-    , recolor
-    , rName
-    , rRecolorStops
-
-    -- ** PageProperties
-    , PageProperties
-    , pageProperties
-    , ppPageBackgRoundFill
-    , ppColorScheme
-
-    -- ** PageBackgRoundFill
-    , PageBackgRoundFill
-    , pageBackgRoundFill
-    , pbrfStretchedPictureFill
-    , pbrfSolidFill
-    , pbrfPropertyState
-
-    -- ** NestingLevel
-    , NestingLevel
-    , nestingLevel
-    , nlBulletStyle
-
-    -- ** OpaqueColor
-    , OpaqueColor
-    , opaqueColor
-    , ocThemeColor
-    , ocRgbColor
-
-    -- ** TableBOrderPropertiesDashStyle
-    , TableBOrderPropertiesDashStyle (..)
-
-    -- ** CreateSlideRequest
-    , CreateSlideRequest
-    , createSlideRequest
-    , csrsObjectId
-    , csrsSlideLayoutReference
-    , csrsInsertionIndex
-    , csrsPlaceholderIdMAppings
-
-    -- ** TableCellLocation
-    , TableCellLocation
-    , tableCellLocation
-    , tclColumnIndex
-    , tclRowIndex
-
-    -- ** UpdateSlidesPositionRequest
-    , UpdateSlidesPositionRequest
-    , updateSlidesPositionRequest
-    , usprSlideObjectIds
-    , usprInsertionIndex
-
-    -- ** ReplaceAllShapesWithImageRequest
-    , ReplaceAllShapesWithImageRequest
-    , replaceAllShapesWithImageRequest
-    , raswirImageReplaceMethod
-    , raswirPageObjectIds
-    , raswirContainsText
-    , raswirImageURL
-    , raswirReplaceMethod
-
-    -- ** PageElement
-    , PageElement
-    , pageElement
-    , peTransform
-    , peImage
-    , peSize
-    , peSheetsChart
-    , peObjectId
-    , peLine
-    , peElementGroup
-    , peVideo
-    , peWordArt
-    , peShape
-    , peTitle
-    , peTable
-    , peDescription
-
-    -- ** ColorStop
-    , ColorStop
-    , colorStop
-    , csColor
-    , csAlpha
-    , csPosition
-
-    -- ** DeleteObjectRequest
-    , DeleteObjectRequest
-    , deleteObjectRequest
-    , dObjectId
-
-    -- ** CreateSlideResponse
-    , CreateSlideResponse
-    , createSlideResponse
-    , ccObjectId
+    -- ** Bullet
+    Bullet (..),
+    newBullet,
 
     -- ** ColorScheme
-    , ColorScheme
-    , colorScheme
-    , csColors
+    ColorScheme (..),
+    newColorScheme,
 
-    -- ** TableCell
-    , TableCell
-    , tableCell
-    , tcColumnSpan
-    , tcLocation
-    , tcText
-    , tcRowSpan
-    , tcTableCellProperties
+    -- ** ColorStop
+    ColorStop (..),
+    newColorStop,
 
-    -- ** ListNestingLevel
-    , ListNestingLevel
-    , listNestingLevel
-    , lnlAddtional
-
-    -- ** AutofitAutofitType
-    , AutofitAutofitType (..)
-
-    -- ** Outline
-    , Outline
-    , outline
-    , oOutlineFill
-    , oWeight
-    , oDashStyle
-    , oPropertyState
-
-    -- ** UpdateVideoPropertiesRequest
-    , UpdateVideoPropertiesRequest
-    , updateVideoPropertiesRequest
-    , uvprObjectId
-    , uvprVideoProperties
-    , uvprFields
-
-    -- ** UpdateLineCategoryRequestLineCategory
-    , UpdateLineCategoryRequestLineCategory (..)
-
-    -- ** VideoProperties
-    , VideoProperties
-    , videoProperties
-    , vpStart
-    , vpAutoPlay
-    , vpMute
-    , vpEnd
-    , vpOutline
-
-    -- ** LayoutPlaceholderIdMApping
-    , LayoutPlaceholderIdMApping
-    , layoutPlaceholderIdMApping
-    , lpimaObjectId
-    , lpimaLayoutPlaceholderObjectId
-    , lpimaLayoutPlaceholder
-
-    -- ** LineLineType
-    , LineLineType (..)
-
-    -- ** PagePageType
-    , PagePageType (..)
+    -- ** CreateImageRequest
+    CreateImageRequest (..),
+    newCreateImageRequest,
 
     -- ** CreateImageResponse
-    , CreateImageResponse
-    , createImageResponse
-    , ciriObjectId
-
-    -- ** TextElement
-    , TextElement
-    , textElement
-    , teParagraphMarker
-    , teAutoText
-    , teEndIndex
-    , teTextRun
-    , teStartIndex
-
-    -- ** ParagraphStyleSpacingMode
-    , ParagraphStyleSpacingMode (..)
-
-    -- ** DeleteParagraphBulletsRequest
-    , DeleteParagraphBulletsRequest
-    , deleteParagraphBulletsRequest
-    , dpbrTextRange
-    , dpbrObjectId
-    , dpbrCellLocation
-
-    -- ** InsertTextRequest
-    , InsertTextRequest
-    , insertTextRequest
-    , itrText
-    , itrObjectId
-    , itrInsertionIndex
-    , itrCellLocation
-
-    -- ** UpdateTableBOrderPropertiesRequest
-    , UpdateTableBOrderPropertiesRequest
-    , updateTableBOrderPropertiesRequest
-    , utboprBOrderPosition
-    , utboprObjectId
-    , utboprTableBOrderProperties
-    , utboprTableRange
-    , utboprFields
+    CreateImageResponse (..),
+    newCreateImageResponse,
 
     -- ** CreateLineRequest
-    , CreateLineRequest
-    , createLineRequest
-    , clrlCategory
-    , clrlObjectId
-    , clrlLineCategory
-    , clrlElementProperties
+    CreateLineRequest (..),
+    newCreateLineRequest,
 
-    -- ** Placeholder
-    , Placeholder
-    , placeholder
-    , pParentObjectId
-    , pType
-    , pIndex
+    -- ** CreateLineRequest_Category
+    CreateLineRequest_Category (..),
 
-    -- ** LayoutProperties
-    , LayoutProperties
-    , layoutProperties
-    , lpMasterObjectId
-    , lpName
-    , lpDisplayName
+    -- ** CreateLineRequest_LineCategory
+    CreateLineRequest_LineCategory (..),
 
-    -- ** CreateLineRequestCategory
-    , CreateLineRequestCategory (..)
-
-    -- ** UpdateShapePropertiesRequest
-    , UpdateShapePropertiesRequest
-    , updateShapePropertiesRequest
-    , uObjectId
-    , uShapeProperties
-    , uFields
-
-    -- ** Table
-    , Table
-    , table
-    , tTableRows
-    , tVerticalBOrderRows
-    , tRows
-    , tColumns
-    , tHorizontalBOrderRows
-    , tTableColumns
-
-    -- ** ThemeColorPairType
-    , ThemeColorPairType (..)
-
-    -- ** LinePropertiesStartArrow
-    , LinePropertiesStartArrow (..)
-
-    -- ** UpdateLineCategoryRequest
-    , UpdateLineCategoryRequest
-    , updateLineCategoryRequest
-    , ulcrObjectId
-    , ulcrLineCategory
-
-    -- ** ShapeProperties
-    , ShapeProperties
-    , shapeProperties
-    , spAutofit
-    , spLink
-    , spShadow
-    , spOutline
-    , spContentAlignment
-    , spShapeBackgRoundFill
-
-    -- ** ShadowPropertyState
-    , ShadowPropertyState (..)
-
-    -- ** ShadowType
-    , ShadowType (..)
-
-    -- ** ShapeBackgRoundFill
-    , ShapeBackgRoundFill
-    , shapeBackgRoundFill
-    , sbrfSolidFill
-    , sbrfPropertyState
-
-    -- ** UpdatePageElementTransformRequestApplyMode
-    , UpdatePageElementTransformRequestApplyMode (..)
+    -- ** CreateLineResponse
+    CreateLineResponse (..),
+    newCreateLineResponse,
 
     -- ** CreateParagraphBulletsRequest
-    , CreateParagraphBulletsRequest
-    , createParagraphBulletsRequest
-    , cpbrTextRange
-    , cpbrObjectId
-    , cpbrBulletPreset
-    , cpbrCellLocation
+    CreateParagraphBulletsRequest (..),
+    newCreateParagraphBulletsRequest,
 
-    -- ** DimensionUnit
-    , DimensionUnit (..)
+    -- ** CreateParagraphBulletsRequest_BulletPreset
+    CreateParagraphBulletsRequest_BulletPreset (..),
 
-    -- ** ReplaceImageRequestImageReplaceMethod
-    , ReplaceImageRequestImageReplaceMethod (..)
+    -- ** CreateShapeRequest
+    CreateShapeRequest (..),
+    newCreateShapeRequest,
 
-    -- ** OutlineDashStyle
-    , OutlineDashStyle (..)
+    -- ** CreateShapeRequest_ShapeType
+    CreateShapeRequest_ShapeType (..),
 
-    -- ** AffineTransformUnit
-    , AffineTransformUnit (..)
+    -- ** CreateShapeResponse
+    CreateShapeResponse (..),
+    newCreateShapeResponse,
 
-    -- ** UpdatePageElementAltTextRequest
-    , UpdatePageElementAltTextRequest
-    , updatePageElementAltTextRequest
-    , upeatrObjectId
-    , upeatrTitle
-    , upeatrDescription
+    -- ** CreateSheetsChartRequest
+    CreateSheetsChartRequest (..),
+    newCreateSheetsChartRequest,
 
-    -- ** UpdateTableCellPropertiesRequest
-    , UpdateTableCellPropertiesRequest
-    , updateTableCellPropertiesRequest
-    , updObjectId
-    , updTableCellProperties
-    , updTableRange
-    , updFields
+    -- ** CreateSheetsChartRequest_LinkingMode
+    CreateSheetsChartRequest_LinkingMode (..),
 
-    -- ** ReplaceAllShapesWithImageRequestImageReplaceMethod
-    , ReplaceAllShapesWithImageRequestImageReplaceMethod (..)
+    -- ** CreateSheetsChartResponse
+    CreateSheetsChartResponse (..),
+    newCreateSheetsChartResponse,
 
-    -- ** SheetsChartProperties
-    , SheetsChartProperties
-    , sheetsChartProperties
-    , scpChartImageProperties
+    -- ** CreateSlideRequest
+    CreateSlideRequest (..),
+    newCreateSlideRequest,
 
-    -- ** ParagraphStyle
-    , ParagraphStyle
-    , paragraphStyle
-    , psLineSpacing
-    , psDirection
-    , psIndentFirstLine
-    , psIndentEnd
-    , psIndentStart
-    , psAlignment
-    , psSpaceBelow
-    , psSpacingMode
-    , psSpaceAbove
+    -- ** CreateSlideResponse
+    CreateSlideResponse (..),
+    newCreateSlideResponse,
+
+    -- ** CreateTableRequest
+    CreateTableRequest (..),
+    newCreateTableRequest,
 
     -- ** CreateTableResponse
-    , CreateTableResponse
-    , createTableResponse
-    , ctrtObjectId
+    CreateTableResponse (..),
+    newCreateTableResponse,
 
-    -- ** RerouteLineRequest
-    , RerouteLineRequest
-    , rerouteLineRequest
-    , rlrObjectId
+    -- ** CreateVideoRequest
+    CreateVideoRequest (..),
+    newCreateVideoRequest,
 
-    -- ** TableColumnProperties
-    , TableColumnProperties
-    , tableColumnProperties
-    , tcpColumnWidth
+    -- ** CreateVideoRequest_Source
+    CreateVideoRequest_Source (..),
+
+    -- ** CreateVideoResponse
+    CreateVideoResponse (..),
+    newCreateVideoResponse,
+
+    -- ** CropProperties
+    CropProperties (..),
+    newCropProperties,
+
+    -- ** DeleteObjectRequest
+    DeleteObjectRequest (..),
+    newDeleteObjectRequest,
+
+    -- ** DeleteParagraphBulletsRequest
+    DeleteParagraphBulletsRequest (..),
+    newDeleteParagraphBulletsRequest,
+
+    -- ** DeleteTableColumnRequest
+    DeleteTableColumnRequest (..),
+    newDeleteTableColumnRequest,
+
+    -- ** DeleteTableRowRequest
+    DeleteTableRowRequest (..),
+    newDeleteTableRowRequest,
+
+    -- ** DeleteTextRequest
+    DeleteTextRequest (..),
+    newDeleteTextRequest,
+
+    -- ** Dimension
+    Dimension (..),
+    newDimension,
+
+    -- ** Dimension_Unit
+    Dimension_Unit (..),
+
+    -- ** DuplicateObjectRequest
+    DuplicateObjectRequest (..),
+    newDuplicateObjectRequest,
+
+    -- ** DuplicateObjectRequest_ObjectIds
+    DuplicateObjectRequest_ObjectIds (..),
+    newDuplicateObjectRequest_ObjectIds,
 
     -- ** DuplicateObjectResponse
-    , DuplicateObjectResponse
-    , duplicateObjectResponse
-    , dupObjectId
+    DuplicateObjectResponse (..),
+    newDuplicateObjectResponse,
 
-    -- ** UpdateParagraphStyleRequest
-    , UpdateParagraphStyleRequest
-    , updateParagraphStyleRequest
-    , upsrStyle
-    , upsrTextRange
-    , upsrObjectId
-    , upsrCellLocation
-    , upsrFields
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** GroupObjectsRequest
+    GroupObjectsRequest (..),
+    newGroupObjectsRequest,
+
+    -- ** GroupObjectsResponse
+    GroupObjectsResponse (..),
+    newGroupObjectsResponse,
+
+    -- ** Image
+    Image (..),
+    newImage,
+
+    -- ** ImageProperties
+    ImageProperties (..),
+    newImageProperties,
+
+    -- ** InsertTableColumnsRequest
+    InsertTableColumnsRequest (..),
+    newInsertTableColumnsRequest,
+
+    -- ** InsertTableRowsRequest
+    InsertTableRowsRequest (..),
+    newInsertTableRowsRequest,
+
+    -- ** InsertTextRequest
+    InsertTextRequest (..),
+    newInsertTextRequest,
+
+    -- ** LayoutPlaceholderIdMapping
+    LayoutPlaceholderIdMapping (..),
+    newLayoutPlaceholderIdMapping,
+
+    -- ** LayoutProperties
+    LayoutProperties (..),
+    newLayoutProperties,
+
+    -- ** LayoutReference
+    LayoutReference (..),
+    newLayoutReference,
+
+    -- ** LayoutReference_PredefinedLayout
+    LayoutReference_PredefinedLayout (..),
+
+    -- ** Line
+    Line (..),
+    newLine,
+
+    -- ** Line_LineCategory
+    Line_LineCategory (..),
+
+    -- ** Line_LineType
+    Line_LineType (..),
+
+    -- ** LineConnection
+    LineConnection (..),
+    newLineConnection,
+
+    -- ** LineFill
+    LineFill (..),
+    newLineFill,
+
+    -- ** LineProperties
+    LineProperties (..),
+    newLineProperties,
+
+    -- ** LineProperties_DashStyle
+    LineProperties_DashStyle (..),
+
+    -- ** LineProperties_EndArrow
+    LineProperties_EndArrow (..),
+
+    -- ** LineProperties_StartArrow
+    LineProperties_StartArrow (..),
+
+    -- ** Link
+    Link (..),
+    newLink,
+
+    -- ** Link_RelativeLink
+    Link_RelativeLink (..),
+
+    -- ** List
+    List (..),
+    newList,
+
+    -- ** List_NestingLevel
+    List_NestingLevel (..),
+    newList_NestingLevel,
+
+    -- ** MasterProperties
+    MasterProperties (..),
+    newMasterProperties,
+
+    -- ** MergeTableCellsRequest
+    MergeTableCellsRequest (..),
+    newMergeTableCellsRequest,
+
+    -- ** NestingLevel
+    NestingLevel (..),
+    newNestingLevel,
+
+    -- ** NotesProperties
+    NotesProperties (..),
+    newNotesProperties,
+
+    -- ** OpaqueColor
+    OpaqueColor (..),
+    newOpaqueColor,
+
+    -- ** OpaqueColor_ThemeColor
+    OpaqueColor_ThemeColor (..),
+
+    -- ** OptionalColor
+    OptionalColor (..),
+    newOptionalColor,
+
+    -- ** Outline
+    Outline (..),
+    newOutline,
+
+    -- ** Outline_DashStyle
+    Outline_DashStyle (..),
+
+    -- ** Outline_PropertyState
+    Outline_PropertyState (..),
+
+    -- ** OutlineFill
+    OutlineFill (..),
+    newOutlineFill,
+
+    -- ** Page
+    Page (..),
+    newPage,
+
+    -- ** Page_PageType
+    Page_PageType (..),
+
+    -- ** PageBackgroundFill
+    PageBackgroundFill (..),
+    newPageBackgroundFill,
+
+    -- ** PageBackgroundFill_PropertyState
+    PageBackgroundFill_PropertyState (..),
+
+    -- ** PageElement
+    PageElement (..),
+    newPageElement,
+
+    -- ** PageElementProperties
+    PageElementProperties (..),
+    newPageElementProperties,
+
+    -- ** PageProperties
+    PageProperties (..),
+    newPageProperties,
+
+    -- ** ParagraphMarker
+    ParagraphMarker (..),
+    newParagraphMarker,
+
+    -- ** ParagraphStyle
+    ParagraphStyle (..),
+    newParagraphStyle,
+
+    -- ** ParagraphStyle_Alignment
+    ParagraphStyle_Alignment (..),
+
+    -- ** ParagraphStyle_Direction
+    ParagraphStyle_Direction (..),
+
+    -- ** ParagraphStyle_SpacingMode
+    ParagraphStyle_SpacingMode (..),
+
+    -- ** Placeholder
+    Placeholder (..),
+    newPlaceholder,
+
+    -- ** Placeholder_Type
+    Placeholder_Type (..),
+
+    -- ** Presentation
+    Presentation (..),
+    newPresentation,
+
+    -- ** Range
+    Range (..),
+    newRange,
+
+    -- ** Range_Type
+    Range_Type (..),
+
+    -- ** Recolor
+    Recolor (..),
+    newRecolor,
+
+    -- ** Recolor_Name
+    Recolor_Name (..),
+
+    -- ** RefreshSheetsChartRequest
+    RefreshSheetsChartRequest (..),
+    newRefreshSheetsChartRequest,
+
+    -- ** ReplaceAllShapesWithImageRequest
+    ReplaceAllShapesWithImageRequest (..),
+    newReplaceAllShapesWithImageRequest,
+
+    -- ** ReplaceAllShapesWithImageRequest_ImageReplaceMethod
+    ReplaceAllShapesWithImageRequest_ImageReplaceMethod (..),
+
+    -- ** ReplaceAllShapesWithImageRequest_ReplaceMethod
+    ReplaceAllShapesWithImageRequest_ReplaceMethod (..),
+
+    -- ** ReplaceAllShapesWithImageResponse
+    ReplaceAllShapesWithImageResponse (..),
+    newReplaceAllShapesWithImageResponse,
+
+    -- ** ReplaceAllShapesWithSheetsChartRequest
+    ReplaceAllShapesWithSheetsChartRequest (..),
+    newReplaceAllShapesWithSheetsChartRequest,
+
+    -- ** ReplaceAllShapesWithSheetsChartRequest_LinkingMode
+    ReplaceAllShapesWithSheetsChartRequest_LinkingMode (..),
+
+    -- ** ReplaceAllShapesWithSheetsChartResponse
+    ReplaceAllShapesWithSheetsChartResponse (..),
+    newReplaceAllShapesWithSheetsChartResponse,
 
     -- ** ReplaceAllTextRequest
-    , ReplaceAllTextRequest
-    , replaceAllTextRequest
-    , ratrPageObjectIds
-    , ratrContainsText
-    , ratrReplaceText
+    ReplaceAllTextRequest (..),
+    newReplaceAllTextRequest,
 
-    -- ** TableRange
-    , TableRange
-    , tableRange
-    , trColumnSpan
-    , trLocation
-    , trRowSpan
+    -- ** ReplaceAllTextResponse
+    ReplaceAllTextResponse (..),
+    newReplaceAllTextResponse,
+
+    -- ** ReplaceImageRequest
+    ReplaceImageRequest (..),
+    newReplaceImageRequest,
+
+    -- ** ReplaceImageRequest_ImageReplaceMethod
+    ReplaceImageRequest_ImageReplaceMethod (..),
 
     -- ** Request'
-    , Request'
-    , request'
-    , reqReplaceAllShapesWithImage
-    , reqDeleteObject
-    , reqUpdateSlidesPosition
-    , reqUpdateShapeProperties
-    , reqCreateParagraphBullets
-    , reqUpdateLineCategory
-    , reqCreateLine
-    , reqInsertText
-    , reqUpdateTableBOrderProperties
-    , reqDeleteParagraphBullets
-    , reqDeleteTableRow
-    , reqUpdateTableCellProperties
-    , reqReplaceAllText
-    , reqUpdatePageElementAltText
-    , reqUpdateParagraphStyle
-    , reqRerouteLine
-    , reqReplaceImage
-    , reqReplaceAllShapesWithSheetsChart
-    , reqCreateShape
-    , reqUpdatePageElementsZOrder
-    , reqUpdatePageProperties
-    , reqUpdateLineProperties
-    , reqDeleteTableColumn
-    , reqGroupObjects
-    , reqDeleteText
-    , reqUpdateTableRowProperties
-    , reqCreateSheetsChart
-    , reqInsertTableColumns
-    , reqUpdateSlideProperties
-    , reqUpdateImageProperties
-    , reqUnGroupObjects
-    , reqDuplicateObject
-    , reqCreateTable
-    , reqCreateVideo
-    , reqRefreshSheetsChart
-    , reqUpdateTableColumnProperties
-    , reqUnmergeTableCells
-    , reqUpdatePageElementTransform
-    , reqInsertTableRows
-    , reqCreateImage
-    , reqMergeTableCells
-    , reqCreateSlide
-    , reqUpdateTextStyle
-    , reqUpdateVideoProperties
+    Request' (..),
+    newRequest,
+
+    -- ** RerouteLineRequest
+    RerouteLineRequest (..),
+    newRerouteLineRequest,
+
+    -- ** Response
+    Response (..),
+    newResponse,
+
+    -- ** RgbColor
+    RgbColor (..),
+    newRgbColor,
+
+    -- ** Shadow
+    Shadow (..),
+    newShadow,
+
+    -- ** Shadow_Alignment
+    Shadow_Alignment (..),
+
+    -- ** Shadow_PropertyState
+    Shadow_PropertyState (..),
+
+    -- ** Shadow_Type
+    Shadow_Type (..),
+
+    -- ** Shape
+    Shape (..),
+    newShape,
+
+    -- ** Shape_ShapeType
+    Shape_ShapeType (..),
+
+    -- ** ShapeBackgroundFill
+    ShapeBackgroundFill (..),
+    newShapeBackgroundFill,
+
+    -- ** ShapeBackgroundFill_PropertyState
+    ShapeBackgroundFill_PropertyState (..),
+
+    -- ** ShapeProperties
+    ShapeProperties (..),
+    newShapeProperties,
+
+    -- ** ShapeProperties_ContentAlignment
+    ShapeProperties_ContentAlignment (..),
+
+    -- ** SheetsChart
+    SheetsChart (..),
+    newSheetsChart,
+
+    -- ** SheetsChartProperties
+    SheetsChartProperties (..),
+    newSheetsChartProperties,
+
+    -- ** Size
+    Size (..),
+    newSize,
+
+    -- ** SlideProperties
+    SlideProperties (..),
+    newSlideProperties,
+
+    -- ** SolidFill
+    SolidFill (..),
+    newSolidFill,
+
+    -- ** StretchedPictureFill
+    StretchedPictureFill (..),
+    newStretchedPictureFill,
 
     -- ** SubstringMatchCriteria
-    , SubstringMatchCriteria
-    , substringMatchCriteria
-    , smcMatchCase
-    , smcText
-    ) where
+    SubstringMatchCriteria (..),
+    newSubstringMatchCriteria,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Slides.Presentations.BatchUpdate
-import Network.Google.Resource.Slides.Presentations.Create
-import Network.Google.Resource.Slides.Presentations.Get
-import Network.Google.Resource.Slides.Presentations.Pages.Get
-import Network.Google.Resource.Slides.Presentations.Pages.GetThumbnail
+    -- ** Table
+    Table (..),
+    newTable,
+
+    -- ** TableBorderCell
+    TableBorderCell (..),
+    newTableBorderCell,
+
+    -- ** TableBorderFill
+    TableBorderFill (..),
+    newTableBorderFill,
+
+    -- ** TableBorderProperties
+    TableBorderProperties (..),
+    newTableBorderProperties,
+
+    -- ** TableBorderProperties_DashStyle
+    TableBorderProperties_DashStyle (..),
+
+    -- ** TableBorderRow
+    TableBorderRow (..),
+    newTableBorderRow,
+
+    -- ** TableCell
+    TableCell (..),
+    newTableCell,
+
+    -- ** TableCellBackgroundFill
+    TableCellBackgroundFill (..),
+    newTableCellBackgroundFill,
+
+    -- ** TableCellBackgroundFill_PropertyState
+    TableCellBackgroundFill_PropertyState (..),
+
+    -- ** TableCellLocation
+    TableCellLocation (..),
+    newTableCellLocation,
+
+    -- ** TableCellProperties
+    TableCellProperties (..),
+    newTableCellProperties,
+
+    -- ** TableCellProperties_ContentAlignment
+    TableCellProperties_ContentAlignment (..),
+
+    -- ** TableColumnProperties
+    TableColumnProperties (..),
+    newTableColumnProperties,
+
+    -- ** TableRange
+    TableRange (..),
+    newTableRange,
+
+    -- ** TableRow
+    TableRow (..),
+    newTableRow,
+
+    -- ** TableRowProperties
+    TableRowProperties (..),
+    newTableRowProperties,
+
+    -- ** TextContent
+    TextContent (..),
+    newTextContent,
+
+    -- ** TextContent_Lists
+    TextContent_Lists (..),
+    newTextContent_Lists,
+
+    -- ** TextElement
+    TextElement (..),
+    newTextElement,
+
+    -- ** TextRun
+    TextRun (..),
+    newTextRun,
+
+    -- ** TextStyle
+    TextStyle (..),
+    newTextStyle,
+
+    -- ** TextStyle_BaselineOffset
+    TextStyle_BaselineOffset (..),
+
+    -- ** ThemeColorPair
+    ThemeColorPair (..),
+    newThemeColorPair,
+
+    -- ** ThemeColorPair_Type
+    ThemeColorPair_Type (..),
+
+    -- ** Thumbnail
+    Thumbnail (..),
+    newThumbnail,
+
+    -- ** UngroupObjectsRequest
+    UngroupObjectsRequest (..),
+    newUngroupObjectsRequest,
+
+    -- ** UnmergeTableCellsRequest
+    UnmergeTableCellsRequest (..),
+    newUnmergeTableCellsRequest,
+
+    -- ** UpdateImagePropertiesRequest
+    UpdateImagePropertiesRequest (..),
+    newUpdateImagePropertiesRequest,
+
+    -- ** UpdateLineCategoryRequest
+    UpdateLineCategoryRequest (..),
+    newUpdateLineCategoryRequest,
+
+    -- ** UpdateLineCategoryRequest_LineCategory
+    UpdateLineCategoryRequest_LineCategory (..),
+
+    -- ** UpdateLinePropertiesRequest
+    UpdateLinePropertiesRequest (..),
+    newUpdateLinePropertiesRequest,
+
+    -- ** UpdatePageElementAltTextRequest
+    UpdatePageElementAltTextRequest (..),
+    newUpdatePageElementAltTextRequest,
+
+    -- ** UpdatePageElementTransformRequest
+    UpdatePageElementTransformRequest (..),
+    newUpdatePageElementTransformRequest,
+
+    -- ** UpdatePageElementTransformRequest_ApplyMode
+    UpdatePageElementTransformRequest_ApplyMode (..),
+
+    -- ** UpdatePageElementsZOrderRequest
+    UpdatePageElementsZOrderRequest (..),
+    newUpdatePageElementsZOrderRequest,
+
+    -- ** UpdatePageElementsZOrderRequest_Operation
+    UpdatePageElementsZOrderRequest_Operation (..),
+
+    -- ** UpdatePagePropertiesRequest
+    UpdatePagePropertiesRequest (..),
+    newUpdatePagePropertiesRequest,
+
+    -- ** UpdateParagraphStyleRequest
+    UpdateParagraphStyleRequest (..),
+    newUpdateParagraphStyleRequest,
+
+    -- ** UpdateShapePropertiesRequest
+    UpdateShapePropertiesRequest (..),
+    newUpdateShapePropertiesRequest,
+
+    -- ** UpdateSlidePropertiesRequest
+    UpdateSlidePropertiesRequest (..),
+    newUpdateSlidePropertiesRequest,
+
+    -- ** UpdateSlidesPositionRequest
+    UpdateSlidesPositionRequest (..),
+    newUpdateSlidesPositionRequest,
+
+    -- ** UpdateTableBorderPropertiesRequest
+    UpdateTableBorderPropertiesRequest (..),
+    newUpdateTableBorderPropertiesRequest,
+
+    -- ** UpdateTableBorderPropertiesRequest_BorderPosition
+    UpdateTableBorderPropertiesRequest_BorderPosition (..),
+
+    -- ** UpdateTableCellPropertiesRequest
+    UpdateTableCellPropertiesRequest (..),
+    newUpdateTableCellPropertiesRequest,
+
+    -- ** UpdateTableColumnPropertiesRequest
+    UpdateTableColumnPropertiesRequest (..),
+    newUpdateTableColumnPropertiesRequest,
+
+    -- ** UpdateTableRowPropertiesRequest
+    UpdateTableRowPropertiesRequest (..),
+    newUpdateTableRowPropertiesRequest,
+
+    -- ** UpdateTextStyleRequest
+    UpdateTextStyleRequest (..),
+    newUpdateTextStyleRequest,
+
+    -- ** UpdateVideoPropertiesRequest
+    UpdateVideoPropertiesRequest (..),
+    newUpdateVideoPropertiesRequest,
+
+    -- ** Video
+    Video (..),
+    newVideo,
+
+    -- ** Video_Source
+    Video_Source (..),
+
+    -- ** VideoProperties
+    VideoProperties (..),
+    newVideoProperties,
+
+    -- ** WeightedFontFamily
+    WeightedFontFamily (..),
+    newWeightedFontFamily,
+
+    -- ** WordArt
+    WordArt (..),
+    newWordArt,
+
+    -- ** WriteControl
+    WriteControl (..),
+    newWriteControl,
+
+    -- ** PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+    PresentationsPagesGetThumbnailThumbnailPropertiesMimeType (..),
+
+    -- ** PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+    PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize (..),
+  )
+where
+
+import Network.Google.Slides.Presentations.BatchUpdate
+import Network.Google.Slides.Presentations.Create
+import Network.Google.Slides.Presentations.Get
+import Network.Google.Slides.Presentations.Pages.Get
+import Network.Google.Slides.Presentations.Pages.GetThumbnail
 import Network.Google.Slides.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Slides API service.
-type SlidesAPI =
-     PresentationsPagesGetResource :<|>
-       PresentationsPagesGetThumbnailResource
-       :<|> PresentationsGetResource
-       :<|> PresentationsCreateResource
-       :<|> PresentationsBatchUpdateResource
