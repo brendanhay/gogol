@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudAsset.Operations.Get
+-- Module      : Gogol.CloudAsset.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ <https://cloud.google.com/asset-inventory/docs/quickstart Cloud Asset API Reference> for @cloudasset.operations.get@.
-module Network.Google.CloudAsset.Operations.Get
+module Gogol.CloudAsset.Operations.Get
   ( -- * Resource
     CloudAssetOperationsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.CloudAsset.Operations.Get
   )
 where
 
-import Network.Google.CloudAsset.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudAsset.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @cloudasset.operations.get@ method which the
 -- 'CloudAssetOperationsGet' request conforms to.

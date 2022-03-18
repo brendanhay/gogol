@@ -39,19 +39,20 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudAsset
-    Network.Google.CloudAsset.ExportAssets
-    Network.Google.CloudAsset.Operations.Get
-    Network.Google.CloudAsset.Types
+    Gogol.CloudAsset
+    Gogol.CloudAsset.ExportAssets
+    Gogol.CloudAsset.Operations.Get
+    Gogol.CloudAsset.Types
 
   other-modules:
-    Network.Google.CloudAsset.Internal.Product
-    Network.Google.CloudAsset.Internal.Sum
+    Gogol.CloudAsset.Internal.Product
+    Gogol.CloudAsset.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
