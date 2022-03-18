@@ -1,237 +1,185 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.FirebaseRules.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.FirebaseRules.Types
-    (
-    -- * Service Configuration
-      firebaseRulesService
+  ( -- * Configuration
+    firebaseRulesService,
 
     -- * OAuth Scopes
-    , firebaseScope
-    , cloudPlatformScope
-    , firebaseReadOnlyScope
+    cloudPlatformScope,
+    firebaseScope,
+    firebaseReadOnlyScope,
 
-    -- * SourcePosition
-    , SourcePosition
-    , sourcePosition
-    , spCurrentOffSet
-    , spLine
-    , spEndOffSet
-    , spColumn
-    , spFileName
+    -- * Types
 
-    -- * ExpressionReport
-    , ExpressionReport
-    , expressionReport
-    , erSourcePosition
-    , erValues
-    , erChildren
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * TestCase
-    , TestCase
-    , testCase
-    , tcExpressionReportLevel
-    , tcPathEncoding
-    , tcResource
-    , tcExpectation
-    , tcFunctionMocks
-    , tcRequest
+    -- ** Arg
+    Arg (..),
+    newArg,
 
-    -- * VisitedExpression
-    , VisitedExpression
-    , visitedExpression
-    , veSourcePosition
-    , veValue
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** ExpressionReport
+    ExpressionReport (..),
+    newExpressionReport,
 
-    -- * FunctionMock
-    , FunctionMock
-    , functionMock
-    , fmArgs
-    , fmFunction
-    , fmResult
+    -- ** File
+    File (..),
+    newFile,
 
-    -- * ProjectsReleasesGetExecutableExecutableVersion
-    , ProjectsReleasesGetExecutableExecutableVersion (..)
+    -- ** FunctionCall
+    FunctionCall (..),
+    newFunctionCall,
 
-    -- * TestCaseExpressionReportLevel
-    , TestCaseExpressionReportLevel (..)
+    -- ** FunctionMock
+    FunctionMock (..),
+    newFunctionMock,
 
-    -- * TestResultState
-    , TestResultState (..)
+    -- ** GetReleaseExecutableResponse
+    GetReleaseExecutableResponse (..),
+    newGetReleaseExecutableResponse,
 
-    -- * FunctionCall
-    , FunctionCall
-    , functionCall
-    , fcArgs
-    , fcFunction
+    -- ** GetReleaseExecutableResponse_ExecutableVersion
+    GetReleaseExecutableResponse_ExecutableVersion (..),
 
-    -- * ListReleasesResponse
-    , ListReleasesResponse
-    , listReleasesResponse
-    , lrrNextPageToken
-    , lrrReleases
+    -- ** GetReleaseExecutableResponse_Language
+    GetReleaseExecutableResponse_Language (..),
 
-    -- * Result
-    , Result
-    , result
-    , rValue
-    , rUndefined
+    -- ** Issue
+    Issue (..),
+    newIssue,
 
-    -- * TestRulesetResponse
-    , TestRulesetResponse
-    , testRulesetResponse
-    , trrTestResults
-    , trrIssues
+    -- ** Issue_Severity
+    Issue_Severity (..),
 
-    -- * Release
-    , Release
-    , release
-    , rRulesetName
-    , rUpdateTime
-    , rName
-    , rCreateTime
+    -- ** ListReleasesResponse
+    ListReleasesResponse (..),
+    newListReleasesResponse,
 
-    -- * Arg
-    , Arg
-    , arg
-    , aAnyValue
-    , aExactValue
+    -- ** ListRulesetsResponse
+    ListRulesetsResponse (..),
+    newListRulesetsResponse,
 
-    -- * Ruleset
-    , Ruleset
-    , ruleset
-    , rulName
-    , rulMetadata
-    , rulSource
-    , rulCreateTime
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
 
-    -- * GetReleaseExecutableResponse
-    , GetReleaseExecutableResponse
-    , getReleaseExecutableResponse
-    , grerExecutable
-    , grerRulesetName
-    , grerUpdateTime
-    , grerSyncTime
-    , grerExecutableVersion
-    , grerLanguage
+    -- ** Release
+    Release (..),
+    newRelease,
 
-    -- * TestCasePathEncoding
-    , TestCasePathEncoding (..)
+    -- ** Result
+    Result (..),
+    newResult,
 
-    -- * TestResult
-    , TestResult
-    , testResult
-    , trState
-    , trExpressionReports
-    , trFunctionCalls
-    , trVisitedExpressions
-    , trErrorPosition
-    , trDebugMessages
+    -- ** Ruleset
+    Ruleset (..),
+    newRuleset,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Source
+    Source (..),
+    newSource,
 
-    -- * IssueSeverity
-    , IssueSeverity (..)
+    -- ** SourcePosition
+    SourcePosition (..),
+    newSourcePosition,
 
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mServices
+    -- ** TestCase
+    TestCase (..),
+    newTestCase,
 
-    -- * Source
-    , Source
-    , source
-    , sFiles
+    -- ** TestCase_Expectation
+    TestCase_Expectation (..),
 
-    -- * TestCaseExpectation
-    , TestCaseExpectation (..)
+    -- ** TestCase_ExpressionReportLevel
+    TestCase_ExpressionReportLevel (..),
 
-    -- * ValueCount
-    , ValueCount
-    , valueCount
-    , vcValue
-    , vcCount
+    -- ** TestCase_PathEncoding
+    TestCase_PathEncoding (..),
 
-    -- * TestSuite
-    , TestSuite
-    , testSuite
-    , tsTestCases
+    -- ** TestResult
+    TestResult (..),
+    newTestResult,
 
-    -- * TestRulesetRequest
-    , TestRulesetRequest
-    , testRulesetRequest
-    , trrSource
-    , trrTestSuite
+    -- ** TestResult_State
+    TestResult_State (..),
 
-    -- * File
-    , File
-    , file
-    , fFingerprint
-    , fContent
-    , fName
+    -- ** TestRulesetRequest
+    TestRulesetRequest (..),
+    newTestRulesetRequest,
 
-    -- * GetReleaseExecutableResponseExecutableVersion
-    , GetReleaseExecutableResponseExecutableVersion (..)
+    -- ** TestRulesetResponse
+    TestRulesetResponse (..),
+    newTestRulesetResponse,
 
-    -- * GetReleaseExecutableResponseLanguage
-    , GetReleaseExecutableResponseLanguage (..)
+    -- ** TestSuite
+    TestSuite (..),
+    newTestSuite,
 
-    -- * ListRulesetsResponse
-    , ListRulesetsResponse
-    , listRulesetsResponse
-    , lRulesets
-    , lNextPageToken
+    -- ** UpdateReleaseRequest
+    UpdateReleaseRequest (..),
+    newUpdateReleaseRequest,
 
-    -- * Issue
-    , Issue
-    , issue
-    , iSourcePosition
-    , iSeverity
-    , iDescription
+    -- ** ValueCount
+    ValueCount (..),
+    newValueCount,
 
-    -- * UpdateReleaseRequest
-    , UpdateReleaseRequest
-    , updateReleaseRequest
-    , urrUpdateMask
-    , urrRelease
-    ) where
+    -- ** VisitedExpression
+    VisitedExpression (..),
+    newVisitedExpression,
 
-import Network.Google.FirebaseRules.Types.Product
-import Network.Google.FirebaseRules.Types.Sum
-import Network.Google.Prelude
+    -- ** ProjectsReleasesGetExecutableExecutableVersion
+    ProjectsReleasesGetExecutableExecutableVersion (..),
+  )
+where
 
--- | Default request referring to version 'v1' of the Firebase Rules API. This contains the host and root path used as a starting point for constructing service requests.
-firebaseRulesService :: ServiceConfig
-firebaseRulesService
-  = defaultService (ServiceId "firebaserules:v1")
-      "firebaserules.googleapis.com"
+import Network.Google.FirebaseRules.Internal.Product
+import Network.Google.FirebaseRules.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Firebase Rules API. This contains the host and root path used as a starting point for constructing service requests.
+firebaseRulesService :: Core.ServiceConfig
+firebaseRulesService =
+  Core.defaultService
+    (Core.ServiceId "firebaserules:v1")
+    "firebaserules.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | View and administer all your Firebase data and settings
-firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+firebaseScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase"]
+firebaseScope = Core.Proxy
 
 -- | View all your Firebase data and settings
-firebaseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/firebase.readonly"]
-firebaseReadOnlyScope = Proxy
+firebaseReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/firebase.readonly"]
+firebaseReadOnlyScope = Core.Proxy
