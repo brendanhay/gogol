@@ -1,322 +1,285 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AccessContextManager.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AccessContextManager.Types
-    (
-    -- * Service Configuration
-      accessContextManagerService
+  ( -- * Configuration
+    accessContextManagerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * Types
 
-    -- * BasicLevel
-    , BasicLevel
-    , basicLevel
-    , blConditions
-    , blCombiningFunction
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * AccessPoliciesAccessLevelsGetAccessLevelFormat
-    , AccessPoliciesAccessLevelsGetAccessLevelFormat (..)
+    -- ** AccessContextManagerOperationMetadata
+    AccessContextManagerOperationMetadata (..),
+    newAccessContextManagerOperationMetadata,
 
-    -- * IngressPolicy
-    , IngressPolicy
-    , ingressPolicy
-    , ipIngressFrom
-    , ipIngressTo
+    -- ** AccessLevel
+    AccessLevel (..),
+    newAccessLevel,
 
-    -- * Expr
-    , Expr
-    , expr
-    , eLocation
-    , eExpression
-    , eTitle
-    , eDescription
+    -- ** AccessPolicy
+    AccessPolicy (..),
+    newAccessPolicy,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** ApiOperation
+    ApiOperation (..),
+    newApiOperation,
 
-    -- * CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
+    -- ** AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * AccessLevel
-    , AccessLevel
-    , accessLevel
-    , alBasic
-    , alCustom
-    , alName
-    , alTitle
-    , alDescription
+    -- ** AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * BasicLevelCombiningFunction
-    , BasicLevelCombiningFunction (..)
+    -- ** AuditLogConfig_LogType
+    AuditLogConfig_LogType (..),
 
-    -- * IngressSource
-    , IngressSource
-    , ingressSource
-    , isAccessLevel
-    , isResource
+    -- ** BasicLevel
+    BasicLevel (..),
+    newBasicLevel,
 
-    -- * ServicePerimeterConfig
-    , ServicePerimeterConfig
-    , servicePerimeterConfig
-    , spcResources
-    , spcVPCAccessibleServices
-    , spcRestrictedServices
-    , spcEgressPolicies
-    , spcAccessLevels
-    , spcIngressPolicies
+    -- ** BasicLevel_CombiningFunction
+    BasicLevel_CombiningFunction (..),
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
-    -- * EgressPolicy
-    , EgressPolicy
-    , egressPolicy
-    , epEgressFrom
-    , epEgressTo
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- * ServicePerimeterPerimeterType
-    , ServicePerimeterPerimeterType (..)
+    -- ** CommitServicePerimetersRequest
+    CommitServicePerimetersRequest (..),
+    newCommitServicePerimetersRequest,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** CommitServicePerimetersResponse
+    CommitServicePerimetersResponse (..),
+    newCommitServicePerimetersResponse,
 
-    -- * OSConstraintOSType
-    , OSConstraintOSType (..)
+    -- ** Condition
+    Condition (..),
+    newCondition,
 
-    -- * GcpUserAccessBinding
-    , GcpUserAccessBinding
-    , gcpUserAccessBinding
-    , guabGroupKey
-    , guabName
-    , guabAccessLevels
+    -- ** CustomLevel
+    CustomLevel (..),
+    newCustomLevel,
 
-    -- * ServicePerimeter
-    , ServicePerimeter
-    , servicePerimeter
-    , spStatus
-    , spPerimeterType
-    , spName
-    , spSpec
-    , spTitle
-    , spUseExplicitDryRunSpec
-    , spDescription
+    -- ** DevicePolicy
+    DevicePolicy (..),
+    newDevicePolicy,
 
-    -- * AccessPoliciesAccessLevelsListAccessLevelFormat
-    , AccessPoliciesAccessLevelsListAccessLevelFormat (..)
+    -- ** DevicePolicy_AllowedDeviceManagementLevelsItem
+    DevicePolicy_AllowedDeviceManagementLevelsItem (..),
 
-    -- * CommitServicePerimetersRequest
-    , CommitServicePerimetersRequest
-    , commitServicePerimetersRequest
-    , csprEtag
+    -- ** DevicePolicy_AllowedEncryptionStatusesItem
+    DevicePolicy_AllowedEncryptionStatusesItem (..),
 
-    -- * ListAccessPoliciesResponse
-    , ListAccessPoliciesResponse
-    , listAccessPoliciesResponse
-    , laprNextPageToken
-    , laprAccessPolicies
+    -- ** EgressFrom
+    EgressFrom (..),
+    newEgressFrom,
 
-    -- * DevicePolicyAllowedDeviceManagementLevelsItem
-    , DevicePolicyAllowedDeviceManagementLevelsItem (..)
+    -- ** EgressFrom_IdentityType
+    EgressFrom_IdentityType (..),
 
-    -- * EgressFrom
-    , EgressFrom
-    , egressFrom
-    , efIdentityType
-    , efIdentities
+    -- ** EgressPolicy
+    EgressPolicy (..),
+    newEgressPolicy,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** EgressTo
+    EgressTo (..),
+    newEgressTo,
 
-    -- * ReplaceServicePerimetersRequest
-    , ReplaceServicePerimetersRequest
-    , replaceServicePerimetersRequest
-    , rsprEtag
-    , rsprServicePerimeters
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * ReplaceAccessLevelsResponse
-    , ReplaceAccessLevelsResponse
-    , replaceAccessLevelsResponse
-    , ralrAccessLevels
+    -- ** Expr
+    Expr (..),
+    newExpr,
 
-    -- * EgressTo
-    , EgressTo
-    , egressTo
-    , etResources
-    , etOperations
+    -- ** GcpUserAccessBinding
+    GcpUserAccessBinding (..),
+    newGcpUserAccessBinding,
 
-    -- * OSConstraint
-    , OSConstraint
-    , osConstraint
-    , ocOSType
-    , ocMinimumVersion
-    , ocRequireVerifiedChromeOS
+    -- ** GcpUserAccessBindingOperationMetadata
+    GcpUserAccessBindingOperationMetadata (..),
+    newGcpUserAccessBindingOperationMetadata,
 
-    -- * IngressFrom
-    , IngressFrom
-    , ingressFrom
-    , ifIdentityType
-    , ifSources
-    , ifIdentities
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
-    -- * ReplaceServicePerimetersResponse
-    , ReplaceServicePerimetersResponse
-    , replaceServicePerimetersResponse
-    , rServicePerimeters
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
-    -- * AccessPolicy
-    , AccessPolicy
-    , accessPolicy
-    , apParent
-    , apEtag
-    , apName
-    , apTitle
+    -- ** IngressFrom
+    IngressFrom (..),
+    newIngressFrom,
 
-    -- * ReplaceAccessLevelsRequest
-    , ReplaceAccessLevelsRequest
-    , replaceAccessLevelsRequest
-    , rEtag
-    , rAccessLevels
+    -- ** IngressFrom_IdentityType
+    IngressFrom_IdentityType (..),
 
-    -- * IngressTo
-    , IngressTo
-    , ingressTo
-    , itResources
-    , itOperations
+    -- ** IngressPolicy
+    IngressPolicy (..),
+    newIngressPolicy,
 
-    -- * IngressFromIdentityType
-    , IngressFromIdentityType (..)
+    -- ** IngressSource
+    IngressSource (..),
+    newIngressSource,
 
-    -- * MethodSelector
-    , MethodSelector
-    , methodSelector
-    , msMethod
-    , msPermission
+    -- ** IngressTo
+    IngressTo (..),
+    newIngressTo,
 
-    -- * ListGcpUserAccessBindingsResponse
-    , ListGcpUserAccessBindingsResponse
-    , listGcpUserAccessBindingsResponse
-    , lguabrNextPageToken
-    , lguabrGcpUserAccessBindings
+    -- ** ListAccessLevelsResponse
+    ListAccessLevelsResponse (..),
+    newListAccessLevelsResponse,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ListAccessPoliciesResponse
+    ListAccessPoliciesResponse (..),
+    newListAccessPoliciesResponse,
 
-    -- * ListServicePerimetersResponse
-    , ListServicePerimetersResponse
-    , listServicePerimetersResponse
-    , lsprNextPageToken
-    , lsprServicePerimeters
+    -- ** ListGcpUserAccessBindingsResponse
+    ListGcpUserAccessBindingsResponse (..),
+    newListGcpUserAccessBindingsResponse,
 
-    -- * VPCAccessibleServices
-    , VPCAccessibleServices
-    , vpcAccessibleServices
-    , vasAllowedServices
-    , vasEnableRestriction
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * CustomLevel
-    , CustomLevel
-    , customLevel
-    , clExpr
+    -- ** ListServicePerimetersResponse
+    ListServicePerimetersResponse (..),
+    newListServicePerimetersResponse,
 
-    -- * APIOperation
-    , APIOperation
-    , apiOperation
-    , aoMethodSelectors
-    , aoServiceName
+    -- ** MethodSelector
+    MethodSelector (..),
+    newMethodSelector,
 
-    -- * EgressFromIdentityType
-    , EgressFromIdentityType (..)
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * ListAccessLevelsResponse
-    , ListAccessLevelsResponse
-    , listAccessLevelsResponse
-    , lalrNextPageToken
-    , lalrAccessLevels
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * DevicePolicyAllowedEncryptionStatusesItem
-    , DevicePolicyAllowedEncryptionStatusesItem (..)
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** OsConstraint
+    OsConstraint (..),
+    newOsConstraint,
 
-    -- * DevicePolicy
-    , DevicePolicy
-    , devicePolicy
-    , dpOSConstraints
-    , dpRequireAdminApproval
-    , dpRequireCorpOwned
-    , dpRequireScreenlock
-    , dpAllowedEncryptionStatuses
-    , dpAllowedDeviceManagementLevels
+    -- ** OsConstraint_OsType
+    OsConstraint_OsType (..),
 
-    -- * Condition
-    , Condition
-    , condition
-    , cMembers
-    , cRegions
-    , cNegate
-    , cIPSubnetworks
-    , cDevicePolicy
-    , cRequiredAccessLevels
+    -- ** Policy
+    Policy (..),
+    newPolicy,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** ReplaceAccessLevelsRequest
+    ReplaceAccessLevelsRequest (..),
+    newReplaceAccessLevelsRequest,
 
-    -- * CommitServicePerimetersResponse
-    , CommitServicePerimetersResponse
-    , commitServicePerimetersResponse
-    , csprServicePerimeters
-    ) where
+    -- ** ReplaceAccessLevelsResponse
+    ReplaceAccessLevelsResponse (..),
+    newReplaceAccessLevelsResponse,
 
-import Network.Google.AccessContextManager.Types.Product
-import Network.Google.AccessContextManager.Types.Sum
-import Network.Google.Prelude
+    -- ** ReplaceServicePerimetersRequest
+    ReplaceServicePerimetersRequest (..),
+    newReplaceServicePerimetersRequest,
 
--- | Default request referring to version 'v1' of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
-accessContextManagerService :: ServiceConfig
-accessContextManagerService
-  = defaultService
-      (ServiceId "accesscontextmanager:v1")
-      "accesscontextmanager.googleapis.com"
+    -- ** ReplaceServicePerimetersResponse
+    ReplaceServicePerimetersResponse (..),
+    newReplaceServicePerimetersResponse,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** ServicePerimeter
+    ServicePerimeter (..),
+    newServicePerimeter,
+
+    -- ** ServicePerimeter_PerimeterType
+    ServicePerimeter_PerimeterType (..),
+
+    -- ** ServicePerimeterConfig
+    ServicePerimeterConfig (..),
+    newServicePerimeterConfig,
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
+
+    -- ** VpcAccessibleServices
+    VpcAccessibleServices (..),
+    newVpcAccessibleServices,
+
+    -- ** AccessPoliciesAccessLevelsGetAccessLevelFormat
+    AccessPoliciesAccessLevelsGetAccessLevelFormat (..),
+
+    -- ** AccessPoliciesAccessLevelsListAccessLevelFormat
+    AccessPoliciesAccessLevelsListAccessLevelFormat (..),
+  )
+where
+
+import Network.Google.AccessContextManager.Internal.Product
+import Network.Google.AccessContextManager.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
+accessContextManagerService :: Core.ServiceConfig
+accessContextManagerService =
+  Core.defaultService
+    (Core.ServiceId "accesscontextmanager:v1")
+    "accesscontextmanager.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
