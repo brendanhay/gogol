@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Analytics
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,1590 +30,1003 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Network.Google.Analytics
-    (
-    -- * Service Configuration
-      analyticsService
+  ( -- * Configuration
+    analyticsService,
 
     -- * OAuth Scopes
-    , analyticsManageUsersScope
-    , analyticsProvisionScope
-    , analyticsManageUsersReadOnlyScope
-    , analyticsScope
-    , analyticsReadOnlyScope
-    , analyticsUserDeletionScope
-    , analyticsEditScope
-
-    -- * API Declaration
-    , AnalyticsAPI
+    analyticsScope,
+    analyticsEditScope,
+    analyticsManageUsersScope,
+    analyticsManageUsersReadOnlyScope,
+    analyticsProvisionScope,
+    analyticsReadOnlyScope,
+    analyticsUserDeletionScope,
 
     -- * Resources
 
     -- ** analytics.data.ga.get
-    , module Network.Google.Resource.Analytics.Data.Ga.Get
+    AnalyticsDataGaGetResource,
+    newAnalyticsDataGaGet,
+    AnalyticsDataGaGet,
 
     -- ** analytics.data.mcf.get
-    , module Network.Google.Resource.Analytics.Data.Mcf.Get
+    AnalyticsDataMcfGetResource,
+    newAnalyticsDataMcfGet,
+    AnalyticsDataMcfGet,
 
     -- ** analytics.data.realtime.get
-    , module Network.Google.Resource.Analytics.Data.Realtime.Get
+    AnalyticsDataRealtimeGetResource,
+    newAnalyticsDataRealtimeGet,
+    AnalyticsDataRealtimeGet,
 
     -- ** analytics.management.accountSummaries.list
-    , module Network.Google.Resource.Analytics.Management.AccountSummaries.List
+    AnalyticsManagementAccountSummariesListResource,
+    newAnalyticsManagementAccountSummariesList,
+    AnalyticsManagementAccountSummariesList,
 
     -- ** analytics.management.accountUserLinks.delete
-    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
+    AnalyticsManagementAccountUserLinksDeleteResource,
+    newAnalyticsManagementAccountUserLinksDelete,
+    AnalyticsManagementAccountUserLinksDelete,
 
     -- ** analytics.management.accountUserLinks.insert
-    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
+    AnalyticsManagementAccountUserLinksInsertResource,
+    newAnalyticsManagementAccountUserLinksInsert,
+    AnalyticsManagementAccountUserLinksInsert,
 
     -- ** analytics.management.accountUserLinks.list
-    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
+    AnalyticsManagementAccountUserLinksListResource,
+    newAnalyticsManagementAccountUserLinksList,
+    AnalyticsManagementAccountUserLinksList,
 
     -- ** analytics.management.accountUserLinks.update
-    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
+    AnalyticsManagementAccountUserLinksUpdateResource,
+    newAnalyticsManagementAccountUserLinksUpdate,
+    AnalyticsManagementAccountUserLinksUpdate,
 
     -- ** analytics.management.accounts.list
-    , module Network.Google.Resource.Analytics.Management.Accounts.List
+    AnalyticsManagementAccountsListResource,
+    newAnalyticsManagementAccountsList,
+    AnalyticsManagementAccountsList,
 
     -- ** analytics.management.clientId.hashClientId
-    , module Network.Google.Resource.Analytics.Management.ClientId.HashClientId
+    AnalyticsManagementClientIdHashClientIdResource,
+    newAnalyticsManagementClientIdHashClientId,
+    AnalyticsManagementClientIdHashClientId,
 
     -- ** analytics.management.customDataSources.list
-    , module Network.Google.Resource.Analytics.Management.CustomDataSources.List
+    AnalyticsManagementCustomDataSourcesListResource,
+    newAnalyticsManagementCustomDataSourcesList,
+    AnalyticsManagementCustomDataSourcesList,
 
     -- ** analytics.management.customDimensions.get
-    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
+    AnalyticsManagementCustomDimensionsGetResource,
+    newAnalyticsManagementCustomDimensionsGet,
+    AnalyticsManagementCustomDimensionsGet,
 
     -- ** analytics.management.customDimensions.insert
-    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
+    AnalyticsManagementCustomDimensionsInsertResource,
+    newAnalyticsManagementCustomDimensionsInsert,
+    AnalyticsManagementCustomDimensionsInsert,
 
     -- ** analytics.management.customDimensions.list
-    , module Network.Google.Resource.Analytics.Management.CustomDimensions.List
+    AnalyticsManagementCustomDimensionsListResource,
+    newAnalyticsManagementCustomDimensionsList,
+    AnalyticsManagementCustomDimensionsList,
 
     -- ** analytics.management.customDimensions.patch
-    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
+    AnalyticsManagementCustomDimensionsPatchResource,
+    newAnalyticsManagementCustomDimensionsPatch,
+    AnalyticsManagementCustomDimensionsPatch,
 
     -- ** analytics.management.customDimensions.update
-    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
+    AnalyticsManagementCustomDimensionsUpdateResource,
+    newAnalyticsManagementCustomDimensionsUpdate,
+    AnalyticsManagementCustomDimensionsUpdate,
 
     -- ** analytics.management.customMetrics.get
-    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
+    AnalyticsManagementCustomMetricsGetResource,
+    newAnalyticsManagementCustomMetricsGet,
+    AnalyticsManagementCustomMetricsGet,
 
     -- ** analytics.management.customMetrics.insert
-    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
+    AnalyticsManagementCustomMetricsInsertResource,
+    newAnalyticsManagementCustomMetricsInsert,
+    AnalyticsManagementCustomMetricsInsert,
 
     -- ** analytics.management.customMetrics.list
-    , module Network.Google.Resource.Analytics.Management.CustomMetrics.List
+    AnalyticsManagementCustomMetricsListResource,
+    newAnalyticsManagementCustomMetricsList,
+    AnalyticsManagementCustomMetricsList,
 
     -- ** analytics.management.customMetrics.patch
-    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
+    AnalyticsManagementCustomMetricsPatchResource,
+    newAnalyticsManagementCustomMetricsPatch,
+    AnalyticsManagementCustomMetricsPatch,
 
     -- ** analytics.management.customMetrics.update
-    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
+    AnalyticsManagementCustomMetricsUpdateResource,
+    newAnalyticsManagementCustomMetricsUpdate,
+    AnalyticsManagementCustomMetricsUpdate,
 
     -- ** analytics.management.experiments.delete
-    , module Network.Google.Resource.Analytics.Management.Experiments.Delete
+    AnalyticsManagementExperimentsDeleteResource,
+    newAnalyticsManagementExperimentsDelete,
+    AnalyticsManagementExperimentsDelete,
 
     -- ** analytics.management.experiments.get
-    , module Network.Google.Resource.Analytics.Management.Experiments.Get
+    AnalyticsManagementExperimentsGetResource,
+    newAnalyticsManagementExperimentsGet,
+    AnalyticsManagementExperimentsGet,
 
     -- ** analytics.management.experiments.insert
-    , module Network.Google.Resource.Analytics.Management.Experiments.Insert
+    AnalyticsManagementExperimentsInsertResource,
+    newAnalyticsManagementExperimentsInsert,
+    AnalyticsManagementExperimentsInsert,
 
     -- ** analytics.management.experiments.list
-    , module Network.Google.Resource.Analytics.Management.Experiments.List
+    AnalyticsManagementExperimentsListResource,
+    newAnalyticsManagementExperimentsList,
+    AnalyticsManagementExperimentsList,
 
     -- ** analytics.management.experiments.patch
-    , module Network.Google.Resource.Analytics.Management.Experiments.Patch
+    AnalyticsManagementExperimentsPatchResource,
+    newAnalyticsManagementExperimentsPatch,
+    AnalyticsManagementExperimentsPatch,
 
     -- ** analytics.management.experiments.update
-    , module Network.Google.Resource.Analytics.Management.Experiments.Update
+    AnalyticsManagementExperimentsUpdateResource,
+    newAnalyticsManagementExperimentsUpdate,
+    AnalyticsManagementExperimentsUpdate,
 
     -- ** analytics.management.filters.delete
-    , module Network.Google.Resource.Analytics.Management.Filters.Delete
+    AnalyticsManagementFiltersDeleteResource,
+    newAnalyticsManagementFiltersDelete,
+    AnalyticsManagementFiltersDelete,
 
     -- ** analytics.management.filters.get
-    , module Network.Google.Resource.Analytics.Management.Filters.Get
+    AnalyticsManagementFiltersGetResource,
+    newAnalyticsManagementFiltersGet,
+    AnalyticsManagementFiltersGet,
 
     -- ** analytics.management.filters.insert
-    , module Network.Google.Resource.Analytics.Management.Filters.Insert
+    AnalyticsManagementFiltersInsertResource,
+    newAnalyticsManagementFiltersInsert,
+    AnalyticsManagementFiltersInsert,
 
     -- ** analytics.management.filters.list
-    , module Network.Google.Resource.Analytics.Management.Filters.List
+    AnalyticsManagementFiltersListResource,
+    newAnalyticsManagementFiltersList,
+    AnalyticsManagementFiltersList,
 
     -- ** analytics.management.filters.patch
-    , module Network.Google.Resource.Analytics.Management.Filters.Patch
+    AnalyticsManagementFiltersPatchResource,
+    newAnalyticsManagementFiltersPatch,
+    AnalyticsManagementFiltersPatch,
 
     -- ** analytics.management.filters.update
-    , module Network.Google.Resource.Analytics.Management.Filters.Update
+    AnalyticsManagementFiltersUpdateResource,
+    newAnalyticsManagementFiltersUpdate,
+    AnalyticsManagementFiltersUpdate,
 
     -- ** analytics.management.goals.get
-    , module Network.Google.Resource.Analytics.Management.Goals.Get
+    AnalyticsManagementGoalsGetResource,
+    newAnalyticsManagementGoalsGet,
+    AnalyticsManagementGoalsGet,
 
     -- ** analytics.management.goals.insert
-    , module Network.Google.Resource.Analytics.Management.Goals.Insert
+    AnalyticsManagementGoalsInsertResource,
+    newAnalyticsManagementGoalsInsert,
+    AnalyticsManagementGoalsInsert,
 
     -- ** analytics.management.goals.list
-    , module Network.Google.Resource.Analytics.Management.Goals.List
+    AnalyticsManagementGoalsListResource,
+    newAnalyticsManagementGoalsList,
+    AnalyticsManagementGoalsList,
 
     -- ** analytics.management.goals.patch
-    , module Network.Google.Resource.Analytics.Management.Goals.Patch
+    AnalyticsManagementGoalsPatchResource,
+    newAnalyticsManagementGoalsPatch,
+    AnalyticsManagementGoalsPatch,
 
     -- ** analytics.management.goals.update
-    , module Network.Google.Resource.Analytics.Management.Goals.Update
+    AnalyticsManagementGoalsUpdateResource,
+    newAnalyticsManagementGoalsUpdate,
+    AnalyticsManagementGoalsUpdate,
 
     -- ** analytics.management.profileFilterLinks.delete
-    , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
+    AnalyticsManagementProfileFilterLinksDeleteResource,
+    newAnalyticsManagementProfileFilterLinksDelete,
+    AnalyticsManagementProfileFilterLinksDelete,
 
     -- ** analytics.management.profileFilterLinks.get
-    , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
+    AnalyticsManagementProfileFilterLinksGetResource,
+    newAnalyticsManagementProfileFilterLinksGet,
+    AnalyticsManagementProfileFilterLinksGet,
 
     -- ** analytics.management.profileFilterLinks.insert
-    , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
+    AnalyticsManagementProfileFilterLinksInsertResource,
+    newAnalyticsManagementProfileFilterLinksInsert,
+    AnalyticsManagementProfileFilterLinksInsert,
 
     -- ** analytics.management.profileFilterLinks.list
-    , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
+    AnalyticsManagementProfileFilterLinksListResource,
+    newAnalyticsManagementProfileFilterLinksList,
+    AnalyticsManagementProfileFilterLinksList,
 
     -- ** analytics.management.profileFilterLinks.patch
-    , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
+    AnalyticsManagementProfileFilterLinksPatchResource,
+    newAnalyticsManagementProfileFilterLinksPatch,
+    AnalyticsManagementProfileFilterLinksPatch,
 
     -- ** analytics.management.profileFilterLinks.update
-    , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
+    AnalyticsManagementProfileFilterLinksUpdateResource,
+    newAnalyticsManagementProfileFilterLinksUpdate,
+    AnalyticsManagementProfileFilterLinksUpdate,
 
     -- ** analytics.management.profileUserLinks.delete
-    , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
+    AnalyticsManagementProfileUserLinksDeleteResource,
+    newAnalyticsManagementProfileUserLinksDelete,
+    AnalyticsManagementProfileUserLinksDelete,
 
     -- ** analytics.management.profileUserLinks.insert
-    , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
+    AnalyticsManagementProfileUserLinksInsertResource,
+    newAnalyticsManagementProfileUserLinksInsert,
+    AnalyticsManagementProfileUserLinksInsert,
 
     -- ** analytics.management.profileUserLinks.list
-    , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
+    AnalyticsManagementProfileUserLinksListResource,
+    newAnalyticsManagementProfileUserLinksList,
+    AnalyticsManagementProfileUserLinksList,
 
     -- ** analytics.management.profileUserLinks.update
-    , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
+    AnalyticsManagementProfileUserLinksUpdateResource,
+    newAnalyticsManagementProfileUserLinksUpdate,
+    AnalyticsManagementProfileUserLinksUpdate,
 
     -- ** analytics.management.profiles.delete
-    , module Network.Google.Resource.Analytics.Management.ProFiles.Delete
+    AnalyticsManagementProfilesDeleteResource,
+    newAnalyticsManagementProfilesDelete,
+    AnalyticsManagementProfilesDelete,
 
     -- ** analytics.management.profiles.get
-    , module Network.Google.Resource.Analytics.Management.ProFiles.Get
+    AnalyticsManagementProfilesGetResource,
+    newAnalyticsManagementProfilesGet,
+    AnalyticsManagementProfilesGet,
 
     -- ** analytics.management.profiles.insert
-    , module Network.Google.Resource.Analytics.Management.ProFiles.Insert
+    AnalyticsManagementProfilesInsertResource,
+    newAnalyticsManagementProfilesInsert,
+    AnalyticsManagementProfilesInsert,
 
     -- ** analytics.management.profiles.list
-    , module Network.Google.Resource.Analytics.Management.ProFiles.List
+    AnalyticsManagementProfilesListResource,
+    newAnalyticsManagementProfilesList,
+    AnalyticsManagementProfilesList,
 
     -- ** analytics.management.profiles.patch
-    , module Network.Google.Resource.Analytics.Management.ProFiles.Patch
+    AnalyticsManagementProfilesPatchResource,
+    newAnalyticsManagementProfilesPatch,
+    AnalyticsManagementProfilesPatch,
 
     -- ** analytics.management.profiles.update
-    , module Network.Google.Resource.Analytics.Management.ProFiles.Update
+    AnalyticsManagementProfilesUpdateResource,
+    newAnalyticsManagementProfilesUpdate,
+    AnalyticsManagementProfilesUpdate,
 
     -- ** analytics.management.remarketingAudience.delete
-    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
+    AnalyticsManagementRemarketingAudienceDeleteResource,
+    newAnalyticsManagementRemarketingAudienceDelete,
+    AnalyticsManagementRemarketingAudienceDelete,
 
     -- ** analytics.management.remarketingAudience.get
-    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
+    AnalyticsManagementRemarketingAudienceGetResource,
+    newAnalyticsManagementRemarketingAudienceGet,
+    AnalyticsManagementRemarketingAudienceGet,
 
     -- ** analytics.management.remarketingAudience.insert
-    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
+    AnalyticsManagementRemarketingAudienceInsertResource,
+    newAnalyticsManagementRemarketingAudienceInsert,
+    AnalyticsManagementRemarketingAudienceInsert,
 
     -- ** analytics.management.remarketingAudience.list
-    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.List
+    AnalyticsManagementRemarketingAudienceListResource,
+    newAnalyticsManagementRemarketingAudienceList,
+    AnalyticsManagementRemarketingAudienceList,
 
     -- ** analytics.management.remarketingAudience.patch
-    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Patch
+    AnalyticsManagementRemarketingAudiencePatchResource,
+    newAnalyticsManagementRemarketingAudiencePatch,
+    AnalyticsManagementRemarketingAudiencePatch,
 
     -- ** analytics.management.remarketingAudience.update
-    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Update
+    AnalyticsManagementRemarketingAudienceUpdateResource,
+    newAnalyticsManagementRemarketingAudienceUpdate,
+    AnalyticsManagementRemarketingAudienceUpdate,
 
     -- ** analytics.management.segments.list
-    , module Network.Google.Resource.Analytics.Management.Segments.List
+    AnalyticsManagementSegmentsListResource,
+    newAnalyticsManagementSegmentsList,
+    AnalyticsManagementSegmentsList,
 
     -- ** analytics.management.unsampledReports.delete
-    , module Network.Google.Resource.Analytics.Management.UnSampledReports.Delete
+    AnalyticsManagementUnsampledReportsDeleteResource,
+    newAnalyticsManagementUnsampledReportsDelete,
+    AnalyticsManagementUnsampledReportsDelete,
 
     -- ** analytics.management.unsampledReports.get
-    , module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
+    AnalyticsManagementUnsampledReportsGetResource,
+    newAnalyticsManagementUnsampledReportsGet,
+    AnalyticsManagementUnsampledReportsGet,
 
     -- ** analytics.management.unsampledReports.insert
-    , module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
+    AnalyticsManagementUnsampledReportsInsertResource,
+    newAnalyticsManagementUnsampledReportsInsert,
+    AnalyticsManagementUnsampledReportsInsert,
 
     -- ** analytics.management.unsampledReports.list
-    , module Network.Google.Resource.Analytics.Management.UnSampledReports.List
+    AnalyticsManagementUnsampledReportsListResource,
+    newAnalyticsManagementUnsampledReportsList,
+    AnalyticsManagementUnsampledReportsList,
 
     -- ** analytics.management.uploads.deleteUploadData
-    , module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
+    AnalyticsManagementUploadsDeleteUploadDataResource,
+    newAnalyticsManagementUploadsDeleteUploadData,
+    AnalyticsManagementUploadsDeleteUploadData,
 
     -- ** analytics.management.uploads.get
-    , module Network.Google.Resource.Analytics.Management.Uploads.Get
+    AnalyticsManagementUploadsGetResource,
+    newAnalyticsManagementUploadsGet,
+    AnalyticsManagementUploadsGet,
 
     -- ** analytics.management.uploads.list
-    , module Network.Google.Resource.Analytics.Management.Uploads.List
+    AnalyticsManagementUploadsListResource,
+    newAnalyticsManagementUploadsList,
+    AnalyticsManagementUploadsList,
 
     -- ** analytics.management.uploads.uploadData
-    , module Network.Google.Resource.Analytics.Management.Uploads.UploadData
+    AnalyticsManagementUploadsUploadDataResource,
+    newAnalyticsManagementUploadsUploadData,
+    AnalyticsManagementUploadsUploadData,
 
     -- ** analytics.management.webPropertyAdWordsLinks.delete
-    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
+    AnalyticsManagementWebPropertyAdWordsLinksDeleteResource,
+    newAnalyticsManagementWebPropertyAdWordsLinksDelete,
+    AnalyticsManagementWebPropertyAdWordsLinksDelete,
 
     -- ** analytics.management.webPropertyAdWordsLinks.get
-    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
+    AnalyticsManagementWebPropertyAdWordsLinksGetResource,
+    newAnalyticsManagementWebPropertyAdWordsLinksGet,
+    AnalyticsManagementWebPropertyAdWordsLinksGet,
 
     -- ** analytics.management.webPropertyAdWordsLinks.insert
-    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
+    AnalyticsManagementWebPropertyAdWordsLinksInsertResource,
+    newAnalyticsManagementWebPropertyAdWordsLinksInsert,
+    AnalyticsManagementWebPropertyAdWordsLinksInsert,
 
     -- ** analytics.management.webPropertyAdWordsLinks.list
-    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
+    AnalyticsManagementWebPropertyAdWordsLinksListResource,
+    newAnalyticsManagementWebPropertyAdWordsLinksList,
+    AnalyticsManagementWebPropertyAdWordsLinksList,
 
     -- ** analytics.management.webPropertyAdWordsLinks.patch
-    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
+    AnalyticsManagementWebPropertyAdWordsLinksPatchResource,
+    newAnalyticsManagementWebPropertyAdWordsLinksPatch,
+    AnalyticsManagementWebPropertyAdWordsLinksPatch,
 
     -- ** analytics.management.webPropertyAdWordsLinks.update
-    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
+    AnalyticsManagementWebPropertyAdWordsLinksUpdateResource,
+    newAnalyticsManagementWebPropertyAdWordsLinksUpdate,
+    AnalyticsManagementWebPropertyAdWordsLinksUpdate,
 
     -- ** analytics.management.webproperties.get
-    , module Network.Google.Resource.Analytics.Management.WebProperties.Get
+    AnalyticsManagementWebpropertiesGetResource,
+    newAnalyticsManagementWebpropertiesGet,
+    AnalyticsManagementWebpropertiesGet,
 
     -- ** analytics.management.webproperties.insert
-    , module Network.Google.Resource.Analytics.Management.WebProperties.Insert
+    AnalyticsManagementWebpropertiesInsertResource,
+    newAnalyticsManagementWebpropertiesInsert,
+    AnalyticsManagementWebpropertiesInsert,
 
     -- ** analytics.management.webproperties.list
-    , module Network.Google.Resource.Analytics.Management.WebProperties.List
+    AnalyticsManagementWebpropertiesListResource,
+    newAnalyticsManagementWebpropertiesList,
+    AnalyticsManagementWebpropertiesList,
 
     -- ** analytics.management.webproperties.patch
-    , module Network.Google.Resource.Analytics.Management.WebProperties.Patch
+    AnalyticsManagementWebpropertiesPatchResource,
+    newAnalyticsManagementWebpropertiesPatch,
+    AnalyticsManagementWebpropertiesPatch,
 
     -- ** analytics.management.webproperties.update
-    , module Network.Google.Resource.Analytics.Management.WebProperties.Update
+    AnalyticsManagementWebpropertiesUpdateResource,
+    newAnalyticsManagementWebpropertiesUpdate,
+    AnalyticsManagementWebpropertiesUpdate,
 
     -- ** analytics.management.webpropertyUserLinks.delete
-    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
+    AnalyticsManagementWebpropertyUserLinksDeleteResource,
+    newAnalyticsManagementWebpropertyUserLinksDelete,
+    AnalyticsManagementWebpropertyUserLinksDelete,
 
     -- ** analytics.management.webpropertyUserLinks.insert
-    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
+    AnalyticsManagementWebpropertyUserLinksInsertResource,
+    newAnalyticsManagementWebpropertyUserLinksInsert,
+    AnalyticsManagementWebpropertyUserLinksInsert,
 
     -- ** analytics.management.webpropertyUserLinks.list
-    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
+    AnalyticsManagementWebpropertyUserLinksListResource,
+    newAnalyticsManagementWebpropertyUserLinksList,
+    AnalyticsManagementWebpropertyUserLinksList,
 
     -- ** analytics.management.webpropertyUserLinks.update
-    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
+    AnalyticsManagementWebpropertyUserLinksUpdateResource,
+    newAnalyticsManagementWebpropertyUserLinksUpdate,
+    AnalyticsManagementWebpropertyUserLinksUpdate,
 
     -- ** analytics.metadata.columns.list
-    , module Network.Google.Resource.Analytics.Metadata.Columns.List
+    AnalyticsMetadataColumnsListResource,
+    newAnalyticsMetadataColumnsList,
+    AnalyticsMetadataColumnsList,
 
     -- ** analytics.provisioning.createAccountTicket
-    , module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
+    AnalyticsProvisioningCreateAccountTicketResource,
+    newAnalyticsProvisioningCreateAccountTicket,
+    AnalyticsProvisioningCreateAccountTicket,
 
     -- ** analytics.provisioning.createAccountTree
-    , module Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
+    AnalyticsProvisioningCreateAccountTreeResource,
+    newAnalyticsProvisioningCreateAccountTree,
+    AnalyticsProvisioningCreateAccountTree,
 
     -- ** analytics.userDeletion.userDeletionRequest.upsert
-    , module Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
+    AnalyticsUserDeletionUserDeletionRequestUpsertResource,
+    newAnalyticsUserDeletionUserDeletionRequestUpsert,
+    AnalyticsUserDeletionUserDeletionRequestUpsert,
 
     -- * Types
 
-    -- ** UserDeletionRequest
-    , UserDeletionRequest
-    , userDeletionRequest
-    , udrWebPropertyId
-    , udrKind
-    , udrPropertyId
-    , udrId
-    , udrFirebaseProjectId
-    , udrDeletionRequestTime
+    -- ** Account
+    Account (..),
+    newAccount,
 
-    -- ** UnSampledReports
-    , UnSampledReports
-    , unSampledReports
-    , usrNextLink
-    , usrItemsPerPage
-    , usrKind
-    , usrUsername
-    , usrItems
-    , usrTotalResults
-    , usrStartIndex
-    , usrPreviousLink
+    -- ** Account_ChildLink
+    Account_ChildLink (..),
+    newAccount_ChildLink,
 
-    -- ** GoalURLDestinationDetailsStepsItem
-    , GoalURLDestinationDetailsStepsItem
-    , goalURLDestinationDetailsStepsItem
-    , guddsiURL
-    , guddsiName
-    , guddsiNumber
-
-    -- ** GaDataQuery
-    , GaDataQuery
-    , gaDataQuery
-    , gdqMetrics
-    , gdqSamplingLevel
-    , gdqFilters
-    , gdqIds
-    , gdqEndDate
-    , gdqSort
-    , gdqDimensions
-    , gdqStartIndex
-    , gdqMaxResults
-    , gdqSegment
-    , gdqStartDate
-
-    -- ** RemarketingAudiences
-    , RemarketingAudiences
-    , remarketingAudiences
-    , raNextLink
-    , raItemsPerPage
-    , raKind
-    , raUsername
-    , raItems
-    , raTotalResults
-    , raStartIndex
-    , raPreviousLink
-
-    -- ** GaDataDataTableRowsItem
-    , GaDataDataTableRowsItem
-    , gaDataDataTableRowsItem
-    , gddtriC
-
-    -- ** UnSampledReport
-    , UnSampledReport
-    , unSampledReport
-    , uDownloadType
-    , uStatus
-    , uMetrics
-    , uDriveDownloadDetails
-    , uWebPropertyId
-    , uKind
-    , uCreated
-    , uFilters
-    , uProFileId
-    , uEndDate
-    , uSelfLink
-    , uAccountId
-    , uId
-    , uUpdated
-    , uTitle
-    , uDimensions
-    , uSegment
-    , uCloudStorageDownloadDetails
-    , uStartDate
-
-    -- ** McfDataColumnHeadersItem
-    , McfDataColumnHeadersItem
-    , mcfDataColumnHeadersItem
-    , mdchiColumnType
-    , mdchiName
-    , mdchiDataType
-
-    -- ** GaDataTotalsForAllResults
-    , GaDataTotalsForAllResults
-    , gaDataTotalsForAllResults
-    , gdtfarAddtional
-
-    -- ** ProFileParentLink
-    , ProFileParentLink
-    , proFileParentLink
-    , pfplHref
-    , pfplType
-
-    -- ** RemarketingAudience
-    , RemarketingAudience
-    , remarketingAudience
-    , rWebPropertyId
-    , rKind
-    , rCreated
-    , rLinkedAdAccounts
-    , rAudienceDefinition
-    , rAudienceType
-    , rAccountId
-    , rName
-    , rStateBasedAudienceDefinition
-    , rLinkedViews
-    , rInternalWebPropertyId
-    , rId
-    , rUpdated
-    , rDescription
-
-    -- ** GaDataDataTableRowsItemCItem
-    , GaDataDataTableRowsItemCItem
-    , gaDataDataTableRowsItemCItem
-    , gddtriciV
-
-    -- ** EntityUserLinkPermissions
-    , EntityUserLinkPermissions
-    , entityUserLinkPermissions
-    , eulpLocal
-    , eulpEffective
-
-    -- ** RealtimeDataProFileInfo
-    , RealtimeDataProFileInfo
-    , realtimeDataProFileInfo
-    , rdpfiWebPropertyId
-    , rdpfiProFileId
-    , rdpfiProFileName
-    , rdpfiAccountId
-    , rdpfiInternalWebPropertyId
-    , rdpfiTableId
-
-    -- ** McfDataRowsItemItemConversionPathValueItem
-    , McfDataRowsItemItemConversionPathValueItem
-    , mcfDataRowsItemItemConversionPathValueItem
-    , mdriicpviInteractionType
-    , mdriicpviNodeValue
-
-    -- ** FilterExpression
-    , FilterExpression
-    , filterExpression
-    , feFieldIndex
-    , feField
-    , feKind
-    , feMatchType
-    , feCaseSensitive
-    , feExpressionValue
-
-    -- ** ProFileRef
-    , ProFileRef
-    , proFileRef
-    , pfrWebPropertyId
-    , pfrKind
-    , pfrHref
-    , pfrAccountId
-    , pfrName
-    , pfrInternalWebPropertyId
-    , pfrId
-
-    -- ** Accounts
-    , Accounts
-    , accounts
-    , aNextLink
-    , aItemsPerPage
-    , aKind
-    , aUsername
-    , aItems
-    , aTotalResults
-    , aStartIndex
-    , aPreviousLink
-
-    -- ** Experiments
-    , Experiments
-    , experiments
-    , eNextLink
-    , eItemsPerPage
-    , eKind
-    , eUsername
-    , eItems
-    , eTotalResults
-    , eStartIndex
-    , ePreviousLink
-
-    -- ** ExperimentParentLink
-    , ExperimentParentLink
-    , experimentParentLink
-    , eplHref
-    , eplType
-
-    -- ** UnSampledReportDriveDownloadDetails
-    , UnSampledReportDriveDownloadDetails
-    , unSampledReportDriveDownloadDetails
-    , usrdddDocumentId
-
-    -- ** McfDataProFileInfo
-    , McfDataProFileInfo
-    , mcfDataProFileInfo
-    , mdpfiWebPropertyId
-    , mdpfiProFileId
-    , mdpfiProFileName
-    , mdpfiAccountId
-    , mdpfiInternalWebPropertyId
-    , mdpfiTableId
-
-    -- ** CustomDataSources
-    , CustomDataSources
-    , customDataSources
-    , cdsNextLink
-    , cdsItemsPerPage
-    , cdsKind
-    , cdsUsername
-    , cdsItems
-    , cdsTotalResults
-    , cdsStartIndex
-    , cdsPreviousLink
-
-    -- ** WebPropertyChildLink
-    , WebPropertyChildLink
-    , webPropertyChildLink
-    , wpclHref
-    , wpclType
-
-    -- ** DataGaGetSamplingLevel
-    , DataGaGetSamplingLevel (..)
-
-    -- ** HashClientIdResponse
-    , HashClientIdResponse
-    , hashClientIdResponse
-    , hcirClientId
-    , hcirWebPropertyId
-    , hcirKind
-    , hcirHashedClientId
-
-    -- ** McfData
-    , McfData
-    , mcfData
-    , mdNextLink
-    , mdSampleSpace
-    , mdItemsPerPage
-    , mdProFileInfo
-    , mdKind
-    , mdSampleSize
-    , mdRows
-    , mdSelfLink
-    , mdQuery
-    , mdColumnHeaders
-    , mdId
-    , mdTotalResults
-    , mdContainsSampledData
-    , mdTotalsForAllResults
-    , mdPreviousLink
-
-    -- ** UserRef
-    , UserRef
-    , userRef
-    , urEmail
-    , urKind
-    , urId
-
-    -- ** GoalVisitNumPagesDetails
-    , GoalVisitNumPagesDetails
-    , goalVisitNumPagesDetails
-    , gvnpdComparisonValue
-    , gvnpdComparisonType
-
-    -- ** RealtimeDataColumnHeadersItem
-    , RealtimeDataColumnHeadersItem
-    , realtimeDataColumnHeadersItem
-    , rdchiColumnType
-    , rdchiName
-    , rdchiDataType
+    -- ** Account_Permissions
+    Account_Permissions (..),
+    newAccount_Permissions,
 
     -- ** AccountRef
-    , AccountRef
-    , accountRef
-    , arKind
-    , arHref
-    , arName
-    , arId
-
-    -- ** EntityAdWordsLinks
-    , EntityAdWordsLinks
-    , entityAdWordsLinks
-    , eawlNextLink
-    , eawlItemsPerPage
-    , eawlKind
-    , eawlItems
-    , eawlTotalResults
-    , eawlStartIndex
-    , eawlPreviousLink
-
-    -- ** ProFiles
-    , ProFiles
-    , proFiles
-    , pfNextLink
-    , pfItemsPerPage
-    , pfKind
-    , pfUsername
-    , pfItems
-    , pfTotalResults
-    , pfStartIndex
-    , pfPreviousLink
-
-    -- ** AnalyticsDataimportDeleteUploadDataRequest
-    , AnalyticsDataimportDeleteUploadDataRequest
-    , analyticsDataimportDeleteUploadDataRequest
-    , addudrCustomDataImportUids
-
-    -- ** EntityAdWordsLink
-    , EntityAdWordsLink
-    , entityAdWordsLink
-    , entAdWordsAccounts
-    , entProFileIds
-    , entKind
-    , entSelfLink
-    , entName
-    , entId
-    , entEntity
-
-    -- ** FilterSearchAndReplaceDetails
-    , FilterSearchAndReplaceDetails
-    , filterSearchAndReplaceDetails
-    , fsardFieldIndex
-    , fsardField
-    , fsardSearchString
-    , fsardReplaceString
-    , fsardCaseSensitive
-
-    -- ** ProFilePermissions
-    , ProFilePermissions
-    , proFilePermissions
-    , pfpEffective
-
-    -- ** ProFile
-    , ProFile
-    , proFile
-    , pParentLink
-    , pECommerceTracking
-    , pSiteSearchCategoryParameters
-    , pWebPropertyId
-    , pChildLink
-    , pSiteSearchQueryParameters
-    , pKind
-    , pDefaultPage
-    , pCreated
-    , pSelfLink
-    , pAccountId
-    , pBotFilteringEnabled
-    , pName
-    , pCurrency
-    , pStarred
-    , pInternalWebPropertyId
-    , pId
-    , pUpdated
-    , pPermissions
-    , pWebsiteURL
-    , pType
-    , pStripSiteSearchCategoryParameters
-    , pTimezone
-    , pExcludeQueryParameters
-    , pEnhancedECommerceTracking
-    , pStripSiteSearchQueryParameters
+    AccountRef (..),
+    newAccountRef,
 
     -- ** AccountSummaries
-    , AccountSummaries
-    , accountSummaries
-    , asNextLink
-    , asItemsPerPage
-    , asKind
-    , asUsername
-    , asItems
-    , asTotalResults
-    , asStartIndex
-    , asPreviousLink
-
-    -- ** GoalEventDetails
-    , GoalEventDetails
-    , goalEventDetails
-    , gedUseEventValue
-    , gedEventConditions
-
-    -- ** WebPropertySummary
-    , WebPropertySummary
-    , webPropertySummary
-    , wpsKind
-    , wpsProFiles
-    , wpsName
-    , wpsStarred
-    , wpsInternalWebPropertyId
-    , wpsId
-    , wpsWebsiteURL
-    , wpsLevel
-
-    -- ** Filters
-    , Filters
-    , filters
-    , fNextLink
-    , fItemsPerPage
-    , fKind
-    , fUsername
-    , fItems
-    , fTotalResults
-    , fStartIndex
-    , fPreviousLink
-
-    -- ** GaData
-    , GaData
-    , gaData
-    , gdNextLink
-    , gdSampleSpace
-    , gdItemsPerPage
-    , gdProFileInfo
-    , gdKind
-    , gdSampleSize
-    , gdRows
-    , gdSelfLink
-    , gdQuery
-    , gdColumnHeaders
-    , gdId
-    , gdTotalResults
-    , gdDataLastRefreshed
-    , gdDataTable
-    , gdContainsSampledData
-    , gdTotalsForAllResults
-    , gdPreviousLink
-
-    -- ** RealtimeDataTotalsForAllResults
-    , RealtimeDataTotalsForAllResults
-    , realtimeDataTotalsForAllResults
-    , rdtfarAddtional
-
-    -- ** CustomDataSource
-    , CustomDataSource
-    , customDataSource
-    , cParentLink
-    , cWebPropertyId
-    , cChildLink
-    , cKind
-    , cCreated
-    , cUploadType
-    , cSchema
-    , cImportBehavior
-    , cSelfLink
-    , cAccountId
-    , cName
-    , cId
-    , cUpdated
-    , cType
-    , cDescription
-    , cProFilesLinked
-
-    -- ** AccountTreeRequest
-    , AccountTreeRequest
-    , accountTreeRequest
-    , atrWebPropertyName
-    , atrKind
-    , atrAccountName
-    , atrProFileName
-    , atrWebsiteURL
-    , atrTimezone
-
-    -- ** WebPropertyRef
-    , WebPropertyRef
-    , webPropertyRef
-    , wprKind
-    , wprHref
-    , wprAccountId
-    , wprName
-    , wprInternalWebPropertyId
-    , wprId
-
-    -- ** LinkedForeignAccount
-    , LinkedForeignAccount
-    , linkedForeignAccount
-    , lfaStatus
-    , lfaWebPropertyId
-    , lfaKind
-    , lfaEligibleForSearch
-    , lfaAccountId
-    , lfaRemarketingAudienceId
-    , lfaLinkedAccountId
-    , lfaInternalWebPropertyId
-    , lfaId
-    , lfaType
-
-    -- ** Goals
-    , Goals
-    , goals
-    , gNextLink
-    , gItemsPerPage
-    , gKind
-    , gUsername
-    , gItems
-    , gTotalResults
-    , gStartIndex
-    , gPreviousLink
-
-    -- ** McfDataRowsItemItem
-    , McfDataRowsItemItem
-    , mcfDataRowsItemItem
-    , mdriiPrimitiveValue
-    , mdriiConversionPathValue
-
-    -- ** AccountPermissions
-    , AccountPermissions
-    , accountPermissions
-    , apEffective
-
-    -- ** EntityUserLinkEntity
-    , EntityUserLinkEntity
-    , entityUserLinkEntity
-    , euleProFileRef
-    , euleAccountRef
-    , euleWebPropertyRef
-
-    -- ** Account
-    , Account
-    , account
-    , accChildLink
-    , accKind
-    , accCreated
-    , accSelfLink
-    , accName
-    , accStarred
-    , accId
-    , accUpdated
-    , accPermissions
-
-    -- ** Experiment
-    , Experiment
-    , experiment
-    , expParentLink
-    , expEqualWeighting
-    , expStatus
-    , expWebPropertyId
-    , expStartTime
-    , expSnippet
-    , expKind
-    , expCreated
-    , expReasonExperimentEnded
-    , expTrafficCoverage
-    , expEditableInGaUi
-    , expMinimumExperimentLengthInDays
-    , expProFileId
-    , expOptimizationType
-    , expSelfLink
-    , expAccountId
-    , expName
-    , expWinnerFound
-    , expEndTime
-    , expVariations
-    , expInternalWebPropertyId
-    , expId
-    , expUpdated
-    , expRewriteVariationURLsAsOriginal
-    , expObjectiveMetric
-    , expWinnerConfidenceLevel
-    , expServingFramework
-    , expDescription
-
-    -- ** EntityUserLinks
-    , EntityUserLinks
-    , entityUserLinks
-    , eulNextLink
-    , eulItemsPerPage
-    , eulKind
-    , eulItems
-    , eulTotalResults
-    , eulStartIndex
-    , eulPreviousLink
-
-    -- ** AdWordsAccount
-    , AdWordsAccount
-    , adWordsAccount
-    , awaAutoTaggingEnabled
-    , awaKind
-    , awaCustomerId
-
-    -- ** FilterRef
-    , FilterRef
-    , filterRef
-    , frKind
-    , frHref
-    , frAccountId
-    , frName
-    , frId
-
-    -- ** GoalVisitTimeOnSiteDetails
-    , GoalVisitTimeOnSiteDetails
-    , goalVisitTimeOnSiteDetails
-    , gvtosdComparisonValue
-    , gvtosdComparisonType
-
-    -- ** WebProperties
-    , WebProperties
-    , webProperties
-    , wpNextLink
-    , wpItemsPerPage
-    , wpKind
-    , wpUsername
-    , wpItems
-    , wpTotalResults
-    , wpStartIndex
-    , wpPreviousLink
-
-    -- ** CustomMetrics
-    , CustomMetrics
-    , customMetrics
-    , cmNextLink
-    , cmItemsPerPage
-    , cmKind
-    , cmUsername
-    , cmItems
-    , cmTotalResults
-    , cmStartIndex
-    , cmPreviousLink
-
-    -- ** FilterAdvancedDetails
-    , FilterAdvancedDetails
-    , filterAdvancedDetails
-    , fadExtractA
-    , fadFieldARequired
-    , fadFieldA
-    , fadFieldBIndex
-    , fadOutputToField
-    , fadOutputConstructor
-    , fadExtractB
-    , fadFieldAIndex
-    , fadCaseSensitive
-    , fadOutputToFieldIndex
-    , fadFieldB
-    , fadFieldBRequired
-    , fadOverrideOutputField
-
-    -- ** AccountTreeResponse
-    , AccountTreeResponse
-    , accountTreeResponse
-    , atrtKind
-    , atrtProFile
-    , atrtAccount
-    , atrtWebProperty
-
-    -- ** FilterUppercaseDetails
-    , FilterUppercaseDetails
-    , filterUppercaseDetails
-    , fudFieldIndex
-    , fudField
-
-    -- ** CustomDataSourceChildLink
-    , CustomDataSourceChildLink
-    , customDataSourceChildLink
-    , cdsclHref
-    , cdsclType
-
-    -- ** IncludeConditions
-    , IncludeConditions
-    , includeConditions
-    , icKind
-    , icDaysToLookBack
-    , icMembershipDurationDays
-    , icSegment
-    , icIsSmartList
-
-    -- ** FilterParentLink
-    , FilterParentLink
-    , filterParentLink
-    , fplHref
-    , fplType
-
-    -- ** DataGaGetOutput
-    , DataGaGetOutput (..)
-
-    -- ** HashClientIdRequest
-    , HashClientIdRequest
-    , hashClientIdRequest
-    , hClientId
-    , hWebPropertyId
-    , hKind
-
-    -- ** RealtimeData
-    , RealtimeData
-    , realtimeData
-    , rdProFileInfo
-    , rdKind
-    , rdRows
-    , rdSelfLink
-    , rdQuery
-    , rdColumnHeaders
-    , rdId
-    , rdTotalResults
-    , rdTotalsForAllResults
-
-    -- ** CustomMetric
-    , CustomMetric
-    , customMetric
-    , cusParentLink
-    , cusWebPropertyId
-    , cusKind
-    , cusMaxValue
-    , cusCreated
-    , cusMinValue
-    , cusActive
-    , cusSelfLink
-    , cusAccountId
-    , cusName
-    , cusScope
-    , cusId
-    , cusUpdated
-    , cusType
-    , cusIndex
-
-    -- ** ProFileSummary
-    , ProFileSummary
-    , proFileSummary
-    , pfsKind
-    , pfsName
-    , pfsStarred
-    , pfsId
-    , pfsType
-
-    -- ** CustomDimensionParentLink
-    , CustomDimensionParentLink
-    , customDimensionParentLink
-    , cdplHref
-    , cdplType
-
-    -- ** WebProperty
-    , WebProperty
-    , webProperty
-    , wParentLink
-    , wChildLink
-    , wDefaultProFileId
-    , wKind
-    , wCreated
-    , wDataRetentionTtl
-    , wDataRetentionResetOnNewActivity
-    , wSelfLink
-    , wAccountId
-    , wName
-    , wStarred
-    , wInternalWebPropertyId
-    , wId
-    , wUpdated
-    , wProFileCount
-    , wPermissions
-    , wWebsiteURL
-    , wIndustryVertical
-    , wLevel
-
-    -- ** WebPropertyPermissions
-    , WebPropertyPermissions
-    , webPropertyPermissions
-    , wppEffective
-
-    -- ** EntityUserLink
-    , EntityUserLink
-    , entityUserLink
-    , euluKind
-    , euluUserRef
-    , euluSelfLink
-    , euluId
-    , euluPermissions
-    , euluEntity
-
-    -- ** CustomDataSourceParentLink
-    , CustomDataSourceParentLink
-    , customDataSourceParentLink
-    , cdsplHref
-    , cdsplType
-
-    -- ** GoalEventDetailsEventConditionsItem
-    , GoalEventDetailsEventConditionsItem
-    , goalEventDetailsEventConditionsItem
-    , gedeciMatchType
-    , gedeciExpression
-    , gedeciComparisonValue
-    , gedeciType
-    , gedeciComparisonType
-
-    -- ** McfDataQuery
-    , McfDataQuery
-    , mcfDataQuery
-    , mdqMetrics
-    , mdqSamplingLevel
-    , mdqFilters
-    , mdqIds
-    , mdqEndDate
-    , mdqSort
-    , mdqDimensions
-    , mdqStartIndex
-    , mdqMaxResults
-    , mdqSegment
-    , mdqStartDate
-
-    -- ** Goal
-    , Goal
-    , goal
-    , goaParentLink
-    , goaWebPropertyId
-    , goaKind
-    , goaCreated
-    , goaValue
-    , goaProFileId
-    , goaEventDetails
-    , goaActive
-    , goaSelfLink
-    , goaVisitTimeOnSiteDetails
-    , goaAccountId
-    , goaName
-    , goaInternalWebPropertyId
-    , goaId
-    , goaURLDestinationDetails
-    , goaVisitNumPagesDetails
-    , goaUpdated
-    , goaType
-
-    -- ** AccountTicket
-    , AccountTicket
-    , accountTicket
-    , atRedirectURI
-    , atKind
-    , atProFile
-    , atAccount
-    , atWebProperty
-    , atId
+    AccountSummaries (..),
+    newAccountSummaries,
 
     -- ** AccountSummary
-    , AccountSummary
-    , accountSummary
-    , assKind
-    , assWebProperties
-    , assName
-    , assStarred
-    , assId
+    AccountSummary (..),
+    newAccountSummary,
 
-    -- ** RealtimeDataQuery
-    , RealtimeDataQuery
-    , realtimeDataQuery
-    , rdqMetrics
-    , rdqFilters
-    , rdqIds
-    , rdqSort
-    , rdqDimensions
-    , rdqMaxResults
+    -- ** AccountTicket
+    AccountTicket (..),
+    newAccountTicket,
 
-    -- ** Columns
-    , Columns
-    , columns
-    , colEtag
-    , colKind
-    , colItems
-    , colTotalResults
-    , colAttributeNames
+    -- ** AccountTreeRequest
+    AccountTreeRequest (..),
+    newAccountTreeRequest,
 
-    -- ** FilterLowercaseDetails
-    , FilterLowercaseDetails
-    , filterLowercaseDetails
-    , fldFieldIndex
-    , fldField
+    -- ** AccountTreeResponse
+    AccountTreeResponse (..),
+    newAccountTreeResponse,
 
-    -- ** Filter
-    , Filter
-    , filter'
-    , filParentLink
-    , filAdvancedDetails
-    , filUppercaseDetails
-    , filLowercaseDetails
-    , filKind
-    , filCreated
-    , filIncludeDetails
-    , filExcludeDetails
-    , filSelfLink
-    , filAccountId
-    , filName
-    , filId
-    , filUpdated
-    , filType
-    , filSearchAndReplaceDetails
+    -- ** Accounts
+    Accounts (..),
+    newAccounts,
 
-    -- ** Uploads
-    , Uploads
-    , uploads
-    , uplNextLink
-    , uplItemsPerPage
-    , uplKind
-    , uplItems
-    , uplTotalResults
-    , uplStartIndex
-    , uplPreviousLink
+    -- ** AdWordsAccount
+    AdWordsAccount (..),
+    newAdWordsAccount,
 
-    -- ** CustomDimensions
-    , CustomDimensions
-    , customDimensions
-    , cdNextLink
-    , cdItemsPerPage
-    , cdKind
-    , cdUsername
-    , cdItems
-    , cdTotalResults
-    , cdStartIndex
-    , cdPreviousLink
-
-    -- ** Segments
-    , Segments
-    , segments
-    , sNextLink
-    , sItemsPerPage
-    , sKind
-    , sUsername
-    , sItems
-    , sTotalResults
-    , sStartIndex
-    , sPreviousLink
-
-    -- ** GaDataDataTable
-    , GaDataDataTable
-    , gaDataDataTable
-    , gddtCols
-    , gddtRows
-
-    -- ** EntityAdWordsLinkEntity
-    , EntityAdWordsLinkEntity
-    , entityAdWordsLinkEntity
-    , eawleWebPropertyRef
-
-    -- ** RemarketingAudienceStateBasedAudienceDefinition
-    , RemarketingAudienceStateBasedAudienceDefinition
-    , remarketingAudienceStateBasedAudienceDefinition
-    , rasbadExcludeConditions
-    , rasbadIncludeConditions
-
-    -- ** GoalURLDestinationDetails
-    , GoalURLDestinationDetails
-    , goalURLDestinationDetails
-    , guddURL
-    , guddMatchType
-    , guddSteps
-    , guddCaseSensitive
-    , guddFirstStepRequired
-
-    -- ** ProFileFilterLinks
-    , ProFileFilterLinks
-    , proFileFilterLinks
-    , pfflNextLink
-    , pfflItemsPerPage
-    , pfflKind
-    , pfflUsername
-    , pfflItems
-    , pfflTotalResults
-    , pfflStartIndex
-    , pfflPreviousLink
-
-    -- ** WebPropertyParentLink
-    , WebPropertyParentLink
-    , webPropertyParentLink
-    , wpplHref
-    , wpplType
-
-    -- ** GaDataProFileInfo
-    , GaDataProFileInfo
-    , gaDataProFileInfo
-    , gdpfiWebPropertyId
-    , gdpfiProFileId
-    , gdpfiProFileName
-    , gdpfiAccountId
-    , gdpfiInternalWebPropertyId
-    , gdpfiTableId
-
-    -- ** Upload
-    , Upload
-    , upload
-    , uuStatus
-    , uuKind
-    , uuCustomDataSourceId
-    , uuUploadTime
-    , uuAccountId
-    , uuId
-    , uuErrors
-
-    -- ** DataMcfGetSamplingLevel
-    , DataMcfGetSamplingLevel (..)
-
-    -- ** CustomDimension
-    , CustomDimension
-    , customDimension
-    , cddParentLink
-    , cddWebPropertyId
-    , cddKind
-    , cddCreated
-    , cddActive
-    , cddSelfLink
-    , cddAccountId
-    , cddName
-    , cddScope
-    , cddId
-    , cddUpdated
-    , cddIndex
-
-    -- ** Segment
-    , Segment
-    , segment
-    , segDefinition
-    , segKind
-    , segCreated
-    , segSelfLink
-    , segName
-    , segId
-    , segUpdated
-    , segType
-    , segSegmentId
-
-    -- ** AccountChildLink
-    , AccountChildLink
-    , accountChildLink
-    , aclHref
-    , aclType
-
-    -- ** ProFileFilterLink
-    , ProFileFilterLink
-    , proFileFilterLink
-    , proProFileRef
-    , proKind
-    , proFilterRef
-    , proSelfLink
-    , proId
-    , proRank
-
-    -- ** CustomMetricParentLink
-    , CustomMetricParentLink
-    , customMetricParentLink
-    , cmplHref
-    , cmplType
+    -- ** AnalyticsDataimportDeleteUploadDataRequest
+    AnalyticsDataimportDeleteUploadDataRequest (..),
+    newAnalyticsDataimportDeleteUploadDataRequest,
 
     -- ** Column
-    , Column
-    , column
-    , ccKind
-    , ccAttributes
-    , ccId
+    Column (..),
+    newColumn,
 
-    -- ** RemarketingAudienceAudienceDefinition
-    , RemarketingAudienceAudienceDefinition
-    , remarketingAudienceAudienceDefinition
-    , raadIncludeConditions
+    -- ** Column_Attributes
+    Column_Attributes (..),
+    newColumn_Attributes,
 
-    -- ** GaDataDataTableColsItem
-    , GaDataDataTableColsItem
-    , gaDataDataTableColsItem
-    , gddtciId
-    , gddtciType
-    , gddtciLabel
+    -- ** Columns
+    Columns (..),
+    newColumns,
 
-    -- ** ExperimentVariationsItem
-    , ExperimentVariationsItem
-    , experimentVariationsItem
-    , eviStatus
-    , eviWeight
-    , eviURL
-    , eviWon
-    , eviName
+    -- ** CustomDataSource
+    CustomDataSource (..),
+    newCustomDataSource,
 
-    -- ** RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
-    , RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
-    , remarketingAudienceStateBasedAudienceDefinitionExcludeConditions
-    , rasbadecExclusionDuration
-    , rasbadecSegment
+    -- ** CustomDataSource_ChildLink
+    CustomDataSource_ChildLink (..),
+    newCustomDataSource_ChildLink,
 
-    -- ** McfDataTotalsForAllResults
-    , McfDataTotalsForAllResults
-    , mcfDataTotalsForAllResults
-    , mdtfarAddtional
+    -- ** CustomDataSource_ParentLink
+    CustomDataSource_ParentLink (..),
+    newCustomDataSource_ParentLink,
 
-    -- ** UserDeletionRequestId
-    , UserDeletionRequestId
-    , userDeletionRequestId
-    , udriUserId
-    , udriType
+    -- ** CustomDataSources
+    CustomDataSources (..),
+    newCustomDataSources,
 
-    -- ** UnSampledReportCloudStorageDownloadDetails
-    , UnSampledReportCloudStorageDownloadDetails
-    , unSampledReportCloudStorageDownloadDetails
-    , usrcsddObjectId
-    , usrcsddBucketId
+    -- ** CustomDimension
+    CustomDimension (..),
+    newCustomDimension,
 
-    -- ** ProFileChildLink
-    , ProFileChildLink
-    , proFileChildLink
-    , pfclHref
-    , pfclType
+    -- ** CustomDimension_ParentLink
+    CustomDimension_ParentLink (..),
+    newCustomDimension_ParentLink,
 
-    -- ** GaDataColumnHeadersItem
-    , GaDataColumnHeadersItem
-    , gaDataColumnHeadersItem
-    , gdchiColumnType
-    , gdchiName
-    , gdchiDataType
+    -- ** CustomDimensions
+    CustomDimensions (..),
+    newCustomDimensions,
 
-    -- ** GoalParentLink
-    , GoalParentLink
-    , goalParentLink
-    , gplHref
-    , gplType
+    -- ** CustomMetric
+    CustomMetric (..),
+    newCustomMetric,
 
-    -- ** ColumnAttributes
-    , ColumnAttributes
-    , columnAttributes
-    , caAddtional
-    ) where
+    -- ** CustomMetric_ParentLink
+    CustomMetric_ParentLink (..),
+    newCustomMetric_ParentLink,
 
-import Network.Google.Prelude
+    -- ** CustomMetrics
+    CustomMetrics (..),
+    newCustomMetrics,
+
+    -- ** EntityAdWordsLink
+    EntityAdWordsLink (..),
+    newEntityAdWordsLink,
+
+    -- ** EntityAdWordsLink_Entity
+    EntityAdWordsLink_Entity (..),
+    newEntityAdWordsLink_Entity,
+
+    -- ** EntityAdWordsLinks
+    EntityAdWordsLinks (..),
+    newEntityAdWordsLinks,
+
+    -- ** EntityUserLink
+    EntityUserLink (..),
+    newEntityUserLink,
+
+    -- ** EntityUserLink_Entity
+    EntityUserLink_Entity (..),
+    newEntityUserLink_Entity,
+
+    -- ** EntityUserLink_Permissions
+    EntityUserLink_Permissions (..),
+    newEntityUserLink_Permissions,
+
+    -- ** EntityUserLinks
+    EntityUserLinks (..),
+    newEntityUserLinks,
+
+    -- ** Experiment
+    Experiment (..),
+    newExperiment,
+
+    -- ** Experiment_ParentLink
+    Experiment_ParentLink (..),
+    newExperiment_ParentLink,
+
+    -- ** Experiment_VariationsItem
+    Experiment_VariationsItem (..),
+    newExperiment_VariationsItem,
+
+    -- ** Experiments
+    Experiments (..),
+    newExperiments,
+
+    -- ** Filter
+    Filter (..),
+    newFilter,
+
+    -- ** Filter_AdvancedDetails
+    Filter_AdvancedDetails (..),
+    newFilter_AdvancedDetails,
+
+    -- ** Filter_LowercaseDetails
+    Filter_LowercaseDetails (..),
+    newFilter_LowercaseDetails,
+
+    -- ** Filter_ParentLink
+    Filter_ParentLink (..),
+    newFilter_ParentLink,
+
+    -- ** Filter_SearchAndReplaceDetails
+    Filter_SearchAndReplaceDetails (..),
+    newFilter_SearchAndReplaceDetails,
+
+    -- ** Filter_UppercaseDetails
+    Filter_UppercaseDetails (..),
+    newFilter_UppercaseDetails,
+
+    -- ** FilterExpression
+    FilterExpression (..),
+    newFilterExpression,
+
+    -- ** FilterRef
+    FilterRef (..),
+    newFilterRef,
+
+    -- ** Filters
+    Filters (..),
+    newFilters,
+
+    -- ** GaData
+    GaData (..),
+    newGaData,
+
+    -- ** GaData_ColumnHeadersItem
+    GaData_ColumnHeadersItem (..),
+    newGaData_ColumnHeadersItem,
+
+    -- ** GaData_DataTable
+    GaData_DataTable (..),
+    newGaData_DataTable,
+
+    -- ** GaData_DataTable_ColsItem
+    GaData_DataTable_ColsItem (..),
+    newGaData_DataTable_ColsItem,
+
+    -- ** GaData_DataTable_RowsItem
+    GaData_DataTable_RowsItem (..),
+    newGaData_DataTable_RowsItem,
+
+    -- ** GaData_DataTable_RowsItem_CItem
+    GaData_DataTable_RowsItem_CItem (..),
+    newGaData_DataTable_RowsItem_CItem,
+
+    -- ** GaData_ProfileInfo
+    GaData_ProfileInfo (..),
+    newGaData_ProfileInfo,
+
+    -- ** GaData_Query
+    GaData_Query (..),
+    newGaData_Query,
+
+    -- ** GaData_TotalsForAllResults
+    GaData_TotalsForAllResults (..),
+    newGaData_TotalsForAllResults,
+
+    -- ** Goal
+    Goal (..),
+    newGoal,
+
+    -- ** Goal_EventDetails
+    Goal_EventDetails (..),
+    newGoal_EventDetails,
+
+    -- ** Goal_EventDetails_EventConditionsItem
+    Goal_EventDetails_EventConditionsItem (..),
+    newGoal_EventDetails_EventConditionsItem,
+
+    -- ** Goal_ParentLink
+    Goal_ParentLink (..),
+    newGoal_ParentLink,
+
+    -- ** Goal_UrlDestinationDetails
+    Goal_UrlDestinationDetails (..),
+    newGoal_UrlDestinationDetails,
+
+    -- ** Goal_UrlDestinationDetails_StepsItem
+    Goal_UrlDestinationDetails_StepsItem (..),
+    newGoal_UrlDestinationDetails_StepsItem,
+
+    -- ** Goal_VisitNumPagesDetails
+    Goal_VisitNumPagesDetails (..),
+    newGoal_VisitNumPagesDetails,
+
+    -- ** Goal_VisitTimeOnSiteDetails
+    Goal_VisitTimeOnSiteDetails (..),
+    newGoal_VisitTimeOnSiteDetails,
+
+    -- ** Goals
+    Goals (..),
+    newGoals,
+
+    -- ** HashClientIdRequest
+    HashClientIdRequest (..),
+    newHashClientIdRequest,
+
+    -- ** HashClientIdResponse
+    HashClientIdResponse (..),
+    newHashClientIdResponse,
+
+    -- ** IncludeConditions
+    IncludeConditions (..),
+    newIncludeConditions,
+
+    -- ** LinkedForeignAccount
+    LinkedForeignAccount (..),
+    newLinkedForeignAccount,
+
+    -- ** McfData
+    McfData (..),
+    newMcfData,
+
+    -- ** McfData_ColumnHeadersItem
+    McfData_ColumnHeadersItem (..),
+    newMcfData_ColumnHeadersItem,
+
+    -- ** McfData_ProfileInfo
+    McfData_ProfileInfo (..),
+    newMcfData_ProfileInfo,
+
+    -- ** McfData_Query
+    McfData_Query (..),
+    newMcfData_Query,
+
+    -- ** McfData_RowsItemItem
+    McfData_RowsItemItem (..),
+    newMcfData_RowsItemItem,
+
+    -- ** McfData_RowsItemItem_ConversionPathValueItem
+    McfData_RowsItemItem_ConversionPathValueItem (..),
+    newMcfData_RowsItemItem_ConversionPathValueItem,
+
+    -- ** McfData_TotalsForAllResults
+    McfData_TotalsForAllResults (..),
+    newMcfData_TotalsForAllResults,
+
+    -- ** Profile
+    Profile (..),
+    newProfile,
+
+    -- ** Profile_ChildLink
+    Profile_ChildLink (..),
+    newProfile_ChildLink,
+
+    -- ** Profile_ParentLink
+    Profile_ParentLink (..),
+    newProfile_ParentLink,
+
+    -- ** Profile_Permissions
+    Profile_Permissions (..),
+    newProfile_Permissions,
+
+    -- ** ProfileFilterLink
+    ProfileFilterLink (..),
+    newProfileFilterLink,
+
+    -- ** ProfileFilterLinks
+    ProfileFilterLinks (..),
+    newProfileFilterLinks,
+
+    -- ** ProfileRef
+    ProfileRef (..),
+    newProfileRef,
+
+    -- ** ProfileSummary
+    ProfileSummary (..),
+    newProfileSummary,
+
+    -- ** Profiles
+    Profiles (..),
+    newProfiles,
+
+    -- ** RealtimeData
+    RealtimeData (..),
+    newRealtimeData,
+
+    -- ** RealtimeData_ColumnHeadersItem
+    RealtimeData_ColumnHeadersItem (..),
+    newRealtimeData_ColumnHeadersItem,
+
+    -- ** RealtimeData_ProfileInfo
+    RealtimeData_ProfileInfo (..),
+    newRealtimeData_ProfileInfo,
+
+    -- ** RealtimeData_Query
+    RealtimeData_Query (..),
+    newRealtimeData_Query,
+
+    -- ** RealtimeData_TotalsForAllResults
+    RealtimeData_TotalsForAllResults (..),
+    newRealtimeData_TotalsForAllResults,
+
+    -- ** RemarketingAudience
+    RemarketingAudience (..),
+    newRemarketingAudience,
+
+    -- ** RemarketingAudience_AudienceDefinition
+    RemarketingAudience_AudienceDefinition (..),
+    newRemarketingAudience_AudienceDefinition,
+
+    -- ** RemarketingAudience_StateBasedAudienceDefinition
+    RemarketingAudience_StateBasedAudienceDefinition (..),
+    newRemarketingAudience_StateBasedAudienceDefinition,
+
+    -- ** RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
+    RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions (..),
+    newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions,
+
+    -- ** RemarketingAudiences
+    RemarketingAudiences (..),
+    newRemarketingAudiences,
+
+    -- ** Segment
+    Segment (..),
+    newSegment,
+
+    -- ** Segments
+    Segments (..),
+    newSegments,
+
+    -- ** UnsampledReport
+    UnsampledReport (..),
+    newUnsampledReport,
+
+    -- ** UnsampledReport_CloudStorageDownloadDetails
+    UnsampledReport_CloudStorageDownloadDetails (..),
+    newUnsampledReport_CloudStorageDownloadDetails,
+
+    -- ** UnsampledReport_DriveDownloadDetails
+    UnsampledReport_DriveDownloadDetails (..),
+    newUnsampledReport_DriveDownloadDetails,
+
+    -- ** UnsampledReports
+    UnsampledReports (..),
+    newUnsampledReports,
+
+    -- ** Upload
+    Upload (..),
+    newUpload,
+
+    -- ** Uploads
+    Uploads (..),
+    newUploads,
+
+    -- ** UserDeletionRequest
+    UserDeletionRequest (..),
+    newUserDeletionRequest,
+
+    -- ** UserDeletionRequest_Id
+    UserDeletionRequest_Id (..),
+    newUserDeletionRequest_Id,
+
+    -- ** UserRef
+    UserRef (..),
+    newUserRef,
+
+    -- ** WebPropertyRef
+    WebPropertyRef (..),
+    newWebPropertyRef,
+
+    -- ** WebPropertySummary
+    WebPropertySummary (..),
+    newWebPropertySummary,
+
+    -- ** Webproperties
+    Webproperties (..),
+    newWebproperties,
+
+    -- ** Webproperty
+    Webproperty (..),
+    newWebproperty,
+
+    -- ** Webproperty_ChildLink
+    Webproperty_ChildLink (..),
+    newWebproperty_ChildLink,
+
+    -- ** Webproperty_ParentLink
+    Webproperty_ParentLink (..),
+    newWebproperty_ParentLink,
+
+    -- ** Webproperty_Permissions
+    Webproperty_Permissions (..),
+    newWebproperty_Permissions,
+
+    -- ** DataGaGetOutput
+    DataGaGetOutput (..),
+
+    -- ** DataGaGetSamplingLevel
+    DataGaGetSamplingLevel (..),
+
+    -- ** DataMcfGetSamplingLevel
+    DataMcfGetSamplingLevel (..),
+  )
+where
+
+import Network.Google.Analytics.Data.Ga.Get
+import Network.Google.Analytics.Data.Mcf.Get
+import Network.Google.Analytics.Data.Realtime.Get
+import Network.Google.Analytics.Management.AccountSummaries.List
+import Network.Google.Analytics.Management.AccountUserLinks.Delete
+import Network.Google.Analytics.Management.AccountUserLinks.Insert
+import Network.Google.Analytics.Management.AccountUserLinks.List
+import Network.Google.Analytics.Management.AccountUserLinks.Update
+import Network.Google.Analytics.Management.Accounts.List
+import Network.Google.Analytics.Management.ClientId.HashClientId
+import Network.Google.Analytics.Management.CustomDataSources.List
+import Network.Google.Analytics.Management.CustomDimensions.Get
+import Network.Google.Analytics.Management.CustomDimensions.Insert
+import Network.Google.Analytics.Management.CustomDimensions.List
+import Network.Google.Analytics.Management.CustomDimensions.Patch
+import Network.Google.Analytics.Management.CustomDimensions.Update
+import Network.Google.Analytics.Management.CustomMetrics.Get
+import Network.Google.Analytics.Management.CustomMetrics.Insert
+import Network.Google.Analytics.Management.CustomMetrics.List
+import Network.Google.Analytics.Management.CustomMetrics.Patch
+import Network.Google.Analytics.Management.CustomMetrics.Update
+import Network.Google.Analytics.Management.Experiments.Delete
+import Network.Google.Analytics.Management.Experiments.Get
+import Network.Google.Analytics.Management.Experiments.Insert
+import Network.Google.Analytics.Management.Experiments.List
+import Network.Google.Analytics.Management.Experiments.Patch
+import Network.Google.Analytics.Management.Experiments.Update
+import Network.Google.Analytics.Management.Filters.Delete
+import Network.Google.Analytics.Management.Filters.Get
+import Network.Google.Analytics.Management.Filters.Insert
+import Network.Google.Analytics.Management.Filters.List
+import Network.Google.Analytics.Management.Filters.Patch
+import Network.Google.Analytics.Management.Filters.Update
+import Network.Google.Analytics.Management.Goals.Get
+import Network.Google.Analytics.Management.Goals.Insert
+import Network.Google.Analytics.Management.Goals.List
+import Network.Google.Analytics.Management.Goals.Patch
+import Network.Google.Analytics.Management.Goals.Update
+import Network.Google.Analytics.Management.ProfileFilterLinks.Delete
+import Network.Google.Analytics.Management.ProfileFilterLinks.Get
+import Network.Google.Analytics.Management.ProfileFilterLinks.Insert
+import Network.Google.Analytics.Management.ProfileFilterLinks.List
+import Network.Google.Analytics.Management.ProfileFilterLinks.Patch
+import Network.Google.Analytics.Management.ProfileFilterLinks.Update
+import Network.Google.Analytics.Management.ProfileUserLinks.Delete
+import Network.Google.Analytics.Management.ProfileUserLinks.Insert
+import Network.Google.Analytics.Management.ProfileUserLinks.List
+import Network.Google.Analytics.Management.ProfileUserLinks.Update
+import Network.Google.Analytics.Management.Profiles.Delete
+import Network.Google.Analytics.Management.Profiles.Get
+import Network.Google.Analytics.Management.Profiles.Insert
+import Network.Google.Analytics.Management.Profiles.List
+import Network.Google.Analytics.Management.Profiles.Patch
+import Network.Google.Analytics.Management.Profiles.Update
+import Network.Google.Analytics.Management.RemarketingAudience.Delete
+import Network.Google.Analytics.Management.RemarketingAudience.Get
+import Network.Google.Analytics.Management.RemarketingAudience.Insert
+import Network.Google.Analytics.Management.RemarketingAudience.List
+import Network.Google.Analytics.Management.RemarketingAudience.Patch
+import Network.Google.Analytics.Management.RemarketingAudience.Update
+import Network.Google.Analytics.Management.Segments.List
+import Network.Google.Analytics.Management.UnsampledReports.Delete
+import Network.Google.Analytics.Management.UnsampledReports.Get
+import Network.Google.Analytics.Management.UnsampledReports.Insert
+import Network.Google.Analytics.Management.UnsampledReports.List
+import Network.Google.Analytics.Management.Uploads.DeleteUploadData
+import Network.Google.Analytics.Management.Uploads.Get
+import Network.Google.Analytics.Management.Uploads.List
+import Network.Google.Analytics.Management.Uploads.UploadData
+import Network.Google.Analytics.Management.WebPropertyAdWordsLinks.Delete
+import Network.Google.Analytics.Management.WebPropertyAdWordsLinks.Get
+import Network.Google.Analytics.Management.WebPropertyAdWordsLinks.Insert
+import Network.Google.Analytics.Management.WebPropertyAdWordsLinks.List
+import Network.Google.Analytics.Management.WebPropertyAdWordsLinks.Patch
+import Network.Google.Analytics.Management.WebPropertyAdWordsLinks.Update
+import Network.Google.Analytics.Management.Webproperties.Get
+import Network.Google.Analytics.Management.Webproperties.Insert
+import Network.Google.Analytics.Management.Webproperties.List
+import Network.Google.Analytics.Management.Webproperties.Patch
+import Network.Google.Analytics.Management.Webproperties.Update
+import Network.Google.Analytics.Management.WebpropertyUserLinks.Delete
+import Network.Google.Analytics.Management.WebpropertyUserLinks.Insert
+import Network.Google.Analytics.Management.WebpropertyUserLinks.List
+import Network.Google.Analytics.Management.WebpropertyUserLinks.Update
+import Network.Google.Analytics.Metadata.Columns.List
+import Network.Google.Analytics.Provisioning.CreateAccountTicket
+import Network.Google.Analytics.Provisioning.CreateAccountTree
 import Network.Google.Analytics.Types
-import Network.Google.Resource.Analytics.Data.Ga.Get
-import Network.Google.Resource.Analytics.Data.Mcf.Get
-import Network.Google.Resource.Analytics.Data.Realtime.Get
-import Network.Google.Resource.Analytics.Management.AccountSummaries.List
-import Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
-import Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
-import Network.Google.Resource.Analytics.Management.AccountUserLinks.List
-import Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
-import Network.Google.Resource.Analytics.Management.Accounts.List
-import Network.Google.Resource.Analytics.Management.ClientId.HashClientId
-import Network.Google.Resource.Analytics.Management.CustomDataSources.List
-import Network.Google.Resource.Analytics.Management.CustomDimensions.Get
-import Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
-import Network.Google.Resource.Analytics.Management.CustomDimensions.List
-import Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
-import Network.Google.Resource.Analytics.Management.CustomDimensions.Update
-import Network.Google.Resource.Analytics.Management.CustomMetrics.Get
-import Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
-import Network.Google.Resource.Analytics.Management.CustomMetrics.List
-import Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
-import Network.Google.Resource.Analytics.Management.CustomMetrics.Update
-import Network.Google.Resource.Analytics.Management.Experiments.Delete
-import Network.Google.Resource.Analytics.Management.Experiments.Get
-import Network.Google.Resource.Analytics.Management.Experiments.Insert
-import Network.Google.Resource.Analytics.Management.Experiments.List
-import Network.Google.Resource.Analytics.Management.Experiments.Patch
-import Network.Google.Resource.Analytics.Management.Experiments.Update
-import Network.Google.Resource.Analytics.Management.Filters.Delete
-import Network.Google.Resource.Analytics.Management.Filters.Get
-import Network.Google.Resource.Analytics.Management.Filters.Insert
-import Network.Google.Resource.Analytics.Management.Filters.List
-import Network.Google.Resource.Analytics.Management.Filters.Patch
-import Network.Google.Resource.Analytics.Management.Filters.Update
-import Network.Google.Resource.Analytics.Management.Goals.Get
-import Network.Google.Resource.Analytics.Management.Goals.Insert
-import Network.Google.Resource.Analytics.Management.Goals.List
-import Network.Google.Resource.Analytics.Management.Goals.Patch
-import Network.Google.Resource.Analytics.Management.Goals.Update
-import Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
-import Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
-import Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
-import Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
-import Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
-import Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
-import Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
-import Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
-import Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
-import Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
-import Network.Google.Resource.Analytics.Management.ProFiles.Delete
-import Network.Google.Resource.Analytics.Management.ProFiles.Get
-import Network.Google.Resource.Analytics.Management.ProFiles.Insert
-import Network.Google.Resource.Analytics.Management.ProFiles.List
-import Network.Google.Resource.Analytics.Management.ProFiles.Patch
-import Network.Google.Resource.Analytics.Management.ProFiles.Update
-import Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
-import Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
-import Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
-import Network.Google.Resource.Analytics.Management.RemarketingAudience.List
-import Network.Google.Resource.Analytics.Management.RemarketingAudience.Patch
-import Network.Google.Resource.Analytics.Management.RemarketingAudience.Update
-import Network.Google.Resource.Analytics.Management.Segments.List
-import Network.Google.Resource.Analytics.Management.UnSampledReports.Delete
-import Network.Google.Resource.Analytics.Management.UnSampledReports.Get
-import Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
-import Network.Google.Resource.Analytics.Management.UnSampledReports.List
-import Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
-import Network.Google.Resource.Analytics.Management.Uploads.Get
-import Network.Google.Resource.Analytics.Management.Uploads.List
-import Network.Google.Resource.Analytics.Management.Uploads.UploadData
-import Network.Google.Resource.Analytics.Management.WebProperties.Get
-import Network.Google.Resource.Analytics.Management.WebProperties.Insert
-import Network.Google.Resource.Analytics.Management.WebProperties.List
-import Network.Google.Resource.Analytics.Management.WebProperties.Patch
-import Network.Google.Resource.Analytics.Management.WebProperties.Update
-import Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
-import Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
-import Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
-import Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
-import Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
-import Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
-import Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
-import Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
-import Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
-import Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
-import Network.Google.Resource.Analytics.Metadata.Columns.List
-import Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
-import Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
-import Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Analytics API service.
-type AnalyticsAPI =
-     UserDeletionUserDeletionRequestUpsertResource :<|>
-       DataMcfGetResource
-       :<|> DataGaGetResource
-       :<|> DataRealtimeGetResource
-       :<|> ManagementClientIdHashClientIdResource
-       :<|> ManagementWebPropertyAdWordsLinksInsertResource
-       :<|> ManagementWebPropertyAdWordsLinksListResource
-       :<|> ManagementWebPropertyAdWordsLinksPatchResource
-       :<|> ManagementWebPropertyAdWordsLinksGetResource
-       :<|> ManagementWebPropertyAdWordsLinksDeleteResource
-       :<|> ManagementWebPropertyAdWordsLinksUpdateResource
-       :<|> ManagementUnSampledReportsInsertResource
-       :<|> ManagementUnSampledReportsListResource
-       :<|> ManagementUnSampledReportsGetResource
-       :<|> ManagementUnSampledReportsDeleteResource
-       :<|> ManagementRemarketingAudienceInsertResource
-       :<|> ManagementRemarketingAudienceListResource
-       :<|> ManagementRemarketingAudiencePatchResource
-       :<|> ManagementRemarketingAudienceGetResource
-       :<|> ManagementRemarketingAudienceDeleteResource
-       :<|> ManagementRemarketingAudienceUpdateResource
-       :<|> ManagementAccountsListResource
-       :<|> ManagementExperimentsInsertResource
-       :<|> ManagementExperimentsListResource
-       :<|> ManagementExperimentsPatchResource
-       :<|> ManagementExperimentsGetResource
-       :<|> ManagementExperimentsDeleteResource
-       :<|> ManagementExperimentsUpdateResource
-       :<|> ManagementCustomDataSourcesListResource
-       :<|> ManagementWebPropertyUserLinksInsertResource
-       :<|> ManagementWebPropertyUserLinksListResource
-       :<|> ManagementWebPropertyUserLinksDeleteResource
-       :<|> ManagementWebPropertyUserLinksUpdateResource
-       :<|> ManagementProFilesInsertResource
-       :<|> ManagementProFilesListResource
-       :<|> ManagementProFilesPatchResource
-       :<|> ManagementProFilesGetResource
-       :<|> ManagementProFilesDeleteResource
-       :<|> ManagementProFilesUpdateResource
-       :<|> ManagementFiltersInsertResource
-       :<|> ManagementFiltersListResource
-       :<|> ManagementFiltersPatchResource
-       :<|> ManagementFiltersGetResource
-       :<|> ManagementFiltersDeleteResource
-       :<|> ManagementFiltersUpdateResource
-       :<|> ManagementAccountSummariesListResource
-       :<|> ManagementGoalsInsertResource
-       :<|> ManagementGoalsListResource
-       :<|> ManagementGoalsPatchResource
-       :<|> ManagementGoalsGetResource
-       :<|> ManagementGoalsUpdateResource
-       :<|> ManagementWebPropertiesInsertResource
-       :<|> ManagementWebPropertiesListResource
-       :<|> ManagementWebPropertiesPatchResource
-       :<|> ManagementWebPropertiesGetResource
-       :<|> ManagementWebPropertiesUpdateResource
-       :<|> ManagementCustomMetricsInsertResource
-       :<|> ManagementCustomMetricsListResource
-       :<|> ManagementCustomMetricsPatchResource
-       :<|> ManagementCustomMetricsGetResource
-       :<|> ManagementCustomMetricsUpdateResource
-       :<|> ManagementUploadsListResource
-       :<|> ManagementUploadsDeleteUploadDataResource
-       :<|> ManagementUploadsGetResource
-       :<|> ManagementUploadsUploadDataResource
-       :<|> ManagementSegmentsListResource
-       :<|> ManagementProFileFilterLinksInsertResource
-       :<|> ManagementProFileFilterLinksListResource
-       :<|> ManagementProFileFilterLinksPatchResource
-       :<|> ManagementProFileFilterLinksGetResource
-       :<|> ManagementProFileFilterLinksDeleteResource
-       :<|> ManagementProFileFilterLinksUpdateResource
-       :<|> ManagementCustomDimensionsInsertResource
-       :<|> ManagementCustomDimensionsListResource
-       :<|> ManagementCustomDimensionsPatchResource
-       :<|> ManagementCustomDimensionsGetResource
-       :<|> ManagementCustomDimensionsUpdateResource
-       :<|> ManagementAccountUserLinksInsertResource
-       :<|> ManagementAccountUserLinksListResource
-       :<|> ManagementAccountUserLinksDeleteResource
-       :<|> ManagementAccountUserLinksUpdateResource
-       :<|> ManagementProFileUserLinksInsertResource
-       :<|> ManagementProFileUserLinksListResource
-       :<|> ManagementProFileUserLinksDeleteResource
-       :<|> ManagementProFileUserLinksUpdateResource
-       :<|> ProvisioningCreateAccountTreeResource
-       :<|> ProvisioningCreateAccountTicketResource
-       :<|> MetadataColumnsListResource
+import Network.Google.Analytics.UserDeletion.UserDeletionRequest.Upsert
