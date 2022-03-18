@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,944 +30,944 @@
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference>
 module Gogol.Container
-    (
-    -- * Configuration
-      containerService
+  ( -- * Configuration
+    containerService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Resources
 
     -- ** container.projects.aggregated.usableSubnetworks.list
-    , ContainerProjectsAggregatedUsableSubnetworksListResource
-    , newContainerProjectsAggregatedUsableSubnetworksList
-    , ContainerProjectsAggregatedUsableSubnetworksList
+    ContainerProjectsAggregatedUsableSubnetworksListResource,
+    newContainerProjectsAggregatedUsableSubnetworksList,
+    ContainerProjectsAggregatedUsableSubnetworksList,
 
     -- ** container.projects.locations.clusters.completeIpRotation
-    , ContainerProjectsLocationsClustersCompleteIpRotationResource
-    , newContainerProjectsLocationsClustersCompleteIpRotation
-    , ContainerProjectsLocationsClustersCompleteIpRotation
+    ContainerProjectsLocationsClustersCompleteIpRotationResource,
+    newContainerProjectsLocationsClustersCompleteIpRotation,
+    ContainerProjectsLocationsClustersCompleteIpRotation,
 
     -- ** container.projects.locations.clusters.create
-    , ContainerProjectsLocationsClustersCreateResource
-    , newContainerProjectsLocationsClustersCreate
-    , ContainerProjectsLocationsClustersCreate
+    ContainerProjectsLocationsClustersCreateResource,
+    newContainerProjectsLocationsClustersCreate,
+    ContainerProjectsLocationsClustersCreate,
 
     -- ** container.projects.locations.clusters.delete
-    , ContainerProjectsLocationsClustersDeleteResource
-    , newContainerProjectsLocationsClustersDelete
-    , ContainerProjectsLocationsClustersDelete
+    ContainerProjectsLocationsClustersDeleteResource,
+    newContainerProjectsLocationsClustersDelete,
+    ContainerProjectsLocationsClustersDelete,
 
     -- ** container.projects.locations.clusters.get
-    , ContainerProjectsLocationsClustersGetResource
-    , newContainerProjectsLocationsClustersGet
-    , ContainerProjectsLocationsClustersGet
+    ContainerProjectsLocationsClustersGetResource,
+    newContainerProjectsLocationsClustersGet,
+    ContainerProjectsLocationsClustersGet,
 
     -- ** container.projects.locations.clusters.getJwks
-    , ContainerProjectsLocationsClustersGetJwksResource
-    , newContainerProjectsLocationsClustersGetJwks
-    , ContainerProjectsLocationsClustersGetJwks
+    ContainerProjectsLocationsClustersGetJwksResource,
+    newContainerProjectsLocationsClustersGetJwks,
+    ContainerProjectsLocationsClustersGetJwks,
 
     -- ** container.projects.locations.clusters.list
-    , ContainerProjectsLocationsClustersListResource
-    , newContainerProjectsLocationsClustersList
-    , ContainerProjectsLocationsClustersList
+    ContainerProjectsLocationsClustersListResource,
+    newContainerProjectsLocationsClustersList,
+    ContainerProjectsLocationsClustersList,
 
     -- ** container.projects.locations.clusters.nodePools.create
-    , ContainerProjectsLocationsClustersNodePoolsCreateResource
-    , newContainerProjectsLocationsClustersNodePoolsCreate
-    , ContainerProjectsLocationsClustersNodePoolsCreate
+    ContainerProjectsLocationsClustersNodePoolsCreateResource,
+    newContainerProjectsLocationsClustersNodePoolsCreate,
+    ContainerProjectsLocationsClustersNodePoolsCreate,
 
     -- ** container.projects.locations.clusters.nodePools.delete
-    , ContainerProjectsLocationsClustersNodePoolsDeleteResource
-    , newContainerProjectsLocationsClustersNodePoolsDelete
-    , ContainerProjectsLocationsClustersNodePoolsDelete
+    ContainerProjectsLocationsClustersNodePoolsDeleteResource,
+    newContainerProjectsLocationsClustersNodePoolsDelete,
+    ContainerProjectsLocationsClustersNodePoolsDelete,
 
     -- ** container.projects.locations.clusters.nodePools.get
-    , ContainerProjectsLocationsClustersNodePoolsGetResource
-    , newContainerProjectsLocationsClustersNodePoolsGet
-    , ContainerProjectsLocationsClustersNodePoolsGet
+    ContainerProjectsLocationsClustersNodePoolsGetResource,
+    newContainerProjectsLocationsClustersNodePoolsGet,
+    ContainerProjectsLocationsClustersNodePoolsGet,
 
     -- ** container.projects.locations.clusters.nodePools.list
-    , ContainerProjectsLocationsClustersNodePoolsListResource
-    , newContainerProjectsLocationsClustersNodePoolsList
-    , ContainerProjectsLocationsClustersNodePoolsList
+    ContainerProjectsLocationsClustersNodePoolsListResource,
+    newContainerProjectsLocationsClustersNodePoolsList,
+    ContainerProjectsLocationsClustersNodePoolsList,
 
     -- ** container.projects.locations.clusters.nodePools.rollback
-    , ContainerProjectsLocationsClustersNodePoolsRollbackResource
-    , newContainerProjectsLocationsClustersNodePoolsRollback
-    , ContainerProjectsLocationsClustersNodePoolsRollback
+    ContainerProjectsLocationsClustersNodePoolsRollbackResource,
+    newContainerProjectsLocationsClustersNodePoolsRollback,
+    ContainerProjectsLocationsClustersNodePoolsRollback,
 
     -- ** container.projects.locations.clusters.nodePools.setAutoscaling
-    , ContainerProjectsLocationsClustersNodePoolsSetAutoscalingResource
-    , newContainerProjectsLocationsClustersNodePoolsSetAutoscaling
-    , ContainerProjectsLocationsClustersNodePoolsSetAutoscaling
+    ContainerProjectsLocationsClustersNodePoolsSetAutoscalingResource,
+    newContainerProjectsLocationsClustersNodePoolsSetAutoscaling,
+    ContainerProjectsLocationsClustersNodePoolsSetAutoscaling,
 
     -- ** container.projects.locations.clusters.nodePools.setManagement
-    , ContainerProjectsLocationsClustersNodePoolsSetManagementResource
-    , newContainerProjectsLocationsClustersNodePoolsSetManagement
-    , ContainerProjectsLocationsClustersNodePoolsSetManagement
+    ContainerProjectsLocationsClustersNodePoolsSetManagementResource,
+    newContainerProjectsLocationsClustersNodePoolsSetManagement,
+    ContainerProjectsLocationsClustersNodePoolsSetManagement,
 
     -- ** container.projects.locations.clusters.nodePools.setSize
-    , ContainerProjectsLocationsClustersNodePoolsSetSizeResource
-    , newContainerProjectsLocationsClustersNodePoolsSetSize
-    , ContainerProjectsLocationsClustersNodePoolsSetSize
+    ContainerProjectsLocationsClustersNodePoolsSetSizeResource,
+    newContainerProjectsLocationsClustersNodePoolsSetSize,
+    ContainerProjectsLocationsClustersNodePoolsSetSize,
 
     -- ** container.projects.locations.clusters.nodePools.update
-    , ContainerProjectsLocationsClustersNodePoolsUpdateResource
-    , newContainerProjectsLocationsClustersNodePoolsUpdate
-    , ContainerProjectsLocationsClustersNodePoolsUpdate
+    ContainerProjectsLocationsClustersNodePoolsUpdateResource,
+    newContainerProjectsLocationsClustersNodePoolsUpdate,
+    ContainerProjectsLocationsClustersNodePoolsUpdate,
 
     -- ** container.projects.locations.clusters.setAddons
-    , ContainerProjectsLocationsClustersSetAddonsResource
-    , newContainerProjectsLocationsClustersSetAddons
-    , ContainerProjectsLocationsClustersSetAddons
+    ContainerProjectsLocationsClustersSetAddonsResource,
+    newContainerProjectsLocationsClustersSetAddons,
+    ContainerProjectsLocationsClustersSetAddons,
 
     -- ** container.projects.locations.clusters.setLegacyAbac
-    , ContainerProjectsLocationsClustersSetLegacyAbacResource
-    , newContainerProjectsLocationsClustersSetLegacyAbac
-    , ContainerProjectsLocationsClustersSetLegacyAbac
+    ContainerProjectsLocationsClustersSetLegacyAbacResource,
+    newContainerProjectsLocationsClustersSetLegacyAbac,
+    ContainerProjectsLocationsClustersSetLegacyAbac,
 
     -- ** container.projects.locations.clusters.setLocations
-    , ContainerProjectsLocationsClustersSetLocationsResource
-    , newContainerProjectsLocationsClustersSetLocations
-    , ContainerProjectsLocationsClustersSetLocations
+    ContainerProjectsLocationsClustersSetLocationsResource,
+    newContainerProjectsLocationsClustersSetLocations,
+    ContainerProjectsLocationsClustersSetLocations,
 
     -- ** container.projects.locations.clusters.setLogging
-    , ContainerProjectsLocationsClustersSetLoggingResource
-    , newContainerProjectsLocationsClustersSetLogging
-    , ContainerProjectsLocationsClustersSetLogging
+    ContainerProjectsLocationsClustersSetLoggingResource,
+    newContainerProjectsLocationsClustersSetLogging,
+    ContainerProjectsLocationsClustersSetLogging,
 
     -- ** container.projects.locations.clusters.setMaintenancePolicy
-    , ContainerProjectsLocationsClustersSetMaintenancePolicyResource
-    , newContainerProjectsLocationsClustersSetMaintenancePolicy
-    , ContainerProjectsLocationsClustersSetMaintenancePolicy
+    ContainerProjectsLocationsClustersSetMaintenancePolicyResource,
+    newContainerProjectsLocationsClustersSetMaintenancePolicy,
+    ContainerProjectsLocationsClustersSetMaintenancePolicy,
 
     -- ** container.projects.locations.clusters.setMasterAuth
-    , ContainerProjectsLocationsClustersSetMasterAuthResource
-    , newContainerProjectsLocationsClustersSetMasterAuth
-    , ContainerProjectsLocationsClustersSetMasterAuth
+    ContainerProjectsLocationsClustersSetMasterAuthResource,
+    newContainerProjectsLocationsClustersSetMasterAuth,
+    ContainerProjectsLocationsClustersSetMasterAuth,
 
     -- ** container.projects.locations.clusters.setMonitoring
-    , ContainerProjectsLocationsClustersSetMonitoringResource
-    , newContainerProjectsLocationsClustersSetMonitoring
-    , ContainerProjectsLocationsClustersSetMonitoring
+    ContainerProjectsLocationsClustersSetMonitoringResource,
+    newContainerProjectsLocationsClustersSetMonitoring,
+    ContainerProjectsLocationsClustersSetMonitoring,
 
     -- ** container.projects.locations.clusters.setNetworkPolicy
-    , ContainerProjectsLocationsClustersSetNetworkPolicyResource
-    , newContainerProjectsLocationsClustersSetNetworkPolicy
-    , ContainerProjectsLocationsClustersSetNetworkPolicy
+    ContainerProjectsLocationsClustersSetNetworkPolicyResource,
+    newContainerProjectsLocationsClustersSetNetworkPolicy,
+    ContainerProjectsLocationsClustersSetNetworkPolicy,
 
     -- ** container.projects.locations.clusters.setResourceLabels
-    , ContainerProjectsLocationsClustersSetResourceLabelsResource
-    , newContainerProjectsLocationsClustersSetResourceLabels
-    , ContainerProjectsLocationsClustersSetResourceLabels
+    ContainerProjectsLocationsClustersSetResourceLabelsResource,
+    newContainerProjectsLocationsClustersSetResourceLabels,
+    ContainerProjectsLocationsClustersSetResourceLabels,
 
     -- ** container.projects.locations.clusters.startIpRotation
-    , ContainerProjectsLocationsClustersStartIpRotationResource
-    , newContainerProjectsLocationsClustersStartIpRotation
-    , ContainerProjectsLocationsClustersStartIpRotation
+    ContainerProjectsLocationsClustersStartIpRotationResource,
+    newContainerProjectsLocationsClustersStartIpRotation,
+    ContainerProjectsLocationsClustersStartIpRotation,
 
     -- ** container.projects.locations.clusters.update
-    , ContainerProjectsLocationsClustersUpdateResource
-    , newContainerProjectsLocationsClustersUpdate
-    , ContainerProjectsLocationsClustersUpdate
+    ContainerProjectsLocationsClustersUpdateResource,
+    newContainerProjectsLocationsClustersUpdate,
+    ContainerProjectsLocationsClustersUpdate,
 
     -- ** container.projects.locations.clusters.updateMaster
-    , ContainerProjectsLocationsClustersUpdateMasterResource
-    , newContainerProjectsLocationsClustersUpdateMaster
-    , ContainerProjectsLocationsClustersUpdateMaster
+    ContainerProjectsLocationsClustersUpdateMasterResource,
+    newContainerProjectsLocationsClustersUpdateMaster,
+    ContainerProjectsLocationsClustersUpdateMaster,
 
     -- ** container.projects.locations.clusters.wellknown.getOpenidconfiguration
-    , ContainerProjectsLocationsClustersWellknownGetOpenidconfigurationResource
-    , newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
-    , ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
+    ContainerProjectsLocationsClustersWellknownGetOpenidconfigurationResource,
+    newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration,
+    ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration,
 
     -- ** container.projects.locations.getServerConfig
-    , ContainerProjectsLocationsGetServerConfigResource
-    , newContainerProjectsLocationsGetServerConfig
-    , ContainerProjectsLocationsGetServerConfig
+    ContainerProjectsLocationsGetServerConfigResource,
+    newContainerProjectsLocationsGetServerConfig,
+    ContainerProjectsLocationsGetServerConfig,
 
     -- ** container.projects.locations.operations.cancel
-    , ContainerProjectsLocationsOperationsCancelResource
-    , newContainerProjectsLocationsOperationsCancel
-    , ContainerProjectsLocationsOperationsCancel
+    ContainerProjectsLocationsOperationsCancelResource,
+    newContainerProjectsLocationsOperationsCancel,
+    ContainerProjectsLocationsOperationsCancel,
 
     -- ** container.projects.locations.operations.get
-    , ContainerProjectsLocationsOperationsGetResource
-    , newContainerProjectsLocationsOperationsGet
-    , ContainerProjectsLocationsOperationsGet
+    ContainerProjectsLocationsOperationsGetResource,
+    newContainerProjectsLocationsOperationsGet,
+    ContainerProjectsLocationsOperationsGet,
 
     -- ** container.projects.locations.operations.list
-    , ContainerProjectsLocationsOperationsListResource
-    , newContainerProjectsLocationsOperationsList
-    , ContainerProjectsLocationsOperationsList
+    ContainerProjectsLocationsOperationsListResource,
+    newContainerProjectsLocationsOperationsList,
+    ContainerProjectsLocationsOperationsList,
 
     -- ** container.projects.zones.clusters.addons
-    , ContainerProjectsZonesClustersAddonsResource
-    , newContainerProjectsZonesClustersAddons
-    , ContainerProjectsZonesClustersAddons
+    ContainerProjectsZonesClustersAddonsResource,
+    newContainerProjectsZonesClustersAddons,
+    ContainerProjectsZonesClustersAddons,
 
     -- ** container.projects.zones.clusters.completeIpRotation
-    , ContainerProjectsZonesClustersCompleteIpRotationResource
-    , newContainerProjectsZonesClustersCompleteIpRotation
-    , ContainerProjectsZonesClustersCompleteIpRotation
+    ContainerProjectsZonesClustersCompleteIpRotationResource,
+    newContainerProjectsZonesClustersCompleteIpRotation,
+    ContainerProjectsZonesClustersCompleteIpRotation,
 
     -- ** container.projects.zones.clusters.create
-    , ContainerProjectsZonesClustersCreateResource
-    , newContainerProjectsZonesClustersCreate
-    , ContainerProjectsZonesClustersCreate
+    ContainerProjectsZonesClustersCreateResource,
+    newContainerProjectsZonesClustersCreate,
+    ContainerProjectsZonesClustersCreate,
 
     -- ** container.projects.zones.clusters.delete
-    , ContainerProjectsZonesClustersDeleteResource
-    , newContainerProjectsZonesClustersDelete
-    , ContainerProjectsZonesClustersDelete
+    ContainerProjectsZonesClustersDeleteResource,
+    newContainerProjectsZonesClustersDelete,
+    ContainerProjectsZonesClustersDelete,
 
     -- ** container.projects.zones.clusters.get
-    , ContainerProjectsZonesClustersGetResource
-    , newContainerProjectsZonesClustersGet
-    , ContainerProjectsZonesClustersGet
+    ContainerProjectsZonesClustersGetResource,
+    newContainerProjectsZonesClustersGet,
+    ContainerProjectsZonesClustersGet,
 
     -- ** container.projects.zones.clusters.legacyAbac
-    , ContainerProjectsZonesClustersLegacyAbacResource
-    , newContainerProjectsZonesClustersLegacyAbac
-    , ContainerProjectsZonesClustersLegacyAbac
+    ContainerProjectsZonesClustersLegacyAbacResource,
+    newContainerProjectsZonesClustersLegacyAbac,
+    ContainerProjectsZonesClustersLegacyAbac,
 
     -- ** container.projects.zones.clusters.list
-    , ContainerProjectsZonesClustersListResource
-    , newContainerProjectsZonesClustersList
-    , ContainerProjectsZonesClustersList
+    ContainerProjectsZonesClustersListResource,
+    newContainerProjectsZonesClustersList,
+    ContainerProjectsZonesClustersList,
 
     -- ** container.projects.zones.clusters.locations
-    , ContainerProjectsZonesClustersLocationsResource
-    , newContainerProjectsZonesClustersLocations
-    , ContainerProjectsZonesClustersLocations
+    ContainerProjectsZonesClustersLocationsResource,
+    newContainerProjectsZonesClustersLocations,
+    ContainerProjectsZonesClustersLocations,
 
     -- ** container.projects.zones.clusters.logging
-    , ContainerProjectsZonesClustersLoggingResource
-    , newContainerProjectsZonesClustersLogging
-    , ContainerProjectsZonesClustersLogging
+    ContainerProjectsZonesClustersLoggingResource,
+    newContainerProjectsZonesClustersLogging,
+    ContainerProjectsZonesClustersLogging,
 
     -- ** container.projects.zones.clusters.master
-    , ContainerProjectsZonesClustersMasterResource
-    , newContainerProjectsZonesClustersMaster
-    , ContainerProjectsZonesClustersMaster
+    ContainerProjectsZonesClustersMasterResource,
+    newContainerProjectsZonesClustersMaster,
+    ContainerProjectsZonesClustersMaster,
 
     -- ** container.projects.zones.clusters.monitoring
-    , ContainerProjectsZonesClustersMonitoringResource
-    , newContainerProjectsZonesClustersMonitoring
-    , ContainerProjectsZonesClustersMonitoring
+    ContainerProjectsZonesClustersMonitoringResource,
+    newContainerProjectsZonesClustersMonitoring,
+    ContainerProjectsZonesClustersMonitoring,
 
     -- ** container.projects.zones.clusters.nodePools.autoscaling
-    , ContainerProjectsZonesClustersNodePoolsAutoscalingResource
-    , newContainerProjectsZonesClustersNodePoolsAutoscaling
-    , ContainerProjectsZonesClustersNodePoolsAutoscaling
+    ContainerProjectsZonesClustersNodePoolsAutoscalingResource,
+    newContainerProjectsZonesClustersNodePoolsAutoscaling,
+    ContainerProjectsZonesClustersNodePoolsAutoscaling,
 
     -- ** container.projects.zones.clusters.nodePools.create
-    , ContainerProjectsZonesClustersNodePoolsCreateResource
-    , newContainerProjectsZonesClustersNodePoolsCreate
-    , ContainerProjectsZonesClustersNodePoolsCreate
+    ContainerProjectsZonesClustersNodePoolsCreateResource,
+    newContainerProjectsZonesClustersNodePoolsCreate,
+    ContainerProjectsZonesClustersNodePoolsCreate,
 
     -- ** container.projects.zones.clusters.nodePools.delete
-    , ContainerProjectsZonesClustersNodePoolsDeleteResource
-    , newContainerProjectsZonesClustersNodePoolsDelete
-    , ContainerProjectsZonesClustersNodePoolsDelete
+    ContainerProjectsZonesClustersNodePoolsDeleteResource,
+    newContainerProjectsZonesClustersNodePoolsDelete,
+    ContainerProjectsZonesClustersNodePoolsDelete,
 
     -- ** container.projects.zones.clusters.nodePools.get
-    , ContainerProjectsZonesClustersNodePoolsGetResource
-    , newContainerProjectsZonesClustersNodePoolsGet
-    , ContainerProjectsZonesClustersNodePoolsGet
+    ContainerProjectsZonesClustersNodePoolsGetResource,
+    newContainerProjectsZonesClustersNodePoolsGet,
+    ContainerProjectsZonesClustersNodePoolsGet,
 
     -- ** container.projects.zones.clusters.nodePools.list
-    , ContainerProjectsZonesClustersNodePoolsListResource
-    , newContainerProjectsZonesClustersNodePoolsList
-    , ContainerProjectsZonesClustersNodePoolsList
+    ContainerProjectsZonesClustersNodePoolsListResource,
+    newContainerProjectsZonesClustersNodePoolsList,
+    ContainerProjectsZonesClustersNodePoolsList,
 
     -- ** container.projects.zones.clusters.nodePools.rollback
-    , ContainerProjectsZonesClustersNodePoolsRollbackResource
-    , newContainerProjectsZonesClustersNodePoolsRollback
-    , ContainerProjectsZonesClustersNodePoolsRollback
+    ContainerProjectsZonesClustersNodePoolsRollbackResource,
+    newContainerProjectsZonesClustersNodePoolsRollback,
+    ContainerProjectsZonesClustersNodePoolsRollback,
 
     -- ** container.projects.zones.clusters.nodePools.setManagement
-    , ContainerProjectsZonesClustersNodePoolsSetManagementResource
-    , newContainerProjectsZonesClustersNodePoolsSetManagement
-    , ContainerProjectsZonesClustersNodePoolsSetManagement
+    ContainerProjectsZonesClustersNodePoolsSetManagementResource,
+    newContainerProjectsZonesClustersNodePoolsSetManagement,
+    ContainerProjectsZonesClustersNodePoolsSetManagement,
 
     -- ** container.projects.zones.clusters.nodePools.setSize
-    , ContainerProjectsZonesClustersNodePoolsSetSizeResource
-    , newContainerProjectsZonesClustersNodePoolsSetSize
-    , ContainerProjectsZonesClustersNodePoolsSetSize
+    ContainerProjectsZonesClustersNodePoolsSetSizeResource,
+    newContainerProjectsZonesClustersNodePoolsSetSize,
+    ContainerProjectsZonesClustersNodePoolsSetSize,
 
     -- ** container.projects.zones.clusters.nodePools.update
-    , ContainerProjectsZonesClustersNodePoolsUpdateResource
-    , newContainerProjectsZonesClustersNodePoolsUpdate
-    , ContainerProjectsZonesClustersNodePoolsUpdate
+    ContainerProjectsZonesClustersNodePoolsUpdateResource,
+    newContainerProjectsZonesClustersNodePoolsUpdate,
+    ContainerProjectsZonesClustersNodePoolsUpdate,
 
     -- ** container.projects.zones.clusters.resourceLabels
-    , ContainerProjectsZonesClustersResourceLabelsResource
-    , newContainerProjectsZonesClustersResourceLabels
-    , ContainerProjectsZonesClustersResourceLabels
+    ContainerProjectsZonesClustersResourceLabelsResource,
+    newContainerProjectsZonesClustersResourceLabels,
+    ContainerProjectsZonesClustersResourceLabels,
 
     -- ** container.projects.zones.clusters.setMaintenancePolicy
-    , ContainerProjectsZonesClustersSetMaintenancePolicyResource
-    , newContainerProjectsZonesClustersSetMaintenancePolicy
-    , ContainerProjectsZonesClustersSetMaintenancePolicy
+    ContainerProjectsZonesClustersSetMaintenancePolicyResource,
+    newContainerProjectsZonesClustersSetMaintenancePolicy,
+    ContainerProjectsZonesClustersSetMaintenancePolicy,
 
     -- ** container.projects.zones.clusters.setMasterAuth
-    , ContainerProjectsZonesClustersSetMasterAuthResource
-    , newContainerProjectsZonesClustersSetMasterAuth
-    , ContainerProjectsZonesClustersSetMasterAuth
+    ContainerProjectsZonesClustersSetMasterAuthResource,
+    newContainerProjectsZonesClustersSetMasterAuth,
+    ContainerProjectsZonesClustersSetMasterAuth,
 
     -- ** container.projects.zones.clusters.setNetworkPolicy
-    , ContainerProjectsZonesClustersSetNetworkPolicyResource
-    , newContainerProjectsZonesClustersSetNetworkPolicy
-    , ContainerProjectsZonesClustersSetNetworkPolicy
+    ContainerProjectsZonesClustersSetNetworkPolicyResource,
+    newContainerProjectsZonesClustersSetNetworkPolicy,
+    ContainerProjectsZonesClustersSetNetworkPolicy,
 
     -- ** container.projects.zones.clusters.startIpRotation
-    , ContainerProjectsZonesClustersStartIpRotationResource
-    , newContainerProjectsZonesClustersStartIpRotation
-    , ContainerProjectsZonesClustersStartIpRotation
+    ContainerProjectsZonesClustersStartIpRotationResource,
+    newContainerProjectsZonesClustersStartIpRotation,
+    ContainerProjectsZonesClustersStartIpRotation,
 
     -- ** container.projects.zones.clusters.update
-    , ContainerProjectsZonesClustersUpdateResource
-    , newContainerProjectsZonesClustersUpdate
-    , ContainerProjectsZonesClustersUpdate
+    ContainerProjectsZonesClustersUpdateResource,
+    newContainerProjectsZonesClustersUpdate,
+    ContainerProjectsZonesClustersUpdate,
 
     -- ** container.projects.zones.getServerconfig
-    , ContainerProjectsZonesGetServerconfigResource
-    , newContainerProjectsZonesGetServerconfig
-    , ContainerProjectsZonesGetServerconfig
+    ContainerProjectsZonesGetServerconfigResource,
+    newContainerProjectsZonesGetServerconfig,
+    ContainerProjectsZonesGetServerconfig,
 
     -- ** container.projects.zones.operations.cancel
-    , ContainerProjectsZonesOperationsCancelResource
-    , newContainerProjectsZonesOperationsCancel
-    , ContainerProjectsZonesOperationsCancel
+    ContainerProjectsZonesOperationsCancelResource,
+    newContainerProjectsZonesOperationsCancel,
+    ContainerProjectsZonesOperationsCancel,
 
     -- ** container.projects.zones.operations.get
-    , ContainerProjectsZonesOperationsGetResource
-    , newContainerProjectsZonesOperationsGet
-    , ContainerProjectsZonesOperationsGet
+    ContainerProjectsZonesOperationsGetResource,
+    newContainerProjectsZonesOperationsGet,
+    ContainerProjectsZonesOperationsGet,
 
     -- ** container.projects.zones.operations.list
-    , ContainerProjectsZonesOperationsListResource
-    , newContainerProjectsZonesOperationsList
-    , ContainerProjectsZonesOperationsList
+    ContainerProjectsZonesOperationsListResource,
+    newContainerProjectsZonesOperationsList,
+    ContainerProjectsZonesOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AcceleratorConfig
-    , AcceleratorConfig (..)
-    , newAcceleratorConfig
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
 
     -- ** AddonsConfig
-    , AddonsConfig (..)
-    , newAddonsConfig
+    AddonsConfig (..),
+    newAddonsConfig,
 
     -- ** AdvancedMachineFeatures
-    , AdvancedMachineFeatures (..)
-    , newAdvancedMachineFeatures
+    AdvancedMachineFeatures (..),
+    newAdvancedMachineFeatures,
 
     -- ** AuthenticatorGroupsConfig
-    , AuthenticatorGroupsConfig (..)
-    , newAuthenticatorGroupsConfig
+    AuthenticatorGroupsConfig (..),
+    newAuthenticatorGroupsConfig,
 
     -- ** AutoUpgradeOptions
-    , AutoUpgradeOptions (..)
-    , newAutoUpgradeOptions
+    AutoUpgradeOptions (..),
+    newAutoUpgradeOptions,
 
     -- ** Autopilot
-    , Autopilot (..)
-    , newAutopilot
+    Autopilot (..),
+    newAutopilot,
 
     -- ** AutoprovisioningNodePoolDefaults
-    , AutoprovisioningNodePoolDefaults (..)
-    , newAutoprovisioningNodePoolDefaults
+    AutoprovisioningNodePoolDefaults (..),
+    newAutoprovisioningNodePoolDefaults,
 
     -- ** BigQueryDestination
-    , BigQueryDestination (..)
-    , newBigQueryDestination
+    BigQueryDestination (..),
+    newBigQueryDestination,
 
     -- ** BinaryAuthorization
-    , BinaryAuthorization (..)
-    , newBinaryAuthorization
+    BinaryAuthorization (..),
+    newBinaryAuthorization,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** CidrBlock
-    , CidrBlock (..)
-    , newCidrBlock
+    CidrBlock (..),
+    newCidrBlock,
 
     -- ** ClientCertificateConfig
-    , ClientCertificateConfig (..)
-    , newClientCertificateConfig
+    ClientCertificateConfig (..),
+    newClientCertificateConfig,
 
     -- ** CloudRunConfig
-    , CloudRunConfig (..)
-    , newCloudRunConfig
+    CloudRunConfig (..),
+    newCloudRunConfig,
 
     -- ** CloudRunConfig_LoadBalancerType
-    , CloudRunConfig_LoadBalancerType (..)
+    CloudRunConfig_LoadBalancerType (..),
 
     -- ** Cluster
-    , Cluster (..)
-    , newCluster
+    Cluster (..),
+    newCluster,
 
     -- ** Cluster_ResourceLabels
-    , Cluster_ResourceLabels (..)
-    , newCluster_ResourceLabels
+    Cluster_ResourceLabels (..),
+    newCluster_ResourceLabels,
 
     -- ** Cluster_Status
-    , Cluster_Status (..)
+    Cluster_Status (..),
 
     -- ** ClusterAutoscaling
-    , ClusterAutoscaling (..)
-    , newClusterAutoscaling
+    ClusterAutoscaling (..),
+    newClusterAutoscaling,
 
     -- ** ClusterAutoscaling_AutoscalingProfile
-    , ClusterAutoscaling_AutoscalingProfile (..)
+    ClusterAutoscaling_AutoscalingProfile (..),
 
     -- ** ClusterUpdate
-    , ClusterUpdate (..)
-    , newClusterUpdate
+    ClusterUpdate (..),
+    newClusterUpdate,
 
     -- ** ClusterUpdate_DesiredDatapathProvider
-    , ClusterUpdate_DesiredDatapathProvider (..)
+    ClusterUpdate_DesiredDatapathProvider (..),
 
     -- ** ClusterUpdate_DesiredPrivateIpv6GoogleAccess
-    , ClusterUpdate_DesiredPrivateIpv6GoogleAccess (..)
+    ClusterUpdate_DesiredPrivateIpv6GoogleAccess (..),
 
     -- ** CompleteIPRotationRequest
-    , CompleteIPRotationRequest (..)
-    , newCompleteIPRotationRequest
+    CompleteIPRotationRequest (..),
+    newCompleteIPRotationRequest,
 
     -- ** ConfidentialNodes
-    , ConfidentialNodes (..)
-    , newConfidentialNodes
+    ConfidentialNodes (..),
+    newConfidentialNodes,
 
     -- ** ConfigConnectorConfig
-    , ConfigConnectorConfig (..)
-    , newConfigConnectorConfig
+    ConfigConnectorConfig (..),
+    newConfigConnectorConfig,
 
     -- ** ConsumptionMeteringConfig
-    , ConsumptionMeteringConfig (..)
-    , newConsumptionMeteringConfig
+    ConsumptionMeteringConfig (..),
+    newConsumptionMeteringConfig,
 
     -- ** CreateClusterRequest
-    , CreateClusterRequest (..)
-    , newCreateClusterRequest
+    CreateClusterRequest (..),
+    newCreateClusterRequest,
 
     -- ** CreateNodePoolRequest
-    , CreateNodePoolRequest (..)
-    , newCreateNodePoolRequest
+    CreateNodePoolRequest (..),
+    newCreateNodePoolRequest,
 
     -- ** DNSConfig
-    , DNSConfig (..)
-    , newDNSConfig
+    DNSConfig (..),
+    newDNSConfig,
 
     -- ** DNSConfig_ClusterDns
-    , DNSConfig_ClusterDns (..)
+    DNSConfig_ClusterDns (..),
 
     -- ** DNSConfig_ClusterDnsScope
-    , DNSConfig_ClusterDnsScope (..)
+    DNSConfig_ClusterDnsScope (..),
 
     -- ** DailyMaintenanceWindow
-    , DailyMaintenanceWindow (..)
-    , newDailyMaintenanceWindow
+    DailyMaintenanceWindow (..),
+    newDailyMaintenanceWindow,
 
     -- ** DatabaseEncryption
-    , DatabaseEncryption (..)
-    , newDatabaseEncryption
+    DatabaseEncryption (..),
+    newDatabaseEncryption,
 
     -- ** DatabaseEncryption_State
-    , DatabaseEncryption_State (..)
+    DatabaseEncryption_State (..),
 
     -- ** DefaultSnatStatus
-    , DefaultSnatStatus (..)
-    , newDefaultSnatStatus
+    DefaultSnatStatus (..),
+    newDefaultSnatStatus,
 
     -- ** DnsCacheConfig
-    , DnsCacheConfig (..)
-    , newDnsCacheConfig
+    DnsCacheConfig (..),
+    newDnsCacheConfig,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Filter
-    , Filter (..)
-    , newFilter
+    Filter (..),
+    newFilter,
 
     -- ** Filter_EventTypeItem
-    , Filter_EventTypeItem (..)
+    Filter_EventTypeItem (..),
 
     -- ** GcePersistentDiskCsiDriverConfig
-    , GcePersistentDiskCsiDriverConfig (..)
-    , newGcePersistentDiskCsiDriverConfig
+    GcePersistentDiskCsiDriverConfig (..),
+    newGcePersistentDiskCsiDriverConfig,
 
     -- ** GcfsConfig
-    , GcfsConfig (..)
-    , newGcfsConfig
+    GcfsConfig (..),
+    newGcfsConfig,
 
     -- ** GcpFilestoreCsiDriverConfig
-    , GcpFilestoreCsiDriverConfig (..)
-    , newGcpFilestoreCsiDriverConfig
+    GcpFilestoreCsiDriverConfig (..),
+    newGcpFilestoreCsiDriverConfig,
 
     -- ** GetJSONWebKeysResponse
-    , GetJSONWebKeysResponse (..)
-    , newGetJSONWebKeysResponse
+    GetJSONWebKeysResponse (..),
+    newGetJSONWebKeysResponse,
 
     -- ** GetOpenIDConfigResponse
-    , GetOpenIDConfigResponse (..)
-    , newGetOpenIDConfigResponse
+    GetOpenIDConfigResponse (..),
+    newGetOpenIDConfigResponse,
 
     -- ** HorizontalPodAutoscaling
-    , HorizontalPodAutoscaling (..)
-    , newHorizontalPodAutoscaling
+    HorizontalPodAutoscaling (..),
+    newHorizontalPodAutoscaling,
 
     -- ** HttpCacheControlResponseHeader
-    , HttpCacheControlResponseHeader (..)
-    , newHttpCacheControlResponseHeader
+    HttpCacheControlResponseHeader (..),
+    newHttpCacheControlResponseHeader,
 
     -- ** HttpLoadBalancing
-    , HttpLoadBalancing (..)
-    , newHttpLoadBalancing
+    HttpLoadBalancing (..),
+    newHttpLoadBalancing,
 
     -- ** ILBSubsettingConfig
-    , ILBSubsettingConfig (..)
-    , newILBSubsettingConfig
+    ILBSubsettingConfig (..),
+    newILBSubsettingConfig,
 
     -- ** IPAllocationPolicy
-    , IPAllocationPolicy (..)
-    , newIPAllocationPolicy
+    IPAllocationPolicy (..),
+    newIPAllocationPolicy,
 
     -- ** IdentityServiceConfig
-    , IdentityServiceConfig (..)
-    , newIdentityServiceConfig
+    IdentityServiceConfig (..),
+    newIdentityServiceConfig,
 
     -- ** IntraNodeVisibilityConfig
-    , IntraNodeVisibilityConfig (..)
-    , newIntraNodeVisibilityConfig
+    IntraNodeVisibilityConfig (..),
+    newIntraNodeVisibilityConfig,
 
     -- ** Jwk
-    , Jwk (..)
-    , newJwk
+    Jwk (..),
+    newJwk,
 
     -- ** KubernetesDashboard
-    , KubernetesDashboard (..)
-    , newKubernetesDashboard
+    KubernetesDashboard (..),
+    newKubernetesDashboard,
 
     -- ** LegacyAbac
-    , LegacyAbac (..)
-    , newLegacyAbac
+    LegacyAbac (..),
+    newLegacyAbac,
 
     -- ** LinuxNodeConfig
-    , LinuxNodeConfig (..)
-    , newLinuxNodeConfig
+    LinuxNodeConfig (..),
+    newLinuxNodeConfig,
 
     -- ** LinuxNodeConfig_Sysctls
-    , LinuxNodeConfig_Sysctls (..)
-    , newLinuxNodeConfig_Sysctls
+    LinuxNodeConfig_Sysctls (..),
+    newLinuxNodeConfig_Sysctls,
 
     -- ** ListClustersResponse
-    , ListClustersResponse (..)
-    , newListClustersResponse
+    ListClustersResponse (..),
+    newListClustersResponse,
 
     -- ** ListNodePoolsResponse
-    , ListNodePoolsResponse (..)
-    , newListNodePoolsResponse
+    ListNodePoolsResponse (..),
+    newListNodePoolsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListUsableSubnetworksResponse
-    , ListUsableSubnetworksResponse (..)
-    , newListUsableSubnetworksResponse
+    ListUsableSubnetworksResponse (..),
+    newListUsableSubnetworksResponse,
 
     -- ** LoggingComponentConfig
-    , LoggingComponentConfig (..)
-    , newLoggingComponentConfig
+    LoggingComponentConfig (..),
+    newLoggingComponentConfig,
 
     -- ** LoggingComponentConfig_EnableComponentsItem
-    , LoggingComponentConfig_EnableComponentsItem (..)
+    LoggingComponentConfig_EnableComponentsItem (..),
 
     -- ** LoggingConfig
-    , LoggingConfig (..)
-    , newLoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
 
     -- ** MaintenanceExclusionOptions
-    , MaintenanceExclusionOptions (..)
-    , newMaintenanceExclusionOptions
+    MaintenanceExclusionOptions (..),
+    newMaintenanceExclusionOptions,
 
     -- ** MaintenanceExclusionOptions_Scope
-    , MaintenanceExclusionOptions_Scope (..)
+    MaintenanceExclusionOptions_Scope (..),
 
     -- ** MaintenancePolicy
-    , MaintenancePolicy (..)
-    , newMaintenancePolicy
+    MaintenancePolicy (..),
+    newMaintenancePolicy,
 
     -- ** MaintenanceWindow
-    , MaintenanceWindow (..)
-    , newMaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
 
     -- ** MaintenanceWindow_MaintenanceExclusions
-    , MaintenanceWindow_MaintenanceExclusions (..)
-    , newMaintenanceWindow_MaintenanceExclusions
+    MaintenanceWindow_MaintenanceExclusions (..),
+    newMaintenanceWindow_MaintenanceExclusions,
 
     -- ** MasterAuth
-    , MasterAuth (..)
-    , newMasterAuth
+    MasterAuth (..),
+    newMasterAuth,
 
     -- ** MasterAuthorizedNetworksConfig
-    , MasterAuthorizedNetworksConfig (..)
-    , newMasterAuthorizedNetworksConfig
+    MasterAuthorizedNetworksConfig (..),
+    newMasterAuthorizedNetworksConfig,
 
     -- ** MaxPodsConstraint
-    , MaxPodsConstraint (..)
-    , newMaxPodsConstraint
+    MaxPodsConstraint (..),
+    newMaxPodsConstraint,
 
     -- ** MeshCertificates
-    , MeshCertificates (..)
-    , newMeshCertificates
+    MeshCertificates (..),
+    newMeshCertificates,
 
     -- ** Metric
-    , Metric (..)
-    , newMetric
+    Metric (..),
+    newMetric,
 
     -- ** MonitoringComponentConfig
-    , MonitoringComponentConfig (..)
-    , newMonitoringComponentConfig
+    MonitoringComponentConfig (..),
+    newMonitoringComponentConfig,
 
     -- ** MonitoringComponentConfig_EnableComponentsItem
-    , MonitoringComponentConfig_EnableComponentsItem (..)
+    MonitoringComponentConfig_EnableComponentsItem (..),
 
     -- ** MonitoringConfig
-    , MonitoringConfig (..)
-    , newMonitoringConfig
+    MonitoringConfig (..),
+    newMonitoringConfig,
 
     -- ** NetworkConfig
-    , NetworkConfig (..)
-    , newNetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
 
     -- ** NetworkConfig_DatapathProvider
-    , NetworkConfig_DatapathProvider (..)
+    NetworkConfig_DatapathProvider (..),
 
     -- ** NetworkConfig_PrivateIpv6GoogleAccess
-    , NetworkConfig_PrivateIpv6GoogleAccess (..)
+    NetworkConfig_PrivateIpv6GoogleAccess (..),
 
     -- ** NetworkPolicy
-    , NetworkPolicy (..)
-    , newNetworkPolicy
+    NetworkPolicy (..),
+    newNetworkPolicy,
 
     -- ** NetworkPolicy_Provider
-    , NetworkPolicy_Provider (..)
+    NetworkPolicy_Provider (..),
 
     -- ** NetworkPolicyConfig
-    , NetworkPolicyConfig (..)
-    , newNetworkPolicyConfig
+    NetworkPolicyConfig (..),
+    newNetworkPolicyConfig,
 
     -- ** NetworkTags
-    , NetworkTags (..)
-    , newNetworkTags
+    NetworkTags (..),
+    newNetworkTags,
 
     -- ** NodeConfig
-    , NodeConfig (..)
-    , newNodeConfig
+    NodeConfig (..),
+    newNodeConfig,
 
     -- ** NodeConfig_Labels
-    , NodeConfig_Labels (..)
-    , newNodeConfig_Labels
+    NodeConfig_Labels (..),
+    newNodeConfig_Labels,
 
     -- ** NodeConfig_Metadata
-    , NodeConfig_Metadata (..)
-    , newNodeConfig_Metadata
+    NodeConfig_Metadata (..),
+    newNodeConfig_Metadata,
 
     -- ** NodeConfigDefaults
-    , NodeConfigDefaults (..)
-    , newNodeConfigDefaults
+    NodeConfigDefaults (..),
+    newNodeConfigDefaults,
 
     -- ** NodeKubeletConfig
-    , NodeKubeletConfig (..)
-    , newNodeKubeletConfig
+    NodeKubeletConfig (..),
+    newNodeKubeletConfig,
 
     -- ** NodeManagement
-    , NodeManagement (..)
-    , newNodeManagement
+    NodeManagement (..),
+    newNodeManagement,
 
     -- ** NodeNetworkConfig
-    , NodeNetworkConfig (..)
-    , newNodeNetworkConfig
+    NodeNetworkConfig (..),
+    newNodeNetworkConfig,
 
     -- ** NodePool
-    , NodePool (..)
-    , newNodePool
+    NodePool (..),
+    newNodePool,
 
     -- ** NodePool_Status
-    , NodePool_Status (..)
+    NodePool_Status (..),
 
     -- ** NodePoolAutoConfig
-    , NodePoolAutoConfig (..)
-    , newNodePoolAutoConfig
+    NodePoolAutoConfig (..),
+    newNodePoolAutoConfig,
 
     -- ** NodePoolAutoscaling
-    , NodePoolAutoscaling (..)
-    , newNodePoolAutoscaling
+    NodePoolAutoscaling (..),
+    newNodePoolAutoscaling,
 
     -- ** NodePoolDefaults
-    , NodePoolDefaults (..)
-    , newNodePoolDefaults
+    NodePoolDefaults (..),
+    newNodePoolDefaults,
 
     -- ** NodeTaint
-    , NodeTaint (..)
-    , newNodeTaint
+    NodeTaint (..),
+    newNodeTaint,
 
     -- ** NodeTaint_Effect
-    , NodeTaint_Effect (..)
+    NodeTaint_Effect (..),
 
     -- ** NotificationConfig
-    , NotificationConfig (..)
-    , newNotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_OperationType
-    , Operation_OperationType (..)
+    Operation_OperationType (..),
 
     -- ** Operation_Status
-    , Operation_Status (..)
+    Operation_Status (..),
 
     -- ** OperationProgress
-    , OperationProgress (..)
-    , newOperationProgress
+    OperationProgress (..),
+    newOperationProgress,
 
     -- ** OperationProgress_Status
-    , OperationProgress_Status (..)
+    OperationProgress_Status (..),
 
     -- ** PrivateClusterConfig
-    , PrivateClusterConfig (..)
-    , newPrivateClusterConfig
+    PrivateClusterConfig (..),
+    newPrivateClusterConfig,
 
     -- ** PrivateClusterMasterGlobalAccessConfig
-    , PrivateClusterMasterGlobalAccessConfig (..)
-    , newPrivateClusterMasterGlobalAccessConfig
+    PrivateClusterMasterGlobalAccessConfig (..),
+    newPrivateClusterMasterGlobalAccessConfig,
 
     -- ** PubSub
-    , PubSub (..)
-    , newPubSub
+    PubSub (..),
+    newPubSub,
 
     -- ** RecurringTimeWindow
-    , RecurringTimeWindow (..)
-    , newRecurringTimeWindow
+    RecurringTimeWindow (..),
+    newRecurringTimeWindow,
 
     -- ** ReleaseChannel
-    , ReleaseChannel (..)
-    , newReleaseChannel
+    ReleaseChannel (..),
+    newReleaseChannel,
 
     -- ** ReleaseChannel_Channel
-    , ReleaseChannel_Channel (..)
+    ReleaseChannel_Channel (..),
 
     -- ** ReleaseChannelConfig
-    , ReleaseChannelConfig (..)
-    , newReleaseChannelConfig
+    ReleaseChannelConfig (..),
+    newReleaseChannelConfig,
 
     -- ** ReleaseChannelConfig_Channel
-    , ReleaseChannelConfig_Channel (..)
+    ReleaseChannelConfig_Channel (..),
 
     -- ** ReservationAffinity
-    , ReservationAffinity (..)
-    , newReservationAffinity
+    ReservationAffinity (..),
+    newReservationAffinity,
 
     -- ** ReservationAffinity_ConsumeReservationType
-    , ReservationAffinity_ConsumeReservationType (..)
+    ReservationAffinity_ConsumeReservationType (..),
 
     -- ** ResourceLimit
-    , ResourceLimit (..)
-    , newResourceLimit
+    ResourceLimit (..),
+    newResourceLimit,
 
     -- ** ResourceUsageExportConfig
-    , ResourceUsageExportConfig (..)
-    , newResourceUsageExportConfig
+    ResourceUsageExportConfig (..),
+    newResourceUsageExportConfig,
 
     -- ** RollbackNodePoolUpgradeRequest
-    , RollbackNodePoolUpgradeRequest (..)
-    , newRollbackNodePoolUpgradeRequest
+    RollbackNodePoolUpgradeRequest (..),
+    newRollbackNodePoolUpgradeRequest,
 
     -- ** SandboxConfig
-    , SandboxConfig (..)
-    , newSandboxConfig
+    SandboxConfig (..),
+    newSandboxConfig,
 
     -- ** SandboxConfig_Type
-    , SandboxConfig_Type (..)
+    SandboxConfig_Type (..),
 
     -- ** SecurityBulletinEvent
-    , SecurityBulletinEvent (..)
-    , newSecurityBulletinEvent
+    SecurityBulletinEvent (..),
+    newSecurityBulletinEvent,
 
     -- ** ServerConfig
-    , ServerConfig (..)
-    , newServerConfig
+    ServerConfig (..),
+    newServerConfig,
 
     -- ** ServiceExternalIPsConfig
-    , ServiceExternalIPsConfig (..)
-    , newServiceExternalIPsConfig
+    ServiceExternalIPsConfig (..),
+    newServiceExternalIPsConfig,
 
     -- ** SetAddonsConfigRequest
-    , SetAddonsConfigRequest (..)
-    , newSetAddonsConfigRequest
+    SetAddonsConfigRequest (..),
+    newSetAddonsConfigRequest,
 
     -- ** SetLabelsRequest
-    , SetLabelsRequest (..)
-    , newSetLabelsRequest
+    SetLabelsRequest (..),
+    newSetLabelsRequest,
 
     -- ** SetLabelsRequest_ResourceLabels
-    , SetLabelsRequest_ResourceLabels (..)
-    , newSetLabelsRequest_ResourceLabels
+    SetLabelsRequest_ResourceLabels (..),
+    newSetLabelsRequest_ResourceLabels,
 
     -- ** SetLegacyAbacRequest
-    , SetLegacyAbacRequest (..)
-    , newSetLegacyAbacRequest
+    SetLegacyAbacRequest (..),
+    newSetLegacyAbacRequest,
 
     -- ** SetLocationsRequest
-    , SetLocationsRequest (..)
-    , newSetLocationsRequest
+    SetLocationsRequest (..),
+    newSetLocationsRequest,
 
     -- ** SetLoggingServiceRequest
-    , SetLoggingServiceRequest (..)
-    , newSetLoggingServiceRequest
+    SetLoggingServiceRequest (..),
+    newSetLoggingServiceRequest,
 
     -- ** SetMaintenancePolicyRequest
-    , SetMaintenancePolicyRequest (..)
-    , newSetMaintenancePolicyRequest
+    SetMaintenancePolicyRequest (..),
+    newSetMaintenancePolicyRequest,
 
     -- ** SetMasterAuthRequest
-    , SetMasterAuthRequest (..)
-    , newSetMasterAuthRequest
+    SetMasterAuthRequest (..),
+    newSetMasterAuthRequest,
 
     -- ** SetMasterAuthRequest_Action
-    , SetMasterAuthRequest_Action (..)
+    SetMasterAuthRequest_Action (..),
 
     -- ** SetMonitoringServiceRequest
-    , SetMonitoringServiceRequest (..)
-    , newSetMonitoringServiceRequest
+    SetMonitoringServiceRequest (..),
+    newSetMonitoringServiceRequest,
 
     -- ** SetNetworkPolicyRequest
-    , SetNetworkPolicyRequest (..)
-    , newSetNetworkPolicyRequest
+    SetNetworkPolicyRequest (..),
+    newSetNetworkPolicyRequest,
 
     -- ** SetNodePoolAutoscalingRequest
-    , SetNodePoolAutoscalingRequest (..)
-    , newSetNodePoolAutoscalingRequest
+    SetNodePoolAutoscalingRequest (..),
+    newSetNodePoolAutoscalingRequest,
 
     -- ** SetNodePoolManagementRequest
-    , SetNodePoolManagementRequest (..)
-    , newSetNodePoolManagementRequest
+    SetNodePoolManagementRequest (..),
+    newSetNodePoolManagementRequest,
 
     -- ** SetNodePoolSizeRequest
-    , SetNodePoolSizeRequest (..)
-    , newSetNodePoolSizeRequest
+    SetNodePoolSizeRequest (..),
+    newSetNodePoolSizeRequest,
 
     -- ** ShieldedInstanceConfig
-    , ShieldedInstanceConfig (..)
-    , newShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
 
     -- ** ShieldedNodes
-    , ShieldedNodes (..)
-    , newShieldedNodes
+    ShieldedNodes (..),
+    newShieldedNodes,
 
     -- ** StartIPRotationRequest
-    , StartIPRotationRequest (..)
-    , newStartIPRotationRequest
+    StartIPRotationRequest (..),
+    newStartIPRotationRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StatusCondition
-    , StatusCondition (..)
-    , newStatusCondition
+    StatusCondition (..),
+    newStatusCondition,
 
     -- ** StatusCondition_CanonicalCode
-    , StatusCondition_CanonicalCode (..)
+    StatusCondition_CanonicalCode (..),
 
     -- ** StatusCondition_Code
-    , StatusCondition_Code (..)
+    StatusCondition_Code (..),
 
     -- ** TimeWindow
-    , TimeWindow (..)
-    , newTimeWindow
+    TimeWindow (..),
+    newTimeWindow,
 
     -- ** UpdateClusterRequest
-    , UpdateClusterRequest (..)
-    , newUpdateClusterRequest
+    UpdateClusterRequest (..),
+    newUpdateClusterRequest,
 
     -- ** UpdateMasterRequest
-    , UpdateMasterRequest (..)
-    , newUpdateMasterRequest
+    UpdateMasterRequest (..),
+    newUpdateMasterRequest,
 
     -- ** UpdateNodePoolRequest
-    , UpdateNodePoolRequest (..)
-    , newUpdateNodePoolRequest
+    UpdateNodePoolRequest (..),
+    newUpdateNodePoolRequest,
 
     -- ** UpgradeAvailableEvent
-    , UpgradeAvailableEvent (..)
-    , newUpgradeAvailableEvent
+    UpgradeAvailableEvent (..),
+    newUpgradeAvailableEvent,
 
     -- ** UpgradeAvailableEvent_ResourceType
-    , UpgradeAvailableEvent_ResourceType (..)
+    UpgradeAvailableEvent_ResourceType (..),
 
     -- ** UpgradeEvent
-    , UpgradeEvent (..)
-    , newUpgradeEvent
+    UpgradeEvent (..),
+    newUpgradeEvent,
 
     -- ** UpgradeEvent_ResourceType
-    , UpgradeEvent_ResourceType (..)
+    UpgradeEvent_ResourceType (..),
 
     -- ** UpgradeSettings
-    , UpgradeSettings (..)
-    , newUpgradeSettings
+    UpgradeSettings (..),
+    newUpgradeSettings,
 
     -- ** UsableSubnetwork
-    , UsableSubnetwork (..)
-    , newUsableSubnetwork
+    UsableSubnetwork (..),
+    newUsableSubnetwork,
 
     -- ** UsableSubnetworkSecondaryRange
-    , UsableSubnetworkSecondaryRange (..)
-    , newUsableSubnetworkSecondaryRange
+    UsableSubnetworkSecondaryRange (..),
+    newUsableSubnetworkSecondaryRange,
 
     -- ** UsableSubnetworkSecondaryRange_Status
-    , UsableSubnetworkSecondaryRange_Status (..)
+    UsableSubnetworkSecondaryRange_Status (..),
 
     -- ** VerticalPodAutoscaling
-    , VerticalPodAutoscaling (..)
-    , newVerticalPodAutoscaling
+    VerticalPodAutoscaling (..),
+    newVerticalPodAutoscaling,
 
     -- ** VirtualNIC
-    , VirtualNIC (..)
-    , newVirtualNIC
+    VirtualNIC (..),
+    newVirtualNIC,
 
     -- ** WorkloadIdentityConfig
-    , WorkloadIdentityConfig (..)
-    , newWorkloadIdentityConfig
+    WorkloadIdentityConfig (..),
+    newWorkloadIdentityConfig,
 
     -- ** WorkloadMetadataConfig
-    , WorkloadMetadataConfig (..)
-    , newWorkloadMetadataConfig
+    WorkloadMetadataConfig (..),
+    newWorkloadMetadataConfig,
 
     -- ** WorkloadMetadataConfig_Mode
-    , WorkloadMetadataConfig_Mode (..)
-    ) where
+    WorkloadMetadataConfig_Mode (..),
+  )
+where
 
 import Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
 import Gogol.Container.Projects.Locations.Clusters.CompleteIpRotation

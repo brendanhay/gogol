@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,96 +30,105 @@
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.list@.
 module Gogol.Container.Projects.Zones.Clusters.List
-    (
-    -- * Resource
-      ContainerProjectsZonesClustersListResource
+  ( -- * Resource
+    ContainerProjectsZonesClustersListResource,
 
     -- ** Constructing a Request
-    , newContainerProjectsZonesClustersList
-    , ContainerProjectsZonesClustersList
-    ) where
+    newContainerProjectsZonesClustersList,
+    ContainerProjectsZonesClustersList,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Container.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @container.projects.zones.clusters.list@ method which the
 -- 'ContainerProjectsZonesClustersList' request conforms to.
 type ContainerProjectsZonesClustersListResource =
-     "v1" Core.:>
-       "projects" Core.:>
-         Core.Capture "projectId" Core.Text Core.:>
-           "zones" Core.:>
-             Core.Capture "zone" Core.Text Core.:>
-               "clusters" Core.:>
-                 Core.QueryParam "$.xgafv" Xgafv Core.:>
-                   Core.QueryParam "access_token" Core.Text Core.:>
-                     Core.QueryParam "callback" Core.Text Core.:>
-                       Core.QueryParam "parent" Core.Text Core.:>
-                         Core.QueryParam "uploadType" Core.Text Core.:>
-                           Core.QueryParam "upload_protocol" Core.Text Core.:>
-                             Core.QueryParam "alt" Core.AltJSON Core.:>
-                               Core.Get '[Core.JSON] ListClustersResponse
+  "v1"
+    Core.:> "projects"
+    Core.:> Core.Capture "projectId" Core.Text
+    Core.:> "zones"
+    Core.:> Core.Capture "zone" Core.Text
+    Core.:> "clusters"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "parent" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ListClustersResponse
 
 -- | Lists all clusters owned by a project in either the specified zone or all zones.
 --
 -- /See:/ 'newContainerProjectsZonesClustersList' smart constructor.
 data ContainerProjectsZonesClustersList = ContainerProjectsZonesClustersList
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The parent (project and location) where the clusters will be listed. Specified in the format @projects\/*\/locations\/*@. Location \"-\" matches all zones and all regions.
-    , parent :: (Core.Maybe Core.Text)
-      -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field.
-    , projectId :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-      -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides, or \"-\" for all zones. This field has been deprecated and replaced by the parent field.
-    , zone :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The parent (project and location) where the clusters will be listed. Specified in the format @projects\/*\/locations\/*@. Location \"-\" matches all zones and all regions.
+    parent :: (Core.Maybe Core.Text),
+    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field.
+    projectId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides, or \"-\" for all zones. This field has been deprecated and replaced by the parent field.
+    zone :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ContainerProjectsZonesClustersList' with the minimum fields required to make a request.
-newContainerProjectsZonesClustersList 
-    ::  Core.Text
-       -- ^  Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field. See 'projectId'.
-    -> Core.Text
-       -- ^  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides, or \"-\" for all zones. This field has been deprecated and replaced by the parent field. See 'zone'.
-    -> ContainerProjectsZonesClustersList
+newContainerProjectsZonesClustersList ::
+  -- |  Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field. See 'projectId'.
+  Core.Text ->
+  -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides, or \"-\" for all zones. This field has been deprecated and replaced by the parent field. See 'zone'.
+  Core.Text ->
+  ContainerProjectsZonesClustersList
 newContainerProjectsZonesClustersList projectId zone =
   ContainerProjectsZonesClustersList
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , parent = Core.Nothing
-    , projectId = projectId
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
-    , zone = zone
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      parent = Core.Nothing,
+      projectId = projectId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing,
+      zone = zone
     }
 
-instance Core.GoogleRequest
-           ContainerProjectsZonesClustersList
-         where
-        type Rs ContainerProjectsZonesClustersList =
-             ListClustersResponse
-        type Scopes ContainerProjectsZonesClustersList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ContainerProjectsZonesClustersList{..}
-          = go projectId zone xgafv accessToken callback parent
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              containerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           ContainerProjectsZonesClustersListResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    ContainerProjectsZonesClustersList
+  where
+  type
+    Rs ContainerProjectsZonesClustersList =
+      ListClustersResponse
+  type
+    Scopes ContainerProjectsZonesClustersList =
+      '["https://www.googleapis.com/auth/cloud-platform"]
+  requestClient ContainerProjectsZonesClustersList {..} =
+    go
+      projectId
+      zone
+      xgafv
+      accessToken
+      callback
+      parent
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ContainerProjectsZonesClustersListResource
+          )
+          Core.mempty
