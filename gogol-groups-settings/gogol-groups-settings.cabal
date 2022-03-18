@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.GroupsSettings
-    Network.Google.GroupsSettings.Groups.Get
-    Network.Google.GroupsSettings.Groups.Patch
-    Network.Google.GroupsSettings.Groups.Update
-    Network.Google.GroupsSettings.Types
+    Gogol.GroupsSettings
+    Gogol.GroupsSettings.Groups.Get
+    Gogol.GroupsSettings.Groups.Patch
+    Gogol.GroupsSettings.Groups.Update
+    Gogol.GroupsSettings.Types
 
   other-modules:
-    Network.Google.GroupsSettings.Internal.Product
-    Network.Google.GroupsSettings.Internal.Sum
+    Gogol.GroupsSettings.Internal.Product
+    Gogol.GroupsSettings.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

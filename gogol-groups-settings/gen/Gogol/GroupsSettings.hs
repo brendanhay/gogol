@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.GroupsSettings
+-- Module      : Gogol.GroupsSettings
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Manages permission levels and related settings of a group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
-module Network.Google.GroupsSettings
+module Gogol.GroupsSettings
   ( -- * Configuration
     groupsSettingsService,
 
@@ -61,7 +61,7 @@ module Network.Google.GroupsSettings
   )
 where
 
-import Network.Google.GroupsSettings.Groups.Get
-import Network.Google.GroupsSettings.Groups.Patch
-import Network.Google.GroupsSettings.Groups.Update
-import Network.Google.GroupsSettings.Types
+import Gogol.GroupsSettings.Groups.Get
+import Gogol.GroupsSettings.Groups.Patch
+import Gogol.GroupsSettings.Groups.Update
+import Gogol.GroupsSettings.Types
