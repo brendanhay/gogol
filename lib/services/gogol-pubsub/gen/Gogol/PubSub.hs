@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,449 +36,449 @@
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference>
 module Gogol.PubSub
-  ( -- * Configuration
-    pubSubService,
+    (
+    -- * Configuration
+      pubSubService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    pubSubScope,
+    , cloudPlatformScope
+    , pubSubScope
 
     -- * Resources
 
     -- ** pubsub.projects.schemas.create
-    PubSubProjectsSchemasCreateResource,
-    newPubSubProjectsSchemasCreate,
-    PubSubProjectsSchemasCreate,
+    , PubSubProjectsSchemasCreateResource
+    , newPubSubProjectsSchemasCreate
+    , PubSubProjectsSchemasCreate
 
     -- ** pubsub.projects.schemas.delete
-    PubSubProjectsSchemasDeleteResource,
-    newPubSubProjectsSchemasDelete,
-    PubSubProjectsSchemasDelete,
+    , PubSubProjectsSchemasDeleteResource
+    , newPubSubProjectsSchemasDelete
+    , PubSubProjectsSchemasDelete
 
     -- ** pubsub.projects.schemas.get
-    PubSubProjectsSchemasGetResource,
-    newPubSubProjectsSchemasGet,
-    PubSubProjectsSchemasGet,
+    , PubSubProjectsSchemasGetResource
+    , newPubSubProjectsSchemasGet
+    , PubSubProjectsSchemasGet
 
     -- ** pubsub.projects.schemas.getIamPolicy
-    PubSubProjectsSchemasGetIamPolicyResource,
-    newPubSubProjectsSchemasGetIamPolicy,
-    PubSubProjectsSchemasGetIamPolicy,
+    , PubSubProjectsSchemasGetIamPolicyResource
+    , newPubSubProjectsSchemasGetIamPolicy
+    , PubSubProjectsSchemasGetIamPolicy
 
     -- ** pubsub.projects.schemas.list
-    PubSubProjectsSchemasListResource,
-    newPubSubProjectsSchemasList,
-    PubSubProjectsSchemasList,
+    , PubSubProjectsSchemasListResource
+    , newPubSubProjectsSchemasList
+    , PubSubProjectsSchemasList
 
     -- ** pubsub.projects.schemas.setIamPolicy
-    PubSubProjectsSchemasSetIamPolicyResource,
-    newPubSubProjectsSchemasSetIamPolicy,
-    PubSubProjectsSchemasSetIamPolicy,
+    , PubSubProjectsSchemasSetIamPolicyResource
+    , newPubSubProjectsSchemasSetIamPolicy
+    , PubSubProjectsSchemasSetIamPolicy
 
     -- ** pubsub.projects.schemas.testIamPermissions
-    PubSubProjectsSchemasTestIamPermissionsResource,
-    newPubSubProjectsSchemasTestIamPermissions,
-    PubSubProjectsSchemasTestIamPermissions,
+    , PubSubProjectsSchemasTestIamPermissionsResource
+    , newPubSubProjectsSchemasTestIamPermissions
+    , PubSubProjectsSchemasTestIamPermissions
 
     -- ** pubsub.projects.schemas.validate
-    PubSubProjectsSchemasValidateResource,
-    newPubSubProjectsSchemasValidate,
-    PubSubProjectsSchemasValidate,
+    , PubSubProjectsSchemasValidateResource
+    , newPubSubProjectsSchemasValidate
+    , PubSubProjectsSchemasValidate
 
     -- ** pubsub.projects.schemas.validateMessage
-    PubSubProjectsSchemasValidateMessageResource,
-    newPubSubProjectsSchemasValidateMessage,
-    PubSubProjectsSchemasValidateMessage,
+    , PubSubProjectsSchemasValidateMessageResource
+    , newPubSubProjectsSchemasValidateMessage
+    , PubSubProjectsSchemasValidateMessage
 
     -- ** pubsub.projects.snapshots.create
-    PubSubProjectsSnapshotsCreateResource,
-    newPubSubProjectsSnapshotsCreate,
-    PubSubProjectsSnapshotsCreate,
+    , PubSubProjectsSnapshotsCreateResource
+    , newPubSubProjectsSnapshotsCreate
+    , PubSubProjectsSnapshotsCreate
 
     -- ** pubsub.projects.snapshots.delete
-    PubSubProjectsSnapshotsDeleteResource,
-    newPubSubProjectsSnapshotsDelete,
-    PubSubProjectsSnapshotsDelete,
+    , PubSubProjectsSnapshotsDeleteResource
+    , newPubSubProjectsSnapshotsDelete
+    , PubSubProjectsSnapshotsDelete
 
     -- ** pubsub.projects.snapshots.get
-    PubSubProjectsSnapshotsGetResource,
-    newPubSubProjectsSnapshotsGet,
-    PubSubProjectsSnapshotsGet,
+    , PubSubProjectsSnapshotsGetResource
+    , newPubSubProjectsSnapshotsGet
+    , PubSubProjectsSnapshotsGet
 
     -- ** pubsub.projects.snapshots.getIamPolicy
-    PubSubProjectsSnapshotsGetIamPolicyResource,
-    newPubSubProjectsSnapshotsGetIamPolicy,
-    PubSubProjectsSnapshotsGetIamPolicy,
+    , PubSubProjectsSnapshotsGetIamPolicyResource
+    , newPubSubProjectsSnapshotsGetIamPolicy
+    , PubSubProjectsSnapshotsGetIamPolicy
 
     -- ** pubsub.projects.snapshots.list
-    PubSubProjectsSnapshotsListResource,
-    newPubSubProjectsSnapshotsList,
-    PubSubProjectsSnapshotsList,
+    , PubSubProjectsSnapshotsListResource
+    , newPubSubProjectsSnapshotsList
+    , PubSubProjectsSnapshotsList
 
     -- ** pubsub.projects.snapshots.patch
-    PubSubProjectsSnapshotsPatchResource,
-    newPubSubProjectsSnapshotsPatch,
-    PubSubProjectsSnapshotsPatch,
+    , PubSubProjectsSnapshotsPatchResource
+    , newPubSubProjectsSnapshotsPatch
+    , PubSubProjectsSnapshotsPatch
 
     -- ** pubsub.projects.snapshots.setIamPolicy
-    PubSubProjectsSnapshotsSetIamPolicyResource,
-    newPubSubProjectsSnapshotsSetIamPolicy,
-    PubSubProjectsSnapshotsSetIamPolicy,
+    , PubSubProjectsSnapshotsSetIamPolicyResource
+    , newPubSubProjectsSnapshotsSetIamPolicy
+    , PubSubProjectsSnapshotsSetIamPolicy
 
     -- ** pubsub.projects.snapshots.testIamPermissions
-    PubSubProjectsSnapshotsTestIamPermissionsResource,
-    newPubSubProjectsSnapshotsTestIamPermissions,
-    PubSubProjectsSnapshotsTestIamPermissions,
+    , PubSubProjectsSnapshotsTestIamPermissionsResource
+    , newPubSubProjectsSnapshotsTestIamPermissions
+    , PubSubProjectsSnapshotsTestIamPermissions
 
     -- ** pubsub.projects.subscriptions.acknowledge
-    PubSubProjectsSubscriptionsAcknowledgeResource,
-    newPubSubProjectsSubscriptionsAcknowledge,
-    PubSubProjectsSubscriptionsAcknowledge,
+    , PubSubProjectsSubscriptionsAcknowledgeResource
+    , newPubSubProjectsSubscriptionsAcknowledge
+    , PubSubProjectsSubscriptionsAcknowledge
 
     -- ** pubsub.projects.subscriptions.create
-    PubSubProjectsSubscriptionsCreateResource,
-    newPubSubProjectsSubscriptionsCreate,
-    PubSubProjectsSubscriptionsCreate,
+    , PubSubProjectsSubscriptionsCreateResource
+    , newPubSubProjectsSubscriptionsCreate
+    , PubSubProjectsSubscriptionsCreate
 
     -- ** pubsub.projects.subscriptions.delete
-    PubSubProjectsSubscriptionsDeleteResource,
-    newPubSubProjectsSubscriptionsDelete,
-    PubSubProjectsSubscriptionsDelete,
+    , PubSubProjectsSubscriptionsDeleteResource
+    , newPubSubProjectsSubscriptionsDelete
+    , PubSubProjectsSubscriptionsDelete
 
     -- ** pubsub.projects.subscriptions.detach
-    PubSubProjectsSubscriptionsDetachResource,
-    newPubSubProjectsSubscriptionsDetach,
-    PubSubProjectsSubscriptionsDetach,
+    , PubSubProjectsSubscriptionsDetachResource
+    , newPubSubProjectsSubscriptionsDetach
+    , PubSubProjectsSubscriptionsDetach
 
     -- ** pubsub.projects.subscriptions.get
-    PubSubProjectsSubscriptionsGetResource,
-    newPubSubProjectsSubscriptionsGet,
-    PubSubProjectsSubscriptionsGet,
+    , PubSubProjectsSubscriptionsGetResource
+    , newPubSubProjectsSubscriptionsGet
+    , PubSubProjectsSubscriptionsGet
 
     -- ** pubsub.projects.subscriptions.getIamPolicy
-    PubSubProjectsSubscriptionsGetIamPolicyResource,
-    newPubSubProjectsSubscriptionsGetIamPolicy,
-    PubSubProjectsSubscriptionsGetIamPolicy,
+    , PubSubProjectsSubscriptionsGetIamPolicyResource
+    , newPubSubProjectsSubscriptionsGetIamPolicy
+    , PubSubProjectsSubscriptionsGetIamPolicy
 
     -- ** pubsub.projects.subscriptions.list
-    PubSubProjectsSubscriptionsListResource,
-    newPubSubProjectsSubscriptionsList,
-    PubSubProjectsSubscriptionsList,
+    , PubSubProjectsSubscriptionsListResource
+    , newPubSubProjectsSubscriptionsList
+    , PubSubProjectsSubscriptionsList
 
     -- ** pubsub.projects.subscriptions.modifyAckDeadline
-    PubSubProjectsSubscriptionsModifyAckDeadlineResource,
-    newPubSubProjectsSubscriptionsModifyAckDeadline,
-    PubSubProjectsSubscriptionsModifyAckDeadline,
+    , PubSubProjectsSubscriptionsModifyAckDeadlineResource
+    , newPubSubProjectsSubscriptionsModifyAckDeadline
+    , PubSubProjectsSubscriptionsModifyAckDeadline
 
     -- ** pubsub.projects.subscriptions.modifyPushConfig
-    PubSubProjectsSubscriptionsModifyPushConfigResource,
-    newPubSubProjectsSubscriptionsModifyPushConfig,
-    PubSubProjectsSubscriptionsModifyPushConfig,
+    , PubSubProjectsSubscriptionsModifyPushConfigResource
+    , newPubSubProjectsSubscriptionsModifyPushConfig
+    , PubSubProjectsSubscriptionsModifyPushConfig
 
     -- ** pubsub.projects.subscriptions.patch
-    PubSubProjectsSubscriptionsPatchResource,
-    newPubSubProjectsSubscriptionsPatch,
-    PubSubProjectsSubscriptionsPatch,
+    , PubSubProjectsSubscriptionsPatchResource
+    , newPubSubProjectsSubscriptionsPatch
+    , PubSubProjectsSubscriptionsPatch
 
     -- ** pubsub.projects.subscriptions.pull
-    PubSubProjectsSubscriptionsPullResource,
-    newPubSubProjectsSubscriptionsPull,
-    PubSubProjectsSubscriptionsPull,
+    , PubSubProjectsSubscriptionsPullResource
+    , newPubSubProjectsSubscriptionsPull
+    , PubSubProjectsSubscriptionsPull
 
     -- ** pubsub.projects.subscriptions.seek
-    PubSubProjectsSubscriptionsSeekResource,
-    newPubSubProjectsSubscriptionsSeek,
-    PubSubProjectsSubscriptionsSeek,
+    , PubSubProjectsSubscriptionsSeekResource
+    , newPubSubProjectsSubscriptionsSeek
+    , PubSubProjectsSubscriptionsSeek
 
     -- ** pubsub.projects.subscriptions.setIamPolicy
-    PubSubProjectsSubscriptionsSetIamPolicyResource,
-    newPubSubProjectsSubscriptionsSetIamPolicy,
-    PubSubProjectsSubscriptionsSetIamPolicy,
+    , PubSubProjectsSubscriptionsSetIamPolicyResource
+    , newPubSubProjectsSubscriptionsSetIamPolicy
+    , PubSubProjectsSubscriptionsSetIamPolicy
 
     -- ** pubsub.projects.subscriptions.testIamPermissions
-    PubSubProjectsSubscriptionsTestIamPermissionsResource,
-    newPubSubProjectsSubscriptionsTestIamPermissions,
-    PubSubProjectsSubscriptionsTestIamPermissions,
+    , PubSubProjectsSubscriptionsTestIamPermissionsResource
+    , newPubSubProjectsSubscriptionsTestIamPermissions
+    , PubSubProjectsSubscriptionsTestIamPermissions
 
     -- ** pubsub.projects.topics.create
-    PubSubProjectsTopicsCreateResource,
-    newPubSubProjectsTopicsCreate,
-    PubSubProjectsTopicsCreate,
+    , PubSubProjectsTopicsCreateResource
+    , newPubSubProjectsTopicsCreate
+    , PubSubProjectsTopicsCreate
 
     -- ** pubsub.projects.topics.delete
-    PubSubProjectsTopicsDeleteResource,
-    newPubSubProjectsTopicsDelete,
-    PubSubProjectsTopicsDelete,
+    , PubSubProjectsTopicsDeleteResource
+    , newPubSubProjectsTopicsDelete
+    , PubSubProjectsTopicsDelete
 
     -- ** pubsub.projects.topics.get
-    PubSubProjectsTopicsGetResource,
-    newPubSubProjectsTopicsGet,
-    PubSubProjectsTopicsGet,
+    , PubSubProjectsTopicsGetResource
+    , newPubSubProjectsTopicsGet
+    , PubSubProjectsTopicsGet
 
     -- ** pubsub.projects.topics.getIamPolicy
-    PubSubProjectsTopicsGetIamPolicyResource,
-    newPubSubProjectsTopicsGetIamPolicy,
-    PubSubProjectsTopicsGetIamPolicy,
+    , PubSubProjectsTopicsGetIamPolicyResource
+    , newPubSubProjectsTopicsGetIamPolicy
+    , PubSubProjectsTopicsGetIamPolicy
 
     -- ** pubsub.projects.topics.list
-    PubSubProjectsTopicsListResource,
-    newPubSubProjectsTopicsList,
-    PubSubProjectsTopicsList,
+    , PubSubProjectsTopicsListResource
+    , newPubSubProjectsTopicsList
+    , PubSubProjectsTopicsList
 
     -- ** pubsub.projects.topics.patch
-    PubSubProjectsTopicsPatchResource,
-    newPubSubProjectsTopicsPatch,
-    PubSubProjectsTopicsPatch,
+    , PubSubProjectsTopicsPatchResource
+    , newPubSubProjectsTopicsPatch
+    , PubSubProjectsTopicsPatch
 
     -- ** pubsub.projects.topics.publish
-    PubSubProjectsTopicsPublishResource,
-    newPubSubProjectsTopicsPublish,
-    PubSubProjectsTopicsPublish,
+    , PubSubProjectsTopicsPublishResource
+    , newPubSubProjectsTopicsPublish
+    , PubSubProjectsTopicsPublish
 
     -- ** pubsub.projects.topics.setIamPolicy
-    PubSubProjectsTopicsSetIamPolicyResource,
-    newPubSubProjectsTopicsSetIamPolicy,
-    PubSubProjectsTopicsSetIamPolicy,
+    , PubSubProjectsTopicsSetIamPolicyResource
+    , newPubSubProjectsTopicsSetIamPolicy
+    , PubSubProjectsTopicsSetIamPolicy
 
     -- ** pubsub.projects.topics.snapshots.list
-    PubSubProjectsTopicsSnapshotsListResource,
-    newPubSubProjectsTopicsSnapshotsList,
-    PubSubProjectsTopicsSnapshotsList,
+    , PubSubProjectsTopicsSnapshotsListResource
+    , newPubSubProjectsTopicsSnapshotsList
+    , PubSubProjectsTopicsSnapshotsList
 
     -- ** pubsub.projects.topics.subscriptions.list
-    PubSubProjectsTopicsSubscriptionsListResource,
-    newPubSubProjectsTopicsSubscriptionsList,
-    PubSubProjectsTopicsSubscriptionsList,
+    , PubSubProjectsTopicsSubscriptionsListResource
+    , newPubSubProjectsTopicsSubscriptionsList
+    , PubSubProjectsTopicsSubscriptionsList
 
     -- ** pubsub.projects.topics.testIamPermissions
-    PubSubProjectsTopicsTestIamPermissionsResource,
-    newPubSubProjectsTopicsTestIamPermissions,
-    PubSubProjectsTopicsTestIamPermissions,
+    , PubSubProjectsTopicsTestIamPermissionsResource
+    , newPubSubProjectsTopicsTestIamPermissions
+    , PubSubProjectsTopicsTestIamPermissions
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AcknowledgeRequest
-    AcknowledgeRequest (..),
-    newAcknowledgeRequest,
+    , AcknowledgeRequest (..)
+    , newAcknowledgeRequest
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** CreateSnapshotRequest
-    CreateSnapshotRequest (..),
-    newCreateSnapshotRequest,
+    , CreateSnapshotRequest (..)
+    , newCreateSnapshotRequest
 
     -- ** CreateSnapshotRequest_Labels
-    CreateSnapshotRequest_Labels (..),
-    newCreateSnapshotRequest_Labels,
+    , CreateSnapshotRequest_Labels (..)
+    , newCreateSnapshotRequest_Labels
 
     -- ** DeadLetterPolicy
-    DeadLetterPolicy (..),
-    newDeadLetterPolicy,
+    , DeadLetterPolicy (..)
+    , newDeadLetterPolicy
 
     -- ** DetachSubscriptionResponse
-    DetachSubscriptionResponse (..),
-    newDetachSubscriptionResponse,
+    , DetachSubscriptionResponse (..)
+    , newDetachSubscriptionResponse
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** ExpirationPolicy
-    ExpirationPolicy (..),
-    newExpirationPolicy,
+    , ExpirationPolicy (..)
+    , newExpirationPolicy
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** ListSchemasResponse
-    ListSchemasResponse (..),
-    newListSchemasResponse,
+    , ListSchemasResponse (..)
+    , newListSchemasResponse
 
     -- ** ListSnapshotsResponse
-    ListSnapshotsResponse (..),
-    newListSnapshotsResponse,
+    , ListSnapshotsResponse (..)
+    , newListSnapshotsResponse
 
     -- ** ListSubscriptionsResponse
-    ListSubscriptionsResponse (..),
-    newListSubscriptionsResponse,
+    , ListSubscriptionsResponse (..)
+    , newListSubscriptionsResponse
 
     -- ** ListTopicSnapshotsResponse
-    ListTopicSnapshotsResponse (..),
-    newListTopicSnapshotsResponse,
+    , ListTopicSnapshotsResponse (..)
+    , newListTopicSnapshotsResponse
 
     -- ** ListTopicSubscriptionsResponse
-    ListTopicSubscriptionsResponse (..),
-    newListTopicSubscriptionsResponse,
+    , ListTopicSubscriptionsResponse (..)
+    , newListTopicSubscriptionsResponse
 
     -- ** ListTopicsResponse
-    ListTopicsResponse (..),
-    newListTopicsResponse,
+    , ListTopicsResponse (..)
+    , newListTopicsResponse
 
     -- ** MessageStoragePolicy
-    MessageStoragePolicy (..),
-    newMessageStoragePolicy,
+    , MessageStoragePolicy (..)
+    , newMessageStoragePolicy
 
     -- ** ModifyAckDeadlineRequest
-    ModifyAckDeadlineRequest (..),
-    newModifyAckDeadlineRequest,
+    , ModifyAckDeadlineRequest (..)
+    , newModifyAckDeadlineRequest
 
     -- ** ModifyPushConfigRequest
-    ModifyPushConfigRequest (..),
-    newModifyPushConfigRequest,
+    , ModifyPushConfigRequest (..)
+    , newModifyPushConfigRequest
 
     -- ** OidcToken
-    OidcToken (..),
-    newOidcToken,
+    , OidcToken (..)
+    , newOidcToken
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PublishRequest
-    PublishRequest (..),
-    newPublishRequest,
+    , PublishRequest (..)
+    , newPublishRequest
 
     -- ** PublishResponse
-    PublishResponse (..),
-    newPublishResponse,
+    , PublishResponse (..)
+    , newPublishResponse
 
     -- ** PubsubMessage
-    PubsubMessage (..),
-    newPubsubMessage,
+    , PubsubMessage (..)
+    , newPubsubMessage
 
     -- ** PubsubMessage_Attributes
-    PubsubMessage_Attributes (..),
-    newPubsubMessage_Attributes,
+    , PubsubMessage_Attributes (..)
+    , newPubsubMessage_Attributes
 
     -- ** PullRequest
-    PullRequest (..),
-    newPullRequest,
+    , PullRequest (..)
+    , newPullRequest
 
     -- ** PullResponse
-    PullResponse (..),
-    newPullResponse,
+    , PullResponse (..)
+    , newPullResponse
 
     -- ** PushConfig
-    PushConfig (..),
-    newPushConfig,
+    , PushConfig (..)
+    , newPushConfig
 
     -- ** PushConfig_Attributes
-    PushConfig_Attributes (..),
-    newPushConfig_Attributes,
+    , PushConfig_Attributes (..)
+    , newPushConfig_Attributes
 
     -- ** ReceivedMessage
-    ReceivedMessage (..),
-    newReceivedMessage,
+    , ReceivedMessage (..)
+    , newReceivedMessage
 
     -- ** RetryPolicy
-    RetryPolicy (..),
-    newRetryPolicy,
+    , RetryPolicy (..)
+    , newRetryPolicy
 
     -- ** Schema
-    Schema (..),
-    newSchema,
+    , Schema (..)
+    , newSchema
 
     -- ** Schema_Type
-    Schema_Type (..),
+    , Schema_Type (..)
 
     -- ** SchemaSettings
-    SchemaSettings (..),
-    newSchemaSettings,
+    , SchemaSettings (..)
+    , newSchemaSettings
 
     -- ** SchemaSettings_Encoding
-    SchemaSettings_Encoding (..),
+    , SchemaSettings_Encoding (..)
 
     -- ** SeekRequest
-    SeekRequest (..),
-    newSeekRequest,
+    , SeekRequest (..)
+    , newSeekRequest
 
     -- ** SeekResponse
-    SeekResponse (..),
-    newSeekResponse,
+    , SeekResponse (..)
+    , newSeekResponse
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Snapshot
-    Snapshot (..),
-    newSnapshot,
+    , Snapshot (..)
+    , newSnapshot
 
     -- ** Snapshot_Labels
-    Snapshot_Labels (..),
-    newSnapshot_Labels,
+    , Snapshot_Labels (..)
+    , newSnapshot_Labels
 
     -- ** Subscription
-    Subscription (..),
-    newSubscription,
+    , Subscription (..)
+    , newSubscription
 
     -- ** Subscription_Labels
-    Subscription_Labels (..),
-    newSubscription_Labels,
+    , Subscription_Labels (..)
+    , newSubscription_Labels
 
     -- ** Subscription_State
-    Subscription_State (..),
+    , Subscription_State (..)
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** Topic
-    Topic (..),
-    newTopic,
+    , Topic (..)
+    , newTopic
 
     -- ** Topic_Labels
-    Topic_Labels (..),
-    newTopic_Labels,
+    , Topic_Labels (..)
+    , newTopic_Labels
 
     -- ** UpdateSnapshotRequest
-    UpdateSnapshotRequest (..),
-    newUpdateSnapshotRequest,
+    , UpdateSnapshotRequest (..)
+    , newUpdateSnapshotRequest
 
     -- ** UpdateSubscriptionRequest
-    UpdateSubscriptionRequest (..),
-    newUpdateSubscriptionRequest,
+    , UpdateSubscriptionRequest (..)
+    , newUpdateSubscriptionRequest
 
     -- ** UpdateTopicRequest
-    UpdateTopicRequest (..),
-    newUpdateTopicRequest,
+    , UpdateTopicRequest (..)
+    , newUpdateTopicRequest
 
     -- ** ValidateMessageRequest
-    ValidateMessageRequest (..),
-    newValidateMessageRequest,
+    , ValidateMessageRequest (..)
+    , newValidateMessageRequest
 
     -- ** ValidateMessageRequest_Encoding
-    ValidateMessageRequest_Encoding (..),
+    , ValidateMessageRequest_Encoding (..)
 
     -- ** ValidateMessageResponse
-    ValidateMessageResponse (..),
-    newValidateMessageResponse,
+    , ValidateMessageResponse (..)
+    , newValidateMessageResponse
 
     -- ** ValidateSchemaRequest
-    ValidateSchemaRequest (..),
-    newValidateSchemaRequest,
+    , ValidateSchemaRequest (..)
+    , newValidateSchemaRequest
 
     -- ** ValidateSchemaResponse
-    ValidateSchemaResponse (..),
-    newValidateSchemaResponse,
+    , ValidateSchemaResponse (..)
+    , newValidateSchemaResponse
 
     -- ** ProjectsSchemasGetView
-    ProjectsSchemasGetView (..),
+    , ProjectsSchemasGetView (..)
 
     -- ** ProjectsSchemasListView
-    ProjectsSchemasListView (..),
-  )
-where
+    , ProjectsSchemasListView (..)
+    ) where
 
 import Gogol.PubSub.Projects.Schemas.Create
 import Gogol.PubSub.Projects.Schemas.Delete
