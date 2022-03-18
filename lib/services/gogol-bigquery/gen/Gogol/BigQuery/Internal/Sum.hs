@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,10 +31,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.BigQuery.Internal.Sum
-  ( -- * Argument_ArgumentKind
+  (
+
+    -- * Argument_ArgumentKind
     Argument_ArgumentKind
-      ( Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED,
+      (
+        Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED,
         Argument_ArgumentKind_FIXEDTYPE,
         Argument_ArgumentKind_ANYTYPE,
         ..
@@ -36,7 +46,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Argument_Mode
     Argument_Mode
-      ( Argument_Mode_MODEUNSPECIFIED,
+      (
+        Argument_Mode_MODEUNSPECIFIED,
         Argument_Mode_IN,
         Argument_Mode_Out,
         Argument_Mode_Inout,
@@ -45,7 +56,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaForecastingMetrics_SeasonalPeriodsItem
     ArimaForecastingMetrics_SeasonalPeriodsItem
-      ( ArimaForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      (
+        ArimaForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaForecastingMetrics_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaForecastingMetrics_SeasonalPeriodsItem_Daily,
         ArimaForecastingMetrics_SeasonalPeriodsItem_Weekly,
@@ -57,7 +69,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaModelInfo_SeasonalPeriodsItem
     ArimaModelInfo_SeasonalPeriodsItem
-      ( ArimaModelInfo_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      (
+        ArimaModelInfo_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaModelInfo_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaModelInfo_SeasonalPeriodsItem_Daily,
         ArimaModelInfo_SeasonalPeriodsItem_Weekly,
@@ -69,7 +82,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaResult_SeasonalPeriodsItem
     ArimaResult_SeasonalPeriodsItem
-      ( ArimaResult_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      (
+        ArimaResult_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaResult_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaResult_SeasonalPeriodsItem_Daily,
         ArimaResult_SeasonalPeriodsItem_Weekly,
@@ -81,7 +95,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
     ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
-      ( ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      (
+        ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Daily,
         ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Weekly,
@@ -93,7 +108,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      (
+        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -102,14 +118,16 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * DatasetAccessEntry_TargetTypesItem
     DatasetAccessEntry_TargetTypesItem
-      ( DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
+      (
+        DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
         DatasetAccessEntry_TargetTypesItem_Views,
         ..
       ),
 
     -- * HparamTuningTrial_Status
     HparamTuningTrial_Status
-      ( HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED,
+      (
+        HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED,
         HparamTuningTrial_Status_NOTSTARTED,
         HparamTuningTrial_Status_Running,
         HparamTuningTrial_Status_Succeeded,
@@ -121,7 +139,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Model_ModelType
     Model_ModelType
-      ( Model_ModelType_MODELTYPEUNSPECIFIED,
+      (
+        Model_ModelType_MODELTYPEUNSPECIFIED,
         Model_ModelType_LINEARREGRESSION,
         Model_ModelType_LOGISTICREGRESSION,
         Model_ModelType_Kmeans,
@@ -142,7 +161,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Routine_DeterminismLevel
     Routine_DeterminismLevel
-      ( Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED,
+      (
+        Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED,
         Routine_DeterminismLevel_Deterministic,
         Routine_DeterminismLevel_NOTDETERMINISTIC,
         ..
@@ -150,7 +170,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Routine_Language
     Routine_Language
-      ( Routine_Language_LANGUAGEUNSPECIFIED,
+      (
+        Routine_Language_LANGUAGEUNSPECIFIED,
         Routine_Language_Sql,
         Routine_Language_Javascript,
         ..
@@ -158,7 +179,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Routine_RoutineType
     Routine_RoutineType
-      ( Routine_RoutineType_ROUTINETYPEUNSPECIFIED,
+      (
+        Routine_RoutineType_ROUTINETYPEUNSPECIFIED,
         Routine_RoutineType_SCALARFUNCTION,
         Routine_RoutineType_Procedure,
         Routine_RoutineType_TABLEVALUEDFUNCTION,
@@ -167,7 +189,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * StandardSqlDataType_TypeKind
     StandardSqlDataType_TypeKind
-      ( StandardSqlDataType_TypeKind_TYPEKINDUNSPECIFIED,
+      (
+        StandardSqlDataType_TypeKind_TYPEKINDUNSPECIFIED,
         StandardSqlDataType_TypeKind_INT64,
         StandardSqlDataType_TypeKind_Bool,
         StandardSqlDataType_TypeKind_FLOAT64,
@@ -189,7 +212,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_BoosterType
     TrainingOptions_BoosterType
-      ( TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
+      (
+        TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
         TrainingOptions_BoosterType_Gbtree,
         TrainingOptions_BoosterType_Dart,
         ..
@@ -197,7 +221,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DartNormalizeType
     TrainingOptions_DartNormalizeType
-      ( TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED,
+      (
+        TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED,
         TrainingOptions_DartNormalizeType_Tree,
         TrainingOptions_DartNormalizeType_Forest,
         ..
@@ -205,7 +230,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DataFrequency
     TrainingOptions_DataFrequency
-      ( TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED,
+      (
+        TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED,
         TrainingOptions_DataFrequency_AUTOFREQUENCY,
         TrainingOptions_DataFrequency_Yearly,
         TrainingOptions_DataFrequency_Quarterly,
@@ -219,7 +245,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DataSplitMethod
     TrainingOptions_DataSplitMethod
-      ( TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED,
+      (
+        TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED,
         TrainingOptions_DataSplitMethod_Random,
         TrainingOptions_DataSplitMethod_Custom,
         TrainingOptions_DataSplitMethod_Sequential,
@@ -230,7 +257,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DistanceType
     TrainingOptions_DistanceType
-      ( TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED,
+      (
+        TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED,
         TrainingOptions_DistanceType_Euclidean,
         TrainingOptions_DistanceType_Cosine,
         ..
@@ -238,7 +266,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_FeedbackType
     TrainingOptions_FeedbackType
-      ( TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED,
+      (
+        TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED,
         TrainingOptions_FeedbackType_Implicit,
         TrainingOptions_FeedbackType_Explicit,
         ..
@@ -246,7 +275,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_HolidayRegion
     TrainingOptions_HolidayRegion
-      ( TrainingOptions_HolidayRegion_HOLIDAYREGIONUNSPECIFIED,
+      (
+        TrainingOptions_HolidayRegion_HOLIDAYREGIONUNSPECIFIED,
         TrainingOptions_HolidayRegion_Global,
         TrainingOptions_HolidayRegion_NA,
         TrainingOptions_HolidayRegion_Japac,
@@ -320,7 +350,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_HparamTuningObjectivesItem
     TrainingOptions_HparamTuningObjectivesItem
-      ( TrainingOptions_HparamTuningObjectivesItem_HPARAMTUNINGOBJECTIVEUNSPECIFIED,
+      (
+        TrainingOptions_HparamTuningObjectivesItem_HPARAMTUNINGOBJECTIVEUNSPECIFIED,
         TrainingOptions_HparamTuningObjectivesItem_MEANABSOLUTEERROR,
         TrainingOptions_HparamTuningObjectivesItem_MEANSQUAREDERROR,
         TrainingOptions_HparamTuningObjectivesItem_MEANSQUAREDLOGERROR,
@@ -342,7 +373,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_KmeansInitializationMethod
     TrainingOptions_KmeansInitializationMethod
-      ( TrainingOptions_KmeansInitializationMethod_KMEANSINITIALIZATIONMETHODUNSPECIFIED,
+      (
+        TrainingOptions_KmeansInitializationMethod_KMEANSINITIALIZATIONMETHODUNSPECIFIED,
         TrainingOptions_KmeansInitializationMethod_Random,
         TrainingOptions_KmeansInitializationMethod_Custom,
         TrainingOptions_KmeansInitializationMethod_KMEANSPLUSPLUS,
@@ -351,7 +383,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_LearnRateStrategy
     TrainingOptions_LearnRateStrategy
-      ( TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED,
+      (
+        TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED,
         TrainingOptions_LearnRateStrategy_LINESEARCH,
         TrainingOptions_LearnRateStrategy_Constant,
         ..
@@ -359,7 +392,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_LossType
     TrainingOptions_LossType
-      ( TrainingOptions_LossType_LOSSTYPEUNSPECIFIED,
+      (
+        TrainingOptions_LossType_LOSSTYPEUNSPECIFIED,
         TrainingOptions_LossType_MEANSQUAREDLOSS,
         TrainingOptions_LossType_MEANLOGLOSS,
         ..
@@ -367,7 +401,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_OptimizationStrategy
     TrainingOptions_OptimizationStrategy
-      ( TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED,
+      (
+        TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED,
         TrainingOptions_OptimizationStrategy_BATCHGRADIENTDESCENT,
         TrainingOptions_OptimizationStrategy_NORMALEQUATION,
         ..
@@ -375,7 +410,8 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_TreeMethod
     TrainingOptions_TreeMethod
-      ( TrainingOptions_TreeMethod_TREEMETHODUNSPECIFIED,
+      (
+        TrainingOptions_TreeMethod_TREEMETHODUNSPECIFIED,
         TrainingOptions_TreeMethod_Auto,
         TrainingOptions_TreeMethod_Exact,
         TrainingOptions_TreeMethod_Approx,
@@ -385,37 +421,38 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobsListProjection
     JobsListProjection
-      ( JobsListProjection_Full,
+      (
+        JobsListProjection_Full,
         JobsListProjection_Minimal,
         ..
       ),
 
     -- * JobsListStateFilter
     JobsListStateFilter
-      ( JobsListStateFilter_Done,
+      (
+        JobsListStateFilter_Done,
         JobsListStateFilter_Pending,
         JobsListStateFilter_Running,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | Optional. Defaults to FIXED_TYPE.
-newtype Argument_ArgumentKind = Argument_ArgumentKind {fromArgument_ArgumentKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Argument_ArgumentKind = Argument_ArgumentKind { fromArgument_ArgumentKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED :: Argument_ArgumentKind
 pattern Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED = Argument_ArgumentKind "ARGUMENT_KIND_UNSPECIFIED"
 
@@ -431,23 +468,22 @@ pattern Argument_ArgumentKind_ANYTYPE = Argument_ArgumentKind "ANY_TYPE"
   Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED,
   Argument_ArgumentKind_FIXEDTYPE,
   Argument_ArgumentKind_ANYTYPE,
-  Argument_ArgumentKind
-  #-}
+  Argument_ArgumentKind #-}
 
 -- | Optional. Specifies whether the argument is input or output. Can be set for procedures only.
-newtype Argument_Mode = Argument_Mode {fromArgument_Mode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Argument_Mode = Argument_Mode { fromArgument_Mode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Argument_Mode_MODEUNSPECIFIED :: Argument_Mode
 pattern Argument_Mode_MODEUNSPECIFIED = Argument_Mode "MODE_UNSPECIFIED"
 
@@ -468,20 +504,19 @@ pattern Argument_Mode_Inout = Argument_Mode "INOUT"
   Argument_Mode_IN,
   Argument_Mode_Out,
   Argument_Mode_Inout,
-  Argument_Mode
-  #-}
+  Argument_Mode #-}
 
-newtype ArimaForecastingMetrics_SeasonalPeriodsItem = ArimaForecastingMetrics_SeasonalPeriodsItem {fromArimaForecastingMetrics_SeasonalPeriodsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ArimaForecastingMetrics_SeasonalPeriodsItem = ArimaForecastingMetrics_SeasonalPeriodsItem { fromArimaForecastingMetrics_SeasonalPeriodsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified seasonal period.
 pattern ArimaForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaForecastingMetrics_SeasonalPeriodsItem
@@ -519,20 +554,19 @@ pattern ArimaForecastingMetrics_SeasonalPeriodsItem_Yearly = ArimaForecastingMet
   ArimaForecastingMetrics_SeasonalPeriodsItem_Monthly,
   ArimaForecastingMetrics_SeasonalPeriodsItem_Quarterly,
   ArimaForecastingMetrics_SeasonalPeriodsItem_Yearly,
-  ArimaForecastingMetrics_SeasonalPeriodsItem
-  #-}
+  ArimaForecastingMetrics_SeasonalPeriodsItem #-}
 
-newtype ArimaModelInfo_SeasonalPeriodsItem = ArimaModelInfo_SeasonalPeriodsItem {fromArimaModelInfo_SeasonalPeriodsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ArimaModelInfo_SeasonalPeriodsItem = ArimaModelInfo_SeasonalPeriodsItem { fromArimaModelInfo_SeasonalPeriodsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified seasonal period.
 pattern ArimaModelInfo_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaModelInfo_SeasonalPeriodsItem
@@ -570,20 +604,19 @@ pattern ArimaModelInfo_SeasonalPeriodsItem_Yearly = ArimaModelInfo_SeasonalPerio
   ArimaModelInfo_SeasonalPeriodsItem_Monthly,
   ArimaModelInfo_SeasonalPeriodsItem_Quarterly,
   ArimaModelInfo_SeasonalPeriodsItem_Yearly,
-  ArimaModelInfo_SeasonalPeriodsItem
-  #-}
+  ArimaModelInfo_SeasonalPeriodsItem #-}
 
-newtype ArimaResult_SeasonalPeriodsItem = ArimaResult_SeasonalPeriodsItem {fromArimaResult_SeasonalPeriodsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ArimaResult_SeasonalPeriodsItem = ArimaResult_SeasonalPeriodsItem { fromArimaResult_SeasonalPeriodsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified seasonal period.
 pattern ArimaResult_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaResult_SeasonalPeriodsItem
@@ -621,20 +654,19 @@ pattern ArimaResult_SeasonalPeriodsItem_Yearly = ArimaResult_SeasonalPeriodsItem
   ArimaResult_SeasonalPeriodsItem_Monthly,
   ArimaResult_SeasonalPeriodsItem_Quarterly,
   ArimaResult_SeasonalPeriodsItem_Yearly,
-  ArimaResult_SeasonalPeriodsItem
-  #-}
+  ArimaResult_SeasonalPeriodsItem #-}
 
-newtype ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem = ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem {fromArimaSingleModelForecastingMetrics_SeasonalPeriodsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem = ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem { fromArimaSingleModelForecastingMetrics_SeasonalPeriodsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified seasonal period.
 pattern ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
@@ -672,21 +704,20 @@ pattern ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Yearly = ArimaSin
   ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Monthly,
   ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Quarterly,
   ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Yearly,
-  ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
-  #-}
+  ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -709,20 +740,19 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType
-  #-}
+  AuditLogConfig_LogType #-}
 
-newtype DatasetAccessEntry_TargetTypesItem = DatasetAccessEntry_TargetTypesItem {fromDatasetAccessEntry_TargetTypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DatasetAccessEntry_TargetTypesItem = DatasetAccessEntry_TargetTypesItem { fromDatasetAccessEntry_TargetTypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. You must set a target type explicitly.
 pattern DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED :: DatasetAccessEntry_TargetTypesItem
@@ -735,23 +765,22 @@ pattern DatasetAccessEntry_TargetTypesItem_Views = DatasetAccessEntry_TargetType
 {-# COMPLETE
   DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
   DatasetAccessEntry_TargetTypesItem_Views,
-  DatasetAccessEntry_TargetTypesItem
-  #-}
+  DatasetAccessEntry_TargetTypesItem #-}
 
 -- | The status of the trial.
-newtype HparamTuningTrial_Status = HparamTuningTrial_Status {fromHparamTuningTrial_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype HparamTuningTrial_Status = HparamTuningTrial_Status { fromHparamTuningTrial_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED :: HparamTuningTrial_Status
 pattern HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED = HparamTuningTrial_Status "TRIAL_STATUS_UNSPECIFIED"
 
@@ -787,23 +816,22 @@ pattern HparamTuningTrial_Status_STOPPEDEARLY = HparamTuningTrial_Status "STOPPE
   HparamTuningTrial_Status_Failed,
   HparamTuningTrial_Status_Infeasible,
   HparamTuningTrial_Status_STOPPEDEARLY,
-  HparamTuningTrial_Status
-  #-}
+  HparamTuningTrial_Status #-}
 
 -- | Output only. Type of the model resource.
-newtype Model_ModelType = Model_ModelType {fromModel_ModelType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Model_ModelType = Model_ModelType { fromModel_ModelType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Model_ModelType_MODELTYPEUNSPECIFIED :: Model_ModelType
 pattern Model_ModelType_MODELTYPEUNSPECIFIED = Model_ModelType "MODEL_TYPE_UNSPECIFIED"
 
@@ -884,21 +912,20 @@ pattern Model_ModelType_ARIMAPLUS = Model_ModelType "ARIMA_PLUS"
   Model_ModelType_Pca,
   Model_ModelType_Autoencoder,
   Model_ModelType_ARIMAPLUS,
-  Model_ModelType
-  #-}
+  Model_ModelType #-}
 
 -- | Optional. The determinism level of the JavaScript UDF, if defined.
-newtype Routine_DeterminismLevel = Routine_DeterminismLevel {fromRoutine_DeterminismLevel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Routine_DeterminismLevel = Routine_DeterminismLevel { fromRoutine_DeterminismLevel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The determinism of the UDF is unspecified.
 pattern Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED :: Routine_DeterminismLevel
@@ -916,23 +943,22 @@ pattern Routine_DeterminismLevel_NOTDETERMINISTIC = Routine_DeterminismLevel "NO
   Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED,
   Routine_DeterminismLevel_Deterministic,
   Routine_DeterminismLevel_NOTDETERMINISTIC,
-  Routine_DeterminismLevel
-  #-}
+  Routine_DeterminismLevel #-}
 
 -- | Optional. Defaults to \"SQL\".
-newtype Routine_Language = Routine_Language {fromRoutine_Language :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Routine_Language = Routine_Language { fromRoutine_Language :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Routine_Language_LANGUAGEUNSPECIFIED :: Routine_Language
 pattern Routine_Language_LANGUAGEUNSPECIFIED = Routine_Language "LANGUAGE_UNSPECIFIED"
 
@@ -948,23 +974,22 @@ pattern Routine_Language_Javascript = Routine_Language "JAVASCRIPT"
   Routine_Language_LANGUAGEUNSPECIFIED,
   Routine_Language_Sql,
   Routine_Language_Javascript,
-  Routine_Language
-  #-}
+  Routine_Language #-}
 
 -- | Required. The type of routine.
-newtype Routine_RoutineType = Routine_RoutineType {fromRoutine_RoutineType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Routine_RoutineType = Routine_RoutineType { fromRoutine_RoutineType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Routine_RoutineType_ROUTINETYPEUNSPECIFIED :: Routine_RoutineType
 pattern Routine_RoutineType_ROUTINETYPEUNSPECIFIED = Routine_RoutineType "ROUTINE_TYPE_UNSPECIFIED"
 
@@ -985,21 +1010,20 @@ pattern Routine_RoutineType_TABLEVALUEDFUNCTION = Routine_RoutineType "TABLE_VAL
   Routine_RoutineType_SCALARFUNCTION,
   Routine_RoutineType_Procedure,
   Routine_RoutineType_TABLEVALUEDFUNCTION,
-  Routine_RoutineType
-  #-}
+  Routine_RoutineType #-}
 
 -- | Required. The top level type of this field. Can be any standard SQL data type (e.g., \"INT64\", \"DATE\", \"ARRAY\").
-newtype StandardSqlDataType_TypeKind = StandardSqlDataType_TypeKind {fromStandardSqlDataType_TypeKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype StandardSqlDataType_TypeKind = StandardSqlDataType_TypeKind { fromStandardSqlDataType_TypeKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid type.
 pattern StandardSqlDataType_TypeKind_TYPEKINDUNSPECIFIED :: StandardSqlDataType_TypeKind
@@ -1087,21 +1111,20 @@ pattern StandardSqlDataType_TypeKind_Struct = StandardSqlDataType_TypeKind "STRU
   StandardSqlDataType_TypeKind_Json,
   StandardSqlDataType_TypeKind_Array,
   StandardSqlDataType_TypeKind_Struct,
-  StandardSqlDataType_TypeKind
-  #-}
+  StandardSqlDataType_TypeKind #-}
 
 -- | Booster type for boosted tree models.
-newtype TrainingOptions_BoosterType = TrainingOptions_BoosterType {fromTrainingOptions_BoosterType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_BoosterType = TrainingOptions_BoosterType { fromTrainingOptions_BoosterType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified booster type.
 pattern TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED :: TrainingOptions_BoosterType
@@ -1119,21 +1142,20 @@ pattern TrainingOptions_BoosterType_Dart = TrainingOptions_BoosterType "DART"
   TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
   TrainingOptions_BoosterType_Gbtree,
   TrainingOptions_BoosterType_Dart,
-  TrainingOptions_BoosterType
-  #-}
+  TrainingOptions_BoosterType #-}
 
 -- | Type of normalization algorithm for boosted tree models using dart booster.
-newtype TrainingOptions_DartNormalizeType = TrainingOptions_DartNormalizeType {fromTrainingOptions_DartNormalizeType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_DartNormalizeType = TrainingOptions_DartNormalizeType { fromTrainingOptions_DartNormalizeType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified dart normalize type.
 pattern TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED :: TrainingOptions_DartNormalizeType
@@ -1151,23 +1173,22 @@ pattern TrainingOptions_DartNormalizeType_Forest = TrainingOptions_DartNormalize
   TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED,
   TrainingOptions_DartNormalizeType_Tree,
   TrainingOptions_DartNormalizeType_Forest,
-  TrainingOptions_DartNormalizeType
-  #-}
+  TrainingOptions_DartNormalizeType #-}
 
 -- | The data frequency of a time series.
-newtype TrainingOptions_DataFrequency = TrainingOptions_DataFrequency {fromTrainingOptions_DataFrequency :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_DataFrequency = TrainingOptions_DataFrequency { fromTrainingOptions_DataFrequency :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED :: TrainingOptions_DataFrequency
 pattern TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED = TrainingOptions_DataFrequency "DATA_FREQUENCY_UNSPECIFIED"
 
@@ -1213,23 +1234,22 @@ pattern TrainingOptions_DataFrequency_PERMINUTE = TrainingOptions_DataFrequency 
   TrainingOptions_DataFrequency_Daily,
   TrainingOptions_DataFrequency_Hourly,
   TrainingOptions_DataFrequency_PERMINUTE,
-  TrainingOptions_DataFrequency
-  #-}
+  TrainingOptions_DataFrequency #-}
 
 -- | The data split type for training and evaluation, e.g. RANDOM.
-newtype TrainingOptions_DataSplitMethod = TrainingOptions_DataSplitMethod {fromTrainingOptions_DataSplitMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_DataSplitMethod = TrainingOptions_DataSplitMethod { fromTrainingOptions_DataSplitMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED :: TrainingOptions_DataSplitMethod
 pattern TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED = TrainingOptions_DataSplitMethod "DATA_SPLIT_METHOD_UNSPECIFIED"
 
@@ -1260,23 +1280,22 @@ pattern TrainingOptions_DataSplitMethod_AUTOSPLIT = TrainingOptions_DataSplitMet
   TrainingOptions_DataSplitMethod_Sequential,
   TrainingOptions_DataSplitMethod_NOSPLIT,
   TrainingOptions_DataSplitMethod_AUTOSPLIT,
-  TrainingOptions_DataSplitMethod
-  #-}
+  TrainingOptions_DataSplitMethod #-}
 
 -- | Distance type for clustering models.
-newtype TrainingOptions_DistanceType = TrainingOptions_DistanceType {fromTrainingOptions_DistanceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_DistanceType = TrainingOptions_DistanceType { fromTrainingOptions_DistanceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED :: TrainingOptions_DistanceType
 pattern TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED = TrainingOptions_DistanceType "DISTANCE_TYPE_UNSPECIFIED"
 
@@ -1292,23 +1311,22 @@ pattern TrainingOptions_DistanceType_Cosine = TrainingOptions_DistanceType "COSI
   TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED,
   TrainingOptions_DistanceType_Euclidean,
   TrainingOptions_DistanceType_Cosine,
-  TrainingOptions_DistanceType
-  #-}
+  TrainingOptions_DistanceType #-}
 
 -- | Feedback type that specifies which algorithm to run for matrix factorization.
-newtype TrainingOptions_FeedbackType = TrainingOptions_FeedbackType {fromTrainingOptions_FeedbackType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_FeedbackType = TrainingOptions_FeedbackType { fromTrainingOptions_FeedbackType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED :: TrainingOptions_FeedbackType
 pattern TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED = TrainingOptions_FeedbackType "FEEDBACK_TYPE_UNSPECIFIED"
 
@@ -1324,21 +1342,20 @@ pattern TrainingOptions_FeedbackType_Explicit = TrainingOptions_FeedbackType "EX
   TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED,
   TrainingOptions_FeedbackType_Implicit,
   TrainingOptions_FeedbackType_Explicit,
-  TrainingOptions_FeedbackType
-  #-}
+  TrainingOptions_FeedbackType #-}
 
 -- | The geographical region based on which the holidays are considered in time series modeling. If a valid value is specified, then holiday effects modeling is enabled.
-newtype TrainingOptions_HolidayRegion = TrainingOptions_HolidayRegion {fromTrainingOptions_HolidayRegion :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_HolidayRegion = TrainingOptions_HolidayRegion { fromTrainingOptions_HolidayRegion :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Holiday region unspecified.
 pattern TrainingOptions_HolidayRegion_HOLIDAYREGIONUNSPECIFIED :: TrainingOptions_HolidayRegion
@@ -1686,20 +1703,19 @@ pattern TrainingOptions_HolidayRegion_ZA = TrainingOptions_HolidayRegion "ZA"
   TrainingOptions_HolidayRegion_VE,
   TrainingOptions_HolidayRegion_VN,
   TrainingOptions_HolidayRegion_ZA,
-  TrainingOptions_HolidayRegion
-  #-}
+  TrainingOptions_HolidayRegion #-}
 
-newtype TrainingOptions_HparamTuningObjectivesItem = TrainingOptions_HparamTuningObjectivesItem {fromTrainingOptions_HparamTuningObjectivesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_HparamTuningObjectivesItem = TrainingOptions_HparamTuningObjectivesItem { fromTrainingOptions_HparamTuningObjectivesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified evaluation metric.
 pattern TrainingOptions_HparamTuningObjectivesItem_HPARAMTUNINGOBJECTIVEUNSPECIFIED :: TrainingOptions_HparamTuningObjectivesItem
@@ -1787,21 +1803,20 @@ pattern TrainingOptions_HparamTuningObjectivesItem_AVERAGERANK = TrainingOptions
   TrainingOptions_HparamTuningObjectivesItem_MEANAVERAGEPRECISION,
   TrainingOptions_HparamTuningObjectivesItem_NORMALIZEDDISCOUNTEDCUMULATIVEGAIN,
   TrainingOptions_HparamTuningObjectivesItem_AVERAGERANK,
-  TrainingOptions_HparamTuningObjectivesItem
-  #-}
+  TrainingOptions_HparamTuningObjectivesItem #-}
 
 -- | The method used to initialize the centroids for kmeans algorithm.
-newtype TrainingOptions_KmeansInitializationMethod = TrainingOptions_KmeansInitializationMethod {fromTrainingOptions_KmeansInitializationMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_KmeansInitializationMethod = TrainingOptions_KmeansInitializationMethod { fromTrainingOptions_KmeansInitializationMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified initialization method.
 pattern TrainingOptions_KmeansInitializationMethod_KMEANSINITIALIZATIONMETHODUNSPECIFIED :: TrainingOptions_KmeansInitializationMethod
@@ -1824,23 +1839,22 @@ pattern TrainingOptions_KmeansInitializationMethod_KMEANSPLUSPLUS = TrainingOpti
   TrainingOptions_KmeansInitializationMethod_Random,
   TrainingOptions_KmeansInitializationMethod_Custom,
   TrainingOptions_KmeansInitializationMethod_KMEANSPLUSPLUS,
-  TrainingOptions_KmeansInitializationMethod
-  #-}
+  TrainingOptions_KmeansInitializationMethod #-}
 
 -- | The strategy to determine learn rate for the current iteration.
-newtype TrainingOptions_LearnRateStrategy = TrainingOptions_LearnRateStrategy {fromTrainingOptions_LearnRateStrategy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_LearnRateStrategy = TrainingOptions_LearnRateStrategy { fromTrainingOptions_LearnRateStrategy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED :: TrainingOptions_LearnRateStrategy
 pattern TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED = TrainingOptions_LearnRateStrategy "LEARN_RATE_STRATEGY_UNSPECIFIED"
 
@@ -1856,23 +1870,22 @@ pattern TrainingOptions_LearnRateStrategy_Constant = TrainingOptions_LearnRateSt
   TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED,
   TrainingOptions_LearnRateStrategy_LINESEARCH,
   TrainingOptions_LearnRateStrategy_Constant,
-  TrainingOptions_LearnRateStrategy
-  #-}
+  TrainingOptions_LearnRateStrategy #-}
 
 -- | Type of loss function used during training run.
-newtype TrainingOptions_LossType = TrainingOptions_LossType {fromTrainingOptions_LossType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_LossType = TrainingOptions_LossType { fromTrainingOptions_LossType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_LossType_LOSSTYPEUNSPECIFIED :: TrainingOptions_LossType
 pattern TrainingOptions_LossType_LOSSTYPEUNSPECIFIED = TrainingOptions_LossType "LOSS_TYPE_UNSPECIFIED"
 
@@ -1888,23 +1901,22 @@ pattern TrainingOptions_LossType_MEANLOGLOSS = TrainingOptions_LossType "MEAN_LO
   TrainingOptions_LossType_LOSSTYPEUNSPECIFIED,
   TrainingOptions_LossType_MEANSQUAREDLOSS,
   TrainingOptions_LossType_MEANLOGLOSS,
-  TrainingOptions_LossType
-  #-}
+  TrainingOptions_LossType #-}
 
 -- | Optimization strategy for training linear regression models.
-newtype TrainingOptions_OptimizationStrategy = TrainingOptions_OptimizationStrategy {fromTrainingOptions_OptimizationStrategy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_OptimizationStrategy = TrainingOptions_OptimizationStrategy { fromTrainingOptions_OptimizationStrategy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED :: TrainingOptions_OptimizationStrategy
 pattern TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED = TrainingOptions_OptimizationStrategy "OPTIMIZATION_STRATEGY_UNSPECIFIED"
 
@@ -1920,21 +1932,20 @@ pattern TrainingOptions_OptimizationStrategy_NORMALEQUATION = TrainingOptions_Op
   TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED,
   TrainingOptions_OptimizationStrategy_BATCHGRADIENTDESCENT,
   TrainingOptions_OptimizationStrategy_NORMALEQUATION,
-  TrainingOptions_OptimizationStrategy
-  #-}
+  TrainingOptions_OptimizationStrategy #-}
 
 -- | Tree construction algorithm for boosted tree models.
-newtype TrainingOptions_TreeMethod = TrainingOptions_TreeMethod {fromTrainingOptions_TreeMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TrainingOptions_TreeMethod = TrainingOptions_TreeMethod { fromTrainingOptions_TreeMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified tree method.
 pattern TrainingOptions_TreeMethod_TREEMETHODUNSPECIFIED :: TrainingOptions_TreeMethod
@@ -1962,21 +1973,20 @@ pattern TrainingOptions_TreeMethod_Hist = TrainingOptions_TreeMethod "HIST"
   TrainingOptions_TreeMethod_Exact,
   TrainingOptions_TreeMethod_Approx,
   TrainingOptions_TreeMethod_Hist,
-  TrainingOptions_TreeMethod
-  #-}
+  TrainingOptions_TreeMethod #-}
 
 -- | Restrict information returned to a set of selected fields
-newtype JobsListProjection = JobsListProjection {fromJobsListProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype JobsListProjection = JobsListProjection { fromJobsListProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes all job data
 pattern JobsListProjection_Full :: JobsListProjection
@@ -1989,21 +1999,20 @@ pattern JobsListProjection_Minimal = JobsListProjection "minimal"
 {-# COMPLETE
   JobsListProjection_Full,
   JobsListProjection_Minimal,
-  JobsListProjection
-  #-}
+  JobsListProjection #-}
 
 -- | Filter for job state
-newtype JobsListStateFilter = JobsListStateFilter {fromJobsListStateFilter :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype JobsListStateFilter = JobsListStateFilter { fromJobsListStateFilter :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Finished jobs
 pattern JobsListStateFilter_Done :: JobsListStateFilter
@@ -2021,5 +2030,4 @@ pattern JobsListStateFilter_Running = JobsListStateFilter "running"
   JobsListStateFilter_Done,
   JobsListStateFilter_Pending,
   JobsListStateFilter_Running,
-  JobsListStateFilter
-  #-}
+  JobsListStateFilter #-}

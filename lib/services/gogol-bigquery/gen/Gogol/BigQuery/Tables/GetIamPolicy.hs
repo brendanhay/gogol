@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,70 +36,65 @@
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tables.getIamPolicy@.
 module Gogol.BigQuery.Tables.GetIamPolicy
-  ( -- * Resource
-    BigQueryTablesGetIamPolicyResource,
+    (
+    -- * Resource
+      BigQueryTablesGetIamPolicyResource
 
     -- ** Constructing a Request
-    newBigQueryTablesGetIamPolicy,
-    BigQueryTablesGetIamPolicy,
-  )
-where
+    , newBigQueryTablesGetIamPolicy
+    , BigQueryTablesGetIamPolicy
+    ) where
 
-import Gogol.BigQuery.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigQuery.Types
 
 -- | A resource alias for @bigquery.tables.getIamPolicy@ method which the
 -- 'BigQueryTablesGetIamPolicy' request conforms to.
 type BigQueryTablesGetIamPolicyResource =
-  "bigquery"
-    Core.:> "v2"
-    Core.:> Core.CaptureMode "resource" "getIamPolicy" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] GetIamPolicyRequest
-    Core.:> Core.Post '[Core.JSON] Policy
+     "bigquery" Core.:>
+       "v2" Core.:>
+         Core.CaptureMode "resource" "getIamPolicy" Core.Text
+           Core.:>
+           Core.QueryParam "alt" Core.AltJSON Core.:>
+             Core.ReqBody '[Core.JSON] GetIamPolicyRequest Core.:>
+               Core.Post '[Core.JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
 --
 -- /See:/ 'newBigQueryTablesGetIamPolicy' smart constructor.
 data BigQueryTablesGetIamPolicy = BigQueryTablesGetIamPolicy
-  { -- | Multipart request metadata.
-    payload :: GetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: GetIamPolicyRequest
+      -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryTablesGetIamPolicy' with the minimum fields required to make a request.
-newBigQueryTablesGetIamPolicy ::
-  -- |  Multipart request metadata. See 'payload'.
-  GetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  BigQueryTablesGetIamPolicy
+newBigQueryTablesGetIamPolicy 
+    ::  GetIamPolicyRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> BigQueryTablesGetIamPolicy
 newBigQueryTablesGetIamPolicy payload resource =
   BigQueryTablesGetIamPolicy {payload = payload, resource = resource}
 
-instance
-  Core.GoogleRequest
-    BigQueryTablesGetIamPolicy
-  where
-  type Rs BigQueryTablesGetIamPolicy = Policy
-  type
-    Scopes BigQueryTablesGetIamPolicy =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
-  requestClient BigQueryTablesGetIamPolicy {..} =
-    go
-      resource
-      (Core.Just Core.AltJSON)
-      payload
-      bigQueryService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryTablesGetIamPolicyResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           BigQueryTablesGetIamPolicy
+         where
+        type Rs BigQueryTablesGetIamPolicy = Policy
+        type Scopes BigQueryTablesGetIamPolicy =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient BigQueryTablesGetIamPolicy{..}
+          = go resource (Core.Just Core.AltJSON) payload
+              bigQueryService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy BigQueryTablesGetIamPolicyResource)
+                      Core.mempty
+
