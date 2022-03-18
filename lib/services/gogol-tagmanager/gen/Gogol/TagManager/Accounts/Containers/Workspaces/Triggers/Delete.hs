@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,94 +36,88 @@
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.delete@.
 module Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
-  ( -- * Resource
-    TagManagerAccountsContainersWorkspacesTriggersDeleteResource,
+    (
+    -- * Resource
+      TagManagerAccountsContainersWorkspacesTriggersDeleteResource
 
     -- ** Constructing a Request
-    newTagManagerAccountsContainersWorkspacesTriggersDelete,
-    TagManagerAccountsContainersWorkspacesTriggersDelete,
-  )
-where
+    , newTagManagerAccountsContainersWorkspacesTriggersDelete
+    , TagManagerAccountsContainersWorkspacesTriggersDelete
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.triggers.delete@ method which the
 -- 'TagManagerAccountsContainersWorkspacesTriggersDelete' request conforms to.
-type TagManagerAccountsContainersWorkspacesTriggersDeleteResource =
-  "tagmanager"
-    Core.:> "v2"
-    Core.:> Core.Capture "path" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+type TagManagerAccountsContainersWorkspacesTriggersDeleteResource
+     =
+     "tagmanager" Core.:>
+       "v2" Core.:>
+         Core.Capture "path" Core.Text Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.Delete '[Core.JSON] ()
 
 -- | Deletes a GTM Trigger.
 --
 -- /See:/ 'newTagManagerAccountsContainersWorkspacesTriggersDelete' smart constructor.
 data TagManagerAccountsContainersWorkspacesTriggersDelete = TagManagerAccountsContainersWorkspacesTriggersDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | GTM Trigger\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/triggers\/{trigger/id}
-    path :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | GTM Trigger\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/triggers\/{trigger/id}
+    , path :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesTriggersDelete' with the minimum fields required to make a request.
-newTagManagerAccountsContainersWorkspacesTriggersDelete ::
-  -- |  GTM Trigger\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/triggers\/{trigger/id} See 'path'.
-  Core.Text ->
-  TagManagerAccountsContainersWorkspacesTriggersDelete
+newTagManagerAccountsContainersWorkspacesTriggersDelete 
+    ::  Core.Text
+       -- ^  GTM Trigger\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace/id}\/triggers\/{trigger/id} See 'path'.
+    -> TagManagerAccountsContainersWorkspacesTriggersDelete
 newTagManagerAccountsContainersWorkspacesTriggersDelete path =
   TagManagerAccountsContainersWorkspacesTriggersDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      path = path,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , path = path
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TagManagerAccountsContainersWorkspacesTriggersDelete
-  where
-  type
-    Rs
-      TagManagerAccountsContainersWorkspacesTriggersDelete =
-      ()
-  type
-    Scopes
-      TagManagerAccountsContainersWorkspacesTriggersDelete =
-      '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-  requestClient
-    TagManagerAccountsContainersWorkspacesTriggersDelete {..} =
-      go
-        path
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        tagManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TagManagerAccountsContainersWorkspacesTriggersDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           TagManagerAccountsContainersWorkspacesTriggersDelete
+         where
+        type Rs
+               TagManagerAccountsContainersWorkspacesTriggersDelete
+             = ()
+        type Scopes
+               TagManagerAccountsContainersWorkspacesTriggersDelete
+             =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient
+          TagManagerAccountsContainersWorkspacesTriggersDelete{..}
+          = go path xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              tagManagerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           TagManagerAccountsContainersWorkspacesTriggersDeleteResource)
+                      Core.mempty
+
