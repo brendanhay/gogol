@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Operations.List
+-- Module      : Gogol.ServiceUsage.Operations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists operations that match the specified filter in the request. If the server doesn\'t support this method, it returns @UNIMPLEMENTED@. NOTE: the @name@ binding allows API services to override the binding to use different resource name schemes, such as @users\/*\/operations@. To override the binding, API services can add a binding such as @\"\/v1\/{name=users\/*}\/operations\"@ to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.operations.list@.
-module Network.Google.ServiceUsage.Operations.List
+module Gogol.ServiceUsage.Operations.List
   ( -- * Resource
     ServiceUsageOperationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceUsage.Operations.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
 -- | A resource alias for @serviceusage.operations.list@ method which the
 -- 'ServiceUsageOperationsList' request conforms to.
