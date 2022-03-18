@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,380 +36,380 @@
 --
 -- /See:/ <https://cloud.google.com/filestore/ Cloud Filestore API Reference>
 module Gogol.File
-  ( -- * Configuration
-    fileService,
+    (
+    -- * Configuration
+      fileService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** file.projects.locations.backups.create
-    FileProjectsLocationsBackupsCreateResource,
-    newFileProjectsLocationsBackupsCreate,
-    FileProjectsLocationsBackupsCreate,
+    , FileProjectsLocationsBackupsCreateResource
+    , newFileProjectsLocationsBackupsCreate
+    , FileProjectsLocationsBackupsCreate
 
     -- ** file.projects.locations.backups.delete
-    FileProjectsLocationsBackupsDeleteResource,
-    newFileProjectsLocationsBackupsDelete,
-    FileProjectsLocationsBackupsDelete,
+    , FileProjectsLocationsBackupsDeleteResource
+    , newFileProjectsLocationsBackupsDelete
+    , FileProjectsLocationsBackupsDelete
 
     -- ** file.projects.locations.backups.get
-    FileProjectsLocationsBackupsGetResource,
-    newFileProjectsLocationsBackupsGet,
-    FileProjectsLocationsBackupsGet,
+    , FileProjectsLocationsBackupsGetResource
+    , newFileProjectsLocationsBackupsGet
+    , FileProjectsLocationsBackupsGet
 
     -- ** file.projects.locations.backups.list
-    FileProjectsLocationsBackupsListResource,
-    newFileProjectsLocationsBackupsList,
-    FileProjectsLocationsBackupsList,
+    , FileProjectsLocationsBackupsListResource
+    , newFileProjectsLocationsBackupsList
+    , FileProjectsLocationsBackupsList
 
     -- ** file.projects.locations.backups.patch
-    FileProjectsLocationsBackupsPatchResource,
-    newFileProjectsLocationsBackupsPatch,
-    FileProjectsLocationsBackupsPatch,
+    , FileProjectsLocationsBackupsPatchResource
+    , newFileProjectsLocationsBackupsPatch
+    , FileProjectsLocationsBackupsPatch
 
     -- ** file.projects.locations.get
-    FileProjectsLocationsGetResource,
-    newFileProjectsLocationsGet,
-    FileProjectsLocationsGet,
+    , FileProjectsLocationsGetResource
+    , newFileProjectsLocationsGet
+    , FileProjectsLocationsGet
 
     -- ** file.projects.locations.instances.create
-    FileProjectsLocationsInstancesCreateResource,
-    newFileProjectsLocationsInstancesCreate,
-    FileProjectsLocationsInstancesCreate,
+    , FileProjectsLocationsInstancesCreateResource
+    , newFileProjectsLocationsInstancesCreate
+    , FileProjectsLocationsInstancesCreate
 
     -- ** file.projects.locations.instances.delete
-    FileProjectsLocationsInstancesDeleteResource,
-    newFileProjectsLocationsInstancesDelete,
-    FileProjectsLocationsInstancesDelete,
+    , FileProjectsLocationsInstancesDeleteResource
+    , newFileProjectsLocationsInstancesDelete
+    , FileProjectsLocationsInstancesDelete
 
     -- ** file.projects.locations.instances.get
-    FileProjectsLocationsInstancesGetResource,
-    newFileProjectsLocationsInstancesGet,
-    FileProjectsLocationsInstancesGet,
+    , FileProjectsLocationsInstancesGetResource
+    , newFileProjectsLocationsInstancesGet
+    , FileProjectsLocationsInstancesGet
 
     -- ** file.projects.locations.instances.list
-    FileProjectsLocationsInstancesListResource,
-    newFileProjectsLocationsInstancesList,
-    FileProjectsLocationsInstancesList,
+    , FileProjectsLocationsInstancesListResource
+    , newFileProjectsLocationsInstancesList
+    , FileProjectsLocationsInstancesList
 
     -- ** file.projects.locations.instances.patch
-    FileProjectsLocationsInstancesPatchResource,
-    newFileProjectsLocationsInstancesPatch,
-    FileProjectsLocationsInstancesPatch,
+    , FileProjectsLocationsInstancesPatchResource
+    , newFileProjectsLocationsInstancesPatch
+    , FileProjectsLocationsInstancesPatch
 
     -- ** file.projects.locations.instances.restore
-    FileProjectsLocationsInstancesRestoreResource,
-    newFileProjectsLocationsInstancesRestore,
-    FileProjectsLocationsInstancesRestore,
+    , FileProjectsLocationsInstancesRestoreResource
+    , newFileProjectsLocationsInstancesRestore
+    , FileProjectsLocationsInstancesRestore
 
     -- ** file.projects.locations.instances.snapshots.create
-    FileProjectsLocationsInstancesSnapshotsCreateResource,
-    newFileProjectsLocationsInstancesSnapshotsCreate,
-    FileProjectsLocationsInstancesSnapshotsCreate,
+    , FileProjectsLocationsInstancesSnapshotsCreateResource
+    , newFileProjectsLocationsInstancesSnapshotsCreate
+    , FileProjectsLocationsInstancesSnapshotsCreate
 
     -- ** file.projects.locations.instances.snapshots.delete
-    FileProjectsLocationsInstancesSnapshotsDeleteResource,
-    newFileProjectsLocationsInstancesSnapshotsDelete,
-    FileProjectsLocationsInstancesSnapshotsDelete,
+    , FileProjectsLocationsInstancesSnapshotsDeleteResource
+    , newFileProjectsLocationsInstancesSnapshotsDelete
+    , FileProjectsLocationsInstancesSnapshotsDelete
 
     -- ** file.projects.locations.instances.snapshots.get
-    FileProjectsLocationsInstancesSnapshotsGetResource,
-    newFileProjectsLocationsInstancesSnapshotsGet,
-    FileProjectsLocationsInstancesSnapshotsGet,
+    , FileProjectsLocationsInstancesSnapshotsGetResource
+    , newFileProjectsLocationsInstancesSnapshotsGet
+    , FileProjectsLocationsInstancesSnapshotsGet
 
     -- ** file.projects.locations.instances.snapshots.list
-    FileProjectsLocationsInstancesSnapshotsListResource,
-    newFileProjectsLocationsInstancesSnapshotsList,
-    FileProjectsLocationsInstancesSnapshotsList,
+    , FileProjectsLocationsInstancesSnapshotsListResource
+    , newFileProjectsLocationsInstancesSnapshotsList
+    , FileProjectsLocationsInstancesSnapshotsList
 
     -- ** file.projects.locations.instances.snapshots.patch
-    FileProjectsLocationsInstancesSnapshotsPatchResource,
-    newFileProjectsLocationsInstancesSnapshotsPatch,
-    FileProjectsLocationsInstancesSnapshotsPatch,
+    , FileProjectsLocationsInstancesSnapshotsPatchResource
+    , newFileProjectsLocationsInstancesSnapshotsPatch
+    , FileProjectsLocationsInstancesSnapshotsPatch
 
     -- ** file.projects.locations.list
-    FileProjectsLocationsListResource,
-    newFileProjectsLocationsList,
-    FileProjectsLocationsList,
+    , FileProjectsLocationsListResource
+    , newFileProjectsLocationsList
+    , FileProjectsLocationsList
 
     -- ** file.projects.locations.operations.cancel
-    FileProjectsLocationsOperationsCancelResource,
-    newFileProjectsLocationsOperationsCancel,
-    FileProjectsLocationsOperationsCancel,
+    , FileProjectsLocationsOperationsCancelResource
+    , newFileProjectsLocationsOperationsCancel
+    , FileProjectsLocationsOperationsCancel
 
     -- ** file.projects.locations.operations.delete
-    FileProjectsLocationsOperationsDeleteResource,
-    newFileProjectsLocationsOperationsDelete,
-    FileProjectsLocationsOperationsDelete,
+    , FileProjectsLocationsOperationsDeleteResource
+    , newFileProjectsLocationsOperationsDelete
+    , FileProjectsLocationsOperationsDelete
 
     -- ** file.projects.locations.operations.get
-    FileProjectsLocationsOperationsGetResource,
-    newFileProjectsLocationsOperationsGet,
-    FileProjectsLocationsOperationsGet,
+    , FileProjectsLocationsOperationsGetResource
+    , newFileProjectsLocationsOperationsGet
+    , FileProjectsLocationsOperationsGet
 
     -- ** file.projects.locations.operations.list
-    FileProjectsLocationsOperationsListResource,
-    newFileProjectsLocationsOperationsList,
-    FileProjectsLocationsOperationsList,
+    , FileProjectsLocationsOperationsListResource
+    , newFileProjectsLocationsOperationsList
+    , FileProjectsLocationsOperationsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Backup
-    Backup (..),
-    newBackup,
+    , Backup (..)
+    , newBackup
 
     -- ** Backup_Labels
-    Backup_Labels (..),
-    newBackup_Labels,
+    , Backup_Labels (..)
+    , newBackup_Labels
 
     -- ** Backup_SourceInstanceTier
-    Backup_SourceInstanceTier (..),
+    , Backup_SourceInstanceTier (..)
 
     -- ** Backup_State
-    Backup_State (..),
+    , Backup_State (..)
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** DailyCycle
-    DailyCycle (..),
-    newDailyCycle,
+    , DailyCycle (..)
+    , newDailyCycle
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** DenyMaintenancePeriod
-    DenyMaintenancePeriod (..),
-    newDenyMaintenancePeriod,
+    , DenyMaintenancePeriod (..)
+    , newDenyMaintenancePeriod
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** FileShareConfig
-    FileShareConfig (..),
-    newFileShareConfig,
+    , FileShareConfig (..)
+    , newFileShareConfig
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions,
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance_State
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance_State (..),
+    , GoogleCloudSaasacceleratorManagementProvidersV1Instance_State (..)
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
-    GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule,
+    , GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
-    GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings,
+    , GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
-    GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies,
+    , GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
-    GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata,
+    , GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
-    GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility,
+    , GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
-    GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities,
+    , GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource
-    GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource,
+    , GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
-    GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1SloEligibility,
+    , GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
-    GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata (..),
-    newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata,
+    , GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata (..)
+    , newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
 
     -- ** Instance
-    Instance (..),
-    newInstance,
+    , Instance (..)
+    , newInstance
 
     -- ** Instance_Labels
-    Instance_Labels (..),
-    newInstance_Labels,
+    , Instance_Labels (..)
+    , newInstance_Labels
 
     -- ** Instance_State
-    Instance_State (..),
+    , Instance_State (..)
 
     -- ** Instance_SuspensionReasonsItem
-    Instance_SuspensionReasonsItem (..),
+    , Instance_SuspensionReasonsItem (..)
 
     -- ** Instance_Tier
-    Instance_Tier (..),
+    , Instance_Tier (..)
 
     -- ** ListBackupsResponse
-    ListBackupsResponse (..),
-    newListBackupsResponse,
+    , ListBackupsResponse (..)
+    , newListBackupsResponse
 
     -- ** ListInstancesResponse
-    ListInstancesResponse (..),
-    newListInstancesResponse,
+    , ListInstancesResponse (..)
+    , newListInstancesResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListSnapshotsResponse
-    ListSnapshotsResponse (..),
-    newListSnapshotsResponse,
+    , ListSnapshotsResponse (..)
+    , newListSnapshotsResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** MaintenancePolicy
-    MaintenancePolicy (..),
-    newMaintenancePolicy,
+    , MaintenancePolicy (..)
+    , newMaintenancePolicy
 
     -- ** MaintenancePolicy_Labels
-    MaintenancePolicy_Labels (..),
-    newMaintenancePolicy_Labels,
+    , MaintenancePolicy_Labels (..)
+    , newMaintenancePolicy_Labels
 
     -- ** MaintenancePolicy_State
-    MaintenancePolicy_State (..),
+    , MaintenancePolicy_State (..)
 
     -- ** MaintenanceWindow
-    MaintenanceWindow (..),
-    newMaintenanceWindow,
+    , MaintenanceWindow (..)
+    , newMaintenanceWindow
 
     -- ** NetworkConfig
-    NetworkConfig (..),
-    newNetworkConfig,
+    , NetworkConfig (..)
+    , newNetworkConfig
 
     -- ** NetworkConfig_ConnectMode
-    NetworkConfig_ConnectMode (..),
+    , NetworkConfig_ConnectMode (..)
 
     -- ** NetworkConfig_ModesItem
-    NetworkConfig_ModesItem (..),
+    , NetworkConfig_ModesItem (..)
 
     -- ** NfsExportOptions
-    NfsExportOptions (..),
-    newNfsExportOptions,
+    , NfsExportOptions (..)
+    , newNfsExportOptions
 
     -- ** NfsExportOptions_AccessMode
-    NfsExportOptions_AccessMode (..),
+    , NfsExportOptions_AccessMode (..)
 
     -- ** NfsExportOptions_SquashMode
-    NfsExportOptions_SquashMode (..),
+    , NfsExportOptions_SquashMode (..)
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationMetadata
-    OperationMetadata (..),
-    newOperationMetadata,
+    , OperationMetadata (..)
+    , newOperationMetadata
 
     -- ** RestoreInstanceRequest
-    RestoreInstanceRequest (..),
-    newRestoreInstanceRequest,
+    , RestoreInstanceRequest (..)
+    , newRestoreInstanceRequest
 
     -- ** Schedule
-    Schedule (..),
-    newSchedule,
+    , Schedule (..)
+    , newSchedule
 
     -- ** Schedule_Day
-    Schedule_Day (..),
+    , Schedule_Day (..)
 
     -- ** Snapshot
-    Snapshot (..),
-    newSnapshot,
+    , Snapshot (..)
+    , newSnapshot
 
     -- ** Snapshot_Labels
-    Snapshot_Labels (..),
-    newSnapshot_Labels,
+    , Snapshot_Labels (..)
+    , newSnapshot_Labels
 
     -- ** Snapshot_State
-    Snapshot_State (..),
+    , Snapshot_State (..)
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimeOfDay'
-    TimeOfDay' (..),
-    newTimeOfDay,
+    , TimeOfDay' (..)
+    , newTimeOfDay
 
     -- ** UpdatePolicy
-    UpdatePolicy (..),
-    newUpdatePolicy,
+    , UpdatePolicy (..)
+    , newUpdatePolicy
 
     -- ** UpdatePolicy_Channel
-    UpdatePolicy_Channel (..),
+    , UpdatePolicy_Channel (..)
 
     -- ** WeeklyCycle
-    WeeklyCycle (..),
-    newWeeklyCycle,
-  )
-where
+    , WeeklyCycle (..)
+    , newWeeklyCycle
+    ) where
 
 import Gogol.File.Projects.Locations.Backups.Create
 import Gogol.File.Projects.Locations.Backups.Delete
