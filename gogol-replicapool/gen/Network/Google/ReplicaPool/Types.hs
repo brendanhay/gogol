@@ -1,243 +1,169 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ReplicaPool.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.ReplicaPool.Types
-    (
-    -- * Service Configuration
-      replicaPoolService
+  ( -- * Configuration
+    replicaPoolService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , ndevCloudmanScope
-    , ndevCloudmanReadOnlyScope
-    , replicaPoolScope
-    , replicaPoolReadOnlyScope
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    ndevCloudmanScope,
+    ndevCloudmanReadOnlyScope,
+    replicaPoolScope,
+    replicaPoolReadOnlyScope,
 
-    -- * ReplicaStatus
-    , ReplicaStatus
-    , replicaStatus
-    , rsState
-    , rsTemplateVersion
-    , rsVMLink
-    , rsVMStartTime
-    , rsDetails
+    -- * Types
 
-    -- * DiskAttachment
-    , DiskAttachment
-    , diskAttachment
-    , daDeviceName
-    , daIndex
+    -- ** AccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
-    -- * PoolsDeleteRequest
-    , PoolsDeleteRequest
-    , poolsDeleteRequest
-    , pdrAbandonInstances
+    -- ** Action
+    Action (..),
+    newAction,
 
-    -- * HealthCheck
-    , HealthCheck
-    , healthCheck
-    , hcHealthyThreshold
-    , hcPath
-    , hcCheckIntervalSec
-    , hcName
-    , hcHost
-    , hcTimeoutSec
-    , hcDescription
-    , hcUnhealthyThreshold
-    , hcPort
+    -- ** DiskAttachment
+    DiskAttachment (..),
+    newDiskAttachment,
 
-    -- * Tag
-    , Tag
-    , tag
-    , tFingerPrint
-    , tItems
+    -- ** EnvVariable
+    EnvVariable (..),
+    newEnvVariable,
 
-    -- * NewDiskInitializeParams
-    , NewDiskInitializeParams
-    , newDiskInitializeParams
-    , ndipSourceImage
-    , ndipDiskSizeGb
-    , ndipDiskType
+    -- ** ExistingDisk
+    ExistingDisk (..),
+    newExistingDisk,
 
-    -- * MetadataItem
-    , MetadataItem
-    , metadataItem
-    , miValue
-    , miKey
+    -- ** HealthCheck
+    HealthCheck (..),
+    newHealthCheck,
 
-    -- * Replica
-    , Replica
-    , replica
-    , rStatus
-    , rSelfLink
-    , rName
+    -- ** Label
+    Label (..),
+    newLabel,
 
-    -- * NetworkInterface
-    , NetworkInterface
-    , networkInterface
-    , niNetwork
-    , niNetworkIP
-    , niAccessConfigs
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
 
-    -- * ExistingDisk
-    , ExistingDisk
-    , existingDisk
-    , edAttachment
-    , edSource
+    -- ** MetadataItem
+    MetadataItem (..),
+    newMetadataItem,
 
-    -- * Action
-    , Action
-    , action
-    , aCommands
-    , aTimeoutMilliSeconds
-    , aEnvVariables
+    -- ** NetworkInterface
+    NetworkInterface (..),
+    newNetworkInterface,
 
-    -- * Pool
-    , Pool
-    , pool
-    , pResourceViews
-    , pNumReplicas
-    , pTargetPool
-    , pAutoRestart
-    , pBaseInstanceName
-    , pInitialNumReplicas
-    , pCurrentNumReplicas
-    , pSelfLink
-    , pName
-    , pLabels
-    , pType
-    , pTemplate
-    , pTargetPools
-    , pDescription
-    , pHealthChecks
+    -- ** NewDisk
+    NewDisk (..),
+    newNewDisk,
 
-    -- * ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
+    -- ** NewDiskInitializeParams
+    NewDiskInitializeParams (..),
+    newNewDiskInitializeParams,
 
-    -- * VMParams
-    , VMParams
-    , vMParams
-    , vmpServiceAccounts
-    , vmpNetworkInterfaces
-    , vmpBaseInstanceName
-    , vmpOnHostMaintenance
-    , vmpMachineType
-    , vmpMetadata
-    , vmpDisksToAttach
-    , vmpCanIPForward
-    , vmpDescription
-    , vmpDisksToCreate
-    , vmpTags
+    -- ** Pool
+    Pool (..),
+    newPool,
 
-    -- * ReplicasListResponse
-    , ReplicasListResponse
-    , replicasListResponse
-    , rlrNextPageToken
-    , rlrResources
+    -- ** PoolsDeleteRequest
+    PoolsDeleteRequest (..),
+    newPoolsDeleteRequest,
 
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mFingerPrint
-    , mItems
+    -- ** PoolsListResponse
+    PoolsListResponse (..),
+    newPoolsListResponse,
 
-    -- * Template
-    , Template
-    , template
-    , tAction
-    , tVMParams
-    , tVersion
-    , tHealthChecks
+    -- ** Replica
+    Replica (..),
+    newReplica,
 
-    -- * EnvVariable
-    , EnvVariable
-    , envVariable
-    , evValue
-    , evName
-    , evHidden
+    -- ** ReplicaStatus
+    ReplicaStatus (..),
+    newReplicaStatus,
 
-    -- * ReplicasDeleteRequest
-    , ReplicasDeleteRequest
-    , replicasDeleteRequest
-    , rdrAbandonInstance
+    -- ** ReplicasDeleteRequest
+    ReplicasDeleteRequest (..),
+    newReplicasDeleteRequest,
 
-    -- * AccessConfig
-    , AccessConfig
-    , accessConfig
-    , acName
-    , acNATIP
-    , acType
+    -- ** ReplicasListResponse
+    ReplicasListResponse (..),
+    newReplicasListResponse,
 
-    -- * Label
-    , Label
-    , label
-    , lValue
-    , lKey
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
-    -- * PoolsListResponse
-    , PoolsListResponse
-    , poolsListResponse
-    , plrNextPageToken
-    , plrResources
+    -- ** Tag
+    Tag (..),
+    newTag,
 
-    -- * NewDisk
-    , NewDisk
-    , newDisk
-    , ndBoot
-    , ndAutoDelete
-    , ndAttachment
-    , ndInitializeParams
-    ) where
+    -- ** Template
+    Template (..),
+    newTemplate,
 
-import Network.Google.Prelude
-import Network.Google.ReplicaPool.Types.Product
-import Network.Google.ReplicaPool.Types.Sum
+    -- ** VmParams
+    VmParams (..),
+    newVmParams,
+  )
+where
 
--- | Default request referring to version 'v1beta1' of the Replica Pool API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolService :: ServiceConfig
-replicaPoolService
-  = defaultService (ServiceId "replicapool:v1beta1")
-      "www.googleapis.com"
+import qualified Network.Google.Prelude as Core
+import Network.Google.ReplicaPool.Internal.Product
+import Network.Google.ReplicaPool.Internal.Sum
 
--- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy
+-- | Default request referring to version @v1beta1@ of the Replica Pool API. This contains the host and root path used as a starting point for constructing service requests.
+replicaPoolService :: Core.ServiceConfig
+replicaPoolService =
+  Core.defaultService
+    (Core.ServiceId "replicapool:v1beta1")
+    "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
--- | View and manage your Google Cloud Platform management resources and
--- deployment status information
-ndevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-ndevCloudmanScope = Proxy
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Core.Proxy
 
--- | View your Google Cloud Platform management resources and deployment
--- status information
-ndevCloudmanReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-ndevCloudmanReadOnlyScope = Proxy
+-- | View and manage your Google Cloud Platform management resources and deployment status information
+ndevCloudmanScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+ndevCloudmanScope = Core.Proxy
+
+-- | View your Google Cloud Platform management resources and deployment status information
+ndevCloudmanReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+ndevCloudmanReadOnlyScope = Core.Proxy
 
 -- | View and manage replica pools
-replicaPoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
-replicaPoolScope = Proxy
+replicaPoolScope :: Core.Proxy '["https://www.googleapis.com/auth/replicapool"]
+replicaPoolScope = Core.Proxy
 
 -- | View replica pools
-replicaPoolReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
-replicaPoolReadOnlyScope = Proxy
+replicaPoolReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
+replicaPoolReadOnlyScope = Core.Proxy

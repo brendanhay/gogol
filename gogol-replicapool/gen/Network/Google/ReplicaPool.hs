@@ -1,276 +1,202 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.ReplicaPool
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Replica Pool API allows users to declaratively provision and manage
--- groups of Google Compute Engine instances based on a common template.
+-- The Replica Pool API allows users to declaratively provision and manage groups of Google Compute Engine instances based on a common template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference>
 module Network.Google.ReplicaPool
-    (
-    -- * Service Configuration
-      replicaPoolService
+  ( -- * Configuration
+    replicaPoolService,
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , ndevCloudmanScope
-    , ndevCloudmanReadOnlyScope
-    , replicaPoolScope
-    , replicaPoolReadOnlyScope
-
-    -- * API Declaration
-    , ReplicaPoolAPI
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
+    ndevCloudmanScope,
+    ndevCloudmanReadOnlyScope,
+    replicaPoolScope,
+    replicaPoolReadOnlyScope,
 
     -- * Resources
 
     -- ** replicapool.pools.delete
-    , module Network.Google.Resource.ReplicaPool.Pools.Delete
+    ReplicaPoolPoolsDeleteResource,
+    newReplicaPoolPoolsDelete,
+    ReplicaPoolPoolsDelete,
 
     -- ** replicapool.pools.get
-    , module Network.Google.Resource.ReplicaPool.Pools.Get
+    ReplicaPoolPoolsGetResource,
+    newReplicaPoolPoolsGet,
+    ReplicaPoolPoolsGet,
 
     -- ** replicapool.pools.insert
-    , module Network.Google.Resource.ReplicaPool.Pools.Insert
+    ReplicaPoolPoolsInsertResource,
+    newReplicaPoolPoolsInsert,
+    ReplicaPoolPoolsInsert,
 
     -- ** replicapool.pools.list
-    , module Network.Google.Resource.ReplicaPool.Pools.List
+    ReplicaPoolPoolsListResource,
+    newReplicaPoolPoolsList,
+    ReplicaPoolPoolsList,
 
     -- ** replicapool.pools.resize
-    , module Network.Google.Resource.ReplicaPool.Pools.Resize
+    ReplicaPoolPoolsResizeResource,
+    newReplicaPoolPoolsResize,
+    ReplicaPoolPoolsResize,
 
     -- ** replicapool.pools.updatetemplate
-    , module Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
+    ReplicaPoolPoolsUpdatetemplateResource,
+    newReplicaPoolPoolsUpdatetemplate,
+    ReplicaPoolPoolsUpdatetemplate,
 
     -- ** replicapool.replicas.delete
-    , module Network.Google.Resource.ReplicaPool.Replicas.Delete
+    ReplicaPoolReplicasDeleteResource,
+    newReplicaPoolReplicasDelete,
+    ReplicaPoolReplicasDelete,
 
     -- ** replicapool.replicas.get
-    , module Network.Google.Resource.ReplicaPool.Replicas.Get
+    ReplicaPoolReplicasGetResource,
+    newReplicaPoolReplicasGet,
+    ReplicaPoolReplicasGet,
 
     -- ** replicapool.replicas.list
-    , module Network.Google.Resource.ReplicaPool.Replicas.List
+    ReplicaPoolReplicasListResource,
+    newReplicaPoolReplicasList,
+    ReplicaPoolReplicasList,
 
     -- ** replicapool.replicas.restart
-    , module Network.Google.Resource.ReplicaPool.Replicas.Restart
+    ReplicaPoolReplicasRestartResource,
+    newReplicaPoolReplicasRestart,
+    ReplicaPoolReplicasRestart,
 
     -- * Types
 
-    -- ** ReplicaStatus
-    , ReplicaStatus
-    , replicaStatus
-    , rsState
-    , rsTemplateVersion
-    , rsVMLink
-    , rsVMStartTime
-    , rsDetails
-
-    -- ** DiskAttachment
-    , DiskAttachment
-    , diskAttachment
-    , daDeviceName
-    , daIndex
-
-    -- ** PoolsDeleteRequest
-    , PoolsDeleteRequest
-    , poolsDeleteRequest
-    , pdrAbandonInstances
-
-    -- ** HealthCheck
-    , HealthCheck
-    , healthCheck
-    , hcHealthyThreshold
-    , hcPath
-    , hcCheckIntervalSec
-    , hcName
-    , hcHost
-    , hcTimeoutSec
-    , hcDescription
-    , hcUnhealthyThreshold
-    , hcPort
-
-    -- ** Tag
-    , Tag
-    , tag
-    , tFingerPrint
-    , tItems
-
-    -- ** NewDiskInitializeParams
-    , NewDiskInitializeParams
-    , newDiskInitializeParams
-    , ndipSourceImage
-    , ndipDiskSizeGb
-    , ndipDiskType
-
-    -- ** MetadataItem
-    , MetadataItem
-    , metadataItem
-    , miValue
-    , miKey
-
-    -- ** Replica
-    , Replica
-    , replica
-    , rStatus
-    , rSelfLink
-    , rName
-
-    -- ** NetworkInterface
-    , NetworkInterface
-    , networkInterface
-    , niNetwork
-    , niNetworkIP
-    , niAccessConfigs
-
-    -- ** ExistingDisk
-    , ExistingDisk
-    , existingDisk
-    , edAttachment
-    , edSource
+    -- ** AccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
     -- ** Action
-    , Action
-    , action
-    , aCommands
-    , aTimeoutMilliSeconds
-    , aEnvVariables
+    Action (..),
+    newAction,
 
-    -- ** Pool
-    , Pool
-    , pool
-    , pResourceViews
-    , pNumReplicas
-    , pTargetPool
-    , pAutoRestart
-    , pBaseInstanceName
-    , pInitialNumReplicas
-    , pCurrentNumReplicas
-    , pSelfLink
-    , pName
-    , pLabels
-    , pType
-    , pTemplate
-    , pTargetPools
-    , pDescription
-    , pHealthChecks
-
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
-
-    -- ** VMParams
-    , VMParams
-    , vMParams
-    , vmpServiceAccounts
-    , vmpNetworkInterfaces
-    , vmpBaseInstanceName
-    , vmpOnHostMaintenance
-    , vmpMachineType
-    , vmpMetadata
-    , vmpDisksToAttach
-    , vmpCanIPForward
-    , vmpDescription
-    , vmpDisksToCreate
-    , vmpTags
-
-    -- ** ReplicasListResponse
-    , ReplicasListResponse
-    , replicasListResponse
-    , rlrNextPageToken
-    , rlrResources
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mFingerPrint
-    , mItems
-
-    -- ** Template
-    , Template
-    , template
-    , tAction
-    , tVMParams
-    , tVersion
-    , tHealthChecks
+    -- ** DiskAttachment
+    DiskAttachment (..),
+    newDiskAttachment,
 
     -- ** EnvVariable
-    , EnvVariable
-    , envVariable
-    , evValue
-    , evName
-    , evHidden
+    EnvVariable (..),
+    newEnvVariable,
 
-    -- ** ReplicasDeleteRequest
-    , ReplicasDeleteRequest
-    , replicasDeleteRequest
-    , rdrAbandonInstance
+    -- ** ExistingDisk
+    ExistingDisk (..),
+    newExistingDisk,
 
-    -- ** AccessConfig
-    , AccessConfig
-    , accessConfig
-    , acName
-    , acNATIP
-    , acType
+    -- ** HealthCheck
+    HealthCheck (..),
+    newHealthCheck,
 
     -- ** Label
-    , Label
-    , label
-    , lValue
-    , lKey
+    Label (..),
+    newLabel,
 
-    -- ** PoolsListResponse
-    , PoolsListResponse
-    , poolsListResponse
-    , plrNextPageToken
-    , plrResources
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
+
+    -- ** MetadataItem
+    MetadataItem (..),
+    newMetadataItem,
+
+    -- ** NetworkInterface
+    NetworkInterface (..),
+    newNetworkInterface,
 
     -- ** NewDisk
-    , NewDisk
-    , newDisk
-    , ndBoot
-    , ndAutoDelete
-    , ndAttachment
-    , ndInitializeParams
-    ) where
+    NewDisk (..),
+    newNewDisk,
 
-import Network.Google.Prelude
+    -- ** NewDiskInitializeParams
+    NewDiskInitializeParams (..),
+    newNewDiskInitializeParams,
+
+    -- ** Pool
+    Pool (..),
+    newPool,
+
+    -- ** PoolsDeleteRequest
+    PoolsDeleteRequest (..),
+    newPoolsDeleteRequest,
+
+    -- ** PoolsListResponse
+    PoolsListResponse (..),
+    newPoolsListResponse,
+
+    -- ** Replica
+    Replica (..),
+    newReplica,
+
+    -- ** ReplicaStatus
+    ReplicaStatus (..),
+    newReplicaStatus,
+
+    -- ** ReplicasDeleteRequest
+    ReplicasDeleteRequest (..),
+    newReplicasDeleteRequest,
+
+    -- ** ReplicasListResponse
+    ReplicasListResponse (..),
+    newReplicasListResponse,
+
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** Tag
+    Tag (..),
+    newTag,
+
+    -- ** Template
+    Template (..),
+    newTemplate,
+
+    -- ** VmParams
+    VmParams (..),
+    newVmParams,
+  )
+where
+
+import Network.Google.ReplicaPool.Pools.Delete
+import Network.Google.ReplicaPool.Pools.Get
+import Network.Google.ReplicaPool.Pools.Insert
+import Network.Google.ReplicaPool.Pools.List
+import Network.Google.ReplicaPool.Pools.Resize
+import Network.Google.ReplicaPool.Pools.Updatetemplate
+import Network.Google.ReplicaPool.Replicas.Delete
+import Network.Google.ReplicaPool.Replicas.Get
+import Network.Google.ReplicaPool.Replicas.List
+import Network.Google.ReplicaPool.Replicas.Restart
 import Network.Google.ReplicaPool.Types
-import Network.Google.Resource.ReplicaPool.Pools.Delete
-import Network.Google.Resource.ReplicaPool.Pools.Get
-import Network.Google.Resource.ReplicaPool.Pools.Insert
-import Network.Google.Resource.ReplicaPool.Pools.List
-import Network.Google.Resource.ReplicaPool.Pools.Resize
-import Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
-import Network.Google.Resource.ReplicaPool.Replicas.Delete
-import Network.Google.Resource.ReplicaPool.Replicas.Get
-import Network.Google.Resource.ReplicaPool.Replicas.List
-import Network.Google.Resource.ReplicaPool.Replicas.Restart
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Replica Pool API service.
-type ReplicaPoolAPI =
-     PoolsInsertResource :<|> PoolsResizeResource :<|>
-       PoolsListResource
-       :<|> PoolsGetResource
-       :<|> PoolsUpdatetemplateResource
-       :<|> PoolsDeleteResource
-       :<|> ReplicasListResource
-       :<|> ReplicasGetResource
-       :<|> ReplicasRestartResource
-       :<|> ReplicasDeleteResource
