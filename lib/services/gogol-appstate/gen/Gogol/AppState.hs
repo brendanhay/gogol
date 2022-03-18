@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,58 +36,58 @@
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Gogol.AppState
-  ( -- * Configuration
-    appStateService,
+    (
+    -- * Configuration
+      appStateService
 
     -- * OAuth Scopes
-    appStateScope,
+    , appStateScope
 
     -- * Resources
 
     -- ** appstate.states.clear
-    AppStateStatesClearResource,
-    newAppStateStatesClear,
-    AppStateStatesClear,
+    , AppStateStatesClearResource
+    , newAppStateStatesClear
+    , AppStateStatesClear
 
     -- ** appstate.states.delete
-    AppStateStatesDeleteResource,
-    newAppStateStatesDelete,
-    AppStateStatesDelete,
+    , AppStateStatesDeleteResource
+    , newAppStateStatesDelete
+    , AppStateStatesDelete
 
     -- ** appstate.states.get
-    AppStateStatesGetResource,
-    newAppStateStatesGet,
-    AppStateStatesGet,
+    , AppStateStatesGetResource
+    , newAppStateStatesGet
+    , AppStateStatesGet
 
     -- ** appstate.states.list
-    AppStateStatesListResource,
-    newAppStateStatesList,
-    AppStateStatesList,
+    , AppStateStatesListResource
+    , newAppStateStatesList
+    , AppStateStatesList
 
     -- ** appstate.states.update
-    AppStateStatesUpdateResource,
-    newAppStateStatesUpdate,
-    AppStateStatesUpdate,
+    , AppStateStatesUpdateResource
+    , newAppStateStatesUpdate
+    , AppStateStatesUpdate
 
     -- * Types
 
     -- ** GetResponse
-    GetResponse (..),
-    newGetResponse,
+    , GetResponse (..)
+    , newGetResponse
 
     -- ** ListResponse
-    ListResponse (..),
-    newListResponse,
+    , ListResponse (..)
+    , newListResponse
 
     -- ** UpdateRequest
-    UpdateRequest (..),
-    newUpdateRequest,
+    , UpdateRequest (..)
+    , newUpdateRequest
 
     -- ** WriteResult
-    WriteResult (..),
-    newWriteResult,
-  )
-where
+    , WriteResult (..)
+    , newWriteResult
+    ) where
 
 import Gogol.AppState.States.Clear
 import Gogol.AppState.States.Delete
