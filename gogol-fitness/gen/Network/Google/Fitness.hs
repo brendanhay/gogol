@@ -1,15 +1,28 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Fitness
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -17,310 +30,227 @@
 --
 -- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference>
 module Network.Google.Fitness
-    (
-    -- * Service Configuration
-      fitnessService
+  ( -- * Configuration
+    fitnessService,
 
     -- * OAuth Scopes
-    , fitnessBodyTemperatureReadScope
-    , fitnessBodyReadScope
-    , fitnessHeartRateWriteScope
-    , fitnessSleepWriteScope
-    , fitnessNutritionReadScope
-    , fitnessReProductiveHealthReadScope
-    , fitnessActivityReadScope
-    , fitnessReProductiveHealthWriteScope
-    , fitnessActivityWriteScope
-    , fitnessBloodPressureWriteScope
-    , fitnessSleepReadScope
-    , fitnessHeartRateReadScope
-    , fitnessBodyTemperatureWriteScope
-    , fitnessOxygenSaturationReadScope
-    , fitnessBloodGlucoseWriteScope
-    , fitnessBloodPressureReadScope
-    , fitnessLocationReadScope
-    , fitnessLocationWriteScope
-    , fitnessNutritionWriteScope
-    , fitnessBodyWriteScope
-    , fitnessBloodGlucoseReadScope
-    , fitnessOxygenSaturationWriteScope
-
-    -- * API Declaration
-    , FitnessAPI
+    fitnessActivityReadScope,
+    fitnessActivityWriteScope,
+    fitnessBlood_glucoseReadScope,
+    fitnessBlood_glucoseWriteScope,
+    fitnessBlood_pressureReadScope,
+    fitnessBlood_pressureWriteScope,
+    fitnessBodyReadScope,
+    fitnessBodyWriteScope,
+    fitnessBody_temperatureReadScope,
+    fitnessBody_temperatureWriteScope,
+    fitnessHeart_rateReadScope,
+    fitnessHeart_rateWriteScope,
+    fitnessLocationReadScope,
+    fitnessLocationWriteScope,
+    fitnessNutritionReadScope,
+    fitnessNutritionWriteScope,
+    fitnessOxygen_saturationReadScope,
+    fitnessOxygen_saturationWriteScope,
+    fitnessReproductive_healthReadScope,
+    fitnessReproductive_healthWriteScope,
+    fitnessSleepReadScope,
+    fitnessSleepWriteScope,
 
     -- * Resources
 
     -- ** fitness.users.dataSources.create
-    , module Network.Google.Resource.Fitness.Users.DataSources.Create
+    FitnessUsersDataSourcesCreateResource,
+    newFitnessUsersDataSourcesCreate,
+    FitnessUsersDataSourcesCreate,
 
     -- ** fitness.users.dataSources.dataPointChanges.list
-    , module Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
+    FitnessUsersDataSourcesDataPointChangesListResource,
+    newFitnessUsersDataSourcesDataPointChangesList,
+    FitnessUsersDataSourcesDataPointChangesList,
 
     -- ** fitness.users.dataSources.datasets.delete
-    , module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
+    FitnessUsersDataSourcesDatasetsDeleteResource,
+    newFitnessUsersDataSourcesDatasetsDelete,
+    FitnessUsersDataSourcesDatasetsDelete,
 
     -- ** fitness.users.dataSources.datasets.get
-    , module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
+    FitnessUsersDataSourcesDatasetsGetResource,
+    newFitnessUsersDataSourcesDatasetsGet,
+    FitnessUsersDataSourcesDatasetsGet,
 
     -- ** fitness.users.dataSources.datasets.patch
-    , module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
+    FitnessUsersDataSourcesDatasetsPatchResource,
+    newFitnessUsersDataSourcesDatasetsPatch,
+    FitnessUsersDataSourcesDatasetsPatch,
 
     -- ** fitness.users.dataSources.delete
-    , module Network.Google.Resource.Fitness.Users.DataSources.Delete
+    FitnessUsersDataSourcesDeleteResource,
+    newFitnessUsersDataSourcesDelete,
+    FitnessUsersDataSourcesDelete,
 
     -- ** fitness.users.dataSources.get
-    , module Network.Google.Resource.Fitness.Users.DataSources.Get
+    FitnessUsersDataSourcesGetResource,
+    newFitnessUsersDataSourcesGet,
+    FitnessUsersDataSourcesGet,
 
     -- ** fitness.users.dataSources.list
-    , module Network.Google.Resource.Fitness.Users.DataSources.List
+    FitnessUsersDataSourcesListResource,
+    newFitnessUsersDataSourcesList,
+    FitnessUsersDataSourcesList,
 
     -- ** fitness.users.dataSources.update
-    , module Network.Google.Resource.Fitness.Users.DataSources.Update
+    FitnessUsersDataSourcesUpdateResource,
+    newFitnessUsersDataSourcesUpdate,
+    FitnessUsersDataSourcesUpdate,
 
     -- ** fitness.users.dataset.aggregate
-    , module Network.Google.Resource.Fitness.Users.DataSet.Aggregate
+    FitnessUsersDatasetAggregateResource,
+    newFitnessUsersDatasetAggregate,
+    FitnessUsersDatasetAggregate,
 
     -- ** fitness.users.sessions.delete
-    , module Network.Google.Resource.Fitness.Users.Sessions.Delete
+    FitnessUsersSessionsDeleteResource,
+    newFitnessUsersSessionsDelete,
+    FitnessUsersSessionsDelete,
 
     -- ** fitness.users.sessions.list
-    , module Network.Google.Resource.Fitness.Users.Sessions.List
+    FitnessUsersSessionsListResource,
+    newFitnessUsersSessionsList,
+    FitnessUsersSessionsList,
 
     -- ** fitness.users.sessions.update
-    , module Network.Google.Resource.Fitness.Users.Sessions.Update
+    FitnessUsersSessionsUpdateResource,
+    newFitnessUsersSessionsUpdate,
+    FitnessUsersSessionsUpdate,
 
     -- * Types
 
-    -- ** AggregateBucketType
-    , AggregateBucketType (..)
-
-    -- ** DataSet
-    , DataSet
-    , dataSet
-    , dsNextPageToken
-    , dsDataSourceId
-    , dsPoint
-    , dsMinStartTimeNs
-    , dsMaxEndTimeNs
-
-    -- ** Application
-    , Application
-    , application
-    , aPackageName
-    , aName
-    , aVersion
-    , aDetailsURL
-
-    -- ** AggregateResponse
-    , AggregateResponse
-    , aggregateResponse
-    , arBucket
-
-    -- ** AggregateBy
-    , AggregateBy
-    , aggregateBy
-    , abDataTypeName
-    , abDataSourceId
-
-    -- ** DataSourceType
-    , DataSourceType (..)
-
-    -- ** BucketByTimePeriodType
-    , BucketByTimePeriodType (..)
-
-    -- ** BucketByActivity
-    , BucketByActivity
-    , bucketByActivity
-    , bbaMinDurationMillis
-    , bbaActivityDataSourceId
-
-    -- ** AggregateRequest
-    , AggregateRequest
-    , aggregateRequest
-    , arEndTimeMillis
-    , arFilteredDataQualityStandard
-    , arAggregateBy
-    , arBucketBySession
-    , arBucketByActivityType
-    , arBucketByTime
-    , arStartTimeMillis
-    , arBucketByActivitySegment
-
-    -- ** Device
-    , Device
-    , device
-    , dManufacturer
-    , dUid
-    , dModel
-    , dVersion
-    , dType
-
-    -- ** Value
-    , Value
-    , value
-    , vMapVal
-    , vFpVal
-    , vIntVal
-    , vStringVal
-
-    -- ** BucketBySession
-    , BucketBySession
-    , bucketBySession
-    , bbsMinDurationMillis
-
-    -- ** DataPoint
-    , DataPoint
-    , dataPoint
-    , dpOriginDataSourceId
-    , dpRawTimestampNanos
-    , dpDataTypeName
-    , dpValue
-    , dpComputationTimeMillis
-    , dpEndTimeNanos
-    , dpModifiedTimeMillis
-    , dpStartTimeNanos
-
-    -- ** ListSessionsResponse
-    , ListSessionsResponse
-    , listSessionsResponse
-    , lsrNextPageToken
-    , lsrDeletedSession
-    , lsrHasMoreData
-    , lsrSession
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** AggregateBucket
-    , AggregateBucket
-    , aggregateBucket
-    , abEndTimeMillis
-    , abDataSet
-    , abActivity
-    , abType
-    , abStartTimeMillis
-    , abSession
+    AggregateBucket (..),
+    newAggregateBucket,
 
-    -- ** MapValue
-    , MapValue
-    , mapValue
-    , mvFpVal
+    -- ** AggregateBucket_Type
+    AggregateBucket_Type (..),
 
-    -- ** ListDataSourcesResponse
-    , ListDataSourcesResponse
-    , listDataSourcesResponse
-    , ldsrDataSource
+    -- ** AggregateBy
+    AggregateBy (..),
+    newAggregateBy,
 
-    -- ** Xgafv
-    , Xgafv (..)
+    -- ** AggregateRequest
+    AggregateRequest (..),
+    newAggregateRequest,
 
-    -- ** DataTypeField
-    , DataTypeField
-    , dataTypeField
-    , dtfFormat
-    , dtfName
-    , dtfOptional
+    -- ** AggregateRequest_FilteredDataQualityStandardItem
+    AggregateRequest_FilteredDataQualityStandardItem (..),
 
-    -- ** AggregateRequestFilteredDataQualityStandardItem
-    , AggregateRequestFilteredDataQualityStandardItem (..)
+    -- ** AggregateResponse
+    AggregateResponse (..),
+    newAggregateResponse,
 
-    -- ** DataSource
-    , DataSource
-    , dataSource
-    , dsApplication
-    , dsDevice
-    , dsDataQualityStandard
-    , dsName
-    , dsDataType
-    , dsType
-    , dsDataStreamName
-    , dsDataStreamId
+    -- ** Application
+    Application (..),
+    newApplication,
 
-    -- ** BucketByTimePeriod
-    , BucketByTimePeriod
-    , bucketByTimePeriod
-    , bbtpValue
-    , bbtpType
-    , bbtpTimeZoneId
+    -- ** BucketByActivity
+    BucketByActivity (..),
+    newBucketByActivity,
 
-    -- ** DeviceType
-    , DeviceType (..)
-
-    -- ** ValueMapValEntry
-    , ValueMapValEntry
-    , valueMapValEntry
-    , vmveValue
-    , vmveKey
+    -- ** BucketBySession
+    BucketBySession (..),
+    newBucketBySession,
 
     -- ** BucketByTime
-    , BucketByTime
-    , bucketByTime
-    , bbtPeriod
-    , bbtDurationMillis
+    BucketByTime (..),
+    newBucketByTime,
+
+    -- ** BucketByTimePeriod
+    BucketByTimePeriod (..),
+    newBucketByTimePeriod,
+
+    -- ** BucketByTimePeriod_Type
+    BucketByTimePeriod_Type (..),
+
+    -- ** DataPoint
+    DataPoint (..),
+    newDataPoint,
+
+    -- ** DataSource
+    DataSource (..),
+    newDataSource,
+
+    -- ** DataSource_DataQualityStandardItem
+    DataSource_DataQualityStandardItem (..),
+
+    -- ** DataSource_Type
+    DataSource_Type (..),
 
     -- ** DataType
-    , DataType
-    , dataType
-    , dtField
-    , dtName
+    DataType (..),
+    newDataType,
+
+    -- ** DataTypeField
+    DataTypeField (..),
+    newDataTypeField,
+
+    -- ** DataTypeField_Format
+    DataTypeField_Format (..),
+
+    -- ** Dataset
+    Dataset (..),
+    newDataset,
+
+    -- ** Device
+    Device (..),
+    newDevice,
+
+    -- ** Device_Type
+    Device_Type (..),
 
     -- ** ListDataPointChangesResponse
-    , ListDataPointChangesResponse
-    , listDataPointChangesResponse
-    , ldpcrNextPageToken
-    , ldpcrInsertedDataPoint
-    , ldpcrDataSourceId
-    , ldpcrDeletedDataPoint
+    ListDataPointChangesResponse (..),
+    newListDataPointChangesResponse,
+
+    -- ** ListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
+
+    -- ** ListSessionsResponse
+    ListSessionsResponse (..),
+    newListSessionsResponse,
+
+    -- ** MapValue
+    MapValue (..),
+    newMapValue,
 
     -- ** Session
-    , Session
-    , session
-    , sEndTimeMillis
-    , sActiveTimeMillis
-    , sApplication
-    , sActivityType
-    , sName
-    , sModifiedTimeMillis
-    , sId
-    , sStartTimeMillis
-    , sDescription
+    Session (..),
+    newSession,
 
-    -- ** DataSourceDataQualityStandardItem
-    , DataSourceDataQualityStandardItem (..)
+    -- ** Value
+    Value (..),
+    newValue,
 
-    -- ** DataTypeFieldFormat
-    , DataTypeFieldFormat (..)
-    ) where
+    -- ** ValueMapValEntry
+    ValueMapValEntry (..),
+    newValueMapValEntry,
+  )
+where
 
-import Network.Google.Prelude
 import Network.Google.Fitness.Types
-import Network.Google.Resource.Fitness.Users.DataSet.Aggregate
-import Network.Google.Resource.Fitness.Users.DataSources.Create
-import Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
-import Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
-import Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
-import Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
-import Network.Google.Resource.Fitness.Users.DataSources.Delete
-import Network.Google.Resource.Fitness.Users.DataSources.Get
-import Network.Google.Resource.Fitness.Users.DataSources.List
-import Network.Google.Resource.Fitness.Users.DataSources.Update
-import Network.Google.Resource.Fitness.Users.Sessions.Delete
-import Network.Google.Resource.Fitness.Users.Sessions.List
-import Network.Google.Resource.Fitness.Users.Sessions.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Fitness API service.
-type FitnessAPI =
-     UsersDataSetAggregateResource :<|>
-       UsersDataSourcesDataSetsPatchResource
-       :<|> UsersDataSourcesDataSetsGetResource
-       :<|> UsersDataSourcesDataSetsDeleteResource
-       :<|> UsersDataSourcesDataPointChangesListResource
-       :<|> UsersDataSourcesListResource
-       :<|> UsersDataSourcesGetResource
-       :<|> UsersDataSourcesCreateResource
-       :<|> UsersDataSourcesDeleteResource
-       :<|> UsersDataSourcesUpdateResource
-       :<|> UsersSessionsListResource
-       :<|> UsersSessionsDeleteResource
-       :<|> UsersSessionsUpdateResource
+import Network.Google.Fitness.Users.DataSources.Create
+import Network.Google.Fitness.Users.DataSources.DataPointChanges.List
+import Network.Google.Fitness.Users.DataSources.Datasets.Delete
+import Network.Google.Fitness.Users.DataSources.Datasets.Get
+import Network.Google.Fitness.Users.DataSources.Datasets.Patch
+import Network.Google.Fitness.Users.DataSources.Delete
+import Network.Google.Fitness.Users.DataSources.Get
+import Network.Google.Fitness.Users.DataSources.List
+import Network.Google.Fitness.Users.DataSources.Update
+import Network.Google.Fitness.Users.Dataset.Aggregate
+import Network.Google.Fitness.Users.Sessions.Delete
+import Network.Google.Fitness.Users.Sessions.List
+import Network.Google.Fitness.Users.Sessions.Update
