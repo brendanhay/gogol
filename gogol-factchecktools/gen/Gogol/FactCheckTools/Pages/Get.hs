@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools.Pages.Delete
+-- Module      : Gogol.FactCheckTools.Pages.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete all @ClaimReview@ markup on a page.
+-- Get all @ClaimReview@ markup on a page.
 --
--- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference> for @factchecktools.pages.delete@.
-module Network.Google.FactCheckTools.Pages.Delete
+-- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference> for @factchecktools.pages.get@.
+module Gogol.FactCheckTools.Pages.Get
   ( -- * Resource
-    FactCheckToolsPagesDeleteResource,
+    FactCheckToolsPagesGetResource,
 
     -- ** Constructing a Request
-    newFactCheckToolsPagesDelete,
-    FactCheckToolsPagesDelete,
+    newFactCheckToolsPagesGet,
+    FactCheckToolsPagesGet,
   )
 where
 
-import Network.Google.FactCheckTools.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FactCheckTools.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @factchecktools.pages.delete@ method which the
--- 'FactCheckToolsPagesDelete' request conforms to.
-type FactCheckToolsPagesDeleteResource =
+-- | A resource alias for @factchecktools.pages.get@ method which the
+-- 'FactCheckToolsPagesGet' request conforms to.
+type FactCheckToolsPagesGetResource =
   "v1alpha1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,21 @@ type FactCheckToolsPagesDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
+    Core.:> Core.Get
+              '[Core.JSON]
+              GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
 
--- | Delete all @ClaimReview@ markup on a page.
+-- | Get all @ClaimReview@ markup on a page.
 --
--- /See:/ 'newFactCheckToolsPagesDelete' smart constructor.
-data FactCheckToolsPagesDelete = FactCheckToolsPagesDelete
+-- /See:/ 'newFactCheckToolsPagesGet' smart constructor.
+data FactCheckToolsPagesGet = FactCheckToolsPagesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the resource to delete, in the form of @pages\/{page_id}@.
+    -- | The name of the resource to get, in the form of @pages\/{page_id}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +76,13 @@ data FactCheckToolsPagesDelete = FactCheckToolsPagesDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FactCheckToolsPagesDelete' with the minimum fields required to make a request.
-newFactCheckToolsPagesDelete ::
-  -- |  The name of the resource to delete, in the form of @pages\/{page_id}@. See 'name'.
+-- | Creates a value of 'FactCheckToolsPagesGet' with the minimum fields required to make a request.
+newFactCheckToolsPagesGet ::
+  -- |  The name of the resource to get, in the form of @pages\/{page_id}@. See 'name'.
   Core.Text ->
-  FactCheckToolsPagesDelete
-newFactCheckToolsPagesDelete name =
-  FactCheckToolsPagesDelete
+  FactCheckToolsPagesGet
+newFactCheckToolsPagesGet name =
+  FactCheckToolsPagesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -89,14 +91,14 @@ newFactCheckToolsPagesDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest FactCheckToolsPagesDelete where
+instance Core.GoogleRequest FactCheckToolsPagesGet where
   type
-    Rs FactCheckToolsPagesDelete =
-      GoogleProtobufEmpty
+    Rs FactCheckToolsPagesGet =
+      GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
   type
-    Scopes FactCheckToolsPagesDelete =
+    Scopes FactCheckToolsPagesGet =
       '["https://www.googleapis.com/auth/userinfo.email"]
-  requestClient FactCheckToolsPagesDelete {..} =
+  requestClient FactCheckToolsPagesGet {..} =
     go
       name
       xgafv
@@ -110,6 +112,6 @@ instance Core.GoogleRequest FactCheckToolsPagesDelete where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy FactCheckToolsPagesDeleteResource
+              Core.Proxy FactCheckToolsPagesGetResource
           )
           Core.mempty

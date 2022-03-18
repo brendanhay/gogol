@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools.Claims.Search
+-- Module      : Gogol.FactCheckTools.Claims.Search
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Search through fact-checked claims.
 --
 -- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference> for @factchecktools.claims.search@.
-module Network.Google.FactCheckTools.Claims.Search
+module Gogol.FactCheckTools.Claims.Search
   ( -- * Resource
     FactCheckToolsClaimsSearchResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FactCheckTools.Claims.Search
   )
 where
 
-import Network.Google.FactCheckTools.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FactCheckTools.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @factchecktools.claims.search@ method which the
 -- 'FactCheckToolsClaimsSearch' request conforms to.

@@ -38,23 +38,24 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.FactCheckTools
-    Network.Google.FactCheckTools.Claims.Search
-    Network.Google.FactCheckTools.Pages.Create
-    Network.Google.FactCheckTools.Pages.Delete
-    Network.Google.FactCheckTools.Pages.Get
-    Network.Google.FactCheckTools.Pages.List
-    Network.Google.FactCheckTools.Pages.Update
-    Network.Google.FactCheckTools.Types
+    Gogol.FactCheckTools
+    Gogol.FactCheckTools.Claims.Search
+    Gogol.FactCheckTools.Pages.Create
+    Gogol.FactCheckTools.Pages.Delete
+    Gogol.FactCheckTools.Pages.Get
+    Gogol.FactCheckTools.Pages.List
+    Gogol.FactCheckTools.Pages.Update
+    Gogol.FactCheckTools.Types
 
   other-modules:
-    Network.Google.FactCheckTools.Internal.Product
-    Network.Google.FactCheckTools.Internal.Sum
+    Gogol.FactCheckTools.Internal.Product
+    Gogol.FactCheckTools.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

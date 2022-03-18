@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.FactCheckTools.Pages.List
+-- Module      : Gogol.FactCheckTools.Pages.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List the @ClaimReview@ markup pages for a specific URL or for an organization.
 --
 -- /See:/ <https://developers.google.com/fact-check/tools/api/ Fact Check Tools API Reference> for @factchecktools.pages.list@.
-module Network.Google.FactCheckTools.Pages.List
+module Gogol.FactCheckTools.Pages.List
   ( -- * Resource
     FactCheckToolsPagesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.FactCheckTools.Pages.List
   )
 where
 
-import Network.Google.FactCheckTools.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.FactCheckTools.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @factchecktools.pages.list@ method which the
 -- 'FactCheckToolsPagesList' request conforms to.
