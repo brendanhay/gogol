@@ -19,46 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudScheduler.Projects.Locations.Jobs.Delete
+-- Module      : Gogol.CloudScheduler.Projects.Locations.Jobs.Resume
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a job.
+-- Resume a job. This method reenables a job after it has been Job.State.PAUSED. The state of a job is stored in Job.state; after calling this method it will be set to Job.State.ENABLED. A job must be in Job.State.PAUSED to be resumed.
 --
--- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.jobs.delete@.
-module Network.Google.CloudScheduler.Projects.Locations.Jobs.Delete
+-- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.jobs.resume@.
+module Gogol.CloudScheduler.Projects.Locations.Jobs.Resume
   ( -- * Resource
-    CloudSchedulerProjectsLocationsJobsDeleteResource,
+    CloudSchedulerProjectsLocationsJobsResumeResource,
 
     -- ** Constructing a Request
-    newCloudSchedulerProjectsLocationsJobsDelete,
-    CloudSchedulerProjectsLocationsJobsDelete,
+    newCloudSchedulerProjectsLocationsJobsResume,
+    CloudSchedulerProjectsLocationsJobsResume,
   )
 where
 
-import Network.Google.CloudScheduler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudScheduler.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudscheduler.projects.locations.jobs.delete@ method which the
--- 'CloudSchedulerProjectsLocationsJobsDelete' request conforms to.
-type CloudSchedulerProjectsLocationsJobsDeleteResource =
+-- | A resource alias for @cloudscheduler.projects.locations.jobs.resume@ method which the
+-- 'CloudSchedulerProjectsLocationsJobsResume' request conforms to.
+type CloudSchedulerProjectsLocationsJobsResumeResource =
   "v1"
-    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.CaptureMode "name" "resume" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.ReqBody '[Core.JSON] ResumeJobRequest
+    Core.:> Core.Post '[Core.JSON] Job
 
--- | Deletes a job.
+-- | Resume a job. This method reenables a job after it has been Job.State.PAUSED. The state of a job is stored in Job.state; after calling this method it will be set to Job.State.ENABLED. A job must be in Job.State.PAUSED to be resumed.
 --
--- /See:/ 'newCloudSchedulerProjectsLocationsJobsDelete' smart constructor.
-data CloudSchedulerProjectsLocationsJobsDelete = CloudSchedulerProjectsLocationsJobsDelete
+-- /See:/ 'newCloudSchedulerProjectsLocationsJobsResume' smart constructor.
+data CloudSchedulerProjectsLocationsJobsResume = CloudSchedulerProjectsLocationsJobsResume
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -67,6 +68,8 @@ data CloudSchedulerProjectsLocationsJobsDelete = CloudSchedulerProjectsLocations
     callback :: (Core.Maybe Core.Text),
     -- | Required. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@.
     name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: ResumeJobRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,33 +77,36 @@ data CloudSchedulerProjectsLocationsJobsDelete = CloudSchedulerProjectsLocations
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudSchedulerProjectsLocationsJobsDelete' with the minimum fields required to make a request.
-newCloudSchedulerProjectsLocationsJobsDelete ::
+-- | Creates a value of 'CloudSchedulerProjectsLocationsJobsResume' with the minimum fields required to make a request.
+newCloudSchedulerProjectsLocationsJobsResume ::
   -- |  Required. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@. See 'name'.
   Core.Text ->
-  CloudSchedulerProjectsLocationsJobsDelete
-newCloudSchedulerProjectsLocationsJobsDelete name =
-  CloudSchedulerProjectsLocationsJobsDelete
+  -- |  Multipart request metadata. See 'payload'.
+  ResumeJobRequest ->
+  CloudSchedulerProjectsLocationsJobsResume
+newCloudSchedulerProjectsLocationsJobsResume name payload =
+  CloudSchedulerProjectsLocationsJobsResume
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    CloudSchedulerProjectsLocationsJobsDelete
+    CloudSchedulerProjectsLocationsJobsResume
   where
   type
-    Rs CloudSchedulerProjectsLocationsJobsDelete =
-      Empty
+    Rs CloudSchedulerProjectsLocationsJobsResume =
+      Job
   type
-    Scopes CloudSchedulerProjectsLocationsJobsDelete =
+    Scopes CloudSchedulerProjectsLocationsJobsResume =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudSchedulerProjectsLocationsJobsDelete {..} =
+    CloudSchedulerProjectsLocationsJobsResume {..} =
       go
         name
         xgafv
@@ -109,12 +115,13 @@ instance
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)
+        payload
         cloudSchedulerService
       where
         go =
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudSchedulerProjectsLocationsJobsDeleteResource
+                  CloudSchedulerProjectsLocationsJobsResumeResource
             )
             Core.mempty

@@ -39,27 +39,28 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.CloudScheduler
-    Network.Google.CloudScheduler.Projects.Locations.Get
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Create
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Delete
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Get
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.List
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Patch
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Pause
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Resume
-    Network.Google.CloudScheduler.Projects.Locations.Jobs.Run
-    Network.Google.CloudScheduler.Projects.Locations.List
-    Network.Google.CloudScheduler.Types
+    Gogol.CloudScheduler
+    Gogol.CloudScheduler.Projects.Locations.Get
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Create
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Delete
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Get
+    Gogol.CloudScheduler.Projects.Locations.Jobs.List
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Patch
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Pause
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Resume
+    Gogol.CloudScheduler.Projects.Locations.Jobs.Run
+    Gogol.CloudScheduler.Projects.Locations.List
+    Gogol.CloudScheduler.Types
 
   other-modules:
-    Network.Google.CloudScheduler.Internal.Product
-    Network.Google.CloudScheduler.Internal.Sum
+    Gogol.CloudScheduler.Internal.Product
+    Gogol.CloudScheduler.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

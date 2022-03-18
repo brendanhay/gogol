@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudScheduler.Projects.Locations.Get
+-- Module      : Gogol.CloudScheduler.Projects.Locations.Jobs.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about a location.
+-- Gets a job.
 --
--- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.get@.
-module Network.Google.CloudScheduler.Projects.Locations.Get
+-- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.jobs.get@.
+module Gogol.CloudScheduler.Projects.Locations.Jobs.Get
   ( -- * Resource
-    CloudSchedulerProjectsLocationsGetResource,
+    CloudSchedulerProjectsLocationsJobsGetResource,
 
     -- ** Constructing a Request
-    newCloudSchedulerProjectsLocationsGet,
-    CloudSchedulerProjectsLocationsGet,
+    newCloudSchedulerProjectsLocationsJobsGet,
+    CloudSchedulerProjectsLocationsJobsGet,
   )
 where
 
-import Network.Google.CloudScheduler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudScheduler.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudscheduler.projects.locations.get@ method which the
--- 'CloudSchedulerProjectsLocationsGet' request conforms to.
-type CloudSchedulerProjectsLocationsGetResource =
+-- | A resource alias for @cloudscheduler.projects.locations.jobs.get@ method which the
+-- 'CloudSchedulerProjectsLocationsJobsGet' request conforms to.
+type CloudSchedulerProjectsLocationsJobsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type CloudSchedulerProjectsLocationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Location
+    Core.:> Core.Get '[Core.JSON] Job
 
--- | Gets information about a location.
+-- | Gets a job.
 --
--- /See:/ 'newCloudSchedulerProjectsLocationsGet' smart constructor.
-data CloudSchedulerProjectsLocationsGet = CloudSchedulerProjectsLocationsGet
+-- /See:/ 'newCloudSchedulerProjectsLocationsJobsGet' smart constructor.
+data CloudSchedulerProjectsLocationsJobsGet = CloudSchedulerProjectsLocationsJobsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name for the location.
+    -- | Required. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data CloudSchedulerProjectsLocationsGet = CloudSchedulerProjectsLocationsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudSchedulerProjectsLocationsGet' with the minimum fields required to make a request.
-newCloudSchedulerProjectsLocationsGet ::
-  -- |  Resource name for the location. See 'name'.
+-- | Creates a value of 'CloudSchedulerProjectsLocationsJobsGet' with the minimum fields required to make a request.
+newCloudSchedulerProjectsLocationsJobsGet ::
+  -- |  Required. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@. See 'name'.
   Core.Text ->
-  CloudSchedulerProjectsLocationsGet
-newCloudSchedulerProjectsLocationsGet name =
-  CloudSchedulerProjectsLocationsGet
+  CloudSchedulerProjectsLocationsJobsGet
+newCloudSchedulerProjectsLocationsJobsGet name =
+  CloudSchedulerProjectsLocationsJobsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,27 +91,28 @@ newCloudSchedulerProjectsLocationsGet name =
 
 instance
   Core.GoogleRequest
-    CloudSchedulerProjectsLocationsGet
+    CloudSchedulerProjectsLocationsJobsGet
   where
-  type Rs CloudSchedulerProjectsLocationsGet = Location
+  type Rs CloudSchedulerProjectsLocationsJobsGet = Job
   type
-    Scopes CloudSchedulerProjectsLocationsGet =
+    Scopes CloudSchedulerProjectsLocationsJobsGet =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient CloudSchedulerProjectsLocationsGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      cloudSchedulerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                CloudSchedulerProjectsLocationsGetResource
-          )
-          Core.mempty
+  requestClient
+    CloudSchedulerProjectsLocationsJobsGet {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        cloudSchedulerService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  CloudSchedulerProjectsLocationsJobsGetResource
+            )
+            Core.mempty

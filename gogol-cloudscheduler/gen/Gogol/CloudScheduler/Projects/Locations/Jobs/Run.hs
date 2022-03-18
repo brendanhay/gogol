@@ -19,47 +19,47 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.CloudScheduler.Projects.Locations.Jobs.Pause
+-- Module      : Gogol.CloudScheduler.Projects.Locations.Jobs.Run
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Pauses a job. If a job is paused then the system will stop executing the job until it is re-enabled via ResumeJob. The state of the job is stored in state; if paused it will be set to Job.State.PAUSED. A job must be in Job.State.ENABLED to be paused.
+-- Forces a job to run now. When this method is called, Cloud Scheduler will dispatch the job, even if the job is already running.
 --
--- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.jobs.pause@.
-module Network.Google.CloudScheduler.Projects.Locations.Jobs.Pause
+-- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference> for @cloudscheduler.projects.locations.jobs.run@.
+module Gogol.CloudScheduler.Projects.Locations.Jobs.Run
   ( -- * Resource
-    CloudSchedulerProjectsLocationsJobsPauseResource,
+    CloudSchedulerProjectsLocationsJobsRunResource,
 
     -- ** Constructing a Request
-    newCloudSchedulerProjectsLocationsJobsPause,
-    CloudSchedulerProjectsLocationsJobsPause,
+    newCloudSchedulerProjectsLocationsJobsRun,
+    CloudSchedulerProjectsLocationsJobsRun,
   )
 where
 
-import Network.Google.CloudScheduler.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.CloudScheduler.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @cloudscheduler.projects.locations.jobs.pause@ method which the
--- 'CloudSchedulerProjectsLocationsJobsPause' request conforms to.
-type CloudSchedulerProjectsLocationsJobsPauseResource =
+-- | A resource alias for @cloudscheduler.projects.locations.jobs.run@ method which the
+-- 'CloudSchedulerProjectsLocationsJobsRun' request conforms to.
+type CloudSchedulerProjectsLocationsJobsRunResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "pause" Core.Text
+    Core.:> Core.CaptureMode "name" "run" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] PauseJobRequest
+    Core.:> Core.ReqBody '[Core.JSON] RunJobRequest
     Core.:> Core.Post '[Core.JSON] Job
 
--- | Pauses a job. If a job is paused then the system will stop executing the job until it is re-enabled via ResumeJob. The state of the job is stored in state; if paused it will be set to Job.State.PAUSED. A job must be in Job.State.ENABLED to be paused.
+-- | Forces a job to run now. When this method is called, Cloud Scheduler will dispatch the job, even if the job is already running.
 --
--- /See:/ 'newCloudSchedulerProjectsLocationsJobsPause' smart constructor.
-data CloudSchedulerProjectsLocationsJobsPause = CloudSchedulerProjectsLocationsJobsPause
+-- /See:/ 'newCloudSchedulerProjectsLocationsJobsRun' smart constructor.
+data CloudSchedulerProjectsLocationsJobsRun = CloudSchedulerProjectsLocationsJobsRun
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -69,7 +69,7 @@ data CloudSchedulerProjectsLocationsJobsPause = CloudSchedulerProjectsLocationsJ
     -- | Required. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: PauseJobRequest,
+    payload :: RunJobRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,15 +77,15 @@ data CloudSchedulerProjectsLocationsJobsPause = CloudSchedulerProjectsLocationsJ
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CloudSchedulerProjectsLocationsJobsPause' with the minimum fields required to make a request.
-newCloudSchedulerProjectsLocationsJobsPause ::
+-- | Creates a value of 'CloudSchedulerProjectsLocationsJobsRun' with the minimum fields required to make a request.
+newCloudSchedulerProjectsLocationsJobsRun ::
   -- |  Required. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  PauseJobRequest ->
-  CloudSchedulerProjectsLocationsJobsPause
-newCloudSchedulerProjectsLocationsJobsPause name payload =
-  CloudSchedulerProjectsLocationsJobsPause
+  RunJobRequest ->
+  CloudSchedulerProjectsLocationsJobsRun
+newCloudSchedulerProjectsLocationsJobsRun name payload =
+  CloudSchedulerProjectsLocationsJobsRun
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -97,16 +97,14 @@ newCloudSchedulerProjectsLocationsJobsPause name payload =
 
 instance
   Core.GoogleRequest
-    CloudSchedulerProjectsLocationsJobsPause
+    CloudSchedulerProjectsLocationsJobsRun
   where
+  type Rs CloudSchedulerProjectsLocationsJobsRun = Job
   type
-    Rs CloudSchedulerProjectsLocationsJobsPause =
-      Job
-  type
-    Scopes CloudSchedulerProjectsLocationsJobsPause =
+    Scopes CloudSchedulerProjectsLocationsJobsRun =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    CloudSchedulerProjectsLocationsJobsPause {..} =
+    CloudSchedulerProjectsLocationsJobsRun {..} =
       go
         name
         xgafv
@@ -122,6 +120,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  CloudSchedulerProjectsLocationsJobsPauseResource
+                  CloudSchedulerProjectsLocationsJobsRunResource
             )
             Core.mempty
