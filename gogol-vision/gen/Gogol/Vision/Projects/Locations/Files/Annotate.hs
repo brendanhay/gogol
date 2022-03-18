@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Files.Annotate
+-- Module      : Gogol.Vision.Projects.Locations.Files.Annotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -28,24 +28,25 @@
 --
 -- Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.files.annotate@.
-module Network.Google.Vision.Files.Annotate
+-- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.locations.files.annotate@.
+module Gogol.Vision.Projects.Locations.Files.Annotate
   ( -- * Resource
-    VisionFilesAnnotateResource,
+    VisionProjectsLocationsFilesAnnotateResource,
 
     -- ** Constructing a Request
-    newVisionFilesAnnotate,
-    VisionFilesAnnotate,
+    newVisionProjectsLocationsFilesAnnotate,
+    VisionProjectsLocationsFilesAnnotate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Types
 
--- | A resource alias for @vision.files.annotate@ method which the
--- 'VisionFilesAnnotate' request conforms to.
-type VisionFilesAnnotateResource =
+-- | A resource alias for @vision.projects.locations.files.annotate@ method which the
+-- 'VisionProjectsLocationsFilesAnnotate' request conforms to.
+type VisionProjectsLocationsFilesAnnotateResource =
   "v1p2beta1"
+    Core.:> Core.Capture "parent" Core.Text
     Core.:> "files:annotate"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -62,14 +63,16 @@ type VisionFilesAnnotateResource =
 
 -- | Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
 --
--- /See:/ 'newVisionFilesAnnotate' smart constructor.
-data VisionFilesAnnotate = VisionFilesAnnotate
+-- /See:/ 'newVisionProjectsLocationsFilesAnnotate' smart constructor.
+data VisionProjectsLocationsFilesAnnotate = VisionProjectsLocationsFilesAnnotate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
+    parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -79,44 +82,53 @@ data VisionFilesAnnotate = VisionFilesAnnotate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'VisionFilesAnnotate' with the minimum fields required to make a request.
-newVisionFilesAnnotate ::
+-- | Creates a value of 'VisionProjectsLocationsFilesAnnotate' with the minimum fields required to make a request.
+newVisionProjectsLocationsFilesAnnotate ::
+  -- |  Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@. See 'parent'.
+  Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest ->
-  VisionFilesAnnotate
-newVisionFilesAnnotate payload =
-  VisionFilesAnnotate
+  VisionProjectsLocationsFilesAnnotate
+newVisionProjectsLocationsFilesAnnotate parent payload =
+  VisionProjectsLocationsFilesAnnotate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      parent = parent,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest VisionFilesAnnotate where
+instance
+  Core.GoogleRequest
+    VisionProjectsLocationsFilesAnnotate
+  where
   type
-    Rs VisionFilesAnnotate =
+    Rs VisionProjectsLocationsFilesAnnotate =
       GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
   type
-    Scopes VisionFilesAnnotate =
+    Scopes VisionProjectsLocationsFilesAnnotate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-vision"
        ]
-  requestClient VisionFilesAnnotate {..} =
-    go
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      visionService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy VisionFilesAnnotateResource
-          )
-          Core.mempty
+  requestClient
+    VisionProjectsLocationsFilesAnnotate {..} =
+      go
+        parent
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        visionService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  VisionProjectsLocationsFilesAnnotateResource
+            )
+            Core.mempty

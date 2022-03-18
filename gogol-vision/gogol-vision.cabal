@@ -39,29 +39,30 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Vision
-    Network.Google.Vision.Files.Annotate
-    Network.Google.Vision.Files.AsyncBatchAnnotate
-    Network.Google.Vision.Images.Annotate
-    Network.Google.Vision.Images.AsyncBatchAnnotate
-    Network.Google.Vision.Projects.Files.Annotate
-    Network.Google.Vision.Projects.Files.AsyncBatchAnnotate
-    Network.Google.Vision.Projects.Images.Annotate
-    Network.Google.Vision.Projects.Images.AsyncBatchAnnotate
-    Network.Google.Vision.Projects.Locations.Files.Annotate
-    Network.Google.Vision.Projects.Locations.Files.AsyncBatchAnnotate
-    Network.Google.Vision.Projects.Locations.Images.Annotate
-    Network.Google.Vision.Projects.Locations.Images.AsyncBatchAnnotate
-    Network.Google.Vision.Types
+    Gogol.Vision
+    Gogol.Vision.Files.Annotate
+    Gogol.Vision.Files.AsyncBatchAnnotate
+    Gogol.Vision.Images.Annotate
+    Gogol.Vision.Images.AsyncBatchAnnotate
+    Gogol.Vision.Projects.Files.Annotate
+    Gogol.Vision.Projects.Files.AsyncBatchAnnotate
+    Gogol.Vision.Projects.Images.Annotate
+    Gogol.Vision.Projects.Images.AsyncBatchAnnotate
+    Gogol.Vision.Projects.Locations.Files.Annotate
+    Gogol.Vision.Projects.Locations.Files.AsyncBatchAnnotate
+    Gogol.Vision.Projects.Locations.Images.Annotate
+    Gogol.Vision.Projects.Locations.Images.AsyncBatchAnnotate
+    Gogol.Vision.Types
 
   other-modules:
-    Network.Google.Vision.Internal.Product
-    Network.Google.Vision.Internal.Sum
+    Gogol.Vision.Internal.Product
+    Gogol.Vision.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

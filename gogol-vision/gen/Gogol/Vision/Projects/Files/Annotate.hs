@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Projects.Files.Annotate
+-- Module      : Gogol.Vision.Projects.Files.Annotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
 --
 -- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.files.annotate@.
-module Network.Google.Vision.Projects.Files.Annotate
+module Gogol.Vision.Projects.Files.Annotate
   ( -- * Resource
     VisionProjectsFilesAnnotateResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Vision.Projects.Files.Annotate
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Types
 
 -- | A resource alias for @vision.projects.files.annotate@ method which the
 -- 'VisionProjectsFilesAnnotate' request conforms to.

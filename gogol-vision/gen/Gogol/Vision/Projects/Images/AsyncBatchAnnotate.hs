@@ -19,35 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Projects.Images.Annotate
+-- Module      : Gogol.Vision.Projects.Images.AsyncBatchAnnotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Run image detection and annotation for a batch of images.
+-- Run asynchronous image detection and annotation for a list of images. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateImagesResponse@ (results). This service will write image annotation outputs to json files in customer GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.images.annotate@.
-module Network.Google.Vision.Projects.Images.Annotate
+-- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.images.asyncBatchAnnotate@.
+module Gogol.Vision.Projects.Images.AsyncBatchAnnotate
   ( -- * Resource
-    VisionProjectsImagesAnnotateResource,
+    VisionProjectsImagesAsyncBatchAnnotateResource,
 
     -- ** Constructing a Request
-    newVisionProjectsImagesAnnotate,
-    VisionProjectsImagesAnnotate,
+    newVisionProjectsImagesAsyncBatchAnnotate,
+    VisionProjectsImagesAsyncBatchAnnotate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Types
 
--- | A resource alias for @vision.projects.images.annotate@ method which the
--- 'VisionProjectsImagesAnnotate' request conforms to.
-type VisionProjectsImagesAnnotateResource =
+-- | A resource alias for @vision.projects.images.asyncBatchAnnotate@ method which the
+-- 'VisionProjectsImagesAsyncBatchAnnotate' request conforms to.
+type VisionProjectsImagesAsyncBatchAnnotateResource =
   "v1p2beta1"
     Core.:> Core.Capture "parent" Core.Text
-    Core.:> "images:annotate"
+    Core.:> "images:asyncBatchAnnotate"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -56,15 +56,13 @@ type VisionProjectsImagesAnnotateResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
+              GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Run image detection and annotation for a batch of images.
+-- | Run asynchronous image detection and annotation for a list of images. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateImagesResponse@ (results). This service will write image annotation outputs to json files in customer GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
 --
--- /See:/ 'newVisionProjectsImagesAnnotate' smart constructor.
-data VisionProjectsImagesAnnotate = VisionProjectsImagesAnnotate
+-- /See:/ 'newVisionProjectsImagesAsyncBatchAnnotate' smart constructor.
+data VisionProjectsImagesAsyncBatchAnnotate = VisionProjectsImagesAsyncBatchAnnotate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -74,7 +72,7 @@ data VisionProjectsImagesAnnotate = VisionProjectsImagesAnnotate
     -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
     parent :: Core.Text,
     -- | Multipart request metadata.
-    payload :: GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest,
+    payload :: GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -82,15 +80,15 @@ data VisionProjectsImagesAnnotate = VisionProjectsImagesAnnotate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'VisionProjectsImagesAnnotate' with the minimum fields required to make a request.
-newVisionProjectsImagesAnnotate ::
+-- | Creates a value of 'VisionProjectsImagesAsyncBatchAnnotate' with the minimum fields required to make a request.
+newVisionProjectsImagesAsyncBatchAnnotate ::
   -- |  Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest ->
-  VisionProjectsImagesAnnotate
-newVisionProjectsImagesAnnotate parent payload =
-  VisionProjectsImagesAnnotate
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest ->
+  VisionProjectsImagesAsyncBatchAnnotate
+newVisionProjectsImagesAsyncBatchAnnotate parent payload =
+  VisionProjectsImagesAsyncBatchAnnotate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -102,31 +100,33 @@ newVisionProjectsImagesAnnotate parent payload =
 
 instance
   Core.GoogleRequest
-    VisionProjectsImagesAnnotate
+    VisionProjectsImagesAsyncBatchAnnotate
   where
   type
-    Rs VisionProjectsImagesAnnotate =
-      GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
+    Rs VisionProjectsImagesAsyncBatchAnnotate =
+      Operation
   type
-    Scopes VisionProjectsImagesAnnotate =
+    Scopes VisionProjectsImagesAsyncBatchAnnotate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-vision"
        ]
-  requestClient VisionProjectsImagesAnnotate {..} =
-    go
-      parent
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      visionService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy VisionProjectsImagesAnnotateResource
-          )
-          Core.mempty
+  requestClient
+    VisionProjectsImagesAsyncBatchAnnotate {..} =
+      go
+        parent
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        visionService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  VisionProjectsImagesAsyncBatchAnnotateResource
+            )
+            Core.mempty

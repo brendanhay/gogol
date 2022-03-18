@@ -19,85 +19,19 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision
+-- Module      : Gogol.Vision.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.
---
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference>
-module Network.Google.Vision
+module Gogol.Vision.Types
   ( -- * Configuration
     visionService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
     cloudVisionScope,
-
-    -- * Resources
-
-    -- ** vision.files.annotate
-    VisionFilesAnnotateResource,
-    newVisionFilesAnnotate,
-    VisionFilesAnnotate,
-
-    -- ** vision.files.asyncBatchAnnotate
-    VisionFilesAsyncBatchAnnotateResource,
-    newVisionFilesAsyncBatchAnnotate,
-    VisionFilesAsyncBatchAnnotate,
-
-    -- ** vision.images.annotate
-    VisionImagesAnnotateResource,
-    newVisionImagesAnnotate,
-    VisionImagesAnnotate,
-
-    -- ** vision.images.asyncBatchAnnotate
-    VisionImagesAsyncBatchAnnotateResource,
-    newVisionImagesAsyncBatchAnnotate,
-    VisionImagesAsyncBatchAnnotate,
-
-    -- ** vision.projects.files.annotate
-    VisionProjectsFilesAnnotateResource,
-    newVisionProjectsFilesAnnotate,
-    VisionProjectsFilesAnnotate,
-
-    -- ** vision.projects.files.asyncBatchAnnotate
-    VisionProjectsFilesAsyncBatchAnnotateResource,
-    newVisionProjectsFilesAsyncBatchAnnotate,
-    VisionProjectsFilesAsyncBatchAnnotate,
-
-    -- ** vision.projects.images.annotate
-    VisionProjectsImagesAnnotateResource,
-    newVisionProjectsImagesAnnotate,
-    VisionProjectsImagesAnnotate,
-
-    -- ** vision.projects.images.asyncBatchAnnotate
-    VisionProjectsImagesAsyncBatchAnnotateResource,
-    newVisionProjectsImagesAsyncBatchAnnotate,
-    VisionProjectsImagesAsyncBatchAnnotate,
-
-    -- ** vision.projects.locations.files.annotate
-    VisionProjectsLocationsFilesAnnotateResource,
-    newVisionProjectsLocationsFilesAnnotate,
-    VisionProjectsLocationsFilesAnnotate,
-
-    -- ** vision.projects.locations.files.asyncBatchAnnotate
-    VisionProjectsLocationsFilesAsyncBatchAnnotateResource,
-    newVisionProjectsLocationsFilesAsyncBatchAnnotate,
-    VisionProjectsLocationsFilesAsyncBatchAnnotate,
-
-    -- ** vision.projects.locations.images.annotate
-    VisionProjectsLocationsImagesAnnotateResource,
-    newVisionProjectsLocationsImagesAnnotate,
-    VisionProjectsLocationsImagesAnnotate,
-
-    -- ** vision.projects.locations.images.asyncBatchAnnotate
-    VisionProjectsLocationsImagesAsyncBatchAnnotateResource,
-    newVisionProjectsLocationsImagesAsyncBatchAnnotate,
-    VisionProjectsLocationsImagesAsyncBatchAnnotate,
 
     -- * Types
 
@@ -1438,16 +1372,21 @@ module Network.Google.Vision
   )
 where
 
-import Network.Google.Vision.Files.Annotate
-import Network.Google.Vision.Files.AsyncBatchAnnotate
-import Network.Google.Vision.Images.Annotate
-import Network.Google.Vision.Images.AsyncBatchAnnotate
-import Network.Google.Vision.Projects.Files.Annotate
-import Network.Google.Vision.Projects.Files.AsyncBatchAnnotate
-import Network.Google.Vision.Projects.Images.Annotate
-import Network.Google.Vision.Projects.Images.AsyncBatchAnnotate
-import Network.Google.Vision.Projects.Locations.Files.Annotate
-import Network.Google.Vision.Projects.Locations.Files.AsyncBatchAnnotate
-import Network.Google.Vision.Projects.Locations.Images.Annotate
-import Network.Google.Vision.Projects.Locations.Images.AsyncBatchAnnotate
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Internal.Product
+import Gogol.Vision.Internal.Sum
+
+-- | Default request referring to version @v1p2beta1@ of the Cloud Vision API. This contains the host and root path used as a starting point for constructing service requests.
+visionService :: Core.ServiceConfig
+visionService =
+  Core.defaultService
+    (Core.ServiceId "vision:v1p2beta1")
+    "vision.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | Apply machine learning models to understand and label images
+cloudVisionScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-vision"]
+cloudVisionScope = Core.Proxy

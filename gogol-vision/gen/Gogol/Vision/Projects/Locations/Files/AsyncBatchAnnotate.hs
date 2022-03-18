@@ -19,35 +19,35 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Projects.Locations.Files.Annotate
+-- Module      : Gogol.Vision.Projects.Locations.Files.AsyncBatchAnnotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
+-- Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateFilesResponse@ (results).
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.locations.files.annotate@.
-module Network.Google.Vision.Projects.Locations.Files.Annotate
+-- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.projects.locations.files.asyncBatchAnnotate@.
+module Gogol.Vision.Projects.Locations.Files.AsyncBatchAnnotate
   ( -- * Resource
-    VisionProjectsLocationsFilesAnnotateResource,
+    VisionProjectsLocationsFilesAsyncBatchAnnotateResource,
 
     -- ** Constructing a Request
-    newVisionProjectsLocationsFilesAnnotate,
-    VisionProjectsLocationsFilesAnnotate,
+    newVisionProjectsLocationsFilesAsyncBatchAnnotate,
+    VisionProjectsLocationsFilesAsyncBatchAnnotate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Types
 
--- | A resource alias for @vision.projects.locations.files.annotate@ method which the
--- 'VisionProjectsLocationsFilesAnnotate' request conforms to.
-type VisionProjectsLocationsFilesAnnotateResource =
+-- | A resource alias for @vision.projects.locations.files.asyncBatchAnnotate@ method which the
+-- 'VisionProjectsLocationsFilesAsyncBatchAnnotate' request conforms to.
+type VisionProjectsLocationsFilesAsyncBatchAnnotateResource =
   "v1p2beta1"
     Core.:> Core.Capture "parent" Core.Text
-    Core.:> "files:annotate"
+    Core.:> "files:asyncBatchAnnotate"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -56,15 +56,13 @@ type VisionProjectsLocationsFilesAnnotateResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
+              GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
+    Core.:> Core.Post '[Core.JSON] Operation
 
--- | Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
+-- | Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateFilesResponse@ (results).
 --
--- /See:/ 'newVisionProjectsLocationsFilesAnnotate' smart constructor.
-data VisionProjectsLocationsFilesAnnotate = VisionProjectsLocationsFilesAnnotate
+-- /See:/ 'newVisionProjectsLocationsFilesAsyncBatchAnnotate' smart constructor.
+data VisionProjectsLocationsFilesAsyncBatchAnnotate = VisionProjectsLocationsFilesAsyncBatchAnnotate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -74,7 +72,7 @@ data VisionProjectsLocationsFilesAnnotate = VisionProjectsLocationsFilesAnnotate
     -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
     parent :: Core.Text,
     -- | Multipart request metadata.
-    payload :: GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest,
+    payload :: GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -82,15 +80,15 @@ data VisionProjectsLocationsFilesAnnotate = VisionProjectsLocationsFilesAnnotate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'VisionProjectsLocationsFilesAnnotate' with the minimum fields required to make a request.
-newVisionProjectsLocationsFilesAnnotate ::
+-- | Creates a value of 'VisionProjectsLocationsFilesAsyncBatchAnnotate' with the minimum fields required to make a request.
+newVisionProjectsLocationsFilesAsyncBatchAnnotate ::
   -- |  Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest ->
-  VisionProjectsLocationsFilesAnnotate
-newVisionProjectsLocationsFilesAnnotate parent payload =
-  VisionProjectsLocationsFilesAnnotate
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest ->
+  VisionProjectsLocationsFilesAsyncBatchAnnotate
+newVisionProjectsLocationsFilesAsyncBatchAnnotate parent payload =
+  VisionProjectsLocationsFilesAsyncBatchAnnotate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -102,18 +100,20 @@ newVisionProjectsLocationsFilesAnnotate parent payload =
 
 instance
   Core.GoogleRequest
-    VisionProjectsLocationsFilesAnnotate
+    VisionProjectsLocationsFilesAsyncBatchAnnotate
   where
   type
-    Rs VisionProjectsLocationsFilesAnnotate =
-      GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
+    Rs
+      VisionProjectsLocationsFilesAsyncBatchAnnotate =
+      Operation
   type
-    Scopes VisionProjectsLocationsFilesAnnotate =
+    Scopes
+      VisionProjectsLocationsFilesAsyncBatchAnnotate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-vision"
        ]
   requestClient
-    VisionProjectsLocationsFilesAnnotate {..} =
+    VisionProjectsLocationsFilesAsyncBatchAnnotate {..} =
       go
         parent
         xgafv
@@ -129,6 +129,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  VisionProjectsLocationsFilesAnnotateResource
+                  VisionProjectsLocationsFilesAsyncBatchAnnotateResource
             )
             Core.mempty

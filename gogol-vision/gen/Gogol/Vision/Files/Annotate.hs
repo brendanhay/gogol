@@ -19,34 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Vision.Files.AsyncBatchAnnotate
+-- Module      : Gogol.Vision.Files.Annotate
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateFilesResponse@ (results).
+-- Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.files.asyncBatchAnnotate@.
-module Network.Google.Vision.Files.AsyncBatchAnnotate
+-- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.files.annotate@.
+module Gogol.Vision.Files.Annotate
   ( -- * Resource
-    VisionFilesAsyncBatchAnnotateResource,
+    VisionFilesAnnotateResource,
 
     -- ** Constructing a Request
-    newVisionFilesAsyncBatchAnnotate,
-    VisionFilesAsyncBatchAnnotate,
+    newVisionFilesAnnotate,
+    VisionFilesAnnotate,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Vision.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Vision.Types
 
--- | A resource alias for @vision.files.asyncBatchAnnotate@ method which the
--- 'VisionFilesAsyncBatchAnnotate' request conforms to.
-type VisionFilesAsyncBatchAnnotateResource =
+-- | A resource alias for @vision.files.annotate@ method which the
+-- 'VisionFilesAnnotate' request conforms to.
+type VisionFilesAnnotateResource =
   "v1p2beta1"
-    Core.:> "files:asyncBatchAnnotate"
+    Core.:> "files:annotate"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -55,13 +55,15 @@ type VisionFilesAsyncBatchAnnotateResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+              GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
+    Core.:> Core.Post
+              '[Core.JSON]
+              GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
 
--- | Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the @google.longrunning.Operations@ interface. @Operation.metadata@ contains @OperationMetadata@ (metadata). @Operation.response@ contains @AsyncBatchAnnotateFilesResponse@ (results).
+-- | Service that performs image detection and annotation for a batch of files. Now only \"application\/pdf\", \"image\/tiff\" and \"image\/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.
 --
--- /See:/ 'newVisionFilesAsyncBatchAnnotate' smart constructor.
-data VisionFilesAsyncBatchAnnotate = VisionFilesAsyncBatchAnnotate
+-- /See:/ 'newVisionFilesAnnotate' smart constructor.
+data VisionFilesAnnotate = VisionFilesAnnotate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -69,7 +71,7 @@ data VisionFilesAsyncBatchAnnotate = VisionFilesAsyncBatchAnnotate
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest,
+    payload :: GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,13 +79,13 @@ data VisionFilesAsyncBatchAnnotate = VisionFilesAsyncBatchAnnotate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'VisionFilesAsyncBatchAnnotate' with the minimum fields required to make a request.
-newVisionFilesAsyncBatchAnnotate ::
+-- | Creates a value of 'VisionFilesAnnotate' with the minimum fields required to make a request.
+newVisionFilesAnnotate ::
   -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest ->
-  VisionFilesAsyncBatchAnnotate
-newVisionFilesAsyncBatchAnnotate payload =
-  VisionFilesAsyncBatchAnnotate
+  GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest ->
+  VisionFilesAnnotate
+newVisionFilesAnnotate payload =
+  VisionFilesAnnotate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -92,17 +94,16 @@ newVisionFilesAsyncBatchAnnotate payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    VisionFilesAsyncBatchAnnotate
-  where
-  type Rs VisionFilesAsyncBatchAnnotate = Operation
+instance Core.GoogleRequest VisionFilesAnnotate where
   type
-    Scopes VisionFilesAsyncBatchAnnotate =
+    Rs VisionFilesAnnotate =
+      GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
+  type
+    Scopes VisionFilesAnnotate =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-vision"
        ]
-  requestClient VisionFilesAsyncBatchAnnotate {..} =
+  requestClient VisionFilesAnnotate {..} =
     go
       xgafv
       accessToken
@@ -116,6 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy VisionFilesAsyncBatchAnnotateResource
+              Core.Proxy VisionFilesAnnotateResource
           )
           Core.mempty
