@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,91 +36,84 @@
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.operations.get@.
 module Gogol.CloudPrivateCatalogProducer.Operations.Get
-  ( -- * Resource
-    CloudPrivateCatalogProducerOperationsGetResource,
+    (
+    -- * Resource
+      CloudPrivateCatalogProducerOperationsGetResource
 
     -- ** Constructing a Request
-    newCloudPrivateCatalogProducerOperationsGet,
-    CloudPrivateCatalogProducerOperationsGet,
-  )
-where
+    , newCloudPrivateCatalogProducerOperationsGet
+    , CloudPrivateCatalogProducerOperationsGet
+    ) where
 
-import Gogol.CloudPrivateCatalogProducer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudPrivateCatalogProducer.Types
 
 -- | A resource alias for @cloudprivatecatalogproducer.operations.get@ method which the
 -- 'CloudPrivateCatalogProducerOperationsGet' request conforms to.
-type CloudPrivateCatalogProducerOperationsGetResource =
-  "v1beta1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] GoogleLongrunningOperation
+type CloudPrivateCatalogProducerOperationsGetResource
+     =
+     "v1beta1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] GoogleLongrunningOperation
 
 -- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ 'newCloudPrivateCatalogProducerOperationsGet' smart constructor.
 data CloudPrivateCatalogProducerOperationsGet = CloudPrivateCatalogProducerOperationsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The name of the operation resource.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudPrivateCatalogProducerOperationsGet' with the minimum fields required to make a request.
-newCloudPrivateCatalogProducerOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
-  Core.Text ->
-  CloudPrivateCatalogProducerOperationsGet
+newCloudPrivateCatalogProducerOperationsGet 
+    ::  Core.Text
+       -- ^  The name of the operation resource. See 'name'.
+    -> CloudPrivateCatalogProducerOperationsGet
 newCloudPrivateCatalogProducerOperationsGet name =
   CloudPrivateCatalogProducerOperationsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudPrivateCatalogProducerOperationsGet
-  where
-  type
-    Rs CloudPrivateCatalogProducerOperationsGet =
-      GoogleLongrunningOperation
-  type
-    Scopes CloudPrivateCatalogProducerOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient
-    CloudPrivateCatalogProducerOperationsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudPrivateCatalogProducerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudPrivateCatalogProducerOperationsGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudPrivateCatalogProducerOperationsGet
+         where
+        type Rs CloudPrivateCatalogProducerOperationsGet =
+             GoogleLongrunningOperation
+        type Scopes CloudPrivateCatalogProducerOperationsGet
+             = '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient
+          CloudPrivateCatalogProducerOperationsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              cloudPrivateCatalogProducerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudPrivateCatalogProducerOperationsGetResource)
+                      Core.mempty
+
