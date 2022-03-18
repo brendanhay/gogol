@@ -39,50 +39,51 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Vault
-    Network.Google.Vault.Matters.AddPermissions
-    Network.Google.Vault.Matters.Close
-    Network.Google.Vault.Matters.Count
-    Network.Google.Vault.Matters.Create
-    Network.Google.Vault.Matters.Delete
-    Network.Google.Vault.Matters.Exports.Create
-    Network.Google.Vault.Matters.Exports.Delete
-    Network.Google.Vault.Matters.Exports.Get
-    Network.Google.Vault.Matters.Exports.List
-    Network.Google.Vault.Matters.Get
-    Network.Google.Vault.Matters.Holds.Accounts.Create
-    Network.Google.Vault.Matters.Holds.Accounts.Delete
-    Network.Google.Vault.Matters.Holds.Accounts.List
-    Network.Google.Vault.Matters.Holds.AddHeldAccounts
-    Network.Google.Vault.Matters.Holds.Create
-    Network.Google.Vault.Matters.Holds.Delete
-    Network.Google.Vault.Matters.Holds.Get
-    Network.Google.Vault.Matters.Holds.List
-    Network.Google.Vault.Matters.Holds.RemoveHeldAccounts
-    Network.Google.Vault.Matters.Holds.Update
-    Network.Google.Vault.Matters.List
-    Network.Google.Vault.Matters.RemovePermissions
-    Network.Google.Vault.Matters.Reopen
-    Network.Google.Vault.Matters.SavedQueries.Create
-    Network.Google.Vault.Matters.SavedQueries.Delete
-    Network.Google.Vault.Matters.SavedQueries.Get
-    Network.Google.Vault.Matters.SavedQueries.List
-    Network.Google.Vault.Matters.Undelete
-    Network.Google.Vault.Matters.Update
-    Network.Google.Vault.Operations.Cancel
-    Network.Google.Vault.Operations.Delete
-    Network.Google.Vault.Operations.Get
-    Network.Google.Vault.Operations.List
-    Network.Google.Vault.Types
+    Gogol.Vault
+    Gogol.Vault.Matters.AddPermissions
+    Gogol.Vault.Matters.Close
+    Gogol.Vault.Matters.Count
+    Gogol.Vault.Matters.Create
+    Gogol.Vault.Matters.Delete
+    Gogol.Vault.Matters.Exports.Create
+    Gogol.Vault.Matters.Exports.Delete
+    Gogol.Vault.Matters.Exports.Get
+    Gogol.Vault.Matters.Exports.List
+    Gogol.Vault.Matters.Get
+    Gogol.Vault.Matters.Holds.Accounts.Create
+    Gogol.Vault.Matters.Holds.Accounts.Delete
+    Gogol.Vault.Matters.Holds.Accounts.List
+    Gogol.Vault.Matters.Holds.AddHeldAccounts
+    Gogol.Vault.Matters.Holds.Create
+    Gogol.Vault.Matters.Holds.Delete
+    Gogol.Vault.Matters.Holds.Get
+    Gogol.Vault.Matters.Holds.List
+    Gogol.Vault.Matters.Holds.RemoveHeldAccounts
+    Gogol.Vault.Matters.Holds.Update
+    Gogol.Vault.Matters.List
+    Gogol.Vault.Matters.RemovePermissions
+    Gogol.Vault.Matters.Reopen
+    Gogol.Vault.Matters.SavedQueries.Create
+    Gogol.Vault.Matters.SavedQueries.Delete
+    Gogol.Vault.Matters.SavedQueries.Get
+    Gogol.Vault.Matters.SavedQueries.List
+    Gogol.Vault.Matters.Undelete
+    Gogol.Vault.Matters.Update
+    Gogol.Vault.Operations.Cancel
+    Gogol.Vault.Operations.Delete
+    Gogol.Vault.Operations.Get
+    Gogol.Vault.Operations.List
+    Gogol.Vault.Types
 
   other-modules:
-    Network.Google.Vault.Internal.Product
-    Network.Google.Vault.Internal.Sum
+    Gogol.Vault.Internal.Product
+    Gogol.Vault.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5
