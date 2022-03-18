@@ -1,747 +1,517 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AndroidEnterprise.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AndroidEnterprise.Types
-    (
-    -- * Service Configuration
-      androidEnterpriseService
+  ( -- * Configuration
+    androidEnterpriseService,
 
     -- * OAuth Scopes
-    , androidEnterpriseScope
-
-    -- * GroupLicense
-    , GroupLicense
-    , groupLicense
-    , glNumProvisioned
-    , glNumPurchased
-    , glApproval
-    , glPermissions
-    , glProductId
-    , glAcquisitionKind
-
-    -- * StoreLayoutPagesListResponse
-    , StoreLayoutPagesListResponse
-    , storeLayoutPagesListResponse
-    , slplrPage
-
-    -- * EnterpriseAccount
-    , EnterpriseAccount
-    , enterpriseAccount
-    , eaAccountEmail
-
-    -- * AppRestrictionsSchemaRestrictionRestrictionValue
-    , AppRestrictionsSchemaRestrictionRestrictionValue
-    , appRestrictionsSchemaRestrictionRestrictionValue
-    , arsrrvValueMultiselect
-    , arsrrvValueBool
-    , arsrrvValueInteger
-    , arsrrvType
-    , arsrrvValueString
-
-    -- * AdministratorWebTokenSpecPlaySearch
-    , AdministratorWebTokenSpecPlaySearch
-    , administratorWebTokenSpecPlaySearch
-    , awtspsEnabled
-    , awtspsApproveApps
-
-    -- * DeviceState
-    , DeviceState
-    , deviceState
-    , dsAccountState
-
-    -- * AppRestrictionsSchemaRestrictionRestrictionType
-    , AppRestrictionsSchemaRestrictionRestrictionType (..)
-
-    -- * ProductPermissionState
-    , ProductPermissionState (..)
-
-    -- * GroupLicenseUsersListResponse
-    , GroupLicenseUsersListResponse
-    , groupLicenseUsersListResponse
-    , glulrUser
-
-    -- * TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- * AdministratorWebTokenSpecWebApps
-    , AdministratorWebTokenSpecWebApps
-    , administratorWebTokenSpecWebApps
-    , awtswaEnabled
-
-    -- * ProductDistributionChannel
-    , ProductDistributionChannel (..)
-
-    -- * ApprovalURLInfo
-    , ApprovalURLInfo
-    , approvalURLInfo
-    , auiApprovalURL
-
-    -- * ManagedConfigurationsSettingsListResponse
-    , ManagedConfigurationsSettingsListResponse
-    , managedConfigurationsSettingsListResponse
-    , mcslrManagedConfigurationsSettings
-
-    -- * ManagedProperty
-    , ManagedProperty
-    , managedProperty
-    , mpValueStringArray
-    , mpValueBool
-    , mpKey
-    , mpValueBundle
-    , mpValueInteger
-    , mpValueBundleArray
-    , mpValueString
-
-    -- * StoreLayoutClustersListResponse
-    , StoreLayoutClustersListResponse
-    , storeLayoutClustersListResponse
-    , slclrCluster
-
-    -- * ManagedConfiguration
-    , ManagedConfiguration
-    , managedConfiguration
-    , mcManagedProperty
-    , mcKind
-    , mcConfigurationVariables
-    , mcProductId
-
-    -- * AutoInstallConstraintDeviceIdleStateConstraint
-    , AutoInstallConstraintDeviceIdleStateConstraint (..)
-
-    -- * StoreCluster
-    , StoreCluster
-    , storeCluster
-    , scName
-    , scOrderInPage
-    , scId
-    , scProductId
-
-    -- * AdministratorWebTokenSpec
-    , AdministratorWebTokenSpec
-    , administratorWebTokenSpec
-    , awtsParent
-    , awtsZeroTouch
-    , awtsPrivateApps
-    , awtsPlaySearch
-    , awtsWebApps
-    , awtsPermission
-    , awtsStoreBuilder
-    , awtsManagedConfigurations
-
-    -- * ProductContentRating
-    , ProductContentRating (..)
-
-    -- * ProductVisibility
-    , ProductVisibility
-    , productVisibility
-    , pvTracks
-    , pvTrackIds
-    , pvProductId
-
-    -- * EntitlementReason
-    , EntitlementReason (..)
-
-    -- * Notification
-    , Notification
-    , notification
-    , nEnterpriseId
-    , nNewPermissionsEvent
-    , nProductApprovalEvent
-    , nProductAvailabilityChangeEvent
-    , nAppUpdateEvent
-    , nInstallFailureEvent
-    , nNotificationType
-    , nAppRestrictionsSchemaChangeEvent
-    , nNewDeviceEvent
-    , nTimestampMillis
-    , nDeviceReportUpdateEvent
-
-    -- * PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
-
-    -- * ProductAvailabilityChangeEventAvailabilityStatus
-    , ProductAvailabilityChangeEventAvailabilityStatus (..)
-
-    -- * ProductPermission
-    , ProductPermission
-    , productPermission
-    , ppState
-    , ppPermissionId
-
-    -- * AutoInstallConstraintNetworkTypeConstraint
-    , AutoInstallConstraintNetworkTypeConstraint (..)
-
-    -- * StoreLayoutStoreLayoutType
-    , StoreLayoutStoreLayoutType (..)
-
-    -- * NewPermissionsEvent
-    , NewPermissionsEvent
-    , newPermissionsEvent
-    , npeRequestedPermissions
-    , npeApprovedPermissions
-    , npeProductId
-
-    -- * ProductAvailabilityChangeEvent
-    , ProductAvailabilityChangeEvent
-    , productAvailabilityChangeEvent
-    , paceAvailabilityStatus
-    , paceProductId
-
-    -- * ProductApprovalEvent
-    , ProductApprovalEvent
-    , productApprovalEvent
-    , paeApproved
-    , paeProductId
-
-    -- * UserAccountType
-    , UserAccountType (..)
-
-    -- * Device
-    , Device
-    , device
-    , dReport
-    , dPolicy
-    , dManagementType
-    , dAndroidId
-
-    -- * WebAppDisplayMode
-    , WebAppDisplayMode (..)
-
-    -- * AutoInstallConstraint
-    , AutoInstallConstraint
-    , autoInstallConstraint
-    , aicChargingStateConstraint
-    , aicDeviceIdleStateConstraint
-    , aicNetworkTypeConstraint
-
-    -- * ServiceAccountKey
-    , ServiceAccountKey
-    , serviceAccountKey
-    , sakData
-    , sakId
-    , sakType
-    , sakPublicData
-
-    -- * InstallsListResponse
-    , InstallsListResponse
-    , installsListResponse
-    , ilrInstall
-
-    -- * AppRestrictionsSchemaRestriction
-    , AppRestrictionsSchemaRestriction
-    , appRestrictionsSchemaRestriction
-    , arsrRestrictionType
-    , arsrEntry
-    , arsrKey
-    , arsrEntryValue
-    , arsrDefaultValue
-    , arsrTitle
-    , arsrDescription
-    , arsrNestedRestriction
-
-    -- * ProductPolicy
-    , ProductPolicy
-    , productPolicy
-    , ppTracks
-    , ppManagedConfiguration
-    , ppTrackIds
-    , ppAutoUpdateMode
-    , ppAutoInstallPolicy
-    , ppProductId
-
-    -- * Administrator
-    , Administrator
-    , administrator
-    , aEmail
-
-    -- * UsersListResponse
-    , UsersListResponse
-    , usersListResponse
-    , ulrUser
-
-    -- * NewDeviceEventManagementType
-    , NewDeviceEventManagementType (..)
-
-    -- * AdministratorWebTokenSpecStoreBuilder
-    , AdministratorWebTokenSpecStoreBuilder
-    , administratorWebTokenSpecStoreBuilder
-    , awtssbEnabled
-
-    -- * AuthenticationToken
-    , AuthenticationToken
-    , authenticationToken
-    , atToken
-
-    -- * ProductAvailableTracksItem
-    , ProductAvailableTracksItem (..)
-
-    -- * ManagedConfigurationsSettings
-    , ManagedConfigurationsSettings
-    , managedConfigurationsSettings
-    , mcsLastUpdatedTimestampMillis
-    , mcsMcmId
-    , mcsName
-
-    -- * AppVersion
-    , AppVersion
-    , appVersion
-    , avTrack
-    , avVersionCode
-    , avVersionString
-    , avTrackId
-    , avIsProduction
-
-    -- * AdministratorWebTokenSpecPermissionItem
-    , AdministratorWebTokenSpecPermissionItem (..)
-
-    -- * AppState
-    , AppState
-    , appState
-    , asPackageName
-    , asKeyedAppState
-
-    -- * EnterprisesPullNotificationSetRequestMode
-    , EnterprisesPullNotificationSetRequestMode (..)
-
-    -- * DeviceReport
-    , DeviceReport
-    , deviceReport
-    , drLastUpdatedTimestampMillis
-    , drAppState
-
-    -- * PolicyAutoUpdatePolicy
-    , PolicyAutoUpdatePolicy (..)
-
-    -- * ManagedPropertyBundle
-    , ManagedPropertyBundle
-    , managedPropertyBundle
-    , mpbManagedProperty
-
-    -- * GroupLicensesListResponse
-    , GroupLicensesListResponse
-    , groupLicensesListResponse
-    , gllrGroupLicense
-
-    -- * PolicyDeviceReportPolicy
-    , PolicyDeviceReportPolicy (..)
-
-    -- * ProductPolicyAutoUpdateMode
-    , ProductPolicyAutoUpdateMode (..)
-
-    -- * AutoInstallConstraintChargingStateConstraint
-    , AutoInstallConstraintChargingStateConstraint (..)
-
-    -- * InstallFailureEventFailureReason
-    , InstallFailureEventFailureReason (..)
-
-    -- * ProductSet
-    , ProductSet
-    , productSet
-    , psProductVisibility
-    , psProductSetBehavior
-    , psProductId
-
-    -- * Install
-    , Install
-    , install
-    , iVersionCode
-    , iInstallState
-    , iProductId
-
-    -- * MaintenanceWindow
-    , MaintenanceWindow
-    , maintenanceWindow
-    , mwDurationMs
-    , mwStartTimeAfterMidnightMs
-
-    -- * ServiceAccountKeysListResponse
-    , ServiceAccountKeysListResponse
-    , serviceAccountKeysListResponse
-    , saklrServiceAccountKey
-
-    -- * TrackInfo
-    , TrackInfo
-    , trackInfo
-    , tiTrackAlias
-    , tiTrackId
-
-    -- * User
-    , User
-    , user
-    , uAccountIdentifier
-    , uDisplayName
-    , uId
-    , uPrimaryEmail
-    , uManagementType
-    , uAccountType
-
-    -- * AppVersionTrack
-    , AppVersionTrack (..)
-
-    -- * AppRestrictionsSchemaRestrictionRestrictionValueType
-    , AppRestrictionsSchemaRestrictionRestrictionValueType (..)
-
-    -- * ProductSetProductSetBehavior
-    , ProductSetProductSetBehavior (..)
-
-    -- * ManagedConfigurationsForDeviceListResponse
-    , ManagedConfigurationsForDeviceListResponse
-    , managedConfigurationsForDeviceListResponse
-    , mcfdlrManagedConfigurationForDevice
-
-    -- * ProductsGenerateApprovalURLResponse
-    , ProductsGenerateApprovalURLResponse
-    , productsGenerateApprovalURLResponse
-    , pgaurURL
-
-    -- * StorePage
-    , StorePage
-    , storePage
-    , spLink
-    , spName
-    , spId
-
-    -- * ProductVisibilityTracksItem
-    , ProductVisibilityTracksItem (..)
-
-    -- * EnterprisesSendTestPushNotificationResponse
-    , EnterprisesSendTestPushNotificationResponse
-    , enterprisesSendTestPushNotificationResponse
-    , estpnrTopicName
-    , estpnrMessageId
-
-    -- * ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saKey
-    , saName
-
-    -- * VariableSet
-    , VariableSet
-    , variableSet
-    , vsUserValue
-    , vsPlaceholder
-
-    -- * AppUpdateEvent
-    , AppUpdateEvent
-    , appUpdateEvent
-    , aueProductId
-
-    -- * GroupLicensePermissions
-    , GroupLicensePermissions (..)
-
-    -- * EnterprisesListResponse
-    , EnterprisesListResponse
-    , enterprisesListResponse
-    , elrEnterprise
-
-    -- * NotificationSet
-    , NotificationSet
-    , notificationSet
-    , nsNotificationSetId
-    , nsNotification
-
-    -- * InstallInstallState
-    , InstallInstallState (..)
-
-    -- * AppRestrictionsSchema
-    , AppRestrictionsSchema
-    , appRestrictionsSchema
-    , arsKind
-    , arsRestrictions
-
-    -- * UserManagementType
-    , UserManagementType (..)
-
-    -- * PolicyProductAvailabilityPolicy
-    , PolicyProductAvailabilityPolicy (..)
-
-    -- * WebAppIcon
-    , WebAppIcon
-    , webAppIcon
-    , waiImageData
-
-    -- * LocalizedText
-    , LocalizedText
-    , localizedText
-    , ltText
-    , ltLocale
-
-    -- * Xgafv
-    , Xgafv (..)
-
-    -- * AdministratorWebTokenSpecPrivateApps
-    , AdministratorWebTokenSpecPrivateApps
-    , administratorWebTokenSpecPrivateApps
-    , awtspaEnabled
-
-    -- * ProductPolicyTracksItem
-    , ProductPolicyTracksItem (..)
-
-    -- * AdministratorWebTokenSpecZeroTouch
-    , AdministratorWebTokenSpecZeroTouch
-    , administratorWebTokenSpecZeroTouch
-    , awtsztEnabled
-
-    -- * DevicesListResponse
-    , DevicesListResponse
-    , devicesListResponse
-    , dlrDevice
-
-    -- * ProductSigningCertificate
-    , ProductSigningCertificate
-    , productSigningCertificate
-    , pscCertificateHashSha256
-    , pscCertificateHashSha1
-
-    -- * Enterprise
-    , Enterprise
-    , enterprise
-    , eAdministrator
-    , ePrimaryDomain
-    , eName
-    , eId
-
-    -- * GroupLicenseAcquisitionKind
-    , GroupLicenseAcquisitionKind (..)
-
-    -- * ProductsApproveRequestApprovedPermissions
-    , ProductsApproveRequestApprovedPermissions (..)
-
-    -- * InstallFailureEvent
-    , InstallFailureEvent
-    , installFailureEvent
-    , ifeFailureReason
-    , ifeFailureDetails
-    , ifeUserId
-    , ifeDeviceId
-    , ifeProductId
-
-    -- * ManagedConfigurationsForUserListResponse
-    , ManagedConfigurationsForUserListResponse
-    , managedConfigurationsForUserListResponse
-    , mcfulrManagedConfigurationForUser
-
-    -- * ConfigurationVariables
-    , ConfigurationVariables
-    , configurationVariables
-    , cvMcmId
-    , cvVariableSet
-
-    -- * StoreLayout
-    , StoreLayout
-    , storeLayout
-    , slStoreLayoutType
-    , slHomepageId
-
-    -- * AppRestrictionsSchemaChangeEvent
-    , AppRestrictionsSchemaChangeEvent
-    , appRestrictionsSchemaChangeEvent
-    , arsceProductId
-
-    -- * NotificationNotificationType
-    , NotificationNotificationType (..)
-
-    -- * ProductProductPricing
-    , ProductProductPricing (..)
-
-    -- * NewDeviceEvent
-    , NewDeviceEvent
-    , newDeviceEvent
-    , ndeUserId
-    , ndeDpcPackageName
-    , ndeDeviceId
-    , ndeManagementType
-
-    -- * Policy
-    , Policy
-    , policy
-    , pProductAvailabilityPolicy
-    , pProductPolicy
-    , pMaintenanceWindow
-    , pDeviceReportPolicy
-    , pAutoUpdatePolicy
-
-    -- * KeyedAppState
-    , KeyedAppState
-    , keyedAppState
-    , kasStateTimestampMillis
-    , kasData
-    , kasSeverity
-    , kasKey
-    , kasMessage
-
-    -- * AdministratorWebToken
-    , AdministratorWebToken
-    , administratorWebToken
-    , awtToken
-
-    -- * SignupInfo
-    , SignupInfo
-    , signupInfo
-    , siCompletionToken
-    , siKind
-    , siURL
-
-    -- * DeviceManagementType
-    , DeviceManagementType (..)
-
-    -- * Product
-    , Product
-    , product
-    , pScreenshotURLs
-    , pLastUpdatedTimestampMillis
-    , pSmallIconURL
-    , pAuthorName
-    , pAppTracks
-    , pWorkDetailsURL
-    , pRequiresContainerApp
-    , pCategory
-    , pAppVersion
-    , pProductPricing
-    , pDistributionChannel
-    , pMinAndroidSdkVersion
-    , pAvailableCountries
-    , pFeatures
-    , pAvailableTracks
-    , pIconURL
-    , pPermissions
-    , pTitle
-    , pSigningCertificate
-    , pContentRating
-    , pProductId
-    , pRecentChanges
-    , pDescription
-    , pDetailsURL
-
-    -- * GroupLicenseApproval
-    , GroupLicenseApproval (..)
-
-    -- * EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , elrEntitlement
-
-    -- * KeyedAppStateSeverity
-    , KeyedAppStateSeverity (..)
-
-    -- * EnterprisesGetServiceAccountKeyType
-    , EnterprisesGetServiceAccountKeyType (..)
-
-    -- * ProductPermissions
-    , ProductPermissions
-    , productPermissions
-    , ppsPermission
-    , ppsProductId
-
-    -- * AdministratorWebTokenSpecManagedConfigurations
-    , AdministratorWebTokenSpecManagedConfigurations
-    , administratorWebTokenSpecManagedConfigurations
-    , awtsmcEnabled
-
-    -- * Permission
-    , Permission
-    , permission
-    , perName
-    , perDescription
-    , perPermissionId
-
-    -- * ServiceAccountKeyType
-    , ServiceAccountKeyType (..)
-
-    -- * AutoInstallPolicyAutoInstallMode
-    , AutoInstallPolicyAutoInstallMode (..)
-
-    -- * DeviceReportUpdateEvent
-    , DeviceReportUpdateEvent
-    , deviceReportUpdateEvent
-    , drueReport
-    , drueUserId
-    , drueDeviceId
-
-    -- * ProductApprovalEventApproved
-    , ProductApprovalEventApproved (..)
-
-    -- * WebAppsListResponse
-    , WebAppsListResponse
-    , webAppsListResponse
-    , walrWebApp
-
-    -- * ProductsApproveRequest
-    , ProductsApproveRequest
-    , productsApproveRequest
-    , parApprovalURLInfo
-    , parApprovedPermissions
-
-    -- * AutoInstallPolicy
-    , AutoInstallPolicy
-    , autoInstallPolicy
-    , aipAutoInstallConstraint
-    , aipAutoInstallPriority
-    , aipAutoInstallMode
-    , aipMinimumVersionCode
-
-    -- * ProductFeaturesItem
-    , ProductFeaturesItem (..)
-
-    -- * Entitlement
-    , Entitlement
-    , entitlement
-    , eReason
-    , eProductId
-
-    -- * ProductsListResponse
-    , ProductsListResponse
-    , productsListResponse
-    , plrTokenPagination
-    , plrPageInfo
-    , plrProduct
-
-    -- * DeviceStateAccountState
-    , DeviceStateAccountState (..)
-
-    -- * WebApp
-    , WebApp
-    , webApp
-    , waWebAppId
-    , waVersionCode
-    , waIcons
-    , waStartURL
-    , waDisplayMode
-    , waIsPublished
-    , waTitle
-    ) where
-
-import Network.Google.AndroidEnterprise.Types.Product
-import Network.Google.AndroidEnterprise.Types.Sum
-import Network.Google.Prelude
-
--- | Default request referring to version 'v1' of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
-androidEnterpriseService :: ServiceConfig
-androidEnterpriseService
-  = defaultService (ServiceId "androidenterprise:v1")
-      "androidenterprise.googleapis.com"
+    androidEnterpriseScope,
+
+    -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
+
+    -- ** Administrator
+    Administrator (..),
+    newAdministrator,
+
+    -- ** AdministratorWebToken
+    AdministratorWebToken (..),
+    newAdministratorWebToken,
+
+    -- ** AdministratorWebTokenSpec
+    AdministratorWebTokenSpec (..),
+    newAdministratorWebTokenSpec,
+
+    -- ** AdministratorWebTokenSpec_PermissionItem
+    AdministratorWebTokenSpec_PermissionItem (..),
+
+    -- ** AdministratorWebTokenSpecManagedConfigurations
+    AdministratorWebTokenSpecManagedConfigurations (..),
+    newAdministratorWebTokenSpecManagedConfigurations,
+
+    -- ** AdministratorWebTokenSpecPlaySearch
+    AdministratorWebTokenSpecPlaySearch (..),
+    newAdministratorWebTokenSpecPlaySearch,
+
+    -- ** AdministratorWebTokenSpecPrivateApps
+    AdministratorWebTokenSpecPrivateApps (..),
+    newAdministratorWebTokenSpecPrivateApps,
+
+    -- ** AdministratorWebTokenSpecStoreBuilder
+    AdministratorWebTokenSpecStoreBuilder (..),
+    newAdministratorWebTokenSpecStoreBuilder,
+
+    -- ** AdministratorWebTokenSpecWebApps
+    AdministratorWebTokenSpecWebApps (..),
+    newAdministratorWebTokenSpecWebApps,
+
+    -- ** AdministratorWebTokenSpecZeroTouch
+    AdministratorWebTokenSpecZeroTouch (..),
+    newAdministratorWebTokenSpecZeroTouch,
+
+    -- ** AppRestrictionsSchema
+    AppRestrictionsSchema (..),
+    newAppRestrictionsSchema,
+
+    -- ** AppRestrictionsSchemaChangeEvent
+    AppRestrictionsSchemaChangeEvent (..),
+    newAppRestrictionsSchemaChangeEvent,
+
+    -- ** AppRestrictionsSchemaRestriction
+    AppRestrictionsSchemaRestriction (..),
+    newAppRestrictionsSchemaRestriction,
+
+    -- ** AppRestrictionsSchemaRestriction_RestrictionType
+    AppRestrictionsSchemaRestriction_RestrictionType (..),
+
+    -- ** AppRestrictionsSchemaRestrictionRestrictionValue
+    AppRestrictionsSchemaRestrictionRestrictionValue (..),
+    newAppRestrictionsSchemaRestrictionRestrictionValue,
+
+    -- ** AppRestrictionsSchemaRestrictionRestrictionValue_Type
+    AppRestrictionsSchemaRestrictionRestrictionValue_Type (..),
+
+    -- ** AppState
+    AppState (..),
+    newAppState,
+
+    -- ** AppUpdateEvent
+    AppUpdateEvent (..),
+    newAppUpdateEvent,
+
+    -- ** AppVersion
+    AppVersion (..),
+    newAppVersion,
+
+    -- ** AppVersion_Track
+    AppVersion_Track (..),
+
+    -- ** ApprovalUrlInfo
+    ApprovalUrlInfo (..),
+    newApprovalUrlInfo,
+
+    -- ** AuthenticationToken
+    AuthenticationToken (..),
+    newAuthenticationToken,
+
+    -- ** AutoInstallConstraint
+    AutoInstallConstraint (..),
+    newAutoInstallConstraint,
+
+    -- ** AutoInstallConstraint_ChargingStateConstraint
+    AutoInstallConstraint_ChargingStateConstraint (..),
+
+    -- ** AutoInstallConstraint_DeviceIdleStateConstraint
+    AutoInstallConstraint_DeviceIdleStateConstraint (..),
+
+    -- ** AutoInstallConstraint_NetworkTypeConstraint
+    AutoInstallConstraint_NetworkTypeConstraint (..),
+
+    -- ** AutoInstallPolicy
+    AutoInstallPolicy (..),
+    newAutoInstallPolicy,
+
+    -- ** AutoInstallPolicy_AutoInstallMode
+    AutoInstallPolicy_AutoInstallMode (..),
+
+    -- ** ConfigurationVariables
+    ConfigurationVariables (..),
+    newConfigurationVariables,
+
+    -- ** Device
+    Device (..),
+    newDevice,
+
+    -- ** Device_ManagementType
+    Device_ManagementType (..),
+
+    -- ** DeviceReport
+    DeviceReport (..),
+    newDeviceReport,
+
+    -- ** DeviceReportUpdateEvent
+    DeviceReportUpdateEvent (..),
+    newDeviceReportUpdateEvent,
+
+    -- ** DeviceState
+    DeviceState (..),
+    newDeviceState,
+
+    -- ** DeviceState_AccountState
+    DeviceState_AccountState (..),
+
+    -- ** DevicesListResponse
+    DevicesListResponse (..),
+    newDevicesListResponse,
+
+    -- ** Enterprise
+    Enterprise (..),
+    newEnterprise,
+
+    -- ** EnterpriseAccount
+    EnterpriseAccount (..),
+    newEnterpriseAccount,
+
+    -- ** EnterprisesListResponse
+    EnterprisesListResponse (..),
+    newEnterprisesListResponse,
+
+    -- ** EnterprisesSendTestPushNotificationResponse
+    EnterprisesSendTestPushNotificationResponse (..),
+    newEnterprisesSendTestPushNotificationResponse,
+
+    -- ** Entitlement
+    Entitlement (..),
+    newEntitlement,
+
+    -- ** Entitlement_Reason
+    Entitlement_Reason (..),
+
+    -- ** EntitlementsListResponse
+    EntitlementsListResponse (..),
+    newEntitlementsListResponse,
+
+    -- ** GroupLicense
+    GroupLicense (..),
+    newGroupLicense,
+
+    -- ** GroupLicense_AcquisitionKind
+    GroupLicense_AcquisitionKind (..),
+
+    -- ** GroupLicense_Approval
+    GroupLicense_Approval (..),
+
+    -- ** GroupLicense_Permissions
+    GroupLicense_Permissions (..),
+
+    -- ** GroupLicenseUsersListResponse
+    GroupLicenseUsersListResponse (..),
+    newGroupLicenseUsersListResponse,
+
+    -- ** GroupLicensesListResponse
+    GroupLicensesListResponse (..),
+    newGroupLicensesListResponse,
+
+    -- ** Install
+    Install (..),
+    newInstall,
+
+    -- ** Install_InstallState
+    Install_InstallState (..),
+
+    -- ** InstallFailureEvent
+    InstallFailureEvent (..),
+    newInstallFailureEvent,
+
+    -- ** InstallFailureEvent_FailureReason
+    InstallFailureEvent_FailureReason (..),
+
+    -- ** InstallsListResponse
+    InstallsListResponse (..),
+    newInstallsListResponse,
+
+    -- ** KeyedAppState
+    KeyedAppState (..),
+    newKeyedAppState,
+
+    -- ** KeyedAppState_Severity
+    KeyedAppState_Severity (..),
+
+    -- ** LocalizedText
+    LocalizedText (..),
+    newLocalizedText,
+
+    -- ** MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
+
+    -- ** ManagedConfiguration
+    ManagedConfiguration (..),
+    newManagedConfiguration,
+
+    -- ** ManagedConfigurationsForDeviceListResponse
+    ManagedConfigurationsForDeviceListResponse (..),
+    newManagedConfigurationsForDeviceListResponse,
+
+    -- ** ManagedConfigurationsForUserListResponse
+    ManagedConfigurationsForUserListResponse (..),
+    newManagedConfigurationsForUserListResponse,
+
+    -- ** ManagedConfigurationsSettings
+    ManagedConfigurationsSettings (..),
+    newManagedConfigurationsSettings,
+
+    -- ** ManagedConfigurationsSettingsListResponse
+    ManagedConfigurationsSettingsListResponse (..),
+    newManagedConfigurationsSettingsListResponse,
+
+    -- ** ManagedProperty
+    ManagedProperty (..),
+    newManagedProperty,
+
+    -- ** ManagedPropertyBundle
+    ManagedPropertyBundle (..),
+    newManagedPropertyBundle,
+
+    -- ** NewDeviceEvent
+    NewDeviceEvent (..),
+    newNewDeviceEvent,
+
+    -- ** NewDeviceEvent_ManagementType
+    NewDeviceEvent_ManagementType (..),
+
+    -- ** NewPermissionsEvent
+    NewPermissionsEvent (..),
+    newNewPermissionsEvent,
+
+    -- ** Notification
+    Notification (..),
+    newNotification,
+
+    -- ** Notification_NotificationType
+    Notification_NotificationType (..),
+
+    -- ** NotificationSet
+    NotificationSet (..),
+    newNotificationSet,
+
+    -- ** PageInfo
+    PageInfo (..),
+    newPageInfo,
+
+    -- ** Permission
+    Permission (..),
+    newPermission,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Policy_AutoUpdatePolicy
+    Policy_AutoUpdatePolicy (..),
+
+    -- ** Policy_DeviceReportPolicy
+    Policy_DeviceReportPolicy (..),
+
+    -- ** Policy_ProductAvailabilityPolicy
+    Policy_ProductAvailabilityPolicy (..),
+
+    -- ** Product
+    Product (..),
+    newProduct,
+
+    -- ** Product_AvailableTracksItem
+    Product_AvailableTracksItem (..),
+
+    -- ** Product_ContentRating
+    Product_ContentRating (..),
+
+    -- ** Product_DistributionChannel
+    Product_DistributionChannel (..),
+
+    -- ** Product_FeaturesItem
+    Product_FeaturesItem (..),
+
+    -- ** Product_ProductPricing
+    Product_ProductPricing (..),
+
+    -- ** ProductApprovalEvent
+    ProductApprovalEvent (..),
+    newProductApprovalEvent,
+
+    -- ** ProductApprovalEvent_Approved
+    ProductApprovalEvent_Approved (..),
+
+    -- ** ProductAvailabilityChangeEvent
+    ProductAvailabilityChangeEvent (..),
+    newProductAvailabilityChangeEvent,
+
+    -- ** ProductAvailabilityChangeEvent_AvailabilityStatus
+    ProductAvailabilityChangeEvent_AvailabilityStatus (..),
+
+    -- ** ProductPermission
+    ProductPermission (..),
+    newProductPermission,
+
+    -- ** ProductPermission_State
+    ProductPermission_State (..),
+
+    -- ** ProductPermissions
+    ProductPermissions (..),
+    newProductPermissions,
+
+    -- ** ProductPolicy
+    ProductPolicy (..),
+    newProductPolicy,
+
+    -- ** ProductPolicy_AutoUpdateMode
+    ProductPolicy_AutoUpdateMode (..),
+
+    -- ** ProductPolicy_TracksItem
+    ProductPolicy_TracksItem (..),
+
+    -- ** ProductSet
+    ProductSet (..),
+    newProductSet,
+
+    -- ** ProductSet_ProductSetBehavior
+    ProductSet_ProductSetBehavior (..),
+
+    -- ** ProductSigningCertificate
+    ProductSigningCertificate (..),
+    newProductSigningCertificate,
+
+    -- ** ProductVisibility
+    ProductVisibility (..),
+    newProductVisibility,
+
+    -- ** ProductVisibility_TracksItem
+    ProductVisibility_TracksItem (..),
+
+    -- ** ProductsApproveRequest
+    ProductsApproveRequest (..),
+    newProductsApproveRequest,
+
+    -- ** ProductsApproveRequest_ApprovedPermissions
+    ProductsApproveRequest_ApprovedPermissions (..),
+
+    -- ** ProductsGenerateApprovalUrlResponse
+    ProductsGenerateApprovalUrlResponse (..),
+    newProductsGenerateApprovalUrlResponse,
+
+    -- ** ProductsListResponse
+    ProductsListResponse (..),
+    newProductsListResponse,
+
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** ServiceAccountKey
+    ServiceAccountKey (..),
+    newServiceAccountKey,
+
+    -- ** ServiceAccountKey_Type
+    ServiceAccountKey_Type (..),
+
+    -- ** ServiceAccountKeysListResponse
+    ServiceAccountKeysListResponse (..),
+    newServiceAccountKeysListResponse,
+
+    -- ** SignupInfo
+    SignupInfo (..),
+    newSignupInfo,
+
+    -- ** StoreCluster
+    StoreCluster (..),
+    newStoreCluster,
+
+    -- ** StoreLayout
+    StoreLayout (..),
+    newStoreLayout,
+
+    -- ** StoreLayout_StoreLayoutType
+    StoreLayout_StoreLayoutType (..),
+
+    -- ** StoreLayoutClustersListResponse
+    StoreLayoutClustersListResponse (..),
+    newStoreLayoutClustersListResponse,
+
+    -- ** StoreLayoutPagesListResponse
+    StoreLayoutPagesListResponse (..),
+    newStoreLayoutPagesListResponse,
+
+    -- ** StorePage
+    StorePage (..),
+    newStorePage,
+
+    -- ** TokenPagination
+    TokenPagination (..),
+    newTokenPagination,
+
+    -- ** TrackInfo
+    TrackInfo (..),
+    newTrackInfo,
+
+    -- ** User
+    User (..),
+    newUser,
+
+    -- ** User_AccountType
+    User_AccountType (..),
+
+    -- ** User_ManagementType
+    User_ManagementType (..),
+
+    -- ** UsersListResponse
+    UsersListResponse (..),
+    newUsersListResponse,
+
+    -- ** VariableSet
+    VariableSet (..),
+    newVariableSet,
+
+    -- ** WebApp
+    WebApp (..),
+    newWebApp,
+
+    -- ** WebApp_DisplayMode
+    WebApp_DisplayMode (..),
+
+    -- ** WebAppIcon
+    WebAppIcon (..),
+    newWebAppIcon,
+
+    -- ** WebAppsListResponse
+    WebAppsListResponse (..),
+    newWebAppsListResponse,
+
+    -- ** EnterprisesGetServiceAccountKeyType
+    EnterprisesGetServiceAccountKeyType (..),
+
+    -- ** EnterprisesPullNotificationSetRequestMode
+    EnterprisesPullNotificationSetRequestMode (..),
+  )
+where
+
+import Network.Google.AndroidEnterprise.Internal.Product
+import Network.Google.AndroidEnterprise.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
+androidEnterpriseService :: Core.ServiceConfig
+androidEnterpriseService =
+  Core.defaultService
+    (Core.ServiceId "androidenterprise:v1")
+    "androidenterprise.googleapis.com"
 
 -- | Manage corporate Android devices
-androidEnterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
-androidEnterpriseScope = Proxy
+androidEnterpriseScope :: Core.Proxy '["https://www.googleapis.com/auth/androidenterprise"]
+androidEnterpriseScope = Core.Proxy
