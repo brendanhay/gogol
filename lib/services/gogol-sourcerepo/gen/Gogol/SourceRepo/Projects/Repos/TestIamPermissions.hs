@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +36,98 @@
 --
 -- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.testIamPermissions@.
 module Gogol.SourceRepo.Projects.Repos.TestIamPermissions
-  ( -- * Resource
-    SourceRepoProjectsReposTestIamPermissionsResource,
+    (
+    -- * Resource
+      SourceRepoProjectsReposTestIamPermissionsResource
 
     -- ** Constructing a Request
-    newSourceRepoProjectsReposTestIamPermissions,
-    SourceRepoProjectsReposTestIamPermissions,
-  )
-where
+    , newSourceRepoProjectsReposTestIamPermissions
+    , SourceRepoProjectsReposTestIamPermissions
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.testIamPermissions@ method which the
 -- 'SourceRepoProjectsReposTestIamPermissions' request conforms to.
-type SourceRepoProjectsReposTestIamPermissionsResource =
-  "v1"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
-    Core.:> Core.Post '[Core.JSON] TestIamPermissionsResponse
+type SourceRepoProjectsReposTestIamPermissionsResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "resource" "testIamPermissions"
+         Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
+                       Core.:>
+                       Core.Post '[Core.JSON] TestIamPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.
 --
 -- /See:/ 'newSourceRepoProjectsReposTestIamPermissions' smart constructor.
 data SourceRepoProjectsReposTestIamPermissions = SourceRepoProjectsReposTestIamPermissions
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: TestIamPermissionsRequest,
-    -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: TestIamPermissionsRequest
+      -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SourceRepoProjectsReposTestIamPermissions' with the minimum fields required to make a request.
-newSourceRepoProjectsReposTestIamPermissions ::
-  -- |  Multipart request metadata. See 'payload'.
-  TestIamPermissionsRequest ->
-  -- |  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  SourceRepoProjectsReposTestIamPermissions
+newSourceRepoProjectsReposTestIamPermissions 
+    ::  TestIamPermissionsRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+    -> SourceRepoProjectsReposTestIamPermissions
 newSourceRepoProjectsReposTestIamPermissions payload resource =
   SourceRepoProjectsReposTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SourceRepoProjectsReposTestIamPermissions
-  where
-  type
-    Rs SourceRepoProjectsReposTestIamPermissions =
-      TestIamPermissionsResponse
-  type
-    Scopes SourceRepoProjectsReposTestIamPermissions =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/source.full_control",
-         "https://www.googleapis.com/auth/source.read_only",
-         "https://www.googleapis.com/auth/source.read_write"
-       ]
-  requestClient
-    SourceRepoProjectsReposTestIamPermissions {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sourceRepoService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SourceRepoProjectsReposTestIamPermissionsResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           SourceRepoProjectsReposTestIamPermissions
+         where
+        type Rs SourceRepoProjectsReposTestIamPermissions =
+             TestIamPermissionsResponse
+        type Scopes SourceRepoProjectsReposTestIamPermissions
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/source.full_control",
+               "https://www.googleapis.com/auth/source.read_only",
+               "https://www.googleapis.com/auth/source.read_write"]
+        requestClient
+          SourceRepoProjectsReposTestIamPermissions{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              sourceRepoService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           SourceRepoProjectsReposTestIamPermissionsResource)
+                      Core.mempty
+
