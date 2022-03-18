@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Surveys.Results.Get
+-- Module      : Gogol.Surveys.Results.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add \"?alt=media\" to the URL as an argument to get results.
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.results.get@.
-module Network.Google.Surveys.Results.Get
+module Gogol.Surveys.Results.Get
   ( -- * Resource
     SurveysResultsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Surveys.Results.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Surveys.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Surveys.Types
 
 -- | A resource alias for @surveys.results.get@ method which the
 -- 'SurveysResultsGet' request conforms to.
