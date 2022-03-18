@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,45 +30,45 @@
 --
 -- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference>
 module Gogol.Indexing
-    (
-    -- * Configuration
-      indexingService
+  ( -- * Configuration
+    indexingService,
 
     -- * OAuth Scopes
-    , indexingScope
+    indexingScope,
 
     -- * Resources
 
     -- ** indexing.urlNotifications.getMetadata
-    , IndexingUrlNotificationsGetMetadataResource
-    , newIndexingUrlNotificationsGetMetadata
-    , IndexingUrlNotificationsGetMetadata
+    IndexingUrlNotificationsGetMetadataResource,
+    newIndexingUrlNotificationsGetMetadata,
+    IndexingUrlNotificationsGetMetadata,
 
     -- ** indexing.urlNotifications.publish
-    , IndexingUrlNotificationsPublishResource
-    , newIndexingUrlNotificationsPublish
-    , IndexingUrlNotificationsPublish
+    IndexingUrlNotificationsPublishResource,
+    newIndexingUrlNotificationsPublish,
+    IndexingUrlNotificationsPublish,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** PublishUrlNotificationResponse
-    , PublishUrlNotificationResponse (..)
-    , newPublishUrlNotificationResponse
+    PublishUrlNotificationResponse (..),
+    newPublishUrlNotificationResponse,
 
     -- ** UrlNotification
-    , UrlNotification (..)
-    , newUrlNotification
+    UrlNotification (..),
+    newUrlNotification,
 
     -- ** UrlNotification_Type
-    , UrlNotification_Type (..)
+    UrlNotification_Type (..),
 
     -- ** UrlNotificationMetadata
-    , UrlNotificationMetadata (..)
-    , newUrlNotificationMetadata
-    ) where
+    UrlNotificationMetadata (..),
+    newUrlNotificationMetadata,
+  )
+where
 
 import Gogol.Indexing.Types
 import Gogol.Indexing.UrlNotifications.GetMetadata
