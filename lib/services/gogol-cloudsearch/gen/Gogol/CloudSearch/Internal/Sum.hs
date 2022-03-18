@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudSearch.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AclInfo_Scope
     AclInfo_Scope
-      ( AclInfo_Scope_Limited,
+      (
+        AclInfo_Scope_Limited,
         AclInfo_Scope_DASHERDOMAINWITHLINK,
         AclInfo_Scope_DASHERDOMAIN,
         AclInfo_Scope_PUBLICWITHLINK,
@@ -46,7 +57,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * AppId_AppType
     AppId_AppType
-      ( AppId_AppType_APPTYPEUNSPECIFIED,
+      (
+        AppId_AppType_APPTYPEUNSPECIFIED,
         AppId_AppType_App,
         AppId_AppType_GSUITEAPP,
         AppId_AppType_INCOMINGWEBHOOK,
@@ -55,7 +67,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * AppId_GsuiteAppType
     AppId_GsuiteAppType
-      ( AppId_GsuiteAppType_GSUITEAPPTYPEUNSPECIFIED,
+      (
+        AppId_GsuiteAppType_GSUITEAPPTYPEUNSPECIFIED,
         AppId_GsuiteAppType_TASKSAPP,
         AppId_GsuiteAppType_CALENDARAPP,
         AppId_GsuiteAppType_DOCSAPP,
@@ -72,7 +85,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * CompositeFilter_LogicOperator
     CompositeFilter_LogicOperator
-      ( CompositeFilter_LogicOperator_And,
+      (
+        CompositeFilter_LogicOperator_And,
         CompositeFilter_LogicOperator_OR,
         CompositeFilter_LogicOperator_Not,
         ..
@@ -80,7 +94,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * CustomEmoji_State
     CustomEmoji_State
-      ( CustomEmoji_State_EMOJISTATEUNSPECIFIED,
+      (
+        CustomEmoji_State_EMOJISTATEUNSPECIFIED,
         CustomEmoji_State_EMOJIENABLED,
         CustomEmoji_State_EMOJISYSTEMDISABLED,
         CustomEmoji_State_EMOJIHIDDEN,
@@ -90,7 +105,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * DriveFollowUpRestrict_Type
     DriveFollowUpRestrict_Type
-      ( DriveFollowUpRestrict_Type_Unspecified,
+      (
+        DriveFollowUpRestrict_Type_Unspecified,
         DriveFollowUpRestrict_Type_FOLLOWUPSUGGESTIONS,
         DriveFollowUpRestrict_Type_FOLLOWUPACTIONITEMS,
         ..
@@ -98,7 +114,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * DriveLocationRestrict_Type
     DriveLocationRestrict_Type
-      ( DriveLocationRestrict_Type_Unspecified,
+      (
+        DriveLocationRestrict_Type_Unspecified,
         DriveLocationRestrict_Type_Trashed,
         DriveLocationRestrict_Type_Starred,
         ..
@@ -106,7 +123,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * DriveMimeTypeRestrict_Type
     DriveMimeTypeRestrict_Type
-      ( DriveMimeTypeRestrict_Type_Unspecified,
+      (
+        DriveMimeTypeRestrict_Type_Unspecified,
         DriveMimeTypeRestrict_Type_Pdf,
         DriveMimeTypeRestrict_Type_Document,
         DriveMimeTypeRestrict_Type_Presentation,
@@ -126,7 +144,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * DriveTimeSpanRestrict_Type
     DriveTimeSpanRestrict_Type
-      ( DriveTimeSpanRestrict_Type_Unspecified,
+      (
+        DriveTimeSpanRestrict_Type_Unspecified,
         DriveTimeSpanRestrict_Type_Today,
         DriveTimeSpanRestrict_Type_Yesterday,
         DriveTimeSpanRestrict_Type_LAST7DAYS,
@@ -137,7 +156,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * EnumPropertyOptions_OrderedRanking
     EnumPropertyOptions_OrderedRanking
-      ( EnumPropertyOptions_OrderedRanking_NOORDER,
+      (
+        EnumPropertyOptions_OrderedRanking_NOORDER,
         EnumPropertyOptions_OrderedRanking_Ascending,
         EnumPropertyOptions_OrderedRanking_Descending,
         ..
@@ -145,7 +165,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * GoogleDocsMetadata_DocumentType
     GoogleDocsMetadata_DocumentType
-      ( GoogleDocsMetadata_DocumentType_Unknown,
+      (
+        GoogleDocsMetadata_DocumentType_Unknown,
         GoogleDocsMetadata_DocumentType_Document,
         GoogleDocsMetadata_DocumentType_Presentation,
         GoogleDocsMetadata_DocumentType_Spreadsheet,
@@ -167,7 +188,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * IndexItemRequest_Mode
     IndexItemRequest_Mode
-      ( IndexItemRequest_Mode_Unspecified,
+      (
+        IndexItemRequest_Mode_Unspecified,
         IndexItemRequest_Mode_Synchronous,
         IndexItemRequest_Mode_Asynchronous,
         ..
@@ -175,7 +197,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * IntegerPropertyOptions_OrderedRanking
     IntegerPropertyOptions_OrderedRanking
-      ( IntegerPropertyOptions_OrderedRanking_NOORDER,
+      (
+        IntegerPropertyOptions_OrderedRanking_NOORDER,
         IntegerPropertyOptions_OrderedRanking_Ascending,
         IntegerPropertyOptions_OrderedRanking_Descending,
         ..
@@ -183,7 +206,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * Interaction_Type
     Interaction_Type
-      ( Interaction_Type_Unspecified,
+      (
+        Interaction_Type_Unspecified,
         Interaction_Type_View,
         Interaction_Type_Edit,
         ..
@@ -191,7 +215,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * Item_ItemType
     Item_ItemType
-      ( Item_ItemType_Unspecified,
+      (
+        Item_ItemType_Unspecified,
         Item_ItemType_CONTENTITEM,
         Item_ItemType_CONTAINERITEM,
         Item_ItemType_VIRTUALCONTAINERITEM,
@@ -200,7 +225,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * ItemAcl_AclInheritanceType
     ItemAcl_AclInheritanceType
-      ( ItemAcl_AclInheritanceType_NOTAPPLICABLE,
+      (
+        ItemAcl_AclInheritanceType_NOTAPPLICABLE,
         ItemAcl_AclInheritanceType_CHILDOVERRIDE,
         ItemAcl_AclInheritanceType_PARENTOVERRIDE,
         ItemAcl_AclInheritanceType_BOTHPERMIT,
@@ -209,7 +235,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * ItemContent_ContentFormat
     ItemContent_ContentFormat
-      ( ItemContent_ContentFormat_Unspecified,
+      (
+        ItemContent_ContentFormat_Unspecified,
         ItemContent_ContentFormat_Html,
         ItemContent_ContentFormat_Text,
         ItemContent_ContentFormat_Raw,
@@ -218,7 +245,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * ItemCountByStatus_StatusCode
     ItemCountByStatus_StatusCode
-      ( ItemCountByStatus_StatusCode_CODEUNSPECIFIED,
+      (
+        ItemCountByStatus_StatusCode_CODEUNSPECIFIED,
         ItemCountByStatus_StatusCode_Error',
         ItemCountByStatus_StatusCode_Modified,
         ItemCountByStatus_StatusCode_NEWITEM,
@@ -228,7 +256,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * ItemStatus_Code
     ItemStatus_Code
-      ( ItemStatus_Code_CODEUNSPECIFIED,
+      (
+        ItemStatus_Code_CODEUNSPECIFIED,
         ItemStatus_Code_Error',
         ItemStatus_Code_Modified,
         ItemStatus_Code_NEWITEM,
@@ -238,7 +267,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * PollItemsRequest_StatusCodesItem
     PollItemsRequest_StatusCodesItem
-      ( PollItemsRequest_StatusCodesItem_CODEUNSPECIFIED,
+      (
+        PollItemsRequest_StatusCodesItem_CODEUNSPECIFIED,
         PollItemsRequest_StatusCodesItem_Error',
         PollItemsRequest_StatusCodesItem_Modified,
         PollItemsRequest_StatusCodesItem_NEWITEM,
@@ -248,7 +278,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * ProcessingError_Code
     ProcessingError_Code
-      ( ProcessingError_Code_PROCESSINGERRORCODEUNSPECIFIED,
+      (
+        ProcessingError_Code_PROCESSINGERRORCODEUNSPECIFIED,
         ProcessingError_Code_MALFORMEDREQUEST,
         ProcessingError_Code_UNSUPPORTEDCONTENTFORMAT,
         ProcessingError_Code_INDIRECTBROKENACL,
@@ -258,7 +289,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * PushItem_Type
     PushItem_Type
-      ( PushItem_Type_Unspecified,
+      (
+        PushItem_Type_Unspecified,
         PushItem_Type_Modified,
         PushItem_Type_NOTMODIFIED,
         PushItem_Type_REPOSITORYERROR,
@@ -268,7 +300,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * QueryInterpretation_InterpretationType
     QueryInterpretation_InterpretationType
-      ( QueryInterpretation_InterpretationType_None,
+      (
+        QueryInterpretation_InterpretationType_None,
         QueryInterpretation_InterpretationType_Blend,
         QueryInterpretation_InterpretationType_Replace,
         ..
@@ -276,7 +309,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * QueryInterpretation_Reason
     QueryInterpretation_Reason
-      ( QueryInterpretation_Reason_Unspecified,
+      (
+        QueryInterpretation_Reason_Unspecified,
         QueryInterpretation_Reason_QUERYHASNATURALLANGUAGEINTENT,
         QueryInterpretation_Reason_NOTENOUGHRESULTSFOUNDFORUSERQUERY,
         ..
@@ -284,7 +318,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * QueryOperator_Type
     QueryOperator_Type
-      ( QueryOperator_Type_Unknown,
+      (
+        QueryOperator_Type_Unknown,
         QueryOperator_Type_Integer,
         QueryOperator_Type_Double,
         QueryOperator_Type_Timestamp,
@@ -298,7 +333,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * RepositoryError_Type
     RepositoryError_Type
-      ( RepositoryError_Type_Unknown,
+      (
+        RepositoryError_Type_Unknown,
         RepositoryError_Type_NETWORKERROR,
         RepositoryError_Type_DNSERROR,
         RepositoryError_Type_CONNECTIONERROR,
@@ -313,7 +349,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * RetrievalImportance_Importance
     RetrievalImportance_Importance
-      ( RetrievalImportance_Importance_Default,
+      (
+        RetrievalImportance_Importance_Default,
         RetrievalImportance_Importance_Highest,
         RetrievalImportance_Importance_High,
         RetrievalImportance_Importance_Low,
@@ -323,7 +360,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * ShareScope_Scope
     ShareScope_Scope
-      ( ShareScope_Scope_Unknown,
+      (
+        ShareScope_Scope_Unknown,
         ShareScope_Scope_Private,
         ShareScope_Scope_Limited,
         ShareScope_Scope_Extended,
@@ -334,14 +372,16 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * SortOptions_SortOrder
     SortOptions_SortOrder
-      ( SortOptions_SortOrder_Ascending,
+      (
+        SortOptions_SortOrder_Ascending,
         SortOptions_SortOrder_Descending,
         ..
       ),
 
     -- * Source_PredefinedSource
     Source_PredefinedSource
-      ( Source_PredefinedSource_None,
+      (
+        Source_PredefinedSource_None,
         Source_PredefinedSource_QUERYHISTORY,
         Source_PredefinedSource_Person,
         Source_PredefinedSource_GOOGLEDRIVE,
@@ -355,7 +395,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * SourceScoringConfig_SourceImportance
     SourceScoringConfig_SourceImportance
-      ( SourceScoringConfig_SourceImportance_Default,
+      (
+        SourceScoringConfig_SourceImportance_Default,
         SourceScoringConfig_SourceImportance_Low,
         SourceScoringConfig_SourceImportance_High,
         ..
@@ -363,7 +404,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * SpaceInfo_UserMembershipState
     SpaceInfo_UserMembershipState
-      ( SpaceInfo_UserMembershipState_MEMBERUNKNOWN,
+      (
+        SpaceInfo_UserMembershipState_MEMBERUNKNOWN,
         SpaceInfo_UserMembershipState_MEMBERINVITED,
         SpaceInfo_UserMembershipState_MEMBERJOINED,
         SpaceInfo_UserMembershipState_MEMBERNOTAMEMBER,
@@ -373,7 +415,8 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * UnmappedIdentity_ResolutionStatusCode
     UnmappedIdentity_ResolutionStatusCode
-      ( UnmappedIdentity_ResolutionStatusCode_CODEUNSPECIFIED,
+      (
+        UnmappedIdentity_ResolutionStatusCode_CODEUNSPECIFIED,
         UnmappedIdentity_ResolutionStatusCode_NOTFOUND,
         UnmappedIdentity_ResolutionStatusCode_IDENTITYSOURCENOTFOUND,
         UnmappedIdentity_ResolutionStatusCode_IDENTITYSOURCEMISCONFIGURED,
@@ -384,14 +427,16 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * UserId_Type
     UserId_Type
-      ( UserId_Type_Human,
+      (
+        UserId_Type_Human,
         UserId_Type_Bot,
         ..
       ),
 
     -- * DebugIdentitysourcesUnmappedidsListResolutionStatusCode
     DebugIdentitysourcesUnmappedidsListResolutionStatusCode
-      ( DebugIdentitysourcesUnmappedidsListResolutionStatusCode_CODEUNSPECIFIED,
+      (
+        DebugIdentitysourcesUnmappedidsListResolutionStatusCode_CODEUNSPECIFIED,
         DebugIdentitysourcesUnmappedidsListResolutionStatusCode_NOTFOUND,
         DebugIdentitysourcesUnmappedidsListResolutionStatusCode_IDENTITYSOURCENOTFOUND,
         DebugIdentitysourcesUnmappedidsListResolutionStatusCode_IDENTITYSOURCEMISCONFIGURED,
@@ -402,28 +447,28 @@ module Gogol.CloudSearch.Internal.Sum
 
     -- * IndexingDatasourcesItemsDeleteMode
     IndexingDatasourcesItemsDeleteMode
-      ( IndexingDatasourcesItemsDeleteMode_Unspecified,
+      (
+        IndexingDatasourcesItemsDeleteMode_Unspecified,
         IndexingDatasourcesItemsDeleteMode_Synchronous,
         IndexingDatasourcesItemsDeleteMode_Asynchronous,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -436,21 +481,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The scope to which the content was shared.
-newtype AclInfo_Scope = AclInfo_Scope {fromAclInfo_Scope :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AclInfo_Scope = AclInfo_Scope { fromAclInfo_Scope :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Explicit set of people and groups.
 pattern AclInfo_Scope_Limited :: AclInfo_Scope
@@ -483,23 +527,22 @@ pattern AclInfo_Scope_TEAMDRIVE = AclInfo_Scope "TEAM_DRIVE"
   AclInfo_Scope_PUBLICWITHLINK,
   AclInfo_Scope_Public,
   AclInfo_Scope_TEAMDRIVE,
-  AclInfo_Scope
-  #-}
+  AclInfo_Scope #-}
 
 -- | Enum indicating the type of App this is.
-newtype AppId_AppType = AppId_AppType {fromAppId_AppType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AppId_AppType = AppId_AppType { fromAppId_AppType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern AppId_AppType_APPTYPEUNSPECIFIED :: AppId_AppType
 pattern AppId_AppType_APPTYPEUNSPECIFIED = AppId_AppType "APP_TYPE_UNSPECIFIED"
 
@@ -520,47 +563,46 @@ pattern AppId_AppType_INCOMINGWEBHOOK = AppId_AppType "INCOMING_WEBHOOK"
   AppId_AppType_App,
   AppId_AppType_GSUITEAPP,
   AppId_AppType_INCOMINGWEBHOOK,
-  AppId_AppType
-  #-}
+  AppId_AppType #-}
 
 -- | Enum indicating which 1P App this is when app/type is GSUITE/APP. Determined & set by the 1P API as a convenience for all users of this identifier(Eg. clients, chime, backend etc.) to map to 1P properties.
-newtype AppId_GsuiteAppType = AppId_GsuiteAppType {fromAppId_GsuiteAppType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AppId_GsuiteAppType = AppId_GsuiteAppType { fromAppId_GsuiteAppType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_GSUITEAPPTYPEUNSPECIFIED :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_GSUITEAPPTYPEUNSPECIFIED = AppId_GsuiteAppType "GSUITE_APP_TYPE_UNSPECIFIED"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_TASKSAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_TASKSAPP = AppId_GsuiteAppType "TASKS_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_CALENDARAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_CALENDARAPP = AppId_GsuiteAppType "CALENDAR_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_DOCSAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_DOCSAPP = AppId_GsuiteAppType "DOCS_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_SHEETSAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_SHEETSAPP = AppId_GsuiteAppType "SHEETS_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_SLIDESAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_SLIDESAPP = AppId_GsuiteAppType "SLIDES_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_MEETAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_MEETAPP = AppId_GsuiteAppType "MEET_APP"
 
@@ -568,15 +610,15 @@ pattern AppId_GsuiteAppType_MEETAPP = AppId_GsuiteAppType "MEET_APP"
 pattern AppId_GsuiteAppType_FILESUGGESTIONAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_FILESUGGESTIONAPP = AppId_GsuiteAppType "FILE_SUGGESTION_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_CONTACTSAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_CONTACTSAPP = AppId_GsuiteAppType "CONTACTS_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_ACTIVITYFEEDAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_ACTIVITYFEEDAPP = AppId_GsuiteAppType "ACTIVITY_FEED_APP"
 
--- |
+-- | 
 pattern AppId_GsuiteAppType_DRIVEAPP :: AppId_GsuiteAppType
 pattern AppId_GsuiteAppType_DRIVEAPP = AppId_GsuiteAppType "DRIVE_APP"
 
@@ -597,27 +639,26 @@ pattern AppId_GsuiteAppType_ASSISTIVESUGGESTIONAPP = AppId_GsuiteAppType "ASSIST
   AppId_GsuiteAppType_ACTIVITYFEEDAPP,
   AppId_GsuiteAppType_DRIVEAPP,
   AppId_GsuiteAppType_ASSISTIVESUGGESTIONAPP,
-  AppId_GsuiteAppType
-  #-}
+  AppId_GsuiteAppType #-}
 
 -- | The logic operator of the sub filter.
-newtype CompositeFilter_LogicOperator = CompositeFilter_LogicOperator {fromCompositeFilter_LogicOperator :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CompositeFilter_LogicOperator = CompositeFilter_LogicOperator { fromCompositeFilter_LogicOperator :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Logical operators, which can only be applied to sub filters.
 pattern CompositeFilter_LogicOperator_And :: CompositeFilter_LogicOperator
 pattern CompositeFilter_LogicOperator_And = CompositeFilter_LogicOperator "AND"
 
--- |
+-- | 
 pattern CompositeFilter_LogicOperator_OR :: CompositeFilter_LogicOperator
 pattern CompositeFilter_LogicOperator_OR = CompositeFilter_LogicOperator "OR"
 
@@ -629,23 +670,22 @@ pattern CompositeFilter_LogicOperator_Not = CompositeFilter_LogicOperator "NOT"
   CompositeFilter_LogicOperator_And,
   CompositeFilter_LogicOperator_OR,
   CompositeFilter_LogicOperator_Not,
-  CompositeFilter_LogicOperator
-  #-}
+  CompositeFilter_LogicOperator #-}
 
 -- | Snapshot of the current state of the emoji, which may differ from the source-of-truth in the CustomEmojis table. This field should /never/ be persisted to Spanner.
-newtype CustomEmoji_State = CustomEmoji_State {fromCustomEmoji_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CustomEmoji_State = CustomEmoji_State { fromCustomEmoji_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CustomEmoji_State_EMOJISTATEUNSPECIFIED :: CustomEmoji_State
 pattern CustomEmoji_State_EMOJISTATEUNSPECIFIED = CustomEmoji_State "EMOJI_STATE_UNSPECIFIED"
 
@@ -671,30 +711,29 @@ pattern CustomEmoji_State_EMOJIDELETED = CustomEmoji_State "EMOJI_DELETED"
   CustomEmoji_State_EMOJISYSTEMDISABLED,
   CustomEmoji_State_EMOJIHIDDEN,
   CustomEmoji_State_EMOJIDELETED,
-  CustomEmoji_State
-  #-}
+  CustomEmoji_State #-}
 
-newtype DriveFollowUpRestrict_Type = DriveFollowUpRestrict_Type {fromDriveFollowUpRestrict_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DriveFollowUpRestrict_Type = DriveFollowUpRestrict_Type { fromDriveFollowUpRestrict_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern DriveFollowUpRestrict_Type_Unspecified :: DriveFollowUpRestrict_Type
 pattern DriveFollowUpRestrict_Type_Unspecified = DriveFollowUpRestrict_Type "UNSPECIFIED"
 
--- |
+-- | 
 pattern DriveFollowUpRestrict_Type_FOLLOWUPSUGGESTIONS :: DriveFollowUpRestrict_Type
 pattern DriveFollowUpRestrict_Type_FOLLOWUPSUGGESTIONS = DriveFollowUpRestrict_Type "FOLLOWUP_SUGGESTIONS"
 
--- |
+-- | 
 pattern DriveFollowUpRestrict_Type_FOLLOWUPACTIONITEMS :: DriveFollowUpRestrict_Type
 pattern DriveFollowUpRestrict_Type_FOLLOWUPACTIONITEMS = DriveFollowUpRestrict_Type "FOLLOWUP_ACTION_ITEMS"
 
@@ -702,30 +741,29 @@ pattern DriveFollowUpRestrict_Type_FOLLOWUPACTIONITEMS = DriveFollowUpRestrict_T
   DriveFollowUpRestrict_Type_Unspecified,
   DriveFollowUpRestrict_Type_FOLLOWUPSUGGESTIONS,
   DriveFollowUpRestrict_Type_FOLLOWUPACTIONITEMS,
-  DriveFollowUpRestrict_Type
-  #-}
+  DriveFollowUpRestrict_Type #-}
 
-newtype DriveLocationRestrict_Type = DriveLocationRestrict_Type {fromDriveLocationRestrict_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DriveLocationRestrict_Type = DriveLocationRestrict_Type { fromDriveLocationRestrict_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern DriveLocationRestrict_Type_Unspecified :: DriveLocationRestrict_Type
 pattern DriveLocationRestrict_Type_Unspecified = DriveLocationRestrict_Type "UNSPECIFIED"
 
--- |
+-- | 
 pattern DriveLocationRestrict_Type_Trashed :: DriveLocationRestrict_Type
 pattern DriveLocationRestrict_Type_Trashed = DriveLocationRestrict_Type "TRASHED"
 
--- |
+-- | 
 pattern DriveLocationRestrict_Type_Starred :: DriveLocationRestrict_Type
 pattern DriveLocationRestrict_Type_Starred = DriveLocationRestrict_Type "STARRED"
 
@@ -733,78 +771,77 @@ pattern DriveLocationRestrict_Type_Starred = DriveLocationRestrict_Type "STARRED
   DriveLocationRestrict_Type_Unspecified,
   DriveLocationRestrict_Type_Trashed,
   DriveLocationRestrict_Type_Starred,
-  DriveLocationRestrict_Type
-  #-}
+  DriveLocationRestrict_Type #-}
 
-newtype DriveMimeTypeRestrict_Type = DriveMimeTypeRestrict_Type {fromDriveMimeTypeRestrict_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DriveMimeTypeRestrict_Type = DriveMimeTypeRestrict_Type { fromDriveMimeTypeRestrict_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Unspecified :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Unspecified = DriveMimeTypeRestrict_Type "UNSPECIFIED"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Pdf :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Pdf = DriveMimeTypeRestrict_Type "PDF"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Document :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Document = DriveMimeTypeRestrict_Type "DOCUMENT"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Presentation :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Presentation = DriveMimeTypeRestrict_Type "PRESENTATION"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Spreadsheet :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Spreadsheet = DriveMimeTypeRestrict_Type "SPREADSHEET"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Form :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Form = DriveMimeTypeRestrict_Type "FORM"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Drawing :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Drawing = DriveMimeTypeRestrict_Type "DRAWING"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Script :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Script = DriveMimeTypeRestrict_Type "SCRIPT"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Map :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Map = DriveMimeTypeRestrict_Type "MAP"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Image :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Image = DriveMimeTypeRestrict_Type "IMAGE"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Audio :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Audio = DriveMimeTypeRestrict_Type "AUDIO"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Video :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Video = DriveMimeTypeRestrict_Type "VIDEO"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Folder :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Folder = DriveMimeTypeRestrict_Type "FOLDER"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Archive :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Archive = DriveMimeTypeRestrict_Type "ARCHIVE"
 
--- |
+-- | 
 pattern DriveMimeTypeRestrict_Type_Site :: DriveMimeTypeRestrict_Type
 pattern DriveMimeTypeRestrict_Type_Site = DriveMimeTypeRestrict_Type "SITE"
 
@@ -824,34 +861,33 @@ pattern DriveMimeTypeRestrict_Type_Site = DriveMimeTypeRestrict_Type "SITE"
   DriveMimeTypeRestrict_Type_Folder,
   DriveMimeTypeRestrict_Type_Archive,
   DriveMimeTypeRestrict_Type_Site,
-  DriveMimeTypeRestrict_Type
-  #-}
+  DriveMimeTypeRestrict_Type #-}
 
-newtype DriveTimeSpanRestrict_Type = DriveTimeSpanRestrict_Type {fromDriveTimeSpanRestrict_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DriveTimeSpanRestrict_Type = DriveTimeSpanRestrict_Type { fromDriveTimeSpanRestrict_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern DriveTimeSpanRestrict_Type_Unspecified :: DriveTimeSpanRestrict_Type
 pattern DriveTimeSpanRestrict_Type_Unspecified = DriveTimeSpanRestrict_Type "UNSPECIFIED"
 
--- |
+-- | 
 pattern DriveTimeSpanRestrict_Type_Today :: DriveTimeSpanRestrict_Type
 pattern DriveTimeSpanRestrict_Type_Today = DriveTimeSpanRestrict_Type "TODAY"
 
--- |
+-- | 
 pattern DriveTimeSpanRestrict_Type_Yesterday :: DriveTimeSpanRestrict_Type
 pattern DriveTimeSpanRestrict_Type_Yesterday = DriveTimeSpanRestrict_Type "YESTERDAY"
 
--- |
+-- | 
 pattern DriveTimeSpanRestrict_Type_LAST7DAYS :: DriveTimeSpanRestrict_Type
 pattern DriveTimeSpanRestrict_Type_LAST7DAYS = DriveTimeSpanRestrict_Type "LAST_7_DAYS"
 
@@ -870,21 +906,20 @@ pattern DriveTimeSpanRestrict_Type_LAST90DAYS = DriveTimeSpanRestrict_Type "LAST
   DriveTimeSpanRestrict_Type_LAST7DAYS,
   DriveTimeSpanRestrict_Type_LAST30DAYS,
   DriveTimeSpanRestrict_Type_LAST90DAYS,
-  DriveTimeSpanRestrict_Type
-  #-}
+  DriveTimeSpanRestrict_Type #-}
 
 -- | Used to specify the ordered ranking for the enumeration that determines how the integer values provided in the possible EnumValuePairs are used to rank results. If specified, integer values must be provided for all possible EnumValuePair values given for this property. Can only be used if isRepeatable is false.
-newtype EnumPropertyOptions_OrderedRanking = EnumPropertyOptions_OrderedRanking {fromEnumPropertyOptions_OrderedRanking :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype EnumPropertyOptions_OrderedRanking = EnumPropertyOptions_OrderedRanking { fromEnumPropertyOptions_OrderedRanking :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | There is no ranking order for the property. Results aren\'t adjusted by this property\'s value.
 pattern EnumPropertyOptions_OrderedRanking_NOORDER :: EnumPropertyOptions_OrderedRanking
@@ -902,21 +937,20 @@ pattern EnumPropertyOptions_OrderedRanking_Descending = EnumPropertyOptions_Orde
   EnumPropertyOptions_OrderedRanking_NOORDER,
   EnumPropertyOptions_OrderedRanking_Ascending,
   EnumPropertyOptions_OrderedRanking_Descending,
-  EnumPropertyOptions_OrderedRanking
-  #-}
+  EnumPropertyOptions_OrderedRanking #-}
 
 -- | The conceptual type (presentation, document, etc.) of this document.
-newtype GoogleDocsMetadata_DocumentType = GoogleDocsMetadata_DocumentType {fromGoogleDocsMetadata_DocumentType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleDocsMetadata_DocumentType = GoogleDocsMetadata_DocumentType { fromGoogleDocsMetadata_DocumentType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | If the type is unknown or not represented in this enum.
 pattern GoogleDocsMetadata_DocumentType_Unknown :: GoogleDocsMetadata_DocumentType
@@ -938,7 +972,7 @@ pattern GoogleDocsMetadata_DocumentType_Spreadsheet = GoogleDocsMetadata_Documen
 pattern GoogleDocsMetadata_DocumentType_Pdf :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Pdf = GoogleDocsMetadata_DocumentType "PDF"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_Image :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Image = GoogleDocsMetadata_DocumentType "IMAGE"
 
@@ -946,23 +980,23 @@ pattern GoogleDocsMetadata_DocumentType_Image = GoogleDocsMetadata_DocumentType 
 pattern GoogleDocsMetadata_DocumentType_BINARYBLOB :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_BINARYBLOB = GoogleDocsMetadata_DocumentType "BINARY_BLOB"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_FUSIONTABLE :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_FUSIONTABLE = GoogleDocsMetadata_DocumentType "FUSION_TABLE"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_Folder :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Folder = GoogleDocsMetadata_DocumentType "FOLDER"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_Drawing :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Drawing = GoogleDocsMetadata_DocumentType "DRAWING"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_Video :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Video = GoogleDocsMetadata_DocumentType "VIDEO"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_Form :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Form = GoogleDocsMetadata_DocumentType "FORM"
 
@@ -970,7 +1004,7 @@ pattern GoogleDocsMetadata_DocumentType_Form = GoogleDocsMetadata_DocumentType "
 pattern GoogleDocsMetadata_DocumentType_DRAFTSITE :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_DRAFTSITE = GoogleDocsMetadata_DocumentType "DRAFT_SITE"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_DRAFTSITEPAGE :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_DRAFTSITEPAGE = GoogleDocsMetadata_DocumentType "DRAFT_SITE_PAGE"
 
@@ -982,7 +1016,7 @@ pattern GoogleDocsMetadata_DocumentType_Jam = GoogleDocsMetadata_DocumentType "J
 pattern GoogleDocsMetadata_DocumentType_Shortcut :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Shortcut = GoogleDocsMetadata_DocumentType "SHORTCUT"
 
--- |
+-- | 
 pattern GoogleDocsMetadata_DocumentType_Script :: GoogleDocsMetadata_DocumentType
 pattern GoogleDocsMetadata_DocumentType_Script = GoogleDocsMetadata_DocumentType "SCRIPT"
 
@@ -1004,21 +1038,20 @@ pattern GoogleDocsMetadata_DocumentType_Script = GoogleDocsMetadata_DocumentType
   GoogleDocsMetadata_DocumentType_Jam,
   GoogleDocsMetadata_DocumentType_Shortcut,
   GoogleDocsMetadata_DocumentType_Script,
-  GoogleDocsMetadata_DocumentType
-  #-}
+  GoogleDocsMetadata_DocumentType #-}
 
 -- | Required. The RequestMode for this request.
-newtype IndexItemRequest_Mode = IndexItemRequest_Mode {fromIndexItemRequest_Mode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype IndexItemRequest_Mode = IndexItemRequest_Mode { fromIndexItemRequest_Mode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Priority is not specified in the update request. Leaving priority unspecified results in an update failure.
 pattern IndexItemRequest_Mode_Unspecified :: IndexItemRequest_Mode
@@ -1036,21 +1069,20 @@ pattern IndexItemRequest_Mode_Asynchronous = IndexItemRequest_Mode "ASYNCHRONOUS
   IndexItemRequest_Mode_Unspecified,
   IndexItemRequest_Mode_Synchronous,
   IndexItemRequest_Mode_Asynchronous,
-  IndexItemRequest_Mode
-  #-}
+  IndexItemRequest_Mode #-}
 
 -- | Used to specify the ordered ranking for the integer. Can only be used if isRepeatable is false.
-newtype IntegerPropertyOptions_OrderedRanking = IntegerPropertyOptions_OrderedRanking {fromIntegerPropertyOptions_OrderedRanking :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype IntegerPropertyOptions_OrderedRanking = IntegerPropertyOptions_OrderedRanking { fromIntegerPropertyOptions_OrderedRanking :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | There is no ranking order for the property. Results are not adjusted by this property\'s value.
 pattern IntegerPropertyOptions_OrderedRanking_NOORDER :: IntegerPropertyOptions_OrderedRanking
@@ -1068,20 +1100,19 @@ pattern IntegerPropertyOptions_OrderedRanking_Descending = IntegerPropertyOption
   IntegerPropertyOptions_OrderedRanking_NOORDER,
   IntegerPropertyOptions_OrderedRanking_Ascending,
   IntegerPropertyOptions_OrderedRanking_Descending,
-  IntegerPropertyOptions_OrderedRanking
-  #-}
+  IntegerPropertyOptions_OrderedRanking #-}
 
-newtype Interaction_Type = Interaction_Type {fromInteraction_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Interaction_Type = Interaction_Type { fromInteraction_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid value.
 pattern Interaction_Type_Unspecified :: Interaction_Type
@@ -1099,23 +1130,22 @@ pattern Interaction_Type_Edit = Interaction_Type "EDIT"
   Interaction_Type_Unspecified,
   Interaction_Type_View,
   Interaction_Type_Edit,
-  Interaction_Type
-  #-}
+  Interaction_Type #-}
 
 -- | Type for this item.
-newtype Item_ItemType = Item_ItemType {fromItem_ItemType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Item_ItemType = Item_ItemType { fromItem_ItemType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Item_ItemType_Unspecified :: Item_ItemType
 pattern Item_ItemType_Unspecified = Item_ItemType "UNSPECIFIED"
 
@@ -1136,21 +1166,20 @@ pattern Item_ItemType_VIRTUALCONTAINERITEM = Item_ItemType "VIRTUAL_CONTAINER_IT
   Item_ItemType_CONTENTITEM,
   Item_ItemType_CONTAINERITEM,
   Item_ItemType_VIRTUALCONTAINERITEM,
-  Item_ItemType
-  #-}
+  Item_ItemType #-}
 
 -- | Sets the type of access rules to apply when an item inherits its ACL from a parent. This should always be set in tandem with the inheritAclFrom field. Also, when the inheritAclFrom field is set, this field should be set to a valid AclInheritanceType.
-newtype ItemAcl_AclInheritanceType = ItemAcl_AclInheritanceType {fromItemAcl_AclInheritanceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ItemAcl_AclInheritanceType = ItemAcl_AclInheritanceType { fromItemAcl_AclInheritanceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default value when this item does not inherit an ACL. Use NOT_APPLICABLE when inheritAclFrom is empty. An item without ACL inheritance can still have ACLs supplied by its own readers and deniedReaders fields.
 pattern ItemAcl_AclInheritanceType_NOTAPPLICABLE :: ItemAcl_AclInheritanceType
@@ -1173,20 +1202,19 @@ pattern ItemAcl_AclInheritanceType_BOTHPERMIT = ItemAcl_AclInheritanceType "BOTH
   ItemAcl_AclInheritanceType_CHILDOVERRIDE,
   ItemAcl_AclInheritanceType_PARENTOVERRIDE,
   ItemAcl_AclInheritanceType_BOTHPERMIT,
-  ItemAcl_AclInheritanceType
-  #-}
+  ItemAcl_AclInheritanceType #-}
 
-newtype ItemContent_ContentFormat = ItemContent_ContentFormat {fromItemContent_ContentFormat :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ItemContent_ContentFormat = ItemContent_ContentFormat { fromItemContent_ContentFormat :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid value.
 pattern ItemContent_ContentFormat_Unspecified :: ItemContent_ContentFormat
@@ -1209,21 +1237,20 @@ pattern ItemContent_ContentFormat_Raw = ItemContent_ContentFormat "RAW"
   ItemContent_ContentFormat_Html,
   ItemContent_ContentFormat_Text,
   ItemContent_ContentFormat_Raw,
-  ItemContent_ContentFormat
-  #-}
+  ItemContent_ContentFormat #-}
 
 -- | Status of the items.
-newtype ItemCountByStatus_StatusCode = ItemCountByStatus_StatusCode {fromItemCountByStatus_StatusCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ItemCountByStatus_StatusCode = ItemCountByStatus_StatusCode { fromItemCountByStatus_StatusCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Input-only value. Used with Items.list to list all items in the queue, regardless of status.
 pattern ItemCountByStatus_StatusCode_CODEUNSPECIFIED :: ItemCountByStatus_StatusCode
@@ -1251,21 +1278,20 @@ pattern ItemCountByStatus_StatusCode_Accepted = ItemCountByStatus_StatusCode "AC
   ItemCountByStatus_StatusCode_Modified,
   ItemCountByStatus_StatusCode_NEWITEM,
   ItemCountByStatus_StatusCode_Accepted,
-  ItemCountByStatus_StatusCode
-  #-}
+  ItemCountByStatus_StatusCode #-}
 
 -- | Status code.
-newtype ItemStatus_Code = ItemStatus_Code {fromItemStatus_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ItemStatus_Code = ItemStatus_Code { fromItemStatus_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Input-only value. Used with Items.list to list all items in the queue, regardless of status.
 pattern ItemStatus_Code_CODEUNSPECIFIED :: ItemStatus_Code
@@ -1293,20 +1319,19 @@ pattern ItemStatus_Code_Accepted = ItemStatus_Code "ACCEPTED"
   ItemStatus_Code_Modified,
   ItemStatus_Code_NEWITEM,
   ItemStatus_Code_Accepted,
-  ItemStatus_Code
-  #-}
+  ItemStatus_Code #-}
 
-newtype PollItemsRequest_StatusCodesItem = PollItemsRequest_StatusCodesItem {fromPollItemsRequest_StatusCodesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PollItemsRequest_StatusCodesItem = PollItemsRequest_StatusCodesItem { fromPollItemsRequest_StatusCodesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Input-only value. Used with Items.list to list all items in the queue, regardless of status.
 pattern PollItemsRequest_StatusCodesItem_CODEUNSPECIFIED :: PollItemsRequest_StatusCodesItem
@@ -1334,21 +1359,20 @@ pattern PollItemsRequest_StatusCodesItem_Accepted = PollItemsRequest_StatusCodes
   PollItemsRequest_StatusCodesItem_Modified,
   PollItemsRequest_StatusCodesItem_NEWITEM,
   PollItemsRequest_StatusCodesItem_Accepted,
-  PollItemsRequest_StatusCodesItem
-  #-}
+  PollItemsRequest_StatusCodesItem #-}
 
 -- | Error code indicating the nature of the error.
-newtype ProcessingError_Code = ProcessingError_Code {fromProcessingError_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProcessingError_Code = ProcessingError_Code { fromProcessingError_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Input only value. Use this value in Items.
 pattern ProcessingError_Code_PROCESSINGERRORCODEUNSPECIFIED :: ProcessingError_Code
@@ -1376,21 +1400,20 @@ pattern ProcessingError_Code_ACLCYCLE = ProcessingError_Code "ACL_CYCLE"
   ProcessingError_Code_UNSUPPORTEDCONTENTFORMAT,
   ProcessingError_Code_INDIRECTBROKENACL,
   ProcessingError_Code_ACLCYCLE,
-  ProcessingError_Code
-  #-}
+  ProcessingError_Code #-}
 
 -- | The type of the push operation that defines the push behavior.
-newtype PushItem_Type = PushItem_Type {fromPushItem_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PushItem_Type = PushItem_Type { fromPushItem_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default UNSPECIFIED. Specifies that the push operation should not modify ItemStatus
 pattern PushItem_Type_Unspecified :: PushItem_Type
@@ -1418,20 +1441,19 @@ pattern PushItem_Type_Requeue = PushItem_Type "REQUEUE"
   PushItem_Type_NOTMODIFIED,
   PushItem_Type_REPOSITORYERROR,
   PushItem_Type_Requeue,
-  PushItem_Type
-  #-}
+  PushItem_Type #-}
 
-newtype QueryInterpretation_InterpretationType = QueryInterpretation_InterpretationType {fromQueryInterpretation_InterpretationType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype QueryInterpretation_InterpretationType = QueryInterpretation_InterpretationType { fromQueryInterpretation_InterpretationType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Neither the natural language interpretation, nor a broader version of the query is used to fetch the search results.
 pattern QueryInterpretation_InterpretationType_None :: QueryInterpretation_InterpretationType
@@ -1449,23 +1471,22 @@ pattern QueryInterpretation_InterpretationType_Replace = QueryInterpretation_Int
   QueryInterpretation_InterpretationType_None,
   QueryInterpretation_InterpretationType_Blend,
   QueryInterpretation_InterpretationType_Replace,
-  QueryInterpretation_InterpretationType
-  #-}
+  QueryInterpretation_InterpretationType #-}
 
 -- | The reason for interpretation of the query. This field will not be UNSPECIFIED if the interpretation type is not NONE.
-newtype QueryInterpretation_Reason = QueryInterpretation_Reason {fromQueryInterpretation_Reason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype QueryInterpretation_Reason = QueryInterpretation_Reason { fromQueryInterpretation_Reason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern QueryInterpretation_Reason_Unspecified :: QueryInterpretation_Reason
 pattern QueryInterpretation_Reason_Unspecified = QueryInterpretation_Reason "UNSPECIFIED"
 
@@ -1481,55 +1502,54 @@ pattern QueryInterpretation_Reason_NOTENOUGHRESULTSFOUNDFORUSERQUERY = QueryInte
   QueryInterpretation_Reason_Unspecified,
   QueryInterpretation_Reason_QUERYHASNATURALLANGUAGEINTENT,
   QueryInterpretation_Reason_NOTENOUGHRESULTSFOUNDFORUSERQUERY,
-  QueryInterpretation_Reason
-  #-}
+  QueryInterpretation_Reason #-}
 
 -- | Type of the operator.
-newtype QueryOperator_Type = QueryOperator_Type {fromQueryOperator_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype QueryOperator_Type = QueryOperator_Type { fromQueryOperator_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid value.
 pattern QueryOperator_Type_Unknown :: QueryOperator_Type
 pattern QueryOperator_Type_Unknown = QueryOperator_Type "UNKNOWN"
 
--- |
+-- | 
 pattern QueryOperator_Type_Integer :: QueryOperator_Type
 pattern QueryOperator_Type_Integer = QueryOperator_Type "INTEGER"
 
--- |
+-- | 
 pattern QueryOperator_Type_Double :: QueryOperator_Type
 pattern QueryOperator_Type_Double = QueryOperator_Type "DOUBLE"
 
--- |
+-- | 
 pattern QueryOperator_Type_Timestamp :: QueryOperator_Type
 pattern QueryOperator_Type_Timestamp = QueryOperator_Type "TIMESTAMP"
 
--- |
+-- | 
 pattern QueryOperator_Type_Boolean :: QueryOperator_Type
 pattern QueryOperator_Type_Boolean = QueryOperator_Type "BOOLEAN"
 
--- |
+-- | 
 pattern QueryOperator_Type_Enum' :: QueryOperator_Type
 pattern QueryOperator_Type_Enum' = QueryOperator_Type "ENUM"
 
--- |
+-- | 
 pattern QueryOperator_Type_Date :: QueryOperator_Type
 pattern QueryOperator_Type_Date = QueryOperator_Type "DATE"
 
--- |
+-- | 
 pattern QueryOperator_Type_Text :: QueryOperator_Type
 pattern QueryOperator_Type_Text = QueryOperator_Type "TEXT"
 
--- |
+-- | 
 pattern QueryOperator_Type_Html :: QueryOperator_Type
 pattern QueryOperator_Type_Html = QueryOperator_Type "HTML"
 
@@ -1543,21 +1563,20 @@ pattern QueryOperator_Type_Html = QueryOperator_Type "HTML"
   QueryOperator_Type_Date,
   QueryOperator_Type_Text,
   QueryOperator_Type_Html,
-  QueryOperator_Type
-  #-}
+  QueryOperator_Type #-}
 
 -- | Type of error.
-newtype RepositoryError_Type = RepositoryError_Type {fromRepositoryError_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RepositoryError_Type = RepositoryError_Type { fromRepositoryError_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown error.
 pattern RepositoryError_Type_Unknown :: RepositoryError_Type
@@ -1610,21 +1629,20 @@ pattern RepositoryError_Type_CLIENTERROR = RepositoryError_Type "CLIENT_ERROR"
   RepositoryError_Type_QUOTAEXCEEDED,
   RepositoryError_Type_SERVICEUNAVAILABLE,
   RepositoryError_Type_CLIENTERROR,
-  RepositoryError_Type
-  #-}
+  RepositoryError_Type #-}
 
 -- | Indicates the ranking importance given to property when it is matched during retrieval. Once set, the token importance of a property cannot be changed.
-newtype RetrievalImportance_Importance = RetrievalImportance_Importance {fromRetrievalImportance_Importance :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RetrievalImportance_Importance = RetrievalImportance_Importance { fromRetrievalImportance_Importance :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Treat the match like a body text match.
 pattern RetrievalImportance_Importance_Default :: RetrievalImportance_Importance
@@ -1652,23 +1670,22 @@ pattern RetrievalImportance_Importance_None = RetrievalImportance_Importance "NO
   RetrievalImportance_Importance_High,
   RetrievalImportance_Importance_Low,
   RetrievalImportance_Importance_None,
-  RetrievalImportance_Importance
-  #-}
+  RetrievalImportance_Importance #-}
 
 -- | The scope to which the content was shared.
-newtype ShareScope_Scope = ShareScope_Scope {fromShareScope_Scope :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ShareScope_Scope = ShareScope_Scope { fromShareScope_Scope :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern ShareScope_Scope_Unknown :: ShareScope_Scope
 pattern ShareScope_Scope_Unknown = ShareScope_Scope "UNKNOWN"
 
@@ -1684,11 +1701,11 @@ pattern ShareScope_Scope_Limited = ShareScope_Scope "LIMITED"
 pattern ShareScope_Scope_Extended :: ShareScope_Scope
 pattern ShareScope_Scope_Extended = ShareScope_Scope "EXTENDED"
 
--- |
+-- | 
 pattern ShareScope_Scope_DASHERDOMAIN :: ShareScope_Scope
 pattern ShareScope_Scope_DASHERDOMAIN = ShareScope_Scope "DASHER_DOMAIN"
 
--- |
+-- | 
 pattern ShareScope_Scope_Public :: ShareScope_Scope
 pattern ShareScope_Scope_Public = ShareScope_Scope "PUBLIC"
 
@@ -1699,50 +1716,48 @@ pattern ShareScope_Scope_Public = ShareScope_Scope "PUBLIC"
   ShareScope_Scope_Extended,
   ShareScope_Scope_DASHERDOMAIN,
   ShareScope_Scope_Public,
-  ShareScope_Scope
-  #-}
+  ShareScope_Scope #-}
 
 -- | Ascending is the default sort order
-newtype SortOptions_SortOrder = SortOptions_SortOrder {fromSortOptions_SortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SortOptions_SortOrder = SortOptions_SortOrder { fromSortOptions_SortOrder :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern SortOptions_SortOrder_Ascending :: SortOptions_SortOrder
 pattern SortOptions_SortOrder_Ascending = SortOptions_SortOrder "ASCENDING"
 
--- |
+-- | 
 pattern SortOptions_SortOrder_Descending :: SortOptions_SortOrder
 pattern SortOptions_SortOrder_Descending = SortOptions_SortOrder "DESCENDING"
 
 {-# COMPLETE
   SortOptions_SortOrder_Ascending,
   SortOptions_SortOrder_Descending,
-  SortOptions_SortOrder
-  #-}
+  SortOptions_SortOrder #-}
 
 -- | Predefined content source for Google Apps.
-newtype Source_PredefinedSource = Source_PredefinedSource {fromSource_PredefinedSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Source_PredefinedSource = Source_PredefinedSource { fromSource_PredefinedSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Source_PredefinedSource_None :: Source_PredefinedSource
 pattern Source_PredefinedSource_None = Source_PredefinedSource "NONE"
 
@@ -1754,27 +1769,27 @@ pattern Source_PredefinedSource_QUERYHISTORY = Source_PredefinedSource "QUERY_HI
 pattern Source_PredefinedSource_Person :: Source_PredefinedSource
 pattern Source_PredefinedSource_Person = Source_PredefinedSource "PERSON"
 
--- |
+-- | 
 pattern Source_PredefinedSource_GOOGLEDRIVE :: Source_PredefinedSource
 pattern Source_PredefinedSource_GOOGLEDRIVE = Source_PredefinedSource "GOOGLE_DRIVE"
 
--- |
+-- | 
 pattern Source_PredefinedSource_GOOGLEGMAIL :: Source_PredefinedSource
 pattern Source_PredefinedSource_GOOGLEGMAIL = Source_PredefinedSource "GOOGLE_GMAIL"
 
--- |
+-- | 
 pattern Source_PredefinedSource_GOOGLESITES :: Source_PredefinedSource
 pattern Source_PredefinedSource_GOOGLESITES = Source_PredefinedSource "GOOGLE_SITES"
 
--- |
+-- | 
 pattern Source_PredefinedSource_GOOGLEGROUPS :: Source_PredefinedSource
 pattern Source_PredefinedSource_GOOGLEGROUPS = Source_PredefinedSource "GOOGLE_GROUPS"
 
--- |
+-- | 
 pattern Source_PredefinedSource_GOOGLECALENDAR :: Source_PredefinedSource
 pattern Source_PredefinedSource_GOOGLECALENDAR = Source_PredefinedSource "GOOGLE_CALENDAR"
 
--- |
+-- | 
 pattern Source_PredefinedSource_GOOGLEKEEP :: Source_PredefinedSource
 pattern Source_PredefinedSource_GOOGLEKEEP = Source_PredefinedSource "GOOGLE_KEEP"
 
@@ -1788,31 +1803,30 @@ pattern Source_PredefinedSource_GOOGLEKEEP = Source_PredefinedSource "GOOGLE_KEE
   Source_PredefinedSource_GOOGLEGROUPS,
   Source_PredefinedSource_GOOGLECALENDAR,
   Source_PredefinedSource_GOOGLEKEEP,
-  Source_PredefinedSource
-  #-}
+  Source_PredefinedSource #-}
 
 -- | Importance of the source.
-newtype SourceScoringConfig_SourceImportance = SourceScoringConfig_SourceImportance {fromSourceScoringConfig_SourceImportance :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SourceScoringConfig_SourceImportance = SourceScoringConfig_SourceImportance { fromSourceScoringConfig_SourceImportance :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern SourceScoringConfig_SourceImportance_Default :: SourceScoringConfig_SourceImportance
 pattern SourceScoringConfig_SourceImportance_Default = SourceScoringConfig_SourceImportance "DEFAULT"
 
--- |
+-- | 
 pattern SourceScoringConfig_SourceImportance_Low :: SourceScoringConfig_SourceImportance
 pattern SourceScoringConfig_SourceImportance_Low = SourceScoringConfig_SourceImportance "LOW"
 
--- |
+-- | 
 pattern SourceScoringConfig_SourceImportance_High :: SourceScoringConfig_SourceImportance
 pattern SourceScoringConfig_SourceImportance_High = SourceScoringConfig_SourceImportance "HIGH"
 
@@ -1820,21 +1834,20 @@ pattern SourceScoringConfig_SourceImportance_High = SourceScoringConfig_SourceIm
   SourceScoringConfig_SourceImportance_Default,
   SourceScoringConfig_SourceImportance_Low,
   SourceScoringConfig_SourceImportance_High,
-  SourceScoringConfig_SourceImportance
-  #-}
+  SourceScoringConfig_SourceImportance #-}
 
 -- | searching user\'s membership state in this space
-newtype SpaceInfo_UserMembershipState = SpaceInfo_UserMembershipState {fromSpaceInfo_UserMembershipState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SpaceInfo_UserMembershipState = SpaceInfo_UserMembershipState { fromSpaceInfo_UserMembershipState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default state, do not use
 pattern SpaceInfo_UserMembershipState_MEMBERUNKNOWN :: SpaceInfo_UserMembershipState
@@ -1862,21 +1875,20 @@ pattern SpaceInfo_UserMembershipState_MEMBERFAILED = SpaceInfo_UserMembershipSta
   SpaceInfo_UserMembershipState_MEMBERJOINED,
   SpaceInfo_UserMembershipState_MEMBERNOTAMEMBER,
   SpaceInfo_UserMembershipState_MEMBERFAILED,
-  SpaceInfo_UserMembershipState
-  #-}
+  SpaceInfo_UserMembershipState #-}
 
 -- | The resolution status for the external identity.
-newtype UnmappedIdentity_ResolutionStatusCode = UnmappedIdentity_ResolutionStatusCode {fromUnmappedIdentity_ResolutionStatusCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UnmappedIdentity_ResolutionStatusCode = UnmappedIdentity_ResolutionStatusCode { fromUnmappedIdentity_ResolutionStatusCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Input-only value. Used to list all unmapped identities regardless of status.
 pattern UnmappedIdentity_ResolutionStatusCode_CODEUNSPECIFIED :: UnmappedIdentity_ResolutionStatusCode
@@ -1909,48 +1921,46 @@ pattern UnmappedIdentity_ResolutionStatusCode_INTERNALERROR = UnmappedIdentity_R
   UnmappedIdentity_ResolutionStatusCode_IDENTITYSOURCEMISCONFIGURED,
   UnmappedIdentity_ResolutionStatusCode_TOOMANYMAPPINGSFOUND,
   UnmappedIdentity_ResolutionStatusCode_INTERNALERROR,
-  UnmappedIdentity_ResolutionStatusCode
-  #-}
+  UnmappedIdentity_ResolutionStatusCode #-}
 
 -- | Clients do not need to send UserType to Backend, but Backend will always send this field to clients per the following rule: 1. For HUMAN Ids, the field is empty but by default .getType() will return HUMAN. 2. For BOT Ids, the field is ALWAYS set to BOT.
-newtype UserId_Type = UserId_Type {fromUserId_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UserId_Type = UserId_Type { fromUserId_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Notes on HUMAN type: 1) Leaving UserId.UserType field empty will return HUMAN as default value. This is expected because all the existing UserIds are without explicitly setting UserType, most of which are HUMAN Ids. For Bot Ids we will always set BOT in UserType field. 2) DO NOT explicitly set HUMAN as type. This is a proto2 issue, that a UserId with explicitly set default value HUMAN as type is NOT equal to an id without setting the field. aka. UserId id1 = UserId.newBuilder() .setId(\"dummy\").setType(UserType.HUMAN).build(); UserId id2 = UserId.newBuilder().setId(\"dummy\").build(); AssertThat(id1).isNotEqual(id2); AssertThat(id2.getType()).isEqualTo(UserType.HUMAN);
 pattern UserId_Type_Human :: UserId_Type
 pattern UserId_Type_Human = UserId_Type "HUMAN"
 
--- |
+-- | 
 pattern UserId_Type_Bot :: UserId_Type
 pattern UserId_Type_Bot = UserId_Type "BOT"
 
 {-# COMPLETE
   UserId_Type_Human,
   UserId_Type_Bot,
-  UserId_Type
-  #-}
+  UserId_Type #-}
 
 -- | Limit users selection to this status.
-newtype DebugIdentitysourcesUnmappedidsListResolutionStatusCode = DebugIdentitysourcesUnmappedidsListResolutionStatusCode {fromDebugIdentitysourcesUnmappedidsListResolutionStatusCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DebugIdentitysourcesUnmappedidsListResolutionStatusCode = DebugIdentitysourcesUnmappedidsListResolutionStatusCode { fromDebugIdentitysourcesUnmappedidsListResolutionStatusCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Input-only value. Used to list all unmapped identities regardless of status.
 pattern DebugIdentitysourcesUnmappedidsListResolutionStatusCode_CODEUNSPECIFIED :: DebugIdentitysourcesUnmappedidsListResolutionStatusCode
@@ -1983,21 +1993,20 @@ pattern DebugIdentitysourcesUnmappedidsListResolutionStatusCode_INTERNALERROR = 
   DebugIdentitysourcesUnmappedidsListResolutionStatusCode_IDENTITYSOURCEMISCONFIGURED,
   DebugIdentitysourcesUnmappedidsListResolutionStatusCode_TOOMANYMAPPINGSFOUND,
   DebugIdentitysourcesUnmappedidsListResolutionStatusCode_INTERNALERROR,
-  DebugIdentitysourcesUnmappedidsListResolutionStatusCode
-  #-}
+  DebugIdentitysourcesUnmappedidsListResolutionStatusCode #-}
 
 -- | Required. The RequestMode for this request.
-newtype IndexingDatasourcesItemsDeleteMode = IndexingDatasourcesItemsDeleteMode {fromIndexingDatasourcesItemsDeleteMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype IndexingDatasourcesItemsDeleteMode = IndexingDatasourcesItemsDeleteMode { fromIndexingDatasourcesItemsDeleteMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Priority is not specified in the update request. Leaving priority unspecified results in an update failure.
 pattern IndexingDatasourcesItemsDeleteMode_Unspecified :: IndexingDatasourcesItemsDeleteMode
@@ -2015,5 +2024,4 @@ pattern IndexingDatasourcesItemsDeleteMode_Asynchronous = IndexingDatasourcesIte
   IndexingDatasourcesItemsDeleteMode_Unspecified,
   IndexingDatasourcesItemsDeleteMode_Synchronous,
   IndexingDatasourcesItemsDeleteMode_Asynchronous,
-  IndexingDatasourcesItemsDeleteMode
-  #-}
+  IndexingDatasourcesItemsDeleteMode #-}

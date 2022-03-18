@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,870 +31,871 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudSearch.Types
-  ( -- * Configuration
-    cloudSearchService,
+    (
+    -- * Configuration
+      cloudSearchService
 
     -- * OAuth Scopes
-    cloud_searchScope,
-    cloud_searchDebugScope,
-    cloud_searchIndexingScope,
-    cloud_searchQueryScope,
-    cloud_searchSettingsScope,
-    cloud_searchSettingsIndexingScope,
-    cloud_searchSettingsQueryScope,
-    cloud_searchStatsScope,
-    cloud_searchStatsIndexingScope,
+    , cloud_searchScope
+    , cloud_searchDebugScope
+    , cloud_searchIndexingScope
+    , cloud_searchQueryScope
+    , cloud_searchSettingsScope
+    , cloud_searchSettingsIndexingScope
+    , cloud_searchSettingsQueryScope
+    , cloud_searchStatsScope
+    , cloud_searchStatsIndexingScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AclInfo
-    AclInfo (..),
-    newAclInfo,
+    , AclInfo (..)
+    , newAclInfo
 
     -- ** AclInfo_Scope
-    AclInfo_Scope (..),
+    , AclInfo_Scope (..)
 
     -- ** AppId
-    AppId (..),
-    newAppId,
+    , AppId (..)
+    , newAppId
 
     -- ** AppId_AppType
-    AppId_AppType (..),
+    , AppId_AppType (..)
 
     -- ** AppId_GsuiteAppType
-    AppId_GsuiteAppType (..),
+    , AppId_GsuiteAppType (..)
 
     -- ** AuditLoggingSettings
-    AuditLoggingSettings (..),
-    newAuditLoggingSettings,
+    , AuditLoggingSettings (..)
+    , newAuditLoggingSettings
 
     -- ** AvatarInfo
-    AvatarInfo (..),
-    newAvatarInfo,
+    , AvatarInfo (..)
+    , newAvatarInfo
 
     -- ** BooleanOperatorOptions
-    BooleanOperatorOptions (..),
-    newBooleanOperatorOptions,
+    , BooleanOperatorOptions (..)
+    , newBooleanOperatorOptions
 
     -- ** BooleanPropertyOptions
-    BooleanPropertyOptions (..),
-    newBooleanPropertyOptions,
+    , BooleanPropertyOptions (..)
+    , newBooleanPropertyOptions
 
     -- ** CheckAccessResponse
-    CheckAccessResponse (..),
-    newCheckAccessResponse,
+    , CheckAccessResponse (..)
+    , newCheckAccessResponse
 
     -- ** CompositeFilter
-    CompositeFilter (..),
-    newCompositeFilter,
+    , CompositeFilter (..)
+    , newCompositeFilter
 
     -- ** CompositeFilter_LogicOperator
-    CompositeFilter_LogicOperator (..),
+    , CompositeFilter_LogicOperator (..)
 
     -- ** ContextAttribute
-    ContextAttribute (..),
-    newContextAttribute,
+    , ContextAttribute (..)
+    , newContextAttribute
 
     -- ** CustomEmoji
-    CustomEmoji (..),
-    newCustomEmoji,
+    , CustomEmoji (..)
+    , newCustomEmoji
 
     -- ** CustomEmoji_State
-    CustomEmoji_State (..),
+    , CustomEmoji_State (..)
 
     -- ** CustomerId
-    CustomerId (..),
-    newCustomerId,
+    , CustomerId (..)
+    , newCustomerId
 
     -- ** CustomerIndexStats
-    CustomerIndexStats (..),
-    newCustomerIndexStats,
+    , CustomerIndexStats (..)
+    , newCustomerIndexStats
 
     -- ** CustomerQueryStats
-    CustomerQueryStats (..),
-    newCustomerQueryStats,
+    , CustomerQueryStats (..)
+    , newCustomerQueryStats
 
     -- ** CustomerSearchApplicationStats
-    CustomerSearchApplicationStats (..),
-    newCustomerSearchApplicationStats,
+    , CustomerSearchApplicationStats (..)
+    , newCustomerSearchApplicationStats
 
     -- ** CustomerSessionStats
-    CustomerSessionStats (..),
-    newCustomerSessionStats,
+    , CustomerSessionStats (..)
+    , newCustomerSessionStats
 
     -- ** CustomerSettings
-    CustomerSettings (..),
-    newCustomerSettings,
+    , CustomerSettings (..)
+    , newCustomerSettings
 
     -- ** CustomerUserStats
-    CustomerUserStats (..),
-    newCustomerUserStats,
+    , CustomerUserStats (..)
+    , newCustomerUserStats
 
     -- ** DataSource
-    DataSource (..),
-    newDataSource,
+    , DataSource (..)
+    , newDataSource
 
     -- ** DataSourceIndexStats
-    DataSourceIndexStats (..),
-    newDataSourceIndexStats,
+    , DataSourceIndexStats (..)
+    , newDataSourceIndexStats
 
     -- ** DataSourceRestriction
-    DataSourceRestriction (..),
-    newDataSourceRestriction,
+    , DataSourceRestriction (..)
+    , newDataSourceRestriction
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** DateOperatorOptions
-    DateOperatorOptions (..),
-    newDateOperatorOptions,
+    , DateOperatorOptions (..)
+    , newDateOperatorOptions
 
     -- ** DatePropertyOptions
-    DatePropertyOptions (..),
-    newDatePropertyOptions,
+    , DatePropertyOptions (..)
+    , newDatePropertyOptions
 
     -- ** DateValues
-    DateValues (..),
-    newDateValues,
+    , DateValues (..)
+    , newDateValues
 
     -- ** DebugOptions
-    DebugOptions (..),
-    newDebugOptions,
+    , DebugOptions (..)
+    , newDebugOptions
 
     -- ** DeleteQueueItemsRequest
-    DeleteQueueItemsRequest (..),
-    newDeleteQueueItemsRequest,
+    , DeleteQueueItemsRequest (..)
+    , newDeleteQueueItemsRequest
 
     -- ** DisplayedProperty
-    DisplayedProperty (..),
-    newDisplayedProperty,
+    , DisplayedProperty (..)
+    , newDisplayedProperty
 
     -- ** DmId
-    DmId (..),
-    newDmId,
+    , DmId (..)
+    , newDmId
 
     -- ** DoubleOperatorOptions
-    DoubleOperatorOptions (..),
-    newDoubleOperatorOptions,
+    , DoubleOperatorOptions (..)
+    , newDoubleOperatorOptions
 
     -- ** DoublePropertyOptions
-    DoublePropertyOptions (..),
-    newDoublePropertyOptions,
+    , DoublePropertyOptions (..)
+    , newDoublePropertyOptions
 
     -- ** DoubleValues
-    DoubleValues (..),
-    newDoubleValues,
+    , DoubleValues (..)
+    , newDoubleValues
 
     -- ** DriveFollowUpRestrict
-    DriveFollowUpRestrict (..),
-    newDriveFollowUpRestrict,
+    , DriveFollowUpRestrict (..)
+    , newDriveFollowUpRestrict
 
     -- ** DriveFollowUpRestrict_Type
-    DriveFollowUpRestrict_Type (..),
+    , DriveFollowUpRestrict_Type (..)
 
     -- ** DriveLocationRestrict
-    DriveLocationRestrict (..),
-    newDriveLocationRestrict,
+    , DriveLocationRestrict (..)
+    , newDriveLocationRestrict
 
     -- ** DriveLocationRestrict_Type
-    DriveLocationRestrict_Type (..),
+    , DriveLocationRestrict_Type (..)
 
     -- ** DriveMimeTypeRestrict
-    DriveMimeTypeRestrict (..),
-    newDriveMimeTypeRestrict,
+    , DriveMimeTypeRestrict (..)
+    , newDriveMimeTypeRestrict
 
     -- ** DriveMimeTypeRestrict_Type
-    DriveMimeTypeRestrict_Type (..),
+    , DriveMimeTypeRestrict_Type (..)
 
     -- ** DriveTimeSpanRestrict
-    DriveTimeSpanRestrict (..),
-    newDriveTimeSpanRestrict,
+    , DriveTimeSpanRestrict (..)
+    , newDriveTimeSpanRestrict
 
     -- ** DriveTimeSpanRestrict_Type
-    DriveTimeSpanRestrict_Type (..),
+    , DriveTimeSpanRestrict_Type (..)
 
     -- ** DynamiteSpacesScoringInfo
-    DynamiteSpacesScoringInfo (..),
-    newDynamiteSpacesScoringInfo,
+    , DynamiteSpacesScoringInfo (..)
+    , newDynamiteSpacesScoringInfo
 
     -- ** EmailAddress
-    EmailAddress (..),
-    newEmailAddress,
+    , EmailAddress (..)
+    , newEmailAddress
 
     -- ** Emoji
-    Emoji (..),
-    newEmoji,
+    , Emoji (..)
+    , newEmoji
 
     -- ** EnumOperatorOptions
-    EnumOperatorOptions (..),
-    newEnumOperatorOptions,
+    , EnumOperatorOptions (..)
+    , newEnumOperatorOptions
 
     -- ** EnumPropertyOptions
-    EnumPropertyOptions (..),
-    newEnumPropertyOptions,
+    , EnumPropertyOptions (..)
+    , newEnumPropertyOptions
 
     -- ** EnumPropertyOptions_OrderedRanking
-    EnumPropertyOptions_OrderedRanking (..),
+    , EnumPropertyOptions_OrderedRanking (..)
 
     -- ** EnumValuePair
-    EnumValuePair (..),
-    newEnumValuePair,
+    , EnumValuePair (..)
+    , newEnumValuePair
 
     -- ** EnumValues
-    EnumValues (..),
-    newEnumValues,
+    , EnumValues (..)
+    , newEnumValues
 
     -- ** ErrorInfo
-    ErrorInfo (..),
-    newErrorInfo,
+    , ErrorInfo (..)
+    , newErrorInfo
 
     -- ** ErrorMessage
-    ErrorMessage (..),
-    newErrorMessage,
+    , ErrorMessage (..)
+    , newErrorMessage
 
     -- ** FacetBucket
-    FacetBucket (..),
-    newFacetBucket,
+    , FacetBucket (..)
+    , newFacetBucket
 
     -- ** FacetOptions
-    FacetOptions (..),
-    newFacetOptions,
+    , FacetOptions (..)
+    , newFacetOptions
 
     -- ** FacetResult
-    FacetResult (..),
-    newFacetResult,
+    , FacetResult (..)
+    , newFacetResult
 
     -- ** FieldViolation
-    FieldViolation (..),
-    newFieldViolation,
+    , FieldViolation (..)
+    , newFieldViolation
 
     -- ** Filter
-    Filter (..),
-    newFilter,
+    , Filter (..)
+    , newFilter
 
     -- ** FilterOptions
-    FilterOptions (..),
-    newFilterOptions,
+    , FilterOptions (..)
+    , newFilterOptions
 
     -- ** FreshnessOptions
-    FreshnessOptions (..),
-    newFreshnessOptions,
+    , FreshnessOptions (..)
+    , newFreshnessOptions
 
     -- ** GSuitePrincipal
-    GSuitePrincipal (..),
-    newGSuitePrincipal,
+    , GSuitePrincipal (..)
+    , newGSuitePrincipal
 
     -- ** GetCustomerIndexStatsResponse
-    GetCustomerIndexStatsResponse (..),
-    newGetCustomerIndexStatsResponse,
+    , GetCustomerIndexStatsResponse (..)
+    , newGetCustomerIndexStatsResponse
 
     -- ** GetCustomerQueryStatsResponse
-    GetCustomerQueryStatsResponse (..),
-    newGetCustomerQueryStatsResponse,
+    , GetCustomerQueryStatsResponse (..)
+    , newGetCustomerQueryStatsResponse
 
     -- ** GetCustomerSearchApplicationStatsResponse
-    GetCustomerSearchApplicationStatsResponse (..),
-    newGetCustomerSearchApplicationStatsResponse,
+    , GetCustomerSearchApplicationStatsResponse (..)
+    , newGetCustomerSearchApplicationStatsResponse
 
     -- ** GetCustomerSessionStatsResponse
-    GetCustomerSessionStatsResponse (..),
-    newGetCustomerSessionStatsResponse,
+    , GetCustomerSessionStatsResponse (..)
+    , newGetCustomerSessionStatsResponse
 
     -- ** GetCustomerUserStatsResponse
-    GetCustomerUserStatsResponse (..),
-    newGetCustomerUserStatsResponse,
+    , GetCustomerUserStatsResponse (..)
+    , newGetCustomerUserStatsResponse
 
     -- ** GetDataSourceIndexStatsResponse
-    GetDataSourceIndexStatsResponse (..),
-    newGetDataSourceIndexStatsResponse,
+    , GetDataSourceIndexStatsResponse (..)
+    , newGetDataSourceIndexStatsResponse
 
     -- ** GetSearchApplicationQueryStatsResponse
-    GetSearchApplicationQueryStatsResponse (..),
-    newGetSearchApplicationQueryStatsResponse,
+    , GetSearchApplicationQueryStatsResponse (..)
+    , newGetSearchApplicationQueryStatsResponse
 
     -- ** GetSearchApplicationSessionStatsResponse
-    GetSearchApplicationSessionStatsResponse (..),
-    newGetSearchApplicationSessionStatsResponse,
+    , GetSearchApplicationSessionStatsResponse (..)
+    , newGetSearchApplicationSessionStatsResponse
 
     -- ** GetSearchApplicationUserStatsResponse
-    GetSearchApplicationUserStatsResponse (..),
-    newGetSearchApplicationUserStatsResponse,
+    , GetSearchApplicationUserStatsResponse (..)
+    , newGetSearchApplicationUserStatsResponse
 
     -- ** GoogleDocsMetadata
-    GoogleDocsMetadata (..),
-    newGoogleDocsMetadata,
+    , GoogleDocsMetadata (..)
+    , newGoogleDocsMetadata
 
     -- ** GoogleDocsMetadata_DocumentType
-    GoogleDocsMetadata_DocumentType (..),
+    , GoogleDocsMetadata_DocumentType (..)
 
     -- ** GoogleDocsResultInfo
-    GoogleDocsResultInfo (..),
-    newGoogleDocsResultInfo,
+    , GoogleDocsResultInfo (..)
+    , newGoogleDocsResultInfo
 
     -- ** GroupId
-    GroupId (..),
-    newGroupId,
+    , GroupId (..)
+    , newGroupId
 
     -- ** HtmlOperatorOptions
-    HtmlOperatorOptions (..),
-    newHtmlOperatorOptions,
+    , HtmlOperatorOptions (..)
+    , newHtmlOperatorOptions
 
     -- ** HtmlPropertyOptions
-    HtmlPropertyOptions (..),
-    newHtmlPropertyOptions,
+    , HtmlPropertyOptions (..)
+    , newHtmlPropertyOptions
 
     -- ** HtmlValues
-    HtmlValues (..),
-    newHtmlValues,
+    , HtmlValues (..)
+    , newHtmlValues
 
     -- ** Id
-    Id (..),
-    newId,
+    , Id (..)
+    , newId
 
     -- ** IndexItemOptions
-    IndexItemOptions (..),
-    newIndexItemOptions,
+    , IndexItemOptions (..)
+    , newIndexItemOptions
 
     -- ** IndexItemRequest
-    IndexItemRequest (..),
-    newIndexItemRequest,
+    , IndexItemRequest (..)
+    , newIndexItemRequest
 
     -- ** IndexItemRequest_Mode
-    IndexItemRequest_Mode (..),
+    , IndexItemRequest_Mode (..)
 
     -- ** InitializeCustomerRequest
-    InitializeCustomerRequest (..),
-    newInitializeCustomerRequest,
+    , InitializeCustomerRequest (..)
+    , newInitializeCustomerRequest
 
     -- ** IntegerOperatorOptions
-    IntegerOperatorOptions (..),
-    newIntegerOperatorOptions,
+    , IntegerOperatorOptions (..)
+    , newIntegerOperatorOptions
 
     -- ** IntegerPropertyOptions
-    IntegerPropertyOptions (..),
-    newIntegerPropertyOptions,
+    , IntegerPropertyOptions (..)
+    , newIntegerPropertyOptions
 
     -- ** IntegerPropertyOptions_OrderedRanking
-    IntegerPropertyOptions_OrderedRanking (..),
+    , IntegerPropertyOptions_OrderedRanking (..)
 
     -- ** IntegerValues
-    IntegerValues (..),
-    newIntegerValues,
+    , IntegerValues (..)
+    , newIntegerValues
 
     -- ** Interaction
-    Interaction (..),
-    newInteraction,
+    , Interaction (..)
+    , newInteraction
 
     -- ** Interaction_Type
-    Interaction_Type (..),
+    , Interaction_Type (..)
 
     -- ** Item
-    Item (..),
-    newItem,
+    , Item (..)
+    , newItem
 
     -- ** Item_ItemType
-    Item_ItemType (..),
+    , Item_ItemType (..)
 
     -- ** ItemAcl
-    ItemAcl (..),
-    newItemAcl,
+    , ItemAcl (..)
+    , newItemAcl
 
     -- ** ItemAcl_AclInheritanceType
-    ItemAcl_AclInheritanceType (..),
+    , ItemAcl_AclInheritanceType (..)
 
     -- ** ItemContent
-    ItemContent (..),
-    newItemContent,
+    , ItemContent (..)
+    , newItemContent
 
     -- ** ItemContent_ContentFormat
-    ItemContent_ContentFormat (..),
+    , ItemContent_ContentFormat (..)
 
     -- ** ItemCountByStatus
-    ItemCountByStatus (..),
-    newItemCountByStatus,
+    , ItemCountByStatus (..)
+    , newItemCountByStatus
 
     -- ** ItemCountByStatus_StatusCode
-    ItemCountByStatus_StatusCode (..),
+    , ItemCountByStatus_StatusCode (..)
 
     -- ** ItemMetadata
-    ItemMetadata (..),
-    newItemMetadata,
+    , ItemMetadata (..)
+    , newItemMetadata
 
     -- ** ItemStatus
-    ItemStatus (..),
-    newItemStatus,
+    , ItemStatus (..)
+    , newItemStatus
 
     -- ** ItemStatus_Code
-    ItemStatus_Code (..),
+    , ItemStatus_Code (..)
 
     -- ** ItemStructuredData
-    ItemStructuredData (..),
-    newItemStructuredData,
+    , ItemStructuredData (..)
+    , newItemStructuredData
 
     -- ** ListDataSourceResponse
-    ListDataSourceResponse (..),
-    newListDataSourceResponse,
+    , ListDataSourceResponse (..)
+    , newListDataSourceResponse
 
     -- ** ListItemNamesForUnmappedIdentityResponse
-    ListItemNamesForUnmappedIdentityResponse (..),
-    newListItemNamesForUnmappedIdentityResponse,
+    , ListItemNamesForUnmappedIdentityResponse (..)
+    , newListItemNamesForUnmappedIdentityResponse
 
     -- ** ListItemsResponse
-    ListItemsResponse (..),
-    newListItemsResponse,
+    , ListItemsResponse (..)
+    , newListItemsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListQuerySourcesResponse
-    ListQuerySourcesResponse (..),
-    newListQuerySourcesResponse,
+    , ListQuerySourcesResponse (..)
+    , newListQuerySourcesResponse
 
     -- ** ListSearchApplicationsResponse
-    ListSearchApplicationsResponse (..),
-    newListSearchApplicationsResponse,
+    , ListSearchApplicationsResponse (..)
+    , newListSearchApplicationsResponse
 
     -- ** ListUnmappedIdentitiesResponse
-    ListUnmappedIdentitiesResponse (..),
-    newListUnmappedIdentitiesResponse,
+    , ListUnmappedIdentitiesResponse (..)
+    , newListUnmappedIdentitiesResponse
 
     -- ** MatchRange
-    MatchRange (..),
-    newMatchRange,
+    , MatchRange (..)
+    , newMatchRange
 
     -- ** Media
-    Media (..),
-    newMedia,
+    , Media (..)
+    , newMedia
 
     -- ** Metadata
-    Metadata (..),
-    newMetadata,
+    , Metadata (..)
+    , newMetadata
 
     -- ** Metaline
-    Metaline (..),
-    newMetaline,
+    , Metaline (..)
+    , newMetaline
 
     -- ** Name
-    Name (..),
-    newName,
+    , Name (..)
+    , newName
 
     -- ** NamedProperty
-    NamedProperty (..),
-    newNamedProperty,
+    , NamedProperty (..)
+    , newNamedProperty
 
     -- ** ObjectDefinition
-    ObjectDefinition (..),
-    newObjectDefinition,
+    , ObjectDefinition (..)
+    , newObjectDefinition
 
     -- ** ObjectDisplayOptions
-    ObjectDisplayOptions (..),
-    newObjectDisplayOptions,
+    , ObjectDisplayOptions (..)
+    , newObjectDisplayOptions
 
     -- ** ObjectOptions
-    ObjectOptions (..),
-    newObjectOptions,
+    , ObjectOptions (..)
+    , newObjectOptions
 
     -- ** ObjectPropertyOptions
-    ObjectPropertyOptions (..),
-    newObjectPropertyOptions,
+    , ObjectPropertyOptions (..)
+    , newObjectPropertyOptions
 
     -- ** ObjectValues
-    ObjectValues (..),
-    newObjectValues,
+    , ObjectValues (..)
+    , newObjectValues
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** PeopleSuggestion
-    PeopleSuggestion (..),
-    newPeopleSuggestion,
+    , PeopleSuggestion (..)
+    , newPeopleSuggestion
 
     -- ** Person
-    Person (..),
-    newPerson,
+    , Person (..)
+    , newPerson
 
     -- ** Photo
-    Photo (..),
-    newPhoto,
+    , Photo (..)
+    , newPhoto
 
     -- ** PollItemsRequest
-    PollItemsRequest (..),
-    newPollItemsRequest,
+    , PollItemsRequest (..)
+    , newPollItemsRequest
 
     -- ** PollItemsRequest_StatusCodesItem
-    PollItemsRequest_StatusCodesItem (..),
+    , PollItemsRequest_StatusCodesItem (..)
 
     -- ** PollItemsResponse
-    PollItemsResponse (..),
-    newPollItemsResponse,
+    , PollItemsResponse (..)
+    , newPollItemsResponse
 
     -- ** Principal
-    Principal (..),
-    newPrincipal,
+    , Principal (..)
+    , newPrincipal
 
     -- ** ProcessingError
-    ProcessingError (..),
-    newProcessingError,
+    , ProcessingError (..)
+    , newProcessingError
 
     -- ** ProcessingError_Code
-    ProcessingError_Code (..),
+    , ProcessingError_Code (..)
 
     -- ** PropertyDefinition
-    PropertyDefinition (..),
-    newPropertyDefinition,
+    , PropertyDefinition (..)
+    , newPropertyDefinition
 
     -- ** PropertyDisplayOptions
-    PropertyDisplayOptions (..),
-    newPropertyDisplayOptions,
+    , PropertyDisplayOptions (..)
+    , newPropertyDisplayOptions
 
     -- ** PushItem
-    PushItem (..),
-    newPushItem,
+    , PushItem (..)
+    , newPushItem
 
     -- ** PushItem_Type
-    PushItem_Type (..),
+    , PushItem_Type (..)
 
     -- ** PushItemRequest
-    PushItemRequest (..),
-    newPushItemRequest,
+    , PushItemRequest (..)
+    , newPushItemRequest
 
     -- ** QueryCountByStatus
-    QueryCountByStatus (..),
-    newQueryCountByStatus,
+    , QueryCountByStatus (..)
+    , newQueryCountByStatus
 
     -- ** QueryInterpretation
-    QueryInterpretation (..),
-    newQueryInterpretation,
+    , QueryInterpretation (..)
+    , newQueryInterpretation
 
     -- ** QueryInterpretation_InterpretationType
-    QueryInterpretation_InterpretationType (..),
+    , QueryInterpretation_InterpretationType (..)
 
     -- ** QueryInterpretation_Reason
-    QueryInterpretation_Reason (..),
+    , QueryInterpretation_Reason (..)
 
     -- ** QueryInterpretationConfig
-    QueryInterpretationConfig (..),
-    newQueryInterpretationConfig,
+    , QueryInterpretationConfig (..)
+    , newQueryInterpretationConfig
 
     -- ** QueryInterpretationOptions
-    QueryInterpretationOptions (..),
-    newQueryInterpretationOptions,
+    , QueryInterpretationOptions (..)
+    , newQueryInterpretationOptions
 
     -- ** QueryItem
-    QueryItem (..),
-    newQueryItem,
+    , QueryItem (..)
+    , newQueryItem
 
     -- ** QueryOperator
-    QueryOperator (..),
-    newQueryOperator,
+    , QueryOperator (..)
+    , newQueryOperator
 
     -- ** QueryOperator_Type
-    QueryOperator_Type (..),
+    , QueryOperator_Type (..)
 
     -- ** QuerySource
-    QuerySource (..),
-    newQuerySource,
+    , QuerySource (..)
+    , newQuerySource
 
     -- ** QuerySuggestion
-    QuerySuggestion (..),
-    newQuerySuggestion,
+    , QuerySuggestion (..)
+    , newQuerySuggestion
 
     -- ** RepositoryError
-    RepositoryError (..),
-    newRepositoryError,
+    , RepositoryError (..)
+    , newRepositoryError
 
     -- ** RepositoryError_Type
-    RepositoryError_Type (..),
+    , RepositoryError_Type (..)
 
     -- ** RequestOptions
-    RequestOptions (..),
-    newRequestOptions,
+    , RequestOptions (..)
+    , newRequestOptions
 
     -- ** ResetSearchApplicationRequest
-    ResetSearchApplicationRequest (..),
-    newResetSearchApplicationRequest,
+    , ResetSearchApplicationRequest (..)
+    , newResetSearchApplicationRequest
 
     -- ** ResponseDebugInfo
-    ResponseDebugInfo (..),
-    newResponseDebugInfo,
+    , ResponseDebugInfo (..)
+    , newResponseDebugInfo
 
     -- ** RestrictItem
-    RestrictItem (..),
-    newRestrictItem,
+    , RestrictItem (..)
+    , newRestrictItem
 
     -- ** ResultCounts
-    ResultCounts (..),
-    newResultCounts,
+    , ResultCounts (..)
+    , newResultCounts
 
     -- ** ResultDebugInfo
-    ResultDebugInfo (..),
-    newResultDebugInfo,
+    , ResultDebugInfo (..)
+    , newResultDebugInfo
 
     -- ** ResultDisplayField
-    ResultDisplayField (..),
-    newResultDisplayField,
+    , ResultDisplayField (..)
+    , newResultDisplayField
 
     -- ** ResultDisplayLine
-    ResultDisplayLine (..),
-    newResultDisplayLine,
+    , ResultDisplayLine (..)
+    , newResultDisplayLine
 
     -- ** ResultDisplayMetadata
-    ResultDisplayMetadata (..),
-    newResultDisplayMetadata,
+    , ResultDisplayMetadata (..)
+    , newResultDisplayMetadata
 
     -- ** RetrievalImportance
-    RetrievalImportance (..),
-    newRetrievalImportance,
+    , RetrievalImportance (..)
+    , newRetrievalImportance
 
     -- ** RetrievalImportance_Importance
-    RetrievalImportance_Importance (..),
+    , RetrievalImportance_Importance (..)
 
     -- ** Schema
-    Schema (..),
-    newSchema,
+    , Schema (..)
+    , newSchema
 
     -- ** ScoringConfig
-    ScoringConfig (..),
-    newScoringConfig,
+    , ScoringConfig (..)
+    , newScoringConfig
 
     -- ** SearchApplication
-    SearchApplication (..),
-    newSearchApplication,
+    , SearchApplication (..)
+    , newSearchApplication
 
     -- ** SearchApplicationQueryStats
-    SearchApplicationQueryStats (..),
-    newSearchApplicationQueryStats,
+    , SearchApplicationQueryStats (..)
+    , newSearchApplicationQueryStats
 
     -- ** SearchApplicationSessionStats
-    SearchApplicationSessionStats (..),
-    newSearchApplicationSessionStats,
+    , SearchApplicationSessionStats (..)
+    , newSearchApplicationSessionStats
 
     -- ** SearchApplicationUserStats
-    SearchApplicationUserStats (..),
-    newSearchApplicationUserStats,
+    , SearchApplicationUserStats (..)
+    , newSearchApplicationUserStats
 
     -- ** SearchItemsByViewUrlRequest
-    SearchItemsByViewUrlRequest (..),
-    newSearchItemsByViewUrlRequest,
+    , SearchItemsByViewUrlRequest (..)
+    , newSearchItemsByViewUrlRequest
 
     -- ** SearchItemsByViewUrlResponse
-    SearchItemsByViewUrlResponse (..),
-    newSearchItemsByViewUrlResponse,
+    , SearchItemsByViewUrlResponse (..)
+    , newSearchItemsByViewUrlResponse
 
     -- ** SearchQualityMetadata
-    SearchQualityMetadata (..),
-    newSearchQualityMetadata,
+    , SearchQualityMetadata (..)
+    , newSearchQualityMetadata
 
     -- ** SearchRequest
-    SearchRequest (..),
-    newSearchRequest,
+    , SearchRequest (..)
+    , newSearchRequest
 
     -- ** SearchResponse
-    SearchResponse (..),
-    newSearchResponse,
+    , SearchResponse (..)
+    , newSearchResponse
 
     -- ** SearchResult
-    SearchResult (..),
-    newSearchResult,
+    , SearchResult (..)
+    , newSearchResult
 
     -- ** ShareScope
-    ShareScope (..),
-    newShareScope,
+    , ShareScope (..)
+    , newShareScope
 
     -- ** ShareScope_Scope
-    ShareScope_Scope (..),
+    , ShareScope_Scope (..)
 
     -- ** Snippet
-    Snippet (..),
-    newSnippet,
+    , Snippet (..)
+    , newSnippet
 
     -- ** SortOptions
-    SortOptions (..),
-    newSortOptions,
+    , SortOptions (..)
+    , newSortOptions
 
     -- ** SortOptions_SortOrder
-    SortOptions_SortOrder (..),
+    , SortOptions_SortOrder (..)
 
     -- ** Source
-    Source (..),
-    newSource,
+    , Source (..)
+    , newSource
 
     -- ** Source_PredefinedSource
-    Source_PredefinedSource (..),
+    , Source_PredefinedSource (..)
 
     -- ** SourceConfig
-    SourceConfig (..),
-    newSourceConfig,
+    , SourceConfig (..)
+    , newSourceConfig
 
     -- ** SourceCrowdingConfig
-    SourceCrowdingConfig (..),
-    newSourceCrowdingConfig,
+    , SourceCrowdingConfig (..)
+    , newSourceCrowdingConfig
 
     -- ** SourceResultCount
-    SourceResultCount (..),
-    newSourceResultCount,
+    , SourceResultCount (..)
+    , newSourceResultCount
 
     -- ** SourceScoringConfig
-    SourceScoringConfig (..),
-    newSourceScoringConfig,
+    , SourceScoringConfig (..)
+    , newSourceScoringConfig
 
     -- ** SourceScoringConfig_SourceImportance
-    SourceScoringConfig_SourceImportance (..),
+    , SourceScoringConfig_SourceImportance (..)
 
     -- ** SpaceId
-    SpaceId (..),
-    newSpaceId,
+    , SpaceId (..)
+    , newSpaceId
 
     -- ** SpaceInfo
-    SpaceInfo (..),
-    newSpaceInfo,
+    , SpaceInfo (..)
+    , newSpaceInfo
 
     -- ** SpaceInfo_UserMembershipState
-    SpaceInfo_UserMembershipState (..),
+    , SpaceInfo_UserMembershipState (..)
 
     -- ** SpellResult
-    SpellResult (..),
-    newSpellResult,
+    , SpellResult (..)
+    , newSpellResult
 
     -- ** StartUploadItemRequest
-    StartUploadItemRequest (..),
-    newStartUploadItemRequest,
+    , StartUploadItemRequest (..)
+    , newStartUploadItemRequest
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** StructuredDataObject
-    StructuredDataObject (..),
-    newStructuredDataObject,
+    , StructuredDataObject (..)
+    , newStructuredDataObject
 
     -- ** StructuredResult
-    StructuredResult (..),
-    newStructuredResult,
+    , StructuredResult (..)
+    , newStructuredResult
 
     -- ** SuggestRequest
-    SuggestRequest (..),
-    newSuggestRequest,
+    , SuggestRequest (..)
+    , newSuggestRequest
 
     -- ** SuggestResponse
-    SuggestResponse (..),
-    newSuggestResponse,
+    , SuggestResponse (..)
+    , newSuggestResponse
 
     -- ** SuggestResult
-    SuggestResult (..),
-    newSuggestResult,
+    , SuggestResult (..)
+    , newSuggestResult
 
     -- ** TextOperatorOptions
-    TextOperatorOptions (..),
-    newTextOperatorOptions,
+    , TextOperatorOptions (..)
+    , newTextOperatorOptions
 
     -- ** TextPropertyOptions
-    TextPropertyOptions (..),
-    newTextPropertyOptions,
+    , TextPropertyOptions (..)
+    , newTextPropertyOptions
 
     -- ** TextValues
-    TextValues (..),
-    newTextValues,
+    , TextValues (..)
+    , newTextValues
 
     -- ** TimestampOperatorOptions
-    TimestampOperatorOptions (..),
-    newTimestampOperatorOptions,
+    , TimestampOperatorOptions (..)
+    , newTimestampOperatorOptions
 
     -- ** TimestampPropertyOptions
-    TimestampPropertyOptions (..),
-    newTimestampPropertyOptions,
+    , TimestampPropertyOptions (..)
+    , newTimestampPropertyOptions
 
     -- ** TimestampValues
-    TimestampValues (..),
-    newTimestampValues,
+    , TimestampValues (..)
+    , newTimestampValues
 
     -- ** TypeInfo
-    TypeInfo (..),
-    newTypeInfo,
+    , TypeInfo (..)
+    , newTypeInfo
 
     -- ** UnmappedIdentity
-    UnmappedIdentity (..),
-    newUnmappedIdentity,
+    , UnmappedIdentity (..)
+    , newUnmappedIdentity
 
     -- ** UnmappedIdentity_ResolutionStatusCode
-    UnmappedIdentity_ResolutionStatusCode (..),
+    , UnmappedIdentity_ResolutionStatusCode (..)
 
     -- ** UnreserveItemsRequest
-    UnreserveItemsRequest (..),
-    newUnreserveItemsRequest,
+    , UnreserveItemsRequest (..)
+    , newUnreserveItemsRequest
 
     -- ** UpdateDataSourceRequest
-    UpdateDataSourceRequest (..),
-    newUpdateDataSourceRequest,
+    , UpdateDataSourceRequest (..)
+    , newUpdateDataSourceRequest
 
     -- ** UpdateSchemaRequest
-    UpdateSchemaRequest (..),
-    newUpdateSchemaRequest,
+    , UpdateSchemaRequest (..)
+    , newUpdateSchemaRequest
 
     -- ** UploadItemRef
-    UploadItemRef (..),
-    newUploadItemRef,
+    , UploadItemRef (..)
+    , newUploadItemRef
 
     -- ** UserId
-    UserId (..),
-    newUserId,
+    , UserId (..)
+    , newUserId
 
     -- ** UserId_Type
-    UserId_Type (..),
+    , UserId_Type (..)
 
     -- ** VPCSettings
-    VPCSettings (..),
-    newVPCSettings,
+    , VPCSettings (..)
+    , newVPCSettings
 
     -- ** Value
-    Value (..),
-    newValue,
+    , Value (..)
+    , newValue
 
     -- ** ValueFilter
-    ValueFilter (..),
-    newValueFilter,
+    , ValueFilter (..)
+    , newValueFilter
 
     -- ** VideoInfo
-    VideoInfo (..),
-    newVideoInfo,
+    , VideoInfo (..)
+    , newVideoInfo
 
     -- ** DebugIdentitysourcesUnmappedidsListResolutionStatusCode
-    DebugIdentitysourcesUnmappedidsListResolutionStatusCode (..),
+    , DebugIdentitysourcesUnmappedidsListResolutionStatusCode (..)
 
     -- ** IndexingDatasourcesItemsDeleteMode
-    IndexingDatasourcesItemsDeleteMode (..),
-  )
-where
+    , IndexingDatasourcesItemsDeleteMode (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.CloudSearch.Internal.Product
 import Gogol.CloudSearch.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Search API. This contains the host and root path used as a starting point for constructing service requests.
 cloudSearchService :: Core.ServiceConfig
-cloudSearchService =
-  Core.defaultService
-    (Core.ServiceId "cloudsearch:v1")
-    "cloudsearch.googleapis.com"
+cloudSearchService
+  = Core.defaultService
+      (Core.ServiceId "cloudsearch:v1")
+      "cloudsearch.googleapis.com"
 
 -- | Index and serve your organization\'s data with Cloud Search
 cloud_searchScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search"]
