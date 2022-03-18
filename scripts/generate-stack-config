@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-library=($(ls -d gogol-*))
+library=($(ls -d lib/services/gogol-*))
 library=($(echo ${library[@]} | tr ' ' '\n' | sort | uniq -u))
 
 for config in stack-*.yaml; do
