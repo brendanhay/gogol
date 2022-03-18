@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Services.BatchEnable
+-- Module      : Gogol.ServiceUsage.Services.BatchEnable
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Enable multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. To enable a single service, use the @EnableService@ method instead.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.batchEnable@.
-module Network.Google.ServiceUsage.Services.BatchEnable
+module Gogol.ServiceUsage.Services.BatchEnable
   ( -- * Resource
     ServiceUsageServicesBatchEnableResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceUsage.Services.BatchEnable
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
 -- | A resource alias for @serviceusage.services.batchEnable@ method which the
 -- 'ServiceUsageServicesBatchEnable' request conforms to.

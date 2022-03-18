@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage
+-- Module      : Gogol.ServiceUsage
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference>
-module Network.Google.ServiceUsage
+module Gogol.ServiceUsage
   ( -- * Configuration
     serviceUsageService,
 
@@ -528,14 +528,14 @@ module Network.Google.ServiceUsage
   )
 where
 
-import Network.Google.ServiceUsage.Operations.Cancel
-import Network.Google.ServiceUsage.Operations.Delete
-import Network.Google.ServiceUsage.Operations.Get
-import Network.Google.ServiceUsage.Operations.List
-import Network.Google.ServiceUsage.Services.BatchEnable
-import Network.Google.ServiceUsage.Services.BatchGet
-import Network.Google.ServiceUsage.Services.Disable
-import Network.Google.ServiceUsage.Services.Enable
-import Network.Google.ServiceUsage.Services.Get
-import Network.Google.ServiceUsage.Services.List
-import Network.Google.ServiceUsage.Types
+import Gogol.ServiceUsage.Operations.Cancel
+import Gogol.ServiceUsage.Operations.Delete
+import Gogol.ServiceUsage.Operations.Get
+import Gogol.ServiceUsage.Operations.List
+import Gogol.ServiceUsage.Services.BatchEnable
+import Gogol.ServiceUsage.Services.BatchGet
+import Gogol.ServiceUsage.Services.Disable
+import Gogol.ServiceUsage.Services.Enable
+import Gogol.ServiceUsage.Services.Get
+import Gogol.ServiceUsage.Services.List
+import Gogol.ServiceUsage.Types

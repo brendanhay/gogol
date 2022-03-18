@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Services.Get
+-- Module      : Gogol.ServiceUsage.Services.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns the service configuration and enabled state for a given service.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.get@.
-module Network.Google.ServiceUsage.Services.Get
+module Gogol.ServiceUsage.Services.Get
   ( -- * Resource
     ServiceUsageServicesGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceUsage.Services.Get
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
 -- | A resource alias for @serviceusage.services.get@ method which the
 -- 'ServiceUsageServicesGet' request conforms to.

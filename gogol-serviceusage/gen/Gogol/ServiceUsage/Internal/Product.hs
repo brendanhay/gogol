@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Internal.Product
+-- Module      : Gogol.ServiceUsage.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.ServiceUsage.Internal.Product
+module Gogol.ServiceUsage.Internal.Product
   ( -- * AdminQuotaPolicy
     AdminQuotaPolicy (..),
     newAdminQuotaPolicy,
@@ -408,8 +408,8 @@ module Network.Google.ServiceUsage.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Internal.Sum
 
 -- | Quota policy created by quota administrator.
 --

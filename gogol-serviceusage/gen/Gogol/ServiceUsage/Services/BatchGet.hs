@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Services.BatchGet
+-- Module      : Gogol.ServiceUsage.Services.BatchGet
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns the service configurations and enabled states for a given list of services.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.batchGet@.
-module Network.Google.ServiceUsage.Services.BatchGet
+module Gogol.ServiceUsage.Services.BatchGet
   ( -- * Resource
     ServiceUsageServicesBatchGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceUsage.Services.BatchGet
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
 -- | A resource alias for @serviceusage.services.batchGet@ method which the
 -- 'ServiceUsageServicesBatchGet' request conforms to.

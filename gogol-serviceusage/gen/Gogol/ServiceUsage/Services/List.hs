@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Services.List
+-- Module      : Gogol.ServiceUsage.Services.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the @servicemanagement.services.bind@ permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project. WARNING: If you need to query enabled services frequently or across an organization, you should use <https://cloud.google.com/asset-inventory/docs/apis Cloud Asset Inventory API>, which provides higher throughput and richer filtering capability.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.list@.
-module Network.Google.ServiceUsage.Services.List
+module Gogol.ServiceUsage.Services.List
   ( -- * Resource
     ServiceUsageServicesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.ServiceUsage.Services.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
 -- | A resource alias for @serviceusage.services.list@ method which the
 -- 'ServiceUsageServicesList' request conforms to.

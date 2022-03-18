@@ -39,27 +39,28 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.ServiceUsage
-    Network.Google.ServiceUsage.Operations.Cancel
-    Network.Google.ServiceUsage.Operations.Delete
-    Network.Google.ServiceUsage.Operations.Get
-    Network.Google.ServiceUsage.Operations.List
-    Network.Google.ServiceUsage.Services.BatchEnable
-    Network.Google.ServiceUsage.Services.BatchGet
-    Network.Google.ServiceUsage.Services.Disable
-    Network.Google.ServiceUsage.Services.Enable
-    Network.Google.ServiceUsage.Services.Get
-    Network.Google.ServiceUsage.Services.List
-    Network.Google.ServiceUsage.Types
+    Gogol.ServiceUsage
+    Gogol.ServiceUsage.Operations.Cancel
+    Gogol.ServiceUsage.Operations.Delete
+    Gogol.ServiceUsage.Operations.Get
+    Gogol.ServiceUsage.Operations.List
+    Gogol.ServiceUsage.Services.BatchEnable
+    Gogol.ServiceUsage.Services.BatchGet
+    Gogol.ServiceUsage.Services.Disable
+    Gogol.ServiceUsage.Services.Enable
+    Gogol.ServiceUsage.Services.Get
+    Gogol.ServiceUsage.Services.List
+    Gogol.ServiceUsage.Types
 
   other-modules:
-    Network.Google.ServiceUsage.Internal.Product
-    Network.Google.ServiceUsage.Internal.Sum
+    Gogol.ServiceUsage.Internal.Product
+    Gogol.ServiceUsage.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

@@ -19,57 +19,57 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Services.Disable
+-- Module      : Gogol.ServiceUsage.Services.Enable
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a @FAILED_PRECONDITION@ status if the target service is not currently enabled.
+-- Enable a service so that it can be used with a project.
 --
--- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.disable@.
-module Network.Google.ServiceUsage.Services.Disable
+-- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.enable@.
+module Gogol.ServiceUsage.Services.Enable
   ( -- * Resource
-    ServiceUsageServicesDisableResource,
+    ServiceUsageServicesEnableResource,
 
     -- ** Constructing a Request
-    newServiceUsageServicesDisable,
-    ServiceUsageServicesDisable,
+    newServiceUsageServicesEnable,
+    ServiceUsageServicesEnable,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
--- | A resource alias for @serviceusage.services.disable@ method which the
--- 'ServiceUsageServicesDisable' request conforms to.
-type ServiceUsageServicesDisableResource =
+-- | A resource alias for @serviceusage.services.enable@ method which the
+-- 'ServiceUsageServicesEnable' request conforms to.
+type ServiceUsageServicesEnableResource =
   "v1"
-    Core.:> Core.CaptureMode "name" "disable" Core.Text
+    Core.:> Core.CaptureMode "name" "enable" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] DisableServiceRequest
+    Core.:> Core.ReqBody '[Core.JSON] EnableServiceRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a @FAILED_PRECONDITION@ status if the target service is not currently enabled.
+-- | Enable a service so that it can be used with a project.
 --
--- /See:/ 'newServiceUsageServicesDisable' smart constructor.
-data ServiceUsageServicesDisable = ServiceUsageServicesDisable
+-- /See:/ 'newServiceUsageServicesEnable' smart constructor.
+data ServiceUsageServicesEnable = ServiceUsageServicesEnable
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the consumer and service to disable the service on. The enable and disable methods currently only support projects. An example name would be: @projects\/123\/services\/serviceusage.googleapis.com@ where @123@ is the project number.
+    -- | Name of the consumer and service to enable the service on. The @EnableService@ and @DisableService@ methods currently only support projects. Enabling a service requires that the service is public or is shared with the user enabling the service. An example name would be: @projects\/123\/services\/serviceusage.googleapis.com@ where @123@ is the project number.
     name :: Core.Text,
     -- | Multipart request metadata.
-    payload :: DisableServiceRequest,
+    payload :: EnableServiceRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,15 +77,15 @@ data ServiceUsageServicesDisable = ServiceUsageServicesDisable
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ServiceUsageServicesDisable' with the minimum fields required to make a request.
-newServiceUsageServicesDisable ::
-  -- |  Name of the consumer and service to disable the service on. The enable and disable methods currently only support projects. An example name would be: @projects\/123\/services\/serviceusage.googleapis.com@ where @123@ is the project number. See 'name'.
+-- | Creates a value of 'ServiceUsageServicesEnable' with the minimum fields required to make a request.
+newServiceUsageServicesEnable ::
+  -- |  Name of the consumer and service to enable the service on. The @EnableService@ and @DisableService@ methods currently only support projects. Enabling a service requires that the service is public or is shared with the user enabling the service. An example name would be: @projects\/123\/services\/serviceusage.googleapis.com@ where @123@ is the project number. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
-  DisableServiceRequest ->
-  ServiceUsageServicesDisable
-newServiceUsageServicesDisable name payload =
-  ServiceUsageServicesDisable
+  EnableServiceRequest ->
+  ServiceUsageServicesEnable
+newServiceUsageServicesEnable name payload =
+  ServiceUsageServicesEnable
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -97,15 +97,15 @@ newServiceUsageServicesDisable name payload =
 
 instance
   Core.GoogleRequest
-    ServiceUsageServicesDisable
+    ServiceUsageServicesEnable
   where
-  type Rs ServiceUsageServicesDisable = Operation
+  type Rs ServiceUsageServicesEnable = Operation
   type
-    Scopes ServiceUsageServicesDisable =
+    Scopes ServiceUsageServicesEnable =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/service.management"
        ]
-  requestClient ServiceUsageServicesDisable {..} =
+  requestClient ServiceUsageServicesEnable {..} =
     go
       name
       xgafv
@@ -120,6 +120,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ServiceUsageServicesDisableResource
+              Core.Proxy ServiceUsageServicesEnableResource
           )
           Core.mempty

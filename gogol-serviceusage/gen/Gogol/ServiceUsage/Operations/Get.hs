@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.ServiceUsage.Operations.Delete
+-- Module      : Gogol.ServiceUsage.Operations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.operations.delete@.
-module Network.Google.ServiceUsage.Operations.Delete
+-- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.operations.get@.
+module Gogol.ServiceUsage.Operations.Get
   ( -- * Resource
-    ServiceUsageOperationsDeleteResource,
+    ServiceUsageOperationsGetResource,
 
     -- ** Constructing a Request
-    newServiceUsageOperationsDelete,
-    ServiceUsageOperationsDelete,
+    newServiceUsageOperationsGet,
+    ServiceUsageOperationsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.ServiceUsage.Types
+import qualified Gogol.Prelude as Core
+import Gogol.ServiceUsage.Types
 
--- | A resource alias for @serviceusage.operations.delete@ method which the
--- 'ServiceUsageOperationsDelete' request conforms to.
-type ServiceUsageOperationsDeleteResource =
+-- | A resource alias for @serviceusage.operations.get@ method which the
+-- 'ServiceUsageOperationsGet' request conforms to.
+type ServiceUsageOperationsGetResource =
   "v1"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type ServiceUsageOperationsDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+    Core.:> Core.Get '[Core.JSON] Operation
 
--- | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn\'t support this method, it returns @google.rpc.Code.UNIMPLEMENTED@.
+-- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
--- /See:/ 'newServiceUsageOperationsDelete' smart constructor.
-data ServiceUsageOperationsDelete = ServiceUsageOperationsDelete
+-- /See:/ 'newServiceUsageOperationsGet' smart constructor.
+data ServiceUsageOperationsGet = ServiceUsageOperationsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource to be deleted.
+    -- | The name of the operation resource.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data ServiceUsageOperationsDelete = ServiceUsageOperationsDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ServiceUsageOperationsDelete' with the minimum fields required to make a request.
-newServiceUsageOperationsDelete ::
-  -- |  The name of the operation resource to be deleted. See 'name'.
+-- | Creates a value of 'ServiceUsageOperationsGet' with the minimum fields required to make a request.
+newServiceUsageOperationsGet ::
+  -- |  The name of the operation resource. See 'name'.
   Core.Text ->
-  ServiceUsageOperationsDelete
-newServiceUsageOperationsDelete name =
-  ServiceUsageOperationsDelete
+  ServiceUsageOperationsGet
+newServiceUsageOperationsGet name =
+  ServiceUsageOperationsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -89,17 +89,14 @@ newServiceUsageOperationsDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ServiceUsageOperationsDelete
-  where
-  type Rs ServiceUsageOperationsDelete = Empty
+instance Core.GoogleRequest ServiceUsageOperationsGet where
+  type Rs ServiceUsageOperationsGet = Operation
   type
-    Scopes ServiceUsageOperationsDelete =
+    Scopes ServiceUsageOperationsGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/service.management"
        ]
-  requestClient ServiceUsageOperationsDelete {..} =
+  requestClient ServiceUsageOperationsGet {..} =
     go
       name
       xgafv
@@ -113,6 +110,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy ServiceUsageOperationsDeleteResource
+              Core.Proxy ServiceUsageOperationsGetResource
           )
           Core.mempty
