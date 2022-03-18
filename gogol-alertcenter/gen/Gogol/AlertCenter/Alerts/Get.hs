@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Alerts.Get
+-- Module      : Gogol.AlertCenter.Alerts.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Gets the specified alert. Attempting to get a nonexistent alert returns @NOT_FOUND@ error.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.get@.
-module Network.Google.AlertCenter.Alerts.Get
+module Gogol.AlertCenter.Alerts.Get
   ( -- * Resource
     AlertCenterAlertsGetResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AlertCenter.Alerts.Get
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @alertcenter.alerts.get@ method which the
 -- 'AlertCenterAlertsGet' request conforms to.

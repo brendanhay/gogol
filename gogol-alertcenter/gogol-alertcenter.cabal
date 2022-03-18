@@ -39,28 +39,29 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.AlertCenter
-    Network.Google.AlertCenter.Alerts.BatchDelete
-    Network.Google.AlertCenter.Alerts.BatchUndelete
-    Network.Google.AlertCenter.Alerts.Delete
-    Network.Google.AlertCenter.Alerts.Feedback.Create
-    Network.Google.AlertCenter.Alerts.Feedback.List
-    Network.Google.AlertCenter.Alerts.Get
-    Network.Google.AlertCenter.Alerts.GetMetadata
-    Network.Google.AlertCenter.Alerts.List
-    Network.Google.AlertCenter.Alerts.Undelete
-    Network.Google.AlertCenter.GetSettings
-    Network.Google.AlertCenter.Types
-    Network.Google.AlertCenter.UpdateSettings
+    Gogol.AlertCenter
+    Gogol.AlertCenter.Alerts.BatchDelete
+    Gogol.AlertCenter.Alerts.BatchUndelete
+    Gogol.AlertCenter.Alerts.Delete
+    Gogol.AlertCenter.Alerts.Feedback.Create
+    Gogol.AlertCenter.Alerts.Feedback.List
+    Gogol.AlertCenter.Alerts.Get
+    Gogol.AlertCenter.Alerts.GetMetadata
+    Gogol.AlertCenter.Alerts.List
+    Gogol.AlertCenter.Alerts.Undelete
+    Gogol.AlertCenter.GetSettings
+    Gogol.AlertCenter.Types
+    Gogol.AlertCenter.UpdateSettings
 
   other-modules:
-    Network.Google.AlertCenter.Internal.Product
-    Network.Google.AlertCenter.Internal.Sum
+    Gogol.AlertCenter.Internal.Product
+    Gogol.AlertCenter.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

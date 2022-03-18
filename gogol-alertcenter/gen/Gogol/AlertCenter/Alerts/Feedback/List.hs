@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Alerts.Feedback.Create
+-- Module      : Gogol.AlertCenter.Alerts.Feedback.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates new feedback for an alert. Attempting to create a feedback for a non-existent alert returns @NOT_FOUND@ error. Attempting to create a feedback for an alert that is marked for deletion returns \`FAILED_PRECONDITION\' error.
+-- Lists all the feedback for an alert. Attempting to list feedbacks for a non-existent alert returns @NOT_FOUND@ error.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.feedback.create@.
-module Network.Google.AlertCenter.Alerts.Feedback.Create
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.feedback.list@.
+module Gogol.AlertCenter.Alerts.Feedback.List
   ( -- * Resource
-    AlertCenterAlertsFeedbackCreateResource,
+    AlertCenterAlertsFeedbackListResource,
 
     -- ** Constructing a Request
-    newAlertCenterAlertsFeedbackCreate,
-    AlertCenterAlertsFeedbackCreate,
+    newAlertCenterAlertsFeedbackList,
+    AlertCenterAlertsFeedbackList,
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @alertcenter.alerts.feedback.create@ method which the
--- 'AlertCenterAlertsFeedbackCreate' request conforms to.
-type AlertCenterAlertsFeedbackCreateResource =
+-- | A resource alias for @alertcenter.alerts.feedback.list@ method which the
+-- 'AlertCenterAlertsFeedbackList' request conforms to.
+type AlertCenterAlertsFeedbackListResource =
   "v1beta1"
     Core.:> "alerts"
     Core.:> Core.Capture "alertId" Core.Text
@@ -53,28 +53,28 @@ type AlertCenterAlertsFeedbackCreateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "customerId" Core.Text
+    Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] AlertFeedback
-    Core.:> Core.Post '[Core.JSON] AlertFeedback
+    Core.:> Core.Get '[Core.JSON] ListAlertFeedbackResponse
 
--- | Creates new feedback for an alert. Attempting to create a feedback for a non-existent alert returns @NOT_FOUND@ error. Attempting to create a feedback for an alert that is marked for deletion returns \`FAILED_PRECONDITION\' error.
+-- | Lists all the feedback for an alert. Attempting to list feedbacks for a non-existent alert returns @NOT_FOUND@ error.
 --
--- /See:/ 'newAlertCenterAlertsFeedbackCreate' smart constructor.
-data AlertCenterAlertsFeedbackCreate = AlertCenterAlertsFeedbackCreate
+-- /See:/ 'newAlertCenterAlertsFeedbackList' smart constructor.
+data AlertCenterAlertsFeedbackList = AlertCenterAlertsFeedbackList
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Required. The identifier of the alert this feedback belongs to.
+    -- | Required. The alert identifier. The \"-\" wildcard could be used to represent all alerts.
     alertId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alert feedback are associated with. Inferred from the caller identity if not provided.
     customerId :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: AlertFeedback,
+    -- | Optional. A query string for filtering alert feedback results. For more details, see <https://developers.google.com/admin-sdk/alertcenter/guides/query-filters Query filters> and <https://developers.google.com/admin-sdk/alertcenter/reference/filter-fields#alerts.feedback.list Supported query filter fields>.
+    filter :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -82,51 +82,49 @@ data AlertCenterAlertsFeedbackCreate = AlertCenterAlertsFeedbackCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'AlertCenterAlertsFeedbackCreate' with the minimum fields required to make a request.
-newAlertCenterAlertsFeedbackCreate ::
-  -- |  Required. The identifier of the alert this feedback belongs to. See 'alertId'.
+-- | Creates a value of 'AlertCenterAlertsFeedbackList' with the minimum fields required to make a request.
+newAlertCenterAlertsFeedbackList ::
+  -- |  Required. The alert identifier. The \"-\" wildcard could be used to represent all alerts. See 'alertId'.
   Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  AlertFeedback ->
-  AlertCenterAlertsFeedbackCreate
-newAlertCenterAlertsFeedbackCreate alertId payload =
-  AlertCenterAlertsFeedbackCreate
+  AlertCenterAlertsFeedbackList
+newAlertCenterAlertsFeedbackList alertId =
+  AlertCenterAlertsFeedbackList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       alertId = alertId,
       callback = Core.Nothing,
       customerId = Core.Nothing,
-      payload = payload,
+      filter = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    AlertCenterAlertsFeedbackCreate
+    AlertCenterAlertsFeedbackList
   where
   type
-    Rs AlertCenterAlertsFeedbackCreate =
-      AlertFeedback
+    Rs AlertCenterAlertsFeedbackList =
+      ListAlertFeedbackResponse
   type
-    Scopes AlertCenterAlertsFeedbackCreate =
+    Scopes AlertCenterAlertsFeedbackList =
       '["https://www.googleapis.com/auth/apps.alerts"]
-  requestClient AlertCenterAlertsFeedbackCreate {..} =
+  requestClient AlertCenterAlertsFeedbackList {..} =
     go
       alertId
       xgafv
       accessToken
       callback
       customerId
+      filter
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       alertCenterService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy AlertCenterAlertsFeedbackCreateResource
+              Core.Proxy AlertCenterAlertsFeedbackListResource
           )
           Core.mempty

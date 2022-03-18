@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Internal.Product
+-- Module      : Gogol.AlertCenter.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.AlertCenter.Internal.Product
+module Gogol.AlertCenter.Internal.Product
   ( -- * AccountSuspensionDetails
     AccountSuspensionDetails (..),
     newAccountSuspensionDetails,
@@ -256,8 +256,8 @@ module Network.Google.AlertCenter.Internal.Product
   )
 where
 
-import Network.Google.AlertCenter.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Details about why an account is receiving an account suspension warning.
 --

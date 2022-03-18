@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Alerts.Undelete
+-- Module      : Gogol.AlertCenter.Alerts.Undelete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Restores, or \"undeletes\", an alert that was marked for deletion within the past 30 days. Attempting to undelete an alert which was marked for deletion over 30 days ago (which has been removed from the Alert Center database) or a nonexistent alert returns a @NOT_FOUND@ error. Attempting to undelete an alert which has not been marked for deletion has no effect.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.undelete@.
-module Network.Google.AlertCenter.Alerts.Undelete
+module Gogol.AlertCenter.Alerts.Undelete
   ( -- * Resource
     AlertCenterAlertsUndeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AlertCenter.Alerts.Undelete
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @alertcenter.alerts.undelete@ method which the
 -- 'AlertCenterAlertsUndelete' request conforms to.

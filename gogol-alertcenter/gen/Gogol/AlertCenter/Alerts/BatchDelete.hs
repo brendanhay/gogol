@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.AlertCenter.Alerts.BatchDelete
+-- Module      : Gogol.AlertCenter.Alerts.BatchDelete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Performs batch delete operation on alerts.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.batchDelete@.
-module Network.Google.AlertCenter.Alerts.BatchDelete
+module Gogol.AlertCenter.Alerts.BatchDelete
   ( -- * Resource
     AlertCenterAlertsBatchDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.AlertCenter.Alerts.BatchDelete
   )
 where
 
-import Network.Google.AlertCenter.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.AlertCenter.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @alertcenter.alerts.batchDelete@ method which the
 -- 'AlertCenterAlertsBatchDelete' request conforms to.
