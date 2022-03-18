@@ -1,7 +1,6 @@
 # Gogol
 
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
-[![Gitter Chat](https://img.shields.io/gitter/room/brendanhay/gogol.js.svg?maxAge=2592000)](https://gitter.im/brendanhay/gogol)
 
 * [Description](#description)
 * [Documentation](#documentation)
