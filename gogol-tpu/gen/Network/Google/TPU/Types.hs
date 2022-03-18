@@ -1,224 +1,218 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.TPU.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.TPU.Types
-    (
-    -- * Service Configuration
-      tPUService
+  ( -- * Configuration
+    tPUService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * Types
 
-    -- * OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * ListLocationsResponse
-    , ListLocationsResponse
-    , listLocationsResponse
-    , llrNextPageToken
-    , llrLocations
+    -- ** AcceleratorType
+    AcceleratorType (..),
+    newAcceleratorType,
 
-    -- * AcceleratorType
-    , AcceleratorType
-    , acceleratorType
-    , atName
-    , atType
+    -- ** AccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
+    -- ** AttachedDisk
+    AttachedDisk (..),
+    newAttachedDisk,
 
-    -- * NodeState
-    , NodeState (..)
+    -- ** AttachedDisk_Mode
+    AttachedDisk_Mode (..),
 
-    -- * NodeAPIVersion
-    , NodeAPIVersion (..)
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * ListAcceleratorTypesResponse
-    , ListAcceleratorTypesResponse
-    , listAcceleratorTypesResponse
-    , latrAcceleratorTypes
-    , latrNextPageToken
-    , latrUnreachable
+    -- ** GenerateServiceIdentityRequest
+    GenerateServiceIdentityRequest (..),
+    newGenerateServiceIdentityRequest,
 
-    -- * Location
-    , Location
-    , location
-    , lName
-    , lMetadata
-    , lDisplayName
-    , lLabels
-    , lLocationId
+    -- ** GenerateServiceIdentityResponse
+    GenerateServiceIdentityResponse (..),
+    newGenerateServiceIdentityResponse,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** GetGuestAttributesRequest
+    GetGuestAttributesRequest (..),
+    newGetGuestAttributesRequest,
 
-    -- * NetworkEndpoint
-    , NetworkEndpoint
-    , networkEndpoint
-    , neIPAddress
-    , nePort
+    -- ** GetGuestAttributesResponse
+    GetGuestAttributesResponse (..),
+    newGetGuestAttributesResponse,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** GuestAttributes
+    GuestAttributes (..),
+    newGuestAttributes,
 
-    -- * Node
-    , Node
-    , node
-    , nAcceleratorType
-    , nIPAddress
-    , nState
-    , nSymptoms
-    , nAPIVersion
-    , nUseServiceNetworking
-    , nNetwork
-    , nHealth
-    , nServiceAccount
-    , nName
-    , nSchedulingConfig
-    , nHealthDescription
-    , nCIdRBlock
-    , nLabels
-    , nNetworkEndpoints
-    , nDescription
-    , nCreateTime
-    , nTensorflowVersion
-    , nPort
+    -- ** GuestAttributesEntry
+    GuestAttributesEntry (..),
+    newGuestAttributesEntry,
 
-    -- * SymptomSymptomType
-    , SymptomSymptomType (..)
+    -- ** GuestAttributesValue
+    GuestAttributesValue (..),
+    newGuestAttributesValue,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** ListAcceleratorTypesResponse
+    ListAcceleratorTypesResponse (..),
+    newListAcceleratorTypesResponse,
 
-    -- * StopNodeRequest
-    , StopNodeRequest
-    , stopNodeRequest
+    -- ** ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * Symptom
-    , Symptom
-    , symptom
-    , symDetails
-    , symWorkerId
-    , symCreateTime
-    , symSymptomType
+    -- ** ListNodesResponse
+    ListNodesResponse (..),
+    newListNodesResponse,
 
-    -- * ReimageNodeRequest
-    , ReimageNodeRequest
-    , reimageNodeRequest
-    , rnrTensorflowVersion
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
-    -- * NodeHealth
-    , NodeHealth (..)
+    -- ** ListRuntimeVersionsResponse
+    ListRuntimeVersionsResponse (..),
+    newListRuntimeVersionsResponse,
 
-    -- * ListNodesResponse
-    , ListNodesResponse
-    , listNodesResponse
-    , lnrNextPageToken
-    , lnrUnreachable
-    , lnrNodes
+    -- ** Location
+    Location (..),
+    newLocation,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * SchedulingConfig
-    , SchedulingConfig
-    , schedulingConfig
-    , scReserved
-    , scPreemptible
+    -- ** Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * NodeLabels
-    , NodeLabels
-    , nodeLabels
-    , nlAddtional
+    -- ** NetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
 
-    -- * LocationLabels
-    , LocationLabels
-    , locationLabels
-    , llAddtional
+    -- ** NetworkEndpoint
+    NetworkEndpoint (..),
+    newNetworkEndpoint,
 
-    -- * LocationMetadata
-    , LocationMetadata
-    , locationMetadata
-    , lmAddtional
+    -- ** Node
+    Node (..),
+    newNode,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAPIVersion
-    , omEndTime
-    , omStatusDetail
-    , omVerb
-    , omCancelRequested
-    , omTarget
-    , omCreateTime
+    -- ** Node_ApiVersion
+    Node_ApiVersion (..),
 
-    -- * ListTensorFlowVersionsResponse
-    , ListTensorFlowVersionsResponse
-    , listTensorFlowVersionsResponse
-    , ltfvrNextPageToken
-    , ltfvrUnreachable
-    , ltfvrTensorflowVersions
+    -- ** Node_Health
+    Node_Health (..),
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** Node_Labels
+    Node_Labels (..),
+    newNode_Labels,
 
-    -- * TensorFlowVersion
-    , TensorFlowVersion
-    , tensorFlowVersion
-    , tfvName
-    , tfvVersion
+    -- ** Node_Metadata
+    Node_Metadata (..),
+    newNode_Metadata,
 
-    -- * StartNodeRequest
-    , StartNodeRequest
-    , startNodeRequest
-    ) where
+    -- ** Node_State
+    Node_State (..),
 
-import Network.Google.Prelude
-import Network.Google.TPU.Types.Product
-import Network.Google.TPU.Types.Sum
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
--- | Default request referring to version 'v1' of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
-tPUService :: ServiceConfig
-tPUService
-  = defaultService (ServiceId "tpu:v1")
-      "tpu.googleapis.com"
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
+
+    -- ** RuntimeVersion
+    RuntimeVersion (..),
+    newRuntimeVersion,
+
+    -- ** SchedulingConfig
+    SchedulingConfig (..),
+    newSchedulingConfig,
+
+    -- ** ServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
+
+    -- ** ServiceIdentity
+    ServiceIdentity (..),
+    newServiceIdentity,
+
+    -- ** StartNodeRequest
+    StartNodeRequest (..),
+    newStartNodeRequest,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StopNodeRequest
+    StopNodeRequest (..),
+    newStopNodeRequest,
+
+    -- ** Symptom
+    Symptom (..),
+    newSymptom,
+
+    -- ** Symptom_SymptomType
+    Symptom_SymptomType (..),
+  )
+where
+
+import qualified Network.Google.Prelude as Core
+import Network.Google.TPU.Internal.Product
+import Network.Google.TPU.Internal.Sum
+
+-- | Default request referring to version @v2alpha1@ of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
+tPUService :: Core.ServiceConfig
+tPUService =
+  Core.defaultService
+    (Core.ServiceId "tpu:v2alpha1")
+    "tpu.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
