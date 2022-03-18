@@ -44,8 +44,7 @@ This repository is organised into the following directory structure:
 * [`core`](core): The `gogol-core` library upon which each of the services depends.
 * [`examples`](examples): A currently sparse collection of examples for the various services.
 * [`gen`](gen): The code generation binary, along with configuration, templates, and assets.
-* [`script`](script): CI scripts to manage the release lifecycle of the service libraries.
-* [`share`](share): Makefile plumbing common to all service libraries
+* [`scripts`](scripts): Scripts to manage the release lifecycle of the service libraries.
 
 > See the `./gen` subdirectory for further details about generating an API client/SDK.
 
