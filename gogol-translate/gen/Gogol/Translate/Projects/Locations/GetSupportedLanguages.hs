@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.GetSupportedLanguages
+-- Module      : Gogol.Translate.Projects.Locations.GetSupportedLanguages
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Returns a list of supported languages for translation.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.getSupportedLanguages@.
-module Network.Google.Translate.Projects.Locations.GetSupportedLanguages
+module Gogol.Translate.Projects.Locations.GetSupportedLanguages
   ( -- * Resource
     TranslateProjectsLocationsGetSupportedLanguagesResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.Locations.GetSupportedLanguages
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.getSupportedLanguages@ method which the
 -- 'TranslateProjectsLocationsGetSupportedLanguages' request conforms to.

@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.List
+-- Module      : Gogol.Translate.Projects.Locations.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists information about the supported locations for this service.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.list@.
-module Network.Google.Translate.Projects.Locations.List
+module Gogol.Translate.Projects.Locations.List
   ( -- * Resource
     TranslateProjectsLocationsListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.Locations.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.list@ method which the
 -- 'TranslateProjectsLocationsList' request conforms to.

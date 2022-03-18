@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.Glossaries.Get
+-- Module      : Gogol.Translate.Projects.Locations.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a glossary. Returns NOT_FOUND, if the glossary doesn\'t exist.
+-- Gets information about a location.
 --
--- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.glossaries.get@.
-module Network.Google.Translate.Projects.Locations.Glossaries.Get
+-- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.get@.
+module Gogol.Translate.Projects.Locations.Get
   ( -- * Resource
-    TranslateProjectsLocationsGlossariesGetResource,
+    TranslateProjectsLocationsGetResource,
 
     -- ** Constructing a Request
-    newTranslateProjectsLocationsGlossariesGet,
-    TranslateProjectsLocationsGlossariesGet,
+    newTranslateProjectsLocationsGet,
+    TranslateProjectsLocationsGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
--- | A resource alias for @translate.projects.locations.glossaries.get@ method which the
--- 'TranslateProjectsLocationsGlossariesGet' request conforms to.
-type TranslateProjectsLocationsGlossariesGetResource =
+-- | A resource alias for @translate.projects.locations.get@ method which the
+-- 'TranslateProjectsLocationsGet' request conforms to.
+type TranslateProjectsLocationsGetResource =
   "v3"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -53,19 +53,19 @@ type TranslateProjectsLocationsGlossariesGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Glossary
+    Core.:> Core.Get '[Core.JSON] Location
 
--- | Gets a glossary. Returns NOT_FOUND, if the glossary doesn\'t exist.
+-- | Gets information about a location.
 --
--- /See:/ 'newTranslateProjectsLocationsGlossariesGet' smart constructor.
-data TranslateProjectsLocationsGlossariesGet = TranslateProjectsLocationsGlossariesGet
+-- /See:/ 'newTranslateProjectsLocationsGet' smart constructor.
+data TranslateProjectsLocationsGet = TranslateProjectsLocationsGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the glossary to retrieve.
+    -- | Resource name for the location.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -74,13 +74,13 @@ data TranslateProjectsLocationsGlossariesGet = TranslateProjectsLocationsGlossar
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TranslateProjectsLocationsGlossariesGet' with the minimum fields required to make a request.
-newTranslateProjectsLocationsGlossariesGet ::
-  -- |  Required. The name of the glossary to retrieve. See 'name'.
+-- | Creates a value of 'TranslateProjectsLocationsGet' with the minimum fields required to make a request.
+newTranslateProjectsLocationsGet ::
+  -- |  Resource name for the location. See 'name'.
   Core.Text ->
-  TranslateProjectsLocationsGlossariesGet
-newTranslateProjectsLocationsGlossariesGet name =
-  TranslateProjectsLocationsGlossariesGet
+  TranslateProjectsLocationsGet
+newTranslateProjectsLocationsGet name =
+  TranslateProjectsLocationsGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -91,32 +91,28 @@ newTranslateProjectsLocationsGlossariesGet name =
 
 instance
   Core.GoogleRequest
-    TranslateProjectsLocationsGlossariesGet
+    TranslateProjectsLocationsGet
   where
+  type Rs TranslateProjectsLocationsGet = Location
   type
-    Rs TranslateProjectsLocationsGlossariesGet =
-      Glossary
-  type
-    Scopes TranslateProjectsLocationsGlossariesGet =
+    Scopes TranslateProjectsLocationsGet =
       '[ "https://www.googleapis.com/auth/cloud-platform",
          "https://www.googleapis.com/auth/cloud-translation"
        ]
-  requestClient
-    TranslateProjectsLocationsGlossariesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        translateService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TranslateProjectsLocationsGlossariesGetResource
-            )
-            Core.mempty
+  requestClient TranslateProjectsLocationsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      translateService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy TranslateProjectsLocationsGetResource
+          )
+          Core.mempty

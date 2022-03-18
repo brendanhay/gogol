@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.BatchTranslateText
+-- Module      : Gogol.Translate.Projects.Locations.BatchTranslateText
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Translates a large volume of text in asynchronous batch mode. This function provides real-time output as the inputs are being processed. If caller cancels a request, the partial results (for an input file, it\'s all or nothing) may still be available on the specified output location. This call returns immediately and you can use google.longrunning.Operation.name to poll the status of the call.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.batchTranslateText@.
-module Network.Google.Translate.Projects.Locations.BatchTranslateText
+module Gogol.Translate.Projects.Locations.BatchTranslateText
   ( -- * Resource
     TranslateProjectsLocationsBatchTranslateTextResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.Locations.BatchTranslateText
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.batchTranslateText@ method which the
 -- 'TranslateProjectsLocationsBatchTranslateText' request conforms to.

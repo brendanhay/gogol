@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.Operations.Wait
+-- Module      : Gogol.Translate.Projects.Locations.Operations.Wait
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Waits until the specified long-running operation is done or reaches at most a specified timeout, returning the latest state. If the operation is already done, the latest state is immediately returned. If the timeout specified is greater than the default HTTP\/RPC timeout, the HTTP\/RPC timeout is used. If the server does not support this method, it returns @google.rpc.Code.UNIMPLEMENTED@. Note that this method is on a best-effort basis. It may return the latest state before the specified timeout (including immediately), meaning even an immediate response is no guarantee that the operation is done.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.operations.wait@.
-module Network.Google.Translate.Projects.Locations.Operations.Wait
+module Gogol.Translate.Projects.Locations.Operations.Wait
   ( -- * Resource
     TranslateProjectsLocationsOperationsWaitResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.Locations.Operations.Wait
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.operations.wait@ method which the
 -- 'TranslateProjectsLocationsOperationsWait' request conforms to.

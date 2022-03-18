@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Internal.Product
+-- Module      : Gogol.Translate.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Translate.Internal.Product
+module Gogol.Translate.Internal.Product
   ( -- * BatchDocumentInputConfig
     BatchDocumentInputConfig (..),
     newBatchDocumentInputConfig,
@@ -224,8 +224,8 @@ module Network.Google.Translate.Internal.Product
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Internal.Sum
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Internal.Sum
 
 -- | Input configuration for BatchTranslateDocument request.
 --

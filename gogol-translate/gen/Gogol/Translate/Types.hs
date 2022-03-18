@@ -19,125 +19,19 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate
+-- Module      : Gogol.Translate.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
--- Integrates text translation into your website or application.
---
--- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference>
-module Network.Google.Translate
+module Gogol.Translate.Types
   ( -- * Configuration
     translateService,
 
     -- * OAuth Scopes
     cloudPlatformScope,
     cloudTranslationScope,
-
-    -- * Resources
-
-    -- ** translate.projects.detectLanguage
-    TranslateProjectsDetectLanguageResource,
-    newTranslateProjectsDetectLanguage,
-    TranslateProjectsDetectLanguage,
-
-    -- ** translate.projects.getSupportedLanguages
-    TranslateProjectsGetSupportedLanguagesResource,
-    newTranslateProjectsGetSupportedLanguages,
-    TranslateProjectsGetSupportedLanguages,
-
-    -- ** translate.projects.locations.batchTranslateDocument
-    TranslateProjectsLocationsBatchTranslateDocumentResource,
-    newTranslateProjectsLocationsBatchTranslateDocument,
-    TranslateProjectsLocationsBatchTranslateDocument,
-
-    -- ** translate.projects.locations.batchTranslateText
-    TranslateProjectsLocationsBatchTranslateTextResource,
-    newTranslateProjectsLocationsBatchTranslateText,
-    TranslateProjectsLocationsBatchTranslateText,
-
-    -- ** translate.projects.locations.detectLanguage
-    TranslateProjectsLocationsDetectLanguageResource,
-    newTranslateProjectsLocationsDetectLanguage,
-    TranslateProjectsLocationsDetectLanguage,
-
-    -- ** translate.projects.locations.get
-    TranslateProjectsLocationsGetResource,
-    newTranslateProjectsLocationsGet,
-    TranslateProjectsLocationsGet,
-
-    -- ** translate.projects.locations.getSupportedLanguages
-    TranslateProjectsLocationsGetSupportedLanguagesResource,
-    newTranslateProjectsLocationsGetSupportedLanguages,
-    TranslateProjectsLocationsGetSupportedLanguages,
-
-    -- ** translate.projects.locations.glossaries.create
-    TranslateProjectsLocationsGlossariesCreateResource,
-    newTranslateProjectsLocationsGlossariesCreate,
-    TranslateProjectsLocationsGlossariesCreate,
-
-    -- ** translate.projects.locations.glossaries.delete
-    TranslateProjectsLocationsGlossariesDeleteResource,
-    newTranslateProjectsLocationsGlossariesDelete,
-    TranslateProjectsLocationsGlossariesDelete,
-
-    -- ** translate.projects.locations.glossaries.get
-    TranslateProjectsLocationsGlossariesGetResource,
-    newTranslateProjectsLocationsGlossariesGet,
-    TranslateProjectsLocationsGlossariesGet,
-
-    -- ** translate.projects.locations.glossaries.list
-    TranslateProjectsLocationsGlossariesListResource,
-    newTranslateProjectsLocationsGlossariesList,
-    TranslateProjectsLocationsGlossariesList,
-
-    -- ** translate.projects.locations.list
-    TranslateProjectsLocationsListResource,
-    newTranslateProjectsLocationsList,
-    TranslateProjectsLocationsList,
-
-    -- ** translate.projects.locations.operations.cancel
-    TranslateProjectsLocationsOperationsCancelResource,
-    newTranslateProjectsLocationsOperationsCancel,
-    TranslateProjectsLocationsOperationsCancel,
-
-    -- ** translate.projects.locations.operations.delete
-    TranslateProjectsLocationsOperationsDeleteResource,
-    newTranslateProjectsLocationsOperationsDelete,
-    TranslateProjectsLocationsOperationsDelete,
-
-    -- ** translate.projects.locations.operations.get
-    TranslateProjectsLocationsOperationsGetResource,
-    newTranslateProjectsLocationsOperationsGet,
-    TranslateProjectsLocationsOperationsGet,
-
-    -- ** translate.projects.locations.operations.list
-    TranslateProjectsLocationsOperationsListResource,
-    newTranslateProjectsLocationsOperationsList,
-    TranslateProjectsLocationsOperationsList,
-
-    -- ** translate.projects.locations.operations.wait
-    TranslateProjectsLocationsOperationsWaitResource,
-    newTranslateProjectsLocationsOperationsWait,
-    TranslateProjectsLocationsOperationsWait,
-
-    -- ** translate.projects.locations.translateDocument
-    TranslateProjectsLocationsTranslateDocumentResource,
-    newTranslateProjectsLocationsTranslateDocument,
-    TranslateProjectsLocationsTranslateDocument,
-
-    -- ** translate.projects.locations.translateText
-    TranslateProjectsLocationsTranslateTextResource,
-    newTranslateProjectsLocationsTranslateText,
-    TranslateProjectsLocationsTranslateText,
-
-    -- ** translate.projects.translateText
-    TranslateProjectsTranslateTextResource,
-    newTranslateProjectsTranslateText,
-    TranslateProjectsTranslateText,
 
     -- * Types
 
@@ -342,24 +236,21 @@ module Network.Google.Translate
   )
 where
 
-import Network.Google.Translate.Projects.DetectLanguage
-import Network.Google.Translate.Projects.GetSupportedLanguages
-import Network.Google.Translate.Projects.Locations.BatchTranslateDocument
-import Network.Google.Translate.Projects.Locations.BatchTranslateText
-import Network.Google.Translate.Projects.Locations.DetectLanguage
-import Network.Google.Translate.Projects.Locations.Get
-import Network.Google.Translate.Projects.Locations.GetSupportedLanguages
-import Network.Google.Translate.Projects.Locations.Glossaries.Create
-import Network.Google.Translate.Projects.Locations.Glossaries.Delete
-import Network.Google.Translate.Projects.Locations.Glossaries.Get
-import Network.Google.Translate.Projects.Locations.Glossaries.List
-import Network.Google.Translate.Projects.Locations.List
-import Network.Google.Translate.Projects.Locations.Operations.Cancel
-import Network.Google.Translate.Projects.Locations.Operations.Delete
-import Network.Google.Translate.Projects.Locations.Operations.Get
-import Network.Google.Translate.Projects.Locations.Operations.List
-import Network.Google.Translate.Projects.Locations.Operations.Wait
-import Network.Google.Translate.Projects.Locations.TranslateDocument
-import Network.Google.Translate.Projects.Locations.TranslateText
-import Network.Google.Translate.Projects.TranslateText
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Internal.Product
+import Gogol.Translate.Internal.Sum
+
+-- | Default request referring to version @v3@ of the Cloud Translation API. This contains the host and root path used as a starting point for constructing service requests.
+translateService :: Core.ServiceConfig
+translateService =
+  Core.defaultService
+    (Core.ServiceId "translate:v3")
+    "translation.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
+
+-- | Translate text from one language to another using Google Translate
+cloudTranslationScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-translation"]
+cloudTranslationScope = Core.Proxy

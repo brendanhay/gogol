@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.Glossaries.List
+-- Module      : Gogol.Translate.Projects.Locations.Glossaries.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Lists glossaries in a project. Returns NOT_FOUND, if the project doesn\'t exist.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.glossaries.list@.
-module Network.Google.Translate.Projects.Locations.Glossaries.List
+module Gogol.Translate.Projects.Locations.Glossaries.List
   ( -- * Resource
     TranslateProjectsLocationsGlossariesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.Locations.Glossaries.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.glossaries.list@ method which the
 -- 'TranslateProjectsLocationsGlossariesList' request conforms to.

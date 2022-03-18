@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Translate.Projects.Locations.Glossaries.Delete
+-- Module      : Gogol.Translate.Projects.Locations.Glossaries.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Deletes a glossary, or cancels glossary construction if the glossary isn\'t created yet. Returns NOT_FOUND, if the glossary doesn\'t exist.
 --
 -- /See:/ <https://cloud.google.com/translate/docs/quickstarts Cloud Translation API Reference> for @translate.projects.locations.glossaries.delete@.
-module Network.Google.Translate.Projects.Locations.Glossaries.Delete
+module Gogol.Translate.Projects.Locations.Glossaries.Delete
   ( -- * Resource
     TranslateProjectsLocationsGlossariesDeleteResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Translate.Projects.Locations.Glossaries.Delete
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Translate.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.glossaries.delete@ method which the
 -- 'TranslateProjectsLocationsGlossariesDelete' request conforms to.
