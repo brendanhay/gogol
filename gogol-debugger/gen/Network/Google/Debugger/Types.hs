@@ -1,280 +1,204 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Debugger.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.Debugger.Types
-    (
-    -- * Service Configuration
-      debuggerService
+  ( -- * Configuration
+    debuggerService,
 
     -- * OAuth Scopes
-    , cloudDebuggerScope
-    , cloudPlatformScope
+    cloudPlatformScope,
+    cloud_debuggerScope,
 
-    -- * RegisterDebuggeeResponse
-    , RegisterDebuggeeResponse
-    , registerDebuggeeResponse
-    , rdrAgentId
-    , rdrDebuggee
+    -- * Types
 
-    -- * SourceContext
-    , SourceContext
-    , sourceContext
-    , scCloudWorkspace
-    , scCloudRepo
-    , scGerrit
-    , scGit
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * SetBreakpointResponse
-    , SetBreakpointResponse
-    , setBreakpointResponse
-    , sbrBreakpoint
+    -- ** AliasContext
+    AliasContext (..),
+    newAliasContext,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** AliasContext_Kind
+    AliasContext_Kind (..),
 
-    -- * UpdateActiveBreakpointResponse
-    , UpdateActiveBreakpointResponse
-    , updateActiveBreakpointResponse
+    -- ** Breakpoint
+    Breakpoint (..),
+    newBreakpoint,
 
-    -- * GerritSourceContext
-    , GerritSourceContext
-    , gerritSourceContext
-    , gscGerritProject
-    , gscAliasName
-    , gscRevisionId
-    , gscHostURI
-    , gscAliasContext
+    -- ** Breakpoint_Action
+    Breakpoint_Action (..),
 
-    -- * RepoId
-    , RepoId
-    , repoId
-    , riUid
-    , riProjectRepoId
+    -- ** Breakpoint_Labels
+    Breakpoint_Labels (..),
+    newBreakpoint_Labels,
 
-    -- * ExtendedSourceContextLabels
-    , ExtendedSourceContextLabels
-    , extendedSourceContextLabels
-    , esclAddtional
+    -- ** Breakpoint_LogLevel
+    Breakpoint_LogLevel (..),
 
-    -- * ProjectRepoId
-    , ProjectRepoId
-    , projectRepoId
-    , priRepoName
-    , priProjectId
+    -- ** Breakpoint_State
+    Breakpoint_State (..),
 
-    -- * FormatMessage
-    , FormatMessage
-    , formatMessage
-    , fmFormat
-    , fmParameters
+    -- ** CloudRepoSourceContext
+    CloudRepoSourceContext (..),
+    newCloudRepoSourceContext,
 
-    -- * Breakpoint
-    , Breakpoint
-    , breakpoint
-    , bStatus
-    , bState
-    , bLogLevel
-    , bLocation
-    , bAction
-    , bFinalTime
-    , bExpressions
-    , bLogMessageFormat
-    , bId
-    , bLabels
-    , bUserEmail
-    , bVariableTable
-    , bCanaryExpireTime
-    , bStackFrames
-    , bCondition
-    , bEvaluatedExpressions
-    , bCreateTime
-    , bIsFinalState
+    -- ** CloudWorkspaceId
+    CloudWorkspaceId (..),
+    newCloudWorkspaceId,
 
-    -- * DebuggerDebuggeesBreakpointsSetCanaryOption
-    , DebuggerDebuggeesBreakpointsSetCanaryOption (..)
+    -- ** CloudWorkspaceSourceContext
+    CloudWorkspaceSourceContext (..),
+    newCloudWorkspaceSourceContext,
 
-    -- * BreakpointLabels
-    , BreakpointLabels
-    , breakpointLabels
-    , blAddtional
+    -- ** Debuggee
+    Debuggee (..),
+    newDebuggee,
 
-    -- * GetBreakpointResponse
-    , GetBreakpointResponse
-    , getBreakpointResponse
-    , gbrBreakpoint
+    -- ** Debuggee_CanaryMode
+    Debuggee_CanaryMode (..),
 
-    -- * Variable
-    , Variable
-    , variable
-    , vStatus
-    , vVarTableIndex
-    , vMembers
-    , vValue
-    , vName
-    , vType
+    -- ** Debuggee_Labels
+    Debuggee_Labels (..),
+    newDebuggee_Labels,
 
-    -- * ListBreakpointsResponse
-    , ListBreakpointsResponse
-    , listBreakpointsResponse
-    , lbrNextWaitToken
-    , lbrBreakpoints
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * StatusMessageRefersTo
-    , StatusMessageRefersTo (..)
+    -- ** ExtendedSourceContext
+    ExtendedSourceContext (..),
+    newExtendedSourceContext,
 
-    -- * BreakpointLogLevel
-    , BreakpointLogLevel (..)
+    -- ** ExtendedSourceContext_Labels
+    ExtendedSourceContext_Labels (..),
+    newExtendedSourceContext_Labels,
 
-    -- * ListDebuggeesResponse
-    , ListDebuggeesResponse
-    , listDebuggeesResponse
-    , ldrDebuggees
+    -- ** FormatMessage
+    FormatMessage (..),
+    newFormatMessage,
 
-    -- * BreakpointState
-    , BreakpointState (..)
+    -- ** GerritSourceContext
+    GerritSourceContext (..),
+    newGerritSourceContext,
 
-    -- * UpdateActiveBreakpointRequest
-    , UpdateActiveBreakpointRequest
-    , updateActiveBreakpointRequest
-    , uabrBreakpoint
+    -- ** GetBreakpointResponse
+    GetBreakpointResponse (..),
+    newGetBreakpointResponse,
 
-    -- * StatusMessage
-    , StatusMessage
-    , statusMessage
-    , smRefersTo
-    , smIsError
-    , smDescription
+    -- ** GitSourceContext
+    GitSourceContext (..),
+    newGitSourceContext,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** ListActiveBreakpointsResponse
+    ListActiveBreakpointsResponse (..),
+    newListActiveBreakpointsResponse,
 
-    -- * BreakpointAction
-    , BreakpointAction (..)
+    -- ** ListBreakpointsResponse
+    ListBreakpointsResponse (..),
+    newListBreakpointsResponse,
 
-    -- * ListActiveBreakpointsResponse
-    , ListActiveBreakpointsResponse
-    , listActiveBreakpointsResponse
-    , labrNextWaitToken
-    , labrBreakpoints
-    , labrWaitExpired
+    -- ** ListDebuggeesResponse
+    ListDebuggeesResponse (..),
+    newListDebuggeesResponse,
 
-    -- * ExtendedSourceContext
-    , ExtendedSourceContext
-    , extendedSourceContext
-    , escContext
-    , escLabels
+    -- ** ProjectRepoId
+    ProjectRepoId (..),
+    newProjectRepoId,
 
-    -- * GitSourceContext
-    , GitSourceContext
-    , gitSourceContext
-    , gURL
-    , gRevisionId
+    -- ** RegisterDebuggeeRequest
+    RegisterDebuggeeRequest (..),
+    newRegisterDebuggeeRequest,
 
-    -- * SourceLocation
-    , SourceLocation
-    , sourceLocation
-    , slPath
-    , slLine
-    , slColumn
+    -- ** RegisterDebuggeeResponse
+    RegisterDebuggeeResponse (..),
+    newRegisterDebuggeeResponse,
 
-    -- * StackFrame
-    , StackFrame
-    , stackFrame
-    , sfFunction
-    , sfLocation
-    , sfArguments
-    , sfLocals
+    -- ** RepoId
+    RepoId (..),
+    newRepoId,
 
-    -- * CloudRepoSourceContext
-    , CloudRepoSourceContext
-    , cloudRepoSourceContext
-    , crscRepoId
-    , crscAliasName
-    , crscRevisionId
-    , crscAliasContext
+    -- ** SetBreakpointResponse
+    SetBreakpointResponse (..),
+    newSetBreakpointResponse,
 
-    -- * DebuggeeLabels
-    , DebuggeeLabels
-    , debuggeeLabels
-    , dlAddtional
+    -- ** SourceContext
+    SourceContext (..),
+    newSourceContext,
 
-    -- * DebuggeeCanaryMode
-    , DebuggeeCanaryMode (..)
+    -- ** SourceLocation
+    SourceLocation (..),
+    newSourceLocation,
 
-    -- * DebuggerDebuggeesBreakpointsListActionValue
-    , DebuggerDebuggeesBreakpointsListActionValue (..)
+    -- ** StackFrame
+    StackFrame (..),
+    newStackFrame,
 
-    -- * Debuggee
-    , Debuggee
-    , debuggee
-    , dStatus
-    , dUniquifier
-    , dProject
-    , dExtSourceContexts
-    , dAgentVersion
-    , dIsDisabled
-    , dId
-    , dLabels
-    , dCanaryMode
-    , dDescription
-    , dIsInactive
-    , dSourceContexts
+    -- ** StatusMessage
+    StatusMessage (..),
+    newStatusMessage,
 
-    -- * CloudWorkspaceSourceContext
-    , CloudWorkspaceSourceContext
-    , cloudWorkspaceSourceContext
-    , cwscWorkspaceId
-    , cwscSnapshotId
+    -- ** StatusMessage_RefersTo
+    StatusMessage_RefersTo (..),
 
-    -- * RegisterDebuggeeRequest
-    , RegisterDebuggeeRequest
-    , registerDebuggeeRequest
-    , rDebuggee
+    -- ** UpdateActiveBreakpointRequest
+    UpdateActiveBreakpointRequest (..),
+    newUpdateActiveBreakpointRequest,
 
-    -- * AliasContext
-    , AliasContext
-    , aliasContext
-    , acKind
-    , acName
+    -- ** UpdateActiveBreakpointResponse
+    UpdateActiveBreakpointResponse (..),
+    newUpdateActiveBreakpointResponse,
 
-    -- * AliasContextKind
-    , AliasContextKind (..)
+    -- ** Variable
+    Variable (..),
+    newVariable,
 
-    -- * CloudWorkspaceId
-    , CloudWorkspaceId
-    , cloudWorkspaceId
-    , cwiRepoId
-    , cwiName
-    ) where
+    -- ** DebuggerDebuggeesBreakpointsListActionValue
+    DebuggerDebuggeesBreakpointsListActionValue (..),
 
-import Network.Google.Debugger.Types.Product
-import Network.Google.Debugger.Types.Sum
-import Network.Google.Prelude
+    -- ** DebuggerDebuggeesBreakpointsSetCanaryOption
+    DebuggerDebuggeesBreakpointsSetCanaryOption (..),
+  )
+where
 
--- | Default request referring to version 'v2' of the Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
-debuggerService :: ServiceConfig
-debuggerService
-  = defaultService (ServiceId "clouddebugger:v2")
-      "clouddebugger.googleapis.com"
+import Network.Google.Debugger.Internal.Product
+import Network.Google.Debugger.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v2@ of the Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
+debuggerService :: Core.ServiceConfig
+debuggerService =
+  Core.defaultService
+    (Core.ServiceId "clouddebugger:v2")
+    "clouddebugger.googleapis.com"
+
+-- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
 
 -- | Use Stackdriver Debugger
-cloudDebuggerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
-cloudDebuggerScope = Proxy
-
--- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+cloud_debuggerScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
+cloud_debuggerScope = Core.Proxy
