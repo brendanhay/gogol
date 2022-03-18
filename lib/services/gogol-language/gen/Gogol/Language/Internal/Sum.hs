@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Language.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AnalyzeEntitiesRequest_EncodingType
     AnalyzeEntitiesRequest_EncodingType
-      (
-        AnalyzeEntitiesRequest_EncodingType_None,
+      ( AnalyzeEntitiesRequest_EncodingType_None,
         AnalyzeEntitiesRequest_EncodingType_UTF8,
         AnalyzeEntitiesRequest_EncodingType_UTF16,
         AnalyzeEntitiesRequest_EncodingType_UTF32,
@@ -55,8 +44,7 @@ module Gogol.Language.Internal.Sum
 
     -- * AnalyzeEntitySentimentRequest_EncodingType
     AnalyzeEntitySentimentRequest_EncodingType
-      (
-        AnalyzeEntitySentimentRequest_EncodingType_None,
+      ( AnalyzeEntitySentimentRequest_EncodingType_None,
         AnalyzeEntitySentimentRequest_EncodingType_UTF8,
         AnalyzeEntitySentimentRequest_EncodingType_UTF16,
         AnalyzeEntitySentimentRequest_EncodingType_UTF32,
@@ -65,8 +53,7 @@ module Gogol.Language.Internal.Sum
 
     -- * AnalyzeSentimentRequest_EncodingType
     AnalyzeSentimentRequest_EncodingType
-      (
-        AnalyzeSentimentRequest_EncodingType_None,
+      ( AnalyzeSentimentRequest_EncodingType_None,
         AnalyzeSentimentRequest_EncodingType_UTF8,
         AnalyzeSentimentRequest_EncodingType_UTF16,
         AnalyzeSentimentRequest_EncodingType_UTF32,
@@ -75,8 +62,7 @@ module Gogol.Language.Internal.Sum
 
     -- * AnalyzeSyntaxRequest_EncodingType
     AnalyzeSyntaxRequest_EncodingType
-      (
-        AnalyzeSyntaxRequest_EncodingType_None,
+      ( AnalyzeSyntaxRequest_EncodingType_None,
         AnalyzeSyntaxRequest_EncodingType_UTF8,
         AnalyzeSyntaxRequest_EncodingType_UTF16,
         AnalyzeSyntaxRequest_EncodingType_UTF32,
@@ -85,8 +71,7 @@ module Gogol.Language.Internal.Sum
 
     -- * AnnotateTextRequest_EncodingType
     AnnotateTextRequest_EncodingType
-      (
-        AnnotateTextRequest_EncodingType_None,
+      ( AnnotateTextRequest_EncodingType_None,
         AnnotateTextRequest_EncodingType_UTF8,
         AnnotateTextRequest_EncodingType_UTF16,
         AnnotateTextRequest_EncodingType_UTF32,
@@ -95,8 +80,7 @@ module Gogol.Language.Internal.Sum
 
     -- * DependencyEdge_Label
     DependencyEdge_Label
-      (
-        DependencyEdge_Label_Unknown,
+      ( DependencyEdge_Label_Unknown,
         DependencyEdge_Label_Abbrev,
         DependencyEdge_Label_Acomp,
         DependencyEdge_Label_Advcl,
@@ -184,8 +168,7 @@ module Gogol.Language.Internal.Sum
 
     -- * Document_Type
     Document_Type
-      (
-        Document_Type_TYPEUNSPECIFIED,
+      ( Document_Type_TYPEUNSPECIFIED,
         Document_Type_PLAINTEXT,
         Document_Type_Html,
         ..
@@ -193,8 +176,7 @@ module Gogol.Language.Internal.Sum
 
     -- * Entity_Type
     Entity_Type
-      (
-        Entity_Type_Unknown,
+      ( Entity_Type_Unknown,
         Entity_Type_Person,
         Entity_Type_Location,
         Entity_Type_Organization,
@@ -212,8 +194,7 @@ module Gogol.Language.Internal.Sum
 
     -- * EntityMention_Type
     EntityMention_Type
-      (
-        EntityMention_Type_TYPEUNKNOWN,
+      ( EntityMention_Type_TYPEUNKNOWN,
         EntityMention_Type_Proper,
         EntityMention_Type_Common,
         ..
@@ -221,8 +202,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Aspect
     PartOfSpeech_Aspect
-      (
-        PartOfSpeech_Aspect_ASPECTUNKNOWN,
+      ( PartOfSpeech_Aspect_ASPECTUNKNOWN,
         PartOfSpeech_Aspect_Perfective,
         PartOfSpeech_Aspect_Imperfective,
         PartOfSpeech_Aspect_Progressive,
@@ -231,8 +211,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Case
     PartOfSpeech_Case
-      (
-        PartOfSpeech_Case_CASEUNKNOWN,
+      ( PartOfSpeech_Case_CASEUNKNOWN,
         PartOfSpeech_Case_Accusative,
         PartOfSpeech_Case_Adverbial,
         PartOfSpeech_Case_Complementive,
@@ -252,8 +231,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Form
     PartOfSpeech_Form
-      (
-        PartOfSpeech_Form_FORMUNKNOWN,
+      ( PartOfSpeech_Form_FORMUNKNOWN,
         PartOfSpeech_Form_Adnomial,
         PartOfSpeech_Form_Auxiliary,
         PartOfSpeech_Form_Complementizer,
@@ -270,8 +248,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Gender
     PartOfSpeech_Gender
-      (
-        PartOfSpeech_Gender_GENDERUNKNOWN,
+      ( PartOfSpeech_Gender_GENDERUNKNOWN,
         PartOfSpeech_Gender_Feminine,
         PartOfSpeech_Gender_Masculine,
         PartOfSpeech_Gender_Neuter,
@@ -280,8 +257,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Mood
     PartOfSpeech_Mood
-      (
-        PartOfSpeech_Mood_MOODUNKNOWN,
+      ( PartOfSpeech_Mood_MOODUNKNOWN,
         PartOfSpeech_Mood_CONDITIONALMOOD,
         PartOfSpeech_Mood_Imperative,
         PartOfSpeech_Mood_Indicative,
@@ -293,8 +269,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Number
     PartOfSpeech_Number
-      (
-        PartOfSpeech_Number_NUMBERUNKNOWN,
+      ( PartOfSpeech_Number_NUMBERUNKNOWN,
         PartOfSpeech_Number_Singular,
         PartOfSpeech_Number_Plural,
         PartOfSpeech_Number_Dual,
@@ -303,8 +278,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Person
     PartOfSpeech_Person
-      (
-        PartOfSpeech_Person_PERSONUNKNOWN,
+      ( PartOfSpeech_Person_PERSONUNKNOWN,
         PartOfSpeech_Person_First,
         PartOfSpeech_Person_Second,
         PartOfSpeech_Person_Third,
@@ -314,8 +288,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Proper
     PartOfSpeech_Proper
-      (
-        PartOfSpeech_Proper_PROPERUNKNOWN,
+      ( PartOfSpeech_Proper_PROPERUNKNOWN,
         PartOfSpeech_Proper_Proper,
         PartOfSpeech_Proper_NOTPROPER,
         ..
@@ -323,8 +296,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Reciprocity
     PartOfSpeech_Reciprocity
-      (
-        PartOfSpeech_Reciprocity_RECIPROCITYUNKNOWN,
+      ( PartOfSpeech_Reciprocity_RECIPROCITYUNKNOWN,
         PartOfSpeech_Reciprocity_Reciprocal,
         PartOfSpeech_Reciprocity_NONRECIPROCAL,
         ..
@@ -332,8 +304,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Tag
     PartOfSpeech_Tag
-      (
-        PartOfSpeech_Tag_Unknown,
+      ( PartOfSpeech_Tag_Unknown,
         PartOfSpeech_Tag_Adj,
         PartOfSpeech_Tag_Adp,
         PartOfSpeech_Tag_Adv,
@@ -352,8 +323,7 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Tense
     PartOfSpeech_Tense
-      (
-        PartOfSpeech_Tense_TENSEUNKNOWN,
+      ( PartOfSpeech_Tense_TENSEUNKNOWN,
         PartOfSpeech_Tense_CONDITIONALTENSE,
         PartOfSpeech_Tense_Future,
         PartOfSpeech_Tense_Past,
@@ -365,29 +335,29 @@ module Gogol.Language.Internal.Sum
 
     -- * PartOfSpeech_Voice
     PartOfSpeech_Voice
-      (
-        PartOfSpeech_Voice_VOICEUNKNOWN,
+      ( PartOfSpeech_Voice_VOICEUNKNOWN,
         PartOfSpeech_Voice_Active,
         PartOfSpeech_Voice_Causative,
         PartOfSpeech_Voice_Passive,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -400,20 +370,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The encoding type used by the API to calculate offsets.
-newtype AnalyzeEntitiesRequest_EncodingType = AnalyzeEntitiesRequest_EncodingType { fromAnalyzeEntitiesRequest_EncodingType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AnalyzeEntitiesRequest_EncodingType = AnalyzeEntitiesRequest_EncodingType {fromAnalyzeEntitiesRequest_EncodingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If @EncodingType@ is not specified, encoding-dependent information (such as @begin_offset@) will be set at @-1@.
 pattern AnalyzeEntitiesRequest_EncodingType_None :: AnalyzeEntitiesRequest_EncodingType
@@ -436,20 +407,21 @@ pattern AnalyzeEntitiesRequest_EncodingType_UTF32 = AnalyzeEntitiesRequest_Encod
   AnalyzeEntitiesRequest_EncodingType_UTF8,
   AnalyzeEntitiesRequest_EncodingType_UTF16,
   AnalyzeEntitiesRequest_EncodingType_UTF32,
-  AnalyzeEntitiesRequest_EncodingType #-}
+  AnalyzeEntitiesRequest_EncodingType
+  #-}
 
 -- | The encoding type used by the API to calculate offsets.
-newtype AnalyzeEntitySentimentRequest_EncodingType = AnalyzeEntitySentimentRequest_EncodingType { fromAnalyzeEntitySentimentRequest_EncodingType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AnalyzeEntitySentimentRequest_EncodingType = AnalyzeEntitySentimentRequest_EncodingType {fromAnalyzeEntitySentimentRequest_EncodingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If @EncodingType@ is not specified, encoding-dependent information (such as @begin_offset@) will be set at @-1@.
 pattern AnalyzeEntitySentimentRequest_EncodingType_None :: AnalyzeEntitySentimentRequest_EncodingType
@@ -472,20 +444,21 @@ pattern AnalyzeEntitySentimentRequest_EncodingType_UTF32 = AnalyzeEntitySentimen
   AnalyzeEntitySentimentRequest_EncodingType_UTF8,
   AnalyzeEntitySentimentRequest_EncodingType_UTF16,
   AnalyzeEntitySentimentRequest_EncodingType_UTF32,
-  AnalyzeEntitySentimentRequest_EncodingType #-}
+  AnalyzeEntitySentimentRequest_EncodingType
+  #-}
 
 -- | The encoding type used by the API to calculate sentence offsets.
-newtype AnalyzeSentimentRequest_EncodingType = AnalyzeSentimentRequest_EncodingType { fromAnalyzeSentimentRequest_EncodingType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AnalyzeSentimentRequest_EncodingType = AnalyzeSentimentRequest_EncodingType {fromAnalyzeSentimentRequest_EncodingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If @EncodingType@ is not specified, encoding-dependent information (such as @begin_offset@) will be set at @-1@.
 pattern AnalyzeSentimentRequest_EncodingType_None :: AnalyzeSentimentRequest_EncodingType
@@ -508,20 +481,21 @@ pattern AnalyzeSentimentRequest_EncodingType_UTF32 = AnalyzeSentimentRequest_Enc
   AnalyzeSentimentRequest_EncodingType_UTF8,
   AnalyzeSentimentRequest_EncodingType_UTF16,
   AnalyzeSentimentRequest_EncodingType_UTF32,
-  AnalyzeSentimentRequest_EncodingType #-}
+  AnalyzeSentimentRequest_EncodingType
+  #-}
 
 -- | The encoding type used by the API to calculate offsets.
-newtype AnalyzeSyntaxRequest_EncodingType = AnalyzeSyntaxRequest_EncodingType { fromAnalyzeSyntaxRequest_EncodingType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AnalyzeSyntaxRequest_EncodingType = AnalyzeSyntaxRequest_EncodingType {fromAnalyzeSyntaxRequest_EncodingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If @EncodingType@ is not specified, encoding-dependent information (such as @begin_offset@) will be set at @-1@.
 pattern AnalyzeSyntaxRequest_EncodingType_None :: AnalyzeSyntaxRequest_EncodingType
@@ -544,20 +518,21 @@ pattern AnalyzeSyntaxRequest_EncodingType_UTF32 = AnalyzeSyntaxRequest_EncodingT
   AnalyzeSyntaxRequest_EncodingType_UTF8,
   AnalyzeSyntaxRequest_EncodingType_UTF16,
   AnalyzeSyntaxRequest_EncodingType_UTF32,
-  AnalyzeSyntaxRequest_EncodingType #-}
+  AnalyzeSyntaxRequest_EncodingType
+  #-}
 
 -- | The encoding type used by the API to calculate offsets.
-newtype AnnotateTextRequest_EncodingType = AnnotateTextRequest_EncodingType { fromAnnotateTextRequest_EncodingType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AnnotateTextRequest_EncodingType = AnnotateTextRequest_EncodingType {fromAnnotateTextRequest_EncodingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If @EncodingType@ is not specified, encoding-dependent information (such as @begin_offset@) will be set at @-1@.
 pattern AnnotateTextRequest_EncodingType_None :: AnnotateTextRequest_EncodingType
@@ -580,20 +555,21 @@ pattern AnnotateTextRequest_EncodingType_UTF32 = AnnotateTextRequest_EncodingTyp
   AnnotateTextRequest_EncodingType_UTF8,
   AnnotateTextRequest_EncodingType_UTF16,
   AnnotateTextRequest_EncodingType_UTF32,
-  AnnotateTextRequest_EncodingType #-}
+  AnnotateTextRequest_EncodingType
+  #-}
 
 -- | The parse label for the token.
-newtype DependencyEdge_Label = DependencyEdge_Label { fromDependencyEdge_Label :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DependencyEdge_Label = DependencyEdge_Label {fromDependencyEdge_Label :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown
 pattern DependencyEdge_Label_Unknown :: DependencyEdge_Label
@@ -1011,20 +987,21 @@ pattern DependencyEdge_Label_Ncomp = DependencyEdge_Label "NCOMP"
   DependencyEdge_Label_Infmod,
   DependencyEdge_Label_Mes,
   DependencyEdge_Label_Ncomp,
-  DependencyEdge_Label #-}
+  DependencyEdge_Label
+  #-}
 
 -- | Required. If the type is not set or is @TYPE_UNSPECIFIED@, returns an @INVALID_ARGUMENT@ error.
-newtype Document_Type = Document_Type { fromDocument_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Document_Type = Document_Type {fromDocument_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The content type is not specified.
 pattern Document_Type_TYPEUNSPECIFIED :: Document_Type
@@ -1042,20 +1019,21 @@ pattern Document_Type_Html = Document_Type "HTML"
   Document_Type_TYPEUNSPECIFIED,
   Document_Type_PLAINTEXT,
   Document_Type_Html,
-  Document_Type #-}
+  Document_Type
+  #-}
 
 -- | The entity type.
-newtype Entity_Type = Entity_Type { fromEntity_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Entity_Type = Entity_Type {fromEntity_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown
 pattern Entity_Type_Unknown :: Entity_Type
@@ -1123,20 +1101,21 @@ pattern Entity_Type_Price = Entity_Type "PRICE"
   Entity_Type_Date,
   Entity_Type_Number,
   Entity_Type_Price,
-  Entity_Type #-}
+  Entity_Type
+  #-}
 
 -- | The type of the entity mention.
-newtype EntityMention_Type = EntityMention_Type { fromEntityMention_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EntityMention_Type = EntityMention_Type {fromEntityMention_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown
 pattern EntityMention_Type_TYPEUNKNOWN :: EntityMention_Type
@@ -1154,20 +1133,21 @@ pattern EntityMention_Type_Common = EntityMention_Type "COMMON"
   EntityMention_Type_TYPEUNKNOWN,
   EntityMention_Type_Proper,
   EntityMention_Type_Common,
-  EntityMention_Type #-}
+  EntityMention_Type
+  #-}
 
 -- | The grammatical aspect.
-newtype PartOfSpeech_Aspect = PartOfSpeech_Aspect { fromPartOfSpeech_Aspect :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Aspect = PartOfSpeech_Aspect {fromPartOfSpeech_Aspect :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Aspect is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Aspect_ASPECTUNKNOWN :: PartOfSpeech_Aspect
@@ -1190,20 +1170,21 @@ pattern PartOfSpeech_Aspect_Progressive = PartOfSpeech_Aspect "PROGRESSIVE"
   PartOfSpeech_Aspect_Perfective,
   PartOfSpeech_Aspect_Imperfective,
   PartOfSpeech_Aspect_Progressive,
-  PartOfSpeech_Aspect #-}
+  PartOfSpeech_Aspect
+  #-}
 
 -- | The grammatical case.
-newtype PartOfSpeech_Case = PartOfSpeech_Case { fromPartOfSpeech_Case :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Case = PartOfSpeech_Case {fromPartOfSpeech_Case :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Case is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Case_CASEUNKNOWN :: PartOfSpeech_Case
@@ -1281,20 +1262,21 @@ pattern PartOfSpeech_Case_Vocative = PartOfSpeech_Case "VOCATIVE"
   PartOfSpeech_Case_REFLEXIVECASE,
   PartOfSpeech_Case_RELATIVECASE,
   PartOfSpeech_Case_Vocative,
-  PartOfSpeech_Case #-}
+  PartOfSpeech_Case
+  #-}
 
 -- | The grammatical form.
-newtype PartOfSpeech_Form = PartOfSpeech_Form { fromPartOfSpeech_Form :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Form = PartOfSpeech_Form {fromPartOfSpeech_Form :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Form is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Form_FORMUNKNOWN :: PartOfSpeech_Form
@@ -1357,20 +1339,21 @@ pattern PartOfSpeech_Form_Specific = PartOfSpeech_Form "SPECIFIC"
   PartOfSpeech_Form_Long,
   PartOfSpeech_Form_Order,
   PartOfSpeech_Form_Specific,
-  PartOfSpeech_Form #-}
+  PartOfSpeech_Form
+  #-}
 
 -- | The grammatical gender.
-newtype PartOfSpeech_Gender = PartOfSpeech_Gender { fromPartOfSpeech_Gender :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Gender = PartOfSpeech_Gender {fromPartOfSpeech_Gender :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Gender is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Gender_GENDERUNKNOWN :: PartOfSpeech_Gender
@@ -1393,20 +1376,21 @@ pattern PartOfSpeech_Gender_Neuter = PartOfSpeech_Gender "NEUTER"
   PartOfSpeech_Gender_Feminine,
   PartOfSpeech_Gender_Masculine,
   PartOfSpeech_Gender_Neuter,
-  PartOfSpeech_Gender #-}
+  PartOfSpeech_Gender
+  #-}
 
 -- | The grammatical mood.
-newtype PartOfSpeech_Mood = PartOfSpeech_Mood { fromPartOfSpeech_Mood :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Mood = PartOfSpeech_Mood {fromPartOfSpeech_Mood :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Mood is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Mood_MOODUNKNOWN :: PartOfSpeech_Mood
@@ -1444,20 +1428,21 @@ pattern PartOfSpeech_Mood_Subjunctive = PartOfSpeech_Mood "SUBJUNCTIVE"
   PartOfSpeech_Mood_Interrogative,
   PartOfSpeech_Mood_Jussive,
   PartOfSpeech_Mood_Subjunctive,
-  PartOfSpeech_Mood #-}
+  PartOfSpeech_Mood
+  #-}
 
 -- | The grammatical number.
-newtype PartOfSpeech_Number = PartOfSpeech_Number { fromPartOfSpeech_Number :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Number = PartOfSpeech_Number {fromPartOfSpeech_Number :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Number is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Number_NUMBERUNKNOWN :: PartOfSpeech_Number
@@ -1480,20 +1465,21 @@ pattern PartOfSpeech_Number_Dual = PartOfSpeech_Number "DUAL"
   PartOfSpeech_Number_Singular,
   PartOfSpeech_Number_Plural,
   PartOfSpeech_Number_Dual,
-  PartOfSpeech_Number #-}
+  PartOfSpeech_Number
+  #-}
 
 -- | The grammatical person.
-newtype PartOfSpeech_Person = PartOfSpeech_Person { fromPartOfSpeech_Person :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Person = PartOfSpeech_Person {fromPartOfSpeech_Person :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Person is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Person_PERSONUNKNOWN :: PartOfSpeech_Person
@@ -1521,20 +1507,21 @@ pattern PartOfSpeech_Person_REFLEXIVEPERSON = PartOfSpeech_Person "REFLEXIVE_PER
   PartOfSpeech_Person_Second,
   PartOfSpeech_Person_Third,
   PartOfSpeech_Person_REFLEXIVEPERSON,
-  PartOfSpeech_Person #-}
+  PartOfSpeech_Person
+  #-}
 
 -- | The grammatical properness.
-newtype PartOfSpeech_Proper = PartOfSpeech_Proper { fromPartOfSpeech_Proper :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Proper = PartOfSpeech_Proper {fromPartOfSpeech_Proper :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Proper is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Proper_PROPERUNKNOWN :: PartOfSpeech_Proper
@@ -1552,20 +1539,21 @@ pattern PartOfSpeech_Proper_NOTPROPER = PartOfSpeech_Proper "NOT_PROPER"
   PartOfSpeech_Proper_PROPERUNKNOWN,
   PartOfSpeech_Proper_Proper,
   PartOfSpeech_Proper_NOTPROPER,
-  PartOfSpeech_Proper #-}
+  PartOfSpeech_Proper
+  #-}
 
 -- | The grammatical reciprocity.
-newtype PartOfSpeech_Reciprocity = PartOfSpeech_Reciprocity { fromPartOfSpeech_Reciprocity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Reciprocity = PartOfSpeech_Reciprocity {fromPartOfSpeech_Reciprocity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Reciprocity is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Reciprocity_RECIPROCITYUNKNOWN :: PartOfSpeech_Reciprocity
@@ -1583,20 +1571,21 @@ pattern PartOfSpeech_Reciprocity_NONRECIPROCAL = PartOfSpeech_Reciprocity "NON_R
   PartOfSpeech_Reciprocity_RECIPROCITYUNKNOWN,
   PartOfSpeech_Reciprocity_Reciprocal,
   PartOfSpeech_Reciprocity_NONRECIPROCAL,
-  PartOfSpeech_Reciprocity #-}
+  PartOfSpeech_Reciprocity
+  #-}
 
 -- | The part of speech tag.
-newtype PartOfSpeech_Tag = PartOfSpeech_Tag { fromPartOfSpeech_Tag :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Tag = PartOfSpeech_Tag {fromPartOfSpeech_Tag :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown
 pattern PartOfSpeech_Tag_Unknown :: PartOfSpeech_Tag
@@ -1669,20 +1658,21 @@ pattern PartOfSpeech_Tag_Affix = PartOfSpeech_Tag "AFFIX"
   PartOfSpeech_Tag_Verb,
   PartOfSpeech_Tag_X,
   PartOfSpeech_Tag_Affix,
-  PartOfSpeech_Tag #-}
+  PartOfSpeech_Tag
+  #-}
 
 -- | The grammatical tense.
-newtype PartOfSpeech_Tense = PartOfSpeech_Tense { fromPartOfSpeech_Tense :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Tense = PartOfSpeech_Tense {fromPartOfSpeech_Tense :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Tense is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Tense_TENSEUNKNOWN :: PartOfSpeech_Tense
@@ -1720,20 +1710,21 @@ pattern PartOfSpeech_Tense_Pluperfect = PartOfSpeech_Tense "PLUPERFECT"
   PartOfSpeech_Tense_Present,
   PartOfSpeech_Tense_Imperfect,
   PartOfSpeech_Tense_Pluperfect,
-  PartOfSpeech_Tense #-}
+  PartOfSpeech_Tense
+  #-}
 
 -- | The grammatical voice.
-newtype PartOfSpeech_Voice = PartOfSpeech_Voice { fromPartOfSpeech_Voice :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PartOfSpeech_Voice = PartOfSpeech_Voice {fromPartOfSpeech_Voice :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Voice is not applicable in the analyzed language or is not predicted.
 pattern PartOfSpeech_Voice_VOICEUNKNOWN :: PartOfSpeech_Voice
@@ -1756,4 +1747,5 @@ pattern PartOfSpeech_Voice_Passive = PartOfSpeech_Voice "PASSIVE"
   PartOfSpeech_Voice_Active,
   PartOfSpeech_Voice_Causative,
   PartOfSpeech_Voice_Passive,
-  PartOfSpeech_Voice #-}
+  PartOfSpeech_Voice
+  #-}
