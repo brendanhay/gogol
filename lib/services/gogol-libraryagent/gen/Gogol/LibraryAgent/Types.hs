@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,47 +25,46 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.LibraryAgent.Types
-    (
-    -- * Configuration
-      libraryAgentService
+  ( -- * Configuration
+    libraryAgentService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** GoogleExampleLibraryagentV1Book
-    , GoogleExampleLibraryagentV1Book (..)
-    , newGoogleExampleLibraryagentV1Book
+    GoogleExampleLibraryagentV1Book (..),
+    newGoogleExampleLibraryagentV1Book,
 
     -- ** GoogleExampleLibraryagentV1ListBooksResponse
-    , GoogleExampleLibraryagentV1ListBooksResponse (..)
-    , newGoogleExampleLibraryagentV1ListBooksResponse
+    GoogleExampleLibraryagentV1ListBooksResponse (..),
+    newGoogleExampleLibraryagentV1ListBooksResponse,
 
     -- ** GoogleExampleLibraryagentV1ListShelvesResponse
-    , GoogleExampleLibraryagentV1ListShelvesResponse (..)
-    , newGoogleExampleLibraryagentV1ListShelvesResponse
+    GoogleExampleLibraryagentV1ListShelvesResponse (..),
+    newGoogleExampleLibraryagentV1ListShelvesResponse,
 
     -- ** GoogleExampleLibraryagentV1Shelf
-    , GoogleExampleLibraryagentV1Shelf (..)
-    , newGoogleExampleLibraryagentV1Shelf
-    ) where
+    GoogleExampleLibraryagentV1Shelf (..),
+    newGoogleExampleLibraryagentV1Shelf,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.LibraryAgent.Internal.Product
 import Gogol.LibraryAgent.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Library Agent API. This contains the host and root path used as a starting point for constructing service requests.
 libraryAgentService :: Core.ServiceConfig
-libraryAgentService
-  = Core.defaultService
-      (Core.ServiceId "libraryagent:v1")
-      "libraryagent.googleapis.com"
+libraryAgentService =
+  Core.defaultService
+    (Core.ServiceId "libraryagent:v1")
+    "libraryagent.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
