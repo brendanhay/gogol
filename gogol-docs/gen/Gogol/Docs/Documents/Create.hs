@@ -19,60 +19,55 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Docs.Documents.Get
+-- Module      : Gogol.Docs.Documents.Create
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest version of the specified document.
+-- Creates a blank document using the title given in the request. Other fields in the request, including any provided content, are ignored. Returns the created document.
 --
--- /See:/ <https://developers.google.com/docs/ Google Docs API Reference> for @docs.documents.get@.
-module Network.Google.Docs.Documents.Get
+-- /See:/ <https://developers.google.com/docs/ Google Docs API Reference> for @docs.documents.create@.
+module Gogol.Docs.Documents.Create
   ( -- * Resource
-    DocsDocumentsGetResource,
+    DocsDocumentsCreateResource,
 
     -- ** Constructing a Request
-    newDocsDocumentsGet,
-    DocsDocumentsGet,
+    newDocsDocumentsCreate,
+    DocsDocumentsCreate,
   )
 where
 
-import Network.Google.Docs.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.Docs.Types
+import qualified Gogol.Prelude as Core
 
--- | A resource alias for @docs.documents.get@ method which the
--- 'DocsDocumentsGet' request conforms to.
-type DocsDocumentsGetResource =
+-- | A resource alias for @docs.documents.create@ method which the
+-- 'DocsDocumentsCreate' request conforms to.
+type DocsDocumentsCreateResource =
   "v1"
     Core.:> "documents"
-    Core.:> Core.Capture "documentId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "suggestionsViewMode"
-              DocumentsGetSuggestionsViewMode
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Document
+    Core.:> Core.ReqBody '[Core.JSON] Document
+    Core.:> Core.Post '[Core.JSON] Document
 
--- | Gets the latest version of the specified document.
+-- | Creates a blank document using the title given in the request. Other fields in the request, including any provided content, are ignored. Returns the created document.
 --
--- /See:/ 'newDocsDocumentsGet' smart constructor.
-data DocsDocumentsGet = DocsDocumentsGet
+-- /See:/ 'newDocsDocumentsCreate' smart constructor.
+data DocsDocumentsCreate = DocsDocumentsCreate
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the document to retrieve.
-    documentId :: Core.Text,
-    -- | The suggestions view mode to apply to the document. This allows viewing the document with all suggestions inline, accepted or rejected. If one is not specified, DEFAULT/FOR/CURRENT_ACCESS is used.
-    suggestionsViewMode :: (Core.Maybe DocumentsGetSuggestionsViewMode),
+    -- | Multipart request metadata.
+    payload :: Document,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,45 +75,43 @@ data DocsDocumentsGet = DocsDocumentsGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'DocsDocumentsGet' with the minimum fields required to make a request.
-newDocsDocumentsGet ::
-  -- |  The ID of the document to retrieve. See 'documentId'.
-  Core.Text ->
-  DocsDocumentsGet
-newDocsDocumentsGet documentId =
-  DocsDocumentsGet
+-- | Creates a value of 'DocsDocumentsCreate' with the minimum fields required to make a request.
+newDocsDocumentsCreate ::
+  -- |  Multipart request metadata. See 'payload'.
+  Document ->
+  DocsDocumentsCreate
+newDocsDocumentsCreate payload =
+  DocsDocumentsCreate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      documentId = documentId,
-      suggestionsViewMode = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest DocsDocumentsGet where
-  type Rs DocsDocumentsGet = Document
+instance Core.GoogleRequest DocsDocumentsCreate where
+  type Rs DocsDocumentsCreate = Document
   type
-    Scopes DocsDocumentsGet =
+    Scopes DocsDocumentsCreate =
       '[ "https://www.googleapis.com/auth/documents",
-         "https://www.googleapis.com/auth/documents.readonly",
          "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly"
+         "https://www.googleapis.com/auth/drive.file"
        ]
-  requestClient DocsDocumentsGet {..} =
+  requestClient DocsDocumentsCreate {..} =
     go
-      documentId
       xgafv
       accessToken
       callback
-      suggestionsViewMode
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       docsService
     where
       go =
         Core.buildClient
-          (Core.Proxy :: Core.Proxy DocsDocumentsGetResource)
+          ( Core.Proxy ::
+              Core.Proxy DocsDocumentsCreateResource
+          )
           Core.mempty

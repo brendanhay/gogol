@@ -39,20 +39,21 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Docs
-    Network.Google.Docs.Documents.BatchUpdate
-    Network.Google.Docs.Documents.Create
-    Network.Google.Docs.Documents.Get
-    Network.Google.Docs.Types
+    Gogol.Docs
+    Gogol.Docs.Documents.BatchUpdate
+    Gogol.Docs.Documents.Create
+    Gogol.Docs.Documents.Get
+    Gogol.Docs.Types
 
   other-modules:
-    Network.Google.Docs.Internal.Product
-    Network.Google.Docs.Internal.Sum
+    Gogol.Docs.Internal.Product
+    Gogol.Docs.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

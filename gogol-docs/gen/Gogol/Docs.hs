@@ -19,13 +19,17 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Docs.Types
+-- Module      : Gogol.Docs
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.Docs.Types
+--
+-- Reads and writes Google Docs documents.
+--
+-- /See:/ <https://developers.google.com/docs/ Google Docs API Reference>
+module Gogol.Docs
   ( -- * Configuration
     docsService,
 
@@ -35,6 +39,23 @@ module Network.Google.Docs.Types
     driveScope,
     driveFileScope,
     driveReadOnlyScope,
+
+    -- * Resources
+
+    -- ** docs.documents.batchUpdate
+    DocsDocumentsBatchUpdateResource,
+    newDocsDocumentsBatchUpdate,
+    DocsDocumentsBatchUpdate,
+
+    -- ** docs.documents.create
+    DocsDocumentsCreateResource,
+    newDocsDocumentsCreate,
+    DocsDocumentsCreate,
+
+    -- ** docs.documents.get
+    DocsDocumentsGetResource,
+    newDocsDocumentsGet,
+    DocsDocumentsGet,
 
     -- * Types
 
@@ -834,33 +855,7 @@ module Network.Google.Docs.Types
   )
 where
 
-import Network.Google.Docs.Internal.Product
-import Network.Google.Docs.Internal.Sum
-import qualified Network.Google.Prelude as Core
-
--- | Default request referring to version @v1@ of the Google Docs API. This contains the host and root path used as a starting point for constructing service requests.
-docsService :: Core.ServiceConfig
-docsService =
-  Core.defaultService
-    (Core.ServiceId "docs:v1")
-    "docs.googleapis.com"
-
--- | See, edit, create, and delete all your Google Docs documents
-documentsScope :: Core.Proxy '["https://www.googleapis.com/auth/documents"]
-documentsScope = Core.Proxy
-
--- | See all your Google Docs documents
-documentsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/documents.readonly"]
-documentsReadOnlyScope = Core.Proxy
-
--- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
-
--- | See, edit, create, and delete only the specific Google Drive files you use with this app
-driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Core.Proxy
-
--- | See and download all your Google Drive files
-driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Core.Proxy
+import Gogol.Docs.Documents.BatchUpdate
+import Gogol.Docs.Documents.Create
+import Gogol.Docs.Documents.Get
+import Gogol.Docs.Types
