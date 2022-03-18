@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Speech
+-- Module      : Gogol.Speech
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Converts audio to text by applying powerful neural network models.
 --
 -- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference>
-module Network.Google.Speech
+module Gogol.Speech
   ( -- * Configuration
     speechService,
 
@@ -99,6 +99,6 @@ module Network.Google.Speech
   )
 where
 
-import Network.Google.Speech.Projects.Locations.Operations.Get
-import Network.Google.Speech.Projects.Locations.Operations.List
-import Network.Google.Speech.Types
+import Gogol.Speech.Projects.Locations.Operations.Get
+import Gogol.Speech.Projects.Locations.Operations.List
+import Gogol.Speech.Types
