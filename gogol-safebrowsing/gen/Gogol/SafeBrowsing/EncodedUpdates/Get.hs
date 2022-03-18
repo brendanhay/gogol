@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SafeBrowsing.EncodedFullHashes.Get
+-- Module      : Gogol.SafeBrowsing.EncodedUpdates.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -28,25 +28,25 @@
 --
 --
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.encodedFullHashes.get@.
-module Network.Google.SafeBrowsing.EncodedFullHashes.Get
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.encodedUpdates.get@.
+module Gogol.SafeBrowsing.EncodedUpdates.Get
   ( -- * Resource
-    SafeBrowsingEncodedFullHashesGetResource,
+    SafeBrowsingEncodedUpdatesGetResource,
 
     -- ** Constructing a Request
-    newSafeBrowsingEncodedFullHashesGet,
-    SafeBrowsingEncodedFullHashesGet,
+    newSafeBrowsingEncodedUpdatesGet,
+    SafeBrowsingEncodedUpdatesGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SafeBrowsing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SafeBrowsing.Types
 
--- | A resource alias for @safebrowsing.encodedFullHashes.get@ method which the
--- 'SafeBrowsingEncodedFullHashesGet' request conforms to.
-type SafeBrowsingEncodedFullHashesGetResource =
+-- | A resource alias for @safebrowsing.encodedUpdates.get@ method which the
+-- 'SafeBrowsingEncodedUpdatesGet' request conforms to.
+type SafeBrowsingEncodedUpdatesGetResource =
   "v4"
-    Core.:> "encodedFullHashes"
+    Core.:> "encodedUpdates"
     Core.:> Core.Capture "encodedRequest" Core.Base64
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -58,23 +58,23 @@ type SafeBrowsingEncodedFullHashesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
-              GoogleSecuritySafebrowsingV4FindFullHashesResponse
+              GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
 
 -- |
 --
--- /See:/ 'newSafeBrowsingEncodedFullHashesGet' smart constructor.
-data SafeBrowsingEncodedFullHashesGet = SafeBrowsingEncodedFullHashesGet
+-- /See:/ 'newSafeBrowsingEncodedUpdatesGet' smart constructor.
+data SafeBrowsingEncodedUpdatesGet = SafeBrowsingEncodedUpdatesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A client ID that (hopefully) uniquely identifies the client implementation of the Safe Browsing API.
+    -- | A client ID that uniquely identifies the client implementation of the Safe Browsing API.
     clientId :: (Core.Maybe Core.Text),
     -- | The version of the client implementation.
     clientVersion :: (Core.Maybe Core.Text),
-    -- | A serialized FindFullHashesRequest proto.
+    -- | A serialized FetchThreatListUpdatesRequest proto.
     encodedRequest :: Core.Base64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,13 +83,13 @@ data SafeBrowsingEncodedFullHashesGet = SafeBrowsingEncodedFullHashesGet
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SafeBrowsingEncodedFullHashesGet' with the minimum fields required to make a request.
-newSafeBrowsingEncodedFullHashesGet ::
-  -- |  A serialized FindFullHashesRequest proto. See 'encodedRequest'.
+-- | Creates a value of 'SafeBrowsingEncodedUpdatesGet' with the minimum fields required to make a request.
+newSafeBrowsingEncodedUpdatesGet ::
+  -- |  A serialized FetchThreatListUpdatesRequest proto. See 'encodedRequest'.
   Core.Base64 ->
-  SafeBrowsingEncodedFullHashesGet
-newSafeBrowsingEncodedFullHashesGet encodedRequest =
-  SafeBrowsingEncodedFullHashesGet
+  SafeBrowsingEncodedUpdatesGet
+newSafeBrowsingEncodedUpdatesGet encodedRequest =
+  SafeBrowsingEncodedUpdatesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -102,13 +102,13 @@ newSafeBrowsingEncodedFullHashesGet encodedRequest =
 
 instance
   Core.GoogleRequest
-    SafeBrowsingEncodedFullHashesGet
+    SafeBrowsingEncodedUpdatesGet
   where
   type
-    Rs SafeBrowsingEncodedFullHashesGet =
-      GoogleSecuritySafebrowsingV4FindFullHashesResponse
-  type Scopes SafeBrowsingEncodedFullHashesGet = '[]
-  requestClient SafeBrowsingEncodedFullHashesGet {..} =
+    Rs SafeBrowsingEncodedUpdatesGet =
+      GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
+  type Scopes SafeBrowsingEncodedUpdatesGet = '[]
+  requestClient SafeBrowsingEncodedUpdatesGet {..} =
     go
       encodedRequest
       xgafv
@@ -124,6 +124,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SafeBrowsingEncodedFullHashesGetResource
+              Core.Proxy SafeBrowsingEncodedUpdatesGetResource
           )
           Core.mempty

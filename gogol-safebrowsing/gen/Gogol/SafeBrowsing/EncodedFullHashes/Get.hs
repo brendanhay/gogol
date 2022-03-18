@@ -19,57 +19,63 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SafeBrowsing.ThreatHits.Create
+-- Module      : Gogol.SafeBrowsing.EncodedFullHashes.Get
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reports a Safe Browsing threat list hit to Google. Only projects with TRUSTED_REPORTER visibility can use this method.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatHits.create@.
-module Network.Google.SafeBrowsing.ThreatHits.Create
+--
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.encodedFullHashes.get@.
+module Gogol.SafeBrowsing.EncodedFullHashes.Get
   ( -- * Resource
-    SafeBrowsingThreatHitsCreateResource,
+    SafeBrowsingEncodedFullHashesGetResource,
 
     -- ** Constructing a Request
-    newSafeBrowsingThreatHitsCreate,
-    SafeBrowsingThreatHitsCreate,
+    newSafeBrowsingEncodedFullHashesGet,
+    SafeBrowsingEncodedFullHashesGet,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SafeBrowsing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SafeBrowsing.Types
 
--- | A resource alias for @safebrowsing.threatHits.create@ method which the
--- 'SafeBrowsingThreatHitsCreate' request conforms to.
-type SafeBrowsingThreatHitsCreateResource =
+-- | A resource alias for @safebrowsing.encodedFullHashes.get@ method which the
+-- 'SafeBrowsingEncodedFullHashesGet' request conforms to.
+type SafeBrowsingEncodedFullHashesGetResource =
   "v4"
-    Core.:> "threatHits"
+    Core.:> "encodedFullHashes"
+    Core.:> Core.Capture "encodedRequest" Core.Base64
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "clientId" Core.Text
+    Core.:> Core.QueryParam "clientVersion" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
+    Core.:> Core.Get
               '[Core.JSON]
-              GoogleSecuritySafebrowsingV4ThreatHit
-    Core.:> Core.Post '[Core.JSON] GoogleProtobufEmpty
+              GoogleSecuritySafebrowsingV4FindFullHashesResponse
 
--- | Reports a Safe Browsing threat list hit to Google. Only projects with TRUSTED_REPORTER visibility can use this method.
+-- |
 --
--- /See:/ 'newSafeBrowsingThreatHitsCreate' smart constructor.
-data SafeBrowsingThreatHitsCreate = SafeBrowsingThreatHitsCreate
+-- /See:/ 'newSafeBrowsingEncodedFullHashesGet' smart constructor.
+data SafeBrowsingEncodedFullHashesGet = SafeBrowsingEncodedFullHashesGet
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: GoogleSecuritySafebrowsingV4ThreatHit,
+    -- | A client ID that (hopefully) uniquely identifies the client implementation of the Safe Browsing API.
+    clientId :: (Core.Maybe Core.Text),
+    -- | The version of the client implementation.
+    clientVersion :: (Core.Maybe Core.Text),
+    -- | A serialized FindFullHashesRequest proto.
+    encodedRequest :: Core.Base64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -77,43 +83,47 @@ data SafeBrowsingThreatHitsCreate = SafeBrowsingThreatHitsCreate
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SafeBrowsingThreatHitsCreate' with the minimum fields required to make a request.
-newSafeBrowsingThreatHitsCreate ::
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleSecuritySafebrowsingV4ThreatHit ->
-  SafeBrowsingThreatHitsCreate
-newSafeBrowsingThreatHitsCreate payload =
-  SafeBrowsingThreatHitsCreate
+-- | Creates a value of 'SafeBrowsingEncodedFullHashesGet' with the minimum fields required to make a request.
+newSafeBrowsingEncodedFullHashesGet ::
+  -- |  A serialized FindFullHashesRequest proto. See 'encodedRequest'.
+  Core.Base64 ->
+  SafeBrowsingEncodedFullHashesGet
+newSafeBrowsingEncodedFullHashesGet encodedRequest =
+  SafeBrowsingEncodedFullHashesGet
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      payload = payload,
+      clientId = Core.Nothing,
+      clientVersion = Core.Nothing,
+      encodedRequest = encodedRequest,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    SafeBrowsingThreatHitsCreate
+    SafeBrowsingEncodedFullHashesGet
   where
   type
-    Rs SafeBrowsingThreatHitsCreate =
-      GoogleProtobufEmpty
-  type Scopes SafeBrowsingThreatHitsCreate = '[]
-  requestClient SafeBrowsingThreatHitsCreate {..} =
+    Rs SafeBrowsingEncodedFullHashesGet =
+      GoogleSecuritySafebrowsingV4FindFullHashesResponse
+  type Scopes SafeBrowsingEncodedFullHashesGet = '[]
+  requestClient SafeBrowsingEncodedFullHashesGet {..} =
     go
+      encodedRequest
       xgafv
       accessToken
       callback
+      clientId
+      clientVersion
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
-      payload
       safeBrowsingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SafeBrowsingThreatHitsCreateResource
+              Core.Proxy SafeBrowsingEncodedFullHashesGetResource
           )
           Core.mempty

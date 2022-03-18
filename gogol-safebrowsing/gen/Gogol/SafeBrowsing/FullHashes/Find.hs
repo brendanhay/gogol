@@ -19,54 +19,59 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.SafeBrowsing.ThreatLists.List
+-- Module      : Gogol.SafeBrowsing.FullHashes.Find
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the Safe Browsing threat lists available for download.
+-- Finds the full hashes that match the requested hash prefixes.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatLists.list@.
-module Network.Google.SafeBrowsing.ThreatLists.List
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.fullHashes.find@.
+module Gogol.SafeBrowsing.FullHashes.Find
   ( -- * Resource
-    SafeBrowsingThreatListsListResource,
+    SafeBrowsingFullHashesFindResource,
 
     -- ** Constructing a Request
-    newSafeBrowsingThreatListsList,
-    SafeBrowsingThreatListsList,
+    newSafeBrowsingFullHashesFind,
+    SafeBrowsingFullHashesFind,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.SafeBrowsing.Types
+import qualified Gogol.Prelude as Core
+import Gogol.SafeBrowsing.Types
 
--- | A resource alias for @safebrowsing.threatLists.list@ method which the
--- 'SafeBrowsingThreatListsList' request conforms to.
-type SafeBrowsingThreatListsListResource =
+-- | A resource alias for @safebrowsing.fullHashes.find@ method which the
+-- 'SafeBrowsingFullHashesFind' request conforms to.
+type SafeBrowsingFullHashesFindResource =
   "v4"
-    Core.:> "threatLists"
+    Core.:> "fullHashes:find"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
+    Core.:> Core.ReqBody
               '[Core.JSON]
-              GoogleSecuritySafebrowsingV4ListThreatListsResponse
+              GoogleSecuritySafebrowsingV4FindFullHashesRequest
+    Core.:> Core.Post
+              '[Core.JSON]
+              GoogleSecuritySafebrowsingV4FindFullHashesResponse
 
--- | Lists the Safe Browsing threat lists available for download.
+-- | Finds the full hashes that match the requested hash prefixes.
 --
--- /See:/ 'newSafeBrowsingThreatListsList' smart constructor.
-data SafeBrowsingThreatListsList = SafeBrowsingThreatListsList
+-- /See:/ 'newSafeBrowsingFullHashesFind' smart constructor.
+data SafeBrowsingFullHashesFind = SafeBrowsingFullHashesFind
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: GoogleSecuritySafebrowsingV4FindFullHashesRequest,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -74,27 +79,30 @@ data SafeBrowsingThreatListsList = SafeBrowsingThreatListsList
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SafeBrowsingThreatListsList' with the minimum fields required to make a request.
-newSafeBrowsingThreatListsList ::
-  SafeBrowsingThreatListsList
-newSafeBrowsingThreatListsList =
-  SafeBrowsingThreatListsList
+-- | Creates a value of 'SafeBrowsingFullHashesFind' with the minimum fields required to make a request.
+newSafeBrowsingFullHashesFind ::
+  -- |  Multipart request metadata. See 'payload'.
+  GoogleSecuritySafebrowsingV4FindFullHashesRequest ->
+  SafeBrowsingFullHashesFind
+newSafeBrowsingFullHashesFind payload =
+  SafeBrowsingFullHashesFind
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
 instance
   Core.GoogleRequest
-    SafeBrowsingThreatListsList
+    SafeBrowsingFullHashesFind
   where
   type
-    Rs SafeBrowsingThreatListsList =
-      GoogleSecuritySafebrowsingV4ListThreatListsResponse
-  type Scopes SafeBrowsingThreatListsList = '[]
-  requestClient SafeBrowsingThreatListsList {..} =
+    Rs SafeBrowsingFullHashesFind =
+      GoogleSecuritySafebrowsingV4FindFullHashesResponse
+  type Scopes SafeBrowsingFullHashesFind = '[]
+  requestClient SafeBrowsingFullHashesFind {..} =
     go
       xgafv
       accessToken
@@ -102,11 +110,12 @@ instance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
+      payload
       safeBrowsingService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy SafeBrowsingThreatListsListResource
+              Core.Proxy SafeBrowsingFullHashesFindResource
           )
           Core.mempty
