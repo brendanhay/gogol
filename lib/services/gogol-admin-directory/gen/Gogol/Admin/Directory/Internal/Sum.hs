@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,22 +25,17 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Admin.Directory.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuxiliaryMessage_Severity
     AuxiliaryMessage_Severity
-      (
-        AuxiliaryMessage_Severity_SEVERITYUNSPECIFIED,
+      ( AuxiliaryMessage_Severity_SEVERITYUNSPECIFIED,
         AuxiliaryMessage_Severity_SEVERITYINFO,
         AuxiliaryMessage_Severity_SEVERITYWARNING,
         AuxiliaryMessage_Severity_SEVERITYERROR,
@@ -55,8 +44,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * DirectoryChromeosdevicesCommand_State
     DirectoryChromeosdevicesCommand_State
-      (
-        DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED,
+      ( DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED,
         DirectoryChromeosdevicesCommand_State_Pending,
         DirectoryChromeosdevicesCommand_State_Expired,
         DirectoryChromeosdevicesCommand_State_Cancelled,
@@ -68,8 +56,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * DirectoryChromeosdevicesCommand_Type
     DirectoryChromeosdevicesCommand_Type
-      (
-        DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
+      ( DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
         DirectoryChromeosdevicesCommand_Type_Reboot,
         DirectoryChromeosdevicesCommand_Type_TAKEASCREENSHOT,
         DirectoryChromeosdevicesCommand_Type_SETVOLUME,
@@ -80,8 +67,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * DirectoryChromeosdevicesCommandResult_Result
     DirectoryChromeosdevicesCommandResult_Result
-      (
-        DirectoryChromeosdevicesCommandResult_Result_COMMANDRESULTTYPEUNSPECIFIED,
+      ( DirectoryChromeosdevicesCommandResult_Result_COMMANDRESULTTYPEUNSPECIFIED,
         DirectoryChromeosdevicesCommandResult_Result_Ignored,
         DirectoryChromeosdevicesCommandResult_Result_Failure,
         DirectoryChromeosdevicesCommandResult_Result_Success,
@@ -90,8 +76,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * DirectoryChromeosdevicesIssueCommandRequest_CommandType
     DirectoryChromeosdevicesIssueCommandRequest_CommandType
-      (
-        DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
+      ( DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_TAKEASCREENSHOT,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_SETVOLUME,
@@ -102,8 +87,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * FailureInfo_ErrorCode
     FailureInfo_ErrorCode
-      (
-        FailureInfo_ErrorCode_OK,
+      ( FailureInfo_ErrorCode_OK,
         FailureInfo_ErrorCode_Cancelled,
         FailureInfo_ErrorCode_Unknown,
         FailureInfo_ErrorCode_INVALIDARGUMENT,
@@ -125,16 +109,14 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ChromeosdevicesGetProjection
     ChromeosdevicesGetProjection
-      (
-        ChromeosdevicesGetProjection_Basic,
+      ( ChromeosdevicesGetProjection_Basic,
         ChromeosdevicesGetProjection_Full,
         ..
       ),
 
     -- * ChromeosdevicesListOrderBy
     ChromeosdevicesListOrderBy
-      (
-        ChromeosdevicesListOrderBy_AnnotatedLocation,
+      ( ChromeosdevicesListOrderBy_AnnotatedLocation,
         ChromeosdevicesListOrderBy_AnnotatedUser,
         ChromeosdevicesListOrderBy_LastSync,
         ChromeosdevicesListOrderBy_Notes,
@@ -146,63 +128,55 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ChromeosdevicesListProjection
     ChromeosdevicesListProjection
-      (
-        ChromeosdevicesListProjection_Basic,
+      ( ChromeosdevicesListProjection_Basic,
         ChromeosdevicesListProjection_Full,
         ..
       ),
 
     -- * ChromeosdevicesListSortOrder
     ChromeosdevicesListSortOrder
-      (
-        ChromeosdevicesListSortOrder_Ascending,
+      ( ChromeosdevicesListSortOrder_Ascending,
         ChromeosdevicesListSortOrder_Descending,
         ..
       ),
 
     -- * ChromeosdevicesPatchProjection
     ChromeosdevicesPatchProjection
-      (
-        ChromeosdevicesPatchProjection_Basic,
+      ( ChromeosdevicesPatchProjection_Basic,
         ChromeosdevicesPatchProjection_Full,
         ..
       ),
 
     -- * ChromeosdevicesUpdateProjection
     ChromeosdevicesUpdateProjection
-      (
-        ChromeosdevicesUpdateProjection_Basic,
+      ( ChromeosdevicesUpdateProjection_Basic,
         ChromeosdevicesUpdateProjection_Full,
         ..
       ),
 
     -- * GroupsListOrderBy
     GroupsListOrderBy
-      (
-        GroupsListOrderBy_Email,
+      ( GroupsListOrderBy_Email,
         ..
       ),
 
     -- * GroupsListSortOrder
     GroupsListSortOrder
-      (
-        GroupsListSortOrder_Ascending,
+      ( GroupsListSortOrder_Ascending,
         GroupsListSortOrder_Descending,
         ..
       ),
 
     -- * MobiledevicesGetProjection
     MobiledevicesGetProjection
-      (
-        MobiledevicesGetProjection_Basic,
+      ( MobiledevicesGetProjection_Basic,
         MobiledevicesGetProjection_Full,
         ..
       ),
 
     -- * MobiledevicesListOrderBy
     MobiledevicesListOrderBy
-      (
-        MobiledevicesListOrderBy_DeviceId,
+      ( MobiledevicesListOrderBy_DeviceId,
         MobiledevicesListOrderBy_Email,
         MobiledevicesListOrderBy_LastSync,
         MobiledevicesListOrderBy_Model,
@@ -215,32 +189,28 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * MobiledevicesListProjection
     MobiledevicesListProjection
-      (
-        MobiledevicesListProjection_Basic,
+      ( MobiledevicesListProjection_Basic,
         MobiledevicesListProjection_Full,
         ..
       ),
 
     -- * MobiledevicesListSortOrder
     MobiledevicesListSortOrder
-      (
-        MobiledevicesListSortOrder_Ascending,
+      ( MobiledevicesListSortOrder_Ascending,
         MobiledevicesListSortOrder_Descending,
         ..
       ),
 
     -- * OrgunitsListType
     OrgunitsListType
-      (
-        OrgunitsListType_All,
+      ( OrgunitsListType_All,
         OrgunitsListType_Children,
         ..
       ),
 
     -- * ResourcesBuildingsInsertCoordinatesSource
     ResourcesBuildingsInsertCoordinatesSource
-      (
-        ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED,
+      ( ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED,
         ResourcesBuildingsInsertCoordinatesSource_RESOLVEDFROMADDRESS,
         ResourcesBuildingsInsertCoordinatesSource_SOURCEUNSPECIFIED,
         ..
@@ -248,8 +218,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ResourcesBuildingsPatchCoordinatesSource
     ResourcesBuildingsPatchCoordinatesSource
-      (
-        ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED,
+      ( ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED,
         ResourcesBuildingsPatchCoordinatesSource_RESOLVEDFROMADDRESS,
         ResourcesBuildingsPatchCoordinatesSource_SOURCEUNSPECIFIED,
         ..
@@ -257,8 +226,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ResourcesBuildingsUpdateCoordinatesSource
     ResourcesBuildingsUpdateCoordinatesSource
-      (
-        ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED,
+      ( ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED,
         ResourcesBuildingsUpdateCoordinatesSource_RESOLVEDFROMADDRESS,
         ResourcesBuildingsUpdateCoordinatesSource_SOURCEUNSPECIFIED,
         ..
@@ -266,24 +234,21 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersAliasesListEvent
     UsersAliasesListEvent
-      (
-        UsersAliasesListEvent_Add,
+      ( UsersAliasesListEvent_Add,
         UsersAliasesListEvent_Delete',
         ..
       ),
 
     -- * UsersAliasesWatchEvent
     UsersAliasesWatchEvent
-      (
-        UsersAliasesWatchEvent_Add,
+      ( UsersAliasesWatchEvent_Add,
         UsersAliasesWatchEvent_Delete',
         ..
       ),
 
     -- * UsersGetProjection
     UsersGetProjection
-      (
-        UsersGetProjection_Basic,
+      ( UsersGetProjection_Basic,
         UsersGetProjection_Custom,
         UsersGetProjection_Full,
         ..
@@ -291,16 +256,14 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersGetViewType
     UsersGetViewType
-      (
-        UsersGetViewType_AdminView,
+      ( UsersGetViewType_AdminView,
         UsersGetViewType_DomainPublic,
         ..
       ),
 
     -- * UsersListEvent
     UsersListEvent
-      (
-        UsersListEvent_Add,
+      ( UsersListEvent_Add,
         UsersListEvent_Delete',
         UsersListEvent_MakeAdmin,
         UsersListEvent_Undelete,
@@ -310,8 +273,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersListOrderBy
     UsersListOrderBy
-      (
-        UsersListOrderBy_Email,
+      ( UsersListOrderBy_Email,
         UsersListOrderBy_FamilyName,
         UsersListOrderBy_GivenName,
         ..
@@ -319,8 +281,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersListProjection
     UsersListProjection
-      (
-        UsersListProjection_Basic,
+      ( UsersListProjection_Basic,
         UsersListProjection_Custom,
         UsersListProjection_Full,
         ..
@@ -328,24 +289,21 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersListSortOrder
     UsersListSortOrder
-      (
-        UsersListSortOrder_Ascending,
+      ( UsersListSortOrder_Ascending,
         UsersListSortOrder_Descending,
         ..
       ),
 
     -- * UsersListViewType
     UsersListViewType
-      (
-        UsersListViewType_AdminView,
+      ( UsersListViewType_AdminView,
         UsersListViewType_DomainPublic,
         ..
       ),
 
     -- * UsersWatchEvent
     UsersWatchEvent
-      (
-        UsersWatchEvent_Add,
+      ( UsersWatchEvent_Add,
         UsersWatchEvent_Delete',
         UsersWatchEvent_MakeAdmin,
         UsersWatchEvent_Undelete,
@@ -355,8 +313,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersWatchOrderBy
     UsersWatchOrderBy
-      (
-        UsersWatchOrderBy_Email,
+      ( UsersWatchOrderBy_Email,
         UsersWatchOrderBy_FamilyName,
         UsersWatchOrderBy_GivenName,
         ..
@@ -364,8 +321,7 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersWatchProjection
     UsersWatchProjection
-      (
-        UsersWatchProjection_Basic,
+      ( UsersWatchProjection_Basic,
         UsersWatchProjection_Custom,
         UsersWatchProjection_Full,
         ..
@@ -373,35 +329,34 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersWatchSortOrder
     UsersWatchSortOrder
-      (
-        UsersWatchSortOrder_Ascending,
+      ( UsersWatchSortOrder_Ascending,
         UsersWatchSortOrder_Descending,
         ..
       ),
 
     -- * UsersWatchViewType
     UsersWatchViewType
-      (
-        UsersWatchViewType_AdminView,
+      ( UsersWatchViewType_AdminView,
         UsersWatchViewType_DomainPublic,
         ..
       ),
-  ) where
+  )
+where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -414,20 +369,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Message severity
-newtype AuxiliaryMessage_Severity = AuxiliaryMessage_Severity { fromAuxiliaryMessage_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuxiliaryMessage_Severity = AuxiliaryMessage_Severity {fromAuxiliaryMessage_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Message type unspecified.
 pattern AuxiliaryMessage_Severity_SEVERITYUNSPECIFIED :: AuxiliaryMessage_Severity
@@ -450,20 +406,21 @@ pattern AuxiliaryMessage_Severity_SEVERITYERROR = AuxiliaryMessage_Severity "SEV
   AuxiliaryMessage_Severity_SEVERITYINFO,
   AuxiliaryMessage_Severity_SEVERITYWARNING,
   AuxiliaryMessage_Severity_SEVERITYERROR,
-  AuxiliaryMessage_Severity #-}
+  AuxiliaryMessage_Severity
+  #-}
 
 -- | Indicates the command state.
-newtype DirectoryChromeosdevicesCommand_State = DirectoryChromeosdevicesCommand_State { fromDirectoryChromeosdevicesCommand_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DirectoryChromeosdevicesCommand_State = DirectoryChromeosdevicesCommand_State {fromDirectoryChromeosdevicesCommand_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The command status was unspecified.
 pattern DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED :: DirectoryChromeosdevicesCommand_State
@@ -501,20 +458,21 @@ pattern DirectoryChromeosdevicesCommand_State_EXECUTEDBYCLIENT = DirectoryChrome
   DirectoryChromeosdevicesCommand_State_SENTTOCLIENT,
   DirectoryChromeosdevicesCommand_State_ACKEDBYCLIENT,
   DirectoryChromeosdevicesCommand_State_EXECUTEDBYCLIENT,
-  DirectoryChromeosdevicesCommand_State #-}
+  DirectoryChromeosdevicesCommand_State
+  #-}
 
 -- | The type of the command.
-newtype DirectoryChromeosdevicesCommand_Type = DirectoryChromeosdevicesCommand_Type { fromDirectoryChromeosdevicesCommand_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DirectoryChromeosdevicesCommand_Type = DirectoryChromeosdevicesCommand_Type {fromDirectoryChromeosdevicesCommand_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The command type was unspecified.
 pattern DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED :: DirectoryChromeosdevicesCommand_Type
@@ -547,20 +505,21 @@ pattern DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH = DirectoryChromeos
   DirectoryChromeosdevicesCommand_Type_SETVOLUME,
   DirectoryChromeosdevicesCommand_Type_WIPEUSERS,
   DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
-  DirectoryChromeosdevicesCommand_Type #-}
+  DirectoryChromeosdevicesCommand_Type
+  #-}
 
 -- | The result of the command.
-newtype DirectoryChromeosdevicesCommandResult_Result = DirectoryChromeosdevicesCommandResult_Result { fromDirectoryChromeosdevicesCommandResult_Result :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DirectoryChromeosdevicesCommandResult_Result = DirectoryChromeosdevicesCommandResult_Result {fromDirectoryChromeosdevicesCommandResult_Result :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The command result was unspecified.
 pattern DirectoryChromeosdevicesCommandResult_Result_COMMANDRESULTTYPEUNSPECIFIED :: DirectoryChromeosdevicesCommandResult_Result
@@ -583,20 +542,21 @@ pattern DirectoryChromeosdevicesCommandResult_Result_Success = DirectoryChromeos
   DirectoryChromeosdevicesCommandResult_Result_Ignored,
   DirectoryChromeosdevicesCommandResult_Result_Failure,
   DirectoryChromeosdevicesCommandResult_Result_Success,
-  DirectoryChromeosdevicesCommandResult_Result #-}
+  DirectoryChromeosdevicesCommandResult_Result
+  #-}
 
 -- | The type of command.
-newtype DirectoryChromeosdevicesIssueCommandRequest_CommandType = DirectoryChromeosdevicesIssueCommandRequest_CommandType { fromDirectoryChromeosdevicesIssueCommandRequest_CommandType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DirectoryChromeosdevicesIssueCommandRequest_CommandType = DirectoryChromeosdevicesIssueCommandRequest_CommandType {fromDirectoryChromeosdevicesIssueCommandRequest_CommandType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The command type was unspecified.
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
@@ -629,20 +589,21 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH 
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_SETVOLUME,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_WIPEUSERS,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
-  DirectoryChromeosdevicesIssueCommandRequest_CommandType #-}
+  DirectoryChromeosdevicesIssueCommandRequest_CommandType
+  #-}
 
 -- | Canonical code for why the update failed to apply.
-newtype FailureInfo_ErrorCode = FailureInfo_ErrorCode { fromFailureInfo_ErrorCode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FailureInfo_ErrorCode = FailureInfo_ErrorCode {fromFailureInfo_ErrorCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not an error; returned on success HTTP Mapping: 200 OK
 pattern FailureInfo_ErrorCode_OK :: FailureInfo_ErrorCode
@@ -730,20 +691,21 @@ pattern FailureInfo_ErrorCode_DATALOSS = FailureInfo_ErrorCode "DATA_LOSS"
   FailureInfo_ErrorCode_Internal,
   FailureInfo_ErrorCode_Unavailable,
   FailureInfo_ErrorCode_DATALOSS,
-  FailureInfo_ErrorCode #-}
+  FailureInfo_ErrorCode
+  #-}
 
 -- | Determines whether the response contains the full list of properties or only a subset.
-newtype ChromeosdevicesGetProjection = ChromeosdevicesGetProjection { fromChromeosdevicesGetProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ChromeosdevicesGetProjection = ChromeosdevicesGetProjection {fromChromeosdevicesGetProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesGetProjection_Basic :: ChromeosdevicesGetProjection
@@ -756,20 +718,21 @@ pattern ChromeosdevicesGetProjection_Full = ChromeosdevicesGetProjection "FULL"
 {-# COMPLETE
   ChromeosdevicesGetProjection_Basic,
   ChromeosdevicesGetProjection_Full,
-  ChromeosdevicesGetProjection #-}
+  ChromeosdevicesGetProjection
+  #-}
 
 -- | Device property to use for sorting results.
-newtype ChromeosdevicesListOrderBy = ChromeosdevicesListOrderBy { fromChromeosdevicesListOrderBy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ChromeosdevicesListOrderBy = ChromeosdevicesListOrderBy {fromChromeosdevicesListOrderBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Chrome device location as annotated by the administrator.
 pattern ChromeosdevicesListOrderBy_AnnotatedLocation :: ChromeosdevicesListOrderBy
@@ -807,20 +770,21 @@ pattern ChromeosdevicesListOrderBy_SupportEndDate = ChromeosdevicesListOrderBy "
   ChromeosdevicesListOrderBy_SerialNumber,
   ChromeosdevicesListOrderBy_Status,
   ChromeosdevicesListOrderBy_SupportEndDate,
-  ChromeosdevicesListOrderBy #-}
+  ChromeosdevicesListOrderBy
+  #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype ChromeosdevicesListProjection = ChromeosdevicesListProjection { fromChromeosdevicesListProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ChromeosdevicesListProjection = ChromeosdevicesListProjection {fromChromeosdevicesListProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesListProjection_Basic :: ChromeosdevicesListProjection
@@ -833,20 +797,21 @@ pattern ChromeosdevicesListProjection_Full = ChromeosdevicesListProjection "FULL
 {-# COMPLETE
   ChromeosdevicesListProjection_Basic,
   ChromeosdevicesListProjection_Full,
-  ChromeosdevicesListProjection #-}
+  ChromeosdevicesListProjection
+  #-}
 
 -- | Whether to return results in ascending or descending order. Must be used with the @orderBy@ parameter.
-newtype ChromeosdevicesListSortOrder = ChromeosdevicesListSortOrder { fromChromeosdevicesListSortOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ChromeosdevicesListSortOrder = ChromeosdevicesListSortOrder {fromChromeosdevicesListSortOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Ascending order.
 pattern ChromeosdevicesListSortOrder_Ascending :: ChromeosdevicesListSortOrder
@@ -859,20 +824,21 @@ pattern ChromeosdevicesListSortOrder_Descending = ChromeosdevicesListSortOrder "
 {-# COMPLETE
   ChromeosdevicesListSortOrder_Ascending,
   ChromeosdevicesListSortOrder_Descending,
-  ChromeosdevicesListSortOrder #-}
+  ChromeosdevicesListSortOrder
+  #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype ChromeosdevicesPatchProjection = ChromeosdevicesPatchProjection { fromChromeosdevicesPatchProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ChromeosdevicesPatchProjection = ChromeosdevicesPatchProjection {fromChromeosdevicesPatchProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesPatchProjection_Basic :: ChromeosdevicesPatchProjection
@@ -885,20 +851,21 @@ pattern ChromeosdevicesPatchProjection_Full = ChromeosdevicesPatchProjection "FU
 {-# COMPLETE
   ChromeosdevicesPatchProjection_Basic,
   ChromeosdevicesPatchProjection_Full,
-  ChromeosdevicesPatchProjection #-}
+  ChromeosdevicesPatchProjection
+  #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype ChromeosdevicesUpdateProjection = ChromeosdevicesUpdateProjection { fromChromeosdevicesUpdateProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ChromeosdevicesUpdateProjection = ChromeosdevicesUpdateProjection {fromChromeosdevicesUpdateProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesUpdateProjection_Basic :: ChromeosdevicesUpdateProjection
@@ -911,20 +878,21 @@ pattern ChromeosdevicesUpdateProjection_Full = ChromeosdevicesUpdateProjection "
 {-# COMPLETE
   ChromeosdevicesUpdateProjection_Basic,
   ChromeosdevicesUpdateProjection_Full,
-  ChromeosdevicesUpdateProjection #-}
+  ChromeosdevicesUpdateProjection
+  #-}
 
 -- | Column to use for sorting results
-newtype GroupsListOrderBy = GroupsListOrderBy { fromGroupsListOrderBy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupsListOrderBy = GroupsListOrderBy {fromGroupsListOrderBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Email of the group.
 pattern GroupsListOrderBy_Email :: GroupsListOrderBy
@@ -932,20 +900,21 @@ pattern GroupsListOrderBy_Email = GroupsListOrderBy "email"
 
 {-# COMPLETE
   GroupsListOrderBy_Email,
-  GroupsListOrderBy #-}
+  GroupsListOrderBy
+  #-}
 
 -- | Whether to return results in ascending or descending order. Only of use when orderBy is also used
-newtype GroupsListSortOrder = GroupsListSortOrder { fromGroupsListSortOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupsListSortOrder = GroupsListSortOrder {fromGroupsListSortOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Ascending order.
 pattern GroupsListSortOrder_Ascending :: GroupsListSortOrder
@@ -958,20 +927,21 @@ pattern GroupsListSortOrder_Descending = GroupsListSortOrder "DESCENDING"
 {-# COMPLETE
   GroupsListSortOrder_Ascending,
   GroupsListSortOrder_Descending,
-  GroupsListSortOrder #-}
+  GroupsListSortOrder
+  #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype MobiledevicesGetProjection = MobiledevicesGetProjection { fromMobiledevicesGetProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobiledevicesGetProjection = MobiledevicesGetProjection {fromMobiledevicesGetProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, model, status, type, and status)
 pattern MobiledevicesGetProjection_Basic :: MobiledevicesGetProjection
@@ -984,20 +954,21 @@ pattern MobiledevicesGetProjection_Full = MobiledevicesGetProjection "FULL"
 {-# COMPLETE
   MobiledevicesGetProjection_Basic,
   MobiledevicesGetProjection_Full,
-  MobiledevicesGetProjection #-}
+  MobiledevicesGetProjection
+  #-}
 
 -- | Device property to use for sorting results.
-newtype MobiledevicesListOrderBy = MobiledevicesListOrderBy { fromMobiledevicesListOrderBy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobiledevicesListOrderBy = MobiledevicesListOrderBy {fromMobiledevicesListOrderBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The serial number for a Google Sync mobile device. For Android devices, this is a software generated unique identifier.
 pattern MobiledevicesListOrderBy_DeviceId :: MobiledevicesListOrderBy
@@ -1040,20 +1011,21 @@ pattern MobiledevicesListOrderBy_Type = MobiledevicesListOrderBy "type"
   MobiledevicesListOrderBy_OS,
   MobiledevicesListOrderBy_Status,
   MobiledevicesListOrderBy_Type,
-  MobiledevicesListOrderBy #-}
+  MobiledevicesListOrderBy
+  #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype MobiledevicesListProjection = MobiledevicesListProjection { fromMobiledevicesListProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobiledevicesListProjection = MobiledevicesListProjection {fromMobiledevicesListProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, model, status, type, and status)
 pattern MobiledevicesListProjection_Basic :: MobiledevicesListProjection
@@ -1066,20 +1038,21 @@ pattern MobiledevicesListProjection_Full = MobiledevicesListProjection "FULL"
 {-# COMPLETE
   MobiledevicesListProjection_Basic,
   MobiledevicesListProjection_Full,
-  MobiledevicesListProjection #-}
+  MobiledevicesListProjection
+  #-}
 
 -- | Whether to return results in ascending or descending order. Must be used with the @orderBy@ parameter.
-newtype MobiledevicesListSortOrder = MobiledevicesListSortOrder { fromMobiledevicesListSortOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MobiledevicesListSortOrder = MobiledevicesListSortOrder {fromMobiledevicesListSortOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Ascending order.
 pattern MobiledevicesListSortOrder_Ascending :: MobiledevicesListSortOrder
@@ -1092,20 +1065,21 @@ pattern MobiledevicesListSortOrder_Descending = MobiledevicesListSortOrder "DESC
 {-# COMPLETE
   MobiledevicesListSortOrder_Ascending,
   MobiledevicesListSortOrder_Descending,
-  MobiledevicesListSortOrder #-}
+  MobiledevicesListSortOrder
+  #-}
 
 -- | Whether to return all sub-organizations or just immediate children.
-newtype OrgunitsListType = OrgunitsListType { fromOrgunitsListType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OrgunitsListType = OrgunitsListType {fromOrgunitsListType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | All sub-organizational units.
 pattern OrgunitsListType_All :: OrgunitsListType
@@ -1118,20 +1092,21 @@ pattern OrgunitsListType_Children = OrgunitsListType "children"
 {-# COMPLETE
   OrgunitsListType_All,
   OrgunitsListType_Children,
-  OrgunitsListType #-}
+  OrgunitsListType
+  #-}
 
 -- | Source from which Building.coordinates are derived.
-newtype ResourcesBuildingsInsertCoordinatesSource = ResourcesBuildingsInsertCoordinatesSource { fromResourcesBuildingsInsertCoordinatesSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcesBuildingsInsertCoordinatesSource = ResourcesBuildingsInsertCoordinatesSource {fromResourcesBuildingsInsertCoordinatesSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Building.coordinates are set to the coordinates included in the request.
 pattern ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED :: ResourcesBuildingsInsertCoordinatesSource
@@ -1149,20 +1124,21 @@ pattern ResourcesBuildingsInsertCoordinatesSource_SOURCEUNSPECIFIED = ResourcesB
   ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED,
   ResourcesBuildingsInsertCoordinatesSource_RESOLVEDFROMADDRESS,
   ResourcesBuildingsInsertCoordinatesSource_SOURCEUNSPECIFIED,
-  ResourcesBuildingsInsertCoordinatesSource #-}
+  ResourcesBuildingsInsertCoordinatesSource
+  #-}
 
 -- | Source from which Building.coordinates are derived.
-newtype ResourcesBuildingsPatchCoordinatesSource = ResourcesBuildingsPatchCoordinatesSource { fromResourcesBuildingsPatchCoordinatesSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcesBuildingsPatchCoordinatesSource = ResourcesBuildingsPatchCoordinatesSource {fromResourcesBuildingsPatchCoordinatesSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Building.coordinates are set to the coordinates included in the request.
 pattern ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED :: ResourcesBuildingsPatchCoordinatesSource
@@ -1180,20 +1156,21 @@ pattern ResourcesBuildingsPatchCoordinatesSource_SOURCEUNSPECIFIED = ResourcesBu
   ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED,
   ResourcesBuildingsPatchCoordinatesSource_RESOLVEDFROMADDRESS,
   ResourcesBuildingsPatchCoordinatesSource_SOURCEUNSPECIFIED,
-  ResourcesBuildingsPatchCoordinatesSource #-}
+  ResourcesBuildingsPatchCoordinatesSource
+  #-}
 
 -- | Source from which Building.coordinates are derived.
-newtype ResourcesBuildingsUpdateCoordinatesSource = ResourcesBuildingsUpdateCoordinatesSource { fromResourcesBuildingsUpdateCoordinatesSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourcesBuildingsUpdateCoordinatesSource = ResourcesBuildingsUpdateCoordinatesSource {fromResourcesBuildingsUpdateCoordinatesSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Building.coordinates are set to the coordinates included in the request.
 pattern ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED :: ResourcesBuildingsUpdateCoordinatesSource
@@ -1211,20 +1188,21 @@ pattern ResourcesBuildingsUpdateCoordinatesSource_SOURCEUNSPECIFIED = ResourcesB
   ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED,
   ResourcesBuildingsUpdateCoordinatesSource_RESOLVEDFROMADDRESS,
   ResourcesBuildingsUpdateCoordinatesSource_SOURCEUNSPECIFIED,
-  ResourcesBuildingsUpdateCoordinatesSource #-}
+  ResourcesBuildingsUpdateCoordinatesSource
+  #-}
 
 -- | Events to watch for.
-newtype UsersAliasesListEvent = UsersAliasesListEvent { fromUsersAliasesListEvent :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersAliasesListEvent = UsersAliasesListEvent {fromUsersAliasesListEvent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Alias Created Event
 pattern UsersAliasesListEvent_Add :: UsersAliasesListEvent
@@ -1237,20 +1215,21 @@ pattern UsersAliasesListEvent_Delete' = UsersAliasesListEvent "delete"
 {-# COMPLETE
   UsersAliasesListEvent_Add,
   UsersAliasesListEvent_Delete',
-  UsersAliasesListEvent #-}
+  UsersAliasesListEvent
+  #-}
 
 -- | Events to watch for.
-newtype UsersAliasesWatchEvent = UsersAliasesWatchEvent { fromUsersAliasesWatchEvent :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersAliasesWatchEvent = UsersAliasesWatchEvent {fromUsersAliasesWatchEvent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Alias Created Event
 pattern UsersAliasesWatchEvent_Add :: UsersAliasesWatchEvent
@@ -1263,20 +1242,21 @@ pattern UsersAliasesWatchEvent_Delete' = UsersAliasesWatchEvent "delete"
 {-# COMPLETE
   UsersAliasesWatchEvent_Add,
   UsersAliasesWatchEvent_Delete',
-  UsersAliasesWatchEvent #-}
+  UsersAliasesWatchEvent
+  #-}
 
 -- | What subset of fields to fetch for this user.
-newtype UsersGetProjection = UsersGetProjection { fromUsersGetProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersGetProjection = UsersGetProjection {fromUsersGetProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not include any custom fields for the user.
 pattern UsersGetProjection_Basic :: UsersGetProjection
@@ -1294,20 +1274,21 @@ pattern UsersGetProjection_Full = UsersGetProjection "full"
   UsersGetProjection_Basic,
   UsersGetProjection_Custom,
   UsersGetProjection_Full,
-  UsersGetProjection #-}
+  UsersGetProjection
+  #-}
 
 -- | Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see </admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin Retrieve a user as a non-administrator>.
-newtype UsersGetViewType = UsersGetViewType { fromUsersGetViewType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersGetViewType = UsersGetViewType {fromUsersGetViewType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Results include both administrator-only and domain-public fields for the user.
 pattern UsersGetViewType_AdminView :: UsersGetViewType
@@ -1320,20 +1301,21 @@ pattern UsersGetViewType_DomainPublic = UsersGetViewType "domain_public"
 {-# COMPLETE
   UsersGetViewType_AdminView,
   UsersGetViewType_DomainPublic,
-  UsersGetViewType #-}
+  UsersGetViewType
+  #-}
 
 -- | Event on which subscription is intended (if subscribing)
-newtype UsersListEvent = UsersListEvent { fromUsersListEvent :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersListEvent = UsersListEvent {fromUsersListEvent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | User Created Event
 pattern UsersListEvent_Add :: UsersListEvent
@@ -1361,20 +1343,21 @@ pattern UsersListEvent_Update = UsersListEvent "update"
   UsersListEvent_MakeAdmin,
   UsersListEvent_Undelete,
   UsersListEvent_Update,
-  UsersListEvent #-}
+  UsersListEvent
+  #-}
 
 -- | Property to use for sorting results.
-newtype UsersListOrderBy = UsersListOrderBy { fromUsersListOrderBy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersListOrderBy = UsersListOrderBy {fromUsersListOrderBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Primary email of the user.
 pattern UsersListOrderBy_Email :: UsersListOrderBy
@@ -1392,20 +1375,21 @@ pattern UsersListOrderBy_GivenName = UsersListOrderBy "givenName"
   UsersListOrderBy_Email,
   UsersListOrderBy_FamilyName,
   UsersListOrderBy_GivenName,
-  UsersListOrderBy #-}
+  UsersListOrderBy
+  #-}
 
 -- | What subset of fields to fetch for this user.
-newtype UsersListProjection = UsersListProjection { fromUsersListProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersListProjection = UsersListProjection {fromUsersListProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not include any custom fields for the user.
 pattern UsersListProjection_Basic :: UsersListProjection
@@ -1423,20 +1407,21 @@ pattern UsersListProjection_Full = UsersListProjection "full"
   UsersListProjection_Basic,
   UsersListProjection_Custom,
   UsersListProjection_Full,
-  UsersListProjection #-}
+  UsersListProjection
+  #-}
 
 -- | Whether to return results in ascending or descending order, ignoring case.
-newtype UsersListSortOrder = UsersListSortOrder { fromUsersListSortOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersListSortOrder = UsersListSortOrder {fromUsersListSortOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Ascending order.
 pattern UsersListSortOrder_Ascending :: UsersListSortOrder
@@ -1449,20 +1434,21 @@ pattern UsersListSortOrder_Descending = UsersListSortOrder "DESCENDING"
 {-# COMPLETE
   UsersListSortOrder_Ascending,
   UsersListSortOrder_Descending,
-  UsersListSortOrder #-}
+  UsersListSortOrder
+  #-}
 
 -- | Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see </admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin Retrieve a user as a non-administrator>.
-newtype UsersListViewType = UsersListViewType { fromUsersListViewType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersListViewType = UsersListViewType {fromUsersListViewType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Results include both administrator-only and domain-public fields for the user.
 pattern UsersListViewType_AdminView :: UsersListViewType
@@ -1475,20 +1461,21 @@ pattern UsersListViewType_DomainPublic = UsersListViewType "domain_public"
 {-# COMPLETE
   UsersListViewType_AdminView,
   UsersListViewType_DomainPublic,
-  UsersListViewType #-}
+  UsersListViewType
+  #-}
 
 -- | Events to watch for.
-newtype UsersWatchEvent = UsersWatchEvent { fromUsersWatchEvent :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersWatchEvent = UsersWatchEvent {fromUsersWatchEvent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | User Created Event
 pattern UsersWatchEvent_Add :: UsersWatchEvent
@@ -1516,20 +1503,21 @@ pattern UsersWatchEvent_Update = UsersWatchEvent "update"
   UsersWatchEvent_MakeAdmin,
   UsersWatchEvent_Undelete,
   UsersWatchEvent_Update,
-  UsersWatchEvent #-}
+  UsersWatchEvent
+  #-}
 
 -- | Column to use for sorting results
-newtype UsersWatchOrderBy = UsersWatchOrderBy { fromUsersWatchOrderBy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersWatchOrderBy = UsersWatchOrderBy {fromUsersWatchOrderBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Primary email of the user.
 pattern UsersWatchOrderBy_Email :: UsersWatchOrderBy
@@ -1547,20 +1535,21 @@ pattern UsersWatchOrderBy_GivenName = UsersWatchOrderBy "givenName"
   UsersWatchOrderBy_Email,
   UsersWatchOrderBy_FamilyName,
   UsersWatchOrderBy_GivenName,
-  UsersWatchOrderBy #-}
+  UsersWatchOrderBy
+  #-}
 
 -- | What subset of fields to fetch for this user.
-newtype UsersWatchProjection = UsersWatchProjection { fromUsersWatchProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersWatchProjection = UsersWatchProjection {fromUsersWatchProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not include any custom fields for the user.
 pattern UsersWatchProjection_Basic :: UsersWatchProjection
@@ -1578,20 +1567,21 @@ pattern UsersWatchProjection_Full = UsersWatchProjection "full"
   UsersWatchProjection_Basic,
   UsersWatchProjection_Custom,
   UsersWatchProjection_Full,
-  UsersWatchProjection #-}
+  UsersWatchProjection
+  #-}
 
 -- | Whether to return results in ascending or descending order.
-newtype UsersWatchSortOrder = UsersWatchSortOrder { fromUsersWatchSortOrder :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersWatchSortOrder = UsersWatchSortOrder {fromUsersWatchSortOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Ascending order.
 pattern UsersWatchSortOrder_Ascending :: UsersWatchSortOrder
@@ -1604,20 +1594,21 @@ pattern UsersWatchSortOrder_Descending = UsersWatchSortOrder "DESCENDING"
 {-# COMPLETE
   UsersWatchSortOrder_Ascending,
   UsersWatchSortOrder_Descending,
-  UsersWatchSortOrder #-}
+  UsersWatchSortOrder
+  #-}
 
 -- | Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see </admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin Retrieve a user as a non-administrator>.
-newtype UsersWatchViewType = UsersWatchViewType { fromUsersWatchViewType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UsersWatchViewType = UsersWatchViewType {fromUsersWatchViewType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Results include both administrator-only and domain-public fields.
 pattern UsersWatchViewType_AdminView :: UsersWatchViewType
@@ -1630,4 +1621,5 @@ pattern UsersWatchViewType_DomainPublic = UsersWatchViewType "domain_public"
 {-# COMPLETE
   UsersWatchViewType_AdminView,
   UsersWatchViewType_DomainPublic,
-  UsersWatchViewType #-}
+  UsersWatchViewType
+  #-}

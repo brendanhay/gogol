@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-admin-directory
-version:               0.5.0
-synopsis:              Google Admin SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-admin-directory
+version:            0.5.0
+synopsis:           Google Admin SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
+  Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,148 +31,145 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Admin.Directory
-    , Gogol.Admin.Directory.Admin.Channels.Stop
-    , Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.Commands.Get
-    , Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.IssueCommand
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchCreatePrinters
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Create
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Delete
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Get
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.List
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.ListPrinterModels
-    , Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Patch
-    , Gogol.Admin.Directory.Asps.Delete
-    , Gogol.Admin.Directory.Asps.Get
-    , Gogol.Admin.Directory.Asps.List
-    , Gogol.Admin.Directory.Chromeosdevices.Action
-    , Gogol.Admin.Directory.Chromeosdevices.Get
-    , Gogol.Admin.Directory.Chromeosdevices.List
-    , Gogol.Admin.Directory.Chromeosdevices.MoveDevicesToOu
-    , Gogol.Admin.Directory.Chromeosdevices.Patch
-    , Gogol.Admin.Directory.Chromeosdevices.Update
-    , Gogol.Admin.Directory.Customers.Get
-    , Gogol.Admin.Directory.Customers.Patch
-    , Gogol.Admin.Directory.Customers.Update
-    , Gogol.Admin.Directory.DomainAliases.Delete
-    , Gogol.Admin.Directory.DomainAliases.Get
-    , Gogol.Admin.Directory.DomainAliases.Insert
-    , Gogol.Admin.Directory.DomainAliases.List
-    , Gogol.Admin.Directory.Domains.Delete
-    , Gogol.Admin.Directory.Domains.Get
-    , Gogol.Admin.Directory.Domains.Insert
-    , Gogol.Admin.Directory.Domains.List
-    , Gogol.Admin.Directory.Groups.Aliases.Delete
-    , Gogol.Admin.Directory.Groups.Aliases.Insert
-    , Gogol.Admin.Directory.Groups.Aliases.List
-    , Gogol.Admin.Directory.Groups.Delete
-    , Gogol.Admin.Directory.Groups.Get
-    , Gogol.Admin.Directory.Groups.Insert
-    , Gogol.Admin.Directory.Groups.List
-    , Gogol.Admin.Directory.Groups.Patch
-    , Gogol.Admin.Directory.Groups.Update
-    , Gogol.Admin.Directory.Members.Delete
-    , Gogol.Admin.Directory.Members.Get
-    , Gogol.Admin.Directory.Members.HasMember
-    , Gogol.Admin.Directory.Members.Insert
-    , Gogol.Admin.Directory.Members.List
-    , Gogol.Admin.Directory.Members.Patch
-    , Gogol.Admin.Directory.Members.Update
-    , Gogol.Admin.Directory.Mobiledevices.Action
-    , Gogol.Admin.Directory.Mobiledevices.Delete
-    , Gogol.Admin.Directory.Mobiledevices.Get
-    , Gogol.Admin.Directory.Mobiledevices.List
-    , Gogol.Admin.Directory.Orgunits.Delete
-    , Gogol.Admin.Directory.Orgunits.Get
-    , Gogol.Admin.Directory.Orgunits.Insert
-    , Gogol.Admin.Directory.Orgunits.List
-    , Gogol.Admin.Directory.Orgunits.Patch
-    , Gogol.Admin.Directory.Orgunits.Update
-    , Gogol.Admin.Directory.Privileges.List
-    , Gogol.Admin.Directory.Resources.Buildings.Delete
-    , Gogol.Admin.Directory.Resources.Buildings.Get
-    , Gogol.Admin.Directory.Resources.Buildings.Insert
-    , Gogol.Admin.Directory.Resources.Buildings.List
-    , Gogol.Admin.Directory.Resources.Buildings.Patch
-    , Gogol.Admin.Directory.Resources.Buildings.Update
-    , Gogol.Admin.Directory.Resources.Calendars.Delete
-    , Gogol.Admin.Directory.Resources.Calendars.Get
-    , Gogol.Admin.Directory.Resources.Calendars.Insert
-    , Gogol.Admin.Directory.Resources.Calendars.List
-    , Gogol.Admin.Directory.Resources.Calendars.Patch
-    , Gogol.Admin.Directory.Resources.Calendars.Update
-    , Gogol.Admin.Directory.Resources.Features.Delete
-    , Gogol.Admin.Directory.Resources.Features.Get
-    , Gogol.Admin.Directory.Resources.Features.Insert
-    , Gogol.Admin.Directory.Resources.Features.List
-    , Gogol.Admin.Directory.Resources.Features.Patch
-    , Gogol.Admin.Directory.Resources.Features.Rename
-    , Gogol.Admin.Directory.Resources.Features.Update
-    , Gogol.Admin.Directory.RoleAssignments.Delete
-    , Gogol.Admin.Directory.RoleAssignments.Get
-    , Gogol.Admin.Directory.RoleAssignments.Insert
-    , Gogol.Admin.Directory.RoleAssignments.List
-    , Gogol.Admin.Directory.Roles.Delete
-    , Gogol.Admin.Directory.Roles.Get
-    , Gogol.Admin.Directory.Roles.Insert
-    , Gogol.Admin.Directory.Roles.List
-    , Gogol.Admin.Directory.Roles.Patch
-    , Gogol.Admin.Directory.Roles.Update
-    , Gogol.Admin.Directory.Schemas.Delete
-    , Gogol.Admin.Directory.Schemas.Get
-    , Gogol.Admin.Directory.Schemas.Insert
-    , Gogol.Admin.Directory.Schemas.List
-    , Gogol.Admin.Directory.Schemas.Patch
-    , Gogol.Admin.Directory.Schemas.Update
-    , Gogol.Admin.Directory.Tokens.Delete
-    , Gogol.Admin.Directory.Tokens.Get
-    , Gogol.Admin.Directory.Tokens.List
-    , Gogol.Admin.Directory.TwoStepVerification.TurnOff
-    , Gogol.Admin.Directory.Types
-    , Gogol.Admin.Directory.Users.Aliases.Delete
-    , Gogol.Admin.Directory.Users.Aliases.Insert
-    , Gogol.Admin.Directory.Users.Aliases.List
-    , Gogol.Admin.Directory.Users.Aliases.Watch
-    , Gogol.Admin.Directory.Users.Delete
-    , Gogol.Admin.Directory.Users.Get
-    , Gogol.Admin.Directory.Users.Insert
-    , Gogol.Admin.Directory.Users.List
-    , Gogol.Admin.Directory.Users.MakeAdmin
-    , Gogol.Admin.Directory.Users.Patch
-    , Gogol.Admin.Directory.Users.Photos.Delete
-    , Gogol.Admin.Directory.Users.Photos.Get
-    , Gogol.Admin.Directory.Users.Photos.Patch
-    , Gogol.Admin.Directory.Users.Photos.Update
-    , Gogol.Admin.Directory.Users.SignOut
-    , Gogol.Admin.Directory.Users.Undelete
-    , Gogol.Admin.Directory.Users.Update
-    , Gogol.Admin.Directory.Users.Watch
-    , Gogol.Admin.Directory.VerificationCodes.Generate
-    , Gogol.Admin.Directory.VerificationCodes.Invalidate
-    , Gogol.Admin.Directory.VerificationCodes.List
+    Gogol.Admin.Directory
+    Gogol.Admin.Directory.Admin.Channels.Stop
+    Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.Commands.Get
+    Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.IssueCommand
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchCreatePrinters
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Create
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Delete
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Get
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.List
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.ListPrinterModels
+    Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Patch
+    Gogol.Admin.Directory.Asps.Delete
+    Gogol.Admin.Directory.Asps.Get
+    Gogol.Admin.Directory.Asps.List
+    Gogol.Admin.Directory.Chromeosdevices.Action
+    Gogol.Admin.Directory.Chromeosdevices.Get
+    Gogol.Admin.Directory.Chromeosdevices.List
+    Gogol.Admin.Directory.Chromeosdevices.MoveDevicesToOu
+    Gogol.Admin.Directory.Chromeosdevices.Patch
+    Gogol.Admin.Directory.Chromeosdevices.Update
+    Gogol.Admin.Directory.Customers.Get
+    Gogol.Admin.Directory.Customers.Patch
+    Gogol.Admin.Directory.Customers.Update
+    Gogol.Admin.Directory.DomainAliases.Delete
+    Gogol.Admin.Directory.DomainAliases.Get
+    Gogol.Admin.Directory.DomainAliases.Insert
+    Gogol.Admin.Directory.DomainAliases.List
+    Gogol.Admin.Directory.Domains.Delete
+    Gogol.Admin.Directory.Domains.Get
+    Gogol.Admin.Directory.Domains.Insert
+    Gogol.Admin.Directory.Domains.List
+    Gogol.Admin.Directory.Groups.Aliases.Delete
+    Gogol.Admin.Directory.Groups.Aliases.Insert
+    Gogol.Admin.Directory.Groups.Aliases.List
+    Gogol.Admin.Directory.Groups.Delete
+    Gogol.Admin.Directory.Groups.Get
+    Gogol.Admin.Directory.Groups.Insert
+    Gogol.Admin.Directory.Groups.List
+    Gogol.Admin.Directory.Groups.Patch
+    Gogol.Admin.Directory.Groups.Update
+    Gogol.Admin.Directory.Members.Delete
+    Gogol.Admin.Directory.Members.Get
+    Gogol.Admin.Directory.Members.HasMember
+    Gogol.Admin.Directory.Members.Insert
+    Gogol.Admin.Directory.Members.List
+    Gogol.Admin.Directory.Members.Patch
+    Gogol.Admin.Directory.Members.Update
+    Gogol.Admin.Directory.Mobiledevices.Action
+    Gogol.Admin.Directory.Mobiledevices.Delete
+    Gogol.Admin.Directory.Mobiledevices.Get
+    Gogol.Admin.Directory.Mobiledevices.List
+    Gogol.Admin.Directory.Orgunits.Delete
+    Gogol.Admin.Directory.Orgunits.Get
+    Gogol.Admin.Directory.Orgunits.Insert
+    Gogol.Admin.Directory.Orgunits.List
+    Gogol.Admin.Directory.Orgunits.Patch
+    Gogol.Admin.Directory.Orgunits.Update
+    Gogol.Admin.Directory.Privileges.List
+    Gogol.Admin.Directory.Resources.Buildings.Delete
+    Gogol.Admin.Directory.Resources.Buildings.Get
+    Gogol.Admin.Directory.Resources.Buildings.Insert
+    Gogol.Admin.Directory.Resources.Buildings.List
+    Gogol.Admin.Directory.Resources.Buildings.Patch
+    Gogol.Admin.Directory.Resources.Buildings.Update
+    Gogol.Admin.Directory.Resources.Calendars.Delete
+    Gogol.Admin.Directory.Resources.Calendars.Get
+    Gogol.Admin.Directory.Resources.Calendars.Insert
+    Gogol.Admin.Directory.Resources.Calendars.List
+    Gogol.Admin.Directory.Resources.Calendars.Patch
+    Gogol.Admin.Directory.Resources.Calendars.Update
+    Gogol.Admin.Directory.Resources.Features.Delete
+    Gogol.Admin.Directory.Resources.Features.Get
+    Gogol.Admin.Directory.Resources.Features.Insert
+    Gogol.Admin.Directory.Resources.Features.List
+    Gogol.Admin.Directory.Resources.Features.Patch
+    Gogol.Admin.Directory.Resources.Features.Rename
+    Gogol.Admin.Directory.Resources.Features.Update
+    Gogol.Admin.Directory.RoleAssignments.Delete
+    Gogol.Admin.Directory.RoleAssignments.Get
+    Gogol.Admin.Directory.RoleAssignments.Insert
+    Gogol.Admin.Directory.RoleAssignments.List
+    Gogol.Admin.Directory.Roles.Delete
+    Gogol.Admin.Directory.Roles.Get
+    Gogol.Admin.Directory.Roles.Insert
+    Gogol.Admin.Directory.Roles.List
+    Gogol.Admin.Directory.Roles.Patch
+    Gogol.Admin.Directory.Roles.Update
+    Gogol.Admin.Directory.Schemas.Delete
+    Gogol.Admin.Directory.Schemas.Get
+    Gogol.Admin.Directory.Schemas.Insert
+    Gogol.Admin.Directory.Schemas.List
+    Gogol.Admin.Directory.Schemas.Patch
+    Gogol.Admin.Directory.Schemas.Update
+    Gogol.Admin.Directory.Tokens.Delete
+    Gogol.Admin.Directory.Tokens.Get
+    Gogol.Admin.Directory.Tokens.List
+    Gogol.Admin.Directory.TwoStepVerification.TurnOff
+    Gogol.Admin.Directory.Types
+    Gogol.Admin.Directory.Users.Aliases.Delete
+    Gogol.Admin.Directory.Users.Aliases.Insert
+    Gogol.Admin.Directory.Users.Aliases.List
+    Gogol.Admin.Directory.Users.Aliases.Watch
+    Gogol.Admin.Directory.Users.Delete
+    Gogol.Admin.Directory.Users.Get
+    Gogol.Admin.Directory.Users.Insert
+    Gogol.Admin.Directory.Users.List
+    Gogol.Admin.Directory.Users.MakeAdmin
+    Gogol.Admin.Directory.Users.Patch
+    Gogol.Admin.Directory.Users.Photos.Delete
+    Gogol.Admin.Directory.Users.Photos.Get
+    Gogol.Admin.Directory.Users.Photos.Patch
+    Gogol.Admin.Directory.Users.Photos.Update
+    Gogol.Admin.Directory.Users.SignOut
+    Gogol.Admin.Directory.Users.Undelete
+    Gogol.Admin.Directory.Users.Update
+    Gogol.Admin.Directory.Users.Watch
+    Gogol.Admin.Directory.VerificationCodes.Generate
+    Gogol.Admin.Directory.VerificationCodes.Invalidate
+    Gogol.Admin.Directory.VerificationCodes.List
 
   other-modules:
-      Gogol.Admin.Directory.Internal.Product
-    , Gogol.Admin.Directory.Internal.Sum
+    Gogol.Admin.Directory.Internal.Product
+    Gogol.Admin.Directory.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
