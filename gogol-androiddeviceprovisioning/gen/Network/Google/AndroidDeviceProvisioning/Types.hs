@@ -1,367 +1,254 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AndroidDeviceProvisioning.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.AndroidDeviceProvisioning.Types
-    (
-    -- * Service Configuration
-      androidDeviceProvisioningService
+  ( -- * Configuration
+    androidDeviceProvisioningService,
 
-    -- * UpdateMetadataArguments
-    , UpdateMetadataArguments
-    , updateMetadataArguments
-    , umaDeviceIdentifier
-    , umaDeviceId
-    , umaDeviceMetadata
+    -- * Types
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * PartnerClaim
-    , PartnerClaim
-    , partnerClaim
-    , pcDeviceIdentifier
-    , pcSectionType
-    , pcCustomerId
-    , pcDeviceMetadata
+    -- ** ClaimDeviceRequest
+    ClaimDeviceRequest (..),
+    newClaimDeviceRequest,
 
-    -- * CustomerUnclaimDeviceRequest
-    , CustomerUnclaimDeviceRequest
-    , customerUnclaimDeviceRequest
-    , cudrDevice
+    -- ** ClaimDeviceRequest_SectionType
+    ClaimDeviceRequest_SectionType (..),
 
-    -- * PerDeviceStatusInBatchStatus
-    , PerDeviceStatusInBatchStatus (..)
+    -- ** ClaimDeviceResponse
+    ClaimDeviceResponse (..),
+    newClaimDeviceResponse,
 
-    -- * FindDevicesByOwnerRequestSectionType
-    , FindDevicesByOwnerRequestSectionType (..)
+    -- ** ClaimDevicesRequest
+    ClaimDevicesRequest (..),
+    newClaimDevicesRequest,
 
-    -- * FindDevicesByDeviceIdentifierRequest
-    , FindDevicesByDeviceIdentifierRequest
-    , findDevicesByDeviceIdentifierRequest
-    , fdbdirDeviceIdentifier
-    , fdbdirLimit
-    , fdbdirPageToken
+    -- ** Company
+    Company (..),
+    newCompany,
 
-    -- * FindDevicesByOwnerResponse
-    , FindDevicesByOwnerResponse
-    , findDevicesByOwnerResponse
-    , fdborNextPageToken
-    , fdborTotalSize
-    , fdborDevices
+    -- ** Company_TermsStatus
+    Company_TermsStatus (..),
 
-    -- * DeviceMetadataEntries
-    , DeviceMetadataEntries
-    , deviceMetadataEntries
-    , dmeAddtional
+    -- ** Configuration
+    Configuration (..),
+    newConfiguration,
 
-    -- * PartnerUnclaim
-    , PartnerUnclaim
-    , partnerUnclaim
-    , puDeviceIdentifier
-    , puSectionType
-    , puVacationModeExpireTime
-    , puVacationModeDays
-    , puDeviceId
+    -- ** CreateCustomerRequest
+    CreateCustomerRequest (..),
+    newCreateCustomerRequest,
 
-    -- * Dpc
-    , Dpc
-    , dpc
-    , dPackageName
-    , dName
-    , dDpcName
+    -- ** CustomerApplyConfigurationRequest
+    CustomerApplyConfigurationRequest (..),
+    newCustomerApplyConfigurationRequest,
 
-    -- * ListVendorCustomersResponse
-    , ListVendorCustomersResponse
-    , listVendorCustomersResponse
-    , lvcrCustomers
-    , lvcrNextPageToken
-    , lvcrTotalSize
+    -- ** CustomerListConfigurationsResponse
+    CustomerListConfigurationsResponse (..),
+    newCustomerListConfigurationsResponse,
 
-    -- * OperationPerDevice
-    , OperationPerDevice
-    , operationPerDevice
-    , opdUpdateMetadata
-    , opdResult
-    , opdClaim
-    , opdUnclaim
+    -- ** CustomerListCustomersResponse
+    CustomerListCustomersResponse (..),
+    newCustomerListCustomersResponse,
 
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
+    -- ** CustomerListDevicesResponse
+    CustomerListDevicesResponse (..),
+    newCustomerListDevicesResponse,
 
-    -- * Empty
-    , Empty
-    , empty
+    -- ** CustomerListDpcsResponse
+    CustomerListDpcsResponse (..),
+    newCustomerListDpcsResponse,
 
-    -- * PartnerClaimSectionType
-    , PartnerClaimSectionType (..)
+    -- ** CustomerRemoveConfigurationRequest
+    CustomerRemoveConfigurationRequest (..),
+    newCustomerRemoveConfigurationRequest,
 
-    -- * PerDeviceStatusInBatch
-    , PerDeviceStatusInBatch
-    , perDeviceStatusInBatch
-    , pdsibStatus
-    , pdsibErrorIdentifier
-    , pdsibDeviceId
-    , pdsibErrorMessage
+    -- ** CustomerUnclaimDeviceRequest
+    CustomerUnclaimDeviceRequest (..),
+    newCustomerUnclaimDeviceRequest,
 
-    -- * ClaimDevicesRequest
-    , ClaimDevicesRequest
-    , claimDevicesRequest
-    , cdrClaims
+    -- ** Device
+    Device (..),
+    newDevice,
 
-    -- * Device
-    , Device
-    , device
-    , devDeviceIdentifier
-    , devClaims
-    , devName
-    , devDeviceId
-    , devDeviceMetadata
-    , devConfiguration
+    -- ** DeviceClaim
+    DeviceClaim (..),
+    newDeviceClaim,
 
-    -- * ClaimDeviceRequest
-    , ClaimDeviceRequest
-    , claimDeviceRequest
-    , cdrDeviceIdentifier
-    , cdrSectionType
-    , cdrCustomerId
-    , cdrDeviceMetadata
+    -- ** DeviceClaim_AdditionalService
+    DeviceClaim_AdditionalService (..),
 
-    -- * DeviceReference
-    , DeviceReference
-    , deviceReference
-    , drDeviceIdentifier
-    , drDeviceId
+    -- ** DeviceClaim_SectionType
+    DeviceClaim_SectionType (..),
 
-    -- * CustomerRemoveConfigurationRequest
-    , CustomerRemoveConfigurationRequest
-    , customerRemoveConfigurationRequest
-    , crcrDevice
+    -- ** DeviceIdentifier
+    DeviceIdentifier (..),
+    newDeviceIdentifier,
 
-    -- * DeviceIdentifier
-    , DeviceIdentifier
-    , deviceIdentifier
-    , diManufacturer
-    , diModel
-    , diMeid
-    , diImei
-    , diSerialNumber
+    -- ** DeviceMetadata
+    DeviceMetadata (..),
+    newDeviceMetadata,
 
-    -- * UnclaimDevicesRequest
-    , UnclaimDevicesRequest
-    , unclaimDevicesRequest
-    , udrUnclaims
+    -- ** DeviceMetadata_Entries
+    DeviceMetadata_Entries (..),
+    newDeviceMetadata_Entries,
 
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
+    -- ** DeviceReference
+    DeviceReference (..),
+    newDeviceReference,
 
-    -- * ListVendorsResponse
-    , ListVendorsResponse
-    , listVendorsResponse
-    , lvrNextPageToken
-    , lvrTotalSize
-    , lvrVendors
+    -- ** DevicesLongRunningOperationMetadata
+    DevicesLongRunningOperationMetadata (..),
+    newDevicesLongRunningOperationMetadata,
 
-    -- * CustomerListConfigurationsResponse
-    , CustomerListConfigurationsResponse
-    , customerListConfigurationsResponse
-    , clcrConfigurations
+    -- ** DevicesLongRunningOperationMetadata_ProcessingStatus
+    DevicesLongRunningOperationMetadata_ProcessingStatus (..),
 
-    -- * PartnerUnclaimSectionType
-    , PartnerUnclaimSectionType (..)
+    -- ** DevicesLongRunningOperationResponse
+    DevicesLongRunningOperationResponse (..),
+    newDevicesLongRunningOperationResponse,
 
-    -- * CustomerApplyConfigurationRequest
-    , CustomerApplyConfigurationRequest
-    , customerApplyConfigurationRequest
-    , cacrDevice
-    , cacrConfiguration
+    -- ** Dpc
+    Dpc (..),
+    newDpc,
 
-    -- * Company
-    , Company
-    , company
-    , cLanguageCode
-    , cCompanyId
-    , cCompanyName
-    , cOwnerEmails
-    , cTermsStatus
-    , cName
-    , cSkipWelcomeEmail
-    , cAdminEmails
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** FindDevicesByDeviceIdentifierRequest
+    FindDevicesByDeviceIdentifierRequest (..),
+    newFindDevicesByDeviceIdentifierRequest,
 
-    -- * ClaimDeviceRequestSectionType
-    , ClaimDeviceRequestSectionType (..)
+    -- ** FindDevicesByDeviceIdentifierResponse
+    FindDevicesByDeviceIdentifierResponse (..),
+    newFindDevicesByDeviceIdentifierResponse,
 
-    -- * CustomerListCustomersResponse
-    , CustomerListCustomersResponse
-    , customerListCustomersResponse
-    , clcrCustomers
-    , clcrNextPageToken
+    -- ** FindDevicesByOwnerRequest
+    FindDevicesByOwnerRequest (..),
+    newFindDevicesByOwnerRequest,
 
-    -- * DeviceClaim
-    , DeviceClaim
-    , deviceClaim
-    , dcSectionType
-    , dcAdditionalService
-    , dcVacationModeExpireTime
-    , dcVacationModeStartTime
-    , dcOwnerCompanyId
-    , dcResellerId
+    -- ** FindDevicesByOwnerRequest_SectionType
+    FindDevicesByOwnerRequest_SectionType (..),
 
-    -- * UpdateDeviceMetadataRequest
-    , UpdateDeviceMetadataRequest
-    , updateDeviceMetadataRequest
-    , udmrDeviceMetadata
+    -- ** FindDevicesByOwnerResponse
+    FindDevicesByOwnerResponse (..),
+    newFindDevicesByOwnerResponse,
 
-    -- * DeviceMetadata
-    , DeviceMetadata
-    , deviceMetadata
-    , dmEntries
+    -- ** ListCustomersResponse
+    ListCustomersResponse (..),
+    newListCustomersResponse,
 
-    -- * FindDevicesByOwnerRequest
-    , FindDevicesByOwnerRequest
-    , findDevicesByOwnerRequest
-    , fdborSectionType
-    , fdborCustomerId
-    , fdborLimit
-    , fdborPageToken
+    -- ** ListVendorCustomersResponse
+    ListVendorCustomersResponse (..),
+    newListVendorCustomersResponse,
 
-    -- * FindDevicesByDeviceIdentifierResponse
-    , FindDevicesByDeviceIdentifierResponse
-    , findDevicesByDeviceIdentifierResponse
-    , fdbdirNextPageToken
-    , fdbdirTotalSize
-    , fdbdirDevices
+    -- ** ListVendorsResponse
+    ListVendorsResponse (..),
+    newListVendorsResponse,
 
-    -- * UnclaimDeviceRequest
-    , UnclaimDeviceRequest
-    , unclaimDeviceRequest
-    , udrDeviceIdentifier
-    , udrSectionType
-    , udrVacationModeExpireTime
-    , udrVacationModeDays
-    , udrDeviceId
+    -- ** Operation
+    Operation (..),
+    newOperation,
 
-    -- * DevicesLongRunningOperationResponse
-    , DevicesLongRunningOperationResponse
-    , devicesLongRunningOperationResponse
-    , dlrorSuccessCount
-    , dlrorPerDeviceStatus
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
-    -- * Configuration
-    , Configuration
-    , configuration
-    , conContactPhone
-    , conContactEmail
-    , conConfigurationName
-    , conConfigurationId
-    , conCustomMessage
-    , conCompanyName
-    , conDpcExtras
-    , conName
-    , conDpcResourcePath
-    , conIsDefault
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- ** OperationPerDevice
+    OperationPerDevice (..),
+    newOperationPerDevice,
 
-    -- * DeviceClaimSectionType
-    , DeviceClaimSectionType (..)
+    -- ** PartnerClaim
+    PartnerClaim (..),
+    newPartnerClaim,
 
-    -- * ListCustomersResponse
-    , ListCustomersResponse
-    , listCustomersResponse
-    , lcrCustomers
-    , lcrNextPageToken
-    , lcrTotalSize
+    -- ** PartnerClaim_SectionType
+    PartnerClaim_SectionType (..),
 
-    -- * DevicesLongRunningOperationMetadata
-    , DevicesLongRunningOperationMetadata
-    , devicesLongRunningOperationMetadata
-    , dlromProgress
-    , dlromDevicesCount
-    , dlromProcessingStatus
+    -- ** PartnerUnclaim
+    PartnerUnclaim (..),
+    newPartnerUnclaim,
 
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** PartnerUnclaim_SectionType
+    PartnerUnclaim_SectionType (..),
 
-    -- * CompanyTermsStatus
-    , CompanyTermsStatus (..)
+    -- ** PerDeviceStatusInBatch
+    PerDeviceStatusInBatch (..),
+    newPerDeviceStatusInBatch,
 
-    -- * CustomerListDevicesResponse
-    , CustomerListDevicesResponse
-    , customerListDevicesResponse
-    , cldrNextPageToken
-    , cldrDevices
+    -- ** PerDeviceStatusInBatch_Status
+    PerDeviceStatusInBatch_Status (..),
 
-    -- * DeviceClaimAdditionalService
-    , DeviceClaimAdditionalService (..)
+    -- ** Status
+    Status (..),
+    newStatus,
 
-    -- * UpdateDeviceMetadataInBatchRequest
-    , UpdateDeviceMetadataInBatchRequest
-    , updateDeviceMetadataInBatchRequest
-    , udmibrUpdates
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
-    -- * UnclaimDeviceRequestSectionType
-    , UnclaimDeviceRequestSectionType (..)
+    -- ** UnclaimDeviceRequest
+    UnclaimDeviceRequest (..),
+    newUnclaimDeviceRequest,
 
-    -- * CustomerListDpcsResponse
-    , CustomerListDpcsResponse
-    , customerListDpcsResponse
-    , cldrDpcs
+    -- ** UnclaimDeviceRequest_SectionType
+    UnclaimDeviceRequest_SectionType (..),
 
-    -- * ClaimDeviceResponse
-    , ClaimDeviceResponse
-    , claimDeviceResponse
-    , cdrDeviceName
-    , cdrDeviceId
+    -- ** UnclaimDevicesRequest
+    UnclaimDevicesRequest (..),
+    newUnclaimDevicesRequest,
 
-    -- * CreateCustomerRequest
-    , CreateCustomerRequest
-    , createCustomerRequest
-    , ccrCustomer
+    -- ** UpdateDeviceMetadataInBatchRequest
+    UpdateDeviceMetadataInBatchRequest (..),
+    newUpdateDeviceMetadataInBatchRequest,
 
-    -- * DevicesLongRunningOperationMetadataProcessingStatus
-    , DevicesLongRunningOperationMetadataProcessingStatus (..)
-    ) where
+    -- ** UpdateDeviceMetadataRequest
+    UpdateDeviceMetadataRequest (..),
+    newUpdateDeviceMetadataRequest,
 
-import Network.Google.AndroidDeviceProvisioning.Types.Product
-import Network.Google.AndroidDeviceProvisioning.Types.Sum
-import Network.Google.Prelude
+    -- ** UpdateMetadataArguments
+    UpdateMetadataArguments (..),
+    newUpdateMetadataArguments,
+  )
+where
 
--- | Default request referring to version 'v1' of the Android Device Provisioning Partner API. This contains the host and root path used as a starting point for constructing service requests.
-androidDeviceProvisioningService :: ServiceConfig
-androidDeviceProvisioningService
-  = defaultService
-      (ServiceId "androiddeviceprovisioning:v1")
-      "androiddeviceprovisioning.googleapis.com"
+import Network.Google.AndroidDeviceProvisioning.Internal.Product
+import Network.Google.AndroidDeviceProvisioning.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Android Device Provisioning Partner API. This contains the host and root path used as a starting point for constructing service requests.
+androidDeviceProvisioningService :: Core.ServiceConfig
+androidDeviceProvisioningService =
+  Core.defaultService
+    (Core.ServiceId "androiddeviceprovisioning:v1")
+    "androiddeviceprovisioning.googleapis.com"
