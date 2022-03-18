@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,220 +36,220 @@
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference>
 module Gogol.Composer
-  ( -- * Configuration
-    composerService,
+    (
+    -- * Configuration
+      composerService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    , cloudPlatformScope
 
     -- * Resources
 
     -- ** composer.projects.locations.environments.create
-    ComposerProjectsLocationsEnvironmentsCreateResource,
-    newComposerProjectsLocationsEnvironmentsCreate,
-    ComposerProjectsLocationsEnvironmentsCreate,
+    , ComposerProjectsLocationsEnvironmentsCreateResource
+    , newComposerProjectsLocationsEnvironmentsCreate
+    , ComposerProjectsLocationsEnvironmentsCreate
 
     -- ** composer.projects.locations.environments.delete
-    ComposerProjectsLocationsEnvironmentsDeleteResource,
-    newComposerProjectsLocationsEnvironmentsDelete,
-    ComposerProjectsLocationsEnvironmentsDelete,
+    , ComposerProjectsLocationsEnvironmentsDeleteResource
+    , newComposerProjectsLocationsEnvironmentsDelete
+    , ComposerProjectsLocationsEnvironmentsDelete
 
     -- ** composer.projects.locations.environments.get
-    ComposerProjectsLocationsEnvironmentsGetResource,
-    newComposerProjectsLocationsEnvironmentsGet,
-    ComposerProjectsLocationsEnvironmentsGet,
+    , ComposerProjectsLocationsEnvironmentsGetResource
+    , newComposerProjectsLocationsEnvironmentsGet
+    , ComposerProjectsLocationsEnvironmentsGet
 
     -- ** composer.projects.locations.environments.list
-    ComposerProjectsLocationsEnvironmentsListResource,
-    newComposerProjectsLocationsEnvironmentsList,
-    ComposerProjectsLocationsEnvironmentsList,
+    , ComposerProjectsLocationsEnvironmentsListResource
+    , newComposerProjectsLocationsEnvironmentsList
+    , ComposerProjectsLocationsEnvironmentsList
 
     -- ** composer.projects.locations.environments.patch
-    ComposerProjectsLocationsEnvironmentsPatchResource,
-    newComposerProjectsLocationsEnvironmentsPatch,
-    ComposerProjectsLocationsEnvironmentsPatch,
+    , ComposerProjectsLocationsEnvironmentsPatchResource
+    , newComposerProjectsLocationsEnvironmentsPatch
+    , ComposerProjectsLocationsEnvironmentsPatch
 
     -- ** composer.projects.locations.imageVersions.list
-    ComposerProjectsLocationsImageVersionsListResource,
-    newComposerProjectsLocationsImageVersionsList,
-    ComposerProjectsLocationsImageVersionsList,
+    , ComposerProjectsLocationsImageVersionsListResource
+    , newComposerProjectsLocationsImageVersionsList
+    , ComposerProjectsLocationsImageVersionsList
 
     -- ** composer.projects.locations.operations.delete
-    ComposerProjectsLocationsOperationsDeleteResource,
-    newComposerProjectsLocationsOperationsDelete,
-    ComposerProjectsLocationsOperationsDelete,
+    , ComposerProjectsLocationsOperationsDeleteResource
+    , newComposerProjectsLocationsOperationsDelete
+    , ComposerProjectsLocationsOperationsDelete
 
     -- ** composer.projects.locations.operations.get
-    ComposerProjectsLocationsOperationsGetResource,
-    newComposerProjectsLocationsOperationsGet,
-    ComposerProjectsLocationsOperationsGet,
+    , ComposerProjectsLocationsOperationsGetResource
+    , newComposerProjectsLocationsOperationsGet
+    , ComposerProjectsLocationsOperationsGet
 
     -- ** composer.projects.locations.operations.list
-    ComposerProjectsLocationsOperationsListResource,
-    newComposerProjectsLocationsOperationsList,
-    ComposerProjectsLocationsOperationsList,
+    , ComposerProjectsLocationsOperationsListResource
+    , newComposerProjectsLocationsOperationsList
+    , ComposerProjectsLocationsOperationsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AllowedIpRange
-    AllowedIpRange (..),
-    newAllowedIpRange,
+    , AllowedIpRange (..)
+    , newAllowedIpRange
 
     -- ** CheckUpgradeResponse
-    CheckUpgradeResponse (..),
-    newCheckUpgradeResponse,
+    , CheckUpgradeResponse (..)
+    , newCheckUpgradeResponse
 
     -- ** CheckUpgradeResponse_ContainsPypiModulesConflict
-    CheckUpgradeResponse_ContainsPypiModulesConflict (..),
+    , CheckUpgradeResponse_ContainsPypiModulesConflict (..)
 
     -- ** CheckUpgradeResponse_PypiDependencies
-    CheckUpgradeResponse_PypiDependencies (..),
-    newCheckUpgradeResponse_PypiDependencies,
+    , CheckUpgradeResponse_PypiDependencies (..)
+    , newCheckUpgradeResponse_PypiDependencies
 
     -- ** DatabaseConfig
-    DatabaseConfig (..),
-    newDatabaseConfig,
+    , DatabaseConfig (..)
+    , newDatabaseConfig
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EncryptionConfig
-    EncryptionConfig (..),
-    newEncryptionConfig,
+    , EncryptionConfig (..)
+    , newEncryptionConfig
 
     -- ** Environment
-    Environment (..),
-    newEnvironment,
+    , Environment (..)
+    , newEnvironment
 
     -- ** Environment_Labels
-    Environment_Labels (..),
-    newEnvironment_Labels,
+    , Environment_Labels (..)
+    , newEnvironment_Labels
 
     -- ** Environment_State
-    Environment_State (..),
+    , Environment_State (..)
 
     -- ** EnvironmentConfig
-    EnvironmentConfig (..),
-    newEnvironmentConfig,
+    , EnvironmentConfig (..)
+    , newEnvironmentConfig
 
     -- ** EnvironmentConfig_EnvironmentSize
-    EnvironmentConfig_EnvironmentSize (..),
+    , EnvironmentConfig_EnvironmentSize (..)
 
     -- ** IPAllocationPolicy
-    IPAllocationPolicy (..),
-    newIPAllocationPolicy,
+    , IPAllocationPolicy (..)
+    , newIPAllocationPolicy
 
     -- ** ImageVersion
-    ImageVersion (..),
-    newImageVersion,
+    , ImageVersion (..)
+    , newImageVersion
 
     -- ** ListEnvironmentsResponse
-    ListEnvironmentsResponse (..),
-    newListEnvironmentsResponse,
+    , ListEnvironmentsResponse (..)
+    , newListEnvironmentsResponse
 
     -- ** ListImageVersionsResponse
-    ListImageVersionsResponse (..),
-    newListImageVersionsResponse,
+    , ListImageVersionsResponse (..)
+    , newListImageVersionsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** MaintenanceWindow
-    MaintenanceWindow (..),
-    newMaintenanceWindow,
+    , MaintenanceWindow (..)
+    , newMaintenanceWindow
 
     -- ** NodeConfig
-    NodeConfig (..),
-    newNodeConfig,
+    , NodeConfig (..)
+    , newNodeConfig
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationMetadata
-    OperationMetadata (..),
-    newOperationMetadata,
+    , OperationMetadata (..)
+    , newOperationMetadata
 
     -- ** OperationMetadata_OperationType
-    OperationMetadata_OperationType (..),
+    , OperationMetadata_OperationType (..)
 
     -- ** OperationMetadata_State
-    OperationMetadata_State (..),
+    , OperationMetadata_State (..)
 
     -- ** PrivateClusterConfig
-    PrivateClusterConfig (..),
-    newPrivateClusterConfig,
+    , PrivateClusterConfig (..)
+    , newPrivateClusterConfig
 
     -- ** PrivateEnvironmentConfig
-    PrivateEnvironmentConfig (..),
-    newPrivateEnvironmentConfig,
+    , PrivateEnvironmentConfig (..)
+    , newPrivateEnvironmentConfig
 
     -- ** SchedulerResource
-    SchedulerResource (..),
-    newSchedulerResource,
+    , SchedulerResource (..)
+    , newSchedulerResource
 
     -- ** SoftwareConfig
-    SoftwareConfig (..),
-    newSoftwareConfig,
+    , SoftwareConfig (..)
+    , newSoftwareConfig
 
     -- ** SoftwareConfig_AirflowConfigOverrides
-    SoftwareConfig_AirflowConfigOverrides (..),
-    newSoftwareConfig_AirflowConfigOverrides,
+    , SoftwareConfig_AirflowConfigOverrides (..)
+    , newSoftwareConfig_AirflowConfigOverrides
 
     -- ** SoftwareConfig_EnvVariables
-    SoftwareConfig_EnvVariables (..),
-    newSoftwareConfig_EnvVariables,
+    , SoftwareConfig_EnvVariables (..)
+    , newSoftwareConfig_EnvVariables
 
     -- ** SoftwareConfig_PypiPackages
-    SoftwareConfig_PypiPackages (..),
-    newSoftwareConfig_PypiPackages,
+    , SoftwareConfig_PypiPackages (..)
+    , newSoftwareConfig_PypiPackages
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** WebServerConfig
-    WebServerConfig (..),
-    newWebServerConfig,
+    , WebServerConfig (..)
+    , newWebServerConfig
 
     -- ** WebServerNetworkAccessControl
-    WebServerNetworkAccessControl (..),
-    newWebServerNetworkAccessControl,
+    , WebServerNetworkAccessControl (..)
+    , newWebServerNetworkAccessControl
 
     -- ** WebServerResource
-    WebServerResource (..),
-    newWebServerResource,
+    , WebServerResource (..)
+    , newWebServerResource
 
     -- ** WorkerResource
-    WorkerResource (..),
-    newWorkerResource,
+    , WorkerResource (..)
+    , newWorkerResource
 
     -- ** WorkloadsConfig
-    WorkloadsConfig (..),
-    newWorkloadsConfig,
-  )
-where
+    , WorkloadsConfig (..)
+    , newWorkloadsConfig
+    ) where
 
 import Gogol.Composer.Projects.Locations.Environments.Create
 import Gogol.Composer.Projects.Locations.Environments.Delete
