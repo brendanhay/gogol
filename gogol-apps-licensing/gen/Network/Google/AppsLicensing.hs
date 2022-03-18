@@ -1,111 +1,106 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.AppsLicensing
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Enterprise License Manager API\'s allows you to license apps
--- for all the users of a domain managed by you.
+-- The Google Enterprise License Manager API\'s allows you to license apps for all the users of a domain managed by you.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference>
 module Network.Google.AppsLicensing
-    (
-    -- * Service Configuration
-      appsLicensingService
+  ( -- * Configuration
+    appsLicensingService,
 
     -- * OAuth Scopes
-    , appsLicensingScope
-
-    -- * API Declaration
-    , AppsLicensingAPI
+    appsLicensingScope,
 
     -- * Resources
 
     -- ** licensing.licenseAssignments.delete
-    , module Network.Google.Resource.Licensing.LicenseAssignments.Delete
+    LicensingLicenseAssignmentsDeleteResource,
+    newLicensingLicenseAssignmentsDelete,
+    LicensingLicenseAssignmentsDelete,
 
     -- ** licensing.licenseAssignments.get
-    , module Network.Google.Resource.Licensing.LicenseAssignments.Get
+    LicensingLicenseAssignmentsGetResource,
+    newLicensingLicenseAssignmentsGet,
+    LicensingLicenseAssignmentsGet,
 
     -- ** licensing.licenseAssignments.insert
-    , module Network.Google.Resource.Licensing.LicenseAssignments.Insert
+    LicensingLicenseAssignmentsInsertResource,
+    newLicensingLicenseAssignmentsInsert,
+    LicensingLicenseAssignmentsInsert,
 
     -- ** licensing.licenseAssignments.listForProduct
-    , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
+    LicensingLicenseAssignmentsListForProductResource,
+    newLicensingLicenseAssignmentsListForProduct,
+    LicensingLicenseAssignmentsListForProduct,
 
     -- ** licensing.licenseAssignments.listForProductAndSku
-    , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
+    LicensingLicenseAssignmentsListForProductAndSkuResource,
+    newLicensingLicenseAssignmentsListForProductAndSku,
+    LicensingLicenseAssignmentsListForProductAndSku,
 
     -- ** licensing.licenseAssignments.patch
-    , module Network.Google.Resource.Licensing.LicenseAssignments.Patch
+    LicensingLicenseAssignmentsPatchResource,
+    newLicensingLicenseAssignmentsPatch,
+    LicensingLicenseAssignmentsPatch,
 
     -- ** licensing.licenseAssignments.update
-    , module Network.Google.Resource.Licensing.LicenseAssignments.Update
+    LicensingLicenseAssignmentsUpdateResource,
+    newLicensingLicenseAssignmentsUpdate,
+    LicensingLicenseAssignmentsUpdate,
 
     -- * Types
 
-    -- ** LicenseAssignmentInsert
-    , LicenseAssignmentInsert
-    , licenseAssignmentInsert
-    , laiUserId
-
-    -- ** LicenseAssignmentList
-    , LicenseAssignmentList
-    , licenseAssignmentList
-    , lalEtag
-    , lalNextPageToken
-    , lalKind
-    , lalItems
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** Empty
-    , Empty
-    , empty
+    Empty (..),
+    newEmpty,
 
     -- ** LicenseAssignment
-    , LicenseAssignment
-    , licenseAssignment
-    , laProductName
-    , laEtags
-    , laSKUName
-    , laKind
-    , laSKUId
-    , laUserId
-    , laSelfLink
-    , laProductId
+    LicenseAssignment (..),
+    newLicenseAssignment,
 
-    -- ** Xgafv
-    , Xgafv (..)
-    ) where
+    -- ** LicenseAssignmentInsert
+    LicenseAssignmentInsert (..),
+    newLicenseAssignmentInsert,
 
-import Network.Google.Prelude
+    -- ** LicenseAssignmentList
+    LicenseAssignmentList (..),
+    newLicenseAssignmentList,
+  )
+where
+
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Delete
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Get
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Insert
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Patch
+import Network.Google.AppsLicensing.Licensing.LicenseAssignments.Update
 import Network.Google.AppsLicensing.Types
-import Network.Google.Resource.Licensing.LicenseAssignments.Delete
-import Network.Google.Resource.Licensing.LicenseAssignments.Get
-import Network.Google.Resource.Licensing.LicenseAssignments.Insert
-import Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
-import Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
-import Network.Google.Resource.Licensing.LicenseAssignments.Patch
-import Network.Google.Resource.Licensing.LicenseAssignments.Update
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Enterprise License Manager API service.
-type AppsLicensingAPI =
-     LicenseAssignmentsInsertResource :<|>
-       LicenseAssignmentsPatchResource
-       :<|> LicenseAssignmentsGetResource
-       :<|> LicenseAssignmentsListForProductAndSKUResource
-       :<|> LicenseAssignmentsListForProductResource
-       :<|> LicenseAssignmentsDeleteResource
-       :<|> LicenseAssignmentsUpdateResource
