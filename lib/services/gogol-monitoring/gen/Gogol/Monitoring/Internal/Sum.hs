@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Monitoring.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Aggregation_CrossSeriesReducer
     Aggregation_CrossSeriesReducer
-      ( Aggregation_CrossSeriesReducer_REDUCENONE,
+      (
+        Aggregation_CrossSeriesReducer_REDUCENONE,
         Aggregation_CrossSeriesReducer_REDUCEMEAN,
         Aggregation_CrossSeriesReducer_REDUCEMIN,
         Aggregation_CrossSeriesReducer_REDUCEMAX,
@@ -54,7 +65,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * Aggregation_PerSeriesAligner
     Aggregation_PerSeriesAligner
-      ( Aggregation_PerSeriesAligner_ALIGNNONE,
+      (
+        Aggregation_PerSeriesAligner_ALIGNNONE,
         Aggregation_PerSeriesAligner_ALIGNDELTA,
         Aggregation_PerSeriesAligner_ALIGNRATE,
         Aggregation_PerSeriesAligner_ALIGNINTERPOLATE,
@@ -78,7 +90,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * AlertPolicy_Combiner
     AlertPolicy_Combiner
-      ( AlertPolicy_Combiner_COMBINEUNSPECIFIED,
+      (
+        AlertPolicy_Combiner_COMBINEUNSPECIFIED,
         AlertPolicy_Combiner_And,
         AlertPolicy_Combiner_OR,
         AlertPolicy_Combiner_ANDWITHMATCHINGRESOURCE,
@@ -87,7 +100,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * CollectdValue_DataSourceType
     CollectdValue_DataSourceType
-      ( CollectdValue_DataSourceType_UNSPECIFIEDDATASOURCETYPE,
+      (
+        CollectdValue_DataSourceType_UNSPECIFIEDDATASOURCETYPE,
         CollectdValue_DataSourceType_Gauge,
         CollectdValue_DataSourceType_Counter,
         CollectdValue_DataSourceType_Derive,
@@ -97,7 +111,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ContentMatcher_Matcher
     ContentMatcher_Matcher
-      ( ContentMatcher_Matcher_CONTENTMATCHEROPTIONUNSPECIFIED,
+      (
+        ContentMatcher_Matcher_CONTENTMATCHEROPTIONUNSPECIFIED,
         ContentMatcher_Matcher_CONTAINSSTRING,
         ContentMatcher_Matcher_NOTCONTAINSSTRING,
         ContentMatcher_Matcher_MATCHESREGEX,
@@ -107,7 +122,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * Field_Cardinality
     Field_Cardinality
-      ( Field_Cardinality_CARDINALITYUNKNOWN,
+      (
+        Field_Cardinality_CARDINALITYUNKNOWN,
         Field_Cardinality_CARDINALITYOPTIONAL,
         Field_Cardinality_CARDINALITYREQUIRED,
         Field_Cardinality_CARDINALITYREPEATED,
@@ -116,7 +132,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * Field_Kind
     Field_Kind
-      ( Field_Kind_TYPEUNKNOWN,
+      (
+        Field_Kind_TYPEUNKNOWN,
         Field_Kind_TYPEDOUBLE,
         Field_Kind_TYPEFLOAT,
         Field_Kind_TYPE_INT64,
@@ -140,14 +157,16 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * HttpCheck_ContentType
     HttpCheck_ContentType
-      ( HttpCheck_ContentType_TYPEUNSPECIFIED,
+      (
+        HttpCheck_ContentType_TYPEUNSPECIFIED,
         HttpCheck_ContentType_URLENCODED,
         ..
       ),
 
     -- * HttpCheck_RequestMethod
     HttpCheck_RequestMethod
-      ( HttpCheck_RequestMethod_METHODUNSPECIFIED,
+      (
+        HttpCheck_RequestMethod_METHODUNSPECIFIED,
         HttpCheck_RequestMethod_Get',
         HttpCheck_RequestMethod_Post',
         ..
@@ -155,7 +174,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * InternalChecker_State
     InternalChecker_State
-      ( InternalChecker_State_Unspecified,
+      (
+        InternalChecker_State_Unspecified,
         InternalChecker_State_Creating,
         InternalChecker_State_Running,
         ..
@@ -163,7 +183,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * LabelDescriptor_ValueType
     LabelDescriptor_ValueType
-      ( LabelDescriptor_ValueType_String,
+      (
+        LabelDescriptor_ValueType_String,
         LabelDescriptor_ValueType_Bool,
         LabelDescriptor_ValueType_INT64,
         ..
@@ -171,7 +192,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MetricDescriptor_LaunchStage
     MetricDescriptor_LaunchStage
-      ( MetricDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        MetricDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MetricDescriptor_LaunchStage_Unimplemented,
         MetricDescriptor_LaunchStage_Prelaunch,
         MetricDescriptor_LaunchStage_EARLYACCESS,
@@ -184,7 +206,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MetricDescriptor_MetricKind
     MetricDescriptor_MetricKind
-      ( MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED,
+      (
+        MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED,
         MetricDescriptor_MetricKind_Gauge,
         MetricDescriptor_MetricKind_Delta,
         MetricDescriptor_MetricKind_Cumulative,
@@ -193,7 +216,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MetricDescriptor_ValueType
     MetricDescriptor_ValueType
-      ( MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED,
+      (
+        MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED,
         MetricDescriptor_ValueType_Bool,
         MetricDescriptor_ValueType_INT64,
         MetricDescriptor_ValueType_Double,
@@ -205,7 +229,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage
-      ( MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MetricDescriptorMetadata_LaunchStage_Unimplemented,
         MetricDescriptorMetadata_LaunchStage_Prelaunch,
         MetricDescriptorMetadata_LaunchStage_EARLYACCESS,
@@ -218,7 +243,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MetricThreshold_Comparison
     MetricThreshold_Comparison
-      ( MetricThreshold_Comparison_COMPARISONUNSPECIFIED,
+      (
+        MetricThreshold_Comparison_COMPARISONUNSPECIFIED,
         MetricThreshold_Comparison_COMPARISONGT,
         MetricThreshold_Comparison_COMPARISONGE,
         MetricThreshold_Comparison_COMPARISONLT,
@@ -230,7 +256,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MetricThreshold_EvaluationMissingData
     MetricThreshold_EvaluationMissingData
-      ( MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED,
+      (
+        MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED,
         MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE,
         MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE,
         MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATANOOP,
@@ -239,7 +266,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MonitoredResourceDescriptor_LaunchStage
     MonitoredResourceDescriptor_LaunchStage
-      ( MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MonitoredResourceDescriptor_LaunchStage_Unimplemented,
         MonitoredResourceDescriptor_LaunchStage_Prelaunch,
         MonitoredResourceDescriptor_LaunchStage_EARLYACCESS,
@@ -252,7 +280,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * MonitoringQueryLanguageCondition_EvaluationMissingData
     MonitoringQueryLanguageCondition_EvaluationMissingData
-      ( MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED,
+      (
+        MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED,
         MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE,
         MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE,
         MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATANOOP,
@@ -261,7 +290,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * NotificationChannel_VerificationStatus
     NotificationChannel_VerificationStatus
-      ( NotificationChannel_VerificationStatus_VERIFICATIONSTATUSUNSPECIFIED,
+      (
+        NotificationChannel_VerificationStatus_VERIFICATIONSTATUSUNSPECIFIED,
         NotificationChannel_VerificationStatus_Unverified,
         NotificationChannel_VerificationStatus_Verified,
         ..
@@ -269,7 +299,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * NotificationChannelDescriptor_LaunchStage
     NotificationChannelDescriptor_LaunchStage
-      ( NotificationChannelDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        NotificationChannelDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         NotificationChannelDescriptor_LaunchStage_Unimplemented,
         NotificationChannelDescriptor_LaunchStage_Prelaunch,
         NotificationChannelDescriptor_LaunchStage_EARLYACCESS,
@@ -282,7 +313,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * NotificationChannelDescriptor_SupportedTiersItem
     NotificationChannelDescriptor_SupportedTiersItem
-      ( NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERUNSPECIFIED,
+      (
+        NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERUNSPECIFIED,
         NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERBASIC,
         NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERPREMIUM,
         ..
@@ -290,7 +322,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * OperationMetadata_State
     OperationMetadata_State
-      ( OperationMetadata_State_STATEUNSPECIFIED,
+      (
+        OperationMetadata_State_STATEUNSPECIFIED,
         OperationMetadata_State_Created,
         OperationMetadata_State_Running,
         OperationMetadata_State_Done,
@@ -300,7 +333,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ResourceGroup_ResourceType
     ResourceGroup_ResourceType
-      ( ResourceGroup_ResourceType_RESOURCETYPEUNSPECIFIED,
+      (
+        ResourceGroup_ResourceType_RESOURCETYPEUNSPECIFIED,
         ResourceGroup_ResourceType_Instance,
         ResourceGroup_ResourceType_AWSELBLOADBALANCER,
         ..
@@ -308,7 +342,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ServiceLevelObjective_CalendarPeriod
     ServiceLevelObjective_CalendarPeriod
-      ( ServiceLevelObjective_CalendarPeriod_CALENDARPERIODUNSPECIFIED,
+      (
+        ServiceLevelObjective_CalendarPeriod_CALENDARPERIODUNSPECIFIED,
         ServiceLevelObjective_CalendarPeriod_Day,
         ServiceLevelObjective_CalendarPeriod_Week,
         ServiceLevelObjective_CalendarPeriod_Fortnight,
@@ -321,7 +356,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * TimeSeries_MetricKind
     TimeSeries_MetricKind
-      ( TimeSeries_MetricKind_METRICKINDUNSPECIFIED,
+      (
+        TimeSeries_MetricKind_METRICKINDUNSPECIFIED,
         TimeSeries_MetricKind_Gauge,
         TimeSeries_MetricKind_Delta,
         TimeSeries_MetricKind_Cumulative,
@@ -330,7 +366,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * TimeSeries_ValueType
     TimeSeries_ValueType
-      ( TimeSeries_ValueType_VALUETYPEUNSPECIFIED,
+      (
+        TimeSeries_ValueType_VALUETYPEUNSPECIFIED,
         TimeSeries_ValueType_Bool,
         TimeSeries_ValueType_INT64,
         TimeSeries_ValueType_Double,
@@ -342,14 +379,16 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * Type_Syntax
     Type_Syntax
-      ( Type_Syntax_SYNTAX_PROTO2,
+      (
+        Type_Syntax_SYNTAX_PROTO2,
         Type_Syntax_SYNTAX_PROTO3,
         ..
       ),
 
     -- * UptimeCheckConfig_CheckerType
     UptimeCheckConfig_CheckerType
-      ( UptimeCheckConfig_CheckerType_CHECKERTYPEUNSPECIFIED,
+      (
+        UptimeCheckConfig_CheckerType_CHECKERTYPEUNSPECIFIED,
         UptimeCheckConfig_CheckerType_STATICIPCHECKERS,
         UptimeCheckConfig_CheckerType_VPCCHECKERS,
         ..
@@ -357,7 +396,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * UptimeCheckConfig_SelectedRegionsItem
     UptimeCheckConfig_SelectedRegionsItem
-      ( UptimeCheckConfig_SelectedRegionsItem_REGIONUNSPECIFIED,
+      (
+        UptimeCheckConfig_SelectedRegionsItem_REGIONUNSPECIFIED,
         UptimeCheckConfig_SelectedRegionsItem_Usa,
         UptimeCheckConfig_SelectedRegionsItem_Europe,
         UptimeCheckConfig_SelectedRegionsItem_SOUTHAMERICA,
@@ -367,7 +407,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * UptimeCheckIp_Region
     UptimeCheckIp_Region
-      ( UptimeCheckIp_Region_REGIONUNSPECIFIED,
+      (
+        UptimeCheckIp_Region_REGIONUNSPECIFIED,
         UptimeCheckIp_Region_Usa,
         UptimeCheckIp_Region_Europe,
         UptimeCheckIp_Region_SOUTHAMERICA,
@@ -377,7 +418,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ValueDescriptor_MetricKind
     ValueDescriptor_MetricKind
-      ( ValueDescriptor_MetricKind_METRICKINDUNSPECIFIED,
+      (
+        ValueDescriptor_MetricKind_METRICKINDUNSPECIFIED,
         ValueDescriptor_MetricKind_Gauge,
         ValueDescriptor_MetricKind_Delta,
         ValueDescriptor_MetricKind_Cumulative,
@@ -386,7 +428,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ValueDescriptor_ValueType
     ValueDescriptor_ValueType
-      ( ValueDescriptor_ValueType_VALUETYPEUNSPECIFIED,
+      (
+        ValueDescriptor_ValueType_VALUETYPEUNSPECIFIED,
         ValueDescriptor_ValueType_Bool,
         ValueDescriptor_ValueType_INT64,
         ValueDescriptor_ValueType_Double,
@@ -398,7 +441,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * FoldersTimeSeriesListAggregationCrossSeriesReducer
     FoldersTimeSeriesListAggregationCrossSeriesReducer
-      ( FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE,
+      (
+        FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE,
         FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCEMEAN,
         FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCEMIN,
         FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCEMAX,
@@ -417,7 +461,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * FoldersTimeSeriesListAggregationPerSeriesAligner
     FoldersTimeSeriesListAggregationPerSeriesAligner
-      ( FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE,
+      (
+        FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE,
         FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNDELTA,
         FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNRATE,
         FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNINTERPOLATE,
@@ -441,7 +486,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
     FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
-      ( FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE,
+      (
+        FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE,
         FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMEAN,
         FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMIN,
         FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMAX,
@@ -460,7 +506,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
     FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
-      ( FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE,
+      (
+        FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE,
         FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNDELTA,
         FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNRATE,
         FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNINTERPOLATE,
@@ -484,14 +531,16 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * FoldersTimeSeriesListView
     FoldersTimeSeriesListView
-      ( FoldersTimeSeriesListView_Full,
+      (
+        FoldersTimeSeriesListView_Full,
         FoldersTimeSeriesListView_Headers,
         ..
       ),
 
     -- * OrganizationsTimeSeriesListAggregationCrossSeriesReducer
     OrganizationsTimeSeriesListAggregationCrossSeriesReducer
-      ( OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE,
+      (
+        OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE,
         OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCEMEAN,
         OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCEMIN,
         OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCEMAX,
@@ -510,7 +559,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * OrganizationsTimeSeriesListAggregationPerSeriesAligner
     OrganizationsTimeSeriesListAggregationPerSeriesAligner
-      ( OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE,
+      (
+        OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE,
         OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNDELTA,
         OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNRATE,
         OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNINTERPOLATE,
@@ -534,7 +584,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
     OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
-      ( OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE,
+      (
+        OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE,
         OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMEAN,
         OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMIN,
         OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMAX,
@@ -553,7 +604,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
     OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
-      ( OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE,
+      (
+        OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE,
         OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNDELTA,
         OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNRATE,
         OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNINTERPOLATE,
@@ -577,14 +629,16 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * OrganizationsTimeSeriesListView
     OrganizationsTimeSeriesListView
-      ( OrganizationsTimeSeriesListView_Full,
+      (
+        OrganizationsTimeSeriesListView_Full,
         OrganizationsTimeSeriesListView_Headers,
         ..
       ),
 
     -- * ProjectsTimeSeriesListAggregationCrossSeriesReducer
     ProjectsTimeSeriesListAggregationCrossSeriesReducer
-      ( ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE,
+      (
+        ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE,
         ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCEMEAN,
         ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCEMIN,
         ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCEMAX,
@@ -603,7 +657,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ProjectsTimeSeriesListAggregationPerSeriesAligner
     ProjectsTimeSeriesListAggregationPerSeriesAligner
-      ( ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE,
+      (
+        ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE,
         ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNDELTA,
         ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNRATE,
         ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNINTERPOLATE,
@@ -627,7 +682,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
     ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
-      ( ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE,
+      (
+        ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE,
         ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMEAN,
         ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMIN,
         ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCEMAX,
@@ -646,7 +702,8 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
     ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
-      ( ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE,
+      (
+        ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE,
         ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNDELTA,
         ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNRATE,
         ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNINTERPOLATE,
@@ -670,14 +727,16 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ProjectsTimeSeriesListView
     ProjectsTimeSeriesListView
-      ( ProjectsTimeSeriesListView_Full,
+      (
+        ProjectsTimeSeriesListView_Full,
         ProjectsTimeSeriesListView_Headers,
         ..
       ),
 
     -- * ServicesServiceLevelObjectivesGetView
     ServicesServiceLevelObjectivesGetView
-      ( ServicesServiceLevelObjectivesGetView_VIEWUNSPECIFIED,
+      (
+        ServicesServiceLevelObjectivesGetView_VIEWUNSPECIFIED,
         ServicesServiceLevelObjectivesGetView_Full,
         ServicesServiceLevelObjectivesGetView_Explicit,
         ..
@@ -685,28 +744,28 @@ module Gogol.Monitoring.Internal.Sum
 
     -- * ServicesServiceLevelObjectivesListView
     ServicesServiceLevelObjectivesListView
-      ( ServicesServiceLevelObjectivesListView_VIEWUNSPECIFIED,
+      (
+        ServicesServiceLevelObjectivesListView_VIEWUNSPECIFIED,
         ServicesServiceLevelObjectivesListView_Full,
         ServicesServiceLevelObjectivesListView_Explicit,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -719,21 +778,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype Aggregation_CrossSeriesReducer = Aggregation_CrossSeriesReducer {fromAggregation_CrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Aggregation_CrossSeriesReducer = Aggregation_CrossSeriesReducer { fromAggregation_CrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern Aggregation_CrossSeriesReducer_REDUCENONE :: Aggregation_CrossSeriesReducer
@@ -806,21 +864,20 @@ pattern Aggregation_CrossSeriesReducer_REDUCE_PERCENTILE_05 = Aggregation_CrossS
   Aggregation_CrossSeriesReducer_REDUCE_PERCENTILE_95,
   Aggregation_CrossSeriesReducer_REDUCE_PERCENTILE_50,
   Aggregation_CrossSeriesReducer_REDUCE_PERCENTILE_05,
-  Aggregation_CrossSeriesReducer
-  #-}
+  Aggregation_CrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype Aggregation_PerSeriesAligner = Aggregation_PerSeriesAligner {fromAggregation_PerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Aggregation_PerSeriesAligner = Aggregation_PerSeriesAligner { fromAggregation_PerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern Aggregation_PerSeriesAligner_ALIGNNONE :: Aggregation_PerSeriesAligner
@@ -918,21 +975,20 @@ pattern Aggregation_PerSeriesAligner_ALIGNPERCENTCHANGE = Aggregation_PerSeriesA
   Aggregation_PerSeriesAligner_ALIGN_PERCENTILE_50,
   Aggregation_PerSeriesAligner_ALIGN_PERCENTILE_05,
   Aggregation_PerSeriesAligner_ALIGNPERCENTCHANGE,
-  Aggregation_PerSeriesAligner
-  #-}
+  Aggregation_PerSeriesAligner #-}
 
 -- | How to combine the results of multiple conditions to determine if an incident should be opened. If condition/time/series/query/language is present, this must be COMBINE_UNSPECIFIED.
-newtype AlertPolicy_Combiner = AlertPolicy_Combiner {fromAlertPolicy_Combiner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AlertPolicy_Combiner = AlertPolicy_Combiner { fromAlertPolicy_Combiner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An unspecified combiner.
 pattern AlertPolicy_Combiner_COMBINEUNSPECIFIED :: AlertPolicy_Combiner
@@ -955,21 +1011,20 @@ pattern AlertPolicy_Combiner_ANDWITHMATCHINGRESOURCE = AlertPolicy_Combiner "AND
   AlertPolicy_Combiner_And,
   AlertPolicy_Combiner_OR,
   AlertPolicy_Combiner_ANDWITHMATCHINGRESOURCE,
-  AlertPolicy_Combiner
-  #-}
+  AlertPolicy_Combiner #-}
 
 -- | The type of measurement.
-newtype CollectdValue_DataSourceType = CollectdValue_DataSourceType {fromCollectdValue_DataSourceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CollectdValue_DataSourceType = CollectdValue_DataSourceType { fromCollectdValue_DataSourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An unspecified data source type. This corresponds to google.api.MetricDescriptor.MetricKind.METRIC/KIND/UNSPECIFIED.
 pattern CollectdValue_DataSourceType_UNSPECIFIEDDATASOURCETYPE :: CollectdValue_DataSourceType
@@ -997,21 +1052,20 @@ pattern CollectdValue_DataSourceType_Absolute = CollectdValue_DataSourceType "AB
   CollectdValue_DataSourceType_Counter,
   CollectdValue_DataSourceType_Derive,
   CollectdValue_DataSourceType_Absolute,
-  CollectdValue_DataSourceType
-  #-}
+  CollectdValue_DataSourceType #-}
 
 -- | The type of content matcher that will be applied to the server output, compared to the content string when the check is run.
-newtype ContentMatcher_Matcher = ContentMatcher_Matcher {fromContentMatcher_Matcher :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContentMatcher_Matcher = ContentMatcher_Matcher { fromContentMatcher_Matcher :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No content matcher type specified (maintained for backward compatibility, but deprecated for future use). Treated as CONTAINS_STRING.
 pattern ContentMatcher_Matcher_CONTENTMATCHEROPTIONUNSPECIFIED :: ContentMatcher_Matcher
@@ -1039,21 +1093,20 @@ pattern ContentMatcher_Matcher_NOTMATCHESREGEX = ContentMatcher_Matcher "NOT_MAT
   ContentMatcher_Matcher_NOTCONTAINSSTRING,
   ContentMatcher_Matcher_MATCHESREGEX,
   ContentMatcher_Matcher_NOTMATCHESREGEX,
-  ContentMatcher_Matcher
-  #-}
+  ContentMatcher_Matcher #-}
 
 -- | The field cardinality.
-newtype Field_Cardinality = Field_Cardinality {fromField_Cardinality :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Field_Cardinality = Field_Cardinality { fromField_Cardinality :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | For fields with unknown cardinality.
 pattern Field_Cardinality_CARDINALITYUNKNOWN :: Field_Cardinality
@@ -1076,21 +1129,20 @@ pattern Field_Cardinality_CARDINALITYREPEATED = Field_Cardinality "CARDINALITY_R
   Field_Cardinality_CARDINALITYOPTIONAL,
   Field_Cardinality_CARDINALITYREQUIRED,
   Field_Cardinality_CARDINALITYREPEATED,
-  Field_Cardinality
-  #-}
+  Field_Cardinality #-}
 
 -- | The field type.
-newtype Field_Kind = Field_Kind {fromField_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Field_Kind = Field_Kind { fromField_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Field type unknown.
 pattern Field_Kind_TYPEUNKNOWN :: Field_Kind
@@ -1188,21 +1240,20 @@ pattern Field_Kind_TYPE_SINT64 = Field_Kind "TYPE_SINT64"
   Field_Kind_TYPE_SFIXED64,
   Field_Kind_TYPE_SINT32,
   Field_Kind_TYPE_SINT64,
-  Field_Kind
-  #-}
+  Field_Kind #-}
 
 -- | The content type header to use for the check. The following configurations result in errors: 1. Content type is specified in both the headers field and the content/type field. 2. Request method is GET and content/type is not TYPE/UNSPECIFIED 3. Request method is POST and content/type is TYPE/UNSPECIFIED. 4. Request method is POST and a \"Content-Type\" header is provided via headers field. The content/type field should be used instead.
-newtype HttpCheck_ContentType = HttpCheck_ContentType {fromHttpCheck_ContentType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype HttpCheck_ContentType = HttpCheck_ContentType { fromHttpCheck_ContentType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No content type specified.
 pattern HttpCheck_ContentType_TYPEUNSPECIFIED :: HttpCheck_ContentType
@@ -1215,21 +1266,20 @@ pattern HttpCheck_ContentType_URLENCODED = HttpCheck_ContentType "URL_ENCODED"
 {-# COMPLETE
   HttpCheck_ContentType_TYPEUNSPECIFIED,
   HttpCheck_ContentType_URLENCODED,
-  HttpCheck_ContentType
-  #-}
+  HttpCheck_ContentType #-}
 
 -- | The HTTP request method to use for the check. If set to METHOD/UNSPECIFIED then request/method defaults to GET.
-newtype HttpCheck_RequestMethod = HttpCheck_RequestMethod {fromHttpCheck_RequestMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype HttpCheck_RequestMethod = HttpCheck_RequestMethod { fromHttpCheck_RequestMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No request method specified.
 pattern HttpCheck_RequestMethod_METHODUNSPECIFIED :: HttpCheck_RequestMethod
@@ -1247,21 +1297,20 @@ pattern HttpCheck_RequestMethod_Post' = HttpCheck_RequestMethod "POST"
   HttpCheck_RequestMethod_METHODUNSPECIFIED,
   HttpCheck_RequestMethod_Get',
   HttpCheck_RequestMethod_Post',
-  HttpCheck_RequestMethod
-  #-}
+  HttpCheck_RequestMethod #-}
 
 -- | The current operational state of the internal checker.
-newtype InternalChecker_State = InternalChecker_State {fromInternalChecker_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype InternalChecker_State = InternalChecker_State { fromInternalChecker_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An internal checker should never be in the unspecified state.
 pattern InternalChecker_State_Unspecified :: InternalChecker_State
@@ -1279,21 +1328,20 @@ pattern InternalChecker_State_Running = InternalChecker_State "RUNNING"
   InternalChecker_State_Unspecified,
   InternalChecker_State_Creating,
   InternalChecker_State_Running,
-  InternalChecker_State
-  #-}
+  InternalChecker_State #-}
 
 -- | The type of data that can be assigned to the label.
-newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType {fromLabelDescriptor_ValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType { fromLabelDescriptor_ValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A variable-length string, not to exceed 1,024 characters. This is the default value type.
 pattern LabelDescriptor_ValueType_String :: LabelDescriptor_ValueType
@@ -1311,21 +1359,20 @@ pattern LabelDescriptor_ValueType_INT64 = LabelDescriptor_ValueType "INT64"
   LabelDescriptor_ValueType_String,
   LabelDescriptor_ValueType_Bool,
   LabelDescriptor_ValueType_INT64,
-  LabelDescriptor_ValueType
-  #-}
+  LabelDescriptor_ValueType #-}
 
 -- | Optional. The launch stage of the metric definition.
-newtype MetricDescriptor_LaunchStage = MetricDescriptor_LaunchStage {fromMetricDescriptor_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptor_LaunchStage = MetricDescriptor_LaunchStage { fromMetricDescriptor_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MetricDescriptor_LaunchStage
@@ -1368,21 +1415,20 @@ pattern MetricDescriptor_LaunchStage_Deprecated = MetricDescriptor_LaunchStage "
   MetricDescriptor_LaunchStage_Beta,
   MetricDescriptor_LaunchStage_GA,
   MetricDescriptor_LaunchStage_Deprecated,
-  MetricDescriptor_LaunchStage
-  #-}
+  MetricDescriptor_LaunchStage #-}
 
 -- | Whether the metric records instantaneous values, changes to a value, etc. Some combinations of metric/kind and value/type might not be supported.
-newtype MetricDescriptor_MetricKind = MetricDescriptor_MetricKind {fromMetricDescriptor_MetricKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptor_MetricKind = MetricDescriptor_MetricKind { fromMetricDescriptor_MetricKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED :: MetricDescriptor_MetricKind
@@ -1405,21 +1451,20 @@ pattern MetricDescriptor_MetricKind_Cumulative = MetricDescriptor_MetricKind "CU
   MetricDescriptor_MetricKind_Gauge,
   MetricDescriptor_MetricKind_Delta,
   MetricDescriptor_MetricKind_Cumulative,
-  MetricDescriptor_MetricKind
-  #-}
+  MetricDescriptor_MetricKind #-}
 
 -- | Whether the measurement is an integer, a floating-point number, etc. Some combinations of metric/kind and value/type might not be supported.
-newtype MetricDescriptor_ValueType = MetricDescriptor_ValueType {fromMetricDescriptor_ValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptor_ValueType = MetricDescriptor_ValueType { fromMetricDescriptor_ValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED :: MetricDescriptor_ValueType
@@ -1457,21 +1502,20 @@ pattern MetricDescriptor_ValueType_Money = MetricDescriptor_ValueType "MONEY"
   MetricDescriptor_ValueType_String,
   MetricDescriptor_ValueType_Distribution,
   MetricDescriptor_ValueType_Money,
-  MetricDescriptor_ValueType
-  #-}
+  MetricDescriptor_ValueType #-}
 
 -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
-newtype MetricDescriptorMetadata_LaunchStage = MetricDescriptorMetadata_LaunchStage {fromMetricDescriptorMetadata_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptorMetadata_LaunchStage = MetricDescriptorMetadata_LaunchStage { fromMetricDescriptorMetadata_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MetricDescriptorMetadata_LaunchStage
@@ -1514,21 +1558,20 @@ pattern MetricDescriptorMetadata_LaunchStage_Deprecated = MetricDescriptorMetada
   MetricDescriptorMetadata_LaunchStage_Beta,
   MetricDescriptorMetadata_LaunchStage_GA,
   MetricDescriptorMetadata_LaunchStage_Deprecated,
-  MetricDescriptorMetadata_LaunchStage
-  #-}
+  MetricDescriptorMetadata_LaunchStage #-}
 
 -- | The comparison to apply between the time series (indicated by filter and aggregation) and the threshold (indicated by threshold/value). The comparison is applied on each time series, with the time series on the left-hand side and the threshold on the right-hand side.Only COMPARISON/LT and COMPARISON_GT are supported currently.
-newtype MetricThreshold_Comparison = MetricThreshold_Comparison {fromMetricThreshold_Comparison :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricThreshold_Comparison = MetricThreshold_Comparison { fromMetricThreshold_Comparison :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No ordering relationship is specified.
 pattern MetricThreshold_Comparison_COMPARISONUNSPECIFIED :: MetricThreshold_Comparison
@@ -1566,21 +1609,20 @@ pattern MetricThreshold_Comparison_COMPARISONNE = MetricThreshold_Comparison "CO
   MetricThreshold_Comparison_COMPARISONLE,
   MetricThreshold_Comparison_COMPARISONEQ,
   MetricThreshold_Comparison_COMPARISONNE,
-  MetricThreshold_Comparison
-  #-}
+  MetricThreshold_Comparison #-}
 
 -- | A condition control that determines how metric-threshold conditions are evaluated when data stops arriving.
-newtype MetricThreshold_EvaluationMissingData = MetricThreshold_EvaluationMissingData {fromMetricThreshold_EvaluationMissingData :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricThreshold_EvaluationMissingData = MetricThreshold_EvaluationMissingData { fromMetricThreshold_EvaluationMissingData :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An unspecified evaluation missing data option. Equivalent to EVALUATION/MISSING/DATA/NO/OP.
 pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED :: MetricThreshold_EvaluationMissingData
@@ -1603,21 +1645,20 @@ pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATANOOP = Metric
   MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE,
   MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE,
   MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATANOOP,
-  MetricThreshold_EvaluationMissingData
-  #-}
+  MetricThreshold_EvaluationMissingData #-}
 
 -- | Optional. The launch stage of the monitored resource definition.
-newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage {fromMonitoredResourceDescriptor_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage { fromMonitoredResourceDescriptor_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MonitoredResourceDescriptor_LaunchStage
@@ -1660,21 +1701,20 @@ pattern MonitoredResourceDescriptor_LaunchStage_Deprecated = MonitoredResourceDe
   MonitoredResourceDescriptor_LaunchStage_Beta,
   MonitoredResourceDescriptor_LaunchStage_GA,
   MonitoredResourceDescriptor_LaunchStage_Deprecated,
-  MonitoredResourceDescriptor_LaunchStage
-  #-}
+  MonitoredResourceDescriptor_LaunchStage #-}
 
 -- | A condition control that determines how metric-threshold conditions are evaluated when data stops arriving.
-newtype MonitoringQueryLanguageCondition_EvaluationMissingData = MonitoringQueryLanguageCondition_EvaluationMissingData {fromMonitoringQueryLanguageCondition_EvaluationMissingData :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MonitoringQueryLanguageCondition_EvaluationMissingData = MonitoringQueryLanguageCondition_EvaluationMissingData { fromMonitoringQueryLanguageCondition_EvaluationMissingData :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An unspecified evaluation missing data option. Equivalent to EVALUATION/MISSING/DATA/NO/OP.
 pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED :: MonitoringQueryLanguageCondition_EvaluationMissingData
@@ -1697,21 +1737,20 @@ pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSING
   MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE,
   MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE,
   MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATANOOP,
-  MonitoringQueryLanguageCondition_EvaluationMissingData
-  #-}
+  MonitoringQueryLanguageCondition_EvaluationMissingData #-}
 
 -- | Indicates whether this channel has been verified or not. On a ListNotificationChannels or GetNotificationChannel operation, this field is expected to be populated.If the value is UNVERIFIED, then it indicates that the channel is non-functioning (it both requires verification and lacks verification); otherwise, it is assumed that the channel works.If the channel is neither VERIFIED nor UNVERIFIED, it implies that the channel is of a type that does not require verification or that this specific channel has been exempted from verification because it was created prior to verification being required for channels of this type.This field cannot be modified using a standard UpdateNotificationChannel operation. To change the value of this field, you must call VerifyNotificationChannel.
-newtype NotificationChannel_VerificationStatus = NotificationChannel_VerificationStatus {fromNotificationChannel_VerificationStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NotificationChannel_VerificationStatus = NotificationChannel_VerificationStatus { fromNotificationChannel_VerificationStatus :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Sentinel value used to indicate that the state is unknown, omitted, or is not applicable (as in the case of channels that neither support nor require verification in order to function).
 pattern NotificationChannel_VerificationStatus_VERIFICATIONSTATUSUNSPECIFIED :: NotificationChannel_VerificationStatus
@@ -1729,21 +1768,20 @@ pattern NotificationChannel_VerificationStatus_Verified = NotificationChannel_Ve
   NotificationChannel_VerificationStatus_VERIFICATIONSTATUSUNSPECIFIED,
   NotificationChannel_VerificationStatus_Unverified,
   NotificationChannel_VerificationStatus_Verified,
-  NotificationChannel_VerificationStatus
-  #-}
+  NotificationChannel_VerificationStatus #-}
 
 -- | The product launch stage for channels of this type.
-newtype NotificationChannelDescriptor_LaunchStage = NotificationChannelDescriptor_LaunchStage {fromNotificationChannelDescriptor_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NotificationChannelDescriptor_LaunchStage = NotificationChannelDescriptor_LaunchStage { fromNotificationChannelDescriptor_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern NotificationChannelDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: NotificationChannelDescriptor_LaunchStage
@@ -1786,20 +1824,19 @@ pattern NotificationChannelDescriptor_LaunchStage_Deprecated = NotificationChann
   NotificationChannelDescriptor_LaunchStage_Beta,
   NotificationChannelDescriptor_LaunchStage_GA,
   NotificationChannelDescriptor_LaunchStage_Deprecated,
-  NotificationChannelDescriptor_LaunchStage
-  #-}
+  NotificationChannelDescriptor_LaunchStage #-}
 
-newtype NotificationChannelDescriptor_SupportedTiersItem = NotificationChannelDescriptor_SupportedTiersItem {fromNotificationChannelDescriptor_SupportedTiersItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NotificationChannelDescriptor_SupportedTiersItem = NotificationChannelDescriptor_SupportedTiersItem { fromNotificationChannelDescriptor_SupportedTiersItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An invalid sentinel value, used to indicate that a tier has not been provided explicitly.
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERUNSPECIFIED :: NotificationChannelDescriptor_SupportedTiersItem
@@ -1817,21 +1854,20 @@ pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERPREMIUM = No
   NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERUNSPECIFIED,
   NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERBASIC,
   NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERPREMIUM,
-  NotificationChannelDescriptor_SupportedTiersItem
-  #-}
+  NotificationChannelDescriptor_SupportedTiersItem #-}
 
 -- | Current state of the batch operation.
-newtype OperationMetadata_State = OperationMetadata_State {fromOperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OperationMetadata_State = OperationMetadata_State { fromOperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern OperationMetadata_State_STATEUNSPECIFIED :: OperationMetadata_State
@@ -1859,21 +1895,20 @@ pattern OperationMetadata_State_Cancelled = OperationMetadata_State "CANCELLED"
   OperationMetadata_State_Running,
   OperationMetadata_State_Done,
   OperationMetadata_State_Cancelled,
-  OperationMetadata_State
-  #-}
+  OperationMetadata_State #-}
 
 -- | The resource type of the group members.
-newtype ResourceGroup_ResourceType = ResourceGroup_ResourceType {fromResourceGroup_ResourceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ResourceGroup_ResourceType = ResourceGroup_ResourceType { fromResourceGroup_ResourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value (not valid).
 pattern ResourceGroup_ResourceType_RESOURCETYPEUNSPECIFIED :: ResourceGroup_ResourceType
@@ -1891,21 +1926,20 @@ pattern ResourceGroup_ResourceType_AWSELBLOADBALANCER = ResourceGroup_ResourceTy
   ResourceGroup_ResourceType_RESOURCETYPEUNSPECIFIED,
   ResourceGroup_ResourceType_Instance,
   ResourceGroup_ResourceType_AWSELBLOADBALANCER,
-  ResourceGroup_ResourceType
-  #-}
+  ResourceGroup_ResourceType #-}
 
 -- | A calendar period, semantically \"since the start of the current \". At this time, only DAY, WEEK, FORTNIGHT, and MONTH are supported.
-newtype ServiceLevelObjective_CalendarPeriod = ServiceLevelObjective_CalendarPeriod {fromServiceLevelObjective_CalendarPeriod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ServiceLevelObjective_CalendarPeriod = ServiceLevelObjective_CalendarPeriod { fromServiceLevelObjective_CalendarPeriod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Undefined period, raises an error.
 pattern ServiceLevelObjective_CalendarPeriod_CALENDARPERIODUNSPECIFIED :: ServiceLevelObjective_CalendarPeriod
@@ -1948,21 +1982,20 @@ pattern ServiceLevelObjective_CalendarPeriod_Year = ServiceLevelObjective_Calend
   ServiceLevelObjective_CalendarPeriod_Quarter,
   ServiceLevelObjective_CalendarPeriod_Half,
   ServiceLevelObjective_CalendarPeriod_Year,
-  ServiceLevelObjective_CalendarPeriod
-  #-}
+  ServiceLevelObjective_CalendarPeriod #-}
 
 -- | The metric kind of the time series. When listing time series, this metric kind might be different from the metric kind of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the metric kind of the associated metric. If the associated metric\'s descriptor must be auto-created, then this field specifies the metric kind of the new descriptor and must be either GAUGE (the default) or CUMULATIVE.
-newtype TimeSeries_MetricKind = TimeSeries_MetricKind {fromTimeSeries_MetricKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TimeSeries_MetricKind = TimeSeries_MetricKind { fromTimeSeries_MetricKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern TimeSeries_MetricKind_METRICKINDUNSPECIFIED :: TimeSeries_MetricKind
@@ -1985,21 +2018,20 @@ pattern TimeSeries_MetricKind_Cumulative = TimeSeries_MetricKind "CUMULATIVE"
   TimeSeries_MetricKind_Gauge,
   TimeSeries_MetricKind_Delta,
   TimeSeries_MetricKind_Cumulative,
-  TimeSeries_MetricKind
-  #-}
+  TimeSeries_MetricKind #-}
 
 -- | The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.
-newtype TimeSeries_ValueType = TimeSeries_ValueType {fromTimeSeries_ValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TimeSeries_ValueType = TimeSeries_ValueType { fromTimeSeries_ValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern TimeSeries_ValueType_VALUETYPEUNSPECIFIED :: TimeSeries_ValueType
@@ -2037,21 +2069,20 @@ pattern TimeSeries_ValueType_Money = TimeSeries_ValueType "MONEY"
   TimeSeries_ValueType_String,
   TimeSeries_ValueType_Distribution,
   TimeSeries_ValueType_Money,
-  TimeSeries_ValueType
-  #-}
+  TimeSeries_ValueType #-}
 
 -- | The source syntax.
-newtype Type_Syntax = Type_Syntax {fromType_Syntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Type_Syntax = Type_Syntax { fromType_Syntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Syntax proto2.
 pattern Type_Syntax_SYNTAX_PROTO2 :: Type_Syntax
@@ -2064,21 +2095,20 @@ pattern Type_Syntax_SYNTAX_PROTO3 = Type_Syntax "SYNTAX_PROTO3"
 {-# COMPLETE
   Type_Syntax_SYNTAX_PROTO2,
   Type_Syntax_SYNTAX_PROTO3,
-  Type_Syntax
-  #-}
+  Type_Syntax #-}
 
 -- | The type of checkers to use to execute the Uptime check.
-newtype UptimeCheckConfig_CheckerType = UptimeCheckConfig_CheckerType {fromUptimeCheckConfig_CheckerType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UptimeCheckConfig_CheckerType = UptimeCheckConfig_CheckerType { fromUptimeCheckConfig_CheckerType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default checker type. Currently converted to STATIC/IP/CHECKERS on creation, the default conversion behavior may change in the future.
 pattern UptimeCheckConfig_CheckerType_CHECKERTYPEUNSPECIFIED :: UptimeCheckConfig_CheckerType
@@ -2096,20 +2126,19 @@ pattern UptimeCheckConfig_CheckerType_VPCCHECKERS = UptimeCheckConfig_CheckerTyp
   UptimeCheckConfig_CheckerType_CHECKERTYPEUNSPECIFIED,
   UptimeCheckConfig_CheckerType_STATICIPCHECKERS,
   UptimeCheckConfig_CheckerType_VPCCHECKERS,
-  UptimeCheckConfig_CheckerType
-  #-}
+  UptimeCheckConfig_CheckerType #-}
 
-newtype UptimeCheckConfig_SelectedRegionsItem = UptimeCheckConfig_SelectedRegionsItem {fromUptimeCheckConfig_SelectedRegionsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UptimeCheckConfig_SelectedRegionsItem = UptimeCheckConfig_SelectedRegionsItem { fromUptimeCheckConfig_SelectedRegionsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value if no region is specified. Will result in Uptime checks running from all regions.
 pattern UptimeCheckConfig_SelectedRegionsItem_REGIONUNSPECIFIED :: UptimeCheckConfig_SelectedRegionsItem
@@ -2137,21 +2166,20 @@ pattern UptimeCheckConfig_SelectedRegionsItem_ASIAPACIFIC = UptimeCheckConfig_Se
   UptimeCheckConfig_SelectedRegionsItem_Europe,
   UptimeCheckConfig_SelectedRegionsItem_SOUTHAMERICA,
   UptimeCheckConfig_SelectedRegionsItem_ASIAPACIFIC,
-  UptimeCheckConfig_SelectedRegionsItem
-  #-}
+  UptimeCheckConfig_SelectedRegionsItem #-}
 
 -- | A broad region category in which the IP address is located.
-newtype UptimeCheckIp_Region = UptimeCheckIp_Region {fromUptimeCheckIp_Region :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UptimeCheckIp_Region = UptimeCheckIp_Region { fromUptimeCheckIp_Region :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value if no region is specified. Will result in Uptime checks running from all regions.
 pattern UptimeCheckIp_Region_REGIONUNSPECIFIED :: UptimeCheckIp_Region
@@ -2179,21 +2207,20 @@ pattern UptimeCheckIp_Region_ASIAPACIFIC = UptimeCheckIp_Region "ASIA_PACIFIC"
   UptimeCheckIp_Region_Europe,
   UptimeCheckIp_Region_SOUTHAMERICA,
   UptimeCheckIp_Region_ASIAPACIFIC,
-  UptimeCheckIp_Region
-  #-}
+  UptimeCheckIp_Region #-}
 
 -- | The value stream kind.
-newtype ValueDescriptor_MetricKind = ValueDescriptor_MetricKind {fromValueDescriptor_MetricKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ValueDescriptor_MetricKind = ValueDescriptor_MetricKind { fromValueDescriptor_MetricKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern ValueDescriptor_MetricKind_METRICKINDUNSPECIFIED :: ValueDescriptor_MetricKind
@@ -2216,21 +2243,20 @@ pattern ValueDescriptor_MetricKind_Cumulative = ValueDescriptor_MetricKind "CUMU
   ValueDescriptor_MetricKind_Gauge,
   ValueDescriptor_MetricKind_Delta,
   ValueDescriptor_MetricKind_Cumulative,
-  ValueDescriptor_MetricKind
-  #-}
+  ValueDescriptor_MetricKind #-}
 
 -- | The value type.
-newtype ValueDescriptor_ValueType = ValueDescriptor_ValueType {fromValueDescriptor_ValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ValueDescriptor_ValueType = ValueDescriptor_ValueType { fromValueDescriptor_ValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern ValueDescriptor_ValueType_VALUETYPEUNSPECIFIED :: ValueDescriptor_ValueType
@@ -2268,21 +2294,20 @@ pattern ValueDescriptor_ValueType_Money = ValueDescriptor_ValueType "MONEY"
   ValueDescriptor_ValueType_String,
   ValueDescriptor_ValueType_Distribution,
   ValueDescriptor_ValueType_Money,
-  ValueDescriptor_ValueType
-  #-}
+  ValueDescriptor_ValueType #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype FoldersTimeSeriesListAggregationCrossSeriesReducer = FoldersTimeSeriesListAggregationCrossSeriesReducer {fromFoldersTimeSeriesListAggregationCrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FoldersTimeSeriesListAggregationCrossSeriesReducer = FoldersTimeSeriesListAggregationCrossSeriesReducer { fromFoldersTimeSeriesListAggregationCrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE :: FoldersTimeSeriesListAggregationCrossSeriesReducer
@@ -2355,21 +2380,20 @@ pattern FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05 
   FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_95,
   FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_50,
   FoldersTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05,
-  FoldersTimeSeriesListAggregationCrossSeriesReducer
-  #-}
+  FoldersTimeSeriesListAggregationCrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype FoldersTimeSeriesListAggregationPerSeriesAligner = FoldersTimeSeriesListAggregationPerSeriesAligner {fromFoldersTimeSeriesListAggregationPerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FoldersTimeSeriesListAggregationPerSeriesAligner = FoldersTimeSeriesListAggregationPerSeriesAligner { fromFoldersTimeSeriesListAggregationPerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE :: FoldersTimeSeriesListAggregationPerSeriesAligner
@@ -2467,21 +2491,20 @@ pattern FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNPERCENTCHANGE = Fo
   FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGN_PERCENTILE_50,
   FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGN_PERCENTILE_05,
   FoldersTimeSeriesListAggregationPerSeriesAligner_ALIGNPERCENTCHANGE,
-  FoldersTimeSeriesListAggregationPerSeriesAligner
-  #-}
+  FoldersTimeSeriesListAggregationPerSeriesAligner #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer = FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer {fromFoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer = FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer { fromFoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE :: FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
@@ -2554,21 +2577,20 @@ pattern FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCE
   FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_95,
   FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_50,
   FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05,
-  FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
-  #-}
+  FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner = FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner {fromFoldersTimeSeriesListSecondaryAggregationPerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner = FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner { fromFoldersTimeSeriesListSecondaryAggregationPerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE :: FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
@@ -2666,21 +2688,20 @@ pattern FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNPERCENTCH
   FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGN_PERCENTILE_50,
   FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGN_PERCENTILE_05,
   FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNPERCENTCHANGE,
-  FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
-  #-}
+  FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner #-}
 
 -- | Required. Specifies which information is returned about the time series.
-newtype FoldersTimeSeriesListView = FoldersTimeSeriesListView {fromFoldersTimeSeriesListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FoldersTimeSeriesListView = FoldersTimeSeriesListView { fromFoldersTimeSeriesListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Returns the identity of the metric(s), the time series, and the time series data.
 pattern FoldersTimeSeriesListView_Full :: FoldersTimeSeriesListView
@@ -2693,21 +2714,20 @@ pattern FoldersTimeSeriesListView_Headers = FoldersTimeSeriesListView "HEADERS"
 {-# COMPLETE
   FoldersTimeSeriesListView_Full,
   FoldersTimeSeriesListView_Headers,
-  FoldersTimeSeriesListView
-  #-}
+  FoldersTimeSeriesListView #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype OrganizationsTimeSeriesListAggregationCrossSeriesReducer = OrganizationsTimeSeriesListAggregationCrossSeriesReducer {fromOrganizationsTimeSeriesListAggregationCrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrganizationsTimeSeriesListAggregationCrossSeriesReducer = OrganizationsTimeSeriesListAggregationCrossSeriesReducer { fromOrganizationsTimeSeriesListAggregationCrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE :: OrganizationsTimeSeriesListAggregationCrossSeriesReducer
@@ -2780,21 +2800,20 @@ pattern OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTI
   OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_95,
   OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_50,
   OrganizationsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05,
-  OrganizationsTimeSeriesListAggregationCrossSeriesReducer
-  #-}
+  OrganizationsTimeSeriesListAggregationCrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype OrganizationsTimeSeriesListAggregationPerSeriesAligner = OrganizationsTimeSeriesListAggregationPerSeriesAligner {fromOrganizationsTimeSeriesListAggregationPerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrganizationsTimeSeriesListAggregationPerSeriesAligner = OrganizationsTimeSeriesListAggregationPerSeriesAligner { fromOrganizationsTimeSeriesListAggregationPerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE :: OrganizationsTimeSeriesListAggregationPerSeriesAligner
@@ -2892,21 +2911,20 @@ pattern OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNPERCENTCHANG
   OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGN_PERCENTILE_50,
   OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGN_PERCENTILE_05,
   OrganizationsTimeSeriesListAggregationPerSeriesAligner_ALIGNPERCENTCHANGE,
-  OrganizationsTimeSeriesListAggregationPerSeriesAligner
-  #-}
+  OrganizationsTimeSeriesListAggregationPerSeriesAligner #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer = OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer {fromOrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer = OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer { fromOrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE :: OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
@@ -2979,21 +2997,20 @@ pattern OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE
   OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_95,
   OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_50,
   OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05,
-  OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
-  #-}
+  OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner = OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner {fromOrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner = OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner { fromOrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE :: OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
@@ -3091,21 +3108,20 @@ pattern OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNPER
   OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGN_PERCENTILE_50,
   OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGN_PERCENTILE_05,
   OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNPERCENTCHANGE,
-  OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
-  #-}
+  OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner #-}
 
 -- | Required. Specifies which information is returned about the time series.
-newtype OrganizationsTimeSeriesListView = OrganizationsTimeSeriesListView {fromOrganizationsTimeSeriesListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrganizationsTimeSeriesListView = OrganizationsTimeSeriesListView { fromOrganizationsTimeSeriesListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Returns the identity of the metric(s), the time series, and the time series data.
 pattern OrganizationsTimeSeriesListView_Full :: OrganizationsTimeSeriesListView
@@ -3118,21 +3134,20 @@ pattern OrganizationsTimeSeriesListView_Headers = OrganizationsTimeSeriesListVie
 {-# COMPLETE
   OrganizationsTimeSeriesListView_Full,
   OrganizationsTimeSeriesListView_Headers,
-  OrganizationsTimeSeriesListView
-  #-}
+  OrganizationsTimeSeriesListView #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype ProjectsTimeSeriesListAggregationCrossSeriesReducer = ProjectsTimeSeriesListAggregationCrossSeriesReducer {fromProjectsTimeSeriesListAggregationCrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTimeSeriesListAggregationCrossSeriesReducer = ProjectsTimeSeriesListAggregationCrossSeriesReducer { fromProjectsTimeSeriesListAggregationCrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCENONE :: ProjectsTimeSeriesListAggregationCrossSeriesReducer
@@ -3205,21 +3220,20 @@ pattern ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05
   ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_95,
   ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_50,
   ProjectsTimeSeriesListAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05,
-  ProjectsTimeSeriesListAggregationCrossSeriesReducer
-  #-}
+  ProjectsTimeSeriesListAggregationCrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype ProjectsTimeSeriesListAggregationPerSeriesAligner = ProjectsTimeSeriesListAggregationPerSeriesAligner {fromProjectsTimeSeriesListAggregationPerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTimeSeriesListAggregationPerSeriesAligner = ProjectsTimeSeriesListAggregationPerSeriesAligner { fromProjectsTimeSeriesListAggregationPerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNNONE :: ProjectsTimeSeriesListAggregationPerSeriesAligner
@@ -3317,21 +3331,20 @@ pattern ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNPERCENTCHANGE = P
   ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGN_PERCENTILE_50,
   ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGN_PERCENTILE_05,
   ProjectsTimeSeriesListAggregationPerSeriesAligner_ALIGNPERCENTCHANGE,
-  ProjectsTimeSeriesListAggregationPerSeriesAligner
-  #-}
+  ProjectsTimeSeriesListAggregationPerSeriesAligner #-}
 
 -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
-newtype ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer = ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer {fromProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer = ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer { fromProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No cross-time series reduction. The output of the Aligner is returned.
 pattern ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCENONE :: ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
@@ -3404,21 +3417,20 @@ pattern ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERC
   ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_95,
   ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_50,
   ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer_REDUCE_PERCENTILE_05,
-  ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
-  #-}
+  ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer #-}
 
 -- | An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN/NONE, all alignments cause all the data points in an alignment/period to be mathematically grouped together, resulting in a single data point for each alignment/period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric/kind and value/type of the original time series. Alignment can change the metric/kind or the value/type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified and not equal to ALIGN/NONE and alignment_period must be specified; otherwise, an error is returned.
-newtype ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner = ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner {fromProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner = ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner { fromProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No alignment. Raw data is returned. Not valid if cross-series reduction is requested. The value/type of the result is the same as the value/type of the input.
 pattern ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNNONE :: ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
@@ -3516,21 +3528,20 @@ pattern ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNPERCENTC
   ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGN_PERCENTILE_50,
   ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGN_PERCENTILE_05,
   ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner_ALIGNPERCENTCHANGE,
-  ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
-  #-}
+  ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner #-}
 
 -- | Required. Specifies which information is returned about the time series.
-newtype ProjectsTimeSeriesListView = ProjectsTimeSeriesListView {fromProjectsTimeSeriesListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTimeSeriesListView = ProjectsTimeSeriesListView { fromProjectsTimeSeriesListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Returns the identity of the metric(s), the time series, and the time series data.
 pattern ProjectsTimeSeriesListView_Full :: ProjectsTimeSeriesListView
@@ -3543,21 +3554,20 @@ pattern ProjectsTimeSeriesListView_Headers = ProjectsTimeSeriesListView "HEADERS
 {-# COMPLETE
   ProjectsTimeSeriesListView_Full,
   ProjectsTimeSeriesListView_Headers,
-  ProjectsTimeSeriesListView
-  #-}
+  ProjectsTimeSeriesListView #-}
 
 -- | View of the ServiceLevelObjective to return. If DEFAULT, return the ServiceLevelObjective as originally defined. If EXPLICIT and the ServiceLevelObjective is defined in terms of a BasicSli, replace the BasicSli with a RequestBasedSli spelling out how the SLI is computed.
-newtype ServicesServiceLevelObjectivesGetView = ServicesServiceLevelObjectivesGetView {fromServicesServiceLevelObjectivesGetView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ServicesServiceLevelObjectivesGetView = ServicesServiceLevelObjectivesGetView { fromServicesServiceLevelObjectivesGetView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Same as FULL.
 pattern ServicesServiceLevelObjectivesGetView_VIEWUNSPECIFIED :: ServicesServiceLevelObjectivesGetView
@@ -3575,21 +3585,20 @@ pattern ServicesServiceLevelObjectivesGetView_Explicit = ServicesServiceLevelObj
   ServicesServiceLevelObjectivesGetView_VIEWUNSPECIFIED,
   ServicesServiceLevelObjectivesGetView_Full,
   ServicesServiceLevelObjectivesGetView_Explicit,
-  ServicesServiceLevelObjectivesGetView
-  #-}
+  ServicesServiceLevelObjectivesGetView #-}
 
 -- | View of the ServiceLevelObjectives to return. If DEFAULT, return each ServiceLevelObjective as originally defined. If EXPLICIT and the ServiceLevelObjective is defined in terms of a BasicSli, replace the BasicSli with a RequestBasedSli spelling out how the SLI is computed.
-newtype ServicesServiceLevelObjectivesListView = ServicesServiceLevelObjectivesListView {fromServicesServiceLevelObjectivesListView :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ServicesServiceLevelObjectivesListView = ServicesServiceLevelObjectivesListView { fromServicesServiceLevelObjectivesListView :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Same as FULL.
 pattern ServicesServiceLevelObjectivesListView_VIEWUNSPECIFIED :: ServicesServiceLevelObjectivesListView
@@ -3607,5 +3616,4 @@ pattern ServicesServiceLevelObjectivesListView_Explicit = ServicesServiceLevelOb
   ServicesServiceLevelObjectivesListView_VIEWUNSPECIFIED,
   ServicesServiceLevelObjectivesListView_Full,
   ServicesServiceLevelObjectivesListView_Explicit,
-  ServicesServiceLevelObjectivesListView
-  #-}
+  ServicesServiceLevelObjectivesListView #-}

@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,895 +36,895 @@
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference>
 module Gogol.Monitoring
-  ( -- * Configuration
-    monitoringService,
+    (
+    -- * Configuration
+      monitoringService
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    monitoringScope,
-    monitoringReadScope,
-    monitoringWriteScope,
+    , cloudPlatformScope
+    , monitoringScope
+    , monitoringReadScope
+    , monitoringWriteScope
 
     -- * Resources
 
     -- ** monitoring.folders.timeSeries.list
-    MonitoringFoldersTimeSeriesListResource,
-    newMonitoringFoldersTimeSeriesList,
-    MonitoringFoldersTimeSeriesList,
+    , MonitoringFoldersTimeSeriesListResource
+    , newMonitoringFoldersTimeSeriesList
+    , MonitoringFoldersTimeSeriesList
 
     -- ** monitoring.organizations.timeSeries.list
-    MonitoringOrganizationsTimeSeriesListResource,
-    newMonitoringOrganizationsTimeSeriesList,
-    MonitoringOrganizationsTimeSeriesList,
+    , MonitoringOrganizationsTimeSeriesListResource
+    , newMonitoringOrganizationsTimeSeriesList
+    , MonitoringOrganizationsTimeSeriesList
 
     -- ** monitoring.projects.alertPolicies.create
-    MonitoringProjectsAlertPoliciesCreateResource,
-    newMonitoringProjectsAlertPoliciesCreate,
-    MonitoringProjectsAlertPoliciesCreate,
+    , MonitoringProjectsAlertPoliciesCreateResource
+    , newMonitoringProjectsAlertPoliciesCreate
+    , MonitoringProjectsAlertPoliciesCreate
 
     -- ** monitoring.projects.alertPolicies.delete
-    MonitoringProjectsAlertPoliciesDeleteResource,
-    newMonitoringProjectsAlertPoliciesDelete,
-    MonitoringProjectsAlertPoliciesDelete,
+    , MonitoringProjectsAlertPoliciesDeleteResource
+    , newMonitoringProjectsAlertPoliciesDelete
+    , MonitoringProjectsAlertPoliciesDelete
 
     -- ** monitoring.projects.alertPolicies.get
-    MonitoringProjectsAlertPoliciesGetResource,
-    newMonitoringProjectsAlertPoliciesGet,
-    MonitoringProjectsAlertPoliciesGet,
+    , MonitoringProjectsAlertPoliciesGetResource
+    , newMonitoringProjectsAlertPoliciesGet
+    , MonitoringProjectsAlertPoliciesGet
 
     -- ** monitoring.projects.alertPolicies.list
-    MonitoringProjectsAlertPoliciesListResource,
-    newMonitoringProjectsAlertPoliciesList,
-    MonitoringProjectsAlertPoliciesList,
+    , MonitoringProjectsAlertPoliciesListResource
+    , newMonitoringProjectsAlertPoliciesList
+    , MonitoringProjectsAlertPoliciesList
 
     -- ** monitoring.projects.alertPolicies.patch
-    MonitoringProjectsAlertPoliciesPatchResource,
-    newMonitoringProjectsAlertPoliciesPatch,
-    MonitoringProjectsAlertPoliciesPatch,
+    , MonitoringProjectsAlertPoliciesPatchResource
+    , newMonitoringProjectsAlertPoliciesPatch
+    , MonitoringProjectsAlertPoliciesPatch
 
     -- ** monitoring.projects.collectdTimeSeries.create
-    MonitoringProjectsCollectdTimeSeriesCreateResource,
-    newMonitoringProjectsCollectdTimeSeriesCreate,
-    MonitoringProjectsCollectdTimeSeriesCreate,
+    , MonitoringProjectsCollectdTimeSeriesCreateResource
+    , newMonitoringProjectsCollectdTimeSeriesCreate
+    , MonitoringProjectsCollectdTimeSeriesCreate
 
     -- ** monitoring.projects.groups.create
-    MonitoringProjectsGroupsCreateResource,
-    newMonitoringProjectsGroupsCreate,
-    MonitoringProjectsGroupsCreate,
+    , MonitoringProjectsGroupsCreateResource
+    , newMonitoringProjectsGroupsCreate
+    , MonitoringProjectsGroupsCreate
 
     -- ** monitoring.projects.groups.delete
-    MonitoringProjectsGroupsDeleteResource,
-    newMonitoringProjectsGroupsDelete,
-    MonitoringProjectsGroupsDelete,
+    , MonitoringProjectsGroupsDeleteResource
+    , newMonitoringProjectsGroupsDelete
+    , MonitoringProjectsGroupsDelete
 
     -- ** monitoring.projects.groups.get
-    MonitoringProjectsGroupsGetResource,
-    newMonitoringProjectsGroupsGet,
-    MonitoringProjectsGroupsGet,
+    , MonitoringProjectsGroupsGetResource
+    , newMonitoringProjectsGroupsGet
+    , MonitoringProjectsGroupsGet
 
     -- ** monitoring.projects.groups.list
-    MonitoringProjectsGroupsListResource,
-    newMonitoringProjectsGroupsList,
-    MonitoringProjectsGroupsList,
+    , MonitoringProjectsGroupsListResource
+    , newMonitoringProjectsGroupsList
+    , MonitoringProjectsGroupsList
 
     -- ** monitoring.projects.groups.members.list
-    MonitoringProjectsGroupsMembersListResource,
-    newMonitoringProjectsGroupsMembersList,
-    MonitoringProjectsGroupsMembersList,
+    , MonitoringProjectsGroupsMembersListResource
+    , newMonitoringProjectsGroupsMembersList
+    , MonitoringProjectsGroupsMembersList
 
     -- ** monitoring.projects.groups.update
-    MonitoringProjectsGroupsUpdateResource,
-    newMonitoringProjectsGroupsUpdate,
-    MonitoringProjectsGroupsUpdate,
+    , MonitoringProjectsGroupsUpdateResource
+    , newMonitoringProjectsGroupsUpdate
+    , MonitoringProjectsGroupsUpdate
 
     -- ** monitoring.projects.metricDescriptors.create
-    MonitoringProjectsMetricDescriptorsCreateResource,
-    newMonitoringProjectsMetricDescriptorsCreate,
-    MonitoringProjectsMetricDescriptorsCreate,
+    , MonitoringProjectsMetricDescriptorsCreateResource
+    , newMonitoringProjectsMetricDescriptorsCreate
+    , MonitoringProjectsMetricDescriptorsCreate
 
     -- ** monitoring.projects.metricDescriptors.delete
-    MonitoringProjectsMetricDescriptorsDeleteResource,
-    newMonitoringProjectsMetricDescriptorsDelete,
-    MonitoringProjectsMetricDescriptorsDelete,
+    , MonitoringProjectsMetricDescriptorsDeleteResource
+    , newMonitoringProjectsMetricDescriptorsDelete
+    , MonitoringProjectsMetricDescriptorsDelete
 
     -- ** monitoring.projects.metricDescriptors.get
-    MonitoringProjectsMetricDescriptorsGetResource,
-    newMonitoringProjectsMetricDescriptorsGet,
-    MonitoringProjectsMetricDescriptorsGet,
+    , MonitoringProjectsMetricDescriptorsGetResource
+    , newMonitoringProjectsMetricDescriptorsGet
+    , MonitoringProjectsMetricDescriptorsGet
 
     -- ** monitoring.projects.metricDescriptors.list
-    MonitoringProjectsMetricDescriptorsListResource,
-    newMonitoringProjectsMetricDescriptorsList,
-    MonitoringProjectsMetricDescriptorsList,
+    , MonitoringProjectsMetricDescriptorsListResource
+    , newMonitoringProjectsMetricDescriptorsList
+    , MonitoringProjectsMetricDescriptorsList
 
     -- ** monitoring.projects.monitoredResourceDescriptors.get
-    MonitoringProjectsMonitoredResourceDescriptorsGetResource,
-    newMonitoringProjectsMonitoredResourceDescriptorsGet,
-    MonitoringProjectsMonitoredResourceDescriptorsGet,
+    , MonitoringProjectsMonitoredResourceDescriptorsGetResource
+    , newMonitoringProjectsMonitoredResourceDescriptorsGet
+    , MonitoringProjectsMonitoredResourceDescriptorsGet
 
     -- ** monitoring.projects.monitoredResourceDescriptors.list
-    MonitoringProjectsMonitoredResourceDescriptorsListResource,
-    newMonitoringProjectsMonitoredResourceDescriptorsList,
-    MonitoringProjectsMonitoredResourceDescriptorsList,
+    , MonitoringProjectsMonitoredResourceDescriptorsListResource
+    , newMonitoringProjectsMonitoredResourceDescriptorsList
+    , MonitoringProjectsMonitoredResourceDescriptorsList
 
     -- ** monitoring.projects.notificationChannelDescriptors.get
-    MonitoringProjectsNotificationChannelDescriptorsGetResource,
-    newMonitoringProjectsNotificationChannelDescriptorsGet,
-    MonitoringProjectsNotificationChannelDescriptorsGet,
+    , MonitoringProjectsNotificationChannelDescriptorsGetResource
+    , newMonitoringProjectsNotificationChannelDescriptorsGet
+    , MonitoringProjectsNotificationChannelDescriptorsGet
 
     -- ** monitoring.projects.notificationChannelDescriptors.list
-    MonitoringProjectsNotificationChannelDescriptorsListResource,
-    newMonitoringProjectsNotificationChannelDescriptorsList,
-    MonitoringProjectsNotificationChannelDescriptorsList,
+    , MonitoringProjectsNotificationChannelDescriptorsListResource
+    , newMonitoringProjectsNotificationChannelDescriptorsList
+    , MonitoringProjectsNotificationChannelDescriptorsList
 
     -- ** monitoring.projects.notificationChannels.create
-    MonitoringProjectsNotificationChannelsCreateResource,
-    newMonitoringProjectsNotificationChannelsCreate,
-    MonitoringProjectsNotificationChannelsCreate,
+    , MonitoringProjectsNotificationChannelsCreateResource
+    , newMonitoringProjectsNotificationChannelsCreate
+    , MonitoringProjectsNotificationChannelsCreate
 
     -- ** monitoring.projects.notificationChannels.delete
-    MonitoringProjectsNotificationChannelsDeleteResource,
-    newMonitoringProjectsNotificationChannelsDelete,
-    MonitoringProjectsNotificationChannelsDelete,
+    , MonitoringProjectsNotificationChannelsDeleteResource
+    , newMonitoringProjectsNotificationChannelsDelete
+    , MonitoringProjectsNotificationChannelsDelete
 
     -- ** monitoring.projects.notificationChannels.get
-    MonitoringProjectsNotificationChannelsGetResource,
-    newMonitoringProjectsNotificationChannelsGet,
-    MonitoringProjectsNotificationChannelsGet,
+    , MonitoringProjectsNotificationChannelsGetResource
+    , newMonitoringProjectsNotificationChannelsGet
+    , MonitoringProjectsNotificationChannelsGet
 
     -- ** monitoring.projects.notificationChannels.getVerificationCode
-    MonitoringProjectsNotificationChannelsGetVerificationCodeResource,
-    newMonitoringProjectsNotificationChannelsGetVerificationCode,
-    MonitoringProjectsNotificationChannelsGetVerificationCode,
+    , MonitoringProjectsNotificationChannelsGetVerificationCodeResource
+    , newMonitoringProjectsNotificationChannelsGetVerificationCode
+    , MonitoringProjectsNotificationChannelsGetVerificationCode
 
     -- ** monitoring.projects.notificationChannels.list
-    MonitoringProjectsNotificationChannelsListResource,
-    newMonitoringProjectsNotificationChannelsList,
-    MonitoringProjectsNotificationChannelsList,
+    , MonitoringProjectsNotificationChannelsListResource
+    , newMonitoringProjectsNotificationChannelsList
+    , MonitoringProjectsNotificationChannelsList
 
     -- ** monitoring.projects.notificationChannels.patch
-    MonitoringProjectsNotificationChannelsPatchResource,
-    newMonitoringProjectsNotificationChannelsPatch,
-    MonitoringProjectsNotificationChannelsPatch,
+    , MonitoringProjectsNotificationChannelsPatchResource
+    , newMonitoringProjectsNotificationChannelsPatch
+    , MonitoringProjectsNotificationChannelsPatch
 
     -- ** monitoring.projects.notificationChannels.sendVerificationCode
-    MonitoringProjectsNotificationChannelsSendVerificationCodeResource,
-    newMonitoringProjectsNotificationChannelsSendVerificationCode,
-    MonitoringProjectsNotificationChannelsSendVerificationCode,
+    , MonitoringProjectsNotificationChannelsSendVerificationCodeResource
+    , newMonitoringProjectsNotificationChannelsSendVerificationCode
+    , MonitoringProjectsNotificationChannelsSendVerificationCode
 
     -- ** monitoring.projects.notificationChannels.verify
-    MonitoringProjectsNotificationChannelsVerifyResource,
-    newMonitoringProjectsNotificationChannelsVerify,
-    MonitoringProjectsNotificationChannelsVerify,
+    , MonitoringProjectsNotificationChannelsVerifyResource
+    , newMonitoringProjectsNotificationChannelsVerify
+    , MonitoringProjectsNotificationChannelsVerify
 
     -- ** monitoring.projects.timeSeries.create
-    MonitoringProjectsTimeSeriesCreateResource,
-    newMonitoringProjectsTimeSeriesCreate,
-    MonitoringProjectsTimeSeriesCreate,
+    , MonitoringProjectsTimeSeriesCreateResource
+    , newMonitoringProjectsTimeSeriesCreate
+    , MonitoringProjectsTimeSeriesCreate
 
     -- ** monitoring.projects.timeSeries.createService
-    MonitoringProjectsTimeSeriesCreateServiceResource,
-    newMonitoringProjectsTimeSeriesCreateService,
-    MonitoringProjectsTimeSeriesCreateService,
+    , MonitoringProjectsTimeSeriesCreateServiceResource
+    , newMonitoringProjectsTimeSeriesCreateService
+    , MonitoringProjectsTimeSeriesCreateService
 
     -- ** monitoring.projects.timeSeries.list
-    MonitoringProjectsTimeSeriesListResource,
-    newMonitoringProjectsTimeSeriesList,
-    MonitoringProjectsTimeSeriesList,
+    , MonitoringProjectsTimeSeriesListResource
+    , newMonitoringProjectsTimeSeriesList
+    , MonitoringProjectsTimeSeriesList
 
     -- ** monitoring.projects.timeSeries.query
-    MonitoringProjectsTimeSeriesQueryResource,
-    newMonitoringProjectsTimeSeriesQuery,
-    MonitoringProjectsTimeSeriesQuery,
+    , MonitoringProjectsTimeSeriesQueryResource
+    , newMonitoringProjectsTimeSeriesQuery
+    , MonitoringProjectsTimeSeriesQuery
 
     -- ** monitoring.projects.uptimeCheckConfigs.create
-    MonitoringProjectsUptimeCheckConfigsCreateResource,
-    newMonitoringProjectsUptimeCheckConfigsCreate,
-    MonitoringProjectsUptimeCheckConfigsCreate,
+    , MonitoringProjectsUptimeCheckConfigsCreateResource
+    , newMonitoringProjectsUptimeCheckConfigsCreate
+    , MonitoringProjectsUptimeCheckConfigsCreate
 
     -- ** monitoring.projects.uptimeCheckConfigs.delete
-    MonitoringProjectsUptimeCheckConfigsDeleteResource,
-    newMonitoringProjectsUptimeCheckConfigsDelete,
-    MonitoringProjectsUptimeCheckConfigsDelete,
+    , MonitoringProjectsUptimeCheckConfigsDeleteResource
+    , newMonitoringProjectsUptimeCheckConfigsDelete
+    , MonitoringProjectsUptimeCheckConfigsDelete
 
     -- ** monitoring.projects.uptimeCheckConfigs.get
-    MonitoringProjectsUptimeCheckConfigsGetResource,
-    newMonitoringProjectsUptimeCheckConfigsGet,
-    MonitoringProjectsUptimeCheckConfigsGet,
+    , MonitoringProjectsUptimeCheckConfigsGetResource
+    , newMonitoringProjectsUptimeCheckConfigsGet
+    , MonitoringProjectsUptimeCheckConfigsGet
 
     -- ** monitoring.projects.uptimeCheckConfigs.list
-    MonitoringProjectsUptimeCheckConfigsListResource,
-    newMonitoringProjectsUptimeCheckConfigsList,
-    MonitoringProjectsUptimeCheckConfigsList,
+    , MonitoringProjectsUptimeCheckConfigsListResource
+    , newMonitoringProjectsUptimeCheckConfigsList
+    , MonitoringProjectsUptimeCheckConfigsList
 
     -- ** monitoring.projects.uptimeCheckConfigs.patch
-    MonitoringProjectsUptimeCheckConfigsPatchResource,
-    newMonitoringProjectsUptimeCheckConfigsPatch,
-    MonitoringProjectsUptimeCheckConfigsPatch,
+    , MonitoringProjectsUptimeCheckConfigsPatchResource
+    , newMonitoringProjectsUptimeCheckConfigsPatch
+    , MonitoringProjectsUptimeCheckConfigsPatch
 
     -- ** monitoring.services.create
-    MonitoringServicesCreateResource,
-    newMonitoringServicesCreate,
-    MonitoringServicesCreate,
+    , MonitoringServicesCreateResource
+    , newMonitoringServicesCreate
+    , MonitoringServicesCreate
 
     -- ** monitoring.services.delete
-    MonitoringServicesDeleteResource,
-    newMonitoringServicesDelete,
-    MonitoringServicesDelete,
+    , MonitoringServicesDeleteResource
+    , newMonitoringServicesDelete
+    , MonitoringServicesDelete
 
     -- ** monitoring.services.get
-    MonitoringServicesGetResource,
-    newMonitoringServicesGet,
-    MonitoringServicesGet,
+    , MonitoringServicesGetResource
+    , newMonitoringServicesGet
+    , MonitoringServicesGet
 
     -- ** monitoring.services.list
-    MonitoringServicesListResource,
-    newMonitoringServicesList,
-    MonitoringServicesList,
+    , MonitoringServicesListResource
+    , newMonitoringServicesList
+    , MonitoringServicesList
 
     -- ** monitoring.services.patch
-    MonitoringServicesPatchResource,
-    newMonitoringServicesPatch,
-    MonitoringServicesPatch,
+    , MonitoringServicesPatchResource
+    , newMonitoringServicesPatch
+    , MonitoringServicesPatch
 
     -- ** monitoring.services.serviceLevelObjectives.create
-    MonitoringServicesServiceLevelObjectivesCreateResource,
-    newMonitoringServicesServiceLevelObjectivesCreate,
-    MonitoringServicesServiceLevelObjectivesCreate,
+    , MonitoringServicesServiceLevelObjectivesCreateResource
+    , newMonitoringServicesServiceLevelObjectivesCreate
+    , MonitoringServicesServiceLevelObjectivesCreate
 
     -- ** monitoring.services.serviceLevelObjectives.delete
-    MonitoringServicesServiceLevelObjectivesDeleteResource,
-    newMonitoringServicesServiceLevelObjectivesDelete,
-    MonitoringServicesServiceLevelObjectivesDelete,
+    , MonitoringServicesServiceLevelObjectivesDeleteResource
+    , newMonitoringServicesServiceLevelObjectivesDelete
+    , MonitoringServicesServiceLevelObjectivesDelete
 
     -- ** monitoring.services.serviceLevelObjectives.get
-    MonitoringServicesServiceLevelObjectivesGetResource,
-    newMonitoringServicesServiceLevelObjectivesGet,
-    MonitoringServicesServiceLevelObjectivesGet,
+    , MonitoringServicesServiceLevelObjectivesGetResource
+    , newMonitoringServicesServiceLevelObjectivesGet
+    , MonitoringServicesServiceLevelObjectivesGet
 
     -- ** monitoring.services.serviceLevelObjectives.list
-    MonitoringServicesServiceLevelObjectivesListResource,
-    newMonitoringServicesServiceLevelObjectivesList,
-    MonitoringServicesServiceLevelObjectivesList,
+    , MonitoringServicesServiceLevelObjectivesListResource
+    , newMonitoringServicesServiceLevelObjectivesList
+    , MonitoringServicesServiceLevelObjectivesList
 
     -- ** monitoring.services.serviceLevelObjectives.patch
-    MonitoringServicesServiceLevelObjectivesPatchResource,
-    newMonitoringServicesServiceLevelObjectivesPatch,
-    MonitoringServicesServiceLevelObjectivesPatch,
+    , MonitoringServicesServiceLevelObjectivesPatchResource
+    , newMonitoringServicesServiceLevelObjectivesPatch
+    , MonitoringServicesServiceLevelObjectivesPatch
 
     -- ** monitoring.uptimeCheckIps.list
-    MonitoringUptimeCheckIpsListResource,
-    newMonitoringUptimeCheckIpsList,
-    MonitoringUptimeCheckIpsList,
+    , MonitoringUptimeCheckIpsListResource
+    , newMonitoringUptimeCheckIpsList
+    , MonitoringUptimeCheckIpsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Aggregation
-    Aggregation (..),
-    newAggregation,
+    , Aggregation (..)
+    , newAggregation
 
     -- ** Aggregation_CrossSeriesReducer
-    Aggregation_CrossSeriesReducer (..),
+    , Aggregation_CrossSeriesReducer (..)
 
     -- ** Aggregation_PerSeriesAligner
-    Aggregation_PerSeriesAligner (..),
+    , Aggregation_PerSeriesAligner (..)
 
     -- ** AlertPolicy
-    AlertPolicy (..),
-    newAlertPolicy,
+    , AlertPolicy (..)
+    , newAlertPolicy
 
     -- ** AlertPolicy_Combiner
-    AlertPolicy_Combiner (..),
+    , AlertPolicy_Combiner (..)
 
     -- ** AlertPolicy_UserLabels
-    AlertPolicy_UserLabels (..),
-    newAlertPolicy_UserLabels,
+    , AlertPolicy_UserLabels (..)
+    , newAlertPolicy_UserLabels
 
     -- ** AlertStrategy
-    AlertStrategy (..),
-    newAlertStrategy,
+    , AlertStrategy (..)
+    , newAlertStrategy
 
     -- ** AppEngine
-    AppEngine (..),
-    newAppEngine,
+    , AppEngine (..)
+    , newAppEngine
 
     -- ** AvailabilityCriteria
-    AvailabilityCriteria (..),
-    newAvailabilityCriteria,
+    , AvailabilityCriteria (..)
+    , newAvailabilityCriteria
 
     -- ** BasicAuthentication
-    BasicAuthentication (..),
-    newBasicAuthentication,
+    , BasicAuthentication (..)
+    , newBasicAuthentication
 
     -- ** BasicSli
-    BasicSli (..),
-    newBasicSli,
+    , BasicSli (..)
+    , newBasicSli
 
     -- ** BucketOptions
-    BucketOptions (..),
-    newBucketOptions,
+    , BucketOptions (..)
+    , newBucketOptions
 
     -- ** CloudEndpoints
-    CloudEndpoints (..),
-    newCloudEndpoints,
+    , CloudEndpoints (..)
+    , newCloudEndpoints
 
     -- ** ClusterIstio
-    ClusterIstio (..),
-    newClusterIstio,
+    , ClusterIstio (..)
+    , newClusterIstio
 
     -- ** CollectdPayload
-    CollectdPayload (..),
-    newCollectdPayload,
+    , CollectdPayload (..)
+    , newCollectdPayload
 
     -- ** CollectdPayload_Metadata
-    CollectdPayload_Metadata (..),
-    newCollectdPayload_Metadata,
+    , CollectdPayload_Metadata (..)
+    , newCollectdPayload_Metadata
 
     -- ** CollectdPayloadError
-    CollectdPayloadError (..),
-    newCollectdPayloadError,
+    , CollectdPayloadError (..)
+    , newCollectdPayloadError
 
     -- ** CollectdValue
-    CollectdValue (..),
-    newCollectdValue,
+    , CollectdValue (..)
+    , newCollectdValue
 
     -- ** CollectdValue_DataSourceType
-    CollectdValue_DataSourceType (..),
+    , CollectdValue_DataSourceType (..)
 
     -- ** CollectdValueError
-    CollectdValueError (..),
-    newCollectdValueError,
+    , CollectdValueError (..)
+    , newCollectdValueError
 
     -- ** Condition
-    Condition (..),
-    newCondition,
+    , Condition (..)
+    , newCondition
 
     -- ** ContentMatcher
-    ContentMatcher (..),
-    newContentMatcher,
+    , ContentMatcher (..)
+    , newContentMatcher
 
     -- ** ContentMatcher_Matcher
-    ContentMatcher_Matcher (..),
+    , ContentMatcher_Matcher (..)
 
     -- ** CreateCollectdTimeSeriesRequest
-    CreateCollectdTimeSeriesRequest (..),
-    newCreateCollectdTimeSeriesRequest,
+    , CreateCollectdTimeSeriesRequest (..)
+    , newCreateCollectdTimeSeriesRequest
 
     -- ** CreateCollectdTimeSeriesResponse
-    CreateCollectdTimeSeriesResponse (..),
-    newCreateCollectdTimeSeriesResponse,
+    , CreateCollectdTimeSeriesResponse (..)
+    , newCreateCollectdTimeSeriesResponse
 
     -- ** CreateTimeSeriesRequest
-    CreateTimeSeriesRequest (..),
-    newCreateTimeSeriesRequest,
+    , CreateTimeSeriesRequest (..)
+    , newCreateTimeSeriesRequest
 
     -- ** CreateTimeSeriesSummary
-    CreateTimeSeriesSummary (..),
-    newCreateTimeSeriesSummary,
+    , CreateTimeSeriesSummary (..)
+    , newCreateTimeSeriesSummary
 
     -- ** Custom
-    Custom (..),
-    newCustom,
+    , Custom (..)
+    , newCustom
 
     -- ** Distribution
-    Distribution (..),
-    newDistribution,
+    , Distribution (..)
+    , newDistribution
 
     -- ** DistributionCut
-    DistributionCut (..),
-    newDistributionCut,
+    , DistributionCut (..)
+    , newDistributionCut
 
     -- ** Documentation
-    Documentation (..),
-    newDocumentation,
+    , Documentation (..)
+    , newDocumentation
 
     -- ** DroppedLabels
-    DroppedLabels (..),
-    newDroppedLabels,
+    , DroppedLabels (..)
+    , newDroppedLabels
 
     -- ** DroppedLabels_Label
-    DroppedLabels_Label (..),
-    newDroppedLabels_Label,
+    , DroppedLabels_Label (..)
+    , newDroppedLabels_Label
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Error'
-    Error' (..),
-    newError,
+    , Error' (..)
+    , newError
 
     -- ** Exemplar
-    Exemplar (..),
-    newExemplar,
+    , Exemplar (..)
+    , newExemplar
 
     -- ** Exemplar_AttachmentsItem
-    Exemplar_AttachmentsItem (..),
-    newExemplar_AttachmentsItem,
+    , Exemplar_AttachmentsItem (..)
+    , newExemplar_AttachmentsItem
 
     -- ** Explicit
-    Explicit (..),
-    newExplicit,
+    , Explicit (..)
+    , newExplicit
 
     -- ** Exponential
-    Exponential (..),
-    newExponential,
+    , Exponential (..)
+    , newExponential
 
     -- ** Field
-    Field (..),
-    newField,
+    , Field (..)
+    , newField
 
     -- ** Field_Cardinality
-    Field_Cardinality (..),
+    , Field_Cardinality (..)
 
     -- ** Field_Kind
-    Field_Kind (..),
+    , Field_Kind (..)
 
     -- ** GetNotificationChannelVerificationCodeRequest
-    GetNotificationChannelVerificationCodeRequest (..),
-    newGetNotificationChannelVerificationCodeRequest,
+    , GetNotificationChannelVerificationCodeRequest (..)
+    , newGetNotificationChannelVerificationCodeRequest
 
     -- ** GetNotificationChannelVerificationCodeResponse
-    GetNotificationChannelVerificationCodeResponse (..),
-    newGetNotificationChannelVerificationCodeResponse,
+    , GetNotificationChannelVerificationCodeResponse (..)
+    , newGetNotificationChannelVerificationCodeResponse
 
     -- ** GoogleMonitoringV3Range
-    GoogleMonitoringV3Range (..),
-    newGoogleMonitoringV3Range,
+    , GoogleMonitoringV3Range (..)
+    , newGoogleMonitoringV3Range
 
     -- ** Group
-    Group (..),
-    newGroup,
+    , Group (..)
+    , newGroup
 
     -- ** HttpCheck
-    HttpCheck (..),
-    newHttpCheck,
+    , HttpCheck (..)
+    , newHttpCheck
 
     -- ** HttpCheck_ContentType
-    HttpCheck_ContentType (..),
+    , HttpCheck_ContentType (..)
 
     -- ** HttpCheck_Headers
-    HttpCheck_Headers (..),
-    newHttpCheck_Headers,
+    , HttpCheck_Headers (..)
+    , newHttpCheck_Headers
 
     -- ** HttpCheck_RequestMethod
-    HttpCheck_RequestMethod (..),
+    , HttpCheck_RequestMethod (..)
 
     -- ** InternalChecker
-    InternalChecker (..),
-    newInternalChecker,
+    , InternalChecker (..)
+    , newInternalChecker
 
     -- ** InternalChecker_State
-    InternalChecker_State (..),
+    , InternalChecker_State (..)
 
     -- ** IstioCanonicalService
-    IstioCanonicalService (..),
-    newIstioCanonicalService,
+    , IstioCanonicalService (..)
+    , newIstioCanonicalService
 
     -- ** LabelDescriptor
-    LabelDescriptor (..),
-    newLabelDescriptor,
+    , LabelDescriptor (..)
+    , newLabelDescriptor
 
     -- ** LabelDescriptor_ValueType
-    LabelDescriptor_ValueType (..),
+    , LabelDescriptor_ValueType (..)
 
     -- ** LabelValue
-    LabelValue (..),
-    newLabelValue,
+    , LabelValue (..)
+    , newLabelValue
 
     -- ** LatencyCriteria
-    LatencyCriteria (..),
-    newLatencyCriteria,
+    , LatencyCriteria (..)
+    , newLatencyCriteria
 
     -- ** Linear
-    Linear (..),
-    newLinear,
+    , Linear (..)
+    , newLinear
 
     -- ** ListAlertPoliciesResponse
-    ListAlertPoliciesResponse (..),
-    newListAlertPoliciesResponse,
+    , ListAlertPoliciesResponse (..)
+    , newListAlertPoliciesResponse
 
     -- ** ListGroupMembersResponse
-    ListGroupMembersResponse (..),
-    newListGroupMembersResponse,
+    , ListGroupMembersResponse (..)
+    , newListGroupMembersResponse
 
     -- ** ListGroupsResponse
-    ListGroupsResponse (..),
-    newListGroupsResponse,
+    , ListGroupsResponse (..)
+    , newListGroupsResponse
 
     -- ** ListMetricDescriptorsResponse
-    ListMetricDescriptorsResponse (..),
-    newListMetricDescriptorsResponse,
+    , ListMetricDescriptorsResponse (..)
+    , newListMetricDescriptorsResponse
 
     -- ** ListMonitoredResourceDescriptorsResponse
-    ListMonitoredResourceDescriptorsResponse (..),
-    newListMonitoredResourceDescriptorsResponse,
+    , ListMonitoredResourceDescriptorsResponse (..)
+    , newListMonitoredResourceDescriptorsResponse
 
     -- ** ListNotificationChannelDescriptorsResponse
-    ListNotificationChannelDescriptorsResponse (..),
-    newListNotificationChannelDescriptorsResponse,
+    , ListNotificationChannelDescriptorsResponse (..)
+    , newListNotificationChannelDescriptorsResponse
 
     -- ** ListNotificationChannelsResponse
-    ListNotificationChannelsResponse (..),
-    newListNotificationChannelsResponse,
+    , ListNotificationChannelsResponse (..)
+    , newListNotificationChannelsResponse
 
     -- ** ListServiceLevelObjectivesResponse
-    ListServiceLevelObjectivesResponse (..),
-    newListServiceLevelObjectivesResponse,
+    , ListServiceLevelObjectivesResponse (..)
+    , newListServiceLevelObjectivesResponse
 
     -- ** ListServicesResponse
-    ListServicesResponse (..),
-    newListServicesResponse,
+    , ListServicesResponse (..)
+    , newListServicesResponse
 
     -- ** ListTimeSeriesResponse
-    ListTimeSeriesResponse (..),
-    newListTimeSeriesResponse,
+    , ListTimeSeriesResponse (..)
+    , newListTimeSeriesResponse
 
     -- ** ListUptimeCheckConfigsResponse
-    ListUptimeCheckConfigsResponse (..),
-    newListUptimeCheckConfigsResponse,
+    , ListUptimeCheckConfigsResponse (..)
+    , newListUptimeCheckConfigsResponse
 
     -- ** ListUptimeCheckIpsResponse
-    ListUptimeCheckIpsResponse (..),
-    newListUptimeCheckIpsResponse,
+    , ListUptimeCheckIpsResponse (..)
+    , newListUptimeCheckIpsResponse
 
     -- ** LogMatch
-    LogMatch (..),
-    newLogMatch,
+    , LogMatch (..)
+    , newLogMatch
 
     -- ** LogMatch_LabelExtractors
-    LogMatch_LabelExtractors (..),
-    newLogMatch_LabelExtractors,
+    , LogMatch_LabelExtractors (..)
+    , newLogMatch_LabelExtractors
 
     -- ** MeshIstio
-    MeshIstio (..),
-    newMeshIstio,
+    , MeshIstio (..)
+    , newMeshIstio
 
     -- ** Metric
-    Metric (..),
-    newMetric,
+    , Metric (..)
+    , newMetric
 
     -- ** Metric_Labels
-    Metric_Labels (..),
-    newMetric_Labels,
+    , Metric_Labels (..)
+    , newMetric_Labels
 
     -- ** MetricAbsence
-    MetricAbsence (..),
-    newMetricAbsence,
+    , MetricAbsence (..)
+    , newMetricAbsence
 
     -- ** MetricDescriptor
-    MetricDescriptor (..),
-    newMetricDescriptor,
+    , MetricDescriptor (..)
+    , newMetricDescriptor
 
     -- ** MetricDescriptor_LaunchStage
-    MetricDescriptor_LaunchStage (..),
+    , MetricDescriptor_LaunchStage (..)
 
     -- ** MetricDescriptor_MetricKind
-    MetricDescriptor_MetricKind (..),
+    , MetricDescriptor_MetricKind (..)
 
     -- ** MetricDescriptor_ValueType
-    MetricDescriptor_ValueType (..),
+    , MetricDescriptor_ValueType (..)
 
     -- ** MetricDescriptorMetadata
-    MetricDescriptorMetadata (..),
-    newMetricDescriptorMetadata,
+    , MetricDescriptorMetadata (..)
+    , newMetricDescriptorMetadata
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    MetricDescriptorMetadata_LaunchStage (..),
+    , MetricDescriptorMetadata_LaunchStage (..)
 
     -- ** MetricRange
-    MetricRange (..),
-    newMetricRange,
+    , MetricRange (..)
+    , newMetricRange
 
     -- ** MetricThreshold
-    MetricThreshold (..),
-    newMetricThreshold,
+    , MetricThreshold (..)
+    , newMetricThreshold
 
     -- ** MetricThreshold_Comparison
-    MetricThreshold_Comparison (..),
+    , MetricThreshold_Comparison (..)
 
     -- ** MetricThreshold_EvaluationMissingData
-    MetricThreshold_EvaluationMissingData (..),
+    , MetricThreshold_EvaluationMissingData (..)
 
     -- ** MonitoredResource
-    MonitoredResource (..),
-    newMonitoredResource,
+    , MonitoredResource (..)
+    , newMonitoredResource
 
     -- ** MonitoredResource_Labels
-    MonitoredResource_Labels (..),
-    newMonitoredResource_Labels,
+    , MonitoredResource_Labels (..)
+    , newMonitoredResource_Labels
 
     -- ** MonitoredResourceDescriptor
-    MonitoredResourceDescriptor (..),
-    newMonitoredResourceDescriptor,
+    , MonitoredResourceDescriptor (..)
+    , newMonitoredResourceDescriptor
 
     -- ** MonitoredResourceDescriptor_LaunchStage
-    MonitoredResourceDescriptor_LaunchStage (..),
+    , MonitoredResourceDescriptor_LaunchStage (..)
 
     -- ** MonitoredResourceMetadata
-    MonitoredResourceMetadata (..),
-    newMonitoredResourceMetadata,
+    , MonitoredResourceMetadata (..)
+    , newMonitoredResourceMetadata
 
     -- ** MonitoredResourceMetadata_SystemLabels
-    MonitoredResourceMetadata_SystemLabels (..),
-    newMonitoredResourceMetadata_SystemLabels,
+    , MonitoredResourceMetadata_SystemLabels (..)
+    , newMonitoredResourceMetadata_SystemLabels
 
     -- ** MonitoredResourceMetadata_UserLabels
-    MonitoredResourceMetadata_UserLabels (..),
-    newMonitoredResourceMetadata_UserLabels,
+    , MonitoredResourceMetadata_UserLabels (..)
+    , newMonitoredResourceMetadata_UserLabels
 
     -- ** MonitoringQueryLanguageCondition
-    MonitoringQueryLanguageCondition (..),
-    newMonitoringQueryLanguageCondition,
+    , MonitoringQueryLanguageCondition (..)
+    , newMonitoringQueryLanguageCondition
 
     -- ** MonitoringQueryLanguageCondition_EvaluationMissingData
-    MonitoringQueryLanguageCondition_EvaluationMissingData (..),
+    , MonitoringQueryLanguageCondition_EvaluationMissingData (..)
 
     -- ** MutationRecord
-    MutationRecord (..),
-    newMutationRecord,
+    , MutationRecord (..)
+    , newMutationRecord
 
     -- ** NotificationChannel
-    NotificationChannel (..),
-    newNotificationChannel,
+    , NotificationChannel (..)
+    , newNotificationChannel
 
     -- ** NotificationChannel_Labels
-    NotificationChannel_Labels (..),
-    newNotificationChannel_Labels,
+    , NotificationChannel_Labels (..)
+    , newNotificationChannel_Labels
 
     -- ** NotificationChannel_UserLabels
-    NotificationChannel_UserLabels (..),
-    newNotificationChannel_UserLabels,
+    , NotificationChannel_UserLabels (..)
+    , newNotificationChannel_UserLabels
 
     -- ** NotificationChannel_VerificationStatus
-    NotificationChannel_VerificationStatus (..),
+    , NotificationChannel_VerificationStatus (..)
 
     -- ** NotificationChannelDescriptor
-    NotificationChannelDescriptor (..),
-    newNotificationChannelDescriptor,
+    , NotificationChannelDescriptor (..)
+    , newNotificationChannelDescriptor
 
     -- ** NotificationChannelDescriptor_LaunchStage
-    NotificationChannelDescriptor_LaunchStage (..),
+    , NotificationChannelDescriptor_LaunchStage (..)
 
     -- ** NotificationChannelDescriptor_SupportedTiersItem
-    NotificationChannelDescriptor_SupportedTiersItem (..),
+    , NotificationChannelDescriptor_SupportedTiersItem (..)
 
     -- ** NotificationRateLimit
-    NotificationRateLimit (..),
-    newNotificationRateLimit,
+    , NotificationRateLimit (..)
+    , newNotificationRateLimit
 
     -- ** OperationMetadata
-    OperationMetadata (..),
-    newOperationMetadata,
+    , OperationMetadata (..)
+    , newOperationMetadata
 
     -- ** OperationMetadata_State
-    OperationMetadata_State (..),
+    , OperationMetadata_State (..)
 
     -- ** Option
-    Option (..),
-    newOption,
+    , Option (..)
+    , newOption
 
     -- ** Option_Value
-    Option_Value (..),
-    newOption_Value,
+    , Option_Value (..)
+    , newOption_Value
 
     -- ** PerformanceThreshold
-    PerformanceThreshold (..),
-    newPerformanceThreshold,
+    , PerformanceThreshold (..)
+    , newPerformanceThreshold
 
     -- ** Point
-    Point (..),
-    newPoint,
+    , Point (..)
+    , newPoint
 
     -- ** PointData
-    PointData (..),
-    newPointData,
+    , PointData (..)
+    , newPointData
 
     -- ** QueryTimeSeriesRequest
-    QueryTimeSeriesRequest (..),
-    newQueryTimeSeriesRequest,
+    , QueryTimeSeriesRequest (..)
+    , newQueryTimeSeriesRequest
 
     -- ** QueryTimeSeriesResponse
-    QueryTimeSeriesResponse (..),
-    newQueryTimeSeriesResponse,
+    , QueryTimeSeriesResponse (..)
+    , newQueryTimeSeriesResponse
 
     -- ** Range
-    Range (..),
-    newRange,
+    , Range (..)
+    , newRange
 
     -- ** RequestBasedSli
-    RequestBasedSli (..),
-    newRequestBasedSli,
+    , RequestBasedSli (..)
+    , newRequestBasedSli
 
     -- ** ResourceGroup
-    ResourceGroup (..),
-    newResourceGroup,
+    , ResourceGroup (..)
+    , newResourceGroup
 
     -- ** ResourceGroup_ResourceType
-    ResourceGroup_ResourceType (..),
+    , ResourceGroup_ResourceType (..)
 
     -- ** SendNotificationChannelVerificationCodeRequest
-    SendNotificationChannelVerificationCodeRequest (..),
-    newSendNotificationChannelVerificationCodeRequest,
+    , SendNotificationChannelVerificationCodeRequest (..)
+    , newSendNotificationChannelVerificationCodeRequest
 
     -- ** Service
-    Service (..),
-    newService,
+    , Service (..)
+    , newService
 
     -- ** Service_UserLabels
-    Service_UserLabels (..),
-    newService_UserLabels,
+    , Service_UserLabels (..)
+    , newService_UserLabels
 
     -- ** ServiceLevelIndicator
-    ServiceLevelIndicator (..),
-    newServiceLevelIndicator,
+    , ServiceLevelIndicator (..)
+    , newServiceLevelIndicator
 
     -- ** ServiceLevelObjective
-    ServiceLevelObjective (..),
-    newServiceLevelObjective,
+    , ServiceLevelObjective (..)
+    , newServiceLevelObjective
 
     -- ** ServiceLevelObjective_CalendarPeriod
-    ServiceLevelObjective_CalendarPeriod (..),
+    , ServiceLevelObjective_CalendarPeriod (..)
 
     -- ** ServiceLevelObjective_UserLabels
-    ServiceLevelObjective_UserLabels (..),
-    newServiceLevelObjective_UserLabels,
+    , ServiceLevelObjective_UserLabels (..)
+    , newServiceLevelObjective_UserLabels
 
     -- ** SourceContext
-    SourceContext (..),
-    newSourceContext,
+    , SourceContext (..)
+    , newSourceContext
 
     -- ** SpanContext
-    SpanContext (..),
-    newSpanContext,
+    , SpanContext (..)
+    , newSpanContext
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TcpCheck
-    TcpCheck (..),
-    newTcpCheck,
+    , TcpCheck (..)
+    , newTcpCheck
 
     -- ** Telemetry
-    Telemetry (..),
-    newTelemetry,
+    , Telemetry (..)
+    , newTelemetry
 
     -- ** TimeInterval
-    TimeInterval (..),
-    newTimeInterval,
+    , TimeInterval (..)
+    , newTimeInterval
 
     -- ** TimeSeries
-    TimeSeries (..),
-    newTimeSeries,
+    , TimeSeries (..)
+    , newTimeSeries
 
     -- ** TimeSeries_MetricKind
-    TimeSeries_MetricKind (..),
+    , TimeSeries_MetricKind (..)
 
     -- ** TimeSeries_ValueType
-    TimeSeries_ValueType (..),
+    , TimeSeries_ValueType (..)
 
     -- ** TimeSeriesData
-    TimeSeriesData (..),
-    newTimeSeriesData,
+    , TimeSeriesData (..)
+    , newTimeSeriesData
 
     -- ** TimeSeriesDescriptor
-    TimeSeriesDescriptor (..),
-    newTimeSeriesDescriptor,
+    , TimeSeriesDescriptor (..)
+    , newTimeSeriesDescriptor
 
     -- ** TimeSeriesRatio
-    TimeSeriesRatio (..),
-    newTimeSeriesRatio,
+    , TimeSeriesRatio (..)
+    , newTimeSeriesRatio
 
     -- ** Trigger
-    Trigger (..),
-    newTrigger,
+    , Trigger (..)
+    , newTrigger
 
     -- ** Type
-    Type (..),
-    newType,
+    , Type (..)
+    , newType
 
     -- ** Type_Syntax
-    Type_Syntax (..),
+    , Type_Syntax (..)
 
     -- ** TypedValue
-    TypedValue (..),
-    newTypedValue,
+    , TypedValue (..)
+    , newTypedValue
 
     -- ** UptimeCheckConfig
-    UptimeCheckConfig (..),
-    newUptimeCheckConfig,
+    , UptimeCheckConfig (..)
+    , newUptimeCheckConfig
 
     -- ** UptimeCheckConfig_CheckerType
-    UptimeCheckConfig_CheckerType (..),
+    , UptimeCheckConfig_CheckerType (..)
 
     -- ** UptimeCheckConfig_SelectedRegionsItem
-    UptimeCheckConfig_SelectedRegionsItem (..),
+    , UptimeCheckConfig_SelectedRegionsItem (..)
 
     -- ** UptimeCheckIp
-    UptimeCheckIp (..),
-    newUptimeCheckIp,
+    , UptimeCheckIp (..)
+    , newUptimeCheckIp
 
     -- ** UptimeCheckIp_Region
-    UptimeCheckIp_Region (..),
+    , UptimeCheckIp_Region (..)
 
     -- ** ValueDescriptor
-    ValueDescriptor (..),
-    newValueDescriptor,
+    , ValueDescriptor (..)
+    , newValueDescriptor
 
     -- ** ValueDescriptor_MetricKind
-    ValueDescriptor_MetricKind (..),
+    , ValueDescriptor_MetricKind (..)
 
     -- ** ValueDescriptor_ValueType
-    ValueDescriptor_ValueType (..),
+    , ValueDescriptor_ValueType (..)
 
     -- ** VerifyNotificationChannelRequest
-    VerifyNotificationChannelRequest (..),
-    newVerifyNotificationChannelRequest,
+    , VerifyNotificationChannelRequest (..)
+    , newVerifyNotificationChannelRequest
 
     -- ** WindowsBasedSli
-    WindowsBasedSli (..),
-    newWindowsBasedSli,
+    , WindowsBasedSli (..)
+    , newWindowsBasedSli
 
     -- ** FoldersTimeSeriesListAggregationCrossSeriesReducer
-    FoldersTimeSeriesListAggregationCrossSeriesReducer (..),
+    , FoldersTimeSeriesListAggregationCrossSeriesReducer (..)
 
     -- ** FoldersTimeSeriesListAggregationPerSeriesAligner
-    FoldersTimeSeriesListAggregationPerSeriesAligner (..),
+    , FoldersTimeSeriesListAggregationPerSeriesAligner (..)
 
     -- ** FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer
-    FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer (..),
+    , FoldersTimeSeriesListSecondaryAggregationCrossSeriesReducer (..)
 
     -- ** FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
-    FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner (..),
+    , FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner (..)
 
     -- ** FoldersTimeSeriesListView
-    FoldersTimeSeriesListView (..),
+    , FoldersTimeSeriesListView (..)
 
     -- ** OrganizationsTimeSeriesListAggregationCrossSeriesReducer
-    OrganizationsTimeSeriesListAggregationCrossSeriesReducer (..),
+    , OrganizationsTimeSeriesListAggregationCrossSeriesReducer (..)
 
     -- ** OrganizationsTimeSeriesListAggregationPerSeriesAligner
-    OrganizationsTimeSeriesListAggregationPerSeriesAligner (..),
+    , OrganizationsTimeSeriesListAggregationPerSeriesAligner (..)
 
     -- ** OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
-    OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer (..),
+    , OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer (..)
 
     -- ** OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
-    OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner (..),
+    , OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner (..)
 
     -- ** OrganizationsTimeSeriesListView
-    OrganizationsTimeSeriesListView (..),
+    , OrganizationsTimeSeriesListView (..)
 
     -- ** ProjectsTimeSeriesListAggregationCrossSeriesReducer
-    ProjectsTimeSeriesListAggregationCrossSeriesReducer (..),
+    , ProjectsTimeSeriesListAggregationCrossSeriesReducer (..)
 
     -- ** ProjectsTimeSeriesListAggregationPerSeriesAligner
-    ProjectsTimeSeriesListAggregationPerSeriesAligner (..),
+    , ProjectsTimeSeriesListAggregationPerSeriesAligner (..)
 
     -- ** ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer
-    ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer (..),
+    , ProjectsTimeSeriesListSecondaryAggregationCrossSeriesReducer (..)
 
     -- ** ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner
-    ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner (..),
+    , ProjectsTimeSeriesListSecondaryAggregationPerSeriesAligner (..)
 
     -- ** ProjectsTimeSeriesListView
-    ProjectsTimeSeriesListView (..),
+    , ProjectsTimeSeriesListView (..)
 
     -- ** ServicesServiceLevelObjectivesGetView
-    ServicesServiceLevelObjectivesGetView (..),
+    , ServicesServiceLevelObjectivesGetView (..)
 
     -- ** ServicesServiceLevelObjectivesListView
-    ServicesServiceLevelObjectivesListView (..),
-  )
-where
+    , ServicesServiceLevelObjectivesListView (..)
+    ) where
 
 import Gogol.Monitoring.Folders.TimeSeries.List
 import Gogol.Monitoring.Organizations.TimeSeries.List
