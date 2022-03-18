@@ -1,98 +1,87 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.CloudPrivateCatalog.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.CloudPrivateCatalog.Types
-    (
-    -- * Service Configuration
-      cloudPrivateCatalogService
+  ( -- * Configuration
+    cloudPrivateCatalogService,
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    cloudPlatformScope,
 
-    -- * GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
-    , GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
-    , googleCloudPrivatecatalogV1beta1SearchCatalogsResponse
-    , gcpvscrNextPageToken
-    , gcpvscrCatalogs
+    -- * Types
 
-    -- * GoogleCloudPrivatecatalogV1beta1ProductDisplayMetadata
-    , GoogleCloudPrivatecatalogV1beta1ProductDisplayMetadata
-    , googleCloudPrivatecatalogV1beta1ProductDisplayMetadata
-    , gcpvpdmAddtional
+    -- ** Xgafv
+    Xgafv (..),
 
-    -- * GoogleCloudPrivatecatalogV1beta1Catalog
-    , GoogleCloudPrivatecatalogV1beta1Catalog
-    , googleCloudPrivatecatalogV1beta1Catalog
-    , gcpvcUpdateTime
-    , gcpvcName
-    , gcpvcDisplayName
-    , gcpvcDescription
-    , gcpvcCreateTime
+    -- ** GoogleCloudPrivatecatalogV1beta1Catalog
+    GoogleCloudPrivatecatalogV1beta1Catalog (..),
+    newGoogleCloudPrivatecatalogV1beta1Catalog,
 
-    -- * GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
-    , GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
-    , googleCloudPrivatecatalogV1beta1SearchProductsResponse
-    , gcpvsprNextPageToken
-    , gcpvsprProducts
+    -- ** GoogleCloudPrivatecatalogV1beta1Product
+    GoogleCloudPrivatecatalogV1beta1Product (..),
+    newGoogleCloudPrivatecatalogV1beta1Product,
 
-    -- * Xgafv
-    , Xgafv (..)
+    -- ** GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata
+    GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata (..),
+    newGoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata,
 
-    -- * GoogleCloudPrivatecatalogV1beta1VersionAsset
-    , GoogleCloudPrivatecatalogV1beta1VersionAsset
-    , googleCloudPrivatecatalogV1beta1VersionAsset
-    , gcpvvaAddtional
+    -- ** GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
+    GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse (..),
+    newGoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse,
 
-    -- * GoogleCloudPrivatecatalogV1beta1Version
-    , GoogleCloudPrivatecatalogV1beta1Version
-    , googleCloudPrivatecatalogV1beta1Version
-    , gcpvvAsset
-    , gcpvvUpdateTime
-    , gcpvvName
-    , gcpvvDescription
-    , gcpvvCreateTime
+    -- ** GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
+    GoogleCloudPrivatecatalogV1beta1SearchProductsResponse (..),
+    newGoogleCloudPrivatecatalogV1beta1SearchProductsResponse,
 
-    -- * GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
-    , GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
-    , googleCloudPrivatecatalogV1beta1SearchVersionsResponse
-    , gcpvsvrNextPageToken
-    , gcpvsvrVersions
+    -- ** GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
+    GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse (..),
+    newGoogleCloudPrivatecatalogV1beta1SearchVersionsResponse,
 
-    -- * GoogleCloudPrivatecatalogV1beta1Product
-    , GoogleCloudPrivatecatalogV1beta1Product
-    , googleCloudPrivatecatalogV1beta1Product
-    , gcpvpIconURI
-    , gcpvpUpdateTime
-    , gcpvpDisplayMetadata
-    , gcpvpName
-    , gcpvpAssetType
-    , gcpvpCreateTime
-    ) where
+    -- ** GoogleCloudPrivatecatalogV1beta1Version
+    GoogleCloudPrivatecatalogV1beta1Version (..),
+    newGoogleCloudPrivatecatalogV1beta1Version,
 
-import Network.Google.CloudPrivateCatalog.Types.Product
-import Network.Google.CloudPrivateCatalog.Types.Sum
-import Network.Google.Prelude
+    -- ** GoogleCloudPrivatecatalogV1beta1Version_Asset
+    GoogleCloudPrivatecatalogV1beta1Version_Asset (..),
+    newGoogleCloudPrivatecatalogV1beta1Version_Asset,
+  )
+where
 
--- | Default request referring to version 'v1beta1' of the Cloud Private Catalog API. This contains the host and root path used as a starting point for constructing service requests.
-cloudPrivateCatalogService :: ServiceConfig
-cloudPrivateCatalogService
-  = defaultService
-      (ServiceId "cloudprivatecatalog:v1beta1")
-      "cloudprivatecatalog.googleapis.com"
+import Network.Google.CloudPrivateCatalog.Internal.Product
+import Network.Google.CloudPrivateCatalog.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1beta1@ of the Cloud Private Catalog API. This contains the host and root path used as a starting point for constructing service requests.
+cloudPrivateCatalogService :: Core.ServiceConfig
+cloudPrivateCatalogService =
+  Core.defaultService
+    (Core.ServiceId "cloudprivatecatalog:v1beta1")
+    "cloudprivatecatalog.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy
+cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Core.Proxy
