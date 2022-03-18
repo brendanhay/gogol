@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +31,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Chat.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ActionResponse_Type
     ActionResponse_Type
-      ( ActionResponse_Type_TYPEUNSPECIFIED,
+      (
+        ActionResponse_Type_TYPEUNSPECIFIED,
         ActionResponse_Type_NEWMESSAGE,
         ActionResponse_Type_UPDATEMESSAGE,
         ActionResponse_Type_UPDATEUSERMESSAGECARDS,
@@ -46,7 +57,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * ActionStatus_StatusCode
     ActionStatus_StatusCode
-      ( ActionStatus_StatusCode_OK,
+      (
+        ActionStatus_StatusCode_OK,
         ActionStatus_StatusCode_Cancelled,
         ActionStatus_StatusCode_Unknown,
         ActionStatus_StatusCode_INVALIDARGUMENT,
@@ -68,7 +80,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * Annotation_Type
     Annotation_Type
-      ( Annotation_Type_ANNOTATIONTYPEUNSPECIFIED,
+      (
+        Annotation_Type_ANNOTATIONTYPEUNSPECIFIED,
         Annotation_Type_USERMENTION,
         Annotation_Type_SLASHCOMMAND,
         ..
@@ -76,7 +89,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * Attachment_Source
     Attachment_Source
-      ( Attachment_Source_SOURCEUNSPECIFIED,
+      (
+        Attachment_Source_SOURCEUNSPECIFIED,
         Attachment_Source_DRIVEFILE,
         Attachment_Source_UPLOADEDCONTENT,
         ..
@@ -84,7 +98,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * CardHeader_ImageStyle
     CardHeader_ImageStyle
-      ( CardHeader_ImageStyle_IMAGESTYLEUNSPECIFIED,
+      (
+        CardHeader_ImageStyle_IMAGESTYLEUNSPECIFIED,
         CardHeader_ImageStyle_Image,
         CardHeader_ImageStyle_Avatar,
         ..
@@ -92,7 +107,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * CommonEventObject_HostApp
     CommonEventObject_HostApp
-      ( CommonEventObject_HostApp_UNSPECIFIEDHOSTAPP,
+      (
+        CommonEventObject_HostApp_UNSPECIFIEDHOSTAPP,
         CommonEventObject_HostApp_Gmail,
         CommonEventObject_HostApp_Calendar,
         CommonEventObject_HostApp_Drive,
@@ -107,7 +123,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * CommonEventObject_Platform
     CommonEventObject_Platform
-      ( CommonEventObject_Platform_UNKNOWNPLATFORM,
+      (
+        CommonEventObject_Platform_UNKNOWNPLATFORM,
         CommonEventObject_Platform_Web,
         CommonEventObject_Platform_Ios,
         CommonEventObject_Platform_Android,
@@ -116,7 +133,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * DeprecatedEvent_DialogEventType
     DeprecatedEvent_DialogEventType
-      ( DeprecatedEvent_DialogEventType_TYPEUNSPECIFIED,
+      (
+        DeprecatedEvent_DialogEventType_TYPEUNSPECIFIED,
         DeprecatedEvent_DialogEventType_REQUESTDIALOG,
         DeprecatedEvent_DialogEventType_SUBMITDIALOG,
         DeprecatedEvent_DialogEventType_CANCELDIALOG,
@@ -125,7 +143,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * DeprecatedEvent_Type
     DeprecatedEvent_Type
-      ( DeprecatedEvent_Type_Unspecified,
+      (
+        DeprecatedEvent_Type_Unspecified,
         DeprecatedEvent_Type_Message,
         DeprecatedEvent_Type_ADDEDTOSPACE,
         DeprecatedEvent_Type_REMOVEDFROMSPACE,
@@ -135,14 +154,16 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1Action_LoadIndicator
     GoogleAppsCardV1Action_LoadIndicator
-      ( GoogleAppsCardV1Action_LoadIndicator_Spinner,
+      (
+        GoogleAppsCardV1Action_LoadIndicator_Spinner,
         GoogleAppsCardV1Action_LoadIndicator_None,
         ..
       ),
 
     -- * GoogleAppsCardV1BorderStyle_Type
     GoogleAppsCardV1BorderStyle_Type
-      ( GoogleAppsCardV1BorderStyle_Type_BORDERTYPEUNSPECIFIED,
+      (
+        GoogleAppsCardV1BorderStyle_Type_BORDERTYPEUNSPECIFIED,
         GoogleAppsCardV1BorderStyle_Type_NOBORDER,
         GoogleAppsCardV1BorderStyle_Type_Stroke,
         ..
@@ -150,7 +171,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1Card_DisplayStyle
     GoogleAppsCardV1Card_DisplayStyle
-      ( GoogleAppsCardV1Card_DisplayStyle_DISPLAYSTYLEUNSPECIFIED,
+      (
+        GoogleAppsCardV1Card_DisplayStyle_DISPLAYSTYLEUNSPECIFIED,
         GoogleAppsCardV1Card_DisplayStyle_Peek,
         GoogleAppsCardV1Card_DisplayStyle_Replace,
         ..
@@ -158,14 +180,16 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1CardHeader_ImageType
     GoogleAppsCardV1CardHeader_ImageType
-      ( GoogleAppsCardV1CardHeader_ImageType_Square,
+      (
+        GoogleAppsCardV1CardHeader_ImageType_Square,
         GoogleAppsCardV1CardHeader_ImageType_Circle,
         ..
       ),
 
     -- * GoogleAppsCardV1DateTimePicker_Type
     GoogleAppsCardV1DateTimePicker_Type
-      ( GoogleAppsCardV1DateTimePicker_Type_DATEANDTIME,
+      (
+        GoogleAppsCardV1DateTimePicker_Type_DATEANDTIME,
         GoogleAppsCardV1DateTimePicker_Type_DATEONLY,
         GoogleAppsCardV1DateTimePicker_Type_TIMEONLY,
         ..
@@ -173,7 +197,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1GridItem_Layout
     GoogleAppsCardV1GridItem_Layout
-      ( GoogleAppsCardV1GridItem_Layout_GRIDITEMLAYOUTUNSPECIFIED,
+      (
+        GoogleAppsCardV1GridItem_Layout_GRIDITEMLAYOUTUNSPECIFIED,
         GoogleAppsCardV1GridItem_Layout_TEXTBELOW,
         GoogleAppsCardV1GridItem_Layout_TEXTABOVE,
         ..
@@ -181,7 +206,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1GridItem_TextAlignment
     GoogleAppsCardV1GridItem_TextAlignment
-      ( GoogleAppsCardV1GridItem_TextAlignment_HORIZONTALALIGNMENTUNSPECIFIED,
+      (
+        GoogleAppsCardV1GridItem_TextAlignment_HORIZONTALALIGNMENTUNSPECIFIED,
         GoogleAppsCardV1GridItem_TextAlignment_Start,
         GoogleAppsCardV1GridItem_TextAlignment_Center,
         GoogleAppsCardV1GridItem_TextAlignment_End,
@@ -190,14 +216,16 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1Icon_ImageType
     GoogleAppsCardV1Icon_ImageType
-      ( GoogleAppsCardV1Icon_ImageType_Square,
+      (
+        GoogleAppsCardV1Icon_ImageType_Square,
         GoogleAppsCardV1Icon_ImageType_Circle,
         ..
       ),
 
     -- * GoogleAppsCardV1ImageCropStyle_Type
     GoogleAppsCardV1ImageCropStyle_Type
-      ( GoogleAppsCardV1ImageCropStyle_Type_IMAGECROPTYPEUNSPECIFIED,
+      (
+        GoogleAppsCardV1ImageCropStyle_Type_IMAGECROPTYPEUNSPECIFIED,
         GoogleAppsCardV1ImageCropStyle_Type_Square,
         GoogleAppsCardV1ImageCropStyle_Type_Circle,
         GoogleAppsCardV1ImageCropStyle_Type_RECTANGLECUSTOM,
@@ -207,21 +235,24 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1OpenLink_OnClose
     GoogleAppsCardV1OpenLink_OnClose
-      ( GoogleAppsCardV1OpenLink_OnClose_Nothing',
+      (
+        GoogleAppsCardV1OpenLink_OnClose_Nothing',
         GoogleAppsCardV1OpenLink_OnClose_Reload,
         ..
       ),
 
     -- * GoogleAppsCardV1OpenLink_OpenAs
     GoogleAppsCardV1OpenLink_OpenAs
-      ( GoogleAppsCardV1OpenLink_OpenAs_FULLSIZE,
+      (
+        GoogleAppsCardV1OpenLink_OpenAs_FULLSIZE,
         GoogleAppsCardV1OpenLink_OpenAs_Overlay,
         ..
       ),
 
     -- * GoogleAppsCardV1SelectionInput_Type
     GoogleAppsCardV1SelectionInput_Type
-      ( GoogleAppsCardV1SelectionInput_Type_CHECKBOX,
+      (
+        GoogleAppsCardV1SelectionInput_Type_CHECKBOX,
         GoogleAppsCardV1SelectionInput_Type_RADIOBUTTON,
         GoogleAppsCardV1SelectionInput_Type_Switch,
         GoogleAppsCardV1SelectionInput_Type_Dropdown,
@@ -230,7 +261,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1SwitchControl_ControlType
     GoogleAppsCardV1SwitchControl_ControlType
-      ( GoogleAppsCardV1SwitchControl_ControlType_Switch,
+      (
+        GoogleAppsCardV1SwitchControl_ControlType_Switch,
         GoogleAppsCardV1SwitchControl_ControlType_Checkbox,
         GoogleAppsCardV1SwitchControl_ControlType_CHECKBOX,
         ..
@@ -238,14 +270,16 @@ module Gogol.Chat.Internal.Sum
 
     -- * GoogleAppsCardV1TextInput_Type
     GoogleAppsCardV1TextInput_Type
-      ( GoogleAppsCardV1TextInput_Type_SINGLELINE,
+      (
+        GoogleAppsCardV1TextInput_Type_SINGLELINE,
         GoogleAppsCardV1TextInput_Type_MULTIPLELINE,
         ..
       ),
 
     -- * GoogleAppsCardV1Widget_HorizontalAlignment
     GoogleAppsCardV1Widget_HorizontalAlignment
-      ( GoogleAppsCardV1Widget_HorizontalAlignment_HORIZONTALALIGNMENTUNSPECIFIED,
+      (
+        GoogleAppsCardV1Widget_HorizontalAlignment_HORIZONTALALIGNMENTUNSPECIFIED,
         GoogleAppsCardV1Widget_HorizontalAlignment_Start,
         GoogleAppsCardV1Widget_HorizontalAlignment_Center,
         GoogleAppsCardV1Widget_HorizontalAlignment_End,
@@ -254,7 +288,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * ImageButton_Icon
     ImageButton_Icon
-      ( ImageButton_Icon_ICONUNSPECIFIED,
+      (
+        ImageButton_Icon_ICONUNSPECIFIED,
         ImageButton_Icon_Airplane,
         ImageButton_Icon_Bookmark,
         ImageButton_Icon_Bus,
@@ -290,7 +325,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * KeyValue_Icon
     KeyValue_Icon
-      ( KeyValue_Icon_ICONUNSPECIFIED,
+      (
+        KeyValue_Icon_ICONUNSPECIFIED,
         KeyValue_Icon_Airplane,
         KeyValue_Icon_Bookmark,
         KeyValue_Icon_Bus,
@@ -326,7 +362,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * Membership_State
     Membership_State
-      ( Membership_State_MEMBERSHIPSTATEUNSPECIFIED,
+      (
+        Membership_State_MEMBERSHIPSTATEUNSPECIFIED,
         Membership_State_Joined,
         Membership_State_Invited,
         Membership_State_NOTAMEMBER,
@@ -335,7 +372,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * SlashCommandMetadata_Type
     SlashCommandMetadata_Type
-      ( SlashCommandMetadata_Type_TYPEUNSPECIFIED,
+      (
+        SlashCommandMetadata_Type_TYPEUNSPECIFIED,
         SlashCommandMetadata_Type_Add,
         SlashCommandMetadata_Type_Invoke,
         ..
@@ -343,7 +381,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * Space_Type
     Space_Type
-      ( Space_Type_TYPEUNSPECIFIED,
+      (
+        Space_Type_TYPEUNSPECIFIED,
         Space_Type_Room,
         Space_Type_DM,
         ..
@@ -351,7 +390,8 @@ module Gogol.Chat.Internal.Sum
 
     -- * User_Type
     User_Type
-      ( User_Type_TYPEUNSPECIFIED,
+      (
+        User_Type_TYPEUNSPECIFIED,
         User_Type_Human,
         User_Type_Bot,
         ..
@@ -359,28 +399,28 @@ module Gogol.Chat.Internal.Sum
 
     -- * UserMentionMetadata_Type
     UserMentionMetadata_Type
-      ( UserMentionMetadata_Type_TYPEUNSPECIFIED,
+      (
+        UserMentionMetadata_Type_TYPEUNSPECIFIED,
         UserMentionMetadata_Type_Add,
         UserMentionMetadata_Type_Mention,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -393,21 +433,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The type of bot response.
-newtype ActionResponse_Type = ActionResponse_Type {fromActionResponse_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ActionResponse_Type = ActionResponse_Type { fromActionResponse_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default type; will be handled as NEW_MESSAGE.
 pattern ActionResponse_Type_TYPEUNSPECIFIED :: ActionResponse_Type
@@ -440,21 +479,20 @@ pattern ActionResponse_Type_Dialog = ActionResponse_Type "DIALOG"
   ActionResponse_Type_UPDATEUSERMESSAGECARDS,
   ActionResponse_Type_REQUESTCONFIG,
   ActionResponse_Type_Dialog,
-  ActionResponse_Type
-  #-}
+  ActionResponse_Type #-}
 
 -- | The status code.
-newtype ActionStatus_StatusCode = ActionStatus_StatusCode {fromActionStatus_StatusCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ActionStatus_StatusCode = ActionStatus_StatusCode { fromActionStatus_StatusCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not an error; returned on success HTTP Mapping: 200 OK
 pattern ActionStatus_StatusCode_OK :: ActionStatus_StatusCode
@@ -542,21 +580,20 @@ pattern ActionStatus_StatusCode_DATALOSS = ActionStatus_StatusCode "DATA_LOSS"
   ActionStatus_StatusCode_Internal,
   ActionStatus_StatusCode_Unavailable,
   ActionStatus_StatusCode_DATALOSS,
-  ActionStatus_StatusCode
-  #-}
+  ActionStatus_StatusCode #-}
 
 -- | The type of this annotation.
-newtype Annotation_Type = Annotation_Type {fromAnnotation_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Annotation_Type = Annotation_Type { fromAnnotation_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value for the enum. DO NOT USE.
 pattern Annotation_Type_ANNOTATIONTYPEUNSPECIFIED :: Annotation_Type
@@ -574,31 +611,30 @@ pattern Annotation_Type_SLASHCOMMAND = Annotation_Type "SLASH_COMMAND"
   Annotation_Type_ANNOTATIONTYPEUNSPECIFIED,
   Annotation_Type_USERMENTION,
   Annotation_Type_SLASHCOMMAND,
-  Annotation_Type
-  #-}
+  Annotation_Type #-}
 
 -- | The source of the attachment.
-newtype Attachment_Source = Attachment_Source {fromAttachment_Source :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Attachment_Source = Attachment_Source { fromAttachment_Source :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Attachment_Source_SOURCEUNSPECIFIED :: Attachment_Source
 pattern Attachment_Source_SOURCEUNSPECIFIED = Attachment_Source "SOURCE_UNSPECIFIED"
 
--- |
+-- | 
 pattern Attachment_Source_DRIVEFILE :: Attachment_Source
 pattern Attachment_Source_DRIVEFILE = Attachment_Source "DRIVE_FILE"
 
--- |
+-- | 
 pattern Attachment_Source_UPLOADEDCONTENT :: Attachment_Source
 pattern Attachment_Source_UPLOADEDCONTENT = Attachment_Source "UPLOADED_CONTENT"
 
@@ -606,23 +642,22 @@ pattern Attachment_Source_UPLOADEDCONTENT = Attachment_Source "UPLOADED_CONTENT"
   Attachment_Source_SOURCEUNSPECIFIED,
   Attachment_Source_DRIVEFILE,
   Attachment_Source_UPLOADEDCONTENT,
-  Attachment_Source
-  #-}
+  Attachment_Source #-}
 
 -- | The image\'s type (e.g. square border or circular border).
-newtype CardHeader_ImageStyle = CardHeader_ImageStyle {fromCardHeader_ImageStyle :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CardHeader_ImageStyle = CardHeader_ImageStyle { fromCardHeader_ImageStyle :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CardHeader_ImageStyle_IMAGESTYLEUNSPECIFIED :: CardHeader_ImageStyle
 pattern CardHeader_ImageStyle_IMAGESTYLEUNSPECIFIED = CardHeader_ImageStyle "IMAGE_STYLE_UNSPECIFIED"
 
@@ -638,21 +673,20 @@ pattern CardHeader_ImageStyle_Avatar = CardHeader_ImageStyle "AVATAR"
   CardHeader_ImageStyle_IMAGESTYLEUNSPECIFIED,
   CardHeader_ImageStyle_Image,
   CardHeader_ImageStyle_Avatar,
-  CardHeader_ImageStyle
-  #-}
+  CardHeader_ImageStyle #-}
 
 -- | The hostApp enum which indicates the app the add-on is invoked from. Always @CHAT@ for Chat apps.
-newtype CommonEventObject_HostApp = CommonEventObject_HostApp {fromCommonEventObject_HostApp :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CommonEventObject_HostApp = CommonEventObject_HostApp { fromCommonEventObject_HostApp :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Google can\'t identify a host app.
 pattern CommonEventObject_HostApp_UNSPECIFIEDHOSTAPP :: CommonEventObject_HostApp
@@ -705,35 +739,34 @@ pattern CommonEventObject_HostApp_Chat = CommonEventObject_HostApp "CHAT"
   CommonEventObject_HostApp_Slides,
   CommonEventObject_HostApp_Drawings,
   CommonEventObject_HostApp_Chat,
-  CommonEventObject_HostApp
-  #-}
+  CommonEventObject_HostApp #-}
 
 -- | The platform enum which indicates the platform where the event originates (@WEB@, @IOS@, or @ANDROID@). Not supported by Chat apps.
-newtype CommonEventObject_Platform = CommonEventObject_Platform {fromCommonEventObject_Platform :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CommonEventObject_Platform = CommonEventObject_Platform { fromCommonEventObject_Platform :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern CommonEventObject_Platform_UNKNOWNPLATFORM :: CommonEventObject_Platform
 pattern CommonEventObject_Platform_UNKNOWNPLATFORM = CommonEventObject_Platform "UNKNOWN_PLATFORM"
 
--- |
+-- | 
 pattern CommonEventObject_Platform_Web :: CommonEventObject_Platform
 pattern CommonEventObject_Platform_Web = CommonEventObject_Platform "WEB"
 
--- |
+-- | 
 pattern CommonEventObject_Platform_Ios :: CommonEventObject_Platform
 pattern CommonEventObject_Platform_Ios = CommonEventObject_Platform "IOS"
 
--- |
+-- | 
 pattern CommonEventObject_Platform_Android :: CommonEventObject_Platform
 pattern CommonEventObject_Platform_Android = CommonEventObject_Platform "ANDROID"
 
@@ -742,21 +775,20 @@ pattern CommonEventObject_Platform_Android = CommonEventObject_Platform "ANDROID
   CommonEventObject_Platform_Web,
   CommonEventObject_Platform_Ios,
   CommonEventObject_Platform_Android,
-  CommonEventObject_Platform
-  #-}
+  CommonEventObject_Platform #-}
 
 -- | The type of <https://developers.google.com/chat/how-tos/bot-dialogs dialog> event received.
-newtype DeprecatedEvent_DialogEventType = DeprecatedEvent_DialogEventType {fromDeprecatedEvent_DialogEventType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeprecatedEvent_DialogEventType = DeprecatedEvent_DialogEventType { fromDeprecatedEvent_DialogEventType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | This could be used when the corresponding event is not dialog related. For example an \@mention.
 pattern DeprecatedEvent_DialogEventType_TYPEUNSPECIFIED :: DeprecatedEvent_DialogEventType
@@ -779,21 +811,20 @@ pattern DeprecatedEvent_DialogEventType_CANCELDIALOG = DeprecatedEvent_DialogEve
   DeprecatedEvent_DialogEventType_REQUESTDIALOG,
   DeprecatedEvent_DialogEventType_SUBMITDIALOG,
   DeprecatedEvent_DialogEventType_CANCELDIALOG,
-  DeprecatedEvent_DialogEventType
-  #-}
+  DeprecatedEvent_DialogEventType #-}
 
 -- | The type of the event.
-newtype DeprecatedEvent_Type = DeprecatedEvent_Type {fromDeprecatedEvent_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeprecatedEvent_Type = DeprecatedEvent_Type { fromDeprecatedEvent_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value for the enum. DO NOT USE.
 pattern DeprecatedEvent_Type_Unspecified :: DeprecatedEvent_Type
@@ -821,21 +852,20 @@ pattern DeprecatedEvent_Type_CARDCLICKED = DeprecatedEvent_Type "CARD_CLICKED"
   DeprecatedEvent_Type_ADDEDTOSPACE,
   DeprecatedEvent_Type_REMOVEDFROMSPACE,
   DeprecatedEvent_Type_CARDCLICKED,
-  DeprecatedEvent_Type
-  #-}
+  DeprecatedEvent_Type #-}
 
 -- | Specifies the loading indicator that the action displays while making the call to the action.
-newtype GoogleAppsCardV1Action_LoadIndicator = GoogleAppsCardV1Action_LoadIndicator {fromGoogleAppsCardV1Action_LoadIndicator :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1Action_LoadIndicator = GoogleAppsCardV1Action_LoadIndicator { fromGoogleAppsCardV1Action_LoadIndicator :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Displays a spinner to indicate that content is loading.
 pattern GoogleAppsCardV1Action_LoadIndicator_Spinner :: GoogleAppsCardV1Action_LoadIndicator
@@ -848,21 +878,20 @@ pattern GoogleAppsCardV1Action_LoadIndicator_None = GoogleAppsCardV1Action_LoadI
 {-# COMPLETE
   GoogleAppsCardV1Action_LoadIndicator_Spinner,
   GoogleAppsCardV1Action_LoadIndicator_None,
-  GoogleAppsCardV1Action_LoadIndicator
-  #-}
+  GoogleAppsCardV1Action_LoadIndicator #-}
 
 -- | The border type.
-newtype GoogleAppsCardV1BorderStyle_Type = GoogleAppsCardV1BorderStyle_Type {fromGoogleAppsCardV1BorderStyle_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1BorderStyle_Type = GoogleAppsCardV1BorderStyle_Type { fromGoogleAppsCardV1BorderStyle_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No value specified.
 pattern GoogleAppsCardV1BorderStyle_Type_BORDERTYPEUNSPECIFIED :: GoogleAppsCardV1BorderStyle_Type
@@ -880,21 +909,20 @@ pattern GoogleAppsCardV1BorderStyle_Type_Stroke = GoogleAppsCardV1BorderStyle_Ty
   GoogleAppsCardV1BorderStyle_Type_BORDERTYPEUNSPECIFIED,
   GoogleAppsCardV1BorderStyle_Type_NOBORDER,
   GoogleAppsCardV1BorderStyle_Type_Stroke,
-  GoogleAppsCardV1BorderStyle_Type
-  #-}
+  GoogleAppsCardV1BorderStyle_Type #-}
 
 -- | The display style for @peekCardHeader@.
-newtype GoogleAppsCardV1Card_DisplayStyle = GoogleAppsCardV1Card_DisplayStyle {fromGoogleAppsCardV1Card_DisplayStyle :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1Card_DisplayStyle = GoogleAppsCardV1Card_DisplayStyle { fromGoogleAppsCardV1Card_DisplayStyle :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. Do not use.
 pattern GoogleAppsCardV1Card_DisplayStyle_DISPLAYSTYLEUNSPECIFIED :: GoogleAppsCardV1Card_DisplayStyle
@@ -912,21 +940,20 @@ pattern GoogleAppsCardV1Card_DisplayStyle_Replace = GoogleAppsCardV1Card_Display
   GoogleAppsCardV1Card_DisplayStyle_DISPLAYSTYLEUNSPECIFIED,
   GoogleAppsCardV1Card_DisplayStyle_Peek,
   GoogleAppsCardV1Card_DisplayStyle_Replace,
-  GoogleAppsCardV1Card_DisplayStyle
-  #-}
+  GoogleAppsCardV1Card_DisplayStyle #-}
 
 -- | The image\'s type.
-newtype GoogleAppsCardV1CardHeader_ImageType = GoogleAppsCardV1CardHeader_ImageType {fromGoogleAppsCardV1CardHeader_ImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1CardHeader_ImageType = GoogleAppsCardV1CardHeader_ImageType { fromGoogleAppsCardV1CardHeader_ImageType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Applies no cropping to the image.
 pattern GoogleAppsCardV1CardHeader_ImageType_Square :: GoogleAppsCardV1CardHeader_ImageType
@@ -939,21 +966,20 @@ pattern GoogleAppsCardV1CardHeader_ImageType_Circle = GoogleAppsCardV1CardHeader
 {-# COMPLETE
   GoogleAppsCardV1CardHeader_ImageType_Square,
   GoogleAppsCardV1CardHeader_ImageType_Circle,
-  GoogleAppsCardV1CardHeader_ImageType
-  #-}
+  GoogleAppsCardV1CardHeader_ImageType #-}
 
 -- | The type of the date\/time picker.
-newtype GoogleAppsCardV1DateTimePicker_Type = GoogleAppsCardV1DateTimePicker_Type {fromGoogleAppsCardV1DateTimePicker_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1DateTimePicker_Type = GoogleAppsCardV1DateTimePicker_Type { fromGoogleAppsCardV1DateTimePicker_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The user can select a date and time.
 pattern GoogleAppsCardV1DateTimePicker_Type_DATEANDTIME :: GoogleAppsCardV1DateTimePicker_Type
@@ -971,21 +997,20 @@ pattern GoogleAppsCardV1DateTimePicker_Type_TIMEONLY = GoogleAppsCardV1DateTimeP
   GoogleAppsCardV1DateTimePicker_Type_DATEANDTIME,
   GoogleAppsCardV1DateTimePicker_Type_DATEONLY,
   GoogleAppsCardV1DateTimePicker_Type_TIMEONLY,
-  GoogleAppsCardV1DateTimePicker_Type
-  #-}
+  GoogleAppsCardV1DateTimePicker_Type #-}
 
 -- | The layout to use for the grid item.
-newtype GoogleAppsCardV1GridItem_Layout = GoogleAppsCardV1GridItem_Layout {fromGoogleAppsCardV1GridItem_Layout :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1GridItem_Layout = GoogleAppsCardV1GridItem_Layout { fromGoogleAppsCardV1GridItem_Layout :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No layout specified.
 pattern GoogleAppsCardV1GridItem_Layout_GRIDITEMLAYOUTUNSPECIFIED :: GoogleAppsCardV1GridItem_Layout
@@ -1003,21 +1028,20 @@ pattern GoogleAppsCardV1GridItem_Layout_TEXTABOVE = GoogleAppsCardV1GridItem_Lay
   GoogleAppsCardV1GridItem_Layout_GRIDITEMLAYOUTUNSPECIFIED,
   GoogleAppsCardV1GridItem_Layout_TEXTBELOW,
   GoogleAppsCardV1GridItem_Layout_TEXTABOVE,
-  GoogleAppsCardV1GridItem_Layout
-  #-}
+  GoogleAppsCardV1GridItem_Layout #-}
 
 -- | The horizontal alignment of the grid item\'s text.
-newtype GoogleAppsCardV1GridItem_TextAlignment = GoogleAppsCardV1GridItem_TextAlignment {fromGoogleAppsCardV1GridItem_TextAlignment :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1GridItem_TextAlignment = GoogleAppsCardV1GridItem_TextAlignment { fromGoogleAppsCardV1GridItem_TextAlignment :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified alignment.
 pattern GoogleAppsCardV1GridItem_TextAlignment_HORIZONTALALIGNMENTUNSPECIFIED :: GoogleAppsCardV1GridItem_TextAlignment
@@ -1040,21 +1064,20 @@ pattern GoogleAppsCardV1GridItem_TextAlignment_End = GoogleAppsCardV1GridItem_Te
   GoogleAppsCardV1GridItem_TextAlignment_Start,
   GoogleAppsCardV1GridItem_TextAlignment_Center,
   GoogleAppsCardV1GridItem_TextAlignment_End,
-  GoogleAppsCardV1GridItem_TextAlignment
-  #-}
+  GoogleAppsCardV1GridItem_TextAlignment #-}
 
 -- | The crop style applied to the image. In some cases, applying a @CIRCLE@ crop causes the image to be drawn larger than a standard icon.
-newtype GoogleAppsCardV1Icon_ImageType = GoogleAppsCardV1Icon_ImageType {fromGoogleAppsCardV1Icon_ImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1Icon_ImageType = GoogleAppsCardV1Icon_ImageType { fromGoogleAppsCardV1Icon_ImageType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Applies no cropping to the image.
 pattern GoogleAppsCardV1Icon_ImageType_Square :: GoogleAppsCardV1Icon_ImageType
@@ -1067,21 +1090,20 @@ pattern GoogleAppsCardV1Icon_ImageType_Circle = GoogleAppsCardV1Icon_ImageType "
 {-# COMPLETE
   GoogleAppsCardV1Icon_ImageType_Square,
   GoogleAppsCardV1Icon_ImageType_Circle,
-  GoogleAppsCardV1Icon_ImageType
-  #-}
+  GoogleAppsCardV1Icon_ImageType #-}
 
 -- | The crop type.
-newtype GoogleAppsCardV1ImageCropStyle_Type = GoogleAppsCardV1ImageCropStyle_Type {fromGoogleAppsCardV1ImageCropStyle_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1ImageCropStyle_Type = GoogleAppsCardV1ImageCropStyle_Type { fromGoogleAppsCardV1ImageCropStyle_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No value specified.
 pattern GoogleAppsCardV1ImageCropStyle_Type_IMAGECROPTYPEUNSPECIFIED :: GoogleAppsCardV1ImageCropStyle_Type
@@ -1109,21 +1131,20 @@ pattern GoogleAppsCardV1ImageCropStyle_Type_RECTANGLE_4_3 = GoogleAppsCardV1Imag
   GoogleAppsCardV1ImageCropStyle_Type_Circle,
   GoogleAppsCardV1ImageCropStyle_Type_RECTANGLECUSTOM,
   GoogleAppsCardV1ImageCropStyle_Type_RECTANGLE_4_3,
-  GoogleAppsCardV1ImageCropStyle_Type
-  #-}
+  GoogleAppsCardV1ImageCropStyle_Type #-}
 
 -- | Whether the client forgets about a link after opening it, or observes it until the window closes. Not supported by Chat apps.
-newtype GoogleAppsCardV1OpenLink_OnClose = GoogleAppsCardV1OpenLink_OnClose {fromGoogleAppsCardV1OpenLink_OnClose :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1OpenLink_OnClose = GoogleAppsCardV1OpenLink_OnClose { fromGoogleAppsCardV1OpenLink_OnClose :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Doesn’t reload the card after the child window closes.
 pattern GoogleAppsCardV1OpenLink_OnClose_Nothing' :: GoogleAppsCardV1OpenLink_OnClose
@@ -1136,21 +1157,20 @@ pattern GoogleAppsCardV1OpenLink_OnClose_Reload = GoogleAppsCardV1OpenLink_OnClo
 {-# COMPLETE
   GoogleAppsCardV1OpenLink_OnClose_Nothing',
   GoogleAppsCardV1OpenLink_OnClose_Reload,
-  GoogleAppsCardV1OpenLink_OnClose
-  #-}
+  GoogleAppsCardV1OpenLink_OnClose #-}
 
 -- | How to open a link. Not supported by Chat apps.
-newtype GoogleAppsCardV1OpenLink_OpenAs = GoogleAppsCardV1OpenLink_OpenAs {fromGoogleAppsCardV1OpenLink_OpenAs :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1OpenLink_OpenAs = GoogleAppsCardV1OpenLink_OpenAs { fromGoogleAppsCardV1OpenLink_OpenAs :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The link opens as a full size window (if that\'s the frame used by the client.
 pattern GoogleAppsCardV1OpenLink_OpenAs_FULLSIZE :: GoogleAppsCardV1OpenLink_OpenAs
@@ -1163,21 +1183,20 @@ pattern GoogleAppsCardV1OpenLink_OpenAs_Overlay = GoogleAppsCardV1OpenLink_OpenA
 {-# COMPLETE
   GoogleAppsCardV1OpenLink_OpenAs_FULLSIZE,
   GoogleAppsCardV1OpenLink_OpenAs_Overlay,
-  GoogleAppsCardV1OpenLink_OpenAs
-  #-}
+  GoogleAppsCardV1OpenLink_OpenAs #-}
 
 -- | The type of the selection.
-newtype GoogleAppsCardV1SelectionInput_Type = GoogleAppsCardV1SelectionInput_Type {fromGoogleAppsCardV1SelectionInput_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1SelectionInput_Type = GoogleAppsCardV1SelectionInput_Type { fromGoogleAppsCardV1SelectionInput_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A checkbox.
 pattern GoogleAppsCardV1SelectionInput_Type_CHECKBOX :: GoogleAppsCardV1SelectionInput_Type
@@ -1200,21 +1219,20 @@ pattern GoogleAppsCardV1SelectionInput_Type_Dropdown = GoogleAppsCardV1Selection
   GoogleAppsCardV1SelectionInput_Type_RADIOBUTTON,
   GoogleAppsCardV1SelectionInput_Type_Switch,
   GoogleAppsCardV1SelectionInput_Type_Dropdown,
-  GoogleAppsCardV1SelectionInput_Type
-  #-}
+  GoogleAppsCardV1SelectionInput_Type #-}
 
 -- | The control type, either switch or checkbox.
-newtype GoogleAppsCardV1SwitchControl_ControlType = GoogleAppsCardV1SwitchControl_ControlType {fromGoogleAppsCardV1SwitchControl_ControlType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1SwitchControl_ControlType = GoogleAppsCardV1SwitchControl_ControlType { fromGoogleAppsCardV1SwitchControl_ControlType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A toggle-style switch.
 pattern GoogleAppsCardV1SwitchControl_ControlType_Switch :: GoogleAppsCardV1SwitchControl_ControlType
@@ -1232,21 +1250,20 @@ pattern GoogleAppsCardV1SwitchControl_ControlType_CHECKBOX = GoogleAppsCardV1Swi
   GoogleAppsCardV1SwitchControl_ControlType_Switch,
   GoogleAppsCardV1SwitchControl_ControlType_Checkbox,
   GoogleAppsCardV1SwitchControl_ControlType_CHECKBOX,
-  GoogleAppsCardV1SwitchControl_ControlType
-  #-}
+  GoogleAppsCardV1SwitchControl_ControlType #-}
 
 -- | The style of the text, for example, a single line or multiple lines.
-newtype GoogleAppsCardV1TextInput_Type = GoogleAppsCardV1TextInput_Type {fromGoogleAppsCardV1TextInput_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1TextInput_Type = GoogleAppsCardV1TextInput_Type { fromGoogleAppsCardV1TextInput_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The text is put into a single line.
 pattern GoogleAppsCardV1TextInput_Type_SINGLELINE :: GoogleAppsCardV1TextInput_Type
@@ -1259,21 +1276,20 @@ pattern GoogleAppsCardV1TextInput_Type_MULTIPLELINE = GoogleAppsCardV1TextInput_
 {-# COMPLETE
   GoogleAppsCardV1TextInput_Type_SINGLELINE,
   GoogleAppsCardV1TextInput_Type_MULTIPLELINE,
-  GoogleAppsCardV1TextInput_Type
-  #-}
+  GoogleAppsCardV1TextInput_Type #-}
 
 -- | The horizontal alignment of this widget.
-newtype GoogleAppsCardV1Widget_HorizontalAlignment = GoogleAppsCardV1Widget_HorizontalAlignment {fromGoogleAppsCardV1Widget_HorizontalAlignment :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleAppsCardV1Widget_HorizontalAlignment = GoogleAppsCardV1Widget_HorizontalAlignment { fromGoogleAppsCardV1Widget_HorizontalAlignment :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified alignment.
 pattern GoogleAppsCardV1Widget_HorizontalAlignment_HORIZONTALALIGNMENTUNSPECIFIED :: GoogleAppsCardV1Widget_HorizontalAlignment
@@ -1296,143 +1312,142 @@ pattern GoogleAppsCardV1Widget_HorizontalAlignment_End = GoogleAppsCardV1Widget_
   GoogleAppsCardV1Widget_HorizontalAlignment_Start,
   GoogleAppsCardV1Widget_HorizontalAlignment_Center,
   GoogleAppsCardV1Widget_HorizontalAlignment_End,
-  GoogleAppsCardV1Widget_HorizontalAlignment
-  #-}
+  GoogleAppsCardV1Widget_HorizontalAlignment #-}
 
 -- | The icon specified by an enum that indices to an icon provided by Chat API.
-newtype ImageButton_Icon = ImageButton_Icon {fromImageButton_Icon :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ImageButton_Icon = ImageButton_Icon { fromImageButton_Icon :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern ImageButton_Icon_ICONUNSPECIFIED :: ImageButton_Icon
 pattern ImageButton_Icon_ICONUNSPECIFIED = ImageButton_Icon "ICON_UNSPECIFIED"
 
--- |
+-- | 
 pattern ImageButton_Icon_Airplane :: ImageButton_Icon
 pattern ImageButton_Icon_Airplane = ImageButton_Icon "AIRPLANE"
 
--- |
+-- | 
 pattern ImageButton_Icon_Bookmark :: ImageButton_Icon
 pattern ImageButton_Icon_Bookmark = ImageButton_Icon "BOOKMARK"
 
--- |
+-- | 
 pattern ImageButton_Icon_Bus :: ImageButton_Icon
 pattern ImageButton_Icon_Bus = ImageButton_Icon "BUS"
 
--- |
+-- | 
 pattern ImageButton_Icon_Car :: ImageButton_Icon
 pattern ImageButton_Icon_Car = ImageButton_Icon "CAR"
 
--- |
+-- | 
 pattern ImageButton_Icon_Clock :: ImageButton_Icon
 pattern ImageButton_Icon_Clock = ImageButton_Icon "CLOCK"
 
--- |
+-- | 
 pattern ImageButton_Icon_CONFIRMATIONNUMBERICON :: ImageButton_Icon
 pattern ImageButton_Icon_CONFIRMATIONNUMBERICON = ImageButton_Icon "CONFIRMATION_NUMBER_ICON"
 
--- |
+-- | 
 pattern ImageButton_Icon_Dollar :: ImageButton_Icon
 pattern ImageButton_Icon_Dollar = ImageButton_Icon "DOLLAR"
 
--- |
+-- | 
 pattern ImageButton_Icon_Description :: ImageButton_Icon
 pattern ImageButton_Icon_Description = ImageButton_Icon "DESCRIPTION"
 
--- |
+-- | 
 pattern ImageButton_Icon_Email :: ImageButton_Icon
 pattern ImageButton_Icon_Email = ImageButton_Icon "EMAIL"
 
--- |
+-- | 
 pattern ImageButton_Icon_EVENTPERFORMER :: ImageButton_Icon
 pattern ImageButton_Icon_EVENTPERFORMER = ImageButton_Icon "EVENT_PERFORMER"
 
--- |
+-- | 
 pattern ImageButton_Icon_EVENTSEAT :: ImageButton_Icon
 pattern ImageButton_Icon_EVENTSEAT = ImageButton_Icon "EVENT_SEAT"
 
--- |
+-- | 
 pattern ImageButton_Icon_FLIGHTARRIVAL :: ImageButton_Icon
 pattern ImageButton_Icon_FLIGHTARRIVAL = ImageButton_Icon "FLIGHT_ARRIVAL"
 
--- |
+-- | 
 pattern ImageButton_Icon_FLIGHTDEPARTURE :: ImageButton_Icon
 pattern ImageButton_Icon_FLIGHTDEPARTURE = ImageButton_Icon "FLIGHT_DEPARTURE"
 
--- |
+-- | 
 pattern ImageButton_Icon_Hotel :: ImageButton_Icon
 pattern ImageButton_Icon_Hotel = ImageButton_Icon "HOTEL"
 
--- |
+-- | 
 pattern ImageButton_Icon_HOTELROOMTYPE :: ImageButton_Icon
 pattern ImageButton_Icon_HOTELROOMTYPE = ImageButton_Icon "HOTEL_ROOM_TYPE"
 
--- |
+-- | 
 pattern ImageButton_Icon_Invite :: ImageButton_Icon
 pattern ImageButton_Icon_Invite = ImageButton_Icon "INVITE"
 
--- |
+-- | 
 pattern ImageButton_Icon_MAPPIN :: ImageButton_Icon
 pattern ImageButton_Icon_MAPPIN = ImageButton_Icon "MAP_PIN"
 
--- |
+-- | 
 pattern ImageButton_Icon_Membership :: ImageButton_Icon
 pattern ImageButton_Icon_Membership = ImageButton_Icon "MEMBERSHIP"
 
--- |
+-- | 
 pattern ImageButton_Icon_MULTIPLEPEOPLE :: ImageButton_Icon
 pattern ImageButton_Icon_MULTIPLEPEOPLE = ImageButton_Icon "MULTIPLE_PEOPLE"
 
--- |
+-- | 
 pattern ImageButton_Icon_Offer :: ImageButton_Icon
 pattern ImageButton_Icon_Offer = ImageButton_Icon "OFFER"
 
--- |
+-- | 
 pattern ImageButton_Icon_Person :: ImageButton_Icon
 pattern ImageButton_Icon_Person = ImageButton_Icon "PERSON"
 
--- |
+-- | 
 pattern ImageButton_Icon_Phone :: ImageButton_Icon
 pattern ImageButton_Icon_Phone = ImageButton_Icon "PHONE"
 
--- |
+-- | 
 pattern ImageButton_Icon_RESTAURANTICON :: ImageButton_Icon
 pattern ImageButton_Icon_RESTAURANTICON = ImageButton_Icon "RESTAURANT_ICON"
 
--- |
+-- | 
 pattern ImageButton_Icon_SHOPPINGCART :: ImageButton_Icon
 pattern ImageButton_Icon_SHOPPINGCART = ImageButton_Icon "SHOPPING_CART"
 
--- |
+-- | 
 pattern ImageButton_Icon_Star :: ImageButton_Icon
 pattern ImageButton_Icon_Star = ImageButton_Icon "STAR"
 
--- |
+-- | 
 pattern ImageButton_Icon_Store :: ImageButton_Icon
 pattern ImageButton_Icon_Store = ImageButton_Icon "STORE"
 
--- |
+-- | 
 pattern ImageButton_Icon_Ticket :: ImageButton_Icon
 pattern ImageButton_Icon_Ticket = ImageButton_Icon "TICKET"
 
--- |
+-- | 
 pattern ImageButton_Icon_Train :: ImageButton_Icon
 pattern ImageButton_Icon_Train = ImageButton_Icon "TRAIN"
 
--- |
+-- | 
 pattern ImageButton_Icon_VIDEOCAMERA :: ImageButton_Icon
 pattern ImageButton_Icon_VIDEOCAMERA = ImageButton_Icon "VIDEO_CAMERA"
 
--- |
+-- | 
 pattern ImageButton_Icon_VIDEOPLAY :: ImageButton_Icon
 pattern ImageButton_Icon_VIDEOPLAY = ImageButton_Icon "VIDEO_PLAY"
 
@@ -1468,143 +1483,142 @@ pattern ImageButton_Icon_VIDEOPLAY = ImageButton_Icon "VIDEO_PLAY"
   ImageButton_Icon_Train,
   ImageButton_Icon_VIDEOCAMERA,
   ImageButton_Icon_VIDEOPLAY,
-  ImageButton_Icon
-  #-}
+  ImageButton_Icon #-}
 
 -- | An enum value that will be replaced by the Chat API with the corresponding icon image.
-newtype KeyValue_Icon = KeyValue_Icon {fromKeyValue_Icon :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype KeyValue_Icon = KeyValue_Icon { fromKeyValue_Icon :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern KeyValue_Icon_ICONUNSPECIFIED :: KeyValue_Icon
 pattern KeyValue_Icon_ICONUNSPECIFIED = KeyValue_Icon "ICON_UNSPECIFIED"
 
--- |
+-- | 
 pattern KeyValue_Icon_Airplane :: KeyValue_Icon
 pattern KeyValue_Icon_Airplane = KeyValue_Icon "AIRPLANE"
 
--- |
+-- | 
 pattern KeyValue_Icon_Bookmark :: KeyValue_Icon
 pattern KeyValue_Icon_Bookmark = KeyValue_Icon "BOOKMARK"
 
--- |
+-- | 
 pattern KeyValue_Icon_Bus :: KeyValue_Icon
 pattern KeyValue_Icon_Bus = KeyValue_Icon "BUS"
 
--- |
+-- | 
 pattern KeyValue_Icon_Car :: KeyValue_Icon
 pattern KeyValue_Icon_Car = KeyValue_Icon "CAR"
 
--- |
+-- | 
 pattern KeyValue_Icon_Clock :: KeyValue_Icon
 pattern KeyValue_Icon_Clock = KeyValue_Icon "CLOCK"
 
--- |
+-- | 
 pattern KeyValue_Icon_CONFIRMATIONNUMBERICON :: KeyValue_Icon
 pattern KeyValue_Icon_CONFIRMATIONNUMBERICON = KeyValue_Icon "CONFIRMATION_NUMBER_ICON"
 
--- |
+-- | 
 pattern KeyValue_Icon_Dollar :: KeyValue_Icon
 pattern KeyValue_Icon_Dollar = KeyValue_Icon "DOLLAR"
 
--- |
+-- | 
 pattern KeyValue_Icon_Description :: KeyValue_Icon
 pattern KeyValue_Icon_Description = KeyValue_Icon "DESCRIPTION"
 
--- |
+-- | 
 pattern KeyValue_Icon_Email :: KeyValue_Icon
 pattern KeyValue_Icon_Email = KeyValue_Icon "EMAIL"
 
--- |
+-- | 
 pattern KeyValue_Icon_EVENTPERFORMER :: KeyValue_Icon
 pattern KeyValue_Icon_EVENTPERFORMER = KeyValue_Icon "EVENT_PERFORMER"
 
--- |
+-- | 
 pattern KeyValue_Icon_EVENTSEAT :: KeyValue_Icon
 pattern KeyValue_Icon_EVENTSEAT = KeyValue_Icon "EVENT_SEAT"
 
--- |
+-- | 
 pattern KeyValue_Icon_FLIGHTARRIVAL :: KeyValue_Icon
 pattern KeyValue_Icon_FLIGHTARRIVAL = KeyValue_Icon "FLIGHT_ARRIVAL"
 
--- |
+-- | 
 pattern KeyValue_Icon_FLIGHTDEPARTURE :: KeyValue_Icon
 pattern KeyValue_Icon_FLIGHTDEPARTURE = KeyValue_Icon "FLIGHT_DEPARTURE"
 
--- |
+-- | 
 pattern KeyValue_Icon_Hotel :: KeyValue_Icon
 pattern KeyValue_Icon_Hotel = KeyValue_Icon "HOTEL"
 
--- |
+-- | 
 pattern KeyValue_Icon_HOTELROOMTYPE :: KeyValue_Icon
 pattern KeyValue_Icon_HOTELROOMTYPE = KeyValue_Icon "HOTEL_ROOM_TYPE"
 
--- |
+-- | 
 pattern KeyValue_Icon_Invite :: KeyValue_Icon
 pattern KeyValue_Icon_Invite = KeyValue_Icon "INVITE"
 
--- |
+-- | 
 pattern KeyValue_Icon_MAPPIN :: KeyValue_Icon
 pattern KeyValue_Icon_MAPPIN = KeyValue_Icon "MAP_PIN"
 
--- |
+-- | 
 pattern KeyValue_Icon_Membership :: KeyValue_Icon
 pattern KeyValue_Icon_Membership = KeyValue_Icon "MEMBERSHIP"
 
--- |
+-- | 
 pattern KeyValue_Icon_MULTIPLEPEOPLE :: KeyValue_Icon
 pattern KeyValue_Icon_MULTIPLEPEOPLE = KeyValue_Icon "MULTIPLE_PEOPLE"
 
--- |
+-- | 
 pattern KeyValue_Icon_Offer :: KeyValue_Icon
 pattern KeyValue_Icon_Offer = KeyValue_Icon "OFFER"
 
--- |
+-- | 
 pattern KeyValue_Icon_Person :: KeyValue_Icon
 pattern KeyValue_Icon_Person = KeyValue_Icon "PERSON"
 
--- |
+-- | 
 pattern KeyValue_Icon_Phone :: KeyValue_Icon
 pattern KeyValue_Icon_Phone = KeyValue_Icon "PHONE"
 
--- |
+-- | 
 pattern KeyValue_Icon_RESTAURANTICON :: KeyValue_Icon
 pattern KeyValue_Icon_RESTAURANTICON = KeyValue_Icon "RESTAURANT_ICON"
 
--- |
+-- | 
 pattern KeyValue_Icon_SHOPPINGCART :: KeyValue_Icon
 pattern KeyValue_Icon_SHOPPINGCART = KeyValue_Icon "SHOPPING_CART"
 
--- |
+-- | 
 pattern KeyValue_Icon_Star :: KeyValue_Icon
 pattern KeyValue_Icon_Star = KeyValue_Icon "STAR"
 
--- |
+-- | 
 pattern KeyValue_Icon_Store :: KeyValue_Icon
 pattern KeyValue_Icon_Store = KeyValue_Icon "STORE"
 
--- |
+-- | 
 pattern KeyValue_Icon_Ticket :: KeyValue_Icon
 pattern KeyValue_Icon_Ticket = KeyValue_Icon "TICKET"
 
--- |
+-- | 
 pattern KeyValue_Icon_Train :: KeyValue_Icon
 pattern KeyValue_Icon_Train = KeyValue_Icon "TRAIN"
 
--- |
+-- | 
 pattern KeyValue_Icon_VIDEOCAMERA :: KeyValue_Icon
 pattern KeyValue_Icon_VIDEOCAMERA = KeyValue_Icon "VIDEO_CAMERA"
 
--- |
+-- | 
 pattern KeyValue_Icon_VIDEOPLAY :: KeyValue_Icon
 pattern KeyValue_Icon_VIDEOPLAY = KeyValue_Icon "VIDEO_PLAY"
 
@@ -1640,21 +1654,20 @@ pattern KeyValue_Icon_VIDEOPLAY = KeyValue_Icon "VIDEO_PLAY"
   KeyValue_Icon_Train,
   KeyValue_Icon_VIDEOCAMERA,
   KeyValue_Icon_VIDEOPLAY,
-  KeyValue_Icon
-  #-}
+  KeyValue_Icon #-}
 
 -- | Output only. State of the membership.
-newtype Membership_State = Membership_State {fromMembership_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Membership_State = Membership_State { fromMembership_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default, do not use.
 pattern Membership_State_MEMBERSHIPSTATEUNSPECIFIED :: Membership_State
@@ -1677,21 +1690,20 @@ pattern Membership_State_NOTAMEMBER = Membership_State "NOT_A_MEMBER"
   Membership_State_Joined,
   Membership_State_Invited,
   Membership_State_NOTAMEMBER,
-  Membership_State
-  #-}
+  Membership_State #-}
 
 -- | The type of slash command.
-newtype SlashCommandMetadata_Type = SlashCommandMetadata_Type {fromSlashCommandMetadata_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SlashCommandMetadata_Type = SlashCommandMetadata_Type { fromSlashCommandMetadata_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value for the enum. DO NOT USE.
 pattern SlashCommandMetadata_Type_TYPEUNSPECIFIED :: SlashCommandMetadata_Type
@@ -1709,23 +1721,22 @@ pattern SlashCommandMetadata_Type_Invoke = SlashCommandMetadata_Type "INVOKE"
   SlashCommandMetadata_Type_TYPEUNSPECIFIED,
   SlashCommandMetadata_Type_Add,
   SlashCommandMetadata_Type_Invoke,
-  SlashCommandMetadata_Type
-  #-}
+  SlashCommandMetadata_Type #-}
 
 -- | Deprecated. Use @single_user_bot_dm@ instead. Output only. The type of a space.
-newtype Space_Type = Space_Type {fromSpace_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Space_Type = Space_Type { fromSpace_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern Space_Type_TYPEUNSPECIFIED :: Space_Type
 pattern Space_Type_TYPEUNSPECIFIED = Space_Type "TYPE_UNSPECIFIED"
 
@@ -1741,21 +1752,20 @@ pattern Space_Type_DM = Space_Type "DM"
   Space_Type_TYPEUNSPECIFIED,
   Space_Type_Room,
   Space_Type_DM,
-  Space_Type
-  #-}
+  Space_Type #-}
 
 -- | User type.
-newtype User_Type = User_Type {fromUser_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype User_Type = User_Type { fromUser_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value for the enum. DO NOT USE.
 pattern User_Type_TYPEUNSPECIFIED :: User_Type
@@ -1773,21 +1783,20 @@ pattern User_Type_Bot = User_Type "BOT"
   User_Type_TYPEUNSPECIFIED,
   User_Type_Human,
   User_Type_Bot,
-  User_Type
-  #-}
+  User_Type #-}
 
 -- | The type of user mention.
-newtype UserMentionMetadata_Type = UserMentionMetadata_Type {fromUserMentionMetadata_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UserMentionMetadata_Type = UserMentionMetadata_Type { fromUserMentionMetadata_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value for the enum. DO NOT USE.
 pattern UserMentionMetadata_Type_TYPEUNSPECIFIED :: UserMentionMetadata_Type
@@ -1805,5 +1814,4 @@ pattern UserMentionMetadata_Type_Mention = UserMentionMetadata_Type "MENTION"
   UserMentionMetadata_Type_TYPEUNSPECIFIED,
   UserMentionMetadata_Type_Add,
   UserMentionMetadata_Type_Mention,
-  UserMentionMetadata_Type
-  #-}
+  UserMentionMetadata_Type #-}
