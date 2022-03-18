@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -31,188 +25,187 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.BigQueryDataTransfer.Types
-    (
-    -- * Configuration
-      bigQueryDataTransferService
+  ( -- * Configuration
+    bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    , bigqueryScope
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
+    bigqueryScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CheckValidCredsRequest
-    , CheckValidCredsRequest (..)
-    , newCheckValidCredsRequest
+    CheckValidCredsRequest (..),
+    newCheckValidCredsRequest,
 
     -- ** CheckValidCredsResponse
-    , CheckValidCredsResponse (..)
-    , newCheckValidCredsResponse
+    CheckValidCredsResponse (..),
+    newCheckValidCredsResponse,
 
     -- ** DataSource
-    , DataSource (..)
-    , newDataSource
+    DataSource (..),
+    newDataSource,
 
     -- ** DataSource_AuthorizationType
-    , DataSource_AuthorizationType (..)
+    DataSource_AuthorizationType (..),
 
     -- ** DataSource_DataRefreshType
-    , DataSource_DataRefreshType (..)
+    DataSource_DataRefreshType (..),
 
     -- ** DataSource_TransferType
-    , DataSource_TransferType (..)
+    DataSource_TransferType (..),
 
     -- ** DataSourceParameter
-    , DataSourceParameter (..)
-    , newDataSourceParameter
+    DataSourceParameter (..),
+    newDataSourceParameter,
 
     -- ** DataSourceParameter_Type
-    , DataSourceParameter_Type (..)
+    DataSourceParameter_Type (..),
 
     -- ** EmailPreferences
-    , EmailPreferences (..)
-    , newEmailPreferences
+    EmailPreferences (..),
+    newEmailPreferences,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnrollDataSourcesRequest
-    , EnrollDataSourcesRequest (..)
-    , newEnrollDataSourcesRequest
+    EnrollDataSourcesRequest (..),
+    newEnrollDataSourcesRequest,
 
     -- ** ListDataSourcesResponse
-    , ListDataSourcesResponse (..)
-    , newListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListTransferConfigsResponse
-    , ListTransferConfigsResponse (..)
-    , newListTransferConfigsResponse
+    ListTransferConfigsResponse (..),
+    newListTransferConfigsResponse,
 
     -- ** ListTransferLogsResponse
-    , ListTransferLogsResponse (..)
-    , newListTransferLogsResponse
+    ListTransferLogsResponse (..),
+    newListTransferLogsResponse,
 
     -- ** ListTransferRunsResponse
-    , ListTransferRunsResponse (..)
-    , newListTransferRunsResponse
+    ListTransferRunsResponse (..),
+    newListTransferRunsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** ScheduleOptions
-    , ScheduleOptions (..)
-    , newScheduleOptions
+    ScheduleOptions (..),
+    newScheduleOptions,
 
     -- ** ScheduleTransferRunsRequest
-    , ScheduleTransferRunsRequest (..)
-    , newScheduleTransferRunsRequest
+    ScheduleTransferRunsRequest (..),
+    newScheduleTransferRunsRequest,
 
     -- ** ScheduleTransferRunsResponse
-    , ScheduleTransferRunsResponse (..)
-    , newScheduleTransferRunsResponse
+    ScheduleTransferRunsResponse (..),
+    newScheduleTransferRunsResponse,
 
     -- ** StartManualTransferRunsRequest
-    , StartManualTransferRunsRequest (..)
-    , newStartManualTransferRunsRequest
+    StartManualTransferRunsRequest (..),
+    newStartManualTransferRunsRequest,
 
     -- ** StartManualTransferRunsResponse
-    , StartManualTransferRunsResponse (..)
-    , newStartManualTransferRunsResponse
+    StartManualTransferRunsResponse (..),
+    newStartManualTransferRunsResponse,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeRange
-    , TimeRange (..)
-    , newTimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** TransferConfig
-    , TransferConfig (..)
-    , newTransferConfig
+    TransferConfig (..),
+    newTransferConfig,
 
     -- ** TransferConfig_Params
-    , TransferConfig_Params (..)
-    , newTransferConfig_Params
+    TransferConfig_Params (..),
+    newTransferConfig_Params,
 
     -- ** TransferConfig_State
-    , TransferConfig_State (..)
+    TransferConfig_State (..),
 
     -- ** TransferMessage
-    , TransferMessage (..)
-    , newTransferMessage
+    TransferMessage (..),
+    newTransferMessage,
 
     -- ** TransferMessage_Severity
-    , TransferMessage_Severity (..)
+    TransferMessage_Severity (..),
 
     -- ** TransferRun
-    , TransferRun (..)
-    , newTransferRun
+    TransferRun (..),
+    newTransferRun,
 
     -- ** TransferRun_Params
-    , TransferRun_Params (..)
-    , newTransferRun_Params
+    TransferRun_Params (..),
+    newTransferRun_Params,
 
     -- ** TransferRun_State
-    , TransferRun_State (..)
+    TransferRun_State (..),
 
     -- ** UserInfo
-    , UserInfo (..)
-    , newUserInfo
+    UserInfo (..),
+    newUserInfo,
 
     -- ** ProjectsLocationsTransferConfigsRunsListRunAttempt
-    , ProjectsLocationsTransferConfigsRunsListRunAttempt (..)
+    ProjectsLocationsTransferConfigsRunsListRunAttempt (..),
 
     -- ** ProjectsLocationsTransferConfigsRunsListStates
-    , ProjectsLocationsTransferConfigsRunsListStates (..)
+    ProjectsLocationsTransferConfigsRunsListStates (..),
 
     -- ** ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..)
+    ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..),
 
     -- ** ProjectsTransferConfigsRunsListRunAttempt
-    , ProjectsTransferConfigsRunsListRunAttempt (..)
+    ProjectsTransferConfigsRunsListRunAttempt (..),
 
     -- ** ProjectsTransferConfigsRunsListStates
-    , ProjectsTransferConfigsRunsListStates (..)
+    ProjectsTransferConfigsRunsListStates (..),
 
     -- ** ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..)
-    ) where
+    ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.BigQueryDataTransfer.Internal.Product
 import Gogol.BigQueryDataTransfer.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the BigQuery Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 bigQueryDataTransferService :: Core.ServiceConfig
-bigQueryDataTransferService
-  = Core.defaultService
-      (Core.ServiceId "bigquerydatatransfer:v1")
-      "bigquerydatatransfer.googleapis.com"
+bigQueryDataTransferService =
+  Core.defaultService
+    (Core.ServiceId "bigquerydatatransfer:v1")
+    "bigquerydatatransfer.googleapis.com"
 
 -- | View and manage your data in Google BigQuery and see the email address for your Google Account
 bigqueryScope :: Core.Proxy '["https://www.googleapis.com/auth/bigquery"]

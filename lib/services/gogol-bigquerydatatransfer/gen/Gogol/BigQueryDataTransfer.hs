@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,337 +30,337 @@
 --
 -- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference>
 module Gogol.BigQueryDataTransfer
-    (
-    -- * Configuration
-      bigQueryDataTransferService
+  ( -- * Configuration
+    bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    , bigqueryScope
-    , cloudPlatformScope
-    , cloudPlatformReadOnlyScope
+    bigqueryScope,
+    cloudPlatformScope,
+    cloudPlatformReadOnlyScope,
 
     -- * Resources
 
     -- ** bigquerydatatransfer.projects.dataSources.checkValidCreds
-    , BigQueryDataTransferProjectsDataSourcesCheckValidCredsResource
-    , newBigQueryDataTransferProjectsDataSourcesCheckValidCreds
-    , BigQueryDataTransferProjectsDataSourcesCheckValidCreds
+    BigQueryDataTransferProjectsDataSourcesCheckValidCredsResource,
+    newBigQueryDataTransferProjectsDataSourcesCheckValidCreds,
+    BigQueryDataTransferProjectsDataSourcesCheckValidCreds,
 
     -- ** bigquerydatatransfer.projects.dataSources.get
-    , BigQueryDataTransferProjectsDataSourcesGetResource
-    , newBigQueryDataTransferProjectsDataSourcesGet
-    , BigQueryDataTransferProjectsDataSourcesGet
+    BigQueryDataTransferProjectsDataSourcesGetResource,
+    newBigQueryDataTransferProjectsDataSourcesGet,
+    BigQueryDataTransferProjectsDataSourcesGet,
 
     -- ** bigquerydatatransfer.projects.dataSources.list
-    , BigQueryDataTransferProjectsDataSourcesListResource
-    , newBigQueryDataTransferProjectsDataSourcesList
-    , BigQueryDataTransferProjectsDataSourcesList
+    BigQueryDataTransferProjectsDataSourcesListResource,
+    newBigQueryDataTransferProjectsDataSourcesList,
+    BigQueryDataTransferProjectsDataSourcesList,
 
     -- ** bigquerydatatransfer.projects.enrollDataSources
-    , BigQueryDataTransferProjectsEnrollDataSourcesResource
-    , newBigQueryDataTransferProjectsEnrollDataSources
-    , BigQueryDataTransferProjectsEnrollDataSources
+    BigQueryDataTransferProjectsEnrollDataSourcesResource,
+    newBigQueryDataTransferProjectsEnrollDataSources,
+    BigQueryDataTransferProjectsEnrollDataSources,
 
     -- ** bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
-    , BigQueryDataTransferProjectsLocationsDataSourcesCheckValidCredsResource
-    , newBigQueryDataTransferProjectsLocationsDataSourcesCheckValidCreds
-    , BigQueryDataTransferProjectsLocationsDataSourcesCheckValidCreds
+    BigQueryDataTransferProjectsLocationsDataSourcesCheckValidCredsResource,
+    newBigQueryDataTransferProjectsLocationsDataSourcesCheckValidCreds,
+    BigQueryDataTransferProjectsLocationsDataSourcesCheckValidCreds,
 
     -- ** bigquerydatatransfer.projects.locations.dataSources.get
-    , BigQueryDataTransferProjectsLocationsDataSourcesGetResource
-    , newBigQueryDataTransferProjectsLocationsDataSourcesGet
-    , BigQueryDataTransferProjectsLocationsDataSourcesGet
+    BigQueryDataTransferProjectsLocationsDataSourcesGetResource,
+    newBigQueryDataTransferProjectsLocationsDataSourcesGet,
+    BigQueryDataTransferProjectsLocationsDataSourcesGet,
 
     -- ** bigquerydatatransfer.projects.locations.dataSources.list
-    , BigQueryDataTransferProjectsLocationsDataSourcesListResource
-    , newBigQueryDataTransferProjectsLocationsDataSourcesList
-    , BigQueryDataTransferProjectsLocationsDataSourcesList
+    BigQueryDataTransferProjectsLocationsDataSourcesListResource,
+    newBigQueryDataTransferProjectsLocationsDataSourcesList,
+    BigQueryDataTransferProjectsLocationsDataSourcesList,
 
     -- ** bigquerydatatransfer.projects.locations.enrollDataSources
-    , BigQueryDataTransferProjectsLocationsEnrollDataSourcesResource
-    , newBigQueryDataTransferProjectsLocationsEnrollDataSources
-    , BigQueryDataTransferProjectsLocationsEnrollDataSources
+    BigQueryDataTransferProjectsLocationsEnrollDataSourcesResource,
+    newBigQueryDataTransferProjectsLocationsEnrollDataSources,
+    BigQueryDataTransferProjectsLocationsEnrollDataSources,
 
     -- ** bigquerydatatransfer.projects.locations.get
-    , BigQueryDataTransferProjectsLocationsGetResource
-    , newBigQueryDataTransferProjectsLocationsGet
-    , BigQueryDataTransferProjectsLocationsGet
+    BigQueryDataTransferProjectsLocationsGetResource,
+    newBigQueryDataTransferProjectsLocationsGet,
+    BigQueryDataTransferProjectsLocationsGet,
 
     -- ** bigquerydatatransfer.projects.locations.list
-    , BigQueryDataTransferProjectsLocationsListResource
-    , newBigQueryDataTransferProjectsLocationsList
-    , BigQueryDataTransferProjectsLocationsList
+    BigQueryDataTransferProjectsLocationsListResource,
+    newBigQueryDataTransferProjectsLocationsList,
+    BigQueryDataTransferProjectsLocationsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.create
-    , BigQueryDataTransferProjectsLocationsTransferConfigsCreateResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsCreate
-    , BigQueryDataTransferProjectsLocationsTransferConfigsCreate
+    BigQueryDataTransferProjectsLocationsTransferConfigsCreateResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsCreate,
+    BigQueryDataTransferProjectsLocationsTransferConfigsCreate,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.delete
-    , BigQueryDataTransferProjectsLocationsTransferConfigsDeleteResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsDelete
-    , BigQueryDataTransferProjectsLocationsTransferConfigsDelete
+    BigQueryDataTransferProjectsLocationsTransferConfigsDeleteResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsDelete,
+    BigQueryDataTransferProjectsLocationsTransferConfigsDelete,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.get
-    , BigQueryDataTransferProjectsLocationsTransferConfigsGetResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsGet
-    , BigQueryDataTransferProjectsLocationsTransferConfigsGet
+    BigQueryDataTransferProjectsLocationsTransferConfigsGetResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsGet,
+    BigQueryDataTransferProjectsLocationsTransferConfigsGet,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.list
-    , BigQueryDataTransferProjectsLocationsTransferConfigsListResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsList
-    , BigQueryDataTransferProjectsLocationsTransferConfigsList
+    BigQueryDataTransferProjectsLocationsTransferConfigsListResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsList,
+    BigQueryDataTransferProjectsLocationsTransferConfigsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.patch
-    , BigQueryDataTransferProjectsLocationsTransferConfigsPatchResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsPatch
-    , BigQueryDataTransferProjectsLocationsTransferConfigsPatch
+    BigQueryDataTransferProjectsLocationsTransferConfigsPatchResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsPatch,
+    BigQueryDataTransferProjectsLocationsTransferConfigsPatch,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.delete
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsDeleteResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsDeleteResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.get
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsGetResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsRunsGet
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsGet
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsGetResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsGet,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsGet,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.list
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsListResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsRunsList
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsList
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsListResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsList,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsListResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsList
-    , BigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsList
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsListResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsList,
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsTransferLogsList,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
-    , BigQueryDataTransferProjectsLocationsTransferConfigsScheduleRunsResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsScheduleRuns
-    , BigQueryDataTransferProjectsLocationsTransferConfigsScheduleRuns
+    BigQueryDataTransferProjectsLocationsTransferConfigsScheduleRunsResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsScheduleRuns,
+    BigQueryDataTransferProjectsLocationsTransferConfigsScheduleRuns,
 
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns
-    , BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRunsResource
-    , newBigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns
-    , BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns
+    BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRunsResource,
+    newBigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns,
+    BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.create
-    , BigQueryDataTransferProjectsTransferConfigsCreateResource
-    , newBigQueryDataTransferProjectsTransferConfigsCreate
-    , BigQueryDataTransferProjectsTransferConfigsCreate
+    BigQueryDataTransferProjectsTransferConfigsCreateResource,
+    newBigQueryDataTransferProjectsTransferConfigsCreate,
+    BigQueryDataTransferProjectsTransferConfigsCreate,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.delete
-    , BigQueryDataTransferProjectsTransferConfigsDeleteResource
-    , newBigQueryDataTransferProjectsTransferConfigsDelete
-    , BigQueryDataTransferProjectsTransferConfigsDelete
+    BigQueryDataTransferProjectsTransferConfigsDeleteResource,
+    newBigQueryDataTransferProjectsTransferConfigsDelete,
+    BigQueryDataTransferProjectsTransferConfigsDelete,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.get
-    , BigQueryDataTransferProjectsTransferConfigsGetResource
-    , newBigQueryDataTransferProjectsTransferConfigsGet
-    , BigQueryDataTransferProjectsTransferConfigsGet
+    BigQueryDataTransferProjectsTransferConfigsGetResource,
+    newBigQueryDataTransferProjectsTransferConfigsGet,
+    BigQueryDataTransferProjectsTransferConfigsGet,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.list
-    , BigQueryDataTransferProjectsTransferConfigsListResource
-    , newBigQueryDataTransferProjectsTransferConfigsList
-    , BigQueryDataTransferProjectsTransferConfigsList
+    BigQueryDataTransferProjectsTransferConfigsListResource,
+    newBigQueryDataTransferProjectsTransferConfigsList,
+    BigQueryDataTransferProjectsTransferConfigsList,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.patch
-    , BigQueryDataTransferProjectsTransferConfigsPatchResource
-    , newBigQueryDataTransferProjectsTransferConfigsPatch
-    , BigQueryDataTransferProjectsTransferConfigsPatch
+    BigQueryDataTransferProjectsTransferConfigsPatchResource,
+    newBigQueryDataTransferProjectsTransferConfigsPatch,
+    BigQueryDataTransferProjectsTransferConfigsPatch,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.delete
-    , BigQueryDataTransferProjectsTransferConfigsRunsDeleteResource
-    , newBigQueryDataTransferProjectsTransferConfigsRunsDelete
-    , BigQueryDataTransferProjectsTransferConfigsRunsDelete
+    BigQueryDataTransferProjectsTransferConfigsRunsDeleteResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsDelete,
+    BigQueryDataTransferProjectsTransferConfigsRunsDelete,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.get
-    , BigQueryDataTransferProjectsTransferConfigsRunsGetResource
-    , newBigQueryDataTransferProjectsTransferConfigsRunsGet
-    , BigQueryDataTransferProjectsTransferConfigsRunsGet
+    BigQueryDataTransferProjectsTransferConfigsRunsGetResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsGet,
+    BigQueryDataTransferProjectsTransferConfigsRunsGet,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.list
-    , BigQueryDataTransferProjectsTransferConfigsRunsListResource
-    , newBigQueryDataTransferProjectsTransferConfigsRunsList
-    , BigQueryDataTransferProjectsTransferConfigsRunsList
+    BigQueryDataTransferProjectsTransferConfigsRunsListResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsList,
+    BigQueryDataTransferProjectsTransferConfigsRunsList,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
-    , BigQueryDataTransferProjectsTransferConfigsRunsTransferLogsListResource
-    , newBigQueryDataTransferProjectsTransferConfigsRunsTransferLogsList
-    , BigQueryDataTransferProjectsTransferConfigsRunsTransferLogsList
+    BigQueryDataTransferProjectsTransferConfigsRunsTransferLogsListResource,
+    newBigQueryDataTransferProjectsTransferConfigsRunsTransferLogsList,
+    BigQueryDataTransferProjectsTransferConfigsRunsTransferLogsList,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.scheduleRuns
-    , BigQueryDataTransferProjectsTransferConfigsScheduleRunsResource
-    , newBigQueryDataTransferProjectsTransferConfigsScheduleRuns
-    , BigQueryDataTransferProjectsTransferConfigsScheduleRuns
+    BigQueryDataTransferProjectsTransferConfigsScheduleRunsResource,
+    newBigQueryDataTransferProjectsTransferConfigsScheduleRuns,
+    BigQueryDataTransferProjectsTransferConfigsScheduleRuns,
 
     -- ** bigquerydatatransfer.projects.transferConfigs.startManualRuns
-    , BigQueryDataTransferProjectsTransferConfigsStartManualRunsResource
-    , newBigQueryDataTransferProjectsTransferConfigsStartManualRuns
-    , BigQueryDataTransferProjectsTransferConfigsStartManualRuns
+    BigQueryDataTransferProjectsTransferConfigsStartManualRunsResource,
+    newBigQueryDataTransferProjectsTransferConfigsStartManualRuns,
+    BigQueryDataTransferProjectsTransferConfigsStartManualRuns,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CheckValidCredsRequest
-    , CheckValidCredsRequest (..)
-    , newCheckValidCredsRequest
+    CheckValidCredsRequest (..),
+    newCheckValidCredsRequest,
 
     -- ** CheckValidCredsResponse
-    , CheckValidCredsResponse (..)
-    , newCheckValidCredsResponse
+    CheckValidCredsResponse (..),
+    newCheckValidCredsResponse,
 
     -- ** DataSource
-    , DataSource (..)
-    , newDataSource
+    DataSource (..),
+    newDataSource,
 
     -- ** DataSource_AuthorizationType
-    , DataSource_AuthorizationType (..)
+    DataSource_AuthorizationType (..),
 
     -- ** DataSource_DataRefreshType
-    , DataSource_DataRefreshType (..)
+    DataSource_DataRefreshType (..),
 
     -- ** DataSource_TransferType
-    , DataSource_TransferType (..)
+    DataSource_TransferType (..),
 
     -- ** DataSourceParameter
-    , DataSourceParameter (..)
-    , newDataSourceParameter
+    DataSourceParameter (..),
+    newDataSourceParameter,
 
     -- ** DataSourceParameter_Type
-    , DataSourceParameter_Type (..)
+    DataSourceParameter_Type (..),
 
     -- ** EmailPreferences
-    , EmailPreferences (..)
-    , newEmailPreferences
+    EmailPreferences (..),
+    newEmailPreferences,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnrollDataSourcesRequest
-    , EnrollDataSourcesRequest (..)
-    , newEnrollDataSourcesRequest
+    EnrollDataSourcesRequest (..),
+    newEnrollDataSourcesRequest,
 
     -- ** ListDataSourcesResponse
-    , ListDataSourcesResponse (..)
-    , newListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListTransferConfigsResponse
-    , ListTransferConfigsResponse (..)
-    , newListTransferConfigsResponse
+    ListTransferConfigsResponse (..),
+    newListTransferConfigsResponse,
 
     -- ** ListTransferLogsResponse
-    , ListTransferLogsResponse (..)
-    , newListTransferLogsResponse
+    ListTransferLogsResponse (..),
+    newListTransferLogsResponse,
 
     -- ** ListTransferRunsResponse
-    , ListTransferRunsResponse (..)
-    , newListTransferRunsResponse
+    ListTransferRunsResponse (..),
+    newListTransferRunsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** ScheduleOptions
-    , ScheduleOptions (..)
-    , newScheduleOptions
+    ScheduleOptions (..),
+    newScheduleOptions,
 
     -- ** ScheduleTransferRunsRequest
-    , ScheduleTransferRunsRequest (..)
-    , newScheduleTransferRunsRequest
+    ScheduleTransferRunsRequest (..),
+    newScheduleTransferRunsRequest,
 
     -- ** ScheduleTransferRunsResponse
-    , ScheduleTransferRunsResponse (..)
-    , newScheduleTransferRunsResponse
+    ScheduleTransferRunsResponse (..),
+    newScheduleTransferRunsResponse,
 
     -- ** StartManualTransferRunsRequest
-    , StartManualTransferRunsRequest (..)
-    , newStartManualTransferRunsRequest
+    StartManualTransferRunsRequest (..),
+    newStartManualTransferRunsRequest,
 
     -- ** StartManualTransferRunsResponse
-    , StartManualTransferRunsResponse (..)
-    , newStartManualTransferRunsResponse
+    StartManualTransferRunsResponse (..),
+    newStartManualTransferRunsResponse,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeRange
-    , TimeRange (..)
-    , newTimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** TransferConfig
-    , TransferConfig (..)
-    , newTransferConfig
+    TransferConfig (..),
+    newTransferConfig,
 
     -- ** TransferConfig_Params
-    , TransferConfig_Params (..)
-    , newTransferConfig_Params
+    TransferConfig_Params (..),
+    newTransferConfig_Params,
 
     -- ** TransferConfig_State
-    , TransferConfig_State (..)
+    TransferConfig_State (..),
 
     -- ** TransferMessage
-    , TransferMessage (..)
-    , newTransferMessage
+    TransferMessage (..),
+    newTransferMessage,
 
     -- ** TransferMessage_Severity
-    , TransferMessage_Severity (..)
+    TransferMessage_Severity (..),
 
     -- ** TransferRun
-    , TransferRun (..)
-    , newTransferRun
+    TransferRun (..),
+    newTransferRun,
 
     -- ** TransferRun_Params
-    , TransferRun_Params (..)
-    , newTransferRun_Params
+    TransferRun_Params (..),
+    newTransferRun_Params,
 
     -- ** TransferRun_State
-    , TransferRun_State (..)
+    TransferRun_State (..),
 
     -- ** UserInfo
-    , UserInfo (..)
-    , newUserInfo
+    UserInfo (..),
+    newUserInfo,
 
     -- ** ProjectsLocationsTransferConfigsRunsListRunAttempt
-    , ProjectsLocationsTransferConfigsRunsListRunAttempt (..)
+    ProjectsLocationsTransferConfigsRunsListRunAttempt (..),
 
     -- ** ProjectsLocationsTransferConfigsRunsListStates
-    , ProjectsLocationsTransferConfigsRunsListStates (..)
+    ProjectsLocationsTransferConfigsRunsListStates (..),
 
     -- ** ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..)
+    ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..),
 
     -- ** ProjectsTransferConfigsRunsListRunAttempt
-    , ProjectsTransferConfigsRunsListRunAttempt (..)
+    ProjectsTransferConfigsRunsListRunAttempt (..),
 
     -- ** ProjectsTransferConfigsRunsListStates
-    , ProjectsTransferConfigsRunsListStates (..)
+    ProjectsTransferConfigsRunsListStates (..),
 
     -- ** ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..)
-    ) where
+    ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..),
+  )
+where
 
 import Gogol.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
 import Gogol.BigQueryDataTransfer.Projects.DataSources.Get
