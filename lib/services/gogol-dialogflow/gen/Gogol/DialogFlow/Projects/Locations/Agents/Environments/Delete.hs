@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,88 +30,95 @@
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.agents.environments.delete@.
 module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Delete
-    (
-    -- * Resource
-      DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource
+  ( -- * Resource
+    DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource,
 
     -- ** Constructing a Request
-    , newDialogFlowProjectsLocationsAgentsEnvironmentsDelete
-    , DialogFlowProjectsLocationsAgentsEnvironmentsDelete
-    ) where
+    newDialogFlowProjectsLocationsAgentsEnvironmentsDelete,
+    DialogFlowProjectsLocationsAgentsEnvironmentsDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DialogFlow.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.environments.delete@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEnvironmentsDelete' request conforms to.
-type DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource
-     =
-     "v3" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Delete '[Core.JSON] GoogleProtobufEmpty
+type DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource =
+  "v3"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
 -- | Deletes the specified Environment.
 --
 -- /See:/ 'newDialogFlowProjectsLocationsAgentsEnvironmentsDelete' smart constructor.
 data DialogFlowProjectsLocationsAgentsEnvironmentsDelete = DialogFlowProjectsLocationsAgentsEnvironmentsDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name of the Environment to delete. Format: @projects\/\/locations\/\/agents\/\/environments\/@.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the Environment to delete. Format: @projects\/\/locations\/\/agents\/\/environments\/@.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsEnvironmentsDelete' with the minimum fields required to make a request.
-newDialogFlowProjectsLocationsAgentsEnvironmentsDelete 
-    ::  Core.Text
-       -- ^  Required. The name of the Environment to delete. Format: @projects\/\/locations\/\/agents\/\/environments\/@. See 'name'.
-    -> DialogFlowProjectsLocationsAgentsEnvironmentsDelete
+newDialogFlowProjectsLocationsAgentsEnvironmentsDelete ::
+  -- |  Required. The name of the Environment to delete. Format: @projects\/\/locations\/\/agents\/\/environments\/@. See 'name'.
+  Core.Text ->
+  DialogFlowProjectsLocationsAgentsEnvironmentsDelete
 newDialogFlowProjectsLocationsAgentsEnvironmentsDelete name =
   DialogFlowProjectsLocationsAgentsEnvironmentsDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           DialogFlowProjectsLocationsAgentsEnvironmentsDelete
-         where
-        type Rs
-               DialogFlowProjectsLocationsAgentsEnvironmentsDelete
-             = GoogleProtobufEmpty
-        type Scopes
-               DialogFlowProjectsLocationsAgentsEnvironmentsDelete
-             =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/dialogflow"]
-        requestClient
-          DialogFlowProjectsLocationsAgentsEnvironmentsDelete{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              dialogFlowService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    DialogFlowProjectsLocationsAgentsEnvironmentsDelete
+  where
+  type
+    Rs
+      DialogFlowProjectsLocationsAgentsEnvironmentsDelete =
+      GoogleProtobufEmpty
+  type
+    Scopes
+      DialogFlowProjectsLocationsAgentsEnvironmentsDelete =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/dialogflow"
+       ]
+  requestClient
+    DialogFlowProjectsLocationsAgentsEnvironmentsDelete {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        dialogFlowService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource
+            )
+            Core.mempty

@@ -1,23 +1,17 @@
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
-
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -36,95 +30,102 @@
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.agents.restore@.
 module Gogol.DialogFlow.Projects.Locations.Agents.Restore
-    (
-    -- * Resource
-      DialogFlowProjectsLocationsAgentsRestoreResource
+  ( -- * Resource
+    DialogFlowProjectsLocationsAgentsRestoreResource,
 
     -- ** Constructing a Request
-    , newDialogFlowProjectsLocationsAgentsRestore
-    , DialogFlowProjectsLocationsAgentsRestore
-    ) where
+    newDialogFlowProjectsLocationsAgentsRestore,
+    DialogFlowProjectsLocationsAgentsRestore,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DialogFlow.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.restore@ method which the
 -- 'DialogFlowProjectsLocationsAgentsRestore' request conforms to.
-type DialogFlowProjectsLocationsAgentsRestoreResource
-     =
-     "v3" Core.:>
-       Core.CaptureMode "name" "restore" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.ReqBody '[Core.JSON]
-                       GoogleCloudDialogflowCxV3RestoreAgentRequest
-                       Core.:>
-                       Core.Post '[Core.JSON] GoogleLongrunningOperation
+type DialogFlowProjectsLocationsAgentsRestoreResource =
+  "v3"
+    Core.:> Core.CaptureMode "name" "restore" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody
+              '[Core.JSON]
+              GoogleCloudDialogflowCxV3RestoreAgentRequest
+    Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Restores the specified agent from a binary file. Replaces the current agent with a new one. Note that all existing resources in agent (e.g. intents, entity types, flows) will be removed. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: An empty <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct Struct message> - @response@: An <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty Empty message> Note: You should always train flows prior to sending them queries. See the <https://cloud.google.com/dialogflow/cx/docs/concept/training training documentation>.
 --
 -- /See:/ 'newDialogFlowProjectsLocationsAgentsRestore' smart constructor.
 data DialogFlowProjectsLocationsAgentsRestore = DialogFlowProjectsLocationsAgentsRestore
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name of the agent to restore into. Format: @projects\/\/locations\/\/agents\/@.
-    , name :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: GoogleCloudDialogflowCxV3RestoreAgentRequest
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the agent to restore into. Format: @projects\/\/locations\/\/agents\/@.
+    name :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: GoogleCloudDialogflowCxV3RestoreAgentRequest,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsRestore' with the minimum fields required to make a request.
-newDialogFlowProjectsLocationsAgentsRestore 
-    ::  Core.Text
-       -- ^  Required. The name of the agent to restore into. Format: @projects\/\/locations\/\/agents\/@. See 'name'.
-    -> GoogleCloudDialogflowCxV3RestoreAgentRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> DialogFlowProjectsLocationsAgentsRestore
+newDialogFlowProjectsLocationsAgentsRestore ::
+  -- |  Required. The name of the agent to restore into. Format: @projects\/\/locations\/\/agents\/@. See 'name'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  GoogleCloudDialogflowCxV3RestoreAgentRequest ->
+  DialogFlowProjectsLocationsAgentsRestore
 newDialogFlowProjectsLocationsAgentsRestore name payload =
   DialogFlowProjectsLocationsAgentsRestore
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           DialogFlowProjectsLocationsAgentsRestore
-         where
-        type Rs DialogFlowProjectsLocationsAgentsRestore =
-             GoogleLongrunningOperation
-        type Scopes DialogFlowProjectsLocationsAgentsRestore
-             =
-             '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/dialogflow"]
-        requestClient
-          DialogFlowProjectsLocationsAgentsRestore{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              dialogFlowService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           DialogFlowProjectsLocationsAgentsRestoreResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    DialogFlowProjectsLocationsAgentsRestore
+  where
+  type
+    Rs DialogFlowProjectsLocationsAgentsRestore =
+      GoogleLongrunningOperation
+  type
+    Scopes DialogFlowProjectsLocationsAgentsRestore =
+      '[ "https://www.googleapis.com/auth/cloud-platform",
+         "https://www.googleapis.com/auth/dialogflow"
+       ]
+  requestClient
+    DialogFlowProjectsLocationsAgentsRestore {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        dialogFlowService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  DialogFlowProjectsLocationsAgentsRestoreResource
+            )
+            Core.mempty

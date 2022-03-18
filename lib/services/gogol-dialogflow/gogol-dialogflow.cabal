@@ -1,19 +1,22 @@
-cabal-version:         2.2
-name:                  gogol-dialogflow
-version:               0.5.0
-synopsis:              Google Dialogflow SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-dialogflow
+version:            0.5.0
+synopsis:           Google Dialogflow SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:          Copyright (c) 2015-2022 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Builds conversational interfaces (for example, chatbots, and voice-powered apps and devices).
+  Builds conversational interfaces (for example, chatbots, and voice-powered apps and devices).
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -28,142 +31,139 @@ source-repository head
 
 flag no-field-selectors
   description: If field selectors should be omitted, requires GHC >=9.2
-  default: True
+  default:     True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: Haskell2010
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if flag(no-field-selectors) && impl(ghc >= 9.1)
+  if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.DialogFlow
-    , Gogol.DialogFlow.Projects.Locations.Agents.Changelogs.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Changelogs.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestResults.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.DeployFlow
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Deployments.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Deployments.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Stop
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.LookupEnvironmentHistory
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.RunContinuousTest
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.DetectIntent
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.FulfillIntent
-    , Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.MatchIntent
-    , Gogol.DialogFlow.Projects.Locations.Agents.Export
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Export
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Import
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Train
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Validate
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.CompareVersions
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Load
-    , Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.GetValidationResult
-    , Gogol.DialogFlow.Projects.Locations.Agents.Intents.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Intents.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Intents.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Intents.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Intents.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Restore
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.DetectIntent
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
-    , Gogol.DialogFlow.Projects.Locations.Agents.Sessions.MatchIntent
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.BatchDelete
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.BatchRun
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.CalculateCoverage
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Export
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Import
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Patch
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Run
-    , Gogol.DialogFlow.Projects.Locations.Agents.Validate
-    , Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Create
-    , Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Delete
-    , Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Get
-    , Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.List
-    , Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Patch
-    , Gogol.DialogFlow.Projects.Locations.Get
-    , Gogol.DialogFlow.Projects.Locations.List
-    , Gogol.DialogFlow.Projects.Locations.Operations.Cancel
-    , Gogol.DialogFlow.Projects.Locations.Operations.Get
-    , Gogol.DialogFlow.Projects.Locations.Operations.List
-    , Gogol.DialogFlow.Projects.Locations.SecuritySettings.Create
-    , Gogol.DialogFlow.Projects.Locations.SecuritySettings.Delete
-    , Gogol.DialogFlow.Projects.Locations.SecuritySettings.Get
-    , Gogol.DialogFlow.Projects.Locations.SecuritySettings.List
-    , Gogol.DialogFlow.Projects.Locations.SecuritySettings.Patch
-    , Gogol.DialogFlow.Projects.Operations.Cancel
-    , Gogol.DialogFlow.Projects.Operations.Get
-    , Gogol.DialogFlow.Projects.Operations.List
-    , Gogol.DialogFlow.Types
+    Gogol.DialogFlow
+    Gogol.DialogFlow.Projects.Locations.Agents.Changelogs.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Changelogs.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.List
+    Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestResults.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.DeployFlow
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Deployments.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Deployments.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Stop
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.LookupEnvironmentHistory
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.RunContinuousTest
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.DetectIntent
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTypes.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.FulfillIntent
+    Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.MatchIntent
+    Gogol.DialogFlow.Projects.Locations.Agents.Export
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Export
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Import
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Train
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Validate
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.CompareVersions
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Load
+    Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.GetValidationResult
+    Gogol.DialogFlow.Projects.Locations.Agents.Intents.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Intents.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Intents.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Intents.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Intents.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Restore
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.DetectIntent
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.EntityTypes.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
+    Gogol.DialogFlow.Projects.Locations.Agents.Sessions.MatchIntent
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.BatchDelete
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.BatchRun
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.CalculateCoverage
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Export
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Import
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.List
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Patch
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
+    Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Run
+    Gogol.DialogFlow.Projects.Locations.Agents.Validate
+    Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Create
+    Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Delete
+    Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Get
+    Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.List
+    Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Patch
+    Gogol.DialogFlow.Projects.Locations.Get
+    Gogol.DialogFlow.Projects.Locations.List
+    Gogol.DialogFlow.Projects.Locations.Operations.Cancel
+    Gogol.DialogFlow.Projects.Locations.Operations.Get
+    Gogol.DialogFlow.Projects.Locations.Operations.List
+    Gogol.DialogFlow.Projects.Locations.SecuritySettings.Create
+    Gogol.DialogFlow.Projects.Locations.SecuritySettings.Delete
+    Gogol.DialogFlow.Projects.Locations.SecuritySettings.Get
+    Gogol.DialogFlow.Projects.Locations.SecuritySettings.List
+    Gogol.DialogFlow.Projects.Locations.SecuritySettings.Patch
+    Gogol.DialogFlow.Projects.Operations.Cancel
+    Gogol.DialogFlow.Projects.Operations.Get
+    Gogol.DialogFlow.Projects.Operations.List
+    Gogol.DialogFlow.Types
 
   other-modules:
-      Gogol.DialogFlow.Internal.Product
-    , Gogol.DialogFlow.Internal.Sum
+    Gogol.DialogFlow.Internal.Product
+    Gogol.DialogFlow.Internal.Sum
 
   build-depends:
-      gogol-core == 0.5.0.*
-    , base       >= 4.12 && < 5
+    , base        >=4.12  && <5
+    , gogol-core  >=0.5.0 && <0.5.1
