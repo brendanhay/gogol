@@ -1,812 +1,560 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Games
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Play games service allows developers to enhance games with
--- social leaderboards, achievements, game state, sign-in with Google, and
--- more.
+-- The Google Play games service allows developers to enhance games with social leaderboards, achievements, game state, sign-in with Google, and more.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference>
 module Network.Google.Games
-    (
-    -- * Service Configuration
-      gamesService
+  ( -- * Configuration
+    gamesService,
 
     -- * OAuth Scopes
-    , gamesScope
-    , driveAppDataScope
-
-    -- * API Declaration
-    , GamesAPI
+    driveAppdataScope,
+    gamesScope,
 
     -- * Resources
 
     -- ** games.achievementDefinitions.list
-    , module Network.Google.Resource.Games.AchievementDefinitions.List
+    GamesAchievementDefinitionsListResource,
+    newGamesAchievementDefinitionsList,
+    GamesAchievementDefinitionsList,
 
     -- ** games.achievements.increment
-    , module Network.Google.Resource.Games.Achievements.Increment
+    GamesAchievementsIncrementResource,
+    newGamesAchievementsIncrement,
+    GamesAchievementsIncrement,
 
     -- ** games.achievements.list
-    , module Network.Google.Resource.Games.Achievements.List
+    GamesAchievementsListResource,
+    newGamesAchievementsList,
+    GamesAchievementsList,
 
     -- ** games.achievements.reveal
-    , module Network.Google.Resource.Games.Achievements.Reveal
+    GamesAchievementsRevealResource,
+    newGamesAchievementsReveal,
+    GamesAchievementsReveal,
 
     -- ** games.achievements.setStepsAtLeast
-    , module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
+    GamesAchievementsSetStepsAtLeastResource,
+    newGamesAchievementsSetStepsAtLeast,
+    GamesAchievementsSetStepsAtLeast,
 
     -- ** games.achievements.unlock
-    , module Network.Google.Resource.Games.Achievements.Unlock
+    GamesAchievementsUnlockResource,
+    newGamesAchievementsUnlock,
+    GamesAchievementsUnlock,
 
     -- ** games.achievements.updateMultiple
-    , module Network.Google.Resource.Games.Achievements.UpdateMultiple
+    GamesAchievementsUpdateMultipleResource,
+    newGamesAchievementsUpdateMultiple,
+    GamesAchievementsUpdateMultiple,
 
     -- ** games.applications.get
-    , module Network.Google.Resource.Games.Applications.Get
+    GamesApplicationsGetResource,
+    newGamesApplicationsGet,
+    GamesApplicationsGet,
 
     -- ** games.applications.getEndPoint
-    , module Network.Google.Resource.Games.Applications.GetEndPoint
+    GamesApplicationsGetEndPointResource,
+    newGamesApplicationsGetEndPoint,
+    GamesApplicationsGetEndPoint,
 
     -- ** games.applications.played
-    , module Network.Google.Resource.Games.Applications.Played
+    GamesApplicationsPlayedResource,
+    newGamesApplicationsPlayed,
+    GamesApplicationsPlayed,
 
     -- ** games.applications.verify
-    , module Network.Google.Resource.Games.Applications.Verify
+    GamesApplicationsVerifyResource,
+    newGamesApplicationsVerify,
+    GamesApplicationsVerify,
 
     -- ** games.events.listByPlayer
-    , module Network.Google.Resource.Games.Events.ListByPlayer
+    GamesEventsListByPlayerResource,
+    newGamesEventsListByPlayer,
+    GamesEventsListByPlayer,
 
     -- ** games.events.listDefinitions
-    , module Network.Google.Resource.Games.Events.ListDefinitions
+    GamesEventsListDefinitionsResource,
+    newGamesEventsListDefinitions,
+    GamesEventsListDefinitions,
 
     -- ** games.events.record
-    , module Network.Google.Resource.Games.Events.Record
+    GamesEventsRecordResource,
+    newGamesEventsRecord,
+    GamesEventsRecord,
 
     -- ** games.leaderboards.get
-    , module Network.Google.Resource.Games.Leaderboards.Get
+    GamesLeaderboardsGetResource,
+    newGamesLeaderboardsGet,
+    GamesLeaderboardsGet,
 
     -- ** games.leaderboards.list
-    , module Network.Google.Resource.Games.Leaderboards.List
+    GamesLeaderboardsListResource,
+    newGamesLeaderboardsList,
+    GamesLeaderboardsList,
 
     -- ** games.metagame.getMetagameConfig
-    , module Network.Google.Resource.Games.Metagame.GetMetagameConfig
+    GamesMetagameGetMetagameConfigResource,
+    newGamesMetagameGetMetagameConfig,
+    GamesMetagameGetMetagameConfig,
 
     -- ** games.metagame.listCategoriesByPlayer
-    , module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
+    GamesMetagameListCategoriesByPlayerResource,
+    newGamesMetagameListCategoriesByPlayer,
+    GamesMetagameListCategoriesByPlayer,
 
     -- ** games.players.get
-    , module Network.Google.Resource.Games.Players.Get
+    GamesPlayersGetResource,
+    newGamesPlayersGet,
+    GamesPlayersGet,
 
     -- ** games.players.list
-    , module Network.Google.Resource.Games.Players.List
+    GamesPlayersListResource,
+    newGamesPlayersList,
+    GamesPlayersList,
 
     -- ** games.revisions.check
-    , module Network.Google.Resource.Games.Revisions.Check
+    GamesRevisionsCheckResource,
+    newGamesRevisionsCheck,
+    GamesRevisionsCheck,
 
     -- ** games.scores.get
-    , module Network.Google.Resource.Games.Scores.Get
+    GamesScoresGetResource,
+    newGamesScoresGet,
+    GamesScoresGet,
 
     -- ** games.scores.list
-    , module Network.Google.Resource.Games.Scores.List
+    GamesScoresListResource,
+    newGamesScoresList,
+    GamesScoresList,
 
     -- ** games.scores.listWindow
-    , module Network.Google.Resource.Games.Scores.ListWindow
+    GamesScoresListWindowResource,
+    newGamesScoresListWindow,
+    GamesScoresListWindow,
 
     -- ** games.scores.submit
-    , module Network.Google.Resource.Games.Scores.Submit
+    GamesScoresSubmitResource,
+    newGamesScoresSubmit,
+    GamesScoresSubmit,
 
     -- ** games.scores.submitMultiple
-    , module Network.Google.Resource.Games.Scores.SubmitMultiple
+    GamesScoresSubmitMultipleResource,
+    newGamesScoresSubmitMultiple,
+    GamesScoresSubmitMultiple,
 
     -- ** games.snapshots.get
-    , module Network.Google.Resource.Games.Snapshots.Get
+    GamesSnapshotsGetResource,
+    newGamesSnapshotsGet,
+    GamesSnapshotsGet,
 
     -- ** games.snapshots.list
-    , module Network.Google.Resource.Games.Snapshots.List
+    GamesSnapshotsListResource,
+    newGamesSnapshotsList,
+    GamesSnapshotsList,
 
     -- ** games.stats.get
-    , module Network.Google.Resource.Games.Stats.Get
+    GamesStatsGetResource,
+    newGamesStatsGet,
+    GamesStatsGet,
 
     -- * Types
 
-    -- ** PlayersListCollection
-    , PlayersListCollection (..)
-
-    -- ** LeaderboardEntryTimeSpan
-    , LeaderboardEntryTimeSpan (..)
-
-    -- ** PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
-
-    -- ** EventBatchRecordFailureFailureCause
-    , EventBatchRecordFailureFailureCause (..)
-
-    -- ** Snapshot
-    , Snapshot
-    , snapshot
-    , sLastModifiedMillis
-    , sKind
-    , sProgressValue
-    , sUniqueName
-    , sCoverImage
-    , sId
-    , sDurationMillis
-    , sTitle
-    , sType
-    , sDescription
-    , sDriveId
-
-    -- ** ScoresListCollection
-    , ScoresListCollection (..)
-
-    -- ** PlayerEvent
-    , PlayerEvent
-    , playerEvent
-    , peKind
-    , peNumEvents
-    , peFormattedNumEvents
-    , peDefinitionId
-    , pePlayerId
-
-    -- ** ApplicationsGetEndPointEndPointType
-    , ApplicationsGetEndPointEndPointType (..)
-
-    -- ** StatsResponse
-    , StatsResponse
-    , statsResponse
-    , srTotalSpendNext28Days
-    , srDaysSinceLastPlayed
-    , srKind
-    , srSpendPercentile
-    , srNumPurchases
-    , srNumSessions
-    , srHighSpenderProbability
-    , srAvgSessionLengthMinutes
-    , srNumSessionsPercentile
-    , srChurnProbability
-    , srSpendProbability
-
-    -- ** PlayerLeaderboardScore
-    , PlayerLeaderboardScore
-    , playerLeaderboardScore
-    , plsScoreTag
-    , plsScoreString
-    , plsKind
-    , plsScoreValue
-    , plsTimeSpan
-    , plsFriendsRank
-    , plsPublicRank
-    , plsSocialRank
-    , plsLeaderboardId
-    , plsWriteTimestamp
-
-    -- ** Application
-    , Application
-    , application
-    , aThemeColor
-    , aLeaderboardCount
-    , aKind
-    , aCategory
-    , aName
-    , aEnabledFeatures
-    , aInstances
-    , aAuthor
-    , aId
-    , aAchievementCount
-    , aAssets
-    , aDescription
-    , aLastUpdatedTimestamp
-
-    -- ** ApplicationCategory
-    , ApplicationCategory
-    , applicationCategory
-    , acSecondary
-    , acKind
-    , acPrimary
-
-    -- ** PlayerScoreTimeSpan
-    , PlayerScoreTimeSpan (..)
-
-    -- ** PlayerScoreListResponse
-    , PlayerScoreListResponse
-    , playerScoreListResponse
-    , pslrSubmittedScores
-    , pslrKind
-
-    -- ** AchievementUpdateResponse
-    , AchievementUpdateResponse
-    , achievementUpdateResponse
-    , aurUpdateOccurred
-    , aurAchievementId
-    , aurKind
-    , aurCurrentState
-    , aurNewlyUnlocked
-    , aurCurrentSteps
-
-    -- ** LeaderboardEntry
-    , LeaderboardEntry
-    , leaderboardEntry
-    , leScoreTag
-    , leWriteTimestampMillis
-    , leKind
-    , leScoreValue
-    , leFormattedScore
-    , leTimeSpan
-    , leFormattedScoreRank
-    , lePlayer
-    , leScoreRank
-
-    -- ** SnapshotListResponse
-    , SnapshotListResponse
-    , snapshotListResponse
-    , slrNextPageToken
-    , slrKind
-    , slrItems
-
-    -- ** PlayerLevel
-    , PlayerLevel
-    , playerLevel
-    , plMaxExperiencePoints
-    , plKind
-    , plMinExperiencePoints
-    , plLevel
-
-    -- ** ApplicationEnabledFeaturesItem
-    , ApplicationEnabledFeaturesItem (..)
-
-    -- ** AchievementUpdateMultipleResponse
-    , AchievementUpdateMultipleResponse
-    , achievementUpdateMultipleResponse
-    , aumrKind
-    , aumrUpdatedAchievements
-
-    -- ** ApplicationsGetPlatformType
-    , ApplicationsGetPlatformType (..)
-
-    -- ** EventDefinitionListResponse
-    , EventDefinitionListResponse
-    , eventDefinitionListResponse
-    , edlrNextPageToken
-    , edlrKind
-    , edlrItems
-
-    -- ** Category
-    , Category
-    , category
-    , cKind
-    , cCategory
-    , cExperiencePoints
-
-    -- ** InstanceAndroidDetails
-    , InstanceAndroidDetails
-    , instanceAndroidDetails
-    , iadPackageName
-    , iadPreferred
-    , iadKind
-    , iadEnablePiracyCheck
-
-    -- ** AchievementDefinitionsListResponse
-    , AchievementDefinitionsListResponse
-    , achievementDefinitionsListResponse
-    , adlrNextPageToken
-    , adlrKind
-    , adlrItems
-
-    -- ** PlayerScoreResponse
-    , PlayerScoreResponse
-    , playerScoreResponse
-    , psrScoreTag
-    , psrKind
-    , psrFormattedScore
-    , psrLeaderboardId
-    , psrBeatenScoreTimeSpans
-    , psrUnbeatenScores
-
-    -- ** LeaderboardListResponse
-    , LeaderboardListResponse
-    , leaderboardListResponse
-    , llrNextPageToken
-    , llrKind
-    , llrItems
-
-    -- ** EventRecordFailureFailureCause
-    , EventRecordFailureFailureCause (..)
-
-    -- ** PlayerLeaderboardScoreTimeSpan
-    , PlayerLeaderboardScoreTimeSpan (..)
-
-    -- ** PlayerScore
-    , PlayerScore
-    , playerScore
-    , psScoreTag
-    , psScore
-    , psKind
-    , psFormattedScore
-    , psTimeSpan
-
-    -- ** AchievementRevealResponseCurrentState
-    , AchievementRevealResponseCurrentState (..)
-
-    -- ** ProFileSettingsFriendsListVisibility
-    , ProFileSettingsFriendsListVisibility (..)
-
-    -- ** ScoresListWindowCollection
-    , ScoresListWindowCollection (..)
-
-    -- ** SnapshotImage
-    , SnapshotImage
-    , snapshotImage
-    , siHeight
-    , siKind
-    , siURL
-    , siMimeType
-    , siWidth
-
-    -- ** PlayerLeaderboardScoreListResponse
-    , PlayerLeaderboardScoreListResponse
-    , playerLeaderboardScoreListResponse
-    , plslrNextPageToken
-    , plslrKind
-    , plslrItems
-    , plslrPlayer
-
-    -- ** InstanceIosDetails
-    , InstanceIosDetails
-    , instanceIosDetails
-    , iidItunesAppId
-    , iidPreferredForIPad
-    , iidSupportIPhone
-    , iidKind
-    , iidSupportIPad
-    , iidPreferredForIPhone
-    , iidBundleIdentifier
-
-    -- ** AchievementUpdateRequestUpdateType
-    , AchievementUpdateRequestUpdateType (..)
-
-    -- ** EventUpdateResponse
-    , EventUpdateResponse
-    , eventUpdateResponse
-    , eurPlayerEvents
-    , eurBatchFailures
-    , eurEventFailures
-    , eurKind
-
-    -- ** RevisionCheckResponse
-    , RevisionCheckResponse
-    , revisionCheckResponse
-    , rcrAPIVersion
-    , rcrKind
-    , rcrRevisionStatus
-
-    -- ** Leaderboard
-    , Leaderboard
-    , leaderboard
-    , lKind
-    , lIsIconURLDefault
-    , lName
-    , lId
-    , lIconURL
-    , lOrder
-
-    -- ** MetagameConfig
-    , MetagameConfig
-    , metagameConfig
-    , mcKind
-    , mcCurrentVersion
-    , mcPlayerLevels
-
-    -- ** CategoryListResponse
-    , CategoryListResponse
-    , categoryListResponse
-    , clrNextPageToken
-    , clrKind
-    , clrItems
-
-    -- ** EventDefinition
-    , EventDefinition
-    , eventDefinition
-    , edIsDefaultImageURL
-    , edKind
-    , edVisibility
-    , edImageURL
-    , edDisplayName
-    , edId
-    , edChildEvents
-    , edDescription
-
-    -- ** RevisionCheckResponseRevisionStatus
-    , RevisionCheckResponseRevisionStatus (..)
-
-    -- ** SnapshotType
-    , SnapshotType (..)
-
-    -- ** ScoresListWindowTimeSpan
-    , ScoresListWindowTimeSpan (..)
-
-    -- ** EventUpdateRequest
-    , EventUpdateRequest
-    , eventUpdateRequest
-    , eUpdateCount
-    , eKind
-    , eDefinitionId
-
-    -- ** PlayerAchievementAchievementState
-    , PlayerAchievementAchievementState (..)
-
-    -- ** AchievementUnlockResponse
-    , AchievementUnlockResponse
-    , achievementUnlockResponse
-    , achKind
-    , achNewlyUnlocked
-
-    -- ** ScoresGetTimeSpan
-    , ScoresGetTimeSpan (..)
-
-    -- ** PlayerAchievement
-    , PlayerAchievement
-    , playerAchievement
-    , paKind
-    , paAchievementState
-    , paFormattedCurrentStepsString
-    , paExperiencePoints
-    , paId
-    , paCurrentSteps
-    , paLastUpdatedTimestamp
-
-    -- ** EventDefinitionVisibility
-    , EventDefinitionVisibility (..)
-
-    -- ** ImageAsset
-    , ImageAsset
-    , imageAsset
-    , iaHeight
-    , iaKind
-    , iaURL
-    , iaWidth
-    , iaName
-
-    -- ** AchievementUpdateMultipleRequest
-    , AchievementUpdateMultipleRequest
-    , achievementUpdateMultipleRequest
-    , aumruKind
-    , aumruUpdates
-
-    -- ** LeaderboardOrder
-    , LeaderboardOrder (..)
-
-    -- ** AchievementUpdateRequest
-    , AchievementUpdateRequest
-    , achievementUpdateRequest
-    , auruAchievementId
-    , auruKind
-    , auruUpdateType
-    , auruSetStepsAtLeastPayload
-    , auruIncrementPayload
-
-    -- ** ScoresGetIncludeRankType
-    , ScoresGetIncludeRankType (..)
-
-    -- ** LeaderboardScoreRank
-    , LeaderboardScoreRank
-    , leaderboardScoreRank
-    , lsrNumScores
-    , lsrKind
-    , lsrFormattedRank
-    , lsrFormattedNumScores
-    , lsrRank
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** PlayerListResponse
-    , PlayerListResponse
-    , playerListResponse
-    , plrNextPageToken
-    , plrKind
-    , plrItems
-
-    -- ** LeaderboardScores
-    , LeaderboardScores
-    , leaderboardScores
-    , lsNextPageToken
-    , lsNumScores
-    , lsKind
-    , lsPlayerScore
-    , lsItems
-    , lsPrevPageToken
+    Xgafv (..),
 
     -- ** AchievementDefinition
-    , AchievementDefinition
-    , achievementDefinition
-    , adAchievementType
-    , adFormattedTotalSteps
-    , adRevealedIconURL
-    , adKind
-    , adExperiencePoints
-    , adInitialState
-    , adName
-    , adId
-    , adIsUnlockedIconURLDefault
-    , adTotalSteps
-    , adDescription
-    , adIsRevealedIconURLDefault
-    , adUnlockedIconURL
+    AchievementDefinition (..),
+    newAchievementDefinition,
 
-    -- ** AchievementDefinitionAchievementType
-    , AchievementDefinitionAchievementType (..)
+    -- ** AchievementDefinition_AchievementType
+    AchievementDefinition_AchievementType (..),
 
-    -- ** EventBatchRecordFailure
-    , EventBatchRecordFailure
-    , eventBatchRecordFailure
-    , ebrfKind
-    , ebrfRange
-    , ebrfFailureCause
+    -- ** AchievementDefinition_InitialState
+    AchievementDefinition_InitialState (..),
 
-    -- ** PlayerFriendStatus
-    , PlayerFriendStatus (..)
+    -- ** AchievementDefinitionsListResponse
+    AchievementDefinitionsListResponse (..),
+    newAchievementDefinitionsListResponse,
 
     -- ** AchievementIncrementResponse
-    , AchievementIncrementResponse
-    , achievementIncrementResponse
-    , airKind
-    , airNewlyUnlocked
-    , airCurrentSteps
+    AchievementIncrementResponse (..),
+    newAchievementIncrementResponse,
 
     -- ** AchievementRevealResponse
-    , AchievementRevealResponse
-    , achievementRevealResponse
-    , arrKind
-    , arrCurrentState
+    AchievementRevealResponse (..),
+    newAchievementRevealResponse,
+
+    -- ** AchievementRevealResponse_CurrentState
+    AchievementRevealResponse_CurrentState (..),
 
     -- ** AchievementSetStepsAtLeastResponse
-    , AchievementSetStepsAtLeastResponse
-    , achievementSetStepsAtLeastResponse
-    , assalrKind
-    , assalrNewlyUnlocked
-    , assalrCurrentSteps
+    AchievementSetStepsAtLeastResponse (..),
+    newAchievementSetStepsAtLeastResponse,
 
-    -- ** PlayerAchievementListResponse
-    , PlayerAchievementListResponse
-    , playerAchievementListResponse
-    , palrNextPageToken
-    , palrKind
-    , palrItems
+    -- ** AchievementUnlockResponse
+    AchievementUnlockResponse (..),
+    newAchievementUnlockResponse,
 
-    -- ** EventRecordRequest
-    , EventRecordRequest
-    , eventRecordRequest
-    , errRequestId
-    , errKind
-    , errCurrentTimeMillis
-    , errTimePeriods
+    -- ** AchievementUpdateMultipleRequest
+    AchievementUpdateMultipleRequest (..),
+    newAchievementUpdateMultipleRequest,
 
-    -- ** ScoresListTimeSpan
-    , ScoresListTimeSpan (..)
+    -- ** AchievementUpdateMultipleResponse
+    AchievementUpdateMultipleResponse (..),
+    newAchievementUpdateMultipleResponse,
 
-    -- ** EventPeriodUpdate
-    , EventPeriodUpdate
-    , eventPeriodUpdate
-    , epuKind
-    , epuTimePeriod
-    , epuUpdates
+    -- ** AchievementUpdateRequest
+    AchievementUpdateRequest (..),
+    newAchievementUpdateRequest,
 
-    -- ** ScoreSubmission
-    , ScoreSubmission
-    , scoreSubmission
-    , scoSignature
-    , scoScoreTag
-    , scoScore
-    , scoKind
-    , scoLeaderboardId
+    -- ** AchievementUpdateRequest_UpdateType
+    AchievementUpdateRequest_UpdateType (..),
 
-    -- ** EndPoint
-    , EndPoint
-    , endPoint
-    , epURL
+    -- ** AchievementUpdateResponse
+    AchievementUpdateResponse (..),
+    newAchievementUpdateResponse,
 
-    -- ** InstanceWebDetails
-    , InstanceWebDetails
-    , instanceWebDetails
-    , iwdPreferred
-    , iwdKind
-    , iwdLaunchURL
+    -- ** AchievementUpdateResponse_CurrentState
+    AchievementUpdateResponse_CurrentState (..),
 
-    -- ** PlayerExperienceInfo
-    , PlayerExperienceInfo
-    , playerExperienceInfo
-    , peiKind
-    , peiCurrentExperiencePoints
-    , peiCurrentLevel
-    , peiNextLevel
-    , peiLastLevelUpTimestampMillis
+    -- ** Application
+    Application (..),
+    newApplication,
 
-    -- ** GamesAchievementSetStepsAtLeast
-    , GamesAchievementSetStepsAtLeast
-    , gamesAchievementSetStepsAtLeast
-    , gassalKind
-    , gassalSteps
+    -- ** Application_EnabledFeaturesItem
+    Application_EnabledFeaturesItem (..),
 
-    -- ** AchievementUpdateResponseCurrentState
-    , AchievementUpdateResponseCurrentState (..)
-
-    -- ** AchievementDefinitionInitialState
-    , AchievementDefinitionInitialState (..)
-
-    -- ** Player
-    , Player
-    , player
-    , pBannerURLLandscape
-    , pAvatarImageURL
-    , pKind
-    , pExperienceInfo
-    , pName
-    , pOriginalPlayerId
-    , pDisplayName
-    , pTitle
-    , pBannerURLPortrait
-    , pPlayerId
-    , pProFileSettings
-    , pFriendStatus
-
-    -- ** GamesAchievementIncrement
-    , GamesAchievementIncrement
-    , gamesAchievementIncrement
-    , gaiRequestId
-    , gaiKind
-    , gaiSteps
-
-    -- ** EventChild
-    , EventChild
-    , eventChild
-    , ecKind
-    , ecChildId
+    -- ** ApplicationCategory
+    ApplicationCategory (..),
+    newApplicationCategory,
 
     -- ** ApplicationVerifyResponse
-    , ApplicationVerifyResponse
-    , applicationVerifyResponse
-    , avrKind
-    , avrAlternatePlayerId
-    , avrPlayerId
+    ApplicationVerifyResponse (..),
+    newApplicationVerifyResponse,
 
-    -- ** PlayerEventListResponse
-    , PlayerEventListResponse
-    , playerEventListResponse
-    , pelrNextPageToken
-    , pelrKind
-    , pelrItems
+    -- ** Category
+    Category (..),
+    newCategory,
 
-    -- ** PlayerScoreResponseBeatenScoreTimeSpansItem
-    , PlayerScoreResponseBeatenScoreTimeSpansItem (..)
+    -- ** CategoryListResponse
+    CategoryListResponse (..),
+    newCategoryListResponse,
 
-    -- ** ProFileSettings
-    , ProFileSettings
-    , proFileSettings
-    , pfsProFileVisible
-    , pfsFriendsListVisibility
-    , pfsKind
+    -- ** EndPoint
+    EndPoint (..),
+    newEndPoint,
+
+    -- ** EventBatchRecordFailure
+    EventBatchRecordFailure (..),
+    newEventBatchRecordFailure,
+
+    -- ** EventBatchRecordFailure_FailureCause
+    EventBatchRecordFailure_FailureCause (..),
+
+    -- ** EventChild
+    EventChild (..),
+    newEventChild,
+
+    -- ** EventDefinition
+    EventDefinition (..),
+    newEventDefinition,
+
+    -- ** EventDefinition_Visibility
+    EventDefinition_Visibility (..),
+
+    -- ** EventDefinitionListResponse
+    EventDefinitionListResponse (..),
+    newEventDefinitionListResponse,
 
     -- ** EventPeriodRange
-    , EventPeriodRange
-    , eventPeriodRange
-    , eprKind
-    , eprPeriodStartMillis
-    , eprPeriodEndMillis
+    EventPeriodRange (..),
+    newEventPeriodRange,
 
-    -- ** InstancePlatformType
-    , InstancePlatformType (..)
-
-    -- ** MetagameListCategoriesByPlayerCollection
-    , MetagameListCategoriesByPlayerCollection (..)
-
-    -- ** AchievementsListState
-    , AchievementsListState (..)
+    -- ** EventPeriodUpdate
+    EventPeriodUpdate (..),
+    newEventPeriodUpdate,
 
     -- ** EventRecordFailure
-    , EventRecordFailure
-    , eventRecordFailure
-    , erfKind
-    , erfFailureCause
-    , erfEventId
+    EventRecordFailure (..),
+    newEventRecordFailure,
 
-    -- ** PlayerScoreSubmissionList
-    , PlayerScoreSubmissionList
-    , playerScoreSubmissionList
-    , psslKind
-    , psslScores
+    -- ** EventRecordFailure_FailureCause
+    EventRecordFailure_FailureCause (..),
+
+    -- ** EventRecordRequest
+    EventRecordRequest (..),
+    newEventRecordRequest,
+
+    -- ** EventUpdateRequest
+    EventUpdateRequest (..),
+    newEventUpdateRequest,
+
+    -- ** EventUpdateResponse
+    EventUpdateResponse (..),
+    newEventUpdateResponse,
+
+    -- ** GamesAchievementIncrement
+    GamesAchievementIncrement (..),
+    newGamesAchievementIncrement,
+
+    -- ** GamesAchievementSetStepsAtLeast
+    GamesAchievementSetStepsAtLeast (..),
+    newGamesAchievementSetStepsAtLeast,
+
+    -- ** ImageAsset
+    ImageAsset (..),
+    newImageAsset,
 
     -- ** Instance
-    , Instance
-    , instance'
-    , iAndroidInstance
-    , iKind
-    , iWebInstance
-    , iIosInstance
-    , iName
-    , iAcquisitionURI
-    , iPlatformType
-    , iTurnBasedPlay
-    , iRealtimePlay
-    ) where
+    Instance (..),
+    newInstance,
 
-import Network.Google.Prelude
+    -- ** Instance_PlatformType
+    Instance_PlatformType (..),
+
+    -- ** InstanceAndroidDetails
+    InstanceAndroidDetails (..),
+    newInstanceAndroidDetails,
+
+    -- ** InstanceIosDetails
+    InstanceIosDetails (..),
+    newInstanceIosDetails,
+
+    -- ** InstanceWebDetails
+    InstanceWebDetails (..),
+    newInstanceWebDetails,
+
+    -- ** Leaderboard
+    Leaderboard (..),
+    newLeaderboard,
+
+    -- ** Leaderboard_Order
+    Leaderboard_Order (..),
+
+    -- ** LeaderboardEntry
+    LeaderboardEntry (..),
+    newLeaderboardEntry,
+
+    -- ** LeaderboardEntry_TimeSpan
+    LeaderboardEntry_TimeSpan (..),
+
+    -- ** LeaderboardListResponse
+    LeaderboardListResponse (..),
+    newLeaderboardListResponse,
+
+    -- ** LeaderboardScoreRank
+    LeaderboardScoreRank (..),
+    newLeaderboardScoreRank,
+
+    -- ** LeaderboardScores
+    LeaderboardScores (..),
+    newLeaderboardScores,
+
+    -- ** MetagameConfig
+    MetagameConfig (..),
+    newMetagameConfig,
+
+    -- ** Player
+    Player (..),
+    newPlayer,
+
+    -- ** Player_FriendStatus
+    Player_FriendStatus (..),
+
+    -- ** Player_Name
+    Player_Name (..),
+    newPlayer_Name,
+
+    -- ** PlayerAchievement
+    PlayerAchievement (..),
+    newPlayerAchievement,
+
+    -- ** PlayerAchievement_AchievementState
+    PlayerAchievement_AchievementState (..),
+
+    -- ** PlayerAchievementListResponse
+    PlayerAchievementListResponse (..),
+    newPlayerAchievementListResponse,
+
+    -- ** PlayerEvent
+    PlayerEvent (..),
+    newPlayerEvent,
+
+    -- ** PlayerEventListResponse
+    PlayerEventListResponse (..),
+    newPlayerEventListResponse,
+
+    -- ** PlayerExperienceInfo
+    PlayerExperienceInfo (..),
+    newPlayerExperienceInfo,
+
+    -- ** PlayerLeaderboardScore
+    PlayerLeaderboardScore (..),
+    newPlayerLeaderboardScore,
+
+    -- ** PlayerLeaderboardScore_TimeSpan
+    PlayerLeaderboardScore_TimeSpan (..),
+
+    -- ** PlayerLeaderboardScoreListResponse
+    PlayerLeaderboardScoreListResponse (..),
+    newPlayerLeaderboardScoreListResponse,
+
+    -- ** PlayerLevel
+    PlayerLevel (..),
+    newPlayerLevel,
+
+    -- ** PlayerListResponse
+    PlayerListResponse (..),
+    newPlayerListResponse,
+
+    -- ** PlayerScore
+    PlayerScore (..),
+    newPlayerScore,
+
+    -- ** PlayerScore_TimeSpan
+    PlayerScore_TimeSpan (..),
+
+    -- ** PlayerScoreListResponse
+    PlayerScoreListResponse (..),
+    newPlayerScoreListResponse,
+
+    -- ** PlayerScoreResponse
+    PlayerScoreResponse (..),
+    newPlayerScoreResponse,
+
+    -- ** PlayerScoreResponse_BeatenScoreTimeSpansItem
+    PlayerScoreResponse_BeatenScoreTimeSpansItem (..),
+
+    -- ** PlayerScoreSubmissionList
+    PlayerScoreSubmissionList (..),
+    newPlayerScoreSubmissionList,
+
+    -- ** ProfileSettings
+    ProfileSettings (..),
+    newProfileSettings,
+
+    -- ** ProfileSettings_FriendsListVisibility
+    ProfileSettings_FriendsListVisibility (..),
+
+    -- ** RevisionCheckResponse
+    RevisionCheckResponse (..),
+    newRevisionCheckResponse,
+
+    -- ** RevisionCheckResponse_RevisionStatus
+    RevisionCheckResponse_RevisionStatus (..),
+
+    -- ** ScoreSubmission
+    ScoreSubmission (..),
+    newScoreSubmission,
+
+    -- ** Snapshot
+    Snapshot (..),
+    newSnapshot,
+
+    -- ** Snapshot_Type
+    Snapshot_Type (..),
+
+    -- ** SnapshotImage
+    SnapshotImage (..),
+    newSnapshotImage,
+
+    -- ** SnapshotListResponse
+    SnapshotListResponse (..),
+    newSnapshotListResponse,
+
+    -- ** StatsResponse
+    StatsResponse (..),
+    newStatsResponse,
+
+    -- ** AchievementsListState
+    AchievementsListState (..),
+
+    -- ** ApplicationsGetPlatformType
+    ApplicationsGetPlatformType (..),
+
+    -- ** ApplicationsGetEndPointEndPointType
+    ApplicationsGetEndPointEndPointType (..),
+
+    -- ** MetagameListCategoriesByPlayerCollection
+    MetagameListCategoriesByPlayerCollection (..),
+
+    -- ** PlayersListCollection
+    PlayersListCollection (..),
+
+    -- ** ScoresGetIncludeRankType
+    ScoresGetIncludeRankType (..),
+
+    -- ** ScoresGetTimeSpan
+    ScoresGetTimeSpan (..),
+
+    -- ** ScoresListCollection
+    ScoresListCollection (..),
+
+    -- ** ScoresListTimeSpan
+    ScoresListTimeSpan (..),
+
+    -- ** ScoresListWindowCollection
+    ScoresListWindowCollection (..),
+
+    -- ** ScoresListWindowTimeSpan
+    ScoresListWindowTimeSpan (..),
+  )
+where
+
+import Network.Google.Games.AchievementDefinitions.List
+import Network.Google.Games.Achievements.Increment
+import Network.Google.Games.Achievements.List
+import Network.Google.Games.Achievements.Reveal
+import Network.Google.Games.Achievements.SetStepsAtLeast
+import Network.Google.Games.Achievements.Unlock
+import Network.Google.Games.Achievements.UpdateMultiple
+import Network.Google.Games.Applications.Get
+import Network.Google.Games.Applications.GetEndPoint
+import Network.Google.Games.Applications.Played
+import Network.Google.Games.Applications.Verify
+import Network.Google.Games.Events.ListByPlayer
+import Network.Google.Games.Events.ListDefinitions
+import Network.Google.Games.Events.Record
+import Network.Google.Games.Leaderboards.Get
+import Network.Google.Games.Leaderboards.List
+import Network.Google.Games.Metagame.GetMetagameConfig
+import Network.Google.Games.Metagame.ListCategoriesByPlayer
+import Network.Google.Games.Players.Get
+import Network.Google.Games.Players.List
+import Network.Google.Games.Revisions.Check
+import Network.Google.Games.Scores.Get
+import Network.Google.Games.Scores.List
+import Network.Google.Games.Scores.ListWindow
+import Network.Google.Games.Scores.Submit
+import Network.Google.Games.Scores.SubmitMultiple
+import Network.Google.Games.Snapshots.Get
+import Network.Google.Games.Snapshots.List
+import Network.Google.Games.Stats.Get
 import Network.Google.Games.Types
-import Network.Google.Resource.Games.AchievementDefinitions.List
-import Network.Google.Resource.Games.Achievements.Increment
-import Network.Google.Resource.Games.Achievements.List
-import Network.Google.Resource.Games.Achievements.Reveal
-import Network.Google.Resource.Games.Achievements.SetStepsAtLeast
-import Network.Google.Resource.Games.Achievements.Unlock
-import Network.Google.Resource.Games.Achievements.UpdateMultiple
-import Network.Google.Resource.Games.Applications.Get
-import Network.Google.Resource.Games.Applications.GetEndPoint
-import Network.Google.Resource.Games.Applications.Played
-import Network.Google.Resource.Games.Applications.Verify
-import Network.Google.Resource.Games.Events.ListByPlayer
-import Network.Google.Resource.Games.Events.ListDefinitions
-import Network.Google.Resource.Games.Events.Record
-import Network.Google.Resource.Games.Leaderboards.Get
-import Network.Google.Resource.Games.Leaderboards.List
-import Network.Google.Resource.Games.Metagame.GetMetagameConfig
-import Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
-import Network.Google.Resource.Games.Players.Get
-import Network.Google.Resource.Games.Players.List
-import Network.Google.Resource.Games.Revisions.Check
-import Network.Google.Resource.Games.Scores.Get
-import Network.Google.Resource.Games.Scores.List
-import Network.Google.Resource.Games.Scores.ListWindow
-import Network.Google.Resource.Games.Scores.Submit
-import Network.Google.Resource.Games.Scores.SubmitMultiple
-import Network.Google.Resource.Games.Snapshots.Get
-import Network.Google.Resource.Games.Snapshots.List
-import Network.Google.Resource.Games.Stats.Get
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Google Play Game Services service.
-type GamesAPI =
-     LeaderboardsListResource :<|> LeaderboardsGetResource
-       :<|> MetagameListCategoriesByPlayerResource
-       :<|> MetagameGetMetagameConfigResource
-       :<|> StatsGetResource
-       :<|> AchievementDefinitionsListResource
-       :<|> AchievementsListResource
-       :<|> AchievementsUnlockResource
-       :<|> AchievementsRevealResource
-       :<|> AchievementsSetStepsAtLeastResource
-       :<|> AchievementsUpdateMultipleResource
-       :<|> AchievementsIncrementResource
-       :<|> SnapshotsListResource
-       :<|> SnapshotsGetResource
-       :<|> EventsListDefinitionsResource
-       :<|> EventsListByPlayerResource
-       :<|> EventsRecordResource
-       :<|> PlayersListResource
-       :<|> PlayersGetResource
-       :<|> RevisionsCheckResource
-       :<|> ScoresListResource
-       :<|> ScoresGetResource
-       :<|> ScoresSubmitResource
-       :<|> ScoresSubmitMultipleResource
-       :<|> ScoresListWindowResource
-       :<|> ApplicationsVerifyResource
-       :<|> ApplicationsGetEndPointResource
-       :<|> ApplicationsGetResource
-       :<|> ApplicationsPlayedResource
