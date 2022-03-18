@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Relyingparty.SignOutUser
+-- Module      : Gogol.IdentityToolkit.Relyingparty.SignOutUser
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Sign out user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.signOutUser@.
-module Network.Google.IdentityToolkit.Relyingparty.SignOutUser
+module Gogol.IdentityToolkit.Relyingparty.SignOutUser
   ( -- * Resource
     IdentityToolkitRelyingpartySignOutUserResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IdentityToolkit.Relyingparty.SignOutUser
   )
 where
 
-import Network.Google.IdentityToolkit.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.signOutUser@ method which the
 -- 'IdentityToolkitRelyingpartySignOutUser' request conforms to.

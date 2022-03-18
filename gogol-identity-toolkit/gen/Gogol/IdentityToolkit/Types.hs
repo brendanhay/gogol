@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Types
+-- Module      : Gogol.IdentityToolkit.Types
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.IdentityToolkit.Types
+module Gogol.IdentityToolkit.Types
   ( -- * Configuration
     identityToolkitService,
 
@@ -213,9 +213,9 @@ module Network.Google.IdentityToolkit.Types
   )
 where
 
-import Network.Google.IdentityToolkit.Internal.Product
-import Network.Google.IdentityToolkit.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Internal.Product
+import Gogol.IdentityToolkit.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v3@ of the Google Identity Toolkit API. This contains the host and root path used as a starting point for constructing service requests.
 identityToolkitService :: Core.ServiceConfig

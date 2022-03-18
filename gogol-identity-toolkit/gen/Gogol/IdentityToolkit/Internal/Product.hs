@@ -19,13 +19,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Internal.Product
+-- Module      : Gogol.IdentityToolkit.Internal.Product
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Network.Google.IdentityToolkit.Internal.Product
+module Gogol.IdentityToolkit.Internal.Product
   ( -- * CreateAuthUriResponse
     CreateAuthUriResponse (..),
     newCreateAuthUriResponse,
@@ -204,8 +204,8 @@ module Network.Google.IdentityToolkit.Internal.Product
   )
 where
 
-import Network.Google.IdentityToolkit.Internal.Sum
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Internal.Sum
+import qualified Gogol.Prelude as Core
 
 -- | Response of creating the IDP authentication URL.
 --

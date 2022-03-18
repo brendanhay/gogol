@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.IdentityToolkit.Relyingparty.GetPublicKeys
+-- Module      : Gogol.IdentityToolkit.Relyingparty.GetPublicKeys
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Get token signing public key.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.getPublicKeys@.
-module Network.Google.IdentityToolkit.Relyingparty.GetPublicKeys
+module Gogol.IdentityToolkit.Relyingparty.GetPublicKeys
   ( -- * Resource
     IdentityToolkitRelyingpartyGetPublicKeysResource,
 
@@ -39,8 +39,8 @@ module Network.Google.IdentityToolkit.Relyingparty.GetPublicKeys
   )
 where
 
-import Network.Google.IdentityToolkit.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.IdentityToolkit.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.getPublicKeys@ method which the
 -- 'IdentityToolkitRelyingpartyGetPublicKeys' request conforms to.
