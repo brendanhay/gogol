@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google G Suite Vault.
+A client library for the Google Vault.
 
 
 ## Contribute

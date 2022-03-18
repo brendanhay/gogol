@@ -1,703 +1,573 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.Vault
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retention and eDiscovery for Google Workspace. To work with Vault
--- resources, the account must have the [required Vault
--- privileges](https:\/\/support.google.com\/vault\/answer\/2799699) and
--- access to the matter. To access a matter, the account must have created
--- the matter, have the matter shared with them, or have the **View All
--- Matters** privilege. For example, to download an export, an account
--- needs the **Manage Exports** privilege and the matter shared with them.
+-- Retention and eDiscovery for Google Workspace. To work with Vault resources, the account must have the <https://support.google.com/vault/answer/2799699 required Vault privileges> and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege. For example, to download an export, an account needs the __Manage Exports__ privilege and the matter shared with them.
 --
--- /See:/ <https://developers.google.com/vault G Suite Vault API Reference>
+-- /See:/ <https://developers.google.com/vault Google Vault API Reference>
 module Network.Google.Vault
-    (
-    -- * Service Configuration
-      vaultService
+  ( -- * Configuration
+    vaultService,
 
     -- * OAuth Scopes
-    , ediscoveryReadOnlyScope
-    , ediscoveryScope
-
-    -- * API Declaration
-    , VaultAPI
+    ediscoveryScope,
+    ediscoveryReadOnlyScope,
 
     -- * Resources
 
     -- ** vault.matters.addPermissions
-    , module Network.Google.Resource.Vault.Matters.AddPermissions
+    VaultMattersAddPermissionsResource,
+    newVaultMattersAddPermissions,
+    VaultMattersAddPermissions,
 
     -- ** vault.matters.close
-    , module Network.Google.Resource.Vault.Matters.Close
+    VaultMattersCloseResource,
+    newVaultMattersClose,
+    VaultMattersClose,
 
     -- ** vault.matters.count
-    , module Network.Google.Resource.Vault.Matters.Count
+    VaultMattersCountResource,
+    newVaultMattersCount,
+    VaultMattersCount,
 
     -- ** vault.matters.create
-    , module Network.Google.Resource.Vault.Matters.Create
+    VaultMattersCreateResource,
+    newVaultMattersCreate,
+    VaultMattersCreate,
 
     -- ** vault.matters.delete
-    , module Network.Google.Resource.Vault.Matters.Delete
+    VaultMattersDeleteResource,
+    newVaultMattersDelete,
+    VaultMattersDelete,
 
     -- ** vault.matters.exports.create
-    , module Network.Google.Resource.Vault.Matters.Exports.Create
+    VaultMattersExportsCreateResource,
+    newVaultMattersExportsCreate,
+    VaultMattersExportsCreate,
 
     -- ** vault.matters.exports.delete
-    , module Network.Google.Resource.Vault.Matters.Exports.Delete
+    VaultMattersExportsDeleteResource,
+    newVaultMattersExportsDelete,
+    VaultMattersExportsDelete,
 
     -- ** vault.matters.exports.get
-    , module Network.Google.Resource.Vault.Matters.Exports.Get
+    VaultMattersExportsGetResource,
+    newVaultMattersExportsGet,
+    VaultMattersExportsGet,
 
     -- ** vault.matters.exports.list
-    , module Network.Google.Resource.Vault.Matters.Exports.List
+    VaultMattersExportsListResource,
+    newVaultMattersExportsList,
+    VaultMattersExportsList,
 
     -- ** vault.matters.get
-    , module Network.Google.Resource.Vault.Matters.Get
+    VaultMattersGetResource,
+    newVaultMattersGet,
+    VaultMattersGet,
 
     -- ** vault.matters.holds.accounts.create
-    , module Network.Google.Resource.Vault.Matters.Holds.Accounts.Create
+    VaultMattersHoldsAccountsCreateResource,
+    newVaultMattersHoldsAccountsCreate,
+    VaultMattersHoldsAccountsCreate,
 
     -- ** vault.matters.holds.accounts.delete
-    , module Network.Google.Resource.Vault.Matters.Holds.Accounts.Delete
+    VaultMattersHoldsAccountsDeleteResource,
+    newVaultMattersHoldsAccountsDelete,
+    VaultMattersHoldsAccountsDelete,
 
     -- ** vault.matters.holds.accounts.list
-    , module Network.Google.Resource.Vault.Matters.Holds.Accounts.List
+    VaultMattersHoldsAccountsListResource,
+    newVaultMattersHoldsAccountsList,
+    VaultMattersHoldsAccountsList,
 
     -- ** vault.matters.holds.addHeldAccounts
-    , module Network.Google.Resource.Vault.Matters.Holds.AddHeldAccounts
+    VaultMattersHoldsAddHeldAccountsResource,
+    newVaultMattersHoldsAddHeldAccounts,
+    VaultMattersHoldsAddHeldAccounts,
 
     -- ** vault.matters.holds.create
-    , module Network.Google.Resource.Vault.Matters.Holds.Create
+    VaultMattersHoldsCreateResource,
+    newVaultMattersHoldsCreate,
+    VaultMattersHoldsCreate,
 
     -- ** vault.matters.holds.delete
-    , module Network.Google.Resource.Vault.Matters.Holds.Delete
+    VaultMattersHoldsDeleteResource,
+    newVaultMattersHoldsDelete,
+    VaultMattersHoldsDelete,
 
     -- ** vault.matters.holds.get
-    , module Network.Google.Resource.Vault.Matters.Holds.Get
+    VaultMattersHoldsGetResource,
+    newVaultMattersHoldsGet,
+    VaultMattersHoldsGet,
 
     -- ** vault.matters.holds.list
-    , module Network.Google.Resource.Vault.Matters.Holds.List
+    VaultMattersHoldsListResource,
+    newVaultMattersHoldsList,
+    VaultMattersHoldsList,
 
     -- ** vault.matters.holds.removeHeldAccounts
-    , module Network.Google.Resource.Vault.Matters.Holds.RemoveHeldAccounts
+    VaultMattersHoldsRemoveHeldAccountsResource,
+    newVaultMattersHoldsRemoveHeldAccounts,
+    VaultMattersHoldsRemoveHeldAccounts,
 
     -- ** vault.matters.holds.update
-    , module Network.Google.Resource.Vault.Matters.Holds.Update
+    VaultMattersHoldsUpdateResource,
+    newVaultMattersHoldsUpdate,
+    VaultMattersHoldsUpdate,
 
     -- ** vault.matters.list
-    , module Network.Google.Resource.Vault.Matters.List
+    VaultMattersListResource,
+    newVaultMattersList,
+    VaultMattersList,
 
     -- ** vault.matters.removePermissions
-    , module Network.Google.Resource.Vault.Matters.RemovePermissions
+    VaultMattersRemovePermissionsResource,
+    newVaultMattersRemovePermissions,
+    VaultMattersRemovePermissions,
 
     -- ** vault.matters.reopen
-    , module Network.Google.Resource.Vault.Matters.Reopen
+    VaultMattersReopenResource,
+    newVaultMattersReopen,
+    VaultMattersReopen,
 
     -- ** vault.matters.savedQueries.create
-    , module Network.Google.Resource.Vault.Matters.SavedQueries.Create
+    VaultMattersSavedQueriesCreateResource,
+    newVaultMattersSavedQueriesCreate,
+    VaultMattersSavedQueriesCreate,
 
     -- ** vault.matters.savedQueries.delete
-    , module Network.Google.Resource.Vault.Matters.SavedQueries.Delete
+    VaultMattersSavedQueriesDeleteResource,
+    newVaultMattersSavedQueriesDelete,
+    VaultMattersSavedQueriesDelete,
 
     -- ** vault.matters.savedQueries.get
-    , module Network.Google.Resource.Vault.Matters.SavedQueries.Get
+    VaultMattersSavedQueriesGetResource,
+    newVaultMattersSavedQueriesGet,
+    VaultMattersSavedQueriesGet,
 
     -- ** vault.matters.savedQueries.list
-    , module Network.Google.Resource.Vault.Matters.SavedQueries.List
+    VaultMattersSavedQueriesListResource,
+    newVaultMattersSavedQueriesList,
+    VaultMattersSavedQueriesList,
 
     -- ** vault.matters.undelete
-    , module Network.Google.Resource.Vault.Matters.Undelete
+    VaultMattersUndeleteResource,
+    newVaultMattersUndelete,
+    VaultMattersUndelete,
 
     -- ** vault.matters.update
-    , module Network.Google.Resource.Vault.Matters.Update
+    VaultMattersUpdateResource,
+    newVaultMattersUpdate,
+    VaultMattersUpdate,
 
     -- ** vault.operations.cancel
-    , module Network.Google.Resource.Vault.Operations.Cancel
+    VaultOperationsCancelResource,
+    newVaultOperationsCancel,
+    VaultOperationsCancel,
 
     -- ** vault.operations.delete
-    , module Network.Google.Resource.Vault.Operations.Delete
+    VaultOperationsDeleteResource,
+    newVaultOperationsDelete,
+    VaultOperationsDelete,
 
     -- ** vault.operations.get
-    , module Network.Google.Resource.Vault.Operations.Get
+    VaultOperationsGetResource,
+    newVaultOperationsGet,
+    VaultOperationsGet,
 
     -- ** vault.operations.list
-    , module Network.Google.Resource.Vault.Operations.List
+    VaultOperationsListResource,
+    newVaultOperationsList,
+    VaultOperationsList,
 
     -- * Types
 
-    -- ** HeldAccount
-    , HeldAccount
-    , heldAccount
-    , haEmail
-    , haLastName
-    , haAccountId
-    , haHoldTime
-    , haFirstName
-
-    -- ** HeldHangoutsChatQuery
-    , HeldHangoutsChatQuery
-    , heldHangoutsChatQuery
-    , hhcqIncludeRooms
-
-    -- ** ExportOptionsRegion
-    , ExportOptionsRegion (..)
-
-    -- ** Export
-    , Export
-    , export'
-    , eStatus
-    , eCloudStorageSink
-    , eMatterId
-    , eStats
-    , eExportOptions
-    , eName
-    , eQuery
-    , eId
-    , eRequester
-    , eCreateTime
-
-    -- ** MatterPermissionRole
-    , MatterPermissionRole (..)
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** AccountInfo
-    , AccountInfo
-    , accountInfo
-    , aiEmails
-
-    -- ** CloudStorageSink
-    , CloudStorageSink
-    , cloudStorageSink
-    , cssFiles
-
-    -- ** HoldCorpus
-    , HoldCorpus (..)
-
-    -- ** HangoutsChatExportOptions
-    , HangoutsChatExportOptions
-    , hangoutsChatExportOptions
-    , hceoExportFormat
-
-    -- ** CountArtifactsRequest
-    , CountArtifactsRequest
-    , countArtifactsRequest
-    , carQuery
-    , carView
-
-    -- ** UserInfo
-    , UserInfo
-    , userInfo
-    , uiEmail
-    , uiDisplayName
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** TeamDriveInfo
-    , TeamDriveInfo
-    , teamDriveInfo
-    , tdiTeamDriveIds
-
-    -- ** AddHeldAccountsRequest
-    , AddHeldAccountsRequest
-    , addHeldAccountsRequest
-    , aharAccountIds
-    , aharEmails
-
-    -- ** CorpusQuery
-    , CorpusQuery
-    , corpusQuery
-    , cqGroupsQuery
-    , cqDriveQuery
-    , cqHangoutsChatQuery
-    , cqVoiceQuery
-    , cqMailQuery
-
-    -- ** CancelOperationRequest
-    , CancelOperationRequest
-    , cancelOperationRequest
-
-    -- ** QueryCorpus
-    , QueryCorpus (..)
-
-    -- ** OrgUnitInfo
-    , OrgUnitInfo
-    , orgUnitInfo
-    , ouiOrgUnitId
-
-    -- ** AccountCountErrorErrorType
-    , AccountCountErrorErrorType (..)
-
-    -- ** RemoveHeldAccountsResponse
-    , RemoveHeldAccountsResponse
-    , removeHeldAccountsResponse
-    , rharStatuses
-
-    -- ** MattersListState
-    , MattersListState (..)
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** QueryMethod
-    , QueryMethod (..)
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ExportStats
-    , ExportStats
-    , exportStats
-    , esTotalArtifactCount
-    , esSizeInBytes
-    , esExportedArtifactCount
-
-    -- ** HangoutsChatInfo
-    , HangoutsChatInfo
-    , hangoutsChatInfo
-    , hciRoomId
-
-    -- ** RemoveHeldAccountsRequest
-    , RemoveHeldAccountsRequest
-    , removeHeldAccountsRequest
-    , rharAccountIds
-
-    -- ** HangoutsChatExportOptionsExportFormat
-    , HangoutsChatExportOptionsExportFormat (..)
-
-    -- ** QueryDataScope
-    , QueryDataScope (..)
-
-    -- ** ListSavedQueriesResponse
-    , ListSavedQueriesResponse
-    , listSavedQueriesResponse
-    , lsqrNextPageToken
-    , lsqrSavedQueries
-
-    -- ** ExportStatus
-    , ExportStatus (..)
-
-    -- ** UndeleteMatterRequest
-    , UndeleteMatterRequest
-    , undeleteMatterRequest
-
-    -- ** MattersHoldsListView
-    , MattersHoldsListView (..)
-
-    -- ** HeldDriveQuery
-    , HeldDriveQuery
-    , heldDriveQuery
-    , hdqIncludeTeamDriveFiles
-    , hdqIncludeSharedDriveFiles
-
-    -- ** HangoutsChatOptions
-    , HangoutsChatOptions
-    , hangoutsChatOptions
-    , hcoIncludeRooms
-
-    -- ** QuerySearchMethod
-    , QuerySearchMethod (..)
-
-    -- ** MailCountResult
-    , MailCountResult
-    , mailCountResult
-    , mcrAccountCounts
-    , mcrAccountCountErrors
-    , mcrMatchingAccountsCount
-    , mcrQueriedAccountsCount
-    , mcrNonQueryableAccounts
-
-    -- ** CountArtifactsMetadata
-    , CountArtifactsMetadata
-    , countArtifactsMetadata
-    , camStartTime
-    , camMatterId
-    , camEndTime
-    , camQuery
-
-    -- ** AddMatterPermissionsRequest
-    , AddMatterPermissionsRequest
-    , addMatterPermissionsRequest
-    , amprSendEmails
-    , amprCcMe
-    , amprMatterPermission
-
-    -- ** MattersGetView
-    , MattersGetView (..)
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** Matter
-    , Matter
-    , matter
-    , mState
-    , mMatterPermissions
-    , mMatterId
-    , mName
-    , mDescription
-
-    -- ** CloseMatterResponse
-    , CloseMatterResponse
-    , closeMatterResponse
-    , cmrMatter
-
-    -- ** HeldMailQuery
-    , HeldMailQuery
-    , heldMailQuery
-    , hmqStartTime
-    , hmqTerms
-    , hmqEndTime
-
-    -- ** ListHeldAccountsResponse
-    , ListHeldAccountsResponse
-    , listHeldAccountsResponse
-    , lharAccounts
-
-    -- ** ListExportsResponse
-    , ListExportsResponse
-    , listExportsResponse
-    , lerNextPageToken
-    , lerExports
-
-    -- ** VoiceOptions
-    , VoiceOptions
-    , voiceOptions
-    , voCoveredData
-
-    -- ** HeldOrgUnit
-    , HeldOrgUnit
-    , heldOrgUnit
-    , houHoldTime
-    , houOrgUnitId
-
-    -- ** ListMattersResponse
-    , ListMattersResponse
-    , listMattersResponse
-    , lmrNextPageToken
-    , lmrMatters
-
-    -- ** ReopenMatterRequest
-    , ReopenMatterRequest
-    , reopenMatterRequest
-
-    -- ** HeldVoiceQuery
-    , HeldVoiceQuery
-    , heldVoiceQuery
-    , hvqCoveredData
-
-    -- ** RemoveMatterPermissionsRequest
-    , RemoveMatterPermissionsRequest
-    , removeMatterPermissionsRequest
-    , rmprAccountId
-
-    -- ** ExportOptions
-    , ExportOptions
-    , exportOptions
-    , eoHangoutsChatOptions
-    , eoVoiceOptions
-    , eoDriveOptions
-    , eoGroupsOptions
-    , eoRegion
-    , eoMailOptions
-
-    -- ** MatterState
-    , MatterState (..)
-
-    -- ** CloseMatterRequest
-    , CloseMatterRequest
-    , closeMatterRequest
-
-    -- ** DriveOptions
-    , DriveOptions
-    , driveOptions
-    , doIncludeSharedDrives
-    , doIncludeTeamDrives
-    , doVersionDate
-
-    -- ** AddHeldAccountResult
-    , AddHeldAccountResult
-    , addHeldAccountResult
-    , aharStatus
-    , aharAccount
-
-    -- ** SavedQuery
-    , SavedQuery
-    , savedQuery
-    , sqSavedQueryId
-    , sqMatterId
-    , sqQuery
-    , sqDisplayName
-    , sqCreateTime
-
-    -- ** Hold
-    , Hold
-    , hold
-    , hOrgUnit
-    , hHoldId
-    , hAccounts
-    , hUpdateTime
-    , hName
-    , hQuery
-    , hCorpus
-
-    -- ** MattersListView
-    , MattersListView (..)
-
-    -- ** VoiceOptionsCoveredDataItem
-    , VoiceOptionsCoveredDataItem (..)
-
-    -- ** GroupsExportOptionsExportFormat
-    , GroupsExportOptionsExportFormat (..)
-
-    -- ** MattersHoldsGetView
-    , MattersHoldsGetView (..)
-
-    -- ** CountArtifactsRequestView
-    , CountArtifactsRequestView (..)
-
-    -- ** Query
-    , Query
-    , query
-    , qAccountInfo
-    , qTeamDriveInfo
-    , qOrgUnitInfo
-    , qStartTime
-    , qTerms
-    , qHangoutsChatInfo
-    , qHangoutsChatOptions
-    , qVoiceOptions
-    , qDriveOptions
-    , qMethod
-    , qEndTime
-    , qDataScope
-    , qCorpus
-    , qTimeZone
-    , qSharedDriveInfo
-    , qMailOptions
-    , qSearchMethod
-
     -- ** Xgafv
-    , Xgafv (..)
-
-    -- ** AccountCountError
-    , AccountCountError
-    , accountCountError
-    , aceAccount
-    , aceErrorType
+    Xgafv (..),
 
     -- ** AccountCount
-    , AccountCount
-    , accountCount
-    , acCount
-    , acAccount
+    AccountCount (..),
+    newAccountCount,
 
-    -- ** VoiceExportOptions
-    , VoiceExportOptions
-    , voiceExportOptions
-    , veoExportFormat
+    -- ** AccountCountError
+    AccountCountError (..),
+    newAccountCountError,
 
-    -- ** MailExportOptionsExportFormat
-    , MailExportOptionsExportFormat (..)
+    -- ** AccountCountError_ErrorType
+    AccountCountError_ErrorType (..),
+
+    -- ** AccountInfo
+    AccountInfo (..),
+    newAccountInfo,
+
+    -- ** AddHeldAccountResult
+    AddHeldAccountResult (..),
+    newAddHeldAccountResult,
+
+    -- ** AddHeldAccountsRequest
+    AddHeldAccountsRequest (..),
+    newAddHeldAccountsRequest,
 
     -- ** AddHeldAccountsResponse
-    , AddHeldAccountsResponse
-    , addHeldAccountsResponse
-    , aharResponses
+    AddHeldAccountsResponse (..),
+    newAddHeldAccountsResponse,
 
-    -- ** MailExportOptions
-    , MailExportOptions
-    , mailExportOptions
-    , meoExportFormat
-    , meoShowConfidentialModeContent
+    -- ** AddMatterPermissionsRequest
+    AddMatterPermissionsRequest (..),
+    newAddMatterPermissionsRequest,
 
-    -- ** CountArtifactsResponse
-    , CountArtifactsResponse
-    , countArtifactsResponse
-    , carMailCountResult
-    , carGroupsCountResult
-    , carTotalCount
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
-    -- ** VoiceExportOptionsExportFormat
-    , VoiceExportOptionsExportFormat (..)
+    -- ** CloseMatterRequest
+    CloseMatterRequest (..),
+    newCloseMatterRequest,
 
-    -- ** ListHoldsResponse
-    , ListHoldsResponse
-    , listHoldsResponse
-    , lhrNextPageToken
-    , lhrHolds
-
-    -- ** GroupsExportOptions
-    , GroupsExportOptions
-    , groupsExportOptions
-    , geoExportFormat
-
-    -- ** HeldVoiceQueryCoveredDataItem
-    , HeldVoiceQueryCoveredDataItem (..)
-
-    -- ** MatterPermission
-    , MatterPermission
-    , matterPermission
-    , mpRole
-    , mpAccountId
-
-    -- ** DriveExportOptions
-    , DriveExportOptions
-    , driveExportOptions
-    , deoIncludeAccessInfo
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
-
-    -- ** HeldGroupsQuery
-    , HeldGroupsQuery
-    , heldGroupsQuery
-    , hgqStartTime
-    , hgqTerms
-    , hgqEndTime
-
-    -- ** SharedDriveInfo
-    , SharedDriveInfo
-    , sharedDriveInfo
-    , sdiSharedDriveIds
-
-    -- ** ReopenMatterResponse
-    , ReopenMatterResponse
-    , reopenMatterResponse
-    , rmrMatter
+    -- ** CloseMatterResponse
+    CloseMatterResponse (..),
+    newCloseMatterResponse,
 
     -- ** CloudStorageFile
-    , CloudStorageFile
-    , cloudStorageFile
-    , csfObjectName
-    , csfSize
-    , csfBucketName
-    , csfMD5Hash
+    CloudStorageFile (..),
+    newCloudStorageFile,
 
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-    , orAddtional
+    -- ** CloudStorageSink
+    CloudStorageSink (..),
+    newCloudStorageSink,
+
+    -- ** CorpusQuery
+    CorpusQuery (..),
+    newCorpusQuery,
+
+    -- ** CountArtifactsMetadata
+    CountArtifactsMetadata (..),
+    newCountArtifactsMetadata,
+
+    -- ** CountArtifactsRequest
+    CountArtifactsRequest (..),
+    newCountArtifactsRequest,
+
+    -- ** CountArtifactsRequest_View
+    CountArtifactsRequest_View (..),
+
+    -- ** CountArtifactsResponse
+    CountArtifactsResponse (..),
+    newCountArtifactsResponse,
+
+    -- ** DriveExportOptions
+    DriveExportOptions (..),
+    newDriveExportOptions,
+
+    -- ** DriveOptions
+    DriveOptions (..),
+    newDriveOptions,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** Export
+    Export (..),
+    newExport,
+
+    -- ** Export_Status
+    Export_Status (..),
+
+    -- ** ExportOptions
+    ExportOptions (..),
+    newExportOptions,
+
+    -- ** ExportOptions_Region
+    ExportOptions_Region (..),
+
+    -- ** ExportStats
+    ExportStats (..),
+    newExportStats,
 
     -- ** GroupsCountResult
-    , GroupsCountResult
-    , groupsCountResult
-    , gcrAccountCounts
-    , gcrAccountCountErrors
-    , gcrMatchingAccountsCount
-    , gcrQueriedAccountsCount
-    , gcrNonQueryableAccounts
+    GroupsCountResult (..),
+    newGroupsCountResult,
+
+    -- ** GroupsExportOptions
+    GroupsExportOptions (..),
+    newGroupsExportOptions,
+
+    -- ** GroupsExportOptions_ExportFormat
+    GroupsExportOptions_ExportFormat (..),
+
+    -- ** HangoutsChatExportOptions
+    HangoutsChatExportOptions (..),
+    newHangoutsChatExportOptions,
+
+    -- ** HangoutsChatExportOptions_ExportFormat
+    HangoutsChatExportOptions_ExportFormat (..),
+
+    -- ** HangoutsChatInfo
+    HangoutsChatInfo (..),
+    newHangoutsChatInfo,
+
+    -- ** HangoutsChatOptions
+    HangoutsChatOptions (..),
+    newHangoutsChatOptions,
+
+    -- ** HeldAccount
+    HeldAccount (..),
+    newHeldAccount,
+
+    -- ** HeldDriveQuery
+    HeldDriveQuery (..),
+    newHeldDriveQuery,
+
+    -- ** HeldGroupsQuery
+    HeldGroupsQuery (..),
+    newHeldGroupsQuery,
+
+    -- ** HeldHangoutsChatQuery
+    HeldHangoutsChatQuery (..),
+    newHeldHangoutsChatQuery,
+
+    -- ** HeldMailQuery
+    HeldMailQuery (..),
+    newHeldMailQuery,
+
+    -- ** HeldOrgUnit
+    HeldOrgUnit (..),
+    newHeldOrgUnit,
+
+    -- ** HeldVoiceQuery
+    HeldVoiceQuery (..),
+    newHeldVoiceQuery,
+
+    -- ** HeldVoiceQuery_CoveredDataItem
+    HeldVoiceQuery_CoveredDataItem (..),
+
+    -- ** Hold
+    Hold (..),
+    newHold,
+
+    -- ** Hold_Corpus
+    Hold_Corpus (..),
+
+    -- ** ListExportsResponse
+    ListExportsResponse (..),
+    newListExportsResponse,
+
+    -- ** ListHeldAccountsResponse
+    ListHeldAccountsResponse (..),
+    newListHeldAccountsResponse,
+
+    -- ** ListHoldsResponse
+    ListHoldsResponse (..),
+    newListHoldsResponse,
+
+    -- ** ListMattersResponse
+    ListMattersResponse (..),
+    newListMattersResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
+    -- ** ListSavedQueriesResponse
+    ListSavedQueriesResponse (..),
+    newListSavedQueriesResponse,
+
+    -- ** MailCountResult
+    MailCountResult (..),
+    newMailCountResult,
+
+    -- ** MailExportOptions
+    MailExportOptions (..),
+    newMailExportOptions,
+
+    -- ** MailExportOptions_ExportFormat
+    MailExportOptions_ExportFormat (..),
 
     -- ** MailOptions
-    , MailOptions
-    , mailOptions
-    , moExcludeDrafts
-    ) where
+    MailOptions (..),
+    newMailOptions,
 
-import Network.Google.Prelude
-import Network.Google.Resource.Vault.Matters.AddPermissions
-import Network.Google.Resource.Vault.Matters.Close
-import Network.Google.Resource.Vault.Matters.Count
-import Network.Google.Resource.Vault.Matters.Create
-import Network.Google.Resource.Vault.Matters.Delete
-import Network.Google.Resource.Vault.Matters.Exports.Create
-import Network.Google.Resource.Vault.Matters.Exports.Delete
-import Network.Google.Resource.Vault.Matters.Exports.Get
-import Network.Google.Resource.Vault.Matters.Exports.List
-import Network.Google.Resource.Vault.Matters.Get
-import Network.Google.Resource.Vault.Matters.Holds.Accounts.Create
-import Network.Google.Resource.Vault.Matters.Holds.Accounts.Delete
-import Network.Google.Resource.Vault.Matters.Holds.Accounts.List
-import Network.Google.Resource.Vault.Matters.Holds.AddHeldAccounts
-import Network.Google.Resource.Vault.Matters.Holds.Create
-import Network.Google.Resource.Vault.Matters.Holds.Delete
-import Network.Google.Resource.Vault.Matters.Holds.Get
-import Network.Google.Resource.Vault.Matters.Holds.List
-import Network.Google.Resource.Vault.Matters.Holds.RemoveHeldAccounts
-import Network.Google.Resource.Vault.Matters.Holds.Update
-import Network.Google.Resource.Vault.Matters.List
-import Network.Google.Resource.Vault.Matters.RemovePermissions
-import Network.Google.Resource.Vault.Matters.Reopen
-import Network.Google.Resource.Vault.Matters.SavedQueries.Create
-import Network.Google.Resource.Vault.Matters.SavedQueries.Delete
-import Network.Google.Resource.Vault.Matters.SavedQueries.Get
-import Network.Google.Resource.Vault.Matters.SavedQueries.List
-import Network.Google.Resource.Vault.Matters.Undelete
-import Network.Google.Resource.Vault.Matters.Update
-import Network.Google.Resource.Vault.Operations.Cancel
-import Network.Google.Resource.Vault.Operations.Delete
-import Network.Google.Resource.Vault.Operations.Get
-import Network.Google.Resource.Vault.Operations.List
+    -- ** Matter
+    Matter (..),
+    newMatter,
+
+    -- ** Matter_State
+    Matter_State (..),
+
+    -- ** MatterPermission
+    MatterPermission (..),
+    newMatterPermission,
+
+    -- ** MatterPermission_Role
+    MatterPermission_Role (..),
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OrgUnitInfo
+    OrgUnitInfo (..),
+    newOrgUnitInfo,
+
+    -- ** Query
+    Query (..),
+    newQuery,
+
+    -- ** Query_Corpus
+    Query_Corpus (..),
+
+    -- ** Query_DataScope
+    Query_DataScope (..),
+
+    -- ** Query_Method
+    Query_Method (..),
+
+    -- ** Query_SearchMethod
+    Query_SearchMethod (..),
+
+    -- ** RemoveHeldAccountsRequest
+    RemoveHeldAccountsRequest (..),
+    newRemoveHeldAccountsRequest,
+
+    -- ** RemoveHeldAccountsResponse
+    RemoveHeldAccountsResponse (..),
+    newRemoveHeldAccountsResponse,
+
+    -- ** RemoveMatterPermissionsRequest
+    RemoveMatterPermissionsRequest (..),
+    newRemoveMatterPermissionsRequest,
+
+    -- ** ReopenMatterRequest
+    ReopenMatterRequest (..),
+    newReopenMatterRequest,
+
+    -- ** ReopenMatterResponse
+    ReopenMatterResponse (..),
+    newReopenMatterResponse,
+
+    -- ** SavedQuery
+    SavedQuery (..),
+    newSavedQuery,
+
+    -- ** SharedDriveInfo
+    SharedDriveInfo (..),
+    newSharedDriveInfo,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** TeamDriveInfo
+    TeamDriveInfo (..),
+    newTeamDriveInfo,
+
+    -- ** UndeleteMatterRequest
+    UndeleteMatterRequest (..),
+    newUndeleteMatterRequest,
+
+    -- ** UserInfo
+    UserInfo (..),
+    newUserInfo,
+
+    -- ** VoiceExportOptions
+    VoiceExportOptions (..),
+    newVoiceExportOptions,
+
+    -- ** VoiceExportOptions_ExportFormat
+    VoiceExportOptions_ExportFormat (..),
+
+    -- ** VoiceOptions
+    VoiceOptions (..),
+    newVoiceOptions,
+
+    -- ** VoiceOptions_CoveredDataItem
+    VoiceOptions_CoveredDataItem (..),
+
+    -- ** MattersGetView
+    MattersGetView (..),
+
+    -- ** MattersHoldsGetView
+    MattersHoldsGetView (..),
+
+    -- ** MattersHoldsListView
+    MattersHoldsListView (..),
+
+    -- ** MattersListState
+    MattersListState (..),
+
+    -- ** MattersListView
+    MattersListView (..),
+  )
+where
+
+import Network.Google.Vault.Matters.AddPermissions
+import Network.Google.Vault.Matters.Close
+import Network.Google.Vault.Matters.Count
+import Network.Google.Vault.Matters.Create
+import Network.Google.Vault.Matters.Delete
+import Network.Google.Vault.Matters.Exports.Create
+import Network.Google.Vault.Matters.Exports.Delete
+import Network.Google.Vault.Matters.Exports.Get
+import Network.Google.Vault.Matters.Exports.List
+import Network.Google.Vault.Matters.Get
+import Network.Google.Vault.Matters.Holds.Accounts.Create
+import Network.Google.Vault.Matters.Holds.Accounts.Delete
+import Network.Google.Vault.Matters.Holds.Accounts.List
+import Network.Google.Vault.Matters.Holds.AddHeldAccounts
+import Network.Google.Vault.Matters.Holds.Create
+import Network.Google.Vault.Matters.Holds.Delete
+import Network.Google.Vault.Matters.Holds.Get
+import Network.Google.Vault.Matters.Holds.List
+import Network.Google.Vault.Matters.Holds.RemoveHeldAccounts
+import Network.Google.Vault.Matters.Holds.Update
+import Network.Google.Vault.Matters.List
+import Network.Google.Vault.Matters.RemovePermissions
+import Network.Google.Vault.Matters.Reopen
+import Network.Google.Vault.Matters.SavedQueries.Create
+import Network.Google.Vault.Matters.SavedQueries.Delete
+import Network.Google.Vault.Matters.SavedQueries.Get
+import Network.Google.Vault.Matters.SavedQueries.List
+import Network.Google.Vault.Matters.Undelete
+import Network.Google.Vault.Matters.Update
+import Network.Google.Vault.Operations.Cancel
+import Network.Google.Vault.Operations.Delete
+import Network.Google.Vault.Operations.Get
+import Network.Google.Vault.Operations.List
 import Network.Google.Vault.Types
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the G Suite Vault API service.
-type VaultAPI =
-     MattersSavedQueriesListResource :<|>
-       MattersSavedQueriesGetResource
-       :<|> MattersSavedQueriesCreateResource
-       :<|> MattersSavedQueriesDeleteResource
-       :<|> MattersHoldsAccountsListResource
-       :<|> MattersHoldsAccountsCreateResource
-       :<|> MattersHoldsAccountsDeleteResource
-       :<|> MattersHoldsListResource
-       :<|> MattersHoldsGetResource
-       :<|> MattersHoldsAddHeldAccountsResource
-       :<|> MattersHoldsRemoveHeldAccountsResource
-       :<|> MattersHoldsCreateResource
-       :<|> MattersHoldsDeleteResource
-       :<|> MattersHoldsUpdateResource
-       :<|> MattersExportsListResource
-       :<|> MattersExportsGetResource
-       :<|> MattersExportsCreateResource
-       :<|> MattersExportsDeleteResource
-       :<|> MattersListResource
-       :<|> MattersUndeleteResource
-       :<|> MattersCountResource
-       :<|> MattersGetResource
-       :<|> MattersCloseResource
-       :<|> MattersAddPermissionsResource
-       :<|> MattersCreateResource
-       :<|> MattersReopenResource
-       :<|> MattersRemovePermissionsResource
-       :<|> MattersDeleteResource
-       :<|> MattersUpdateResource
-       :<|> OperationsListResource
-       :<|> OperationsGetResource
-       :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
