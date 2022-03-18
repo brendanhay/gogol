@@ -48,11 +48,11 @@ renameAbbrev = Text.strip . stripPrefix "Google" . stripSuffix "API"
 
 renameField :: Text -> Text
 renameField text
-   -- Prevent ambiguity with smart constructors.
+  -- Prevent ambiguity with smart constructors.
   | Text.isPrefixOf "new" field = field <> "'"
   | otherwise = field
- where
-  field = renameReserved . renameSpecial . lowerHead . toCamel $ text
+  where
+    field = renameReserved . renameSpecial . lowerHead . toCamel $ text
 
 renameBranch :: Text -> Text
 renameBranch t

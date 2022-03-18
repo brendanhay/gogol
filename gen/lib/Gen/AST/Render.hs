@@ -157,7 +157,7 @@ renderMethod s suf m@Method {..} = do
   where
     root = collapseNS (tocNS s <> UnsafeNS parts)
 
-    (alias, typ', parts) = mname suf _mId
+    (alias, typ', parts) = mname (_sCanonicalName s) suf _mId
 
     url = name (serviceName s)
 
@@ -227,4 +227,6 @@ comments (Map.toList -> rs) =
     rel (Just (l, s)) t =
       t <> "\n       -- ^ "
         <> maybe mempty (LText.drop 11 . renderHelp . Nest 7) (s ^. iDescription)
-        <> " See '" <> fromString (PP.prettyPrint (fname l)) <> "'."
+        <> " See '"
+        <> fromString (PP.prettyPrint (fname l))
+        <> "'."

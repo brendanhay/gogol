@@ -18,11 +18,11 @@ module Gen.Types.NS
 where
 
 import Data.Aeson
+import qualified Data.CaseInsensitive as CI
 import Data.String
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.Text.Manipulate
-import qualified Data.CaseInsensitive as CI
 
 newtype NS = UnsafeNS {unNS :: [Text]}
   deriving (Eq, Ord, Show)
@@ -44,10 +44,10 @@ instance Monoid NS where
   mempty = UnsafeNS []
 
 collapseNS :: NS -> NS
-collapseNS (UnsafeNS xs) = UnsafeNS (squeeze xs)
+collapseNS (UnsafeNS xs) = UnsafeNS (map CI.original (squeeze (map CI.mk xs)))
   where
     squeeze = \case
-      x : y : ys | CI.mk x == CI.mk y -> squeeze (x : ys)
+      x : y : ys | x == y -> squeeze (x : ys)
       x : xs -> x : squeeze xs
       [] -> []
 

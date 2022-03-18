@@ -45,7 +45,6 @@ module Gen.Types.Id
   )
 where
 
-import GHC.Stack (HasCallStack)
 import Control.Applicative
 import Control.Monad
 import Data.Aeson hiding (Bool, String)
@@ -59,21 +58,22 @@ import qualified Data.Text.Lazy.Builder as Build
 import Data.Text.Manipulate
 import Formatting
 import GHC.Generics (Generic)
+import GHC.Stack (HasCallStack)
 import Gen.Text
+import Gen.Types.NS
 import Language.Haskell.Exts.Build
 import Language.Haskell.Exts.Syntax (Exp, Name (..))
 
 aname :: Text -> Name ()
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
-mname :: Suffix -> Global -> (Name (), Global, [Text])
-mname (Suffix suf) (Global g) =
-  ( name . Text.unpack $ mconcat n <> suf, -- Action service type alias.
-    Global n, -- Action data type.
-    n
-  )
+mname :: Text -> Suffix -> Global -> (Name (), Global, [Text])
+mname canonical (Suffix suf) (Global method) =
+  ( resourceType, dataType, namespace)
   where
-    n = map upperHead g
+    resourceType = name (Text.unpack (mconcat namespace <> suf))
+    dataType = Global namespace
+    namespace = map upperHead method
 
 dname :: Global -> Name ()
 dname =
@@ -139,7 +139,7 @@ instance Semigroup Global where
 instance IsString Global where
   fromString = mkGlobal . fromString
 
-instance  FromJSON Global where
+instance FromJSON Global where
   parseJSON = withText "global" (pure . mkGlobal)
 
 instance FromJSONKey Global where
