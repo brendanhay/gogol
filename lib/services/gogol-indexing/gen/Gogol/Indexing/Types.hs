@@ -1,17 +1,23 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,45 +31,45 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Indexing.Types
-  ( -- * Configuration
-    indexingService,
+    (
+    -- * Configuration
+      indexingService
 
     -- * OAuth Scopes
-    indexingScope,
+    , indexingScope
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** PublishUrlNotificationResponse
-    PublishUrlNotificationResponse (..),
-    newPublishUrlNotificationResponse,
+    , PublishUrlNotificationResponse (..)
+    , newPublishUrlNotificationResponse
 
     -- ** UrlNotification
-    UrlNotification (..),
-    newUrlNotification,
+    , UrlNotification (..)
+    , newUrlNotification
 
     -- ** UrlNotification_Type
-    UrlNotification_Type (..),
+    , UrlNotification_Type (..)
 
     -- ** UrlNotificationMetadata
-    UrlNotificationMetadata (..),
-    newUrlNotificationMetadata,
-  )
-where
+    , UrlNotificationMetadata (..)
+    , newUrlNotificationMetadata
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Indexing.Internal.Product
 import Gogol.Indexing.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v3@ of the Indexing API. This contains the host and root path used as a starting point for constructing service requests.
 indexingService :: Core.ServiceConfig
-indexingService =
-  Core.defaultService
-    (Core.ServiceId "indexing:v3")
-    "indexing.googleapis.com"
+indexingService
+  = Core.defaultService (Core.ServiceId "indexing:v3")
+      "indexing.googleapis.com"
 
 -- | Submit data to Google for indexing
 indexingScope :: Core.Proxy '["https://www.googleapis.com/auth/indexing"]
