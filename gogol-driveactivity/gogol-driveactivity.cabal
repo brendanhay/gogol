@@ -39,18 +39,19 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.DriveActivity
-    Network.Google.DriveActivity.Activity.Query
-    Network.Google.DriveActivity.Types
+    Gogol.DriveActivity
+    Gogol.DriveActivity.Activity.Query
+    Gogol.DriveActivity.Types
 
   other-modules:
-    Network.Google.DriveActivity.Internal.Product
-    Network.Google.DriveActivity.Internal.Sum
+    Gogol.DriveActivity.Internal.Product
+    Gogol.DriveActivity.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

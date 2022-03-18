@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.DriveActivity.Activity.Query
+-- Module      : Gogol.DriveActivity.Activity.Query
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- Query past activity in Google Drive.
 --
 -- /See:/ <https://developers.google.com/drive/activity/ Drive Activity API Reference> for @driveactivity.activity.query@.
-module Network.Google.DriveActivity.Activity.Query
+module Gogol.DriveActivity.Activity.Query
   ( -- * Resource
     DriveActivityActivityQueryResource,
 
@@ -39,8 +39,8 @@ module Network.Google.DriveActivity.Activity.Query
   )
 where
 
-import Network.Google.DriveActivity.Types
-import qualified Network.Google.Prelude as Core
+import Gogol.DriveActivity.Types
+import qualified Gogol.Prelude as Core
 
 -- | A resource alias for @driveactivity.activity.query@ method which the
 -- 'DriveActivityActivityQuery' request conforms to.
