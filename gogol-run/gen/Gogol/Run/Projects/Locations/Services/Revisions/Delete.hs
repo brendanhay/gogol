@@ -19,32 +19,32 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Run.Projects.Locations.Services.Delete
+-- Module      : Gogol.Run.Projects.Locations.Services.Revisions.Delete
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a Service. This will cause the Service to stop serving traffic and will delete all revisions.
+-- Delete a Revision.
 --
--- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.delete@.
-module Network.Google.Run.Projects.Locations.Services.Delete
+-- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.revisions.delete@.
+module Gogol.Run.Projects.Locations.Services.Revisions.Delete
   ( -- * Resource
-    RunProjectsLocationsServicesDeleteResource,
+    RunProjectsLocationsServicesRevisionsDeleteResource,
 
     -- ** Constructing a Request
-    newRunProjectsLocationsServicesDelete,
-    RunProjectsLocationsServicesDelete,
+    newRunProjectsLocationsServicesRevisionsDelete,
+    RunProjectsLocationsServicesRevisionsDelete,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Run.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Run.Types
 
--- | A resource alias for @run.projects.locations.services.delete@ method which the
--- 'RunProjectsLocationsServicesDelete' request conforms to.
-type RunProjectsLocationsServicesDeleteResource =
+-- | A resource alias for @run.projects.locations.services.revisions.delete@ method which the
+-- 'RunProjectsLocationsServicesRevisionsDelete' request conforms to.
+type RunProjectsLocationsServicesRevisionsDeleteResource =
   "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -57,19 +57,19 @@ type RunProjectsLocationsServicesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] GoogleLongrunningOperation
 
--- | Deletes a Service. This will cause the Service to stop serving traffic and will delete all revisions.
+-- | Delete a Revision.
 --
--- /See:/ 'newRunProjectsLocationsServicesDelete' smart constructor.
-data RunProjectsLocationsServicesDelete = RunProjectsLocationsServicesDelete
+-- /See:/ 'newRunProjectsLocationsServicesRevisionsDelete' smart constructor.
+data RunProjectsLocationsServicesRevisionsDelete = RunProjectsLocationsServicesRevisionsDelete
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+    -- | A system-generated fingerprint for this version of the resource. This may be used to detect modification conflict during updates.
     etag :: (Core.Maybe Core.Text),
-    -- | Required. The full name of the Service. Format: projects\/{projectnumber}\/locations\/{location}\/services\/{service}
+    -- | Required. The name of the Revision to delete. Format: projects\/{project}\/locations\/{location}\/services\/{service}\/revisions\/{revision}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,13 +80,13 @@ data RunProjectsLocationsServicesDelete = RunProjectsLocationsServicesDelete
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RunProjectsLocationsServicesDelete' with the minimum fields required to make a request.
-newRunProjectsLocationsServicesDelete ::
-  -- |  Required. The full name of the Service. Format: projects\/{projectnumber}\/locations\/{location}\/services\/{service} See 'name'.
+-- | Creates a value of 'RunProjectsLocationsServicesRevisionsDelete' with the minimum fields required to make a request.
+newRunProjectsLocationsServicesRevisionsDelete ::
+  -- |  Required. The name of the Revision to delete. Format: projects\/{project}\/locations\/{location}\/services\/{service}\/revisions\/{revision} See 'name'.
   Core.Text ->
-  RunProjectsLocationsServicesDelete
-newRunProjectsLocationsServicesDelete name =
-  RunProjectsLocationsServicesDelete
+  RunProjectsLocationsServicesRevisionsDelete
+newRunProjectsLocationsServicesRevisionsDelete name =
+  RunProjectsLocationsServicesRevisionsDelete
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -99,31 +99,33 @@ newRunProjectsLocationsServicesDelete name =
 
 instance
   Core.GoogleRequest
-    RunProjectsLocationsServicesDelete
+    RunProjectsLocationsServicesRevisionsDelete
   where
   type
-    Rs RunProjectsLocationsServicesDelete =
+    Rs RunProjectsLocationsServicesRevisionsDelete =
       GoogleLongrunningOperation
   type
-    Scopes RunProjectsLocationsServicesDelete =
+    Scopes
+      RunProjectsLocationsServicesRevisionsDelete =
       '["https://www.googleapis.com/auth/cloud-platform"]
-  requestClient RunProjectsLocationsServicesDelete {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      etag
-      uploadType
-      uploadProtocol
-      validateOnly
-      (Core.Just Core.AltJSON)
-      runService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                RunProjectsLocationsServicesDeleteResource
-          )
-          Core.mempty
+  requestClient
+    RunProjectsLocationsServicesRevisionsDelete {..} =
+      go
+        name
+        xgafv
+        accessToken
+        callback
+        etag
+        uploadType
+        uploadProtocol
+        validateOnly
+        (Core.Just Core.AltJSON)
+        runService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  RunProjectsLocationsServicesRevisionsDeleteResource
+            )
+            Core.mempty

@@ -39,31 +39,32 @@ library
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
+    -fwarn-unused-packages
 
   if (flag(no-field-selectors) && impl(ghc >=9.1))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Network.Google.Run
-    Network.Google.Run.Projects.Locations.Operations.Delete
-    Network.Google.Run.Projects.Locations.Operations.Get
-    Network.Google.Run.Projects.Locations.Operations.List
-    Network.Google.Run.Projects.Locations.Services.Create
-    Network.Google.Run.Projects.Locations.Services.Delete
-    Network.Google.Run.Projects.Locations.Services.Get
-    Network.Google.Run.Projects.Locations.Services.GetIamPolicy
-    Network.Google.Run.Projects.Locations.Services.List
-    Network.Google.Run.Projects.Locations.Services.Patch
-    Network.Google.Run.Projects.Locations.Services.Revisions.Delete
-    Network.Google.Run.Projects.Locations.Services.Revisions.Get
-    Network.Google.Run.Projects.Locations.Services.Revisions.List
-    Network.Google.Run.Projects.Locations.Services.SetIamPolicy
-    Network.Google.Run.Projects.Locations.Services.TestIamPermissions
-    Network.Google.Run.Types
+    Gogol.Run
+    Gogol.Run.Projects.Locations.Operations.Delete
+    Gogol.Run.Projects.Locations.Operations.Get
+    Gogol.Run.Projects.Locations.Operations.List
+    Gogol.Run.Projects.Locations.Services.Create
+    Gogol.Run.Projects.Locations.Services.Delete
+    Gogol.Run.Projects.Locations.Services.Get
+    Gogol.Run.Projects.Locations.Services.GetIamPolicy
+    Gogol.Run.Projects.Locations.Services.List
+    Gogol.Run.Projects.Locations.Services.Patch
+    Gogol.Run.Projects.Locations.Services.Revisions.Delete
+    Gogol.Run.Projects.Locations.Services.Revisions.Get
+    Gogol.Run.Projects.Locations.Services.Revisions.List
+    Gogol.Run.Projects.Locations.Services.SetIamPolicy
+    Gogol.Run.Projects.Locations.Services.TestIamPermissions
+    Gogol.Run.Types
 
   other-modules:
-    Network.Google.Run.Internal.Product
-    Network.Google.Run.Internal.Sum
+    Gogol.Run.Internal.Product
+    Gogol.Run.Internal.Sum
 
   build-depends:
     , base        >=4.12  && <5

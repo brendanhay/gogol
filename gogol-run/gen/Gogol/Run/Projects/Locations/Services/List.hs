@@ -19,7 +19,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Run.Projects.Locations.Services.List
+-- Module      : Gogol.Run.Projects.Locations.Services.List
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
@@ -29,7 +29,7 @@
 -- List Services.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.list@.
-module Network.Google.Run.Projects.Locations.Services.List
+module Gogol.Run.Projects.Locations.Services.List
   ( -- * Resource
     RunProjectsLocationsServicesListResource,
 
@@ -39,8 +39,8 @@ module Network.Google.Run.Projects.Locations.Services.List
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Run.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.services.list@ method which the
 -- 'RunProjectsLocationsServicesList' request conforms to.

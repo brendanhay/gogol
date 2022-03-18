@@ -19,37 +19,34 @@
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
--- Module      : Network.Google.Run.Projects.Locations.Services.TestIamPermissions
+-- Module      : Gogol.Run.Projects.Locations.Services.SetIamPolicy
 -- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.
+-- Sets the IAM Access control policy for the specified Service. Overwrites any existing policy.
 --
--- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.testIamPermissions@.
-module Network.Google.Run.Projects.Locations.Services.TestIamPermissions
+-- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.setIamPolicy@.
+module Gogol.Run.Projects.Locations.Services.SetIamPolicy
   ( -- * Resource
-    RunProjectsLocationsServicesTestIamPermissionsResource,
+    RunProjectsLocationsServicesSetIamPolicyResource,
 
     -- ** Constructing a Request
-    newRunProjectsLocationsServicesTestIamPermissions,
-    RunProjectsLocationsServicesTestIamPermissions,
+    newRunProjectsLocationsServicesSetIamPolicy,
+    RunProjectsLocationsServicesSetIamPolicy,
   )
 where
 
-import qualified Network.Google.Prelude as Core
-import Network.Google.Run.Types
+import qualified Gogol.Prelude as Core
+import Gogol.Run.Types
 
--- | A resource alias for @run.projects.locations.services.testIamPermissions@ method which the
--- 'RunProjectsLocationsServicesTestIamPermissions' request conforms to.
-type RunProjectsLocationsServicesTestIamPermissionsResource =
+-- | A resource alias for @run.projects.locations.services.setIamPolicy@ method which the
+-- 'RunProjectsLocationsServicesSetIamPolicy' request conforms to.
+type RunProjectsLocationsServicesSetIamPolicyResource =
   "v2"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -58,15 +55,13 @@ type RunProjectsLocationsServicesTestIamPermissionsResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody
               '[Core.JSON]
-              GoogleIamV1TestIamPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleIamV1TestIamPermissionsResponse
+              GoogleIamV1SetIamPolicyRequest
+    Core.:> Core.Post '[Core.JSON] GoogleIamV1Policy
 
--- | Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.
+-- | Sets the IAM Access control policy for the specified Service. Overwrites any existing policy.
 --
--- /See:/ 'newRunProjectsLocationsServicesTestIamPermissions' smart constructor.
-data RunProjectsLocationsServicesTestIamPermissions = RunProjectsLocationsServicesTestIamPermissions
+-- /See:/ 'newRunProjectsLocationsServicesSetIamPolicy' smart constructor.
+data RunProjectsLocationsServicesSetIamPolicy = RunProjectsLocationsServicesSetIamPolicy
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
@@ -74,8 +69,8 @@ data RunProjectsLocationsServicesTestIamPermissions = RunProjectsLocationsServic
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
-    payload :: GoogleIamV1TestIamPermissionsRequest,
-    -- | REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
+    payload :: GoogleIamV1SetIamPolicyRequest,
+    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
     resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -84,15 +79,15 @@ data RunProjectsLocationsServicesTestIamPermissions = RunProjectsLocationsServic
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RunProjectsLocationsServicesTestIamPermissions' with the minimum fields required to make a request.
-newRunProjectsLocationsServicesTestIamPermissions ::
+-- | Creates a value of 'RunProjectsLocationsServicesSetIamPolicy' with the minimum fields required to make a request.
+newRunProjectsLocationsServicesSetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
-  GoogleIamV1TestIamPermissionsRequest ->
-  -- |  REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+  GoogleIamV1SetIamPolicyRequest ->
+  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
   Core.Text ->
-  RunProjectsLocationsServicesTestIamPermissions
-newRunProjectsLocationsServicesTestIamPermissions payload resource =
-  RunProjectsLocationsServicesTestIamPermissions
+  RunProjectsLocationsServicesSetIamPolicy
+newRunProjectsLocationsServicesSetIamPolicy payload resource =
+  RunProjectsLocationsServicesSetIamPolicy
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -104,18 +99,16 @@ newRunProjectsLocationsServicesTestIamPermissions payload resource =
 
 instance
   Core.GoogleRequest
-    RunProjectsLocationsServicesTestIamPermissions
+    RunProjectsLocationsServicesSetIamPolicy
   where
   type
-    Rs
-      RunProjectsLocationsServicesTestIamPermissions =
-      GoogleIamV1TestIamPermissionsResponse
+    Rs RunProjectsLocationsServicesSetIamPolicy =
+      GoogleIamV1Policy
   type
-    Scopes
-      RunProjectsLocationsServicesTestIamPermissions =
+    Scopes RunProjectsLocationsServicesSetIamPolicy =
       '["https://www.googleapis.com/auth/cloud-platform"]
   requestClient
-    RunProjectsLocationsServicesTestIamPermissions {..} =
+    RunProjectsLocationsServicesSetIamPolicy {..} =
       go
         resource
         xgafv
@@ -131,6 +124,6 @@ instance
           Core.buildClient
             ( Core.Proxy ::
                 Core.Proxy
-                  RunProjectsLocationsServicesTestIamPermissionsResource
+                  RunProjectsLocationsServicesSetIamPolicyResource
             )
             Core.mempty
